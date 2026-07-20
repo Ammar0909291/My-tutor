@@ -11099,6 +11099,360 @@ const SN1_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.org.mechanisms ─────────────────────────────────────────────────────
+const ORGMECH = 'chem.org.mechanisms'
+const ORGMECH_SRC = 'docs/chemistry/kg/graph.json — chem.org.mechanisms'
+
+const ORGMECH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ORGMECH,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Organic mechanisms are tracked using CURVED ARROW NOTATION — a universal visual ' +
+      'language showing electron MOVEMENT (not atom movement). The arrow\'s TAIL starts at ' +
+      'the electron SOURCE (a lone pair, or a bond that\'s breaking), and the HEAD points to ' +
+      'where those electrons END UP (a new bond forming, or an atom that becomes ' +
+      'electron-rich). This single convention describes ALL the mechanism types covered ' +
+      'across this curriculum: SN1/SN2 (nucleophile\'s lone pair arrow to carbon; leaving ' +
+      'group\'s bond arrow away from carbon), electrophilic addition to alkenes (π bond ' +
+      'arrow attacks the electrophile; resulting carbocation then attacked by nucleophile), ' +
+      'electrophilic aromatic substitution (ring\'s π system arrow attacks electrophile, ' +
+      'forming an intermediate; then a C-H bond arrow re-forms aromaticity). Reactions are ' +
+      'broadly classified as HETEROLYTIC (both electrons of a breaking bond go to ONE atom ' +
+      '— produces ions, like carbocations/carbanions, one full curved arrow) or HOMOLYTIC ' +
+      '(electrons SPLIT evenly, one to each atom — produces radicals, shown with HALF-headed ' +
+      '"fishhook" arrows, distinct from the full-headed arrows of heterolytic mechanisms).',
+    targetedMisconceptions: [`${ORGMECH}:MC1`],
+    source: `${ORGMECH_SRC} — curved arrow notation, heterolytic vs homolytic cleavage`,
+  },
+  {
+    conceptId: ORGMECH,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "A curved arrow in a mechanism shows an ATOM physically moving from one ' +
+      'position to another, like a little animation of atomic motion." FALSE — this is the ' +
+      'single most common beginner misunderstanding. Curved arrows track ELECTRON ' +
+      'movement, NOT atom movement. Atoms themselves don\'t "travel" along the arrow\'s ' +
+      'path — the ELECTRON PAIR (or single electron, for fishhooks) moves from the tail ' +
+      'position (source) to the head position (destination), and this electron ' +
+      'reorganization is what CAUSES the resulting structural/bonding changes you observe. ' +
+      'Confusing electron-arrows with atom-motion leads to systematically wrong mechanism ' +
+      'drawings. Second trap: "Full-headed and half-headed (fishhook) arrows are just ' +
+      'stylistic choices — either can be used interchangeably to represent any bond ' +
+      'breaking." FALSE — this is a MEANINGFUL distinction, not decoration: full-headed ' +
+      'arrows specifically represent TWO electrons moving together (heterolytic cleavage, ' +
+      'giving ions), while half-headed fishhook arrows specifically represent ONE electron ' +
+      'moving alone (homolytic cleavage, giving radicals) — using the wrong arrow type ' +
+      'literally misrepresents which mechanism (ionic vs. radical) is being described.',
+    targetedMisconceptions: [`${ORGMECH}:MC1`, `${ORGMECH}:MC2`],
+    source: `${ORGMECH_SRC} — misconception: arrows show atom movement not electron movement; arrow types are interchangeable stylistic choices`,
+  },
+]
+
+const ORGMECH_PROBES: SeedProbe[] = [
+  {
+    conceptId: ORGMECH,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a curved-arrow mechanism diagram, what does the arrow actually represent moving?',
+    choices: [
+      { text: 'Electrons — the arrow tracks electron pair (or single electron) movement from a source (lone pair or breaking bond) to a destination (new bond or electron-rich atom), not physical atom movement', isCorrect: true },
+      { text: 'Atoms — the arrow shows an atom physically relocating from one position in the molecule to another', isCorrect: false, misconceptionId: `${ORGMECH}:MC1` },
+    ],
+    correctValue: 'Electrons, not atoms',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ORGMECH}:MC1`],
+    source: `${ORGMECH_SRC} — distractor targets the classic beginner confusion of arrows representing atom motion`,
+  },
+  {
+    conceptId: ORGMECH,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can a full-headed curved arrow and a half-headed (fishhook) arrow be used interchangeably to represent the same bond-breaking event?',
+    choices: [
+      { text: 'No — full-headed arrows specifically represent two electrons moving together (heterolytic cleavage, forming ions), while fishhook arrows specifically represent one electron moving alone (homolytic cleavage, forming radicals); using the wrong type misrepresents the mechanism', isCorrect: true },
+      { text: 'Yes — both arrow types are stylistic variations that can be used interchangeably to represent any bond-breaking process', isCorrect: false, misconceptionId: `${ORGMECH}:MC2` },
+    ],
+    correctValue: 'No — the arrow types represent distinct, non-interchangeable mechanisms',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ORGMECH}:MC2`],
+    source: `${ORGMECH_SRC} — misconception: full-headed and fishhook arrows are interchangeable notational choices`,
+  },
+]
+
+// ─── chem.sol.vapour-pressure ────────────────────────────────────────────────
+const VAPP = 'chem.sol.vapour-pressure'
+const VAPP_SRC = 'docs/chemistry/kg/graph.json — chem.sol.vapour-pressure'
+
+const VAPP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: VAPP,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Building on liquid-state vapor pressure covered earlier: adding a NON-VOLATILE ' +
+      'solute (one that doesn\'t itself evaporate, like sugar or salt) LOWERS a solvent\'s ' +
+      'vapor pressure — this is a COLLIGATIVE property (depends on the NUMBER of solute ' +
+      'particles, not their chemical identity). RAOULT\'S LAW quantifies this: P_solution = ' +
+      'x_solvent × P°_solvent (vapor pressure of the solution equals the solvent\'s MOLE ' +
+      'FRACTION times its PURE vapor pressure) — since x_solvent must be LESS than 1 when ' +
+      'any solute is present, P_solution is always LOWER than pure P°_solvent. WHY does ' +
+      'this happen? Solute particles occupy some of the liquid surface, physically reducing ' +
+      'the FRACTION of surface area occupied by solvent molecules available to escape into ' +
+      'vapor — fewer solvent molecules at the surface means fewer escaping per unit time, ' +
+      'hence lower vapor pressure. This vapor pressure lowering directly CAUSES two other ' +
+      'colligative effects: BOILING POINT ELEVATION (since boiling requires vapor pressure ' +
+      'to reach atmospheric pressure, and the solution starts with lower vapor pressure, it ' +
+      'needs MORE heat/higher temperature to get there) and FREEZING POINT DEPRESSION ' +
+      '(the solution\'s vapor pressure curve shifts, requiring a LOWER temperature to reach ' +
+      'the freezing equilibrium point).',
+    targetedMisconceptions: [`${VAPP}:MC1`],
+    source: `${VAPP_SRC} — Raoult's law, colligative properties, connection to boiling point elevation/freezing point depression`,
+  },
+  {
+    conceptId: VAPP,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "The IDENTITY of the solute (what kind of molecule/ion it is) matters for how ' +
+      'much vapor pressure lowering occurs — a "stronger" or "heavier" solute should lower ' +
+      'vapor pressure more." FALSE for the core colligative relationship — Raoult\'s Law ' +
+      'depends ONLY on the mole fraction (essentially, the NUMBER of solute particles), not ' +
+      'their chemical identity or mass. HOWEVER, there\'s a crucial subtlety: IONIC solutes ' +
+      'that DISSOCIATE (like NaCl → Na⁺ + Cl⁻) produce MORE total particles per formula ' +
+      'unit dissolved than a non-dissociating molecular solute (like sugar, which stays as ' +
+      'one intact particle) — so 1 mole of NaCl lowers vapor pressure roughly TWICE as much ' +
+      'as 1 mole of sugar, not because NaCl is chemically "special," but simply because it ' +
+      'produces 2 moles of dissolved particles instead of 1 (this is captured by the van\'t ' +
+      'Hoff factor, i). Second trap: "Vapor pressure lowering, boiling point elevation, and ' +
+      'freezing point depression are three separate, unrelated phenomena requiring separate ' +
+      'memorized rules." FALSE — they\'re all DIRECT CONSEQUENCES of the same single ' +
+      'underlying cause (fewer solvent molecules at the surface, per Raoult\'s Law) — ' +
+      'understanding the root cause explains all three effects at once, rather than needing ' +
+      'three disconnected memorized facts.',
+    targetedMisconceptions: [`${VAPP}:MC1`, `${VAPP}:MC2`],
+    source: `${VAPP_SRC} — misconception: solute chemical identity (not particle count) determines vapor pressure lowering; the three colligative effects are unrelated`,
+  },
+]
+
+const VAPP_PROBES: SeedProbe[] = [
+  {
+    conceptId: VAPP,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does 1 mole of NaCl dissolved in water lower the solvent\'s vapor pressure by roughly the SAME amount as 1 mole of sugar (a non-dissociating molecular solute)?',
+    choices: [
+      { text: 'No — NaCl dissociates into Na+ and Cl- (2 particles per formula unit), roughly doubling the effective particle count compared to sugar (which stays as 1 intact particle), causing roughly twice the vapor pressure lowering', isCorrect: true },
+      { text: 'Yes — since both are 1 mole of solute, they must lower vapor pressure by exactly the same amount regardless of dissociation behavior', isCorrect: false, misconceptionId: `${VAPP}:MC1` },
+    ],
+    correctValue: 'No — NaCl lowers vapor pressure roughly twice as much due to dissociation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VAPP}:MC1`],
+    source: `${VAPP_SRC} — distractor targets ignoring dissociation's effect on effective particle count`,
+  },
+  {
+    conceptId: VAPP,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Are vapor pressure lowering, boiling point elevation, and freezing point depression three separate phenomena requiring three independent explanations?',
+    choices: [
+      { text: 'No — all three are direct consequences of the same single underlying cause (Raoult\'s Law: solute particles reduce the solvent\'s effective surface fraction, lowering vapor pressure), which in turn shifts both the boiling and freezing points', isCorrect: true },
+      { text: 'Yes — each colligative property arises from a distinct, unrelated mechanism and must be understood and memorized separately', isCorrect: false, misconceptionId: `${VAPP}:MC2` },
+    ],
+    correctValue: 'No — all three trace back to the same root cause (vapor pressure lowering)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VAPP}:MC2`],
+    source: `${VAPP_SRC} — misconception: treating the colligative properties as unrelated, separately-memorized facts`,
+  },
+]
+
+// ─── chem.state.phase-diagram ────────────────────────────────────────────────
+const PHASEDIAG = 'chem.state.phase-diagram'
+const PHASEDIAG_SRC = 'docs/chemistry/kg/graph.json — chem.state.phase-diagram'
+
+const PHASEDIAG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PHASEDIAG,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A phase diagram maps out WHICH phase (solid/liquid/gas) is stable at any given ' +
+      'temperature-pressure combination — a visual summary combining everything covered in ' +
+      'states-of-matter and vapor pressure. Three curves divide the diagram: the ' +
+      'SOLID-LIQUID boundary (melting curve), LIQUID-GAS boundary (vapor pressure curve, ' +
+      'terminating at the CRITICAL POINT — beyond this temperature/pressure, liquid and gas ' +
+      'become indistinguishable as a single "supercritical fluid"), and SOLID-GAS boundary ' +
+      '(sublimation curve). All three curves MEET at the TRIPLE POINT — the unique ' +
+      'temperature/pressure combination where solid, liquid, AND gas coexist ' +
+      'simultaneously in equilibrium (a single, precisely defined point, not a range). ' +
+      'Water\'s phase diagram has an unusual feature directly connected to the ice-density ' +
+      'anomaly covered earlier: the solid-liquid boundary slopes BACKWARD/NEGATIVE (unlike ' +
+      'most substances, where it slopes forward/positive) — meaning INCREASING pressure on ' +
+      'ice near its melting point actually MELTS it (since liquid water is denser than ice, ' +
+      'compression favors the denser liquid phase, per Le Chatelier applied to phase ' +
+      'equilibrium) — this is part of why ice skating works (pressure from the blade ' +
+      'slightly lowers the local melting point).',
+    targetedMisconceptions: [`${PHASEDIAG}:MC1`],
+    source: `${PHASEDIAG_SRC} — phase diagram structure, triple point, critical point, water's anomalous negative-slope melting curve`,
+  },
+  {
+    conceptId: PHASEDIAG,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Increasing pressure on ANY solid near its melting point should melt it, since ' +
+      'that\'s what happens with ice (as with ice skating)." FALSE — water\'s negative-slope ' +
+      'melting curve is UNUSUAL, not the general rule. For MOST substances (where the solid ' +
+      'is denser than the liquid, the normal case), the solid-liquid boundary slopes ' +
+      'FORWARD/POSITIVE — increasing pressure actually FAVORS the solid phase (compression ' +
+      'favors the denser phase, and for typical substances that\'s the solid), RAISING the ' +
+      'melting point rather than lowering it. Water\'s BACKWARD slope is a direct ' +
+      'consequence of its unusual solid-less-dense-than-liquid property (the ice density ' +
+      'anomaly) — don\'t generalize water\'s special behavior to all substances. Second ' +
+      'trap: "The triple point is a RANGE of conditions where all three phases can coexist, ' +
+      'similar to how a range of temperatures allows amorphous solids to soften." FALSE — ' +
+      'the triple point is a single, PRECISELY DEFINED temperature-pressure COORDINATE ' +
+      '(for water: exactly 0.01°C and 611.657 Pa), not a range — this precision is actually ' +
+      'so reliable that the triple point of water was historically used to DEFINE the ' +
+      'kelvin temperature scale itself.',
+    targetedMisconceptions: [`${PHASEDIAG}:MC1`, `${PHASEDIAG}:MC2`],
+    source: `${PHASEDIAG_SRC} — misconception: pressure-melting behavior generalizes from water to all substances; triple point is a range not a single point`,
+  },
+]
+
+const PHASEDIAG_PROBES: SeedProbe[] = [
+  {
+    conceptId: PHASEDIAG,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Increasing pressure on ice near its melting point causes it to melt (relevant to ice skating). Does increasing pressure on a typical solid (like most metals) near ITS melting point also cause melting?',
+    choices: [
+      { text: 'No — for most substances (where the solid is denser than the liquid), increasing pressure favors the denser solid phase, RAISING the melting point rather than lowering it; water\'s behavior is an unusual exception tied to its ice-density anomaly', isCorrect: true },
+      { text: 'Yes — increasing pressure near the melting point always causes melting for any solid, following the same behavior water shows', isCorrect: false, misconceptionId: `${PHASEDIAG}:MC1` },
+    ],
+    correctValue: 'No — most substances show the opposite behavior (pressure raises melting point)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PHASEDIAG}:MC1`],
+    source: `${PHASEDIAG_SRC} — distractor targets generalizing water's unusual pressure-melting behavior to all substances`,
+  },
+  {
+    conceptId: PHASEDIAG,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is the triple point of a substance a RANGE of temperature-pressure conditions, or a single precisely-defined point?',
+    choices: [
+      { text: 'A single, precisely-defined temperature-pressure coordinate (for water, exactly 0.01°C and 611.657 Pa) — this precision was historically reliable enough to define the kelvin temperature scale itself', isCorrect: true },
+      { text: 'A range of conditions, similar to how amorphous solids soften gradually over a temperature range rather than at one exact point', isCorrect: false, misconceptionId: `${PHASEDIAG}:MC2` },
+    ],
+    correctValue: 'A single, precisely-defined point',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PHASEDIAG}:MC2`],
+    source: `${PHASEDIAG_SRC} — misconception: triple point is a range rather than an exact coordinate`,
+  },
+]
+
+// ─── chem.surface.surfactants ────────────────────────────────────────────────
+const SURF = 'chem.surface.surfactants'
+const SURF_SRC = 'docs/chemistry/kg/graph.json — chem.surface.surfactants'
+
+const SURF_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SURF,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Surfactants (surface-active agents, like soap) have a distinctive AMPHIPATHIC ' +
+      'structure — a long nonpolar HYDROCARBON TAIL (hydrophobic, "water-fearing") attached ' +
+      'to a polar/ionic HEAD group (hydrophilic, "water-loving"). This dual nature is WHY ' +
+      'soap can clean grease: in water, surfactant molecules spontaneously self-assemble ' +
+      'into MICELLES — spherical clusters where hydrophobic tails point INWARD (avoiding ' +
+      'water, clustering together via their mutual "dislike" of water — hydrophobic ' +
+      'interactions) and hydrophilic heads point OUTWARD (facing/interacting with the ' +
+      'surrounding water). Grease/oil molecules get trapped inside the micelle\'s nonpolar ' +
+      'core (like-dissolves-like, covered in solution types), while the polar exterior ' +
+      'keeps the whole assembly suspended and dissolved in water — this is how soap ' +
+      '"dissolves" grease that water alone cannot. Micelle formation only occurs ABOVE a ' +
+      'specific concentration threshold — the CRITICAL MICELLE CONCENTRATION (CMC) — below ' +
+      'which surfactant molecules remain individually dissolved/dispersed rather than ' +
+      'self-assembling. Surfactants also reduce water\'s SURFACE TENSION (covered in liquid ' +
+      'properties) by disrupting the surface\'s normally-strong hydrogen-bonding network.',
+    targetedMisconceptions: [`${SURF}:MC1`],
+    source: `${SURF_SRC} — surfactant structure, micelle formation, critical micelle concentration, surface tension reduction`,
+  },
+  {
+    conceptId: SURF,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Soap cleans grease by CHEMICALLY REACTING with it, breaking it down into new ' +
+      'substances." FALSE — soap cleaning is fundamentally a PHYSICAL process ' +
+      '(solubilization via micelle formation), not a chemical reaction. The grease ' +
+      'molecules themselves don\'t change chemically — they get physically TRAPPED inside ' +
+      'micelles\' hydrophobic cores (via van der Waals/dispersion attractions, not new ' +
+      'covalent bonds forming) and carried away suspended in the water when rinsed, rather ' +
+      'than being broken down or transformed into a different substance. Second trap: ' +
+      '"Below the critical micelle concentration, surfactant molecules simply don\'t work at ' +
+      'all — they have zero effect until you cross that threshold." Not quite — even BELOW ' +
+      'the CMC, individual surfactant molecules still reduce surface tension (by ' +
+      'disrupting water\'s surface hydrogen bonding, one molecule at a time) and have SOME ' +
+      'cleaning ability — the CMC specifically marks where MICELLE FORMATION begins ' +
+      '(the self-assembly threshold), not where surfactant activity begins entirely; below ' +
+      'CMC, surfactants are less effective at trapping grease (no micelle cores to hide ' +
+      'grease in), but they aren\'t completely inactive either.',
+    targetedMisconceptions: [`${SURF}:MC1`, `${SURF}:MC2`],
+    source: `${SURF_SRC} — misconception: soap cleans via chemical reaction rather than physical solubilization; surfactants are inactive below CMC`,
+  },
+]
+
+const SURF_PROBES: SeedProbe[] = [
+  {
+    conceptId: SURF,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'When soap removes grease from a greasy dish during washing, does the grease undergo a chemical reaction (transforming into a new substance), or a physical process?',
+    choices: [
+      { text: 'A physical process — grease molecules get trapped inside micelles\' hydrophobic cores via physical (van der Waals) attractions and are carried away suspended in water; the grease itself remains chemically unchanged', isCorrect: true },
+      { text: 'A chemical reaction — soap chemically breaks down grease molecules into new substances that are then washed away', isCorrect: false, misconceptionId: `${SURF}:MC1` },
+    ],
+    correctValue: 'A physical process (micelle solubilization), not a chemical reaction',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SURF}:MC1`],
+    source: `${SURF_SRC} — distractor targets assuming soap's cleaning action is a chemical reaction rather than physical solubilization`,
+  },
+  {
+    conceptId: SURF,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'At a surfactant concentration BELOW the critical micelle concentration (CMC), are surfactant molecules completely inactive with zero surface-tension-reducing effect?',
+    choices: [
+      { text: 'No — even below the CMC, individual surfactant molecules still reduce surface tension by disrupting water\'s surface hydrogen bonding; the CMC specifically marks the threshold for MICELLE formation, not the onset of all surfactant activity', isCorrect: true },
+      { text: 'Yes — surfactants have absolutely no effect on the solution until the concentration reaches the critical micelle concentration', isCorrect: false, misconceptionId: `${SURF}:MC2` },
+    ],
+    correctValue: 'No — surfactants remain active below CMC, just without micelle formation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SURF}:MC2`],
+    source: `${SURF_SRC} — misconception: surfactants are completely inactive below the critical micelle concentration`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -11234,6 +11588,10 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...POLYCYC_EXPLANATIONS,
   ...SN2_EXPLANATIONS,
   ...SN1_EXPLANATIONS,
+  ...ORGMECH_EXPLANATIONS,
+  ...VAPP_EXPLANATIONS,
+  ...PHASEDIAG_EXPLANATIONS,
+  ...SURF_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -11369,4 +11727,8 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...POLYCYC_PROBES,
   ...SN2_PROBES,
   ...SN1_PROBES,
+  ...ORGMECH_PROBES,
+  ...VAPP_PROBES,
+  ...PHASEDIAG_PROBES,
+  ...SURF_PROBES,
 ]
