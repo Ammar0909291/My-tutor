@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.slope-field-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.slope-field",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:fa08288588599eb625c73d3a62ab6ded216ea813d47a32e6a1a3828a5cc3ea86",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.slope-field.md": "sha256:b381c3bda2ff46793ea436a4ab5bb276bee968f47b8c35346ff59d8994c5bc7f"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.de.slope-field",
+    "name": "Slope Field",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.de.first-order-ode"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.slope-field-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.slope-field (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.slope-field.md": "sha256:b381c3bda2ff46793ea436a4ab5bb276bee968f47b8c35346ff59d8994c5bc7f"
+      },
+      "contentHash": "sha256:2ba67cefe634d29a7dfd977a91295d804938666bfe4205fc35405845aa619493",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.slope-field.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.slope-field.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.slope-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.slope-field\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.slope-field.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.slope-field.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.slope-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.slope-field\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.slope-field.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.slope-field.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.slope-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.slope-field\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.slope-field.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.slope-field.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.slope-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.slope-field\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.slope-field/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.slope-field",
+      "title": "Learning Objectives",
+      "content": "- LO1: Construct a slope field for a given first-order ODE $y'=f(x,y)$ by computing $f(x,y)$ (the PRESCRIBED SLOPE) at a grid of sample points and drawing a short line segment of that slope at each point — and correctly recognize that the ODE ITSELF, via `math.de.first-order-ode`'s own $y'=f(x,y)$ form, is DIRECTLY a formula for the slope at every point in the plane, with no solving required to compute it.\n- LO2: Sketch an APPROXIMATE solution curve through a given initial point by following the slope field's local tangent directions continuously — and correctly explain WHY this sketch approximates the TRUE solution curve through that point: a genuine solution's graph, by definition, has slope $f(x,y)$ at every point it passes through, EXACTLY matching the slope field's own prescribed directions there.\n- LO3: Use a slope field to correctly predict QUALITATIVE long-run behavior (e.g., solutions converging to a constant value, diverging, or oscillating) WITHOUT solving the ODE algebraically — and correctly contrast this qualitative, picture-based understanding against `math.de.first-order-ode`'s own explicit solving techniques (separation of variables, integrating factors, etc.), recognizing slope fields as valuable specifically when an ODE resists those explicit methods.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.slope-field.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.de.slope-field/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.slope-field",
+      "title": "SLOPE-FIELD-ASSUMED-TO-REQUIRE-SOLVING-FIRST",
+      "content": "| MC-1 | SLOPE-FIELD-ASSUMED-TO-REQUIRE-SOLVING-FIRST | Believing constructing a slope field requires first solving the ODE, missing that the slopes are computed directly from the ODE's own right-hand side $f(x,y)$ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.slope-field.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.de.slope-field/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.slope-field",
+      "title": "SOLUTION-SKETCH-ASSUMED-ONLY-NEEDS-INITIAL-TANGENCY",
+      "content": "| MC-2 | SOLUTION-SKETCH-ASSUMED-ONLY-NEEDS-INITIAL-TANGENCY | Believing a sketched solution curve only needs to match the slope field's direction at its starting point, missing that tangency must hold continuously along the entire curve | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.slope-field.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.de.slope-field/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.slope-field",
+      "title": "QUALITATIVE-BEHAVIOR-ASSUMED-TO-REQUIRE-EXPLICIT-SOLVING",
+      "content": "| MC-3 | QUALITATIVE-BEHAVIOR-ASSUMED-TO-REQUIRE-EXPLICIT-SOLVING | Believing reading qualitative long-run behavior from a slope field requires first solving the ODE explicitly, missing that this can be done directly from the picture | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.slope-field.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.de.slope-field/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.slope-field",
+      "title": "The ODE's Own Right-Hand Side IS the Slope Formula — Construction Needs No Solving (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The ODE's Own Right-Hand Side IS the Slope Formula — Construction Needs No Solving (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.slope-field.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.de.slope-field/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.slope-field",
+      "title": "A Sketched Solution Must Stay Tangent to the Field Everywhere, Not Just at the Start (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"A Sketched Solution Must Stay Tangent to the Field Everywhere, Not Just at the Start (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.slope-field.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.de.slope-field/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.slope-field",
+      "title": "Qualitative Long-Run Behavior Is Readable Directly From the Picture, Without Solving (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Qualitative Long-Run Behavior Is Readable Directly From the Picture, Without Solving (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.slope-field.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.slope-field/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.slope-field",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.slope-field.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.slope-field/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.slope-field",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $y'=y-x$, compute the prescribed slope at the points $(0,0)$, $(1,0)$, and $(0,1)$, without solving the ODE.\n  2. Explain why the segments in your problem-1 slope field are horizontal exactly where $y=x$.\n  3. Sketch (in words, describing the qualitative shape) an approximate solution to $y'=y-x$ starting at $(0,3)$, describing how the curve's direction changes as it moves.\n  4. For $y'=-y$, examine the slope field's pattern near $y=0$ and predict the qualitative long-run behavior of solutions starting at positive $y$-values, without solving explicitly.\n- **P76 (Transfer Probe, mode = independence — no cross-link target listed in the KG for this concept)**: \"A biologist models a population's growth rate using an ODE $y'=f(t,y)$ that is too complicated to solve explicitly with any of `math.de.first-order-ode`'s own standard techniques (it doesn't fit the separable, linear, exact, or Bernoulli patterns). The biologist still wants to understand qualitatively whether the population will stabilize, grow without bound, or decline, for various starting population sizes. (a) Explain why constructing a slope field for this equation is possible EVEN THOUGH no explicit solution formula can be found. (b) Explain what specific FEATURE of the slope field's pattern (e.g., horizontal segments at certain $y$-values) the biologist should look for to identify potential stabilization points. (c) Explain why sketching several approximate solution curves, starting from several different initial population sizes, gives the biologist a genuinely useful qualitative picture of the model's behavior across different starting conditions, without ever solving the equation explicitly.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.slope-field.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.slope-field/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.slope-field",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.de.first-order-ode` (an ODE of the form $y'=f(x,y)$; solving techniques including separation of variables, integrating factors, exact equations).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.slope-field.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.slope-field/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.slope-field",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.de.first-order-ode` (the standard form $y'=f(x,y)$ this concept's slope computation directly uses, and the solution definition this concept's tangent-following sketch directly instantiates).\n- **Unlocks**: `math.de.phase-plane` (extending this concept's single-equation slope-field picture to systems of ODEs, visualized in the phase plane).\n- **Cross-link**: KG lists none for this concept. $P76_{mode}=$ **independence** (no cross-link target to check).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.slope-field.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

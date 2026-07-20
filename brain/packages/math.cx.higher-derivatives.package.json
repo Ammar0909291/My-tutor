@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.higher-derivatives-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.higher-derivatives",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9da96deeac3f09919eb1a5a330393e67983a15dcf2274013aca4799f957c7c9f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.higher-derivatives.md": "sha256:6849fc97b0a01a0f43842843c6b9c3cab7ace06796ab85c5fd0d83ae465eada9"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cx.higher-derivatives",
+    "name": "Derivatives of Holomorphic Functions",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.cx.cauchy-integral-formula"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.higher-derivatives-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.higher-derivatives (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.higher-derivatives.md": "sha256:6849fc97b0a01a0f43842843c6b9c3cab7ace06796ab85c5fd0d83ae465eada9"
+      },
+      "contentHash": "sha256:36f8a886ccdac449b72cfaf0e726a8300054af5339c3b81c9ee3936767e8c3c2",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.higher-derivatives.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.higher-derivatives.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.higher-derivatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.higher-derivatives\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.higher-derivatives.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.higher-derivatives.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.higher-derivatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.higher-derivatives\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.higher-derivatives.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.higher-derivatives.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.higher-derivatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.higher-derivatives\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.higher-derivatives.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.higher-derivatives.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.higher-derivatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.higher-derivatives\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.higher-derivatives/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cx.higher-derivatives",
+      "title": "Learning Objectives",
+      "content": "- LO1 (cross-link objective): Recognize the formula for $f^{(n)}(z_0)$ as a DIRECT GENERALIZATION of `math.cx.cauchy-integral-formula`'s own formula for $f(z_0)$ itself (the $n=0$ case) — obtained by differentiating that formula's own integral expression $n$ TIMES with respect to $z_0$ (differentiating under the integral sign, a standard but nontrivial technique, not derived in full here) — and correctly verify the formula reduces to `math.cx.cauchy-integral-formula`'s own statement when $n=0$.\n- LO2: State the genuinely remarkable structural consequence: a holomorphic function is AUTOMATICALLY infinitely differentiable (in $\\mathbb{C}$, holomorphic once $\\Rightarrow$ holomorphic FOREVER, i.e. $C^\\infty$) — a conclusion with NO real-variable analogue (`math.calc.derivative-definition`-style real differentiability at a point says nothing about even the SECOND derivative existing, let alone all orders) — and correctly explain why THIS is a genuinely surprising, complex-analysis-SPECIFIC phenomenon.\n- LO3: State and apply Cauchy's inequality $|f^{(n)}(z_0)|\\le\\frac{n!M}{R^n}$ (a bound on the $n$th derivative's SIZE, obtained by directly estimating the integral formula) — and correctly use it to bound a specific derivative for a function with a known bound $M$ on a specific circle, without ever computing the derivative explicitly.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.higher-derivatives.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cx.higher-derivatives/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.higher-derivatives",
+      "title": "HIGHER-DERIVATIVE-FORMULA-ASSUMED-INDEPENDENT",
+      "content": "| MC-1 | HIGHER-DERIVATIVE-FORMULA-ASSUMED-INDEPENDENT | Believing the formula for $f^{(n)}(z_0)$ is an independent new result unrelated to `math.cx.cauchy-integral-formula`'s own formula, missing the direct reduction and generalization relationship | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.higher-derivatives.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.cx.higher-derivatives/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.higher-derivatives",
+      "title": "COMPLEX-DIFFERENTIABILITY-ASSUMED-TO-HAVE-REAL-VARIABLE-GAPS",
+      "content": "| MC-2 | COMPLEX-DIFFERENTIABILITY-ASSUMED-TO-HAVE-REAL-VARIABLE-GAPS | Believing a holomorphic function could be complex-differentiable at a point without its higher derivatives necessarily existing, missing that holomorphicity forces automatic infinite differentiability | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.higher-derivatives.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.cx.higher-derivatives/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.higher-derivatives",
+      "title": "CAUCHYS-INEQUALITY-ASSUMED-TO-REQUIRE-EXPLICIT-FORMULA",
+      "content": "| MC-3 | CAUCHYS-INEQUALITY-ASSUMED-TO-REQUIRE-EXPLICIT-FORMULA | Believing bounding $|f^{(n)}(z_0)|$ via Cauchy's inequality requires knowing $f$'s explicit formula and computing the derivative directly, missing that a bound on $|f|$ alone suffices | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.higher-derivatives.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.cx.higher-derivatives/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.higher-derivatives",
+      "title": "The General Derivative Formula Is `math.cx.cauchy-integral-formula`'s Own Formula, Differentiated Repeatedly (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The General Derivative Formula Is `math.cx.cauchy-integral-formula`'s Own Formula, Differentiated Repeatedly (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.higher-derivatives.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.cx.higher-derivatives/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.higher-derivatives",
+      "title": "Holomorphic Once Means Infinitely Differentiable — No Real-Variable Analogue (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Holomorphic Once Means Infinitely Differentiable — No Real-Variable Analogue (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.higher-derivatives.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.cx.higher-derivatives/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.higher-derivatives",
+      "title": "Cauchy's Inequality Bounds the Derivative WITHOUT Computing It (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Cauchy's Inequality Bounds the Derivative WITHOUT Computing It (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.higher-derivatives.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.cx.higher-derivatives/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.higher-derivatives",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.higher-derivatives.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.higher-derivatives/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.higher-derivatives",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify that THIS concept's general formula, at $n=0$, reduces exactly to `math.cx.cauchy-integral-formula`'s own statement.\n  2. Explain, using a real-variable example distinct from $g(x)=x^{5/3}$, why real differentiability at a point does not guarantee higher-order differentiability, then explain why the complex case is genuinely different.\n  3. For $f$ holomorphic with $|f(z)|\\le5$ on $|z|=3$, bound $|f^{(2)}(0)|$ using Cauchy's inequality.\n  4. Explain, in your own words, why Cauchy's inequality can be applied without knowing $f$'s explicit formula.\n- **P76 (Transfer Probe, mode = independence — no cross-link target listed in the KG for this concept)**: \"A physicist working with a holomorphic potential function $f(z)$ knows only that $|f(z)|\\le100$ on the circle $|z-z_0|=5$ (from a physical energy-bound argument), and needs to estimate the SIXTH derivative's magnitude at $z_0$ for a perturbation-theory calculation, without knowing $f$'s explicit formula. (a) Using Cauchy's inequality, compute the bound this gives on $|f^{(6)}(z_0)|$. (b) Explain why the physicist can trust this bound is valid even without any explicit knowledge of $f$'s formula, citing this concept's own derivation of the inequality. (c) Explain why the physicist can also be confident that $f^{(6)}(z_0)$ exists AT ALL in the first place, given only that $f$ is holomorphic — citing this concept's automatic-infinite-differentiability result.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.higher-derivatives.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.higher-derivatives/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.higher-derivatives",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cx.cauchy-integral-formula` ($f(z_0)=\\frac1{2\\pi i}\\oint_Cf(z)/(z-z_0)\\,dz$ for $f$ holomorphic on and inside the simple closed curve $C$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.higher-derivatives.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cx.higher-derivatives/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.higher-derivatives",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cx.cauchy-integral-formula` (the formula for $f(z_0)$ itself this concept's general derivative formula directly generalizes, via repeated differentiation).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists none for this concept. $P76_{mode}=$ **independence** (no cross-link target to check).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.higher-derivatives.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
