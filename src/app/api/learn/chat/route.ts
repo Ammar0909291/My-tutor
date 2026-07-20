@@ -2383,6 +2383,31 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         )
       }
 
+      // Content Quality Intelligence layer (analytics only — see
+      // MemoryServingEvent's schema comment). Fire-and-forget: never
+      // awaited, wrapped in .catch(), so a write failure or slow insert can
+      // never delay or fail this turn's response. Persists exactly the
+      // memory*/provider fields already decided above — reads nothing,
+      // writes nothing that any serving-path function (matcher.ts,
+      // explanationMemory.ts, teachingActionRepository.ts) will ever read
+      // back. resolvedConceptId is only null when Explanation Memory was
+      // never in play at all (no KG for this subject) — skip the write
+      // rather than log a conceptId-less row that couldn't be aggregated.
+      if (resolvedConceptId) {
+        prisma.memoryServingEvent.create({
+          data: {
+            conceptId: resolvedConceptId,
+            subjectSlug: learnSession.subject.slug,
+            language: teachingLang,
+            provider,
+            servingMode: memoryServingMode,
+            confidence: memoryConfidence,
+            fallbackReason: memoryFallbackReasonCode,
+            assetId: memoryAssetId,
+          },
+        }).catch((err) => console.warn('[learn/chat] MemoryServingEvent write failed (non-fatal):', err))
+      }
+
       if (!text) {
         console.error('[learn/chat] empty response from model, finish_reason:', finishReason ?? 'unknown')
         return NextResponse.json({ success: false, error: 'Empty response from model' }, { status: 502 })

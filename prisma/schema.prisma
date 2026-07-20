@@ -1884,6 +1884,37 @@ model TeachingStrategyEvent {
   @@map("teaching_strategy_events")
 }
 
+// Content Quality Intelligence layer (P0 authoring-priority analytics):
+// one append-only row per /api/learn/chat turn's Explanation Memory serving
+// decision — the persisted counterpart to route.ts's structured
+// "[learn/chat] RESPONSE ..." console log, so per-concept serving history
+// survives past the log retention window and can be aggregated into the
+// content quality dashboard (scripts/analytics/). Write-only from route.ts,
+// fire-and-forget (never awaited on the response hot path, never blocks or
+// changes a turn) — this table is pure analytics, has zero readers in the
+// serving path, and must never be queried by matcher.ts/explanationMemory.ts/
+// teachingActionRepository.ts. conceptId/subjectSlug/provider/servingMode/
+// confidence/fallbackReason/assetId mirror exactly the memory* response
+// fields already shipped (route.ts) — no new computation, just persistence
+// of what was already decided.
+model MemoryServingEvent {
+  id             String   @id @default(cuid())
+  conceptId      String
+  subjectSlug    String
+  language       String
+  provider       String // 'memory' | 'groq' | 'yandex' | 'fallback' — mirrors the turn's actual provider, never a new value
+  servingMode    String? // 'exact_match' | 'grade_fallback' | 'confidence_fallback' | null (non-memory turn)
+  confidence     Float? // memoryConfidence — null for non-memory turns
+  fallbackReason String // memoryFallbackReason code — 'none' for exact_match
+  assetId        String? // memoryAssetId — null for non-memory turns
+  createdAt      DateTime @default(now())
+
+  @@index([conceptId])
+  @@index([subjectSlug, createdAt])
+  @@index([createdAt])
+  @@map("memory_serving_events")
+}
+
 // Dynamic 2D Visualization Engine (src/lib/teaching/visuals/): caches
 // LLM-generated visualization code per normalized concept, so the same
 // concept asked by any student never re-spends a Groq call after the
