@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.top.van-kampen-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.top.van-kampen",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:52c58187f4df17c0582a00599c8c1b11a369c2efa5b730342c9928aab8d8c26f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.top.van-kampen.md": "sha256:3e641d23250a136faf59cf478396896739575d76c0170f3ebc244fec674ef134"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.top.van-kampen",
+    "name": "Seifert-van Kampen Theorem",
+    "difficultyRaw": "research",
+    "bloom": "apply",
+    "masteryThreshold": 0.65,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.top.fundamental-group"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.top.van-kampen-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.top.van-kampen (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.top.van-kampen.md": "sha256:3e641d23250a136faf59cf478396896739575d76c0170f3ebc244fec674ef134"
+      },
+      "contentHash": "sha256:c96dc9b5eb8c91b9cab9fde2ca443c2c62a1d96a6a27c0e8ba65e8c4485f62de",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.top.van-kampen.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.van-kampen.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.van-kampen"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.van-kampen\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.van-kampen.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.van-kampen.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.van-kampen"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.van-kampen\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.van-kampen.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.van-kampen.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.van-kampen"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.van-kampen\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.van-kampen.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.van-kampen.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.van-kampen"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.van-kampen\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.top.van-kampen/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.top.van-kampen",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the theorem's precise hypotheses and conclusion — for $X=U\\cup V$ with $U,V$ OPEN and $U\\cap V$ PATH-CONNECTED, $\\pi_1(X)\\cong\\pi_1(U)*_{\\pi_1(U\\cap V)}\\pi_1(V)$ (the amalgamated free product) — and correctly verify these hypotheses hold for a specific decomposition of a space BEFORE attempting to apply the theorem, recognizing the hypotheses are not automatic.\n- LO2: Apply the theorem to compute $\\pi_1$ of a space built by gluing two pieces along a SIMPLY CONNECTED intersection (where the amalgamation collapses to an ordinary free product, since $\\pi_1(U\\cap V)=\\{e\\}$ imposes no relations) — using `math.top.fundamental-group`'s own already-computed $\\pi_1(S^1)=\\mathbb{Z}$ as one of the pieces in a standard wedge-of-circles computation.\n- LO3: Apply the theorem to a case where $U\\cap V$ has NONTRIVIAL fundamental group, producing genuine AMALGAMATION (relations identifying elements of $\\pi_1(U)$ with elements of $\\pi_1(V)$ via $\\pi_1(U\\cap V)$'s images) — correctly identifying which relations the amalgamation imposes, and contrasting this with LO2's simpler free-product case.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.van-kampen.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.top.van-kampen/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.top.van-kampen",
+      "title": "VAN-KAMPEN-HYPOTHESES-ASSUMED-AUTOMATIC",
+      "content": "| MC-1 | VAN-KAMPEN-HYPOTHESES-ASSUMED-AUTOMATIC | Believing van Kampen's theorem applies to any decomposition $X=U\\cup V$ without checking hypotheses, missing that openness and path-connectedness of $U\\cap V$ are genuine, checkable conditions | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.van-kampen.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.top.van-kampen/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.top.van-kampen",
+      "title": "SIMPLY-CONNECTED-INTERSECTION-ASSUMED-TO-STILL-IMPOSE-RELATIONS",
+      "content": "| MC-2 | SIMPLY-CONNECTED-INTERSECTION-ASSUMED-TO-STILL-IMPOSE-RELATIONS | Believing the amalgamated free product formula still imposes extra relations even when $U\\cap V$ is simply connected, missing that a trivial $\\pi_1(U\\cap V)$ collapses the formula to an ordinary free product | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.van-kampen.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.top.van-kampen/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.top.van-kampen",
+      "title": "NONTRIVIAL-INTERSECTION-ASSUMED-NOT-TO-CHANGE-COMPUTATION",
+      "content": "| MC-3 | NONTRIVIAL-INTERSECTION-ASSUMED-NOT-TO-CHANGE-COMPUTATION | Believing a nontrivial $\\pi_1(U\\cap V)$ does not genuinely change the resulting computation from the simpler free-product case | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.van-kampen.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.top.van-kampen/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.van-kampen",
+      "title": "Check the Three Hypotheses BEFORE Applying the Theorem (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Check the Three Hypotheses BEFORE Applying the Theorem (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.van-kampen.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.top.van-kampen/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.van-kampen",
+      "title": "Simply Connected Intersection Collapses Amalgamation to a Free Product (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Simply Connected Intersection Collapses Amalgamation to a Free Product (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.van-kampen.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.top.van-kampen/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.van-kampen",
+      "title": "Nontrivial Intersection Genuinely Glues the Two Pieces' Groups Together (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Nontrivial Intersection Genuinely Glues the Two Pieces' Groups Together (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.van-kampen.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.top.van-kampen/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.van-kampen",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.van-kampen.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.top.van-kampen/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.top.van-kampen",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For a wedge of THREE circles $S^1\\vee S^1\\vee S^1$, state (without full derivation) what $\\pi_1$ should be, generalizing Example 2's two-circle computation.\n  2. Explain why the decomposition $U=$ one circle, $V=$ the other circle (with NO enlargement near the wedge point) would fail to satisfy van Kampen's openness hypothesis directly.\n  3. For a space $X=U\\cup V$ where $U\\cap V$ is simply connected, $\\pi_1(U)\\cong\\mathbb{Z}_2$, and $\\pi_1(V)\\cong\\mathbb{Z}_3$, state $\\pi_1(X)$.\n  4. Explain, in your own words, the difference between the free-product case and the genuinely amalgamated case, referencing what role $\\pi_1(U\\cap V)$ plays in each.\n- **P76 (Transfer Probe, mode = independence — no cross-link target listed in the KG for this concept)**: \"A topologist is computing the fundamental group of a genus-2 surface (a two-holed torus) by decomposing it as $X=U\\cup V$, where $U$ and $V$ are each a one-holed torus (with a disc removed), glued along a circle $U\\cap V\\simeq S^1$. (a) Using this lesson's theorem, explain what data the topologist needs to compute FIRST (about $U$, $V$, and their intersection) before applying van Kampen's theorem to find $\\pi_1(X)$. (b) Since $U\\cap V\\simeq S^1$ has NONTRIVIAL fundamental group $\\mathbb{Z}$ (not the simply-connected case of Example 2), explain why the resulting computation for $\\pi_1(X)$ will involve genuine amalgamation relations rather than simply collapsing to a free product. (c) Contrast this decomposition with a DIFFERENT hypothetical one where $U\\cap V$ happened to be simply connected instead, and explain how the resulting computation's STRUCTURE (not necessarily its specific answer) would differ.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.van-kampen.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.top.van-kampen/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.top.van-kampen",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.top.fundamental-group` ($\\pi_1(X,x_0)=$ homotopy classes of based loops, with concatenation; $\\pi_1(S^1)=\\mathbb{Z}$; $\\pi_1(S^n)=0$ for $n\\ge2$; simply connected means $\\pi_1=\\{e\\}$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.van-kampen.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.top.van-kampen/reference/1",
+      "kind": "reference",
+      "conceptId": "math.top.van-kampen",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.top.fundamental-group` ($\\pi_1(S^1)=\\mathbb{Z}$ and the general definition of $\\pi_1$, reused directly as the building-block computation for this concept's decomposition-based approach).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists none for this concept. $P76_{mode}=$ **independence** (no cross-link target to check).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.van-kampen.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

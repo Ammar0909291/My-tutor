@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.harmonic-functions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.harmonic-functions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a54215434daf4283f1da5940504810eec073eac381b0eb8a06630f592421cd3a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.harmonic-functions.md": "sha256:41321bfafe45a3a90f058cdf5ae1b2bd984d7b5e79f4fc8dc9d76a959b6e24bb"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cx.harmonic-functions",
+    "name": "Harmonic Functions (Complex Analysis)",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.cx.cauchy-riemann",
+      "math.de.laplace-equation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.harmonic-functions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.harmonic-functions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.harmonic-functions.md": "sha256:41321bfafe45a3a90f058cdf5ae1b2bd984d7b5e79f4fc8dc9d76a959b6e24bb"
+      },
+      "contentHash": "sha256:e7530ac0e9d965517b00a95f75ceb82d2c282df7bf488b35f180bb4d7e5303ca",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.harmonic-functions.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.harmonic-functions.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.harmonic-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.harmonic-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.harmonic-functions.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.harmonic-functions.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.harmonic-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.harmonic-functions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.harmonic-functions.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.harmonic-functions.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.harmonic-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.harmonic-functions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.harmonic-functions.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.harmonic-functions.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.harmonic-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.harmonic-functions\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.harmonic-functions/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cx.harmonic-functions",
+      "title": "Learning Objectives",
+      "content": "- LO1 (cross-link objective): Recognize the FORWARD direction — \"the real and imaginary parts of a holomorphic function are harmonic\" — as ALREADY fully derived in `math.de.harmonic-functions`'s own cross-link content (via the Cauchy-Riemann equations and equality of mixed partials), reused here rather than re-derived, and state the CONVERSE direction this concept adds: every harmonic $u$ arises as the real part of SOME holomorphic function, at least locally.\n- LO2: Prove (not merely apply, as `math.cx.cauchy-riemann`'s own worked example does for one specific $u$) WHY the two-step CR-integration recipe for constructing a harmonic conjugate $v$ from a given harmonic $u$ ALWAYS succeeds — using $u$'s harmonicity itself to guarantee the integrability condition the recipe silently depends on — and correctly identify which property of $u$ makes the construction valid in general, not just for the one example already worked elsewhere.\n- LO3: Explain precisely why the theorem's \"locally\" qualifier is essential — using a concrete function harmonic on an ANNULUS (a domain with a hole) whose natural candidate conjugate fails to be single-valued globally — and correctly distinguish domains (like a disc) where a GLOBAL harmonic conjugate is guaranteed from domains (like an annulus) where only a LOCAL one is guaranteed.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.harmonic-functions.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cx.harmonic-functions/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.harmonic-functions",
+      "title": "FORWARD-DIRECTION-ASSUMED-TO-NEED-RE-DERIVATION",
+      "content": "| MC-1 | FORWARD-DIRECTION-ASSUMED-TO-NEED-RE-DERIVATION | Believing this concept must re-derive that holomorphic functions have harmonic components, missing that `math.de.harmonic-functions` already establishes this and it should be directly reused | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.harmonic-functions.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.cx.harmonic-functions/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.harmonic-functions",
+      "title": "CR-RECIPE-SUCCESS-ASSUMED-COINCIDENTAL",
+      "content": "| MC-2 | CR-RECIPE-SUCCESS-ASSUMED-COINCIDENTAL | Believing the CR-integration recipe for finding a harmonic conjugate happens to succeed for particular examples by luck, rather than being GUARANTEED by the given function's harmonicity | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.harmonic-functions.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.cx.harmonic-functions/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.harmonic-functions",
+      "title": "LOCALLY-QUALIFIER-ASSUMED-ROUTINE",
+      "content": "| MC-3 | LOCALLY-QUALIFIER-ASSUMED-ROUTINE | Believing the theorem's \"locally\" qualifier is routine mathematical fine print, missing that a global harmonic conjugate can genuinely fail to exist on domains with holes | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.harmonic-functions.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.cx.harmonic-functions/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.harmonic-functions",
+      "title": "This Concept Adds the Converse Direction — the Forward Direction Is Already Proven Elsewhere (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"This Concept Adds the Converse Direction — the Forward Direction Is Already Proven Elsewhere (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.harmonic-functions.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.cx.harmonic-functions/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.harmonic-functions",
+      "title": "Harmonicity of $u$ IS the Recipe's Success Condition, Proven Not Assumed (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Harmonicity of $u$ IS the Recipe's Success Condition, Proven Not Assumed (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.harmonic-functions.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.cx.harmonic-functions/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.harmonic-functions",
+      "title": "\"Locally\" Is a Genuine Restriction, Not Boilerplate (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"\\\"Locally\\\" Is a Genuine Restriction, Not Boilerplate (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.harmonic-functions.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.cx.harmonic-functions/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.harmonic-functions",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.harmonic-functions.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.harmonic-functions/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.harmonic-functions",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State both directions of this concept's theorem (forward and converse), citing which is already proven in `math.de.harmonic-functions` and which is new here.\n  2. Verify $u=x^3-3xy^2$ is harmonic, then use the CR-integration recipe to find its harmonic conjugate $v$.\n  3. Explain, using Example 2's derivation, exactly which step of the CR-integration recipe would fail if $u$ were NOT harmonic.\n  4. Explain why $u=\\log\\sqrt{x^2+y^2}$ has no single-valued harmonic conjugate on a full annulus surrounding the origin, but does have one on any sufficiently small disc avoiding the origin.\n- **P76 (Transfer Probe, mode = cross-link probe engaging `math.de.harmonic-functions`)**: \"A fluid-dynamics engineer models the velocity potential of an idealized 2D flow around a cylindrical obstacle using a harmonic function $u$ defined on an ANNULAR region (the flow domain excludes the cylinder itself, creating a hole). The engineer wants to find the flow's stream function $v$ (the harmonic conjugate of $u$, so that $f=u+iv$ is holomorphic) to complete the flow's complex potential. (a) Using `math.de.harmonic-functions`'s own already-established forward direction together with this concept's converse, explain why the engineer is justified in expecting SOME local harmonic conjugate to exist near any single point of the flow domain. (b) Using Example 3's annulus obstruction, explain why the engineer should NOT assume a single, globally consistent stream function $v$ necessarily exists across the ENTIRE annular flow domain, and what physical/geometric feature of the domain is responsible. (c) If the engineer instead restricts attention to a flow domain that is simply connected (no obstacle, no hole), explain why this concern disappears entirely.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.harmonic-functions.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.harmonic-functions/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.harmonic-functions",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cx.cauchy-riemann` (the CR equations $u_x=v_y,u_y=-v_x$; the two-step integration procedure for finding a harmonic conjugate $v$ given a specific $u$, already practiced there) and `math.de.laplace-equation` ($\\nabla^2u=0$; harmonic functions as its solutions).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.harmonic-functions.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cx.harmonic-functions/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.harmonic-functions",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cx.cauchy-riemann` (the CR equations and the two-step conjugate-finding recipe, applied there to one example and here proven to always succeed) and `math.de.laplace-equation` (the Laplacian equation $\\nabla^2u=0$ this concept's harmonic functions satisfy).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.de.harmonic-functions`, checked via `ls docs/curriculum/blueprints/` and confirmed ALREADY authored. $P76_{mode}=$ **cross-link probe**, engaging `math.de.harmonic-functions`'s own already-proven forward-direction result directly in Component 3's converse framing and the P76 transfer probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.harmonic-functions.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

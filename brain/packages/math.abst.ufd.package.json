@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.ufd-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.ufd",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8364f0d206831460256ac1582e4eb1b95d28b1c614d7c14f5cbe32d7d34279ad",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.ufd.md": "sha256:487aa6825bde052807ac65d18b9c71f240a5903f7a7f3cc9e4b1c34e3e55b4e2"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.abst.ufd",
+    "name": "Unique Factorization Domain",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.abst.pid"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.ufd-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.ufd (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.ufd.md": "sha256:487aa6825bde052807ac65d18b9c71f240a5903f7a7f3cc9e4b1c34e3e55b4e2"
+      },
+      "contentHash": "sha256:99d4c006ef8a9ca5e1cfca036bd757143beb0d87325a555309b0baf4b2052f20",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.ufd.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.ufd.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.ufd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.ufd\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.ufd.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.ufd.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.ufd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.ufd\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.ufd.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.ufd.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.ufd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.ufd\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.ufd.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.ufd.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.ufd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.ufd\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.ufd/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.abst.ufd",
+      "title": "Learning Objectives",
+      "content": "- LO1 (cross-link objective): Recognize `math.nt.fundamental-theorem-arithmetic`'s own statement (\"every integer greater than 1 factors uniquely into primes\") as EXACTLY the claim \"$\\mathbb{Z}$ is a UFD,\" in this concept's general terminology — resolving the forward reference `math.nt.fundamental-theorem-arithmetic` itself explicitly left open (independence mode, pending this concept's authoring) — and correctly restate the Fundamental Theorem of Arithmetic using UFD language (irreducibles, uniqueness up to order and units).\n- LO2: State and apply the theorem \"every PID is a UFD,\" using `math.abst.pid`'s own structural facts (irreducibles equal primes, every prime ideal maximal) as the key mechanism making unique factorization provable — and correctly identify a specific PID (reused from `math.abst.pid`'s own examples) as automatically inheriting UFD status via this theorem, with no separate factorization verification needed.\n- LO3: Recognize UFD as a STRICTLY BROADER class than PID — using $\\mathbb{Z}[x]$ as the standard example (a UFD, by Gauss's Lemma, but NOT a PID, since a specific ideal fails to be principal) — and correctly explain why this shows \"PID $\\Rightarrow$ UFD\" cannot be reversed in general.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ufd.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.abst.ufd/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.ufd",
+      "title": "FTA-TREATED-AS-MERELY-ANALOGOUS-TO-UFD",
+      "content": "| MC-1 | FTA-TREATED-AS-MERELY-ANALOGOUS-TO-UFD | Believing the Fundamental Theorem of Arithmetic is merely similar to the UFD definition rather than literally an instance of it applied to $\\mathbb{Z}$ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ufd.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.abst.ufd/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.ufd",
+      "title": "PID-TO-UFD-ASSUMED-TO-NEED-SEPARATE-VERIFICATION",
+      "content": "| MC-2 | PID-TO-UFD-ASSUMED-TO-NEED-SEPARATE-VERIFICATION | Believing confirming UFD status for an already-known PID requires a separate, independent factorization-uniqueness check, missing that PID status alone already guarantees it | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ufd.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.abst.ufd/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.ufd",
+      "title": "PID-AND-UFD-ASSUMED-EQUIVALENT-CLASSES",
+      "content": "| MC-3 | PID-AND-UFD-ASSUMED-EQUIVALENT-CLASSES | Believing PID and UFD are essentially the same class of rings, missing the genuine strict separation $\\mathbb{Z}[x]$ demonstrates (a UFD that is not a PID) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ufd.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.abst.ufd/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.ufd",
+      "title": "The Fundamental Theorem of Arithmetic IS \"$\\mathbb{Z}$ Is a UFD\" (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Fundamental Theorem of Arithmetic IS \\\"$\\\\mathbb{Z}$ Is a UFD\\\" (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ufd.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.abst.ufd/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.ufd",
+      "title": "PID Status Already Proves UFD Status — No Separate Verification Needed (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"PID Status Already Proves UFD Status — No Separate Verification Needed (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ufd.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.abst.ufd/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.ufd",
+      "title": "UFD Is Strictly Broader Than PID — $\\mathbb{Z}[x]$ Proves It (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"UFD Is Strictly Broader Than PID — $\\\\mathbb{Z}[x]$ Proves It (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ufd.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.abst.ufd/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.ufd",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ufd.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.abst.ufd/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.ufd",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Restate `math.nt.fundamental-theorem-arithmetic`'s statement using this concept's UFD terminology (irreducibles, uniqueness up to order and units).\n  2. Explain, citing `math.abst.pid`'s own irreducibles-equal-primes fact, why \"every PID is a UFD\" is a direct consequence rather than an independent new theorem.\n  3. Verify that the ideal $(3,x)$ in $\\mathbb{Z}[x]$ is also non-principal, using an argument analogous to Example 3's.\n  4. Explain, in your own words, why $\\mathbb{Z}[x]$ being a UFD but not a PID demonstrates the two classes are genuinely different, not just differently named for the same rings.\n- **P76 (Transfer Probe, mode = cross-link probe engaging `math.nt.fundamental-theorem-arithmetic`)**: \"A cryptography researcher is designing a new number-theoretic scheme based on a ring $R=\\mathbb{Z}[\\sqrt{-5}]$, and needs to know whether unique factorization holds in $R$ before relying on factorization-based security arguments (analogous to how classical schemes rely on `math.nt.fundamental-theorem-arithmetic`'s guarantee for $\\mathbb{Z}$). (a) Explain why the researcher CANNOT simply assume $R$ is a UFD just because it is an integral domain, citing this concept's precise definition. (b) If the researcher instead first verifies $R$ IS a PID (using `math.abst.pid`'s own criteria), explain why this alone would be sufficient to conclude unique factorization holds, without further work. (c) Suppose the researcher instead discovers $R$ is NOT a PID. Using $\\mathbb{Z}[x]$'s example as a guide, explain why this does NOT automatically rule out $R$ still being a UFD, and what would need to be checked separately.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ufd.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.abst.ufd/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.ufd",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.abst.pid` (integral domains where every ideal is principal; every prime ideal is maximal; irreducibles equal primes in a PID).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ufd.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.abst.ufd/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.ufd",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.abst.pid` (the PID structural facts — irreducibles equal primes, prime ideals maximal — this concept's \"every PID is a UFD\" theorem directly relies on).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.nt.fundamental-theorem-arithmetic`, checked via `ls docs/curriculum/blueprints/` and confirmed ALREADY authored — and its own Component 7 explicitly flagged this concept as its pending cross-link target, deferred to independence mode until this concept existed. $P76_{mode}=$ **cross-link probe**, engaging `math.nt.fundamental-theorem-arithmetic`'s own integer-factorization statement directly in Component 3's restatement and the P76 transfer probe, resolving that forward reference.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ufd.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
