@@ -124,6 +124,47 @@ describe('pickBest', () => {
   })
 })
 
+describe('scoreMatch — HIGH↔ADULT intelligent compatibility (P0 fix)', () => {
+  // Root cause this pins down: gradeToGradeBand(grade=null) defaults every
+  // Library learner with no school grade on file to ADULT, but the vast
+  // majority of authored Library content is written at HIGH band (209/216
+  // physics concepts). Before this fix, a fresh ACTIVE HIGH-band asset
+  // scored only 50 for an ADULT-classified student (distance=2, +0 bonus) —
+  // permanently below the 65 threshold regardless of asset quality.
+  it('a fresh ACTIVE HIGH-band asset clears threshold for an ADULT-classified student with zero tag overlap', () => {
+    const state = makeState({ grade: undefined, userMessage: 'no matching tags here' })
+    expect(state.gradeBand).toBe(GradeBand.ADULT)
+    const asset = makeAsset({ gradeBand: GradeBand.HIGH, qualityScore: 0, qualityConfidence: 0, tags: [] })
+    const confidence = scoreMatch(state, asset)
+    expect(confidence).toBeGreaterThanOrEqual(DEFAULT_CONFIDENCE_THRESHOLD)
+  })
+
+  it('a fresh ACTIVE ADULT-band asset clears threshold for a HIGH-classified (grade 9-12) student', () => {
+    const state = makeState({ grade: 10, userMessage: 'no matching tags here' })
+    expect(state.gradeBand).toBe(GradeBand.HIGH)
+    const asset = makeAsset({ gradeBand: GradeBand.ADULT, qualityScore: 0, qualityConfidence: 0, tags: [] })
+    const confidence = scoreMatch(state, asset)
+    expect(confidence).toBeGreaterThanOrEqual(DEFAULT_CONFIDENCE_THRESHOLD)
+  })
+
+  it('an exact gradeBand match still outranks a HIGH/ADULT-compatible one when both exist', () => {
+    const state = makeState({ grade: undefined }) // -> ADULT
+    const exact = makeAsset({ assetId: 'exact', gradeBand: GradeBand.ADULT, qualityScore: 0, qualityConfidence: 0, tags: [] })
+    const compatible = makeAsset({ assetId: 'compatible', gradeBand: GradeBand.HIGH, qualityScore: 0, qualityConfidence: 0, tags: [] })
+    expect(scoreMatch(state, exact)).toBeGreaterThan(scoreMatch(state, compatible))
+    const result = pickBest(state, [compatible, exact])
+    expect(result?.asset.assetId).toBe('exact')
+  })
+
+  it('does NOT extend the compatibility bonus to unrelated band pairs (e.g. EARLY vs MIDDLE)', () => {
+    const state = makeState({ grade: 1 }) // -> EARLY
+    expect(state.gradeBand).toBe(GradeBand.EARLY)
+    const asset = makeAsset({ gradeBand: GradeBand.MIDDLE, qualityScore: 0, qualityConfidence: 0, tags: [] })
+    const confidence = scoreMatch(state, asset)
+    expect(confidence).toBeLessThan(DEFAULT_CONFIDENCE_THRESHOLD)
+  })
+})
+
 describe('tokenize', () => {
   it('lowercases, strips punctuation, and drops short/stop words', () => {
     expect(tokenize('Can you explain Gravity, please?')).toEqual(['can', 'explain', 'gravity', 'please'])

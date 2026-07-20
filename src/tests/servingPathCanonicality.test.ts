@@ -79,3 +79,49 @@ describe('route.ts structural lock: Package Runtime route-level wiring is fully 
     expect(matches).toHaveLength(1)
   })
 })
+
+describe('route.ts structural lock: canonical KG is the source of truth for concept resolution (P0 fix)', () => {
+  // Root cause this locks in: english (like c/cpp/python) has legacy
+  // Curriculum table rows (scripts/seed-curriculum.ts's original 4-subject
+  // seed). The OLD code checked `if (curriculumLessons.length > 0)` FIRST
+  // and only attempted KG synthesis `if (lessonCtx === null)` — so for any
+  // subject with both a canonical KG AND legacy curriculum rows (english is
+  // the only such subject), KG synthesis never ran and resolvedConceptId
+  // stayed null forever, permanently disabling the Explanation Memory gate
+  // (`resolvedConceptId && ...`) regardless of authored asset coverage.
+  const ROUTE_SOURCE = fs.readFileSync(
+    path.join(process.cwd(), 'src/app/api/learn/chat/route.ts'),
+    'utf-8',
+  )
+
+  it('getKnowledgeGraph is called before the legacy curriculum-rows branch decides lessonCtx', () => {
+    const kgCallIndex = ROUTE_SOURCE.indexOf("const { getKnowledgeGraph } = await import('@/lib/curriculum/knowledgeGraph')")
+    const legacyBranchIndex = ROUTE_SOURCE.indexOf('if (lessonCtx === null && curriculumLessons.length > 0)')
+    expect(kgCallIndex).toBeGreaterThan(-1)
+    expect(legacyBranchIndex).toBeGreaterThan(-1)
+    expect(kgCallIndex).toBeLessThan(legacyBranchIndex)
+  })
+
+  it('the legacy curriculum-rows branch only fires when lessonCtx is still null (KG resolution takes priority)', () => {
+    expect(ROUTE_SOURCE).toContain('if (lessonCtx === null && curriculumLessons.length > 0)')
+    // The old unconditional gate must not remain anywhere in the file.
+    expect(ROUTE_SOURCE).not.toMatch(/if \(curriculumLessons\.length > 0\) \{\s*\n\s*const currentOrder/)
+  })
+
+  it('getKnowledgeGraph is imported exactly once for concept resolution — the old duplicate KG-synthesis block (a second, now-dead copy of the same logic that used to sit inside the removed "if (lessonCtx === null)" fallback) was deleted, not just made unreachable', () => {
+    const conceptResolutionSection = ROUTE_SOURCE.slice(
+      ROUTE_SOURCE.indexOf('let resolvedConceptId: string | null = null'),
+      ROUTE_SOURCE.indexOf('// For Subject Library subjects without a knowledge graph'),
+    )
+    const matches = conceptResolutionSection.match(/const \{ getKnowledgeGraph \} = await import\('@\/lib\/curriculum\/knowledgeGraph'\)/g) ?? []
+    expect(matches).toHaveLength(1)
+  })
+
+  it('resolvedConceptId is assigned inside the KG-priority block, not gated behind the legacy branch', () => {
+    const kgBlockStart = ROUTE_SOURCE.indexOf("const { getKnowledgeGraph } = await import('@/lib/curriculum/knowledgeGraph')")
+    const legacyBranchIndex = ROUTE_SOURCE.indexOf('if (lessonCtx === null && curriculumLessons.length > 0)')
+    const resolvedAssignIndex = ROUTE_SOURCE.indexOf('resolvedConceptId = currentLesson.topicSlug')
+    expect(resolvedAssignIndex).toBeGreaterThan(kgBlockStart)
+    expect(resolvedAssignIndex).toBeLessThan(legacyBranchIndex)
+  })
+})

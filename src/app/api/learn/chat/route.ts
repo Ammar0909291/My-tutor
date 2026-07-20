@@ -183,7 +183,71 @@ export async function POST(req: Request) {
     // node slug) to resolve "current lesson" — captured here without changing
     // LessonContext's shape or any existing consumer of it.
     let resolvedConceptId: string | null = null
-    if (curriculumLessons.length > 0) {
+
+    // P0 (Explanation Memory routing fix): the canonical Knowledge Graph is
+    // the source of truth for concept resolution — it must be consulted
+    // FIRST, before the legacy `Curriculum` table, for any subject that has
+    // one. Root cause this fixes: english (like c/cpp/python) has legacy
+    // Curriculum rows from scripts/seed-curriculum.ts's original 4-subject
+    // seed, so the old code order (legacy table checked first, KG only
+    // consulted "if lessonCtx === null") NEVER reached KG synthesis for
+    // english — resolvedConceptId stayed null on every single turn, and the
+    // Explanation Memory gate below (`resolvedConceptId && ...`) was
+    // permanently false regardless of how many assets were authored. c/cpp/
+    // python have no canonical KG (getKnowledgeGraph returns null for them —
+    // confirmed via SUBJECT_ADAPTERS/resolveNodes), so this reordering is a
+    // no-op for them: they fall through to the legacy-table branch exactly
+    // as before, unchanged.
+    try {
+      const { getKnowledgeGraph } = await import('@/lib/curriculum/knowledgeGraph')
+      const graph = getKnowledgeGraph(subjectCode)
+      if (graph) {
+        let order = 1
+        const syntheticLessons = graph.modules.flatMap((module, modIdx) =>
+          module.nodes.map((node, nodeIdx) => ({
+            subjectCode,
+            unit: modIdx + 1,
+            unitTitle: module.title,
+            lesson: nodeIdx + 1,
+            lessonTitle: node.title,
+            lessonGoal: (node as any).description ?? node.title,
+            order: order++,
+            topicSlug: node.slug,
+          }))
+        )
+        if (syntheticLessons.length > 0) {
+          const topicProgressRows = topicProgressRowsShared
+          const inProgressSlug = topicProgressRows.find((r) => r.status === 'IN_PROGRESS')?.topicSlug
+          const currentLesson = (inProgressSlug
+            ? syntheticLessons.find((l) => l.topicSlug === inProgressSlug)
+            : null)
+            ?? (studentProgress?.currentLesson != null
+              ? syntheticLessons.find((l) => l.order === studentProgress.currentLesson)
+              : null)
+            ?? syntheticLessons[0]
+          const completedSlugs = new Set(
+            topicProgressRows
+              .filter((r) => r.status === 'COMPLETED' || r.status === 'MASTERED')
+              .map((r) => r.topicSlug)
+          )
+          lessonCtx = {
+            currentLesson: currentLesson.order,
+            totalLessons: syntheticLessons.length,
+            lessonTitle: currentLesson.lessonTitle,
+            lessonGoal: currentLesson.lessonGoal,
+            unitTitle: currentLesson.unitTitle,
+            completedLessons: syntheticLessons
+              .filter((l) => completedSlugs.has(l.topicSlug))
+              .map((l) => l.order),
+          }
+          resolvedConceptId = currentLesson.topicSlug
+        }
+      }
+    } catch {
+      // KG synthesis is optional — never blocks the lesson
+    }
+
+    if (lessonCtx === null && curriculumLessons.length > 0) {
       const currentOrder = studentProgress?.currentLesson ?? 1
       const currentLesson = (curriculumLessons as any[]).find((l) => l.order === currentOrder) ?? curriculumLessons[0]
       lessonCtx = {
@@ -193,59 +257,6 @@ export async function POST(req: Request) {
         lessonGoal: currentLesson.lessonGoal,
         unitTitle: currentLesson.unitTitle,
         completedLessons: studentProgress?.completedLessons ?? [],
-      }
-    }
-
-    // For KG-backed subjects (math/physics/chemistry/biology) there are no DB
-    // curriculum rows, so synthesise lessonCtx from the knowledge graph instead.
-    if (lessonCtx === null) {
-      try {
-        const { getKnowledgeGraph } = await import('@/lib/curriculum/knowledgeGraph')
-        const graph = getKnowledgeGraph(subjectCode)
-        if (graph) {
-          let order = 1
-          const syntheticLessons = graph.modules.flatMap((module, modIdx) =>
-            module.nodes.map((node, nodeIdx) => ({
-              subjectCode,
-              unit: modIdx + 1,
-              unitTitle: module.title,
-              lesson: nodeIdx + 1,
-              lessonTitle: node.title,
-              lessonGoal: (node as any).description ?? node.title,
-              order: order++,
-              topicSlug: node.slug,
-            }))
-          )
-          if (syntheticLessons.length > 0) {
-            const topicProgressRows = topicProgressRowsShared
-            const inProgressSlug = topicProgressRows.find((r) => r.status === 'IN_PROGRESS')?.topicSlug
-            const currentLesson = (inProgressSlug
-              ? syntheticLessons.find((l) => l.topicSlug === inProgressSlug)
-              : null)
-              ?? (studentProgress?.currentLesson != null
-                ? syntheticLessons.find((l) => l.order === studentProgress.currentLesson)
-                : null)
-              ?? syntheticLessons[0]
-            const completedSlugs = new Set(
-              topicProgressRows
-                .filter((r) => r.status === 'COMPLETED' || r.status === 'MASTERED')
-                .map((r) => r.topicSlug)
-            )
-            lessonCtx = {
-              currentLesson: currentLesson.order,
-              totalLessons: syntheticLessons.length,
-              lessonTitle: currentLesson.lessonTitle,
-              lessonGoal: currentLesson.lessonGoal,
-              unitTitle: currentLesson.unitTitle,
-              completedLessons: syntheticLessons
-                .filter((l) => completedSlugs.has(l.topicSlug))
-                .map((l) => l.order),
-            }
-            resolvedConceptId = currentLesson.topicSlug
-          }
-        }
-      } catch {
-        // KG synthesis is optional — never blocks the lesson
       }
     }
 
@@ -2213,6 +2224,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
       let memoryState: StudentState | null = null
       let assembled: AssembledLesson | null = null
+      // P0 (Explanation Memory routing fix): the one authoritative reason
+      // this turn did NOT come from Explanation Memory — computed
+      // deterministically, never left implicit. Logged on every turn below
+      // (never silently swallowed) so "Groq was called" always comes with
+      // a real, specific reason a reviewer can act on.
+      let memoryFallbackReason: string | null = null
       // Red-team fix D1: never serve a first-lesson turn from the asset
       // memory path — a static explanation+probe assembly cannot honor the
       // first-lesson flow (demonstrate-first, echo-before-solo, never open
@@ -2222,7 +2239,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // — no content enters a flooded mind (foundations/04 P5); serving a
       // stored explanation+quiz to a learner who just said "I give up" is
       // the exact violation the preemption rule exists to prevent.
-      if (isExplanationMemoryEnabled() && resolvedConceptId && !firstLessonActiveHoisted && !recoveryKeyHoisted) {
+      if (!isExplanationMemoryEnabled()) {
+        memoryFallbackReason = 'Explanation Memory disabled (DISABLE_EXPLANATION_MEMORY)'
+      } else if (!resolvedConceptId) {
+        memoryFallbackReason = 'No concept'
+      } else if (firstLessonActiveHoisted) {
+        memoryFallbackReason = 'First lesson'
+      } else if (recoveryKeyHoisted) {
+        memoryFallbackReason = 'Recovery mode'
+      } else {
         try {
           memoryState = buildStudentState({
             conceptId: resolvedConceptId,
@@ -2234,8 +2259,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             userMessage: message,
           })
           assembled = await assembleLesson(memoryState)
+          if (!assembled) {
+            // Distinguish "nothing authored for this concept/language" from
+            // "an asset exists but didn't clear the confidence threshold" —
+            // a single cheap, indexed count query, not a re-run of matching.
+            const activeCount = await prisma.assetIdentity.count({
+              where: { conceptId: resolvedConceptId, language: teachingLang, family: 'EXPLANATION', status: 'ACTIVE' },
+            }).catch(() => -1)
+            memoryFallbackReason = activeCount === 0 ? 'No asset'
+              : activeCount > 0 ? 'Confidence failed'
+              : 'No asset (lookup error)'
+          }
         } catch (err) {
           console.warn('[learn/chat] explanation memory lookup failed, falling back to LLM:', err)
+          memoryFallbackReason = 'Explanation Memory lookup error'
         }
       }
 
@@ -2252,13 +2289,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         provider = 'memory'
         // Structured provider log — visible in Vercel logs, never sent to
         // client. Proves Explanation Memory is being served without Groq.
+        // Never silent: every field the P0 routing audit asked for, on
+        // every turn.
         console.log(
           '[learn/chat] RESPONSE provider=memory' +
-          ` concept=${resolvedConceptId ?? 'unknown'}` +
+          ` resolvedConceptId=${resolvedConceptId ?? 'unknown'}` +
           ` subject=${learnSession.subject.slug}` +
           ` source=ExplanationMemory` +
-          ` assets=[${assembled.usedAssetIds.join(',')}]` +
+          ` asset_ids=[${assembled.usedAssetIds.join(',')}]` +
           ` confidence=${assembled.explanationConfidence?.toFixed(3) ?? 'n/a'}` +
+          ` fallback_reason=n/a` +
+          ` groq_invoked=false` +
           ` chars=${text.length}`
         )
       } else {
@@ -2282,13 +2323,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         text = routed.text
         provider = routed.provider
         finishReason = routed.finishReason
-        // Structured provider log — shows when Groq IS called and why
-        // (concept not seeded, gate suppressed, or DB miss).
+        // Structured provider log — shows when Groq IS called and the exact,
+        // never-silent reason Explanation Memory didn't serve this turn
+        // instead (memoryFallbackReason is always set to a real value by
+        // this point — see the gate above: it is never left null once the
+        // memory path was skipped or came back empty).
         console.log(
           `[learn/chat] RESPONSE provider=${provider}` +
-          ` concept=${resolvedConceptId ?? 'unknown'}` +
+          ` resolvedConceptId=${resolvedConceptId ?? 'unknown'}` +
           ` subject=${learnSession.subject.slug}` +
-          ` source=${resolvedConceptId && isExplanationMemoryEnabled() ? 'Groq(no-memory-hit)' : 'Groq'}` +
+          ` source=Groq` +
+          ` fallback_reason=${memoryFallbackReason ?? 'unknown (bug: reason not set)'}` +
+          ` groq_invoked=true` +
           ` finish_reason=${finishReason}` +
           ` chars=${text ? text.length : 0}`
         )

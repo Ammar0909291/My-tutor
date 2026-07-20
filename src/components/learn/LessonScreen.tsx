@@ -500,6 +500,44 @@ function AiBadge({ provider }: { provider: string }) {
   )
 }
 
+// P0 (Explanation Memory routing fix): a positive indicator for turns served
+// from the authored Educational Brain / Explanation Memory (provider ===
+// 'memory') — previously these got NO badge at all (silently
+// indistinguishable from a turn that just hadn't loaded a badge yet), so a
+// student had no way to see when a response came from human-reviewed,
+// authored content rather than a live LLM call. Deliberately never labeled
+// "AI" — this content wasn't generated at request time, it was
+// pre-authored and approved.
+function MemoryBadge() {
+  const tooltip = 'From the authored Educational Brain\nA human-reviewed explanation, not AI-generated for this turn.'
+  return (
+    <span
+      title={tooltip}
+      aria-label={tooltip}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 3,
+        height: 14,
+        padding: '0 6px',
+        borderRadius: 999,
+        fontSize: 9,
+        fontWeight: 700,
+        letterSpacing: 0.5,
+        color: '#fff',
+        background: 'linear-gradient(135deg, #16A34A 0%, #15803D 100%)',
+        border: '1px solid rgba(255,255,255,0.18)',
+        boxShadow: '0 0 6px rgba(22,163,74,0.35), inset 0 1px 0 rgba(255,255,255,0.25)',
+        cursor: 'help',
+        userSelect: 'none',
+      }}
+    >
+      <span aria-hidden style={{ fontSize: 8 }}>🧠</span>
+      Brain
+    </span>
+  )
+}
+
 // ─── Inline practice MCQ (Sprint W gap fix) ────────────────────────────────────
 // Renders the structured InlinePracticeQuestion the route attaches alongside an
 // assistant message (msg.inlinePractice) as a dedicated candy-styled card with
@@ -4137,12 +4175,15 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
                         <EagleMascot variant="logo" size={20} />
                         <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--border-emphasis)' }}>{teachingLanguage === 'ru' ? 'Репетитор Макс' : 'Tutor Max'}</span>
-                        {/* AI badge — shown ONLY when an AI provider actually
-                            answered this turn. Brain-served turns (provider
-                            === 'memory') get NO badge. See the API response
-                            in src/app/api/learn/chat/route.ts: provider is
-                            'memory' for assembled answers, otherwise the
-                            real driver id (groq/yandex/fallback). */}
+                        {/* Provider badge — every real provider now gets a
+                            visible, correctly-labeled indicator. See the API
+                            response in src/app/api/learn/chat/route.ts:
+                            provider is 'memory' for Explanation Memory /
+                            Educational Brain turns (assembleLesson()
+                            succeeded — human-reviewed content, never
+                            AI-generated for this turn), otherwise the real
+                            LLM driver id (groq/yandex/fallback). */}
+                        {msg.provider === 'memory' && <MemoryBadge />}
                         {msg.provider && msg.provider !== 'memory' && (
                           <AiBadge provider={msg.provider} />
                         )}
