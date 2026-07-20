@@ -6954,6 +6954,440 @@ const G16_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.sblock.alkali ──────────────────────────────────────────────────────
+const ALKALI = 'chem.sblock.alkali'
+const ALKALI_SRC = 'docs/chemistry/kg/graph.json — chem.sblock.alkali'
+
+const ALKALI_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ALKALI,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Alkali metals (Group 1: Li, Na, K, Rb, Cs) are the periodic table\'s most ' +
+      'CHEMICALLY UNIFORM group — each has exactly 1 valence electron, and each ' +
+      'reliably forms a +1 ion by losing it. REACTIVITY INCREASES down the group ' +
+      '(opposite of the general "more protons = harder to remove electron" intuition ' +
+      'from ionization energy trends) because the single valence electron gets ' +
+      'progressively FARTHER from the nucleus (more shells, more shielding), making it ' +
+      'progressively EASIER to remove — cesium reacts almost explosively with water, ' +
+      'while lithium reacts comparatively gently. All react vigorously with water: ' +
+      '2M + 2H₂O → 2MOH + H₂ (releasing flammable hydrogen gas — the source of the ' +
+      'characteristic "fizz" and, for heavier members, dramatic fire/explosion). All are ' +
+      'SOFT metals (can be cut with a knife — weak metallic bonding since only 1 ' +
+      'delocalized electron per atom), have LOW melting points (weak metallic bonds again), ' +
+      'and low DENSITY (Li, Na, K actually float on water — briefly, before reacting). ' +
+      'FLAME TESTS give characteristic colors (Li=crimson, Na=yellow, K=lilac) from ' +
+      'electrons jumping between energy levels when heated, useful for QUALITATIVE ' +
+      'identification.',
+    targetedMisconceptions: [`${ALKALI}:MC1`],
+    source: `${ALKALI_SRC} — alkali metal properties, reactivity trend, water reaction, flame tests`,
+  },
+  {
+    conceptId: ALKALI,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Reactivity of alkali metals should DECREASE down the group, since ' +
+      'ionization energy generally... wait, actually more protons should make removal ' +
+      'harder." This confuses TWO competing periodic trends. Within alkali metals, going ' +
+      'down the group, ionization energy actually DECREASES (not increases) because the ' +
+      'extra electron SHELLS (shielding) dominate over the extra protons — the valence ' +
+      'electron is farther away and more shielded, so it\'s progressively EASIER to ' +
+      'remove despite more protons being present. This is the SAME general "ionization ' +
+      'energy decreases down a group" trend covered earlier (ionization-energy concept) — ' +
+      'reactivity for alkali metals tracks INVERSELY with ionization energy (easier ' +
+      'electron loss = more reactive), so LOWER ionization energy down the group means ' +
+      'HIGHER reactivity down the group. Second trap: "All alkali metal + water reactions ' +
+      'are similarly mild, like sodium\'s well-known fizzing demonstration." FALSE — the ' +
+      'reaction becomes progressively MORE violent down the group (Li: gentle fizzing, ' +
+      'Na: fizzing with occasional flame, K: ignites the hydrogen gas reliably, Rb/Cs: ' +
+      'genuinely explosive) — this trend directly follows from the increasing reactivity ' +
+      'trend.',
+    targetedMisconceptions: [`${ALKALI}:MC1`, `${ALKALI}:MC2`],
+    source: `${ALKALI_SRC} — misconception: reactivity should decrease with more protons; all alkali-water reactions are similar`,
+  },
+]
+
+const ALKALI_PROBES: SeedProbe[] = [
+  {
+    conceptId: ALKALI,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Cesium (bottom of Group 1) reacts far more violently with water than lithium (top of Group 1). Why does reactivity INCREASE down the group, despite cesium having more protons?',
+    choices: [
+      { text: 'Cesium\'s valence electron is much farther from the nucleus (more shells, more shielding), making it progressively easier to remove despite the greater nuclear charge — ionization energy decreases down the group', isCorrect: true },
+      { text: 'This is an exception to periodic trends — more protons should always mean lower reactivity, but alkali metals are a rare exception with no clear explanation', isCorrect: false, misconceptionId: `${ALKALI}:MC1` },
+    ],
+    correctValue: 'Decreasing ionization energy down the group (shielding effect)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ALKALI}:MC1`],
+    source: `${ALKALI_SRC} — distractor targets treating the reactivity trend as an unexplained periodic anomaly`,
+  },
+  {
+    conceptId: ALKALI,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is the reaction of potassium with water similar in violence to sodium\'s well-known gentle fizzing reaction?',
+    choices: [
+      { text: 'No — potassium reacts noticeably more violently than sodium, often igniting the hydrogen gas produced, following the trend of increasing reactivity down Group 1', isCorrect: true },
+      { text: 'Yes — all alkali metals react with water in essentially the same mild, fizzing manner regardless of position in the group', isCorrect: false, misconceptionId: `${ALKALI}:MC2` },
+    ],
+    correctValue: 'No — potassium reacts more violently than sodium',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ALKALI}:MC2`],
+    source: `${ALKALI_SRC} — misconception: uniform mild reactivity across all alkali metals with water`,
+  },
+]
+
+// ─── chem.pblock.group17 ─────────────────────────────────────────────────────
+const G17 = 'chem.pblock.group17'
+const G17_SRC = 'docs/chemistry/kg/graph.json — chem.pblock.group17'
+
+const G17_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: G17,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Halogens (Group 17: F, Cl, Br, I) have 7 valence electrons — just ONE short of a ' +
+      'full octet, making them extremely reactive NONMETALS eager to gain (or share) that ' +
+      'one electron. Unlike alkali metals (reactivity increases down the group), halogen ' +
+      'REACTIVITY DECREASES down the group — fluorine is the most reactive element in the ' +
+      'entire periodic table (its extremely small size and high electron affinity make it ' +
+      'gain an electron easily), while iodine is comparatively mild. This makes chemical ' +
+      'sense via DISPLACEMENT REACTIONS: a more reactive halogen displaces a less ' +
+      'reactive one from its salt (Cl₂ + 2NaBr → 2NaCl + Br₂ — chlorine, being more ' +
+      'reactive/higher up, displaces bromide), but the reverse NEVER happens spontaneously. ' +
+      'Halogens exist as diatomic molecules (F₂, Cl₂, Br₂, I₂) held by a single covalent ' +
+      'bond, with physical STATE varying dramatically down the group at room temperature: ' +
+      'F₂ and Cl₂ are gases, Br₂ is famously the only nonmetal that\'s LIQUID at room ' +
+      'temperature, I₂ is a solid (with visible violet vapor upon sublimation) — this ' +
+      'progression follows increasing molecular size/mass, hence stronger London ' +
+      'dispersion forces between molecules.',
+    targetedMisconceptions: [`${G17}:MC1`],
+    source: `${G17_SRC} — halogen reactivity trend, displacement reactions, physical states`,
+  },
+  {
+    conceptId: G17,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Halogen reactivity increases down the group, just like alkali metal ' +
+      'reactivity does — same group direction, same trend." FALSE — this is a critical ' +
+      'DIFFERENCE, not a similarity. Alkali metals get MORE reactive down the group ' +
+      'because they LOSE an electron more easily as it gets farther from the nucleus. ' +
+      'Halogens get LESS reactive down the group because they need to GAIN an electron, ' +
+      'and a larger atom (down the group) has its nucleus farther from the incoming ' +
+      'electron\'s destination, with more shielding — making electron GAIN progressively ' +
+      'harder, not easier. Same "farther from nucleus, more shielding" physical cause, ' +
+      'but OPPOSITE consequence depending on whether the group loses or gains electrons. ' +
+      'Second trap: "Any halogen can displace any other halogen from its salt, regardless ' +
+      'of direction." FALSE — displacement only works in ONE direction: MORE reactive ' +
+      '(higher up) displaces LESS reactive (lower down). Iodine cannot displace chlorine ' +
+      'from NaCl — that reaction simply doesn\'t occur, since it would require iodine to be ' +
+      'more reactive than chlorine, which is backwards.',
+    targetedMisconceptions: [`${G17}:MC1`, `${G17}:MC2`],
+    source: `${G17_SRC} — misconception: halogen reactivity trend matches alkali metals; displacement works both directions`,
+  },
+]
+
+const G17_PROBES: SeedProbe[] = [
+  {
+    conceptId: G17,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Alkali metal reactivity INCREASES down Group 1, but halogen reactivity DECREASES down Group 17. Why are these trends opposite, given both groups have similar "farther from nucleus" size trends?',
+    choices: [
+      { text: 'Alkali metals must LOSE an electron (easier when farther from nucleus, less nuclear pull); halogens must GAIN an electron (harder when farther from nucleus, since incoming electron feels weaker attraction and more shielding)', isCorrect: true },
+      { text: 'This must be an error — both groups should show the exact same reactivity trend direction since they\'re both influenced by atomic size', isCorrect: false, misconceptionId: `${G17}:MC1` },
+    ],
+    correctValue: 'Opposite electron gain/loss requirements cause opposite trends',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${G17}:MC1`],
+    source: `${G17_SRC} — distractor targets assuming all groups must share the same reactivity-trend direction`,
+  },
+  {
+    conceptId: G17,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can iodine (I₂) displace chlorine from a sodium chloride (NaCl) solution?',
+    choices: [
+      { text: 'No — displacement only works when a MORE reactive halogen displaces a LESS reactive one; since chlorine is more reactive than iodine (higher up in the group), iodine cannot displace chlorine — only the reverse (Cl2 displacing I⁻) works', isCorrect: true },
+      { text: 'Yes — any halogen can displace any other halogen from its salt in either direction', isCorrect: false, misconceptionId: `${G17}:MC2` },
+    ],
+    correctValue: 'No — displacement only works in the more-reactive-to-less-reactive direction',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${G17}:MC2`],
+    source: `${G17_SRC} — misconception: halogen displacement reactions are bidirectional`,
+  },
+]
+
+// ─── chem.pblock.group18 ─────────────────────────────────────────────────────
+const G18 = 'chem.pblock.group18'
+const G18_SRC = 'docs/chemistry/kg/graph.json — chem.pblock.group18'
+
+const G18_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: G18,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Noble gases (Group 18: He, Ne, Ar, Kr, Xe, Rn) have COMPLETE valence shells (full ' +
+      'octet, or duet for helium) — the most stable electron configuration possible, ' +
+      'which is exactly WHY every other element\'s bonding behavior is explained by ' +
+      '"trying to achieve a noble gas configuration." This completeness makes noble gases ' +
+      'exceptionally UNREACTIVE (historically called "inert gases," though this term is ' +
+      'now understood to be not-quite-absolute — see below). They exist as MONATOMIC ' +
+      'gases (single atoms, no molecular bonding needed since they\'re already stable) with ' +
+      'only very weak London dispersion forces between them, giving them the LOWEST ' +
+      'boiling points of any element group. Uses exploit their inertness: helium in ' +
+      'weather balloons and MRI cooling (liquid He, near absolute zero), argon as an inert ' +
+      'atmosphere for welding and incandescent light bulbs (prevents the hot filament from ' +
+      'reacting with oxygen), neon in illuminated signage (its characteristic red-orange ' +
+      'glow from electrical excitation).',
+    targetedMisconceptions: [`${G18}:MC1`],
+    source: `${G18_SRC} — noble gas properties, complete valence shells, monatomic nature, industrial uses`,
+  },
+  {
+    conceptId: G18,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Noble gases NEVER form any chemical compounds, ever — they are perfectly ' +
+      'and completely inert." FALSE in an absolute sense — this was believed true until ' +
+      '1962, when Neil Bartlett synthesized XePtF₆, the first noble gas compound, proving ' +
+      'that heavier noble gases (Xe, Kr — with more, larger, more loosely-held electron ' +
+      'shells) CAN be forced to react under the right conditions with extremely powerful ' +
+      'oxidizers (like PtF₆ or F₂ itself, forming XeF₂, XeF₄, XeF₆). Lighter noble gases ' +
+      '(He, Ne, Ar) remain essentially unreactive under any normal laboratory conditions ' +
+      '(their electrons are held far too tightly), but "noble gases never react" is now ' +
+      'known to be an OVERSTATEMENT for the heavier members. The term "inert gases" has ' +
+      'accordingly been mostly replaced by "noble gases" in modern usage, acknowledging ' +
+      'this nuance (noble = generally aloof/unreactive, not absolutely inert). Second ' +
+      'trap: "Since they\'re unreactive, noble gases have no practical industrial uses." ' +
+      'FALSE — their very inertness IS their most valuable industrial property, exploited ' +
+      'precisely because they won\'t react with whatever they\'re protecting or cooling.',
+    targetedMisconceptions: [`${G18}:MC1`, `${G18}:MC2`],
+    source: `${G18_SRC} — misconception: noble gases are absolutely and completely unreactive; unreactivity means no uses`,
+  },
+]
+
+const G18_PROBES: SeedProbe[] = [
+  {
+    conceptId: G18,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In 1962, Neil Bartlett synthesized XePtF₆, a genuine xenon compound. What does this discovery tell us about noble gas reactivity?',
+    choices: [
+      { text: 'Heavier noble gases (like Xe) CAN be forced to react under extreme conditions with powerful oxidizers, even though they were historically believed to be completely inert — "noble" is not absolute for all members', isCorrect: true },
+      { text: 'This must have been a measurement error, since noble gases are proven to be completely and permanently unreactive under all conditions', isCorrect: false, misconceptionId: `${G18}:MC1` },
+    ],
+    correctValue: 'Heavier noble gases can react under extreme conditions',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${G18}:MC1`],
+    source: `${G18_SRC} — distractor targets the absolute-inertness misconception`,
+  },
+  {
+    conceptId: G18,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Given that noble gases are chemically unreactive, does this mean they have no useful industrial applications?',
+    choices: [
+      { text: 'No — their inertness IS their most valuable property, used precisely because they won\'t react: argon protects hot metal filaments/welds from oxidation, helium safely cools MRI magnets without reacting', isCorrect: true },
+      { text: 'Yes — since they don\'t react with anything, noble gases are essentially useless for practical applications', isCorrect: false, misconceptionId: `${G18}:MC2` },
+    ],
+    correctValue: 'No — inertness itself is industrially valuable',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${G18}:MC2`],
+    source: `${G18_SRC} — misconception: chemical inertness implies no practical/industrial value`,
+  },
+]
+
+// ─── chem.redox.balancing ────────────────────────────────────────────────────
+const REDBAL = 'chem.redox.balancing'
+const REDBAL_SRC = 'docs/chemistry/kg/graph.json — chem.redox.balancing'
+
+const REDBAL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: REDBAL,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Redox equations often can\'t be balanced by simple inspection (unlike straightforward ' +
+      'synthesis reactions) — the ION-ELECTRON (half-reaction) METHOD handles them ' +
+      'systematically. Steps: (1) Split into two HALF-REACTIONS (oxidation and reduction ' +
+      'separately). (2) Balance atoms OTHER than O and H first. (3) Balance OXYGEN by ' +
+      'adding H₂O. (4) Balance HYDROGEN by adding H⁺ (in acidic solution) or, for basic ' +
+      'solution, add H⁺ first then neutralize by adding equal OH⁻ to both sides (converting ' +
+      'H⁺+OH⁻ pairs into H₂O). (5) Balance CHARGE by adding electrons (e⁻) to whichever side ' +
+      'has more positive charge. (6) MULTIPLY each half-reaction so that electrons LOST in ' +
+      'oxidation exactly EQUAL electrons GAINED in reduction (the electrons must cancel when ' +
+      'combined — nothing "extra" left over). (7) ADD the two half-reactions together, ' +
+      'canceling the electrons and any species appearing identically on both sides. This ' +
+      'systematic method works even for complex reactions (like MnO₄⁻ + Fe²⁺ in acidic ' +
+      'solution) where trial-and-error balancing would be nearly impossible.',
+    targetedMisconceptions: [`${REDBAL}:MC1`],
+    source: `${REDBAL_SRC} — ion-electron half-reaction balancing method, acidic/basic conditions`,
+  },
+  {
+    conceptId: REDBAL,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Once each individual half-reaction is separately balanced (atoms AND charge), ' +
+      'you can just add them together directly, done." Missing the CRITICAL step: before ' +
+      'adding, you must MULTIPLY each half-reaction by an appropriate integer so the number ' +
+      'of electrons in the oxidation half-reaction EXACTLY MATCHES the number in the ' +
+      'reduction half-reaction. If oxidation loses 2 electrons per event and reduction gains ' +
+      '5 electrons per event, you\'d multiply the oxidation half-reaction by 5 and the ' +
+      'reduction half-reaction by 2, giving 10 electrons on each side — only THEN can they ' +
+      'cancel cleanly when combined. Skipping this step leaves "leftover" uncancelled ' +
+      'electrons in your final equation, which is never a valid balanced overall equation ' +
+      '(free electrons don\'t appear in a real, complete redox reaction). Second trap: ' +
+      '"Balancing for basic solution is fundamentally different from acidic — you need an ' +
+      'entirely separate method from scratch." Not quite — the standard approach is to first ' +
+      'balance AS IF in acidic solution (using H⁺), then ADD OH⁻ to both sides equal to the ' +
+      'number of H⁺ present, converting H⁺+OH⁻ pairs into H₂O — a conversion step, not a ' +
+      'separate method.',
+    targetedMisconceptions: [`${REDBAL}:MC1`, `${REDBAL}:MC2`],
+    source: `${REDBAL_SRC} — misconception: skipping electron-matching step; basic-solution balancing requires a separate method`,
+  },
+]
+
+const REDBAL_PROBES: SeedProbe[] = [
+  {
+    conceptId: REDBAL,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You have two balanced half-reactions: oxidation loses 3 electrons per event, reduction gains 2 electrons per event. Before adding them together, what must you do?',
+    choices: [
+      { text: 'Multiply the oxidation half-reaction by 2 and the reduction half-reaction by 3, so both involve exactly 6 electrons, which will then cancel cleanly when the half-reactions are added', isCorrect: true },
+      { text: 'Simply add them as-is — the electrons will roughly balance out on average', isCorrect: false, misconceptionId: `${REDBAL}:MC1` },
+    ],
+    correctValue: 'Multiply to find the least common multiple of electrons (here, 6)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${REDBAL}:MC1`],
+    source: `${REDBAL_SRC} — distractor targets skipping the electron-matching multiplication step`,
+  },
+  {
+    conceptId: REDBAL,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Do you need a completely different, from-scratch balancing method for redox reactions in BASIC solution compared to acidic solution?',
+    choices: [
+      { text: 'No — the standard approach balances as if in acidic solution first (using H⁺), then adds OH⁻ to both sides equal to the H⁺ count, converting H⁺+OH⁻ into H₂O — a conversion step, not a separate method', isCorrect: true },
+      { text: 'Yes — basic solution balancing requires an entirely separate, unrelated procedure with no connection to the acidic method', isCorrect: false, misconceptionId: `${REDBAL}:MC2` },
+    ],
+    correctValue: 'No — basic solution builds on the acidic method with an extra conversion step',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${REDBAL}:MC2`],
+    source: `${REDBAL_SRC} — misconception: basic-solution balancing is an unrelated, separate method`,
+  },
+]
+
+// ─── chem.thermo.bond-enthalpy ───────────────────────────────────────────────
+const BONDH = 'chem.thermo.bond-enthalpy'
+const BONDH_SRC = 'docs/chemistry/kg/graph.json — chem.thermo.bond-enthalpy'
+
+const BONDH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BONDH,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Bond enthalpy quantifies energy for one MOLE of a specific bond broken in the GAS ' +
+      'phase — always a POSITIVE (endothermic) value, since breaking bonds always requires ' +
+      'energy (as established in the enthalpy concept). AVERAGE bond enthalpy tables ' +
+      '(published values) are exactly that — AVERAGES across many different molecules ' +
+      'containing that bond type, since the true energy varies slightly depending on the ' +
+      'rest of each specific molecule\'s structure (a C-H bond in methane isn\'t IDENTICAL ' +
+      'in energy to a C-H bond in ethanol, though they\'re close). Using average bond ' +
+      'enthalpies, you can ESTIMATE ΔH_rxn = Σ(bond enthalpies BROKEN, reactants) − ' +
+      'Σ(bond enthalpies FORMED, products) — this gives a reasonable APPROXIMATION, not an ' +
+      'exact value (unlike the exact Hess\'s Law method using ΔH°_f values). This estimation ' +
+      'method is especially useful when formation enthalpies aren\'t available/tabulated, ' +
+      'or for quick qualitative reasoning about whether a reaction should be roughly ' +
+      'exothermic or endothermic based on comparing overall bond strength of reactants ' +
+      'versus products.',
+    targetedMisconceptions: [`${BONDH}:MC1`],
+    source: `${BONDH_SRC} — average bond enthalpy, ΔH estimation from bonds broken/formed`,
+  },
+  {
+    conceptId: BONDH,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Bond enthalpy calculations using tabulated average values give the EXACT same ' +
+      'ΔH as the precise Hess\'s Law method using ΔH°_f values." FALSE — bond enthalpy ' +
+      'estimation is inherently APPROXIMATE, because average bond enthalpies are averaged ' +
+      'across many different molecular environments, while a specific reaction\'s ACTUAL ' +
+      'bonds have slightly different true energies depending on their exact molecular ' +
+      'context (neighboring atoms, hybridization, etc.). The Hess\'s Law method (using ' +
+      'measured, compound-specific ΔH°_f values) gives the precise, experimentally-anchored ' +
+      'answer; bond enthalpy estimation gives a useful but APPROXIMATE ballpark figure — ' +
+      'don\'t expect them to match exactly, and prefer Hess\'s Law when precision matters. ' +
+      'Second trap: "Bond enthalpy calculations work equally well for reactions involving ' +
+      'solids or liquids, not just gases." Bond enthalpy VALUES are specifically defined for ' +
+      'GAS-PHASE bond breaking — applying them directly to reactions involving solids or ' +
+      'liquids introduces additional error, since you\'d also need to account for the extra ' +
+      'energy of vaporization/sublimation not captured by pure bond-breaking enthalpies.',
+    targetedMisconceptions: [`${BONDH}:MC1`, `${BONDH}:MC2`],
+    source: `${BONDH_SRC} — misconception: bond enthalpy estimation matches Hess's Law exactly; applies equally to all phases`,
+  },
+]
+
+const BONDH_PROBES: SeedProbe[] = [
+  {
+    conceptId: BONDH,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You calculate ΔH for a reaction two ways: using average bond enthalpies (gives −250 kJ/mol) and using precise Hess\'s Law with ΔH°f values (gives −242 kJ/mol). Which is more likely accurate, and why the discrepancy?',
+    choices: [
+      { text: 'The Hess\'s Law value (−242) is more accurate — it uses precise, compound-specific measured values, while bond enthalpies are AVERAGES across many molecules, introducing approximation error', isCorrect: true },
+      { text: 'They should be identical — any discrepancy indicates a calculation error, since both methods give exactly precise results', isCorrect: false, misconceptionId: `${BONDH}:MC1` },
+    ],
+    correctValue: 'Hess\'s Law is more precise; bond enthalpy is an approximation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BONDH}:MC1`],
+    source: `${BONDH_SRC} — distractor targets expecting exact agreement between approximate and precise methods`,
+  },
+  {
+    conceptId: BONDH,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can you directly apply standard gas-phase bond enthalpy values to estimate ΔH for a reaction where one reactant is a solid?',
+    choices: [
+      { text: 'Not without extra care — bond enthalpies are defined for gas-phase bond breaking; applying them directly to solids ignores the additional energy needed for sublimation/phase change, introducing more error', isCorrect: true },
+      { text: 'Yes — bond enthalpy values apply identically and without adjustment regardless of the physical state of the reactants', isCorrect: false, misconceptionId: `${BONDH}:MC2` },
+    ],
+    correctValue: 'Not directly — phase changes introduce additional energy not captured',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${BONDH}:MC2`],
+    source: `${BONDH_SRC} — misconception: bond enthalpy applies uniformly regardless of physical state`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -7042,6 +7476,11 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...G14_EXPLANATIONS,
   ...G15_EXPLANATIONS,
   ...G16_EXPLANATIONS,
+  ...ALKALI_EXPLANATIONS,
+  ...G17_EXPLANATIONS,
+  ...G18_EXPLANATIONS,
+  ...REDBAL_EXPLANATIONS,
+  ...BONDH_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -7130,4 +7569,9 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...G14_PROBES,
   ...G15_PROBES,
   ...G16_PROBES,
+  ...ALKALI_PROBES,
+  ...G17_PROBES,
+  ...G18_PROBES,
+  ...REDBAL_PROBES,
+  ...BONDH_PROBES,
 ]
