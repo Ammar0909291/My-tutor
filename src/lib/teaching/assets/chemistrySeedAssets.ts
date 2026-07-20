@@ -10740,6 +10740,185 @@ const SOLIDPROP_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.org.reactive-intermediates ─────────────────────────────────────────
+const REACTINT = 'chem.org.reactive-intermediates'
+const REACTINT_SRC = 'docs/chemistry/kg/graph.json — chem.org.reactive-intermediates'
+
+const REACTINT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: REACTINT,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Reaction mechanisms (covered earlier) often pass through short-lived, highly ' +
+      'reactive INTERMEDIATE species before reaching stable products. CARBOCATIONS ' +
+      '(carbon with only 6 valence electrons, positive charge, sp² hybridized, trigonal ' +
+      'planar empty p-orbital) form during SN1/E1 mechanisms — stability order: tertiary > ' +
+      'secondary > primary (MORE alkyl groups DONATE electron density via +I/hyperconjugation, ' +
+      'stabilizing the positive charge — opposite of what naive electronegativity intuition ' +
+      'might suggest). CARBANIONS (carbon with a full octet PLUS a lone pair, negative ' +
+      'charge, typically sp³) show the OPPOSITE stability order: primary > secondary > ' +
+      'tertiary (fewer bulky alkyl groups means LESS electron-donating crowding around the ' +
+      'already electron-rich carbanion, and less steric strain). FREE RADICALS (carbon with ' +
+      'an unpaired electron, formed by homolytic bond cleavage, as in the alkane ' +
+      'halogenation mechanism covered earlier) follow the SAME stability trend as ' +
+      'carbocations (tertiary > secondary > primary — hyperconjugation/electron-donation ' +
+      'stabilizes the radical similarly). CARBENES (carbon with only 6 valence electrons ' +
+      'and NO charge, 2 nonbonding electrons — either paired "singlet" or unpaired ' +
+      '"triplet") are extremely reactive, used in specialized synthesis reactions.',
+    targetedMisconceptions: [`${REACTINT}:MC1`],
+    source: `${REACTINT_SRC} — carbocations, carbanions, free radicals, carbenes: structure and stability trends`,
+  },
+  {
+    conceptId: REACTINT,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Carbocations and carbanions should follow the SAME stability trend, since ' +
+      'they\'re both just charged carbon species stabilized similarly by alkyl groups." ' +
+      'FALSE — they have OPPOSITE trends precisely because they have OPPOSITE electronic ' +
+      'needs. Carbocations are ELECTRON-DEFICIENT (need MORE electron density) — alkyl ' +
+      'groups DONATE density via hyperconjugation/+I effect, so MORE alkyl substitution ' +
+      '(tertiary) stabilizes them best. Carbanions are ELECTRON-RICH (already have EXCESS ' +
+      'electron density, don\'t need more, actually want to disperse/reduce crowding) — ' +
+      'MORE alkyl groups would just add MORE electron-donating character to an already ' +
+      'electron-rich center (destabilizing, plus steric crowding), so FEWER alkyl groups ' +
+      '(primary) is more stable. Always reason from what the intermediate actually NEEDS ' +
+      'electronically, not a memorized universal rule. Second trap: "Free radicals, having ' +
+      'no formal charge, are inherently more stable/less reactive than charged carbocations ' +
+      'or carbanions." FALSE — free radicals are typically HIGHLY reactive (unpaired ' +
+      'electrons strongly favor pairing up), often comparably or even MORE reactive than ' +
+      'certain stabilized ionic intermediates — lack of formal charge does NOT imply low ' +
+      'reactivity.',
+    targetedMisconceptions: [`${REACTINT}:MC1`, `${REACTINT}:MC2`],
+    source: `${REACTINT_SRC} — misconception: carbocations/carbanions share the same stability trend; uncharged radicals are inherently less reactive`,
+  },
+]
+
+const REACTINT_PROBES: SeedProbe[] = [
+  {
+    conceptId: REACTINT,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Tertiary carbocations are MORE stable than primary carbocations, but tertiary carbanions are LESS stable than primary carbanions. Why do these two species show opposite stability trends with alkyl substitution?',
+    choices: [
+      { text: 'Carbocations are electron-deficient and benefit from alkyl groups DONATING electron density (stabilizing); carbanions are already electron-rich and are destabilized by additional electron-donating alkyl groups plus steric crowding', isCorrect: true },
+      { text: 'This must be an error — carbocations and carbanions, both being charged carbon species, should follow identical stability trends with alkyl substitution', isCorrect: false, misconceptionId: `${REACTINT}:MC1` },
+    ],
+    correctValue: 'Opposite electronic needs (electron-deficient vs. electron-rich) cause opposite trends',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${REACTINT}:MC1`],
+    source: `${REACTINT_SRC} — distractor targets assuming carbocations and carbanions must share identical stability trends`,
+  },
+  {
+    conceptId: REACTINT,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Free radicals have no formal electric charge, unlike carbocations or carbanions. Does this mean free radicals are inherently more stable/less reactive?',
+    choices: [
+      { text: 'No — free radicals are typically highly reactive (unpaired electrons strongly favor pairing up), often comparably or even more reactive than certain stabilized ionic intermediates; lack of formal charge does not imply low reactivity', isCorrect: true },
+      { text: 'Yes — since free radicals carry no formal charge, they must be inherently more stable and less reactive than charged intermediates', isCorrect: false, misconceptionId: `${REACTINT}:MC2` },
+    ],
+    correctValue: 'No — free radicals are typically highly reactive despite lacking formal charge',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${REACTINT}:MC2`],
+    source: `${REACTINT_SRC} — misconception: absence of formal charge implies inherent stability/low reactivity`,
+  },
+]
+
+// ─── chem.hyd.polycyclic ─────────────────────────────────────────────────────
+const POLYCYC = 'chem.hyd.polycyclic'
+const POLYCYC_SRC = 'docs/chemistry/kg/graph.json — chem.hyd.polycyclic'
+
+const POLYCYC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: POLYCYC,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Building on aromaticity and benzene chemistry: POLYCYCLIC AROMATIC HYDROCARBONS ' +
+      '(PAHs) fuse multiple benzene rings together sharing edges — naphthalene (2 fused ' +
+      'rings), anthracene (3 rings in a line), phenanthrene (3 rings angled). These retain ' +
+      'AROMATIC character (delocalized π electrons extending across the fused system) but ' +
+      'individual rings are NOT all equally reactive — some carbon positions are more ' +
+      'reactive than others toward electrophilic substitution, based on which resonance ' +
+      'structures best preserve aromaticity in the REMAINING rings after reaction. ' +
+      'HETEROCYCLIC compounds replace one or more ring CARBON atoms with a different ' +
+      'element (heteroatom — commonly N, O, or S) while often RETAINING aromaticity if the ' +
+      'heteroatom\'s electron arrangement still satisfies Hückel\'s rule (4n+2 π electrons ' +
+      'in a planar, conjugated ring). PYRIDINE (nitrogen replacing one CH in benzene) is ' +
+      'aromatic — nitrogen contributes its lone pair to a SEPARATE, non-aromatic sp² orbital ' +
+      '(NOT to the π system), so pyridine\'s nitrogen retains BASIC character (its lone pair ' +
+      'is available to accept a proton) while the ring stays aromatic. PYRROLE (5-membered ' +
+      'ring, one N) is ALSO aromatic, but here nitrogen\'s lone pair IS part of the π system ' +
+      '(needed to reach 6 π electrons in the 5-membered ring), making pyrrole\'s nitrogen ' +
+      'much LESS basic (its lone pair is "busy" maintaining aromaticity, less available for ' +
+      'protonation).',
+    targetedMisconceptions: [`${POLYCYC}:MC1`],
+    source: `${POLYCYC_SRC} — polycyclic aromatics (naphthalene/anthracene), heterocycles (pyridine vs pyrrole basicity)`,
+  },
+  {
+    conceptId: POLYCYC,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Pyridine and pyrrole, both being nitrogen-containing aromatic 5/6-membered ' +
+      'rings, should have SIMILAR basicity, since they both contain a nitrogen lone pair." ' +
+      'FALSE — this is a classic, important distinction. In PYRIDINE, nitrogen\'s lone pair ' +
+      'sits in an sp² orbital in the PLANE of the ring, completely SEPARATE from the ' +
+      'delocalized π system above/below the ring — this lone pair is fully available to ' +
+      'accept a proton (basic, similar to a typical amine). In PYRROLE, nitrogen\'s lone ' +
+      'pair is REQUIRED as part of the aromatic π system itself (contributing 2 electrons ' +
+      'to reach the necessary 6 π electrons for Hückel aromaticity in the 5-membered ring) ' +
+      '— using this lone pair for protonation would DESTROY the ring\'s aromaticity, making ' +
+      'pyrrole\'s nitrogen dramatically LESS basic (roughly a million times weaker base than ' +
+      'pyridine). Both contain "a nitrogen lone pair," but the ROLE that lone pair plays ' +
+      '(separate from vs. integral to the π system) determines basicity — you cannot assume ' +
+      'similar basicity just from superficial structural similarity.',
+    targetedMisconceptions: [`${POLYCYC}:MC1`],
+    source: `${POLYCYC_SRC} — misconception: pyridine and pyrrole have similar basicity due to superficially similar structures`,
+  },
+]
+
+const POLYCYC_PROBES: SeedProbe[] = [
+  {
+    conceptId: POLYCYC,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Pyridine is a much stronger base than pyrrole, even though both are aromatic rings containing one nitrogen with a lone pair. Why?',
+    choices: [
+      { text: 'In pyridine, the nitrogen lone pair sits separate from the π system (fully available for protonation); in pyrrole, the lone pair is REQUIRED as part of the aromatic π system itself, so using it for protonation would destroy aromaticity', isCorrect: true },
+      { text: 'This is inconsistent — since both molecules contain a nitrogen lone pair in an aromatic ring, they should have essentially the same basicity', isCorrect: false, misconceptionId: `${POLYCYC}:MC1` },
+    ],
+    correctValue: 'Different role of the lone pair (separate from vs. integral to the π system)',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${POLYCYC}:MC1`],
+    source: `${POLYCYC_SRC} — distractor targets assuming similar structural features guarantee similar basicity`,
+  },
+  {
+    conceptId: POLYCYC,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'If pyrrole\'s nitrogen were protonated (using its lone pair to bond a hydrogen ion), what would happen to the ring\'s aromaticity?',
+    choices: [
+      { text: 'Aromaticity would be destroyed — pyrrole needs nitrogen\'s lone pair as part of the delocalized π system to satisfy Hückel\'s rule (6 π electrons in the 5-membered ring); removing that lone pair for protonation breaks the required electron count', isCorrect: true },
+      { text: 'Aromaticity would be unaffected — protonating the lone pair has no bearing on the ring\'s π electron system', isCorrect: false },
+    ],
+    correctValue: 'Aromaticity is destroyed upon protonation',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [],
+    source: `${POLYCYC_SRC} — testing understanding of why pyrrole's lone pair is integral to its aromatic system`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -10871,6 +11050,8 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...ELECTROLYSIS_EXPLANATIONS,
   ...IONSOLID_EXPLANATIONS,
   ...SOLIDPROP_EXPLANATIONS,
+  ...REACTINT_EXPLANATIONS,
+  ...POLYCYC_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -11002,4 +11183,6 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...ELECTROLYSIS_PROBES,
   ...IONSOLID_PROBES,
   ...SOLIDPROP_PROBES,
+  ...REACTINT_PROBES,
+  ...POLYCYC_PROBES,
 ]
