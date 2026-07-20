@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.poles-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.poles",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:96de4b888a1ac26928c65cb7b7cafbdc8ff8d7e9c3ef83ac03330b3e4e3a94ae",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.poles.md": "sha256:0d15beb35ccc2dee1cf9cc282d042788d5d56ff95705be983c3180ff2d5b5b6b"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cx.poles",
+    "name": "Poles and Meromorphic Functions",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.cx.singularities"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.poles-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.poles (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.poles.md": "sha256:0d15beb35ccc2dee1cf9cc282d042788d5d56ff95705be983c3180ff2d5b5b6b"
+      },
+      "contentHash": "sha256:a698ce4443fd52cafbfd1fe41791e89822b18d0ab8061c606544faf2103a5ddc",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.poles.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.poles.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.poles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.poles\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.poles.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.poles.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.poles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.poles\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.poles.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.poles.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.poles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.poles\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.poles.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.poles.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.poles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.poles\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.poles/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cx.poles",
+      "title": "Learning Objectives",
+      "content": "- LO1 (cross-link objective): Recognize this concept's ORDER-of-pole notion as a REFINEMENT of `math.cx.singularities`'s own binary pole classification ($|f|\\to\\infty$) — determine the ORDER $n$ of a pole precisely: the unique $n$ such that $(z-z_0)^nf(z)$ is holomorphic AND NONZERO at $z_0$ (not holomorphic-and-zero, which would indicate too LARGE an $n$; not still-unbounded, which would indicate too SMALL an $n$) — and correctly compute the order of a pole for a specific function using this test.\n- LO2: Define a MEROMORPHIC function precisely — holomorphic on a domain EXCEPT at isolated poles (no essential singularities permitted, per `math.cx.singularities`'s own three-way classification) — and correctly determine, for a given function, whether it qualifies as meromorphic by checking that EVERY singularity is specifically a pole (not essential).\n- LO3: State (without full proof) the classification result for meromorphic functions on ALL of $\\mathbb{C}$ with a controlled singularity at infinity: such a function must be a RATIONAL function (a ratio of two polynomials) — and correctly verify this classification concretely by identifying the poles and their orders of a given rational function, confirming they match the function's own algebraic structure.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.poles.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cx.poles/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.poles",
+      "title": "POLE-ORDER-ASSUMED-NON-UNIQUE",
+      "content": "| MC-1 | POLE-ORDER-ASSUMED-NON-UNIQUE | Believing multiple values of $n$ could equally satisfy the \"holomorphic and nonzero\" pole-order test, missing that exactly one $n$ threads between the too-small and too-large failure modes | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.poles.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.cx.poles/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.poles",
+      "title": "MEROMORPHICITY-ASSUMED-NOT-TO-NEED-EXPLICIT-CHECKING",
+      "content": "| MC-2 | MEROMORPHICITY-ASSUMED-NOT-TO-NEED-EXPLICIT-CHECKING | Believing confirming meromorphicity does not require explicitly checking every individual singularity against `math.cx.singularities`'s own pole-vs-essential classification | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.poles.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.cx.poles/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.poles",
+      "title": "RATIONAL-CLASSIFICATION-UNDERVALUED-AS-OBVIOUS",
+      "content": "| MC-3 | RATIONAL-CLASSIFICATION-UNDERVALUED-AS-OBVIOUS | Believing the classification of globally meromorphic functions with tame infinity behavior as exactly the rational functions is an obvious, unremarkable fact rather than a genuinely nontrivial structural theorem | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.poles.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.cx.poles/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.poles",
+      "title": "Pole Order Is the Unique $n$ Threading Between Too-Small and Too-Large (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Pole Order Is the Unique $n$ Threading Between Too-Small and Too-Large (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.poles.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.cx.poles/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.poles",
+      "title": "Meromorphic Requires EVERY Singularity to Be a Pole, Checked, Not Assumed (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Meromorphic Requires EVERY Singularity to Be a Pole, Checked, Not Assumed (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.poles.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.cx.poles/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.poles",
+      "title": "Globally Meromorphic with Tame Infinity Collapses to Rational Functions (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Globally Meromorphic with Tame Infinity Collapses to Rational Functions (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.poles.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.cx.poles/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.poles",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.poles.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.poles/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.poles",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Determine the order of the pole of $f(z)=\\frac1{(z+1)^2}$ at $z_0=-1$, using the bracketing test explicitly.\n  2. For $f(z)=\\frac{\\sin z}{z^3}$, determine the order of the pole at $z_0=0$ (recall $\\sin z\\approx z-\\frac{z^3}{6}+\\cdots$ near 0).\n  3. For $f(z)=e^{1/z}\\cdot\\frac1{z-1}$, explain, citing `math.cx.singularities`'s own classification, why this function does NOT qualify as meromorphic on $\\mathbb{C}$.\n  4. For the rational function $f(z)=\\frac{z-3}{z^2(z+1)}$, identify all poles and their orders directly from the algebraic factorization.\n- **P76 (Transfer Probe, mode = independence — no cross-link target listed in the KG for this concept)**: \"An engineer analyzing a control system's transfer function $H(z)=\\frac{z^2-1}{z^3-z}$ needs to determine the poles and their orders to assess system stability. (a) First simplify $H(z)$ algebraically (factor numerator and denominator, cancel common factors) before identifying poles — explain why skipping this simplification step could lead to incorrectly identifying a pole where none actually exists. (b) After simplification, identify the true poles of $H(z)$ and their orders using this lesson's bracketing test. (c) Explain why $H(z)$, being a ratio of two polynomials, is automatically meromorphic on $\\mathbb{C}$ without needing to individually verify each singularity against `math.cx.singularities`'s classification from scratch.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.poles.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.poles/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.poles",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cx.singularities` (isolated singularities classified into removable/pole/essential; a pole is where $|f(z)|\\to\\infty$ as $z\\to z_0$; Riemann's removable-singularity theorem).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.poles.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cx.poles/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.poles",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cx.singularities` (the isolated-singularity classification into removable/pole/essential this concept's pole-order refinement and meromorphicity definition both directly build on).\n- **Unlocks**: `math.cx.residue-theorem` (residues are computed specifically at poles, using this concept's own pole-order classification to determine the residue computation method).\n- **Cross-link**: KG lists none for this concept. $P76_{mode}=$ **independence** (no cross-link target to check).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.poles.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

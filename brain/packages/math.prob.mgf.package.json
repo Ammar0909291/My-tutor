@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.mgf-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.mgf",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bceb263663a435656dab6d0668099823093b3ff4da1bebcd7f0f967237240db0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.mgf.md": "sha256:159c53d703df6d665285f5535a5ee78e95f78151a0b4d33d29ab1cecec9e3cc3"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.prob.mgf",
+    "name": "Moment Generating Function",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.prob.moments",
+      "math.calc.power-series"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.mgf-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.mgf (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.mgf.md": "sha256:159c53d703df6d665285f5535a5ee78e95f78151a0b4d33d29ab1cecec9e3cc3"
+      },
+      "contentHash": "sha256:e856f557865168111b5a395369a143380fabf2bb62b26dbdf082a5a4d847c321",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.mgf.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.mgf.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.mgf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.mgf\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.mgf.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.mgf.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.mgf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.mgf\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.mgf.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.mgf.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.mgf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.mgf\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.mgf.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.mgf.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.mgf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.mgf\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.mgf/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.mgf",
+      "title": "Learning Objectives",
+      "content": "- LO1 (cross-link objective): Recognize this concept as the FULL development of the MGF `math.prob.moments`'s own orientation-level preview already introduced ($M(t)=E[e^{tX}]$, $M^{(k)}(0)=E[X^k]$) — not a new definition — and correctly COMPUTE the MGF explicitly for a specific standard distribution by evaluating the defining expectation directly, then extract its first two moments via differentiation to verify the already-previewed derivative rule concretely.\n- LO2: Use `math.calc.power-series`'s own machinery to show WHY differentiating the MGF at $t=0$ extracts moments — expanding $e^{tX}=\\sum_{k=0}^\\infty\\frac{(tX)^k}{k!}$ as a power series in $t$ and taking expectations term-by-term gives $M_X(t)=\\sum_{k=0}^\\infty\\frac{E[X^k]}{k!}t^k$, directly identifying $E[X^k]$ as (up to a factorial) the $k$th TAYLOR COEFFICIENT of $M_X$ at $t=0$ — connecting the derivative-extraction rule to `math.calc.power-series`'s own coefficient-extraction machinery rather than treating it as a separate, unmotivated trick.\n- LO3: Apply the two genuinely powerful further properties: the MGF UNIQUELY determines a distribution (two random variables with the same MGF on a neighborhood of 0 have the same distribution — stated without proof), and for INDEPENDENT random variables, $M_{X+Y}(t)=M_X(t)\\cdot M_Y(t)$ — correctly using the product property to identify the distribution of a sum of independent standard random variables by recognizing the resulting MGF as belonging to a known distribution.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.mgf.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.prob.mgf/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.mgf",
+      "title": "MGF-ASSUMED-NEW-DEFINITION",
+      "content": "| MC-1 | MGF-ASSUMED-NEW-DEFINITION | Believing this concept introduces a new definition of the MGF, missing that it fully develops (via explicit computation) the definition already previewed in `math.prob.moments` | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.mgf.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.prob.mgf/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.mgf",
+      "title": "DERIVATIVE-RULE-ASSUMED-INDEPENDENT-FACT",
+      "content": "| MC-2 | DERIVATIVE-RULE-ASSUMED-INDEPENDENT-FACT | Believing the MGF's derivative-extraction rule is an independent probability fact, missing that it follows directly from `math.calc.power-series`'s own coefficient-extraction machinery applied to the MGF's power-series expansion | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.mgf.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.prob.mgf/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.mgf",
+      "title": "CONVOLUTION-ASSUMED-ONLY-RELIABLE-METHOD",
+      "content": "| MC-3 | CONVOLUTION-ASSUMED-ONLY-RELIABLE-METHOD | Believing direct convolution is the only reliable way to find a sum of independent random variables' distribution, missing the MGF product-and-recognize shortcut | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.mgf.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.prob.mgf/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.mgf",
+      "title": "This Concept Develops `math.prob.moments`'s Own Preview in Full — Compute, Don't Just Restate (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"This Concept Develops `math.prob.moments`'s Own Preview in Full — Compute, Don't Just Restate (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.mgf.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.prob.mgf/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.mgf",
+      "title": "The Derivative Rule Comes From `math.calc.power-series`'s Own Coefficient-Matching, Not an Isolated Fact (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Derivative Rule Comes From `math.calc.power-series`'s Own Coefficient-Matching, Not an Isolated Fact (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.mgf.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.prob.mgf/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.mgf",
+      "title": "MGF Algebra Can Identify a Sum's Distribution Without Convolution (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"MGF Algebra Can Identify a Sum's Distribution Without Convolution (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.mgf.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.prob.mgf/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.mgf",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.mgf.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.prob.mgf/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.mgf",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute $M_X(t)$ explicitly for $X\\sim\\text{Bernoulli}(p)$ (taking value 1 with probability $p$, 0 with probability $1-p$).\n  2. Differentiate your answer to problem 1 to verify $M_X'(0)=E[X]=p$.\n  3. Using `math.calc.power-series`'s own coefficient-extraction idea, explain in your own words why differentiating the MGF at $t=0$ extracts moments.\n  4. For independent $X_1\\sim\\text{Bernoulli}(p)$, $X_2\\sim\\text{Bernoulli}(p)$, use the product rule and problem 1's MGF to identify the distribution of $X_1+X_2$.\n- **P76 (Transfer Probe, mode = independence — no cross-link target listed in the KG for this concept)**: \"A reliability engineer models the total lifetime of a system built from $n$ independent, identical components, each with lifetime $X_i\\sim\\text{Exponential}(\\lambda)$ (the system fails when the LAST component fails, so total operating time is $X_1+\\cdots+X_n$... actually, suppose instead the engineer wants the total COMBINED usage time across all $n$ components, i.e., literally $X_1+\\cdots+X_n$). (a) Using this lesson's product rule, write the MGF of the total combined usage time in terms of the individual components' MGF. (b) Using Example 3's identification, state what distribution the total combined usage time follows, and explain how the uniqueness property justifies this conclusion rather than merely suggesting it. (c) Explain why this MGF-based approach is preferable to attempting a direct convolution of $n$ exponential densities.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.mgf.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.prob.mgf/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.mgf",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.prob.moments` ($k$th moment $E[X^k]$; $k$th central moment $E[(X-\\mu)^k]$; the MGF and kurtosis previewed at orientation level, deferred to this concept for full development) and `math.calc.power-series` (representing a function as $\\sum c_n(x-a)^n$, and extracting coefficients via derivatives).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.mgf.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.mgf/reference/1",
+      "kind": "reference",
+      "conceptId": "math.prob.mgf",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.prob.moments` (the $k$th moment definition and the MGF's own orientation-level preview, fully developed here) and `math.calc.power-series` (the coefficient-extraction machinery this concept's derivative-rule derivation directly reuses).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists none for this concept. $P76_{mode}=$ **independence** (no cross-link target to check).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.mgf.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
