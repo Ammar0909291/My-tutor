@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.liouville-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.liouville-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2df76c5c9fb236287096512872a7d0479c0bf96d84a42eea20840b456113dd47",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.liouville-theorem.md": "sha256:d0d7bc7d375d5b231c0632d28d1fe5b084ff75e839536aba9a76ab85a5921176"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cx.liouville-theorem",
+    "name": "Liouville's Theorem",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.cx.higher-derivatives"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.liouville-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.liouville-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.liouville-theorem.md": "sha256:d0d7bc7d375d5b231c0632d28d1fe5b084ff75e839536aba9a76ab85a5921176"
+      },
+      "contentHash": "sha256:663ee3153a255dc9d5d177bcbbeffc588dc9831b251776a5361de8688f1b540a",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.liouville-theorem.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.liouville-theorem.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.liouville-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.liouville-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.liouville-theorem.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.liouville-theorem.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.liouville-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.liouville-theorem\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.liouville-theorem.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.liouville-theorem.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.liouville-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.liouville-theorem\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.liouville-theorem.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.liouville-theorem.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.liouville-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.liouville-theorem\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.liouville-theorem/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cx.liouville-theorem",
+      "title": "Learning Objectives",
+      "content": "- LO1 (cross-link objective): Prove the theorem DIRECTLY from `math.cx.higher-derivatives`'s own Cauchy's inequality — for $f$ ENTIRE (holomorphic on ALL of $\\mathbb{C}$) and BOUNDED ($|f(z)|\\le M$ everywhere), apply Cauchy's inequality $|f^{(n)}(z_0)|\\le\\frac{n!M}{R^n}$ specifically at $n=1$: $|f'(z_0)|\\le\\frac{M}{R}$ — and correctly recognize that, since $f$ is entire, this bound holds for EVERY radius $R$, no matter how large, forcing $|f'(z_0)|\\to0$ as $R\\to\\infty$, hence $f'(z_0)=0$ EXACTLY.\n- LO2: Correctly conclude $f$ is constant from $f'\\equiv0$ EVERYWHERE (a standard consequence of the derivative vanishing identically on a connected domain, reused not re-derived) — and correctly apply the CONTRAPOSITIVE of the full theorem to determine, for a specific NON-constant entire function, that it CANNOT be bounded (without needing to verify unboundedness directly by other means).\n- LO3: Correctly identify why the theorem's conclusion has NO analogue for functions of a REAL variable — $\\sin(x)$ and $\\cos(x)$ are bounded, non-constant, and infinitely differentiable on ALL of $\\mathbb{R}$ — and precisely explain WHY these do not contradict Liouville's theorem: they are not ENTIRE in the complex sense (as complex functions $\\sin(z),\\cos(z)$ are genuinely UNBOUNDED on $\\mathbb{C}$, growing exponentially along the imaginary axis), making the real-variable \"counterexample\" a case of a DIFFERENT, non-entire function once genuinely extended to the complex plane.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.liouville-theorem.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cx.liouville-theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.liouville-theorem",
+      "title": "LIOUVILLE-PROOF-ASSUMED-ENTIRELY-NEW-TECHNIQUE",
+      "content": "| MC-1 | LIOUVILLE-PROOF-ASSUMED-ENTIRELY-NEW-TECHNIQUE | Believing Liouville's theorem requires an entirely new, independent proof technique, missing that it follows directly from `math.cx.higher-derivatives`'s own Cauchy's inequality applied at $n=1$ with $R\\to\\infty$ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.liouville-theorem.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.cx.liouville-theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.liouville-theorem",
+      "title": "UNBOUNDEDNESS-ASSUMED-TO-NEED-DIRECT-GROWTH-ANALYSIS",
+      "content": "| MC-2 | UNBOUNDEDNESS-ASSUMED-TO-NEED-DIRECT-GROWTH-ANALYSIS | Believing certifying an entire, non-constant function's unboundedness always requires direct growth analysis, missing that the theorem's contrapositive certifies this immediately | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.liouville-theorem.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.cx.liouville-theorem/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.liouville-theorem",
+      "title": "SIN-COS-ASSUMED-TO-GENUINELY-CONTRADICT-THEOREM",
+      "content": "| MC-3 | SIN-COS-ASSUMED-TO-GENUINELY-CONTRADICT-THEOREM | Believing $\\sin(z),\\cos(z)$ genuinely contradict Liouville's theorem (bounded, non-constant, entire simultaneously), missing that they are unbounded once genuinely extended to $\\mathbb{C}$ | High |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.liouville-theorem.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.cx.liouville-theorem/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.liouville-theorem",
+      "title": "The Proof Is One Decisive Application of Cauchy's Inequality, Letting $R\\to\\infty$ (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Proof Is One Decisive Application of Cauchy's Inequality, Letting $R\\\\to\\\\infty$ (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.liouville-theorem.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.cx.liouville-theorem/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.liouville-theorem",
+      "title": "The Contrapositive Certifies Unboundedness Without Direct Growth Analysis (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Contrapositive Certifies Unboundedness Without Direct Growth Analysis (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.liouville-theorem.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.cx.liouville-theorem/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.liouville-theorem",
+      "title": "Real-Variable \"Counterexamples\" Become Genuinely Unbounded Once Properly Extended to $\\mathbb{C}$ (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Real-Variable \\\"Counterexamples\\\" Become Genuinely Unbounded Once Properly Extended to $\\\\mathbb{C}$ (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.liouville-theorem.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.cx.liouville-theorem/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.liouville-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.liouville-theorem.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.liouville-theorem/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.liouville-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State Liouville's theorem precisely, and explain in your own words why the $R\\to\\infty$ step in its proof is the crucial move.\n  2. Explain why the polynomial $f(z)=5z^3-2$ must be unbounded on $\\mathbb{C}$, citing the theorem's contrapositive directly.\n  3. Compute $|\\cos(15i)|$ using $\\cos(iy)=\\cosh(y)$, and confirm it is a large, non-bounded value.\n  4. Explain precisely why $f(z)=\\sin(z)$ being unbounded on $\\mathbb{C}$ (despite $\\sin(x)$ being bounded on $\\mathbb{R}$) does not contradict Liouville's theorem.\n- **P76 (Transfer Probe, mode = independence — no cross-link target listed in the KG for this concept)**: \"A student is trying to construct a genuinely bounded, non-constant ENTIRE function (holomorphic on all of $\\mathbb{C}$, with $|f(z)|\\le K$ for some constant $K$ and all $z\\in\\mathbb{C}$), hoping to find a counterexample to Liouville's theorem. (a) Explain, citing this lesson's proof directly, why ANY attempt at such a construction is guaranteed to fail — what would go wrong at the mathematical level if such a function genuinely existed. (b) The student proposes $f(z)=\\frac1{z^2+1}$ as a candidate (bounded away from its two poles at $z=\\pm i$). Explain specifically why this function does NOT satisfy the theorem's hypotheses, and hence poses no threat to the theorem. (c) Explain how this connects to `math.cx.fundamental-theorem-algebra`'s own eventual use of Liouville's theorem (previewed only conceptually here, not derived) — specifically, why assuming a polynomial has NO roots leads to a contradiction via Liouville's theorem applied to $1/p(z)$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.liouville-theorem.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.liouville-theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.liouville-theorem",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cx.higher-derivatives` (every holomorphic function has derivatives of all orders; Cauchy's inequality $|f^{(n)}(z_0)|\\le n!M/R^n$ for $|f|\\le M$ on $|z-z_0|=R$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.liouville-theorem.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cx.liouville-theorem/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.liouville-theorem",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cx.higher-derivatives` (Cauchy's inequality, the single mechanism this concept's entire proof directly reuses).\n- **Unlocks**: `math.cx.fundamental-theorem-algebra` (proving every non-constant polynomial has a root, via applying THIS concept's theorem to $1/p(z)$ under the assumption of no roots, previewed conceptually in the P76 transfer probe).\n- **Cross-link**: KG lists none for this concept. $P76_{mode}=$ **independence** (no cross-link target to check).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.liouville-theorem.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

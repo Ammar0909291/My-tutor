@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.inverse-laplace-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.inverse-laplace",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1c958cb7b9c0b0484573f9532ec1feb60abc634d6cd89247f14df67346b416da",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.inverse-laplace.md": "sha256:4c342c9490d3cab83f45ce4dadddc1fe523be7a7fa1b2eb297faed231be0b346"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.de.inverse-laplace",
+    "name": "Inverse Laplace Transform",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.de.laplace-properties",
+      "math.calc.partial-fractions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.inverse-laplace-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.inverse-laplace (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.inverse-laplace.md": "sha256:4c342c9490d3cab83f45ce4dadddc1fe523be7a7fa1b2eb297faed231be0b346"
+      },
+      "contentHash": "sha256:6dcade9856967391a7e5297246d7974d106b5fd7824e64cc63135650b1f9ed66",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.inverse-laplace.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.inverse-laplace.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.inverse-laplace"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.inverse-laplace\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.inverse-laplace.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.inverse-laplace.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.inverse-laplace"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.inverse-laplace\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.inverse-laplace.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.inverse-laplace.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.inverse-laplace"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.inverse-laplace\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.inverse-laplace.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.inverse-laplace.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.inverse-laplace"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.inverse-laplace\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.inverse-laplace/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.inverse-laplace",
+      "title": "Learning Objectives",
+      "content": "- LO1 (cross-link objective): Recognize the standard inverse-Laplace technique as a DIRECT APPLICATION of `math.calc.partial-fractions`'s own decomposition method — a complicated $F(s)$ (typically a rational function in $s$) is decomposed into simple pieces EXACTLY as that concept teaches, with the KEY difference that here each piece is matched against a KNOWN transform PAIR (rather than integrated directly) — and correctly decompose a specific $F(s)$ using `math.calc.partial-fractions`'s own machinery as the first step.\n- LO2: Match each decomposed piece against `math.de.laplace-properties`'s own already-established standard transform PAIRS and shifting theorems (e.g. $\\mathcal{L}^{-1}\\left\\{\\frac1{s-a}\\right\\}=e^{at}$, and the first shifting theorem's own $F(s-a)\\leftrightarrow e^{at}f(t)$ correspondence RUN IN REVERSE) — and correctly recover $f(t)$ piece-by-piece for a specific $F(s)$, combining the recovered pieces via `math.de.laplace-properties`'s own linearity property.\n- LO3: Correctly handle a repeated linear factor in $F(s)$'s denominator (requiring `math.calc.partial-fractions`'s own multiple-term-per-power decomposition rule) by matching the resulting terms against the specific transform pairs involving powers of $t$ multiplying an exponential (e.g. $\\mathcal{L}^{-1}\\left\\{\\frac1{(s-a)^2}\\right\\}=te^{at}$), correctly distinguishing this case from the simpler single-power case.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.inverse-laplace.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.de.inverse-laplace/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.inverse-laplace",
+      "title": "INVERSE-LAPLACE-ASSUMED-NEW-DECOMPOSITION-TECHNIQUE",
+      "content": "| MC-1 | INVERSE-LAPLACE-ASSUMED-NEW-DECOMPOSITION-TECHNIQUE | Believing inverting a Laplace transform requires a new decomposition technique specific to Laplace transforms, missing that it directly reuses `math.calc.partial-fractions`'s own already-known method | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.inverse-laplace.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.de.inverse-laplace/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.inverse-laplace",
+      "title": "PIECE-WISE-INVERSION-SUM-ASSUMED-TO-NEED-EXTRA-JUSTIFICATION",
+      "content": "| MC-2 | PIECE-WISE-INVERSION-SUM-ASSUMED-TO-NEED-EXTRA-JUSTIFICATION | Believing summing the individually-inverted pieces requires additional (unspecified) checking beyond linearity, or is not valid, missing that `math.de.laplace-properties`'s own linearity property directly guarantees correctness | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.inverse-laplace.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.de.inverse-laplace/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.inverse-laplace",
+      "title": "REPEATED-FACTOR-INVERSE-ASSUMED-SAME-AS-SIMPLE-FACTOR",
+      "content": "| MC-3 | REPEATED-FACTOR-INVERSE-ASSUMED-SAME-AS-SIMPLE-FACTOR | Believing $\\frac1{(s-a)^2}$ inverts to the same $e^{at}$ pair as $\\frac1{s-a}$, missing the distinct $te^{at}$ pattern for repeated linear factors | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.inverse-laplace.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.de.inverse-laplace/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.inverse-laplace",
+      "title": "Decompose $F(s)$ First, Using `math.calc.partial-fractions`'s Own Method Directly (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Decompose $F(s)$ First, Using `math.calc.partial-fractions`'s Own Method Directly (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.inverse-laplace.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.de.inverse-laplace/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.inverse-laplace",
+      "title": "Match Each Piece Against Already-Known Transform Pairs, Then Combine via Linearity (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Match Each Piece Against Already-Known Transform Pairs, Then Combine via Linearity (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.inverse-laplace.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.de.inverse-laplace/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.inverse-laplace",
+      "title": "A Repeated Factor's Inverse Involves a Factor of $t$, Not Just a Repeated Exponential (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"A Repeated Factor's Inverse Involves a Factor of $t$, Not Just a Repeated Exponential (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.inverse-laplace.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.inverse-laplace/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.inverse-laplace",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.inverse-laplace.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.inverse-laplace/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.inverse-laplace",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Decompose $F(s)=\\frac{5s-3}{(s-2)(s+1)}$ using `math.calc.partial-fractions`'s own cover-up method.\n  2. Invert each piece from problem 1 using `math.de.laplace-properties`'s own known transform pairs, and combine via linearity to find $f(t)$.\n  3. Verify your answer to problem 2 by computing the forward Laplace transform of your recovered $f(t)$ and confirming it matches the original $F(s)$.\n  4. Find $\\mathcal{L}^{-1}\\left\\{\\frac3{(s+2)^2}\\right\\}$, explicitly identifying which transform pair applies.\n- **P76 (Transfer Probe, mode = independence — no cross-link target listed in the KG for this concept)**: \"An electrical engineer, after transforming a circuit's governing ODE using the Laplace transform and solving the resulting algebraic equation, obtains $Y(s)=\\frac{4s+8}{s(s+2)^2}$ as the transformed solution and needs to recover the actual time-domain response $y(t)$. (a) Explain what the FIRST step must be, using `math.calc.partial-fractions`'s own decomposition rules, being careful to identify the correct FORM given the repeated factor $(s+2)^2$. (b) After obtaining the decomposed pieces (assume they are $\\frac{A}{s}+\\frac{B}{s+2}+\\frac{C}{(s+2)^2}$ for some constants), explain which SPECIFIC transform pairs from `math.de.laplace-properties`'s own toolkit are needed to invert each piece, paying particular attention to the piece from the repeated factor. (c) Explain how the engineer would verify the recovered $y(t)$ is correct without needing to re-solve the original ODE from scratch.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.inverse-laplace.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.inverse-laplace/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.inverse-laplace",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.de.laplace-properties` (linearity; the first and second shifting theorems; standard transform pairs already computed for functions like $e^{at},\\sin(bt),\\cos(bt)$) and `math.calc.partial-fractions` (decomposing a rational function into simple pieces based on its denominator's factorization).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.inverse-laplace.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.inverse-laplace/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.inverse-laplace",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.de.laplace-properties` (linearity, shifting theorems, and standard transform pairs this concept's matching step directly reuses) and `math.calc.partial-fractions` (the decomposition method this concept's first step directly applies).\n- **Unlocks**: `math.de.laplace-ode` (solving ODEs via the full forward-transform-then-invert pipeline, using this concept's own inversion technique as its final step).\n- **Cross-link**: KG lists none for this concept. $P76_{mode}=$ **independence** (no cross-link target to check).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.inverse-laplace.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

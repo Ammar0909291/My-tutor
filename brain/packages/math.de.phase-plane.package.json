@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.phase-plane-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.phase-plane",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bd413a486389f15d3027570efb0c1348c40fac21224e416be3385d6298f776a5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.phase-plane.md": "sha256:cb45f335629c32905fd311f2107e7246e6e2d1d40ffc107758351c98d7d707de"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.de.phase-plane",
+    "name": "Phase Plane Analysis",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.de.systems-ode",
+      "math.de.slope-field"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.phase-plane-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.phase-plane (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.phase-plane.md": "sha256:cb45f335629c32905fd311f2107e7246e6e2d1d40ffc107758351c98d7d707de"
+      },
+      "contentHash": "sha256:1c020aff161c5e50a7d59a267f74298acb1d674f9949881cf931f23514ed282e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.phase-plane.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.phase-plane.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.phase-plane"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.phase-plane\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.phase-plane.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.phase-plane.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.phase-plane"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.phase-plane\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.phase-plane.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.phase-plane.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.phase-plane"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.phase-plane\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.phase-plane.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.phase-plane.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.phase-plane"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.phase-plane\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.phase-plane/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.phase-plane",
+      "title": "Learning Objectives",
+      "content": "- LO1 (cross-link objective): Recognize the phase PORTRAIT of a 2D system as `math.de.slope-field`'s own single-equation slope-field idea, GENERALIZED from ONE dimension ($x$-$y$ plane, with $y'$ as the single prescribed slope at each $(x,y)$) to TWO coupled dimensions (the $x$-$y$ PHASE plane itself, with the VECTOR $(x'(t),y'(t))=(f(x,y),g(x,y))$ prescribing a DIRECTION at each point, rather than a single slope) — and correctly construct a small portion of a phase portrait by evaluating $(f,g)$ at sample points, directly paralleling `math.de.slope-field`'s own construction procedure.\n- LO2: Find and classify EQUILIBRIA (points where $f(x,y)=g(x,y)=0$, i.e. where the system's velocity vector VANISHES entirely) using `math.de.systems-ode`'s own eigenvalue-based classification, applied to the LINEARIZATION of the system near each equilibrium — correctly identifying whether a specific equilibrium is a NODE (real eigenvalues, same sign), SADDLE (real eigenvalues, opposite signs), SPIRAL (complex eigenvalues, nonzero real part), or CENTER (purely imaginary eigenvalues) from the linearized system's eigenvalues.\n- LO3: Correctly interpret a phase portrait's GLOBAL qualitative behavior for a specific nonlinear system (e.g. predator-prey-style dynamics) — identifying trajectories that spiral toward/away from an equilibrium, are attracted along one direction but repelled along another (saddle behavior), or orbit periodically around a center — and correctly explain why phase-plane analysis reveals genuinely GLOBAL solution behavior that neither equation's own slope field (viewed separately) could show.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.phase-plane.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.de.phase-plane/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.phase-plane",
+      "title": "PHASE-PORTRAIT-ASSUMED-GENUINELY-NEW-PROCEDURE",
+      "content": "| MC-1 | PHASE-PORTRAIT-ASSUMED-GENUINELY-NEW-PROCEDURE | Believing constructing a phase portrait is a genuinely new procedure, missing that it directly generalizes `math.de.slope-field`'s own grid-evaluation construction to a vector-valued quantity | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.phase-plane.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.de.phase-plane/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.phase-plane",
+      "title": "EQUILIBRIUM-CLASSIFICATION-ASSUMED-TO-REQUIRE-EXTENSIVE-PLOTTING",
+      "content": "| MC-2 | EQUILIBRIUM-CLASSIFICATION-ASSUMED-TO-REQUIRE-EXTENSIVE-PLOTTING | Believing classifying an equilibrium's type requires extensive direct plotting of nearby trajectories, missing that the linearization's eigenvalues determine this directly | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.phase-plane.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.de.phase-plane/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.phase-plane",
+      "title": "SEPARATE-SLOPE-FIELDS-ASSUMED-EQUIVALENT-TO-PHASE-PORTRAIT",
+      "content": "| MC-3 | SEPARATE-SLOPE-FIELDS-ASSUMED-EQUIVALENT-TO-PHASE-PORTRAIT | Believing examining each equation's own slope field separately reveals the same global qualitative structure as the full phase portrait, missing that this discards the genuine coupling between variables | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.phase-plane.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.de.phase-plane/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.phase-plane",
+      "title": "The Phase Portrait Generalizes `math.de.slope-field`'s Own Construction to Two Dimensions (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Phase Portrait Generalizes `math.de.slope-field`'s Own Construction to Two Dimensions (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.phase-plane.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.de.phase-plane/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.phase-plane",
+      "title": "Equilibrium Type Is Read Directly From the Linearization's Eigenvalues (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Equilibrium Type Is Read Directly From the Linearization's Eigenvalues (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.phase-plane.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.de.phase-plane/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.phase-plane",
+      "title": "Phase-Plane Analysis Reveals Global Behavior Invisible to Either Variable's Slope Field Alone (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Phase-Plane Analysis Reveals Global Behavior Invisible to Either Variable's Slope Field Alone (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.phase-plane.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.phase-plane/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.phase-plane",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.phase-plane.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.phase-plane/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.phase-plane",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For the system $x'=-y,y'=x$, evaluate the velocity vector at $(1,0),(0,1),(-1,0),(0,-1)$ and describe the resulting rotational pattern.\n  2. Find all equilibria of the system $x'=x+2y,y'=3x+2y$.\n  3. Compute the Jacobian eigenvalues at the equilibrium from problem 2 and classify its type.\n  4. Explain, in your own words, why phase-plane analysis reveals global behavior that examining each equation's own slope field separately cannot.\n- **P76 (Transfer Probe, mode = independence — no cross-link target listed in the KG for this concept)**: \"A control-systems engineer is analyzing a two-variable feedback system $x'=f(x,y),y'=g(x,y)$ near its designed operating equilibrium, and wants to know whether the system will naturally settle back to that equilibrium after a small disturbance (stability) or diverge away from it (instability). (a) Explain how the engineer would compute the linearization's Jacobian matrix at the equilibrium, and what role `math.de.systems-ode`'s own eigenvalue method plays in analyzing it. (b) If the computed eigenvalues turn out to be complex with a NEGATIVE real part, explain what this tells the engineer about the system's behavior near the equilibrium, using this lesson's classification. (c) Explain why the engineer specifically needs the FULL phase-plane picture (not just the eigenvalue classification alone) to understand how trajectories starting FAR from the equilibrium (not just infinitesimally close) actually behave.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.phase-plane.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.phase-plane/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.phase-plane",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.de.systems-ode` (systems $\\vec x'=A\\vec x$; solving via eigenvalues/eigenvectors) and `math.de.slope-field` (constructing a single-equation slope field by evaluating the ODE's right-hand side at a grid of points; sketching approximate solutions by tangent-following).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.phase-plane.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.phase-plane/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.phase-plane",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.de.systems-ode` (the eigenvalue-based solution method for linear systems $\\vec x'=A\\vec x$ this concept's equilibrium classification directly reuses) and `math.de.slope-field` (the single-equation grid-evaluation construction this concept's phase portrait directly generalizes).\n- **Unlocks**: `math.de.stability-analysis` (formalizing the stability implications of each equilibrium type this concept classifies).\n- **Cross-link**: KG lists none for this concept. $P76_{mode}=$ **independence** (no cross-link target to check).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.phase-plane.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
