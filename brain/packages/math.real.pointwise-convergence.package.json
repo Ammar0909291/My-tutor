@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.real.pointwise-convergence-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.real.pointwise-convergence",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:dd951f018011279e9c6a097574e202912f9131af1376ceb146733792e067a547",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.real.pointwise-convergence.md": "sha256:8b43a49d59762259ecbcd07c1f24dd9bb92d28f906bfbf1837f32735398fa926"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.real.pointwise-convergence",
+    "name": "Pointwise Convergence",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.real.convergence-sequences"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.real.pointwise-convergence-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.real.pointwise-convergence (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.real.pointwise-convergence.md": "sha256:8b43a49d59762259ecbcd07c1f24dd9bb92d28f906bfbf1837f32735398fa926"
+      },
+      "contentHash": "sha256:922f1ef2fedab771e90a2265cebff199e3408eebb46401b201580aa6f9e2f6d6",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.real.pointwise-convergence.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.pointwise-convergence.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.pointwise-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.pointwise-convergence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.pointwise-convergence.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.pointwise-convergence.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.pointwise-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.pointwise-convergence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.pointwise-convergence.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.pointwise-convergence.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.pointwise-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.pointwise-convergence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.pointwise-convergence.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.pointwise-convergence.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.pointwise-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.pointwise-convergence\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.real.pointwise-convergence/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.real.pointwise-convergence",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the formal definition $f_n\\to f$ pointwise on $E$ iff $\\forall x\\in E,\\forall\\varepsilon>0,\\exists N(x,\\varepsilon):n>N\\Rightarrow|f_n(x)-f(x)|<\\varepsilon$, recognizing it as EXACTLY `math.real.convergence-sequences`'s own ε–N definition applied SEPARATELY at each fixed $x\\in E$ — a sequence of functions converges pointwise precisely when, for every individually fixed $x$, the resulting NUMBER sequence $(f_n(x))$ converges in the already-known sense.\n- LO2: Recognize the CRUCIAL new feature not present in `math.real.convergence-sequences`'s single-sequence setting: $N$ may depend on BOTH $\\varepsilon$ AND $x$ — different points $x$ can require completely different (and unboundedly larger) $N$ for the same $\\varepsilon$, and correctly compute $N(x,\\varepsilon)$ for a specific pointwise-convergent example to make this $x$-dependence concrete.\n- LO3: State and apply the concrete consequence that pointwise convergence does NOT preserve continuity — a sequence of CONTINUOUS functions can converge pointwise to a DISCONTINUOUS limit — using a specific verified counterexample, and state (without proof) Dini's theorem as the one special condition (monotone convergence on a compact set) under which pointwise convergence upgrades automatically to uniform convergence.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.pointwise-convergence.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.real.pointwise-convergence/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.real.pointwise-convergence",
+      "title": "POINTWISE-CONVERGENCE-ASSUMED-NEW-DEFINITION",
+      "content": "| MC-1 | POINTWISE-CONVERGENCE-ASSUMED-NEW-DEFINITION | Believing pointwise convergence requires a genuinely new definition, missing that it is `math.real.convergence-sequences`'s own ε–N definition applied separately at each fixed point | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.pointwise-convergence.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.real.pointwise-convergence/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.real.pointwise-convergence",
+      "title": "N-ASSUMED-INDEPENDENT-OF-X",
+      "content": "| MC-2 | N-ASSUMED-INDEPENDENT-OF-X | Believing a single $N$ (depending only on $\\varepsilon$) must work at every point $x\\in E$ simultaneously, missing that pointwise convergence permits $N(x,\\varepsilon)$ to vary unboundedly across $E$ | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.pointwise-convergence.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.real.pointwise-convergence/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.real.pointwise-convergence",
+      "title": "CONTINUITY-ASSUMED-PRESERVED-BY-POINTWISE-LIMIT",
+      "content": "| MC-3 | CONTINUITY-ASSUMED-PRESERVED-BY-POINTWISE-LIMIT | Believing a pointwise limit of continuous functions must itself be continuous | High |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.pointwise-convergence.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.real.pointwise-convergence/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.pointwise-convergence",
+      "title": "Pointwise Convergence Is the ε–N Definition, Applied Per Point (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Pointwise Convergence Is the ε–N Definition, Applied Per Point (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.pointwise-convergence.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.real.pointwise-convergence/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.pointwise-convergence",
+      "title": "$N$ Can Depend on $x$, Not Just $\\varepsilon$ (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"$N$ Can Depend on $x$, Not Just $\\\\varepsilon$ (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.pointwise-convergence.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.real.pointwise-convergence/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.pointwise-convergence",
+      "title": "Continuity Is NOT Automatically Preserved by Pointwise Limits (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Continuity Is NOT Automatically Preserved by Pointwise Limits (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.pointwise-convergence.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.real.pointwise-convergence/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.pointwise-convergence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.pointwise-convergence.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.pointwise-convergence/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.real.pointwise-convergence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $f_n(x)=x/n$ on $E=\\mathbb{R}$, find the pointwise limit $f(x)$, showing the per-point ε–N check for a general fixed $x$.\n  2. For $\\varepsilon=0.01$ and the sequence in problem 1, compute $N(x,\\varepsilon)$ explicitly as a function of $x$ (or explain why a single formula suffices here, contrasting with Example 2).\n  3. Give an example (can reuse or adapt $f_n(x)=x^n$) of a sequence of continuous functions whose pointwise limit is discontinuous, and identify exactly where the discontinuity occurs.\n  4. State Dini's theorem and identify which of its three hypotheses (monotone convergence, compact domain, continuous limit) FAILS for the sequence in problem 3, explaining why this means Dini's theorem does not apply there.\n- **P76 (Transfer Probe, mode = independence — no authored cross-link target exists yet for this concept)**: \"A signal-processing engineer approximates a target waveform $f$ using a sequence of smooth approximating functions $f_n$ that converge to $f$ pointwise (but the engineer has not verified uniform convergence). (a) Explain, using this lesson's $N(x,\\varepsilon)$ framework, why the engineer cannot assume a single fixed number of approximation terms $n$ will achieve a desired accuracy $\\varepsilon$ SIMULTANEOUSLY across the entire signal's domain. (b) Even if each $f_n$ is smooth (hence continuous), explain why the engineer cannot conclude the target waveform $f$ itself is continuous, citing this lesson's continuity-failure example. (c) Under what additional condition (name it, citing Dini's theorem) could the engineer be confident the convergence is actually uniform, avoiding part (a)'s problem entirely?\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.pointwise-convergence.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.pointwise-convergence/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.real.pointwise-convergence",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.real.convergence-sequences` (the rigorous ε–N definition of $a_n\\to L$ for sequences of numbers, and comfort constructing $N$ as a function of $\\varepsilon$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.pointwise-convergence.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.real.pointwise-convergence/reference/1",
+      "kind": "reference",
+      "conceptId": "math.real.pointwise-convergence",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.real.convergence-sequences` (the rigorous ε–N definition for sequences of numbers, applied here point-by-point to sequences of functions).\n- **Unlocks**: `math.real.uniform-convergence` (the strictly stronger notion — a single $N$ working uniformly across all of $E$ — motivated directly by this concept's demonstrated failure of continuity preservation).\n- **Cross-link**: KG lists none for this concept. $P76_{mode}=$ **independence** (no cross-link target to check).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.pointwise-convergence.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

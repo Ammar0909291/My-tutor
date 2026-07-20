@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.fourier-convergence-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.fourier-convergence",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:740e604105361cf8340b577b7b1ff54a8e6f0b4200e5852daba336e8b2d955b6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.fourier-convergence.md": "sha256:9bcbdd5397ab4de7cfb8dc74077194d57ddbfb2fcb530505d21c33e6e282e2cf"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.de.fourier-convergence",
+    "name": "Convergence of Fourier Series",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.de.fourier-series",
+      "math.seq.series-convergence"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.fourier-convergence-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.fourier-convergence (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.fourier-convergence.md": "sha256:9bcbdd5397ab4de7cfb8dc74077194d57ddbfb2fcb530505d21c33e6e282e2cf"
+      },
+      "contentHash": "sha256:1d23ae175f976917408357328be8e29b6280f50bf3951785ea5a74ec225e62c9",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.fourier-convergence.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.fourier-convergence.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.fourier-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.fourier-convergence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.fourier-convergence.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.fourier-convergence.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.fourier-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.fourier-convergence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.fourier-convergence.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.fourier-convergence.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.fourier-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.fourier-convergence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.fourier-convergence.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.fourier-convergence.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.fourier-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.fourier-convergence\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.fourier-convergence/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.fourier-convergence",
+      "title": "Learning Objectives",
+      "content": "- LO1: Recognize that a Fourier series, as an infinite SERIES, converges (or fails to) in exactly the sense `math.seq.series-convergence` already defines — via the convergence of its sequence of PARTIAL SUMS — and that asking \"does this Fourier series converge?\" is not a new kind of question, but `math.seq.series-convergence`'s own convergence question applied to this specific series.\n- LO2: State Dirichlet's theorem precisely: for piecewise smooth $f$, the Fourier series converges to $f(x)$ at every point of CONTINUITY, and to the AVERAGE $[f(x^+)+f(x^-)]/2$ at every jump discontinuity — and correctly compute this average value at a specific jump, recognizing this as the cross-link objective connecting to `math.real.pointwise-convergence`'s own per-point convergence framework: Dirichlet's theorem is precisely a statement about the POINTWISE limit of the partial-sum sequence, evaluated separately at each $x$.\n- LO3: Describe the Gibbs phenomenon — near a jump discontinuity, the partial sums do NOT approach the jump smoothly but persistently OVERSHOOT by approximately 9% of the jump's size, no matter how many terms are included — and correctly identify that this overshoot does not violate Dirichlet's theorem's pointwise convergence claim, since the overshoot's LOCATION shifts closer to the jump (rather than shrinking in height) as more terms are added, consistent with convergence holding at each FIXED point even though uniform convergence fails near the jump.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-convergence.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.de.fourier-convergence/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.fourier-convergence",
+      "title": "FOURIER-CONVERGENCE-ASSUMED-NEW-CONCEPT",
+      "content": "| MC-1 | FOURIER-CONVERGENCE-ASSUMED-NEW-CONCEPT | Believing determining Fourier series convergence requires a genuinely new convergence concept, missing that it is `math.seq.series-convergence`'s own partial-sum convergence question applied to this series | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-convergence.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.de.fourier-convergence/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.fourier-convergence",
+      "title": "JUMP-VALUE-ASSUMED-TO-MATCH-ONE-SIDE",
+      "content": "| MC-2 | JUMP-VALUE-ASSUMED-TO-MATCH-ONE-SIDE | Believing the Fourier series converges at a jump to $f(x)$ as originally defined or to one of the one-sided limits, missing Dirichlet's theorem's specific prediction of the AVERAGE $[f(x^+)+f(x^-)]/2$ | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-convergence.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.de.fourier-convergence/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.fourier-convergence",
+      "title": "GIBBS-OVERSHOOT-ASSUMED-TO-SHRINK-WITH-MORE-TERMS",
+      "content": "| MC-3 | GIBBS-OVERSHOOT-ASSUMED-TO-SHRINK-WITH-MORE-TERMS | Believing the Gibbs phenomenon's overshoot height shrinks toward zero as more terms are added, missing that the ~9% height persists while only its location migrates toward the jump | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-convergence.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.de.fourier-convergence/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.fourier-convergence",
+      "title": "Fourier Convergence Is `math.seq.series-convergence`'s Own Partial-Sum Question (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Fourier Convergence Is `math.seq.series-convergence`'s Own Partial-Sum Question (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-convergence.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.de.fourier-convergence/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.fourier-convergence",
+      "title": "At Jumps, the Series Converges to the AVERAGE, Not $f(x)$ Itself (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"At Jumps, the Series Converges to the AVERAGE, Not $f(x)$ Itself (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-convergence.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.de.fourier-convergence/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.fourier-convergence",
+      "title": "The Gibbs Overshoot Migrates Toward the Jump, It Doesn't Shrink Away (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Gibbs Overshoot Migrates Toward the Jump, It Doesn't Shrink Away (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-convergence.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.fourier-convergence/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.fourier-convergence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-convergence.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.fourier-convergence/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.fourier-convergence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Explain, citing `math.seq.series-convergence`'s own definition, exactly what it means for a Fourier series to converge at a specific point $x$.\n  2. For a sawtooth wave with $f(0^+)=2$ and $f(0^-)=-2$ at a jump at $x=0$, use Dirichlet's theorem to predict the Fourier series' value at $x=0$.\n  3. Explain why the Gibbs phenomenon's persistent ~9% overshoot does not contradict Dirichlet's theorem's pointwise convergence claim at points near (but not at) the jump.\n  4. State the two conditions Dirichlet's theorem requires of $f$, and identify what the series converges to at (a) a continuity point and (b) a jump point.\n- **P76 (Transfer Probe, mode = cross-link probe engaging `math.real.pointwise-convergence`)**: \"An audio engineer reconstructs a square-wave test signal using a truncated Fourier series with a fixed, moderate number of terms $N$. Near the signal's sharp transitions (jumps), the reconstructed waveform persistently overshoots the true signal level by roughly 9%, no matter how the engineer adjusts $N$ within a practical range. (a) Using this lesson's Dirichlet's theorem, explain what value the FULL (infinite) Fourier series converges to exactly AT a jump point, and why this differs from the signal's one-sided values. (b) Using `math.real.pointwise-convergence`'s own framework (specifically, how $N(x,\\varepsilon)$ can depend on $x$ and blow up near a particular point), explain why the engineer cannot eliminate the overshoot by simply increasing $N$ a practical, bounded amount — connecting this directly to why the overshoot's LOCATION, not its height, is what changes as $N$ grows. (c) At a point safely away from any jump, explain why the engineer's truncated series IS a good approximation even for moderate $N$, citing genuine pointwise convergence there.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-convergence.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.fourier-convergence/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.fourier-convergence",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.de.fourier-series` (constructing $f(x)=a_0/2+\\sum(a_n\\cos(n\\pi x/L)+b_n\\sin(n\\pi x/L))$ and computing coefficients via orthogonality integrals) and `math.seq.series-convergence` (a series converges iff its sequence of partial sums converges).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-convergence.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.fourier-convergence/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.fourier-convergence",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.de.fourier-series` (the series construction and coefficient computation, assumed already mastered) and `math.seq.series-convergence` (the partial-sum definition of series convergence, applied directly here).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.real.pointwise-convergence`, checked via `ls docs/curriculum/blueprints/` — confirmed authored EARLIER IN THIS SAME BATCH (same-batch cross-link-enabling pattern). $P76_{mode}=$ **cross-link probe**, engaging `math.real.pointwise-convergence`'s own $N(x,\\varepsilon)$-dependence framework directly in Component 3's Gibbs-phenomenon explanation and the P76 transfer probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-convergence.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
