@@ -5355,6 +5355,587 @@ const BUFFER_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.equil.hydrolysis ───────────────────────────────────────────────────
+const HYDROL = 'chem.equil.hydrolysis'
+const HYDROL_SRC = 'docs/chemistry/kg/graph.json — chem.equil.hydrolysis'
+
+const HYDROL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HYDROL,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Not all salts give NEUTRAL solutions when dissolved in water — some make the ' +
+      'solution acidic or basic through SALT HYDROLYSIS, where an ion reacts with water. ' +
+      'Four cases: (1) Strong acid + strong base salt (NaCl) → NEUTRAL, neither ion ' +
+      'reacts with water. (2) Strong acid + weak base salt (NH₄Cl) → ACIDIC, the cation ' +
+      '(NH₄⁺) is itself a weak acid: NH₄⁺ + H₂O ⇌ NH₃ + H₃O⁺. (3) Weak acid + strong base ' +
+      'salt (CH₃COONa) → BASIC, the anion (CH₃COO⁻) is a weak base: CH₃COO⁻ + H₂O ⇌ ' +
+      'CH₃COOH + OH⁻. (4) Weak acid + weak base salt (CH₃COONH₄) → depends on the ' +
+      'RELATIVE strengths of Ka and Kb — if Ka(conjugate acid) > Kb(conjugate base), ' +
+      'net acidic; if Kb > Ka, net basic; if equal, neutral. The underlying principle: ' +
+      'the conjugate of a WEAK acid/base is itself a measurably strong enough base/acid to ' +
+      'shift water\'s own equilibrium (Kw) noticeably, while the conjugate of a STRONG ' +
+      'acid/base is too weak to do anything (spectator ion).',
+    targetedMisconceptions: [`${HYDROL}:MC1`],
+    source: `${HYDROL_SRC} — salt hydrolysis, four cases by parent acid/base strength`,
+  },
+  {
+    conceptId: HYDROL,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "All salt solutions are neutral, since salts are formed by neutralization." ' +
+      'FALSE — "neutralization" describes the REACTION (acid + base → salt + water), not ' +
+      'the resulting solution\'s pH. Only salts of strong-acid+strong-base pairs give truly ' +
+      'neutral solutions. NH₄Cl (from strong HCl + weak NH₃) is genuinely ACIDIC in ' +
+      'solution — this trips up students who assume "salt = neutral" as a blanket rule. ' +
+      'Second trap: "Cl⁻ from NaCl reacts with water just like NH₄⁺ does, contributing to ' +
+      'hydrolysis." No — Cl⁻ is the conjugate base of the STRONG acid HCl, meaning it has ' +
+      'essentially ZERO tendency to grab a proton back from water (as established earlier: ' +
+      'strong acid → very weak conjugate base). Only conjugates of WEAK acids/bases ' +
+      'hydrolyze measurably; conjugates of STRONG acids/bases are essentially inert ' +
+      '"spectator" ions in water.',
+    targetedMisconceptions: [`${HYDROL}:MC1`, `${HYDROL}:MC2`],
+    source: `${HYDROL_SRC} — misconception: all salts are neutral; strong-acid conjugate bases hydrolyze too`,
+  },
+]
+
+const HYDROL_PROBES: SeedProbe[] = [
+  {
+    conceptId: HYDROL,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'NH₄Cl is formed from the reaction of strong acid HCl with weak base NH₃. What is the pH of an NH₄Cl solution?',
+    choices: [
+      { text: 'Acidic — NH₄⁺ (conjugate acid of the weak base NH₃) hydrolyzes water, producing excess H₃O⁺', isCorrect: true },
+      { text: 'Neutral — all salts formed from acid-base neutralization reactions give neutral solutions', isCorrect: false, misconceptionId: `${HYDROL}:MC1` },
+    ],
+    correctValue: 'Acidic',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HYDROL}:MC1`],
+    source: `${HYDROL_SRC} — distractor targets "all salts are neutral" misconception`,
+  },
+  {
+    conceptId: HYDROL,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does Cl⁻ (from dissolved NaCl) undergo hydrolysis with water, similar to how CH₃COO⁻ does?',
+    choices: [
+      { text: 'No — Cl⁻ is the conjugate base of the STRONG acid HCl, so it has essentially no tendency to reclaim a proton from water, unlike CH₃COO⁻ (conjugate base of the weak acid acetic acid)', isCorrect: true },
+      { text: 'Yes — all anions from dissolved salts hydrolyze water to some measurable degree', isCorrect: false, misconceptionId: `${HYDROL}:MC2` },
+    ],
+    correctValue: 'No — Cl⁻ does not hydrolyze (spectator ion)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HYDROL}:MC2`],
+    source: `${HYDROL_SRC} — misconception: strong-acid conjugate bases also hydrolyze measurably`,
+  },
+]
+
+// ─── chem.equil.titration ────────────────────────────────────────────────────
+const TITR = 'chem.equil.titration'
+const TITR_SRC = 'docs/chemistry/kg/graph.json — chem.equil.titration'
+
+const TITR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TITR,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A titration slowly adds a solution of known concentration (titrant) to an unknown ' +
+      'to find its concentration, tracked via a TITRATION CURVE (pH vs. volume added). ' +
+      'The EQUIVALENCE POINT is where moles of acid exactly equal moles of base ' +
+      '(stoichiometrically complete reaction) — NOT necessarily pH 7! For strong acid + ' +
+      'strong base, equivalence point IS pH 7 (salt formed doesn\'t hydrolyze). For weak ' +
+      'acid + strong base, equivalence point is BASIC (pH>7, because the salt formed ' +
+      'hydrolyzes to give a basic solution, as covered in salt hydrolysis). For strong ' +
+      'acid + weak base, equivalence point is ACIDIC (pH<7). The curve\'s STEEPEST point ' +
+      '(inflection point) marks the equivalence point graphically. An INDICATOR is chosen ' +
+      'so its color-change range (pKa ± 1) overlaps the steep vertical jump — NOT ' +
+      'necessarily so its color changes exactly AT pH 7. The half-equivalence point (half ' +
+      'the acid neutralized) is special: pH = pKa exactly there (from Henderson-Hasselbalch, ' +
+      'when [A⁻]=[HA]) — a quick way to determine an unknown weak acid\'s Ka from its curve.',
+    targetedMisconceptions: [`${TITR}:MC1`],
+    source: `${TITR_SRC} — titration curves, equivalence point, indicator selection`,
+  },
+  {
+    conceptId: TITR,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Major trap: "The equivalence point is always at pH 7." FALSE — this is only true ' +
+      'for strong acid + strong base titrations. Weak acid + strong base gives a BASIC ' +
+      'equivalence point (the salt formed hydrolyzes to make the solution basic), and ' +
+      'strong acid + weak base gives an ACIDIC equivalence point. Choosing phenolphthalein ' +
+      '(changes color around pH 8-10) for a weak-acid/strong-base titration is CORRECT ' +
+      'precisely because the equivalence point IS basic there, not despite it. Second trap: ' +
+      '"An indicator must change color exactly at pH 7 to be a good choice." No — the ' +
+      'indicator just needs its color-change range to fall within the STEEP VERTICAL ' +
+      'JUMP of the titration curve (which could be centered anywhere from pH 4 to pH 10 ' +
+      'depending on the acid/base strengths), not at any fixed universal value.',
+    targetedMisconceptions: [`${TITR}:MC1`, `${TITR}:MC2`],
+    source: `${TITR_SRC} — misconception: equivalence point is always pH 7; indicators must change at pH 7`,
+  },
+]
+
+const TITR_PROBES: SeedProbe[] = [
+  {
+    conceptId: TITR,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a titration of weak acetic acid with strong NaOH, what is the pH at the equivalence point?',
+    choices: [
+      { text: 'Greater than 7 (basic) — the sodium acetate salt formed hydrolyzes, since acetate is the conjugate base of a weak acid', isCorrect: true },
+      { text: 'Exactly 7 — all acid-base titrations reach neutral pH at the equivalence point', isCorrect: false, misconceptionId: `${TITR}:MC1` },
+    ],
+    correctValue: 'Greater than 7 (basic)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TITR}:MC1`],
+    source: `${TITR_SRC} — distractor targets "equivalence point is always pH 7" misconception`,
+  },
+  {
+    conceptId: TITR,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why is phenolphthalein (color change range pH 8-10) an appropriate indicator for a weak acid/strong base titration, rather than an indicator that changes at pH 7?',
+    choices: [
+      { text: 'The equivalence point for this titration is basic (around pH 8-9), so an indicator whose range overlaps the steep vertical jump AT that basic pH gives the most accurate endpoint', isCorrect: true },
+      { text: 'It is not actually appropriate — a pH 7 indicator would always be the correct universal choice for any titration', isCorrect: false, misconceptionId: `${TITR}:MC2` },
+    ],
+    correctValue: 'Matches the actual (basic) equivalence point of this titration',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TITR}:MC2`],
+    source: `${TITR_SRC} — misconception: indicators must always change color at pH 7 regardless of titration type`,
+  },
+]
+
+// ─── chem.bond.vsepr ─────────────────────────────────────────────────────────
+const VSEPR = 'chem.bond.vsepr'
+const VSEPR_SRC = 'docs/chemistry/kg/graph.json — chem.bond.vsepr'
+
+const VSEPR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: VSEPR,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'VSEPR (Valence Shell Electron Pair Repulsion) predicts molecular SHAPE with one ' +
+      'simple rule: electron pairs around a central atom REPEL each other and arrange ' +
+      'themselves as FAR APART as possible in 3D space. Count the total electron ' +
+      'domains (bonding pairs + lone pairs) around the central atom: 2 domains → linear ' +
+      '(180°); 3 domains → trigonal planar (120°); 4 domains → tetrahedral (109.5°); 5 ' +
+      'domains → trigonal bipyramidal; 6 domains → octahedral. Crucially, LONE PAIRS ' +
+      'count toward the ELECTRON GEOMETRY (which determines the angles) but are ' +
+      'INVISIBLE in the reported MOLECULAR GEOMETRY (which only names the shape traced ' +
+      'by the ATOMS). Water (O with 2 bonding pairs + 2 lone pairs) has TETRAHEDRAL ' +
+      'electron geometry but BENT molecular geometry (the two lone pairs are still there, ' +
+      'pushing the H atoms together, but we don\'t "see" them when naming the shape). Lone ' +
+      'pairs repel MORE strongly than bonding pairs (they\'re held closer to the nucleus, ' +
+      'less spread out), which is why water\'s H-O-H angle (104.5°) is slightly LESS than ' +
+      'perfect tetrahedral (109.5°) — the lone pairs squeeze the bonding pairs closer.',
+    targetedMisconceptions: [`${VSEPR}:MC1`],
+    source: `${VSEPR_SRC} — VSEPR theory, electron domains, electron vs molecular geometry`,
+  },
+  {
+    conceptId: VSEPR,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Molecular geometry and electron geometry are always the same thing, just ' +
+      'different names." FALSE whenever lone pairs are present. Ammonia (NH₃): N has 3 ' +
+      'bonding pairs + 1 lone pair = 4 total domains = TETRAHEDRAL electron geometry, but ' +
+      'the MOLECULAR geometry (what atoms you actually see/draw) is TRIGONAL PYRAMIDAL — ' +
+      'the lone pair occupies one "corner" of the tetrahedron but is invisible in the ' +
+      'named shape. They\'re only identical when there are ZERO lone pairs (like CH₄, ' +
+      'both tetrahedral). Second trap: "Double and triple bonds count as multiple electron ' +
+      'domains, proportional to bond order." No — for VSEPR purposes, a double or triple ' +
+      'bond STILL counts as just ONE electron domain (one region of electron density), ' +
+      'not two or three. CO₂ (O=C=O) has only 2 electron domains around carbon (2 double ' +
+      'bonds = 2 domains, not 4), giving LINEAR geometry.',
+    targetedMisconceptions: [`${VSEPR}:MC1`, `${VSEPR}:MC2`],
+    source: `${VSEPR_SRC} — misconception: electron/molecular geometry always identical; multiple bonds count as multiple domains`,
+  },
+]
+
+const VSEPR_PROBES: SeedProbe[] = [
+  {
+    conceptId: VSEPR,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Ammonia (NH₃) has 3 bonding pairs and 1 lone pair around nitrogen. What is its MOLECULAR geometry (not electron geometry)?',
+    choices: [
+      { text: 'Trigonal pyramidal — the electron geometry is tetrahedral (4 domains), but the molecular shape only describes the 3 visible N-H bonds, not the invisible lone pair', isCorrect: true },
+      { text: 'Tetrahedral — molecular geometry always matches electron geometry exactly', isCorrect: false, misconceptionId: `${VSEPR}:MC1` },
+    ],
+    correctValue: 'Trigonal pyramidal',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VSEPR}:MC1`],
+    source: `${VSEPR_SRC} — distractor targets conflating electron geometry with molecular geometry`,
+  },
+  {
+    conceptId: VSEPR,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'CO₂ has the structure O=C=O with two double bonds around carbon. How many electron domains does carbon have for VSEPR purposes?',
+    choices: [
+      { text: '2 domains — each double bond counts as ONE electron domain regardless of bond order, giving carbon 2 total domains and linear geometry', isCorrect: true },
+      { text: '4 domains — each double bond counts as 2 domains since it contains 2 bonding pairs', isCorrect: false, misconceptionId: `${VSEPR}:MC2` },
+    ],
+    correctValue: '2 domains (linear geometry)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VSEPR}:MC2`],
+    source: `${VSEPR_SRC} — misconception: multiple bonds count as multiple separate electron domains`,
+  },
+]
+
+// ─── chem.bond.hybridization ─────────────────────────────────────────────────
+const HYBRID = 'chem.bond.hybridization'
+const HYBRID_SRC = 'docs/chemistry/kg/graph.json — chem.bond.hybridization'
+
+const HYBRID_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HYBRID,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Pure atomic orbitals (s, p, d) don\'t always point in the right directions to ' +
+      'explain observed molecular shapes — carbon\'s actual 2s and three 2p orbitals ' +
+      'aren\'t naturally arranged tetrahedrally. HYBRIDIZATION is the mathematical mixing ' +
+      'of atomic orbitals into NEW hybrid orbitals with the correct geometry to match ' +
+      'VSEPR predictions. sp³ (mix 1 s + 3 p) → 4 equivalent orbitals, tetrahedral ' +
+      '(109.5°) — methane\'s carbon. sp² (mix 1 s + 2 p) → 3 equivalent orbitals, ' +
+      'trigonal planar (120°), LEAVES ONE unhybridized p orbital — this leftover p ' +
+      'orbital is what forms π bonds in double bonds (ethene\'s carbons). sp (mix 1 s + 1 ' +
+      'p) → 2 equivalent orbitals, linear (180°), leaves TWO unhybridized p orbitals for ' +
+      'TWO π bonds — this is why triple bonds work (one σ + two π). The number of hybrid ' +
+      'orbitals ALWAYS equals the number of electron domains (VSEPR connection): 4 ' +
+      'domains → sp³, 3 domains → sp², 2 domains → sp. Hybridization EXPLAINS why real ' +
+      'molecular geometries match VSEPR predictions at the orbital level.',
+    targetedMisconceptions: [`${HYBRID}:MC1`],
+    source: `${HYBRID_SRC} — sp/sp²/sp³ hybridization, connection to VSEPR and bond types`,
+  },
+  {
+    conceptId: HYBRID,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Hybridization is a real physical process that atoms undergo, like a chemical ' +
+      'reaction." Not quite — hybridization is a MATHEMATICAL MODEL (a way of combining ' +
+      'wavefunctions) that conveniently explains observed geometries, not necessarily a ' +
+      'literal physical event that "happens" to an atom. It\'s a useful approximation, ' +
+      'not a measurable physical transformation you could observe in real time. Second ' +
+      'trap: "All π bonds require unhybridized p orbitals from BOTH atoms perfectly ' +
+      'aligned, and this alignment is automatic/free." Actually, π bond formation via ' +
+      'unhybridized p orbitals REQUIRES the two p orbitals to be PARALLEL, which is ' +
+      'exactly why double bonds are RIGID (no free rotation around them — rotating would ' +
+      'misalign the p orbitals and break the π bond). This is the structural basis for ' +
+      'cis/trans isomerism: single bonds (sp³-sp³, only σ) rotate freely, but double bonds ' +
+      '(with a π component) are locked in place.',
+    targetedMisconceptions: [`${HYBRID}:MC1`, `${HYBRID}:MC2`],
+    source: `${HYBRID_SRC} — misconception: hybridization is a literal physical process; double bonds rotate freely`,
+  },
+]
+
+const HYBRID_PROBES: SeedProbe[] = [
+  {
+    conceptId: HYBRID,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A carbon atom in ethene (H₂C=CH₂) has 3 electron domains (2 C-H bonds + 1 C=C bond, treating the double bond as one domain). What hybridization does this carbon have?',
+    choices: [
+      { text: 'sp² — 3 electron domains means sp² hybridization (mixing 1 s + 2 p orbitals), leaving one unhybridized p orbital for the π bond', isCorrect: true },
+      { text: 'sp³ — carbon always uses sp³ hybridization by default', isCorrect: false, misconceptionId: `${HYBRID}:MC3` },
+    ],
+    correctValue: 'sp²',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HYBRID}:MC3`],
+    source: `${HYBRID_SRC} — distractor targets assuming carbon defaults to sp³ regardless of domain count`,
+  },
+  {
+    conceptId: HYBRID,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why can\'t the two carbons in a C=C double bond rotate freely relative to each other, unlike a C-C single bond?',
+    choices: [
+      { text: 'The π bond requires unhybridized p orbitals on both carbons to remain PARALLEL for effective overlap; rotating would misalign these p orbitals and break the π bond', isCorrect: true },
+      { text: 'Double bonds are simply "stronger" in a way that mechanically locks rotation, unrelated to orbital orientation', isCorrect: false, misconceptionId: `${HYBRID}:MC2` },
+    ],
+    correctValue: 'π bond requires parallel p orbital alignment',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${HYBRID}:MC2`],
+    source: `${HYBRID_SRC} — misconception: double bond rigidity is generic "strength" rather than orbital alignment`,
+  },
+]
+
+// ─── chem.bond.resonance ─────────────────────────────────────────────────────
+const RESON = 'chem.bond.resonance'
+const RESON_SRC = 'docs/chemistry/kg/graph.json — chem.bond.resonance'
+
+const RESON_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RESON,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some molecules can\'t be accurately drawn with just ONE Lewis structure. Ozone ' +
+      '(O₃) experimentally has TWO IDENTICAL O-O bond lengths (128 pm, in between a ' +
+      'single bond ~148pm and double bond ~121pm) — but any single Lewis structure ' +
+      'shows one O-O as single and the other as double, which would predict two DIFFERENT ' +
+      'lengths. The resolution: RESONANCE — the true structure is a BLEND (hybrid) of ' +
+      'multiple valid Lewis structures, not a rapid flipping between them (a common ' +
+      'misconception addressed below). The REAL molecule is a single, unchanging ' +
+      'structure with bond properties INTERMEDIATE between the resonance forms — like ' +
+      'a mule being a blend of horse and donkey, not an animal that alternates between ' +
+      'being a horse and a donkey. Resonance structures must have the SAME atomic ' +
+      'positions and same number of electrons — only electron/bond arrangement differs. ' +
+      'More resonance structures (especially ones with favorable charge distribution) ' +
+      'generally means more STABILITY (delocalization energy) — this is why benzene\'s ' +
+      'ring, with extensive resonance, is unusually stable.',
+    targetedMisconceptions: [`${RESON}:MC1`],
+    source: `${RESON_SRC} — resonance structures, hybrid concept, bond length averaging`,
+  },
+  {
+    conceptId: RESON,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The single most damaging misconception about resonance: "The molecule rapidly ' +
+      'FLIPS or OSCILLATES between the different resonance structures over time." FALSE. ' +
+      'There is only ONE real structure — the resonance HYBRID — which is static and ' +
+      'unchanging, with bond properties that are the WEIGHTED AVERAGE of all contributing ' +
+      'structures. The individual "resonance structures" we draw are not real, ' +
+      'interconvertible molecules; they\'re just our imperfect NOTATION attempting to ' +
+      'represent one true delocalized structure using tools (Lewis structures) that were ' +
+      'designed for localized bonding. No bond is ever literally "single" then "double" ' +
+      'at different moments in ozone — both O-O bonds are PERMANENTLY intermediate in ' +
+      'character, always. Second trap: "All possible resonance structures contribute ' +
+      'EQUALLY to the hybrid." False — structures with formal charges on more ' +
+      'electronegative atoms, fewer formal charges overall, and complete octets ' +
+      'contribute MORE than less favorable structures; the hybrid is a weighted, not ' +
+      'equal, average.',
+    targetedMisconceptions: [`${RESON}:MC1`, `${RESON}:MC2`],
+    source: `${RESON_SRC} — misconception: molecule oscillates between resonance forms; all forms contribute equally`,
+  },
+]
+
+const RESON_PROBES: SeedProbe[] = [
+  {
+    conceptId: RESON,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Ozone (O₃) has two resonance structures with the double bond on different sides. What does this tell you about the actual molecule?',
+    choices: [
+      { text: 'The real molecule is a single, static hybrid with both O-O bonds having identical, intermediate bond length/order — it does NOT flip between the two drawn structures over time', isCorrect: true },
+      { text: 'The molecule rapidly oscillates between the two structures, spending equal time as each', isCorrect: false, misconceptionId: `${RESON}:MC1` },
+    ],
+    correctValue: 'Static hybrid with intermediate, identical bonds',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RESON}:MC1`],
+    source: `${RESON_SRC} — distractor targets "molecule oscillates between resonance forms" misconception`,
+  },
+  {
+    conceptId: RESON,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A molecule has three possible resonance structures: one with no formal charges, and two with formal charges on less electronegative atoms. Do all three contribute equally to the true hybrid?',
+    choices: [
+      { text: 'No — the structure with no formal charges contributes MORE to the hybrid (is more stable/favorable) than the charge-separated structures; the hybrid is a weighted average, not an equal one', isCorrect: true },
+      { text: 'Yes — every valid resonance structure contributes exactly equally regardless of formal charges', isCorrect: false, misconceptionId: `${RESON}:MC2` },
+    ],
+    correctValue: 'No — weighted by stability, not equal contribution',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${RESON}:MC2`],
+    source: `${RESON_SRC} — misconception: all resonance structures contribute equally to the hybrid`,
+  },
+]
+
+// ─── chem.bond.bond-parameters ───────────────────────────────────────────────
+const BPARAM = 'chem.bond.bond-parameters'
+const BPARAM_SRC = 'docs/chemistry/kg/graph.json — chem.bond.bond-parameters'
+
+const BPARAM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BPARAM,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Bonds have measurable, characteristic properties. BOND LENGTH (distance between ' +
+      'nuclei) DECREASES as bond order increases (triple < double < single) and DECREASES ' +
+      'as atoms get smaller (across a period). BOND ENERGY (energy to break the bond, ' +
+      'always endothermic for breaking) INCREASES as bond order increases and as bond ' +
+      'length decreases (shorter, tighter bonds are generally stronger). BOND ANGLE ' +
+      'reflects the geometry around the atom (covered in VSEPR). DIPOLE MOMENT (μ = q × d, ' +
+      'a vector quantity) measures how unevenly charge is distributed within a bond or ' +
+      'molecule — it has both MAGNITUDE and DIRECTION. Critically: a molecule can have ' +
+      'individually POLAR bonds but be NONPOLAR OVERALL if the bond dipoles cancel by ' +
+      'symmetry (like CO₂\'s two polar C=O bonds pointing in exactly opposite directions, ' +
+      'canceling to zero net dipole) — you must vector-sum ALL bond dipoles, accounting ' +
+      'for molecular geometry, not just look at individual bond polarities.',
+    targetedMisconceptions: [`${BPARAM}:MC1`],
+    source: `${BPARAM_SRC} — bond length, bond energy, bond angle, dipole moment`,
+  },
+  {
+    conceptId: BPARAM,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "If a molecule has polar bonds, the molecule itself must be polar." FALSE — ' +
+      'CO₂ has two polar C=O bonds (oxygen more electronegative, pulling electron density ' +
+      'away from carbon), but the molecule is LINEAR and symmetric, so the two bond ' +
+      'dipoles point in exactly opposite directions and cancel VECTORIALLY, giving a net ' +
+      'molecular dipole of ZERO — CO₂ is nonpolar overall despite having polar bonds. ' +
+      'CCl₄ (tetrahedral, symmetric) is another classic example: polar C-Cl bonds, ' +
+      'nonpolar molecule. You must consider molecular GEOMETRY (from VSEPR), not just bond ' +
+      'polarity, to determine overall molecular polarity. Second trap: "Bond energy and ' +
+      'bond enthalpy are exactly numerically identical always." Close but subtly ' +
+      'different — bond DISSOCIATION energy is measured for one specific bond in one ' +
+      'specific molecule, while average bond ENERGY (used in tables) is an average across ' +
+      'many different molecules containing that bond type, since the exact energy varies ' +
+      'slightly depending on the rest of the molecule\'s structure.',
+    targetedMisconceptions: [`${BPARAM}:MC1`],
+    source: `${BPARAM_SRC} — misconception: polar bonds always mean polar molecule (ignoring geometric cancellation)`,
+  },
+]
+
+const BPARAM_PROBES: SeedProbe[] = [
+  {
+    conceptId: BPARAM,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'CCl₄ has four polar C-Cl bonds (Cl is more electronegative than C). Is the CCl₄ molecule itself polar?',
+    choices: [
+      { text: 'No — the tetrahedral symmetry causes the four bond dipoles to cancel vectorially, giving zero net molecular dipole despite the individually polar bonds', isCorrect: true },
+      { text: 'Yes — any molecule containing polar bonds is automatically a polar molecule', isCorrect: false, misconceptionId: `${BPARAM}:MC1` },
+    ],
+    correctValue: 'No — nonpolar overall due to symmetric cancellation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BPARAM}:MC1`],
+    source: `${BPARAM_SRC} — distractor targets "polar bonds = polar molecule" misconception`,
+  },
+  {
+    conceptId: BPARAM,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Water (bent geometry) has two polar O-H bonds. Unlike CO₂ (linear, nonpolar), water IS a polar molecule overall. Why the difference?',
+    choices: [
+      { text: 'Water\'s bent geometry means the two O-H bond dipoles do NOT point in exactly opposite directions, so they don\'t fully cancel — there\'s a net dipole pointing toward oxygen; CO₂\'s linear symmetry causes complete cancellation', isCorrect: true },
+      { text: 'Water\'s O-H bonds are simply more polar than CO₂\'s C=O bonds, which is why water ends up polar overall', isCorrect: false, misconceptionId: `${BPARAM}:MC2` },
+    ],
+    correctValue: 'Geometry (bent vs linear) determines whether dipoles cancel',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${BPARAM}:MC2`],
+    source: `${BPARAM_SRC} — misconception: individual bond polarity magnitude (not geometry) determines molecular polarity`,
+  },
+]
+
+// ─── chem.bond.coordinate-bond ───────────────────────────────────────────────
+const COORDB = 'chem.bond.coordinate-bond'
+const COORDB_SRC = 'docs/chemistry/kg/graph.json — chem.bond.coordinate-bond'
+
+const COORDB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COORDB,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A COORDINATE (dative) bond is a covalent bond where BOTH shared electrons come ' +
+      'from ONE atom, rather than one electron from each (as in ordinary covalent bonds). ' +
+      'Classic example: NH₃ + H⁺ → NH₄⁺ — nitrogen\'s lone pair is donated entirely to the ' +
+      'incoming H⁺ (which has zero electrons to contribute, being a bare proton). Once ' +
+      'formed, though, a coordinate bond is INDISTINGUISHABLE from any other covalent bond ' +
+      '— all four N-H bonds in NH₄⁺ are identical in length and strength; you can\'t point ' +
+      'to "the coordinate one" after formation. The DISTINCTION only matters for tracking ' +
+      'the bond\'s ORIGIN (electron source), not its final properties. This concept ' +
+      'explains many important structures: H₃O⁺ (water\'s lone pair bonds to H⁺), NH₄⁺, ' +
+      'and — critically for later topics — the entire foundation of COORDINATION ' +
+      'COMPOUNDS/complexes, where ligands donate electron pairs to a central metal ion ' +
+      '(Cu²⁺ + 4NH₃ → [Cu(NH₃)₄]²⁺, each N-Cu bond is coordinate, with nitrogen donating ' +
+      'both electrons).',
+    targetedMisconceptions: [`${COORDB}:MC1`],
+    source: `${COORDB_SRC} — coordinate/dative bonding, formation and post-formation equivalence`,
+  },
+  {
+    conceptId: COORDB,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "A coordinate bond is somehow weaker or different in character from a ' +
+      'normal covalent bond, even after formation." FALSE — once formed, a coordinate ' +
+      'bond IS a normal covalent bond, full stop. In NH₄⁺, you cannot experimentally ' +
+      'distinguish which of the four N-H bonds was "originally" coordinate (formed from ' +
+      'N\'s lone pair + H⁺) versus the three that were "originally" ordinary covalent ' +
+      'bonds (formed during NH₃\'s synthesis) — all four are chemically and physically ' +
+      'IDENTICAL. The "coordinate" label describes only the bond\'s FORMATION HISTORY, a ' +
+      'bookkeeping detail, not a permanent structural feature. Second trap: "Coordinate ' +
+      'bonding is rare and only relevant to a few obscure examples." Actually, it\'s the ' +
+      'foundational bonding type for ALL transition metal coordination complexes ' +
+      '(hemoglobin\'s iron-nitrogen bonds, chlorophyll\'s magnesium-nitrogen bonds, and ' +
+      'countless industrial catalysts) — it\'s one of the most biologically and ' +
+      'industrially important bonding concepts in chemistry.',
+    targetedMisconceptions: [`${COORDB}:MC1`, `${COORDB}:MC2`],
+    source: `${COORDB_SRC} — misconception: coordinate bonds are permanently distinguishable/weaker; rare in importance`,
+  },
+]
+
+const COORDB_PROBES: SeedProbe[] = [
+  {
+    conceptId: COORDB,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In NH₄⁺, one N-H bond formed as a coordinate bond (N donated both electrons to H⁺) while the other three formed as ordinary covalent bonds. Can you experimentally distinguish which bond is which today?',
+    choices: [
+      { text: 'No — all four N-H bonds are identical in length, strength, and every measurable property; the "coordinate" label only describes formation history, not a lasting structural difference', isCorrect: true },
+      { text: 'Yes — the coordinate bond remains measurably weaker than the other three even after formation', isCorrect: false, misconceptionId: `${COORDB}:MC1` },
+    ],
+    correctValue: 'No — all four bonds are identical',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COORDB}:MC1`],
+    source: `${COORDB_SRC} — distractor targets "coordinate bonds remain distinguishable/weaker" misconception`,
+  },
+  {
+    conceptId: COORDB,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is coordinate (dative) bonding a rare, obscure phenomenon relevant to only a few specific molecules?',
+    choices: [
+      { text: 'No — it is the foundational bonding mechanism for ALL transition metal coordination complexes, including biologically vital structures like hemoglobin and chlorophyll', isCorrect: true },
+      { text: 'Yes — coordinate bonding is limited to a small handful of textbook examples like NH₄⁺ and has little broader significance', isCorrect: false, misconceptionId: `${COORDB}:MC2` },
+    ],
+    correctValue: 'No — it underlies coordination chemistry broadly',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${COORDB}:MC2`],
+    source: `${COORDB_SRC} — misconception: coordinate bonding has narrow/limited significance`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -5424,6 +6005,13 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...REDOX_EXPLANATIONS,
   ...WEAKAB_EXPLANATIONS,
   ...BUFFER_EXPLANATIONS,
+  ...HYDROL_EXPLANATIONS,
+  ...TITR_EXPLANATIONS,
+  ...VSEPR_EXPLANATIONS,
+  ...HYBRID_EXPLANATIONS,
+  ...RESON_EXPLANATIONS,
+  ...BPARAM_EXPLANATIONS,
+  ...COORDB_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -5493,4 +6081,11 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...REDOX_PROBES,
   ...WEAKAB_PROBES,
   ...BUFFER_PROBES,
+  ...HYDROL_PROBES,
+  ...TITR_PROBES,
+  ...VSEPR_PROBES,
+  ...HYBRID_PROBES,
+  ...RESON_PROBES,
+  ...BPARAM_PROBES,
+  ...COORDB_PROBES,
 ]
