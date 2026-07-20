@@ -6360,6 +6360,600 @@ const HETCAT_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.org.iupac ───────────────────────────────────────────────────────────
+const IUPAC = 'chem.org.iupac'
+const IUPAC_SRC = 'docs/chemistry/kg/graph.json — chem.org.iupac'
+
+const IUPAC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: IUPAC,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'IUPAC nomenclature gives every organic molecule ONE unambiguous name, built like ' +
+      'a structured sentence. Four steps: (1) Find the LONGEST continuous carbon chain ' +
+      'containing the principal functional group — this sets the PARENT name (meth-1C, ' +
+      'eth-2C, prop-3C, but-4C, pent-5C...). (2) Identify the SUFFIX for the highest- ' +
+      'priority functional group present (-ol for alcohol, -al for aldehyde, -one for ' +
+      'ketone, -oic acid for carboxylic acid — there\'s a strict priority order when ' +
+      'multiple groups compete). (3) Number the chain to give the principal group (and ' +
+      'then other substituents) the LOWEST possible locants — start numbering from ' +
+      'whichever end achieves this. (4) List substituents ALPHABETICALLY as prefixes with ' +
+      'their locant numbers (2-chloro-3-methylpentane, not 3-methyl-2-chloropentane, even ' +
+      'though chloro was found second — alphabetical order in the NAME, not order of ' +
+      'discovery). This systematic approach means any chemist worldwide, given a ' +
+      'structure, generates the IDENTICAL name — no ambiguity, no memorized "common ' +
+      'names" required (though common names like "acetone" persist alongside for very ' +
+      'familiar compounds).',
+    targetedMisconceptions: [`${IUPAC}:MC1`],
+    source: `${IUPAC_SRC} — IUPAC naming rules, parent chain, suffix priority, numbering, substituent ordering`,
+  },
+  {
+    conceptId: IUPAC,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "The parent chain is simply the longest chain drawn in the structure, no ' +
+      'other consideration." FALSE — the parent chain MUST contain the principal ' +
+      'functional group (the one determining the suffix), even if a longer chain exists ' +
+      'elsewhere that doesn\'t include it. For example, if a molecule has a 6-carbon chain ' +
+      'but the -OH group sits on a branch off a shorter 5-carbon path that includes it, ' +
+      'you\'d need the chain that CONTAINS the OH to name it as an "-ol." Second trap: ' +
+      '"Number the chain from whichever end is more convenient, or always from the left ' +
+      'as drawn." No — you MUST number to give the principal functional group (then other ' +
+      'substituents, if there\'s a tie) the LOWEST possible locant, regardless of how the ' +
+      'structure happens to be drawn on paper. Third trap: "List substituents in the ' +
+      'order you found them while scanning the structure." No — substituents are always ' +
+      'listed ALPHABETICALLY in the final name, completely independent of their position ' +
+      'along the chain or the order you identified them.',
+    targetedMisconceptions: [`${IUPAC}:MC1`, `${IUPAC}:MC2`],
+    source: `${IUPAC_SRC} — misconception: parent chain ignores functional group location; arbitrary numbering/ordering`,
+  },
+]
+
+const IUPAC_PROBES: SeedProbe[] = [
+  {
+    conceptId: IUPAC,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A molecule has a 6-carbon chain, but its -OH group is on a branch connected via a 5-carbon path. Which chain should be chosen as the parent for IUPAC naming?',
+    choices: [
+      { text: 'The 5-carbon chain — the parent chain must contain the principal functional group (here, -OH), even if a longer chain exists elsewhere that doesn\'t include it', isCorrect: true },
+      { text: 'The 6-carbon chain — the parent is always simply the longest continuous chain in the structure, regardless of functional group location', isCorrect: false, misconceptionId: `${IUPAC}:MC1` },
+    ],
+    correctValue: 'The chain containing the principal functional group (5-carbon)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IUPAC}:MC1`],
+    source: `${IUPAC_SRC} — distractor targets "longest chain regardless of functional group" misconception`,
+  },
+  {
+    conceptId: IUPAC,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'While naming a molecule, you identify a chloro substituent at position 3 before noticing a methyl substituent at position 2. In the final IUPAC name, which comes first: "3-chloro-2-methyl..." or "2-methyl-3-chloro..."?',
+    choices: [
+      { text: '2-methyl-3-chloro... — substituents are always listed ALPHABETICALLY in the name (chloro before methyl alphabetically? No — "chloro" < "methyl" alphabetically, so actually 3-chloro-2-methyl is correct)', isCorrect: false },
+      { text: 'Substituents are always ordered alphabetically by name, not by the order they were identified or their locant number — "chloro" comes before "methyl" alphabetically, so it is 3-chloro-2-methyl... regardless of discovery order', isCorrect: true },
+    ],
+    correctValue: 'Alphabetical ordering (chloro before methyl), independent of discovery order',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IUPAC}:MC2`],
+    source: `${IUPAC_SRC} — misconception: substituents ordered by discovery/position rather than alphabetically`,
+  },
+]
+
+// ─── chem.solid.crystal-systems ──────────────────────────────────────────────
+const CRYST = 'chem.solid.crystal-systems'
+const CRYST_SRC = 'docs/chemistry/kg/graph.json — chem.solid.crystal-systems'
+
+const CRYST_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CRYST,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Crystalline solids have their particles arranged in a repeating, ORDERED 3D ' +
+      'pattern (unlike AMORPHOUS solids like glass, which lack long-range order). The ' +
+      'UNIT CELL is the smallest repeating "brick" that, stacked in all directions, ' +
+      'builds the entire crystal — defined by edge lengths (a, b, c) and angles (α, β, γ) ' +
+      'between them. Seven crystal systems exist based on unit cell symmetry: CUBIC ' +
+      '(a=b=c, all angles 90°, highest symmetry — NaCl, diamond), TETRAGONAL (a=b≠c, all ' +
+      '90°), ORTHORHOMBIC (a≠b≠c, all 90°), and others with non-90° angles (monoclinic, ' +
+      'triclinic, hexagonal, rhombohedral). Within cubic, THREE packing arrangements ' +
+      'matter: SIMPLE CUBIC (1 atom/unit cell, atoms only at corners, 52% packing ' +
+      'efficiency — rare, only polonium), BODY-CENTERED CUBIC (BCC, 2 atoms/cell, adds one ' +
+      'atom in the center, 68% efficiency — iron, chromium), FACE-CENTERED CUBIC (FCC, 4 ' +
+      'atoms/cell, adds atoms on each face center, 74% efficiency — the maximum possible ' +
+      'for spheres, copper, aluminum, gold). Higher packing efficiency generally means ' +
+      'higher density and often correlates with certain mechanical properties.',
+    targetedMisconceptions: [`${CRYST}:MC1`],
+    source: `${CRYST_SRC} — unit cell, seven crystal systems, cubic packing types (SC/BCC/FCC)`,
+  },
+  {
+    conceptId: CRYST,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "A unit cell with atoms at all 8 corners contains 8 whole atoms." FALSE — ' +
+      'each CORNER atom is SHARED among 8 adjacent unit cells (since 8 unit cells meet at ' +
+      'every corner point in the 3D lattice), so each corner atom contributes only 1/8 to ' +
+      'THIS unit cell. A simple cubic cell has 8 corners × 1/8 = exactly 1 atom per cell, ' +
+      'NOT 8. Similarly, a FACE-CENTERED atom is shared between 2 cells (contributes 1/2), ' +
+      'and a BODY-CENTERED atom belongs entirely to 1 cell (contributes the full 1). This ' +
+      'fractional-sharing accounting is essential for correctly calculating density, ' +
+      'packing efficiency, and formula units per cell — always sum FRACTIONAL ' +
+      'contributions, never count visible atoms at face value. Second trap: "All solids ' +
+      'are crystalline with a definite melting point." Amorphous solids (glass, many ' +
+      'plastics) lack long-range periodic order and instead SOFTEN gradually over a ' +
+      'temperature range rather than melting sharply at one temperature — a key ' +
+      'distinguishing physical test.',
+    targetedMisconceptions: [`${CRYST}:MC1`, `${CRYST}:MC2`],
+    source: `${CRYST_SRC} — misconception: corner atoms count fully (not fractionally); all solids are crystalline`,
+  },
+]
+
+const CRYST_PROBES: SeedProbe[] = [
+  {
+    conceptId: CRYST,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A simple cubic unit cell has one atom at each of its 8 corners. How many atoms actually belong to this ONE unit cell?',
+    choices: [
+      { text: '1 atom — each corner atom is shared among 8 adjacent unit cells, contributing only 1/8 each; 8 corners × 1/8 = 1 whole atom', isCorrect: true },
+      { text: '8 atoms — all 8 visible corner atoms belong entirely to this unit cell', isCorrect: false, misconceptionId: `${CRYST}:MC1` },
+    ],
+    correctValue: '1 atom',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CRYST}:MC1`],
+    source: `${CRYST_SRC} — distractor targets counting all visible corner atoms as fully belonging to one cell`,
+  },
+  {
+    conceptId: CRYST,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Glass, when heated, softens gradually over a temperature range rather than melting sharply at one specific temperature. What does this indicate about its structure?',
+    choices: [
+      { text: 'Glass is amorphous (non-crystalline) — it lacks the long-range, periodic atomic ordering that crystalline solids have, which is why it doesn\'t exhibit a sharp melting point', isCorrect: true },
+      { text: 'This is unusual — all solids, whether crystalline or not, should have a sharp, well-defined melting point', isCorrect: false, misconceptionId: `${CRYST}:MC2` },
+    ],
+    correctValue: 'Amorphous structure (no long-range order)',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CRYST}:MC2`],
+    source: `${CRYST_SRC} — misconception: assuming all solids are crystalline with sharp melting points`,
+  },
+]
+
+// ─── chem.dblock.general ─────────────────────────────────────────────────────
+const DBLOCK = 'chem.dblock.general'
+const DBLOCK_SRC = 'docs/chemistry/kg/graph.json — chem.dblock.general'
+
+const DBLOCK_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DBLOCK,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Transition metals (d-block) share a family of signature properties, ALL traceable ' +
+      'to their PARTIALLY FILLED d orbitals. MULTIPLE OXIDATION STATES: unlike s-block ' +
+      'metals (usually one fixed charge), transition metals commonly show several ' +
+      'oxidation states (Fe²⁺/Fe³⁺, Cu⁺/Cu²⁺) because d-electrons have SIMILAR energy to ' +
+      'the outer s-electrons, so varying numbers can be removed with comparable ease. ' +
+      'COLORED COMPOUNDS: partially filled d orbitals allow electrons to absorb specific ' +
+      'visible-light photons and jump between d-orbital energy levels (d-d transitions) — ' +
+      'the color you SEE is the complementary color of what\'s ABSORBED. Fully filled ' +
+      '(d¹⁰, like Zn²⁺) or fully empty (d⁰, like Sc³⁺) configurations are typically ' +
+      'COLORLESS — no d-d transition is possible. CATALYTIC ACTIVITY: variable oxidation ' +
+      'states let transition metals temporarily accept/donate electrons during a reaction ' +
+      'cycle (Fe in the Haber process, Pt in catalytic converters), then return to their ' +
+      'original state. PARAMAGNETISM: unpaired d-electrons create a magnetic moment, ' +
+      'causing many transition metal compounds to be weakly attracted to magnetic fields.',
+    targetedMisconceptions: [`${DBLOCK}:MC1`],
+    source: `${DBLOCK_SRC} — variable oxidation states, color, catalysis, paramagnetism (d-orbital basis)`,
+  },
+  {
+    conceptId: DBLOCK,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "All transition metal compounds are colored, without exception." FALSE — ' +
+      'compounds with a FULLY FILLED (d¹⁰) or FULLY EMPTY (d⁰) d-subshell are typically ' +
+      'colorless, because color requires an electron to JUMP between different d-orbital ' +
+      'energy levels (a d-d transition), which is impossible if all d-orbitals are ' +
+      'completely full (no empty orbital to jump TO) or completely empty (no electron ' +
+      'available to jump). Zn²⁺ (d¹⁰, fully filled) and Sc³⁺ (d⁰, fully empty) form ' +
+      'colorless compounds despite being transition-metal-family ions. Second trap: "The ' +
+      'color of a transition metal ion is the SAME color as the light it absorbs." ' +
+      'BACKWARDS — the color you observe is the COMPLEMENTARY color to what\'s absorbed. ' +
+      'If a compound absorbs red light, it appears GREEN (red\'s complement) — the ' +
+      'transmitted/reflected wavelengths (everything EXCEPT what was absorbed) reach your ' +
+      'eye.',
+    targetedMisconceptions: [`${DBLOCK}:MC1`, `${DBLOCK}:MC2`],
+    source: `${DBLOCK_SRC} — misconception: all transition metal compounds are colored; observed color = absorbed color`,
+  },
+]
+
+const DBLOCK_PROBES: SeedProbe[] = [
+  {
+    conceptId: DBLOCK,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Zn²⁺ has a d¹⁰ (fully filled) electron configuration, yet zinc is classified as a transition metal family element. Are Zn²⁺ compounds typically colored?',
+    choices: [
+      { text: 'No — with a fully filled d subshell, there is no empty d orbital for an electron to jump to (no possible d-d transition), so Zn²⁺ compounds are typically colorless', isCorrect: true },
+      { text: 'Yes — all transition metal ions produce colored compounds without exception, since color is the defining trait of the d-block', isCorrect: false, misconceptionId: `${DBLOCK}:MC1` },
+    ],
+    correctValue: 'No — Zn²⁺ compounds are colorless (d¹⁰)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DBLOCK}:MC1`],
+    source: `${DBLOCK_SRC} — distractor targets "all transition metal compounds are colored" misconception`,
+  },
+  {
+    conceptId: DBLOCK,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A copper(II) sulfate solution absorbs red-orange light and appears blue to our eyes. Does this mean the solution absorbed blue light?',
+    choices: [
+      { text: 'No — the observed color (blue) is the COMPLEMENT of the absorbed color (red-orange); the solution absorbs red-orange wavelengths and transmits/reflects the remaining wavelengths, which combine to appear blue', isCorrect: true },
+      { text: 'Yes — the color you see directly indicates the color of light that was absorbed', isCorrect: false, misconceptionId: `${DBLOCK}:MC2` },
+    ],
+    correctValue: 'No — observed color is complementary to absorbed color',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DBLOCK}:MC2`],
+    source: `${DBLOCK_SRC} — misconception: observed color equals absorbed color rather than its complement`,
+  },
+]
+
+// ─── chem.pblock.group13 ─────────────────────────────────────────────────────
+const G13 = 'chem.pblock.group13'
+const G13_SRC = 'docs/chemistry/kg/graph.json — chem.pblock.group13'
+
+const G13_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: G13,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Group 13 (boron family: B, Al, Ga, In, Tl) has 3 valence electrons, suggesting a ' +
+      '+3 oxidation state — but this simple picture breaks down going DOWN the group. ' +
+      'Boron is a METALLOID (semiconductor-like properties, covalent compounds, notably ' +
+      'ELECTRON-DEFICIENT — BF₃ has only 6 electrons around B, not a full octet, making it ' +
+      'a strong LEWIS ACID that readily accepts an electron pair from bases like NH₃ or ' +
+      'F⁻). Aluminum onward, these become true METALS. A key trend: the INERT PAIR EFFECT ' +
+      '— as you go DOWN the group, the ns² electron pair becomes increasingly reluctant to ' +
+      'participate in bonding (poor shielding from filled d/f orbitals in heavier elements ' +
+      'means the ns² pair is held unusually tightly), so heavier elements INCREASINGLY ' +
+      'favor the +1 oxidation state over +3. Thallium, the heaviest, strongly PREFERS +1 ' +
+      '(Tl⁺ is more stable than Tl³⁺) — opposite of boron\'s exclusive +3. This is a ' +
+      'striking counterexample to naive "same group = same oxidation state" thinking.',
+    targetedMisconceptions: [`${G13}:MC1`],
+    source: `${G13_SRC} — Group 13 trends, boron's electron deficiency, inert pair effect`,
+  },
+  {
+    conceptId: G13,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "All Group 13 elements behave identically, forming +3 ions predictably, just ' +
+      'like alkali metals reliably form +1." FALSE — the inert pair effect causes a real ' +
+      'DIVERGENCE down the group. Boron and aluminum favor +3; thallium strongly favors ' +
+      '+1 (Tl⁺ compounds are MORE stable and common than Tl³⁺ ones) — this is the ' +
+      'OPPOSITE trend from what naive periodic table pattern-matching would suggest. ' +
+      'Second trap: "BF₃ is unstable/reactive because boron has an incomplete octet, so ' +
+      'it must readily decompose." Not decomposition — BF₃ is actually quite stable AS IS, ' +
+      'but its incomplete octet makes it a powerful LEWIS ACID, eager to ACCEPT an ' +
+      'electron pair from a Lewis base (forming a coordinate bond, as covered earlier) ' +
+      'rather than falling apart on its own. "Electron-deficient" describes its BONDING ' +
+      'TENDENCY (accepting electrons), not inherent instability of the molecule itself.',
+    targetedMisconceptions: [`${G13}:MC1`, `${G13}:MC2`],
+    source: `${G13_SRC} — misconception: uniform +3 behavior across the group; electron deficiency means instability`,
+  },
+]
+
+const G13_PROBES: SeedProbe[] = [
+  {
+    conceptId: G13,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Thallium (heaviest Group 13 element) strongly prefers the +1 oxidation state over +3, unlike boron which is exclusively +3. What explains this?',
+    choices: [
+      { text: 'The inert pair effect — poor shielding from filled d/f orbitals in heavier elements causes the outermost ns² electron pair to be held unusually tightly, making it reluctant to participate in bonding', isCorrect: true },
+      { text: 'This is inconsistent with periodic trends — all Group 13 elements should behave identically, favoring +3 exclusively', isCorrect: false, misconceptionId: `${G13}:MC1` },
+    ],
+    correctValue: 'Inert pair effect',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${G13}:MC1`],
+    source: `${G13_SRC} — distractor targets assuming uniform group behavior regardless of the inert pair effect`,
+  },
+  {
+    conceptId: G13,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'BF₃ has only 6 electrons around boron (an incomplete octet). Does this mean BF₃ is inherently unstable and prone to spontaneous decomposition?',
+    choices: [
+      { text: 'No — BF₃ is a stable molecule as-is; its incomplete octet instead makes it a strong Lewis acid, eager to accept an electron pair from a Lewis base (like NH₃) to form a coordinate bond, rather than being prone to falling apart', isCorrect: true },
+      { text: 'Yes — any molecule with an incomplete octet around the central atom is inherently unstable and will spontaneously decompose', isCorrect: false, misconceptionId: `${G13}:MC2` },
+    ],
+    correctValue: 'No — BF₃ is stable but reactive as a Lewis acid',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${G13}:MC2`],
+    source: `${G13_SRC} — misconception: incomplete octet implies inherent molecular instability`,
+  },
+]
+
+// ─── chem.pblock.group14 ─────────────────────────────────────────────────────
+const G14 = 'chem.pblock.group14'
+const G14_SRC = 'docs/chemistry/kg/graph.json — chem.pblock.group14'
+
+const G14_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: G14,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Group 14 (carbon family: C, Si, Ge, Sn, Pb) shows a dramatic METAL-NONMETAL ' +
+      'TRANSITION down the group: carbon is a nonmetal (forms the backbone of ALL organic ' +
+      'chemistry via strong C-C and C-H covalent bonds, and uniquely CATENATES — forms ' +
+      'long chains/rings of itself — better than any other element due to its small size ' +
+      'and strong C-C bond), silicon is a metalloid/semiconductor (the foundation of ALL ' +
+      'modern electronics, forms strong Si-O bonds making silicates the dominant mineral ' +
+      'class in Earth\'s crust), and tin/lead are true metals. CARBON has THREE distinct ' +
+      'allotropes with wildly different properties from the SAME element: DIAMOND ' +
+      '(tetrahedral sp³ network, each carbon bonded to 4 others — extremely hard, ' +
+      'nonconducting), GRAPHITE (sp² layers, each carbon bonded to 3 others with ' +
+      'delocalized electrons between layers — soft, slippery, ELECTRICALLY CONDUCTING), ' +
+      'and FULLERENES/nanotubes (curved sp² cage structures). Same element, wildly ' +
+      'different structures, wildly different properties — a striking demonstration that ' +
+      'PROPERTIES come from STRUCTURE, not just elemental identity.',
+    targetedMisconceptions: [`${G14}:MC1`],
+    source: `${G14_SRC} — metal-nonmetal transition, carbon catenation, diamond/graphite allotropes`,
+  },
+  {
+    conceptId: G14,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Diamond and graphite, being made of the SAME element (pure carbon), should ' +
+      'have identical or very similar properties." FALSE — they demonstrate that ' +
+      'STRUCTURE, not just elemental composition, determines properties. Diamond\'s sp³ ' +
+      'tetrahedral network (every carbon strongly bonded to 4 neighbors in a rigid 3D ' +
+      'lattice) makes it the hardest known natural material and a perfect electrical ' +
+      'insulator (all 4 valence electrons per carbon are locked into localized bonds, none ' +
+      'free to move). Graphite\'s sp² LAYERED structure (each carbon bonded to only 3 ' +
+      'neighbors within a flat sheet, with the 4th electron delocalized ACROSS the entire ' +
+      'sheet) makes it soft and slippery (layers slide past each other easily — used as a ' +
+      'lubricant) AND electrically conductive (delocalized electrons move freely WITHIN ' +
+      'each layer, though not easily between layers). Second trap: "Carbon is the only ' +
+      'element that can form chains, so catenation is unique to carbon exclusively." ' +
+      'Silicon CAN catenate too (forming silanes, Si-Si chains), but much less extensively ' +
+      '— Si-Si bonds are weaker than C-C bonds (larger atomic size means less effective ' +
+      'orbital overlap), so silicon chains are far shorter and less stable.',
+    targetedMisconceptions: [`${G14}:MC1`, `${G14}:MC2`],
+    source: `${G14_SRC} — misconception: same element means same properties; catenation is exclusively carbon's trait`,
+  },
+]
+
+const G14_PROBES: SeedProbe[] = [
+  {
+    conceptId: G14,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Diamond is an electrical insulator, but graphite (also pure carbon) conducts electricity. What structural difference explains this?',
+    choices: [
+      { text: 'In diamond, all 4 valence electrons per carbon are locked in localized sp³ bonds (no free carriers); in graphite\'s sp² layers, one electron per carbon is delocalized across the sheet, free to carry current', isCorrect: true },
+      { text: 'This is impossible — since both are pure carbon, they must have identical electrical properties', isCorrect: false, misconceptionId: `${G14}:MC1` },
+    ],
+    correctValue: 'Different bonding structure (localized vs delocalized electrons)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${G14}:MC1`],
+    source: `${G14_SRC} — distractor targets assuming identical elemental composition guarantees identical properties`,
+  },
+  {
+    conceptId: G14,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Is carbon the ONLY element in Group 14 capable of catenation (forming chains of itself)?',
+    choices: [
+      { text: 'No — silicon can also catenate (forming silane chains, Si-Si bonds), but much less extensively than carbon, since larger silicon atoms form weaker Si-Si bonds with less effective orbital overlap', isCorrect: true },
+      { text: 'Yes — catenation is a property unique and exclusive to carbon among all elements', isCorrect: false, misconceptionId: `${G14}:MC2` },
+    ],
+    correctValue: 'No — silicon catenates too, just less extensively',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${G14}:MC2`],
+    source: `${G14_SRC} — misconception: catenation is exclusively a carbon phenomenon`,
+  },
+]
+
+// ─── chem.pblock.group15 ─────────────────────────────────────────────────────
+const G15 = 'chem.pblock.group15'
+const G15_SRC = 'docs/chemistry/kg/graph.json — chem.pblock.group15'
+
+const G15_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: G15,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Group 15 (nitrogen family: N, P, As, Sb, Bi) has 5 valence electrons, allowing a ' +
+      'range of oxidation states from −3 (gaining 3 electrons for a full octet, as in NH₃) ' +
+      'up to +5 (losing/sharing all 5, as in HNO₃, H₃PO₄). NITROGEN is unusually UNREACTIVE ' +
+      'as N₂ gas despite being essential for life — this is because of its exceptionally ' +
+      'strong N≡N TRIPLE BOND (bond energy ~945 kJ/mol, one of the strongest bonds known), ' +
+      'requiring extreme conditions (high pressure, high temperature, iron catalyst — the ' +
+      'Haber process) to break it and "fix" nitrogen into usable compounds like ammonia. ' +
+      'PHOSPHORUS shows striking ALLOTROPY: white phosphorus (P₄ tetrahedral molecules, ' +
+      'highly reactive, toxic, glows in the dark via slow oxidation — hence "phosphorescence") ' +
+      'versus red phosphorus (polymeric chain structure, much more stable and less ' +
+      'reactive, used in match heads). Nitrogen and phosphorus compounds are central to ' +
+      'agriculture (fertilizers, via the Haber-Bosch nitrogen fixation process) and biology ' +
+      '(DNA\'s phosphate backbone, proteins\' nitrogen-containing amino groups).',
+    targetedMisconceptions: [`${G15}:MC1`],
+    source: `${G15_SRC} — nitrogen's inertness (triple bond), phosphorus allotropes, oxidation state range`,
+  },
+  {
+    conceptId: G15,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Nitrogen gas (N₂) is unreactive because nitrogen itself is an unreactive ' +
+      'element, generally speaking." MISLEADING — nitrogen COMPOUNDS (NH₃, HNO₃, amino ' +
+      'acids) are extremely reactive and biologically vital; it\'s specifically the N₂ ' +
+      'MOLECULE\'s exceptionally strong triple bond that makes elemental N₂ hard to break ' +
+      'apart, not nitrogen atoms being generally unreactive. Once "fixed" (the N≡N bond is ' +
+      'broken and nitrogen incorporated into a compound), nitrogen chemistry becomes rich ' +
+      'and varied. This distinction (molecular form vs. elemental reactivity) matters — the ' +
+      'SAME element can be inert in one molecular form (N₂) and highly reactive in another ' +
+      '(NH₃, NO₂). Second trap: "White and red phosphorus are basically the same thing, ' +
+      'just different colors/names for convenience." FALSE — they have GENUINELY different ' +
+      'molecular structures (discrete P₄ tetrahedra vs. an extended polymeric chain), ' +
+      'giving them dramatically different reactivity, toxicity, and stability — analogous ' +
+      'to the diamond/graphite carbon allotrope difference covered earlier.',
+    targetedMisconceptions: [`${G15}:MC1`, `${G15}:MC2`],
+    source: `${G15_SRC} — misconception: N2 inertness implies nitrogen itself is unreactive; P allotropes are just color variants`,
+  },
+]
+
+const G15_PROBES: SeedProbe[] = [
+  {
+    conceptId: G15,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'N₂ gas is very unreactive, yet nitrogen compounds like NH₃ and amino acids are chemically reactive/biologically vital. How do you reconcile this?',
+    choices: [
+      { text: 'It\'s specifically the N≡N triple bond in the N₂ molecule that is exceptionally strong and hard to break — once nitrogen is "fixed" into a compound, its chemistry becomes rich and reactive; the element itself isn\'t generally inert', isCorrect: true },
+      { text: 'This is a contradiction — if N₂ is unreactive, all nitrogen-containing compounds should also be unreactive', isCorrect: false, misconceptionId: `${G15}:MC1` },
+    ],
+    correctValue: 'N2\'s inertness is specific to its strong triple bond, not the element generally',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${G15}:MC1`],
+    source: `${G15_SRC} — distractor targets conflating N2 molecular inertness with general elemental unreactivity`,
+  },
+  {
+    conceptId: G15,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'White phosphorus is highly reactive and toxic; red phosphorus is much more stable and used safely in match heads. Are these just different colored versions of the identical substance?',
+    choices: [
+      { text: 'No — they have genuinely different molecular structures (white phosphorus is discrete P₄ tetrahedra; red phosphorus is a polymeric chain structure), which is what causes their dramatically different reactivity and stability', isCorrect: true },
+      { text: 'Yes — white and red phosphorus are chemically identical, differing only in appearance/color', isCorrect: false, misconceptionId: `${G15}:MC2` },
+    ],
+    correctValue: 'No — genuinely different molecular structures (allotropes)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${G15}:MC2`],
+    source: `${G15_SRC} — misconception: phosphorus allotropes are merely color variants of the same structure`,
+  },
+]
+
+// ─── chem.pblock.group16 ─────────────────────────────────────────────────────
+const G16 = 'chem.pblock.group16'
+const G16_SRC = 'docs/chemistry/kg/graph.json — chem.pblock.group16'
+
+const G16_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: G16,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Group 16 (oxygen family/chalcogens: O, S, Se, Te, Po) has 6 valence electrons, ' +
+      'typically forming −2 ions or covalent compounds with 2 bonds. OXYGEN is special ' +
+      'among its group: its small size and high electronegativity let it form STRONG ' +
+      'π-bonds (double bonds, like O=O and C=O), which heavier group members (S, Se, Te) ' +
+      'largely CANNOT do as effectively — their larger atomic size means poor p-orbital ' +
+      'overlap for π-bonding, so they instead favor forming LONGER CHAINS/RINGS of single ' +
+      'bonds (S₈ rings — sulfur\'s common form — rather than S=S=S=S... double-bonded ' +
+      'chains). This size-driven bonding difference explains oxygen\'s diatomic O₂ gas ' +
+      'versus sulfur\'s solid S₈ crown-shaped rings at room temperature, despite both being ' +
+      'in the same group. OZONE (O₃) is oxygen\'s important allotrope (covered earlier in ' +
+      'the atmosphere chemistry unit). Sulfur compounds are industrially vital: SULFURIC ' +
+      'ACID (H₂SO₄) is the world\'s most-produced industrial chemical, made via the ' +
+      'CONTACT PROCESS (S → SO₂ → SO₃ → H₂SO₄, using a vanadium pentoxide catalyst for the ' +
+      'SO₂→SO₃ step).',
+    targetedMisconceptions: [`${G16}:MC1`],
+    source: `${G16_SRC} — oxygen's π-bonding vs sulfur's catenation, S8 rings, contact process`,
+  },
+  {
+    conceptId: G16,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Since oxygen and sulfur are in the same group with the same valence electron ' +
+      'count, they should form structurally analogous molecules — oxygen as O₂ implies ' +
+      'sulfur should similarly prefer S₂." FALSE — sulfur\'s larger atomic size makes ' +
+      'effective p-orbital π-overlap (needed for double bonds like O=O) much weaker, so ' +
+      'S=S double bonds are comparatively unstable. Instead, sulfur favors forming ' +
+      'extended chains/rings of SINGLE bonds (most commonly the S₈ crown ring), a strategy ' +
+      'oxygen doesn\'t need because its strong π-bonding lets it achieve stability as a ' +
+      'simple diatomic molecule. Same group, same valence count, but genuinely DIFFERENT ' +
+      'preferred bonding strategies due to size effects — same lesson as boron\'s inert ' +
+      'pair effect and carbon/silicon\'s catenation difference: periodic trends predict ' +
+      'general PATTERNS, not identical structural behavior down a group. Second trap: ' +
+      '"H₂SO₄ production via the contact process happens in one simple direct step from ' +
+      'sulfur." No — it requires THREE distinct steps (S→SO₂ combustion, SO₂→SO₃ ' +
+      'catalytic oxidation, SO₃+H₂O→H₂SO₄), with the middle step specifically requiring ' +
+      'a V₂O₅ catalyst because SO₂→SO₃ has an otherwise high activation energy.',
+    targetedMisconceptions: [`${G16}:MC1`, `${G16}:MC2`],
+    source: `${G16_SRC} — misconception: same group implies identical molecular structure; contact process is a single step`,
+  },
+]
+
+const G16_PROBES: SeedProbe[] = [
+  {
+    conceptId: G16,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Oxygen exists as diatomic O₂ (with a strong double bond) at room temperature, but sulfur (same group, same valence electron count) exists as S₈ rings of single bonds. Why the structural difference?',
+    choices: [
+      { text: 'Sulfur\'s larger atomic size gives much weaker p-orbital overlap for π-bonding, making S=S double bonds comparatively unstable; sulfur instead favors extended single-bonded ring/chain structures for stability', isCorrect: true },
+      { text: 'This is inconsistent with periodic trends — elements in the same group with the same valence electron count should always form structurally identical molecules', isCorrect: false, misconceptionId: `${G16}:MC1` },
+    ],
+    correctValue: 'Sulfur\'s larger size weakens π-bonding, favoring single-bonded rings',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${G16}:MC1`],
+    source: `${G16_SRC} — distractor targets assuming same-group elements must form identical structures`,
+  },
+  {
+    conceptId: G16,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Does the Contact Process convert elemental sulfur directly into sulfuric acid (H₂SO₄) in one single step?',
+    choices: [
+      { text: 'No — it requires THREE distinct steps: S burns to SO₂, SO₂ is catalytically oxidized to SO₃ (using a V₂O₅ catalyst, since this step has high activation energy), and SO₃ reacts with water to form H₂SO₄', isCorrect: true },
+      { text: 'Yes — sulfur reacts directly and completely with water and oxygen in a single combined step to form sulfuric acid', isCorrect: false, misconceptionId: `${G16}:MC2` },
+    ],
+    correctValue: 'No — three distinct steps, with a catalyst required',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${G16}:MC2`],
+    source: `${G16_SRC} — misconception: industrial sulfuric acid production is a single-step process`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -6441,6 +7035,13 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...CHROMA_EXPLANATIONS,
   ...GRAVI_EXPLANATIONS,
   ...HETCAT_EXPLANATIONS,
+  ...IUPAC_EXPLANATIONS,
+  ...CRYST_EXPLANATIONS,
+  ...DBLOCK_EXPLANATIONS,
+  ...G13_EXPLANATIONS,
+  ...G14_EXPLANATIONS,
+  ...G15_EXPLANATIONS,
+  ...G16_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -6522,4 +7123,11 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...CHROMA_PROBES,
   ...GRAVI_PROBES,
   ...HETCAT_PROBES,
+  ...IUPAC_PROBES,
+  ...CRYST_PROBES,
+  ...DBLOCK_PROBES,
+  ...G13_PROBES,
+  ...G14_PROBES,
+  ...G15_PROBES,
+  ...G16_PROBES,
 ]
