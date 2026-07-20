@@ -12437,6 +12437,186 @@ const DIOL_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.alc.phenols ────────────────────────────────────────────────────────
+const PHENOL = 'chem.alc.phenols'
+const PHENOL_SRC = 'docs/chemistry/kg/graph.json — chem.alc.phenols'
+
+const PHENOL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PHENOL,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Phenol (-OH directly attached to a benzene ring) LOOKS like an alcohol but behaves ' +
+      'dramatically differently, because the oxygen\'s lone pair can DELOCALIZE into the ' +
+      'aromatic ring (resonance, connecting directly to the electronic effects concept ' +
+      'covered earlier) — this has TWO major consequences. First, phenol is a much ' +
+      'STRONGER ACID than typical alcohols (pKa ~10 vs. ~16-18 for alcohols) — after losing ' +
+      'H⁺, the resulting PHENOXIDE ion\'s negative charge delocalizes into the ring ' +
+      '(spreading across multiple resonance structures), stabilizing the anion far better ' +
+      'than a simple alkoxide ion (RO⁻) can stabilize itself. Second, this same resonance ' +
+      'donation makes the ring itself highly ACTIVATED and ORTHO/PARA-DIRECTING toward ' +
+      'electrophilic aromatic substitution (much more reactive than benzene itself toward ' +
+      'EAS, connecting to the arenes reactivity concept) — the -OH group is one of the ' +
+      'strongest activating substituents known. This dual behavior (acidic AND highly ' +
+      'reactive toward EAS) sets phenol apart from BOTH simple alcohols (not acidic enough ' +
+      'to react with weak bases like NaHCO₃) and simple aromatic hydrocarbons (not ' +
+      'sufficiently activated).',
+    targetedMisconceptions: [`${PHENOL}:MC1`],
+    source: `${PHENOL_SRC} — phenol acidity via resonance-stabilized phenoxide, ring activation for electrophilic substitution`,
+  },
+  {
+    conceptId: PHENOL,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Phenol and a typical alcohol like ethanol should have SIMILAR acidity, since ' +
+      'both have an -OH group and the same general acid-dissociation mechanism." FALSE — ' +
+      'this ignores the crucial resonance stabilization available to phenoxide but not to a ' +
+      'simple alkoxide. Phenol (pKa ~10) is roughly A MILLION TIMES more acidic than ethanol ' +
+      '(pKa ~16) — the difference isn\'t subtle. The key distinguishing factor: after losing ' +
+      'H⁺, phenoxide\'s negative charge can DELOCALIZE into the aromatic ring (multiple ' +
+      'resonance structures spreading the charge), dramatically stabilizing the anion, while ' +
+      'ethoxide (CH₃CH₂O⁻) has NO such delocalization pathway available (the negative charge ' +
+      'stays fully localized on oxygen, far less stable). Second trap: "Since phenol is more ' +
+      'acidic than alcohols, this SAME resonance effect should make the aromatic ring LESS ' +
+      'reactive toward electrophiles (electron density being "pulled away" to stabilize the ' +
+      'phenoxide)." Actually the OPPOSITE — the same electron-donating resonance that ' +
+      'stabilizes phenoxide ALSO makes the neutral phenol\'s ring MORE electron-rich and ' +
+      'MORE reactive toward electrophilic aromatic substitution, not less; both effects ' +
+      'trace to the same oxygen lone pair donation into the ring, just observed in two ' +
+      'different contexts (anion stabilization vs. neutral-molecule ring reactivity).',
+    targetedMisconceptions: [`${PHENOL}:MC1`, `${PHENOL}:MC2`],
+    source: `${PHENOL_SRC} — misconception: phenol and alcohols have similar acidity; increased acidity should decrease ring reactivity`,
+  },
+]
+
+const PHENOL_PROBES: SeedProbe[] = [
+  {
+    conceptId: PHENOL,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Phenol (pKa ~10) is roughly a million times more acidic than ethanol (pKa ~16), despite both having an -OH group. What causes this large difference?',
+    choices: [
+      { text: 'After losing H+, phenoxide\'s negative charge can delocalize into the aromatic ring via resonance, dramatically stabilizing the anion; ethoxide has no such delocalization pathway, leaving its negative charge fully localized and less stable', isCorrect: true },
+      { text: 'This must be an error — any compound with an -OH group undergoing the same acid-dissociation mechanism should have similar acidity regardless of the rest of the molecule', isCorrect: false, misconceptionId: `${PHENOL}:MC1` },
+    ],
+    correctValue: 'Resonance stabilization of phenoxide, unavailable to simple alkoxides',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PHENOL}:MC1`],
+    source: `${PHENOL_SRC} — distractor targets assuming all -OH-containing compounds share similar acidity`,
+  },
+  {
+    conceptId: PHENOL,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Since resonance stabilizes the phenoxide anion (making phenol more acidic), does this same resonance effect make the phenol ring LESS reactive toward electrophilic aromatic substitution?',
+    choices: [
+      { text: 'No — the opposite is true; the same oxygen lone pair donation that stabilizes phenoxide also makes the neutral phenol ring MORE electron-rich and MORE reactive toward electrophiles, not less', isCorrect: true },
+      { text: 'Yes — since the resonance effect pulls electron density away to stabilize the anion, the neutral ring should become correspondingly less reactive toward electrophilic substitution', isCorrect: false, misconceptionId: `${PHENOL}:MC2` },
+    ],
+    correctValue: 'No — the ring is MORE reactive, not less, due to the same resonance donation',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PHENOL}:MC2`],
+    source: `${PHENOL_SRC} — misconception: increased acidity implies decreased ring reactivity toward electrophiles`,
+  },
+]
+
+// ─── chem.carb.aldehydes ─────────────────────────────────────────────────────
+const ALDEH = 'chem.carb.aldehydes'
+const ALDEH_SRC = 'docs/chemistry/kg/graph.json — chem.carb.aldehydes'
+
+const ALDEH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ALDEH,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Aldehydes (R-CHO, carbonyl carbon bonded to at least one H) are the oxidation ' +
+      'product of primary alcohols (covered earlier) and readily undergo NUCLEOPHILIC ' +
+      'ADDITION at the carbonyl carbon — the C=O bond is POLARIZED (oxygen pulls electron ' +
+      'density away, making carbon ELECTROPHILIC/electron-poor), so nucleophiles ' +
+      '(including Grignard reagents, covered earlier) attack the carbonyl carbon directly. ' +
+      'Aldehydes are DISTINCTIVELY more reactive toward nucleophilic addition than ketones ' +
+      '(covered next) for two combined reasons: LESS steric hindrance (only one bulky ' +
+      'R-group blocking nucleophilic approach, vs. two for ketones) and LESS electronic ' +
+      'stabilization of the carbonyl (only one electron-donating alkyl group partially ' +
+      'offsetting the carbonyl\'s electron-poor character, vs. two for ketones — so ' +
+      'aldehyde carbons are MORE electrophilic/reactive). This reactivity difference ' +
+      'underlies a classic diagnostic TEST: TOLLENS\' REAGENT (silver-ammonia complex) ' +
+      'oxidizes aldehydes to carboxylic acids while depositing metallic silver as a ' +
+      'characteristic "silver mirror" on the test tube — but does NOT react with ketones ' +
+      '(which have no removable H on the carbonyl carbon to enable this specific oxidation ' +
+      'pathway), providing a reliable chemical test distinguishing the two carbonyl types.',
+    targetedMisconceptions: [`${ALDEH}:MC1`],
+    source: `${ALDEH_SRC} — aldehyde nucleophilic addition, comparative reactivity vs ketones, Tollens' test`,
+  },
+  {
+    conceptId: ALDEH,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Aldehydes and ketones, both containing the same C=O carbonyl functional ' +
+      'group, should show essentially identical reactivity toward nucleophiles." FALSE — ' +
+      'aldehydes are consistently MORE reactive toward nucleophilic addition than ketones, ' +
+      'due to the COMBINED effect of less steric hindrance (one R group vs. two blocking ' +
+      'approach) AND less electronic stabilization (fewer electron-donating alkyl groups ' +
+      'offsetting the carbonyl\'s electrophilicity) — these aren\'t identical reactivity ' +
+      'profiles just because they share the same core functional group; the SUBSTITUENTS ' +
+      'attached to that group meaningfully modulate reactivity, similar to how carbocation/ ' +
+      'radical stability depends on substituent count (covered in reactive intermediates). ' +
+      'Second trap: "The silver mirror test (Tollens\' reagent) works because aldehydes and ' +
+      'ketones have fundamentally different atoms present." FALSE — both have identical ' +
+      'core C=O functionality; the DIFFERENCE enabling the test is structural: an aldehyde\'s ' +
+      'carbonyl carbon has a REMOVABLE hydrogen (enabling further oxidation to a carboxylic ' +
+      'acid, with silver ions serving as the oxidizing agent and getting reduced to metallic ' +
+      'silver in the process), while a ketone\'s carbonyl carbon has NO such hydrogen ' +
+      '(bonded to two carbon groups instead), blocking this specific oxidation pathway ' +
+      'entirely.',
+    targetedMisconceptions: [`${ALDEH}:MC1`, `${ALDEH}:MC2`],
+    source: `${ALDEH_SRC} — misconception: aldehydes and ketones share identical reactivity; Tollens' test distinguishes based on different atoms rather than structural H-availability`,
+  },
+]
+
+const ALDEH_PROBES: SeedProbe[] = [
+  {
+    conceptId: ALDEH,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Both aldehydes and ketones contain a C=O carbonyl group, yet aldehydes are consistently more reactive toward nucleophilic addition. What explains this difference?',
+    choices: [
+      { text: 'Aldehydes have less steric hindrance (only one bulky R group blocking nucleophilic approach vs. two for ketones) AND less electronic stabilization of the carbonyl (fewer electron-donating alkyl groups), making the aldehyde carbon more electrophilic overall', isCorrect: true },
+      { text: 'This must be incorrect — since both contain the identical C=O functional group, they should show essentially the same reactivity toward any nucleophile', isCorrect: false, misconceptionId: `${ALDEH}:MC1` },
+    ],
+    correctValue: 'Combined steric and electronic effects make aldehydes more reactive',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ALDEH}:MC1`],
+    source: `${ALDEH_SRC} — distractor targets assuming shared functional group guarantees identical reactivity`,
+  },
+  {
+    conceptId: ALDEH,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Tollens\' reagent produces a silver mirror with aldehydes but not with ketones. Is this because aldehydes and ketones contain fundamentally different types of atoms?',
+    choices: [
+      { text: 'No — both share identical C=O carbonyl functionality; the key structural difference is that an aldehyde\'s carbonyl carbon has a removable hydrogen (enabling oxidation to a carboxylic acid, reducing silver ions to metal), while a ketone\'s carbonyl carbon has no such hydrogen', isCorrect: true },
+      { text: 'Yes — aldehydes and ketones contain genuinely different atoms, which is why only aldehydes can reduce silver ions in Tollens\' reagent', isCorrect: false, misconceptionId: `${ALDEH}:MC2` },
+    ],
+    correctValue: 'No — the difference is structural (H availability), not different atom types',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ALDEH}:MC2`],
+    source: `${ALDEH_SRC} — misconception: attributing the aldehyde/ketone Tollens' test difference to different atom composition rather than structural H-availability`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -12587,6 +12767,8 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...LANTH_EXPLANATIONS,
   ...ETHER_EXPLANATIONS,
   ...DIOL_EXPLANATIONS,
+  ...PHENOL_EXPLANATIONS,
+  ...ALDEH_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -12737,4 +12919,6 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...LANTH_PROBES,
   ...ETHER_PROBES,
   ...DIOL_PROBES,
+  ...PHENOL_PROBES,
+  ...ALDEH_PROBES,
 ]
