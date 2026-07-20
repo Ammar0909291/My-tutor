@@ -5936,6 +5936,430 @@ const COORDB_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.equil.complex-equil ────────────────────────────────────────────────
+const COMPLEQ = 'chem.equil.complex-equil'
+const COMPLEQ_SRC = 'docs/chemistry/kg/graph.json — chem.equil.complex-equil'
+
+const COMPLEQ_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COMPLEQ,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Metal ions in solution don\'t sit alone — they bond with LIGANDS (electron-pair ' +
+      'donors, using coordinate bonding as covered before) to form COMPLEX IONS: ' +
+      'Cu²⁺ + 4NH₃ ⇌ [Cu(NH₃)₄]²⁺. This is an EQUILIBRIUM, governed by the FORMATION ' +
+      'CONSTANT K_f = [complex]/([metal][ligand]ⁿ) — a LARGE K_f means the complex is ' +
+      'very stable (formation strongly favored). The reverse process (complex breaking ' +
+      'apart) uses the DISSOCIATION CONSTANT K_d = 1/K_f. Complex formation dramatically ' +
+      'INCREASES a metal salt\'s effective solubility — AgCl is nearly insoluble (small ' +
+      'K_sp), but adding excess NH₃ forms [Ag(NH₃)₂]⁺, which pulls the AgCl ⇌ Ag⁺+Cl⁻ ' +
+      'equilibrium FORWARD (Le Chatelier — removing Ag⁺ as it forms the complex), ' +
+      'dissolving MUCH more AgCl than water alone would allow. This coupled-equilibria ' +
+      'principle (one equilibrium shifting another by consuming a shared species) ' +
+      'underlies qualitative analysis schemes for identifying metal ions and many ' +
+      'industrial metal extraction/purification processes.',
+    targetedMisconceptions: [`${COMPLEQ}:MC1`],
+    source: `${COMPLEQ_SRC} — formation constant Kf, ligand binding, coupled equilibria with Ksp`,
+  },
+  {
+    conceptId: COMPLEQ,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Since AgCl has a tiny Ksp, it can never meaningfully dissolve, regardless ' +
+      'of what else is added to the solution." FALSE — this ignores COUPLED EQUILIBRIA. ' +
+      'Adding excess ammonia continuously removes free Ag⁺ (by trapping it as ' +
+      '[Ag(NH₃)₂]⁺), which — by Le Chatelier — pulls the AgCl dissolution equilibrium ' +
+      'forward relentlessly, dissolving progressively more solid AgCl even though Ksp ' +
+      'itself hasn\'t changed. Ksp only limits solubility in a system where free Ag⁺ has ' +
+      'nowhere else to go; once a competing equilibrium consumes it, much more can ' +
+      'dissolve. Second trap: "A large formation constant Kf means the complex forms ' +
+      'FAST." Kf (like K in general) is a THERMODYNAMIC quantity describing the position ' +
+      'of equilibrium, not the KINETIC rate of getting there — a complex could have huge ' +
+      'Kf (thermodynamically very stable once formed) but form slowly if the ligand ' +
+      'substitution mechanism has a high activation energy.',
+    targetedMisconceptions: [`${COMPLEQ}:MC1`, `${COMPLEQ}:MC2`],
+    source: `${COMPLEQ_SRC} — misconception: Ksp is an absolute solubility limit; large Kf implies fast formation`,
+  },
+]
+
+const COMPLEQ_PROBES: SeedProbe[] = [
+  {
+    conceptId: COMPLEQ,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Solid AgCl (very small Ksp) is added to water — barely any dissolves. What happens if excess NH₃ is then added?',
+    choices: [
+      { text: 'More AgCl dissolves — NH₃ traps free Ag⁺ as [Ag(NH₃)₂]⁺, continuously removing Ag⁺ and pulling the AgCl dissolution equilibrium forward via Le Chatelier', isCorrect: true },
+      { text: 'No change — Ksp is fixed, so the same tiny amount of AgCl will always be the maximum that can dissolve, regardless of other additions', isCorrect: false, misconceptionId: `${COMPLEQ}:MC1` },
+    ],
+    correctValue: 'More AgCl dissolves via coupled equilibria',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${COMPLEQ}:MC1`],
+    source: `${COMPLEQ_SRC} — distractor targets treating Ksp as an absolute, uncoupled solubility ceiling`,
+  },
+  {
+    conceptId: COMPLEQ,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A metal complex has an extremely large formation constant Kf (10²⁰). Does this mean the complex forms quickly when the metal ion and ligand are mixed?',
+    choices: [
+      { text: 'Not necessarily — Kf describes the thermodynamic equilibrium position (how stable the complex is once formed), not the kinetic rate of formation, which depends on the reaction mechanism and its activation energy', isCorrect: true },
+      { text: 'Yes — a large equilibrium constant always guarantees the reaction proceeds rapidly', isCorrect: false, misconceptionId: `${COMPLEQ}:MC2` },
+    ],
+    correctValue: 'Not necessarily — thermodynamics ≠ kinetics',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${COMPLEQ}:MC2`],
+    source: `${COMPLEQ_SRC} — misconception: large K implies fast kinetics`,
+  },
+]
+
+// ─── chem.sblock.hydrogen ────────────────────────────────────────────────────
+const HYDR = 'chem.sblock.hydrogen'
+const HYDR_SRC = 'docs/chemistry/kg/graph.json — chem.sblock.hydrogen'
+
+const HYDR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HYDR,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Hydrogen is chemistry\'s great misfit — it doesn\'t truly belong to ANY group, ' +
+      'despite usually being drawn atop Group 1. It has just 1 electron (like Group 1: ' +
+      'can lose it to form H⁺) but is only ONE electron short of a full shell (like Group ' +
+      '17: can gain one to form H⁻, called a HYDRIDE ion). This dual nature means ' +
+      'hydrogen forms compounds spanning both families: with reactive metals (NaH, CaH₂ — ' +
+      'ionic hydrides, H is −1) and with nonmetals (HCl, H₂O, CH₄ — covalent compounds, H ' +
+      'is +1). THREE ISOTOPES exist with dramatically different relative mass differences ' +
+      '(more significant than for any other element, since doubling/tripling mass from 1 ' +
+      'to 2 or 3 is huge proportionally): protium (¹H, no neutrons, 99.98% abundance), ' +
+      'deuterium (²H or D, 1 neutron, ~0.02%), tritium (³H or T, 2 neutrons, radioactive, ' +
+      'trace). Hydrogen gas (H₂) is used industrially in the Haber process (making ' +
+      'ammonia), hydrogenation of oils, and increasingly as a clean fuel (H₂ + ½O₂ → H₂O, ' +
+      'releasing energy with water as the only product).',
+    targetedMisconceptions: [`${HYDR}:MC1`],
+    source: `${HYDR_SRC} — hydrogen's dual nature, isotopes, hydride formation`,
+  },
+  {
+    conceptId: HYDR,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Hydrogen belongs firmly in Group 1 (like sodium/potassium), full stop." ' +
+      'Misleading — hydrogen shares SOME Group 1 similarities (1 valence electron, forms ' +
+      '+1 ions) but is fundamentally DIFFERENT in crucial ways: hydrogen is a gas at room ' +
+      'temperature (alkali metals are solids), hydrogen doesn\'t form a metallic lattice, ' +
+      'and hydrogen can ALSO gain an electron to form H⁻ (something alkali metals ' +
+      'essentially never do, since they have very low electron affinity). Its placement ' +
+      'atop Group 1 in most periodic tables is a positional convenience (1 valence ' +
+      'electron), not a claim that hydrogen truly behaves like an alkali metal. Second ' +
+      'trap: "Deuterium and protium are chemically indistinguishable, being isotopes." ' +
+      'Mostly true (isotopes share chemistry, as established earlier), BUT hydrogen is ' +
+      'the UNIQUE exception where the mass difference is so proportionally huge (D is ' +
+      'literally double the mass of H) that reaction RATES can differ measurably (the ' +
+      '"kinetic isotope effect") — D-containing bonds break more slowly than H-containing ' +
+      'ones, a subtle but real, measurable difference unique to hydrogen\'s isotopes.',
+    targetedMisconceptions: [`${HYDR}:MC1`, `${HYDR}:MC2`],
+    source: `${HYDR_SRC} — misconception: hydrogen is a true Group 1 member; isotopes are always chemically identical`,
+  },
+]
+
+const HYDR_PROBES: SeedProbe[] = [
+  {
+    conceptId: HYDR,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why is hydrogen\'s placement in the periodic table considered ambiguous, despite usually being shown at the top of Group 1?',
+    choices: [
+      { text: 'Hydrogen shares SOME Group 1 traits (1 valence electron, forms +1 ions) but also behaves like Group 17 in some ways (can gain an electron to form H⁻), and lacks other defining metallic properties of Group 1 elements', isCorrect: true },
+      { text: 'It isn\'t actually ambiguous — hydrogen is unambiguously and completely a typical Group 1 alkali metal in every respect', isCorrect: false, misconceptionId: `${HYDR}:MC1` },
+    ],
+    correctValue: 'Hydrogen has dual/hybrid character, fitting neither group cleanly',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${HYDR}:MC1`],
+    source: `${HYDR_SRC} — distractor targets treating hydrogen as a straightforward Group 1 element`,
+  },
+  {
+    conceptId: HYDR,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Deuterium (²H) and protium (¹H) are isotopes with identical electron configurations. Do reactions involving D-containing bonds proceed at exactly the same rate as H-containing bonds?',
+    choices: [
+      { text: 'Not always — hydrogen\'s isotopes are a special case where the proportionally huge mass difference (D is double the mass of H) causes a measurable "kinetic isotope effect," with D-bonds typically breaking more slowly', isCorrect: true },
+      { text: 'Yes — since isotopes are chemically identical by definition, reaction rates are always identical too', isCorrect: false, misconceptionId: `${HYDR}:MC2` },
+    ],
+    correctValue: 'Not always — kinetic isotope effect exists for H/D',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${HYDR}:MC2`],
+    source: `${HYDR_SRC} — misconception: overextending "isotopes have identical chemistry" to reaction kinetics`,
+  },
+]
+
+// ─── chem.anal.chromatography ────────────────────────────────────────────────
+const CHROMA = 'chem.anal.chromatography'
+const CHROMA_SRC = 'docs/chemistry/kg/graph.json — chem.anal.chromatography'
+
+const CHROMA_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CHROMA,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Chromatography separates mixtures by exploiting DIFFERENTIAL AFFINITY between ' +
+      'two phases: a STATIONARY PHASE (fixed — paper, silica gel, a column packing) and a ' +
+      'MOBILE PHASE (moving — a solvent, or a gas). Components that interact MORE ' +
+      'strongly with the stationary phase move SLOWER (they keep getting "stuck" and ' +
+      'released); components that prefer the mobile phase move FASTER, racing ahead. This ' +
+      'differential speed physically separates a mixture into distinct bands/spots. In ' +
+      'paper chromatography, the RETENTION FACTOR R_f = (distance traveled by ' +
+      'compound)/(distance traveled by solvent front) is a CHARACTERISTIC, reproducible ' +
+      'value for a given compound under fixed conditions (same solvent, same paper, same ' +
+      'temperature) — used to identify unknown substances by comparing to known R_f ' +
+      'values. Column chromatography scales this up for larger-scale purification. ' +
+      'Gas chromatography (GC) separates volatile compounds by boiling point and column ' +
+      'interaction, widely used in forensics, drug testing, and environmental analysis.',
+    targetedMisconceptions: [`${CHROMA}:MC1`],
+    source: `${CHROMA_SRC} — chromatography principle, Rf value, types (paper/column/GC)`,
+  },
+  {
+    conceptId: CHROMA,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "A compound that moves FARTHER up the paper (higher R_f) is interacting ' +
+      'MORE strongly with the stationary phase." BACKWARDS — a HIGH R_f means the ' +
+      'compound moved a LARGE fraction of the solvent\'s distance, meaning it spent MORE ' +
+      'time in the MOBILE phase (weaker attraction to the stationary phase). A LOW R_f ' +
+      'means the compound is strongly attracted to (and repeatedly held back by) the ' +
+      'stationary phase, so it barely moves. Higher R_f = weaker stationary-phase ' +
+      'affinity, not stronger. Second trap: "R_f values are universal constants for a ' +
+      'compound, true across any chromatography setup." False — R_f depends on the ' +
+      'SPECIFIC solvent, stationary phase material, temperature, and even paper batch ' +
+      'used. R_f is only reproducible/comparable when conditions are IDENTICAL — that\'s ' +
+      'why forensic/analytical labs must run a known reference sample alongside the ' +
+      'unknown under the exact same conditions, rather than relying on a published table ' +
+      'value from a different setup.',
+    targetedMisconceptions: [`${CHROMA}:MC1`, `${CHROMA}:MC2`],
+    source: `${CHROMA_SRC} — misconception: high Rf means strong stationary-phase affinity; Rf is a universal constant`,
+  },
+]
+
+const CHROMA_PROBES: SeedProbe[] = [
+  {
+    conceptId: CHROMA,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In paper chromatography, Compound A has Rf = 0.85 and Compound B has Rf = 0.15. Which compound is more strongly attracted to the stationary phase (paper)?',
+    choices: [
+      { text: 'Compound B — its low Rf means it moved very little relative to the solvent front, indicating it was repeatedly held back by strong attraction to the stationary phase', isCorrect: true },
+      { text: 'Compound A — its high Rf means it is more strongly attracted to and held by the stationary phase', isCorrect: false, misconceptionId: `${CHROMA}:MC1` },
+    ],
+    correctValue: 'Compound B (low Rf = strong stationary-phase attraction)',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CHROMA}:MC1`],
+    source: `${CHROMA_SRC} — distractor targets inverting the Rf-to-affinity relationship`,
+  },
+  {
+    conceptId: CHROMA,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A forensic lab wants to identify an unknown compound by comparing its Rf value to a published reference table from a different lab\'s experiment. Is this a reliable identification method?',
+    choices: [
+      { text: 'No — Rf values depend on the specific solvent, stationary phase, and temperature used; reliable comparison requires running a known reference sample under IDENTICAL conditions alongside the unknown, not comparing to a different setup\'s published value', isCorrect: true },
+      { text: 'Yes — Rf is a fixed physical constant for each compound, comparable across any chromatography setup', isCorrect: false, misconceptionId: `${CHROMA}:MC2` },
+    ],
+    correctValue: 'No — Rf is condition-dependent, not a universal constant',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CHROMA}:MC2`],
+    source: `${CHROMA_SRC} — misconception: Rf is a universal, condition-independent constant`,
+  },
+]
+
+// ─── chem.anal.gravimetric ───────────────────────────────────────────────────
+const GRAVI = 'chem.anal.gravimetric'
+const GRAVI_SRC = 'docs/chemistry/kg/graph.json — chem.anal.gravimetric'
+
+const GRAVI_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GRAVI,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Gravimetric analysis determines a substance\'s quantity by converting it into a ' +
+      'pure, weighable SOLID and measuring its MASS precisely — "gravimetric" literally ' +
+      'means "by weight." The general procedure: (1) dissolve the sample, (2) add a ' +
+      'PRECIPITATING REAGENT that selectively converts the analyte into an insoluble ' +
+      'compound (e.g., adding AgNO₃ to precipitate Cl⁻ as AgCl), (3) filter, wash ' +
+      '(removing impurities without dissolving the precipitate), and dry the precipitate ' +
+      'completely, (4) weigh the pure, dry precipitate on an analytical balance. From the ' +
+      'precipitate\'s mass and known STOICHIOMETRY, back-calculate the original analyte\'s ' +
+      'mass/concentration — this is essentially advanced stoichiometry applied ' +
+      'analytically. For accuracy, the precipitate must have LOW SOLUBILITY (minimal loss ' +
+      'to the filtrate — small Ksp is essential), be easily filterable (large, well-formed ' +
+      'crystals rather than a fine, hard-to-filter colloidal precipitate), and be chemically ' +
+      'STABLE during drying (no decomposition or moisture retention that would introduce ' +
+      'mass errors).',
+    targetedMisconceptions: [`${GRAVI}:MC1`],
+    source: `${GRAVI_SRC} — gravimetric analysis procedure, precipitate requirements`,
+  },
+  {
+    conceptId: GRAVI,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "The washing step in gravimetric analysis is just for making the precipitate ' +
+      'look cleaner — a cosmetic step with no analytical importance." FALSE — washing is ' +
+      'CRITICAL for accuracy: it removes soluble impurities (like excess precipitating ' +
+      'reagent or byproduct salts) that would otherwise add extra, incorrect mass to your ' +
+      'measurement, systematically inflating your calculated analyte amount. But the wash ' +
+      'solution must be chosen carefully — using PURE WATER to wash AgCl, for instance, ' +
+      'could cause some AgCl to dissolve back into solution (even though Ksp is small, ' +
+      'repeated washing with large volumes can cause measurable loss), so analysts often ' +
+      'use a dilute solution containing a common ion (like dilute HNO₃ or NaCl solution ' +
+      'at controlled concentration) to suppress solubility via the common ion effect while ' +
+      'still washing away impurities. Second trap: "Any precipitate works for gravimetric ' +
+      'analysis as long as it\'s insoluble." Also needs correct crystal habit (not a fine, ' +
+      'gelatinous colloid that clogs filters and traps impurities) and thermal stability at ' +
+      'drying temperature.',
+    targetedMisconceptions: [`${GRAVI}:MC1`, `${GRAVI}:MC2`],
+    source: `${GRAVI_SRC} — misconception: washing is cosmetic only; any insoluble precipitate suffices`,
+  },
+]
+
+const GRAVI_PROBES: SeedProbe[] = [
+  {
+    conceptId: GRAVI,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a gravimetric determination of chloride via AgCl precipitation, why is the washing step analytically important, not just cosmetic?',
+    choices: [
+      { text: 'Washing removes soluble impurities (excess AgNO₃, byproduct salts) that would otherwise add extra mass to the weighed precipitate, causing a systematically inflated (incorrect) result', isCorrect: true },
+      { text: 'Washing has no real effect on accuracy — it just makes the final precipitate look more presentable', isCorrect: false, misconceptionId: `${GRAVI}:MC1` },
+    ],
+    correctValue: 'Washing removes mass-inflating soluble impurities',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GRAVI}:MC1`],
+    source: `${GRAVI_SRC} — distractor targets treating the washing step as purely cosmetic`,
+  },
+  {
+    conceptId: GRAVI,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is having a very low Ksp the ONLY requirement for a compound to be suitable as a gravimetric precipitate?',
+    choices: [
+      { text: 'No — the precipitate must also form large, easily filterable crystals (not a fine colloidal solid) and remain chemically stable during drying, without decomposing or retaining moisture', isCorrect: true },
+      { text: 'Yes — as long as Ksp is small enough, any precipitate is automatically suitable for gravimetric analysis', isCorrect: false, misconceptionId: `${GRAVI}:MC2` },
+    ],
+    correctValue: 'No — filterability and thermal stability also matter',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GRAVI}:MC2`],
+    source: `${GRAVI_SRC} — misconception: low Ksp alone is sufficient for gravimetric suitability`,
+  },
+]
+
+// ─── chem.surface.heterogeneous-cat ──────────────────────────────────────────
+const HETCAT = 'chem.surface.heterogeneous-cat'
+const HETCAT_SRC = 'docs/chemistry/kg/graph.json — chem.surface.heterogeneous-cat'
+
+const HETCAT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HETCAT,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Heterogeneous catalysis (solid catalyst, gas/liquid reactants) proceeds through ' +
+      'FIVE steps: (1) DIFFUSION — reactant molecules travel to the catalyst surface. ' +
+      '(2) ADSORPTION — reactants stick to active sites on the surface (usually via ' +
+      'chemisorption, as covered earlier), which WEAKENS their internal bonds by ' +
+      'redistributing electron density into the metal surface. (3) REACTION — the weakened, ' +
+      'surface-bound reactants react with each other (having the correct geometry and ' +
+      'reduced activation energy because of the adsorption-induced bond weakening — this ' +
+      'IS the mechanism behind why catalysts lower Ea). (4) DESORPTION — the product ' +
+      'detaches from the surface, freeing the active site. (5) DIFFUSION AWAY — product ' +
+      'molecules leave the surface region. The RATE-LIMITING step is often adsorption or ' +
+      'desorption, not the surface reaction itself, which is why catalyst SURFACE AREA and ' +
+      'ACTIVE SITE availability matter so much (as covered in catalysis basics). This ' +
+      'mechanism explains CATALYST POISONING: if an impurity binds irreversibly to active ' +
+      'sites (like sulfur poisoning a platinum catalytic converter), it permanently blocks ' +
+      'those sites from ever catalyzing the intended reaction.',
+    targetedMisconceptions: [`${HETCAT}:MC1`],
+    source: `${HETCAT_SRC} — five-step heterogeneous catalysis mechanism, catalyst poisoning`,
+  },
+  {
+    conceptId: HETCAT,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Adsorption onto the catalyst surface has no effect on the reactant ' +
+      'molecules themselves — the catalyst just holds them close together." FALSE — ' +
+      'chemisorption actively WEAKENS the internal bonds of the adsorbed reactant ' +
+      'molecule by redistributing its electron density into the metal\'s surface orbitals. ' +
+      'This bond-weakening IS the mechanism by which activation energy is lowered — it\'s ' +
+      'not just proximity/concentration effect (though that helps too), it\'s genuine ' +
+      'chemical activation of the reactant through the adsorption bond itself. Second ' +
+      'trap: "Catalyst poisoning is reversible — you can always regenerate a poisoned ' +
+      'catalyst by simple cleaning." Often FALSE for irreversible poisoning (like sulfur ' +
+      'compounds binding strongly and permanently to platinum active sites) — this ' +
+      'requires expensive catalyst REPLACEMENT, not just cleaning, which is why unleaded ' +
+      'gasoline and low-sulfur fuel standards exist specifically to protect catalytic ' +
+      'converters from permanent poisoning.',
+    targetedMisconceptions: [`${HETCAT}:MC1`, `${HETCAT}:MC2`],
+    source: `${HETCAT_SRC} — misconception: adsorption is passive proximity only; poisoning is always reversible`,
+  },
+]
+
+const HETCAT_PROBES: SeedProbe[] = [
+  {
+    conceptId: HETCAT,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'How does chemisorption of a reactant onto a heterogeneous catalyst surface actually lower the activation energy for reaction?',
+    choices: [
+      { text: 'Chemisorption redistributes the reactant\'s electron density into the metal surface, actively weakening its internal bonds — this bond-weakening directly lowers the energy needed to complete the reaction, not just proximity to another reactant', isCorrect: true },
+      { text: 'The catalyst simply holds reactant molecules close together, increasing collision frequency, with no actual effect on the reactants\' bonds', isCorrect: false, misconceptionId: `${HETCAT}:MC1` },
+    ],
+    correctValue: 'Chemisorption weakens reactant bonds directly',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${HETCAT}:MC1`],
+    source: `${HETCAT_SRC} — distractor targets treating catalysis as purely a proximity/concentration effect`,
+  },
+  {
+    conceptId: HETCAT,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A car\'s catalytic converter has been poisoned by sulfur compounds from leaded/high-sulfur fuel. Can this typically be fixed by simply cleaning the converter?',
+    choices: [
+      { text: 'No — sulfur often binds irreversibly (strongly and permanently) to the platinum active sites, requiring expensive catalyst replacement rather than simple cleaning', isCorrect: true },
+      { text: 'Yes — catalyst poisoning is always a reversible surface contamination that cleaning can fully remove', isCorrect: false, misconceptionId: `${HETCAT}:MC2` },
+    ],
+    correctValue: 'No — irreversible poisoning requires replacement',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HETCAT}:MC2`],
+    source: `${HETCAT_SRC} — misconception: catalyst poisoning is always reversible with cleaning`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -6012,6 +6436,11 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...RESON_EXPLANATIONS,
   ...BPARAM_EXPLANATIONS,
   ...COORDB_EXPLANATIONS,
+  ...COMPLEQ_EXPLANATIONS,
+  ...HYDR_EXPLANATIONS,
+  ...CHROMA_EXPLANATIONS,
+  ...GRAVI_EXPLANATIONS,
+  ...HETCAT_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -6088,4 +6517,9 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...RESON_PROBES,
   ...BPARAM_PROBES,
   ...COORDB_PROBES,
+  ...COMPLEQ_PROBES,
+  ...HYDR_PROBES,
+  ...CHROMA_PROBES,
+  ...GRAVI_PROBES,
+  ...HETCAT_PROBES,
 ]
