@@ -13160,6 +13160,184 @@ const PROTECT_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.carb.carboxylic ────────────────────────────────────────────────────
+const CARBOXY = 'chem.carb.carboxylic'
+const CARBOXY_SRC = 'docs/chemistry/kg/graph.json — chem.carb.carboxylic'
+
+const CARBOXY_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CARBOXY,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Carboxylic acids (R-COOH) combine a carbonyl (C=O) and a hydroxyl (-OH) on the SAME ' +
+      'carbon — this combination makes them GENUINELY ACIDIC (pKa ~4-5), far more acidic than ' +
+      'simple alcohols (pKa ~16-18) or even phenol (pKa ~10, covered earlier), because the ' +
+      'resulting CARBOXYLATE anion (RCOO⁻) after losing H⁺ is stabilized by RESONANCE between ' +
+      'TWO EQUIVALENT structures — the negative charge delocalizes EQUALLY across both oxygen ' +
+      'atoms (confirmed experimentally: both C-O bonds in a carboxylate have IDENTICAL, ' +
+      'intermediate length, exactly analogous to the ozone resonance case covered earlier). ' +
+      'This is even BETTER stabilization than phenoxide\'s delocalization into an aromatic ' +
+      'ring, explaining why carboxylic acids are more acidic than phenol. SUBSTITUENT EFFECTS ' +
+      '(inductive, covered in electronic effects) further modulate acidity: electron- ' +
+      'withdrawing groups nearby (like Cl in chloroacetic acid) INCREASE acidity (stabilizing ' +
+      'the anion further via −I effect), while electron-donating alkyl groups slightly ' +
+      'DECREASE acidity — this effect diminishes rapidly with distance from the carboxyl ' +
+      'group, exactly matching the inductive effect\'s distance-decay behavior covered earlier.',
+    targetedMisconceptions: [`${CARBOXY}:MC1`],
+    source: `${CARBOXY_SRC} — carboxylic acid acidity via symmetric carboxylate resonance, substituent inductive effects`,
+  },
+  {
+    conceptId: CARBOXY,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Carboxylic acids are more acidic than phenol simply because they contain more ' +
+      'oxygen atoms, not because of any specific structural reasoning." FALSE — the key ' +
+      'structural distinction is that the carboxylate anion delocalizes its negative charge ' +
+      'EQUALLY across TWO EQUIVALENT oxygen atoms (symmetric resonance, maximally effective ' +
+      'stabilization), while phenoxide delocalizes into an aromatic ring where the negative ' +
+      'charge is spread across LESS electronegative carbon atoms (less effective stabilization ' +
+      'per unit of delocalization) — it\'s the QUALITY and SYMMETRY of the resonance ' +
+      'stabilization that matters, not simply counting oxygen atoms present in the molecule. ' +
+      'Second trap: "Substituent effects on carboxylic acid acidity (like adding a chlorine) ' +
+      'work equally regardless of how far the substituent is from the -COOH group." FALSE — ' +
+      'exactly like the general inductive effect covered earlier, this influence weakens ' +
+      'RAPIDLY with distance: chloroacetic acid (Cl directly adjacent to COOH, pKa ~2.8) is ' +
+      'dramatically more acidic than acetic acid (pKa ~4.8), but 4-chlorobutanoic acid (Cl ' +
+      'several carbons away) shows a much SMALLER acidity increase — proximity to the ' +
+      'carboxyl group matters enormously for how much the inductive effect actually helps ' +
+      'stabilize the resulting anion.',
+    targetedMisconceptions: [`${CARBOXY}:MC1`, `${CARBOXY}:MC2`],
+    source: `${CARBOXY_SRC} — misconception: acidity difference is about oxygen count not resonance symmetry; substituent effects are distance-independent`,
+  },
+]
+
+const CARBOXY_PROBES: SeedProbe[] = [
+  {
+    conceptId: CARBOXY,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Acetic acid (pKa ~4.8) is more acidic than phenol (pKa ~10). Both lose H+ to form anions stabilized by resonance. What structural difference makes the carboxylate\'s stabilization more effective?',
+    choices: [
+      { text: 'The carboxylate anion delocalizes its negative charge equally across two EQUIVALENT, electronegative oxygen atoms (symmetric resonance), while phenoxide delocalizes into a less electronegative aromatic ring — more effective stabilization', isCorrect: true },
+      { text: 'Acetic acid simply contains more total oxygen atoms than phenol, which automatically makes it more acidic regardless of any structural resonance considerations', isCorrect: false, misconceptionId: `${CARBOXY}:MC1` },
+    ],
+    correctValue: 'Symmetric resonance across two oxygens is more effective than delocalization into a ring',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CARBOXY}:MC1`],
+    source: `${CARBOXY_SRC} — distractor targets attributing acidity difference to oxygen count rather than resonance quality/symmetry`,
+  },
+  {
+    conceptId: CARBOXY,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Chloroacetic acid (Cl directly next to COOH, pKa ~2.8) is much more acidic than acetic acid (pKa ~4.8). Would 4-chlorobutanoic acid (Cl several carbons away from COOH) show the same large acidity increase?',
+    choices: [
+      { text: 'No — the inductive effect of the chlorine weakens rapidly with distance from the carboxyl group, so 4-chlorobutanoic acid shows a much smaller acidity increase compared to chloroacetic acid\'s dramatic effect', isCorrect: true },
+      { text: 'Yes — the electron-withdrawing effect of chlorine on acidity is the same regardless of how far it is positioned from the -COOH group', isCorrect: false, misconceptionId: `${CARBOXY}:MC2` },
+    ],
+    correctValue: 'No — the inductive effect diminishes significantly with distance',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CARBOXY}:MC2`],
+    source: `${CARBOXY_SRC} — misconception: substituent inductive effects on acidity are independent of distance from the carboxyl group`,
+  },
+]
+
+// ─── chem.bio.carbohydrates ──────────────────────────────────────────────────
+const CARBS = 'chem.bio.carbohydrates'
+const CARBS_SRC = 'docs/chemistry/kg/graph.json — chem.bio.carbohydrates'
+
+const CARBS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CARBS,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Carbohydrates (sugars) are polyhydroxy aldehydes/ketones (multiple -OH groups plus a ' +
+      'carbonyl, combining alcohol and aldehyde/ketone chemistry covered earlier). Simple ' +
+      'sugars like glucose exist in a fascinating EQUILIBRIUM between OPEN-CHAIN (straight, ' +
+      'showing the free aldehyde) and CYCLIC (ring) forms — the ring forms when a distant -OH ' +
+      'group attacks the carbonyl carbon INTRAMOLECULARLY (nucleophilic addition, same ' +
+      'mechanism as covered for aldehydes, just happening WITHIN one molecule instead of ' +
+      'between two), creating a new stereocenter called the ANOMERIC CARBON. This generates ' +
+      'TWO possible ring forms (α and β anomers, differing only in the orientation of the -OH ' +
+      'at that new stereocenter) that continuously INTERCONVERT through the open-chain form — ' +
+      'a phenomenon called MUTAROTATION, observable as a changing optical rotation over time ' +
+      'until equilibrium is reached. Glucose exists predominantly (>99%) as the cyclic form at ' +
+      'equilibrium, with only a tiny fraction as reactive open-chain aldehyde at any moment — ' +
+      'yet this tiny fraction is enough to give glucose a POSITIVE Tollens\' test (silver ' +
+      'mirror, covered in aldehydes), since the equilibrium constantly REPLENISHES the small ' +
+      'open-chain population as it gets consumed by the oxidizing test reagent.',
+    targetedMisconceptions: [`${CARBS}:MC1`],
+    source: `${CARBS_SRC} — glucose open-chain/cyclic equilibrium, anomeric carbon, mutarotation, positive Tollens' test explanation`,
+  },
+  {
+    conceptId: CARBS,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Since glucose exists predominantly (>99%) as the cyclic form with essentially ' +
+      'NO free aldehyde present, it should NOT give a positive Tollens\' test (silver mirror), ' +
+      'unlike a "true" aldehyde." FALSE — this ignores the DYNAMIC nature of the equilibrium. ' +
+      'While at any INSTANT only a tiny fraction of glucose molecules are in the open-chain ' +
+      'aldehyde form, the equilibrium is constantly INTERCONVERTING — as the small open-chain ' +
+      'population gets consumed by Tollens\' reagent (oxidized, driving the reaction forward), ' +
+      'Le Chatelier\'s principle (covered earlier) shifts MORE cyclic glucose to open up and ' +
+      'replenish the open-chain form, continuously feeding the reaction until essentially ALL ' +
+      'the glucose has eventually reacted — dynamic equilibrium behavior, not a static ' +
+      '"mostly unreactive" snapshot. Second trap: "The α and β anomers of glucose are just two ' +
+      'different NAMES for the identical compound, interconvertible instantly and with no real ' +
+      'structural distinction." FALSE — they ARE genuinely different stereoisomers (differing ' +
+      'in configuration at the anomeric carbon, analogous to any other stereocenter), with ' +
+      'measurably different properties (different specific rotations, different crystal ' +
+      'forms when isolated) — they interconvert through the open-chain form (mutarotation), ' +
+      'but at any given moment they are distinct, separately identifiable species, not merely ' +
+      'alternate names for one thing.',
+    targetedMisconceptions: [`${CARBS}:MC1`, `${CARBS}:MC2`],
+    source: `${CARBS_SRC} — misconception: mostly-cyclic glucose shouldn't give Tollens' test; alpha/beta anomers are just alternate names for one compound`,
+  },
+]
+
+const CARBS_PROBES: SeedProbe[] = [
+  {
+    conceptId: CARBS,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Glucose exists as >99% cyclic form at equilibrium, with only a tiny fraction as open-chain aldehyde at any instant. Yet glucose gives a strong POSITIVE Tollens\' test (silver mirror). How is this possible?',
+    choices: [
+      { text: 'The equilibrium is dynamic — as Tollens\' reagent consumes the small open-chain aldehyde population, Le Chatelier\'s principle shifts more cyclic glucose to open up and replenish it, continuously feeding the reaction until essentially all glucose has reacted', isCorrect: true },
+      { text: 'This must be a testing error — since glucose is predominantly cyclic with no significant free aldehyde, it should not give a positive Tollens\' test at all', isCorrect: false, misconceptionId: `${CARBS}:MC1` },
+    ],
+    correctValue: 'Dynamic equilibrium replenishes the reactive open-chain form as it\'s consumed',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CARBS}:MC1`],
+    source: `${CARBS_SRC} — distractor targets treating equilibrium as a static snapshot rather than a dynamic, replenishing process`,
+  },
+  {
+    conceptId: CARBS,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Are the α and β anomers of glucose simply two different names for the identical compound, with no real structural distinction?',
+    choices: [
+      { text: 'No — they are genuinely different stereoisomers, differing in configuration at the anomeric carbon, with measurably different properties (different specific rotations, different crystal forms); they interconvert via the open-chain form but are distinct species at any given moment', isCorrect: true },
+      { text: 'Yes — alpha and beta glucose are just alternate names for the same molecule, interconvertible instantly with no meaningful structural difference between them', isCorrect: false, misconceptionId: `${CARBS}:MC2` },
+    ],
+    correctValue: 'No — genuinely distinct stereoisomers with measurably different properties',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CARBS}:MC2`],
+    source: `${CARBS_SRC} — misconception: alpha/beta anomers are merely alternate names rather than distinct stereoisomers`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -13318,6 +13496,8 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...ADDPOLY_EXPLANATIONS,
   ...EPOX_EXPLANATIONS,
   ...PROTECT_EXPLANATIONS,
+  ...CARBOXY_EXPLANATIONS,
+  ...CARBS_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -13476,4 +13656,6 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...ADDPOLY_PROBES,
   ...EPOX_PROBES,
   ...PROTECT_PROBES,
+  ...CARBOXY_PROBES,
+  ...CARBS_PROBES,
 ]
