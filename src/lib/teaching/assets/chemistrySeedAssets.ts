@@ -11453,6 +11453,275 @@ const SURF_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.elect.nernst ───────────────────────────────────────────────────────
+const NERNST = 'chem.elect.nernst'
+const NERNST_SRC = 'docs/chemistry/kg/graph.json — chem.elect.nernst'
+
+const NERNST_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NERNST,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Standard electrode potentials (E°, covered earlier) only apply under STANDARD ' +
+      'conditions (1M, 1 atm, 25°C) — but real cells rarely operate under exactly these ' +
+      'conditions. The NERNST EQUATION extends E° to ANY concentration: E = E° − ' +
+      '(RT/nF)ln Q (or, at 25°C, the simplified form: E = E° − (0.0592/n)log Q, using ' +
+      'base-10 log and a pre-calculated constant). Q is the REACTION QUOTIENT (covered in ' +
+      'equilibrium — same concept, same formula, using CURRENT non-equilibrium ' +
+      'concentrations). This equation explains WHY a cell\'s voltage isn\'t fixed forever: ' +
+      'as the reaction proceeds, reactant concentrations DECREASE and product ' +
+      'concentrations INCREASE, making Q grow larger, which makes E DECREASE — eventually, ' +
+      'when Q=K (true equilibrium), E=0 (the "dead battery" state covered in ' +
+      'electrochemical thermodynamics). The Nernst equation also underlies CONCENTRATION ' +
+      'CELLS — a genuinely interesting case where BOTH half-cells contain the SAME redox ' +
+      'couple but at DIFFERENT concentrations (E°_cell = 0, since both electrodes are ' +
+      'chemically identical), yet a real, measurable voltage still exists purely from the ' +
+      'CONCENTRATION difference — the cell spontaneously drives toward equalizing ' +
+      'concentrations, exactly analogous to diffusion, but harnessed as electrical work.',
+    targetedMisconceptions: [`${NERNST}:MC1`],
+    source: `${NERNST_SRC} — Nernst equation, reaction quotient Q, concentration cells`,
+  },
+  {
+    conceptId: NERNST,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "A cell with E°_cell = 0 (identical electrodes) can never produce any measurable ' +
+      'voltage or do any electrical work, since E° being zero means no reaction is ' +
+      'favorable." FALSE — this is exactly the CONCENTRATION CELL scenario. Even with ' +
+      'E°_cell = 0, if the two half-cells have DIFFERENT concentrations of the same species, ' +
+      'the Nernst equation gives a NONZERO E (since Q≠1 when concentrations differ), and ' +
+      'the cell genuinely does produce measurable voltage and can do real electrical work ' +
+      '— driven purely by the concentration gradient, not by any difference in chemical ' +
+      'identity between the electrodes. Second trap: "As a battery discharges (reaction ' +
+      'proceeds toward equilibrium), its voltage should stay CONSTANT until it suddenly ' +
+      'drops to zero when "empty."" FALSE — per the Nernst equation, voltage CONTINUOUSLY ' +
+      'DECREASES throughout discharge as Q grows (concentrations shift away from initial ' +
+      'conditions), approaching zero smoothly and asymptotically as the reaction approaches ' +
+      'equilibrium (Q→K), NOT staying flat and then dropping abruptly — this gradual ' +
+      'voltage decline is why devices often behave sluggishly before a battery is ' +
+      'completely "dead."',
+    targetedMisconceptions: [`${NERNST}:MC1`, `${NERNST}:MC2`],
+    source: `${NERNST_SRC} — misconception: E°cell=0 means no possible voltage; battery voltage stays constant until suddenly dropping to zero`,
+  },
+]
+
+const NERNST_PROBES: SeedProbe[] = [
+  {
+    conceptId: NERNST,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A concentration cell has two identical Cu/Cu2+ half-cells but with different Cu2+ concentrations (0.1M vs 1.0M). Since both electrodes are chemically identical (E°cell = 0), can this cell produce a measurable voltage?',
+    choices: [
+      { text: 'Yes — the Nernst equation gives a nonzero E because Q ≠ 1 when concentrations differ; the cell is driven purely by the concentration gradient, spontaneously working to equalize concentrations, and can genuinely do electrical work', isCorrect: true },
+      { text: 'No — since E°cell = 0 (identical electrodes), the cell can never produce any measurable voltage regardless of concentration differences', isCorrect: false, misconceptionId: `${NERNST}:MC1` },
+    ],
+    correctValue: 'Yes — concentration cells produce real voltage despite E°cell=0',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${NERNST}:MC1`],
+    source: `${NERNST_SRC} — distractor targets assuming E°cell=0 guarantees zero voltage under all conditions`,
+  },
+  {
+    conceptId: NERNST,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'As a battery discharges over time, does its voltage remain constant until suddenly dropping to zero when the battery is "dead," or does it change gradually?',
+    choices: [
+      { text: 'Voltage decreases continuously and gradually throughout discharge (per the Nernst equation, as Q grows toward K), approaching zero smoothly rather than staying flat and dropping abruptly', isCorrect: true },
+      { text: 'Voltage stays essentially constant throughout most of the discharge, then drops suddenly and sharply to zero only at the very end', isCorrect: false, misconceptionId: `${NERNST}:MC2` },
+    ],
+    correctValue: 'Voltage decreases continuously and gradually',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NERNST}:MC2`],
+    source: `${NERNST_SRC} — misconception: battery voltage remains flat until an abrupt drop rather than declining continuously`,
+  },
+]
+
+// ─── chem.elect.industrial ───────────────────────────────────────────────────
+const INDELEC = 'chem.elect.industrial'
+const INDELEC_SRC = 'docs/chemistry/kg/graph.json — chem.elect.industrial'
+
+const INDELEC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: INDELEC,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Industrial electrolysis (building on electrolysis and Faraday\'s laws covered ' +
+      'earlier) produces enormous quantities of essential materials. The DOWNS PROCESS ' +
+      'extracts sodium metal by electrolyzing MOLTEN NaCl (mixed with CaCl₂ to lower the ' +
+      'melting point, saving energy) — must be molten specifically because aqueous ' +
+      'electrolysis would produce H₂ instead of Na (as established earlier). The HALL-' +
+      'HÉROULT PROCESS extracts aluminum by electrolyzing Al₂O₃ (alumina, purified from ' +
+      'bauxite ore) dissolved in molten CRYOLITE (Na₃AlF₆, which dramatically lowers the ' +
+      'otherwise extremely high melting point of pure Al₂O₃ ~2050°C down to a more ' +
+      'manageable ~950°C, saving enormous energy costs) — this process is so ' +
+      'ENERGY-INTENSIVE that aluminum smelters are often built near cheap hydroelectric ' +
+      'power sources, and aluminum recycling uses only about 5% of the energy needed for ' +
+      'primary extraction (recycling just needs to melt and reshape existing metal, not ' +
+      'break strong Al-O bonds via electrolysis). CHLOR-ALKALI electrolysis (of aqueous ' +
+      'NaCl) simultaneously produces THREE valuable industrial chemicals from one process: ' +
+      'Cl₂ gas (anode), H₂ gas (cathode), and NaOH solution (from the leftover Na⁺ and OH⁻ ' +
+      'formed).',
+    targetedMisconceptions: [`${INDELEC}:MC1`],
+    source: `${INDELEC_SRC} — Downs process, Hall-Héroult process, chlor-alkali process`,
+  },
+  {
+    conceptId: INDELEC,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Cryolite is added in the Hall-Héroult process to CHEMICALLY REACT with the ' +
+      'alumina, converting it into a more easily electrolyzed compound." FALSE — cryolite\'s ' +
+      'role is purely PHYSICAL: it acts as a SOLVENT that dissolves Al₂O₃ and dramatically ' +
+      'LOWERS the melting point of the mixture (from ~2050°C for pure alumina down to ' +
+      '~950°C), making electrolysis practically feasible at a much lower, more ' +
+      'energy-efficient temperature — it doesn\'t chemically transform the alumina itself, ' +
+      'similar to how any solvent lowers a solute\'s effective processing temperature ' +
+      'without altering its fundamental chemical identity. Second trap: "Aluminum recycling ' +
+      'saves energy mainly because it avoids mining bauxite ore, not because of anything ' +
+      'related to the electrolysis process itself." Actually, the ENERGY SAVINGS come ' +
+      'overwhelmingly from avoiding the electrolysis step itself (breaking Al-O bonds via ' +
+      'the energy-intensive Hall-Héroult process) — recycled aluminum just needs melting ' +
+      '(a much lower-energy physical process) and reshaping, not re-extracting metal from ' +
+      'ore through electrolysis, which is the single most energy-costly step in the entire ' +
+      'original production chain.',
+    targetedMisconceptions: [`${INDELEC}:MC1`, `${INDELEC}:MC2`],
+    source: `${INDELEC_SRC} — misconception: cryolite chemically transforms alumina; recycling savings come mainly from avoiding mining`,
+  },
+]
+
+const INDELEC_PROBES: SeedProbe[] = [
+  {
+    conceptId: INDELEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'In the Hall-Héroult process, cryolite (Na3AlF6) is mixed with alumina (Al2O3) before electrolysis. What is cryolite\'s primary role?',
+    choices: [
+      { text: 'A physical solvent that dissolves alumina and dramatically lowers the melting point of the mixture (from ~2050°C to ~950°C), making electrolysis practically feasible at much lower, more energy-efficient temperatures', isCorrect: true },
+      { text: 'A chemical reagent that reacts with alumina to convert it into a more easily electrolyzed compound', isCorrect: false, misconceptionId: `${INDELEC}:MC1` },
+    ],
+    correctValue: 'Physical solvent lowering the melting point',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${INDELEC}:MC1`],
+    source: `${INDELEC_SRC} — distractor targets attributing cryolite's role to chemical reaction rather than physical solvation`,
+  },
+  {
+    conceptId: INDELEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Recycling aluminum uses only about 5% of the energy needed for primary extraction from ore. What is the main SOURCE of this energy saving?',
+    choices: [
+      { text: 'Avoiding the electrolysis step itself — recycled aluminum only needs melting (a lower-energy physical process) and reshaping, not re-breaking Al-O bonds via the extremely energy-intensive Hall-Heroult electrolysis process', isCorrect: true },
+      { text: 'Avoiding the mining and transportation of bauxite ore, which is the dominant energy cost in primary aluminum production', isCorrect: false, misconceptionId: `${INDELEC}:MC2` },
+    ],
+    correctValue: 'Avoiding the energy-intensive electrolysis step',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${INDELEC}:MC2`],
+    source: `${INDELEC_SRC} — misconception: attributing recycling energy savings primarily to avoided mining rather than avoided electrolysis`,
+  },
+]
+
+// ─── chem.alc.alcohols ───────────────────────────────────────────────────────
+const ALCOH = 'chem.alc.alcohols'
+const ALCOH_SRC = 'docs/chemistry/kg/graph.json — chem.alc.alcohols'
+
+const ALCOH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ALCOH,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Alcohols (R-OH) sit at a chemical crossroads — the -OH group enables HYDROGEN ' +
+      'BONDING (covered in intermolecular forces), giving alcohols notably HIGHER boiling ' +
+      'points than alkanes/haloalkanes of similar size (methanol, MW 32, boils at 65°C — ' +
+      'far higher than similarly-sized nonpolar molecules), and water-solubility for ' +
+      'SHORT-chain alcohols (the polar -OH dominates over the hydrocarbon tail\'s ' +
+      'hydrophobic character; solubility DECREASES as chain length increases, since the ' +
+      'nonpolar tail\'s influence grows). Classified by carbon type (primary/secondary/ ' +
+      'tertiary, per the classification covered in haloalkanes) — this DIRECTLY predicts ' +
+      'oxidation behavior: PRIMARY alcohols oxidize to ALDEHYDES then further to CARBOXYLIC ' +
+      'ACIDS (two oxidation steps possible); SECONDARY alcohols oxidize only to KETONES ' +
+      '(one step, stops there — no further oxidation possible without breaking C-C bonds); ' +
+      'TERTIARY alcohols RESIST oxidation entirely under normal conditions (no H atom ' +
+      'directly on the C-OH carbon for the oxidizing agent to remove). This oxidation-level ' +
+      'progression (alcohol→aldehyde→acid, or alcohol→ketone-and-stop) is a core organic ' +
+      'synthesis tool and connects directly to spectroscopy (each stage has a distinct IR/ ' +
+      'NMR signature).',
+    targetedMisconceptions: [`${ALCOH}:MC1`],
+    source: `${ALCOH_SRC} — alcohol H-bonding/solubility, primary/secondary/tertiary oxidation pathways`,
+  },
+  {
+    conceptId: ALCOH,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "All alcohols, regardless of carbon type (primary/secondary/tertiary), oxidize ' +
+      'the same way under standard oxidizing conditions." FALSE — this is a critical, ' +
+      'testable distinction. TERTIARY alcohols genuinely RESIST standard oxidation (with ' +
+      'typical oxidants like KMnO₄ or K₂Cr₂O₇ under normal conditions) because oxidation ' +
+      'mechanistically requires removing a hydrogen atom that\'s directly bonded to the ' +
+      'carbon bearing the -OH group — tertiary alcohols have NO such hydrogen (that carbon ' +
+      'is already bonded to 3 OTHER carbons plus the OH, using up all 4 bonds), so the ' +
+      'mechanism simply cannot proceed. This is actually used as a diagnostic TEST to ' +
+      'distinguish alcohol types experimentally (tertiary alcohols show no color change ' +
+      'with standard oxidizing/testing reagents that DO change color for primary/secondary). ' +
+      'Second trap: "Secondary alcohol oxidation, like primary, can proceed through MULTIPLE ' +
+      'oxidation steps to reach a carboxylic-acid-like final product." FALSE — secondary ' +
+      'alcohols oxidize to KETONES and then STOP (no further oxidation under normal ' +
+      'conditions), because further oxidation of a ketone would require breaking a strong ' +
+      'C-C bond (much harder than the C-H bond removal used in the alcohol→ketone step) — ' +
+      'only PRIMARY alcohols can proceed through the full two-step alcohol→aldehyde→acid ' +
+      'sequence, since aldehydes retain a removable H that ketones simply don\'t have.',
+    targetedMisconceptions: [`${ALCOH}:MC1`, `${ALCOH}:MC2`],
+    source: `${ALCOH_SRC} — misconception: all alcohol types oxidize identically; secondary alcohols can reach carboxylic-acid-level oxidation`,
+  },
+]
+
+const ALCOH_PROBES: SeedProbe[] = [
+  {
+    conceptId: ALCOH,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A tertiary alcohol is treated with a standard oxidizing agent (like acidified KMnO4) under normal conditions. What happens?',
+    choices: [
+      { text: 'No reaction occurs (or very minimal reaction) — tertiary alcohols lack a hydrogen atom directly bonded to the carbon bearing the -OH group, which the oxidation mechanism requires to remove; this resistance is used diagnostically to identify tertiary alcohols', isCorrect: true },
+      { text: 'It oxidizes readily, just like primary and secondary alcohols, following the same mechanism regardless of carbon type', isCorrect: false, misconceptionId: `${ALCOH}:MC1` },
+    ],
+    correctValue: 'Tertiary alcohols resist oxidation under standard conditions',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ALCOH}:MC1`],
+    source: `${ALCOH_SRC} — distractor targets assuming uniform oxidation behavior across all alcohol carbon types`,
+  },
+  {
+    conceptId: ALCOH,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A secondary alcohol is oxidized to a ketone. Can this ketone be further oxidized to a carboxylic-acid-like product, the way a primary alcohol\'s aldehyde intermediate can?',
+    choices: [
+      { text: 'No — ketones lack a removable hydrogen on the carbonyl carbon (unlike aldehydes), so further oxidation would require breaking a strong C-C bond; secondary alcohol oxidation stops at the ketone stage under normal conditions', isCorrect: true },
+      { text: 'Yes — secondary alcohols, like primary alcohols, can proceed through a full two-step oxidation sequence to reach an acid-level product', isCorrect: false, misconceptionId: `${ALCOH}:MC2` },
+    ],
+    correctValue: 'No — ketone oxidation stops there under normal conditions',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ALCOH}:MC2`],
+    source: `${ALCOH_SRC} — misconception: secondary alcohol oxidation can proceed as far as primary alcohol oxidation`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -11592,6 +11861,9 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...VAPP_EXPLANATIONS,
   ...PHASEDIAG_EXPLANATIONS,
   ...SURF_EXPLANATIONS,
+  ...NERNST_EXPLANATIONS,
+  ...INDELEC_EXPLANATIONS,
+  ...ALCOH_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -11731,4 +12003,7 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...VAPP_PROBES,
   ...PHASEDIAG_PROBES,
   ...SURF_PROBES,
+  ...NERNST_PROBES,
+  ...INDELEC_PROBES,
+  ...ALCOH_PROBES,
 ]
