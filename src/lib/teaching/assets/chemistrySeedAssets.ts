@@ -13517,6 +13517,187 @@ const DIAZO_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.carb.derivatives ───────────────────────────────────────────────────
+const CARBDERIV = 'chem.carb.derivatives'
+const CARBDERIV_SRC = 'docs/chemistry/kg/graph.json — chem.carb.derivatives'
+
+const CARBDERIV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CARBDERIV,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Carboxylic acid derivatives (esters, amides, acid chlorides, anhydrides) all share the ' +
+      'core R-CO-X structure but differ in the LEAVING GROUP quality of X, which directly ' +
+      'controls REACTIVITY toward nucleophilic acyl substitution — the general mechanism ' +
+      'where a nucleophile attacks the carbonyl carbon (nucleophilic addition, as covered for ' +
+      'aldehydes/ketones) and then the leaving group DEPARTS, restoring the C=O (unlike ' +
+      'aldehyde/ketone addition, which just adds without displacing anything). REACTIVITY ' +
+      'ORDER (most to least reactive): ACID CHLORIDES (Cl⁻ is an excellent leaving group, ' +
+      'weak conjugate base of a strong acid) > ANHYDRIDES (carboxylate is a decent leaving ' +
+      'group) > ESTERS (alkoxide, RO⁻, a poorer leaving group — needs an acid or base catalyst ' +
+      'to react efficiently) > AMIDES (amide N⁻/NH₂⁻ is an extremely POOR leaving group, ' +
+      'making amides remarkably UNREACTIVE toward substitution — this is exactly why the ' +
+      'amide/peptide bond, central to ALL protein structure, is robustly stable under normal ' +
+      'biological conditions). Crucially, a MORE reactive derivative can be converted into a ' +
+      'LESS reactive one (acid chloride → ester → amide, in that direction), but NOT easily ' +
+      'the reverse — this directional reactivity cascade is a fundamental organizing ' +
+      'principle for planning multi-step synthesis involving these functional groups.',
+    targetedMisconceptions: [`${CARBDERIV}:MC1`],
+    source: `${CARBDERIV_SRC} — nucleophilic acyl substitution, leaving group reactivity order, amide bond stability`,
+  },
+  {
+    conceptId: CARBDERIV,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "All carboxylic acid derivatives (esters, amides, acid chlorides) show roughly ' +
+      'similar reactivity toward nucleophiles, since they all share the same core R-CO-X ' +
+      'carbonyl structure." FALSE — reactivity varies by MANY orders of magnitude depending ' +
+      'specifically on leaving group quality: acid chlorides react with water almost ' +
+      'instantly (even atmospheric moisture), while amides can be stable for YEARS under ' +
+      'similar conditions — this vast reactivity range is precisely WHY amide bonds (peptide ' +
+      'bonds) can reliably hold protein structures together for a lifetime without ' +
+      'spontaneously hydrolyzing, while acid chlorides are far too reactive/unstable to exist ' +
+      'in biological systems at all. Second trap: "You can easily convert a LESS reactive ' +
+      'derivative (like an amide) directly into a MORE reactive one (like an acid chloride) ' +
+      'under normal laboratory conditions, just as easily as the reverse conversion." FALSE ' +
+      '— the reactivity cascade strongly favors the FORWARD direction (more reactive → less ' +
+      'reactive; e.g., acid chloride + amine → amide, spontaneous and easy). Converting ' +
+      'BACKWARD (amide → acid chloride) requires much harsher, specialized reagents/ ' +
+      'conditions specifically because you\'re fighting against the natural reactivity trend, ' +
+      'not simply reversing an easy reaction — synthetic planning must respect this ' +
+      'directionality, always building toward LESS reactive derivatives as the final target ' +
+      'when possible.',
+    targetedMisconceptions: [`${CARBDERIV}:MC1`, `${CARBDERIV}:MC2`],
+    source: `${CARBDERIV_SRC} — misconception: all carboxylic acid derivatives have similar reactivity; conversion between derivatives is equally easy in both directions`,
+  },
+]
+
+const CARBDERIV_PROBES: SeedProbe[] = [
+  {
+    conceptId: CARBDERIV,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Acid chlorides react with water almost instantly, while amides can remain stable for years under similar conditions, despite both sharing the same core R-CO-X carbonyl structure. What explains this vast reactivity difference?',
+    choices: [
+      { text: 'Leaving group quality differs enormously: Cl- is an excellent leaving group (weak conjugate base of a strong acid), while the amide nitrogen is an extremely poor leaving group, making nucleophilic acyl substitution far less favorable for amides', isCorrect: true },
+      { text: 'This must be an error — all carboxylic acid derivatives sharing the same core carbonyl structure should show essentially identical reactivity toward nucleophiles', isCorrect: false, misconceptionId: `${CARBDERIV}:MC1` },
+    ],
+    correctValue: 'Leaving group quality varies enormously across derivatives',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CARBDERIV}:MC1`],
+    source: `${CARBDERIV_SRC} — distractor targets assuming shared core structure guarantees similar reactivity across all derivatives`,
+  },
+  {
+    conceptId: CARBDERIV,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Is converting an amide directly into an acid chloride (a less-reactive-to-more-reactive conversion) just as easy as the reverse conversion (acid chloride into amide)?',
+    choices: [
+      { text: 'No — the reactivity cascade strongly favors the forward direction (more reactive to less reactive); converting backward (amide to acid chloride) requires much harsher, specialized conditions since you are fighting against the natural reactivity trend', isCorrect: true },
+      { text: 'Yes — conversions between any two carboxylic acid derivatives proceed with equal ease regardless of the direction of the reactivity change', isCorrect: false, misconceptionId: `${CARBDERIV}:MC2` },
+    ],
+    correctValue: 'No — the reverse (less-to-more reactive) direction is much harder',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CARBDERIV}:MC2`],
+    source: `${CARBDERIV_SRC} — misconception: derivative interconversion is equally easy regardless of reactivity direction`,
+  },
+]
+
+// ─── chem.sol.colligative ────────────────────────────────────────────────────
+const COLLIG = 'chem.sol.colligative'
+const COLLIG_SRC = 'docs/chemistry/kg/graph.json — chem.sol.colligative'
+
+const COLLIG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COLLIG,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Colligative properties (vapor pressure lowering, boiling point elevation, freezing ' +
+      'point depression, and osmotic pressure — all individually covered earlier) share ONE ' +
+      'unifying feature: they depend ONLY on the NUMBER of dissolved solute particles, ' +
+      'completely independent of the solute\'s chemical IDENTITY (size, charge, molecular ' +
+      'structure — none of that matters, only PARTICLE COUNT). This is why the VAN\'T HOFF ' +
+      'FACTOR (i) is essential for accurate calculations: i = actual particles produced per ' +
+      'formula unit dissolved. Non-electrolytes (sugar, urea — stay as single intact ' +
+      'particles) have i=1. Strong electrolytes that fully dissociate: NaCl gives i=2 (Na⁺ + ' +
+      'Cl⁻), CaCl₂ gives i=3 (Ca²⁺ + 2Cl⁻) — MORE ions per formula unit means a LARGER effect ' +
+      'on any colligative property for the SAME molar concentration. Every colligative ' +
+      'formula incorporates i: ΔT_f = i·K_f·m (freezing point depression), ΔT_b = i·K_b·m ' +
+      '(boiling point elevation), π = iMRT (osmotic pressure) — forgetting the van\'t Hoff ' +
+      'factor for ionic solutes is one of the most common calculation errors in this topic, ' +
+      'systematically UNDERESTIMATING the actual colligative effect for any dissociating ' +
+      'solute.',
+    targetedMisconceptions: [`${COLLIG}:MC1`],
+    source: `${COLLIG_SRC} — unifying colligative property definition, van't Hoff factor, formulas for all four effects`,
+  },
+  {
+    conceptId: COLLIG,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "For calculating colligative properties, you should use the STATED molar ' +
+      'concentration of the compound added to the solution, without any further adjustment." ' +
+      'FALSE for IONIC solutes — this is exactly why the van\'t Hoff factor exists as a ' +
+      'necessary correction. If you dissolve 1 mol of CaCl₂ in water, the solution doesn\'t ' +
+      'behave like "1 mol of dissolved particles" — it fully dissociates into 3 mol of TOTAL ' +
+      'particles (1 mol Ca²⁺ + 2 mol Cl⁻), and colligative properties respond to this TOTAL ' +
+      'particle count, not the original formula-unit count. Forgetting to multiply by i=3 for ' +
+      'CaCl₂ would underestimate the freezing point depression, boiling point elevation, or ' +
+      'osmotic pressure by a factor of 3 — a substantial, common calculation error. Second ' +
+      'trap: "A larger, heavier solute molecule should have a bigger effect on colligative ' +
+      'properties than a smaller, lighter one, at the same molar concentration." FALSE — this ' +
+      'is the entire point of "colligative" (from Latin "colligare," to bind together, ' +
+      'referring to particle COUNT): a huge sugar molecule and a tiny non-dissociating ion ' +
+      'have IDENTICAL colligative effects at the same molar concentration (both i=1) — size, ' +
+      'mass, and molecular identity are completely irrelevant; only the NUMBER of particles ' +
+      'matters.',
+    targetedMisconceptions: [`${COLLIG}:MC1`, `${COLLIG}:MC2`],
+    source: `${COLLIG_SRC} — misconception: use stated concentration without van't Hoff correction; larger solutes have bigger colligative effects`,
+  },
+]
+
+const COLLIG_PROBES: SeedProbe[] = [
+  {
+    conceptId: COLLIG,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 0.1 molal solution of CaCl2 is prepared. What effective particle molality should be used in the freezing point depression formula ΔTf = i·Kf·m?',
+    choices: [
+      { text: '0.3 molal effective particles — CaCl2 fully dissociates into Ca2+ + 2Cl- (i=3 particles per formula unit), so 0.1 mol CaCl2 produces 0.3 mol of total dissolved particles', isCorrect: true },
+      { text: '0.1 molal — you should always use the stated molar concentration of the compound directly, without adjusting for dissociation', isCorrect: false, misconceptionId: `${COLLIG}:MC1` },
+    ],
+    correctValue: '0.3 molal effective particles (i=3 for CaCl2)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COLLIG}:MC1`],
+    source: `${COLLIG_SRC} — distractor targets forgetting to apply the van't Hoff factor for a dissociating ionic solute`,
+  },
+  {
+    conceptId: COLLIG,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 0.1M solution of a large sugar molecule (non-dissociating, i=1) and a 0.1M solution of a small non-dissociating molecule (also i=1) — do these have the same boiling point elevation?',
+    choices: [
+      { text: 'Yes — colligative properties depend only on the NUMBER of dissolved particles, not their size, mass, or chemical identity; both solutions have identical particle counts (same molarity, same i=1), so they show identical boiling point elevation', isCorrect: true },
+      { text: 'No — the larger sugar molecule should cause a greater boiling point elevation than the smaller molecule, since it is a bigger, heavier particle', isCorrect: false, misconceptionId: `${COLLIG}:MC2` },
+    ],
+    correctValue: 'Yes — identical effect, since colligative properties depend only on particle count',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${COLLIG}:MC2`],
+    source: `${COLLIG_SRC} — misconception: solute size/mass affects colligative property magnitude`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -13679,6 +13860,8 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...CARBS_EXPLANATIONS,
   ...KETONE_EXPLANATIONS,
   ...DIAZO_EXPLANATIONS,
+  ...CARBDERIV_EXPLANATIONS,
+  ...COLLIG_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -13841,4 +14024,6 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...CARBS_PROBES,
   ...KETONE_PROBES,
   ...DIAZO_PROBES,
+  ...CARBDERIV_PROBES,
+  ...COLLIG_PROBES,
 ]
