@@ -12260,6 +12260,183 @@ const LANTH_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.alc.ethers ─────────────────────────────────────────────────────────
+const ETHER = 'chem.alc.ethers'
+const ETHER_SRC = 'docs/chemistry/kg/graph.json — chem.alc.ethers'
+
+const ETHER_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ETHER,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Ethers (R-O-R\') share the same oxygen-containing functional group family as ' +
+      'alcohols, but the oxygen is bonded to TWO carbons instead of one carbon and one ' +
+      'hydrogen — this single structural difference has major consequences. Without an O-H ' +
+      'bond, ethers CANNOT hydrogen-bond with EACH OTHER (no H directly on an electronegative ' +
+      'atom to donate) — giving ethers much LOWER boiling points than isomeric alcohols of ' +
+      'similar molecular weight (diethyl ether, MW 74, boils at just 35°C, dramatically ' +
+      'lower than butanol, also MW 74, which boils at 118°C due to O-H hydrogen bonding). ' +
+      'However, ethers CAN still accept a hydrogen bond FROM water (their oxygen lone pairs ' +
+      'are available), giving them reasonable water solubility for short chains — similar ' +
+      'logic to the one-directional hydrogen bonding discussed for fluoromethane earlier. ' +
+      'Ethers are chemically quite UNREACTIVE (no O-H to remove, C-O bonds are strong and ' +
+      'resistant to most reagents) — this INERTNESS is exactly why ethers (like THF, ' +
+      'diethyl ether) are the preferred SOLVENTS for reactive species like Grignard ' +
+      'reagents (covered earlier), which would react destructively with almost any other ' +
+      'functional group present.',
+    targetedMisconceptions: [`${ETHER}:MC1`],
+    source: `${ETHER_SRC} — ether structure, absence of self-hydrogen-bonding, boiling point comparison to alcohols, use as inert solvents`,
+  },
+  {
+    conceptId: ETHER,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Ethers and alcohols with the same molecular formula (functional group isomers, ' +
+      'covered earlier) should have similar physical properties, since they contain the ' +
+      'same atoms." FALSE — despite sharing the identical molecular formula (like ' +
+      'C₄H₁₀O for both diethyl ether and butanol), their boiling points differ dramatically ' +
+      '(35°C vs. 118°C) because alcohols can hydrogen-bond with EACH OTHER (O-H to O-H, ' +
+      'strong intermolecular attraction) while ethers cannot (no O-H bond present at all) — ' +
+      'same atoms, but genuinely different intermolecular force capabilities lead to ' +
+      'genuinely different physical properties. This connects directly to the earlier ' +
+      'lesson that functional group isomers can have very different properties despite ' +
+      'sharing a formula. Second trap: "Since ethers are chemically unreactive, they make ' +
+      'poor solvents — you want a REACTIVE solvent to help reactions along." BACKWARDS — ' +
+      'ether\'s very UNREACTIVITY is precisely its most valuable property as a solvent for ' +
+      'sensitive reactions: a solvent that reacted with dissolved reagents (like Grignard ' +
+      'reagents, which react violently with almost anything containing an acidic proton or ' +
+      'electrophilic carbon) would destroy the intended reaction before it could occur — you ' +
+      'WANT an inert "spectator" solvent for such reactive species.',
+    targetedMisconceptions: [`${ETHER}:MC1`, `${ETHER}:MC2`],
+    source: `${ETHER_SRC} — misconception: functional group isomers share similar physical properties; unreactive solvents are undesirable`,
+  },
+]
+
+const ETHER_PROBES: SeedProbe[] = [
+  {
+    conceptId: ETHER,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Diethyl ether and butanol are functional group isomers (same molecular formula C4H10O), yet diethyl ether boils at 35°C while butanol boils at 118°C. What explains this large difference?',
+    choices: [
+      { text: 'Butanol\'s -OH group allows hydrogen bonding between its own molecules (O-H to O-H), a strong intermolecular force that diethyl ether lacks entirely (no O-H bond present), despite both compounds having identical molecular formulas', isCorrect: true },
+      { text: 'This must be an error — compounds with the exact same molecular formula should always have very similar boiling points, regardless of functional group arrangement', isCorrect: false, misconceptionId: `${ETHER}:MC1` },
+    ],
+    correctValue: 'Absence of self-hydrogen-bonding in ethers causes the large boiling point difference',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ETHER}:MC1`],
+    source: `${ETHER_SRC} — distractor targets assuming identical molecular formula guarantees similar physical properties`,
+  },
+  {
+    conceptId: ETHER,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why are ethers like diethyl ether and THF preferred solvents for highly reactive species like Grignard reagents, rather than a more chemically active solvent?',
+    choices: [
+      { text: 'Ether\'s chemical unreactivity (strong, resistant C-O bonds, no easily-removed acidic protons) is exactly what makes it valuable — a reactive solvent would destroy the dissolved reactive species before the intended reaction could occur', isCorrect: true },
+      { text: 'Unreactive solvents are generally undesirable; ethers are used despite this drawback only because of their low cost and availability', isCorrect: false, misconceptionId: `${ETHER}:MC2` },
+    ],
+    correctValue: 'Unreactivity is the desired property, protecting the reactive solute',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ETHER}:MC2`],
+    source: `${ETHER_SRC} — misconception: chemical unreactivity is a drawback rather than the desired solvent property here`,
+  },
+]
+
+// ─── chem.alc.diols ──────────────────────────────────────────────────────────
+const DIOL = 'chem.alc.diols'
+const DIOL_SRC = 'docs/chemistry/kg/graph.json — chem.alc.diols'
+
+const DIOL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DIOL,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Diols (two -OH groups) and polyols (three or more -OH groups) show AMPLIFIED ' +
+      'versions of the hydrogen-bonding effects covered for simple alcohols — MORE -OH ' +
+      'groups means MORE hydrogen bonds possible per molecule, giving progressively HIGHER ' +
+      'boiling points, higher viscosity (the molecules resist flowing past each other more, ' +
+      'due to extensive H-bond networking), and greater water solubility. Ethylene glycol ' +
+      '(2 -OH groups, used in antifreeze) boils at 197°C — notably higher than ethanol\'s ' +
+      '78°C, despite fairly similar molecular size, precisely because TWO -OH groups per ' +
+      'molecule create a much denser hydrogen-bonding network. Glycerol (3 -OH groups) is ' +
+      'even MORE viscous and higher-boiling still (290°C), and its extensive H-bonding also ' +
+      'gives it a notably LOW freezing point when mixed with water — this is EXACTLY why ' +
+      'ethylene glycol/glycerol-based antifreeze works: adding a diol/polyol to water\'s ' +
+      'hydrogen-bond network disrupts ice crystal formation (connecting to the colligative ' +
+      'freezing-point-depression concept, and the specific hydrogen-bonding disruption ' +
+      'mechanism relevant here), preventing the coolant from freezing solid at temperatures ' +
+      'where pure water would.',
+    targetedMisconceptions: [`${DIOL}:MC1`],
+    source: `${DIOL_SRC} — diol/polyol hydrogen bonding amplification, ethylene glycol/glycerol properties, antifreeze mechanism`,
+  },
+  {
+    conceptId: DIOL,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Ethylene glycol\'s higher boiling point compared to ethanol is mainly because ' +
+      'it has a slightly larger molecular mass, similar to how larger alkanes have higher ' +
+      'boiling points from more London dispersion forces." FALSE as the primary explanation ' +
+      '— while there IS some mass difference, the DOMINANT factor is the SECOND -OH group ' +
+      'enabling substantially MORE hydrogen bonding per molecule (roughly double the ' +
+      'H-bond-donating/accepting capacity of a single -OH), not simply a modest mass/size ' +
+      'increase. If mass alone explained it, a similarly-sized nonpolar hydrocarbon would ' +
+      'show a comparably large boiling point jump, which it doesn\'t — the specific chemistry ' +
+      'of ADDITIONAL hydrogen-bonding sites is the key driver, not generic size effects. ' +
+      'Second trap: "Antifreeze (ethylene glycol) works by chemically reacting with water to ' +
+      'form a different, non-freezing substance." FALSE — antifreeze works through the same ' +
+      'PHYSICAL colligative mechanism (freezing point depression) covered for any solute: ' +
+      'ethylene glycol molecules physically disrupt water\'s ability to form the ordered ' +
+      'hydrogen-bonded ice lattice, lowering the temperature at which freezing occurs — no ' +
+      'new chemical substance forms; it remains a genuine solute-in-solvent mixture.',
+    targetedMisconceptions: [`${DIOL}:MC1`, `${DIOL}:MC2`],
+    source: `${DIOL_SRC} — misconception: diol boiling point elevation is mainly a mass effect; antifreeze works via chemical reaction not colligative physics`,
+  },
+]
+
+const DIOL_PROBES: SeedProbe[] = [
+  {
+    conceptId: DIOL,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Ethylene glycol (2 -OH groups) boils at 197°C, far higher than ethanol\'s 78°C, despite the two molecules being fairly similar in size. What is the PRIMARY explanation?',
+    choices: [
+      { text: 'The second -OH group roughly doubles the hydrogen-bond-forming capacity per molecule, creating a much denser hydrogen-bonding network than a single -OH provides — this is the dominant effect, not the modest mass difference alone', isCorrect: true },
+      { text: 'Ethylene glycol is simply heavier than ethanol, and this mass difference alone accounts for the large boiling point gap, similar to comparing two alkanes of different chain length', isCorrect: false, misconceptionId: `${DIOL}:MC1` },
+    ],
+    correctValue: 'Doubled hydrogen-bonding capacity is the primary driver, not mass',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DIOL}:MC1`],
+    source: `${DIOL_SRC} — distractor targets attributing boiling point differences primarily to molecular mass rather than hydrogen-bonding capacity`,
+  },
+  {
+    conceptId: DIOL,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does ethylene glycol antifreeze work by chemically reacting with water to form a new, non-freezing chemical substance?',
+    choices: [
+      { text: 'No — antifreeze works through the physical colligative mechanism of freezing point depression; ethylene glycol molecules physically disrupt water\'s ability to form its ordered hydrogen-bonded ice lattice, without any new chemical substance forming', isCorrect: true },
+      { text: 'Yes — ethylene glycol chemically reacts with water molecules to produce a genuinely different compound that has a lower freezing point', isCorrect: false, misconceptionId: `${DIOL}:MC2` },
+    ],
+    correctValue: 'No — physical colligative freezing point depression, not a chemical reaction',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DIOL}:MC2`],
+    source: `${DIOL_SRC} — misconception: antifreeze functions via chemical reaction rather than physical colligative effect`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -12408,6 +12585,8 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...ACTIVITY_EXPLANATIONS,
   ...FIRSTROW_EXPLANATIONS,
   ...LANTH_EXPLANATIONS,
+  ...ETHER_EXPLANATIONS,
+  ...DIOL_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -12556,4 +12735,6 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...ACTIVITY_PROBES,
   ...FIRSTROW_PROBES,
   ...LANTH_PROBES,
+  ...ETHER_PROBES,
+  ...DIOL_PROBES,
 ]
