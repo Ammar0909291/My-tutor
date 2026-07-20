@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.top.tychonoff-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.top.tychonoff",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1cffb433ddc3983c97ed57a6c0cca7f80011f8cbd70f88daa748c9c4ba774ac5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.top.tychonoff.md": "sha256:37c5e234255c9e46f69b66225e1869723f093b246545ae23b7106b9cd656f321"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.top.tychonoff",
+    "name": "Tychonoff's Theorem",
+    "difficultyRaw": "research",
+    "bloom": "understand",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.top.compactness",
+      "math.found.set-theory-axiomatic"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.top.tychonoff-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.top.tychonoff (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.top.tychonoff.md": "sha256:37c5e234255c9e46f69b66225e1869723f093b246545ae23b7106b9cd656f321"
+      },
+      "contentHash": "sha256:5d6e7feba109553699bed4906841d10c0815ed76c0909959ad827d1ce46fff81",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.top.tychonoff.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.tychonoff.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.tychonoff"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.tychonoff\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.tychonoff.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.tychonoff.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.tychonoff"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.tychonoff\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.tychonoff.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.tychonoff.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.tychonoff"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.tychonoff\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.tychonoff.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.tychonoff.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.tychonoff"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.tychonoff\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.top.tychonoff/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.top.tychonoff",
+      "title": "Learning Objectives",
+      "content": "- LO1 (cross-link objective): Recognize this theorem as the genuine EXTENSION of `math.top.product-space`'s own finite-product construction (and `math.top.compactness`'s own compact-space theory) from FINITE products to ARBITRARY — including INFINITE — products, and correctly identify why the finite case is comparatively easy (provable by induction from the 2-factor case) while the infinite case requires a genuinely different, non-inductive argument.\n- LO2 (cross-link objective): State the precise equivalence with the Axiom of Choice — Tychonoff's theorem is EQUIVALENT to `math.found.set-theory-axiomatic`'s own Axiom of Choice (not merely a consequence of it, and not provable without some form of choice) — and correctly explain, at a conceptual level, why choosing a point from EACH factor space of an INFINITE product to build a convergent-subnet witness genuinely requires making infinitely many simultaneous, uncoordinated choices.\n- LO3: Recognize Tychonoff's theorem as the key technical tool underlying the Banach-Alaoglu theorem (stated, not proven, as a preview) — correctly explaining, at a high level, why compactness of an infinite-dimensional object (the closed unit ball in a dual space, in a suitable weak-* topology) is a genuinely surprising and useful fact that would fail without a result as powerful as Tychonoff's theorem.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.tychonoff.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.top.tychonoff/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.top.tychonoff",
+      "title": "INFINITE-PRODUCT-CASE-ASSUMED-EXTENDED-BY-INDUCTION",
+      "content": "| MC-1 | INFINITE-PRODUCT-CASE-ASSUMED-EXTENDED-BY-INDUCTION | Believing the infinite-product case follows from the finite case just by \"continuing the induction indefinitely,\" missing that induction structurally cannot handle infinitely many steps | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.tychonoff.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.top.tychonoff/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.top.tychonoff",
+      "title": "CHOICE-ASSUMED-MERELY-CONVENIENT-NOT-EQUIVALENT",
+      "content": "| MC-2 | CHOICE-ASSUMED-MERELY-CONVENIENT-NOT-EQUIVALENT | Believing the Axiom of Choice is merely a convenient, replaceable tool in one proof of Tychonoff's theorem, missing the genuine logical equivalence | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.tychonoff.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.top.tychonoff/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.top.tychonoff",
+      "title": "TYCHONOFF-ASSUMED-PURELY-ABSTRACT-WITH-NO-APPLICATION",
+      "content": "| MC-3 | TYCHONOFF-ASSUMED-PURELY-ABSTRACT-WITH-NO-APPLICATION | Believing Tychonoff's theorem is a purely abstract generalization with no concrete application, missing its specific, load-bearing role in results like Banach-Alaoglu | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.tychonoff.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.top.tychonoff/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.tychonoff",
+      "title": "Finite Products Extend by Induction; Infinite Products Genuinely Cannot (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Finite Products Extend by Induction; Infinite Products Genuinely Cannot (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.tychonoff.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.top.tychonoff/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.tychonoff",
+      "title": "The Axiom of Choice Is Exactly Where Infinitely Many Simultaneous Selections Are Needed (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Axiom of Choice Is Exactly Where Infinitely Many Simultaneous Selections Are Needed (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.tychonoff.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.top.tychonoff/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.tychonoff",
+      "title": "Tychonoff's Theorem Is the Specific Engine Behind Banach-Alaoglu's Infinite-Dimensional Compactness (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Tychonoff's Theorem Is the Specific Engine Behind Banach-Alaoglu's Infinite-Dimensional Compactness (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.tychonoff.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.top.tychonoff/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.tychonoff",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.tychonoff.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.top.tychonoff/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.top.tychonoff",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Explain why the compactness of a product of 5 compact spaces can be established by finite induction, while a product of infinitely many compact spaces cannot be handled the same way.\n  2. State the precise logical relationship between Tychonoff's theorem and the Axiom of Choice (implication in one direction only, or genuine equivalence).\n  3. For the product $\\prod_{n=1}^\\infty[0,1]$ (the \"Hilbert cube,\" countably many copies of $[0,1]$), state what Tychonoff's theorem guarantees about this space.\n  4. Explain, in your own words, the role Tychonoff's theorem plays in the Banach-Alaoglu theorem's proof strategy.\n- **P76 (Transfer Probe, mode = independence — no cross-link target listed in the KG for this concept)**: \"A functional analyst is studying weak-* convergence of a sequence of linear functionals on an infinite-dimensional Banach space, and wants to know whether every bounded sequence of such functionals has a weak-*-convergent subsequence (a genuinely useful compactness-type guarantee). (a) Using this lesson's Banach-Alaoglu preview, explain why this question is fundamentally a compactness question about the dual space's closed unit ball in the weak-* topology. (b) Explain, citing Tychonoff's theorem directly, why this compactness guarantee is available EVEN THOUGH the space involved is infinite-dimensional, where naive intuition (compactness usually failing for infinite-dimensional unit balls in the norm topology) might suggest otherwise. (c) Explain why this guarantee genuinely depends on invoking a result as strong as Tychonoff's theorem (equivalent to full Choice), rather than some weaker, more 'constructive' compactness principle.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.tychonoff.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.top.tychonoff/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.top.tychonoff",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.top.compactness` (every open cover has a finite subcover; closed subsets of compact spaces are compact; continuous images of compact spaces are compact) and `math.found.set-theory-axiomatic` (ZFC, including the Axiom of Choice).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.tychonoff.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.top.tychonoff/reference/1",
+      "kind": "reference",
+      "conceptId": "math.top.tychonoff",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.top.compactness` (the general compactness definition and closed-subset/continuous-image facts this concept's proof structure and Banach-Alaoglu preview both rely on) and `math.found.set-theory-axiomatic` (ZFC and the Axiom of Choice, this concept's own logical equivalence partner).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists none for this concept. $P76_{mode}=$ **independence** (no cross-link target to check).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.tychonoff.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

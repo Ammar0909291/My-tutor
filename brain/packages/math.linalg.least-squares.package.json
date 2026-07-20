@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.least-squares-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.least-squares",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2c27bab55638b5e5b8fa2ecac41e5110a2053be18850901e088d1820ec9cd7c5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.least-squares.md": "sha256:feab3812cc983dbe06d356725494d6ae652e07e791cb5df671b95ee6a749403a"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.least-squares",
+    "name": "Least Squares",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.linalg.projection",
+      "math.linalg.matrix-transpose"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.least-squares-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.least-squares (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.least-squares.md": "sha256:feab3812cc983dbe06d356725494d6ae652e07e791cb5df671b95ee6a749403a"
+      },
+      "contentHash": "sha256:752426bcd33068d32bb696435472ccd26c73ba167ddb8efc389422c15c759674",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.least-squares.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.least-squares.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.least-squares"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.least-squares\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.least-squares.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.least-squares.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.least-squares"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.least-squares\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.least-squares.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.least-squares.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.least-squares"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.least-squares\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.least-squares.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.least-squares.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.least-squares"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.least-squares\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.least-squares/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.least-squares",
+      "title": "Learning Objectives",
+      "content": "- LO1 (cross-link objective): Recognize that minimizing $\\|Ax-b\\|^2$ over all $x$ is EXACTLY `math.linalg.projection`'s own problem of finding the closest point in the subspace $W=\\operatorname{col}(A)$ (the column space of $A$) to the vector $b$ — the minimizing $Ax$ is literally $\\operatorname{proj}_W(b)$, and the least-squares SOLUTION $\\hat x$ is whatever coefficient vector produces that specific projection.\n- LO2: Derive the normal equations $A^TA\\hat x=A^Tb$ directly from `math.linalg.projection`'s own orthogonality characterization ($b-\\operatorname{proj}_W(b)\\perp W$) — the residual $b-A\\hat x$ must be ORTHOGONAL to every column of $A$ (since those columns span $W$), which translates, using `math.linalg.matrix-transpose`'s own $(AB)^T=B^TA^T$ identity, into the single matrix equation $A^T(b-A\\hat x)=0$, i.e. $A^TA\\hat x=A^Tb$ — and correctly set up and solve the normal equations for a specific inconsistent system.\n- LO3: Apply least squares to fit a line (or other simple model) to data points that do NOT lie exactly on any line — correctly setting up the matrix $A$ and vector $b$ from a data-fitting scenario, solving the normal equations, and interpreting the resulting $\\hat x$ as the best-fit coefficients minimizing the total squared vertical deviation.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.least-squares.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.linalg.least-squares/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.least-squares",
+      "title": "LEAST-SQUARES-ASSUMED-UNRELATED-NEW-PROBLEM",
+      "content": "| MC-1 | LEAST-SQUARES-ASSUMED-UNRELATED-NEW-PROBLEM | Believing the least-squares problem is a genuinely new kind of problem, missing that it is literally `math.linalg.projection`'s own closest-point-in-a-subspace problem applied to $b$ and $\\operatorname{col}(A)$ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.least-squares.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.least-squares/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.least-squares",
+      "title": "NORMAL-EQUATIONS-ASSUMED-UNMOTIVATED-FORMULA",
+      "content": "| MC-2 | NORMAL-EQUATIONS-ASSUMED-UNMOTIVATED-FORMULA | Believing the normal equations $A^TA\\hat x=A^Tb$ are an independent formula to memorize, missing that they follow directly from `math.linalg.projection`'s own orthogonality characterization | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.least-squares.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.linalg.least-squares/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.least-squares",
+      "title": "LEAST-SQUARES-LINE-ASSUMED-TO-PASS-THROUGH-ALL-POINTS",
+      "content": "| MC-3 | LEAST-SQUARES-LINE-ASSUMED-TO-PASS-THROUGH-ALL-POINTS | Believing the least-squares best-fit line passes through every data point exactly, missing that it minimizes total squared deviation while generally missing every point | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.least-squares.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.linalg.least-squares/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.least-squares",
+      "title": "Least Squares IS `math.linalg.projection`'s Own Closest-Point Problem (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Least Squares IS `math.linalg.projection`'s Own Closest-Point Problem (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.least-squares.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.linalg.least-squares/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.least-squares",
+      "title": "The Normal Equations Come Directly From the Orthogonality Condition, Not From Nowhere (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Normal Equations Come Directly From the Orthogonality Condition, Not From Nowhere (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.least-squares.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.linalg.least-squares/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.least-squares",
+      "title": "Least Squares Fits the BEST Line Through Data That Doesn't Lie on Any Exact Line (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Least Squares Fits the BEST Line Through Data That Doesn't Lie on Any Exact Line (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.least-squares.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.linalg.least-squares/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.least-squares",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.least-squares.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.linalg.least-squares/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.least-squares",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $A=\\begin{pmatrix}1&1\\\\1&2\\\\1&3\\end{pmatrix}$, $b=\\begin{pmatrix}2\\\\3\\\\5\\end{pmatrix}$, identify the column space $W=\\operatorname{col}(A)$ and explain why $b\\notin W$ (verify inconsistency directly).\n  2. Compute $A^TA$ and $A^Tb$ for the system in problem 1, and solve the normal equations for $\\hat x$.\n  3. Verify your answer to problem 2 by checking the residual $b-A\\hat x$ is orthogonal to both columns of $A$.\n  4. Fit a best-fit line $y=c_0+c_1x$ to the data points $(0,0),(1,1),(2,3)$, and state the resulting line equation.\n- **P76 (Transfer Probe, mode = independence — `math.stats.linear-regression` not yet authored, pending future revision)**: \"An engineer has collected 5 noisy sensor measurements that should, in theory, satisfy a known LINEAR relationship $y=mx+c$, but due to measurement noise, no single line passes through all 5 points exactly. (a) Explain why setting up this problem as $Ax=b$ (with $A$'s columns encoding the model structure and $b$ the observed measurements) leads to an inconsistent system in general. (b) Using this lesson's normal-equations method, explain how the engineer obtains a single, well-defined best-fit line despite the inconsistency, rather than having to arbitrarily pick 2 of the 5 points to fit exactly. (c) Explain, citing `math.linalg.projection`'s own orthogonality characterization, why the resulting best-fit line is provably the BEST possible choice (minimizing total squared deviation), not merely a reasonable-looking compromise.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.least-squares.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.linalg.least-squares/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.least-squares",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.projection` (the orthogonal projection $\\operatorname{proj}_W(v)$ of a vector onto a subspace $W$, characterized by $v-\\operatorname{proj}_W(v)\\perp W$) and `math.linalg.matrix-transpose` (the transpose $A^T$ and the identity $(AB)^T=B^TA^T$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.least-squares.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.linalg.least-squares/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.least-squares",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.projection` (the orthogonal projection and its orthogonality characterization this concept's entire derivation is built on) and `math.linalg.matrix-transpose` (the transpose and $(AB)^T=B^TA^T$ identity used to compactly derive the normal equations).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.stats.linear-regression`, checked via `ls docs/curriculum/blueprints/` — confirmed NOT YET authored. Per the established P76_mode rule, this blueprint uses **independence** mode. A future revision, once that concept is authored, may add a genuine cross-link probe connecting this concept's normal-equations machinery directly to that concept's own statistical interpretation of regression coefficients.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.least-squares.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
