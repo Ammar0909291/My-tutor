@@ -8972,6 +8972,266 @@ const GALV_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.redox.disproportionation ───────────────────────────────────────────
+const DISPROP = 'chem.redox.disproportionation'
+const DISPROP_SRC = 'docs/chemistry/kg/graph.json — chem.redox.disproportionation'
+
+const DISPROP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DISPROP,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'In a disproportionation reaction, the SAME element (in the SAME starting oxidation ' +
+      'state) simultaneously gets BOTH oxidized AND reduced — one atom of that element ' +
+      'increases in oxidation state while another identical atom decreases, in the same ' +
+      'reaction. Classic example: 2Cu⁺ → Cu²⁺ + Cu (copper(I) is unstable, disproportionates ' +
+      'into copper(II) and copper metal — one Cu⁺ is oxidized to Cu²⁺, another Cu⁺ is ' +
+      'reduced to Cu⁰). Another: 3Cl₂ + 6OH⁻ → 5Cl⁻ + ClO₃⁻ + 3H₂O (in hot concentrated ' +
+      'base, chlorine — oxidation state 0 — disproportionates into chloride, −1, and ' +
+      'chlorate, +5). This ONLY happens when an element has an INTERMEDIATE oxidation ' +
+      'state that is thermodynamically LESS STABLE than both a higher and lower oxidation ' +
+      'state simultaneously available to it — the element essentially "prefers" to split ' +
+      'into two more stable extremes rather than stay in the unstable middle. The REVERSE ' +
+      'process (two different oxidation states of the SAME element combining into one ' +
+      'intermediate state) is called COMPROPORTIONATION.',
+    targetedMisconceptions: [`${DISPROP}:MC1`],
+    source: `${DISPROP_SRC} — disproportionation mechanism, intermediate oxidation state instability, comproportionation`,
+  },
+  {
+    conceptId: DISPROP,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Disproportionation requires two DIFFERENT elements reacting together, like ' +
+      'any normal redox reaction." FALSE — disproportionation is specifically defined by ' +
+      'involving the SAME element in the SAME starting oxidation state splitting into TWO ' +
+      'different final oxidation states. This is what makes it a special, distinct ' +
+      'category, not just "a redox reaction" — you need to verify the oxidizing and ' +
+      'reducing species trace back to the SAME element/oxidation state before applying ' +
+      'this label. Second trap: "Any element can disproportionate under any conditions, ' +
+      'since disproportionation is a general universal reaction type." FALSE — ' +
+      'disproportionation only occurs when an element\'s INTERMEDIATE oxidation state is ' +
+      'genuinely thermodynamically unstable relative to splitting into higher/lower states ' +
+      '— this depends on the SPECIFIC element and its available oxidation states\' relative ' +
+      'stabilities (related to standard reduction potentials), and doesn\'t happen for ' +
+      'every element in every intermediate oxidation state.',
+    targetedMisconceptions: [`${DISPROP}:MC1`, `${DISPROP}:MC2`],
+    source: `${DISPROP_SRC} — misconception: disproportionation requires different elements; happens universally regardless of stability`,
+  },
+]
+
+const DISPROP_PROBES: SeedProbe[] = [
+  {
+    conceptId: DISPROP,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In the reaction 2Cu⁺ → Cu²⁺ + Cu, is this classified as a disproportionation reaction?',
+    choices: [
+      { text: 'Yes — the SAME element (copper) starting in the SAME oxidation state (+1) splits into two different final oxidation states (+2 and 0), which is the defining feature of disproportionation', isCorrect: true },
+      { text: 'No — disproportionation requires two different elements to be involved, and this reaction only involves copper', isCorrect: false, misconceptionId: `${DISPROP}:MC1` },
+    ],
+    correctValue: 'Yes — classic disproportionation of Cu(I)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DISPROP}:MC1`],
+    source: `${DISPROP_SRC} — distractor targets assuming disproportionation requires multiple different elements`,
+  },
+  {
+    conceptId: DISPROP,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does every element in an intermediate oxidation state automatically undergo disproportionation, given enough time?',
+    choices: [
+      { text: 'No — disproportionation only occurs when the specific intermediate oxidation state is genuinely thermodynamically unstable relative to the higher/lower states, which depends on the particular element involved, not a universal rule', isCorrect: true },
+      { text: 'Yes — disproportionation is a universal tendency that all elements in intermediate oxidation states will eventually undergo', isCorrect: false, misconceptionId: `${DISPROP}:MC2` },
+    ],
+    correctValue: 'No — depends on specific element/oxidation-state stability',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DISPROP}:MC2`],
+    source: `${DISPROP_SRC} — misconception: disproportionation is a universal tendency rather than element-specific`,
+  },
+]
+
+// ─── chem.redox.titrations ───────────────────────────────────────────────────
+const REDOXTITR = 'chem.redox.titrations'
+const REDOXTITR_SRC = 'docs/chemistry/kg/graph.json — chem.redox.titrations'
+
+const REDOXTITR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: REDOXTITR,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Redox titrations determine unknown concentrations using a redox reaction instead ' +
+      'of an acid-base neutralization (building on the general titration concept covered ' +
+      'earlier). The key difference: instead of tracking pH, you track ELECTRON TRANSFER ' +
+      'completeness. Common redox titrants: POTASSIUM PERMANGANATE (KMnO₄) — famously ' +
+      'SELF-INDICATING, since MnO₄⁻ is intensely purple but Mn²⁺ (its reduced product in ' +
+      'acidic conditions) is nearly colorless, so the endpoint is signaled by the FIRST ' +
+      'persistent faint pink color (excess unreacted MnO₄⁻ appearing once all the analyte ' +
+      'is consumed) — no separate indicator needed. IODOMETRIC titrations use sodium ' +
+      'thiosulfate (Na₂S₂O₃) to titrate I₂ (2S₂O₃²⁻ + I₂ → S₄O₆²⁻ + 2I⁻), typically WITH a ' +
+      'starch indicator (forms an intense blue-black complex with I₂, disappearing sharply ' +
+      'at the endpoint when the last trace of I₂ is consumed — starch is added near the ' +
+      'END of the titration, not the start, for a sharper, more sensitive endpoint). ' +
+      'Stoichiometric calculations require BALANCING the redox equation first (via the ' +
+      'ion-electron method covered earlier) to get the correct MOLE RATIO between titrant ' +
+      'and analyte.',
+    targetedMisconceptions: [`${REDOXTITR}:MC1`],
+    source: `${REDOXTITR_SRC} — KMnO4 self-indicating titrations, iodometric titrations with starch, stoichiometry`,
+  },
+  {
+    conceptId: REDOXTITR,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Since KMnO₄ titrations are self-indicating, you can just assume a 1:1 mole ' +
+      'ratio between titrant and analyte, like a simple neutralization." FALSE — the mole ' +
+      'ratio between MnO₄⁻ and the analyte depends entirely on the SPECIFIC balanced redox ' +
+      'equation (which depends on how many electrons each species transfers) — this is ' +
+      'often NOT 1:1. For example, MnO₄⁻ reacting with Fe²⁺ (MnO₄⁻ + 5Fe²⁺ + 8H⁺ → Mn²⁺ + ' +
+      '5Fe³⁺ + 4H₂O) has a 1:5 ratio, not 1:1, because MnO₄⁻ (Mn: +7→+2, gains 5 electrons) ' +
+      'and Fe²⁺ (Fe: +2→+3, loses 1 electron) require 5 Fe²⁺ ions to supply enough ' +
+      'electrons for 1 MnO₄⁻ ion. Always derive the mole ratio from the properly BALANCED ' +
+      'equation, never assume it. Second trap: "Starch indicator should be added at the ' +
+      'very BEGINNING of an iodometric titration, just like phenolphthalein in an acid-base ' +
+      'titration." FALSE — starch is deliberately added NEAR THE END (when the solution has ' +
+      'faded to a pale straw-yellow, signaling I₂ is nearly consumed) because the ' +
+      'starch-iodine complex can be slow to reversibly break down and may give a less sharp, ' +
+      'less accurate endpoint if it forms too early in the titration with high I₂ ' +
+      'concentration present.',
+    targetedMisconceptions: [`${REDOXTITR}:MC1`, `${REDOXTITR}:MC2`],
+    source: `${REDOXTITR_SRC} — misconception: assuming 1:1 mole ratio without balancing; adding starch indicator too early`,
+  },
+]
+
+const REDOXTITR_PROBES: SeedProbe[] = [
+  {
+    conceptId: REDOXTITR,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In the balanced equation MnO₄⁻ + 5Fe²⁺ + 8H⁺ → Mn²⁺ + 5Fe³⁺ + 4H₂O, what is the mole ratio of MnO₄⁻ to Fe²⁺ needed for the titration calculation?',
+    choices: [
+      { text: '1:5 — MnO₄⁻ gains 5 electrons (Mn: +7→+2) while each Fe²⁺ loses only 1 electron (Fe: +2→+3), so 5 Fe²⁺ ions are needed to balance the electron transfer for each MnO₄⁻', isCorrect: true },
+      { text: '1:1 — redox titrations, like acid-base titrations, always assume a simple 1:1 mole ratio between titrant and analyte', isCorrect: false, misconceptionId: `${REDOXTITR}:MC1` },
+    ],
+    correctValue: '1:5',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${REDOXTITR}:MC1`],
+    source: `${REDOXTITR_SRC} — distractor targets assuming a universal 1:1 titrant-analyte ratio`,
+  },
+  {
+    conceptId: REDOXTITR,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In an iodometric titration with sodium thiosulfate, should starch indicator be added at the very START of the titration, like phenolphthalein in an acid-base titration?',
+    choices: [
+      { text: 'No — starch should be added NEAR THE END (when the solution has faded to pale straw-yellow), since adding it too early with high I₂ concentration can give a less sharp, less accurate endpoint due to the slow-to-reverse starch-iodine complex', isCorrect: true },
+      { text: 'Yes — indicators should always be added at the start of any titration for consistent results', isCorrect: false, misconceptionId: `${REDOXTITR}:MC2` },
+    ],
+    correctValue: 'No — starch is added near the end for a sharper endpoint',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${REDOXTITR}:MC2`],
+    source: `${REDOXTITR_SRC} — misconception: all titration indicators should be added at the start regardless of type`,
+  },
+]
+
+// ─── chem.anal.volumetric ────────────────────────────────────────────────────
+const VOLUM = 'chem.anal.volumetric'
+const VOLUM_SRC = 'docs/chemistry/kg/graph.json — chem.anal.volumetric'
+
+const VOLUM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: VOLUM,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Volumetric analysis is the broader category encompassing all TITRATION-based ' +
+      'quantitative techniques (acid-base, redox, complexometric, precipitation) — ' +
+      'determining an unknown quantity by measuring the VOLUME of a reagent of KNOWN ' +
+      'concentration needed to complete a reaction. Precision depends on careful technique ' +
+      'and equipment: a BURETTE (delivers precise, variable volumes, readable to ±0.05 mL ' +
+      'or better) dispenses the titrant; a PIPETTE (delivers one FIXED, highly precise ' +
+      'volume) measures the analyte into the flask; a VOLUMETRIC FLASK (one precise total ' +
+      'volume mark) prepares standard solutions. A PRIMARY STANDARD is a substance pure ' +
+      'and stable enough to weigh directly and dissolve to make a solution of KNOWN, ' +
+      'precisely calculated concentration WITHOUT needing separate standardization (must ' +
+      'be: high purity, stable in air, non-hygroscopic, high molar mass for weighing ' +
+      'precision, and react in a clean, known stoichiometry) — like potassium hydrogen ' +
+      'phthalate (KHP) for acid-base work. A SECONDARY STANDARD (like NaOH, which absorbs ' +
+      'CO₂/moisture from air and isn\'t pure enough to weigh directly) must itself be ' +
+      'STANDARDIZED first by titrating it against a primary standard, before it can ' +
+      'reliably be used to titrate other unknowns.',
+    targetedMisconceptions: [`${VOLUM}:MC1`],
+    source: `${VOLUM_SRC} — burette/pipette/volumetric flask precision, primary vs secondary standards`,
+  },
+  {
+    conceptId: VOLUM,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "You can dissolve a precisely weighed amount of NaOH in water and immediately ' +
+      'trust its concentration as accurately known, just like any other soluble solid." ' +
+      'FALSE — NaOH is HYGROSCOPIC (absorbs moisture from air) and reacts with atmospheric ' +
+      'CO₂ (forming Na₂CO₃ contamination), meaning a weighed sample of solid NaOH is NEVER ' +
+      'quite as pure as its label suggests by the time you weigh it — its true purity is ' +
+      'uncertain. This makes NaOH a SECONDARY standard requiring its own standardization ' +
+      '(titrating it against a reliable PRIMARY standard like KHP) before it can be ' +
+      'trusted for further titrations — you cannot simply calculate its concentration ' +
+      'from mass and volume alone. Second trap: "A burette and a pipette serve essentially ' +
+      'the same measuring function, interchangeably." FALSE — a pipette delivers ONE fixed, ' +
+      'highly precise volume (used to measure a known analyte amount into the flask), while ' +
+      'a burette delivers VARIABLE, precisely-readable volumes (used to titrate — add the ' +
+      'reagent gradually until the endpoint, tracking exactly how much was needed). Using ' +
+      'one where the other is needed would defeat the purpose of the specific measurement.',
+    targetedMisconceptions: [`${VOLUM}:MC1`, `${VOLUM}:MC2`],
+    source: `${VOLUM_SRC} — misconception: NaOH can be weighed as a primary standard; burette and pipette are interchangeable`,
+  },
+]
+
+const VOLUM_PROBES: SeedProbe[] = [
+  {
+    conceptId: VOLUM,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can you weigh out solid NaOH precisely and immediately calculate an accurately known solution concentration, treating it as a primary standard?',
+    choices: [
+      { text: 'No — NaOH is hygroscopic and reacts with atmospheric CO₂, making its true purity uncertain by the time it\'s weighed; it must be treated as a secondary standard and standardized against a reliable primary standard like KHP first', isCorrect: true },
+      { text: 'Yes — any pure solid can be weighed directly to calculate an exactly known solution concentration', isCorrect: false, misconceptionId: `${VOLUM}:MC1` },
+    ],
+    correctValue: 'No — NaOH requires standardization as a secondary standard',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VOLUM}:MC1`],
+    source: `${VOLUM_SRC} — distractor targets treating any weighable solid as an automatic primary standard`,
+  },
+  {
+    conceptId: VOLUM,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can a burette and a pipette be used interchangeably in a titration setup, since both are precision glassware for measuring liquid volumes?',
+    choices: [
+      { text: 'No — a pipette delivers one FIXED precise volume (for measuring the analyte), while a burette delivers VARIABLE, precisely-readable volumes (for gradually titrating the reagent until the endpoint) — they serve distinct, non-interchangeable roles', isCorrect: true },
+      { text: 'Yes — both deliver precise volumes of liquid and can be used for either measuring the analyte or titrating the reagent', isCorrect: false, misconceptionId: `${VOLUM}:MC2` },
+    ],
+    correctValue: 'No — distinct roles (fixed volume vs. variable/titrating volume)',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${VOLUM}:MC2`],
+    source: `${VOLUM_SRC} — misconception: burette and pipette are functionally interchangeable`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -9083,6 +9343,9 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...ORGSPEC_EXPLANATIONS,
   ...PURIF_EXPLANATIONS,
   ...GALV_EXPLANATIONS,
+  ...DISPROP_EXPLANATIONS,
+  ...REDOXTITR_EXPLANATIONS,
+  ...VOLUM_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -9194,4 +9457,7 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...ORGSPEC_PROBES,
   ...PURIF_PROBES,
   ...GALV_PROBES,
+  ...DISPROP_PROBES,
+  ...REDOXTITR_PROBES,
+  ...VOLUM_PROBES,
 ]
