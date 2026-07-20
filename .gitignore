@@ -53,3 +53,8 @@ system_state.json
 # Dynamic-visualization sandbox vendor bundles — copied from node_modules at
 # install/build time by scripts/copy-dynamic-visual-vendor.mjs, never hand-edited.
 public/vendor/dynamic-visuals/
+
+# Throwaway local runtime-verification harness (test user creation, chat-route
+# audit driver) used for a one-off P0 runtime audit against a local dev DB —
+# not part of the app, never meant to ship.
+scripts/_audit/
