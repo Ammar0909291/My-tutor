@@ -12079,6 +12079,187 @@ const ACTIVITY_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.dblock.first-row ───────────────────────────────────────────────────
+const FIRSTROW = 'chem.dblock.first-row'
+const FIRSTROW_SRC = 'docs/chemistry/kg/graph.json — chem.dblock.first-row'
+
+const FIRSTROW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FIRSTROW,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'The first-row transition metals (Sc through Zn, filling the 3d subshell) show ' +
+      'trends distinct from main-group elements, all rooted in d-orbital behavior covered ' +
+      'earlier. ATOMIC RADIUS stays UNUSUALLY CONSTANT across the row (unlike the sharp ' +
+      'decrease seen in s/p-block periods) — as protons increase, the added electrons go ' +
+      'into the INNER 3d subshell (not the outer 4s), so they shield the outer 4s electrons ' +
+      'from the increasing nuclear charge almost as effectively as the nuclear charge pulls ' +
+      'harder, roughly canceling out. MELTING POINTS generally rise then fall across the ' +
+      'row (peaking around Cr/V), correlating with the NUMBER OF UNPAIRED d-electrons ' +
+      'available for metallic bonding (more unpaired electrons = more bonding interactions ' +
+      '= stronger metallic lattice) — chromium\'s exceptionally high melting point traces to ' +
+      'its unusual [Ar]3d⁵4s¹ configuration (a HALF-FILLED d-subshell, extra stable per the ' +
+      'same "half-filled is special" logic covered in ionization energy trends, maximizing ' +
+      'unpaired electrons available for bonding). CATALYTIC activity (covered generally in ' +
+      'd-block properties) is particularly prominent here — Fe, Ni, and others catalyze ' +
+      'industrially vital processes (Haber process, hydrogenation) by cycling between ' +
+      'multiple accessible oxidation states.',
+    targetedMisconceptions: [`${FIRSTROW}:MC1`],
+    source: `${FIRSTROW_SRC} — first-row transition metal trends: near-constant radius, melting point peak, Cr anomaly`,
+  },
+  {
+    conceptId: FIRSTROW,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Atomic radius across the first-row transition metals should decrease sharply, ' +
+      'following the same steep trend seen across s/p-block periods, since protons are ' +
+      'increasing in the same way." FALSE — this is precisely where transition metals ' +
+      'BEHAVE DIFFERENTLY from main-group elements. Because the added electrons fill the ' +
+      'INNER 3d subshell (not the OUTER 4s valence shell that determines size), they ' +
+      'shield the outer electrons from the growing nuclear charge quite effectively — the ' +
+      'net effect on outer-electron attraction (and hence radius) is much SMALLER than in ' +
+      's/p-block periods, where added electrons go into the SAME outer shell being ' +
+      'measured. This is a genuine structural difference in HOW size-determining physics ' +
+      'plays out for d-block vs. s/p-block elements, not a minor exception. Second trap: ' +
+      '"Every transition metal should follow a smooth, uninterrupted trend in melting ' +
+      'point/properties across the row, with no anomalies." FALSE — chromium\'s unusual ' +
+      '[Ar]3d⁵4s¹ configuration (rather than the "expected" [Ar]3d⁴4s²) is a genuine, ' +
+      'well-documented ELECTRON CONFIGURATION EXCEPTION (driven by half-filled subshell ' +
+      'stability, same logic covered in electronic configuration earlier) that measurably ' +
+      'disrupts otherwise smooth periodic trends — these exceptions are real physics, not ' +
+      'errors to be smoothed over.',
+    targetedMisconceptions: [`${FIRSTROW}:MC1`, `${FIRSTROW}:MC2`],
+    source: `${FIRSTROW_SRC} — misconception: d-block radius should decrease as sharply as s/p-block; no configuration exceptions should exist`,
+  },
+]
+
+const FIRSTROW_PROBES: SeedProbe[] = [
+  {
+    conceptId: FIRSTROW,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Why does atomic radius stay unusually CONSTANT across the first-row transition metals (Sc to Zn), unlike the sharp decrease seen across a typical s/p-block period?',
+    choices: [
+      { text: 'Added electrons fill the INNER 3d subshell rather than the outer 4s valence shell, so they shield outer electrons from the increasing nuclear charge almost as effectively as the charge increases, roughly canceling the usual radius-shrinking effect', isCorrect: true },
+      { text: 'This is inconsistent with periodic trends — transition metal radii should decrease just as sharply as main-group element radii across a period', isCorrect: false, misconceptionId: `${FIRSTROW}:MC1` },
+    ],
+    correctValue: 'Inner-shell (3d) filling shields effectively, unlike outer-shell filling in s/p-blocks',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${FIRSTROW}:MC1`],
+    source: `${FIRSTROW_SRC} — distractor targets assuming d-block radius trends must mirror s/p-block trends`,
+  },
+  {
+    conceptId: FIRSTROW,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Chromium has electron configuration [Ar]3d5 4s1, not the "expected" [Ar]3d4 4s2 pattern. Is this an error, or a genuine documented exception?',
+    choices: [
+      { text: 'A genuine, well-documented exception — the half-filled 3d5 subshell provides extra stability (same principle as half-filled-subshell stability covered in ionization energy trends), making this configuration lower in energy than the "expected" pattern', isCorrect: true },
+      { text: 'This must be an error — every transition metal should follow the simple Aufbau filling pattern without exception', isCorrect: false, misconceptionId: `${FIRSTROW}:MC2` },
+    ],
+    correctValue: 'Genuine exception driven by half-filled subshell stability',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${FIRSTROW}:MC2`],
+    source: `${FIRSTROW_SRC} — misconception: chromium's configuration is an error rather than a genuine stability-driven exception`,
+  },
+]
+
+// ─── chem.dblock.lanthanides ─────────────────────────────────────────────────
+const LANTH = 'chem.dblock.lanthanides'
+const LANTH_SRC = 'docs/chemistry/kg/graph.json — chem.dblock.lanthanides'
+
+const LANTH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LANTH,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Lanthanides (Ce-Lu, filling the 4f subshell) and actinides (Th-Lr, filling 5f) sit ' +
+      'in their own separate rows below the main table because inserting 14 additional ' +
+      'elements INTO the main body would make the table impractically wide. The defining ' +
+      'lanthanide phenomenon is the LANTHANIDE CONTRACTION: atomic/ionic radius decreases ' +
+      'STEADILY (though gradually) across the entire series, because 4f electrons are POOR ' +
+      'at shielding the outer electrons (4f orbitals have unusual, deeply-penetrating shape ' +
+      'that doesn\'t block the nuclear charge effectively) — each added proton pulls the ' +
+      'outer electrons in slightly more than the added 4f electron compensates for. This ' +
+      'contraction has an important RIPPLE EFFECT on the elements immediately AFTER the ' +
+      'lanthanides in the periodic table (like Hf, Ta, W) — they end up SMALLER than a ' +
+      'naive extrapolation would predict, causing them to closely RESEMBLE their lighter ' +
+      'counterparts one row up (Zr/Hf, Nb/Ta pairs are notoriously difficult to separate ' +
+      'chemically because the lanthanide contraction makes their sizes nearly identical). ' +
+      'Lanthanides show relatively UNIFORM chemistry (mostly +3 oxidation state throughout ' +
+      'the series) compared to the more varied d-block transition metals, since the 4f ' +
+      'orbitals are largely "buried" and don\'t participate much in bonding.',
+    targetedMisconceptions: [`${LANTH}:MC1`],
+    source: `${LANTH_SRC} — lanthanide contraction mechanism, ripple effect on post-lanthanide elements, uniform +3 chemistry`,
+  },
+  {
+    conceptId: LANTH,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Zirconium (Zr) and hafnium (Hf) are chemically very similar simply because ' +
+      'they\'re in the same group (Group 4), just like any other pair of same-group ' +
+      'elements." INCOMPLETE — while being in the same group DOES contribute (same valence ' +
+      'electron count), the EXTREME similarity of Zr and Hf (historically very difficult to ' +
+      'separate, unusually so even for same-group elements) specifically results from the ' +
+      'LANTHANIDE CONTRACTION: Hf comes right AFTER the lanthanide series, and the ' +
+      'contraction shrinks it down to nearly the SAME size as Zr (which is one row up, ' +
+      'without any preceding f-block contraction) — this is a special, extra effect ON TOP ' +
+      'of normal same-group similarity, unique to elements positioned right after the ' +
+      'lanthanides. Second trap: "All 14 lanthanide elements show wildly different, varied ' +
+      'chemistry, similar to how d-block transition metals vary dramatically across their ' +
+      'row." FALSE — lanthanides show REMARKABLY UNIFORM chemistry (nearly all strongly ' +
+      'favor the +3 oxidation state throughout the series) precisely because the 4f ' +
+      'electrons being added are deeply "buried" and don\'t participate significantly in ' +
+      'bonding — this is the OPPOSITE situation from d-block metals, where the d-electrons ' +
+      'ARE valence electrons and DO drive significant chemical variation.',
+    targetedMisconceptions: [`${LANTH}:MC1`, `${LANTH}:MC2`],
+    source: `${LANTH_SRC} — misconception: Zr/Hf similarity is just ordinary same-group behavior; lanthanides vary as much as d-block metals`,
+  },
+]
+
+const LANTH_PROBES: SeedProbe[] = [
+  {
+    conceptId: LANTH,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Zirconium and hafnium (both Group 4) are notoriously difficult to separate chemically, even more so than typical same-group element pairs. What specifically causes this extreme similarity?',
+    choices: [
+      { text: 'The lanthanide contraction — hafnium comes right after the lanthanide series, and the steady radius decrease across that series shrinks hafnium down to nearly the same size as zirconium, an effect beyond ordinary same-group similarity', isCorrect: true },
+      { text: 'This is simply typical same-group behavior — any two elements in the same group should be equally difficult to separate, with no special explanation needed', isCorrect: false, misconceptionId: `${LANTH}:MC1` },
+    ],
+    correctValue: 'Lanthanide contraction causes this special extreme similarity',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${LANTH}:MC1`],
+    source: `${LANTH_SRC} — distractor targets attributing Zr/Hf similarity to ordinary same-group behavior alone`,
+  },
+  {
+    conceptId: LANTH,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Do the 14 lanthanide elements show as much chemical variation across their series as the d-block transition metals do across theirs?',
+    choices: [
+      { text: 'No — lanthanides show remarkably uniform chemistry (nearly all favor +3 oxidation state) because the 4f electrons being added are deeply buried and don\'t participate significantly in bonding, unlike d-block metals where d-electrons are true valence electrons driving variation', isCorrect: true },
+      { text: 'Yes — lanthanides vary just as much in oxidation states and chemical behavior as transition metals do across a d-block row', isCorrect: false, misconceptionId: `${LANTH}:MC2` },
+    ],
+    correctValue: 'No — lanthanides show unusually uniform +3 chemistry',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${LANTH}:MC2`],
+    source: `${LANTH_SRC} — misconception: lanthanides vary chemically as much as d-block transition metals`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -12225,6 +12406,8 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...ELIM_EXPLANATIONS,
   ...GRIGNARD_EXPLANATIONS,
   ...ACTIVITY_EXPLANATIONS,
+  ...FIRSTROW_EXPLANATIONS,
+  ...LANTH_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -12371,4 +12554,6 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...ELIM_PROBES,
   ...GRIGNARD_PROBES,
   ...ACTIVITY_PROBES,
+  ...FIRSTROW_PROBES,
+  ...LANTH_PROBES,
 ]
