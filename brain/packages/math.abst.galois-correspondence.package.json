@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.galois-correspondence-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.galois-correspondence",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d8556862317185b9b265bb452487a78746eb19781f4161e8fccaec21a9a7e0a7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.galois-correspondence.md": "sha256:100df23c0a5e9bfa21eb4756d70e2ee9dd79c83c853ac75fe4cc30adc57980e7"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.abst.galois-correspondence",
+    "name": "Fundamental Theorem of Galois Theory",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.55,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.abst.galois-group"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.galois-correspondence-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.galois-correspondence (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.galois-correspondence.md": "sha256:100df23c0a5e9bfa21eb4756d70e2ee9dd79c83c853ac75fe4cc30adc57980e7"
+      },
+      "contentHash": "sha256:4b9e8d55d77d70874d0c8245f51d2b1d44dd1490cff34b67a0c19aaa410cb698",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.galois-correspondence.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.galois-correspondence.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.galois-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.galois-correspondence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.galois-correspondence.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.galois-correspondence.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.galois-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.galois-correspondence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.galois-correspondence.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.galois-correspondence.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.galois-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.galois-correspondence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.galois-correspondence.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.galois-correspondence.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.galois-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.galois-correspondence\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.galois-correspondence/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.abst.galois-correspondence",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the correspondence precisely — for a Galois extension $K/F$, the map $E\\mapsto\\operatorname{Gal}(K/E)$ sends each INTERMEDIATE FIELD $E$ (with $F\\subseteq E\\subseteq K$) to a SUBGROUP of `math.abst.galois-group`'s own $\\operatorname{Gal}(K/F)$ — and recognize this as a BIJECTION between the (typically infinite-feeling, geometric) collection of intermediate fields and the (finite, concrete, listable) collection of subgroups, turning a field-theory question into a group-theory question.\n- LO2: Apply the correspondence's INCLUSION-REVERSING property: LARGER intermediate fields correspond to SMALLER subgroups, and vice versa (bigger field $\\Rightarrow$ fewer automorphisms can fix it pointwise) — and correctly order a specific small lattice of intermediate fields and its corresponding subgroup lattice, confirming the reversal directly.\n- LO3: State and apply the correspondence's normality clause: an intermediate field $E$ is a GALOIS extension of $F$ (i.e. a \"Galois subextension\") if and only if $\\operatorname{Gal}(K/E)$ is a NORMAL subgroup of $\\operatorname{Gal}(K/F)$ — and correctly determine, for a specific small example, which intermediate fields are Galois over $F$ by checking normality of the corresponding subgroup rather than re-verifying the field extension's Galois property directly.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-correspondence.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.abst.galois-correspondence/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.galois-correspondence",
+      "title": "CORRESPONDENCE-BIJECTION-DOUBTED",
+      "content": "| MC-1 | CORRESPONDENCE-BIJECTION-DOUBTED | Believing the correspondence between intermediate fields and subgroups might miss some fields or subgroups, rather than being a genuine, complete bijection | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-correspondence.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.abst.galois-correspondence/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.galois-correspondence",
+      "title": "INCLUSION-DIRECTION-ASSUMED-PRESERVED",
+      "content": "| MC-2 | INCLUSION-DIRECTION-ASSUMED-PRESERVED | Believing a larger intermediate field corresponds to a larger subgroup, missing that the correspondence genuinely REVERSES inclusion | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-correspondence.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.abst.galois-correspondence/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.galois-correspondence",
+      "title": "GALOIS-SUBEXTENSION-ASSUMED-TO-NEED-DIRECT-VERIFICATION",
+      "content": "| MC-3 | GALOIS-SUBEXTENSION-ASSUMED-TO-NEED-DIRECT-VERIFICATION | Believing determining whether an intermediate field is itself Galois over $F$ requires directly re-verifying field-theoretic conditions, missing the normality-of-the-corresponding-subgroup shortcut | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-correspondence.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.abst.galois-correspondence/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.galois-correspondence",
+      "title": "The Correspondence Turns Field Search into (Easier) Group Search (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Correspondence Turns Field Search into (Easier) Group Search (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-correspondence.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.abst.galois-correspondence/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.galois-correspondence",
+      "title": "Bigger Fields Get Smaller Subgroups (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Bigger Fields Get Smaller Subgroups (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-correspondence.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.abst.galois-correspondence/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.galois-correspondence",
+      "title": "Normality of the Subgroup Settles Whether the Subextension Is Galois (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Normality of the Subgroup Settles Whether the Subextension Is Galois (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-correspondence.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.abst.galois-correspondence/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.galois-correspondence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-correspondence.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.abst.galois-correspondence/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.galois-correspondence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $K/F$ with $\\operatorname{Gal}(K/F)$ of order 6 (cyclic, $\\cong\\mathbb{Z}_6$), list all subgroups and state how many intermediate fields the correspondence guarantees.\n  2. Explain, using the correspondence's inclusion-reversing property, why the field $F$ itself must correspond to the LARGEST possible subgroup.\n  3. For the same order-6 cyclic group, determine (citing that every subgroup of a CYCLIC group is normal) whether every intermediate field is a Galois subextension of $F$.\n  4. Explain, in your own words, why the correspondence turns a potentially difficult field-theoretic search into a more tractable group-theoretic one.\n- **P76 (Transfer Probe, mode = independence — no cross-link target listed in the KG for this concept)**: \"A researcher studying the splitting field $K$ of a specific degree-4 polynomial over $\\mathbb{Q}$ has already computed $\\operatorname{Gal}(K/\\mathbb{Q})$ to be isomorphic to the non-abelian group $S_3$ (order 6), and wants to determine ALL fields strictly between $\\mathbb{Q}$ and $K$, along with which of them are themselves Galois extensions of $\\mathbb{Q}$. (a) Using the Fundamental Theorem's correspondence, explain what the researcher needs to compute FIRST (about the group, not the fields) to find every intermediate field, and why this is guaranteed to find them all. (b) $S_3$ has a single normal subgroup of order 3 (in addition to the trivial subgroup and the whole group) and three non-normal subgroups of order 2. Using the correspondence's normality clause, explain which of the resulting intermediate fields are Galois extensions of $\\mathbb{Q}$ and which are not. (c) Contrast this with Example 3's fully abelian case: explain why $S_3$ being non-abelian genuinely changes the answer to 'are all intermediate fields automatically Galois over $F$?'\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 3/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-correspondence.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.abst.galois-correspondence/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.galois-correspondence",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.abst.galois-group` ($\\operatorname{Gal}(K/F)=\\{\\sigma:K\\to K\\text{ automorphism fixing }F\\text{ pointwise}\\}$, a group under composition, with $|\\operatorname{Gal}(K/F)|=[K:F]$ for Galois extensions).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-correspondence.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.abst.galois-correspondence/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.galois-correspondence",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.abst.galois-group` (the group $\\operatorname{Gal}(K/F)$ this concept's correspondence is built directly on top of).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists none for this concept. $P76_{mode}=$ **independence** (no cross-link target to check).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-correspondence.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

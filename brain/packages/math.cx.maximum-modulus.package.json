@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.maximum-modulus-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.maximum-modulus",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6682d93c7c0cd87dd5bd8e0807e6014ec1f66254600aa179983be48471cee27d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.maximum-modulus.md": "sha256:6dad74c29b971eaa4f64a108ffb3929076de3b88408eb42bc0289083f342dd93"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cx.maximum-modulus",
+    "name": "Maximum Modulus Principle",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.cx.analytic-functions",
+      "math.cx.cauchy-integral-formula"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.maximum-modulus-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.maximum-modulus (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.maximum-modulus.md": "sha256:6dad74c29b971eaa4f64a108ffb3929076de3b88408eb42bc0289083f342dd93"
+      },
+      "contentHash": "sha256:48cd6cdd13c14b7af40923c98fbf3774f2da5b8fb89e2ecf31fa7f1122466283",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.maximum-modulus.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.maximum-modulus.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.maximum-modulus"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.maximum-modulus\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.maximum-modulus.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.maximum-modulus.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.maximum-modulus"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.maximum-modulus\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.maximum-modulus.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.maximum-modulus.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.maximum-modulus"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.maximum-modulus\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.maximum-modulus.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.maximum-modulus.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.maximum-modulus"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.maximum-modulus\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.maximum-modulus/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cx.maximum-modulus",
+      "title": "Learning Objectives",
+      "content": "- LO1 (cross-link objective): Recognize that $|f|$'s maximum-on-the-boundary behavior is NOT an independent new principle to prove from scratch — it follows DIRECTLY from `math.de.harmonic-functions`'s own already-proven maximum principle for REAL harmonic functions, applied to $\\log|f(z)|$ (harmonic wherever $f(z)\\ne0$, since it is the real part of the holomorphic function $\\log f(z)$ locally) — connecting a complex-analysis statement to an already-established real-analysis result.\n- LO2: State the theorem precisely: for $f$ holomorphic on a BOUNDED domain $D$ and continuous on the closure $\\bar D$, $|f|$ attains its maximum ONLY on the boundary $\\partial D$ — and correctly apply it to bound $|f|$ on a specific domain using only its BOUNDARY values, without needing to check every interior point.\n- LO3: Apply the sharper NON-CONSTANT clause — if $f$ is non-constant and holomorphic, $|f|$ has NO interior maximum at all (not even a non-strict one, unless $f$ is constant) — to correctly determine, for a specific holomorphic function on a specific domain, whether an apparent interior \"maximum\" candidate point can genuinely be the true maximum, or whether this already implies $f$ must be constant.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.maximum-modulus.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cx.maximum-modulus/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.maximum-modulus",
+      "title": "MAX-MODULUS-ASSUMED-INDEPENDENT-PROOF",
+      "content": "| MC-1 | MAX-MODULUS-ASSUMED-INDEPENDENT-PROOF | Believing the Maximum Modulus Principle requires an entirely new, independent proof specific to complex analysis, missing that it follows directly from `math.de.harmonic-functions`'s already-proven theory via $\\log|f|$'s harmonicity | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.maximum-modulus.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.cx.maximum-modulus/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.maximum-modulus",
+      "title": "INTERIOR-CHECK-ASSUMED-NECESSARY-FOR-MAX-MODULUS",
+      "content": "| MC-2 | INTERIOR-CHECK-ASSUMED-NECESSARY-FOR-MAX-MODULUS | Believing finding $|f|$'s maximum over a closed domain requires checking interior points as well as the boundary, missing that the theorem guarantees the boundary alone suffices | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.maximum-modulus.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.cx.maximum-modulus/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.maximum-modulus",
+      "title": "NON-STRICT-INTERIOR-MAXIMUM-ASSUMED-PERMITTED",
+      "content": "| MC-3 | NON-STRICT-INTERIOR-MAXIMUM-ASSUMED-PERMITTED | Believing a non-constant holomorphic function could have $|f|$ attain a non-strict interior maximum (tied with the boundary value), missing that ANY interior maximum forces constancy | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.maximum-modulus.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.cx.maximum-modulus/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.maximum-modulus",
+      "title": "The Maximum Modulus Principle Is `math.de.harmonic-functions`'s Own Theorem, Transported via $\\log|f|$ (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Maximum Modulus Principle Is `math.de.harmonic-functions`'s Own Theorem, Transported via $\\\\log|f|$ (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.maximum-modulus.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.cx.maximum-modulus/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.maximum-modulus",
+      "title": "Boundary Values Alone Bound $|f|$ Everywhere in $D$ (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Boundary Values Alone Bound $|f|$ Everywhere in $D$ (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.maximum-modulus.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.cx.maximum-modulus/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.maximum-modulus",
+      "title": "An Interior Maximum of $|f|$ Forces $f$ to Be Constant (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"An Interior Maximum of $|f|$ Forces $f$ to Be Constant (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.maximum-modulus.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.cx.maximum-modulus/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.maximum-modulus",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.maximum-modulus.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.maximum-modulus/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.maximum-modulus",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Explain, citing `math.de.harmonic-functions`'s own maximum principle, why $\\log|f|$'s maximum-on-boundary behavior directly implies the same for $|f|$ itself.\n  2. Find the maximum of $|f(z)|=|3z-1|$ on the closed disc $|z|\\le1$, using boundary values only.\n  3. Explain why a genuinely non-constant holomorphic function on a bounded domain cannot have $|f|$ attain a maximum at any interior point.\n  4. For $f(z)=5$ (a constant function) on $|z|<1$, explain why this does NOT violate the non-constant clause of the theorem.\n- **P76 (Transfer Probe, mode = cross-link probe engaging `math.de.harmonic-functions`)**: \"An engineer modeling a 2D electrostatic potential problem has independently proven (using `math.de.harmonic-functions`'s own maximum principle) that the potential $u$ in a bounded region achieves its extreme values only on the region's boundary. Separately, the engineer is analyzing a holomorphic 'analytic signal' representation $f(z)$ of a related physical quantity on the same bounded region. (a) Using THIS lesson's connection between $\\log|f|$ and harmonic functions, explain precisely why the engineer can reuse the ALREADY-PROVEN electrostatic-potential result (rather than deriving a separate maximum principle from scratch) to conclude that $|f|$ also achieves its maximum only on the boundary. (b) If the engineer observes that $|f|$ seems to peak at an interior point of the region, explain what this observation would imply about $f$, citing the non-constant clause. (c) Explain what specifically about $\\log|f|$ (rather than $f$ or $|f|$ directly) makes the connection to `math.de.harmonic-functions`'s theory possible.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.maximum-modulus.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.maximum-modulus/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.maximum-modulus",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cx.analytic-functions` (holomorphic $\\Leftrightarrow$ analytic in $\\mathbb{C}$; power series representability) and `math.cx.cauchy-integral-formula` (recovering interior values of a holomorphic function from its boundary values via the contour integral).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.maximum-modulus.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cx.maximum-modulus/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.maximum-modulus",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cx.analytic-functions` (holomorphicity and local power-series representability, underlying the local $f=e^g$ decomposition) and `math.cx.cauchy-integral-formula` (the boundary-recovers-interior machinery that underlies the deeper theory this principle sits within).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.de.harmonic-functions`, checked via `ls docs/curriculum/blueprints/` and confirmed ALREADY authored. $P76_{mode}=$ **cross-link probe**, engaging `math.de.harmonic-functions`'s own maximum principle for real harmonic functions directly in Component 3's $\\log|f|$-transport derivation and the P76 transfer probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.maximum-modulus.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

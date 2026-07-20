@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.riemann-mapping-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.riemann-mapping",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:04c4ecaf6d630f657ef17242c83ba3a157ec22340d7c5450cb4e7b2ffb2eb841",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.riemann-mapping.md": "sha256:e2c491b56abc57933f43958947b8114615a0c951953d7879017a0c3f83f1e7ca"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cx.riemann-mapping",
+    "name": "Riemann Mapping Theorem",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.65,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.cx.conformal-mapping"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.riemann-mapping-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.riemann-mapping (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.riemann-mapping.md": "sha256:e2c491b56abc57933f43958947b8114615a0c951953d7879017a0c3f83f1e7ca"
+      },
+      "contentHash": "sha256:e33543c538bfb6729e3cf565baab143c8a88fc66170a072e9f92b19b11ea1d5c",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.riemann-mapping.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.riemann-mapping.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.riemann-mapping"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.riemann-mapping\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.riemann-mapping.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.riemann-mapping.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.riemann-mapping"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.riemann-mapping\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.riemann-mapping.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.riemann-mapping.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.riemann-mapping"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.riemann-mapping\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.riemann-mapping.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.riemann-mapping.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.riemann-mapping"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.riemann-mapping\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.riemann-mapping/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cx.riemann-mapping",
+      "title": "Learning Objectives",
+      "content": "- LO1 (cross-link objective): State the theorem precisely — every SIMPLY CONNECTED PROPER open subset $\\Omega\\subsetneq\\mathbb{C}$ (i.e., $\\Omega\\ne\\mathbb{C}$ itself, and with no \"holes\") admits a BIHOLOMORPHIC map (a holomorphic bijection, exactly `math.cx.conformal-mapping`'s own conformal-map notion, since a holomorphic bijection is automatically conformal wherever its derivative is nonzero) onto the unit disc $\\mathbb{D}$ — and correctly identify, for a list of candidate domains, which satisfy the theorem's hypotheses (simply connected AND proper) and which do not.\n- LO2: State the UNIQUENESS clause precisely — the biholomorphism $\\Omega\\to\\mathbb{D}$ is not unique outright, but unique UP TO composing with a Möbius transformation of the disc (i.e., fixing one interior point's image and one direction pins down a UNIQUE such map) — and correctly count the remaining degrees of freedom before and after such normalizing conditions are imposed.\n- LO3: Explain, at a conceptual (non-fully-rigorous) level, WHY both hypotheses are genuinely necessary — using $\\mathbb{C}$ itself (proper subset hypothesis fails) and an annulus (simply connected hypothesis fails) as concrete counterexamples where the conclusion demonstrably breaks — and state the proof's high-level strategy (constructing the map as a limit within a normal family via Montel's theorem) without executing the full proof.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-mapping.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-mapping/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.riemann-mapping",
+      "title": "THEOREM-HYPOTHESES-ASSUMED-UNRESTRICTIVE",
+      "content": "| MC-1 | THEOREM-HYPOTHESES-ASSUMED-UNRESTRICTIVE | Believing the Riemann Mapping Theorem applies to every open subset of $\\mathbb{C}$, missing that simply-connectedness and being a proper subset are genuine, necessary restrictions | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-mapping.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-mapping/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.riemann-mapping",
+      "title": "RIEMANN-MAP-ASSUMED-AUTOMATICALLY-UNIQUE",
+      "content": "| MC-2 | RIEMANN-MAP-ASSUMED-AUTOMATICALLY-UNIQUE | Believing the biholomorphism guaranteed by the theorem is automatically unique, missing the genuine 3-real-parameter family of valid maps prior to normalization | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-mapping.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-mapping/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.riemann-mapping",
+      "title": "THEOREM-HYPOTHESES-ASSUMED-TECHNICAL",
+      "content": "| MC-3 | THEOREM-HYPOTHESES-ASSUMED-TECHNICAL | Believing the theorem's hypotheses are minor technical fine print rather than genuinely load-bearing conditions whose failure demonstrably breaks the conclusion | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-mapping.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-mapping/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.riemann-mapping",
+      "title": "The Theorem Guarantees a Conformal Map to the Disc for an Enormous Class of Domains (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Theorem Guarantees a Conformal Map to the Disc for an Enormous Class of Domains (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-mapping.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-mapping/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.riemann-mapping",
+      "title": "Uniqueness Requires Exactly 3 Real Normalizing Conditions (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Uniqueness Requires Exactly 3 Real Normalizing Conditions (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-mapping.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-mapping/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.riemann-mapping",
+      "title": "Both Hypotheses Are Load-Bearing, Not Technicalities (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Both Hypotheses Are Load-Bearing, Not Technicalities (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-mapping.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-mapping/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.riemann-mapping",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-mapping.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-mapping/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.riemann-mapping",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For the open right half-plane $\\{z:\\operatorname{Re}(z)>0\\}$, determine whether the Riemann Mapping Theorem applies, and justify using both hypotheses explicitly.\n  2. Explain why the theorem's biholomorphism to $\\mathbb{D}$, once known to exist for some domain, is not automatically unique.\n  3. State the standard normalization (2 conditions on point-image, 1 on derivative argument) that pins down a unique Riemann map, and explain why together they use up exactly 3 real degrees of freedom.\n  4. Explain, using Liouville's theorem, why the theorem cannot apply to $\\Omega=\\mathbb{C}$.\n- **P76 (Transfer Probe, mode = independence — no cross-link target listed in the KG for this concept)**: \"A numerical-methods researcher is designing software to compute conformal maps for solving PDEs on arbitrary simply connected 2D domains (e.g. irregularly-shaped physical regions), by first mapping each domain to the unit disc, solving the PDE there (where explicit solution techniques are well developed), and mapping the solution back. (a) Using the Riemann Mapping Theorem, explain why this general strategy is guaranteed to be applicable to essentially any such simply connected physical region, regardless of how irregular its boundary is. (b) The researcher's software requires a UNIQUE map for each domain (for reproducibility). Explain what specific normalizing choices the software needs to make, and why these are both necessary and sufficient to guarantee uniqueness. (c) A colleague suggests extending the software to handle a domain shaped like a washer (an annular region with a hole in the middle). Explain, citing this lesson's topological argument, why the Riemann Mapping Theorem as stated cannot be directly applied to such a domain.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-mapping.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-mapping/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.riemann-mapping",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cx.conformal-mapping` (a holomorphic bijection is conformal wherever $f'\\ne0$; conformal maps used to transfer complicated domains to simpler ones for PDE applications).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-mapping.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-mapping/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.riemann-mapping",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cx.conformal-mapping` (the biholomorphism/conformal-map notion this theorem's existence claim is stated in terms of directly).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists none for this concept. $P76_{mode}=$ **independence** (no cross-link target to check).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-mapping.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
