@@ -7733,6 +7733,444 @@ const POLARM_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.solid.packing ──────────────────────────────────────────────────────
+const PACK = 'chem.solid.packing'
+const PACK_SRC = 'docs/chemistry/kg/graph.json — chem.solid.packing'
+
+const PACK_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PACK,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Building on crystal systems: how do spheres (atoms) pack MOST EFFICIENTLY in 3D? ' +
+      'Start with one layer of spheres touching in a hexagonal pattern (each sphere ' +
+      'touches 6 neighbors in-plane). The NEXT layer nestles into the DEPRESSIONS of the ' +
+      'first — but there are two distinct choices for a THIRD layer, giving two different ' +
+      'CLOSE-PACKED structures: HEXAGONAL CLOSE PACKING (HCP: layers ABABAB..., third ' +
+      'layer directly above the first) and CUBIC CLOSE PACKING (CCP, same as ' +
+      'face-centered-cubic FCC: layers ABCABC..., third layer offset from both previous ' +
+      'ones). BOTH achieve the theoretical MAXIMUM packing efficiency for identical spheres ' +
+      '— exactly 74.05% of space filled, mathematically proven to be the best possible ' +
+      '(Kepler\'s conjecture) — with COORDINATION NUMBER 12 (each atom touches 12 nearest ' +
+      'neighbors) in both arrangements. The difference is purely in the STACKING SEQUENCE ' +
+      '(ABAB vs ABCABC), affecting subtle mechanical properties (like how easily layers ' +
+      'slip past each other) even though overall density/efficiency is identical. Many ' +
+      'metals crystallize in one of these two close-packed structures (Mg, Zn: HCP; Cu, Al, ' +
+      'Au: CCP/FCC) precisely because maximizing packing efficiency minimizes energy.',
+    targetedMisconceptions: [`${PACK}:MC1`],
+    source: `${PACK_SRC} — hexagonal close packing, cubic close packing, coordination number, packing efficiency`,
+  },
+  {
+    conceptId: PACK,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Hexagonal close packing (HCP) and cubic close packing (CCP) have different ' +
+      'packing efficiencies, since they have different names and different unit cell ' +
+      'shapes." FALSE — both achieve the EXACT SAME maximum packing efficiency (74.05%) ' +
+      'and the SAME coordination number (12) — they represent the two mathematically ' +
+      'distinct ways to achieve the theoretical BEST possible sphere packing, differing ' +
+      'only in stacking SEQUENCE (ABAB vs ABCABC), not in overall density. The names ' +
+      'reflect different unit cell descriptions of otherwise equally-efficient ' +
+      'arrangements. Second trap: "Simple cubic packing (52% efficient) and close packing ' +
+      '(74% efficient) differ because simple cubic atoms are somehow smaller or arranged ' +
+      'differently in size." No — packing efficiency differences come purely from ' +
+      'GEOMETRIC ARRANGEMENT (how spheres of the SAME size are positioned relative to each ' +
+      'other), not from any difference in atom size. Simple cubic leaves large gaps ' +
+      'because atoms only touch along cell edges; close packing eliminates most of these ' +
+      'gaps through the nested hexagonal layer arrangement.',
+    targetedMisconceptions: [`${PACK}:MC1`, `${PACK}:MC2`],
+    source: `${PACK_SRC} — misconception: HCP and CCP have different efficiencies; packing efficiency reflects atom size differences`,
+  },
+]
+
+const PACK_PROBES: SeedProbe[] = [
+  {
+    conceptId: PACK,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Magnesium crystallizes in HCP (ABAB stacking) while copper crystallizes in CCP/FCC (ABCABC stacking). Which metal has the more efficiently packed crystal structure?',
+    choices: [
+      { text: 'Neither — both HCP and CCP achieve the identical maximum packing efficiency of 74.05% and coordination number 12; they differ only in stacking sequence, not overall density', isCorrect: true },
+      { text: 'Copper — CCP/FCC is inherently more efficient than HCP due to its cubic unit cell', isCorrect: false, misconceptionId: `${PACK}:MC1` },
+    ],
+    correctValue: 'Neither — identical packing efficiency',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PACK}:MC1`],
+    source: `${PACK_SRC} — distractor targets assuming different close-packing names imply different efficiencies`,
+  },
+  {
+    conceptId: PACK,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Simple cubic packing is only 52% efficient, while close packing (HCP/CCP) reaches 74%. Does this difference arise because close-packed atoms are somehow smaller?',
+    choices: [
+      { text: 'No — packing efficiency differences come purely from GEOMETRIC ARRANGEMENT of identically-sized spheres; simple cubic leaves large unfilled gaps, while close packing eliminates most gaps through nested layer positioning', isCorrect: true },
+      { text: 'Yes — close-packed structures use smaller atoms that fit together more tightly than simple cubic structures', isCorrect: false, misconceptionId: `${PACK}:MC2` },
+    ],
+    correctValue: 'No — purely a geometric arrangement difference, same atom size',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PACK}:MC2`],
+    source: `${PACK_SRC} — misconception: packing efficiency differences reflect atom size rather than arrangement`,
+  },
+]
+
+// ─── chem.solid.defects ──────────────────────────────────────────────────────
+const DEFECT = 'chem.solid.defects'
+const DEFECT_SRC = 'docs/chemistry/kg/graph.json — chem.solid.defects'
+
+const DEFECT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DEFECT,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Real crystals are never perfectly ordered — DEFECTS (irregularities in the ideal ' +
+      'lattice pattern) are not just tolerated but often ESSENTIAL for useful material ' +
+      'properties. POINT DEFECTS occur at single lattice sites: VACANCY (an atom missing ' +
+      'entirely from its expected position — decreases density slightly), INTERSTITIAL ' +
+      '(an extra atom squeezed into a gap between regular lattice positions — increases ' +
+      'density slightly), and SUBSTITUTIONAL (a different atom replacing the expected one ' +
+      'at a lattice site — this is exactly how ALLOYS and DOPED SEMICONDUCTORS work). ' +
+      'Ionic crystals show two special defect PAIRS that preserve overall electrical ' +
+      'neutrality: FRENKEL defect (a cation leaves its site and squeezes into an ' +
+      'interstitial gap — common when there\'s a large size difference between cation and ' +
+      'anion, like AgBr) and SCHOTTKY defect (both a cation AND anion vacancy occur ' +
+      'together, in stoichiometric ratio — common when cation and anion are similar size, ' +
+      'like NaCl). Defects genuinely INCREASE conductivity (vacant/interstitial sites let ' +
+      'ions or electrons move more easily) and are deliberately engineered into ' +
+      'semiconductors via DOPING (substitutional defects) to precisely control electrical ' +
+      'properties — the entire foundation of modern electronics.',
+    targetedMisconceptions: [`${DEFECT}:MC1`],
+    source: `${DEFECT_SRC} — point defects, Frenkel/Schottky defects, doping applications`,
+  },
+  {
+    conceptId: DEFECT,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Crystal defects are always undesirable flaws that should be minimized or ' +
+      'eliminated for a "good" material." FALSE in general — while some applications DO ' +
+      'want minimal defects (like ultra-pure silicon wafers before doping), MANY of the ' +
+      'most useful materials properties come DIRECTLY from deliberately introduced defects: ' +
+      'doped semiconductors (substitutional defects controlling conductivity), alloys ' +
+      '(substitutional defects like carbon in steel dramatically increasing hardness), and ' +
+      'colored gemstones (point defects/impurities creating characteristic colors — ruby\'s ' +
+      'red comes from Cr³⁺ substitutional defects in aluminum oxide). Defects are a design ' +
+      'TOOL, not just an unavoidable flaw. Second trap: "Frenkel and Schottky defects are ' +
+      'essentially the same thing, just different names for any ionic crystal ' +
+      'imperfection." FALSE — they\'re structurally distinct: Frenkel involves an ion ' +
+      'MOVING to an interstitial site (density roughly unchanged, since the ion is still ' +
+      'present, just relocated), while Schottky involves ions LEAVING the crystal entirely ' +
+      '(both a cation AND anion vacancy, density DECREASES since mass is genuinely lost ' +
+      'from that region) — they occur under different size-ratio conditions and have ' +
+      'different physical consequences.',
+    targetedMisconceptions: [`${DEFECT}:MC1`, `${DEFECT}:MC2`],
+    source: `${DEFECT_SRC} — misconception: defects are always undesirable flaws; Frenkel and Schottky are interchangeable`,
+  },
+]
+
+const DEFECT_PROBES: SeedProbe[] = [
+  {
+    conceptId: DEFECT,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Silicon computer chips are deliberately "doped" with trace amounts of phosphorus or boron atoms (substitutional defects). Is this defect introduction a manufacturing flaw to be avoided?',
+    choices: [
+      { text: 'No — doping is a deliberate, essential engineering technique; substitutional defects precisely control the semiconductor\'s electrical conductivity, forming the foundation of all modern electronics', isCorrect: true },
+      { text: 'Yes — any crystal defect, including doping, represents an undesirable flaw that reduces the material\'s quality and should be minimized wherever possible', isCorrect: false, misconceptionId: `${DEFECT}:MC1` },
+    ],
+    correctValue: 'No — doping is a deliberate, beneficial engineering technique',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DEFECT}:MC1`],
+    source: `${DEFECT_SRC} — distractor targets treating all crystal defects as undesirable flaws`,
+  },
+  {
+    conceptId: DEFECT,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'AgBr commonly shows Frenkel defects, while NaCl commonly shows Schottky defects. Are these two defect types essentially the same phenomenon with different names?',
+    choices: [
+      { text: 'No — Frenkel involves an ion moving to an interstitial site (density roughly unchanged), while Schottky involves both a cation and anion vacancy (ions leaving entirely, density decreases); they occur under different cation/anion size-ratio conditions', isCorrect: true },
+      { text: 'Yes — Frenkel and Schottky defects are interchangeable terms describing the same underlying structural imperfection', isCorrect: false, misconceptionId: `${DEFECT}:MC2` },
+    ],
+    correctValue: 'No — structurally and physically distinct defect types',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DEFECT}:MC2`],
+    source: `${DEFECT_SRC} — misconception: conflating Frenkel and Schottky defects as identical`,
+  },
+]
+
+// ─── chem.solid.amorphous ────────────────────────────────────────────────────
+const AMORPH = 'chem.solid.amorphous'
+const AMORPH_SRC = 'docs/chemistry/kg/graph.json — chem.solid.amorphous'
+
+const AMORPH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: AMORPH,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Amorphous solids lack the LONG-RANGE periodic order of crystals — particles are ' +
+      'randomly arranged (like a "frozen liquid"), though they often retain SHORT-RANGE ' +
+      'order (individual molecular units, like SiO₄ tetrahedra in glass, keep their local ' +
+      'shape, just not their long-range repeating pattern). This structural difference ' +
+      'produces distinctly different behavior from crystals: amorphous solids SOFTEN ' +
+      'GRADUALLY over a temperature range (no sharp melting point — as covered in crystal ' +
+      'systems) because different regions have different local bonding strengths that ' +
+      'break at slightly different temperatures, unlike a crystal where identical, uniform ' +
+      'bonds all break simultaneously at one exact temperature. Amorphous solids are also ' +
+      'generally ISOTROPIC (same physical properties measured in every direction — glass ' +
+      'shatters unpredictably in any orientation), while crystals are often ANISOTROPIC ' +
+      '(properties differ by direction — mica cleaves cleanly along specific planes because ' +
+      'those planes have systematically weaker bonding than others). Common amorphous ' +
+      'materials: glass (SiO₂-based, rapidly cooled to prevent crystallization), most ' +
+      'plastics, rubber.',
+    targetedMisconceptions: [`${AMORPH}:MC1`],
+    source: `${AMORPH_SRC} — amorphous vs crystalline structure, isotropic vs anisotropic, gradual softening`,
+  },
+  {
+    conceptId: AMORPH,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Glass is technically a liquid that flows very, very slowly over time — old ' +
+      'windowpanes are thicker at the bottom because the glass has flowed downward over ' +
+      'centuries." This is a WIDESPREAD popular myth, but it\'s FALSE. Glass at room ' +
+      'temperature is a rigid amorphous SOLID, not a slow-flowing liquid — it does not ' +
+      'measurably flow on any human timescale (the viscosity of room-temperature glass is ' +
+      'so astronomically high that any flow would take far longer than the age of the ' +
+      'universe to become noticeable). The uneven thickness seen in some old windowpanes ' +
+      'is actually due to imperfect historical manufacturing techniques (older glass-making ' +
+      'processes, like crown glass, naturally produced panes of variable thickness, which ' +
+      'installers often placed thick-side-down for stability) — a manufacturing artifact, ' +
+      'not evidence of glass flow. Second trap: "Amorphous solids have completely random ' +
+      'structure at every scale, with no order whatsoever." Not quite — amorphous solids ' +
+      'typically retain SHORT-RANGE order (individual molecular building blocks keep their ' +
+      'local shape/bonding), losing only the LONG-RANGE repeating periodicity that defines ' +
+      'true crystals.',
+    targetedMisconceptions: [`${AMORPH}:MC1`, `${AMORPH}:MC2`],
+    source: `${AMORPH_SRC} — misconception: glass is a slow-flowing liquid; amorphous solids have zero structural order`,
+  },
+]
+
+const AMORPH_PROBES: SeedProbe[] = [
+  {
+    conceptId: AMORPH,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Some old cathedral windows have glass that is thicker at the bottom than the top. Does this prove that glass is a very slowly flowing liquid at room temperature?',
+    choices: [
+      { text: 'No — this is a widespread myth; room-temperature glass is a rigid amorphous solid that does not measurably flow. The uneven thickness comes from imperfect historical manufacturing techniques, not centuries of flow', isCorrect: true },
+      { text: 'Yes — this is direct physical evidence that glass, though appearing solid, is actually flowing extremely slowly as a liquid over centuries', isCorrect: false, misconceptionId: `${AMORPH}:MC1` },
+    ],
+    correctValue: 'No — glass does not flow; the thickness variation is a manufacturing artifact',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${AMORPH}:MC1`],
+    source: `${AMORPH_SRC} — distractor targets the popular "glass is a slow liquid" myth`,
+  },
+  {
+    conceptId: AMORPH,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In glass (SiO₂-based), individual SiO₄ tetrahedra retain their characteristic local shape, but the tetrahedra are randomly oriented relative to each other throughout the material. Does this describe complete structural randomness at every scale?',
+    choices: [
+      { text: 'No — this describes SHORT-RANGE order (the local tetrahedral shape is maintained) combined with a LACK of LONG-RANGE order (no repeating periodic pattern across the material) — not total randomness at every scale', isCorrect: true },
+      { text: 'Yes — amorphous solids like glass have absolutely no structural order at any scale, from the atomic level upward', isCorrect: false, misconceptionId: `${AMORPH}:MC2` },
+    ],
+    correctValue: 'No — short-range order exists despite lack of long-range order',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${AMORPH}:MC2`],
+    source: `${AMORPH_SRC} — misconception: amorphous solids have zero order at any structural scale`,
+  },
+]
+
+// ─── chem.coord.werner ───────────────────────────────────────────────────────
+const WERNER = 'chem.coord.werner'
+const WERNER_SRC = 'docs/chemistry/kg/graph.json — chem.coord.werner'
+
+const WERNER_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: WERNER,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Before Werner (1893), chemists were baffled by compounds like CoCl₃·6NH₃ — simple ' +
+      'valence theory couldn\'t explain why cobalt (normally +3, forming 3 bonds) could ' +
+      'combine with SIX extra ammonia molecules seemingly beyond its normal bonding ' +
+      'capacity. Werner\'s revolutionary insight: metals have TWO SEPARATE types of ' +
+      'valence. PRIMARY VALENCE (= oxidation state, satisfied by anions like Cl⁻, forming ' +
+      'IONIZABLE bonds that dissociate in water) and SECONDARY VALENCE (= COORDINATION ' +
+      'NUMBER, the fixed number of ligands directly bonded to the metal via coordinate ' +
+      'bonds, as covered earlier — these are NON-IONIZABLE, staying attached even in ' +
+      'solution). For [Co(NH₃)₆]Cl₃: primary valence = 3 (three Cl⁻ ions, freely dissociable, ' +
+      'detected by AgNO₃ precipitation test), secondary valence = 6 (six NH₃ ligands, ' +
+      'tightly bound directly to Co, NOT freely dissociable, invisible to simple ' +
+      'precipitation tests). Werner predicted (and was later confirmed by X-ray ' +
+      'crystallography, decades after his death) that 6-coordinate complexes are ' +
+      'OCTAHEDRAL in geometry — a genuinely predictive theory, not just a descriptive ' +
+      'patch, earning Werner the 1913 Nobel Prize.',
+    targetedMisconceptions: [`${WERNER}:MC1`],
+    source: `${WERNER_SRC} — Werner's coordination theory, primary vs secondary valence, predicted octahedral geometry`,
+  },
+  {
+    conceptId: WERNER,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "All the chloride ions and ammonia molecules in CoCl₃·6NH₃ behave identically ' +
+      'when dissolved in water — they\'re all just "attached" to cobalt in the same way." ' +
+      'FALSE — this was exactly the puzzle Werner solved. Experimentally, dissolving ' +
+      '[Co(NH₃)₆]Cl₃ in water and adding AgNO₃ precipitates ALL THREE chloride ions ' +
+      'immediately (as AgCl) — they behave as genuinely FREE, ionizable Cl⁻ ions (primary ' +
+      'valence). But the six NH₃ molecules do NOT dissociate or react with AgNO₃ at all — ' +
+      'they remain PERMANENTLY bound directly to the cobalt center (secondary valence, ' +
+      'coordinate bonds). These are fundamentally DIFFERENT types of attachment with ' +
+      'different chemical behavior, not interchangeable "generic bonding." Second trap: ' +
+      '"Werner\'s theory was purely descriptive, just explaining what was already known ' +
+      'with no new predictions." FALSE — Werner correctly PREDICTED the octahedral ' +
+      'geometry for 6-coordinate complexes based on isomer-counting logic, YEARS before ' +
+      'X-ray crystallography existed to directly confirm 3D molecular structures — a ' +
+      'genuine, falsifiable scientific prediction that turned out to be correct.',
+    targetedMisconceptions: [`${WERNER}:MC1`, `${WERNER}:MC2`],
+    source: `${WERNER_SRC} — misconception: all ligands/ions behave identically; Werner's theory was purely descriptive`,
+  },
+]
+
+const WERNER_PROBES: SeedProbe[] = [
+  {
+    conceptId: WERNER,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'When [Co(NH₃)₆]Cl₃ is dissolved in water and treated with AgNO₃, all three chloride ions precipitate as AgCl, but none of the six ammonia molecules react or dissociate. What does this reveal?',
+    choices: [
+      { text: 'The three Cl⁻ ions represent primary valence (freely ionizable, not directly bonded to cobalt), while the six NH₃ molecules represent secondary valence (coordination number, tightly bound via coordinate bonds directly to cobalt)', isCorrect: true },
+      { text: 'This is inconsistent behavior — all species attached to a metal complex should behave identically in solution', isCorrect: false, misconceptionId: `${WERNER}:MC1` },
+    ],
+    correctValue: 'Distinguishes primary valence (Cl⁻) from secondary valence (NH₃)',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${WERNER}:MC1`],
+    source: `${WERNER_SRC} — distractor targets expecting uniform behavior from all attached species`,
+  },
+  {
+    conceptId: WERNER,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Was Werner\'s coordination theory merely a description that fit already-known facts, with no genuine predictive power?',
+    choices: [
+      { text: 'No — Werner correctly predicted the octahedral geometry for 6-coordinate complexes using isomer-counting logic, years before X-ray crystallography existed to directly verify 3D structures — a genuine, falsifiable prediction later confirmed', isCorrect: true },
+      { text: 'Yes — Werner\'s theory only explained observations that were already fully understood, without making any new testable predictions', isCorrect: false, misconceptionId: `${WERNER}:MC2` },
+    ],
+    correctValue: 'No — Werner made a genuine, later-confirmed prediction',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${WERNER}:MC2`],
+    source: `${WERNER_SRC} — misconception: Werner's theory was purely descriptive with no predictive value`,
+  },
+]
+
+// ─── chem.coord.nomenclature ─────────────────────────────────────────────────
+const COORDNOM = 'chem.coord.nomenclature'
+const COORDNOM_SRC = 'docs/chemistry/kg/graph.json — chem.coord.nomenclature'
+
+const COORDNOM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COORDNOM,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Naming coordination complexes follows systematic IUPAC rules, similar in spirit to ' +
+      'organic nomenclature but with its own conventions. Key rules: (1) List LIGANDS ' +
+      'ALPHABETICALLY (by ligand name, ignoring any multiplying prefix) BEFORE the metal ' +
+      'name. (2) Use MULTIPLYING PREFIXES for ligand count: di-/tri-/tetra- for SIMPLE ' +
+      'ligands (like chloro, ammine), but bis-/tris-/tetrakis- for COMPLEX ligand names ' +
+      'that already contain a prefix-like syllable or are themselves polysyllabic ' +
+      '(like ethylenediamine — "bis(ethylenediamine)" avoids the ambiguous ' +
+      '"diethylenediamine," which could be misread). (3) ANIONIC ligands end in "-o" ' +
+      '(chloro for Cl⁻, cyano for CN⁻, hydroxo for OH⁻); NEUTRAL ligands mostly keep their ' +
+      'molecular name (with exceptions: aqua for H₂O, ammine for NH₃, carbonyl for CO). ' +
+      '(4) If the OVERALL complex ion is ANIONIC (negative charge), the metal name gets ' +
+      'the SUFFIX "-ate" (ferrate, cuprate — sometimes using the Latin root instead of the ' +
+      'English element name). (5) The metal\'s OXIDATION STATE is given in Roman numerals ' +
+      'in parentheses immediately after the metal name.',
+    targetedMisconceptions: [`${COORDNOM}:MC1`],
+    source: `${COORDNOM_SRC} — coordination complex nomenclature rules, ligand naming, oxidation state notation`,
+  },
+  {
+    conceptId: COORDNOM,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Always use di-/tri-/tetra- as multiplying prefixes for ligand count, ' +
+      'regardless of the ligand\'s name complexity." FALSE — for ligands whose names ' +
+      'already contain syllables resembling multiplying prefixes, or that are themselves ' +
+      'complex/polysyllabic (like ethylenediamine, or any ligand name in parentheses), you ' +
+      'MUST use bis-/tris-/tetrakis- instead, specifically to avoid ambiguity. ' +
+      '"Diethylenediamine" would be confusingly ambiguous (does "di" apply to ' +
+      '"ethylenediamine" as a whole, or is it part of a different, unrelated ligand name?) ' +
+      '— "bis(ethylenediamine)" with parentheses removes all doubt. Second trap: "The ' +
+      'complex ion\'s charge and the metal\'s oxidation state are always the same number, ' +
+      'interchangeable in naming." Not necessarily identical numerically — the OXIDATION ' +
+      'STATE (Roman numeral, describing just the metal\'s formal charge) and the overall ' +
+      'COMPLEX ION CHARGE (describing the entire assembly of metal + ligands) are related ' +
+      'but distinct quantities — you calculate one from the other using the sum of ligand ' +
+      'charges, they don\'t automatically match unless all ligands happen to be neutral.',
+    targetedMisconceptions: [`${COORDNOM}:MC1`, `${COORDNOM}:MC2`],
+    source: `${COORDNOM_SRC} — misconception: always use simple di-/tri- prefixes; oxidation state equals complex charge`,
+  },
+]
+
+const COORDNOM_PROBES: SeedProbe[] = [
+  {
+    conceptId: COORDNOM,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A complex contains two ethylenediamine ligands. Should this be named "diethylenediamine" or "bis(ethylenediamine)"?',
+    choices: [
+      { text: 'bis(ethylenediamine) — since ethylenediamine is a complex/polysyllabic ligand name, the bis- prefix with parentheses is required to avoid the ambiguity that "diethylenediamine" would create', isCorrect: true },
+      { text: 'diethylenediamine — di-/tri-/tetra- prefixes are always used regardless of ligand name complexity', isCorrect: false, misconceptionId: `${COORDNOM}:MC1` },
+    ],
+    correctValue: 'bis(ethylenediamine)',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${COORDNOM}:MC1`],
+    source: `${COORDNOM_SRC} — distractor targets using simple prefixes universally regardless of ligand name complexity`,
+  },
+  {
+    conceptId: COORDNOM,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'In [Co(NH₃)₄Cl₂]⁺, is the overall complex ion charge (+1) automatically the same number as cobalt\'s oxidation state?',
+    choices: [
+      { text: 'No — cobalt\'s oxidation state here is +3 (calculated from: +1 overall charge = Co oxidation state + 4(0, neutral NH₃) + 2(−1, each Cl⁻), so Co = +1+2 = +3), distinct from the complex\'s overall +1 charge', isCorrect: true },
+      { text: 'Yes — the overall complex charge and the metal\'s oxidation state are always numerically identical', isCorrect: false, misconceptionId: `${COORDNOM}:MC2` },
+    ],
+    correctValue: 'No — Co oxidation state (+3) differs from overall complex charge (+1)',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${COORDNOM}:MC2`],
+    source: `${COORDNOM_SRC} — misconception: conflating overall complex charge with the metal's oxidation state`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -7830,6 +8268,11 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...ACTSER_EXPLANATIONS,
   ...MOTHY_EXPLANATIONS,
   ...POLARM_EXPLANATIONS,
+  ...PACK_EXPLANATIONS,
+  ...DEFECT_EXPLANATIONS,
+  ...AMORPH_EXPLANATIONS,
+  ...WERNER_EXPLANATIONS,
+  ...COORDNOM_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -7927,4 +8370,9 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...ACTSER_PROBES,
   ...MOTHY_PROBES,
   ...POLARM_PROBES,
+  ...PACK_PROBES,
+  ...DEFECT_PROBES,
+  ...AMORPH_PROBES,
+  ...WERNER_PROBES,
+  ...COORDNOM_PROBES,
 ]
