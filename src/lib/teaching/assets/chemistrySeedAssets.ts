@@ -9760,6 +9760,276 @@ const HALINTRO_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.hyd.petroleum ──────────────────────────────────────────────────────
+const PETRO = 'chem.hyd.petroleum'
+const PETRO_SRC = 'docs/chemistry/kg/graph.json — chem.hyd.petroleum'
+
+const PETRO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PETRO,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Crude oil is a complex mixture of thousands of different hydrocarbons (mostly ' +
+      'alkanes, some cycloalkanes/aromatics) — FRACTIONAL DISTILLATION (building on the ' +
+      'purification concept covered earlier) separates it by BOILING POINT into usable ' +
+      'FRACTIONS: gases (methane-butane, bp <20°C), petrol/gasoline (C5-C10, ~20-180°C), ' +
+      'kerosene (C10-C16, ~180-250°C), diesel (C14-C20), and heavier fractions (lubricating ' +
+      'oils, waxes, bitumen/asphalt — progressively higher boiling points as chain length ' +
+      'increases, matching the trend covered earlier that longer chains have stronger ' +
+      'London dispersion forces). Straight-run gasoline (directly from distillation) burns ' +
+      'poorly in engines (causes "knocking" — uncontrolled premature ignition) — CRACKING ' +
+      'converts heavier, less-valuable fractions into MORE gasoline-range molecules by ' +
+      'breaking large hydrocarbon chains into smaller ones (thermal cracking: high heat/ ' +
+      'pressure; catalytic cracking: zeolite catalysts, lower temperature, produces more ' +
+      'branched/aromatic products with BETTER engine performance). REFORMING further ' +
+      'improves fuel quality by converting straight-chain alkanes into branched or cyclic/ ' +
+      'aromatic structures (higher octane rating, better anti-knock performance) without ' +
+      'changing the carbon count.',
+    targetedMisconceptions: [`${PETRO}:MC1`],
+    source: `${PETRO_SRC} — fractional distillation of crude oil, cracking, reforming, octane quality`,
+  },
+  {
+    conceptId: PETRO,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Cracking is done simply to make SMALLER molecules, since smaller is somehow ' +
+      'inherently more useful." The real driver is DEMAND MATCHING — crude oil naturally ' +
+      'contains a much HIGHER proportion of heavy, long-chain fractions than the market ' +
+      'demands (relative to gasoline/lighter fuel demand), so cracking converts SURPLUS ' +
+      'heavy fractions into MORE of the high-demand gasoline-range molecules — it\'s an ' +
+      'economic/supply-matching process, not simply "smaller is better" for its own sake. ' +
+      'Second trap: "Straight-chain alkanes are just as good fuel as branched/cyclic ' +
+      'structures — molecular shape doesn\'t matter for combustion quality." FALSE — ' +
+      'straight-chain alkanes ignite more UNEVENLY/prematurely under compression ' +
+      '(causing engine "knocking," reducing efficiency and potentially damaging the ' +
+      'engine), while branched and aromatic structures burn more smoothly and evenly ' +
+      'under the same compression — this is precisely WHY octane rating exists as a ' +
+      'quality measure, and why reforming deliberately converts straight chains into ' +
+      'branched/cyclic structures even without changing the carbon count.',
+    targetedMisconceptions: [`${PETRO}:MC1`, `${PETRO}:MC2`],
+    source: `${PETRO_SRC} — misconception: cracking is about making molecules smaller for its own sake; molecular shape doesn't affect fuel quality`,
+  },
+]
+
+const PETRO_PROBES: SeedProbe[] = [
+  {
+    conceptId: PETRO,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why is cracking (breaking heavy hydrocarbon fractions into lighter ones) an economically important process in petroleum refining?',
+    choices: [
+      { text: 'Crude oil naturally contains more heavy, long-chain fractions than market demand requires relative to gasoline; cracking converts surplus heavy fractions into more of the high-demand lighter, gasoline-range molecules', isCorrect: true },
+      { text: 'Smaller hydrocarbon molecules are inherently more chemically stable and useful than larger ones for any purpose', isCorrect: false, misconceptionId: `${PETRO}:MC1` },
+    ],
+    correctValue: 'Cracking matches supply of fractions to market demand',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PETRO}:MC1`],
+    source: `${PETRO_SRC} — distractor targets vague "smaller is better" reasoning instead of supply-demand economics`,
+  },
+  {
+    conceptId: PETRO,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does the shape of a hydrocarbon molecule (straight-chain vs. branched/cyclic) actually affect its quality as an engine fuel, given the same carbon count?',
+    choices: [
+      { text: 'Yes — straight-chain alkanes tend to ignite unevenly under compression (causing engine knocking), while branched and aromatic structures burn more smoothly; this is why reforming converts straight chains into branched/cyclic structures to improve octane rating', isCorrect: true },
+      { text: 'No — molecular shape has no effect on combustion quality; only the carbon count and total energy content matter for fuel performance', isCorrect: false, misconceptionId: `${PETRO}:MC2` },
+    ],
+    correctValue: 'Yes — molecular shape significantly affects combustion quality/octane rating',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PETRO}:MC2`],
+    source: `${PETRO_SRC} — misconception: molecular shape is irrelevant to fuel combustion quality`,
+  },
+]
+
+// ─── chem.hyd.conformations ──────────────────────────────────────────────────
+const CONFORM = 'chem.hyd.conformations'
+const CONFORM_SRC = 'docs/chemistry/kg/graph.json — chem.hyd.conformations'
+
+const CONFORM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CONFORM,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'CONFORMATIONS are different 3D shapes a molecule can adopt purely by ROTATING ' +
+      'around single (σ) bonds — unlike configurational isomers (structural/stereoisomers ' +
+      'covered earlier), conformations INTERCONVERT freely at room temperature WITHOUT ' +
+      'breaking any bonds, simply through bond rotation. For ethane (CH₃-CH₃), rotating ' +
+      'around the C-C bond gives two extremes: STAGGERED (hydrogens on adjacent carbons ' +
+      'maximally spread apart, 60° dihedral angle, LOWEST energy — minimal electron-cloud ' +
+      'repulsion between neighboring C-H bonds) and ECLIPSED (hydrogens directly aligned, ' +
+      '0° dihedral, HIGHEST energy — maximum repulsion, called TORSIONAL STRAIN). The ' +
+      'energy difference is small (~12 kJ/mol for ethane) but real — molecules spend MORE ' +
+      'time in the lower-energy staggered form, constantly rotating through all ' +
+      'intermediate angles at room temperature (rotation isn\'t frozen, just statistically ' +
+      'biased toward the stable conformation). For larger molecules like butane, an ' +
+      'ADDITIONAL consideration arises: STERIC STRAIN from bulky groups (like the two CH₃ ' +
+      'groups) — the most stable conformation (ANTI, 180° apart) keeps the bulky groups ' +
+      'maximally separated, avoiding both torsional AND steric strain simultaneously.',
+    targetedMisconceptions: [`${CONFORM}:MC1`],
+    source: `${CONFORM_SRC} — staggered/eclipsed conformations, torsional strain, anti/gauche in butane`,
+  },
+  {
+    conceptId: CONFORM,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Conformational isomers (like staggered vs. eclipsed ethane) are genuinely ' +
+      'different, separable compounds, just like structural isomers or stereoisomers." ' +
+      'FALSE — this is the KEY distinction. Conformations interconvert FREELY and RAPIDLY ' +
+      'at room temperature through simple bond rotation (no bonds break), so you CANNOT ' +
+      'isolate "staggered ethane" as a separate bottle from "eclipsed ethane" — at any ' +
+      'given instant, a sample contains a rapidly-interconverting, dynamic MIXTURE ' +
+      'dominated by the lower-energy staggered form, not two distinct isolable compounds. ' +
+      'This contrasts sharply with true isomers (structural, geometric, optical), which ' +
+      'require actual bond-breaking to interconvert and CAN be physically separated/ ' +
+      'isolated. Second trap: "Since the staggered form is lowest energy and eclipsed is ' +
+      'highest, molecules "get stuck" in the staggered conformation once they reach it, ' +
+      'never rotating back to eclipsed." FALSE — at room temperature, thermal energy ' +
+      '(kT) is generally sufficient to overcome the small rotational barrier (~12 kJ/mol ' +
+      'for ethane, much less than a typical covalent bond\'s ~350 kJ/mol) — rotation ' +
+      'continues constantly and rapidly; molecules pass through ALL conformations, just ' +
+      'spending statistically MORE time near the low-energy staggered geometry, not being ' +
+      'permanently locked there.',
+    targetedMisconceptions: [`${CONFORM}:MC1`, `${CONFORM}:MC2`],
+    source: `${CONFORM_SRC} — misconception: conformations are isolable like true isomers; molecules get permanently locked in low-energy conformation`,
+  },
+]
+
+const CONFORM_PROBES: SeedProbe[] = [
+  {
+    conceptId: CONFORM,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Can you isolate a pure sample of "staggered ethane" separately from "eclipsed ethane" in two different bottles, the way you could isolate two different structural isomers?',
+    choices: [
+      { text: 'No — conformations interconvert freely and rapidly via bond rotation at room temperature (no bonds break); a sample is a dynamic, rapidly-interconverting mixture dominated by the lower-energy staggered form, not two separable compounds', isCorrect: true },
+      { text: 'Yes — staggered and eclipsed ethane are distinct, separable compounds just like any other pair of isomers', isCorrect: false, misconceptionId: `${CONFORM}:MC1` },
+    ],
+    correctValue: 'No — conformations cannot be isolated like true isomers',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CONFORM}:MC1`],
+    source: `${CONFORM_SRC} — distractor targets treating conformers as isolable, separable compounds like true isomers`,
+  },
+  {
+    conceptId: CONFORM,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Since the staggered conformation of ethane is lower in energy than eclipsed, do molecules "get stuck" in the staggered form once they reach it, never rotating back through eclipsed?',
+    choices: [
+      { text: 'No — at room temperature, thermal energy is generally sufficient to overcome the small rotational barrier (~12 kJ/mol), so rotation continues constantly; molecules pass through all conformations, just spending more statistical time near staggered', isCorrect: true },
+      { text: 'Yes — once a molecule reaches the lowest-energy conformation, it remains permanently locked there without further rotation', isCorrect: false, misconceptionId: `${CONFORM}:MC2` },
+    ],
+    correctValue: 'No — rotation continues constantly; staggered is just statistically favored',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CONFORM}:MC2`],
+    source: `${CONFORM_SRC} — misconception: molecules become permanently fixed in the lowest-energy conformation`,
+  },
+]
+
+// ─── chem.hyd.arenes ─────────────────────────────────────────────────────────
+const ARENES = 'chem.hyd.arenes'
+const ARENES_SRC = 'docs/chemistry/kg/graph.json — chem.hyd.arenes'
+
+const ARENES_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ARENES,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Building directly on aromaticity (covered earlier): benzene\'s dominant reaction ' +
+      'pathway is ELECTROPHILIC AROMATIC SUBSTITUTION (EAS) — an electrophile replaces one ' +
+      'ring hydrogen while PRESERVING the aromatic system (as opposed to addition, which ' +
+      'would destroy aromaticity and its stabilization energy). Common EAS reactions: ' +
+      'NITRATION (HNO₃/H₂SO₄, introduces -NO₂), HALOGENATION (Cl₂/FeCl₃ catalyst, ' +
+      'introduces -Cl), SULFONATION (fuming H₂SO₄, introduces -SO₃H), FRIEDEL-CRAFTS ' +
+      'ALKYLATION/ACYLATION (R-Cl/AlCl₃ catalyst, introduces alkyl or acyl groups). Once a ' +
+      'SUBSTITUENT is present, it DIRECTS where the NEXT substituent goes (connecting ' +
+      'directly to the electronic effects concept covered earlier): ACTIVATING, ' +
+      'ORTHO/PARA-DIRECTING groups (like -OH, -NH₂, -CH₃ — electron-donating via +M or +I) ' +
+      'make the ring MORE reactive and direct new substituents to positions 2/4 relative to ' +
+      'themselves. DEACTIVATING, META-DIRECTING groups (like -NO₂, -C=O, -SO₃H — ' +
+      'electron-withdrawing via −M or −I) make the ring LESS reactive and direct to ' +
+      'position 3. Halogens are a special exception: deactivating (−I dominates overall ' +
+      'reactivity) but STILL ortho/para-directing (+M dominates the directing preference) — ' +
+      'the same conflicting-effects lesson from electronic effects applied concretely.',
+    targetedMisconceptions: [`${ARENES}:MC1`],
+    source: `${ARENES_SRC} — electrophilic aromatic substitution, activating/deactivating groups, ortho/para vs meta directing`,
+  },
+  {
+    conceptId: ARENES,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "A substituent\'s directing effect (ortho/para vs. meta) and its activating/ ' +
+      'deactivating effect (making the ring more or less reactive overall) must always ' +
+      'correlate in the same intuitive way — activating groups direct ortho/para, ' +
+      'deactivating groups direct meta, with NO exceptions." MOSTLY true but with a ' +
+      'critical EXCEPTION: halogens are DEACTIVATING (make the ring less reactive overall, ' +
+      'due to their dominant −I inductive withdrawal) YET still ortho/para-DIRECTING (due ' +
+      'to their +M resonance donation dominating the POSITIONAL preference specifically). ' +
+      'This seemingly contradictory combination makes perfect sense once you separate the ' +
+      'TWO separate questions being asked: "how reactive overall?" (answered by the NET ' +
+      'balance of inductive+mesomeric effects) versus "where does substitution occur?" ' +
+      '(answered by which position the mesomeric/resonance effect specifically stabilizes ' +
+      'best) — these can have different dominant contributing effects. Second trap: ' +
+      '"Benzene should undergo ADDITION reactions readily, just like a normal alkene with ' +
+      'multiple double bonds." FALSE — as established in aromaticity, the delocalization ' +
+      'energy makes substitution (preserving the aromatic system) strongly preferred over ' +
+      'addition (which would destroy the ring\'s special stability) — benzene requires much ' +
+      'harsher conditions (high pressure H₂/catalyst) to force addition at all, unlike ' +
+      'ordinary alkenes which add readily under mild conditions.',
+    targetedMisconceptions: [`${ARENES}:MC1`, `${ARENES}:MC2`],
+    source: `${ARENES_SRC} — misconception: directing and activating effects always correlate simply; benzene undergoes addition readily like alkenes`,
+  },
+]
+
+const ARENES_PROBES: SeedProbe[] = [
+  {
+    conceptId: ARENES,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Chlorine on a benzene ring is deactivating (makes the ring less reactive overall) but ortho/para-directing. Is this a contradiction?',
+    choices: [
+      { text: 'No — these answer two different questions: overall reactivity is dominated by Cl\'s -I inductive withdrawal (deactivating), while positional directing preference is dominated by Cl\'s +M resonance donation (ortho/para-directing) — different effects can dominate different questions', isCorrect: true },
+      { text: 'Yes — deactivating groups must always be meta-directing; this combination is chemically impossible and indicates an error', isCorrect: false, misconceptionId: `${ARENES}:MC1` },
+    ],
+    correctValue: 'No — different effects (inductive vs mesomeric) dominate different aspects',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ARENES}:MC1`],
+    source: `${ARENES_SRC} — distractor targets assuming activating/directing effects must always correlate simply`,
+  },
+  {
+    conceptId: ARENES,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Benzene contains what appear to be three double bonds (in simplified drawings). Does benzene readily undergo addition reactions under mild conditions, like a typical alkene?',
+    choices: [
+      { text: 'No — benzene\'s aromatic delocalization energy strongly favors substitution (preserving the ring) over addition (which would destroy aromaticity); benzene requires much harsher conditions (high pressure/catalyst) to undergo addition at all', isCorrect: true },
+      { text: 'Yes — since benzene has multiple double bonds, it should add reagents readily under the same mild conditions as ordinary alkenes', isCorrect: false, misconceptionId: `${ARENES}:MC2` },
+    ],
+    correctValue: 'No — benzene strongly resists addition due to aromatic stabilization',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ARENES}:MC2`],
+    source: `${ARENES_SRC} — misconception: benzene behaves like an ordinary polyene toward addition reactions`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -9880,6 +10150,9 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...STABCON_EXPLANATIONS,
   ...COORDISOM_EXPLANATIONS,
   ...HALINTRO_EXPLANATIONS,
+  ...PETRO_EXPLANATIONS,
+  ...CONFORM_EXPLANATIONS,
+  ...ARENES_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -10000,4 +10273,7 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...STABCON_PROBES,
   ...COORDISOM_PROBES,
   ...HALINTRO_PROBES,
+  ...PETRO_PROBES,
+  ...CONFORM_PROBES,
+  ...ARENES_PROBES,
 ]
