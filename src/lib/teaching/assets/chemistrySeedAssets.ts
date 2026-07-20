@@ -11722,6 +11722,184 @@ const ALCOH_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.hyd.alkenes ────────────────────────────────────────────────────────
+const ALKENE = 'chem.hyd.alkenes'
+const ALKENE_SRC = 'docs/chemistry/kg/graph.json — chem.hyd.alkenes'
+
+const ALKENE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ALKENE,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Alkenes (CₙH₂ₙ, containing a C=C double bond, sp² hybridized as covered earlier) are ' +
+      'more reactive than alkanes because the EXPOSED π BOND (electron density above/below ' +
+      'the molecular plane) attracts ELECTROPHILES readily — this drives ELECTROPHILIC ' +
+      'ADDITION as the dominant reaction type (contrasting with alkanes\' resistance to ' +
+      'addition and benzene\'s preference for substitution, covered earlier). MARKOVNIKOV\'S ' +
+      'RULE predicts regiochemistry for addition of H-X (like HBr) to an UNSYMMETRICAL ' +
+      'alkene: H adds to the carbon with MORE hydrogens already attached, and X adds to the ' +
+      'carbon with FEWER — mechanistically, this is because the reaction proceeds through ' +
+      'the MORE STABLE carbocation intermediate (covered in reactive intermediates: ' +
+      'tertiary > secondary > primary), and Markovnikov\'s rule is really just a shortcut ' +
+      'for predicting "which carbocation forms" without drawing the full mechanism. ' +
+      'ANTI-MARKOVNIKOV addition occurs specifically with HBr (not HCl or HI) under PEROXIDE ' +
+      'conditions — this switches the mechanism entirely to a FREE RADICAL pathway (radical ' +
+      'stability also favors tertiary, but the radical forms and adds in the OPPOSITE ' +
+      'position sequence compared to the ionic mechanism), giving the reversed regiochemistry.',
+    targetedMisconceptions: [`${ALKENE}:MC1`],
+    source: `${ALKENE_SRC} — alkene reactivity, electrophilic addition, Markovnikov's rule, peroxide effect`,
+  },
+  {
+    conceptId: ALKENE,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Markovnikov\'s rule is an arbitrary memorized rule with no underlying ' +
+      'mechanistic reason — it\'s just a pattern to memorize." FALSE — it directly follows ' +
+      'from carbocation stability (covered earlier): the reaction proceeds through WHICHEVER ' +
+      'carbocation is more stable (tertiary > secondary > primary), and that stability ' +
+      'determines which carbon ends up bonded to H vs. X. Understanding the MECHANISM (not ' +
+      'just memorizing "H goes to more H\'s") lets you correctly predict outcomes even for ' +
+      'unusual substrates where the simple pattern-matching heuristic might mislead you. ' +
+      'Second trap: "The peroxide effect (anti-Markovnikov addition) works for ANY hydrogen ' +
+      'halide (HCl, HBr, HI) under peroxide conditions." FALSE — the peroxide/anti- ' +
+      'Markovnikov effect is SPECIFIC to HBr only. This is because the radical chain ' +
+      'mechanism requires a very particular energetic balance: HCl\'s H-Cl bond is too ' +
+      'strong for the radical propagation step to work efficiently, and HI\'s radical ' +
+      'chain gets interrupted by an unfavorable competing reaction — only HBr\'s bond ' +
+      'strength happens to be "just right" for the radical mechanism to dominate over the ' +
+      'normal ionic (Markovnikov) pathway.',
+    targetedMisconceptions: [`${ALKENE}:MC1`, `${ALKENE}:MC2`],
+    source: `${ALKENE_SRC} — misconception: Markovnikov's rule is arbitrary rather than mechanism-derived; peroxide effect works for any HX`,
+  },
+]
+
+const ALKENE_PROBES: SeedProbe[] = [
+  {
+    conceptId: ALKENE,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why does HBr add to propene (CH3-CH=CH2) with Br ending up on the middle carbon (Markovnikov product), rather than on the terminal carbon?',
+    choices: [
+      { text: 'The reaction proceeds through the more stable secondary carbocation (formed when H adds to the terminal CH2), which then gets attacked by Br-; Markovnikov\'s rule is a shortcut for predicting which carbocation intermediate forms', isCorrect: true },
+      { text: 'Markovnikov\'s rule is simply an arbitrary pattern that must be memorized, with no connection to reaction mechanism or intermediate stability', isCorrect: false, misconceptionId: `${ALKENE}:MC1` },
+    ],
+    correctValue: 'Follows from more-stable-carbocation-intermediate mechanism',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ALKENE}:MC1`],
+    source: `${ALKENE_SRC} — distractor targets treating Markovnikov's rule as an arbitrary memorized pattern rather than mechanism-derived`,
+  },
+  {
+    conceptId: ALKENE,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does the "peroxide effect" (anti-Markovnikov addition via radical mechanism) work for HCl and HI, just as it does for HBr?',
+    choices: [
+      { text: 'No — the peroxide/anti-Markovnikov effect is specific to HBr; HCl\'s bond is too strong for efficient radical propagation, and HI\'s radical chain is interrupted by a competing reaction, so only HBr shows this reversed regiochemistry under peroxide conditions', isCorrect: true },
+      { text: 'Yes — the peroxide effect works identically for any hydrogen halide (HCl, HBr, or HI) under peroxide conditions', isCorrect: false, misconceptionId: `${ALKENE}:MC2` },
+    ],
+    correctValue: 'No — the peroxide effect is specific to HBr',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ALKENE}:MC2`],
+    source: `${ALKENE_SRC} — misconception: the peroxide/anti-Markovnikov effect applies generally to all hydrogen halides`,
+  },
+]
+
+// ─── chem.hal.elimination ────────────────────────────────────────────────────
+const ELIM = 'chem.hal.elimination'
+const ELIM_SRC = 'docs/chemistry/kg/graph.json — chem.hal.elimination'
+
+const ELIM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ELIM,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Elimination reactions REMOVE atoms/groups from ADJACENT carbons to FORM a new π ' +
+      'bond (the reverse conceptual direction from addition, covered in alkenes) — a ' +
+      'haloalkane loses H-X to become an alkene. Like substitution, elimination has TWO ' +
+      'mechanisms mirroring SN1/SN2 (covered earlier): E1 (two-step, via a carbocation ' +
+      'intermediate, favored by TERTIARY substrates and WEAK bases — often COMPETES ' +
+      'directly with SN1 under the same conditions, since both share the carbocation ' +
+      'intermediate step) and E2 (one-step, CONCERTED — base removes a β-hydrogen at the ' +
+      'EXACT same moment the leaving group departs, requiring ANTI-PERIPLANAR geometry: the ' +
+      'H and leaving group must be aligned 180° apart for proper orbital overlap during the ' +
+      'simultaneous bond-breaking/forming). ZAITSEV\'S RULE predicts the major elimination ' +
+      'product: the MORE SUBSTITUTED alkene (more alkyl groups on the double bond carbons) ' +
+      'is generally favored, because more-substituted double bonds are THERMODYNAMICALLY ' +
+      'more stable (similar hyperconjugation/electron-donation stabilization logic as ' +
+      'carbocations). Crucially, SUBSTITUTION and ELIMINATION are often COMPETING pathways ' +
+      'for the SAME substrate/reagent combination — which one dominates depends heavily on ' +
+      'the base/nucleophile\'s strength and STERIC BULK (bulky, hindered bases favor ' +
+      'elimination over substitution by physically struggling to attack the crowded carbon).',
+    targetedMisconceptions: [`${ELIM}:MC1`],
+    source: `${ELIM_SRC} — E1/E2 mechanisms, anti-periplanar geometry, Zaitsev's rule, substitution vs elimination competition`,
+  },
+  {
+    conceptId: ELIM,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Substitution and elimination are completely separate reaction types that never ' +
+      'compete — a given substrate/reagent combination always cleanly gives ONE type of ' +
+      'product." FALSE — this is a major real-world complication students often ' +
+      'underestimate. The SAME substrate reacting with the SAME reagent frequently produces ' +
+      'a MIXTURE of substitution AND elimination products simultaneously (e.g., a secondary ' +
+      'haloalkane with a moderately strong, moderately bulky base can give both SN2 and E2 ' +
+      'products in the same flask) — predicting the DOMINANT pathway requires considering ' +
+      'substrate type, base/nucleophile strength AND bulk, solvent, and temperature ' +
+      'together, not assuming a clean either/or outcome. Second trap: "Zaitsev\'s rule ' +
+      'ALWAYS gives the major product, with no exceptions." FALSE — with BULKY, STERICALLY ' +
+      'HINDERED bases (like tert-butoxide, (CH₃)₃CO⁻), the HOFMANN product (LESS substituted ' +
+      'alkene) can actually dominate instead — the bulky base preferentially removes the ' +
+      'MORE ACCESSIBLE (less hindered) hydrogen, even though that gives the ' +
+      'thermodynamically less-stable alkene; this is a kinetically-controlled outcome ' +
+      'overriding the usual thermodynamic (Zaitsev) preference.',
+    targetedMisconceptions: [`${ELIM}:MC1`, `${ELIM}:MC2`],
+    source: `${ELIM_SRC} — misconception: substitution/elimination never compete for the same substrate; Zaitsev's rule has no exceptions`,
+  },
+]
+
+const ELIM_PROBES: SeedProbe[] = [
+  {
+    conceptId: ELIM,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A secondary haloalkane reacts with a moderately strong, moderately bulky base/nucleophile. Should you expect a clean, single product (either pure substitution or pure elimination)?',
+    choices: [
+      { text: 'Not necessarily — the same substrate/reagent combination often gives a MIXTURE of substitution (SN2) and elimination (E2) products simultaneously; predicting the dominant pathway requires considering multiple factors together, not assuming a clean either/or outcome', isCorrect: true },
+      { text: 'Yes — substitution and elimination are always completely separate outcomes that never compete for the same substrate/reagent pair', isCorrect: false, misconceptionId: `${ELIM}:MC1` },
+    ],
+    correctValue: 'Not necessarily — mixed products are common',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ELIM}:MC1`],
+    source: `${ELIM_SRC} — distractor targets assuming substitution and elimination never compete for the same reaction`,
+  },
+  {
+    conceptId: ELIM,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does Zaitsev\'s rule (predicting the more-substituted alkene as the major product) always hold true, regardless of which base is used?',
+    choices: [
+      { text: 'No — with bulky, sterically hindered bases (like tert-butoxide), the less-substituted Hofmann product can dominate instead, since the bulky base preferentially removes the more accessible hydrogen, overriding the usual thermodynamic preference', isCorrect: true },
+      { text: 'Yes — Zaitsev\'s rule reliably predicts the major elimination product under all conditions, regardless of the base used', isCorrect: false, misconceptionId: `${ELIM}:MC2` },
+    ],
+    correctValue: 'No — bulky bases can favor the Hofmann product instead',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ELIM}:MC2`],
+    source: `${ELIM_SRC} — misconception: Zaitsev's rule applies universally regardless of base steric bulk`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -11864,6 +12042,8 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...NERNST_EXPLANATIONS,
   ...INDELEC_EXPLANATIONS,
   ...ALCOH_EXPLANATIONS,
+  ...ALKENE_EXPLANATIONS,
+  ...ELIM_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -12006,4 +12186,6 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...NERNST_PROBES,
   ...INDELEC_PROBES,
   ...ALCOH_PROBES,
+  ...ALKENE_PROBES,
+  ...ELIM_PROBES,
 ]
