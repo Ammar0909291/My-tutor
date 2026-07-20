@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.real.lipschitz-continuity-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.real.lipschitz-continuity",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:5fbc08eaa39c6b6fa5059d51569fd1b46ecc78d5eea6c3ad12e98abd1f94a956",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.real.lipschitz-continuity.md": "sha256:53986d578964630d37b5393226c4c1f2dd36ebef92af0a6e818e257cde9111ff"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.real.lipschitz-continuity",
+    "name": "Lipschitz Continuity",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.real.uniform-continuity"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.real.lipschitz-continuity-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.real.lipschitz-continuity (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.real.lipschitz-continuity.md": "sha256:53986d578964630d37b5393226c4c1f2dd36ebef92af0a6e818e257cde9111ff"
+      },
+      "contentHash": "sha256:cd1b2053f20212bc0dff8849bd8d8c6f95e5001d1177af3baf0a489361690605",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.real.lipschitz-continuity.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.lipschitz-continuity.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.lipschitz-continuity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.lipschitz-continuity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.lipschitz-continuity.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.lipschitz-continuity.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.lipschitz-continuity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.lipschitz-continuity\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.lipschitz-continuity.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.lipschitz-continuity.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.lipschitz-continuity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.lipschitz-continuity\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.lipschitz-continuity.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.lipschitz-continuity.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.lipschitz-continuity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.lipschitz-continuity\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.real.lipschitz-continuity/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.real.lipschitz-continuity",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the Lipschitz condition precisely — $\\exists L\\ge0$ such that $|f(x)-f(y)|\\le L|x-y|$ for ALL $x,y$ in the domain — and correctly compute (or bound) the smallest valid Lipschitz constant $L$ for a specific differentiable function, connecting $L$ directly to a bound on $|f'|$.\n- LO2 (cross-link objective): Prove Lipschitz $\\Rightarrow$ uniformly continuous DIRECTLY from `math.real.uniform-continuity`'s own ε–δ definition — given $\\varepsilon>0$, exhibit an EXPLICIT $\\delta=\\delta(\\varepsilon)$ (namely $\\delta=\\varepsilon/L$) that works for the WHOLE domain simultaneously, making the implication completely constructive rather than an abstract existence claim.\n- LO3: Exhibit a function that is uniformly continuous but NOT Lipschitz — using $f(x)=\\sqrt x$ on $[0,1]$ as the standard example — showing its slope becomes UNBOUNDED near $x=0$ (ruling out any finite $L$) while still satisfying `math.real.uniform-continuity`'s own weaker ε–δ requirement, confirming the strict separation between the two properties.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.lipschitz-continuity.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.real.lipschitz-continuity/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.real.lipschitz-continuity",
+      "title": "LIPSCHITZ-CONSTANT-ASSUMED-ABSTRACT",
+      "content": "| MC-1 | LIPSCHITZ-CONSTANT-ASSUMED-ABSTRACT | Believing finding a Lipschitz constant is typically an abstract existence argument, missing that a derivative bound directly and computably supplies one | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.lipschitz-continuity.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.real.lipschitz-continuity/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.real.lipschitz-continuity",
+      "title": "LIPSCHITZ-TO-UNIFORM-CONTINUITY-ASSUMED-NON-CONSTRUCTIVE",
+      "content": "| MC-2 | LIPSCHITZ-TO-UNIFORM-CONTINUITY-ASSUMED-NON-CONSTRUCTIVE | Believing the Lipschitz-implies-uniformly-continuous proof requires a non-constructive argument, missing the explicit $\\delta=\\varepsilon/L$ formula | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.lipschitz-continuity.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.real.lipschitz-continuity/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.real.lipschitz-continuity",
+      "title": "UNIFORM-CONTINUITY-ASSUMED-EQUIVALENT-TO-LIPSCHITZ",
+      "content": "| MC-3 | UNIFORM-CONTINUITY-ASSUMED-EQUIVALENT-TO-LIPSCHITZ | Believing uniform continuity and Lipschitz continuity are essentially equivalent strengths, missing the strict separation $\\sqrt x$ on $[0,1]$ demonstrates | High |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.lipschitz-continuity.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.real.lipschitz-continuity/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.lipschitz-continuity",
+      "title": "The Lipschitz Constant Is Directly Computable From a Derivative Bound (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Lipschitz Constant Is Directly Computable From a Derivative Bound (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.lipschitz-continuity.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.real.lipschitz-continuity/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.lipschitz-continuity",
+      "title": "Lipschitz $\\Rightarrow$ Uniformly Continuous Is Fully Constructive — $\\delta=\\varepsilon/L$ (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Lipschitz $\\\\Rightarrow$ Uniformly Continuous Is Fully Constructive — $\\\\delta=\\\\varepsilon/L$ (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.lipschitz-continuity.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.real.lipschitz-continuity/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.lipschitz-continuity",
+      "title": "Uniformly Continuous Does Not Imply Lipschitz — $\\sqrt x$ Proves It (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Uniformly Continuous Does Not Imply Lipschitz — $\\\\sqrt x$ Proves It (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.lipschitz-continuity.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.real.lipschitz-continuity/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.lipschitz-continuity",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.lipschitz-continuity.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.lipschitz-continuity/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.real.lipschitz-continuity",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Find a valid Lipschitz constant for $f(x)=\\cos x$ on $\\mathbb{R}$, using a derivative bound.\n  2. For your answer to problem 1, compute the explicit $\\delta$ (in terms of $\\varepsilon$) the Lipschitz-implies-uniformly-continuous construction provides.\n  3. Show directly (using a difference-quotient argument like Example 3's) that $f(x)=x^{1/3}$ is NOT Lipschitz on $[0,1]$.\n  4. Explain, in your own words, why \"Lipschitz $\\Rightarrow$ uniformly continuous $\\Rightarrow$ continuous\" is a chain of strictly one-directional implications, not equivalences.\n- **P76 (Transfer Probe, mode = independence — `math.de.existence-uniqueness` not yet authored, pending future revision)**: \"A numerical-methods engineer is implementing an iterative algorithm that requires bounding how much a function's output can change relative to its input change, in order to guarantee the algorithm's error doesn't grow uncontrollably across iterations. (a) Explain why the engineer specifically needs a LIPSCHITZ bound (not merely uniform continuity) to get a concrete, USABLE numerical guarantee for each iteration step. (b) If the engineer's function has a derivative bounded by 5 everywhere on the domain of interest, explain how to obtain a usable Lipschitz constant directly, without any further analysis. (c) If the engineer's function instead behaves like $\\sqrt x$ near a boundary point, explain what practical problem this would create for the algorithm's error-bound guarantee, even though the function remains uniformly continuous there.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.lipschitz-continuity.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.lipschitz-continuity/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.real.lipschitz-continuity",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.real.uniform-continuity` (the ε–δ definition with $\\delta$ depending only on $\\varepsilon$; the Heine-Cantor theorem).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.lipschitz-continuity.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.real.lipschitz-continuity/reference/1",
+      "kind": "reference",
+      "conceptId": "math.real.lipschitz-continuity",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.real.uniform-continuity` (the ε–δ definition and Heine-Cantor theorem this concept's implication and separating counterexample both directly build on).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.de.existence-uniqueness`, checked via `ls docs/curriculum/blueprints/` — confirmed NOT YET authored. Per the established P76_mode rule, this blueprint uses **independence** mode. A future revision, once that concept is authored, may add a genuine cross-link probe connecting this concept's Lipschitz condition directly to the Picard-Lindelöf existence-and-uniqueness theorem for ODEs, which relies on it as a core hypothesis.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.lipschitz-continuity.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

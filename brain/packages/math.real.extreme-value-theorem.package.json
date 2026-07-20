@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.real.extreme-value-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.real.extreme-value-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e742f7c5d53bf75b41ed75f55ec06ef1cc0f0f0a24103f540607ff6dc216cbb8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.real.extreme-value-theorem.md": "sha256:f47b6ce5dee993b95ad17cde6e475a2d6991c89e541235ef3abf6ff72bb80c91"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.real.extreme-value-theorem",
+    "name": "Extreme Value Theorem",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.real.compactness",
+      "math.real.continuity-rigorous"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.real.extreme-value-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.real.extreme-value-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.real.extreme-value-theorem.md": "sha256:f47b6ce5dee993b95ad17cde6e475a2d6991c89e541235ef3abf6ff72bb80c91"
+      },
+      "contentHash": "sha256:6a87ce3ead35f75f89b4a6e3e65b3de718b0b794203c5f70f6b43ae1598adbd6",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.real.extreme-value-theorem.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.extreme-value-theorem.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.extreme-value-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.extreme-value-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.extreme-value-theorem.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.extreme-value-theorem.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.extreme-value-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.extreme-value-theorem\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.extreme-value-theorem.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.extreme-value-theorem.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.extreme-value-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.extreme-value-theorem\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.extreme-value-theorem.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.extreme-value-theorem.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.extreme-value-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.extreme-value-theorem\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.real.extreme-value-theorem/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.real.extreme-value-theorem",
+      "title": "Learning Objectives",
+      "content": "- LO1 (cross-link objective): Recognize this theorem as answering a EXISTENCE question `math.calc.optimization`'s own computational method (critical points + endpoints) silently PRESUPPOSES — that a global max/min genuinely EXISTS to be found — and correctly identify why `math.calc.optimization`'s method is only guaranteed to succeed on a domain satisfying THIS theorem's hypothesis (compact, i.e. closed and bounded).\n- LO2: Prove the theorem's two-step structure: (a) `math.real.compactness`'s own fact that continuous images of compact sets are compact, applied to conclude $f(K)$ is compact whenever $K$ is; (b) a compact subset of $\\mathbb{R}$ is closed and bounded, hence CONTAINS its own supremum and infimum (since a bounded set's sup/inf could otherwise be a \"missing\" limit point, but closedness rules this out) — and correctly explain why BOTH steps are needed, not just boundedness of $f(K)$ alone.\n- LO3: Correctly identify why DROPPING either hypothesis (continuity or compactness) breaks the conclusion, using a concrete counterexample for each — a continuous function on a NON-compact domain failing to attain its max (e.g. $f(x)=x$ on $(0,1)$), and a DISCONTINUOUS function on a compact domain failing to attain its max.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.extreme-value-theorem.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.real.extreme-value-theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.real.extreme-value-theorem",
+      "title": "OPTIMIZATION-METHOD-ASSUMED-SELF-GUARANTEEING",
+      "content": "| MC-1 | OPTIMIZATION-METHOD-ASSUMED-SELF-GUARANTEEING | Believing `math.calc.optimization`'s critical-points-and-endpoints method automatically guarantees a global maximum exists, missing that its reliability depends on this separate existence theorem | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.extreme-value-theorem.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.real.extreme-value-theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.real.extreme-value-theorem",
+      "title": "BOUNDEDNESS-ASSUMED-SUFFICIENT-FOR-ATTAINMENT",
+      "content": "| MC-2 | BOUNDEDNESS-ASSUMED-SUFFICIENT-FOR-ATTAINMENT | Believing boundedness of $f(K)$ alone guarantees $f$ attains a maximum, missing that closedness is also genuinely necessary to secure attainment (not mere approach) | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.extreme-value-theorem.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.real.extreme-value-theorem/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.real.extreme-value-theorem",
+      "title": "COMPACTNESS-ASSUMED-TO-SUBSUME-CONTINUITY-REQUIREMENT",
+      "content": "| MC-3 | COMPACTNESS-ASSUMED-TO-SUBSUME-CONTINUITY-REQUIREMENT | Believing compactness of the domain alone suffices for the extreme value guarantee regardless of continuity, missing that continuity is an independently necessary hypothesis | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.extreme-value-theorem.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.real.extreme-value-theorem/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.extreme-value-theorem",
+      "title": "This Theorem Supplies the Existence Guarantee `math.calc.optimization`'s Method Relies On (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"This Theorem Supplies the Existence Guarantee `math.calc.optimization`'s Method Relies On (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.extreme-value-theorem.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.real.extreme-value-theorem/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.extreme-value-theorem",
+      "title": "Closedness (Not Boundedness Alone) Secures Genuine Attainment (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Closedness (Not Boundedness Alone) Secures Genuine Attainment (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.extreme-value-theorem.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.real.extreme-value-theorem/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.extreme-value-theorem",
+      "title": "Both Hypotheses Are Independently Necessary (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Both Hypotheses Are Independently Necessary (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.extreme-value-theorem.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.real.extreme-value-theorem/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.extreme-value-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.extreme-value-theorem.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.extreme-value-theorem/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.real.extreme-value-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Explain why `math.calc.optimization`'s critical-points-and-endpoints method is only guaranteed reliable on a closed, bounded interval, citing this theorem directly.\n  2. For $f(x)=e^{-x^2}$ on $K=[-3,3]$, compute $f(K)$ and verify it is closed and bounded, confirming both the maximum and minimum are attained.\n  3. Give an example of a continuous function on a bounded but non-closed domain that fails to attain its maximum, distinct from the $f(x)=x$ example.\n  4. Give an example of a discontinuous function on a compact domain that fails to attain its maximum, distinct from the worked example.\n- **P76 (Transfer Probe, mode = cross-link probe engaging `math.calc.optimization`)**: \"An engineer is optimizing a physical design parameter $x$ over the range $[0,10]$ (a closed, bounded interval — genuinely compact), where the design's performance is measured by a continuous function $f(x)$. The engineer plans to use `math.calc.optimization`'s standard method (checking critical points and endpoints) to find the best design. (a) Using this lesson's theorem, explain why the engineer can be confident BEFORE even starting the computation that a genuine global optimum exists somewhere in $[0,10]$. (b) If the engineer's design range were instead the OPEN interval $(0,10)$ (excluding the endpoints, perhaps because the extreme values are physically unreachable), explain what could go wrong with the optimization, using this lesson's compactness-necessity argument. (c) If the engineer's performance function $f$ instead had a discontinuity somewhere in $[0,10]$ (say, a sudden jump due to a design regime change), explain why `math.calc.optimization`'s method could produce a misleading result, even though the domain itself remains compact.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.extreme-value-theorem.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.extreme-value-theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.real.extreme-value-theorem",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.real.compactness` (a set is compact iff every open cover has a finite subcover; Heine-Borel: compact $\\Leftrightarrow$ closed and bounded in $\\mathbb{R}^n$) and `math.real.continuity-rigorous` (the ε–δ definition of continuity).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.extreme-value-theorem.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.real.extreme-value-theorem/reference/1",
+      "kind": "reference",
+      "conceptId": "math.real.extreme-value-theorem",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.real.compactness` (the compactness definition and Heine-Borel characterization this theorem's proof directly uses) and `math.real.continuity-rigorous` (the continuity definition underlying the continuous-image-of-compact-is-compact fact).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.calc.optimization`, checked via `ls docs/curriculum/blueprints/` and confirmed ALREADY authored. $P76_{mode}=$ **cross-link probe**, engaging `math.calc.optimization`'s own computational method directly in Component 3's existence-guarantee framing and the P76 transfer probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.extreme-value-theorem.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

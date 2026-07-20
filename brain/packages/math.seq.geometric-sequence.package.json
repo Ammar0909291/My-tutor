@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.seq.geometric-sequence-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.seq.geometric-sequence",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:93f46e590627181998c974fafd9a6af919d9fc4c0d39dea7dca4985fba5432dd",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.seq.geometric-sequence.md": "sha256:0116e9144cf19a11329372ea546006522cc0592f6423d34079b2fae9a28c21d5"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.seq.geometric-sequence",
+    "name": "Geometric Sequence",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.seq.sequence"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.seq.geometric-sequence-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.seq.geometric-sequence (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.seq.geometric-sequence.md": "sha256:0116e9144cf19a11329372ea546006522cc0592f6423d34079b2fae9a28c21d5"
+      },
+      "contentHash": "sha256:9b018445c9bdea8753382c35ec81bcaee4d61763c8afd9830117f5fa7c812eaf",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.seq.geometric-sequence.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.geometric-sequence.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.geometric-sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.geometric-sequence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.geometric-sequence.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.geometric-sequence.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.geometric-sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.geometric-sequence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.geometric-sequence.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.geometric-sequence.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.geometric-sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.geometric-sequence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.geometric-sequence.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.geometric-sequence.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.geometric-sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.geometric-sequence\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.seq.geometric-sequence/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.seq.geometric-sequence",
+      "title": "Learning Objectives",
+      "content": "- LO1 (cross-link objective): Formalize `math.seq.sequence`'s own informal preview (identifying a constant RATIO between consecutive terms, as opposed to a constant DIFFERENCE) into the precise explicit formula $a_n=a_1\\cdot r^{n-1}$ — and correctly derive this formula from the recursive definition $a_n=a_{n-1}\\cdot r$ by unwinding the recursion, rather than treating the formula as a fact to memorize.\n- LO2: Classify a geometric sequence's LONG-RUN BEHAVIOR based on the value of $r$ — DECAYING toward 0 when $|r|<1$, GROWING without bound when $|r|>1$, OSCILLATING in sign when $r<0$, and CONSTANT when $r=1$ (with the boundary/degenerate cases $r=0$ and $r=-1$ handled explicitly) — and correctly predict a specific sequence's long-run behavior directly from its ratio, without computing many terms.\n- LO3: Apply geometric sequences to a genuine real-world context (compound growth/decay) — correctly setting up the geometric-sequence model for a scenario (e.g. compound interest, radioactive decay, population growth) and computing a specific term, while correctly identifying which quantity plays the role of $a_1$ and which plays the role of $r$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-sequence.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.seq.geometric-sequence/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.seq.geometric-sequence",
+      "title": "GEOMETRIC-EXPONENT-ASSUMED-EQUAL-TO-INDEX",
+      "content": "| MC-1 | GEOMETRIC-EXPONENT-ASSUMED-EQUAL-TO-INDEX | Believing the explicit formula's exponent equals $n$ rather than $n-1$, missing the direct connection between the exponent and the number of multiplication steps from $a_1$ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-sequence.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.seq.geometric-sequence/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.seq.geometric-sequence",
+      "title": "SIGN-AND-MAGNITUDE-BEHAVIOR-CONFLATED",
+      "content": "| MC-2 | SIGN-AND-MAGNITUDE-BEHAVIOR-CONFLATED | Believing $r$'s sign alone determines whether the sequence's magnitude grows or decays, missing that sign-driven oscillation and magnitude-driven growth/decay are determined independently | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-sequence.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.seq.geometric-sequence/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.seq.geometric-sequence",
+      "title": "RATIO-SET-TO-BARE-GROWTH-RATE",
+      "content": "| MC-3 | RATIO-SET-TO-BARE-GROWTH-RATE | Believing the per-period ratio $r$ for compound growth/decay is the bare percentage rate itself, rather than $1+\\text{rate}$ (growth) or $1-\\text{rate}$ (decay) | High |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-sequence.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.seq.geometric-sequence/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.geometric-sequence",
+      "title": "The Formula Comes From Unwinding the Recursion, Not Memorization (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Formula Comes From Unwinding the Recursion, Not Memorization (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-sequence.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.seq.geometric-sequence/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.geometric-sequence",
+      "title": "Sign and Magnitude Behavior Are Determined Separately by $r$ (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Sign and Magnitude Behavior Are Determined Separately by $r$ (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-sequence.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.seq.geometric-sequence/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.geometric-sequence",
+      "title": "Correctly Identifying $a_1$ and $r$ Is the Key Modeling Step (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Correctly Identifying $a_1$ and $r$ Is the Key Modeling Step (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-sequence.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.seq.geometric-sequence/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.geometric-sequence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-sequence.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.seq.geometric-sequence/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.seq.geometric-sequence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For a geometric sequence with $a_1=7$, $r=3$, derive $a_5$ by unwinding the recursion, then verify against the explicit formula.\n  2. Classify the long-run behavior (growth/decay, oscillating or not) of a geometric sequence with $r=-0.8$, without computing terms directly.\n  3. A population of bacteria starts at 200 and TRIPLES every hour. Correctly identify $a_1$ and $r$, then compute the population after 4 hours.\n  4. Explain why the per-period ratio $r$ for a 3% compound DECAY (e.g. depreciation) scenario is $0.97$, not $0.03$ or $-0.03$.\n- **P76 (Transfer Probe, mode = independence — no cross-link target listed in the KG for this concept)**: \"A financial analyst is comparing two investment scenarios: Scenario A grows a \\$5000 initial investment by a fixed 4% each year; Scenario B starts with the SAME \\$5000 but LOSES 4% of its value each year (e.g. due to a depreciating asset). (a) Set up BOTH scenarios as geometric sequences, correctly identifying $a_1$ and $r$ for each — being careful that Scenario B's ratio is NOT simply the negative of Scenario A's. (b) Using this lesson's classification (LO2), explain why Scenario A's sequence grows without bound while Scenario B's sequence decays toward (but never reaches) zero, citing each scenario's specific $r$ value. (c) Compute both scenarios' values after 5 years, and explain concretely why Scenario B's value, despite steadily shrinking, mathematically never reaches exactly zero.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-sequence.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.seq.geometric-sequence/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.geometric-sequence",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.seq.sequence` (the general definition of a sequence as a function from $\\mathbb{N}$; the informal preview recognizing constant-ratio patterns as \"geometric,\" deferred to this concept for full development).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-sequence.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.seq.geometric-sequence/reference/1",
+      "kind": "reference",
+      "conceptId": "math.seq.geometric-sequence",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.seq.sequence` (the general sequence definition and the informal geometric-pattern preview this concept fully formalizes).\n- **Unlocks**: `math.seq.geometric-series` (summing geometric sequences, building directly on this concept's explicit formula).\n- **Cross-link**: KG lists none for this concept. $P76_{mode}=$ **independence** (no cross-link target to check).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-sequence.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
