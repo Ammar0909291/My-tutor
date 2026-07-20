@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.first-isomorphism-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.first-isomorphism-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:fcae2db306570d0e7e17f5a0e8d995c2771bd610359d539251acfcc678f3921f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.first-isomorphism-theorem.md": "sha256:b6eedb76d42c04b69a43c92616525c120731e44e9b91133b10767c2f4135db47"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.abst.first-isomorphism-theorem",
+    "name": "First Isomorphism Theorem",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.abst.quotient-group",
+      "math.abst.group-homomorphism"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.first-isomorphism-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.first-isomorphism-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.first-isomorphism-theorem.md": "sha256:b6eedb76d42c04b69a43c92616525c120731e44e9b91133b10767c2f4135db47"
+      },
+      "contentHash": "sha256:fd0f164ee9eb64b31757501ce69db35d030bc39f6f29301a63111e79bd9a0791",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.first-isomorphism-theorem.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.first-isomorphism-theorem.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.first-isomorphism-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.first-isomorphism-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.first-isomorphism-theorem.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.first-isomorphism-theorem.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.first-isomorphism-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.first-isomorphism-theorem\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.first-isomorphism-theorem.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.first-isomorphism-theorem.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.first-isomorphism-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.first-isomorphism-theorem\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.first-isomorphism-theorem.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.first-isomorphism-theorem.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.first-isomorphism-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.first-isomorphism-theorem\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.first-isomorphism-theorem/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.abst.first-isomorphism-theorem",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the theorem $G/\\ker(\\varphi)\\cong\\mathrm{im}(\\varphi)$, recognizing it as connecting THREE objects already separately studied: `math.abst.group-homomorphism`'s own $\\ker(\\varphi)$ and $\\mathrm{im}(\\varphi)$, and `math.abst.quotient-group`'s own construction $G/N$ (here with $N=\\ker(\\varphi)$, which `math.abst.group-homomorphism` already certified is NORMAL, making the quotient well-defined).\n- LO2: Construct the INDUCED MAP $\\bar\\varphi:G/\\ker(\\varphi)\\to\\mathrm{im}(\\varphi)$, $\\bar\\varphi(g\\ker(\\varphi))=\\varphi(g)$, and verify it is WELL-DEFINED (doesn't depend on which representative $g$ is chosen from its coset) — recognizing well-definedness as the step that genuinely REQUIRES quotienting by $\\ker(\\varphi)$ specifically, not any arbitrary normal subgroup.\n- LO3 (orientation level — full generalization to rings/modules deferred): recognize, without full derivation, that the SAME theorem statement and proof STRUCTURE (kernel, image, induced map, well-definedness via the kernel) apply essentially unchanged to RING and MODULE homomorphisms — a single unifying pattern across different algebraic structures, previewing that the specific algebraic category matters far less than the underlying kernel/image/quotient relationship.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.first-isomorphism-theorem.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.abst.first-isomorphism-theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.first-isomorphism-theorem",
+      "title": "THEOREM-ASSUMED-MERE-RESTATEMENT",
+      "content": "| MC-1 | THEOREM-ASSUMED-MERE-RESTATEMENT | Believing the theorem simply restates the definition of $\\ker(\\varphi)$ or $\\mathrm{im}(\\varphi)$, missing that its genuine content is the isomorphism connecting these already-understood objects | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.first-isomorphism-theorem.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.abst.first-isomorphism-theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.first-isomorphism-theorem",
+      "title": "WELL-DEFINEDNESS-ASSUMED-INDEPENDENT-OF-KERNEL-CHOICE",
+      "content": "| MC-2 | WELL-DEFINEDNESS-ASSUMED-INDEPENDENT-OF-KERNEL-CHOICE | Believing the induced map would be well-defined for any normal subgroup, not specifically the kernel, missing that well-definedness genuinely requires the kernel | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.first-isomorphism-theorem.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.abst.first-isomorphism-theorem/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.first-isomorphism-theorem",
+      "title": "RING-VERSION-ASSUMED-SEPARATE-THEOREM",
+      "content": "| MC-3 | RING-VERSION-ASSUMED-SEPARATE-THEOREM | Believing the ring-theoretic version requires an entirely different proof strategy, missing that the identical kernel/image/induced-map structure applies unchanged | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.first-isomorphism-theorem.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.abst.first-isomorphism-theorem/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.first-isomorphism-theorem",
+      "title": "The Theorem Connects Three Objects You Already Understand Separately (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Theorem Connects Three Objects You Already Understand Separately (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.first-isomorphism-theorem.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.abst.first-isomorphism-theorem/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.first-isomorphism-theorem",
+      "title": "Well-Definedness Genuinely Requires the Kernel Specifically (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Well-Definedness Genuinely Requires the Kernel Specifically (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.first-isomorphism-theorem.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.abst.first-isomorphism-theorem/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.first-isomorphism-theorem",
+      "title": "The Same Pattern Genuinely Recurs in Rings, Not by Coincidence (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Same Pattern Genuinely Recurs in Rings, Not by Coincidence (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.first-isomorphism-theorem.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.abst.first-isomorphism-theorem/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.first-isomorphism-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.first-isomorphism-theorem.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.abst.first-isomorphism-theorem/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.first-isomorphism-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $\\varphi:\\mathbb{Z}\\to\\mathbb{Z}/4\\mathbb{Z}$, $\\varphi(n)=n\\bmod4$, identify $\\ker(\\varphi)$, $\\mathrm{im}(\\varphi)$, and state what the First Isomorphism Theorem concludes.\n  2. Verify well-definedness of the induced map $\\bar\\varphi$ for problem 1 by checking two different representatives of the same coset.\n  3. Explain, in one or two sentences, why quotienting by $\\ker(\\varphi)$ specifically (rather than an arbitrary normal subgroup) is essential for well-definedness.\n  4. State the ring-theoretic analogue of the First Isomorphism Theorem, identifying what replaces \"normal subgroup\" and \"quotient group\" in that setting.\n- **P76 (Transfer Probe, mode = independence)**: \"Consider the determinant map $\\det:GL_2(\\mathbb{R})\\to\\mathbb{R}^\\times$ (from invertible $2\\times2$ matrices under multiplication to the nonzero reals under multiplication), a genuine group homomorphism. (a) Identify $\\ker(\\det)$ (the special linear group $SL_2(\\mathbb{R})$) and $\\mathrm{im}(\\det)$, and state what the First Isomorphism Theorem concludes about $GL_2(\\mathbb{R})/SL_2(\\mathbb{R})$. (b) Explain why the induced map from $GL_2(\\mathbb{R})/SL_2(\\mathbb{R})$ to $\\mathbb{R}^\\times$ is well-defined, citing the kernel-based argument directly. (c) A colleague asks whether this same isomorphism-theorem argument could be applied if $\\det$ were instead viewed as a RING homomorphism (respecting matrix addition and multiplication) — explain what would need to change in the argument's vocabulary, citing the pattern from the ring-theoretic version.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.first-isomorphism-theorem.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.abst.first-isomorphism-theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.first-isomorphism-theorem",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.abst.quotient-group` ($G/N=\\{gN:g\\in G\\}$, well-defined when $N\\trianglelefteq G$) and `math.abst.group-homomorphism` ($\\varphi:G\\to H$ with $\\varphi(ab)=\\varphi(a)\\varphi(b)$; $\\ker(\\varphi)$ normal in $G$; $\\mathrm{im}(\\varphi)$ a subgroup of $H$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.first-isomorphism-theorem.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.abst.first-isomorphism-theorem/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.first-isomorphism-theorem",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.abst.quotient-group` ($G/N$ and its well-definedness for normal $N$, directly instantiated here with $N=\\ker(\\varphi)$) and `math.abst.group-homomorphism` ($\\ker(\\varphi)$ and $\\mathrm{im}(\\varphi)$, the two objects this theorem connects via the quotient).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: none listed in the KG for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.first-isomorphism-theorem.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

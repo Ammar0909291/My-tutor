@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.bessel-equation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.bessel-equation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d4595854d7840123d80b97bc0b6d7e2b61830ac3e09bf757c16e502d5b6da10c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.bessel-equation.md": "sha256:0d21370ba20018d22ffb2c3a033c76e0771d751ae03a5b2e4c1f7e7dd28f9136"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.de.bessel-equation",
+    "name": "Bessel's Equation",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.de.frobenius-method"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.bessel-equation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.bessel-equation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.bessel-equation.md": "sha256:0d21370ba20018d22ffb2c3a033c76e0771d751ae03a5b2e4c1f7e7dd28f9136"
+      },
+      "contentHash": "sha256:ea41c83027cecaee9369d350d51bac3944bf48ff029472165318be70b542e61b",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.bessel-equation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.bessel-equation.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.bessel-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.bessel-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.bessel-equation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.bessel-equation.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.bessel-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.bessel-equation\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.bessel-equation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.bessel-equation.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.bessel-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.bessel-equation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.bessel-equation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.bessel-equation.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.bessel-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.bessel-equation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.bessel-equation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.bessel-equation",
+      "title": "Learning Objectives",
+      "content": "- LO1: Recognize Bessel's equation $x^2y''+xy'+(x^2-\\nu^2)y=0$ as a CONCRETE instance of `math.de.frobenius-method`'s general setup — $x=0$ is a regular singular point — and set up (though not necessarily fully solve) the Frobenius ansatz and resulting indicial equation for it.\n- LO2: Recognize $J_\\nu(x)$ and $Y_\\nu(x)$ as the TWO independent solutions this Frobenius analysis produces, distinguished by their behavior AT the origin: $J_\\nu$ (the \"Bessel function of the first kind\") is REGULAR (finite) at $x=0$, while $Y_\\nu$ (the \"Bessel function of the second kind\") is SINGULAR (blows up) there — correctly selecting which solution is physically admissible based on the problem's boundary requirements.\n- LO3 (orientation level — full solution-family derivation deferred): recognize, without full derivation, that Bessel's equation arises NATURALLY (not as an arbitrary example) from problems with CYLINDRICAL SYMMETRY — e.g. separating variables in the 2D or 3D wave/heat/Laplace equation in cylindrical or polar coordinates produces EXACTLY this equation for the radial part, previewing its connection to `math.fnal.special-functions`'s broader catalogue of equation-generated special functions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bessel-equation.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.de.bessel-equation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.bessel-equation",
+      "title": "BESSEL-ASSUMED-NEW-TECHNIQUE",
+      "content": "| MC-1 | BESSEL-ASSUMED-NEW-TECHNIQUE | Believing solving Bessel's equation requires a genuinely new technique, missing that it is exactly the Frobenius method applied to this specific ODE | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bessel-equation.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.de.bessel-equation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.bessel-equation",
+      "title": "GENERAL-SOLUTION-ASSUMED-ALWAYS-KEPT-IN-FULL",
+      "content": "| MC-2 | GENERAL-SOLUTION-ASSUMED-ALWAYS-KEPT-IN-FULL | Believing the full general solution $c_1J_\\nu+c_2Y_\\nu$ should always be kept regardless of the physical domain, missing that $Y_\\nu$'s singularity forces it out whenever the origin is included | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bessel-equation.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.de.bessel-equation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.bessel-equation",
+      "title": "BESSEL-EQUATION-ASSUMED-ARBITRARY-EXAMPLE",
+      "content": "| MC-3 | BESSEL-EQUATION-ASSUMED-ARBITRARY-EXAMPLE | Believing Bessel's equation is an arbitrary example ODE unconnected to any specific geometry, missing that it arises inevitably from cylindrical/circular symmetry | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bessel-equation.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.de.bessel-equation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.bessel-equation",
+      "title": "Bessel's Equation Is a Concrete Application, Not a New Method (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Bessel's Equation Is a Concrete Application, Not a New Method (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bessel-equation.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.de.bessel-equation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.bessel-equation",
+      "title": "Physical Domains Determine Which Solution Is Admissible (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Physical Domains Determine Which Solution Is Admissible (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bessel-equation.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.de.bessel-equation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.bessel-equation",
+      "title": "Bessel's Equation Emerges Naturally From Cylindrical Geometry, Not Arbitrarily (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Bessel's Equation Emerges Naturally From Cylindrical Geometry, Not Arbitrarily (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bessel-equation.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.bessel-equation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.bessel-equation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bessel-equation.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.bessel-equation/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.bessel-equation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Set up the Frobenius ansatz for Bessel's equation with $\\nu=1$, and derive the resulting indicial equation.\n  2. State whether the roots from problem 1 have a difference that is an integer, non-integer, or zero, and what this implies (citing `math.de.frobenius-method`) about the solution structure.\n  3. For a physical problem on a solid cylindrical rod (domain includes the central axis, $r=0$), explain which Bessel function(s) should appear in the physically admissible solution, and why.\n  4. Explain, in one or two sentences, why Bessel's equation arises specifically from problems with cylindrical or circular symmetry.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer models heat conduction in a solid cylindrical rod of radius $R$, with the temperature satisfying a Bessel-type radial equation with $\\nu=0$ after separation of variables. (a) Explain, citing the Frobenius setup, why the radial solution takes the form $c_1J_0(r)+c_2Y_0(r)$. (b) Since the rod is SOLID (includes the central axis $r=0$), determine which term must vanish and why, citing the physical requirement of finite temperature. (c) If the engineer instead modeled heat conduction in a HOLLOW cylindrical pipe (excluding the central axis from the domain), explain how the admissible solution set would change, and why.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bessel-equation.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.bessel-equation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.bessel-equation",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.de.frobenius-method` (the ansatz $y=x^r\\sum a_nx^n$ for a regular singular point, the indicial equation, and the three-case classification by root difference).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bessel-equation.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.bessel-equation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.bessel-equation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.de.frobenius-method` (the ansatz, indicial equation, and case classification this concept's entire solution procedure directly reuses).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.fnal.special-functions`, checked via `ls docs/curriculum/blueprints/` and confirmed NOT YET authored. $P76_{mode}=$ **independence**.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bessel-equation.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

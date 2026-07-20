@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.linearization-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.linearization",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c659f8c2e09cff80897feb77d4654a2818ea3c020091bb86f92b93b9003dd923",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.linearization.md": "sha256:26c825d9ec462e2494abbe178ca567ff7691334b182bdb1ec3d5c1e6ae22ff69"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.linearization",
+    "name": "Linearization and Differentials",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.calc.derivative-definition"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.linearization-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.linearization (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.linearization.md": "sha256:26c825d9ec462e2494abbe178ca567ff7691334b182bdb1ec3d5c1e6ae22ff69"
+      },
+      "contentHash": "sha256:caf61dab5cfdf3b60b0031a26c75133e5fc98884887c5b1629ffd7af116d10e8",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.linearization.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.linearization.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.linearization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.linearization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.linearization.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.linearization.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.linearization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.linearization\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.linearization.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.linearization.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.linearization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.linearization\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.linearization.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.linearization.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.linearization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.linearization\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.linearization/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.linearization",
+      "title": "Learning Objectives",
+      "content": "- LO1: Construct the LINEARIZATION $L(x)=f(a)+f'(a)(x-a)$ — the tangent line at $a$ — and recognize it as `math.calc.derivative-definition`'s own slope $f'(a)=\\lim_{h\\to0}[f(a+h)-f(a)]/h$, used to build a LINEAR approximation formula, not merely to compute a single numeric slope value.\n- LO2: Use $L(x)$ to approximate $f(x)$ for $x$ NEAR $a$, and recognize that the approximation's ACCURACY degrades as $x$ moves FARTHER from $a$ — the tangent line matches $f$ exactly only AT $a$ itself, with genuine, growing error elsewhere.\n- LO3 (orientation level — full error-bound/Taylor-remainder derivation deferred): recognize, without full derivation, that the DIFFERENTIAL $df=f'(x)\\,dx$ formalizes the SAME linearization idea as an INCREMENT approximation — $\\Delta y\\approx dy=f'(x)\\Delta x$ for a small change $\\Delta x$ — previewing the connection to error propagation and, eventually, Taylor's theorem's higher-order refinements.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.linearization.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.linearization/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.linearization",
+      "title": "LINEARIZATION-ASSUMED-NEW-PROCEDURE",
+      "content": "| MC-1 | LINEARIZATION-ASSUMED-NEW-PROCEDURE | Believing constructing $L(x)$ is a fundamentally new procedure separate from computing the derivative, missing that it is simply the point-slope line formula with the already-computed slope | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.linearization.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.linearization/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.linearization",
+      "title": "LINEARIZATION-ACCURACY-ASSUMED-UNIFORM",
+      "content": "| MC-2 | LINEARIZATION-ACCURACY-ASSUMED-UNIFORM | Believing the linearization provides roughly the same approximation quality regardless of distance from $a$, missing that accuracy genuinely degrades with distance | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.linearization.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.linearization/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.linearization",
+      "title": "DIFFERENTIAL-ASSUMED-SEPARATE-CONCEPT",
+      "content": "| MC-3 | DIFFERENTIAL-ASSUMED-SEPARATE-CONCEPT | Believing the differential $dy=f'(x)\\,dx$ is a genuinely different idea from linearization, missing that it is the same tangent-line idea reframed as an increment approximation | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.linearization.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.calc.linearization/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.linearization",
+      "title": "Linearization Builds a Line From the Derivative's Own Slope (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Linearization Builds a Line From the Derivative's Own Slope (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.linearization.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.linearization/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.linearization",
+      "title": "The Approximation Genuinely Degrades With Distance (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Approximation Genuinely Degrades With Distance (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.linearization.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.linearization/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.linearization",
+      "title": "The Differential Is the Same Idea, Reframed as an Increment (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Differential Is the Same Idea, Reframed as an Increment (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.linearization.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.calc.linearization/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.linearization",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.linearization.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.calc.linearization/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.linearization",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Construct the linearization of $f(x)=x^3$ at $a=2$.\n  2. Using your answer to problem 1, approximate $f(2.1)$ and $f(3)$, and compare each to the TRUE value, noting which is more accurate and why.\n  3. Compute the differential $dy$ for $f(x)=x^3$ at $a=2$ with $dx=0.1$, and verify it matches the increment computed in problem 2 for $x=2.1$.\n  4. Explain, in one or two sentences, why the differential and the linearization are the same underlying idea, framed two different ways.\n- **P76 (Transfer Probe, mode = independence)**: \"A machinist needs to estimate the volume $V=\\frac43\\pi r^3$ of a ball bearing whose radius was measured as $r=2$cm, but with a small measurement uncertainty $\\Delta r=0.01$cm. (a) Compute $V(2)$ and the derivative $V'(2)$. (b) Use the differential $dV=V'(2)\\,dr$ to estimate how much the volume estimate could be off due to the radius uncertainty. (c) Explain why this differential-based estimate would become substantially less reliable if the radius uncertainty were instead $\\Delta r=1$cm rather than $0.01$cm, citing the distance-dependent accuracy of linearization.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.linearization.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.calc.linearization/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.linearization",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.derivative-definition` ($f'(x)=\\lim_{h\\to0}[f(x+h)-f(x)]/h$, the instantaneous rate of change and tangent-line slope).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.linearization.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.linearization/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.linearization",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.derivative-definition` ($f'(x)$ as the limit-defined instantaneous rate of change, the slope value this concept's line-construction directly uses).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: none listed in the KG for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.linearization.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
