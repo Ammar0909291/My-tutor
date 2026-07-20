@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.top.product-space-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.top.product-space",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0da86e8b947ca51bbe9e36c2214c9948186845345da71a90e7e10d47ccfc1c62",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.top.product-space.md": "sha256:9ccc6ac1db68af319b3bb20dce215ec173e8750b568b7be52cbd0f6486a93457"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.top.product-space",
+    "name": "Product Topology",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.top.topological-space"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.top.product-space-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.top.product-space (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.top.product-space.md": "sha256:9ccc6ac1db68af319b3bb20dce215ec173e8750b568b7be52cbd0f6486a93457"
+      },
+      "contentHash": "sha256:c8d6b95226edb601c392805bac91a082d536c4a40f0658f9d75d3cd9afba62e7",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.top.product-space.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.product-space.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.product-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.product-space\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.product-space.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.product-space.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.product-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.product-space\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.product-space.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.product-space.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.product-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.product-space\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.product-space.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.product-space.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.product-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.product-space\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.top.product-space/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.top.product-space",
+      "title": "Learning Objectives",
+      "content": "- LO1: Construct the product topology on $X\\times Y$ via its BASIS of \"open rectangles\" $U\\times V$ (for $U$ open in $X$, $V$ open in $Y$) — and correctly verify a proposed collection of subsets of $X\\times Y$ either IS or is NOT the product topology's basis, checking against `math.top.topological-space`'s own axioms (that arbitrary unions of basis elements, together with the basis elements themselves, satisfy the topology requirements).\n- LO2: Prove the projections $\\pi_1:X\\times Y\\to X$ and $\\pi_2:X\\times Y\\to Y$ are CONTINUOUS with respect to the product topology, directly from the basis definition — and explain why the product topology is, in a precise sense, the SMALLEST (coarsest) topology on $X\\times Y$ making both projections continuous.\n- LO3: State and apply the UNIVERSAL PROPERTY: a function $f:(Z,\\tau)\\to X\\times Y$ is continuous if and only if BOTH component functions $\\pi_1\\circ f$ and $\\pi_2\\circ f$ are continuous — and correctly use this to determine continuity of a specific map into a product space by checking its two components separately, rather than verifying continuity into the product directly.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.product-space.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.top.product-space/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.top.product-space",
+      "title": "PRODUCT-TOPOLOGY-BASIS-ASSUMED-UNIQUELY-RECTANGULAR",
+      "content": "| MC-1 | PRODUCT-TOPOLOGY-BASIS-ASSUMED-UNIQUELY-RECTANGULAR | Believing a basis for the product topology must consist specifically of rectangular sets, missing that differently-shaped generating collections can produce the identical topology | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.product-space.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.top.product-space/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.top.product-space",
+      "title": "PROJECTION-CONTINUITY-ASSUMED-COINCIDENTAL",
+      "content": "| MC-2 | PROJECTION-CONTINUITY-ASSUMED-COINCIDENTAL | Believing projection continuity is a coincidental property of the product topology rather than a direct, by-construction consequence, and missing the coarsest-topology characterization | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.product-space.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.top.product-space/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.top.product-space",
+      "title": "PRODUCT-CONTINUITY-ASSUMED-TO-REQUIRE-DIRECT-BASIS-CHECK",
+      "content": "| MC-3 | PRODUCT-CONTINUITY-ASSUMED-TO-REQUIRE-DIRECT-BASIS-CHECK | Believing verifying continuity into a product space generally requires checking preimages of basic rectangles directly, missing the universal property's component-wise shortcut | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.product-space.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.top.product-space/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.product-space",
+      "title": "The Product Topology's Basis Is Exactly the Open Rectangles (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Product Topology's Basis Is Exactly the Open Rectangles (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.product-space.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.top.product-space/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.product-space",
+      "title": "Projections Are Continuous BY CONSTRUCTION, and the Product Topology Is the Smallest Such Topology (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Projections Are Continuous BY CONSTRUCTION, and the Product Topology Is the Smallest Such Topology (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.product-space.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.top.product-space/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.product-space",
+      "title": "The Universal Property Reduces Product-Continuity to Two Separate, Simpler Checks (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Universal Property Reduces Product-Continuity to Two Separate, Simpler Checks (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.product-space.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.top.product-space/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.product-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.product-space.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.top.product-space/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.top.product-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $X=\\{1,2\\}$ (discrete topology) and $Y=\\{a,b\\}$ (discrete topology), list all basis rectangles $U\\times V$ of the product topology on $X\\times Y$.\n  2. Verify directly that $\\pi_2:\\mathbb{R}^2\\to\\mathbb{R}$, $\\pi_2(x,y)=y$ is continuous, using the basis definition.\n  3. State the universal property precisely, in your own words.\n  4. Use the universal property to determine whether $g(t)=(e^t,\\ln(t+1))$ (for $t>-1$) is continuous into $\\mathbb{R}^2$, without checking the product topology's basis directly.\n- **P76 (Transfer Probe, mode = independence — no cross-link target listed in the KG for this concept)**: \"A robotics engineer models a robot's configuration space as a product of two topological spaces: its position space $X$ (a 2D region) and its orientation space $Y$ (a circle of possible headings), so the full configuration space is $X\\times Y$. The engineer needs to verify that a proposed control function $f:\\mathbb{R}\\to X\\times Y$ (mapping time to the robot's full configuration) is continuous. (a) Using this lesson's universal property, explain what TWO simpler checks the engineer needs to perform instead of directly verifying continuity into $X\\times Y$. (b) Explain why the engineer can trust that the product topology on $X\\times Y$ is the natural, 'smallest reasonable' choice for making the position-projection and orientation-projection functions both continuous. (c) If the engineer's control function's position component is known continuous but the orientation component is NOT known to be continuous, explain what the universal property allows you to conclude (or not conclude) about $f$'s overall continuity into the product space.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.product-space.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.top.product-space/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.top.product-space",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.top.topological-space` (a set $X$ with open sets $\\tau$ satisfying: $\\varnothing,X\\in\\tau$; arbitrary unions and finite intersections of open sets stay open).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.product-space.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.top.product-space/reference/1",
+      "kind": "reference",
+      "conceptId": "math.top.product-space",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.top.topological-space` (the open-set axioms this concept's basis construction directly builds on and verifies against).\n- **Unlocks**: `math.top.tychonoff` (Tychonoff's theorem, generalizing this concept's finite-product construction to arbitrary — possibly infinite — products, and proving compactness is preserved).\n- **Cross-link**: KG lists none for this concept. $P76_{mode}=$ **independence** (no cross-link target to check).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.product-space.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

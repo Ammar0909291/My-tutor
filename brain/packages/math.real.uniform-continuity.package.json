@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.real.uniform-continuity-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.real.uniform-continuity",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b9ceeecc9701eef63ee3eff2c6b06968336c9062654d7fd9c25b72a3d325ec55",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.real.uniform-continuity.md": "sha256:c11ee57fedfa3cabc8445643180c40d3d39ffef8dd354824d41b5a76a0c5d5e7"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.real.uniform-continuity",
+    "name": "Uniform Continuity",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.real.continuity-rigorous"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.real.uniform-continuity-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.real.uniform-continuity (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.real.uniform-continuity.md": "sha256:c11ee57fedfa3cabc8445643180c40d3d39ffef8dd354824d41b5a76a0c5d5e7"
+      },
+      "contentHash": "sha256:33deecccb648b90c79e71fcf6e4001a18d33803bea980006c345a9a95a5e2c0f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.real.uniform-continuity.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.uniform-continuity.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.uniform-continuity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.uniform-continuity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.uniform-continuity.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.uniform-continuity.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.uniform-continuity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.uniform-continuity\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.uniform-continuity.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.uniform-continuity.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.uniform-continuity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.uniform-continuity\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.uniform-continuity.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.uniform-continuity.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.uniform-continuity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.uniform-continuity\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.real.uniform-continuity/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.real.uniform-continuity",
+      "title": "Learning Objectives",
+      "content": "- LO1 (cross-link objective): Recognize the precise SYNTAX difference from `math.real.continuity-rigorous`'s own pointwise definition: ordinary continuity requires, for each FIXED $x$, a $\\delta(x,\\varepsilon)$ that may depend on BOTH $x$ and $\\varepsilon$; uniform continuity requires a SINGLE $\\delta(\\varepsilon)$ (depending on $\\varepsilon$ ALONE) that works SIMULTANEOUSLY for every $x$ in $E$ — and correctly identify, by inspecting the quantifier ORDER, which definition is stronger.\n- LO2: Exhibit a function that is continuous EVERYWHERE on its domain but NOT uniformly continuous there — using $f(x)=1/x$ on $(0,1)$ as the standard example — by showing directly that no single $\\delta$ can work for all $x$ simultaneously, as $x$ approaches the domain's open (missing) endpoint.\n- LO3: State and apply the Heine-Cantor theorem (every continuous function on a COMPACT set is automatically uniformly continuous) — correctly explaining why this theorem does NOT contradict LO2's counterexample (since $(0,1)$ is not compact — it's not closed, missing its limit point $0$), and correctly determine, for a given domain and continuous function, whether uniform continuity is automatically guaranteed.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-continuity.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.real.uniform-continuity/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.real.uniform-continuity",
+      "title": "UNIFORM-CONTINUITY-ASSUMED-EQUIVALENT-TO-POINTWISE",
+      "content": "| MC-1 | UNIFORM-CONTINUITY-ASSUMED-EQUIVALENT-TO-POINTWISE | Believing uniform continuity is just a restatement of ordinary pointwise continuity, missing that the quantifier order makes it a genuinely stronger claim | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-continuity.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.real.uniform-continuity/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.real.uniform-continuity",
+      "title": "POINTWISE-CONTINUITY-ASSUMED-TO-IMPLY-UNIFORM",
+      "content": "| MC-2 | POINTWISE-CONTINUITY-ASSUMED-TO-IMPLY-UNIFORM | Believing continuity at every individual point automatically implies uniform continuity on the domain, missing genuine counterexamples like $1/x$ on $(0,1)$ | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-continuity.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.real.uniform-continuity/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.real.uniform-continuity",
+      "title": "HEINE-CANTOR-ASSUMED-TO-CONFLICT-WITH-COUNTEREXAMPLES",
+      "content": "| MC-3 | HEINE-CANTOR-ASSUMED-TO-CONFLICT-WITH-COUNTEREXAMPLES | Believing the Heine-Cantor theorem's guarantee conflicts with non-compact counterexamples like $1/x$ on $(0,1)$, missing that the theorem's hypothesis (compactness) simply doesn't hold there | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-continuity.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.real.uniform-continuity/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.uniform-continuity",
+      "title": "Quantifier Order Distinguishes Uniform From Pointwise Continuity (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Quantifier Order Distinguishes Uniform From Pointwise Continuity (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-continuity.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.real.uniform-continuity/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.uniform-continuity",
+      "title": "$1/x$ on $(0,1)$ Is Continuous Everywhere Yet Fails Uniform Continuity (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"$1/x$ on $(0,1)$ Is Continuous Everywhere Yet Fails Uniform Continuity (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-continuity.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.real.uniform-continuity/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.uniform-continuity",
+      "title": "Compactness Guarantees Uniform Continuity for Free, Consistently With the $1/x$ Failure (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Compactness Guarantees Uniform Continuity for Free, Consistently With the $1/x$ Failure (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-continuity.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.real.uniform-continuity/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.uniform-continuity",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-continuity.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.uniform-continuity/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.real.uniform-continuity",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State the pointwise and uniform continuity definitions side by side, explicitly identifying which quantifier's position differs.\n  2. Prove $f(x)=x^2$ IS uniformly continuous on $[0,10]$, citing the Heine-Cantor theorem and verifying its hypothesis holds.\n  3. Show directly (using a sequence-pair argument like Example 2's) that $f(x)=1/x^2$ is NOT uniformly continuous on $(0,1)$.\n  4. Explain why $f(x)=x^2$ on ALL of $\\mathbb{R}$ (an unbounded, non-compact domain) requires a separate argument to determine uniform continuity, rather than automatic application of Heine-Cantor.\n- **P76 (Transfer Probe, mode = independence — no cross-link target listed in the KG for this concept)**: \"A numerical-analysis researcher is designing an algorithm that approximates a function $f$ by sampling it at finitely many points, with an error guarantee that depends on choosing sample points close enough together (governed by some $\\delta$) to keep the function's VALUES close together (within some $\\varepsilon$) between samples. (a) Explain why the researcher's algorithm needs $f$ to be UNIFORMLY continuous on the domain being sampled, rather than merely continuous at each individual point, for a SINGLE sampling density (one $\\delta$) to work reliably across the ENTIRE domain. (b) If the domain is a closed, bounded interval $[a,b]$, explain why the researcher can rely on the Heine-Cantor theorem to guarantee this property automatically, without separately verifying it. (c) If the domain is instead an OPEN interval like $(0,1)$ and $f$ behaves like $1/x$ near the missing endpoint, explain what practical problem the researcher's sampling algorithm would run into, connecting directly to this lesson's counterexample.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-continuity.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.uniform-continuity/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.real.uniform-continuity",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.real.continuity-rigorous` (the pointwise ε–δ definition: $f$ continuous at $a$ iff $\\forall\\varepsilon>0,\\exists\\delta>0:|x-a|<\\delta\\Rightarrow|f(x)-f(a)|<\\varepsilon$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-continuity.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.real.uniform-continuity/reference/1",
+      "kind": "reference",
+      "conceptId": "math.real.uniform-continuity",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.real.continuity-rigorous` (the pointwise ε–δ definition this concept's uniform version directly contrasts against via quantifier order).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists none for this concept. $P76_{mode}=$ **independence** (no cross-link target to check).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-continuity.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
