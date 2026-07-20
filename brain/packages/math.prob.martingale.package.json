@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.martingale-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.martingale",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:eb0602ae0fb7d31fb5a264a55be6aec299b26842dcf537af1a04b91a2146504b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.martingale.md": "sha256:38d0e5cee816b61c3075f6b298bb9eb5ab3c5f5e6b7adf2d4f08bc215d0adc65"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.prob.martingale",
+    "name": "Martingale",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.55,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.prob.conditional-expectation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.martingale-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.martingale (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.martingale.md": "sha256:38d0e5cee816b61c3075f6b298bb9eb5ab3c5f5e6b7adf2d4f08bc215d0adc65"
+      },
+      "contentHash": "sha256:875a8914a06a1a43d23cd0aed63a17cbc7a86fcc92474f81031021449000fcad",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.martingale.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.martingale.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.martingale"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.martingale\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.martingale.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.martingale.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.martingale"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.martingale\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.martingale.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.martingale.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.martingale"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.martingale\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.martingale.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.martingale.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.martingale"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.martingale\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.martingale/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.martingale",
+      "title": "Learning Objectives",
+      "content": "- LO1: Verify the martingale \"fairness\" condition $E[M_{n+1}\\mid M_0,\\dots,M_n]=M_n$ for a specific sequence, recognizing this as a DIRECT application of `math.prob.conditional-expectation`'s own $E[X\\mid Y]$ machinery — here conditioning on the ENTIRE PAST $M_0,\\dots,M_n$ rather than a single random variable $Y$, but the SAME conditional-expectation formalism.\n- LO2: Distinguish martingales ($E[M_{n+1}\\mid\\text{past}]=M_n$, exactly fair), SUBmartingales ($\\ge M_n$, favorable/increasing on average), and SUPERmartingales ($\\le M_n$, unfavorable/decreasing on average) — correctly classifying a given sequence based on which inequality (or equality) its conditional expectation satisfies.\n- LO3 (orientation level — full optional-stopping/convergence-theorem proof deferred): recognize, without full derivation, that the OPTIONAL STOPPING THEOREM (under suitable conditions, $E[M_\\tau]=E[M_0]$ even for a RANDOM stopping time $\\tau$, not just a fixed time $n$) and MARTINGALE CONVERGENCE (a bounded martingale converges almost surely) are the theorem's two central payoffs — previewing why \"no clever betting/stopping strategy can create an advantage from a fair game\" is a precise mathematical consequence, not merely an intuitive gambling maxim.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.martingale.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.prob.martingale/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.martingale",
+      "title": "MARTINGALE-CONDITION-ASSUMED-NEW-TOOL",
+      "content": "| MC-1 | MARTINGALE-CONDITION-ASSUMED-NEW-TOOL | Believing verifying the martingale condition requires a fundamentally new probabilistic tool, missing that it is exactly `math.prob.conditional-expectation`'s own machinery, applied to the whole past | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.martingale.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.prob.martingale/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.martingale",
+      "title": "SUB-SUPERMARTINGALE-ASSUMED-QUALITATIVE-JUDGMENT",
+      "content": "| MC-2 | SUB-SUPERMARTINGALE-ASSUMED-QUALITATIVE-JUDGMENT | Believing sub- versus supermartingale classification is a loose qualitative judgment, missing that it is precisely determined by the direction of the conditional-expectation inequality | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.martingale.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.prob.martingale/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.martingale",
+      "title": "OPTIONAL-STOPPING-ASSUMED-UNCONDITIONAL",
+      "content": "| MC-3 | OPTIONAL-STOPPING-ASSUMED-UNCONDITIONAL | Believing the optional stopping theorem guarantees $E[M_\\tau]=E[M_0]$ for any stopping strategy unconditionally, missing that it requires genuine, sometimes-failing hypotheses | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.martingale.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.prob.martingale/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.martingale",
+      "title": "The Martingale Condition Reuses Conditional Expectation, Conditioning on the Whole Past (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Martingale Condition Reuses Conditional Expectation, Conditioning on the Whole Past (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.martingale.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.prob.martingale/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.martingale",
+      "title": "Sub- and Supermartingale Classification Flips With a Sign Change (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Sub- and Supermartingale Classification Flips With a Sign Change (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.martingale.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.prob.martingale/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.martingale",
+      "title": "Optional Stopping Requires Checking Real Hypotheses, Not Just Gambling Intuition (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Optional Stopping Requires Checking Real Hypotheses, Not Just Gambling Intuition (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.martingale.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.prob.martingale/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.martingale",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.martingale.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.prob.martingale/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.martingale",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify the martingale condition for $M_n=\\sum_{i=1}^nX_i$ where $X_i$ are i.i.d. with $E[X_i]=0$, citing `math.prob.conditional-expectation`'s independence-based simplification.\n  2. For a sequence with $E[Y_i]=-0.3$ (each step, i.i.d.), classify $S_n=\\sum_{i=1}^nY_i$ as a martingale, submartingale, or supermartingale.\n  3. For the SAME sequence from problem 2, classify $-S_n$, and explain how the classification changed.\n  4. Explain, in one or two sentences, why the optional stopping theorem's hypotheses (such as a bounded stopping time) genuinely matter, rather than the theorem holding unconditionally for any stopping strategy.\n- **P76 (Transfer Probe, mode = independence)**: \"A trader models a stock price's DAILY LOG-RETURN as a fair game (a martingale), with $M_n$ representing cumulative log-return after $n$ days. (a) State precisely what the martingale condition $E[M_{n+1}\\mid M_0,\\dots,M_n]=M_n$ means in this financial context, citing the conditional-expectation machinery directly. (b) The trader proposes a strategy: 'sell as soon as cumulative log-return first reaches $+5\\%$, guaranteeing a profit.' Using the optional stopping theorem's hypothesis requirements (citing Example 3's random-walk analogy), explain what could go wrong with this reasoning if the trader can't guarantee a bounded number of days before hitting the target. (c) Contrast this martingale-based model against a hypothetical scenario where the stock has a genuine long-term positive drift — explain which classification (martingale, submartingale, or supermartingale) would then be more appropriate, and why.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 3/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.martingale.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.prob.martingale/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.martingale",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.prob.conditional-expectation` ($E[X\\mid Y]$ as a random variable, the tower property $E[X]=E[E[X\\mid Y]]$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.martingale.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.martingale/reference/1",
+      "kind": "reference",
+      "conceptId": "math.prob.martingale",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.prob.conditional-expectation` ($E[X\\mid Y]$ and the tower property, directly extended here to conditioning on an entire observed history).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: none listed in the KG for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.martingale.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

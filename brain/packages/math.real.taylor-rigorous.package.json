@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.real.taylor-rigorous-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.real.taylor-rigorous",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b325dd8af0150ea0a704c1514633d340a44fc1b1eb656cd1d866fbfbeb1b49c9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.real.taylor-rigorous.md": "sha256:ad52e308e008535849d85c2e7dd24037c2edaf412f7b1ee195f547ec24d3b19f"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.real.taylor-rigorous",
+    "name": "Taylor's Theorem (Rigorous)",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.real.mvt"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.real.taylor-rigorous-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.real.taylor-rigorous (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.real.taylor-rigorous.md": "sha256:ad52e308e008535849d85c2e7dd24037c2edaf412f7b1ee195f547ec24d3b19f"
+      },
+      "contentHash": "sha256:084f33415317ee48dcd1f2e30c70a608dfd3be987735d6d36adf289be3c763c2",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.real.taylor-rigorous.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.taylor-rigorous.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.taylor-rigorous"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.taylor-rigorous\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.taylor-rigorous.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.taylor-rigorous.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.taylor-rigorous"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.taylor-rigorous\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.taylor-rigorous.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.taylor-rigorous.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.taylor-rigorous"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.taylor-rigorous\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.taylor-rigorous.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.taylor-rigorous.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.taylor-rigorous"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.taylor-rigorous\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.real.taylor-rigorous/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.real.taylor-rigorous",
+      "title": "Learning Objectives",
+      "content": "- LO1: State Taylor's theorem with Lagrange remainder: $f(x)=\\sum_{k=0}^n\\frac{f^{(k)}(a)}{k!}(x-a)^k+R_n(x)$, and recognize this as making PRECISE what `math.calc.taylor-series` left INFORMAL — the finite-order truncation $\\sum_{k=0}^nf^{(k)}(a)(x-a)^k/k!$ is exactly `math.calc.taylor-series`'s own $n$-term partial sum, and $R_n(x)$ is the EXACT error between this truncation and $f(x)$, not merely \"the higher-order terms\" left vague.\n- LO2: Recognize the Lagrange remainder formula $R_n(x)=\\frac{f^{(n+1)}(c)}{(n+1)!}(x-a)^{n+1}$ (for SOME $c$ between $a$ and $x$) as a DIRECT generalization of `math.real.mvt`'s own conclusion $f'(c)=\\frac{f(b)-f(a)}{b-a}$ — both assert the existence of an intermediate point $c$ making an EXACT equality hold, at successively higher derivative orders.\n- LO3 (orientation level — full induction-based proof deferred): recognize, without full derivation, that Taylor's theorem is typically PROVED by repeated application of `math.real.mvt`'s own generalized form (Cauchy's Mean Value Theorem) or by a clever auxiliary-function argument, applying the SAME existence-of-an-intermediate-point idea $n+1$ times in succession — previewing that the rigorous proof, not just the statement, inherits directly from MVT's machinery.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.taylor-rigorous.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.real.taylor-rigorous/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.real.taylor-rigorous",
+      "title": "REMAINDER-ASSUMED-APPROXIMATE-BOUND",
+      "content": "| MC-1 | REMAINDER-ASSUMED-APPROXIMATE-BOUND | Believing Taylor's theorem only gives an approximate bound on the truncation error, missing that $R_n(x)$ is an EXACT equality | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.taylor-rigorous.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.real.taylor-rigorous/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.real.taylor-rigorous",
+      "title": "LAGRANGE-REMAINDER-ASSUMED-MERELY-ANALOGOUS-TO-MVT",
+      "content": "| MC-2 | LAGRANGE-REMAINDER-ASSUMED-MERELY-ANALOGOUS-TO-MVT | Believing the Lagrange remainder is merely analogous to MVT rather than literally containing it as the $n=0$ special case, missing the direct substitution verification | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.taylor-rigorous.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.real.taylor-rigorous/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.real.taylor-rigorous",
+      "title": "EACH-ORDER-ASSUMED-TO-NEED-NEW-PROOF-TECHNIQUE",
+      "content": "| MC-3 | EACH-ORDER-ASSUMED-TO-NEED-NEW-PROOF-TECHNIQUE | Believing each order $n$ of Taylor's theorem requires a genuinely different proof technique, missing that the same Rolle's-theorem-based argument is reused via an auxiliary function | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.taylor-rigorous.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.real.taylor-rigorous/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.taylor-rigorous",
+      "title": "Taylor's Theorem Turns \"Vague Error\" Into an Exact Equality (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Taylor's Theorem Turns \\\"Vague Error\\\" Into an Exact Equality (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.taylor-rigorous.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.real.taylor-rigorous/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.taylor-rigorous",
+      "title": "The Lagrange Remainder IS MVT, At n=0 (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Lagrange Remainder IS MVT, At n=0 (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.taylor-rigorous.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.real.taylor-rigorous/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.taylor-rigorous",
+      "title": "The Proof Reuses Rolle's Theorem Repeatedly, Not a New Technique Per Order (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Proof Reuses Rolle's Theorem Repeatedly, Not a New Technique Per Order (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.taylor-rigorous.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.real.taylor-rigorous/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.taylor-rigorous",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.taylor-rigorous.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.taylor-rigorous/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.real.taylor-rigorous",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State Taylor's theorem with Lagrange remainder for $n=2$, identifying each term explicitly.\n  2. For $f(x)=\\sin x$ at $a=0$, $n=1$: write out the exact statement $f(x)=x+R_1(x)$ with $R_1(x)$'s explicit formula.\n  3. Verify that setting $n=0$ in Taylor's theorem reproduces `math.real.mvt`'s own conclusion, showing the algebraic steps.\n  4. Explain, in one or two sentences, why the Lagrange remainder is an EXACT equality rather than merely an upper bound on the error.\n- **P76 (Transfer Probe, mode = cross-link probe engaging `math.calc.taylor-series`)**: \"An engineer uses `math.calc.taylor-series`'s own 2-term linear approximation of $f(x)=\\sqrt{1+x}$ near $x=0$ to estimate $\\sqrt{1.1}$, and needs to know how much error this could introduce for a safety-critical calculation. (a) Write the exact Taylor's-theorem statement (with $n=1$ Lagrange remainder) for this situation. (b) Using the formula for $f''(c)$ where $f(x)=\\sqrt{1+x}$, bound (even without finding $c$ exactly) how large $|R_1(0.1)|$ could possibly be, given that $c$ lies somewhere in $(0,0.1)$. (c) Explain why this rigorous error bound is a strictly stronger, more useful guarantee for the engineer than `math.calc.taylor-series`'s own informal observation that 'accuracy degrades farther from the center' — citing what specifically Taylor's theorem adds beyond that qualitative statement.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.taylor-rigorous.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.taylor-rigorous/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.real.taylor-rigorous",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.real.mvt` (if $f$ is continuous on $[a,b]$, differentiable on $(a,b)$, then $\\exists c\\in(a,b)$ with $f'(c)=[f(b)-f(a)]/(b-a)$, proved via Rolle's theorem).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.taylor-rigorous.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.real.taylor-rigorous/reference/1",
+      "kind": "reference",
+      "conceptId": "math.real.taylor-rigorous",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.real.mvt` (the intermediate-point existence guarantee this concept's Lagrange remainder directly generalizes, and whose Rolle's-theorem-based proof technique is reused).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.calc.taylor-series`, checked via `ls docs/curriculum/blueprints/` and confirmed ALREADY authored. $P76_{mode}=$ **cross-link probe**, engaging `math.calc.taylor-series`'s own linearization/approximation framing directly in the P76 transfer probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.taylor-rigorous.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
