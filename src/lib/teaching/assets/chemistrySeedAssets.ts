@@ -10209,6 +10209,186 @@ const WATER_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.elect.batteries ────────────────────────────────────────────────────
+const BATT = 'chem.elect.batteries'
+const BATT_SRC = 'docs/chemistry/kg/graph.json — chem.elect.batteries'
+
+const BATT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BATT,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Batteries are practical applications of galvanic cells (covered earlier), packaged ' +
+      'for portable use. PRIMARY batteries (like alkaline/zinc-carbon) use a ONE-WAY ' +
+      'redox reaction that CANNOT be reversed by recharging — once the reactants are ' +
+      'consumed, the battery is genuinely dead (discard/recycle only). SECONDARY batteries ' +
+      '(rechargeable, like lithium-ion, lead-acid) use a redox reaction that CAN be driven ' +
+      'BACKWARD by applying an external current (essentially running as an electrolytic ' +
+      'cell during charging, then as a galvanic cell during use/discharging) — the same ' +
+      'chemical species shuttle back and forth between oxidized and reduced forms across ' +
+      'many cycles. LEAD-ACID batteries (car batteries) use Pb/PbO₂ electrodes in H₂SO₄ — ' +
+      'robust and cheap but heavy, with limited cycle life. LITHIUM-ION batteries dominate ' +
+      'modern portable electronics/EVs — small, light Li⁺ ions shuttle between electrodes ' +
+      '(intercalating into layered materials rather than undergoing full chemical ' +
+      'transformation each cycle), giving HIGH energy density and long cycle life. FUEL ' +
+      'CELLS (like H₂/O₂ fuel cells) are technically similar to batteries but ' +
+      'continuously SUPPLIED with fresh fuel/oxidizer from an external tank rather than ' +
+      'storing the reactants internally — theoretically running indefinitely as long as ' +
+      'fuel keeps flowing, used in some vehicles and spacecraft.',
+    targetedMisconceptions: [`${BATT}:MC1`],
+    source: `${BATT_SRC} — primary vs secondary batteries, lead-acid, lithium-ion, fuel cells`,
+  },
+  {
+    conceptId: BATT,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "You can recharge any dead battery by applying an external current — ' +
+      'recharging is a universal fix for any depleted battery." DANGEROUSLY FALSE — ' +
+      'PRIMARY (non-rechargeable) batteries undergo an essentially IRREVERSIBLE chemical ' +
+      'change; attempting to "recharge" them can cause dangerous side reactions (gas ' +
+      'buildup, leakage, even rupture/explosion) rather than restoring the original ' +
+      'reactants — this is precisely why alkaline batteries are clearly labeled ' +
+      '"non-rechargeable" and should never be placed in a charger. Only SECONDARY batteries ' +
+      '(explicitly designed and labeled as rechargeable, using a genuinely reversible ' +
+      'redox couple) can be safely recharged. Second trap: "A fuel cell and a battery are ' +
+      'fundamentally the same device, just with different names." FALSE — while both use ' +
+      'redox reactions to generate electricity via the same electrochemical principles, a ' +
+      'battery STORES its reactants internally (finite capacity, must recharge or replace), ' +
+      'while a fuel cell is continuously SUPPLIED with fresh reactants from an external ' +
+      'source (theoretically unlimited runtime as long as fuel is supplied) — a genuine ' +
+      'structural/operational difference, not merely a naming convention.',
+    targetedMisconceptions: [`${BATT}:MC1`, `${BATT}:MC2`],
+    source: `${BATT_SRC} — misconception: any battery can be safely recharged; fuel cells and batteries are the same device`,
+  },
+]
+
+const BATT_PROBES: SeedProbe[] = [
+  {
+    conceptId: BATT,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can a standard alkaline (non-rechargeable) battery be safely recharged by placing it in a battery charger?',
+    choices: [
+      { text: 'No — alkaline batteries undergo an essentially irreversible chemical change; attempting to recharge them can cause dangerous side reactions like gas buildup, leakage, or rupture rather than restoring the battery', isCorrect: true },
+      { text: 'Yes — applying an external current can recharge any depleted battery, whether it is labeled rechargeable or not', isCorrect: false, misconceptionId: `${BATT}:MC1` },
+    ],
+    correctValue: 'No — non-rechargeable batteries should never be recharged',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${BATT}:MC1`],
+    source: `${BATT_SRC} — distractor targets assuming any dead battery can safely be recharged`,
+  },
+  {
+    conceptId: BATT,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A hydrogen fuel cell in a vehicle can run continuously for as long as hydrogen is supplied, unlike a battery which has a finite charge. What structural difference explains this?',
+    choices: [
+      { text: 'A battery stores its reactants internally with finite capacity, while a fuel cell is continuously supplied with fresh reactants (hydrogen and oxygen) from external tanks, allowing theoretically unlimited runtime as long as fuel keeps flowing', isCorrect: true },
+      { text: 'There is no real structural difference — fuel cells and batteries are simply two different names for the identical type of device', isCorrect: false, misconceptionId: `${BATT}:MC2` },
+    ],
+    correctValue: 'Fuel cells use externally supplied reactants; batteries store them internally',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BATT}:MC2`],
+    source: `${BATT_SRC} — misconception: fuel cells and batteries are structurally identical devices`,
+  },
+]
+
+// ─── chem.elect.corrosion ────────────────────────────────────────────────────
+const CORR = 'chem.elect.corrosion'
+const CORR_SRC = 'docs/chemistry/kg/graph.json — chem.elect.corrosion'
+
+const CORR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CORR,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Corrosion (like iron RUSTING) is essentially an unwanted, spontaneous ' +
+      'ELECTROCHEMICAL process — a tiny galvanic cell forms directly ON the metal surface. ' +
+      'For iron: at ANODIC regions, Fe → Fe²⁺ + 2e⁻ (oxidation, iron dissolves); electrons ' +
+      'travel through the metal to CATHODIC regions where O₂ + 2H₂O + 4e⁻ → 4OH⁻ ' +
+      '(reduction, using dissolved atmospheric oxygen and water). The Fe²⁺ and OH⁻ then ' +
+      'combine and further oxidize (by more O₂) to form Fe₂O₃·xH₂O (rust — a hydrated iron ' +
+      'oxide, NOT metallic iron, and structurally porous/flaky, unlike protective oxide ' +
+      'layers on some other metals). Corrosion needs BOTH water AND oxygen present ' +
+      'simultaneously — neither alone is sufficient (dry iron doesn\'t rust; iron in ' +
+      'oxygen-free water doesn\'t rust either). PREVENTION strategies exploit this ' +
+      'electrochemistry directly: SACRIFICIAL PROTECTION (attaching a MORE reactive metal ' +
+      'like zinc/magnesium — using the activity series covered earlier — which corrodes ' +
+      'preferentially, "sacrificing" itself to protect the iron, since it becomes the ' +
+      'anode instead), GALVANIZING (coating iron with a zinc layer, combining a physical ' +
+      'barrier with sacrificial protection if the coating is scratched), and simple ' +
+      'BARRIER COATINGS (paint, oil) that block water/oxygen access entirely.',
+    targetedMisconceptions: [`${CORR}:MC1`],
+    source: `${CORR_SRC} — corrosion as electrochemistry, rust formation mechanism, sacrificial protection/galvanizing`,
+  },
+  {
+    conceptId: CORR,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Rust IS iron, just in a slightly different physical form — it\'s still ' +
+      'basically the same metal, structurally." FALSE — rust (Fe₂O₃·xH₂O) is a CHEMICALLY ' +
+      'DIFFERENT compound from metallic iron, having undergone genuine oxidation (Fe: 0 → ' +
+      '+3) — it has completely different physical properties (porous, flaky, brittle, no ' +
+      'metallic conductivity or luster) precisely BECAUSE it\'s chemically transformed, not ' +
+      'just physically altered iron. This is exactly why rust flakes off and exposes fresh ' +
+      'metal underneath to further corrosion, unlike some other metals\' oxide layers ' +
+      '(like aluminum oxide) which form a dense, PROTECTIVE, adherent coating that ' +
+      'actually shields the underlying metal from further oxidation. Second trap: "Zinc ' +
+      'coating (galvanizing) protects iron simply by acting as a waterproof/airtight ' +
+      'physical barrier, nothing more." FALSE — galvanizing provides DOUBLE protection: ' +
+      'the physical barrier AND (critically) SACRIFICIAL protection — even if the zinc ' +
+      'coating is scratched, exposing the iron underneath, zinc (more reactive than iron ' +
+      'per the activity series) will preferentially corrode INSTEAD of the iron, ' +
+      'continuing to protect the exposed metal electrochemically even after the physical ' +
+      'barrier is compromised.',
+    targetedMisconceptions: [`${CORR}:MC1`, `${CORR}:MC2`],
+    source: `${CORR_SRC} — misconception: rust is just physically altered iron; galvanizing works only as a physical barrier`,
+  },
+]
+
+const CORR_PROBES: SeedProbe[] = [
+  {
+    conceptId: CORR,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why does rust (Fe2O3·xH2O) flake off and expose fresh metal to further corrosion, while aluminum oxide forms a protective layer on aluminum that prevents further corrosion?',
+    choices: [
+      { text: 'Rust is a porous, flaky, chemically distinct compound from iron (a genuine oxidation product), while aluminum oxide forms a dense, adherent, protective coating; the structural difference in the oxide layers determines whether further corrosion is blocked or exposed', isCorrect: true },
+      { text: 'Rust is basically the same substance as iron, just physically weathered, which is why it doesn\'t protect the metal underneath', isCorrect: false, misconceptionId: `${CORR}:MC1` },
+    ],
+    correctValue: 'Different oxide layer structures (porous/flaky vs. dense/protective)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CORR}:MC1`],
+    source: `${CORR_SRC} — distractor targets treating rust as merely physically altered iron rather than a distinct compound`,
+  },
+  {
+    conceptId: CORR,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A galvanized (zinc-coated) iron pipe gets scratched, exposing bare iron underneath. Does the pipe immediately start rusting at the scratch, since the physical zinc barrier is broken?',
+    choices: [
+      { text: 'No — zinc (more reactive than iron) continues to provide SACRIFICIAL protection even after the physical barrier is broken; zinc will preferentially corrode at the exposed area instead of the iron, continuing electrochemical protection', isCorrect: true },
+      { text: 'Yes — once the physical zinc coating is broken, the iron underneath has no further protection and will rust immediately, since galvanizing is only a physical barrier', isCorrect: false, misconceptionId: `${CORR}:MC2` },
+    ],
+    correctValue: 'No — sacrificial protection continues even after the coating is scratched',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CORR}:MC2`],
+    source: `${CORR_SRC} — misconception: galvanizing provides only physical barrier protection, not sacrificial protection`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -10334,6 +10514,8 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...ARENES_EXPLANATIONS,
   ...LIQ_EXPLANATIONS,
   ...WATER_EXPLANATIONS,
+  ...BATT_EXPLANATIONS,
+  ...CORR_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -10459,4 +10641,6 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...ARENES_PROBES,
   ...LIQ_PROBES,
   ...WATER_PROBES,
+  ...BATT_PROBES,
+  ...CORR_PROBES,
 ]
