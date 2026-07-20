@@ -10563,6 +10563,183 @@ const ELECTROLYSIS_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.solid.ionic-solids ─────────────────────────────────────────────────
+const IONSOLID = 'chem.solid.ionic-solids'
+const IONSOLID_SRC = 'docs/chemistry/kg/graph.json — chem.solid.ionic-solids'
+
+const IONSOLID_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: IONSOLID,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Building on ionic bonding and crystal packing covered earlier: the SPECIFIC structure ' +
+      'an ionic crystal adopts depends on the RADIUS RATIO (r_cation/r_anion) — smaller ' +
+      'cations relative to anions fit into smaller "holes" in the anion packing. Common ' +
+      'structures: ROCK SALT (NaCl-type, radius ratio ~0.3-0.7, coordination number 6:6 — ' +
+      'each ion surrounded by 6 opposite-charge neighbors, FCC anion arrangement with ' +
+      'cations in octahedral holes). CESIUM CHLORIDE (CsCl-type, larger cation, radius ' +
+      'ratio ~0.7-1.0, coordination number 8:8 — simple cubic anion arrangement with cation ' +
+      'in the body center). ZINC BLENDE (ZnS-type, smaller cation, radius ratio ~0.2-0.4, ' +
+      'coordination number 4:4 — FCC anion arrangement with cations in tetrahedral holes). ' +
+      'LATTICE ENERGY (energy released forming the solid from gaseous ions — always highly ' +
+      'exothermic, hence favorable) depends on the BORN-LANDÉ equation factors: INCREASES ' +
+      'with higher ionic charges (Coulomb\'s law, charge²) and DECREASES with larger ' +
+      'inter-ionic distance (smaller ions pack closer, giving stronger attraction) — this ' +
+      'is why MgO (both +2/−2 charges, small ions) has a vastly higher lattice energy ' +
+      '(~3800 kJ/mol) than NaCl (+1/−1, larger ions, ~780 kJ/mol).',
+    targetedMisconceptions: [`${IONSOLID}:MC1`],
+    source: `${IONSOLID_SRC} — radius ratio rule, rock salt/CsCl/zinc blende structures, lattice energy trends`,
+  },
+  {
+    conceptId: IONSOLID,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Lattice energy depends primarily on the ATOMIC MASS of the ions involved — ' +
+      'heavier ions should give higher lattice energy." FALSE — lattice energy depends on ' +
+      'CHARGE and DISTANCE (ionic radius), not mass, following Coulomb\'s law directly ' +
+      '(E ∝ q₁q₂/r). A compound like LiF (small, light ions, +1/−1) can have HIGHER lattice ' +
+      'energy than a compound with heavier but LARGER ions of the same charge, because ' +
+      'smaller ionic radius means the ions pack CLOSER together, giving stronger ' +
+      'electrostatic attraction — mass is essentially irrelevant to this electrostatic ' +
+      'calculation. Second trap: "All ionic compounds with a 1:1 cation:anion ratio adopt ' +
+      'the SAME crystal structure, since they have the same stoichiometry." FALSE — the ' +
+      'structure depends on the RADIUS RATIO, not stoichiometry alone. NaCl (radius ratio ' +
+      '~0.52) adopts rock salt structure (6:6 coordination), while CsCl (radius ratio ' +
+      '~0.93, much larger cation) adopts a genuinely DIFFERENT structure (8:8 coordination) ' +
+      'despite both being simple 1:1 ionic compounds — the relative SIZE of the ions, not ' +
+      'just their charge ratio, determines the packing geometry.',
+    targetedMisconceptions: [`${IONSOLID}:MC1`, `${IONSOLID}:MC2`],
+    source: `${IONSOLID_SRC} — misconception: lattice energy depends on mass; 1:1 compounds always share the same structure`,
+  },
+]
+
+const IONSOLID_PROBES: SeedProbe[] = [
+  {
+    conceptId: IONSOLID,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'MgO has a much higher lattice energy (~3800 kJ/mol) than NaCl (~780 kJ/mol). Both are common ionic solids. What primarily explains this large difference?',
+    choices: [
+      { text: 'MgO has doubly-charged ions (Mg2+/O2-) compared to NaCl\'s singly-charged ions (Na+/Cl-), and Coulomb\'s law means lattice energy scales with the PRODUCT of the charges — higher charges dramatically increase electrostatic attraction', isCorrect: true },
+      { text: 'Magnesium and oxygen atoms are heavier than sodium and chlorine atoms, and heavier ions always produce higher lattice energy', isCorrect: false, misconceptionId: `${IONSOLID}:MC1` },
+    ],
+    correctValue: 'Higher ionic charges (Coulomb\'s law) drive the large lattice energy difference',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${IONSOLID}:MC1`],
+    source: `${IONSOLID_SRC} — distractor targets attributing lattice energy differences to atomic mass rather than charge`,
+  },
+  {
+    conceptId: IONSOLID,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'NaCl and CsCl are both simple 1:1 ionic compounds. Do they adopt the same crystal structure?',
+    choices: [
+      { text: 'No — NaCl adopts rock salt structure (6:6 coordination, radius ratio ~0.52), while CsCl adopts a different structure (8:8 coordination, radius ratio ~0.93) because Cs+ is much larger relative to Cl-; structure depends on radius ratio, not just charge ratio', isCorrect: true },
+      { text: 'Yes — any ionic compound with a 1:1 cation:anion stoichiometric ratio must adopt the identical crystal structure', isCorrect: false, misconceptionId: `${IONSOLID}:MC2` },
+    ],
+    correctValue: 'No — different structures despite identical stoichiometric ratio',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${IONSOLID}:MC2`],
+    source: `${IONSOLID_SRC} — misconception: identical stoichiometric ratio guarantees identical crystal structure`,
+  },
+]
+
+// ─── chem.solid.properties ───────────────────────────────────────────────────
+const SOLIDPROP = 'chem.solid.properties'
+const SOLIDPROP_SRC = 'docs/chemistry/kg/graph.json — chem.solid.properties'
+
+const SOLIDPROP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SOLIDPROP,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Solid electrical conductivity is explained by BAND THEORY (an extension of ' +
+      'molecular orbital theory covered earlier, applied to the millions of atoms in a ' +
+      'solid rather than just 2). Combining N atomic orbitals from N atoms creates N ' +
+      'molecular orbitals so closely spaced in energy that they merge into continuous ' +
+      'BANDS. The VALENCE BAND (filled with electrons) and CONDUCTION BAND (empty, higher ' +
+      'energy) are separated by a BAND GAP. CONDUCTORS (metals) have overlapping or ' +
+      'touching bands — electrons move freely with no energy barrier, giving excellent ' +
+      'conductivity that DECREASES slightly with rising temperature (more lattice ' +
+      'vibration disrupts electron flow). INSULATORS have a LARGE band gap (>4 eV) — ' +
+      'electrons essentially can\'t jump to the conduction band under normal conditions. ' +
+      'SEMICONDUCTORS have a SMALL band gap (~1 eV, like silicon) — some electrons ARE ' +
+      'thermally excited across at room temperature, and conductivity INCREASES with rising ' +
+      'temperature (more thermal energy = more electrons crossing the gap) — the OPPOSITE ' +
+      'temperature trend from metals. DOPING (covered in crystal defects) fine-tunes ' +
+      'semiconductor conductivity: n-type doping (adding extra-electron atoms like P to Si) ' +
+      'creates excess conduction electrons; p-type doping (adding electron-deficient atoms ' +
+      'like B) creates "holes" (electron vacancies) that also carry current.',
+    targetedMisconceptions: [`${SOLIDPROP}:MC1`],
+    source: `${SOLIDPROP_SRC} — band theory, conductors/insulators/semiconductors, temperature dependence, n-type/p-type doping`,
+  },
+  {
+    conceptId: SOLIDPROP,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Conductivity always DECREASES with rising temperature for any solid material, ' +
+      'just like it does for metals." FALSE — this is TRUE for metals (more lattice ' +
+      'vibration scatters electrons, impeding flow) but OPPOSITE for semiconductors ' +
+      '(conductivity INCREASES with temperature, since more thermal energy excites more ' +
+      'electrons across the small band gap into the conduction band, creating MORE charge ' +
+      'carriers than the scattering effect removes). This temperature-dependence direction ' +
+      'is actually a standard experimental TEST distinguishing metals from semiconductors — ' +
+      'you can\'t assume one universal rule applies to "all solids." Second trap: "p-type ' +
+      'doping (adding boron to silicon) adds POSITIVE charge carriers, meaning the material ' +
+      'gains a genuine overall positive electric charge." FALSE — the material remains ' +
+      'electrically NEUTRAL overall (boron atoms are neutral, just contributing one FEWER ' +
+      'valence electron than silicon needs for full bonding). The "positive" in p-type ' +
+      'refers to the CHARGE CARRIER behavior (electron "holes" that behave AS IF they were ' +
+      'mobile positive charges moving through the lattice), not an actual net positive ' +
+      'charge on the material itself.',
+    targetedMisconceptions: [`${SOLIDPROP}:MC1`, `${SOLIDPROP}:MC2`],
+    source: `${SOLIDPROP_SRC} — misconception: conductivity always decreases with temperature; p-type doped material has net positive charge`,
+  },
+]
+
+const SOLIDPROP_PROBES: SeedProbe[] = [
+  {
+    conceptId: SOLIDPROP,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'As temperature increases, does the electrical conductivity of silicon (a semiconductor) increase or decrease, compared to a typical metal like copper?',
+    choices: [
+      { text: 'Silicon\'s conductivity INCREASES with temperature (more electrons thermally excited across the small band gap), OPPOSITE to copper\'s conductivity which decreases with temperature (more lattice vibration scatters electrons)', isCorrect: true },
+      { text: 'Both silicon and copper show decreasing conductivity with increasing temperature, following the same universal trend for all solids', isCorrect: false, misconceptionId: `${SOLIDPROP}:MC1` },
+    ],
+    correctValue: 'Silicon\'s conductivity increases; opposite trend from metals',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SOLIDPROP}:MC1`],
+    source: `${SOLIDPROP_SRC} — distractor targets assuming a universal temperature-conductivity trend across all solid types`,
+  },
+  {
+    conceptId: SOLIDPROP,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'p-type doped silicon (with boron added) is described as having "positive" charge carriers. Does this mean the doped silicon material has an overall net positive electric charge?',
+    choices: [
+      { text: 'No — the material remains electrically neutral overall; "positive" refers to how electron holes behave as mobile positive charge carriers, not an actual net charge imbalance on the material', isCorrect: true },
+      { text: 'Yes — p-type doping genuinely gives the silicon a net positive electric charge due to the added boron atoms', isCorrect: false, misconceptionId: `${SOLIDPROP}:MC2` },
+    ],
+    correctValue: 'No — the material is electrically neutral overall',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SOLIDPROP}:MC2`],
+    source: `${SOLIDPROP_SRC} — misconception: p-type doping gives the material a genuine net positive charge`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -10692,6 +10869,8 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...CORR_EXPLANATIONS,
   ...STDELEC_EXPLANATIONS,
   ...ELECTROLYSIS_EXPLANATIONS,
+  ...IONSOLID_EXPLANATIONS,
+  ...SOLIDPROP_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -10821,4 +11000,6 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...CORR_PROBES,
   ...STDELEC_PROBES,
   ...ELECTROLYSIS_PROBES,
+  ...IONSOLID_PROBES,
+  ...SOLIDPROP_PROBES,
 ]
