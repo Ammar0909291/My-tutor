@@ -13698,6 +13698,187 @@ const COLLIG_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.nitro.amino-acids ──────────────────────────────────────────────────
+const AMINOACID = 'chem.nitro.amino-acids'
+const AMINOACID_SRC = 'docs/chemistry/kg/graph.json — chem.nitro.amino-acids'
+
+const AMINOACID_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: AMINOACID,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Amino acids combine an amine (-NH₂, basic, covered earlier) and a carboxylic acid ' +
+      '(-COOH, acidic, covered earlier) on the SAME molecule — this creates a genuinely ' +
+      'unique situation: the acidic -COOH can protonate the basic -NH₂ INTRAMOLECULARLY, ' +
+      'forming a ZWITTERION (a single molecule carrying BOTH a positive charge, -NH₃⁺, and a ' +
+      'negative charge, -COO⁻, simultaneously — net neutral overall, but genuinely dipolar). ' +
+      'This zwitterionic form DOMINATES at physiological/neutral pH, giving amino acids ' +
+      'notably HIGH melting points and water solubility (more like an ionic salt than a ' +
+      'typical small organic molecule) despite their modest size. The ISOELECTRIC POINT (pI) ' +
+      'is the specific pH where the molecule\'s NET charge is exactly zero (the zwitterion ' +
+      'form dominates completely, with no additional protonation/deprotonation of side chain ' +
+      'groups) — at pH BELOW pI, the molecule is net POSITIVELY charged (-COOH stays ' +
+      'protonated too, adding to -NH₃⁺); ABOVE pI, net NEGATIVELY charged (-NH₂ loses its ' +
+      'proton too). This pH-dependent charge behavior is EXPLOITED in ELECTROPHORESIS (a ' +
+      'technique separating amino acids/proteins by their different pI values and resulting ' +
+      'different migration in an electric field).',
+    targetedMisconceptions: [`${AMINOACID}:MC1`],
+    source: `${AMINOACID_SRC} — zwitterion formation, isoelectric point, pH-dependent net charge, electrophoresis application`,
+  },
+  {
+    conceptId: AMINOACID,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "At the isoelectric point (pI), the amino acid has NO charged groups at all — ' +
+      'it\'s a simple, fully neutral molecule like any uncharged organic compound." FALSE — ' +
+      'at the pI, the molecule is in its ZWITTERION form, meaning it STILL carries BOTH a ' +
+      'positive charge (-NH₃⁺) AND a negative charge (-COO⁻) SIMULTANEOUSLY — these charges ' +
+      'exactly CANCEL to give zero NET charge, but the molecule is genuinely dipolar/ionic in ' +
+      'character (explaining its salt-like high melting point and water solubility), not ' +
+      'simply "uncharged" like a neutral hydrocarbon. Net charge of zero and complete absence ' +
+      'of charge are different things. Second trap: "An amino acid solution below its pI ' +
+      'and above its pI would behave identically in an electric field, since both are just ' +
+      '\'somewhat charged.\'" FALSE — below pI, the molecule is net POSITIVE and migrates ' +
+      'toward the CATHODE (negative electrode) in electrophoresis; above pI, it\'s net ' +
+      'NEGATIVE and migrates toward the ANODE (positive electrode) — OPPOSITE migration ' +
+      'directions, which is exactly the physical basis for using electrophoresis to SEPARATE ' +
+      'different amino acids/proteins (each with a distinct pI) by running the experiment at ' +
+      'a chosen pH where they carry different net charges and hence migrate differently.',
+    targetedMisconceptions: [`${AMINOACID}:MC1`, `${AMINOACID}:MC2`],
+    source: `${AMINOACID_SRC} — misconception: pI means no charged groups present; charge state above/below pI behaves identically in an electric field`,
+  },
+]
+
+const AMINOACID_PROBES: SeedProbe[] = [
+  {
+    conceptId: AMINOACID,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'At its isoelectric point (pI), does an amino acid have zero charged groups, or is it in a specific charged state with zero NET charge?',
+    choices: [
+      { text: 'It is in the zwitterion form — carrying both a positive charge (-NH3+) and a negative charge (-COO-) simultaneously, which exactly cancel to give zero net charge, not a truly uncharged neutral molecule', isCorrect: true },
+      { text: 'It has zero charged groups at all, behaving like a simple, fully neutral organic molecule with no ionic character', isCorrect: false, misconceptionId: `${AMINOACID}:MC1` },
+    ],
+    correctValue: 'Zwitterion form (charges present but canceling), not truly uncharged',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${AMINOACID}:MC1`],
+    source: `${AMINOACID_SRC} — distractor targets conflating "zero net charge" with "no charged groups present"`,
+  },
+  {
+    conceptId: AMINOACID,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In electrophoresis, does an amino acid solution at a pH BELOW its pI migrate the same direction as a solution at a pH ABOVE its pI?',
+    choices: [
+      { text: 'No — below pI the molecule is net positive and migrates toward the cathode (negative electrode); above pI it is net negative and migrates toward the anode (positive electrode) — opposite directions, which is the basis for electrophoretic separation', isCorrect: true },
+      { text: 'Yes — both conditions produce "somewhat charged" molecules that migrate in the same general direction regardless of whether the pH is above or below pI', isCorrect: false, misconceptionId: `${AMINOACID}:MC2` },
+    ],
+    correctValue: 'No — opposite migration directions above vs. below pI',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${AMINOACID}:MC2`],
+    source: `${AMINOACID_SRC} — misconception: charge states above/below pI produce the same electrophoretic migration behavior`,
+  },
+]
+
+// ─── chem.bio.proteins ───────────────────────────────────────────────────────
+const PROTEIN = 'chem.bio.proteins'
+const PROTEIN_SRC = 'docs/chemistry/kg/graph.json — chem.bio.proteins'
+
+const PROTEIN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PROTEIN,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Proteins are polymers of amino acids (covered earlier) linked by AMIDE bonds (called ' +
+      'PEPTIDE bonds in this context — same functional group, connecting directly to the ' +
+      'amide stability concept covered in carboxylic acid derivatives). Protein structure is ' +
+      'organized in FOUR hierarchical levels: PRIMARY structure (the linear amino acid ' +
+      'SEQUENCE, held together by strong covalent peptide bonds); SECONDARY structure (local ' +
+      'folding patterns — α-helices and β-sheets — held together by HYDROGEN BONDING between ' +
+      'backbone N-H and C=O groups, connecting to the hydrogen bonding concept covered ' +
+      'earlier); TERTIARY structure (the overall 3D shape of a single protein chain, held ' +
+      'together by a combination of forces: hydrogen bonds, disulfide bridges (S-S covalent ' +
+      'bonds between cysteine side chains), ionic interactions, and hydrophobic ' +
+      'interactions — connecting to the intermolecular forces concept); QUATERNARY structure ' +
+      '(how multiple separate protein chains/subunits assemble together, when applicable). ' +
+      'DENATURATION (loss of function) occurs when secondary/tertiary/quaternary structure is ' +
+      'disrupted (by heat, extreme pH, or certain chemicals) — critically, this does NOT ' +
+      'break the primary structure\'s covalent peptide bonds, only the WEAKER structural ' +
+      'forces (hydrogen bonds, hydrophobic interactions) holding the folded 3D shape ' +
+      'together.',
+    targetedMisconceptions: [`${PROTEIN}:MC1`],
+    source: `${PROTEIN_SRC} — four levels of protein structure, forces stabilizing each level, denaturation mechanism`,
+  },
+  {
+    conceptId: PROTEIN,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Denaturing a protein (like cooking an egg white) breaks the peptide bonds ' +
+      'holding the amino acid chain together, essentially breaking the protein into smaller ' +
+      'pieces." FALSE — denaturation disrupts the WEAKER structural forces (hydrogen bonds, ' +
+      'hydrophobic interactions, ionic interactions) that maintain secondary/tertiary/ ' +
+      'quaternary structure, causing the protein to UNFOLD from its specific functional shape ' +
+      '— but the PRIMARY structure\'s strong covalent peptide bonds remain completely INTACT ' +
+      '(the amino acid sequence is unchanged; you still have the same linear chain, just ' +
+      'unfolded rather than in its native 3D shape). This is exactly why denaturation is ' +
+      'often IRREVERSIBLE in practice (the protein can\'t easily refold to its precise ' +
+      'original shape once unfolded, even though its covalent chain is unbroken) but is a ' +
+      'fundamentally different process from actual peptide-bond hydrolysis (which DOES break ' +
+      'covalent bonds and requires much harsher conditions, like strong acid + heat). Second ' +
+      'trap: "All four levels of protein structure are held together by the SAME type of ' +
+      'bonding force." FALSE — primary structure uses strong COVALENT peptide bonds, while ' +
+      'secondary/tertiary/quaternary structure uses a MIX of much WEAKER non-covalent forces ' +
+      '(hydrogen bonds, hydrophobic interactions, ionic interactions) plus occasional covalent ' +
+      'disulfide bridges — this is precisely WHY denaturation (disrupting the weaker forces) ' +
+      'is possible without breaking the primary sequence at all.',
+    targetedMisconceptions: [`${PROTEIN}:MC1`, `${PROTEIN}:MC2`],
+    source: `${PROTEIN_SRC} — misconception: denaturation breaks peptide bonds; all structural levels use the same bonding type`,
+  },
+]
+
+const PROTEIN_PROBES: SeedProbe[] = [
+  {
+    conceptId: PROTEIN,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'When an egg white protein is denatured by heat (cooking), are the covalent peptide bonds holding the amino acid sequence together broken?',
+    choices: [
+      { text: 'No — denaturation disrupts the weaker structural forces (hydrogen bonds, hydrophobic interactions) maintaining the folded 3D shape, causing unfolding, but the strong covalent peptide bonds of the primary sequence remain completely intact', isCorrect: true },
+      { text: 'Yes — denaturation breaks the covalent peptide bonds, essentially fragmenting the protein into smaller pieces during cooking', isCorrect: false, misconceptionId: `${PROTEIN}:MC1` },
+    ],
+    correctValue: 'No — primary structure (peptide bonds) remains intact during denaturation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PROTEIN}:MC1`],
+    source: `${PROTEIN_SRC} — distractor targets conflating denaturation with actual peptide bond hydrolysis`,
+  },
+  {
+    conceptId: PROTEIN,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Are all four levels of protein structure (primary, secondary, tertiary, quaternary) held together by the same type of chemical bonding force?',
+    choices: [
+      { text: 'No — primary structure uses strong covalent peptide bonds, while secondary/tertiary/quaternary structure rely on a mix of much weaker non-covalent forces (hydrogen bonds, hydrophobic interactions, ionic interactions) plus occasional covalent disulfide bridges', isCorrect: true },
+      { text: 'Yes — all four levels of protein structure are maintained by the same fundamental type of chemical bond throughout', isCorrect: false, misconceptionId: `${PROTEIN}:MC2` },
+    ],
+    correctValue: 'No — different structural levels rely on different bonding force types',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PROTEIN}:MC2`],
+    source: `${PROTEIN_SRC} — misconception: all protein structural levels are held together by identical bonding forces`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -13862,6 +14043,8 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...DIAZO_EXPLANATIONS,
   ...CARBDERIV_EXPLANATIONS,
   ...COLLIG_EXPLANATIONS,
+  ...AMINOACID_EXPLANATIONS,
+  ...PROTEIN_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -14026,4 +14209,6 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...DIAZO_PROBES,
   ...CARBDERIV_PROBES,
   ...COLLIG_PROBES,
+  ...AMINOACID_PROBES,
+  ...PROTEIN_PROBES,
 ]
