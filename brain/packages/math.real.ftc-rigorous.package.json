@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.real.ftc-rigorous-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.real.ftc-rigorous",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:acbb6f5dcbab385005e13c23df91e8bcf27f6d443630ee0d55234df8f05fbb8f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.real.ftc-rigorous.md": "sha256:a2072acc35dddabc99cf10fed36a6880442768a477d418a790b365738712abcb"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.real.ftc-rigorous",
+    "name": "Fundamental Theorem of Calculus (Rigorous)",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.real.riemann-integral",
+      "math.real.differentiability-rigorous"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.real.ftc-rigorous-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.real.ftc-rigorous (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.real.ftc-rigorous.md": "sha256:a2072acc35dddabc99cf10fed36a6880442768a477d418a790b365738712abcb"
+      },
+      "contentHash": "sha256:f352922947f9ce74f151a0b705dd46361f70eb7cf19f27a6ffb3f0c1ec5ff341",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.real.ftc-rigorous.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.ftc-rigorous.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.ftc-rigorous"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.ftc-rigorous\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.ftc-rigorous.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.ftc-rigorous.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.ftc-rigorous"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.ftc-rigorous\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.ftc-rigorous.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.ftc-rigorous.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.ftc-rigorous"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.ftc-rigorous\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.ftc-rigorous.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.ftc-rigorous.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.ftc-rigorous"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.ftc-rigorous\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.real.ftc-rigorous/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.real.ftc-rigorous",
+      "title": "Learning Objectives",
+      "content": "- LO1 (cross-link objective): Recognize `math.calc.ftc-part1`'s already-known statement ($F'(x)=f(x)$ for $F(x)=\\int_a^xf(t)\\,dt$, $f$ continuous) as a SPECIAL CASE of this concept's more general, rigorously-proven Part 1 — which additionally establishes $F$ is LIPSCHITZ continuous whenever $f$ is merely integrable (not necessarily continuous), a genuinely stronger and more general statement than `math.calc.ftc-part1` ever claimed.\n- LO2: Prove that $F$ is Lipschitz when $f$ is Riemann integrable (hence bounded, by `math.real.riemann-integral`), using a direct bound $|F(x)-F(y)|\\le M|x-y|$ (where $M$ bounds $|f|$) derived from the integral's own additivity and monotonicity properties — and separately prove the differentiability claim $F'(x_0)=f(x_0)$ at points of continuity, using an $\\varepsilon$–$\\delta$ argument bounding the difference quotient directly against continuity's own definition.\n- LO3: Prove Part 2 ($\\int_a^bf=F(b)-F(a)$ for any antiderivative $F$ of $f$) using the Mean Value Theorem (via `math.real.differentiability-rigorous`'s own differentiability framework) applied to a Riemann-sum partition, and correctly explain why this is a genuinely different (and logically independent) claim from Part 1 — Part 2 assumes an antiderivative already EXISTS and evaluates the integral from it; Part 1 CONSTRUCTS a specific antiderivative-candidate $F$ from the integral and studies its properties.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.ftc-rigorous.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.real.ftc-rigorous/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.real.ftc-rigorous",
+      "title": "RIGOROUS-FTC1-ASSUMED-MERE-RESTATEMENT",
+      "content": "| MC-1 | RIGOROUS-FTC1-ASSUMED-MERE-RESTATEMENT | Believing this concept's Part 1 is just a restatement of `math.calc.ftc-part1`'s FTC1, missing the genuine generalizations to pointwise continuity and Lipschitz continuity under mere integrability | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.ftc-rigorous.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.real.ftc-rigorous/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.real.ftc-rigorous",
+      "title": "LIPSCHITZ-CONCLUSION-CONFLATED-WITH-DIFFERENTIABILITY-HYPOTHESIS",
+      "content": "| MC-2 | LIPSCHITZ-CONCLUSION-CONFLATED-WITH-DIFFERENTIABILITY-HYPOTHESIS | Believing proving $F$ is Lipschitz requires $f$ to be continuous, conflating it with the stronger differentiability conclusion's genuinely different (continuity-at-a-point) hypothesis | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.ftc-rigorous.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.real.ftc-rigorous/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.real.ftc-rigorous",
+      "title": "PART-1-AND-PART-2-ASSUMED-SAME-DIRECTION",
+      "content": "| MC-3 | PART-1-AND-PART-2-ASSUMED-SAME-DIRECTION | Believing Part 1 and Part 2 prove the same claim in the same logical direction, missing that Part 1 constructs $F$ from the integral while Part 2 assumes $F$ exists and evaluates the integral from it | High |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.ftc-rigorous.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.real.ftc-rigorous/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.ftc-rigorous",
+      "title": "Part 1 Generalizes `math.calc.ftc-part1` in Two Genuine Ways (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Part 1 Generalizes `math.calc.ftc-part1` in Two Genuine Ways (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.ftc-rigorous.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.real.ftc-rigorous/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.ftc-rigorous",
+      "title": "The Lipschitz Bound Comes From Boundedness Alone, Differentiability Needs Continuity (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Lipschitz Bound Comes From Boundedness Alone, Differentiability Needs Continuity (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.ftc-rigorous.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.real.ftc-rigorous/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.ftc-rigorous",
+      "title": "Part 2 Assumes an Antiderivative Exists; Part 1 Constructs One (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Part 2 Assumes an Antiderivative Exists; Part 1 Constructs One (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.ftc-rigorous.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.real.ftc-rigorous/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.ftc-rigorous",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.ftc-rigorous.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.ftc-rigorous/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.real.ftc-rigorous",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For a bounded, Riemann integrable $f$ that is discontinuous at exactly one point $x_0$ but continuous elsewhere, explain precisely at which points $F(x)=\\int_a^xf$ is guaranteed differentiable, and why.\n  2. Prove the Lipschitz bound $|F(y)-F(x)|\\le M|x-y|$ directly from the integral's additivity, for a specific bounded $f$ of your choosing.\n  3. Using the Mean Value Theorem telescoping argument (as in Example 3), verify Part 2 for $f(t)=3t^2$ on $[0,2]$ with antiderivative $F(t)=t^3$, using a 2-subinterval partition.\n  4. Explain, in your own words, why Part 1 and Part 2 are logically independent claims running in opposite directions, rather than the same theorem restated.\n- **P76 (Transfer Probe, mode = cross-link probe engaging `math.calc.ftc-part1`)**: \"A physicist models a velocity function $v(t)$ that is bounded and Riemann integrable on $[0,T]$, but has a single instantaneous discontinuity at $t=t_0$ (representing an idealized instantaneous collision), and is continuous everywhere else. The physicist wants the position function $x(t)=x(0)+\\int_0^tv(s)\\,ds$. (a) Using THIS concept's Part 1 (not `math.calc.ftc-part1`'s version, which requires continuity everywhere), explain precisely at which times $t$ the physicist can conclude $x'(t)=v(t)$, and why $t=t_0$ must be excluded from this conclusion. (b) Separately, explain why $x(t)$ is still guaranteed to be a genuinely CONTINUOUS (in fact Lipschitz) function of time, even though $v$ has a discontinuity — citing which hypothesis (boundedness vs. continuity) is responsible for this weaker but still valuable guarantee. (c) If the physicist instead ALREADY has a known closed-form antiderivative for $v$ on some sub-interval away from $t_0$, explain, citing Part 2's logical structure, how they would use it to evaluate a definite integral of $v$ over that sub-interval directly, without needing to re-derive $x(t)$ from Part 1 at all.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.ftc-rigorous.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.ftc-rigorous/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.real.ftc-rigorous",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.real.riemann-integral` (Darboux upper/lower sums, integrability, boundedness of integrable functions, continuous functions are integrable) and `math.real.differentiability-rigorous` (the rigorous $f'(a)=\\lim_{h\\to0}[f(a+h)-f(a)]/h$ definition, and the Mean Value Theorem framework built on it).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.ftc-rigorous.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.real.ftc-rigorous/reference/1",
+      "kind": "reference",
+      "conceptId": "math.real.ftc-rigorous",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.real.riemann-integral` (Darboux sums, integrability, and the boundedness of integrable functions this concept's Lipschitz proof directly uses) and `math.real.differentiability-rigorous` (the rigorous differentiability definition and Mean Value Theorem framework Part 2's proof directly uses).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.calc.ftc-part1`, checked via `ls docs/curriculum/blueprints/` and confirmed ALREADY authored. $P76_{mode}=$ **cross-link probe**, engaging `math.calc.ftc-part1`'s own global-continuity-hypothesis version directly in Component 3's generalization argument and the P76 transfer probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.ftc-rigorous.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

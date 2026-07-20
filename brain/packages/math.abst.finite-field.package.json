@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.finite-field-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.finite-field",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:cd242dc13f6b6a12a329881c77313abed3938512dfeb1c17162e683929a14a85",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.finite-field.md": "sha256:982039bc002a4bb14f3f20fd5be031cc6c6a3fba6b7ea65c2e262b5840906f8d"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.abst.finite-field",
+    "name": "Finite Field",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.abst.field",
+      "math.nt.prime-number"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.finite-field-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.finite-field (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.finite-field.md": "sha256:982039bc002a4bb14f3f20fd5be031cc6c6a3fba6b7ea65c2e262b5840906f8d"
+      },
+      "contentHash": "sha256:e32300648b783782d3937c0649165fe93ee5946c8c2ca85bf3481cacc35d4264",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.finite-field.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.finite-field.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.finite-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.finite-field\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.finite-field.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.finite-field.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.finite-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.finite-field\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.finite-field.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.finite-field.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.finite-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.finite-field\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.finite-field.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.finite-field.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.finite-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.finite-field\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.finite-field/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.abst.finite-field",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the existence/classification theorem precisely: a finite field of order $q$ exists if and only if $q=p^n$ for some prime $p$ and integer $n\\ge1$ — NOT for every finite $q$ — and correctly classify a list of candidate orders (e.g. 8, 9, 10, 12) as achievable or not achievable as a finite field's order, using prime factorization.\n- LO2 (cross-link objective): Recognize `math.nt.modular-arithmetic`'s own $\\mathbb{Z}/p\\mathbb{Z}$ (for PRIME $p$) as EXACTLY the $n=1$ special case of this theorem ($\\mathbb{F}_p=\\mathbb{Z}/p\\mathbb{Z}$), while explicitly distinguishing it from the genuinely NEW case $n\\ge2$: $\\mathbb{F}_{p^n}$ for $n\\ge2$ is NOT the same set as $\\mathbb{Z}/p^n\\mathbb{Z}$ (which is a ring but not even a field, since e.g. $p\\cdot p\\equiv0\\pmod{p^2}$ gives zero divisors) — finite fields of non-prime order require a genuinely different construction.\n- LO3: State that the nonzero elements of any finite field $\\mathbb{F}_q$ form a CYCLIC group under multiplication (of order $q-1$) — meaning some single \"generator\" element's powers produce every nonzero field element — and verify this cyclic structure concretely for a small field by direct computation.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.finite-field.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.abst.finite-field/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.finite-field",
+      "title": "FINITE-FIELD-ORDER-ASSUMED-UNRESTRICTED",
+      "content": "| MC-1 | FINITE-FIELD-ORDER-ASSUMED-UNRESTRICTED | Believing a finite field exists for every positive integer order, missing the genuine prime-power ($p^n$) restriction | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.finite-field.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.abst.finite-field/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.finite-field",
+      "title": "FP-N-CONFLATED-WITH-Z-MOD-PN",
+      "content": "| MC-2 | FP-N-CONFLATED-WITH-Z-MOD-PN | Believing $\\mathbb{F}_{p^n}$ for $n\\ge2$ is the same set as $\\mathbb{Z}/p^n\\mathbb{Z}$, missing that the latter has zero divisors and is not even an integral domain | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.finite-field.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.abst.finite-field/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.finite-field",
+      "title": "MULTIPLICATIVE-CYCLIC-STRUCTURE-DOUBTED",
+      "content": "| MC-3 | MULTIPLICATIVE-CYCLIC-STRUCTURE-DOUBTED | Not recognizing that the nonzero elements of ANY finite field are guaranteed to form a cyclic group under multiplication | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.finite-field.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.abst.finite-field/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.finite-field",
+      "title": "Finite Field Orders Are Severely Restricted to Prime Powers (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Finite Field Orders Are Severely Restricted to Prime Powers (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.finite-field.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.abst.finite-field/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.finite-field",
+      "title": "$\\mathbb{F}_{p^n}$ for $n\\ge2$ Is NOT $\\mathbb{Z}/p^n\\mathbb{Z}$ (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"$\\\\mathbb{F}_{p^n}$ for $n\\\\ge2$ Is NOT $\\\\mathbb{Z}/p^n\\\\mathbb{Z}$ (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.finite-field.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.abst.finite-field/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.finite-field",
+      "title": "The Nonzero Elements Are Always Cyclic Under Multiplication (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Nonzero Elements Are Always Cyclic Under Multiplication (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.finite-field.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.abst.finite-field/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.finite-field",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.finite-field.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.abst.finite-field/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.finite-field",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Determine, with justification via prime factorization, whether finite fields exist of orders 16, 18, 25, and 27.\n  2. Explain why $\\mathbb{F}_5=\\mathbb{Z}/5\\mathbb{Z}$ (citing `math.nt.modular-arithmetic`'s own inverse-existence criterion for prime moduli).\n  3. Explain, citing a specific zero-divisor computation, why $\\mathbb{Z}/9\\mathbb{Z}$ is NOT the field $\\mathbb{F}_9$.\n  4. For $\\mathbb{F}_5$, verify by direct computation of powers whether $g=2$ is a generator of the nonzero multiplicative group.\n- **P76 (Transfer Probe, mode = cross-link probe engaging `math.nt.modular-arithmetic`)**: \"A cryptography engineer needs to work in a finite field of order 121 for an error-correcting code. (a) Using the prime-power classification theorem, determine whether a finite field of order 121 exists, and if so, identify $p$ and $n$. (b) The engineer initially proposes simply using $\\mathbb{Z}/121\\mathbb{Z}$ (ordinary modular arithmetic) as this field. Using `math.nt.modular-arithmetic`'s own inverse-existence criterion ($\\gcd(a,n)=1$), determine whether every nonzero residue modulo 121 actually has a multiplicative inverse, and explain what this implies about whether $\\mathbb{Z}/121\\mathbb{Z}$ can serve as the needed field. (c) Contrast this with the case of a finite field of PRIME order (say 127): explain, again citing `math.nt.modular-arithmetic`'s criterion, why $\\mathbb{Z}/127\\mathbb{Z}$ genuinely DOES work directly as the field in that case.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.finite-field.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.abst.finite-field/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.finite-field",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.abst.field` (field axioms: commutative ring where every nonzero element has a multiplicative inverse; characteristic; standard examples $\\mathbb{Q},\\mathbb{R},\\mathbb{C},\\mathbb{Z}_p$) and `math.nt.prime-number` (primes as the multiplicative building blocks of the integers).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.finite-field.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.abst.finite-field/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.finite-field",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.abst.field` (the general field axioms, characteristic theory, and standard examples $\\mathbb{Z}_p$ this concept classifies and extends) and `math.nt.prime-number` (the primality concept underlying the $p^n$ classification).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.nt.modular-arithmetic`, checked via `ls docs/curriculum/blueprints/` and confirmed ALREADY authored. $P76_{mode}=$ **cross-link probe**, engaging `math.nt.modular-arithmetic`'s own inverse-existence criterion ($\\gcd(a,n)=1$) directly in Component 3's derivation and the P76 transfer probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.finite-field.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
