@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.frobenius-method-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.frobenius-method",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:30fa4274b045e763e8223da42acdd1eda56350d3ad0eee1bd771ec0f6876be20",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.frobenius-method.md": "sha256:263c34e1c9f3cb02c0dbd7f38b5b8527d8f2e5038e225477f42b21b808dd9e38"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.de.frobenius-method",
+    "name": "Frobenius Method",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.de.series-solution"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.frobenius-method-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.frobenius-method (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.frobenius-method.md": "sha256:263c34e1c9f3cb02c0dbd7f38b5b8527d8f2e5038e225477f42b21b808dd9e38"
+      },
+      "contentHash": "sha256:2f7759d8740f594f2d67cbbc712f20101cc7e15361c6626dffbea57c25b22229",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.frobenius-method.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.frobenius-method.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.frobenius-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.frobenius-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.frobenius-method.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.frobenius-method.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.frobenius-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.frobenius-method\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.frobenius-method.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.frobenius-method.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.frobenius-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.frobenius-method\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.frobenius-method.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.frobenius-method.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.frobenius-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.frobenius-method\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.frobenius-method/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.frobenius-method",
+      "title": "Learning Objectives",
+      "content": "- LO1: Recognize that `math.de.series-solution`'s own ansatz $y=\\sum a_nx^n$ REQUIRES $x=0$ to be an ORDINARY point, and that at a REGULAR SINGULAR point, this ansatz fails — motivating the Frobenius MODIFICATION $y=x^r\\sum a_nx^n$, which introduces an extra factor $x^r$ (with $r$ not necessarily a non-negative integer) to accommodate the singularity.\n- LO2: Derive the INDICIAL EQUATION (a quadratic in $r$, obtained from the LOWEST-order term when substituting the Frobenius ansatz into the ODE) and solve it to determine the possible values of $r$ — recognizing this as the FIRST new step beyond `math.de.series-solution`'s own coefficient-recurrence procedure.\n- LO3 (orientation level — full three-case derivation deferred): recognize, without full derivation, that the indicial equation's TWO roots $r_1,r_2$ (with $r_1\\ge r_2$) determine THREE structurally different cases for the general solution — DISTINCT non-integer difference (both roots give independent Frobenius series solutions directly), INTEGER difference, and EQUAL roots (the latter two requiring a LOGARITHMIC term in the second solution) — previewing that the roots' relationship, not merely their individual values, governs the solution's structure.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.frobenius-method.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.de.frobenius-method/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.frobenius-method",
+      "title": "FROBENIUS-ASSUMED-UNRELATED-TECHNIQUE",
+      "content": "| MC-1 | FROBENIUS-ASSUMED-UNRELATED-TECHNIQUE | Believing the Frobenius ansatz is an entirely unrelated technique from the ordinary series-solution ansatz, missing that it is a targeted fix for the ordinary ansatz's failure at a singular point | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.frobenius-method.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.de.frobenius-method/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.frobenius-method",
+      "title": "INDICIAL-EQUATION-ASSUMED-AFTERTHOUGHT",
+      "content": "| MC-2 | INDICIAL-EQUATION-ASSUMED-AFTERTHOUGHT | Believing the Frobenius method starts with the same coefficient-recurrence derivation as the ordinary method, missing that the indicial equation is derived FIRST, determining $r$ before any coefficients | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.frobenius-method.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.de.frobenius-method/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.frobenius-method",
+      "title": "LOG-TERM-NEED-ASSUMED-DETERMINED-BY-ROOT-SIZE",
+      "content": "| MC-3 | LOG-TERM-NEED-ASSUMED-DETERMINED-BY-ROOT-SIZE | Believing whether a logarithmic term is needed is determined by the roots' individual size, missing that it is the DIFFERENCE between the two roots that determines the case | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.frobenius-method.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.de.frobenius-method/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.frobenius-method",
+      "title": "The Frobenius Ansatz Is a Targeted Fix for the Ordinary Ansatz's Failure (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Frobenius Ansatz Is a Targeted Fix for the Ordinary Ansatz's Failure (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.frobenius-method.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.de.frobenius-method/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.frobenius-method",
+      "title": "The Indicial Equation Comes First, Determining r Before Any Coefficients (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Indicial Equation Comes First, Determining r Before Any Coefficients (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.frobenius-method.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.de.frobenius-method/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.frobenius-method",
+      "title": "It's the Roots' Difference, Not Their Individual Size, That Determines the Case (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"It's the Roots' Difference, Not Their Individual Size, That Determines the Case (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.frobenius-method.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.frobenius-method/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.frobenius-method",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.frobenius-method.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.frobenius-method/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.frobenius-method",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify that $x=0$ is a regular singular point for $2x^2y''+3xy'-y=0$ (i.e., the coefficients, after dividing by the leading term, have the controlled singularity type Frobenius requires).\n  2. Substitute the Frobenius ansatz into the ODE from problem 1 and derive its indicial equation.\n  3. Solve problem 2's indicial equation, and state whether the two roots' difference is an integer, non-integer, or zero.\n  4. Explain, in one or two sentences, why the ordinary series-solution ansatz alone would fail for the ODE in problem 1.\n- **P76 (Transfer Probe, mode = independence)**: \"A physicist analyzing a radially symmetric wave equation encounters the ODE $x^2y''+xy'+(x^2-\\nu^2)y=0$ (Bessel's equation) near $x=0$, a regular singular point. (a) Set up the Frobenius ansatz and identify the general form of the indicial equation you would derive (without necessarily completing every algebraic step). (b) Explain why simply trying `math.de.series-solution`'s ordinary ansatz would be expected to fail for this equation, given the singularity at $x=0$. (c) If the indicial equation for a particular value of $\\nu$ produced two roots differing by a positive integer, explain what additional structural complication the physicist should anticipate when constructing the second linearly independent solution.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.frobenius-method.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.frobenius-method/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.frobenius-method",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.de.series-solution` (the ansatz $y=\\sum a_nx^n$, substituted into an ODE to derive a coefficient recurrence, valid at an ORDINARY point).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.frobenius-method.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.frobenius-method/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.frobenius-method",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.de.series-solution` (the ordinary power-series ansatz and coefficient-recurrence procedure this concept's Frobenius modification directly extends).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: none listed in the KG for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.frobenius-method.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
