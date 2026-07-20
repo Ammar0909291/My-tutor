@@ -12801,6 +12801,185 @@ const AMINE_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.sol.osmosis ────────────────────────────────────────────────────────
+const OSMOSIS = 'chem.sol.osmosis'
+const OSMOSIS_SRC = 'docs/chemistry/kg/graph.json — chem.sol.osmosis'
+
+const OSMOSIS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: OSMOSIS,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Osmosis is the fourth colligative property (alongside vapor pressure lowering, ' +
+      'boiling point elevation, and freezing point depression, all covered earlier): the ' +
+      'net movement of SOLVENT (not solute) across a SEMIPERMEABLE MEMBRANE (permits solvent ' +
+      'through but blocks solute) from LOW solute concentration toward HIGH solute ' +
+      'concentration, driven by the same underlying principle — the system moves toward ' +
+      'equalizing concentration/entropy. OSMOTIC PRESSURE (π) is the pressure that would ' +
+      'need to be applied to the HIGH-concentration side to exactly STOP this net solvent ' +
+      'flow — quantified by van\'t Hoff\'s equation: π = MRT (strikingly parallel in form to ' +
+      'the ideal gas law PV=nRT, though describing an entirely different physical ' +
+      'phenomenon). Like other colligative properties, π depends on the NUMBER of dissolved ' +
+      'particles (M here being TOTAL particle molarity, accounting for dissociation via the ' +
+      'van\'t Hoff factor i, same principle as vapor pressure lowering covered earlier). ' +
+      'REVERSE OSMOSIS applies pressure GREATER than the natural osmotic pressure, forcing ' +
+      'solvent to flow AGAINST its natural direction (from high to low concentration) — this ' +
+      'is the working principle behind industrial water desalination/purification systems.',
+    targetedMisconceptions: [`${OSMOSIS}:MC1`],
+    source: `${OSMOSIS_SRC} — osmosis mechanism, osmotic pressure (van't Hoff equation), reverse osmosis`,
+  },
+  {
+    conceptId: OSMOSIS,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "In osmosis, the SOLUTE moves across the membrane to equalize concentration, ' +
+      'just like ordinary diffusion of a dissolved substance." FALSE — this is the single ' +
+      'most common osmosis misconception. The semipermeable membrane specifically BLOCKS ' +
+      'solute passage (that\'s the defining feature of the setup) — it\'s the SOLVENT ' +
+      '(usually water) that moves, flowing from the dilute side toward the concentrated side, ' +
+      'effectively diluting the concentrated solution and equalizing concentrations that way ' +
+      'INSTEAD of solute redistributing directly. Getting this direction/species backward ' +
+      'leads to completely wrong predictions about which way water will flow in any given ' +
+      'osmosis scenario. Second trap: "Placing a red blood cell in ANY solution with a ' +
+      'different solute concentration than blood plasma will cause the same general effect ' +
+      '(cell either swells or shrinks, doesn\'t matter which direction)." The DIRECTION ' +
+      'matters critically: a HYPOTONIC solution (lower solute concentration outside the ' +
+      'cell than inside) causes water to flow INTO the cell (swelling, potentially bursting/ ' +
+      'lysis), while a HYPERTONIC solution (higher solute concentration outside) causes water ' +
+      'to flow OUT of the cell (shrinking/crenation) — these are opposite, medically ' +
+      'significant outcomes, not interchangeable "some effect happens" results (this is ' +
+      'exactly why IV fluids must be carefully formulated to be ISOTONIC with blood).',
+    targetedMisconceptions: [`${OSMOSIS}:MC1`, `${OSMOSIS}:MC2`],
+    source: `${OSMOSIS_SRC} — misconception: solute moves during osmosis (it's solvent); hypotonic/hypertonic effects are interchangeable`,
+  },
+]
+
+const OSMOSIS_PROBES: SeedProbe[] = [
+  {
+    conceptId: OSMOSIS,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A semipermeable membrane separates pure water from a concentrated sugar solution. What actually moves across the membrane during osmosis?',
+    choices: [
+      { text: 'Water (the solvent) moves from the pure water side into the sugar solution side; the semipermeable membrane specifically blocks sugar (the solute) from passing through', isCorrect: true },
+      { text: 'Sugar molecules (the solute) diffuse across the membrane from the concentrated side to the pure water side, similar to ordinary diffusion', isCorrect: false, misconceptionId: `${OSMOSIS}:MC1` },
+    ],
+    correctValue: 'Water (solvent) moves; solute is blocked by the membrane',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${OSMOSIS}:MC1`],
+    source: `${OSMOSIS_SRC} — distractor targets the classic confusion of solute movement instead of solvent movement in osmosis`,
+  },
+  {
+    conceptId: OSMOSIS,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A red blood cell is placed in a hypotonic solution (lower solute concentration than the cell\'s interior). Does the same thing happen as if it were placed in a hypertonic solution (higher solute concentration outside)?',
+    choices: [
+      { text: 'No — hypotonic causes water to flow INTO the cell (swelling, potentially bursting), while hypertonic causes water to flow OUT of the cell (shrinking); these are opposite, medically significant outcomes, not interchangeable effects', isCorrect: true },
+      { text: 'Yes — both hypotonic and hypertonic solutions cause the same general water-movement effect on the cell, regardless of which direction the concentration gradient runs', isCorrect: false, misconceptionId: `${OSMOSIS}:MC2` },
+    ],
+    correctValue: 'No — hypotonic and hypertonic cause opposite effects',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${OSMOSIS}:MC2`],
+    source: `${OSMOSIS_SRC} — misconception: treating hypotonic and hypertonic solution effects as interchangeable`,
+  },
+]
+
+// ─── chem.poly.addition ──────────────────────────────────────────────────────
+const ADDPOLY = 'chem.poly.addition'
+const ADDPOLY_SRC = 'docs/chemistry/kg/graph.json — chem.poly.addition'
+
+const ADDPOLY_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ADDPOLY,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Addition polymerization builds long-chain POLYMERS from small MONOMER units (alkenes, ' +
+      'building on the electrophilic addition reactivity covered earlier) by repeatedly ' +
+      'opening the C=C double bond and linking monomers together — CRUCIALLY, NO atoms are ' +
+      'LOST in this process (the polymer\'s molecular formula is simply the monomer\'s formula ' +
+      'repeated n times: n(CH₂=CH₂) → (-CH₂-CH₂-)ₙ for polyethylene). This follows a FREE ' +
+      'RADICAL chain mechanism (connecting to the radical chemistry covered in reactive ' +
+      'intermediates): INITIATION (a radical initiator, like a peroxide, generates the first ' +
+      'radical), PROPAGATION (that radical repeatedly attacks new monomer double bonds, ' +
+      'extending the chain while regenerating a radical at the new chain end each time — this ' +
+      'step repeats thousands of times), and TERMINATION (two radical chain ends combine, or ' +
+      'disproportionate, ending chain growth). Different monomers give distinct, useful ' +
+      'polymers: ethylene → polyethylene (plastic bags, bottles), propylene → polypropylene ' +
+      '(more rigid, used in containers/carpets), vinyl chloride → PVC (pipes, vinyl siding), ' +
+      'styrene → polystyrene (foam packaging, disposable items) — the monomer\'s specific ' +
+      'substituent groups control the resulting polymer\'s mechanical/thermal properties.',
+    targetedMisconceptions: [`${ADDPOLY}:MC1`],
+    source: `${ADDPOLY_SRC} — addition polymerization mechanism, free radical initiation/propagation/termination, common polymer examples`,
+  },
+  {
+    conceptId: ADDPOLY,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Addition polymerization, like condensation polymerization, releases small ' +
+      'byproduct molecules (like water) as the chain grows." FALSE — this is the defining ' +
+      'distinction between the two major polymerization TYPES: ADDITION polymerization ' +
+      '(covered here) involves NO byproduct loss whatsoever — the polymer\'s molecular ' +
+      'formula is EXACTLY the monomer formula repeated n times, since the mechanism simply ' +
+      'opens double bonds and links monomers directly, without ejecting any atoms. ' +
+      'CONDENSATION polymerization (a genuinely different mechanism, not covered in this ' +
+      'entry) DOES release small molecules like water or HCl as each new bond forms — ' +
+      'confusing these two mechanisms leads to incorrect molecular formula predictions for ' +
+      'the resulting polymer. Second trap: "Once the propagation step begins, it continues ' +
+      'indefinitely without limit, producing infinitely long polymer chains." FALSE — ' +
+      'propagation eventually STOPS via TERMINATION (two radical chain ends meeting and ' +
+      'combining, or disproportionating), which is what gives real polymers a finite (though ' +
+      'often very large) molecular weight distribution rather than truly infinite chains — ' +
+      'controlling the balance of initiation/propagation/termination rates is actually how ' +
+      'chemists control the final polymer\'s average chain length and properties.',
+    targetedMisconceptions: [`${ADDPOLY}:MC1`, `${ADDPOLY}:MC2`],
+    source: `${ADDPOLY_SRC} — misconception: addition polymerization releases byproducts like condensation; propagation continues without limit`,
+  },
+]
+
+const ADDPOLY_PROBES: SeedProbe[] = [
+  {
+    conceptId: ADDPOLY,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'When ethylene (CH2=CH2) undergoes addition polymerization to form polyethylene (-CH2-CH2-)n, is any small molecule (like water) released as a byproduct during chain growth?',
+    choices: [
+      { text: 'No — addition polymerization involves NO byproduct loss whatsoever; the polymer\'s formula is exactly the monomer formula repeated n times, since the mechanism simply opens double bonds and links monomers directly', isCorrect: true },
+      { text: 'Yes — like condensation polymerization, addition polymerization releases small byproduct molecules (such as water) as each new monomer is added to the chain', isCorrect: false, misconceptionId: `${ADDPOLY}:MC1` },
+    ],
+    correctValue: 'No byproduct — addition polymerization loses no atoms',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ADDPOLY}:MC1`],
+    source: `${ADDPOLY_SRC} — distractor targets confusing addition polymerization with condensation polymerization's byproduct release`,
+  },
+  {
+    conceptId: ADDPOLY,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Once the propagation step of a free radical polymerization begins, does chain growth continue indefinitely, producing infinitely long polymer chains?',
+    choices: [
+      { text: 'No — propagation eventually stops via termination (two radical chain ends meeting and combining, or disproportionating), giving real polymers a finite, though often very large, molecular weight rather than truly infinite chains', isCorrect: true },
+      { text: 'Yes — once initiated, the propagation step continues without limit, and only the initial amount of monomer determines when the reaction physically runs out of material', isCorrect: false, misconceptionId: `${ADDPOLY}:MC2` },
+    ],
+    correctValue: 'No — termination stops chain growth at a finite length',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ADDPOLY}:MC2`],
+    source: `${ADDPOLY_SRC} — misconception: propagation continues indefinitely without a termination mechanism`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -12955,6 +13134,8 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...ALDEH_EXPLANATIONS,
   ...ALKYNE_EXPLANATIONS,
   ...AMINE_EXPLANATIONS,
+  ...OSMOSIS_EXPLANATIONS,
+  ...ADDPOLY_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -13109,4 +13290,6 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...ALDEH_PROBES,
   ...ALKYNE_PROBES,
   ...AMINE_PROBES,
+  ...OSMOSIS_PROBES,
+  ...ADDPOLY_PROBES,
 ]
