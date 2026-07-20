@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.quadrilateral-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.quadrilateral",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:31c2b2746ca29a9e8688668986bc68cba50745841301305469a4d5fe185f92f7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.quadrilateral.md": "sha256:94ac4344d1066b21f8785892550111799ce84bc2f65f7cdde151cbe3dc7ea10f"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.quadrilateral",
+    "name": "Quadrilateral",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.geom.polygon",
+      "math.geom.parallel-lines"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.quadrilateral-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.quadrilateral (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.quadrilateral.md": "sha256:94ac4344d1066b21f8785892550111799ce84bc2f65f7cdde151cbe3dc7ea10f"
+      },
+      "contentHash": "sha256:b3adfadeb553040e0b26e8a5f8225eb87fcda0932c60d311aa8eb58513158572",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.quadrilateral.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.quadrilateral.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.quadrilateral"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.quadrilateral\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.quadrilateral.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.quadrilateral.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.quadrilateral"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.quadrilateral\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.quadrilateral.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.quadrilateral.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.quadrilateral"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.quadrilateral\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.quadrilateral.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.quadrilateral.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.quadrilateral"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.quadrilateral\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.quadrilateral/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.quadrilateral",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a quadrilateral as a `math.geom.polygon` with EXACTLY four sides, and recognize the NAMED sub-types (parallelogram, rectangle, rhombus, square, trapezoid, kite) as distinguished by SPECIFIC additional constraints on sides/angles — most involving `math.geom.parallel-lines`'s own parallel-side condition — layered on top of the general polygon definition.\n- LO2: Correctly place a given quadrilateral within the CONTAINMENT HIERARCHY of these sub-types (e.g. every square is a rectangle, every rectangle is a parallelogram, but NOT every parallelogram is a rectangle) by checking which specific side/angle conditions it satisfies — recognizing that these categories NEST, they are not mutually exclusive labels.\n- LO3 (orientation level — full proof-based classification deferred): recognize, without full derivation, that the hierarchy's containments (square $\\subset$ rectangle $\\subset$ parallelogram, etc.) are PROVABLE consequences of the defining conditions, not arbitrary naming conventions — e.g. a square's equal-sides-AND-right-angles properties genuinely IMPLY it satisfies a rectangle's weaker right-angles-only condition, previewing `math.geom.geometric-proof`'s own machinery for formally establishing such implications.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.quadrilateral.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.quadrilateral/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.quadrilateral",
+      "title": "QUADRILATERAL-CLASSIFICATION-ASSUMED-VISUAL-IMPRESSION",
+      "content": "| MC-1 | QUADRILATERAL-CLASSIFICATION-ASSUMED-VISUAL-IMPRESSION | Believing quadrilateral classification is based on a rough visual impression, missing that each name corresponds to a precise, checkable side/angle condition | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.quadrilateral.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.quadrilateral/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.quadrilateral",
+      "title": "CATEGORIES-ASSUMED-MUTUALLY-EXCLUSIVE",
+      "content": "| MC-2 | CATEGORIES-ASSUMED-MUTUALLY-EXCLUSIVE | Believing a quadrilateral must be classified as exactly one category, missing that categories genuinely nest — a shape can satisfy several simultaneously | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.quadrilateral.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.quadrilateral/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.quadrilateral",
+      "title": "CONTAINMENT-ASSUMED-ARBITRARY-CONVENTION",
+      "content": "| MC-3 | CONTAINMENT-ASSUMED-ARBITRARY-CONVENTION | Believing hierarchy containments (like \"square implies rectangle\") are arbitrary naming conventions, missing that they are provable logical consequences | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.quadrilateral.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.geom.quadrilateral/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.quadrilateral",
+      "title": "Each Named Sub-Type Adds a Specific Additional Constraint (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Each Named Sub-Type Adds a Specific Additional Constraint (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.quadrilateral.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.quadrilateral/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.quadrilateral",
+      "title": "A Single Shape Can Genuinely Satisfy Multiple Nested Categories At Once (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"A Single Shape Can Genuinely Satisfy Multiple Nested Categories At Once (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.quadrilateral.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.geom.quadrilateral/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.quadrilateral",
+      "title": "Containments Are Proven, Not Assumed By Convention (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Containments Are Proven, Not Assumed By Convention (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.quadrilateral.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.geom.quadrilateral/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.quadrilateral",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.quadrilateral.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.quadrilateral/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.quadrilateral",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For a quadrilateral with all four sides equal but no right angles given, classify it precisely (rhombus, square, or something else), justifying your answer.\n  2. Explain why every rectangle is automatically a parallelogram, citing the specific conditions involved.\n  3. Determine whether a kite can also be a parallelogram, by comparing their defining conditions (adjacent-side-pairs equal vs. opposite-sides-parallel).\n  4. Explain, in one or two sentences, why the containment \"square implies rhombus\" is a provable fact rather than an arbitrary naming choice.\n- **P76 (Transfer Probe, mode = independence)**: \"An architect is designing a window frame and specifies it must have all four sides of equal length, and wants to know what additional property would be needed to guarantee the frame's corners are all perfect right angles (making it also suitable for a specific glass-cutting template designed for rectangles). (a) Identify what shape category the equal-sides-only condition places the frame in. (b) Using the derivation style from Example 3, explain what SINGLE additional condition (and why) would upgrade this shape to also satisfy the rectangle condition, making it a square. (c) Explain why simply asserting 'a rhombus with nice proportions is basically a square' would NOT be mathematically rigorous, and what precise condition the architect should actually specify instead.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.quadrilateral.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.quadrilateral/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.quadrilateral",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.polygon` (a closed plane figure bounded by straight segments, classified by side count) and `math.geom.parallel-lines` (lines that never meet, and the angle relationships they produce with a transversal).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.quadrilateral.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.geom.quadrilateral/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.quadrilateral",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.polygon` (the general closed-figure definition this concept specializes to four sides) and `math.geom.parallel-lines` (the parallel-side condition underlying most sub-type definitions, and the angle relationships used in the hierarchy derivations).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: none listed in the KG for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.quadrilateral.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

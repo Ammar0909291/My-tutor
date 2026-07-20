@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.graph.extremal-graph-theory-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.graph.extremal-graph-theory",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3f96547f0f1a016d95082bfb906ec4ae6b1d6885f50176a1518ab80d1b3bfdf6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.graph.extremal-graph-theory.md": "sha256:b97460381ff8e0883c8d29f5dd67ac88f03bf32e8e439fd6bc78188482f246f0"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.graph.extremal-graph-theory",
+    "name": "Extremal Graph Theory",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.5,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.graph.graph",
+      "math.disc.combinatorics"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.graph.extremal-graph-theory-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.graph.extremal-graph-theory (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.graph.extremal-graph-theory.md": "sha256:b97460381ff8e0883c8d29f5dd67ac88f03bf32e8e439fd6bc78188482f246f0"
+      },
+      "contentHash": "sha256:9ed91472bb3b1839eb22582f3b20189650d50f2d7d1b014145006504dc0fcde2",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.graph.extremal-graph-theory.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.extremal-graph-theory.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.extremal-graph-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.extremal-graph-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.extremal-graph-theory.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.extremal-graph-theory.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.extremal-graph-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.extremal-graph-theory\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.extremal-graph-theory.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.extremal-graph-theory.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.extremal-graph-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.extremal-graph-theory\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.extremal-graph-theory.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.extremal-graph-theory.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.extremal-graph-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.extremal-graph-theory\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.graph.extremal-graph-theory/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.graph.extremal-graph-theory",
+      "title": "Learning Objectives",
+      "content": "- LO1: State Turán's theorem: the MAXIMUM number of edges in an $n$-vertex graph containing NO $K_{r+1}$ (complete graph on $r+1$ vertices) as a subgraph is $\\mathrm{ex}(n,K_{r+1})=(1-1/r)n^2/2$ — recognizing this as an EXTREMAL question, combining `math.graph.graph`'s own edge-counting ($m=|E|$) with a FORBIDDEN-SUBSTRUCTURE constraint, and asking for the extreme (maximum) value achievable under that constraint.\n- LO2: Construct the TURÁN GRAPH $T(n,r)$ (partition $n$ vertices into $r$ nearly-equal parts, connect all pairs of vertices in DIFFERENT parts, none WITHIN the same part) for a small case, verify it is genuinely $K_{r+1}$-FREE, and count its edges to confirm it ACHIEVES the extremal bound — recognizing the theorem's construction as CONCRETE and verifiable, not merely an abstract existence claim.\n- LO3 (orientation level — full Szemerédi Regularity Lemma proof deferred): recognize, without full derivation, that the Szemerédi Regularity Lemma addresses a DIFFERENT kind of extremal question — not \"how many edges can avoid a substructure\" but \"how STRUCTURED must ANY sufficiently dense graph be\" — guaranteeing every dense graph decomposes into quasi-random bipartite pieces, previewing this as a foundational STRUCTURAL tool (not itself a specific edge-count formula) underlying much of modern extremal graph theory.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.extremal-graph-theory.md",
+        "startLine": 21,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.graph.extremal-graph-theory/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.graph.extremal-graph-theory",
+      "title": "TURAN-THEOREM-ASSUMED-MERE-EDGE-COUNTING",
+      "content": "| MC-1 | TURAN-THEOREM-ASSUMED-MERE-EDGE-COUNTING | Believing Turán's theorem simply restates edge-counting without asking a genuinely new optimization question, missing that it answers a genuine extremal (maximization-under-constraint) question | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.extremal-graph-theory.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.graph.extremal-graph-theory/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.graph.extremal-graph-theory",
+      "title": "TURAN-BOUND-ASSUMED-MERELY-ABSTRACT",
+      "content": "| MC-2 | TURAN-BOUND-ASSUMED-MERELY-ABSTRACT | Believing Turán's theorem only establishes an abstract upper bound with no concrete achieving construction, missing that the Turán graph explicitly achieves it | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.extremal-graph-theory.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.graph.extremal-graph-theory/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.graph.extremal-graph-theory",
+      "title": "REGULARITY-LEMMA-ASSUMED-ANOTHER-NUMERICAL-FORMULA",
+      "content": "| MC-3 | REGULARITY-LEMMA-ASSUMED-ANOTHER-NUMERICAL-FORMULA | Believing the Szemerédi Regularity Lemma is essentially another precise numerical formula like Turán's theorem, missing that it is a qualitative structural decomposition tool | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.extremal-graph-theory.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.graph.extremal-graph-theory/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.extremal-graph-theory",
+      "title": "Turán's Theorem Is a Genuine Extremal Optimization Question (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Turán's Theorem Is a Genuine Extremal Optimization Question (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.extremal-graph-theory.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.graph.extremal-graph-theory/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.extremal-graph-theory",
+      "title": "The Turán Graph Concretely Achieves the Bound, Verifiably (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Turán Graph Concretely Achieves the Bound, Verifiably (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.extremal-graph-theory.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.graph.extremal-graph-theory/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.extremal-graph-theory",
+      "title": "The Regularity Lemma Answers a Fundamentally Different Kind of Question (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Regularity Lemma Answers a Fundamentally Different Kind of Question (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.extremal-graph-theory.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.graph.extremal-graph-theory/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.extremal-graph-theory",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.extremal-graph-theory.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.graph.extremal-graph-theory/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.graph.extremal-graph-theory",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute Turán's theorem's maximum edge count for $n=9$, $r=3$ (forbidding $K_4$).\n  2. Construct the Turán graph $T(9,3)$ (three groups of 3), and count its edges to verify it matches your answer to problem 1.\n  3. Verify $T(9,3)$ is $K_4$-free, explaining the pigeonhole argument.\n  4. Explain, in one or two sentences, how the Szemerédi Regularity Lemma's TYPE of conclusion differs from Turán's theorem's type of conclusion.\n- **P76 (Transfer Probe, mode = independence)**: \"A network engineer designs a communication network with $n=12$ nodes, and for reliability reasons, no group of 4 nodes should be FULLY interconnected (no $K_4$ subgraph, to avoid a single point of catastrophic redundancy failure), while maximizing the total number of direct connections. (a) Using Turán's theorem, compute the maximum number of connections achievable under this constraint. (b) Construct the corresponding Turán graph structure ($T(12,3)$) explicitly, describing how the 12 nodes should be grouped and connected. (c) A colleague suggests using the Szemerédi Regularity Lemma instead to directly compute this maximum connection count — explain why this would be the wrong tool, citing the difference between Turán's theorem's precise numerical answer and the Regularity Lemma's qualitative structural guarantee.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 3/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.extremal-graph-theory.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.graph.extremal-graph-theory/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.graph.extremal-graph-theory",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.graph.graph` ($G=(V,E)$, order $n=|V|$, size $m=|E|$, degree, the handshaking lemma) and `math.disc.combinatorics` (counting, arrangement, combination techniques).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.extremal-graph-theory.md",
+        "startLine": 27,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.graph.extremal-graph-theory/reference/1",
+      "kind": "reference",
+      "conceptId": "math.graph.extremal-graph-theory",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.graph.graph` (the basic vertex/edge/degree vocabulary and edge-counting this concept's extremal question builds on) and `math.disc.combinatorics` (counting and arrangement techniques, directly used in verifying the Turán graph's edge count and clique-freeness).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: none listed in the KG for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.extremal-graph-theory.md",
+        "startLine": 93,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
