@@ -13338,6 +13338,185 @@ const CARBS_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.carb.ketones ───────────────────────────────────────────────────────
+const KETONE = 'chem.carb.ketones'
+const KETONE_SRC = 'docs/chemistry/kg/graph.json — chem.carb.ketones'
+
+const KETONE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: KETONE,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Ketones (R-CO-R\', carbonyl carbon bonded to TWO carbon groups, no H) are the ' +
+      'oxidation product of secondary alcohols (covered earlier) and undergo the SAME core ' +
+      'nucleophilic addition mechanism as aldehydes, just LESS readily (due to the combined ' +
+      'steric and electronic factors covered in the aldehyde comparison). A particularly ' +
+      'important ketone reaction is the ALDOL REACTION: under basic conditions, a ketone (or ' +
+      'aldehyde) with α-hydrogens (hydrogens on the carbon NEXT TO the carbonyl) can be ' +
+      'deprotonated to form an ENOLATE ion — this enolate is itself a NUCLEOPHILE (the ' +
+      'negative charge delocalizes onto the α-carbon via resonance, similar logic to other ' +
+      'resonance-stabilized anions covered earlier) that can attack ANOTHER carbonyl ' +
+      'molecule\'s electrophilic carbon, forming a NEW carbon-carbon bond and producing a ' +
+      'β-hydroxy carbonyl compound ("aldol" = ALDehyde + alcOHOL, describing the product\'s ' +
+      'dual functionality). This aldol reaction is one of the most POWERFUL methods in ' +
+      'organic synthesis for building larger carbon skeletons from smaller carbonyl ' +
+      'fragments, and its enolate-formation step directly connects the acid-base chemistry ' +
+      'of α-hydrogens to genuine carbon-carbon bond-forming reactivity.',
+    targetedMisconceptions: [`${KETONE}:MC1`],
+    source: `${KETONE_SRC} — ketone nucleophilic addition, enolate formation, aldol reaction mechanism`,
+  },
+  {
+    conceptId: KETONE,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "The α-hydrogens on a ketone (or aldehyde) are ordinary, unremarkable C-H bonds, ' +
+      'no more acidic than any other alkyl C-H bond in the molecule." FALSE — α-hydrogens are ' +
+      'SPECIFICALLY acidic (pKa ~20, dramatically more acidic than typical alkane C-H at pKa ' +
+      '~50, though far less acidic than a carboxylic acid or even a terminal alkyne, covered ' +
+      'earlier) because the resulting ENOLATE anion is RESONANCE-STABILIZED — the negative ' +
+      'charge delocalizes between the α-carbon and the carbonyl oxygen (two resonance ' +
+      'structures, similar stabilization logic to other resonance-stabilized systems covered ' +
+      'throughout this curriculum), unlike a typical alkyl carbanion which has NO such ' +
+      'delocalization available. This special acidity is EXACTLY what makes the aldol ' +
+      'reaction (and many related carbonyl chemistry reactions) possible. Second trap: "Any ' +
+      'hydrogen on a ketone molecule can be removed to form the reactive enolate needed for ' +
+      'an aldol reaction, not just the specific α-hydrogens." FALSE — only hydrogens on the ' +
+      'carbon DIRECTLY adjacent to the carbonyl (the α-position) benefit from this resonance ' +
+      'stabilization; hydrogens further away (β, γ, etc. positions) show NO such enhanced ' +
+      'acidity and cannot form a stabilized enolate — position relative to the carbonyl is ' +
+      'absolutely critical, not just "any hydrogen somewhere in the ketone molecule."',
+    targetedMisconceptions: [`${KETONE}:MC1`, `${KETONE}:MC2`],
+    source: `${KETONE_SRC} — misconception: alpha-hydrogens are ordinary/unremarkable; any hydrogen in the molecule can form the enolate`,
+  },
+]
+
+const KETONE_PROBES: SeedProbe[] = [
+  {
+    conceptId: KETONE,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why are the alpha-hydrogens (on the carbon next to a ketone\'s carbonyl) unusually acidic (pKa ~20) compared to typical alkane C-H bonds (pKa ~50)?',
+    choices: [
+      { text: 'The resulting enolate anion is resonance-stabilized — its negative charge delocalizes between the alpha-carbon and the carbonyl oxygen across two resonance structures, unlike a typical alkyl carbanion which has no such delocalization', isCorrect: true },
+      { text: 'This must be an error — all C-H bonds in a hydrocarbon-based molecule should have essentially the same acidity regardless of position', isCorrect: false, misconceptionId: `${KETONE}:MC1` },
+    ],
+    correctValue: 'Resonance stabilization of the resulting enolate anion',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${KETONE}:MC1`],
+    source: `${KETONE_SRC} — distractor targets assuming all C-H bonds have uniform acidity regardless of position`,
+  },
+  {
+    conceptId: KETONE,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can any hydrogen anywhere in a ketone molecule be removed by base to form the reactive enolate needed for an aldol reaction, or only specific hydrogens?',
+    choices: [
+      { text: 'Only the alpha-hydrogens (directly on the carbon adjacent to the carbonyl) can form a resonance-stabilized enolate; hydrogens further away (beta, gamma positions) show no such enhanced acidity and cannot form a stabilized enolate', isCorrect: true },
+      { text: 'Any hydrogen present anywhere in the ketone molecule can be removed equally well to generate the reactive enolate species', isCorrect: false, misconceptionId: `${KETONE}:MC2` },
+    ],
+    correctValue: 'Only alpha-hydrogens can form the resonance-stabilized enolate',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${KETONE}:MC2`],
+    source: `${KETONE_SRC} — misconception: any hydrogen in the molecule (not specifically alpha-position) can form the enolate`,
+  },
+]
+
+// ─── chem.nitro.diazonium ────────────────────────────────────────────────────
+const DIAZO = 'chem.nitro.diazonium'
+const DIAZO_SRC = 'docs/chemistry/kg/graph.json — chem.nitro.diazonium'
+
+const DIAZO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DIAZO,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Diazonium salts (Ar-N₂⁺, formed by treating an aromatic primary amine, covered ' +
+      'earlier, with nitrous acid HNO₂ at LOW temperature, typically 0-5°C) are extraordinarily ' +
+      'versatile synthetic intermediates precisely because the N₂ group (dinitrogen) is an ' +
+      'EXCELLENT leaving group — it departs as stable, unreactive N₂ GAS, driving forward a ' +
+      'huge variety of substitution reactions where the diazonium group gets REPLACED by ' +
+      'other functional groups. SANDMEYER REACTIONS (using CuCl, CuBr, or CuCN) install ' +
+      'halogens or a nitrile group onto the aromatic ring — positions that are otherwise ' +
+      'VERY difficult to access directly via standard electrophilic aromatic substitution ' +
+      '(covered earlier), making diazonium chemistry a crucial workaround for accessing ' +
+      'otherwise-unreachable substitution patterns. Diazonium salts can ALSO react with a ' +
+      'different aromatic ring (electron-rich, like phenol or aniline) in an AZO COUPLING ' +
+      'reaction, forming an extended, highly-conjugated Ar-N=N-Ar\' system (an "azo" linkage) ' +
+      '— the extensive conjugation shifts absorption into the VISIBLE spectrum, making azo ' +
+      'compounds intensely colored, which is why they\'re widely used as synthetic DYES.',
+    targetedMisconceptions: [`${DIAZO}:MC1`],
+    source: `${DIAZO_SRC} — diazonium salt formation, N2 as leaving group, Sandmeyer reactions, azo coupling/dyes`,
+  },
+  {
+    conceptId: DIAZO,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Diazonium salts are stable at any temperature and can be stored/handled like ' +
+      'ordinary organic compounds without special precautions." FALSE — this is a genuine ' +
+      'safety-relevant fact. Diazonium salts are generally UNSTABLE above roughly 5-10°C, ' +
+      'decomposing (sometimes explosively/violently) as the excellent N₂ leaving group departs ' +
+      'spontaneously even without an added nucleophile — this is precisely WHY diazonium ' +
+      'salt formation and subsequent reactions are always carried out at LOW temperature (ice ' +
+      'bath conditions), and why they\'re typically used immediately after formation rather ' +
+      'than isolated and stored for later use. Second trap: "Sandmeyer reactions and standard ' +
+      'electrophilic aromatic substitution (covered earlier) can achieve the same substitution ' +
+      'patterns equally easily — diazonium chemistry is just an alternative, not a genuinely ' +
+      'necessary tool." FALSE — some substitution PATTERNS are genuinely difficult or ' +
+      'impossible to achieve via direct EAS due to the directing-effect rules covered earlier ' +
+      '(certain positions being electronically disfavored for a given substituent combination) ' +
+      '— diazonium chemistry provides a fundamentally DIFFERENT mechanistic pathway (not going ' +
+      'through the aromatic ring\'s π system for substitution at all, but rather using the ' +
+      'existing amine\'s position as an anchor point) that can access these otherwise- ' +
+      'unreachable substitution patterns, making it a genuinely necessary synthetic tool, not ' +
+      'merely a redundant alternative method.',
+    targetedMisconceptions: [`${DIAZO}:MC1`, `${DIAZO}:MC2`],
+    source: `${DIAZO_SRC} — misconception: diazonium salts are stable at any temperature; Sandmeyer reactions are merely redundant with EAS`,
+  },
+]
+
+const DIAZO_PROBES: SeedProbe[] = [
+  {
+    conceptId: DIAZO,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Why must diazonium salt formation and subsequent reactions be carried out at low temperature (0-5°C, ice bath conditions)?',
+    choices: [
+      { text: 'Diazonium salts are generally unstable above roughly 5-10°C, decomposing (sometimes violently) as the excellent N2 leaving group departs spontaneously even without an added nucleophile; low temperature prevents this premature decomposition', isCorrect: true },
+      { text: 'Low temperature is simply a minor efficiency optimization with no real safety implications — diazonium salts are actually stable at room temperature and can be stored indefinitely', isCorrect: false, misconceptionId: `${DIAZO}:MC1` },
+    ],
+    correctValue: 'Diazonium salts decompose (potentially violently) above low temperature',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DIAZO}:MC1`],
+    source: `${DIAZO_SRC} — distractor targets underestimating diazonium salt thermal instability`,
+  },
+  {
+    conceptId: DIAZO,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Can standard electrophilic aromatic substitution (EAS) achieve the same substitution patterns as Sandmeyer reactions via diazonium chemistry, making diazonium chemistry a merely redundant alternative?',
+    choices: [
+      { text: 'No — some substitution patterns are genuinely difficult or impossible via direct EAS due to directing-effect rules; diazonium chemistry provides a fundamentally different mechanistic pathway that accesses otherwise-unreachable substitution patterns', isCorrect: true },
+      { text: 'Yes — Sandmeyer reactions and EAS are functionally interchangeable methods that can always achieve identical substitution outcomes', isCorrect: false, misconceptionId: `${DIAZO}:MC2` },
+    ],
+    correctValue: 'No — diazonium chemistry accesses patterns EAS cannot reach',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DIAZO}:MC2`],
+    source: `${DIAZO_SRC} — misconception: diazonium/Sandmeyer chemistry is redundant with standard electrophilic aromatic substitution`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -13498,6 +13677,8 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...PROTECT_EXPLANATIONS,
   ...CARBOXY_EXPLANATIONS,
   ...CARBS_EXPLANATIONS,
+  ...KETONE_EXPLANATIONS,
+  ...DIAZO_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -13658,4 +13839,6 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...PROTECT_PROBES,
   ...CARBOXY_PROBES,
   ...CARBS_PROBES,
+  ...KETONE_PROBES,
+  ...DIAZO_PROBES,
 ]
