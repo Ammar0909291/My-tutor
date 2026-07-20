@@ -10389,6 +10389,180 @@ const CORR_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.elect.standard-electrode ───────────────────────────────────────────
+const STDELEC = 'chem.elect.standard-electrode'
+const STDELEC_SRC = 'docs/chemistry/kg/graph.json — chem.elect.standard-electrode'
+
+const STDELEC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: STDELEC,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'You can never measure a half-reaction\'s voltage in ISOLATION — voltage is always a ' +
+      'DIFFERENCE between two electrodes (you always need a complete circuit). To create a ' +
+      'usable REFERENCE point, chemists defined the STANDARD HYDROGEN ELECTRODE (SHE): ' +
+      '2H⁺(1M) + 2e⁻ ⇌ H₂(1 atm), arbitrarily assigned E° = 0.00 V EXACTLY, by convention, ' +
+      'under standard conditions (1M concentration, 1 atm pressure, 25°C). Every other ' +
+      'half-reaction\'s STANDARD REDUCTION POTENTIAL (E°) is then measured RELATIVE to this ' +
+      'fixed reference by building a cell against the SHE. A MORE POSITIVE E° means a ' +
+      'GREATER tendency to be reduced (gain electrons) — strong oxidizing agents (like F₂, ' +
+      'E°=+2.87V) have highly positive E°. A MORE NEGATIVE E° means a greater tendency to ' +
+      'be OXIDIZED (lose electrons) — strong reducing agents (like Li, E°=−3.05V) have ' +
+      'highly negative E°. The overall cell potential: E°_cell = E°_cathode(reduction) − ' +
+      'E°_anode(reduction, even though it\'s actually being oxidized) — a POSITIVE E°_cell ' +
+      'confirms the reaction is spontaneous as written (connecting to the earlier ' +
+      'ΔG°=−nFE° relationship).',
+    targetedMisconceptions: [`${STDELEC}:MC1`],
+    source: `${STDELEC_SRC} — standard hydrogen electrode, standard reduction potentials, E°cell calculation`,
+  },
+  {
+    conceptId: STDELEC,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "When calculating E°_cell, you should REVERSE the sign of the anode\'s tabulated ' +
+      'E° value, since the anode undergoes OXIDATION (the reverse of the tabulated reduction ' +
+      'reaction)." This is a WIDESPREAD and understandable mistake, but the CORRECT formula ' +
+      'is E°_cell = E°_cathode − E°_anode, using BOTH values exactly as tabulated (both as ' +
+      'REDUCTION potentials, never flip a sign manually) — the subtraction itself already ' +
+      'correctly accounts for the anode\'s reversal; adding an EXTRA sign flip on top of the ' +
+      'subtraction is a double-negative error that gives the wrong answer. Always look up ' +
+      'BOTH values as standard reduction potentials and simply subtract (cathode minus ' +
+      'anode) — never manually flip a sign first. Second trap: "A very negative E°_cell just ' +
+      'means the reaction happens SLOWLY, not that it\'s truly non-spontaneous." FALSE — a ' +
+      'negative E°_cell genuinely means non-spontaneous AS WRITTEN (positive ΔG°, via ' +
+      'ΔG°=−nFE°) — the REVERSE reaction would be spontaneous instead. This is a ' +
+      'THERMODYNAMIC statement about feasibility, not a kinetic statement about speed (the ' +
+      'same thermodynamics-vs-kinetics distinction covered in Gibbs free energy).',
+    targetedMisconceptions: [`${STDELEC}:MC1`, `${STDELEC}:MC2`],
+    source: `${STDELEC_SRC} — misconception: manually reversing anode E° sign before subtracting; negative E°cell means slow not non-spontaneous`,
+  },
+]
+
+const STDELEC_PROBES: SeedProbe[] = [
+  {
+    conceptId: STDELEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Given E°(Cu²⁺/Cu) = +0.34V (cathode) and E°(Zn²⁺/Zn) = −0.76V (anode), what is E°cell for the Zn/Cu²⁺ cell?',
+    choices: [
+      { text: '+1.10V — E°cell = E°cathode − E°anode = 0.34 − (−0.76) = +1.10V, using both tabulated reduction potentials directly without manually flipping any sign', isCorrect: true },
+      { text: '−0.42V — E°cell = E°cathode + (reversed sign of E°anode) = 0.34 + 0.76... then subtract incorrectly, applying an extra sign flip', isCorrect: false, misconceptionId: `${STDELEC}:MC1` },
+    ],
+    correctValue: '+1.10V',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${STDELEC}:MC1`],
+    source: `${STDELEC_SRC} — distractor targets manually reversing the anode's sign before the standard subtraction formula`,
+  },
+  {
+    conceptId: STDELEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A calculated E°cell for a reaction is −0.5V. Does this mean the reaction happens slowly, or that it is thermodynamically non-spontaneous as written?',
+    choices: [
+      { text: 'Thermodynamically non-spontaneous as written — a negative E°cell means positive ΔG° (via ΔG°=−nFE°); this is a statement about feasibility, not speed. The reverse reaction would be spontaneous instead', isCorrect: true },
+      { text: 'It happens slowly — a negative E°cell just indicates slow kinetics, not that the reaction is fundamentally non-spontaneous', isCorrect: false, misconceptionId: `${STDELEC}:MC2` },
+    ],
+    correctValue: 'Non-spontaneous (thermodynamic), not merely slow (kinetic)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${STDELEC}:MC2`],
+    source: `${STDELEC_SRC} — misconception: conflating negative E°cell with slow kinetics rather than non-spontaneity`,
+  },
+]
+
+// ─── chem.elect.electrolysis ─────────────────────────────────────────────────
+const ELECTROLYSIS = 'chem.elect.electrolysis'
+const ELECTROLYSIS_SRC = 'docs/chemistry/kg/graph.json — chem.elect.electrolysis'
+
+const ELECTROLYSIS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ELECTROLYSIS,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Electrolysis FORCES a non-spontaneous redox reaction to occur by supplying external ' +
+      'electrical energy — the reverse situation from a galvanic cell (which harnesses a ' +
+      'spontaneous reaction). This is how reactive metals (Na, Al, from ores with very ' +
+      'negative reduction potentials, impossible to reduce chemically under normal ' +
+      'conditions) are industrially extracted, and how water is split into H₂ and O₂. ' +
+      'FARADAY\'S LAWS quantify the relationship: the amount of substance produced/consumed ' +
+      'is directly proportional to the total CHARGE passed (Q = It, current × time), via ' +
+      'moles of electrons = Q/F (F = Faraday constant, 96,485 C/mol e⁻). Combined with the ' +
+      'balanced half-reaction\'s stoichiometry (electrons per mole of product), you can ' +
+      'calculate exactly how much product forms for a given current and time — this is ' +
+      'PRECISE, quantitative chemistry, not just qualitative prediction. Electrolysis of ' +
+      'AQUEOUS solutions (vs. molten pure salts) is complicated by COMPETING reactions: ' +
+      'water itself can be oxidized/reduced instead of the intended ion, and the actual ' +
+      'product depends on which species is EASIER to oxidize/reduce (related to standard ' +
+      'reduction potentials, though overpotential effects can shift the practical outcome).',
+    targetedMisconceptions: [`${ELECTROLYSIS}:MC1`],
+    source: `${ELECTROLYSIS_SRC} — electrolysis mechanism, Faraday's laws, aqueous vs molten electrolysis`,
+  },
+  {
+    conceptId: ELECTROLYSIS,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Electrolyzing an aqueous NaCl solution will always deposit sodium metal at ' +
+      'the cathode, since Na⁺ is the metal ion present." FALSE — in AQUEOUS solution, WATER ' +
+      'itself is often EASIER to reduce than Na⁺ (Na⁺\'s reduction potential, −2.71V, is far ' +
+      'more negative than water\'s reduction, roughly −0.83V under these conditions) — so ' +
+      'H₂ gas forms at the cathode instead of sodium metal (2H₂O + 2e⁻ → H₂ + 2OH⁻). Pure ' +
+      'sodium metal can ONLY be obtained by electrolyzing MOLTEN (melted, water-free) NaCl, ' +
+      'where there\'s no competing water reduction. This is a genuinely important industrial ' +
+      'distinction — the Downs process for sodium metal uses molten NaCl specifically ' +
+      'because aqueous electrolysis would never produce the metal. Second trap: "Doubling ' +
+      'the CURRENT and doubling the TIME should produce the same amount of product, since ' +
+      'both changes "double something."" Actually TRUE by Faraday\'s Law reasoning (Q=It, so ' +
+      'doubling either current or time doubles charge, hence doubling product) — but the ' +
+      'subtler trap is assuming this relationship is somehow approximate or empirical; it\'s ' +
+      'actually an EXACT, precisely quantitative stoichiometric relationship, not a rough ' +
+      'rule of thumb.',
+    targetedMisconceptions: [`${ELECTROLYSIS}:MC1`],
+    source: `${ELECTROLYSIS_SRC} — misconception: aqueous electrolysis of a metal salt always deposits the metal (ignoring water competition)`,
+  },
+]
+
+const ELECTROLYSIS_PROBES: SeedProbe[] = [
+  {
+    conceptId: ELECTROLYSIS,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Electrolyzing an AQUEOUS solution of NaCl produces H2 gas at the cathode, NOT sodium metal. Why?',
+    choices: [
+      { text: 'Water is easier to reduce than Na+ in aqueous solution (water\'s reduction potential is far less negative than Na+\'s −2.71V), so H2 forms preferentially; pure sodium metal requires electrolyzing MOLTEN (water-free) NaCl instead', isCorrect: true },
+      { text: 'This is an error — electrolyzing any solution containing a metal ion should always deposit that metal at the cathode', isCorrect: false, misconceptionId: `${ELECTROLYSIS}:MC1` },
+    ],
+    correctValue: 'Water is preferentially reduced over Na+ in aqueous solution',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ELECTROLYSIS}:MC1`],
+    source: `${ELECTROLYSIS_SRC} — distractor targets assuming aqueous electrolysis always deposits the intended metal ion`,
+  },
+  {
+    conceptId: ELECTROLYSIS,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If you double BOTH the current and the time during electrolysis, does the amount of product formed increase proportionally, and is this relationship exact or just approximate?',
+    choices: [
+      { text: 'The product quadruples (doubling current AND doubling time both double the total charge Q=It, so charge quadruples overall), and this is an EXACT stoichiometric relationship (Faraday\'s Law), not an approximation', isCorrect: true },
+      { text: 'The product roughly doubles, and this relationship is only an approximate empirical rule of thumb, not an exact law', isCorrect: false, misconceptionId: `${ELECTROLYSIS}:MC2` },
+    ],
+    correctValue: 'Product quadruples; Faraday\'s Law is an exact relationship',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ELECTROLYSIS}:MC2`],
+    source: `${ELECTROLYSIS_SRC} — misconception: treating Faraday's Law as approximate rather than an exact stoichiometric relationship`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -10516,6 +10690,8 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...WATER_EXPLANATIONS,
   ...BATT_EXPLANATIONS,
   ...CORR_EXPLANATIONS,
+  ...STDELEC_EXPLANATIONS,
+  ...ELECTROLYSIS_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -10643,4 +10819,6 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...WATER_PROBES,
   ...BATT_PROBES,
   ...CORR_PROBES,
+  ...STDELEC_PROBES,
+  ...ELECTROLYSIS_PROBES,
 ]
