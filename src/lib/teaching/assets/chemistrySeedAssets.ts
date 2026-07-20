@@ -12617,6 +12617,190 @@ const ALDEH_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.hyd.alkynes ────────────────────────────────────────────────────────
+const ALKYNE = 'chem.hyd.alkynes'
+const ALKYNE_SRC = 'docs/chemistry/kg/graph.json — chem.hyd.alkynes'
+
+const ALKYNE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ALKYNE,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Alkynes (CₙH₂ₙ₋₂, containing a C≡C triple bond, sp hybridized as covered earlier) ' +
+      'have TWO π bonds instead of alkenes\' one, making them undergo electrophilic addition ' +
+      '(same fundamental mechanism as alkenes) but can add EITHER once (to give an alkene) ' +
+      'or TWICE (to give a fully saturated alkane), depending on how much reagent is ' +
+      'supplied. TERMINAL alkynes (triple bond at the END of the chain, R-C≡CH) have a ' +
+      'genuinely UNIQUE property among hydrocarbons: the terminal C-H bond is unusually ' +
+      'ACIDIC (pKa ~25, far more acidic than alkane/alkene C-H bonds at pKa ~50, though ' +
+      'still much weaker than water/alcohols) — this traces to the sp-hybridized carbon\'s ' +
+      'HIGH s-character (50% s-character vs. 25% for sp³, 33% for sp²): s-orbitals hold ' +
+      'electron density CLOSER to the nucleus than p-orbitals, so the sp carbon holds its ' +
+      'bonding electrons (including the resulting carbanion\'s lone pair) more tightly/ ' +
+      'stably, making that lone pair less available and hence the conjugate ACID (releasing ' +
+      'this proton) surprisingly favorable relative to other hydrocarbons. This acidity ' +
+      'allows terminal alkynes to be DEPROTONATED by strong bases (like NaNH₂) to form ' +
+      'ACETYLIDE ions, which are useful nucleophiles for further carbon-carbon bond-forming ' +
+      'reactions.',
+    targetedMisconceptions: [`${ALKYNE}:MC1`],
+    source: `${ALKYNE_SRC} — alkyne addition reactions (single/double), terminal alkyne acidity, s-character explanation`,
+  },
+  {
+    conceptId: ALKYNE,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "All hydrocarbon C-H bonds have essentially the same acidity, since carbon\'s ' +
+      'electronegativity doesn\'t change." FALSE — while carbon\'s electronegativity is ' +
+      'formally constant, the HYBRIDIZATION of that carbon dramatically affects effective ' +
+      'electron-holding behavior. Terminal alkyne C-H (sp carbon, pKa ~25) is roughly 10²⁵ ' +
+      'times MORE acidic than alkane C-H (sp³ carbon, pKa ~50) — this enormous difference ' +
+      'traces directly to s-character: sp carbons have 50% s-character (electrons held ' +
+      'closer to nucleus, more stable as an anion after H⁺ loss) versus sp³\'s 25% ' +
+      '(electrons held farther, less stable as an anion). More s-character in the resulting ' +
+      'carbanion\'s orbital means a more stable carbanion, which means a more acidic parent ' +
+      'C-H bond — this connects the seemingly unrelated concepts of hybridization and acid ' +
+      'strength through a single underlying mechanism. Second trap: "Since terminal alkynes ' +
+      'are "acidic," they should react with weak bases like water or typical amines, similar ' +
+      'to how carboxylic acids do." FALSE — despite being far more acidic than typical ' +
+      'hydrocarbons, terminal alkynes (pKa ~25) are still MUCH LESS acidic than water (pKa ' +
+      '~15.7) or alcohols (pKa ~16-18) — deprotonating a terminal alkyne requires a genuinely ' +
+      'STRONG base (like NaNH₂, whose conjugate acid NH₃ has pKa ~38, or organolithium ' +
+      'reagents), not a weak base; water and typical amines are far too weak to deprotonate ' +
+      'a terminal alkyne under normal conditions.',
+    targetedMisconceptions: [`${ALKYNE}:MC1`, `${ALKYNE}:MC2`],
+    source: `${ALKYNE_SRC} — misconception: all C-H bonds have similar acidity regardless of hybridization; terminal alkynes react with weak bases`,
+  },
+]
+
+const ALKYNE_PROBES: SeedProbe[] = [
+  {
+    conceptId: ALKYNE,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The terminal C-H bond in a terminal alkyne (pKa ~25) is dramatically more acidic than a typical alkane C-H bond (pKa ~50). What structural feature causes this difference?',
+    choices: [
+      { text: 'The sp-hybridized carbon in the alkyne has 50% s-character (vs. 25% for sp3), holding the resulting carbanion\'s electron density closer to the nucleus and thus more stable, making the corresponding C-H bond more willing to release a proton', isCorrect: true },
+      { text: 'This must be an error — carbon\'s electronegativity doesn\'t change regardless of hybridization, so all hydrocarbon C-H bonds should have essentially identical acidity', isCorrect: false, misconceptionId: `${ALKYNE}:MC1` },
+    ],
+    correctValue: 'Higher s-character in sp carbon stabilizes the resulting carbanion',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ALKYNE}:MC1`],
+    source: `${ALKYNE_SRC} — distractor targets assuming hybridization has no effect on C-H bond acidity`,
+  },
+  {
+    conceptId: ALKYNE,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can a terminal alkyne be deprotonated by a weak base like water or a typical amine, given that it is described as relatively "acidic" among hydrocarbons?',
+    choices: [
+      { text: 'No — despite being far more acidic than typical hydrocarbons, terminal alkynes (pKa ~25) are still much less acidic than water (pKa ~15.7); deprotonation requires a genuinely strong base like NaNH2, not a weak base', isCorrect: true },
+      { text: 'Yes — since terminal alkynes are described as acidic, any weak base including water should be sufficient to deprotonate them', isCorrect: false, misconceptionId: `${ALKYNE}:MC2` },
+    ],
+    correctValue: 'No — requires a strong base, not a weak one like water',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ALKYNE}:MC2`],
+    source: `${ALKYNE_SRC} — misconception: relative acidity among hydrocarbons implies reactivity with weak bases like water`,
+  },
+]
+
+// ─── chem.nitro.amines ───────────────────────────────────────────────────────
+const AMINE = 'chem.nitro.amines'
+const AMINE_SRC = 'docs/chemistry/kg/graph.json — chem.nitro.amines'
+
+const AMINE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: AMINE,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Amines (R-NH₂, R₂NH, or R₃N) are nitrogen\'s equivalent of alcohols — the lone pair ' +
+      'on nitrogen makes amines both NUCLEOPHILIC (attacks electrophilic carbons, similar to ' +
+      'Grignard/alcohol chemistry) and BASIC (accepts H⁺, similar to the pyridine basicity ' +
+      'concept covered in heterocycles). Amine BASICITY depends on how AVAILABLE that lone ' +
+      'pair is: alkyl groups DONATE electron density (+I effect, covered in electronic ' +
+      'effects), making the lone pair MORE available/basic — so in the gas phase, basicity ' +
+      'generally follows tertiary > secondary > primary > ammonia. In AQUEOUS solution, ' +
+      'this simple trend gets COMPLICATED by solvation effects: bulkier tertiary amines are ' +
+      'harder for water to effectively solvate/stabilize the resulting ammonium cation, ' +
+      'often making secondary amines the MOST basic in water (not tertiary) — this is a ' +
+      'genuine deviation from the "pure electronic effect" prediction, driven by competing ' +
+      'physical (solvation) and electronic factors. AROMATIC amines (anilines, -NH₂ directly ' +
+      'on a benzene ring) are notably LESS basic than alkyl amines, for the SAME reason ' +
+      'phenol is more acidic than alcohols (covered earlier): the nitrogen lone pair ' +
+      'delocalizes into the aromatic ring via resonance, making it LESS available to accept ' +
+      'a proton.',
+    targetedMisconceptions: [`${AMINE}:MC1`],
+    source: `${AMINE_SRC} — amine basicity trends, gas-phase vs aqueous solvation complications, aniline resonance effect`,
+  },
+  {
+    conceptId: AMINE,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Tertiary amines are always the MOST basic amine type, since they have the ' +
+      'most alkyl groups donating electron density to the nitrogen lone pair, following the ' +
+      'simple electronic-effect logic straightforwardly." INCOMPLETE — this simple pattern ' +
+      'holds in the GAS PHASE (where only electronic effects matter), but breaks down in ' +
+      'AQUEOUS SOLUTION (the practically relevant environment for most chemistry), where ' +
+      'SECONDARY amines often turn out to be MOST basic — because the bulky tertiary amine\'s ' +
+      'resulting ammonium cation is harder for water molecules to effectively surround and ' +
+      'stabilize (solvation), partially offsetting its electronic advantage. Real-world ' +
+      'basicity in water reflects a BALANCE between electronic effects (favoring more alkyl ' +
+      'substitution) and solvation effects (favoring less steric bulk) — don\'t apply the ' +
+      'simple gas-phase electronic trend blindly to aqueous chemistry. Second trap: "Aniline ' +
+      '(aromatic amine) should be MORE basic than a typical alkyl amine, since it has the ' +
+      'SAME -NH₂ functional group plus the extra electron-rich benzene ring nearby, which ' +
+      'should add to its basicity." BACKWARDS — aniline is notably LESS basic than alkyl ' +
+      'amines (pKa of conjugate acid ~4.6 for aniline vs. ~10.7 for a typical alkyl amine), ' +
+      'because the ring doesn\'t just sit "nearby" — the nitrogen lone pair actively ' +
+      'DELOCALIZES INTO the ring via resonance, making that lone pair genuinely LESS ' +
+      'available to accept a proton, not more.',
+    targetedMisconceptions: [`${AMINE}:MC1`, `${AMINE}:MC2`],
+    source: `${AMINE_SRC} — misconception: tertiary amines are always most basic regardless of solvent; aromatic ring proximity increases amine basicity`,
+  },
+]
+
+const AMINE_PROBES: SeedProbe[] = [
+  {
+    conceptId: AMINE,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In the gas phase, tertiary amines are the most basic amine type, but in AQUEOUS solution, secondary amines often turn out to be most basic instead. What explains this discrepancy?',
+    choices: [
+      { text: 'In water, the bulky tertiary amine\'s resulting ammonium cation is harder to solvate (surround/stabilize with water molecules) than a less bulky secondary ammonium cation, partially offsetting the tertiary amine\'s electronic advantage', isCorrect: true },
+      { text: 'This must be a measurement error — basicity trends should be identical in the gas phase and in aqueous solution, since electronic effects are the only relevant factor', isCorrect: false, misconceptionId: `${AMINE}:MC1` },
+    ],
+    correctValue: 'Solvation effects in water partially offset the electronic trend',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${AMINE}:MC1`],
+    source: `${AMINE_SRC} — distractor targets assuming gas-phase electronic trends apply unchanged to aqueous solution`,
+  },
+  {
+    conceptId: AMINE,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Aniline (an aromatic amine, -NH2 on benzene) has a conjugate acid pKa of ~4.6, while a typical alkyl amine has a conjugate acid pKa of ~10.7. Is aniline MORE or LESS basic than the alkyl amine, and why?',
+    choices: [
+      { text: 'LESS basic — the nitrogen lone pair delocalizes into the aromatic ring via resonance, making it genuinely less available to accept a proton, unlike a typical alkyl amine\'s fully localized lone pair', isCorrect: true },
+      { text: 'MORE basic — the nearby electron-rich benzene ring should add extra basicity to the amine group', isCorrect: false, misconceptionId: `${AMINE}:MC2` },
+    ],
+    correctValue: 'Less basic — resonance delocalization reduces lone pair availability',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${AMINE}:MC2`],
+    source: `${AMINE_SRC} — misconception: aromatic ring proximity increases rather than decreases amine basicity`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -12769,6 +12953,8 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...DIOL_EXPLANATIONS,
   ...PHENOL_EXPLANATIONS,
   ...ALDEH_EXPLANATIONS,
+  ...ALKYNE_EXPLANATIONS,
+  ...AMINE_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -12921,4 +13107,6 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...DIOL_PROBES,
   ...PHENOL_PROBES,
   ...ALDEH_PROBES,
+  ...ALKYNE_PROBES,
+  ...AMINE_PROBES,
 ]
