@@ -9494,6 +9494,272 @@ const COORDAPP_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.coord.stability ────────────────────────────────────────────────────
+const STABCON = 'chem.coord.stability'
+const STABCON_SRC = 'docs/chemistry/kg/graph.json — chem.coord.stability'
+
+const STABCON_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: STABCON,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Building on the formation constant (K_f) covered in complex equilibria: STABILITY ' +
+      'CONSTANTS quantify HOW MUCH more stable a complex is compared to the separated ' +
+      'metal ion and ligands. A crucial pattern: CHELATE complexes (where one ligand binds ' +
+      'through MULTIPLE donor atoms simultaneously, like EDTA\'s 6 donor atoms, or ' +
+      'ethylenediamine\'s 2) are DRAMATICALLY more stable than analogous complexes with the ' +
+      'SAME donor atom TYPE but as separate monodentate ligands — this is the CHELATE ' +
+      'EFFECT. For example, [Ni(en)₃]²⁺ (3 bidentate ethylenediamine ligands, 6 total N ' +
+      'donors) is far more stable than [Ni(NH₃)₆]²⁺ (6 separate monodentate NH₃ ligands, ' +
+      'also 6 total N donors) — SAME number and type of donor atoms, but chelation wins ' +
+      'decisively. The reason is fundamentally ENTROPIC: releasing 3 chelating ligand ' +
+      'molecules (en) to bind produces MORE total free particles in solution than binding ' +
+      '6 separate NH₃ molecules would release (1 chelate replacing effectively 2 ' +
+      'monodentate ligands means a net INCREASE in the number of independent solution ' +
+      'species/particles) — favorable entropy change (ΔS > 0) drives spontaneity (ΔG = ΔH − ' +
+      'TΔS) even when the bond enthalpies themselves are similar.',
+    targetedMisconceptions: [`${STABCON}:MC1`],
+    source: `${STABCON_SRC} — stability constants, chelate effect, entropic origin`,
+  },
+  {
+    conceptId: STABCON,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "The chelate effect makes chelate complexes more stable because chelating ' +
+      'ligands form STRONGER individual metal-donor BONDS than monodentate ligands with ' +
+      'the same donor atom." FALSE — the individual metal-nitrogen bond strength in ' +
+      '[Ni(en)₃]²⁺ is roughly SIMILAR to the metal-nitrogen bond strength in [Ni(NH₃)₆]²⁺ ' +
+      '(comparable ΔH contributions per bond) — the dramatic stability difference comes ' +
+      'from ENTROPY, not enthalpy/bond-strength differences. Releasing 3 en molecules into ' +
+      'solution (when the complex forms, displacing 6 water molecules) creates a NET ' +
+      'INCREASE in the total number of free particles (more disorder/entropy) compared to ' +
+      'releasing 6 separate NH₃ ligands to bind (which itself displaces 6 waters, but ' +
+      'without the additional favorable particle-count change from chelation) — the ' +
+      'entropic term (−TΔS in ΔG=ΔH−TΔS) drives the extra stability, an often-overlooked ' +
+      'thermodynamic subtlety. Second trap: "Larger chelate rings (more atoms in the ring) ' +
+      'are always more stable than smaller ones." FALSE — 5- and 6-membered chelate rings ' +
+      'are generally the MOST stable (optimal geometric strain/flexibility balance); much ' +
+      'larger rings actually become LESS stable due to increased conformational strain and ' +
+      'entropy loss from restricting a longer, floppier chain into a ring shape.',
+    targetedMisconceptions: [`${STABCON}:MC1`, `${STABCON}:MC2`],
+    source: `${STABCON_SRC} — misconception: chelate effect is due to stronger bonds not entropy; bigger rings are always more stable`,
+  },
+]
+
+const STABCON_PROBES: SeedProbe[] = [
+  {
+    conceptId: STABCON,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: '[Ni(en)3]2+ is much more stable than [Ni(NH3)6]2+, even though both have 6 total Ni-N bonds of similar individual strength. What explains this "chelate effect"?',
+    choices: [
+      { text: 'The chelate effect is primarily ENTROPIC — releasing 3 chelating en molecules (replacing 6 waters) creates a net increase in total free particles in solution compared to releasing 6 separate NH3 ligands, favoring the chelate thermodynamically', isCorrect: true },
+      { text: 'Each individual Ni-N bond in the en complex is significantly stronger (higher bond enthalpy) than in the NH3 complex', isCorrect: false, misconceptionId: `${STABCON}:MC1` },
+    ],
+    correctValue: 'Entropic effect from particle count change, not stronger individual bonds',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${STABCON}:MC1`],
+    source: `${STABCON_SRC} — distractor targets attributing the chelate effect to bond strength rather than entropy`,
+  },
+  {
+    conceptId: STABCON,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Does making a chelate ring LARGER (more atoms in the ring) always increase complex stability?',
+    choices: [
+      { text: 'No — 5- and 6-membered chelate rings are generally the most stable due to optimal geometric strain/flexibility; much larger rings become less stable from increased conformational strain and entropy loss', isCorrect: true },
+      { text: 'Yes — larger chelate rings always provide greater stability by binding the metal more extensively', isCorrect: false, misconceptionId: `${STABCON}:MC2` },
+    ],
+    correctValue: 'No — 5/6-membered rings are optimal, not the largest possible',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${STABCON}:MC2`],
+    source: `${STABCON_SRC} — misconception: bigger chelate rings are unconditionally more stable`,
+  },
+]
+
+// ─── chem.coord.isomerism ────────────────────────────────────────────────────
+const COORDISOM = 'chem.coord.isomerism'
+const COORDISOM_SRC = 'docs/chemistry/kg/graph.json — chem.coord.isomerism'
+
+const COORDISOM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COORDISOM,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Coordination complexes show isomerism types beyond simple organic structural/ ' +
+      'stereoisomerism (building on that earlier concept). IONIZATION ISOMERS swap which ' +
+      'species is INSIDE the coordination sphere (bonded to the metal) versus OUTSIDE as a ' +
+      'free counter-ion: [Co(NH₃)₅Br]SO₄ vs. [Co(NH₃)₅SO₄]Br — same overall formula, but ' +
+      'different ions dissociate in solution, giving genuinely different chemical tests ' +
+      '(the first gives a precipitate with BaCl₂ testing for free SO₄²⁻; the second doesn\'t, ' +
+      'but instead gives a precipitate with AgNO₃ testing for free Br⁻). GEOMETRIC (cis- ' +
+      'trans) ISOMERS occur in square planar and octahedral complexes with 2+ different ' +
+      'ligand types — cis (adjacent, 90° apart) vs. trans (opposite, 180° apart) ' +
+      'arrangements are genuinely different, non-interconvertible compounds with different ' +
+      'physical/chemical properties (cisplatin, the cis isomer, is a potent anticancer drug; ' +
+      'the trans isomer is essentially therapeutically INACTIVE — same formula, ' +
+      'dramatically different biological effect). OPTICAL ISOMERS occur in octahedral ' +
+      'complexes lacking a plane of symmetry (often with 3 bidentate chelating ligands, ' +
+      'like [Co(en)₃]³⁺), forming genuine non-superimposable mirror images (enantiomers), ' +
+      'exactly analogous to organic chirality.',
+    targetedMisconceptions: [`${COORDISOM}:MC1`],
+    source: `${COORDISOM_SRC} — ionization isomers, geometric (cis/trans) isomers, optical isomers in complexes`,
+  },
+  {
+    conceptId: COORDISOM,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Cisplatin and its trans isomer, having the identical molecular formula and ' +
+      'the same types of bonds, should have essentially the SAME biological activity." ' +
+      'DANGEROUSLY FALSE — this is a striking real-world parallel to the enantiomer/drug ' +
+      'safety lesson covered earlier. Cis-platin (cis-[Pt(NH₃)₂Cl₂]) is a highly effective, ' +
+      'widely-used anticancer drug (works by binding DNA in a specific geometric way that ' +
+      'disrupts replication), while trans-platin is essentially THERAPEUTICALLY INACTIVE ' +
+      'for this purpose (the different geometry prevents the same critical DNA-binding ' +
+      'interaction) — identical formula, dramatically different biological consequence, ' +
+      'purely from geometric isomerism. Second trap: "Ionization isomers are basically the ' +
+      'same compound, since they share the identical overall chemical formula." FALSE — ' +
+      'they are genuinely DIFFERENT compounds with measurably different chemical behavior ' +
+      '(different species precipitate with different test reagents, as shown above) — ' +
+      'sharing an overall formula does NOT mean sharing identical chemistry when the atoms ' +
+      'are arranged/bonded differently (inside vs. outside the coordination sphere).',
+    targetedMisconceptions: [`${COORDISOM}:MC1`, `${COORDISOM}:MC2`],
+    source: `${COORDISOM_SRC} — misconception: cis/trans platin have same biological activity; ionization isomers are the same compound`,
+  },
+]
+
+const COORDISOM_PROBES: SeedProbe[] = [
+  {
+    conceptId: COORDISOM,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Cisplatin (cis-[Pt(NH3)2Cl2]) is a potent anticancer drug, but its geometric isomer trans-platin is essentially therapeutically inactive. Since both have the identical molecular formula, should they have the same biological activity?',
+    choices: [
+      { text: 'No — the different spatial arrangement (cis vs trans) changes how the molecule binds DNA, a specific geometric interaction that only the cis isomer can perform effectively; identical formula does not guarantee identical biological activity', isCorrect: true },
+      { text: 'Yes — since cis-platin and trans-platin share the same molecular formula and bond types, they should be equally effective anticancer drugs', isCorrect: false, misconceptionId: `${COORDISOM}:MC1` },
+    ],
+    correctValue: 'No — geometric isomerism causes dramatically different biological activity',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${COORDISOM}:MC1`],
+    source: `${COORDISOM_SRC} — distractor targets assuming identical formula guarantees identical biological effect`,
+  },
+  {
+    conceptId: COORDISOM,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: '[Co(NH3)5Br]SO4 and [Co(NH3)5SO4]Br share the identical overall chemical formula. Are they the same compound?',
+    choices: [
+      { text: 'No — they are genuinely different ionization isomers with measurably different chemistry: the first releases free SO42- (testable with BaCl2), the second releases free Br- (testable with AgNO3) — different atoms occupy the coordination sphere vs. the outer counter-ion position', isCorrect: true },
+      { text: 'Yes — sharing an identical overall formula means they are the same compound, just written differently', isCorrect: false, misconceptionId: `${COORDISOM}:MC2` },
+    ],
+    correctValue: 'No — genuinely different compounds despite identical formula',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${COORDISOM}:MC2`],
+    source: `${COORDISOM_SRC} — misconception: identical overall formula implies identical compound`,
+  },
+]
+
+// ─── chem.hal.introduction ───────────────────────────────────────────────────
+const HALINTRO = 'chem.hal.introduction'
+const HALINTRO_SRC = 'docs/chemistry/kg/graph.json — chem.hal.introduction'
+
+const HALINTRO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HALINTRO,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Haloalkanes (R-X, halogen bonded to an sp³ carbon) and haloarenes (halogen bonded ' +
+      'DIRECTLY to an aromatic ring carbon) look superficially similar but behave very ' +
+      'DIFFERENTLY in reactions — this difference traces directly back to hybridization ' +
+      'and resonance (both covered earlier). In haloalkanes, the C-X bond is a simple, ' +
+      'fairly reactive σ bond between sp³ carbon and halogen — the halogen readily leaves ' +
+      'as a NUCLEOPHILE/LEAVING GROUP in substitution reactions (SN1/SN2 mechanisms). In ' +
+      'haloarenes, the halogen\'s lone pair can DELOCALIZE into the aromatic π system ' +
+      '(resonance donation, the +M effect covered in electronic effects) — this gives the ' +
+      'C-X bond PARTIAL DOUBLE BOND CHARACTER, making it SHORTER, STRONGER, and much more ' +
+      'RESISTANT to substitution than a comparable haloalkane bond. Additionally, the sp² ' +
+      'carbon in haloarenes holds electrons closer to the nucleus than sp³ carbon (higher ' +
+      's-character means orbitals are more compact/tightly held), further strengthening the ' +
+      'bond. Classification by carbon type mirrors organic naming conventions: PRIMARY ' +
+      '(halogen on a carbon attached to only 1 other carbon), SECONDARY (2 other carbons), ' +
+      'TERTIARY (3 other carbons) — this classification strongly predicts REACTION ' +
+      'MECHANISM preference (primary favors SN2; tertiary favors SN1).',
+    targetedMisconceptions: [`${HALINTRO}:MC1`],
+    source: `${HALINTRO_SRC} — haloalkanes vs haloarenes reactivity difference, C-X bond character, primary/secondary/tertiary classification`,
+  },
+  {
+    conceptId: HALINTRO,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Haloarenes (aryl halides) should be MORE reactive toward nucleophilic ' +
+      'substitution than haloalkanes, since the aromatic ring provides extra stabilization ' +
+      'for the reaction to proceed." BACKWARDS — haloarenes are actually MUCH LESS reactive ' +
+      'toward standard nucleophilic substitution than haloalkanes (chlorobenzene resists ' +
+      'the same substitution conditions that readily convert chloroethane). This is ' +
+      'precisely because of the resonance donation (+M effect) strengthening the C-X bond ' +
+      '(partial double bond character), which makes the halogen a much POORER leaving ' +
+      'group in haloarenes — the aromatic ring\'s stabilization works AGAINST substitution ' +
+      'here, not for it (special conditions, like very high temperature/pressure with ' +
+      'strong nucleophiles, or specific catalyzed pathways, are needed to force haloarene ' +
+      'substitution). Second trap: "The classification primary/secondary/tertiary for ' +
+      'haloalkanes refers to how many HALOGENS are attached to the carbon." FALSE — it ' +
+      'refers to how many OTHER CARBON atoms are attached to the halogen-bearing carbon, ' +
+      'completely independent of halogen count (which is typically just 1 in simple ' +
+      'monohalogenated compounds).',
+    targetedMisconceptions: [`${HALINTRO}:MC1`, `${HALINTRO}:MC2`],
+    source: `${HALINTRO_SRC} — misconception: haloarenes are more reactive than haloalkanes; primary/secondary refers to halogen count`,
+  },
+]
+
+const HALINTRO_PROBES: SeedProbe[] = [
+  {
+    conceptId: HALINTRO,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Chlorobenzene (a haloarene) resists the same nucleophilic substitution conditions that readily convert chloroethane (a haloalkane) to a different product. Why is chlorobenzene so much less reactive?',
+    choices: [
+      { text: 'Chlorine\'s lone pair delocalizes into the aromatic π system (resonance, +M effect), giving the C-Cl bond partial double-bond character that strengthens it and makes chlorine a much poorer leaving group', isCorrect: true },
+      { text: 'This is inconsistent — the aromatic ring should provide extra stabilization that makes chlorobenzene MORE reactive toward substitution, not less', isCorrect: false, misconceptionId: `${HALINTRO}:MC1` },
+    ],
+    correctValue: 'Resonance strengthens the C-Cl bond, reducing reactivity',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HALINTRO}:MC1`],
+    source: `${HALINTRO_SRC} — distractor targets assuming aromatic stabilization increases substitution reactivity`,
+  },
+  {
+    conceptId: HALINTRO,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In classifying a haloalkane as primary, secondary, or tertiary, does this classification depend on how many HALOGEN atoms are attached to the carbon?',
+    choices: [
+      { text: 'No — it depends on how many OTHER CARBON atoms are attached to the halogen-bearing carbon, completely independent of the number of halogens present', isCorrect: true },
+      { text: 'Yes — primary means one halogen, secondary means two halogens, and tertiary means three halogens attached to that carbon', isCorrect: false, misconceptionId: `${HALINTRO}:MC2` },
+    ],
+    correctValue: 'No — classification is based on attached carbons, not halogens',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${HALINTRO}:MC2`],
+    source: `${HALINTRO_SRC} — misconception: primary/secondary/tertiary classification is based on halogen count`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -9611,6 +9877,9 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...CFT_EXPLANATIONS,
   ...COORDBOND_EXPLANATIONS,
   ...COORDAPP_EXPLANATIONS,
+  ...STABCON_EXPLANATIONS,
+  ...COORDISOM_EXPLANATIONS,
+  ...HALINTRO_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -9728,4 +9997,7 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...CFT_PROBES,
   ...COORDBOND_PROBES,
   ...COORDAPP_PROBES,
+  ...STABCON_PROBES,
+  ...COORDISOM_PROBES,
+  ...HALINTRO_PROBES,
 ]
