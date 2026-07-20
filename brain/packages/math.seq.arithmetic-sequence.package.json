@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.seq.arithmetic-sequence-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.seq.arithmetic-sequence",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:431f1a0a6ceb2260143def1d38c2e75ac69b20fa9905ab9c4250a65999811610",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.seq.arithmetic-sequence.md": "sha256:41cab1dc669d9728828bcf210ad4efc1fbe1cf566a1eee39a7abf8077e58d0b9"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.seq.arithmetic-sequence",
+    "name": "Arithmetic Sequence",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.seq.sequence"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.seq.arithmetic-sequence-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.seq.arithmetic-sequence (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.seq.arithmetic-sequence.md": "sha256:41cab1dc669d9728828bcf210ad4efc1fbe1cf566a1eee39a7abf8077e58d0b9"
+      },
+      "contentHash": "sha256:2988f6778010e8d392049a96b1decf13037eaf5d8e287bbbfde28f20e69e508e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.seq.arithmetic-sequence.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.arithmetic-sequence.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.arithmetic-sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.arithmetic-sequence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.arithmetic-sequence.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.arithmetic-sequence.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.arithmetic-sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.arithmetic-sequence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.arithmetic-sequence.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.arithmetic-sequence.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.arithmetic-sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.arithmetic-sequence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.arithmetic-sequence.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.arithmetic-sequence.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.arithmetic-sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.arithmetic-sequence\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.seq.arithmetic-sequence/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.seq.arithmetic-sequence",
+      "title": "Learning Objectives",
+      "content": "- LO1: Formalize `math.seq.sequence`'s own informal preview (identifying a constant DIFFERENCE between consecutive terms, as opposed to a constant RATIO) into the precise explicit formula $a_n=a_1+(n-1)d$ — and correctly derive this formula from the recursive definition $a_n=a_{n-1}+d$ by unwinding the recursion, exactly paralleling `math.seq.geometric-sequence`'s own unwinding derivation but with ADDITION accumulating instead of MULTIPLICATION.\n- LO2: Correctly classify an arithmetic sequence's long-run behavior from the sign of $d$ ALONE — increasing without bound for $d>0$, decreasing without bound for $d<0$, constant for $d=0$ — and explicitly contrast this LINEAR, UNBOUNDED-OR-CONSTANT behavior against `math.seq.geometric-sequence`'s own richer classification (which additionally distinguishes decay/growth by $|r|$ and oscillation by sign), correctly explaining WHY arithmetic sequences have no \"decay toward zero while still moving\" analogue the way geometric sequences do.\n- LO3: Apply arithmetic sequences to a genuine real-world context involving LINEAR (additive, not compound) accumulation — correctly setting up the model for a scenario (e.g. simple, non-compounding interest, or a fixed hourly wage accumulation, or linear depreciation by a fixed dollar amount) and computing a specific term, while correctly identifying which quantity plays the role of $a_1$ and which plays the role of $d$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-sequence.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.seq.arithmetic-sequence/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.seq.arithmetic-sequence",
+      "title": "ARITHMETIC-COEFFICIENT-ASSUMED-EQUAL-TO-INDEX",
+      "content": "| MC-1 | ARITHMETIC-COEFFICIENT-ASSUMED-EQUAL-TO-INDEX | Believing the explicit formula's coefficient of $d$ equals $n$ rather than $n-1$, missing the direct connection between the coefficient and the number of addition steps from $a_1$ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-sequence.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.seq.arithmetic-sequence/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.seq.arithmetic-sequence",
+      "title": "ARITHMETIC-SEQUENCE-ASSUMED-CAN-DECAY-TO-LIMIT",
+      "content": "| MC-2 | ARITHMETIC-SEQUENCE-ASSUMED-CAN-DECAY-TO-LIMIT | Believing an arithmetic sequence with nonzero $d$ can decay toward a finite limit the way a geometric sequence with $|r|<1$ does, missing the structural reason additive accumulation cannot produce this behavior | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-sequence.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.seq.arithmetic-sequence/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.seq.arithmetic-sequence",
+      "title": "SIMPLE-AND-COMPOUND-INTEREST-CONFLATED",
+      "content": "| MC-3 | SIMPLE-AND-COMPOUND-INTEREST-CONFLATED | Believing simple interest and compound interest at the \"same rate\" produce the same total, missing that compounding (multiplicative, geometric) genuinely outpaces simple interest (additive, arithmetic) | High |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-sequence.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.seq.arithmetic-sequence/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.arithmetic-sequence",
+      "title": "The Formula Comes From Unwinding the Recursion — Additively, Paralleling the Geometric Case (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Formula Comes From Unwinding the Recursion — Additively, Paralleling the Geometric Case (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-sequence.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.seq.arithmetic-sequence/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.arithmetic-sequence",
+      "title": "Arithmetic Sequences Have No \"Decay Toward a Finite Limit\" Behavior (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Arithmetic Sequences Have No \\\"Decay Toward a Finite Limit\\\" Behavior (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-sequence.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.seq.arithmetic-sequence/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.arithmetic-sequence",
+      "title": "Simple Interest's $d$ Is a Fixed Addition, Not a Recalculated Percentage (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Simple Interest's $d$ Is a Fixed Addition, Not a Recalculated Percentage (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-sequence.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.seq.arithmetic-sequence/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.arithmetic-sequence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-sequence.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.seq.arithmetic-sequence/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.seq.arithmetic-sequence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For an arithmetic sequence with $a_1=4$, $d=6$, derive $a_5$ by unwinding the recursion, then verify against the explicit formula.\n  2. Explain, without computing terms, why an arithmetic sequence with $d=-0.1$ (a very small negative difference) still decreases WITHOUT bound, rather than approaching a finite limit.\n  3. A worker earns a fixed \\$20/hour with no bonuses or raises. Set up the total-earnings-after-$n$-hours as an arithmetic sequence, correctly identifying $a_1$ and $d$.\n  4. Explain, using both this concept's simple-interest example and `math.seq.geometric-sequence`'s own compound-interest example, why \"5% simple interest\" and \"5% compound interest\" on the same principal produce genuinely different results after multiple years.\n- **P76 (Transfer Probe, mode = independence — no cross-link target listed in the KG for this concept)**: \"A phone plan charges a flat \\$30 base fee plus \\$0.10 per minute used, while a SEPARATE savings account starts at \\$500 and grows via 3% ANNUAL COMPOUND interest. (a) Model the phone bill's total cost as a function of minutes used as an arithmetic sequence (treating minutes as the index), correctly identifying $a_1$ and $d$. (b) Explain why the savings account's growth CANNOT be modeled as an arithmetic sequence, citing the structural reason arithmetic sequences can't replicate compounding behavior. (c) If someone mistakenly modeled the savings account using an arithmetic sequence with $d=500\\times0.03=15$ (treating it like simple interest), explain specifically how and why this would UNDERESTIMATE the account's true value after several years.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-sequence.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.seq.arithmetic-sequence/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.arithmetic-sequence",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.seq.sequence` (the general definition of a sequence as a function from $\\mathbb{N}$; the informal preview recognizing constant-difference patterns as \"arithmetic,\" deferred to this concept for full development).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-sequence.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.seq.arithmetic-sequence/reference/1",
+      "kind": "reference",
+      "conceptId": "math.seq.arithmetic-sequence",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.seq.sequence` (the general sequence definition and the informal arithmetic-pattern preview this concept fully formalizes).\n- **Unlocks**: `math.seq.arithmetic-series` (summing arithmetic sequences, building directly on this concept's explicit formula).\n- **Cross-link**: KG lists none for this concept. $P76_{mode}=$ **independence** (no cross-link target to check).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-sequence.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

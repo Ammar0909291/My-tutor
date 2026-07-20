@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.existence-uniqueness-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.existence-uniqueness",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:066a4b72db828ebbc2cb38e7e53f172beddc9328f3545f5a688744adff8a41b4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.existence-uniqueness.md": "sha256:f04827dc47ce97ea7bb6a3909f8284b6e583fbbb0bc0482e7e14705910cd6dc3"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.de.existence-uniqueness",
+    "name": "Existence and Uniqueness Theorem",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.de.ivp",
+      "math.real.lipschitz-continuity"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.existence-uniqueness-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.existence-uniqueness (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.existence-uniqueness.md": "sha256:f04827dc47ce97ea7bb6a3909f8284b6e583fbbb0bc0482e7e14705910cd6dc3"
+      },
+      "contentHash": "sha256:5ac7919bc4376e9ab7275b166f036514c23d8d68f4fc6b5dcfc49fb6bfb3a6af",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.existence-uniqueness.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.existence-uniqueness.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.existence-uniqueness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.existence-uniqueness\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.existence-uniqueness.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.existence-uniqueness.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.existence-uniqueness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.existence-uniqueness\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.existence-uniqueness.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.existence-uniqueness.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.existence-uniqueness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.existence-uniqueness\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.existence-uniqueness.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.existence-uniqueness.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.existence-uniqueness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.existence-uniqueness\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.existence-uniqueness/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.existence-uniqueness",
+      "title": "Learning Objectives",
+      "content": "- LO1 (cross-link objective): Recognize Picard iteration — the standard proof technique for this theorem — as a DIRECT INSTANCE of `math.real.fixed-point-theorem`'s own contraction-mapping iteration, applied to the \"Picard operator\" $(T\\phi)(x)=y_0+\\int_{x_0}^xf(t,\\phi(t))\\,dt$ acting on a suitable space of candidate solution functions — and correctly recognize that solving $y'=f(x,y),y(x_0)=y_0$ is EQUIVALENT to finding a fixed point $\\phi=T\\phi$ of this integral operator.\n- LO2: State the theorem's precise hypothesis — $f(x,y)$ and $\\partial f/\\partial y$ BOTH continuous in a rectangle around $(x_0,y_0)$ — and explain WHY $\\partial f/\\partial y$'s continuity is exactly what supplies `math.real.lipschitz-continuity`'s own Lipschitz condition on $f$ (in the $y$ variable, via the Mean Value Theorem, directly reusing that concept's own derivative-bound-to-Lipschitz-constant connection), making the Picard operator a genuine contraction on a suitably restricted interval.\n- LO3: Correctly identify why the theorem's conclusion is only LOCAL (guaranteeing a unique solution on SOME interval around $x_0$, not necessarily globally) — using a specific IVP whose solution genuinely blows up in finite time as a concrete illustration that \"exists near $x_0$\" cannot always be strengthened to \"exists for all $x$.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.existence-uniqueness.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.de.existence-uniqueness/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.existence-uniqueness",
+      "title": "PICARD-ITERATION-ASSUMED-MERELY-INSPIRED-BY-FIXED-POINTS",
+      "content": "| MC-1 | PICARD-ITERATION-ASSUMED-MERELY-INSPIRED-BY-FIXED-POINTS | Believing Picard iteration is a separate ODE-specific technique merely inspired by fixed-point ideas, missing that solving the IVP is literally equivalent to finding a fixed point of a specific operator | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.existence-uniqueness.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.de.existence-uniqueness/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.existence-uniqueness",
+      "title": "PARTIAL-DERIVATIVE-HYPOTHESIS-ASSUMED-UNRELATED",
+      "content": "| MC-2 | PARTIAL-DERIVATIVE-HYPOTHESIS-ASSUMED-UNRELATED | Believing the hypothesis on $\\partial f/\\partial y$'s continuity is an unrelated extra technical condition, missing that it directly supplies the Lipschitz bound the proof needs | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.existence-uniqueness.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.de.existence-uniqueness/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.existence-uniqueness",
+      "title": "LOCAL-CONCLUSION-ASSUMED-PROOF-TECHNIQUE-LIMITATION",
+      "content": "| MC-3 | LOCAL-CONCLUSION-ASSUMED-PROOF-TECHNIQUE-LIMITATION | Believing the theorem's local-existence conclusion reflects only a limitation of the Picard-iteration proof technique, missing that finite-time blow-up is a genuine property of certain equations | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.existence-uniqueness.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.de.existence-uniqueness/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.existence-uniqueness",
+      "title": "Solving the IVP IS Finding a Fixed Point of the Picard Operator (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Solving the IVP IS Finding a Fixed Point of the Picard Operator (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.existence-uniqueness.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.de.existence-uniqueness/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.existence-uniqueness",
+      "title": "$\\partial f/\\partial y$'s Continuity Supplies the Lipschitz Constant via the SAME Mechanism Already Known (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"$\\\\partial f/\\\\partial y$'s Continuity Supplies the Lipschitz Constant via the SAME Mechanism Already Known (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.existence-uniqueness.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.de.existence-uniqueness/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.existence-uniqueness",
+      "title": "\"Local\" Is a Genuine Limitation, Not Proof-Technique Laziness (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"\\\"Local\\\" Is a Genuine Limitation, Not Proof-Technique Laziness (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.existence-uniqueness.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.existence-uniqueness/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.existence-uniqueness",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.existence-uniqueness.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.existence-uniqueness/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.existence-uniqueness",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Write the Picard operator for the IVP $y'=2y,y(0)=3$, and verify the known solution $y=3e^{2x}$ is a fixed point.\n  2. For $f(x,y)=xy$ near $(0,1)$ restricted to $|y|\\le2$, bound $\\partial f/\\partial y$ and derive a valid Lipschitz constant for $f$ in $y$.\n  3. Explain, in your own words, why $\\partial f/\\partial y$'s continuity is the specific hypothesis that supplies the Lipschitz bound needed for Picard iteration to work.\n  4. Explain why the theorem only guarantees a solution on \"some interval around $x_0$\" rather than for all $x$, citing a concrete example.\n- **P76 (Transfer Probe, mode = cross-link probe engaging `math.real.fixed-point-theorem`)**: \"A physicist models a population's growth rate using the IVP $y'=y^2-1,y(0)=2$ (a nonlinear equation), and wants to know whether a unique solution is guaranteed to exist near $x=0$, and whether that guarantee extends indefinitely. (a) Verify that $f(x,y)=y^2-1$ and $\\partial f/\\partial y=2y$ are both continuous near $(0,2)$, and explain what this guarantees via this lesson's theorem. (b) Using `math.real.fixed-point-theorem`'s own machinery (which this lesson's Picard iteration directly instantiates), explain in general terms why the resulting solution's existence is only guaranteed on SOME interval around $x=0$, not necessarily for all $x$. (c) Without solving the equation explicitly, explain what kind of behavior (referencing Example 3's blow-up phenomenon) might cause this solution to fail to extend to all $x$, given that $y^2$ appears in the equation.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.existence-uniqueness.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.existence-uniqueness/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.existence-uniqueness",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.de.ivp` (an ODE with conditions specified at a single point; the informal preview of this theorem, deferred here for full development) and `math.real.lipschitz-continuity` (the Lipschitz condition and its computable connection to derivative bounds).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.existence-uniqueness.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.existence-uniqueness/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.existence-uniqueness",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.de.ivp` (the initial value problem this concept's theorem directly addresses, previewed there informally) and `math.real.lipschitz-continuity` (the Lipschitz condition and its derivative-bound connection this concept's proof directly reuses).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.real.fixed-point-theorem`, checked via `ls docs/curriculum/blueprints/` — confirmed authored EARLIER IN THIS SAME BATCH (same-batch cross-link-enabling pattern). $P76_{mode}=$ **cross-link probe**, engaging `math.real.fixed-point-theorem`'s own contraction-mapping machinery directly in Component 3's Picard-operator derivation and the P76 transfer probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.existence-uniqueness.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
