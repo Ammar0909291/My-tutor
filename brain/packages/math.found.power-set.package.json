@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.power-set-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.power-set",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0f40006a28a9065b305cbe92a9ebf7bf7429a79d4f2a9fb217996149e27ed80f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.power-set.md": "sha256:355d8f94e42767921527d4967eeb2f73a5789d4b41f2a012c1b46f97519ebbd6"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.found.power-set",
+    "name": "Power Set",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.found.subset"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.power-set-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.power-set (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.power-set.md": "sha256:355d8f94e42767921527d4967eeb2f73a5789d4b41f2a012c1b46f97519ebbd6"
+      },
+      "contentHash": "sha256:998f785dac67c5292f604d8f1d568d4c56550d84edb3aefa1f9d6f479b16a683",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.power-set.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.power-set.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.power-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.power-set\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.power-set.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.power-set.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.power-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.power-set\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.power-set.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.power-set.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.power-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.power-set\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.power-set.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.power-set.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.power-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.power-set\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.power-set/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.power-set",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define $\\mathcal{P}(A)$ as the set whose ELEMENTS are exactly the subsets of $A$ (as `math.found.subset` already defines \"subset\") — recognizing this as a set of SETS, one level of abstraction higher than $A$ itself — and correctly list $\\mathcal{P}(A)$ completely for a small concrete set $A$, including both $\\varnothing$ and $A$ itself as members.\n- LO2: State and justify the counting formula $|\\mathcal{P}(A)|=2^{|A|}$ for finite $A$, using the \"each element is either IN or OUT\" binary-choice argument (one independent yes/no choice per element), and correctly compute $|\\mathcal{P}(A)|$ for sets of specified sizes, including recognizing $|\\mathcal{P}(\\varnothing)|=1$ (not 0) as the boundary case.\n- LO3 (cross-link objective): Recognize `math.top.topological-space`'s own DISCRETE topology — \"the whole power set\" — as a genuine, concrete INSTANCE of $\\mathcal{P}(A)$ used as a topology $\\tau$ on $A$ itself (i.e., $\\tau=\\mathcal{P}(A)$), verifying directly that this choice of $\\tau$ satisfies the three topology axioms specifically BECAUSE $\\mathcal{P}(A)$ already contains every possible subset, including $\\varnothing$ and $A$, and is automatically closed under unions and intersections.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.power-set.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.power-set/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.power-set",
+      "title": "EMPTY-AND-FULL-SET-OMITTED-FROM-POWER-SET",
+      "content": "| MC-1 | EMPTY-AND-FULL-SET-OMITTED-FROM-POWER-SET | Believing $\\varnothing$ and/or $A$ itself should be omitted from $\\mathcal{P}(A)$ as \"trivial\" exceptions, rather than genuine required members | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.power-set.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.found.power-set/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.power-set",
+      "title": "POWER-SET-OF-EMPTY-SET-ASSUMED-EMPTY",
+      "content": "| MC-2 | POWER-SET-OF-EMPTY-SET-ASSUMED-EMPTY | Believing $\\mathcal{P}(\\varnothing)$ has zero elements, missing that $\\varnothing$ is itself a subset of $\\varnothing$ and hence a genuine element of $\\mathcal{P}(\\varnothing)$, making $|\\mathcal{P}(\\varnothing)|=1$ | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.power-set.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.found.power-set/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.power-set",
+      "title": "DISCRETE-TOPOLOGY-ASSUMED-DIFFERENT-FROM-POWER-SET",
+      "content": "| MC-3 | DISCRETE-TOPOLOGY-ASSUMED-DIFFERENT-FROM-POWER-SET | Believing the discrete topology and the power set are merely similar or numerically coincidental, rather than literally the same set used directly as $\\tau$ | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.power-set.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.found.power-set/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.power-set",
+      "title": "The Power Set Is a Set of Sets — Include $\\varnothing$ and $A$ Itself (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Power Set Is a Set of Sets — Include $\\\\varnothing$ and $A$ Itself (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.power-set.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.power-set/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.power-set",
+      "title": "$2^n$ Comes From Independent Binary Choices, Not a Memorized Formula (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"$2^n$ Comes From Independent Binary Choices, Not a Memorized Formula (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.power-set.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.found.power-set/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.power-set",
+      "title": "The Discrete Topology Literally IS a Power Set Used as $\\tau$ (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Discrete Topology Literally IS a Power Set Used as $\\\\tau$ (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.power-set.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.found.power-set/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.power-set",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.power-set.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.found.power-set/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.power-set",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. List $\\mathcal{P}(A)$ completely for $A=\\{1,2,3\\}$, making sure to include $\\varnothing$ and $A$ itself.\n  2. Compute $|\\mathcal{P}(A)|$ for a set $A$ with 5 elements, explaining your answer using the binary-choice argument (not just citing the formula).\n  3. State $|\\mathcal{P}(\\varnothing)|$ and explain, using `math.found.subset`'s own definition, why this value is correct.\n  4. For $A=\\{a,b,c\\}$, verify explicitly that $\\tau=\\mathcal{P}(A)$ satisfies the union-closure axiom for at least one specific pair of subsets.\n- **P76 (Transfer Probe, mode = cross-link probe engaging `math.top.topological-space`)**: \"A computer scientist is designing a small finite topological space on a set $A=\\{$server-A, server-B, server-C$\\}$ representing three servers, and wants the SIMPLEST possible topology to work with — one where every conceivable subset of servers counts as an 'open' (accessible) configuration. (a) Using this lesson's power set definition, explicitly list all the subsets that would need to belong to $\\tau$ for this to be the discrete topology on $A$. (b) Using `math.top.topological-space`'s own three axioms, explain WHY choosing $\\tau=\\mathcal{P}(A)$ guarantees all three axioms are automatically satisfied, without needing to check each union/intersection combination individually. (c) If the computer scientist instead wanted a SMALLER topology (not every subset counts as open), explain what would need to be verified that is automatically guaranteed when using the full power set.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.power-set.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.found.power-set/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.power-set",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.subset` (the subset relation $A\\subseteq B$: every element of $A$ is also an element of $B$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.power-set.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.found.power-set/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.power-set",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.subset` (the subset relation this concept's elements are built from directly).\n- **Unlocks**: `math.found.cardinality` (the power set's own size, $2^{|A|}$, is a foundational example in developing general cardinality reasoning, including for infinite sets).\n- **Cross-link**: KG lists `math.top.topological-space`, checked via `ls docs/curriculum/blueprints/` and confirmed ALREADY authored. $P76_{mode}=$ **cross-link probe**, engaging `math.top.topological-space`'s own three topology axioms directly in Component 3's discrete-topology verification and the P76 transfer probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.power-set.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

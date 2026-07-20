@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.chinese-remainder-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.chinese-remainder-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c9559a645dbb371937eccc40309e407d473c264843176c39b1899e7dc058020a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.chinese-remainder-theorem.md": "sha256:171e7dac2b9ad0ee5912156cbbe16bc55e74fc6d1a49eb160017675af8c75bc1"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.nt.chinese-remainder-theorem",
+    "name": "Chinese Remainder Theorem",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.nt.congruence",
+      "math.nt.gcd"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.chinese-remainder-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.chinese-remainder-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.chinese-remainder-theorem.md": "sha256:171e7dac2b9ad0ee5912156cbbe16bc55e74fc6d1a49eb160017675af8c75bc1"
+      },
+      "contentHash": "sha256:0b81c21985c9800f0a541e146bee063c5deefb0b53ca238842973da243564902",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.chinese-remainder-theorem.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.chinese-remainder-theorem.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.chinese-remainder-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.chinese-remainder-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.chinese-remainder-theorem.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.chinese-remainder-theorem.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.chinese-remainder-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.chinese-remainder-theorem\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.chinese-remainder-theorem.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.chinese-remainder-theorem.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.chinese-remainder-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.chinese-remainder-theorem\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.chinese-remainder-theorem.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.chinese-remainder-theorem.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.chinese-remainder-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.chinese-remainder-theorem\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.chinese-remainder-theorem/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.chinese-remainder-theorem",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the Chinese Remainder Theorem precisely: for PAIRWISE COPRIME $n_1,\\ldots,n_k$, the system $x\\equiv a_i\\pmod{n_i}$ (for $i=1,\\ldots,k$) has a solution, and that solution is UNIQUE modulo $N=n_1\\cdots n_k$ — and correctly identify when the pairwise-coprime hypothesis fails (using `math.nt.gcd`'s own gcd computation), recognizing the theorem's guarantee does not apply without it.\n- LO2: Solve a 2-modulus system by CONSTRUCTION, using `math.nt.gcd`'s own Euclidean-algorithm/Bézout machinery to find the specific combining coefficients, rather than by trial search — and verify the constructed solution satisfies BOTH original congruences directly by substitution.\n- LO3 (cross-link objective): Recognize the theorem's DEEPER structural meaning via `math.abst.ring-theory`'s own axioms: CRT is precisely the statement that the ring $\\mathbb{Z}/N\\mathbb{Z}$ is RING-ISOMORPHIC to the product ring $\\mathbb{Z}/n_1\\mathbb{Z}\\times\\cdots\\times\\mathbb{Z}/n_k\\mathbb{Z}$ (component-wise addition and multiplication) — the \"unique solution modulo $N$\" language IS exactly the statement that this map is a bijection respecting both ring operations, verified directly on a small case.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.chinese-remainder-theorem.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.nt.chinese-remainder-theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.chinese-remainder-theorem",
+      "title": "PAIRWISE-COPRIME-HYPOTHESIS-ASSUMED-AUTOMATIC",
+      "content": "| MC-1 | PAIRWISE-COPRIME-HYPOTHESIS-ASSUMED-AUTOMATIC | Believing CRT guarantees a solution for any system of congruences regardless of the moduli's coprimality, missing that pairwise coprimality is a genuine, checkable hypothesis | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.chinese-remainder-theorem.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.nt.chinese-remainder-theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.chinese-remainder-theorem",
+      "title": "CRT-SOLVED-BY-TRIAL-SEARCH",
+      "content": "| MC-2 | CRT-SOLVED-BY-TRIAL-SEARCH | Believing the standard method for solving a CRT system is trial-and-error search rather than the direct Bézout-based construction reusing `math.nt.gcd`'s own machinery | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.chinese-remainder-theorem.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.nt.chinese-remainder-theorem/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.chinese-remainder-theorem",
+      "title": "CRT-TREATED-AS-MERE-NUMERIC-COINCIDENCE",
+      "content": "| MC-3 | CRT-TREATED-AS-MERE-NUMERIC-COINCIDENCE | Believing CRT's \"unique solution modulo $N$\" is a standalone numeric fact, missing its deeper reading as a ring isomorphism via `math.abst.ring-theory`'s own definitions | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.chinese-remainder-theorem.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.nt.chinese-remainder-theorem/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.chinese-remainder-theorem",
+      "title": "Pairwise Coprimality Is a Hypothesis to CHECK, Not an Automatic Given (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Pairwise Coprimality Is a Hypothesis to CHECK, Not an Automatic Given (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.chinese-remainder-theorem.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.nt.chinese-remainder-theorem/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.chinese-remainder-theorem",
+      "title": "Construct the Solution via Bézout, Don't Search by Trial (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Construct the Solution via Bézout, Don't Search by Trial (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.chinese-remainder-theorem.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.nt.chinese-remainder-theorem/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.chinese-remainder-theorem",
+      "title": "CRT Is a Ring Isomorphism, Not Just a Numeric Coincidence (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"CRT Is a Ring Isomorphism, Not Just a Numeric Coincidence (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.chinese-remainder-theorem.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.chinese-remainder-theorem/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.chinese-remainder-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.chinese-remainder-theorem.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.nt.chinese-remainder-theorem/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.chinese-remainder-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Check whether the system $x\\equiv3\\pmod8$, $x\\equiv1\\pmod{12}$ satisfies CRT's pairwise-coprime hypothesis, using `math.nt.gcd`'s computation, and state whether a solution is guaranteed.\n  2. Solve $x\\equiv1\\pmod3$, $x\\equiv4\\pmod5$ using the Bézout construction method (show the Bézout coefficients explicitly).\n  3. Verify your solution from problem 2 directly satisfies both original congruences.\n  4. Explain, citing `math.abst.ring-theory`'s own ring-isomorphism definition, why CRT's \"unique solution mod $N$\" claim is equivalent to a specific map being bijective and operation-respecting.\n- **P76 (Transfer Probe, mode = cross-link probe engaging `math.abst.ring-theory`)**: \"A distributed-computing system splits a large integer computation across 3 processors, each working modulo a different pairwise-coprime modulus ($n_1=97,n_2=101,n_3=103$, all prime), then needs to recombine the 3 partial results into the final answer modulo $N=n_1n_2n_3$. (a) Using CRT's guarantee, explain why the recombination step is guaranteed to produce a UNIQUE correct answer modulo $N$, and what property of the chosen moduli makes this valid. (b) Using `math.abst.ring-theory`'s own definitions, explain why the ENTIRE computation (not just the final recombination) can validly be done independently modulo each $n_i$ and then recombined — i.e., why performing $+,\\times$ separately in each $\\mathbb{Z}/n_i\\mathbb{Z}$ and then applying CRT gives the SAME answer as performing $+,\\times$ directly in $\\mathbb{Z}/N\\mathbb{Z}$. (c) Explain what would go wrong with this entire scheme if two of the three chosen moduli shared a common factor.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.chinese-remainder-theorem.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.nt.chinese-remainder-theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.nt.chinese-remainder-theorem",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.nt.congruence` (congruence as an equivalence relation partitioning $\\mathbb{Z}$ into residue classes) and `math.nt.gcd` (the greatest common divisor, computed via the Euclidean algorithm, and Bézout's identity expressing $\\gcd(a,b)$ as an integer combination $ax+by$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.chinese-remainder-theorem.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.chinese-remainder-theorem/reference/1",
+      "kind": "reference",
+      "conceptId": "math.nt.chinese-remainder-theorem",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.nt.congruence` (the congruence relation and residue classes this concept's systems are built from) and `math.nt.gcd` (the Euclidean algorithm and Bézout identity this concept's construction directly reuses).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.abst.ring-theory`, checked via `ls docs/curriculum/blueprints/` and confirmed ALREADY authored. $P76_{mode}=$ **cross-link probe**, engaging `math.abst.ring-theory`'s own ring-isomorphism definition directly in Component 3's structural reading of CRT and the P76 transfer probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.chinese-remainder-theorem.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

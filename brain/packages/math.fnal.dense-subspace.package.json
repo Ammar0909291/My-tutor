@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.fnal.dense-subspace-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.fnal.dense-subspace",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f7f1317cea2d9057acf1e95baa8c599d6357ed02afcfe8f5ed9347b7f939ed4a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.fnal.dense-subspace.md": "sha256:544b16a5253b535556f2269b1e5509705da4bcd1d8d6c28ff31b4862b71a8af7"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.fnal.dense-subspace",
+    "name": "Dense Subspaces and Approximation",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.fnal.banach-space"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.fnal.dense-subspace-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.fnal.dense-subspace (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.fnal.dense-subspace.md": "sha256:544b16a5253b535556f2269b1e5509705da4bcd1d8d6c28ff31b4862b71a8af7"
+      },
+      "contentHash": "sha256:12b63390ea269569e8475fe3e73f3ebce9fd73921b82d413203da0c56fb54336",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.fnal.dense-subspace.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.dense-subspace.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.dense-subspace"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.dense-subspace\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.dense-subspace.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.dense-subspace.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.dense-subspace"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.dense-subspace\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.dense-subspace.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.dense-subspace.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.dense-subspace"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.dense-subspace\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.dense-subspace.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.dense-subspace.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.dense-subspace"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.dense-subspace\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.fnal.dense-subspace/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.fnal.dense-subspace",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the general definition — $S\\subseteq X$ is dense iff $\\operatorname{cl}(S)=X$, equivalently: for every $x\\in X$ and every $\\varepsilon>0$, some $s\\in S$ satisfies $\\|x-s\\|<\\varepsilon$ — recognizing this as a SINGLE unified definition applying in ANY normed/Banach space (via `math.fnal.banach-space`'s own norm and completeness structure), not a separate ad hoc notion for each specific approximation theorem.\n- LO2 (cross-link objective): Recognize `math.real.weierstrass-approximation`'s own theorem (\"every continuous function on $[a,b]$ can be uniformly approximated by polynomials\") as EXACTLY the statement \"the polynomials form a DENSE subspace of $C([a,b])$\" in THIS concept's general density language — the Bernstein-polynomial construction already gives an EXPLICIT witness proving this specific density claim, not merely an abstract existence argument.\n- LO3: Correctly state (without full proof) at least two FURTHER density results beyond Weierstrass's — $C^\\infty$ dense in $L^p$, and trigonometric polynomials dense in $L^2$ (the Fourier density result) — recognizing all three (Weierstrass, $C^\\infty$-in-$L^p$, trigonometric-in-$L^2$) as INSTANCES of the SAME general density definition, applied to different spaces and different candidate dense subspaces.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dense-subspace.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.fnal.dense-subspace/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.fnal.dense-subspace",
+      "title": "DENSITY-DEFINITION-ASSUMED-SPACE-SPECIFIC",
+      "content": "| MC-1 | DENSITY-DEFINITION-ASSUMED-SPACE-SPECIFIC | Believing the definition of a dense subspace must be adapted separately for each specific Banach space, missing that `math.fnal.banach-space`'s own norm gives one uniform definition | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dense-subspace.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.fnal.dense-subspace/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.fnal.dense-subspace",
+      "title": "WEIERSTRASS-TREATED-AS-MERELY-ANALOGOUS-TO-DENSITY",
+      "content": "| MC-2 | WEIERSTRASS-TREATED-AS-MERELY-ANALOGOUS-TO-DENSITY | Believing `math.real.weierstrass-approximation`'s theorem is merely similar to a density claim rather than literally an instance of this concept's definition, with the Bernstein construction already serving as the explicit witness | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dense-subspace.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.fnal.dense-subspace/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.fnal.dense-subspace",
+      "title": "NAMED-DENSITY-THEOREMS-TREATED-AS-UNRELATED",
+      "content": "| MC-3 | NAMED-DENSITY-THEOREMS-TREATED-AS-UNRELATED | Believing Weierstrass, $C^\\infty$-in-$L^p$, and trigonometric-in-$L^2$ density results are three unrelated facts to memorize separately, missing their shared underlying pattern | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dense-subspace.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.fnal.dense-subspace/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.dense-subspace",
+      "title": "One Density Definition, Stated Once, Applies Everywhere (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"One Density Definition, Stated Once, Applies Everywhere (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dense-subspace.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.fnal.dense-subspace/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.dense-subspace",
+      "title": "Weierstrass's Theorem Already IS a Density Statement, With a Witness Already in Hand (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Weierstrass's Theorem Already IS a Density Statement, With a Witness Already in Hand (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dense-subspace.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.fnal.dense-subspace/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.dense-subspace",
+      "title": "Three Named Theorems Are One Recurring Pattern (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Three Named Theorems Are One Recurring Pattern (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dense-subspace.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.fnal.dense-subspace/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.dense-subspace",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dense-subspace.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.fnal.dense-subspace/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.fnal.dense-subspace",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State the general definition of a dense subspace, in terms of `math.fnal.banach-space`'s own norm.\n  2. Verify directly (using the $\\varepsilon$-approximation condition) that the set of terminating decimals is dense in $\\mathbb{R}$.\n  3. Restate `math.real.weierstrass-approximation`'s theorem explicitly in this concept's $(X,S)$ density language, naming $X$ and $S$.\n  4. Explain why the $C^\\infty$-dense-in-$L^p$ result and the Weierstrass theorem are instances of the same general pattern, despite using different spaces and different approximating families.\n- **P76 (Transfer Probe, mode = cross-link probe engaging `math.real.weierstrass-approximation`)**: \"A numerical-analysis researcher wants to approximate an arbitrary continuous function $f$ on $[0,1]$ using a computer, and is choosing between two candidate approximation schemes: (i) evaluating higher-degree Bernstein polynomials, or (ii) using a different, as-yet-unspecified family of simple functions. (a) Using `math.real.weierstrass-approximation`'s own explicit Bernstein construction, explain precisely why scheme (i) is GUARANTEED to achieve any desired accuracy $\\varepsilon$ for a large enough degree $n$, citing this concept's general density condition directly. (b) Suppose the researcher instead wants to approximate an $L^2$ function (not necessarily continuous) using trigonometric polynomials. Explain, using this concept's SAME density framework (not a separately re-derived argument), why this is guaranteed to work in principle, and identify which specific density result justifies it. (c) Explain what would need to be checked to determine whether some THIRD, unfamiliar family of functions is dense in a given Banach space, using only this concept's general definition — without needing a brand-new theorem for that specific family.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dense-subspace.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.fnal.dense-subspace/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.fnal.dense-subspace",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.fnal.banach-space` (complete normed vector spaces; examples $\\mathbb{R}^n$, $L^p(\\mu)$, $C(K)$ with sup norm, $\\ell^p$; completeness).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dense-subspace.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.fnal.dense-subspace/reference/1",
+      "kind": "reference",
+      "conceptId": "math.fnal.dense-subspace",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.fnal.banach-space` (the norm and completeness structure this concept's density definition is built on directly).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.real.weierstrass-approximation`, checked via `ls docs/curriculum/blueprints/` and confirmed ALREADY authored (and its own metadata explicitly notes this concept as \"not yet authored\" at the time it was written — now resolved). $P76_{mode}=$ **cross-link probe**, engaging `math.real.weierstrass-approximation`'s own explicit Bernstein-polynomial construction directly as the density witness in Component 3's derivation and the P76 transfer probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dense-subspace.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
