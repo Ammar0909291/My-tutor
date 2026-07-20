@@ -8884,6 +8884,94 @@ const PURIF_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.elect.galvanic-cell ────────────────────────────────────────────────
+const GALV = 'chem.elect.galvanic-cell'
+const GALV_SRC = 'docs/chemistry/kg/graph.json — chem.elect.galvanic-cell'
+
+const GALV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GALV,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A galvanic (voltaic) cell converts a SPONTANEOUS redox reaction into usable ' +
+      'electrical energy by physically SEPARATING the oxidation and reduction ' +
+      'half-reactions into two compartments, forcing electrons to travel through an ' +
+      'external wire (doing electrical work) rather than transferring directly on contact. ' +
+      'Structure: the ANODE (where OXIDATION occurs, electrons are RELEASED — by ' +
+      'convention, negative terminal in a galvanic cell) and CATHODE (where REDUCTION ' +
+      'occurs, electrons are CONSUMED — positive terminal). Memory aid: "AN OX, RED CAT" ' +
+      '(ANode=OXidation, REDuction=CAThode) — this holds true regardless of cell type. A ' +
+      'SALT BRIDGE (containing an inert electrolyte) completes the circuit internally, ' +
+      'allowing ions to flow and maintain ELECTRICAL NEUTRALITY in both half-cells as the ' +
+      'reaction proceeds (without it, charge would build up and stop the reaction almost ' +
+      'immediately). Conventionally, electrons flow through the EXTERNAL wire from anode ' +
+      'to cathode, while (by convention) CURRENT is defined as flowing the opposite ' +
+      'direction (cathode to anode externally) since current direction is historically ' +
+      'defined by positive charge flow, opposite to actual electron movement.',
+    targetedMisconceptions: [`${GALV}:MC1`],
+    source: `${GALV_SRC} — galvanic cell structure, anode/cathode, salt bridge function, electron flow direction`,
+  },
+  {
+    conceptId: GALV,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "The anode is ALWAYS the negative terminal and cathode ALWAYS positive, in ' +
+      'every type of electrochemical cell." FALSE as a universal rule — this is true for ' +
+      'GALVANIC (spontaneous, energy-producing) cells specifically, but REVERSES for ' +
+      'ELECTROLYTIC cells (non-spontaneous, energy-CONSUMING, driven by an external power ' +
+      'source): there, the anode is connected to the power source\'s POSITIVE terminal ' +
+      '(forcing oxidation to happen there against its natural tendency), making the anode ' +
+      'POSITIVE and cathode NEGATIVE — opposite polarity from galvanic cells! The reliable, ' +
+      'UNIVERSAL rule across BOTH cell types is "AN OX, RED CAT" (anode=oxidation, ' +
+      'cathode=reduction) — polarity (+/−) depends on cell TYPE, but the ' +
+      'oxidation/reduction assignment to anode/cathode never changes. Second trap: "Without ' +
+      'a salt bridge, the reaction simply proceeds more slowly." FALSE — without a salt ' +
+      'bridge (or another ion-flow pathway), charge builds up almost IMMEDIATELY in each ' +
+      'compartment (positive ions accumulating at the anode, negative at the cathode), ' +
+      'creating an opposing electric field that essentially STOPS the reaction very ' +
+      'quickly, not merely slowing it down gradually.',
+    targetedMisconceptions: [`${GALV}:MC1`, `${GALV}:MC2`],
+    source: `${GALV_SRC} — misconception: anode/cathode polarity is fixed regardless of cell type; missing salt bridge just slows reaction`,
+  },
+]
+
+const GALV_PROBES: SeedProbe[] = [
+  {
+    conceptId: GALV,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In an electrolytic cell (non-spontaneous, driven by an external power source), is the anode positive or negative, and how does this compare to a galvanic cell?',
+    choices: [
+      { text: 'The anode is POSITIVE in an electrolytic cell (connected to the power source\'s positive terminal), OPPOSITE to a galvanic cell where the anode is negative — but "anode=oxidation, cathode=reduction" remains true in both', isCorrect: true },
+      { text: 'The anode is always negative in every type of electrochemical cell, galvanic or electrolytic, with no exceptions', isCorrect: false, misconceptionId: `${GALV}:MC1` },
+    ],
+    correctValue: 'Anode is positive in electrolytic cells (opposite of galvanic)',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${GALV}:MC1`],
+    source: `${GALV_SRC} — distractor targets assuming anode polarity is fixed across all cell types`,
+  },
+  {
+    conceptId: GALV,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student removes the salt bridge from a galvanic cell mid-experiment. Does the reaction simply proceed more slowly afterward, or does something more dramatic happen?',
+    choices: [
+      { text: 'The reaction stops almost immediately — without the salt bridge, charge builds up rapidly in each compartment, creating an opposing electric field that halts further electron flow, rather than merely slowing the process gradually', isCorrect: true },
+      { text: 'The reaction just proceeds more slowly, continuing at a reduced rate indefinitely', isCorrect: false, misconceptionId: `${GALV}:MC2` },
+    ],
+    correctValue: 'Reaction stops almost immediately, not just slows',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GALV}:MC2`],
+    source: `${GALV_SRC} — misconception: missing salt bridge merely slows the reaction rather than halting it`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -8994,6 +9082,7 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...IMF_EXPLANATIONS,
   ...ORGSPEC_EXPLANATIONS,
   ...PURIF_EXPLANATIONS,
+  ...GALV_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -9104,4 +9193,5 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...IMF_PROBES,
   ...ORGSPEC_PROBES,
   ...PURIF_PROBES,
+  ...GALV_PROBES,
 ]
