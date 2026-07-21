@@ -122,6 +122,29 @@ export function decideTeaching(u: StudentTurnUnderstanding): TeachingDecision {
         ['conversationIntent', 'studentIntent'])
     }
 
+    // D-0b — CLOSING IS PROTECTED (Milestone 5 P0 fix; decision-engine/07 §6
+    // + Correction 2): the affect budget is spent — NO content decision may
+    // fire past this point, not even serving authored memory. Unresolved
+    // states become the close's open loop / next-session queue; the close
+    // script (already injected by sessionLifecycle) renders through the LLM.
+    if (u.conversationIntent.value === 'session_closing') {
+      return make(u, 'ESCALATE_TO_LLM', 'D0b-CLOSING-PROTECT',
+        ['The session is CLOSING (affect budget spent): no new content, practice, probes, or repair may start (decision-engine/07 §6).',
+         'Unresolved cognitive states are queued for the next session, never resolved inside the close (decision-matrix Correction 2).'],
+        ['conversationIntent'])
+    }
+
+    // D-0c — LESSON ONE IS PROTOCOL-BOUND (Milestone 5 P0 fix; first-lesson/02
+    // §2 + 04 §1): the first-lesson flow (anchor → demonstrate → echo →
+    // ONE solo) outranks every generic content decision. The protocol block
+    // already injected by firstLessonGuard directs the renderer.
+    if (u.conversationIntent.value === 'first_lesson') {
+      return make(u, 'ESCALATE_TO_LLM', 'D0c-FIRST-LESSON-PROTOCOL',
+        ['First-lesson protocol is active: the locked lesson-one flow outranks generic practice/progression decisions (first-lesson/02 §2, 04 §1).',
+         'The firstLessonGuard block already injected directs the renderer.'],
+        ['conversationIntent'])
+    }
+
     // D-1 — AUTHORED CONTENT ALREADY IN HAND: Explanation Memory assembled
     // this very turn. Honor it (the live runtime serves it without an LLM call).
     if (u.explanationMemoryHits.length > 0) {
@@ -170,12 +193,20 @@ export function decideTeaching(u: StudentTurnUnderstanding): TeachingDecision {
         { conceptId: topicId(u.currentTopic.value) })
     }
 
-    // D-6 — LEARNER ASKED FOR HELP AND A VISUAL EXISTS: serve the visual
+    // D-6 — LEARNER ASKED FOR A DIAGRAM AND A VISUAL EXISTS: serve the visual
     // the existing detection already chose (detectVisual/visualRegistry).
+    // Milestone 5 P0 fix: the request KIND must match — a diagram is the
+    // right answer to a diagram request only; "explain differently" or
+    // "real-life example" requests are answered in their own register by
+    // the renderer, never converted into an unrequested visual.
     const visual = u.requiredVisualization.value
-    if (u.studentIntent.value === 'requesting_help' && visual !== 'unknown' && visual !== 'none') {
+    if (
+      u.studentIntent.value === 'requesting_help' &&
+      u.conversationSummary.helpRequestKind === 'diagram' &&
+      visual !== 'unknown' && visual !== 'none'
+    ) {
       return make(u, 'VISUALIZATION', 'D6-VISUAL-ON-REQUEST',
-        [`Learner explicitly asked for help and the visual pipeline already detected "${visual}" for this content.`],
+        [`Learner explicitly asked for a diagram and the visual pipeline already detected "${visual}" for this content.`],
         ['studentIntent', 'requiredVisualization'],
         { visualType: visual, conceptId: topicId(u.currentTopic.value) })
     }

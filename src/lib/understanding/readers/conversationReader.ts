@@ -64,10 +64,13 @@ export function readConversation(input: ConversationReaderInput): ConversationRe
   let conversationIntent: Sourced<ConversationIntent>
   if (input.recoveryKey) {
     conversationIntent = sourced('recovery', 'recoveryGuard', 0.9)
+  } else if (input.episode?.phase === 'CLOSING') {
+    // CLOSING outranks even the first-lesson protocol: a spent failure
+    // budget ends the session in lesson one too (its budget is 1 for
+    // exactly this reason — first-lesson/02 §2, decision-engine/07 §6).
+    conversationIntent = sourced('session_closing', 'sessionLifecycle', 0.9)
   } else if (input.firstLessonActive) {
     conversationIntent = sourced('first_lesson', 'sessionLifecycle', 0.9)
-  } else if (input.episode?.phase === 'CLOSING') {
-    conversationIntent = sourced('session_closing', 'sessionLifecycle', 0.9)
   } else if (input.freshBoundary || input.episode?.phase === 'OPENING') {
     conversationIntent = sourced('session_opening', 'sessionLifecycle', 0.85)
   } else if (input.episode?.phase === 'CORE') {
@@ -90,6 +93,7 @@ export function readConversation(input: ConversationReaderInput): ConversationRe
     lastAssistantAskedQuestion,
     currentMessageChars: message.length,
     currentMessageIsQuestion: isQuestion,
+    helpRequestKind: detectLearnerRequest(message),
     source: 'conversationHeuristic',
   }
 

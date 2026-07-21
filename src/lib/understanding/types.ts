@@ -105,6 +105,11 @@ export interface ConversationSummary {
   lastAssistantAskedQuestion: boolean
   currentMessageChars: number
   currentMessageIsQuestion: boolean
+  /** WHICH help the learner asked for (masteryGate.detectLearnerRequest) —
+   *  preserved so the Decision Engine can match the response to the request
+   *  (Milestone 5 P0 fix: a diagram is only the right answer to a diagram
+   *  request, not to "explain differently"). */
+  helpRequestKind: 'diagram' | 'real_life_example' | 'explain_differently' | null
   source: ProvenanceSource
 }
 
