@@ -99,6 +99,11 @@ const ENGINE_ROUTES: Record<TeachingDecisionType, { executor: DispatchExecutor; 
     engine: 'teaching-engine/prerequisite flow (KG edge + strategy blocks)',
     note: 'Step back one KG edge; existing blocks direct the renderer.',
   },
+  TEACH_DIRECTLY: {
+    executor: 'LLM_RENDERER',
+    engine: 'conversationState.ts turn directive (SHOW move, decideNextMove)',
+    note: 'No known prerequisite to target; the already-injected SHOW move directs the renderer to demonstrate with an example instead of asking.',
+  },
   PRACTICE: {
     executor: 'LLM_RENDERER',
     engine: 'teachingStrategy practice flow (strategy block already injected)',

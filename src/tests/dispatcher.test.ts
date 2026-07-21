@@ -77,6 +77,7 @@ describe('Dispatcher — routing table (decision → existing engine)', () => {
       ['ASK_DIAGNOSTIC_QUESTION', 'placementVerification'],
       ['DETECT_MISCONCEPTION', 'misconceptionEngine'],
       ['REVIEW_PREREQUISITE', 'prerequisite'],
+      ['TEACH_DIRECTLY', 'conversationState'],
       ['PRACTICE', 'teachingStrategy'],
       ['VISUALIZATION', 'detectVisual'],
       ['CONTINUE_LESSON', 'lesson runtime'],
@@ -92,7 +93,7 @@ describe('Dispatcher — routing table (decision → existing engine)', () => {
   it('groqRequired=false ONLY for the Explanation Memory executor (the Groq gate invariant)', () => {
     const all: TeachingDecision['decision'][] = [
       'SERVE_EXPLANATION_MEMORY', 'ASK_DIAGNOSTIC_QUESTION', 'DETECT_MISCONCEPTION',
-      'REVIEW_PREREQUISITE', 'PRACTICE', 'VISUALIZATION', 'CONTINUE_LESSON', 'ESCALATE_TO_LLM',
+      'REVIEW_PREREQUISITE', 'TEACH_DIRECTLY', 'PRACTICE', 'VISUALIZATION', 'CONTINUE_LESSON', 'ESCALATE_TO_LLM',
     ]
     for (const d of all) {
       const p = planDispatch(decisionOf(d), { assembledAvailable: true })
