@@ -136,10 +136,10 @@ describe('Brain Validation — would a human teacher do the same?', () => {
     expect(decision.decision).toBe('VISUALIZATION')
   })
 
-  it('V12: open question with no other evidence — teacher just answers (LLM floor, explicit)', () => {
+  it('V12: open question — teacher answers what was asked (P1: answer-student-first, ahead of the floor)', () => {
     const { decision } = run({ message: 'why is the sky blue?' })
     expect(decision.decision).toBe('ESCALATE_TO_LLM')
-    expect(decision.ruleId).toBe('D8-LLM-FLOOR')
+    expect(decision.ruleId).toBe('D4b-ANSWER-STUDENT-FIRST')
   })
 
   it('V14 (M6): confident-wrong — teacher treats it as a committed wrong rule, repairs before anything (migrated LAST-ANSWER READ)', () => {

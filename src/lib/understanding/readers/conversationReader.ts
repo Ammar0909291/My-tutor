@@ -35,6 +35,12 @@ export interface ConversationReaderOutput {
 }
 
 const QUESTION_OPENERS = /^(what|why|how|when|where|which|who|can|could|would|does|do|did|is|are|will|should)\b/i
+/** P1 Human Teacher Reasoning: hedging markers in the CURRENT message. */
+const HEDGE_RE = /\b(maybe|perhaps|possibly|probably|i think|i guess|not sure|i'?m guessing it)\b/i
+/** A short answer phrased as a question ("is it 4?", "12?", "so it's the numerator?")
+ *  while a question is pending — a tentative ANSWER, not a genuine question. */
+const TENTATIVE_ANSWER_OPENER = /^(is it|was it|so it'?s|it'?s|could it be|would it be|maybe|perhaps)\b/i
+const GENUINE_QUESTION_OPENER = /^(what|why|how|when|where|which|who)\b/i
 
 export function readConversation(input: ConversationReaderInput): ConversationReaderOutput {
   const message = input.message ?? ''
@@ -44,6 +50,17 @@ export function readConversation(input: ConversationReaderInput): ConversationRe
   const trimmed = message.trim()
   const isQuestion = /\?\s*$/.test(trimmed) || QUESTION_OPENERS.test(trimmed)
 
+  // P1 Human Teacher Reasoning: "is it 4?" / "maybe 12?" after a pending
+  // question is a hesitant ANSWER — the learner is offering a candidate
+  // without ownership, not asking for information. Misreading it as a
+  // question both misstates intent and hides the fragility signal.
+  const tentativeAnswer = lastAssistantAskedQuestion && trimmed.length > 0 && (
+    HEDGE_RE.test(trimmed) ||
+    (/\?\s*$/.test(trimmed) && trimmed.length <= 40 && TENTATIVE_ANSWER_OPENER.test(trimmed)) ||
+    (/\?\s*$/.test(trimmed) && trimmed.length <= 12 && !GENUINE_QUESTION_OPENER.test(trimmed))
+  )
+  const hedged = tentativeAnswer || (HEDGE_RE.test(trimmed) && trimmed.length > 0)
+
   // Intent ladder — most reliable existing detector first, heuristics after.
   let studentIntent: Sourced<StudentIntent>
   if (input.recoveryKey) {
@@ -52,6 +69,8 @@ export function readConversation(input: ConversationReaderInput): ConversationRe
     studentIntent = sourced('acknowledging', 'masteryGate', 0.85)
   } else if (detectLearnerRequest(message) !== null) {
     studentIntent = sourced('requesting_help', 'masteryGate', 0.8)
+  } else if (tentativeAnswer) {
+    studentIntent = sourced('answering', 'conversationHeuristic', 0.7)
   } else if (isQuestion) {
     studentIntent = sourced('asking_question', 'conversationHeuristic', 0.7)
   } else if (lastAssistantAskedQuestion && trimmed.length > 0) {
@@ -79,12 +98,17 @@ export function readConversation(input: ConversationReaderInput): ConversationRe
     conversationIntent = unknownValue<ConversationIntent>() as Sourced<ConversationIntent>
   }
 
-  // The learner's own signalled confidence — previous turn's SIGNAL tag.
+  // The learner's confidence: hedging in the CURRENT message is direct
+  // evidence and outranks the previous turn's SIGNAL (P1 reasoning fix —
+  // an expert teacher hears "maybe...?" as low confidence NOW, whatever
+  // last turn looked like).
   const sigConf = input.lastSignal?.confidence
   const confidence: Sourced<LearnerConfidence> =
-    sigConf === 'high' || sigConf === 'medium' || sigConf === 'low'
-      ? sourced(sigConf, 'signals:lastSignal', 0.6)
-      : (unknownValue<LearnerConfidence>() as Sourced<LearnerConfidence>)
+    hedged
+      ? sourced('low', 'conversationHeuristic', 0.7)
+      : sigConf === 'high' || sigConf === 'medium' || sigConf === 'low'
+        ? sourced(sigConf, 'signals:lastSignal', 0.6)
+        : (unknownValue<LearnerConfidence>() as Sourced<LearnerConfidence>)
 
   const conversationSummary: ConversationSummary = {
     turnCount: history.length,
@@ -94,6 +118,7 @@ export function readConversation(input: ConversationReaderInput): ConversationRe
     currentMessageChars: message.length,
     currentMessageIsQuestion: isQuestion,
     helpRequestKind: detectLearnerRequest(message),
+    hedged,
     source: 'conversationHeuristic',
   }
 

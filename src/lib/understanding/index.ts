@@ -80,7 +80,7 @@ const CONVERSATION_FALLBACK: ConversationReaderOutput = {
   conversationSummary: {
     turnCount: 0, userTurns: 0, assistantTurns: 0,
     lastAssistantAskedQuestion: false, currentMessageChars: 0,
-    currentMessageIsQuestion: false, helpRequestKind: null, source: 'unavailable',
+    currentMessageIsQuestion: false, helpRequestKind: null, hedged: false, source: 'unavailable',
   } satisfies ConversationSummary,
 }
 

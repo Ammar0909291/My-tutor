@@ -111,6 +111,11 @@ export interface ConversationSummary {
    *  (Milestone 5 P0 fix: a diagram is only the right answer to a diagram
    *  request, not to "explain differently"). */
   helpRequestKind: 'diagram' | 'real_life_example' | 'explain_differently' | null
+  /** P1 Human Teacher Reasoning: the CURRENT message hedges ("maybe 12?",
+   *  "is it 4?", "I think..."). A hedged answer is an answer given without
+   *  ownership — an expert teacher grounds it before advancing, so a
+   *  hedged turn is never blind-continued. */
+  hedged: boolean
   source: ProvenanceSource
 }
 

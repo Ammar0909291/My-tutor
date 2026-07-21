@@ -2379,6 +2379,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           )
           if (brainRuntimeActive) {
             serveFromMemory = dispatchPlanHoisted.executor === 'EXPLANATION_MEMORY' && assembled !== null
+            // P1 reasoning: a direct student question outranks canned
+            // content (D4b) — when the Brain routes an assembled turn to
+            // the LLM, record the real reason so the provider log never
+            // claims a bug.
+            if (!serveFromMemory && assembled !== null && memoryFallbackReason === null) {
+              memoryFallbackReason = 'Brain decision'
+            }
             // Milestone 4 (Brain Execution): the decision is authoritative.
             // For renderer-executed decisions, scope the LLM to the RENDERER
             // role for the engine the Brain selected — an additive block
@@ -2468,6 +2475,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           : memoryFallbackReason === 'Confidence failed' ? 'confidence_failed'
           : memoryFallbackReason === 'No asset (lookup error)' ? 'lookup_error'
           : memoryFallbackReason === 'Explanation Memory lookup error' ? 'lookup_error'
+          : memoryFallbackReason === 'Brain decision' ? 'brain_decision'
           : 'no_asset'
         const routed = await routeAI(
           [...historyMessages, { role: 'user', content: message }],

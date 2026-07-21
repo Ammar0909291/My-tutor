@@ -145,15 +145,6 @@ export function decideTeaching(u: StudentTurnUnderstanding): TeachingDecision {
         ['conversationIntent'])
     }
 
-    // D-1 — AUTHORED CONTENT ALREADY IN HAND: Explanation Memory assembled
-    // this very turn. Honor it (the live runtime serves it without an LLM call).
-    if (u.explanationMemoryHits.length > 0) {
-      return make(u, 'SERVE_EXPLANATION_MEMORY', 'D1-MEMORY-HIT',
-        ['Explanation Memory already assembled ACTIVE authored content for this turn (ADR 14 canonical serving path).'],
-        ['explanationMemoryHits'],
-        { assetIds: u.explanationMemoryHits.map((h) => h.assetId), conceptId: topicId(u.currentTopic.value) })
-    }
-
     // D-2 — HIGH-CONFIDENCE MISCONCEPTION: route into the existing repair
     // machinery (misconceptionEngine → elicit→commit→collide sequence).
     const highMisconception = u.misconceptionCandidates.find((m) => m.confidence === 'HIGH')
@@ -176,6 +167,48 @@ export function decideTeaching(u: StudentTurnUnderstanding): TeachingDecision {
          'Do not spot-correct and move on: elicit the reasoning, get commitment, collide it with one breaking case (misconceptions/ 7-step repair).'],
         ['masteryState'],
         { conceptId: topicId(u.currentTopic.value) })
+    }
+
+    // D-6 — LEARNER ASKED FOR A DIAGRAM AND A VISUAL EXISTS (P1 reasoning
+    // reorder: moved ABOVE practice/prereq/placement — a student who asks
+    // for a diagram after failing gets the diagram, not a drill). Serves
+    // the visual the existing detection already chose. The request KIND
+    // must match (Milestone 5 P0 fix): a diagram answers a diagram request
+    // only.
+    const visual = u.requiredVisualization.value
+    if (
+      u.studentIntent.value === 'requesting_help' &&
+      u.conversationSummary.helpRequestKind === 'diagram' &&
+      visual !== 'unknown' && visual !== 'none'
+    ) {
+      return make(u, 'VISUALIZATION', 'D6-VISUAL-ON-REQUEST',
+        [`Learner explicitly asked for a diagram and the visual pipeline already detected "${visual}" for this content.`],
+        ['studentIntent', 'requiredVisualization'],
+        { visualType: visual, conceptId: topicId(u.currentTopic.value) })
+    }
+
+    // D-4b — ANSWER THE STUDENT FIRST (P1 Human Teacher Reasoning fix): a
+    // genuine question or help request is NEVER drilled past. An expert
+    // teacher answers what was actually asked — re-explains, gives the
+    // example — before any practice, prerequisite review, probe, or canned
+    // content. Outranks memory serving too: a stored explanation keyed to
+    // the concept is not an answer to the student's specific question.
+    if (u.studentIntent.value === 'asking_question' || u.studentIntent.value === 'requesting_help') {
+      return make(u, 'ESCALATE_TO_LLM', 'D4b-ANSWER-STUDENT-FIRST',
+        ['The student asked something (a question or an explicit help request): respond to what they actually said before any teaching move.',
+         'Never drill past a question — unanswered questions teach the learner to stop asking (conversation-engine register law).'],
+        ['studentIntent'])
+    }
+
+    // D-1 — AUTHORED CONTENT ALREADY IN HAND: Explanation Memory assembled
+    // this very turn. Honor it (the live runtime serves it without an LLM
+    // call). Sits BELOW the answer-student-first rule: canned content never
+    // overrides a direct question (P1 reasoning reorder).
+    if (u.explanationMemoryHits.length > 0) {
+      return make(u, 'SERVE_EXPLANATION_MEMORY', 'D1-MEMORY-HIT',
+        ['Explanation Memory already assembled ACTIVE authored content for this turn (ADR 14 canonical serving path).'],
+        ['explanationMemoryHits'],
+        { assetIds: u.explanationMemoryHits.map((h) => h.assetId), conceptId: topicId(u.currentTopic.value) })
     }
 
     // D-3 — STRUGGLING WITH A KNOWN PREREQUISITE: step back one KG edge
@@ -206,28 +239,14 @@ export function decideTeaching(u: StudentTurnUnderstanding): TeachingDecision {
         { conceptId: topicId(u.currentTopic.value) })
     }
 
-    // D-6 — LEARNER ASKED FOR A DIAGRAM AND A VISUAL EXISTS: serve the visual
-    // the existing detection already chose (detectVisual/visualRegistry).
-    // Milestone 5 P0 fix: the request KIND must match — a diagram is the
-    // right answer to a diagram request only; "explain differently" or
-    // "real-life example" requests are answered in their own register by
-    // the renderer, never converted into an unrequested visual.
-    const visual = u.requiredVisualization.value
-    if (
-      u.studentIntent.value === 'requesting_help' &&
-      u.conversationSummary.helpRequestKind === 'diagram' &&
-      visual !== 'unknown' && visual !== 'none'
-    ) {
-      return make(u, 'VISUALIZATION', 'D6-VISUAL-ON-REQUEST',
-        [`Learner explicitly asked for a diagram and the visual pipeline already detected "${visual}" for this content.`],
-        ['studentIntent', 'requiredVisualization'],
-        { visualType: visual, conceptId: topicId(u.currentTopic.value) })
-    }
-
     // D-7 — HEALTHY PROGRESSION: last answer right, learner is answering/
-    // acknowledging mid-lesson → continue.
+    // acknowledging mid-lesson → continue. P1 reasoning fix: a HEDGED
+    // answer ("maybe 12?", "is it 4?") is never blind-continued — the
+    // teacher grounds it first (falls to the open floor, where the
+    // renderer responds to the tentative answer naturally).
     if (
       u.masteryState.value === 'progressing' &&
+      !u.conversationSummary.hedged &&
       (u.studentIntent.value === 'answering' || u.studentIntent.value === 'acknowledging')
     ) {
       return make(u, 'CONTINUE_LESSON', 'D7-PROGRESSING-CONTINUE',
