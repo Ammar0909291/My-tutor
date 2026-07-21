@@ -2351,6 +2351,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           sessionFailureCount: snapshotSessionFailureCount,
           episode: sessionEpisodeHoisted,
           freshBoundary: sessionEpisodeFreshHoisted,
+          // P0-4: conversationState.ts's own counter — read, never recomputed.
+          consecutivePriorKnowledgeProbes: conversationStateHoisted?.consecutivePriorKnowledgeProbes ?? 0,
           lastSuccessfulTeachingStyle,
           conceptId: resolvedConceptId ?? snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? null,
           placement: placementPrevHoisted,
@@ -2827,7 +2829,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Fail-closed: a null state never authorizes.
       if (!schoolCtx && conversationStateHoisted) {
         try {
-          const { advanceConversationState, repliesWithQuestion } = await import('@/lib/teaching/conversationState')
+          const { advanceConversationState, repliesWithQuestion, isPriorKnowledgeProbe } = await import('@/lib/teaching/conversationState')
           const { enforceStance } = await import('@/lib/teaching/stanceEnforcement')
           conversationStateAfterTurnHoisted = advanceConversationState(conversationStateHoisted, {
             askedQuestion: repliesWithQuestion(cleanText),
@@ -2835,6 +2837,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             recoveryFired: recoveryKeyHoisted !== null,
             learnerRequest: learnerRequestHoisted,
             misconceptionDetected: teachingSignal?.phrase !== undefined,
+            isPriorKnowledgeProbe: isPriorKnowledgeProbe(cleanText),
           })
           const stanceVerdict = enforceStance({
             text: cleanText,
@@ -3434,13 +3437,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (conversationStateAfterTurnHoisted) {
             conversationStateUpdate = { conversationState: conversationStateAfterTurnHoisted }
           } else if (conversationStateHoisted) {
-            const { advanceConversationState, repliesWithQuestion } = await import('@/lib/teaching/conversationState')
+            const { advanceConversationState, repliesWithQuestion, isPriorKnowledgeProbe } = await import('@/lib/teaching/conversationState')
             conversationStateUpdate = {
               conversationState: advanceConversationState(conversationStateHoisted, {
                 askedQuestion: repliesWithQuestion(cleanText),
                 signalCorrect: teachingSignal?.correctness ?? null,
                 recoveryFired: recoveryKeyHoisted !== null,
                 learnerRequest: learnerRequestHoisted,
+                isPriorKnowledgeProbe: isPriorKnowledgeProbe(cleanText),
               }),
             }
           }

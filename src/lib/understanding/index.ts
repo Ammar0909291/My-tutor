@@ -53,6 +53,8 @@ export interface UnderstandingInputs {
   sessionFailureCount: number
   episode: SessionEpisode | null
   freshBoundary: boolean
+  /** P0-4: read from conversationState.ts's own counter (see conversationReader.ts). */
+  consecutivePriorKnowledgeProbes: number
   lastSuccessfulTeachingStyle: string | null
   conceptId: string | null
   placement: PlacementVerificationState | null
@@ -93,6 +95,7 @@ export function understandStudentTurn(inputs: UnderstandingInputs): StudentTurnU
     episode: inputs.episode,
     freshBoundary: inputs.freshBoundary,
     firstLessonActive: inputs.firstLessonActive,
+    consecutivePriorKnowledgeProbes: inputs.consecutivePriorKnowledgeProbes,
   }), CONVERSATION_FALLBACK)
 
   const studentMemory = guard<StudentMemoryReaderOutput>(() => readStudentMemory({

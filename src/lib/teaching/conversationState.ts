@@ -65,6 +65,14 @@ export interface ConversationState {
    * same as every other counter here) — feeds stanceEnforcement.ts's
    * "misconception cannot be marked resolved without evidence" check. */
   misconceptionDetectedThisLesson: boolean
+  /** P0-4 (semantic loop detection): consecutive assistant turns whose
+   * question matched the prior-knowledge-elicitation family (isPriorKnow
+   * ledgeProbe), regardless of exact wording — "Have you seen X?" then
+   * "Can you think of X?" both count. Distinct from questionsAskedSince
+   * Teach (which counts ANY question): this tracks the SAME underlying
+   * ask repeated in different words. Resets whenever a turn's question
+   * (or non-question) isn't a probe of this family. */
+  consecutivePriorKnowledgeProbes: number
 }
 
 export function initialConversationState(conceptId: string | null): ConversationState {
@@ -81,6 +89,7 @@ export function initialConversationState(conceptId: string | null): Conversation
     diagramRequests: 0,
     exampleRequests: 0,
     misconceptionDetectedThisLesson: false,
+    consecutivePriorKnowledgeProbes: 0,
   }
 }
 
@@ -121,6 +130,28 @@ export interface TurnEvidence {
    * Optional so pre-existing call sites stay valid; undefined behaves as
    * false (no misconception signal this turn). */
   misconceptionDetected?: boolean
+  /** P0-4: did the assistant's (clean) reply match the prior-knowledge-
+   * elicitation question family (isPriorKnowledgeProbe)? Optional so
+   * pre-existing call sites stay valid; undefined behaves as false. */
+  isPriorKnowledgeProbe?: boolean
+}
+
+/**
+ * P0-4 (semantic loop detection): structural classifier for the prior-
+ * knowledge-elicitation question family — "Have you seen/heard/come
+ * across X?", "Can you think of X?", "What comes to mind when...?",
+ * "Do you know/recall X?". These share one underlying INTENT (checking
+ * what the learner already has, before teaching) regardless of exact
+ * wording — the same "understand by structure, not exact phrase" pattern
+ * QUESTION_OPENERS/STRONG_PATTERNS already use elsewhere in this codebase.
+ * Sibling to repliesWithQuestion(): both read the ASSISTANT's own text.
+ */
+const PRIOR_KNOWLEDGE_PROBE_RE =
+  /\b(have you (seen|heard( of)?|come across|encountered)|can you think of|what comes to mind|do you (know|recall|remember))\b/i
+
+export function isPriorKnowledgeProbe(assistantText: string): boolean {
+  const withoutCode = assistantText.replace(/```[\s\S]*?```/g, '')
+  return PRIOR_KNOWLEDGE_PROBE_RE.test(withoutCode)
 }
 
 function phaseIndex(p: TeachingPhase): number { return PHASE_ORDER.indexOf(p) }
@@ -166,6 +197,12 @@ export function advanceConversationState(
     // something — the evidence gate DEMONSTRATE→GUIDE needs.
     if (prev.phase !== 'OBSERVE') next.demonstrated = true
   }
+
+  // P0-4: consecutive prior-knowledge-probe counter — folded unconditionally
+  // like the Phase E counters above, independent of which branch follows.
+  next.consecutivePriorKnowledgeProbes = evidence.isPriorKnowledgeProbe
+    ? prev.consecutivePriorKnowledgeProbes + 1
+    : 0
 
   // Bug 5/6/11 — student-state counters for explicit action requests.
   if (evidence.learnerRequest === 'diagram') next.diagramRequests = prev.diagramRequests + 1
@@ -241,6 +278,11 @@ export interface NextMoveContext {
 export function decideNextMove(state: ConversationState, ctx: NextMoveContext): NextMove {
   // Recovery preempts — the recovery script already forbids questions.
   if (ctx.recoveryTurn) return 'teach'
+  // P0-4: semantic loop break — the same underlying question, reworded,
+  // twice in a row. More specific than the generic question budget below
+  // (which only counts, never recognizes repeated INTENT), so it is
+  // checked first and can fire even where the generic count alone would not.
+  if (state.consecutivePriorKnowledgeProbes >= 2) return 'show'
   // Hard question budget: two asks without a give → give.
   if (state.questionsAskedSinceTeach >= 2) {
     return state.consecutiveFailures >= 1 ? 'show' : 'teach'
@@ -342,6 +384,12 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   }
   if (p.nextMove === 'show' && p.workedExampleFirst) {
     lines.push('- Demonstrate first: this learner needs to SEE it work before being asked anything (worked-example-first is in force).')
+  }
+  // P0-4: name the specific reason when the semantic loop break is what
+  // forced this SHOW — a clearer signal than the generic worked-example-
+  // first wording above, since the LLM's OWN prior wording is the problem.
+  if (p.nextMove === 'show' && p.state.consecutivePriorKnowledgeProbes >= 2) {
+    lines.push('- Semantic loop detected: your last two turns asked the SAME underlying question in different words (e.g. "have you seen X" then "can you think of X") without landing. Do NOT ask a third rephrased version of it. Switch to a direct demonstration, worked example, or visualization instead — show them, don\'t ask again.')
   }
   if (p.visualType) {
     lines.push(`- Visual-first: a ${p.visualType.replace(/_/g, ' ')} teaches this faster than prose — lead with it (emit the VISUAL tag) and keep the text around it minimal.`)

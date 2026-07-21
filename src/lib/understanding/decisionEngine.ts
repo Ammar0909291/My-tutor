@@ -146,6 +146,23 @@ export function decideTeaching(u: StudentTurnUnderstanding): TeachingDecision {
         ['conversationIntent'])
     }
 
+    // D-0e — SEMANTIC QUESTION LOOP (P0-4 fix): 2+ consecutive assistant
+    // turns asked the SAME underlying question in different words (e.g.
+    // "have you seen X" then "can you think of X") — recognized by INTENT
+    // (conversationState.ts's isPriorKnowledgeProbe classifier), not exact
+    // phrase matching. Reuses TEACH_DIRECTLY outright (P0-2's decision, no
+    // new type): continuing to probe would just repeat the loop a third
+    // time. The turn-directive block already injected (extended for this
+    // fix with the semantic-loop line) directs the renderer to switch to
+    // demonstration/example/visualization instead of asking again.
+    if (u.conversationIntent.value === 'question_loop') {
+      return make(u, 'TEACH_DIRECTLY', 'D0e-QUESTION-LOOP-BREAK',
+        ['The last two assistant turns asked equivalent-intent questions in different words — a semantic loop, not genuine progression.',
+         'Switch to direct explanation/example/visualization; the buildTurnDirective SHOW block already injected directs the renderer.'],
+        ['conversationIntent'],
+        { conceptId: topicId(u.currentTopic.value) })
+    }
+
     // D-0d — SESSION OPENING IS PROTOCOL-BOUND (P0-1 lesson-introduction
     // fix): a fresh episode boundary on a non-first lesson outranks generic
     // content decisions the same way D0c protects lesson one — the learner

@@ -25,6 +25,11 @@ export interface ConversationReaderInput {
   episode: SessionEpisode | null
   freshBoundary: boolean
   firstLessonActive: boolean
+  /** P0-4: conversationState.ts's own counter — consecutive assistant
+   * turns whose question matched the prior-knowledge-elicitation family,
+   * regardless of exact wording. Read, never recomputed (conversationState.ts
+   * owns the classifier and the fold). */
+  consecutivePriorKnowledgeProbes: number
 }
 
 export interface ConversationReaderOutput {
@@ -90,6 +95,11 @@ export function readConversation(input: ConversationReaderInput): ConversationRe
     conversationIntent = sourced('session_closing', 'sessionLifecycle', 0.9)
   } else if (input.firstLessonActive) {
     conversationIntent = sourced('first_lesson', 'sessionLifecycle', 0.9)
+  } else if (input.consecutivePriorKnowledgeProbes >= 2) {
+    // P0-4: the same underlying question asked twice in different words —
+    // outranks session_opening/core_teaching the same way first_lesson does,
+    // since continuing to probe would just repeat the pattern a third time.
+    conversationIntent = sourced('question_loop', 'conversationState', 0.85)
   } else if (input.freshBoundary || input.episode?.phase === 'OPENING') {
     conversationIntent = sourced('session_opening', 'sessionLifecycle', 0.85)
   } else if (input.episode?.phase === 'CORE') {

@@ -14,6 +14,7 @@ import {
   decideNextMove,
   responseBudget,
   repliesWithQuestion,
+  isPriorKnowledgeProbe,
   detectAutonomyRequest,
   buildAutonomyBlock,
   buildTurnDirective,
@@ -30,13 +31,14 @@ import { buildTutorSystemPrompt } from '@/lib/ai/client'
 /** Fold a sequence of turns into the state machine. */
 function playTurns(
   start: ConversationState,
-  turns: Array<{ asked: boolean; correct: boolean | null; recovery?: boolean }>,
+  turns: Array<{ asked: boolean; correct: boolean | null; recovery?: boolean; priorKnowledgeProbe?: boolean }>,
 ): ConversationState {
   return turns.reduce(
     (s, t) => advanceConversationState(s, {
       askedQuestion: t.asked,
       signalCorrect: t.correct,
       recoveryFired: t.recovery ?? false,
+      isPriorKnowledgeProbe: t.priorKnowledgeProbe ?? false,
     }),
     start,
   )
@@ -225,6 +227,93 @@ describe('scenario 8 — repeated "I don\'t understand"', () => {
     }
     expect(responseBudget('expert', 0)).toBeNull()          // advanced: unlimited
     expect(responseBudget('expert', 2)).not.toBeNull()      // …until they struggle
+  })
+})
+
+// ── Scenario 9: semantic question loop (P0-4) ────────────────────────────────
+
+describe('scenario 9 — semantic question loop (paraphrased, not exact wording)', () => {
+  it.each([
+    'Have you seen a pulley before?',
+    'Have you heard of photosynthesis?',
+    'Can you think of an example of a lever?',
+    'What comes to mind when you think of momentum?',
+    'Do you know what osmosis is?',
+    'Do you recall what we covered about fractions?',
+  ])('%s → classified as a prior-knowledge probe', (text) => {
+    expect(isPriorKnowledgeProbe(text)).toBe(true)
+  })
+
+  it.each([
+    'What is the value of x in this equation?',
+    'Can you solve for y?',
+    'Here is the idea. Try it when ready.',
+    'Why does the ball fall faster than the feather?',
+  ])('%s → NOT a prior-knowledge probe (a real content question, or none)', (text) => {
+    expect(isPriorKnowledgeProbe(text)).toBe(false)
+  })
+
+  it('question marks inside code fences do not count (reuses the repliesWithQuestion convention)', () => {
+    expect(isPriorKnowledgeProbe('Look:\n```py\n# have you seen this pattern before?\nx = 1\n```\nDone.')).toBe(false)
+  })
+
+  it('two consecutive probes in DIFFERENT WORDS force SHOW on the third turn', () => {
+    let s = initialConversationState('c')
+    s = playTurns(s, [
+      { asked: true, correct: null, priorKnowledgeProbe: true },  // "Have you seen X?"
+      { asked: true, correct: null, priorKnowledgeProbe: true },  // "Can you think of X?"
+    ])
+    expect(s.consecutivePriorKnowledgeProbes).toBe(2)
+    const move = decideNextMove(s, { recoveryTurn: false, workedExampleFirst: false })
+    expect(move).toBe('show')
+  })
+
+  it('a single probe does not yet force the break', () => {
+    let s = initialConversationState('c')
+    s = playTurns(s, [{ asked: true, correct: null, priorKnowledgeProbe: true }])
+    expect(s.consecutivePriorKnowledgeProbes).toBe(1)
+    expect(decideNextMove(s, { recoveryTurn: false, workedExampleFirst: false })).toBe('ask')
+  })
+
+  it('a genuine content question in between resets the counter (not a loop)', () => {
+    let s = initialConversationState('c')
+    s = playTurns(s, [
+      { asked: true, correct: null, priorKnowledgeProbe: true },
+      { asked: true, correct: true, priorKnowledgeProbe: false }, // different, real question
+    ])
+    expect(s.consecutivePriorKnowledgeProbes).toBe(0)
+  })
+
+  it('fires BEFORE the generic 2-question budget would even matter — a more specific, earlier signal', () => {
+    // Two probe-type questions also trip the generic questionsAskedSinceTeach
+    // cap at the same count — this test pins that the semantic reason is
+    // available (consecutivePriorKnowledgeProbes), not just the generic one.
+    let s = initialConversationState('c')
+    s = playTurns(s, [
+      { asked: true, correct: null, priorKnowledgeProbe: true },
+      { asked: true, correct: null, priorKnowledgeProbe: true },
+    ])
+    expect(s.questionsAskedSinceTeach).toBe(2)
+    expect(s.consecutivePriorKnowledgeProbes).toBe(2)
+  })
+
+  it('the turn directive names the semantic loop specifically when it is what forced SHOW', () => {
+    let s = initialConversationState('c')
+    s = playTurns(s, [
+      { asked: true, correct: null, priorKnowledgeProbe: true },
+      { asked: true, correct: null, priorKnowledgeProbe: true },
+    ])
+    const move = decideNextMove(s, { recoveryTurn: false, workedExampleFirst: false })
+    const block = buildTurnDirective({ state: s, nextMove: move, maxParagraphs: null, workedExampleFirst: false, visualType: null })
+    expect(block).toMatch(/Semantic loop detected/i)
+    expect(block).toMatch(/do NOT ask a third rephrased version/i)
+  })
+
+  it('the semantic-loop line does not appear on an ordinary SHOW (worked-example-first only)', () => {
+    const s = initialConversationState('c')
+    const block = buildTurnDirective({ state: s, nextMove: 'show', maxParagraphs: null, workedExampleFirst: true, visualType: null })
+    expect(block).not.toMatch(/Semantic loop detected/i)
+    expect(block).toMatch(/Demonstrate first/i)
   })
 })
 

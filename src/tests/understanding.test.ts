@@ -20,6 +20,7 @@ function emptyInputs(overrides: Partial<UnderstandingInputs> = {}): Understandin
     sessionFailureCount: 0,
     episode: null,
     freshBoundary: false,
+    consecutivePriorKnowledgeProbes: 0,
     lastSuccessfulTeachingStyle: null,
     conceptId: null,
     placement: null,
@@ -86,6 +87,33 @@ describe('CUE Conversation Reader — intent from the detectors that already ran
     expect(u.studentIntent.value).toBe('expressing_distress')
     expect(u.studentIntent.source).toBe('recoveryGuard')
     expect(u.conversationIntent.value).toBe('recovery')
+  })
+
+  // P0-4: semantic loop detection — read from conversationState.ts's own
+  // counter, never recomputed by the CUE.
+  it('2+ consecutive prior-knowledge probes → question_loop intent', () => {
+    const u = understandStudentTurn(emptyInputs({ consecutivePriorKnowledgeProbes: 2 }))
+    expect(u.conversationIntent.value).toBe('question_loop')
+    expect(u.conversationIntent.source).toBe('conversationState')
+  })
+
+  it('a single probe does not yet trigger question_loop', () => {
+    const u = understandStudentTurn(emptyInputs({ consecutivePriorKnowledgeProbes: 1 }))
+    expect(u.conversationIntent.value).not.toBe('question_loop')
+  })
+
+  it('recovery still outranks question_loop (affect band wins)', () => {
+    const u = understandStudentTurn(emptyInputs({
+      recoveryKey: 'i_give_up', consecutivePriorKnowledgeProbes: 3,
+    }))
+    expect(u.conversationIntent.value).toBe('recovery')
+  })
+
+  it('question_loop outranks a plain session opening', () => {
+    const u = understandStudentTurn(emptyInputs({
+      freshBoundary: true, consecutivePriorKnowledgeProbes: 2,
+    }))
+    expect(u.conversationIntent.value).toBe('question_loop')
   })
 
   it('bare acknowledgement is acknowledging (masteryGate rule), never answering', () => {

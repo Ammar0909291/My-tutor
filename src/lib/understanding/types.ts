@@ -26,6 +26,7 @@ export type ProvenanceSource =
   | 'masteryGate'            // src/lib/teaching/masteryGate.ts heuristics (this turn)
   | 'signals:lastSignal'     // previous turn's SIGNAL tag, persisted in contextSnapshot
   | 'sessionLifecycle'       // src/lib/teaching/sessionLifecycle.ts episode state
+  | 'conversationState'      // src/lib/teaching/conversationState.ts counters (already computed this turn)
   | 'placementVerification'  // contextSnapshot.placementVerification state machine
   | 'teachingStrategy'       // src/lib/school/adaptive/teachingStrategy.ts (already computed this turn)
   | 'misconceptionEngine'    // src/lib/school/adaptive/misconceptionEngine.ts (already computed this turn)
@@ -62,6 +63,7 @@ export type StudentIntent =
 export type ConversationIntent =
   | 'recovery'             // affect band preempts teaching this turn
   | 'first_lesson'         // first-lesson protocol is active
+  | 'question_loop'        // P0-4: 2+ consecutive equivalent-intent probes, unlanded
   | 'session_opening'      // fresh episode boundary — OPENING phase
   | 'core_teaching'        // mid-episode CORE work
   | 'session_closing'      // affect budget spent — CLOSING

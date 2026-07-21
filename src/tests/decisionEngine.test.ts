@@ -21,6 +21,7 @@ function inputs(overrides: Partial<UnderstandingInputs> = {}): UnderstandingInpu
     sessionFailureCount: 0,
     episode: null,
     freshBoundary: false,
+    consecutivePriorKnowledgeProbes: 0,
     lastSuccessfulTeachingStyle: null,
     conceptId: null,
     placement: null,
@@ -88,6 +89,31 @@ describe('Decision Engine — the ladder, rule by rule', () => {
       lastSignal: { correctness: false }, sessionFailureCount: 3,
     })
     expect(d.decision).toBe('ESCALATE_TO_LLM')
+    expect(d.ruleId).toBe('D0-RECOVERY-PREEMPT')
+  })
+
+  // P0-4: semantic question loop reuses TEACH_DIRECTLY outright (P0-2's
+  // decision type) — no new decision type, no dispatcher change needed.
+  it('D0e: a semantic question loop (2+ equivalent-intent probes) forces TEACH_DIRECTLY', () => {
+    const d = decide({
+      consecutivePriorKnowledgeProbes: 2,
+      // A left-over correct/progressing signal — would route to
+      // D7-PROGRESSING-CONTINUE if the loop-break didn't preempt it.
+      lastSignal: { correctness: true },
+    })
+    expect(d.decision).toBe('TEACH_DIRECTLY')
+    expect(d.ruleId).toBe('D0e-QUESTION-LOOP-BREAK')
+  })
+
+  it('D0e does not fire on a single probe', () => {
+    const d = decide({ consecutivePriorKnowledgeProbes: 1 })
+    expect(d.ruleId).not.toBe('D0e-QUESTION-LOOP-BREAK')
+  })
+
+  it('D0: recovery still outranks D0e (affect band wins)', () => {
+    const d = decide({
+      message: 'I give up', recoveryKey: 'i_give_up', consecutivePriorKnowledgeProbes: 3,
+    })
     expect(d.ruleId).toBe('D0-RECOVERY-PREEMPT')
   })
 
