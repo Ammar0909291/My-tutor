@@ -114,10 +114,6 @@ export async function POST(req: Request) {
     const snapshotLastPrereqGap = typeof snapshot?.lastPrerequisiteGap === 'string' ? snapshot.lastPrerequisiteGap : null
     // P1: cumulative failure counter — incremented on recovery turns and false SIGNALs
     const snapshotSessionFailureCount = typeof snapshot?.sessionFailureCount === 'number' ? snapshot.sessionFailureCount : 0
-    // Sprint CH: active worked example carried across turns
-    const snapshotWorkedExample = (snapshot?.currentWorkedExample && typeof snapshot.currentWorkedExample === 'object')
-      ? snapshot.currentWorkedExample as { concept: string; currentStep: number; stepCount: number }
-      : null
     // W2-2 (ADR 09): lesson stage progress carried across turns
     const snapshotLessonStageProgress = (
       snapshot?.lessonStageProgress &&
@@ -137,37 +133,7 @@ export async function POST(req: Request) {
 
     const subjectCode = learnSession.subject.slug
     const ebEnabled = isEduBrainEnabled(subjectCode)
-
-    // ─── School Mode (Sprint BI) ───
-    // When the session carries a school chapter id and the learner is a school
-    // student, resolve the chapter from the board catalog. School progress uses
-    // the namespaced subjectCode so it never collides with global-mode rows.
-    let schoolCtx: {
-      board: string; grade: number; code: string
-      chapter: { id: string; order: number; title: string }
-      totalChapters: number; displayTitle: string
-    } | null = null
-    const snapshotChapterId = typeof snapshot?.schoolChapterId === 'string' ? snapshot.schoolChapterId : null
-    if (snapshotChapterId && profile?.userType === 'SCHOOL_STUDENT' && profile.educationBoard && profile.grade) {
-      try {
-        const { getSchoolChapters, schoolSubjectCode, chapterDisplayTitle } = await import('@/lib/school/schoolRouting')
-        const chapters = getSchoolChapters(profile.educationBoard, subjectCode, profile.grade)
-        const chapter = chapters.find((c) => c.id === snapshotChapterId)
-        if (chapter) {
-          schoolCtx = {
-            board: profile.educationBoard,
-            grade: profile.grade,
-            code: schoolSubjectCode(profile.educationBoard, subjectCode, profile.grade),
-            chapter,
-            totalChapters: chapters.length,
-            displayTitle: chapterDisplayTitle(chapter.title),
-          }
-        }
-      } catch (err) {
-        console.warn('[learn/chat] school context resolution skipped:', err)
-      }
-    }
-    const progressCode = schoolCtx?.code ?? subjectCode
+    const progressCode = subjectCode
 
     // Batch all per-request reads that are needed by multiple context blocks.
     // Sprint U: topicProgress was fetched 3× (KG synthesis, Library synthesis,
@@ -319,18 +285,6 @@ export async function POST(req: Request) {
       }
     }
 
-    // School sessions: the chapter IS the lesson — override any synthesized ctx.
-    if (schoolCtx) {
-      lessonCtx = {
-        currentLesson: schoolCtx.chapter.order,
-        totalLessons: schoolCtx.totalChapters,
-        lessonTitle: schoolCtx.displayTitle,
-        lessonGoal: `Master "${schoolCtx.displayTitle}" as prescribed by the ${schoolCtx.board === 'cbse' ? 'CBSE' : 'UP Board'} Class ${schoolCtx.grade} syllabus`,
-        unitTitle: learnSession.subject.name,
-        completedLessons: studentProgress?.completedLessons ?? [],
-      }
-    }
-
     const teachingLang = (profile?.teachingLanguage ?? 'en') as 'ru' | 'en' | 'hi'
     const profileCountry = (profile as any)?.country ?? 'global'
     // Route to YandexGPT whenever EITHER signal says Russian — country alone
@@ -358,22 +312,8 @@ export async function POST(req: Request) {
       contentRegister,
     )
 
-    // School Mode curriculum context (Sprint BI) — board/grade/chapter plus
-    // chapter KG topics and previously-covered node count, straight from the
-    // education graph. Additive and school-only; general learners never get it.
-    // Hoisted outside schoolCtx block so Sprint BX/BY/CB snapshot updates can reference them
-    let learnerProfHoisted: import('@/lib/school/adaptive/learningProfile').StudentLearningProfile | null = null
-    let lessonPlanHoisted: import('@/lib/school/adaptive/lessonPlanner').LessonPlan | null = null
-    let prereqGapHoisted: import('@/lib/school/adaptive/prerequisiteRecovery').PrerequisiteGap | null = null
     // W2-1 (ADR 08 §4a): Library-mode concept tracking — hoisted for post-AI persist.
     let libraryConceptNodeIdHoisted: string | null = null
-    // P0-1/P0-2 fix: School Mode's own forced-visual-render decision
-    // (mirrors the Library-only variables declared below for the same
-    // purpose) — declared here, ahead of use, since the detection runs
-    // inside the decide()/conceptNode block further up the request.
-    let schoolLearnerRequestHoisted: import('@/lib/teaching/masteryGate').LearnerRequest | null = null
-    let schoolAvailableVisualHoisted: import('@/lib/school/visuals/visualTypes').VisualType | null = null
-    let schoolForceVisualRenderHoisted = false
     // Visualization Registry Phase 2: server-authoritative visual attachment.
     // availableVisualHoisted is the registry/detectVisual match computed
     // pre-LLM; forceVisualRenderHoisted is set true only for an explicit
@@ -407,625 +347,30 @@ export async function POST(req: Request) {
     let hintBiasHoisted: import('@/lib/school/adaptive/teachingOutputBias').HintBiasKind | null = null
     // ADR 02 (docs/architecture/ADR_02_GENERAL_LEARNER_DIAGNOSTIC_LAYER.md): the
     // topicSlug the strategy-effectiveness log was actually written under this
-    // turn — school path uses schoolCtx.chapter.id, library path uses the
-    // current module's slug. Must match whatever was passed as `chapterId` into
-    // getTeachingStrategy() below, or the staleMate feedback loop silently reads
-    // back zero events forever.
+    // turn — the current module's slug. Must match whatever was passed as
+    // `chapterId` into getTeachingStrategy() below, or the staleMate feedback
+    // loop silently reads back zero events forever.
     let strategyTopicSlugHoisted: string | null = null
-    // Sprint CH: did THIS turn activate/continue a worked example?
-    let workedExampleActive = false
-    // Sprint W: deterministic inline-practice MCQ (generateInlinePractice.ts), computed
-    // below alongside the strategy block. Hoisted so it can be attached to the JSON
-    // response as a structured field once cleanText is finalized, the same pattern as
-    // strategyHoisted/outputBiasHoisted above.
-    let inlinePracticeHoisted: import('@/lib/school/practice/generateInlinePractice').InlinePracticeQuestion | null = null
-    // Sprint W gap A: the structured [HINT] tag's extracted text, hoisted the
-    // same way as inlinePracticeHoisted above so it can be attached to the
-    // JSON response once cleanText is finalized.
+    // Sprint W gap A: the structured [HINT] tag's extracted text, hoisted so
+    // it can be attached to the JSON response once cleanText is finalized.
     let hintHoisted: string | null = null
-    // W2-4 (ADR 11 §4.2): in-session signals collected when the reconciler flag is ON.
-    // null = flag OFF (signals bypass reconciler and inject directly into systemPrompt).
-    // [] or populated = flag ON (signals accumulate here and are reconciled once after collection).
-    let pendingSignals: import('@/lib/school/adaptive/sessionRecommendationReconciler').InSessionSignal[] | null = null
 
-    if (schoolCtx) {
-      if (process.env.ENABLE_SESSION_RECOMMENDATION_RECONCILER === '1') pendingSignals = []
-      // Hoisted so Phase 4 (weak-topic reinforcement) and Phase 6 (objectives)
-      // can be passed to buildGuidedTeachingPrompt below.
-      let guidedWeakTopicTitles: string[] = []
-      let guidedChapterObjectives: string[] = []
-      // Sprint BS: chapter KG nodes (for checkpoint node matching), checkpoint
-      // frequency for this learner's coaching mode, and retry/recovery flags
-      // derived from evaluating the previous turn's understanding check.
-      let chapterKgNodes: { id: string; title: string }[] = []
-      let checkpointFrequency: 'frequent' | 'normal' | 'reduced' = 'normal'
-      let pendingCheckpointRetry = false
-      let checkpointFailedAgain = false
-      let learnerProf: import('@/lib/school/adaptive/learningProfile').StudentLearningProfile | null = null
-
-      try {
-        const { buildSchoolTutorContext, getNodesForChapter } = await import('@/lib/education')
-        const { getSchoolChapters: _getChapters } = await import('@/lib/school/schoolRouting')
-        const ctx = buildSchoolTutorContext(schoolCtx.board, subjectCode, schoolCtx.grade, schoolCtx.chapter.id)
-        if (ctx) {
-          systemPrompt += `\n\nSCHOOL MODE — AUTHORITATIVE CURRICULUM CONTEXT:\n${ctx}\nThe student is a ${schoolCtx.board === 'cbse' ? 'CBSE' : 'UP Board'} Class ${schoolCtx.grade} student working on chapter ${schoolCtx.chapter.order} of ${schoolCtx.totalChapters}, "${schoolCtx.displayTitle}". Teach strictly at this grade level and within this chapter's scope (referencing previously covered chapters is fine). NEVER ask the student for their board, class, or chapter — you already know. Use NCERT/board-aligned terminology, methods, and examples appropriate for this class.`
-        }
-        // Phase 6: extract chapter node titles as objectives for guided teaching
-        const fullChapterForObj = _getChapters(schoolCtx.board, subjectCode, schoolCtx.grade)
-          .find((c) => c.id === schoolCtx!.chapter.id)
-        if (fullChapterForObj) {
-          const nodes = getNodesForChapter(fullChapterForObj)
-          guidedChapterObjectives = nodes.map((n) => n.title)
-          chapterKgNodes = nodes.map((n) => ({ id: n.id, title: n.title }))
-        }
-      } catch (err) {
-        console.warn('[learn/chat] school curriculum context skipped:', err)
-      }
-
-      // Sprint BS: in-session understanding-check evaluation. A lightweight AI
-      // classifier looks at the previous tutor turn + this student reply to
-      // detect a conversational checkpoint question and evaluate the answer,
-      // records the result, and derives this turn's checkpoint frequency
-      // (from the learner's coaching mode) and retry/recovery flags for the
-      // guided teaching prompt below. Writes only to LearningCheckpoint —
-      // never touches Practice/Assessment/TopicProgress/MistakeRecord.
-      try {
-        const { buildLearningProfile, checkpointFrequencyForMode } = await import('@/lib/school/adaptive/learningProfile')
-        learnerProf = await buildLearningProfile(userId, schoolCtx.grade, subjectCode, lastSuccessfulTeachingStyle, schoolCtx.board, schoolCtx.chapter.id, chapterKgNodes.map((n) => n.id))
-        learnerProfHoisted = learnerProf
-        checkpointFrequency = checkpointFrequencyForMode(learnerProf.preferredDifficulty)
-
-        const prevMsg = learnSession.messages[0]
-        if (prevMsg?.role === MessageRole.ASSISTANT) {
-          const { evaluateCheckpointTurn } = await import('@/lib/school/checkpoints/evaluateCheckpoint')
-          const { recordCheckpoint, getPendingRetry } = await import('@/lib/school/checkpoints/checkpointStats')
-          const checkpointEval = await evaluateCheckpointTurn(prevMsg.content, message, chapterKgNodes)
-          if (checkpointEval?.checkpointAsked && checkpointEval.question && checkpointEval.expectedAnswer) {
-            const pending = await getPendingRetry(userId, subjectCode, schoolCtx.chapter.id)
-            const hintUsed = pending !== null
-            await recordCheckpoint({
-              userId, board: schoolCtx.board, grade: schoolCtx.grade, subjectSlug: subjectCode,
-              chapterId: schoolCtx.chapter.id, kgNodeId: checkpointEval.nodeId,
-              question: checkpointEval.question, answer: checkpointEval.expectedAnswer,
-              userResponse: message, passed: checkpointEval.passed, hintUsed,
-            })
-            if (!checkpointEval.passed) {
-              if (hintUsed) checkpointFailedAgain = true
-              else pendingCheckpointRetry = true
-            }
-            // Sprint CA: advance spaced revision stage when checkpoint is on a
-            // previously-mastered node (tracks whether memory is being retained)
-            if (checkpointEval.nodeId) {
-              import('@/lib/school/adaptive/spacedRevision').then(({ advanceRevision }) =>
-                advanceRevision(userId, subjectCode, checkpointEval.nodeId!, checkpointEval.passed)
-              ).catch(() => {})
-
-              // Bridge: a conversational checkpoint is a single AI-judged, lenient
-              // signal — not a deterministic multi-question score like
-              // practice/submit. So it contributes a soft TopicProgress nudge
-              // (never MASTERED, never downgrades an already-mastered node) and,
-              // on a substantive failure, a MistakeRecord so misconception/weak-topic
-              // engines see it. Mirrors the never-downgrade pattern in
-              // school/practice/submit/route.ts but at lower confidence weight.
-              // Deflect/vague replies ("ok", "I'm tired", "what's next") demonstrate
-              // nothing about understanding either way, so they skip BOTH writes —
-              // a TopicProgress nudge or MistakeRecord there would be a false signal.
-              const nodeId = checkpointEval.nodeId
-              if (checkpointEval.engagement === 'substantive') {
-                ;(async () => {
-                  const existing = await prisma.topicProgress.findUnique({
-                    where: { userId_subjectSlug_topicSlug: { userId, subjectSlug: subjectCode, topicSlug: nodeId } },
-                    select: { status: true },
-                  }).catch(() => null)
-                  if (existing?.status === 'MASTERED' || existing?.status === 'COMPLETED') return
-                  const score = checkpointEval.passed ? 65 : 25
-                  await prisma.topicProgress.upsert({
-                    where: { userId_subjectSlug_topicSlug: { userId, subjectSlug: subjectCode, topicSlug: nodeId } },
-                    create: { userId, subjectSlug: subjectCode, topicSlug: nodeId, status: 'IN_PROGRESS', masteryPct: score, attempts: 1, lastScore: score },
-                    update: { status: 'IN_PROGRESS', masteryPct: score, lastScore: score, attempts: { increment: 1 } },
-                  }).catch(() => {})
-                  if (!checkpointEval.passed) {
-                    await prisma.mistakeRecord.create({
-                      data: {
-                        userId, subjectSlug: subjectCode, topicSlug: nodeId,
-                        sessionId: learnSession.id, category: 'conversational_checkpoint', questionId: nodeId,
-                      },
-                    }).catch(() => {})
-                  }
-                })().catch(() => {})
-              }
-            }
-          }
-        }
-      } catch (err) {
-        console.warn('[learn/chat] checkpoint evaluation skipped:', err)
-      }
-
-      // Sprint BO/BP: compact student status — weak topics + recommended next
-      // action, max 5 lines. Additive only.
-      try {
-        const { getWeakTopicsForSubject } = await import('@/lib/school/adaptive/weakTopics')
-        const { getChapterNextStep } = await import('@/lib/school/adaptive/nextBestAction')
-        const { getChapterProgressDetails } = await import('@/lib/school/schoolProgress')
-        const { getSchoolChapters } = await import('@/lib/school/schoolRouting')
-        const fullChapter = getSchoolChapters(schoolCtx.board, subjectCode, schoolCtx.grade)
-          .find((c) => c.id === schoolCtx!.chapter.id)
-        if (!fullChapter) throw new Error('chapter not found for status context')
-        const [weak, details] = await Promise.all([
-          getWeakTopicsForSubject(userId, subjectCode),
-          getChapterProgressDetails(userId, subjectCode, fullChapter, false),
-        ])
-        const weakTop = weak.slice(0, 5)
-        guidedWeakTopicTitles = weak.slice(0, 2).map((t) => t.title)
-        const nextStep = getChapterNextStep(details, schoolCtx.chapter.order < schoolCtx.totalChapters)
-        const actionLabel = nextStep === 'practice' ? 'Practice this chapter'
-          : nextStep === 'assessment' ? 'Take the chapter assessment'
-          : nextStep === 'next_chapter' ? 'Move to the next chapter' : 'Continue learning'
-        const lines = [
-          `- Current chapter: ${schoolCtx.displayTitle} (mastery: ${details.practiceStatus.replace('_', ' ')})`,
-          `- Recommended action: ${actionLabel}`,
-        ]
-        if (weakTop.length > 0) lines.push(`- Weak topics: ${weakTop.map((t) => t.title).join(', ')}`)
-        const statusBlock = `\n\nSTUDENT STATUS:\n${lines.join('\n')}\nWhen weak topics come up, slow down, check understanding with simple questions first, and reinforce fundamentals before moving on. Do not mention this status block explicitly.`
-        if (pendingSignals !== null) {
-          pendingSignals.push({ source: 'weak_topic', priority: 3, payload: statusBlock })
-        } else {
-          systemPrompt += statusBlock
-        }
-      } catch (err) {
-        console.warn('[learn/chat] student status context skipped:', err)
-      }
-
-      // Sprint CR: mastery intelligence — detect false mastery and guide tutor tone.
-      try {
-        const { getMasteryProfile, buildMasteryIntelligenceBlock } = await import('@/lib/school/adaptive/masteryIntelligence')
-        const { getSchoolChapters: _getChaptersForMastery } = await import('@/lib/school/schoolRouting')
-        const fullChapterForMastery = _getChaptersForMastery(schoolCtx.board, subjectCode, schoolCtx.grade)
-          .find((c: { id: string }) => c.id === schoolCtx!.chapter.id)
-        const kgNodeIds = fullChapterForMastery?.kgNodeIds ?? []
-        const masteryProfile = await getMasteryProfile(
-          userId, schoolCtx.board, schoolCtx.grade, subjectCode, schoolCtx.chapter.id, kgNodeIds
-        )
-        systemPrompt += buildMasteryIntelligenceBlock(masteryProfile)
-      } catch {
-        // non-fatal — mastery context is purely additive
-      }
-
-      // Phase 2H: assessment intelligence — decide whether an assessment is
-      // appropriate right now, and of what kind. Advisory only: surfaces a
-      // recommendation in the system prompt; never blocks or rewrites any
-      // existing assessment flow.
-      try {
-        const { getAssessmentDecision, buildAssessmentIntelligenceBlock } = await import('@/lib/school/adaptive/assessmentIntelligence')
-        const { getSchoolChapters: _getChaptersForAssessment } = await import('@/lib/school/schoolRouting')
-        const fullChapterForAssessment = _getChaptersForAssessment(schoolCtx.board, subjectCode, schoolCtx.grade)
-          .find((c: { id: string }) => c.id === schoolCtx!.chapter.id)
-        if (fullChapterForAssessment) {
-          const assessmentDecision = await getAssessmentDecision(
-            userId, schoolCtx.board, schoolCtx.grade, subjectCode, learnSession.subjectId, fullChapterForAssessment,
-          )
-          systemPrompt += buildAssessmentIntelligenceBlock(assessmentDecision)
-        }
-      } catch {
-        // non-fatal — assessment intelligence context is purely additive
-      }
-
-      // Sprint CS: misconception alert — detect specific misunderstanding patterns.
-      try {
-        const { detectMisconceptions, buildMisconceptionBlock, buildRemediationStrategy } = await import('@/lib/school/adaptive/misconceptionEngine')
-        const misconceptions = await detectMisconceptions(
-          userId, subjectCode, chapterKgNodes.map((n) => n.id), schoolCtx.chapter.id
-        )
-        cueObservations.misconceptions = misconceptions
-        const block = buildMisconceptionBlock(misconceptions)
-        if (block) {
-          systemPrompt += block
-          const topHighConfidence = misconceptions.find((m) => m.confidence === 'HIGH')
-          if (topHighConfidence) systemPrompt += buildRemediationStrategy(topHighConfidence)
-        }
-      } catch {
-        // non-fatal — misconception context is purely additive
-      }
-
-      // Sprint CT: concept transfer status — distinguish memorized procedure from real understanding.
-      try {
-        const { evaluateConceptTransfer, buildTransferReasoningBlock, generateTransferPrompt } = await import('@/lib/school/adaptive/conceptTransfer')
-        const transferProfile = await evaluateConceptTransfer(userId, subjectCode, schoolCtx.chapter.id)
-        const block = buildTransferReasoningBlock(transferProfile)
-        if (block) {
-          systemPrompt += block
-          if (transferProfile?.level === 'TRANSFER_WEAK') {
-            systemPrompt += generateTransferPrompt(subjectCode, chapterKgNodes.map((n) => n.id))
-          }
-        }
-      } catch {
-        // non-fatal — transfer context is purely additive
-      }
-
-      // Sprint CU: confidence calibration — detect overconfident/underconfident learners.
-      try {
-        const { getConfidenceProfile, buildConfidenceCalibrationBlock } = await import('@/lib/school/adaptive/confidenceCalibration')
-        // Include recent student messages from this session as live language signals
-        const recentStudentMessages = learnSession.messages
-          .filter((m) => m.role === MessageRole.USER)
-          .slice(0, 10)
-          .map((m) => m.content)
-        const confidenceProfile = await getConfidenceProfile(
-          userId, subjectCode, schoolCtx.chapter.id, recentStudentMessages
-        )
-        const block = buildConfidenceCalibrationBlock(confidenceProfile)
-        if (block) systemPrompt += block
-      } catch {
-        // non-fatal — confidence context is purely additive
-      }
-
-      // Sprint CV: learning momentum — detect engagement risk before drop-off.
-      try {
-        const { getLearningMomentum, buildMomentumBlock } = await import('@/lib/school/adaptive/learningMomentum')
-        const momentumProfile = await getLearningMomentum(userId)
-        systemPrompt += buildMomentumBlock(momentumProfile)
-      } catch {
-        // non-fatal — momentum context is purely additive
-      }
-
-      // Sprint CW: unified teaching strategy — single orchestrated directive from all signals.
-      try {
-        const { getTeachingStrategy, buildTeachingStrategyBlock } = await import('@/lib/school/adaptive/teachingStrategy')
-        const { getSchoolChapters: _getChaptersForStrategy } = await import('@/lib/school/schoolRouting')
-        const fullChapterForStrategy = _getChaptersForStrategy(schoolCtx.board, subjectCode, schoolCtx.grade)
-          .find((c: { id: string }) => c.id === schoolCtx!.chapter.id)
-        const strategyKgNodeIds = fullChapterForStrategy?.kgNodeIds ?? []
-        const teachingStrategy = await getTeachingStrategy(
-          userId, schoolCtx.board, schoolCtx.grade, subjectCode, schoolCtx.chapter.id, strategyKgNodeIds
-        )
-        systemPrompt += buildTeachingStrategyBlock(teachingStrategy)
-        // Teaching Strategy Engine (docs/TEACHING_ENGINE_SPEC.md): additively surface
-        // the strategy + its advisory output bias for the post-AI visual pipeline.
-        // Pure, synchronous; cannot stall the turn.
-        const { deriveOutputBias, deriveHintBias } = await import('@/lib/school/adaptive/teachingOutputBias')
-        strategyHoisted = teachingStrategy.type
-        strategyTopicSlugHoisted = schoolCtx.chapter.id
-        outputBiasHoisted = deriveOutputBias(teachingStrategy.type)
-
-        // Survey follow-up (practice questions were fully decoupled from
-        // chat): when strategy calls for application practice, or the
-        // strategy-effectiveness reader flagged a stalemate, generate one
-        // inline MCQ from this chapter and have the tutor close the turn
-        // with it. Non-fatal — failure just means no inline question.
-        //
-        // Sprint W output-bias gap fix: APPLICATION_FOCUS deliberately chose this
-        // practice question — it is never optional. But staleMate can fire
-        // alongside ANY strategy, including a SUPPRESS_OPTIONAL one (e.g. a
-        // MOMENTUM_RECOVERY turn for a struggling student). In that case the
-        // question only exists because of stalemate detection, not a deliberate
-        // pedagogical choice, so it counts as OPTIONAL and SUPPRESS_OPTIONAL skips
-        // generating it entirely — consistent with isOptionalInlinePractice.
-        if (teachingStrategy.type === 'APPLICATION_FOCUS' || teachingStrategy.staleMate) {
-          const { isOptionalInlinePractice } = await import('@/lib/school/adaptive/teachingOutputBias')
-          const practiceIsOptional = isOptionalInlinePractice(teachingStrategy.type, teachingStrategy.staleMate)
-          const suppressPractice = outputBiasHoisted?.kind === 'SUPPRESS_OPTIONAL' && practiceIsOptional
-          if (!suppressPractice) {
-            try {
-              const { generateInlinePractice } = await import('@/lib/school/practice/generateInlinePractice')
-              const { SCHOOL_SUBJECT_META } = await import('@/lib/school/schoolRouting')
-              if (fullChapterForStrategy) {
-                const subjectName = SCHOOL_SUBJECT_META[subjectCode]?.label ?? subjectCode
-                const inlinePractice = await generateInlinePractice(
-                  schoolCtx.board, subjectCode, subjectName, schoolCtx.grade, fullChapterForStrategy,
-                  userId, prisma,
-                ).catch(() => null)
-                if (inlinePractice) {
-                  inlinePracticeHoisted = inlinePractice
-                  systemPrompt += `\n\nEnd your response with a short one-sentence transition inviting the student to try a quick practice question, then end with exactly this tag on its own line and nothing after it: [INLINE_PRACTICE]\nDo not write out the question, its options, or the answer yourself — the app displays them in a separate interactive card.`
-                }
-              }
-            } catch {
-              // non-fatal — inline practice is purely additive
-            }
-          }
-        }
-
-        // Sprint W gap A: a structured [HINT] action type. Previously a hint
-        // was only ever folded into the tutor's own prose (driven by each
-        // strategy's STRATEGY_ACTION_DIRECTIVE text) with no way for the
-        // student to control when it's revealed. The bias is advisory only —
-        // PREFERRED nudges the model to reach for the tag when the student
-        // seems stuck or has gotten the same thing wrong 2+ times in this
-        // conversation; SUPPRESSED tells it not to, since a hint contradicts
-        // that strategy's directive to explain directly; NEUTRAL leaves
-        // today's prose-only behavior as the default with no extra push.
-        hintBiasHoisted = deriveHintBias(teachingStrategy.type)
-        if (hintBiasHoisted === 'PREFERRED') {
-          systemPrompt += `\n\nHINT TAG: If the student seems stuck or has gotten this same question wrong 2 or more times in this conversation, do NOT give away the full answer. Instead, end your response with a single short, specific hint wrapped exactly like this on its own line: [HINT]your hint text here[/HINT]\nThe hint must nudge toward the next step only — never state the final answer inside the tag. Omit the tag entirely if the student is not stuck.`
-        } else if (hintBiasHoisted === 'SUPPRESSED') {
-          systemPrompt += `\n\nDo not use a [HINT] tag this turn — explain directly and clearly instead, per this strategy's directive.`
-        }
-      } catch {
-        // non-fatal — strategy + bias context is purely additive
-      }
-
-      // Sprint CX: longitudinal learning narrative — let the tutor acknowledge growth over time.
-      try {
-        const { getLearningNarrative, buildLearningNarrativeBlock } = await import('@/lib/school/adaptive/learningNarrative')
-        const { getSchoolChapters: _getChaptersForNarrative } = await import('@/lib/school/schoolRouting')
-        const fullChapterForNarrative = _getChaptersForNarrative(schoolCtx.board, subjectCode, schoolCtx.grade)
-          .find((c: { id: string }) => c.id === schoolCtx!.chapter.id)
-        const narrativeKgNodeIds = fullChapterForNarrative?.kgNodeIds ?? []
-        const narrative = await getLearningNarrative(
-          userId, schoolCtx.board, schoolCtx.grade, subjectCode, schoolCtx.chapter.id, narrativeKgNodeIds
-        )
-        const narrativeBlock = buildLearningNarrativeBlock(narrative)
-        if (pendingSignals !== null && narrative !== null) {
-          pendingSignals.push({ source: 'narrative', priority: 1, payload: narrativeBlock, trend: narrative.trend as import('@/lib/school/adaptive/sessionRecommendationReconciler').LearningTrend })
-        } else {
-          systemPrompt += narrativeBlock
-        }
-      } catch {
-        // non-fatal — narrative context is purely additive
-      }
-
-      // Sprint BQ: daily plan context — "Task X of Y" so tutor knows where
-      // this lesson sits in today's schedule. Additive only, max 1 line.
-      try {
-        const { getDailyStudyPlan } = await import('@/lib/school/adaptive/dailyPlan')
-        const dailyTasks = await getDailyStudyPlan(userId, schoolCtx.board, schoolCtx.grade)
-        const taskIdx = dailyTasks.findIndex((t) => t.chapterId === schoolCtx!.chapter.id)
-        if (taskIdx !== -1) {
-          const dailyPlanBlock = `\n\nDAILY STUDY PLAN: Task ${taskIdx + 1} of ${dailyTasks.length} for today. Keep the session focused and within the chapter scope.`
-          if (pendingSignals !== null) {
-            pendingSignals.push({ source: 'daily_plan', priority: 4, payload: dailyPlanBlock })
-          } else {
-            systemPrompt += dailyPlanBlock
-          }
-        }
-      } catch {
-        // non-fatal — plan context is purely additive
-      }
-
-      // Sprint BP (Tutoring Quality): guided teaching strategy — understanding
-      // checks, grade-aware depth, confusion recovery, weak-topic reinforcement,
-      // example-first teaching, objective awareness, session completion signal.
-      try {
-        const { buildGuidedTeachingPrompt } = await import('@/lib/school/tutoring/guidedTeachingPrompt')
-        systemPrompt += buildGuidedTeachingPrompt({
-          board: schoolCtx.board,
-          grade: schoolCtx.grade,
-          subjectSlug: subjectCode,
-          weakTopicTitles: guidedWeakTopicTitles,
-          chapterObjectives: guidedChapterObjectives,
-          checkpointFrequency,
-          pendingCheckpointRetry,
-          checkpointFailedAgain,
-        })
-      } catch (err) {
-        console.warn('[learn/chat] guided teaching prompt skipped:', err)
-      }
-
-      // Sprint BR: student learning profile — coaching mode, strengths/weaknesses,
-      // smart questioning, phase 4 weak-node recovery, phase 3 explanation depth.
-      try {
-        const { buildLearningProfile, formatLearningProfileContext } = await import('@/lib/school/adaptive/learningProfile')
-        learnerProf = learnerProf ?? await buildLearningProfile(userId, schoolCtx.grade, subjectCode, lastSuccessfulTeachingStyle, schoolCtx.board)
-        learnerProfHoisted = learnerProf
-        systemPrompt += formatLearningProfileContext(learnerProf)
-
-        // Sprint BX: inject teaching style instructions into system prompt
-        if (learnerProf.preferredTeachingStyle.confidence !== 'low') {
-          const { buildTeachingStyleBlock } = await import('@/lib/school/adaptive/teachingStyle')
-          systemPrompt += buildTeachingStyleBlock(learnerProf.preferredTeachingStyle)
-        }
-
-        // Phase 4: if this chapter has weak nodes, add recovery instruction
-        if (guidedWeakTopicTitles.length > 0) {
-          systemPrompt += `\n\nWEAK TOPIC RECOVERY (this chapter): When introducing a concept related to ${guidedWeakTopicTitles[0]}, briefly revisit the underlying prerequisite idea first, mention one common mistake students make, then provide one extra worked example. Limit this recovery to a single example — do not pad the response.`
-        }
-      } catch (err) {
-        console.warn('[learn/chat] learning profile context skipped:', err)
-      }
-
-      // Sprint CH: interactive worked examples — solve WITH the student step by step.
-      // Activates when the student asks to be walked through a problem, or when a
-      // worked example is already in progress from a previous turn.
-      try {
-        const { detectWorkedExampleIntent, buildWorkedExampleBlock } = await import('@/lib/school/tutoring/workedExamples')
-        const difficultyMode = learnerProfHoisted?.preferredDifficulty ?? 'standard'
-        if (snapshotWorkedExample) {
-          // Resume an in-progress example
-          workedExampleActive = true
-          systemPrompt += buildWorkedExampleBlock({
-            concept: snapshotWorkedExample.concept,
-            difficultyMode,
-            resuming: true,
-            currentStep: snapshotWorkedExample.currentStep,
-            totalSteps: snapshotWorkedExample.stepCount,
-          })
-        } else {
-          const concept = detectWorkedExampleIntent(message, subjectCode)
-          if (concept) {
-            workedExampleActive = true
-            systemPrompt += buildWorkedExampleBlock({ concept, difficultyMode })
-          }
-        }
-      } catch (err) {
-        console.warn('[learn/chat] worked example context skipped:', err)
-      }
-
-      // Sprint CO: primary student goal from the unified Learning Navigator
-      // Sprint CK: enrich with roadmap progress for the current subject
-      try {
-        const { getLearningNavigatorAction, buildNavigatorSystemPromptBlock } = await import('@/lib/school/navigation/learningNavigator')
-        const action = await getLearningNavigatorAction(userId, schoolCtx.board, schoolCtx.grade)
-        if (action) systemPrompt += buildNavigatorSystemPromptBlock(action)
-
-        const { getSubjectRoadmap, roadmapProgressPhrase } = await import('@/lib/school/roadmap/learningRoadmap')
-        const roadmap = await getSubjectRoadmap(userId, schoolCtx.board, schoolCtx.grade, subjectCode).catch(() => null)
-        if (roadmap && roadmap.totalCount > 0) {
-          systemPrompt += `\n\nROADMAP PROGRESS: The student is ${roadmapProgressPhrase(roadmap)}. You may occasionally acknowledge this long-term progress to motivate them (e.g. "You're ${roadmap.completionPercent}% through ${roadmap.subjectLabel}!"). Do not over-use it — keep the focus on the current concept.`
-        }
-      } catch (err) {
-        console.warn('[learn/chat] navigator context skipped:', err)
-      }
-
-      // Sprint BY: lesson plan — derive chapter roadmap from existing progress data
-      // and inject as CURRENT LESSON PLAN block. Additive, try/catch, never blocks.
-      try {
-        const { buildLessonPlan, buildLessonPlanBlock } = await import('@/lib/school/adaptive/lessonPlanner')
-        const { getNodesForChapter: _getNodes } = await import('@/lib/education')
-        const { getSchoolChapters: _getChapsByForPlan } = await import('@/lib/school/schoolRouting')
-        const fullChapterForPlan = _getChapsByForPlan(schoolCtx.board, subjectCode, schoolCtx.grade)
-          .find((c) => c.id === schoolCtx!.chapter.id)
-        if (fullChapterForPlan) {
-          const planNodes = _getNodes(fullChapterForPlan)
-          const plan = await buildLessonPlan(
-            userId,
-            subjectCode,
-            schoolCtx.chapter.id,
-            schoolCtx.displayTitle,
-            planNodes,
-          )
-          lessonPlanHoisted = plan
-          const planBlock = buildLessonPlanBlock(plan)
-          if (planBlock) systemPrompt += planBlock
-        }
-      } catch (err) {
-        console.warn('[learn/chat] lesson plan context skipped:', err)
-      }
-
-      // Sprint CA: spaced revision — inject DUE FOR REVIEW block when mastered
-      // concepts in this chapter are due for a memory refresh.
-      try {
-        const { getDueRevisions, buildRevisionBlock } = await import('@/lib/school/adaptive/spacedRevision')
-        const dueRevisions = await getDueRevisions(userId, subjectCode, chapterKgNodes.map((n) => n.id))
-        const revBlock = buildRevisionBlock(dueRevisions)
-        if (revBlock) systemPrompt += revBlock
-      } catch (err) {
-        console.warn('[learn/chat] spaced revision context skipped:', err)
-      }
-
-      // Sprint CB: prerequisite gap detection — only inject when confidence is high.
-      // Avoids overwhelming the student with recovery prompts on low-signal turns.
-      try {
-        const { detectPrerequisiteGap, buildPrerequisiteAlertBlock } = await import('@/lib/school/adaptive/prerequisiteRecovery')
-        const { getNodesForChapter: _getNodesForPrereq } = await import('@/lib/education')
-        const { getSchoolChapters: _getChapsForPrereq } = await import('@/lib/school/schoolRouting')
-        const fullChapterForPrereq = _getChapsForPrereq(schoolCtx.board, subjectCode, schoolCtx.grade)
-          .find((c) => c.id === schoolCtx!.chapter.id)
-        if (fullChapterForPrereq) {
-          const prereqNodes = _getNodesForPrereq(fullChapterForPrereq)
-          const gap = await detectPrerequisiteGap(userId, subjectCode, schoolCtx.chapter.id, prereqNodes)
-          if (gap && gap.confidence === 'high') {
-            prereqGapHoisted = gap
-            systemPrompt += buildPrerequisiteAlertBlock(gap)
-          }
-        }
-      } catch (err) {
-        console.warn('[learn/chat] prerequisite recovery context skipped:', err)
-      }
-
-      // Sprint CE: exam readiness block — inject when profile has readiness data
-      try {
-        if (learnerProfHoisted?.examReadinessSummary) {
-          const { getExamReadinessForSubject, buildExamReadinessBlock } = await import('@/lib/school/adaptive/examReadiness')
-          const { ALL_KG_NODES } = await import('@/lib/education')
-          const nodeMap = new Map(ALL_KG_NODES.map((n: import('@/lib/education').KnowledgeNode) => [n.id, n.title]))
-          const readiness = await getExamReadinessForSubject(userId, schoolCtx.board, schoolCtx.grade, subjectCode)
-          const block = buildExamReadinessBlock(readiness, (id) => nodeMap.get(id) ?? id)
-          if (block) {
-            if (pendingSignals !== null) {
-              pendingSignals.push({ source: 'exam_readiness', priority: 2, payload: block })
-            } else {
-              systemPrompt += block
-            }
-          }
-        }
-      } catch (err) {
-        console.warn('[learn/chat] exam readiness context skipped:', err)
-      }
-
-      // W2-4 (ADR 11 §4.2): reconcile and inject collected in-session signals.
-      if (pendingSignals !== null && pendingSignals.length > 0) {
-        const { reconcileSessionSignals } = await import('@/lib/school/adaptive/sessionRecommendationReconciler')
-        const reconciled = reconcileSessionSignals(pendingSignals)
-        if (reconciled.systemPromptBlock) systemPrompt += reconciled.systemPromptBlock
-      }
-
-      // Sprint CF: mock test insights block — inject most recent mock result for this subject
-      try {
-        const recentMock = await prisma.practiceSession.findFirst({
-          where: { userId, subjectSlug: subjectCode, kind: 'mock', completedAt: { not: null } },
-          orderBy: { completedAt: 'desc' },
-          select: { score: true, questions: true, completedAt: true },
-        }).catch(() => null)
-        if (recentMock && typeof recentMock.score === 'number') {
-          const { ALL_KG_NODES } = await import('@/lib/education')
-          const nodeMap = new Map(ALL_KG_NODES.map((n: import('@/lib/education').KnowledgeNode) => [n.id, n.title]))
-          const { buildMockTestInsightsBlock } = await import('@/lib/school/exams/mockTestEngine')
-          // Derive strong/weak from question-level scores stored in review (not persisted here — use mistake records as proxy)
-          const since7 = new Date(Date.now() - 7 * 86400000)
-          const recentMistakeNodes = await prisma.mistakeRecord.findMany({
-            where: { userId, subjectSlug: subjectCode, category: 'mock_test', createdAt: { gte: since7 } },
-            select: { topicSlug: true },
-          }).catch(() => [] as { topicSlug: string }[])
-          const weakTitles = [...new Set(recentMistakeNodes.map((r) => nodeMap.get(r.topicSlug) ?? r.topicSlug))].filter(Boolean).slice(0, 4)
-          const subjectMeta = (await import('@/lib/school/schoolRouting')).SCHOOL_SUBJECT_META
-          const block = buildMockTestInsightsBlock(subjectMeta[subjectCode]?.label ?? subjectCode, recentMock.score, [], weakTitles)
-          if (block) systemPrompt += block
-        }
-      } catch (err) {
-        console.warn('[learn/chat] mock test insights skipped:', err)
-      }
-
-      // Sprint CI: note when revision notes have been generated for this chapter,
-      // so the tutor can point the student to them when relevant.
-      try {
-        const notesCount = await prisma.revisionNotesCache.count({
-          where: { board: schoolCtx.board, subjectSlug: subjectCode, grade: schoolCtx.grade, chapterId: schoolCtx.chapter.id },
-        }).catch(() => 0)
-        if (notesCount > 0) {
-          systemPrompt += `\n\nREVISION NOTES AVAILABLE: Concise revision notes (Quick Revision, Exam Revision${schoolCtx && (subjectCode === 'mathematics' || subjectCode === 'science') ? ', Formula Sheet' : ''}) have been generated for this chapter and can be opened from the chapter page via "Generate Revision Notes". If the student asks for a summary, key points, or quick revision, you may mention these are available — but still answer their question directly.`
-        }
-      } catch (err) {
-        console.warn('[learn/chat] revision notes hint skipped:', err)
-      }
-
-      // Sprint BW: visual learning aids — detect the best visual for this chapter
-      // and instruct the tutor to emit a VISUAL:<type> tag when helpful.
-      // Additive only — never blocks, never modifies existing context.
-      try {
-        const { detectVisual, buildVisualsSystemBlock } = await import('@/lib/school/visuals/detectVisual')
-        const availableVisual = detectVisual({
-          subjectSlug: subjectCode,
-          chapterTitle: schoolCtx.chapter.title,
-          lessonTitle: lessonCtx?.lessonTitle,
-        })
-        cueObservations.availableVisual = availableVisual
-        cueObservations.visualDetectionRan = true
-        const visualBlock = buildVisualsSystemBlock(availableVisual)
-        if (visualBlock) systemPrompt += visualBlock
-      } catch (err) {
-        console.warn('[learn/chat] visual aids context skipped:', err)
-      }
-    }
-
-    // Visual learning aids for SUBJECT_LIBRARY subjects — same Sprint BW
-    // detectVisual()/buildVisualsSystemBlock() the school flow uses above,
-    // here scoped to the Library lesson's own unit/lesson titles instead of
-    // schoolCtx.chapter.title. Purely additive; never blocks a lesson.
-    if (!schoolCtx) {
-      try {
-        const { detectVisual, buildVisualsSystemBlock } = await import('@/lib/school/visuals/detectVisual')
-        const availableVisual = detectVisual({
-          subjectSlug: subjectCode,
-          chapterTitle: lessonCtx?.unitTitle ?? '',
-          lessonTitle: lessonCtx?.lessonTitle,
-        })
-        cueObservations.availableVisual = availableVisual
-        cueObservations.visualDetectionRan = true
-        const visualBlock = buildVisualsSystemBlock(availableVisual)
-        if (visualBlock) systemPrompt += visualBlock
-      } catch (err) {
-        console.warn('[learn/chat] library visual aids context skipped:', err)
-      }
+    // Visual learning aids for SUBJECT_LIBRARY subjects — Sprint BW
+    // detectVisual()/buildVisualsSystemBlock(), scoped to the Library lesson's
+    // own unit/lesson titles. Purely additive; never blocks a lesson.
+    try {
+      const { detectVisual, buildVisualsSystemBlock } = await import('@/lib/school/visuals/detectVisual')
+      const availableVisual = detectVisual({
+        subjectSlug: subjectCode,
+        chapterTitle: lessonCtx?.unitTitle ?? '',
+        lessonTitle: lessonCtx?.lessonTitle,
+      })
+      cueObservations.availableVisual = availableVisual
+      cueObservations.visualDetectionRan = true
+      const visualBlock = buildVisualsSystemBlock(availableVisual)
+      if (visualBlock) systemPrompt += visualBlock
+    } catch (err) {
+      console.warn('[learn/chat] library visual aids context skipped:', err)
     }
 
     // Append the personalized roadmap context (if one exists) so the tutor
@@ -1105,7 +450,7 @@ export async function POST(req: Request) {
     // subject's own lesson slugs (its MistakeRecord topicSlugs) instead of KG
     // node ids. Purely additive context; reuses the existing taxonomy + engine
     // with no schema or engine change, and never blocks a lesson.
-    if (!schoolCtx && ebEnabled) {
+    if (ebEnabled) {
       try {
         const { findLibrarySubject } = await import('@/lib/curriculum/subjectCatalog')
         const libSubject = findLibrarySubject(subjectCode)
@@ -1135,9 +480,9 @@ export async function POST(req: Request) {
     // safe. The current module's slug stands in for chapterId and its node slugs
     // for kgNodeIds — the same substitution the misconception block above uses.
     // Also sets strategyHoisted/outputBiasHoisted/hintBiasHoisted so the existing
-    // post-AI visual-suppression and [HINT] tag pipeline (already schoolCtx-agnostic)
-    // activates for general learners too, not just the prompt text.
-    if (!schoolCtx && ebEnabled) {
+    // post-AI visual-suppression and [HINT] tag pipeline activates for
+    // general learners too, not just the prompt text.
+    if (ebEnabled) {
       try {
         const { findLibrarySubject } = await import('@/lib/curriculum/subjectCatalog')
         const libSubject = findLibrarySubject(subjectCode)
@@ -1249,16 +594,17 @@ export async function POST(req: Request) {
     // (topicSlug is written identically for school and Library elsewhere in this
     // route — see the conversational-checkpoint TopicProgress upsert above).
     // learningCheckpoint reads always return empty for Library turns (that table's
-    // `board`/`grade` columns are required and only ever written inside the
-    // schoolCtx branch), and practiceSession reads return empty too (the generic
-    // /api/practice/submit route never sets `chapterId`) — both degrade to safe
-    // defaults (recommendedCheckpoint/recommendedPractice fall back to true) rather
-    // than breaking, the same kind of partial-signal tradeoff ADR 02 already
-    // accepted for spaced revision. Snapshot persistence of currentConceptNodeId
-    // (route.ts ~1640, schoolCtx-gated) is intentionally NOT extended here — kept
-    // to the single prompt-injection block, consistent with ADR 02 §3's "smaller
-    // surface area for a first increment" rationale.
-    if (!schoolCtx && ebEnabled) {
+    // `board`/`grade` columns are required and, with School Mode removed,
+    // nothing ever writes them anymore), and practiceSession reads return
+    // empty too (the generic /api/practice/submit route never sets
+    // `chapterId`) — both degrade to safe defaults (recommendedCheckpoint/
+    // recommendedPractice fall back to true) rather than breaking, the same
+    // kind of partial-signal tradeoff ADR 02 already accepted for spaced
+    // revision. Snapshot persistence of currentConceptNodeId is intentionally
+    // NOT extended here — kept to the single prompt-injection block,
+    // consistent with ADR 02 §3's "smaller surface area for a first
+    // increment" rationale.
+    if (ebEnabled) {
       try {
         const { findLibrarySubject } = await import('@/lib/curriculum/subjectCatalog')
         const libSubject = findLibrarySubject(subjectCode)
@@ -1556,63 +902,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // non-fatal — blueprint context is purely additive
           }
 
-          // P0-1/P0-2 fix: School Mode's own forced-visual-render decision.
-          // Same registry-first lookup and server-authoritative force-render
-          // Library already has (visualRegistry.ts's shouldForceVisualRender/
-          // resolveResponseVisual) — an explicit "show me a diagram" request
-          // uses the existing renderer asset when one is registered for this
-          // concept; the LLM only falls back to a text description as a last
-          // resort, and is told explicitly not to claim a visual was shown
-          // when none exists.
-          if (schoolCtx) {
-            try {
-              const { detectLearnerRequest, buildLearnerRequestBlock } = await import('@/lib/teaching/masteryGate')
-              const { getConceptVisualType, shouldForceVisualRender } = await import('@/lib/teaching/visualRegistry')
-              const { detectVisual } = await import('@/lib/school/visuals/detectVisual')
-              schoolLearnerRequestHoisted = detectLearnerRequest(message)
-              const registryVisual = getConceptVisualType(activeConceptIdForDecide)
-              schoolAvailableVisualHoisted = registryVisual ?? detectVisual({
-                subjectSlug: subjectCode,
-                chapterTitle: schoolCtx.chapter.title,
-                lessonTitle: lessonCtx?.lessonTitle,
-              })
-              schoolForceVisualRenderHoisted = shouldForceVisualRender(schoolLearnerRequestHoisted, schoolAvailableVisualHoisted)
-              if (schoolLearnerRequestHoisted) {
-                systemPrompt += buildLearnerRequestBlock(schoolLearnerRequestHoisted, schoolAvailableVisualHoisted)
-              }
-            } catch {
-              // non-fatal — mirrors the Library path's error handling
-            }
-
-            // P1 fix: School Mode never ran the recovery guard (that
-            // detection is Library-only, `if (!schoolCtx)` above) — an
-            // explicit failure-state utterance ("I don't understand", "why
-            // do you keep asking me questions", a bare "don't know") had no
-            // effect at all, so Tutor Max continued with near-identical
-            // questioning. Narrow, additive fix: reuse the same
-            // detectFailureState()/buildRecoveryBlock() pair Library uses,
-            // injected LAST (preempts everything above, same contract).
-            // School's multi-turn escalation ladder (sessionFailureCount)
-            // is Library-only infrastructure (contextSnapshot persistence
-            // scoped to `!schoolCtx && ENABLE_LIBRARY_CONCEPT_TRACKING`) and
-            // is intentionally NOT extended here — this fix stops the
-            // immediate repeated-questioning symptom on detection; it does
-            // not give School the same escalating-severity ladder Library
-            // has across turns (see deliverable's Remaining Risks).
-            try {
-              const { detectFailureState, buildRecoveryBlock } = await import('@/lib/teaching/recoveryGuard')
-              const schoolRecoveryKey = detectFailureState(message)
-              if (schoolRecoveryKey) {
-                // School Mode has no first-lesson detection (that's a
-                // Library-only concept, isFirstLessonContext({isSchoolMode:
-                // false, ...}) below) — false is the correct, safe default.
-                systemPrompt += buildRecoveryBlock(schoolRecoveryKey, false, 0)
-              }
-            } catch {
-              // non-fatal — recovery injection is purely additive
-            }
-          }
-
           const { readLearnerMemoryFromPreload, toTeachingSnapshot } = await import('@/lib/memory')
           const memory = await readLearnerMemoryFromPreload(
             userId,
@@ -1722,9 +1011,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // Wave 1 (Runtime Guardian): the authored HOW for the action
             // decide() just selected — retrieved from the Brain's action
             // catalog / repair sequence instead of improvised per turn.
-            // Library only: School Mode already receives the Teaching Action
-            // Generator's structured block for the same purpose (ADR 08).
-            if (!schoolCtx) {
+            {
               const { buildActionProcedureBlock } = await import('@/lib/teaching/actionProcedures')
               systemPrompt += buildActionProcedureBlock(decision.action_type)
             }
@@ -1742,20 +1029,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // from the ReviewSchedule table, written exclusively by
           // /api/school/practice/submit and /api/school/assessment/submit —
           // no Library-mode path ever populates it.
+          // Legacy ReviewSchedule-based due-review advisory was School-Mode-only
+          // (Task 3 fix) and has been removed with School Mode. Library Mode's
+          // own due-review signal is the Spaced Retrieval Scheduler's
+          // session-opening block (buildOpeningBlock, evidence-derived, wired
+          // in sessionLifecycle.ts).
           const reviewDue = snapshot.dueForReview.filter((slug) => slug !== conceptNode.id).slice(0, 3)
-          // The freestanding prompt advisory (below), however, is School
-          // Mode only (Task 3 fix). Library Mode's own due-review signal is
-          // the Spaced Retrieval Scheduler's session-opening block
-          // (buildOpeningBlock, evidence-derived, wired in
-          // sessionLifecycle.ts) — this legacy ReviewSchedule-based line,
-          // if ever non-empty for a Library session (a shared subjectId
-          // carrying real School Mode ReviewSchedule rows), duplicated that
-          // signal with a separately-computed, possibly contradictory topic
-          // list. School Mode's own behavior is unchanged — this line
-          // already fired unconditionally for School Mode.
-          if (schoolCtx && reviewDue.length > 0) {
-            systemPrompt += `\n- Due for spaced-repetition review (weave in a brief touchpoint if a natural opening arises — do not derail the main lesson): ${reviewDue.join(', ')}`
-          }
 
           // Phase 3A: Teaching Action Generator + Phase 3B: Dynamic Lesson Composer.
           // Runs for School Mode (real chapter) and Library Mode (synthetic chapter
@@ -1763,29 +1042,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // functions, confirmed ADR 02). Advisory only; never overrides decide().
           try {
             const { getTeachingAction, buildTeachingActionBlock } = await import('@/lib/school/adaptive/teachingActionGenerator')
-            const { getSchoolChapters: _getChaptersForTAG } = await import('@/lib/school/schoolRouting')
 
-            // Resolve chapter: real school chapter or synthetic Library chapter.
-            let chapterForTAG: { id: string; order: number; title: string; kgNodeIds: string[] } | null = null
-            let boardForTAG = ''
-            let gradeForTAG = 0
-            let chapterTitleForTAG = conceptNode.name ?? conceptNode.id
-
-            if (schoolCtx) {
-              const fullChapterForTAG = _getChaptersForTAG(schoolCtx.board, subjectCode, schoolCtx.grade)
-                .find((c: { id: string }) => c.id === schoolCtx!.chapter.id)
-              chapterForTAG = fullChapterForTAG ?? null
-              boardForTAG = schoolCtx.board
-              gradeForTAG = schoolCtx.grade
-              chapterTitleForTAG = schoolCtx.displayTitle
-            } else {
-              // Library Mode: synthetic chapter — one concept, no board/grade coupling.
-              chapterForTAG = {
-                id: conceptNode.id,
-                order: 1,
-                title: conceptNode.name ?? conceptNode.id,
-                kgNodeIds: [conceptNode.id],
-              }
+            // Synthetic chapter — one concept, no board/grade coupling.
+            const boardForTAG = ''
+            const gradeForTAG = 0
+            const chapterTitleForTAG = conceptNode.name ?? conceptNode.id
+            const chapterForTAG: { id: string; order: number; title: string; kgNodeIds: string[] } = {
+              id: conceptNode.id,
+              order: 1,
+              title: conceptNode.name ?? conceptNode.id,
+              kgNodeIds: [conceptNode.id],
             }
 
             if (chapterForTAG) {
@@ -1804,10 +1070,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // decision VOICE in the prompt (its block states WHAT/HOW to
               // teach, independent of the Brain). Once the Brain owns decision
               // blocks, it must not compete — same suppression pattern already
-              // applied to decide()'s own blocks above. School Mode unaffected
-              // (brainOwnsDecisionBlocks is Library-only in every other use in
-              // this route; `schoolCtx` short-circuits to unconditional inject).
-              if (schoolCtx || !brainOwnsDecisionBlocks) {
+              // applied to decide()'s own blocks above.
+              if (!brainOwnsDecisionBlocks) {
                 systemPrompt += buildTeachingActionBlock(teachingAction)
               }
 
@@ -1919,7 +1183,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // this turn by enforceStance(), for provenance/telemetry only; never
     // used to rewrite prose (see stanceEnforcement.ts's module doc).
     let stanceViolationsHoisted: import('@/lib/teaching/stanceEnforcement').StanceViolationCode[] = []
-    if (!schoolCtx) {
+    {
       try {
         const { detectFailureState } = await import('@/lib/teaching/recoveryGuard')
         // P0-3: the learner's immediately preceding message (already loaded,
@@ -2208,7 +1472,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // through stages 1–10 + VERIFY(passthrough), and produces a trace for
     // parity measurement / golden-transcript capture. Fire-and-forget:
     // suppresses all errors and never affects the response or the DB.
-    if (!schoolCtx && process.env.ENABLE_KERNEL_PIPELINE && process.env.ENABLE_KERNEL_PIPELINE !== '0') {
+    if (process.env.ENABLE_KERNEL_PIPELINE && process.env.ENABLE_KERNEL_PIPELINE !== '0') {
       try {
         const { runShadowPipeline } = await import('@/lib/kernel/shadow')
         void runShadowPipeline({
@@ -2627,117 +1891,34 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // The tag is additive — stripping it keeps stored messages clean.
       let responseVisual: string | null = null
       let cleanText = text
-      // Sprint CH: worked-example progress — null = no change, 'clear' = done, object = update
-      let workedExampleUpdate: 'clear' | { concept: string; currentStep: number; stepCount: number } | null = null
-      if (schoolCtx) {
-        try {
-          const { parseVisualTag } = await import('@/lib/school/visuals/detectVisual')
-          const parsed = parseVisualTag(text)
-          responseVisual = parsed.visual
-          cleanText = parsed.cleanText
-        } catch { /* non-fatal */ }
-        // P0-1/P0-2 fix: server-authoritative attachment, same as Library
-        // (visualRegistry.ts resolveResponseVisual) — an explicit diagram
-        // request with a known registered visual renders it regardless of
-        // whether the LLM emitted the VISUAL:<type> tag itself. The LLM's
-        // own tag is honored when present; this only fills the gap when the
-        // model described the diagram in prose instead of rendering it.
-        // UI/UX P0: also force-render when the model's OWN text promises a
-        // visual ("here's a visual example...") that never got attached —
-        // see textPromisesUnfulfilledVisual()'s comment for why the prior
-        // force-render trigger (student asked) missed this case entirely.
-        try {
-          const { resolveResponseVisual, textPromisesUnfulfilledVisual } = await import('@/lib/teaching/visualRegistry')
-          const forceForPromise = !responseVisual && schoolAvailableVisualHoisted !== null && textPromisesUnfulfilledVisual(cleanText)
-          responseVisual = resolveResponseVisual(
-            responseVisual as import('@/lib/school/visuals/visualTypes').VisualType | null,
-            schoolForceVisualRenderHoisted || forceForPromise,
-            schoolAvailableVisualHoisted,
-          )
-        } catch { /* non-fatal */ }
-        // P0-3 fix: School Mode has no server-side mastery-evidence gate
-        // (that machine only runs for Library — see the mastery-gate block
-        // below). Without it, "Next"/"Got it"/"Continue" could trigger the
-        // LLM to emit [LESSON_COMPLETE], which reaches the client ungated
-        // and completes the lesson on acknowledgement alone — the exact bug
-        // masteryGate.ts already fixed for Library. This is the narrow,
-        // deterministic part of that fix applied to School Mode: a bare
-        // acknowledgement can never itself authorize completion, regardless
-        // of what the model emitted. Extracted to masteryGate.ts's
-        // stripCompletionOnBareAcknowledgement (Phase 5: complete the
-        // existing guard, made unit-testable) instead of inline regex.
-        try {
-          const { stripCompletionOnBareAcknowledgement } = await import('@/lib/teaching/masteryGate')
-          cleanText = stripCompletionOnBareAcknowledgement(cleanText, message)
-        } catch { /* non-fatal */ }
-
-        // Sprint CH: extract and strip the [WE:...] worked-example progress tag
-        if (workedExampleActive || snapshotWorkedExample) {
-          try {
-            const { parseWorkedExampleTag } = await import('@/lib/school/tutoring/workedExamples')
-            const we = parseWorkedExampleTag(cleanText)
-            cleanText = we.cleanText
-            if (we.done) workedExampleUpdate = 'clear'
-            else if (we.state) workedExampleUpdate = { concept: we.state.concept, currentStep: we.state.currentStep, stepCount: we.state.stepCount }
-          } catch { /* non-fatal */ }
-        }
-
-        // W2-2 (ADR 09): extract and strip the [LESSON:<n>] stage-progress tag
-        if (process.env.ENABLE_LESSON_STAGE_CONTINUITY === '1' && lessonStageProgressHoisted !== null) {
-          try {
-            const { parseLessonProgressTag } = await import('@/lib/school/adaptive/lessonComposer')
-            const lp = parseLessonProgressTag(cleanText)
-            cleanText = lp.cleanText
-            if (lp.stageIndex !== null) {
-              // stageIndex emitted = stage just covered; next stage = emitted + 1
-              lessonStageProgressHoisted = {
-                ...lessonStageProgressHoisted,
-                stageIndex: lp.stageIndex + 1,
-              }
-            }
-          } catch { /* non-fatal */ }
-        }
-      } else {
-        // VISUAL:<type> extraction for SUBJECT_LIBRARY subjects — same
-        // Sprint BW parseVisualTag() the school flow uses above. Additive;
-        // strips the tag from the persisted/returned text either way.
-        try {
-          const { parseVisualTag } = await import('@/lib/school/visuals/detectVisual')
-          const parsed = parseVisualTag(text)
-          responseVisual = parsed.visual
-          cleanText = parsed.cleanText
-        } catch { /* non-fatal */ }
-        // Visualization Registry Phase 2 — server-authoritative attachment:
-        // an explicit learner diagram request with a known available visual
-        // renders it REGARDLESS of whether the LLM emitted (or correctly
-        // spelled) the VISUAL:<type> tag. The LLM's own tag is honored when
-        // present (it may legitimately pick a more specific match); this
-        // only fills the gap when the model described the diagram in prose
-        // instead of rendering it — the exact failure mode this closes.
-        // UI/UX P0: also force-render when the model's OWN text promises a
-        // visual ("here's a visual example...") that never got attached —
-        // see textPromisesUnfulfilledVisual()'s comment for why the prior
-        // force-render trigger (student asked) missed this case entirely.
-        {
-          const { resolveResponseVisual, textPromisesUnfulfilledVisual } = await import('@/lib/teaching/visualRegistry')
-          const forceForPromise = !responseVisual && availableVisualHoisted !== null && textPromisesUnfulfilledVisual(cleanText)
-          responseVisual = resolveResponseVisual(
-            responseVisual as import('@/lib/school/visuals/visualTypes').VisualType | null,
-            forceVisualRenderHoisted || forceForPromise,
-            availableVisualHoisted as import('@/lib/school/visuals/visualTypes').VisualType | null,
-          )
-        }
-      }
-
-      // Sprint W: strip the [INLINE_PRACTICE] control tag from the persisted/
-      // returned text regardless of whether it generated one (hygiene only —
-      // the structured field below is attached independently of this tag, since
-      // it comes from inlinePracticeHoisted, not from parsing the AI's text).
-      if (inlinePracticeHoisted) {
-        try {
-          const { parseInlinePracticeTag } = await import('@/lib/school/practice/generateInlinePractice')
-          cleanText = parseInlinePracticeTag(cleanText)
-        } catch { /* non-fatal */ }
+      // VISUAL:<type> extraction for SUBJECT_LIBRARY subjects — Sprint BW
+      // parseVisualTag(). Additive; strips the tag from the persisted/
+      // returned text either way.
+      try {
+        const { parseVisualTag } = await import('@/lib/school/visuals/detectVisual')
+        const parsed = parseVisualTag(text)
+        responseVisual = parsed.visual
+        cleanText = parsed.cleanText
+      } catch { /* non-fatal */ }
+      // Visualization Registry Phase 2 — server-authoritative attachment:
+      // an explicit learner diagram request with a known available visual
+      // renders it REGARDLESS of whether the LLM emitted (or correctly
+      // spelled) the VISUAL:<type> tag. The LLM's own tag is honored when
+      // present (it may legitimately pick a more specific match); this
+      // only fills the gap when the model described the diagram in prose
+      // instead of rendering it — the exact failure mode this closes.
+      // UI/UX P0: also force-render when the model's OWN text promises a
+      // visual ("here's a visual example...") that never got attached —
+      // see textPromisesUnfulfilledVisual()'s comment for why the prior
+      // force-render trigger (student asked) missed this case entirely.
+      {
+        const { resolveResponseVisual, textPromisesUnfulfilledVisual } = await import('@/lib/teaching/visualRegistry')
+        const forceForPromise = !responseVisual && availableVisualHoisted !== null && textPromisesUnfulfilledVisual(cleanText)
+        responseVisual = resolveResponseVisual(
+          responseVisual as import('@/lib/school/visuals/visualTypes').VisualType | null,
+          forceVisualRenderHoisted || forceForPromise,
+          availableVisualHoisted as import('@/lib/school/visuals/visualTypes').VisualType | null,
+        )
       }
 
       // Sprint W gap A: extract the [HINT] tag's text (if the model emitted
@@ -2773,7 +1954,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       let eosVerifierEvents: import('@/lib/kernel/verifier').OutputEvent[] = []
       let eosVerifierUsedTemplate = false
       let eosVerifierAttempts: 1 | 2 = 1
-      if (!schoolCtx && !assembled) {
+      if (!assembled) {
         try {
           const { readEosFlags, buildVerifierContext, verifierGate } = await import('@/lib/eos-runtime')
           const eosFlags = readEosFlags()
@@ -2846,7 +2027,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // with this turn's evidence; the persist block below reuses the
       // folded value (never folds twice). School Mode is untouched.
       // Fail-closed: a null state never authorizes.
-      if (!schoolCtx && conversationStateHoisted) {
+      if (conversationStateHoisted) {
         try {
           const { advanceConversationState, repliesWithQuestion, isPriorKnowledgeProbe } = await import('@/lib/teaching/conversationState')
           const { enforceStance } = await import('@/lib/teaching/stanceEnforcement')
@@ -2875,7 +2056,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           cleanText = cleanText.replace(/\s*\[LESSON_COMPLETE\]\s*/gi, ' ').trim()
           masteryCompletionSuppressedHoisted = true
         }
-      } else if (!schoolCtx && /\[LESSON_COMPLETE\]/i.test(cleanText)) {
+      } else if (/\[LESSON_COMPLETE\]/i.test(cleanText)) {
         // Fail-closed: a Library turn with no state machine (upstream block
         // threw) has no completion authority — strip rather than trust.
         cleanText = cleanText.replace(/\s*\[LESSON_COMPLETE\]\s*/gi, ' ').trim()
@@ -3297,7 +2478,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
         // P5 — Recovery memory: write a MistakeRecord so decide() enters
         // remediate mode on the next turn for this concept. Fire-and-forget.
-        if (!schoolCtx && resolvedConceptId) {
+        if (resolvedConceptId) {
           prisma.mistakeRecord.create({
             data: {
               userId,
@@ -3325,7 +2506,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // must not certify mastery (assessment/05 §3: gates need delayed +
       // transfer components; those stay owned by the existing completion/
       // assessment flows).
-      if (!schoolCtx && resolvedConceptId && teachingSignal && teachingSignal.correctness !== undefined) {
+      if (resolvedConceptId && teachingSignal && teachingSignal.correctness !== undefined) {
         const signalCorrect = teachingSignal.correctness
         const signalConfidence = teachingSignal.confidence
         ;(async () => {
@@ -3362,47 +2543,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         })().catch(() => {})
       }
 
-      // Sprint BY/CH: persist concept/teaching-style + worked-example memory to
-      // snapshot. Write once when either the lesson concept changed (BY) or the
-      // worked-example state changed (CH).
-      if (schoolCtx) {
-        const newCurrentId = lessonPlanHoisted?.currentConcept?.nodeId ?? null
-        const newNextId = lessonPlanHoisted?.nextConcept?.nodeId ?? null
-        const conceptChanged = !!newCurrentId && newCurrentId !== snapshotCurrentConceptId
-        const workedExampleChanged = workedExampleUpdate !== null
-        // W2-2 (ADR 09): lesson stage progress changed whenever a lessonPlan block was rendered this turn
-        const lessonStageProgressChanged = lessonStageProgressHoisted !== null
-
-        if (conceptChanged || workedExampleChanged || lessonStageProgressChanged) {
-          // Sprint CH: compute the next worked-example memory value
-          let workedExampleField: Record<string, unknown> = {}
-          if (workedExampleUpdate === 'clear') {
-            workedExampleField = { currentWorkedExample: null }
-          } else if (workedExampleUpdate) {
-            workedExampleField = { currentWorkedExample: workedExampleUpdate }
-          }
-
-          // Atomic JSONB merge: use PostgreSQL || operator so concurrent turns
-          // each add their own delta without overwriting each other's fields.
-          // This eliminates the read-modify-write race where two concurrent
-          // requests both spread the same stale snapshot and one loses its delta.
-          const schoolSnapshotDelta = {
-            ...(learnerProfHoisted?.preferredTeachingStyle.confidence !== 'low'
-              ? { lastSuccessfulTeachingStyle: learnerProfHoisted!.preferredTeachingStyle.style }
-              : {}),
-            ...(conceptChanged ? { currentConceptNodeId: newCurrentId, nextConceptNodeId: newNextId } : {}),
-            ...(prereqGapHoisted ? { lastPrerequisiteGap: prereqGapHoisted.missingPrereqId } : {}),
-            ...workedExampleField,
-            ...(lessonStageProgressHoisted ? { lessonStageProgress: lessonStageProgressHoisted } : {}),
-          }
-          prisma.$executeRaw`
-            UPDATE "LearnSession"
-            SET "contextSnapshot" = COALESCE("contextSnapshot", '{}'::jsonb) || ${JSON.stringify(schoolSnapshotDelta)}::jsonb
-            WHERE id = ${sessionId}
-          `.catch(() => {})
-        }
-      }
-
       // W2-1 (ADR 08 §4a) + Wave 0 Steps 4/5: Library-mode snapshot persist.
       // Step 5 (Blueprint Phase 5): concept tracking now DEFAULTS ON so the
       // Teaching Engine decide() gate fires for Library mode — set
@@ -3413,7 +2553,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // (decision-engine/08 §3's update contract — "the ledger is the truth").
       // libraryLessonPlanHoisted.currentConcept.nodeId is a subjectCatalog slug (not a canonical
       // KG ID) — use only libraryConceptNodeIdHoisted which Writer B seeds with the correct ID.
-      if (!schoolCtx && process.env.ENABLE_LIBRARY_CONCEPT_TRACKING !== '0') {
+      if (process.env.ENABLE_LIBRARY_CONCEPT_TRACKING !== '0') {
         try {
           const newLibConceptId = libraryConceptNodeIdHoisted
           const conceptChanged = !!newLibConceptId && newLibConceptId !== snapshotCurrentConceptId
@@ -3606,7 +2746,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             lastLessonTitle: lessonCtx.lessonTitle,
             lastUnitTitle: lessonCtx.unitTitle,
           } : {}),
-          ...(schoolCtx ? { currentLesson: schoolCtx.chapter.order } : {}),
         },
         create: {
           userId,
@@ -3618,20 +2757,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           lastUnitTitle: lessonCtx?.unitTitle ?? null,
         },
       }).catch(() => {})
-
-      // Sprint CD: fire-and-forget streak update + achievement check (school students only)
-      if (schoolCtx) {
-        Promise.all([
-          import('@/lib/school/achievements/streakEngine').then(({ updateStudyStreak }) =>
-            updateStudyStreak(userId)
-          ),
-        ]).then(async ([streakResult]) => {
-          if (streakResult.isNewDay) {
-            const { checkAndUnlockAchievements } = await import('@/lib/school/achievements/achievementEngine')
-            await checkAndUnlockAchievements(userId, schoolCtx!.board, schoolCtx!.grade)
-          }
-        }).catch(() => {})
-      }
 
       // Lesson-sync bug fix: surface the exact lesson context this response
       // was generated from, so the client can reconcile Roadmap/Learn Panel
@@ -3674,7 +2799,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         visual: responseVisual ?? undefined, visualSpec: detectedVisualSpec ?? undefined,
         sceneSpec: detectedSceneSpec ?? undefined,
         dynamicVisualizationCode: dynamicVisualizationCode ?? undefined,
-        inlinePractice: inlinePracticeHoisted ?? undefined,
+        inlinePractice: undefined,
         hint: hintHoisted ?? undefined,
         lessonOrder: lessonCtx?.currentLesson ?? undefined,
         completedLessons: lessonCtx?.completedLessons ?? undefined,
