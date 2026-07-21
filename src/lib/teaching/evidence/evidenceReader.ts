@@ -9,8 +9,9 @@
  *
  * Evidence sources reused (all pre-existing):
  *   EvidenceEvent           PROBE_OUTCOME / MISCONCEPTION_DETECTED /
- *                           LEARNER_FEEDBACK("recovery:*") rows written by
- *                           route.ts per validation/08 §2 contracts
+ *                           LEARNER_FEEDBACK("recovery:*") / ASSET_SHOWN
+ *                           rows written by route.ts per validation/08 §2
+ *                           contracts
  *   TeachingStrategyEvent   per-turn strategy posture (the L5 join's left side)
  *   TopicProgress           mastery %, status, attempts, revision counts
  *   MistakeRecord           mistake taxonomy incl. 'signal_confident_wrong'
@@ -33,6 +34,7 @@ export interface EvidenceEventRow {
   language: string
   category: string           // EvidenceCategory value
   misconceptionId: string | null
+  assetId: string | null
   outcome: string
   strength: number
   rawScore: number | null
@@ -100,6 +102,13 @@ export interface RecoveryEvent {
   state: string
 }
 
+export interface ExplanationShown {
+  occurredAt: Date
+  /** Knowledge Asset id when Explanation Memory served this turn, else null
+   *  (an LLM-generated explanation with no asset identity). */
+  assetId: string | null
+}
+
 export type LessonOutcome = 'mastered' | 'progressing' | 'struggling' | 'abandoned' | 'no_signal'
 
 /** One lesson = one (userId, sessionId, conceptId) episode of evidence. */
@@ -116,6 +125,7 @@ export interface LessonEvidence {
   probes: ProbeOutcome[]
   misconceptions: MisconceptionDetection[]
   recoveries: RecoveryEvent[]
+  explanationsShown: ExplanationShown[]
   mistakes: Array<{ category: string; occurredAt: Date }>
   outcome: LessonOutcome
   /** TopicProgress mastery for this learner+concept at read time, if any */
@@ -248,6 +258,7 @@ export function readLessonEvidence(corpus: EvidenceCorpus): LessonEvidence[] {
         probes: [],
         misconceptions: [],
         recoveries: [],
+        explanationsShown: [],
         mistakes: [],
         outcome: 'no_signal',
         masteryPct: null,
@@ -276,8 +287,12 @@ export function readLessonEvidence(corpus: EvidenceCorpus): LessonEvidence[] {
         if (state) lesson.recoveries.push({ occurredAt: e.occurredAt, state })
         break
       }
+      case 'ASSET_SHOWN': {
+        lesson.explanationsShown.push({ occurredAt: e.occurredAt, assetId: e.assetId })
+        break
+      }
       default:
-        break // ASSET_SHOWN / RE_ASK / SUMMATIVE_OUTCOME: carried by counts only today
+        break // RE_ASK / SUMMATIVE_OUTCOME: carried by counts only today
     }
   }
 

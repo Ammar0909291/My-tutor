@@ -123,6 +123,39 @@ export function recoverySuccessRates(lessons: LessonEvidence[]): RecoveryStat[] 
     .sort((a, b) => a.stat.rate - b.stat.rate || a.state.localeCompare(b.state))
 }
 
+export interface ExplanationEffectivenessStat {
+  /** Knowledge Asset id when the explanation came from Explanation Memory,
+   *  else the conceptId (LLM-generated explanations grouped per concept —
+   *  there is no per-generation identity to key on). */
+  id: string
+  /** true when `id` is a real assetId (Explanation Memory served it) */
+  fromAssetLibrary: boolean
+  conceptId: string
+  stat: RateStat
+}
+
+/** Explanation effectiveness: an explanation "succeeds" when the learner
+ *  produces a passing probe LATER IN THE SAME LESSON (the same L1
+ *  what-followed join recoverySuccessRates/teachingActionSuccessRates use).
+ *  Explanations with no later probe in the lesson don't count — there is no
+ *  evidence yet either way. */
+export function explanationEffectiveness(lessons: LessonEvidence[]): ExplanationEffectivenessStat[] {
+  const byKey = new Map<string, { conceptId: string; fromAssetLibrary: boolean; pass: number; fail: number }>()
+  for (const l of lessons) {
+    for (const ex of l.explanationsShown) {
+      const laterProbe = l.probes.find((p) => p.occurredAt.getTime() > ex.occurredAt.getTime())
+      if (!laterProbe) continue
+      const id = ex.assetId ?? l.conceptId
+      const cur = byKey.get(id) ?? { conceptId: l.conceptId, fromAssetLibrary: ex.assetId !== null, pass: 0, fail: 0 }
+      ;(laterProbe.passed ? cur.pass++ : cur.fail++)
+      byKey.set(id, cur)
+    }
+  }
+  return [...byKey.entries()]
+    .map(([id, v]) => ({ id, fromAssetLibrary: v.fromAssetLibrary, conceptId: v.conceptId, stat: rateStat(v.pass, v.fail) }))
+    .sort((a, b) => a.stat.rate - b.stat.rate || b.stat.total - a.stat.total || a.id.localeCompare(b.id))
+}
+
 export interface ProbeEffectivenessStat {
   /** placement bracket / probe key ('' = ordinary non-placement probes) */
   probe: string
@@ -256,6 +289,7 @@ export interface LearningAnalytics {
   mostCommonMisconceptions: MisconceptionStat[]
   teachingActionSuccessRates: TeachingActionStat[]
   recoverySuccessRates: RecoveryStat[]
+  explanationEffectiveness: ExplanationEffectivenessStat[]
   probeEffectiveness: ProbeEffectivenessStat[]
   averageMasteryTime: MasteryTimeStat[]
   conceptsRequiringRepeatedRemediation: RemediationStat[]
@@ -270,6 +304,7 @@ export function computeLearningAnalytics(lessons: LessonEvidence[]): LearningAna
     mostCommonMisconceptions: mostCommonMisconceptions(lessons),
     teachingActionSuccessRates: teachingActionSuccessRates(lessons),
     recoverySuccessRates: recoverySuccessRates(lessons),
+    explanationEffectiveness: explanationEffectiveness(lessons),
     probeEffectiveness: probeEffectiveness(lessons),
     averageMasteryTime: averageMasteryTime(lessons),
     conceptsRequiringRepeatedRemediation: conceptsRequiringRepeatedRemediation(lessons),

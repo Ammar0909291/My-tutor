@@ -12,7 +12,7 @@ import {
 } from '@/lib/teaching/evidence/evidenceReader'
 import {
   computeLearningAnalytics, mostFailedConcepts, mostCommonMisconceptions,
-  teachingActionSuccessRates, recoverySuccessRates, probeEffectiveness,
+  teachingActionSuccessRates, recoverySuccessRates, explanationEffectiveness, probeEffectiveness,
   averageMasteryTime, conceptsRequiringRepeatedRemediation, dropOffPoints,
 } from '@/lib/teaching/evidence/learningAnalytics'
 import {
@@ -39,6 +39,7 @@ function ev(over: Partial<EvidenceEventRow> & { category: string; outcome: strin
     conceptId: 'phys.therm.entropy',
     language: 'en',
     misconceptionId: null,
+    assetId: null,
     strength: 0,
     rawScore: null,
     ...over,
@@ -59,6 +60,9 @@ const mc = (phrase: string, over: Partial<EvidenceEventRow> = {}) =>
 
 const recovery = (state: string, over: Partial<EvidenceEventRow> = {}) =>
   ev({ category: 'LEARNER_FEEDBACK', outcome: `recovery:${state}`, ...over })
+
+const assetShown = (over: Partial<EvidenceEventRow> = {}) =>
+  ev({ category: 'ASSET_SHOWN', outcome: 'shown', strength: 0, ...over })
 
 const inspectorWith = (kinds: string[]): PackageInspector => (conceptId) => ({
   packageId: `${conceptId}-package`,
@@ -234,6 +238,28 @@ describe('learning analytics', () => {
     const stats = recoverySuccessRates(lessonsFrom(events))
     expect(stats.find((s) => s.state === 'im_stuck')!.stat.rate).toBe(1)
     expect(stats.find((s) => s.state === 'i_cant_do_this')!.stat.rate).toBe(0)
+  })
+
+  it('explanationEffectiveness joins an explanation to the FIRST later probe, keyed by assetId when present', () => {
+    const events = [
+      // Explanation Memory asset, followed by a pass → success for the asset
+      assetShown({ assetId: 'asset-123' }),
+      probe(true),
+      // LLM-generated explanation (no assetId), followed by a fail → failure for the concept bucket
+      assetShown({ sessionId: 's2' }),
+      probe(false, { sessionId: 's2' }),
+      // shown with nothing after it in the lesson → must NOT count either way
+      assetShown({ sessionId: 's3' }),
+    ]
+    const stats = explanationEffectiveness(lessonsFrom(events))
+    const asset = stats.find((s) => s.id === 'asset-123')!
+    const llmGenerated = stats.find((s) => s.fromAssetLibrary === false)!
+    expect(asset.stat).toMatchObject({ successes: 1, failures: 0, rate: 1 })
+    expect(asset.fromAssetLibrary).toBe(true)
+    expect(llmGenerated.stat).toMatchObject({ successes: 0, failures: 1, rate: 0 })
+    // the un-followed s3 shown event contributes to neither bucket
+    const totalCounted = stats.reduce((sum, s) => sum + s.stat.total, 0)
+    expect(totalCounted).toBe(2)
   })
 
   it('probeEffectiveness flags non-discriminating probes at sample size', () => {

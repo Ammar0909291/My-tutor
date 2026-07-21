@@ -4,6 +4,7 @@ import { isAdmin } from '@/lib/auth/admin'
 import { prisma } from '@/lib/db/prisma'
 import { redis } from '@/lib/redis/client'
 import { getFailureCounters } from '@/lib/monitoring'
+import { snapshotBrainMetrics } from '@/lib/understanding/brainMetrics'
 
 export const dynamic = 'force-dynamic'
 
@@ -57,6 +58,11 @@ export async function GET() {
       uptime: process.uptime(),
     },
     failureCounters,
+    // This-instance-only snapshot (serverless: not a cross-instance
+    // aggregate — see brainMetrics.ts's production-validation note).
+    // Useful as a live sanity check that the Brain runtime is dispatching
+    // and complying as expected on whichever instance answers this request.
+    brainMetrics: snapshotBrainMetrics(),
     env: {
       smtp: !!process.env.SMTP_HOST,
       monitoring: !!process.env.MONITORING_WEBHOOK_URL,

@@ -30,6 +30,7 @@ function ev(over: Partial<EvidenceEventRow> & { category: string; outcome: strin
     conceptId: 'phys.therm.entropy',
     language: 'en',
     misconceptionId: null,
+    assetId: null,
     strength: 0,
     rawScore: null,
     ...over,

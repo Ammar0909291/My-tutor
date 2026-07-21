@@ -79,7 +79,7 @@ export async function loadEvidenceCorpus(opts: LoadEvidenceOptions = {}): Promis
     take: opts.maxEvents ?? 50_000,
     select: {
       eventId: true, occurredAt: true, userId: true, sessionId: true, turnId: true,
-      conceptId: true, language: true, category: true, misconceptionId: true,
+      conceptId: true, language: true, category: true, misconceptionId: true, assetId: true,
       outcome: true, strength: true, rawScore: true,
     },
   })

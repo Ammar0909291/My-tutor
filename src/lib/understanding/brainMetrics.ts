@@ -8,6 +8,21 @@
  * '[learn/chat] BRAIN metrics=...' so shadow/active behavior can be
  * verified from logs alone. Counters reset on process restart; they are
  * an observability surface, never a store of record. Never throws.
+ *
+ * PRODUCTION-VALIDATION NOTE (2026-07-21): this app deploys to Vercel
+ * (vercel.json, next.config.js) as Node.js serverless functions, not a
+ * single long-lived process. `metrics`/`sessionMetrics` below are scoped
+ * to ONE warm serverless instance — concurrent traffic is served by
+ * multiple instances, each with its own independent copy of these
+ * counters, and a cold start resets them to zero. They are correct and
+ * useful as a live, single-instance sanity check (exactly how
+ * getSessionBrainMetrics is wired into /api/admin/ops below) but they
+ * are NOT a global aggregate across all production traffic — do not
+ * build a claim like "X% of turns this week were compliant" on them.
+ * The per-turn '[learn/chat] BRAIN_EVENT=...' JSON log line is the
+ * only signal here that genuinely covers all traffic, and only if
+ * something aggregates Vercel's captured function logs (a log drain
+ * or platform outside this repo) — nothing in this repo does that today.
  */
 import type { DispatchPlan } from './dispatcher'
 
