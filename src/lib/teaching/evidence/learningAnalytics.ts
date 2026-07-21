@@ -180,6 +180,53 @@ export function hintEffectiveness(lessons: LessonEvidence[]): HintEffectivenessS
     .sort((a, b) => a.stat.rate - b.stat.rate || b.stat.total - a.stat.total || a.conceptId.localeCompare(b.conceptId))
 }
 
+const CONFIDENCE_SCORE: Record<string, number> = { high: 1, medium: 0.5, low: 0 }
+
+export interface ConfidenceTrendStat {
+  conceptId: string
+  /** mean confidence score (high=1, medium=0.5, low=0) over the first half
+   *  of each lesson's stated-confidence probes */
+  earlyScore: number
+  /** mean confidence score over the second half */
+  lateScore: number
+  /** lateScore - earlyScore; positive = confidence improved within lessons
+   *  on this concept, negative = declined */
+  delta: number
+  /** probes with a stated confidence value, across all included lessons */
+  probesWithConfidence: number
+}
+
+/** Confidence improvement: within each lesson, splits the probes that
+ *  carry a stated behavioral confidence (SIGNAL confidence="high|medium|
+ *  low") into first half / second half by position, scores each half, and
+ *  aggregates the early/late means per concept. Lessons with fewer than 2
+ *  confidence-bearing probes contribute nothing (no within-lesson trend to
+ *  measure). Does not compare across sessions/days — that is retention
+ *  territory (RetentionMetric/KnowledgeRetention), a different, already-
+ *  owned system this deliberately does not duplicate. */
+export function confidenceTrend(lessons: LessonEvidence[]): ConfidenceTrendStat[] {
+  const byConcept = new Map<string, { earlySum: number; earlyN: number; lateSum: number; lateN: number }>()
+  for (const l of lessons) {
+    const withConf = l.probes.filter((p) => p.confidence !== null)
+    if (withConf.length < 2) continue
+    const mid = Math.ceil(withConf.length / 2)
+    const early = withConf.slice(0, mid)
+    const late = withConf.slice(mid)
+    const cur = byConcept.get(l.conceptId) ?? { earlySum: 0, earlyN: 0, lateSum: 0, lateN: 0 }
+    for (const p of early) { cur.earlySum += CONFIDENCE_SCORE[p.confidence!]; cur.earlyN++ }
+    for (const p of late) { cur.lateSum += CONFIDENCE_SCORE[p.confidence!]; cur.lateN++ }
+    byConcept.set(l.conceptId, cur)
+  }
+  return [...byConcept.entries()]
+    .filter(([, v]) => v.earlyN > 0 && v.lateN > 0)
+    .map(([conceptId, v]) => {
+      const earlyScore = v.earlySum / v.earlyN
+      const lateScore = v.lateSum / v.lateN
+      return { conceptId, earlyScore, lateScore, delta: lateScore - earlyScore, probesWithConfidence: v.earlyN + v.lateN }
+    })
+    .sort((a, b) => a.delta - b.delta || a.conceptId.localeCompare(b.conceptId))
+}
+
 export interface ProbeEffectivenessStat {
   /** placement bracket / probe key ('' = ordinary non-placement probes) */
   probe: string
@@ -315,6 +362,7 @@ export interface LearningAnalytics {
   recoverySuccessRates: RecoveryStat[]
   explanationEffectiveness: ExplanationEffectivenessStat[]
   hintEffectiveness: HintEffectivenessStat[]
+  confidenceTrend: ConfidenceTrendStat[]
   probeEffectiveness: ProbeEffectivenessStat[]
   averageMasteryTime: MasteryTimeStat[]
   conceptsRequiringRepeatedRemediation: RemediationStat[]
@@ -331,6 +379,7 @@ export function computeLearningAnalytics(lessons: LessonEvidence[]): LearningAna
     recoverySuccessRates: recoverySuccessRates(lessons),
     explanationEffectiveness: explanationEffectiveness(lessons),
     hintEffectiveness: hintEffectiveness(lessons),
+    confidenceTrend: confidenceTrend(lessons),
     probeEffectiveness: probeEffectiveness(lessons),
     averageMasteryTime: averageMasteryTime(lessons),
     conceptsRequiringRepeatedRemediation: conceptsRequiringRepeatedRemediation(lessons),

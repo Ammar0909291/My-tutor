@@ -13,7 +13,8 @@ import {
 import {
   computeLearningAnalytics, mostFailedConcepts, mostCommonMisconceptions,
   teachingActionSuccessRates, recoverySuccessRates, explanationEffectiveness, hintEffectiveness,
-  probeEffectiveness, averageMasteryTime, conceptsRequiringRepeatedRemediation, dropOffPoints,
+  confidenceTrend, probeEffectiveness, averageMasteryTime, conceptsRequiringRepeatedRemediation,
+  dropOffPoints,
 } from '@/lib/teaching/evidence/learningAnalytics'
 import {
   buildAuthoringFeedback, renderAuthoringFeedbackMarkdown, DEFAULT_AUTHORING_THRESHOLDS,
@@ -278,6 +279,25 @@ describe('learning analytics', () => {
     const stats = hintEffectiveness(lessonsFrom(events))
     const entropy = stats.find((s) => s.conceptId === 'phys.therm.entropy')!
     expect(entropy.stat).toMatchObject({ successes: 1, failures: 1, total: 2 })
+  })
+
+  it('confidenceTrend splits a lesson\'s confidence-bearing probes into early/late halves', () => {
+    const events = [
+      // low, low, high, high → early=[low,low]=0, late=[high,high]=1, delta=+1
+      probe(true, { outcome: 'pass|conf=low|confusion=false' }),
+      probe(false, { outcome: 'fail|conf=low|confusion=false' }),
+      probe(true, { outcome: 'pass|conf=high|confusion=false' }),
+      probe(true, { outcome: 'pass|conf=high|confusion=false' }),
+      // a second lesson with only 1 confidence-bearing probe → excluded (needs ≥2)
+      probe(true, { conceptId: 'phys.wave.beats', sessionId: 's2', outcome: 'pass|conf=high|confusion=false' }),
+    ]
+    const stats = confidenceTrend(lessonsFrom(events))
+    expect(stats).toHaveLength(1)
+    expect(stats[0].conceptId).toBe('phys.therm.entropy')
+    expect(stats[0].earlyScore).toBe(0)
+    expect(stats[0].lateScore).toBe(1)
+    expect(stats[0].delta).toBe(1)
+    expect(stats[0].probesWithConfidence).toBe(4)
   })
 
   it('probeEffectiveness flags non-discriminating probes at sample size', () => {
