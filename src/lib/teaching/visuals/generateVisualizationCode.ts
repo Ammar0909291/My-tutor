@@ -2,9 +2,9 @@
  * Dynamic Visualization Engine — code generation.
  *
  * Wired into the chat route (src/app/api/learn/chat/route.ts) behind
- * ENABLE_DYNAMIC_VISUALIZATION (default OFF), only when neither the
- * deterministic VisualSpec/SceneSpec pipelines nor the parametric scene
- * generators produced anything for the turn. Calls the LLM to write a
+ * ENABLE_DYNAMIC_VISUALIZATION (on by default — see .env.example), only
+ * when neither the deterministic VisualSpec/SceneSpec pipelines nor the
+ * parametric scene generators produced anything for the turn. Calls the LLM to write a
  * small React component (as a string) that visualizes the concept just
  * explained, then runs it through static checks before it is ever sent
  * to the client. The component is never executed here or anywhere in the
@@ -27,7 +27,7 @@
 import { generateAIResponse } from '@/lib/ai/client'
 import { parseVisualizationCode } from './parseVisualizationCode'
 
-/** Feature flag — keep generation OFF until explicitly enabled. */
+/** Feature flag — on by default (.env.example); set ENABLE_DYNAMIC_VISUALIZATION= (empty) to disable. */
 export function isDynamicVisualizationEnabled(): boolean {
   return process.env.ENABLE_DYNAMIC_VISUALIZATION === 'true'
 }
