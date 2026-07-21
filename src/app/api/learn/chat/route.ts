@@ -127,6 +127,14 @@ export async function POST(req: Request) {
       conceptId: string; planSignature: string; stageIndex: number; totalStages: number
     } : null
 
+    // CUE (Conversation Understanding Engine, Milestone 1): per-turn
+    // observation collector. Branch-scoped engine outputs (misconceptions,
+    // visuals) are recorded here at their EXISTING call sites so the single
+    // understanding call before the LLM call can read them without
+    // re-running any engine or hoisting more locals. Perception only —
+    // nothing downstream consumes this yet.
+    const cueObservations: import('@/lib/understanding').CueObservations = {}
+
     const subjectCode = learnSession.subject.slug
     const ebEnabled = isEduBrainEnabled(subjectCode)
 
@@ -608,6 +616,7 @@ export async function POST(req: Request) {
         const misconceptions = await detectMisconceptions(
           userId, subjectCode, chapterKgNodes.map((n) => n.id), schoolCtx.chapter.id
         )
+        cueObservations.misconceptions = misconceptions
         const block = buildMisconceptionBlock(misconceptions)
         if (block) {
           systemPrompt += block
@@ -989,6 +998,8 @@ export async function POST(req: Request) {
           chapterTitle: schoolCtx.chapter.title,
           lessonTitle: lessonCtx?.lessonTitle,
         })
+        cueObservations.availableVisual = availableVisual
+        cueObservations.visualDetectionRan = true
         const visualBlock = buildVisualsSystemBlock(availableVisual)
         if (visualBlock) systemPrompt += visualBlock
       } catch (err) {
@@ -1008,6 +1019,8 @@ export async function POST(req: Request) {
           chapterTitle: lessonCtx?.unitTitle ?? '',
           lessonTitle: lessonCtx?.lessonTitle,
         })
+        cueObservations.availableVisual = availableVisual
+        cueObservations.visualDetectionRan = true
         const visualBlock = buildVisualsSystemBlock(availableVisual)
         if (visualBlock) systemPrompt += visualBlock
       } catch (err) {
@@ -1100,6 +1113,7 @@ export async function POST(req: Request) {
           const lessonSlugs = libSubject.modules.flatMap((m) => m.nodes.map((n) => n.slug))
           const { detectMisconceptions, buildMisconceptionBlock, buildRemediationStrategy } = await import('@/lib/school/adaptive/misconceptionEngine')
           const misconceptions = await detectMisconceptions(userId, subjectCode, lessonSlugs, '')
+          cueObservations.misconceptions = misconceptions
           const block = buildMisconceptionBlock(misconceptions)
           if (block) {
             systemPrompt += block
@@ -2062,6 +2076,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             chapterTitle: lessonCtx?.unitTitle ?? '',
             lessonTitle: lessonCtx?.lessonTitle,
           })
+          cueObservations.availableVisual = availableVisual
+          cueObservations.visualDetectionRan = true
           availableVisualHoisted = availableVisual
           // Bugs 5/6/7 — explicit learner requests are detected in code and
           // dispatched as forced TeachingActions, injected AFTER the turn
@@ -2274,6 +2290,45 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           console.warn('[learn/chat] explanation memory lookup failed, falling back to LLM:', err)
           memoryFallbackReason = 'Explanation Memory lookup error'
         }
+      }
+
+      // CUE (Conversation Understanding Engine) — Milestone 1 of the
+      // Educational Brain Runtime. Runs for EVERY student turn, school and
+      // Library, BEFORE the response below is produced (memory-served or
+      // LLM). Perception only: unifies what the existing detectors and
+      // engines already read this turn into ONE StudentTurnUnderstanding
+      // object. Zero behavior change — nothing consumes it yet (the
+      // Decision Engine will, in a later milestone); it is logged for
+      // observability, writes nothing, and can never break a turn
+      // (understandStudentTurn never throws; this guard is belt-and-braces).
+      try {
+        const { understandStudentTurn } = await import('@/lib/understanding')
+        const cueLastSignal = (snapshot?.lastSignal && typeof snapshot.lastSignal === 'object')
+          ? snapshot.lastSignal as { correctness?: boolean; confidence?: string }
+          : null
+        const understanding = understandStudentTurn({
+          message,
+          history: historyMessages,
+          recoveryKey: recoveryKeyHoisted,
+          firstLessonActive: firstLessonActiveHoisted,
+          lastSignal: cueLastSignal,
+          sessionFailureCount: snapshotSessionFailureCount,
+          episode: sessionEpisodeHoisted,
+          freshBoundary: sessionEpisodeFreshHoisted,
+          lastSuccessfulTeachingStyle,
+          conceptId: resolvedConceptId ?? snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? null,
+          placement: placementPrevHoisted,
+          pendingPlacementProbe: snapshotPendingProbe,
+          dueReviewCount: libraryDueRevisionCountHoisted,
+          strategyType: strategyHoisted,
+          evidenceMove: evidenceMoveHoisted,
+          assembled,
+          memoryFallbackReason,
+          observations: cueObservations,
+        })
+        console.log('[learn/chat] CUE understanding=' + JSON.stringify(understanding))
+      } catch (err) {
+        console.warn('[learn/chat] CUE understanding skipped (never affects the turn):', err)
       }
 
       let text: string
