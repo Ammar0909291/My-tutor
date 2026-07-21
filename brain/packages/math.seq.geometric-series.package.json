@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.seq.geometric-series-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.seq.geometric-series",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e8e8427d2ed76c23ef696f00a150063f1bfd5eec4c5bfa9cd525121f8154a4d9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.seq.geometric-series.md": "sha256:6851127baa69324ee7a15f7d4c88a8bf42f474d28d5275b6bfd5711e169eca36"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.seq.geometric-series",
+    "name": "Geometric Series",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.seq.geometric-sequence",
+      "math.seq.series"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.seq.geometric-series-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.seq.geometric-series (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.seq.geometric-series.md": "sha256:6851127baa69324ee7a15f7d4c88a8bf42f474d28d5275b6bfd5711e169eca36"
+      },
+      "contentHash": "sha256:be15b1c2de6885ce43a8c99c0e2eed248a2c433bef5783ed4bddfbdb728de06a",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.seq.geometric-series.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.geometric-series.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.geometric-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.geometric-series\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.geometric-series.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.geometric-series.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.geometric-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.geometric-series\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.geometric-series.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.geometric-series.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.geometric-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.geometric-series\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.geometric-series.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.geometric-series.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.geometric-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.geometric-series\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.seq.geometric-series/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.seq.geometric-series",
+      "title": "Learning Objectives",
+      "content": "- LO1: Derive the finite geometric sum formula $S_n = \\dfrac{a(1-r^n)}{1-r}$ from `math.seq.geometric-sequence`'s own explicit formula, using the multiply-by-$r$-and-subtract technique (writing $S_n$ and $rS_n$, subtracting so the middle terms cancel) — and recognize precisely why the formula FAILS at $r=1$ (division by zero), with the correct replacement $S_n = na$ in that case.\n- LO2: Apply the finite sum formula to compute $S_n$ for geometric series with ARBITRARY first term and ratio — including negative ratios — executing the arithmetic reliably (correct exponent $n$, not $n-1$, in $r^n$; correct sign handling when $r<0$).\n- LO3: Determine the INFINITE geometric series sum $\\dfrac{a}{1-r}$ when $|r|<1$ as the LIMIT of the partial sums $S_n$ (because $r^n \\to 0$), using `math.seq.series`'s own convergence definition — and correctly recognize divergence whenever $|r| \\ge 1$, refusing to apply the infinite-sum formula outside its validity condition.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-series.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.seq.geometric-series/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.seq.geometric-series",
+      "title": "SUM-FORMULA-ASSUMED-VALID-AT-R-EQUALS-ONE",
+      "content": "| MC-1 | SUM-FORMULA-ASSUMED-VALID-AT-R-EQUALS-ONE | Plugging $r=1$ into $S_n = a(1-r^n)/(1-r)$ (producing $0/0$) instead of recognizing the derivation's division by $1-r$ is illegal there and the correct sum is $S_n = na$ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-series.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.seq.geometric-series/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.seq.geometric-series",
+      "title": "INFINITE-SUM-FORMULA-APPLIED-WITHOUT-VALIDITY-CHECK",
+      "content": "| MC-2 | INFINITE-SUM-FORMULA-APPLIED-WITHOUT-VALIDITY-CHECK | Applying $a/(1-r)$ for ANY ratio, missing that the formula is the limit of partial sums only when $\\|r\\|<1$ — e.g., accepting $-12$ as the \"sum\" of the positive growing series with $a=6, r=3/2$ | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-series.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.seq.geometric-series/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.seq.geometric-series",
+      "title": "NEGATIVE-RATIO-ASSUMED-TO-BLOCK-CONVERGENCE",
+      "content": "| MC-3 | NEGATIVE-RATIO-ASSUMED-TO-BLOCK-CONVERGENCE | Believing an alternating geometric series (negative $r$) cannot converge or cannot use the sum formulas, missing that convergence is governed by $\\|r\\|<1$ regardless of sign | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-series.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.seq.geometric-series/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.geometric-series",
+      "title": "The Formula Is a Cancellation, Not a Fact (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Formula Is a Cancellation, Not a Fact (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-series.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.seq.geometric-series/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.geometric-series",
+      "title": "The Infinite-Sum Formula Has a Validity Condition, and Violating It Produces Nonsense (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Infinite-Sum Formula Has a Validity Condition, and Violating It Produces Nonsense (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-series.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.seq.geometric-series/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.geometric-series",
+      "title": "Convergence Depends on $|r|$, Not on $r$'s Sign (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Convergence Depends on $|r|$, Not on $r$'s Sign (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-series.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.seq.geometric-series/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.geometric-series",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-series.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.seq.geometric-series/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.seq.geometric-series",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Derive the sum formula for $S_4$ with $a=3, r=2$ using the multiply-by-$r$-and-subtract technique, showing the cancellation explicitly, and verify by direct addition.\n  2. Compute $S_5$ for $a=4, r=-3$, handling the signs carefully, and check by direct addition.\n  3. Compute the sum $7 + 7 + 7 + \\dots$ ($n$ terms, $r=1$), and explain precisely why the general formula cannot be used here.\n  4. For each series, decide convergence and (where valid) compute the infinite sum: (a) $a=10, r=\\tfrac25$; (b) $a=10, r=-\\tfrac45$; (c) $a=10, r=\\tfrac54$.\n- **P76 (Transfer Probe, mode = independence — no cross-link target listed in the KG for this concept)**: \"A ball is dropped from 8 meters. Each bounce returns it to $\\tfrac34$ of its previous height. (a) Write the total DOWNWARD distance the ball travels (the initial drop plus every subsequent fall) as a geometric series, identifying $a$ and $r$. (b) Compute the total downward distance traveled over infinitely many bounces, justifying why an infinite sum is legitimate here ($|r|<1$). (c) A skeptic objects: 'infinitely many bounces should mean infinite total distance.' Explain, using the behavior of the partial sums, why the total is finite even though the number of bounces is not.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-series.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.seq.geometric-series/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.geometric-series",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.seq.geometric-sequence` (the explicit formula $a_n = ar^{n-1}$; recognizing first term $a$ and common ratio $r$) and `math.seq.series` (partial sums $S_n$; convergence of a series as the limit of its partial-sum sequence; the geometric series already met there as the standing INSTANCE of a convergent series, with its formulas quoted but their derivation explicitly deferred).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-series.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.seq.geometric-series/reference/1",
+      "kind": "reference",
+      "conceptId": "math.seq.geometric-series",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.seq.geometric-sequence` (explicit formula $a_n = ar^{n-1}$, whose terms this concept sums), `math.seq.series` (partial sums and the convergence-as-limit definition this concept's infinite case instantiates).\n- **Unlocks**: `math.seq.infinite-geometric-series` (deeper treatment of the infinite case this concept establishes at the limit level; not yet authored — noted, not assumed).\n- **Cross-link**: KG lists none for this concept. $P76_{mode}=$ **independence** (no cross-link target to check).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.geometric-series.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
