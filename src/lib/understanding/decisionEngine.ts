@@ -36,6 +36,7 @@ export type TeachingDecisionType =
   | 'ASK_DIAGNOSTIC_QUESTION'  // placement/diagnosis probe before teaching on
   | 'DETECT_MISCONCEPTION'     // route into the misconception repair machinery
   | 'REVIEW_PREREQUISITE'      // step back to the KG prerequisite
+  | 'TEACH_DIRECTLY'           // stop probing — no known prerequisite to target; explain with an example
   | 'CONTINUE_LESSON'          // progression is healthy — proceed
   | 'PRACTICE'                 // consolidate before advancing (D1 FRAGILE quadrant)
   | 'VISUALIZATION'            // serve the already-detected visual aid
@@ -234,6 +235,23 @@ export function decideTeaching(u: StudentTurnUnderstanding): TeachingDecision {
         ['Repeated failures this session with a known KG prerequisite: step back one edge (placement/05 §5 just-in-time repair).'],
         ['masteryState', 'prerequisiteTopic'],
         { prerequisiteId: prereqId, conceptId: topicId(u.currentTopic.value) })
+    }
+
+    // D-3b — STOP PROBING, TEACH DIRECTLY (P0-2 fix): the same repeated-
+    // struggle signal D3 reads (2+ consecutive non-landing turns — the
+    // SIGNAL tag's correctness/confidence read, folded across turns; never
+    // a hardcoded phrase list), but with NO known KG prerequisite to step
+    // back to. Continuing to probe/ask past this point just repeats the
+    // same failure; a human teacher stops eliciting and demonstrates
+    // instead (foundations/03 grid — SHOW, not ASK, once struggle is
+    // established). Mirrors the live conversationState.ts consecutiveFailures
+    // >= 2 → 'show' transition; this is its CUE/Decision Engine counterpart.
+    if (u.masteryState.value === 'struggling' && !prereqId) {
+      return make(u, 'TEACH_DIRECTLY', 'D3b-STOP-PROBING-TEACH-DIRECTLY',
+        ['Repeated non-landing turns this session with no KG prerequisite to target: further probing/diagnostic questioning would just repeat the same failure.',
+         'Switch to direct explanation with a concrete worked example — demonstrate, do not interrogate (conversationState.ts SHOW semantics).'],
+        ['masteryState'],
+        { conceptId: topicId(u.currentTopic.value) })
     }
 
     // D-4 — PLACEMENT STILL UNVERIFIED: keep diagnosing before teaching on

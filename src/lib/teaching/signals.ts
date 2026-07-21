@@ -71,7 +71,16 @@ export function buildSignalInstruction(): string {
     'Optionally add phrase="..." quoting (verbatim, max 12 words) any phrase ' +
     'suggesting a systematic misconception (e.g. "you just add the tops"). ' +
     'If their last message was NOT an answer or attempt (a greeting, a ' +
-    'question, small talk), do NOT emit the tag at all. Never mention this ' +
-    'tag or its contents to the student.'
+    'question, small talk), do NOT emit the tag at all. ' +
+    'If your last message was a PROBE — checking what the student already ' +
+    'knows before teaching, not a graded content question — there is no ' +
+    'objectively right answer, but the tag still applies: correctness="false" ' +
+    'when the reply shows they do NOT have the relevant prior knowledge ' +
+    '(e.g. "I don\'t know", "no", "not sure", a bare guess with no ' +
+    'substance), correctness="true" when it shows they genuinely do. This is ' +
+    'how the app knows when to stop probing and switch to direct teaching — ' +
+    'grade every probe reply honestly, never skip the tag just because the ' +
+    'question had no single correct answer. ' +
+    'Never mention this tag or its contents to the student.'
   )
 }

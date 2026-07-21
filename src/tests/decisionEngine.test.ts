@@ -137,6 +137,28 @@ describe('Decision Engine — the ladder, rule by rule', () => {
     expect(d.decision).not.toBe('REVIEW_PREREQUISITE')
   })
 
+  // P0-2: after repeated non-landing turns (semantic — the SIGNAL tag's
+  // correctness/confidence folded across turns, never a phrase list) with
+  // no KG prerequisite to target, stop probing and teach directly.
+  it('D3b: struggling with NO known prerequisite → stop probing, teach directly', () => {
+    // math.found.mathematical-thinking is a real KG root (requires: []).
+    const d = decide({ sessionFailureCount: 2, conceptId: 'math.found.mathematical-thinking' })
+    expect(d.decision).toBe('TEACH_DIRECTLY')
+    expect(d.ruleId).toBe('D3b-STOP-PROBING-TEACH-DIRECTLY')
+    expect(d.parameters.conceptId).toBe('math.found.mathematical-thinking')
+  })
+
+  it('D3b does not fire on a single non-landing turn (not yet "struggling")', () => {
+    const d = decide({ sessionFailureCount: 1, conceptId: 'math.found.mathematical-thinking', lastSignal: { correctness: false } })
+    expect(d.decision).not.toBe('TEACH_DIRECTLY')
+  })
+
+  it('D3 still wins over D3b when a prerequisite IS known (more targeted intervention)', () => {
+    const d = decide({ sessionFailureCount: 2, conceptId: 'math.arith.fractions' })
+    expect(d.decision).toBe('REVIEW_PREREQUISITE')
+    expect(d.decision).not.toBe('TEACH_DIRECTLY')
+  })
+
   it('D4: placement probes in flight → keep diagnosing', () => {
     const d = decide({ pendingPlacementProbe: 'at' })
     expect(d.decision).toBe('ASK_DIAGNOSTIC_QUESTION')
