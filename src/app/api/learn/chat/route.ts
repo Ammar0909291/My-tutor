@@ -3104,21 +3104,54 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }).catch(() => { /* non-fatal — outcome logging is purely additive */ })
       }
 
-      // P0 (Brain compliance validation): after the response is finalized,
-      // verify it actually followed the TeachingDecision the Brain computed
-      // this turn (cueDecisionHoisted/dispatchPlanHoisted — always computed,
-      // shadow or active, see the CUE/dispatcher block above). Runs whether
-      // or not the flag is on, so shadow-mode data accumulates evidence for
-      // whether flipping the default is safe. Never blocks or alters the
-      // response — log-only, and never silently ignored (recordCompliance
-      // always logs; violations log at 'warn').
+      // P0 (Brain compliance validation) + P1 (production-validation
+      // telemetry): after the response is finalized, verify it actually
+      // followed the TeachingDecision the Brain computed this turn
+      // (cueDecisionHoisted/dispatchPlanHoisted — always computed, shadow
+      // or active, see the CUE/dispatcher block above), and emit one
+      // BrainEvent covering every field the milestone asks to measure.
+      // Runs whether or not the flag is on, so shadow-mode data
+      // accumulates evidence for whether flipping the default is safe.
+      // Never blocks or alters the response — log-only, and never
+      // silently ignored (recordCompliance always logs; violations log
+      // at 'warn'; recordBrainEvent always emits the structured line).
       try {
         const { checkBrainCompliance } = await import('@/lib/understanding/execution')
-        const { recordCompliance } = await import('@/lib/understanding/brainMetrics')
+        const { recordCompliance, recordBrainEvent } = await import('@/lib/understanding/brainMetrics')
         const complianceResult = checkBrainCompliance(cleanText, dispatchPlanHoisted, cueDecisionHoisted, visualFired)
         recordCompliance(complianceResult)
+
+        const explanationMemoryAvailable = assembled !== null
+        const llmUsed = provider !== 'memory'
+        recordBrainEvent({
+          version: 1,
+          timestamp: new Date().toISOString(),
+          sessionId,
+          userId,
+          subjectSlug: learnSession.subject.slug,
+          brainRuntimeActive,
+          brainDecision: cueDecisionHoisted?.decision ?? null,
+          brainRuleId: cueDecisionHoisted?.ruleId ?? null,
+          compliant: dispatchPlanHoisted && cueDecisionHoisted ? complianceResult.compliant : null,
+          complianceReason: dispatchPlanHoisted && cueDecisionHoisted ? complianceResult.reason : null,
+          explanationMemoryAvailable,
+          explanationMemoryHit: !llmUsed,
+          fallbackReason: memoryFallbackReasonCode,
+          llmUsed,
+          provider,
+          latencyMs: Date.now() - turnReceivedAt,
+          recoveryTriggered: recoveryKeyHoisted !== null,
+          recoveryKey: recoveryKeyHoisted,
+          frustrationDetected: recoveryKeyHoisted === 'frustrated',
+          questionLoopDetected: (conversationStateHoisted?.consecutivePriorKnowledgeProbes ?? 0) >= 2,
+          directInstructionTriggered: cueDecisionHoisted?.decision === 'TEACH_DIRECTLY',
+          brainLegacyDisagreement: explanationMemoryAvailable
+            && dispatchPlanHoisted !== null && dispatchPlanHoisted.executor !== 'EXPLANATION_MEMORY',
+          visualFired,
+          responseLength: cleanText.length,
+        })
       } catch (err) {
-        console.warn('[learn/chat] Brain compliance check skipped (never affects the turn):', err)
+        console.warn('[learn/chat] Brain compliance/telemetry check skipped (never affects the turn):', err)
       }
 
       // The chat turn itself must never fail because of the AI-badge column

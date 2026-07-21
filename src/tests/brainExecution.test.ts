@@ -13,6 +13,7 @@ import { isBrainRuntimeEnabled, planDispatch, type DispatchPlan } from '@/lib/un
 import { buildBrainExecutionBlock, checkBrainCompliance } from '@/lib/understanding/execution'
 import {
   recordDispatch, recordServe, recordCompliance, resetBrainMetrics, snapshotBrainMetrics,
+  recordBrainEvent, getSessionBrainMetrics, type BrainEvent,
 } from '@/lib/understanding/brainMetrics'
 
 function inputs(overrides: Partial<UnderstandingInputs> = {}): UnderstandingInputs {
@@ -266,5 +267,102 @@ describe('Brain compliance validation (P0)', () => {
     expect(warnSpy).toHaveBeenCalledTimes(2)
     expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('violation A'))
     warnSpy.mockRestore()
+  })
+})
+
+// P1 — production-validation telemetry.
+describe('Brain telemetry (P1)', () => {
+  function event(overrides: Partial<BrainEvent> = {}): BrainEvent {
+    return {
+      version: 1, timestamp: new Date().toISOString(), sessionId: 's1', userId: 'u1', subjectSlug: 'physics',
+      brainRuntimeActive: false, brainDecision: null, brainRuleId: null,
+      compliant: null, complianceReason: null,
+      explanationMemoryAvailable: false, explanationMemoryHit: false,
+      fallbackReason: 'no_asset', llmUsed: true, provider: 'groq', latencyMs: 100,
+      recoveryTriggered: false, recoveryKey: null, frustrationDetected: false,
+      questionLoopDetected: false, directInstructionTriggered: false,
+      brainLegacyDisagreement: false, visualFired: false, responseLength: 200,
+      ...overrides,
+    }
+  }
+
+  beforeEach(() => resetBrainMetrics())
+
+  it('unknown session returns null, never a fabricated all-zero report', () => {
+    expect(getSessionBrainMetrics('never-seen')).toBeNull()
+  })
+
+  it('one call per turn emits exactly one structured BRAIN_EVENT log line', () => {
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {})
+    recordBrainEvent(event())
+    const calls = logSpy.mock.calls.filter((c) => typeof c[0] === 'string' && c[0].startsWith('[learn/chat] BRAIN_EVENT='))
+    expect(calls.length).toBe(1)
+    const parsed = JSON.parse(calls[0][0].replace('[learn/chat] BRAIN_EVENT=', ''))
+    expect(parsed.sessionId).toBe('s1')
+    logSpy.mockRestore()
+  })
+
+  it('counters are correct: compliance/memory/llm/recovery/frustration/loop/direct-instruction percentages', () => {
+    recordBrainEvent(event({ compliant: true, llmUsed: true, explanationMemoryHit: false }))
+    recordBrainEvent(event({ compliant: false, llmUsed: true, explanationMemoryHit: false }))
+    recordBrainEvent(event({ compliant: null, llmUsed: false, explanationMemoryHit: true, explanationMemoryAvailable: true }))
+    recordBrainEvent(event({ recoveryTriggered: true, recoveryKey: 'dont_know' }))
+    recordBrainEvent(event({ recoveryTriggered: true, frustrationDetected: true, recoveryKey: 'frustrated' }))
+    recordBrainEvent(event({ questionLoopDetected: true }))
+    recordBrainEvent(event({ directInstructionTriggered: true }))
+
+    const m = getSessionBrainMetrics('s1')!
+    expect(m.totalTurns).toBe(7)
+    // compliance % is only over turns where a compliance check ran (2 of 7)
+    expect(m.compliancePct).toBe(50)
+    expect(m.explanationMemoryPct).toBeCloseTo((1 / 7) * 100, 1)
+    expect(m.llmPct).toBeCloseTo((6 / 7) * 100, 1)
+    expect(m.recoveryPct).toBeCloseTo((2 / 7) * 100, 1)
+    expect(m.frustrationPct).toBeCloseTo((1 / 7) * 100, 1)
+    expect(m.questionLoopPct).toBeCloseTo((1 / 7) * 100, 1)
+    expect(m.directInstructionPct).toBeCloseTo((1 / 7) * 100, 1)
+  })
+
+  it('compliancePct is null when no compliance check ever ran this session', () => {
+    recordBrainEvent(event({ compliant: null }))
+    const m = getSessionBrainMetrics('s1')!
+    expect(m.compliancePct).toBeNull()
+  })
+
+  it('average latency and Brain/legacy disagreements are counted correctly', () => {
+    recordBrainEvent(event({ latencyMs: 100 }))
+    recordBrainEvent(event({ latencyMs: 300 }))
+    recordBrainEvent(event({ brainLegacyDisagreement: true }))
+    const m = getSessionBrainMetrics('s1')!
+    expect(m.avgLatencyMs).toBe(Math.round((100 + 300 + 100) / 3))
+    expect(m.brainLegacyDisagreements).toBe(1)
+    expect(m.brainLegacyDisagreementPct).toBeCloseTo((1 / 3) * 100, 1)
+  })
+
+  it('sessions are tracked independently', () => {
+    recordBrainEvent(event({ sessionId: 'a', llmUsed: true }))
+    recordBrainEvent(event({ sessionId: 'b', llmUsed: false, explanationMemoryHit: true, explanationMemoryAvailable: true }))
+    expect(getSessionBrainMetrics('a')!.llmPct).toBe(100)
+    expect(getSessionBrainMetrics('b')!.llmPct).toBe(0)
+  })
+
+  it('resetBrainMetrics clears session state too', () => {
+    recordBrainEvent(event())
+    resetBrainMetrics()
+    expect(getSessionBrainMetrics('s1')).toBeNull()
+  })
+
+  it('never throws on malformed events', () => {
+    expect(() => recordBrainEvent(null as never)).not.toThrow()
+    expect(() => recordBrainEvent({} as never)).not.toThrow()
+    expect(() => recordBrainEvent({ sessionId: 123 } as never)).not.toThrow()
+  })
+
+  it('logging failure never breaks metric recording (survives a throwing console.log)', () => {
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => { throw new Error('log sink down') })
+    expect(() => recordBrainEvent(event({ sessionId: 'resilient' }))).not.toThrow()
+    logSpy.mockRestore()
+    // the counter fold runs in its own try/catch, independent of the log call
+    expect(getSessionBrainMetrics('resilient')!.totalTurns).toBe(1)
   })
 })
