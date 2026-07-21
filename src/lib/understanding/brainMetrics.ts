@@ -19,6 +19,9 @@ export interface BrainMetricsSnapshot {
   shadowTurns: number
   fallbacks: number
   decisions: Record<string, number>
+  /** P0 compliance validation — see execution.ts checkBrainCompliance(). */
+  complianceChecks: number
+  complianceViolations: number
 }
 
 const metrics: BrainMetricsSnapshot = {
@@ -29,6 +32,8 @@ const metrics: BrainMetricsSnapshot = {
   shadowTurns: 0,
   fallbacks: 0,
   decisions: {},
+  complianceChecks: 0,
+  complianceViolations: 0,
 }
 
 /** One call per turn, at dispatch time. A null plan counts as a fallback. */
@@ -56,6 +61,23 @@ export function snapshotBrainMetrics(): BrainMetricsSnapshot {
   return { ...metrics, decisions: { ...metrics.decisions } }
 }
 
+/**
+ * P0 — one call per turn where a Brain decision was reachable (compliant
+ * or not). Never silently ignores a violation: always logged, at 'warn'
+ * level specifically so it's visually distinct from routine info logs.
+ */
+export function recordCompliance(result: { compliant: boolean; reason: string }): void {
+  try {
+    if (result.compliant) {
+      metrics.complianceChecks += 1
+    } else {
+      metrics.complianceChecks += 1
+      metrics.complianceViolations += 1
+      console.warn('[learn/chat] BRAIN COMPLIANCE VIOLATION: ' + result.reason)
+    }
+  } catch { /* observability never breaks a turn */ }
+}
+
 /** Test hook — counters are process-global. */
 export function resetBrainMetrics(): void {
   metrics.totalTurns = 0
@@ -65,4 +87,6 @@ export function resetBrainMetrics(): void {
   metrics.shadowTurns = 0
   metrics.fallbacks = 0
   metrics.decisions = {}
+  metrics.complianceChecks = 0
+  metrics.complianceViolations = 0
 }

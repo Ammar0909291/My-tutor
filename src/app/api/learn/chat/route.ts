@@ -1800,7 +1800,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 weakConcepts: snapshot.weakConcepts,
                 misconceptions: snapshot.misconceptions,
               })
-              systemPrompt += buildTeachingActionBlock(teachingAction)
+              // P0 (Brain single-authority fix): Teaching Action Generator is a
+              // decision VOICE in the prompt (its block states WHAT/HOW to
+              // teach, independent of the Brain). Once the Brain owns decision
+              // blocks, it must not compete — same suppression pattern already
+              // applied to decide()'s own blocks above. School Mode unaffected
+              // (brainOwnsDecisionBlocks is Library-only in every other use in
+              // this route; `schoolCtx` short-circuits to unconditional inject).
+              if (schoolCtx || !brainOwnsDecisionBlocks) {
+                systemPrompt += buildTeachingActionBlock(teachingAction)
+              }
 
               // Phase 3B: Dynamic Lesson Composer.
               try {
@@ -1830,6 +1839,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                     stageIndex: resumeStageIndex,
                     totalStages: lessonPlan.stages.length,
                   }
+                  // NOTE: unlike buildTeachingActionBlock above, this block is
+                  // NOT suppressed when the Brain owns decisions — the Brain
+                  // (CUE/Decision Engine) does not run until later in this
+                  // route, so which decision it will reach this turn is not
+                  // yet known here; CONTINUE_LESSON's own Brain execution
+                  // directive ("where the lesson plan above left off",
+                  // execution.ts RENDER_ROLES) depends on this block still
+                  // being present whenever that decision fires. Left
+                  // unconditional (unchanged) rather than risk a dangling
+                  // Brain directive with nothing to point at.
                   systemPrompt += buildLessonPlanBlock(lessonPlan, {
                     stageIndex: resumeStageIndex,
                     totalStages: lessonPlan.stages.length,
@@ -3062,13 +3081,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         responseVisual = null
       }
 
+      // Hoisted out of the strategy-log block below so the P0 Brain
+      // compliance check (further down) can reuse it unconditionally —
+      // same computation, not duplicated.
+      const visualFired = Boolean(detectedVisualSpec || detectedSceneSpec || responseVisual)
+
       // Teaching Strategy Engine outcome log (docs/STUDENT_MEMORY_AUDIT.md):
       // additive, fire-and-forget, non-fatal — records which strategy fired
       // and whether a visual ultimately rendered this turn, for future
       // strategy-effectiveness analysis. Never awaited, never throws, so it
       // cannot add latency or fail the turn.
       if (strategyHoisted && outputBiasHoisted && userId) {
-        const visualFired = Boolean(detectedVisualSpec || detectedSceneSpec || responseVisual)
         prisma.teachingStrategyEvent.create({
           data: {
             userId,
@@ -3079,6 +3102,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             sessionId: sessionId ?? null,
           },
         }).catch(() => { /* non-fatal — outcome logging is purely additive */ })
+      }
+
+      // P0 (Brain compliance validation): after the response is finalized,
+      // verify it actually followed the TeachingDecision the Brain computed
+      // this turn (cueDecisionHoisted/dispatchPlanHoisted — always computed,
+      // shadow or active, see the CUE/dispatcher block above). Runs whether
+      // or not the flag is on, so shadow-mode data accumulates evidence for
+      // whether flipping the default is safe. Never blocks or alters the
+      // response — log-only, and never silently ignored (recordCompliance
+      // always logs; violations log at 'warn').
+      try {
+        const { checkBrainCompliance } = await import('@/lib/understanding/execution')
+        const { recordCompliance } = await import('@/lib/understanding/brainMetrics')
+        const complianceResult = checkBrainCompliance(cleanText, dispatchPlanHoisted, cueDecisionHoisted, visualFired)
+        recordCompliance(complianceResult)
+      } catch (err) {
+        console.warn('[learn/chat] Brain compliance check skipped (never affects the turn):', err)
       }
 
       // The chat turn itself must never fail because of the AI-badge column
