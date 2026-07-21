@@ -2301,6 +2301,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Decision Engine will, in a later milestone); it is logged for
       // observability, writes nothing, and can never break a turn
       // (understandStudentTurn never throws; this guard is belt-and-braces).
+      // Milestone 3: the decision is hoisted so the Runtime Dispatcher below
+      // can consume it after this block.
+      let cueDecisionHoisted: import('@/lib/understanding/decisionEngine').TeachingDecision | null = null
       try {
         const { understandStudentTurn } = await import('@/lib/understanding')
         const cueLastSignal = (snapshot?.lastSignal && typeof snapshot.lastSignal === 'object')
@@ -2333,9 +2336,41 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // did. Never acted on: no prompt, DB, or control-flow effect.
         const { decideTeaching } = await import('@/lib/understanding/decisionEngine')
         const teachingDecision = decideTeaching(understanding)
+        cueDecisionHoisted = teachingDecision
         console.log('[learn/chat] CUE decision=' + JSON.stringify(teachingDecision))
       } catch (err) {
         console.warn('[learn/chat] CUE understanding skipped (never affects the turn):', err)
+      }
+
+      // Runtime Dispatcher (Milestone 3) — the ONE place a TeachingDecision
+      // is mapped onto an existing execution path. Flag-gated:
+      // ENABLE_BRAIN_RUNTIME off (default) = shadow compare mode — the plan
+      // is logged next to what the runtime actually does, and the legacy
+      // serving choice below is byte-for-byte unchanged. Flag on = the plan
+      // DRIVES the serve-from-memory-vs-LLM fork (the only externally
+      // visible fork at this point in the route); every other decision
+      // executes through the engine blocks already injected above, with the
+      // LLM in the renderer role (see dispatcher.ts executor honesty note).
+      // Fallback law: a missing/inconsistent plan always degrades to the
+      // legacy behavior — the dispatcher can never strand a turn.
+      let brainRuntimeActive = false
+      let serveFromMemory = assembled !== null
+      try {
+        const { isBrainRuntimeEnabled, planDispatch } = await import('@/lib/understanding/dispatcher')
+        brainRuntimeActive = isBrainRuntimeEnabled()
+        if (cueDecisionHoisted) {
+          const dispatchPlan = planDispatch(cueDecisionHoisted, { assembledAvailable: assembled !== null })
+          console.log(
+            '[learn/chat] CUE dispatch=' + JSON.stringify(dispatchPlan) +
+            ` mode=${brainRuntimeActive ? 'ACTIVE' : 'shadow'}`
+          )
+          if (brainRuntimeActive) {
+            serveFromMemory = dispatchPlan.executor === 'EXPLANATION_MEMORY' && assembled !== null
+          }
+        }
+      } catch (err) {
+        console.warn('[learn/chat] dispatcher skipped (legacy serving choice retained):', err)
+        serveFromMemory = assembled !== null
       }
 
       let text: string
@@ -2364,7 +2399,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       let memoryExactGradeMatch: boolean | null = null
       let memoryFallbackUsed: boolean | null = null
       let memoryFallbackReasonCode: string = 'none'
-      if (assembled) {
+      if (assembled && serveFromMemory) {
         text = assembled.text
         provider = 'memory'
         memoryServingMode = assembled.explanationServingMode
