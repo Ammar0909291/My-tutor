@@ -2355,19 +2355,32 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // legacy behavior — the dispatcher can never strand a turn.
       let brainRuntimeActive = false
       let serveFromMemory = assembled !== null
+      let dispatchPlanHoisted: import('@/lib/understanding/dispatcher').DispatchPlan | null = null
       try {
         const { isBrainRuntimeEnabled, planDispatch } = await import('@/lib/understanding/dispatcher')
         brainRuntimeActive = isBrainRuntimeEnabled()
         if (cueDecisionHoisted) {
-          const dispatchPlan = planDispatch(cueDecisionHoisted, { assembledAvailable: assembled !== null })
+          dispatchPlanHoisted = planDispatch(cueDecisionHoisted, { assembledAvailable: assembled !== null })
           console.log(
-            '[learn/chat] CUE dispatch=' + JSON.stringify(dispatchPlan) +
+            '[learn/chat] CUE dispatch=' + JSON.stringify(dispatchPlanHoisted) +
             ` mode=${brainRuntimeActive ? 'ACTIVE' : 'shadow'}`
           )
           if (brainRuntimeActive) {
-            serveFromMemory = dispatchPlan.executor === 'EXPLANATION_MEMORY' && assembled !== null
+            serveFromMemory = dispatchPlanHoisted.executor === 'EXPLANATION_MEMORY' && assembled !== null
+            // Milestone 4 (Brain Execution): the decision is authoritative.
+            // For renderer-executed decisions, scope the LLM to the RENDERER
+            // role for the engine the Brain selected — an additive block
+            // (the same mechanism every engine already uses) that points at
+            // the engine blocks already injected above; it introduces no new
+            // content and forbids the LLM from choosing a different action.
+            // Empty for memory serves (no LLM at all) and open escalation.
+            const { buildBrainExecutionBlock } = await import('@/lib/understanding/execution')
+            systemPrompt += buildBrainExecutionBlock(dispatchPlanHoisted, cueDecisionHoisted)
           }
         }
+        // Brain runtime metrics — in-process observability only (no DB).
+        const { recordDispatch } = await import('@/lib/understanding/brainMetrics')
+        recordDispatch(dispatchPlanHoisted, brainRuntimeActive)
       } catch (err) {
         console.warn('[learn/chat] dispatcher skipped (legacy serving choice retained):', err)
         serveFromMemory = assembled !== null
@@ -2409,6 +2422,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         memoryExactGradeMatch = assembled.explanationExactGradeMatch
         memoryFallbackUsed = assembled.explanationFallbackUsed
         memoryFallbackReasonCode = assembled.explanationFallbackReason
+        // Milestone 4 metrics: an Explanation Memory serve — Groq NOT called.
+        try { (await import('@/lib/understanding/brainMetrics')).recordServe('memory') } catch { /* observability only */ }
         // Structured provider log — visible in Vercel logs, never sent to
         // client. Proves Explanation Memory is being served without Groq.
         // Never silent: every field the P0 routing audit asked for, on
@@ -2462,6 +2477,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         text = routed.text
         provider = routed.provider
         finishReason = routed.finishReason
+        // Milestone 4 metrics: an LLM-rendered turn (Groq/Yandex called).
+        try { (await import('@/lib/understanding/brainMetrics')).recordServe('llm') } catch { /* observability only */ }
         // Structured provider log — shows when Groq IS called and the exact,
         // never-silent reason Explanation Memory didn't serve this turn
         // instead (memoryFallbackReason is always set to a real value by
