@@ -33,6 +33,13 @@ export type FailureStateKey =
   // Socratic questioning). Distinct failure state, distinct script: stop
   // asking, start showing, this turn and the next one.
   | 'too_many_questions'
+  // P0-3: FRUSTRATION — distinct from every state above, which are all
+  // honest admissions of struggle. Frustration is an affect signal (anger/
+  // exasperation at the CONVERSATION, not the content) and needs a
+  // different script: acknowledge briefly, apologize if the tutor caused
+  // it (e.g. by repeating itself), then change strategy — never validate-
+  // and-shrink like 'dont_know', never argue the point.
+  | 'frustrated'
 
 const STRONG_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   ['give_up',      /\bi\s+(just\s+)?(give|gave)\s+up\b/i],
@@ -51,6 +58,19 @@ const STRONG_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   ['too_many_questions', /\b(stop|quit)\s+asking\s+(me\s+)?(so\s+many\s+)?questions\b/i],
   ['too_many_questions', /\btoo\s+many\s+questions\b/i],
   ['too_many_questions', /\bwhy\s+(do\s+you\s+)?keep\s+(quizzing|questioning|testing)\s+me\b/i],
+  // P0-3: emphatic repetition/exasperation — the learner is not admitting
+  // ignorance, they are objecting to being asked again ("I SAID NO",
+  // "no no no", "how many times", "for the third time", "ugh", "omg").
+  ['frustrated', /\bi\s+(already\s+)?(said|told\s+you)\s+no\b/i],
+  ['frustrated', /\b(no[.,!]*\s+){2,}no\b/i],
+  ['frustrated', /\bhow\s+many\s+times\b/i],
+  ['frustrated', /\bfor\s+the\s+(second|third|fourth|fifth|\d+(st|nd|rd|th))\s+time\b/i],
+  ['frustrated', /\bomg\b/i],
+  ['frustrated', /\bugh+\b/i],
+  // Profanity is one signal among several here, never the sole detector —
+  // kept to unambiguous words to avoid false-firing on incidental subject
+  // content (history/literature can legitimately mention milder words).
+  ['frustrated', /\b(fuck(?:ing)?|shit|wtf|bullshit)\b/i],
 ]
 
 const MILD_PATTERNS: Array<[FailureStateKey, RegExp]> = [
@@ -87,11 +107,50 @@ const MILD_PATTERNS: Array<[FailureStateKey, RegExp]> = [
  * utterance (not merely contain it mid-paragraph). */
 const MILD_MAX_LENGTH = 120
 
-export function detectFailureState(message: string): FailureStateKey | null {
+/**
+ * P0-3: structural "shouting" check — deliberately NOT a phrase list.
+ * Requires enough alphabetic content (>= 8 letters) and multiple words so
+ * a short, legitimately-capitalized answer ("NO", "TRUE", "DNA") can never
+ * misfire; requires an uppercase ratio high enough that normal sentence
+ * capitalization can't trigger it by accident.
+ */
+function isShoutingCaps(text: string): boolean {
+  const letters = text.replace(/[^a-zA-Z]/g, '')
+  if (letters.length < 8) return false
+  if (!/\s/.test(text.trim())) return false
+  const upper = text.replace(/[^A-Z]/g, '')
+  return upper.length / letters.length >= 0.7
+}
+
+/**
+ * P0-3: repeated-identical-answer check — the learner's normalized message
+ * matches their own immediately preceding message. Structural, not a
+ * phrase list: any content can trigger it. Trivial acknowledgements
+ * ("ok", "yes") are excluded via the length floor — those are handled
+ * elsewhere (masteryGate.isBareAcknowledgement) and repeating one is not
+ * evidence of frustration.
+ */
+function isRepeatedAnswer(message: string, priorUserMessage: string | null | undefined): boolean {
+  if (!priorUserMessage) return false
+  const normalize = (s: string) => s.trim().toLowerCase().replace(/['’]/g, '').replace(/[.,!?…\s]+/g, ' ').trim()
+  const a = normalize(message)
+  const b = normalize(priorUserMessage)
+  return a.length >= 4 && a === b
+}
+
+/**
+ * priorUserMessage (optional, default undefined): the learner's immediately
+ * preceding message, when the caller has it — enables the repeated-answer
+ * check above. Omitting it (every pre-existing call site) reproduces the
+ * exact prior behavior; no existing caller's result changes.
+ */
+export function detectFailureState(message: string, priorUserMessage?: string | null): FailureStateKey | null {
   const text = message.trim()
   for (const [key, re] of STRONG_PATTERNS) {
     if (re.test(text)) return key
   }
+  if (isShoutingCaps(text)) return 'frustrated'
+  if (isRepeatedAnswer(text, priorUserMessage)) return 'frustrated'
   if (text.length <= MILD_MAX_LENGTH) {
     for (const [key, re] of MILD_PATTERNS) {
       if (re.test(text)) return key
@@ -224,6 +283,28 @@ const SCRIPTS: Record<FailureStateKey, { general: string; lessonOne?: string }> 
       'STOP asking anything this turn and the next. Demonstrate the idea once, ' +
       'plainly, start to finish, with zero questions attached. A beginner who ' +
       'says this has been asked to infer something before being shown it.',
+  },
+  // P0-3: frustration (anger/exasperation at the conversation, not honest
+  // struggle with the content) — never validate-and-shrink like dont_know;
+  // acknowledge briefly, apologize if the tutor caused it, then switch
+  // strategy outright. The forbidden move is repeating the same question
+  // (verbatim or rephrased) — that IS the loop that caused this.
+  frustrated: {
+    general:
+      'Acknowledge it briefly and plainly ("sorry — I hear you, let\'s try this ' +
+      'differently"). A short apology is appropriate if you have been asking ' +
+      'the same or a similar question repeatedly; do not over-apologize or ' +
+      'dwell on it. Then change strategy immediately: do NOT ask the same ' +
+      'question again in any form — not verbatim, not rephrased, not ' +
+      'simplified. Switch to a direct demonstration or explanation with a ' +
+      'concrete example instead, with no question attached to the end of ' +
+      'your response. Tone: calm and steady — never defensive, never matching ' +
+      'their intensity, never chiding them for how they said it.',
+    lessonOne:
+      'Apologize once, briefly, then STOP asking anything this turn and the ' +
+      'next. Demonstrate the idea plainly, start to finish. A beginner who is ' +
+      'frustrated this early needs proof the friction is over, not another ' +
+      'attempt at the same question.',
   },
 }
 

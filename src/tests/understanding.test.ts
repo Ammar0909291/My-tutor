@@ -79,6 +79,15 @@ describe('CUE Conversation Reader — intent from the detectors that already ran
     expect(u.conversationIntent.value).toBe('recovery')
   })
 
+  // P0-3: frustration reuses the EXACT SAME recoveryGuard -> CUE path as
+  // every other failure state — no new CUE field, no new detector.
+  it('frustration (any FailureStateKey) dominates the same way recovery does', () => {
+    const u = understandStudentTurn(emptyInputs({ message: 'I SAID NO', recoveryKey: 'frustrated' }))
+    expect(u.studentIntent.value).toBe('expressing_distress')
+    expect(u.studentIntent.source).toBe('recoveryGuard')
+    expect(u.conversationIntent.value).toBe('recovery')
+  })
+
   it('bare acknowledgement is acknowledging (masteryGate rule), never answering', () => {
     const u = understandStudentTurn(emptyInputs({
       message: 'ok',

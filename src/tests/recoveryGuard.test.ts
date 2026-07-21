@@ -110,6 +110,101 @@ describe('detectFailureState — P1 coverage extension', () => {
   })
 })
 
+// P0-3: frustration detection, deliberately NOT a static phrase list —
+// mixes emphatic-repetition patterns (still regex, but pattern-shaped not
+// exact-phrase), structural ALL-CAPS shouting, and cross-turn repeated-
+// answer comparison.
+describe('detectFailureState — P0-3 frustration', () => {
+  it.each([
+    'I SAID NO',
+    'i already said no',
+    'no. no. no.',
+    'How many times do I have to say this',
+    'For the third time, no',
+    'omg',
+    'ugh',
+    "this is fucking annoying",
+    'what the hell, wtf',
+  ])('%s → frustrated', (msg) => {
+    expect(detectFailureState(msg)).toBe('frustrated')
+  })
+
+  it('structural ALL-CAPS shouting fires without any phrase match', () => {
+    expect(detectFailureState('STOP TELLING ME THE SAME THING')).toBe('frustrated')
+    expect(detectFailureState('WHY ARE WE STILL DOING THIS')).toBe('frustrated')
+  })
+
+  it('a short legitimate caps answer never fires (no phrase, short, no false shout)', () => {
+    expect(detectFailureState('NO')).toBeNull()
+    expect(detectFailureState('TRUE')).toBeNull()
+    expect(detectFailureState('DNA')).toBeNull()
+  })
+
+  it('normal sentence capitalization never fires', () => {
+    expect(detectFailureState('Can we do harder ones?')).toBeNull()
+    expect(detectFailureState('The mitochondria is the powerhouse of the cell')).toBeNull()
+  })
+
+  it('repeated identical answer across turns fires, given the prior message', () => {
+    expect(detectFailureState('the answer is 12', 'The answer is 12.')).toBe('frustrated')
+    expect(detectFailureState('I dont know', "I don't know")).toBe('frustrated')
+  })
+
+  it('repeated-answer check never fires without the prior-message argument (backward compatible)', () => {
+    // Every pre-existing call site calls detectFailureState with one
+    // argument — this must reproduce the exact prior behavior.
+    expect(detectFailureState('the answer is 12')).toBeNull()
+  })
+
+  it('a different answer on consecutive turns never fires', () => {
+    expect(detectFailureState('the answer is 14', 'the answer is 12')).toBeNull()
+  })
+
+  it('trivial short repeats (acknowledgements) do not fire — handled elsewhere', () => {
+    expect(detectFailureState('ok', 'ok')).toBeNull()
+    expect(detectFailureState('yes', 'yes')).toBeNull()
+  })
+
+  it('benign messages with incidental repetition-adjacent words never fire', () => {
+    expect(detectFailureState('Why does this happen every time the ball falls?')).toBeNull()
+    expect(detectFailureState('What is the third derivative of this function?')).toBeNull()
+  })
+})
+
+describe('buildRecoveryBlock — frustrated (P0-3)', () => {
+  it('acknowledges briefly, apologizes when appropriate, and forbids repeating the question', () => {
+    const block = buildRecoveryBlock('frustrated', false)
+    expect(block).toMatch(/Acknowledge it briefly/i)
+    expect(block).toMatch(/apology is appropriate/i)
+    expect(block).toMatch(/do NOT ask the same question again/i)
+    expect(block).toMatch(/not verbatim, not rephrased/i)
+  })
+  it('changes strategy to direct demonstration with an example, no question attached', () => {
+    const block = buildRecoveryBlock('frustrated', false)
+    expect(block).toMatch(/direct demonstration or explanation with a/i)
+    expect(block).toMatch(/no question attached/i)
+  })
+  it('never matches their intensity or chides their tone', () => {
+    const block = buildRecoveryBlock('frustrated', false)
+    expect(block).toMatch(/never matching their intensity/i)
+    expect(block).toMatch(/never chiding them/i)
+  })
+  it('lesson-one variant apologizes once then bans questions this turn and the next', () => {
+    const block = buildRecoveryBlock('frustrated', true)
+    expect(block).toMatch(/Apologize once/i)
+    expect(block).toMatch(/this turn and the next/i)
+  })
+  it('still preempts everything and bans answering with a question, like every other script', () => {
+    const block = buildRecoveryBlock('frustrated', false)
+    expect(block).toMatch(/PREEMPTS EVERYTHING/)
+    expect(block).toMatch(/never answer it with a question/i)
+  })
+  it('participates in the same escalation ladder as every other failure state', () => {
+    const block = buildRecoveryBlock('frustrated', false, 2)
+    expect(block).toMatch(/REPEATED STRUGGLE/i)
+  })
+})
+
 describe('buildRecoveryBlock — too_many_questions (P1)', () => {
   it('stops questioning and switches to direct demonstration, general script', () => {
     const block = buildRecoveryBlock('too_many_questions', false)

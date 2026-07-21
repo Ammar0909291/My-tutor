@@ -1903,7 +1903,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     if (!schoolCtx) {
       try {
         const { detectFailureState } = await import('@/lib/teaching/recoveryGuard')
-        recoveryKeyHoisted = detectFailureState(message)
+        // P0-3: the learner's immediately preceding message (already loaded,
+        // newest-first, predates this turn's insert) — enables the repeated-
+        // identical-answer frustration check. Optional param; every other
+        // call site (School Mode, EOS kernel) is unaffected.
+        const priorUserMessage = learnSession.messages.find((m) => m.role === MessageRole.USER)?.content ?? null
+        recoveryKeyHoisted = detectFailureState(message, priorUserMessage)
         const { buildSignalInstruction } = await import('@/lib/teaching/signals')
         const { isFirstLessonContext, buildFirstLessonBlock } = await import('@/lib/teaching/firstLessonGuard')
         const { emptyPlacementState, nextProbe, buildPlacementProbeBlock, buildPlacementAwaitBlock } = await import('@/lib/teaching/placementVerification')

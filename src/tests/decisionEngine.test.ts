@@ -78,6 +78,19 @@ describe('Decision Engine — the ladder, rule by rule', () => {
     expect(d.ruleId).toBe('D0-RECOVERY-PREEMPT')
   })
 
+  // P0-3: frustration reuses D0-RECOVERY-PREEMPT outright — no new rule.
+  // Proves the Decision Engine needs zero new code for frustration; only
+  // the detector (recoveryGuard) needed extending.
+  it('D0: frustration preempts everything, exactly like every other recovery key', () => {
+    const d = decide({
+      message: 'I SAID NO', recoveryKey: 'frustrated',
+      assembled: { usedAssetIds: ['a1'], explanationConfidence: 0.9, explanationServingMode: 'exact' },
+      lastSignal: { correctness: false }, sessionFailureCount: 3,
+    })
+    expect(d.decision).toBe('ESCALATE_TO_LLM')
+    expect(d.ruleId).toBe('D0-RECOVERY-PREEMPT')
+  })
+
   it('D0d: a fresh session opening on a non-first lesson outranks a stale FRAGILE mastery reading', () => {
     const d = decide({
       freshBoundary: true,
