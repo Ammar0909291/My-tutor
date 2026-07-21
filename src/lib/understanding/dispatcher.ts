@@ -62,6 +62,22 @@ export function isBrainRuntimeEnabled(): boolean {
   return v === '1' || v === 'true'
 }
 
+/**
+ * Milestone 6 (Brain owns decisions): when the Brain runtime is ON, the
+ * Brain's execution block is the prompt's SINGLE decision authority. The
+ * legacy decision blocks — the TEACHING ENGINE DECISION block, the
+ * LAST-ANSWER READ overlay (whose two grid reads are migrated into the
+ * Decision Engine: D2b confident-wrong, D5 hesitant-correct), and the
+ * per-action procedure block keyed to decide()'s choice — are suppressed
+ * at their injection sites. Their engines keep RUNNING (their state,
+ * snapshots, and visual outputs are consumed elsewhere); they just no
+ * longer speak with decision authority in the prompt. Flag OFF: every
+ * legacy block is injected exactly as before.
+ */
+export function legacyDecisionBlocksSuppressed(): boolean {
+  return isBrainRuntimeEnabled()
+}
+
 const ENGINE_ROUTES: Record<TeachingDecisionType, { executor: DispatchExecutor; engine: string; note: string }> = {
   SERVE_EXPLANATION_MEMORY: {
     executor: 'EXPLANATION_MEMORY',

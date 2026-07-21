@@ -142,6 +142,33 @@ describe('Brain Validation — would a human teacher do the same?', () => {
     expect(decision.ruleId).toBe('D8-LLM-FLOOR')
   })
 
+  it('V14 (M6): confident-wrong — teacher treats it as a committed wrong rule, repairs before anything (migrated LAST-ANSWER READ)', () => {
+    const { decision } = run({ lastSignal: { correctness: false, confidence: 'high' } })
+    expect(decision.decision).toBe('DETECT_MISCONCEPTION')
+    expect(decision.ruleId).toBe('D2b-CONFIDENT-WRONG')
+    expect(decision.rationale.join(' ')).toContain('collide')
+  })
+
+  it('V15 (M6): hesitant-correct — right answer with shaky ownership → same-level practice, no advancement (migrated LAST-ANSWER READ)', () => {
+    const { decision } = run({ lastSignal: { correctness: true, confidence: 'low' } })
+    expect(decision.decision).toBe('PRACTICE')
+    expect(decision.ruleId).toBe('D5-FRAGILE-CONSOLIDATE')
+  })
+
+  it('V16 (M6): an engine-catalogued HIGH misconception still outranks the bare confident-wrong signature', () => {
+    const { decision } = run({
+      lastSignal: { correctness: false, confidence: 'high' },
+      observations: {
+        misconceptions: [{
+          type: 'X', label: 'Named misconception', description: 'd',
+          confidence: 'HIGH', evidenceCount: 3, remediationSteps: [],
+        }],
+      },
+    })
+    expect(decision.ruleId).toBe('D2-MISCONCEPTION-HIGH')
+    expect(decision.parameters.misconceptionLabel).toBe('Named misconception')
+  })
+
   it('V13: recovery outranks closing outranks first-lesson (preemption order is total)', () => {
     const all = run({
       message: 'I give up', recoveryKey: 'i_give_up',

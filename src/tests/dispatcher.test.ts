@@ -10,7 +10,7 @@
 import { describe, it, expect, afterEach } from 'vitest'
 import { understandStudentTurn, type UnderstandingInputs } from '@/lib/understanding'
 import { decideTeaching, type TeachingDecision } from '@/lib/understanding/decisionEngine'
-import { isBrainRuntimeEnabled, planDispatch } from '@/lib/understanding/dispatcher'
+import { isBrainRuntimeEnabled, legacyDecisionBlocksSuppressed, planDispatch } from '@/lib/understanding/dispatcher'
 
 function inputs(overrides: Partial<UnderstandingInputs> = {}): UnderstandingInputs {
   return {
@@ -47,6 +47,13 @@ describe('Dispatcher — feature flag', () => {
     expect(isBrainRuntimeEnabled()).toBe(true)
     process.env.ENABLE_BRAIN_RUNTIME = 'true'
     expect(isBrainRuntimeEnabled()).toBe(true)
+  })
+
+  it('M6: legacy decision blocks are suppressed exactly when the Brain runtime is ON (single decision authority)', () => {
+    delete process.env.ENABLE_BRAIN_RUNTIME
+    expect(legacyDecisionBlocksSuppressed()).toBe(false) // flag OFF: legacy blocks injected as before
+    process.env.ENABLE_BRAIN_RUNTIME = '1'
+    expect(legacyDecisionBlocksSuppressed()).toBe(true)  // flag ON: Brain execution block is the only decision text
   })
 })
 

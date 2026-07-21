@@ -64,7 +64,7 @@ describe('Brain Execution — runtime ON, every decision verified', () => {
         }],
       },
     }, false)
-    expect(block).toContain('misconception/remediation block above')
+    expect(block).toContain('misconception/remediation block appears above')
     expect(block).toContain('Misconception under repair: "Bigger denominator = bigger fraction"')
     expect(block).toContain('you only explain')
   })

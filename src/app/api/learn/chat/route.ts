@@ -1678,44 +1678,56 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               error_patterns: snapshot.errorPatterns,
             },
           )
-          const modeNote = decision.mode === 'remediate'
-            ? ' — address prerequisite gaps before new material'
-            : decision.mode === 'reinforce'
-              ? ' — strengthen retention via spaced practice'
-              : decision.mode === 'accelerate'
-                ? ' — reduce scaffolding, move faster'
-                : ' — direct instruction'
-          systemPrompt += `\n\nTEACHING ENGINE DECISION — follow this strategy this turn:\n- Goal: ${decision.goal}\n- Mode: ${decision.mode}${modeNote}\n- Action: ${decision.action_type.replace(/_/g, ' ').toLowerCase()}\n- Difficulty: ${decision.difficulty}\n- Target session: ${decision.estimated_time} min`
+          // Milestone 6 (Brain owns decisions): when the Brain runtime is ON,
+          // the Brain's execution block (appended before the LLM call) is the
+          // prompt's single decision authority — decide() still RUNS (its
+          // snapshot and visual outputs are consumed elsewhere), but its
+          // instruction block, the LAST-ANSWER READ overlay (both grid reads
+          // now live in the Decision Engine: D2b confident-wrong / D5
+          // hesitant-correct), and the per-action procedure block are not
+          // injected. Flag OFF: everything injected exactly as before.
+          const { legacyDecisionBlocksSuppressed } = await import('@/lib/understanding/dispatcher')
+          const brainOwnsDecisionBlocks = legacyDecisionBlocksSuppressed()
+          if (!brainOwnsDecisionBlocks) {
+            const modeNote = decision.mode === 'remediate'
+              ? ' — address prerequisite gaps before new material'
+              : decision.mode === 'reinforce'
+                ? ' — strengthen retention via spaced practice'
+                : decision.mode === 'accelerate'
+                  ? ' — reduce scaffolding, move faster'
+                  : ' — direct instruction'
+            systemPrompt += `\n\nTEACHING ENGINE DECISION — follow this strategy this turn:\n- Goal: ${decision.goal}\n- Mode: ${decision.mode}${modeNote}\n- Action: ${decision.action_type.replace(/_/g, ' ').toLowerCase()}\n- Difficulty: ${decision.difficulty}\n- Target session: ${decision.estimated_time} min`
 
-          // CTO iteration — the D1 grid read (foundations/02 §1), previously
-          // invisible to the decision layer: the previous turn's captured
-          // signal classifies the learner's last answer into the grid's
-          // quadrants, and the two quadrants that change the next move are
-          // stated deterministically (decision-matrix/03 cells, retrieved
-          // not improvised). decide()'s frozen signature has no
-          // speed/confidence input (its documented gap, foundations/02 §5)
-          // — this overlay supplies exactly that read without touching the
-          // frozen engine.
-          // NOTE: `snapshot` here is the TeachingMemorySnapshot (shadowed) —
-          // the session contextSnapshot is read via learnSession directly.
-          const sessionSnap = learnSession.contextSnapshot as Record<string, unknown> | null
-          const prevSignal = (sessionSnap?.lastSignal && typeof sessionSnap.lastSignal === 'object')
-            ? sessionSnap.lastSignal as { correctness?: boolean; confidence?: string }
-            : undefined
-          if (prevSignal?.correctness === false && prevSignal?.confidence === 'high') {
-            systemPrompt += `\n- LAST-ANSWER READ (fast-wrong — misconception signature, the grid's dangerous quadrant): do NOT spot-correct and move on. Elicit their reasoning, get them to commit to it, then present one concrete case where their rule visibly breaks — repair before any new content.`
-          } else if (prevSignal?.correctness === true && prevSignal?.confidence === 'low') {
-            systemPrompt += `\n- LAST-ANSWER READ (hesitant-correct — FRAGILE): do not advance yet. One more problem of the SAME type and difficulty now; advance only after a fluent, confident success. If this one is quicker, say so ("that one was quicker — feel it?").`
-          }
+            // CTO iteration — the D1 grid read (foundations/02 §1), previously
+            // invisible to the decision layer: the previous turn's captured
+            // signal classifies the learner's last answer into the grid's
+            // quadrants, and the two quadrants that change the next move are
+            // stated deterministically (decision-matrix/03 cells, retrieved
+            // not improvised). decide()'s frozen signature has no
+            // speed/confidence input (its documented gap, foundations/02 §5)
+            // — this overlay supplies exactly that read without touching the
+            // frozen engine.
+            // NOTE: `snapshot` here is the TeachingMemorySnapshot (shadowed) —
+            // the session contextSnapshot is read via learnSession directly.
+            const sessionSnap = learnSession.contextSnapshot as Record<string, unknown> | null
+            const prevSignal = (sessionSnap?.lastSignal && typeof sessionSnap.lastSignal === 'object')
+              ? sessionSnap.lastSignal as { correctness?: boolean; confidence?: string }
+              : undefined
+            if (prevSignal?.correctness === false && prevSignal?.confidence === 'high') {
+              systemPrompt += `\n- LAST-ANSWER READ (fast-wrong — misconception signature, the grid's dangerous quadrant): do NOT spot-correct and move on. Elicit their reasoning, get them to commit to it, then present one concrete case where their rule visibly breaks — repair before any new content.`
+            } else if (prevSignal?.correctness === true && prevSignal?.confidence === 'low') {
+              systemPrompt += `\n- LAST-ANSWER READ (hesitant-correct — FRAGILE): do not advance yet. One more problem of the SAME type and difficulty now; advance only after a fluent, confident success. If this one is quicker, say so ("that one was quicker — feel it?").`
+            }
 
-          // Wave 1 (Runtime Guardian): the authored HOW for the action
-          // decide() just selected — retrieved from the Brain's action
-          // catalog / repair sequence instead of improvised per turn.
-          // Library only: School Mode already receives the Teaching Action
-          // Generator's structured block for the same purpose (ADR 08).
-          if (!schoolCtx) {
-            const { buildActionProcedureBlock } = await import('@/lib/teaching/actionProcedures')
-            systemPrompt += buildActionProcedureBlock(decision.action_type)
+            // Wave 1 (Runtime Guardian): the authored HOW for the action
+            // decide() just selected — retrieved from the Brain's action
+            // catalog / repair sequence instead of improvised per turn.
+            // Library only: School Mode already receives the Teaching Action
+            // Generator's structured block for the same purpose (ADR 08).
+            if (!schoolCtx) {
+              const { buildActionProcedureBlock } = await import('@/lib/teaching/actionProcedures')
+              systemPrompt += buildActionProcedureBlock(decision.action_type)
+            }
           }
 
           // Phase 2F (Teaching Action Intelligence): advisory only — does NOT

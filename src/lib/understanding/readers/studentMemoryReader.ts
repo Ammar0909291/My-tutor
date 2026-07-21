@@ -29,9 +29,19 @@ export function readStudentMemory(input: StudentMemoryReaderInput): StudentMemor
     input.episode?.visibleFailures ?? 0,
   )
   let masteryState: Sourced<MasteryState>
-  if (failures >= 2) {
+  if (input.lastSignal?.correctness === false && input.lastSignal?.confidence === 'high') {
+    // Confident-wrong — the D1 grid's dangerous quadrant (misconception
+    // signature; foundations/02 §1). Migrated from route.ts's LAST-ANSWER
+    // READ overlay (Milestone 6): outranks the failure-count reads because
+    // repairing a committed wrong rule comes before generic consolidation.
+    masteryState = sourced('misconceiving', 'signals:lastSignal', 0.75)
+  } else if (failures >= 2) {
     masteryState = sourced('struggling', 'contextSnapshot', 0.75)
   } else if (input.lastSignal?.correctness === false || failures > 0) {
+    masteryState = sourced('fragile', 'signals:lastSignal', 0.7)
+  } else if (input.lastSignal?.correctness === true && input.lastSignal?.confidence === 'low') {
+    // Hesitant-correct — the grid's FRAGILE quadrant (also from the
+    // LAST-ANSWER READ overlay): right answer, shaky ownership.
     masteryState = sourced('fragile', 'signals:lastSignal', 0.7)
   } else if (input.lastSignal?.correctness === true) {
     masteryState = sourced('progressing', 'signals:lastSignal', 0.7)

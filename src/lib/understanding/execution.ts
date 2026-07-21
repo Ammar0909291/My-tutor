@@ -30,7 +30,7 @@ const RENDER_ROLES: Partial<Record<TeachingDecision['decision'], { role: string;
   },
   DETECT_MISCONCEPTION: {
     role: 'explain',
-    directive: 'Run the misconception repair the misconception/remediation block above specifies. The engine decided WHAT to repair and HOW; you only explain it naturally.',
+    directive: 'Run the misconception repair: if a misconception/remediation block appears above, follow it exactly; otherwise (confident-wrong signature) elicit the learner\'s reasoning, get them to commit to it, then present one concrete case where their rule visibly breaks — repair before any new content. The engine decided WHAT to repair and HOW; you only explain it naturally.',
   },
   REVIEW_PREREQUISITE: {
     role: 'teach',
@@ -38,7 +38,7 @@ const RENDER_ROLES: Partial<Record<TeachingDecision['decision'], { role: string;
   },
   PRACTICE: {
     role: 'present',
-    directive: 'Give consolidation practice on the CURRENT concept, following the teaching strategy block above. No new concepts and no advancement this turn.',
+    directive: 'Give consolidation practice on the CURRENT concept, following the teaching strategy block above: one more problem of the SAME type and difficulty; advance only after a fluent, confident success. No new concepts and no advancement this turn.',
   },
   VISUALIZATION: {
     role: 'narrate',

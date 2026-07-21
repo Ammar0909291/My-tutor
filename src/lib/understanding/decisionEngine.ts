@@ -165,6 +165,19 @@ export function decideTeaching(u: StudentTurnUnderstanding): TeachingDecision {
         { misconceptionLabel: highMisconception.label, conceptId: topicId(u.currentTopic.value) })
     }
 
+    // D-2b — CONFIDENT-WRONG SIGNATURE (Milestone 6, migrated from route.ts's
+    // LAST-ANSWER READ overlay): wrong answer given with high confidence is
+    // the D1 grid's dangerous quadrant — a committed wrong rule. Repair
+    // (elicit → commit → collide) before any new content, even without an
+    // engine-catalogued misconception to name.
+    if (u.masteryState.value === 'misconceiving') {
+      return make(u, 'DETECT_MISCONCEPTION', 'D2b-CONFIDENT-WRONG',
+        ['Last answer was wrong with HIGH stated confidence — the misconception signature (D1 grid dangerous quadrant, foundations/02 §1).',
+         'Do not spot-correct and move on: elicit the reasoning, get commitment, collide it with one breaking case (misconceptions/ 7-step repair).'],
+        ['masteryState'],
+        { conceptId: topicId(u.currentTopic.value) })
+    }
+
     // D-3 — STRUGGLING WITH A KNOWN PREREQUISITE: step back one KG edge
     // (placement/05 just-in-time prerequisite repair), never re-teach from zero.
     const prereqId = topicId(u.prerequisiteTopic.value)

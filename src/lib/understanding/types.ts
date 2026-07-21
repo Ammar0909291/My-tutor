@@ -68,9 +68,10 @@ export type ConversationIntent =
   | 'unknown'
 
 export type MasteryState =
+  | 'misconceiving'        // confident-wrong: the D1 grid's dangerous quadrant (fast-wrong signature)
   | 'struggling'           // repeated failures this session
-  | 'fragile'              // last answer wrong, or failure count > 0
-  | 'progressing'          // last answer right, no failures banked
+  | 'fragile'              // last answer wrong, or hesitant-correct, or failure count > 0
+  | 'progressing'          // last answer right and confident, no failures banked
   | 'unknown'
 
 export type ProgressState =
