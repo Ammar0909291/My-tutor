@@ -111,11 +111,26 @@ export function applySignalToEpisode(
  * win first when owed → retro-close continuity in one breath → due-review
  * retrieval BEFORE any new content.
  */
+/**
+ * P0-1 (lesson introduction defect): identity of the lesson this OPENING
+ * belongs to, so a returning learner starting a NEW lesson (not lesson
+ * one — that is firstLessonGuard's block) gets an explicit objective,
+ * rationale, and bridge from the previous lesson, not just a one-line
+ * greeting. Callers pass null for lesson one (firstLessonGuard already
+ * owns that introduction in full) or when no lesson identity is resolved.
+ */
+export interface LessonOpeningIntro {
+  lessonTitle: string
+  lessonGoal: string
+  previousLessonTitle: string | null
+}
+
 export function buildOpeningBlock(opts: {
   dueReviewCount: number
   retroWinOwed: boolean
   isFreshBoundary: boolean
   hadPreviousEpisode: boolean
+  lessonIntro?: LessonOpeningIntro | null
 }): string {
   if (!opts.isFreshBoundary) return ''
   const lines: string[] = [
@@ -146,6 +161,20 @@ export function buildOpeningBlock(opts: {
     )
   } else {
     lines.push('- No reviews are due — proceed to the main content after the greeting.')
+  }
+  if (opts.lessonIntro) {
+    const { lessonTitle, lessonGoal, previousLessonTitle } = opts.lessonIntro
+    lines.push(
+      `- Once the above is satisfied, open lesson "${lessonTitle}" covering ` +
+      'these required elements, in order, before teaching any new content: ' +
+      `(1) state the lesson objective — what they will be able to do by the ` +
+      `end (goal: "${lessonGoal}"); (2) state briefly why this lesson matters ` +
+      '— one concrete reason it is worth learning; ' +
+      (previousLessonTitle
+        ? `(3) connect it to the previous lesson, "${previousLessonTitle}" — one sentence on how the two relate.`
+        : '(3) connect it to what the learner already knows, if anything relevant came up above.') +
+      ' Keep this to a few sentences — it is an orientation, not a lecture.',
+    )
   }
   return lines.join('\n')
 }

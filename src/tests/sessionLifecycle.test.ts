@@ -88,6 +88,36 @@ describe('prompt blocks', () => {
   it('no block mid-session (no re-greeting — invisible-restart guard)', () => {
     expect(buildOpeningBlock({ dueReviewCount: 3, retroWinOwed: false, isFreshBoundary: false, hadPreviousEpisode: true })).toBe('')
   })
+
+  // P0-1 (lesson introduction defect): a returning learner starting lesson
+  // 2+ was only ever getting "name one thing they did well" — no explicit
+  // objective, no why-it-matters, no connection to the previous lesson.
+  it('lessonIntro adds objective, why-it-matters, and a connection to the previous lesson', () => {
+    const block = buildOpeningBlock({
+      dueReviewCount: 0, retroWinOwed: false, isFreshBoundary: true, hadPreviousEpisode: true,
+      lessonIntro: { lessonTitle: 'Newton\'s Second Law', lessonGoal: 'Apply F=ma to solve motion problems', previousLessonTitle: 'Newton\'s First Law' },
+    })
+    expect(block).toMatch(/state the lesson objective/i)
+    expect(block).toMatch(/Apply F=ma to solve motion problems/)
+    expect(block).toMatch(/why this lesson matters/i)
+    expect(block).toMatch(/connect it to the previous lesson, "Newton's First Law"/)
+  })
+
+  it('lessonIntro with no previous lesson title still asks for a connection, without naming one', () => {
+    const block = buildOpeningBlock({
+      dueReviewCount: 0, retroWinOwed: false, isFreshBoundary: true, hadPreviousEpisode: false,
+      lessonIntro: { lessonTitle: 'Fractions', lessonGoal: 'Compare and order fractions', previousLessonTitle: null },
+    })
+    expect(block).toMatch(/connect it to what the learner already knows/i)
+    expect(block).not.toMatch(/connect it to the previous lesson, "/)
+  })
+
+  it('omitting lessonIntro reproduces the exact pre-fix text (no regression for lesson one / no-lesson-context callers)', () => {
+    const withoutIntro = buildOpeningBlock({ dueReviewCount: 0, retroWinOwed: false, isFreshBoundary: true, hadPreviousEpisode: true })
+    const withNullIntro = buildOpeningBlock({ dueReviewCount: 0, retroWinOwed: false, isFreshBoundary: true, hadPreviousEpisode: true, lessonIntro: null })
+    expect(withoutIntro).toBe(withNullIntro)
+    expect(withoutIntro).not.toMatch(/lesson objective/i)
+  })
   it('affect close forbids new content and mistake-blaming', () => {
     const block = buildAffectCloseBlock()
     expect(block).toMatch(/do NOT introduce new content/i)

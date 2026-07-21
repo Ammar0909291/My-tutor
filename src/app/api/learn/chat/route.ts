@@ -1911,6 +1911,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // Step 2: the OBSERVE signal (decision-engine/08 step 1; Blueprint Phase 3)
         systemPrompt += buildSignalInstruction()
 
+        // P0-1 (lesson introduction defect): computed once, ahead of the
+        // session-opening block below, so a non-first lesson's OPENING can
+        // require an explicit objective/why-it-matters/connection instead of
+        // only the first-lesson block covering that ground (lesson one only).
+        // Reused verbatim at Step 3 below — no duplicate isFirstLessonContext call.
+        const isFirstLessonContextHoisted = isFirstLessonContext({
+          isSchoolMode: false,
+          currentLevel: profile?.currentLevel,
+          currentLessonOrder: lessonCtx?.currentLesson,
+          completedLessonCount: studentProgress?.completedLessons?.length ?? 0,
+        })
+
         // Session lifecycle (07 §8): boundary measured from real message
         // timestamps — the newest loaded message predates this turn's user
         // insert, so the gap is genuine learner inactivity, never LLM-claimed.
@@ -1956,6 +1968,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               retroWinOwed: sessionEpisodeHoisted.retroWinOwed,
               isFreshBoundary: true,
               hadPreviousEpisode: prevEpisode !== null || lastMsgAt !== null,
+              // P0-1: lesson one's objective/why-it-matters/connection is
+              // fully owned by buildFirstLessonBlock (Step 3 below) — never
+              // duplicate it here. For lesson 2+, only fire when a lesson
+              // identity actually resolved this turn.
+              lessonIntro: (!isFirstLessonContextHoisted && lessonCtx) ? {
+                lessonTitle: lessonCtx.lessonTitle,
+                lessonGoal: lessonCtx.lessonGoal,
+                previousLessonTitle: studentProgress?.lastLessonTitle ?? null,
+              } : null,
             })
           } else if (sessionEpisodeHoisted.phase === 'CLOSING') {
             // Affect budget spent earlier this session (07 §6): the close
@@ -2017,12 +2038,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
         // Step 3: deterministic first-lesson protocol (Blueprint Phase 1;
         // first-lesson/02 §2, 04 §1, 07). Last block = overriding rules.
-        if (isFirstLessonContext({
-          isSchoolMode: false,
-          currentLevel: profile?.currentLevel,
-          currentLessonOrder: lessonCtx?.currentLesson,
-          completedLessonCount: studentProgress?.completedLessons?.length ?? 0,
-        })) {
+        if (isFirstLessonContextHoisted) {
           systemPrompt += buildFirstLessonBlock(subjectCode)
           firstLessonActiveHoisted = true
         }

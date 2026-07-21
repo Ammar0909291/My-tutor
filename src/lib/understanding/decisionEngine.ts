@@ -145,6 +145,21 @@ export function decideTeaching(u: StudentTurnUnderstanding): TeachingDecision {
         ['conversationIntent'])
     }
 
+    // D-0d — SESSION OPENING IS PROTOCOL-BOUND (P0-1 lesson-introduction
+    // fix): a fresh episode boundary on a non-first lesson outranks generic
+    // content decisions the same way D0c protects lesson one — the learner
+    // has not yet been welcomed, recapped, or told this lesson's objective,
+    // so no misconception repair/practice/progression call may open the
+    // turn instead. The buildOpeningBlock block already injected (extended
+    // for this fix with the objective/why-it-matters/connection directive)
+    // directs the renderer.
+    if (u.conversationIntent.value === 'session_opening') {
+      return make(u, 'ESCALATE_TO_LLM', 'D0d-SESSION-OPENING-PROTOCOL',
+        ['A fresh session/episode boundary is open: the lesson-opening protocol (welcome, recap, objective, why it matters, connection to the previous lesson) outranks generic content decisions until it is delivered.',
+         'The buildOpeningBlock block already injected by the runtime directs the renderer.'],
+        ['conversationIntent'])
+    }
+
     // D-2 — HIGH-CONFIDENCE MISCONCEPTION: route into the existing repair
     // machinery (misconceptionEngine → elicit→commit→collide sequence).
     const highMisconception = u.misconceptionCandidates.find((m) => m.confidence === 'HIGH')

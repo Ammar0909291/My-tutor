@@ -78,6 +78,28 @@ describe('Decision Engine — the ladder, rule by rule', () => {
     expect(d.ruleId).toBe('D0-RECOVERY-PREEMPT')
   })
 
+  it('D0d: a fresh session opening on a non-first lesson outranks a stale FRAGILE mastery reading', () => {
+    const d = decide({
+      freshBoundary: true,
+      firstLessonActive: false,
+      // A left-over failure signal from before the boundary — would route
+      // to D5-FRAGILE-CONSOLIDATE if the opening protocol didn't preempt it.
+      lastSignal: { correctness: false },
+    })
+    expect(d.decision).toBe('ESCALATE_TO_LLM')
+    expect(d.ruleId).toBe('D0d-SESSION-OPENING-PROTOCOL')
+  })
+
+  it('D0d does not fire on lesson one (D0c owns that introduction instead)', () => {
+    const d = decide({ freshBoundary: true, firstLessonActive: true })
+    expect(d.ruleId).toBe('D0c-FIRST-LESSON-PROTOCOL')
+  })
+
+  it('D0d does not fire mid-session (no freshBoundary, no OPENING episode)', () => {
+    const d = decide({ freshBoundary: false, firstLessonActive: false, lastSignal: { correctness: true } })
+    expect(d.ruleId).not.toBe('D0d-SESSION-OPENING-PROTOCOL')
+  })
+
   it('D1: an assembled Explanation Memory turn is honored, with asset ids', () => {
     const d = decide({
       assembled: { usedAssetIds: ['a1', 'a2'], explanationConfidence: 0.9, explanationServingMode: 'exact' },
