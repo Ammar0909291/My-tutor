@@ -12,8 +12,8 @@ import {
 } from '@/lib/teaching/evidence/evidenceReader'
 import {
   computeLearningAnalytics, mostFailedConcepts, mostCommonMisconceptions,
-  teachingActionSuccessRates, recoverySuccessRates, explanationEffectiveness, probeEffectiveness,
-  averageMasteryTime, conceptsRequiringRepeatedRemediation, dropOffPoints,
+  teachingActionSuccessRates, recoverySuccessRates, explanationEffectiveness, hintEffectiveness,
+  probeEffectiveness, averageMasteryTime, conceptsRequiringRepeatedRemediation, dropOffPoints,
 } from '@/lib/teaching/evidence/learningAnalytics'
 import {
   buildAuthoringFeedback, renderAuthoringFeedbackMarkdown, DEFAULT_AUTHORING_THRESHOLDS,
@@ -63,6 +63,9 @@ const recovery = (state: string, over: Partial<EvidenceEventRow> = {}) =>
 
 const assetShown = (over: Partial<EvidenceEventRow> = {}) =>
   ev({ category: 'ASSET_SHOWN', outcome: 'shown', strength: 0, ...over })
+
+const hintShown = (over: Partial<EvidenceEventRow> = {}) =>
+  ev({ category: 'LEARNER_FEEDBACK', outcome: 'hint:shown', strength: 0, ...over })
 
 const inspectorWith = (kinds: string[]): PackageInspector => (conceptId) => ({
   packageId: `${conceptId}-package`,
@@ -260,6 +263,21 @@ describe('learning analytics', () => {
     // the un-followed s3 shown event contributes to neither bucket
     const totalCounted = stats.reduce((sum, s) => sum + s.stat.total, 0)
     expect(totalCounted).toBe(2)
+  })
+
+  it('hintEffectiveness joins a hint to the FIRST following probe, and ignores recovery/other feedback', () => {
+    const events = [
+      hintShown(),               // followed by a pass → success
+      probe(true),
+      hintShown({ sessionId: 's2' }), // followed by a fail → failure
+      probe(false, { sessionId: 's2' }),
+      hintShown({ sessionId: 's3' }), // nothing after → must not count
+      recovery('im_stuck', { sessionId: 's4' }), // a different LEARNER_FEEDBACK outcome — must not be read as a hint
+      probe(true, { sessionId: 's4' }),
+    ]
+    const stats = hintEffectiveness(lessonsFrom(events))
+    const entropy = stats.find((s) => s.conceptId === 'phys.therm.entropy')!
+    expect(entropy.stat).toMatchObject({ successes: 1, failures: 1, total: 2 })
   })
 
   it('probeEffectiveness flags non-discriminating probes at sample size', () => {

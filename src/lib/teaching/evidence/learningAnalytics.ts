@@ -156,6 +156,30 @@ export function explanationEffectiveness(lessons: LessonEvidence[]): Explanation
     .sort((a, b) => a.stat.rate - b.stat.rate || b.stat.total - a.stat.total || a.id.localeCompare(b.id))
 }
 
+export interface HintEffectivenessStat { conceptId: string; stat: RateStat }
+
+/** Hint effectiveness: a hint "succeeds" when the FIRST probe after it
+ *  passes (same next-probe join explanationEffectiveness/
+ *  teachingActionSuccessRates use — a hint is meant to unblock the CURRENT
+ *  question, so the immediate next attempt is the right signal, not "any
+ *  later pass" the way recoverySuccessRates checks). Hints with no
+ *  following probe don't count. */
+export function hintEffectiveness(lessons: LessonEvidence[]): HintEffectivenessStat[] {
+  const byConcept = new Map<string, { pass: number; fail: number }>()
+  for (const l of lessons) {
+    for (const h of l.hintsShown) {
+      const next = l.probes.find((p) => p.occurredAt.getTime() > h.occurredAt.getTime())
+      if (!next) continue
+      const s = byConcept.get(l.conceptId) ?? { pass: 0, fail: 0 }
+      ;(next.passed ? s.pass++ : s.fail++)
+      byConcept.set(l.conceptId, s)
+    }
+  }
+  return [...byConcept.entries()]
+    .map(([conceptId, s]) => ({ conceptId, stat: rateStat(s.pass, s.fail) }))
+    .sort((a, b) => a.stat.rate - b.stat.rate || b.stat.total - a.stat.total || a.conceptId.localeCompare(b.conceptId))
+}
+
 export interface ProbeEffectivenessStat {
   /** placement bracket / probe key ('' = ordinary non-placement probes) */
   probe: string
@@ -290,6 +314,7 @@ export interface LearningAnalytics {
   teachingActionSuccessRates: TeachingActionStat[]
   recoverySuccessRates: RecoveryStat[]
   explanationEffectiveness: ExplanationEffectivenessStat[]
+  hintEffectiveness: HintEffectivenessStat[]
   probeEffectiveness: ProbeEffectivenessStat[]
   averageMasteryTime: MasteryTimeStat[]
   conceptsRequiringRepeatedRemediation: RemediationStat[]
@@ -305,6 +330,7 @@ export function computeLearningAnalytics(lessons: LessonEvidence[]): LearningAna
     teachingActionSuccessRates: teachingActionSuccessRates(lessons),
     recoverySuccessRates: recoverySuccessRates(lessons),
     explanationEffectiveness: explanationEffectiveness(lessons),
+    hintEffectiveness: hintEffectiveness(lessons),
     probeEffectiveness: probeEffectiveness(lessons),
     averageMasteryTime: averageMasteryTime(lessons),
     conceptsRequiringRepeatedRemediation: conceptsRequiringRepeatedRemediation(lessons),

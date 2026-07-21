@@ -2492,6 +2492,29 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
+      // HINT evidence (Phase 2 Learning Analytics gap — hints were never
+      // captured as evidence at all; "hint effectiveness" had no data
+      // source to compute from). Reuses the exact same LEARNER_FEEDBACK
+      // pattern the RECOVERY/voice-signal writers above use. hintHoisted is
+      // null both when no [HINT] tag was emitted AND when one was emitted
+      // but suppressed by hintBiasHoisted — this only fires when a hint was
+      // genuinely surfaced to the learner this turn. The next turn's
+      // PROBE_OUTCOME is the what-followed half of the L1 join (same
+      // pattern as recoverySuccessRates in learningAnalytics.ts).
+      if (hintHoisted) {
+        appendEvidenceEvent({
+          userId,
+          sessionId,
+          turnId:    assistantMessage.id,
+          conceptId: resolvedConceptId ?? memoryState?.conceptId ?? learnSession.subject.slug,
+          language:  teachingLang,
+          gradeBand: memoryState?.gradeBand ?? GradeBand.ADULT,
+          category:  EvidenceCategory.LEARNER_FEEDBACK,
+          outcome:   'hint:shown',
+          strength:  0.0,
+        })
+      }
+
       // CTO iteration — Library mastery evidence loop. Before this block,
       // Library signals were captured as evidence but nothing updated
       // mastery state from them: a learner could traverse the entire

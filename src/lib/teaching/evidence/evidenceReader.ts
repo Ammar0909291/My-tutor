@@ -109,6 +109,10 @@ export interface ExplanationShown {
   assetId: string | null
 }
 
+export interface HintShown {
+  occurredAt: Date
+}
+
 export type LessonOutcome = 'mastered' | 'progressing' | 'struggling' | 'abandoned' | 'no_signal'
 
 /** One lesson = one (userId, sessionId, conceptId) episode of evidence. */
@@ -126,6 +130,7 @@ export interface LessonEvidence {
   misconceptions: MisconceptionDetection[]
   recoveries: RecoveryEvent[]
   explanationsShown: ExplanationShown[]
+  hintsShown: HintShown[]
   mistakes: Array<{ category: string; occurredAt: Date }>
   outcome: LessonOutcome
   /** TopicProgress mastery for this learner+concept at read time, if any */
@@ -259,6 +264,7 @@ export function readLessonEvidence(corpus: EvidenceCorpus): LessonEvidence[] {
         misconceptions: [],
         recoveries: [],
         explanationsShown: [],
+        hintsShown: [],
         mistakes: [],
         outcome: 'no_signal',
         masteryPct: null,
@@ -285,6 +291,7 @@ export function readLessonEvidence(corpus: EvidenceCorpus): LessonEvidence[] {
       case 'LEARNER_FEEDBACK': {
         const state = parseRecoveryState(e.outcome)
         if (state) lesson.recoveries.push({ occurredAt: e.occurredAt, state })
+        else if (e.outcome === 'hint:shown') lesson.hintsShown.push({ occurredAt: e.occurredAt })
         break
       }
       case 'ASSET_SHOWN': {
