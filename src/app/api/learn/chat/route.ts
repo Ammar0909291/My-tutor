@@ -2327,6 +2327,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           observations: cueObservations,
         })
         console.log('[learn/chat] CUE understanding=' + JSON.stringify(understanding))
+        // Decision Engine v1 (Milestone 2) — SHADOW MODE ONLY: consumes the
+        // understanding, produces a typed TeachingDecision, and is logged so
+        // shadow decisions can be compared against what the runtime actually
+        // did. Never acted on: no prompt, DB, or control-flow effect.
+        const { decideTeaching } = await import('@/lib/understanding/decisionEngine')
+        const teachingDecision = decideTeaching(understanding)
+        console.log('[learn/chat] CUE decision=' + JSON.stringify(teachingDecision))
       } catch (err) {
         console.warn('[learn/chat] CUE understanding skipped (never affects the turn):', err)
       }
