@@ -1,18 +1,19 @@
 # Educational Brain Production Pipeline — Validation Report
 
-Generated 2026-07-22 against the live repository state. Every check below
-was computed directly from `docs/{subject}/kg/graph.json` (all 6
-subjects), `docs/curriculum/blueprints/`, and
-`educational-brain/concepts/{subject}/` — none of the numbers here are
+Generated 2026-07-22 against the live repository state; re-run this batch
+(Physics Wave 6) against the post-rebase state (`origin/main` @
+`d8401bae`). Every check below was computed directly from
+`docs/{subject}/kg/graph.json` (all 6 subjects), `docs/curriculum/blueprints/`,
+and `educational-brain/concepts/{subject}/` — none of the numbers here are
 estimated or copied from prior reports.
 
 ## Structural KG integrity (all 6 subjects, re-run this batch)
 
 `npx tsx scripts/validate-knowledge-graph.ts docs/{subject}/kg/graph.json`
 for mathematics, physics, chemistry, biology, computer_science, and
-english (biology and computer_science were validated for the first time
-this session — mathematics/physics/chemistry/english were last confirmed
-clean in the prior curriculum-validation series):
+english — re-run fresh this batch, all 6 still PASS with unchanged
+concept counts (this batch authored Educational Brain entries only; no
+KG file was touched):
 
 | Subject | Status | Concepts | Reachable | Broken requires/unlocks |
 |---|---|---|---|---|
@@ -34,9 +35,9 @@ report).
 
 **✓ Every Educational Brain entry points to one existing KG concept.**
 Checked: every filename in `educational-brain/concepts/{subject}/`
-(102 files, re-checked this batch after 8 new `math.found.*` Wave 5
-entries) against that subject's live KG id set. **0 orphans** — every
-EB file resolves to a real, current KG concept.
+(114 files, re-checked this batch after 12 new `phys.*` Wave 6 entries)
+against that subject's live KG id set. **0 orphans** — every EB file
+resolves to a real, current KG concept.
 
 **✓ Every KG concept has at most one Educational Brain entry.**
 Structurally guaranteed by the 1:1 `{kg-id}.md` filename convention;
@@ -45,16 +46,18 @@ filesystem could technically hold `Foo.md` and `foo.md` as distinct
 files) — **0 duplicates**.
 
 **◐ Every Educational Brain entry references one Blueprint — partially,
-honestly reported.** 95 of 102 EB entries' concepts have a matching
+honestly reported.** 107 of 114 EB entries' concepts have a matching
 Blueprint FILE on disk. The other 7 (`math.found.definition`,
 `inductive-reasoning`, `mathematical-modeling`, `mathematical-symbols`,
 `problem-solving-strategies` — Wave 2 — plus `reading-mathematics` —
 Wave 3 — plus `empty-set` — Wave 5) genuinely have no Blueprint yet —
 each states this explicitly in its own Blueprint References section per
-Quality Gate 2, rather than omitting the section. 32 of the 102 now
-have an explicit, machine-checkable "Blueprint References" section
-citing it by name (or citing its absence) — `eng.phonics.print-concepts`
-plus this program's 31 `math.found.*` entries, all authored under
+Quality Gate 2, rather than omitting the section. All 12 of this batch's
+new physics entries (Wave 6) DO have existing Blueprints, each reused by
+reference. 44 of the 114 now have an explicit, machine-checkable
+"Blueprint References" section citing it by name (or citing its absence)
+— `eng.phonics.print-concepts` plus this program's 31 `math.found.*`
+entries plus this batch's 12 `phys.*` Wave 6 entries, all authored under
 `EDUCATIONAL_BRAIN_STANDARD.md`. The remaining 70 predate that section
 (authored under the old `TEMPLATE.md`) and reference their Blueprints
 only informally or not at all in prose — the migration debt already
@@ -93,6 +96,29 @@ blocker:**
    task's explicit constraint and the project's standing rule that KG
    corrections are the Pipeline's to make.
 
+## Physics Wave 6 — explicit exception batch (2026-07-22)
+
+A direct, explicit user instruction redirected this batch specifically to
+physics, overriding the standing math.found-first default (see
+`ROADMAP.md` §3b for full detail). Audited first: verified
+programmatically that the pre-existing 67 physics EB files have zero
+overlap with `AUTHORING_QUEUE.md`'s physics rows and that their union
+equals exactly the physics KG's 238 concepts. Authored all 12 concepts at
+physics dependency level 6 (the full level). All 12 individually pass
+every per-entry check: structural 21-section conformance verified by
+heading scan and exact heading-order diff (0 mismatches across all 12);
+0 orphans; 0 duplicates; Blueprint References section present and
+accurate (all 12 cite an existing Blueprint); no runtime-asset
+duplication (none of the 12 created any `AssetIdentity` records). **Six
+Curriculum Feedback findings, explicitly carried forward, not resolved**:
+every one of the 12 concepts' KG `cross_links` arrays is empty, and 11 of
+the 12 have a genuine, identifiable cross-subject connection this program
+found but the KG does not yet encode (see `COVERAGE.md`'s Delivery
+history for the full per-concept list); `phys.opt.youngs-experiment`
+alone was honestly assessed as having no strong cross-subject connection
+at this level — a "weak but real" conclusion, not a gap. No Canonical KG
+file was modified for any of the six findings.
+
 ## Domain Certification — math.found
 
 **Certification does NOT pass**, correctly: `math.found` has 82 total
@@ -119,16 +145,22 @@ three; all stay open until `math.found` reaches 82/82.
 ## Full index and queue
 
 See `EDUCATIONAL_BRAIN_INDEX.md` (1,775 rows, one per KG concept, with
-Blueprint/EB/Status columns) and `AUTHORING_QUEUE.md` (1,673 rows — every
+Blueprint/EB/Status columns) and `AUTHORING_QUEUE.md` (1,661 rows — every
 `MISSING` concept, with `math.found`'s remaining 51 called out as the
-mandatory next targets per the current Domain Certification Mode) for
-the complete, per-concept detail behind every count in this report.
+default next targets per the current Domain Certification Mode, unless
+overridden by an equally explicit subject-specific instruction as this
+batch was) for the complete, per-concept detail behind every count in
+this report.
 
 ## Verdict
 
-**No blocking defect found.** The two cross-link findings are informational
-(one by design, one a small Curriculum Feedback item) and neither breaks
-any of the Phase 2 checklist's pass/fail criteria. The one open item
-(Blueprint References migration debt on 70 pre-Standard entries) is
-already tracked, already has an owner (future reconciliation batches),
-and does not block new authoring under the current Standard.
+**No blocking defect found.** The two mathematics/chemistry cross-link
+findings (KG-level, pre-existing) remain informational, as does this
+batch's own new physics cross-link finding (11 empty-but-genuine
+cross-subject connections + 1 honest "none found" — an EB-authoring-level
+observation, not a KG defect). None of these break any of the Phase 2
+checklist's pass/fail criteria. The two open items (Blueprint References
+migration debt on 70 pre-Standard entries; math.found domain at 31/82)
+are already tracked, already have owners (future reconciliation/
+continuation batches), and do not block new authoring under the current
+Standard.

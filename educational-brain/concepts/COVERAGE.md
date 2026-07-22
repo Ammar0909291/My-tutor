@@ -12,7 +12,7 @@ and this file's summary row should be corrected to match.
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
 | mathematics | 908 | 32 | `math.arith.fractions` + 31 `math.found.*` entries (Waves 1-5) — math.found domain IN PROGRESS (31/82), see Delivery history |
-| physics | 238 | 67 | `phys.meas.*` (8), `phys.mech.displacement`, `phys.mech.velocity`, `phys.mech.acceleration`, `phys.mech.kinematics-1d`, `phys.mech.newtons-first-law`, `phys.mech.force`, `phys.mech.kinematics-2d`, `phys.mech.projectile-motion`, `phys.therm.temperature`, `phys.wave.wave-properties`, `phys.em.electric-charge`, `phys.therm.zeroth-law`, `phys.therm.thermal-expansion`, `phys.therm.heat-transfer`, `phys.wave.transverse-waves`, `phys.wave.longitudinal-waves`, `phys.wave.sound-waves`, `phys.opt.nature-of-light`, `phys.em.coulombs-law`, `phys.em.electric-current`, `phys.therm.ideal-gas-law`, `phys.therm.specific-heat`, `phys.wave.wave-speed`, `phys.em.electric-field`, `phys.em.magnetic-field`, `phys.opt.reflection`, `phys.opt.refraction`, `phys.opt.wave-optics`, `phys.wave.doppler-effect`, `phys.wave.sound-intensity`, `phys.em.electric-dipole`, `phys.em.gauss-law`, `phys.em.magnetic-flux`, `phys.em.magnetic-force`, `phys.em.magnetic-materials`, `phys.therm.kinetic-theory`, `phys.therm.calorimetry`, `phys.wave.superposition`, `phys.opt.mirrors`, `phys.opt.total-internal-reflection`, `phys.opt.lenses`, `phys.opt.dispersion`, `phys.opt.polarization`, `phys.mech.newtons-second-law`, `phys.therm.internal-energy`, `phys.therm.phase-transitions`, `phys.wave.interference`, `phys.opt.lens-power`, `phys.opt.brewsters-law`, `phys.em.electric-potential`, `phys.em.biot-savart`, `phys.em.magnetic-dipole`, `phys.em.faradays-law`, `phys.mech.relative-motion`, `phys.mech.circular-motion`, `phys.mech.newtons-third-law`, `phys.mech.free-body-diagram`, `phys.mech.work`, `phys.mech.momentum` — KG concept count corrected 194→238 (2026-07-22): reflects the Particle Physics domain + Semiconductor Physics additions authored that day; no new physics entries added this batch |
+| physics | 238 | 79 | `phys.meas.*` (8), `phys.mech.displacement`, `phys.mech.velocity`, `phys.mech.acceleration`, `phys.mech.kinematics-1d`, `phys.mech.newtons-first-law`, `phys.mech.force`, `phys.mech.kinematics-2d`, `phys.mech.projectile-motion`, `phys.therm.temperature`, `phys.wave.wave-properties`, `phys.em.electric-charge`, `phys.therm.zeroth-law`, `phys.therm.thermal-expansion`, `phys.therm.heat-transfer`, `phys.wave.transverse-waves`, `phys.wave.longitudinal-waves`, `phys.wave.sound-waves`, `phys.opt.nature-of-light`, `phys.em.coulombs-law`, `phys.em.electric-current`, `phys.therm.ideal-gas-law`, `phys.therm.specific-heat`, `phys.wave.wave-speed`, `phys.em.electric-field`, `phys.em.magnetic-field`, `phys.opt.reflection`, `phys.opt.refraction`, `phys.opt.wave-optics`, `phys.wave.doppler-effect`, `phys.wave.sound-intensity`, `phys.em.electric-dipole`, `phys.em.gauss-law`, `phys.em.magnetic-flux`, `phys.em.magnetic-force`, `phys.em.magnetic-materials`, `phys.therm.kinetic-theory`, `phys.therm.calorimetry`, `phys.wave.superposition`, `phys.opt.mirrors`, `phys.opt.total-internal-reflection`, `phys.opt.lenses`, `phys.opt.dispersion`, `phys.opt.polarization`, `phys.mech.newtons-second-law`, `phys.therm.internal-energy`, `phys.therm.phase-transitions`, `phys.wave.interference`, `phys.opt.lens-power`, `phys.opt.brewsters-law`, `phys.em.electric-potential`, `phys.em.biot-savart`, `phys.em.magnetic-dipole`, `phys.em.faradays-law`, `phys.mech.relative-motion`, `phys.mech.circular-motion`, `phys.mech.newtons-third-law`, `phys.mech.free-body-diagram`, `phys.mech.work`, `phys.mech.momentum` (pre-existing 67, TEMPLATE.md-era) + `phys.mech.universal-gravitation`, `phys.mech.hookes-law`, `phys.mech.pressure-fluids`, `phys.wave.standing-waves`, `phys.wave.beats`, `phys.opt.optical-instruments`, `phys.opt.youngs-experiment`, `phys.em.capacitance`, `phys.em.ohms-law`, `phys.em.amperes-law`, `phys.em.lenzs-law`, `phys.em.self-inductance` (2026-07-22, Wave 6, EDUCATIONAL_BRAIN_STANDARD.md-era, this batch) — 159 concepts remain |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 0 | — |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
@@ -309,3 +309,63 @@ retrieval engine. Per-entry completeness against the tracked fields is in
   `origin/main` during this batch — verified zero file overlap with this
   program's own files before rebasing; no KG file was touched by that
   commit, so no further reconciliation was required.
+- **Curriculum Completion Program, batch 9 — Physics Wave 6 (explicit
+  user-directed exception to the standing math.found-first default)**
+  (2026-07-22): a direct, explicit user instruction ("audit Physics
+  Educational Brain, verify exactly which 67 already exist, then continue
+  authoring the remaining Educational Brain concepts in strict
+  prerequisite/topological order") redirected this batch specifically to
+  the physics subject, overriding math.found's standing priority for this
+  one batch only — `math.found` was NOT touched and remains 31/82,
+  IN PROGRESS, the default target for any future batch without an
+  equally explicit override. Audit first: fetched and rebased onto latest
+  `origin/main` (one new commit, `d8401bae`, CS Explanation Memory
+  completion, zero file overlap with physics), then verified
+  programmatically (not by inspection) that exactly 67 physics
+  `educational-brain/concepts/physics/*.md` files exist, that they have
+  zero overlap with `AUTHORING_QUEUE.md`'s 171 physics rows, and that the
+  union of both sets equals exactly the physics KG's 238 concepts —
+  confirming `AUTHORING_QUEUE.md` was already current against the KG
+  extension (216→238) and needed no recomputation before authoring began.
+  Authored the complete Wave 6 (12 concepts, dependency level 6, the
+  first physics level with any missing concepts) — every concept
+  verified to have all prerequisites already `READY`:
+  `phys.mech.universal-gravitation`, `phys.mech.hookes-law`,
+  `phys.mech.pressure-fluids`, `phys.wave.standing-waves`,
+  `phys.wave.beats`, `phys.opt.optical-instruments`,
+  `phys.opt.youngs-experiment`, `phys.em.capacitance`, `phys.em.ohms-law`,
+  `phys.em.amperes-law`, `phys.em.lenzs-law`, `phys.em.self-inductance`.
+  All 12 had existing Blueprints (`docs/curriculum/blueprints/{id}.md`,
+  Component-format) reused by reference — each entry cites its
+  Blueprint's Misconception Engine/Register/Profile by name with
+  birth-type classification added (never re-deriving probe/bridge/
+  replacement text), plus its session-script and assessment-probe
+  components, never restating worked examples or full item banks. All 12
+  entries verified against `EDUCATIONAL_BRAIN_STANDARD.md`'s exact
+  21-section structure and heading order (`grep "^## "` diffed against
+  the canonical order for every file — 0 mismatches). Six genuine
+  Curriculum Feedback findings recorded (not fixed, no KG file modified):
+  every one of the 12 concepts has an empty KG `cross_links` array despite
+  a genuine, identifiable cross-subject or cross-domain connection in 11
+  of the 12 cases (mathematics' inverse-square functions for
+  `universal-gravitation`; chemistry's molecular bond vibration models for
+  `hookes-law`; biology's blood-pressure gradients for `pressure-fluids`;
+  mathematics' Fourier analysis for `standing-waves`; music theory for
+  `beats`; biology's eye anatomy for `optical-instruments`; computer
+  science's digital/semiconductor circuits for `ohms-law`; mathematics'
+  vector calculus for `amperes-law`; chemistry's Le Chatelier's principle
+  for `lenzs-law`; mathematics' differential equations for
+  `self-inductance`) — `youngs-experiment` alone was assessed as
+  genuinely having no strong cross-subject connection at this curriculum
+  level, an honest "weak but real" conclusion, not a fabricated link.
+  `phys.em.ohms-law`'s KG-recorded hub status (4 direct `unlocks`, the
+  most of any concept in this wave) was verified against the live KG and
+  reflected in its Identity section. `physics` is now 79/238 (159
+  concepts remain); Wave 7 (the next dependency level with newly-eligible
+  concepts) was NOT computed or started this batch, per the standing
+  one-bounded-batch-per-turn discipline — a full level-6 wave is one
+  complete, coherent batch. All six tracking files
+  (`EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, `ROADMAP.md`,
+  `QUALITY.md`, `COVERAGE.md`, `VALIDATION_REPORT.md`) regenerated from
+  source; re-validated 0 orphans, 0 duplicates, 0 broken KG references, 0
+  invalid Blueprint references across all 114 entries.
