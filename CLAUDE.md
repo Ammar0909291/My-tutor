@@ -1120,8 +1120,11 @@
   - **Layer 2 (Educational Brain)**, which subsumes the content requested under Layers 3
     (Explanation Memory's *authored source*, distinct from the DB-backed runtime asset of the same
     name — see below) and 4 (Misconception Library) → `educational-brain/concepts/{subject}/
-    {kg-id}.md`, per `TEMPLATE.md`'s authoring contract. This IS what this program authors,
-    one concept per batch, at the existing seed-entry quality bar (see `COVERAGE.md`).
+    {kg-id}.md`, per **`EDUCATIONAL_BRAIN_STANDARD.md`'s authoring contract (v1.0, 2026-07-22,
+    supersedes `TEMPLATE.md` — 21 sections, reconciles the 15-section template with this program's
+    own requested layer list, fixes a real numbered/unnumbered heading drift found across the
+    existing 71 entries, and adds Blueprint References / Runtime Asset References / Version History
+    as new required sections)**. This IS what this program authors, one concept per batch.
   - **Layers 3 & 7, DB-backed sense (Explanation/Probe assets)** → `AssetIdentity` (ADR 14),
     populated either by real LLM-generation-plus-admin-review at runtime, or by small, deliberate
     transcription batches into `src/lib/teaching/assets/brainSeedAssets.ts` (production code,
@@ -1142,9 +1145,12 @@
   - **Layer 10 (Certification)** → per-batch, mark only Layers 1–2 (+ embedded misconception
     library) as checkable; mark Layers 3&7(DB)/5/6/8/9 "N/A — runtime/pipeline-owned" with the
     reasoning above, never "incomplete."
-- Live batch-by-batch progress tracking lives in `educational-brain/concepts/COVERAGE.md`
-  (updated in the same turn as any entry added) — CLAUDE.md records the standing governance
-  framing once here, not a re-narrated essay per batch, to stay sustainable across many sessions.
+- Live progress tracking is split across three files, each with one job (no duplicated/diverging
+  numbers): `educational-brain/concepts/COVERAGE.md` (per-subject entry list + full delivery
+  changelog), `educational-brain/concepts/ROADMAP.md` (computed dashboard: totals, completion %,
+  current/next batch, evidence-based priority queue — regenerate from source, never hand-estimate),
+  `educational-brain/concepts/QUALITY.md` (generated per-entry completeness ledger against the
+  Standard's tracked fields). All three updated in the same turn as any entry or framework change.
 - **Batch 1** (2026-07-22): authored `eng.phonics.print-concepts` — English's other
   zero-prerequisite entry node, already flagged by name as the next priority in
   `eng.phonics.phonemic-awareness.md`'s own Curriculum feedback section. Cross-referenced (not
@@ -1152,6 +1158,25 @@
   errors found while establishing this batch's baseline (English undercounted at 1 entry when 2
   already existed; physics KG count stale at 194 vs. the current 238). Full detail in
   `COVERAGE.md`'s Delivery history.
+- **Batch 2 — production framework** (2026-07-22): no new concept entries authored (this batch's
+  deliverable was the framework itself, per explicit instruction). Reviewed a representative
+  sample of the 71 existing entries (all 5 of the fully-read ones plus a headings-only scan of 8
+  more physics entries across different batches) and found real drift: numbered vs. unnumbered
+  section headings beginning somewhere between physics batches 12 and 17, and a genuine
+  duplication risk — all 71 entries' concepts already have a matching Blueprint
+  (`docs/curriculum/blueprints/{id}.md`), and existing "Assessment" sections were not yet scoped
+  narrowly against that overlap. Produced `EDUCATIONAL_BRAIN_STANDARD.md` (21-section canonical
+  standard, with an explicit ownership-boundary table against Blueprints and every
+  runtime-generated layer), retired `TEMPLATE.md` to a one-line pointer, `ROADMAP.md` (computed:
+  1,756 KG concepts across 6 subjects, 71 authored = 4.04% complete; priority queue computed
+  directly from live KG root nodes — mathematics' own zero-prerequisite entry point,
+  `math.found.mathematical-thinking`, has never been authored, despite mathematics being the
+  single largest subject by concept count at 908; chemistry/biology/computer_science each have
+  zero Educational Brain coverage and an uncovered entry point of their own), and `QUALITY.md`
+  (per-entry ledger for all 71 existing entries, generated programmatically — one detection-script
+  limitation was found and reported honestly in the file itself rather than silently patched).
+  No existing entries were rewritten to the new Standard — reconciliation is tracked as separate
+  future work in `EDUCATIONAL_BRAIN_STANDARD.md` §6, not retroactively applied this batch.
 
 ## Run locally
 ```

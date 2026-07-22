@@ -1,7 +1,13 @@
 # Coverage Manifest
 
-Live count of canonical KG concepts with authored Educational Brain entries.
-Updated in the same commit as any entry added.
+Live count of canonical KG concepts with authored Educational Brain entries,
+plus the full per-entry changelog. Updated in the same commit as any entry
+added. **For the dashboard view (totals, completion %, current/next batch,
+priority queue) see [`ROADMAP.md`](ROADMAP.md)** — that file owns the
+high-level numbers so they are computed in one place; this file owns the
+detailed per-subject entry list and delivery-by-delivery history. If the
+two ever disagree, `ROADMAP.md`'s freshly-computed totals are authoritative
+and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
@@ -29,12 +35,21 @@ Coverage grows in leverage order, not file order:
 4. **Everything else in prerequisite order** — floors before what stands on
    them, matching how learners actually arrive.
 
+This policy is applied concretely, per subject, in `ROADMAP.md`'s Priority
+queue section — that is where "which concept is next" is computed from the
+live KG; this section states the rule, not the current answer.
+
 ## Entry quality bar
 
-The three seed entries ARE the bar. An entry thinner than the seeds is not
-merged; it is finished first. Coverage counts only full-template entries —
-partial entries are worse than none because they read as "covered" to every
-future author and to the retrieval engine.
+The three original seed entries set the depth bar; the exact structural
+contract they (and every entry since) must follow is now
+**[`EDUCATIONAL_BRAIN_STANDARD.md`](EDUCATIONAL_BRAIN_STANDARD.md)**
+(supersedes `TEMPLATE.md`, 2026-07-22) — read it before authoring the next
+entry. An entry thinner than the bar is not merged; it is finished first.
+Coverage counts only full-standard entries — partial entries are worse than
+none because they read as "covered" to every future author and to the
+retrieval engine. Per-entry completeness against the tracked fields is in
+[`QUALITY.md`](QUALITY.md).
 
 ## Delivery history
 
@@ -106,3 +121,24 @@ future author and to the retrieval engine.
   library with breaking points, discovery-lesson argument, teaching
   action dispatch, voice teaching, transfer map) that the Blueprint
   format does not carry. Quality-bar entries: 3/216 English concepts.
+- **Curriculum Completion Program, batch 2 — production framework**
+  (2026-07-22): no new concept entries authored (deliberately — this
+  batch's deliverable was the framework itself). Reviewed a
+  representative sample of the 71 existing entries across all 3 subjects
+  and batches, found real heading-style drift (numbered vs. unnumbered
+  sections, beginning somewhere between physics batches 12 and 17) and a
+  genuine duplication risk (all 71 entries' concepts already have a
+  Blueprint, and existing "Assessment" sections were not yet scoped
+  narrowly against that overlap). Produced `EDUCATIONAL_BRAIN_STANDARD.md`
+  (the new 21-section canonical authoring contract, superseding
+  `TEMPLATE.md`, which now just points to it), `ROADMAP.md` (computed
+  totals: 1,756 KG concepts across 6 subjects, 71 authored, 4.04%
+  complete, plus an evidence-based priority queue — mathematics' own
+  zero-prerequisite entry node, `math.found.mathematical-thinking`, has
+  never been authored, ranked above chemistry/biology/computer_science's
+  equally-uncovered entry points only by mathematics's much larger total
+  concept count), and `QUALITY.md` (a generated per-entry completeness
+  ledger for all 71 existing entries, with one flagged self-limitation
+  in its own detection script rather than a silently "corrected" number).
+  No existing entries were rewritten to the new Standard — reconciliation
+  is tracked as separate future work, not retroactively applied.

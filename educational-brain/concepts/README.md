@@ -35,12 +35,15 @@ Knowledge Graph concept ID** exactly as it appears in the subject's
 
 ```
 concepts/
-  README.md          ← this file (the binding spec)
-  TEMPLATE.md        ← the canonical concept-entry template (authoring contract)
-  COVERAGE.md        ← per-subject manifest + expansion protocol
-  mathematics/       ← one file per math.* concept ID
-  physics/           ← one file per phys.* concept ID
-  english/           ← one file per eng.* concept ID
+  README.md                      ← this file (the binding spec)
+  EDUCATIONAL_BRAIN_STANDARD.md  ← the canonical concept-entry template (authoring contract, v1.0)
+  TEMPLATE.md                    ← superseded; points to EDUCATIONAL_BRAIN_STANDARD.md
+  COVERAGE.md                    ← per-subject manifest + expansion protocol + delivery history
+  ROADMAP.md                     ← dashboard: totals, completion %, current/next batch, priority queue
+  QUALITY.md                     ← per-entry completeness ledger
+  mathematics/                   ← one file per math.* concept ID
+  physics/                       ← one file per phys.* concept ID
+  english/                       ← one file per eng.* concept ID
 ```
 
 File naming: `{subject-dir}/{full-kg-id}.md` — e.g.
