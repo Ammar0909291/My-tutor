@@ -14,6 +14,13 @@
   so it can be copied in one action. No exceptions. This means the ENTIRE end-of-turn report —
   not just code/commands inside it — goes inside one ``` fence. Markdown headers/tables/checklists
   outside a fence do NOT satisfy this; wrap the whole thing.
+- **Reinforced 2026-07-22, after a live violation**: a multi-phase research/audit report was
+  delivered as free-form markdown (headers, tables, no fence) instead of one fenced block, and
+  without a git-info section. The rule above already covered both requirements explicitly — the
+  failure was non-compliance, not ambiguity. Long, multi-phase, or research-only outputs are NOT
+  exempt: if the report risks becoming very long, that is still not a reason to drop the single
+  fence or the git-info section — split across multiple responses if needed (each response still
+  fully fenced), never abandon the format because the content is large.
 
 ## Workflow preference (ALWAYS follow — updated 2026-07-07, supersedes the prior version below)
 - On EVERY prompt: first read and understand it the way the lead developer on this project would
