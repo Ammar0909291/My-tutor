@@ -111,8 +111,9 @@
     Modern Physics (`phys.mod.*`) — see the Physics KG Extension exception record below
   - chemistry → `docs/chemistry/kg/graph.json` (187 concepts, prefix `chem.`)
   - computer_science → `docs/computer-science/kg/graph.json` (119 concepts, prefix `cs.`)
-  - biology → `docs/biology/kg/graph.json` (89 concepts, prefix `bio.`) — shipped 2026-06-29,
-    see `docs/biology/VALIDATION_REPORT.md` for full validator/smoke-test/regression evidence
+  - biology → `docs/biology/kg/graph.json` (108 concepts, 16 domains, prefix `bio.`) — v2.0.0 frozen 2026-07-22,
+    expanded from 89 concepts (15 domains) by adding 19 research-level concepts incl. new bio.div domain;
+    see `docs/biology/VALIDATION_REPORT.md` for original validator/smoke-test/regression evidence
   - english → `docs/english/kg/graph.json` (216 concepts, 12 domains, prefix `eng.`) — authored by
     the Curriculum Production Pipeline 2026-07-03/04, validator PASS 216/216 reachable, but **NOT
     yet registered** in the runtime registry (`knowledgeGraph.ts` `SUBJECT_ADAPTERS`/
