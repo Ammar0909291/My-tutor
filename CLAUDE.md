@@ -1177,6 +1177,23 @@
   limitation was found and reported honestly in the file itself rather than silently patched).
   No existing entries were rewritten to the new Standard — reconciliation is tracked as separate
   future work in `EDUCATIONAL_BRAIN_STANDARD.md` §6, not retroactively applied this batch.
+- **Batch 3 — pipeline validation and indexing** (2026-07-22): no new concept entries authored
+  (this batch validated and indexed the pipeline before large-scale authoring begins). Re-ran the
+  KG validator against all 6 subjects (biology and computer_science checked for the first time
+  this session) — all PASS, 0 failures, 100% reachable, 1,756 concepts total. Produced
+  `educational-brain/concepts/EDUCATIONAL_BRAIN_INDEX.md` (canonical registry, one row per KG
+  concept: 0 orphan EB files, 0 duplicate EB files, 0 broken KG references), `AUTHORING_QUEUE.md`
+  (1,685-row permanent authoring order, purely graph-derived — topological level by level, subjects
+  interleaved in a fixed order, zero manual ordering), `QUALITY_GATES.md` (8 mandatory pre-
+  acceptance checks, directly closing the duplication and heading-drift risks Batch 2 found), and
+  `PRODUCTION_PIPELINE.md` (the batch-selection algorithm, documented not automated per instruction,
+  plus the frozen select→author→validate→update-four-tracking-files→commit→push workflow — no
+  future batch may bypass it). Found 2 unresolvable KG cross-links: one is a validator-recognized
+  aspirational placeholder (not a defect), one is genuine
+  (`chem.atomic.electromagnetic-radiation` → a nonexistent physics slug) — recorded as Curriculum
+  Feedback, not fixed (no Canonical KG file was modified this batch). Verdict: no blocking defect;
+  production workflow declared FROZEN. Full detail in `COVERAGE.md`'s Delivery history and
+  `educational-brain/concepts/VALIDATION_REPORT.md`.
 
 ## Run locally
 ```

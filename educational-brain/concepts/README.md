@@ -41,10 +41,20 @@ concepts/
   COVERAGE.md                    ← per-subject manifest + expansion protocol + delivery history
   ROADMAP.md                     ← dashboard: totals, completion %, current/next batch, priority queue
   QUALITY.md                     ← per-entry completeness ledger
+  EDUCATIONAL_BRAIN_INDEX.md     ← canonical registry: one row per KG concept, all 6 subjects
+  AUTHORING_QUEUE.md             ← permanent authoring order, computed from the prerequisite graph
+  QUALITY_GATES.md               ← the 8 mandatory checks before any entry is accepted
+  VALIDATION_REPORT.md           ← latest full-pipeline validation run
+  PRODUCTION_PIPELINE.md         ← the frozen batch-selection algorithm and workflow
   mathematics/                   ← one file per math.* concept ID
   physics/                       ← one file per phys.* concept ID
   english/                       ← one file per eng.* concept ID
 ```
+
+Regenerate `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`,
+`ROADMAP.md`, `QUALITY.md`, and `COVERAGE.md`'s summary row every batch —
+see `PRODUCTION_PIPELINE.md` for the frozen workflow these five files are
+part of.
 
 File naming: `{subject-dir}/{full-kg-id}.md` — e.g.
 `mathematics/math.arith.fractions.md`. The redundancy (subject dir + prefixed

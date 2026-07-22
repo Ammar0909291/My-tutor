@@ -142,3 +142,26 @@ retrieval engine. Per-entry completeness against the tracked fields is in
   in its own detection script rather than a silently "corrected" number).
   No existing entries were rewritten to the new Standard — reconciliation
   is tracked as separate future work, not retroactively applied.
+- **Curriculum Completion Program, batch 3 — pipeline validation and
+  indexing** (2026-07-22): no new concept entries authored (deliberately
+  — this batch's deliverable was validating and indexing the pipeline
+  before large-scale authoring begins). Re-ran the KG validator against
+  all 6 subjects (first time biology and computer_science were checked
+  this session) — all 6 PASS, 0 failures, 100% reachable. Generated
+  `EDUCATIONAL_BRAIN_INDEX.md` (1,756 rows, one per KG concept across all
+  6 subjects, with Blueprint/EB/Status columns), found 0 orphan EB files,
+  0 duplicate EB files, 0 broken KG references. Found 2 unresolvable
+  cross-links: `math.de.ode`'s is a recognized aspirational placeholder
+  (not a defect), `chem.atomic.electromagnetic-radiation`'s is a genuine
+  broken reference (points to a nonexistent physics slug) — recorded as
+  Curriculum Feedback in `VALIDATION_REPORT.md`, not fixed (this batch
+  does not modify any Canonical Knowledge Graph). Computed root/
+  intermediate/terminal breakdown and a full topological-order
+  `AUTHORING_QUEUE.md` (1,685 rows — every MISSING concept, priority 1
+  onward, purely graph-derived: level-by-level, subjects interleaved in
+  a fixed order, no manual ordering). Produced `QUALITY_GATES.md` (8
+  mandatory pre-acceptance checks) and `PRODUCTION_PIPELINE.md`
+  (Phase 4's batch-selection algorithm, documented not automated, plus
+  the Phase 6 frozen workflow: select → author → validate → update
+  INDEX/ROADMAP/QUALITY/COVERAGE → commit → push). Verdict: no blocking
+  defect found; production workflow declared FROZEN.
