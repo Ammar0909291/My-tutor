@@ -20,11 +20,15 @@ clean in the prior curriculum-validation series):
 | physics | PASS | 238 | 238/238 | 0 |
 | english | PASS | 216 | 216/216 | 0 |
 | chemistry | PASS | 186 | 186/186 | 0 |
-| biology | PASS | 89 | 89/89 | 0 |
+| biology | PASS | 108 | 108/108 | 0 |
 | computer_science | PASS | 119 | 119/119 | 0 |
 
 Zero failures, zero warnings, 100% reachability, all six — this is the
 "mathematically correct" baseline the rest of this report depends on.
+Biology's count (89→108) reflects the Curriculum Production Pipeline's
+own Biology KG v2.0.0 freeze, a concurrent external change picked up via
+rebase during this batch, re-validated fresh (not copied from a prior
+report).
 
 ## Phase 2 checklist
 
@@ -69,7 +73,7 @@ verified to be correct (checked programmatically this batch for the 5
 new Blueprint-less concepts).
 
 **✓ No broken KG references.** 0 broken `requires`/`unlocks` edges across
-all 1,756 concepts in all 6 subjects (see the integrity table above).
+all 1,775 concepts in all 6 subjects (see the integrity table above).
 
 **◐ Cross-links — 2 unresolvable references found, both real, neither a
 blocker:**
@@ -114,8 +118,8 @@ has been modified for either; both stay open until `math.found` reaches
 
 ## Full index and queue
 
-See `EDUCATIONAL_BRAIN_INDEX.md` (1,756 rows, one per KG concept, with
-Blueprint/EB/Status columns) and `AUTHORING_QUEUE.md` (1,662 rows — every
+See `EDUCATIONAL_BRAIN_INDEX.md` (1,775 rows, one per KG concept, with
+Blueprint/EB/Status columns) and `AUTHORING_QUEUE.md` (1,681 rows — every
 `MISSING` concept, with `math.found`'s remaining 59 called out as the
 mandatory next targets per the current Domain Certification Mode) for
 the complete, per-concept detail behind every count in this report.

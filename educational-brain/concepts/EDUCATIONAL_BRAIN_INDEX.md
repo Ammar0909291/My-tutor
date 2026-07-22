@@ -3,7 +3,7 @@
 Generated programmatically from the live Canonical Knowledge Graphs, the
 live `docs/curriculum/blueprints/` directory, and the live
 `educational-brain/concepts/` directory tree. One row per KG concept, all
-1,756 across 6 subjects. Regenerate from source; do not hand-edit rows.
+1,775 across 6 subjects. Regenerate from source; do not hand-edit rows.
 
 **Status legend**: `READY` = Educational Brain entry exists (and, per the
 validation below, its Blueprint and KG anchor are confirmed intact).
@@ -1583,7 +1583,7 @@ its subject KG.
 | thermo | `chem.thermo.system` | System, Surroundings and State Functions | No | No | — | MISSING |
 | thermo | `chem.thermo.third-law` | Third Law and Absolute Entropy | No | No | — | MISSING |
 
-## biology (89 concepts, 0 READY)
+## biology (108 concepts, 0 READY)
 
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
@@ -1595,6 +1595,7 @@ its subject KG.
 | biotech | `bio.biotech.biotech-process-applications` | Biotechnology Process Applications | No | No | — | MISSING |
 | biotech | `bio.biotech.crispr-genome-editing` | CRISPR and Genome Editing | No | No | — | MISSING |
 | biotech | `bio.biotech.genomics-proteomics` | Genomics and Proteomics | No | No | — | MISSING |
+| cell | `bio.cell.apoptosis` | Apoptosis and Programmed Cell Death | No | No | — | MISSING |
 | cell | `bio.cell.cell-cycle` | The Cell Cycle | No | No | — | MISSING |
 | cell | `bio.cell.cell-membrane-transport` | Cell Membrane and Transport | No | No | — | MISSING |
 | cell | `bio.cell.cell-signalling` | Cell Signalling | No | No | — | MISSING |
@@ -1611,15 +1612,24 @@ its subject KG.
 | dev | `bio.dev.gametogenesis-fertilisation-dev` | Fundamentals of Animal Development | No | No | — | MISSING |
 | dev | `bio.dev.morphogenesis-differentiation` | Morphogenesis and Cell Differentiation | No | No | — | MISSING |
 | dev | `bio.dev.stem-cells-regeneration` | Stem Cells and Regeneration | No | No | — | MISSING |
+| div | `bio.div.cladistics-phylogenetic-thinking` | Cladistics and Phylogenetic Thinking | No | No | — | MISSING |
+| div | `bio.div.endosymbiotic-theory` | Endosymbiotic Theory | No | No | — | MISSING |
+| div | `bio.div.fungal-biology` | Fungal Biology | No | No | — | MISSING |
+| div | `bio.div.plant-diversity-alternation-of-generations` | Plant Diversity and Alternation of Generations | No | No | — | MISSING |
+| div | `bio.div.protist-diversity` | Eukaryotic Supergroups and Protist Diversity | No | No | — | MISSING |
+| div | `bio.div.three-domain-system` | Three Domain System | No | No | — | MISSING |
 | eco | `bio.eco.biodiversity-conservation` | Biodiversity and Conservation | No | No | — | MISSING |
+| eco | `bio.eco.community-ecology` | Community Ecology | No | No | — | MISSING |
 | eco | `bio.eco.ecosystem-structure-function` | Ecosystem Structure and Function | No | No | — | MISSING |
 | eco | `bio.eco.environmental-issues` | Environmental Issues and Pollution | No | No | — | MISSING |
 | eco | `bio.eco.nutrient-cycling` | Nutrient Cycling and Succession | No | No | — | MISSING |
 | eco | `bio.eco.organism-environment` | Organisms and their Environment | No | No | — | MISSING |
 | eco | `bio.eco.population-ecology` | Population Ecology | No | No | — | MISSING |
 | evo | `bio.evo.evidence-for-evolution` | Evidence for Evolution | No | No | — | MISSING |
+| evo | `bio.evo.evo-devo` | Evolutionary Developmental Biology | No | No | — | MISSING |
 | evo | `bio.evo.human-evolution` | Human Evolution | No | No | — | MISSING |
 | evo | `bio.evo.modern-synthesis-speciation` | Modern Synthesis and Speciation | No | No | — | MISSING |
+| evo | `bio.evo.molecular-evolution` | Molecular Evolution and Neutral Theory | No | No | — | MISSING |
 | evo | `bio.evo.natural-selection` | Natural Selection and Darwinism | No | No | — | MISSING |
 | evo | `bio.evo.origin-of-life` | Origin of Life | No | No | — | MISSING |
 | found | `bio.found.binomial-nomenclature` | Binomial Nomenclature | No | No | — | MISSING |
@@ -1637,21 +1647,30 @@ its subject KG.
 | gen | `bio.gen.mutations` | Mutations | No | No | — | MISSING |
 | gen | `bio.gen.pedigree-human-genetics` | Pedigree Analysis and Human Genetic Disorders | No | No | — | MISSING |
 | gen | `bio.gen.population-genetics` | Population Genetics | No | No | — | MISSING |
+| gen | `bio.gen.transposable-elements` | Transposable Elements and Genome Organisation | No | No | — | MISSING |
 | immuno | `bio.immuno.antibody-structure-function` | Antibody Structure and Function | No | No | — | MISSING |
 | immuno | `bio.immuno.immune-disorders` | Immune Disorders | No | No | — | MISSING |
 | immuno | `bio.immuno.innate-adaptive-immunity` | Innate and Adaptive Immunity | No | No | — | MISSING |
+| immuno | `bio.immuno.mhc-antigen-presentation` | MHC and Antigen Presentation | No | No | — | MISSING |
 | immuno | `bio.immuno.vaccination-immunisation` | Vaccination and Immunisation | No | No | — | MISSING |
+| micro | `bio.micro.horizontal-gene-transfer` | Horizontal Gene Transfer | No | No | — | MISSING |
 | micro | `bio.micro.microbes-in-human-welfare` | Microbes in Human Welfare | No | No | — | MISSING |
 | micro | `bio.micro.microbial-diversity` | Microbial Diversity | No | No | — | MISSING |
 | micro | `bio.micro.microbial-growth-culture` | Microbial Growth and Culture Techniques | No | No | — | MISSING |
 | micro | `bio.micro.pathogenic-microbes` | Pathogenic Microorganisms and Disease | No | No | — | MISSING |
+| micro | `bio.micro.viral-replication` | Viral Replication and Lifecycle | No | No | — | MISSING |
+| mol | `bio.mol.bioenergetics` | Bioenergetics and Thermodynamics of Life | No | No | — | MISSING |
 | mol | `bio.mol.biomolecule-types` | Types of Biomolecules | No | No | — | MISSING |
 | mol | `bio.mol.carbohydrates-lipids` | Carbohydrates and Lipids | No | No | — | MISSING |
+| mol | `bio.mol.dna-damage-repair` | DNA Damage Response and Repair | No | No | — | MISSING |
 | mol | `bio.mol.dna-replication` | DNA Replication | No | No | — | MISSING |
 | mol | `bio.mol.enzymes` | Enzymes and Enzyme Kinetics | No | No | — | MISSING |
+| mol | `bio.mol.epigenetics` | Epigenetics and Chromatin Regulation | No | No | — | MISSING |
 | mol | `bio.mol.gene-regulation` | Regulation of Gene Expression | No | No | — | MISSING |
+| mol | `bio.mol.noncoding-rna` | Non-coding RNA Biology | No | No | — | MISSING |
 | mol | `bio.mol.nucleic-acid-structure` | Nucleic Acid Structure | No | No | — | MISSING |
 | mol | `bio.mol.proteins-structure` | Proteins and Protein Structure | No | No | — | MISSING |
+| mol | `bio.mol.signal-transduction-pathways` | Core Signal Transduction Pathways | No | No | — | MISSING |
 | mol | `bio.mol.transcription` | Transcription | No | No | — | MISSING |
 | mol | `bio.mol.translation-genetic-code` | Translation and the Genetic Code | No | No | — | MISSING |
 | physio | `bio.physio.circulatory-system` | Human Circulatory System | No | No | — | MISSING |

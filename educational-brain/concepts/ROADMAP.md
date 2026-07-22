@@ -12,10 +12,10 @@ below from source whenever this file is updated, never hand-estimate.
 
 | Metric | Value |
 |---|---|
-| Total KG concepts (all 6 subjects) | **1,756** |
+| Total KG concepts (all 6 subjects) | **1,775** |
 | Concepts with an Educational Brain entry | **94** |
-| Remaining | **1,662** |
-| Completion percentage | **5.35%** |
+| Remaining | **1,681** |
+| Completion percentage | **5.30%** |
 
 ---
 
@@ -27,12 +27,16 @@ below from source whenever this file is updated, never hand-estimate.
 | physics | 238 | 67 | 28.15% | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 0 | 0.00% | `chem.found.matter` | No |
-| biology | 89 | 0 | 0.00% | `bio.found.what-is-biology` | No |
+| biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
 
 Physics's KG count reflects the 2026-07-22 Particle Physics + Semiconductor
 Physics additions (216 → 238); its 67 existing entries predate that
-addition and cover none of the 22 new concepts.
+addition and cover none of the 22 new concepts. Biology's KG count
+reflects the Curriculum Production Pipeline's own 2026-07-22 Biology KG
+v2.0.0 freeze (89 → 108 concepts, 19 new concepts incl. a new `bio.div`
+domain) — a concurrent, external change to this program's own work,
+picked up via rebase; biology still has 0 Educational Brain entries.
 
 ---
 
@@ -114,7 +118,7 @@ symbols`.
    physics's Particle Physics / Semiconductor Physics domains, then
    everything else in prerequisite order.
 
-Full computed order (all 1,662 remaining concepts): see
+Full computed order (all 1,681 remaining concepts): see
 `AUTHORING_QUEUE.md` — §5 above (the domain-completion constraint) takes
 precedence over that file's literal row order until `math.found` is
 complete.
