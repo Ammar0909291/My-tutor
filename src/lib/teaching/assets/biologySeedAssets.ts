@@ -6028,6 +6028,939 @@ const SYNTHBIO_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── v2.0.0 — 19 new concepts ────────────────────────────────────────────────
+
+const THREEDOMAIN = 'bio.div.three-domain-system'
+const THREEDOMAIN_SRC = 'docs/biology/kg/graph.json — bio.div.three-domain-system'
+const THREEDOMAIN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: THREEDOMAIN, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Life is divided into three domains: Bacteria, Archaea, and Eukarya. Bacteria and Archaea are both prokaryotes, but Archaea are more closely related to Eukarya than to Bacteria — they share features like similar RNA polymerases and histone-like proteins. The two-kingdom and five-kingdom systems split life by appearance; the three-domain system splits it by molecular ancestry, revealing that the old "Prokaryota" is actually two deeply divergent lineages.',
+    targetedMisconceptions: [`${THREEDOMAIN}:M1`],
+    source: THREEDOMAIN_SRC,
+  },
+  {
+    conceptId: THREEDOMAIN, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'A common error: "Archaea are just ancient bacteria." Not so. Archaea and Bacteria split very early and have followed completely independent evolutionary paths for billions of years. Archaea\'s cell membranes use ether-linked lipids (bacteria use ester-linked); their ribosomes and RNA polymerases resemble ours more than bacteria\'s. The word "archaea" means ancient, not primitive — they are highly adapted organisms living in hot springs, salt lakes, and also your gut.',
+    targetedMisconceptions: [`${THREEDOMAIN}:M1`],
+    source: THREEDOMAIN_SRC,
+  },
+]
+const THREEDOMAIN_PROBES: SeedProbe[] = [
+  {
+    conceptId: THREEDOMAIN, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Which pair of domains shares the most recent common ancestor?',
+    choices: [
+      { text: 'Archaea and Eukarya', isCorrect: true },
+      { text: 'Bacteria and Archaea', isCorrect: false, misconceptionId: `${THREEDOMAIN}:M1` },
+      { text: 'Bacteria and Eukarya', isCorrect: false },
+      { text: 'All three diverged simultaneously', isCorrect: false },
+    ],
+    correctValue: 'Archaea and Eukarya',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${THREEDOMAIN}:M1`],
+    source: THREEDOMAIN_SRC,
+  },
+  {
+    conceptId: THREEDOMAIN, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A student says: "Archaea are just a type of bacteria that live in extreme environments." What is wrong with this statement?',
+    choices: [
+      { text: 'Archaea are a separate domain, as distantly related to bacteria as we are', isCorrect: true },
+      { text: 'Nothing — archaea are indeed a subgroup of bacteria', isCorrect: false, misconceptionId: `${THREEDOMAIN}:M1` },
+    ],
+    correctValue: 'Archaea are a separate domain',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${THREEDOMAIN}:M1`],
+    source: THREEDOMAIN_SRC,
+  },
+]
+
+const ENDOSYMB = 'bio.div.endosymbiotic-theory'
+const ENDOSYMB_SRC = 'docs/biology/kg/graph.json — bio.div.endosymbiotic-theory'
+const ENDOSYMB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ENDOSYMB, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Endosymbiotic theory explains that mitochondria and chloroplasts were once free-living prokaryotes engulfed by a host cell. Instead of being digested, they stayed — and both host and guest benefited. Evidence: both organelles have their own circular DNA, their own ribosomes (bacterial-sized, 70S), divide by binary fission, and are bounded by a double membrane (the inner membrane is the original bacterium\'s membrane). Mitochondria descended from an alpha-proteobacterium; chloroplasts from a cyanobacterium.',
+    targetedMisconceptions: [`${ENDOSYMB}:M1`],
+    source: ENDOSYMB_SRC,
+  },
+  {
+    conceptId: ENDOSYMB, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Misconception: "Endosymbiotic theory is just a hypothesis — we don\'t have proof." It is one of the most strongly evidenced ideas in biology. The double membrane, 70S ribosomes, circular genome, binary fission, and the fact that mitochondrial DNA is most similar to alpha-proteobacteria — not to the nuclear genome — all independently point to the same conclusion. Lynn Margulis\'s proposal was once controversial; today it is textbook fact supported by molecular phylogenetics.',
+    targetedMisconceptions: [`${ENDOSYMB}:M1`],
+    source: ENDOSYMB_SRC,
+  },
+]
+const ENDOSYMB_PROBES: SeedProbe[] = [
+  {
+    conceptId: ENDOSYMB, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Which feature of mitochondria is the strongest evidence for their bacterial origin?',
+    choices: [
+      { text: 'Circular DNA and 70S ribosomes', isCorrect: true },
+      { text: 'They are surrounded by the ER membrane', isCorrect: false },
+      { text: 'They contain histones like the nucleus', isCorrect: false },
+      { text: 'They replicate only during S phase', isCorrect: false },
+    ],
+    correctValue: 'Circular DNA and 70S ribosomes',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ENDOSYMB}:M1`],
+    source: ENDOSYMB_SRC,
+  },
+  {
+    conceptId: ENDOSYMB, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Why do mitochondria have their own ribosomes if they live inside a eukaryotic cell?',
+    choices: [
+      { text: 'Because they descended from free-living bacteria that already had ribosomes', isCorrect: true },
+      { text: 'The cell nucleus sends ribosomes into the mitochondria for efficiency', isCorrect: false, misconceptionId: `${ENDOSYMB}:M1` },
+    ],
+    correctValue: 'Because they descended from free-living bacteria',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ENDOSYMB}:M1`],
+    source: ENDOSYMB_SRC,
+  },
+]
+
+const PROTDIV = 'bio.div.protist-diversity'
+const PROTDIV_SRC = 'docs/biology/kg/graph.json — bio.div.protist-diversity'
+const PROTDIV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PROTDIV, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Protists are eukaryotes that are not animals, plants, or fungi — essentially the "everything else" category. They include amoebae, algae, diatoms, foraminifera, and the malaria parasite Plasmodium. Protists are not a natural group (they do not share a single exclusive common ancestor), but the category is useful shorthand. Their life cycles range from entirely asexual to complex alternation of generations; some are photosynthetic, some heterotrophic, and some switch between modes.',
+    targetedMisconceptions: [`${PROTDIV}:M1`],
+    source: PROTDIV_SRC,
+  },
+  {
+    conceptId: PROTDIV, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Misconception: "Protists are simple, primitive organisms." Many protists have highly complex cells — the malaria parasite has a multi-stage life cycle spanning two hosts and undergoes dramatic morphological changes; radiolarians build intricate glass skeletons; some ciliates have two nuclei with entirely different functions. "Primitive" means ancestral, not simple; protists are not ancestral to anything in particular — they are a diverse polyphyletic assortment, most lineages as evolutionarily derived as we are.',
+    targetedMisconceptions: [`${PROTDIV}:M1`],
+    source: PROTDIV_SRC,
+  },
+]
+const PROTDIV_PROBES: SeedProbe[] = [
+  {
+    conceptId: PROTDIV, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Why is "Protista" considered a polyphyletic grouping?',
+    choices: [
+      { text: 'Its members do not share a unique common ancestor exclusive to themselves', isCorrect: true },
+      { text: 'Protists include organisms from all three domains', isCorrect: false },
+      { text: 'Protists can only reproduce asexually', isCorrect: false },
+      { text: 'They lack membrane-bound organelles', isCorrect: false },
+    ],
+    correctValue: 'Its members do not share a unique common ancestor exclusive to themselves',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PROTDIV}:M1`],
+    source: PROTDIV_SRC,
+  },
+  {
+    conceptId: PROTDIV, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A classmate calls protists "the simple ancestral eukaryotes." Name one feature of a protist that contradicts the word "simple."',
+    choices: [
+      { text: 'Plasmodium\'s multi-host life cycle / radiolarian glass skeleton', isCorrect: true },
+      { text: 'They are all unicellular, so simplicity is accurate', isCorrect: false, misconceptionId: `${PROTDIV}:M1` },
+    ],
+    correctValue: 'Complex life cycle or elaborate cell structure',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PROTDIV}:M1`],
+    source: PROTDIV_SRC,
+  },
+]
+
+const FUNGALBIO = 'bio.div.fungal-biology'
+const FUNGALBIO_SRC = 'docs/biology/kg/graph.json — bio.div.fungal-biology'
+const FUNGALBIO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FUNGALBIO, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Fungi are eukaryotes with cell walls made of chitin (not cellulose). They are heterotrophs that digest food externally — secreting enzymes into their substrate and absorbing the products — rather than ingesting food. The fungal body (mycelium) is a network of thread-like hyphae, giving enormous surface area for absorption. Fungi reproduce via spores (sexually or asexually). Key ecological roles: decomposers that recycle nutrients, and mycorrhizal partners that extend plant root systems in exchange for sugars.',
+    targetedMisconceptions: [`${FUNGALBIO}:M1`],
+    source: FUNGALBIO_SRC,
+  },
+  {
+    conceptId: FUNGALBIO, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Misconception: "Fungi are plants." Fungi are more closely related to animals than to plants. Plants make their own food (autotrophs) and have cellulose cell walls; fungi are heterotrophs with chitin walls. Plants store starch; fungi store glycogen — like animals. Fungi were historically classified with plants because both are stationary, but molecular phylogenetics firmly places fungi as the sister group to animals (together called Opisthokonta), not close to plants at all.',
+    targetedMisconceptions: [`${FUNGALBIO}:M1`],
+    source: FUNGALBIO_SRC,
+  },
+]
+const FUNGALBIO_PROBES: SeedProbe[] = [
+  {
+    conceptId: FUNGALBIO, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'What distinguishes the fungal cell wall from the plant cell wall?',
+    choices: [
+      { text: 'Fungi have chitin walls; plants have cellulose walls', isCorrect: true },
+      { text: 'Fungi have cellulose walls; plants have chitin walls', isCorrect: false, misconceptionId: `${FUNGALBIO}:M1` },
+      { text: 'Both have chitin walls', isCorrect: false },
+      { text: 'Fungi have no cell wall', isCorrect: false },
+    ],
+    correctValue: 'Fungi have chitin walls; plants have cellulose walls',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FUNGALBIO}:M1`],
+    source: FUNGALBIO_SRC,
+  },
+  {
+    conceptId: FUNGALBIO, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Based on molecular evidence, fungi are most closely related to which kingdom?',
+    choices: [
+      { text: 'Animals (Animalia)', isCorrect: true },
+      { text: 'Plants (Plantae)', isCorrect: false, misconceptionId: `${FUNGALBIO}:M1` },
+    ],
+    correctValue: 'Animals',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FUNGALBIO}:M1`],
+    source: FUNGALBIO_SRC,
+  },
+]
+
+const PLANTDIVALT = 'bio.div.plant-diversity-alternation-of-generations'
+const PLANTDIVALT_SRC = 'docs/biology/kg/graph.json — bio.div.plant-diversity-alternation-of-generations'
+const PLANTDIVALT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PLANTDIVALT, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Plants alternate between two multicellular generations: the sporophyte (diploid, 2n) produces spores by meiosis; the gametophyte (haploid, n) produces gametes by mitosis. In mosses the gametophyte is the dominant visible green plant; in ferns the sporophyte dominates and the gametophyte is a tiny heart-shaped structure; in seed plants (gymnosperms/angiosperms) the gametophyte is microscopic and entirely dependent on the sporophyte. This trend — sporophyte dominance, gametophyte reduction — tracks plant evolution onto land.',
+    targetedMisconceptions: [`${PLANTDIVALT}:M1`],
+    source: PLANTDIVALT_SRC,
+  },
+  {
+    conceptId: PLANTDIVALT, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Misconception: "The plant you see IS the plant." In mosses, the green cushion you walk on is actually the gametophyte generation — haploid. The brown stalk with a capsule on top is the sporophyte. Students often assume the familiar visible plant is always the sporophyte, but that is only true for ferns onward. Recognising which generation is dominant in each group is key to understanding why seed plants can colonise dry land while mosses cannot.',
+    targetedMisconceptions: [`${PLANTDIVALT}:M1`],
+    source: PLANTDIVALT_SRC,
+  },
+]
+const PLANTDIVALT_PROBES: SeedProbe[] = [
+  {
+    conceptId: PLANTDIVALT, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'In a moss plant, the familiar green cushion represents which generation?',
+    choices: [
+      { text: 'Gametophyte (haploid)', isCorrect: true },
+      { text: 'Sporophyte (diploid)', isCorrect: false, misconceptionId: `${PLANTDIVALT}:M1` },
+      { text: 'Both generations together', isCorrect: false },
+      { text: 'Neither — mosses have no alternation of generations', isCorrect: false },
+    ],
+    correctValue: 'Gametophyte (haploid)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PLANTDIVALT}:M1`],
+    source: PLANTDIVALT_SRC,
+  },
+  {
+    conceptId: PLANTDIVALT, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'As plants evolved from mosses to seed plants, what happened to the gametophyte generation?',
+    choices: [
+      { text: 'It became progressively smaller and dependent on the sporophyte', isCorrect: true },
+      { text: 'It became dominant in more advanced plants', isCorrect: false, misconceptionId: `${PLANTDIVALT}:M1` },
+    ],
+    correctValue: 'It became progressively smaller',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PLANTDIVALT}:M1`],
+    source: PLANTDIVALT_SRC,
+  },
+]
+
+const CLADPHYLO = 'bio.div.cladistics-phylogenetic-thinking'
+const CLADPHYLO_SRC = 'docs/biology/kg/graph.json — bio.div.cladistics-phylogenetic-thinking'
+const CLADPHYLO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CLADPHYLO, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Cladistics classifies organisms by shared derived characters — traits that arose in a common ancestor and were inherited by all its descendants. A clade is an ancestor plus all its descendants (a monophyletic group). Phylogenetic trees show hypotheses of ancestry, not certainty; they are built by finding the most parsimonious tree (fewest evolutionary changes) or using probabilistic models with DNA sequence data. Key principle: two species are more closely related if they share a more recent common ancestor, regardless of how similar they look.',
+    targetedMisconceptions: [`${CLADPHYLO}:M1`],
+    source: CLADPHYLO_SRC,
+  },
+  {
+    conceptId: CLADPHYLO, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Misconception: "Similar appearance = close relationship." Dolphins and fish look similar and live similarly, but dolphins are more closely related to hippopotamuses than to any fish. Convergent evolution produces similar-looking structures (wings in bats/birds/insects) in distantly related lineages. Cladistics avoids this by using shared derived characters from a common ancestor, not overall similarity. Molecular data now routinely overturn relationships that seemed obvious from anatomy.',
+    targetedMisconceptions: [`${CLADPHYLO}:M1`],
+    source: CLADPHYLO_SRC,
+  },
+]
+const CLADPHYLO_PROBES: SeedProbe[] = [
+  {
+    conceptId: CLADPHYLO, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A clade (monophyletic group) includes:',
+    choices: [
+      { text: 'An ancestor and ALL of its descendants', isCorrect: true },
+      { text: 'An ancestor and only its morphologically similar descendants', isCorrect: false, misconceptionId: `${CLADPHYLO}:M1` },
+      { text: 'Any group of organisms sharing at least one trait', isCorrect: false },
+      { text: 'Only species that share the same habitat', isCorrect: false },
+    ],
+    correctValue: 'An ancestor and ALL of its descendants',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CLADPHYLO}:M1`],
+    source: CLADPHYLO_SRC,
+  },
+  {
+    conceptId: CLADPHYLO, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Dolphins look like fish. Does this mean dolphins and fish are more closely related to each other than dolphins are to hippos?',
+    choices: [
+      { text: 'No — dolphins and hippos share a more recent common ancestor; the similarity to fish is convergent', isCorrect: true },
+      { text: 'Yes — similar body plan means closer evolutionary relationship', isCorrect: false, misconceptionId: `${CLADPHYLO}:M1` },
+    ],
+    correctValue: 'No — convergent evolution explains the similarity',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CLADPHYLO}:M1`],
+    source: CLADPHYLO_SRC,
+  },
+]
+
+const VIRALREP = 'bio.micro.viral-replication'
+const VIRALREP_SRC = 'docs/biology/kg/graph.json — bio.micro.viral-replication'
+const VIRALREP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: VIRALREP, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Viruses replicate by hijacking host cell machinery. The lytic cycle: virus attaches → injects genetic material → host makes viral proteins and copies viral genome → new virions assemble → cell lyses, releasing hundreds of progeny. The lysogenic cycle (bacteriophage λ): viral DNA integrates into host chromosome as a prophage, replicates silently with the host for generations, then excises and enters the lytic cycle when triggered by stress. Animal viruses use analogous temperate/productive cycles. RNA viruses (e.g. HIV) require reverse transcriptase to convert RNA→DNA before integration.',
+    targetedMisconceptions: [`${VIRALREP}:M1`],
+    source: VIRALREP_SRC,
+  },
+  {
+    conceptId: VIRALREP, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Misconception: "Viruses are alive — they reproduce." Viruses do not reproduce; they replicate by commandeering the host\'s ribosomes, energy, and raw materials. Outside a host, a virus is inert — it metabolises nothing, grows nothing, responds to nothing. The distinction matters: antibiotics target bacterial metabolism; they have no effect on viruses because there is no viral metabolism to disrupt. Antivirals instead block specific steps of the replication cycle (attachment, reverse transcription, protease processing).',
+    targetedMisconceptions: [`${VIRALREP}:M1`],
+    source: VIRALREP_SRC,
+  },
+]
+const VIRALREP_PROBES: SeedProbe[] = [
+  {
+    conceptId: VIRALREP, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'In the lysogenic cycle, what happens to the viral genome?',
+    choices: [
+      { text: 'It integrates into the host chromosome and replicates with it', isCorrect: true },
+      { text: 'It immediately directs production of new virions', isCorrect: false, misconceptionId: `${VIRALREP}:M1` },
+      { text: 'It is degraded by host restriction enzymes', isCorrect: false },
+      { text: 'It exits the nucleus and stays in the cytoplasm', isCorrect: false },
+    ],
+    correctValue: 'It integrates into the host chromosome and replicates with it',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VIRALREP}:M1`],
+    source: VIRALREP_SRC,
+  },
+  {
+    conceptId: VIRALREP, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Why don\'t antibiotics work on viral infections?',
+    choices: [
+      { text: 'Viruses have no metabolism for antibiotics to target', isCorrect: true },
+      { text: 'Viruses are too large for antibiotics to reach', isCorrect: false, misconceptionId: `${VIRALREP}:M1` },
+    ],
+    correctValue: 'Viruses have no metabolism',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${VIRALREP}:M1`],
+    source: VIRALREP_SRC,
+  },
+]
+
+const HORISGENE = 'bio.micro.horizontal-gene-transfer'
+const HORISGENE_SRC = 'docs/biology/kg/graph.json — bio.micro.horizontal-gene-transfer'
+const HORISGENE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HORISGENE, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Horizontal gene transfer (HGT) moves genes between organisms that are not parent and offspring — across the tree of life, even between unrelated species. Three mechanisms in bacteria: transformation (uptake of naked DNA from environment), transduction (DNA carried by a bacteriophage), and conjugation (direct cell-to-cell transfer via a pilus). HGT is how antibiotic resistance genes spread rapidly across bacterial species. It also explains why some eukaryote genomes contain genes of bacterial origin that were never inherited vertically.',
+    targetedMisconceptions: [`${HORISGENE}:M1`],
+    source: HORISGENE_SRC,
+  },
+  {
+    conceptId: HORISGENE, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Misconception: "Resistance evolves in individual bacteria during their lifetime." Bacteria do not adaptively mutate in response to antibiotics — they cannot direct their mutations. Instead, resistance mutations arise randomly and pre-exist in the population at low frequency. Antibiotics select for bacteria already carrying resistance genes, or HGT transfers an already-existing resistance gene from another strain. The resistance gene existed before the patient ever took the drug; the antibiotic merely removed the competition.',
+    targetedMisconceptions: [`${HORISGENE}:M1`],
+    source: HORISGENE_SRC,
+  },
+]
+const HORISGENE_PROBES: SeedProbe[] = [
+  {
+    conceptId: HORISGENE, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Which HGT mechanism transfers bacterial DNA using a bacteriophage as a vector?',
+    choices: [
+      { text: 'Transduction', isCorrect: true },
+      { text: 'Transformation', isCorrect: false },
+      { text: 'Conjugation', isCorrect: false },
+      { text: 'Transposition', isCorrect: false },
+    ],
+    correctValue: 'Transduction',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HORISGENE}:M1`],
+    source: HORISGENE_SRC,
+  },
+  {
+    conceptId: HORISGENE, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A patient\'s bacteria become resistant after a course of antibiotics. Did the bacteria "learn" or "evolve" resistance during treatment?',
+    choices: [
+      { text: 'No — resistant bacteria pre-existed; antibiotics selected them or they acquired resistance via HGT', isCorrect: true },
+      { text: 'Yes — bacteria mutate in response to the antibiotic to survive', isCorrect: false, misconceptionId: `${HORISGENE}:M1` },
+    ],
+    correctValue: 'No — selection and HGT, not directed mutation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HORISGENE}:M1`],
+    source: HORISGENE_SRC,
+  },
+]
+
+const APOPTOSIS = 'bio.cell.apoptosis'
+const APOPTOSIS_SRC = 'docs/biology/kg/graph.json — bio.cell.apoptosis'
+const APOPTOSIS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: APOPTOSIS, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Apoptosis is programmed cell death — a deliberate, ordered self-destruction used to remove unwanted or damaged cells without triggering inflammation. Hallmarks: cell shrinks, chromatin condenses, DNA is cleaved into fragments, the cell blebs into apoptotic bodies that phagocytes clear away. Two pathways: intrinsic (mitochondria sense internal damage — DNA breaks, misfolded proteins — and release cytochrome c, activating caspases) and extrinsic (death-receptor ligands like FasL trigger caspase activation from outside). Disrupted apoptosis underlies cancer (too little) and neurodegeneration (too much).',
+    targetedMisconceptions: [`${APOPTOSIS}:M1`],
+    source: APOPTOSIS_SRC,
+  },
+  {
+    conceptId: APOPTOSIS, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Misconception: "Cell death is always harmful." Apoptosis is essential for normal development — the webbing between your fingers disappeared because those cells underwent apoptosis; 100 billion neurons are pruned in the developing brain; the thymus eliminates self-reactive T cells this way. Without apoptosis, development fails and cancer risk soars. The harmful form of cell death is necrosis — accidental rupture that spills contents and causes inflammation. Apoptosis is the body\'s deliberate, clean disposal mechanism.',
+    targetedMisconceptions: [`${APOPTOSIS}:M1`],
+    source: APOPTOSIS_SRC,
+  },
+]
+const APOPTOSIS_PROBES: SeedProbe[] = [
+  {
+    conceptId: APOPTOSIS, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'In the intrinsic apoptosis pathway, what event in the mitochondria triggers caspase activation?',
+    choices: [
+      { text: 'Release of cytochrome c into the cytoplasm', isCorrect: true },
+      { text: 'Binding of FasL to its receptor on the cell surface', isCorrect: false },
+      { text: 'Loss of the mitochondrial outer membrane', isCorrect: false },
+      { text: 'ATP depletion stopping oxidative phosphorylation', isCorrect: false },
+    ],
+    correctValue: 'Release of cytochrome c',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${APOPTOSIS}:M1`],
+    source: APOPTOSIS_SRC,
+  },
+  {
+    conceptId: APOPTOSIS, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Why is apoptosis considered beneficial rather than harmful during embryonic development?',
+    choices: [
+      { text: 'It removes specific cells in a controlled way — e.g., sculpting digits by eliminating interdigital tissue', isCorrect: true },
+      { text: 'It is harmful; all cell death during development is a defect', isCorrect: false, misconceptionId: `${APOPTOSIS}:M1` },
+    ],
+    correctValue: 'It removes specific cells in a controlled way',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${APOPTOSIS}:M1`],
+    source: APOPTOSIS_SRC,
+  },
+]
+
+const EPIGENET = 'bio.mol.epigenetics'
+const EPIGENET_SRC = 'docs/biology/kg/graph.json — bio.mol.epigenetics'
+const EPIGENET_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EPIGENET, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Epigenetics studies heritable changes in gene expression that do not alter the DNA sequence. Main mechanisms: (1) DNA methylation — cytosine at CpG sites gets a methyl group, generally silencing nearby genes; (2) histone modification — acetylation loosens chromatin and activates genes; methylation or deacetylation condenses it and silences genes; (3) non-coding RNA regulation. Epigenetic marks can be tissue-specific (liver cells vs. neurons have the same DNA but different marks) and some marks are inherited across cell divisions or even generations.',
+    targetedMisconceptions: [`${EPIGENET}:M1`],
+    source: EPIGENET_SRC,
+  },
+  {
+    conceptId: EPIGENET, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Misconception: "Epigenetics means your lifestyle permanently rewrites your genes for your children." Epigenetic marks can be reset between generations; transgenerational epigenetic inheritance is real but limited in mammals — most marks are erased during gametogenesis and embryogenesis. What your diet or stress does to your methylome during your lifetime mostly does NOT reliably program your grandchildren\'s gene expression. Epigenetics is powerful within a lifetime and across cell generations in one body; claims about multi-generational inheritance require careful evidence.',
+    targetedMisconceptions: [`${EPIGENET}:M1`],
+    source: EPIGENET_SRC,
+  },
+]
+const EPIGENET_PROBES: SeedProbe[] = [
+  {
+    conceptId: EPIGENET, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'DNA methylation at CpG sites most commonly leads to:',
+    choices: [
+      { text: 'Gene silencing', isCorrect: true },
+      { text: 'Gene activation', isCorrect: false, misconceptionId: `${EPIGENET}:M1` },
+      { text: 'DNA strand breaks', isCorrect: false },
+      { text: 'Increased mutation rate', isCorrect: false },
+    ],
+    correctValue: 'Gene silencing',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EPIGENET}:M1`],
+    source: EPIGENET_SRC,
+  },
+  {
+    conceptId: EPIGENET, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A liver cell and a neuron in the same person have identical DNA sequences. How can they look and function so differently?',
+    choices: [
+      { text: 'Different epigenetic marks silence different gene sets in each cell type', isCorrect: true },
+      { text: 'Liver cells mutate their DNA to delete neuron-specific genes', isCorrect: false, misconceptionId: `${EPIGENET}:M1` },
+    ],
+    correctValue: 'Different epigenetic marks',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EPIGENET}:M1`],
+    source: EPIGENET_SRC,
+  },
+]
+
+const NCRNA = 'bio.mol.noncoding-rna'
+const NCRNA_SRC = 'docs/biology/kg/graph.json — bio.mol.noncoding-rna'
+const NCRNA_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NCRNA, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Non-coding RNAs (ncRNAs) are transcribed from DNA but not translated into protein — yet they perform critical regulatory and structural functions. Key classes: rRNA (ribosome structure/catalysis), tRNA (amino acid adaptor in translation), miRNA (bind mRNA by complementarity, triggering degradation or translational repression), siRNA (similar mechanism, exogenous source — basis of RNAi), lncRNA (long non-coding RNAs, diverse functions including X-chromosome inactivation via Xist). The majority of the human genome is transcribed but most of it is non-coding; this was once called "junk DNA" — a label now known to be wrong.',
+    targetedMisconceptions: [`${NCRNA}:M1`],
+    source: NCRNA_SRC,
+  },
+  {
+    conceptId: NCRNA, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Misconception: "Only protein-coding genes matter — the rest is junk." The ENCODE project showed that >80% of the human genome has biochemical activity. miRNAs regulate hundreds of protein-coding genes each; a single miRNA mutation can cause cancer or developmental defects. lncRNAs orchestrate chromatin structure at the chromosome scale. The "junk" framing came from the protein-centric 20th-century view; the 21st-century RNA world view sees non-coding sequence as a rich regulatory layer, not dead sequence.',
+    targetedMisconceptions: [`${NCRNA}:M1`],
+    source: NCRNA_SRC,
+  },
+]
+const NCRNA_PROBES: SeedProbe[] = [
+  {
+    conceptId: NCRNA, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'How does a miRNA typically suppress gene expression?',
+    choices: [
+      { text: 'It binds complementary mRNA sequences, causing degradation or blocking translation', isCorrect: true },
+      { text: 'It methylates the gene\'s promoter in the DNA', isCorrect: false },
+      { text: 'It competes with ribosomes for tRNA', isCorrect: false },
+      { text: 'It cleaves the 5′ cap from mRNAs', isCorrect: false },
+    ],
+    correctValue: 'Binds mRNA, causing degradation or translational repression',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${NCRNA}:M1`],
+    source: NCRNA_SRC,
+  },
+  {
+    conceptId: NCRNA, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'About 98% of human transcription produces non-coding RNA. Does this mean 98% of transcription is wasteful "junk"?',
+    choices: [
+      { text: 'No — ncRNAs perform essential regulatory, structural, and catalytic roles', isCorrect: true },
+      { text: 'Yes — only mRNA is functional; the rest is evolutionary noise', isCorrect: false, misconceptionId: `${NCRNA}:M1` },
+    ],
+    correctValue: 'No — ncRNAs are functional',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NCRNA}:M1`],
+    source: NCRNA_SRC,
+  },
+]
+
+const SIGTRANS = 'bio.mol.signal-transduction-pathways'
+const SIGTRANS_SRC = 'docs/biology/kg/graph.json — bio.mol.signal-transduction-pathways'
+const SIGTRANS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SIGTRANS, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Signal transduction converts an extracellular signal (hormone, growth factor, neurotransmitter) into an intracellular response via three stages: reception (signal binds receptor), transduction (relay molecules amplify and route the message), and response (gene expression change, enzyme activation, cytoskeletal rearrangement). Key receptors: G-protein-coupled receptors (GPCRs) activate adenylyl cyclase → cAMP → PKA cascade; receptor tyrosine kinases (RTKs) dimerize and autophosphorylate → Ras → MAP kinase cascade. Signal amplification: one receptor can activate thousands of downstream molecules.',
+    targetedMisconceptions: [`${SIGTRANS}:M1`],
+    source: SIGTRANS_SRC,
+  },
+  {
+    conceptId: SIGTRANS, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Misconception: "Hormones enter cells and directly change gene expression." Most peptide hormones and neurotransmitters are too hydrophilic to cross the plasma membrane; they bind surface receptors and trigger an intracellular relay. Only lipid-soluble signals (steroid hormones, thyroid hormone) cross the membrane directly and bind intracellular receptors. The distinction matters clinically: drugs targeting GPCRs (beta-blockers, antihistamines) work on the outside of cells; drugs mimicking steroids must reach intracellular receptors.',
+    targetedMisconceptions: [`${SIGTRANS}:M1`],
+    source: SIGTRANS_SRC,
+  },
+]
+const SIGTRANS_PROBES: SeedProbe[] = [
+  {
+    conceptId: SIGTRANS, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'cAMP acts as a second messenger in GPCR signalling. What is the first messenger?',
+    choices: [
+      { text: 'The extracellular signal molecule (e.g., hormone or neurotransmitter)', isCorrect: true },
+      { text: 'The G-protein itself', isCorrect: false },
+      { text: 'Adenylyl cyclase', isCorrect: false },
+      { text: 'Protein kinase A', isCorrect: false },
+    ],
+    correctValue: 'The extracellular signal molecule',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SIGTRANS}:M1`],
+    source: SIGTRANS_SRC,
+  },
+  {
+    conceptId: SIGTRANS, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Insulin is a peptide hormone. Does it cross the plasma membrane to deliver its signal inside the cell?',
+    choices: [
+      { text: 'No — it binds a surface receptor (RTK) that initiates an intracellular cascade', isCorrect: true },
+      { text: 'Yes — all hormones enter the nucleus to regulate gene expression directly', isCorrect: false, misconceptionId: `${SIGTRANS}:M1` },
+    ],
+    correctValue: 'No — binds surface RTK receptor',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SIGTRANS}:M1`],
+    source: SIGTRANS_SRC,
+  },
+]
+
+const DNADMGREP = 'bio.mol.dna-damage-repair'
+const DNADMGREP_SRC = 'docs/biology/kg/graph.json — bio.mol.dna-damage-repair'
+const DNADMGREP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DNADMGREP, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'DNA sustains ~10,000 lesions per cell per day. Multiple repair pathways handle different damage types: base excision repair (BER) fixes small base modifications; nucleotide excision repair (NER) removes bulky lesions like UV-induced thymine dimers; mismatch repair (MMR) corrects replication errors; homologous recombination (HR) and non-homologous end joining (NHEJ) repair double-strand breaks. Defects in these pathways cause hereditary cancers: BRCA1/2 mutations disable HR (breast/ovarian cancer risk); MLH1/MSH2 mutations disable MMR (Lynch syndrome, colorectal cancer).',
+    targetedMisconceptions: [`${DNADMGREP}:M1`],
+    source: DNADMGREP_SRC,
+  },
+  {
+    conceptId: DNADMGREP, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Misconception: "Mutations only come from radiation and toxic chemicals." The largest source of mutations is spontaneous chemistry — deamination (cytosine → uracil), depurination, and replication errors occur constantly. The cell\'s repair systems catch almost all of them; cancer arises when both the mutation rate increases AND the repair systems are compromised. Understanding this explains why DNA repair gene defects (BRCA1/2) confer cancer risk even without unusual environmental exposure.',
+    targetedMisconceptions: [`${DNADMGREP}:M1`],
+    source: DNADMGREP_SRC,
+  },
+]
+const DNADMGREP_PROBES: SeedProbe[] = [
+  {
+    conceptId: DNADMGREP, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Thymine dimers caused by UV light are primarily repaired by which pathway?',
+    choices: [
+      { text: 'Nucleotide excision repair (NER)', isCorrect: true },
+      { text: 'Base excision repair (BER)', isCorrect: false },
+      { text: 'Mismatch repair (MMR)', isCorrect: false },
+      { text: 'Non-homologous end joining (NHEJ)', isCorrect: false },
+    ],
+    correctValue: 'Nucleotide excision repair',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DNADMGREP}:M1`],
+    source: DNADMGREP_SRC,
+  },
+  {
+    conceptId: DNADMGREP, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Why do BRCA1/2 mutation carriers have elevated cancer risk even without unusual radiation or chemical exposure?',
+    choices: [
+      { text: 'Because spontaneous DNA damage occurs constantly and BRCA1/2 repairs double-strand breaks from that normal damage', isCorrect: true },
+      { text: 'Because BRCA1/2 mutations attract radiation to the cell', isCorrect: false, misconceptionId: `${DNADMGREP}:M1` },
+    ],
+    correctValue: 'Spontaneous damage accumulates when BRCA1/2 repair is absent',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DNADMGREP}:M1`],
+    source: DNADMGREP_SRC,
+  },
+]
+
+const BIOENERGET = 'bio.mol.bioenergetics'
+const BIOENERGET_SRC = 'docs/biology/kg/graph.json — bio.mol.bioenergetics'
+const BIOENERGET_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BIOENERGET, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Bioenergetics is the study of energy flow through living systems. Key principles: (1) ATP is the universal energy currency — its hydrolysis (ΔG = −30.5 kJ/mol) drives endergonic reactions by coupling; (2) coupled reactions: an exergonic reaction drives an endergonic one in the same pathway; (3) thermodynamic laws apply — life does not violate the second law; instead, it maintains low entropy locally by exporting entropy to the environment; (4) free energy (ΔG) determines spontaneity: ΔG < 0 means spontaneous; reactions at equilibrium cannot do work. Metabolic pathways are precisely ordered to maximize free energy capture from substrate oxidation into ATP.',
+    targetedMisconceptions: [`${BIOENERGET}:M1`],
+    source: BIOENERGET_SRC,
+  },
+  {
+    conceptId: BIOENERGET, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Misconception: "Life violates the second law of thermodynamics because organisms create order." Life does not violate entropy — it EXPORTS disorder. When a cell builds a protein (local order), it simultaneously releases heat and disorder into the environment that exceeds the local order gained. The total entropy of the universe (cell + surroundings) increases, as required. Living systems are open systems, constantly exchanging energy with surroundings; the second law governs closed systems. Open systems can maintain or increase internal order by increasing surroundings\' entropy even more.',
+    targetedMisconceptions: [`${BIOENERGET}:M1`],
+    source: BIOENERGET_SRC,
+  },
+]
+const BIOENERGET_PROBES: SeedProbe[] = [
+  {
+    conceptId: BIOENERGET, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Which condition makes a biochemical reaction spontaneous?',
+    choices: [
+      { text: 'ΔG < 0 (negative free energy change)', isCorrect: true },
+      { text: 'ΔG > 0 (positive free energy change)', isCorrect: false, misconceptionId: `${BIOENERGET}:M1` },
+      { text: 'ΔG = 0 (free energy at equilibrium)', isCorrect: false },
+      { text: 'ΔH < 0 regardless of entropy change', isCorrect: false },
+    ],
+    correctValue: 'ΔG < 0',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BIOENERGET}:M1`],
+    source: BIOENERGET_SRC,
+  },
+  {
+    conceptId: BIOENERGET, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Does the organisation of a living cell violate the second law of thermodynamics?',
+    choices: [
+      { text: 'No — cells export more disorder to the environment than they create internally', isCorrect: true },
+      { text: 'Yes — creating order from disorder requires violating entropy', isCorrect: false, misconceptionId: `${BIOENERGET}:M1` },
+    ],
+    correctValue: 'No — net entropy of universe increases',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${BIOENERGET}:M1`],
+    source: BIOENERGET_SRC,
+  },
+]
+
+const TRANSPELE = 'bio.gen.transposable-elements'
+const TRANSPELE_SRC = 'docs/biology/kg/graph.json — bio.gen.transposable-elements'
+const TRANSPELE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TRANSPELE, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Transposable elements (TEs, "jumping genes") are DNA sequences that can move to new locations in the genome. Class I TEs (retrotransposons) use a copy-and-paste mechanism via an RNA intermediate — they transcribe to RNA, reverse-transcribe to DNA, then insert the copy elsewhere; they increase in copy number. Class II TEs (DNA transposons) use cut-and-paste — the transposase enzyme excises the element and reinserts it. TEs comprise ~45% of the human genome and >80% of some plant genomes. Insertions can disrupt genes, alter gene expression, or — over evolutionary time — be domesticated as regulatory elements.',
+    targetedMisconceptions: [`${TRANSPELE}:M1`],
+    source: TRANSPELE_SRC,
+  },
+  {
+    conceptId: TRANSPELE, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Misconception: "Jumping genes randomly destroy the genome." Most TEs are silenced by epigenetic mechanisms (DNA methylation, small RNA pathways like piRNA) and are not actively transposing. Active transposition is tightly regulated; cells that fail to suppress TEs face chromosome instability. Historically, TEs were considered "selfish DNA" or junk; now we know many have been co-opted as gene regulatory sequences, exon sources, and structural elements — contributing to genome evolution rather than only destroying it.',
+    targetedMisconceptions: [`${TRANSPELE}:M1`],
+    source: TRANSPELE_SRC,
+  },
+]
+const TRANSPELE_PROBES: SeedProbe[] = [
+  {
+    conceptId: TRANSPELE, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A retrotransposon moves via which mechanism?',
+    choices: [
+      { text: 'Copy-and-paste using an RNA intermediate and reverse transcriptase', isCorrect: true },
+      { text: 'Cut-and-paste directly from one DNA site to another', isCorrect: false, misconceptionId: `${TRANSPELE}:M1` },
+      { text: 'Homologous recombination between identical sequences', isCorrect: false },
+      { text: 'Packaging into a virus and infecting new cells', isCorrect: false },
+    ],
+    correctValue: 'Copy-and-paste via RNA intermediate',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${TRANSPELE}:M1`],
+    source: TRANSPELE_SRC,
+  },
+  {
+    conceptId: TRANSPELE, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'About 45% of the human genome consists of transposable elements. Are they all actively jumping and causing mutations?',
+    choices: [
+      { text: 'No — most are silenced by epigenetic mechanisms; many have been co-opted as regulatory elements', isCorrect: true },
+      { text: 'Yes — they constantly move and cause continuous genome instability', isCorrect: false, misconceptionId: `${TRANSPELE}:M1` },
+    ],
+    correctValue: 'No — most are silenced or co-opted',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TRANSPELE}:M1`],
+    source: TRANSPELE_SRC,
+  },
+]
+
+const MOLEVO = 'bio.evo.molecular-evolution'
+const MOLEVO_SRC = 'docs/biology/kg/graph.json — bio.evo.molecular-evolution'
+const MOLEVO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MOLEVO, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Molecular evolution studies how DNA, RNA, and protein sequences change over time. The neutral theory (Kimura) proposes that most molecular variation is selectively neutral — fixed by genetic drift rather than natural selection. The molecular clock hypothesis: neutral mutations accumulate at a roughly constant rate, so sequence divergence between species is proportional to time since common ancestry. Applications: phylogenetic tree construction from sequence data, dating divergence events, identifying functionally important conserved sequences (slow-evolving sites = functional constraint), and reconstructing ancestral protein sequences.',
+    targetedMisconceptions: [`${MOLEVO}:M1`],
+    source: MOLEVO_SRC,
+  },
+  {
+    conceptId: MOLEVO, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Misconception: "Evolution is always driven by natural selection." At the molecular level, most mutations are neutral — they change the DNA but not the protein\'s function (synonymous codons, non-functional regions). These are fixed by genetic drift, not selection. The neutral theory was controversial when proposed but is now the null model: before claiming a molecular change is adaptive, you must demonstrate it is NOT neutral. Highly conserved sequences (e.g., histone H4 — nearly identical from yeast to humans) are conserved because ANY change is deleterious; highly variable regions evolve neutrally.',
+    targetedMisconceptions: [`${MOLEVO}:M1`],
+    source: MOLEVO_SRC,
+  },
+]
+const MOLEVO_PROBES: SeedProbe[] = [
+  {
+    conceptId: MOLEVO, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'According to the neutral theory, what is the main driver of most molecular evolution?',
+    choices: [
+      { text: 'Genetic drift fixing neutral mutations', isCorrect: true },
+      { text: 'Natural selection favouring beneficial mutations', isCorrect: false, misconceptionId: `${MOLEVO}:M1` },
+      { text: 'Directed mutation in response to the environment', isCorrect: false },
+      { text: 'Sexual selection on molecular phenotypes', isCorrect: false },
+    ],
+    correctValue: 'Genetic drift fixing neutral mutations',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${MOLEVO}:M1`],
+    source: MOLEVO_SRC,
+  },
+  {
+    conceptId: MOLEVO, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Histone H4 is nearly identical between yeast and humans. Does this mean H4 is under strong positive selection?',
+    choices: [
+      { text: 'No — strong conservation indicates strong purifying (negative) selection against any change', isCorrect: true },
+      { text: 'Yes — the protein is so good that selection keeps improving it', isCorrect: false, misconceptionId: `${MOLEVO}:M1` },
+    ],
+    correctValue: 'No — purifying selection, not positive selection',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${MOLEVO}:M1`],
+    source: MOLEVO_SRC,
+  },
+]
+
+const EVODEVO = 'bio.evo.evo-devo'
+const EVODEVO_SRC = 'docs/biology/kg/graph.json — bio.evo.evo-devo'
+const EVODEVO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EVODEVO, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Evolutionary developmental biology (evo-devo) studies how changes in developmental genes and gene regulatory networks produce morphological diversity. Key insight: body plans across phyla are controlled by deeply conserved toolkit genes — especially Hox genes, which specify body axis identity. Hox genes are present in flies and humans, arranged in the same order, and their expression patterns determine head-to-tail segmental identity. Major morphological changes (limb loss in snakes, eye reduction in cave fish) often result from changes in regulatory regions that control WHERE and WHEN conserved genes are expressed, not in the protein-coding sequences themselves.',
+    targetedMisconceptions: [`${EVODEVO}:M1`],
+    source: EVODEVO_SRC,
+  },
+  {
+    conceptId: EVODEVO, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Misconception: "Very different organisms must have very different genes." Humans and fruit flies share ~60% of genes; mice and humans share ~85%. The profound morphological differences arise from differences in gene regulation — which genes are on or off, in which tissues, at which times. A mouse Pax6 gene (eye development) expressed in a fly produces a fly eye; the same regulatory signal works across 600 million years of divergence. Evolution often works by rewiring gene regulatory networks with the same components, not inventing new genes.',
+    targetedMisconceptions: [`${EVODEVO}:M1`],
+    source: EVODEVO_SRC,
+  },
+]
+const EVODEVO_PROBES: SeedProbe[] = [
+  {
+    conceptId: EVODEVO, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Hox genes specify body segment identity in both flies and vertebrates. What does their conservation imply?',
+    choices: [
+      { text: 'A shared ancestral body-plan regulatory system conserved over hundreds of millions of years', isCorrect: true },
+      { text: 'Convergent evolution independently produced the same genes in each lineage', isCorrect: false },
+      { text: 'Flies and vertebrates are more closely related than thought', isCorrect: false },
+      { text: 'Hox genes are recent mutations unique to complex organisms', isCorrect: false },
+    ],
+    correctValue: 'Shared ancestral regulatory system',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${EVODEVO}:M1`],
+    source: EVODEVO_SRC,
+  },
+  {
+    conceptId: EVODEVO, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'If a mouse Pax6 gene expressed in a fly produces a fly eye — not a mouse eye — what does this tell us about how evolution generates diversity?',
+    choices: [
+      { text: 'Regulatory signals are conserved; the output depends on which genome receives the signal', isCorrect: true },
+      { text: 'Genes are not actually conserved — Pax6 must have mutated to work in both organisms', isCorrect: false, misconceptionId: `${EVODEVO}:M1` },
+    ],
+    correctValue: 'Conserved signal, species-specific output',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${EVODEVO}:M1`],
+    source: EVODEVO_SRC,
+  },
+]
+
+const COMMECO = 'bio.eco.community-ecology'
+const COMMECO_SRC = 'docs/biology/kg/graph.json — bio.eco.community-ecology'
+const COMMECO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COMMECO, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Community ecology studies how multiple species interact in the same area. Key interactions: competition (−/−), predation/parasitism (−/+), mutualism (+/+), commensalism (+/0), amensalism (−/0). Keystone species have disproportionate effects on community structure relative to their abundance — removing a keystone species triggers a trophic cascade. Succession: communities change over time from pioneer species (primary succession on bare rock) through seral stages to a climax community. Intermediate disturbance hypothesis: moderate disturbance levels maximize species diversity by preventing competitive exclusion.',
+    targetedMisconceptions: [`${COMMECO}:M1`],
+    source: COMMECO_SRC,
+  },
+  {
+    conceptId: COMMECO, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Misconception: "Adding more predators always disrupts an ecosystem." Predators can STABILISE ecosystems by preventing any single prey species from monopolising resources. The classic Yellowstone wolf reintroduction showed that wolves reduced elk overgrazing of riparian vegetation, which recovered riverside plant communities, which reduced erosion, which changed river morphology — a trophic cascade that increased overall biodiversity. Removing a top predator often causes competitive exclusion at lower trophic levels, reducing diversity.',
+    targetedMisconceptions: [`${COMMECO}:M1`],
+    source: COMMECO_SRC,
+  },
+]
+const COMMECO_PROBES: SeedProbe[] = [
+  {
+    conceptId: COMMECO, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A keystone species is defined as one that:',
+    choices: [
+      { text: 'Has a disproportionately large effect on community structure relative to its biomass', isCorrect: true },
+      { text: 'Is the most abundant species in the community', isCorrect: false, misconceptionId: `${COMMECO}:M1` },
+      { text: 'Is always a top predator', isCorrect: false },
+      { text: 'First colonises a disturbed habitat', isCorrect: false },
+    ],
+    correctValue: 'Disproportionately large effect relative to biomass',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COMMECO}:M1`],
+    source: COMMECO_SRC,
+  },
+  {
+    conceptId: COMMECO, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Wolf reintroduction in Yellowstone increased overall biodiversity. How is this possible if wolves kill other animals?',
+    choices: [
+      { text: 'Wolves triggered a trophic cascade — controlling elk reduced overgrazing, allowing vegetation and other species to recover', isCorrect: true },
+      { text: 'It is not possible — predators always reduce biodiversity by killing prey', isCorrect: false, misconceptionId: `${COMMECO}:M1` },
+    ],
+    correctValue: 'Trophic cascade improved ecosystem structure',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COMMECO}:M1`],
+    source: COMMECO_SRC,
+  },
+]
+
+const MHCANTIGEN = 'bio.immuno.mhc-antigen-presentation'
+const MHCANTIGEN_SRC = 'docs/biology/kg/graph.json — bio.immuno.mhc-antigen-presentation'
+const MHCANTIGEN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MHCANTIGEN, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'MHC (Major Histocompatibility Complex) molecules display peptide fragments on the cell surface so T cells can inspect them. MHC class I is on all nucleated cells and presents peptides from inside the cell (from self proteins or intracellular pathogens) — detected by cytotoxic T cells (CD8+). MHC class II is on professional antigen-presenting cells (dendritic cells, macrophages, B cells) and presents peptides from extracellular antigens engulfed by phagocytosis — detected by helper T cells (CD4+). This distinction determines whether an immune response destroys infected cells (class I) or coordinates the adaptive response (class II).',
+    targetedMisconceptions: [`${MHCANTIGEN}:M1`],
+    source: MHCANTIGEN_SRC,
+  },
+  {
+    conceptId: MHCANTIGEN, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content: 'Misconception: "T cells directly detect pathogens." T cells cannot recognise free antigens — they only see peptide fragments displayed on MHC molecules. This is called MHC restriction: a CD8+ T cell trained on one individual\'s MHC will not recognise the same pathogen presented by a different individual\'s MHC. This is why transplant rejection occurs — the recipient\'s T cells see donor MHC as foreign (allogeneic MHC). The MHC-peptide complex is what the T cell receptor (TCR) actually binds.',
+    targetedMisconceptions: [`${MHCANTIGEN}:M1`],
+    source: MHCANTIGEN_SRC,
+  },
+]
+const MHCANTIGEN_PROBES: SeedProbe[] = [
+  {
+    conceptId: MHCANTIGEN, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A virus infects a liver cell. Which MHC class displays viral peptides, and which T cell detects them?',
+    choices: [
+      { text: 'MHC class I; cytotoxic T cells (CD8+)', isCorrect: true },
+      { text: 'MHC class II; helper T cells (CD4+)', isCorrect: false, misconceptionId: `${MHCANTIGEN}:M1` },
+      { text: 'MHC class I; helper T cells (CD4+)', isCorrect: false },
+      { text: 'MHC class II; cytotoxic T cells (CD8+)', isCorrect: false },
+    ],
+    correctValue: 'MHC class I; CD8+ cytotoxic T cells',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${MHCANTIGEN}:M1`],
+    source: MHCANTIGEN_SRC,
+  },
+  {
+    conceptId: MHCANTIGEN, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Can a cytotoxic T cell detect a bacterium floating in the blood directly?',
+    choices: [
+      { text: 'No — T cells only recognise peptide fragments presented on MHC molecules on cell surfaces', isCorrect: true },
+      { text: 'Yes — T cell receptors can bind free bacterial proteins in the blood', isCorrect: false, misconceptionId: `${MHCANTIGEN}:M1` },
+    ],
+    correctValue: 'No — T cells require MHC-presented peptides',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MHCANTIGEN}:M1`],
+    source: MHCANTIGEN_SRC,
+  },
+]
+
 // ─── Batch export ──────────────────────────────────────────────────────────────
 export const BIOLOGY_EXPLANATIONS: SeedExplanation[] = [
   ...BIOL_EXPLANATIONS,
@@ -6119,6 +7052,25 @@ export const BIOLOGY_EXPLANATIONS: SeedExplanation[] = [
   ...SYSGENREG_EXPLANATIONS,
   ...METABNET_EXPLANATIONS,
   ...SYNTHBIO_EXPLANATIONS,
+  ...THREEDOMAIN_EXPLANATIONS,
+  ...ENDOSYMB_EXPLANATIONS,
+  ...PROTDIV_EXPLANATIONS,
+  ...FUNGALBIO_EXPLANATIONS,
+  ...PLANTDIVALT_EXPLANATIONS,
+  ...CLADPHYLO_EXPLANATIONS,
+  ...VIRALREP_EXPLANATIONS,
+  ...HORISGENE_EXPLANATIONS,
+  ...APOPTOSIS_EXPLANATIONS,
+  ...EPIGENET_EXPLANATIONS,
+  ...NCRNA_EXPLANATIONS,
+  ...SIGTRANS_EXPLANATIONS,
+  ...DNADMGREP_EXPLANATIONS,
+  ...BIOENERGET_EXPLANATIONS,
+  ...TRANSPELE_EXPLANATIONS,
+  ...MOLEVO_EXPLANATIONS,
+  ...EVODEVO_EXPLANATIONS,
+  ...COMMECO_EXPLANATIONS,
+  ...MHCANTIGEN_EXPLANATIONS,
 ]
 export const BIOLOGY_PROBES: SeedProbe[] = [
   ...BIOL_PROBES,
@@ -6210,4 +7162,23 @@ export const BIOLOGY_PROBES: SeedProbe[] = [
   ...SYSGENREG_PROBES,
   ...METABNET_PROBES,
   ...SYNTHBIO_PROBES,
+  ...THREEDOMAIN_PROBES,
+  ...ENDOSYMB_PROBES,
+  ...PROTDIV_PROBES,
+  ...FUNGALBIO_PROBES,
+  ...PLANTDIVALT_PROBES,
+  ...CLADPHYLO_PROBES,
+  ...VIRALREP_PROBES,
+  ...HORISGENE_PROBES,
+  ...APOPTOSIS_PROBES,
+  ...EPIGENET_PROBES,
+  ...NCRNA_PROBES,
+  ...SIGTRANS_PROBES,
+  ...DNADMGREP_PROBES,
+  ...BIOENERGET_PROBES,
+  ...TRANSPELE_PROBES,
+  ...MOLEVO_PROBES,
+  ...EVODEVO_PROBES,
+  ...COMMECO_PROBES,
+  ...MHCANTIGEN_PROBES,
 ]
