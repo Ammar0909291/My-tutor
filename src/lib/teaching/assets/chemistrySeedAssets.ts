@@ -14363,6 +14363,1342 @@ const CFCS_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.hal.haloarenes ─────────────────────────────────────────────────────
+const HALOARENE = 'chem.hal.haloarenes'
+const HALOARENE_SRC = 'docs/chemistry/kg/graph.json — chem.hal.haloarenes'
+const HALOARENE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HALOARENE,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Haloarenes (aryl halides, e.g. chlorobenzene) differ fundamentally from haloalkanes ' +
+      'in reactivity. In chlorobenzene, the lone pairs on Cl overlap with the aromatic pi ' +
+      'system — this delocalisation strengthens the C–Cl bond and makes Cl a poor leaving ' +
+      'group by the normal SN1/SN2 routes. Instead, nucleophilic aromatic substitution (SNAr) ' +
+      'requires a strongly electron-withdrawing group ortho/para to the halide: the incoming ' +
+      'nucleophile attacks ipso, forming a Meisenheimer complex (a cyclohexadienyl anion), ' +
+      'which then loses Cl⁻. Without activating groups, haloarenes need very harsh conditions ' +
+      '(Dow process: NaOH at 300 °C, 200 atm) or organometallic routes. Haloarenes DO ' +
+      'participate in EAS (electrophilic aromatic substitution) where Cl/Br are ortho/para ' +
+      'directors despite being ring-deactivators (lone pair donation > inductive withdrawal ' +
+      'for directing effect).',
+    targetedMisconceptions: [],
+    source: `${HALOARENE_SRC} — haloarene C-Cl resonance stabilisation, SNAr via Meisenheimer complex, o/p direction`,
+  },
+  {
+    conceptId: HALOARENE,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Chlorobenzene reacts with NaOH solution the same way chloroalkanes do." ' +
+      'COMPLETELY WRONG — chloroalkanes react readily with aqueous NaOH at room temperature ' +
+      '(SN2 or SN1); chlorobenzene requires 300 °C, 200 atm with molten NaOH. The reason is ' +
+      'the C–Cl bond in chlorobenzene has partial double-bond character from resonance with ' +
+      'the ring — it is MUCH STRONGER and shorter than in haloalkanes. Also, the ring blocks ' +
+      'the back-face attack needed for SN2, and the system cannot form a stable carbocation ' +
+      'at the sp²-hybridised carbon for SN1. Second trap: "Because Cl deactivates the ring, ' +
+      'it is a meta director." WRONG — Cl is ortho/para directing for EAS despite ring ' +
+      'deactivation: the lone pair on Cl stabilises the intermediate at o/p positions even ' +
+      'though the inductive effect withdraws overall electron density, making the ring slower.',
+    targetedMisconceptions: [`${HALOARENE}:MC1`, `${HALOARENE}:MC2`],
+    source: `${HALOARENE_SRC} — haloarene unreactivity vs haloalkane; Cl o/p directing despite deactivation`,
+  },
+]
+const HALOARENE_PROBES: SeedProbe[] = [
+  {
+    conceptId: HALOARENE,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why does chlorobenzene NOT undergo SN2 substitution with NaOH(aq) under mild conditions, unlike chloroethane?',
+    choices: [
+      { text: 'The C–Cl bond has partial double bond character from resonance with the ring, making it shorter and stronger, and the sp² carbon blocks back-face attack', isCorrect: true },
+      { text: 'Chlorobenzene dissolves poorly in water, preventing contact with the NaOH nucleophile', isCorrect: false, misconceptionId: `${HALOARENE}:MC1` },
+      { text: 'Chlorine is too large an atom to leave from an aromatic ring', isCorrect: false },
+    ],
+    correctValue: 'Resonance strengthens C-Cl; sp2 blocks back-face SN2',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HALOARENE}:MC1`],
+    source: `${HALOARENE_SRC} — haloarene SN2 unreactivity from resonance and geometry`,
+  },
+  {
+    conceptId: HALOARENE,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Chlorobenzene deactivates the aromatic ring toward EAS. Is chlorine therefore a meta director?',
+    choices: [
+      { text: 'No — Cl is an ortho/para director for EAS: despite ring deactivation via induction, lone pair donation stabilises the intermediate at o/p positions', isCorrect: true },
+      { text: 'Yes — ring deactivators are always meta directors', isCorrect: false, misconceptionId: `${HALOARENE}:MC2` },
+    ],
+    correctValue: 'No — Cl is ortho/para directing (lone pair effect > inductive for directing)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HALOARENE}:MC2`],
+    source: `${HALOARENE_SRC} — halogen o/p direction despite deactivation`,
+  },
+]
+
+// ─── chem.nitro.nitro-compounds ──────────────────────────────────────────────
+const NITROCOMP = 'chem.nitro.nitro-compounds'
+const NITROCOMP_SRC = 'docs/chemistry/kg/graph.json — chem.nitro.nitro-compounds'
+const NITROCOMP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NITROCOMP,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Nitration of arenes: Ar–H + HNO₃ (conc) + H₂SO₄ (conc) → Ar–NO₂ + H₂O. ' +
+      'The concentrated H₂SO₄ protonates HNO₃ generating the nitronium ion ' +
+      '(NO₂⁺, the actual electrophile): HNO₃ + H₂SO₄ → NO₂⁺ + HSO₄⁻ + H₂O. ' +
+      'The NO₂ group on the ring is a STRONG electron-withdrawing, meta-directing group — ' +
+      'it deactivates the ring and directs further substitution to the meta position (sigma ' +
+      'complex destabilised at o/p by the NO₂ withdrawal). Reduction of nitrobenzene: ' +
+      'in acid with Fe/HCl (or catalytic H₂/Pd), nitrobenzene → aniline (PhNH₂). ' +
+      'Partial reduction gives N-hydroxylamine or nitroso compounds (Ph–NO) depending on ' +
+      'conditions. Aniline is a much weaker base than aliphatic amines (lone pair delocalised ' +
+      'into ring, pKa ~4.6 vs ~10 for RNH₂).',
+    targetedMisconceptions: [],
+    source: `${NITROCOMP_SRC} — nitronium ion electrophile, NO2 meta direction/deactivation, reduction to aniline`,
+  },
+  {
+    conceptId: NITROCOMP,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "The concentrated H₂SO₄ acts as an oxidising agent to attach NO₂ to the ring." ' +
+      'WRONG — H₂SO₄ acts as a PROTON donor (acid), generating the nitronium ion NO₂⁺ from ' +
+      'HNO₃. The electrophile is NO₂⁺, not HNO₃ itself, and the actual attack is ' +
+      'electrophilic substitution by NO₂⁺ on the ring, not oxidation. Second trap: "After ' +
+      'one NO₂ group is attached, the ring can easily be nitrated again in the same ' +
+      'conditions." WRONG — each NO₂ group strongly deactivates the ring, so di-nitration ' +
+      'requires more vigorous conditions (higher temperature, fuming HNO₃). TNT ' +
+      '(trinitrotoluene) requires three successive harsh nitrations, not a simple repetition ' +
+      'of mild conditions.',
+    targetedMisconceptions: [`${NITROCOMP}:MC1`, `${NITROCOMP}:MC2`],
+    source: `${NITROCOMP_SRC} — H2SO4 as proton donor not oxidant; progressive deactivation by NO2 groups`,
+  },
+]
+const NITROCOMP_PROBES: SeedProbe[] = [
+  {
+    conceptId: NITROCOMP,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In the nitration of benzene, what is the actual electrophile that attacks the ring?',
+    choices: [
+      { text: 'NO₂⁺ (nitronium ion), generated by protonation of HNO₃ by H₂SO₄', isCorrect: true },
+      { text: 'HNO₃ itself — the intact nitric acid molecule acts as the electrophile', isCorrect: false, misconceptionId: `${NITROCOMP}:MC1` },
+      { text: 'H₂SO₄ — sulphuric acid acts as both catalyst and reactant, donating the NO₂ group', isCorrect: false },
+    ],
+    correctValue: 'NO2+ (nitronium ion)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NITROCOMP}:MC1`],
+    source: `${NITROCOMP_SRC} — nitronium ion as true EAS electrophile in nitration`,
+  },
+  {
+    conceptId: NITROCOMP,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If further nitration of nitrobenzene is carried out under the same conditions as the first nitration, what product is formed and where does the second NO₂ group go?',
+    choices: [
+      { text: 'The second NO₂ group goes meta to the first (m-dinitrobenzene), and harsher conditions are required because the first NO₂ deactivates the ring', isCorrect: true },
+      { text: 'The second NO₂ group goes ortho or para, and the same mild conditions work because NO₂ is an activating group', isCorrect: false, misconceptionId: `${NITROCOMP}:MC2` },
+    ],
+    correctValue: 'meta-dinitrobenzene; harsher conditions needed',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NITROCOMP}:MC2`],
+    source: `${NITROCOMP_SRC} — NO2 meta direction and ring deactivation effect on further nitration`,
+  },
+]
+
+// ─── chem.org.arrow-pushing ──────────────────────────────────────────────────
+const ARROWPUSH = 'chem.org.arrow-pushing'
+const ARROWPUSH_SRC = 'docs/chemistry/kg/graph.json — chem.org.arrow-pushing'
+const ARROWPUSH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ARROWPUSH,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Curved arrow notation is the universal language of organic mechanism: each arrow ' +
+      'represents the movement of ONE electron pair from where it starts (lone pair, ' +
+      'pi bond, or sigma bond) to where it goes. Arrow tail = source of electrons. ' +
+      'Arrow head = destination (new bond or lone pair on a more electronegative atom). ' +
+      'Critical rules: (1) Arrows never run "backwards" from a positive charge — electrons ' +
+      'move TOWARD positive or AWAY FROM negative. (2) In SN2: arrow from Nu: → C–LG ' +
+      '(makes Nu–C bond), then arrow from C–LG bond → LG (breaks bond, LG becomes lone pair). ' +
+      '(3) In E2: base arrow → H–C (breaks C–H), pi bond forms C=C, then C–LG arrow → LG. ' +
+      'Single-barbed "fishhook" arrows represent ONE electron movement (radical mechanisms). ' +
+      'Double-barbed arrows = electron PAIR movement (ionic/polar mechanisms).',
+    targetedMisconceptions: [],
+    source: `${ARROWPUSH_SRC} — curved arrow convention: tail=source, head=destination, SN2/E2 examples`,
+  },
+  {
+    conceptId: ARROWPUSH,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "The arrow shows which way a bond breaks — from the breaking bond." ' +
+      'WRONG — arrows show where electrons MOVE TO, not where a bond breaks. The arrow ' +
+      'starts where electrons ARE (a lone pair, a pi bond, a bond to a leaving group) ' +
+      'and points to where they ARE GOING (to form a new bond or to rest as a lone pair). ' +
+      'In Nu: → C–X (SN2), the arrow starts at the lone pair on Nu and points to the ' +
+      'carbon, creating a Nu–C bond. A second arrow starts at the C–X bond and points to ' +
+      'X, showing those electrons leaving WITH X. Many students draw arrows pointing in ' +
+      'the wrong direction or from nowhere to somewhere — each arrow must start with visible ' +
+      'electrons (you must be able to draw the dot pair or pi bond where the tail sits).',
+    targetedMisconceptions: [`${ARROWPUSH}:MC1`],
+    source: `${ARROWPUSH_SRC} — arrows show electron movement direction; tail must sit on electron source`,
+  },
+]
+const ARROWPUSH_PROBES: SeedProbe[] = [
+  {
+    conceptId: ARROWPUSH,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a curved-arrow mechanism, where does the tail (start) of each arrow originate?',
+    choices: [
+      { text: 'At a source of electrons: a lone pair, a pi bond, or a sigma bond that is being broken', isCorrect: true },
+      { text: 'At the atom that is being attacked, showing which electrons it needs', isCorrect: false, misconceptionId: `${ARROWPUSH}:MC1` },
+      { text: 'At a positive charge, to show where electron density is deficient', isCorrect: false, misconceptionId: `${ARROWPUSH}:MC1` },
+    ],
+    correctValue: 'At a source of electrons (lone pair, pi bond, or breaking sigma bond)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ARROWPUSH}:MC1`],
+    source: `${ARROWPUSH_SRC} — arrow tail rule: must start at an electron source`,
+  },
+  {
+    conceptId: ARROWPUSH,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student draws a curved arrow starting from a C–C sigma bond and pointing to an electrophile carbon nearby. Is this valid?',
+    choices: [
+      { text: 'Yes — a sigma bond\'s electron pair is a valid electron source and can attack an electron-deficient site under appropriate conditions (e.g., hyperconjugation or rearrangements)', isCorrect: true },
+      { text: 'No — curved arrows can only start from lone pairs, never from sigma bonds', isCorrect: false, misconceptionId: `${ARROWPUSH}:MC1` },
+    ],
+    correctValue: 'Yes — sigma bond electrons can be a valid arrow source',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ARROWPUSH}:MC1`],
+    source: `${ARROWPUSH_SRC} — sigma bonds as valid electron sources in curved arrow notation`,
+  },
+]
+
+// ─── chem.org.pericyclic ─────────────────────────────────────────────────────
+const PERICYC = 'chem.org.pericyclic'
+const PERICYC_SRC = 'docs/chemistry/kg/graph.json — chem.org.pericyclic'
+const PERICYC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PERICYC,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Pericyclic reactions occur via a cyclic transition state with simultaneous bond ' +
+      'making and breaking — no ions, no radicals, no catalyst needed. Three families: ' +
+      '(1) CYCLOADDITIONS: two pi components combine in a concerted ring-forming step. ' +
+      'The Diels–Alder is [4+2]: a 4π diene (must be s-cis conformation) + 2π dienophile ' +
+      '→ cyclohexene. Electron-rich dienes + electron-poor dienophiles react fastest ' +
+      '(FMO: HOMO_diene interacts with LUMO_dienophile). Stereochemistry: syn addition — ' +
+      'substituents on diene and dienophile maintain their relative orientation (endo rule: ' +
+      'kinetic product has secondary orbital interactions favouring endo). ' +
+      '(2) ELECTROCYCLIC: ring opening/closing of conjugated polyenes. ' +
+      '(3) SIGMATROPIC SHIFTS: [1,3], [1,5]-H shifts, Cope and Claisen rearrangements. ' +
+      'Woodward–Hoffmann: thermal vs. photochemical reactions obey opposite orbital symmetry rules.',
+    targetedMisconceptions: [],
+    source: `${PERICYC_SRC} — pericyclic types; Diels-Alder [4+2] geometry/stereochemistry/FMO; W-H rules`,
+  },
+  {
+    conceptId: PERICYC,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "The Diels–Alder works with any diene — just put a diene and a dienophile ' +
+      'together." WRONG — the diene must be in the s-CIS conformation (the two double bonds ' +
+      'must be able to curve toward the dienophile). Butadiene is ~97% s-TRANS at room ' +
+      'temperature, and the small s-cis population is what reacts. Dienes locked in s-trans ' +
+      '(e.g., E,E-2,4-hexadiene without rotation) react extremely poorly. Cyclopentadiene ' +
+      'is locked in s-cis and is therefore an excellent diene — it even self-dimerises ' +
+      'quickly at room temperature (Diels–Alder dimerisation). Second trap: "Pericyclic ' +
+      'reactions are just concerted for convenience — they probably go through a diradical ' +
+      'intermediate." WRONG — the entire point of pericyclic theory (Woodward–Hoffmann) is ' +
+      'that the orbital symmetry requirement governs WHICH reactions are thermally vs. ' +
+      'photochemically allowed, producing specific and predictable stereochemical outcomes ' +
+      'that a stepwise diradical cannot explain.',
+    targetedMisconceptions: [`${PERICYC}:MC1`, `${PERICYC}:MC2`],
+    source: `${PERICYC_SRC} — Diels-Alder requires s-cis diene; pericyclic not diradical`,
+  },
+]
+const PERICYC_PROBES: SeedProbe[] = [
+  {
+    conceptId: PERICYC,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Why does cyclopentadiene react much more readily as a Diels–Alder diene than (E,E)-hexa-2,4-diene?',
+    choices: [
+      { text: 'Cyclopentadiene is locked in the s-cis conformation; (E,E)-hexa-2,4-diene is locked in s-trans and cannot achieve the required geometry', isCorrect: true },
+      { text: 'Cyclopentadiene has more pi electrons available for overlap with the dienophile', isCorrect: false, misconceptionId: `${PERICYC}:MC1` },
+      { text: 'The ring strain in cyclopentadiene lowers the activation energy for [4+2] cycloaddition', isCorrect: false },
+    ],
+    correctValue: 'Cyclopentadiene locked s-cis; (E,E) locked s-trans',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PERICYC}:MC1`],
+    source: `${PERICYC_SRC} — s-cis conformation requirement for Diels-Alder diene`,
+  },
+  {
+    conceptId: PERICYC,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A thermally allowed pericyclic reaction is photochemically forbidden under W-H rules. What changes when UV light is used?',
+    choices: [
+      { text: 'UV promotes an electron to create an excited state with different HOMO/LUMO symmetry, switching which suprafacial/antarafacial combination is allowed', isCorrect: true },
+      { text: 'UV simply provides more energy to overcome the activation barrier, giving the same product as thermal conditions but faster', isCorrect: false, misconceptionId: `${PERICYC}:MC2` },
+    ],
+    correctValue: 'Excited state inverts orbital symmetry, switching which mode is allowed',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PERICYC}:MC2`],
+    source: `${PERICYC_SRC} — Woodward-Hoffmann: thermal/photochemical symmetry switch`,
+  },
+]
+
+// ─── chem.elect.concentration-cell ───────────────────────────────────────────
+const CONCELL = 'chem.elect.concentration-cell'
+const CONCELL_SRC = 'docs/chemistry/kg/graph.json — chem.elect.concentration-cell'
+const CONCELL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CONCELL,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A concentration cell has IDENTICAL electrodes and electrolytes, but at DIFFERENT ' +
+      'concentrations. EMF arises not from different electrode materials, but from the ' +
+      'thermodynamic tendency for concentrations to equalise. Nernst equation gives the ' +
+      'cell EMF: E = (RT/nF) × ln(C_high/C_low) — where C_high and C_low are the ' +
+      'concentrations of the more and less concentrated half-cells. The more concentrated ' +
+      'half-cell is the CATHODE (metal ions are deposited, concentration drops); the less ' +
+      'concentrated is the ANODE (metal dissolves, concentration rises). EMF → 0 as ' +
+      'concentrations equalise. At equilibrium, E = 0. Applications: pH measurement ' +
+      '(glass electrode concentration cell for H⁺), nerve impulse generation (ion ' +
+      'concentration gradients across cell membranes).',
+    targetedMisconceptions: [],
+    source: `${CONCELL_SRC} — concentration cell: identical electrodes, Nernst-derived EMF, cathode/anode assignment`,
+  },
+  {
+    conceptId: CONCELL,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "A concentration cell cannot generate any EMF because both electrodes are the ' +
+      'same metal — there is no potential difference." WRONG — EMF does NOT require ' +
+      'different metals; it requires a thermodynamic driving force. A concentration gradient ' +
+      'IS a driving force: the system can lower its Gibbs energy by transferring metal ions ' +
+      'from the high-concentration side (where their chemical potential is higher) to the ' +
+      'low-concentration side. The Nernst equation quantifies this: even with identical ' +
+      'electrodes, E = (RT/nF)ln(C₁/C₂) ≠ 0 when C₁ ≠ C₂. The cell runs until ' +
+      'both concentrations are equal (E → 0). Students who believe "same electrode = no ' +
+      'EMF" are conflating the standard electrode potential (which IS zero for the cell: ' +
+      'E° = 0) with the actual EMF (which is non-zero because Q ≠ 1).',
+    targetedMisconceptions: [`${CONCELL}:MC1`],
+    source: `${CONCELL_SRC} — concentration gradient IS driving force; E°=0 but E≠0 when concentrations differ`,
+  },
+]
+const CONCELL_PROBES: SeedProbe[] = [
+  {
+    conceptId: CONCELL,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A concentration cell consists of two copper electrodes in CuSO₄ solutions at 1.0 M and 0.01 M. Which electrode is the anode?',
+    choices: [
+      { text: 'The 0.01 M electrode (anode) — copper dissolves here, raising the low concentration; the 1.0 M electrode is the cathode', isCorrect: true },
+      { text: 'The 1.0 M electrode (anode) — the high concentration drives oxidation at the more concentrated side', isCorrect: false, misconceptionId: `${CONCELL}:MC1` },
+      { text: 'Neither — identical electrodes cannot be distinguished as anode or cathode', isCorrect: false, misconceptionId: `${CONCELL}:MC1` },
+    ],
+    correctValue: '0.01 M electrode is anode (Cu dissolves, concentrations equalise)',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CONCELL}:MC1`],
+    source: `${CONCELL_SRC} — anode assignment in concentration cell: dilute side oxidises`,
+  },
+  {
+    conceptId: CONCELL,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The standard cell potential E° of a concentration cell is zero. Does this mean the actual EMF E is also zero?',
+    choices: [
+      { text: 'No — E = (RT/nF)ln(C_high/C_low); E° = 0 but E ≠ 0 whenever the concentrations differ', isCorrect: true },
+      { text: 'Yes — if E° = 0 then E = 0 from the Nernst equation regardless of concentrations', isCorrect: false, misconceptionId: `${CONCELL}:MC1` },
+    ],
+    correctValue: 'E° = 0 but E ≠ 0 when concentrations differ (Q ≠ 1)',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CONCELL}:MC1`],
+    source: `${CONCELL_SRC} — distinction between E° (zero for concentration cell) and E (Nernst-corrected, non-zero)`,
+  },
+]
+
+// ─── chem.nitro.heterocycles ─────────────────────────────────────────────────
+const HETCYC = 'chem.nitro.heterocycles'
+const HETCYC_SRC = 'docs/chemistry/kg/graph.json — chem.nitro.heterocycles'
+const HETCYC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HETCYC,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Nitrogen heterocycles fall into two basicity/reactivity patterns based on how N ' +
+      'contributes its lone pair: (1) PYRIDINE-TYPE (N lone pair NOT in the ring pi system ' +
+      '— the lone pair is in an sp² orbital in the plane, NOT part of aromaticity): pyridine ' +
+      'is aromatic (6π, like benzene) but the N lone pair is available for protonation → ' +
+      'pyridine is a BASE (pKa ~5.3). The ring is electron-poor (N is electronegative) → ' +
+      'EAS is difficult; nucleophilic aromatic substitution at C2/C4 is preferred. ' +
+      '(2) PYRROLE-TYPE (N lone pair IS part of the ring pi system — the lone pair is in ' +
+      'a p orbital contributing to the 6π aromatic system): pyrrole is aromatic precisely ' +
+      'BECAUSE the N lone pair makes up 2 of the 6 pi electrons. Therefore the lone pair ' +
+      'is NOT available for protonation → pyrrole is a VERY WEAK BASE (pKa ~−3.8). ' +
+      'The ring is electron-rich → EAS reactive (at C2/C3).',
+    targetedMisconceptions: [],
+    source: `${HETCYC_SRC} — pyridine (lone pair not in pi) vs pyrrole (lone pair in pi); basicity contrast; EAS/NAS preference`,
+  },
+  {
+    conceptId: HETCYC,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Pyrrole has a nitrogen atom, so it should be a decent base — at least as basic ' +
+      'as an amine." WRONG — pyrrole has pKa ≈ −3.8 (conjugate acid), making it a FAR ' +
+      'WEAKER base than even water (pKa 0 for H₃O⁺) or aniline (pKa ~4.6). The reason: ' +
+      'protonating N in pyrrole would remove the lone pair from the aromatic pi system, ' +
+      'destroying the 6π aromaticity — the ring would become non-aromatic and lose its ' +
+      '~36 kJ/mol aromatic stabilisation energy. The thermodynamic cost of losing ' +
+      'aromaticity is too high, so pyrrole barely accepts a proton at N. Contrast: ' +
+      'imidazole has BOTH a pyridine-type N AND a pyrrole-type N in the same 5-membered ' +
+      'ring — the pyridine N protonates readily (pKa ~7.0), which is why histidine\'s ' +
+      'imidazole side chain is a key enzymatic proton shuttle near physiological pH.',
+    targetedMisconceptions: [`${HETCYC}:MC1`],
+    source: `${HETCYC_SRC} — pyrrole not basic: protonation would destroy aromaticity; imidazole dual N character`,
+  },
+]
+const HETCYC_PROBES: SeedProbe[] = [
+  {
+    conceptId: HETCYC,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Pyridine is a base (pKa ~5.3) but pyrrole is not (pKa ~−3.8). What structural feature explains this difference?',
+    choices: [
+      { text: 'In pyridine, the N lone pair is in a planar sp² orbital NOT part of the pi system and is freely available for protonation; in pyrrole, the N lone pair is part of the aromatic 6π system and cannot be donated without destroying aromaticity', isCorrect: true },
+      { text: 'Pyridine has a 6-membered ring and is therefore more stable than the 5-membered pyrrole, making it more willing to accept a proton', isCorrect: false, misconceptionId: `${HETCYC}:MC1` },
+      { text: 'Pyridine has no pi electrons because its N atom withdraws them all, freeing the lone pair for base activity', isCorrect: false },
+    ],
+    correctValue: 'Pyridine N lone pair not in pi (sp2 orbital); pyrrole N lone pair IS pi aromatic',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${HETCYC}:MC1`],
+    source: `${HETCYC_SRC} — pyridine vs pyrrole basicity from lone pair orbital involvement`,
+  },
+  {
+    conceptId: HETCYC,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Pyrrole undergoes electrophilic aromatic substitution much more readily than pyridine. Why?',
+    choices: [
+      { text: 'The N lone pair in pyrrole is part of the aromatic pi system, making the ring electron-RICH and highly activated toward EAS; pyridine\'s N withdraws electrons, making the ring electron-poor and resistant to EAS', isCorrect: true },
+      { text: 'Pyrrole is 5-membered with more ring strain, which destabilises the ring and makes it more reactive toward any reagent', isCorrect: false, misconceptionId: `${HETCYC}:MC1` },
+    ],
+    correctValue: 'Pyrrole N lone pair in pi system = electron-rich ring; pyridine N withdraws = electron-poor',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${HETCYC}:MC1`],
+    source: `${HETCYC_SRC} — EAS reactivity: pyrrole (electron-rich) vs pyridine (electron-poor)`,
+  },
+]
+
+// ─── chem.carb.alpha-reactions ───────────────────────────────────────────────
+const ALPHARXN = 'chem.carb.alpha-reactions'
+const ALPHARXN_SRC = 'docs/chemistry/kg/graph.json — chem.carb.alpha-reactions'
+const ALPHARXN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ALPHARXN,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The alpha-carbon (C adjacent to a carbonyl) is mildly acidic (pKa ~20 for a typical ' +
+      'ketone) because the resulting enolate anion is resonance-stabilised — the negative ' +
+      'charge is delocalised onto the electronegative oxygen (C=C–O⁻ ↔ C⁻–C=O). ' +
+      'Aldol condensation: two aldehyde/ketone molecules, one acts as nucleophile (as enolate ' +
+      'at the alpha carbon) attacking the carbonyl carbon of the second. Product: a ' +
+      'beta-hydroxy carbonyl compound (aldol = aldehyde + alcohol). On heating, dehydration ' +
+      'gives an alpha,beta-unsaturated carbonyl (conjugation). Claisen condensation is the ' +
+      'ester analogue: ester enolate attacks another ester\'s carbonyl, losing alkoxide to ' +
+      'give a beta-ketoester. Malonic ester synthesis uses the doubly-activated CH₂ between ' +
+      'two esters for controlled alkylation.',
+    targetedMisconceptions: [],
+    source: `${ALPHARXN_SRC} — enolate from alpha-C acidity; aldol/Claisen condensation mechanisms; malonic ester`,
+  },
+  {
+    conceptId: ALPHARXN,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "In an aldol reaction, the carbonyl carbon attacks another carbonyl." WRONG — ' +
+      'the alpha carbon (NOT the carbonyl carbon) acts as the nucleophile after deprotonation ' +
+      'to form the enolate. The enolate\'s alpha carbon has nucleophilic character (electron ' +
+      'density from the C=C pi bond of the enolate resonance structure), and it attacks the ' +
+      'ELECTROPHILIC carbonyl CARBON of the second molecule. Never confuse "which carbon ' +
+      'is the nucleophile" in aldol: it is always the alpha carbon of the enolate, not the ' +
+      'carbonyl carbon of the starting material. Second trap: "Aldol gives a single ' +
+      'stereoisomer." WRONG — the aldol product has new stereocentre(s) and both syn and anti ' +
+      'diastereomers form unless the enolate geometry is controlled (e.g. via boron enolates).',
+    targetedMisconceptions: [`${ALPHARXN}:MC1`],
+    source: `${ALPHARXN_SRC} — enolate alpha-C is nucleophile not carbonyl carbon; stereocentre generated`,
+  },
+]
+const ALPHARXN_PROBES: SeedProbe[] = [
+  {
+    conceptId: ALPHARXN,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a base-catalysed aldol condensation of acetaldehyde, which carbon acts as the nucleophile?',
+    choices: [
+      { text: 'The alpha-carbon of the enolate (CH₂ adjacent to the carbonyl, deprotonated by base)', isCorrect: true },
+      { text: 'The carbonyl carbon (C=O) — it is electrophilic and attacks the second molecule', isCorrect: false, misconceptionId: `${ALPHARXN}:MC1` },
+      { text: 'The oxygen of the carbonyl (O is the most nucleophilic site)', isCorrect: false },
+    ],
+    correctValue: 'Alpha-carbon of the enolate',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ALPHARXN}:MC1`],
+    source: `${ALPHARXN_SRC} — enolate alpha-carbon is nucleophile in aldol`,
+  },
+  {
+    conceptId: ALPHARXN,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why is the alpha-hydrogen of a ketone more acidic (pKa ~20) than a typical C–H bond (pKa ~50)?',
+    choices: [
+      { text: 'Removing the alpha-H generates an enolate where the negative charge is delocalised into the carbonyl oxygen via resonance, stabilising the conjugate base', isCorrect: true },
+      { text: 'The carbonyl oxygen pulls electron density away from the alpha-C via induction, making the C–H bond polar and the H more positive', isCorrect: false, misconceptionId: `${ALPHARXN}:MC2` },
+    ],
+    correctValue: 'Resonance stabilisation of enolate (C=C-O- ↔ C-C=O) is the main effect',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ALPHARXN}:MC2`],
+    source: `${ALPHARXN_SRC} — alpha-H acidity from enolate resonance stabilisation`,
+  },
+]
+
+// ─── chem.carb.spectro ───────────────────────────────────────────────────────
+const CARBSPECTRO = 'chem.carb.spectro'
+const CARBSPECTRO_SRC = 'docs/chemistry/kg/graph.json — chem.carb.spectro'
+const CARBSPECTRO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CARBSPECTRO,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Carbonyl identification by spectroscopy: (1) IR: C=O stretch appears as a strong, ' +
+      'sharp absorption at ~1700–1750 cm⁻¹. Conjugation with C=C lowers the frequency ' +
+      '(conjugated enone ~1680 cm⁻¹ vs unconjugated ketone ~1715 cm⁻¹) — conjugation ' +
+      'weakens the C=O bond by delocalisation. Acid chlorides are highest (~1800 cm⁻¹); ' +
+      'amides lowest (~1650 cm⁻¹). (2) ¹H NMR: aldehyde proton (CHO) appears far ' +
+      'downfield at δ 9–10 ppm (extreme deshielding from the carbonyl). ' +
+      '(3) ¹³C NMR: carbonyl carbon appears at δ 190–220 ppm. ' +
+      '(4) Mass spectrometry: alpha-cleavage (bond beside C=O breaks homolytically) gives ' +
+      'an acylium ion [RCO]⁺ as a diagnostic fragment; McLafferty rearrangement (6-membered ' +
+      'cyclic transition state, gamma-H transfer) gives a characteristic fragment for carbonyls ' +
+      'with a gamma-H.',
+    targetedMisconceptions: [],
+    source: `${CARBSPECTRO_SRC} — IR C=O position/conjugation effect; 1H/13C NMR shifts; MS alpha-cleavage and McLafferty`,
+  },
+  {
+    conceptId: CARBSPECTRO,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "A carbonyl with a lower IR frequency must be a WEAKER carbonyl or less ' +
+      'reactive compound." WRONG — the IR frequency reflects bond STRENGTH, not reactivity. ' +
+      'Amide C=O at ~1650 cm⁻¹ is the LOWEST frequency of all carbonyl groups because the ' +
+      'lone pair on N donates INTO the C=O via resonance, adding pi character to C–N and ' +
+      'REDUCING C=O double-bond character (weaker C=O → lower frequency). But amides are ' +
+      'actually the LEAST reactive toward nucleophilic acyl substitution because the same ' +
+      'resonance stabilisation makes the amide more stable and the carbonyl C less ' +
+      'electrophilic. Low frequency → weaker C=O bond, yes — but also more resonance ' +
+      'stabilisation, so LESS reactive, not more.',
+    targetedMisconceptions: [`${CARBSPECTRO}:MC1`],
+    source: `${CARBSPECTRO_SRC} — lower IR C=O frequency means more resonance stabilisation = less reactive (amide paradox)`,
+  },
+]
+const CARBSPECTRO_PROBES: SeedProbe[] = [
+  {
+    conceptId: CARBSPECTRO,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The IR C=O absorption of pent-3-en-2-one (CH₃CO–CH=CH₂) appears at ~1680 cm⁻¹, while pentan-2-one (CH₃CO–CH₂CH₂CH₃) absorbs at ~1715 cm⁻¹. Why the lower frequency for the conjugated compound?',
+    choices: [
+      { text: 'Conjugation with the C=C delocalises electron density from C=O into the C=C, weakening the C=O bond and lowering its stretching frequency', isCorrect: true },
+      { text: 'The larger molecule has more mass, lowering all its vibrational frequencies uniformly', isCorrect: false, misconceptionId: `${CARBSPECTRO}:MC1` },
+      { text: 'The ketone loses conjugation with the ring, changing the electronic environment', isCorrect: false },
+    ],
+    correctValue: 'Conjugation delocalises C=O, weakening it and lowering IR frequency',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CARBSPECTRO}:MC1`],
+    source: `${CARBSPECTRO_SRC} — conjugation effect on C=O IR frequency`,
+  },
+  {
+    conceptId: CARBSPECTRO,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In mass spectrometry, alpha-cleavage of 2-pentanone (CH₃COCH₂CH₂CH₃) produces two acylium/alkyl fragment pairs. Which alpha-cleavage gives the acylium ion at m/z 43?',
+    choices: [
+      { text: 'Cleavage between C=O and the CH₂ group (CH₃CO)⁺ at m/z 43 — this is the acetyl cation from the methyl side', isCorrect: true },
+      { text: 'Cleavage at the C=O double bond itself — the C=O is the weakest bond and breaks first', isCorrect: false, misconceptionId: `${CARBSPECTRO}:MC2` },
+    ],
+    correctValue: '(CH3CO)+ = m/z 43, from alpha-cleavage on the methyl side',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CARBSPECTRO}:MC2`],
+    source: `${CARBSPECTRO_SRC} — MS alpha-cleavage of ketone: acylium ion identity`,
+  },
+]
+
+// ─── chem.carb.named-reactions ───────────────────────────────────────────────
+const NAMEDCARBR = 'chem.carb.named-reactions'
+const NAMEDCARBR_SRC = 'docs/chemistry/kg/graph.json — chem.carb.named-reactions'
+const NAMEDCARBR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NAMEDCARBR,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Key named carbonyl reactions: (1) WITTIG: Ph₃P=CH₂ (phosphorus ylide) + C=O → ' +
+      'C=CH₂ + Ph₃P=O. Converts C=O to C=C with defined geometry (Z from stabilised ' +
+      'ylides, non-stabilised ylides give Z-alkene predominance). Mild conditions, wide scope. ' +
+      '(2) BAEYER–VILLIGER: C=O + peroxy acid (mCPBA) → C=O converted to ester/lactone. ' +
+      'Mechanism: peroxy acid O inserts BETWEEN the carbonyl C and the migrating group. ' +
+      'Migration aptitude: tertiary > secondary > aryl > primary > methyl — the more ' +
+      'electron-rich carbon migrates preferentially. ' +
+      '(3) REFORMATSKY: Zn activates alpha-bromo ester + C=O → beta-hydroxyester. ' +
+      '(4) PERKIN: anhydride + aromatic aldehyde, base → alpha,beta-unsaturated acid. ' +
+      '(5) KNOEVENAGEL: active methylene compound + aldehyde, amine base → ' +
+      'alpha,beta-unsaturated product.',
+    targetedMisconceptions: [],
+    source: `${NAMEDCARBR_SRC} — Wittig C=O to C=C; Baeyer-Villiger O-insertion; Reformatsky/Perkin/Knoevenagel overviews`,
+  },
+  {
+    conceptId: NAMEDCARBR,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "In the Baeyer–Villiger reaction, the peroxy acid adds oxygen to the carbonyl ' +
+      'by attacking the double bond." WRONG — the oxygen INSERTS between the carbonyl ' +
+      'carbon and the MIGRATING SUBSTITUENT (via a concerted Criegee rearrangement), not ' +
+      'by adding to the pi bond. The product is an ester (or lactone from a cyclic ketone), ' +
+      'not a diol or epoxide. Crucially: the group that migrates is NEVER the hydrogen (even ' +
+      'for aldehydes, H rarely migrates preferentially unless that\'s the only option) — it ' +
+      'is the group that can best stabilise the partial positive charge in the transition ' +
+      'state (migration aptitude: tertiary C > secondary C > aryl > methyl). Second trap: ' +
+      '"The Wittig reaction gives only E-alkene because phosphorus ylides are stable." ' +
+      'WRONG — NON-stabilised ylides (alkyl, no electron-withdrawing groups) give ' +
+      'predominantly Z-alkene (cis); stabilised ylides (with EWG on the carbanion) give ' +
+      'predominantly E-alkene.',
+    targetedMisconceptions: [`${NAMEDCARBR}:MC1`, `${NAMEDCARBR}:MC2`],
+    source: `${NAMEDCARBR_SRC} — Baeyer-Villiger O-insertion mechanism; Wittig Z vs E from ylide stabilisation`,
+  },
+]
+const NAMEDCARBR_PROBES: SeedProbe[] = [
+  {
+    conceptId: NAMEDCARBR,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In the Baeyer–Villiger oxidation of 2-methylcyclohexanone with mCPBA, which group migrates preferentially?',
+    choices: [
+      { text: 'The secondary C adjacent to C=O migrates (migration aptitude: secondary > methyl), giving a 7-membered lactone with the oxygen inserted next to the secondary carbon', isCorrect: true },
+      { text: 'The methyl group migrates because smaller substituents migrate faster in concerted rearrangements', isCorrect: false, misconceptionId: `${NAMEDCARBR}:MC1` },
+      { text: 'The C=O oxygen is retained and a new oxygen is added to form a diol', isCorrect: false },
+    ],
+    correctValue: 'Secondary C migrates (higher migration aptitude than methyl)',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${NAMEDCARBR}:MC1`],
+    source: `${NAMEDCARBR_SRC} — Baeyer-Villiger migration aptitude: secondary > methyl`,
+  },
+  {
+    conceptId: NAMEDCARBR,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A Wittig reaction uses a non-stabilised ylide (Ph₃P=CHCH₂CH₃). What alkene geometry is predominantly obtained?',
+    choices: [
+      { text: 'Z (cis) — non-stabilised ylides predominantly give the Z-alkene via a poorly reversible oxetane transition state', isCorrect: true },
+      { text: 'E (trans) — the Wittig always gives the more stable E-alkene regardless of ylide type', isCorrect: false, misconceptionId: `${NAMEDCARBR}:MC2` },
+    ],
+    correctValue: 'Z-alkene predominates from non-stabilised ylides',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${NAMEDCARBR}:MC2`],
+    source: `${NAMEDCARBR_SRC} — Wittig Z-selectivity from non-stabilised ylides`,
+  },
+]
+
+// ─── chem.poly.condensation ──────────────────────────────────────────────────
+const CONDPOLY = 'chem.poly.condensation'
+const CONDPOLY_SRC = 'docs/chemistry/kg/graph.json — chem.poly.condensation'
+const CONDPOLY_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CONDPOLY,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Condensation polymerisation (step-growth): monomers join by reaction of functional ' +
+      'groups, losing a small molecule (usually H₂O or HCl) at each step. Key examples: ' +
+      '(1) Nylon-6,6: hexamethylene-1,6-diamine + hexanedioic acid (adipic acid) → ' +
+      'polyamide linkage (–CO–NH–), losing H₂O per step. "6,6" = 6 carbons in each ' +
+      'monomer. (2) Nylon-6: caprolactam (cyclic amide, self-reaction) → polyamide; ' +
+      '"6" = 6 carbons. (3) Dacron/PET: ethane-1,2-diol + benzene-1,4-dicarboxylic acid ' +
+      '(terephthalic acid) → polyester linkage (–CO–O–), losing H₂O. (4) Bakelite: ' +
+      'phenol + methanal (formaldehyde) → thermosetting 3D network. Key contrast with ' +
+      'addition polymerisation: (a) condensation uses bi-functional monomers; ' +
+      '(b) MW builds slowly (each step joins two molecules); (c) a by-product is released.',
+    targetedMisconceptions: [],
+    source: `${CONDPOLY_SRC} — step-growth mechanism; nylon-6/6,6/PET/Bakelite examples; contrast with addition`,
+  },
+  {
+    conceptId: CONDPOLY,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Nylon-6 and nylon-6,6 are basically the same — they both have 6 carbons and ' +
+      'make the same amide links." WRONG in an important way: nylon-6,6 is made from TWO ' +
+      'DIFFERENT monomers (a diamine + a diacid), each with 6 carbons; nylon-6 is made ' +
+      'from ONE MONOMER (caprolactam, a cyclic amide that self-ring-opens). They produce ' +
+      'different repeating units, different molecular weights per repeat, and slightly ' +
+      'different properties (melting points, crystallinity). They are distinct polymers ' +
+      'despite the similar name. Second trap: "In condensation polymerisation, high ' +
+      'molecular weight is achieved quickly." WRONG — in step-growth polymerisation, even ' +
+      '99% conversion of monomers gives only ~Mn = 100 × monomer MW (by Carothers equation: ' +
+      'Xn = 1/(1-p) where p = conversion). 99% conversion is needed for even DP = 100; ' +
+      '99.9% for DP = 1000. This is why purity and exact stoichiometry are critical.',
+    targetedMisconceptions: [`${CONDPOLY}:MC1`, `${CONDPOLY}:MC2`],
+    source: `${CONDPOLY_SRC} — nylon-6 vs 6,6 different monomers; Carothers equation: high p needed for high MW`,
+  },
+]
+const CONDPOLY_PROBES: SeedProbe[] = [
+  {
+    conceptId: CONDPOLY,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What small molecule is eliminated in the formation of PET (Dacron) from ethane-1,2-diol and terephthalic acid?',
+    choices: [
+      { text: 'H₂O — the –OH of the diol condenses with the –COOH of the acid, forming an ester link and releasing water', isCorrect: true },
+      { text: 'HCl — the acid chloride of terephthalic acid is used, releasing HCl', isCorrect: false, misconceptionId: `${CONDPOLY}:MC1` },
+      { text: 'CO₂ — decarboxylation occurs to link the monomers', isCorrect: false },
+    ],
+    correctValue: 'H2O (ester bond formation between OH and COOH)',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CONDPOLY}:MC1`],
+    source: `${CONDPOLY_SRC} — PET ester link formation with H2O as by-product`,
+  },
+  {
+    conceptId: CONDPOLY,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In step-growth polymerisation, what monomer conversion (p) is needed to achieve a degree of polymerisation (Xn) of 100?',
+    choices: [
+      { text: 'p = 0.99 (99%) — from Carothers equation Xn = 1/(1-p), p = 1 - 1/100 = 0.99', isCorrect: true },
+      { text: 'p = 0.50 (50%) — half conversion is sufficient to dimerize all monomers into chains of 100 units', isCorrect: false, misconceptionId: `${CONDPOLY}:MC2` },
+    ],
+    correctValue: 'p = 0.99 (99% conversion)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CONDPOLY}:MC2`],
+    source: `${CONDPOLY_SRC} — Carothers equation: Xn = 1/(1-p), very high conversion needed`,
+  },
+]
+
+// ─── chem.poly.properties ────────────────────────────────────────────────────
+const POLYPROP = 'chem.poly.properties'
+const POLYPROP_SRC = 'docs/chemistry/kg/graph.json — chem.poly.properties'
+const POLYPROP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: POLYPROP,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Polymer properties depend on chain structure, not just monomer identity. Key concepts: ' +
+      '(1) GLASS TRANSITION TEMPERATURE (Tg): below Tg, amorphous regions are glassy (rigid); ' +
+      'above Tg, they become rubbery. Polymers used at T < Tg = rigid plastic; T > Tg = ' +
+      'elastomer. Tg is raised by: bulky side groups (restrict rotation), polar interactions ' +
+      '(H-bonds, dipoles), crosslinking; lowered by plasticisers (small molecules that ' +
+      'lubricate chain motion). (2) CRYSTALLINITY: regular, tactic polymers crystallise ' +
+      '(isotactic/syndiotactic polypropylene); atactic = amorphous. Higher crystallinity ' +
+      '→ higher Tm, higher strength, but less transparency and flexibility. ' +
+      '(3) Categories: ELASTOMERS (highly amorphous, Tg well below use temperature, ' +
+      'crosslinked for shape recovery), THERMOPLASTICS (linear/branched, remelt above Tm), ' +
+      'THERMOSETS (crosslinked 3D network, do not melt — Bakelite, epoxy, rubber after ' +
+      'vulcanisation).',
+    targetedMisconceptions: [],
+    source: `${POLYPROP_SRC} — Tg, crystallinity-tacticity link, elastomer/thermoplastic/thermoset classification`,
+  },
+  {
+    conceptId: POLYPROP,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "A polymer is either crystalline or amorphous — you pick one." WRONG — most ' +
+      'real polymers are SEMI-CRYSTALLINE: ordered crystalline regions (lamellae) coexist ' +
+      'with amorphous regions in the SAME sample. The degree of crystallinity (0–100%) is ' +
+      'continuous and determines where the material sits between "rubber-like" and ' +
+      '"rigid-plastic-like." HDPE (~80% crystalline) is stiff; LDPE (~50%) is flexible — ' +
+      'same monomer (ethylene), different polymerisation conditions. Second trap: "Higher ' +
+      'Tg means the polymer is stronger." NOT necessarily — Tg governs chain mobility in ' +
+      'the amorphous phase, not tensile strength. A highly crosslinked thermoset can have ' +
+      'very high Tg AND very high modulus, but a semicrystalline polymer can have high ' +
+      'tensile strength from crystalline packing even with a modest Tg.',
+    targetedMisconceptions: [`${POLYPROP}:MC1`, `${POLYPROP}:MC2`],
+    source: `${POLYPROP_SRC} — semi-crystallinity (not binary); Tg vs strength distinction`,
+  },
+]
+const POLYPROP_PROBES: SeedProbe[] = [
+  {
+    conceptId: POLYPROP,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Isotactic polypropylene is more crystalline than atactic polypropylene. Why?',
+    choices: [
+      { text: 'Isotactic PP has all methyl groups on the same side of the chain, allowing regular packing into crystal lamellae; atactic PP has random methyl placement, preventing crystallisation', isCorrect: true },
+      { text: 'Isotactic PP has shorter chains, which pack more efficiently into a crystal lattice', isCorrect: false, misconceptionId: `${POLYPROP}:MC1` },
+      { text: 'Isotactic PP is made by a different monomer with stronger intermolecular forces', isCorrect: false },
+    ],
+    correctValue: 'Regular stereochemistry (isotactic) enables crystalline packing',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${POLYPROP}:MC1`],
+    source: `${POLYPROP_SRC} — tacticity and crystallinity: isotactic vs atactic polypropylene`,
+  },
+  {
+    conceptId: POLYPROP,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A polymer sample is described as "semi-crystalline." What does this mean about its structure?',
+    choices: [
+      { text: 'It contains both ordered crystalline regions and disordered amorphous regions within the same bulk sample', isCorrect: true },
+      { text: 'It is partially polymerised — some monomers have not yet linked into the chain', isCorrect: false, misconceptionId: `${POLYPROP}:MC2` },
+    ],
+    correctValue: 'Coexisting crystalline and amorphous domains in the same sample',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${POLYPROP}:MC2`],
+    source: `${POLYPROP_SRC} — semi-crystallinity: crystalline and amorphous regions coexist`,
+  },
+]
+
+// ─── chem.poly.biodegradable ─────────────────────────────────────────────────
+const BIODEGPOLY = 'chem.poly.biodegradable'
+const BIODEGPOLY_SRC = 'docs/chemistry/kg/graph.json — chem.poly.biodegradable'
+const BIODEGPOLY_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BIODEGPOLY,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Biodegradable polymers contain hydrolysable bonds (ester, amide, carbonate) that ' +
+      'enzymes/microorganisms can break down. Key examples: ' +
+      '(1) PLA (polylactic acid): from fermented plant starch → lactic acid → ring-opening ' +
+      'polymerisation of lactide → polyester; compostable under industrial conditions. ' +
+      '(2) PHB (polyhydroxybutyrate): produced naturally by bacteria as an energy store; ' +
+      'natural polyester, fully biodegradable, but brittle. ' +
+      'Green chemistry metrics: E-factor (kg waste per kg product), atom economy ' +
+      '(% of atoms in product vs reagents), PMI (process mass intensity). ' +
+      'CONDUCTING POLYMERS: polyacetylene, polyaniline — conjugated pi system along backbone ' +
+      'allows charge transport (doped with oxidants/reductants). Applications: ' +
+      'OLEDs, flexible electronics. These are NOT biodegradable — they are a distinct ' +
+      'functional category combining organic chemistry with solid-state physics.',
+    targetedMisconceptions: [],
+    source: `${BIODEGPOLY_SRC} — PLA/PHB biodegradable polyesters; green chemistry metrics; conducting polymers (conjugated backbone)`,
+  },
+  {
+    conceptId: BIODEGPOLY,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Biodegradable plastics always break down quickly in any environment — just ' +
+      'throw them in the ocean and they will disappear." WRONG — "biodegradable" labels ' +
+      'often mean "compostable under controlled conditions" (high temperature, humidity, ' +
+      'specific microorganisms). PLA degrades in industrial composting facilities (~60 °C, ' +
+      'months) but breaks down negligibly in cold ocean water or even home compost bins. ' +
+      'In landfill (anaerobic, no UV, low moisture) it can persist for years. The chemistry ' +
+      'is sound, but the environmental claim requires the correct disposal pathway. ' +
+      'Second trap: "Conducting polymers conduct electricity because they are metals." ' +
+      'WRONG — conducting polymers are organic materials that conduct via delocalised pi ' +
+      'electrons along the conjugated backbone, a fundamentally different mechanism from ' +
+      'metallic conduction. Their conductivity is typically 10–100 S/cm (lower than copper ' +
+      '~6 × 10⁷ S/cm), and increases on doping.',
+    targetedMisconceptions: [`${BIODEGPOLY}:MC1`, `${BIODEGPOLY}:MC2`],
+    source: `${BIODEGPOLY_SRC} — PLA needs industrial composting not open environment; conducting polymer mechanism`,
+  },
+]
+const BIODEGPOLY_PROBES: SeedProbe[] = [
+  {
+    conceptId: BIODEGPOLY,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PLA (polylactic acid) is labelled "biodegradable." Under which conditions does it actually degrade efficiently?',
+    choices: [
+      { text: 'Industrial composting conditions (~60 °C, high humidity, specific microorganisms) — it does not degrade significantly in cold ocean water or typical landfill', isCorrect: true },
+      { text: 'Any moist environment — water alone hydrolyses the ester bonds quickly at room temperature', isCorrect: false, misconceptionId: `${BIODEGPOLY}:MC1` },
+      { text: 'Sunlight — UV radiation breaks down all biodegradable polymers', isCorrect: false },
+    ],
+    correctValue: 'Industrial composting (~60°C + microorganisms) required',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BIODEGPOLY}:MC1`],
+    source: `${BIODEGPOLY_SRC} — PLA degradation requires industrial composting conditions`,
+  },
+  {
+    conceptId: BIODEGPOLY,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'How does a conducting polymer like polyacetylene conduct electricity?',
+    choices: [
+      { text: 'Via delocalised pi electrons along the conjugated backbone — doping introduces charge carriers (polarons); this is fundamentally different from metallic conduction', isCorrect: true },
+      { text: 'Via free metal ions incorporated into the polymer chain during synthesis', isCorrect: false, misconceptionId: `${BIODEGPOLY}:MC2` },
+    ],
+    correctValue: 'Delocalised pi electrons + dopant charge carriers along conjugated backbone',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${BIODEGPOLY}:MC2`],
+    source: `${BIODEGPOLY_SRC} — conducting polymer: pi-electron delocalisation not metallic ions`,
+  },
+]
+
+// ─── chem.bio.nucleic-acids ───────────────────────────────────────────────────
+const NACID = 'chem.bio.nucleic-acids'
+const NACID_SRC = 'docs/chemistry/kg/graph.json — chem.bio.nucleic-acids'
+const NACID_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NACID,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Nucleotides = phosphate + pentose sugar + nitrogenous base. DNA: deoxyribose, ' +
+      'bases A/T/G/C. RNA: ribose, bases A/U/G/C (uracil replaces thymine). ' +
+      'DNA double helix: two antiparallel strands (one 5\'→3\', other 3\'→5\') held by ' +
+      'specific base pairs via hydrogen bonds: A–T (2 H-bonds), G–C (3 H-bonds). ' +
+      'Chargaff\'s rule: [A] = [T], [G] = [C] in any double-stranded DNA. ' +
+      'The sugar-phosphate BACKBONE is on the outside; the bases point INWARD (stacked, ' +
+      'stabilised by van der Waals and pi-pi stacking as well as H-bonds). ' +
+      'Primary structure (sequence) → secondary structure (double helix). ' +
+      'Replication is semiconservative: each new DNA molecule has one original strand + ' +
+      'one newly synthesised strand. RNA types: mRNA (carries code from DNA), tRNA ' +
+      '(carries amino acid), rRNA (structural part of ribosome).',
+    targetedMisconceptions: [],
+    source: `${NACID_SRC} — nucleotide structure, DNA double helix antiparallel, Chargaff base pairing, semiconservative replication`,
+  },
+  {
+    conceptId: NACID,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "DNA strands are held together primarily by covalent bonds across the two ' +
+      'strands." WRONG — the cross-strand bonds are hydrogen bonds (A–T: 2, G–C: 3), ' +
+      'which are individually weak but collectively strong due to the huge number in a ' +
+      'long DNA molecule. The covalent bonds only run along each individual strand ' +
+      '(phosphodiester bonds linking nucleotides). This non-covalent nature of the ' +
+      'double helix is ESSENTIAL for biological function: the strands must be able to ' +
+      'separate (during replication and transcription) without breaking covalent bonds — ' +
+      'helicase simply unwinds and separates the H-bond-linked strands. Second trap: ' +
+      '"G-C pairs are stronger because G is larger." WRONG — G–C pairs have 3 H-bonds ' +
+      'vs 2 for A–T; the extra H-bond (not base size) is the reason G–C pairs have higher ' +
+      'thermal stability. DNA regions rich in G–C require higher temperature to denature.',
+    targetedMisconceptions: [`${NACID}:MC1`, `${NACID}:MC2`],
+    source: `${NACID_SRC} — cross-strand H-bonds not covalent; G-C 3 H-bonds vs A-T 2 H-bonds`,
+  },
+]
+const NACID_PROBES: SeedProbe[] = [
+  {
+    conceptId: NACID,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A DNA strand has the base sequence 5\'-ATGCCC-3\'. What is the complementary strand, written 5\'→3\'?',
+    choices: [
+      { text: '5\'-GGGCAT-3\' (complement antiparallel: A pairs T, T pairs A, G pairs C)', isCorrect: true },
+      { text: '5\'-TACGGG-3\' (complement written in same direction)', isCorrect: false, misconceptionId: `${NACID}:MC1` },
+      { text: '5\'-ATGCCC-3\' (identical sequence)', isCorrect: false, misconceptionId: `${NACID}:MC1` },
+    ],
+    correctValue: '5\'-GGGCAT-3\'',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NACID}:MC1`],
+    source: `${NACID_SRC} — antiparallel complementary strand direction`,
+  },
+  {
+    conceptId: NACID,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What type of bonds hold the two DNA strands together, and why is this important for replication?',
+    choices: [
+      { text: 'Hydrogen bonds (A–T: 2, G–C: 3) — these are individually weak and can be broken by helicase without breaking covalent bonds, allowing strand separation during replication', isCorrect: true },
+      { text: 'Covalent phosphodiester bonds — the same bonds that link nucleotides within each strand also link the two strands', isCorrect: false, misconceptionId: `${NACID}:MC1` },
+    ],
+    correctValue: 'Hydrogen bonds — non-covalent, breakable by helicase for replication',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NACID}:MC1`],
+    source: `${NACID_SRC} — H-bonds (not covalent) between strands; helicase separates for replication`,
+  },
+]
+
+// ─── chem.bio.enzyme-kinetics ─────────────────────────────────────────────────
+const ENZKIN = 'chem.bio.enzyme-kinetics'
+const ENZKIN_SRC = 'docs/chemistry/kg/graph.json — chem.bio.enzyme-kinetics'
+const ENZKIN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ENZKIN,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Michaelis–Menten kinetics: v = Vmax[S]/(Km + [S]). At low [S]: v ≈ (Vmax/Km)[S] ' +
+      '(first order in [S]). At high [S]: v ≈ Vmax (zero order — enzyme fully saturated). ' +
+      'Km = substrate concentration at half-maximal velocity (v = Vmax/2). Km interpretation: ' +
+      'APPROXIMATE measure of enzyme-substrate affinity — lower Km means higher affinity ' +
+      '(enzyme is half-saturated at lower [S]). Vmax/[E]total = kcat = turnover number ' +
+      '(maximum substrate molecules converted per enzyme per second). kcat/Km = catalytic ' +
+      'efficiency (how well the enzyme works at low [S]). Inhibition types: ' +
+      'COMPETITIVE (inhibitor resembles substrate, binds active site, reversible, increases ' +
+      'apparent Km, Vmax unchanged); NON-COMPETITIVE (binds elsewhere, decreases Vmax, ' +
+      'Km unchanged). Allosteric regulation: effector binds remote site, causes conformational ' +
+      'change affecting active site (sigmoidal kinetics, not Michaelis–Menten).',
+    targetedMisconceptions: [],
+    source: `${ENZKIN_SRC} — Michaelis-Menten: Km/Vmax/kcat interpretation; competitive vs non-competitive inhibition`,
+  },
+  {
+    conceptId: ENZKIN,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "In competitive inhibition, adding more inhibitor will eventually reduce Vmax." ' +
+      'WRONG — competitive inhibition is REVERSIBLE and [S]-dependent. At sufficiently high ' +
+      'substrate concentration, substrate outcompetes the inhibitor for the active site, ' +
+      'and Vmax is unchanged (inhibitor raises apparent Km, but the same Vmax is reachable ' +
+      'at high [S]). Only irreversible or non-competitive inhibition reduces Vmax. ' +
+      'Second trap: "Km always equals the equilibrium dissociation constant KD of enzyme ' +
+      'for substrate." WRONG — Km = (k₋₁ + kcat)/k₁ from the Michaelis mechanism; it equals ' +
+      'KD = k₋₁/k₁ only if kcat << k₋₁ (the catalytic step is slow relative to dissociation, ' +
+      'the "rapid equilibrium" approximation). For many efficient enzymes, kcat is not ' +
+      'negligible and Km > KD.',
+    targetedMisconceptions: [`${ENZKIN}:MC1`, `${ENZKIN}:MC2`],
+    source: `${ENZKIN_SRC} — competitive inhibition does not reduce Vmax; Km approximates but may differ from KD`,
+  },
+]
+const ENZKIN_PROBES: SeedProbe[] = [
+  {
+    conceptId: ENZKIN,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A competitive inhibitor is added to an enzyme at fixed concentration. What happens to the apparent Km and Vmax?',
+    choices: [
+      { text: 'Apparent Km increases (more substrate needed to reach half-Vmax); Vmax is unchanged (can be reached at sufficiently high [S])', isCorrect: true },
+      { text: 'Km increases AND Vmax decreases — the inhibitor permanently reduces the enzyme\'s maximum rate', isCorrect: false, misconceptionId: `${ENZKIN}:MC1` },
+      { text: 'Km is unchanged; only Vmax decreases because the inhibitor blocks some active sites permanently', isCorrect: false },
+    ],
+    correctValue: 'Apparent Km increases; Vmax unchanged',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ENZKIN}:MC1`],
+    source: `${ENZKIN_SRC} — competitive inhibition: Km increases, Vmax unchanged`,
+  },
+  {
+    conceptId: ENZKIN,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Enzyme A has Km = 0.1 mM; Enzyme B has Km = 10 mM (both for the same substrate). Which has higher substrate affinity?',
+    choices: [
+      { text: 'Enzyme A — lower Km means the enzyme is half-saturated at a lower substrate concentration, indicating higher affinity', isCorrect: true },
+      { text: 'Enzyme B — higher Km means the enzyme binds substrate more tightly and holds onto it longer', isCorrect: false, misconceptionId: `${ENZKIN}:MC2` },
+    ],
+    correctValue: 'Enzyme A — lower Km = higher affinity',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ENZKIN}:MC2`],
+    source: `${ENZKIN_SRC} — Km interpretation: lower Km = higher substrate affinity`,
+  },
+]
+
+// ─── chem.poly.natural ───────────────────────────────────────────────────────
+const NATPOLY = 'chem.poly.natural'
+const NATPOLY_SRC = 'docs/chemistry/kg/graph.json — chem.poly.natural'
+const NATPOLY_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NATPOLY,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Natural polymers: biological macromolecules formed by living organisms. ' +
+      '(1) STARCH: alpha-glucose units linked alpha-1,4 (amylose, linear) and alpha-1,6 ' +
+      '(amylopectin, branched). The alpha linkage gives a helical structure; digestible ' +
+      'by human amylase. (2) CELLULOSE: beta-glucose units linked beta-1,4. The beta ' +
+      'linkage creates flat, extended chains that H-bond laterally into microfibrils — ' +
+      'very high tensile strength, indigestible by most animals (no beta-glucosidase), ' +
+      'basis of plant cell walls, cotton, paper. (3) NATURAL RUBBER: cis-1,4-polyisoprene ' +
+      '(from Hevea tree latex). Elastomeric because the cis configuration keeps chains ' +
+      'from packing tightly. VULCANISATION with S₈: forms sulphur crosslinks between ' +
+      'chains, converting sticky uncrosslinked rubber into a resilient, elastic solid. ' +
+      '(4) SILK (fibroin): beta-sheet polypeptide (antiparallel H-bonded chains), strong ' +
+      'and lustrous. (5) WOOL (keratin): alpha-helix protein, coiled → elastic.',
+    targetedMisconceptions: [],
+    source: `${NATPOLY_SRC} — starch vs cellulose alpha/beta glycosidic linkage; rubber cis-polyisoprene, vulcanisation; silk/wool protein structure`,
+  },
+  {
+    conceptId: NATPOLY,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Starch and cellulose are both made of glucose, so they must have similar ' +
+      'properties and both be digestible." WRONG — the LINKAGE between glucose units is ' +
+      'different: starch uses ALPHA-1,4 glycosidic bonds (the two ring oxygens point in the ' +
+      'SAME direction), creating a helical, more accessible structure; cellulose uses ' +
+      'BETA-1,4 bonds (ring oxygens alternately above and below), creating flat sheets that ' +
+      'pack into tough H-bonded microfibrils. Human digestive enzymes (amylase) are ' +
+      'SPECIFIC to alpha linkages — they cannot break beta-1,4 bonds. The difference is ONE ' +
+      'stereochemical configuration at C1, but it creates completely different 3D structures ' +
+      'and completely different digestibility — a profound example of how stereochemistry ' +
+      'determines function.',
+    targetedMisconceptions: [`${NATPOLY}:MC1`],
+    source: `${NATPOLY_SRC} — starch (alpha-1,4) vs cellulose (beta-1,4): same monomer, different linkage = different structure and digestibility`,
+  },
+]
+const NATPOLY_PROBES: SeedProbe[] = [
+  {
+    conceptId: NATPOLY,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why is cellulose stronger and more rigid than starch, given that both are made from glucose?',
+    choices: [
+      { text: 'Cellulose has beta-1,4 glycosidic bonds creating flat extended chains that H-bond laterally into tough microfibrils; starch has alpha-1,4 bonds giving helical, less rigidly packed chains', isCorrect: true },
+      { text: 'Cellulose chains are longer than starch chains, giving it higher molecular weight and strength', isCorrect: false, misconceptionId: `${NATPOLY}:MC1` },
+      { text: 'Cellulose contains additional non-carbohydrate components that reinforce its structure', isCorrect: false },
+    ],
+    correctValue: 'Beta-1,4 bonds in cellulose create flat chains that H-bond into microfibrils',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NATPOLY}:MC1`],
+    source: `${NATPOLY_SRC} — cellulose beta-1,4 vs starch alpha-1,4 structural consequence`,
+  },
+  {
+    conceptId: NATPOLY,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Natural rubber (cis-polyisoprene) becomes a useful elastic solid after vulcanisation. What does vulcanisation actually do chemically?',
+    choices: [
+      { text: 'Sulphur crosslinks form between adjacent polymer chains, preventing permanent slipping and giving elastic recovery', isCorrect: true },
+      { text: 'Vulcanisation removes the double bonds, converting the polymer to a saturated compound with higher melting point', isCorrect: false, misconceptionId: `${NATPOLY}:MC2` },
+    ],
+    correctValue: 'Sulphur crosslinks between chains — enables elastic recovery',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NATPOLY}:MC2`],
+    source: `${NATPOLY_SRC} — vulcanisation: sulphur crosslinks prevent chain slipping`,
+  },
+]
+
+// ─── chem.anal.spectroscopy ───────────────────────────────────────────────────
+const ANALSPEC = 'chem.anal.spectroscopy'
+const ANALSPEC_SRC = 'docs/chemistry/kg/graph.json — chem.anal.spectroscopy'
+const ANALSPEC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ANALSPEC,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Analytical spectroscopy for structure and quantification: ' +
+      '(1) UV-Vis: Beer–Lambert law A = εcl (absorbance = molar absorptivity × ' +
+      'concentration × path length); pi→pi* and n→pi* transitions; useful for conjugated ' +
+      'systems and quantification. (2) IR: functional group identification from characteristic ' +
+      'stretching/bending frequencies; fingerprint region (600–1500 cm⁻¹) for overall ' +
+      'molecular identity; C=O ~1700 cm⁻¹, O–H 2500–3300 (broad), N–H 3300–3500. ' +
+      '(3) NMR: chemical shift reflects electronic environment; multiplicity from spin-spin ' +
+      'coupling (n+1 rule for simple systems); COSY (1H-1H correlation), HMBC/HSQC ' +
+      '(1H-13C). (4) Mass spectrometry: molecular ion M⁺ gives MW; high-resolution MS ' +
+      '(HRMS) gives exact mass → molecular formula; fragmentation pattern gives structural ' +
+      'information. (5) AAS/ICP-OES: elemental analysis — Beer–Lambert quantification ' +
+      'at characteristic atomic emission/absorption wavelengths.',
+    targetedMisconceptions: [],
+    source: `${ANALSPEC_SRC} — UV-Vis Beer-Lambert; IR fingerprint; NMR coupling; MS molecular ion/fragmentation; AAS/ICP`,
+  },
+  {
+    conceptId: ANALSPEC,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "A compound with the correct molecular formula must have the correct structure ' +
+      '— if the molecular ion m/z is right, we have identified the compound." WRONG — ' +
+      'many compounds are ISOMERS with identical molecular formulae (e.g. C₆H₁₂O = ' +
+      'cyclohexanol, hexanal, methyl pentan-3-one...). The molecular ion gives MW ' +
+      '(low-resolution) or formula (HRMS), but structural identification requires ' +
+      'fragmentation pattern + IR + NMR. No single technique is definitive for structure. ' +
+      'Second trap: "Beer–Lambert law holds under all conditions, so you can always ' +
+      'linearly calibrate any UV-Vis measurement." WRONG — Beer–Lambert linearity breaks ' +
+      'down at high concentrations (A > ~1.5: detector error, stray light, molecular ' +
+      'interactions) and with strongly scattering, fluorescent, or photodecomposing samples. ' +
+      'Always verify linearity across the measurement range before quantifying.',
+    targetedMisconceptions: [`${ANALSPEC}:MC1`, `${ANALSPEC}:MC2`],
+    source: `${ANALSPEC_SRC} — molecular ion alone insufficient for structure; Beer-Lambert linearity limits`,
+  },
+]
+const ANALSPEC_PROBES: SeedProbe[] = [
+  {
+    conceptId: ANALSPEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A compound shows a molecular ion at m/z = 100 in its mass spectrum. Which additional technique best distinguishes between structural isomers with the same MW?',
+    choices: [
+      { text: 'Combination of IR (functional groups), ¹H NMR (chemical environment and connectivity), and MS fragmentation pattern together', isCorrect: true },
+      { text: 'High-resolution MS alone — exact mass uniquely identifies every compound regardless of isomerism', isCorrect: false, misconceptionId: `${ANALSPEC}:MC1` },
+      { text: 'UV-Vis alone — the absorption wavelength depends on the exact structure of chromophores', isCorrect: false },
+    ],
+    correctValue: 'IR + NMR + MS fragmentation combined',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ANALSPEC}:MC1`],
+    source: `${ANALSPEC_SRC} — single spectroscopic technique insufficient; combination required for structure`,
+  },
+  {
+    conceptId: ANALSPEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Beer–Lambert law predicts absorbance A = εcl. Under what conditions does this linear relationship fail?',
+    choices: [
+      { text: 'At high concentrations (A > ~1.5), with stray light reaching the detector, or with fluorescent/scattering samples — all cause non-linearity', isCorrect: true },
+      { text: 'Beer–Lambert always holds for any concentration as long as the correct molar absorptivity ε is used', isCorrect: false, misconceptionId: `${ANALSPEC}:MC2` },
+    ],
+    correctValue: 'High concentration, stray light, fluorescence/scattering cause deviations',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ANALSPEC}:MC2`],
+    source: `${ANALSPEC_SRC} — Beer-Lambert linearity limits at high A and scattering samples`,
+  },
+]
+
+// ─── chem.dblock.organometallics ─────────────────────────────────────────────
+const ORGMET = 'chem.dblock.organometallics'
+const ORGMET_SRC = 'docs/chemistry/kg/graph.json — chem.dblock.organometallics'
+const ORGMET_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ORGMET,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Organometallic compounds contain a direct metal-carbon bond. Key concepts: ' +
+      '(1) 18-ELECTRON RULE: stable d-block organometallics tend to have 18 electrons ' +
+      'in the valence shell of the metal (count metal electrons + ligand contributions). ' +
+      'Analogous to the octet rule for main group. Not absolute (16-electron Pd/Pt complexes ' +
+      'are catalytically active). ' +
+      '(2) METAL CARBONYLS: CO is a strong sigma-donor (via C lone pair) AND pi-acceptor ' +
+      '(CO pi* accepts d electron density — "backbonding"). This synergistic donor-acceptor ' +
+      'stabilises the complex: Ni(CO)₄ (tetrahedral, 18e⁻), Fe(CO)₅ (trigonal bipyramidal, ' +
+      '18e⁻), Cr(CO)₆ (octahedral, 18e⁻). CO IR stretch is LOWERED by backbonding (net ' +
+      'weakens C≡O). ' +
+      '(3) FERROCENE Fe(C₅H₅)₂: sandwich compound, 18e⁻; the cyclopentadienyl anion ' +
+      '(Cp⁻) contributes 6e⁻ per ring. ' +
+      '(4) ZIEGLER–NATTA CATALYST (TiCl₄/AlR₃): stereospecific polymerisation of alkenes; ' +
+      'WILKINSON\'S CATALYST [RhCl(PPh₃)₃]: homogeneous hydrogenation via oxidative ' +
+      'addition of H₂.',
+    targetedMisconceptions: [],
+    source: `${ORGMET_SRC} — 18e rule; CO sigma donor/pi acceptor/backbonding; ferrocene; Ziegler-Natta/Wilkinson catalysis`,
+  },
+  {
+    conceptId: ORGMET,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "CO in metal carbonyls is a ligand just like Cl⁻ — it donates a lone pair and ' +
+      'that is the entire story." WRONG — CO is special because it is BOTH a sigma-donor ' +
+      '(donates the C lone pair to the metal, like most ligands) AND a pi-ACCEPTOR ' +
+      '(the CO\'s empty pi* orbital accepts d electron density from the metal back into it). ' +
+      'This "backbonding" (metal → CO pi*) is what makes CO such an exceptionally strong-' +
+      'field ligand — it removes electron density from the metal (preventing a build-up that ' +
+      'would make high electron counts unstable) while also strengthening the M–C bond. ' +
+      'Evidence: the CO stretching frequency in metal carbonyls (≈1850–2100 cm⁻¹) is BELOW ' +
+      'free CO (2143 cm⁻¹) — because backbonding puts electron density into CO pi*, ' +
+      'weakening the C≡O triple bond. Second trap: "Ferrocene has ionic bonds between Fe²⁺ ' +
+      'and the Cp rings." Correct charge picture but the bonding is COVALENT/organometallic — ' +
+      'the Cp pi system bonds to the metal d orbitals.',
+    targetedMisconceptions: [`${ORGMET}:MC1`, `${ORGMET}:MC2`],
+    source: `${ORGMET_SRC} — CO backbonding mechanism and IR evidence; ferrocene covalent bonding`,
+  },
+]
+const ORGMET_PROBES: SeedProbe[] = [
+  {
+    conceptId: ORGMET,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'The CO stretching frequency in Ni(CO)₄ (~2060 cm⁻¹) is LOWER than in free CO (2143 cm⁻¹). What causes this decrease?',
+    choices: [
+      { text: 'Metal-to-CO backbonding: d electrons from Ni flow into the CO pi* antibonding orbital, weakening the C≡O bond and lowering its stretching frequency', isCorrect: true },
+      { text: 'The CO is compressed inside the tetrahedral coordination sphere, reducing the effective bond order', isCorrect: false, misconceptionId: `${ORGMET}:MC1` },
+      { text: 'The sigma donation from CO to Ni weakens the C≡O triple bond directly', isCorrect: false, misconceptionId: `${ORGMET}:MC2` },
+    ],
+    correctValue: 'Backbonding into CO pi* weakens C≡O, lowers IR frequency',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ORGMET}:MC1`, `${ORGMET}:MC2`],
+    source: `${ORGMET_SRC} — CO IR frequency decrease from backbonding evidence`,
+  },
+  {
+    conceptId: ORGMET,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Verify that Ni(CO)₄ obeys the 18-electron rule. Ni is Group 10 (10 d electrons). Each CO contributes 2 electrons. How many electrons total?',
+    choices: [
+      { text: '18 — Ni contributes 10 electrons; 4 CO ligands contribute 4 × 2 = 8 electrons; 10 + 8 = 18', isCorrect: true },
+      { text: '10 — only the metal d electrons count; ligand electrons are not included in the count', isCorrect: false, misconceptionId: `${ORGMET}:MC1` },
+    ],
+    correctValue: '10 (Ni) + 8 (4 × CO) = 18 electrons',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ORGMET}:MC1`],
+    source: `${ORGMET_SRC} — 18-electron count for Ni(CO)4`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -14535,6 +15871,23 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...OXOSPEC_EXPLANATIONS,
   ...QUALORG_EXPLANATIONS,
   ...CFCS_EXPLANATIONS,
+  ...HALOARENE_EXPLANATIONS,
+  ...NITROCOMP_EXPLANATIONS,
+  ...ARROWPUSH_EXPLANATIONS,
+  ...PERICYC_EXPLANATIONS,
+  ...CONCELL_EXPLANATIONS,
+  ...HETCYC_EXPLANATIONS,
+  ...ALPHARXN_EXPLANATIONS,
+  ...CARBSPECTRO_EXPLANATIONS,
+  ...NAMEDCARBR_EXPLANATIONS,
+  ...CONDPOLY_EXPLANATIONS,
+  ...POLYPROP_EXPLANATIONS,
+  ...BIODEGPOLY_EXPLANATIONS,
+  ...NACID_EXPLANATIONS,
+  ...ENZKIN_EXPLANATIONS,
+  ...NATPOLY_EXPLANATIONS,
+  ...ANALSPEC_EXPLANATIONS,
+  ...ORGMET_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -14707,5 +16060,22 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...OXOSPEC_PROBES,
   ...QUALORG_PROBES,
   ...CFCS_PROBES,
+  ...HALOARENE_PROBES,
+  ...NITROCOMP_PROBES,
+  ...ARROWPUSH_PROBES,
+  ...PERICYC_PROBES,
+  ...CONCELL_PROBES,
+  ...HETCYC_PROBES,
+  ...ALPHARXN_PROBES,
+  ...CARBSPECTRO_PROBES,
+  ...NAMEDCARBR_PROBES,
+  ...CONDPOLY_PROBES,
+  ...POLYPROP_PROBES,
+  ...BIODEGPOLY_PROBES,
+  ...NACID_PROBES,
+  ...ENZKIN_PROBES,
+  ...NATPOLY_PROBES,
+  ...ANALSPEC_PROBES,
+  ...ORGMET_PROBES,
 ]
 
