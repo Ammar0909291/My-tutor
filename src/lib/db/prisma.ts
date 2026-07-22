@@ -1,12 +1,21 @@
 import { PrismaClient } from '@prisma/client'
+import { withPoolParams } from './poolConfig'
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined
 }
 
+// P0 (production pool exhaustion, 2026-07-22): explicit pool sizing — see
+// poolConfig.ts for the full production-log evidence. Without this, Prisma
+// defaults to connection_limit=5 / pool_timeout=10 on Vercel, which a
+// single busy function instance exhausts, taking down /learn and /dashboard
+// with "Timed out fetching a new connection from the connection pool".
+const pooledUrl = withPoolParams(process.env.DATABASE_URL)
+
 export const prisma =
   globalForPrisma.prisma ??
   new PrismaClient({
+    ...(pooledUrl ? { datasources: { db: { url: pooledUrl } } } : {}),
     log: process.env.NODE_ENV === 'development' ? ['error', 'warn'] : ['error'],
   })
 
