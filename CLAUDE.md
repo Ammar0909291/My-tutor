@@ -1102,6 +1102,57 @@
   Curriculum Production Pipeline's own generated dashboards, out of scope for this exception
   (their Physics concept count will read stale — 216 — until the pipeline's own next sync).
 
+## Curriculum Completion Program (started 2026-07-22, standing/long-running)
+- Standing instruction: work through the "10 educational layers per KG concept" ambition
+  (Blueprint, Educational Brain, Explanation Memory, Misconceptions, Lesson Assets,
+  Visualizations, Assessments, Practice, Adaptive Tutoring, Certification) as an incremental
+  production pipeline, not a one-shot task — one small bounded batch per turn (one concept, one
+  domain slice), across as many future sessions as it takes. Never attempt to complete everything
+  at once; never create placeholders merely to raise a coverage number; before each batch,
+  determine what already exists and work only on the genuinely missing portion.
+- **Layer-ownership mapping (binding — read before every batch)**: of the 10 requested layers,
+  only 2 are meant to be hand-authored as static per-concept files by this program:
+  - **Layer 1 (Blueprint)** → already an existing, actively-used artifact class
+    (`docs/curriculum/blueprints/{conceptId}.md`, loaded by `blueprintLoader.ts`), produced by the
+    external Curriculum Production Pipeline (962 files as of 2026-07-22: 529 math, 217 phys, 216
+    eng, 0 chem/bio). This program does not author new Blueprints — it reads and cross-references
+    existing ones to avoid duplicating their content.
+  - **Layer 2 (Educational Brain)**, which subsumes the content requested under Layers 3
+    (Explanation Memory's *authored source*, distinct from the DB-backed runtime asset of the same
+    name — see below) and 4 (Misconception Library) → `educational-brain/concepts/{subject}/
+    {kg-id}.md`, per `TEMPLATE.md`'s authoring contract. This IS what this program authors,
+    one concept per batch, at the existing seed-entry quality bar (see `COVERAGE.md`).
+  - **Layers 3 & 7, DB-backed sense (Explanation/Probe assets)** → `AssetIdentity` (ADR 14),
+    populated either by real LLM-generation-plus-admin-review at runtime, or by small, deliberate
+    transcription batches into `src/lib/teaching/assets/brainSeedAssets.ts` (production code,
+    Wave-0-gated, precedent: 9 EXPLANATION + 5 PROBE assets seeded from the first 4 concept
+    entries) — never by hand-authoring bulk static markdown per concept.
+  - **Layer 5 (Lesson Assets — dialogue, hints, worked examples, practice, checkpoints)** →
+    generated live, per-turn, per-student, by the Teaching Engine + LLM at runtime. Hand-authoring
+    static per-concept lesson scripts would contradict the ADR 14 "LLM as voice-renderer, not
+    content-generator" endgame. Document as runtime-generated; do not author.
+  - **Layer 6 (Visualizations)** → the Visual Asset Model (ADR 12), background-authored per
+    concept via LLM and cached — not manually pre-authored in bulk, and explicitly gated as
+    untouched territory (W4-2 in `WAVE_0_APPROVAL_CHECKLIST.md`). Document, do not author.
+  - **Layer 8 (Practice Generation templates)** → Dynamic Lesson Composer / Teaching Action
+    Generator, runtime-procedural. Document, do not author.
+  - **Layer 9 (Adaptive Tutoring `decide()`)** → already-implemented, frozen production code
+    (`src/lib/teaching-engine/index.ts`) that CONSUMES Layers 1–2 as its per-concept data; this
+    program is not asked to re-implement it, only to keep feeding it better-authored input.
+  - **Layer 10 (Certification)** → per-batch, mark only Layers 1–2 (+ embedded misconception
+    library) as checkable; mark Layers 3&7(DB)/5/6/8/9 "N/A — runtime/pipeline-owned" with the
+    reasoning above, never "incomplete."
+- Live batch-by-batch progress tracking lives in `educational-brain/concepts/COVERAGE.md`
+  (updated in the same turn as any entry added) — CLAUDE.md records the standing governance
+  framing once here, not a re-narrated essay per batch, to stay sustainable across many sessions.
+- **Batch 1** (2026-07-22): authored `eng.phonics.print-concepts` — English's other
+  zero-prerequisite entry node, already flagged by name as the next priority in
+  `eng.phonics.phonemic-awareness.md`'s own Curriculum feedback section. Cross-referenced (not
+  duplicated) the concept's existing Blueprint. Corrected two stale `COVERAGE.md` bookkeeping
+  errors found while establishing this batch's baseline (English undercounted at 1 entry when 2
+  already existed; physics KG count stale at 194 vs. the current 238). Full detail in
+  `COVERAGE.md`'s Delivery history.
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
