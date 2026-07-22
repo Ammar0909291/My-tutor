@@ -14061,6 +14061,308 @@ const VITAMIN_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.pblock.trends ──────────────────────────────────────────────────────
+const PBLOCK = 'chem.pblock.trends'
+const PBLOCK_SRC = 'docs/chemistry/kg/graph.json — chem.pblock.trends'
+const PBLOCK_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PBLOCK,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Three cross-cutting patterns in the p-block: (1) INERT-PAIR EFFECT — going down a group, ' +
+      'the ns² electrons become increasingly reluctant to bond (relativistic contraction ' +
+      'stabilises the s orbital), so the lower oxidation state (+2 for Group 14, +1 for ' +
+      'Group 13) becomes more stable relative to the higher one. Lead prefers Pb²⁺ over Pb⁴⁺; ' +
+      'thallium prefers Tl⁺ over Tl³⁺. (2) ANOMALOUS FIRST-MEMBER BEHAVIOUR — the first ' +
+      'member of each group (B, C, N, O, F) behaves differently from the rest: no d orbitals, ' +
+      'smaller size, higher electronegativity, ability to pi-bond. N forms N₂ with a triple ' +
+      'bond; P does not (forms P₄ instead). (3) DIAGONAL RELATIONSHIPS — elements in the ' +
+      'second period often resemble the element one period below and one group to the right ' +
+      '(B≈Si, Li≈Mg, Be≈Al) because similar charge density compensates for moving diagonally.',
+    targetedMisconceptions: [],
+    source: `${PBLOCK_SRC} — inert pair effect, first-member anomaly, diagonal relationships`,
+  },
+  {
+    conceptId: PBLOCK,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "The lower oxidation state is always less stable — higher oxidation state = more ' +
+      'bonds = more stable." WRONG when the inert-pair effect applies. For lead, Pb²⁺ is MORE ' +
+      'stable than Pb⁴⁺ at standard conditions — the extra energy to pull those two s electrons ' +
+      'into bonding is not returned by the bonds formed. PbO₂ IS a strong oxidising agent ' +
+      'precisely because Pb(IV) is unstable and wants to return to Pb(II). Second trap: "The ' +
+      'first member of a group is just a less extreme version of the others." The first member ' +
+      'is often QUALITATIVELY different, not just quantitatively smaller/weaker: carbon forms ' +
+      'fullerenes and graphite because of its unique ability to form stable pi bonds; nitrogen ' +
+      'dimerises to N₂ via a triple bond while phosphorus does not form P₂ under normal ' +
+      'conditions. These are not "slightly different" — they are category differences.',
+    targetedMisconceptions: [`${PBLOCK}:MC1`, `${PBLOCK}:MC2`],
+    source: `${PBLOCK_SRC} — inert pair stability reversal; first-member qualitative differences not just quantitative`,
+  },
+]
+const PBLOCK_PROBES: SeedProbe[] = [
+  {
+    conceptId: PBLOCK,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The inert-pair effect explains why lead (Group 14) predominantly forms Pb²⁺ rather than Pb⁴⁺. What is the underlying reason?',
+    choices: [
+      { text: 'The 6s² electrons in Pb are stabilised by relativistic contraction, making them less available for bonding than the 6p electrons', isCorrect: true },
+      { text: 'Lead simply does not have enough electrons in total to form four bonds at the same time', isCorrect: false, misconceptionId: `${PBLOCK}:MC1` },
+      { text: 'The higher +4 oxidation state would require ionic character that lead cannot achieve due to its large atomic radius', isCorrect: false },
+    ],
+    correctValue: 'Relativistic stabilisation of 6s² makes those electrons reluctant to bond',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PBLOCK}:MC1`],
+    source: `${PBLOCK_SRC} — inert pair effect mechanism: relativistic s orbital contraction`,
+  },
+  {
+    conceptId: PBLOCK,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Element B (boron, period 2, Group 13) and element Si (silicon, period 3, Group 14) show similar chemical behaviour. This is an example of:',
+    choices: [
+      { text: 'A diagonal relationship — B and Si have similar charge density (moving diagonally: down a period and right a group), giving similar electronegativity and bonding preferences', isCorrect: true },
+      { text: 'The inert-pair effect — both elements use their s electrons reluctantly', isCorrect: false, misconceptionId: `${PBLOCK}:MC2` },
+    ],
+    correctValue: 'Diagonal relationship between B and Si',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PBLOCK}:MC2`],
+    source: `${PBLOCK_SRC} — diagonal relationships across p-block`,
+  },
+]
+
+// ─── chem.dblock.oxo-species ─────────────────────────────────────────────────
+const OXOSPEC = 'chem.dblock.oxo-species'
+const OXOSPEC_SRC = 'docs/chemistry/kg/graph.json — chem.dblock.oxo-species'
+const OXOSPEC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: OXOSPEC,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Transition metals form oxyanions when in high oxidation states because the highly ' +
+      'charged metal ion strongly polarises oxygen, enabling covalent M=O character. Key ' +
+      'examples: chromate (CrO₄²⁻, yellow, Cr(VI)) ⇌ dichromate (Cr₂O₇²⁻, orange, Cr(VI)) — ' +
+      'this equilibrium shifts with pH: acidic → dichromate, basic → chromate ' +
+      '(Cr₂O₇²⁻ + 2OH⁻ → 2CrO₄²⁻ + H₂O). Dichromate is a strong oxidising agent in acid ' +
+      'solution (orange → green Cr³⁺). Permanganate (MnO₄⁻, purple, Mn(VII)) is an even ' +
+      'stronger oxidant: in acid solution reduced to Mn²⁺ (pale pink/colourless); in neutral/ ' +
+      'basic solution to MnO₂ (brown precipitate). Vanadium pentoxide (V₂O₅) is the catalyst ' +
+      'in the Contact Process (SO₂ → SO₃), working via V(V)/V(IV) redox cycling.',
+    targetedMisconceptions: [],
+    source: `${OXOSPEC_SRC} — chromate/dichromate pH equilibrium; permanganate oxidation products in acid vs base; V2O5 catalyst`,
+  },
+  {
+    conceptId: OXOSPEC,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Chromate and dichromate are different oxidation states of chromium." WRONG — ' +
+      'both chromate (CrO₄²⁻) and dichromate (Cr₂O₇²⁻) contain Cr in the +6 oxidation state. ' +
+      'The interconversion is a CONDENSATION equilibrium driven by pH change, not a redox ' +
+      'reaction. To determine the oxidation state: in CrO₄²⁻, let Cr = x: x + 4(−2) = −2, ' +
+      'so x = +6. In Cr₂O₇²⁻: 2x + 7(−2) = −2, so x = +6. Same oxidation state, different ' +
+      'degree of condensation. Second trap: "The colour of KMnO₄ solution is unchanged by ' +
+      'reduction because it stays purple." WRONG — MnO₄⁻ turns colourless (Mn²⁺) in acid ' +
+      'solution after reduction; the purple colour is diagnostic of Mn(VII) still present.',
+    targetedMisconceptions: [`${OXOSPEC}:MC1`, `${OXOSPEC}:MC2`],
+    source: `${OXOSPEC_SRC} — chromate vs dichromate same oxidation state; permanganate colour change diagnostic`,
+  },
+]
+const OXOSPEC_PROBES: SeedProbe[] = [
+  {
+    conceptId: OXOSPEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What happens to the chromate/dichromate equilibrium (CrO₄²⁻ ⇌ Cr₂O₇²⁻) when concentrated H₂SO₄ is added?',
+    choices: [
+      { text: 'Equilibrium shifts toward dichromate (Cr₂O₇²⁻, orange) — acid removes OH⁻, driving condensation', isCorrect: true },
+      { text: 'Equilibrium shifts toward chromate (CrO₄²⁻, yellow) — acid reduces Cr(VI) to Cr(III)', isCorrect: false, misconceptionId: `${OXOSPEC}:MC1` },
+      { text: 'Adding strong acid does not affect the position of this equilibrium', isCorrect: false },
+    ],
+    correctValue: 'Shifts to dichromate (orange) in acidic conditions',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${OXOSPEC}:MC1`],
+    source: `${OXOSPEC_SRC} — chromate/dichromate pH equilibrium shift`,
+  },
+  {
+    conceptId: OXOSPEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the oxidation state of chromium in Cr₂O₇²⁻ (dichromate ion)?',
+    choices: [
+      { text: '+6 — same as in chromate (CrO₄²⁻); the interconversion is a condensation equilibrium, not a redox change', isCorrect: true },
+      { text: '+7 — more oxygen atoms bonded means a higher oxidation state than in CrO₄²⁻', isCorrect: false, misconceptionId: `${OXOSPEC}:MC1` },
+    ],
+    correctValue: '+6 in both chromate and dichromate',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${OXOSPEC}:MC1`],
+    source: `${OXOSPEC_SRC} — same oxidation state +6 in both chromate and dichromate`,
+  },
+]
+
+// ─── chem.org.qualitative-analysis ──────────────────────────────────────────
+const QUALORG = 'chem.org.qualitative-analysis'
+const QUALORG_SRC = 'docs/chemistry/kg/graph.json — chem.org.qualitative-analysis'
+const QUALORG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: QUALORG,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Qualitative organic analysis: a systematic set of chemical tests that identify ' +
+      'functional groups from observable changes (colour, precipitate, gas, smell). ' +
+      'Key tests: (1) Lassaigne\'s test — fuse organic compound with Na metal, extract ' +
+      'the fusion cake, test for N (prussian blue with FeSO₄/FeCl₃), S (black FeS precipitate), ' +
+      'or halogens (white/pale yellow AgCl/AgBr/AgI precipitate). (2) Tollens\' reagent ' +
+      '(ammoniacal AgNO₃): silver mirror → aldehyde present (oxidised to carboxylate); ' +
+      'no reaction → ketone. (3) Fehling\'s solution (blue Cu²⁺ complex): red-brick Cu₂O ' +
+      'precipitate → reducing aldehyde present; ketones generally do NOT react. (4) Iodoform ' +
+      'test (I₂/NaOH): yellow CHI₃ precipitate → CH₃CO group present (methyl ketones and ' +
+      'CH₃CH(OH) — but NOT other ketones or aldehydes).',
+    targetedMisconceptions: [],
+    source: `${QUALORG_SRC} — Lassaignes test, Tollens, Fehlings, iodoform tests for functional group ID`,
+  },
+  {
+    conceptId: QUALORG,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Tollens\' test is positive for any carbonyl compound." WRONG — Tollens\' tests ' +
+      'for OXIDISABLE carbonyls: aldehydes (RCHO) give a positive result (silver mirror) ' +
+      'because aldehydes can be oxidised to carboxylates. Ketones (RCOR) give NO reaction ' +
+      'with Tollens\' under normal conditions because they cannot be easily oxidised. This is ' +
+      'the key aldehyde/ketone distinction test. Second trap: "Iodoform test is specific to ' +
+      'ketones." WRONG — the iodoform test is specific to the CH₃CO– group (whether in a ' +
+      'methyl ketone OR in ethanol CH₃CH₂OH which can be oxidised in situ to acetaldehyde, ' +
+      'OR in secondary alcohols CH₃CH(OH)R). Acetone gives a positive result; pentan-3-one ' +
+      '(CH₃CH₂COCH₂CH₃) does NOT — no CH₃CO group.',
+    targetedMisconceptions: [`${QUALORG}:MC1`, `${QUALORG}:MC2`],
+    source: `${QUALORG_SRC} — Tollens for aldehydes not all carbonyls; iodoform for CH3CO group not all ketones`,
+  },
+]
+const QUALORG_PROBES: SeedProbe[] = [
+  {
+    conceptId: QUALORG,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A compound gives a silver mirror with Tollens\' reagent but no brick-red precipitate with Fehling\'s solution. The compound is most likely:',
+    choices: [
+      { text: 'An aromatic aldehyde (such as benzaldehyde) — Tollens\' oxidises it, but Fehling\'s does not react with aromatic aldehydes', isCorrect: true },
+      { text: 'A ketone — Tollens\' reacts with all carbonyl compounds', isCorrect: false, misconceptionId: `${QUALORG}:MC1` },
+      { text: 'A primary alcohol being oxidised in situ by Tollens\' reagent', isCorrect: false },
+    ],
+    correctValue: 'Aromatic aldehyde (Tollens positive, Fehlings negative)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${QUALORG}:MC1`],
+    source: `${QUALORG_SRC} — Tollens vs Fehlings distinction for aromatic vs aliphatic aldehydes`,
+  },
+  {
+    conceptId: QUALORG,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which of these compounds gives a positive iodoform test (yellow CHI₃ precipitate)? (a) pentan-2-one (b) pentan-3-one (c) propan-2-ol',
+    choices: [
+      { text: '(a) pentan-2-one and (c) propan-2-ol — both contain the CH₃CO or CH₃CH(OH) motif; pentan-3-one lacks CH₃CO and is negative', isCorrect: true },
+      { text: 'All ketones and secondary alcohols give a positive iodoform test', isCorrect: false, misconceptionId: `${QUALORG}:MC2` },
+    ],
+    correctValue: 'pentan-2-one and propan-2-ol positive; pentan-3-one negative (no CH3CO group)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${QUALORG}:MC2`],
+    source: `${QUALORG_SRC} — iodoform test specificity to CH3CO group`,
+  },
+]
+
+// ─── chem.hal.cfcs ───────────────────────────────────────────────────────────
+const CFCS = 'chem.hal.cfcs'
+const CFCS_SRC = 'docs/chemistry/kg/graph.json — chem.hal.cfcs'
+const CFCS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CFCS,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Polyhalogen compounds: chloroform (CHCl₃, anaesthetic, now controlled), carbon ' +
+      'tetrachloride (CCl₄, once used as a fire extinguisher — banned because toxic and ' +
+      'ozone-depleting). CFCs (chlorofluorocarbons, e.g. CCl₂F₂ "Freon-12"): seemed ideal ' +
+      'refrigerants — non-toxic, non-flammable, chemically stable at ground level. The ' +
+      'stability IS the problem: CFCs drift into the stratosphere where UV breaks C–Cl bonds ' +
+      '(the C–F bond is too strong), releasing Cl• radicals. Cl• catalytically destroys ' +
+      'ozone: Cl• + O₃ → ClO• + O₂; ClO• + O → Cl• + O₂ (net: O₃ + O → 2O₂, ' +
+      'one Cl• destroys 100,000 ozone molecules). Banned under the Montreal Protocol (1987); ' +
+      'replaced by HFCs (no Cl, no ozone destruction — but are greenhouse gases) and HFOs.',
+    targetedMisconceptions: [],
+    source: `${CFCS_SRC} — CFCs: stability at ground level vs UV-driven stratospheric radical chain; Montreal Protocol`,
+  },
+  {
+    conceptId: CFCS,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "CFCs are dangerous because they are chemically reactive and toxic." ' +
+      'COMPLETELY BACKWARDS — CFCs were widely adopted precisely because they seemed ' +
+      'chemically inert and non-toxic at ground level, and for decades were considered safe. ' +
+      'The hazard comes from their STABILITY: they do not break down in the troposphere, ' +
+      'accumulate, reach the stratosphere, and are then photodegraded by high-energy UV ' +
+      '(which doesn\'t reach ground level). A reactive CFC would never pose an ozone problem — ' +
+      'it would decompose harmlessly near ground level. The lesson: "chemically stable" does ' +
+      'not mean "environmentally safe" when the compound persists long enough to reach a very ' +
+      'different environment (stratosphere) where it IS broken down harmfully.',
+    targetedMisconceptions: [`${CFCS}:MC1`],
+    source: `${CFCS_SRC} — CFCs harmful BECAUSE of stability, not reactivity; persistence + UV = stratospheric hazard`,
+  },
+]
+const CFCS_PROBES: SeedProbe[] = [
+  {
+    conceptId: CFCS,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In the stratosphere, one Cl• radical from a CFC molecule can destroy approximately 100,000 ozone molecules. Why is the destruction so extensive?',
+    choices: [
+      { text: 'The Cl• radical is regenerated in each catalytic cycle (ClO• + O → Cl• + O₂), so it destroys ozone repeatedly without being consumed', isCorrect: true },
+      { text: 'Each CFC releases 100,000 Cl• radicals on UV photolysis', isCorrect: false, misconceptionId: `${CFCS}:MC1` },
+      { text: 'Cl• reacts simultaneously with many ozone molecules in a chain-termination step', isCorrect: false },
+    ],
+    correctValue: 'Cl• is regenerated in each cycle — catalytic chain mechanism',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CFCS}:MC1`],
+    source: `${CFCS_SRC} — catalytic ozone destruction: Cl radical not consumed, regenerated each cycle`,
+  },
+  {
+    conceptId: CFCS,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why were CFCs originally considered "safe" when first introduced, and what property actually makes them dangerous?',
+    choices: [
+      { text: 'They were considered safe because they are stable and non-toxic at ground level; they are dangerous for the same reason — stability allows them to persist and reach the stratosphere where UV light breaks them down releasing Cl• radicals', isCorrect: true },
+      { text: 'They were never considered safe — their ozone-depleting properties were known from the beginning but ignored for economic reasons', isCorrect: false, misconceptionId: `${CFCS}:MC2` },
+    ],
+    correctValue: 'Ground-level stability = persistence = stratospheric hazard',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CFCS}:MC2`],
+    source: `${CFCS_SRC} — stability paradox: safe ground property = hazardous stratospheric persistence`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -14229,6 +14531,10 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...PROTEIN_EXPLANATIONS,
   ...LIPID_EXPLANATIONS,
   ...VITAMIN_EXPLANATIONS,
+  ...PBLOCK_EXPLANATIONS,
+  ...OXOSPEC_EXPLANATIONS,
+  ...QUALORG_EXPLANATIONS,
+  ...CFCS_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -14397,4 +14703,9 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...PROTEIN_PROBES,
   ...LIPID_PROBES,
   ...VITAMIN_PROBES,
+  ...PBLOCK_PROBES,
+  ...OXOSPEC_PROBES,
+  ...QUALORG_PROBES,
+  ...CFCS_PROBES,
 ]
+
