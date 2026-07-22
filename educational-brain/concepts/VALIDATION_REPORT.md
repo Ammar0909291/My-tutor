@@ -34,7 +34,7 @@ report).
 
 **✓ Every Educational Brain entry points to one existing KG concept.**
 Checked: every filename in `educational-brain/concepts/{subject}/`
-(94 files, re-checked this batch after 4 new `math.found.*` Wave 4
+(102 files, re-checked this batch after 8 new `math.found.*` Wave 5
 entries) against that subject's live KG id set. **0 orphans** — every
 EB file resolves to a real, current KG concept.
 
@@ -45,21 +45,20 @@ filesystem could technically hold `Foo.md` and `foo.md` as distinct
 files) — **0 duplicates**.
 
 **◐ Every Educational Brain entry references one Blueprint — partially,
-honestly reported.** 88 of 94 EB entries' concepts have a matching
-Blueprint FILE on disk. The other 6 (`math.found.definition`,
+honestly reported.** 95 of 102 EB entries' concepts have a matching
+Blueprint FILE on disk. The other 7 (`math.found.definition`,
 `inductive-reasoning`, `mathematical-modeling`, `mathematical-symbols`,
 `problem-solving-strategies` — Wave 2 — plus `reading-mathematics` —
-Wave 3) genuinely have no Blueprint yet — each states this explicitly in
-its own Blueprint References section per Quality Gate 2, rather than
-omitting the section. All 4 Wave 4 entries have existing Blueprints. 24
-of the 94 now have an explicit, machine-checkable "Blueprint References"
-section citing it by name (or citing its absence) — `eng.phonics.print-
-concepts` plus this program's 23 `math.found.*` entries, all authored
-under `EDUCATIONAL_BRAIN_STANDARD.md`. The remaining 70 predate that
-section (authored under the old `TEMPLATE.md`) and reference their
-Blueprints only informally or not at all in prose — the migration debt
-already recorded in `EDUCATIONAL_BRAIN_STANDARD.md` §6 and
-`QUALITY.md`.
+Wave 3 — plus `empty-set` — Wave 5) genuinely have no Blueprint yet —
+each states this explicitly in its own Blueprint References section per
+Quality Gate 2, rather than omitting the section. 32 of the 102 now
+have an explicit, machine-checkable "Blueprint References" section
+citing it by name (or citing its absence) — `eng.phonics.print-concepts`
+plus this program's 31 `math.found.*` entries, all authored under
+`EDUCATIONAL_BRAIN_STANDARD.md`. The remaining 70 predate that section
+(authored under the old `TEMPLATE.md`) and reference their Blueprints
+only informally or not at all in prose — the migration debt already
+recorded in `EDUCATIONAL_BRAIN_STANDARD.md` §6 and `QUALITY.md`.
 
 **✓ No duplicate Educational Brain files.** 0 found (see above).
 
@@ -69,8 +68,8 @@ already recorded in `EDUCATIONAL_BRAIN_STANDARD.md` §6 and
 claims to reference is verified to exist at
 `docs/curriculum/blueprints/{kg-id}.md` by direct file-existence test;
 every entry that instead states "no Blueprint exists" was independently
-verified to be correct (checked programmatically this batch for the 5
-new Blueprint-less concepts).
+verified to be correct (checked programmatically this batch for the 1
+new Blueprint-less concept, `empty-set`).
 
 **✓ No broken KG references.** 0 broken `requires`/`unlocks` edges across
 all 1,775 concepts in all 6 subjects (see the integrity table above).
@@ -97,30 +96,31 @@ blocker:**
 ## Domain Certification — math.found
 
 **Certification does NOT pass**, correctly: `math.found` has 82 total
-concepts, 23 authored across Wave 1 (5), Wave 2 (8), Wave 3 (6), and
-Wave 4 (4), 59 remaining. Domain Certification requires 100% of a
-domain's concepts authored — reported here as IN PROGRESS, not marked
-COMPLETE anywhere in `COVERAGE.md` or `ROADMAP.md`. All 23 authored
-concepts individually pass every per-entry check (structural 21-section
-conformance verified by heading scan and exact heading-order diff; 0
-orphans; 0 duplicates; Blueprint References section present and
+concepts, 31 authored across Wave 1 (5), Wave 2 (8), Wave 3 (6), Wave 4
+(4), and Wave 5 (8), 51 remaining. Domain Certification requires 100%
+of a domain's concepts authored — reported here as IN PROGRESS, not
+marked COMPLETE anywhere in `COVERAGE.md` or `ROADMAP.md`. All 31
+authored concepts individually pass every per-entry check (structural
+21-section conformance verified by heading scan and exact heading-order
+diff; 0 orphans; 0 duplicates; Blueprint References section present and
 accurate — either citing an existing Blueprint or stating none exists;
-no runtime-asset duplication — none of the 23 created any
-`AssetIdentity` records). **Two open KGCS review items, explicitly
+no runtime-asset duplication — none of the 31 created any
+`AssetIdentity` records). **Three open KGCS review items, explicitly
 carried forward, not resolved**: (1) `math.found.mathematical-notation`
 and `math.found.mathematical-symbols` remain flagged as a genuinely
 thin KG distinction (near-identical descriptions, identical single
 prerequisite, identical `bloom: remember`); (2) `math.found.set`'s
 Misconception Register substantially overlaps `math.found.set-theory`'s
-own (order/repetition, ∅-vs-{∅}), found this batch. No Canonical KG file
-has been modified for either; both stay open until `math.found` reaches
-82/82.
+own (order/repetition, ∅-vs-{∅}); (3) the same ∅-vs-{∅} confusion is now
+registered a THIRD time in `math.found.empty-set`'s own Misconceptions,
+found this batch. No Canonical KG file has been modified for any of the
+three; all stay open until `math.found` reaches 82/82.
 
 ## Full index and queue
 
 See `EDUCATIONAL_BRAIN_INDEX.md` (1,775 rows, one per KG concept, with
-Blueprint/EB/Status columns) and `AUTHORING_QUEUE.md` (1,681 rows — every
-`MISSING` concept, with `math.found`'s remaining 59 called out as the
+Blueprint/EB/Status columns) and `AUTHORING_QUEUE.md` (1,673 rows — every
+`MISSING` concept, with `math.found`'s remaining 51 called out as the
 mandatory next targets per the current Domain Certification Mode) for
 the complete, per-concept detail behind every count in this report.
 

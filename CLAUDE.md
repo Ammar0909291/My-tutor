@@ -1245,6 +1245,25 @@
   domain touched. Per explicit stop condition, Wave 5 was NOT started this batch. All six
   tracking files regenerated from source; re-validated 0 orphans, 0 duplicates, 0 broken KG
   references, 0 invalid Blueprint references across all 94 entries.
+- **Batch 8 — Domain Certification Mode, math.found Wave 5** (2026-07-22): authored the 8
+  concepts whose prerequisites became fully satisfied after Wave 4 (`cartesian-product`,
+  `empty-set`, `ordered-pair`, `predicate-logic`, `set-builder-notation`, `set-membership`,
+  `set-theory-axiomatic`, `truth-table`) — verified programmatically against the live KG,
+  matching the expected candidate list exactly. 7 of the 8 had existing Blueprints reused by
+  reference; 1 (`empty-set`) had none, stated explicitly, with 2 misconceptions authored directly
+  via the birth-taxonomy diagnostic procedure and a 3rd cited by reference from `set`/`set-theory`.
+  New genuine Curriculum Feedback finding: the ∅-vs-{∅} confusion is now registered in three
+  Educational Brain entries (`set-theory`, `set`, `empty-set`) — a structural consequence of ∅'s
+  relevance to all three nodes, recorded honestly, not fixed (no KG or Blueprint modified). The
+  open `mathematical-notation`/`mathematical-symbols` item from Wave 2 remains carried forward,
+  unresolved. All 8 entries verified against the Standard's exact 21-section heading order.
+  `math.found` 31/82 — still IN PROGRESS; Wave 6 candidates already computed
+  (`logical-equivalence`, `ordinal-number`, `quantifiers`, `relation`, `subset`). No other domain
+  touched. A concurrent commit (`52ed09e`, CS Explanation Memory asset seeding) landed on
+  `origin/main` mid-batch — verified zero file overlap, rebased cleanly, no KG file touched so no
+  further reconciliation needed. Per explicit stop condition, Wave 6 was NOT started this batch.
+  All six tracking files regenerated from source; re-validated 0 orphans, 0 duplicates, 0 broken
+  KG references, 0 invalid Blueprint references across all 102 entries.
 
 ## Run locally
 ```

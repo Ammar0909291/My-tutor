@@ -14,35 +14,36 @@ rather than hand-edit when entries change.
   `docs/curriculum/blueprints/{id}.md`. A ✓ here means the section
   EXISTS, not that its content has been re-verified against the
   Standard's narrower scope rules.
-- **Blueprint column, 88/94**: 6 concepts genuinely have no Blueprint yet
-  (`math.found.definition`, `inductive-reasoning`,
+- **Blueprint column, 95/102**: 7 concepts genuinely have no Blueprint
+  yet (`math.found.definition`, `inductive-reasoning`,
   `mathematical-modeling`, `mathematical-symbols`,
   `problem-solving-strategies` — Wave 2 — plus `reading-mathematics` —
-  Wave 3). Each states this explicitly in its own Blueprint References
-  section per Quality Gate 2, rather than silently omitting it. All 4
-  Wave 4 entries have existing Blueprints.
+  Wave 3 — plus `empty-set` — Wave 5). Each states this explicitly in
+  its own Blueprint References section per Quality Gate 2, rather than
+  silently omitting it.
 - **Cross-links**: a ✓ means the entry's Transfer/Cross-Subject section
   *discusses* cross-subject connections — including entries that
   honestly conclude "none via KG cross_links at this node."
 - **Version**: whether a "Version History" section is present. The 71
   pre-Standard entries correctly read ✗ (expected migration debt); all
-  23 entries authored under the current Standard (5 from Wave 1, 8 from
-  Wave 2, 6 from Wave 3, 4 from Wave 4 of math.found) correctly read ✓.
+  31 entries authored under the current Standard (5 from Wave 1, 8 from
+  Wave 2, 6 from Wave 3, 4 from Wave 4, 8 from Wave 5 of math.found)
+  correctly read ✓.
 
-## Aggregate summary (94 entries)
+## Aggregate summary (102 entries)
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 88 / 94 | 6 genuinely have none yet — see note above |
-| Educational Brain | 94 / 94 | trivially true (this is the entry list) |
-| Mental Model | 94 / 94 | |
-| Misconceptions | 94 / 94 | |
-| Analogies | 94 / 94 | |
-| Recovery Strategy | 94 / 94 | |
-| Assessment Signals | 94 / 94 | |
-| Tutor Actions | 94 / 94 | |
-| Cross-links | 67 / 94 | +4 from this batch |
-| Version History | 23 / 94 | +4 from this batch (Wave 4) |
+| Blueprint | 95 / 102 | 7 genuinely have none yet — see note above |
+| Educational Brain | 102 / 102 | trivially true (this is the entry list) |
+| Mental Model | 102 / 102 | |
+| Misconceptions | 102 / 102 | |
+| Analogies | 102 / 102 | |
+| Recovery Strategy | 102 / 102 | |
+| Assessment Signals | 102 / 102 | |
+| Tutor Actions | 102 / 102 | |
+| Cross-links | 75 / 102 | +8 from this batch |
+| Version History | 31 / 102 | +8 from this batch (Wave 5) |
 
 ## Per-concept ledger
 
@@ -52,8 +53,10 @@ rather than hand-edit when entries change.
 | `math.found.abstraction` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.axiom` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.axiomatic-system` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.cartesian-product` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.deductive-reasoning` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.definition` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.empty-set` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.generalization` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.inductive-reasoning` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.logic` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -63,14 +66,20 @@ rather than hand-edit when entries change.
 | `math.found.mathematical-notation` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.mathematical-symbols` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.mathematical-thinking` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.ordered-pair` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.pattern-recognition` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.predicate` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.predicate-logic` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.problem-solving-strategies` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.problem-solving` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.proposition` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.reading-mathematics` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.set` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.set-builder-notation` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.set-membership` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.set-theory` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.set-theory-axiomatic` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.truth-table` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.variable` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.em.biot-savart` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
 | `phys.em.coulombs-law` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
@@ -148,6 +157,6 @@ rather than hand-edit when entries change.
 No entry is blocked or defective. Version History will continue to rise
 entry by entry as new concepts are authored under the current Standard;
 the 71 pre-Standard entries' migration remains tracked future work, not
-a blocker. Blueprint coverage (88/94) will also rise as the Curriculum
-Production Pipeline authors Blueprints for the 6 currently-Blueprint-less
+a blocker. Blueprint coverage (95/102) will also rise as the Curriculum
+Production Pipeline authors Blueprints for the 7 currently-Blueprint-less
 math.found concepts — not something this program can accelerate.
