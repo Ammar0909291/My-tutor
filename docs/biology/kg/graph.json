@@ -1,8 +1,13 @@
 {
   "name": "Biology Knowledge Graph",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "status": "production",
-  "build_date": "2026-06-29",
+  "build_date": "2026-07-22",
+  "statistics": {
+    "total_concepts": 108,
+    "total_domains": 16,
+    "domains": ["bio.found", "bio.cell", "bio.mol", "bio.gen", "bio.evo", "bio.physio", "bio.plant", "bio.repro", "bio.dev", "bio.eco", "bio.micro", "bio.immuno", "bio.biotech", "bio.bioinfo", "bio.sys", "bio.div"]
+  },
   "concepts": [
     {
       "id": "bio.found.what-is-biology",
@@ -297,7 +302,7 @@
       "bloom": "analyze",
       "mastery_threshold": 0.75,
       "estimated_hours": 4,
-      "description": "Interphase (G1, S, G2) and M phase; checkpoints and cyclin-CDK regulation; significance of regulated progression for growth and genome stability."
+      "description": "Interphase (G1, S, G2) and M phase; checkpoints and cyclin-CDK regulation; significance of regulated progression for growth and genome stability; oncogene activation and tumour-suppressor loss as pathological consequences of checkpoint failure."
     },
     {
       "id": "bio.cell.mitosis",
@@ -402,7 +407,7 @@
       "bloom": "analyze",
       "mastery_threshold": 0.75,
       "estimated_hours": 4,
-      "description": "Amino acids and peptide bonds; primary, secondary, tertiary and quaternary structure; denaturation; structure-function relationship in enzymes and structural proteins."
+      "description": "Amino acids and peptide bonds; primary, secondary, tertiary and quaternary structure; denaturation; structure-function relationship in enzymes and structural proteins; ubiquitin-proteasome degradation as the cell's mechanism for clearing misfolded proteins."
     },
     {
       "id": "bio.mol.enzymes",
@@ -845,7 +850,8 @@
       "name": "Photosynthesis",
       "requires": [
         "bio.cell.chloroplast-structure",
-        "bio.mol.enzymes"
+        "bio.mol.enzymes",
+        "bio.mol.bioenergetics"
       ],
       "unlocks": [
         "bio.plant.plant-respiration"
@@ -864,7 +870,8 @@
       "name": "Respiration in Plants",
       "requires": [
         "bio.plant.photosynthesis",
-        "bio.cell.mitochondria-energy"
+        "bio.cell.mitochondria-energy",
+        "bio.mol.bioenergetics"
       ],
       "unlocks": [
         "bio.sys.metabolic-network-modelling"
@@ -1160,7 +1167,7 @@
       "bloom": "understand",
       "mastery_threshold": 0.7,
       "estimated_hours": 3,
-      "description": "Bacteria, archaea, fungi, protozoa and viruses; methods of classification and identification; ubiquity and ecological roles of microbes."
+      "description": "Bacteria, archaea, fungi, protozoa and viruses; methods of classification and identification; ubiquity and ecological roles of microbes; uncultured diversity (estimated >99% of species) and the microbiome as host-associated microbial communities."
     },
     {
       "id": "bio.micro.microbial-growth-culture",
@@ -1379,7 +1386,8 @@
       "name": "Computational Phylogenetics",
       "requires": [
         "bio.bioinfo.sequence-alignment",
-        "bio.evo.modern-synthesis-speciation"
+        "bio.evo.modern-synthesis-speciation",
+        "bio.div.cladistics-phylogenetic-thinking"
       ],
       "unlocks": [],
       "cross_links": [],
@@ -1469,6 +1477,327 @@
       "mastery_threshold": 0.8,
       "estimated_hours": 7,
       "description": "Engineering biological circuits from standardised parts; design-build-test cycle; applications in biosensing and biomanufacturing; biosafety considerations."
+    },
+    {
+      "id": "bio.div.three-domain-system",
+      "name": "Three Domain System",
+      "requires": [
+        "bio.found.five-kingdom"
+      ],
+      "unlocks": [
+        "bio.div.endosymbiotic-theory"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Woese's three-domain classification from 16S rRNA phylogeny; distinguishing features of Bacteria, Archaea and Eukarya; Archaea-Eukarya phylogenetic proximity; molecular evidence for the three-domain tree of life."
+    },
+    {
+      "id": "bio.div.endosymbiotic-theory",
+      "name": "Endosymbiotic Theory",
+      "requires": [
+        "bio.div.three-domain-system",
+        "bio.cell.mitochondria-energy",
+        "bio.cell.chloroplast-structure"
+      ],
+      "unlocks": [
+        "bio.div.protist-diversity"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Origin of mitochondria and chloroplasts from free-living bacteria; evidence: double membranes, 70S ribosomes, circular DNA, binary fission; primary and secondary endosymbiosis; genome reduction over evolutionary time; implications for the diversity and complexity of eukaryotic life."
+    },
+    {
+      "id": "bio.div.protist-diversity",
+      "name": "Eukaryotic Supergroups and Protist Diversity",
+      "requires": [
+        "bio.div.endosymbiotic-theory",
+        "bio.cell.eukaryotic-cell"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Major eukaryotic supergroups (SAR, Excavata, Amoebozoa, Archaeplastida); ecological significance of protists; endosymbiotic plastid origins in algal lineages; protists as ecological drivers and model organisms for cell biology."
+    },
+    {
+      "id": "bio.div.fungal-biology",
+      "name": "Fungal Biology",
+      "requires": [
+        "bio.found.five-kingdom"
+      ],
+      "unlocks": [],
+      "cross_links": [
+        "bio.eco.nutrient-cycling"
+      ],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Chitin cell walls; absorptive heterotrophy; hyphal growth and mycelium organisation; major fungal groups (Ascomycetes, Basidiomycetes, Zygomycetes, Chytridiomycetes); sexual and asexual reproduction; decomposer, pathogenic and mycorrhizal roles in ecosystems."
+    },
+    {
+      "id": "bio.div.plant-diversity-alternation-of-generations",
+      "name": "Plant Diversity and Alternation of Generations",
+      "requires": [
+        "bio.repro.sexual-reproduction-plants",
+        "bio.evo.evidence-for-evolution"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Sporophyte and gametophyte alternation as the universal plant life cycle; trends across bryophytes, lycophytes, ferns, gymnosperms and angiosperms; structural adaptations to terrestrial life; progressive gametophyte reduction as a macro-evolutionary trend in land plants."
+    },
+    {
+      "id": "bio.div.cladistics-phylogenetic-thinking",
+      "name": "Cladistics and Phylogenetic Thinking",
+      "requires": [
+        "bio.evo.evidence-for-evolution",
+        "bio.found.classification-need"
+      ],
+      "unlocks": [
+        "bio.bioinfo.phylogenetics-computational"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Synapomorphies as defining shared derived characters; monophyletic, paraphyletic and polyphyletic groups; parsimony and maximum likelihood as inference principles; reading phylogenetic trees (branch lengths, node support, outgroups); tree thinking as core quantitative literacy for all of biology."
+    },
+    {
+      "id": "bio.micro.viral-replication",
+      "name": "Viral Replication and Lifecycle",
+      "requires": [
+        "bio.found.viruses-viroids-lichens",
+        "bio.mol.dna-replication"
+      ],
+      "unlocks": [],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Lytic and lysogenic cycles in bacteriophage; Baltimore classification of viruses by genome type (seven classes); attachment, entry, replication, assembly and release; retroviruses and reverse transcriptase; RNA-dependent RNA polymerase in RNA viruses."
+    },
+    {
+      "id": "bio.micro.horizontal-gene-transfer",
+      "name": "Horizontal Gene Transfer",
+      "requires": [
+        "bio.micro.microbial-diversity",
+        "bio.mol.dna-replication"
+      ],
+      "unlocks": [],
+      "cross_links": [
+        "bio.gen.mutations",
+        "bio.evo.modern-synthesis-speciation"
+      ],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Transformation, transduction and conjugation as natural HGT mechanisms; HGT as the primary driver of prokaryotic genome evolution; antibiotic resistance spread as an applied consequence; the prokaryotic phylogeny as a reticulate network rather than a tree; evidence for ancient HGT events in eukaryotes."
+    },
+    {
+      "id": "bio.cell.apoptosis",
+      "name": "Apoptosis and Programmed Cell Death",
+      "requires": [
+        "bio.cell.cell-cycle",
+        "bio.mol.gene-regulation"
+      ],
+      "unlocks": [],
+      "cross_links": [
+        "bio.dev.morphogenesis-differentiation",
+        "bio.immuno.innate-adaptive-immunity"
+      ],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Intrinsic pathway (cytochrome c release, Bcl-2 family, apoptosome formation, caspase cascade); extrinsic pathway (death receptors, FADD, initiator caspases); executioner caspase activation and hallmark morphological changes; physiological roles in embryonic development, immune selection and homeostatic tissue turnover."
+    },
+    {
+      "id": "bio.mol.epigenetics",
+      "name": "Epigenetics and Chromatin Regulation",
+      "requires": [
+        "bio.mol.gene-regulation",
+        "bio.cell.nucleus-chromosomes"
+      ],
+      "unlocks": [],
+      "cross_links": [
+        "bio.dev.morphogenesis-differentiation"
+      ],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "DNA methylation and CpG island silencing; histone code hypothesis (acetylation, methylation, phosphorylation); chromatin remodelling complexes; heterochromatin versus euchromatin domains; genomic imprinting; X-chromosome inactivation (Barr body); evidence for transgenerational epigenetic inheritance."
+    },
+    {
+      "id": "bio.mol.noncoding-rna",
+      "name": "Non-coding RNA Biology",
+      "requires": [
+        "bio.mol.transcription",
+        "bio.mol.gene-regulation"
+      ],
+      "unlocks": [],
+      "cross_links": [
+        "bio.mol.epigenetics"
+      ],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "siRNA and RISC-mediated RNA interference; miRNA biogenesis (Drosha, Dicer) and post-transcriptional repression; lncRNA roles in chromatin regulation and transcriptional control; piRNA and transposon silencing in the germline; ribozymes as catalytic RNA molecules."
+    },
+    {
+      "id": "bio.mol.signal-transduction-pathways",
+      "name": "Core Signal Transduction Pathways",
+      "requires": [
+        "bio.cell.cell-signalling",
+        "bio.mol.proteins-structure"
+      ],
+      "unlocks": [],
+      "cross_links": [
+        "bio.dev.morphogenesis-differentiation",
+        "bio.cell.cell-cycle"
+      ],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "MAPK/ERK cascade (RTK to Ras to Raf to MEK to ERK); Wnt/beta-catenin pathway (frizzled, Dishevelled, beta-catenin stabilisation, TCF/LEF transcription); Notch signalling (membrane-bound ligand, gamma-secretase cleavage, NICD nuclear translocation); JAK-STAT pathway; cross-pathway interactions and mechanisms of signalling specificity."
+    },
+    {
+      "id": "bio.mol.dna-damage-repair",
+      "name": "DNA Damage Response and Repair",
+      "requires": [
+        "bio.mol.dna-replication",
+        "bio.gen.mutations"
+      ],
+      "unlocks": [],
+      "cross_links": [
+        "bio.cell.cell-cycle"
+      ],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Damage types (oxidative lesions, UV-induced pyrimidine dimers, single- and double-strand breaks); Base Excision Repair (glycosylase, AP endonuclease); Nucleotide Excision Repair (recognition, dual incision, gap-fill); Mismatch Repair (strand discrimination, nick-directed excision); Homologous Recombination versus NHEJ for DSBs; ATM/ATR checkpoint kinase activation."
+    },
+    {
+      "id": "bio.mol.bioenergetics",
+      "name": "Bioenergetics and Thermodynamics of Life",
+      "requires": [
+        "bio.mol.biomolecule-types"
+      ],
+      "unlocks": [
+        "bio.plant.photosynthesis",
+        "bio.plant.plant-respiration"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Gibbs free energy (delta G) and spontaneity; exergonic versus endergonic reactions and metabolic directionality; ATP as the universal energy currency; coupled reactions and energetic rationale; NAD+/NADH and FAD/FADH2 as electron carriers; chemiosmotic principle as the unifying theme of energy transduction."
+    },
+    {
+      "id": "bio.gen.transposable-elements",
+      "name": "Transposable Elements and Genome Organisation",
+      "requires": [
+        "bio.mol.nucleic-acid-structure",
+        "bio.gen.mutations"
+      ],
+      "unlocks": [],
+      "cross_links": [
+        "bio.evo.modern-synthesis-speciation",
+        "bio.mol.gene-regulation"
+      ],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "DNA transposons (cut-and-paste via transposase); retrotransposons (copy-and-paste via RNA intermediate); LINEs, SINEs and LTR retrotransposons; transposable elements as approximately 50% of the human genome; the C-value paradox; genome organisation (coding, non-coding, repetitive elements, gene families, pseudogenes)."
+    },
+    {
+      "id": "bio.evo.molecular-evolution",
+      "name": "Molecular Evolution and Neutral Theory",
+      "requires": [
+        "bio.gen.population-genetics",
+        "bio.bioinfo.sequence-alignment"
+      ],
+      "unlocks": [],
+      "cross_links": [
+        "bio.bioinfo.phylogenetics-computational"
+      ],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Kimura's neutral theory and nearly-neutral theory; synonymous versus nonsynonymous substitutions; dN/dS ratio as a statistical test for natural selection; molecular clock hypothesis and its limitations; selective sweeps and their genomic signatures; purifying selection versus positive selection at the sequence level."
+    },
+    {
+      "id": "bio.evo.evo-devo",
+      "name": "Evolutionary Developmental Biology",
+      "requires": [
+        "bio.dev.morphogenesis-differentiation",
+        "bio.evo.natural-selection",
+        "bio.mol.gene-regulation"
+      ],
+      "unlocks": [],
+      "cross_links": [
+        "bio.evo.modern-synthesis-speciation"
+      ],
+      "difficulty": "expert",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "Hox genes as master regulators of body plan axis specification; genetic toolkit (conserved regulatory genes: Pax6, Distal-less, Tinman); deep homology across phyla; modularity and developmental constraints; heterochrony and heterotopy as mechanisms generating morphological variation across evolutionary time."
+    },
+    {
+      "id": "bio.eco.community-ecology",
+      "name": "Community Ecology",
+      "requires": [
+        "bio.eco.population-ecology",
+        "bio.eco.ecosystem-structure-function"
+      ],
+      "unlocks": [],
+      "cross_links": [
+        "bio.eco.biodiversity-conservation"
+      ],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Competitive exclusion principle (Gause's law) and coexistence mechanisms; character displacement and niche partitioning; keystone species and trophic cascades; intermediate disturbance hypothesis; succession (facilitation, tolerance, inhibition models); island biogeography theory; species diversity indices (Shannon, Simpson)."
+    },
+    {
+      "id": "bio.immuno.mhc-antigen-presentation",
+      "name": "MHC and Antigen Presentation",
+      "requires": [
+        "bio.immuno.innate-adaptive-immunity",
+        "bio.mol.proteins-structure"
+      ],
+      "unlocks": [],
+      "cross_links": [
+        "bio.mol.translation-genetic-code"
+      ],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "MHC class I (all nucleated cells, endogenous peptides, CD8+ cytotoxic T cell activation); MHC class II (APCs, exogenous peptides, CD4+ helper T cell activation); antigen processing pathways (proteasome, TAP, lysosomal); peptide-MHC complex and TCR recognition geometry; self-tolerance via thymic positive and negative selection; MHC restriction; allograft rejection mechanism."
     }
   ]
 }
