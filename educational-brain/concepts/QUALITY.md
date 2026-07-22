@@ -14,34 +14,34 @@ rather than hand-edit when entries change.
   `docs/curriculum/blueprints/{id}.md`. A ✓ here means the section
   EXISTS, not that its content has been re-verified against the
   Standard's narrower scope rules.
-- **Blueprint column, 79/84**: 5 concepts genuinely have no Blueprint yet
+- **Blueprint column, 84/90**: 6 concepts genuinely have no Blueprint yet
   (`math.found.definition`, `inductive-reasoning`,
   `mathematical-modeling`, `mathematical-symbols`,
-  `problem-solving-strategies` — all Wave 2 of the math.found domain
-  batch). Each states this explicitly in its own Blueprint References
+  `problem-solving-strategies` — Wave 2 — plus `reading-mathematics` —
+  Wave 3). Each states this explicitly in its own Blueprint References
   section per Quality Gate 2, rather than silently omitting it.
 - **Cross-links**: a ✓ means the entry's Transfer/Cross-Subject section
   *discusses* cross-subject connections — including entries that
   honestly conclude "none via KG cross_links at this node."
 - **Version**: whether a "Version History" section is present. The 71
   pre-Standard entries correctly read ✗ (expected migration debt); all
-  13 entries authored under the current Standard (5 from Wave 1, 8 from
-  Wave 2 of math.found) correctly read ✓.
+  19 entries authored under the current Standard (5 from Wave 1, 8 from
+  Wave 2, 6 from Wave 3 of math.found) correctly read ✓.
 
-## Aggregate summary (84 entries)
+## Aggregate summary (90 entries)
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 79 / 84 | 5 genuinely have none yet — see note above |
-| Educational Brain | 84 / 84 | trivially true (this is the entry list) |
-| Mental Model | 84 / 84 | |
-| Misconceptions | 84 / 84 | |
-| Analogies | 84 / 84 | |
-| Recovery Strategy | 84 / 84 | |
-| Assessment Signals | 84 / 84 | |
-| Tutor Actions | 84 / 84 | |
-| Cross-links | 57 / 84 | +8 from this batch |
-| Version History | 13 / 84 | +8 from this batch (5 Wave 1 + 8 Wave 2) |
+| Blueprint | 84 / 90 | 6 genuinely have none yet — see note above |
+| Educational Brain | 90 / 90 | trivially true (this is the entry list) |
+| Mental Model | 90 / 90 | |
+| Misconceptions | 90 / 90 | |
+| Analogies | 90 / 90 | |
+| Recovery Strategy | 90 / 90 | |
+| Assessment Signals | 90 / 90 | |
+| Tutor Actions | 90 / 90 | |
+| Cross-links | 63 / 90 | +6 from this batch |
+| Version History | 19 / 90 | +6 from this batch (Wave 3) |
 
 ## Per-concept ledger
 
@@ -49,6 +49,8 @@ rather than hand-edit when entries change.
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | `math.arith.fractions` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `math.found.abstraction` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.axiom` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.deductive-reasoning` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.definition` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.generalization` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.inductive-reasoning` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -61,6 +63,10 @@ rather than hand-edit when entries change.
 | `math.found.pattern-recognition` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.problem-solving-strategies` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.problem-solving` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.proposition` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.reading-mathematics` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.set-theory` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.variable` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.em.biot-savart` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
 | `phys.em.coulombs-law` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.em.electric-charge` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
@@ -137,6 +143,6 @@ rather than hand-edit when entries change.
 No entry is blocked or defective. Version History will continue to rise
 entry by entry as new concepts are authored under the current Standard;
 the 71 pre-Standard entries' migration remains tracked future work, not
-a blocker. Blueprint coverage (79/84) will also rise as the Curriculum
-Production Pipeline authors Blueprints for the 5 currently-Blueprint-less
+a blocker. Blueprint coverage (84/90) will also rise as the Curriculum
+Production Pipeline authors Blueprints for the 6 currently-Blueprint-less
 math.found concepts — not something this program can accelerate.

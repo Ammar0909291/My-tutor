@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 14 | `math.arith.fractions` + 13 `math.found.*` entries (Waves 1-2) — math.found domain IN PROGRESS (13/82), see Delivery history |
+| mathematics | 908 | 20 | `math.arith.fractions` + 19 `math.found.*` entries (Waves 1-3) — math.found domain IN PROGRESS (19/82), see Delivery history |
 | physics | 238 | 67 | `phys.meas.*` (8), `phys.mech.displacement`, `phys.mech.velocity`, `phys.mech.acceleration`, `phys.mech.kinematics-1d`, `phys.mech.newtons-first-law`, `phys.mech.force`, `phys.mech.kinematics-2d`, `phys.mech.projectile-motion`, `phys.therm.temperature`, `phys.wave.wave-properties`, `phys.em.electric-charge`, `phys.therm.zeroth-law`, `phys.therm.thermal-expansion`, `phys.therm.heat-transfer`, `phys.wave.transverse-waves`, `phys.wave.longitudinal-waves`, `phys.wave.sound-waves`, `phys.opt.nature-of-light`, `phys.em.coulombs-law`, `phys.em.electric-current`, `phys.therm.ideal-gas-law`, `phys.therm.specific-heat`, `phys.wave.wave-speed`, `phys.em.electric-field`, `phys.em.magnetic-field`, `phys.opt.reflection`, `phys.opt.refraction`, `phys.opt.wave-optics`, `phys.wave.doppler-effect`, `phys.wave.sound-intensity`, `phys.em.electric-dipole`, `phys.em.gauss-law`, `phys.em.magnetic-flux`, `phys.em.magnetic-force`, `phys.em.magnetic-materials`, `phys.therm.kinetic-theory`, `phys.therm.calorimetry`, `phys.wave.superposition`, `phys.opt.mirrors`, `phys.opt.total-internal-reflection`, `phys.opt.lenses`, `phys.opt.dispersion`, `phys.opt.polarization`, `phys.mech.newtons-second-law`, `phys.therm.internal-energy`, `phys.therm.phase-transitions`, `phys.wave.interference`, `phys.opt.lens-power`, `phys.opt.brewsters-law`, `phys.em.electric-potential`, `phys.em.biot-savart`, `phys.em.magnetic-dipole`, `phys.em.faradays-law`, `phys.mech.relative-motion`, `phys.mech.circular-motion`, `phys.mech.newtons-third-law`, `phys.mech.free-body-diagram`, `phys.mech.work`, `phys.mech.momentum` — KG concept count corrected 194→238 (2026-07-22): reflects the Particle Physics domain + Semiconductor Physics additions authored that day; no new physics entries added this batch |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 0 | — |
@@ -207,4 +207,32 @@ retrieval engine. Per-entry completeness against the tracked fields is in
   is 13/82 — still genuinely IN PROGRESS; 69 concepts remain. No other
   domain or subject was started. All five tracking files regenerated
   from source; re-validated 0 orphans, 0 duplicates across all 84
+  entries.
+- **Curriculum Completion Program, batch 6 — Domain Certification Mode,
+  math.found Wave 3** (2026-07-22): authored the 6 concepts whose
+  prerequisites became fully satisfied after Wave 2 — `axiom`,
+  `deductive-reasoning`, `proposition`, `reading-mathematics`,
+  `set-theory`, `variable` (determined programmatically from the live
+  KG + EB directory against the live KG's `requires` edges; matched the
+  Domain Certification Mode prompt's own expected candidate list
+  exactly). Of these, 5 (`axiom`, `deductive-reasoning`, `proposition`,
+  `set-theory`, `variable`) had existing Blueprints reused by
+  reference — each entry cites the Blueprint's Misconception Registry
+  by MC number with birth-type classification added, never restating
+  worked examples or mastery probes; 1 (`reading-mathematics`) had none,
+  stated explicitly in its Blueprint References section per Quality
+  Gate 2, with 3 misconceptions authored directly via the birth-taxonomy
+  diagnostic procedure. The open `mathematical-notation`/`mathematical-
+  symbols` Curriculum Feedback item from Wave 2 is explicitly carried
+  forward, unresolved, per this batch's own SPECIAL REVIEW instruction —
+  not modified, not merged, still an open KGCS review item until
+  math.found reaches 82/82. All 6 entries verified against
+  `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and
+  heading order (`grep "^## "` diffed against the canonical order for
+  every file). `math.found` is 19/82 — still genuinely IN PROGRESS; 63
+  concepts remain (Wave 4 candidates already computed:
+  `axiomatic-system`, `logical-connectives`, `predicate`, `set`). No
+  other domain or subject was started. All six tracking files
+  regenerated from source; re-validated 0 orphans, 0 duplicates, 0
+  broken KG references, 0 invalid Blueprint references across all 90
   entries.

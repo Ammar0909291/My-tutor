@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 14 READY)
+## mathematics (908 concepts, 20 READY)
 
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
@@ -402,7 +402,7 @@ its subject KG.
 | fnal | `math.fnal.spectral-theory` | Spectral Theory | Yes | No | — | MISSING |
 | fnal | `math.fnal.uniform-boundedness` | Uniform Boundedness Principle | No | No | — | MISSING |
 | found | `math.found.abstraction` | Abstraction | Yes | Yes | `educational-brain/concepts/mathematics/math.found.abstraction.md` | READY |
-| found | `math.found.axiom` | Axiom | Yes | No | — | MISSING |
+| found | `math.found.axiom` | Axiom | Yes | Yes | `educational-brain/concepts/mathematics/math.found.axiom.md` | READY |
 | found | `math.found.axiomatic-system` | Axiomatic System | Yes | No | — | MISSING |
 | found | `math.found.cardinal-arithmetic` | Cardinal Arithmetic | Yes | No | — | MISSING |
 | found | `math.found.cardinality` | Cardinality | Yes | No | — | MISSING |
@@ -412,7 +412,7 @@ its subject KG.
 | found | `math.found.conjecture` | Conjecture | No | No | — | MISSING |
 | found | `math.found.corollary` | Corollary | No | No | — | MISSING |
 | found | `math.found.countable-set` | Countable Set | No | No | — | MISSING |
-| found | `math.found.deductive-reasoning` | Deductive Reasoning | Yes | No | — | MISSING |
+| found | `math.found.deductive-reasoning` | Deductive Reasoning | Yes | Yes | `educational-brain/concepts/mathematics/math.found.deductive-reasoning.md` | READY |
 | found | `math.found.definition` | Mathematical Definition | No | Yes | `educational-brain/concepts/mathematics/math.found.definition.md` | READY |
 | found | `math.found.direct-proof` | Direct Proof | No | No | — | MISSING |
 | found | `math.found.empty-set` | Empty Set | No | No | — | MISSING |
@@ -453,10 +453,10 @@ its subject KG.
 | found | `math.found.proof-by-contrapositive` | Proof by Contrapositive | No | No | — | MISSING |
 | found | `math.found.proof-by-induction` | Mathematical Induction | Yes | No | — | MISSING |
 | found | `math.found.proper-subset` | Proper Subset | No | No | — | MISSING |
-| found | `math.found.proposition` | Proposition | Yes | No | — | MISSING |
+| found | `math.found.proposition` | Proposition | Yes | Yes | `educational-brain/concepts/mathematics/math.found.proposition.md` | READY |
 | found | `math.found.quantifiers` | Quantifiers | Yes | No | — | MISSING |
 | found | `math.found.rational-numbers` | Rational Numbers | Yes | No | — | MISSING |
-| found | `math.found.reading-mathematics` | Reading Mathematics | No | No | — | MISSING |
+| found | `math.found.reading-mathematics` | Reading Mathematics | No | Yes | `educational-brain/concepts/mathematics/math.found.reading-mathematics.md` | READY |
 | found | `math.found.real-numbers` | Real Numbers | Yes | No | — | MISSING |
 | found | `math.found.reflexive-relation` | Reflexive Relation | Yes | No | — | MISSING |
 | found | `math.found.relation` | Relation | Yes | No | — | MISSING |
@@ -467,7 +467,7 @@ its subject KG.
 | found | `math.found.set-equality` | Set Equality | No | No | — | MISSING |
 | found | `math.found.set-membership` | Set Membership | Yes | No | — | MISSING |
 | found | `math.found.set-operations` | Set Operations | Yes | No | — | MISSING |
-| found | `math.found.set-theory` | Set Theory | Yes | No | — | MISSING |
+| found | `math.found.set-theory` | Set Theory | Yes | Yes | `educational-brain/concepts/mathematics/math.found.set-theory.md` | READY |
 | found | `math.found.set-theory-axiomatic` | Axiomatic Set Theory | Yes | No | — | MISSING |
 | found | `math.found.strong-induction` | Strong Induction | No | No | — | MISSING |
 | found | `math.found.subset` | Subset | Yes | No | — | MISSING |
@@ -479,7 +479,7 @@ its subject KG.
 | found | `math.found.uncountable-set` | Uncountable Set | No | No | — | MISSING |
 | found | `math.found.union` | Union | No | No | — | MISSING |
 | found | `math.found.uniqueness-proof` | Uniqueness Proof | No | No | — | MISSING |
-| found | `math.found.variable` | Variable | Yes | No | — | MISSING |
+| found | `math.found.variable` | Variable | Yes | Yes | `educational-brain/concepts/mathematics/math.found.variable.md` | READY |
 | found | `math.found.venn-diagram` | Venn Diagram | No | No | — | MISSING |
 | found | `math.found.well-ordering-principle` | Well-Ordering Principle | Yes | No | — | MISSING |
 | found | `math.found.writing-mathematics` | Writing Mathematics | No | No | — | MISSING |
@@ -1803,7 +1803,7 @@ its subject KG.
 
 ## Orphan Educational Brain files
 
-None found. Every one of the 71 existing Educational Brain files
+None found. Every one of the 90 existing Educational Brain files
 resolves to a live KG concept id in its subject's graph.json.
 
 ## Duplicate Educational Brain files

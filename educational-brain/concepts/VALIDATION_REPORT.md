@@ -30,9 +30,9 @@ Zero failures, zero warnings, 100% reachability, all six — this is the
 
 **✓ Every Educational Brain entry points to one existing KG concept.**
 Checked: every filename in `educational-brain/concepts/{subject}/`
-(84 files, re-checked this batch after 8 new `math.found.*` entries)
-against that subject's live KG id set. **0 orphans** — every EB file
-resolves to a real, current KG concept.
+(90 files, re-checked this batch after 6 new `math.found.*` Wave 3
+entries) against that subject's live KG id set. **0 orphans** — every
+EB file resolves to a real, current KG concept.
 
 **✓ Every KG concept has at most one Educational Brain entry.**
 Structurally guaranteed by the 1:1 `{kg-id}.md` filename convention;
@@ -41,16 +41,15 @@ filesystem could technically hold `Foo.md` and `foo.md` as distinct
 files) — **0 duplicates**.
 
 **◐ Every Educational Brain entry references one Blueprint — partially,
-honestly reported, and for the first time genuinely incomplete on
-Blueprint EXISTENCE, not just citation.** 79 of 84 EB entries' concepts
-have a matching Blueprint FILE on disk. The other 5
-(`math.found.definition`, `inductive-reasoning`, `mathematical-modeling`,
-`mathematical-symbols`, `problem-solving-strategies`, all authored this
-batch) genuinely have no Blueprint yet — each states this explicitly in
+honestly reported.** 84 of 90 EB entries' concepts have a matching
+Blueprint FILE on disk. The other 6 (`math.found.definition`,
+`inductive-reasoning`, `mathematical-modeling`, `mathematical-symbols`,
+`problem-solving-strategies` — Wave 2 — plus `reading-mathematics` —
+Wave 3) genuinely have no Blueprint yet — each states this explicitly in
 its own Blueprint References section per Quality Gate 2, rather than
-omitting the section. 14 of the 84 now have an explicit, machine-
+omitting the section. 20 of the 90 now have an explicit, machine-
 checkable "Blueprint References" section citing it by name (or citing
-its absence) — `eng.phonics.print-concepts` plus this program's 13
+its absence) — `eng.phonics.print-concepts` plus this program's 19
 `math.found.*` entries, all authored under
 `EDUCATIONAL_BRAIN_STANDARD.md`. The remaining 70 predate that section
 (authored under the old `TEMPLATE.md`) and reference their Blueprints
@@ -93,21 +92,27 @@ blocker:**
 ## Domain Certification — math.found
 
 **Certification does NOT pass**, correctly: `math.found` has 82 total
-concepts, 13 authored across Wave 1 (5) and Wave 2 (8), 69 remaining.
-Domain Certification requires 100% of a domain's concepts authored —
-reported here as IN PROGRESS, not marked COMPLETE anywhere in
-`COVERAGE.md` or `ROADMAP.md`. All 13 authored concepts individually
+concepts, 19 authored across Wave 1 (5), Wave 2 (8), and Wave 3 (6),
+63 remaining. Domain Certification requires 100% of a domain's concepts
+authored — reported here as IN PROGRESS, not marked COMPLETE anywhere in
+`COVERAGE.md` or `ROADMAP.md`. All 19 authored concepts individually
 pass every per-entry check (structural 21-section conformance verified
-by heading scan; 0 orphans; 0 duplicates; Blueprint References section
-present and accurate — either citing an existing Blueprint or stating
-none exists; no runtime-asset duplication — none of the 13 created any
-`AssetIdentity` records).
+by heading scan and exact heading-order diff; 0 orphans; 0 duplicates;
+Blueprint References section present and accurate — either citing an
+existing Blueprint or stating none exists; no runtime-asset
+duplication — none of the 19 created any `AssetIdentity` records).
+**Open KGCS review item, explicitly carried forward per this batch's own
+instruction, not resolved**: `math.found.mathematical-notation` and
+`math.found.mathematical-symbols` remain flagged as a genuinely thin
+KG distinction (near-identical descriptions, identical single
+prerequisite, identical `bloom: remember`) — no Canonical KG file has
+been modified; this stays open until `math.found` reaches 82/82.
 
 ## Full index and queue
 
 See `EDUCATIONAL_BRAIN_INDEX.md` (1,756 rows, one per KG concept, with
-Blueprint/EB/Status columns) and `AUTHORING_QUEUE.md` (1,672 rows — every
-`MISSING` concept, with `math.found`'s remaining 69 called out as the
+Blueprint/EB/Status columns) and `AUTHORING_QUEUE.md` (1,666 rows — every
+`MISSING` concept, with `math.found`'s remaining 63 called out as the
 mandatory next targets per the current Domain Certification Mode) for
 the complete, per-concept detail behind every count in this report.
 

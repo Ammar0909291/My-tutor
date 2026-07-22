@@ -1194,6 +1194,40 @@
   Feedback, not fixed (no Canonical KG file was modified this batch). Verdict: no blocking defect;
   production workflow declared FROZEN. Full detail in `COVERAGE.md`'s Delivery history and
   `educational-brain/concepts/VALIDATION_REPORT.md`.
+- **Batch 4 — Domain Certification Mode, math.found Wave 1** (2026-07-22): switched to a
+  one-domain-at-a-time discipline (Domain Certification Mode) rather than cross-subject
+  cherry-picking. Authored 5 concepts in strict topological order — root `math.found.
+  mathematical-thinking` (level 0) and its 4 direct children (`abstraction`,
+  `pattern-recognition`, `problem-solving`, `mathematical-language`), all 5 grounded in
+  existing Blueprints reused by reference. All 5 conform exactly to
+  `EDUCATIONAL_BRAIN_STANDARD.md`'s 21-section structure. `math.found` 5/82 — IN PROGRESS,
+  not certified. No other domain touched.
+- **Batch 5 — Domain Certification Mode, math.found Wave 2** (2026-07-22): authored the 8
+  concepts whose prerequisites became fully satisfied after Wave 1 (`definition`,
+  `generalization`, `inductive-reasoning`, `logic`, `mathematical-modeling`,
+  `mathematical-notation`, `mathematical-symbols`, `problem-solving-strategies`) — determined
+  programmatically from the live KG, not manually chosen. 3 had existing Blueprints reused by
+  reference; 5 had none, stated explicitly, with misconceptions authored directly via the
+  birth-taxonomy diagnostic procedure. One genuine Curriculum Feedback finding: `mathematical-
+  notation` and `mathematical-symbols` have unusually close KG descriptions, identical
+  prerequisites, identical Bloom level — recorded honestly, not fixed (no KG file modified).
+  `math.found` 13/82 — IN PROGRESS. No other domain touched.
+- **Batch 6 — Domain Certification Mode, math.found Wave 3** (2026-07-22): authored the 6
+  concepts whose prerequisites became fully satisfied after Wave 2 (`axiom`, `deductive-
+  reasoning`, `proposition`, `reading-mathematics`, `set-theory`, `variable`) — verified
+  programmatically against the live KG, matching the expected candidate list exactly. 5 had
+  existing Blueprints reused by reference (Misconception Registries cited by MC number with
+  birth-type classification added, never restating worked examples/mastery probes); 1
+  (`reading-mathematics`) had none, stated explicitly, with 3 misconceptions authored directly
+  via the birth-taxonomy diagnostic procedure. The open `mathematical-notation`/`mathematical-
+  symbols` Curriculum Feedback item is explicitly carried forward, unresolved, as a standing
+  KGCS review item until the domain reaches 82/82. All 6 entries verified against the
+  Standard's exact 21-section heading order. `math.found` 19/82 — still IN PROGRESS; Wave 4
+  candidates already computed (`axiomatic-system`, `logical-connectives`, `predicate`, `set`).
+  No other domain touched. All six tracking files (`EDUCATIONAL_BRAIN_INDEX.md`,
+  `AUTHORING_QUEUE.md`, `ROADMAP.md`, `QUALITY.md`, `COVERAGE.md`, `VALIDATION_REPORT.md`)
+  regenerated from source; re-validated 0 orphans, 0 duplicates, 0 broken KG references, 0
+  invalid Blueprint references across all 90 entries.
 
 ## Run locally
 ```
