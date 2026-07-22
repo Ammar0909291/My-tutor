@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.particle.gauge-bosons-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.particle.gauge-bosons",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8e28cb1fcc7e23f494489b609bdc165c96523393c42bfb4975fdb2bbd555b25b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.particle.gauge-bosons.md": "sha256:da4544a57abb0ad77ed8d9452fc861221fdd1fff7623f6cb54838a90e36a4143"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.particle.gauge-bosons",
+    "name": "Gauge Bosons and Force Carriers",
+    "difficultyRaw": "Proficient",
+    "bloom": "Understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.particle.four-forces",
+      "phys.mod.photons"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.particle.gauge-bosons-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.particle.gauge-bosons (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.particle.gauge-bosons.md": "sha256:da4544a57abb0ad77ed8d9452fc861221fdd1fff7623f6cb54838a90e36a4143"
+      },
+      "contentHash": "sha256:aff86cb284da75dbd1e6d75747c36a37cb1d8f42d94d1347ec253cead9991a7a",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.particle.gauge-bosons.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.gauge-bosons.md#TA-1 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.gauge-bosons"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.gauge-bosons\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.gauge-bosons.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.gauge-bosons.md#TA-2 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.gauge-bosons"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.gauge-bosons\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.gauge-bosons.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.gauge-bosons.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.gauge-bosons"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.gauge-bosons\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.gauge-bosons.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.gauge-bosons.md#TA-4 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.gauge-bosons"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.gauge-bosons\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.particle.gauge-bosons/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.particle.gauge-bosons",
+      "title": "Gauge Bosons and Force Carriers — core explanation",
+      "content": "**One-sentence definition:** Each of the four fundamental forces (except, in the Standard Model's current formulation, gravity) is mediated by the exchange of a specific carrier particle: the photon for electromagnetism, gluons for the strong force, and the W and Z bosons for the weak force.\n\n**The core insight:** Forces in modern particle physics are not \"action at a distance\" in the way Newton originally conceived gravity — every interaction is understood as an exchange of a specific particle between the interacting bodies. Two electrons repel each other by exchanging virtual photons; quarks bind together by exchanging gluons; particles change flavor via the weak force by exchanging W or Z bosons. Learning which particle carries which force is the single organizing fact that ties the four-force scorecard (phys.particle.four-forces) to every specific interaction studied afterward.\n\n**Conceptual chain:**\n1. Quantum field theory describes forces as arising from the exchange of \"gauge bosons\" — particles associated with each fundamental force's underlying symmetry.\n2. Electromagnetism: mediated by the photon, which is massless and chargeless, giving electromagnetism its infinite range.\n3. Strong force: mediated by gluons, which — unlike the photon — carry color charge themselves, allowing gluons to interact with each other (a key difference explored fully in phys.particle.strong-interaction).\n4. Weak force: mediated by the W⁺, W⁻, and Z⁰ bosons, which are extremely massive (about 80–91 times the proton's mass) — this large mass is directly responsible for the weak force's extremely short range, via the general quantum-mechanical rule that heavier mediating particles correspond to shorter-range forces.\n5. Gravity has no confirmed mediating particle in the currently verified Standard Model; a hypothetical \"graviton\" is proposed by many theories but has never been observed, and a full quantum theory of gravity remains unsolved.\n6. The masses of the W, Z bosons (and of every other massive fundamental particle) are explained by the Higgs mechanism (phys.particle.higgs-mechanism), a direct successor concept.\n\n**Central relations:**\n- Photon (γ): mediates electromagnetism; massless; infinite range; carries no electric charge itself.\n- Gluon (g): mediates the strong force; massless; but confined to short range due to color-charge self-interaction and confinement; carries color charge.\n- W⁺, W⁻, Z⁰ bosons: mediate the weak force; very massive (~80–91 GeV/c²); extremely short range (~10⁻¹⁸ m) as a direct consequence of their large mass.\n- General rule: heavier mediating particle → shorter force range (via the mass-range relation rooted in the uncertainty principle).\n- No confirmed graviton; gravity remains outside the Standard Model's gauge-boson framework.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.gauge-bosons.md",
+        "startLine": 18,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "phys.particle.gauge-bosons/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.particle.gauge-bosons",
+      "title": "Gauge bosons are just more particles, no different in role from quarks or electrons",
+      "content": "### MC-1: \"Gauge bosons are just more particles, no different in role from quarks or electrons\"\n- **Probe:** \"Is a photon a building block of matter, the same way a quark or an electron is?\"\n- **Characteristic phrase:** \"Photons, gluons, W/Z bosons — they're just more items on the particle list.\"\n- **Trigger:** Students encounter a growing list of particle names (quarks, leptons, now gauge bosons) without a clear categorical distinction between \"matter particles\" and \"force-carrying particles.\"\n- **Conflict evidence [P28]:** Quarks and leptons (fermions, obeying the Pauli exclusion principle) are what matter is built from — protons, atoms, and everything solid around you. Gauge bosons (bosons, not subject to the Pauli exclusion principle) never form the bulk \"stuff\" of ordinary matter; they appear only transiently, as force is transmitted between matter particles, or are directly produced and detected in high-energy collisions.\n- **Bridge [P30]:** \"There are two fundamentally different categories of particle in the Standard Model: matter particles (quarks and leptons, which build up everything solid) and force-carrying particles (gauge bosons, which transmit interactions between matter particles). Gauge bosons are the 'verbs' of particle physics — the actions connecting the 'nouns' (quarks and leptons).\"\n- **Replacement [P31]:** Gauge bosons are categorically distinct from matter particles — their role is to mediate force, not to compose matter.\n- **Discrimination pairs [P33]:** In a sentence, nouns (people, objects) are analogous to quarks and leptons; verbs (actions connecting nouns) are analogous to gauge bosons — you cannot build a \"thing\" out of verbs alone.\n- **S6 repair path:** Return to the two-person ball-throwing demonstration (Section 2) and ask directly, \"who are the 'matter particles' in this demo, and what plays the role of the gauge boson?\"",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.gauge-bosons.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.particle.gauge-bosons/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.particle.gauge-bosons",
+      "title": "A heavier mediating particle should create a stronger or longer-range force",
+      "content": "### MC-2: \"A heavier mediating particle should create a stronger or longer-range force\"\n- **Probe:** \"The W and Z bosons are far heavier than the photon. Does that mean the weak force should have a longer range than electromagnetism?\"\n- **Characteristic phrase:** \"Heavier particles should carry more force further.\"\n- **Trigger:** Everyday intuition (a heavier object hits harder, travels further with momentum) is misapplied to the quantum relationship between mediator mass and force range.\n- **Conflict evidence [P28]:** The weak force's range (~10⁻¹⁸ m, mediated by the ~80–91 GeV/c² W/Z bosons) is dramatically shorter than electromagnetism's infinite range (mediated by the massless photon). This directly contradicts \"heavier = longer range\" and instead confirms the opposite: heavier mediators correspond to shorter ranges, because a virtual (borrowed) particle can only exist for a time inversely related to its mass (via the uncertainty principle), and a heavier particle \"spends\" that brief existence traveling a much shorter distance.\n- **Bridge [P30]:** \"In quantum field theory, the relationship is inverted from everyday intuition: mass and range trade off oppositely. A massless mediator (the photon) can exist for an unlimited 'borrowed' time and travel any distance, giving electromagnetism infinite range. A very massive mediator (W/Z bosons) can only exist fleetingly, limiting the weak force to an extremely short range.\"\n- **Replacement [P31]:** Range and mediator mass are inversely related: massless mediator → infinite range; massive mediator → short range.\n- **Discrimination pairs [P33]:** A whispered message (light, easy to \"carry,\" travels far in a quiet room) vs. shouting a very specific, heavy message that can only be delivered in person, up close (heavy, short-range) — inverted from naive \"heavier = stronger reach\" intuition.\n- **S6 repair path:** Present the mass-range table (Section 2) directly, side by side, and have the student verbally state the inverse relationship before moving on.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.gauge-bosons.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.particle.gauge-bosons/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.particle.gauge-bosons",
+      "title": "Gravity has a confirmed mediating gauge boson, just like the other three forces",
+      "content": "### MC-3: \"Gravity has a confirmed mediating gauge boson, just like the other three forces\"\n- **Probe:** \"Has the graviton — the particle that would carry gravity — actually been detected, the same way the photon, gluon, and W/Z bosons have been?\"\n- **Characteristic phrase:** \"Gravity has its force carrier too — the graviton — just like the other forces.\"\n- **Trigger:** The clean, symmetric four-force framework (each force has exactly one type of carrier) tempts students to assume gravity's carrier must already be confirmed, matching the pattern of the other three.\n- **Conflict evidence [P28]:** The graviton is a theoretical proposal (a hypothetical massless, spin-2 particle) required by attempts to unify gravity with quantum field theory, but no experiment has ever directly detected a graviton, and no complete, experimentally validated quantum theory of gravity currently exists — unlike the photon (confirmed since the early 20th century), the gluon (confirmed via jet physics in the 1970s), and the W/Z bosons (directly produced and detected at CERN in 1983).\n- **Bridge [P30]:** \"Gravity is the one fundamental force that does NOT yet have an experimentally confirmed mediating particle within the Standard Model framework. The graviton remains a well-motivated theoretical prediction, actively searched for (indirectly, through phenomena like gravitational waves), but it has not been directly detected as a particle the way the other three mediators have.\"\n- **Replacement [P31]:** Three of the four forces have experimentally confirmed mediating gauge bosons (photon, gluon, W/Z); gravity's mediator (the graviton) remains unconfirmed and outside the currently verified Standard Model.\n- **Discrimination pairs [P33]:** Three suspects in a case have confirmed alibis backed by video evidence; the fourth suspect has a plausible, widely-believed alibi that nobody has actually been able to verify yet — the graviton is the fourth suspect.\n- **S6 repair path:** Explicitly list the discovery dates/methods for photon, gluon, and W/Z bosons side by side with \"graviton: not yet detected\" to make the asymmetry concrete rather than abstract.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.gauge-bosons.md",
+        "startLine": 23,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.particle.gauge-bosons/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.gauge-bosons",
+      "title": "EXPLAIN + DEMONSTRATE",
+      "content": "{\"id\":\"TA-1\",\"title\":\"EXPLAIN + DEMONSTRATE\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.gauge-bosons.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.particle.gauge-bosons/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.gauge-bosons",
+      "title": "CHALLENGE",
+      "content": "{\"id\":\"TA-2\",\"title\":\"CHALLENGE\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.gauge-bosons.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.particle.gauge-bosons/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.gauge-bosons",
+      "title": "DEMONSTRATE + TRANSFER",
+      "content": "{\"id\":\"TA-3\",\"title\":\"DEMONSTRATE + TRANSFER\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.gauge-bosons.md",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.particle.gauge-bosons/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.gauge-bosons",
+      "title": "CHALLENGE",
+      "content": "{\"id\":\"TA-4\",\"title\":\"CHALLENGE\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.gauge-bosons.md",
+        "startLine": 11,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.particle.gauge-bosons/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.particle.gauge-bosons",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly matches each of the four fundamental forces to its mediating particle (or lack thereof for gravity), correctly reasons about the inverse mass-range relationship, and correctly states the graviton's unconfirmed status. Score ≥ 80%.\n\n**FA-1 — Mediator matching:**\n*Q: Match each force to its mediating particle: (a) electromagnetism, (b) strong force, (c) weak force, (d) gravity.*\nExpected: (a) photon, (b) gluon, (c) W/Z bosons, (d) no confirmed mediator (graviton is hypothetical, unconfirmed).\nThreshold: All four correct, including correctly flagging (d) as unconfirmed rather than naming \"graviton\" as settled fact.\n\n**FA-2 — Mass-range reasoning:**\n*Q: The W and Z bosons are far more massive than the photon. Explain what this implies about the relative ranges of the weak force and electromagnetism, and why.*\nExpected: The weak force has a much shorter range than electromagnetism, because a heavier mediating particle can only exist (as a \"borrowed,\" virtual particle) for a much shorter time, limiting how far it can travel before an interaction must complete.\nThreshold: Must state the inverse relationship (heavier → shorter range) and invoke the underlying virtual-particle/uncertainty-principle mechanism, not merely state the fact without reasoning.\n\n**FA-3 — Boson vs. matter particle:**\n*Q: Is a gluon a building block of ordinary matter, the same way a quark is? Explain the categorical difference.*\nExpected: No — gluons are gauge bosons, force-carrying particles; quarks (and leptons) are matter particles (fermions) that compose ordinary matter. Gauge bosons transmit interactions between matter particles rather than composing matter themselves.\nThreshold: Must correctly state the matter-particle vs. force-carrier distinction.\n\n**FA-4 — Graviton status:**\n*Q: Has the graviton been experimentally confirmed the same way the photon, gluon, and W/Z bosons have? Explain the current status.*\nExpected: No — the graviton is a theoretically proposed particle required by attempts to make gravity consistent with quantum field theory, but it has never been directly detected; no complete, experimentally verified quantum theory of gravity currently exists.\nThreshold: Must correctly say \"not confirmed\" and briefly justify (contrast with the other three, which have been directly produced/detected).\n\n**Confidence calibration:** After FA-2, students rate confidence before revealing the answer; students confident but wrong are walked through the ball-exchange analogy with an explicitly heavy \"ball\" (Demo 1 variant) before re-attempting a parallel item.\n\n**Delayed retrieval (session + 3):** \"Name the mediating particle for each of the four fundamental forces, flagging any that remain unconfirmed. State the general relationship between mediator mass and force range.\" Expected: photon, gluon, W/Z, no confirmed graviton; heavier mediator → shorter range.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.gauge-bosons.md",
+        "startLine": 188,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "phys.particle.gauge-bosons/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.gauge-bosons",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- Two people on frictionless ice repeatedly throwing and catching a heavy ball between them recoil apart with each throw and catch — a classic (imperfect but pedagogically useful) illustration of \"force via exchange of a particle,\" where the exchanged ball plays the role of the mediating boson.\n- Contrast: if the \"ball\" being exchanged were extremely heavy and hard to throw far, the two people would need to be very close together for the exchange to work at all — mapping directly to the mass-range relationship for the W/Z bosons vs. the photon.\n\n### Representational (Iconic)\n- A force/mediator/mass/range table: photon (EM, massless, infinite range), gluon (strong, massless but confined, ~10⁻¹⁵ m), W/Z (weak, ~80–91 GeV/c², ~10⁻¹⁸ m).\n- A simple exchange diagram (qualitative, previewing Feynman diagrams): two particle lines approaching, one mediating-boson line connecting them at a vertex, two particle lines departing — drawn for each of the three confirmed force types.\n\n### Abstract (Symbolic)\n- Mass-range relation (qualitative, no derivation required at this level): range ~ ℏ/(mc) — a heavier mediator corresponds to a shorter force range, which is why the extremely massive W/Z bosons give the weak force its extremely short range, while the massless photon gives electromagnetism infinite range.\n- W boson mass ≈ 80.4 GeV/c²; Z boson mass ≈ 91.2 GeV/c² — for comparison, roughly 80–97 times the mass of a single proton, packed into one fundamental particle.\n\n### Transfer (+)\n- Particle accelerator design: colliders are built at specific energies precisely to directly produce W and Z bosons (first done at CERN in 1983, a major Nobel-Prize-winning discovery) and study their properties.\n- Radioactive decay: beta decay is now understood precisely as a down quark emitting a W⁻ boson and converting to an up quark, with the W⁻ boson subsequently decaying into an electron and antineutrino — the gauge boson framework gives a complete mechanistic picture of what \"beta decay\" actually is at the particle level.\n- Modern unification physics: electroweak theory (phys.particle.electroweak-unification) shows the photon and the W/Z bosons are, at high energy, part of a single unified set of gauge bosons that only appear distinct at the energies accessible in everyday experience.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.gauge-bosons.md",
+        "startLine": 41,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "phys.particle.gauge-bosons/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.gauge-bosons",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — Believing gauge bosons are simply \"particles\" in the same sense as electrons or quarks, with no special role:** Correct: gauge bosons are specifically the particles responsible for transmitting force between other particles — they are not building blocks of matter (unlike quarks and leptons), they are the mechanism by which matter particles interact with each other.\n\n**Mode 2 — Assuming a heavier mediating particle should correspond to a longer-range or stronger force, by analogy to \"heavier things have more effect\":** Correct: the actual relationship is the opposite — heavier mediators correspond to shorter-range forces, a genuinely counter-intuitive quantum mechanical result rooted in the uncertainty principle (a \"borrowed\" virtual particle can only exist briefly, and a heavier particle can travel a shorter distance in that brief time).\n\n**Mode 3 — Believing gravity has a confirmed, experimentally observed mediating particle just like the other three forces:** Correct: the graviton is a hypothetical particle proposed by theoretical extensions of the Standard Model, but it has never been detected, and no complete, experimentally verified quantum theory of gravity currently exists — gravity's mediator remains an open question, unlike the other three forces.\n\n**Mode 4 — Assuming the photon, gluon, and W/Z bosons are all fundamentally similar in behavior simply because they're all \"gauge bosons\":** Correct: the photon is chargeless and does not interact with itself; the gluon carries color charge and does interact with other gluons (a crucial difference explaining confinement); the W/Z bosons are unusually massive among gauge bosons — each mediator has genuinely distinct behavior tied to the specific force it carries.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.gauge-bosons.md",
+        "startLine": 62,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "phys.particle.gauge-bosons/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.gauge-bosons",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"Two electrons never touch each other, yet somehow they push each other apart. How does that actually work, mechanically? Modern particle physics gives a surprisingly literal answer: they're throwing something back and forth between them, constantly, and that exchange is what we experience as 'force.'\"\n\n**At the mass-range surprise:**\n\"Quick prediction: the W and Z bosons — the particles that carry the weak force — are about eighty to ninety times heavier than a proton. Given that, do you think the weak force reaches further than electromagnetism, or less far? [Wait.] Less far — dramatically less far. About a million billion times shorter range, in fact. Here's why: a 'borrowed,' virtual particle can only exist for a tiny sliver of time, and that sliver gets shorter the heavier the particle is. A massless photon can be 'borrowed' for as long as you like and travel any distance — infinite range. A hugely massive W or Z boson barely exists at all before it has to be 'returned' — so it can only carry its force across an almost unimaginably tiny distance.\"\n\n**At the gravity gap:**\n\"So — photon confirmed. Gluon confirmed. W and Z bosons confirmed, directly produced in a real accelerator in 1983, no less. And gravity? Physicists have a name ready — the graviton — and a strong theoretical case for why it should exist. But nobody has ever detected one. Gravity is the one force in this entire framework that still doesn't have a confirmed carrier particle. That's not a small gap — that's one of the biggest open questions left in physics.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.gauge-bosons.md",
+        "startLine": 175,
+        "endLine": 188
+      }
+    },
+    {
+      "assetId": "phys.particle.gauge-bosons/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.gauge-bosons",
+      "title": "Recovery Notes",
+      "content": "**S0:** Student has the four-force scorecard (from phys.particle.four-forces) but has not yet connected \"force\" to \"particle exchange\" as a mechanism. Begin entirely with the ball-exchange demonstration (Demo 1) as a physical, hands-on anchor before introducing any mediator names.\n\n**S3:** Student can name the mediators but predicts range incorrectly from mass (MC-2). Repeat Demo 2 (predict-then-check table) with additional hypothetical mediator masses until the inverse relationship becomes the automatic prediction.\n\n**S6:** Student is anxious about the abstractness of \"virtual particles\" that are \"borrowed\" and not directly observable. Anchor entirely in the 1983 W/Z discovery story (Demo 3) — real, physical, directly-produced particles — before introducing the more abstract virtual-exchange framing for everyday interactions.\n\n**S9:** Extend into electroweak unification (phys.particle.electroweak-unification) as a direct preview: \"the photon and the W/Z bosons look completely different today — but at extremely high energy, they merge into a single family of gauge bosons. Want to see how?\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.gauge-bosons.md",
+        "startLine": 218,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "phys.particle.gauge-bosons/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.gauge-bosons",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Declarative/categorical (mediator-force matching table) plus conceptual reasoning (mass-range inverse relationship) — retrieval practice should test both the factual matching and the reasoning chain connecting mass to range.\n\n**Spaced retrieval schedule:**\n- Session + 1: \"Match each of the four forces to its mediating particle.\"\n- Session + 3: \"Explain why the weak force has such a short range compared to electromagnetism.\"\n- Session + 7: \"What is the current experimental status of the graviton?\"\n\n**Interleaving partners:** phys.particle.four-forces (prerequisite — the force scorecard this concept adds mediators to), phys.mod.photons (prerequisite — photon properties), phys.particle.strong-interaction, phys.particle.weak-interaction, and phys.particle.higgs-mechanism (successors — detailed mechanisms for each mediator).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.gauge-bosons.md",
+        "startLine": 230,
+        "endLine": 243
+      }
+    },
+    {
+      "assetId": "phys.particle.gauge-bosons/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.gauge-bosons",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Reasoning about the range and behavior of any newly introduced force-carrying particle (e.g., the Higgs boson, in the next-but-one concept, which is not itself a gauge boson but is closely related to the mechanism giving gauge bosons their mass) using the same mass-range logic.\n\n**Far transfer:** Particle accelerator design (colliders are built at specific energies precisely to directly produce specific mediators, as with the 1983 W/Z discovery), quantum field theory generally (the \"exchange particle\" picture of force is the foundational idea of the entire field), and the broader scientific principle that a genuinely new theoretical framework (quantum field theory replacing action-at-a-distance) can overturn even a framework (Newtonian force) that worked well for centuries.\n\n**Structural abstraction:** \"Interaction range is inversely related to the mass of what's being exchanged.\" This pattern, while specific to quantum field theory in its precise form, echoes a broader intuition-inverting theme in physics: properties that seem like they should scale one way (heavier = stronger reach) sometimes scale the opposite way once the underlying mechanism (the uncertainty principle, in this case) is understood.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.gauge-bosons.md",
+        "startLine": 243,
+        "endLine": 253
+      }
+    },
+    {
+      "assetId": "phys.particle.gauge-bosons/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.particle.gauge-bosons",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.particle.four-forces (to know which forces need mediators) and phys.mod.photons (photon properties as the first, most familiar mediator) are both necessary and sufficient.\n- **Unlock readiness:** phys.particle.strong-interaction, phys.particle.weak-interaction, phys.particle.higgs-mechanism, phys.particle.feynman-diagrams, and phys.particle.standard-model all directly depend on the mediator concept established here; this concept's five listed unlocks (the most of any concept in the domain) correctly reflect its position as a central hub concept.\n- **Difficulty calibration:** Proficient/Understand is appropriate — the mediator-matching facts are declarative, but the mass-range inverse relationship (MC-2) is a genuine conceptual hurdle that justifies the full estimated hours and mastery threshold.\n- **No open issues:** description, prerequisites, and unlocks are internally consistent with the Physics KG's Particle Physics domain design; this concept's hub role (5 unlocks) is appropriately reflected in its position early in the topological order.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.gauge-bosons.md",
+        "startLine": 253,
+        "endLine": 263
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

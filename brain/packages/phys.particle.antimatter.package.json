@@ -1,0 +1,391 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.particle.antimatter-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.particle.antimatter",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6b777785a0aa6daf242bec64ff93a2f9aa88a9909705a576db5fa547b417a107",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.particle.antimatter.md": "sha256:f385740dbc0594a37590f841e38d12b6302eb99d1631c72092f6e525f42af9f7"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.particle.antimatter",
+    "name": "Antimatter and Antiparticles",
+    "difficultyRaw": "Proficient",
+    "bloom": "Apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.particle.particle-classification",
+      "phys.rel.mass-energy"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.particle.antimatter-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.particle.antimatter (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.particle.antimatter.md": "sha256:f385740dbc0594a37590f841e38d12b6302eb99d1631c72092f6e525f42af9f7"
+      },
+      "contentHash": "sha256:5663820b2c8bac75d2ce120b268ad3e40bd39580e27a6bfea16edf4d42cf226c",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.particle.antimatter.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.antimatter.md#TA-1 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.antimatter"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.antimatter\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.antimatter.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.antimatter.md#TA-2 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.antimatter"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.antimatter\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.antimatter.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.antimatter.md#TA-3 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.antimatter"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.antimatter\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.antimatter.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.antimatter.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.antimatter"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.antimatter\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.particle.antimatter/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.particle.antimatter",
+      "title": "Antimatter and Antiparticles — core explanation",
+      "content": "**One-sentence definition:** Every known particle has a corresponding antiparticle with identical mass but opposite electric charge (and opposite values of other additive quantum numbers); when a particle meets its antiparticle they annihilate into pure energy, and sufficient energy concentrated at a point can create a particle-antiparticle pair.\n\n**The core insight:** Antimatter is not \"opposite matter\" in some vague sci-fi sense — it is precisely defined and experimentally routine: the positron (antielectron) has exactly the electron's mass but charge +e instead of −e, and positron-electron annihilation/pair-production is observed daily in hospitals (PET scanners) and particle accelerators.\n\n**Conceptual chain:**\n1. Dirac's relativistic equation for the electron (1928) mathematically required a second solution with negative energy, which Dirac reinterpreted as a new particle: the positron, discovered experimentally by Anderson in 1932.\n2. Every known particle — not just the electron — has an antiparticle counterpart: identical mass, opposite charge and opposite other conserved additive quantum numbers (like lepton number or baryon number).\n3. Some neutral particles (like the photon) are their own antiparticle.\n4. Annihilation: a particle and its antiparticle meeting convert their entire rest mass into energy (typically photons), following E = mc² exactly.\n5. Pair production: a sufficiently energetic photon (or other process) passing near a nucleus can convert its energy into a particle-antiparticle pair, provided the photon energy exceeds twice the rest-mass energy of the pair.\n6. Antimatter is rare in the observable universe — one of physics' open questions (baryon asymmetry) is why matter vastly outnumbers antimatter today, given that the early universe should have produced them in equal amounts.\n\n**Central relations:**\n- Antiparticle: same mass as its particle, opposite charge and opposite additive quantum numbers.\n- Annihilation: particle + antiparticle → energy (photons), with total energy = 2mc² (at rest) plus kinetic energy.\n- Pair production: energy (photon) → particle + antiparticle, requiring photon energy ≥ 2mc² of the pair produced.\n- Charge conservation and other conservation laws (Section on phys.particle.conservation-laws) are automatically satisfied because particle and antiparticle have exactly canceling additive quantum numbers.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.antimatter.md",
+        "startLine": 18,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.particle.antimatter/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.particle.antimatter",
+      "title": "Antimatter has negative mass",
+      "content": "### MC-1: \"Antimatter has negative mass\"\n- **Probe:** \"If a positron and an electron collided, would the total mass involved be positive, negative, or zero?\"\n- **Characteristic phrase:** \"Antimatter is the opposite of matter, so its mass must be negative.\"\n- **Trigger:** Casual over-application of the \"anti-\" prefix to every property, including mass, which is not one of the properties that flips sign.\n- **Conflict evidence [P28]:** The positron was discovered in cosmic-ray cloud-chamber tracks (Anderson, 1932) that curved in a magnetic field exactly like an electron's track, but in the opposite direction — indicating opposite charge, with a curvature radius indicating identical mass, not negative mass. If the positron had negative mass, the annihilation energy released (511 keV per particle, matching E = mc² for a positive mass) would not match experimental observation.\n- **Bridge [P30]:** \"Only charge (and related additive quantum numbers) flip sign between a particle and its antiparticle. Mass — and therefore gravitational behavior — is identical and positive for both. A positron falls downward under gravity exactly like an electron does.\"\n- **Replacement [P31]:** Antiparticles have identical, positive mass to their particle counterparts; only charge and other additive quantum numbers are reversed.\n- **Discrimination pairs [P33]:** A mirror image of a person has the same height and weight — everything about their physical size is identical, only left-right orientation is reversed. Antimatter is a \"charge-mirror,\" not a \"mass-mirror.\"\n- **S6 repair path:** Point directly at the annihilation energy number (511 keV per particle) and ask, \"if the positron had negative mass, would E = mc² even give a positive energy release? No — so the mass must be positive.\"",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.antimatter.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.particle.antimatter/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.particle.antimatter",
+      "title": "Annihilation destroys mass and energy entirely — nothing is conserved",
+      "content": "### MC-2: \"Annihilation destroys mass and energy entirely — nothing is conserved\"\n- **Probe:** \"When an electron and positron annihilate, is any energy left over afterward, or does everything just vanish?\"\n- **Characteristic phrase:** \"They just cancel out to nothing.\"\n- **Trigger:** The word \"annihilate\" colloquially means \"to destroy completely,\" suggesting nothing remains.\n- **Conflict evidence [P28]:** Every annihilation event produces detectable photons carrying exactly the total rest-mass energy of the original particles (511 keV each for e⁻e⁺ annihilation at rest) — this is precisely what PET scanners detect and use to reconstruct medical images; if energy truly vanished, PET scanning would be physically impossible.\n- **Bridge [P30]:** \"'Annihilate' means the particles themselves cease to exist as particles — but their mass-energy doesn't disappear, it converts form, into photons, following E = mc² exactly. Total energy (and momentum, and charge) is conserved throughout.\"\n- **Replacement [P31]:** Annihilation converts rest-mass energy into radiant energy (typically photons); it does not destroy energy, mass-energy is strictly conserved.\n- **Discrimination pairs [P33]:** Burning a log doesn't destroy the log's matter — it converts the log's chemical energy into heat, light, and gases; annihilation converts rest-mass energy into photon energy in the same conservation spirit, just via E = mc² rather than chemistry.\n- **S6 repair path:** Walk through the PET scan mechanism concretely: injected positron → meets an electron in the body → annihilates → two 511 keV photons fly off in opposite directions → detected by the scanner ring → used to reconstruct an image. If nothing were produced, the scan would show nothing.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.antimatter.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.particle.antimatter/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.particle.antimatter",
+      "title": "The proton is the antiparticle of the electron",
+      "content": "### MC-3: \"The proton is the antiparticle of the electron\"\n- **Probe:** \"Is the proton the antiparticle of the electron, since they have opposite charge?\"\n- **Characteristic phrase:** \"Proton and electron have opposite charge, so they must be antiparticles of each other.\"\n- **Trigger:** Opposite charge is the most visually obvious antiparticle-defining property, so students apply it to any oppositely-charged pair.\n- **Conflict evidence [P28]:** The proton's mass (~938 MeV/c²) is roughly 1836 times the electron's mass (~0.511 MeV/c²) — but a particle and its antiparticle must have identical mass. A proton and electron cannot be antiparticle pairs because their masses don't match; the electron's true antiparticle is the positron, which does have matching mass.\n- **Bridge [P30]:** \"Antiparticle status requires identical mass AND exactly-opposite charge (and other quantum numbers) — not just opposite charge alone. The proton and electron differ enormously in mass, so despite opposite charge, they are unrelated particles, not antiparticle partners.\"\n- **Replacement [P31]:** Identify antiparticle pairs by matching mass first, then confirming opposite charge/quantum numbers — never by charge alone.\n- **Discrimination pairs [P33]:** Twins share identical height and features but may have opposite handedness (left-handed vs. right-handed) — a superficial opposite trait (charge) doesn't establish the deep structural match (mass) that true antiparticle pairing requires.\n- **S6 repair path:** Put the electron/positron mass values and proton/electron mass values side by side; ask the student to spot which pair actually matches in mass.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.antimatter.md",
+        "startLine": 23,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.particle.antimatter/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.antimatter",
+      "title": "EXPLAIN",
+      "content": "{\"id\":\"TA-1\",\"title\":\"EXPLAIN\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.antimatter.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.particle.antimatter/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.antimatter",
+      "title": "DEMONSTRATE",
+      "content": "{\"id\":\"TA-2\",\"title\":\"DEMONSTRATE\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.antimatter.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.particle.antimatter/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.antimatter",
+      "title": "CHALLENGE",
+      "content": "{\"id\":\"TA-3\",\"title\":\"CHALLENGE\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.antimatter.md",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.particle.antimatter/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.antimatter",
+      "title": "TRANSFER",
+      "content": "{\"id\":\"TA-4\",\"title\":\"TRANSFER\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.antimatter.md",
+        "startLine": 11,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.particle.antimatter/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.particle.antimatter",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly identifies antiparticle pairs by matching mass (not charge alone), correctly explains that annihilation conserves rather than destroys energy, and correctly states the pair-production energy threshold condition. Score ≥ 80%.\n\n**FA-1 — Property matching:**\n*Q: An electron has mass 0.511 MeV/c² and charge −e. What are the mass and charge of its antiparticle (the positron)?*\nExpected: Mass 0.511 MeV/c² (identical), charge +e (opposite).\nThreshold: Both values correct.\n\n**FA-2 — Energy conservation in annihilation:**\n*Q: An electron and positron, both nearly at rest, annihilate. What happens to their total mass-energy? Is anything conserved?*\nExpected: The total rest-mass energy (2 × 0.511 MeV = 1.022 MeV) converts into two photons of 511 keV each, flying off in opposite directions to conserve momentum; total energy, momentum, and charge are all conserved.\nThreshold: Must state energy converts to photons (not destroyed) and identify momentum conservation as the reason for two oppositely-directed photons.\n\n**FA-3 — Pair production threshold:**\n*Q: Can a photon with energy 0.8 MeV produce an electron-positron pair? Why or why not?*\nExpected: No — pair production of an electron-positron pair requires at least 1.022 MeV (2 × 0.511 MeV); 0.8 MeV is below this threshold.\nThreshold: Must correctly compute or cite the 1.022 MeV threshold and correctly conclude the process cannot occur.\n\n**FA-4 — Correct antiparticle identification:**\n*Q: A student claims the proton is the antiparticle of the electron because they have opposite charge. Explain why this is incorrect.*\nExpected: Antiparticle status requires identical mass in addition to opposite charge. The proton's mass (~938 MeV/c²) is about 1836 times the electron's mass, so despite opposite charge they cannot be antiparticle partners; the electron's true antiparticle is the positron.\nThreshold: Must cite the mass mismatch as the disqualifying factor.\n\n**Confidence calibration:** After FA-3, students rate confidence before revealing the answer; students confident but wrong are walked through the threshold calculation explicitly (2 × rest-mass energy) before re-attempting a parallel item (muon-antimuon pair threshold).\n\n**Delayed retrieval (session + 3):** \"What two things must be true for two particles to be antiparticle partners? Name one everyday application of matter-antimatter annihilation.\" Expected: identical mass, opposite charge/quantum numbers; PET scanning.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.antimatter.md",
+        "startLine": 190,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.particle.antimatter/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.antimatter",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- PET (positron emission tomography) scanning: a radioactive tracer emits positrons inside the body; each positron annihilates with a nearby electron, producing two gamma-ray photons detected to build a medical image — a real, everyday application of matter-antimatter annihilation.\n- Physical analogy: matter and antimatter are like a physical object and its \"photographic negative charge twin\" — same shape and mass, but every charge-like property flipped.\n\n### Representational (Iconic)\n- Feynman-diagram-style sketch (qualitative, no calculation): an electron line and a positron line meeting at a vertex, converting into two outgoing photon lines (annihilation) — and the reverse diagram (a photon splitting into an electron-positron pair near a nucleus).\n- A side-by-side particle/antiparticle property table: electron (mass 0.511 MeV/c², charge −e) vs. positron (mass 0.511 MeV/c², charge +e) — everything the same except the sign of the charge.\n\n### Abstract (Symbolic)\n- Annihilation energy accounting: e⁻ + e⁺ → 2γ, each photon carrying energy ≥ 0.511 MeV (511 keV) at minimum, in the center-of-mass frame, from E = mc² applied to each particle's rest mass.\n- Pair-production threshold condition: E_photon ≥ 2mc² for the lightest pair the photon energy allows (e.g., ≥ 1.022 MeV to produce an electron-positron pair) — energy below this threshold cannot produce that pair, regardless of how the photon interacts.\n- Quantum number bookkeeping: charge, lepton number, and baryon number of the particle-antiparticle pair sum to zero, automatically conserving each quantity through the process.\n\n### Transfer (+)\n- Medical imaging (PET scans) directly exploits controlled, small-scale annihilation for diagnostic purposes.\n- Astrophysics: gamma-ray astronomy detects annihilation radiation (511 keV lines) from regions where positrons are being produced and destroyed, such as near black holes or in cosmic ray interactions.\n- Cosmology's baryon asymmetry problem: why the observable universe is almost entirely matter, not an equal mixture of matter and antimatter, remains one of the deepest open questions in physics.\n- Particle accelerators: colliders like the LHC deliberately collide particles with their antiparticles (or produce antiparticles as collision products) to study fundamental interactions at high energy.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.antimatter.md",
+        "startLine": 40,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.particle.antimatter/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.antimatter",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — Believing antimatter has negative mass:** Because \"anti-\" suggests \"opposite\" in every sense, students assume antimatter must have negative mass (and thus, e.g., fall upward under gravity). Correct: the antiparticle's mass is identical (and positive) to its particle's mass — only charge and other additive quantum numbers flip sign.\n\n**Mode 2 — Assuming annihilation destroys mass without trace:** Students think matter and antimatter \"just disappear\" when they meet. Correct: mass-energy is strictly conserved — the rest mass of both particles is converted entirely into the energy of outgoing photons (or other particles), following E = mc² precisely; nothing is destroyed, only converted.\n\n**Mode 3 — Confusing \"antiparticle\" with \"opposite particle in some general sense\" (e.g., proton is the antiparticle of the electron):** Correct: the antiparticle of a given particle is uniquely determined (antielectron = positron, specifically), not simply \"any particle with opposite charge.\" The proton and electron are entirely different particles, not antiparticle pairs, despite having opposite charge.\n\n**Mode 4 — Believing pair production can occur from any photon regardless of energy:** Students assume any photon can spontaneously create a particle-antiparticle pair. Correct: pair production requires the photon's energy to exceed the combined rest-mass energy of the pair (2mc²) AND requires a nearby massive body (like a nucleus) to absorb recoil momentum — an isolated photon in empty space cannot pair-produce, regardless of its energy, because momentum cannot be simultaneously conserved with energy in that case.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.antimatter.md",
+        "startLine": 63,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "phys.particle.antimatter/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.antimatter",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"In 1928, a physicist named Paul Dirac wrote an equation for the electron, and the math handed him a second answer he wasn't looking for — a particle with negative energy. Most people would throw that answer away as nonsense. Dirac didn't. He said: maybe this is real. Four years later, someone found it — in a cloud chamber, in cosmic rays from outer space. Same particle as the electron in every way, except one: the opposite charge.\"\n\n**At the negative-mass misconception:**\n\"Quick check — if antimatter is the 'opposite' of matter, does that mean it has negative mass? [Wait.] No. Only the charge flips. The mass is exactly, precisely the same, and it's positive. A positron weighs exactly what an electron weighs. If you dropped one, it would fall down, not up — as far as every experiment has shown so far.\"\n\n**At the PET scan connection:**\n\"Here's the part that surprises people: this isn't some distant, exotic phenomenon. Every single day, in hospitals around the world, doctors inject patients with a tracer that emits positrons. Those positrons meet electrons in your body, annihilate, and produce two flashes of gamma-ray light flying off in exactly opposite directions. A ring of detectors around you catches those flashes and uses them to build a 3D image of what's happening inside. That's a PET scan. Matter-antimatter annihilation, used for medicine.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.antimatter.md",
+        "startLine": 177,
+        "endLine": 190
+      }
+    },
+    {
+      "assetId": "phys.particle.antimatter/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.antimatter",
+      "title": "Recovery Notes",
+      "content": "**S0:** Student has no prior exposure to antimatter beyond popular-science or fiction. Begin entirely with the Dirac/Anderson historical narrative (Explanation A) before introducing any quantitative threshold calculations.\n\n**S3:** Student accepts \"opposite charge\" as the antiparticle definition but hasn't internalized the mass-matching requirement. Run Demo 3 (mass-matching table) repeatedly with new particle pairs until the \"match mass first\" habit is automatic.\n\n**S6:** Student is unsettled by the idea of \"negative energy\" in Dirac's original equation. Skip the historical negative-energy detail and enter directly through the PET scan application (Demo 1) as a concrete, safe, medical framing before returning to any theoretical framing.\n\n**S9:** Extend into the baryon asymmetry problem as a genuine open scientific question — \"why is the observable universe made of matter, when equal amounts of matter and antimatter should have been produced early on?\" — as an enrichment discussion with no fixed textbook answer.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.antimatter.md",
+        "startLine": 220,
+        "endLine": 232
+      }
+    },
+    {
+      "assetId": "phys.particle.antimatter/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.antimatter",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Declarative/conceptual (property-matching schema) plus a single procedural threshold calculation (pair-production energy condition) — retrieval practice should test both the qualitative antiparticle-identification rule and the quantitative threshold formula.\n\n**Spaced retrieval schedule:**\n- Session + 1: \"What two properties must match/oppose for a valid particle-antiparticle pair?\"\n- Session + 3: \"What is the minimum photon energy needed to produce an electron-positron pair, and why that specific number?\"\n- Session + 7: \"Explain, in your own words, why annihilation does not violate conservation of energy.\"\n\n**Interleaving partners:** phys.rel.mass-energy (prerequisite — E = mc² is the computational backbone), phys.particle.particle-classification (prerequisite — antiparticles exist for both hadrons and leptons), phys.particle.conservation-laws (successor — quantum number bookkeeping in annihilation/pair production).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.antimatter.md",
+        "startLine": 232,
+        "endLine": 245
+      }
+    },
+    {
+      "assetId": "phys.particle.antimatter/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.antimatter",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Applying the mass-matching + threshold-energy reasoning to any other particle-antiparticle pair (proton-antiproton, muon-antimuon) encountered in later material or in accelerator physics contexts.\n\n**Far transfer:** Medical physics (PET imaging design and radiation safety), astrophysics (511 keV gamma-ray line detection as a signature of positron annihilation in astronomical sources), and cosmology (the baryon asymmetry problem as a driver of active research into CP violation).\n\n**Structural abstraction:** \"A process and its exact time-reversed mirror both conserve the same quantities.\" This pattern (annihilation ↔ pair production as mirror processes) recurs throughout physics wherever a reaction and its reverse are both physically allowed under the same conservation laws (e.g., forward and reverse chemical reactions, nuclear fission and fusion as opposite-direction processes on the binding-energy curve).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.antimatter.md",
+        "startLine": 245,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "phys.particle.antimatter/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.particle.antimatter",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.particle.particle-classification (to know what kind of particle is being paired) and phys.rel.mass-energy (for the E = mc² threshold calculation) are both necessary and sufficient.\n- **Unlock readiness:** This concept currently has no direct KG unlock recorded; it functions as a terminal enrichment node within the domain rather than a strict prerequisite for further concepts, which is appropriate given its self-contained, application-heavy content.\n- **Difficulty calibration:** Proficient/Apply is well-calibrated — the qualitative antiparticle-identification rule is Understand-level, but the pair-production threshold calculation and the conservation-law bookkeeping genuinely require Apply-level reasoning.\n- **No open issues:** description, prerequisites, and the (absent) unlocks are internally consistent with this concept's role as a self-contained application node in the Particle Physics domain.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.antimatter.md",
+        "startLine": 255,
+        "endLine": 265
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

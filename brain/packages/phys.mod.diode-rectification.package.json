@@ -1,0 +1,427 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mod.diode-rectification-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mod.diode-rectification",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:465966323eade45fb8b1b898421f0c501ea480c06c824b37d375ecc228a47287",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mod.diode-rectification.md": "sha256:b001bf6cbdc6c46c4d061bc8a4baca98adceb1a5ea8e2269a03048de78522176"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mod.diode-rectification",
+    "name": "Diode Rectifying Behavior",
+    "difficultyRaw": "Expert",
+    "bloom": "Analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.mod.pn-junction"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mod.diode-rectification-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mod.diode-rectification (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mod.diode-rectification.md": "sha256:b001bf6cbdc6c46c4d061bc8a4baca98adceb1a5ea8e2269a03048de78522176"
+      },
+      "contentHash": "sha256:8b64e766f5ecf1585153a7ddfffe201a1178a4ce184c66f010c8caba2bfc19d4",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mod.diode-rectification.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.diode-rectification.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.diode-rectification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.diode-rectification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.diode-rectification.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.diode-rectification.md#TA-2 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.diode-rectification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.diode-rectification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.diode-rectification.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.diode-rectification.md#TA-3 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.diode-rectification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.diode-rectification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.diode-rectification.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.diode-rectification.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.diode-rectification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.diode-rectification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.diode-rectification.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.diode-rectification.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.diode-rectification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.diode-rectification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mod.diode-rectification/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mod.diode-rectification",
+      "title": "Diode Rectifying Behavior — core explanation",
+      "content": "**One-sentence definition:** Forward bias narrows a p-n junction's depletion region and allows current to flow readily, while reverse bias widens it and blocks current almost entirely, giving the p-n junction diode its distinctive asymmetric, rectifying current-voltage behavior.\n\n**The core insight:** A diode is not a symmetric resistor whose current simply scales with applied voltage in either direction — it is a genuinely one-way device, and this one-way behavior is a direct, mechanistic consequence of how an externally applied voltage interacts with the equilibrium depletion region and built-in potential already established in the prerequisite concept. Applying voltage one way (forward bias) actively works against the built-in field, shrinking the depletion region and permitting substantial current once the applied voltage exceeds the built-in potential; applying voltage the other way (reverse bias) reinforces the built-in field, widening the depletion region and permitting only a tiny leakage current, largely independent of how much reverse voltage is applied (until an extreme breakdown voltage is reached).\n\n**Conceptual chain:**\n1. Forward bias: connecting the external voltage source's positive terminal to the p-side and negative terminal to the n-side pushes majority carriers (holes in p-type, electrons in n-type) toward the junction, directly opposing and narrowing the depletion region.\n2. Once the forward-bias voltage exceeds the built-in potential (~0.6–0.7 V for silicon), the depletion region's opposing field is effectively overcome, and majority carriers flow across the junction relatively freely, producing a rapidly rising current as voltage increases further.\n3. Reverse bias: connecting the positive terminal to the n-side and negative to the p-side pulls majority carriers away from the junction, widening the depletion region and reinforcing its opposing field.\n4. Under reverse bias, only a tiny \"leakage\" current flows, carried by the minority carriers (which are, in fact, pushed toward and across the junction by the reverse-bias field) — this reverse current is extremely small and, over a wide range of reverse voltages, largely independent of the exact reverse voltage applied.\n5. If reverse voltage is increased far enough, a specific breakdown voltage is reached where the diode suddenly conducts heavily in reverse — a distinct phenomenon (avalanche or Zener breakdown, depending on mechanism) exploited deliberately in certain specialized diodes but generally avoided in ordinary rectifier applications.\n6. This asymmetric current-voltage behavior — negligible current below a small \"turn-on\" forward voltage, rapidly rising current above it, and near-zero current under reverse bias (until breakdown) — is precisely what allows a diode to convert alternating current (AC, which periodically reverses direction) into pulsating direct current (DC, which flows in only one direction), the basic function called rectification.\n\n**Central relations:**\n- Forward bias (+ to p-side, − to n-side): narrows depletion region; current rises rapidly once applied voltage exceeds the built-in potential (~0.6–0.7 V for silicon).\n- Reverse bias (+ to n-side, − to p-side): widens depletion region; only a tiny, largely voltage-independent leakage current flows (until breakdown voltage).\n- Rectification: exploiting this forward/reverse current asymmetry to convert alternating current into one-directional (pulsating direct) current.\n- Breakdown voltage: a specific, high reverse voltage beyond which the diode suddenly conducts heavily in reverse — a distinct phenomenon from ordinary reverse leakage.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.diode-rectification.md",
+        "startLine": 18,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.mod.diode-rectification/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.mod.diode-rectification",
+      "title": "A diode's forward current-voltage relationship is linear, like a resistor's",
+      "content": "### MC-1: \"A diode's forward current-voltage relationship is linear, like a resistor's\"\n- **Probe:** \"If you double the forward voltage applied to a diode (while staying above its turn-on voltage), does the current through it also roughly double, the way it would for a simple resistor following Ohm's law?\"\n- **Characteristic phrase:** \"A diode should behave like a resistor once it's conducting — double the voltage, double the current.\"\n- **Trigger:** Prior extensive experience with Ohm's-law-obeying resistors leads students to assume all circuit components, including diodes, follow a similarly linear voltage-current relationship.\n- **Conflict evidence [P28]:** A real diode's forward current-voltage characteristic curve is distinctly exponential-shaped, not a straight line — small increases in forward voltage beyond the turn-on threshold produce dramatically larger, non-proportional increases in current; measured I-V curves for real diodes show this clear exponential curvature, fundamentally distinguishing them from the straight-line I-V relationship of an ohmic resistor.\n- **Bridge [P30]:** \"A diode is a fundamentally nonlinear device — its forward current rises roughly exponentially with voltage once past the turn-on threshold, not proportionally the way a resistor's current does. Doubling the forward voltage (while staying in the conducting region) can increase the current by a much larger factor than two, precisely because of this exponential relationship.\"\n- **Replacement [P31]:** Diode forward current-voltage behavior is exponential, not linear/ohmic — a genuinely nonlinear circuit element.\n- **Discrimination pairs [P33]:** A simple spring (linear force-extension relationship, like a resistor) behaves very differently from a rapidly-stiffening nonlinear spring or a snowballing chain reaction (where small input changes produce disproportionately large output changes) — a diode's forward behavior is much closer to the second, nonlinear case.\n- **S6 repair path:** Present the actual I-V characteristic curve (Section 2) directly, having the student trace the curve's shape and explicitly compare it to a straight line, noting the clear curvature.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.diode-rectification.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.mod.diode-rectification/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.mod.diode-rectification",
+      "title": "There is an absolute, sharp voltage threshold below which literally zero current flows in the forward direction",
+      "content": "### MC-2: \"There is an absolute, sharp voltage threshold below which literally zero current flows in the forward direction\"\n- **Probe:** \"Below the nominal 0.6–0.7 V 'turn-on' voltage for a silicon diode, is the forward current exactly, mathematically zero, or just very small?\"\n- **Characteristic phrase:** \"Below the turn-on voltage, there's absolutely no current at all — it's a hard cutoff.\"\n- **Trigger:** The practical, commonly-used \"turn-on voltage\" approximation (useful for quick circuit analysis) is over-interpreted as a literal, sharp physical discontinuity rather than a convenient practical approximation of a smooth, continuous exponential relationship.\n- **Conflict evidence [P28]:** The underlying diode current-voltage relationship is a smooth, continuous exponential function with no true discontinuity — some small forward current genuinely does flow at forward voltages below the nominal ~0.6–0.7 V threshold, it is simply negligibly small (often far less than a microamp) for practical circuit purposes, growing rapidly (but continuously) as voltage approaches and exceeds the nominal threshold.\n- **Bridge [P30]:** \"The 'turn-on voltage' is an extremely useful practical approximation for circuit analysis, treating the transition as if it were a sharp on/off switch — but the underlying physical current-voltage relationship is actually a smooth, continuous exponential curve with no literal discontinuity. Some tiny, practically negligible current does flow below the nominal turn-on threshold; it simply becomes practically significant only once voltage approaches and exceeds that threshold.\"\n- **Replacement [P31]:** The turn-on voltage is a practical, useful approximation of a smooth exponential current-voltage relationship, not a literal, physically sharp discontinuity.\n- **Discrimination pairs [P33]:** Describing \"rush hour\" as starting \"at 5 PM sharp\" is a useful practical approximation for planning purposes, even though traffic actually increases smoothly and continuously beginning somewhat before that exact time — the turn-on voltage works the same way, as a useful practical marker on a smooth, continuous underlying curve.\n- **S6 repair path:** Zoom into the I-V curve near the \"knee\" region explicitly, showing the curve is continuous (not a vertical jump) and that some small current does exist just below the nominal threshold.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.diode-rectification.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.mod.diode-rectification/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.mod.diode-rectification",
+      "title": "Reverse current is exactly zero under reverse bias",
+      "content": "### MC-3: \"Reverse current is exactly zero under reverse bias\"\n- **Probe:** \"Under reverse bias (below the breakdown voltage), is the current through a diode exactly, mathematically zero, or just very small?\"\n- **Characteristic phrase:** \"Reverse bias means absolutely no current flows at all, period.\"\n- **Trigger:** The common simplification \"reverse bias blocks current\" (a good first-approximation description) is over-interpreted as \"reverse current is literally, exactly zero\" rather than \"reverse current is extremely small but genuinely nonzero.\"\n- **Conflict evidence [P28]:** Minority carriers (electrons in the p-side, holes in the n-side — always present in small numbers even in an intrinsic/lightly doped region, as established in the intrinsic semiconductor concept) are actually swept across the junction by the reverse-bias field, producing a small but measurable and genuinely nonzero \"reverse saturation current\" or \"leakage current,\" typically in the nanoampere to microampere range for ordinary silicon diodes — far smaller than forward current at a comparable voltage magnitude, but not literally zero.\n- **Bridge [P30]:** \"'Reverse bias blocks current' is an excellent practical first approximation, but the more precise statement is: reverse bias reduces current to a tiny, roughly constant leakage current (carried by minority carriers being swept across the junction), not to exactly zero. This leakage current is genuinely present and, in careful circuit design and certain applications (like some sensor and detector circuits), can actually matter.\"\n- **Replacement [P31]:** Reverse-bias current is small but genuinely nonzero (the reverse saturation/leakage current, carried by minority carriers), not exactly zero.\n- **Discrimination pairs [P33]:** A \"watertight\" door seal in practical, everyday usage still allows some infinitesimal, technically-measurable air leakage under careful enough instrumentation — \"essentially blocks\" and \"literally, mathematically zero\" are different claims, and reverse-bias current works the same way.\n- **S6 repair path:** Present the actual I-V curve's reverse-bias region explicitly, showing it as a small but nonzero, roughly flat line (not exactly at zero), and connect this current explicitly to minority carrier motion.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.diode-rectification.md",
+        "startLine": 23,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.mod.diode-rectification/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.diode-rectification",
+      "title": "EXPLAIN + DEMONSTRATE",
+      "content": "{\"id\":\"TA-1\",\"title\":\"EXPLAIN + DEMONSTRATE\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.diode-rectification.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.mod.diode-rectification/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.diode-rectification",
+      "title": "DEMONSTRATE + CHALLENGE",
+      "content": "{\"id\":\"TA-2\",\"title\":\"DEMONSTRATE + CHALLENGE\",\"primitives\":[],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.diode-rectification.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.mod.diode-rectification/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.diode-rectification",
+      "title": "CHALLENGE",
+      "content": "{\"id\":\"TA-3\",\"title\":\"CHALLENGE\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.diode-rectification.md",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mod.diode-rectification/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.diode-rectification",
+      "title": "TRANSFER",
+      "content": "{\"id\":\"TA-4\",\"title\":\"TRANSFER\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.diode-rectification.md",
+        "startLine": 11,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.mod.diode-rectification/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.diode-rectification",
+      "title": "SYNTHESIS",
+      "content": "{\"id\":\"TA-5\",\"title\":\"SYNTHESIS\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.diode-rectification.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "phys.mod.diode-rectification/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mod.diode-rectification",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly explains the forward/reverse bias mechanism in terms of depletion-region width, correctly identifies the diode's I-V curve as exponential (not linear) in the forward direction, and correctly explains rectification as exploiting this forward/reverse asymmetry. Score ≥ 70%.\n\n**FA-1 — Forward vs. reverse mechanism:**\n*Q: Explain, in terms of the depletion region, why forward bias allows substantial current to flow while reverse bias (below breakdown) does not.*\nExpected: Forward bias pushes majority carriers toward the junction, narrowing the depletion region and, once applied voltage exceeds the built-in potential, overcoming its opposing field to allow substantial current flow. Reverse bias pulls majority carriers away, widening the depletion region and reinforcing its opposing field, permitting only a tiny minority-carrier leakage current.\nThreshold: Must correctly describe both mechanisms (narrowing/overcoming vs. widening/reinforcing) with correct carrier-motion reasoning.\n\n**FA-2 — Nonlinearity:**\n*Q: Is a diode's forward current-voltage relationship linear (like a resistor) or nonlinear? Describe its actual shape.*\nExpected: Nonlinear — roughly exponential, with current rising much faster than proportionally to voltage once past the turn-on threshold.\nThreshold: Must correctly say \"nonlinear/exponential,\" not \"linear\" or an unqualified \"it varies.\"\n\n**FA-3 — Reverse current is nonzero:**\n*Q: Is the current through a diode under reverse bias (below breakdown) exactly zero, or something else? Explain what carries this current, if any.*\nExpected: Not exactly zero — a small \"leakage\" or \"saturation\" reverse current flows, carried by minority carriers swept across the junction by the reverse-bias field; it is far smaller than forward current but genuinely nonzero.\nThreshold: Must correctly say \"not exactly zero\" and identify minority carriers as the current mechanism.\n\n**FA-4 — Rectification application:**\n*Q: Explain how a single diode can convert an alternating current (AC) input into a pulsating direct current (DC) output.*\nExpected: The diode conducts substantially during the half-cycle matching its forward-bias orientation and blocks (to a good approximation) the opposite half-cycle, so the output current always flows in one direction (though its magnitude rises and falls), rather than periodically reversing direction as the input AC does.\nThreshold: Must correctly describe the asymmetric conduction across the AC cycle producing one-directional (though pulsating) output.\n\n**Confidence calibration:** After FA-2, students rate confidence before revealing the answer; students confident but wrong are walked through the I-V curve (Demo 1) again, explicitly tracing its curvature against an imagined straight line, before re-attempting a parallel item.\n\n**Delayed retrieval (session + 3):** \"Explain the depletion-region mechanism distinguishing forward bias from reverse bias. Describe the shape of a diode's forward current-voltage curve, and explain how this enables rectification.\" Expected: narrowing/overcoming vs. widening/reinforcing; exponential, not linear; asymmetric conduction across the AC cycle.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.diode-rectification.md",
+        "startLine": 189,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "phys.mod.diode-rectification/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.diode-rectification",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- A one-way turnstile/mechanical valve analogy, physically demonstrated (or diagrammed): pushing in the \"allowed\" direction requires overcoming a small initial resistance (a spring, analogous to the built-in potential threshold) before swinging freely; pushing in the \"blocked\" direction meets an immovable stop, permitting essentially no passage regardless of how hard you push (up to some extreme force that would break the mechanism entirely — analogous to breakdown).\n- Physical analogy: a one-way check valve in plumbing, allowing water to flow freely in one direction once a small threshold pressure is overcome, while blocking flow almost completely in the reverse direction.\n\n### Representational (Iconic)\n- A current-voltage (I-V) characteristic curve for a diode: essentially zero current for small forward voltages, a sharp \"knee\" and rapidly rising current once forward voltage exceeds ~0.6–0.7 V, and a nearly flat, tiny, negative (reverse) current for all reverse voltages up to a distinct breakdown point where the curve plunges sharply.\n- Depletion-region-width diagrams under three conditions side by side: unbiased (equilibrium width), forward-biased (visibly narrowed), reverse-biased (visibly widened) — directly connecting the applied-voltage mechanism to the resulting current behavior.\n\n### Abstract (Symbolic)\n- Qualitative diode equation behavior (no full Shockley-equation derivation required at this level): forward current increases roughly exponentially with forward voltage once past the built-in-potential threshold; reverse current remains small and roughly constant (the \"saturation current\") across a wide range of reverse voltages, until breakdown.\n- Turn-on voltage values: approximately 0.6–0.7 V for silicon diodes, approximately 0.2–0.3 V for germanium diodes — directly inherited from each material's built-in potential established in the prerequisite concept.\n\n### Transfer (+)\n- Power supply design: virtually every electronic device that runs on wall-outlet AC power contains a rectifier circuit (built from diodes) as one of the first stages converting AC to usable DC.\n- Signal processing and radio: diode rectification is historically and currently used to demodulate amplitude-modulated (AM) radio signals, extracting the audio signal from the radio-frequency carrier wave.\n- Solar cell and LED operation (already previewed in the prerequisite concept): both devices are, functionally, p-n junctions operated in specific bias/illumination regimes that directly build on the forward/reverse asymmetry established here.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.diode-rectification.md",
+        "startLine": 40,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "phys.mod.diode-rectification/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.diode-rectification",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — Believing a diode's current-voltage relationship is linear (Ohm's-law-like) in the forward direction, simply with some fixed \"resistance\":** Correct: forward diode current rises roughly exponentially with voltage once past the turn-on threshold, not linearly — a diode is fundamentally a nonlinear device, and treating it as a simple fixed resistor (even an asymmetric one) misses this essential nonlinear behavior.\n\n**Mode 2 — Assuming zero current flows at any forward voltage below the ~0.6–0.7 V turn-on threshold, treating it as an absolute, sharp cutoff:** Correct: some small forward current does flow even below the nominal turn-on voltage (the exponential current-voltage relationship has no true discontinuity), but it is genuinely negligible in practical terms — the \"turn-on voltage\" is a useful, practical approximation of where current becomes practically significant, not a literal, sharp physical threshold with mathematically zero current below it.\n\n**Mode 3 — Believing reverse current is exactly zero under reverse bias, with absolutely no current flowing at all:** Correct: a small but genuinely nonzero \"leakage\" or \"saturation\" current does flow under reverse bias, carried by minority carriers being swept across the widened depletion region — this reverse current is many orders of magnitude smaller than the forward current at a comparable voltage magnitude, but it is not literally zero.\n\n**Mode 4 — Confusing reverse breakdown (a distinct, specific high-voltage phenomenon) with an intensified version of the normal, small reverse leakage current, as though reverse current simply increases smoothly and continuously as reverse voltage increases:** Correct: reverse current remains small and roughly constant across a wide range of reverse voltages, then increases suddenly and dramatically only once a specific, distinct breakdown voltage is reached — breakdown is a qualitatively different regime (a separate physical mechanism), not simply \"more of the same\" gradually increasing reverse leakage.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.diode-rectification.md",
+        "startLine": 61,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.mod.diode-rectification/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.diode-rectification",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"You just learned that a p-n junction, left completely alone, settles into a stable, unchanging equilibrium. Now connect a battery to it. Flip the battery one way, and current flows through easily. Flip it the other way — same battery, same junction — and almost no current flows at all. Why would the exact same connection, just reversed, produce such a dramatically different result?\"\n\n**At the mechanism connection:**\n\"Here's the answer, and it connects directly to what you already know. Connect the battery one way — forward bias — and you're pushing the junction's own majority carriers toward the boundary, directly fighting against and shrinking that depletion region you learned about. Push hard enough — past about 0.6 to 0.7 volts for silicon — and you overwhelm the built-in field entirely, and carriers flow across freely, with current rising steeply from there. Flip the battery the other way — reverse bias — and now you're pulling carriers away from the boundary instead, widening the depletion region and reinforcing that same built-in field. Almost nothing gets through, no matter how much reverse voltage you apply, until you push so hard the whole thing breaks down entirely.\"\n\n**At the nonlinearity clarification:**\n\"One important correction: once a diode is conducting in the forward direction, does doubling the voltage just double the current, the way it would for an ordinary resistor? No. The relationship is exponential, not linear — small increases in voltage past the threshold produce dramatically larger jumps in current. A diode is not a one-way resistor. It's a fundamentally different, nonlinear kind of device.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.diode-rectification.md",
+        "startLine": 176,
+        "endLine": 189
+      }
+    },
+    {
+      "assetId": "phys.mod.diode-rectification/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.diode-rectification",
+      "title": "Recovery Notes",
+      "content": "**S3:** Student has the equilibrium depletion-region concept (from the prerequisite concept) secure but hasn't yet connected it to what happens under an externally applied voltage. Begin entirely with Demo 2 (forward vs. reverse depletion-region-width comparison) as a direct visual bridge from the prior concept before introducing the I-V curve.\n\n**S4:** Student assumes linear (MC-1), sharp-threshold (MC-2), or exactly-zero-reverse-current (MC-3) behavior. Present the full I-V curve (Demo 1) as the single shared reference for correcting all three, having the student trace and describe each region explicitly in their own words.\n\n**S6:** Student is anxious about the abstractness of \"exponential\" current-voltage relationships. Anchor entirely in the one-way check-valve analogy (Section 6) and the concrete \"push harder, more flows through, in a rapidly accelerating way\" framing before introducing the symbolic exponential-function language.\n\n**S7:** Student is intellectually ready for challenge-first entry given this concept's Expert difficulty — open directly with \"why would flipping a battery's connection direction on the exact same junction produce such wildly asymmetric results?\" before any depletion-region-diagram scaffolding.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.diode-rectification.md",
+        "startLine": 219,
+        "endLine": 231
+      }
+    },
+    {
+      "assetId": "phys.mod.diode-rectification/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.diode-rectification",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Conceptual/mechanistic (the forward/reverse bias mechanism and the nonlinear I-V relationship) plus applied/transfer (the rectification application) — retrieval practice should test the mechanism explanation, the nonlinearity distinction, and the rectification application separately.\n\n**Spaced retrieval schedule:**\n- Session + 1: \"Explain the depletion-region mechanism distinguishing forward bias from reverse bias.\"\n- Session + 3: \"Describe the shape of a diode's forward current-voltage curve and explain why it is not linear.\"\n- Session + 7: \"Explain how a diode's forward/reverse asymmetry enables AC-to-DC rectification.\"\n\n**Interleaving partners:** phys.mod.pn-junction (prerequisite — the equilibrium depletion region and built-in potential this concept's applied-bias mechanism directly builds on).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.diode-rectification.md",
+        "startLine": 231,
+        "endLine": 244
+      }
+    },
+    {
+      "assetId": "phys.mod.diode-rectification/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.diode-rectification",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Applying the same forward/reverse bias reasoning to more specialized diode types (Zener diodes, deliberately engineered to have a sharp, well-controlled breakdown voltage exploited for voltage regulation; LEDs, exploiting forward-bias recombination to emit light) as direct extensions of this same asymmetric-bias framework.\n\n**Far transfer:** Power electronics and circuit design (rectifier circuits as the foundational first stage of essentially all AC-powered electronic devices), radio and communications engineering (AM radio demodulation via diode rectification), and the general engineering principle of exploiting an asymmetric physical mechanism (here, the depletion-region response to bias direction) to achieve a genuinely useful, directional device behavior — a pattern also seen in mechanical check valves, biological ion channels, and other asymmetric-response systems.\n\n**Structural abstraction:** \"An externally applied perturbation can either work with or against a system's own internal equilibrium-restoring mechanism, producing dramatically asymmetric responses depending on the perturbation's direction.\" This pattern — where the same magnitude of external influence produces wildly different outcomes depending on whether it reinforces or opposes an existing internal balance — recurs in mechanical one-way valves, certain biological transport mechanisms, and more broadly in any system with a directional internal equilibrium that an external force can either assist or resist.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.diode-rectification.md",
+        "startLine": 244,
+        "endLine": 254
+      }
+    },
+    {
+      "assetId": "phys.mod.diode-rectification/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.mod.diode-rectification",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.mod.pn-junction is necessary and sufficient — diode rectification is entirely a story of how externally applied bias voltage interacts with the equilibrium depletion region and built-in potential established there.\n- **Unlock readiness:** This concept currently has no direct KG unlock recorded, correctly reflecting its role as the terminal, capstone application node of the six-concept semiconductor physics sub-sequence (energy bands → classification → intrinsic → extrinsic/doping → p-n junction → diode rectification) appended to the Modern Physics domain.\n- **Difficulty calibration:** Expert/Analyze is well-calibrated as the sub-sequence's capstone — correctly analyzing the forward/reverse mechanism, the nonlinear I-V relationship, and the rectification application together represents the most integrative, multi-step reasoning demand in the entire semiconductor sub-sequence, justifying the Expert difficulty, Analyze Bloom level, and reduced mastery threshold (0.70).\n- **No open issues:** description, prerequisites, and the (absent) unlocks are internally consistent with this concept's role as the capstone of the semiconductor physics sub-sequence within the Modern Physics domain.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.diode-rectification.md",
+        "startLine": 254,
+        "endLine": 264
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,427 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.particle.hadron-quark-model-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.particle.hadron-quark-model",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:69c6a5f0fcb2df5d8cf84344dc5ff96d5a27b560b124d838969251f02cf35718",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md": "sha256:a0e1e2499b623f22ed7d3ba569dff3b0416d56102601a5e0963771ff2c253532"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.particle.hadron-quark-model",
+    "name": "Quark Model of Hadrons: Baryons and Mesons",
+    "difficultyRaw": "Proficient",
+    "bloom": "Apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.particle.quarks"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.particle.hadron-quark-model-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.particle.hadron-quark-model (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md": "sha256:a0e1e2499b623f22ed7d3ba569dff3b0416d56102601a5e0963771ff2c253532"
+      },
+      "contentHash": "sha256:971edf48a21b34cfaed8287e11f2f10fb72d12a002faf229b7b74cfeabbd26e9",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.particle.hadron-quark-model.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md#TA-1 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.hadron-quark-model"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.hadron-quark-model\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.hadron-quark-model.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md#TA-2 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.hadron-quark-model"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.hadron-quark-model\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.hadron-quark-model.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md#TA-3 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.hadron-quark-model"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.hadron-quark-model\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.hadron-quark-model.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.hadron-quark-model"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.hadron-quark-model\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.hadron-quark-model.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.hadron-quark-model"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.hadron-quark-model\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.particle.hadron-quark-model/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.particle.hadron-quark-model",
+      "title": "Quark Model of Hadrons: Baryons and Mesons — core explanation",
+      "content": "**One-sentence definition:** Hadrons combine quarks in exactly two allowed patterns — baryons (three quarks) and mesons (a quark-antiquark pair) — and the quark model predicts the charge, approximate mass, and existence of every known hadron from its quark content alone.\n\n**The core insight:** Once you accept that quarks always combine in color-neutral groups (Section on strong-interaction develops \"color\" fully; for now, treat it as \"three quarks\" or \"quark+antiquark\" as the two allowed recipes), the entire hadron zoo — hundreds of named particles discovered since the 1950s — collapses into a predictable combinatorial table, the same way the periodic table organizes elements by proton count rather than treating each element as an unrelated mystery.\n\n**Conceptual chain:**\n1. Baryons are built from exactly three quarks (e.g., proton = uud, neutron = udd); antibaryons are built from three antiquarks.\n2. Mesons are built from exactly one quark and one antiquark (e.g., positive pion π⁺ = ud̄, i.e., an up quark and an anti-down quark).\n3. No other combination (two quarks, four quarks, a single quark) forms a stable, long-observed hadron under the ordinary quark model — although more exotic four- and five-quark combinations (\"tetraquarks,\" \"pentaquarks\") have been observed in modern collider data as rare, short-lived states.\n4. Every hadron's charge is the sum of its constituent quark charges; every hadron's approximate mass is dominated by its quark masses plus a large contribution from the binding (strong-force) energy itself.\n5. Baryon number (+1 for baryons, −1 for antibaryons, 0 for mesons) is a strictly conserved quantity in every known interaction (developed fully in phys.particle.conservation-laws).\n6. The quark model predicted particles before they were discovered (most famously the Ω⁻ baryon, sss, predicted by Gell-Mann in 1962 and discovered in 1964 with exactly the predicted mass and charge) — a triumph comparable to Mendeleev's periodic table predictions.\n\n**Central relations:**\n- Baryon = 3 quarks (e.g., proton uud, neutron udd, Ω⁻ sss). Antibaryon = 3 antiquarks.\n- Meson = quark + antiquark (e.g., π⁺ = ud̄, π⁻ = ūd, K⁺ = us̄).\n- Baryon number: +1 (baryon), −1 (antibaryon), 0 (meson).\n- Charge = sum of constituent quark charges (always a whole multiple of e).\n- Hadron mass ≈ constituent quark masses + strong-force binding energy (binding energy dominates for light-quark hadrons like the proton).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md",
+        "startLine": 18,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "phys.particle.hadron-quark-model/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.particle.hadron-quark-model",
+      "title": "A hadron's mass is just the sum of the masses of its constituent quarks",
+      "content": "### MC-1: \"A hadron's mass is just the sum of the masses of its constituent quarks\"\n- **Probe:** \"The proton's mass is about 938 MeV/c². Its three quarks (two up, one down) have masses of roughly 2, 2, and 5 MeV/c². Do these numbers add up? If not, where does the rest of the mass come from?\"\n- **Characteristic phrase:** \"The proton's mass should just be the sum of its quark masses.\"\n- **Trigger:** Simple additive intuition from everyday composite objects (a car's mass is the sum of its parts' masses) is over-applied to hadron mass.\n- **Conflict evidence [P28]:** Summing the \"bare\" masses of two up quarks and one down quark gives only about 9 MeV/c² — roughly 1% of the proton's actual measured mass of 938 MeV/c². The remaining ~99% comes from the strong-force binding energy (the energy stored in the gluon field holding the quarks together), converted into mass via E = mc².\n- **Bridge [P30]:** \"For hadrons made of light quarks, almost all of the mass is binding energy, not quark rest mass — the opposite of what everyday additive intuition suggests. Nearly all of a proton's mass is, in a real sense, the energy of the force holding it together, not the 'stuff' inside it.\"\n- **Replacement [P31]:** Hadron mass = sum of constituent quark rest masses + strong-force binding energy contribution; for light-quark hadrons, binding energy dominates overwhelmingly.\n- **Discrimination pairs [P33]:** A stretched spring stores potential energy that adds to a system's total energy beyond the sum of its parts' rest masses — the proton is an extreme version of this, where the \"stretched\" gluon field between confined quarks contributes almost the entire mass.\n- **S6 repair path:** Do the arithmetic together explicitly (2+2+5 = 9 MeV/c² vs. 938 MeV/c² measured) and ask, \"where did the other 929 MeV/c² come from?\" before revealing the binding-energy answer.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.particle.hadron-quark-model/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.particle.hadron-quark-model",
+      "title": "Any combination of quarks (two, four, or any number) should form a valid hadron",
+      "content": "### MC-2: \"Any combination of quarks (two, four, or any number) should form a valid hadron\"\n- **Probe:** \"Could two quarks alone (no antiquark) combine to form a stable hadron?\"\n- **Characteristic phrase:** \"If three quarks make a baryon, two quarks should make something too, and four quarks should make something bigger.\"\n- **Trigger:** Overgeneralizing from \"quarks combine to form hadrons\" to \"any number of quarks combines,\" without the color-neutrality constraint (fully developed in phys.particle.strong-interaction) restricting the allowed combinations.\n- **Conflict evidence [P28]:** Ordinary hadrons are found only as 3-quark baryons or quark-antiquark mesons — no stable, ordinary 2-quark or 4-quark hadron has ever been part of the standard hadron catalog; the constraint comes from color confinement, which requires the total color charge of any observed particle to be \"colorless\" (neutral), a condition satisfied by exactly 3 quarks (one of each color) or a quark-antiquark pair (color and its anticolor), but not by 2 or 4 quarks in the simplest combinations.\n- **Bridge [P30]:** \"It's not that any quark count 'should' work and doesn't — the color-charge rule (developed fully in the next concept) mathematically permits only 3-quark and quark-antiquark combinations to be color-neutral in the simplest way. Modern experiments have found rare 4-quark (tetraquark) and 5-quark (pentaquark) states, but these are unusual, short-lived exceptions confirmed only recently — not part of the ordinary hadron catalog most physics is built on.\"\n- **Replacement [P31]:** The two standard hadron recipes (3 quarks, or quark+antiquark) come from the requirement of color neutrality; other combinations are rare, recently-confirmed exotic states, not the basic rule.\n- **Discrimination pairs [P33]:** A recipe book with two standard dish templates (a three-ingredient stew, a two-ingredient sandwich) might occasionally have a rare \"chef's special\" exception dish — but the two standard templates are what fill 99% of the book.\n- **S6 repair path:** Explicitly state, \"this is a preview — the full reason only 3-quark and quark+antiquark combinations are ordinary will make complete sense once you learn about color charge in the very next concept.\"",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.particle.hadron-quark-model/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.particle.hadron-quark-model",
+      "title": "Baryon number and electric charge are the same bookkeeping quantity",
+      "content": "### MC-3: \"Baryon number and electric charge are the same bookkeeping quantity\"\n- **Probe:** \"A proton has charge +1 and baryon number +1. Does that mean charge and baryon number are always the same number for any hadron?\"\n- **Characteristic phrase:** \"Baryon number and charge are basically the same thing, just under different names.\"\n- **Trigger:** The coincidence that the proton (the most familiar hadron) has both charge +1 and baryon number +1 leads to an over-generalization that these two quantities always match.\n- **Conflict evidence [P28]:** The neutron has charge 0 but baryon number +1 (it's still 3 quarks, udd). The Ω⁻ baryon (sss) has charge −1 but baryon number +1. These clearly show charge and baryon number are computed independently and frequently disagree.\n- **Bridge [P30]:** \"Charge is computed by summing each quark's individual electric charge (+⅔ or −⅓ depending on flavor). Baryon number is computed purely by counting quarks (+⅓ each, regardless of flavor) and antiquarks (−⅓ each). They use completely different input rules and, for most hadrons, give different numbers.\"\n- **Replacement [P31]:** Compute charge and baryon number as two entirely separate sums: charge from quark flavor-dependent charges; baryon number from quark/antiquark count alone.\n- **Discrimination pairs [P33]:** A shopping cart's total price and total item count are both \"sums,\" but they measure completely different things and rarely match numerically — charge and baryon number are exactly this kind of independent pair of sums.\n- **S6 repair path:** Compute both quantities side by side for the neutron (udd): charge = ⅔−⅓−⅓ = 0; baryon number = ⅓+⅓+⅓ = 1 — showing the two numbers explicitly disagree for a very familiar particle.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md",
+        "startLine": 23,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.particle.hadron-quark-model/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.hadron-quark-model",
+      "title": "EXPLAIN",
+      "content": "{\"id\":\"TA-1\",\"title\":\"EXPLAIN\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.particle.hadron-quark-model/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.hadron-quark-model",
+      "title": "CHALLENGE",
+      "content": "{\"id\":\"TA-2\",\"title\":\"CHALLENGE\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.particle.hadron-quark-model/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.hadron-quark-model",
+      "title": "EXPLAIN",
+      "content": "{\"id\":\"TA-3\",\"title\":\"EXPLAIN\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.particle.hadron-quark-model/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.hadron-quark-model",
+      "title": "DEMONSTRATE + TRANSFER",
+      "content": "{\"id\":\"TA-4\",\"title\":\"DEMONSTRATE + TRANSFER\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md",
+        "startLine": 11,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.particle.hadron-quark-model/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.hadron-quark-model",
+      "title": "ASSESSMENT PRIMER",
+      "content": "{\"id\":\"TA-5\",\"title\":\"ASSESSMENT PRIMER\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "phys.particle.hadron-quark-model/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.particle.hadron-quark-model",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly classifies hadrons as baryon or meson from quark content, correctly computes charge and baryon number independently for a given hadron, and correctly explains why binding energy (not bare quark mass) dominates hadron mass. Score ≥ 80%.\n\n**FA-1 — Classification and charge:**\n*Q: A hadron has quark content dūs̄ (a down quark, an anti-up quark, wait — reconsider: use ds̄, a down quark and an anti-strange quark). Is this a baryon or meson? What is its charge?*\nExpected: Meson (quark + antiquark: d and s̄). Charge = (−⅓) + (+⅓) = 0. [Note: this composition corresponds to the neutral kaon K⁰.]\nThreshold: Correct category and correct charge computed via explicit summation.\n\n**FA-2 — Baryon number vs. charge:**\n*Q: Compute both the electric charge and the baryon number of the Ω⁻ baryon (quark content: sss).*\nExpected: Charge = 3 × (−⅓) = −1. Baryon number = 3 × (+⅓) = +1.\nThreshold: Both values correct, computed via separate, correctly-applied rules (not conflated).\n\n**FA-3 — Mass reasoning:**\n*Q: The sum of a proton's three \"bare\" quark masses is only about 1% of its measured mass. Explain where the remaining ~99% comes from.*\nExpected: The strong-force binding energy — the energy of the gluon field holding the quarks together — contributes the vast majority of the proton's mass via E = mc².\nThreshold: Must correctly attribute the discrepancy to binding energy via E = mc², not merely say \"the quarks are more massive than we think\" or leave it unexplained.\n\n**FA-4 — Predictive power:**\n*Q: Explain, using the Ω⁻ example, why the quark model is considered a genuinely predictive theory rather than just a retroactive classification scheme.*\nExpected: Gell-Mann predicted the Ω⁻'s charge and approximate mass from a gap in a symmetric particle pattern before the particle was ever observed; its discovery in 1964 with matching properties confirmed the quark model's predictive, not merely descriptive, power.\nThreshold: Must cite the prediction-before-discovery sequence explicitly.\n\n**Confidence calibration:** After FA-3, students rate confidence before revealing the answer; students confident but wrong are walked through the explicit arithmetic mismatch (Demo 2) again before re-attempting a parallel item (neutron mass breakdown).\n\n**Delayed retrieval (session + 3):** \"What are the two allowed 'recipes' for an ordinary hadron? Why does a proton's mass vastly exceed the sum of its quark masses?\" Expected: 3 quarks (baryon) or quark+antiquark (meson); binding energy via E = mc².\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md",
+        "startLine": 191,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "phys.particle.hadron-quark-model/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.hadron-quark-model",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- Colored-block building exercise: students physically assemble a \"baryon\" from exactly three labeled quark blocks and a \"meson\" from exactly one quark block plus one (differently colored/marked) antiquark block, and are shown that two blocks alone, or four blocks, do not form a recognized ordinary hadron.\n- Analogy prop: a recipe book that allows exactly two dish types — a \"three-ingredient stew\" (baryon) and a \"two-ingredient sandwich, one filling plus one specific condiment\" (meson) — nothing else is on the menu.\n\n### Representational (Iconic)\n- A hadron construction table: name, quark content, charge (computed), baryon number, category (baryon/meson).\n- The Ω⁻ prediction story as an iconic \"empty slot\" diagram — analogous to Mendeleev's periodic table gaps — showing a predicted particle's properties before its discovery.\n\n### Abstract (Symbolic)\n- Charge computation for mesons: π⁺ = u(+⅔) + d̄(+⅓) = +1. [Anti-down carries the opposite charge of down: −(−⅓) = +⅓.]\n- Baryon number computation: any 3-quark combination has baryon number 3×(+⅓) = +1; any quark-antiquark combination has baryon number (+⅓)+(−⅓) = 0.\n- Mass-energy accounting: the proton's mass (~938 MeV/c²) vastly exceeds the sum of its three \"bare\" quark masses (~2+2+5 = ~9 MeV/c² for uud) — the difference (~99% of the proton's mass) comes from the strong-force binding energy (gluon field energy) holding the quarks together, a genuinely counter-intuitive E = mc² consequence.\n\n### Transfer (+)\n- Nuclear physics: every property of protons, neutrons, and exotic hadrons observed in collider experiments is explained via this same combinatorial framework.\n- The historical parallel to Mendeleev's periodic table (predicting undiscovered elements from pattern gaps) directly parallels Gell-Mann's Ω⁻ prediction, illustrating how a good classification scheme becomes a genuine predictive theory.\n- Particle accelerator physics: the discovery of \"exotic\" tetraquark and pentaquark states in modern collider data (LHCb experiment) is understood as an extension of, not an exception to, the basic quark-combination rules taught here.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md",
+        "startLine": 41,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.particle.hadron-quark-model/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.hadron-quark-model",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — Believing a hadron's mass equals the simple sum of its \"bare\" quark masses:** Correct: for light-quark hadrons like the proton, the sum of quark rest masses accounts for only about 1% of the total mass — the remainder comes from the strong-force binding energy itself (via E = mc²), a genuinely surprising and important point that distinguishes the quark model's mass prediction from a naive additive expectation.\n\n**Mode 2 — Assuming any combination of quarks forms a valid hadron (e.g., two quarks, or four quarks):** Correct: the ordinary quark model restricts stable, long-studied hadrons to exactly two recipes — three quarks (baryon) or quark+antiquark (meson) — though rare exotic multiquark states (tetraquarks, pentaquarks) have since been confirmed as genuine but unusual exceptions.\n\n**Mode 3 — Confusing baryon number with electric charge:** Students conflate \"3 quarks = charge +1\" with \"3 quarks = baryon number +1,\" not realizing these are two separate bookkeeping quantities computed independently (charge from quark charges; baryon number from quark count alone, regardless of flavor).\n\n**Mode 4 — Believing the quark model was purely a retroactive explanation with no genuine predictive power:** Correct: the model correctly predicted the existence, mass, and charge of previously undiscovered particles (most famously the Ω⁻ baryon) before they were experimentally found — a hallmark of a genuinely successful physical theory, not just an after-the-fact classification scheme.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md",
+        "startLine": 63,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "phys.particle.hadron-quark-model/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.hadron-quark-model",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"In 1962, a physicist named Murray Gell-Mann was staring at a pattern of known particles arranged like a triangle, and he noticed something odd: one corner of the triangle was empty. Using nothing but the pattern, he predicted the exact charge and approximate mass of the missing particle. Two years later, in 1964, physicists found it — almost exactly as predicted. That particle is called the Omega-minus baryon, and its discovery is one of the great predictive triumphs in the history of physics.\"\n\n**At the mass mismatch:**\n\"Quick arithmetic: a proton is uud — two up quarks, about 2 MeV/c² each, and one down quark, about 5 MeV/c². Add those up: roughly 9 MeV/c². The proton's actual measured mass? 938 MeV/c². That's not a small discrepancy — that's a hundred times off. So where does the other ninety-nine percent of the proton's mass actually come from? [Pause.] It's not more quark 'stuff.' It's the energy of the strong force field holding those three quarks together, converted into mass through E equals m c squared. Almost the entire mass of every proton in your body — in a very real sense — is the energy of a force, not the 'stuff' the quarks are made of.\"\n\n**At the two-recipes rule:**\n\"Every hadron you'll ever meet follows exactly one of two recipes: three quarks — that's a baryon — or one quark and one antiquark — that's a meson. That's it. Once you know a particle's quark content, you can compute its charge, you can compute a number called baryon number, and — combined with what you learn next about color charge — you'll understand why those are the only two recipes that work.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md",
+        "startLine": 178,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "phys.particle.hadron-quark-model/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.hadron-quark-model",
+      "title": "Recovery Notes",
+      "content": "**S0:** Student has the quark charge/flavor facts (from phys.particle.quarks) but hasn't yet combined them into hadrons. Begin entirely with the physical block-building exercise (Section 2, Concrete) — assembling a literal three-block \"baryon\" and a two-block \"meson\" — before any charge arithmetic.\n\n**S3:** Student can classify baryon vs. meson but computes charge and baryon number as if they were the same quantity (MC-3). Run Demo 1 (charge/baryon-number table) repeatedly with new hadrons until the two separate computations become automatic and distinct.\n\n**S6:** Student is anxious about the counter-intuitive mass fact (MC-1) feeling \"impossible\" or \"made up.\" Ground entirely in the concrete arithmetic mismatch (Demo 2, showing real numbers: 9 vs. 938 MeV/c²) before introducing the abstract \"binding energy\" language.\n\n**S9:** Extend into the modern tetraquark/pentaquark discoveries (LHCb experiment) as an enrichment topic — \"the two-recipe rule you just learned has recently been shown to have rare exceptions; want to see what a 5-quark particle looks like?\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md",
+        "startLine": 221,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "phys.particle.hadron-quark-model/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.hadron-quark-model",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Procedural (charge and baryon-number computation from quark content) plus conceptual/historical narrative (the Ω⁻ prediction as a model of predictive science) — retrieval practice should test both the computational skill and the historical reasoning.\n\n**Spaced retrieval schedule:**\n- Session + 1: \"Compute the charge and baryon number of a hadron with quark content uds.\"\n- Session + 3: \"Explain why a proton's mass is not simply the sum of its quark masses.\"\n- Session + 7: \"Describe how the Ω⁻ baryon was predicted before it was discovered.\"\n\n**Interleaving partners:** phys.particle.quarks (prerequisite — quark charges and flavors), phys.particle.strong-interaction (successor — the color-neutrality rule that explains why only these two recipes work), phys.particle.conservation-laws (successor — baryon number as a strictly conserved quantity).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md",
+        "startLine": 233,
+        "endLine": 246
+      }
+    },
+    {
+      "assetId": "phys.particle.hadron-quark-model/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.hadron-quark-model",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Classifying and computing charge/baryon number for any newly named hadron encountered in later material (kaons, sigma baryons, exotic tetraquarks) using the same two-recipe, sum-the-quantities method.\n\n**Far transfer:** The general scientific principle of predictive classification (Mendeleev's periodic table, the quark model's baryon decuplet, and modern genomics' predicted-but-not-yet-sequenced gene functions) — a good classification scheme's ultimate test is whether it can predict something not yet observed, not merely organize what's already known.\n\n**Structural abstraction:** \"Most of a bound system's mass/energy can come from the binding itself, not the raw components.\" This pattern — where interaction energy dominates over constituent rest mass — echoes (in reduced form) nuclear binding energy (though there mass is lost, not gained, since nucleons are already individually stable) and, more distantly, the general E = mc² principle that energy of any form contributes to measured mass.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md",
+        "startLine": 246,
+        "endLine": 256
+      }
+    },
+    {
+      "assetId": "phys.particle.hadron-quark-model/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.particle.hadron-quark-model",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.particle.quarks is necessary and sufficient — quark charges and flavors must be secure before combining them into hadrons.\n- **Unlock readiness:** phys.particle.weak-interaction, phys.particle.conservation-laws, and phys.particle.standard-model all depend on the baryon/meson framework and baryon-number bookkeeping established here; sequencing as three parallel unlocks is well-motivated given each depends on this concept independently.\n- **Difficulty calibration:** Proficient/Apply is appropriate — the charge/baryon-number computation is routine once the two recipes are known, but the mass-from-binding-energy insight (MC-1) is a genuine conceptual challenge that justifies the higher estimated hours (5) relative to neighboring concepts.\n- **No open issues:** description, prerequisites, and unlocks are internally consistent with the Physics KG's Particle Physics domain design.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md",
+        "startLine": 256,
+        "endLine": 266
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

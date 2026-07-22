@@ -1,0 +1,428 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mod.pn-junction-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mod.pn-junction",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:470440df79f0c936ca40c6b2240094defae436034d69c1767c3cb75a6c02e0a6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mod.pn-junction.md": "sha256:fafb5a6d36332de1646c1077fa3b13e2e0c1cf272ce090f39d9bd75509f6d0de"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mod.pn-junction",
+    "name": "The p-n Junction",
+    "difficultyRaw": "Expert",
+    "bloom": "Apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.mod.extrinsic-semiconductors"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mod.pn-junction-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mod.pn-junction (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mod.pn-junction.md": "sha256:fafb5a6d36332de1646c1077fa3b13e2e0c1cf272ce090f39d9bd75509f6d0de"
+      },
+      "contentHash": "sha256:aa9f43658c6e3890153e120e87083596e2dfa5d52b3e4099e9801a3ad543ad19",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mod.pn-junction.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.pn-junction.md#TA-1 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.pn-junction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.pn-junction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.pn-junction.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.pn-junction.md#TA-2 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.pn-junction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.pn-junction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.pn-junction.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.pn-junction.md#TA-3 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.pn-junction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.pn-junction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.pn-junction.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.pn-junction.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.pn-junction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.pn-junction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.pn-junction.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.pn-junction.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.pn-junction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.pn-junction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mod.pn-junction/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mod.pn-junction",
+      "title": "The p-n Junction — core explanation",
+      "content": "**One-sentence definition:** At the interface between p-type and n-type semiconductor regions, diffusion of majority carriers across the junction forms a depletion region (emptied of mobile carriers) and a built-in electric potential that opposes further net carrier flow once equilibrium is reached.\n\n**The core insight:** Simply pressing a p-type region and an n-type region together doesn't produce a static, unchanging boundary — it triggers a genuine physical process: majority carriers from each side (abundant electrons in n-type, abundant holes in p-type) diffuse across the junction into the region where they're scarce, driven purely by the concentration gradient, exactly as any concentrated substance diffuses into a region of lower concentration. But this diffusion is self-limiting: as carriers cross and leave behind their fixed, oppositely-charged dopant ions, a built-in electric field develops that increasingly opposes further diffusion, until the system reaches a stable equilibrium — the depletion region and its associated built-in potential.\n\n**Conceptual chain:**\n1. Before contact, n-type and p-type regions are each individually electrically neutral (as established in the prerequisite concept), each with their own majority and minority carrier populations.\n2. Upon forming a junction, majority carriers diffuse across the interface: electrons from the n-side diffuse into the p-side (where they're scarce), and holes from the p-side diffuse into the n-side (where they're scarce), driven by the concentration gradient alone, exactly like any diffusion process.\n3. As electrons leave the n-side, they leave behind their fixed, positively-charged donor ions (now unbalanced, since the mobile electron that balanced them is gone); as holes leave the p-side, they leave behind fixed, negatively-charged acceptor ions.\n4. This creates a region right at the junction — the depletion region — genuinely emptied of mobile carriers on both sides, with exposed fixed positive ions on the n-side and fixed negative ions on the p-side.\n5. These exposed fixed charges create a built-in electric field pointing from the n-side toward the p-side (from positive to negative), which opposes further diffusion of majority carriers across the junction — as more carriers diffuse, the field strengthens, until diffusion and the opposing field-driven drift exactly balance.\n6. At equilibrium, a specific, stable built-in potential difference (typically around 0.6–0.7 V for silicon) exists across the depletion region — genuinely present, measurable in principle, but not directly usable to power an external circuit without an additional applied voltage (developed in the next concept, diode behavior under forward/reverse bias).\n\n**Central relations:**\n- Depletion region: the narrow zone at the p-n interface genuinely emptied of mobile carriers, containing only exposed fixed dopant ions.\n- Built-in potential (V_bi): the equilibrium potential difference across the depletion region (~0.6–0.7 V for silicon), arising from the exposed fixed ion charges.\n- Diffusion (carrier concentration gradient) vs. drift (electric-field-driven carrier motion): these two opposing effects reach exact balance at equilibrium, defining the depletion region's stable width and the built-in potential's stable value.\n- The depletion region and built-in potential form spontaneously upon junction formation, with no external voltage applied — this equilibrium state is the starting point for understanding diode behavior under applied bias.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.pn-junction.md",
+        "startLine": 18,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.mod.pn-junction/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.mod.pn-junction",
+      "title": "The depletion region and built-in potential require an external battery or voltage source to form",
+      "content": "### MC-1: \"The depletion region and built-in potential require an external battery or voltage source to form\"\n- **Probe:** \"Does a p-n junction need to be connected to a battery or power source before a depletion region and built-in potential exist, or do these form on their own?\"\n- **Characteristic phrase:** \"The depletion region only forms once you connect a voltage source to the junction.\"\n- **Trigger:** Because \"potential\" and \"voltage\" are terms usually associated with batteries and external circuits, students assume the built-in potential must similarly require an external source.\n- **Conflict evidence [P28]:** A freshly manufactured p-n junction diode, sitting on a table with no wires or power connected at all, genuinely has a depletion region and a built-in potential (~0.6–0.7 V for silicon) — this is a direct, spontaneous consequence of majority-carrier diffusion and the resulting exposure of fixed dopant ions the instant the junction forms during manufacturing, entirely independent of any subsequently applied external circuit.\n- **Bridge [P30]:** \"The depletion region and built-in potential form spontaneously, from the physics of diffusion alone, the moment p-type and n-type materials are joined — no external battery, wire, or voltage source is needed. An external voltage (developed in the next concept) doesn't create this equilibrium; it disturbs an already-existing equilibrium, shifting the junction away from its spontaneous, unconnected state.\"\n- **Replacement [P31]:** The depletion region and built-in potential are intrinsic, spontaneous properties of any p-n junction, forming immediately upon junction creation, independent of any external circuit.\n- **Discrimination pairs [P33]:** Two rooms of different air pressure connected by an open door will spontaneously equalize somewhat and reach their own stable pressure difference without any external fan or pump needed — the depletion region's built-in potential forms just as spontaneously, from diffusion alone, without any external \"pump\" (battery) required.\n- **S6 repair path:** State directly: \"this diode, sitting here on the table, disconnected from anything — does it have a depletion region right now? Yes. It formed the instant the p-type and n-type materials were joined, during manufacturing, long before you ever picked it up.\"",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.pn-junction.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.mod.pn-junction/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.mod.pn-junction",
+      "title": "Diffusion across the junction continues forever, eventually completely mixing the n-type and p-type regions",
+      "content": "### MC-2: \"Diffusion across the junction continues forever, eventually completely mixing the n-type and p-type regions\"\n- **Probe:** \"Does the diffusion of electrons and holes across a p-n junction ever stop, or does it continue indefinitely until the n-type and p-type regions completely merge into one uniform material?\"\n- **Characteristic phrase:** \"Diffusion should keep going until everything evens out completely, like dye eventually spreading evenly through an entire glass of water.\"\n- **Trigger:** Over-generalizing from simple diffusion examples (like dye in water, which does eventually reach uniform concentration throughout an unbounded, unstructured medium) without accounting for the self-limiting electric field that develops specifically in the charged, structured p-n junction case.\n- **Conflict evidence [P28]:** As carriers diffuse across the junction, they leave behind fixed, oppositely-charged dopant ions, and this growing charge imbalance creates an increasingly strong electric field that pushes back against further diffusion — this is fundamentally different from dye diffusing in electrically neutral water, where no such self-limiting field ever develops. In a real p-n junction, diffusion and the opposing field-driven drift reach an exact, stable balance, leaving a permanent, unchanging depletion region of a specific, finite width (typically less than a micrometer) — a manufactured diode's depletion region does not grow or shrink over time under equilibrium conditions.\n- **Bridge [P30]:** \"Unlike dye diffusing in plain water, carrier diffusion across a p-n junction creates its own opposing electric field as it proceeds — the exposed fixed ions push back against further diffusion. This is a genuinely self-limiting process, reaching a stable, permanent equilibrium (a fixed-width depletion region, a fixed built-in potential), not an ever-continuing mixing process.\"\n- **Replacement [P31]:** p-n junction diffusion is self-limiting via the built-in field it generates, reaching a stable, permanent equilibrium depletion region — it does not continue indefinitely toward complete mixing.\n- **Discrimination pairs [P33]:** Dye spreading in plain water (no opposing force develops) eventually reaches uniform concentration everywhere; but two oppositely-charged balloons attracting each other as they're pulled apart reach a stable equilibrium distance where the pulling force and the elastic resistance balance — the p-n junction behaves like the balloon case, not the dye case, precisely because a genuine restoring force (the built-in field) develops.\n- **S6 repair path:** Contrast the dye-in-water demonstration directly against the p-n junction diagram, explicitly asking, \"does the water develop an opposing force pushing back against the dye as it spreads? No. Does the p-n junction? Yes — that's the crucial difference.\"",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.pn-junction.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.mod.pn-junction/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.mod.pn-junction",
+      "title": "The built-in potential can be directly measured by connecting an ordinary voltmeter across the junction",
+      "content": "### MC-3: \"The built-in potential can be directly measured by connecting an ordinary voltmeter across the junction\"\n- **Probe:** \"Could you directly measure a p-n junction's built-in potential (~0.6–0.7 V) just by connecting an ordinary voltmeter across its two terminals, the same way you'd measure a battery's voltage?\"\n- **Characteristic phrase:** \"Just hook up a voltmeter and you should read the built-in potential directly.\"\n- **Trigger:** Analogizing directly and uncritically to measuring a battery's terminal voltage, without considering that the voltmeter's own connecting leads introduce additional junction-like contact potentials.\n- **Conflict evidence [P28]:** Connecting an ordinary voltmeter to a p-n junction's terminals creates additional metal-semiconductor contact junctions at each connection point, each with their own contact potential; in a properly analyzed closed loop, these additional contact potentials exactly cancel the junction's own built-in potential, so an ideal voltmeter reads zero across an unbiased, unconnected-to-anything-else p-n junction, despite the built-in potential being genuinely, physically present inside the material.\n- **Bridge [P30]:** \"The built-in potential is genuinely real and physically present, but it is not directly measurable with a simple external voltmeter connection, because the measurement leads themselves introduce additional contact potentials that exactly cancel it out in the closed measurement loop. This is a subtle but important and well-established result in semiconductor physics — its reality is confirmed indirectly, through the junction's overall electrical behavior (developed fully in the next concept), not through direct voltmeter measurement.\"\n- **Replacement [P31]:** The built-in potential is real but not directly measurable by simple external voltmeter connection, due to canceling contact potentials introduced by the measurement leads themselves.\n- **Discrimination pairs [P33]:** A sealed, perfectly insulated container at a specific internal pressure cannot have that pressure \"directly measured\" by simply attaching an external gauge without accounting for how the gauge's own connection affects the reading — some physically real internal quantities require indirect methods to properly characterize.\n- **S6 repair path:** State the result directly and clearly: \"yes, the built-in potential is real. No, you can't just read it off a voltmeter directly — the wires you'd use to connect the voltmeter introduce their own hidden junctions that exactly cancel it out. This is one of those results that seems paradoxical at first but is well-established.\"\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.pn-junction.md",
+        "startLine": 23,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.mod.pn-junction/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.pn-junction",
+      "title": "EXPLAIN + DEMONSTRATE",
+      "content": "{\"id\":\"TA-1\",\"title\":\"EXPLAIN + DEMONSTRATE\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.pn-junction.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.mod.pn-junction/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.pn-junction",
+      "title": "DEMONSTRATE + CHALLENGE",
+      "content": "{\"id\":\"TA-2\",\"title\":\"DEMONSTRATE + CHALLENGE\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.pn-junction.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.mod.pn-junction/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.pn-junction",
+      "title": "CHALLENGE",
+      "content": "{\"id\":\"TA-3\",\"title\":\"CHALLENGE\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.pn-junction.md",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mod.pn-junction/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.pn-junction",
+      "title": "TRANSFER",
+      "content": "{\"id\":\"TA-4\",\"title\":\"TRANSFER\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.pn-junction.md",
+        "startLine": 11,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.mod.pn-junction/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.pn-junction",
+      "title": "SYNTHESIS",
+      "content": "{\"id\":\"TA-5\",\"title\":\"SYNTHESIS\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.pn-junction.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "phys.mod.pn-junction/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mod.pn-junction",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly explains the diffusion-to-equilibrium mechanism forming the depletion region, correctly explains why this process is self-limiting (unlike simple neutral-medium diffusion), and correctly states that the depletion region forms without any external voltage source. Score ≥ 70%.\n\n**FA-1 — Mechanism sequence:**\n*Q: Describe, step by step, what happens physically when p-type and n-type semiconductor pieces are joined together, with nothing else connected.*\nExpected: Majority carriers diffuse across the junction (electrons into p-side, holes into n-side) due to concentration gradient; this exposes fixed, oppositely-charged dopant ions at the junction; these exposed charges create a built-in electric field opposing further diffusion; diffusion and field-driven drift reach equilibrium, leaving a stable depletion region and built-in potential.\nThreshold: Must correctly sequence all steps (diffusion → exposed ions → opposing field → equilibrium), not merely state \"a depletion region forms.\"\n\n**FA-2 — Self-limiting nature:**\n*Q: Why doesn't carrier diffusion across a p-n junction continue until the n-type and p-type regions are completely, uniformly mixed, the way dye eventually spreads uniformly through water?*\nExpected: Unlike dye in electrically neutral water, carrier diffusion across a p-n junction exposes fixed, oppositely-charged dopant ions, creating a genuine, growing electric field that opposes further diffusion — this self-limiting feedback reaches a stable equilibrium (a fixed-width depletion region) rather than continuing to complete mixing.\nThreshold: Must correctly cite the opposing-field/self-limiting mechanism as the key difference from simple diffusion.\n\n**FA-3 — No external voltage required:**\n*Q: Does a p-n junction need to be connected to a battery or external voltage source for a depletion region and built-in potential to exist? Explain.*\nExpected: No — the depletion region and built-in potential form spontaneously, from diffusion and the resulting exposed fixed ion charges alone, the moment the junction is formed, entirely independent of any external circuit.\nThreshold: Must correctly say \"no\" and cite the spontaneous, diffusion-driven origin.\n\n**FA-4 — Measurement subtlety:**\n*Q: Is the built-in potential a real, physically present quantity? Can it be directly measured by connecting an ordinary voltmeter across the junction's terminals? Explain.*\nExpected: Yes, it is genuinely real and physically present; no, it cannot be directly measured this way, because the voltmeter's own connecting leads introduce additional contact potentials that exactly cancel the built-in potential in the closed measurement loop.\nThreshold: Must correctly affirm reality while correctly denying direct measurability, with the contact-potential-cancellation reasoning.\n\n**Confidence calibration:** After FA-2, students rate confidence before revealing the answer; students confident but wrong are walked through the dye-vs-junction contrast (Demo 1) again explicitly before re-attempting a parallel item.\n\n**Delayed retrieval (session + 3):** \"Describe the sequence of physical events that produces a stable depletion region and built-in potential at a p-n junction, and explain why this process is self-limiting rather than continuing indefinitely.\" Expected: diffusion → exposed fixed ions → opposing built-in field → equilibrium; self-limiting due to the growing opposing field, unlike neutral-medium diffusion.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.pn-junction.md",
+        "startLine": 189,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "phys.mod.pn-junction/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.pn-junction",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- A dye-diffusion-in-water demonstration: drop concentrated dye into one side of a still water container, separated by a removable barrier from clear water on the other side; remove the barrier and observe dye diffusing from high to low concentration — directly analogous to majority carriers diffusing across the newly formed junction, purely due to concentration difference.\n- Physical analogy: two rooms, initially separated, one packed with red balls (majority carrier: electrons in n-type) and one packed with blue balls (majority carrier: holes in p-type); open a door between them, and balls of each color initially spread into the other room — but imagine the red balls leave behind small red anchors nailed to the floor wherever they were (fixed donor ions), and blue balls leave behind blue anchors (fixed acceptor ions) — eventually, the anchors create enough of a \"pull back\" effect that further crossing slows to a stop.\n\n### Representational (Iconic)\n- A p-n junction band diagram: p-type region (holes as majority) and n-type region (electrons as majority) joined at an interface, with a depletion region drawn as a narrow zone emptied of mobile-carrier symbols but showing fixed \"+\" ions on the n-side edge and fixed \"−\" ions on the p-side edge.\n- A built-in electric field diagram: field lines drawn pointing from the exposed positive ions (n-side of the depletion region) toward the exposed negative ions (p-side), directly opposing further majority-carrier diffusion.\n\n### Abstract (Symbolic)\n- Equilibrium condition (qualitative, no full Poisson-equation derivation required at this level): diffusion current (carriers moving down their concentration gradient) exactly balances drift current (carriers being pushed back by the built-in field) for both electrons and holes simultaneously, at equilibrium — this dynamic balance, not a static absence of motion, defines the stable depletion region.\n- Typical built-in potential values: approximately 0.6–0.7 V for silicon p-n junctions, approximately 0.3 V for germanium — this specific number becomes centrally important in the next concept's forward/reverse bias behavior.\n\n### Transfer (+)\n- Solar cell physics: photovoltaic cells are, at their core, p-n junctions engineered so that photon-generated electron-hole pairs are efficiently separated by the built-in field, directly producing usable electric current.\n- LED (light-emitting diode) physics: LEDs are p-n junctions engineered so that electron-hole recombination (the reverse of pair generation) releases energy as emitted photons rather than heat.\n- Transistor physics: modern transistors are built from carefully arranged combinations of p-n junctions (e.g., bipolar junction transistors use two junctions back-to-back), making the single p-n junction the essential building block of virtually all semiconductor electronics.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.pn-junction.md",
+        "startLine": 40,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "phys.mod.pn-junction/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.pn-junction",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — Believing the depletion region and built-in potential require an external voltage source or battery to form:** Correct: the depletion region and built-in potential form spontaneously, purely from the diffusion of majority carriers and the resulting exposure of fixed dopant ions, the moment a p-n junction is formed — no external circuit, battery, or applied voltage is needed at all for this equilibrium state to exist.\n\n**Mode 2 — Assuming diffusion of carriers across the junction continues indefinitely, eventually completely mixing the n-type and p-type regions into one uniform material:** Correct: diffusion is self-limiting — as carriers diffuse and expose fixed ions, the resulting built-in electric field increasingly opposes further diffusion, until an exact, stable equilibrium is reached (diffusion current = drift current for each carrier type), leaving a genuinely stable, unchanging depletion region and built-in potential, not a continuing, ever-mixing process.\n\n**Mode 3 — Believing the built-in potential can be directly measured with an external voltmeter connected across the junction's two terminals, the way a battery's voltage can be measured:** Correct: while the built-in potential is a genuine, physically real potential difference across the depletion region, it cannot be directly measured by simply connecting an external voltmeter — the voltmeter's own connecting wires and contacts introduce additional junction-like potential differences that exactly cancel the built-in potential in a closed loop, a subtle but important point developed further in diode circuit analysis.\n\n**Mode 4 — Confusing the depletion region (a spatial region emptied of mobile carriers) with the built-in potential (a voltage/energy quantity) as though they were the same single concept rather than two related but distinct aspects of the same equilibrium:** Correct: the depletion region is a spatial/structural feature (a physical width, typically sub-micrometer, emptied of carriers), while the built-in potential is an energy/voltage quantity (measured in volts) describing the potential difference across that region — related, but describing different physical aspects (space vs. energy) of the same equilibrium state.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.pn-junction.md",
+        "startLine": 61,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.mod.pn-junction/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.pn-junction",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"Take a piece of n-type silicon and a piece of p-type silicon and simply press them together. No battery. No wires. Nothing else connected to anything. What do you think happens right at that boundary, the instant they touch?\"\n\n**At the self-limiting equilibrium reveal:**\n\"Here's what actually happens. Electrons on the n-side, where they're abundant, start diffusing across into the p-side, where they're scarce — pure diffusion, just like any substance spreading from high concentration to low. Holes do the same thing in reverse. But here's the crucial twist: every electron that leaves the n-side leaves behind a fixed, positively-charged atom nailed in place in the crystal lattice — it can't follow. Every hole that leaves the p-side leaves behind a fixed negative atom. As more carriers cross, more of these fixed charges pile up right at the boundary, and they create a real electric field that pushes back against further crossing. Eventually, that pushback exactly balances the diffusion, and everything settles into a stable, permanent equilibrium — a region right at the boundary, completely emptied of mobile carriers, with a specific, fixed voltage across it. All of that, with nothing connected. Nothing plugged in.\"\n\n**At the unmeasurable-directly subtlety:**\n\"Here's a genuinely strange, well-established fact: that built-in voltage — real, physically present, typically about 0.6 to 0.7 volts for silicon — cannot simply be read off with an ordinary voltmeter connected to the two ends. Why not? Because the metal probes you'd use to make contact create their own hidden junction voltages, and in a full measurement loop, those hidden voltages exactly cancel the one you're trying to measure. It's real. You just can't measure it that directly. That's the kind of subtlety that makes semiconductor physics genuinely interesting.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.pn-junction.md",
+        "startLine": 176,
+        "endLine": 189
+      }
+    },
+    {
+      "assetId": "phys.mod.pn-junction/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.pn-junction",
+      "title": "Recovery Notes",
+      "content": "**S3:** Student has n-type/p-type material properties secure (from the prerequisite concept) but hasn't yet connected them to what happens when the two are joined. Begin entirely with the two-rooms-with-anchored-balloons analogy (Section 6) as a concrete anchor before introducing the formal depletion-region/built-in-potential vocabulary.\n\n**S4:** Student assumes diffusion continues indefinitely (MC-2) or requires an external voltage (MC-1). Run Demo 1 (dye-vs-junction contrast) repeatedly, explicitly asking \"does an opposing force develop in this case? Yes or no?\" for each scenario until the self-limiting distinction becomes automatic.\n\n**S6:** Student is anxious about the counter-intuitive, subtle measurement result (MC-3) feeling like a \"trick\" or \"unfair\" fact. Present it directly and matter-of-factly as a genuinely well-established, interesting subtlety of semiconductor physics, rather than dwelling on its counter-intuitiveness — reassure that its strangeness is a feature of real physics, not a sign of a flawed explanation.\n\n**S7:** Student is intellectually ready for challenge-first entry given this concept's Expert difficulty — open directly with \"why doesn't this junction just keep diffusing until it's completely mixed, the way dye in water does?\" as a genuine puzzle before any diagram-building scaffolding.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.pn-junction.md",
+        "startLine": 219,
+        "endLine": 231
+      }
+    },
+    {
+      "assetId": "phys.mod.pn-junction/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.pn-junction",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Conceptual/mechanistic (the diffusion-to-equilibrium sequence and the self-limiting mechanism) — retrieval practice should emphasize explaining the full mechanism and its self-limiting nature in the student's own words, not just naming \"depletion region\" and \"built-in potential\" as isolated vocabulary terms.\n\n**Spaced retrieval schedule:**\n- Session + 1: \"Describe the step-by-step sequence forming a p-n junction's depletion region and built-in potential.\"\n- Session + 3: \"Explain why this diffusion process is self-limiting, unlike dye spreading in water.\"\n- Session + 7: \"Does the built-in potential require an external voltage source? Can it be directly measured with a voltmeter?\"\n\n**Interleaving partners:** phys.mod.extrinsic-semiconductors (prerequisite — n-type and p-type material properties this concept joins), phys.mod.diode-rectification (successor — how an externally applied voltage disturbs this equilibrium to produce rectifying behavior).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.pn-junction.md",
+        "startLine": 231,
+        "endLine": 244
+      }
+    },
+    {
+      "assetId": "phys.mod.pn-junction/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.pn-junction",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Applying the same diffusion-exposed-ion-equilibrium reasoning to understanding how an externally applied voltage (forward or reverse bias) disturbs this equilibrium, directly setting up the next concept's diode rectification behavior.\n\n**Far transfer:** Solar cell and LED device physics (both directly exploit the p-n junction's built-in field, either to separate photon-generated carriers or to drive carrier recombination into light emission), electrochemistry (analogous self-limiting equilibria arise at electrode-electrolyte interfaces, governed by similar diffusion-versus-opposing-field balance), and the general physics principle of self-limiting equilibrium processes (a system reaching stable balance because the very process driving change also generates an opposing effect — a pattern also seen in osmotic pressure equilibrium and capacitor charging).\n\n**Structural abstraction:** \"A diffusion-driven process can be genuinely self-limiting, reaching a stable equilibrium, when the diffusing quantity itself generates an opposing effect (here, an electric field from exposed fixed charges).\" This pattern — diffusion generating its own restoring force, reaching equilibrium rather than continuing to uniformity — recurs in osmotic pressure balance, capacitor charging dynamics, and other systems where a flow generates its own back-pressure.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.pn-junction.md",
+        "startLine": 244,
+        "endLine": 254
+      }
+    },
+    {
+      "assetId": "phys.mod.pn-junction/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.mod.pn-junction",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.mod.extrinsic-semiconductors is necessary and sufficient — the p-n junction is precisely the interface formed by joining the n-type and p-type materials established there.\n- **Unlock readiness:** phys.mod.diode-rectification directly depends on the equilibrium depletion region and built-in potential established here being secure, since diode behavior is entirely about how an externally applied voltage disturbs this specific equilibrium; sequencing as the immediate next concept is well-motivated.\n- **Difficulty calibration:** Expert/Apply is well-calibrated — the self-limiting diffusion-equilibrium mechanism and the subtle, counter-intuitive measurement result (MC-3) both require genuine, careful applied reasoning beyond simple recall, matching the Expert difficulty and reduced mastery threshold (0.70) appropriately.\n- **No open issues:** description, prerequisites, and unlocks are internally consistent with the Physics KG's Modern Physics domain extension (semiconductor physics) design.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.pn-junction.md",
+        "startLine": 254,
+        "endLine": 264
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,358 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.particle.particle-classification-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.particle.particle-classification",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:943b2e6e8b8ded5745d2cd3b437a1f549f33465a6a94f689f5c4800b4de8da95",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.particle.particle-classification.md": "sha256:6aecf533cbbb3a368051cc483bee5d56fa0a98071650697081510a6114aa353a"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "phys.particle.particle-classification",
+    "name": "Particle Classification: Hadrons and Leptons",
+    "difficultyRaw": "Developing",
+    "bloom": "Understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.particle.four-forces"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.particle.particle-classification-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.particle.particle-classification (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.particle.particle-classification.md": "sha256:6aecf533cbbb3a368051cc483bee5d56fa0a98071650697081510a6114aa353a"
+      },
+      "contentHash": "sha256:017160a62af5c8db641542eea836d45520e408e675366ad747ac16cc4734a005",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.particle.particle-classification.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.particle-classification.md#TA-1 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.particle-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.particle-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.particle-classification.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.particle-classification.md#TA-2 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.particle-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.particle-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.particle-classification.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.particle-classification.md#TA-3 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.particle-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.particle-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.particle.particle-classification/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.particle.particle-classification",
+      "title": "Particle Classification: Hadrons and Leptons — core explanation",
+      "content": "**One-sentence definition:** Every particle that experiences the strong force is a hadron (a composite particle built from quarks); every particle that does not is a lepton (a fundamental particle in its own right, such as the electron).\n\n**The core insight:** The single question that sorts every known particle into one of these two families is: \"does it feel the strong force?\" Hadrons (protons, neutrons, pions, and hundreds of other short-lived particles) are all composites built from quarks bound by the strong force. Leptons (the electron, muon, tau, and their neutrinos) are not built from anything smaller that we know of — they are fundamental — and they never feel the strong force at all.\n\n**Conceptual chain:**\n1. By the 1950s–60s, particle accelerators had discovered so many new particles (\"the particle zoo\") that physicists needed an organizing scheme, not just a growing list of names.\n2. The first cut: does the particle interact via the strong force? If yes, it's a hadron; if no, it's a lepton.\n3. Hadrons are further divided by internal quark content (Section on phys.particle.hadron-quark-model): baryons (three quarks, like the proton and neutron) and mesons (a quark-antiquark pair, like the pion).\n4. Leptons come in three \"generations,\" each with a charged member (electron, muon, tau) and an associated neutrino — none of these six leptons has ever been shown to have internal structure.\n5. This binary classification (hadron vs. lepton) is the essential first sorting step before any deeper particle physics — quarks, gauge bosons, conservation laws — can be introduced meaningfully.\n\n**Central relations:**\n- Hadron: any particle built from quarks, therefore subject to the strong force. Includes protons, neutrons, pions, kaons.\n- Lepton: any fundamental particle not built from quarks, therefore never subject to the strong force. Includes electron, muon, tau, and their three neutrinos.\n- All hadrons are composite (have internal structure); all leptons (so far as any experiment has shown) are point-like/fundamental.\n- The proton and neutron are hadrons — despite being commonly taught as \"fundamental building blocks of the atom,\" they are themselves composite particles built from quarks.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.particle-classification.md",
+        "startLine": 18,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.particle.particle-classification/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.particle.particle-classification",
+      "title": "Protons and neutrons are fundamental particles",
+      "content": "### MC-1: \"Protons and neutrons are fundamental particles\"\n- **Probe:** \"Are protons and neutrons fundamental, or are they made of something smaller?\"\n- **Characteristic phrase:** \"Protons and neutrons are the basic building blocks — you can't break them down further.\"\n- **Trigger:** Early chemistry and physics education presents protons, neutrons, and electrons as the three \"fundamental\" particles making up atoms, and never revisits this simplification.\n- **Conflict evidence [P28]:** Deep inelastic scattering experiments (firing high-energy electrons at protons) in the late 1960s revealed that protons have internal structure — point-like constituents (quarks) inside them — exactly as earlier experiments (Rutherford scattering) had revealed structure inside the atom itself.\n- **Bridge [P30]:** \"The proton and neutron are hadrons — composite particles built from three quarks each, bound by the strong force. They are fundamental building blocks of the atom, but they are not fundamental particles in the particle-physics sense. Only the electron (a lepton) and the quarks inside the proton/neutron are currently believed to be truly fundamental.\"\n- **Replacement [P31]:** \"Fundamental to atomic structure\" (proton, neutron, electron) and \"fundamental particle\" (has no known internal structure) are different claims. The electron satisfies both; the proton and neutron satisfy only the first.\n- **Discrimination pairs [P33]:** A brick wall is a \"fundamental unit\" of house-building, but a brick itself is made of smaller sand and clay particles — being foundational to one level of structure doesn't mean being irreducible at the next level down.\n- **S6 repair path:** Show the historical parallel directly: \"Rutherford found the atom has structure (a nucleus) in 1911. In 1968, a nearly identical experiment found the proton has structure too (quarks). Same method, same lesson, applied one level deeper.\"",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.particle-classification.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.particle.particle-classification/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.particle.particle-classification",
+      "title": "Hadron and baryon mean the same thing",
+      "content": "### MC-2: \"Hadron and baryon mean the same thing\"\n- **Probe:** \"Is a pion a baryon? Is it a hadron?\"\n- **Characteristic phrase:** \"Hadrons are protons and neutrons — those are the only kinds.\"\n- **Trigger:** Baryons (proton, neutron) are the hadrons most commonly discussed in introductory nuclear physics, so students never encounter the umbrella term \"hadron\" being distinct.\n- **Conflict evidence [P28]:** The pion (a meson, made of a quark-antiquark pair) is not a baryon — it has none of the properties that define baryons (it doesn't have the \"baryon number\" conservation property, Section on phys.particle.conservation-laws) — yet it absolutely does feel the strong force and is therefore a hadron.\n- **Bridge [P30]:** \"Hadron is the umbrella term for 'any particle that feels the strong force.' Baryon (3 quarks) and meson (quark-antiquark pair) are the two subtypes of hadron. Every baryon is a hadron, but not every hadron is a baryon.\"\n- **Replacement [P31]:** Hadron ⊃ {Baryon, Meson}. The classification test for hadron-vs-lepton is \"does it feel the strong force\"; the further split into baryon-vs-meson depends on quark content (3 quarks vs. quark-antiquark pair).\n- **Discrimination pairs [P33]:** \"Vehicle\" is the umbrella term for both \"car\" and \"truck\" — a truck is a vehicle, but not every vehicle is a truck. Hadron is to baryon/meson as vehicle is to car/truck.\n- **S6 repair path:** Draw the nested-circle diagram (Section 2) explicitly and have the student place proton, neutron, and pion into the correct sub-circles.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.particle-classification.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.particle.particle-classification/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.particle.particle-classification",
+      "title": "Mass determines whether a particle is a hadron or a lepton",
+      "content": "### MC-3: \"Mass determines whether a particle is a hadron or a lepton\"\n- **Probe:** \"The tau lepton is heavier than the proton. Does that mean the tau is actually a hadron?\"\n- **Characteristic phrase:** \"Heavier particles are hadrons, lighter ones are leptons.\"\n- **Trigger:** The most familiar hadron (proton, ~938 MeV/c²) is much heavier than the most familiar lepton (electron, ~0.511 MeV/c²), leading to an over-generalized mass-based rule.\n- **Conflict evidence [P28]:** The tau lepton has a mass of about 1777 MeV/c² — nearly twice the proton's mass — yet it is unambiguously a lepton (it does not feel the strong force). Conversely, the pion (a hadron) has a mass of only about 140 MeV/c² — much lighter than the tau.\n- **Bridge [P30]:** \"Mass is a property each particle happens to have, but it is not the test for hadron-vs-lepton membership. The only test is: does this particle feel the strong force? The tau feels only the weak, electromagnetic, and gravitational forces — never the strong force — so it is a lepton regardless of its mass.\"\n- **Replacement [P31]:** Classification is defined solely by which forces a particle experiences (specifically, the strong force test), never by mass, size, or historical familiarity.\n- **Discrimination pairs [P33]:** A heavyweight boxer and a featherweight boxer are still both boxers — weight class doesn't change the sport they compete in. Mass doesn't change which force-category a particle belongs to.\n- **S6 repair path:** Put the tau lepton (heavy) and pion (light) side by side with their masses labeled, and ask the student to classify each using only the strong-force test, ignoring the mass numbers entirely.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.particle-classification.md",
+        "startLine": 23,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.particle.particle-classification/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.particle-classification",
+      "title": "EXPLAIN",
+      "content": "{\"id\":\"TA-1\",\"title\":\"EXPLAIN\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.particle-classification.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.particle.particle-classification/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.particle-classification",
+      "title": "DEMONSTRATE",
+      "content": "{\"id\":\"TA-2\",\"title\":\"DEMONSTRATE\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.particle-classification.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.particle.particle-classification/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.particle-classification",
+      "title": "CHALLENGE + TRANSFER",
+      "content": "{\"id\":\"TA-3\",\"title\":\"CHALLENGE + TRANSFER\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.particle-classification.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.particle.particle-classification/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.particle.particle-classification",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly applies the strong-force test to classify at least 8 of 10 unfamiliar particles as hadron or lepton, and correctly explains why the proton is not a fundamental particle despite being foundational to atomic structure. Score ≥ 85%.\n\n**FA-1 — Classification:**\n*Q: A newly discovered particle is found to feel the strong force. Is it a hadron or a lepton? Is it fundamental or composite?*\nExpected: Hadron; composite (built from quarks).\nThreshold: Both parts correct.\n\n**FA-2 — Protons are not fundamental:**\n*Q: Explain why the proton, despite being one of the three particles that make up atoms, is NOT considered a fundamental particle.*\nExpected: The proton is a hadron — a composite particle built from three quarks bound by the strong force. \"Fundamental\" means having no known internal structure; deep inelastic scattering experiments showed the proton has internal structure (quarks), so it fails that test even though it is foundational to atomic structure.\nThreshold: Must distinguish \"foundational to atoms\" from \"fundamental particle\" and cite composite/quark structure.\n\n**FA-3 — Mass is not the test:**\n<br>*Q: The tau lepton (~1777 MeV/c²) is heavier than the proton (~938 MeV/c²), a hadron. Does this mean the tau should actually be classified as a hadron? Justify your answer.*\nExpected: No — mass is irrelevant to the classification. The tau is a lepton because it does not feel the strong force, regardless of being heavier than the proton.\nThreshold: Must explicitly reject mass as the classification criterion and restate the strong-force test.\n\n**FA-4 — Hadron vs. baryon:**\n*Q: Is every meson a baryon? Is every baryon a hadron? Explain the relationship between the three terms.*\nExpected: No, mesons are not baryons (mesons are quark-antiquark pairs; baryons are three-quark combinations) — they are two different subtypes of hadron. Yes, every baryon is a hadron, since hadron is the umbrella term for any strong-force-feeling particle.\nThreshold: Must correctly state the hadron ⊃ {baryon, meson} relationship.\n\n**Confidence calibration:** After FA-3, students rate confidence before revealing the answer; students confident but wrong receive the mass-scatter plot (Demo 3) as a direct visual counter-example.\n\n**Delayed retrieval (session + 3):** \"Name the single defining test that separates hadrons from leptons. Is a neutrino a hadron or a lepton, and why?\" Expected: the strong-force test; neutrino is a lepton (does not feel the strong force).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.particle-classification.md",
+        "startLine": 185,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "phys.particle.particle-classification/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.particle-classification",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- Sort a deck of labeled particle cards (proton, neutron, pion, electron, muon, neutrino, kaon) into two physical piles using only the rule \"does it feel the strong force?\"\n- Analogy prop: a bag of marbles (hadrons, made of smaller beads glued together) vs. single solid steel balls (leptons, no internal parts to find).\n\n### Representational (Iconic)\n- Two-column classification table: Hadrons (composite, feel strong force, examples: proton, neutron, pion) vs. Leptons (fundamental, never feel strong force, examples: electron, muon, tau, neutrinos).\n- A simple nested-circle diagram: a large circle \"hadrons\" containing smaller circles for baryons and mesons; a separate, non-overlapping circle \"leptons\" with six named members.\n\n### Abstract (Symbolic)\n- The defining test is a Boolean condition: `feels_strong_force(particle) == True → hadron; == False → lepton`. No numerical calculation is required at this concept's level — the classification is categorical, not quantitative.\n- Charge and mass values (proton: +1e, ~938 MeV/c²; electron: −1e, ~0.511 MeV/c²) are useful labels but are not what defines the category — the strong-force test is the sole defining criterion.\n\n### Transfer (+)\n- Nuclear physics: every process inside a nucleus (fission, fusion, alpha/beta decay) can now be described precisely as hadron and lepton participants exchanging or transforming via specific forces.\n- Cosmic ray physics: cosmic ray showers detected at ground level are cascades of hadrons and leptons, and detector design (which particles pass through which shielding) exploits exactly this classification.\n- Medical physics: proton therapy for cancer treatment relies on protons (hadrons) depositing energy via the strong and electromagnetic forces differently than an electron beam (leptons) would.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.particle-classification.md",
+        "startLine": 39,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "phys.particle.particle-classification/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.particle-classification",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — Believing \"fundamental\" means \"small\" rather than \"not made of anything smaller\":** Students think a hadron must be \"fundamental\" because protons and neutrons are taught early as the basic components of the atom. Correct: fundamental means \"not built from anything smaller that we know of\" — protons and neutrons are hadrons, and hadrons are composite (built from quarks), so they are decidedly NOT fundamental, despite feeling foundational to atomic structure.\n\n**Mode 2 — Assuming all hadrons are heavy and all leptons are light:** Because the proton (a hadron) is much heavier than the electron (a lepton), students infer mass is the defining property. Correct: mass is not the classification criterion — some mesons (hadrons) are lighter than some hadrons, and the tau lepton is heavier than the proton; the only defining test is whether the particle feels the strong force.\n\n**Mode 3 — Treating \"hadron\" and \"baryon\" as synonyms:** Because \"baryon\" (proton, neutron) is the most commonly discussed type of hadron, students use the words interchangeably. Correct: baryon is a subtype of hadron (three quarks); meson is another subtype of hadron (quark-antiquark pair); hadron is the umbrella category for both.\n\n**Mode 4 — Assuming neutrinos, being nearly massless and hard to detect, might not really be leptons:** Students sometimes place neutrinos in a separate, vaguer category. Correct: neutrinos are leptons by the same defining test — they do not feel the strong force — despite their extremely weak interaction with everything else.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.particle-classification.md",
+        "startLine": 60,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "phys.particle.particle-classification/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.particle-classification",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"Ten particle names, one rule, two piles. Proton, neutron, pion, kaon, electron, muon, tau, and three flavors of neutrino. Sort them into two groups any way you like — go with your gut.\"\n\n**At the reveal:**\n\"Here's the actual rule physicists use: does the particle feel the strong force? That's it. One question. If yes, it's a hadron — which means it's actually built from smaller pieces called quarks, glued together by that same strong force. If no, it's a lepton — meaning as far as we can tell, there's nothing smaller inside it at all.\"\n\n**At the protons-are-not-fundamental moment:**\n\"Here's the part that surprises almost everyone: the proton — the thing you were taught is a fundamental building block of the atom — is not fundamental at all. It's a hadron. It's made of three quarks. We know this because in 1968, physicists fired high-energy electrons at protons and watched them scatter off something small and hard inside — almost the exact same experiment, and the exact same lesson, as Rutherford's gold-foil experiment fifty years earlier, just one layer deeper.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.particle-classification.md",
+        "startLine": 172,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "phys.particle.particle-classification/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.particle-classification",
+      "title": "Recovery Notes",
+      "content": "**S0:** Student has no prior particle-physics vocabulary at all. Begin entirely with the card-sorting opening (Section 8) using only familiar names (proton, neutron, electron) before introducing pion, kaon, or the neutrino family.\n\n**S3:** Student can state the rule (\"does it feel the strong force\") but cannot yet apply it fluently to unfamiliar particles. Run additional rounds of Demo 1 with new, unlabeled particle names drawn from later concepts (e.g., muon, kaon) until classification becomes fast and confident.\n\n**S6:** Student is anxious about not recognizing most of the particle names. Restrict the initial sort to only the three most familiar particles (proton, neutron, electron) and build outward slowly, one new particle at a time, rather than presenting all ten at once.\n\n**S9:** Extend into \"why can a free quark never be isolated\" (confinement, previewing phys.particle.strong-interaction) as an enrichment question for a student who has mastered the classification quickly and is ready to ask \"what actually holds the quarks together inside a hadron?\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.particle-classification.md",
+        "startLine": 215,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "phys.particle.particle-classification/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.particle-classification",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Declarative/categorical schema (a binary classification test applied repeatedly) — retrieval practice should emphasize rapid, confident application of the single strong-force test to novel particle names, not memorization of a fixed list.\n\n**Spaced retrieval schedule:**\n- Session + 1: \"State the one test that separates hadrons from leptons.\"\n- Session + 3: \"Classify: kaon, muon, neutron, tau-neutrino. Which are hadrons? Which are leptons?\"\n- Session + 7: \"Explain why the proton is composite rather than fundamental, using the classification test.\"\n\n**Interleaving partners:** phys.particle.four-forces (prerequisite — the strong force test depends on it), phys.particle.quarks and phys.particle.leptons (successors — the internal detail of each family).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.particle-classification.md",
+        "startLine": 227,
+        "endLine": 240
+      }
+    },
+    {
+      "assetId": "phys.particle.particle-classification/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.particle-classification",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Classifying any newly named particle encountered later in the domain (W boson, gluon, Higgs boson — none of which are hadrons or leptons, since they belong to a third category, gauge/scalar bosons, previewed but not required here) using the same test-first habit.\n\n**Far transfer:** Any scientific classification scheme that uses a single, sharp, testable criterion rather than surface features (e.g., biological classification by genetic lineage rather than appearance; chemical classification by electron configuration rather than color or state) — the \"test first, sort second, ignore surface features\" habit transfers broadly.\n\n**Structural abstraction:** \"Classify by mechanism, not by familiarity or magnitude.\" This is the same reasoning error correction as MC-3 (mass) and appears throughout science: classifying stars by spectral type rather than brightness, classifying rocks by mineral composition rather than color.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.particle-classification.md",
+        "startLine": 240,
+        "endLine": 250
+      }
+    },
+    {
+      "assetId": "phys.particle.particle-classification/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.particle.particle-classification",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.particle.four-forces is exactly sufficient — the entire classification rests on \"does it feel the strong force,\" which requires the four-force scorecard to be secure first.\n- **Unlock readiness:** phys.particle.antimatter, phys.particle.quarks, and phys.particle.leptons all depend directly on this classification being solid; sequencing them as this concept's immediate unlocks is well-motivated.\n- **Difficulty calibration:** Developing/Understand is appropriate — the content is purely categorical with no calculation required, but MC-1 (protons are not fundamental) is a genuinely difficult belief revision for most students and deserves the full session time allotted.\n- **No open issues:** description, prerequisites, and unlocks are all internally consistent with the Physics KG's Particle Physics domain design.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.particle-classification.md",
+        "startLine": 250,
+        "endLine": 260
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

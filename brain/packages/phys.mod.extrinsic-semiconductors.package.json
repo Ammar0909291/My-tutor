@@ -1,0 +1,427 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mod.extrinsic-semiconductors-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mod.extrinsic-semiconductors",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:abf4def230e2dcf5ca2b43c2bf3619d0c79271a23fa83b799c82312aed8904b1",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md": "sha256:1eb61169fe5e2af8da9d8f832f23e8470ca27659a4cb7f84b7054b890b18feb7"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mod.extrinsic-semiconductors",
+    "name": "Extrinsic Semiconductors: Doping and Carrier Types",
+    "difficultyRaw": "Expert",
+    "bloom": "Apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.mod.intrinsic-semiconductors"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mod.extrinsic-semiconductors-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mod.extrinsic-semiconductors (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md": "sha256:1eb61169fe5e2af8da9d8f832f23e8470ca27659a4cb7f84b7054b890b18feb7"
+      },
+      "contentHash": "sha256:67d29dd3c3875a142bc4b9f36d3b3902158ae60b76f2905eaec7d6042c2a39fa",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mod.extrinsic-semiconductors.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.extrinsic-semiconductors"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.extrinsic-semiconductors\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.extrinsic-semiconductors.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md#TA-2 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.extrinsic-semiconductors"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.extrinsic-semiconductors\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.extrinsic-semiconductors.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md#TA-3 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.extrinsic-semiconductors"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.extrinsic-semiconductors\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.extrinsic-semiconductors.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md#TA-4 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.extrinsic-semiconductors"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.extrinsic-semiconductors\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.extrinsic-semiconductors.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.extrinsic-semiconductors"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.extrinsic-semiconductors\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mod.extrinsic-semiconductors/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mod.extrinsic-semiconductors",
+      "title": "Extrinsic Semiconductors: Doping and Carrier Types — core explanation",
+      "content": "**One-sentence definition:** Doping a semiconductor with a donor or acceptor impurity deliberately breaks the natural n = p balance, producing an n-type material (excess mobile electrons) or a p-type material (excess mobile holes) with a majority charge carrier, while the material as a whole remains electrically neutral.\n\n**The core insight:** Pure silicon conducts too poorly (as established in the prerequisite concept, n_i is vanishingly small at room temperature) to be useful in most real electronic devices. The single engineering breakthrough that makes modern electronics possible is doping: deliberately introducing a tiny, carefully controlled concentration of a different element into the silicon crystal lattice, which either donates an extra, easily-freed electron (n-type doping) or creates an extra, easily-filled vacancy (p-type doping) — dramatically increasing the concentration of one specific carrier type by many orders of magnitude, while the crystal as a whole remains perfectly electrically neutral throughout.\n\n**Conceptual chain:**\n1. Silicon has 4 valence electrons and forms 4 covalent bonds with its neighboring silicon atoms in the crystal lattice.\n2. n-type doping: replacing a small fraction of silicon atoms with a pentavalent (5-valence-electron) donor impurity (e.g., phosphorus, arsenic) — 4 of the impurity's 5 valence electrons form the required covalent bonds, and the 5th electron is only weakly bound, easily freed by thermal energy at room temperature to become a mobile conduction-band electron.\n3. p-type doping: replacing a small fraction of silicon atoms with a trivalent (3-valence-electron) acceptor impurity (e.g., boron, gallium) — the impurity can only form 3 of the required 4 covalent bonds, leaving one bond incomplete, which readily accepts an electron from a neighboring silicon atom, creating a hole in the valence band.\n4. In n-type material, electrons are the majority carrier (vastly more numerous than holes) and holes are the minority carrier; in p-type material, holes are the majority carrier and electrons are the minority carrier.\n5. Despite this dramatic imbalance in mobile carrier types, the doped material as a whole remains electrically neutral: the donor impurity atoms, having given up their extra electron, become fixed, immobile positive ions embedded in the lattice (in n-type material); the acceptor impurity atoms, having accepted an extra electron, become fixed, immobile negative ions (in p-type material) — these fixed ion charges exactly balance the mobile majority carrier charges, so the bulk material has zero net charge.\n6. Doping concentrations are typically extremely small (often one impurity atom per million to per billion silicon atoms) yet increase majority carrier concentration by many orders of magnitude relative to the pure material's tiny intrinsic concentration, illustrating just how sensitive semiconductor conductivity is to controlled impurity introduction.\n\n**Central relations:**\n- n-type: pentavalent donor impurity (P, As); excess mobile electrons (majority carriers); holes are minority carriers; fixed donor ions become positively charged.\n- p-type: trivalent acceptor impurity (B, Ga); excess mobile holes (majority carriers); electrons are minority carriers; fixed acceptor ions become negatively charged.\n- Overall electrical neutrality: mobile majority carrier charge is exactly balanced by fixed, immobile ionized-impurity charge — the doped material has zero net charge, despite having a huge majority-carrier imbalance.\n- Doping dramatically increases majority carrier concentration (often by many orders of magnitude) relative to the intrinsic (undoped) concentration.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md",
+        "startLine": 18,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.mod.extrinsic-semiconductors/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.mod.extrinsic-semiconductors",
+      "title": "An n-type (or p-type) doped semiconductor carries an overall net electric charge",
+      "content": "### MC-1: \"An n-type (or p-type) doped semiconductor carries an overall net electric charge\"\n- **Probe:** \"If an n-type semiconductor has a huge excess of mobile electrons compared to holes, does that mean the material as a whole is negatively charged?\"\n- **Characteristic phrase:** \"N-type material should be negatively charged overall, since it has extra electrons.\"\n- **Trigger:** The word \"excess electrons\" (used to describe n-type material's majority carrier) is misread as implying an excess of total negative charge in the material, rather than an excess of one specific mobile carrier type balanced by fixed positive charge elsewhere.\n- **Conflict evidence [P28]:** Every donor atom that gives up its extra electron to become a free conduction-band electron itself becomes a fixed, immobile positive ion, permanently embedded in the crystal lattice at that exact location — for every mobile electron created, there is exactly one fixed positive ion left behind. The total charge (mobile electrons plus fixed donor ions) sums to exactly zero; n-type material, measured with any external charge-detection instrument, shows exactly zero net charge, just like the undoped material it came from.\n- **Bridge [P30]:** \"Every mobile carrier created by doping is exactly balanced by a fixed, oppositely-charged ion left behind in the lattice. N-type material has excess mobile NEGATIVE carriers (electrons) exactly balanced by excess fixed POSITIVE ions (ionized donors) — the material as a whole remains perfectly electrically neutral, with zero net charge, despite the dramatic imbalance in which carrier type is doing the actual moving.\"\n- **Replacement [P31]:** Doped semiconductors remain electrically neutral overall; \"majority carrier\" describes an imbalance in mobile carrier type, not a net charge on the bulk material.\n- **Discrimination pairs [P33]:** A room with 100 people who each hold a red balloon on a string tied to the floor (fixed positive ions) and 100 free-floating blue balloons drifting around the room (mobile electrons) has exactly balanced red and blue — the room \"has extra blue balloons visibly moving around\" doesn't mean the room's total balloon count is unbalanced; n-type material's \"extra mobile electrons\" doesn't mean its total charge is unbalanced.\n- **S6 repair path:** Present the fixed-ion-vs-mobile-carrier diagram (Section 2) directly, explicitly counting fixed positive donor ions against mobile electrons, and asking the student to compute the net charge (zero).",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.mod.extrinsic-semiconductors/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.mod.extrinsic-semiconductors",
+      "title": "N-type material has literally zero holes; p-type material has literally zero electrons",
+      "content": "### MC-2: \"N-type material has literally zero holes; p-type material has literally zero electrons\"\n- **Probe:** \"Does n-type silicon have absolutely no holes present at all, or does it just have far fewer holes than electrons?\"\n- **Characteristic phrase:** \"N-type means only electrons, no holes at all — p-type means only holes, no electrons at all.\"\n- **Trigger:** The simplified \"n-type = electrons, p-type = holes\" shorthand, useful for a first pass, is taken as an absolute, exclusive statement rather than a majority/minority distinction.\n- **Conflict evidence [P28]:** Both carrier types coexist in any real doped semiconductor — n-type material still has a small, nonzero hole concentration (the minority carrier), just dramatically smaller than its electron concentration; this minority carrier population, while small, plays a genuinely important role in device behavior (particularly at p-n junctions, developed in the next concept), and is never literally zero in any real material at any nonzero temperature.\n- **Bridge [P30]:** \"N-type and p-type labels describe which carrier type is the MAJORITY (vastly more numerous), not which carrier type is the ONLY one present. Both electrons and holes exist in every real doped semiconductor; doping shifts their relative populations dramatically, but never eliminates either type entirely.\"\n- **Replacement [P31]:** N-type/p-type describes majority-vs-minority carrier populations, both of which are always present and nonzero, not the exclusive presence of only one carrier type.\n- **Discrimination pairs [P33]:** A country with a strong ethnic or linguistic majority group still has minority groups present, even if far less numerous — describing a country by its majority doesn't mean the minority is literally absent; n-type/p-type labeling works the same way for carrier populations.\n- **S6 repair path:** Present the mass-action-law relation (n×p ≈ n_i²) conceptually, showing that even in heavily n-type material, p is small but never exactly zero.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.mod.extrinsic-semiconductors/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.mod.extrinsic-semiconductors",
+      "title": "Doping increases both electron and hole concentrations together, proportionally",
+      "content": "### MC-3: \"Doping increases both electron and hole concentrations together, proportionally\"\n- **Probe:** \"If doping silicon with a donor impurity dramatically increases the electron concentration, does the hole concentration also increase, stay the same, or decrease?\"\n- **Characteristic phrase:** \"Doping should make the material more conductive overall by increasing both types of carriers.\"\n- **Trigger:** Assuming \"doping increases conductivity\" implies both underlying carrier populations increase together, rather than recognizing a genuine tradeoff relationship.\n- **Conflict evidence [P28]:** The approximate relation n×p ≈ n_i² (a constant, for a given material and temperature) means that if doping increases n (electron concentration) far above its intrinsic value, p (hole concentration) must correspondingly DECREASE far below the intrinsic value to keep the product roughly constant — in heavily n-type doped silicon, the minority hole concentration can actually be many orders of magnitude LOWER than in pure, undoped silicon, not higher.\n- **Bridge [P30]:** \"Doping doesn't increase both carrier types together — it trades one off against the other. Increasing the majority carrier concentration (via doping) actually suppresses the minority carrier concentration below even its original intrinsic value, following the approximate relationship n×p ≈ n_i² (roughly constant for a given material and temperature). More of one type genuinely means less of the other.\"\n- **Replacement [P31]:** Doping trades majority against minority carrier concentration (following n×p ≈ n_i², approximately constant); it does not increase both carrier types simultaneously.\n- **Discrimination pairs [P33]:** In many chemical equilibrium reactions, increasing the concentration of one product shifts the reaction to reduce a related species' concentration, keeping an equilibrium constant roughly fixed — carrier concentrations in a doped semiconductor follow an analogous constant-product relationship.\n- **S6 repair path:** Present the n×p ≈ n_i² relationship explicitly with example numbers (intrinsic n_i ≈ 10¹⁰; heavily n-type doped n ≈ 10¹⁷, implying p ≈ 10³ — dramatically below intrinsic), making the tradeoff concrete.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md",
+        "startLine": 23,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.mod.extrinsic-semiconductors/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.extrinsic-semiconductors",
+      "title": "EXPLAIN + DEMONSTRATE",
+      "content": "{\"id\":\"TA-1\",\"title\":\"EXPLAIN + DEMONSTRATE\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.mod.extrinsic-semiconductors/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.extrinsic-semiconductors",
+      "title": "CHALLENGE",
+      "content": "{\"id\":\"TA-2\",\"title\":\"CHALLENGE\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.mod.extrinsic-semiconductors/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.extrinsic-semiconductors",
+      "title": "EXPLAIN",
+      "content": "{\"id\":\"TA-3\",\"title\":\"EXPLAIN\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mod.extrinsic-semiconductors/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.extrinsic-semiconductors",
+      "title": "DEMONSTRATE + CHALLENGE",
+      "content": "{\"id\":\"TA-4\",\"title\":\"DEMONSTRATE + CHALLENGE\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md",
+        "startLine": 11,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.mod.extrinsic-semiconductors/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.extrinsic-semiconductors",
+      "title": "SYNTHESIS",
+      "content": "{\"id\":\"TA-5\",\"title\":\"SYNTHESIS\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "phys.mod.extrinsic-semiconductors/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mod.extrinsic-semiconductors",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly determines the carrier type (n or p) resulting from a given dopant, correctly explains why doped semiconductors remain electrically neutral overall, and correctly explains the majority/minority carrier tradeoff. Score ≥ 70%.\n\n**FA-1 — Dopant-to-carrier-type mapping:**\n*Q: Silicon is doped with gallium (3 valence electrons). What carrier type results, and why?*\nExpected: p-type — gallium, with only 3 valence electrons, can form only 3 of silicon's required 4 covalent bonds, leaving an incomplete bond (a hole) that is readily filled by a neighboring electron, creating excess mobile holes.\nThreshold: Correct carrier type (p-type) with correct valence-electron-count reasoning.\n\n**FA-2 — Overall neutrality:**\n*Q: An n-type semiconductor has a huge excess of mobile electrons compared to holes. Is the material as a whole electrically charged? Explain.*\nExpected: No — the material remains exactly electrically neutral overall; every donor atom that releases a mobile electron becomes a fixed, immobile positive ion, and this fixed positive charge exactly balances the mobile electron charge.\nThreshold: Must correctly say \"no, neutral\" and cite the fixed-ion balancing mechanism.\n\n**FA-3 — Majority/minority tradeoff:**\n*Q: If doping silicon with a donor impurity increases the electron concentration from ~10¹⁰ to ~10¹⁷ per cm³, what happens to the hole concentration? Explain using the approximate relationship between electron and hole concentrations.*\nExpected: The hole concentration decreases, roughly to ~10³ per cm³ (well below the original intrinsic ~10¹⁰), since the approximate relation n×p ≈ n_i² keeps the product roughly constant — increasing n forces p to decrease correspondingly.\nThreshold: Must correctly state hole concentration decreases (not increases or stays the same) and reference the roughly-constant-product relationship.\n\n**FA-4 — Majority vs. exclusive presence:**\n<br>*Q: Does p-type silicon have any electrons present at all, or only holes? Explain.*\nExpected: Both carrier types are always present — p-type silicon has holes as the majority carrier and a small but nonzero electron concentration as the minority carrier; electrons are never literally absent.\nThreshold: Must correctly say both are present and correctly identify majority vs. minority.\n\n**Confidence calibration:** After FA-2, students rate confidence before revealing the answer; students confident but wrong are walked through the fixed-ion-vs-mobile-carrier charge count (Demo 2) again explicitly before re-attempting a parallel item.\n\n**Delayed retrieval (session + 3):** \"Given a specific dopant's valence-electron count, determine the resulting carrier type. Explain why a doped semiconductor remains electrically neutral despite having a majority carrier imbalance.\" Expected: 5-valence → n-type; 3-valence → p-type; fixed ion charge balances mobile carrier charge.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md",
+        "startLine": 189,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "phys.mod.extrinsic-semiconductors/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.extrinsic-semiconductors",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- A physical bond-model demonstration: build a silicon lattice segment using ball-and-stick models (each silicon atom with 4 bonds to neighbors), then substitute one atom with a 5-bond \"donor\" piece (showing the 5th, unbonded electron) or a 3-bond \"acceptor\" piece (showing the incomplete, vacant bond).\n- Analogy prop: a marching band formation where every member is normally paired with exactly the right number of partners — introducing one \"extra\" member with one arm free (donor) or one member \"short\" an arm (acceptor) into an otherwise perfectly paired formation.\n\n### Representational (Iconic)\n- A lattice diagram showing silicon atoms in their tetrahedral bonding arrangement, with one substituted donor atom (5 valence electrons, one drawn as a loosely-bound extra) and, in a separate diagram, one substituted acceptor atom (3 valence electrons, one incomplete bond shown as a vacancy).\n- A \"fixed ion vs. mobile carrier\" diagram, explicitly distinguishing the immobile, embedded donor/acceptor ions (drawn fixed in the lattice) from the mobile majority carriers (drawn as free to move through the crystal) — directly illustrating overall neutrality.\n\n### Abstract (Symbolic)\n- Majority/minority carrier concentration relation (qualitative, mass-action law preview, no full derivation required at this level): in a doped semiconductor, the product of electron and hole concentrations remains approximately equal to the square of the intrinsic concentration (n×p ≈ n_i²) — so increasing one carrier type (via doping) necessarily suppresses the other, explaining why the minority carrier concentration in a doped material can actually be lower than in the pure intrinsic material.\n- Typical doping ratios: roughly 1 impurity atom per 10⁶–10⁹ silicon atoms is often sufficient to increase majority carrier concentration from the intrinsic ~10¹⁰ cm⁻³ to roughly 10¹⁵–10¹⁸ cm⁻³ — several orders of magnitude, from an extremely dilute impurity concentration.\n\n### Transfer (+)\n- Semiconductor device manufacturing: the entire modern semiconductor industry (transistors, integrated circuits, solar cells) is built on precisely controlled doping processes (ion implantation, diffusion) to create specific n-type and p-type regions with exact, engineered carrier concentrations.\n- Solar cell design: p-n junction solar cells (developed in the next two concepts) require carefully balanced n-type and p-type layers, each engineered via specific doping choices.\n- Materials science research: doping concepts (introducing controlled impurities to dramatically alter electronic properties) extend well beyond silicon to compound semiconductors (gallium arsenide, gallium nitride) used in specialized high-performance electronics and LEDs.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md",
+        "startLine": 40,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "phys.mod.extrinsic-semiconductors/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.extrinsic-semiconductors",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — Believing a doped semiconductor carries a net electric charge (n-type is \"positively charged overall\" or \"negatively charged overall\"):** Correct: despite having a large majority-carrier imbalance (excess mobile electrons in n-type, excess mobile holes in p-type), the doped material as a whole remains exactly electrically neutral — the fixed, immobile donor or acceptor ion charges precisely balance the mobile majority carrier charges.\n\n**Mode 2 — Assuming \"n-type\" means the material has literally no holes at all, or \"p-type\" means literally no electrons at all:** Correct: both carrier types are always present in any real semiconductor — n-type material simply has a vastly larger electron concentration than hole concentration (majority vs. minority carriers), and p-type material has the reverse; neither carrier type is ever completely absent.\n\n**Mode 3 — Confusing donor (pentavalent) and acceptor (trivalent) impurities, or which produces which carrier type:** Correct: a pentavalent (5-valence-electron) donor impurity donates an extra electron, producing n-type material with excess mobile electrons; a trivalent (3-valence-electron) acceptor impurity creates an electron vacancy, producing p-type material with excess mobile holes — the valence-electron count of the dopant, relative to silicon's 4, directly determines which carrier type results.\n\n**Mode 4 — Believing doping increases both carrier concentrations simultaneously and proportionally:** Correct: doping to increase one carrier type (say, electrons in n-type material) actually suppresses the other carrier type (holes) below even the pure intrinsic concentration — a consequence of the mass-action-law-like relationship (n×p ≈ n_i², approximately constant), meaning majority and minority carrier concentrations move in opposite directions under doping, not together.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md",
+        "startLine": 61,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.mod.extrinsic-semiconductors/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.extrinsic-semiconductors",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"Pure silicon barely conducts electricity at room temperature — you already know that. Here's the engineering trick that changes everything: add an almost unbelievably tiny amount of a different element — sometimes just one atom for every billion silicon atoms — and conductivity can jump by many orders of magnitude. What do you think that one-in-a-billion added atom actually does?\"\n\n**At the donor/acceptor explanation:**\n\"Silicon has four valence electrons and needs exactly four bonds to its neighbors. Swap in an atom with five valence electrons instead — phosphorus, say — and four of its electrons form the required bonds just fine, but the fifth one has nothing to bond to. It's barely held on at all, and at room temperature, it easily breaks free to become a mobile conduction electron. That's n-type doping. Now swap in an atom with only three valence electrons — boron — and it can only form three of the four required bonds. One bond stays incomplete, a vacancy — a hole — that a neighboring electron will readily jump in to fill. That's p-type doping.\"\n\n**At the neutrality clarification:**\n\"Here's the part almost everyone gets wrong at first: does n-type silicon end up negatively charged overall, since it's got all these extra mobile electrons? No. Every single donor atom that releases its extra electron becomes a fixed, permanently embedded positive ion, stuck right where it is in the lattice. One mobile negative electron created, one fixed positive ion left behind, every single time. Add it all up, and the material is exactly, perfectly electrically neutral — just like it was before doping. What's changed isn't the total charge. It's which carrier type is doing the actual moving.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md",
+        "startLine": 176,
+        "endLine": 189
+      }
+    },
+    {
+      "assetId": "phys.mod.extrinsic-semiconductors/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.extrinsic-semiconductors",
+      "title": "Recovery Notes",
+      "content": "**S3:** Student has the electron-hole pair concept (from the prerequisite concept) secure but hasn't yet connected it to the doping mechanism. Begin entirely with the ball-and-stick lattice build (Demo 1), physically substituting a donor and then an acceptor atom, before introducing any charge-balance or majority/minority terminology.\n\n**S4:** Student assumes doped material carries net charge (MC-1) or that minority carriers are literally absent (MC-2). Run Demo 2 (fixed ion vs. mobile carrier charge count) repeatedly with different doping levels until the neutrality result becomes automatic; explicitly restate the majority/minority (not exclusive) framing at every opportunity.\n\n**S6:** Student is anxious about the abstractness of \"fixed ions\" and \"mobile carriers\" as separate concepts. Anchor entirely in the marching-band analogy (Section 6) and the physical ball-and-stick model (Demo 1) before introducing symbolic notation (n, p, n_i) or the mass-action-law relationship.\n\n**S7:** Student is intellectually ready for challenge-first entry given this concept's Expert difficulty — open directly with the majority/minority tradeoff puzzle (\"if you add millions of electrons, does the hole count stay the same, go up, or go down? Most people guess wrong\") before any donor/acceptor scaffolding.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md",
+        "startLine": 219,
+        "endLine": 231
+      }
+    },
+    {
+      "assetId": "phys.mod.extrinsic-semiconductors/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.extrinsic-semiconductors",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Procedural (dopant-to-carrier-type mapping) plus conceptual (overall neutrality and the majority/minority tradeoff) — retrieval practice should test both the mapping skill and the two conceptual distinctions (neutrality despite imbalance; tradeoff not simultaneous increase).\n\n**Spaced retrieval schedule:**\n- Session + 1: \"Given a dopant's valence-electron count, determine the resulting carrier type (n or p).\"\n- Session + 3: \"Explain why a doped semiconductor remains electrically neutral overall despite a majority carrier imbalance.\"\n- Session + 7: \"Explain the majority/minority carrier tradeoff relationship in a doped semiconductor.\"\n\n**Interleaving partners:** phys.mod.intrinsic-semiconductors (prerequisite — the electron-hole pair concept this concept deliberately unbalances), phys.mod.pn-junction (successor — joining n-type and p-type regions together).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md",
+        "startLine": 231,
+        "endLine": 244
+      }
+    },
+    {
+      "assetId": "phys.mod.extrinsic-semiconductors/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.extrinsic-semiconductors",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Applying the same donor/acceptor mechanism and neutrality reasoning to other semiconductor materials (germanium, gallium arsenide) doped with analogous impurities, using the same valence-electron-counting logic.\n\n**Far transfer:** Semiconductor device manufacturing and integrated circuit design (precisely controlled doping profiles are the foundation of transistor fabrication), materials engineering generally (deliberately introducing controlled impurities to dramatically alter a bulk material's properties, a pattern also seen in metallurgy's alloying and in glass/ceramics doping for optical properties), and chemical equilibrium reasoning (the mass-action-law-like n×p ≈ n_i² relationship directly parallels equilibrium constant relationships in chemistry).\n\n**Structural abstraction:** \"Introducing a small, controlled perturbation to a system can dramatically shift the balance between two coupled, tradeoff-linked quantities, without changing the system's overall neutral/balanced status.\" This pattern — deliberate perturbation producing a large majority/minority shift while preserving an overall conservation law (charge neutrality) — recurs in chemical equilibrium, population genetics (allele frequency shifts under selection while total population remains fixed), and other coupled-quantity systems.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md",
+        "startLine": 244,
+        "endLine": 254
+      }
+    },
+    {
+      "assetId": "phys.mod.extrinsic-semiconductors/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.mod.extrinsic-semiconductors",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.mod.intrinsic-semiconductors is necessary and sufficient — doping is precisely the deliberate disruption of the n = p equality established there.\n- **Unlock readiness:** phys.mod.pn-junction directly depends on n-type and p-type material being independently understood, since a p-n junction is formed by joining exactly these two doped material types together; sequencing as the immediate next concept is well-motivated.\n- **Difficulty calibration:** Expert/Apply is well-calibrated — correctly applying the donor/acceptor mechanism, the neutrality principle, and especially the majority/minority tradeoff (a genuinely counter-intuitive result) together represent the most demanding applied-reasoning combination in the semiconductor sub-sequence so far, justifying the Expert difficulty and reduced mastery threshold (0.70).\n- **No open issues:** description, prerequisites, and unlocks are internally consistent with the Physics KG's Modern Physics domain extension (semiconductor physics) design.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md",
+        "startLine": 254,
+        "endLine": 264
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

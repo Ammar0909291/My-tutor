@@ -1,0 +1,356 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.particle.leptons-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.particle.leptons",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d4252e226b2efb4bf137d1c3a3294da7f19c4c50934592d731c909d1f7084c61",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.particle.leptons.md": "sha256:cf12b7c3cb5f3ddd4084670c9c6a51de8b4c8c202f08aa1e7932631f4681225a"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "phys.particle.leptons",
+    "name": "Leptons",
+    "difficultyRaw": "Proficient",
+    "bloom": "Understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.particle.particle-classification"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.particle.leptons-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.particle.leptons (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.particle.leptons.md": "sha256:cf12b7c3cb5f3ddd4084670c9c6a51de8b4c8c202f08aa1e7932631f4681225a"
+      },
+      "contentHash": "sha256:dc70d00504ea8d6db032aed061e73adfa740f91aa8aca06924556e1125f88ee0",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.particle.leptons.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.leptons.md#TA-1 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.leptons"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.leptons\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.leptons.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.leptons.md#TA-2 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.leptons"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.leptons\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.leptons.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.leptons.md#TA-3 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.leptons"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.leptons\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.particle.leptons/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.particle.leptons",
+      "title": "Leptons — core explanation",
+      "content": "**One-sentence definition:** Leptons are fundamental particles (no known substructure) that never experience the strong force, coming in three generations, each pairing a charged particle (electron, muon, or tau) with a corresponding, nearly massless neutrino.\n\n**The core insight:** The electron is the most familiar lepton, but it has two heavier \"cousins\" — the muon and the tau — that behave almost identically in every way except mass and (for the tau) lifetime; each of the three also has its own neutrino partner. All six leptons are believed to be truly fundamental — no experiment has ever found evidence of internal structure inside any of them, unlike hadrons.\n\n**Conceptual chain:**\n1. Leptons are defined by particle-classification (phys.particle.particle-classification) as anything that does not feel the strong force.\n2. Six leptons exist, in three generations: (electron, electron-neutrino), (muon, muon-neutrino), (tau, tau-neutrino).\n3. The charged member of each generation (electron, muon, tau) has identical charge (−e) and identical spin, differing only in mass: electron ≈ 0.511 MeV/c², muon ≈ 105.7 MeV/c², tau ≈ 1777 MeV/c².\n4. Only the electron is stable; the muon (mean lifetime ~2.2 μs) and tau (mean lifetime ~2.9×10⁻¹³ s) both decay via the weak interaction into lighter leptons plus neutrinos.\n5. Each charged lepton has a corresponding neutrino, an electrically neutral, nearly massless partner that interacts only via the weak force (developed fully in phys.particle.neutrinos).\n6. Lepton number (a separate conserved quantity per generation, in the simplest treatment) is conserved in every known interaction — a foundational bookkeeping rule used throughout particle physics (phys.particle.conservation-laws).\n\n**Central relations:**\n- Three generations: (e, νₑ), (μ, ν_μ), (τ, ν_τ).\n- Charged lepton masses: m_e < m_μ < m_τ (0.511 MeV/c² ≪ 105.7 MeV/c² ≪ 1777 MeV/c²).\n- Only the electron is stable; muon and tau decay via the weak interaction.\n- Leptons never feel the strong force (defining property, from particle-classification).\n- Each lepton has a distinct antilepton (positron, antimuon, antitau, and three antineutrinos).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.leptons.md",
+        "startLine": 18,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "phys.particle.leptons/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.particle.leptons",
+      "title": "The muon and tau are less fundamental or less 'real' than the electron",
+      "content": "### MC-1: \"The muon and tau are less fundamental or less 'real' than the electron\"\n- **Probe:** \"Is the muon a fundamental particle in the same sense as the electron, or is it some kind of exotic, less-real cousin?\"\n- **Characteristic phrase:** \"The muon is just some heavy, unstable version of the electron — not a 'real' particle like the electron is.\"\n- **Trigger:** The electron's ubiquity in chemistry and everyday physics gives it outsized familiarity, making the muon and tau feel secondary or exotic by comparison.\n- **Conflict evidence [P28]:** Cosmic ray muons pass through every square meter of Earth's surface (and through your own body) at a rate of roughly one per minute — muon detection is one of the easiest particle physics experiments to perform with simple, inexpensive equipment. The muon is exactly as fundamental (no known substructure, identical spin and charge to the electron) as the electron; it is simply heavier and unstable, not \"less real.\"\n- **Bridge [P30]:** \"The muon and tau are exactly as fundamental as the electron — same charge, same spin, same lack of internal structure — they are simply heavier and therefore decay via the weak interaction, since more decay channels become energetically available as mass increases. Fundamental does not mean stable.\"\n- **Replacement [P31]:** All three charged leptons (electron, muon, tau) are equally fundamental; they differ only in mass and consequent lifetime, not in \"how real\" or \"how fundamental\" they are.\n- **Discrimination pairs [P33]:** A heavyweight and lightweight boxer are equally legitimate athletes in their sport — being heavier doesn't make one \"less of a boxer;\" being unstable doesn't make the muon \"less of a fundamental particle.\"\n- **S6 repair path:** Point to the cosmic ray muon detection rate (about one per minute through your body right now) — ask \"does something happening to you once a minute feel exotic, or ordinary?\"",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.leptons.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.particle.leptons/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.particle.leptons",
+      "title": "Muon decay is just the muon 'shrinking' into an electron",
+      "content": "### MC-2: \"Muon decay is just the muon 'shrinking' into an electron\"\n- **Probe:** \"When a muon decays, does it just lose some mass and turn into an electron, or does something else happen?\"\n- **Characteristic phrase:** \"The muon just loses weight and becomes an electron.\"\n- **Trigger:** Casual language (\"the muon decays into an electron\") is often shortened from the full three-body decay, leading to an oversimplified \"shrinking\" mental model.\n- **Conflict evidence [P28]:** Muon decay (μ⁻ → e⁻ + ν̄ₑ + ν_μ) produces three separate particles, not one. If it were simple \"shrinking,\" momentum could not be conserved (a lone electron recoiling from a stationary muon would need to carry away all the muon's rest energy in one specific direction, which experiments do not show); instead, momentum is shared unpredictably among three outgoing particles, exactly as observed in muon decay experiments.\n- **Bridge [P30]:** \"Muon decay is a full particle transformation via the weak interaction: one muon disappears, and three new particles (an electron and two neutrinos of specific generations) appear, sharing the released energy and momentum between them. It's a creation-and-destruction event, not a shrinking event.\"\n- **Replacement [P31]:** Muon decay: μ⁻ → e⁻ + ν̄ₑ + ν_μ — three distinct outgoing particles, conserving lepton number (separately per generation, in the simplest treatment), momentum, and energy.\n- **Discrimination pairs [P33]:** A caterpillar \"becoming\" a butterfly is a gradual transformation of the same material; muon decay is more like a firework exploding into three distinct fragments that fly off independently — a genuine multi-particle event, not a continuous transformation of one object.\n- **S6 repair path:** Draw the decay-arrow diagram explicitly (one muon line in, three lines out: electron, electron-antineutrino, muon-neutrino) and count particles before and after.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.leptons.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.particle.leptons/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.particle.leptons",
+      "title": "All six leptons appear equally in everyday matter",
+      "content": "### MC-3: \"All six leptons appear equally in everyday matter\"\n- **Probe:** \"Are muons and tau particles floating around in the atoms of this room right now, the same way electrons are?\"\n- **Characteristic phrase:** \"Since there are six leptons, they should all be equally present in matter.\"\n- **Trigger:** Learning the six-lepton table without learning which ones are stable/common at everyday conditions.\n- **Conflict evidence [P28]:** Only the electron is stable and only the electron and electron-neutrino participate in ordinary matter and everyday nuclear processes (like beta decay and stellar fusion); muons and taus, with mean lifetimes of microseconds and less than a trillionth of a second respectively, cannot persist in ordinary matter — they are produced transiently by cosmic rays or accelerators and decay away almost immediately.\n- **Bridge [P30]:** \"All six leptons are equally fundamental, but only the electron (and electron-neutrino) is stable enough to be a building block of ordinary matter. The muon and tau exist only fleetingly, produced in high-energy events, before decaying into lighter leptons.\"\n- **Replacement [P31]:** Ordinary matter contains only electrons (and, in nuclear processes, electron-neutrinos); muons and taus are transient, high-energy phenomena, not everyday constituents.\n- **Discrimination pairs [P33]:** Fireflies produce light constantly in summer meadows, but you wouldn't expect to find a firefly glowing inside a rock — some phenomena are real and common in specific conditions (cosmic ray showers) without being present in ordinary, everyday matter (a rock, an atom).\n- **S6 repair path:** Present the lifetime table (electron: stable; muon: 2.2 μs; tau: 2.9×10⁻¹³ s) and ask, \"if a particle only lasts a millionth of a second, could it ever be a permanent part of an atom?\"\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.leptons.md",
+        "startLine": 23,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.particle.leptons/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.leptons",
+      "title": "EXPLAIN + DEMONSTRATE",
+      "content": "{\"id\":\"TA-1\",\"title\":\"EXPLAIN + DEMONSTRATE\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.leptons.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.particle.leptons/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.leptons",
+      "title": "DEMONSTRATE",
+      "content": "{\"id\":\"TA-2\",\"title\":\"DEMONSTRATE\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.leptons.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.particle.leptons/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.leptons",
+      "title": "TRANSFER",
+      "content": "{\"id\":\"TA-3\",\"title\":\"TRANSFER\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.leptons.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.particle.leptons/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.particle.leptons",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly names all three lepton generations with their charged member and neutrino partner, correctly explains why only the electron is stable, and correctly identifies muon decay as a three-particle process (not simple shrinking). Score ≥ 80%.\n\n**FA-1 — Generation recall:**\n*Q: Name the three lepton generations, listing the charged particle and its neutrino partner for each.*\nExpected: (electron, electron-neutrino), (muon, muon-neutrino), (tau, tau-neutrino).\nThreshold: All three pairs correct.\n\n**FA-2 — Stability reasoning:**\n*Q: Why is the electron stable while the muon and tau are not?*\nExpected: The electron is the lightest charged lepton — there is no lighter charged particle it could decay into while conserving charge and lepton number, so it cannot decay. The muon and tau, being heavier, have lighter leptons available to decay into via the weak interaction.\nThreshold: Must cite \"no lighter particle to decay to,\" not merely \"the electron is special\" or \"smaller particles are more stable\" without mechanism.\n\n**FA-3 — Decay process:**\n*Q: When a muon decays, how many particles are produced, and what are they?*\nExpected: Three particles: an electron, an electron-antineutrino, and a muon-neutrino (μ⁻ → e⁻ + ν̄ₑ + ν_μ).\nThreshold: Must state three particles, not one (\"just an electron\").\n\n**FA-4 — Everyday prevalence:**\n*Q: Are muons or taus commonly found as stable constituents of ordinary matter, like electrons are? Explain.*\nExpected: No — only the electron is stable enough to be part of ordinary matter; muons and taus are transient, produced by cosmic rays or accelerators, and decay within microseconds or less.\nThreshold: Must correctly say no and cite the lifetime/stability distinction.\n\n**Confidence calibration:** After FA-3, students rate confidence before revealing the answer; students confident but wrong are shown the decay diagram (Demo 3) again with an explicit particle count before re-attempting a parallel item (tau decay channel count).\n\n**Delayed retrieval (session + 3):** \"Why is the electron the only stable charged lepton? What happens, in terms of particle count, when a muon decays?\" Expected: nowhere lighter to decay to; three particles are produced.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.leptons.md",
+        "startLine": 188,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "phys.particle.leptons/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.leptons",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- Cosmic ray muons are detected constantly at ground level (a simple scintillator detector or even a well-shielded Geiger counter shows detection events attributable to muon showers from cosmic ray collisions in the upper atmosphere) — a genuinely observable, everyday instance of a \"heavier electron\" passing through the room.\n- Physical analogy: three siblings of the same \"family type\" (electron-like), identical in every quality except size/weight and how long they live before \"growing up and transforming\" (decaying) into something else.\n\n### Representational (Iconic)\n- A three-row generation table: charged lepton name, mass, lifetime, associated neutrino.\n- A simple decay-arrow diagram: muon → electron + muon-neutrino + electron-antineutrino (showing lepton number bookkeeping per generation is conserved even through decay).\n\n### Abstract (Symbolic)\n- Mass ratios: m_μ/m_e ≈ 207; m_τ/m_e ≈ 3477 — the muon is roughly 207 times heavier than the electron; the tau roughly 3477 times heavier.\n- Lifetime ordering: τ(electron) = ∞ (stable); τ(muon) ≈ 2.2 μs; τ(tau) ≈ 2.9×10⁻¹³ s — heavier charged leptons are shorter-lived because more decay channels (with more available kinetic energy) are open to them.\n- Lepton-number bookkeeping in muon decay: μ⁻ → e⁻ + ν̄ₑ + ν_μ conserves both muon-generation lepton number and electron-generation lepton number separately, in the simplest treatment.\n\n### Transfer (+)\n- Cosmic ray physics and astroparticle detectors (e.g., underground neutrino observatories) rely on distinguishing muon tracks from electron tracks by their different penetration depths and decay signatures.\n- Particle accelerator physics: muon colliders are an active research proposal precisely because muons are \"heavy electrons\" that can, in principle, reach higher collision energies with less synchrotron radiation loss than electrons.\n- Medical and materials science: muon spin rotation techniques use implanted muons as tiny, sensitive magnetic probes inside materials.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.leptons.md",
+        "startLine": 41,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.particle.leptons/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.leptons",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — Believing the muon and tau are \"smaller\" or \"less real\" than the electron:** Because the electron is by far the most familiar lepton, students subconsciously treat the muon and tau as minor or exotic curiosities. Correct: all three charged leptons are equally fundamental particles with identical charge and spin; they differ only in mass and lifetime, and the muon in particular is detected constantly (cosmic ray showers reach ground level continuously).\n\n**Mode 2 — Assuming the muon decays \"into an electron\" as if shrinking, rather than via a specific weak-interaction process producing three particles:** Correct: muon decay produces three particles (an electron and two neutrinos: μ⁻ → e⁻ + ν̄ₑ + ν_μ), conserving lepton number, momentum, and energy — it is a genuine weak-interaction decay, not a simple \"mass loss\" or \"shrinking.\"\n\n**Mode 3 — Treating all six leptons as equally common in everyday matter:** Correct: only the electron (and its associated electron-neutrino, produced in stellar and nuclear processes) plays a role in ordinary matter and everyday chemistry; muons and taus are transient, produced in cosmic ray interactions or accelerator collisions, and decay away almost immediately.\n\n**Mode 4 — Confusing \"lepton\" with \"electron\" as synonyms:** Correct: lepton is the umbrella category (six particles: three charged, three neutrino); electron is one specific member of that category, not the whole family.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.leptons.md",
+        "startLine": 63,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "phys.particle.leptons/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.leptons",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"Right now — not in a lab, not someday, right now, in this room — a particle almost exactly like an electron, but about two hundred times heavier, is passing through your body roughly once every minute. It's called a muon, and it's raining down constantly from cosmic ray collisions happening miles above your head.\"\n\n**At the shrinking misconception:**\n\"When a muon decays, does it just lose some weight and become an electron? [Wait.] No — and this is important. One muon goes in, and three particles come out: an electron, and two different neutrinos. It's not shrinking. It's a complete transformation, governed by the weak force, that has to balance momentum and energy between three separate particles flying off in three different directions.\"\n\n**At the stability question:**\n\"Why doesn't the electron ever decay, but the muon and tau do? Simple answer: the electron is the lightest charged particle that exists. There's nowhere lighter for it to go. The muon and tau, being heavier, have plenty of lighter options available — so the weak force takes them there, fast. Stability, in particle physics, usually just means: nowhere left to fall.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.leptons.md",
+        "startLine": 175,
+        "endLine": 188
+      }
+    },
+    {
+      "assetId": "phys.particle.leptons/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.leptons",
+      "title": "Recovery Notes",
+      "content": "**S0:** Student has no prior exposure to particles beyond the electron. Begin entirely with the cosmic ray muon detection-rate hook (Section 8 opening) before introducing the tau or the full generation table.\n\n**S3:** Student can recite the three generations but treats muon decay as simple shrinking. Repeat Demo 3 (decay diagram) with explicit before/after particle counting until the three-particle outcome is automatic.\n\n**S6:** Student is anxious about the very short tau lifetime (2.9×10⁻¹³ s) feeling \"impossible to picture.\" Skip precise numeric lifetimes initially and use only the qualitative ordering (electron stable > muon microseconds > tau much shorter) before introducing exact values.\n\n**S9:** Extend into lepton-number conservation as a bookkeeping tool (previewing phys.particle.conservation-laws) — have the student verify that muon decay conserves lepton number separately per generation, as an enrichment check.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.leptons.md",
+        "startLine": 218,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "phys.particle.leptons/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.leptons",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Declarative/categorical (three-generation table) plus conceptual reasoning (stability-via-no-lighter-option) — retrieval practice should test both the factual table and the \"why is the electron stable\" reasoning chain.\n\n**Spaced retrieval schedule:**\n- Session + 1: \"List the three lepton generations.\"\n- Session + 3: \"Explain why the electron doesn't decay but the muon does.\"\n- Session + 7: \"How many particles are produced when a muon decays, and what are they?\"\n\n**Interleaving partners:** phys.particle.particle-classification (prerequisite — leptons are defined by NOT feeling the strong force), phys.particle.neutrinos and phys.particle.conservation-laws (successors — neutrino detail and lepton-number bookkeeping).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.leptons.md",
+        "startLine": 230,
+        "endLine": 243
+      }
+    },
+    {
+      "assetId": "phys.particle.leptons/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.leptons",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Applying the \"generation template\" reasoning to quark generations (already encountered in phys.particle.quarks) — recognizing the same three-generation structure recurs across both fundamental fermion families.\n\n**Far transfer:** Astroparticle physics (cosmic ray muon detectors used in geology for muon tomography of volcanoes and pyramids), particle accelerator design (proposed muon colliders), and the general principle that \"stability = no energetically and law-conserving-allowed lighter state to decay into,\" which recurs throughout nuclear and particle physics (e.g., why certain isotopes are stable and others are not).\n\n**Structural abstraction:** \"A stable state is simply one with nowhere lower-energy left to go, given the rules.\" This reasoning pattern — stability as an absence of an available lower-energy pathway, rather than a special protective property — recurs in nuclear physics (stable isotopes), chemistry (noble gas stability), and even everyday systems (a ball at the bottom of a valley is \"stable\" because there's nowhere lower to roll).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.leptons.md",
+        "startLine": 243,
+        "endLine": 253
+      }
+    },
+    {
+      "assetId": "phys.particle.leptons/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.particle.leptons",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.particle.particle-classification is necessary and sufficient — leptons are directly defined in contrast to hadrons by the strong-force test established there.\n- **Unlock readiness:** phys.particle.neutrinos (detailed treatment of the neutrino partners) and phys.particle.conservation-laws (lepton-number bookkeeping) both depend directly on this concept; sequencing is well-motivated.\n- **Difficulty calibration:** Proficient/Understand is appropriate — the generation table is straightforward recall, but the \"why is the electron uniquely stable\" reasoning and the muon-decay particle-count correction (MC-2) both require genuine conceptual work matching the Understand level.\n- **No open issues:** description, prerequisites, and unlocks are internally consistent with the Physics KG's Particle Physics domain design.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.leptons.md",
+        "startLine": 253,
+        "endLine": 263
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

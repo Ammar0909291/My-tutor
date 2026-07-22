@@ -1,0 +1,427 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.particle.strong-interaction-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.particle.strong-interaction",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7657f234564beb842a26a3d5f0d440082e02ce6ddfb3f67b448e2e9c4a66cd50",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.particle.strong-interaction.md": "sha256:af4024b41f398e0c8dfb3c29001ee486cd7f77ce68c651554433e7a0dac19456"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.particle.strong-interaction",
+    "name": "The Strong Interaction and Color Charge",
+    "difficultyRaw": "Advanced",
+    "bloom": "Analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.particle.gauge-bosons",
+      "phys.particle.quarks"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.particle.strong-interaction-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.particle.strong-interaction (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.particle.strong-interaction.md": "sha256:af4024b41f398e0c8dfb3c29001ee486cd7f77ce68c651554433e7a0dac19456"
+      },
+      "contentHash": "sha256:4a9656bb9da335e6cd7721a9db9f9e6779fec5cbd7c0d578ff727036eb12a105",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.particle.strong-interaction.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.strong-interaction.md#TA-1 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.strong-interaction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.strong-interaction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.strong-interaction.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.strong-interaction.md#TA-2 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.strong-interaction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.strong-interaction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.strong-interaction.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.strong-interaction.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.strong-interaction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.strong-interaction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.strong-interaction.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.strong-interaction.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.strong-interaction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.strong-interaction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.strong-interaction.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.strong-interaction.md#TA-5 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.strong-interaction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.strong-interaction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.particle.strong-interaction/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.particle.strong-interaction",
+      "title": "The Strong Interaction and Color Charge — core explanation",
+      "content": "**One-sentence definition:** The strong interaction binds quarks together via \"color charge\" (a property unrelated to visual color) and gluon exchange, and the force between quarks grows with separation rather than weakening, so a lone quark is never observed — a phenomenon called confinement.\n\n**The core insight:** Every other force encountered so far (gravity, electromagnetism) weakens with distance. The strong force does the opposite: the closer two quarks are, the weaker the force between them (a property called asymptotic freedom, allowing quarks to move nearly freely inside a proton at very short range); the farther apart they get, the stronger the force becomes, until trying to separate them further makes it energetically cheaper for the vacuum to create a new quark-antiquark pair than to keep stretching the bond. This is why quarks are permanently confined — never observed free, always found in color-neutral combinations (Section on phys.particle.hadron-quark-model).\n\n**Conceptual chain:**\n1. Quarks carry an additional property beyond flavor and electric charge, called color charge, with three types (arbitrarily labeled red, green, blue) plus their corresponding anticolors — unrelated to visible light or color perception.\n2. The strong force acts only between color-charged particles (quarks and gluons); it does not act on colorless particles like leptons or photons.\n3. Gluons, the mediators of the strong force, themselves carry color charge (unlike the photon, which carries no electric charge) — this allows gluons to interact directly with each other, a crucial difference that produces confinement.\n4. Only color-neutral (\"colorless\") combinations are ever observed as free particles: three quarks of the three different colors (baryon), or a quark and its anticolor-matched antiquark (meson).\n5. As two quarks are pulled apart, the gluon field between them forms a narrow, string-like \"flux tube\" whose energy grows linearly with separation (unlike the 1/r² fall-off of EM or gravity) — eventually the stored energy exceeds the rest-mass energy needed to create a new quark-antiquark pair, \"snapping\" the flux tube into two new, separately color-neutral hadrons.\n6. At very short distances (inside a single hadron), the strong force actually weakens (asymptotic freedom, 2004 Nobel Prize to Gross, Politzer, and Wilczek) — allowing quarks to behave almost as free particles when close together, which is precisely what deep inelastic scattering experiments observed.\n\n**Central relations:**\n- Color charge: red, green, blue (and anticolors) — a strong-force-only property, unrelated to visible color.\n- Confinement: the strong force grows with separation; free (isolated) quarks or gluons have never been observed.\n- Asymptotic freedom: the strong force weakens at very short distances (inside a hadron), the opposite behavior from confinement at larger distances.\n- Color neutrality: only \"colorless\" combinations (3 quarks, one of each color; or quark + matching anticolor antiquark) exist as free hadrons.\n- Gluon self-interaction: unlike the photon, gluons carry color charge and interact directly with other gluons — this is the structural reason confinement occurs at all.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.strong-interaction.md",
+        "startLine": 18,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "phys.particle.strong-interaction/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.particle.strong-interaction",
+      "title": "Color charge means quarks literally have a visible color",
+      "content": "### MC-1: \"Color charge means quarks literally have a visible color\"\n- **Probe:** \"If you could somehow see a single quark directly, would it actually look red, green, or blue?\"\n- **Characteristic phrase:** \"Quarks are literally colored — that's why it's called color charge.\"\n- **Trigger:** The word \"color\" is used literally in everyday language, and the term \"color charge\" was deliberately chosen (as a playful physics naming convention) using the same word, without initially clarifying it's a metaphor.\n- **Conflict evidence [P28]:** Quarks are far smaller than any wavelength of visible light (visible light wavelengths are hundreds of nanometers; quarks have no measured size, consistent with being point-like) — nothing at that scale can reflect or absorb visible light in the way a colored object does. \"Color charge\" is purely a quantum number label, chosen because its three-way combination-to-neutral mathematics mirrors how red, green, and blue light combine to white.\n- **Bridge [P30]:** \"Color charge is a name, not a description — physicists borrowed the word 'color' because the mathematics of combining three color charges to 'neutral' works exactly like combining red, green, and blue light to white. No quark has ever been seen, and none could ever look colored in the everyday sense, because quarks are far too small to interact with visible light that way.\"\n- **Replacement [P31]:** Color charge is an abstract quantum property (a type of \"strong charge,\" analogous in role to electric charge for electromagnetism) with three values, named \"color\" purely as a mathematical convenience/metaphor, unrelated to visible appearance.\n- **Discrimination pairs [P33]:** Calling a chess piece a \"bishop\" doesn't mean it's literally a member of the clergy — the name is a convenient label borrowed from another context, not a literal description of the object's nature. \"Color charge\" works the same way.\n- **S6 repair path:** Directly state the paint-mixing mathematical analogy (red+green+blue light = white) as the sole reason for the naming choice, and explicitly deny any visual/appearance claim.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.strong-interaction.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.particle.strong-interaction/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.particle.strong-interaction",
+      "title": "The strong force weakens with distance, just like gravity and electromagnetism",
+      "content": "### MC-2: \"The strong force weakens with distance, just like gravity and electromagnetism\"\n- **Probe:** \"As two quarks are pulled further apart, does the force between them get weaker, like it would for two charged particles or two masses?\"\n- **Characteristic phrase:** \"All forces should get weaker as things get farther apart.\"\n- **Trigger:** Overgeneralizing from the two most familiar forces (gravity, electromagnetism), both of which follow a 1/r² weakening law, to \"all forces work this way.\"\n- **Conflict evidence [P28]:** Lattice QCD calculations and deep inelastic scattering experiments both confirm the strong force potential grows roughly linearly with quark separation at longer range (rather than falling off), which is precisely why quarks can never be pulled apart into free, isolated particles — the energy required grows without bound, well before separation could be achieved. At very short range, by contrast, the strong force actually weakens (asymptotic freedom), the complete opposite of the 1/r² forces' short-range behavior (where they are strongest at short range and weaken monotonically).\n- **Bridge [P30]:** \"The strong force is genuinely different from gravity and electromagnetism: it weakens at very short range (letting quarks move almost freely inside a hadron — asymptotic freedom) and grows at longer range (confinement) — a two-faced behavior unlike any force encountered so far.\"\n- **Replacement [P31]:** The strong force's distance-dependence is qualitatively different from an inverse-square law: weak at short range, growing (not shrinking) at longer range.\n- **Discrimination pairs [P33]:** A rubber band offers almost no resistance when barely stretched, but resists more and more the further it's stretched — the opposite pattern from a spring compressed close to a wall (strongest force at closest approach, weakening as it's released), which is more like gravity/EM's behavior.\n- **S6 repair path:** Physically perform the rubber-band stretch demonstration (Section 2) and have the student describe, in their own words, how the resistance changes as it's stretched further.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.strong-interaction.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.particle.strong-interaction/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.particle.strong-interaction",
+      "title": "The residual strong force holding nuclei together is the same thing as the fundamental strong force between quarks",
+      "content": "### MC-3: \"The residual strong force holding nuclei together is the same thing as the fundamental strong force between quarks\"\n- **Probe:** \"Is the force holding a proton and neutron together inside a nucleus the exact same force as the force holding the three quarks together inside a single proton?\"\n- **Characteristic phrase:** \"The strong force holds the nucleus together, and it holds quarks together — it's all one and the same force acting the same way at every level.\"\n- **Trigger:** Both phenomena are commonly called \"the strong force\" in introductory nuclear physics without distinguishing the fundamental (quark-gluon) level from the residual (nucleon-nucleon) level.\n- **Conflict evidence [P28]:** The force between quarks inside a single proton (mediated directly by gluon exchange, growing with separation, subject to confinement) has a fundamentally different mathematical form and range than the force between two adjacent, individually color-neutral protons/neutrons in a nucleus (which falls off rapidly with distance, more like a short-range residual attraction) — exactly analogous to how the van der Waals force between neutral molecules is a much weaker, different-behaving \"leftover\" effect of the electromagnetic force acting on the molecules' internal charged constituents.\n- **Bridge [P30]:** \"There are two related but distinct levels: the fundamental strong force (between quarks and gluons within a single hadron, subject to confinement and asymptotic freedom) and the residual strong force (a secondary, much weaker 'leftover' attraction between already color-neutral protons and neutrons, responsible for holding nuclei together). They share an origin but behave differently and operate at different scales.\"\n- **Replacement [P31]:** Nuclear binding is explained by the residual strong force, a distinct, weaker phenomenon from the fundamental quark-level strong force studied in this concept.\n- **Discrimination pairs [P33]:** The chemical bond holding two atoms into a molecule (residual electromagnetic effect between neutral atoms) is a genuinely different phenomenon from the electromagnetic force holding an electron to its own nucleus inside one atom (fundamental-level EM) — same underlying force, different level and behavior.\n- **S6 repair path:** Draw two separate diagrams side by side: quarks-within-one-proton (gluon exchange, confinement) vs. proton-and-neutron-within-a-nucleus (residual attraction, much shorter effective range, weaker), and have the student articulate the difference explicitly.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.strong-interaction.md",
+        "startLine": 23,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.particle.strong-interaction/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.strong-interaction",
+      "title": "EXPLAIN",
+      "content": "{\"id\":\"TA-1\",\"title\":\"EXPLAIN\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.strong-interaction.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.particle.strong-interaction/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.strong-interaction",
+      "title": "DEMONSTRATE + CHALLENGE",
+      "content": "{\"id\":\"TA-2\",\"title\":\"DEMONSTRATE + CHALLENGE\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.strong-interaction.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.particle.strong-interaction/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.strong-interaction",
+      "title": "DEMONSTRATE",
+      "content": "{\"id\":\"TA-3\",\"title\":\"DEMONSTRATE\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.strong-interaction.md",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.particle.strong-interaction/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.strong-interaction",
+      "title": "EXPLAIN + TRANSFER",
+      "content": "{\"id\":\"TA-4\",\"title\":\"EXPLAIN + TRANSFER\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.strong-interaction.md",
+        "startLine": 11,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.particle.strong-interaction/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.strong-interaction",
+      "title": "CHALLENGE",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CHALLENGE\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.strong-interaction.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "phys.particle.strong-interaction/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.particle.strong-interaction",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly explains confinement (why free quarks are never observed) using the growing-force/flux-tube mechanism, correctly distinguishes asymptotic freedom from confinement as opposite-regime behaviors of the same force, and correctly distinguishes the fundamental from the residual strong force. Score ≥ 75%.\n\n**FA-1 — Confinement mechanism:**\n*Q: Explain, mechanistically, why pulling two quarks apart never produces a single free quark, no matter how much energy is supplied.*\nExpected: The gluon field between the quarks forms a flux tube whose energy grows with separation; before the quarks can be fully separated, the stored energy exceeds the threshold to create a new quark-antiquark pair (via E = mc²), \"snapping\" into two color-neutral hadrons instead of yielding a lone quark.\nThreshold: Must cite the growing flux-tube energy and the pair-production snapping mechanism, not merely restate \"quarks are confined.\"\n\n**FA-2 — Asymptotic freedom vs. confinement:**\n*Q: Does the strong force get weaker or stronger as two quarks get closer together? Does this match or contradict its behavior at longer separation?*\nExpected: The strong force weakens at very short range (asymptotic freedom) but grows at longer range (confinement) — a two-faced behavior, unlike gravity or electromagnetism, which behave the same way (weakening) at all separations.\nThreshold: Must correctly describe both regimes and explicitly note the contrast with gravity/EM.\n\n**FA-3 — Fundamental vs. residual:**\n*Q: Is the force holding a nucleus together (protons and neutrons bound together) the same phenomenon as the force holding the quarks together inside a single proton? Explain the relationship.*\nExpected: No — the force holding quarks together inside a proton is the fundamental strong force (gluon exchange, subject to confinement); the force holding a nucleus together is the residual strong force, a weaker, shorter-range \"leftover\" effect between already color-neutral nucleons, analogous to van der Waals forces being a residual effect of electromagnetism.\nThreshold: Must correctly distinguish the two levels and name at least one structural difference (range, strength, or mechanism).\n\n**FA-4 — Color charge naming:**\n*Q: Does \"color charge\" mean quarks have a visible color? Explain what the term actually refers to.*\nExpected: No — color charge is an abstract quantum property with three values, named \"color\" only because its combination mathematics (three types summing to neutral) mirrors visible color mixing (red+green+blue = white); quarks have no visible color, being far smaller than any wavelength of visible light.\nThreshold: Must correctly reject the literal interpretation and explain the naming convention.\n\n**Confidence calibration:** After FA-1, students rate confidence before revealing the answer; students confident but wrong are walked through the rubber-band-snap demo (Demo 1) again with explicit narration of the growing-force stage before re-attempting a parallel confinement question.\n\n**Delayed retrieval (session + 3):** \"Describe the two opposite behaviors of the strong force at short vs. long range. What happens, mechanistically, when you try to separate two quarks?\" Expected: asymptotic freedom (short range, weak) vs. confinement (long range, growing); flux-tube snapping into new hadrons.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.strong-interaction.md",
+        "startLine": 190,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.particle.strong-interaction/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.strong-interaction",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- Stretch a rubber band between two hands slowly: initially it stretches easily (loosely analogous to asymptotic freedom at short range), but the restoring force grows the further it's stretched, and eventually it snaps into two separate pieces rather than continuing to stretch indefinitely (analogous to confinement and flux-tube \"snapping\" into two new hadrons).\n- Physical analogy: paint mixing — red, green, and blue light combine to make white (colorless) light; a quark triplet of one-each-color similarly combines to \"colorless,\" which is the actual mathematical origin of the (unfortunate, but now standard) choice of the word \"color\" for this property.\n\n### Representational (Iconic)\n- A force-vs-distance graph for the strong force: nearly flat/weak at very short distances (asymptotic freedom), then rising roughly linearly with distance (confinement) — contrasted directly with the falling 1/r² curves for gravity and electromagnetism.\n- A \"flux tube snapping\" diagram: two quarks connected by a tube-like gluon field, stretched until a new quark-antiquark pair pops into existence at the breaking point, producing two separate, color-neutral hadrons where there was one stretched system before.\n\n### Abstract (Symbolic)\n- The strong force potential is often modeled (qualitatively, no derivation required at this level) as V(r) ≈ −a/r + br, where the −a/r term dominates at short range (giving weak, Coulomb-like behavior — asymptotic freedom) and the br term dominates at long range (giving a force that grows linearly with distance — confinement).\n- Color neutrality condition: a baryon (r+g+b) or a meson (color + matching anticolor) sums to net-zero color charge, exactly analogous to how three primary colors of light sum to white/colorless.\n\n### Transfer (+)\n- Nuclear physics: the residual strong force (the \"leftover\" attraction between color-neutral protons and neutrons, distinct from the fundamental quark-level strong force) is what actually binds nuclei together — a genuinely separate, weaker, shorter-range effect analogous to how the van der Waals force between neutral molecules is a residual effect of the more fundamental electromagnetic force between their charged constituents.\n- High-energy physics: heavy-ion collider experiments (RHIC, LHC) briefly recreate a \"quark-gluon plasma\" — an extremely hot, dense state where confinement temporarily breaks down and quarks move nearly freely, believed to mirror conditions microseconds after the Big Bang.\n- Materials science: the confinement concept (\"a force that grows with separation, preventing isolation\") occasionally appears as a loose conceptual analogy in discussions of certain exotic condensed-matter phenomena, though the underlying physics is entirely different.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.strong-interaction.md",
+        "startLine": 41,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "phys.particle.strong-interaction/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.strong-interaction",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — Believing \"color charge\" refers to actual visible color:** Correct: color charge is a purely mathematical/quantum label (borrowed from the visual metaphor of color-mixing to white) for a property of the strong force entirely unrelated to visible light or a quark's actual appearance (quarks have no visible color at all — they are far smaller than any wavelength of visible light).\n\n**Mode 2 — Assuming the strong force behaves like gravity/EM, weakening with distance at all scales:** Correct: the strong force's behavior is genuinely two-faced — it weakens at very short range (asymptotic freedom) and grows at longer range (confinement), the opposite pattern from gravity and electromagnetism at every scale.\n\n**Mode 3 — Believing confinement means \"quarks are stuck because we haven't found a strong enough machine yet,\" a practical limitation rather than a structural law (already addressed partially in phys.particle.quarks, revisited here with the full mechanism):** Correct: confinement is a mathematical consequence of gluon self-interaction and the linearly-growing flux-tube energy — no amount of energy isolates a single quark, because the energy invested always exceeds the pair-production threshold before separation is achieved.\n\n**Mode 4 — Confusing the fundamental strong force (between quarks, via gluons) with the residual strong force (between protons/neutrons, holding nuclei together):** Correct: these are related but genuinely distinct phenomena — the fundamental strong force acts between quarks/gluons within a hadron; the much weaker residual strong force is a secondary effect between color-neutral hadrons (analogous to how van der Waals forces are a residual effect of electromagnetism between neutral molecules).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.strong-interaction.md",
+        "startLine": 62,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "phys.particle.strong-interaction/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.strong-interaction",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"Every force you've met so far gets weaker the farther apart two things are. Gravity — weaker with distance. Electric force — weaker with distance. I'm about to show you a force that does the exact opposite. What do you think happens if you try to pull two quarks apart?\"\n\n**At the confinement moment:**\n\"Here's what actually happens: the closer two quarks are, the weaker the force between them — they practically ignore each other at very short range. But pull them apart, and the force doesn't fade — it grows, almost like a stretched rubber band. Keep pulling, and eventually you're putting so much energy into that stretch that it becomes cheaper for the universe to just create a brand new quark-antiquark pair out of that energy than to keep stretching. Snap — and instead of one free quark in each hand, you're holding two complete, brand-new hadrons. No matter how hard you pull, you never get a lone quark. Ever.\"\n\n**At the color-naming clarification:**\n\"Quick, important clarification: 'color charge' has absolutely nothing to do with actual visible color. Quarks are far too small to reflect light the way a red apple does. Physicists just needed a name for a property with three types that combine to 'neutral' — the same way red, green, and blue light combine into white — so they borrowed the word. It's a label, not a description.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.strong-interaction.md",
+        "startLine": 177,
+        "endLine": 190
+      }
+    },
+    {
+      "assetId": "phys.particle.strong-interaction/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.strong-interaction",
+      "title": "Recovery Notes",
+      "content": "**S1:** Student has secured the gauge-boson framework (gluons as mediators) but hasn't yet grasped the two-faced short/long-range behavior. Anchor entirely in the rubber-band demonstration (Demo 1) before introducing the asymptotic-freedom/confinement vocabulary.\n\n**S4:** Student conflates the fundamental and residual strong forces (MC-3). Run Demo 3 (two-diagram comparison) repeatedly, having the student explicitly state which diagram is \"inside one hadron\" vs. \"between two hadrons in a nucleus\" until the distinction is automatic.\n\n**S5:** Student can state confinement and asymptotic freedom as facts but hasn't connected them as two regimes of the same underlying force curve. Draw the single combined force-vs-distance graph (Demo 2) explicitly, tracing a finger along the curve from short to long range to narrate both regimes as one continuous story.\n\n**S7:** Student is ready for the challenge-first entry given the concept's high (Advanced/Analyze) difficulty — open directly with \"why does confinement happen — not just that it happens\" as a genuine mechanistic puzzle before any narrative scaffolding.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.strong-interaction.md",
+        "startLine": 220,
+        "endLine": 232
+      }
+    },
+    {
+      "assetId": "phys.particle.strong-interaction/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.strong-interaction",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Conceptual/mechanistic (the two-regime force curve and the flux-tube snapping mechanism) — retrieval practice should emphasize explaining the mechanism in the student's own words, not just recalling the vocabulary terms (confinement, asymptotic freedom).\n\n**Spaced retrieval schedule:**\n- Session + 1: \"Describe what happens, mechanistically, when you try to pull two quarks apart.\"\n- Session + 3: \"Contrast the strong force's behavior at short range vs. long range.\"\n- Session + 7: \"Explain the difference between the fundamental strong force and the residual strong force.\"\n\n**Interleaving partners:** phys.particle.gauge-bosons (prerequisite — gluons as the mediator), phys.particle.quarks (prerequisite — confinement was previewed there and is fully explained here).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.strong-interaction.md",
+        "startLine": 232,
+        "endLine": 245
+      }
+    },
+    {
+      "assetId": "phys.particle.strong-interaction/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.strong-interaction",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Reasoning about quark-gluon plasma (a state where confinement temporarily breaks down under extreme temperature/density, studied in heavy-ion collider experiments) as an extension of the confinement mechanism to extreme conditions.\n\n**Far transfer:** Nuclear physics (residual strong force as the mechanism binding nuclei, directly building on the fundamental/residual distinction established here), early-universe cosmology (the quark-gluon plasma epoch microseconds after the Big Bang), and the general physics principle that a force's mathematical form can change qualitatively across different distance regimes — a genuinely rare phenomenon among the four fundamental forces, worth flagging as exceptional.\n\n**Structural abstraction:** \"A force need not behave the same way at every scale — its mathematical form can qualitatively change across regimes.\" This is a genuinely rare and important structural lesson: most forces encountered in introductory physics (gravity, Coulomb) have one fixed functional form at all scales; the strong force's two-regime behavior is the clearest counter-example, worth flagging explicitly as an exception to a pattern students may have over-generalized from other forces.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.strong-interaction.md",
+        "startLine": 245,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "phys.particle.strong-interaction/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.particle.strong-interaction",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.particle.gauge-bosons (gluon as mediator) and phys.particle.quarks (color charge and confinement previewed) are both necessary and sufficient — this concept fully develops mechanisms that were deliberately left partial in the prerequisite concepts.\n- **Unlock readiness:** This concept currently has no direct KG unlock recorded; it functions as a terminal, mechanism-depth node within the domain, appropriate given its role completing (rather than launching) a a multi-concept confinement narrative that began in phys.particle.quarks.\n- **Difficulty calibration:** Advanced/Analyze is well-calibrated — the two-regime force behavior (asymptotic freedom vs. confinement) and the flux-tube snapping mechanism both require genuine multi-step reasoning beyond simple recall, justifying the lower mastery threshold (0.75) and higher estimated hours (5) relative to more declarative concepts in the domain.\n- **No open issues:** description, prerequisites, and the (absent) unlocks are internally consistent with this concept's role as a mechanism-completion node in the Particle Physics domain.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.strong-interaction.md",
+        "startLine": 255,
+        "endLine": 265
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

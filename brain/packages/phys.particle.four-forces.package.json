@@ -1,0 +1,355 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.particle.four-forces-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.particle.four-forces",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0933faf783355755a74fd278e52490a44c781b388fc0e0532d0269e547e10505",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.particle.four-forces.md": "sha256:5be24e48c9376085204bdb70137729b75c35960c0bfa8cf1270511b2094a40d7"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "phys.particle.four-forces",
+    "name": "Four Fundamental Forces",
+    "difficultyRaw": "Developing",
+    "bloom": "Understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.em.coulombs-law",
+      "phys.mod.nuclear-reactions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.particle.four-forces-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.particle.four-forces (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.particle.four-forces.md": "sha256:5be24e48c9376085204bdb70137729b75c35960c0bfa8cf1270511b2094a40d7"
+      },
+      "contentHash": "sha256:18ee96b6cdbb46288fb7c07e49889541e0d2d5dcd8f64a1269995f903df96bb1",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.particle.four-forces.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.four-forces.md#TA-1 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.four-forces"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.four-forces\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.four-forces.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.four-forces.md#TA-2 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.four-forces"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.four-forces\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.four-forces.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.four-forces.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.four-forces"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.four-forces\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.particle.four-forces/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.particle.four-forces",
+      "title": "Four Fundamental Forces — core explanation",
+      "content": "**One-sentence definition:** All known interactions in nature reduce to exactly four fundamental forces — gravity, electromagnetism, the strong nuclear force, and the weak nuclear force — which differ enormously in relative strength, range, and which particles they act on.\n\n**The core insight:** Every push, pull, collision, chemical bond, nuclear decay, and gravitational attraction anyone has ever observed is one of only four underlying interactions. The forces are not equally important at every scale: gravity dominates at planetary scale despite being the weakest by far, because it is always attractive and accumulates over huge masses; the strong force dominates inside the nucleus but has essentially zero effect beyond ~10⁻¹⁵ m; electromagnetism governs everyday chemistry and contact forces; the weak force is responsible for radioactive beta decay and is the only force that can change one flavor of quark or lepton into another.\n\n**Conceptual chain:**\n1. Historically, \"forces\" were catalogued phenomenon by phenomenon — friction, gravity, magnetism, electricity, cohesion — until physicists realized many of these are the same force viewed differently (friction and cohesion are electromagnetic).\n2. By the 20th century, only four forces survived as truly fundamental — every other named \"force\" (friction, normal force, tension, viscosity, the strong nuclear glue that appears as \"residual\" binding) is a macroscopic manifestation of electromagnetism or the strong force.\n3. Each force has a relative strength (compared at the scale of a proton), a range, and a mediating exchange particle (Section 9's territory, phys.particle.gauge-bosons).\n4. Relative strength at nuclear scale: strong ≈ 1, electromagnetic ≈ 10⁻², weak ≈ 10⁻⁶, gravity ≈ 10⁻³⁸.\n5. Range: strong and weak are short-range (confined to the nucleus, ~10⁻¹⁵ m and less); electromagnetic and gravitational are infinite-range, falling off as 1/r².\n6. Every particle interaction — a chemical bond forming, a nucleus fissioning, a star fusing hydrogen, an apple falling — is fully explained by one or a combination of these four forces.\n\n**Central relations:**\n- Relative strength ordering (strongest to weakest, at nuclear separations): Strong > Electromagnetic > Weak > Gravitational.\n- Range ordering: Electromagnetic = Gravitational (infinite, 1/r²) > Strong ≈ Weak (short-range, ~10⁻¹⁵ m or less).\n- Strong force: binds quarks into nucleons and nucleons into nuclei; acts only on quarks and gluons (via color charge).\n- Electromagnetic force: acts on all electrically charged particles; governs atoms, chemistry, light.\n- Weak force: acts on all quarks and leptons; the only force that changes particle flavor (e.g., beta decay: down quark → up quark).\n- Gravitational force: acts on all particles with mass/energy; by far the weakest, but always attractive and cumulative.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.four-forces.md",
+        "startLine": 18,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "phys.particle.four-forces/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.particle.four-forces",
+      "title": "The strong force is the most important force in the universe because it's the strongest",
+      "content": "### MC-1: \"The strong force is the most important force in the universe because it's the strongest\"\n- **Probe:** \"Which force holds the Solar System together — the strong force or gravity? Why doesn't the strong force do it, if it's the strongest?\"\n- **Characteristic phrase:** \"The strong force is strongest, so it should dominate everything.\"\n- **Trigger:** Students over-generalize a scale-specific ranking (strength at nuclear separations) to all separations.\n- **Conflict evidence [P28]:** The strong force's range is about 10⁻¹⁵ m — smaller than a single atomic nucleus. Beyond that distance, its effect is exactly zero, not just small. Gravity, despite being 10³⁸ times weaker at nuclear scale, has infinite range and never cancels (mass is always positive), so it accumulates over astronomical distances and masses until it dominates planets, stars, and galaxies.\n- **Bridge [P30]:** \"Strength must always be compared at a specified distance. The strong force wins the contest only inside the nucleus. Outside that tiny range, it isn't even in the race — its strength is zero, not just small.\"\n- **Replacement [P31]:** Each force's importance depends on both its coupling strength AND its range. A short-range force, however strong at close distances, becomes irrelevant beyond that range; an infinite-range force, however weak, dominates at large enough scale because it never switches off.\n- **Discrimination pairs [P33]:** A firecracker (very strong, very short-lived effect) vs. a slow steady wind (weak, but blows continuously over hours) — total effect depends on both intensity and duration/range, not intensity alone.\n- **S6 repair path:** Use the analogy directly — ask \"which is stronger over a lifetime: a single very loud shout, or a whisper repeated every second for 80 years?\" — then map \"shout\" to strong force (short range) and \"whisper\" to gravity (infinite range, always adding up).",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.four-forces.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.particle.four-forces/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.particle.four-forces",
+      "title": "Friction and the normal force are fundamental forces alongside gravity, EM, strong, and weak",
+      "content": "### MC-2: \"Friction and the normal force are fundamental forces alongside gravity, EM, strong, and weak\"\n- **Probe:** \"List the four fundamental forces. Is friction one of them? Why or why not?\"\n- **Characteristic phrase:** \"Friction is a force, so it must be one of the fundamental four.\"\n- **Trigger:** Introductory mechanics teaches friction, normal force, and tension as forces with formulas and free-body diagrams, without distinguishing \"force I can draw an arrow for\" from \"fundamental interaction.\"\n- **Conflict evidence [P28]:** Friction arises from countless electromagnetic interactions between atoms and electrons on two contacting surfaces — it has no independent coupling constant, no exchange particle of its own, and its strength depends on surface roughness and material, not on a universal constant the way Coulomb's law does.\n- **Bridge [P30]:** \"Friction, normal force, tension, and air resistance are all real forces you can measure and use in F = ma — but they are emergent: they are the electromagnetic force acting between huge numbers of atoms, averaged into one convenient net force. They are not on the list of four fundamental forces because they are not irreducible.\"\n- **Replacement [P31]:** Only four forces are fundamental (irreducible): gravity, electromagnetism, strong, and weak. Every contact force in mechanics is a macroscopic electromagnetic effect.\n- **Discrimination pairs [P33]:** \"GDP\" is a real, measurable number describing an economy, but it's not a fundamental physical quantity like charge or mass — it emerges from millions of individual transactions. Friction is the \"GDP\" of countless electromagnetic interactions.\n- **S6 repair path:** Zoom into a sliding block at the atomic scale in the diagram — show that \"friction\" is literally millions of tiny electromagnetic bonds forming and breaking between surface atoms.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.four-forces.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.particle.four-forces/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.particle.four-forces",
+      "title": "The weak force is a weaker version of gravity",
+      "content": "### MC-3: \"The weak force is a weaker version of gravity\"\n- **Probe:** \"Both gravity and the weak nuclear force are called 'weak' in some sense. Are they the same kind of force, just at different scales?\"\n- **Characteristic phrase:** \"Weak force = a smaller version of gravity.\"\n- **Trigger:** Shared informal vocabulary (\"weak\") for two forces that are, in fact, unrelated in mechanism and scale.\n- **Conflict evidence [P28]:** Gravity acts on anything with mass/energy, has infinite range, and never changes what a particle is. The weak force acts on quarks and leptons, has a range of about 10⁻¹⁸ m (even shorter than the strong force's), and is the only force capable of transforming one type of quark or lepton into another (e.g., in beta decay, a down quark becomes an up quark).\n- **Bridge [P30]:** \"'Weak' in 'weak nuclear force' is a historical label for its coupling strength relative to the strong force — not a claim that it behaves like gravity. The weak force does something none of the other three forces can do: change a particle's identity.\"\n- **Replacement [P31]:** The weak force is a short-range, flavor-changing interaction, unrelated in mechanism to gravity's long-range, universal attraction. Their shared English adjective is a coincidence of naming.\n- **Discrimination pairs [P33]:** Beta decay (n → p + e⁻ + ν̄, driven by the weak force changing a down quark to an up quark) vs. an apple falling (driven by gravity, with no change to the apple's composition).\n- **S6 repair path:** Point to the one thing the weak force does that nothing else on the list does: it is solely responsible for radioactive beta decay, by literally converting one kind of quark into another — ask \"does gravity ever turn one particle into a different particle? No. That's the tell.\"\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.four-forces.md",
+        "startLine": 23,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.particle.four-forces/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.four-forces",
+      "title": "EXPLAIN",
+      "content": "{\"id\":\"TA-1\",\"title\":\"EXPLAIN\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.four-forces.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.particle.four-forces/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.four-forces",
+      "title": "DEMONSTRATE",
+      "content": "{\"id\":\"TA-2\",\"title\":\"DEMONSTRATE\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.four-forces.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.particle.four-forces/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.four-forces",
+      "title": "SORT + TRANSFER",
+      "content": "{\"id\":\"TA-3\",\"title\":\"SORT + TRANSFER\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.four-forces.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.particle.four-forces/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.particle.four-forces",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly names all four fundamental forces with their relative strength ordering and range classification, and correctly identifies at least three named phenomena (friction, gravity, beta decay) by which force is actually responsible. Score ≥ 85%.\n\n**FA-1 — Classification:**\n*Q: For each of the following, name the fundamental force responsible: (a) the Moon orbiting Earth, (b) a proton and neutron binding into a deuteron nucleus, (c) a free neutron decaying into a proton, electron, and antineutrino, (d) two like charges repelling.*\nExpected: (a) gravity, (b) strong force, (c) weak force, (d) electromagnetic force.\nThreshold: All four correct.\n\n**FA-2 — Range/strength reasoning:**\n*Q: The strong force is far stronger than gravity at nuclear distances, yet gravity — not the strong force — holds galaxies together. Explain why, using both range and strength.*\nExpected: The strong force's range is confined to about 10⁻¹⁵ m; beyond that its effect is zero. Gravity has infinite range and never cancels (mass is always positive), so even though it is far weaker per-particle, it accumulates over astronomical distances and masses until it dominates.\nThreshold: Must invoke both the range cutoff of the strong force and the cumulative, always-attractive nature of gravity.\n\n**FA-3 — Is-it-fundamental check:**\n*Q: Is the normal force (the force a table exerts upward on a book) a fifth fundamental force? Justify your answer.*\nExpected: No. The normal force is a macroscopic manifestation of the electromagnetic force between atoms in the table and atoms in the book resisting compression; only four forces are fundamental/irreducible.\nThreshold: Must say \"no\" and correctly attribute it to the electromagnetic force at the atomic level.\n\n**FA-4 — Weak force identity:**\n*Q: What makes the weak force unique among the four fundamental forces — what can it do that none of the other three can?*\nExpected: The weak force is the only force that can change the flavor/identity of a quark or lepton (e.g., converting a down quark into an up quark during beta decay).\nThreshold: Must correctly state the flavor-changing property, not merely \"it's weak\" or \"it's short-range\" (which is also true of the strong force).\n\n**Confidence calibration:** After FA-2, students rate confidence 1–5 before the explanation is revealed. Students confident (4–5) but wrong receive a targeted re-walk of the range-vs-strength distinction using the balloon demo as anchor.\n\n**Delayed retrieval (session + 3):** \"Rank the four fundamental forces by strength at nuclear scale, and by range. Which force is both weakest in strength and unlimited in range?\" Expected: strength order strong > EM > weak > gravity; range order EM = gravity (infinite) > strong ≈ weak (short); gravity is weakest yet infinite-range.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.four-forces.md",
+        "startLine": 191,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "phys.particle.four-forces/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.four-forces",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- Hold a magnet near iron filings (electromagnetic); drop a ball (gravity, weak at this scale but familiar); note that neither hand-scale experiment can demonstrate the strong or weak force directly — they only act inside the nucleus.\n- Rub a balloon on hair and stick it to a wall: electrostatic force visibly overpowers gravity on a small charged object, illustrating the vast strength gap between EM and gravity.\n- Physical analogy: think of the four forces as four different kinds of \"glue and push\" operating at different distance scales — a rubber band (short-range, strong), a magnet (long-range, EM), a nearly imperceptible tug (gravity), and a \"flavor-changing switch\" you cannot feel directly (weak).\n\n### Representational (Iconic)\n- Draw a logarithmic bar chart of relative strengths at nuclear scale: strong (10⁰), EM (10⁻²), weak (10⁻⁶), gravity (10⁻³⁸) — the enormous vertical gaps are the point.\n- Draw a range diagram: two forces (EM, gravity) with force-vs-distance curves falling off gradually to infinity (1/r²); two forces (strong, weak) with curves that plunge to zero abruptly past ~10⁻¹⁵ m.\n- A table with four rows (force, relative strength, range, acts on, everyday manifestation) is the single most useful iconic representation for this concept.\n\n### Abstract (Symbolic)\n- Strength ratios expressed as powers of ten allow direct comparison without needing exact SI unification (the four forces have different natural units and cannot yet be written with one shared coupling constant).\n- Gravitational force: F = Gm₁m₂/r²; electromagnetic force (Coulomb): F = kq₁q₂/r² — same 1/r² form, vastly different coupling constants (G ≈ 6.67×10⁻¹¹, k ≈ 8.99×10⁹).\n- The strong and weak forces are described by different coupling structures (mediated by gluons and W/Z bosons respectively) that fall off exponentially rather than as a power law, which is what confines their range.\n\n### Transfer (+)\n- Chemistry: every chemical bond, from covalent to hydrogen bonding, is fundamentally the electromagnetic force acting between electrons and nuclei.\n- Astrophysics: gravity alone shapes the large-scale structure of the universe precisely because it is the only unshielded, always-attractive, infinite-range force — the strong and weak forces are irrelevant beyond nuclear distances, and electric charges tend to cancel out (matter is neutral overall).\n- Nuclear engineering: reactor design and radioactive dating both hinge on knowing which force is responsible for which nuclear process (strong force binds the nucleus; weak force causes beta decay).\n- Particle physics unification programs (electroweak theory, grand unified theories) are attempts to show that these four apparently distinct forces are different low-energy manifestations of fewer underlying interactions.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.four-forces.md",
+        "startLine": 42,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "phys.particle.four-forces/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.four-forces",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — Treating \"strong\" as meaning \"big at all scales\":** Students assume the strong force must dominate everywhere since it's the \"strongest.\" Correct: the strong force's strength advantage only applies within its ~10⁻¹⁵ m range; beyond that it is exactly zero, so it plays no role in everyday or astronomical phenomena.\n\n**Mode 2 — Confusing weak force with \"a weak version of gravity\":** Because both are called \"weak\" in casual language (weak/gravity are both non-dominant at human scale in different ways), students conflate them. Correct: gravity is weak in the sense of overall coupling strength but universal and infinite-range; the weak nuclear force is weak and extremely short-range, and does something gravity and EM cannot: it changes particle identity/flavor.\n\n**Mode 3 — Believing friction, normal force, tension are separate fundamental forces:** Standard mechanics vocabulary lists many \"forces\" (friction, tension, normal, air resistance, viscosity) as if they belong on the same list as the four fundamental ones. Correct: all of these \"contact forces\" are macroscopic, statistical manifestations of the electromagnetic force between atoms/electrons in the two materials — none is fundamental.\n\n**Mode 4 — Assuming gravity is negligible and therefore irrelevant to include:** Because gravity is enormously weaker than the other three at particle scale, students conclude it \"doesn't count\" as one of the four. Correct: gravity's weakness at small scale is exactly why it needs to be included explicitly as the fourth force — its irrelevance at the particle scale and its total dominance at astronomical scale is one of the biggest unsolved puzzles in physics (the hierarchy problem).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.four-forces.md",
+        "startLine": 67,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "phys.particle.four-forces/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.four-forces",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"Quick question before I tell you anything: how many different forces can you name? Go. [Wait for list.] Okay — you named gravity, friction, magnetism, tension, maybe nuclear force. Physics has bad news and good news. Bad news: most of what's on your list isn't fundamental. Good news: everything on your list, and everything that's ever been observed happening anywhere in the universe, boils down to just four forces.\"\n\n**At the strength/range table:**\n\"Here's the strangest fact in this whole topic. The strong force is, by far, the strongest of the four. But it only reaches about the width of a nucleus — step outside that distance and its effect is exactly zero, not just small, zero. Gravity is the weakest of the four by an almost absurd margin — ten to the thirty-eighth times weaker than the strong force at that same nuclear distance. And yet gravity built every star and every galaxy. Why? Because gravity never turns off, and it never cancels — mass only ever pulls, never pushes. Given enough distance and enough mass, that tiny, tiny pull adds up to the force that shapes the universe.\"\n\n**At the friction misconception:**\n\"So is friction one of the four fundamental forces? [Wait.] No. Friction is not fundamental — it's electromagnetism in disguise, millions of tiny electric bonds between atoms on two surfaces, forming and breaking as they slide. Same for the normal force, tension, air resistance. They're all real, they're all useful in F = ma — but if you zoomed in far enough, every single one of them is just electromagnetism between charged particles.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.four-forces.md",
+        "startLine": 178,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "phys.particle.four-forces/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.four-forces",
+      "title": "Recovery Notes",
+      "content": "**S0:** Student has no prior exposure to \"fundamental force\" as a category distinct from everyday forces. Start entirely from the list-generation opening (Section 8) before introducing any table — let them discover the distinction between \"forces I can name\" and \"forces that are truly fundamental.\"\n\n**S3:** Student can recite the four names but cannot reason about range vs. strength tradeoffs. Re-run Demo 2 (strength/range chart) and have them predict, before checking, which force dominates at three specified distances.\n\n**S6:** Student is anxious about the abstractness of \"forces I can't feel directly\" (strong, weak). Ground entirely in Demo 1 (balloon) and familiar phenomena first; defer strong/weak force detail to the sorting exercise with concrete labeled examples rather than abstract definitions.\n\n**S9:** Extend into the electroweak unification story (phys.particle.electroweak-unification) as a preview: \"these four forces are not necessarily four separate things at the deepest level — two of them have already been shown to merge at extremely high energy.\" This previews the unification arc without requiring the machinery yet.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.four-forces.md",
+        "startLine": 221,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "phys.particle.four-forces/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.four-forces",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Declarative/categorical (a four-item classification schema with attached numeric properties) — this is a \"sorting schema,\" not a procedural skill, so retrieval practice should emphasize classification speed and range/strength recall over multi-step calculation.\n\n**Spaced retrieval schedule:**\n- Session + 1: \"Name the four fundamental forces in order from strongest to weakest at nuclear scale.\"\n- Session + 3: \"A chemical bond forms between two atoms. Which fundamental force is actually responsible?\"\n- Session + 7: \"Explain in one sentence why gravity, despite being the weakest force, dominates the shape of the universe.\"\n\n**Interleaving partners:** phys.em.coulombs-law (prerequisite — strength benchmark for EM), phys.mod.nuclear-reactions (prerequisite — strong/weak force context), phys.particle.gauge-bosons (successor — mediating particles for each force).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.four-forces.md",
+        "startLine": 233,
+        "endLine": 246
+      }
+    },
+    {
+      "assetId": "phys.particle.four-forces/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.four-forces",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Classifying any new named phenomenon (magnetism in a motor, alpha decay, a covalent bond, tidal forces) into one of the four forces using the same three-question test (range, what it acts on, does it change particle identity).\n\n**Far transfer:** Cosmology (why gravity, not the strong force, determines the fate of the universe), particle accelerator design (colliders are built specifically to probe short-range strong/weak interactions that cannot be studied any other way), and the historical unification program (electricity + magnetism → electromagnetism; electromagnetism + weak → electroweak) as a template for \"unification thinking\" in physics generally.\n\n**Structural abstraction:** \"Total influence = strength × effective range × accumulation.\" This pattern — a weak-but-persistent effect eventually dominating a strong-but-localized one — recurs in compound interest (small rate, long time), erosion (small force, long duration), and epidemiology (low transmission probability, large population), making it a genuinely transferable reasoning pattern beyond physics.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.four-forces.md",
+        "startLine": 246,
+        "endLine": 256
+      }
+    },
+    {
+      "assetId": "phys.particle.four-forces/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.particle.four-forces",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.em.coulombs-law (for the EM strength benchmark) and phys.mod.nuclear-reactions (for strong/weak force context inside the nucleus) are both necessary and sufficient; no gap found.\n- **Unlock readiness:** phys.particle.particle-classification and phys.particle.gauge-bosons are both well-motivated next steps — the four-force scorecard directly sets up \"which particles are acted on by which force\" (classification) and \"what carries each force\" (gauge bosons).\n- **Difficulty calibration:** Developing/Understand is appropriate — the content is almost entirely categorical and comparative (no new mathematical machinery beyond the already-known 1/r² form), but the range-vs-strength tradeoff is a genuine conceptual hurdle worth the full three hours estimated.\n- **Root-node note:** This concept is the entry point to the Particle Physics domain (`phys.particle.*`) — it introduces the four-force scorecard used as scaffolding throughout every subsequent particle physics concept; treat its mastery gate as a hard prerequisite check before proceeding into the domain.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.four-forces.md",
+        "startLine": 256,
+        "endLine": 266
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

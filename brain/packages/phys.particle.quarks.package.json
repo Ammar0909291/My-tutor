@@ -1,0 +1,390 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.particle.quarks-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.particle.quarks",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c920be22ba3ded663805c648205064d0c91b921c0ac07435808cd6c285024328",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.particle.quarks.md": "sha256:269c30e1afa9c275bebf5fd836d3c02afc497e6766a6309d2ce7cf0706b500d3"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.particle.quarks",
+    "name": "Quarks",
+    "difficultyRaw": "Proficient",
+    "bloom": "Understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.particle.particle-classification"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.particle.quarks-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.particle.quarks (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.particle.quarks.md": "sha256:269c30e1afa9c275bebf5fd836d3c02afc497e6766a6309d2ce7cf0706b500d3"
+      },
+      "contentHash": "sha256:d372501d4d352867668d833d08de996c22046a3db4833991d45c82262ad6e230",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.particle.quarks.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.quarks.md#TA-1 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.quarks"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.quarks\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.quarks.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.quarks.md#TA-2 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.quarks"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.quarks\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.quarks.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.quarks.md#TA-3 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.quarks"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.quarks\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.quarks.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.quarks.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.quarks"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.quarks\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.particle.quarks/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.particle.quarks",
+      "title": "Quarks — core explanation",
+      "content": "**One-sentence definition:** Quarks are the fundamental constituents of hadrons, carrying fractional electric charge (multiples of ⅓e), coming in six \"flavors\" (up, down, charm, strange, top, bottom), and are never observed as free, isolated particles due to confinement.\n\n**The core insight:** Everything a hadron is (mass, charge, decay behavior) is a bookkeeping consequence of which quarks it contains. A proton is uud (two up quarks, one down quark: charge ⅔+⅔−⅓ = +1); a neutron is udd (⅔−⅓−⅓ = 0). But no experiment has ever isolated a single free quark — pulling two quarks apart takes so much energy that it's cheaper for the vacuum to create a new quark-antiquark pair, so you end up with two hadrons instead of two free quarks (confinement).\n\n**Conceptual chain:**\n1. In the 1960s, Gell-Mann and Zweig independently proposed that hadrons are not fundamental but built from smaller constituents, initially called \"quarks\" (a nonsense word from James Joyce's novel).\n2. Six quark flavors exist, in three generations of two: (up, down), (charm, strange), (top, bottom) — heavier generations were discovered later, at higher collision energies.\n3. Each quark has a fractional charge: up-type quarks (up, charm, top) carry +⅔e; down-type quarks (down, strange, bottom) carry −⅓e.\n4. Every quark also carries \"color charge\" (a strong-force property, unrelated to visual color — fully developed in phys.particle.strong-interaction), which is the source of the force that binds quarks together and simultaneously prevents them from ever separating.\n5. Quarks combine into hadrons in only two allowed patterns: three quarks (baryons) or a quark-antiquark pair (mesons) — free single quarks have never been observed.\n6. The up and down quarks alone (the lightest, most stable flavor) are sufficient to build all ordinary matter (protons and neutrons); the four heavier flavors (charm, strange, top, bottom) appear only in high-energy collisions or short-lived exotic hadrons.\n\n**Central relations:**\n- Six flavors in three generations: (up, down), (charm, strange), (top, bottom).\n- Charge: up-type = +⅔e; down-type = −⅓e.\n- Proton = uud (charge +1e); neutron = udd (charge 0).\n- Confinement: quarks are never observed free/isolated; only bound inside hadrons.\n- Each quark has a corresponding antiquark with opposite charge.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.quarks.md",
+        "startLine": 18,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "phys.particle.quarks/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.particle.quarks",
+      "title": "With a powerful enough collider, physicists will eventually isolate a single free quark",
+      "content": "### MC-1: \"With a powerful enough collider, physicists will eventually isolate a single free quark\"\n- **Probe:** \"If you had an arbitrarily powerful particle accelerator, could you eventually pull a single quark out of a proton and study it alone?\"\n- **Characteristic phrase:** \"More energy should eventually separate them, like splitting an atom.\"\n- **Trigger:** Analogy to splitting atoms or molecules, where enough energy does eventually separate constituent parts into free pieces.\n- **Conflict evidence [P28]:** Unlike the electromagnetic force (which weakens with distance, so enough energy does separate charges), the strong force between quarks grows stronger with separation. Once the energy invested in trying to separate two quarks exceeds the energy needed to create a new quark-antiquark pair (via E = mc²), the vacuum \"pays\" for a new pair instead, and you end up with two color-neutral hadrons flying apart — never a free quark.\n- **Bridge [P30]:** \"There is no amount of energy that isolates a single quark, because the strong force doesn't run out with distance — it keeps growing until it's cheaper to make a new quark pair than to keep stretching the bond. This 'cheaper to make a new pair' threshold is always reached before separation, no matter how much energy you supply.\"\n- **Replacement [P31]:** Confinement is not a practical limitation to be overcome with more energy — it is a structural feature of the strong force itself (fully developed in phys.particle.strong-interaction); free quarks have never been, and by this mechanism cannot be, observed.\n- **Discrimination pairs [P33]:** Stretching a rubber band that snaps and reforms two shorter bands (energy creates new \"ends\" rather than yielding one free end) vs. pulling apart two magnets with a spring between them that eventually separates cleanly (the electromagnetic case) — quarks behave like the rubber band, not the magnets.\n- **S6 repair path:** Use the physical building-block/magnet-box demo (Section 2) directly — pull the blocks apart slowly and narrate: \"the harder I pull, the stronger it resists — it's not weakening like a spring would.\"",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.quarks.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.particle.quarks/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.particle.quarks",
+      "title": "A quark's fractional charge should be measurable directly with a sensitive-enough charge detector",
+      "content": "### MC-2: \"A quark's fractional charge should be measurable directly with a sensitive-enough charge detector\"\n- **Probe:** \"Could a very precise experiment measure a charge of exactly +⅔e sitting alone in a detector?\"\n- **Characteristic phrase:** \"If quarks have ⅔ charge, some detector should eventually see exactly that fraction.\"\n- **Trigger:** Overextending \"fractional charge exists\" to \"fractional charge is independently observable,\" without connecting it to confinement.\n- **Conflict evidence [P28]:** Every charge ever measured directly in an experiment (electrons, protons, ions, nuclei) has been a whole-number multiple of e. This is a direct experimental consequence of confinement: quarks only exist bound into hadrons whose total charge always sums to a whole multiple of e (e.g., proton +1e, neutron 0, pion ±1e or 0).\n- **Bridge [P30]:** \"Fractional charge is a real, well-established property of individual quarks, confirmed indirectly through deep inelastic scattering and the quark model's predictive success — but it is never observed as a free, isolated fractional charge in a detector, because free quarks don't exist to be measured that way.\"\n- **Replacement [P31]:** Quark charge is inferred from the combined charge and behavior of hadrons, not measured as an isolated fractional value; whole-number charge is the only thing ever directly detected.\n- **Discrimination pairs [P33]:** You can infer that a cake recipe used exactly 1½ eggs' worth of a particular ingredient's contribution by careful chemical analysis of the finished cake, without ever holding \"half an egg\" in your hand — the finished cake (hadron) is what you can hold; the fractional contribution (quark charge) is inferred.\n- **S6 repair path:** Walk through the proton charge-arithmetic (+⅔+⅔−⅓=+1) explicitly, emphasizing that the fractions are real inputs to an always-whole-number output.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.quarks.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.particle.quarks/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.particle.quarks",
+      "title": "All six quark flavors are equally present in ordinary, everyday matter",
+      "content": "### MC-3: \"All six quark flavors are equally present in ordinary, everyday matter\"\n- **Probe:** \"Is there a strange quark or a top quark inside the atoms in this table right now?\"\n- **Characteristic phrase:** \"Matter is made of quarks, and there are six kinds, so all six should be around us.\"\n- **Trigger:** Learning \"six flavors exist\" without learning that only two are stable/common at everyday energy scales.\n- **Conflict evidence [P28]:** Only up and down quarks are stable enough to exist in ordinary matter; the top quark, for example, has a mean lifetime of about 5×10⁻²⁵ seconds — it decays before it can even form a hadron, let alone persist in everyday matter. Charm, strange, and bottom quarks appear only fleetingly in cosmic ray interactions or particle collider experiments.\n- **Bridge [P30]:** \"All six flavors are equally 'real' as fundamental particles, but only up and down are light and stable enough to build the ordinary matter around you. The other four require enormous collision energies to even briefly exist, and then decay away almost instantly via the weak interaction.\"\n- **Replacement [P31]:** Ordinary matter (protons, neutrons, and therefore atoms) is built exclusively from up and down quarks; the four heavier flavors are transient, high-energy phenomena, not everyday constituents.\n- **Discrimination pairs [P33]:** All elements on the periodic table are \"real chemistry,\" but only a handful (carbon, oxygen, hydrogen, nitrogen) make up the vast majority of everyday biological matter — rarity in ordinary experience doesn't make the rest less real, it just makes them uncommon at everyday energy/conditions.\n- **S6 repair path:** Show the mass table: up (~2 MeV/c²) and down (~5 MeV/c²) are almost featherweight compared to top (~173,000 MeV/c²) — ask \"which quarks would be 'cheapest,' energy-wise, for the universe to make and keep around?\"\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.quarks.md",
+        "startLine": 23,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.particle.quarks/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.quarks",
+      "title": "EXPLAIN",
+      "content": "{\"id\":\"TA-1\",\"title\":\"EXPLAIN\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.quarks.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.particle.quarks/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.quarks",
+      "title": "EXPLAIN + DEMONSTRATE",
+      "content": "{\"id\":\"TA-2\",\"title\":\"EXPLAIN + DEMONSTRATE\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.quarks.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.particle.quarks/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.quarks",
+      "title": "CHALLENGE",
+      "content": "{\"id\":\"TA-3\",\"title\":\"CHALLENGE\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.quarks.md",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.particle.quarks/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.quarks",
+      "title": "TRANSFER",
+      "content": "{\"id\":\"TA-4\",\"title\":\"TRANSFER\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.quarks.md",
+        "startLine": 11,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.particle.quarks/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.particle.quarks",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly computes hadron charge from quark composition, correctly explains why free quarks are never observed (confinement, qualitatively), and correctly identifies which quark flavors build ordinary matter. Score ≥ 80%.\n\n**FA-1 — Charge arithmetic:**\n*Q: A hadron is composed of one up quark and two down quarks (udd). What is its total charge?*\nExpected: ⅔ − ⅓ − ⅓ = 0 (this is the neutron).\nThreshold: Correct arithmetic and correct whole-number result.\n\n**FA-2 — Confinement explanation:**\n*Q: Why has no experiment ever detected a single, free quark, despite quarks being confirmed as real, physical constituents of hadrons?*\nExpected: The strong force between quarks grows (rather than weakens) with separation distance; before two quarks can be pulled apart, the energy invested becomes sufficient to create a new quark-antiquark pair, so the result is always two hadrons, never one isolated quark.\nThreshold: Must invoke the growing-force/confinement mechanism, not merely restate \"confinement means they're stuck.\"\n\n**FA-3 — Flavor prevalence:**\n*Q: Why don't we find strange or top quarks in ordinary matter (like the atoms in this room), even though six quark flavors exist?*\nExpected: Only up and down quarks are light/stable enough to persist in ordinary matter; the four heavier flavors are far more massive and decay via the weak interaction almost instantly, appearing only in high-energy collisions.\nThreshold: Must cite mass/stability, not merely \"they're rare.\"\n\n**FA-4 — Antiquark charge:**\n*Q: An up quark has charge +⅔e. What is the charge of an anti-up quark (ū)?*\nExpected: −⅔e (exact opposite sign, same magnitude).\nThreshold: Correct sign and magnitude.\n\n**Confidence calibration:** After FA-2, students rate confidence before revealing the answer; students confident but wrong are walked through the rubber-band-vs-magnet demo (Demo 3) again before re-attempting a parallel confinement question.\n\n**Delayed retrieval (session + 3):** \"What are the two quark flavors present in ordinary matter, and what is the charge of each?\" Expected: up (+⅔e), down (−⅓e).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.quarks.md",
+        "startLine": 189,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "phys.particle.quarks/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.quarks",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- Colored building blocks (three of one color type + none of another representing up/down mix) physically assembled into a \"proton\" (2 up-blocks + 1 down-block) and a \"neutron\" (1 up-block + 2 down-blocks), snapped together and unable to be pulled apart individually without \"creating\" a new block pair from the felt tension of separation (a hands-on metaphor for confinement, revisited rigorously in phys.particle.strong-interaction).\n- Analogy prop: a sealed box of magnets that always snap back together when pulled apart — you can never hold just one pole in isolation.\n\n### Representational (Iconic)\n- A quark property table: flavor, charge (in units of e), approximate mass, generation.\n- Proton/neutron composition diagrams: three small circles (labeled u, u, d for proton; u, d, d for neutron) inside one larger circle, with a running charge total shown.\n\n### Abstract (Symbolic)\n- Charge arithmetic: proton = u + u + d = (+⅔) + (+⅔) + (−⅓) = +1. Neutron = u + d + d = (+⅔) + (−⅓) + (−⅓) = 0.\n- Antiquark charges are the exact negative of their quark's charge (e.g., anti-up ū has charge −⅔e).\n- Baryon number bookkeeping: each quark carries baryon number +⅓, so three quarks give baryon number +1 (matching a proton or neutron); each antiquark carries −⅓.\n\n### Transfer (+)\n- Nuclear physics: every nucleon's mass and charge is fully explained by quark content; beta decay (phys.particle.weak-interaction) is precisely a down quark converting to an up quark.\n- Particle accelerators: colliding protons at high enough energy can produce exotic, short-lived hadrons containing heavier quark flavors (charm, strange, bottom, top) that don't exist naturally on Earth.\n- Cosmology: the quark-gluon plasma believed to have existed microseconds after the Big Bang — a state where quarks were briefly not confined — is recreated and studied in heavy-ion collider experiments today.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.quarks.md",
+        "startLine": 41,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.particle.quarks/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.quarks",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — Expecting to isolate a free quark experimentally:** Students assume that with enough energy, a single quark could eventually be pulled free and studied alone, like separating atoms from a molecule. Correct: confinement means the strong force between two quarks does not weaken with distance (unlike gravity or EM) — it grows, so attempting to separate them creates a new quark-antiquark pair from the input energy before separation is achieved, always leaving two color-neutral hadrons, never a lone quark.\n\n**Mode 2 — Believing fractional charge (⅓e, ⅔e) can exist as a free, measurable charge in the lab:** Correct: because quarks are always confined inside hadrons, and hadrons always combine quarks such that total charge is a whole multiple of e, no isolated fractional charge has ever been measured — the fractional charge is a bookkeeping property of confined constituents, not a freely observable quantity.\n\n**Mode 3 — Assuming all six quark flavors are equally common in ordinary matter:** Students think charm, strange, top, and bottom quarks are present in everyday objects the same way up and down quarks are. Correct: ordinary matter (protons and neutrons in atoms) is built entirely from up and down quarks; the four heavier flavors only appear transiently in high-energy collisions or cosmic ray interactions and decay away in fractions of a second.\n\n**Mode 4 — Confusing \"quark\" with \"hadron\" as synonyms:** Correct: quarks are the fundamental constituent; hadrons (protons, neutrons, pions) are the composite particles quarks combine into. A quark is never itself a hadron, and a hadron is never itself a single quark.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.quarks.md",
+        "startLine": 63,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "phys.particle.quarks/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.quarks",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"A proton has a charge of exactly +1. I'm going to tell you it's built from three smaller pieces, and each piece has a fractional charge — a third or two-thirds of an electron's charge. How does that ever add up to a clean whole number? Let's find out what fractions actually work.\"\n\n**At the confinement idea:**\n\"Here's the strangest fact about quarks: nobody has ever seen one alone. Not once, not ever, in any experiment, anywhere. You'd think with a big enough accelerator, you could eventually just pull one out and study it by itself, the way you'd split apart a molecule. But quarks don't work that way. The harder you pull two quarks apart, the stronger the force between them gets — the opposite of gravity or electric attraction, which get weaker with distance. Eventually, before they ever separate, the energy you're putting in gets converted into a brand new quark-antiquark pair, and you end up with two hadrons flying apart, never one lone quark.\"\n\n**At the six flavors:**\n\"There are six flavors of quark — up, down, charm, strange, top, bottom — but you only need two of them, up and down, to build every atom in your body, this room, this planet. The other four are so heavy and so unstable that they only exist for a fraction of a second, and only when physicists smash particles together at enormous energy in an accelerator.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.quarks.md",
+        "startLine": 176,
+        "endLine": 189
+      }
+    },
+    {
+      "assetId": "phys.particle.quarks/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.quarks",
+      "title": "Recovery Notes",
+      "content": "**S0:** Student has no prior exposure to \"particles inside particles\" beyond the hadron/lepton classification. Begin entirely with the charge-arithmetic puzzle (Section 8 opening) as a concrete numeric hook before introducing flavor names.\n\n**S3:** Student can compute hadron charge from given quark compositions but hasn't internalized why free quarks don't exist. Repeat Demo 3 (rubber band vs. magnets) and have the student articulate, in their own words, the difference between a force that weakens and one that grows with distance.\n\n**S6:** Student is anxious about the abstractness of \"fractional charge that's never directly measured.\" Anchor entirely in the charge-arithmetic worked examples (proton, neutron) with concrete whole-number answers before introducing the confinement/measurability nuance.\n\n**S9:** Extend into the historical discovery timeline (up/down 1964, charm 1974, bottom 1977, top 1995) as an enrichment narrative connecting each discovery to the accelerator energy required — previewing phys.particle.accelerators-detectors.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.quarks.md",
+        "startLine": 219,
+        "endLine": 231
+      }
+    },
+    {
+      "assetId": "phys.particle.quarks/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.quarks",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Procedural (charge-arithmetic calculation) plus declarative/categorical (six-flavor table, confinement rule) — retrieval practice should test both the calculation skill and the conceptual confinement explanation separately.\n\n**Spaced retrieval schedule:**\n- Session + 1: \"Compute the charge of a hadron composed of two up quarks and one down quark.\"\n- Session + 3: \"Explain why free quarks are never directly observed.\"\n- Session + 7: \"Name the six quark flavors and state which two build ordinary matter.\"\n\n**Interleaving partners:** phys.particle.particle-classification (prerequisite — quarks are what makes something a hadron), phys.particle.hadron-quark-model and phys.particle.strong-interaction (successors — quark combination rules and the full confinement mechanism).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.quarks.md",
+        "startLine": 231,
+        "endLine": 244
+      }
+    },
+    {
+      "assetId": "phys.particle.quarks/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.quarks",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Computing the charge and quark composition of any newly named hadron (kaon, sigma baryon) encountered later, using the same charge-arithmetic method.\n\n**Far transfer:** Particle accelerator experiment design (colliders are built at specific energies precisely to produce heavier quark flavors), quark-gluon plasma research in heavy-ion physics, and the general scientific principle that indirect evidence (scattering patterns, charge bookkeeping) can establish a particle's reality even when it is never directly, individually observed.\n\n**Structural abstraction:** \"A system's bulk properties (charge, mass) can be fully explained by summing the properties of hidden constituents that are never individually observable.\" This pattern recurs in condensed matter physics (quasiparticles), chemistry (oxidation states as bookkeeping for electron distribution), and even economics (aggregate statistics built from untraceable individual transactions).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.quarks.md",
+        "startLine": 244,
+        "endLine": 254
+      }
+    },
+    {
+      "assetId": "phys.particle.quarks/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.particle.quarks",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.particle.particle-classification is necessary and sufficient — quarks only make sense once \"hadron\" is understood as the category quarks build.\n- **Unlock readiness:** phys.particle.hadron-quark-model (baryon/meson combination rules) and phys.particle.strong-interaction (the full confinement mechanism) are both directly and necessarily built on this concept; sequencing is well-motivated.\n- **Difficulty calibration:** Proficient/Understand is appropriate — the charge arithmetic is straightforward once the two charge values are known, but the confinement idea (why free quarks are never seen) is a genuine conceptual leap worth flagging as the harder half of this concept.\n- **No open issues:** description, prerequisites, and unlocks are internally consistent with the Physics KG's Particle Physics domain design.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.quarks.md",
+        "startLine": 254,
+        "endLine": 264
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

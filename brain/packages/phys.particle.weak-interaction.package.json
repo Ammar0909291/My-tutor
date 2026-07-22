@@ -1,0 +1,427 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.particle.weak-interaction-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.particle.weak-interaction",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7f2efaeb284baa3e89fb07bffe3670868a21c4890a83ff7d4a0b835f07089e4b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.particle.weak-interaction.md": "sha256:52a2878d1e9597d71a42ea8982f3f9bf055fbb242863b22c7e749a0ffea3b3bd"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.particle.weak-interaction",
+    "name": "The Weak Interaction",
+    "difficultyRaw": "Advanced",
+    "bloom": "Analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.particle.gauge-bosons",
+      "phys.particle.hadron-quark-model"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.particle.weak-interaction-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.particle.weak-interaction (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.particle.weak-interaction.md": "sha256:52a2878d1e9597d71a42ea8982f3f9bf055fbb242863b22c7e749a0ffea3b3bd"
+      },
+      "contentHash": "sha256:21bc92343e720116b4892028664882e2521582923209266404199b7225befaee",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.particle.weak-interaction.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.weak-interaction.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.weak-interaction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.weak-interaction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.weak-interaction.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.weak-interaction.md#TA-2 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.weak-interaction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.weak-interaction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.weak-interaction.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.weak-interaction.md#TA-3 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.weak-interaction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.weak-interaction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.weak-interaction.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.weak-interaction.md#TA-4 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.weak-interaction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.weak-interaction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.weak-interaction.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.weak-interaction.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.weak-interaction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.weak-interaction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.particle.weak-interaction/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.particle.weak-interaction",
+      "title": "The Weak Interaction — core explanation",
+      "content": "**One-sentence definition:** The weak interaction is the only fundamental force that can change one flavor of quark or lepton into another, mediated by the exchange of massive W and Z bosons, with beta decay (a down quark converting to an up quark) as its most familiar manifestation.\n\n**The core insight:** Every other force studied so far leaves a particle's identity unchanged — an electron pushed by electromagnetism is still the same electron afterward; a proton pulled by gravity is still the same proton. The weak interaction is fundamentally different: it can convert a down quark into an up quark, or an electron into a neutrino, changing what a particle actually is. This flavor-changing property is the weak force's defining, unique signature among the four fundamental forces.\n\n**Conceptual chain:**\n1. The weak interaction acts on all quarks and leptons (unlike the strong force, which only acts on quarks/gluons).\n2. Its defining, unique capability: it can change the flavor of a quark (e.g., down → up) or transform one lepton generation member into another via the associated neutrino.\n3. Mediated by the W⁺, W⁻, and Z⁰ bosons (already introduced in phys.particle.gauge-bosons) — extremely massive, giving the weak force its extremely short range.\n4. Beta decay is the classic example: inside a neutron (udd), a down quark converts to an up quark by emitting a W⁻ boson, turning the neutron into a proton (uud); the W⁻ boson then decays into an electron and an electron-antineutrino.\n5. Unlike electromagnetism and the strong force, the weak interaction is observed to violate parity symmetry (mirror-reflection symmetry) — a landmark discovery (Wu experiment, 1956) showing nature is not perfectly mirror-symmetric at the most fundamental level.\n6. The weak interaction is directly responsible for radioactive beta decay, for the fusion reactions that power the Sun (proton-proton chain requires a weak-interaction step converting a proton to a neutron), and for the eventual decay of every unstable heavier quark and lepton flavor into lighter, more stable ones.\n\n**Central relations:**\n- Only the weak force changes particle flavor (quark flavor or lepton generation); no other force does this.\n- Mediators: W⁺, W⁻ (charged, changing electric charge by ±1 in the process), Z⁰ (neutral, no charge change).\n- Beta decay (β⁻): n → p + e⁻ + ν̄ₑ, at the quark level: d → u + W⁻, then W⁻ → e⁻ + ν̄ₑ.\n- The weak force is the shortest-range of the three confirmed force types (~10⁻¹⁸ m), a direct consequence of the W/Z bosons' large mass.\n- Parity violation: the weak interaction distinguishes left from right at a fundamental level, unlike gravity, electromagnetism, and the strong force.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.weak-interaction.md",
+        "startLine": 18,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "phys.particle.weak-interaction/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.particle.weak-interaction",
+      "title": "The weak force is called 'weak' because it barely matters or has little effect on the universe",
+      "content": "### MC-1: \"The weak force is called 'weak' because it barely matters or has little effect on the universe\"\n- **Probe:** \"If the weak force suddenly stopped working entirely, would the universe look noticeably different, or would almost nothing change?\"\n- **Characteristic phrase:** \"The weak force is weak, so it doesn't really do much.\"\n- **Trigger:** Directly over-literalizing the adjective \"weak\" (a coupling-strength comparison) into \"unimportant\" or \"negligible in effect.\"\n- **Conflict evidence [P28]:** If the weak interaction stopped working, the Sun's proton-proton fusion chain (which requires a weak-interaction step converting a proton to a neutron) would halt, extinguishing the primary energy source of every main-sequence star, including the Sun. Radioactive decay of countless isotopes (used in medicine, geology, and nuclear power) would also stop, since beta decay is a weak-interaction process.\n- **Bridge [P30]:** \"'Weak' describes only the coupling strength of this force compared to the strong and electromagnetic forces at typical particle-physics energies — it says nothing about the force's importance. The weak interaction is directly responsible for the nuclear fusion that powers every star, including our own Sun, and for every instance of radioactive beta decay.\"\n- **Replacement [P31]:** The weak force's name reflects its relative coupling strength, not its cosmological or practical significance, which is enormous.\n- **Discrimination pairs [P33]:** A single, quiet ignition spark is \"weak\" compared to the massive fire it triggers, but without that spark, the fire never starts at all — the weak interaction is the essential, if comparatively \"weak,\" spark enabling stellar fusion.\n- **S6 repair path:** State directly: \"if the weak force stopped tomorrow, the Sun would eventually go dark, because it depends on this exact force to fuse hydrogen. That doesn't sound 'unimportant' to me.\"",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.weak-interaction.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.particle.weak-interaction/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.particle.weak-interaction",
+      "title": "Any sufficiently energetic interaction, via any force, can change a particle's flavor/identity",
+      "content": "### MC-2: \"Any sufficiently energetic interaction, via any force, can change a particle's flavor/identity\"\n- **Probe:** \"Could a very high-energy electromagnetic collision, given enough energy, convert a down quark into an up quark, the same way the weak interaction does?\"\n- **Characteristic phrase:** \"With enough energy, any force should be able to transform one particle into another.\"\n- **Trigger:** Overgeneralizing \"high energy enables more physics\" (true for producing new particles via pair production, phys.particle.antimatter) to \"high energy enables flavor-changing via any force\" (false).\n- **Conflict evidence [P28]:** Electromagnetic and strong interactions conserve quark flavor and lepton generation exactly, at any energy — a photon or gluon vertex never converts a down quark into an up quark, regardless of collision energy; only a W-boson vertex does this, because flavor-changing is a structural feature of how W bosons specifically couple to quarks and leptons, not a general high-energy phenomenon.\n- **Bridge [P30]:** \"Flavor conservation under electromagnetism and the strong force isn't a low-energy approximation that breaks down at high energy — it's an exact, structural feature of those interactions at any energy. Only the weak interaction, through W-boson exchange specifically, can change a particle's flavor, because of how the W boson's coupling is structured, not because of the amount of energy available.\"\n- **Replacement [P31]:** Flavor-changing is uniquely tied to weak-interaction (W-boson) vertices, not a general consequence of sufficient collision energy through any force.\n- **Discrimination pairs [P33]:** No matter how forcefully you shake a locked box (electromagnetic/strong interactions), it won't open — only the specific key (the W-boson vertex) unlocks it, regardless of how much force is applied with the wrong tool.\n- **S6 repair path:** Ask directly, \"has any electromagnetic or strong-force process you've studied ever changed what kind of quark or lepton something is? [No.] That's the tell — it's not about energy, it's about which force is acting.\"",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.weak-interaction.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.particle.weak-interaction/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.particle.weak-interaction",
+      "title": "All four fundamental forces respect mirror symmetry (parity) equally",
+      "content": "### MC-3: \"All four fundamental forces respect mirror symmetry (parity) equally\"\n- **Probe:** \"If you built a mirror-image version of a radioactive decay experiment, would the results look exactly the same as the original, just flipped?\"\n- **Characteristic phrase:** \"Physics should look the same in a mirror — that's true for every force.\"\n- **Trigger:** Gravity, electromagnetism, and the strong force do all conserve parity, so students over-generalize this to \"all forces must.\"\n- **Conflict evidence [P28]:** In 1956, Chien-Shiung Wu's experiment with polarized cobalt-60 nuclei found that beta-decay electrons were emitted preferentially in one direction relative to the nuclear spin — not equally in both directions as parity conservation would require. This directly proved the weak interaction distinguishes left from right, a result so unexpected it led to the 1957 Nobel Prize (awarded to theorists Lee and Yang, who had proposed the test) and fundamentally revised physicists' assumptions about mirror symmetry in nature.\n- **Bridge [P30]:** \"Gravity, electromagnetism, and the strong force do all conserve parity — a mirror-image experiment looks exactly like a valid possible experiment under those forces. The weak interaction is the sole exception: it genuinely, measurably distinguishes left-handed from right-handed processes, proven directly by the Wu experiment.\"\n- **Replacement [P31]:** Parity conservation is not a universal law of all four forces; the weak interaction specifically and provably violates it.\n- **Discrimination pairs [P33]:** Reading a book in a mirror is unreadable (text is not mirror-symmetric) while looking at a symmetric logo in a mirror looks identical (the logo is mirror-symmetric) — gravity/EM/strong-force physics is like the symmetric logo; weak-interaction physics is like the unreadable mirrored text.\n- **S6 repair path:** Narrate the Wu experiment directly and concretely: cobalt-60 nuclei aligned by a magnetic field, electrons measured preferentially escaping in one direction — \"if you flipped this whole setup in a mirror, the mirror-image experiment would show electrons still preferring the same direction relative to the (now-flipped) spin, which is impossible if parity were conserved.\"\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.weak-interaction.md",
+        "startLine": 23,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.particle.weak-interaction/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.weak-interaction",
+      "title": "EXPLAIN + DEMONSTRATE",
+      "content": "{\"id\":\"TA-1\",\"title\":\"EXPLAIN + DEMONSTRATE\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.weak-interaction.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.particle.weak-interaction/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.weak-interaction",
+      "title": "EXPLAIN",
+      "content": "{\"id\":\"TA-2\",\"title\":\"EXPLAIN\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.weak-interaction.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.particle.weak-interaction/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.weak-interaction",
+      "title": "CHALLENGE",
+      "content": "{\"id\":\"TA-3\",\"title\":\"CHALLENGE\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.weak-interaction.md",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.particle.weak-interaction/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.weak-interaction",
+      "title": "CHALLENGE",
+      "content": "{\"id\":\"TA-4\",\"title\":\"CHALLENGE\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.weak-interaction.md",
+        "startLine": 11,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.particle.weak-interaction/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.weak-interaction",
+      "title": "TRANSFER",
+      "content": "{\"id\":\"TA-5\",\"title\":\"TRANSFER\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.weak-interaction.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "phys.particle.weak-interaction/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.particle.weak-interaction",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly describes the beta decay mechanism at the quark level, correctly explains why only the weak force changes particle flavor, and correctly states the parity-violation result and its significance. Score ≥ 75%.\n\n**FA-1 — Beta decay mechanism:**\n*Q: Describe, at the quark level, what happens when a neutron undergoes beta decay to become a proton.*\nExpected: A down quark within the neutron converts to an up quark, emitting a W⁻ boson (d → u + W⁻); the W⁻ boson then decays into an electron and an electron-antineutrino (W⁻ → e⁻ + ν̄ₑ).\nThreshold: Must correctly state both steps (quark conversion, then W⁻ decay), not merely \"a neutron turns into a proton and an electron.\"\n\n**FA-2 — Why only weak force changes flavor:**\n*Q: Could a sufficiently high-energy photon-quark interaction ever change a quark's flavor, the way a W-boson interaction does? Explain.*\nExpected: No — flavor conservation under electromagnetic (and strong) interactions is an exact structural feature at any energy, not an approximation that breaks at high energy; only the W-boson vertex is structured to change flavor.\nThreshold: Must correctly say no and cite the structural (not energy-dependent) reason.\n\n**FA-3 — Parity violation:**\n*Q: What did the 1956 Wu experiment demonstrate, and why was it significant?*\nExpected: It demonstrated that the weak interaction violates parity (mirror symmetry) — beta-decay electrons from polarized cobalt-60 nuclei were emitted preferentially in one direction rather than equally in all directions, proving the weak force distinguishes left from right, unlike gravity, electromagnetism, and the strong force.\nThreshold: Must correctly state the asymmetric emission result and its implication for parity conservation.\n\n**FA-4 — \"Weak\" ≠ unimportant:**\n*Q: If the weak interaction suddenly stopped functioning, name one major astrophysical or everyday consequence.*\nExpected: The Sun's (and other stars') hydrogen fusion, which requires a weak-interaction step (proton to neutron conversion), would halt, extinguishing stellar energy production; radioactive beta decay would also cease.\nThreshold: Must name a genuine, specific consequence (stellar fusion or beta decay), not merely restate \"it would stop working.\"\n\n**Confidence calibration:** After FA-3, students rate confidence before revealing the answer; students confident but wrong are walked through the Wu experiment narrative (Demo 2) again with explicit emphasis on the asymmetric-emission result before re-attempting a parallel item.\n\n**Delayed retrieval (session + 3):** \"Write the two-step quark-level process for beta decay. What makes the weak interaction unique among the four fundamental forces?\" Expected: d → u + W⁻, then W⁻ → e⁻ + ν̄ₑ; uniquely changes particle flavor and violates parity.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.weak-interaction.md",
+        "startLine": 191,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "phys.particle.weak-interaction/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.weak-interaction",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- A physical \"identity swap\" demonstration: a card labeled \"down quark\" flips over during a simulated interaction to reveal \"up quark\" on the back, with a separate small card (\"W⁻ boson\") pulled away and further split into two more cards (\"electron,\" \"antineutrino\") — a hands-on stand-in for the full beta-decay chain.\n- Analogy prop: a vending machine that, when you insert one specific token (a down quark), doesn't just dispense a product — it hands back a different token entirely (an up quark) plus a receipt that later \"splits\" into two further items (electron, antineutrino).\n\n### Representational (Iconic)\n- A beta decay diagram: neutron (udd) on the left, arrow through a labeled \"W⁻ emission\" step, converting to a proton (uud) plus the emitted W⁻ boson, which itself decays into an electron and an antineutrino.\n- A parity-violation diagram (qualitative): a radioactive cobalt-60 nucleus with spin pointing one way, emitting beta-decay electrons preferentially in one direction relative to that spin — and the \"mirror image\" experiment (spins and emission directions both flipped) would predict equal emission in both directions if parity were conserved, which experiment shows it is not.\n\n### Abstract (Symbolic)\n- Quark-level beta decay: d → u + W⁻ (charge bookkeeping: −⅓ → +⅔ + (−1), since −⅓ = ⅔ + (−1) exactly), followed by W⁻ → e⁻ + ν̄ₑ (charge: −1 → −1 + 0).\n- Flavor-changing is quantified by the fact that no other known interaction vertex changes a quark's flavor label (up ↔ down, charm ↔ strange, top ↔ bottom, and cross-generation transitions with smaller probability) except via W-boson exchange.\n- Parity violation is quantified by the Wu experiment's measured asymmetry: electrons were emitted preferentially opposite to the nuclear spin direction, a result with no possible explanation under a parity-conserving theory.\n\n### Transfer (+)\n- Nuclear physics and radiometric dating: every beta-decay-based dating method (e.g., certain isotopic clocks) relies directly on the weak interaction's flavor-changing mechanism.\n- Astrophysics: the Sun's proton-proton fusion chain requires a weak-interaction step (converting a proton into a neutron, positron, and neutrino) as its rate-limiting first step — without the weak force, stars could not shine via hydrogen fusion the way they do.\n- Particle physics research: neutrino oscillation experiments, precision tests of parity violation, and searches for physics beyond the Standard Model all directly build on the weak interaction's established, well-tested behavior.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.weak-interaction.md",
+        "startLine": 41,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.particle.weak-interaction/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.weak-interaction",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — Believing the weak force is \"weak\" in the everyday sense of having little effect on the universe:** Correct: \"weak\" refers only to its coupling strength relative to the strong and electromagnetic forces at a given energy scale — its effects (radioactive decay, stellar fusion, the eventual decay of every unstable particle) are cosmologically and practically enormous; without it, stars could not shine and radioactive decay would not occur.\n\n**Mode 2 — Assuming any force can, in principle, change a particle's flavor/identity if given enough energy:** Correct: flavor-changing is a uniquely structural property of the weak interaction, tied to the specific way W bosons couple to quarks and leptons — no amount of energy channeled through electromagnetism or the strong force alone changes a particle's flavor; only weak-interaction vertices do this.\n\n**Mode 3 — Believing all forces respect mirror symmetry (parity) equally, since gravity, electromagnetism, and the strong force all do:** Correct: the weak interaction is the sole known exception among the four forces — it measurably distinguishes left from right, a landmark 1956 discovery that shocked the physics community precisely because parity conservation had been assumed universal.\n\n**Mode 4 — Confusing the direction of beta decay (down → up, releasing a W⁻) with the reverse (up → down, releasing a W⁺), treating them as interchangeable or unimportant which direction is meant:** Correct: these are physically distinct processes with different charge-conservation bookkeeping (a W⁻ carries away −1 charge in one direction; a W⁺ carries away +1 charge in the other), corresponding to different physical decay types (β⁻ decay vs. β⁺ decay/electron capture).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.weak-interaction.md",
+        "startLine": 63,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "phys.particle.weak-interaction/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.weak-interaction",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"Every force you've studied so far leaves a particle exactly who it was. Push an electron with electromagnetism — still an electron. Bind a quark with the strong force — still the same quark. I'm about to show you the one force that can change what a particle actually is — turn one type of quark into a completely different type.\"\n\n**At the beta decay walkthrough:**\n\"Here's what's actually happening inside a neutron when it undergoes beta decay. One of its three quarks — a down quark — converts into an up quark, emitting a W-minus boson in the process. That single change flips the neutron, udd, into a proton, uud. The W-minus boson barely exists before it decays again, this time into an electron and an antineutrino — the two particles you actually detect flying out. Two weak-interaction steps, back to back, and that's beta decay, completely explained at the particle level.\"\n\n**At the parity violation reveal:**\n\"In 1956, a physicist named Chien-Shiung Wu ran an experiment that shocked the entire field. She lined up radioactive cobalt-60 nuclei using a magnetic field and watched which direction the beta-decay electrons came out. If nature respected mirror symmetry — and physicists had assumed, without much question, that it always did — the electrons should come out equally in every direction. They didn't. They came out preferentially in one specific direction. The weak force, it turned out, can tell left from right. Nature is not a perfect mirror after all — and the weak interaction is the only one of the four fundamental forces where that's true.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.weak-interaction.md",
+        "startLine": 178,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "phys.particle.weak-interaction/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.weak-interaction",
+      "title": "Recovery Notes",
+      "content": "**S1:** Student has the gauge-boson and hadron-quark-model background secure but hasn't yet connected them to a specific, familiar phenomenon. Open directly with the beta-decay walkthrough (Demo 1) as a concrete anchor before introducing parity violation or the general flavor-changing principle.\n\n**S4:** Student can state the beta-decay equation but treats it as a single, atomic event rather than two sequential weak-interaction steps (quark conversion, then W-boson decay). Re-draw Demo 1's two-step diagram explicitly, having the student narrate each arrow separately.\n\n**S5:** Student accepts flavor-changing as a fact but hasn't grasped why it's structurally unique to the weak force (MC-2). Run Demo 3 (flavor-conservation contrast table) with additional example vertices until the \"only W-boson vertices change flavor\" rule becomes automatic.\n\n**S7:** Student is ready for the challenge-first entry given the concept's high (Advanced/Analyze) difficulty — open directly with the Wu experiment as a genuine historical puzzle (\"physicists assumed nature was mirror-symmetric — then this happened\") before any beta-decay scaffolding.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.weak-interaction.md",
+        "startLine": 221,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "phys.particle.weak-interaction/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.weak-interaction",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Procedural (the two-step beta decay mechanism) plus conceptual/historical narrative (why flavor-changing and parity violation are uniquely weak-interaction properties) — retrieval practice should test both the mechanistic sequence and the \"why is this force unique\" reasoning.\n\n**Spaced retrieval schedule:**\n- Session + 1: \"Write out the two-step quark-level process for beta decay.\"\n- Session + 3: \"Explain why only the weak interaction can change a particle's flavor.\"\n- Session + 7: \"Describe the Wu experiment and what it proved about parity.\"\n\n**Interleaving partners:** phys.particle.gauge-bosons (prerequisite — W/Z bosons as mediators), phys.particle.hadron-quark-model (prerequisite — quark composition of neutron/proton), phys.particle.electroweak-unification (successor — the weak force's deep connection to electromagnetism).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.weak-interaction.md",
+        "startLine": 233,
+        "endLine": 246
+      }
+    },
+    {
+      "assetId": "phys.particle.weak-interaction/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.weak-interaction",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Applying the same quark-level flavor-changing analysis to other weak-interaction processes (muon decay, already encountered in phys.particle.leptons, is itself a weak-interaction process; kaon decay, encountered later) using the same W-boson-vertex reasoning.\n\n**Far transfer:** Astrophysics (stellar nucleosynthesis and the proton-proton fusion chain), nuclear medicine and radiometric dating (both rely directly on beta-decay physics), and the philosophy of physics (parity violation as a historically important case study in how deeply-held symmetry assumptions can be experimentally overturned).\n\n**Structural abstraction:** \"A system's most deeply assumed symmetries can turn out to be approximate, not exact, once tested directly.\" The Wu experiment's parity violation is a powerful, transferable case study in scientific epistemology: theoretical assumptions (even ones as intuitive as mirror symmetry) require direct experimental testing, not just theoretical elegance, before being accepted as universal.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.weak-interaction.md",
+        "startLine": 246,
+        "endLine": 256
+      }
+    },
+    {
+      "assetId": "phys.particle.weak-interaction/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.particle.weak-interaction",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.particle.gauge-bosons (W/Z bosons) and phys.particle.hadron-quark-model (quark composition for beta decay) are both necessary and sufficient.\n- **Unlock readiness:** phys.particle.electroweak-unification directly depends on the weak interaction's full mechanism being secure before showing its deep connection to electromagnetism; sequencing is well-motivated.\n- **Difficulty calibration:** Advanced/Analyze is well-calibrated — the two-step beta decay mechanism, the structural (non-energy-dependent) explanation for flavor-changing, and the parity-violation result all require genuine multi-step reasoning beyond simple recall.\n- **No open issues:** description, prerequisites, and unlocks are internally consistent with the Physics KG's Particle Physics domain design.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.weak-interaction.md",
+        "startLine": 256,
+        "endLine": 266
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

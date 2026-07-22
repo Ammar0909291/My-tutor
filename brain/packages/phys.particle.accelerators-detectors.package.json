@@ -1,0 +1,394 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.particle.accelerators-detectors-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.particle.accelerators-detectors",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1d1899be26f85b9f2c15b63b838af87167c2b1bcb8ecb78bb0c5c1e282ec19f5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md": "sha256:3ae40714874842f10b456c20b9d83ca9153a958cb96a12e3f80ac41715ea97c4"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.particle.accelerators-detectors",
+    "name": "Particle Accelerators and Detectors",
+    "difficultyRaw": "Proficient",
+    "bloom": "Apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.particle.conservation-laws",
+      "phys.rel.relativistic-momentum"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.particle.accelerators-detectors-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.particle.accelerators-detectors (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md": "sha256:3ae40714874842f10b456c20b9d83ca9153a958cb96a12e3f80ac41715ea97c4"
+      },
+      "contentHash": "sha256:3e2da123622ddb49d71e45d0d038b4ee5f249a3977fd922abe71b50aba71e625",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.particle.accelerators-detectors.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md#TA-1 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.accelerators-detectors"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.accelerators-detectors\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.accelerators-detectors.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.accelerators-detectors"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.accelerators-detectors\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.accelerators-detectors.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md#TA-3 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.accelerators-detectors"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.accelerators-detectors\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.accelerators-detectors.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md#TA-4 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.accelerators-detectors"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.accelerators-detectors\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.particle.accelerators-detectors/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.particle.accelerators-detectors",
+      "title": "Particle Accelerators and Detectors — core explanation",
+      "content": "**One-sentence definition:** Particle accelerators collide particles at high relativistic momentum and energy, and applying conservation of energy and momentum to the detected collision products reveals the mass and properties of newly produced particles — even particles that decay before ever being directly observed.\n\n**The core insight:** No detector ever directly \"sees\" most of the particles it studies — many exist for a fraction of a trillionth of a second before decaying. What experimenters actually measure are the momenta and energies of the stable, longer-lived decay products that do reach the detector. By applying the same conservation-law toolkit already mastered (phys.particle.conservation-laws) together with relativistic momentum-energy relations, physicists reconstruct the mass and identity of a short-lived intermediate particle purely from the fingerprints it leaves in its decay products — a technique underlying essentially every major particle discovery since the mid-20th century.\n\n**Conceptual chain:**\n1. A particle accelerator uses electric and magnetic fields to accelerate charged particles (protons, electrons, or ions) to extremely high, relativistic speeds and correspondingly high momentum and kinetic energy.\n2. Colliding two such high-energy particles concentrates enormous energy into a small region, sufficient (via E = mc²) to create new, often much more massive particles than either original colliding particle.\n3. Newly created massive particles (like the W/Z bosons, the Higgs boson, or countless hadrons) are typically extremely short-lived and decay before reaching any detector; what the detector actually registers are the decay products' tracks, energies, and momenta.\n4. Applying conservation of energy and momentum to the measured decay products allows physicists to reconstruct the \"invariant mass\" of the original, undetected parent particle — a calculation that produces a sharp peak at the parent particle's true mass when many collision events are analyzed together (a technique central to, for example, the 2012 Higgs boson discovery).\n5. Detectors are built in layers, each specialized to measure a different property (charge/momentum via magnetic-field curvature; energy via calorimeters; particle identity via specialized detection layers), so that the full set of decay products from a single collision event can be fully characterized.\n6. Collision energy must exceed specific thresholds (related to the mass of the particle sought, via E = mc²) before a given particle can be produced at all — this is precisely why the Higgs boson (phys.particle.higgs-mechanism) and the W/Z bosons (phys.particle.gauge-bosons) required specific, historically significant accelerator energy milestones before their discovery.\n\n**Central relations:**\n- Collision energy must exceed the rest-mass energy (via E = mc²) of any particle to be produced, plus additional energy for the produced particles' kinetic energy and momentum balance.\n- Invariant mass reconstruction: from measured decay-product energies and momenta, physicists compute the parent particle's mass using relativistic energy-momentum relations, even though the parent was never directly detected.\n- Detector layering: different detector components measure charge/momentum (via a magnetic field bending charged tracks), energy (calorimeters), and specific particle identity.\n- Higher collision energy is required to produce higher-mass particles — this is the physical basis for building ever-larger, higher-energy accelerators over time.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md",
+        "startLine": 18,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.particle.accelerators-detectors/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.particle.accelerators-detectors",
+      "title": "The Higgs boson (or W/Z bosons) were directly seen/photographed by a detector",
+      "content": "### MC-1: \"The Higgs boson (or W/Z bosons) were directly seen/photographed by a detector\"\n- **Probe:** \"When physicists 'discovered' the Higgs boson in 2012, did a detector directly capture an image or direct signal of the Higgs boson itself?\"\n- **Characteristic phrase:** \"The detector directly saw/photographed the Higgs boson.\"\n- **Trigger:** Popular science coverage of major discoveries often uses language (\"the detector found/saw the particle\") that implies direct observation, without clarifying the actual invariant-mass-reconstruction methodology.\n- **Conflict evidence [P28]:** The Higgs boson has a mean lifetime far too short (on the order of 10⁻²² seconds) to travel any measurable distance or interact with any detector component directly — it decays into other particles (e.g., two photons, or four leptons) essentially instantaneously at the collision point. What was actually measured were the energies and momenta of these decay products; the Higgs boson's existence and mass (~125 GeV/c²) were inferred from a sharp peak in the invariant-mass histogram built from many such decay events.\n- **Bridge [P30]:** \"No detector has ever directly 'seen' a Higgs boson, W boson, Z boson, or most other particles discovered in modern particle physics — these particles decay far too quickly. What's actually measured is a collection of longer-lived decay products; the parent particle's mass and existence are inferred by reconstructing invariant mass from those measured products, producing a statistically significant peak that announces the discovery.\"\n- **Replacement [P31]:** Most particle discoveries are inferences from invariant-mass reconstruction of decay products, not direct observations of the particle itself.\n- **Discrimination pairs [P33]:** A forensic investigator doesn't need to have witnessed a crime directly to reconstruct exactly what happened from careful physical evidence — invariant-mass reconstruction is the particle-physics equivalent of this forensic-evidence-based inference.\n- **S6 repair path:** Present the actual invariant-mass histogram plot style used in the 2012 announcement directly, and ask, \"does this graph show a photograph of the Higgs boson, or does it show something else entirely?\"",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.particle.accelerators-detectors/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.particle.accelerators-detectors",
+      "title": "Exceeding the minimum required collision energy guarantees the particle will be produced and detected",
+      "content": "### MC-2: \"Exceeding the minimum required collision energy guarantees the particle will be produced and detected\"\n- **Probe:** \"If a collider reaches an energy above the threshold needed to produce a certain particle, is that particle guaranteed to appear in every collision from that point forward?\"\n- **Characteristic phrase:** \"Once you have enough energy, the particle should just show up reliably.\"\n- **Trigger:** Overgeneralizing the threshold-energy condition (a necessary condition) into a sufficient one, without accounting for the probabilistic nature of particle interactions (cross-sections).\n- **Conflict evidence [P28]:** Even well above the minimum threshold energy, producing a specific particle (like the Higgs boson) in any single collision remains an extremely rare event — only a tiny fraction of billions of collisions at the LHC actually produce a Higgs boson, requiring years of data collection and careful statistical analysis to build up enough events for a confident discovery, even once the energy requirement was comfortably met.\n- **Bridge [P30]:** \"Meeting the energy threshold is necessary but far from sufficient — producing a specific particle in any given collision has a small probability (called a cross-section), meaning enormous numbers of collisions, collected over long periods, are needed even when the energy requirement is easily satisfied.\"\n- **Replacement [P31]:** Energy threshold is a necessary condition; actual production rate depends additionally on interaction probability (cross-section), requiring large collision statistics even above threshold.\n- **Discrimination pairs [P33]:** Being tall enough to ride a roller coaster (meeting a threshold) doesn't guarantee you'll actually get on the ride that day — many other factors (queue, timing, chance) determine whether the specific event (a ride, or a particle production event) actually happens on any given attempt.\n- **S6 repair path:** Present the actual collision statistics (billions of collisions per second at the LHC, with Higgs bosons produced only rarely among them) to make the probabilistic, not guaranteed, nature of production concrete.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.particle.accelerators-detectors/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.particle.accelerators-detectors",
+      "title": "Invariant mass is the directly-measured mass of one single detected particle",
+      "content": "### MC-3: \"Invariant mass is the directly-measured mass of one single detected particle\"\n- **Probe:** \"Is 'invariant mass,' as used in particle physics discovery announcements, the mass of one single particle the detector directly measured?\"\n- **Characteristic phrase:** \"Invariant mass is just the mass of the particle you detected.\"\n- **Trigger:** The term \"mass\" in \"invariant mass\" sounds like a direct, single-particle property, obscuring that it is actually a calculated quantity combining multiple measured decay products.\n- **Conflict evidence [P28]:** Invariant mass is computed from the combined energies and momenta of two or more separately measured decay products (e.g., two photons, in the case of one major Higgs decay channel) using the relativistic energy-momentum relation — it is specifically designed to reconstruct the mass of an undetected parent particle from its detected children, not to report the mass of any single directly-observed particle.\n- **Bridge [P30]:** \"Invariant mass is a calculated quantity: take the measured energies and momenta of two or more decay products, combine them using the relativistic energy-momentum relation, and the result reconstructs the mass of the (undetected) parent particle that produced them — it is never the directly-measured mass of a single particle you can point to in the detector.\"\n- **Replacement [P31]:** Invariant mass is a computed reconstruction from multiple decay-product measurements, representing the inferred mass of an unobserved parent particle.\n- **Discrimination pairs [P33]:** Estimating a shattered vase's original weight by carefully weighing and combining every recovered fragment is analogous to computing invariant mass from decay products — the result describes the original object (vase, or parent particle), not any single fragment.\n- **S6 repair path:** Walk through the actual invariant-mass formula conceptually with two example decay products, explicitly showing that both products' measurements are combined into a single computed result.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md",
+        "startLine": 23,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.particle.accelerators-detectors/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.accelerators-detectors",
+      "title": "EXPLAIN + DEMONSTRATE",
+      "content": "{\"id\":\"TA-1\",\"title\":\"EXPLAIN + DEMONSTRATE\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.particle.accelerators-detectors/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.accelerators-detectors",
+      "title": "DEMONSTRATE",
+      "content": "{\"id\":\"TA-2\",\"title\":\"DEMONSTRATE\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.particle.accelerators-detectors/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.accelerators-detectors",
+      "title": "EXPLAIN + CHALLENGE",
+      "content": "{\"id\":\"TA-3\",\"title\":\"EXPLAIN + CHALLENGE\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.particle.accelerators-detectors/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.accelerators-detectors",
+      "title": "CHALLENGE",
+      "content": "{\"id\":\"TA-4\",\"title\":\"CHALLENGE\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md",
+        "startLine": 11,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.particle.accelerators-detectors/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.particle.accelerators-detectors",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly explains invariant-mass reconstruction as the mechanism for detecting short-lived particles, correctly distinguishes energy threshold (necessary) from production probability (also required), and correctly identifies the layered nature of real detectors. Score ≥ 80%.\n\n**FA-1 — Reconstruction mechanism:**\n*Q: Explain how physicists determined the mass of the Higgs boson, given that it decays before any detector can register it directly.*\nExpected: They measured the energy and momentum of the Higgs boson's decay products (e.g., two photons) and combined these measurements using the relativistic invariant-mass formula; repeating this across many collision events produced a statistically significant peak at the Higgs boson's true mass.\nThreshold: Must cite decay-product measurement plus the histogram-peak signature, not merely \"they detected it directly.\"\n\n**FA-2 — Threshold vs. probability:**\n*Q: A collider reaches an energy well above the threshold needed to produce a particular particle. Does this guarantee the particle appears in every collision? Explain.*\nExpected: No — meeting the energy threshold is necessary but not sufficient; production of a specific particle in any given collision has its own probability (cross-section), so many collisions are still needed to actually produce and statistically confirm the particle, even well above threshold.\nThreshold: Must correctly say \"no\" and cite the probabilistic/cross-section reasoning.\n\n**FA-3 — Invariant mass definition:**\n*Q: Is \"invariant mass\" the directly-measured mass of a single detected particle, or something else? Explain.*\nExpected: It is a calculated quantity, combining the measured energies and momenta of two or more decay products via the relativistic energy-momentum relation, reconstructing the mass of an undetected parent particle — not the directly-measured mass of any single observed particle.\nThreshold: Must correctly describe it as a multi-product calculation, not a single-particle direct measurement.\n\n**FA-4 — Detector layering:**\n*Q: Why does a real particle detector consist of multiple distinct layers rather than a single instrument?*\nExpected: Different layers measure different properties — an inner tracking layer (in a magnetic field) measures charge and momentum via path curvature; calorimeter layers measure energy; an outer layer specifically detects muons (the only common particle type penetrating that far) — combining all layers' data is necessary to fully characterize a collision event.\nThreshold: Must correctly name at least two distinct layer functions.\n\n**Confidence calibration:** After FA-1, students rate confidence before revealing the answer; students confident but wrong are walked through the histogram plot (Demo 1) again with explicit emphasis on \"the peak, not a photograph, is the evidence\" before re-attempting a parallel item.\n\n**Delayed retrieval (session + 3):** \"Describe, in your own words, how invariant-mass reconstruction allows physicists to determine the mass of a particle too short-lived to detect directly.\" Expected: measure decay products' energy/momentum, combine via the relativistic formula, look for a statistical peak across many events.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md",
+        "startLine": 187,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "phys.particle.accelerators-detectors/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.accelerators-detectors",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- A \"broken piñata\" analogy: nobody sees the piñata's original shape directly once it's struck and shattered — but by carefully measuring and weighing every piece that falls out, and using conservation of total mass, you can reconstruct what the original piñata must have looked like and weighed, even though you never saw it whole.\n- Physical demonstration: roll two balls of modeling clay at each other at speed, observe the resulting combined/deformed shape, and discuss how measuring the fragments' masses and directions could, in principle, tell you about the collision even without having watched the initial impact moment directly.\n\n### Representational (Iconic)\n- An invariant-mass histogram (the actual, real technique used in discovery announcements): a plot of computed \"candidate parent mass\" from many collision events, showing a flat background with a sharp peak exactly at the true parent particle's mass — the signature \"bump\" that announces a new particle's discovery (this is literally the plot style used in the 2012 Higgs boson discovery announcement).\n- A layered detector cross-section diagram: innermost tracking layer (measures charged-particle paths/momentum via magnetic curvature), middle calorimeter layers (measure energy deposited), outer muon detection layer (only muons penetrate this far).\n\n### Abstract (Symbolic)\n- Relativistic invariant mass formula (qualitative statement, no full derivation required at this level): for two decay products with measured energies E₁, E₂ and momenta p₁, p₂, the parent particle's invariant mass M satisfies (Mc²)² = (E₁+E₂)² − |p₁c+p₂c|² — a quantity that is the same (invariant) regardless of the reference frame used to measure it, which is precisely why it reliably reconstructs the parent's true rest mass.\n- Threshold energy condition: to produce a particle of mass m, the total collision energy in the center-of-mass frame must exceed mc² (plus additional energy for momentum/kinetic energy balance of all produced particles) — explaining why the W/Z bosons (~80–91 GeV/c²) and Higgs boson (~125 GeV/c²) each required specific, progressively higher accelerator energy milestones.\n\n### Transfer (+)\n- Nuclear medicine: cyclotrons (a simpler type of accelerator) are used to produce medical radioisotopes for PET scanning and other diagnostic techniques, applying the same acceleration principles at a much smaller, more accessible scale.\n- Materials science: synchrotron light sources (accelerators built primarily to produce intense X-ray beams, rather than for collision physics) use the same acceleration technology for structural biology, materials characterization, and other applications entirely distinct from particle discovery.\n- Historical science methodology: the invariant-mass reconstruction technique exemplifies a broader scientific principle — inferring the properties of something never directly observed from careful, conservation-law-based analysis of what it left behind, a method with direct analogs in forensic science, paleontology, and astronomy.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md",
+        "startLine": 40,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "phys.particle.accelerators-detectors/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.accelerators-detectors",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — Believing detectors directly \"see\" and photograph short-lived particles like the Higgs boson or W/Z bosons:** Correct: these particles are far too short-lived (often existing for less than 10⁻²² seconds) to ever be directly detected; what is actually measured are the longer-lived, stable decay products, and the parent particle's existence and mass are inferred through invariant-mass reconstruction, not direct observation.\n\n**Mode 2 — Assuming any collision energy above a rough threshold guarantees producing the particle of interest:** Correct: exceeding the minimum energy threshold (mc²) is necessary but not sufficient — the specific process must also be allowed by the interaction structure (which mediator, which vertices are involved) and has a specific, generally very small, probability (cross-section) per collision, meaning enormous numbers of collisions are needed even at sufficient energy to produce and detect a rare event.\n\n**Mode 3 — Believing \"invariant mass\" is simply the literal, directly-measured mass of one specific detected particle:** Correct: invariant mass is a calculated quantity, computed from the combined energies and momenta of two or more measured decay products, specifically designed to reconstruct the mass of an undetected parent particle — it is not the mass of any single particle actually seen in the detector.\n\n**Mode 4 — Assuming a detector is a single instrument rather than a system of many specialized, layered components each measuring something different:** Correct: real particle detectors (like those at the LHC) are enormous, multi-layered systems, with different layers/components specifically designed to measure charge/momentum, energy, and particle identity separately — no single measurement captures everything about a collision event.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md",
+        "startLine": 61,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.particle.accelerators-detectors/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.accelerators-detectors",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"In 2012, physicists announced they had discovered the Higgs boson. Here's the thing: the Higgs boson exists for about a tenth of a trillionth of a trillionth of a second before it decays. No camera, no detector, nothing could possibly take a direct picture of something that fleeting. So how, exactly, do you 'discover' a particle nobody has ever directly seen?\"\n\n**At the reconstruction technique:**\n\"Here's how it actually works. You don't look for the Higgs boson itself — you look for what it leaves behind. It decays almost instantly into other, longer-lived particles — say, two photons. You carefully measure the energy and momentum of those two photons, and you combine those measurements using a specific formula from relativity. Do that for one collision, and you get one number — not very meaningful on its own. Do it for billions of collisions, and plot every single computed number on a graph. If the Higgs boson genuinely exists, a sharp spike appears at exactly its true mass, standing out above the random noise of everything else. That spike — not a photograph, a spike in a graph — is the discovery.\"\n\n**At the threshold-vs-probability distinction:**\n\"Quick but important clarification: having enough collision energy to produce a Higgs boson doesn't mean every collision produces one. Far from it. Out of billions of collisions per second at the Large Hadron Collider, only a tiny handful actually produce a Higgs boson. That's why the discovery took years of data collection, even once the energy requirement was easily met — energy gets you in the door, but producing the specific particle you're after is still a matter of probability, collision after collision after collision.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md",
+        "startLine": 174,
+        "endLine": 187
+      }
+    },
+    {
+      "assetId": "phys.particle.accelerators-detectors/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.accelerators-detectors",
+      "title": "Recovery Notes",
+      "content": "**S0:** Student has the conservation-law toolkit and relativistic momentum background secure but hasn't yet connected them to a real discovery application. Open entirely with the shattered-vase analogy (Section 6) and the \"how do you discover something you never see\" hook (Section 8 opening) before introducing the formal invariant-mass formula.\n\n**S3:** Student can state the invariant-mass concept abstractly but treats it as reporting a single particle's mass (MC-3). Walk through the combination formula explicitly with two concrete decay-product measurements, emphasizing the \"combine two things into one result\" structure.\n\n**S6:** Student is anxious about the statistical/probabilistic nature of discovery (MC-2) feeling \"uncertain\" or \"not real science.\" Ground entirely in the concrete histogram-peak signature (Demo 1) as unambiguous, quantitative evidence, rather than framing statistics as inherently uncertain or speculative.\n\n**S8:** Student wants a directly practical, career-relevant entry point — connect explicitly to real collider facilities (LHC) and their scale/cost, and to medical/materials-science applications of smaller accelerators (cyclotrons, synchrotron light sources) as real-world career and application contexts.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md",
+        "startLine": 217,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "phys.particle.accelerators-detectors/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.accelerators-detectors",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Procedural (the invariant-mass reconstruction method) plus conceptual (correctly distinguishing threshold-necessary from production-sufficient, and understanding detector layering) — retrieval practice should test both the reconstruction procedure and these conceptual distinctions.\n\n**Spaced retrieval schedule:**\n- Session + 1: \"Describe the invariant-mass reconstruction procedure for finding an undetected parent particle's mass.\"\n- Session + 3: \"Explain why meeting a collision-energy threshold doesn't guarantee a particle will be produced in every collision.\"\n- Session + 7: \"Why does a real particle detector need multiple distinct layers?\"\n\n**Interleaving partners:** phys.particle.conservation-laws (prerequisite — the conservation-law toolkit used in reconstruction), phys.rel.relativistic-momentum (prerequisite — the relativistic energy-momentum relations underlying the invariant-mass formula).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md",
+        "startLine": 229,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.particle.accelerators-detectors/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.accelerators-detectors",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Applying the same invariant-mass reconstruction logic to any other particle-discovery scenario encountered later (e.g., reasoning about how the top quark or any future undiscovered particle might be found using the same technique).\n\n**Far transfer:** Forensic science and paleontology (reconstructing an original event or organism from indirect physical evidence), astronomy (inferring the properties of unseen objects, like black holes, from their gravitational effects on visible companions — a structurally similar \"infer the unseen from measurable effects\" reasoning pattern), and general scientific epistemology (statistical significance, like a histogram peak, as legitimate, rigorous evidence rather than \"just a guess\").\n\n**Structural abstraction:** \"An unobserved entity's properties can be rigorously reconstructed from conservation-law-based analysis of its observable effects/products.\" This reasoning pattern — direct observation is not the only path to rigorous scientific knowledge — is one of the most broadly transferable epistemological lessons in the entire Particle Physics domain.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md",
+        "startLine": 242,
+        "endLine": 252
+      }
+    },
+    {
+      "assetId": "phys.particle.accelerators-detectors/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.particle.accelerators-detectors",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.particle.conservation-laws (the conservation-law toolkit) and phys.rel.relativistic-momentum (the relativistic energy-momentum relations) are both necessary and sufficient.\n- **Unlock readiness:** This concept currently has no direct KG unlock recorded; it functions as a terminal, application-synthesis node within the domain, appropriate given its role as a capstone application of both conservation laws and relativistic momentum to a real experimental methodology.\n- **Difficulty calibration:** Proficient/Apply is appropriate — applying the reconstruction concept and reasoning about threshold-vs-probability both require genuine applied reasoning, matching the Apply level without requiring the higher Analyze/Evaluate demands of the domain's most abstract concepts.\n- **No open issues:** description, prerequisites, and the (absent) unlocks are internally consistent with this concept's role as an application-synthesis node in the Particle Physics domain.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.accelerators-detectors.md",
+        "startLine": 252,
+        "endLine": 262
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

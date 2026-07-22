@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.particle.conservation-laws-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.particle.conservation-laws",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1ce7b12ae0987a658b67aab939f602af485b876eadbf6dafb81cc7bcba266952",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.particle.conservation-laws.md": "sha256:5e40c51fa64cccce5eb2e2c4a2fc6642cdaee2a03c2d13a181e4ea89dd352132"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.particle.conservation-laws",
+    "name": "Conservation Laws in Particle Interactions",
+    "difficultyRaw": "Proficient",
+    "bloom": "Apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.particle.hadron-quark-model",
+      "phys.particle.leptons"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.particle.conservation-laws-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.particle.conservation-laws (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.particle.conservation-laws.md": "sha256:5e40c51fa64cccce5eb2e2c4a2fc6642cdaee2a03c2d13a181e4ea89dd352132"
+      },
+      "contentHash": "sha256:968e28c87a4a76c368a9ad8a620788781567810cecdb636ad3d123b51e8953fa",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.particle.conservation-laws.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.conservation-laws.md#TA-1 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.conservation-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.conservation-laws\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.conservation-laws.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.conservation-laws.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.conservation-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.conservation-laws\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.conservation-laws.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.conservation-laws.md#TA-3 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.conservation-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.conservation-laws\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.particle.conservation-laws.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.particle.conservation-laws.md#TA-4 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.particle.conservation-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.particle.conservation-laws\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.particle.conservation-laws/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.particle.conservation-laws",
+      "title": "Conservation Laws in Particle Interactions — core explanation",
+      "content": "**One-sentence definition:** Baryon number and lepton number are strictly conserved in every known particle interaction; a proposed reaction is forbidden if it violates either conservation law, regardless of how much energy is available to power it.\n\n**The core insight:** Energy availability alone does not determine whether a particle reaction can occur — a reaction that conserves energy and momentum perfectly can still be completely forbidden if it violates baryon number or lepton number conservation. This gives particle physicists (and students) a powerful, purely bookkeeping-based tool: before ever calculating probabilities or cross-sections, simply check whether the proposed reaction's quantum number totals match on both sides of the equation.\n\n**Conceptual chain:**\n1. Baryon number: +1 for every baryon, −1 for every antibaryon, 0 for every meson and lepton; total baryon number is conserved in every known interaction.\n2. Lepton number: +1 for every lepton, −1 for every antilepton, 0 for every hadron; in the simplest treatment, lepton number is conserved separately for each of the three lepton generations (electron-type, muon-type, tau-type).\n3. These conservation laws apply in addition to the more familiar conservation of energy, momentum, and electric charge — a proposed reaction must satisfy ALL of these simultaneously to be allowed.\n4. A reaction that conserves energy and charge perfectly, but not baryon number or lepton number, is strictly forbidden — no amount of available energy makes it possible.\n5. These conservation laws are experimentally supported by an extremely strong absence of evidence: proton decay (which would violate baryon number) has been searched for extensively and never observed, placing an extraordinarily long lower bound on the proton's lifetime (if it decays at all) — among the strongest empirical support for any conservation law in physics.\n6. Conservation laws function as a fast, purely arithmetic pre-check: before any detailed calculation, verify baryon number, lepton number (per generation), charge, energy, and momentum all balance — if any fails, the reaction is impossible regardless of energy.\n\n**Central relations:**\n- Baryon number: ΣB(initial) = ΣB(final) in every known interaction.\n- Lepton number: ΣL(initial) = ΣL(final), separately per generation, in every known interaction.\n- Both apply alongside charge, energy, and momentum conservation — all must hold simultaneously.\n- Proton decay searches (baryon-number-violating) have found no confirmed events, strongly supporting baryon number conservation (though some Grand Unified Theories predict extremely rare violation).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.conservation-laws.md",
+        "startLine": 18,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.particle.conservation-laws/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.particle.conservation-laws",
+      "title": "If a reaction has enough available energy, it should be allowed to happen",
+      "content": "### MC-1: \"If a reaction has enough available energy, it should be allowed to happen\"\n- **Probe:** \"A proposed reaction conserves energy and momentum perfectly, and plenty of energy is available. Is that enough to guarantee the reaction can actually happen?\"\n- **Characteristic phrase:** \"As long as there's enough energy, the reaction should be possible.\"\n- **Trigger:** Most introductory mechanics and even basic nuclear physics treatments emphasize energy conservation almost exclusively, without introducing baryon/lepton number as additional, independent requirements.\n- **Conflict evidence [P28]:** Proton decay (e.g., p → e⁺ + π⁰) conserves energy, momentum, and even electric charge perfectly — and would release a huge amount of energy (the proton's entire rest mass) — yet it has never been observed despite decades of extraordinarily sensitive searches, precisely because it violates baryon number conservation (B: +1 → 0). Energy availability alone clearly does not make this reaction happen.\n- **Bridge [P30]:** \"A reaction must satisfy every conservation law simultaneously — energy, momentum, charge, baryon number, and lepton number (per generation). Having enough energy is necessary but nowhere near sufficient. Failing even one of these checks makes the reaction strictly forbidden, no matter how much energy is available.\"\n- **Replacement [P31]:** Reaction feasibility requires simultaneous satisfaction of all conservation laws; energy sufficiency is only one of several independent necessary conditions.\n- **Discrimination pairs [P33]:** Having enough money to buy a house (energy) doesn't matter if the house isn't legally for sale (a different, independent requirement) — a reaction needs both \"enough energy\" AND \"conserves every quantum number,\" just as a purchase needs both \"enough money\" and \"a willing, legal seller.\"\n- **S6 repair path:** Walk through the proton decay example explicitly, computing that energy/momentum/charge are all fine, then revealing the baryon-number failure as the sole reason it's forbidden.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.conservation-laws.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.particle.conservation-laws/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.particle.conservation-laws",
+      "title": "Lepton number is one single conserved total, not three separate per-generation totals",
+      "content": "### MC-2: \"Lepton number is one single conserved total, not three separate per-generation totals\"\n- **Probe:** \"Is a reaction that converts an electron directly into a muon (with nothing else changing) allowed, since both are leptons with lepton number +1?\"\n- **Characteristic phrase:** \"As long as the total lepton count matches, the reaction should be fine — a lepton is a lepton.\"\n- **Trigger:** Baryon number is a single, undifferentiated quantity (no baryon \"generations\" distinction needed at this level), leading students to assume lepton number works identically, without the per-generation split.\n- **Conflict evidence [P28]:** No experiment has ever observed a bare electron converting directly into a bare muon (e⁻ → μ⁻ with nothing else emitted) — despite this reaction conserving total lepton number (both sides sum to +1), it violates lepton number conservation when checked separately per generation (electron-type lepton number would go from +1 to 0; muon-type lepton number would go from 0 to +1) — a violation, even though the crude \"total\" count matches.\n- **Bridge [P30]:** \"In the simplest treatment, lepton number must be conserved separately per generation, not just as one grand total. A reaction that shuffles lepton number between generations, even while keeping the overall count the same, is still forbidden. This is different from baryon number, which (at this level) is tracked as a single quantity without a generation split.\"\n- **Replacement [P31]:** Check lepton number conservation separately for each of the three generations (electron-type, muon-type, tau-type), not as a single combined total.\n- **Discrimination pairs [P33]:** A company's total employee count staying the same doesn't mean it's fine to secretly replace every accountant with an engineer — department-by-department totals (per-generation lepton number) matter, not just the grand total.\n- **S6 repair path:** Do the per-generation bookkeeping explicitly for the forbidden e⁻ → μ⁻ example, showing the total matches but the per-generation split fails.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.conservation-laws.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.particle.conservation-laws/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.particle.conservation-laws",
+      "title": "Proton decay has already been observed, given how extensively it's been searched for",
+      "content": "### MC-3: \"Proton decay has already been observed, given how extensively it's been searched for\"\n- **Probe:** \"After decades of dedicated searching in enormous detectors, has proton decay actually been directly observed?\"\n- **Characteristic phrase:** \"With that much searching, they must have found it by now.\"\n- **Trigger:** Students assume the sheer scale and duration of proton-decay search experiments implies a positive result must have eventually emerged.\n- **Conflict evidence [P28]:** Massive, long-running detectors (such as Super-Kamiokande, with tens of thousands of tons of ultra-pure water continuously monitored for decades) have searched extensively for proton decay signatures and found none, placing an extraordinarily long lower bound on the proton's lifetime (if it decays at all) — well beyond 10³⁴ years, vastly longer than the current age of the universe (~1.4×10¹⁰ years). This absence of evidence is itself a strong, positive experimental result supporting baryon number conservation, not an inconclusive null result.\n- **Bridge [P30]:** \"The extensive search for proton decay has not found it — and that absence, given the extraordinary sensitivity and duration of the search, is itself powerful evidence that baryon number conservation holds extremely well, if not perfectly. Some Grand Unified Theories predict proton decay should occur, but at a rate far too slow to have been detected yet by any experiment so far.\"\n- **Replacement [P31]:** Proton decay remains unobserved despite extensive, sensitive, decades-long searches; this is strong, positive support for baryon number conservation, not evidence of an incomplete or inconclusive search.\n- **Discrimination pairs [P33]:** A rigorous, decades-long, well-funded search for a specific rare mineral that consistently finds nothing is strong evidence the mineral (if it exists at all in accessible form) is exceedingly rare or absent — not evidence the search method was flawed.\n- **S6 repair path:** Present the specific lower-bound number (proton lifetime > 10³⁴ years, if it decays at all) alongside the age of the universe (~1.4×10¹⁰ years) to make the extraordinary strength of this null result concrete.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.conservation-laws.md",
+        "startLine": 23,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.particle.conservation-laws/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.conservation-laws",
+      "title": "EXPLAIN + CHALLENGE",
+      "content": "{\"id\":\"TA-1\",\"title\":\"EXPLAIN + CHALLENGE\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.conservation-laws.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.particle.conservation-laws/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.conservation-laws",
+      "title": "DEMONSTRATE",
+      "content": "{\"id\":\"TA-2\",\"title\":\"DEMONSTRATE\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.conservation-laws.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.particle.conservation-laws/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.conservation-laws",
+      "title": "CHALLENGE",
+      "content": "{\"id\":\"TA-3\",\"title\":\"CHALLENGE\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.conservation-laws.md",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.particle.conservation-laws/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.particle.conservation-laws",
+      "title": "DEMONSTRATE + TRANSFER",
+      "content": "{\"id\":\"TA-4\",\"title\":\"DEMONSTRATE + TRANSFER\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.conservation-laws.md",
+        "startLine": 11,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.particle.conservation-laws/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.particle.conservation-laws",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly applies the full conservation-law checklist (baryon number, lepton number per generation, charge) to determine whether a proposed reaction is allowed, and correctly explains why energy availability alone is insufficient. Score ≥ 80%.\n\n**FA-1 — Baryon number check:**\n*Q: Is the reaction p + p → p + p + p + p̄ (proton-proton collision producing two extra protons and an antiproton) allowed by baryon number conservation? Show your work.*\nExpected: Initial: B = 1+1 = 2. Final: B = 1+1+1+(−1) = 2. Baryon number is conserved (allowed by this check; other checks would also need to pass for the full reaction to be genuinely allowed).\nThreshold: Correct sum on both sides and correct conclusion.\n\n**FA-2 — Lepton number per generation:**\n*Q: Is the reaction μ⁻ → e⁻ + γ (a muon decaying directly into an electron and a photon, with no neutrinos) allowed by lepton number conservation? Explain, checking per generation.*\nExpected: No — muon-type lepton number goes from +1 (initial) to 0 (final); electron-type lepton number goes from 0 (initial) to +1 (final). Neither generation's lepton number is conserved, so the reaction is forbidden (and indeed, has never been observed).\nThreshold: Must check both generations separately and correctly conclude \"forbidden.\"\n\n**FA-3 — Energy sufficiency is not sufficient:**\n*Q: A proposed reaction has ample available energy and conserves momentum and charge perfectly. Is it therefore guaranteed to be a physically allowed reaction? Explain, using proton decay as an example.*\nExpected: No — energy/momentum/charge conservation are necessary but not sufficient; the reaction must also conserve baryon number and lepton number (per generation). Proton decay is the classic example: energy, momentum, and charge are all fine, but it violates baryon number, so it remains forbidden (and unobserved) despite ample available energy.\nThreshold: Must correctly say \"not guaranteed\" and cite proton decay (or an equivalent example) with the baryon-number violation as the reason.\n\n**FA-4 — Experimental status of proton decay:**\n*Q: Has proton decay been directly observed? What does the search's result imply about baryon number conservation?*\nExpected: No, it has never been confirmed despite decades of extremely sensitive searches; this places an extraordinarily long lower bound on the proton's lifetime (well beyond 10³⁴ years) and provides strong experimental support for baryon number conservation.\nThreshold: Must correctly say \"not observed\" and correctly interpret the null result as positive support, not as an inconclusive search.\n\n**Confidence calibration:** After FA-2, students rate confidence before revealing the answer; students confident but wrong are walked through the per-generation ledger (Demo 3) again explicitly before re-attempting a parallel item.\n\n**Delayed retrieval (session + 3):** \"List the full checklist of conservation laws a proposed particle reaction must satisfy. Why is proton decay's non-observation considered strong evidence, rather than an inconclusive null result?\" Expected: charge, energy, momentum, baryon number, lepton number (per generation); the extraordinarily long lifetime lower bound from extensive, sensitive searches is itself positive evidence.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.conservation-laws.md",
+        "startLine": 187,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "phys.particle.conservation-laws/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.conservation-laws",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- A \"bookkeeping ledger\" exercise: physically write each particle's baryon number and lepton number on index cards, and for a proposed reaction, sum the cards on each side of an arrow — if the sums don't match, the reaction is rejected, no further calculation needed.\n- Physical analogy: a bank's double-entry ledger where every transaction must balance to zero net change — no transaction, however profitable it looks superficially, is permitted if the books don't balance.\n\n### Representational (Iconic)\n- A worked-reaction table: proposed reaction, baryon number sum (initial vs. final), lepton number sum (initial vs. final, per generation), charge sum, verdict (allowed/forbidden).\n- A \"forbidden reaction gallery\": several plausible-looking but actually forbidden reactions, each annotated with exactly which conservation law it violates.\n\n### Abstract (Symbolic)\n- Baryon number check: B(p) = +1, B(n) = +1, B(e⁻) = 0, B(ν) = 0 — a reaction like p → e⁺ + π⁰ (proposed proton decay) has B(initial) = +1, B(final) = 0 + 0 = 0, violating baryon number conservation and therefore forbidden.\n- Lepton number check (per generation): L_e(e⁻) = +1, L_e(νₑ) = +1, L_e(e⁺) = −1, L_e(ν̄ₑ) = −1; a reaction like μ⁻ → e⁻ + γ (a hypothetical, never-observed muon decay) fails lepton-number-per-generation conservation (L_μ changes from +1 to 0; L_e changes from 0 to +1) and is therefore forbidden, despite conserving charge and energy easily.\n\n### Transfer (+)\n- Grand Unified Theories (previewed in phys.particle.electroweak-unification's broader unification context) predict baryon number is only approximately conserved, with proton decay occurring at an extraordinarily slow rate — dedicated, decades-long experiments (e.g., Super-Kamiokande) continue searching for this predicted, extremely rare violation as a test of GUT proposals.\n- Nuclear physics: every allowed and forbidden nuclear decay and reaction channel can be quickly screened using these same conservation checks before any detailed calculation.\n- Particle accelerator design and analysis: physicists use baryon/lepton number conservation as a first-pass filter when interpreting collision data, rapidly ruling out impossible interpretations of detected particle tracks.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.conservation-laws.md",
+        "startLine": 40,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "phys.particle.conservation-laws/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.conservation-laws",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — Believing any reaction with enough available energy is automatically allowed:** Correct: energy availability is necessary but never sufficient — a reaction must simultaneously conserve baryon number, lepton number (per generation), charge, momentum, and energy; failing any single one of these makes the reaction impossible regardless of energy.\n\n**Mode 2 — Treating lepton number as a single, undifferentiated total rather than three separate per-generation quantities:** Correct: in the simplest treatment (accurate for the vast majority of observed processes), lepton number is conserved separately for each of the three generations (electron-type, muon-type, tau-type) — a reaction that conserves total lepton number but mixes generations incorrectly (e.g., converting an electron-type lepton into a muon-type lepton with no compensating change) is still forbidden.\n\n**Mode 3 — Assuming proton decay has been experimentally observed, given how much searching has gone into finding it:** Correct: despite decades of extremely sensitive searches (some running continuously in enormous underground detectors), proton decay has never been confirmed; this absence of evidence is itself powerful, positive support for baryon number conservation as understood in the Standard Model, even though some theoretical extensions (GUTs) predict it should occur, extremely rarely.\n\n**Mode 4 — Confusing baryon number conservation with electric charge conservation, treating them as the same rule applied twice:** Correct: these are two entirely independent conservation laws with different counting rules (charge sums quark/particle electric charges; baryon number counts quarks/antiquarks regardless of flavor or charge) — a reaction can satisfy one while violating the other.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.conservation-laws.md",
+        "startLine": 61,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.particle.conservation-laws/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.conservation-laws",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"Here's a reaction: a proton turns into a positron and a neutral pion. Check the energy — balances. Check the momentum — balances. Check the electric charge — balances. By every rule you've learned so far, this should be a perfectly fine reaction. Physicists have searched for exactly this reaction, in some of the most sensitive detectors ever built, for over forty years. They have never found it. Not once. Why not?\"\n\n**At the conservation-law reveal:**\n\"The answer is that energy, momentum, and charge aren't the only things that have to balance. There's another ledger: baryon number. A proton has baryon number plus one. A positron and a pion together have baryon number zero. That ledger doesn't balance — and that single failure is enough to forbid the entire reaction, no matter how much energy is sitting around ready to power it.\"\n\n**At the lepton-generation subtlety:**\n\"Here's a subtler trap. Could an electron just directly turn into a muon — nothing else involved? Total lepton count stays the same, one lepton in, one lepton out. Should be fine, right? [Wait.] No — and this has never once been observed. Lepton number isn't tracked as one big combined total. It's tracked separately, generation by generation — electron-type, muon-type, tau-type. An electron becoming a muon shuffles a unit from one generation's ledger to another's, and that shuffle, even though the grand total looks unchanged, is still forbidden.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.conservation-laws.md",
+        "startLine": 174,
+        "endLine": 187
+      }
+    },
+    {
+      "assetId": "phys.particle.conservation-laws/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.conservation-laws",
+      "title": "Recovery Notes",
+      "content": "**S0:** Student has the baryon/lepton definitions (from hadron-quark-model and leptons concepts) but hasn't yet applied them as a reaction-screening tool. Begin entirely with Demo 1 (reaction bookkeeping worksheet) using only very simple, already-familiar reactions (beta decay, muon decay) before introducing the proton-decay hook.\n\n**S3:** Student can check baryon number correctly but treats lepton number as one undifferentiated total (MC-2). Run Demo 3 (per-generation ledger) repeatedly with new example reactions until the per-generation habit becomes automatic.\n\n**S6:** Student is anxious about the abstractness of \"conservation laws beyond energy.\" Ground entirely in the bank-ledger analogy (Section 6) with concrete, familiar reactions before introducing the proton-decay search story, which involves larger, less familiar numbers.\n\n**S9:** Extend into Grand Unified Theory predictions of extremely rare baryon-number violation as an enrichment topic — \"some theories predict protons DO decay, just at a rate so slow it hasn't been caught yet — what would it mean for physics if it finally were?\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.conservation-laws.md",
+        "startLine": 217,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "phys.particle.conservation-laws/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.conservation-laws",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Procedural (applying the multi-law conservation checklist to a proposed reaction) plus conceptual (understanding why a null experimental result can be strong positive evidence) — retrieval practice should test both the checklist application skill and the proton-decay evidentiary reasoning.\n\n**Spaced retrieval schedule:**\n- Session + 1: \"Apply the full conservation-law checklist to a given proposed reaction.\"\n- Session + 3: \"Explain why lepton number must be checked per generation, not as a single total.\"\n- Session + 7: \"What does the non-observation of proton decay imply about baryon number conservation?\"\n\n**Interleaving partners:** phys.particle.hadron-quark-model (prerequisite — baryon number definition), phys.particle.leptons (prerequisite — lepton number and generation structure), phys.particle.feynman-diagrams, phys.particle.accelerators-detectors, and phys.particle.standard-model (successors — all rely on conservation-law screening as a working tool).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.conservation-laws.md",
+        "startLine": 229,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.particle.conservation-laws/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.particle.conservation-laws",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Screening any newly encountered proposed particle reaction (in Feynman diagram exercises, or in accelerator/detector data interpretation) using the same multi-law checklist before attempting any detailed calculation.\n\n**Far transfer:** Chemistry (mass and charge balance in chemical equations is a direct, simpler analog of this same bookkeeping discipline), general scientific reasoning about necessary-vs-sufficient conditions (a proposed hypothesis satisfying some criteria is not automatically confirmed if it fails even one independent, necessary test), and experimental design (the proton-decay search as a case study in how a rigorous null result can constitute powerful positive evidence, a reasoning pattern relevant across all of experimental science).\n\n**Structural abstraction:** \"Multiple independent conservation laws must all hold simultaneously; failing even one is sufficient to forbid an outcome, regardless of how favorable the others are.\" This \"all gates must open\" reasoning pattern recurs throughout science and engineering — a bridge design that satisfies every safety check but one is still unsafe; a chemical reaction that balances mass but not charge is still wrong.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.conservation-laws.md",
+        "startLine": 242,
+        "endLine": 252
+      }
+    },
+    {
+      "assetId": "phys.particle.conservation-laws/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.particle.conservation-laws",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.particle.hadron-quark-model (baryon number) and phys.particle.leptons (lepton number, generation structure) are both necessary and sufficient.\n- **Unlock readiness:** phys.particle.feynman-diagrams, phys.particle.accelerators-detectors, and phys.particle.standard-model all rely on conservation-law screening as a working, applied tool; sequencing as three parallel unlocks is well-motivated given each depends on this concept independently.\n- **Difficulty calibration:** Proficient/Apply is appropriate — the checklist application is a genuine applied skill (Apply level), while the proton-decay evidentiary reasoning (MC-3) pushes slightly toward Analyze-level thinking, justifying the full estimated hours (5) relative to more purely declarative concepts.\n- **No open issues:** description, prerequisites, and unlocks are internally consistent with the Physics KG's Particle Physics domain design.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.particle.conservation-laws.md",
+        "startLine": 252,
+        "endLine": 262
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mod.energy-bands-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mod.energy-bands",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:cddcc0aebdc1c6bfae0b9514ecd06f820ac86a1df6711b46806561035251be1e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mod.energy-bands.md": "sha256:2b757dca29bd6fc82fbc72113121b4960c202c3eac4ec0e10a593f51379799c5"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.mod.energy-bands",
+    "name": "Energy Bands in Solids",
+    "difficultyRaw": "Advanced",
+    "bloom": "Understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.mod.atomic-spectra",
+      "phys.stat.fermi-dirac"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mod.energy-bands-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mod.energy-bands (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mod.energy-bands.md": "sha256:2b757dca29bd6fc82fbc72113121b4960c202c3eac4ec0e10a593f51379799c5"
+      },
+      "contentHash": "sha256:68ee6e0d5267de5247b8669304e79adcad231b7cf5f832fc83a15414ef00f4b4",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mod.energy-bands.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.energy-bands.md#TA-1 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.energy-bands"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.energy-bands\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.energy-bands.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.energy-bands.md#TA-2 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.energy-bands"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.energy-bands\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.energy-bands.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.energy-bands.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.energy-bands"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.energy-bands\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.energy-bands.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.energy-bands.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.energy-bands"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.energy-bands\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mod.energy-bands/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mod.energy-bands",
+      "title": "Energy Bands in Solids — core explanation",
+      "content": "**One-sentence definition:** In a crystalline solid, the discrete energy levels of isolated atoms broaden into continuous bands of allowed electron energy, separated by band gaps of forbidden energy, and it is the size of these band gaps (and how filled the resulting bands are) that ultimately determines whether a material conducts electricity.\n\n**The core insight:** A single isolated atom has sharp, discrete energy levels (phys.mod.atomic-spectra). Bring an enormous number of atoms together into a crystal (~10²³ atoms per cubic centimeter), and each originally-sharp energy level splits into an enormous number of extremely closely-spaced sub-levels — so closely spaced that they effectively merge into a continuous \"band\" of allowed energy. Between these bands lie band gaps: energy ranges no electron in the solid can occupy, no matter what. This band structure — not some vague notion of \"how conductive the material feels\" — is the actual, rigorous, quantum-mechanical explanation for why some solids conduct electricity and others don't.\n\n**Conceptual chain:**\n1. An isolated atom's electrons occupy sharp, discrete energy levels (already established via the Bohr model and atomic spectra).\n2. When N atoms come together into a crystal, the Pauli exclusion principle forces each originally-identical atomic energy level to split into N extremely closely-spaced levels (since no two electrons in the combined system can occupy exactly the same state).\n3. For a macroscopic crystal, N is astronomically large (~10²³), so these N split levels are spaced so closely they form what is, for all practical purposes, a continuous band of allowed energy.\n4. Between adjacent bands lie band gaps — energy ranges that remain forbidden, exactly as they were forbidden between an isolated atom's discrete levels, just inherited by the bulk solid.\n5. The valence band is the highest energy band that is normally filled (or nearly filled) with electrons at low temperature; the conduction band is the next band up, and whether/how easily electrons can reach the conduction band determines the material's electrical behavior.\n6. This band picture, combined with the Fermi-Dirac distribution (already established, describing how electrons statistically fill available energy states), is the essential quantum-mechanical foundation for classifying and understanding all of solid-state electronics.\n\n**Central relations:**\n- N atoms → N-fold splitting of each atomic energy level → effectively continuous band for macroscopic N.\n- Valence band: highest normally-filled band. Conduction band: next band up.\n- Band gap: forbidden energy range between valence and conduction bands.\n- Electrical conductivity depends on band gap size and how filled/empty the conduction band is — the classification developed fully in the next concept.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.energy-bands.md",
+        "startLine": 18,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.mod.energy-bands/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.mod.energy-bands",
+      "title": "Atoms in a solid keep their own independent, unchanged discrete energy levels",
+      "content": "### MC-1: \"Atoms in a solid keep their own independent, unchanged discrete energy levels\"\n- **Probe:** \"When millions of identical atoms come together to form a solid crystal, do each of their electrons still occupy the exact same sharp, isolated-atom energy levels as before?\"\n- **Characteristic phrase:** \"Each atom in the solid still has its own separate, unchanged energy levels.\"\n- **Trigger:** Prior learning about isolated atomic energy levels (Bohr model, atomic spectra) is carried forward unchanged into the solid-state context, without recognizing that bringing atoms together fundamentally alters the electron energy structure.\n- **Conflict evidence [P28]:** The Pauli exclusion principle forbids any two electrons in the same combined quantum system from occupying identical quantum states; once N atoms combine into one crystal, their electrons form one shared system, so the previously-identical atomic levels must split into N distinct, closely-spaced sub-levels to satisfy this principle — this splitting is directly observable in solid-state spectroscopy experiments, which show continuous bands, not the sharp, discrete lines characteristic of isolated atoms (as seen in phys.mod.atomic-spectra).\n- **Bridge [P30]:** \"Combining atoms into a solid is not like placing separate, independent atoms side by side — the electrons become part of one shared quantum system, and the Pauli exclusion principle forces each originally-identical energy level to split into a spread of closely-packed sub-levels: a band. This is a genuine, physically real consequence of combining atoms, not a mathematical fiction.\"\n- **Replacement [P31]:** Atomic energy levels split into bands upon forming a solid, due to the Pauli exclusion principle acting on the combined electron system — isolated-atom levels do not simply persist unchanged.\n- **Discrimination pairs [P33]:** A single musician playing a note produces one pure, sharp tone; an enormous orchestra with every musician trying to hit that exact same note, but each with the tiniest imperfection, produces a \"smeared,\" continuous band of very closely related frequencies — not one sharp identical tone repeated many times independently.\n- **S6 repair path:** Use the coupled-pendulum demonstration (Section 2) directly, showing how identical, isolated pendulums (isolated atomic levels) develop a spread of coupled normal-mode frequencies (a band) the moment they're connected.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.energy-bands.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.mod.energy-bands/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.mod.energy-bands",
+      "title": "A band is uniformly, fully occupied by electrons, or the concept of 'occupation' doesn't apply to bands",
+      "content": "### MC-2: \"A band is uniformly, fully occupied by electrons, or the concept of 'occupation' doesn't apply to bands\"\n- **Probe:** \"Is a band always either completely full of electrons or completely empty, with no in-between possibility?\"\n- **Characteristic phrase:** \"A band is just a range of energy — occupation isn't really something that varies within it.\"\n- **Trigger:** Introducing \"band\" as a purely structural, energy-range concept without immediately connecting it to the separate, statistical question of how likely each state within that range is to be occupied (governed by Fermi-Dirac statistics).\n- **Conflict evidence [P28]:** In a metal (a conductor), the topmost band containing electrons (at absolute zero) is only partially filled — electrons occupy the lowest-energy states within that band up to a specific energy (the Fermi energy), leaving higher-energy states within the same band empty; this partial filling, governed by Fermi-Dirac statistics, is precisely what allows those electrons to move into nearby empty states within the band and conduct electricity easily.\n- **Bridge [P30]:** \"Whether the states within a band are occupied by electrons is a separate question from whether the band exists as an allowed energy range. Fermi-Dirac statistics determines occupation, state by state, within any given band — a band can be fully occupied, empty, or (crucially, for conductors) partially filled, and this partial-filling case is exactly what makes metals conduct so easily.\"\n- **Replacement [P31]:** Band structure (which energies are allowed) and occupation (which allowed states actually contain electrons) are two separate, independently-determined properties, connected via Fermi-Dirac statistics.\n- **Discrimination pairs [P33]:** A parking garage's total capacity (how many spaces exist — the band structure) is a separate fact from how many of those spaces are actually occupied by cars right now (the occupation, determined by separate rules about who parks where) — a garage can be full, empty, or partially full, just like a band.\n- **S6 repair path:** Directly connect back to the prerequisite Fermi-Dirac concept, asking the student to recall how the Fermi-Dirac distribution determines occupation probability as a function of energy, then apply that recalled concept to a specific band.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.energy-bands.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.mod.energy-bands/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.mod.energy-bands",
+      "title": "The band gap is just empty, unoccupied space with no real physical significance",
+      "content": "### MC-3: \"The band gap is just empty, unoccupied space with no real physical significance\"\n- **Probe:** \"Is the band gap simply a region where no electrons currently happen to be, the same way part of an allowed band might be temporarily unoccupied?\"\n- **Characteristic phrase:** \"The band gap is just an empty region — nothing special about it structurally.\"\n- **Trigger:** Confusing \"no electrons present\" (which could describe an unoccupied but allowed state within a band) with \"no electron states exist at all\" (the actual, structural nature of the band gap).\n- **Conflict evidence [P28]:** No electron in the solid can ever have an energy value falling within the band gap, under any circumstance — this is fundamentally different from an unoccupied state within an allowed band (which COULD hold an electron, given the right conditions, but currently doesn't). The band gap represents energies that are structurally forbidden by the crystal's quantum mechanical structure, exactly analogous to the forbidden energy ranges between an isolated atom's discrete levels (phys.mod.atomic-spectra) — genuinely absent states, not merely temporarily empty ones.\n- **Bridge [P30]:** \"The band gap isn't 'currently empty but could be filled' — it's structurally forbidden, meaning no electron state exists there at all, under any circumstances, in this material. This is a much stronger statement than 'unoccupied,' and it's exactly this genuine forbiddenness that makes the size of the band gap (E_g) the single most important number for classifying a material's conductivity.\"\n- **Replacement [P31]:** The band gap represents genuinely forbidden electron states (none exist there at all), fundamentally different from an unoccupied-but-allowed state within a band.\n- **Discrimination pairs [P33]:** An empty parking space (unoccupied but allowed — analogous to an empty state within a band) is fundamentally different from the solid concrete median strip between two parking lots where no parking space could ever exist at all (structurally forbidden — analogous to the band gap).\n- **S6 repair path:** Directly contrast, side by side, \"an empty state within the conduction band\" (allowed, just not currently occupied) against \"an energy value within the band gap\" (no state exists there at all, under any circumstance).\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.energy-bands.md",
+        "startLine": 23,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.mod.energy-bands/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.energy-bands",
+      "title": "EXPLAIN + DEMONSTRATE",
+      "content": "{\"id\":\"TA-1\",\"title\":\"EXPLAIN + DEMONSTRATE\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.energy-bands.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.mod.energy-bands/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.energy-bands",
+      "title": "DEMONSTRATE",
+      "content": "{\"id\":\"TA-2\",\"title\":\"DEMONSTRATE\",\"primitives\":[],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.energy-bands.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.mod.energy-bands/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.energy-bands",
+      "title": "EXPLAIN",
+      "content": "{\"id\":\"TA-3\",\"title\":\"EXPLAIN\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.energy-bands.md",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mod.energy-bands/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.energy-bands",
+      "title": "TRANSFER",
+      "content": "{\"id\":\"TA-4\",\"title\":\"TRANSFER\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.energy-bands.md",
+        "startLine": 11,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mod.energy-bands/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mod.energy-bands",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly explains why atomic energy levels split into bands when atoms combine into a solid, correctly distinguishes band occupation from band existence, and correctly explains why the band gap represents genuinely forbidden (not merely unoccupied) energy. Score ≥ 75%.\n\n**FA-1 — Level-splitting mechanism:**\n*Q: Explain why bringing a large number of identical atoms together into a solid crystal causes their originally sharp, discrete energy levels to become continuous bands.*\nExpected: The Pauli exclusion principle forbids any two electrons in the combined system from occupying identical quantum states; as atoms combine, each originally-identical atomic level splits into as many closely-spaced sub-levels as there are atoms, and for a macroscopic crystal (~10²³ atoms), this spread is so dense it forms an effectively continuous band.\nThreshold: Must correctly cite the Pauli exclusion principle as the mechanism, not merely state \"levels get closer together\" without explanation.\n\n**FA-2 — Occupation vs. band existence:**\n*Q: A metal's conduction band, at low temperature, is only partially filled with electrons. Does this mean part of the band \"doesn't exist,\" or is something else going on?*\nExpected: The band exists as a full range of allowed energy states; occupation (which states actually contain electrons) is a separate, statistically-determined question (via Fermi-Dirac statistics) — partial filling means some allowed states are occupied and others are not, not that part of the band is missing.\nThreshold: Must correctly distinguish \"band existence\" from \"occupation.\"\n\n**FA-3 — Band gap forbiddenness:**\n*Q: Is the band gap simply a region where no electrons currently happen to be found, or something stronger? Explain.*\nExpected: Something stronger — the band gap represents energies that are structurally forbidden; no electron state exists there at all, under any circumstance, unlike an unoccupied-but-allowed state within a band.\nThreshold: Must correctly state the forbidden (not merely unoccupied) nature of the band gap.\n\n**FA-4 — Optical transfer:**\n*Q: Why can a photon with energy less than a solid's band gap pass through the material without being absorbed?*\nExpected: Absorbing a photon requires promoting an electron from the valence band across the band gap into the conduction band; a photon with energy less than the band gap cannot supply enough energy for this transition, so it passes through unabsorbed.\nThreshold: Must correctly connect photon energy to the band-gap-crossing requirement.\n\n**Confidence calibration:** After FA-1, students rate confidence before revealing the answer; students confident but wrong are walked through the coupled-pendulum-to-band progression (Demo 1) again before re-attempting a parallel item.\n\n**Delayed retrieval (session + 3):** \"Explain the difference between an unoccupied state within an allowed band and an energy value within the band gap. What causes atomic levels to split into bands in a solid?\" Expected: unoccupied-but-allowed vs. structurally forbidden; Pauli exclusion principle acting on combined atoms.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.energy-bands.md",
+        "startLine": 187,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "phys.mod.energy-bands/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.energy-bands",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- A row of identical, coupled pendulum clocks (or coupled springs) hung close together: each pendulum has the same natural frequency in isolation, but coupled together, the system develops a whole spread (\"band\") of closely-spaced normal-mode frequencies — a mechanical analogy for how identical atomic energy levels split into a band when atoms are brought together.\n- Physical analogy: a single musical note played by one instrument (sharp, discrete atomic level) versus the same note played by an enormous orchestra tuning slightly differently around that note, producing a continuous \"smear\" of nearby frequencies (a band) rather than one sharp tone.\n\n### Representational (Iconic)\n- An energy-level-splitting diagram: one atom (single sharp level) → two atoms (level splits into two closely-spaced levels) → many atoms (levels merge into a shaded, continuous band) — a classic textbook progression diagram.\n- A band-structure diagram: valence band (shaded, mostly filled), band gap (blank, forbidden), conduction band (mostly empty), stacked vertically by energy, for a generic solid.\n\n### Abstract (Symbolic)\n- N-fold splitting (qualitative, no full solid-state derivation required at this level): each of an isolated atom's discrete levels splits into exactly N sub-levels when N atoms combine into a crystal, a direct consequence of the Pauli exclusion principle applied to the combined system's electrons.\n- Band gap energy (E_g) is the key quantitative parameter distinguishing material types (fully developed in the next concept): E_g = 0 (or bands overlap) for conductors; E_g large (~5+ eV) for insulators; E_g small (~0.5–3 eV) for semiconductors.\n\n### Transfer (+)\n- Solid-state electronics: literally every semiconductor device (diodes, transistors, solar cells, LEDs) operates by engineering and exploiting specific band-gap properties, developed across the remaining concepts in this domain extension.\n- Materials science: band structure explains not just conductivity but also a solid's optical properties (which photon energies it absorbs/transmits, directly tied to its band gap) and even its color in some cases.\n- Astrophysics and condensed matter research: band theory (in more sophisticated forms) underlies research into exotic materials like superconductors and topological insulators.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.energy-bands.md",
+        "startLine": 40,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "phys.mod.energy-bands/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.energy-bands",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — Believing each atom in a solid keeps its own separate, sharp energy levels, unaffected by neighboring atoms:** Correct: bringing atoms together into a crystal fundamentally changes the electron energy structure — the Pauli exclusion principle forces each atomic level to split (since electrons from different atoms now share one combined quantum system), producing bands rather than a simple repetition of isolated-atom levels.\n\n**Mode 2 — Assuming a \"band\" means all energies within that range are equally likely or equally occupied:** Correct: a band is a continuous range of allowed energies, but whether those states are actually occupied by electrons is a separate question, governed by the Fermi-Dirac distribution (the prerequisite concept) — a band can be mostly empty, mostly full, or partially full depending on the material and temperature.\n\n**Mode 3 — Believing the band gap is simply \"empty space\" with no physical significance, rather than a genuinely forbidden energy range:** Correct: the band gap represents energies literally unavailable to any electron in the solid, exactly as forbidden as the gaps between an isolated atom's discrete energy levels — it is not merely \"unoccupied\" the way part of an allowed band might be unoccupied, it is structurally forbidden.\n\n**Mode 4 — Assuming band structure is a purely theoretical/mathematical convenience with no directly observable consequence:** Correct: band structure directly and observably determines whether a material conducts electricity, what colors of light it absorbs or transmits, and its entire electronic/optical behavior — it is one of the most experimentally consequential ideas in solid-state physics.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.energy-bands.md",
+        "startLine": 61,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.mod.energy-bands/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.energy-bands",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"A single, isolated atom of any element always produces the exact same sharp, discrete spectral lines — you already know this. Now bring ten to the twenty-third power of those atoms together into a solid crystal. What happens to those once razor-sharp energy levels?\"\n\n**At the level-splitting reveal:**\n\"Here's what actually happens: bring two identical atoms close together, and the Pauli exclusion principle — the same rule that keeps electrons from ever occupying identical states — forces each of their matching energy levels to split into two very closely spaced levels. Bring in a third atom, it splits into three. Keep going until you've got ten to the twenty-third atoms, and each originally sharp level has split into ten to the twenty-third incredibly close sub-levels — so close together, they might as well be one smooth, continuous band. That's a band. Not a mathematical trick — a direct, physical consequence of cramming that many identical atoms together.\"\n\n**At the band-gap clarification:**\n\"One really important distinction: an empty space within an allowed band is not the same thing as the band gap itself. An empty state within a band could hold an electron — it's just not occupied right now. The band gap is different — genuinely, structurally forbidden. No electron in this material can ever have an energy value that falls inside that gap, no matter what. That distinction — forbidden versus merely unoccupied — is the single most important idea in this entire concept.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.energy-bands.md",
+        "startLine": 174,
+        "endLine": 187
+      }
+    },
+    {
+      "assetId": "phys.mod.energy-bands/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.energy-bands",
+      "title": "Recovery Notes",
+      "content": "**S3:** Student can state \"atoms form bands in solids\" as a fact but cannot explain the mechanism (Pauli exclusion, level-splitting). Run the step-by-step one-atom→two-atom→many-atom progression (Demo 1/Explanation A) explicitly, having the student predict each stage before reveal.\n\n**S4:** Student conflates band existence with occupation (MC-2) or forbiddenness (MC-3). Use the parking-garage analogy (capacity vs. occupancy vs. the concrete median where no space exists) repeatedly until the three-way distinction (allowed-occupied, allowed-unoccupied, forbidden) is automatic.\n\n**S6:** Student is anxious about the abstractness of \"10²³ atoms\" and quantum mechanical splitting. Anchor entirely in the coupled-pendulum physical demonstration (tangible, visible, small numbers of pendulums) before introducing the astronomically large atom-count abstraction.\n\n**S9:** Extend into the optical-property transfer (Demo 3/Explanation C) as enrichment — \"why is diamond transparent but silicon opaque, even though both have similar crystal structures?\" — previewing band-gap-size reasoning developed fully in the next concept.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.energy-bands.md",
+        "startLine": 217,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "phys.mod.energy-bands/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.energy-bands",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Conceptual/mechanistic (the level-splitting mechanism and the three-way allowed/forbidden/occupied distinction) — retrieval practice should emphasize explaining the mechanism and the terminology distinctions in the student's own words, not just naming \"valence band\" and \"conduction band.\"\n\n**Spaced retrieval schedule:**\n- Session + 1: \"Explain why atomic energy levels split into bands when atoms combine into a solid.\"\n- Session + 3: \"Distinguish an unoccupied state within a band from an energy value within the band gap.\"\n- Session + 7: \"Why can some photons pass through a solid unabsorbed while others are absorbed?\"\n\n**Interleaving partners:** phys.mod.atomic-spectra (prerequisite — the isolated-atom discrete levels this concept builds on), phys.stat.fermi-dirac (prerequisite — the occupation-probability framework), phys.mod.semiconductor-classification (successor — using band gap size to classify materials).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.energy-bands.md",
+        "startLine": 229,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.mod.energy-bands/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.energy-bands",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Reasoning about material classification (conductor, insulator, semiconductor) in the immediately following concept, using band gap size as the key parameter established here.\n\n**Far transfer:** Materials science and solar cell design (band-gap engineering for optimal light absorption), optical physics (why materials have specific colors/transparency), and the general physics principle that combining many identical quantum systems produces qualitatively new, emergent behavior (a \"quantity has a quality all its own\" pattern that recurs in condensed matter physics broadly, including superconductivity and magnetism).\n\n**Structural abstraction:** \"Combining an enormous number of identical quantum systems can produce qualitatively new, continuous-seeming behavior from what were originally discrete, separate properties.\" This emergent-behavior pattern — where a large collection of simple, identical units produces a genuinely new collective phenomenon — recurs throughout condensed matter physics and, more broadly, in any system where scale itself changes the fundamental behavior.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.energy-bands.md",
+        "startLine": 242,
+        "endLine": 252
+      }
+    },
+    {
+      "assetId": "phys.mod.energy-bands/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.mod.energy-bands",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.mod.atomic-spectra (isolated-atom discrete levels) and phys.stat.fermi-dirac (occupation-probability framework) are both necessary and sufficient.\n- **Unlock readiness:** phys.mod.semiconductor-classification directly depends on the band/band-gap framework established here; sequencing as the immediate next concept is well-motivated.\n- **Difficulty calibration:** Advanced/Understand is appropriate — the level-splitting mechanism and the allowed/forbidden/occupied distinctions require genuine conceptual work beyond simple recall, matching the Advanced difficulty, while remaining at the Understand (not yet Apply) Bloom level appropriate for this foundational concept in the semiconductor sub-sequence.\n- **No open issues:** description, prerequisites, and unlocks are internally consistent with the Physics KG's Modern Physics domain extension (semiconductor physics) design; this concept correctly serves as the entry point for the six newly appended semiconductor concepts.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.energy-bands.md",
+        "startLine": 252,
+        "endLine": 262
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
