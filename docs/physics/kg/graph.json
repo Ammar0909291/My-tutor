@@ -4,10 +4,10 @@
   "status": "production",
   "build_date": "2026-06-29",
   "statistics": {
-    "total_concepts": 216,
-    "total_domains": 11,
-    "total_requires_edges": 266,
-    "total_unlocks_edges": 266,
+    "total_concepts": 238,
+    "total_domains": 12,
+    "total_requires_edges": 301,
+    "total_unlocks_edges": 300,
     "total_cross_links": 0
   },
   "domains": [
@@ -44,7 +44,7 @@
     {
       "key": "mod",
       "name": "Modern Physics",
-      "count": 15
+      "count": 21
     },
     {
       "key": "qm",
@@ -65,6 +65,11 @@
       "key": "astro",
       "name": "Astrophysics",
       "count": 6
+    },
+    {
+      "key": "particle",
+      "name": "Particle Physics",
+      "count": 16
     }
   ],
   "concepts": [
@@ -3415,7 +3420,8 @@
       "children": [],
       "unlocks": [
         "phys.em.electric-field",
-        "phys.mod.bohr-model"
+        "phys.mod.bohr-model",
+        "phys.particle.four-forces"
       ]
     },
     {
@@ -4401,7 +4407,8 @@
         "phys.mod.bohr-model",
         "phys.mod.compton-effect",
         "phys.mod.de-broglie",
-        "phys.mod.x-rays"
+        "phys.mod.x-rays",
+        "phys.particle.gauge-bosons"
       ]
     },
     {
@@ -4537,7 +4544,8 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.mod.radioactivity"
+        "phys.mod.radioactivity",
+        "phys.mod.energy-bands"
       ]
     },
     {
@@ -4649,7 +4657,8 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.mod.binding-energy"
+        "phys.mod.binding-energy",
+        "phys.particle.four-forces"
       ]
     },
     {
@@ -5483,7 +5492,8 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.rel.mass-energy"
+        "phys.rel.mass-energy",
+        "phys.particle.accelerators-detectors"
       ]
     },
     {
@@ -5513,7 +5523,8 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.rel.spacetime"
+        "phys.rel.spacetime",
+        "phys.particle.antimatter"
       ]
     },
     {
@@ -5688,7 +5699,9 @@
         "Kittel Introduction to Solid State Physics"
       ],
       "children": [],
-      "unlocks": []
+      "unlocks": [
+        "phys.mod.energy-bands"
+      ]
     },
     {
       "id": "phys.stat.bose-einstein",
@@ -6150,6 +6163,612 @@
       "references": [
         "Abbott et al. 2016 PRL",
         "LIGO Scientific Collaboration"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.particle.four-forces",
+      "name": "Four Fundamental Forces",
+      "aliases": [
+        "fundamental forces",
+        "four forces of nature"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.coulombs-law",
+        "phys.mod.nuclear-reactions"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The four fundamental forces \u2014 gravity, electromagnetism, the strong nuclear force, and the weak nuclear force \u2014 differ in relative strength, range, and the particles they act on.",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "NCERT Physics Class 11 Ch.1",
+        "OpenStax University Physics Vol.3 Ch.11"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.particle.particle-classification",
+        "phys.particle.gauge-bosons"
+      ]
+    },
+    {
+      "id": "phys.particle.particle-classification",
+      "name": "Particle Classification: Hadrons and Leptons",
+      "aliases": [
+        "hadrons vs leptons",
+        "particle families"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.particle.four-forces"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Particles are classified as hadrons (composite particles built from quarks, subject to the strong force) or leptons (fundamental particles not subject to the strong force).",
+      "difficulty": "developing",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.85,
+      "references": [
+        "IB Physics Topic 7.3",
+        "OpenStax University Physics Vol.3 Ch.11"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.particle.antimatter",
+        "phys.particle.quarks",
+        "phys.particle.leptons"
+      ]
+    },
+    {
+      "id": "phys.particle.antimatter",
+      "name": "Antimatter and Antiparticles",
+      "aliases": [
+        "antiparticle",
+        "pair production",
+        "annihilation"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.particle.particle-classification",
+        "phys.rel.mass-energy"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Every particle has a corresponding antiparticle of opposite charge and identical mass; matter-antimatter pairs annihilate into energy, and sufficient energy can produce a particle-antiparticle pair.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "AQA A-Level Physics: Particles and Radiation",
+        "OpenStax University Physics Vol.3 Ch.11"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.particle.quarks",
+      "name": "Quarks",
+      "aliases": [
+        "quark flavors",
+        "up quark",
+        "down quark"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.particle.particle-classification"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Quarks are fundamental constituents of hadrons, carrying fractional electric charge and one of six flavors; they are never observed in isolation due to confinement.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "IB Physics Topic 7.3",
+        "OpenStax University Physics Vol.3 Ch.11"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.particle.hadron-quark-model",
+        "phys.particle.strong-interaction"
+      ]
+    },
+    {
+      "id": "phys.particle.leptons",
+      "name": "Leptons",
+      "aliases": [
+        "electron",
+        "muon",
+        "tau",
+        "lepton generations"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.particle.particle-classification"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Leptons are fundamental particles that do not experience the strong force; the electron, muon, and tau each form a generation together with a corresponding neutrino.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "IB Physics Topic 7.3",
+        "AQA A-Level Physics: Particles and Radiation"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.particle.neutrinos",
+        "phys.particle.conservation-laws"
+      ]
+    },
+    {
+      "id": "phys.particle.neutrinos",
+      "name": "Neutrinos",
+      "aliases": [
+        "neutrino",
+        "electron neutrino"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.particle.leptons"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Neutrinos are nearly massless leptons that interact only via the weak force, giving them an extremely small interaction cross-section and making them very difficult to detect.",
+      "difficulty": "advanced",
+      "estimated_hours": 4,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "OpenStax University Physics Vol.3 Ch.11"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.particle.hadron-quark-model",
+      "name": "Quark Model of Hadrons: Baryons and Mesons",
+      "aliases": [
+        "baryon",
+        "meson",
+        "quark composition"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.particle.quarks"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Baryons are composed of three quarks and mesons of a quark-antiquark pair; the quark model predicts the charge, and existence of hadrons from their quark content.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "IB Physics Topic 7.3",
+        "OpenStax University Physics Vol.3 Ch.11"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.particle.weak-interaction",
+        "phys.particle.conservation-laws",
+        "phys.particle.standard-model"
+      ]
+    },
+    {
+      "id": "phys.particle.gauge-bosons",
+      "name": "Gauge Bosons and Force Carriers",
+      "aliases": [
+        "force carrier",
+        "photon as boson",
+        "gluon",
+        "W boson",
+        "Z boson"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.particle.four-forces",
+        "phys.mod.photons"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Each fundamental force is mediated by an exchange particle: the photon for electromagnetism, gluons for the strong force, and the W and Z bosons for the weak force.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.8,
+      "references": [
+        "OpenStax University Physics Vol.3 Ch.11"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.particle.strong-interaction",
+        "phys.particle.weak-interaction",
+        "phys.particle.higgs-mechanism",
+        "phys.particle.feynman-diagrams",
+        "phys.particle.standard-model"
+      ]
+    },
+    {
+      "id": "phys.particle.strong-interaction",
+      "name": "The Strong Interaction and Color Charge",
+      "aliases": [
+        "color charge",
+        "quark confinement",
+        "gluon field"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.particle.gauge-bosons",
+        "phys.particle.quarks"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The strong interaction binds quarks via color charge and gluon exchange; confinement means the force grows with separation, so free quarks are never observed.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "OpenStax University Physics Vol.3 Ch.11"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.particle.weak-interaction",
+      "name": "The Weak Interaction",
+      "aliases": [
+        "weak force",
+        "flavor-changing interaction",
+        "beta decay via W boson"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.particle.gauge-bosons",
+        "phys.particle.hadron-quark-model"
+      ],
+      "related": [
+        "phys.mod.radioactivity"
+      ],
+      "cross_links": [],
+      "description": "The weak interaction changes one quark or lepton flavor into another via W and Z boson exchange; beta decay is a weak-interaction process in which a down quark converts to an up quark.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.13",
+        "OpenStax University Physics Vol.3 Ch.11"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.particle.electroweak-unification"
+      ]
+    },
+    {
+      "id": "phys.particle.electroweak-unification",
+      "name": "Electroweak Unification",
+      "aliases": [
+        "electroweak theory",
+        "unification of EM and weak force"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.particle.weak-interaction"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "At sufficiently high energy, the electromagnetic and weak interactions merge into a single electroweak interaction, described by a unified theoretical framework.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.7,
+      "references": [
+        "OpenStax University Physics Vol.3 Ch.11"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.particle.higgs-mechanism"
+      ]
+    },
+    {
+      "id": "phys.particle.higgs-mechanism",
+      "name": "The Higgs Mechanism",
+      "aliases": [
+        "Higgs field",
+        "origin of particle mass"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.particle.electroweak-unification",
+        "phys.particle.gauge-bosons"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The Higgs mechanism explains why the W and Z bosons and the fundamental fermions are massive while the photon and gluon are massless, via interaction with the Higgs field.",
+      "difficulty": "expert",
+      "estimated_hours": 8,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.7,
+      "references": [
+        "OpenStax University Physics Vol.3 Ch.11"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.particle.standard-model"
+      ]
+    },
+    {
+      "id": "phys.particle.conservation-laws",
+      "name": "Conservation Laws in Particle Interactions",
+      "aliases": [
+        "baryon number conservation",
+        "lepton number conservation"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.particle.hadron-quark-model",
+        "phys.particle.leptons"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Baryon number and lepton number are conserved in every known particle interaction; a proposed reaction is forbidden if it violates either conservation law, independent of energy availability.",
+      "difficulty": "proficient",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "IB Physics Topic 7.3",
+        "AQA A-Level Physics: Particles and Radiation"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.particle.feynman-diagrams",
+        "phys.particle.accelerators-detectors",
+        "phys.particle.standard-model"
+      ]
+    },
+    {
+      "id": "phys.particle.feynman-diagrams",
+      "name": "Feynman Diagrams (Qualitative)",
+      "aliases": [
+        "Feynman diagram",
+        "interaction vertex"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.particle.gauge-bosons",
+        "phys.particle.conservation-laws"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "A Feynman diagram represents a particle interaction as vertices where incoming and outgoing particle lines meet an exchanged force-carrier line, read qualitatively without calculating amplitudes.",
+      "difficulty": "advanced",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "IB Physics Topic 7.3"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.particle.accelerators-detectors",
+      "name": "Particle Accelerators and Detectors",
+      "aliases": [
+        "collider",
+        "particle detector"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.particle.conservation-laws",
+        "phys.rel.relativistic-momentum"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Accelerators collide particles at high relativistic momentum and energy; applying conservation of energy and momentum to the detected collision products reveals the mass and properties of new particles.",
+      "difficulty": "proficient",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.8,
+      "references": [
+        "OpenStax University Physics Vol.3 Ch.11"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.particle.standard-model",
+      "name": "The Standard Model",
+      "aliases": [
+        "Standard Model of particle physics"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.particle.hadron-quark-model",
+        "phys.particle.gauge-bosons",
+        "phys.particle.higgs-mechanism",
+        "phys.particle.conservation-laws"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "The Standard Model organizes all known quarks, leptons, gauge bosons, and the Higgs boson into a single framework, allowing any particle to be classified by its interactions and quantum numbers.",
+      "difficulty": "expert",
+      "estimated_hours": 10,
+      "bloom": "evaluate",
+      "mastery_threshold": 0.7,
+      "references": [
+        "OpenStax University Physics Vol.3 Ch.11"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mod.energy-bands",
+      "name": "Energy Bands in Solids",
+      "aliases": [
+        "valence band",
+        "conduction band",
+        "band gap"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.atomic-spectra",
+        "phys.stat.fermi-dirac"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "In a crystalline solid, the discrete energy levels of isolated atoms broaden into continuous bands of allowed energy separated by a band gap of forbidden energy.",
+      "difficulty": "advanced",
+      "estimated_hours": 5,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.14",
+        "OpenStax University Physics Vol.3 Ch.9"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mod.semiconductor-classification"
+      ]
+    },
+    {
+      "id": "phys.mod.semiconductor-classification",
+      "name": "Conductors, Insulators, and Semiconductors",
+      "aliases": [
+        "band-theory classification of materials"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.energy-bands"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Materials are classified as conductors, insulators, or semiconductors according to the size of the band gap and the extent to which the conduction band is filled.",
+      "difficulty": "advanced",
+      "estimated_hours": 4,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.14"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mod.intrinsic-semiconductors"
+      ]
+    },
+    {
+      "id": "phys.mod.intrinsic-semiconductors",
+      "name": "Intrinsic Semiconductors",
+      "aliases": [
+        "pure semiconductor",
+        "electron-hole pair"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.semiconductor-classification"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "In a pure (intrinsic) semiconductor, thermal energy generates electron-hole pairs across the band gap, so conductivity rises with temperature, unlike a metal.",
+      "difficulty": "advanced",
+      "estimated_hours": 4,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.14"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mod.extrinsic-semiconductors"
+      ]
+    },
+    {
+      "id": "phys.mod.extrinsic-semiconductors",
+      "name": "Extrinsic Semiconductors: Doping and Carrier Types",
+      "aliases": [
+        "n-type semiconductor",
+        "p-type semiconductor",
+        "doping"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.intrinsic-semiconductors"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Doping a semiconductor with a donor or acceptor impurity produces an n-type or p-type material with a majority charge carrier, while the material as a whole remains electrically neutral.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "references": [
+        "NCERT Physics Class 12 Ch.14"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mod.pn-junction"
+      ]
+    },
+    {
+      "id": "phys.mod.pn-junction",
+      "name": "The p-n Junction",
+      "aliases": [
+        "depletion region",
+        "built-in potential"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.extrinsic-semiconductors"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "At a p-n junction, diffusion of majority carriers across the interface forms a depletion region and a built-in potential that opposes further net carrier flow at equilibrium.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "references": [
+        "NCERT Physics Class 12 Ch.14"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mod.diode-rectification"
+      ]
+    },
+    {
+      "id": "phys.mod.diode-rectification",
+      "name": "Diode Rectifying Behavior",
+      "aliases": [
+        "forward bias",
+        "reverse bias",
+        "diode I-V characteristic"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.pn-junction"
+      ],
+      "related": [],
+      "cross_links": [],
+      "description": "Forward bias narrows the depletion region and allows current to flow readily, while reverse bias widens it and blocks current, giving the p-n junction diode its asymmetric, rectifying current-voltage behavior.",
+      "difficulty": "expert",
+      "estimated_hours": 5,
+      "bloom": "analyze",
+      "mastery_threshold": 0.7,
+      "references": [
+        "NCERT Physics Class 12 Ch.14"
       ],
       "children": [],
       "unlocks": []

@@ -105,7 +105,10 @@
   + `subjectKgAdapter.ts`, one `docs/{subject}/kg/graph.json` + 2 registry lines per subject, no new
   adapter/validator/Teaching Engine code per subject):
   - mathematics → `docs/mathematics/kg/graph.json` (908 concepts, prefix `math.`)
-  - physics → `docs/physics/kg/graph.json` (194 concepts, prefix `phys.`)
+  - physics → `docs/physics/kg/graph.json` (238 concepts, 12 domains, prefix `phys.`) — 216
+    concepts across 11 domains as of 2026-06-29, extended 2026-07-22 with a new Particle Physics
+    domain (16 concepts, `phys.particle.*`) and 6 Semiconductor Physics concepts appended to
+    Modern Physics (`phys.mod.*`) — see the Physics KG Extension exception record below
   - chemistry → `docs/chemistry/kg/graph.json` (187 concepts, prefix `chem.`)
   - computer_science → `docs/computer-science/kg/graph.json` (119 concepts, prefix `cs.`)
   - biology → `docs/biology/kg/graph.json` (89 concepts, prefix `bio.`) — shipped 2026-06-29,
@@ -1058,6 +1061,46 @@
   `src/app/api/learn/chat/route.ts`, and explain why extending the canonical pipeline in place is
   insufficient. A new parallel pipeline is not an acceptable answer to "the existing one feels
   architecturally rough" — refactor the live system instead.
+
+## Physics KG Extension — G2-style exception (2026-07-22, direct owner override)
+- Standing rule (see "Third pivot / Integration & Validation Loop" above): "the Curriculum
+  Production Pipeline runs independently and remains the ONLY authority for Canonical KGs... do
+  NOT modify curriculum/KG files." This session ran a multi-turn Physics curriculum validation
+  series (institutional benchmarking against NCERT/CBSE/IB/A-Level/AP/Cambridge/MIT/Stanford/
+  Harvard/Oxford/OpenStax, granularity via KGCS v1.0.0, a KG-philosophy audit that established
+  "KG nodes must be independently masterable — no history/biography/discovery/trivia nodes") that
+  surfaced two evidence-based gaps and *designed* (but did not author) solutions for both. When
+  asked to implement those designs directly into `docs/physics/kg/graph.json`, this conflicted
+  with the standing rule above; the user was asked to confirm via AskUserQuestion whether to
+  override it, and explicitly chose to proceed — recorded here as the exception, matching the
+  precedent of the ADR 14 Phase 2/3 and curriculum-placement G2 exceptions above.
+- Implemented: (1) a new **Particle Physics** domain, `phys.particle.*`, 16 concepts (Four
+  Fundamental Forces → particle classification → quarks/leptons/neutrinos → hadron quark model →
+  gauge bosons → strong/weak interaction → electroweak unification → Higgs mechanism →
+  conservation laws → Feynman diagrams (qualitative) → accelerators/detectors → Standard Model
+  capstone), gated on `{phys.em, phys.mod, phys.rel}`, deliberately NOT `phys.qm` (qualitative
+  scope only, no Schrödinger-equation machinery needed). (2) **6 Semiconductor Physics concepts**
+  appended to the existing Modern Physics domain (`phys.mod.energy-bands` →
+  `semiconductor-classification` → `intrinsic-semiconductors` → `extrinsic-semiconductors` →
+  `pn-junction` → `diode-rectification`), gated on `{phys.mod.atomic-spectra,
+  phys.stat.fermi-dirac}` — deliberately excludes transistors/logic gates/rectifier-circuit
+  design as EE-territory, not core physics. Both additions follow KGCS v1.0.0 (every node
+  independently teachable/assessable/masterable; no history/biography/discovery nodes — that
+  content belongs in Blueprint/Educational Brain, never authored here). 7 existing concepts
+  (`phys.em.coulombs-law`, `phys.mod.nuclear-reactions`, `phys.rel.mass-energy`,
+  `phys.mod.photons`, `phys.rel.relativistic-momentum`, `phys.mod.atomic-spectra`,
+  `phys.stat.fermi-dirac`) had one `unlocks` entry each appended (never removed/altered
+  otherwise) to maintain the graph's existing requires/unlocks mirror invariant across the new
+  cross-domain edges — no other existing concept was touched.
+  Physics: 216 → 238 concepts, 11 → 12 domains. `npx tsx scripts/validate-knowledge-graph.ts
+  docs/physics/kg/graph.json` → PASS, 0 failures, 0 warnings, 238/238 reachable from the single
+  existing root (`phys.meas.units`) — verified as the identical PASS/0/0 standard Mathematics,
+  Chemistry, and English already carry. Full test suite: 1887 passed/1 skipped, no regressions
+  (2 unrelated pre-existing environment-only failures: missing `resend` package, no
+  `DATABASE_URL` in this sandbox). `docs/CANONICAL_CURRICULUM_MANIFEST.json` and
+  `docs/CURRICULUM_PROGRESS.md` were deliberately NOT updated — those remain the external
+  Curriculum Production Pipeline's own generated dashboards, out of scope for this exception
+  (their Physics concept count will read stale — 216 — until the pipeline's own next sync).
 
 ## Run locally
 ```
