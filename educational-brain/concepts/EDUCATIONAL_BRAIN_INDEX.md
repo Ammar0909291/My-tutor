@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 6 READY)
+## mathematics (908 concepts, 14 READY)
 
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
@@ -413,7 +413,7 @@ its subject KG.
 | found | `math.found.corollary` | Corollary | No | No | — | MISSING |
 | found | `math.found.countable-set` | Countable Set | No | No | — | MISSING |
 | found | `math.found.deductive-reasoning` | Deductive Reasoning | Yes | No | — | MISSING |
-| found | `math.found.definition` | Mathematical Definition | No | No | — | MISSING |
+| found | `math.found.definition` | Mathematical Definition | No | Yes | `educational-brain/concepts/mathematics/math.found.definition.md` | READY |
 | found | `math.found.direct-proof` | Direct Proof | No | No | — | MISSING |
 | found | `math.found.empty-set` | Empty Set | No | No | — | MISSING |
 | found | `math.found.equivalence-class` | Equivalence Class | Yes | No | — | MISSING |
@@ -421,20 +421,20 @@ its subject KG.
 | found | `math.found.existence-proof` | Existence Proof | No | No | — | MISSING |
 | found | `math.found.finite-set` | Finite Set | No | No | — | MISSING |
 | found | `math.found.function-set-theoretic` | Function (Set-Theoretic) | Yes | No | — | MISSING |
-| found | `math.found.generalization` | Generalization | Yes | No | — | MISSING |
+| found | `math.found.generalization` | Generalization | Yes | Yes | `educational-brain/concepts/mathematics/math.found.generalization.md` | READY |
 | found | `math.found.hasse-diagram` | Hasse Diagram | No | No | — | MISSING |
-| found | `math.found.inductive-reasoning` | Inductive Reasoning | No | No | — | MISSING |
+| found | `math.found.inductive-reasoning` | Inductive Reasoning | No | Yes | `educational-brain/concepts/mathematics/math.found.inductive-reasoning.md` | READY |
 | found | `math.found.integers` | Integers | Yes | No | — | MISSING |
 | found | `math.found.intersection` | Intersection | No | No | — | MISSING |
 | found | `math.found.irrational-numbers` | Irrational Numbers | Yes | No | — | MISSING |
 | found | `math.found.lemma` | Lemma | No | No | — | MISSING |
-| found | `math.found.logic` | Mathematical Logic | Yes | No | — | MISSING |
+| found | `math.found.logic` | Mathematical Logic | Yes | Yes | `educational-brain/concepts/mathematics/math.found.logic.md` | READY |
 | found | `math.found.logical-connectives` | Logical Connectives | Yes | No | — | MISSING |
 | found | `math.found.logical-equivalence` | Logical Equivalence | Yes | No | — | MISSING |
 | found | `math.found.mathematical-language` | Mathematical Language | Yes | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-language.md` | READY |
-| found | `math.found.mathematical-modeling` | Mathematical Modeling | No | No | — | MISSING |
-| found | `math.found.mathematical-notation` | Mathematical Notation | Yes | No | — | MISSING |
-| found | `math.found.mathematical-symbols` | Mathematical Symbols | No | No | — | MISSING |
+| found | `math.found.mathematical-modeling` | Mathematical Modeling | No | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-modeling.md` | READY |
+| found | `math.found.mathematical-notation` | Mathematical Notation | Yes | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-notation.md` | READY |
+| found | `math.found.mathematical-symbols` | Mathematical Symbols | No | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-symbols.md` | READY |
 | found | `math.found.mathematical-thinking` | Mathematical Thinking | Yes | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-thinking.md` | READY |
 | found | `math.found.natural-numbers` | Natural Numbers | Yes | No | — | MISSING |
 | found | `math.found.ordered-pair` | Ordered Pair | Yes | No | — | MISSING |
@@ -446,7 +446,7 @@ its subject KG.
 | found | `math.found.predicate` | Predicate | Yes | No | — | MISSING |
 | found | `math.found.predicate-logic` | Predicate Logic | Yes | No | — | MISSING |
 | found | `math.found.problem-solving` | Mathematical Problem Solving | Yes | Yes | `educational-brain/concepts/mathematics/math.found.problem-solving.md` | READY |
-| found | `math.found.problem-solving-strategies` | Problem-Solving Strategies | No | No | — | MISSING |
+| found | `math.found.problem-solving-strategies` | Problem-Solving Strategies | No | Yes | `educational-brain/concepts/mathematics/math.found.problem-solving-strategies.md` | READY |
 | found | `math.found.proof` | Mathematical Proof | Yes | No | — | MISSING |
 | found | `math.found.proof-by-cases` | Proof by Cases | No | No | — | MISSING |
 | found | `math.found.proof-by-contradiction` | Proof by Contradiction | No | No | — | MISSING |
