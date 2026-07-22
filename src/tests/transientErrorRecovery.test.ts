@@ -101,4 +101,13 @@ describe('ConnectionRecovery: bounded auto-retry, manual fallback', () => {
   it('never uses window.location.href (recovery must not reset navigation)', () => {
     expect(RECOVERY).not.toContain('window.location.href')
   })
+
+  it('chains attempts inside one effect run (a failed refresh does NOT remount, so a single non-chained timer stops after attempt 1)', () => {
+    expect(RECOVERY).toMatch(/scheduleNext\(a \+ 1\)/)
+  })
+
+  it('uses its own heading, never the crash page\'s "Something went wrong" (users must be able to tell recovery apart from a crash)', () => {
+    expect(RECOVERY).toContain("t('connection_recovery_title')")
+    expect(RECOVERY).not.toContain("{t('error_title')}")
+  })
 })

@@ -50,12 +50,25 @@ export function ConnectionRecovery({ retryKey }: { retryKey: string }) {
       return
     }
 
-    timerRef.current = setTimeout(() => {
-      try {
-        sessionStorage.setItem(storageKey, JSON.stringify({ attempt: attempt + 1, ts: Date.now() }))
-      } catch { /* ignore */ }
-      router.refresh()
-    }, AUTO_RETRY_DELAYS_MS[attempt])
+    // Chain the attempts inside ONE effect run. A failed router.refresh()
+    // re-renders this same mounted component (React reconciles — it does NOT
+    // remount), so the effect never re-runs; a single non-chained timer
+    // would silently stop after attempt 1. A SUCCESSFUL refresh unmounts us,
+    // and cleanup cancels whatever is pending.
+    const scheduleNext = (a: number) => {
+      if (a >= AUTO_RETRY_DELAYS_MS.length) {
+        setAutoExhausted(true)
+        return
+      }
+      timerRef.current = setTimeout(() => {
+        try {
+          sessionStorage.setItem(storageKey, JSON.stringify({ attempt: a + 1, ts: Date.now() }))
+        } catch { /* ignore */ }
+        router.refresh()
+        scheduleNext(a + 1)
+      }, AUTO_RETRY_DELAYS_MS[a])
+    }
+    scheduleNext(attempt)
 
     return () => { if (timerRef.current) clearTimeout(timerRef.current) }
   }, [router, storageKey])
@@ -72,7 +85,11 @@ export function ConnectionRecovery({ retryKey }: { retryKey: string }) {
         <EagleMascot variant="hero" size={96} />
         <Card className="px-6 py-8 flex flex-col items-center gap-3">
           <h1 className="text-xl" style={{ fontFamily: 'var(--font-baloo2)', fontWeight: 800, color: 'var(--candy-ink)' }}>
-            {t('error_title')}
+            {/* Deliberately NOT error_title ("Something went wrong") — this
+                screen is a recoverable connection hiccup, and sharing the
+                crash page's heading made users (and bug reports) read it as
+                the crash it exists to prevent. */}
+            {t('connection_recovery_title')}
           </h1>
           <p className="text-sm" style={{ color: 'var(--candy-ink-soft)', fontWeight: 600 }}>
             {t('lesson_connect_failed')}
