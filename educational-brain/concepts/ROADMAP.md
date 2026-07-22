@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,756** |
-| Concepts with an Educational Brain entry | **71** |
-| Remaining | **1,685** |
-| Completion percentage | **4.04%** |
+| Concepts with an Educational Brain entry | **76** |
+| Remaining | **1,680** |
+| Completion percentage | **4.33%** |
 
 ---
 
@@ -23,7 +23,7 @@ below from source whenever this file is updated, never hand-estimate.
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 1 | 0.11% | `math.found.mathematical-thinking` | **No** |
+| mathematics | 908 | 6 | 0.66% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 67 | 28.15% | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 0 | 0.00% | `chem.found.matter` | No |
@@ -36,53 +36,73 @@ addition and cover none of the 22 new concepts (see §4).
 
 ---
 
-## 3. Current batch
+## 3. Domain status — math.found (IN PROGRESS)
 
-**Curriculum Completion Program batch 2** (this batch): production
-framework only — `EDUCATIONAL_BRAIN_STANDARD.md`, `ROADMAP.md`,
-`QUALITY.md`, `TEMPLATE.md` retirement. No concept entries authored.
+Per the standing Domain Certification workflow: complete one domain at a
+time, in strict prerequisite order, never starting a new domain before
+the current one is finished.
+
+| Metric | Value |
+|---|---|
+| Domain | `math.found` (mathematics / Foundations) |
+| Total concepts in domain | 82 |
+| Authored this program | 5 |
+| Remaining | 77 |
+| Status | **IN PROGRESS** — not eligible for Domain Certification yet |
+
+Authored so far (Wave 1 — root + all 4 direct level-1 children, in
+strict topological order): `mathematical-thinking` (level 0, the domain
+root), `abstraction`, `pattern-recognition`, `problem-solving`,
+`mathematical-language` (all level 1 — every concept whose only
+prerequisite is the root). Wave 2 (level 2 — every concept requiring
+only already-READY level-0/1 concepts) is next: `generalization`,
+`inductive-reasoning`, `problem-solving-strategies`,
+`mathematical-modeling`, `mathematical-notation`, `mathematical-symbols`,
+`logic`, `definition` (8 concepts, all requiring only concepts already
+authored). No other domain will be started until all 82 `math.found`
+concepts are `READY` and Domain Certification passes.
 
 ---
 
-## 4. Priority queue (evidence-based, computed against live KG roots)
+## 4. Current batch
 
-Per `COVERAGE.md`'s expansion protocol — placement entry points first,
-then cut-nodes, then misconception hubs, then prerequisite order —
-computed directly by finding every KG node with an empty `requires` list
-(a true zero-prerequisite entry point) per subject and checking it
-against the existing entry directory:
+**Curriculum Completion Program batch 4** (this batch, Domain
+Certification Mode): authored 5 `math.found` concepts (Wave 1 — root +
+immediate children). Domain not yet complete; certification not run
+(would fail — 77/82 still missing). No other domain touched.
 
-1. **`math.found.mathematical-thinking`** (mathematics) — mathematics'
-   own zero-prerequisite entry node has never been authored; the
-   existing single math entry (`math.arith.fractions`) is deep inside
-   the arithmetic domain, not the entry point. This is the exact same
-   gap pattern already fixed twice for English (`phonemic-awareness`,
-   `print-concepts`) — highest-priority item in the entire queue.
-2. **`chem.found.matter`** (chemistry) — chemistry has zero Educational
-   Brain coverage; its entry point is the correct first concept.
-3. **`bio.found.what-is-biology`** (biology) — same situation, biology's
-   entry point.
-4. **`cs.found.intro-computers`** (computer_science) — same situation,
-   computer_science's entry point.
-5. **Physics's 22 uncovered Particle Physics + Semiconductor Physics
-   concepts** (`phys.particle.*` ×16, `phys.mod.energy-bands` and its 5
-   siblings) — physics's own entry point is already covered, so the next
-   physics priority per the protocol's "cut-nodes next" step is
-   `phys.particle.four-forces` and `phys.mod.energy-bands` (the entry
-   nodes of the two newest domains) rather than continuing the existing
-   22-batch mechanics/E&M/thermal sequence, since a brand-new domain
-   with zero coverage outranks incremental depth in an already
-   substantially-covered one.
-6. **Everything else**, in prerequisite order within each subject, per
-   the existing protocol — not enumerated here node-by-node; consult
-   each subject's KG `requires` graph at the time of the next batch
-   after items 1–5 are done.
+---
 
-## 5. Next batch
+## 5. Priority queue (evidence-based, computed against live KG roots)
 
-**Batch 3 (recommended)**: author `math.found.mathematical-thinking` —
-item 1 above. Single concept, matches the program's one-bounded-unit-
-per-batch rule, and closes the most consequential remaining
-placement-entry-point gap (mathematics is the single largest subject by
-concept count, 908, with the thinnest coverage, 0.11%, and its true
-entry point has never been touched).
+Per `COVERAGE.md`'s expansion protocol, AND the current standing
+Domain-Completion rule (finish `math.found` before any other domain):
+
+1. **`math.found` Wave 2 (8 concepts, level 2)** — the immediate next
+   authoring target, per the Domain Certification Mode instruction to
+   never jump between subjects/domains until the current one is done:
+   `generalization`, `inductive-reasoning`, `problem-solving-strategies`,
+   `mathematical-modeling`, `mathematical-notation`,
+   `mathematical-symbols`, `logic`, `definition`.
+2. **`math.found` Waves 3+ (69 remaining concepts)**, in strict
+   topological order, until all 82 are `READY`.
+3. Only after `math.found` is 100% complete and certified: the queue
+   returns to the cross-subject priorities identified previously —
+   `chem.found.matter`, `bio.found.what-is-biology`,
+   `cs.found.intro-computers` (each subject's own uncovered entry point),
+   then physics's Particle Physics / Semiconductor Physics domains
+   (`phys.particle.four-forces`, `phys.mod.energy-bands`), then
+   everything else in prerequisite order.
+
+Full computed order (all 1,680 remaining concepts): see
+`AUTHORING_QUEUE.md` — note that file's own row order is the
+general-purpose graph-derived queue and does not yet encode the
+domain-completion constraint; §5 above is a manual override authorized
+by the current standing instruction and takes precedence over
+`AUTHORING_QUEUE.md`'s literal row order until `math.found` is complete.
+
+## 6. Next batch
+
+**Batch 5 (recommended)**: continue `math.found` Wave 2 — the 8 level-2
+concepts listed in §5 item 1, in strict prerequisite order, no other
+domain started.

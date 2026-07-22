@@ -1,63 +1,65 @@
 # Educational Brain Quality Ledger
 
 Per-concept completeness record for every existing Educational Brain
-entry, checked against the fields this batch was asked to track. Table
-generated programmatically from the live files (not hand-transcribed) —
-regenerate rather than hand-edit when entries change.
+entry, checked against the fields this program tracks. Table generated
+programmatically from the live files (not hand-transcribed) — regenerate
+rather than hand-edit when entries change.
 
 ## Methodology and honest caveats
 
 - **Blueprint / EB Entry / Mental Model / Misconceptions / Analogies /
   Recovery / Assessment / Tutor Actions**: presence of the corresponding
-  section (matched by heading text, tolerant of the numbered/unnumbered
-  drift documented in `EDUCATIONAL_BRAIN_STANDARD.md` §1.2) or, for
-  Blueprint, the existence of `docs/curriculum/blueprints/{id}.md`. A ✓
-  here means the section EXISTS, not that its content has been
-  re-verified against the new Standard's narrower scope rules (e.g.
-  whether an "Assessment" section duplicates its Blueprint) — see
-  `EDUCATIONAL_BRAIN_STANDARD.md` §1.2's duplication finding.
-- **Cross-links**: a ✓ means the entry's Transfer map section *discusses*
-  cross-subject connections — including entries that honestly conclude
-  "none via KG cross_links at this node" (e.g.
-  `phys.mech.newtons-first-law`). This column tracks whether the
-  question was addressed, not whether a link exists.
-- **Version**: whether a "Version History" section (new in
-  `EDUCATIONAL_BRAIN_STANDARD.md`) is present. **All 71 existing entries
-  correctly read ✗** — they predate this section's introduction in this
-  batch. This is expected migration debt, not a defect to fix now (see
-  `EDUCATIONAL_BRAIN_STANDARD.md` §6).
+  section (matched by scanning `## ` heading lines for the relevant
+  keyword anywhere in the line, tolerant of both the retired numbered
+  heading style and the current `EDUCATIONAL_BRAIN_STANDARD.md` heading
+  names) or, for Blueprint, the existence of
+  `docs/curriculum/blueprints/{id}.md`. A ✓ here means the section
+  EXISTS, not that its content has been re-verified against the
+  Standard's narrower scope rules.
+- **Detection-script limitation from the prior ledger, now fixed**: the
+  previous version of this file flagged the "Tutor Actions" column as
+  reading 44/71 due to a regex that didn't match the numbered-heading
+  variant's fuller wording, and predicted the true figure was "very
+  likely 71/71." Re-run this batch with a corrected, line-scanning
+  detector: confirmed 76/76 (all 71 pre-existing entries plus all 5 new
+  ones) — the prediction was correct, and this ledger's own detector is
+  now accurate rather than merely re-asserted.
+- **Cross-links**: a ✓ means the entry's Transfer/Cross-Subject section
+  *discusses* cross-subject connections — including entries that
+  honestly conclude "none via KG cross_links at this node." This column
+  tracks whether the question was addressed, not whether a link exists.
+- **Version**: whether a "Version History" section (introduced in
+  `EDUCATIONAL_BRAIN_STANDARD.md`) is present. The 71 pre-Standard
+  entries correctly read ✗ (expected migration debt, documented in
+  `EDUCATIONAL_BRAIN_STANDARD.md` §6); the 5 new `math.found.*` entries
+  authored this batch correctly read ✓ — the first entries in this
+  program to carry Version History from the start.
 
-## Aggregate summary (71 entries)
+## Aggregate summary (76 entries)
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 71 / 71 | every existing EB entry has a matching Blueprint |
-| Educational Brain | 71 / 71 | trivially true (this is the entry list) |
-| Mental Model | 71 / 71 | |
-| Misconceptions | 71 / 71 | |
-| Analogies | 71 / 71 | |
-| Recovery Strategy | 71 / 71 | |
-| Assessment Signals | 71 / 71 | scope not yet narrowed to the new Standard — see caveat above |
-| Tutor Actions | 44 / 71 | 27 entries' "Teaching actions" section did not match the detection pattern used — spot-check of 3 (`phys.em.biot-savart`, `phys.mech.momentum`, `phys.opt.brewsters-law`) confirms the section exists under the numbered heading style (`## 9. Teaching Actions (dispatch table)`); this is a **detection-pattern gap in this ledger's own script, not a real content gap** — flagged, not silently corrected, so the discrepancy is visible; see Known ledger limitations below |
-| Cross-links | 44 / 71 | see caveat above |
-| Version History | 0 / 71 | expected — see caveat above |
-
-### Known ledger limitations (to fix before the next regeneration)
-
-The "Tutor Actions" detection regex (`teaching action`) does not match
-the numbered-heading variant's fuller string
-(`## 9. Teaching Actions (dispatch table)`) case-sensitivity/wording as
-reliably as the other fields did — the true figure is very likely 71/71,
-matching every other structural field, not 44/71. Recorded honestly
-rather than silently patched, because silently "fixing" a generated
-number without re-running the actual detection would itself be a form of
-the placeholder-content problem this program is designed to avoid.
+| Blueprint | 76 / 76 | every EB entry has a matching Blueprint |
+| Educational Brain | 76 / 76 | trivially true (this is the entry list) |
+| Mental Model | 76 / 76 | |
+| Misconceptions | 76 / 76 | |
+| Analogies | 76 / 76 | |
+| Recovery Strategy | 76 / 76 | |
+| Assessment Signals | 76 / 76 | |
+| Tutor Actions | 76 / 76 | corrected this batch — see note above |
+| Cross-links | 49 / 76 | +5 from this batch's new entries (all 5 discuss it) |
+| Version History | 5 / 76 | expected — only entries authored under the current Standard carry it |
 
 ## Per-concept ledger
 
 | Concept ID | Subject | Blueprint | EB Entry | Mental Model | Misconceptions | Analogies | Recovery | Assessment | Tutor Actions | Cross-links | Version |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | `math.arith.fractions` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
+| `math.found.abstraction` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.mathematical-language` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.mathematical-thinking` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.pattern-recognition` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.problem-solving` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.em.biot-savart` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
 | `phys.em.coulombs-law` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.em.electric-charge` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
@@ -131,7 +133,7 @@ the placeholder-content problem this program is designed to avoid.
 
 ## What this ledger means for the next batch
 
-No entry is blocked or defective. The only universal gap (Version
-History, 0/71) is expected migration debt from adopting the new Standard
-mid-program, tracked in `ROADMAP.md` as future work, not a blocker for
-authoring the next new concept per `ROADMAP.md`'s priority queue.
+No entry is blocked or defective. Version History (5/76) will continue
+to rise entry by entry as new concepts are authored under the current
+Standard; the 71 pre-Standard entries' migration remains tracked future
+work, not a blocker.

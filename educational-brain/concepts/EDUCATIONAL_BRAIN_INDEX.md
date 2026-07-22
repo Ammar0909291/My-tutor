@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 1 READY)
+## mathematics (908 concepts, 6 READY)
 
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
@@ -401,7 +401,7 @@ its subject KG.
 | fnal | `math.fnal.special-functions` | Special Functions | Yes | No | — | MISSING |
 | fnal | `math.fnal.spectral-theory` | Spectral Theory | Yes | No | — | MISSING |
 | fnal | `math.fnal.uniform-boundedness` | Uniform Boundedness Principle | No | No | — | MISSING |
-| found | `math.found.abstraction` | Abstraction | Yes | No | — | MISSING |
+| found | `math.found.abstraction` | Abstraction | Yes | Yes | `educational-brain/concepts/mathematics/math.found.abstraction.md` | READY |
 | found | `math.found.axiom` | Axiom | Yes | No | — | MISSING |
 | found | `math.found.axiomatic-system` | Axiomatic System | Yes | No | — | MISSING |
 | found | `math.found.cardinal-arithmetic` | Cardinal Arithmetic | Yes | No | — | MISSING |
@@ -431,21 +431,21 @@ its subject KG.
 | found | `math.found.logic` | Mathematical Logic | Yes | No | — | MISSING |
 | found | `math.found.logical-connectives` | Logical Connectives | Yes | No | — | MISSING |
 | found | `math.found.logical-equivalence` | Logical Equivalence | Yes | No | — | MISSING |
-| found | `math.found.mathematical-language` | Mathematical Language | Yes | No | — | MISSING |
+| found | `math.found.mathematical-language` | Mathematical Language | Yes | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-language.md` | READY |
 | found | `math.found.mathematical-modeling` | Mathematical Modeling | No | No | — | MISSING |
 | found | `math.found.mathematical-notation` | Mathematical Notation | Yes | No | — | MISSING |
 | found | `math.found.mathematical-symbols` | Mathematical Symbols | No | No | — | MISSING |
-| found | `math.found.mathematical-thinking` | Mathematical Thinking | Yes | No | — | MISSING |
+| found | `math.found.mathematical-thinking` | Mathematical Thinking | Yes | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-thinking.md` | READY |
 | found | `math.found.natural-numbers` | Natural Numbers | Yes | No | — | MISSING |
 | found | `math.found.ordered-pair` | Ordered Pair | Yes | No | — | MISSING |
 | found | `math.found.ordinal-number` | Ordinal Number | Yes | No | — | MISSING |
 | found | `math.found.partial-order` | Partial Order | Yes | No | — | MISSING |
 | found | `math.found.partition` | Partition | Yes | No | — | MISSING |
-| found | `math.found.pattern-recognition` | Pattern Recognition | Yes | No | — | MISSING |
+| found | `math.found.pattern-recognition` | Pattern Recognition | Yes | Yes | `educational-brain/concepts/mathematics/math.found.pattern-recognition.md` | READY |
 | found | `math.found.power-set` | Power Set | Yes | No | — | MISSING |
 | found | `math.found.predicate` | Predicate | Yes | No | — | MISSING |
 | found | `math.found.predicate-logic` | Predicate Logic | Yes | No | — | MISSING |
-| found | `math.found.problem-solving` | Mathematical Problem Solving | Yes | No | — | MISSING |
+| found | `math.found.problem-solving` | Mathematical Problem Solving | Yes | Yes | `educational-brain/concepts/mathematics/math.found.problem-solving.md` | READY |
 | found | `math.found.problem-solving-strategies` | Problem-Solving Strategies | No | No | — | MISSING |
 | found | `math.found.proof` | Mathematical Proof | Yes | No | — | MISSING |
 | found | `math.found.proof-by-cases` | Proof by Cases | No | No | — | MISSING |
