@@ -1144,6 +1144,14 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         // failed before the tutor replied) → treat as no history at all, so
         // the welcome screen + Start Lesson gate still shows.
         if (restored.length === 0) return
+        // P0 ("opening blinks once and disappears"): this fetch has a 15s
+        // budget — on a slow network it can resolve AFTER the learner already
+        // pressed Start Lesson. Replacing messages at that point clobbers the
+        // live opening turn: the in-flight sendMessage then can't find its
+        // bubble id and the tutor's fresh reply silently vanished. If the
+        // learner has taken over (initializedRef set at Start-press time),
+        // the restore loses — never overwrite a live conversation.
+        if (initializedRef.current) return
         setMessages(restored)
         setLessonStarted(true) // skip the "Start Lesson" welcome screen
         // Prevent startLesson() from firing a duplicate opening prompt if
@@ -1712,7 +1720,16 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         }
       }
 
-      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: full, streaming: false, provider, visual: responseVisual, visualSpec: responseVisualSpec, sceneSpec: responseSceneSpec, dynamicVisualizationCode: responseDynamicVisualizationCode, inlinePractice: responseInlinePractice, hint: responseHint } : m))
+      // Clobber-proof landing: if a concurrent state replacement (e.g. the
+      // mount-time history restore) removed this turn's placeholder bubble,
+      // APPEND the reply instead of silently dropping it via a no-op map —
+      // the tutor's answer must never vanish because of a state race.
+      setMessages((p) => {
+        const landed = { content: full, streaming: false as const, provider, visual: responseVisual, visualSpec: responseVisualSpec, sceneSpec: responseSceneSpec, dynamicVisualizationCode: responseDynamicVisualizationCode, inlinePractice: responseInlinePractice, hint: responseHint }
+        return p.some((m) => m.id === aid)
+          ? p.map((m) => m.id === aid ? { ...m, ...landed } : m)
+          : [...p, { id: aid, role: 'assistant' as const, ts: Date.now(), ...landed }]
+      })
       const codeBlock = extractLastCodeBlock(full)
       if (codeBlock) {
         setCode(codeBlock)
@@ -1740,7 +1757,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       consecutiveTurnFailuresRef.current += 1
       console.error(`[learn/chat] turn failed (consecutive ${consecutiveTurnFailuresRef.current}):`, msg)
       const recoveryText = pickRecoveryMessage(consecutiveTurnFailuresRef.current, teachingLanguage)
-      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: recoveryText, streaming: false } : m))
+      // Same clobber-proof landing as the success path above.
+      setMessages((p) => p.some((m) => m.id === aid)
+        ? p.map((m) => m.id === aid ? { ...m, content: recoveryText, streaming: false } : m)
+        : [...p, { id: aid, role: 'assistant' as const, content: recoveryText, ts: Date.now(), streaming: false }])
     } finally { setIsStreaming(false); textareaRef.current?.focus() }
   }, [handleSpeak, curriculumLessons, curriculumProgress.currentLesson, handleLessonComplete, userId, subjectSlug])
 
@@ -1775,20 +1795,22 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok || !data.success || !data.text) throw new Error(data.error ?? `HTTP ${res.status}`)
-      setMessages((p) => p.map((m) => m.id === aid
-        ? { ...m, content: data.text as string, streaming: false, provider: data.provider }
-        : m,
-      ))
+      // Clobber-proof landing (same as sendMessage): a late history restore
+      // must never make the lesson opening vanish.
+      setMessages((p) => p.some((m) => m.id === aid)
+        ? p.map((m) => m.id === aid
+          ? { ...m, content: data.text as string, streaming: false, provider: data.provider }
+          : m)
+        : [...p, { id: aid, role: 'assistant' as const, content: data.text as string, ts: Date.now(), streaming: false, provider: data.provider }])
     } catch (err) {
       const recoveryText = teachingLanguage === 'ru'
         ? 'Ой, связь прервалась. Попробуй ещё раз.'
         : teachingLanguage === 'hi'
         ? 'Connection ruk gaya. Dobara try karo.'
         : 'Sorry, something went wrong loading the lesson. Please try again.'
-      setMessages((p) => p.map((m) => m.id === aid
-        ? { ...m, content: recoveryText, streaming: false }
-        : m,
-      ))
+      setMessages((p) => p.some((m) => m.id === aid)
+        ? p.map((m) => m.id === aid ? { ...m, content: recoveryText, streaming: false } : m)
+        : [...p, { id: aid, role: 'assistant' as const, content: recoveryText, ts: Date.now(), streaming: false }])
       console.error('[lesson-init]', err)
     } finally {
       setIsStreaming(false)
@@ -2198,7 +2220,10 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
       const visionErr = typeof data.error === 'string' ? data.error : data.error?.message ?? 'Vision error'
       if (!data.success || !data.text) throw new Error(visionErr)
       const full = data.text
-      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: full, streaming: false } : m))
+      // Clobber-proof landing — same contract as sendMessage/callLessonInit.
+      setMessages((p) => p.some((m) => m.id === aid)
+        ? p.map((m) => m.id === aid ? { ...m, content: full, streaming: false } : m)
+        : [...p, { id: aid, role: 'assistant' as const, content: full, ts: Date.now(), streaming: false }])
       const codeBlock = extractLastCodeBlock(full)
       if (codeBlock) {
         setCode(codeBlock)
@@ -2208,7 +2233,9 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
       // Voice no longer auto-plays on arrival — see the sendMessage handler above.
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err)
-      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: `Analysis error: ${msg}`, streaming: false } : m))
+      setMessages((p) => p.some((m) => m.id === aid)
+        ? p.map((m) => m.id === aid ? { ...m, content: `Analysis error: ${msg}`, streaming: false } : m)
+        : [...p, { id: aid, role: 'assistant' as const, content: `Analysis error: ${msg}`, ts: Date.now(), streaming: false }])
     } finally { setIsStreaming(false); textareaRef.current?.focus() }
   }
 
@@ -4102,6 +4129,10 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                           pendingLessonRunRef.current = null
                           setPendingLesson(null)
                           setLessonStarted(true)
+                          // Same take-over marker startLesson() sets: a
+                          // late-resolving history restore must not clobber
+                          // the lesson-init turn this click starts.
+                          initializedRef.current = true
                           void run()
                         } else {
                           startLesson()

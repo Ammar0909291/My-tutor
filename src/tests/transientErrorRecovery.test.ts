@@ -24,6 +24,7 @@ const DASHBOARD = read('src/app/dashboard/page.tsx')
 const ERROR_PAGE = read('src/app/error.tsx')
 const GLOBAL_ERROR = read('src/app/global-error.tsx')
 const RECOVERY = read('src/components/system/ConnectionRecovery.tsx')
+const LESSON = read('src/components/learn/LessonScreen.tsx')
 
 describe('learn/page.tsx: transient DB failures degrade, never throw to the global boundary', () => {
   it('imports and renders ConnectionRecovery for a failed user load', () => {
@@ -109,5 +110,31 @@ describe('ConnectionRecovery: bounded auto-retry, manual fallback', () => {
   it('uses its own heading, never the crash page\'s "Something went wrong" (users must be able to tell recovery apart from a crash)', () => {
     expect(RECOVERY).toContain("t('connection_recovery_title')")
     expect(RECOVERY).not.toContain("{t('error_title')}")
+  })
+})
+
+describe('LessonScreen: late history restore never clobbers a live lesson turn ("opening blinks and disappears" fix)', () => {
+  it('the mount-time history restore is skipped once the learner has taken over (initializedRef)', () => {
+    // The restore has a 15s budget and can resolve AFTER Start Lesson was
+    // pressed; replacing messages at that point wiped the live opening.
+    const restoreBlock = LESSON.slice(
+      LESSON.indexOf('// All rows were internal bootstrap prompts'),
+      LESSON.indexOf("setLessonStarted(true) // skip the \"Start Lesson\" welcome screen"),
+    )
+    expect(restoreBlock).toContain('if (initializedRef.current) return')
+  })
+
+  it('the lesson-switch Start button sets the same take-over marker before running lesson-init', () => {
+    const btnBlock = LESSON.slice(LESSON.indexOf('pendingLessonRunRef.current = null'), LESSON.indexOf('void run()'))
+    expect(btnBlock).toContain('initializedRef.current = true')
+  })
+
+  it('reply landing is clobber-proof: appends when the placeholder bubble id is gone instead of a silent no-op map', () => {
+    // Every landing site (sendMessage success + recovery, callLessonInit
+    // success + recovery) must check existence before mapping.
+    const landings = LESSON.match(/p\.some\(\(m\) => m\.id === aid\)/g) ?? []
+    expect(landings.length).toBeGreaterThanOrEqual(4)
+    // The old silently-droppable shape must not remain anywhere.
+    expect(LESSON).not.toMatch(/setMessages\(\(p\) => p\.map\(\(m\) => m\.id === aid/)
   })
 })
