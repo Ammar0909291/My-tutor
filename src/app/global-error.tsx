@@ -17,7 +17,11 @@ export default function GlobalError({ reset }: { error: Error & { digest?: strin
             My Tutor hit an unexpected error. Try again, or come back in a bit.
           </p>
           <button
-            onClick={() => reset()}
+            // Full reload, not reset(): at this level the root layout itself
+            // failed, and reset() alone re-renders against the same cached
+            // server payload (same dead-Retry mechanism fixed in error.tsx).
+            // A hard reload is the only recovery that re-fetches everything.
+            onClick={() => window.location.reload()}
             style={{
               background: '#8B5CF6', color: '#fff', fontWeight: 800, fontSize: 14,
               border: 'none', borderRadius: 16, padding: '12px 24px', cursor: 'pointer',

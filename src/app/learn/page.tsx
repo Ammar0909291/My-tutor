@@ -7,6 +7,7 @@ import { LessonScreen } from '@/components/learn/LessonScreen'
 import { MessageRole } from '@prisma/client'
 import { t, type TranslationKey } from '@/lib/i18n'
 import { getUserNavSubjects } from '@/lib/subjects/getUserNavSubjects'
+import { ConnectionRecovery } from '@/components/system/ConnectionRecovery'
 
 // P0 (subject switching, Lesson Flow sprint item 1): auth() already forces
 // this route dynamic (any cookies()/auth() call opts a route out of static
@@ -22,6 +23,20 @@ import { getUserNavSubjects } from '@/lib/subjects/getUserNavSubjects'
 // ever be served instead of a fresh one.
 export const dynamic = 'force-dynamic'
 
+// Bounded, retried user+profile load — extracted so the page body can type
+// its recoverable-failure handling off this function's return type.
+function loadLearnUser(userId: string) {
+  return withTimeout(withRetry(() => prisma.user.findUnique({
+    where: { id: userId },
+    select: {
+      onboardingCompleted: true,
+      profile: {
+        include: { subjects: { include: { subject: true }, orderBy: { createdAt: 'asc' } } },
+      },
+    },
+  })), 12000, 'learn-user')
+}
+
 const ASK_PROMPT_KEYS: Record<string, TranslationKey> = {
   explain: 'chapter_ask_explain',
   examples: 'chapter_ask_examples',
@@ -33,15 +48,22 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
 
-  const user = await withTimeout(withRetry(() => prisma.user.findUnique({
-    where: { id: session.user.id },
-    select: {
-      onboardingCompleted: true,
-      profile: {
-        include: { subjects: { include: { subject: true }, orderBy: { createdAt: 'asc' } } },
-      },
-    },
-  })), 12000, 'learn-user')
+  // P0 (global "Something went wrong" for transient failures): this await
+  // used to be unguarded — a Neon cold start / pool exhaustion / network
+  // blip here THREW out of the Server Component into the app-wide error
+  // boundary (error.tsx, "Error ID: <digest>"). A transient DB failure is
+  // recoverable by definition; it must degrade to the inline auto-retrying
+  // recovery screen, never to the global error page. redirect() calls stay
+  // OUTSIDE the try so NEXT_REDIRECT control-flow is never swallowed.
+  let user: Awaited<ReturnType<typeof loadLearnUser>> | undefined
+  let userLoadFailed = false
+  try {
+    user = await loadLearnUser(session.user.id)
+  } catch (err) {
+    console.error('[learn] transient user-load failure, showing recovery screen:', err)
+    userLoadFailed = true
+  }
+  if (userLoadFailed) return <ConnectionRecovery retryKey="learn" />
 
   if (!user?.onboardingCompleted) {
     if (user?.profile) {
@@ -141,7 +163,14 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
         select: { role: true, content: true, createdAt: true },
       },
     },
-  })), 12000, 'learn-pastSessions') : []
+  // Past-session memory context is a nice-to-have, never worth the page: a
+  // transient failure here degrades to "no memory context" instead of
+  // throwing to the global error boundary (same class as the studentProgress
+  // .catch above).
+  })), 12000, 'learn-pastSessions').catch((err) => {
+    console.error('[learn] transient pastSessions failure, rendering without memory context:', err)
+    return []
+  }) : []
 
   let memoryContext: string | null = null
   let pastSessionsSummary: string | null = null

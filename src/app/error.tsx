@@ -1,5 +1,6 @@
 'use client'
-import { useEffect } from 'react'
+import { useEffect, useTransition } from 'react'
+import { useRouter } from 'next/navigation'
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { CandyPage, Card, CandyButton, EagleMascot } from '@/components/ui/candy'
 
@@ -10,10 +11,19 @@ import { CandyPage, Card, CandyButton, EagleMascot } from '@/components/ui/candy
  */
 export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   const { t } = useLanguage()
+  const router = useRouter()
+  const [, startTransition] = useTransition()
 
   useEffect(() => {
     console.error('[app-error-boundary]', error)
   }, [error])
+
+  // P0 (Retry that doesn't retry): for an error thrown by a SERVER component,
+  // reset() alone only re-renders the client tree against the SAME cached RSC
+  // payload — the identical error re-renders instantly and the button appears
+  // dead. router.refresh() re-fetches the server payload; wrapping both in one
+  // transition is the documented Next.js recovery pattern.
+  const retry = () => startTransition(() => { router.refresh(); reset() })
 
   return (
     <CandyPage className="p-6">
@@ -40,7 +50,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
           )}
           <div className="flex flex-col sm:flex-row gap-3 mt-2 w-full">
             <CandyButton
-              onClick={() => reset()}
+              onClick={retry}
               className="flex-1 px-5 py-3 rounded-2xl text-sm"
               style={{ background: 'var(--candy-purple)', color: '#fff', fontWeight: 800, border: 'none' }}
             >
