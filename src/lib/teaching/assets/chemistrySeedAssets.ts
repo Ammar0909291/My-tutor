@@ -13879,6 +13879,188 @@ const PROTEIN_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.bio.lipids ─────────────────────────────────────────────────────────
+const LIPID = 'chem.bio.lipids'
+const LIPID_SRC = 'docs/chemistry/kg/graph.json — chem.bio.lipids'
+
+const LIPID_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LIPID,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Lipids (fats/oils) are TRIESTERS of glycerol (a triol, connecting to the diols/polyols ' +
+      'concept covered earlier) with three long-chain FATTY ACIDS (carboxylic acids, covered ' +
+      'earlier), linked via ESTER bonds (carboxylic acid derivatives, also covered earlier). ' +
+      'The KEY structural distinction between FATS (solid at room temperature) and OILS ' +
+      '(liquid) is the DEGREE OF SATURATION of the fatty acid chains: SATURATED fatty acids ' +
+      '(no C=C double bonds, all single bonds — like alkanes covered earlier) pack together ' +
+      'TIGHTLY and regularly, maximizing London dispersion forces between neighboring ' +
+      'molecules, giving HIGHER melting points (solid fats, common in animal sources). ' +
+      'UNSATURATED fatty acids (containing C=C double bonds) have a bent, KINKED shape at each ' +
+      'double bond (the double bond restricts rotation and typically adopts a CIS geometry in ' +
+      'natural fats) — this kink PREVENTS tight, regular packing, weakening intermolecular ' +
+      'forces and giving LOWER melting points (liquid oils, common in plant sources). ' +
+      'HYDROGENATION (industrially adding H₂ across the double bonds, using a metal catalyst — ' +
+      'connecting to catalytic addition covered earlier) converts liquid oils into solid fats, ' +
+      'though this process can also inadvertently isomerize some remaining cis double bonds ' +
+      'into TRANS double bonds (trans fats), which pack more like saturated fats despite still ' +
+      'technically being "unsaturated."',
+    targetedMisconceptions: [`${LIPID}:MC1`],
+    source: `${LIPID_SRC} — triglyceride ester structure, saturated/unsaturated packing and melting point, hydrogenation and trans fats`,
+  },
+  {
+    conceptId: LIPID,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Unsaturated fats (with C=C double bonds) should have HIGHER melting points than ' +
+      'saturated fats, since double bonds are "stronger" or add extra structural rigidity." ' +
+      'BACKWARDS — unsaturated fats have LOWER melting points, and the reasoning has nothing ' +
+      'to do with bond strength directly. The cis double bond creates a KINK/bend in the ' +
+      'fatty acid chain, preventing the molecules from packing together as tightly and ' +
+      'regularly as straight saturated chains can — WEAKER intermolecular packing (fewer, less ' +
+      'effective London dispersion contacts between neighboring molecules) means LOWER melting ' +
+      'point, not higher. Molecular SHAPE/packing efficiency, not bond strength, determines this ' +
+      'property — the same lesson as branching lowering alkane boiling points, covered earlier. ' +
+      'Second trap: "Trans fats, since they still contain C=C double bonds (technically ' +
+      '\'unsaturated\'), should behave physically like typical cis-unsaturated oils (liquid, low ' +
+      'melting point)." FALSE — trans double bonds do NOT create the same kink that cis double ' +
+      'bonds do; a trans configuration allows the chain to remain relatively STRAIGHT (similar ' +
+      'packing behavior to saturated fats), so trans fats behave more like SATURATED fats ' +
+      '(higher melting point, solid-like packing) despite technically containing double bonds — ' +
+      'this is exactly why trans fats raised health concerns: they mimic saturated fat\'s solid ' +
+      'physical behavior and associated biological effects, despite their "unsaturated" ' +
+      'classification.',
+    targetedMisconceptions: [`${LIPID}:MC1`, `${LIPID}:MC2`],
+    source: `${LIPID_SRC} — misconception: double bonds increase melting point via bond strength; trans fats behave like cis-unsaturated oils`,
+  },
+]
+
+const LIPID_PROBES: SeedProbe[] = [
+  {
+    conceptId: LIPID,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why do unsaturated fats (containing cis C=C double bonds) generally have LOWER melting points than saturated fats?',
+    choices: [
+      { text: 'The cis double bond creates a kink/bend in the fatty acid chain, preventing tight, regular molecular packing and weakening intermolecular London dispersion forces compared to the straight-chain packing of saturated fats', isCorrect: true },
+      { text: 'Double bonds are inherently weaker chemical bonds than single bonds, which directly lowers the overall stability and melting point of the molecule', isCorrect: false, misconceptionId: `${LIPID}:MC1` },
+    ],
+    correctValue: 'Kinked shape disrupts molecular packing, weakening intermolecular forces',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LIPID}:MC1`],
+    source: `${LIPID_SRC} — distractor targets attributing melting point differences to bond strength rather than molecular packing/shape`,
+  },
+  {
+    conceptId: LIPID,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Trans fats still contain C=C double bonds, technically making them "unsaturated." Do they behave physically like typical cis-unsaturated oils (liquid, low melting point)?',
+    choices: [
+      { text: 'No — trans double bonds allow the chain to remain relatively straight (unlike the kinked cis configuration), so trans fats pack more like saturated fats and behave more like solids with higher melting points, despite technically being unsaturated', isCorrect: true },
+      { text: 'Yes — any fat containing C=C double bonds, whether cis or trans, shows the same liquid, low-melting-point behavior typical of unsaturated oils', isCorrect: false, misconceptionId: `${LIPID}:MC2` },
+    ],
+    correctValue: 'No — trans fats behave more like saturated fats',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${LIPID}:MC2`],
+    source: `${LIPID_SRC} — misconception: trans-unsaturated fats behave physically like cis-unsaturated fats`,
+  },
+]
+
+// ─── chem.bio.vitamins ───────────────────────────────────────────────────────
+const VITAMIN = 'chem.bio.vitamins'
+const VITAMIN_SRC = 'docs/chemistry/kg/graph.json — chem.bio.vitamins'
+
+const VITAMIN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: VITAMIN,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Vitamins are organic compounds the body needs in small amounts but cannot synthesize ' +
+      'itself (must come from diet) — classified by SOLUBILITY into two groups with genuinely ' +
+      'different chemistry and behavior. FAT-SOLUBLE vitamins (A, D, E, K) are largely ' +
+      'nonpolar/hydrophobic in structure (connecting to the like-dissolves-like solubility ' +
+      'concept covered earlier) — they\'re absorbed alongside dietary fat, transported in the ' +
+      'body via lipid-associated pathways, and importantly can ACCUMULATE in fatty tissue over ' +
+      'time (since the body has no efficient way to excrete excess amounts through water-based ' +
+      'urine) — this makes overdose/toxicity from excessive supplementation a genuine, ' +
+      'medically documented concern for these vitamins specifically. WATER-SOLUBLE vitamins (B ' +
+      'complex, C) are polar, often containing multiple -OH or -NH₂ groups enabling hydrogen ' +
+      'bonding with water (connecting to the intermolecular forces concept) — they\'re NOT ' +
+      'significantly stored in the body; any excess is efficiently filtered by the kidneys and ' +
+      'excreted in urine, making toxicity from oral over-supplementation comparatively rare for ' +
+      'this category (though not impossible for a few specific water-soluble vitamins at very ' +
+      'extreme doses). Hormones, similarly, can be either fat-soluble (steroid hormones, ' +
+      'passing directly through cell membranes) or water-soluble (peptide hormones, requiring ' +
+      'surface receptors), following the SAME structure-based solubility logic.',
+    targetedMisconceptions: [`${VITAMIN}:MC1`],
+    source: `${VITAMIN_SRC} — fat-soluble vs water-soluble vitamin chemistry, storage/excretion behavior, overdose risk difference`,
+  },
+  {
+    conceptId: VITAMIN,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Since vitamins are generally beneficial, taking MORE of any vitamin (through ' +
+      'high-dose supplements) is always safe, or at worst just wasteful with no real harm." ' +
+      'FALSE, and the DIFFERENCE between fat-soluble and water-soluble vitamins is exactly ' +
+      'why this generalization fails. Fat-soluble vitamins (A, D, E, K) genuinely ACCUMULATE ' +
+      'in body fat over time (no efficient excretion pathway), so chronic excessive ' +
+      'supplementation can reach genuinely TOXIC levels (vitamin A toxicity, for instance, is ' +
+      'a real, documented medical condition) — "more is better" is a dangerous oversimplification ' +
+      'specifically for this vitamin category. Water-soluble vitamins are comparatively much ' +
+      'safer in excess (efficiently excreted via urine), but even here, "always completely safe ' +
+      'in unlimited amounts" isn\'t quite accurate either (a few, like B6, can cause problems at ' +
+      'extremely high doses). The KEY chemistry-based distinction (solubility → storage vs. ' +
+      'excretion behavior) directly explains why blanket statements about vitamin safety are ' +
+      'misleading — the RIGHT answer depends on which specific vitamin\'s underlying chemical ' +
+      'structure and resulting body-handling behavior you\'re considering.',
+    targetedMisconceptions: [`${VITAMIN}:MC1`],
+    source: `${VITAMIN_SRC} — misconception: all vitamins are equally safe in excess regardless of solubility category`,
+  },
+]
+
+const VITAMIN_PROBES: SeedProbe[] = [
+  {
+    conceptId: VITAMIN,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why is chronic excessive supplementation with fat-soluble vitamins (like A or D) a more significant toxicity concern than excessive supplementation with water-soluble vitamins (like C)?',
+    choices: [
+      { text: 'Fat-soluble vitamins accumulate in body fat over time since there is no efficient excretion pathway for them, while water-soluble vitamins are efficiently filtered by the kidneys and excreted in urine when present in excess', isCorrect: true },
+      { text: 'There is no real difference in toxicity risk — all vitamins, regardless of solubility category, carry equal risk of overdose when taken in excess', isCorrect: false, misconceptionId: `${VITAMIN}:MC1` },
+    ],
+    correctValue: 'Fat-soluble vitamins accumulate; water-soluble vitamins are efficiently excreted',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VITAMIN}:MC1`],
+    source: `${VITAMIN_SRC} — distractor targets treating all vitamins as having equal overdose risk regardless of solubility`,
+  },
+  {
+    conceptId: VITAMIN,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Since vitamins are generally described as beneficial nutrients, is it accurate to say that taking more of ANY vitamin through high-dose supplements is always either helpful or at worst harmless?',
+    choices: [
+      { text: 'No — this is a dangerous oversimplification, especially for fat-soluble vitamins, which can accumulate to genuinely toxic levels with chronic excessive supplementation (documented conditions like vitamin A toxicity exist)', isCorrect: true },
+      { text: 'Yes — since vitamins are essential nutrients the body needs, there is no meaningful risk from taking more than the recommended amount through supplements', isCorrect: false },
+    ],
+    correctValue: 'No — excess fat-soluble vitamins pose genuine toxicity risk',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${VITAMIN_SRC} — testing understanding that vitamin supplementation safety depends on solubility-based body handling`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -14045,6 +14227,8 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...COLLIG_EXPLANATIONS,
   ...AMINOACID_EXPLANATIONS,
   ...PROTEIN_EXPLANATIONS,
+  ...LIPID_EXPLANATIONS,
+  ...VITAMIN_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -14211,4 +14395,6 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...COLLIG_PROBES,
   ...AMINOACID_PROBES,
   ...PROTEIN_PROBES,
+  ...LIPID_PROBES,
+  ...VITAMIN_PROBES,
 ]
