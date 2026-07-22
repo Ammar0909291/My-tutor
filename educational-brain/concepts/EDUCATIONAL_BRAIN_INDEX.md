@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 20 READY)
+## mathematics (908 concepts, 24 READY)
 
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
@@ -403,7 +403,7 @@ its subject KG.
 | fnal | `math.fnal.uniform-boundedness` | Uniform Boundedness Principle | No | No | — | MISSING |
 | found | `math.found.abstraction` | Abstraction | Yes | Yes | `educational-brain/concepts/mathematics/math.found.abstraction.md` | READY |
 | found | `math.found.axiom` | Axiom | Yes | Yes | `educational-brain/concepts/mathematics/math.found.axiom.md` | READY |
-| found | `math.found.axiomatic-system` | Axiomatic System | Yes | No | — | MISSING |
+| found | `math.found.axiomatic-system` | Axiomatic System | Yes | Yes | `educational-brain/concepts/mathematics/math.found.axiomatic-system.md` | READY |
 | found | `math.found.cardinal-arithmetic` | Cardinal Arithmetic | Yes | No | — | MISSING |
 | found | `math.found.cardinality` | Cardinality | Yes | No | — | MISSING |
 | found | `math.found.cartesian-product` | Cartesian Product | Yes | No | — | MISSING |
@@ -429,7 +429,7 @@ its subject KG.
 | found | `math.found.irrational-numbers` | Irrational Numbers | Yes | No | — | MISSING |
 | found | `math.found.lemma` | Lemma | No | No | — | MISSING |
 | found | `math.found.logic` | Mathematical Logic | Yes | Yes | `educational-brain/concepts/mathematics/math.found.logic.md` | READY |
-| found | `math.found.logical-connectives` | Logical Connectives | Yes | No | — | MISSING |
+| found | `math.found.logical-connectives` | Logical Connectives | Yes | Yes | `educational-brain/concepts/mathematics/math.found.logical-connectives.md` | READY |
 | found | `math.found.logical-equivalence` | Logical Equivalence | Yes | No | — | MISSING |
 | found | `math.found.mathematical-language` | Mathematical Language | Yes | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-language.md` | READY |
 | found | `math.found.mathematical-modeling` | Mathematical Modeling | No | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-modeling.md` | READY |
@@ -443,7 +443,7 @@ its subject KG.
 | found | `math.found.partition` | Partition | Yes | No | — | MISSING |
 | found | `math.found.pattern-recognition` | Pattern Recognition | Yes | Yes | `educational-brain/concepts/mathematics/math.found.pattern-recognition.md` | READY |
 | found | `math.found.power-set` | Power Set | Yes | No | — | MISSING |
-| found | `math.found.predicate` | Predicate | Yes | No | — | MISSING |
+| found | `math.found.predicate` | Predicate | Yes | Yes | `educational-brain/concepts/mathematics/math.found.predicate.md` | READY |
 | found | `math.found.predicate-logic` | Predicate Logic | Yes | No | — | MISSING |
 | found | `math.found.problem-solving` | Mathematical Problem Solving | Yes | Yes | `educational-brain/concepts/mathematics/math.found.problem-solving.md` | READY |
 | found | `math.found.problem-solving-strategies` | Problem-Solving Strategies | No | Yes | `educational-brain/concepts/mathematics/math.found.problem-solving-strategies.md` | READY |
@@ -461,7 +461,7 @@ its subject KG.
 | found | `math.found.reflexive-relation` | Reflexive Relation | Yes | No | — | MISSING |
 | found | `math.found.relation` | Relation | Yes | No | — | MISSING |
 | found | `math.found.rules-of-inference` | Rules of Inference | Yes | No | — | MISSING |
-| found | `math.found.set` | Set | Yes | No | — | MISSING |
+| found | `math.found.set` | Set | Yes | Yes | `educational-brain/concepts/mathematics/math.found.set.md` | READY |
 | found | `math.found.set-builder-notation` | Set-Builder Notation | Yes | No | — | MISSING |
 | found | `math.found.set-difference` | Set Difference | No | No | — | MISSING |
 | found | `math.found.set-equality` | Set Equality | No | No | — | MISSING |
@@ -1803,7 +1803,7 @@ its subject KG.
 
 ## Orphan Educational Brain files
 
-None found. Every one of the 90 existing Educational Brain files
+None found. Every one of the 94 existing Educational Brain files
 resolves to a live KG concept id in its subject's graph.json.
 
 ## Duplicate Educational Brain files

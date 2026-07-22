@@ -1229,6 +1229,22 @@
   `AUTHORING_QUEUE.md`, `ROADMAP.md`, `QUALITY.md`, `COVERAGE.md`, `VALIDATION_REPORT.md`)
   regenerated from source; re-validated 0 orphans, 0 duplicates, 0 broken KG references, 0
   invalid Blueprint references across all 90 entries.
+- **Batch 7 — Domain Certification Mode, math.found Wave 4** (2026-07-22): authored the 4
+  concepts whose prerequisites became fully satisfied after Wave 3 (`axiomatic-system`,
+  `logical-connectives`, `predicate`, `set`) — verified programmatically against the live KG,
+  matching the expected candidate list exactly. All 4 had existing Blueprints reused by
+  reference (Misconception Registries cited by MC number with birth-type classification added,
+  never restating worked examples/transfer probes/mastery gates). One new genuine Curriculum
+  Feedback finding: `math.found.set`'s Misconception Register substantially overlaps
+  `math.found.set-theory`'s own (order/repetition, ∅-vs-{∅}) — recorded honestly, not fixed (no
+  KG or Blueprint modified). The open `mathematical-notation`/`mathematical-symbols` item from
+  Wave 2 remains carried forward, unresolved. All 4 entries verified against the Standard's exact
+  21-section heading order. `math.found` 23/82 — still IN PROGRESS; Wave 5 candidates already
+  computed (`cartesian-product`, `empty-set`, `ordered-pair`, `predicate-logic`,
+  `set-builder-notation`, `set-membership`, `set-theory-axiomatic`, `truth-table`). No other
+  domain touched. Per explicit stop condition, Wave 5 was NOT started this batch. All six
+  tracking files regenerated from source; re-validated 0 orphans, 0 duplicates, 0 broken KG
+  references, 0 invalid Blueprint references across all 94 entries.
 
 ## Run locally
 ```
