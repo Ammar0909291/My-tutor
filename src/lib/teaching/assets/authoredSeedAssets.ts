@@ -39480,6 +39480,456 @@ const SMOD_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.mod.energy-bands ────────────────────────────────────────────────────
+const EBND = 'phys.mod.energy-bands'
+const EBND_SRC = 'docs/curriculum/blueprints/phys.mod.energy-bands.md'
+
+const EBND_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EBND,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'When millions of identical atoms come together to form a solid crystal, their electrons do NOT keep ' +
+      'occupying the exact same sharp, isolated-atom energy levels as before — prior learning about isolated ' +
+      'atomic energy levels is carried forward unchanged, but combining atoms fundamentally alters the shared ' +
+      'electron energy structure via the Pauli exclusion principle: no two electrons in the whole crystal can ' +
+      'occupy the exact same quantum state, so the once-sharp atomic levels smear out into continuous BANDS ' +
+      'of many closely-spaced allowed energies. And a band is NOT always either completely full or completely ' +
+      'empty — introducing "band" as a purely structural energy range, without connecting it to the separate ' +
+      'statistical question of occupation, creates the false impression that occupation does not vary within ' +
+      'it. In reality, whether and how much of a band is occupied by electrons is a genuinely separate, ' +
+      'crucial question — a partially-filled band is exactly what makes a conductor conduct.',
+    targetedMisconceptions: [`${EBND}:MC-1`, `${EBND}:MC-2`],
+    source: `${EBND_SRC} — Section 4 MC-1 (atomic levels smear into bands via Pauli exclusion) + MC-2 (occupation varies within a band, distinct from band structure)`,
+  },
+  {
+    conceptId: EBND,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The band gap is NOT simply an empty, unoccupied region with nothing special about it structurally — ' +
+      '"no electrons present" (which could describe an unoccupied but allowed state within a band) is ' +
+      'conflated with "no electron states exist at all," the actual structural nature of the band gap. A band ' +
+      'gap is not merely a temporarily-unoccupied part of an allowed band; it is a range of energy where NO ' +
+      'ELECTRON STATES EXIST AT ALL — there is no available "seat" for an electron to occupy in that energy ' +
+      'range, no matter how much thermal or other energy is supplied, unlike an allowed band\'s empty states ' +
+      'which genuinely could be filled. This structural distinction — states existing but unoccupied, versus ' +
+      'no states existing at all — is exactly what separates conductors, semiconductors, and insulators.',
+    targetedMisconceptions: [`${EBND}:MC-3`],
+    source: `${EBND_SRC} — Section 4 MC-3 (band gap has no electron states at all, structurally distinct from an unoccupied band)`,
+  },
+]
+
+const EBND_PROBES: SeedProbe[] = [
+  {
+    conceptId: EBND,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'When millions of identical atoms come together to form a solid crystal, do each of their electrons still occupy the exact same sharp, isolated-atom energy levels as before?',
+    choices: [
+      { text: 'No — the Pauli exclusion principle forbids any two electrons in the crystal from occupying the exact same state, so the once-sharp atomic levels smear out into continuous bands of many closely-spaced energies', isCorrect: true },
+      { text: 'Yes — each atom in the solid still has its own separate, unchanged energy levels, independent of the other atoms nearby', isCorrect: false, misconceptionId: `${EBND}:MC-1` },
+    ],
+    correctValue: 'no — atomic levels smear into bands via Pauli exclusion',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EBND}:MC-1`],
+    source: `${EBND_SRC} — Section 4 MC-1 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: EBND,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is the band gap simply a region where no electrons currently happen to be, the same way part of an allowed band might be temporarily unoccupied?',
+    choices: [
+      { text: 'No — the band gap has no electron STATES at all, structurally; an allowed band\'s empty state could in principle be filled, but the band gap has no available states to fill regardless of energy supplied', isCorrect: true },
+      { text: 'Yes — the band gap is just an empty region, structurally no different from an unoccupied part of an allowed band', isCorrect: false, misconceptionId: `${EBND}:MC-3` },
+    ],
+    correctValue: 'no — the band gap structurally has zero electron states, unlike an unoccupied band',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${EBND}:MC-3`],
+    source: `${EBND_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mod.semiconductor-classification ───────────────────────────────────
+const SCLS = 'phys.mod.semiconductor-classification'
+const SCLS_SRC = 'docs/curriculum/blueprints/phys.mod.semiconductor-classification.md'
+
+const SCLS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SCLS,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A semiconductor does NOT have a fixed, unchanging "medium" conductivity value — the everyday meaning ' +
+      'of "semi-" (halfway, partial) suggests a fixed intermediate value, but semiconductor conductivity is ' +
+      'highly variable and strongly condition-dependent, changing dramatically with temperature, light ' +
+      'exposure, and impurity doping. And conductors, insulators, and semiconductors are NOT explained by ' +
+      'three entirely separate physical mechanisms — learning them as separately-named categories in ' +
+      'different textbook sections obscures that all three share one identical band-structure framework: ' +
+      'whether a material conducts well, poorly, or somewhere in between depends entirely on the size of its ' +
+      'band gap and how many electrons have enough energy to cross it, not on three unrelated underlying ' +
+      'physical laws.',
+    targetedMisconceptions: [`${SCLS}:MC-1`, `${SCLS}:MC-2`],
+    source: `${SCLS_SRC} — Section 4 MC-1 (conductivity is variable, not fixed) + MC-2 (one shared band-structure framework, not three separate mechanisms)`,
+  },
+  {
+    conceptId: SCLS,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Metals and semiconductors do NOT respond to heating the same basic way — without explicit contrast, ' +
+      'temperature effects are assumed to generalize uniformly across all conductive materials, but two ' +
+      'genuinely distinct, competing mechanisms are actually at work. Heat a metal wire and its conductivity ' +
+      'DECREASES: more thermal vibration in the lattice increases electron scattering, impeding the already-' +
+      'abundant free electrons. Heat a piece of silicon and its conductivity INCREASES: thermal energy ' +
+      'promotes more electrons across the band gap into the conduction band, creating additional charge ' +
+      'carriers where relatively few existed before. Same physical action (heating), opposite conductivity ' +
+      'response — a direct consequence of each material\'s different band structure.',
+    targetedMisconceptions: [`${SCLS}:MC-3`],
+    source: `${SCLS_SRC} — Section 4 MC-3 (metals and semiconductors respond to heating in opposite directions)`,
+  },
+]
+
+const SCLS_PROBES: SeedProbe[] = [
+  {
+    conceptId: SCLS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Are conductors, insulators, and semiconductors explained by three entirely different physical mechanisms, or by one single underlying framework?',
+    choices: [
+      { text: 'One single framework — all three are explained by the same band-structure model; the difference is band-gap size and how many electrons can cross it', isCorrect: true },
+      { text: 'Three entirely different mechanisms — each material category works by its own separate physical law, unrelated to the others', isCorrect: false, misconceptionId: `${SCLS}:MC-2` },
+    ],
+    correctValue: 'one shared band-structure framework explains all three categories',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SCLS}:MC-2`],
+    source: `${SCLS_SRC} — Section 4 MC-2 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: SCLS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If you heat both a metal wire and a piece of silicon, does their electrical conductivity change in the same direction, or in opposite directions?',
+    choices: [
+      { text: 'Opposite directions — a metal\'s conductivity decreases with heating (more scattering), while a semiconductor\'s conductivity increases with heating (more thermally-promoted carriers)', isCorrect: true },
+      { text: 'The same direction — heating any material should affect its conductivity the same basic way, regardless of whether it is a metal or a semiconductor', isCorrect: false, misconceptionId: `${SCLS}:MC-3` },
+    ],
+    correctValue: 'opposite directions — metals down, semiconductors up',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SCLS}:MC-3`],
+    source: `${SCLS_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mod.intrinsic-semiconductors ───────────────────────────────────────
+const ISEM = 'phys.mod.intrinsic-semiconductors'
+const ISEM_SRC = 'docs/curriculum/blueprints/phys.mod.intrinsic-semiconductors.md'
+
+const ISEM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ISEM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A "hole" is NOT a real, physical particle like a newly created antielectron — the vivid, particle-like ' +
+      'language describing holes (positive charge, mobility, contributes to current) invites confusion with ' +
+      'genuine antiparticles, but a hole is an emergent DESCRIPTION of collective valence-band electron ' +
+      'rearrangement, not an independently existing particle: when a nearby electron shifts to fill the ' +
+      'vacancy left by a promoted electron, the vacancy appears to "move" in the opposite direction, purely ' +
+      'as a bookkeeping convenience for tracking many real electrons\' shifts. And holes are NOT a minor ' +
+      'detail in semiconductor conduction — prior experience with metals (pure electron conduction) does not ' +
+      'carry over; in a pure semiconductor, valence-band hole motion contributes just as meaningfully to total ' +
+      'conductivity as conduction-band electron motion does, both moving under an applied field and both ' +
+      'contributing current in the same overall direction.',
+    targetedMisconceptions: [`${ISEM}:MC-1`, `${ISEM}:MC-2`],
+    source: `${ISEM_SRC} — Section 4 MC-1 (hole is an emergent description, not a real particle) + MC-2 (holes contribute meaningfully, not just electrons)`,
+  },
+  {
+    conceptId: ISEM,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Electron and hole concentrations are NOT independently variable in a pure, undoped semiconductor — ' +
+      'without explicit emphasis on the pair-creation mechanism, it seems there is no particular reason the ' +
+      'two counts should match, but every single electron promoted from the valence band to the conduction ' +
+      'band necessarily and simultaneously creates exactly one hole (the vacancy left behind) — it is ONE ' +
+      'single event viewed from two perspectives, not two independent processes. This is precisely why n = p ' +
+      'exactly in an intrinsic semiconductor: the two populations are locked together by the very definition ' +
+      'of how they are created, with no exceptions possible in the pure material.',
+    targetedMisconceptions: [`${ISEM}:MC-3`],
+    source: `${ISEM_SRC} — Section 4 MC-3 (electron-hole pair creation is one event, forcing n = p exactly)`,
+  },
+]
+
+const ISEM_PROBES: SeedProbe[] = [
+  {
+    conceptId: ISEM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'When an electron is promoted to the conduction band, is the "hole" left behind a brand new physical particle, or something else?',
+    choices: [
+      { text: 'Something else — a hole is an emergent description of collective valence-band electron rearrangement, not an independently existing particle like a positron', isCorrect: true },
+      { text: 'A brand new physical particle — a hole is basically a new particle that gets created, similar to a positron', isCorrect: false, misconceptionId: `${ISEM}:MC-1` },
+    ],
+    correctValue: 'not a real particle — an emergent description of electron motion',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ISEM}:MC-1`],
+    source: `${ISEM_SRC} — Section 4 MC-1 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: ISEM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a completely pure, undoped semiconductor, could there be more electrons in the conduction band than holes in the valence band?',
+    choices: [
+      { text: 'No — every promoted electron creates exactly one hole as the same single event; electron and hole counts must be exactly equal (n = p) in a pure semiconductor', isCorrect: true },
+      { text: 'Yes — there is no particular reason the number of electrons and holes should be exactly equal, so one could exceed the other', isCorrect: false, misconceptionId: `${ISEM}:MC-3` },
+    ],
+    correctValue: 'no — n = p exactly, by the pair-creation mechanism',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ISEM}:MC-3`],
+    source: `${ISEM_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mod.extrinsic-semiconductors ───────────────────────────────────────
+const ESEM = 'phys.mod.extrinsic-semiconductors'
+const ESEM_SRC = 'docs/curriculum/blueprints/phys.mod.extrinsic-semiconductors.md'
+
+const ESEM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ESEM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A doped semiconductor does NOT carry an overall net electric charge — the phrase "excess electrons" ' +
+      '(describing n-type\'s majority carrier) is misread as implying an excess of total negative charge, but ' +
+      'every donor atom that releases its extra electron becomes a fixed, immobile POSITIVE ion, exactly ' +
+      'balancing the mobile electron charge created; the material as a whole remains precisely electrically ' +
+      'neutral. And n-type material does NOT have literally zero holes, nor does p-type have literally zero ' +
+      'electrons — the simplified "n-type = electrons, p-type = holes" shorthand is a majority/minority ' +
+      'statement, not an exclusive one: both carrier types always coexist in any real doped semiconductor, ' +
+      'just with dramatically shifted relative populations.',
+    targetedMisconceptions: [`${ESEM}:MC-1`, `${ESEM}:MC-2`],
+    source: `${ESEM_SRC} — Section 4 MC-1 (doped material remains electrically neutral overall) + MC-2 (both carrier types always coexist, majority/minority not exclusive)`,
+  },
+  {
+    conceptId: ESEM,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Doping does NOT increase both electron and hole concentrations together, proportionally — assuming ' +
+      '"doping increases conductivity" implies both carrier populations rise together misses a genuine ' +
+      'tradeoff. The approximate relation n×p ≈ n_i² (roughly constant for a given material and temperature) ' +
+      'means that if doping increases the majority carrier concentration (say, electrons in n-type material) ' +
+      'far above the intrinsic value, the MINORITY carrier concentration (holes) must correspondingly ' +
+      'DECREASE far below the intrinsic value to keep the product roughly constant — heavily n-type doped ' +
+      'silicon actually has fewer holes than pure, undoped silicon, not more.',
+    targetedMisconceptions: [`${ESEM}:MC-3`],
+    source: `${ESEM_SRC} — Section 4 MC-3 (doping trades majority against minority carrier concentration, not increasing both)`,
+  },
+]
+
+const ESEM_PROBES: SeedProbe[] = [
+  {
+    conceptId: ESEM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If an n-type semiconductor has a huge excess of mobile electrons compared to holes, does that mean the material as a whole is negatively charged?',
+    choices: [
+      { text: 'No — every donor atom that releases its extra electron becomes a fixed, immobile positive ion, exactly balancing the mobile electron charge; the material remains exactly electrically neutral overall', isCorrect: true },
+      { text: 'Yes — n-type material should be negatively charged overall, since it has extra mobile electrons', isCorrect: false, misconceptionId: `${ESEM}:MC-1` },
+    ],
+    correctValue: 'no — the material remains electrically neutral, balanced by fixed ions',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ESEM}:MC-1`],
+    source: `${ESEM_SRC} — Section 4 MC-1 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: ESEM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If doping silicon with a donor impurity dramatically increases the electron concentration, does the hole concentration also increase, stay the same, or decrease?',
+    choices: [
+      { text: 'Decrease — the approximate relation n×p ≈ n_i² keeps the product roughly constant, so increasing electron concentration forces hole concentration to drop below even the pure intrinsic value', isCorrect: true },
+      { text: 'Increase — doping should make the material more conductive overall by increasing both carrier types together', isCorrect: false, misconceptionId: `${ESEM}:MC-3` },
+    ],
+    correctValue: 'decrease — majority and minority carrier concentrations trade off',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ESEM}:MC-3`],
+    source: `${ESEM_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mod.pn-junction ─────────────────────────────────────────────────────
+const PNJC = 'phys.mod.pn-junction'
+const PNJC_SRC = 'docs/curriculum/blueprints/phys.mod.pn-junction.md'
+
+const PNJC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PNJC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A p-n junction\'s depletion region and built-in potential do NOT require an external battery or ' +
+      'voltage source to form — "potential" and "voltage" are terms usually associated with batteries and ' +
+      'external circuits, but these arise SPONTANEOUSLY the instant a p-type and n-type region are joined, ' +
+      'purely from diffusion physics: majority carriers diffuse across the junction driven only by the ' +
+      'concentration gradient, with nothing else connected at all. And this diffusion does NOT continue ' +
+      'forever, eventually completely mixing the two regions like dye spreading through water — a p-n ' +
+      'junction is genuinely self-limiting, unlike simple diffusion in a neutral medium: as carriers cross, ' +
+      'they leave behind fixed, oppositely-charged dopant ions, generating an opposing electric field that ' +
+      'grows until it exactly balances further diffusion, reaching a stable, permanent equilibrium.',
+    targetedMisconceptions: [`${PNJC}:MC-1`, `${PNJC}:MC-2`],
+    source: `${PNJC_SRC} — Section 4 MC-1 (depletion region forms spontaneously, no external voltage needed) + MC-2 (diffusion is self-limiting, reaches equilibrium)`,
+  },
+  {
+    conceptId: PNJC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The built-in potential can NOT be directly measured by simply connecting an ordinary voltmeter across ' +
+      'the junction — analogizing directly to measuring a battery\'s terminal voltage overlooks the ' +
+      'measurement leads\' own contact potentials. Any external measurement circuit introduces its own contact ' +
+      'potentials at the probe-to-semiconductor junctions, which exactly cancel the reading in a closed loop ' +
+      '— the built-in potential is genuinely real and physically present (typically ~0.6–0.7 V for silicon), ' +
+      'but this specific measurement approach cannot reveal it directly; more indirect methods (like ' +
+      'capacitance-voltage measurements) are needed instead.',
+    targetedMisconceptions: [`${PNJC}:MC-3`],
+    source: `${PNJC_SRC} — Section 4 MC-3 (built-in potential is real but not directly voltmeter-measurable, due to canceling contact potentials)`,
+  },
+]
+
+const PNJC_PROBES: SeedProbe[] = [
+  {
+    conceptId: PNJC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does a p-n junction need to be connected to a battery or power source before a depletion region and built-in potential exist, or do these form on their own?',
+    choices: [
+      { text: 'They form on their own — the instant a p-type and n-type region are joined, diffusion begins spontaneously and creates the depletion region and built-in potential with nothing externally connected', isCorrect: true },
+      { text: 'A battery or power source is required first — the depletion region and built-in potential only form once a voltage source is connected to the junction', isCorrect: false, misconceptionId: `${PNJC}:MC-1` },
+    ],
+    correctValue: 'they form spontaneously, with no external voltage required',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PNJC}:MC-1`],
+    source: `${PNJC_SRC} — Section 4 MC-1 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: PNJC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does the diffusion of electrons and holes across a p-n junction ever stop, or does it continue indefinitely until the regions completely merge?',
+    choices: [
+      { text: 'It stops at a stable equilibrium — exposed fixed dopant ions generate a growing opposing electric field that eventually exactly balances further diffusion, unlike simple diffusion in a neutral medium', isCorrect: true },
+      { text: 'It continues indefinitely, like dye eventually spreading evenly through an entire glass of water, until the n-type and p-type regions completely mix', isCorrect: false, misconceptionId: `${PNJC}:MC-2` },
+    ],
+    correctValue: 'it stops — self-limiting, reaching a stable equilibrium',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PNJC}:MC-2`],
+    source: `${PNJC_SRC} — Section 4 MC-2 trigger probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mod.diode-rectification ────────────────────────────────────────────
+const DREC = 'phys.mod.diode-rectification'
+const DREC_SRC = 'docs/curriculum/blueprints/phys.mod.diode-rectification.md'
+
+const DREC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DREC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A diode\'s forward current-voltage relationship is NOT linear like a resistor\'s — prior extensive ' +
+      'experience with Ohm\'s-law-obeying resistors leads to assuming all circuit components follow a ' +
+      'similarly proportional relationship, but a diode is a fundamentally nonlinear device: its forward ' +
+      'current rises roughly EXPONENTIALLY with voltage once past the turn-on threshold, not proportionally. ' +
+      'Doubling the forward voltage (while staying in the conducting region) can increase current by a much ' +
+      'larger factor than two. And there is NOT an absolute, sharp voltage threshold below which literally ' +
+      'zero current flows — the practical "turn-on voltage" (~0.6–0.7 V for silicon) is a useful approximation ' +
+      'of a smooth, continuous exponential curve, not a literal physical discontinuity; some small forward ' +
+      'current genuinely does flow below the nominal threshold, simply negligible in practical terms.',
+    targetedMisconceptions: [`${DREC}:MC-1`, `${DREC}:MC-2`],
+    source: `${DREC_SRC} — Section 4 MC-1 (forward I-V is exponential, not linear) + MC-2 (turn-on voltage is a practical approximation, not a literal discontinuity)`,
+  },
+  {
+    conceptId: DREC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Reverse current is NOT exactly zero under reverse bias (below breakdown) — the common simplification ' +
+      '"reverse bias blocks current" is a good practical first approximation, but is over-interpreted as a ' +
+      'literal, exact-zero claim. Minority carriers (always present in small numbers even in a doped ' +
+      'material) are actually swept across the junction by the reverse-bias field, producing a small but ' +
+      'genuinely measurable "reverse saturation" or "leakage" current, typically in the nanoampere to ' +
+      'microampere range for ordinary silicon diodes — far smaller than forward current at a comparable ' +
+      'voltage, but not literally zero. This asymmetric forward/reverse behavior — negligible current below a ' +
+      'small turn-on voltage, rapidly rising current above it, near-zero (but nonzero) current under reverse ' +
+      'bias — is precisely what allows a diode to convert alternating current into pulsating direct current, ' +
+      'the basic function called rectification.',
+    targetedMisconceptions: [`${DREC}:MC-3`],
+    source: `${DREC_SRC} — Section 4 MC-3 (reverse current is small but genuinely nonzero, carried by minority carriers)`,
+  },
+]
+
+const DREC_PROBES: SeedProbe[] = [
+  {
+    conceptId: DREC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If you double the forward voltage applied to a diode (while staying above its turn-on voltage), does the current through it also roughly double, the way it would for a simple resistor following Ohm\'s law?',
+    choices: [
+      { text: 'No — a diode\'s forward current rises roughly exponentially with voltage past the turn-on threshold; doubling the voltage can increase current by a much larger factor than two', isCorrect: true },
+      { text: 'Yes — a diode should behave like a resistor once it is conducting, so doubling the voltage should roughly double the current', isCorrect: false, misconceptionId: `${DREC}:MC-1` },
+    ],
+    correctValue: 'no — the forward relationship is exponential, not linear',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DREC}:MC-1`],
+    source: `${DREC_SRC} — Section 4 MC-1 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: DREC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Under reverse bias (below the breakdown voltage), is the current through a diode exactly, mathematically zero, or just very small?',
+    choices: [
+      { text: 'Just very small — a small but genuinely nonzero "leakage" current flows, carried by minority carriers swept across the junction by the reverse-bias field', isCorrect: true },
+      { text: 'Exactly zero — reverse bias means absolutely no current flows at all, period', isCorrect: false, misconceptionId: `${DREC}:MC-3` },
+    ],
+    correctValue: 'small but nonzero — the reverse leakage/saturation current',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DREC}:MC-3`],
+    source: `${DREC_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -39970,6 +40420,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...FEYN_EXPLANATIONS,
   ...ACDT_EXPLANATIONS,
   ...SMOD_EXPLANATIONS,
+  ...EBND_EXPLANATIONS,
+  ...SCLS_EXPLANATIONS,
+  ...ISEM_EXPLANATIONS,
+  ...ESEM_EXPLANATIONS,
+  ...PNJC_EXPLANATIONS,
+  ...DREC_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -40460,4 +40916,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...FEYN_PROBES,
   ...ACDT_PROBES,
   ...SMOD_PROBES,
+  ...EBND_PROBES,
+  ...SCLS_PROBES,
+  ...ISEM_PROBES,
+  ...ESEM_PROBES,
+  ...PNJC_PROBES,
+  ...DREC_PROBES,
 ]
