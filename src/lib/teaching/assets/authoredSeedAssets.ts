@@ -38288,6 +38288,296 @@ const QTUN_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.particle.four-forces ───────────────────────────────────────────────
+const FRC4 = 'phys.particle.four-forces'
+const FRC4_SRC = 'docs/curriculum/blueprints/phys.particle.four-forces.md'
+
+const FRC4_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FRC4,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'All of nature\'s countless interactions reduce to exactly four fundamental forces: gravity, ' +
+      'electromagnetism, the strong force, and the weak force. Being "strongest" does not mean "dominates ' +
+      'everywhere" — the strong force is by far the most powerful of the four, but its range is cut off ' +
+      'completely beyond about 10⁻¹⁵ m (roughly a proton\'s width); past that distance its effect is not ' +
+      'small, it is exactly zero. That is why the Solar System is held together by gravity — the weakest ' +
+      'of the four forces — rather than the strong force: gravity is universal and infinite-range, so at ' +
+      'planetary separations it is the only one of the four still acting at all. Rank by strength and rank ' +
+      'by relevance are two different questions.',
+    targetedMisconceptions: [`${FRC4}:MC-1`],
+    source: `${FRC4_SRC} — Section 4 MC-1 (strongest-force overgeneralization, range-cutoff correction)`,
+  },
+  {
+    conceptId: FRC4,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Friction, the normal force, and tension are NOT a fifth, sixth, and seventh fundamental force sitting ' +
+      'alongside gravity, electromagnetism, strong, and weak — introductory mechanics teaches them with the ' +
+      'same F=ma arrow-drawing treatment as the fundamental four, which is exactly what invites the mix-up. ' +
+      'The test for "fundamental" is not "can I draw a force arrow for it" but "does it have its own ' +
+      'irreducible coupling constant, or does it reduce to something else at a smaller scale." Friction and ' +
+      'the normal force are both macroscopic electromagnetic effects — the repulsion between the electron ' +
+      'clouds of touching atoms — with no independent coupling constant of their own. They are real forces ' +
+      'you can measure and use in F=ma, just not fundamental ones.',
+    targetedMisconceptions: [`${FRC4}:MC-2`],
+    source: `${FRC4_SRC} — Section 4 MC-2 (contact forces as emergent electromagnetism, not a fifth fundamental force)`,
+  },
+]
+
+const FRC4_PROBES: SeedProbe[] = [
+  {
+    conceptId: FRC4,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which force holds the Solar System together — the strong force or gravity? Why doesn\'t the strong force do it, if it\'s the strongest of the four?',
+    choices: [
+      { text: 'Gravity — the strong force\'s range is cut off completely beyond about 10⁻¹⁵ m, so at planetary separations its effect is exactly zero, not just weak', isCorrect: true },
+      { text: 'The strong force — since it is the strongest of the four fundamental forces, it should dominate at every scale, including planetary distances', isCorrect: false, misconceptionId: `${FRC4}:MC-1` },
+    ],
+    correctValue: 'gravity, because the strong force has zero effect beyond nuclear range',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FRC4}:MC-1`],
+    source: `${FRC4_SRC} — Section 4 MC-1 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: FRC4,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'List the four fundamental forces. Is friction one of them?',
+    choices: [
+      { text: 'No — friction is a macroscopic electromagnetic effect (electron-cloud repulsion between touching surfaces) with no independent coupling constant; the four fundamental forces are gravity, electromagnetism, strong, and weak', isCorrect: true },
+      { text: 'Yes — friction is a force you can draw an arrow for and use in F=ma, so it belongs alongside gravity, electromagnetism, strong, and weak as a fifth fundamental force', isCorrect: false, misconceptionId: `${FRC4}:MC-2` },
+    ],
+    correctValue: 'no, friction reduces to electromagnetism, not a fundamental force',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FRC4}:MC-2`],
+    source: `${FRC4_SRC} — Section 4 MC-2 trigger probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.particle.particle-classification ──────────────────────────────────
+const PCLS = 'phys.particle.particle-classification'
+const PCLS_SRC = 'docs/curriculum/blueprints/phys.particle.particle-classification.md'
+
+const PCLS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PCLS,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Protons and neutrons are NOT fundamental — 1968 deep inelastic scattering experiments revealed they ' +
+      'are composite, built from quarks, exactly the way early chemistry\'s "proton/neutron/electron are the ' +
+      'three basic building blocks" framing never gets revisited. The real fundamental-vs-composite line runs ' +
+      'differently: leptons (electron, muon, tau, and their neutrinos) and quarks are fundamental — no smaller ' +
+      'parts, no substructure ever detected. Hadrons (protons, neutrons, pions, and everything built from ' +
+      'quarks) are composite. And within hadrons, "hadron" and "baryon" are NOT synonyms: baryons (three-quark ' +
+      'combinations like the proton and neutron) are only one hadron sub-category; mesons (quark-antiquark ' +
+      'pairs, like the pion) are hadrons too, despite not being baryons.',
+    targetedMisconceptions: [`${PCLS}:MC-1`, `${PCLS}:MC-2`],
+    source: `${PCLS_SRC} — Section 4 MC-1 (proton/neutron composite structure) + MC-2 (hadron ≠ baryon)`,
+  },
+  {
+    conceptId: PCLS,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Mass does NOT determine whether a particle is classified as a hadron or a lepton — the familiar ' +
+      'heavy-proton/light-electron contrast tempts a mass-based rule, but it breaks immediately: the tau ' +
+      'lepton (about 1.78 GeV/c²) is heavier than the proton (about 0.94 GeV/c²), yet the tau remains a ' +
+      'lepton, while the pion (about 0.14 GeV/c², far lighter than the tau) remains a hadron. Classification ' +
+      'is based on which force governs the particle\'s interactions and its internal quark structure (or ' +
+      'lack of one) — leptons do not feel the strong force and have no internal quark structure; hadrons are ' +
+      'built from quarks and do feel the strong force. Mass simply plays no role in the category at all.',
+    targetedMisconceptions: [`${PCLS}:MC-3`],
+    source: `${PCLS_SRC} — Section 4 MC-3 (mass is irrelevant to hadron/lepton classification)`,
+  },
+]
+
+const PCLS_PROBES: SeedProbe[] = [
+  {
+    conceptId: PCLS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is a pion a baryon? Is it a hadron?',
+    choices: [
+      { text: 'It is a hadron but NOT a baryon — the pion is a meson (a quark-antiquark pair); baryons are only one hadron sub-category (three-quark combinations like the proton and neutron)', isCorrect: true },
+      { text: 'Hadron and baryon mean the same thing, so if the pion is a hadron it must also be a baryon', isCorrect: false, misconceptionId: `${PCLS}:MC-2` },
+    ],
+    correctValue: 'hadron, not a baryon — it is a meson',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PCLS}:MC-2`],
+    source: `${PCLS_SRC} — Section 4 MC-2 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: PCLS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The tau lepton is heavier than the proton. Does that mean the tau is actually a hadron?',
+    choices: [
+      { text: 'No — mass plays no role in hadron/lepton classification; the tau has no internal quark structure and does not feel the strong force, so it remains a lepton regardless of its mass', isCorrect: true },
+      { text: 'Yes — since the tau is heavier than the proton, and heavier particles are hadrons, the tau should be reclassified as a hadron', isCorrect: false, misconceptionId: `${PCLS}:MC-3` },
+    ],
+    correctValue: 'no, the tau remains a lepton — mass is irrelevant to the classification',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PCLS}:MC-3`],
+    source: `${PCLS_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.particle.antimatter ────────────────────────────────────────────────
+const ANTI = 'phys.particle.antimatter'
+const ANTI_SRC = 'docs/curriculum/blueprints/phys.particle.antimatter.md'
+
+const ANTI_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ANTI,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Antimatter is NOT "the opposite of matter in every respect" — the everyday meaning of "anti-" as a ' +
+      'total reversal invites the assumption that antimatter must have negative mass, but mass never flips ' +
+      'sign between a particle and its antiparticle. A positron (the electron\'s antiparticle) has exactly ' +
+      'the same positive mass as the electron; only charge (and other internal quantum numbers) reverses ' +
+      'sign. When a positron and electron collide, the total mass-energy involved is positive, never negative ' +
+      'or zero — it converts into photon energy via E=mc², it does not vanish.',
+    targetedMisconceptions: [`${ANTI}:MC-1`, `${ANTI}:MC-2`],
+    source: `${ANTI_SRC} — Section 4 MC-1 (mass never reverses sign) + MC-2 (annihilation converts, does not destroy)`,
+  },
+  {
+    conceptId: ANTI,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The proton is NOT the antiparticle of the electron, even though they carry opposite electric charge — ' +
+      'opposite charge is the most visually obvious antiparticle-defining property, so it is tempting to ' +
+      'generalize "oppositely charged pair" straight into "antiparticle pair," but a true particle-antiparticle ' +
+      'pair must ALSO match exactly in mass (and every other internal quantum number, only with reversed ' +
+      'sign). The proton is roughly 1836 times heavier than the electron — they fail the mass-matching test ' +
+      'completely. The electron\'s actual antiparticle is the positron: identical mass, opposite charge.',
+    targetedMisconceptions: [`${ANTI}:MC-3`],
+    source: `${ANTI_SRC} — Section 4 MC-3 (antiparticle pairs require mass-matching, not just opposite charge)`,
+  },
+]
+
+const ANTI_PROBES: SeedProbe[] = [
+  {
+    conceptId: ANTI,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If a positron and electron collided, would the total mass-energy involved be positive, negative, or zero?',
+    choices: [
+      { text: 'Positive — mass never reverses sign for antimatter; the collision converts their (positive) rest-mass energy into photon energy, it does not destroy or negate it', isCorrect: true },
+      { text: 'Zero — antimatter has negative mass, so it exactly cancels the electron\'s positive mass, leaving nothing', isCorrect: false, misconceptionId: `${ANTI}:MC-1` },
+    ],
+    correctValue: 'positive — converted into photon energy, never negated',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ANTI}:MC-1`],
+    source: `${ANTI_SRC} — Section 4 MC-1 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: ANTI,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is the proton the antiparticle of the electron, since they have opposite charge?',
+    choices: [
+      { text: 'No — a true antiparticle pair must match exactly in mass with only charge (and other quantum numbers) reversed; the proton is about 1836 times heavier than the electron, so it fails the mass-matching test', isCorrect: true },
+      { text: 'Yes — opposite electric charge is the defining property of an antiparticle pair, and the proton and electron have opposite charge', isCorrect: false, misconceptionId: `${ANTI}:MC-3` },
+    ],
+    correctValue: 'no — the electron\'s antiparticle is the positron, not the proton',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ANTI}:MC-3`],
+    source: `${ANTI_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.particle.quarks ────────────────────────────────────────────────────
+const QRK = 'phys.particle.quarks'
+const QRK_SRC = 'docs/curriculum/blueprints/phys.particle.quarks.md'
+
+const QRK_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: QRK,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'No accelerator, however powerful, will ever isolate a single free quark — this is confinement, and it ' +
+      'breaks the everyday intuition that "more energy eventually separates things." For atoms or molecules, ' +
+      'the binding force weakens with distance, so enough energy does pull the pieces apart. Quark binding ' +
+      'does the opposite: the confining force GROWS with separation, like an ever-stretching elastic band. ' +
+      'Pull two quarks apart far enough and the stored energy in that stretching "string" becomes large enough ' +
+      'to spontaneously create a new quark-antiquark pair out of the vacuum — snapping the string into two ' +
+      'shorter, still-confined pieces rather than ever releasing one free quark.',
+    targetedMisconceptions: [`${QRK}:MC-1`],
+    source: `${QRK_SRC} — Section 4 MC-1 (confinement: binding force grows, not weakens, with distance)`,
+  },
+  {
+    conceptId: QRK,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Quarks genuinely carry fractional electric charge (+⅔e or −⅓e depending on flavor) — but this ' +
+      'fractional charge is never independently, directly measurable sitting alone in a detector, precisely ' +
+      'because confinement means quarks are never free. Every observable hadron is built from a combination ' +
+      'of quarks whose fractional charges always sum to a whole-number multiple of e (a proton\'s uud = ' +
+      '⅔+⅔−⅓ = +1e exactly). And of the six quark flavors (up, down, charm, strange, top, bottom), only up ' +
+      'and down are stable and common at everyday energy scales — charm, strange, top, and bottom quarks ' +
+      'require high-energy production and decay away almost instantly; they are not lurking inside the atoms ' +
+      'in ordinary matter around us right now.',
+    targetedMisconceptions: [`${QRK}:MC-2`, `${QRK}:MC-3`],
+    source: `${QRK_SRC} — Section 4 MC-2 (fractional charge never independently measured) + MC-3 (only up/down are common in everyday matter)`,
+  },
+]
+
+const QRK_PROBES: SeedProbe[] = [
+  {
+    conceptId: QRK,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If you had an arbitrarily powerful particle accelerator, could you eventually pull a single quark out of a proton and study it alone?',
+    choices: [
+      { text: 'No — confinement means the binding force between quarks grows with separation; pulling them apart far enough creates a new quark-antiquark pair from the vacuum instead of ever releasing one free quark', isCorrect: true },
+      { text: 'Yes — with enough energy, any bound system can eventually be separated into its individual parts, the same way enough energy separates atoms or molecules', isCorrect: false, misconceptionId: `${QRK}:MC-1` },
+    ],
+    correctValue: 'no — confinement prevents any free quark from ever being isolated',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${QRK}:MC-1`],
+    source: `${QRK_SRC} — Section 4 MC-1 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: QRK,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is there a strange quark or a top quark inside the atoms in this table right now?',
+    choices: [
+      { text: 'No — only up and down quarks are stable and common at everyday energy scales; strange, top, charm, and bottom quarks require high-energy production and decay away almost instantly', isCorrect: true },
+      { text: 'Yes — since matter is made of quarks and there are six flavors, all six should be present in roughly equal amounts in ordinary matter', isCorrect: false, misconceptionId: `${QRK}:MC-3` },
+    ],
+    correctValue: 'no — only up and down quarks make up everyday matter',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${QRK}:MC-3`],
+    source: `${QRK_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -38762,6 +39052,10 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...ISNG_EXPLANATIONS,
   ...MCAR_EXPLANATIONS,
   ...QTUN_EXPLANATIONS,
+  ...FRC4_EXPLANATIONS,
+  ...PCLS_EXPLANATIONS,
+  ...ANTI_EXPLANATIONS,
+  ...QRK_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -39236,4 +39530,8 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...ISNG_PROBES,
   ...MCAR_PROBES,
   ...QTUN_PROBES,
+  ...FRC4_PROBES,
+  ...PCLS_PROBES,
+  ...ANTI_PROBES,
+  ...QRK_PROBES,
 ]
