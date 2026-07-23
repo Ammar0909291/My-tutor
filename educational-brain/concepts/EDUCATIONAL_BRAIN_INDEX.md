@@ -16,7 +16,6 @@ this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
 ## mathematics (908 concepts, 37 READY)
-
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -928,8 +927,7 @@ its subject KG.
 | trig | `math.trig.trig-identities` | Trigonometric Identities | Yes | No | — | MISSING |
 | trig | `math.trig.unit-circle` | Unit Circle | Yes | No | — | MISSING |
 
-## physics (238 concepts, 179 READY)
-
+## physics (238 concepts, 215 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | astro | `phys.astro.black-holes` | Black Holes and Schwarzschild Radius | Yes | No | — | MISSING |
@@ -937,7 +935,7 @@ its subject KG.
 | astro | `phys.astro.dark-matter` | Dark Matter and Dark Energy | Yes | No | — | MISSING |
 | astro | `phys.astro.gravitational-waves` | Gravitational Waves | Yes | No | — | MISSING |
 | astro | `phys.astro.stellar-evolution` | Stellar Evolution and End States | Yes | No | — | MISSING |
-| astro | `phys.astro.stellar-structure` | Stellar Structure and the Main Sequence | Yes | No | — | MISSING |
+| astro | `phys.astro.stellar-structure` | Stellar Structure and the Main Sequence | Yes | Yes | `educational-brain/concepts/physics/phys.astro.stellar-structure.md` | READY |
 | em | `phys.em.ac-basics` | Alternating Current: Peak and RMS Values | Yes | Yes | `educational-brain/concepts/physics/phys.em.ac-basics.md` | READY |
 | em | `phys.em.amperes-law` | Ampere's Circuital Law | Yes | Yes | `educational-brain/concepts/physics/phys.em.amperes-law.md` | READY |
 | em | `phys.em.biot-savart` | Biot-Savart Law | Yes | Yes | `educational-brain/concepts/physics/phys.em.biot-savart.md` | READY |
@@ -986,7 +984,7 @@ its subject KG.
 | mech | `phys.mech.angular-momentum` | Angular Momentum | Yes | Yes | `educational-brain/concepts/physics/phys.mech.angular-momentum.md` | READY |
 | mech | `phys.mech.bernoulli` | Bernoulli's Equation and Fluid Flow | Yes | Yes | `educational-brain/concepts/physics/phys.mech.bernoulli.md` | READY |
 | mech | `phys.mech.buoyancy` | Buoyancy and Archimedes' Principle | Yes | Yes | `educational-brain/concepts/physics/phys.mech.buoyancy.md` | READY |
-| mech | `phys.mech.canonical-transformations` | Canonical Transformations and Generating Functions | Yes | No | — | MISSING |
+| mech | `phys.mech.canonical-transformations` | Canonical Transformations and Generating Functions | Yes | Yes | `educational-brain/concepts/physics/phys.mech.canonical-transformations.md` | READY |
 | mech | `phys.mech.center-of-mass` | Center of Mass | Yes | Yes | `educational-brain/concepts/physics/phys.mech.center-of-mass.md` | READY |
 | mech | `phys.mech.circular-motion` | Uniform Circular Motion | Yes | Yes | `educational-brain/concepts/physics/phys.mech.circular-motion.md` | READY |
 | mech | `phys.mech.collisions-elastic` | Elastic Collisions | Yes | Yes | `educational-brain/concepts/physics/phys.mech.collisions-elastic.md` | READY |
@@ -1006,7 +1004,7 @@ its subject KG.
 | mech | `phys.mech.generalized-coordinates` | Generalized Coordinates and Configuration Space | Yes | Yes | `educational-brain/concepts/physics/phys.mech.generalized-coordinates.md` | READY |
 | mech | `phys.mech.gravitational-field` | Gravitational Field and Field Lines | Yes | Yes | `educational-brain/concepts/physics/phys.mech.gravitational-field.md` | READY |
 | mech | `phys.mech.gravitational-potential` | Gravitational Potential Energy | Yes | Yes | `educational-brain/concepts/physics/phys.mech.gravitational-potential.md` | READY |
-| mech | `phys.mech.hamilton-jacobi-equation` | Hamilton-Jacobi Equation and Action-Angle Variables | Yes | No | — | MISSING |
+| mech | `phys.mech.hamilton-jacobi-equation` | Hamilton-Jacobi Equation and Action-Angle Variables | Yes | Yes | `educational-brain/concepts/physics/phys.mech.hamilton-jacobi-equation.md` | READY |
 | mech | `phys.mech.hamiltonian` | The Hamiltonian and Legendre Transform | Yes | Yes | `educational-brain/concepts/physics/phys.mech.hamiltonian.md` | READY |
 | mech | `phys.mech.hamiltons-equations` | Hamilton's Equations of Motion | Yes | Yes | `educational-brain/concepts/physics/phys.mech.hamiltons-equations.md` | READY |
 | mech | `phys.mech.hookes-law` | Hooke's Law and Spring Force | Yes | Yes | `educational-brain/concepts/physics/phys.mech.hookes-law.md` | READY |
@@ -1042,24 +1040,24 @@ its subject KG.
 | mech | `phys.mech.work` | Work Done by a Force | Yes | Yes | `educational-brain/concepts/physics/phys.mech.work.md` | READY |
 | mech | `phys.mech.work-energy-theorem` | Work-Energy Theorem | Yes | Yes | `educational-brain/concepts/physics/phys.mech.work-energy-theorem.md` | READY |
 | mod | `phys.mod.atomic-spectra` | Atomic Spectra and Energy Levels | Yes | Yes | `educational-brain/concepts/physics/phys.mod.atomic-spectra.md` | READY |
-| mod | `phys.mod.binding-energy` | Nuclear Binding Energy and Mass Defect | Yes | No | — | MISSING |
+| mod | `phys.mod.binding-energy` | Nuclear Binding Energy and Mass Defect | Yes | Yes | `educational-brain/concepts/physics/phys.mod.binding-energy.md` | READY |
 | mod | `phys.mod.bohr-model` | Bohr Model of the Hydrogen Atom | Yes | Yes | `educational-brain/concepts/physics/phys.mod.bohr-model.md` | READY |
 | mod | `phys.mod.compton-effect` | Compton Scattering | Yes | Yes | `educational-brain/concepts/physics/phys.mod.compton-effect.md` | READY |
 | mod | `phys.mod.de-broglie` | de Broglie Hypothesis — Matter Waves | Yes | Yes | `educational-brain/concepts/physics/phys.mod.de-broglie.md` | READY |
-| mod | `phys.mod.diode-rectification` | Diode Rectifying Behavior | No | No | — | MISSING |
-| mod | `phys.mod.energy-bands` | Energy Bands in Solids | No | No | — | MISSING |
-| mod | `phys.mod.extrinsic-semiconductors` | Extrinsic Semiconductors: Doping and Carrier Types | No | No | — | MISSING |
-| mod | `phys.mod.intrinsic-semiconductors` | Intrinsic Semiconductors | No | No | — | MISSING |
-| mod | `phys.mod.nuclear-fission` | Nuclear Fission and Chain Reactions | Yes | No | — | MISSING |
-| mod | `phys.mod.nuclear-fusion` | Nuclear Fusion and Stellar Energy | Yes | No | — | MISSING |
-| mod | `phys.mod.nuclear-models` | Nuclear Models: Shell Model | Yes | No | — | MISSING |
-| mod | `phys.mod.nuclear-reactions` | Nuclear Reactions and Q-Value | Yes | No | — | MISSING |
+| mod | `phys.mod.diode-rectification` | Diode Rectifying Behavior | Yes | No | — | MISSING |
+| mod | `phys.mod.energy-bands` | Energy Bands in Solids | Yes | No | — | MISSING |
+| mod | `phys.mod.extrinsic-semiconductors` | Extrinsic Semiconductors: Doping and Carrier Types | Yes | No | — | MISSING |
+| mod | `phys.mod.intrinsic-semiconductors` | Intrinsic Semiconductors | Yes | No | — | MISSING |
+| mod | `phys.mod.nuclear-fission` | Nuclear Fission and Chain Reactions | Yes | Yes | `educational-brain/concepts/physics/phys.mod.nuclear-fission.md` | READY |
+| mod | `phys.mod.nuclear-fusion` | Nuclear Fusion and Stellar Energy | Yes | Yes | `educational-brain/concepts/physics/phys.mod.nuclear-fusion.md` | READY |
+| mod | `phys.mod.nuclear-models` | Nuclear Models: Shell Model | Yes | Yes | `educational-brain/concepts/physics/phys.mod.nuclear-models.md` | READY |
+| mod | `phys.mod.nuclear-reactions` | Nuclear Reactions and Q-Value | Yes | Yes | `educational-brain/concepts/physics/phys.mod.nuclear-reactions.md` | READY |
 | mod | `phys.mod.photoelectric-effect` | Photoelectric Effect | Yes | Yes | `educational-brain/concepts/physics/phys.mod.photoelectric-effect.md` | READY |
 | mod | `phys.mod.photons` | Photons and Quantization of Light | Yes | Yes | `educational-brain/concepts/physics/phys.mod.photons.md` | READY |
-| mod | `phys.mod.pn-junction` | The p-n Junction | No | No | — | MISSING |
+| mod | `phys.mod.pn-junction` | The p-n Junction | Yes | No | — | MISSING |
 | mod | `phys.mod.radioactive-decay` | Radioactive Decay Law and Half-Life | Yes | Yes | `educational-brain/concepts/physics/phys.mod.radioactive-decay.md` | READY |
 | mod | `phys.mod.radioactivity` | Radioactivity: Alpha, Beta, Gamma Decay | Yes | Yes | `educational-brain/concepts/physics/phys.mod.radioactivity.md` | READY |
-| mod | `phys.mod.semiconductor-classification` | Conductors, Insulators, and Semiconductors | No | No | — | MISSING |
+| mod | `phys.mod.semiconductor-classification` | Conductors, Insulators, and Semiconductors | Yes | No | — | MISSING |
 | mod | `phys.mod.wave-particle-duality` | Wave-Particle Duality | Yes | Yes | `educational-brain/concepts/physics/phys.mod.wave-particle-duality.md` | READY |
 | mod | `phys.mod.x-rays` | X-Rays and Their Properties | Yes | Yes | `educational-brain/concepts/physics/phys.mod.x-rays.md` | READY |
 | opt | `phys.opt.brewsters-law` | Brewster's Law and Malus's Law | Yes | Yes | `educational-brain/concepts/physics/phys.opt.brewsters-law.md` | READY |
@@ -1077,63 +1075,63 @@ its subject KG.
 | opt | `phys.opt.total-internal-reflection` | Total Internal Reflection and Critical Angle | Yes | Yes | `educational-brain/concepts/physics/phys.opt.total-internal-reflection.md` | READY |
 | opt | `phys.opt.wave-optics` | Introduction to Wave Optics | Yes | Yes | `educational-brain/concepts/physics/phys.opt.wave-optics.md` | READY |
 | opt | `phys.opt.youngs-experiment` | Young's Double-Slit Experiment | Yes | Yes | `educational-brain/concepts/physics/phys.opt.youngs-experiment.md` | READY |
-| particle | `phys.particle.accelerators-detectors` | Particle Accelerators and Detectors | No | No | — | MISSING |
-| particle | `phys.particle.antimatter` | Antimatter and Antiparticles | No | No | — | MISSING |
-| particle | `phys.particle.conservation-laws` | Conservation Laws in Particle Interactions | No | No | — | MISSING |
-| particle | `phys.particle.electroweak-unification` | Electroweak Unification | No | No | — | MISSING |
-| particle | `phys.particle.feynman-diagrams` | Feynman Diagrams (Qualitative) | No | No | — | MISSING |
-| particle | `phys.particle.four-forces` | Four Fundamental Forces | No | No | — | MISSING |
-| particle | `phys.particle.gauge-bosons` | Gauge Bosons and Force Carriers | No | No | — | MISSING |
-| particle | `phys.particle.hadron-quark-model` | Quark Model of Hadrons: Baryons and Mesons | No | No | — | MISSING |
-| particle | `phys.particle.higgs-mechanism` | The Higgs Mechanism | No | No | — | MISSING |
-| particle | `phys.particle.leptons` | Leptons | No | No | — | MISSING |
-| particle | `phys.particle.neutrinos` | Neutrinos | No | No | — | MISSING |
-| particle | `phys.particle.particle-classification` | Particle Classification: Hadrons and Leptons | No | No | — | MISSING |
-| particle | `phys.particle.quarks` | Quarks | No | No | — | MISSING |
-| particle | `phys.particle.standard-model` | The Standard Model | No | No | — | MISSING |
-| particle | `phys.particle.strong-interaction` | The Strong Interaction and Color Charge | No | No | — | MISSING |
-| particle | `phys.particle.weak-interaction` | The Weak Interaction | No | No | — | MISSING |
-| qm | `phys.qm.angular-momentum-addition` | Addition of Angular Momenta and Clebsch-Gordan Coefficients | Yes | No | — | MISSING |
-| qm | `phys.qm.density-matrix` | Density Matrix and Mixed Quantum States | Yes | No | — | MISSING |
-| qm | `phys.qm.harmonic-oscillator-qm` | Quantum Harmonic Oscillator | Yes | No | — | MISSING |
-| qm | `phys.qm.hydrogen-atom-qm` | Quantum Treatment of Hydrogen Atom | Yes | No | — | MISSING |
-| qm | `phys.qm.identical-particles` | Identical Particles and the Symmetrization Postulate | Yes | No | — | MISSING |
-| qm | `phys.qm.operators` | Quantum Operators and Observables | Yes | No | — | MISSING |
-| qm | `phys.qm.particle-in-box` | Particle in an Infinite Square Well | Yes | No | — | MISSING |
-| qm | `phys.qm.pauli-exclusion` | Pauli Exclusion Principle | Yes | No | — | MISSING |
-| qm | `phys.qm.perturbation-theory` | Time-Independent Perturbation Theory | Yes | No | — | MISSING |
-| qm | `phys.qm.quantum-tunneling` | Quantum Tunneling | Yes | No | — | MISSING |
+| particle | `phys.particle.accelerators-detectors` | Particle Accelerators and Detectors | Yes | No | — | MISSING |
+| particle | `phys.particle.antimatter` | Antimatter and Antiparticles | Yes | Yes | `educational-brain/concepts/physics/phys.particle.antimatter.md` | READY |
+| particle | `phys.particle.conservation-laws` | Conservation Laws in Particle Interactions | Yes | No | — | MISSING |
+| particle | `phys.particle.electroweak-unification` | Electroweak Unification | Yes | No | — | MISSING |
+| particle | `phys.particle.feynman-diagrams` | Feynman Diagrams (Qualitative) | Yes | No | — | MISSING |
+| particle | `phys.particle.four-forces` | Four Fundamental Forces | Yes | Yes | `educational-brain/concepts/physics/phys.particle.four-forces.md` | READY |
+| particle | `phys.particle.gauge-bosons` | Gauge Bosons and Force Carriers | Yes | Yes | `educational-brain/concepts/physics/phys.particle.gauge-bosons.md` | READY |
+| particle | `phys.particle.hadron-quark-model` | Quark Model of Hadrons: Baryons and Mesons | Yes | No | — | MISSING |
+| particle | `phys.particle.higgs-mechanism` | The Higgs Mechanism | Yes | No | — | MISSING |
+| particle | `phys.particle.leptons` | Leptons | Yes | Yes | `educational-brain/concepts/physics/phys.particle.leptons.md` | READY |
+| particle | `phys.particle.neutrinos` | Neutrinos | Yes | No | — | MISSING |
+| particle | `phys.particle.particle-classification` | Particle Classification: Hadrons and Leptons | Yes | Yes | `educational-brain/concepts/physics/phys.particle.particle-classification.md` | READY |
+| particle | `phys.particle.quarks` | Quarks | Yes | Yes | `educational-brain/concepts/physics/phys.particle.quarks.md` | READY |
+| particle | `phys.particle.standard-model` | The Standard Model | Yes | No | — | MISSING |
+| particle | `phys.particle.strong-interaction` | The Strong Interaction and Color Charge | Yes | No | — | MISSING |
+| particle | `phys.particle.weak-interaction` | The Weak Interaction | Yes | No | — | MISSING |
+| qm | `phys.qm.angular-momentum-addition` | Addition of Angular Momenta and Clebsch-Gordan Coefficients | Yes | Yes | `educational-brain/concepts/physics/phys.qm.angular-momentum-addition.md` | READY |
+| qm | `phys.qm.density-matrix` | Density Matrix and Mixed Quantum States | Yes | Yes | `educational-brain/concepts/physics/phys.qm.density-matrix.md` | READY |
+| qm | `phys.qm.harmonic-oscillator-qm` | Quantum Harmonic Oscillator | Yes | Yes | `educational-brain/concepts/physics/phys.qm.harmonic-oscillator-qm.md` | READY |
+| qm | `phys.qm.hydrogen-atom-qm` | Quantum Treatment of Hydrogen Atom | Yes | Yes | `educational-brain/concepts/physics/phys.qm.hydrogen-atom-qm.md` | READY |
+| qm | `phys.qm.identical-particles` | Identical Particles and the Symmetrization Postulate | Yes | Yes | `educational-brain/concepts/physics/phys.qm.identical-particles.md` | READY |
+| qm | `phys.qm.operators` | Quantum Operators and Observables | Yes | Yes | `educational-brain/concepts/physics/phys.qm.operators.md` | READY |
+| qm | `phys.qm.particle-in-box` | Particle in an Infinite Square Well | Yes | Yes | `educational-brain/concepts/physics/phys.qm.particle-in-box.md` | READY |
+| qm | `phys.qm.pauli-exclusion` | Pauli Exclusion Principle | Yes | Yes | `educational-brain/concepts/physics/phys.qm.pauli-exclusion.md` | READY |
+| qm | `phys.qm.perturbation-theory` | Time-Independent Perturbation Theory | Yes | Yes | `educational-brain/concepts/physics/phys.qm.perturbation-theory.md` | READY |
+| qm | `phys.qm.quantum-tunneling` | Quantum Tunneling | Yes | Yes | `educational-brain/concepts/physics/phys.qm.quantum-tunneling.md` | READY |
 | qm | `phys.qm.s-matrix-basics` | S-Matrix and Scattering Amplitudes | Yes | No | — | MISSING |
-| qm | `phys.qm.scattering-theory-born-approximation` | Scattering Theory and the Born Approximation | Yes | No | — | MISSING |
+| qm | `phys.qm.scattering-theory-born-approximation` | Scattering Theory and the Born Approximation | Yes | Yes | `educational-brain/concepts/physics/phys.qm.scattering-theory-born-approximation.md` | READY |
 | qm | `phys.qm.schrodinger-equation` | Time-Dependent Schrödinger Equation | Yes | Yes | `educational-brain/concepts/physics/phys.qm.schrodinger-equation.md` | READY |
-| qm | `phys.qm.selection-rules` | Selection Rules and Transition Probabilities | Yes | No | — | MISSING |
-| qm | `phys.qm.spin` | Electron Spin and the Stern-Gerlach Experiment | Yes | No | — | MISSING |
+| qm | `phys.qm.selection-rules` | Selection Rules and Transition Probabilities | Yes | Yes | `educational-brain/concepts/physics/phys.qm.selection-rules.md` | READY |
+| qm | `phys.qm.spin` | Electron Spin and the Stern-Gerlach Experiment | Yes | Yes | `educational-brain/concepts/physics/phys.qm.spin.md` | READY |
 | qm | `phys.qm.uncertainty-principle` | Heisenberg's Uncertainty Principle | Yes | Yes | `educational-brain/concepts/physics/phys.qm.uncertainty-principle.md` | READY |
-| qm | `phys.qm.variational-method` | Variational Method and Variational Principle | Yes | No | — | MISSING |
+| qm | `phys.qm.variational-method` | Variational Method and Variational Principle | Yes | Yes | `educational-brain/concepts/physics/phys.qm.variational-method.md` | READY |
 | qm | `phys.qm.wave-function` | Wave Function and Probability Interpretation | Yes | Yes | `educational-brain/concepts/physics/phys.qm.wave-function.md` | READY |
 | qm | `phys.qm.wkb-approximation` | WKB Approximation (Semiclassical Limit) | Yes | No | — | MISSING |
 | rel | `phys.rel.length-contraction` | Length Contraction | Yes | Yes | `educational-brain/concepts/physics/phys.rel.length-contraction.md` | READY |
 | rel | `phys.rel.lorentz-transform` | Lorentz Transformations | Yes | Yes | `educational-brain/concepts/physics/phys.rel.lorentz-transform.md` | READY |
-| rel | `phys.rel.mass-energy` | Mass-Energy Equivalence: E=mc² | Yes | No | — | MISSING |
+| rel | `phys.rel.mass-energy` | Mass-Energy Equivalence: E=mc² | Yes | Yes | `educational-brain/concepts/physics/phys.rel.mass-energy.md` | READY |
 | rel | `phys.rel.postulates` | Postulates of Special Relativity | Yes | Yes | `educational-brain/concepts/physics/phys.rel.postulates.md` | READY |
 | rel | `phys.rel.relativistic-momentum` | Relativistic Momentum and Energy | Yes | Yes | `educational-brain/concepts/physics/phys.rel.relativistic-momentum.md` | READY |
 | rel | `phys.rel.simultaneity` | Relativity of Simultaneity | Yes | Yes | `educational-brain/concepts/physics/phys.rel.simultaneity.md` | READY |
-| rel | `phys.rel.spacetime` | Spacetime Interval and Four-Vectors | Yes | No | — | MISSING |
+| rel | `phys.rel.spacetime` | Spacetime Interval and Four-Vectors | Yes | Yes | `educational-brain/concepts/physics/phys.rel.spacetime.md` | READY |
 | rel | `phys.rel.time-dilation` | Time Dilation | Yes | Yes | `educational-brain/concepts/physics/phys.rel.time-dilation.md` | READY |
 | stat | `phys.stat.boltzmann-factor` | Boltzmann Factor and Statistical Weight | Yes | Yes | `educational-brain/concepts/physics/phys.stat.boltzmann-factor.md` | READY |
 | stat | `phys.stat.bose-einstein` | Bose-Einstein Statistics | Yes | Yes | `educational-brain/concepts/physics/phys.stat.bose-einstein.md` | READY |
-| stat | `phys.stat.chemical-potential` | Chemical Potential and Thermodynamic Equilibrium | Yes | No | — | MISSING |
+| stat | `phys.stat.chemical-potential` | Chemical Potential and Thermodynamic Equilibrium | Yes | Yes | `educational-brain/concepts/physics/phys.stat.chemical-potential.md` | READY |
 | stat | `phys.stat.entropy-statistical` | Statistical Definition of Entropy | Yes | Yes | `educational-brain/concepts/physics/phys.stat.entropy-statistical.md` | READY |
-| stat | `phys.stat.fermi-dirac` | Fermi-Dirac Statistics | Yes | No | — | MISSING |
+| stat | `phys.stat.fermi-dirac` | Fermi-Dirac Statistics | Yes | Yes | `educational-brain/concepts/physics/phys.stat.fermi-dirac.md` | READY |
 | stat | `phys.stat.fluctuations-correlations` | Fluctuations, Response Functions, and Correlations | Yes | Yes | `educational-brain/concepts/physics/phys.stat.fluctuations-correlations.md` | READY |
 | stat | `phys.stat.free-energy` | Helmholtz and Gibbs Free Energy | Yes | Yes | `educational-brain/concepts/physics/phys.stat.free-energy.md` | READY |
 | stat | `phys.stat.grand-canonical-ensemble` | Grand Canonical Ensemble | Yes | Yes | `educational-brain/concepts/physics/phys.stat.grand-canonical-ensemble.md` | READY |
-| stat | `phys.stat.ising-model` | Ising Model | Yes | No | — | MISSING |
+| stat | `phys.stat.ising-model` | Ising Model | Yes | Yes | `educational-brain/concepts/physics/phys.stat.ising-model.md` | READY |
 | stat | `phys.stat.maxwell-boltzmann` | Maxwell-Boltzmann Speed Distribution | Yes | Yes | `educational-brain/concepts/physics/phys.stat.maxwell-boltzmann.md` | READY |
-| stat | `phys.stat.monte-carlo-basics` | Monte Carlo Methods in Statistical Physics | Yes | No | — | MISSING |
+| stat | `phys.stat.monte-carlo-basics` | Monte Carlo Methods in Statistical Physics | Yes | Yes | `educational-brain/concepts/physics/phys.stat.monte-carlo-basics.md` | READY |
 | stat | `phys.stat.partition-function` | Partition Function | Yes | Yes | `educational-brain/concepts/physics/phys.stat.partition-function.md` | READY |
-| stat | `phys.stat.phase-transitions` | Phase Transitions and Landau Mean-Field Theory | Yes | No | — | MISSING |
-| stat | `phys.stat.phase-transitions-critical-phenomena` | Critical Phenomena, Scaling Laws, and Universality | Yes | No | — | MISSING |
+| stat | `phys.stat.phase-transitions` | Phase Transitions and Landau Mean-Field Theory | Yes | Yes | `educational-brain/concepts/physics/phys.stat.phase-transitions.md` | READY |
+| stat | `phys.stat.phase-transitions-critical-phenomena` | Critical Phenomena, Scaling Laws, and Universality | Yes | Yes | `educational-brain/concepts/physics/phys.stat.phase-transitions-critical-phenomena.md` | READY |
 | stat | `phys.stat.probability-basics` | Probability Distributions in Physics | Yes | Yes | `educational-brain/concepts/physics/phys.stat.probability-basics.md` | READY |
 | therm | `phys.therm.calorimetry` | Calorimetry | Yes | Yes | `educational-brain/concepts/physics/phys.therm.calorimetry.md` | READY |
 | therm | `phys.therm.carnot-cycle` | Carnot Cycle | Yes | Yes | `educational-brain/concepts/physics/phys.therm.carnot-cycle.md` | READY |
@@ -1172,7 +1170,6 @@ its subject KG.
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
 ## english (216 concepts, 3 READY)
-
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1392,8 +1389,7 @@ its subject KG.
 | writing | `eng.writing.topic-sentences` | Topic Sentences | Yes | No | — | MISSING |
 | writing | `eng.writing.transitions-and-cohesion` | Transitions and Cohesion | Yes | No | — | MISSING |
 
-## chemistry (186 concepts, 32 READY)
-
+## chemistry (186 concepts, 89 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | alc | `chem.alc.alcohols` | Alcohols | No | No | — | MISSING |
@@ -1402,19 +1398,19 @@ its subject KG.
 | alc | `chem.alc.ethers` | Ethers | No | No | — | MISSING |
 | alc | `chem.alc.phenols` | Phenols | No | No | — | MISSING |
 | alc | `chem.alc.protection` | Protecting Group Strategy | No | No | — | MISSING |
-| anal | `chem.anal.chromatography` | Chromatography | No | No | — | MISSING |
-| anal | `chem.anal.gravimetric` | Gravimetric Analysis | No | No | — | MISSING |
+| anal | `chem.anal.chromatography` | Chromatography | No | Yes | `educational-brain/concepts/chemistry/chem.anal.chromatography.md` | READY |
+| anal | `chem.anal.gravimetric` | Gravimetric Analysis | No | Yes | `educational-brain/concepts/chemistry/chem.anal.gravimetric.md` | READY |
 | anal | `chem.anal.spectroscopy` | Spectroscopic Methods | No | No | — | MISSING |
 | anal | `chem.anal.volumetric` | Volumetric Analysis | No | No | — | MISSING |
 | atomic | `chem.atomic.atomic-spectra` | Atomic Spectra | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.atomic-spectra.md` | READY |
 | atomic | `chem.atomic.atomic-theory` | Atomic Theory | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.atomic-theory.md` | READY |
 | atomic | `chem.atomic.bohr-model` | Bohr Model of the Atom | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.bohr-model.md` | READY |
 | atomic | `chem.atomic.electromagnetic-radiation` | Electromagnetic Radiation | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.electromagnetic-radiation.md` | READY |
-| atomic | `chem.atomic.electronic-config` | Electronic Configuration | No | No | — | MISSING |
-| atomic | `chem.atomic.orbitals` | Atomic Orbitals | No | No | — | MISSING |
+| atomic | `chem.atomic.electronic-config` | Electronic Configuration | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.electronic-config.md` | READY |
+| atomic | `chem.atomic.orbitals` | Atomic Orbitals | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.orbitals.md` | READY |
 | atomic | `chem.atomic.photoelectric-effect` | Photoelectric Effect and Dual Nature | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.photoelectric-effect.md` | READY |
-| atomic | `chem.atomic.quantum-mech-model` | Quantum Mechanical Model | No | No | — | MISSING |
-| atomic | `chem.atomic.quantum-numbers` | Quantum Numbers | No | No | — | MISSING |
+| atomic | `chem.atomic.quantum-mech-model` | Quantum Mechanical Model | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.quantum-mech-model.md` | READY |
+| atomic | `chem.atomic.quantum-numbers` | Quantum Numbers | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.quantum-numbers.md` | READY |
 | atomic | `chem.atomic.subatomic-particles` | Subatomic Particles | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.subatomic-particles.md` | READY |
 | bio | `chem.bio.carbohydrates` | Carbohydrates | No | No | — | MISSING |
 | bio | `chem.bio.enzyme-kinetics` | Enzyme Kinetics | No | No | — | MISSING |
@@ -1422,17 +1418,17 @@ its subject KG.
 | bio | `chem.bio.nucleic-acids` | Nucleic Acids | No | No | — | MISSING |
 | bio | `chem.bio.proteins` | Proteins | No | No | — | MISSING |
 | bio | `chem.bio.vitamins` | Vitamins and Hormones | No | No | — | MISSING |
-| bond | `chem.bond.bond-parameters` | Bond Parameters | No | No | — | MISSING |
-| bond | `chem.bond.coordinate-bond` | Coordinate and Dative Bonding | No | No | — | MISSING |
-| bond | `chem.bond.covalent-bonding` | Covalent Bonding | No | No | — | MISSING |
-| bond | `chem.bond.hybridization` | Hybridization | No | No | — | MISSING |
+| bond | `chem.bond.bond-parameters` | Bond Parameters | No | Yes | `educational-brain/concepts/chemistry/chem.bond.bond-parameters.md` | READY |
+| bond | `chem.bond.coordinate-bond` | Coordinate and Dative Bonding | No | Yes | `educational-brain/concepts/chemistry/chem.bond.coordinate-bond.md` | READY |
+| bond | `chem.bond.covalent-bonding` | Covalent Bonding | No | Yes | `educational-brain/concepts/chemistry/chem.bond.covalent-bonding.md` | READY |
+| bond | `chem.bond.hybridization` | Hybridization | No | Yes | `educational-brain/concepts/chemistry/chem.bond.hybridization.md` | READY |
 | bond | `chem.bond.intermolecular` | Intermolecular Forces | No | No | — | MISSING |
-| bond | `chem.bond.ionic-bonding` | Ionic Bonding | No | No | — | MISSING |
-| bond | `chem.bond.metallic-bonding` | Metallic Bonding | No | No | — | MISSING |
+| bond | `chem.bond.ionic-bonding` | Ionic Bonding | No | Yes | `educational-brain/concepts/chemistry/chem.bond.ionic-bonding.md` | READY |
+| bond | `chem.bond.metallic-bonding` | Metallic Bonding | No | Yes | `educational-brain/concepts/chemistry/chem.bond.metallic-bonding.md` | READY |
 | bond | `chem.bond.mo-theory` | Molecular Orbital Theory | No | No | — | MISSING |
 | bond | `chem.bond.polar-molecules` | Polarity and Dipole Moment | No | No | — | MISSING |
-| bond | `chem.bond.resonance` | Resonance Structures | No | No | — | MISSING |
-| bond | `chem.bond.vsepr` | VSEPR Theory | No | No | — | MISSING |
+| bond | `chem.bond.resonance` | Resonance Structures | No | Yes | `educational-brain/concepts/chemistry/chem.bond.resonance.md` | READY |
+| bond | `chem.bond.vsepr` | VSEPR Theory | No | Yes | `educational-brain/concepts/chemistry/chem.bond.vsepr.md` | READY |
 | carb | `chem.carb.aldehydes` | Aldehydes | No | No | — | MISSING |
 | carb | `chem.carb.alpha-reactions` | Alpha-Carbon Reactions | No | No | — | MISSING |
 | carb | `chem.carb.carboxylic` | Carboxylic Acids | No | No | — | MISSING |
@@ -1448,7 +1444,7 @@ its subject KG.
 | coord | `chem.coord.stability` | Stability Constants | No | No | — | MISSING |
 | coord | `chem.coord.werner` | Werner's Theory | No | No | — | MISSING |
 | dblock | `chem.dblock.first-row` | First-Row Transition Metals | No | No | — | MISSING |
-| dblock | `chem.dblock.general` | Transition Metals — General Properties | No | No | — | MISSING |
+| dblock | `chem.dblock.general` | Transition Metals — General Properties | No | Yes | `educational-brain/concepts/chemistry/chem.dblock.general.md` | READY |
 | dblock | `chem.dblock.lanthanides` | Lanthanides and Actinides | No | No | — | MISSING |
 | dblock | `chem.dblock.organometallics` | Organometallic Chemistry | No | No | — | MISSING |
 | dblock | `chem.dblock.oxo-species` | Oxides and Oxyanions of Transition Metals | No | No | — | MISSING |
@@ -1463,19 +1459,19 @@ its subject KG.
 | elect | `chem.elect.standard-electrode` | Standard Electrode Potential | No | No | — | MISSING |
 | env | `chem.env.air-pollution` | Air Pollution | No | Yes | `educational-brain/concepts/chemistry/chem.env.air-pollution.md` | READY |
 | env | `chem.env.atmosphere` | Atmosphere and Composition | No | Yes | `educational-brain/concepts/chemistry/chem.env.atmosphere.md` | READY |
-| env | `chem.env.ozone` | Ozone Depletion | No | No | — | MISSING |
+| env | `chem.env.ozone` | Ozone Depletion | No | Yes | `educational-brain/concepts/chemistry/chem.env.ozone.md` | READY |
 | env | `chem.env.water-soil` | Water and Soil Pollution | No | Yes | `educational-brain/concepts/chemistry/chem.env.water-soil.md` | READY |
-| equil | `chem.equil.acids-bases` | Acid–Base Theories | No | No | — | MISSING |
-| equil | `chem.equil.buffer` | Buffer Solutions | No | No | — | MISSING |
-| equil | `chem.equil.complex-equil` | Complex Ion Equilibria | No | No | — | MISSING |
-| equil | `chem.equil.concept` | Equilibrium Concept | No | No | — | MISSING |
-| equil | `chem.equil.hydrolysis` | Salt Hydrolysis | No | No | — | MISSING |
-| equil | `chem.equil.kc-kp` | Equilibrium Constants Kc and Kp | No | No | — | MISSING |
-| equil | `chem.equil.kw-ph` | Water Ionization and pH | No | No | — | MISSING |
-| equil | `chem.equil.le-chatelier` | Le Chatelier's Principle | No | No | — | MISSING |
-| equil | `chem.equil.solubility` | Solubility Equilibria | No | No | — | MISSING |
-| equil | `chem.equil.titration` | Acid–Base Titrations | No | No | — | MISSING |
-| equil | `chem.equil.weak-acid` | Weak Acid and Base Equilibria | No | No | — | MISSING |
+| equil | `chem.equil.acids-bases` | Acid–Base Theories | No | Yes | `educational-brain/concepts/chemistry/chem.equil.acids-bases.md` | READY |
+| equil | `chem.equil.buffer` | Buffer Solutions | No | Yes | `educational-brain/concepts/chemistry/chem.equil.buffer.md` | READY |
+| equil | `chem.equil.complex-equil` | Complex Ion Equilibria | No | Yes | `educational-brain/concepts/chemistry/chem.equil.complex-equil.md` | READY |
+| equil | `chem.equil.concept` | Equilibrium Concept | No | Yes | `educational-brain/concepts/chemistry/chem.equil.concept.md` | READY |
+| equil | `chem.equil.hydrolysis` | Salt Hydrolysis | No | Yes | `educational-brain/concepts/chemistry/chem.equil.hydrolysis.md` | READY |
+| equil | `chem.equil.kc-kp` | Equilibrium Constants Kc and Kp | No | Yes | `educational-brain/concepts/chemistry/chem.equil.kc-kp.md` | READY |
+| equil | `chem.equil.kw-ph` | Water Ionization and pH | No | Yes | `educational-brain/concepts/chemistry/chem.equil.kw-ph.md` | READY |
+| equil | `chem.equil.le-chatelier` | Le Chatelier's Principle | No | Yes | `educational-brain/concepts/chemistry/chem.equil.le-chatelier.md` | READY |
+| equil | `chem.equil.solubility` | Solubility Equilibria | No | Yes | `educational-brain/concepts/chemistry/chem.equil.solubility.md` | READY |
+| equil | `chem.equil.titration` | Acid–Base Titrations | No | Yes | `educational-brain/concepts/chemistry/chem.equil.titration.md` | READY |
+| equil | `chem.equil.weak-acid` | Weak Acid and Base Equilibria | No | Yes | `educational-brain/concepts/chemistry/chem.equil.weak-acid.md` | READY |
 | found | `chem.found.concentration` | Concentration Units | No | Yes | `educational-brain/concepts/chemistry/chem.found.concentration.md` | READY |
 | found | `chem.found.matter` | Nature of Matter | No | Yes | `educational-brain/concepts/chemistry/chem.found.matter.md` | READY |
 | found | `chem.found.measurement` | Physical Quantities and SI Units | No | Yes | `educational-brain/concepts/chemistry/chem.found.measurement.md` | READY |
@@ -1498,13 +1494,13 @@ its subject KG.
 | hyd | `chem.hyd.conformations` | Conformational Analysis | No | No | — | MISSING |
 | hyd | `chem.hyd.petroleum` | Petroleum Refining | No | No | — | MISSING |
 | hyd | `chem.hyd.polycyclic` | Polycyclic and Heterocyclic Systems | No | No | — | MISSING |
-| kinet | `chem.kinet.arrhenius` | Arrhenius Equation | No | No | — | MISSING |
-| kinet | `chem.kinet.catalysis` | Catalysis | No | No | — | MISSING |
-| kinet | `chem.kinet.integrated-rate` | Integrated Rate Laws | No | No | — | MISSING |
-| kinet | `chem.kinet.mechanism` | Reaction Mechanisms | No | No | — | MISSING |
-| kinet | `chem.kinet.photochemistry` | Photochemical Reactions | No | No | — | MISSING |
+| kinet | `chem.kinet.arrhenius` | Arrhenius Equation | No | Yes | `educational-brain/concepts/chemistry/chem.kinet.arrhenius.md` | READY |
+| kinet | `chem.kinet.catalysis` | Catalysis | No | Yes | `educational-brain/concepts/chemistry/chem.kinet.catalysis.md` | READY |
+| kinet | `chem.kinet.integrated-rate` | Integrated Rate Laws | No | Yes | `educational-brain/concepts/chemistry/chem.kinet.integrated-rate.md` | READY |
+| kinet | `chem.kinet.mechanism` | Reaction Mechanisms | No | Yes | `educational-brain/concepts/chemistry/chem.kinet.mechanism.md` | READY |
+| kinet | `chem.kinet.photochemistry` | Photochemical Reactions | No | Yes | `educational-brain/concepts/chemistry/chem.kinet.photochemistry.md` | READY |
 | kinet | `chem.kinet.rate` | Rate of Reaction | No | Yes | `educational-brain/concepts/chemistry/chem.kinet.rate.md` | READY |
-| kinet | `chem.kinet.rate-law` | Rate Law and Order | No | No | — | MISSING |
+| kinet | `chem.kinet.rate-law` | Rate Law and Order | No | Yes | `educational-brain/concepts/chemistry/chem.kinet.rate-law.md` | READY |
 | nitro | `chem.nitro.amines` | Amines | No | No | — | MISSING |
 | nitro | `chem.nitro.amino-acids` | Amino Acids | No | No | — | MISSING |
 | nitro | `chem.nitro.diazonium` | Diazonium Salts | No | No | — | MISSING |
@@ -1515,49 +1511,49 @@ its subject KG.
 | org | `chem.org.electronic-effects` | Inductive and Mesomeric Effects | No | No | — | MISSING |
 | org | `chem.org.hybridization` | Carbon Hybridization | No | No | — | MISSING |
 | org | `chem.org.isomerism` | Structural and Stereoisomerism | No | No | — | MISSING |
-| org | `chem.org.iupac` | IUPAC Nomenclature | No | No | — | MISSING |
+| org | `chem.org.iupac` | IUPAC Nomenclature | No | Yes | `educational-brain/concepts/chemistry/chem.org.iupac.md` | READY |
 | org | `chem.org.mechanisms` | Organic Reaction Mechanisms | No | No | — | MISSING |
 | org | `chem.org.pericyclic` | Pericyclic Reactions | No | No | — | MISSING |
 | org | `chem.org.purification` | Purification Techniques | No | No | — | MISSING |
 | org | `chem.org.qualitative-analysis` | Qualitative Organic Analysis | No | No | — | MISSING |
 | org | `chem.org.reactive-intermediates` | Reactive Intermediates | No | No | — | MISSING |
 | org | `chem.org.spectroscopy` | Introduction to Spectroscopy | No | No | — | MISSING |
-| pblock | `chem.pblock.group13` | Group 13 — Boron Family | No | No | — | MISSING |
-| pblock | `chem.pblock.group14` | Group 14 — Carbon Family | No | No | — | MISSING |
-| pblock | `chem.pblock.group15` | Group 15 — Nitrogen Family | No | No | — | MISSING |
-| pblock | `chem.pblock.group16` | Group 16 — Oxygen Family | No | No | — | MISSING |
-| pblock | `chem.pblock.group17` | Group 17 — Halogens | No | No | — | MISSING |
-| pblock | `chem.pblock.group18` | Group 18 — Noble Gases | No | No | — | MISSING |
+| pblock | `chem.pblock.group13` | Group 13 — Boron Family | No | Yes | `educational-brain/concepts/chemistry/chem.pblock.group13.md` | READY |
+| pblock | `chem.pblock.group14` | Group 14 — Carbon Family | No | Yes | `educational-brain/concepts/chemistry/chem.pblock.group14.md` | READY |
+| pblock | `chem.pblock.group15` | Group 15 — Nitrogen Family | No | Yes | `educational-brain/concepts/chemistry/chem.pblock.group15.md` | READY |
+| pblock | `chem.pblock.group16` | Group 16 — Oxygen Family | No | Yes | `educational-brain/concepts/chemistry/chem.pblock.group16.md` | READY |
+| pblock | `chem.pblock.group17` | Group 17 — Halogens | No | Yes | `educational-brain/concepts/chemistry/chem.pblock.group17.md` | READY |
+| pblock | `chem.pblock.group18` | Group 18 — Noble Gases | No | Yes | `educational-brain/concepts/chemistry/chem.pblock.group18.md` | READY |
 | pblock | `chem.pblock.trends` | Trends Across p-Block | No | No | — | MISSING |
-| period | `chem.period.atomic-radius` | Atomic and Ionic Radius | No | No | — | MISSING |
+| period | `chem.period.atomic-radius` | Atomic and Ionic Radius | No | Yes | `educational-brain/concepts/chemistry/chem.period.atomic-radius.md` | READY |
 | period | `chem.period.classification` | Early Classification of Elements | No | Yes | `educational-brain/concepts/chemistry/chem.period.classification.md` | READY |
-| period | `chem.period.electron-affinity` | Electron Affinity and Electronegativity | No | No | — | MISSING |
-| period | `chem.period.ionization-energy` | Ionization Energy | No | No | — | MISSING |
-| period | `chem.period.modern-periodic-law` | Modern Periodic Law and Table | No | No | — | MISSING |
-| period | `chem.period.periodic-properties` | Periodic Trends Overview | No | No | — | MISSING |
-| period | `chem.period.valency` | Valency and Oxidation State | No | No | — | MISSING |
+| period | `chem.period.electron-affinity` | Electron Affinity and Electronegativity | No | Yes | `educational-brain/concepts/chemistry/chem.period.electron-affinity.md` | READY |
+| period | `chem.period.ionization-energy` | Ionization Energy | No | Yes | `educational-brain/concepts/chemistry/chem.period.ionization-energy.md` | READY |
+| period | `chem.period.modern-periodic-law` | Modern Periodic Law and Table | No | Yes | `educational-brain/concepts/chemistry/chem.period.modern-periodic-law.md` | READY |
+| period | `chem.period.periodic-properties` | Periodic Trends Overview | No | Yes | `educational-brain/concepts/chemistry/chem.period.periodic-properties.md` | READY |
+| period | `chem.period.valency` | Valency and Oxidation State | No | Yes | `educational-brain/concepts/chemistry/chem.period.valency.md` | READY |
 | poly | `chem.poly.addition` | Addition Polymerization | No | No | — | MISSING |
 | poly | `chem.poly.biodegradable` | Biodegradable and Functional Polymers | No | No | — | MISSING |
 | poly | `chem.poly.condensation` | Condensation Polymerization | No | No | — | MISSING |
 | poly | `chem.poly.natural` | Natural Polymers | No | No | — | MISSING |
 | poly | `chem.poly.properties` | Polymer Properties | No | No | — | MISSING |
 | redox | `chem.redox.activity-series` | Electrochemical Activity Series | No | No | — | MISSING |
-| redox | `chem.redox.balancing` | Balancing Redox Equations | No | No | — | MISSING |
+| redox | `chem.redox.balancing` | Balancing Redox Equations | No | Yes | `educational-brain/concepts/chemistry/chem.redox.balancing.md` | READY |
 | redox | `chem.redox.disproportionation` | Disproportionation | No | No | — | MISSING |
-| redox | `chem.redox.oxidation-state` | Oxidation State | No | No | — | MISSING |
+| redox | `chem.redox.oxidation-state` | Oxidation State | No | Yes | `educational-brain/concepts/chemistry/chem.redox.oxidation-state.md` | READY |
 | redox | `chem.redox.titrations` | Redox Titrations | No | No | — | MISSING |
-| sblock | `chem.sblock.alkali` | Alkali Metals | No | No | — | MISSING |
+| sblock | `chem.sblock.alkali` | Alkali Metals | No | Yes | `educational-brain/concepts/chemistry/chem.sblock.alkali.md` | READY |
 | sblock | `chem.sblock.alkaline-earth` | Alkaline Earth Metals | No | No | — | MISSING |
-| sblock | `chem.sblock.hydrogen` | Hydrogen | No | No | — | MISSING |
+| sblock | `chem.sblock.hydrogen` | Hydrogen | No | Yes | `educational-brain/concepts/chemistry/chem.sblock.hydrogen.md` | READY |
 | sblock | `chem.sblock.water` | Chemistry of Water | No | No | — | MISSING |
 | sol | `chem.sol.activity` | Activity and Non-ideal Solutions | No | No | — | MISSING |
 | sol | `chem.sol.colligative` | Colligative Properties | No | No | — | MISSING |
 | sol | `chem.sol.osmosis` | Osmosis and Osmotic Pressure | No | No | — | MISSING |
-| sol | `chem.sol.solubility` | Solubility and Henry's Law | No | No | — | MISSING |
+| sol | `chem.sol.solubility` | Solubility and Henry's Law | No | Yes | `educational-brain/concepts/chemistry/chem.sol.solubility.md` | READY |
 | sol | `chem.sol.types` | Types of Solutions | No | Yes | `educational-brain/concepts/chemistry/chem.sol.types.md` | READY |
 | sol | `chem.sol.vapour-pressure` | Vapour Pressure of Solutions | No | No | — | MISSING |
 | solid | `chem.solid.amorphous` | Amorphous Solids | No | No | — | MISSING |
-| solid | `chem.solid.crystal-systems` | Crystal Systems | No | No | — | MISSING |
+| solid | `chem.solid.crystal-systems` | Crystal Systems | No | Yes | `educational-brain/concepts/chemistry/chem.solid.crystal-systems.md` | READY |
 | solid | `chem.solid.defects` | Crystal Defects | No | No | — | MISSING |
 | solid | `chem.solid.ionic-solids` | Ionic Crystal Structures | No | No | — | MISSING |
 | solid | `chem.solid.packing` | Close Packing and Efficiency | No | No | — | MISSING |
@@ -1568,23 +1564,22 @@ its subject KG.
 | state | `chem.state.molar-mass-gas` | Molar Mass from Gas Data | No | Yes | `educational-brain/concepts/chemistry/chem.state.molar-mass-gas.md` | READY |
 | state | `chem.state.phase-diagram` | Phase Diagrams | No | No | — | MISSING |
 | state | `chem.state.real-gases` | Real Gases and van der Waals Equation | No | Yes | `educational-brain/concepts/chemistry/chem.state.real-gases.md` | READY |
-| surface | `chem.surface.adsorption` | Adsorption | No | No | — | MISSING |
+| surface | `chem.surface.adsorption` | Adsorption | No | Yes | `educational-brain/concepts/chemistry/chem.surface.adsorption.md` | READY |
 | surface | `chem.surface.colloids` | Colloids | No | Yes | `educational-brain/concepts/chemistry/chem.surface.colloids.md` | READY |
 | surface | `chem.surface.emulsions` | Emulsions and Gels | No | Yes | `educational-brain/concepts/chemistry/chem.surface.emulsions.md` | READY |
-| surface | `chem.surface.heterogeneous-cat` | Mechanism of Heterogeneous Catalysis | No | No | — | MISSING |
+| surface | `chem.surface.heterogeneous-cat` | Mechanism of Heterogeneous Catalysis | No | Yes | `educational-brain/concepts/chemistry/chem.surface.heterogeneous-cat.md` | READY |
 | surface | `chem.surface.surfactants` | Surfactants and Micelles | No | No | — | MISSING |
 | thermo | `chem.thermo.bond-enthalpy` | Bond Enthalpy | No | No | — | MISSING |
-| thermo | `chem.thermo.cell-thermo` | Electrochemical Thermodynamics | No | No | — | MISSING |
+| thermo | `chem.thermo.cell-thermo` | Electrochemical Thermodynamics | No | Yes | `educational-brain/concepts/chemistry/chem.thermo.cell-thermo.md` | READY |
 | thermo | `chem.thermo.enthalpy` | Enthalpy and Hess's Law | No | Yes | `educational-brain/concepts/chemistry/chem.thermo.enthalpy.md` | READY |
 | thermo | `chem.thermo.entropy` | Entropy and Second Law | No | Yes | `educational-brain/concepts/chemistry/chem.thermo.entropy.md` | READY |
 | thermo | `chem.thermo.first-law` | First Law of Thermodynamics | No | Yes | `educational-brain/concepts/chemistry/chem.thermo.first-law.md` | READY |
-| thermo | `chem.thermo.gibbs` | Gibbs Free Energy and Spontaneity | No | No | — | MISSING |
+| thermo | `chem.thermo.gibbs` | Gibbs Free Energy and Spontaneity | No | Yes | `educational-brain/concepts/chemistry/chem.thermo.gibbs.md` | READY |
 | thermo | `chem.thermo.heat-capacities` | Heat Capacities of Gases | No | Yes | `educational-brain/concepts/chemistry/chem.thermo.heat-capacities.md` | READY |
 | thermo | `chem.thermo.system` | System, Surroundings and State Functions | No | Yes | `educational-brain/concepts/chemistry/chem.thermo.system.md` | READY |
-| thermo | `chem.thermo.third-law` | Third Law and Absolute Entropy | No | No | — | MISSING |
+| thermo | `chem.thermo.third-law` | Third Law and Absolute Entropy | No | Yes | `educational-brain/concepts/chemistry/chem.thermo.third-law.md` | READY |
 
 ## biology (108 concepts, 0 READY)
-
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | bioinfo | `bio.bioinfo.bioinformatics-intro` | Introduction to Bioinformatics | No | No | — | MISSING |
@@ -1697,7 +1692,6 @@ its subject KG.
 | sys | `bio.sys.systems-biology-intro` | Introduction to Systems Biology | No | No | — | MISSING |
 
 ## computer_science (119 concepts, 0 READY)
-
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | algo | `cs.algo.algorithms` | Algorithms | No | No | — | MISSING |

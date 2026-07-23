@@ -12,7 +12,7 @@ and this file's summary row should be corrected to match.
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
-| physics | 238 | 179 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 (2026-07-23, level 14, this batch): `phys.mech.poisson-brackets`, `phys.mod.radioactive-decay`, `phys.qm.schrodinger-equation`, `phys.qm.uncertainty-principle`, `phys.rel.relativistic-momentum`, `phys.stat.bose-einstein`, `phys.stat.entropy-statistical`, `phys.stat.fluctuations-correlations`, `phys.stat.free-energy`, `phys.stat.grand-canonical-ensemble` — 59 concepts remain (75.21%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-13 name lists |
+| physics | 238 | 215 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 (2026-07-23, level 18, this batch): `phys.qm.variational-method`, `phys.qm.identical-particles`, `phys.qm.scattering-theory-born-approximation`, `phys.stat.fermi-dirac`, `phys.astro.stellar-structure`, `phys.particle.antimatter`, `phys.particle.quarks`, `phys.particle.leptons` — 23 concepts remain (90.34%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-17 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 106 | levels 0–12 complete (106/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock, chem.redox, chem.dblock, chem.org, chem.pblock, chem.solid — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
@@ -874,6 +874,148 @@ Chemistry: 56 → 66 entries. Levels 0–9 complete.
 chem.bond.bond-parameters, chem.bond.coordinate-bond, chem.bond.hybridization, chem.bond.resonance, chem.bond.vsepr, chem.dblock.general, chem.org.iupac, chem.pblock.group13, chem.pblock.group14, chem.pblock.group15, chem.pblock.group16, chem.pblock.group17, chem.pblock.group18, chem.redox.balancing, chem.sblock.alkali, chem.solid.crystal-systems
 Chemistry: 73 → 89/186 entries (47.85%).
 
+### Physics EB Wave 15 (2026-07-23)
+
+9 concepts authored in strict topological order (dependency level 15 —
+all prerequisites satisfied by the 179 physics EB entries authored
+through Wave 14, verified via a fresh Kahn's-algorithm recomputation
+against the live physics KG rather than trusting any stored level number):
+`phys.mech.canonical-transformations`, `phys.mod.nuclear-reactions`,
+`phys.qm.harmonic-oscillator-qm`, `phys.qm.operators`,
+`phys.qm.particle-in-box`, `phys.qm.quantum-tunneling`,
+`phys.rel.mass-energy`, `phys.stat.chemical-potential`,
+`phys.stat.phase-transitions`. This completes the second major Quantum
+Mechanics cluster (operators, particle-in-box, harmonic oscillator,
+tunneling — all four downstream of the `phys.qm.schrodinger-equation` hub
+authored in Wave 14) and closes out the Statistical Mechanics domain's
+final two leaf concepts (chemical potential, phase transitions), plus one
+Classical Mechanics capstone (canonical transformations) and one Modern
+Physics capstone (nuclear reactions, generalizing radioactive decay's
+Q-value machinery to induced two-body reactions). All 9 had existing
+Blueprints (`docs/curriculum/blueprints/{id}.md`) reused by reference —
+Misconception Libraries cited by MC-ID/number with birth-type
+classification added per this program's standard practice, never
+restating worked examples, demonstrations, or full teaching-action
+sequences already owned by the Blueprint. All 9 entries verified against
+`EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and heading
+order (0 mismatches), zero duplicate filenames/concept IDs (confirmed via
+`git log --diff-filter=A` showing 0 prior commits touching any of the 9
+new files), zero orphans against the live physics KG (all 188 physics EB
+files map to a valid KG id). Physics KG re-validated: PASS, 238/238
+reachable, 0 failures/warnings — no KG file was touched; all 6 subject
+KGs re-validated PASS. `physics` is now 188/238 — 78.99% complete. True
+total, recomputed fresh: **317** entries (188 physics + 37 mathematics +
+89 chemistry + 3 english), out of 1,775 total KG concepts across all 6
+subjects — 1,458 remaining, 17.86%. Wave 16 candidates
+were not computed this batch — the next iteration of this program should
+begin with a fresh `git fetch`/pull, re-audit current Physics EB state
+from scratch (per this program's standing discipline of never trusting
+stored counts), and recompute the next topological wave from the live KG.
+All six tracking files regenerated from source; re-validated 0 orphans, 0
+duplicates across all 317 entries.
+
+### Physics EB Wave 16 (2026-07-23)
+
+7 concepts authored in strict topological order (dependency level 16 —
+all prerequisites satisfied by the 188 physics EB entries authored
+through Wave 15, verified via a fresh Kahn's-algorithm recomputation
+against the live physics KG): `phys.mech.hamilton-jacobi-equation`,
+`phys.mod.binding-energy`, `phys.qm.hydrogen-atom-qm`, `phys.qm.spin`,
+`phys.rel.spacetime`, `phys.stat.ising-model`, `phys.particle.four-
+forces`. This wave is notable for `phys.particle.four-forces` —
+verified as the formal root node (zero prerequisites within the domain,
+requiring only `phys.em.coulombs-law` and `phys.mod.nuclear-reactions`
+from outside it) of the entire Particle Physics domain, opening that
+16-concept domain for future waves. All 7 had existing Blueprints
+reused by reference — Misconception Libraries cited by MC-ID/number
+with birth-type classification added. All 7 entries verified against
+`EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and heading
+order (0 mismatches), zero duplicate filenames/concept IDs (confirmed
+via `git log --diff-filter=A` showing 0 prior commits touching any of
+the 7 new files), zero orphans against the live physics KG (all 195
+physics EB files map to a valid KG id, repo-wide scan across all 6
+subjects also clean). Physics KG re-validated: PASS, 238/238 reachable,
+0 failures/warnings — no KG file was touched; all 6 subject KGs
+re-validated PASS. `physics` is now 195/238 — 81.93% complete. True
+total, recomputed fresh: **324** entries (195 physics + 37 mathematics +
+89 chemistry + 3 english), out of 1,775 total KG concepts — 1,451
+remaining, 18.25%. Wave 17 candidates were not computed this batch — the
+next iteration of this program should begin with a fresh `git fetch`/
+pull, re-audit current Physics EB state from scratch, and recompute the
+next topological wave from the live KG.
+
+### Physics EB Wave 17 (2026-07-23)
+
+12 concepts authored in strict topological order (dependency level 17 —
+all prerequisites satisfied by the 195 physics EB entries authored
+through Wave 16, verified via a fresh Kahn's-algorithm recomputation
+against the live physics KG): `phys.mod.nuclear-fission`, `phys.mod.
+nuclear-fusion`, `phys.mod.nuclear-models`, `phys.qm.pauli-exclusion`,
+`phys.qm.perturbation-theory`, `phys.qm.selection-rules`, `phys.qm.
+angular-momentum-addition`, `phys.qm.density-matrix`, `phys.stat.phase-
+transitions-critical-phenomena`, `phys.stat.monte-carlo-basics`,
+`phys.particle.particle-classification`, `phys.particle.gauge-bosons`.
+This is the largest single wave since Wave 9 (16 concepts), reflecting
+the unlock cascade from Wave 16's domain-opening concepts:
+`phys.mod.binding-energy` unlocked 3 leaf nuclear-physics concepts
+(fission, fusion, nuclear models); `phys.qm.operators`/`phys.qm.spin`/
+`phys.qm.hydrogen-atom-qm` together unlocked 5 quantum-mechanics
+concepts (Pauli exclusion, perturbation theory, selection rules,
+angular-momentum addition, density matrix); `phys.stat.ising-model`
+unlocked 2 statistical-mechanics concepts (critical phenomena, Monte
+Carlo methods); `phys.particle.four-forces` unlocked 2 more Particle
+Physics concepts (particle classification, gauge bosons), continuing
+the domain opened in Wave 16. All 12 had existing Blueprints reused by
+reference. All 12 entries verified against `EDUCATIONAL_BRAIN_
+STANDARD.md`'s exact 21-section structure and heading order (0
+mismatches), zero duplicate filenames/concept IDs, zero orphans against
+the live physics KG (all 207 physics EB files map to a valid KG id,
+repo-wide scan across all 6 subjects also clean). Physics KG re-
+validated: PASS, 238/238 reachable, 0 failures/warnings — no KG file
+was touched; all 6 subject KGs re-validated PASS. `physics` is now
+207/238 — 86.97% complete. True total, recomputed fresh: **336**
+entries (207 physics + 37 mathematics + 89 chemistry + 3 english), out
+of 1,775 total KG concepts — 1,439 remaining, 18.93%. Wave 18 candidates
+were not computed this batch — the next physics iteration should begin
+with a fresh fetch/audit per this program's standing discipline.
+
+### Physics EB Wave 18 (2026-07-23)
+
+8 concepts authored in strict topological order (dependency level 18 —
+all prerequisites satisfied by the 207 physics EB entries authored
+through Wave 17, verified via a fresh Kahn's-algorithm recomputation
+against the live physics KG, triggered by the explicit standing
+instruction "Keep continue until 238/238 done"): `phys.qm.variational-
+method`, `phys.qm.identical-particles`, `phys.qm.scattering-theory-born-
+approximation`, `phys.stat.fermi-dirac`, `phys.astro.stellar-structure`,
+`phys.particle.antimatter`, `phys.particle.quarks`, `phys.particle.
+leptons`. This wave draws from three different domains simultaneously:
+Wave 17's `phys.qm.perturbation-theory`/`phys.qm.angular-momentum-
+addition`/`phys.qm.pauli-exclusion` together unlocked 3 more quantum-
+mechanics concepts (variational method, identical particles, scattering
+theory); `phys.stat.partition-function` plus Wave 17's `phys.qm.pauli-
+exclusion` unlocked Fermi-Dirac statistics; `phys.mod.nuclear-fusion`
+(Wave 17) plus the pre-existing `phys.mech.universal-gravitation`
+unlocked the Astrophysics domain's `phys.astro.stellar-structure` (the
+first Astrophysics-domain concept authored — a 6-concept domain not
+previously called out separately in project memory, confirmed present
+in the live KG); Wave 17's `phys.particle.particle-classification`
+unlocked 3 more Particle Physics concepts (antimatter, quarks, leptons).
+All 8 had existing Blueprints reused by reference. All 8 entries verified
+against `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and
+heading order (0 mismatches), zero duplicate filenames/concept IDs, zero
+orphans against the live physics KG (all 215 physics EB files map to a
+valid KG id, repo-wide scan across all 6 subjects also clean). Physics
+KG re-validated: PASS, 238/238 reachable, 0 failures/warnings — no KG
+file was touched; all 6 subject KGs re-validated PASS. `physics` is now
+215/238 — 90.34% complete. True total, recomputed fresh: **344** entries
+(215 physics + 37 mathematics + 89 chemistry + 3 english), out of 1,775
+total KG concepts — 1,431 remaining, 19.38%. Per the standing
+instruction, Wave 19 candidates were not computed this batch — the next
+physics iteration should begin immediately with a fresh fetch/audit per
+this program's standing discipline, continuing without pausing until
+physics reaches 238/238.
+
 ### Batch 27 — Chemistry level 12 (17 concepts, 2026-07-23)
 17 concepts authored at topological level 12 in strict dependency order.
 
@@ -897,3 +1039,4 @@ Files authored:
 - chem.thermo.bond-enthalpy (mean bond enthalpies; ΔH ≈ Σbroken − Σformed; estimate not exact; F–F weakness; N≡N strength)
 
 Running total: 106/186 chemistry entries. Levels 0–12 complete.
+
