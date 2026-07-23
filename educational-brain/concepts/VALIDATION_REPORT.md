@@ -1,11 +1,11 @@
 # Educational Brain Production Pipeline — Validation Report
 
 Generated 2026-07-22, re-run every batch since. Most recently re-run this
-batch (Physics Wave 17, see the dedicated section near the end of this
-file for full detail) against the post-Wave-16 state — no concurrent
-push occurred between Wave 16 and Wave 17. All totals below (top-level
+batch (Physics Wave 18, see the dedicated section near the end of this
+file for full detail) against the post-Wave-17 state — no concurrent
+push occurred between Wave 17 and Wave 18. All totals below (top-level
 summary and Phase 2 checklist) are recomputed fresh from the live
-`educational-brain/concepts/{subject}/` directories as of Wave 17, not
+`educational-brain/concepts/{subject}/` directories as of Wave 18, not
 hand-merged from conflicting drafts or estimated — the per-wave sections
 below remain as a historical log, each showing the state as of when it
 was written. Every check below was computed directly from
@@ -19,7 +19,7 @@ was written. Every check below was computed directly from
 for mathematics, physics, chemistry, biology, computer_science, and
 english — re-run fresh this batch, all 6 still PASS with unchanged
 concept counts (this batch authored Educational Brain entries only; no
-KG file was touched, Wave 17):
+KG file was touched, Wave 18):
 
 | Subject | Status | Concepts | Reachable | Broken requires/unlocks |
 |---|---|---|---|---|
@@ -41,7 +41,7 @@ report).
 
 **✓ Every Educational Brain entry points to one existing KG concept.**
 Checked: every filename in `educational-brain/concepts/{subject}/`
-(336 files, as of Wave 17: 207 physics + 37 mathematics + 89 chemistry +
+(344 files, as of Wave 18: 215 physics + 37 mathematics + 89 chemistry +
 3 english) against that subject's live KG id set. **0 orphans** — every
 EB file resolves to a real, current KG concept. **Reconciliation
 findings (Waves 12, 13, 15, and 16, carried forward)**: multiple
@@ -62,8 +62,8 @@ filesystem could technically hold `Foo.md` and `foo.md` as distinct
 files) — **0 duplicates**.
 
 **◐ Every Educational Brain entry references one Blueprint — partially,
-honestly reported.** 240 of 336 EB entries' concepts have a matching
-Blueprint FILE on disk (as of Wave 17). The other 96 are: 7 `math.found`
+honestly reported.** 248 of 344 EB entries' concepts have a matching
+Blueprint FILE on disk (as of Wave 18). The other 96 are: 7 `math.found`
 concepts (`math.found.definition`, `inductive-reasoning`,
 `mathematical-modeling`, `mathematical-symbols`,
 `problem-solving-strategies` — Wave 2 — plus `reading-mathematics` —
@@ -73,9 +73,9 @@ section per Quality Gate 2; plus all 89 chemistry concepts, which
 reference `docs/chemistry/kg/graph.json` and standard chemistry
 pedagogy directly instead — confirmed by the 2026-07-23 Forensic
 Repository Audit that no chemistry Blueprint file has ever existed in
-this repository's history, on any branch. All 12 of Wave 17's new physics
+this repository's history, on any branch. All 8 of Wave 18's new physics
 entries DO have existing Blueprints, each reused by reference (raising
-the Blueprint-matched count from 228 to 240 with no methodology change).
+the Blueprint-matched count from 240 to 248 with no methodology change).
 A separate, pre-existing Blueprint-column ACCURACY bug (not a coverage
 gap) was found and fixed in Wave 16 in `EDUCATIONAL_BRAIN_INDEX.md`:
 21 rows for concepts whose Blueprint files genuinely exist on disk
@@ -633,3 +633,68 @@ Per the user's standing instruction, the next unlocked physics wave
 (Wave 18) was NOT computed this batch — it must be recomputed fresh from
 the live KG immediately after this batch's commit/push completes, and the
 cycle continues without pausing until physics reaches 238/238.
+
+## Physics Wave 18 — mandatory-rules cycle continuation (2026-07-23)
+
+Continuation of the same mandatory-rules production cycle immediately
+following Wave 17, per the same explicit standing instruction — "Keep
+continue until 238/238 done." Re-fetched `origin/main` and confirmed 0
+commits ahead/behind before starting — no concurrent push occurred
+between Wave 17 and Wave 18. Independently recomputed dependency levels
+via a fresh Kahn's-algorithm pass over the live KG's `requires` edges —
+the level-18 set (8 concepts) matched the expected candidate list
+exactly: `phys.qm.variational-method`, `phys.qm.identical-particles`,
+`phys.qm.scattering-theory-born-approximation`, `phys.stat.fermi-dirac`,
+`phys.astro.stellar-structure`, `phys.particle.antimatter`,
+`phys.particle.quarks`, `phys.particle.leptons` — drawing from three
+different domains simultaneously (Quantum Mechanics, Statistical
+Physics, Astrophysics, and Particle Physics), reflecting the unlock
+cascade from Wave 17's authoring across those same domains.
+`phys.astro.stellar-structure` is notable as the first Astrophysics-
+domain concept authored under this program — a 6-concept domain
+(`phys.astro.*`: stellar-structure, stellar-evolution, cosmology,
+dark-matter, black-holes, gravitational-waves) confirmed present in the
+live KG via direct query, previously not called out separately in
+project memory. Verified all 8 have existing Blueprints on disk before
+starting. Authored all 8. All 8 individually pass every per-entry check:
+structural 21-section conformance verified by heading scan and exact
+heading-order diff (0 mismatches across all 8); 0 orphans (all 8 new
+files map to a valid KG concept id, verified against
+`docs/physics/kg/graph.json`); 0 duplicates (verified via `git log
+--diff-filter=A` showing 0 prior commits touching any of the 8 new file
+paths, and via a repo-wide orphan/duplicate scan across all 6 subjects);
+Blueprint References section present and accurate (all 8 cite an
+existing Blueprint by exact path); no runtime-asset duplication (none of
+the 8 created any `AssetIdentity` records, checked against
+`brainSeedAssets.ts`). Physics KG re-validated fresh this batch: PASS,
+238/238 reachable, 0 failures/warnings — no KG file was touched; all 6
+subject KGs re-validated PASS this batch. `physics` is now 215/238 —
+90.34%, 23 concepts remaining. True total, recomputed fresh by scanning
+every live file: **344** EB entries (215 physics + 37 mathematics + 89
+chemistry + 3 english), out of 1,775 total KG concepts, 1,431 remaining
+(19.38%). No concurrent push encountered during this batch's own
+commit/push (verified via `git fetch` + `git rev-list --left-right
+--count` immediately before push).
+
+**Updated Phase 2 checklist numbers (this batch, recomputed fresh)**:
+- Every Educational Brain entry points to one existing KG concept: 344
+  files checked, **0 orphans**.
+- Every KG concept has at most one Educational Brain entry: **0
+  duplicates** (case-insensitive check included).
+- Every Educational Brain entry references one Blueprint — partially:
+  **248/344** have a matching Blueprint file on disk. The other 96 are: 7
+  `math.found` concepts (genuinely Blueprint-less, stated explicitly in
+  each entry) plus all 89 chemistry concepts (chemistry's Blueprint
+  production track has never started). All 8 of this batch's new
+  physics entries (Wave 18) DO have existing Blueprints, each reused by
+  reference.
+- No broken KG references: **0** across all 1,775 concepts, all 6
+  subjects (integrity table above, re-verified this batch).
+- Cross-links: the same 2 pre-existing unresolvable references carried
+  forward unchanged from prior batches (§ above) — neither touched or
+  affected by this batch's physics-only work.
+
+Per the user's standing instruction, the next unlocked physics wave
+(Wave 19) was NOT computed this batch — it must be recomputed fresh from
+the live KG immediately after this batch's commit/push completes, and
+the cycle continues without pausing until physics reaches 238/238.

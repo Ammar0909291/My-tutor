@@ -14,7 +14,7 @@ rather than hand-edit when entries change.
   `docs/curriculum/blueprints/{id}.md`. A ✓ here means the section
   EXISTS, not that its content has been re-verified against the
   Standard's narrower scope rules.
-- **Blueprint column, 240/336**: 7 `math.found` concepts genuinely have
+- **Blueprint column, 248/344**: 7 `math.found` concepts genuinely have
   no Blueprint yet (`math.found.definition`, `inductive-reasoning`,
   `mathematical-modeling`, `mathematical-symbols`,
   `problem-solving-strategies` — Wave 2 — plus `reading-mathematics` —
@@ -28,9 +28,9 @@ rather than hand-edit when entries change.
   reference `docs/chemistry/kg/graph.json` and standard chemistry
   pedagogy directly — correctly read as ✗ under this column's literal
   methodology (existence of the `docs/curriculum/blueprints/` file
-  specifically), not as missing content. All 12 Physics Wave 17 concepts
+  specifically), not as missing content. All 8 Physics Wave 18 concepts
   had existing Blueprints, reused by reference, raising the Blueprint
-  count from 228 to 240 with no other change to this methodology.
+  count from 240 to 248 with no other change to this methodology.
 - **Cross-links**: a ✓ means the entry's Transfer/Cross-Subject section
   *discusses* cross-subject connections — including entries that
   honestly conclude "none via KG cross_links at this node."
@@ -38,7 +38,7 @@ rather than hand-edit when entries change.
   pre-Standard entries correctly read ✗ (expected migration debt); all
   entries authored under the current Standard (math.found, physics,
   english, and chemistry batches from 2026-07-22 onward) correctly read ✓.
-- **Tutor Actions, 248/324 → 260/336**: the same 71 pre-Standard TEMPLATE.md-era
+- **Tutor Actions, 260/336 → 268/344**: the same 71 pre-Standard TEMPLATE.md-era
   entries plus 5 concurrent `math.found` Wave 6 entries
   (`logical-equivalence`, `ordinal-number`, `quantifiers`, `relation`,
   `subset`) use a different, numbered 21-section heading scheme
@@ -48,30 +48,30 @@ rather than hand-edit when entries change.
   reads ✗ here even though content covering the same function exists
   under a different name. This is pre-existing, previously-flagged
   migration debt (76 = 71 + 5), not introduced this batch — rewriting
-  another session's freshly authored files remains out of scope. All 12
-  Physics Wave 17 entries use the current Standard's exact heading text,
-  so the +12 delta from 324→336 total entries applies identically to
+  another session's freshly authored files remains out of scope. All 8
+  Physics Wave 18 entries use the current Standard's exact heading text,
+  so the +8 delta from 336→344 total entries applies identically to
   Tutor Actions, Cross-links, and Version History.
 
-## Aggregate summary (336 entries)
+## Aggregate summary (344 entries)
 
-Extends the prior 324-entry total with this session's Physics Wave 17
-(12 concepts, 195→207). All numbers below were recomputed fresh by
+Extends the prior 336-entry total with this session's Physics Wave 18
+(8 concepts, 207→215). All numbers below were recomputed fresh by
 scanning every live file in `educational-brain/concepts/{subject}/` —
 none hand-estimated.
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 240 / 336 | see methodology note above — 7 `math.found` + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file (confirmed by forensic audit: chemistry Blueprints have never existed) |
-| Educational Brain | 336 / 336 | trivially true (this is the entry list) |
-| Mental Model | 336 / 336 | |
-| Misconceptions | 336 / 336 | |
-| Analogies | 336 / 336 | |
-| Recovery Strategy | 336 / 336 | |
-| Assessment Signals | 336 / 336 | |
-| Tutor Actions | 260 / 336 | see methodology note above — 71 pre-existing TEMPLATE.md-era entries + 5 non-Standard `math.found` Wave 6 entries |
-| Cross-links | 260 / 336 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the 71 pre-Standard entries use a different section name |
-| Version History | 265 / 336 | the 71 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored under the current Standard read ✓ |
+| Blueprint | 248 / 344 | see methodology note above — 7 `math.found` + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file (confirmed by forensic audit: chemistry Blueprints have never existed) |
+| Educational Brain | 344 / 344 | trivially true (this is the entry list) |
+| Mental Model | 344 / 344 | |
+| Misconceptions | 344 / 344 | |
+| Analogies | 344 / 344 | |
+| Recovery Strategy | 344 / 344 | |
+| Assessment Signals | 344 / 344 | |
+| Tutor Actions | 268 / 344 | see methodology note above — 71 pre-existing TEMPLATE.md-era entries + 5 non-Standard `math.found` Wave 6 entries |
+| Cross-links | 268 / 344 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the 71 pre-Standard entries use a different section name |
+| Version History | 273 / 344 | the 71 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored under the current Standard read ✓ |
 
 ## Per-concept ledger
 
@@ -206,6 +206,7 @@ none hand-estimated.
 | `math.found.subset` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | ✓ |
 | `math.found.truth-table` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.variable` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.astro.stellar-structure` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.em.ac-basics` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.em.amperes-law` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.em.biot-savart` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | ✗ |
@@ -339,22 +340,28 @@ none hand-estimated.
 | `phys.opt.total-internal-reflection` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | ✗ |
 | `phys.opt.wave-optics` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | ✗ |
 | `phys.opt.youngs-experiment` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.particle.antimatter` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.particle.four-forces` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.particle.gauge-bosons` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.particle.leptons` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.particle.particle-classification` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.particle.quarks` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.qm.angular-momentum-addition` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.qm.density-matrix` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.qm.harmonic-oscillator-qm` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.qm.hydrogen-atom-qm` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.qm.identical-particles` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.qm.operators` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.qm.particle-in-box` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.qm.pauli-exclusion` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.qm.perturbation-theory` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.qm.quantum-tunneling` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.qm.scattering-theory-born-approximation` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.qm.schrodinger-equation` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.qm.selection-rules` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.qm.spin` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.qm.uncertainty-principle` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.qm.variational-method` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.qm.wave-function` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.rel.length-contraction` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.rel.lorentz-transform` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -368,6 +375,7 @@ none hand-estimated.
 | `phys.stat.bose-einstein` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.stat.chemical-potential` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.stat.entropy-statistical` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.stat.fermi-dirac` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.stat.fluctuations-correlations` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.stat.free-energy` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.stat.grand-canonical-ensemble` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
