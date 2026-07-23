@@ -39176,6 +39176,310 @@ const HIGG_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.particle.conservation-laws ─────────────────────────────────────────
+const PCON = 'phys.particle.conservation-laws'
+const PCON_SRC = 'docs/curriculum/blueprints/phys.particle.conservation-laws.md'
+
+const PCON_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PCON,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Having enough energy does NOT guarantee a proposed particle reaction is allowed — introductory ' +
+      'mechanics and nuclear physics treatments emphasize energy conservation almost exclusively, leaving ' +
+      'baryon number and lepton number as additional, INDEPENDENT requirements students never learn to check. ' +
+      'A reaction that conserves energy and momentum perfectly, with plenty of energy available, can still be ' +
+      'completely forbidden if it violates baryon number or lepton number. And lepton number is NOT one ' +
+      'single combined total — baryon number\'s simple single-total structure (no generation split needed) ' +
+      'does not carry over to leptons: lepton number must be conserved SEPARATELY within each generation ' +
+      '(electron-type, muon-type, tau-type). A reaction converting an electron directly into a muon, with ' +
+      'nothing else changing, is forbidden — it would violate both electron-lepton-number and muon-lepton-' +
+      'number conservation individually, even though "total lepton count" alone looks unchanged.',
+    targetedMisconceptions: [`${PCON}:MC-1`, `${PCON}:MC-2`],
+    source: `${PCON_SRC} — Section 4 MC-1 (energy alone is not sufficient) + MC-2 (lepton number conserved per-generation, not as one total)`,
+  },
+  {
+    conceptId: PCON,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Proton decay has NOT already been observed, despite decades of dedicated searching in enormous ' +
+      'underground detectors — the sheer scale and duration of these experiments tempts the assumption that a ' +
+      'positive result must have eventually emerged, but the persistent NULL result is itself the ' +
+      'scientifically significant finding. If baryon number is exactly conserved (as observed in every other ' +
+      'known process), the proton — the lightest baryon — must be absolutely stable, since there is no ' +
+      'lighter baryon for it to decay into while conserving baryon number. The ongoing non-observation of ' +
+      'proton decay, despite enormous detector sensitivity, is strong evidence supporting exact baryon-number ' +
+      'conservation, not a sign the search has simply not looked hard enough yet.',
+    targetedMisconceptions: [`${PCON}:MC-3`],
+    source: `${PCON_SRC} — Section 4 MC-3 (proton decay remains unobserved; the null result is itself significant)`,
+  },
+]
+
+const PCON_PROBES: SeedProbe[] = [
+  {
+    conceptId: PCON,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A proposed reaction conserves energy and momentum perfectly, and plenty of energy is available. Is that enough to guarantee it can happen?',
+    choices: [
+      { text: 'No — baryon number and lepton number must also be conserved, as independent requirements separate from energy and momentum; violating either forbids the reaction regardless of available energy', isCorrect: true },
+      { text: 'Yes — as long as there is enough energy and momentum is conserved, the reaction should be possible', isCorrect: false, misconceptionId: `${PCON}:MC-1` },
+    ],
+    correctValue: 'no — baryon/lepton number conservation are additional, independent requirements',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PCON}:MC-1`],
+    source: `${PCON_SRC} — Section 4 MC-1 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: PCON,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is a reaction that converts an electron directly into a muon, with nothing else changing, allowed?',
+    choices: [
+      { text: 'No — lepton number must be conserved separately per generation (electron-type, muon-type); this reaction violates both individually, even though the total lepton count alone looks unchanged', isCorrect: true },
+      { text: 'Yes — as long as the total lepton count matches before and after, the reaction should be fine, since a lepton is a lepton', isCorrect: false, misconceptionId: `${PCON}:MC-2` },
+    ],
+    correctValue: 'no — per-generation lepton number is violated',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PCON}:MC-2`],
+    source: `${PCON_SRC} — Section 4 MC-2 trigger probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.particle.feynman-diagrams ──────────────────────────────────────────
+const FEYN = 'phys.particle.feynman-diagrams'
+const FEYN_SRC = 'docs/curriculum/blueprints/phys.particle.feynman-diagrams.md'
+
+const FEYN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FEYN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A Feynman diagram is NOT a literal picture of particles physically moving through space — its visual ' +
+      'resemblance to a simple space-time trajectory plot invites that reading, but it is actually a compact, ' +
+      'rule-governed mathematical shorthand representing one term in a quantum-mechanical calculation, closer ' +
+      'to a circuit diagram\'s abstraction than to a photograph. And the backward-pointing arrow used for ' +
+      'antiparticle lines does NOT mean antiparticles have literally been observed traveling backward through ' +
+      'time — this is a specific mathematical bookkeeping convention rooted in the underlying quantum field ' +
+      'theory equations. No experiment has ever recorded an antiparticle moving backward through time; every ' +
+      'antiparticle observed moves forward through time exactly like everything else.',
+    targetedMisconceptions: [`${FEYN}:MC-1`, `${FEYN}:MC-2`],
+    source: `${FEYN_SRC} — Section 4 MC-1 (diagram as mathematical shorthand, not literal trajectory) + MC-2 (backward arrow is notation, not observed time-reversal)`,
+  },
+  {
+    conceptId: FEYN,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The same Feynman diagram shape does NOT always represent the same physical process — focusing on the ' +
+      'diagram\'s static shape while ignoring the crucial role of which lines are incoming versus outgoing ' +
+      'misses this entirely. The identical "V"-shaped diagram (two fermion lines meeting a boson line at a ' +
+      'vertex) represents electron-positron ANNIHILATION if the fermion lines are incoming and the boson line ' +
+      'outgoing (matter converting to energy), but represents PAIR PRODUCTION if the boson line is incoming ' +
+      'and the fermion lines outgoing (energy converting to matter) — two genuinely opposite physical ' +
+      'processes represented by the exact same diagram shape, distinguished entirely by reading direction, ' +
+      'never by shape alone.',
+    targetedMisconceptions: [`${FEYN}:MC-3`],
+    source: `${FEYN_SRC} — Section 4 MC-3 (direction, not shape, determines the physical process depicted)`,
+  },
+]
+
+const FEYN_PROBES: SeedProbe[] = [
+  {
+    conceptId: FEYN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a Feynman diagram, do the drawn lines represent the actual physical paths particles travel through space, the way a trajectory diagram would?',
+    choices: [
+      { text: 'No — a Feynman diagram is a rule-governed mathematical shorthand representing one term in a quantum calculation, not a literal picture of physical motion, much like a circuit diagram represents logical relationships rather than literal electron paths', isCorrect: true },
+      { text: 'Yes — the lines show exactly where the particles physically go, like a map of their motion through space', isCorrect: false, misconceptionId: `${FEYN}:MC-1` },
+    ],
+    correctValue: 'no — the diagram is a mathematical abstraction, not a literal trajectory map',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FEYN}:MC-1`],
+    source: `${FEYN_SRC} — Section 4 MC-1 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: FEYN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If two Feynman diagrams have the exact same shape and line types, do they always represent the exact same physical process?',
+    choices: [
+      { text: 'No — the identical shape can represent annihilation (matter to energy) or pair production (energy to matter), entirely depending on which lines are labeled incoming versus outgoing', isCorrect: true },
+      { text: 'Yes — same shape means same process, regardless of which end is called "in" and which is called "out"', isCorrect: false, misconceptionId: `${FEYN}:MC-3` },
+    ],
+    correctValue: 'no — direction, not shape alone, determines the process',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${FEYN}:MC-3`],
+    source: `${FEYN_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.particle.accelerators-detectors ────────────────────────────────────
+const ACDT = 'phys.particle.accelerators-detectors'
+const ACDT_SRC = 'docs/curriculum/blueprints/phys.particle.accelerators-detectors.md'
+
+const ACDT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ACDT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Higgs boson (and the W/Z bosons) were NOT directly seen or photographed by a detector — popular ' +
+      'science coverage of major discoveries often uses language ("the detector found/saw the particle") that ' +
+      'implies direct observation, but these particles exist for less than 10⁻²² seconds, far too short-lived ' +
+      'to ever be directly detected. What is actually measured are the energies and momenta of the longer-' +
+      'lived decay products; the parent particle\'s existence and mass are inferred by reconstructing ' +
+      '"invariant mass" from those measured products, across many collision events, until a statistically ' +
+      'significant peak emerges at the parent particle\'s true mass — that peak, not a photograph, is the ' +
+      'discovery. And exceeding the minimum collision energy does NOT guarantee the particle appears in every ' +
+      'collision — meeting the energy threshold (via E=mc²) is necessary but not sufficient; the specific ' +
+      'process also has a small probability (cross-section) per collision, so enormous numbers of collisions ' +
+      'are still needed even once the energy requirement is comfortably met.',
+    targetedMisconceptions: [`${ACDT}:MC-1`, `${ACDT}:MC-2`],
+    source: `${ACDT_SRC} — Section 4 MC-1 (particles inferred via invariant-mass reconstruction, not directly seen) + MC-2 (energy threshold is necessary but not sufficient)`,
+  },
+  {
+    conceptId: ACDT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Invariant mass," as used in particle-physics discovery announcements, is NOT the directly-measured ' +
+      'mass of one single detected particle — the word "mass" in the term sounds like a direct, single-' +
+      'particle property, obscuring that it is actually a CALCULATED quantity. Invariant mass combines the ' +
+      'measured energies and momenta of two or more separately-detected decay products, using the ' +
+      'relativistic energy-momentum relation, to reconstruct the mass of an undetected parent particle from ' +
+      'its detected children — it is never the mass of any single directly-observed particle you could point ' +
+      'to in the detector. This is exactly how the Higgs boson\'s mass (~125 GeV/c²) was determined, from ' +
+      'combining the energies and momenta of its decay products (such as two photons) across many events.',
+    targetedMisconceptions: [`${ACDT}:MC-3`],
+    source: `${ACDT_SRC} — Section 4 MC-3 (invariant mass is a calculated, multi-product reconstruction, not a single-particle measurement)`,
+  },
+]
+
+const ACDT_PROBES: SeedProbe[] = [
+  {
+    conceptId: ACDT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'When physicists "discovered" the Higgs boson in 2012, did a detector directly capture an image or direct signal of the Higgs boson itself?',
+    choices: [
+      { text: 'No — the Higgs boson decays in under 10⁻²² seconds; physicists measured its decay products\' energies and momenta and reconstructed a statistical peak (invariant mass) at its true mass across many collision events', isCorrect: true },
+      { text: 'Yes — the detector directly saw and photographed the Higgs boson itself as it passed through', isCorrect: false, misconceptionId: `${ACDT}:MC-1` },
+    ],
+    correctValue: 'no — the discovery came from invariant-mass reconstruction of decay products',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ACDT}:MC-1`],
+    source: `${ACDT_SRC} — Section 4 MC-1 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: ACDT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If a collider reaches an energy above the threshold needed to produce a certain particle, is that particle guaranteed to appear in every collision from that point forward?',
+    choices: [
+      { text: 'No — meeting the energy threshold is necessary but not sufficient; production also has its own probability (cross-section), so many collisions are still needed to actually produce and detect the particle', isCorrect: true },
+      { text: 'Yes — once you have enough energy, the particle should just show up reliably in every subsequent collision', isCorrect: false, misconceptionId: `${ACDT}:MC-2` },
+    ],
+    correctValue: 'no — production probability (cross-section) also matters, beyond the energy threshold',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ACDT}:MC-2`],
+    source: `${ACDT_SRC} — Section 4 MC-2 trigger probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.particle.standard-model ────────────────────────────────────────────
+const SMOD = 'phys.particle.standard-model'
+const SMOD_SRC = 'docs/curriculum/blueprints/phys.particle.standard-model.md'
+
+const SMOD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SMOD,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Standard Model is NOT a complete "theory of everything" — its genuinely remarkable, precisely-' +
+      'tested success (electroweak unification, the Higgs mechanism, decades of confirmed predictions) tempts ' +
+      'over-extending its scope to "explains literally everything," but it explicitly excludes gravity ' +
+      'entirely and has no explanation for dark matter or dark energy, which together account for roughly ' +
+      '95% of the universe\'s total mass-energy content. And extraordinary precision-testing success does NOT ' +
+      'mean the theory has no major unresolved gaps — the electron\'s magnetic moment matches theoretical ' +
+      'prediction to about one part in a trillion, yet this precision applies only WITHIN the Standard ' +
+      'Model\'s own bounded scope; it says nothing about phenomena entirely outside that scope, like gravity ' +
+      'or dark matter. Precision within scope and completeness beyond scope are two logically independent ' +
+      'properties, and the Standard Model genuinely has both — extreme precision inside its domain, ' +
+      'acknowledged incompleteness outside it.',
+    targetedMisconceptions: [`${SMOD}:MC-1`, `${SMOD}:MC-2`],
+    source: `${SMOD_SRC} — Section 4 MC-1 (bounded, not complete, theory) + MC-2 (precision within scope ≠ completeness beyond scope)`,
+  },
+  {
+    conceptId: SMOD,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Dark matter and dark energy are NOT the same kind of open question, both just "undiscovered ' +
+      'particles" — both terms share the word "dark" and are often mentioned together in popular science ' +
+      'without distinguishing their very different natures. Dark matter\'s leading hypotheses do generally ' +
+      'involve new, undiscovered particles, actively searched for in dedicated detectors. Dark energy, by ' +
+      'contrast, is associated with the observed acceleration of the universe\'s expansion and is more ' +
+      'commonly hypothesized to be a property of space itself (a cosmological constant, or vacuum energy) ' +
+      'rather than a particle at all — a genuinely different kind of mystery, with a different leading ' +
+      'explanatory framework and a different experimental approach entirely.',
+    targetedMisconceptions: [`${SMOD}:MC-3`],
+    source: `${SMOD_SRC} — Section 4 MC-3 (dark matter and dark energy are distinct mysteries with different leading hypotheses)`,
+  },
+]
+
+const SMOD_PROBES: SeedProbe[] = [
+  {
+    conceptId: SMOD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does the Standard Model explain gravity? Does it explain dark matter and dark energy, which make up most of the universe\'s total mass-energy content?',
+    choices: [
+      { text: 'No — the Standard Model explicitly excludes gravity entirely and has no explanation for dark matter or dark energy, which together make up about 95% of the universe\'s total mass-energy content', isCorrect: true },
+      { text: 'Yes — the Standard Model is a complete theory of everything, precisely tested and fully explaining all known physics', isCorrect: false, misconceptionId: `${SMOD}:MC-1` },
+    ],
+    correctValue: 'no — gravity, dark matter, and dark energy all remain outside the Standard Model',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SMOD}:MC-1`],
+    source: `${SMOD_SRC} — Section 4 MC-1 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: SMOD,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Are dark matter and dark energy the same kind of mystery — both just a matter of finding the right undiscovered particle?',
+    choices: [
+      { text: 'No — dark matter is more likely a new, undiscovered particle actively searched for in detectors; dark energy is more often treated as a property of space itself (a cosmological constant), a fundamentally different kind of question', isCorrect: true },
+      { text: 'Yes — dark matter and dark energy are basically the same thing, just particles that have not yet been found', isCorrect: false, misconceptionId: `${SMOD}:MC-3` },
+    ],
+    correctValue: 'no — they are distinct mysteries with different leading hypotheses',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SMOD}:MC-3`],
+    source: `${SMOD_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -39662,6 +39966,10 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...WEAK_EXPLANATIONS,
   ...EWKU_EXPLANATIONS,
   ...HIGG_EXPLANATIONS,
+  ...PCON_EXPLANATIONS,
+  ...FEYN_EXPLANATIONS,
+  ...ACDT_EXPLANATIONS,
+  ...SMOD_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -40148,4 +40456,8 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...WEAK_PROBES,
   ...EWKU_PROBES,
   ...HIGG_PROBES,
+  ...PCON_PROBES,
+  ...FEYN_PROBES,
+  ...ACDT_PROBES,
+  ...SMOD_PROBES,
 ]
