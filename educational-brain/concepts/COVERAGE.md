@@ -12,7 +12,7 @@ and this file's summary row should be corrected to match.
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
-| physics | 238 | 188 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 (2026-07-23, level 15, this batch): `phys.mech.canonical-transformations`, `phys.mod.nuclear-reactions`, `phys.qm.harmonic-oscillator-qm`, `phys.qm.operators`, `phys.qm.particle-in-box`, `phys.qm.quantum-tunneling`, `phys.rel.mass-energy`, `phys.stat.chemical-potential`, `phys.stat.phase-transitions` — 50 concepts remain (78.99%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-14 name lists |
+| physics | 238 | 195 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 (2026-07-23, level 16, this batch): `phys.mech.hamilton-jacobi-equation`, `phys.mod.binding-energy`, `phys.qm.hydrogen-atom-qm`, `phys.qm.spin`, `phys.rel.spacetime`, `phys.stat.ising-model`, `phys.particle.four-forces` (Particle Physics domain root node) — 43 concepts remain (81.93%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-15 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 89 | levels 0–11 complete (89/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock, chem.redox, chem.dblock, chem.org, chem.pblock, chem.solid — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
@@ -913,3 +913,33 @@ from scratch (per this program's standing discipline of never trusting
 stored counts), and recompute the next topological wave from the live KG.
 All six tracking files regenerated from source; re-validated 0 orphans, 0
 duplicates across all 317 entries.
+
+### Physics EB Wave 16 (2026-07-23)
+
+7 concepts authored in strict topological order (dependency level 16 —
+all prerequisites satisfied by the 188 physics EB entries authored
+through Wave 15, verified via a fresh Kahn's-algorithm recomputation
+against the live physics KG): `phys.mech.hamilton-jacobi-equation`,
+`phys.mod.binding-energy`, `phys.qm.hydrogen-atom-qm`, `phys.qm.spin`,
+`phys.rel.spacetime`, `phys.stat.ising-model`, `phys.particle.four-
+forces`. This wave is notable for `phys.particle.four-forces` —
+verified as the formal root node (zero prerequisites within the domain,
+requiring only `phys.em.coulombs-law` and `phys.mod.nuclear-reactions`
+from outside it) of the entire Particle Physics domain, opening that
+16-concept domain for future waves. All 7 had existing Blueprints
+reused by reference — Misconception Libraries cited by MC-ID/number
+with birth-type classification added. All 7 entries verified against
+`EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and heading
+order (0 mismatches), zero duplicate filenames/concept IDs (confirmed
+via `git log --diff-filter=A` showing 0 prior commits touching any of
+the 7 new files), zero orphans against the live physics KG (all 195
+physics EB files map to a valid KG id, repo-wide scan across all 6
+subjects also clean). Physics KG re-validated: PASS, 238/238 reachable,
+0 failures/warnings — no KG file was touched; all 6 subject KGs
+re-validated PASS. `physics` is now 195/238 — 81.93% complete. True
+total, recomputed fresh: **324** entries (195 physics + 37 mathematics +
+89 chemistry + 3 english), out of 1,775 total KG concepts — 1,451
+remaining, 18.25%. Wave 17 candidates were not computed this batch — the
+next iteration of this program should begin with a fresh `git fetch`/
+pull, re-audit current Physics EB state from scratch, and recompute the
+next topological wave from the live KG.

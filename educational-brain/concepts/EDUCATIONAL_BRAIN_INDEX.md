@@ -927,7 +927,7 @@ its subject KG.
 | trig | `math.trig.trig-identities` | Trigonometric Identities | Yes | No | — | MISSING |
 | trig | `math.trig.unit-circle` | Unit Circle | Yes | No | — | MISSING |
 
-## physics (238 concepts, 188 READY)
+## physics (238 concepts, 195 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | astro | `phys.astro.black-holes` | Black Holes and Schwarzschild Radius | Yes | No | — | MISSING |
@@ -1004,7 +1004,7 @@ its subject KG.
 | mech | `phys.mech.generalized-coordinates` | Generalized Coordinates and Configuration Space | Yes | Yes | `educational-brain/concepts/physics/phys.mech.generalized-coordinates.md` | READY |
 | mech | `phys.mech.gravitational-field` | Gravitational Field and Field Lines | Yes | Yes | `educational-brain/concepts/physics/phys.mech.gravitational-field.md` | READY |
 | mech | `phys.mech.gravitational-potential` | Gravitational Potential Energy | Yes | Yes | `educational-brain/concepts/physics/phys.mech.gravitational-potential.md` | READY |
-| mech | `phys.mech.hamilton-jacobi-equation` | Hamilton-Jacobi Equation and Action-Angle Variables | Yes | No | — | MISSING |
+| mech | `phys.mech.hamilton-jacobi-equation` | Hamilton-Jacobi Equation and Action-Angle Variables | Yes | Yes | `educational-brain/concepts/physics/phys.mech.hamilton-jacobi-equation.md` | READY |
 | mech | `phys.mech.hamiltonian` | The Hamiltonian and Legendre Transform | Yes | Yes | `educational-brain/concepts/physics/phys.mech.hamiltonian.md` | READY |
 | mech | `phys.mech.hamiltons-equations` | Hamilton's Equations of Motion | Yes | Yes | `educational-brain/concepts/physics/phys.mech.hamiltons-equations.md` | READY |
 | mech | `phys.mech.hookes-law` | Hooke's Law and Spring Force | Yes | Yes | `educational-brain/concepts/physics/phys.mech.hookes-law.md` | READY |
@@ -1040,24 +1040,24 @@ its subject KG.
 | mech | `phys.mech.work` | Work Done by a Force | Yes | Yes | `educational-brain/concepts/physics/phys.mech.work.md` | READY |
 | mech | `phys.mech.work-energy-theorem` | Work-Energy Theorem | Yes | Yes | `educational-brain/concepts/physics/phys.mech.work-energy-theorem.md` | READY |
 | mod | `phys.mod.atomic-spectra` | Atomic Spectra and Energy Levels | Yes | Yes | `educational-brain/concepts/physics/phys.mod.atomic-spectra.md` | READY |
-| mod | `phys.mod.binding-energy` | Nuclear Binding Energy and Mass Defect | Yes | No | — | MISSING |
+| mod | `phys.mod.binding-energy` | Nuclear Binding Energy and Mass Defect | Yes | Yes | `educational-brain/concepts/physics/phys.mod.binding-energy.md` | READY |
 | mod | `phys.mod.bohr-model` | Bohr Model of the Hydrogen Atom | Yes | Yes | `educational-brain/concepts/physics/phys.mod.bohr-model.md` | READY |
 | mod | `phys.mod.compton-effect` | Compton Scattering | Yes | Yes | `educational-brain/concepts/physics/phys.mod.compton-effect.md` | READY |
 | mod | `phys.mod.de-broglie` | de Broglie Hypothesis — Matter Waves | Yes | Yes | `educational-brain/concepts/physics/phys.mod.de-broglie.md` | READY |
-| mod | `phys.mod.diode-rectification` | Diode Rectifying Behavior | No | No | — | MISSING |
-| mod | `phys.mod.energy-bands` | Energy Bands in Solids | No | No | — | MISSING |
-| mod | `phys.mod.extrinsic-semiconductors` | Extrinsic Semiconductors: Doping and Carrier Types | No | No | — | MISSING |
-| mod | `phys.mod.intrinsic-semiconductors` | Intrinsic Semiconductors | No | No | — | MISSING |
+| mod | `phys.mod.diode-rectification` | Diode Rectifying Behavior | Yes | No | — | MISSING |
+| mod | `phys.mod.energy-bands` | Energy Bands in Solids | Yes | No | — | MISSING |
+| mod | `phys.mod.extrinsic-semiconductors` | Extrinsic Semiconductors: Doping and Carrier Types | Yes | No | — | MISSING |
+| mod | `phys.mod.intrinsic-semiconductors` | Intrinsic Semiconductors | Yes | No | — | MISSING |
 | mod | `phys.mod.nuclear-fission` | Nuclear Fission and Chain Reactions | Yes | No | — | MISSING |
 | mod | `phys.mod.nuclear-fusion` | Nuclear Fusion and Stellar Energy | Yes | No | — | MISSING |
 | mod | `phys.mod.nuclear-models` | Nuclear Models: Shell Model | Yes | No | — | MISSING |
 | mod | `phys.mod.nuclear-reactions` | Nuclear Reactions and Q-Value | Yes | Yes | `educational-brain/concepts/physics/phys.mod.nuclear-reactions.md` | READY |
 | mod | `phys.mod.photoelectric-effect` | Photoelectric Effect | Yes | Yes | `educational-brain/concepts/physics/phys.mod.photoelectric-effect.md` | READY |
 | mod | `phys.mod.photons` | Photons and Quantization of Light | Yes | Yes | `educational-brain/concepts/physics/phys.mod.photons.md` | READY |
-| mod | `phys.mod.pn-junction` | The p-n Junction | No | No | — | MISSING |
+| mod | `phys.mod.pn-junction` | The p-n Junction | Yes | No | — | MISSING |
 | mod | `phys.mod.radioactive-decay` | Radioactive Decay Law and Half-Life | Yes | Yes | `educational-brain/concepts/physics/phys.mod.radioactive-decay.md` | READY |
 | mod | `phys.mod.radioactivity` | Radioactivity: Alpha, Beta, Gamma Decay | Yes | Yes | `educational-brain/concepts/physics/phys.mod.radioactivity.md` | READY |
-| mod | `phys.mod.semiconductor-classification` | Conductors, Insulators, and Semiconductors | No | No | — | MISSING |
+| mod | `phys.mod.semiconductor-classification` | Conductors, Insulators, and Semiconductors | Yes | No | — | MISSING |
 | mod | `phys.mod.wave-particle-duality` | Wave-Particle Duality | Yes | Yes | `educational-brain/concepts/physics/phys.mod.wave-particle-duality.md` | READY |
 | mod | `phys.mod.x-rays` | X-Rays and Their Properties | Yes | Yes | `educational-brain/concepts/physics/phys.mod.x-rays.md` | READY |
 | opt | `phys.opt.brewsters-law` | Brewster's Law and Malus's Law | Yes | Yes | `educational-brain/concepts/physics/phys.opt.brewsters-law.md` | READY |
@@ -1075,26 +1075,26 @@ its subject KG.
 | opt | `phys.opt.total-internal-reflection` | Total Internal Reflection and Critical Angle | Yes | Yes | `educational-brain/concepts/physics/phys.opt.total-internal-reflection.md` | READY |
 | opt | `phys.opt.wave-optics` | Introduction to Wave Optics | Yes | Yes | `educational-brain/concepts/physics/phys.opt.wave-optics.md` | READY |
 | opt | `phys.opt.youngs-experiment` | Young's Double-Slit Experiment | Yes | Yes | `educational-brain/concepts/physics/phys.opt.youngs-experiment.md` | READY |
-| particle | `phys.particle.accelerators-detectors` | Particle Accelerators and Detectors | No | No | — | MISSING |
-| particle | `phys.particle.antimatter` | Antimatter and Antiparticles | No | No | — | MISSING |
-| particle | `phys.particle.conservation-laws` | Conservation Laws in Particle Interactions | No | No | — | MISSING |
-| particle | `phys.particle.electroweak-unification` | Electroweak Unification | No | No | — | MISSING |
-| particle | `phys.particle.feynman-diagrams` | Feynman Diagrams (Qualitative) | No | No | — | MISSING |
-| particle | `phys.particle.four-forces` | Four Fundamental Forces | No | No | — | MISSING |
-| particle | `phys.particle.gauge-bosons` | Gauge Bosons and Force Carriers | No | No | — | MISSING |
-| particle | `phys.particle.hadron-quark-model` | Quark Model of Hadrons: Baryons and Mesons | No | No | — | MISSING |
-| particle | `phys.particle.higgs-mechanism` | The Higgs Mechanism | No | No | — | MISSING |
-| particle | `phys.particle.leptons` | Leptons | No | No | — | MISSING |
-| particle | `phys.particle.neutrinos` | Neutrinos | No | No | — | MISSING |
-| particle | `phys.particle.particle-classification` | Particle Classification: Hadrons and Leptons | No | No | — | MISSING |
-| particle | `phys.particle.quarks` | Quarks | No | No | — | MISSING |
-| particle | `phys.particle.standard-model` | The Standard Model | No | No | — | MISSING |
-| particle | `phys.particle.strong-interaction` | The Strong Interaction and Color Charge | No | No | — | MISSING |
-| particle | `phys.particle.weak-interaction` | The Weak Interaction | No | No | — | MISSING |
+| particle | `phys.particle.accelerators-detectors` | Particle Accelerators and Detectors | Yes | No | — | MISSING |
+| particle | `phys.particle.antimatter` | Antimatter and Antiparticles | Yes | No | — | MISSING |
+| particle | `phys.particle.conservation-laws` | Conservation Laws in Particle Interactions | Yes | No | — | MISSING |
+| particle | `phys.particle.electroweak-unification` | Electroweak Unification | Yes | No | — | MISSING |
+| particle | `phys.particle.feynman-diagrams` | Feynman Diagrams (Qualitative) | Yes | No | — | MISSING |
+| particle | `phys.particle.four-forces` | Four Fundamental Forces | Yes | Yes | `educational-brain/concepts/physics/phys.particle.four-forces.md` | READY |
+| particle | `phys.particle.gauge-bosons` | Gauge Bosons and Force Carriers | Yes | No | — | MISSING |
+| particle | `phys.particle.hadron-quark-model` | Quark Model of Hadrons: Baryons and Mesons | Yes | No | — | MISSING |
+| particle | `phys.particle.higgs-mechanism` | The Higgs Mechanism | Yes | No | — | MISSING |
+| particle | `phys.particle.leptons` | Leptons | Yes | No | — | MISSING |
+| particle | `phys.particle.neutrinos` | Neutrinos | Yes | No | — | MISSING |
+| particle | `phys.particle.particle-classification` | Particle Classification: Hadrons and Leptons | Yes | No | — | MISSING |
+| particle | `phys.particle.quarks` | Quarks | Yes | No | — | MISSING |
+| particle | `phys.particle.standard-model` | The Standard Model | Yes | No | — | MISSING |
+| particle | `phys.particle.strong-interaction` | The Strong Interaction and Color Charge | Yes | No | — | MISSING |
+| particle | `phys.particle.weak-interaction` | The Weak Interaction | Yes | No | — | MISSING |
 | qm | `phys.qm.angular-momentum-addition` | Addition of Angular Momenta and Clebsch-Gordan Coefficients | Yes | No | — | MISSING |
 | qm | `phys.qm.density-matrix` | Density Matrix and Mixed Quantum States | Yes | No | — | MISSING |
 | qm | `phys.qm.harmonic-oscillator-qm` | Quantum Harmonic Oscillator | Yes | Yes | `educational-brain/concepts/physics/phys.qm.harmonic-oscillator-qm.md` | READY |
-| qm | `phys.qm.hydrogen-atom-qm` | Quantum Treatment of Hydrogen Atom | Yes | No | — | MISSING |
+| qm | `phys.qm.hydrogen-atom-qm` | Quantum Treatment of Hydrogen Atom | Yes | Yes | `educational-brain/concepts/physics/phys.qm.hydrogen-atom-qm.md` | READY |
 | qm | `phys.qm.identical-particles` | Identical Particles and the Symmetrization Postulate | Yes | No | — | MISSING |
 | qm | `phys.qm.operators` | Quantum Operators and Observables | Yes | Yes | `educational-brain/concepts/physics/phys.qm.operators.md` | READY |
 | qm | `phys.qm.particle-in-box` | Particle in an Infinite Square Well | Yes | Yes | `educational-brain/concepts/physics/phys.qm.particle-in-box.md` | READY |
@@ -1105,7 +1105,7 @@ its subject KG.
 | qm | `phys.qm.scattering-theory-born-approximation` | Scattering Theory and the Born Approximation | Yes | No | — | MISSING |
 | qm | `phys.qm.schrodinger-equation` | Time-Dependent Schrödinger Equation | Yes | Yes | `educational-brain/concepts/physics/phys.qm.schrodinger-equation.md` | READY |
 | qm | `phys.qm.selection-rules` | Selection Rules and Transition Probabilities | Yes | No | — | MISSING |
-| qm | `phys.qm.spin` | Electron Spin and the Stern-Gerlach Experiment | Yes | No | — | MISSING |
+| qm | `phys.qm.spin` | Electron Spin and the Stern-Gerlach Experiment | Yes | Yes | `educational-brain/concepts/physics/phys.qm.spin.md` | READY |
 | qm | `phys.qm.uncertainty-principle` | Heisenberg's Uncertainty Principle | Yes | Yes | `educational-brain/concepts/physics/phys.qm.uncertainty-principle.md` | READY |
 | qm | `phys.qm.variational-method` | Variational Method and Variational Principle | Yes | No | — | MISSING |
 | qm | `phys.qm.wave-function` | Wave Function and Probability Interpretation | Yes | Yes | `educational-brain/concepts/physics/phys.qm.wave-function.md` | READY |
@@ -1116,7 +1116,7 @@ its subject KG.
 | rel | `phys.rel.postulates` | Postulates of Special Relativity | Yes | Yes | `educational-brain/concepts/physics/phys.rel.postulates.md` | READY |
 | rel | `phys.rel.relativistic-momentum` | Relativistic Momentum and Energy | Yes | Yes | `educational-brain/concepts/physics/phys.rel.relativistic-momentum.md` | READY |
 | rel | `phys.rel.simultaneity` | Relativity of Simultaneity | Yes | Yes | `educational-brain/concepts/physics/phys.rel.simultaneity.md` | READY |
-| rel | `phys.rel.spacetime` | Spacetime Interval and Four-Vectors | Yes | No | — | MISSING |
+| rel | `phys.rel.spacetime` | Spacetime Interval and Four-Vectors | Yes | Yes | `educational-brain/concepts/physics/phys.rel.spacetime.md` | READY |
 | rel | `phys.rel.time-dilation` | Time Dilation | Yes | Yes | `educational-brain/concepts/physics/phys.rel.time-dilation.md` | READY |
 | stat | `phys.stat.boltzmann-factor` | Boltzmann Factor and Statistical Weight | Yes | Yes | `educational-brain/concepts/physics/phys.stat.boltzmann-factor.md` | READY |
 | stat | `phys.stat.bose-einstein` | Bose-Einstein Statistics | Yes | Yes | `educational-brain/concepts/physics/phys.stat.bose-einstein.md` | READY |
@@ -1126,7 +1126,7 @@ its subject KG.
 | stat | `phys.stat.fluctuations-correlations` | Fluctuations, Response Functions, and Correlations | Yes | Yes | `educational-brain/concepts/physics/phys.stat.fluctuations-correlations.md` | READY |
 | stat | `phys.stat.free-energy` | Helmholtz and Gibbs Free Energy | Yes | Yes | `educational-brain/concepts/physics/phys.stat.free-energy.md` | READY |
 | stat | `phys.stat.grand-canonical-ensemble` | Grand Canonical Ensemble | Yes | Yes | `educational-brain/concepts/physics/phys.stat.grand-canonical-ensemble.md` | READY |
-| stat | `phys.stat.ising-model` | Ising Model | Yes | No | — | MISSING |
+| stat | `phys.stat.ising-model` | Ising Model | Yes | Yes | `educational-brain/concepts/physics/phys.stat.ising-model.md` | READY |
 | stat | `phys.stat.maxwell-boltzmann` | Maxwell-Boltzmann Speed Distribution | Yes | Yes | `educational-brain/concepts/physics/phys.stat.maxwell-boltzmann.md` | READY |
 | stat | `phys.stat.monte-carlo-basics` | Monte Carlo Methods in Statistical Physics | Yes | No | — | MISSING |
 | stat | `phys.stat.partition-function` | Partition Function | Yes | Yes | `educational-brain/concepts/physics/phys.stat.partition-function.md` | READY |
