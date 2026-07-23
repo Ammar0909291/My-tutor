@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **352** |
-| Remaining | **1,423** |
-| Completion percentage | **19.83%** |
+| Concepts with an Educational Brain entry | **369** |
+| Remaining | **1,406** |
+| Completion percentage | **20.79%** |
 
 ---
 
@@ -26,7 +26,7 @@ below from source whenever this file is updated, never hand-estimate.
 | mathematics | 908 | 37 | 4.07% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 223 | 93.70% | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
-| chemistry | 186 | 89 | 47.85% | `chem.found.matter` | **Yes** |
+| chemistry | 186 | 106 | 56.99% | `chem.found.matter` | **Yes** |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
 
@@ -481,6 +481,21 @@ current-batch entry below.**
 
 ## 4. Current batch
 
+**Chemistry EB level 12 (concurrent batch, standing production run —
+merged from a parallel session)**: authored 17 concepts at dependency
+level 12 in strict topological order — chem.bond.mo-theory,
+chem.bond.polar-molecules, chem.coord.werner, chem.dblock.first-row,
+chem.dblock.lanthanides, chem.org.hybridization, chem.org.purification,
+chem.org.spectroscopy, chem.pblock.trends, chem.redox.activity-series,
+chem.redox.disproportionation, chem.redox.titrations,
+chem.sblock.alkaline-earth, chem.solid.amorphous, chem.solid.defects,
+chem.solid.packing, chem.thermo.bond-enthalpy. Chemistry is now 106/186
+(56.99%). Level 13 is next. This batch was pushed to `origin/main`
+concurrently with this session's Physics Wave 19 batch (below); merged
+via `git merge` with zero file overlap in authored concept files — only
+`COVERAGE.md` and this file needed reconciliation (see the Merge note in
+`COVERAGE.md`'s Delivery history).
+
 **Physics Wave 19 (this batch, explicit exception — standing Curriculum
 Completion Program 8-step cycle)**: continuing the same cycle
 immediately after Wave 18 in response to the user's "Keep continue until
@@ -504,13 +519,16 @@ duplicate filenames/concept IDs, zero orphans against the live physics
 KG (all 223 physics EB files map to a valid KG id; repo-wide scan across
 all 6 subjects also clean). Physics KG re-validated PASS (238/238
 reachable, 0 failures/warnings, no KG file touched); all 6 subject KGs
-re-validated PASS. Physics EB reached 223/238 — 93.70%. True total,
-recomputed fresh: **352** EB entries (223 physics + 37 mathematics + 89
-chemistry + 3 english), out of 1,775 total KG concepts — 1,423
-remaining, 19.83%. Wave 20 candidates were NOT computed this batch — the
-next physics iteration should begin with a fresh fetch/audit per this
-program's standing discipline, continuing without pausing until physics
-reaches 238/238.
+re-validated PASS. Physics EB reached 223/238 — 93.70%. True total at
+the moment this wave was authored (before merging the concurrent
+chemistry batch above): **352** EB entries (223 physics + 37 mathematics
++ 89 chemistry + 3 english), out of 1,775 total KG concepts — 1,423
+remaining, 19.83%. Combined true total after merge (see §1 above):
+**369** entries (223 physics + 37 mathematics + 106 chemistry + 3
+english) — 1,406 remaining, 20.79%. Wave 20 candidates were NOT computed
+this batch — the next physics iteration should begin with a fresh
+fetch/audit per this program's standing discipline, continuing without
+pausing until physics reaches 238/238.
 
 **Prior batch (Physics Wave 18)**: continuing the same cycle immediately
 after Wave 17. Authored the level-18 set (8 concepts): `phys.qm.
@@ -563,6 +581,7 @@ verified against `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section
 structure and heading order (0 mismatches), zero duplicates, zero
 orphans. True total at that point: 308 entries (179 physics + 37
 mathematics + 89 chemistry + 3 english), 1,478 remaining, 17.34%.
+
 
 **Prior batch (batch 20, Chemistry EB level 5)**: authored 6 concepts at level 5.
 Chemistry reached 38/186 (20.43%). True total at that point: 257 entries.
@@ -728,10 +747,10 @@ procedure.
    any stored candidate list. The user has instructed continuation of
    this cycle until physics reaches 238/238.
 
-Full computed order (all 1,423 remaining concepts): see
-`AUTHORING_QUEUE.md` — §5 above (the domain-completion constraint) takes
-precedence over that file's literal row order until `math.found` is
-complete, unless overridden per item 4.
+Full computed order (all 1,406 remaining concepts, post-merge total —
+see §1 above): see `AUTHORING_QUEUE.md` — §5 above (the domain-
+completion constraint) takes precedence over that file's literal row
+order until `math.found` is complete, unless overridden per item 4.
 
 ## 6. Next batch
 

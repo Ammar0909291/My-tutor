@@ -14,7 +14,7 @@ and this file's summary row should be corrected to match.
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
 | physics | 238 | 223 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 (2026-07-23, level 19, this batch): `phys.qm.wkb-approximation`, `phys.qm.s-matrix-basics`, `phys.astro.stellar-evolution`, `phys.astro.cosmology`, `phys.particle.neutrinos`, `phys.particle.hadron-quark-model`, `phys.particle.strong-interaction`, `phys.mod.energy-bands` — 15 concepts remain (93.70%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-18 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
-| chemistry | 186 | 89 | levels 0–11 complete (89/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock, chem.redox, chem.dblock, chem.org, chem.pblock, chem.solid — IN PROGRESS |
+| chemistry | 186 | 106 | levels 0–12 complete (106/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock, chem.redox, chem.dblock, chem.org, chem.pblock, chem.solid — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
 
@@ -1045,10 +1045,46 @@ orphans against the live physics KG (all 223 physics EB files map to a
 valid KG id, repo-wide scan across all 6 subjects also clean). Physics
 KG re-validated: PASS, 238/238 reachable, 0 failures/warnings — no KG
 file was touched; all 6 subject KGs re-validated PASS. `physics` is now
-223/238 — 93.70% complete. True total, recomputed fresh: **352** entries
-(223 physics + 37 mathematics + 89 chemistry + 3 english), out of 1,775
-total KG concepts — 1,423 remaining, 19.83%. Per the standing
-instruction, Wave 20 candidates were not computed this batch — the next
-physics iteration should begin immediately with a fresh fetch/audit per
-this program's standing discipline, continuing without pausing until
-physics reaches 238/238.
+223/238 — 93.70% complete. True total at the moment this wave was
+authored (before merging the concurrent chemistry batch below):
+**352** entries (223 physics + 37 mathematics + 89 chemistry + 3
+english), out of 1,775 total KG concepts — 1,423 remaining, 19.83%. Per
+the standing instruction, Wave 20 candidates were not computed this
+batch — the next physics iteration should begin immediately with a
+fresh fetch/audit per this program's standing discipline, continuing
+without pausing until physics reaches 238/238.
+
+**Merge note (2026-07-23)**: this Wave 19 commit and a concurrent
+session's Chemistry level-12 batch (below) were pushed independently and
+merged via `git merge`, both touching this file and `ROADMAP.md`. No
+file overlap in the authored `.md` concept files themselves (physics vs.
+chemistry) — only the two shared tracking files needed reconciliation.
+Combined true total after merge: **369** entries (223 physics + 37
+mathematics + 106 chemistry + 3 english), out of 1,775 total KG
+concepts — 1,406 remaining, 20.79%. Re-verified via a full recount of
+every live file in `educational-brain/concepts/{subject}/` after the
+merge, not by simple addition of the two batches' self-reported totals.
+
+### Batch 27 — Chemistry level 12 (17 concepts, 2026-07-23)
+17 concepts authored at topological level 12 in strict dependency order.
+
+Files authored:
+- chem.bond.mo-theory (MO theory: LCAO, bonding/antibonding, bond order, O₂ paramagnetism)
+- chem.bond.polar-molecules (dipole vector addition; CO₂ nonpolar despite polar bonds; BF₃ vs NF₃)
+- chem.coord.werner (Werner's primary/secondary valency; AgNO₃ precipitation; chelate effect)
+- chem.dblock.first-row (Cr/Cu anomalies; Fe/Cu/Mn/Cr OS; Fe²⁺/Fe³⁺/Cu²⁺/MnO₄⁻/Cr₂O₇²⁻ chemistry)
+- chem.dblock.lanthanides (f-block; lanthanide contraction; f–f transitions; NdFeB/Eu/Tb/Ce/Gd applications)
+- chem.org.hybridization (sp³/sp²/sp in organic; O and N heteroatom hybridization; pyridine-N vs pyrrole-N)
+- chem.org.purification (distillation/recrystallisation/extraction/TLC/column/GC-MS; mp as purity indicator)
+- chem.org.spectroscopy (MS M⁺/base peak/isotope patterns; IR key absorptions; ¹H NMR δ/splitting/integration)
+- chem.pblock.trends (oxide acidity Period 3; chloride hydrolysis; hydride bp anomalies; inert pair; first-member anomaly)
+- chem.redox.activity-series (E° definition; SHE; E°cell = E°cathode − E°anode; displacement reactions; activity series)
+- chem.redox.disproportionation (same element same OS → split to higher and lower; Cu⁺ unstable; Cl₂/alkali; H₂O₂; E° criterion)
+- chem.redox.titrations (KMnO₄ self-indicating/H₂SO₄ only; K₂Cr₂O₇/diphenylamine; iodometric/thiosulfate 2:1; starch near endpoint)
+- chem.sblock.alkaline-earth (Group 2; +2 always; reactivity ↑ down; hydroxide solubility ↑ down; sulphate solubility ↓ down; carbonate thermal stability; Be anomaly)
+- chem.solid.amorphous (no long-range order; isotropic; Tg; no sharp mp; glass/polymers/metallic glasses; glass-flow myth)
+- chem.solid.defects (Schottky/Frenkel point defects; density effects; non-stoichiometry FeO₁₋ₓ; F-centres; dislocations)
+- chem.solid.packing (CCP ABCABC vs HCP ABABAB; 74% packing; 2 tet + 1 oct holes per CCP atom; NaCl/ZnS/CaF₂ hole-filling)
+- chem.thermo.bond-enthalpy (mean bond enthalpies; ΔH ≈ Σbroken − Σformed; estimate not exact; F–F weakness; N≡N strength)
+
+Running total: 106/186 chemistry entries. Levels 0–12 complete.

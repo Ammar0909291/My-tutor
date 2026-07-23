@@ -1389,7 +1389,7 @@ its subject KG.
 | writing | `eng.writing.topic-sentences` | Topic Sentences | Yes | No | — | MISSING |
 | writing | `eng.writing.transitions-and-cohesion` | Transitions and Cohesion | Yes | No | — | MISSING |
 
-## chemistry (186 concepts, 89 READY)
+## chemistry (186 concepts, 106 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | alc | `chem.alc.alcohols` | Alcohols | No | No | — | MISSING |
@@ -1425,8 +1425,8 @@ its subject KG.
 | bond | `chem.bond.intermolecular` | Intermolecular Forces | No | No | — | MISSING |
 | bond | `chem.bond.ionic-bonding` | Ionic Bonding | No | Yes | `educational-brain/concepts/chemistry/chem.bond.ionic-bonding.md` | READY |
 | bond | `chem.bond.metallic-bonding` | Metallic Bonding | No | Yes | `educational-brain/concepts/chemistry/chem.bond.metallic-bonding.md` | READY |
-| bond | `chem.bond.mo-theory` | Molecular Orbital Theory | No | No | — | MISSING |
-| bond | `chem.bond.polar-molecules` | Polarity and Dipole Moment | No | No | — | MISSING |
+| bond | `chem.bond.mo-theory` | Molecular Orbital Theory | No | `educational-brain/concepts/chemistry/chem.bond.mo-theory.md` | READY |
+| bond | `chem.bond.polar-molecules` | Polarity and Dipole Moment | No | `educational-brain/concepts/chemistry/chem.bond.polar-molecules.md` | READY |
 | bond | `chem.bond.resonance` | Resonance Structures | No | Yes | `educational-brain/concepts/chemistry/chem.bond.resonance.md` | READY |
 | bond | `chem.bond.vsepr` | VSEPR Theory | No | Yes | `educational-brain/concepts/chemistry/chem.bond.vsepr.md` | READY |
 | carb | `chem.carb.aldehydes` | Aldehydes | No | No | — | MISSING |
@@ -1442,10 +1442,10 @@ its subject KG.
 | coord | `chem.coord.isomerism` | Isomerism in Complexes | No | No | — | MISSING |
 | coord | `chem.coord.nomenclature` | Nomenclature of Complexes | No | No | — | MISSING |
 | coord | `chem.coord.stability` | Stability Constants | No | No | — | MISSING |
-| coord | `chem.coord.werner` | Werner's Theory | No | No | — | MISSING |
-| dblock | `chem.dblock.first-row` | First-Row Transition Metals | No | No | — | MISSING |
+| coord | `chem.coord.werner` | Werner's Theory | No | `educational-brain/concepts/chemistry/chem.coord.werner.md` | READY |
+| dblock | `chem.dblock.first-row` | First-Row Transition Metals | No | `educational-brain/concepts/chemistry/chem.dblock.first-row.md` | READY |
 | dblock | `chem.dblock.general` | Transition Metals — General Properties | No | Yes | `educational-brain/concepts/chemistry/chem.dblock.general.md` | READY |
-| dblock | `chem.dblock.lanthanides` | Lanthanides and Actinides | No | No | — | MISSING |
+| dblock | `chem.dblock.lanthanides` | Lanthanides and Actinides | No | `educational-brain/concepts/chemistry/chem.dblock.lanthanides.md` | READY |
 | dblock | `chem.dblock.organometallics` | Organometallic Chemistry | No | No | — | MISSING |
 | dblock | `chem.dblock.oxo-species` | Oxides and Oxyanions of Transition Metals | No | No | — | MISSING |
 | elect | `chem.elect.batteries` | Batteries and Fuel Cells | No | No | — | MISSING |
@@ -1509,22 +1509,22 @@ its subject KG.
 | org | `chem.org.aromaticity` | Aromaticity | No | No | — | MISSING |
 | org | `chem.org.arrow-pushing` | Electron Flow and Arrow Notation | No | No | — | MISSING |
 | org | `chem.org.electronic-effects` | Inductive and Mesomeric Effects | No | No | — | MISSING |
-| org | `chem.org.hybridization` | Carbon Hybridization | No | No | — | MISSING |
+| org | `chem.org.hybridization` | Carbon Hybridization | No | `educational-brain/concepts/chemistry/chem.org.hybridization.md` | READY |
 | org | `chem.org.isomerism` | Structural and Stereoisomerism | No | No | — | MISSING |
 | org | `chem.org.iupac` | IUPAC Nomenclature | No | Yes | `educational-brain/concepts/chemistry/chem.org.iupac.md` | READY |
 | org | `chem.org.mechanisms` | Organic Reaction Mechanisms | No | No | — | MISSING |
 | org | `chem.org.pericyclic` | Pericyclic Reactions | No | No | — | MISSING |
-| org | `chem.org.purification` | Purification Techniques | No | No | — | MISSING |
+| org | `chem.org.purification` | Purification Techniques | No | `educational-brain/concepts/chemistry/chem.org.purification.md` | READY |
 | org | `chem.org.qualitative-analysis` | Qualitative Organic Analysis | No | No | — | MISSING |
 | org | `chem.org.reactive-intermediates` | Reactive Intermediates | No | No | — | MISSING |
-| org | `chem.org.spectroscopy` | Introduction to Spectroscopy | No | No | — | MISSING |
+| org | `chem.org.spectroscopy` | Introduction to Spectroscopy | No | `educational-brain/concepts/chemistry/chem.org.spectroscopy.md` | READY |
 | pblock | `chem.pblock.group13` | Group 13 — Boron Family | No | Yes | `educational-brain/concepts/chemistry/chem.pblock.group13.md` | READY |
 | pblock | `chem.pblock.group14` | Group 14 — Carbon Family | No | Yes | `educational-brain/concepts/chemistry/chem.pblock.group14.md` | READY |
 | pblock | `chem.pblock.group15` | Group 15 — Nitrogen Family | No | Yes | `educational-brain/concepts/chemistry/chem.pblock.group15.md` | READY |
 | pblock | `chem.pblock.group16` | Group 16 — Oxygen Family | No | Yes | `educational-brain/concepts/chemistry/chem.pblock.group16.md` | READY |
 | pblock | `chem.pblock.group17` | Group 17 — Halogens | No | Yes | `educational-brain/concepts/chemistry/chem.pblock.group17.md` | READY |
 | pblock | `chem.pblock.group18` | Group 18 — Noble Gases | No | Yes | `educational-brain/concepts/chemistry/chem.pblock.group18.md` | READY |
-| pblock | `chem.pblock.trends` | Trends Across p-Block | No | No | — | MISSING |
+| pblock | `chem.pblock.trends` | Trends Across p-Block | No | `educational-brain/concepts/chemistry/chem.pblock.trends.md` | READY |
 | period | `chem.period.atomic-radius` | Atomic and Ionic Radius | No | Yes | `educational-brain/concepts/chemistry/chem.period.atomic-radius.md` | READY |
 | period | `chem.period.classification` | Early Classification of Elements | No | Yes | `educational-brain/concepts/chemistry/chem.period.classification.md` | READY |
 | period | `chem.period.electron-affinity` | Electron Affinity and Electronegativity | No | Yes | `educational-brain/concepts/chemistry/chem.period.electron-affinity.md` | READY |
@@ -1537,13 +1537,13 @@ its subject KG.
 | poly | `chem.poly.condensation` | Condensation Polymerization | No | No | — | MISSING |
 | poly | `chem.poly.natural` | Natural Polymers | No | No | — | MISSING |
 | poly | `chem.poly.properties` | Polymer Properties | No | No | — | MISSING |
-| redox | `chem.redox.activity-series` | Electrochemical Activity Series | No | No | — | MISSING |
+| redox | `chem.redox.activity-series` | Electrochemical Activity Series | No | `educational-brain/concepts/chemistry/chem.redox.activity-series.md` | READY |
 | redox | `chem.redox.balancing` | Balancing Redox Equations | No | Yes | `educational-brain/concepts/chemistry/chem.redox.balancing.md` | READY |
-| redox | `chem.redox.disproportionation` | Disproportionation | No | No | — | MISSING |
+| redox | `chem.redox.disproportionation` | Disproportionation | No | `educational-brain/concepts/chemistry/chem.redox.disproportionation.md` | READY |
 | redox | `chem.redox.oxidation-state` | Oxidation State | No | Yes | `educational-brain/concepts/chemistry/chem.redox.oxidation-state.md` | READY |
-| redox | `chem.redox.titrations` | Redox Titrations | No | No | — | MISSING |
+| redox | `chem.redox.titrations` | Redox Titrations | No | `educational-brain/concepts/chemistry/chem.redox.titrations.md` | READY |
 | sblock | `chem.sblock.alkali` | Alkali Metals | No | Yes | `educational-brain/concepts/chemistry/chem.sblock.alkali.md` | READY |
-| sblock | `chem.sblock.alkaline-earth` | Alkaline Earth Metals | No | No | — | MISSING |
+| sblock | `chem.sblock.alkaline-earth` | Alkaline Earth Metals | No | `educational-brain/concepts/chemistry/chem.sblock.alkaline-earth.md` | READY |
 | sblock | `chem.sblock.hydrogen` | Hydrogen | No | Yes | `educational-brain/concepts/chemistry/chem.sblock.hydrogen.md` | READY |
 | sblock | `chem.sblock.water` | Chemistry of Water | No | No | — | MISSING |
 | sol | `chem.sol.activity` | Activity and Non-ideal Solutions | No | No | — | MISSING |
@@ -1552,11 +1552,11 @@ its subject KG.
 | sol | `chem.sol.solubility` | Solubility and Henry's Law | No | Yes | `educational-brain/concepts/chemistry/chem.sol.solubility.md` | READY |
 | sol | `chem.sol.types` | Types of Solutions | No | Yes | `educational-brain/concepts/chemistry/chem.sol.types.md` | READY |
 | sol | `chem.sol.vapour-pressure` | Vapour Pressure of Solutions | No | No | — | MISSING |
-| solid | `chem.solid.amorphous` | Amorphous Solids | No | No | — | MISSING |
+| solid | `chem.solid.amorphous` | Amorphous Solids | No | `educational-brain/concepts/chemistry/chem.solid.amorphous.md` | READY |
 | solid | `chem.solid.crystal-systems` | Crystal Systems | No | Yes | `educational-brain/concepts/chemistry/chem.solid.crystal-systems.md` | READY |
-| solid | `chem.solid.defects` | Crystal Defects | No | No | — | MISSING |
+| solid | `chem.solid.defects` | Crystal Defects | No | `educational-brain/concepts/chemistry/chem.solid.defects.md` | READY |
 | solid | `chem.solid.ionic-solids` | Ionic Crystal Structures | No | No | — | MISSING |
-| solid | `chem.solid.packing` | Close Packing and Efficiency | No | No | — | MISSING |
+| solid | `chem.solid.packing` | Close Packing and Efficiency | No | `educational-brain/concepts/chemistry/chem.solid.packing.md` | READY |
 | solid | `chem.solid.properties` | Electrical and Magnetic Properties | No | No | — | MISSING |
 | state | `chem.state.gas-laws` | Gas Laws | No | Yes | `educational-brain/concepts/chemistry/chem.state.gas-laws.md` | READY |
 | state | `chem.state.kinetic-theory` | Kinetic Molecular Theory of Gases | No | Yes | `educational-brain/concepts/chemistry/chem.state.kinetic-theory.md` | READY |
@@ -1569,7 +1569,7 @@ its subject KG.
 | surface | `chem.surface.emulsions` | Emulsions and Gels | No | Yes | `educational-brain/concepts/chemistry/chem.surface.emulsions.md` | READY |
 | surface | `chem.surface.heterogeneous-cat` | Mechanism of Heterogeneous Catalysis | No | Yes | `educational-brain/concepts/chemistry/chem.surface.heterogeneous-cat.md` | READY |
 | surface | `chem.surface.surfactants` | Surfactants and Micelles | No | No | — | MISSING |
-| thermo | `chem.thermo.bond-enthalpy` | Bond Enthalpy | No | No | — | MISSING |
+| thermo | `chem.thermo.bond-enthalpy` | Bond Enthalpy | No | `educational-brain/concepts/chemistry/chem.thermo.bond-enthalpy.md` | READY |
 | thermo | `chem.thermo.cell-thermo` | Electrochemical Thermodynamics | No | Yes | `educational-brain/concepts/chemistry/chem.thermo.cell-thermo.md` | READY |
 | thermo | `chem.thermo.enthalpy` | Enthalpy and Hess's Law | No | Yes | `educational-brain/concepts/chemistry/chem.thermo.enthalpy.md` | READY |
 | thermo | `chem.thermo.entropy` | Entropy and Second Law | No | Yes | `educational-brain/concepts/chemistry/chem.thermo.entropy.md` | READY |
