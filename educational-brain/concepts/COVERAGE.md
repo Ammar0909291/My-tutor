@@ -14,7 +14,7 @@ and this file's summary row should be corrected to match.
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
 | physics | 238 | 155 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 (2026-07-23, level 11, this batch): `phys.mech.angular-momentum`, `phys.mech.rolling-motion`, `phys.mech.euler-lagrange-equation`, `phys.therm.carnot-cycle`, `phys.therm.third-law`, `phys.mod.compton-effect`, `phys.mod.de-broglie`, `phys.mod.bohr-model`, `phys.mod.x-rays`, `phys.rel.time-dilation`, `phys.stat.probability-basics` — 83 concepts remain (65.13%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-10 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
-| chemistry | 186 | 0 | — |
+| chemistry | 186 | 24 | levels 0–3 complete (24/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
 
@@ -598,3 +598,31 @@ retrieval engine. Per-entry completeness against the tracked fields is in
   tracking files regenerated from source; re-validated 0 orphans, 0
   duplicates, 0 broken KG references, 0 invalid Blueprint references across
   all 195 entries.
+
+- **Curriculum Completion Program, Chemistry EB batch 1 — levels 0–3
+  (standing production run)** (2026-07-23): new standing production
+  instruction — author ALL 186 Chemistry Educational Brain entries in
+  strict topological dependency order (22 levels, 0–21), one level per
+  commit, continuing without stopping until 186/186. Level 0 (1 concept):
+  `chem.found.matter`. Level 1 (4 concepts): `chem.found.states-of-matter`,
+  `chem.found.pure-substances`, `chem.found.measurement`,
+  `chem.atomic.atomic-theory`. Level 2 (8 concepts):
+  `chem.found.significant-figures`, `chem.found.mole-concept`,
+  `chem.atomic.subatomic-particles`, `chem.atomic.electromagnetic-radiation`,
+  `chem.state.kinetic-theory`, `chem.thermo.system`, `chem.elect.conductance`,
+  `chem.surface.colloids`, `chem.env.atmosphere`. Level 3 (10 concepts):
+  `chem.found.stoichiometry`, `chem.found.concentration`,
+  `chem.atomic.atomic-spectra`, `chem.atomic.photoelectric-effect`,
+  `chem.period.classification`, `chem.state.gas-laws`, `chem.thermo.first-law`,
+  `chem.surface.emulsions`, `chem.env.air-pollution`, `chem.env.water-soil`.
+  KEY DISCOVERY: all 186 chemistry Blueprint entries in
+  `docs/chemistry/teaching-assets/assets.json` contain `[TEMPLATE]`
+  placeholder strings — no authored Blueprint content exists for chemistry.
+  All chemistry EB entries are authored entirely from KG data
+  (description, difficulty, bloom, estimated_hours, mastery_threshold,
+  requires, unlocks, cross_links) and domain chemistry expertise, not by
+  cross-referencing Blueprint content. Blueprint References section in
+  each entry explicitly states this template status. 24 entries authored;
+  all verified against `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section
+  structure and heading order; 0 orphans, 0 duplicates. Chemistry is
+  24/186 — 12.90% complete; Level 4 is next.
