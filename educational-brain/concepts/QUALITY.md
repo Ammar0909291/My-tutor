@@ -30,20 +30,20 @@ rather than hand-edit when entries change.
   Wave 2, 6 from Wave 3, 4 from Wave 4, 8 from Wave 5 of math.found)
   correctly read ✓.
 
-## Aggregate summary (154 entries)
+## Aggregate summary (170 entries)
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 147 / 154 | 7 genuinely have none yet — see note above; +15 from this batch (all 15 have existing Blueprints) |
-| Educational Brain | 154 / 154 | trivially true (this is the entry list) |
-| Mental Model | 154 / 154 | |
-| Misconceptions | 154 / 154 | |
-| Analogies | 154 / 154 | |
-| Recovery Strategy | 154 / 154 | |
-| Assessment Signals | 154 / 154 | |
-| Tutor Actions | 154 / 154 | |
-| Cross-links | 127 / 154 | +15 from this batch (all 15 physics Wave 8 entries discuss cross-subject connections) |
-| Version History | 83 / 154 | +15 from this batch (physics Wave 8, all 15 authored under the Standard) |
+| Blueprint | 163 / 170 | 7 genuinely have none yet — see note above; +16 from this batch (all 16 have existing Blueprints) |
+| Educational Brain | 170 / 170 | trivially true (this is the entry list) |
+| Mental Model | 170 / 170 | |
+| Misconceptions | 170 / 170 | |
+| Analogies | 170 / 170 | |
+| Recovery Strategy | 170 / 170 | |
+| Assessment Signals | 170 / 170 | |
+| Tutor Actions | 170 / 170 | |
+| Cross-links | 143 / 170 | +16 from this batch (all 16 physics Wave 9 entries discuss cross-subject connections) |
+| Version History | 99 / 170 | +16 from this batch (physics Wave 9, all 16 authored under the Standard) |
 
 ## Per-concept ledger
 
@@ -113,9 +113,12 @@ rather than hand-edit when entries change.
 | `phys.em.maxwells-equations` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.em.mutual-inductance` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.em.ohms-law` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.em.potentiometer` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.em.rc-circuits` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.em.resistivity` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.em.self-inductance` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.em.solenoid` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.em.wheatstone-bridge` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.meas.dimensions` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.meas.errors` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.meas.scalars-vectors` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
@@ -126,12 +129,18 @@ rather than hand-edit when entries change.
 | `phys.meas.vector-products` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.mech.acceleration` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.mech.angular-kinematics` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.mech.bernoulli` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.buoyancy` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.center-of-mass` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.circular-motion` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
+| `phys.mech.collisions-elastic` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.mech.collisions-inelastic` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.conservation-of-energy` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.conservation-of-momentum` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.mech.conservative-forces` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.displacement` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
+| `phys.mech.equilibrium` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.mech.escape-velocity` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.force` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.mech.free-body-diagram` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
 | `phys.mech.friction` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -143,11 +152,13 @@ rather than hand-edit when entries change.
 | `phys.mech.kinematics-1d` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.mech.kinematics-2d` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.mech.kinetic-energy` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.mech.moment-of-inertia` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.momentum` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
 | `phys.mech.newtons-first-law` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.mech.newtons-second-law` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
 | `phys.mech.newtons-third-law` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
 | `phys.mech.normal-force` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.mech.orbital-mechanics` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.potential-energy` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.power` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.pressure-fluids` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -161,6 +172,7 @@ rather than hand-edit when entries change.
 | `phys.mech.velocity` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.mech.work` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
 | `phys.mech.work-energy-theorem` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.mod.photoelectric-effect` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.opt.brewsters-law` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
 | `phys.opt.diffraction` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.opt.dispersion` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
@@ -176,19 +188,23 @@ rather than hand-edit when entries change.
 | `phys.opt.total-internal-reflection` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
 | `phys.opt.wave-optics` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.opt.youngs-experiment` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.rel.postulates` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.therm.calorimetry` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
 | `phys.therm.first-law` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.therm.heat-engines` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.therm.heat-transfer` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.therm.ideal-gas-law` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.therm.internal-energy` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
 | `phys.therm.kinetic-theory` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
 | `phys.therm.phase-transitions` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
+| `phys.therm.second-law` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.therm.specific-heat` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.therm.temperature` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.therm.thermal-expansion` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.therm.thermodynamic-processes` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.therm.zeroth-law` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.wave.beats` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.wave.damped-oscillations` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.wave.doppler-effect` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.wave.interference` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
 | `phys.wave.longitudinal-waves` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |

@@ -12,7 +12,7 @@ and this file's summary row should be corrected to match.
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
 | mathematics | 908 | 32 | `math.arith.fractions` + 31 `math.found.*` entries (Waves 1-5) — math.found domain IN PROGRESS (31/82), see Delivery history |
-| physics | 238 | 119 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 (2026-07-22, level 6) + 25 Wave 7 (2026-07-23, level 7) + 15 Wave 8 (2026-07-23, level 8, this batch): `phys.mech.inclined-plane`, `phys.mech.work-energy-theorem`, `phys.mech.conservation-of-energy`, `phys.mech.conservation-of-momentum`, `phys.mech.torque`, `phys.mech.gravitational-potential`, `phys.therm.thermodynamic-processes`, `phys.wave.shm-energy`, `phys.wave.pendulum`, `phys.wave.spring-mass`, `phys.opt.single-slit`, `phys.em.kirchhoffs-laws`, `phys.em.emf`, `phys.em.lc-circuits`, `phys.em.electromagnetic-waves` — exactly 119 concepts remain (50.00%); see Delivery history for the full pre-existing-67, Wave-6, and Wave-7 name lists |
+| physics | 238 | 135 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 (2026-07-22, level 6) + 25 Wave 7 (2026-07-23, level 7) + 15 Wave 8 (2026-07-23, level 8) + 16 Wave 9 (2026-07-23, level 9, this batch): `phys.mech.conservative-forces`, `phys.mech.collisions-elastic`, `phys.mech.collisions-inelastic`, `phys.mech.moment-of-inertia`, `phys.mech.equilibrium`, `phys.mech.orbital-mechanics`, `phys.mech.escape-velocity`, `phys.mech.bernoulli`, `phys.therm.second-law`, `phys.therm.heat-engines`, `phys.wave.damped-oscillations`, `phys.em.wheatstone-bridge`, `phys.em.potentiometer`, `phys.em.rc-circuits`, `phys.mod.photoelectric-effect`, `phys.rel.postulates` — 103 concepts remain (56.72%); see Delivery history for the full pre-existing-67, Wave-6, Wave-7, and Wave-8 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 0 | — |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
@@ -457,3 +457,45 @@ retrieval engine. Per-entry completeness against the tracked fields is in
   this batch. All six tracking files regenerated from source;
   re-validated 0 orphans, 0 duplicates, 0 broken KG references, 0
   invalid Blueprint references across all 154 entries.
+
+- **Curriculum Completion Program, batch 12 — Physics Wave 9 (mandatory-
+  rules cycle continuation)** (2026-07-23): the same mandatory-rules
+  production cycle continued immediately after Wave 8 within the same
+  conversation, per rule 10's "fetch, re-audit, continue" discipline.
+  Re-fetched `origin/main` after the Wave 8 push and confirmed 0 commits
+  ahead/behind before starting — no other session had touched physics EB
+  concurrently. `math.found` was NOT touched and remains 31/82.
+  Independently recomputed dependency levels via a fresh Kahn's-algorithm
+  pass over the live KG's `requires` edges — the level-9 set (16
+  concepts) matched `AUTHORING_QUEUE.md`'s stored rows exactly, zero
+  discrepancy. Authored all 16: `phys.mech.conservative-forces`,
+  `phys.mech.collisions-elastic`, `phys.mech.collisions-inelastic`,
+  `phys.mech.moment-of-inertia`, `phys.mech.equilibrium`,
+  `phys.mech.orbital-mechanics`, `phys.mech.escape-velocity`,
+  `phys.mech.bernoulli`, `phys.therm.second-law`,
+  `phys.therm.heat-engines`, `phys.wave.damped-oscillations`,
+  `phys.em.wheatstone-bridge`, `phys.em.potentiometer`,
+  `phys.em.rc-circuits`, `phys.mod.photoelectric-effect`,
+  `phys.rel.postulates`. All 16 had existing Blueprints (Component-format)
+  reused by reference — each entry cites its Blueprint's Misconception
+  Engine/Register by name with birth-type classification added, never
+  re-deriving probe/bridge/replacement text. `phys.mod.photoelectric-effect`
+  and `phys.rel.postulates` each cited all 4 of their Blueprint's
+  documented misconceptions (matching the 4-misconception density pattern
+  already established for `phys.opt.diffraction`/`phys.opt.single-slit`
+  in Waves 7-8). This wave introduced the first Modern Physics
+  (`phys.mod.photoelectric-effect`) and Relativity (`phys.rel.postulates`)
+  domain entries in this program — both entry points reached via the
+  classical-electromagnetism capstone (`phys.em.electromagnetic-waves`,
+  Wave 8) and, for relativity, classical mechanics' relative-motion
+  concept. All 16 entries verified against
+  `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and
+  heading order (0 mismatches), zero duplicate filenames/concept IDs,
+  zero orphans against the live physics KG (all 135 physics EB files map
+  to a valid KG id). Physics KG re-validated: PASS, 238/238 reachable, 0
+  failures/warnings — no KG file was touched. `physics` is now 135/238 —
+  56.72% complete. Wave 10 (dependency level 10, 9 concepts —
+  `phys.mech.rotational-dynamics` through `phys.rel.simultaneity`) is
+  computed and next, but NOT started this batch. All six tracking files
+  regenerated from source; re-validated 0 orphans, 0 duplicates, 0 broken
+  KG references, 0 invalid Blueprint references across all 170 entries.
