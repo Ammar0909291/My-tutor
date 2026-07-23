@@ -928,7 +928,7 @@ its subject KG.
 | trig | `math.trig.trig-identities` | Trigonometric Identities | Yes | No | — | MISSING |
 | trig | `math.trig.unit-circle` | Unit Circle | Yes | No | — | MISSING |
 
-## physics (238 concepts, 163 READY)
+## physics (238 concepts, 169 READY)
 
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
@@ -1008,7 +1008,7 @@ its subject KG.
 | mech | `phys.mech.gravitational-potential` | Gravitational Potential Energy | Yes | Yes | `educational-brain/concepts/physics/phys.mech.gravitational-potential.md` | READY |
 | mech | `phys.mech.hamilton-jacobi-equation` | Hamilton-Jacobi Equation and Action-Angle Variables | Yes | No | — | MISSING |
 | mech | `phys.mech.hamiltonian` | The Hamiltonian and Legendre Transform | Yes | Yes | `educational-brain/concepts/physics/phys.mech.hamiltonian.md` | READY |
-| mech | `phys.mech.hamiltons-equations` | Hamilton's Equations of Motion | Yes | No | — | MISSING |
+| mech | `phys.mech.hamiltons-equations` | Hamilton's Equations of Motion | Yes | Yes | `educational-brain/concepts/physics/phys.mech.hamiltons-equations.md` | READY |
 | mech | `phys.mech.hookes-law` | Hooke's Law and Spring Force | Yes | Yes | `educational-brain/concepts/physics/phys.mech.hookes-law.md` | READY |
 | mech | `phys.mech.impulse` | Impulse and Momentum Change | Yes | Yes | `educational-brain/concepts/physics/phys.mech.impulse.md` | READY |
 | mech | `phys.mech.inclined-plane` | Motion on Inclined Planes | Yes | Yes | `educational-brain/concepts/physics/phys.mech.inclined-plane.md` | READY |
@@ -1058,7 +1058,7 @@ its subject KG.
 | mod | `phys.mod.photons` | Photons and Quantization of Light | Yes | Yes | `educational-brain/concepts/physics/phys.mod.photons.md` | READY |
 | mod | `phys.mod.pn-junction` | The p-n Junction | No | No | — | MISSING |
 | mod | `phys.mod.radioactive-decay` | Radioactive Decay Law and Half-Life | Yes | No | — | MISSING |
-| mod | `phys.mod.radioactivity` | Radioactivity: Alpha, Beta, Gamma Decay | Yes | No | — | MISSING |
+| mod | `phys.mod.radioactivity` | Radioactivity: Alpha, Beta, Gamma Decay | Yes | Yes | `educational-brain/concepts/physics/phys.mod.radioactivity.md` | READY |
 | mod | `phys.mod.semiconductor-classification` | Conductors, Insulators, and Semiconductors | No | No | — | MISSING |
 | mod | `phys.mod.wave-particle-duality` | Wave-Particle Duality | Yes | Yes | `educational-brain/concepts/physics/phys.mod.wave-particle-duality.md` | READY |
 | mod | `phys.mod.x-rays` | X-Rays and Their Properties | Yes | Yes | `educational-brain/concepts/physics/phys.mod.x-rays.md` | READY |
@@ -1110,10 +1110,10 @@ its subject KG.
 | qm | `phys.qm.spin` | Electron Spin and the Stern-Gerlach Experiment | Yes | No | — | MISSING |
 | qm | `phys.qm.uncertainty-principle` | Heisenberg's Uncertainty Principle | Yes | No | — | MISSING |
 | qm | `phys.qm.variational-method` | Variational Method and Variational Principle | Yes | No | — | MISSING |
-| qm | `phys.qm.wave-function` | Wave Function and Probability Interpretation | Yes | No | — | MISSING |
+| qm | `phys.qm.wave-function` | Wave Function and Probability Interpretation | Yes | Yes | `educational-brain/concepts/physics/phys.qm.wave-function.md` | READY |
 | qm | `phys.qm.wkb-approximation` | WKB Approximation (Semiclassical Limit) | Yes | No | — | MISSING |
 | rel | `phys.rel.length-contraction` | Length Contraction | Yes | Yes | `educational-brain/concepts/physics/phys.rel.length-contraction.md` | READY |
-| rel | `phys.rel.lorentz-transform` | Lorentz Transformations | Yes | No | — | MISSING |
+| rel | `phys.rel.lorentz-transform` | Lorentz Transformations | Yes | Yes | `educational-brain/concepts/physics/phys.rel.lorentz-transform.md` | READY |
 | rel | `phys.rel.mass-energy` | Mass-Energy Equivalence: E=mc² | Yes | No | — | MISSING |
 | rel | `phys.rel.postulates` | Postulates of Special Relativity | Yes | Yes | `educational-brain/concepts/physics/phys.rel.postulates.md` | READY |
 | rel | `phys.rel.relativistic-momentum` | Relativistic Momentum and Energy | Yes | No | — | MISSING |
@@ -1129,9 +1129,9 @@ its subject KG.
 | stat | `phys.stat.free-energy` | Helmholtz and Gibbs Free Energy | Yes | No | — | MISSING |
 | stat | `phys.stat.grand-canonical-ensemble` | Grand Canonical Ensemble | Yes | No | — | MISSING |
 | stat | `phys.stat.ising-model` | Ising Model | Yes | No | — | MISSING |
-| stat | `phys.stat.maxwell-boltzmann` | Maxwell-Boltzmann Speed Distribution | Yes | No | — | MISSING |
+| stat | `phys.stat.maxwell-boltzmann` | Maxwell-Boltzmann Speed Distribution | Yes | Yes | `educational-brain/concepts/physics/phys.stat.maxwell-boltzmann.md` | READY |
 | stat | `phys.stat.monte-carlo-basics` | Monte Carlo Methods in Statistical Physics | Yes | No | — | MISSING |
-| stat | `phys.stat.partition-function` | Partition Function | Yes | No | — | MISSING |
+| stat | `phys.stat.partition-function` | Partition Function | Yes | Yes | `educational-brain/concepts/physics/phys.stat.partition-function.md` | READY |
 | stat | `phys.stat.phase-transitions` | Phase Transitions and Landau Mean-Field Theory | Yes | No | — | MISSING |
 | stat | `phys.stat.phase-transitions-critical-phenomena` | Critical Phenomena, Scaling Laws, and Universality | Yes | No | — | MISSING |
 | stat | `phys.stat.probability-basics` | Probability Distributions in Physics | Yes | Yes | `educational-brain/concepts/physics/phys.stat.probability-basics.md` | READY |

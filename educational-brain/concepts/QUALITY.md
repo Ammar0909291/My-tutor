@@ -52,31 +52,24 @@ rather than hand-edit when entries change.
   are the pre-existing 71 TEMPLATE.md-era entries (partially overlapping
   the Version History gap above).
 
-## Aggregate summary (227 entries)
+## Aggregate summary (233 entries)
 
-Merges three concurrent pieces of work landing on `main` at nearly the
-same time: this session's Physics Wave 12 (8 concepts, 155→163), a
-separate session's `math.found` Wave 6 (5 concepts, 32→37) and a
-Chemistry Educational Brain batch (24 concepts, 0→24, chemistry's own
-levels 0-3). The chemistry batch's own commits authored all 24 files but
-never added their rows to this ledger — a bookkeeping gap in that
-session's work, corrected here as part of this merge (not left
-inconsistent). All numbers below were recomputed fresh by scanning every
-live file in `educational-brain/concepts/{subject}/`, not hand-merged
-from the two conflicting drafts.
+Extends the prior 227-entry merged total with this batch's Physics Wave
+13 (6 concepts, 163→169). All numbers below were recomputed fresh by
+scanning every live file in `educational-brain/concepts/{subject}/`.
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 196 / 227 | see methodology note above — 7 `math.found` + 24 chemistry genuinely lack a `docs/curriculum/blueprints/` file; +8 from this batch (all 8 physics Wave 12 have existing Blueprints) |
-| Educational Brain | 227 / 227 | trivially true (this is the entry list) |
-| Mental Model | 227 / 227 | |
-| Misconceptions | 227 / 227 | |
-| Analogies | 227 / 227 | |
-| Recovery Strategy | 227 / 227 | |
-| Assessment Signals | 227 / 227 | |
-| Tutor Actions | 151 / 227 | see new-finding note above — 5 `math.found` Wave 6 entries use non-Standard heading text; remainder are pre-existing 71 TEMPLATE.md-era entries |
-| Cross-links | 227 / 227 | all entries (including this batch's 8, the concurrent 5 `math.found`, and all 24 chemistry) discuss cross-subject connections, including honest "none found" conclusions |
-| Version History | 156 / 227 | +8 from this batch (physics Wave 12, all 8 authored under the Standard); the pre-existing 71 TEMPLATE.md-era entries correctly read ✗ |
+| Blueprint | 202 / 233 | see methodology note above — 7 `math.found` + 24 chemistry genuinely lack a `docs/curriculum/blueprints/` file; +6 from this batch (all 6 physics Wave 13 have existing Blueprints) |
+| Educational Brain | 233 / 233 | trivially true (this is the entry list) |
+| Mental Model | 233 / 233 | |
+| Misconceptions | 233 / 233 | |
+| Analogies | 233 / 233 | |
+| Recovery Strategy | 233 / 233 | |
+| Assessment Signals | 233 / 233 | |
+| Tutor Actions | 157 / 233 | see new-finding note above — 5 `math.found` Wave 6 entries use non-Standard heading text; remainder are pre-existing 71 TEMPLATE.md-era entries |
+| Cross-links | 233 / 233 | all entries discuss cross-subject connections, including honest "none found" conclusions |
+| Version History | 162 / 233 | +6 from this batch (physics Wave 13, all 6 authored under the Standard); the pre-existing 71 TEMPLATE.md-era entries correctly read ✗ |
 
 ## Per-concept ledger
 
@@ -214,6 +207,7 @@ from the two conflicting drafts.
 | `phys.mech.gravitational-field` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.gravitational-potential` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.hamiltonian` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.mech.hamiltons-equations` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.hookes-law` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.impulse` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.inclined-plane` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -251,6 +245,7 @@ from the two conflicting drafts.
 | `phys.mod.de-broglie` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.photoelectric-effect` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.photons` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.mod.radioactivity` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.wave-particle-duality` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.x-rays` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.opt.brewsters-law` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ |
@@ -268,11 +263,15 @@ from the two conflicting drafts.
 | `phys.opt.total-internal-reflection` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ |
 | `phys.opt.wave-optics` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ |
 | `phys.opt.youngs-experiment` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.qm.wave-function` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.rel.length-contraction` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.rel.lorentz-transform` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.rel.postulates` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.rel.simultaneity` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.rel.time-dilation` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.stat.boltzmann-factor` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.stat.maxwell-boltzmann` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.stat.partition-function` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.stat.probability-basics` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.therm.calorimetry` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ |
 | `phys.therm.carnot-cycle` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
