@@ -32,12 +32,12 @@
  * (ESCALATE_TO_LLM, or an engine rendering through the LLM); a plan with
  * groqRequired=false is served without any model call.
  *
- * Activation is flag-gated: ENABLE_BRAIN_RUNTIME (default OFF). Flag off
- * = shadow compare mode — the plan is logged next to what the runtime
- * actually did, and the legacy serving choice is untouched. Flag on = the
- * plan DRIVES the serve-from-memory-vs-LLM choice (today's only
+ * Activation is flag-gated: ENABLE_BRAIN_RUNTIME (default ON). Flag on =
+ * the plan DRIVES the serve-from-memory-vs-LLM choice (today's only
  * externally visible fork), with the legacy behavior as the fallback for
- * any inconsistent plan. No prompts, DB, or KG are touched either way.
+ * any inconsistent plan. Flag off ('0'/'false') = shadow compare mode —
+ * the plan is logged but the legacy serving choice is untouched.
+ * No prompts, DB, or KG are touched either way.
  * Pure function — no I/O, never throws.
  */
 import type { TeachingDecision, TeachingDecisionType } from './decisionEngine'
