@@ -430,7 +430,7 @@ its subject KG.
 | found | `math.found.lemma` | Lemma | No | No | — | MISSING |
 | found | `math.found.logic` | Mathematical Logic | Yes | Yes | `educational-brain/concepts/mathematics/math.found.logic.md` | READY |
 | found | `math.found.logical-connectives` | Logical Connectives | Yes | Yes | `educational-brain/concepts/mathematics/math.found.logical-connectives.md` | READY |
-| found | `math.found.logical-equivalence` | Logical Equivalence | Yes | No | — | MISSING |
+| found | `math.found.logical-equivalence` | Logical Equivalence | Yes | Yes | math.found.logical-equivalence.md | READY |
 | found | `math.found.mathematical-language` | Mathematical Language | Yes | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-language.md` | READY |
 | found | `math.found.mathematical-modeling` | Mathematical Modeling | No | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-modeling.md` | READY |
 | found | `math.found.mathematical-notation` | Mathematical Notation | Yes | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-notation.md` | READY |
@@ -438,7 +438,7 @@ its subject KG.
 | found | `math.found.mathematical-thinking` | Mathematical Thinking | Yes | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-thinking.md` | READY |
 | found | `math.found.natural-numbers` | Natural Numbers | Yes | No | — | MISSING |
 | found | `math.found.ordered-pair` | Ordered Pair | Yes | Yes | `educational-brain/concepts/mathematics/math.found.ordered-pair.md` | READY |
-| found | `math.found.ordinal-number` | Ordinal Number | Yes | No | — | MISSING |
+| found | `math.found.ordinal-number` | Ordinal Number | Yes | Yes | math.found.ordinal-number.md | READY |
 | found | `math.found.partial-order` | Partial Order | Yes | No | — | MISSING |
 | found | `math.found.partition` | Partition | Yes | No | — | MISSING |
 | found | `math.found.pattern-recognition` | Pattern Recognition | Yes | Yes | `educational-brain/concepts/mathematics/math.found.pattern-recognition.md` | READY |
@@ -454,12 +454,12 @@ its subject KG.
 | found | `math.found.proof-by-induction` | Mathematical Induction | Yes | No | — | MISSING |
 | found | `math.found.proper-subset` | Proper Subset | No | No | — | MISSING |
 | found | `math.found.proposition` | Proposition | Yes | Yes | `educational-brain/concepts/mathematics/math.found.proposition.md` | READY |
-| found | `math.found.quantifiers` | Quantifiers | Yes | No | — | MISSING |
+| found | `math.found.quantifiers` | Quantifiers | Yes | Yes | math.found.quantifiers.md | READY |
 | found | `math.found.rational-numbers` | Rational Numbers | Yes | No | — | MISSING |
 | found | `math.found.reading-mathematics` | Reading Mathematics | No | Yes | `educational-brain/concepts/mathematics/math.found.reading-mathematics.md` | READY |
 | found | `math.found.real-numbers` | Real Numbers | Yes | No | — | MISSING |
 | found | `math.found.reflexive-relation` | Reflexive Relation | Yes | No | — | MISSING |
-| found | `math.found.relation` | Relation | Yes | No | — | MISSING |
+| found | `math.found.relation` | Relation | Yes | Yes | math.found.relation.md | READY |
 | found | `math.found.rules-of-inference` | Rules of Inference | Yes | No | — | MISSING |
 | found | `math.found.set` | Set | Yes | Yes | `educational-brain/concepts/mathematics/math.found.set.md` | READY |
 | found | `math.found.set-builder-notation` | Set-Builder Notation | Yes | Yes | `educational-brain/concepts/mathematics/math.found.set-builder-notation.md` | READY |
@@ -470,7 +470,7 @@ its subject KG.
 | found | `math.found.set-theory` | Set Theory | Yes | Yes | `educational-brain/concepts/mathematics/math.found.set-theory.md` | READY |
 | found | `math.found.set-theory-axiomatic` | Axiomatic Set Theory | Yes | Yes | `educational-brain/concepts/mathematics/math.found.set-theory-axiomatic.md` | READY |
 | found | `math.found.strong-induction` | Strong Induction | No | No | — | MISSING |
-| found | `math.found.subset` | Subset | Yes | No | — | MISSING |
+| found | `math.found.subset` | Subset | Yes | Yes | math.found.subset.md | READY |
 | found | `math.found.symmetric-relation` | Symmetric Relation | Yes | No | — | MISSING |
 | found | `math.found.theorem` | Theorem | No | No | — | MISSING |
 | found | `math.found.total-order` | Total Order | Yes | No | — | MISSING |

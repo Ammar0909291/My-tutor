@@ -283,3 +283,26 @@ migration debt on 70 pre-Standard entries; math.found domain at 31/82)
 are already tracked, already have owners (future reconciliation/
 continuation batches), and do not block new authoring under the current
 Standard.
+
+---
+
+## Batch 15 validation (2026-07-23) — math.found Wave 6
+
+**Re-validated**: 0 new KG files touched; 5 new EB entries authored. All 5
+`math.found` Wave 6 concepts (`logical-equivalence`, `subset`, `quantifiers`,
+`relation`, `ordinal-number`) verified:
+- Blueprint exists for all 5 ✅
+- All 5 entries conform to `EDUCATIONAL_BRAIN_STANDARD.md` 21-section structure ✅
+- 0 orphan EB files (all 5 new files map to valid KG node IDs) ✅
+- 0 duplicate EB files ✅
+- 0 broken KG references ✅
+- 0 invalid Blueprint references ✅
+
+Total EB entries: 195. `math.found` is now 36/82. `AUTHORING_QUEUE.md` updated
+(5 rows removed). `EDUCATIONAL_BRAIN_INDEX.md` updated (5 rows MISSING→READY).
+No KG file was modified.
+
+**Open items carried forward** (unchanged from prior batches):
+- Blueprint References migration debt on 71 pre-Standard entries (tracked in `EDUCATIONAL_BRAIN_STANDARD.md §6`)
+- `mathematical-notation`/`mathematical-symbols` KG overlap (Wave 2 Curriculum Feedback, unresolved)
+- `math.found` domain at 36/82 — Wave 7 candidates to be computed before the next batch

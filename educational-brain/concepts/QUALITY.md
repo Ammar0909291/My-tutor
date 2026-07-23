@@ -14,36 +14,36 @@ rather than hand-edit when entries change.
   `docs/curriculum/blueprints/{id}.md`. A ✓ here means the section
   EXISTS, not that its content has been re-verified against the
   Standard's narrower scope rules.
-- **Blueprint column, 95/102**: 7 concepts genuinely have no Blueprint
+- **Blueprint column, 188/195**: 7 concepts genuinely have no Blueprint
   yet (`math.found.definition`, `inductive-reasoning`,
   `mathematical-modeling`, `mathematical-symbols`,
   `problem-solving-strategies` — Wave 2 — plus `reading-mathematics` —
   Wave 3 — plus `empty-set` — Wave 5). Each states this explicitly in
   its own Blueprint References section per Quality Gate 2, rather than
-  silently omitting it.
+  silently omitting it. All 5 Wave 6 concepts have existing Blueprints.
 - **Cross-links**: a ✓ means the entry's Transfer/Cross-Subject section
   *discusses* cross-subject connections — including entries that
   honestly conclude "none via KG cross_links at this node."
 - **Version**: whether a "Version History" section is present. The 71
   pre-Standard entries correctly read ✗ (expected migration debt); all
   31 entries authored under the current Standard (5 from Wave 1, 8 from
-  Wave 2, 6 from Wave 3, 4 from Wave 4, 8 from Wave 5 of math.found)
+  Wave 2, 6 from Wave 3, 4 from Wave 4, 8 from Wave 5, 5 from Wave 6 of math.found)
   correctly read ✓.
 
-## Aggregate summary (190 entries)
+## Aggregate summary (195 entries)
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 183 / 190 | 7 genuinely have none yet — see note above; +11 from this batch (all 11 have existing Blueprints) |
-| Educational Brain | 190 / 190 | trivially true (this is the entry list) |
-| Mental Model | 190 / 190 | |
-| Misconceptions | 190 / 190 | |
-| Analogies | 190 / 190 | |
-| Recovery Strategy | 190 / 190 | |
-| Assessment Signals | 190 / 190 | |
-| Tutor Actions | 190 / 190 | |
-| Cross-links | 163 / 190 | +11 from this batch (all 11 physics Wave 11 entries discuss cross-subject connections) |
-| Version History | 119 / 190 | +11 from this batch (physics Wave 11, all 11 authored under the Standard) |
+| Blueprint | 188 / 195 | 7 genuinely have none yet — see note above; +5 from this batch (all 5 have existing Blueprints) |
+| Educational Brain | 195 / 195 | trivially true (this is the entry list) |
+| Mental Model | 195 / 195 | |
+| Misconceptions | 195 / 195 | |
+| Analogies | 195 / 195 | |
+| Recovery Strategy | 195 / 195 | |
+| Assessment Signals | 195 / 195 | |
+| Tutor Actions | 195 / 195 | |
+| Cross-links | 168 / 195 | +5 from this batch (all 5 math.found Wave 6 entries discuss cross-subject connections) |
+| Version History | 124 / 195 | +5 from this batch (math.found Wave 6, all 5 authored under the Standard) |
 
 ## Per-concept ledger
 
@@ -82,6 +82,11 @@ rather than hand-edit when entries change.
 | `math.found.set-membership` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.set-theory` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.set-theory-axiomatic` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.logical-equivalence` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.ordinal-number` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.quantifiers` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.relation` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.subset` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.truth-table` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.variable` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.em.ac-basics` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

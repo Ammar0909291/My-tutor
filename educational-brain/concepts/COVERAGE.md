@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 32 | `math.arith.fractions` + 31 `math.found.*` entries (Waves 1-5) — math.found domain IN PROGRESS (31/82), see Delivery history |
+| mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
 | physics | 238 | 155 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 (2026-07-23, level 11, this batch): `phys.mech.angular-momentum`, `phys.mech.rolling-motion`, `phys.mech.euler-lagrange-equation`, `phys.therm.carnot-cycle`, `phys.therm.third-law`, `phys.mod.compton-effect`, `phys.mod.de-broglie`, `phys.mod.bohr-model`, `phys.mod.x-rays`, `phys.rel.time-dilation`, `phys.stat.probability-basics` — 83 concepts remain (65.13%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-10 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 0 | — |
@@ -570,3 +570,31 @@ retrieval engine. Per-entry completeness against the tracked fields is in
   this batch. All six tracking files regenerated from source;
   re-validated 0 orphans, 0 duplicates, 0 broken KG references, 0
   invalid Blueprint references across all 190 entries.
+
+- **Curriculum Completion Program, batch 15 — Domain Certification Mode,
+  math.found Wave 6** (2026-07-23): returning to `math.found` after the
+  mandatory-rules physics production cycle (batches 9-14). Authored the 5
+  concepts whose prerequisites became fully satisfied after Wave 5 —
+  `logical-equivalence`, `subset`, `quantifiers`, `relation`,
+  `ordinal-number` (verified programmatically against the live KG's
+  `requires` edges; matches the Wave-6 candidate list already computed in
+  batch 8's closing section). All 5 had existing Blueprints reused by
+  reference — each entry cites its Blueprint's Misconception Registry by
+  MC number with birth-type classification added, never restating worked
+  examples or mastery probes. `quantifiers` carries 4 misconceptions
+  (MC-4, the ∀-implication/∃-conjunction asymmetry, is the rare case where
+  a notation-induced misconception requires its own concrete counterexample
+  demonstration rather than just a verbal correction). `ordinal-number` is
+  the first expert-difficulty entry in this domain (estimated_hours: 12);
+  its two Type-6 misconceptions (commutativity; ordinal=cardinal) both
+  require the order-type bijection argument as the collision instrument —
+  algebraic counter-argument alone is insufficient. The open
+  `mathematical-notation`/`mathematical-symbols` Curriculum Feedback item
+  from Wave 2 remains carried forward, unresolved. All 5 entries verified
+  against `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and
+  heading order. `math.found` is 36/82 — still IN PROGRESS; 46 concepts
+  remain (Wave 7 candidates to be computed from the live KG before the
+  next batch). No other domain or subject was started this batch. All six
+  tracking files regenerated from source; re-validated 0 orphans, 0
+  duplicates, 0 broken KG references, 0 invalid Blueprint references across
+  all 195 entries.

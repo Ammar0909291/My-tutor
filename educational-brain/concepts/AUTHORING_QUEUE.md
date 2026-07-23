@@ -298,11 +298,6 @@ program (`phys.stat.probability-basics`).
 | 151 | computer_science | 5 | `cs.net.dns-dhcp` | DNS and DHCP |
 | 152 | computer_science | 5 | `cs.net.routing-congestion` | Routing and Congestion Control |
 | 153 | computer_science | 5 | `cs.theory.regular-expressions` | Regular Expressions and Regular Languages |
-| 154 | mathematics | 6 | `math.found.quantifiers` | Quantifiers |
-| 155 | mathematics | 6 | `math.found.logical-equivalence` | Logical Equivalence |
-| 156 | mathematics | 6 | `math.found.subset` | Subset |
-| 157 | mathematics | 6 | `math.found.relation` | Relation |
-| 158 | mathematics | 6 | `math.found.ordinal-number` | Ordinal Number |
 | 159 | mathematics | 6 | `math.geom.parallel-lines` | Parallel Lines |
 | 160 | mathematics | 6 | `math.geom.triangle-types` | Types of Triangles |
 | 161 | mathematics | 6 | `math.geom.right-triangle` | Right Triangle |
