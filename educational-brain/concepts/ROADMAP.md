@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **233** |
-| Remaining | **1,542** |
-| Completion percentage | **13.13%** |
+| Concepts with an Educational Brain entry | **241** |
+| Remaining | **1,534** |
+| Completion percentage | **13.58%** |
 
 ---
 
@@ -26,7 +26,7 @@ below from source whenever this file is updated, never hand-estimate.
 | mathematics | 908 | 37 | 4.07% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 169 | 71.01% | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
-| chemistry | 186 | 24 | 12.90% | `chem.found.matter` | **Yes** |
+| chemistry | 186 | 32 | 17.20% | `chem.found.matter` | **Yes** |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
 
@@ -390,7 +390,7 @@ next, but NOT started this batch.
 
 ## 4. Current batch
 
-**Curriculum Completion Program batch 17 (this batch, Physics Wave 13,
+**Curriculum Completion Program batch 18 (this batch, Physics Wave 13,
 explicit exception — see §3i for full detail)**: authored the complete
 physics dependency-level-13 wave (6 concepts), continuing the same
 mandatory-rules cycle immediately after Wave 12's merge. All 6 verified
@@ -402,10 +402,29 @@ reachable, 0 failures/warnings, no KG file touched); all 6 subject KGs
 re-validated PASS. Physics EB reached 169/238 — 71.01%. This wave
 introduced the first Quantum Mechanics domain entry
 (`phys.qm.wave-function`) and expanded Statistical Mechanics with two
-more hub concepts. True total, recomputed fresh: **233** EB entries (169
-physics + 37 mathematics + 24 chemistry + 3 english), 1,542 remaining,
-13.13%. No concurrent push encountered this time — clean fast-forward
-push expected.
+more hub concepts. **Merge note**: this batch's push encountered a
+concurrent push to `origin/main` (batch 17 below, a Chemistry EB level-4
+batch, 8 concepts). Merged rather than force-pushed; no bookkeeping
+gaps found this time in the concurrent commit for `COVERAGE.md`/
+`ROADMAP.md` (both were updated), though — consistent with the Wave 12
+merge's finding — `EDUCATIONAL_BRAIN_INDEX.md`, `QUALITY.md`, and
+`AUTHORING_QUEUE.md` were again not updated by the chemistry batch's own
+commit, corrected as part of this merge. True total, recomputed fresh
+from the live directories: **241** EB entries (169 physics + 37
+mathematics + 32 chemistry + 3 english), 1,534 remaining, 13.58%.
+
+**Batch 17 (concurrent, Chemistry EB level 4, standing production
+run)**: authored the 8 concepts at dependency level 4 —
+`chem.atomic.bohr-model`, `chem.kinet.rate`, `chem.sol.types`,
+`chem.state.molar-mass-gas`, `chem.state.real-gases`,
+`chem.thermo.enthalpy`, `chem.thermo.entropy`,
+`chem.thermo.heat-capacities`. All 8 verified against
+`EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and heading
+order (0 mismatches), zero duplicates, zero orphans. Chemistry is now
+32/186 (17.20%). Level 5 is next (6 concepts:
+`chem.atomic.quantum-numbers`, `chem.kinet.photochemistry`,
+`chem.kinet.rate-law`, `chem.sol.solubility`, `chem.thermo.gibbs`,
+`chem.thermo.third-law`).
 
 **Prior batch (batch 16, Physics Wave 12, explicit exception — see §3h
 for full detail)**: authored the complete
@@ -442,13 +461,6 @@ batch's scope). True post-merge total, recomputed fresh from the live
 hand-merged: **227** EB entries (163 physics + 37 mathematics + 24
 chemistry + 3 english), 1,548 remaining, 12.79%.
 
-**Batch 15 (concurrent, math.found Wave 6, returning to default
-priority)**: authored the 5 concepts whose prerequisites became fully
-satisfied after Wave 5 — `logical-equivalence`, `subset`, `quantifiers`,
-`relation`, `ordinal-number`. `math.found` is now 37/82. See this
-batch's merge note above for a structural non-conformance finding
-discovered in these 5 files during reconciliation.
-
 **Prior batch (batch 14, Physics Wave 11, explicit exception — see
 §3g for full detail)**: authored the complete physics dependency-level-11
 wave (11 concepts), continuing the same mandatory-rules cycle immediately
@@ -463,7 +475,6 @@ references, 0 invalid Blueprint references across all 190 entries.
 Physics EB reached 155/238 — 65.13%. This wave introduced the first
 Statistical Mechanics (`phys.stat.probability-basics`) domain entry in
 this program.
-
 **Prior batch (batch 13, Physics Wave 10, explicit exception — see
 §3f)**: authored the complete physics dependency-level-10 wave (9
 concepts), continuing the same mandatory-rules cycle immediately after
@@ -570,14 +581,14 @@ procedure.
    `phys.stat.fluctuations-correlations`, `phys.stat.free-energy`,
    `phys.stat.grand-canonical-ensemble`.
 
-Full computed order (all 1,542 remaining concepts): see
+Full computed order (all 1,534 remaining concepts): see
 `AUTHORING_QUEUE.md` — §5 above (the domain-completion constraint) takes
 precedence over that file's literal row order until `math.found` is
 complete, unless overridden per item 4.
 
 ## 6. Next batch
 
-**Batch 18 (recommended default)**: compute `math.found` Wave 7 candidates
+**Batch 19 (recommended default)**: compute `math.found` Wave 7 candidates
 from the live KG (the set of `math.found` nodes whose prerequisites are all
 now READY after Wave 6: `logical-equivalence`, `subset`, `quantifiers`,
 `relation`, `ordinal-number`), then author all Wave 7 concepts, no other

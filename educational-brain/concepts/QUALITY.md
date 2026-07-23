@@ -52,24 +52,25 @@ rather than hand-edit when entries change.
   are the pre-existing 71 TEMPLATE.md-era entries (partially overlapping
   the Version History gap above).
 
-## Aggregate summary (233 entries)
+## Aggregate summary (241 entries)
 
-Extends the prior 227-entry merged total with this batch's Physics Wave
-13 (6 concepts, 163→169). All numbers below were recomputed fresh by
-scanning every live file in `educational-brain/concepts/{subject}/`.
+Extends the prior 233-entry merged total with a concurrent Chemistry EB
+level-4 batch (8 concepts, 24→32) merged alongside this session's
+Physics Wave 13. All numbers below were recomputed fresh by scanning
+every live file in `educational-brain/concepts/{subject}/`.
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 202 / 233 | see methodology note above — 7 `math.found` + 24 chemistry genuinely lack a `docs/curriculum/blueprints/` file; +6 from this batch (all 6 physics Wave 13 have existing Blueprints) |
-| Educational Brain | 233 / 233 | trivially true (this is the entry list) |
-| Mental Model | 233 / 233 | |
-| Misconceptions | 233 / 233 | |
-| Analogies | 233 / 233 | |
-| Recovery Strategy | 233 / 233 | |
-| Assessment Signals | 233 / 233 | |
-| Tutor Actions | 157 / 233 | see new-finding note above — 5 `math.found` Wave 6 entries use non-Standard heading text; remainder are pre-existing 71 TEMPLATE.md-era entries |
-| Cross-links | 233 / 233 | all entries discuss cross-subject connections, including honest "none found" conclusions |
-| Version History | 162 / 233 | +6 from this batch (physics Wave 13, all 6 authored under the Standard); the pre-existing 71 TEMPLATE.md-era entries correctly read ✗ |
+| Blueprint | 202 / 241 | see methodology note above — 7 `math.found` + 32 chemistry genuinely lack a `docs/curriculum/blueprints/` file; the 8 new chemistry entries (level 4) reference `docs/chemistry/teaching-assets/assets.json` like the other 24 |
+| Educational Brain | 241 / 241 | trivially true (this is the entry list) |
+| Mental Model | 241 / 241 | |
+| Misconceptions | 241 / 241 | |
+| Analogies | 241 / 241 | |
+| Recovery Strategy | 241 / 241 | |
+| Assessment Signals | 241 / 241 | |
+| Tutor Actions | 165 / 241 | see new-finding note above — 5 `math.found` Wave 6 entries use non-Standard heading text; remainder are pre-existing 71 TEMPLATE.md-era entries |
+| Cross-links | 241 / 241 | all entries discuss cross-subject connections, including honest "none found" conclusions |
+| Version History | 170 / 241 | +8 chemistry level-4 entries (authored under the Standard); the pre-existing 71 TEMPLATE.md-era entries correctly read ✗ |
 
 ## Per-concept ledger
 
@@ -77,6 +78,7 @@ scanning every live file in `educational-brain/concepts/{subject}/`.
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | `chem.atomic.atomic-spectra` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.atomic.atomic-theory` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.atomic.bohr-model` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.atomic.electromagnetic-radiation` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.atomic.photoelectric-effect` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.atomic.subatomic-particles` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -92,12 +94,19 @@ scanning every live file in `educational-brain/concepts/{subject}/`.
 | `chem.found.significant-figures` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.found.states-of-matter` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.found.stoichiometry` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.kinet.rate` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.period.classification` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.sol.types` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.state.gas-laws` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.state.kinetic-theory` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.state.molar-mass-gas` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.state.real-gases` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.surface.colloids` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.surface.emulsions` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.thermo.enthalpy` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.thermo.entropy` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.thermo.first-law` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.thermo.heat-capacities` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.thermo.system` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `eng.phonics.letter-sound-correspondence` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ |
 | `eng.phonics.phonemic-awareness` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ |

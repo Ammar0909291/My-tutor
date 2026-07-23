@@ -14,7 +14,7 @@ and this file's summary row should be corrected to match.
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
 | physics | 238 | 169 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 (2026-07-23, level 13, this batch): `phys.mech.hamiltons-equations`, `phys.mod.radioactivity`, `phys.qm.wave-function`, `phys.rel.lorentz-transform`, `phys.stat.maxwell-boltzmann`, `phys.stat.partition-function` — 69 concepts remain (71.01%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-12 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
-| chemistry | 186 | 24 | levels 0–3 complete (24/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period — IN PROGRESS |
+| chemistry | 186 | 32 | levels 0–4 complete (32/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
 
@@ -727,4 +727,27 @@ retrieval engine. Per-entry completeness against the tracked fields is in
   `phys.stat.fluctuations-correlations`, `phys.stat.free-energy`,
   `phys.stat.grand-canonical-ensemble`) is computed and next, but NOT
   started this batch. All six tracking files regenerated from source;
-  re-validated 0 orphans, 0 duplicates across all 233 entries.
+  re-validated 0 orphans, 0 duplicates across all 233 entries. **Merge
+  note**: this batch's push encountered a concurrent push to
+  `origin/main` (the Chemistry EB batch 2 below, 8 concepts). Merged
+  rather than force-pushed; true post-merge total, recomputed fresh:
+  **241** entries (169 physics + 37 mathematics + 32 chemistry + 3
+  english), 1,534 remaining, 13.58%.
+
+- **Curriculum Completion Program, Chemistry EB batch 2 — level 4**
+  (2026-07-23): continuation of the standing production run. Level 4
+  (8 concepts): `chem.atomic.bohr-model`, `chem.kinet.rate`,
+  `chem.sol.types`, `chem.state.molar-mass-gas`, `chem.state.real-gases`,
+  `chem.thermo.enthalpy`, `chem.thermo.entropy`,
+  `chem.thermo.heat-capacities`. All authored from KG data and domain
+  chemistry expertise (all chemistry Blueprints remain `[TEMPLATE]`
+  placeholder strings). All 8 verified against
+  `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and
+  heading order; 0 orphans, 0 duplicates. Chemistry is 32/186 — 17.20%
+  complete; Level 5 is next (6 concepts: `chem.atomic.quantum-numbers`,
+  `chem.kinet.photochemistry`, `chem.kinet.rate-law`, `chem.sol.solubility`,
+  `chem.thermo.gibbs`, `chem.thermo.third-law`). **Reconciliation note**:
+  this batch's own commit updated `COVERAGE.md`/`ROADMAP.md` but did not
+  add its 8 rows to `EDUCATIONAL_BRAIN_INDEX.md`/`QUALITY.md` or remove
+  them from `AUTHORING_QUEUE.md` — corrected as part of the Wave 13
+  merge above.

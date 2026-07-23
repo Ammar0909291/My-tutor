@@ -1392,7 +1392,7 @@ its subject KG.
 | writing | `eng.writing.topic-sentences` | Topic Sentences | Yes | No | — | MISSING |
 | writing | `eng.writing.transitions-and-cohesion` | Transitions and Cohesion | Yes | No | — | MISSING |
 
-## chemistry (186 concepts, 24 READY)
+## chemistry (186 concepts, 32 READY)
 
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
@@ -1408,7 +1408,7 @@ its subject KG.
 | anal | `chem.anal.volumetric` | Volumetric Analysis | No | No | — | MISSING |
 | atomic | `chem.atomic.atomic-spectra` | Atomic Spectra | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.atomic-spectra.md` | READY |
 | atomic | `chem.atomic.atomic-theory` | Atomic Theory | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.atomic-theory.md` | READY |
-| atomic | `chem.atomic.bohr-model` | Bohr Model of the Atom | No | No | — | MISSING |
+| atomic | `chem.atomic.bohr-model` | Bohr Model of the Atom | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.bohr-model.md` | READY |
 | atomic | `chem.atomic.electromagnetic-radiation` | Electromagnetic Radiation | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.electromagnetic-radiation.md` | READY |
 | atomic | `chem.atomic.electronic-config` | Electronic Configuration | No | No | — | MISSING |
 | atomic | `chem.atomic.orbitals` | Atomic Orbitals | No | No | — | MISSING |
@@ -1503,7 +1503,7 @@ its subject KG.
 | kinet | `chem.kinet.integrated-rate` | Integrated Rate Laws | No | No | — | MISSING |
 | kinet | `chem.kinet.mechanism` | Reaction Mechanisms | No | No | — | MISSING |
 | kinet | `chem.kinet.photochemistry` | Photochemical Reactions | No | No | — | MISSING |
-| kinet | `chem.kinet.rate` | Rate of Reaction | No | No | — | MISSING |
+| kinet | `chem.kinet.rate` | Rate of Reaction | No | Yes | `educational-brain/concepts/chemistry/chem.kinet.rate.md` | READY |
 | kinet | `chem.kinet.rate-law` | Rate Law and Order | No | No | — | MISSING |
 | nitro | `chem.nitro.amines` | Amines | No | No | — | MISSING |
 | nitro | `chem.nitro.amino-acids` | Amino Acids | No | No | — | MISSING |
@@ -1554,7 +1554,7 @@ its subject KG.
 | sol | `chem.sol.colligative` | Colligative Properties | No | No | — | MISSING |
 | sol | `chem.sol.osmosis` | Osmosis and Osmotic Pressure | No | No | — | MISSING |
 | sol | `chem.sol.solubility` | Solubility and Henry's Law | No | No | — | MISSING |
-| sol | `chem.sol.types` | Types of Solutions | No | No | — | MISSING |
+| sol | `chem.sol.types` | Types of Solutions | No | Yes | `educational-brain/concepts/chemistry/chem.sol.types.md` | READY |
 | sol | `chem.sol.vapour-pressure` | Vapour Pressure of Solutions | No | No | — | MISSING |
 | solid | `chem.solid.amorphous` | Amorphous Solids | No | No | — | MISSING |
 | solid | `chem.solid.crystal-systems` | Crystal Systems | No | No | — | MISSING |
@@ -1565,9 +1565,9 @@ its subject KG.
 | state | `chem.state.gas-laws` | Gas Laws | No | Yes | `educational-brain/concepts/chemistry/chem.state.gas-laws.md` | READY |
 | state | `chem.state.kinetic-theory` | Kinetic Molecular Theory of Gases | No | Yes | `educational-brain/concepts/chemistry/chem.state.kinetic-theory.md` | READY |
 | state | `chem.state.liquids` | Liquid State Properties | No | No | — | MISSING |
-| state | `chem.state.molar-mass-gas` | Molar Mass from Gas Data | No | No | — | MISSING |
+| state | `chem.state.molar-mass-gas` | Molar Mass from Gas Data | No | Yes | `educational-brain/concepts/chemistry/chem.state.molar-mass-gas.md` | READY |
 | state | `chem.state.phase-diagram` | Phase Diagrams | No | No | — | MISSING |
-| state | `chem.state.real-gases` | Real Gases and van der Waals Equation | No | No | — | MISSING |
+| state | `chem.state.real-gases` | Real Gases and van der Waals Equation | No | Yes | `educational-brain/concepts/chemistry/chem.state.real-gases.md` | READY |
 | surface | `chem.surface.adsorption` | Adsorption | No | No | — | MISSING |
 | surface | `chem.surface.colloids` | Colloids | No | Yes | `educational-brain/concepts/chemistry/chem.surface.colloids.md` | READY |
 | surface | `chem.surface.emulsions` | Emulsions and Gels | No | Yes | `educational-brain/concepts/chemistry/chem.surface.emulsions.md` | READY |
@@ -1575,11 +1575,11 @@ its subject KG.
 | surface | `chem.surface.surfactants` | Surfactants and Micelles | No | No | — | MISSING |
 | thermo | `chem.thermo.bond-enthalpy` | Bond Enthalpy | No | No | — | MISSING |
 | thermo | `chem.thermo.cell-thermo` | Electrochemical Thermodynamics | No | No | — | MISSING |
-| thermo | `chem.thermo.enthalpy` | Enthalpy and Hess's Law | No | No | — | MISSING |
-| thermo | `chem.thermo.entropy` | Entropy and Second Law | No | No | — | MISSING |
+| thermo | `chem.thermo.enthalpy` | Enthalpy and Hess's Law | No | Yes | `educational-brain/concepts/chemistry/chem.thermo.enthalpy.md` | READY |
+| thermo | `chem.thermo.entropy` | Entropy and Second Law | No | Yes | `educational-brain/concepts/chemistry/chem.thermo.entropy.md` | READY |
 | thermo | `chem.thermo.first-law` | First Law of Thermodynamics | No | Yes | `educational-brain/concepts/chemistry/chem.thermo.first-law.md` | READY |
 | thermo | `chem.thermo.gibbs` | Gibbs Free Energy and Spontaneity | No | No | — | MISSING |
-| thermo | `chem.thermo.heat-capacities` | Heat Capacities of Gases | No | No | — | MISSING |
+| thermo | `chem.thermo.heat-capacities` | Heat Capacities of Gases | No | Yes | `educational-brain/concepts/chemistry/chem.thermo.heat-capacities.md` | READY |
 | thermo | `chem.thermo.system` | System, Surroundings and State Functions | No | Yes | `educational-brain/concepts/chemistry/chem.thermo.system.md` | READY |
 | thermo | `chem.thermo.third-law` | Third Law and Absolute Entropy | No | No | — | MISSING |
 
