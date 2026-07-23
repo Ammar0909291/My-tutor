@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **139** |
-| Remaining | **1,636** |
-| Completion percentage | **7.83%** |
+| Concepts with an Educational Brain entry | **154** |
+| Remaining | **1,621** |
+| Completion percentage | **8.68%** |
 
 ---
 
@@ -24,7 +24,7 @@ below from source whenever this file is updated, never hand-estimate.
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
 | mathematics | 908 | 32 | 3.52% | `math.found.mathematical-thinking` | **Yes** |
-| physics | 238 | 104 | 43.70% | `phys.meas.units` | Yes |
+| physics | 238 | 119 | 50.00% | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 0 | 0.00% | `chem.found.matter` | No |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
@@ -33,11 +33,13 @@ below from source whenever this file is updated, never hand-estimate.
 Physics's KG count reflects the 2026-07-22 Particle Physics + Semiconductor
 Physics additions (216 → 238); its 67 pre-existing entries predated that
 addition. Wave 6 (12 concepts, dependency level 6) raised physics to
-79/238; this session's Wave 7 batch (25 concepts, dependency level 7)
-raised physics to 104/238 — still none of the 22 new Particle
-Physics/Semiconductor Physics concepts are covered yet (those sit at
-much deeper dependency levels, since the Particle Physics domain has its
-own internal prerequisite chain rooted at `phys.particle.four-forces`).
+79/238; Wave 7 (25 concepts, dependency level 7) raised physics to
+104/238; this session's Wave 8 batch (15 concepts, dependency level 8)
+raised physics to exactly 119/238 (50.00%) — still none of the 22 new
+Particle Physics/Semiconductor Physics concepts are covered yet (those
+sit at much deeper dependency levels, since the Particle Physics domain
+has its own internal prerequisite chain rooted at
+`phys.particle.four-forces`).
 Biology's KG count reflects the Curriculum Production Pipeline's own
 2026-07-22 Biology KG v2.0.0 freeze (89 → 108 concepts, 19 new concepts
 incl. a new `bio.div` domain) — a concurrent, external change to this
@@ -148,22 +150,67 @@ re-audit" mandatory-rules discipline.
 
 ---
 
+## 3d. Domain status — physics Wave 8 (explicit exception batch,
+2026-07-23, COMPLETE)
+
+Continuation of the same mandatory-rules production cycle (§3c),
+immediately following Wave 7 within the same conversation per rule 10.
+`math.found` was NOT touched and remains 31/82.
+
+| Metric | Value |
+|---|---|
+| Domain | physics (whole subject, not a sub-domain) |
+| Total concepts in subject | 238 |
+| Authored before this batch | 104 |
+| Authored this batch (Wave 8, dependency level 8) | 15 |
+| Total now | 119 |
+| Remaining | 119 |
+| Status | **IN PROGRESS — exactly 50.00% complete** |
+
+Re-fetched `origin/main` after the Wave 7 push and confirmed 0 commits
+ahead/behind before starting (per rule 10) — no other session had
+touched physics EB concurrently. Independently recomputed dependency
+levels via a fresh Kahn's-algorithm pass over the live KG's `requires`
+edges — the level-8 set matched `AUTHORING_QUEUE.md`'s stored rows
+exactly, 15 concepts: `phys.mech.inclined-plane`,
+`phys.mech.work-energy-theorem`, `phys.mech.conservation-of-energy`,
+`phys.mech.conservation-of-momentum`, `phys.mech.torque`,
+`phys.mech.gravitational-potential`, `phys.therm.thermodynamic-processes`,
+`phys.wave.shm-energy`, `phys.wave.pendulum`, `phys.wave.spring-mass`,
+`phys.opt.single-slit`, `phys.em.kirchhoffs-laws`, `phys.em.emf`,
+`phys.em.lc-circuits`, `phys.em.electromagnetic-waves`. All 15 had
+existing Blueprints reused by reference (`phys.opt.single-slit` cited 4
+misconceptions, matching the same 4-misconception density already
+established for its sibling `phys.opt.diffraction`). Wave 9 (level 9,
+16 concepts) is computed and next, but NOT started this batch.
+
+---
+
 ## 4. Current batch
 
-**Curriculum Completion Program batch 10 (this batch, Physics Wave 7,
-explicit exception — see §3c for full detail)**: authored the complete
-physics dependency-level-7 wave (25 concepts) under a second, more
-detailed set of explicit mandatory rules for continuing physics
-Educational Brain production. All 25 verified against
-`EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and heading
-order (0 mismatches), zero duplicates, zero orphans against the live
-physics KG. Discovered and resolved a real process gap: the prior
-session's entire Wave 6 batch (blueprints + 12 EB entries) had never been
-merged to `main`; merged it first, then continued. `math.found` remains
-31/82, untouched this batch. Physics KG re-validated PASS (238/238
-reachable, 0 failures/warnings, no KG file touched). All six tracking
-files regenerated; re-validated 0 orphans, 0 duplicates, 0 broken KG
-references, 0 invalid Blueprint references across all 139 entries.
+**Curriculum Completion Program batch 11 (this batch, Physics Wave 8,
+explicit exception — see §3d for full detail)**: authored the complete
+physics dependency-level-8 wave (15 concepts), continuing the same
+mandatory-rules cycle immediately after Wave 7 within the same
+conversation. All 15 verified against `EDUCATIONAL_BRAIN_STANDARD.md`'s
+exact 21-section structure and heading order (0 mismatches), zero
+duplicates, zero orphans against the live physics KG (119 total physics
+EB files). `math.found` remains 31/82, untouched this batch. Physics KG
+re-validated PASS (238/238 reachable, 0 failures/warnings, no KG file
+touched). All six tracking files regenerated; re-validated 0 orphans, 0
+duplicates, 0 broken KG references, 0 invalid Blueprint references
+across all 154 entries. Physics EB reached exactly 119/238 — 50.00%.
+
+**Prior batch (batch 10, Physics Wave 7, explicit exception — see
+§3c)**: authored the complete physics dependency-level-7 wave (25
+concepts) under a second, more detailed set of explicit mandatory rules
+for continuing physics Educational Brain production. All 25 verified
+against `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and
+heading order (0 mismatches), zero duplicates, zero orphans against the
+live physics KG. Discovered and resolved a real process gap: the prior
+session's entire Wave 6 batch (blueprints + 12 EB entries) had never
+been merged to `main`; merged it first, then continued. `math.found`
+remains 31/82, untouched this batch.
 
 **Prior batch (batch 9, Physics Wave 6, explicit exception — see §3b)**:
 authored the complete physics dependency-level-6 wave (12 concepts). All
@@ -221,28 +268,30 @@ procedure.
 4. **Standing exception**: physics (or any subject) may be targeted
    again ahead of this default order given an equally explicit,
    subject-specific user instruction, as happened this batch and the
-   prior one (§3b/§3c/§4). Physics currently has 134 concepts remaining
-   (104/238 done); its own internal queue's next unlocked wave (Wave 8,
-   dependency level 8, 15 concepts) IS already computed: `phys.mech.
-   inclined-plane`, `phys.mech.work-energy-theorem`, `phys.mech.
-   conservation-of-energy`, `phys.mech.conservation-of-momentum`,
-   `phys.mech.torque`, `phys.mech.gravitational-potential`, `phys.therm.
-   thermodynamic-processes`, `phys.wave.shm-energy`, `phys.wave.pendulum`,
-   `phys.wave.spring-mass`, `phys.opt.single-slit`, `phys.em.
-   kirchhoffs-laws`, `phys.em.emf`, `phys.em.lc-circuits`, `phys.em.
-   electromagnetic-waves`.
+   prior ones (§3b/§3c/§3d/§4). Physics currently has 119 concepts
+   remaining (119/238 done, exactly 50.00%); its own internal queue's
+   next unlocked wave (Wave 9, dependency level 9, 16 concepts) IS
+   already computed: `phys.mech.conservative-forces`,
+   `phys.mech.collisions-elastic`, `phys.mech.collisions-inelastic`,
+   `phys.mech.moment-of-inertia`, `phys.mech.equilibrium`,
+   `phys.mech.orbital-mechanics`, `phys.mech.escape-velocity`,
+   `phys.mech.bernoulli`, `phys.therm.second-law`,
+   `phys.therm.heat-engines`, `phys.wave.damped-oscillations`,
+   `phys.em.wheatstone-bridge`, `phys.em.potentiometer`,
+   `phys.em.rc-circuits`, `phys.mod.photoelectric-effect`,
+   `phys.rel.postulates`.
 
-Full computed order (all 1,636 remaining concepts): see
+Full computed order (all 1,621 remaining concepts): see
 `AUTHORING_QUEUE.md` — §5 above (the domain-completion constraint) takes
 precedence over that file's literal row order until `math.found` is
 complete, unless overridden per item 4.
 
 ## 6. Next batch
 
-**Batch 11 (recommended default)**: resume `math.found` Wave 6 — the 5
+**Batch 12 (recommended default)**: resume `math.found` Wave 6 — the 5
 level-6 concepts listed in §5 item 1, in strict prerequisite order, no
 other domain started. **If instead directed back to physics** (per the
-standing mandatory-rules cycle governing this override): author Wave 8
-(the 15 concepts listed in §5 item 4) in full, following the same
-reuse-by-reference-Blueprint discipline established these past two
-batches, then re-fetch/re-audit `main` and continue to Wave 9.
+standing mandatory-rules cycle governing this override): author Wave 9
+(the 16 concepts listed in §5 item 4) in full, following the same
+reuse-by-reference-Blueprint discipline established these past three
+batches, then re-fetch/re-audit `main` and continue to Wave 10.

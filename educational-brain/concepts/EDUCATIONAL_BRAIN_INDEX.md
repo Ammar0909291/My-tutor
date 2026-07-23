@@ -928,7 +928,7 @@ its subject KG.
 | trig | `math.trig.trig-identities` | Trigonometric Identities | Yes | No | — | MISSING |
 | trig | `math.trig.unit-circle` | Unit Circle | Yes | No | — | MISSING |
 
-## physics (238 concepts, 104 READY)
+## physics (238 concepts, 119 READY)
 
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
@@ -951,13 +951,13 @@ its subject KG.
 | em | `phys.em.electric-field` | Electric Field and Field Lines | Yes | Yes | `educational-brain/concepts/physics/phys.em.electric-field.md` | READY |
 | em | `phys.em.electric-potential` | Electric Potential and Potential Difference | Yes | Yes | `educational-brain/concepts/physics/phys.em.electric-potential.md` | READY |
 | em | `phys.em.electrical-power` | Electrical Power and Joule Heating | Yes | Yes | `educational-brain/concepts/physics/phys.em.electrical-power.md` | READY |
-| em | `phys.em.electromagnetic-waves` | Electromagnetic Waves and the EM Spectrum | Yes | No | — | MISSING |
-| em | `phys.em.emf` | EMF, Internal Resistance, and Terminal Voltage | Yes | No | — | MISSING |
+| em | `phys.em.electromagnetic-waves` | Electromagnetic Waves and the EM Spectrum | Yes | Yes | `educational-brain/concepts/physics/phys.em.electromagnetic-waves.md` | READY |
+| em | `phys.em.emf` | EMF, Internal Resistance, and Terminal Voltage | Yes | Yes | `educational-brain/concepts/physics/phys.em.emf.md` | READY |
 | em | `phys.em.energy-capacitor` | Energy Stored in a Capacitor | Yes | Yes | `educational-brain/concepts/physics/phys.em.energy-capacitor.md` | READY |
 | em | `phys.em.faradays-law` | Faraday's Law of Electromagnetic Induction | Yes | Yes | `educational-brain/concepts/physics/phys.em.faradays-law.md` | READY |
 | em | `phys.em.gauss-law` | Gauss's Law | Yes | Yes | `educational-brain/concepts/physics/phys.em.gauss-law.md` | READY |
-| em | `phys.em.kirchhoffs-laws` | Kirchhoff's Current and Voltage Laws | Yes | No | — | MISSING |
-| em | `phys.em.lc-circuits` | LC Oscillations and Resonance | Yes | No | — | MISSING |
+| em | `phys.em.kirchhoffs-laws` | Kirchhoff's Current and Voltage Laws | Yes | Yes | `educational-brain/concepts/physics/phys.em.kirchhoffs-laws.md` | READY |
+| em | `phys.em.lc-circuits` | LC Oscillations and Resonance | Yes | Yes | `educational-brain/concepts/physics/phys.em.lc-circuits.md` | READY |
 | em | `phys.em.lenzs-law` | Lenz's Law and Induced EMF Direction | Yes | Yes | `educational-brain/concepts/physics/phys.em.lenzs-law.md` | READY |
 | em | `phys.em.magnetic-dipole` | Magnetic Dipole and Earth's Magnetism | Yes | Yes | `educational-brain/concepts/physics/phys.em.magnetic-dipole.md` | READY |
 | em | `phys.em.magnetic-field` | Magnetic Field and Field Lines | Yes | Yes | `educational-brain/concepts/physics/phys.em.magnetic-field.md` | READY |
@@ -992,8 +992,8 @@ its subject KG.
 | mech | `phys.mech.collisions-elastic` | Elastic Collisions | Yes | No | — | MISSING |
 | mech | `phys.mech.collisions-inelastic` | Inelastic Collisions | Yes | No | — | MISSING |
 | mech | `phys.mech.conservation-of-angular-momentum` | Conservation of Angular Momentum | Yes | No | — | MISSING |
-| mech | `phys.mech.conservation-of-energy` | Conservation of Mechanical Energy | Yes | No | — | MISSING |
-| mech | `phys.mech.conservation-of-momentum` | Conservation of Linear Momentum | Yes | No | — | MISSING |
+| mech | `phys.mech.conservation-of-energy` | Conservation of Mechanical Energy | Yes | Yes | `educational-brain/concepts/physics/phys.mech.conservation-of-energy.md` | READY |
+| mech | `phys.mech.conservation-of-momentum` | Conservation of Linear Momentum | Yes | Yes | `educational-brain/concepts/physics/phys.mech.conservation-of-momentum.md` | READY |
 | mech | `phys.mech.conservative-forces` | Conservative and Non-Conservative Forces | Yes | No | — | MISSING |
 | mech | `phys.mech.cyclic-coordinates-conservation-laws` | Cyclic Coordinates and Noether's Theorem | Yes | No | — | MISSING |
 | mech | `phys.mech.displacement` | Displacement and Distance | Yes | Yes | `educational-brain/concepts/physics/phys.mech.displacement.md` | READY |
@@ -1005,13 +1005,13 @@ its subject KG.
 | mech | `phys.mech.friction` | Friction Forces | Yes | Yes | `educational-brain/concepts/physics/phys.mech.friction.md` | READY |
 | mech | `phys.mech.generalized-coordinates` | Generalized Coordinates and Configuration Space | Yes | No | — | MISSING |
 | mech | `phys.mech.gravitational-field` | Gravitational Field and Field Lines | Yes | Yes | `educational-brain/concepts/physics/phys.mech.gravitational-field.md` | READY |
-| mech | `phys.mech.gravitational-potential` | Gravitational Potential Energy | Yes | No | — | MISSING |
+| mech | `phys.mech.gravitational-potential` | Gravitational Potential Energy | Yes | Yes | `educational-brain/concepts/physics/phys.mech.gravitational-potential.md` | READY |
 | mech | `phys.mech.hamilton-jacobi-equation` | Hamilton-Jacobi Equation and Action-Angle Variables | Yes | No | — | MISSING |
 | mech | `phys.mech.hamiltonian` | The Hamiltonian and Legendre Transform | Yes | No | — | MISSING |
 | mech | `phys.mech.hamiltons-equations` | Hamilton's Equations of Motion | Yes | No | — | MISSING |
 | mech | `phys.mech.hookes-law` | Hooke's Law and Spring Force | Yes | Yes | `educational-brain/concepts/physics/phys.mech.hookes-law.md` | READY |
 | mech | `phys.mech.impulse` | Impulse and Momentum Change | Yes | Yes | `educational-brain/concepts/physics/phys.mech.impulse.md` | READY |
-| mech | `phys.mech.inclined-plane` | Motion on Inclined Planes | Yes | No | — | MISSING |
+| mech | `phys.mech.inclined-plane` | Motion on Inclined Planes | Yes | Yes | `educational-brain/concepts/physics/phys.mech.inclined-plane.md` | READY |
 | mech | `phys.mech.keplers-laws` | Kepler's Laws of Planetary Motion | Yes | No | — | MISSING |
 | mech | `phys.mech.kinematics-1d` | Kinematics in One Dimension | Yes | Yes | `educational-brain/concepts/physics/phys.mech.kinematics-1d.md` | READY |
 | mech | `phys.mech.kinematics-2d` | Kinematics in Two Dimensions | Yes | Yes | `educational-brain/concepts/physics/phys.mech.kinematics-2d.md` | READY |
@@ -1035,12 +1035,12 @@ its subject KG.
 | mech | `phys.mech.stress-strain` | Stress, Strain, and Elastic Moduli | Yes | Yes | `educational-brain/concepts/physics/phys.mech.stress-strain.md` | READY |
 | mech | `phys.mech.surface-tension` | Surface Tension and Capillarity | Yes | Yes | `educational-brain/concepts/physics/phys.mech.surface-tension.md` | READY |
 | mech | `phys.mech.tension` | Tension in Strings and Ropes | Yes | Yes | `educational-brain/concepts/physics/phys.mech.tension.md` | READY |
-| mech | `phys.mech.torque` | Torque | Yes | No | — | MISSING |
+| mech | `phys.mech.torque` | Torque | Yes | Yes | `educational-brain/concepts/physics/phys.mech.torque.md` | READY |
 | mech | `phys.mech.universal-gravitation` | Newton's Law of Universal Gravitation | Yes | Yes | `educational-brain/concepts/physics/phys.mech.universal-gravitation.md` | READY |
 | mech | `phys.mech.velocity` | Speed and Velocity | Yes | Yes | `educational-brain/concepts/physics/phys.mech.velocity.md` | READY |
 | mech | `phys.mech.viscosity` | Viscosity and Stokes' Law | Yes | No | — | MISSING |
 | mech | `phys.mech.work` | Work Done by a Force | Yes | Yes | `educational-brain/concepts/physics/phys.mech.work.md` | READY |
-| mech | `phys.mech.work-energy-theorem` | Work-Energy Theorem | Yes | No | — | MISSING |
+| mech | `phys.mech.work-energy-theorem` | Work-Energy Theorem | Yes | Yes | `educational-brain/concepts/physics/phys.mech.work-energy-theorem.md` | READY |
 | mod | `phys.mod.atomic-spectra` | Atomic Spectra and Energy Levels | Yes | No | — | MISSING |
 | mod | `phys.mod.binding-energy` | Nuclear Binding Energy and Mass Defect | Yes | No | — | MISSING |
 | mod | `phys.mod.bohr-model` | Bohr Model of the Hydrogen Atom | Yes | No | — | MISSING |
@@ -1073,7 +1073,7 @@ its subject KG.
 | opt | `phys.opt.polarization` | Polarization of Light | Yes | Yes | `educational-brain/concepts/physics/phys.opt.polarization.md` | READY |
 | opt | `phys.opt.reflection` | Reflection and Laws of Reflection | Yes | Yes | `educational-brain/concepts/physics/phys.opt.reflection.md` | READY |
 | opt | `phys.opt.refraction` | Refraction and Snell's Law | Yes | Yes | `educational-brain/concepts/physics/phys.opt.refraction.md` | READY |
-| opt | `phys.opt.single-slit` | Single-Slit Diffraction | Yes | No | — | MISSING |
+| opt | `phys.opt.single-slit` | Single-Slit Diffraction | Yes | Yes | `educational-brain/concepts/physics/phys.opt.single-slit.md` | READY |
 | opt | `phys.opt.total-internal-reflection` | Total Internal Reflection and Critical Angle | Yes | Yes | `educational-brain/concepts/physics/phys.opt.total-internal-reflection.md` | READY |
 | opt | `phys.opt.wave-optics` | Introduction to Wave Optics | Yes | Yes | `educational-brain/concepts/physics/phys.opt.wave-optics.md` | READY |
 | opt | `phys.opt.youngs-experiment` | Young's Double-Slit Experiment | Yes | Yes | `educational-brain/concepts/physics/phys.opt.youngs-experiment.md` | READY |
@@ -1150,7 +1150,7 @@ its subject KG.
 | therm | `phys.therm.specific-heat` | Specific Heat Capacity | Yes | Yes | `educational-brain/concepts/physics/phys.therm.specific-heat.md` | READY |
 | therm | `phys.therm.temperature` | Temperature and Thermal Equilibrium | Yes | Yes | `educational-brain/concepts/physics/phys.therm.temperature.md` | READY |
 | therm | `phys.therm.thermal-expansion` | Thermal Expansion | Yes | Yes | `educational-brain/concepts/physics/phys.therm.thermal-expansion.md` | READY |
-| therm | `phys.therm.thermodynamic-processes` | Thermodynamic Processes | Yes | No | — | MISSING |
+| therm | `phys.therm.thermodynamic-processes` | Thermodynamic Processes | Yes | Yes | `educational-brain/concepts/physics/phys.therm.thermodynamic-processes.md` | READY |
 | therm | `phys.therm.third-law` | Third Law of Thermodynamics | Yes | No | — | MISSING |
 | therm | `phys.therm.zeroth-law` | Zeroth Law of Thermodynamics | Yes | Yes | `educational-brain/concepts/physics/phys.therm.zeroth-law.md` | READY |
 | wave | `phys.wave.beats` | Beats and Beat Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.beats.md` | READY |
@@ -1159,12 +1159,12 @@ its subject KG.
 | wave | `phys.wave.forced-oscillations` | Forced Oscillations and Resonance | Yes | No | — | MISSING |
 | wave | `phys.wave.interference` | Wave Interference | Yes | Yes | `educational-brain/concepts/physics/phys.wave.interference.md` | READY |
 | wave | `phys.wave.longitudinal-waves` | Longitudinal Waves | Yes | Yes | `educational-brain/concepts/physics/phys.wave.longitudinal-waves.md` | READY |
-| wave | `phys.wave.pendulum` | Simple Pendulum | Yes | No | — | MISSING |
+| wave | `phys.wave.pendulum` | Simple Pendulum | Yes | Yes | `educational-brain/concepts/physics/phys.wave.pendulum.md` | READY |
 | wave | `phys.wave.shm` | Simple Harmonic Motion | Yes | Yes | `educational-brain/concepts/physics/phys.wave.shm.md` | READY |
-| wave | `phys.wave.shm-energy` | Energy in Simple Harmonic Motion | Yes | No | — | MISSING |
+| wave | `phys.wave.shm-energy` | Energy in Simple Harmonic Motion | Yes | Yes | `educational-brain/concepts/physics/phys.wave.shm-energy.md` | READY |
 | wave | `phys.wave.sound-intensity` | Sound Intensity and the Decibel Scale | Yes | Yes | `educational-brain/concepts/physics/phys.wave.sound-intensity.md` | READY |
 | wave | `phys.wave.sound-waves` | Sound Waves | Yes | Yes | `educational-brain/concepts/physics/phys.wave.sound-waves.md` | READY |
-| wave | `phys.wave.spring-mass` | Spring-Mass System | Yes | No | — | MISSING |
+| wave | `phys.wave.spring-mass` | Spring-Mass System | Yes | Yes | `educational-brain/concepts/physics/phys.wave.spring-mass.md` | READY |
 | wave | `phys.wave.standing-waves` | Standing Waves | Yes | Yes | `educational-brain/concepts/physics/phys.wave.standing-waves.md` | READY |
 | wave | `phys.wave.superposition` | Superposition Principle | Yes | Yes | `educational-brain/concepts/physics/phys.wave.superposition.md` | READY |
 | wave | `phys.wave.transverse-waves` | Transverse Waves | Yes | Yes | `educational-brain/concepts/physics/phys.wave.transverse-waves.md` | READY |
