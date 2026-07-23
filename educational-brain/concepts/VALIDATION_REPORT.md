@@ -1,17 +1,16 @@
 # Educational Brain Production Pipeline — Validation Report
 
-Generated 2026-07-22 against the live repository state; re-run this batch
-(Physics Wave 14) against the post-Wave-13-merges state. Wave 12's push
-encountered a concurrent push to `origin/main` (a `math.found` Wave 6
-batch, 5 concepts, plus a Chemistry Educational Brain batch, 24
-concepts, chemistry's own levels 0-3, chemistry's first EB coverage);
-Wave 13's push encountered a second concurrent push (a Chemistry EB
-level-4 batch, 8 concepts, 24→32) — both merged rather than
-force-pushed. Wave 14 (this batch) encountered no concurrent push. All
-totals below are recomputed fresh from the live
-`educational-brain/concepts/{subject}/` directories, not hand-merged
-from conflicting drafts or estimated. Every check below was computed
-directly from `docs/{subject}/kg/graph.json` (all 6 subjects),
+Generated 2026-07-22, re-run every batch since. Most recently re-run this
+batch (Physics Wave 15, see the dedicated section near the end of this
+file for full detail) against the post-Wave-14 state, after a fresh
+`git pull` brought in two concurrent chemistry batches (levels 10 and 11,
+73→89 chemistry entries) landed during an intervening read-only forensic-
+audit turn. All totals below (top-level summary and Phase 2 checklist)
+are recomputed fresh from the live `educational-brain/concepts/{subject}/`
+directories as of Wave 15, not hand-merged from conflicting drafts or
+estimated — the per-wave sections below remain as a historical log,
+each showing the state as of when it was written. Every check below was
+computed directly from `docs/{subject}/kg/graph.json` (all 6 subjects),
 `docs/curriculum/blueprints/`, and `educational-brain/concepts/{subject}/`
 — none of the numbers here are estimated or copied from prior reports.
 
@@ -43,14 +42,15 @@ report).
 
 **✓ Every Educational Brain entry points to one existing KG concept.**
 Checked: every filename in `educational-brain/concepts/{subject}/`
-(251 files: 179 physics + 37 mathematics + 32 chemistry + 3 english)
-against that subject's live KG id set. **0 orphans** — every EB file
-resolves to a real, current KG concept. **Reconciliation findings (Waves
-12 and 13, carried forward)**: both concurrent chemistry batches'
-commits authored their files but never added rows to
+(317 files, as of Wave 15: 188 physics + 37 mathematics + 89 chemistry +
+3 english) against that subject's live KG id set. **0 orphans** — every
+EB file resolves to a real, current KG concept. **Reconciliation
+findings (Waves 12, 13, and 15, carried forward)**: multiple concurrent
+chemistry batches' commits authored their files but never added rows to
 `EDUCATIONAL_BRAIN_INDEX.md` or `QUALITY.md`, nor removed them from
 `AUTHORING_QUEUE.md` — a bookkeeping gap in each of those sessions'
-work, corrected during the respective merges.
+work, corrected during the respective merges/reconciliation passes (most
+recently a 57-row `AUTHORING_QUEUE.md` gap corrected in Wave 15).
 
 **✓ Every KG concept has at most one Educational Brain entry.**
 Structurally guaranteed by the 1:1 `{kg-id}.md` filename convention;
@@ -59,38 +59,31 @@ filesystem could technically hold `Foo.md` and `foo.md` as distinct
 files) — **0 duplicates**.
 
 **◐ Every Educational Brain entry references one Blueprint — partially,
-honestly reported.** 212 of 251 EB entries' concepts have a matching
-Blueprint FILE on disk. The other 39 are: 7 `math.found` concepts
-(`math.found.definition`, `inductive-reasoning`, `mathematical-modeling`,
-`mathematical-symbols`, `problem-solving-strategies` — Wave 2 — plus
-`reading-mathematics` — Wave 3 — plus `empty-set` — Wave 5) which
-genuinely have no Blueprint yet, each stating this explicitly in its own
-Blueprint References section per Quality Gate 2; plus all 32 chemistry
-concepts, which reference `docs/chemistry/teaching-assets/assets.json`
-instead (that file's own entries are `[TEMPLATE]` placeholders per the
-chemistry batch's own discovery — chemistry's Blueprint production
-track has not started). All 10 of this batch's new physics entries (Wave
-14) DO have existing Blueprints, each reused by reference. 140+ of the
-251 have an explicit, machine-checkable "Blueprint References" section
-citing it by name (or citing its absence) — `eng.phonics.print-concepts`
-plus this program's 36 `math.found.*` entries plus 12 `phys.*` Wave 6
-entries plus 25 `phys.*` Wave 7 entries plus 15 `phys.*` Wave 8 entries
-plus 16 `phys.*` Wave 9 entries plus 9 `phys.*` Wave 10 entries plus 11
-`phys.*` Wave 11 entries plus 8 `phys.*` Wave 12 entries plus 6 `phys.*`
-Wave 13 entries plus this batch's 10 `phys.*` Wave 14 entries plus all
-32 chemistry entries, all authored under
-`EDUCATIONAL_BRAIN_STANDARD.md`. The remaining 70 predate that section
-(authored under the old `TEMPLATE.md`) and reference their
-Blueprints only informally or not at all in prose — the migration debt
-already
-recorded in `EDUCATIONAL_BRAIN_STANDARD.md` §6 and `QUALITY.md`. **New
-finding this batch**: 5 of the `math.found` Wave 6 entries
+honestly reported.** 221 of 317 EB entries' concepts have a matching
+Blueprint FILE on disk (as of Wave 15). The other 96 are: 7 `math.found`
+concepts (`math.found.definition`, `inductive-reasoning`,
+`mathematical-modeling`, `mathematical-symbols`,
+`problem-solving-strategies` — Wave 2 — plus `reading-mathematics` —
+Wave 3 — plus `empty-set` — Wave 5) which genuinely have no Blueprint
+yet, each stating this explicitly in its own Blueprint References
+section per Quality Gate 2; plus all 89 chemistry concepts, which
+reference `docs/chemistry/kg/graph.json` and standard chemistry
+pedagogy directly instead — confirmed by the 2026-07-23 Forensic
+Repository Audit that no chemistry Blueprint file has ever existed in
+this repository's history, on any branch, superseding this report's
+earlier, less certain framing (which pointed at the separate, orphaned
+`docs/chemistry/teaching-assets/assets.json` legacy system as the reason
+— that system does exist and IS `[TEMPLATE]`-placeholder-only, but is a
+distinct, non-runtime-consumed system from the real Blueprint directory,
+per the Forensic Audit's findings). All 9 of Wave 15's new physics
+entries DO have existing Blueprints, each reused by reference. The
+migration debt on the 71 pre-Standard entries (authored under the old
+`TEMPLATE.md`) remains unchanged and already recorded in
+`EDUCATIONAL_BRAIN_STANDARD.md` §6 and `QUALITY.md`. The structural
+heading non-conformance in 5 `math.found` Wave 6 entries
 (`logical-equivalence`, `ordinal-number`, `quantifiers`, `relation`,
-`subset`) use a different, numbered 21-section heading scheme instead of
-the Standard's exact heading text, despite that batch's own claim of
-exact conformance — see `QUALITY.md`'s methodology notes for detail; not
-corrected here (out of this batch's scope, another session's freshly
-authored files).
+`subset`) — found in a prior batch, still not corrected (out of scope,
+another session's freshly authored files) — also remains unchanged.
 
 **✓ No duplicate Educational Brain files.** 0 found (see above).
 
@@ -427,3 +420,81 @@ No KG file was modified.
 - Blueprint References migration debt on 71 pre-Standard entries (tracked in `EDUCATIONAL_BRAIN_STANDARD.md §6`)
 - `mathematical-notation`/`mathematical-symbols` KG overlap (Wave 2 Curriculum Feedback, unresolved)
 - `math.found` domain at 36/82 — Wave 7 candidates to be computed before the next batch
+
+---
+
+## Physics Wave 15 — mandatory-rules cycle continuation (2026-07-23)
+
+This batch followed a separate, intervening turn (a read-only Forensic
+Repository Audit, no production work, no commits) — resumed the standing
+Curriculum Completion Program cycle per the user's "Continue working from
+here" instruction. Re-fetched `origin/main`: it had moved TWICE since the
+prior physics batch (a concurrent session landed 7 chemistry EB entries
+at level 10, then 16 more at level 11 — chemistry rising 73→89); pulled
+both fast-forwards cleanly, confirmed 0 commits ahead/behind before
+starting. Re-audited physics EB state fresh from disk (179/238,
+unaffected by the concurrent chemistry work — confirmed no other session
+touched physics EB in that window). Independently recomputed dependency
+levels via a fresh Kahn's-algorithm pass over the live KG's `requires`
+edges — the level-15 set (9 concepts) matched the previously-computed
+candidate list exactly: `phys.mech.canonical-transformations`,
+`phys.mod.nuclear-reactions`, `phys.qm.harmonic-oscillator-qm`,
+`phys.qm.operators`, `phys.qm.particle-in-box`,
+`phys.qm.quantum-tunneling`, `phys.rel.mass-energy`,
+`phys.stat.chemical-potential`, `phys.stat.phase-transitions`. Verified
+all 9 have existing Blueprints on disk before starting. Authored all 9.
+All 9 individually pass every per-entry check: structural 21-section
+conformance verified by heading scan and exact heading-order diff (0
+mismatches across all 9, checked against `EDUCATIONAL_BRAIN_STANDARD.md`'s
+canonical heading list programmatically); 0 orphans (all 9 new files map
+to a valid KG concept id, verified against `docs/physics/kg/graph.json`);
+0 duplicates (verified via `git log --diff-filter=A` showing 0 prior
+commits touching any of the 9 new file paths, and via a repo-wide
+orphan/duplicate scan across all 6 subjects); Blueprint References
+section present and accurate (all 9 cite an existing Blueprint by exact
+path); no runtime-asset duplication (none of the 9 created any
+`AssetIdentity` records, checked against `brainSeedAssets.ts`). This wave
+completed all four downstream concepts of the `phys.qm.schrodinger-
+equation` hub authored in Wave 14 (operators, particle-in-box, harmonic
+oscillator, quantum tunneling), closed out Statistical Mechanics' two
+remaining leaf concepts (chemical potential, phase transitions), and
+added one Classical Mechanics capstone (canonical transformations,
+itself unlocking `phys.mech.hamilton-jacobi-equation`) and one Modern
+Physics capstone (nuclear reactions, generalizing the radioactive-decay
+Q-value machinery to induced two-body reactions). Physics KG re-validated
+fresh this batch: PASS, 238/238 reachable, 0 failures/warnings — no KG
+file was touched; all 6 subject KGs re-validated PASS this batch.
+`physics` is now 188/238 — 78.99%. **Tracking-file reconciliation
+performed this batch, beyond physics itself**: found and corrected a
+57-row bookkeeping gap left by the concurrent chemistry level-10/level-11
+batches — those batches authored 23 files (7+16) but never added their
+rows to `EDUCATIONAL_BRAIN_INDEX.md`/`QUALITY.md` and never removed the
+corresponding 57 stale rows from `AUTHORING_QUEUE.md` (57, not 23,
+because the gap had accumulated across two batches without any
+intervening reconciliation). Corrected in the same pass as this batch's
+own physics-Wave-15 tracking-file updates. True total, recomputed fresh
+by scanning every live file: **317** EB entries (188 physics + 37
+mathematics + 89 chemistry + 3 english), out of 1,775 total KG concepts,
+1,458 remaining (17.86%). No concurrent push encountered during this
+batch's own commit/push (verified via `git fetch` + `git rev-list
+--left-right --count` immediately before push).
+
+**Updated Phase 2 checklist numbers (this batch, recomputed fresh)**:
+- Every Educational Brain entry points to one existing KG concept: 317
+  files checked, **0 orphans**.
+- Every KG concept has at most one Educational Brain entry: **0
+  duplicates** (case-insensitive check included).
+- Every Educational Brain entry references one Blueprint — partially:
+  **221/317** have a matching Blueprint file on disk. The other 96 are: 7
+  `math.found` concepts (genuinely Blueprint-less, stated explicitly in
+  each entry) plus all 89 chemistry concepts (chemistry's Blueprint
+  production track has never started, per the 2026-07-23 Forensic
+  Repository Audit's finding that no chemistry Blueprint file has ever
+  existed in this repository's history). All 9 of this batch's new
+  physics entries (Wave 15) DO have existing Blueprints, each reused by
+  reference.
+- No broken KG references: **0** across all 1,775 concepts, all 6
+  subjects (integrity table above, re-verified this batch).
+- Cross-links: the same 2 pre-existing unresolvable references carried
+  forward unchanged from prior batches (§ above) — neither touched or
+  affected by this batch's physics-only work.

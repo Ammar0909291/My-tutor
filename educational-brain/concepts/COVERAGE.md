@@ -12,7 +12,7 @@ and this file's summary row should be corrected to match.
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
-| physics | 238 | 179 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 (2026-07-23, level 14, this batch): `phys.mech.poisson-brackets`, `phys.mod.radioactive-decay`, `phys.qm.schrodinger-equation`, `phys.qm.uncertainty-principle`, `phys.rel.relativistic-momentum`, `phys.stat.bose-einstein`, `phys.stat.entropy-statistical`, `phys.stat.fluctuations-correlations`, `phys.stat.free-energy`, `phys.stat.grand-canonical-ensemble` — 59 concepts remain (75.21%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-13 name lists |
+| physics | 238 | 188 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 (2026-07-23, level 15, this batch): `phys.mech.canonical-transformations`, `phys.mod.nuclear-reactions`, `phys.qm.harmonic-oscillator-qm`, `phys.qm.operators`, `phys.qm.particle-in-box`, `phys.qm.quantum-tunneling`, `phys.rel.mass-energy`, `phys.stat.chemical-potential`, `phys.stat.phase-transitions` — 50 concepts remain (78.99%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-14 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 89 | levels 0–11 complete (89/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock, chem.redox, chem.dblock, chem.org, chem.pblock, chem.solid — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
@@ -873,3 +873,43 @@ Chemistry: 56 → 66 entries. Levels 0–9 complete.
 16 concepts authored (topological level 11):
 chem.bond.bond-parameters, chem.bond.coordinate-bond, chem.bond.hybridization, chem.bond.resonance, chem.bond.vsepr, chem.dblock.general, chem.org.iupac, chem.pblock.group13, chem.pblock.group14, chem.pblock.group15, chem.pblock.group16, chem.pblock.group17, chem.pblock.group18, chem.redox.balancing, chem.sblock.alkali, chem.solid.crystal-systems
 Chemistry: 73 → 89/186 entries (47.85%).
+
+### Physics EB Wave 15 (2026-07-23)
+
+9 concepts authored in strict topological order (dependency level 15 —
+all prerequisites satisfied by the 179 physics EB entries authored
+through Wave 14, verified via a fresh Kahn's-algorithm recomputation
+against the live physics KG rather than trusting any stored level number):
+`phys.mech.canonical-transformations`, `phys.mod.nuclear-reactions`,
+`phys.qm.harmonic-oscillator-qm`, `phys.qm.operators`,
+`phys.qm.particle-in-box`, `phys.qm.quantum-tunneling`,
+`phys.rel.mass-energy`, `phys.stat.chemical-potential`,
+`phys.stat.phase-transitions`. This completes the second major Quantum
+Mechanics cluster (operators, particle-in-box, harmonic oscillator,
+tunneling — all four downstream of the `phys.qm.schrodinger-equation` hub
+authored in Wave 14) and closes out the Statistical Mechanics domain's
+final two leaf concepts (chemical potential, phase transitions), plus one
+Classical Mechanics capstone (canonical transformations) and one Modern
+Physics capstone (nuclear reactions, generalizing radioactive decay's
+Q-value machinery to induced two-body reactions). All 9 had existing
+Blueprints (`docs/curriculum/blueprints/{id}.md`) reused by reference —
+Misconception Libraries cited by MC-ID/number with birth-type
+classification added per this program's standard practice, never
+restating worked examples, demonstrations, or full teaching-action
+sequences already owned by the Blueprint. All 9 entries verified against
+`EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and heading
+order (0 mismatches), zero duplicate filenames/concept IDs (confirmed via
+`git log --diff-filter=A` showing 0 prior commits touching any of the 9
+new files), zero orphans against the live physics KG (all 188 physics EB
+files map to a valid KG id). Physics KG re-validated: PASS, 238/238
+reachable, 0 failures/warnings — no KG file was touched; all 6 subject
+KGs re-validated PASS. `physics` is now 188/238 — 78.99% complete. True
+total, recomputed fresh: **317** entries (188 physics + 37 mathematics +
+89 chemistry + 3 english), out of 1,775 total KG concepts across all 6
+subjects — 1,458 remaining, 17.86%. Wave 16 candidates
+were not computed this batch — the next iteration of this program should
+begin with a fresh `git fetch`/pull, re-audit current Physics EB state
+from scratch (per this program's standing discipline of never trusting
+stored counts), and recompute the next topological wave from the live KG.
+All six tracking files regenerated from source; re-validated 0 orphans, 0
+duplicates across all 317 entries.

@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **308** |
-| Remaining | **1,478** |
-| Completion percentage | **17.34%** |
+| Concepts with an Educational Brain entry | **317** |
+| Remaining | **1,458** |
+| Completion percentage | **17.86%** |
 
 ---
 
@@ -24,7 +24,7 @@ below from source whenever this file is updated, never hand-estimate.
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
 | mathematics | 908 | 37 | 4.07% | `math.found.mathematical-thinking` | **Yes** |
-| physics | 238 | 179 | 75.21% | `phys.meas.units` | Yes |
+| physics | 238 | 188 | 78.99% | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 89 | 47.85% | `chem.found.matter` | **Yes** |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
@@ -45,13 +45,19 @@ Mechanics domain entry (`phys.stat.probability-basics`); Wave 12 (8
 concepts, dependency level 12) raised physics to 163/238 (68.49%); Wave
 13 (6 concepts, dependency level 13) raised physics to 169/238
 (71.01%) — introducing the first Quantum Mechanics domain entry
-(`phys.qm.wave-function`); this session's Wave 14 batch (10 concepts,
-dependency level 14) raised physics to 179/238 (75.21%) — completing the
-Schrödinger-equation hub (unlocking 5 downstream quantum-mechanics
-concepts) and expanding the grand-canonical/free-energy branch of
-Statistical Mechanics — still none of the 22 new Particle Physics/
-Semiconductor Physics concepts are covered yet (those sit at much deeper
-dependency levels, since the Particle Physics domain has its own
+(`phys.qm.wave-function`); Wave 14 (10 concepts, dependency level 14)
+raised physics to 179/238 (75.21%) — completing the Schrödinger-equation
+hub (unlocking 5 downstream quantum-mechanics concepts) and expanding the
+grand-canonical/free-energy branch of Statistical Mechanics; this
+session's Wave 15 batch (9 concepts, dependency level 15) raised physics
+to 188/238 (78.99%) — completing all four Schrödinger-equation-hub
+downstream concepts (operators, particle-in-box, harmonic oscillator,
+quantum tunneling), closing out Statistical Mechanics' two remaining leaf
+concepts (chemical potential, phase transitions), and adding one
+Classical Mechanics capstone (canonical transformations) and one Modern
+Physics capstone (nuclear reactions) — still none of the 22 new Particle
+Physics/Semiconductor Physics concepts are covered yet (those sit at much
+deeper dependency levels, since the Particle Physics domain has its own
 internal prerequisite chain rooted at `phys.particle.four-forces`).
 Biology's KG count reflects the Curriculum Production Pipeline's own
 2026-07-22 Biology KG v2.0.0 freeze (89 → 108 concepts, 19 new concepts
@@ -428,20 +434,46 @@ downstream quantum-mechanics concepts: `phys.qm.harmonic-oscillator-qm`,
 Statistical Mechanics with four more hub concepts (Bose-Einstein
 statistics, statistical entropy, fluctuations/correlations, free energy,
 grand canonical ensemble). Wave 15 (level 15, 9 concepts) is computed
-and next, but NOT started this batch.
+and next, but NOT started that batch — **now DONE, see the new §4
+current-batch entry below.**
 
 ---
 
 ## 4. Current batch
 
-**Curriculum Completion Program batch 26 (this batch, Chemistry EB level 10,
-standing production run)**: authored the 7 concepts at dependency level 6 —
-`chem.atomic.orbitals`, `chem.env.ozone`, `chem.equil.concept`, `chem.kinet.arrhenius`,
-`chem.kinet.integrated-rate`, `chem.kinet.mechanism`, `chem.thermo.cell-thermo`. All 7
-verified against `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and heading
-order (0 mismatches), zero duplicates, zero orphans. Chemistry is now 45/186 (24.19%).
-True total, recomputed fresh: **285** EB entries (179 physics + 37 mathematics + 66
-chemistry + 3 english + 7 chemistry level 10 + 16 chemistry level 11), 1,478 remaining, 17.34%. Level 12 is next.
+**Physics Wave 15 (this batch, explicit exception — standing Curriculum
+Completion Program 8-step cycle)**: after the prior turn's forensic
+repository audit concluded (read-only, no production work), re-fetched
+`origin/main` (which had moved twice during the audit — a concurrent
+session landed 16 more Chemistry EB files, chemistry rising 73→89),
+re-audited physics EB state fresh (179/238, unchanged by the concurrent
+chemistry work), and independently recomputed dependency levels via a
+fresh Kahn's-algorithm pass over the live KG's `requires` edges. The
+level-15 set: `phys.mech.canonical-transformations`,
+`phys.mod.nuclear-reactions`, `phys.qm.harmonic-oscillator-qm`,
+`phys.qm.operators`, `phys.qm.particle-in-box`,
+`phys.qm.quantum-tunneling`, `phys.rel.mass-energy`,
+`phys.stat.chemical-potential`, `phys.stat.phase-transitions` — 9
+concepts, all with existing Blueprints reused by reference. All 9
+verified against `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section
+structure and heading order (0 mismatches), zero duplicate filenames/
+concept IDs, zero orphans against the live physics KG (all 188 physics EB
+files map to a valid KG id). Physics KG re-validated PASS (238/238
+reachable, 0 failures/warnings, no KG file touched); all 6 subject KGs
+re-validated PASS. Physics EB reached 188/238 — 78.99%. True total,
+recomputed fresh: **317** EB entries (188 physics + 37 mathematics + 89
+chemistry + 3 english), 1,458 remaining, 17.86%. Wave 16 candidates were
+NOT computed this batch — the next physics iteration should begin with a
+fresh fetch/audit per this program's standing discipline.
+
+**Prior batch (batch 26, Chemistry EB level 10-11, standing production
+run)**: authored the 7 concepts at dependency level 10 plus 16 concepts
+at level 11 (23 total, landed via two concurrent commits merged during
+this batch's own git sync). Chemistry reached 89/186 (47.85%). All
+verified against `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section
+structure and heading order (0 mismatches), zero duplicates, zero
+orphans. True total at that point: 308 entries (179 physics + 37
+mathematics + 89 chemistry + 3 english), 1,478 remaining, 17.34%.
 
 **Prior batch (batch 20, Chemistry EB level 5)**: authored 6 concepts at level 5.
 Chemistry reached 38/186 (20.43%). True total at that point: 257 entries.
@@ -597,27 +629,27 @@ procedure.
    again ahead of this default order given an equally explicit,
    subject-specific user instruction, as happened this batch and the
    prior ones (§3b/§3c/§3d/§3e/§3f/§3g/§3h/§3i/§3j/§4). Physics currently
-   has 59 concepts remaining (179/238 done, 75.21%); its own internal
-   queue's next unlocked wave (Wave 15, dependency level 15, 9 concepts)
-   IS already computed: `phys.mech.canonical-transformations`,
-   `phys.mod.nuclear-reactions`, `phys.qm.harmonic-oscillator-qm`,
-   `phys.qm.operators`, `phys.qm.particle-in-box`,
-   `phys.qm.quantum-tunneling`, `phys.rel.mass-energy`,
-   `phys.stat.chemical-potential`, `phys.stat.phase-transitions`.
+   has 50 concepts remaining (188/238 done, 78.99%); Wave 15 (dependency
+   level 15, 9 concepts) is now DONE (see §4). Its own internal queue's
+   next wave (Wave 16) has NOT been computed yet — the next physics
+   iteration must recompute it fresh from the live KG via Kahn's
+   algorithm rather than assuming any stored candidate list.
 
-Full computed order (all 1,524 remaining concepts): see
+Full computed order (all 1,458 remaining concepts): see
 `AUTHORING_QUEUE.md` — §5 above (the domain-completion constraint) takes
 precedence over that file's literal row order until `math.found` is
 complete, unless overridden per item 4.
 
 ## 6. Next batch
 
-**Batch 20 (recommended default)**: compute `math.found` Wave 7 candidates
+**Batch 28 (recommended default)**: compute `math.found` Wave 7 candidates
 from the live KG (the set of `math.found` nodes whose prerequisites are all
 now READY after Wave 6: `logical-equivalence`, `subset`, `quantifiers`,
 `relation`, `ordinal-number`), then author all Wave 7 concepts, no other
 domain started. **If instead directed back to physics** (per the
-standing mandatory-rules cycle governing this override): author Wave 15
-(the 9 concepts listed in §5 item 4) in full, following the same
-reuse-by-reference-Blueprint discipline established these past nine
-batches, then re-fetch/re-audit `main` and continue to Wave 16.
+standing mandatory-rules cycle governing this override): fetch/audit
+`main` fresh, recompute physics Wave 16 candidates from the live KG (do
+NOT assume any list computed in a prior turn is still accurate — this
+program's standing discipline), then author Wave 16 in full following the
+same reuse-by-reference-Blueprint discipline established these past ten
+batches.
