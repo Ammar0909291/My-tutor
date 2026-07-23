@@ -927,7 +927,7 @@ its subject KG.
 | trig | `math.trig.trig-identities` | Trigonometric Identities | Yes | No | — | MISSING |
 | trig | `math.trig.unit-circle` | Unit Circle | Yes | No | — | MISSING |
 
-## physics (238 concepts, 235 READY)
+## physics (238 concepts, 237 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | astro | `phys.astro.black-holes` | Black Holes and Schwarzschild Radius | Yes | Yes | `educational-brain/concepts/physics/phys.astro.black-holes.md` | READY |
@@ -1054,7 +1054,7 @@ its subject KG.
 | mod | `phys.mod.nuclear-reactions` | Nuclear Reactions and Q-Value | Yes | Yes | `educational-brain/concepts/physics/phys.mod.nuclear-reactions.md` | READY |
 | mod | `phys.mod.photoelectric-effect` | Photoelectric Effect | Yes | Yes | `educational-brain/concepts/physics/phys.mod.photoelectric-effect.md` | READY |
 | mod | `phys.mod.photons` | Photons and Quantization of Light | Yes | Yes | `educational-brain/concepts/physics/phys.mod.photons.md` | READY |
-| mod | `phys.mod.pn-junction` | The p-n Junction | Yes | No | — | MISSING |
+| mod | `phys.mod.pn-junction` | The p-n Junction | Yes | Yes | `educational-brain/concepts/physics/phys.mod.pn-junction.md` | READY |
 | mod | `phys.mod.radioactive-decay` | Radioactive Decay Law and Half-Life | Yes | Yes | `educational-brain/concepts/physics/phys.mod.radioactive-decay.md` | READY |
 | mod | `phys.mod.radioactivity` | Radioactivity: Alpha, Beta, Gamma Decay | Yes | Yes | `educational-brain/concepts/physics/phys.mod.radioactivity.md` | READY |
 | mod | `phys.mod.semiconductor-classification` | Conductors, Insulators, and Semiconductors | Yes | Yes | `educational-brain/concepts/physics/phys.mod.semiconductor-classification.md` | READY |
@@ -1088,7 +1088,7 @@ its subject KG.
 | particle | `phys.particle.neutrinos` | Neutrinos | Yes | Yes | `educational-brain/concepts/physics/phys.particle.neutrinos.md` | READY |
 | particle | `phys.particle.particle-classification` | Particle Classification: Hadrons and Leptons | Yes | Yes | `educational-brain/concepts/physics/phys.particle.particle-classification.md` | READY |
 | particle | `phys.particle.quarks` | Quarks | Yes | Yes | `educational-brain/concepts/physics/phys.particle.quarks.md` | READY |
-| particle | `phys.particle.standard-model` | The Standard Model | Yes | No | — | MISSING |
+| particle | `phys.particle.standard-model` | The Standard Model | Yes | Yes | `educational-brain/concepts/physics/phys.particle.standard-model.md` | READY |
 | particle | `phys.particle.strong-interaction` | The Strong Interaction and Color Charge | Yes | Yes | `educational-brain/concepts/physics/phys.particle.strong-interaction.md` | READY |
 | particle | `phys.particle.weak-interaction` | The Weak Interaction | Yes | Yes | `educational-brain/concepts/physics/phys.particle.weak-interaction.md` | READY |
 | qm | `phys.qm.angular-momentum-addition` | Addition of Angular Momenta and Clebsch-Gordan Coefficients | Yes | Yes | `educational-brain/concepts/physics/phys.qm.angular-momentum-addition.md` | READY |
