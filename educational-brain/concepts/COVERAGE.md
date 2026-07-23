@@ -14,7 +14,7 @@ and this file's summary row should be corrected to match.
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
 | physics | 238 | 179 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 (2026-07-23, level 14, this batch): `phys.mech.poisson-brackets`, `phys.mod.radioactive-decay`, `phys.qm.schrodinger-equation`, `phys.qm.uncertainty-principle`, `phys.rel.relativistic-momentum`, `phys.stat.bose-einstein`, `phys.stat.entropy-statistical`, `phys.stat.fluctuations-correlations`, `phys.stat.free-energy`, `phys.stat.grand-canonical-ensemble` — 59 concepts remain (75.21%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-13 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
-| chemistry | 186 | 38 | levels 0–5 complete (38/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol — IN PROGRESS |
+| chemistry | 186 | 45 | levels 0–6 complete (45/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
 
@@ -806,3 +806,15 @@ retrieval engine. Per-entry completeness against the tracked fields is in
   zero duplicates, zero orphans. Chemistry is now 38/186 — 20.43% complete.
   True total, recomputed fresh: **257** entries (179 physics + 37 mathematics + 38
   chemistry + 3 english), 1,518 remaining, 14.48%.
+
+### Chemistry batch 4 — level 6 (2026-07-23)
+Authored 7 concepts in topological order (level 6):
+- `chem.atomic.orbitals` (proficient/understand/4h/0.75) — s/p/d/f shapes; radial/angular nodes (radial=n−l−1, angular=l); multielectron energy splitting
+- `chem.env.ozone` (developing/understand/2h/0.75) — Chapman cycle; CFC photodissociation → Cl• catalytic chain; polar vortex; Montreal Protocol
+- `chem.equil.concept` (developing/understand/2h/0.75) — dynamic equilibrium; ΔG = 0 at equilibrium; Q vs K; ΔG° = −RT ln K
+- `chem.kinet.arrhenius` (proficient/apply/4h/0.80) — k = Ae^(−Ea/RT); linear form; two-T form; catalyst lowers Ea
+- `chem.kinet.integrated-rate` (proficient/apply/4h/0.80) — zero/first/second-order integrated laws; half-lives; three-plot diagnostic; pseudo-first-order
+- `chem.kinet.mechanism` (advanced/analyze/4h/0.75) — elementary steps; RDS; pre-equilibrium elimination; SSA; mechanism consistency
+- `chem.thermo.cell-thermo` (proficient/apply/3h/0.75) — ΔG = −nFE; ΔG° = −nFE°; K from E°; Nernst equation; (∂E/∂T) = ΔS/nF
+
+Chemistry: 38 → 45/186 entries. Total authored: 257 → 264.
