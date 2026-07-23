@@ -1,8 +1,8 @@
 # Educational Brain Production Pipeline — Validation Report
 
 Generated 2026-07-22 against the live repository state; re-run this batch
-(Physics Wave 6) against the post-rebase state (`origin/main` @
-`d8401bae`). Every check below was computed directly from
+(Physics Wave 7) against the post-merge state (`origin/main` @ `ff07c8cc`).
+Every check below was computed directly from
 `docs/{subject}/kg/graph.json` (all 6 subjects), `docs/curriculum/blueprints/`,
 and `educational-brain/concepts/{subject}/` — none of the numbers here are
 estimated or copied from prior reports.
@@ -35,7 +35,7 @@ report).
 
 **✓ Every Educational Brain entry points to one existing KG concept.**
 Checked: every filename in `educational-brain/concepts/{subject}/`
-(114 files, re-checked this batch after 12 new `phys.*` Wave 6 entries)
+(139 files, re-checked this batch after 25 new `phys.*` Wave 7 entries)
 against that subject's live KG id set. **0 orphans** — every EB file
 resolves to a real, current KG concept.
 
@@ -46,22 +46,23 @@ filesystem could technically hold `Foo.md` and `foo.md` as distinct
 files) — **0 duplicates**.
 
 **◐ Every Educational Brain entry references one Blueprint — partially,
-honestly reported.** 107 of 114 EB entries' concepts have a matching
+honestly reported.** 132 of 139 EB entries' concepts have a matching
 Blueprint FILE on disk. The other 7 (`math.found.definition`,
 `inductive-reasoning`, `mathematical-modeling`, `mathematical-symbols`,
 `problem-solving-strategies` — Wave 2 — plus `reading-mathematics` —
 Wave 3 — plus `empty-set` — Wave 5) genuinely have no Blueprint yet —
 each states this explicitly in its own Blueprint References section per
-Quality Gate 2, rather than omitting the section. All 12 of this batch's
-new physics entries (Wave 6) DO have existing Blueprints, each reused by
-reference. 44 of the 114 now have an explicit, machine-checkable
+Quality Gate 2, rather than omitting the section. All 25 of this batch's
+new physics entries (Wave 7) DO have existing Blueprints, each reused by
+reference. 69 of the 139 now have an explicit, machine-checkable
 "Blueprint References" section citing it by name (or citing its absence)
 — `eng.phonics.print-concepts` plus this program's 31 `math.found.*`
-entries plus this batch's 12 `phys.*` Wave 6 entries, all authored under
-`EDUCATIONAL_BRAIN_STANDARD.md`. The remaining 70 predate that section
-(authored under the old `TEMPLATE.md`) and reference their Blueprints
-only informally or not at all in prose — the migration debt already
-recorded in `EDUCATIONAL_BRAIN_STANDARD.md` §6 and `QUALITY.md`.
+entries plus 12 `phys.*` Wave 6 entries plus this batch's 25 `phys.*`
+Wave 7 entries, all authored under `EDUCATIONAL_BRAIN_STANDARD.md`. The
+remaining 70 predate that section (authored under the old `TEMPLATE.md`)
+and reference their Blueprints only informally or not at all in prose —
+the migration debt already recorded in `EDUCATIONAL_BRAIN_STANDARD.md`
+§6 and `QUALITY.md`.
 
 **✓ No duplicate Educational Brain files.** 0 found (see above).
 
@@ -96,7 +97,7 @@ blocker:**
    task's explicit constraint and the project's standing rule that KG
    corrections are the Pipeline's to make.
 
-## Physics Wave 6 — explicit exception batch (2026-07-22)
+## Physics Wave 6 — explicit exception batch (2026-07-22, COMPLETE)
 
 A direct, explicit user instruction redirected this batch specifically to
 physics, overriding the standing math.found-first default (see
@@ -118,6 +119,32 @@ history for the full per-concept list); `phys.opt.youngs-experiment`
 alone was honestly assessed as having no strong cross-subject connection
 at this level — a "weak but real" conclusion, not a gap. No Canonical KG
 file was modified for any of the six findings.
+
+## Physics Wave 7 — second explicit exception batch, mandatory-rules
+cycle (2026-07-23)
+
+A second, direct, explicit user instruction (an 11-point numbered
+mandatory-rules set) again redirected this batch specifically to
+physics, overriding the standing math.found-first default (see
+`ROADMAP.md` §3c for full detail). Audit first, per mandatory rule 1/2
+("never trust previous reports"): `git fetch origin && git checkout main
+&& git pull origin main` revealed `main` had only 67 physics EB files —
+the entire prior Wave 6 batch had never been merged, only existed on the
+feature branch. Merged it (fast-forward, zero file conflicts) before
+re-auditing again, establishing 79/238 as the true starting point.
+Independently recomputed dependency levels via a fresh Kahn's-algorithm
+pass over the live KG's `requires` edges — the level-7 set (25 concepts)
+matched `AUTHORING_QUEUE.md`'s stored rows exactly, zero discrepancy.
+Authored all 25. All 25 individually pass every per-entry check:
+structural 21-section conformance verified by heading scan and exact
+heading-order diff (0 mismatches across all 25); 0 orphans; 0
+duplicates; Blueprint References section present and accurate (all 25
+cite an existing Blueprint); no runtime-asset duplication (none of the
+25 created any `AssetIdentity` records). Physics KG re-validated fresh
+this batch: PASS, 238/238 reachable, 0 failures/warnings — no KG file
+was touched. A concurrent commit set (`806eb9b5`/`95d6e44a`/`ff07c8cc`)
+landed on `origin/main` mid-batch — verified zero file overlap, merged
+cleanly. `physics` is now 104/238 (134 concepts remain).
 
 ## Domain Certification — math.found
 
@@ -145,7 +172,7 @@ three; all stay open until `math.found` reaches 82/82.
 ## Full index and queue
 
 See `EDUCATIONAL_BRAIN_INDEX.md` (1,775 rows, one per KG concept, with
-Blueprint/EB/Status columns) and `AUTHORING_QUEUE.md` (1,661 rows — every
+Blueprint/EB/Status columns) and `AUTHORING_QUEUE.md` (1,636 rows — every
 `MISSING` concept, with `math.found`'s remaining 51 called out as the
 default next targets per the current Domain Certification Mode, unless
 overridden by an equally explicit subject-specific instruction as this

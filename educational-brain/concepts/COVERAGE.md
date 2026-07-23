@@ -12,7 +12,7 @@ and this file's summary row should be corrected to match.
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
 | mathematics | 908 | 32 | `math.arith.fractions` + 31 `math.found.*` entries (Waves 1-5) — math.found domain IN PROGRESS (31/82), see Delivery history |
-| physics | 238 | 79 | `phys.meas.*` (8), `phys.mech.displacement`, `phys.mech.velocity`, `phys.mech.acceleration`, `phys.mech.kinematics-1d`, `phys.mech.newtons-first-law`, `phys.mech.force`, `phys.mech.kinematics-2d`, `phys.mech.projectile-motion`, `phys.therm.temperature`, `phys.wave.wave-properties`, `phys.em.electric-charge`, `phys.therm.zeroth-law`, `phys.therm.thermal-expansion`, `phys.therm.heat-transfer`, `phys.wave.transverse-waves`, `phys.wave.longitudinal-waves`, `phys.wave.sound-waves`, `phys.opt.nature-of-light`, `phys.em.coulombs-law`, `phys.em.electric-current`, `phys.therm.ideal-gas-law`, `phys.therm.specific-heat`, `phys.wave.wave-speed`, `phys.em.electric-field`, `phys.em.magnetic-field`, `phys.opt.reflection`, `phys.opt.refraction`, `phys.opt.wave-optics`, `phys.wave.doppler-effect`, `phys.wave.sound-intensity`, `phys.em.electric-dipole`, `phys.em.gauss-law`, `phys.em.magnetic-flux`, `phys.em.magnetic-force`, `phys.em.magnetic-materials`, `phys.therm.kinetic-theory`, `phys.therm.calorimetry`, `phys.wave.superposition`, `phys.opt.mirrors`, `phys.opt.total-internal-reflection`, `phys.opt.lenses`, `phys.opt.dispersion`, `phys.opt.polarization`, `phys.mech.newtons-second-law`, `phys.therm.internal-energy`, `phys.therm.phase-transitions`, `phys.wave.interference`, `phys.opt.lens-power`, `phys.opt.brewsters-law`, `phys.em.electric-potential`, `phys.em.biot-savart`, `phys.em.magnetic-dipole`, `phys.em.faradays-law`, `phys.mech.relative-motion`, `phys.mech.circular-motion`, `phys.mech.newtons-third-law`, `phys.mech.free-body-diagram`, `phys.mech.work`, `phys.mech.momentum` (pre-existing 67, TEMPLATE.md-era) + `phys.mech.universal-gravitation`, `phys.mech.hookes-law`, `phys.mech.pressure-fluids`, `phys.wave.standing-waves`, `phys.wave.beats`, `phys.opt.optical-instruments`, `phys.opt.youngs-experiment`, `phys.em.capacitance`, `phys.em.ohms-law`, `phys.em.amperes-law`, `phys.em.lenzs-law`, `phys.em.self-inductance` (2026-07-22, Wave 6, EDUCATIONAL_BRAIN_STANDARD.md-era, this batch) — 159 concepts remain |
+| physics | 238 | 104 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 (2026-07-22, level 6) + 25 Wave 7 (2026-07-23, level 7, this batch): `phys.mech.friction`, `phys.mech.tension`, `phys.mech.normal-force`, `phys.mech.kinetic-energy`, `phys.mech.potential-energy`, `phys.mech.power`, `phys.mech.impulse`, `phys.mech.center-of-mass`, `phys.mech.angular-kinematics`, `phys.mech.gravitational-field`, `phys.mech.stress-strain`, `phys.mech.buoyancy`, `phys.mech.surface-tension`, `phys.therm.first-law`, `phys.wave.shm`, `phys.opt.diffraction`, `phys.em.dielectrics`, `phys.em.energy-capacitor`, `phys.em.resistivity`, `phys.em.dc-circuits`, `phys.em.electrical-power`, `phys.em.solenoid`, `phys.em.mutual-inductance`, `phys.em.ac-basics`, `phys.em.maxwells-equations` — 134 concepts remain; see Delivery history for the full pre-existing-67 and Wave-6 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 0 | — |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
@@ -369,3 +369,54 @@ retrieval engine. Per-entry completeness against the tracked fields is in
   `QUALITY.md`, `COVERAGE.md`, `VALIDATION_REPORT.md`) regenerated from
   source; re-validated 0 orphans, 0 duplicates, 0 broken KG references, 0
   invalid Blueprint references across all 114 entries.
+
+- **Curriculum Completion Program, batch 10 — Physics Wave 7 (second
+  explicit user-directed exception, mandatory-rules cycle)** (2026-07-23):
+  a second, direct, explicit user instruction — an 11-point numbered set
+  of mandatory rules for continuing Physics Educational Brain production
+  — again redirected this batch specifically to physics, overriding
+  `math.found`'s standing priority for this batch only. `math.found` was
+  NOT touched and remains 31/82, IN PROGRESS. Audit first (per mandatory
+  rule 1/2, "never trust previous reports"): `git fetch origin &&
+  git checkout main && git pull origin main` revealed `main` had only 67
+  physics EB files — the entire prior session's Wave 6 work (22
+  blueprints + 12 EB entries) had never actually been merged, only
+  existed on the feature branch `claude/physics-blueprint-audit-x8usq8`.
+  Checked for file conflicts (none), rebased the branch onto latest
+  `origin/main`, fast-forward-merged into `main` (`d3bce523..db424458`),
+  and pushed `main` directly — establishing the TRUE starting point,
+  79/238, before authoring anything. Re-audited again: independently
+  recomputed dependency levels via a fresh Kahn's-algorithm pass over the
+  live KG's `requires` edges (not trusting `AUTHORING_QUEUE.md`'s stored
+  levels blindly) and confirmed the level-7 set matched the queue's
+  stored rows exactly — 25 concepts, the full level. Authored all 25:
+  `phys.mech.friction`, `phys.mech.tension`, `phys.mech.normal-force`,
+  `phys.mech.kinetic-energy`, `phys.mech.potential-energy`,
+  `phys.mech.power`, `phys.mech.impulse`, `phys.mech.center-of-mass`,
+  `phys.mech.angular-kinematics`, `phys.mech.gravitational-field`,
+  `phys.mech.stress-strain`, `phys.mech.buoyancy`,
+  `phys.mech.surface-tension`, `phys.therm.first-law`, `phys.wave.shm`,
+  `phys.opt.diffraction`, `phys.em.dielectrics`,
+  `phys.em.energy-capacitor`, `phys.em.resistivity`,
+  `phys.em.dc-circuits`, `phys.em.electrical-power`, `phys.em.solenoid`,
+  `phys.em.mutual-inductance`, `phys.em.ac-basics`,
+  `phys.em.maxwells-equations`. All 25 had existing Blueprints
+  (Component-format) reused by reference — each entry cites its
+  Blueprint's Misconception Engine/Register by name with birth-type
+  classification added, never re-deriving probe/bridge/replacement text
+  or restating worked examples/full item banks. All 25 entries verified
+  against `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure
+  and heading order (0 mismatches), zero duplicate filenames/concept IDs,
+  zero orphans against the live physics KG (all 104 physics EB files map
+  to a valid KG id). A concurrent commit set landed on `origin/main`
+  mid-batch (`806eb9b5`/`95d6e44a`/`ff07c8cc` — lesson-history-restore
+  fix, 22 physics brain-package artifacts, Prisma pool sizing) — verified
+  zero file overlap with this batch's work, merged cleanly. Physics KG
+  re-validated: PASS, 238/238 reachable, 0 failures/warnings — no KG file
+  was touched. `physics` is now 104/238 (134 concepts remain); Wave 8
+  (dependency level 8, 15 concepts — `phys.mech.inclined-plane` through
+  `phys.em.electromagnetic-waves`) is computed and next, but NOT started
+  this batch, per the mandatory-rules cycle's "batch, validate, report,
+  then re-audit before continuing" discipline. All six tracking files
+  regenerated from source; re-validated 0 orphans, 0 duplicates, 0 broken
+  KG references, 0 invalid Blueprint references across all 139 entries.
