@@ -928,7 +928,7 @@ its subject KG.
 | trig | `math.trig.trig-identities` | Trigonometric Identities | Yes | No | — | MISSING |
 | trig | `math.trig.unit-circle` | Unit Circle | Yes | No | — | MISSING |
 
-## physics (238 concepts, 135 READY)
+## physics (238 concepts, 144 READY)
 
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
@@ -1003,7 +1003,7 @@ its subject KG.
 | mech | `phys.mech.force` | Force and Interaction | Yes | Yes | `educational-brain/concepts/physics/phys.mech.force.md` | READY |
 | mech | `phys.mech.free-body-diagram` | Free Body Diagrams | Yes | Yes | `educational-brain/concepts/physics/phys.mech.free-body-diagram.md` | READY |
 | mech | `phys.mech.friction` | Friction Forces | Yes | Yes | `educational-brain/concepts/physics/phys.mech.friction.md` | READY |
-| mech | `phys.mech.generalized-coordinates` | Generalized Coordinates and Configuration Space | Yes | No | — | MISSING |
+| mech | `phys.mech.generalized-coordinates` | Generalized Coordinates and Configuration Space | Yes | Yes | `educational-brain/concepts/physics/phys.mech.generalized-coordinates.md` | READY |
 | mech | `phys.mech.gravitational-field` | Gravitational Field and Field Lines | Yes | Yes | `educational-brain/concepts/physics/phys.mech.gravitational-field.md` | READY |
 | mech | `phys.mech.gravitational-potential` | Gravitational Potential Energy | Yes | Yes | `educational-brain/concepts/physics/phys.mech.gravitational-potential.md` | READY |
 | mech | `phys.mech.hamilton-jacobi-equation` | Hamilton-Jacobi Equation and Action-Angle Variables | Yes | No | — | MISSING |
@@ -1012,7 +1012,7 @@ its subject KG.
 | mech | `phys.mech.hookes-law` | Hooke's Law and Spring Force | Yes | Yes | `educational-brain/concepts/physics/phys.mech.hookes-law.md` | READY |
 | mech | `phys.mech.impulse` | Impulse and Momentum Change | Yes | Yes | `educational-brain/concepts/physics/phys.mech.impulse.md` | READY |
 | mech | `phys.mech.inclined-plane` | Motion on Inclined Planes | Yes | Yes | `educational-brain/concepts/physics/phys.mech.inclined-plane.md` | READY |
-| mech | `phys.mech.keplers-laws` | Kepler's Laws of Planetary Motion | Yes | No | — | MISSING |
+| mech | `phys.mech.keplers-laws` | Kepler's Laws of Planetary Motion | Yes | Yes | `educational-brain/concepts/physics/phys.mech.keplers-laws.md` | READY |
 | mech | `phys.mech.kinematics-1d` | Kinematics in One Dimension | Yes | Yes | `educational-brain/concepts/physics/phys.mech.kinematics-1d.md` | READY |
 | mech | `phys.mech.kinematics-2d` | Kinematics in Two Dimensions | Yes | Yes | `educational-brain/concepts/physics/phys.mech.kinematics-2d.md` | READY |
 | mech | `phys.mech.kinetic-energy` | Kinetic Energy | Yes | Yes | `educational-brain/concepts/physics/phys.mech.kinetic-energy.md` | READY |
@@ -1030,15 +1030,15 @@ its subject KG.
 | mech | `phys.mech.projectile-motion` | Projectile Motion | Yes | Yes | `educational-brain/concepts/physics/phys.mech.projectile-motion.md` | READY |
 | mech | `phys.mech.relative-motion` | Relative Motion and Reference Frames | Yes | Yes | `educational-brain/concepts/physics/phys.mech.relative-motion.md` | READY |
 | mech | `phys.mech.rolling-motion` | Rolling Without Slipping | Yes | No | — | MISSING |
-| mech | `phys.mech.rotational-dynamics` | Rotational Dynamics | Yes | No | — | MISSING |
-| mech | `phys.mech.satellites` | Artificial Satellites and Geostationary Orbits | Yes | No | — | MISSING |
+| mech | `phys.mech.rotational-dynamics` | Rotational Dynamics | Yes | Yes | `educational-brain/concepts/physics/phys.mech.rotational-dynamics.md` | READY |
+| mech | `phys.mech.satellites` | Artificial Satellites and Geostationary Orbits | Yes | Yes | `educational-brain/concepts/physics/phys.mech.satellites.md` | READY |
 | mech | `phys.mech.stress-strain` | Stress, Strain, and Elastic Moduli | Yes | Yes | `educational-brain/concepts/physics/phys.mech.stress-strain.md` | READY |
 | mech | `phys.mech.surface-tension` | Surface Tension and Capillarity | Yes | Yes | `educational-brain/concepts/physics/phys.mech.surface-tension.md` | READY |
 | mech | `phys.mech.tension` | Tension in Strings and Ropes | Yes | Yes | `educational-brain/concepts/physics/phys.mech.tension.md` | READY |
 | mech | `phys.mech.torque` | Torque | Yes | Yes | `educational-brain/concepts/physics/phys.mech.torque.md` | READY |
 | mech | `phys.mech.universal-gravitation` | Newton's Law of Universal Gravitation | Yes | Yes | `educational-brain/concepts/physics/phys.mech.universal-gravitation.md` | READY |
 | mech | `phys.mech.velocity` | Speed and Velocity | Yes | Yes | `educational-brain/concepts/physics/phys.mech.velocity.md` | READY |
-| mech | `phys.mech.viscosity` | Viscosity and Stokes' Law | Yes | No | — | MISSING |
+| mech | `phys.mech.viscosity` | Viscosity and Stokes' Law | Yes | Yes | `educational-brain/concepts/physics/phys.mech.viscosity.md` | READY |
 | mech | `phys.mech.work` | Work Done by a Force | Yes | Yes | `educational-brain/concepts/physics/phys.mech.work.md` | READY |
 | mech | `phys.mech.work-energy-theorem` | Work-Energy Theorem | Yes | Yes | `educational-brain/concepts/physics/phys.mech.work-energy-theorem.md` | READY |
 | mod | `phys.mod.atomic-spectra` | Atomic Spectra and Energy Levels | Yes | No | — | MISSING |
@@ -1055,7 +1055,7 @@ its subject KG.
 | mod | `phys.mod.nuclear-models` | Nuclear Models: Shell Model | Yes | No | — | MISSING |
 | mod | `phys.mod.nuclear-reactions` | Nuclear Reactions and Q-Value | Yes | No | — | MISSING |
 | mod | `phys.mod.photoelectric-effect` | Photoelectric Effect | Yes | Yes | `educational-brain/concepts/physics/phys.mod.photoelectric-effect.md` | READY |
-| mod | `phys.mod.photons` | Photons and Quantization of Light | Yes | No | — | MISSING |
+| mod | `phys.mod.photons` | Photons and Quantization of Light | Yes | Yes | `educational-brain/concepts/physics/phys.mod.photons.md` | READY |
 | mod | `phys.mod.pn-junction` | The p-n Junction | No | No | — | MISSING |
 | mod | `phys.mod.radioactive-decay` | Radioactive Decay Law and Half-Life | Yes | No | — | MISSING |
 | mod | `phys.mod.radioactivity` | Radioactivity: Alpha, Beta, Gamma Decay | Yes | No | — | MISSING |
@@ -1117,7 +1117,7 @@ its subject KG.
 | rel | `phys.rel.mass-energy` | Mass-Energy Equivalence: E=mc² | Yes | No | — | MISSING |
 | rel | `phys.rel.postulates` | Postulates of Special Relativity | Yes | Yes | `educational-brain/concepts/physics/phys.rel.postulates.md` | READY |
 | rel | `phys.rel.relativistic-momentum` | Relativistic Momentum and Energy | Yes | No | — | MISSING |
-| rel | `phys.rel.simultaneity` | Relativity of Simultaneity | Yes | No | — | MISSING |
+| rel | `phys.rel.simultaneity` | Relativity of Simultaneity | Yes | Yes | `educational-brain/concepts/physics/phys.rel.simultaneity.md` | READY |
 | rel | `phys.rel.spacetime` | Spacetime Interval and Four-Vectors | Yes | No | — | MISSING |
 | rel | `phys.rel.time-dilation` | Time Dilation | Yes | No | — | MISSING |
 | stat | `phys.stat.boltzmann-factor` | Boltzmann Factor and Statistical Weight | Yes | No | — | MISSING |
@@ -1137,7 +1137,7 @@ its subject KG.
 | stat | `phys.stat.probability-basics` | Probability Distributions in Physics | Yes | No | — | MISSING |
 | therm | `phys.therm.calorimetry` | Calorimetry | Yes | Yes | `educational-brain/concepts/physics/phys.therm.calorimetry.md` | READY |
 | therm | `phys.therm.carnot-cycle` | Carnot Cycle | Yes | No | — | MISSING |
-| therm | `phys.therm.entropy` | Entropy and Disorder | Yes | No | — | MISSING |
+| therm | `phys.therm.entropy` | Entropy and Disorder | Yes | Yes | `educational-brain/concepts/physics/phys.therm.entropy.md` | READY |
 | therm | `phys.therm.first-law` | First Law of Thermodynamics | Yes | Yes | `educational-brain/concepts/physics/phys.therm.first-law.md` | READY |
 | therm | `phys.therm.heat-engines` | Heat Engines and Efficiency | Yes | Yes | `educational-brain/concepts/physics/phys.therm.heat-engines.md` | READY |
 | therm | `phys.therm.heat-transfer` | Heat Transfer: Conduction, Convection, Radiation | Yes | Yes | `educational-brain/concepts/physics/phys.therm.heat-transfer.md` | READY |
@@ -1156,7 +1156,7 @@ its subject KG.
 | wave | `phys.wave.beats` | Beats and Beat Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.beats.md` | READY |
 | wave | `phys.wave.damped-oscillations` | Damped Oscillations | Yes | Yes | `educational-brain/concepts/physics/phys.wave.damped-oscillations.md` | READY |
 | wave | `phys.wave.doppler-effect` | Doppler Effect | Yes | Yes | `educational-brain/concepts/physics/phys.wave.doppler-effect.md` | READY |
-| wave | `phys.wave.forced-oscillations` | Forced Oscillations and Resonance | Yes | No | — | MISSING |
+| wave | `phys.wave.forced-oscillations` | Forced Oscillations and Resonance | Yes | Yes | `educational-brain/concepts/physics/phys.wave.forced-oscillations.md` | READY |
 | wave | `phys.wave.interference` | Wave Interference | Yes | Yes | `educational-brain/concepts/physics/phys.wave.interference.md` | READY |
 | wave | `phys.wave.longitudinal-waves` | Longitudinal Waves | Yes | Yes | `educational-brain/concepts/physics/phys.wave.longitudinal-waves.md` | READY |
 | wave | `phys.wave.pendulum` | Simple Pendulum | Yes | Yes | `educational-brain/concepts/physics/phys.wave.pendulum.md` | READY |

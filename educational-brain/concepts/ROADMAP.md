@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **170** |
-| Remaining | **1,605** |
-| Completion percentage | **9.58%** |
+| Concepts with an Educational Brain entry | **179** |
+| Remaining | **1,596** |
+| Completion percentage | **10.08%** |
 
 ---
 
@@ -24,7 +24,7 @@ below from source whenever this file is updated, never hand-estimate.
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
 | mathematics | 908 | 32 | 3.52% | `math.found.mathematical-thinking` | **Yes** |
-| physics | 238 | 135 | 56.72% | `phys.meas.units` | Yes |
+| physics | 238 | 144 | 60.50% | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 0 | 0.00% | `chem.found.matter` | No |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
@@ -35,10 +35,11 @@ Physics additions (216 → 238); its 67 pre-existing entries predated that
 addition. Wave 6 (12 concepts, dependency level 6) raised physics to
 79/238; Wave 7 (25 concepts, dependency level 7) raised physics to
 104/238; Wave 8 (15 concepts, dependency level 8) raised physics to
-119/238 (50.00%); this session's Wave 9 batch (16 concepts, dependency
-level 9) raised physics to 135/238 (56.72%) — this wave also introduced
-this program's first Modern Physics and Relativity domain entries
-(`phys.mod.photoelectric-effect`, `phys.rel.postulates`) — still none of
+119/238 (50.00%); Wave 9 (16 concepts, dependency level 9) raised
+physics to 135/238 (56.72%) — introducing the first Modern Physics and
+Relativity domain entries (`phys.mod.photoelectric-effect`,
+`phys.rel.postulates`); this session's Wave 10 batch (9 concepts,
+dependency level 10) raised physics to 144/238 (60.50%) — still none of
 the 22 new Particle Physics/Semiconductor Physics concepts are covered
 yet (those sit at much deeper dependency levels, since the Particle
 Physics domain has its own internal prerequisite chain rooted at
@@ -229,22 +230,66 @@ this batch.
 
 ---
 
+## 3f. Domain status — physics Wave 10 (explicit exception batch,
+2026-07-23, COMPLETE)
+
+Continuation of the same mandatory-rules production cycle (§3c/§3d/§3e),
+immediately following Wave 9 within the same conversation per rule 10.
+`math.found` was NOT touched and remains 31/82.
+
+| Metric | Value |
+|---|---|
+| Domain | physics (whole subject, not a sub-domain) |
+| Total concepts in subject | 238 |
+| Authored before this batch | 135 |
+| Authored this batch (Wave 10, dependency level 10) | 9 |
+| Total now | 144 |
+| Remaining | 94 |
+| Status | **IN PROGRESS — 60.50% complete** |
+
+Re-fetched `origin/main` after the Wave 9 push and confirmed 0 commits
+ahead/behind before starting (per rule 10) — no other session had
+touched physics EB concurrently. Independently recomputed dependency
+levels via a fresh Kahn's-algorithm pass over the live KG's `requires`
+edges — the level-10 set matched `AUTHORING_QUEUE.md`'s stored rows
+exactly, 9 concepts: `phys.mech.rotational-dynamics`,
+`phys.mech.keplers-laws`, `phys.mech.satellites`, `phys.mech.viscosity`,
+`phys.mech.generalized-coordinates`, `phys.therm.entropy`,
+`phys.wave.forced-oscillations`, `phys.mod.photons`,
+`phys.rel.simultaneity`. All 9 had existing Blueprints reused by
+reference (`phys.mod.photons` cited all 4 of its Blueprint's documented
+misconceptions, matching the 4-misconception density pattern already
+established for `phys.opt.diffraction`/`phys.opt.single-slit`/
+`phys.mod.photoelectric-effect`/`phys.rel.postulates`). Wave 11 (level
+11, 11 concepts) is computed and next, but NOT started this batch.
+
+---
+
 ## 4. Current batch
 
-**Curriculum Completion Program batch 12 (this batch, Physics Wave 9,
-explicit exception — see §3e for full detail)**: authored the complete
-physics dependency-level-9 wave (16 concepts), continuing the same
-mandatory-rules cycle immediately after Wave 8 within the same
-conversation. All 16 verified against `EDUCATIONAL_BRAIN_STANDARD.md`'s
+**Curriculum Completion Program batch 13 (this batch, Physics Wave 10,
+explicit exception — see §3f for full detail)**: authored the complete
+physics dependency-level-10 wave (9 concepts), continuing the same
+mandatory-rules cycle immediately after Wave 9 within the same
+conversation. All 9 verified against `EDUCATIONAL_BRAIN_STANDARD.md`'s
 exact 21-section structure and heading order (0 mismatches), zero
-duplicates, zero orphans against the live physics KG (135 total physics
+duplicates, zero orphans against the live physics KG (144 total physics
 EB files). `math.found` remains 31/82, untouched this batch. Physics KG
 re-validated PASS (238/238 reachable, 0 failures/warnings, no KG file
 touched). All six tracking files regenerated; re-validated 0 orphans, 0
 duplicates, 0 broken KG references, 0 invalid Blueprint references
-across all 170 entries. Physics EB reached 135/238 — 56.72%. This wave
-introduced the first Modern Physics (`phys.mod.photoelectric-effect`)
-and Relativity (`phys.rel.postulates`) domain entries in this program.
+across all 179 entries. Physics EB reached 144/238 — 60.50%.
+
+**Prior batch (batch 12, Physics Wave 9, explicit exception — see
+§3e)**: authored the complete physics dependency-level-9 wave (16
+concepts), continuing the same mandatory-rules cycle immediately after
+Wave 8 within the same conversation. All 16 verified against
+`EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and heading
+order (0 mismatches), zero duplicates, zero orphans against the live
+physics KG. `math.found` remains 31/82, untouched this batch. Physics EB
+reached 135/238 — 56.72%. This wave introduced the first Modern Physics
+(`phys.mod.photoelectric-effect`) and Relativity (`phys.rel.postulates`)
+domain entries in this program.
 
 **Prior batch (batch 11, Physics Wave 8, explicit exception — see
 §3d)**: authored the complete physics dependency-level-8 wave (15
@@ -322,26 +367,26 @@ procedure.
 4. **Standing exception**: physics (or any subject) may be targeted
    again ahead of this default order given an equally explicit,
    subject-specific user instruction, as happened this batch and the
-   prior ones (§3b/§3c/§3d/§3e/§4). Physics currently has 103 concepts
-   remaining (135/238 done, 56.72%); its own internal queue's next
-   unlocked wave (Wave 10, dependency level 10, 9 concepts) IS already
-   computed: `phys.mech.rotational-dynamics`, `phys.mech.keplers-laws`,
-   `phys.mech.satellites`, `phys.mech.viscosity`,
-   `phys.mech.generalized-coordinates`, `phys.therm.entropy`,
-   `phys.wave.forced-oscillations`, `phys.mod.photons`,
-   `phys.rel.simultaneity`.
+   prior ones (§3b/§3c/§3d/§3e/§3f/§4). Physics currently has 94 concepts
+   remaining (144/238 done, 60.50%); its own internal queue's next
+   unlocked wave (Wave 11, dependency level 11, 11 concepts) IS already
+   computed: `phys.mech.angular-momentum`, `phys.mech.rolling-motion`,
+   `phys.mech.euler-lagrange-equation`, `phys.therm.carnot-cycle`,
+   `phys.therm.third-law`, `phys.mod.compton-effect`,
+   `phys.mod.de-broglie`, `phys.mod.bohr-model`, `phys.mod.x-rays`,
+   `phys.rel.time-dilation`, `phys.stat.probability-basics`.
 
-Full computed order (all 1,605 remaining concepts): see
+Full computed order (all 1,596 remaining concepts): see
 `AUTHORING_QUEUE.md` — §5 above (the domain-completion constraint) takes
 precedence over that file's literal row order until `math.found` is
 complete, unless overridden per item 4.
 
 ## 6. Next batch
 
-**Batch 13 (recommended default)**: resume `math.found` Wave 6 — the 5
+**Batch 14 (recommended default)**: resume `math.found` Wave 6 — the 5
 level-6 concepts listed in §5 item 1, in strict prerequisite order, no
 other domain started. **If instead directed back to physics** (per the
-standing mandatory-rules cycle governing this override): author Wave 10
-(the 9 concepts listed in §5 item 4) in full, following the same
-reuse-by-reference-Blueprint discipline established these past four
-batches, then re-fetch/re-audit `main` and continue to Wave 11.
+standing mandatory-rules cycle governing this override): author Wave 11
+(the 11 concepts listed in §5 item 4) in full, following the same
+reuse-by-reference-Blueprint discipline established these past five
+batches, then re-fetch/re-audit `main` and continue to Wave 12.
