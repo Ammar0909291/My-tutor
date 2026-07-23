@@ -38578,6 +38578,303 @@ const QRK_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.particle.leptons ────────────────────────────────────────────────────
+const LEPT = 'phys.particle.leptons'
+const LEPT_SRC = 'docs/curriculum/blueprints/phys.particle.leptons.md'
+
+const LEPT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LEPT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The muon and tau are NOT some "less real" or exotic cousin of the electron — the electron\'s ' +
+      'outsized familiarity from everyday chemistry makes it feel more fundamental by comparison, but all ' +
+      'three (electron, muon, tau) share identical charge and spin and are equally fundamental particles ' +
+      'with no internal structure. Cosmic-ray muons pass through your body at roughly one per minute — they ' +
+      'are detected just as directly and concretely as electrons ever are, simply at a much higher mass and ' +
+      'shorter lifetime. When a muon decays, it does NOT simply "shrink" into an electron — the casual ' +
+      'phrase "the muon decays into an electron" drops the two accompanying neutrinos that are always emitted ' +
+      'alongside it; it is genuinely a three-particle event (muon → electron + muon-neutrino + electron-' +
+      'antineutrino), not a mass-loss transformation.',
+    targetedMisconceptions: [`${LEPT}:MC-1`, `${LEPT}:MC-2`],
+    source: `${LEPT_SRC} — Section 4 MC-1 (muon/tau equally fundamental) + MC-2 (muon decay is a three-particle event)`,
+  },
+  {
+    conceptId: LEPT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Not all six leptons appear equally in everyday matter — learning the clean six-lepton table (electron, ' +
+      'muon, tau, and their three neutrinos) invites the unwarranted assumption that all six should be ' +
+      'equally present around us, but only the electron is stable and common at everyday conditions. Muons ' +
+      'and tau particles are not floating around in the atoms of an ordinary room the way electrons are: the ' +
+      'muon has a mean lifetime of only about 2.2 microseconds and the tau decays even faster, so both must ' +
+      'be freshly produced (by cosmic rays or accelerators) to exist at all — they decay away almost ' +
+      'instantly rather than persisting as stable matter constituents.',
+    targetedMisconceptions: [`${LEPT}:MC-3`],
+    source: `${LEPT_SRC} — Section 4 MC-3 (only the electron is stable/common in everyday matter)`,
+  },
+]
+
+const LEPT_PROBES: SeedProbe[] = [
+  {
+    conceptId: LEPT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'When a muon decays, does it just lose some mass and turn into an electron, or does something else happen?',
+    choices: [
+      { text: 'Something else — it is a genuine three-particle event: muon → electron + muon-neutrino + electron-antineutrino, not a simple mass-loss transformation', isCorrect: true },
+      { text: 'Yes — the muon simply loses weight and becomes an electron, since "the muon decays into an electron" describes the whole process', isCorrect: false, misconceptionId: `${LEPT}:MC-2` },
+    ],
+    correctValue: 'a three-particle decay, not a simple shrink-into-electron transformation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LEPT}:MC-2`],
+    source: `${LEPT_SRC} — Section 4 MC-2 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: LEPT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Are muons and tau particles floating around in the atoms of this room right now, the same way electrons are?',
+    choices: [
+      { text: 'No — only the electron is stable and common at everyday conditions; muons and tau particles decay away in microseconds or less and must be freshly produced to exist at all', isCorrect: true },
+      { text: 'Yes — since there are six leptons total, all six should be present in roughly equal amounts in ordinary matter', isCorrect: false, misconceptionId: `${LEPT}:MC-3` },
+    ],
+    correctValue: 'no — only the electron persists as a stable matter constituent',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LEPT}:MC-3`],
+    source: `${LEPT_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.particle.neutrinos ─────────────────────────────────────────────────
+const NEUT = 'phys.particle.neutrinos'
+const NEUT_SRC = 'docs/curriculum/blueprints/phys.particle.neutrinos.md'
+
+const NEUT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NEUT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Neutrinos are NOT exactly massless — early or simplified Standard Model treatments state neutrino ' +
+      'mass as exactly zero, an assumption experimentally overturned by the discovery of neutrino oscillation ' +
+      '(flavor changing over a trip), which requires a genuine mass difference to occur at all; if neutrinos ' +
+      'were truly massless, there would be nothing for oscillation to depend on. And neutrinos do NOT "never" ' +
+      'interact with matter — the true fact that their interaction probability is extraordinarily small gets ' +
+      'rounded down to "zero" or "never," but it is genuinely nonzero: huge, carefully instrumented detectors ' +
+      '(like Super-Kamiokande, containing tens of thousands of tons of water) rely on catching the rare but ' +
+      'real interactions that do occur, which is exactly how neutrinos were experimentally detected at all.',
+    targetedMisconceptions: [`${NEUT}:MC-1`, `${NEUT}:MC-2`],
+    source: `${NEUT_SRC} — Section 4 MC-1 (nonzero mass, required for oscillation) + MC-2 (extremely rare but nonzero interaction)`,
+  },
+  {
+    conceptId: NEUT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Neutrino "flavor" is not an arbitrary or meaningless label — each of the three flavors (electron, ' +
+      'muon, tau neutrino) is meaningfully tied to a specific lepton generation at the moment of production ' +
+      'and detection: an electron-neutrino is produced alongside an electron, a muon-neutrino alongside a ' +
+      'muon, and so on, and this pairing genuinely matters for which reactions can occur in a given process. ' +
+      'Oscillation (a neutrino changing flavor over a distance traveled) does not mean flavor was meaningless ' +
+      'to begin with — it means a neutrino produced in one definite flavor state can later be measured in a ' +
+      'different flavor state, a genuine quantum phenomenon layered on top of, not a replacement for, ' +
+      'flavor\'s real physical significance at production and detection.',
+    targetedMisconceptions: [`${NEUT}:MC-3`],
+    source: `${NEUT_SRC} — Section 4 MC-3 (flavor is physically meaningful at production/detection, not arbitrary)`,
+  },
+]
+
+const NEUT_PROBES: SeedProbe[] = [
+  {
+    conceptId: NEUT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If neutrinos have zero mass, could a neutrino produced as one flavor ever be detected as a different flavor later (oscillation)?',
+    choices: [
+      { text: 'No — oscillation requires a genuine mass difference between flavor states; the experimental discovery of oscillation is itself the proof that neutrinos are NOT exactly massless', isCorrect: true },
+      { text: 'Yes — neutrinos are massless like photons, and massless particles can still change flavor freely regardless of mass', isCorrect: false, misconceptionId: `${NEUT}:MC-1` },
+    ],
+    correctValue: 'no — massless neutrinos could not oscillate; oscillation proves nonzero mass',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NEUT}:MC-1`],
+    source: `${NEUT_SRC} — Section 4 MC-1 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: NEUT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If neutrinos almost never interact with matter, how was the neutrino ever actually detected in an experiment?',
+    choices: [
+      { text: 'The interaction probability is extraordinarily small but genuinely nonzero; huge, carefully instrumented detectors (tens of thousands of tons of material) catch the rare interactions that do occur', isCorrect: true },
+      { text: 'Neutrinos never interact with matter at all, so they cannot actually be directly detected — their existence is inferred only indirectly', isCorrect: false, misconceptionId: `${NEUT}:MC-2` },
+    ],
+    correctValue: 'rare but nonzero interactions, caught by massive dedicated detectors',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${NEUT}:MC-2`],
+    source: `${NEUT_SRC} — Section 4 MC-2 trigger probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.particle.hadron-quark-model ────────────────────────────────────────
+const HDQM = 'phys.particle.hadron-quark-model'
+const HDQM_SRC = 'docs/curriculum/blueprints/phys.particle.hadron-quark-model.md'
+
+const HDQM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HDQM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A hadron\'s mass is NOT the sum of its quark masses — everyday additive intuition from composite ' +
+      'objects (a car\'s mass sums its parts) does not carry over to hadrons. The proton\'s mass is about 938 ' +
+      'MeV/c², but its three quarks (two up, one down) have masses of only roughly 2, 2, and 5 MeV/c² — those ' +
+      'numbers add up to barely 1% of the proton\'s actual mass. The overwhelming remainder comes from the ' +
+      'strong-force BINDING ENERGY confining the quarks together (via E=mc²), not from the bare quark masses ' +
+      'themselves. Also, not any quark combination forms a valid hadron: color-neutrality (the quarks\' ' +
+      'internal "color charge" must combine to a neutral, colorless whole) restricts ordinary hadrons to ' +
+      'exactly two recipes — three quarks (a baryon, like the proton) or a quark-antiquark pair (a meson, ' +
+      'like the pion). Two quarks alone, or four quarks alone, cannot form a stable, color-neutral hadron.',
+    targetedMisconceptions: [`${HDQM}:MC-1`, `${HDQM}:MC-2`],
+    source: `${HDQM_SRC} — Section 4 MC-1 (binding energy dominates hadron mass) + MC-2 (color-neutrality restricts valid quark combinations)`,
+  },
+  {
+    conceptId: HDQM,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Baryon number and electric charge are NOT the same quantity, even though the proton — the most ' +
+      'familiar hadron — happens to have both charge +1 and baryon number +1, a coincidence that invites the ' +
+      'generalization "these always match." They are computed by entirely independent rules: electric charge ' +
+      'sums each quark\'s fractional charge (up: +⅔e, down: −⅓e); baryon number simply counts ⅓ per quark ' +
+      '(so any three-quark baryon has baryon number exactly +1, and any antibaryon has −1), completely ' +
+      'ignoring the quarks\' actual charges. The neutron makes this clear immediately: charge 0, but baryon ' +
+      'number +1 — the two quantities plainly diverge for a hadron just as familiar as the proton.',
+    targetedMisconceptions: [`${HDQM}:MC-3`],
+    source: `${HDQM_SRC} — Section 4 MC-3 (baryon number and charge are computed by independent rules)`,
+  },
+]
+
+const HDQM_PROBES: SeedProbe[] = [
+  {
+    conceptId: HDQM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The proton\'s mass is about 938 MeV/c². Its three quarks have masses of roughly 2, 2, and 5 MeV/c². Do these numbers add up?',
+    choices: [
+      { text: 'No — the quark masses sum to barely 1% of the proton\'s mass; the overwhelming remainder comes from strong-force binding energy, not the bare quark masses', isCorrect: true },
+      { text: 'Yes — a hadron\'s mass should simply be the sum of its constituent quark masses, the same way a composite object\'s mass sums its parts', isCorrect: false, misconceptionId: `${HDQM}:MC-1` },
+    ],
+    correctValue: 'no — binding energy, not quark mass, dominates the proton\'s mass',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HDQM}:MC-1`],
+    source: `${HDQM_SRC} — Section 4 MC-1 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: HDQM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A proton has charge +1 and baryon number +1. Does that mean charge and baryon number are always the same number for any hadron?',
+    choices: [
+      { text: 'No — they are computed by independent rules; the neutron has charge 0 but baryon number +1, showing the two quantities plainly diverge', isCorrect: true },
+      { text: 'Yes — since they match for the proton, baryon number and electric charge must be the same underlying quantity under different names', isCorrect: false, misconceptionId: `${HDQM}:MC-3` },
+    ],
+    correctValue: 'no — the neutron (charge 0, baryon number +1) disproves the equivalence',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HDQM}:MC-3`],
+    source: `${HDQM_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.particle.gauge-bosons ──────────────────────────────────────────────
+const GBOS = 'phys.particle.gauge-bosons'
+const GBOS_SRC = 'docs/curriculum/blueprints/phys.particle.gauge-bosons.md'
+
+const GBOS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GBOS,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Gauge bosons are NOT just more items on a growing particle-name list, no different in role from ' +
+      'quarks or electrons — they belong to a fundamentally different category. Matter particles (quarks and ' +
+      'leptons, both fermions) compose matter; gauge bosons (photon, gluon, W, Z) TRANSMIT force between ' +
+      'matter particles. A photon is never a building block of matter the way a quark or electron is — it is ' +
+      'the mediator carrying the electromagnetic interaction between charged particles. And a heavier ' +
+      'mediating particle does NOT create a stronger or longer-range force — everyday intuition (a heavier ' +
+      'object hits harder, travels further) is misleading here, because the actual quantum relationship, via ' +
+      'the uncertainty principle, is INVERTED: heavier mediators produce SHORTER-range forces. The W and Z ' +
+      'bosons are far heavier than the massless photon, and correspondingly the weak force has an extremely ' +
+      'short range while electromagnetism (photon-mediated) is infinite-range.',
+    targetedMisconceptions: [`${GBOS}:MC-1`, `${GBOS}:MC-2`],
+    source: `${GBOS_SRC} — Section 4 MC-1 (bosons transmit force, fermions compose matter) + MC-2 (heavier mediator means shorter range, not longer)`,
+  },
+  {
+    conceptId: GBOS,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Gravity does NOT have a confirmed mediating gauge boson the way the other three forces do — the ' +
+      'clean, symmetric four-force framework (each force paired with exactly one carrier type) tempts the ' +
+      'assumption that gravity\'s carrier, the graviton, must already be confirmed alongside the photon, ' +
+      'gluon, and W/Z bosons. It has not been: the graviton remains a purely theoretical, never-directly-' +
+      'detected proposal. The photon, gluon, and W/Z bosons are all experimentally confirmed, directly ' +
+      'observed particles; the graviton is a name for what a future quantum theory of gravity would need, ' +
+      'not yet an observed entity.',
+    targetedMisconceptions: [`${GBOS}:MC-3`],
+    source: `${GBOS_SRC} — Section 4 MC-3 (graviton remains unconfirmed, unlike photon/gluon/W/Z)`,
+  },
+]
+
+const GBOS_PROBES: SeedProbe[] = [
+  {
+    conceptId: GBOS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The W and Z bosons are far heavier than the photon. Does that mean the weak force should have a longer range than electromagnetism?',
+    choices: [
+      { text: 'No — the relationship is inverted via the uncertainty principle: heavier mediators produce SHORTER-range forces, which is exactly why the weak force is extremely short-range while electromagnetism is infinite-range', isCorrect: true },
+      { text: 'Yes — a heavier mediating particle should carry force further, the same way a heavier object travels further with momentum', isCorrect: false, misconceptionId: `${GBOS}:MC-2` },
+    ],
+    correctValue: 'no — heavier mediator means shorter range, not longer',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GBOS}:MC-2`],
+    source: `${GBOS_SRC} — Section 4 MC-2 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: GBOS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Has the graviton actually been detected, the same way the photon, gluon, and W/Z bosons have been?',
+    choices: [
+      { text: 'No — the graviton remains a purely theoretical, never-directly-detected proposal, unlike the experimentally confirmed photon, gluon, and W/Z bosons', isCorrect: true },
+      { text: 'Yes — since each of the four fundamental forces has a mediating gauge boson, and the other three are confirmed, the graviton must already be confirmed too', isCorrect: false, misconceptionId: `${GBOS}:MC-3` },
+    ],
+    correctValue: 'no — the graviton remains unconfirmed',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${GBOS}:MC-3`],
+    source: `${GBOS_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -39056,6 +39353,10 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...PCLS_EXPLANATIONS,
   ...ANTI_EXPLANATIONS,
   ...QRK_EXPLANATIONS,
+  ...LEPT_EXPLANATIONS,
+  ...NEUT_EXPLANATIONS,
+  ...HDQM_EXPLANATIONS,
+  ...GBOS_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -39534,4 +39835,8 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...PCLS_PROBES,
   ...ANTI_PROBES,
   ...QRK_PROBES,
+  ...LEPT_PROBES,
+  ...NEUT_PROBES,
+  ...HDQM_PROBES,
+  ...GBOS_PROBES,
 ]
