@@ -927,12 +927,12 @@ its subject KG.
 | trig | `math.trig.trig-identities` | Trigonometric Identities | Yes | No | — | MISSING |
 | trig | `math.trig.unit-circle` | Unit Circle | Yes | No | — | MISSING |
 
-## physics (238 concepts, 223 READY)
+## physics (238 concepts, 228 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
-| astro | `phys.astro.black-holes` | Black Holes and Schwarzschild Radius | Yes | No | — | MISSING |
+| astro | `phys.astro.black-holes` | Black Holes and Schwarzschild Radius | Yes | Yes | `educational-brain/concepts/physics/phys.astro.black-holes.md` | READY |
 | astro | `phys.astro.cosmology` | Big Bang Cosmology | Yes | Yes | `educational-brain/concepts/physics/phys.astro.cosmology.md` | READY |
-| astro | `phys.astro.dark-matter` | Dark Matter and Dark Energy | Yes | No | — | MISSING |
+| astro | `phys.astro.dark-matter` | Dark Matter and Dark Energy | Yes | Yes | `educational-brain/concepts/physics/phys.astro.dark-matter.md` | READY |
 | astro | `phys.astro.gravitational-waves` | Gravitational Waves | Yes | No | — | MISSING |
 | astro | `phys.astro.stellar-evolution` | Stellar Evolution and End States | Yes | Yes | `educational-brain/concepts/physics/phys.astro.stellar-evolution.md` | READY |
 | astro | `phys.astro.stellar-structure` | Stellar Structure and the Main Sequence | Yes | Yes | `educational-brain/concepts/physics/phys.astro.stellar-structure.md` | READY |
@@ -1057,7 +1057,7 @@ its subject KG.
 | mod | `phys.mod.pn-junction` | The p-n Junction | Yes | No | — | MISSING |
 | mod | `phys.mod.radioactive-decay` | Radioactive Decay Law and Half-Life | Yes | Yes | `educational-brain/concepts/physics/phys.mod.radioactive-decay.md` | READY |
 | mod | `phys.mod.radioactivity` | Radioactivity: Alpha, Beta, Gamma Decay | Yes | Yes | `educational-brain/concepts/physics/phys.mod.radioactivity.md` | READY |
-| mod | `phys.mod.semiconductor-classification` | Conductors, Insulators, and Semiconductors | Yes | No | — | MISSING |
+| mod | `phys.mod.semiconductor-classification` | Conductors, Insulators, and Semiconductors | Yes | Yes | `educational-brain/concepts/physics/phys.mod.semiconductor-classification.md` | READY |
 | mod | `phys.mod.wave-particle-duality` | Wave-Particle Duality | Yes | Yes | `educational-brain/concepts/physics/phys.mod.wave-particle-duality.md` | READY |
 | mod | `phys.mod.x-rays` | X-Rays and Their Properties | Yes | Yes | `educational-brain/concepts/physics/phys.mod.x-rays.md` | READY |
 | opt | `phys.opt.brewsters-law` | Brewster's Law and Malus's Law | Yes | Yes | `educational-brain/concepts/physics/phys.opt.brewsters-law.md` | READY |
@@ -1077,7 +1077,7 @@ its subject KG.
 | opt | `phys.opt.youngs-experiment` | Young's Double-Slit Experiment | Yes | Yes | `educational-brain/concepts/physics/phys.opt.youngs-experiment.md` | READY |
 | particle | `phys.particle.accelerators-detectors` | Particle Accelerators and Detectors | Yes | No | — | MISSING |
 | particle | `phys.particle.antimatter` | Antimatter and Antiparticles | Yes | Yes | `educational-brain/concepts/physics/phys.particle.antimatter.md` | READY |
-| particle | `phys.particle.conservation-laws` | Conservation Laws in Particle Interactions | Yes | No | — | MISSING |
+| particle | `phys.particle.conservation-laws` | Conservation Laws in Particle Interactions | Yes | Yes | `educational-brain/concepts/physics/phys.particle.conservation-laws.md` | READY |
 | particle | `phys.particle.electroweak-unification` | Electroweak Unification | Yes | No | — | MISSING |
 | particle | `phys.particle.feynman-diagrams` | Feynman Diagrams (Qualitative) | Yes | No | — | MISSING |
 | particle | `phys.particle.four-forces` | Four Fundamental Forces | Yes | Yes | `educational-brain/concepts/physics/phys.particle.four-forces.md` | READY |
@@ -1090,7 +1090,7 @@ its subject KG.
 | particle | `phys.particle.quarks` | Quarks | Yes | Yes | `educational-brain/concepts/physics/phys.particle.quarks.md` | READY |
 | particle | `phys.particle.standard-model` | The Standard Model | Yes | No | — | MISSING |
 | particle | `phys.particle.strong-interaction` | The Strong Interaction and Color Charge | Yes | Yes | `educational-brain/concepts/physics/phys.particle.strong-interaction.md` | READY |
-| particle | `phys.particle.weak-interaction` | The Weak Interaction | Yes | No | — | MISSING |
+| particle | `phys.particle.weak-interaction` | The Weak Interaction | Yes | Yes | `educational-brain/concepts/physics/phys.particle.weak-interaction.md` | READY |
 | qm | `phys.qm.angular-momentum-addition` | Addition of Angular Momenta and Clebsch-Gordan Coefficients | Yes | Yes | `educational-brain/concepts/physics/phys.qm.angular-momentum-addition.md` | READY |
 | qm | `phys.qm.density-matrix` | Density Matrix and Mixed Quantum States | Yes | Yes | `educational-brain/concepts/physics/phys.qm.density-matrix.md` | READY |
 | qm | `phys.qm.harmonic-oscillator-qm` | Quantum Harmonic Oscillator | Yes | Yes | `educational-brain/concepts/physics/phys.qm.harmonic-oscillator-qm.md` | READY |
