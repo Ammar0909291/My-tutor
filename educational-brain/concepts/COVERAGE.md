@@ -14,7 +14,7 @@ and this file's summary row should be corrected to match.
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
 | physics | 238 | 223 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 (2026-07-23, level 19, this batch): `phys.qm.wkb-approximation`, `phys.qm.s-matrix-basics`, `phys.astro.stellar-evolution`, `phys.astro.cosmology`, `phys.particle.neutrinos`, `phys.particle.hadron-quark-model`, `phys.particle.strong-interaction`, `phys.mod.energy-bands` — 15 concepts remain (93.70%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-18 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
-| chemistry | 186 | 106 | levels 0–12 complete (106/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock, chem.redox, chem.dblock, chem.org, chem.pblock, chem.solid — IN PROGRESS |
+| chemistry | 186 | 121 | levels 0–13 complete (121/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock, chem.redox, chem.dblock, chem.org, chem.pblock, chem.solid — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
 
@@ -1088,3 +1088,15 @@ Files authored:
 - chem.thermo.bond-enthalpy (mean bond enthalpies; ΔH ≈ Σbroken − Σformed; estimate not exact; F–F weakness; N≡N strength)
 
 Running total: 106/186 chemistry entries. Levels 0–12 complete.
+
+### Batch 28 — Chemistry level 13 (2026-07-23)
+Authored 15 level-13 concepts in topological order: `chem.anal.spectroscopy`, `chem.anal.volumetric`, `chem.bond.intermolecular`, `chem.coord.cft`, `chem.coord.nomenclature`, `chem.coord.stability`, `chem.dblock.oxo-species`, `chem.elect.galvanic-cell`, `chem.hyd.alkanes`, `chem.org.aromaticity`, `chem.org.electronic-effects`, `chem.org.isomerism`, `chem.org.qualitative-analysis`, `chem.solid.ionic-solids`, `chem.solid.properties`. Chemistry: 106 → 121/186.
+
+**Merge note (2026-07-23)**: this Batch 28 (Chemistry level 13) and this
+session's Physics Wave 19 batch were pushed independently and merged via
+`git merge`. No file overlap in authored concept files — only this file
+and `ROADMAP.md` needed reconciliation. Combined true total after merge:
+**384** entries (223 physics + 37 mathematics + 121 chemistry + 3
+english), out of 1,775 total KG concepts — 1,391 remaining, 21.63%.
+Re-verified via a full recount of every live file in
+`educational-brain/concepts/{subject}/` after the merge.

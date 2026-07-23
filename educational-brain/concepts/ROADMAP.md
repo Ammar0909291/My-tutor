@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **369** |
-| Remaining | **1,406** |
-| Completion percentage | **20.79%** |
+| Concepts with an Educational Brain entry | **384** |
+| Remaining | **1,391** |
+| Completion percentage | **21.63%** |
 
 ---
 
@@ -26,7 +26,7 @@ below from source whenever this file is updated, never hand-estimate.
 | mathematics | 908 | 37 | 4.07% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 223 | 93.70% | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
-| chemistry | 186 | 106 | 56.99% | `chem.found.matter` | **Yes** |
+| chemistry | 186 | 121 | 65.05% | `chem.found.matter` | **Yes** |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
 
@@ -481,20 +481,30 @@ current-batch entry below.**
 
 ## 4. Current batch
 
-**Chemistry EB level 12 (concurrent batch, standing production run —
-merged from a parallel session)**: authored 17 concepts at dependency
-level 12 in strict topological order — chem.bond.mo-theory,
-chem.bond.polar-molecules, chem.coord.werner, chem.dblock.first-row,
-chem.dblock.lanthanides, chem.org.hybridization, chem.org.purification,
-chem.org.spectroscopy, chem.pblock.trends, chem.redox.activity-series,
-chem.redox.disproportionation, chem.redox.titrations,
-chem.sblock.alkaline-earth, chem.solid.amorphous, chem.solid.defects,
-chem.solid.packing, chem.thermo.bond-enthalpy. Chemistry is now 106/186
-(56.99%). Level 13 is next. This batch was pushed to `origin/main`
-concurrently with this session's Physics Wave 19 batch (below); merged
-via `git merge` with zero file overlap in authored concept files — only
-`COVERAGE.md` and this file needed reconciliation (see the Merge note in
-`COVERAGE.md`'s Delivery history).
+**Chemistry EB level 13 (concurrent batch, standing production run —
+merged from a parallel session)**: authored 15 concepts at dependency
+level 13 in strict topological order — chem.anal.spectroscopy,
+chem.anal.volumetric, chem.bond.intermolecular, chem.coord.cft,
+chem.coord.nomenclature, chem.coord.stability, chem.dblock.oxo-species,
+chem.elect.galvanic-cell, chem.hyd.alkanes, chem.org.aromaticity,
+chem.org.electronic-effects, chem.org.isomerism, chem.org.qualitative-
+analysis, chem.solid.ionic-solids, chem.solid.properties. Chemistry is
+now 121/186 (65.05%). Level 14 is next. This batch (and the preceding
+Chemistry EB level 12 batch, both below as prior batches) were pushed to
+`origin/main` concurrently with this session's Physics Wave 19 batch;
+merged via `git merge` with zero file overlap in authored concept files
+— only `COVERAGE.md` and this file needed reconciliation across both
+merges (see the Merge notes in `COVERAGE.md`'s Delivery history).
+
+**Prior batch (Chemistry EB level 12, concurrent)**: authored 17
+concepts at dependency level 12 — chem.bond.mo-theory, chem.bond.polar-
+molecules, chem.coord.werner, chem.dblock.first-row, chem.dblock.
+lanthanides, chem.org.hybridization, chem.org.purification, chem.org.
+spectroscopy, chem.pblock.trends, chem.redox.activity-series, chem.
+redox.disproportionation, chem.redox.titrations, chem.sblock.alkaline-
+earth, chem.solid.amorphous, chem.solid.defects, chem.solid.packing,
+chem.thermo.bond-enthalpy. Chemistry reached 106/186 (56.99%) at that
+point.
 
 **Physics Wave 19 (this batch, explicit exception — standing Curriculum
 Completion Program 8-step cycle)**: continuing the same cycle

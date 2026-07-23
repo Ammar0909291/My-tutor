@@ -1389,7 +1389,7 @@ its subject KG.
 | writing | `eng.writing.topic-sentences` | Topic Sentences | Yes | No | — | MISSING |
 | writing | `eng.writing.transitions-and-cohesion` | Transitions and Cohesion | Yes | No | — | MISSING |
 
-## chemistry (186 concepts, 106 READY)
+## chemistry (186 concepts, 121 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | alc | `chem.alc.alcohols` | Alcohols | No | No | — | MISSING |
@@ -1400,8 +1400,8 @@ its subject KG.
 | alc | `chem.alc.protection` | Protecting Group Strategy | No | No | — | MISSING |
 | anal | `chem.anal.chromatography` | Chromatography | No | Yes | `educational-brain/concepts/chemistry/chem.anal.chromatography.md` | READY |
 | anal | `chem.anal.gravimetric` | Gravimetric Analysis | No | Yes | `educational-brain/concepts/chemistry/chem.anal.gravimetric.md` | READY |
-| anal | `chem.anal.spectroscopy` | Spectroscopic Methods | No | No | — | MISSING |
-| anal | `chem.anal.volumetric` | Volumetric Analysis | No | No | — | MISSING |
+| anal | `chem.anal.spectroscopy` | Spectroscopic Methods | No | `educational-brain/concepts/chemistry/chem.anal.spectroscopy.md` | READY |
+| anal | `chem.anal.volumetric` | Volumetric Analysis | No | `educational-brain/concepts/chemistry/chem.anal.volumetric.md` | READY |
 | atomic | `chem.atomic.atomic-spectra` | Atomic Spectra | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.atomic-spectra.md` | READY |
 | atomic | `chem.atomic.atomic-theory` | Atomic Theory | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.atomic-theory.md` | READY |
 | atomic | `chem.atomic.bohr-model` | Bohr Model of the Atom | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.bohr-model.md` | READY |
@@ -1422,7 +1422,7 @@ its subject KG.
 | bond | `chem.bond.coordinate-bond` | Coordinate and Dative Bonding | No | Yes | `educational-brain/concepts/chemistry/chem.bond.coordinate-bond.md` | READY |
 | bond | `chem.bond.covalent-bonding` | Covalent Bonding | No | Yes | `educational-brain/concepts/chemistry/chem.bond.covalent-bonding.md` | READY |
 | bond | `chem.bond.hybridization` | Hybridization | No | Yes | `educational-brain/concepts/chemistry/chem.bond.hybridization.md` | READY |
-| bond | `chem.bond.intermolecular` | Intermolecular Forces | No | No | — | MISSING |
+| bond | `chem.bond.intermolecular` | Intermolecular Forces | No | `educational-brain/concepts/chemistry/chem.bond.intermolecular.md` | READY |
 | bond | `chem.bond.ionic-bonding` | Ionic Bonding | No | Yes | `educational-brain/concepts/chemistry/chem.bond.ionic-bonding.md` | READY |
 | bond | `chem.bond.metallic-bonding` | Metallic Bonding | No | Yes | `educational-brain/concepts/chemistry/chem.bond.metallic-bonding.md` | READY |
 | bond | `chem.bond.mo-theory` | Molecular Orbital Theory | No | `educational-brain/concepts/chemistry/chem.bond.mo-theory.md` | READY |
@@ -1438,22 +1438,22 @@ its subject KG.
 | carb | `chem.carb.spectro` | Spectroscopic ID of Carbonyls | No | No | — | MISSING |
 | coord | `chem.coord.applications` | Applications of Coordination Chemistry | No | No | — | MISSING |
 | coord | `chem.coord.bonding` | Bonding in Complexes | No | No | — | MISSING |
-| coord | `chem.coord.cft` | Crystal Field Theory | No | No | — | MISSING |
+| coord | `chem.coord.cft` | Crystal Field Theory | No | `educational-brain/concepts/chemistry/chem.coord.cft.md` | READY |
 | coord | `chem.coord.isomerism` | Isomerism in Complexes | No | No | — | MISSING |
-| coord | `chem.coord.nomenclature` | Nomenclature of Complexes | No | No | — | MISSING |
-| coord | `chem.coord.stability` | Stability Constants | No | No | — | MISSING |
+| coord | `chem.coord.nomenclature` | Nomenclature of Complexes | No | `educational-brain/concepts/chemistry/chem.coord.nomenclature.md` | READY |
+| coord | `chem.coord.stability` | Stability Constants | No | `educational-brain/concepts/chemistry/chem.coord.stability.md` | READY |
 | coord | `chem.coord.werner` | Werner's Theory | No | `educational-brain/concepts/chemistry/chem.coord.werner.md` | READY |
 | dblock | `chem.dblock.first-row` | First-Row Transition Metals | No | `educational-brain/concepts/chemistry/chem.dblock.first-row.md` | READY |
 | dblock | `chem.dblock.general` | Transition Metals — General Properties | No | Yes | `educational-brain/concepts/chemistry/chem.dblock.general.md` | READY |
 | dblock | `chem.dblock.lanthanides` | Lanthanides and Actinides | No | `educational-brain/concepts/chemistry/chem.dblock.lanthanides.md` | READY |
 | dblock | `chem.dblock.organometallics` | Organometallic Chemistry | No | No | — | MISSING |
-| dblock | `chem.dblock.oxo-species` | Oxides and Oxyanions of Transition Metals | No | No | — | MISSING |
+| dblock | `chem.dblock.oxo-species` | Oxides and Oxyanions of Transition Metals | No | `educational-brain/concepts/chemistry/chem.dblock.oxo-species.md` | READY |
 | elect | `chem.elect.batteries` | Batteries and Fuel Cells | No | No | — | MISSING |
 | elect | `chem.elect.concentration-cell` | Concentration Cells | No | No | — | MISSING |
 | elect | `chem.elect.conductance` | Electrolytic Conductance | No | Yes | `educational-brain/concepts/chemistry/chem.elect.conductance.md` | READY |
 | elect | `chem.elect.corrosion` | Corrosion | No | No | — | MISSING |
 | elect | `chem.elect.electrolysis` | Electrolysis and Faraday's Laws | No | No | — | MISSING |
-| elect | `chem.elect.galvanic-cell` | Galvanic Cell | No | No | — | MISSING |
+| elect | `chem.elect.galvanic-cell` | Galvanic Cell | No | `educational-brain/concepts/chemistry/chem.elect.galvanic-cell.md` | READY |
 | elect | `chem.elect.industrial` | Industrial Electrolysis | No | No | — | MISSING |
 | elect | `chem.elect.nernst` | Nernst Equation | No | No | — | MISSING |
 | elect | `chem.elect.standard-electrode` | Standard Electrode Potential | No | No | — | MISSING |
@@ -1487,7 +1487,7 @@ its subject KG.
 | hal | `chem.hal.introduction` | Haloalkanes and Haloarenes | No | No | — | MISSING |
 | hal | `chem.hal.sn1` | SN1 Mechanism | No | No | — | MISSING |
 | hal | `chem.hal.sn2` | SN2 Mechanism | No | No | — | MISSING |
-| hyd | `chem.hyd.alkanes` | Alkanes | No | No | — | MISSING |
+| hyd | `chem.hyd.alkanes` | Alkanes | No | `educational-brain/concepts/chemistry/chem.hyd.alkanes.md` | READY |
 | hyd | `chem.hyd.alkenes` | Alkenes | No | No | — | MISSING |
 | hyd | `chem.hyd.alkynes` | Alkynes | No | No | — | MISSING |
 | hyd | `chem.hyd.arenes` | Benzene and Arenes | No | No | — | MISSING |
@@ -1506,16 +1506,16 @@ its subject KG.
 | nitro | `chem.nitro.diazonium` | Diazonium Salts | No | No | — | MISSING |
 | nitro | `chem.nitro.heterocycles` | Nitrogen Heterocycles | No | No | — | MISSING |
 | nitro | `chem.nitro.nitro-compounds` | Nitro Compounds | No | No | — | MISSING |
-| org | `chem.org.aromaticity` | Aromaticity | No | No | — | MISSING |
+| org | `chem.org.aromaticity` | Aromaticity | No | `educational-brain/concepts/chemistry/chem.org.aromaticity.md` | READY |
 | org | `chem.org.arrow-pushing` | Electron Flow and Arrow Notation | No | No | — | MISSING |
-| org | `chem.org.electronic-effects` | Inductive and Mesomeric Effects | No | No | — | MISSING |
+| org | `chem.org.electronic-effects` | Inductive and Mesomeric Effects | No | `educational-brain/concepts/chemistry/chem.org.electronic-effects.md` | READY |
 | org | `chem.org.hybridization` | Carbon Hybridization | No | `educational-brain/concepts/chemistry/chem.org.hybridization.md` | READY |
-| org | `chem.org.isomerism` | Structural and Stereoisomerism | No | No | — | MISSING |
+| org | `chem.org.isomerism` | Structural and Stereoisomerism | No | `educational-brain/concepts/chemistry/chem.org.isomerism.md` | READY |
 | org | `chem.org.iupac` | IUPAC Nomenclature | No | Yes | `educational-brain/concepts/chemistry/chem.org.iupac.md` | READY |
 | org | `chem.org.mechanisms` | Organic Reaction Mechanisms | No | No | — | MISSING |
 | org | `chem.org.pericyclic` | Pericyclic Reactions | No | No | — | MISSING |
 | org | `chem.org.purification` | Purification Techniques | No | `educational-brain/concepts/chemistry/chem.org.purification.md` | READY |
-| org | `chem.org.qualitative-analysis` | Qualitative Organic Analysis | No | No | — | MISSING |
+| org | `chem.org.qualitative-analysis` | Qualitative Organic Analysis | No | `educational-brain/concepts/chemistry/chem.org.qualitative-analysis.md` | READY |
 | org | `chem.org.reactive-intermediates` | Reactive Intermediates | No | No | — | MISSING |
 | org | `chem.org.spectroscopy` | Introduction to Spectroscopy | No | `educational-brain/concepts/chemistry/chem.org.spectroscopy.md` | READY |
 | pblock | `chem.pblock.group13` | Group 13 — Boron Family | No | Yes | `educational-brain/concepts/chemistry/chem.pblock.group13.md` | READY |
@@ -1555,9 +1555,9 @@ its subject KG.
 | solid | `chem.solid.amorphous` | Amorphous Solids | No | `educational-brain/concepts/chemistry/chem.solid.amorphous.md` | READY |
 | solid | `chem.solid.crystal-systems` | Crystal Systems | No | Yes | `educational-brain/concepts/chemistry/chem.solid.crystal-systems.md` | READY |
 | solid | `chem.solid.defects` | Crystal Defects | No | `educational-brain/concepts/chemistry/chem.solid.defects.md` | READY |
-| solid | `chem.solid.ionic-solids` | Ionic Crystal Structures | No | No | — | MISSING |
+| solid | `chem.solid.ionic-solids` | Ionic Crystal Structures | No | `educational-brain/concepts/chemistry/chem.solid.ionic-solids.md` | READY |
 | solid | `chem.solid.packing` | Close Packing and Efficiency | No | `educational-brain/concepts/chemistry/chem.solid.packing.md` | READY |
-| solid | `chem.solid.properties` | Electrical and Magnetic Properties | No | No | — | MISSING |
+| solid | `chem.solid.properties` | Electrical and Magnetic Properties | No | `educational-brain/concepts/chemistry/chem.solid.properties.md` | READY |
 | state | `chem.state.gas-laws` | Gas Laws | No | Yes | `educational-brain/concepts/chemistry/chem.state.gas-laws.md` | READY |
 | state | `chem.state.kinetic-theory` | Kinetic Molecular Theory of Gases | No | Yes | `educational-brain/concepts/chemistry/chem.state.kinetic-theory.md` | READY |
 | state | `chem.state.liquids` | Liquid State Properties | No | No | — | MISSING |
