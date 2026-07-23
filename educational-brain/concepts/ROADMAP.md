@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **198** |
-| Remaining | **1,577** |
-| Completion percentage | **11.15%** |
+| Concepts with an Educational Brain entry | **227** |
+| Remaining | **1,548** |
+| Completion percentage | **12.79%** |
 
 ---
 
@@ -23,10 +23,10 @@ below from source whenever this file is updated, never hand-estimate.
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 32 | 3.52% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 37 | 4.07% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 163 | 68.49% | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
-| chemistry | 186 | 0 | 0.00% | `chem.found.matter` | No |
+| chemistry | 186 | 24 | 12.90% | `chem.found.matter` | **Yes** |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
 
@@ -61,8 +61,8 @@ Brain entries.
 |---|---|
 | Domain | `math.found` (mathematics / Foundations) |
 | Total concepts in domain | 82 |
-| Authored this program | 31 |
-| Remaining | 51 |
+| Authored this program | 36 |
+| Remaining | 46 |
 | Status | **IN PROGRESS** — not eligible for Domain Certification yet |
 
 Wave 1 (5, level 0-1): `mathematical-thinking` (root), `abstraction`,
@@ -73,14 +73,13 @@ Wave 2 (8, level 2): `definition`, `generalization`,
 `problem-solving-strategies`. Wave 3 (6, level 3): `axiom`,
 `deductive-reasoning`, `proposition`, `reading-mathematics`,
 `set-theory`, `variable`. Wave 4 (4, level 4): `axiomatic-system`,
-`logical-connectives`, `predicate`, `set`. Wave 5 (8, level 5, complete
-this batch): `cartesian-product`, `empty-set`, `ordered-pair`,
-`predicate-logic`, `set-builder-notation`, `set-membership`,
-`set-theory-axiomatic`, `truth-table`. Wave 6 (5, level 6 —
-prerequisites now fully satisfied by Wave 5) is next: `logical-
-equivalence`, `ordinal-number`, `quantifiers`, `relation`, `subset`. No
-other domain will be started until all 82 `math.found` concepts are
-`READY` and Domain Certification passes — **except by explicit,
+`logical-connectives`, `predicate`, `set`. Wave 5 (8, level 5): `cartesian-product`,
+`empty-set`, `ordered-pair`, `predicate-logic`, `set-builder-notation`,
+`set-membership`, `set-theory-axiomatic`, `truth-table`. Wave 6 (5, level 6,
+complete this batch): `logical-equivalence`, `ordinal-number`, `quantifiers`,
+`relation`, `subset`. Wave 7 (to be computed from the live KG before the next
+batch) is next. No other domain will be started until all 82 `math.found` concepts
+are `READY` and Domain Certification passes — **except by explicit,
 subject-specific user instruction, as happened this batch (§3b)**.
 
 ---
@@ -350,20 +349,47 @@ concepts) is computed and next, but NOT started this batch.
 
 ## 4. Current batch
 
-**Curriculum Completion Program batch 15 (this batch, Physics Wave 12,
+**Curriculum Completion Program batch 16 (this batch, Physics Wave 12,
 explicit exception — see §3h for full detail)**: authored the complete
 physics dependency-level-12 wave (8 concepts), continuing the same
-mandatory-rules cycle immediately after Wave 11 within the same
-conversation. All 8 verified against `EDUCATIONAL_BRAIN_STANDARD.md`'s
-exact 21-section structure and heading order (0 mismatches), zero
-duplicates, zero orphans against the live physics KG (163 total physics
-EB files). `math.found` remains 31/82, untouched this batch. Physics KG
-re-validated PASS (238/238 reachable, 0 failures/warnings, no KG file
-touched); all 6 subject KGs re-validated PASS. All six tracking files
-regenerated; re-validated 0 orphans, 0 duplicates across all 198 entries.
-Physics EB reached 163/238 — 68.49%. This wave introduced the second
-Statistical Mechanics domain entry (`phys.stat.boltzmann-factor`) and
-reached the Hamiltonian formulation hub concept.
+mandatory-rules cycle immediately after Wave 11. All 8 verified against
+`EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and heading
+order (0 mismatches), zero duplicates, zero orphans against the live
+physics KG (163 total physics EB files). `math.found` remains 37/82,
+untouched this batch. Physics KG re-validated PASS (238/238 reachable, 0
+failures/warnings, no KG file touched); all 6 subject KGs re-validated
+PASS. Physics EB reached 163/238 — 68.49%. This wave introduced the
+second Statistical Mechanics domain entry (`phys.stat.boltzmann-factor`)
+and reached the Hamiltonian formulation hub concept. **Merge note**:
+this batch's push encountered a concurrent push to `origin/main`
+(batch 15 below, plus an undernumbered concurrent Chemistry Educational
+Brain batch — 24 concepts, `chem.found`/`chem.atomic`/`chem.state`/
+`chem.thermo`/`chem.elect`/`chem.surface`/`chem.env`/`chem.period`,
+chemistry's own levels 0-3, first EB coverage for that subject). Merging
+found two real bookkeeping gaps in the concurrent work, corrected as
+part of this merge rather than left inconsistent: the chemistry batch's
+commits authored all 24 files but never added their rows to
+`EDUCATIONAL_BRAIN_INDEX.md`, `QUALITY.md`, or removed their rows from
+`AUTHORING_QUEUE.md`. A third, more significant finding: the concurrent
+`math.found` Wave 6 batch (batch 15's own 5 concepts) claimed "0
+mismatches" against `EDUCATIONAL_BRAIN_STANDARD.md`'s exact heading
+order, but on direct inspection during this merge, all 5 files
+(`logical-equivalence`, `ordinal-number`, `quantifiers`, `relation`,
+`subset`) actually use a different, numbered 21-section heading scheme
+(`## 1. Concept Identity` … `## 21. Certification Status`), not the
+Standard's exact heading text — flagged in `QUALITY.md`'s methodology
+notes as new migration debt, not silently rewritten (out of this
+batch's scope). True post-merge total, recomputed fresh from the live
+`educational-brain/concepts/{subject}/` directories rather than
+hand-merged: **227** EB entries (163 physics + 37 mathematics + 24
+chemistry + 3 english), 1,548 remaining, 12.79%.
+
+**Batch 15 (concurrent, math.found Wave 6, returning to default
+priority)**: authored the 5 concepts whose prerequisites became fully
+satisfied after Wave 5 — `logical-equivalence`, `subset`, `quantifiers`,
+`relation`, `ordinal-number`. `math.found` is now 37/82. See this
+batch's merge note above for a structural non-conformance finding
+discovered in these 5 files during reconciliation.
 
 **Prior batch (batch 14, Physics Wave 11, explicit exception — see
 §3g for full detail)**: authored the complete physics dependency-level-11
@@ -463,10 +489,10 @@ procedure.
 ## 5. Priority queue
 
 1. **Default (resumes next batch unless given an equally explicit
-   subject-specific override): `math.found` Wave 6 (5 concepts, level
-   6)**: `logical-equivalence`, `ordinal-number`, `quantifiers`,
-   `relation`, `subset`.
-2. **`math.found` Waves 7+ (46 remaining concepts)**, in strict
+   subject-specific override): `math.found` Wave 7 (candidates to be
+   computed from the live KG before starting)**: the set of `math.found`
+   nodes whose prerequisites are all now READY after Wave 6.
+2. **`math.found` Waves 8+ (46 remaining concepts after Wave 7)**, in strict
    topological order, until all 82 are `READY`.
 3. Only after `math.found` is 100% complete and certified: the queue
    returns to cross-subject priorities — `chem.found.matter`,
@@ -484,16 +510,18 @@ procedure.
    `phys.rel.lorentz-transform`, `phys.stat.maxwell-boltzmann`,
    `phys.stat.partition-function`.
 
-Full computed order (all 1,577 remaining concepts): see
+Full computed order (all 1,548 remaining concepts): see
 `AUTHORING_QUEUE.md` — §5 above (the domain-completion constraint) takes
 precedence over that file's literal row order until `math.found` is
 complete, unless overridden per item 4.
 
 ## 6. Next batch
 
-**Batch 16 (recommended default)**: resume `math.found` Wave 6 — the 5
-level-6 concepts listed in §5 item 1, in strict prerequisite order, no
-other domain started. **If instead directed back to physics** (per the
+**Batch 17 (recommended default)**: compute `math.found` Wave 7 candidates
+from the live KG (the set of `math.found` nodes whose prerequisites are all
+now READY after Wave 6: `logical-equivalence`, `subset`, `quantifiers`,
+`relation`, `ordinal-number`), then author all Wave 7 concepts, no other
+domain started. **If instead directed back to physics** (per the
 standing mandatory-rules cycle governing this override): author Wave 13
 (the 6 concepts listed in §5 item 4) in full, following the same
 reuse-by-reference-Blueprint discipline established these past seven

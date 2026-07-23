@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 32 READY)
+## mathematics (908 concepts, 37 READY)
 
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
@@ -430,7 +430,7 @@ its subject KG.
 | found | `math.found.lemma` | Lemma | No | No | — | MISSING |
 | found | `math.found.logic` | Mathematical Logic | Yes | Yes | `educational-brain/concepts/mathematics/math.found.logic.md` | READY |
 | found | `math.found.logical-connectives` | Logical Connectives | Yes | Yes | `educational-brain/concepts/mathematics/math.found.logical-connectives.md` | READY |
-| found | `math.found.logical-equivalence` | Logical Equivalence | Yes | No | — | MISSING |
+| found | `math.found.logical-equivalence` | Logical Equivalence | Yes | Yes | math.found.logical-equivalence.md | READY |
 | found | `math.found.mathematical-language` | Mathematical Language | Yes | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-language.md` | READY |
 | found | `math.found.mathematical-modeling` | Mathematical Modeling | No | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-modeling.md` | READY |
 | found | `math.found.mathematical-notation` | Mathematical Notation | Yes | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-notation.md` | READY |
@@ -438,7 +438,7 @@ its subject KG.
 | found | `math.found.mathematical-thinking` | Mathematical Thinking | Yes | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-thinking.md` | READY |
 | found | `math.found.natural-numbers` | Natural Numbers | Yes | No | — | MISSING |
 | found | `math.found.ordered-pair` | Ordered Pair | Yes | Yes | `educational-brain/concepts/mathematics/math.found.ordered-pair.md` | READY |
-| found | `math.found.ordinal-number` | Ordinal Number | Yes | No | — | MISSING |
+| found | `math.found.ordinal-number` | Ordinal Number | Yes | Yes | math.found.ordinal-number.md | READY |
 | found | `math.found.partial-order` | Partial Order | Yes | No | — | MISSING |
 | found | `math.found.partition` | Partition | Yes | No | — | MISSING |
 | found | `math.found.pattern-recognition` | Pattern Recognition | Yes | Yes | `educational-brain/concepts/mathematics/math.found.pattern-recognition.md` | READY |
@@ -454,12 +454,12 @@ its subject KG.
 | found | `math.found.proof-by-induction` | Mathematical Induction | Yes | No | — | MISSING |
 | found | `math.found.proper-subset` | Proper Subset | No | No | — | MISSING |
 | found | `math.found.proposition` | Proposition | Yes | Yes | `educational-brain/concepts/mathematics/math.found.proposition.md` | READY |
-| found | `math.found.quantifiers` | Quantifiers | Yes | No | — | MISSING |
+| found | `math.found.quantifiers` | Quantifiers | Yes | Yes | math.found.quantifiers.md | READY |
 | found | `math.found.rational-numbers` | Rational Numbers | Yes | No | — | MISSING |
 | found | `math.found.reading-mathematics` | Reading Mathematics | No | Yes | `educational-brain/concepts/mathematics/math.found.reading-mathematics.md` | READY |
 | found | `math.found.real-numbers` | Real Numbers | Yes | No | — | MISSING |
 | found | `math.found.reflexive-relation` | Reflexive Relation | Yes | No | — | MISSING |
-| found | `math.found.relation` | Relation | Yes | No | — | MISSING |
+| found | `math.found.relation` | Relation | Yes | Yes | math.found.relation.md | READY |
 | found | `math.found.rules-of-inference` | Rules of Inference | Yes | No | — | MISSING |
 | found | `math.found.set` | Set | Yes | Yes | `educational-brain/concepts/mathematics/math.found.set.md` | READY |
 | found | `math.found.set-builder-notation` | Set-Builder Notation | Yes | Yes | `educational-brain/concepts/mathematics/math.found.set-builder-notation.md` | READY |
@@ -470,7 +470,7 @@ its subject KG.
 | found | `math.found.set-theory` | Set Theory | Yes | Yes | `educational-brain/concepts/mathematics/math.found.set-theory.md` | READY |
 | found | `math.found.set-theory-axiomatic` | Axiomatic Set Theory | Yes | Yes | `educational-brain/concepts/mathematics/math.found.set-theory-axiomatic.md` | READY |
 | found | `math.found.strong-induction` | Strong Induction | No | No | — | MISSING |
-| found | `math.found.subset` | Subset | Yes | No | — | MISSING |
+| found | `math.found.subset` | Subset | Yes | Yes | math.found.subset.md | READY |
 | found | `math.found.symmetric-relation` | Symmetric Relation | Yes | No | — | MISSING |
 | found | `math.found.theorem` | Theorem | No | No | — | MISSING |
 | found | `math.found.total-order` | Total Order | Yes | No | — | MISSING |
@@ -1392,7 +1392,7 @@ its subject KG.
 | writing | `eng.writing.topic-sentences` | Topic Sentences | Yes | No | — | MISSING |
 | writing | `eng.writing.transitions-and-cohesion` | Transitions and Cohesion | Yes | No | — | MISSING |
 
-## chemistry (186 concepts, 0 READY)
+## chemistry (186 concepts, 24 READY)
 
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
@@ -1406,16 +1406,16 @@ its subject KG.
 | anal | `chem.anal.gravimetric` | Gravimetric Analysis | No | No | — | MISSING |
 | anal | `chem.anal.spectroscopy` | Spectroscopic Methods | No | No | — | MISSING |
 | anal | `chem.anal.volumetric` | Volumetric Analysis | No | No | — | MISSING |
-| atomic | `chem.atomic.atomic-spectra` | Atomic Spectra | No | No | — | MISSING |
-| atomic | `chem.atomic.atomic-theory` | Atomic Theory | No | No | — | MISSING |
+| atomic | `chem.atomic.atomic-spectra` | Atomic Spectra | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.atomic-spectra.md` | READY |
+| atomic | `chem.atomic.atomic-theory` | Atomic Theory | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.atomic-theory.md` | READY |
 | atomic | `chem.atomic.bohr-model` | Bohr Model of the Atom | No | No | — | MISSING |
-| atomic | `chem.atomic.electromagnetic-radiation` | Electromagnetic Radiation | No | No | — | MISSING |
+| atomic | `chem.atomic.electromagnetic-radiation` | Electromagnetic Radiation | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.electromagnetic-radiation.md` | READY |
 | atomic | `chem.atomic.electronic-config` | Electronic Configuration | No | No | — | MISSING |
 | atomic | `chem.atomic.orbitals` | Atomic Orbitals | No | No | — | MISSING |
-| atomic | `chem.atomic.photoelectric-effect` | Photoelectric Effect and Dual Nature | No | No | — | MISSING |
+| atomic | `chem.atomic.photoelectric-effect` | Photoelectric Effect and Dual Nature | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.photoelectric-effect.md` | READY |
 | atomic | `chem.atomic.quantum-mech-model` | Quantum Mechanical Model | No | No | — | MISSING |
 | atomic | `chem.atomic.quantum-numbers` | Quantum Numbers | No | No | — | MISSING |
-| atomic | `chem.atomic.subatomic-particles` | Subatomic Particles | No | No | — | MISSING |
+| atomic | `chem.atomic.subatomic-particles` | Subatomic Particles | No | Yes | `educational-brain/concepts/chemistry/chem.atomic.subatomic-particles.md` | READY |
 | bio | `chem.bio.carbohydrates` | Carbohydrates | No | No | — | MISSING |
 | bio | `chem.bio.enzyme-kinetics` | Enzyme Kinetics | No | No | — | MISSING |
 | bio | `chem.bio.lipids` | Lipids | No | No | — | MISSING |
@@ -1454,17 +1454,17 @@ its subject KG.
 | dblock | `chem.dblock.oxo-species` | Oxides and Oxyanions of Transition Metals | No | No | — | MISSING |
 | elect | `chem.elect.batteries` | Batteries and Fuel Cells | No | No | — | MISSING |
 | elect | `chem.elect.concentration-cell` | Concentration Cells | No | No | — | MISSING |
-| elect | `chem.elect.conductance` | Electrolytic Conductance | No | No | — | MISSING |
+| elect | `chem.elect.conductance` | Electrolytic Conductance | No | Yes | `educational-brain/concepts/chemistry/chem.elect.conductance.md` | READY |
 | elect | `chem.elect.corrosion` | Corrosion | No | No | — | MISSING |
 | elect | `chem.elect.electrolysis` | Electrolysis and Faraday's Laws | No | No | — | MISSING |
 | elect | `chem.elect.galvanic-cell` | Galvanic Cell | No | No | — | MISSING |
 | elect | `chem.elect.industrial` | Industrial Electrolysis | No | No | — | MISSING |
 | elect | `chem.elect.nernst` | Nernst Equation | No | No | — | MISSING |
 | elect | `chem.elect.standard-electrode` | Standard Electrode Potential | No | No | — | MISSING |
-| env | `chem.env.air-pollution` | Air Pollution | No | No | — | MISSING |
-| env | `chem.env.atmosphere` | Atmosphere and Composition | No | No | — | MISSING |
+| env | `chem.env.air-pollution` | Air Pollution | No | Yes | `educational-brain/concepts/chemistry/chem.env.air-pollution.md` | READY |
+| env | `chem.env.atmosphere` | Atmosphere and Composition | No | Yes | `educational-brain/concepts/chemistry/chem.env.atmosphere.md` | READY |
 | env | `chem.env.ozone` | Ozone Depletion | No | No | — | MISSING |
-| env | `chem.env.water-soil` | Water and Soil Pollution | No | No | — | MISSING |
+| env | `chem.env.water-soil` | Water and Soil Pollution | No | Yes | `educational-brain/concepts/chemistry/chem.env.water-soil.md` | READY |
 | equil | `chem.equil.acids-bases` | Acid–Base Theories | No | No | — | MISSING |
 | equil | `chem.equil.buffer` | Buffer Solutions | No | No | — | MISSING |
 | equil | `chem.equil.complex-equil` | Complex Ion Equilibria | No | No | — | MISSING |
@@ -1476,14 +1476,14 @@ its subject KG.
 | equil | `chem.equil.solubility` | Solubility Equilibria | No | No | — | MISSING |
 | equil | `chem.equil.titration` | Acid–Base Titrations | No | No | — | MISSING |
 | equil | `chem.equil.weak-acid` | Weak Acid and Base Equilibria | No | No | — | MISSING |
-| found | `chem.found.concentration` | Concentration Units | No | No | — | MISSING |
-| found | `chem.found.matter` | Nature of Matter | No | No | — | MISSING |
-| found | `chem.found.measurement` | Physical Quantities and SI Units | No | No | — | MISSING |
-| found | `chem.found.mole-concept` | Mole Concept and Avogadro's Number | No | No | — | MISSING |
-| found | `chem.found.pure-substances` | Pure Substances and Mixtures | No | No | — | MISSING |
-| found | `chem.found.significant-figures` | Significant Figures and Error Analysis | No | No | — | MISSING |
-| found | `chem.found.states-of-matter` | States of Matter | No | No | — | MISSING |
-| found | `chem.found.stoichiometry` | Stoichiometry | No | No | — | MISSING |
+| found | `chem.found.concentration` | Concentration Units | No | Yes | `educational-brain/concepts/chemistry/chem.found.concentration.md` | READY |
+| found | `chem.found.matter` | Nature of Matter | No | Yes | `educational-brain/concepts/chemistry/chem.found.matter.md` | READY |
+| found | `chem.found.measurement` | Physical Quantities and SI Units | No | Yes | `educational-brain/concepts/chemistry/chem.found.measurement.md` | READY |
+| found | `chem.found.mole-concept` | Mole Concept and Avogadro's Number | No | Yes | `educational-brain/concepts/chemistry/chem.found.mole-concept.md` | READY |
+| found | `chem.found.pure-substances` | Pure Substances and Mixtures | No | Yes | `educational-brain/concepts/chemistry/chem.found.pure-substances.md` | READY |
+| found | `chem.found.significant-figures` | Significant Figures and Error Analysis | No | Yes | `educational-brain/concepts/chemistry/chem.found.significant-figures.md` | READY |
+| found | `chem.found.states-of-matter` | States of Matter | No | Yes | `educational-brain/concepts/chemistry/chem.found.states-of-matter.md` | READY |
+| found | `chem.found.stoichiometry` | Stoichiometry | No | Yes | `educational-brain/concepts/chemistry/chem.found.stoichiometry.md` | READY |
 | hal | `chem.hal.cfcs` | Polyhalogen Compounds and CFCs | No | No | — | MISSING |
 | hal | `chem.hal.elimination` | Elimination Reactions | No | No | — | MISSING |
 | hal | `chem.hal.grignard` | Grignard and Organolithium Reagents | No | No | — | MISSING |
@@ -1530,7 +1530,7 @@ its subject KG.
 | pblock | `chem.pblock.group18` | Group 18 — Noble Gases | No | No | — | MISSING |
 | pblock | `chem.pblock.trends` | Trends Across p-Block | No | No | — | MISSING |
 | period | `chem.period.atomic-radius` | Atomic and Ionic Radius | No | No | — | MISSING |
-| period | `chem.period.classification` | Early Classification of Elements | No | No | — | MISSING |
+| period | `chem.period.classification` | Early Classification of Elements | No | Yes | `educational-brain/concepts/chemistry/chem.period.classification.md` | READY |
 | period | `chem.period.electron-affinity` | Electron Affinity and Electronegativity | No | No | — | MISSING |
 | period | `chem.period.ionization-energy` | Ionization Energy | No | No | — | MISSING |
 | period | `chem.period.modern-periodic-law` | Modern Periodic Law and Table | No | No | — | MISSING |
@@ -1562,25 +1562,25 @@ its subject KG.
 | solid | `chem.solid.ionic-solids` | Ionic Crystal Structures | No | No | — | MISSING |
 | solid | `chem.solid.packing` | Close Packing and Efficiency | No | No | — | MISSING |
 | solid | `chem.solid.properties` | Electrical and Magnetic Properties | No | No | — | MISSING |
-| state | `chem.state.gas-laws` | Gas Laws | No | No | — | MISSING |
-| state | `chem.state.kinetic-theory` | Kinetic Molecular Theory of Gases | No | No | — | MISSING |
+| state | `chem.state.gas-laws` | Gas Laws | No | Yes | `educational-brain/concepts/chemistry/chem.state.gas-laws.md` | READY |
+| state | `chem.state.kinetic-theory` | Kinetic Molecular Theory of Gases | No | Yes | `educational-brain/concepts/chemistry/chem.state.kinetic-theory.md` | READY |
 | state | `chem.state.liquids` | Liquid State Properties | No | No | — | MISSING |
 | state | `chem.state.molar-mass-gas` | Molar Mass from Gas Data | No | No | — | MISSING |
 | state | `chem.state.phase-diagram` | Phase Diagrams | No | No | — | MISSING |
 | state | `chem.state.real-gases` | Real Gases and van der Waals Equation | No | No | — | MISSING |
 | surface | `chem.surface.adsorption` | Adsorption | No | No | — | MISSING |
-| surface | `chem.surface.colloids` | Colloids | No | No | — | MISSING |
-| surface | `chem.surface.emulsions` | Emulsions and Gels | No | No | — | MISSING |
+| surface | `chem.surface.colloids` | Colloids | No | Yes | `educational-brain/concepts/chemistry/chem.surface.colloids.md` | READY |
+| surface | `chem.surface.emulsions` | Emulsions and Gels | No | Yes | `educational-brain/concepts/chemistry/chem.surface.emulsions.md` | READY |
 | surface | `chem.surface.heterogeneous-cat` | Mechanism of Heterogeneous Catalysis | No | No | — | MISSING |
 | surface | `chem.surface.surfactants` | Surfactants and Micelles | No | No | — | MISSING |
 | thermo | `chem.thermo.bond-enthalpy` | Bond Enthalpy | No | No | — | MISSING |
 | thermo | `chem.thermo.cell-thermo` | Electrochemical Thermodynamics | No | No | — | MISSING |
 | thermo | `chem.thermo.enthalpy` | Enthalpy and Hess's Law | No | No | — | MISSING |
 | thermo | `chem.thermo.entropy` | Entropy and Second Law | No | No | — | MISSING |
-| thermo | `chem.thermo.first-law` | First Law of Thermodynamics | No | No | — | MISSING |
+| thermo | `chem.thermo.first-law` | First Law of Thermodynamics | No | Yes | `educational-brain/concepts/chemistry/chem.thermo.first-law.md` | READY |
 | thermo | `chem.thermo.gibbs` | Gibbs Free Energy and Spontaneity | No | No | — | MISSING |
 | thermo | `chem.thermo.heat-capacities` | Heat Capacities of Gases | No | No | — | MISSING |
-| thermo | `chem.thermo.system` | System, Surroundings and State Functions | No | No | — | MISSING |
+| thermo | `chem.thermo.system` | System, Surroundings and State Functions | No | Yes | `educational-brain/concepts/chemistry/chem.thermo.system.md` | READY |
 | thermo | `chem.thermo.third-law` | Third Law and Absolute Entropy | No | No | — | MISSING |
 
 ## biology (108 concepts, 0 READY)

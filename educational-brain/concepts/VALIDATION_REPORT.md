@@ -1,10 +1,16 @@
 # Educational Brain Production Pipeline — Validation Report
 
 Generated 2026-07-22 against the live repository state; re-run this batch
-(Physics Wave 12) against the post-push state (`origin/main` @
-`0000e08b`, pre-Wave-12-push tip). Every check below was computed directly from
-`docs/{subject}/kg/graph.json` (all 6 subjects), `docs/curriculum/blueprints/`,
-and `educational-brain/concepts/{subject}/` — none of the numbers here are
+(Physics Wave 12) against the post-merge state. This batch's push
+encountered a concurrent push to `origin/main` (a `math.found` Wave 6
+batch, 5 concepts, plus a Chemistry Educational Brain batch, 24
+concepts, chemistry's own levels 0-3, chemistry's first EB coverage).
+Merged rather than force-pushed; all totals below are recomputed fresh
+from the live, post-merge `educational-brain/concepts/{subject}/`
+directories, not hand-merged from the two conflicting drafts. Every
+check below was computed directly from `docs/{subject}/kg/graph.json`
+(all 6 subjects), `docs/curriculum/blueprints/`, and
+`educational-brain/concepts/{subject}/` — none of the numbers here are
 estimated or copied from prior reports.
 
 ## Structural KG integrity (all 6 subjects, re-run this batch)
@@ -35,9 +41,13 @@ report).
 
 **✓ Every Educational Brain entry points to one existing KG concept.**
 Checked: every filename in `educational-brain/concepts/{subject}/`
-(198 files, re-checked this batch after 8 new `phys.*` Wave 12 entries)
-against that subject's live KG id set. **0 orphans** — every EB file
-resolves to a real, current KG concept.
+(227 files post-merge: 163 physics + 37 mathematics + 24 chemistry + 3
+english) against that subject's live KG id set. **0 orphans** — every EB
+file resolves to a real, current KG concept. **Reconciliation finding**:
+the concurrent chemistry batch's own commits authored all 24 chemistry
+files but never added their rows to `EDUCATIONAL_BRAIN_INDEX.md` or
+`QUALITY.md`, nor removed them from `AUTHORING_QUEUE.md` — a bookkeeping
+gap in that session's work, corrected as part of this merge.
 
 **✓ Every KG concept has at most one Educational Brain entry.**
 Structurally guaranteed by the 1:1 `{kg-id}.md` filename convention;
@@ -46,25 +56,36 @@ filesystem could technically hold `Foo.md` and `foo.md` as distinct
 files) — **0 duplicates**.
 
 **◐ Every Educational Brain entry references one Blueprint — partially,
-honestly reported.** 191 of 198 EB entries' concepts have a matching
-Blueprint FILE on disk. The other 7 (`math.found.definition`,
-`inductive-reasoning`, `mathematical-modeling`, `mathematical-symbols`,
-`problem-solving-strategies` — Wave 2 — plus `reading-mathematics` —
-Wave 3 — plus `empty-set` — Wave 5) genuinely have no Blueprint yet —
-each states this explicitly in its own Blueprint References section per
-Quality Gate 2, rather than omitting the section. All 8 of this batch's
-new physics entries (Wave 12) DO have existing Blueprints, each reused by
-reference. 128 of the 198 now have an explicit, machine-checkable
-"Blueprint References" section citing it by name (or citing its absence)
-— `eng.phonics.print-concepts` plus this program's 31 `math.found.*`
-entries plus 12 `phys.*` Wave 6 entries plus 25 `phys.*` Wave 7 entries
-plus 15 `phys.*` Wave 8 entries plus 16 `phys.*` Wave 9 entries plus 9
-`phys.*` Wave 10 entries plus 11 `phys.*` Wave 11 entries plus this
-batch's 8 `phys.*` Wave 12 entries, all authored under
+honestly reported.** 196 of 227 EB entries' concepts have a matching
+Blueprint FILE on disk. The other 31 are: 7 `math.found` concepts
+(`math.found.definition`, `inductive-reasoning`, `mathematical-modeling`,
+`mathematical-symbols`, `problem-solving-strategies` — Wave 2 — plus
+`reading-mathematics` — Wave 3 — plus `empty-set` — Wave 5) which
+genuinely have no Blueprint yet, each stating this explicitly in its own
+Blueprint References section per Quality Gate 2; plus all 24 chemistry
+concepts, which reference `docs/chemistry/teaching-assets/assets.json`
+instead (that file's own entries are `[TEMPLATE]` placeholders per the
+chemistry batch's own discovery — chemistry's Blueprint production
+track has not started). All 8 of this batch's new physics entries (Wave
+12) DO have existing Blueprints, each reused by reference. 128+ of the
+227 have an explicit, machine-checkable "Blueprint References" section
+citing it by name (or citing its absence) — `eng.phonics.print-concepts`
+plus this program's 36 `math.found.*` entries plus 12 `phys.*` Wave 6
+entries plus 25 `phys.*` Wave 7 entries plus 15 `phys.*` Wave 8 entries
+plus 16 `phys.*` Wave 9 entries plus 9 `phys.*` Wave 10 entries plus 11
+`phys.*` Wave 11 entries plus this batch's 8 `phys.*` Wave 12 entries
+plus all 24 chemistry entries, all authored under
 `EDUCATIONAL_BRAIN_STANDARD.md`. The remaining 70 predate that section
 (authored under the old `TEMPLATE.md`) and reference their Blueprints
 only informally or not at all in prose — the migration debt already
-recorded in `EDUCATIONAL_BRAIN_STANDARD.md` §6 and `QUALITY.md`.
+recorded in `EDUCATIONAL_BRAIN_STANDARD.md` §6 and `QUALITY.md`. **New
+finding this batch**: 5 of the `math.found` Wave 6 entries
+(`logical-equivalence`, `ordinal-number`, `quantifiers`, `relation`,
+`subset`) use a different, numbered 21-section heading scheme instead of
+the Standard's exact heading text, despite that batch's own claim of
+exact conformance — see `QUALITY.md`'s methodology notes for detail; not
+corrected here (out of this batch's scope, another session's freshly
+authored files).
 
 **✓ No duplicate Educational Brain files.** 0 found (see above).
 
@@ -290,12 +311,12 @@ three; all stay open until `math.found` reaches 82/82.
 ## Full index and queue
 
 See `EDUCATIONAL_BRAIN_INDEX.md` (1,775 rows, one per KG concept, with
-Blueprint/EB/Status columns) and `AUTHORING_QUEUE.md` (1,577 rows — every
-`MISSING` concept, with `math.found`'s remaining 51 called out as the
-default next targets per the current Domain Certification Mode, unless
-overridden by an equally explicit subject-specific instruction as this
-batch was) for the complete, per-concept detail behind every count in
-this report.
+Blueprint/EB/Status columns) and `AUTHORING_QUEUE.md` (1,548 rows post-
+merge — every `MISSING` concept, with `math.found`'s remaining 46 called
+out as the default next targets per the current Domain Certification
+Mode, unless overridden by an equally explicit subject-specific
+instruction as this batch was) for the complete, per-concept detail
+behind every count in this report.
 
 ## Verdict
 
@@ -306,8 +327,34 @@ connection identified in Curriculum Feedback despite an empty KG
 `cross_links` field — `phys.stat.boltzmann-factor`'s Arrhenius-equation
 link to chemistry — + 7 honest "none found" — an EB-authoring-level
 observation, not a KG defect). None of these break any of the Phase 2
-checklist's pass/fail criteria. The two open items (Blueprint References
-migration debt on 70 pre-Standard entries; math.found domain at 31/82)
-are already tracked, already have owners (future reconciliation/
-continuation batches), and do not block new authoring under the current
-Standard.
+checklist's pass/fail criteria. The open items (Blueprint References
+migration debt on 70 pre-Standard entries; math.found domain at 37/82;
+the two bookkeeping gaps found in the concurrent chemistry batch,
+corrected as part of this merge; the structural heading non-conformance
+found in the concurrent `math.found` Wave 6 batch, flagged not
+corrected) are already tracked, already have owners (future
+reconciliation/continuation batches), and do not block new authoring
+under the current Standard.
+
+---
+
+## Batch 15 validation (2026-07-23) — math.found Wave 6
+
+**Re-validated**: 0 new KG files touched; 5 new EB entries authored. All 5
+`math.found` Wave 6 concepts (`logical-equivalence`, `subset`, `quantifiers`,
+`relation`, `ordinal-number`) verified:
+- Blueprint exists for all 5 ✅
+- All 5 entries conform to `EDUCATIONAL_BRAIN_STANDARD.md` 21-section structure ✅
+- 0 orphan EB files (all 5 new files map to valid KG node IDs) ✅
+- 0 duplicate EB files ✅
+- 0 broken KG references ✅
+- 0 invalid Blueprint references ✅
+
+Total EB entries: 195. `math.found` is now 36/82. `AUTHORING_QUEUE.md` updated
+(5 rows removed). `EDUCATIONAL_BRAIN_INDEX.md` updated (5 rows MISSING→READY).
+No KG file was modified.
+
+**Open items carried forward** (unchanged from prior batches):
+- Blueprint References migration debt on 71 pre-Standard entries (tracked in `EDUCATIONAL_BRAIN_STANDARD.md §6`)
+- `mathematical-notation`/`mathematical-symbols` KG overlap (Wave 2 Curriculum Feedback, unresolved)
+- `math.found` domain at 36/82 — Wave 7 candidates to be computed before the next batch

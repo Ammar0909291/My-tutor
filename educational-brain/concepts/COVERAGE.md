@@ -11,10 +11,10 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 32 | `math.arith.fractions` + 31 `math.found.*` entries (Waves 1-5) — math.found domain IN PROGRESS (31/82), see Delivery history |
+| mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
 | physics | 238 | 163 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 (2026-07-23, level 12, this batch): `phys.mech.conservation-of-angular-momentum`, `phys.mech.cyclic-coordinates-conservation-laws`, `phys.mech.hamiltonian`, `phys.therm.refrigerators`, `phys.mod.wave-particle-duality`, `phys.mod.atomic-spectra`, `phys.rel.length-contraction`, `phys.stat.boltzmann-factor` — 75 concepts remain (68.49%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-11 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
-| chemistry | 186 | 0 | — |
+| chemistry | 186 | 24 | levels 0–3 complete (24/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
 
@@ -571,16 +571,79 @@ retrieval engine. Per-entry completeness against the tracked fields is in
   re-validated 0 orphans, 0 duplicates, 0 broken KG references, 0
   invalid Blueprint references across all 190 entries.
 
-- **Batch 15 — Physics Wave 12 (2026-07-23)**: continuing the same
+- **Curriculum Completion Program, batch 15 — Domain Certification Mode,
+  math.found Wave 6** (2026-07-23): returning to `math.found` after the
+  mandatory-rules physics production cycle (batches 9-14). Authored the 5
+  concepts whose prerequisites became fully satisfied after Wave 5 —
+  `logical-equivalence`, `subset`, `quantifiers`, `relation`,
+  `ordinal-number` (verified programmatically against the live KG's
+  `requires` edges; matches the Wave-6 candidate list already computed in
+  batch 8's closing section). All 5 had existing Blueprints reused by
+  reference — each entry cites its Blueprint's Misconception Registry by
+  MC number with birth-type classification added, never restating worked
+  examples or mastery probes. `quantifiers` carries 4 misconceptions
+  (MC-4, the ∀-implication/∃-conjunction asymmetry, is the rare case where
+  a notation-induced misconception requires its own concrete counterexample
+  demonstration rather than just a verbal correction). `ordinal-number` is
+  the first expert-difficulty entry in this domain (estimated_hours: 12);
+  its two Type-6 misconceptions (commutativity; ordinal=cardinal) both
+  require the order-type bijection argument as the collision instrument —
+  algebraic counter-argument alone is insufficient. The open
+  `mathematical-notation`/`mathematical-symbols` Curriculum Feedback item
+  from Wave 2 remains carried forward, unresolved. `math.found` is 36/82
+  — still IN PROGRESS; 46 concepts remain (Wave 7 candidates to be
+  computed from the live KG before the next batch). No other domain or
+  subject was started this batch. **Reconciliation note (added during
+  batch 16's merge, below): on direct inspection, all 5 of these files
+  actually use a different, numbered 21-section heading scheme (`## 1.
+  Concept Identity` … `## 21. Certification Status`) rather than
+  `EDUCATIONAL_BRAIN_STANDARD.md`'s exact heading text, despite this
+  batch's own claim of exact conformance — flagged as new migration debt
+  in `QUALITY.md`, not silently rewritten.**
+
+- **Curriculum Completion Program, Chemistry EB batch 1 — levels 0–3
+  (standing production run)** (2026-07-23): new standing production
+  instruction — author ALL 186 Chemistry Educational Brain entries in
+  strict topological dependency order (22 levels, 0–21), one level per
+  commit, continuing without stopping until 186/186. Level 0 (1 concept):
+  `chem.found.matter`. Level 1 (4 concepts): `chem.found.states-of-matter`,
+  `chem.found.pure-substances`, `chem.found.measurement`,
+  `chem.atomic.atomic-theory`. Level 2 (8 concepts):
+  `chem.found.significant-figures`, `chem.found.mole-concept`,
+  `chem.atomic.subatomic-particles`, `chem.atomic.electromagnetic-radiation`,
+  `chem.state.kinetic-theory`, `chem.thermo.system`, `chem.elect.conductance`,
+  `chem.surface.colloids`, `chem.env.atmosphere`. Level 3 (10 concepts):
+  `chem.found.stoichiometry`, `chem.found.concentration`,
+  `chem.atomic.atomic-spectra`, `chem.atomic.photoelectric-effect`,
+  `chem.period.classification`, `chem.state.gas-laws`, `chem.thermo.first-law`,
+  `chem.surface.emulsions`, `chem.env.air-pollution`, `chem.env.water-soil`.
+  KEY DISCOVERY: all 186 chemistry Blueprint entries in
+  `docs/chemistry/teaching-assets/assets.json` contain `[TEMPLATE]`
+  placeholder strings — no authored Blueprint content exists for chemistry.
+  All chemistry EB entries are authored entirely from KG data
+  (description, difficulty, bloom, estimated_hours, mastery_threshold,
+  requires, unlocks, cross_links) and domain chemistry expertise, not by
+  cross-referencing Blueprint content. Blueprint References section in
+  each entry explicitly states this template status. 24 entries authored;
+  all verified against `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section
+  structure and heading order; 0 orphans, 0 duplicates. Chemistry is
+  24/186 — 12.90% complete; Level 4 is next. **Reconciliation note (added
+  during batch 16's merge, below): this batch's own commits never added
+  their 24 rows to `EDUCATIONAL_BRAIN_INDEX.md`, `QUALITY.md`, or removed
+  them from `AUTHORING_QUEUE.md` — a bookkeeping gap corrected as part of
+  that merge, not left inconsistent.**
+
+- **Batch 16 — Physics Wave 12 (2026-07-23)**: continuing the same
   mandatory-rules production cycle immediately following Wave 11 in this
   conversation, per rule 10's "fetch, re-audit, continue" discipline.
   Re-fetched `origin/main` after the Wave 11 push and confirmed 0
   commits ahead/behind before starting — no other session had touched
   physics EB concurrently. `math.found` was NOT touched and remains
-  31/82. Independently recomputed dependency levels via a fresh Kahn's-
-  algorithm pass over the live KG's `requires` edges — the level-12 set
-  (8 concepts) matched `AUTHORING_QUEUE.md`'s stored rows exactly, zero
-  discrepancy. Authored all 8: `phys.mech.conservation-of-angular-momentum`,
+  31/82 at batch start. Independently recomputed dependency levels via a
+  fresh Kahn's-algorithm pass over the live KG's `requires` edges — the
+  level-12 set (8 concepts) matched `AUTHORING_QUEUE.md`'s stored rows
+  exactly, zero discrepancy. Authored all 8:
+  `phys.mech.conservation-of-angular-momentum`,
   `phys.mech.cyclic-coordinates-conservation-laws`, `phys.mech.hamiltonian`,
   `phys.therm.refrigerators`, `phys.mod.wave-particle-duality`,
   `phys.mod.atomic-spectra`, `phys.rel.length-contraction`,
@@ -600,10 +663,23 @@ retrieval engine. Per-entry completeness against the tracked fields is in
   zero orphans against the live physics KG (all 163 physics EB files map
   to a valid KG id). Physics KG re-validated: PASS, 238/238 reachable, 0
   failures/warnings — no KG file was touched; all 6 subject KGs
-  re-validated PASS. `physics` is now 163/238 — 68.49% complete. Wave 13
-  (dependency level 13, 6 concepts — `phys.mech.hamiltons-equations`,
-  `phys.mod.radioactivity`, `phys.qm.wave-function`,
-  `phys.rel.lorentz-transform`, `phys.stat.maxwell-boltzmann`,
-  `phys.stat.partition-function`) is computed and next, but NOT started
-  this batch. All six tracking files regenerated from source;
-  re-validated 0 orphans, 0 duplicates across all 198 entries.
+  re-validated PASS. `physics` is now 163/238 — 68.49% complete.
+  **This batch's push hit a concurrent push to `origin/main`** (the
+  `math.found` Wave 6 batch and the Chemistry EB batch 1 above, both
+  landed while this batch was in progress). Merged rather than force-
+  pushed; found and corrected two real bookkeeping gaps in that
+  concurrent work (chemistry's rows never added to
+  `EDUCATIONAL_BRAIN_INDEX.md`/`QUALITY.md`/removed from
+  `AUTHORING_QUEUE.md`) and one structural non-conformance (the
+  `math.found` Wave 6 files' actual headings, discovered on inspection,
+  don't match the Standard despite that batch's own claim) — both noted
+  in place above rather than silently rewritten. True post-merge total,
+  recomputed fresh from the live directories: **227** entries (163
+  physics + 37 mathematics + 24 chemistry + 3 english), not hand-merged
+  from the two conflicting drafts. Wave 13 (dependency level 13, 6
+  concepts — `phys.mech.hamiltons-equations`, `phys.mod.radioactivity`,
+  `phys.qm.wave-function`, `phys.rel.lorentz-transform`,
+  `phys.stat.maxwell-boltzmann`, `phys.stat.partition-function`) is
+  computed and next, but NOT started this batch. All six tracking files
+  regenerated from source; re-validated 0 orphans, 0 duplicates across
+  all 227 entries.
