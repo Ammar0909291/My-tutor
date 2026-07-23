@@ -14,7 +14,7 @@ and this file's summary row should be corrected to match.
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
 | physics | 238 | 179 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 (2026-07-23, level 14, this batch): `phys.mech.poisson-brackets`, `phys.mod.radioactive-decay`, `phys.qm.schrodinger-equation`, `phys.qm.uncertainty-principle`, `phys.rel.relativistic-momentum`, `phys.stat.bose-einstein`, `phys.stat.entropy-statistical`, `phys.stat.fluctuations-correlations`, `phys.stat.free-energy`, `phys.stat.grand-canonical-ensemble` — 59 concepts remain (75.21%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-13 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
-| chemistry | 186 | 50 | levels 0–7 complete (50/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil — IN PROGRESS |
+| chemistry | 186 | 56 | levels 0–8 complete (56/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
 
@@ -829,3 +829,15 @@ Five concepts in strict topological order (level 7 — all prerequisites at leve
 - `chem.kinet.catalysis` (proficient/understand) — Ea lowered (not K); homogeneous vs heterogeneous; Arrhenius rate ratio; enzyme kinetics qualitative
 
 Running total: 50/186 chemistry entries. Levels 0–7 complete.
+
+### Chemistry batch 5 — level 8 (2026-07-23)
+
+Six concepts in strict topological order (level 8 — all prerequisites at level ≤ 7):
+- `chem.equil.acids-bases` (developing/understand) — Arrhenius/Brønsted-Lowry/Lewis; conjugate pairs (exactly 1 H⁺ difference); amphoteric species; Ka×Kb=Kw; pKa down=strength up
+- `chem.equil.complex-equil` (advanced/apply) — Kf formation constants; stepwise Kn; β=K₁×K₂×...×Kn; competition Knet=Ksp×Kf; add equilibria→multiply K; reverse→1/K
+- `chem.equil.le-chatelier` (developing/apply) — concentration/pressure/temperature stresses; catalyst no shift; Δn_gas=0 case; van't Hoff isochore; Haber/Contact industrial applications
+- `chem.equil.solubility` (proficient/apply) — Ksp; stoichiometric multipliers (2s, 3s); Q_sp precipitation; common ion effect; compare solubility across formula types via s not Ksp
+- `chem.period.modern-periodic-law` (developing/understand) — Z not mass (Moseley); four blocks s/p/d/f; (n−1)d for d-block; period length; hydrogen anomaly
+- `chem.surface.adsorption` (proficient/understand) — physisorption vs chemisorption; Freundlich (empirical); Langmuir (monolayer, θ=bP/(1+bP)); Sabatier principle
+
+Running total: 56/186 chemistry entries. Levels 0–8 complete.
