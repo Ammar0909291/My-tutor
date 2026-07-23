@@ -927,7 +927,7 @@ its subject KG.
 | trig | `math.trig.trig-identities` | Trigonometric Identities | Yes | No | — | MISSING |
 | trig | `math.trig.unit-circle` | Unit Circle | Yes | No | — | MISSING |
 
-## physics (238 concepts, 195 READY)
+## physics (238 concepts, 207 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | astro | `phys.astro.black-holes` | Black Holes and Schwarzschild Radius | Yes | No | — | MISSING |
@@ -1048,9 +1048,9 @@ its subject KG.
 | mod | `phys.mod.energy-bands` | Energy Bands in Solids | Yes | No | — | MISSING |
 | mod | `phys.mod.extrinsic-semiconductors` | Extrinsic Semiconductors: Doping and Carrier Types | Yes | No | — | MISSING |
 | mod | `phys.mod.intrinsic-semiconductors` | Intrinsic Semiconductors | Yes | No | — | MISSING |
-| mod | `phys.mod.nuclear-fission` | Nuclear Fission and Chain Reactions | Yes | No | — | MISSING |
-| mod | `phys.mod.nuclear-fusion` | Nuclear Fusion and Stellar Energy | Yes | No | — | MISSING |
-| mod | `phys.mod.nuclear-models` | Nuclear Models: Shell Model | Yes | No | — | MISSING |
+| mod | `phys.mod.nuclear-fission` | Nuclear Fission and Chain Reactions | Yes | Yes | `educational-brain/concepts/physics/phys.mod.nuclear-fission.md` | READY |
+| mod | `phys.mod.nuclear-fusion` | Nuclear Fusion and Stellar Energy | Yes | Yes | `educational-brain/concepts/physics/phys.mod.nuclear-fusion.md` | READY |
+| mod | `phys.mod.nuclear-models` | Nuclear Models: Shell Model | Yes | Yes | `educational-brain/concepts/physics/phys.mod.nuclear-models.md` | READY |
 | mod | `phys.mod.nuclear-reactions` | Nuclear Reactions and Q-Value | Yes | Yes | `educational-brain/concepts/physics/phys.mod.nuclear-reactions.md` | READY |
 | mod | `phys.mod.photoelectric-effect` | Photoelectric Effect | Yes | Yes | `educational-brain/concepts/physics/phys.mod.photoelectric-effect.md` | READY |
 | mod | `phys.mod.photons` | Photons and Quantization of Light | Yes | Yes | `educational-brain/concepts/physics/phys.mod.photons.md` | READY |
@@ -1081,30 +1081,30 @@ its subject KG.
 | particle | `phys.particle.electroweak-unification` | Electroweak Unification | Yes | No | — | MISSING |
 | particle | `phys.particle.feynman-diagrams` | Feynman Diagrams (Qualitative) | Yes | No | — | MISSING |
 | particle | `phys.particle.four-forces` | Four Fundamental Forces | Yes | Yes | `educational-brain/concepts/physics/phys.particle.four-forces.md` | READY |
-| particle | `phys.particle.gauge-bosons` | Gauge Bosons and Force Carriers | Yes | No | — | MISSING |
+| particle | `phys.particle.gauge-bosons` | Gauge Bosons and Force Carriers | Yes | Yes | `educational-brain/concepts/physics/phys.particle.gauge-bosons.md` | READY |
 | particle | `phys.particle.hadron-quark-model` | Quark Model of Hadrons: Baryons and Mesons | Yes | No | — | MISSING |
 | particle | `phys.particle.higgs-mechanism` | The Higgs Mechanism | Yes | No | — | MISSING |
 | particle | `phys.particle.leptons` | Leptons | Yes | No | — | MISSING |
 | particle | `phys.particle.neutrinos` | Neutrinos | Yes | No | — | MISSING |
-| particle | `phys.particle.particle-classification` | Particle Classification: Hadrons and Leptons | Yes | No | — | MISSING |
+| particle | `phys.particle.particle-classification` | Particle Classification: Hadrons and Leptons | Yes | Yes | `educational-brain/concepts/physics/phys.particle.particle-classification.md` | READY |
 | particle | `phys.particle.quarks` | Quarks | Yes | No | — | MISSING |
 | particle | `phys.particle.standard-model` | The Standard Model | Yes | No | — | MISSING |
 | particle | `phys.particle.strong-interaction` | The Strong Interaction and Color Charge | Yes | No | — | MISSING |
 | particle | `phys.particle.weak-interaction` | The Weak Interaction | Yes | No | — | MISSING |
-| qm | `phys.qm.angular-momentum-addition` | Addition of Angular Momenta and Clebsch-Gordan Coefficients | Yes | No | — | MISSING |
-| qm | `phys.qm.density-matrix` | Density Matrix and Mixed Quantum States | Yes | No | — | MISSING |
+| qm | `phys.qm.angular-momentum-addition` | Addition of Angular Momenta and Clebsch-Gordan Coefficients | Yes | Yes | `educational-brain/concepts/physics/phys.qm.angular-momentum-addition.md` | READY |
+| qm | `phys.qm.density-matrix` | Density Matrix and Mixed Quantum States | Yes | Yes | `educational-brain/concepts/physics/phys.qm.density-matrix.md` | READY |
 | qm | `phys.qm.harmonic-oscillator-qm` | Quantum Harmonic Oscillator | Yes | Yes | `educational-brain/concepts/physics/phys.qm.harmonic-oscillator-qm.md` | READY |
 | qm | `phys.qm.hydrogen-atom-qm` | Quantum Treatment of Hydrogen Atom | Yes | Yes | `educational-brain/concepts/physics/phys.qm.hydrogen-atom-qm.md` | READY |
 | qm | `phys.qm.identical-particles` | Identical Particles and the Symmetrization Postulate | Yes | No | — | MISSING |
 | qm | `phys.qm.operators` | Quantum Operators and Observables | Yes | Yes | `educational-brain/concepts/physics/phys.qm.operators.md` | READY |
 | qm | `phys.qm.particle-in-box` | Particle in an Infinite Square Well | Yes | Yes | `educational-brain/concepts/physics/phys.qm.particle-in-box.md` | READY |
-| qm | `phys.qm.pauli-exclusion` | Pauli Exclusion Principle | Yes | No | — | MISSING |
-| qm | `phys.qm.perturbation-theory` | Time-Independent Perturbation Theory | Yes | No | — | MISSING |
+| qm | `phys.qm.pauli-exclusion` | Pauli Exclusion Principle | Yes | Yes | `educational-brain/concepts/physics/phys.qm.pauli-exclusion.md` | READY |
+| qm | `phys.qm.perturbation-theory` | Time-Independent Perturbation Theory | Yes | Yes | `educational-brain/concepts/physics/phys.qm.perturbation-theory.md` | READY |
 | qm | `phys.qm.quantum-tunneling` | Quantum Tunneling | Yes | Yes | `educational-brain/concepts/physics/phys.qm.quantum-tunneling.md` | READY |
 | qm | `phys.qm.s-matrix-basics` | S-Matrix and Scattering Amplitudes | Yes | No | — | MISSING |
 | qm | `phys.qm.scattering-theory-born-approximation` | Scattering Theory and the Born Approximation | Yes | No | — | MISSING |
 | qm | `phys.qm.schrodinger-equation` | Time-Dependent Schrödinger Equation | Yes | Yes | `educational-brain/concepts/physics/phys.qm.schrodinger-equation.md` | READY |
-| qm | `phys.qm.selection-rules` | Selection Rules and Transition Probabilities | Yes | No | — | MISSING |
+| qm | `phys.qm.selection-rules` | Selection Rules and Transition Probabilities | Yes | Yes | `educational-brain/concepts/physics/phys.qm.selection-rules.md` | READY |
 | qm | `phys.qm.spin` | Electron Spin and the Stern-Gerlach Experiment | Yes | Yes | `educational-brain/concepts/physics/phys.qm.spin.md` | READY |
 | qm | `phys.qm.uncertainty-principle` | Heisenberg's Uncertainty Principle | Yes | Yes | `educational-brain/concepts/physics/phys.qm.uncertainty-principle.md` | READY |
 | qm | `phys.qm.variational-method` | Variational Method and Variational Principle | Yes | No | — | MISSING |
@@ -1128,10 +1128,10 @@ its subject KG.
 | stat | `phys.stat.grand-canonical-ensemble` | Grand Canonical Ensemble | Yes | Yes | `educational-brain/concepts/physics/phys.stat.grand-canonical-ensemble.md` | READY |
 | stat | `phys.stat.ising-model` | Ising Model | Yes | Yes | `educational-brain/concepts/physics/phys.stat.ising-model.md` | READY |
 | stat | `phys.stat.maxwell-boltzmann` | Maxwell-Boltzmann Speed Distribution | Yes | Yes | `educational-brain/concepts/physics/phys.stat.maxwell-boltzmann.md` | READY |
-| stat | `phys.stat.monte-carlo-basics` | Monte Carlo Methods in Statistical Physics | Yes | No | — | MISSING |
+| stat | `phys.stat.monte-carlo-basics` | Monte Carlo Methods in Statistical Physics | Yes | Yes | `educational-brain/concepts/physics/phys.stat.monte-carlo-basics.md` | READY |
 | stat | `phys.stat.partition-function` | Partition Function | Yes | Yes | `educational-brain/concepts/physics/phys.stat.partition-function.md` | READY |
 | stat | `phys.stat.phase-transitions` | Phase Transitions and Landau Mean-Field Theory | Yes | Yes | `educational-brain/concepts/physics/phys.stat.phase-transitions.md` | READY |
-| stat | `phys.stat.phase-transitions-critical-phenomena` | Critical Phenomena, Scaling Laws, and Universality | Yes | No | — | MISSING |
+| stat | `phys.stat.phase-transitions-critical-phenomena` | Critical Phenomena, Scaling Laws, and Universality | Yes | Yes | `educational-brain/concepts/physics/phys.stat.phase-transitions-critical-phenomena.md` | READY |
 | stat | `phys.stat.probability-basics` | Probability Distributions in Physics | Yes | Yes | `educational-brain/concepts/physics/phys.stat.probability-basics.md` | READY |
 | therm | `phys.therm.calorimetry` | Calorimetry | Yes | Yes | `educational-brain/concepts/physics/phys.therm.calorimetry.md` | READY |
 | therm | `phys.therm.carnot-cycle` | Carnot Cycle | Yes | Yes | `educational-brain/concepts/physics/phys.therm.carnot-cycle.md` | READY |

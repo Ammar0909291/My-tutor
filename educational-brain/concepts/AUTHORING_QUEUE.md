@@ -282,6 +282,32 @@ NOT computed this batch — recompute fresh from the live KG before
 starting. Total remaining after this wave: 1,451 (verified as the exact
 row count of the table below).
 
+**Physics Wave 17 (2026-07-23)**: continuing the same mandatory-rules
+production cycle in response to an explicit standing instruction — "Keep
+continue until 238/238 done" — which sets 238/238 as the stopping
+condition for this program rather than a single batch. Re-fetched
+`origin/main` (0 ahead/0 behind), re-audited physics EB state fresh
+(195/238), independently recomputed dependency levels via a fresh Kahn's-
+algorithm pass over the live KG's `requires` edges — Wave 16's authoring
+of `phys.particle.four-forces` and its five domain-siblings unlocked the
+largest single wave since Wave 9: all 12 concepts newly at dependency
+level 17 — `phys.mod.nuclear-fission`, `phys.mod.nuclear-fusion`,
+`phys.mod.nuclear-models`, `phys.qm.pauli-exclusion`,
+`phys.qm.perturbation-theory`, `phys.qm.selection-rules`,
+`phys.qm.angular-momentum-addition`, `phys.qm.density-matrix`,
+`phys.stat.phase-transitions-critical-phenomena`,
+`phys.stat.monte-carlo-basics`, `phys.particle.particle-classification`,
+`phys.particle.gauge-bosons`. All 12 had existing Blueprints, reused by
+reference; all verified via heading-structure diff (0 mismatches) and a
+repo-wide orphan/duplicate scan (clean). Physics EB now 207/238
+(195 existing + 12 this wave), 31 concepts remaining. Next unlocked
+physics wave (Wave 18) was NOT computed this batch — recompute fresh
+from the live KG before starting, per this program's standing
+discipline; per the user's standing instruction, Wave 18 begins
+immediately after this wave's tracking-file/commit/push steps complete.
+Total remaining after this wave: 1,439 (verified as the exact row count
+of the table below).
+
 | Priority | Subject | Level | KG ID | Concept Name |
 |---|---|---|---|---|
 | 1 | biology | 0 | `bio.found.what-is-biology` | What is Biology |
@@ -992,746 +1018,734 @@ row count of the table below).
 | 706 | mathematics | 17 | `math.real.connectedness` | Connectedness |
 | 707 | mathematics | 17 | `math.real.pointwise-convergence` | Pointwise Convergence |
 | 708 | mathematics | 17 | `math.graph.ramsey-theory` | Ramsey Theory |
-| 709 | physics | 17 | `phys.mod.nuclear-fission` | Nuclear Fission and Chain Reactions |
-| 710 | physics | 17 | `phys.mod.nuclear-fusion` | Nuclear Fusion and Stellar Energy |
-| 711 | physics | 17 | `phys.mod.nuclear-models` | Nuclear Models: Shell Model |
-| 712 | physics | 17 | `phys.qm.pauli-exclusion` | Pauli Exclusion Principle |
-| 713 | physics | 17 | `phys.qm.perturbation-theory` | Time-Independent Perturbation Theory |
-| 714 | physics | 17 | `phys.qm.selection-rules` | Selection Rules and Transition Probabilities |
-| 715 | physics | 17 | `phys.qm.angular-momentum-addition` | Addition of Angular Momenta and Clebsch-Gordan Coefficients |
-| 716 | physics | 17 | `phys.qm.density-matrix` | Density Matrix and Mixed Quantum States |
-| 717 | physics | 17 | `phys.stat.phase-transitions-critical-phenomena` | Critical Phenomena, Scaling Laws, and Universality |
-| 718 | physics | 17 | `phys.stat.monte-carlo-basics` | Monte Carlo Methods in Statistical Physics |
-| 719 | physics | 17 | `phys.particle.particle-classification` | Particle Classification: Hadrons and Leptons |
-| 720 | physics | 17 | `phys.particle.gauge-bosons` | Gauge Bosons and Force Carriers |
-| 721 | english | 17 | `eng.grammar.compound-sentences` | Compound Sentences |
-| 722 | english | 17 | `eng.grammar.comma-usage` | Comma Usage |
-| 723 | english | 17 | `eng.grammar.sentence-fragments` | Sentence Fragments |
-| 724 | english | 17 | `eng.reading.close-reading` | Close Reading |
-| 725 | english | 17 | `eng.writing.sentence-writing` | Sentence Writing |
-| 726 | chemistry | 17 | `chem.sol.osmosis` | Osmosis and Osmotic Pressure |
-| 727 | chemistry | 17 | `chem.hyd.alkynes` | Alkynes |
-| 728 | chemistry | 17 | `chem.alc.phenols` | Phenols |
-| 729 | chemistry | 17 | `chem.alc.ethers` | Ethers |
-| 730 | chemistry | 17 | `chem.alc.diols` | Diols and Polyols |
-| 731 | chemistry | 17 | `chem.carb.aldehydes` | Aldehydes |
-| 732 | chemistry | 17 | `chem.nitro.amines` | Amines |
-| 733 | chemistry | 17 | `chem.poly.addition` | Addition Polymerization |
-| 734 | biology | 17 | `bio.biotech.crispr-genome-editing` | CRISPR and Genome Editing |
-| 735 | biology | 17 | `bio.bioinfo.bioinformatics-intro` | Introduction to Bioinformatics |
-| 736 | computer_science | 17 | `cs.struct.doubly-circular-lists` | Doubly and Circular Linked Lists |
-| 737 | computer_science | 17 | `cs.struct.trees` | Trees |
-| 738 | computer_science | 17 | `cs.oop.class-static-methods` | Class Methods and Static Methods |
-| 739 | computer_science | 17 | `cs.db.sql-queries-functions` | SQL — Queries and Aggregate Functions |
-| 740 | computer_science | 17 | `cs.ds.pandas-dataframes` | Pandas for Data Analysis |
-| 741 | mathematics | 18 | `math.arith.decimal-operations` | Decimal Operations |
-| 742 | mathematics | 18 | `math.arith.terminating-decimals` | Terminating Decimals |
-| 743 | mathematics | 18 | `math.arith.repeating-decimals` | Repeating Decimals |
-| 744 | mathematics | 18 | `math.arith.percentages` | Percentages |
-| 745 | mathematics | 18 | `math.arith.proportion` | Proportion |
-| 746 | mathematics | 18 | `math.arith.unit-rate` | Unit Rate |
-| 747 | mathematics | 18 | `math.arith.rounding` | Rounding |
-| 748 | mathematics | 18 | `math.arith.irrational-roots` | Irrational Square Roots |
-| 749 | mathematics | 18 | `math.arith.scientific-notation` | Scientific Notation |
-| 750 | mathematics | 18 | `math.nt.composite-number` | Composite Number |
-| 751 | mathematics | 18 | `math.nt.sieve-of-eratosthenes` | Sieve of Eratosthenes |
-| 752 | mathematics | 18 | `math.nt.prime-factorization` | Prime Factorization |
-| 753 | mathematics | 18 | `math.nt.congruence` | Congruence |
-| 754 | mathematics | 18 | `math.nt.fermats-little-theorem` | Fermat's Little Theorem |
-| 755 | mathematics | 18 | `math.nt.prime-distribution` | Distribution of Primes |
-| 756 | mathematics | 18 | `math.alg.term` | Term |
-| 757 | mathematics | 18 | `math.alg.equation` | Equation |
-| 758 | mathematics | 18 | `math.alg.polynomial` | Polynomial |
-| 759 | mathematics | 18 | `math.alg.exponent-rules` | Exponent Rules (Algebraic) |
-| 760 | mathematics | 18 | `math.geom.pythagorean-converse` | Converse of the Pythagorean Theorem |
-| 761 | mathematics | 18 | `math.geom.similar-triangles` | Similar Triangles |
-| 762 | mathematics | 18 | `math.geom.distance-formula` | Distance Formula |
-| 763 | mathematics | 18 | `math.geom.dilation` | Dilation |
-| 764 | mathematics | 18 | `math.geom.cross-product` | Cross Product |
-| 765 | mathematics | 18 | `math.geom.differential-geometry-curves` | Curves in Space |
-| 766 | mathematics | 18 | `math.seq.divergent-sequence` | Divergent Sequence |
-| 767 | mathematics | 18 | `math.seq.series-convergence` | Convergence of Series |
-| 768 | mathematics | 18 | `math.calc.squeeze-theorem` | Squeeze Theorem |
-| 769 | mathematics | 18 | `math.calc.continuity-types` | Types of Discontinuity |
-| 770 | mathematics | 18 | `math.calc.ivt` | Intermediate Value Theorem |
-| 771 | mathematics | 18 | `math.calc.derivative-definition` | Derivative (Definition) |
-| 772 | mathematics | 18 | `math.calc.definite-integral` | Definite Integral |
-| 773 | mathematics | 18 | `math.calc.line-integrals` | Line Integrals |
-| 774 | mathematics | 18 | `math.linalg.vector-addition` | Vector Addition |
-| 775 | mathematics | 18 | `math.linalg.scalar-multiplication` | Scalar Multiplication |
-| 776 | mathematics | 18 | `math.linalg.dot-product` | Dot Product |
-| 777 | mathematics | 18 | `math.linalg.matrix` | Matrix |
-| 778 | mathematics | 18 | `math.prob.combinatorial-probability` | Combinatorial Probability |
-| 779 | mathematics | 18 | `math.stats.descriptive-statistics` | Descriptive Statistics |
-| 780 | mathematics | 18 | `math.stats.sampling` | Sampling Methods |
-| 781 | mathematics | 18 | `math.disc.binomial-theorem` | Binomial Theorem |
-| 782 | mathematics | 18 | `math.disc.combinatorics` | Combinatorics |
-| 783 | mathematics | 18 | `math.disc.stars-bars` | Stars and Bars |
-| 784 | mathematics | 18 | `math.disc.inclusion-exclusion` | Inclusion-Exclusion Principle |
-| 785 | mathematics | 18 | `math.abst.sylow-theorems` | Sylow Theorems |
-| 786 | mathematics | 18 | `math.abst.finite-field` | Finite Field |
-| 787 | mathematics | 18 | `math.abst.galois-correspondence` | Fundamental Theorem of Galois Theory |
-| 788 | mathematics | 18 | `math.real.absolute-convergence` | Absolute Convergence |
-| 789 | mathematics | 18 | `math.real.completeness-metric` | Completeness of Metric Spaces |
-| 790 | mathematics | 18 | `math.real.continuity-rigorous` | Continuity (ε-δ) |
-| 791 | mathematics | 18 | `math.opt.convex-set` | Convex Set |
-| 792 | mathematics | 18 | `math.graph.shortest-path` | Shortest Path Algorithms |
-| 793 | physics | 18 | `phys.qm.variational-method` | Variational Method and Variational Principle |
-| 794 | physics | 18 | `phys.qm.identical-particles` | Identical Particles and the Symmetrization Postulate |
-| 795 | physics | 18 | `phys.qm.scattering-theory-born-approximation` | Scattering Theory and the Born Approximation |
-| 796 | physics | 18 | `phys.stat.fermi-dirac` | Fermi-Dirac Statistics |
-| 797 | physics | 18 | `phys.astro.stellar-structure` | Stellar Structure and the Main Sequence |
-| 798 | physics | 18 | `phys.particle.antimatter` | Antimatter and Antiparticles |
-| 799 | physics | 18 | `phys.particle.quarks` | Quarks |
-| 800 | physics | 18 | `phys.particle.leptons` | Leptons |
-| 801 | english | 18 | `eng.grammar.complex-sentences` | Complex Sentences |
-| 802 | english | 18 | `eng.grammar.parallel-structure` | Parallel Structure |
-| 803 | english | 18 | `eng.grammar.apostrophes` | Apostrophes |
-| 804 | english | 18 | `eng.grammar.quotation-marks` | Quotation Marks |
-| 805 | english | 18 | `eng.grammar.colons-semicolons-dashes` | Colons, Semicolons, and Dashes |
-| 806 | english | 18 | `eng.grammar.run-on-sentences-and-comma-splices` | Run-On Sentences and Comma Splices |
-| 807 | english | 18 | `eng.reading.critical-reading` | Critical Reading |
-| 808 | english | 18 | `eng.writing.paragraph-structure` | Paragraph Structure |
-| 809 | english | 18 | `eng.literature.narrative-elements` | Narrative Elements |
-| 810 | chemistry | 18 | `chem.alc.epoxides` | Epoxides |
-| 811 | chemistry | 18 | `chem.alc.protection` | Protecting Group Strategy |
-| 812 | chemistry | 18 | `chem.carb.ketones` | Ketones |
-| 813 | chemistry | 18 | `chem.carb.carboxylic` | Carboxylic Acids |
-| 814 | chemistry | 18 | `chem.nitro.diazonium` | Diazonium Salts |
-| 815 | chemistry | 18 | `chem.nitro.heterocycles` | Nitrogen Heterocycles |
-| 816 | chemistry | 18 | `chem.bio.carbohydrates` | Carbohydrates |
-| 817 | biology | 18 | `bio.bioinfo.sequence-alignment` | Sequence Alignment |
-| 818 | biology | 18 | `bio.sys.systems-biology-intro` | Introduction to Systems Biology |
-| 819 | computer_science | 18 | `cs.struct.binary-search-trees` | Binary Search Trees |
-| 820 | computer_science | 18 | `cs.struct.heaps` | Heaps |
-| 821 | computer_science | 18 | `cs.struct.graphs-representation` | Graphs and Their Representations |
-| 822 | computer_science | 18 | `cs.oop.design-patterns-intro` | Introduction to Design Patterns |
-| 823 | computer_science | 18 | `cs.db.sql-joins-subqueries` | SQL — Joins and Subqueries |
-| 824 | computer_science | 18 | `cs.ds.data-visualisation` | Data Visualisation with Matplotlib |
-| 825 | mathematics | 19 | `math.arith.percentage-calculations` | Percentage Calculations |
-| 826 | mathematics | 19 | `math.arith.direct-variation` | Direct Variation |
-| 827 | mathematics | 19 | `math.arith.inverse-variation` | Inverse Variation |
-| 828 | mathematics | 19 | `math.arith.estimation` | Estimation |
-| 829 | mathematics | 19 | `math.arith.significant-figures` | Significant Figures |
-| 830 | mathematics | 19 | `math.nt.fundamental-theorem-arithmetic` | Fundamental Theorem of Arithmetic |
-| 831 | mathematics | 19 | `math.nt.gcd` | Greatest Common Divisor |
-| 832 | mathematics | 19 | `math.nt.residue-classes` | Residue Classes |
-| 833 | mathematics | 19 | `math.nt.eulers-theorem` | Euler's Theorem |
-| 834 | mathematics | 19 | `math.nt.eulers-totient` | Euler's Totient Function |
-| 835 | mathematics | 19 | `math.nt.primality-testing` | Primality Testing |
-| 836 | mathematics | 19 | `math.alg.coefficient` | Coefficient |
-| 837 | mathematics | 19 | `math.alg.solution-set` | Solution Set |
-| 838 | mathematics | 19 | `math.alg.degree` | Degree of a Polynomial |
-| 839 | mathematics | 19 | `math.alg.zero-exponent` | Zero Exponent |
-| 840 | mathematics | 19 | `math.alg.negative-exponent` | Negative Exponent |
-| 841 | mathematics | 19 | `math.alg.radicals` | Radical Expressions |
-| 842 | mathematics | 19 | `math.alg.exponential-function` | Exponential Function |
-| 843 | mathematics | 19 | `math.alg.inequality` | Inequality |
-| 844 | mathematics | 19 | `math.alg.binomial-theorem` | Binomial Theorem |
-| 845 | mathematics | 19 | `math.trig.right-triangle-trig` | Right-Triangle Trigonometry |
-| 846 | mathematics | 19 | `math.seq.divergence-test` | Divergence Test (nth Term Test) |
-| 847 | mathematics | 19 | `math.seq.comparison-test` | Comparison Test |
-| 848 | mathematics | 19 | `math.seq.ratio-test` | Ratio Test |
-| 849 | mathematics | 19 | `math.seq.root-test` | Root Test |
-| 850 | mathematics | 19 | `math.seq.alternating-series` | Alternating Series |
-| 851 | mathematics | 19 | `math.seq.harmonic-series` | Harmonic Series |
-| 852 | mathematics | 19 | `math.calc.differentiability` | Differentiability |
-| 853 | mathematics | 19 | `math.calc.derivative-rules` | Basic Differentiation Rules |
-| 854 | mathematics | 19 | `math.calc.lhopitals-rule` | L'Hôpital's Rule |
-| 855 | mathematics | 19 | `math.calc.mean-value-theorem` | Mean Value Theorem |
-| 856 | mathematics | 19 | `math.calc.linearization` | Linearization and Differentials |
-| 857 | mathematics | 19 | `math.calc.ftc-part1` | Fundamental Theorem of Calculus Part 1 |
-| 858 | mathematics | 19 | `math.calc.improper-integrals` | Improper Integrals |
-| 859 | mathematics | 19 | `math.calc.integral-area` | Area by Integration |
-| 860 | mathematics | 19 | `math.calc.power-series` | Power Series |
-| 861 | mathematics | 19 | `math.calc.multivariable-intro` | Introduction to Multivariable Calculus |
-| 862 | mathematics | 19 | `math.linalg.norm` | Vector Norm |
-| 863 | mathematics | 19 | `math.linalg.orthogonality` | Orthogonality |
-| 864 | mathematics | 19 | `math.linalg.cross-product` | Cross Product |
-| 865 | mathematics | 19 | `math.linalg.matrix-addition` | Matrix Addition |
-| 866 | mathematics | 19 | `math.linalg.matrix-multiplication` | Matrix Multiplication |
-| 867 | mathematics | 19 | `math.linalg.matrix-transpose` | Matrix Transpose |
-| 868 | mathematics | 19 | `math.linalg.vector-space` | Vector Space |
-| 869 | mathematics | 19 | `math.prob.continuous-rv` | Continuous Random Variable |
-| 870 | mathematics | 19 | `math.stats.measures-of-center` | Measures of Center |
-| 871 | mathematics | 19 | `math.stats.measures-of-spread` | Measures of Spread |
-| 872 | mathematics | 19 | `math.stats.data-visualization` | Data Visualization |
-| 873 | mathematics | 19 | `math.disc.derangements` | Derangements |
-| 874 | mathematics | 19 | `math.disc.recurrence-relation` | Recurrence Relation |
-| 875 | mathematics | 19 | `math.disc.graph-representation` | Graph Representation |
-| 876 | mathematics | 19 | `math.real.uniform-continuity` | Uniform Continuity |
-| 877 | mathematics | 19 | `math.real.extreme-value-theorem` | Extreme Value Theorem |
-| 878 | mathematics | 19 | `math.real.ivt` | Intermediate Value Theorem (Rigorous) |
-| 879 | mathematics | 19 | `math.real.differentiability-rigorous` | Differentiability (Rigorous) |
-| 880 | mathematics | 19 | `math.real.riemann-integral` | Riemann Integral (Rigorous) |
-| 881 | mathematics | 19 | `math.real.uniform-convergence` | Uniform Convergence |
-| 882 | mathematics | 19 | `math.real.baire-category` | Baire Category Theorem |
-| 883 | mathematics | 19 | `math.graph.extremal-graph-theory` | Extremal Graph Theory |
-| 884 | physics | 19 | `phys.qm.wkb-approximation` | WKB Approximation (Semiclassical Limit) |
-| 885 | physics | 19 | `phys.qm.s-matrix-basics` | S-Matrix and Scattering Amplitudes |
-| 886 | physics | 19 | `phys.astro.stellar-evolution` | Stellar Evolution and End States |
-| 887 | physics | 19 | `phys.astro.cosmology` | Big Bang Cosmology |
-| 888 | physics | 19 | `phys.particle.neutrinos` | Neutrinos |
-| 889 | physics | 19 | `phys.particle.hadron-quark-model` | Quark Model of Hadrons: Baryons and Mesons |
-| 890 | physics | 19 | `phys.particle.strong-interaction` | The Strong Interaction and Color Charge |
-| 891 | physics | 19 | `phys.mod.energy-bands` | Energy Bands in Solids |
-| 892 | english | 19 | `eng.grammar.sentence-combining` | Sentence Combining |
-| 893 | english | 19 | `eng.reading.evaluating-sources` | Evaluating Sources |
-| 894 | english | 19 | `eng.writing.topic-sentences` | Topic Sentences |
-| 895 | english | 19 | `eng.literature.plot-structure` | Plot Structure |
-| 896 | english | 19 | `eng.literature.character-development` | Character Development |
-| 897 | english | 19 | `eng.literature.setting-and-atmosphere` | Setting and Atmosphere |
-| 898 | english | 19 | `eng.literature.point-of-view` | Point of View |
-| 899 | english | 19 | `eng.literature.drama-basics` | Drama Basics |
-| 900 | chemistry | 19 | `chem.carb.alpha-reactions` | Alpha-Carbon Reactions |
-| 901 | chemistry | 19 | `chem.carb.derivatives` | Carboxylic Acid Derivatives |
-| 902 | chemistry | 19 | `chem.carb.spectro` | Spectroscopic ID of Carbonyls |
-| 903 | chemistry | 19 | `chem.nitro.amino-acids` | Amino Acids |
-| 904 | biology | 19 | `bio.bioinfo.phylogenetics-computational` | Computational Phylogenetics |
-| 905 | biology | 19 | `bio.bioinfo.structural-bioinformatics` | Structural Bioinformatics |
-| 906 | biology | 19 | `bio.sys.gene-regulatory-networks` | Gene Regulatory Networks |
-| 907 | biology | 19 | `bio.evo.molecular-evolution` | Molecular Evolution and Neutral Theory |
-| 908 | computer_science | 19 | `cs.struct.balanced-trees` | Balanced Search Trees |
-| 909 | computer_science | 19 | `cs.struct.graph-traversal` | Graph Traversal — BFS and DFS |
-| 910 | computer_science | 19 | `cs.db.transactions-acid` | Transactions and the ACID Properties |
-| 911 | computer_science | 19 | `cs.db.mysql-python` | Connecting Python to MySQL |
-| 912 | computer_science | 19 | `cs.se.agile-design-principles` | Agile Practices and Software Design Principles |
-| 913 | computer_science | 19 | `cs.ds.intro-machine-learning` | Introduction to Machine Learning |
-| 914 | mathematics | 20 | `math.arith.fraction-simplification` | Fraction Simplification |
-| 915 | mathematics | 20 | `math.arith.percentage-change` | Percentage Change |
-| 916 | mathematics | 20 | `math.nt.euclidean-algorithm` | Euclidean Algorithm |
-| 917 | mathematics | 20 | `math.nt.lcm` | Least Common Multiple |
-| 918 | mathematics | 20 | `math.nt.chinese-remainder-theorem` | Chinese Remainder Theorem |
-| 919 | mathematics | 20 | `math.alg.like-terms` | Like Terms |
-| 920 | mathematics | 20 | `math.alg.fractional-exponent` | Fractional Exponent |
-| 921 | mathematics | 20 | `math.alg.simplifying-radicals` | Simplifying Radical Expressions |
-| 922 | mathematics | 20 | `math.alg.radical-equations` | Radical Equations |
-| 923 | mathematics | 20 | `math.alg.exponential-equations` | Exponential Equations |
-| 924 | mathematics | 20 | `math.alg.logarithm` | Logarithm |
-| 925 | mathematics | 20 | `math.alg.pascals-triangle` | Pascal's Triangle |
-| 926 | mathematics | 20 | `math.geom.curvature` | Curvature |
-| 927 | mathematics | 20 | `math.trig.basic-ratios` | Six Trigonometric Ratios |
-| 928 | mathematics | 20 | `math.trig.unit-circle` | Unit Circle |
-| 929 | mathematics | 20 | `math.trig.law-of-sines` | Law of Sines |
-| 930 | mathematics | 20 | `math.trig.law-of-cosines` | Law of Cosines |
-| 931 | mathematics | 20 | `math.func.exponential-function` | Exponential Function |
-| 932 | mathematics | 20 | `math.seq.integral-test` | Integral Test |
-| 933 | mathematics | 20 | `math.seq.absolute-convergence` | Absolute and Conditional Convergence |
-| 934 | mathematics | 20 | `math.calc.product-rule` | Product Rule |
-| 935 | mathematics | 20 | `math.calc.chain-rule` | Chain Rule |
-| 936 | mathematics | 20 | `math.calc.higher-order-derivatives` | Higher-Order Derivatives |
-| 937 | mathematics | 20 | `math.calc.rolles-theorem` | Rolle's Theorem |
-| 938 | mathematics | 20 | `math.calc.increasing-decreasing` | Increasing and Decreasing Functions |
-| 939 | mathematics | 20 | `math.calc.critical-points` | Critical Points |
-| 940 | mathematics | 20 | `math.calc.antiderivatives` | Antiderivatives |
-| 941 | mathematics | 20 | `math.calc.volume-revolution` | Volumes of Revolution |
-| 942 | mathematics | 20 | `math.calc.arc-length` | Arc Length |
-| 943 | mathematics | 20 | `math.calc.radius-of-convergence` | Radius of Convergence |
-| 944 | mathematics | 20 | `math.calc.partial-derivatives` | Partial Derivatives |
-| 945 | mathematics | 20 | `math.calc.multiple-integrals` | Multiple Integrals |
-| 946 | mathematics | 20 | `math.linalg.unit-vector` | Unit Vector |
-| 947 | mathematics | 20 | `math.linalg.symmetric-matrix` | Symmetric Matrix |
-| 948 | mathematics | 20 | `math.linalg.determinant` | Determinant |
-| 949 | mathematics | 20 | `math.linalg.subspace` | Subspace |
-| 950 | mathematics | 20 | `math.linalg.linear-map` | Linear Map |
-| 951 | mathematics | 20 | `math.linalg.inner-product` | Inner Product |
-| 952 | mathematics | 20 | `math.linalg.distance` | Distance in Vector Spaces |
-| 953 | mathematics | 20 | `math.linalg.angle-vectors` | Angle Between Vectors |
-| 954 | mathematics | 20 | `math.prob.pdf` | Probability Density Function |
-| 955 | mathematics | 20 | `math.prob.generating-function` | Probability Generating Function |
-| 956 | mathematics | 20 | `math.prob.markov-chain` | Markov Chain |
-| 957 | mathematics | 20 | `math.stats.percentile` | Percentile |
-| 958 | mathematics | 20 | `math.disc.generating-functions` | Generating Functions |
-| 959 | mathematics | 20 | `math.disc.catalan-numbers` | Catalan Numbers |
-| 960 | mathematics | 20 | `math.disc.stirling-numbers` | Stirling Numbers |
-| 961 | mathematics | 20 | `math.real.lipschitz-continuity` | Lipschitz Continuity |
-| 962 | mathematics | 20 | `math.real.mvt` | Mean Value Theorem (Rigorous) |
-| 963 | mathematics | 20 | `math.real.riemann-integrability` | Riemann Integrability |
-| 964 | mathematics | 20 | `math.real.ftc-rigorous` | Fundamental Theorem of Calculus (Rigorous) |
-| 965 | mathematics | 20 | `math.real.weierstrass-approximation` | Weierstrass Approximation Theorem |
-| 966 | mathematics | 20 | `math.top.smooth-manifold` | Smooth Manifold |
-| 967 | mathematics | 20 | `math.fnal.normed-space` | Normed Space |
-| 968 | mathematics | 20 | `math.num.floating-point` | Floating-Point Arithmetic |
-| 969 | mathematics | 20 | `math.num.root-finding` | Root-Finding Methods |
-| 970 | mathematics | 20 | `math.opt.dynamic-programming` | Dynamic Programming |
-| 971 | physics | 20 | `phys.astro.dark-matter` | Dark Matter and Dark Energy |
-| 972 | physics | 20 | `phys.astro.black-holes` | Black Holes and Schwarzschild Radius |
-| 973 | physics | 20 | `phys.particle.weak-interaction` | The Weak Interaction |
-| 974 | physics | 20 | `phys.particle.conservation-laws` | Conservation Laws in Particle Interactions |
-| 975 | physics | 20 | `phys.mod.semiconductor-classification` | Conductors, Insulators, and Semiconductors |
-| 976 | english | 20 | `eng.reading.reading-across-genres` | Reading Across Genres |
-| 977 | english | 20 | `eng.writing.supporting-details` | Supporting Details |
-| 978 | english | 20 | `eng.literature.theme-and-message` | Theme and Message |
-| 979 | english | 20 | `eng.literature.foreshadowing-and-suspense` | Foreshadowing and Suspense |
-| 980 | english | 20 | `eng.literature.dramatic-structure` | Dramatic Structure |
-| 981 | english | 20 | `eng.literature.prose-fiction` | Prose Fiction |
-| 982 | english | 20 | `eng.linguistics.what-is-linguistics` | What Is Linguistics? |
-| 983 | english | 20 | `eng.communication.media-literacy` | Media Literacy |
-| 984 | chemistry | 20 | `chem.carb.named-reactions` | Named Carbonyl Reactions |
-| 985 | chemistry | 20 | `chem.bio.proteins` | Proteins |
-| 986 | chemistry | 20 | `chem.bio.lipids` | Lipids |
-| 987 | chemistry | 20 | `chem.poly.condensation` | Condensation Polymerization |
-| 988 | biology | 20 | `bio.sys.metabolic-network-modelling` | Metabolic Network Modelling |
-| 989 | computer_science | 20 | `cs.struct.shortest-path-algorithms` | Shortest Path Algorithms |
-| 990 | computer_science | 20 | `cs.db.indexing-query-optimisation` | Indexing and Query Optimisation |
-| 991 | computer_science | 20 | `cs.db.nosql-intro` | Introduction to NoSQL Databases |
-| 992 | computer_science | 20 | `cs.ds.supervised-learning-models` | Supervised Learning Models |
-| 993 | computer_science | 20 | `cs.ds.unsupervised-learning-models` | Unsupervised Learning Models |
-| 994 | mathematics | 21 | `math.arith.fraction-addition` | Addition and Subtraction of Fractions |
-| 995 | mathematics | 21 | `math.nt.extended-euclidean-algorithm` | Extended Euclidean Algorithm |
-| 996 | mathematics | 21 | `math.nt.continued-fractions` | Continued Fractions |
-| 997 | mathematics | 21 | `math.alg.simplification` | Algebraic Simplification |
-| 998 | mathematics | 21 | `math.alg.polynomial-operations` | Polynomial Operations |
-| 999 | mathematics | 21 | `math.alg.rationalizing-denominators` | Rationalizing the Denominator |
-| 1000 | mathematics | 21 | `math.alg.logarithm-properties` | Logarithm Properties |
-| 1001 | mathematics | 21 | `math.alg.natural-logarithm` | Natural Logarithm |
-| 1002 | mathematics | 21 | `math.geom.frenet-serret` | Frenet-Serret Formulas |
-| 1003 | mathematics | 21 | `math.geom.differential-geometry-surfaces` | Differential Geometry of Surfaces |
-| 1004 | mathematics | 21 | `math.trig.special-angles` | Trigonometric Values at Special Angles |
-| 1005 | mathematics | 21 | `math.trig.reference-angles` | Reference Angles |
-| 1006 | mathematics | 21 | `math.trig.trig-functions` | Trigonometric Functions |
-| 1007 | mathematics | 21 | `math.func.logarithmic-function` | Logarithmic Function |
-| 1008 | mathematics | 21 | `math.calc.quotient-rule` | Quotient Rule |
-| 1009 | mathematics | 21 | `math.calc.derivative-exponential` | Derivative of Exponential Functions |
-| 1010 | mathematics | 21 | `math.calc.implicit-differentiation` | Implicit Differentiation |
-| 1011 | mathematics | 21 | `math.calc.local-extrema` | Local Extrema |
-| 1012 | mathematics | 21 | `math.calc.concavity` | Concavity and Inflection Points |
-| 1013 | mathematics | 21 | `math.calc.ftc-part2` | Fundamental Theorem of Calculus Part 2 |
-| 1014 | mathematics | 21 | `math.calc.surface-area-integral` | Surface Area of Revolution |
-| 1015 | mathematics | 21 | `math.calc.taylor-series` | Taylor Series |
-| 1016 | mathematics | 21 | `math.calc.parametric-calculus` | Calculus of Parametric Curves |
-| 1017 | mathematics | 21 | `math.calc.gradient` | Gradient |
-| 1018 | mathematics | 21 | `math.calc.chain-rule-multivariable` | Multivariable Chain Rule |
-| 1019 | mathematics | 21 | `math.calc.double-integrals` | Double Integrals |
-| 1020 | mathematics | 21 | `math.calc.change-of-variables` | Change of Variables (Jacobian) |
-| 1021 | mathematics | 21 | `math.de.ode` | Ordinary Differential Equation |
-| 1022 | mathematics | 21 | `math.linalg.matrix-inverse` | Matrix Inverse |
-| 1023 | mathematics | 21 | `math.linalg.cofactor-expansion` | Cofactor Expansion |
-| 1024 | mathematics | 21 | `math.linalg.det-properties` | Properties of Determinants |
-| 1025 | mathematics | 21 | `math.linalg.span` | Span |
-| 1026 | mathematics | 21 | `math.linalg.kernel-image` | Kernel and Image of Linear Map |
-| 1027 | mathematics | 21 | `math.linalg.eigenvalues` | Eigenvalues and Eigenvectors |
-| 1028 | mathematics | 21 | `math.linalg.inner-product-space` | Inner Product Space |
-| 1029 | mathematics | 21 | `math.linalg.projection` | Orthogonal Projection |
-| 1030 | mathematics | 21 | `math.linalg.tensor` | Tensor |
-| 1031 | mathematics | 21 | `math.linalg.dual-space` | Dual Space |
-| 1032 | mathematics | 21 | `math.prob.continuous-distributions` | Continuous Distributions |
-| 1033 | mathematics | 21 | `math.prob.expected-value` | Expected Value |
-| 1034 | mathematics | 21 | `math.prob.transition-matrix` | Transition Matrix |
-| 1035 | mathematics | 21 | `math.disc.divide-conquer-recurrence` | Divide-and-Conquer Recurrence |
-| 1036 | mathematics | 21 | `math.disc.ogf` | Ordinary Generating Function |
-| 1037 | mathematics | 21 | `math.disc.egf` | Exponential Generating Function |
-| 1038 | mathematics | 21 | `math.real.taylor-rigorous` | Taylor's Theorem (Rigorous) |
-| 1039 | mathematics | 21 | `math.real.fixed-point-theorem` | Banach Fixed-Point Theorem |
-| 1040 | mathematics | 21 | `math.fnal.completeness` | Completeness |
-| 1041 | mathematics | 21 | `math.num.error-analysis` | Error Analysis |
-| 1042 | mathematics | 21 | `math.num.newtons-method` | Newton's Method |
-| 1043 | physics | 21 | `phys.astro.gravitational-waves` | Gravitational Waves |
-| 1044 | physics | 21 | `phys.particle.electroweak-unification` | Electroweak Unification |
-| 1045 | physics | 21 | `phys.particle.feynman-diagrams` | Feynman Diagrams (Qualitative) |
-| 1046 | physics | 21 | `phys.particle.accelerators-detectors` | Particle Accelerators and Detectors |
-| 1047 | physics | 21 | `phys.mod.intrinsic-semiconductors` | Intrinsic Semiconductors |
-| 1048 | english | 21 | `eng.writing.transitions-and-cohesion` | Transitions and Cohesion |
-| 1049 | english | 21 | `eng.literature.literary-devices-overview` | Overview of Literary Devices |
-| 1050 | english | 21 | `eng.literature.prose-nonfiction` | Prose Nonfiction |
-| 1051 | english | 21 | `eng.linguistics.phonology-intro` | Introduction to Phonology |
-| 1052 | english | 21 | `eng.linguistics.morphology-intro` | Introduction to Morphology |
-| 1053 | chemistry | 21 | `chem.bio.nucleic-acids` | Nucleic Acids |
-| 1054 | chemistry | 21 | `chem.bio.vitamins` | Vitamins and Hormones |
-| 1055 | chemistry | 21 | `chem.bio.enzyme-kinetics` | Enzyme Kinetics |
-| 1056 | chemistry | 21 | `chem.poly.natural` | Natural Polymers |
-| 1057 | chemistry | 21 | `chem.poly.properties` | Polymer Properties |
-| 1058 | chemistry | 21 | `chem.poly.biodegradable` | Biodegradable and Functional Polymers |
-| 1059 | biology | 21 | `bio.sys.synthetic-biology` | Synthetic Biology |
-| 1060 | computer_science | 21 | `cs.struct.minimum-spanning-tree` | Minimum Spanning Trees |
-| 1061 | computer_science | 21 | `cs.ds.neural-networks-intro` | Introduction to Neural Networks |
-| 1062 | mathematics | 22 | `math.nt.bezout-identity` | Bézout's Identity |
-| 1063 | mathematics | 22 | `math.nt.modular-inverse` | Modular Inverse |
-| 1064 | mathematics | 22 | `math.alg.linear-equation-1var` | Linear Equation in One Variable |
-| 1065 | mathematics | 22 | `math.alg.polynomial-division` | Polynomial Division |
-| 1066 | mathematics | 22 | `math.alg.change-of-base` | Change of Base Formula |
-| 1067 | mathematics | 22 | `math.alg.logarithmic-equations` | Logarithmic Equations |
-| 1068 | mathematics | 22 | `math.geom.polar-coordinates` | Polar Coordinates |
-| 1069 | mathematics | 22 | `math.geom.rotation` | Rotation |
-| 1070 | mathematics | 22 | `math.geom.dot-product` | Dot Product |
-| 1071 | mathematics | 22 | `math.trig.amplitude-period-phase` | Amplitude, Period, Phase Shift |
-| 1072 | mathematics | 22 | `math.trig.trig-identities` | Trigonometric Identities |
-| 1073 | mathematics | 22 | `math.trig.inverse-trig` | Inverse Trigonometric Functions |
-| 1074 | mathematics | 22 | `math.trig.hyperbolic-functions` | Hyperbolic Functions |
-| 1075 | mathematics | 22 | `math.calc.derivative-ln` | Derivative of Logarithmic Functions |
-| 1076 | mathematics | 22 | `math.calc.derivative-trig` | Derivatives of Trigonometric Functions |
-| 1077 | mathematics | 22 | `math.calc.related-rates` | Related Rates |
-| 1078 | mathematics | 22 | `math.calc.optimization` | Optimization (Calculus) |
-| 1079 | mathematics | 22 | `math.calc.curve-sketching` | Curve Sketching |
-| 1080 | mathematics | 22 | `math.calc.u-substitution` | Integration by Substitution |
-| 1081 | mathematics | 22 | `math.calc.maclaurin-series` | Maclaurin Series |
-| 1082 | mathematics | 22 | `math.calc.taylor-remainder` | Taylor Remainder and Error Bound |
-| 1083 | mathematics | 22 | `math.calc.directional-derivative` | Directional Derivative |
-| 1084 | mathematics | 22 | `math.calc.multivariable-extrema` | Multivariable Extrema |
-| 1085 | mathematics | 22 | `math.calc.triple-integrals` | Triple Integrals |
-| 1086 | mathematics | 22 | `math.calc.surface-integrals` | Surface Integrals |
-| 1087 | mathematics | 22 | `math.calc.vector-fields` | Vector Fields |
-| 1088 | mathematics | 22 | `math.calc.greens-theorem` | Green's Theorem |
-| 1089 | mathematics | 22 | `math.calc.fourier-series-intro` | Fourier Series (Introduction) |
-| 1090 | mathematics | 22 | `math.de.ode-order` | Order of a Differential Equation |
-| 1091 | mathematics | 22 | `math.de.ode-linearity` | Linearity of Differential Equations |
-| 1092 | mathematics | 22 | `math.de.solution-types` | Types of Solutions |
-| 1093 | mathematics | 22 | `math.de.pde` | Partial Differential Equation |
-| 1094 | mathematics | 22 | `math.linalg.cramer-rule` | Cramer's Rule |
-| 1095 | mathematics | 22 | `math.linalg.linear-independence` | Linear Independence |
-| 1096 | mathematics | 22 | `math.linalg.column-space` | Column Space |
-| 1097 | mathematics | 22 | `math.linalg.characteristic-polynomial` | Characteristic Polynomial |
-| 1098 | mathematics | 22 | `math.linalg.least-squares` | Least Squares |
-| 1099 | mathematics | 22 | `math.prob.normal-distribution` | Normal Distribution |
-| 1100 | mathematics | 22 | `math.prob.linearity-expectation` | Linearity of Expectation |
-| 1101 | mathematics | 22 | `math.prob.law-of-unconscious` | Law of the Unconscious Statistician |
-| 1102 | mathematics | 22 | `math.prob.variance` | Variance |
-| 1103 | mathematics | 22 | `math.prob.moments` | Moments |
-| 1104 | mathematics | 22 | `math.prob.markov-inequality` | Markov's Inequality |
-| 1105 | mathematics | 22 | `math.prob.stationary-distribution` | Stationary Distribution |
-| 1106 | mathematics | 22 | `math.prob.poisson-process` | Poisson Process |
-| 1107 | mathematics | 22 | `math.disc.algorithm-complexity` | Algorithm Complexity |
-| 1108 | mathematics | 22 | `math.real.implicit-function-theorem` | Implicit Function Theorem |
-| 1109 | mathematics | 22 | `math.real.inverse-function-theorem` | Inverse Function Theorem |
-| 1110 | mathematics | 22 | `math.fnal.banach-space` | Banach Space |
-| 1111 | mathematics | 22 | `math.num.numerical-differentiation` | Numerical Differentiation |
-| 1112 | mathematics | 22 | `math.opt.unconstrained-optimization` | Unconstrained Optimization |
-| 1113 | mathematics | 22 | `math.opt.convex-function` | Convex Function |
-| 1114 | mathematics | 22 | `math.graph.algebraic-graph-theory` | Algebraic Graph Theory |
-| 1115 | physics | 22 | `phys.particle.higgs-mechanism` | The Higgs Mechanism |
-| 1116 | physics | 22 | `phys.mod.extrinsic-semiconductors` | Extrinsic Semiconductors: Doping and Carrier Types |
-| 1117 | english | 22 | `eng.writing.narrative-writing` | Narrative Writing |
-| 1118 | english | 22 | `eng.writing.descriptive-writing` | Descriptive Writing |
-| 1119 | english | 22 | `eng.writing.expository-writing` | Expository Writing |
-| 1120 | english | 22 | `eng.writing.persuasive-writing-basics` | Persuasive Writing Basics |
-| 1121 | english | 22 | `eng.literature.metaphor-and-simile` | Metaphor and Simile |
-| 1122 | english | 22 | `eng.literature.irony` | Irony |
-| 1123 | english | 22 | `eng.literature.poetry-basics` | Poetry Basics |
-| 1124 | english | 22 | `eng.linguistics.syntax-theory-intro` | Introduction to Syntactic Theory |
-| 1125 | english | 22 | `eng.linguistics.historical-linguistics-intro` | Introduction to Historical Linguistics |
-| 1126 | mathematics | 23 | `math.nt.linear-diophantine` | Linear Diophantine Equations |
-| 1127 | mathematics | 23 | `math.nt.rsa-basics` | RSA Cryptography (Number-Theoretic Basis) |
-| 1128 | mathematics | 23 | `math.alg.inequality-1var` | Linear Inequality in One Variable |
-| 1129 | mathematics | 23 | `math.alg.absolute-value-equations` | Absolute Value Equations and Inequalities |
-| 1130 | mathematics | 23 | `math.alg.linear-equation-2var` | Linear Equation in Two Variables |
-| 1131 | mathematics | 23 | `math.alg.remainder-theorem` | Remainder Theorem |
-| 1132 | mathematics | 23 | `math.geom.polar-curves` | Polar Curves |
-| 1133 | mathematics | 23 | `math.trig.trig-graphs` | Graphs of Trigonometric Functions |
-| 1134 | mathematics | 23 | `math.trig.pythagorean-identities` | Pythagorean Identities |
-| 1135 | mathematics | 23 | `math.trig.reciprocal-identities` | Reciprocal Identities |
-| 1136 | mathematics | 23 | `math.trig.sum-difference-formulas` | Sum and Difference Formulas |
-| 1137 | mathematics | 23 | `math.trig.trig-equations` | Trigonometric Equations |
-| 1138 | mathematics | 23 | `math.trig.polar-form-complex` | Polar Form of Complex Numbers |
-| 1139 | mathematics | 23 | `math.calc.logarithmic-differentiation` | Logarithmic Differentiation |
-| 1140 | mathematics | 23 | `math.calc.derivative-inverse-trig` | Derivatives of Inverse Trig Functions |
-| 1141 | mathematics | 23 | `math.calc.hyperbolic-derivatives` | Derivatives of Hyperbolic Functions |
-| 1142 | mathematics | 23 | `math.calc.integration-by-parts` | Integration by Parts |
-| 1143 | mathematics | 23 | `math.calc.curl-divergence` | Curl and Divergence |
-| 1144 | mathematics | 23 | `math.de.ivp` | Initial Value Problem |
-| 1145 | mathematics | 23 | `math.de.first-order-ode` | First-Order ODE |
-| 1146 | mathematics | 23 | `math.de.pde-classification` | Classification of Second-Order PDEs |
-| 1147 | mathematics | 23 | `math.linalg.basis` | Basis |
-| 1148 | mathematics | 23 | `math.prob.standard-normal` | Standard Normal Distribution |
-| 1149 | mathematics | 23 | `math.prob.standard-deviation` | Standard Deviation |
-| 1150 | mathematics | 23 | `math.prob.mgf` | Moment Generating Function |
-| 1151 | mathematics | 23 | `math.prob.covariance` | Covariance |
-| 1152 | mathematics | 23 | `math.prob.chebyshev` | Chebyshev's Inequality |
-| 1153 | mathematics | 23 | `math.prob.ergodicity` | Ergodic Theorem (Markov Chains) |
-| 1154 | mathematics | 23 | `math.stats.normal-distribution` | Normal Distribution (Statistics) |
-| 1155 | mathematics | 23 | `math.disc.complexity-classes` | Complexity Classes |
-| 1156 | mathematics | 23 | `math.fnal.hilbert-space` | Hilbert Space |
-| 1157 | mathematics | 23 | `math.fnal.bounded-operator` | Bounded Linear Operator |
-| 1158 | mathematics | 23 | `math.fnal.dense-subspace` | Dense Subspaces and Approximation |
-| 1159 | mathematics | 23 | `math.opt.convex-optimization` | Convex Optimization |
-| 1160 | mathematics | 23 | `math.opt.lagrange-multipliers` | Lagrange Multipliers |
-| 1161 | mathematics | 23 | `math.opt.gradient-methods` | Gradient Descent |
-| 1162 | physics | 23 | `phys.particle.standard-model` | The Standard Model |
-| 1163 | physics | 23 | `phys.mod.pn-junction` | The p-n Junction |
-| 1164 | english | 23 | `eng.writing.the-writing-process` | The Writing Process |
-| 1165 | english | 23 | `eng.writing.creative-writing-forms` | Creative Writing Forms |
-| 1166 | english | 23 | `eng.literature.symbolism` | Symbolism |
-| 1167 | english | 23 | `eng.literature.imagery` | Imagery |
-| 1168 | english | 23 | `eng.literature.poetic-forms` | Poetic Forms |
-| 1169 | english | 23 | `eng.literature.literary-genres-overview` | Overview of Literary Genres |
-| 1170 | english | 23 | `eng.linguistics.semantics-intro` | Introduction to Semantics |
-| 1171 | english | 23 | `eng.linguistics.language-families` | Language Families |
-| 1172 | english | 23 | `eng.linguistics.language-acquisition-intro` | Introduction to Language Acquisition |
-| 1173 | mathematics | 24 | `math.nt.general-diophantine` | Diophantine Equations |
-| 1174 | mathematics | 24 | `math.alg.inequality-2var` | Linear Inequality in Two Variables |
-| 1175 | mathematics | 24 | `math.alg.system-linear-equations` | Systems of Linear Equations |
-| 1176 | mathematics | 24 | `math.alg.factor-theorem` | Factor Theorem |
-| 1177 | mathematics | 24 | `math.trig.double-angle-formulas` | Double Angle Formulas |
-| 1178 | mathematics | 24 | `math.trig.product-to-sum` | Product-to-Sum and Sum-to-Product Formulas |
-| 1179 | mathematics | 24 | `math.trig.de-moivres-theorem` | De Moivre's Theorem |
-| 1180 | mathematics | 24 | `math.trig.eulers-formula` | Euler's Formula |
-| 1181 | mathematics | 24 | `math.calc.reduction-formulas` | Reduction Formulas |
-| 1182 | mathematics | 24 | `math.calc.stokes-theorem` | Stokes' Theorem |
-| 1183 | mathematics | 24 | `math.calc.divergence-theorem` | Divergence Theorem |
-| 1184 | mathematics | 24 | `math.de.existence-uniqueness` | Existence and Uniqueness Theorem |
-| 1185 | mathematics | 24 | `math.de.separable` | Separable Differential Equation |
-| 1186 | mathematics | 24 | `math.de.linear-first-order` | Linear First-Order ODE |
-| 1187 | mathematics | 24 | `math.de.exact-ode` | Exact Differential Equation |
-| 1188 | mathematics | 24 | `math.de.slope-field` | Slope Field |
-| 1189 | mathematics | 24 | `math.de.euler-method` | Euler's Method |
-| 1190 | mathematics | 24 | `math.de.second-order-ode` | Second-Order ODE |
-| 1191 | mathematics | 24 | `math.linalg.dimension` | Dimension |
-| 1192 | mathematics | 24 | `math.linalg.coordinates` | Coordinates |
-| 1193 | mathematics | 24 | `math.linalg.matrix-representation` | Matrix Representation of Linear Map |
-| 1194 | mathematics | 24 | `math.linalg.orthogonal-basis` | Orthogonal and Orthonormal Basis |
-| 1195 | mathematics | 24 | `math.prob.correlation` | Correlation |
-| 1196 | mathematics | 24 | `math.prob.lln` | Law of Large Numbers |
-| 1197 | mathematics | 24 | `math.stats.covariance-matrix` | Covariance Matrix |
-| 1198 | mathematics | 24 | `math.cx.complex-numbers-analysis` | Complex Numbers (Analysis) |
-| 1199 | mathematics | 24 | `math.fnal.dual-space-functional` | Dual Space |
-| 1200 | mathematics | 24 | `math.fnal.open-mapping-theorem` | Open Mapping Theorem |
-| 1201 | mathematics | 24 | `math.fnal.uniform-boundedness` | Uniform Boundedness Principle |
-| 1202 | mathematics | 24 | `math.fnal.riesz-representation` | Riesz Representation Theorem |
-| 1203 | mathematics | 24 | `math.fnal.spectral-theory` | Spectral Theory |
-| 1204 | mathematics | 24 | `math.fnal.fourier-transform` | Fourier Transform (Functional Analysis) |
-| 1205 | mathematics | 24 | `math.opt.duality` | Duality Theory |
-| 1206 | mathematics | 24 | `math.opt.stochastic-gradient` | Stochastic Gradient Descent |
-| 1207 | mathematics | 24 | `math.opt.newton-optimization` | Newton's Method for Optimization |
-| 1208 | physics | 24 | `phys.mod.diode-rectification` | Diode Rectifying Behavior |
-| 1209 | english | 24 | `eng.writing.outlining-and-planning` | Outlining and Planning |
-| 1210 | english | 24 | `eng.literature.meter-and-rhyme` | Meter and Rhyme |
-| 1211 | english | 24 | `eng.literature.short-story-study` | Short Story Study |
-| 1212 | english | 24 | `eng.literature.literary-periods-survey` | Survey of Literary Periods |
-| 1213 | english | 24 | `eng.linguistics.pragmatics-intro` | Introduction to Pragmatics |
-| 1214 | english | 24 | `eng.linguistics.psycholinguistics-intro` | Introduction to Psycholinguistics |
-| 1215 | mathematics | 25 | `math.nt.pythagorean-triples` | Pythagorean Triples |
-| 1216 | mathematics | 25 | `math.nt.pells-equation` | Pell's Equation |
-| 1217 | mathematics | 25 | `math.nt.algebraic-number-theory` | Algebraic Number Theory |
-| 1218 | mathematics | 25 | `math.nt.analytic-number-theory` | Analytic Number Theory |
-| 1219 | mathematics | 25 | `math.alg.substitution-method` | Substitution Method |
-| 1220 | mathematics | 25 | `math.alg.elimination-method` | Elimination Method |
-| 1221 | mathematics | 25 | `math.alg.system-3var` | Systems of 3 Equations in 3 Variables |
-| 1222 | mathematics | 25 | `math.alg.factoring` | Factoring Polynomials |
-| 1223 | mathematics | 25 | `math.trig.half-angle-formulas` | Half Angle Formulas |
-| 1224 | mathematics | 25 | `math.calc.trig-integrals` | Trigonometric Integrals |
-| 1225 | mathematics | 25 | `math.de.bernoulli` | Bernoulli Equation |
-| 1226 | mathematics | 25 | `math.de.homogeneous-ode` | Homogeneous First-Order ODE |
-| 1227 | mathematics | 25 | `math.de.second-order-linear` | Second-Order Linear ODE |
-| 1228 | mathematics | 25 | `math.de.laplace-transform` | Laplace Transform |
-| 1229 | mathematics | 25 | `math.de.systems-ode` | Systems of ODEs |
-| 1230 | mathematics | 25 | `math.de.bvp` | Boundary Value Problem |
-| 1231 | mathematics | 25 | `math.linalg.linear-system` | System of Linear Equations |
-| 1232 | mathematics | 25 | `math.linalg.change-of-basis` | Change of Basis |
-| 1233 | mathematics | 25 | `math.linalg.spectral-theorem` | Spectral Theorem |
-| 1234 | mathematics | 25 | `math.linalg.gram-schmidt` | Gram-Schmidt Process |
-| 1235 | mathematics | 25 | `math.prob.clt` | Central Limit Theorem |
-| 1236 | mathematics | 25 | `math.stats.correlation` | Sample Correlation |
-| 1237 | mathematics | 25 | `math.cx.complex-function` | Complex-Valued Function |
-| 1238 | mathematics | 25 | `math.fnal.hahn-banach` | Hahn-Banach Theorem |
-| 1239 | mathematics | 25 | `math.fnal.closed-graph-theorem` | Closed Graph Theorem |
-| 1240 | mathematics | 25 | `math.fnal.compact-operator-spectrum` | Compact Operators |
-| 1241 | mathematics | 25 | `math.fnal.distributions` | Distributions |
-| 1242 | mathematics | 25 | `math.num.euler-method` | Euler's Method (Numerical ODE) |
-| 1243 | mathematics | 25 | `math.opt.kkt` | KKT Conditions |
-| 1244 | english | 25 | `eng.writing.drafting` | Drafting |
-| 1245 | english | 25 | `eng.literature.novel-study` | Novel Study |
-| 1246 | english | 25 | `eng.literature.literary-criticism-intro` | Introduction to Literary Criticism |
-| 1247 | english | 25 | `eng.linguistics.discourse-analysis-intro` | Introduction to Discourse Analysis |
-| 1248 | english | 25 | `eng.linguistics.sociolinguistics-intro` | Introduction to Sociolinguistics |
-| 1249 | mathematics | 26 | `math.nt.algebraic-integers` | Algebraic Integers |
-| 1250 | mathematics | 26 | `math.alg.factoring-gcf` | Factoring out the GCF |
-| 1251 | mathematics | 26 | `math.alg.factoring-special` | Special Factoring Patterns |
-| 1252 | mathematics | 26 | `math.alg.rational-expressions` | Rational Expressions |
-| 1253 | mathematics | 26 | `math.calc.trig-substitution` | Trigonometric Substitution |
-| 1254 | mathematics | 26 | `math.de.second-order-homogeneous` | Homogeneous Second-Order Linear ODE |
-| 1255 | mathematics | 26 | `math.de.laplace-properties` | Laplace Transform Properties |
-| 1256 | mathematics | 26 | `math.de.convolution-theorem` | Convolution Theorem (Laplace) |
-| 1257 | mathematics | 26 | `math.de.phase-plane` | Phase Plane Analysis |
-| 1258 | mathematics | 26 | `math.de.series-solution` | Series Solution of ODEs |
-| 1259 | mathematics | 26 | `math.de.sturm-liouville` | Sturm-Liouville Theory |
-| 1260 | mathematics | 26 | `math.de.fourier-series` | Fourier Series |
-| 1261 | mathematics | 26 | `math.linalg.augmented-matrix` | Augmented Matrix |
-| 1262 | mathematics | 26 | `math.linalg.positive-definite` | Positive Definite Matrix |
-| 1263 | mathematics | 26 | `math.linalg.qr-factorization` | QR Factorization |
-| 1264 | mathematics | 26 | `math.stats.sampling-distribution` | Sampling Distribution |
-| 1265 | mathematics | 26 | `math.stats.linear-regression` | Simple Linear Regression |
-| 1266 | mathematics | 26 | `math.stats.normal-approximation` | Normal Approximation |
-| 1267 | mathematics | 26 | `math.cx.cauchy-riemann` | Cauchy-Riemann Equations |
-| 1268 | mathematics | 26 | `math.num.interpolation` | Polynomial Interpolation |
-| 1269 | mathematics | 26 | `math.num.iterative-linear` | Iterative Methods for Linear Systems |
-| 1270 | mathematics | 26 | `math.num.runge-kutta` | Runge-Kutta Methods |
-| 1271 | mathematics | 26 | `math.opt.linear-programming` | Linear Programming |
-| 1272 | english | 26 | `eng.writing.revising-for-content` | Revising for Content |
-| 1273 | english | 26 | `eng.literature.comparative-literature-intro` | Introduction to Comparative Literature |
-| 1274 | english | 26 | `eng.linguistics.applied-linguistics-intro` | Introduction to Applied Linguistics |
-| 1275 | english | 26 | `eng.linguistics.dialectology` | Dialectology |
-| 1276 | english | 26 | `eng.linguistics.corpus-linguistics-intro` | Introduction to Corpus Linguistics |
-| 1277 | english | 26 | `eng.communication.discourse-markers-advanced` | Advanced Discourse Markers |
-| 1278 | english | 26 | `eng.communication.cross-cultural-communication` | Cross-Cultural Communication |
-| 1279 | mathematics | 27 | `math.nt.number-fields` | Number Fields |
-| 1280 | mathematics | 27 | `math.alg.factoring-trinomials` | Factoring Trinomials |
-| 1281 | mathematics | 27 | `math.alg.rational-expressions-addition` | Addition of Rational Expressions |
-| 1282 | mathematics | 27 | `math.alg.rational-expressions-multiplication` | Multiplication of Rational Expressions |
-| 1283 | mathematics | 27 | `math.alg.rational-equations` | Rational Equations |
-| 1284 | mathematics | 27 | `math.de.wronskian` | Wronskian |
-| 1285 | mathematics | 27 | `math.de.stability-analysis` | Stability Analysis |
-| 1286 | mathematics | 27 | `math.de.frobenius-method` | Frobenius Method |
-| 1287 | mathematics | 27 | `math.de.legendre-equation` | Legendre's Equation |
-| 1288 | mathematics | 27 | `math.de.eigenfunction-expansion` | Eigenfunction Expansion |
-| 1289 | mathematics | 27 | `math.de.fourier-convergence` | Convergence of Fourier Series |
-| 1290 | mathematics | 27 | `math.de.fourier-sine-cosine` | Fourier Sine and Cosine Series |
-| 1291 | mathematics | 27 | `math.de.fourier-transform` | Fourier Transform |
-| 1292 | mathematics | 27 | `math.de.separation-of-variables-pde` | Separation of Variables (PDE) |
-| 1293 | mathematics | 27 | `math.linalg.row-reduction` | Row Reduction |
-| 1294 | mathematics | 27 | `math.linalg.svd` | Singular Value Decomposition |
-| 1295 | mathematics | 27 | `math.stats.standard-error` | Standard Error |
-| 1296 | mathematics | 27 | `math.stats.estimator` | Estimator |
-| 1297 | mathematics | 27 | `math.stats.confidence-interval` | Confidence Interval |
-| 1298 | mathematics | 27 | `math.stats.hypothesis-testing` | Hypothesis Testing |
-| 1299 | mathematics | 27 | `math.stats.multiple-regression` | Multiple Linear Regression |
-| 1300 | mathematics | 27 | `math.cx.analytic-functions` | Analytic (Holomorphic) Functions |
-| 1301 | mathematics | 27 | `math.num.splines` | Spline Interpolation |
-| 1302 | mathematics | 27 | `math.num.numerical-integration` | Numerical Integration |
-| 1303 | mathematics | 27 | `math.num.qr-algorithm` | QR Algorithm |
-| 1304 | mathematics | 27 | `math.num.stiff-ode` | Stiff ODEs and Implicit Methods |
-| 1305 | mathematics | 27 | `math.opt.quadratic-programming` | Quadratic Programming |
-| 1306 | mathematics | 27 | `math.opt.semidefinite-programming` | Semidefinite Programming |
-| 1307 | mathematics | 27 | `math.opt.integer-programming` | Integer Programming |
-| 1308 | english | 27 | `eng.writing.editing-and-proofreading` | Editing and Proofreading |
-| 1309 | english | 27 | `eng.linguistics.bilingualism-and-multilingualism` | Bilingualism and Multilingualism |
-| 1310 | english | 27 | `eng.linguistics.computational-linguistics-intro` | Introduction to Computational Linguistics |
-| 1311 | mathematics | 28 | `math.alg.quadratic-equation` | Quadratic Equation |
-| 1312 | mathematics | 28 | `math.de.variation-of-parameters` | Variation of Parameters |
-| 1313 | mathematics | 28 | `math.de.bessel-equation` | Bessel's Equation |
-| 1314 | mathematics | 28 | `math.de.heat-equation` | Heat Equation |
-| 1315 | mathematics | 28 | `math.de.wave-equation` | Wave Equation |
-| 1316 | mathematics | 28 | `math.de.laplace-equation` | Laplace's Equation |
-| 1317 | mathematics | 28 | `math.de.nonlinear-ode` | Nonlinear ODE |
-| 1318 | mathematics | 28 | `math.linalg.row-echelon` | Row Echelon Form |
-| 1319 | mathematics | 28 | `math.linalg.lu-factorization` | LU Factorization |
-| 1320 | mathematics | 28 | `math.linalg.singular-values` | Singular Values |
-| 1321 | mathematics | 28 | `math.linalg.pseudoinverse` | Moore-Penrose Pseudoinverse |
-| 1322 | mathematics | 28 | `math.prob.characteristic-function` | Characteristic Function |
-| 1323 | mathematics | 28 | `math.stats.bias-variance` | Bias-Variance Tradeoff |
-| 1324 | mathematics | 28 | `math.stats.consistency` | Consistency of Estimators |
-| 1325 | mathematics | 28 | `math.stats.mle` | Maximum Likelihood Estimation |
-| 1326 | mathematics | 28 | `math.stats.method-of-moments` | Method of Moments |
-| 1327 | mathematics | 28 | `math.stats.ci-mean` | Confidence Interval for a Mean |
-| 1328 | mathematics | 28 | `math.stats.ci-proportion` | Confidence Interval for a Proportion |
-| 1329 | mathematics | 28 | `math.stats.test-statistic` | Test Statistic |
-| 1330 | mathematics | 28 | `math.stats.type-errors` | Type I and Type II Errors |
-| 1331 | mathematics | 28 | `math.stats.z-test` | z-Test |
-| 1332 | mathematics | 28 | `math.stats.t-test` | t-Test |
-| 1333 | mathematics | 28 | `math.stats.chi-squared-test` | Chi-Squared Test |
-| 1334 | mathematics | 28 | `math.stats.anova` | Analysis of Variance |
-| 1335 | mathematics | 28 | `math.stats.nonparametric` | Nonparametric Tests |
-| 1336 | mathematics | 28 | `math.stats.sufficient-statistic` | Sufficient Statistic |
-| 1337 | mathematics | 28 | `math.cx.power-series-cx` | Power Series in ℂ |
-| 1338 | mathematics | 28 | `math.cx.complex-integration` | Complex Line Integral |
-| 1339 | mathematics | 28 | `math.cx.singularities` | Singularities |
-| 1340 | mathematics | 28 | `math.cx.conformal-mapping` | Conformal Mapping |
-| 1341 | mathematics | 28 | `math.num.svd` | SVD (Numerical) |
-| 1342 | mathematics | 28 | `math.opt.pca` | Principal Component Analysis |
-| 1343 | english | 28 | `eng.writing.essay-structure` | Essay Structure |
-| 1344 | english | 28 | `eng.linguistics.translation-studies-intro` | Introduction to Translation Studies |
-| 1345 | mathematics | 29 | `math.nt.prime-number-theorem` | Prime Number Theorem |
-| 1346 | mathematics | 29 | `math.alg.completing-the-square` | Completing the Square |
-| 1347 | mathematics | 29 | `math.alg.polynomial-roots` | Polynomial Roots (Real and Complex) |
-| 1348 | mathematics | 29 | `math.geom.conic-sections` | Conic Sections |
-| 1349 | mathematics | 29 | `math.func.quadratic-function` | Quadratic Function |
-| 1350 | mathematics | 29 | `math.de.harmonic-functions` | Harmonic Functions |
-| 1351 | mathematics | 29 | `math.de.poisson-equation` | Poisson's Equation |
-| 1352 | mathematics | 29 | `math.de.bifurcation` | Bifurcation Theory |
-| 1353 | mathematics | 29 | `math.linalg.rank` | Rank |
-| 1354 | mathematics | 29 | `math.linalg.null-space` | Null Space |
-| 1355 | mathematics | 29 | `math.linalg.cholesky` | Cholesky Decomposition |
-| 1356 | mathematics | 29 | `math.stats.p-value` | p-value |
-| 1357 | mathematics | 29 | `math.stats.power` | Power of a Test |
-| 1358 | mathematics | 29 | `math.stats.two-way-anova` | Two-Way ANOVA |
-| 1359 | mathematics | 29 | `math.stats.bayesian-inference` | Bayesian Statistics |
-| 1360 | mathematics | 29 | `math.stats.experimental-design` | Experimental Design |
-| 1361 | mathematics | 29 | `math.stats.rao-blackwell` | Rao-Blackwell Theorem |
-| 1362 | mathematics | 29 | `math.cx.harmonic-functions` | Harmonic Functions (Complex Analysis) |
-| 1363 | mathematics | 29 | `math.cx.cauchy-theorem` | Cauchy's Theorem |
-| 1364 | mathematics | 29 | `math.cx.identity-theorem` | Identity Theorem |
-| 1365 | mathematics | 29 | `math.cx.poles` | Poles and Meromorphic Functions |
-| 1366 | mathematics | 29 | `math.cx.essential-singularity` | Essential Singularity |
-| 1367 | mathematics | 29 | `math.cx.laurent-series` | Laurent Series |
-| 1368 | mathematics | 29 | `math.cx.mobius-transformation` | Möbius Transformation |
-| 1369 | mathematics | 29 | `math.cx.riemann-mapping` | Riemann Mapping Theorem |
-| 1370 | mathematics | 29 | `math.fnal.special-functions` | Special Functions |
-| 1371 | mathematics | 29 | `math.num.lu-factorization` | LU Factorization (Numerical) |
-| 1372 | english | 29 | `eng.writing.thesis-statements` | Thesis Statements |
-| 1373 | english | 29 | `eng.composition.audience-and-purpose` | Audience and Purpose |
-| 1374 | mathematics | 30 | `math.alg.quadratic-formula` | Quadratic Formula |
-| 1375 | mathematics | 30 | `math.alg.rational-root-theorem` | Rational Root Theorem |
-| 1376 | mathematics | 30 | `math.alg.fundamental-theorem-algebra` | Fundamental Theorem of Algebra |
-| 1377 | mathematics | 30 | `math.alg.polynomial-inequality` | Polynomial Inequality |
-| 1378 | mathematics | 30 | `math.alg.vietas-formulas` | Vieta's Formulas |
-| 1379 | mathematics | 30 | `math.geom.parabola` | Parabola |
-| 1380 | mathematics | 30 | `math.geom.ellipse` | Ellipse |
-| 1381 | mathematics | 30 | `math.geom.hyperbola` | Hyperbola |
-| 1382 | mathematics | 30 | `math.func.vertex-form` | Vertex Form of a Quadratic |
-| 1383 | mathematics | 30 | `math.func.polynomial-function` | Polynomial Function |
-| 1384 | mathematics | 30 | `math.calc.partial-fractions` | Partial Fraction Decomposition |
-| 1385 | mathematics | 30 | `math.de.higher-order-ode` | Higher-Order Linear ODE |
-| 1386 | mathematics | 30 | `math.de.greens-function` | Green's Function |
-| 1387 | mathematics | 30 | `math.de.chaos` | Chaotic Dynamics |
-| 1388 | mathematics | 30 | `math.linalg.rank-nullity` | Rank-Nullity Theorem |
-| 1389 | mathematics | 30 | `math.linalg.eigenspace` | Eigenspace |
-| 1390 | mathematics | 30 | `math.stats.conjugate-prior` | Conjugate Prior |
-| 1391 | mathematics | 30 | `math.stats.credible-interval` | Credible Interval |
-| 1392 | mathematics | 30 | `math.disc.linear-recurrence` | Linear Recurrence |
-| 1393 | mathematics | 30 | `math.cx.cauchy-goursat` | Cauchy-Goursat Theorem |
-| 1394 | mathematics | 30 | `math.cx.cauchy-integral-formula` | Cauchy Integral Formula |
-| 1395 | mathematics | 30 | `math.cx.analytic-continuation` | Analytic Continuation |
-| 1396 | mathematics | 30 | `math.cx.residue` | Residue |
-| 1397 | mathematics | 30 | `math.num.cholesky` | Cholesky Factorization (Numerical) |
-| 1398 | english | 30 | `eng.writing.citations-and-referencing` | Citations and Referencing |
-| 1399 | english | 30 | `eng.composition.claim-evidence-reasoning` | Claim, Evidence, and Reasoning |
-| 1400 | english | 30 | `eng.composition.rhetorical-appeals` | Rhetorical Appeals: Ethos, Pathos, Logos |
-| 1401 | mathematics | 31 | `math.alg.discriminant` | Discriminant |
-| 1402 | mathematics | 31 | `math.alg.complex-polynomial-roots` | Complex Roots of Polynomials |
-| 1403 | mathematics | 31 | `math.alg.rational-inequality` | Rational Inequality |
-| 1404 | mathematics | 31 | `math.func.end-behavior` | End Behavior |
-| 1405 | mathematics | 31 | `math.func.rational-root` | Real Roots of Polynomials |
-| 1406 | mathematics | 31 | `math.func.rational-function` | Rational Function |
-| 1407 | mathematics | 31 | `math.de.char-equation` | Characteristic Equation |
-| 1408 | mathematics | 31 | `math.de.inverse-laplace` | Inverse Laplace Transform |
-| 1409 | mathematics | 31 | `math.linalg.diagonalization` | Diagonalization |
-| 1410 | mathematics | 31 | `math.cx.higher-derivatives` | Derivatives of Holomorphic Functions |
-| 1411 | mathematics | 31 | `math.cx.morera-theorem` | Morera's Theorem |
-| 1412 | mathematics | 31 | `math.cx.residue-theorem` | Residue Theorem |
-| 1413 | mathematics | 31 | `math.cx.maximum-modulus` | Maximum Modulus Principle |
-| 1414 | mathematics | 31 | `math.cx.riemann-surface` | Riemann Surface |
-| 1415 | mathematics | 31 | `math.cx.riemann-zeta` | Riemann Zeta Function |
-| 1416 | english | 31 | `eng.composition.argumentation-basics` | Argumentation Basics |
-| 1417 | english | 31 | `eng.composition.rhetorical-devices` | Rhetorical Devices |
-| 1418 | mathematics | 32 | `math.nt.riemann-hypothesis` | Riemann Hypothesis |
-| 1419 | mathematics | 32 | `math.func.vertical-asymptote` | Vertical Asymptote |
-| 1420 | mathematics | 32 | `math.func.horizontal-asymptote` | Horizontal Asymptote |
-| 1421 | mathematics | 32 | `math.de.undetermined-coefficients` | Method of Undetermined Coefficients |
-| 1422 | mathematics | 32 | `math.de.laplace-ode` | Solving ODEs with Laplace Transform |
-| 1423 | mathematics | 32 | `math.de.systems-matrix-method` | Matrix Method for Linear Systems |
-| 1424 | mathematics | 32 | `math.linalg.matrix-exponential` | Matrix Exponential |
-| 1425 | mathematics | 32 | `math.linalg.jordan-form` | Jordan Normal Form |
-| 1426 | mathematics | 32 | `math.cx.liouville-theorem` | Liouville's Theorem |
-| 1427 | mathematics | 32 | `math.cx.real-integral-residues` | Evaluating Real Integrals via Residues |
-| 1428 | mathematics | 32 | `math.cx.argument-principle` | Argument Principle |
-| 1429 | english | 32 | `eng.composition.counterargument-and-rebuttal` | Counterargument and Rebuttal |
-| 1430 | english | 32 | `eng.composition.logical-fallacies` | Logical Fallacies |
-| 1431 | english | 32 | `eng.composition.figurative-language-in-composition` | Figurative Language in Composition |
-| 1432 | english | 32 | `eng.composition.rhetorical-analysis` | Rhetorical Analysis |
-| 1433 | mathematics | 33 | `math.de.harmonic-oscillator` | Harmonic Oscillator |
-| 1434 | mathematics | 33 | `math.cx.fundamental-theorem-algebra` | Fundamental Theorem of Algebra (Complex Analysis) |
-| 1435 | mathematics | 33 | `math.cx.rouche-theorem` | Rouché's Theorem |
-| 1436 | english | 33 | `eng.composition.style-voice-and-tone` | Style, Voice, and Tone |
-| 1437 | english | 33 | `eng.composition.persuasive-techniques` | Advanced Persuasive Techniques |
-| 1438 | english | 33 | `eng.composition.comparative-essay-writing` | Comparative Essay Writing |
-| 1439 | english | 33 | `eng.composition.research-paper-writing` | Research Paper Writing |
-| 1440 | mathematics | 34 | `math.de.resonance` | Resonance |
-| 1441 | english | 34 | `eng.composition.academic-writing-conventions` | Academic Writing Conventions |
-| 1442 | english | 35 | `eng.composition.plagiarism-and-citation-ethics` | Plagiarism and Citation Ethics |
-| 1443 | english | 35 | `eng.composition.editing-for-style` | Editing for Style |
-| 1444 | english | 35 | `eng.communication.academic-writing-advanced` | Advanced Academic Writing |
-| 1445 | english | 36 | `eng.communication.research-methodology-writing` | Writing Research Methodology |
-| 1446 | english | 36 | `eng.communication.technical-writing` | Technical Writing |
-| 1447 | english | 36 | `eng.communication.business-writing` | Business Writing |
-| 1448 | english | 37 | `eng.communication.professional-communication` | Professional Communication |
-| 1449 | english | 37 | `eng.communication.presentation-design` | Presentation Design |
-| 1450 | english | 37 | `eng.communication.editing-for-publication` | Editing for Publication |
-| 1451 | english | 38 | `eng.communication.negotiation-language` | Negotiation Language |
+| 709 | english | 17 | `eng.grammar.compound-sentences` | Compound Sentences |
+| 710 | english | 17 | `eng.grammar.comma-usage` | Comma Usage |
+| 711 | english | 17 | `eng.grammar.sentence-fragments` | Sentence Fragments |
+| 712 | english | 17 | `eng.reading.close-reading` | Close Reading |
+| 713 | english | 17 | `eng.writing.sentence-writing` | Sentence Writing |
+| 714 | chemistry | 17 | `chem.sol.osmosis` | Osmosis and Osmotic Pressure |
+| 715 | chemistry | 17 | `chem.hyd.alkynes` | Alkynes |
+| 716 | chemistry | 17 | `chem.alc.phenols` | Phenols |
+| 717 | chemistry | 17 | `chem.alc.ethers` | Ethers |
+| 718 | chemistry | 17 | `chem.alc.diols` | Diols and Polyols |
+| 719 | chemistry | 17 | `chem.carb.aldehydes` | Aldehydes |
+| 720 | chemistry | 17 | `chem.nitro.amines` | Amines |
+| 721 | chemistry | 17 | `chem.poly.addition` | Addition Polymerization |
+| 722 | biology | 17 | `bio.biotech.crispr-genome-editing` | CRISPR and Genome Editing |
+| 723 | biology | 17 | `bio.bioinfo.bioinformatics-intro` | Introduction to Bioinformatics |
+| 724 | computer_science | 17 | `cs.struct.doubly-circular-lists` | Doubly and Circular Linked Lists |
+| 725 | computer_science | 17 | `cs.struct.trees` | Trees |
+| 726 | computer_science | 17 | `cs.oop.class-static-methods` | Class Methods and Static Methods |
+| 727 | computer_science | 17 | `cs.db.sql-queries-functions` | SQL — Queries and Aggregate Functions |
+| 728 | computer_science | 17 | `cs.ds.pandas-dataframes` | Pandas for Data Analysis |
+| 729 | mathematics | 18 | `math.arith.decimal-operations` | Decimal Operations |
+| 730 | mathematics | 18 | `math.arith.terminating-decimals` | Terminating Decimals |
+| 731 | mathematics | 18 | `math.arith.repeating-decimals` | Repeating Decimals |
+| 732 | mathematics | 18 | `math.arith.percentages` | Percentages |
+| 733 | mathematics | 18 | `math.arith.proportion` | Proportion |
+| 734 | mathematics | 18 | `math.arith.unit-rate` | Unit Rate |
+| 735 | mathematics | 18 | `math.arith.rounding` | Rounding |
+| 736 | mathematics | 18 | `math.arith.irrational-roots` | Irrational Square Roots |
+| 737 | mathematics | 18 | `math.arith.scientific-notation` | Scientific Notation |
+| 738 | mathematics | 18 | `math.nt.composite-number` | Composite Number |
+| 739 | mathematics | 18 | `math.nt.sieve-of-eratosthenes` | Sieve of Eratosthenes |
+| 740 | mathematics | 18 | `math.nt.prime-factorization` | Prime Factorization |
+| 741 | mathematics | 18 | `math.nt.congruence` | Congruence |
+| 742 | mathematics | 18 | `math.nt.fermats-little-theorem` | Fermat's Little Theorem |
+| 743 | mathematics | 18 | `math.nt.prime-distribution` | Distribution of Primes |
+| 744 | mathematics | 18 | `math.alg.term` | Term |
+| 745 | mathematics | 18 | `math.alg.equation` | Equation |
+| 746 | mathematics | 18 | `math.alg.polynomial` | Polynomial |
+| 747 | mathematics | 18 | `math.alg.exponent-rules` | Exponent Rules (Algebraic) |
+| 748 | mathematics | 18 | `math.geom.pythagorean-converse` | Converse of the Pythagorean Theorem |
+| 749 | mathematics | 18 | `math.geom.similar-triangles` | Similar Triangles |
+| 750 | mathematics | 18 | `math.geom.distance-formula` | Distance Formula |
+| 751 | mathematics | 18 | `math.geom.dilation` | Dilation |
+| 752 | mathematics | 18 | `math.geom.cross-product` | Cross Product |
+| 753 | mathematics | 18 | `math.geom.differential-geometry-curves` | Curves in Space |
+| 754 | mathematics | 18 | `math.seq.divergent-sequence` | Divergent Sequence |
+| 755 | mathematics | 18 | `math.seq.series-convergence` | Convergence of Series |
+| 756 | mathematics | 18 | `math.calc.squeeze-theorem` | Squeeze Theorem |
+| 757 | mathematics | 18 | `math.calc.continuity-types` | Types of Discontinuity |
+| 758 | mathematics | 18 | `math.calc.ivt` | Intermediate Value Theorem |
+| 759 | mathematics | 18 | `math.calc.derivative-definition` | Derivative (Definition) |
+| 760 | mathematics | 18 | `math.calc.definite-integral` | Definite Integral |
+| 761 | mathematics | 18 | `math.calc.line-integrals` | Line Integrals |
+| 762 | mathematics | 18 | `math.linalg.vector-addition` | Vector Addition |
+| 763 | mathematics | 18 | `math.linalg.scalar-multiplication` | Scalar Multiplication |
+| 764 | mathematics | 18 | `math.linalg.dot-product` | Dot Product |
+| 765 | mathematics | 18 | `math.linalg.matrix` | Matrix |
+| 766 | mathematics | 18 | `math.prob.combinatorial-probability` | Combinatorial Probability |
+| 767 | mathematics | 18 | `math.stats.descriptive-statistics` | Descriptive Statistics |
+| 768 | mathematics | 18 | `math.stats.sampling` | Sampling Methods |
+| 769 | mathematics | 18 | `math.disc.binomial-theorem` | Binomial Theorem |
+| 770 | mathematics | 18 | `math.disc.combinatorics` | Combinatorics |
+| 771 | mathematics | 18 | `math.disc.stars-bars` | Stars and Bars |
+| 772 | mathematics | 18 | `math.disc.inclusion-exclusion` | Inclusion-Exclusion Principle |
+| 773 | mathematics | 18 | `math.abst.sylow-theorems` | Sylow Theorems |
+| 774 | mathematics | 18 | `math.abst.finite-field` | Finite Field |
+| 775 | mathematics | 18 | `math.abst.galois-correspondence` | Fundamental Theorem of Galois Theory |
+| 776 | mathematics | 18 | `math.real.absolute-convergence` | Absolute Convergence |
+| 777 | mathematics | 18 | `math.real.completeness-metric` | Completeness of Metric Spaces |
+| 778 | mathematics | 18 | `math.real.continuity-rigorous` | Continuity (ε-δ) |
+| 779 | mathematics | 18 | `math.opt.convex-set` | Convex Set |
+| 780 | mathematics | 18 | `math.graph.shortest-path` | Shortest Path Algorithms |
+| 781 | physics | 18 | `phys.qm.variational-method` | Variational Method and Variational Principle |
+| 782 | physics | 18 | `phys.qm.identical-particles` | Identical Particles and the Symmetrization Postulate |
+| 783 | physics | 18 | `phys.qm.scattering-theory-born-approximation` | Scattering Theory and the Born Approximation |
+| 784 | physics | 18 | `phys.stat.fermi-dirac` | Fermi-Dirac Statistics |
+| 785 | physics | 18 | `phys.astro.stellar-structure` | Stellar Structure and the Main Sequence |
+| 786 | physics | 18 | `phys.particle.antimatter` | Antimatter and Antiparticles |
+| 787 | physics | 18 | `phys.particle.quarks` | Quarks |
+| 788 | physics | 18 | `phys.particle.leptons` | Leptons |
+| 789 | english | 18 | `eng.grammar.complex-sentences` | Complex Sentences |
+| 790 | english | 18 | `eng.grammar.parallel-structure` | Parallel Structure |
+| 791 | english | 18 | `eng.grammar.apostrophes` | Apostrophes |
+| 792 | english | 18 | `eng.grammar.quotation-marks` | Quotation Marks |
+| 793 | english | 18 | `eng.grammar.colons-semicolons-dashes` | Colons, Semicolons, and Dashes |
+| 794 | english | 18 | `eng.grammar.run-on-sentences-and-comma-splices` | Run-On Sentences and Comma Splices |
+| 795 | english | 18 | `eng.reading.critical-reading` | Critical Reading |
+| 796 | english | 18 | `eng.writing.paragraph-structure` | Paragraph Structure |
+| 797 | english | 18 | `eng.literature.narrative-elements` | Narrative Elements |
+| 798 | chemistry | 18 | `chem.alc.epoxides` | Epoxides |
+| 799 | chemistry | 18 | `chem.alc.protection` | Protecting Group Strategy |
+| 800 | chemistry | 18 | `chem.carb.ketones` | Ketones |
+| 801 | chemistry | 18 | `chem.carb.carboxylic` | Carboxylic Acids |
+| 802 | chemistry | 18 | `chem.nitro.diazonium` | Diazonium Salts |
+| 803 | chemistry | 18 | `chem.nitro.heterocycles` | Nitrogen Heterocycles |
+| 804 | chemistry | 18 | `chem.bio.carbohydrates` | Carbohydrates |
+| 805 | biology | 18 | `bio.bioinfo.sequence-alignment` | Sequence Alignment |
+| 806 | biology | 18 | `bio.sys.systems-biology-intro` | Introduction to Systems Biology |
+| 807 | computer_science | 18 | `cs.struct.binary-search-trees` | Binary Search Trees |
+| 808 | computer_science | 18 | `cs.struct.heaps` | Heaps |
+| 809 | computer_science | 18 | `cs.struct.graphs-representation` | Graphs and Their Representations |
+| 810 | computer_science | 18 | `cs.oop.design-patterns-intro` | Introduction to Design Patterns |
+| 811 | computer_science | 18 | `cs.db.sql-joins-subqueries` | SQL — Joins and Subqueries |
+| 812 | computer_science | 18 | `cs.ds.data-visualisation` | Data Visualisation with Matplotlib |
+| 813 | mathematics | 19 | `math.arith.percentage-calculations` | Percentage Calculations |
+| 814 | mathematics | 19 | `math.arith.direct-variation` | Direct Variation |
+| 815 | mathematics | 19 | `math.arith.inverse-variation` | Inverse Variation |
+| 816 | mathematics | 19 | `math.arith.estimation` | Estimation |
+| 817 | mathematics | 19 | `math.arith.significant-figures` | Significant Figures |
+| 818 | mathematics | 19 | `math.nt.fundamental-theorem-arithmetic` | Fundamental Theorem of Arithmetic |
+| 819 | mathematics | 19 | `math.nt.gcd` | Greatest Common Divisor |
+| 820 | mathematics | 19 | `math.nt.residue-classes` | Residue Classes |
+| 821 | mathematics | 19 | `math.nt.eulers-theorem` | Euler's Theorem |
+| 822 | mathematics | 19 | `math.nt.eulers-totient` | Euler's Totient Function |
+| 823 | mathematics | 19 | `math.nt.primality-testing` | Primality Testing |
+| 824 | mathematics | 19 | `math.alg.coefficient` | Coefficient |
+| 825 | mathematics | 19 | `math.alg.solution-set` | Solution Set |
+| 826 | mathematics | 19 | `math.alg.degree` | Degree of a Polynomial |
+| 827 | mathematics | 19 | `math.alg.zero-exponent` | Zero Exponent |
+| 828 | mathematics | 19 | `math.alg.negative-exponent` | Negative Exponent |
+| 829 | mathematics | 19 | `math.alg.radicals` | Radical Expressions |
+| 830 | mathematics | 19 | `math.alg.exponential-function` | Exponential Function |
+| 831 | mathematics | 19 | `math.alg.inequality` | Inequality |
+| 832 | mathematics | 19 | `math.alg.binomial-theorem` | Binomial Theorem |
+| 833 | mathematics | 19 | `math.trig.right-triangle-trig` | Right-Triangle Trigonometry |
+| 834 | mathematics | 19 | `math.seq.divergence-test` | Divergence Test (nth Term Test) |
+| 835 | mathematics | 19 | `math.seq.comparison-test` | Comparison Test |
+| 836 | mathematics | 19 | `math.seq.ratio-test` | Ratio Test |
+| 837 | mathematics | 19 | `math.seq.root-test` | Root Test |
+| 838 | mathematics | 19 | `math.seq.alternating-series` | Alternating Series |
+| 839 | mathematics | 19 | `math.seq.harmonic-series` | Harmonic Series |
+| 840 | mathematics | 19 | `math.calc.differentiability` | Differentiability |
+| 841 | mathematics | 19 | `math.calc.derivative-rules` | Basic Differentiation Rules |
+| 842 | mathematics | 19 | `math.calc.lhopitals-rule` | L'Hôpital's Rule |
+| 843 | mathematics | 19 | `math.calc.mean-value-theorem` | Mean Value Theorem |
+| 844 | mathematics | 19 | `math.calc.linearization` | Linearization and Differentials |
+| 845 | mathematics | 19 | `math.calc.ftc-part1` | Fundamental Theorem of Calculus Part 1 |
+| 846 | mathematics | 19 | `math.calc.improper-integrals` | Improper Integrals |
+| 847 | mathematics | 19 | `math.calc.integral-area` | Area by Integration |
+| 848 | mathematics | 19 | `math.calc.power-series` | Power Series |
+| 849 | mathematics | 19 | `math.calc.multivariable-intro` | Introduction to Multivariable Calculus |
+| 850 | mathematics | 19 | `math.linalg.norm` | Vector Norm |
+| 851 | mathematics | 19 | `math.linalg.orthogonality` | Orthogonality |
+| 852 | mathematics | 19 | `math.linalg.cross-product` | Cross Product |
+| 853 | mathematics | 19 | `math.linalg.matrix-addition` | Matrix Addition |
+| 854 | mathematics | 19 | `math.linalg.matrix-multiplication` | Matrix Multiplication |
+| 855 | mathematics | 19 | `math.linalg.matrix-transpose` | Matrix Transpose |
+| 856 | mathematics | 19 | `math.linalg.vector-space` | Vector Space |
+| 857 | mathematics | 19 | `math.prob.continuous-rv` | Continuous Random Variable |
+| 858 | mathematics | 19 | `math.stats.measures-of-center` | Measures of Center |
+| 859 | mathematics | 19 | `math.stats.measures-of-spread` | Measures of Spread |
+| 860 | mathematics | 19 | `math.stats.data-visualization` | Data Visualization |
+| 861 | mathematics | 19 | `math.disc.derangements` | Derangements |
+| 862 | mathematics | 19 | `math.disc.recurrence-relation` | Recurrence Relation |
+| 863 | mathematics | 19 | `math.disc.graph-representation` | Graph Representation |
+| 864 | mathematics | 19 | `math.real.uniform-continuity` | Uniform Continuity |
+| 865 | mathematics | 19 | `math.real.extreme-value-theorem` | Extreme Value Theorem |
+| 866 | mathematics | 19 | `math.real.ivt` | Intermediate Value Theorem (Rigorous) |
+| 867 | mathematics | 19 | `math.real.differentiability-rigorous` | Differentiability (Rigorous) |
+| 868 | mathematics | 19 | `math.real.riemann-integral` | Riemann Integral (Rigorous) |
+| 869 | mathematics | 19 | `math.real.uniform-convergence` | Uniform Convergence |
+| 870 | mathematics | 19 | `math.real.baire-category` | Baire Category Theorem |
+| 871 | mathematics | 19 | `math.graph.extremal-graph-theory` | Extremal Graph Theory |
+| 872 | physics | 19 | `phys.qm.wkb-approximation` | WKB Approximation (Semiclassical Limit) |
+| 873 | physics | 19 | `phys.qm.s-matrix-basics` | S-Matrix and Scattering Amplitudes |
+| 874 | physics | 19 | `phys.astro.stellar-evolution` | Stellar Evolution and End States |
+| 875 | physics | 19 | `phys.astro.cosmology` | Big Bang Cosmology |
+| 876 | physics | 19 | `phys.particle.neutrinos` | Neutrinos |
+| 877 | physics | 19 | `phys.particle.hadron-quark-model` | Quark Model of Hadrons: Baryons and Mesons |
+| 878 | physics | 19 | `phys.particle.strong-interaction` | The Strong Interaction and Color Charge |
+| 879 | physics | 19 | `phys.mod.energy-bands` | Energy Bands in Solids |
+| 880 | english | 19 | `eng.grammar.sentence-combining` | Sentence Combining |
+| 881 | english | 19 | `eng.reading.evaluating-sources` | Evaluating Sources |
+| 882 | english | 19 | `eng.writing.topic-sentences` | Topic Sentences |
+| 883 | english | 19 | `eng.literature.plot-structure` | Plot Structure |
+| 884 | english | 19 | `eng.literature.character-development` | Character Development |
+| 885 | english | 19 | `eng.literature.setting-and-atmosphere` | Setting and Atmosphere |
+| 886 | english | 19 | `eng.literature.point-of-view` | Point of View |
+| 887 | english | 19 | `eng.literature.drama-basics` | Drama Basics |
+| 888 | chemistry | 19 | `chem.carb.alpha-reactions` | Alpha-Carbon Reactions |
+| 889 | chemistry | 19 | `chem.carb.derivatives` | Carboxylic Acid Derivatives |
+| 890 | chemistry | 19 | `chem.carb.spectro` | Spectroscopic ID of Carbonyls |
+| 891 | chemistry | 19 | `chem.nitro.amino-acids` | Amino Acids |
+| 892 | biology | 19 | `bio.bioinfo.phylogenetics-computational` | Computational Phylogenetics |
+| 893 | biology | 19 | `bio.bioinfo.structural-bioinformatics` | Structural Bioinformatics |
+| 894 | biology | 19 | `bio.sys.gene-regulatory-networks` | Gene Regulatory Networks |
+| 895 | biology | 19 | `bio.evo.molecular-evolution` | Molecular Evolution and Neutral Theory |
+| 896 | computer_science | 19 | `cs.struct.balanced-trees` | Balanced Search Trees |
+| 897 | computer_science | 19 | `cs.struct.graph-traversal` | Graph Traversal — BFS and DFS |
+| 898 | computer_science | 19 | `cs.db.transactions-acid` | Transactions and the ACID Properties |
+| 899 | computer_science | 19 | `cs.db.mysql-python` | Connecting Python to MySQL |
+| 900 | computer_science | 19 | `cs.se.agile-design-principles` | Agile Practices and Software Design Principles |
+| 901 | computer_science | 19 | `cs.ds.intro-machine-learning` | Introduction to Machine Learning |
+| 902 | mathematics | 20 | `math.arith.fraction-simplification` | Fraction Simplification |
+| 903 | mathematics | 20 | `math.arith.percentage-change` | Percentage Change |
+| 904 | mathematics | 20 | `math.nt.euclidean-algorithm` | Euclidean Algorithm |
+| 905 | mathematics | 20 | `math.nt.lcm` | Least Common Multiple |
+| 906 | mathematics | 20 | `math.nt.chinese-remainder-theorem` | Chinese Remainder Theorem |
+| 907 | mathematics | 20 | `math.alg.like-terms` | Like Terms |
+| 908 | mathematics | 20 | `math.alg.fractional-exponent` | Fractional Exponent |
+| 909 | mathematics | 20 | `math.alg.simplifying-radicals` | Simplifying Radical Expressions |
+| 910 | mathematics | 20 | `math.alg.radical-equations` | Radical Equations |
+| 911 | mathematics | 20 | `math.alg.exponential-equations` | Exponential Equations |
+| 912 | mathematics | 20 | `math.alg.logarithm` | Logarithm |
+| 913 | mathematics | 20 | `math.alg.pascals-triangle` | Pascal's Triangle |
+| 914 | mathematics | 20 | `math.geom.curvature` | Curvature |
+| 915 | mathematics | 20 | `math.trig.basic-ratios` | Six Trigonometric Ratios |
+| 916 | mathematics | 20 | `math.trig.unit-circle` | Unit Circle |
+| 917 | mathematics | 20 | `math.trig.law-of-sines` | Law of Sines |
+| 918 | mathematics | 20 | `math.trig.law-of-cosines` | Law of Cosines |
+| 919 | mathematics | 20 | `math.func.exponential-function` | Exponential Function |
+| 920 | mathematics | 20 | `math.seq.integral-test` | Integral Test |
+| 921 | mathematics | 20 | `math.seq.absolute-convergence` | Absolute and Conditional Convergence |
+| 922 | mathematics | 20 | `math.calc.product-rule` | Product Rule |
+| 923 | mathematics | 20 | `math.calc.chain-rule` | Chain Rule |
+| 924 | mathematics | 20 | `math.calc.higher-order-derivatives` | Higher-Order Derivatives |
+| 925 | mathematics | 20 | `math.calc.rolles-theorem` | Rolle's Theorem |
+| 926 | mathematics | 20 | `math.calc.increasing-decreasing` | Increasing and Decreasing Functions |
+| 927 | mathematics | 20 | `math.calc.critical-points` | Critical Points |
+| 928 | mathematics | 20 | `math.calc.antiderivatives` | Antiderivatives |
+| 929 | mathematics | 20 | `math.calc.volume-revolution` | Volumes of Revolution |
+| 930 | mathematics | 20 | `math.calc.arc-length` | Arc Length |
+| 931 | mathematics | 20 | `math.calc.radius-of-convergence` | Radius of Convergence |
+| 932 | mathematics | 20 | `math.calc.partial-derivatives` | Partial Derivatives |
+| 933 | mathematics | 20 | `math.calc.multiple-integrals` | Multiple Integrals |
+| 934 | mathematics | 20 | `math.linalg.unit-vector` | Unit Vector |
+| 935 | mathematics | 20 | `math.linalg.symmetric-matrix` | Symmetric Matrix |
+| 936 | mathematics | 20 | `math.linalg.determinant` | Determinant |
+| 937 | mathematics | 20 | `math.linalg.subspace` | Subspace |
+| 938 | mathematics | 20 | `math.linalg.linear-map` | Linear Map |
+| 939 | mathematics | 20 | `math.linalg.inner-product` | Inner Product |
+| 940 | mathematics | 20 | `math.linalg.distance` | Distance in Vector Spaces |
+| 941 | mathematics | 20 | `math.linalg.angle-vectors` | Angle Between Vectors |
+| 942 | mathematics | 20 | `math.prob.pdf` | Probability Density Function |
+| 943 | mathematics | 20 | `math.prob.generating-function` | Probability Generating Function |
+| 944 | mathematics | 20 | `math.prob.markov-chain` | Markov Chain |
+| 945 | mathematics | 20 | `math.stats.percentile` | Percentile |
+| 946 | mathematics | 20 | `math.disc.generating-functions` | Generating Functions |
+| 947 | mathematics | 20 | `math.disc.catalan-numbers` | Catalan Numbers |
+| 948 | mathematics | 20 | `math.disc.stirling-numbers` | Stirling Numbers |
+| 949 | mathematics | 20 | `math.real.lipschitz-continuity` | Lipschitz Continuity |
+| 950 | mathematics | 20 | `math.real.mvt` | Mean Value Theorem (Rigorous) |
+| 951 | mathematics | 20 | `math.real.riemann-integrability` | Riemann Integrability |
+| 952 | mathematics | 20 | `math.real.ftc-rigorous` | Fundamental Theorem of Calculus (Rigorous) |
+| 953 | mathematics | 20 | `math.real.weierstrass-approximation` | Weierstrass Approximation Theorem |
+| 954 | mathematics | 20 | `math.top.smooth-manifold` | Smooth Manifold |
+| 955 | mathematics | 20 | `math.fnal.normed-space` | Normed Space |
+| 956 | mathematics | 20 | `math.num.floating-point` | Floating-Point Arithmetic |
+| 957 | mathematics | 20 | `math.num.root-finding` | Root-Finding Methods |
+| 958 | mathematics | 20 | `math.opt.dynamic-programming` | Dynamic Programming |
+| 959 | physics | 20 | `phys.astro.dark-matter` | Dark Matter and Dark Energy |
+| 960 | physics | 20 | `phys.astro.black-holes` | Black Holes and Schwarzschild Radius |
+| 961 | physics | 20 | `phys.particle.weak-interaction` | The Weak Interaction |
+| 962 | physics | 20 | `phys.particle.conservation-laws` | Conservation Laws in Particle Interactions |
+| 963 | physics | 20 | `phys.mod.semiconductor-classification` | Conductors, Insulators, and Semiconductors |
+| 964 | english | 20 | `eng.reading.reading-across-genres` | Reading Across Genres |
+| 965 | english | 20 | `eng.writing.supporting-details` | Supporting Details |
+| 966 | english | 20 | `eng.literature.theme-and-message` | Theme and Message |
+| 967 | english | 20 | `eng.literature.foreshadowing-and-suspense` | Foreshadowing and Suspense |
+| 968 | english | 20 | `eng.literature.dramatic-structure` | Dramatic Structure |
+| 969 | english | 20 | `eng.literature.prose-fiction` | Prose Fiction |
+| 970 | english | 20 | `eng.linguistics.what-is-linguistics` | What Is Linguistics? |
+| 971 | english | 20 | `eng.communication.media-literacy` | Media Literacy |
+| 972 | chemistry | 20 | `chem.carb.named-reactions` | Named Carbonyl Reactions |
+| 973 | chemistry | 20 | `chem.bio.proteins` | Proteins |
+| 974 | chemistry | 20 | `chem.bio.lipids` | Lipids |
+| 975 | chemistry | 20 | `chem.poly.condensation` | Condensation Polymerization |
+| 976 | biology | 20 | `bio.sys.metabolic-network-modelling` | Metabolic Network Modelling |
+| 977 | computer_science | 20 | `cs.struct.shortest-path-algorithms` | Shortest Path Algorithms |
+| 978 | computer_science | 20 | `cs.db.indexing-query-optimisation` | Indexing and Query Optimisation |
+| 979 | computer_science | 20 | `cs.db.nosql-intro` | Introduction to NoSQL Databases |
+| 980 | computer_science | 20 | `cs.ds.supervised-learning-models` | Supervised Learning Models |
+| 981 | computer_science | 20 | `cs.ds.unsupervised-learning-models` | Unsupervised Learning Models |
+| 982 | mathematics | 21 | `math.arith.fraction-addition` | Addition and Subtraction of Fractions |
+| 983 | mathematics | 21 | `math.nt.extended-euclidean-algorithm` | Extended Euclidean Algorithm |
+| 984 | mathematics | 21 | `math.nt.continued-fractions` | Continued Fractions |
+| 985 | mathematics | 21 | `math.alg.simplification` | Algebraic Simplification |
+| 986 | mathematics | 21 | `math.alg.polynomial-operations` | Polynomial Operations |
+| 987 | mathematics | 21 | `math.alg.rationalizing-denominators` | Rationalizing the Denominator |
+| 988 | mathematics | 21 | `math.alg.logarithm-properties` | Logarithm Properties |
+| 989 | mathematics | 21 | `math.alg.natural-logarithm` | Natural Logarithm |
+| 990 | mathematics | 21 | `math.geom.frenet-serret` | Frenet-Serret Formulas |
+| 991 | mathematics | 21 | `math.geom.differential-geometry-surfaces` | Differential Geometry of Surfaces |
+| 992 | mathematics | 21 | `math.trig.special-angles` | Trigonometric Values at Special Angles |
+| 993 | mathematics | 21 | `math.trig.reference-angles` | Reference Angles |
+| 994 | mathematics | 21 | `math.trig.trig-functions` | Trigonometric Functions |
+| 995 | mathematics | 21 | `math.func.logarithmic-function` | Logarithmic Function |
+| 996 | mathematics | 21 | `math.calc.quotient-rule` | Quotient Rule |
+| 997 | mathematics | 21 | `math.calc.derivative-exponential` | Derivative of Exponential Functions |
+| 998 | mathematics | 21 | `math.calc.implicit-differentiation` | Implicit Differentiation |
+| 999 | mathematics | 21 | `math.calc.local-extrema` | Local Extrema |
+| 1000 | mathematics | 21 | `math.calc.concavity` | Concavity and Inflection Points |
+| 1001 | mathematics | 21 | `math.calc.ftc-part2` | Fundamental Theorem of Calculus Part 2 |
+| 1002 | mathematics | 21 | `math.calc.surface-area-integral` | Surface Area of Revolution |
+| 1003 | mathematics | 21 | `math.calc.taylor-series` | Taylor Series |
+| 1004 | mathematics | 21 | `math.calc.parametric-calculus` | Calculus of Parametric Curves |
+| 1005 | mathematics | 21 | `math.calc.gradient` | Gradient |
+| 1006 | mathematics | 21 | `math.calc.chain-rule-multivariable` | Multivariable Chain Rule |
+| 1007 | mathematics | 21 | `math.calc.double-integrals` | Double Integrals |
+| 1008 | mathematics | 21 | `math.calc.change-of-variables` | Change of Variables (Jacobian) |
+| 1009 | mathematics | 21 | `math.de.ode` | Ordinary Differential Equation |
+| 1010 | mathematics | 21 | `math.linalg.matrix-inverse` | Matrix Inverse |
+| 1011 | mathematics | 21 | `math.linalg.cofactor-expansion` | Cofactor Expansion |
+| 1012 | mathematics | 21 | `math.linalg.det-properties` | Properties of Determinants |
+| 1013 | mathematics | 21 | `math.linalg.span` | Span |
+| 1014 | mathematics | 21 | `math.linalg.kernel-image` | Kernel and Image of Linear Map |
+| 1015 | mathematics | 21 | `math.linalg.eigenvalues` | Eigenvalues and Eigenvectors |
+| 1016 | mathematics | 21 | `math.linalg.inner-product-space` | Inner Product Space |
+| 1017 | mathematics | 21 | `math.linalg.projection` | Orthogonal Projection |
+| 1018 | mathematics | 21 | `math.linalg.tensor` | Tensor |
+| 1019 | mathematics | 21 | `math.linalg.dual-space` | Dual Space |
+| 1020 | mathematics | 21 | `math.prob.continuous-distributions` | Continuous Distributions |
+| 1021 | mathematics | 21 | `math.prob.expected-value` | Expected Value |
+| 1022 | mathematics | 21 | `math.prob.transition-matrix` | Transition Matrix |
+| 1023 | mathematics | 21 | `math.disc.divide-conquer-recurrence` | Divide-and-Conquer Recurrence |
+| 1024 | mathematics | 21 | `math.disc.ogf` | Ordinary Generating Function |
+| 1025 | mathematics | 21 | `math.disc.egf` | Exponential Generating Function |
+| 1026 | mathematics | 21 | `math.real.taylor-rigorous` | Taylor's Theorem (Rigorous) |
+| 1027 | mathematics | 21 | `math.real.fixed-point-theorem` | Banach Fixed-Point Theorem |
+| 1028 | mathematics | 21 | `math.fnal.completeness` | Completeness |
+| 1029 | mathematics | 21 | `math.num.error-analysis` | Error Analysis |
+| 1030 | mathematics | 21 | `math.num.newtons-method` | Newton's Method |
+| 1031 | physics | 21 | `phys.astro.gravitational-waves` | Gravitational Waves |
+| 1032 | physics | 21 | `phys.particle.electroweak-unification` | Electroweak Unification |
+| 1033 | physics | 21 | `phys.particle.feynman-diagrams` | Feynman Diagrams (Qualitative) |
+| 1034 | physics | 21 | `phys.particle.accelerators-detectors` | Particle Accelerators and Detectors |
+| 1035 | physics | 21 | `phys.mod.intrinsic-semiconductors` | Intrinsic Semiconductors |
+| 1036 | english | 21 | `eng.writing.transitions-and-cohesion` | Transitions and Cohesion |
+| 1037 | english | 21 | `eng.literature.literary-devices-overview` | Overview of Literary Devices |
+| 1038 | english | 21 | `eng.literature.prose-nonfiction` | Prose Nonfiction |
+| 1039 | english | 21 | `eng.linguistics.phonology-intro` | Introduction to Phonology |
+| 1040 | english | 21 | `eng.linguistics.morphology-intro` | Introduction to Morphology |
+| 1041 | chemistry | 21 | `chem.bio.nucleic-acids` | Nucleic Acids |
+| 1042 | chemistry | 21 | `chem.bio.vitamins` | Vitamins and Hormones |
+| 1043 | chemistry | 21 | `chem.bio.enzyme-kinetics` | Enzyme Kinetics |
+| 1044 | chemistry | 21 | `chem.poly.natural` | Natural Polymers |
+| 1045 | chemistry | 21 | `chem.poly.properties` | Polymer Properties |
+| 1046 | chemistry | 21 | `chem.poly.biodegradable` | Biodegradable and Functional Polymers |
+| 1047 | biology | 21 | `bio.sys.synthetic-biology` | Synthetic Biology |
+| 1048 | computer_science | 21 | `cs.struct.minimum-spanning-tree` | Minimum Spanning Trees |
+| 1049 | computer_science | 21 | `cs.ds.neural-networks-intro` | Introduction to Neural Networks |
+| 1050 | mathematics | 22 | `math.nt.bezout-identity` | Bézout's Identity |
+| 1051 | mathematics | 22 | `math.nt.modular-inverse` | Modular Inverse |
+| 1052 | mathematics | 22 | `math.alg.linear-equation-1var` | Linear Equation in One Variable |
+| 1053 | mathematics | 22 | `math.alg.polynomial-division` | Polynomial Division |
+| 1054 | mathematics | 22 | `math.alg.change-of-base` | Change of Base Formula |
+| 1055 | mathematics | 22 | `math.alg.logarithmic-equations` | Logarithmic Equations |
+| 1056 | mathematics | 22 | `math.geom.polar-coordinates` | Polar Coordinates |
+| 1057 | mathematics | 22 | `math.geom.rotation` | Rotation |
+| 1058 | mathematics | 22 | `math.geom.dot-product` | Dot Product |
+| 1059 | mathematics | 22 | `math.trig.amplitude-period-phase` | Amplitude, Period, Phase Shift |
+| 1060 | mathematics | 22 | `math.trig.trig-identities` | Trigonometric Identities |
+| 1061 | mathematics | 22 | `math.trig.inverse-trig` | Inverse Trigonometric Functions |
+| 1062 | mathematics | 22 | `math.trig.hyperbolic-functions` | Hyperbolic Functions |
+| 1063 | mathematics | 22 | `math.calc.derivative-ln` | Derivative of Logarithmic Functions |
+| 1064 | mathematics | 22 | `math.calc.derivative-trig` | Derivatives of Trigonometric Functions |
+| 1065 | mathematics | 22 | `math.calc.related-rates` | Related Rates |
+| 1066 | mathematics | 22 | `math.calc.optimization` | Optimization (Calculus) |
+| 1067 | mathematics | 22 | `math.calc.curve-sketching` | Curve Sketching |
+| 1068 | mathematics | 22 | `math.calc.u-substitution` | Integration by Substitution |
+| 1069 | mathematics | 22 | `math.calc.maclaurin-series` | Maclaurin Series |
+| 1070 | mathematics | 22 | `math.calc.taylor-remainder` | Taylor Remainder and Error Bound |
+| 1071 | mathematics | 22 | `math.calc.directional-derivative` | Directional Derivative |
+| 1072 | mathematics | 22 | `math.calc.multivariable-extrema` | Multivariable Extrema |
+| 1073 | mathematics | 22 | `math.calc.triple-integrals` | Triple Integrals |
+| 1074 | mathematics | 22 | `math.calc.surface-integrals` | Surface Integrals |
+| 1075 | mathematics | 22 | `math.calc.vector-fields` | Vector Fields |
+| 1076 | mathematics | 22 | `math.calc.greens-theorem` | Green's Theorem |
+| 1077 | mathematics | 22 | `math.calc.fourier-series-intro` | Fourier Series (Introduction) |
+| 1078 | mathematics | 22 | `math.de.ode-order` | Order of a Differential Equation |
+| 1079 | mathematics | 22 | `math.de.ode-linearity` | Linearity of Differential Equations |
+| 1080 | mathematics | 22 | `math.de.solution-types` | Types of Solutions |
+| 1081 | mathematics | 22 | `math.de.pde` | Partial Differential Equation |
+| 1082 | mathematics | 22 | `math.linalg.cramer-rule` | Cramer's Rule |
+| 1083 | mathematics | 22 | `math.linalg.linear-independence` | Linear Independence |
+| 1084 | mathematics | 22 | `math.linalg.column-space` | Column Space |
+| 1085 | mathematics | 22 | `math.linalg.characteristic-polynomial` | Characteristic Polynomial |
+| 1086 | mathematics | 22 | `math.linalg.least-squares` | Least Squares |
+| 1087 | mathematics | 22 | `math.prob.normal-distribution` | Normal Distribution |
+| 1088 | mathematics | 22 | `math.prob.linearity-expectation` | Linearity of Expectation |
+| 1089 | mathematics | 22 | `math.prob.law-of-unconscious` | Law of the Unconscious Statistician |
+| 1090 | mathematics | 22 | `math.prob.variance` | Variance |
+| 1091 | mathematics | 22 | `math.prob.moments` | Moments |
+| 1092 | mathematics | 22 | `math.prob.markov-inequality` | Markov's Inequality |
+| 1093 | mathematics | 22 | `math.prob.stationary-distribution` | Stationary Distribution |
+| 1094 | mathematics | 22 | `math.prob.poisson-process` | Poisson Process |
+| 1095 | mathematics | 22 | `math.disc.algorithm-complexity` | Algorithm Complexity |
+| 1096 | mathematics | 22 | `math.real.implicit-function-theorem` | Implicit Function Theorem |
+| 1097 | mathematics | 22 | `math.real.inverse-function-theorem` | Inverse Function Theorem |
+| 1098 | mathematics | 22 | `math.fnal.banach-space` | Banach Space |
+| 1099 | mathematics | 22 | `math.num.numerical-differentiation` | Numerical Differentiation |
+| 1100 | mathematics | 22 | `math.opt.unconstrained-optimization` | Unconstrained Optimization |
+| 1101 | mathematics | 22 | `math.opt.convex-function` | Convex Function |
+| 1102 | mathematics | 22 | `math.graph.algebraic-graph-theory` | Algebraic Graph Theory |
+| 1103 | physics | 22 | `phys.particle.higgs-mechanism` | The Higgs Mechanism |
+| 1104 | physics | 22 | `phys.mod.extrinsic-semiconductors` | Extrinsic Semiconductors: Doping and Carrier Types |
+| 1105 | english | 22 | `eng.writing.narrative-writing` | Narrative Writing |
+| 1106 | english | 22 | `eng.writing.descriptive-writing` | Descriptive Writing |
+| 1107 | english | 22 | `eng.writing.expository-writing` | Expository Writing |
+| 1108 | english | 22 | `eng.writing.persuasive-writing-basics` | Persuasive Writing Basics |
+| 1109 | english | 22 | `eng.literature.metaphor-and-simile` | Metaphor and Simile |
+| 1110 | english | 22 | `eng.literature.irony` | Irony |
+| 1111 | english | 22 | `eng.literature.poetry-basics` | Poetry Basics |
+| 1112 | english | 22 | `eng.linguistics.syntax-theory-intro` | Introduction to Syntactic Theory |
+| 1113 | english | 22 | `eng.linguistics.historical-linguistics-intro` | Introduction to Historical Linguistics |
+| 1114 | mathematics | 23 | `math.nt.linear-diophantine` | Linear Diophantine Equations |
+| 1115 | mathematics | 23 | `math.nt.rsa-basics` | RSA Cryptography (Number-Theoretic Basis) |
+| 1116 | mathematics | 23 | `math.alg.inequality-1var` | Linear Inequality in One Variable |
+| 1117 | mathematics | 23 | `math.alg.absolute-value-equations` | Absolute Value Equations and Inequalities |
+| 1118 | mathematics | 23 | `math.alg.linear-equation-2var` | Linear Equation in Two Variables |
+| 1119 | mathematics | 23 | `math.alg.remainder-theorem` | Remainder Theorem |
+| 1120 | mathematics | 23 | `math.geom.polar-curves` | Polar Curves |
+| 1121 | mathematics | 23 | `math.trig.trig-graphs` | Graphs of Trigonometric Functions |
+| 1122 | mathematics | 23 | `math.trig.pythagorean-identities` | Pythagorean Identities |
+| 1123 | mathematics | 23 | `math.trig.reciprocal-identities` | Reciprocal Identities |
+| 1124 | mathematics | 23 | `math.trig.sum-difference-formulas` | Sum and Difference Formulas |
+| 1125 | mathematics | 23 | `math.trig.trig-equations` | Trigonometric Equations |
+| 1126 | mathematics | 23 | `math.trig.polar-form-complex` | Polar Form of Complex Numbers |
+| 1127 | mathematics | 23 | `math.calc.logarithmic-differentiation` | Logarithmic Differentiation |
+| 1128 | mathematics | 23 | `math.calc.derivative-inverse-trig` | Derivatives of Inverse Trig Functions |
+| 1129 | mathematics | 23 | `math.calc.hyperbolic-derivatives` | Derivatives of Hyperbolic Functions |
+| 1130 | mathematics | 23 | `math.calc.integration-by-parts` | Integration by Parts |
+| 1131 | mathematics | 23 | `math.calc.curl-divergence` | Curl and Divergence |
+| 1132 | mathematics | 23 | `math.de.ivp` | Initial Value Problem |
+| 1133 | mathematics | 23 | `math.de.first-order-ode` | First-Order ODE |
+| 1134 | mathematics | 23 | `math.de.pde-classification` | Classification of Second-Order PDEs |
+| 1135 | mathematics | 23 | `math.linalg.basis` | Basis |
+| 1136 | mathematics | 23 | `math.prob.standard-normal` | Standard Normal Distribution |
+| 1137 | mathematics | 23 | `math.prob.standard-deviation` | Standard Deviation |
+| 1138 | mathematics | 23 | `math.prob.mgf` | Moment Generating Function |
+| 1139 | mathematics | 23 | `math.prob.covariance` | Covariance |
+| 1140 | mathematics | 23 | `math.prob.chebyshev` | Chebyshev's Inequality |
+| 1141 | mathematics | 23 | `math.prob.ergodicity` | Ergodic Theorem (Markov Chains) |
+| 1142 | mathematics | 23 | `math.stats.normal-distribution` | Normal Distribution (Statistics) |
+| 1143 | mathematics | 23 | `math.disc.complexity-classes` | Complexity Classes |
+| 1144 | mathematics | 23 | `math.fnal.hilbert-space` | Hilbert Space |
+| 1145 | mathematics | 23 | `math.fnal.bounded-operator` | Bounded Linear Operator |
+| 1146 | mathematics | 23 | `math.fnal.dense-subspace` | Dense Subspaces and Approximation |
+| 1147 | mathematics | 23 | `math.opt.convex-optimization` | Convex Optimization |
+| 1148 | mathematics | 23 | `math.opt.lagrange-multipliers` | Lagrange Multipliers |
+| 1149 | mathematics | 23 | `math.opt.gradient-methods` | Gradient Descent |
+| 1150 | physics | 23 | `phys.particle.standard-model` | The Standard Model |
+| 1151 | physics | 23 | `phys.mod.pn-junction` | The p-n Junction |
+| 1152 | english | 23 | `eng.writing.the-writing-process` | The Writing Process |
+| 1153 | english | 23 | `eng.writing.creative-writing-forms` | Creative Writing Forms |
+| 1154 | english | 23 | `eng.literature.symbolism` | Symbolism |
+| 1155 | english | 23 | `eng.literature.imagery` | Imagery |
+| 1156 | english | 23 | `eng.literature.poetic-forms` | Poetic Forms |
+| 1157 | english | 23 | `eng.literature.literary-genres-overview` | Overview of Literary Genres |
+| 1158 | english | 23 | `eng.linguistics.semantics-intro` | Introduction to Semantics |
+| 1159 | english | 23 | `eng.linguistics.language-families` | Language Families |
+| 1160 | english | 23 | `eng.linguistics.language-acquisition-intro` | Introduction to Language Acquisition |
+| 1161 | mathematics | 24 | `math.nt.general-diophantine` | Diophantine Equations |
+| 1162 | mathematics | 24 | `math.alg.inequality-2var` | Linear Inequality in Two Variables |
+| 1163 | mathematics | 24 | `math.alg.system-linear-equations` | Systems of Linear Equations |
+| 1164 | mathematics | 24 | `math.alg.factor-theorem` | Factor Theorem |
+| 1165 | mathematics | 24 | `math.trig.double-angle-formulas` | Double Angle Formulas |
+| 1166 | mathematics | 24 | `math.trig.product-to-sum` | Product-to-Sum and Sum-to-Product Formulas |
+| 1167 | mathematics | 24 | `math.trig.de-moivres-theorem` | De Moivre's Theorem |
+| 1168 | mathematics | 24 | `math.trig.eulers-formula` | Euler's Formula |
+| 1169 | mathematics | 24 | `math.calc.reduction-formulas` | Reduction Formulas |
+| 1170 | mathematics | 24 | `math.calc.stokes-theorem` | Stokes' Theorem |
+| 1171 | mathematics | 24 | `math.calc.divergence-theorem` | Divergence Theorem |
+| 1172 | mathematics | 24 | `math.de.existence-uniqueness` | Existence and Uniqueness Theorem |
+| 1173 | mathematics | 24 | `math.de.separable` | Separable Differential Equation |
+| 1174 | mathematics | 24 | `math.de.linear-first-order` | Linear First-Order ODE |
+| 1175 | mathematics | 24 | `math.de.exact-ode` | Exact Differential Equation |
+| 1176 | mathematics | 24 | `math.de.slope-field` | Slope Field |
+| 1177 | mathematics | 24 | `math.de.euler-method` | Euler's Method |
+| 1178 | mathematics | 24 | `math.de.second-order-ode` | Second-Order ODE |
+| 1179 | mathematics | 24 | `math.linalg.dimension` | Dimension |
+| 1180 | mathematics | 24 | `math.linalg.coordinates` | Coordinates |
+| 1181 | mathematics | 24 | `math.linalg.matrix-representation` | Matrix Representation of Linear Map |
+| 1182 | mathematics | 24 | `math.linalg.orthogonal-basis` | Orthogonal and Orthonormal Basis |
+| 1183 | mathematics | 24 | `math.prob.correlation` | Correlation |
+| 1184 | mathematics | 24 | `math.prob.lln` | Law of Large Numbers |
+| 1185 | mathematics | 24 | `math.stats.covariance-matrix` | Covariance Matrix |
+| 1186 | mathematics | 24 | `math.cx.complex-numbers-analysis` | Complex Numbers (Analysis) |
+| 1187 | mathematics | 24 | `math.fnal.dual-space-functional` | Dual Space |
+| 1188 | mathematics | 24 | `math.fnal.open-mapping-theorem` | Open Mapping Theorem |
+| 1189 | mathematics | 24 | `math.fnal.uniform-boundedness` | Uniform Boundedness Principle |
+| 1190 | mathematics | 24 | `math.fnal.riesz-representation` | Riesz Representation Theorem |
+| 1191 | mathematics | 24 | `math.fnal.spectral-theory` | Spectral Theory |
+| 1192 | mathematics | 24 | `math.fnal.fourier-transform` | Fourier Transform (Functional Analysis) |
+| 1193 | mathematics | 24 | `math.opt.duality` | Duality Theory |
+| 1194 | mathematics | 24 | `math.opt.stochastic-gradient` | Stochastic Gradient Descent |
+| 1195 | mathematics | 24 | `math.opt.newton-optimization` | Newton's Method for Optimization |
+| 1196 | physics | 24 | `phys.mod.diode-rectification` | Diode Rectifying Behavior |
+| 1197 | english | 24 | `eng.writing.outlining-and-planning` | Outlining and Planning |
+| 1198 | english | 24 | `eng.literature.meter-and-rhyme` | Meter and Rhyme |
+| 1199 | english | 24 | `eng.literature.short-story-study` | Short Story Study |
+| 1200 | english | 24 | `eng.literature.literary-periods-survey` | Survey of Literary Periods |
+| 1201 | english | 24 | `eng.linguistics.pragmatics-intro` | Introduction to Pragmatics |
+| 1202 | english | 24 | `eng.linguistics.psycholinguistics-intro` | Introduction to Psycholinguistics |
+| 1203 | mathematics | 25 | `math.nt.pythagorean-triples` | Pythagorean Triples |
+| 1204 | mathematics | 25 | `math.nt.pells-equation` | Pell's Equation |
+| 1205 | mathematics | 25 | `math.nt.algebraic-number-theory` | Algebraic Number Theory |
+| 1206 | mathematics | 25 | `math.nt.analytic-number-theory` | Analytic Number Theory |
+| 1207 | mathematics | 25 | `math.alg.substitution-method` | Substitution Method |
+| 1208 | mathematics | 25 | `math.alg.elimination-method` | Elimination Method |
+| 1209 | mathematics | 25 | `math.alg.system-3var` | Systems of 3 Equations in 3 Variables |
+| 1210 | mathematics | 25 | `math.alg.factoring` | Factoring Polynomials |
+| 1211 | mathematics | 25 | `math.trig.half-angle-formulas` | Half Angle Formulas |
+| 1212 | mathematics | 25 | `math.calc.trig-integrals` | Trigonometric Integrals |
+| 1213 | mathematics | 25 | `math.de.bernoulli` | Bernoulli Equation |
+| 1214 | mathematics | 25 | `math.de.homogeneous-ode` | Homogeneous First-Order ODE |
+| 1215 | mathematics | 25 | `math.de.second-order-linear` | Second-Order Linear ODE |
+| 1216 | mathematics | 25 | `math.de.laplace-transform` | Laplace Transform |
+| 1217 | mathematics | 25 | `math.de.systems-ode` | Systems of ODEs |
+| 1218 | mathematics | 25 | `math.de.bvp` | Boundary Value Problem |
+| 1219 | mathematics | 25 | `math.linalg.linear-system` | System of Linear Equations |
+| 1220 | mathematics | 25 | `math.linalg.change-of-basis` | Change of Basis |
+| 1221 | mathematics | 25 | `math.linalg.spectral-theorem` | Spectral Theorem |
+| 1222 | mathematics | 25 | `math.linalg.gram-schmidt` | Gram-Schmidt Process |
+| 1223 | mathematics | 25 | `math.prob.clt` | Central Limit Theorem |
+| 1224 | mathematics | 25 | `math.stats.correlation` | Sample Correlation |
+| 1225 | mathematics | 25 | `math.cx.complex-function` | Complex-Valued Function |
+| 1226 | mathematics | 25 | `math.fnal.hahn-banach` | Hahn-Banach Theorem |
+| 1227 | mathematics | 25 | `math.fnal.closed-graph-theorem` | Closed Graph Theorem |
+| 1228 | mathematics | 25 | `math.fnal.compact-operator-spectrum` | Compact Operators |
+| 1229 | mathematics | 25 | `math.fnal.distributions` | Distributions |
+| 1230 | mathematics | 25 | `math.num.euler-method` | Euler's Method (Numerical ODE) |
+| 1231 | mathematics | 25 | `math.opt.kkt` | KKT Conditions |
+| 1232 | english | 25 | `eng.writing.drafting` | Drafting |
+| 1233 | english | 25 | `eng.literature.novel-study` | Novel Study |
+| 1234 | english | 25 | `eng.literature.literary-criticism-intro` | Introduction to Literary Criticism |
+| 1235 | english | 25 | `eng.linguistics.discourse-analysis-intro` | Introduction to Discourse Analysis |
+| 1236 | english | 25 | `eng.linguistics.sociolinguistics-intro` | Introduction to Sociolinguistics |
+| 1237 | mathematics | 26 | `math.nt.algebraic-integers` | Algebraic Integers |
+| 1238 | mathematics | 26 | `math.alg.factoring-gcf` | Factoring out the GCF |
+| 1239 | mathematics | 26 | `math.alg.factoring-special` | Special Factoring Patterns |
+| 1240 | mathematics | 26 | `math.alg.rational-expressions` | Rational Expressions |
+| 1241 | mathematics | 26 | `math.calc.trig-substitution` | Trigonometric Substitution |
+| 1242 | mathematics | 26 | `math.de.second-order-homogeneous` | Homogeneous Second-Order Linear ODE |
+| 1243 | mathematics | 26 | `math.de.laplace-properties` | Laplace Transform Properties |
+| 1244 | mathematics | 26 | `math.de.convolution-theorem` | Convolution Theorem (Laplace) |
+| 1245 | mathematics | 26 | `math.de.phase-plane` | Phase Plane Analysis |
+| 1246 | mathematics | 26 | `math.de.series-solution` | Series Solution of ODEs |
+| 1247 | mathematics | 26 | `math.de.sturm-liouville` | Sturm-Liouville Theory |
+| 1248 | mathematics | 26 | `math.de.fourier-series` | Fourier Series |
+| 1249 | mathematics | 26 | `math.linalg.augmented-matrix` | Augmented Matrix |
+| 1250 | mathematics | 26 | `math.linalg.positive-definite` | Positive Definite Matrix |
+| 1251 | mathematics | 26 | `math.linalg.qr-factorization` | QR Factorization |
+| 1252 | mathematics | 26 | `math.stats.sampling-distribution` | Sampling Distribution |
+| 1253 | mathematics | 26 | `math.stats.linear-regression` | Simple Linear Regression |
+| 1254 | mathematics | 26 | `math.stats.normal-approximation` | Normal Approximation |
+| 1255 | mathematics | 26 | `math.cx.cauchy-riemann` | Cauchy-Riemann Equations |
+| 1256 | mathematics | 26 | `math.num.interpolation` | Polynomial Interpolation |
+| 1257 | mathematics | 26 | `math.num.iterative-linear` | Iterative Methods for Linear Systems |
+| 1258 | mathematics | 26 | `math.num.runge-kutta` | Runge-Kutta Methods |
+| 1259 | mathematics | 26 | `math.opt.linear-programming` | Linear Programming |
+| 1260 | english | 26 | `eng.writing.revising-for-content` | Revising for Content |
+| 1261 | english | 26 | `eng.literature.comparative-literature-intro` | Introduction to Comparative Literature |
+| 1262 | english | 26 | `eng.linguistics.applied-linguistics-intro` | Introduction to Applied Linguistics |
+| 1263 | english | 26 | `eng.linguistics.dialectology` | Dialectology |
+| 1264 | english | 26 | `eng.linguistics.corpus-linguistics-intro` | Introduction to Corpus Linguistics |
+| 1265 | english | 26 | `eng.communication.discourse-markers-advanced` | Advanced Discourse Markers |
+| 1266 | english | 26 | `eng.communication.cross-cultural-communication` | Cross-Cultural Communication |
+| 1267 | mathematics | 27 | `math.nt.number-fields` | Number Fields |
+| 1268 | mathematics | 27 | `math.alg.factoring-trinomials` | Factoring Trinomials |
+| 1269 | mathematics | 27 | `math.alg.rational-expressions-addition` | Addition of Rational Expressions |
+| 1270 | mathematics | 27 | `math.alg.rational-expressions-multiplication` | Multiplication of Rational Expressions |
+| 1271 | mathematics | 27 | `math.alg.rational-equations` | Rational Equations |
+| 1272 | mathematics | 27 | `math.de.wronskian` | Wronskian |
+| 1273 | mathematics | 27 | `math.de.stability-analysis` | Stability Analysis |
+| 1274 | mathematics | 27 | `math.de.frobenius-method` | Frobenius Method |
+| 1275 | mathematics | 27 | `math.de.legendre-equation` | Legendre's Equation |
+| 1276 | mathematics | 27 | `math.de.eigenfunction-expansion` | Eigenfunction Expansion |
+| 1277 | mathematics | 27 | `math.de.fourier-convergence` | Convergence of Fourier Series |
+| 1278 | mathematics | 27 | `math.de.fourier-sine-cosine` | Fourier Sine and Cosine Series |
+| 1279 | mathematics | 27 | `math.de.fourier-transform` | Fourier Transform |
+| 1280 | mathematics | 27 | `math.de.separation-of-variables-pde` | Separation of Variables (PDE) |
+| 1281 | mathematics | 27 | `math.linalg.row-reduction` | Row Reduction |
+| 1282 | mathematics | 27 | `math.linalg.svd` | Singular Value Decomposition |
+| 1283 | mathematics | 27 | `math.stats.standard-error` | Standard Error |
+| 1284 | mathematics | 27 | `math.stats.estimator` | Estimator |
+| 1285 | mathematics | 27 | `math.stats.confidence-interval` | Confidence Interval |
+| 1286 | mathematics | 27 | `math.stats.hypothesis-testing` | Hypothesis Testing |
+| 1287 | mathematics | 27 | `math.stats.multiple-regression` | Multiple Linear Regression |
+| 1288 | mathematics | 27 | `math.cx.analytic-functions` | Analytic (Holomorphic) Functions |
+| 1289 | mathematics | 27 | `math.num.splines` | Spline Interpolation |
+| 1290 | mathematics | 27 | `math.num.numerical-integration` | Numerical Integration |
+| 1291 | mathematics | 27 | `math.num.qr-algorithm` | QR Algorithm |
+| 1292 | mathematics | 27 | `math.num.stiff-ode` | Stiff ODEs and Implicit Methods |
+| 1293 | mathematics | 27 | `math.opt.quadratic-programming` | Quadratic Programming |
+| 1294 | mathematics | 27 | `math.opt.semidefinite-programming` | Semidefinite Programming |
+| 1295 | mathematics | 27 | `math.opt.integer-programming` | Integer Programming |
+| 1296 | english | 27 | `eng.writing.editing-and-proofreading` | Editing and Proofreading |
+| 1297 | english | 27 | `eng.linguistics.bilingualism-and-multilingualism` | Bilingualism and Multilingualism |
+| 1298 | english | 27 | `eng.linguistics.computational-linguistics-intro` | Introduction to Computational Linguistics |
+| 1299 | mathematics | 28 | `math.alg.quadratic-equation` | Quadratic Equation |
+| 1300 | mathematics | 28 | `math.de.variation-of-parameters` | Variation of Parameters |
+| 1301 | mathematics | 28 | `math.de.bessel-equation` | Bessel's Equation |
+| 1302 | mathematics | 28 | `math.de.heat-equation` | Heat Equation |
+| 1303 | mathematics | 28 | `math.de.wave-equation` | Wave Equation |
+| 1304 | mathematics | 28 | `math.de.laplace-equation` | Laplace's Equation |
+| 1305 | mathematics | 28 | `math.de.nonlinear-ode` | Nonlinear ODE |
+| 1306 | mathematics | 28 | `math.linalg.row-echelon` | Row Echelon Form |
+| 1307 | mathematics | 28 | `math.linalg.lu-factorization` | LU Factorization |
+| 1308 | mathematics | 28 | `math.linalg.singular-values` | Singular Values |
+| 1309 | mathematics | 28 | `math.linalg.pseudoinverse` | Moore-Penrose Pseudoinverse |
+| 1310 | mathematics | 28 | `math.prob.characteristic-function` | Characteristic Function |
+| 1311 | mathematics | 28 | `math.stats.bias-variance` | Bias-Variance Tradeoff |
+| 1312 | mathematics | 28 | `math.stats.consistency` | Consistency of Estimators |
+| 1313 | mathematics | 28 | `math.stats.mle` | Maximum Likelihood Estimation |
+| 1314 | mathematics | 28 | `math.stats.method-of-moments` | Method of Moments |
+| 1315 | mathematics | 28 | `math.stats.ci-mean` | Confidence Interval for a Mean |
+| 1316 | mathematics | 28 | `math.stats.ci-proportion` | Confidence Interval for a Proportion |
+| 1317 | mathematics | 28 | `math.stats.test-statistic` | Test Statistic |
+| 1318 | mathematics | 28 | `math.stats.type-errors` | Type I and Type II Errors |
+| 1319 | mathematics | 28 | `math.stats.z-test` | z-Test |
+| 1320 | mathematics | 28 | `math.stats.t-test` | t-Test |
+| 1321 | mathematics | 28 | `math.stats.chi-squared-test` | Chi-Squared Test |
+| 1322 | mathematics | 28 | `math.stats.anova` | Analysis of Variance |
+| 1323 | mathematics | 28 | `math.stats.nonparametric` | Nonparametric Tests |
+| 1324 | mathematics | 28 | `math.stats.sufficient-statistic` | Sufficient Statistic |
+| 1325 | mathematics | 28 | `math.cx.power-series-cx` | Power Series in ℂ |
+| 1326 | mathematics | 28 | `math.cx.complex-integration` | Complex Line Integral |
+| 1327 | mathematics | 28 | `math.cx.singularities` | Singularities |
+| 1328 | mathematics | 28 | `math.cx.conformal-mapping` | Conformal Mapping |
+| 1329 | mathematics | 28 | `math.num.svd` | SVD (Numerical) |
+| 1330 | mathematics | 28 | `math.opt.pca` | Principal Component Analysis |
+| 1331 | english | 28 | `eng.writing.essay-structure` | Essay Structure |
+| 1332 | english | 28 | `eng.linguistics.translation-studies-intro` | Introduction to Translation Studies |
+| 1333 | mathematics | 29 | `math.nt.prime-number-theorem` | Prime Number Theorem |
+| 1334 | mathematics | 29 | `math.alg.completing-the-square` | Completing the Square |
+| 1335 | mathematics | 29 | `math.alg.polynomial-roots` | Polynomial Roots (Real and Complex) |
+| 1336 | mathematics | 29 | `math.geom.conic-sections` | Conic Sections |
+| 1337 | mathematics | 29 | `math.func.quadratic-function` | Quadratic Function |
+| 1338 | mathematics | 29 | `math.de.harmonic-functions` | Harmonic Functions |
+| 1339 | mathematics | 29 | `math.de.poisson-equation` | Poisson's Equation |
+| 1340 | mathematics | 29 | `math.de.bifurcation` | Bifurcation Theory |
+| 1341 | mathematics | 29 | `math.linalg.rank` | Rank |
+| 1342 | mathematics | 29 | `math.linalg.null-space` | Null Space |
+| 1343 | mathematics | 29 | `math.linalg.cholesky` | Cholesky Decomposition |
+| 1344 | mathematics | 29 | `math.stats.p-value` | p-value |
+| 1345 | mathematics | 29 | `math.stats.power` | Power of a Test |
+| 1346 | mathematics | 29 | `math.stats.two-way-anova` | Two-Way ANOVA |
+| 1347 | mathematics | 29 | `math.stats.bayesian-inference` | Bayesian Statistics |
+| 1348 | mathematics | 29 | `math.stats.experimental-design` | Experimental Design |
+| 1349 | mathematics | 29 | `math.stats.rao-blackwell` | Rao-Blackwell Theorem |
+| 1350 | mathematics | 29 | `math.cx.harmonic-functions` | Harmonic Functions (Complex Analysis) |
+| 1351 | mathematics | 29 | `math.cx.cauchy-theorem` | Cauchy's Theorem |
+| 1352 | mathematics | 29 | `math.cx.identity-theorem` | Identity Theorem |
+| 1353 | mathematics | 29 | `math.cx.poles` | Poles and Meromorphic Functions |
+| 1354 | mathematics | 29 | `math.cx.essential-singularity` | Essential Singularity |
+| 1355 | mathematics | 29 | `math.cx.laurent-series` | Laurent Series |
+| 1356 | mathematics | 29 | `math.cx.mobius-transformation` | Möbius Transformation |
+| 1357 | mathematics | 29 | `math.cx.riemann-mapping` | Riemann Mapping Theorem |
+| 1358 | mathematics | 29 | `math.fnal.special-functions` | Special Functions |
+| 1359 | mathematics | 29 | `math.num.lu-factorization` | LU Factorization (Numerical) |
+| 1360 | english | 29 | `eng.writing.thesis-statements` | Thesis Statements |
+| 1361 | english | 29 | `eng.composition.audience-and-purpose` | Audience and Purpose |
+| 1362 | mathematics | 30 | `math.alg.quadratic-formula` | Quadratic Formula |
+| 1363 | mathematics | 30 | `math.alg.rational-root-theorem` | Rational Root Theorem |
+| 1364 | mathematics | 30 | `math.alg.fundamental-theorem-algebra` | Fundamental Theorem of Algebra |
+| 1365 | mathematics | 30 | `math.alg.polynomial-inequality` | Polynomial Inequality |
+| 1366 | mathematics | 30 | `math.alg.vietas-formulas` | Vieta's Formulas |
+| 1367 | mathematics | 30 | `math.geom.parabola` | Parabola |
+| 1368 | mathematics | 30 | `math.geom.ellipse` | Ellipse |
+| 1369 | mathematics | 30 | `math.geom.hyperbola` | Hyperbola |
+| 1370 | mathematics | 30 | `math.func.vertex-form` | Vertex Form of a Quadratic |
+| 1371 | mathematics | 30 | `math.func.polynomial-function` | Polynomial Function |
+| 1372 | mathematics | 30 | `math.calc.partial-fractions` | Partial Fraction Decomposition |
+| 1373 | mathematics | 30 | `math.de.higher-order-ode` | Higher-Order Linear ODE |
+| 1374 | mathematics | 30 | `math.de.greens-function` | Green's Function |
+| 1375 | mathematics | 30 | `math.de.chaos` | Chaotic Dynamics |
+| 1376 | mathematics | 30 | `math.linalg.rank-nullity` | Rank-Nullity Theorem |
+| 1377 | mathematics | 30 | `math.linalg.eigenspace` | Eigenspace |
+| 1378 | mathematics | 30 | `math.stats.conjugate-prior` | Conjugate Prior |
+| 1379 | mathematics | 30 | `math.stats.credible-interval` | Credible Interval |
+| 1380 | mathematics | 30 | `math.disc.linear-recurrence` | Linear Recurrence |
+| 1381 | mathematics | 30 | `math.cx.cauchy-goursat` | Cauchy-Goursat Theorem |
+| 1382 | mathematics | 30 | `math.cx.cauchy-integral-formula` | Cauchy Integral Formula |
+| 1383 | mathematics | 30 | `math.cx.analytic-continuation` | Analytic Continuation |
+| 1384 | mathematics | 30 | `math.cx.residue` | Residue |
+| 1385 | mathematics | 30 | `math.num.cholesky` | Cholesky Factorization (Numerical) |
+| 1386 | english | 30 | `eng.writing.citations-and-referencing` | Citations and Referencing |
+| 1387 | english | 30 | `eng.composition.claim-evidence-reasoning` | Claim, Evidence, and Reasoning |
+| 1388 | english | 30 | `eng.composition.rhetorical-appeals` | Rhetorical Appeals: Ethos, Pathos, Logos |
+| 1389 | mathematics | 31 | `math.alg.discriminant` | Discriminant |
+| 1390 | mathematics | 31 | `math.alg.complex-polynomial-roots` | Complex Roots of Polynomials |
+| 1391 | mathematics | 31 | `math.alg.rational-inequality` | Rational Inequality |
+| 1392 | mathematics | 31 | `math.func.end-behavior` | End Behavior |
+| 1393 | mathematics | 31 | `math.func.rational-root` | Real Roots of Polynomials |
+| 1394 | mathematics | 31 | `math.func.rational-function` | Rational Function |
+| 1395 | mathematics | 31 | `math.de.char-equation` | Characteristic Equation |
+| 1396 | mathematics | 31 | `math.de.inverse-laplace` | Inverse Laplace Transform |
+| 1397 | mathematics | 31 | `math.linalg.diagonalization` | Diagonalization |
+| 1398 | mathematics | 31 | `math.cx.higher-derivatives` | Derivatives of Holomorphic Functions |
+| 1399 | mathematics | 31 | `math.cx.morera-theorem` | Morera's Theorem |
+| 1400 | mathematics | 31 | `math.cx.residue-theorem` | Residue Theorem |
+| 1401 | mathematics | 31 | `math.cx.maximum-modulus` | Maximum Modulus Principle |
+| 1402 | mathematics | 31 | `math.cx.riemann-surface` | Riemann Surface |
+| 1403 | mathematics | 31 | `math.cx.riemann-zeta` | Riemann Zeta Function |
+| 1404 | english | 31 | `eng.composition.argumentation-basics` | Argumentation Basics |
+| 1405 | english | 31 | `eng.composition.rhetorical-devices` | Rhetorical Devices |
+| 1406 | mathematics | 32 | `math.nt.riemann-hypothesis` | Riemann Hypothesis |
+| 1407 | mathematics | 32 | `math.func.vertical-asymptote` | Vertical Asymptote |
+| 1408 | mathematics | 32 | `math.func.horizontal-asymptote` | Horizontal Asymptote |
+| 1409 | mathematics | 32 | `math.de.undetermined-coefficients` | Method of Undetermined Coefficients |
+| 1410 | mathematics | 32 | `math.de.laplace-ode` | Solving ODEs with Laplace Transform |
+| 1411 | mathematics | 32 | `math.de.systems-matrix-method` | Matrix Method for Linear Systems |
+| 1412 | mathematics | 32 | `math.linalg.matrix-exponential` | Matrix Exponential |
+| 1413 | mathematics | 32 | `math.linalg.jordan-form` | Jordan Normal Form |
+| 1414 | mathematics | 32 | `math.cx.liouville-theorem` | Liouville's Theorem |
+| 1415 | mathematics | 32 | `math.cx.real-integral-residues` | Evaluating Real Integrals via Residues |
+| 1416 | mathematics | 32 | `math.cx.argument-principle` | Argument Principle |
+| 1417 | english | 32 | `eng.composition.counterargument-and-rebuttal` | Counterargument and Rebuttal |
+| 1418 | english | 32 | `eng.composition.logical-fallacies` | Logical Fallacies |
+| 1419 | english | 32 | `eng.composition.figurative-language-in-composition` | Figurative Language in Composition |
+| 1420 | english | 32 | `eng.composition.rhetorical-analysis` | Rhetorical Analysis |
+| 1421 | mathematics | 33 | `math.de.harmonic-oscillator` | Harmonic Oscillator |
+| 1422 | mathematics | 33 | `math.cx.fundamental-theorem-algebra` | Fundamental Theorem of Algebra (Complex Analysis) |
+| 1423 | mathematics | 33 | `math.cx.rouche-theorem` | Rouché's Theorem |
+| 1424 | english | 33 | `eng.composition.style-voice-and-tone` | Style, Voice, and Tone |
+| 1425 | english | 33 | `eng.composition.persuasive-techniques` | Advanced Persuasive Techniques |
+| 1426 | english | 33 | `eng.composition.comparative-essay-writing` | Comparative Essay Writing |
+| 1427 | english | 33 | `eng.composition.research-paper-writing` | Research Paper Writing |
+| 1428 | mathematics | 34 | `math.de.resonance` | Resonance |
+| 1429 | english | 34 | `eng.composition.academic-writing-conventions` | Academic Writing Conventions |
+| 1430 | english | 35 | `eng.composition.plagiarism-and-citation-ethics` | Plagiarism and Citation Ethics |
+| 1431 | english | 35 | `eng.composition.editing-for-style` | Editing for Style |
+| 1432 | english | 35 | `eng.communication.academic-writing-advanced` | Advanced Academic Writing |
+| 1433 | english | 36 | `eng.communication.research-methodology-writing` | Writing Research Methodology |
+| 1434 | english | 36 | `eng.communication.technical-writing` | Technical Writing |
+| 1435 | english | 36 | `eng.communication.business-writing` | Business Writing |
+| 1436 | english | 37 | `eng.communication.professional-communication` | Professional Communication |
+| 1437 | english | 37 | `eng.communication.presentation-design` | Presentation Design |
+| 1438 | english | 37 | `eng.communication.editing-for-publication` | Editing for Publication |
+| 1439 | english | 38 | `eng.communication.negotiation-language` | Negotiation Language |

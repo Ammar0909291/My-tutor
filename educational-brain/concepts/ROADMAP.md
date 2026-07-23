@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **324** |
-| Remaining | **1,451** |
-| Completion percentage | **18.25%** |
+| Concepts with an Educational Brain entry | **336** |
+| Remaining | **1,439** |
+| Completion percentage | **18.93%** |
 
 ---
 
@@ -24,7 +24,7 @@ below from source whenever this file is updated, never hand-estimate.
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
 | mathematics | 908 | 37 | 4.07% | `math.found.mathematical-thinking` | **Yes** |
-| physics | 238 | 195 | 81.93% | `phys.meas.units` | Yes |
+| physics | 238 | 207 | 86.97% | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 89 | 47.85% | `chem.found.matter` | **Yes** |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
@@ -65,10 +65,20 @@ alongside the hydrogen-atom quantum treatment (`phys.qm.hydrogen-atom-
 qm`), electron spin (`phys.qm.spin`), the spacetime-interval/four-vector
 framework (`phys.rel.spacetime`), nuclear binding energy (`phys.mod.
 binding-energy`), the Hamilton-Jacobi equation (`phys.mech.hamilton-
-jacobi-equation`), and the Ising model (`phys.stat.ising-model`) — the
-remaining 21 Particle Physics/Semiconductor Physics concepts are still
-uncovered (they sit deeper in the domain's own internal prerequisite
-chain, now unlocked from the root).
+jacobi-equation`), and the Ising model (`phys.stat.ising-model`); this
+session's Wave 17 batch (12 concepts, dependency level 17 — the largest
+wave since Wave 9) raised physics to 207/238 (86.97%), consuming the
+unlock cascade from Wave 16's domain-opening concepts: 3 leaf nuclear-
+physics concepts (fission, fusion, nuclear models) from binding-energy;
+5 quantum-mechanics concepts (Pauli exclusion, perturbation theory,
+selection rules, angular-momentum addition, density matrix) from
+operators/spin/hydrogen-atom-qm; 2 statistical-mechanics concepts
+(critical phenomena, Monte Carlo basics) from the Ising model; and 2
+more Particle Physics concepts (particle classification, gauge bosons)
+from the four-forces root — the remaining 31 Particle Physics/
+Semiconductor Physics concepts are still uncovered (they sit deeper in
+the domain's own internal prerequisite chain, progressively unlocked
+wave by wave).
 Biology's KG count reflects the Curriculum Production Pipeline's own
 2026-07-22 Biology KG v2.0.0 freeze (89 → 108 concepts, 19 new concepts
 incl. a new `bio.div` domain) — a concurrent, external change to this
@@ -451,34 +461,42 @@ current-batch entry below.**
 
 ## 4. Current batch
 
-**Physics Wave 16 (this batch, explicit exception — standing Curriculum
+**Physics Wave 17 (this batch, explicit exception — standing Curriculum
 Completion Program 8-step cycle)**: continuing the same cycle
-immediately after Wave 15 in response to the user's plain "Continue"
-instruction. Re-fetched `origin/main` and confirmed 0 commits ahead/
-behind before starting — no concurrent push this time. Re-audited
-physics EB state fresh (188/238, unchanged since Wave 15's push), and
-independently recomputed dependency levels via a fresh Kahn's-algorithm
-pass over the live KG's `requires` edges. The level-16 set:
+immediately after Wave 16 in response to the user's "Keep continue until
+238/238 done" instruction. Re-fetched `origin/main` and confirmed 0
+commits ahead/behind before starting. Re-audited physics EB state fresh
+(195/238, unchanged since Wave 16's push), and independently recomputed
+dependency levels via a fresh Kahn's-algorithm pass over the live KG's
+`requires` edges. The level-17 set: `phys.mod.nuclear-fission`,
+`phys.mod.nuclear-fusion`, `phys.mod.nuclear-models`, `phys.qm.pauli-
+exclusion`, `phys.qm.perturbation-theory`, `phys.qm.selection-rules`,
+`phys.qm.angular-momentum-addition`, `phys.qm.density-matrix`,
+`phys.stat.phase-transitions-critical-phenomena`, `phys.stat.monte-
+carlo-basics`, `phys.particle.particle-classification`, `phys.particle.
+gauge-bosons` — 12 concepts (the largest wave since Wave 9), all with
+existing Blueprints reused by reference, unlocked by Wave 16's four
+domain-opening concepts. All 12 verified against `EDUCATIONAL_BRAIN_
+STANDARD.md`'s exact 21-section structure and heading order (0
+mismatches), zero duplicate filenames/concept IDs, zero orphans against
+the live physics KG (all 207 physics EB files map to a valid KG id;
+repo-wide scan across all 6 subjects also clean). Physics KG re-
+validated PASS (238/238 reachable, 0 failures/warnings, no KG file
+touched); all 6 subject KGs re-validated PASS. Physics EB reached
+207/238 — 86.97%. True total, recomputed fresh: **336** EB entries (207
+physics + 37 mathematics + 89 chemistry + 3 english), out of 1,775
+total KG concepts — 1,439 remaining, 18.93%. Wave 18 candidates were
+NOT computed this batch — the next physics iteration should begin with
+a fresh fetch/audit per this program's standing discipline.
+
+**Prior batch (Physics Wave 16)**: continuing the same cycle
+immediately after Wave 15. Authored the level-16 set (7 concepts):
 `phys.mech.hamilton-jacobi-equation`, `phys.mod.binding-energy`,
 `phys.qm.hydrogen-atom-qm`, `phys.qm.spin`, `phys.rel.spacetime`,
-`phys.stat.ising-model`, `phys.particle.four-forces` — 7 concepts, all
-with existing Blueprints reused by reference. Notably,
-`phys.particle.four-forces` was verified as the Particle Physics
-domain's formal root node — its only prerequisites (`phys.em.coulombs-
-law`, `phys.mod.nuclear-reactions`) lie OUTSIDE the domain, so authoring
-it opens the entire 16-concept Particle Physics domain for future waves.
-All 7 verified against `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section
-structure and heading order (0 mismatches), zero duplicate filenames/
-concept IDs, zero orphans against the live physics KG (all 195 physics EB
-files map to a valid KG id; repo-wide scan across all 6 subjects also
-clean). Physics KG re-validated PASS (238/238 reachable, 0 failures/
-warnings, no KG file touched); all 6 subject KGs re-validated PASS.
-Physics EB reached 195/238 — 81.93%. True total, recomputed fresh:
-**324** EB entries (195 physics + 37 mathematics + 89 chemistry + 3
-english), out of 1,775 total KG concepts — 1,451 remaining, 18.25%.
-Wave 17 candidates were NOT computed this batch — the next physics
-iteration should begin with a fresh fetch/audit per this program's
-standing discipline.
+`phys.stat.ising-model`, `phys.particle.four-forces` — the last of
+which was verified as the Particle Physics domain's formal root node,
+opening that 16-concept domain for future waves. Physics EB reached
+195/238 — 81.93%. True total at that point: 324 entries.
 
 **Prior batch (batch 27, Physics Wave 15, explicit exception)**: after
 the prior turn's forensic repository audit concluded (read-only, no
@@ -656,28 +674,26 @@ procedure.
    again ahead of this default order given an equally explicit,
    subject-specific user instruction, as happened this batch and the
    prior ones (§3b/§3c/§3d/§3e/§3f/§3g/§3h/§3i/§3j/§4). Physics currently
-   has 43 concepts remaining (195/238 done, 81.93%); Wave 16 (dependency
-   level 16, 7 concepts) is now DONE (see §4), opening the Particle
-   Physics domain via its root node `phys.particle.four-forces`. Its own
-   internal queue's next wave (Wave 17) has NOT been computed yet — the
-   next physics iteration must recompute it fresh from the live KG via
-   Kahn's algorithm rather than assuming any stored candidate list.
+   has 31 concepts remaining (207/238 done, 86.97%); Wave 17 (dependency
+   level 17, 12 concepts — the largest wave since Wave 9) is now DONE
+   (see §4), continuing to consume the Particle Physics domain opened in
+   Wave 16. Its own internal queue's next wave (Wave 18) has NOT been
+   computed yet — the next physics iteration must recompute it fresh
+   from the live KG via Kahn's algorithm rather than assuming any stored
+   candidate list. The user has instructed continuation of this cycle
+   until physics reaches 238/238.
 
-Full computed order (all 1,451 remaining concepts): see
+Full computed order (all 1,439 remaining concepts): see
 `AUTHORING_QUEUE.md` — §5 above (the domain-completion constraint) takes
 precedence over that file's literal row order until `math.found` is
 complete, unless overridden per item 4.
 
 ## 6. Next batch
 
-**Batch 29 (recommended default)**: compute `math.found` Wave 7 candidates
-from the live KG (the set of `math.found` nodes whose prerequisites are all
-now READY after Wave 6: `logical-equivalence`, `subset`, `quantifiers`,
-`relation`, `ordinal-number`), then author all Wave 7 concepts, no other
-domain started. **If instead directed back to physics** (per the
-standing mandatory-rules cycle governing this override): fetch/audit
-`main` fresh, recompute physics Wave 17 candidates from the live KG (do
-NOT assume any list computed in a prior turn is still accurate — this
-program's standing discipline), then author Wave 17 in full following the
+**Batch 30 (standing override in effect — user has instructed
+continuation until physics reaches 238/238)**: fetch/audit `main` fresh,
+recompute physics Wave 18 candidates from the live KG (do NOT assume any
+list computed in a prior turn is still accurate — this program's
+standing discipline), then author Wave 18 in full following the
 same reuse-by-reference-Blueprint discipline established these past eleven
 batches.
