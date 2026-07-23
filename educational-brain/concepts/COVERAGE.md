@@ -12,7 +12,7 @@ and this file's summary row should be corrected to match.
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
 | mathematics | 908 | 32 | `math.arith.fractions` + 31 `math.found.*` entries (Waves 1-5) — math.found domain IN PROGRESS (31/82), see Delivery history |
-| physics | 238 | 144 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 (2026-07-23, level 10, this batch): `phys.mech.rotational-dynamics`, `phys.mech.keplers-laws`, `phys.mech.satellites`, `phys.mech.viscosity`, `phys.mech.generalized-coordinates`, `phys.therm.entropy`, `phys.wave.forced-oscillations`, `phys.mod.photons`, `phys.rel.simultaneity` — 94 concepts remain (60.50%); see Delivery history for the full pre-existing-67, Wave-6, Wave-7, Wave-8, and Wave-9 name lists |
+| physics | 238 | 155 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 (2026-07-23, level 11, this batch): `phys.mech.angular-momentum`, `phys.mech.rolling-motion`, `phys.mech.euler-lagrange-equation`, `phys.therm.carnot-cycle`, `phys.therm.third-law`, `phys.mod.compton-effect`, `phys.mod.de-broglie`, `phys.mod.bohr-model`, `phys.mod.x-rays`, `phys.rel.time-dilation`, `phys.stat.probability-basics` — 83 concepts remain (65.13%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-10 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 0 | — |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
@@ -533,3 +533,40 @@ retrieval engine. Per-entry completeness against the tracked fields is in
   this batch. All six tracking files regenerated from source;
   re-validated 0 orphans, 0 duplicates, 0 broken KG references, 0
   invalid Blueprint references across all 179 entries.
+
+- **Curriculum Completion Program, batch 14 — Physics Wave 11 (mandatory-
+  rules cycle continuation)** (2026-07-23): the same mandatory-rules
+  production cycle continued immediately after Wave 10 within the same
+  conversation, per rule 10's "fetch, re-audit, continue" discipline.
+  Re-fetched `origin/main` after the Wave 10 push and confirmed 0
+  commits ahead/behind before starting — no other session had touched
+  physics EB concurrently. `math.found` was NOT touched and remains
+  31/82. Independently recomputed dependency levels via a fresh Kahn's-
+  algorithm pass over the live KG's `requires` edges — the level-11 set
+  (11 concepts) matched `AUTHORING_QUEUE.md`'s stored rows exactly, zero
+  discrepancy. Authored all 11: `phys.mech.angular-momentum`,
+  `phys.mech.rolling-motion`, `phys.mech.euler-lagrange-equation`,
+  `phys.therm.carnot-cycle`, `phys.therm.third-law`,
+  `phys.mod.compton-effect`, `phys.mod.de-broglie`, `phys.mod.bohr-model`,
+  `phys.mod.x-rays`, `phys.rel.time-dilation`,
+  `phys.stat.probability-basics`. All 11 had existing Blueprints
+  (Component-format) reused by reference — each entry cites its
+  Blueprint's Misconception Engine/Register by name with birth-type
+  classification added, never re-deriving probe/bridge/replacement text.
+  Six of the eleven (all four Modern Physics concepts plus
+  `phys.rel.time-dilation` and `phys.stat.probability-basics`) each cited
+  all 4 of their Blueprint's documented misconceptions, extending the
+  4-misconception density pattern to a total of 10 concepts across this
+  program. This wave introduced the first Statistical Mechanics domain
+  entry (`phys.stat.probability-basics`) in this program. All 11 entries
+  verified against `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section
+  structure and heading order (0 mismatches), zero duplicate filenames/
+  concept IDs, zero orphans against the live physics KG (all 155
+  physics EB files map to a valid KG id). Physics KG re-validated: PASS,
+  238/238 reachable, 0 failures/warnings — no KG file was touched.
+  `physics` is now 155/238 — 65.13% complete. Wave 12 (dependency level
+  12, 8 concepts — `phys.mech.conservation-of-angular-momentum` through
+  `phys.stat.boltzmann-factor`) is computed and next, but NOT started
+  this batch. All six tracking files regenerated from source;
+  re-validated 0 orphans, 0 duplicates, 0 broken KG references, 0
+  invalid Blueprint references across all 190 entries.
