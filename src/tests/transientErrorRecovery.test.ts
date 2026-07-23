@@ -138,3 +138,17 @@ describe('LessonScreen: late history restore never clobbers a live lesson turn (
     expect(LESSON).not.toMatch(/setMessages\(\(p\) => p\.map\(\(m\) => m\.id === aid/)
   })
 })
+
+describe('profile-insights route: the proven pool-starvation offender is bounded ("fix forever" hardening)', () => {
+  const ROUTE = read('src/app/api/learner/profile-insights/route.ts')
+
+  it('every DB call in the GET handler is wrapped in withTimeout (no unbounded await survives)', () => {
+    const handlerBody = ROUTE.slice(ROUTE.indexOf('export async function GET'), ROUTE.indexOf('} catch (err)'))
+    // The old, proven-in-production-logs bug shape: a bare Promise.all of
+    // unwrapped prisma calls, and a bare prisma.coachInsight.findMany.
+    expect(handlerBody).not.toMatch(/const \[profile, subject\] = await Promise\.all\(\[\s*\n\s*prisma\.profile\.findUnique/)
+    expect(handlerBody).not.toMatch(/const coachInsights = await prisma\.coachInsight\.findMany/)
+    expect(handlerBody).toMatch(/withTimeout\(Promise\.all\(\[/)
+    expect(handlerBody).toMatch(/withTimeout\(withRetry\(\(\) => prisma\.coachInsight\.findMany/)
+  })
+})
