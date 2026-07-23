@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **389** |
-| Remaining | **1,386** |
-| Completion percentage | **21.92%** |
+| Concepts with an Educational Brain entry | **394** |
+| Remaining | **1,381** |
+| Completion percentage | **22.20%** |
 
 ---
 
@@ -24,7 +24,7 @@ below from source whenever this file is updated, never hand-estimate.
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
 | mathematics | 908 | 37 | 4.07% | `math.found.mathematical-thinking` | **Yes** |
-| physics | 238 | 228 | 95.80% | `phys.meas.units` | Yes |
+| physics | 238 | 233 | 97.90% | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 121 | 65.05% | `chem.found.matter` | **Yes** |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
@@ -105,9 +105,22 @@ gravitational-waves leaf of the Astrophysics domain), `phys.particle.
 weak-interaction` and `phys.particle.conservation-laws` (both unlocked
 from Wave 19's `phys.particle.hadron-quark-model`), and `phys.mod.
 semiconductor-classification` (unlocked from Wave 19's `phys.mod.
-energy-bands`, continuing the semiconductor-physics extension). Only 10
-physics concepts remain, all in Particle Physics (levels 21-23) and
-Modern Physics semiconductor concepts (levels 21-24).
+energy-bands`, continuing the semiconductor-physics extension). This
+session's Wave 21 batch (5 concepts, dependency level 21), continuing
+under the same standing instruction, raised physics further to 233/238
+(97.90%): `phys.astro.gravitational-waves` (unlocked from Wave 20's
+`phys.astro.black-holes`, completing the Astrophysics domain in full —
+all 6 concepts now authored), `phys.particle.electroweak-unification`
+(unlocked from Wave 20's `phys.particle.weak-interaction`), `phys.
+particle.feynman-diagrams` (unlocked from the pre-existing `phys.
+particle.gauge-bosons` plus Wave 20's `phys.particle.conservation-laws`),
+`phys.particle.accelerators-detectors` (unlocked from Wave 20's `phys.
+particle.conservation-laws` plus the pre-existing `phys.rel.
+relativistic-momentum`), and `phys.mod.intrinsic-semiconductors`
+(unlocked from Wave 20's `phys.mod.semiconductor-classification`,
+continuing the semiconductor-physics extension). Only 5 physics concepts
+remain, all in Particle Physics (levels 22-23) and Modern Physics
+semiconductor concepts (levels 22-24).
 Biology's KG count reflects the Curriculum Production Pipeline's own
 2026-07-22 Biology KG v2.0.0 freeze (89 → 108 concepts, 19 new concepts
 incl. a new `bio.div` domain) — a concurrent, external change to this
@@ -490,33 +503,40 @@ current-batch entry below.**
 
 ## 4. Current batch
 
-**Physics Wave 20 (this batch, explicit exception — standing Curriculum
+**Physics Wave 21 (this batch, explicit exception — standing Curriculum
 Completion Program 8-step cycle)**: continuing the same cycle
-immediately after Wave 19 in response to the user's "Keep continue until
+immediately after Wave 20 in response to the user's "Keep continue until
 238/238 done" instruction. Re-fetched `origin/main` and confirmed 0
 commits ahead/behind before starting. Re-audited physics EB state fresh
-(223/238, unchanged since Wave 19's push), and independently recomputed
+(228/238, unchanged since Wave 20's push), and independently recomputed
 dependency levels via a fresh Kahn's-algorithm pass over the live KG's
-`requires` edges. The level-20 set: `phys.astro.dark-matter`, `phys.
-astro.black-holes`, `phys.particle.weak-interaction`, `phys.particle.
-conservation-laws`, `phys.mod.semiconductor-classification` — 5
-concepts, all with existing Blueprints reused by reference, unlocked by
-Wave 19's astrophysics/particle-physics/modern-physics concepts plus
-pre-existing `phys.particle.gauge-bosons`, `phys.particle.leptons`, and
-`phys.rel.spacetime`. All 5 verified against `EDUCATIONAL_BRAIN_
-STANDARD.md`'s exact 21-section structure and heading order (0
-mismatches), zero duplicate filenames/concept IDs, zero orphans against
-the live physics KG (all 228 physics EB files map to a valid KG id;
-repo-wide scan across all 6 subjects also clean). Physics KG re-
-validated PASS (238/238 reachable, 0 failures/warnings, no KG file
+`requires` edges. The level-21 set: `phys.astro.gravitational-waves`,
+`phys.particle.electroweak-unification`, `phys.particle.feynman-
+diagrams`, `phys.particle.accelerators-detectors`, `phys.mod.intrinsic-
+semiconductors` — 5 concepts, all with existing Blueprints reused by
+reference, unlocked by Wave 20's astrophysics/particle-physics/modern-
+physics concepts plus pre-existing `phys.particle.gauge-bosons` and
+`phys.rel.relativistic-momentum`. All 5 verified against
+`EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and heading
+order (0 mismatches), zero duplicate filenames/concept IDs, zero orphans
+against the live physics KG (all 233 physics EB files map to a valid KG
+id; repo-wide scan across all 6 subjects also clean). Physics KG
+re-validated PASS (238/238 reachable, 0 failures/warnings, no KG file
 touched); all 6 subject KGs re-validated PASS. Physics EB reached
-228/238 — 95.80%. True total, recomputed fresh: **389** EB entries (228
-physics + 37 mathematics + 121 chemistry + 3 english), out of 1,775
-total KG concepts — 1,386 remaining, 21.92%. Wave 21 candidates were
-NOT computed this batch — the next physics iteration should begin with
-a fresh fetch/audit per this program's standing discipline, continuing
-without pausing until physics reaches 238/238. Only 10 physics concepts
-remain.
+233/238 — 97.90%, completing the Astrophysics domain in full. True
+total, recomputed fresh: **394** EB entries (233 physics + 37
+mathematics + 121 chemistry + 3 english), out of 1,775 total KG concepts
+— 1,381 remaining, 22.20%. Wave 22 candidates were NOT computed this
+batch — the next physics iteration should begin with a fresh
+fetch/audit per this program's standing discipline, continuing without
+pausing until physics reaches 238/238. Only 5 physics concepts remain.
+
+**Prior batch (Physics Wave 20)**: continuing the same cycle immediately
+after Wave 19. Authored the level-20 set (5 concepts): `phys.astro.dark-
+matter`, `phys.astro.black-holes`, `phys.particle.weak-interaction`,
+`phys.particle.conservation-laws`, `phys.mod.semiconductor-
+classification`. Physics EB reached 228/238 — 95.80%. True total at
+that point: 389 entries.
 
 **Prior batch (Physics Wave 19)**: continuing the same cycle immediately
 after Wave 18. Authored the level-19 set (8 concepts): `phys.qm.wkb-
@@ -760,26 +780,27 @@ procedure.
    again ahead of this default order given an equally explicit,
    subject-specific user instruction, as happened this batch and the
    prior ones (§3b/§3c/§3d/§3e/§3f/§3g/§3h/§3i/§3j/§4). Physics currently
-   has 10 concepts remaining (228/238 done, 95.80%); Wave 20 (dependency
-   level 20, 5 concepts) is now DONE (see §4), continuing to consume the
-   Astrophysics, Particle Physics, and Modern Physics domains opened in
-   prior waves. Its own internal queue's next wave (Wave 21) has NOT been
-   computed yet — the next physics iteration must recompute it fresh
-   from the live KG via Kahn's algorithm rather than assuming any stored
-   candidate list. The user has instructed continuation of this cycle
-   until physics reaches 238/238.
+   has 5 concepts remaining (233/238 done, 97.90%); Wave 21 (dependency
+   level 21, 5 concepts) is now DONE (see §4), completing the
+   Astrophysics domain in full and continuing to consume the Particle
+   Physics and Modern Physics domains opened in prior waves. Its own
+   internal queue's next wave (Wave 22) has NOT been computed yet — the
+   next physics iteration must recompute it fresh from the live KG via
+   Kahn's algorithm rather than assuming any stored candidate list. The
+   user has instructed continuation of this cycle until physics reaches
+   238/238.
 
-Full computed order (all 1,386 remaining concepts, post-merge total —
+Full computed order (all 1,381 remaining concepts, post-merge total —
 see §1 above): see `AUTHORING_QUEUE.md` — §5 above (the domain-
 completion constraint) takes precedence over that file's literal row
 order until `math.found` is complete, unless overridden per item 4.
 
 ## 6. Next batch
 
-**Batch 33 (standing override in effect — user has instructed
+**Batch 34 (standing override in effect — user has instructed
 continuation until physics reaches 238/238)**: fetch/audit `main` fresh,
-recompute physics Wave 21 candidates from the live KG (do NOT assume any
+recompute physics Wave 22 candidates from the live KG (do NOT assume any
 list computed in a prior turn is still accurate — this program's
-standing discipline), then author Wave 21 in full following the
+standing discipline), then author Wave 22 in full following the
 same reuse-by-reference-Blueprint discipline established these past
-fourteen batches.
+fifteen batches.

@@ -927,13 +927,13 @@ its subject KG.
 | trig | `math.trig.trig-identities` | Trigonometric Identities | Yes | No | — | MISSING |
 | trig | `math.trig.unit-circle` | Unit Circle | Yes | No | — | MISSING |
 
-## physics (238 concepts, 228 READY)
+## physics (238 concepts, 233 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | astro | `phys.astro.black-holes` | Black Holes and Schwarzschild Radius | Yes | Yes | `educational-brain/concepts/physics/phys.astro.black-holes.md` | READY |
 | astro | `phys.astro.cosmology` | Big Bang Cosmology | Yes | Yes | `educational-brain/concepts/physics/phys.astro.cosmology.md` | READY |
 | astro | `phys.astro.dark-matter` | Dark Matter and Dark Energy | Yes | Yes | `educational-brain/concepts/physics/phys.astro.dark-matter.md` | READY |
-| astro | `phys.astro.gravitational-waves` | Gravitational Waves | Yes | No | — | MISSING |
+| astro | `phys.astro.gravitational-waves` | Gravitational Waves | Yes | Yes | `educational-brain/concepts/physics/phys.astro.gravitational-waves.md` | READY |
 | astro | `phys.astro.stellar-evolution` | Stellar Evolution and End States | Yes | Yes | `educational-brain/concepts/physics/phys.astro.stellar-evolution.md` | READY |
 | astro | `phys.astro.stellar-structure` | Stellar Structure and the Main Sequence | Yes | Yes | `educational-brain/concepts/physics/phys.astro.stellar-structure.md` | READY |
 | em | `phys.em.ac-basics` | Alternating Current: Peak and RMS Values | Yes | Yes | `educational-brain/concepts/physics/phys.em.ac-basics.md` | READY |
@@ -1047,7 +1047,7 @@ its subject KG.
 | mod | `phys.mod.diode-rectification` | Diode Rectifying Behavior | Yes | No | — | MISSING |
 | mod | `phys.mod.energy-bands` | Energy Bands in Solids | Yes | Yes | `educational-brain/concepts/physics/phys.mod.energy-bands.md` | READY |
 | mod | `phys.mod.extrinsic-semiconductors` | Extrinsic Semiconductors: Doping and Carrier Types | Yes | No | — | MISSING |
-| mod | `phys.mod.intrinsic-semiconductors` | Intrinsic Semiconductors | Yes | No | — | MISSING |
+| mod | `phys.mod.intrinsic-semiconductors` | Intrinsic Semiconductors | Yes | Yes | `educational-brain/concepts/physics/phys.mod.intrinsic-semiconductors.md` | READY |
 | mod | `phys.mod.nuclear-fission` | Nuclear Fission and Chain Reactions | Yes | Yes | `educational-brain/concepts/physics/phys.mod.nuclear-fission.md` | READY |
 | mod | `phys.mod.nuclear-fusion` | Nuclear Fusion and Stellar Energy | Yes | Yes | `educational-brain/concepts/physics/phys.mod.nuclear-fusion.md` | READY |
 | mod | `phys.mod.nuclear-models` | Nuclear Models: Shell Model | Yes | Yes | `educational-brain/concepts/physics/phys.mod.nuclear-models.md` | READY |
@@ -1075,11 +1075,11 @@ its subject KG.
 | opt | `phys.opt.total-internal-reflection` | Total Internal Reflection and Critical Angle | Yes | Yes | `educational-brain/concepts/physics/phys.opt.total-internal-reflection.md` | READY |
 | opt | `phys.opt.wave-optics` | Introduction to Wave Optics | Yes | Yes | `educational-brain/concepts/physics/phys.opt.wave-optics.md` | READY |
 | opt | `phys.opt.youngs-experiment` | Young's Double-Slit Experiment | Yes | Yes | `educational-brain/concepts/physics/phys.opt.youngs-experiment.md` | READY |
-| particle | `phys.particle.accelerators-detectors` | Particle Accelerators and Detectors | Yes | No | — | MISSING |
+| particle | `phys.particle.accelerators-detectors` | Particle Accelerators and Detectors | Yes | Yes | `educational-brain/concepts/physics/phys.particle.accelerators-detectors.md` | READY |
 | particle | `phys.particle.antimatter` | Antimatter and Antiparticles | Yes | Yes | `educational-brain/concepts/physics/phys.particle.antimatter.md` | READY |
 | particle | `phys.particle.conservation-laws` | Conservation Laws in Particle Interactions | Yes | Yes | `educational-brain/concepts/physics/phys.particle.conservation-laws.md` | READY |
-| particle | `phys.particle.electroweak-unification` | Electroweak Unification | Yes | No | — | MISSING |
-| particle | `phys.particle.feynman-diagrams` | Feynman Diagrams (Qualitative) | Yes | No | — | MISSING |
+| particle | `phys.particle.electroweak-unification` | Electroweak Unification | Yes | Yes | `educational-brain/concepts/physics/phys.particle.electroweak-unification.md` | READY |
+| particle | `phys.particle.feynman-diagrams` | Feynman Diagrams (Qualitative) | Yes | Yes | `educational-brain/concepts/physics/phys.particle.feynman-diagrams.md` | READY |
 | particle | `phys.particle.four-forces` | Four Fundamental Forces | Yes | Yes | `educational-brain/concepts/physics/phys.particle.four-forces.md` | READY |
 | particle | `phys.particle.gauge-bosons` | Gauge Bosons and Force Carriers | Yes | Yes | `educational-brain/concepts/physics/phys.particle.gauge-bosons.md` | READY |
 | particle | `phys.particle.hadron-quark-model` | Quark Model of Hadrons: Baryons and Mesons | Yes | Yes | `educational-brain/concepts/physics/phys.particle.hadron-quark-model.md` | READY |
