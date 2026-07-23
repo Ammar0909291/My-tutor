@@ -38875,6 +38875,307 @@ const GBOS_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.particle.strong-interaction ────────────────────────────────────────
+const STRG = 'phys.particle.strong-interaction'
+const STRG_SRC = 'docs/curriculum/blueprints/phys.particle.strong-interaction.md'
+
+const STRG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: STRG,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Color charge is NOT literal color — "color" is a deliberately borrowed, purely mathematical naming ' +
+      'convention for the strong force\'s three-valued charge (red, green, blue), chosen by analogy to how ' +
+      'combining red, green, and blue light gives white. If you could somehow see a single quark directly, ' +
+      'it would not actually look red, green, or blue — quarks are far smaller than any wavelength of visible ' +
+      'light and have no literal visual color at all. And unlike gravity or electromagnetism, the strong ' +
+      'force does NOT weaken with distance — the two most familiar forces\' shared 1/r² weakening pattern ' +
+      'does not carry over here. As two quarks are pulled further apart, the force between them stays roughly ' +
+      'constant or even grows, like a stretching elastic band, rather than getting weaker.',
+    targetedMisconceptions: [`${STRG}:MC-1`, `${STRG}:MC-2`],
+    source: `${STRG_SRC} — Section 4 MC-1 (color is a naming convention, not literal color) + MC-2 (strong force does not weaken with distance)`,
+  },
+  {
+    conceptId: STRG,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The force holding a proton and neutron together inside a nucleus is NOT the exact same force as the ' +
+      'force holding the three quarks together inside a single proton — both are commonly labeled "the ' +
+      'strong force" in introductory treatments, but they operate at genuinely different levels. The ' +
+      'FUNDAMENTAL strong force acts directly between quarks via gluon exchange, governed by color charge. ' +
+      'The RESIDUAL strong force — what actually binds protons and neutrons together in a nucleus — is a ' +
+      'secondary, "leftover" effect of the fundamental force leaking out past each nucleon\'s boundary, ' +
+      'somewhat analogous to how electrically neutral molecules can still weakly attract each other via ' +
+      'residual electromagnetic effects (van der Waals forces) despite having no net charge.',
+    targetedMisconceptions: [`${STRG}:MC-3`],
+    source: `${STRG_SRC} — Section 4 MC-3 (fundamental strong force vs. residual strong force are distinct)`,
+  },
+]
+
+const STRG_PROBES: SeedProbe[] = [
+  {
+    conceptId: STRG,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'As two quarks are pulled further apart, does the force between them get weaker, like it would for two charged particles or two masses?',
+    choices: [
+      { text: 'No — the strong force stays roughly constant or even grows with distance, like a stretching elastic band, the opposite of the 1/r² weakening pattern of gravity and electromagnetism', isCorrect: true },
+      { text: 'Yes — all fundamental forces should weaken with distance the same way gravity and electromagnetism do', isCorrect: false, misconceptionId: `${STRG}:MC-2` },
+    ],
+    correctValue: 'no — the strong force does not weaken with distance the way gravity/EM do',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${STRG}:MC-2`],
+    source: `${STRG_SRC} — Section 4 MC-2 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: STRG,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is the force holding a proton and neutron together inside a nucleus the exact same force as the force holding the three quarks together inside a single proton?',
+    choices: [
+      { text: 'No — the quark-gluon-level force is the fundamental strong force; the nucleon-nucleon force is a distinct, residual "leftover" effect, analogous to how neutral molecules can weakly attract via residual electromagnetic effects', isCorrect: true },
+      { text: 'Yes — it is all one and the same strong force acting identically at every level, from quarks up to whole nucleons', isCorrect: false, misconceptionId: `${STRG}:MC-3` },
+    ],
+    correctValue: 'no — fundamental (quark-level) and residual (nucleon-level) strong force are distinct',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${STRG}:MC-3`],
+    source: `${STRG_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.particle.weak-interaction ──────────────────────────────────────────
+const WEAK = 'phys.particle.weak-interaction'
+const WEAK_SRC = 'docs/curriculum/blueprints/phys.particle.weak-interaction.md'
+
+const WEAK_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: WEAK,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The weak force is NOT unimportant just because it is called "weak" — the coupling-strength adjective ' +
+      '"weak" describes its relative strength compared to the other fundamental forces, not its significance. ' +
+      'Stellar fusion (the process powering the Sun) and radioactive decay both depend entirely on the weak ' +
+      'interaction; if it suddenly stopped working, stars would stop fusing hydrogen into helium and every ' +
+      'form of beta decay would cease — the universe would look dramatically different. And not any force ' +
+      'can change particle flavor given enough energy — the correct principle that high energy enables new ' +
+      'particle production (pair production) does NOT extend to "high energy lets any force change flavor." ' +
+      'Flavor conservation under electromagnetic and strong interactions is EXACT at any energy; only the ' +
+      'weak interaction can change a quark or lepton\'s flavor (like converting a down quark into an up ' +
+      'quark), no matter how energetic an electromagnetic or strong-force collision is.',
+    targetedMisconceptions: [`${WEAK}:MC-1`, `${WEAK}:MC-2`],
+    source: `${WEAK_SRC} — Section 4 MC-1 ("weak" describes strength, not importance) + MC-2 (only the weak force changes flavor, at any energy)`,
+  },
+  {
+    conceptId: WEAK,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Not all four fundamental forces respect parity (mirror symmetry) equally — the correct observation ' +
+      'that gravity, electromagnetism, and the strong force all conserve parity is easy to over-extend into ' +
+      '"all forces must," but the weak interaction is a proven exception. A mirror-image version of a ' +
+      'radioactive beta-decay experiment does NOT produce identical, simply-flipped results — the famous ' +
+      '1956 Wu experiment showed that beta decay emits electrons preferentially in one direction relative to ' +
+      'the parent nucleus\'s spin, a genuine, measurable asymmetry that a true mirror-symmetric process could ' +
+      'never produce. The weak force is the one fundamental force known to violate parity.',
+    targetedMisconceptions: [`${WEAK}:MC-3`],
+    source: `${WEAK_SRC} — Section 4 MC-3 (weak interaction violates parity, unlike the other three forces)`,
+  },
+]
+
+const WEAK_PROBES: SeedProbe[] = [
+  {
+    conceptId: WEAK,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Could a very high-energy electromagnetic collision convert a down quark into an up quark, the same way the weak interaction does?',
+    choices: [
+      { text: 'No — flavor conservation under electromagnetic (and strong) interactions is exact at ANY energy; only the weak interaction can change a quark\'s flavor', isCorrect: true },
+      { text: 'Yes — with enough energy, any force should be able to transform one particle flavor into another, the same way high energy enables new particle production', isCorrect: false, misconceptionId: `${WEAK}:MC-2` },
+    ],
+    correctValue: 'no — only the weak interaction changes flavor, regardless of energy',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WEAK}:MC-2`],
+    source: `${WEAK_SRC} — Section 4 MC-2 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: WEAK,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If you built a mirror-image version of a radioactive decay experiment, would the results look exactly the same, just flipped?',
+    choices: [
+      { text: 'No — the weak interaction violates parity (the 1956 Wu experiment showed beta decay emits electrons preferentially in one direction relative to nuclear spin), unlike gravity, EM, and the strong force which all conserve parity', isCorrect: true },
+      { text: 'Yes — physics should look the same in a mirror, and that symmetry holds for every fundamental force including the weak interaction', isCorrect: false, misconceptionId: `${WEAK}:MC-3` },
+    ],
+    correctValue: 'no — the weak interaction is a proven exception to parity conservation',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${WEAK}:MC-3`],
+    source: `${WEAK_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.particle.electroweak-unification ───────────────────────────────────
+const EWKU = 'phys.particle.electroweak-unification'
+const EWKU_SRC = 'docs/curriculum/blueprints/phys.particle.electroweak-unification.md'
+
+const EWKU_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EWKU,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Electroweak unification is NOT a claim that electromagnetism and the weak force should look identical ' +
+      'in every everyday experiment — "unified" is interpreted, incorrectly, as an unconditional, energy-' +
+      'independent statement of sameness, when it is really a specific HIGH-energy claim. Above roughly 100 ' +
+      'GeV, the two forces genuinely merge into one indistinguishable electroweak interaction; below that ' +
+      'scale (everyday energies), the Higgs mechanism gives the W/Z bosons mass while the photon stays ' +
+      'massless, making the two forces look completely different in every ordinary lab experiment. This is ' +
+      'also NOT a mere mathematical relabeling with no testable content — electroweak theory made a specific, ' +
+      'falsifiable numerical prediction (the W and Z boson masses, via the weak mixing angle) in the 1960s, ' +
+      'confirmed by direct discovery at CERN in 1983 — a genuine, quantitative, falsifiable prediction, not ' +
+      'just an elegant way to write the equations.',
+    targetedMisconceptions: [`${EWKU}:MC-1`, `${EWKU}:MC-2`],
+    source: `${EWKU_SRC} — Section 4 MC-1 (unification is an energy-dependent claim) + MC-2 (falsifiable W/Z mass prediction, confirmed 1983)`,
+  },
+  {
+    conceptId: EWKU,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Electroweak unification does NOT mean all four fundamental forces have already been fully merged into ' +
+      'one theory — hearing "unification" without a clear sense of scope invites the assumption that the ' +
+      'entire unification program, including the strong force and gravity, is already complete. It is not: ' +
+      'electroweak unification specifically and only merges electromagnetism and the weak force — a genuinely ' +
+      'confirmed, tested step. A Grand Unified Theory (adding the strong force) remains an unconfirmed ' +
+      'theoretical proposal, and a full quantum theory of gravity remains an entirely unsolved open problem. ' +
+      'Electroweak unification is one confirmed step of a larger, still-unfinished unification program, not ' +
+      'the whole story.',
+    targetedMisconceptions: [`${EWKU}:MC-3`],
+    source: `${EWKU_SRC} — Section 4 MC-3 (electroweak unification is one step, not the whole unification program)`,
+  },
+]
+
+const EWKU_PROBES: SeedProbe[] = [
+  {
+    conceptId: EWKU,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Did electroweak theory make any specific, falsifiable numerical prediction that could have proven it wrong, or is it just a way of writing the math more elegantly?',
+    choices: [
+      { text: 'Yes — it predicted the W and Z boson masses (via the weak mixing angle) in the 1960s, decades before technology existed to test it, confirmed by direct discovery at CERN in 1983', isCorrect: true },
+      { text: 'No — electroweak unification is just a more elegant way to write already-known equations, with no genuinely new, testable prediction attached', isCorrect: false, misconceptionId: `${EWKU}:MC-2` },
+    ],
+    correctValue: 'yes — the W/Z boson mass prediction, confirmed in 1983',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${EWKU}:MC-2`],
+    source: `${EWKU_SRC} — Section 4 MC-2 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: EWKU,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Has electroweak unification already merged all four fundamental forces — gravity, electromagnetism, the strong force, and the weak force — into one single theory?',
+    choices: [
+      { text: 'No — electroweak unification merges only electromagnetism and the weak force; Grand Unification (adding the strong force) is unconfirmed and quantum gravity remains unsolved', isCorrect: true },
+      { text: 'Yes — "unification" means all the forces are now understood as one single theory', isCorrect: false, misconceptionId: `${EWKU}:MC-3` },
+    ],
+    correctValue: 'no — only electromagnetism and the weak force are unified so far',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${EWKU}:MC-3`],
+    source: `${EWKU_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.particle.higgs-mechanism ────────────────────────────────────────────
+const HIGG = 'phys.particle.higgs-mechanism'
+const HIGG_SRC = 'docs/curriculum/blueprints/phys.particle.higgs-mechanism.md'
+
+const HIGG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HIGG,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Higgs field does NOT give mass to every particle without exception — popular-science headlines ' +
+      '("the particle that gives everything mass") oversimplify a mechanism that is genuinely selective. The ' +
+      'photon and gluon have exactly zero coupling to the Higgs field (a consequence of the underlying gauge ' +
+      'symmetries) and remain exactly massless as a result — if the Higgs field gave mass indiscriminately, ' +
+      'they would not be. Only particles with nonzero coupling strength (W/Z bosons, quarks, leptons) acquire ' +
+      'mass, and the amount depends on each particle\'s own coupling strength. Also, the Higgs boson and the ' +
+      'Higgs field are NOT the same thing — media coverage of the 2012 discovery often used "the Higgs" ' +
+      'loosely for both. The Higgs FIELD is the pervasive, space-filling entity responsible for the mass ' +
+      'mechanism, present everywhere including in a vacuum; the Higgs BOSON is a distinct, detectable, ' +
+      'particle-like excitation (a ripple) of that field, directly observed at CERN in 2012.',
+    targetedMisconceptions: [`${HIGG}:MC-1`, `${HIGG}:MC-2`],
+    source: `${HIGG_SRC} — Section 4 MC-1 (mass generation is selective, not universal) + MC-2 (field vs. boson are distinct)`,
+  },
+  {
+    conceptId: HIGG,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The 2012 discovery was NOT the first time anyone proposed or found evidence for the Higgs mechanism — ' +
+      'media framing around the announcement often collapsed a nearly 50-year story into a single "discovery" ' +
+      'moment. The mechanism was proposed theoretically in 1964, and its broader framework (electroweak ' +
+      'theory) had already been extensively, indirectly confirmed for decades — most notably via the 1983 ' +
+      'discovery of the W and Z bosons with masses matching electroweak predictions. The 2012 announcement ' +
+      'specifically confirmed the existence of the Higgs boson itself — the last, most direct piece of ' +
+      'missing evidence — capping off a 48-year arc of theoretical proposal and indirect confirmation, not ' +
+      'marking the mechanism\'s origin.',
+    targetedMisconceptions: [`${HIGG}:MC-3`],
+    source: `${HIGG_SRC} — Section 4 MC-3 (2012 was confirmation, not the mechanism's first proposal)`,
+  },
+]
+
+const HIGG_PROBES: SeedProbe[] = [
+  {
+    conceptId: HIGG,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does the Higgs mechanism explain why the photon is massless, or does it give mass to the photon too?',
+    choices: [
+      { text: 'It explains why the photon stays massless — the photon has exactly zero coupling to the Higgs field, a consequence of the underlying gauge symmetries', isCorrect: true },
+      { text: 'The Higgs field gives mass to everything, including the photon, since it is described as "the particle that gives everything mass"', isCorrect: false, misconceptionId: `${HIGG}:MC-1` },
+    ],
+    correctValue: 'the photon has zero coupling and remains massless',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HIGG}:MC-1`],
+    source: `${HIGG_SRC} — Section 4 MC-1 trigger probe, distractor-mapped`,
+  },
+  {
+    conceptId: HIGG,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is the Higgs boson (discovered in 2012) the same thing as the Higgs field, or are they related but different?',
+    choices: [
+      { text: 'Related but different — the field is the pervasive, space-filling mechanism (present even in vacuum); the boson is a distinct, detectable particle-like excitation of that field', isCorrect: true },
+      { text: 'They are the same thing — "the Higgs boson" and "the Higgs field" are just two names for one identical entity', isCorrect: false, misconceptionId: `${HIGG}:MC-2` },
+    ],
+    correctValue: 'related but distinct — field is the mechanism, boson is its detectable excitation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HIGG}:MC-2`],
+    source: `${HIGG_SRC} — Section 4 MC-2 trigger probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -39357,6 +39658,10 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...NEUT_EXPLANATIONS,
   ...HDQM_EXPLANATIONS,
   ...GBOS_EXPLANATIONS,
+  ...STRG_EXPLANATIONS,
+  ...WEAK_EXPLANATIONS,
+  ...EWKU_EXPLANATIONS,
+  ...HIGG_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -39839,4 +40144,8 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...NEUT_PROBES,
   ...HDQM_PROBES,
   ...GBOS_PROBES,
+  ...STRG_PROBES,
+  ...WEAK_PROBES,
+  ...EWKU_PROBES,
+  ...HIGG_PROBES,
 ]
