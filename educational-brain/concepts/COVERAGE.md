@@ -14,7 +14,7 @@ and this file's summary row should be corrected to match.
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
 | physics | 238 | 179 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 (2026-07-23, level 14, this batch): `phys.mech.poisson-brackets`, `phys.mod.radioactive-decay`, `phys.qm.schrodinger-equation`, `phys.qm.uncertainty-principle`, `phys.rel.relativistic-momentum`, `phys.stat.bose-einstein`, `phys.stat.entropy-statistical`, `phys.stat.fluctuations-correlations`, `phys.stat.free-energy`, `phys.stat.grand-canonical-ensemble` — 59 concepts remain (75.21%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-13 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
-| chemistry | 186 | 56 | levels 0–8 complete (56/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil — IN PROGRESS |
+| chemistry | 186 | 66 | levels 0–9 complete (66/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
 
@@ -841,3 +841,20 @@ Six concepts in strict topological order (level 8 — all prerequisites at level
 - `chem.surface.adsorption` (proficient/understand) — physisorption vs chemisorption; Freundlich (empirical); Langmuir (monolayer, θ=bP/(1+bP)); Sabatier principle
 
 Running total: 56/186 chemistry entries. Levels 0–8 complete.
+
+### Batch 24 — Chemistry Educational Brain level 9 (2026-07-23)
+
+10 entries authored in strict topological order (level 9 — concepts whose prerequisites are all in levels 0–8):
+
+- `chem.anal.chromatography` (proficient/apply): stationary/mobile phase; Rf calculation; TLC, HPLC, GC, ion-exchange, size-exclusion; MC-1 low Rf = HIGH affinity; MC-2 large molecules elute FIRST in size-exclusion
+- `chem.anal.gravimetric` (proficient/apply): gravimetric factor = M(analyte)×stoich/M(precipitate); four stages; BaSO₄ and AgCl; co-precipitation → HIGH error; MC-1 inverted GF; MC-2 co-precipitation direction; MC-3 excess precipitant
+- `chem.bond.metallic-bonding` (developing/understand): electron-sea model; non-directional; malleability/conductivity/lustre/high mp; band theory qualitative; MC-1 metallic=covalent; MC-2 liquid metals don't conduct; MC-3 d-block complexity
+- `chem.equil.weak-acid` (proficient/apply): ICE table; Ka=x²/(C₀−x); 5% approximation; Ostwald's dilution law; α increases on dilution; Ka×Kb=Kw; polyprotic acids; MC-1 dilution decreases α; MC-2 Ka+Kb=Kw; MC-3 5% always valid
+- `chem.period.atomic-radius` (developing/analyze): covalent/van der Waals/ionic radii; trends (decreasing across period, increasing down group); Zeff; isoelectronic series; lanthanide contraction; MC-1 radius increases across period; MC-2 cation>parent; MC-3 period 6 always larger
+- `chem.period.ionization-energy` (developing/analyze): IE₁ definition; successive IEs and shell-boundary jump; general trend; two anomalies (Group 2/13: 3p>3s energy; Group 15/16: pairing repulsion); distance effect down group; MC-1 no exceptions; MC-2 jump position=valence electrons; MC-3 shielding explanation for group trend
+- `chem.period.electron-affinity` (developing/analyze): ΔegH sign convention; general trend; anomalies Group 2 (ns² complete), Group 15 (half-filled p), F<Cl (crowded n=2 shell); second EA positive; Mulliken electronegativity; MC-1 more negative=weaker; MC-2 F/Cl same mechanism as N/O; MC-3 second EA negative
+- `chem.period.valency` (developing/apply): unpaired electrons → ground-state valency; d-orbital expansion period 3+; period 2 cannot expand; cross-multiplication rule for formulas; transition metal variable oxidation states; MC-1 group number=valency; MC-2 NCl₅ by analogy; MC-3 oxidation state=electron count
+- `chem.sblock.hydrogen` (developing/understand): unique position (not alkali metal); three isotopes; dihydrogen preparation; ionic/covalent/metallic hydrides; water anomalies (H-bonding, ice density); H₂O₂ dual redox role; hydrogen fuel; MC-1 H=alkali metal; MC-2 ice denser; MC-3 H₂O₂ always oxidant
+- `chem.surface.heterogeneous-cat` (advanced/analyze): three-step mechanism (adsorption→surface reaction→desorption); active sites (geometric+electronic); Sabatier principle; poisoning; promoters; Haber (Fe, rate-limiting N₂ chemisorption); Contact (V₂O₅, Mars-van Krevelen); catalytic converter; MC-1 catalyst provides energy; MC-2 Haber/Contact catalyst swap; MC-3 poisoning=total deactivation
+
+Chemistry: 56 → 66 entries. Levels 0–9 complete.
