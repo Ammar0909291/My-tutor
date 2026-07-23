@@ -14,7 +14,7 @@ and this file's summary row should be corrected to match.
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
 | physics | 238 | 179 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 (2026-07-23, level 14, this batch): `phys.mech.poisson-brackets`, `phys.mod.radioactive-decay`, `phys.qm.schrodinger-equation`, `phys.qm.uncertainty-principle`, `phys.rel.relativistic-momentum`, `phys.stat.bose-einstein`, `phys.stat.entropy-statistical`, `phys.stat.fluctuations-correlations`, `phys.stat.free-energy`, `phys.stat.grand-canonical-ensemble` — 59 concepts remain (75.21%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-13 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
-| chemistry | 186 | 32 | levels 0–4 complete (32/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol — IN PROGRESS |
+| chemistry | 186 | 38 | levels 0–5 complete (38/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
 
@@ -746,7 +746,7 @@ retrieval engine. Per-entry completeness against the tracked fields is in
   heading order; 0 orphans, 0 duplicates. Chemistry is 32/186 — 17.20%
   complete; Level 5 is next (6 concepts: `chem.atomic.quantum-numbers`,
   `chem.kinet.photochemistry`, `chem.kinet.rate-law`, `chem.sol.solubility`,
-  `chem.thermo.gibbs`, `chem.thermo.third-law`). **Reconciliation note**:
+  `chem.thermo.gibbs`, `chem.thermo.third-law`).
   this batch's own commit updated `COVERAGE.md`/`ROADMAP.md` but did not
   add its 8 rows to `EDUCATIONAL_BRAIN_INDEX.md`/`QUALITY.md` or remove
   them from `AUTHORING_QUEUE.md` — corrected as part of the Wave 13
@@ -798,3 +798,11 @@ retrieval engine. Per-entry completeness against the tracked fields is in
   `phys.stat.phase-transitions`) is computed and next, but NOT started
   this batch. All six tracking files regenerated from source;
   re-validated 0 orphans, 0 duplicates across all 251 entries.
+
+- **Batch 20 — Chemistry EB level 5 (2026-07-23)**: authored the 6 concepts at dependency level 5 —
+  `chem.atomic.quantum-numbers`, `chem.kinet.photochemistry`, `chem.kinet.rate-law`,
+  `chem.sol.solubility`, `chem.thermo.gibbs`, `chem.thermo.third-law`. All 6 verified against
+  `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and heading order (0 mismatches),
+  zero duplicates, zero orphans. Chemistry is now 38/186 — 20.43% complete.
+  True total, recomputed fresh: **257** entries (179 physics + 37 mathematics + 38
+  chemistry + 3 english), 1,518 remaining, 14.48%.

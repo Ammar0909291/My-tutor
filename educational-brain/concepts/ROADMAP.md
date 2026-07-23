@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **251** |
-| Remaining | **1,524** |
-| Completion percentage | **14.14%** |
+| Concepts with an Educational Brain entry | **257** |
+| Remaining | **1,518** |
+| Completion percentage | **14.48%** |
 
 ---
 
@@ -26,7 +26,7 @@ below from source whenever this file is updated, never hand-estimate.
 | mathematics | 908 | 37 | 4.07% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 179 | 75.21% | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
-| chemistry | 186 | 32 | 17.20% | `chem.found.matter` | **Yes** |
+| chemistry | 186 | 38 | 20.43% | `chem.found.matter` | **Yes** |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
 
@@ -434,58 +434,21 @@ and next, but NOT started this batch.
 
 ## 4. Current batch
 
-**Curriculum Completion Program batch 19 (this batch, Physics Wave 14,
-explicit exception — see §3j for full detail)**: authored the complete
-physics dependency-level-14 wave (10 concepts), continuing the same
-mandatory-rules cycle immediately after Wave 13's second merge. All 10
-verified against `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section
-structure and heading order (0 mismatches), zero duplicates, zero
-orphans against the live physics KG (179 total physics EB files).
-`math.found` remains 37/82, untouched this batch. Physics KG
-re-validated PASS (238/238 reachable, 0 failures/warnings, no KG file
-touched); all 6 subject KGs re-validated PASS. Physics EB reached
-179/238 — 75.21%. This wave completed the Schrödinger-equation hub
-(unlocking 5 downstream quantum-mechanics concepts) and expanded
-Statistical Mechanics with four more hub concepts. No concurrent push
-encountered this time — clean fast-forward push expected. True total,
-recomputed fresh: **251** EB entries (179 physics + 37 mathematics + 32
-chemistry + 3 english), 1,524 remaining, 14.14%.
+**Curriculum Completion Program batch 20 (this batch, Chemistry EB level 5,
+standing production run)**: authored the 6 concepts at dependency level 5 —
+`chem.atomic.quantum-numbers`, `chem.kinet.photochemistry`, `chem.kinet.rate-law`,
+`chem.sol.solubility`, `chem.thermo.gibbs`, `chem.thermo.third-law`. All 6 verified
+against `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and heading order
+(0 mismatches), zero duplicates, zero orphans. Chemistry is now 38/186 (20.43%).
+True total, recomputed fresh: **257** EB entries (179 physics + 37 mathematics + 38
+chemistry + 3 english), 1,518 remaining, 14.48%. Level 6 is next (7 concepts:
+`chem.atomic.orbitals`, `chem.env.ozone`, `chem.equil.concept`, `chem.kinet.arrhenius`,
+`chem.kinet.integrated-rate`, `chem.kinet.mechanism`, `chem.thermo.cell-thermo`).
 
-**Prior batch (batch 18, Physics Wave 13, explicit exception — see §3i
-for full detail)**: authored the complete
-physics dependency-level-13 wave (6 concepts), continuing the same
-mandatory-rules cycle immediately after Wave 12's merge. All 6 verified
-against `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and
-heading order (0 mismatches), zero duplicates, zero orphans against the
-live physics KG (169 total physics EB files). `math.found` remains
-37/82, untouched this batch. Physics KG re-validated PASS (238/238
-reachable, 0 failures/warnings, no KG file touched); all 6 subject KGs
-re-validated PASS. Physics EB reached 169/238 — 71.01%. This wave
-introduced the first Quantum Mechanics domain entry
-(`phys.qm.wave-function`) and expanded Statistical Mechanics with two
-more hub concepts. **Merge note**: this batch's push encountered a
-concurrent push to `origin/main` (batch 17 below, a Chemistry EB level-4
-batch, 8 concepts). Merged rather than force-pushed; no bookkeeping
-gaps found this time in the concurrent commit for `COVERAGE.md`/
-`ROADMAP.md` (both were updated), though — consistent with the Wave 12
-merge's finding — `EDUCATIONAL_BRAIN_INDEX.md`, `QUALITY.md`, and
-`AUTHORING_QUEUE.md` were again not updated by the chemistry batch's own
-commit, corrected as part of this merge. True total, recomputed fresh
-from the live directories: **241** EB entries (169 physics + 37
-mathematics + 32 chemistry + 3 english), 1,534 remaining, 13.58%.
+**Prior batch (batch 19, Physics Wave 14, explicit exception — see §3j for full detail)**:
+authored the complete physics dependency-level-14 wave (10 concepts). Physics EB reached
+179/238 — 75.21%. True total at that point: 251 entries. `math.found` remains 37/82.
 
-**Batch 17 (concurrent, Chemistry EB level 4, standing production
-run)**: authored the 8 concepts at dependency level 4 —
-`chem.atomic.bohr-model`, `chem.kinet.rate`, `chem.sol.types`,
-`chem.state.molar-mass-gas`, `chem.state.real-gases`,
-`chem.thermo.enthalpy`, `chem.thermo.entropy`,
-`chem.thermo.heat-capacities`. All 8 verified against
-`EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and heading
-order (0 mismatches), zero duplicates, zero orphans. Chemistry is now
-32/186 (17.20%). Level 5 is next (6 concepts:
-`chem.atomic.quantum-numbers`, `chem.kinet.photochemistry`,
-`chem.kinet.rate-law`, `chem.sol.solubility`, `chem.thermo.gibbs`,
-`chem.thermo.third-law`).
 
 **Prior batch (batch 16, Physics Wave 12, explicit exception — see §3h
 for full detail)**: authored the complete
