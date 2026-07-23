@@ -14,7 +14,7 @@ and this file's summary row should be corrected to match.
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
 | physics | 238 | 179 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 (2026-07-23, level 14, this batch): `phys.mech.poisson-brackets`, `phys.mod.radioactive-decay`, `phys.qm.schrodinger-equation`, `phys.qm.uncertainty-principle`, `phys.rel.relativistic-momentum`, `phys.stat.bose-einstein`, `phys.stat.entropy-statistical`, `phys.stat.fluctuations-correlations`, `phys.stat.free-energy`, `phys.stat.grand-canonical-ensemble` — 59 concepts remain (75.21%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-13 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
-| chemistry | 186 | 45 | levels 0–6 complete (45/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil — IN PROGRESS |
+| chemistry | 186 | 50 | levels 0–7 complete (50/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
 
@@ -818,3 +818,14 @@ Authored 7 concepts in topological order (level 6):
 - `chem.thermo.cell-thermo` (proficient/apply/3h/0.75) — ΔG = −nFE; ΔG° = −nFE°; K from E°; Nernst equation; (∂E/∂T) = ΔS/nF
 
 Chemistry: 38 → 45/186 entries. Total authored: 257 → 264.
+
+### Chemistry batch 4 — level 7 (2026-07-23)
+
+Five concepts in strict topological order (level 7 — all prerequisites at level ≤ 6):
+- `chem.atomic.electronic-config` (developing/apply) — Aufbau, Pauli, Hund; 4s→3d fill, 3d→4s ionise; Cr/Cu anomalies; exchange energy
+- `chem.atomic.quantum-mech-model` (proficient/understand) — Schrödinger equation qualitative; ψ vs |ψ|² Born interpretation; Heisenberg uncertainty (fundamental)
+- `chem.equil.kc-kp` (proficient/apply) — Kc/Kp expressions; stoichiometric exponents; heterogeneous equilibria exclude solids/liquids; ICE tables; Kp=Kc(RT)^Δn
+- `chem.equil.kw-ph` (developing/apply) — Kw=[H⁺][OH⁻]=10⁻¹⁴; pH=−log[H⁺]; pH+pOH=14 at 298K; strong acids/bases; neutral≠pH7 at non-298K
+- `chem.kinet.catalysis` (proficient/understand) — Ea lowered (not K); homogeneous vs heterogeneous; Arrhenius rate ratio; enzyme kinetics qualitative
+
+Running total: 50/186 chemistry entries. Levels 0–7 complete.

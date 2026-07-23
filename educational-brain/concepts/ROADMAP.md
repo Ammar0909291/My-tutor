@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **264** |
+| Concepts with an Educational Brain entry | **269** |
 | Remaining | **1,511** |
-| Completion percentage | **14.87%** |
+| Completion percentage | **15.15%** |
 
 ---
 
@@ -26,7 +26,7 @@ below from source whenever this file is updated, never hand-estimate.
 | mathematics | 908 | 37 | 4.07% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 179 | 75.21% | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
-| chemistry | 186 | 45 | 24.19% | `chem.found.matter` | **Yes** |
+| chemistry | 186 | 50 | 26.88% | `chem.found.matter` | **Yes** |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
 
@@ -440,8 +440,8 @@ standing production run)**: authored the 7 concepts at dependency level 6 —
 `chem.kinet.integrated-rate`, `chem.kinet.mechanism`, `chem.thermo.cell-thermo`. All 7
 verified against `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and heading
 order (0 mismatches), zero duplicates, zero orphans. Chemistry is now 45/186 (24.19%).
-True total, recomputed fresh: **264** EB entries (179 physics + 37 mathematics + 45
-chemistry + 3 english), 1,511 remaining, 14.87%. Level 7 is next.
+True total, recomputed fresh: **269** EB entries (179 physics + 37 mathematics + 50
+chemistry + 3 english), 1,506 remaining, 15.15%. Level 7 is next.
 
 **Prior batch (batch 20, Chemistry EB level 5)**: authored 6 concepts at level 5.
 Chemistry reached 38/186 (20.43%). True total at that point: 257 entries.
