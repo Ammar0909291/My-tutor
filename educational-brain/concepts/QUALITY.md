@@ -14,7 +14,7 @@ rather than hand-edit when entries change.
   `docs/curriculum/blueprints/{id}.md`. A ✓ here means the section
   EXISTS, not that its content has been re-verified against the
   Standard's narrower scope rules.
-- **Blueprint column, 266/409**: 7 `math.found` concepts genuinely have
+- **Blueprint column, 268/411**: 7 `math.found` concepts genuinely have
   no Blueprint yet (`math.found.definition`, `inductive-reasoning`,
   `mathematical-modeling`, `mathematical-symbols`,
   `problem-solving-strategies` — Wave 2 — plus `reading-mathematics` —
@@ -28,11 +28,9 @@ rather than hand-edit when entries change.
   reference `docs/chemistry/kg/graph.json` and standard chemistry
   pedagogy directly — correctly read as ✗ under this column's literal
   methodology (existence of the `docs/curriculum/blueprints/` file
-  specifically), not as missing content. This regeneration merges this
-  session's Physics Wave 21 (5 concepts, 228→233) with a concurrent
-  session's Chemistry level-14 batch (15 concepts, 121→136), both
-  landed on `origin/main` independently and reconciled via merge, on top
-  of the prior 389-entry state.
+  specifically), not as missing content. This regeneration adds this
+  session's 2-concept Physics Wave 22 batch (both have existing
+  Blueprints, reused by reference) on top of the prior 409-entry state.
 - **Cross-links**: a ✓ means the entry's Transfer/Cross-Subject section
   *discusses* cross-subject connections — including entries that
   honestly conclude "none via KG cross_links at this node."
@@ -40,7 +38,7 @@ rather than hand-edit when entries change.
   pre-Standard entries correctly read ✗ (expected migration debt); all
   entries authored under the current Standard (math.found, physics,
   english, and chemistry batches from 2026-07-22 onward) correctly read ✓.
-- **Tutor Actions, 333/409**: the same 71 pre-Standard TEMPLATE.md-era
+- **Tutor Actions, 335/411**: the same 71 pre-Standard TEMPLATE.md-era
   entries plus 5 concurrent `math.found` Wave 6 entries
   (`logical-equivalence`, `ordinal-number`, `quantifiers`, `relation`,
   `subset`) use a different, numbered 21-section heading scheme
@@ -52,27 +50,26 @@ rather than hand-edit when entries change.
   migration debt (76 = 71 + 5), not introduced this batch — rewriting
   another session's freshly authored files remains out of scope.
 
-## Aggregate summary (409 entries)
+## Aggregate summary (411 entries)
 
-Merges this session's Physics Wave 21 (5 concepts, 228→233) with a
-concurrent session's Chemistry level-14 batch (15 concepts, 121→136),
-both landed on `origin/main` independently and reconciled via merge, on
-top of the prior 389-entry state. All numbers below were recomputed
-fresh by scanning every live file in
-`educational-brain/concepts/{subject}/` — none hand-estimated.
+Adds this session's Physics Wave 22 (2 concepts, 233→235) on top of the
+prior 409-entry state (Physics Wave 21 5 concepts + concurrent Chemistry
+level-14 batch, 15 concepts). All numbers below were recomputed fresh by
+scanning every live file in `educational-brain/concepts/{subject}/` —
+none hand-estimated.
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 266 / 409 | see methodology note above — 7 `math.found` + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file (confirmed by forensic audit: chemistry Blueprints have never existed) |
-| Educational Brain | 409 / 409 | trivially true (this is the entry list) |
-| Mental Model | 409 / 409 | |
-| Misconceptions | 409 / 409 | |
-| Analogies | 409 / 409 | |
-| Recovery Strategy | 409 / 409 | |
-| Assessment Signals | 409 / 409 | |
-| Tutor Actions | 333 / 409 | see methodology note above — 71 pre-existing TEMPLATE.md-era entries + 5 non-Standard `math.found` Wave 6 entries |
-| Cross-links | 333 / 409 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the 71 pre-Standard entries use a different section name |
-| Version History | 338 / 409 | the 71 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored under the current Standard read ✓ |
+| Blueprint | 268 / 411 | see methodology note above — 7 `math.found` + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file (confirmed by forensic audit: chemistry Blueprints have never existed) |
+| Educational Brain | 411 / 411 | trivially true (this is the entry list) |
+| Mental Model | 411 / 411 | |
+| Misconceptions | 411 / 411 | |
+| Analogies | 411 / 411 | |
+| Recovery Strategy | 411 / 411 | |
+| Assessment Signals | 411 / 411 | |
+| Tutor Actions | 335 / 411 | see methodology note above — 71 pre-existing TEMPLATE.md-era entries + 5 non-Standard `math.found` Wave 6 entries |
+| Cross-links | 335 / 411 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the 71 pre-Standard entries use a different section name |
+| Version History | 340 / 411 | the 71 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored under the current Standard read ✓ |
 
 ## Per-concept ledger
 
@@ -193,6 +190,7 @@ fresh by scanning every live file in
 | `phys.mod.compton-effect` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.de-broglie` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.energy-bands` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.mod.extrinsic-semiconductors` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.intrinsic-semiconductors` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.nuclear-fission` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.nuclear-fusion` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -228,6 +226,7 @@ fresh by scanning every live file in
 | `phys.particle.four-forces` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.particle.gauge-bosons` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.particle.hadron-quark-model` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.particle.higgs-mechanism` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.particle.leptons` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.particle.neutrinos` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.particle.particle-classification` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

@@ -927,7 +927,7 @@ its subject KG.
 | trig | `math.trig.trig-identities` | Trigonometric Identities | Yes | No | — | MISSING |
 | trig | `math.trig.unit-circle` | Unit Circle | Yes | No | — | MISSING |
 
-## physics (238 concepts, 233 READY)
+## physics (238 concepts, 235 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | astro | `phys.astro.black-holes` | Black Holes and Schwarzschild Radius | Yes | Yes | `educational-brain/concepts/physics/phys.astro.black-holes.md` | READY |
@@ -1046,7 +1046,7 @@ its subject KG.
 | mod | `phys.mod.de-broglie` | de Broglie Hypothesis — Matter Waves | Yes | Yes | `educational-brain/concepts/physics/phys.mod.de-broglie.md` | READY |
 | mod | `phys.mod.diode-rectification` | Diode Rectifying Behavior | Yes | No | — | MISSING |
 | mod | `phys.mod.energy-bands` | Energy Bands in Solids | Yes | Yes | `educational-brain/concepts/physics/phys.mod.energy-bands.md` | READY |
-| mod | `phys.mod.extrinsic-semiconductors` | Extrinsic Semiconductors: Doping and Carrier Types | Yes | No | — | MISSING |
+| mod | `phys.mod.extrinsic-semiconductors` | Extrinsic Semiconductors: Doping and Carrier Types | Yes | Yes | `educational-brain/concepts/physics/phys.mod.extrinsic-semiconductors.md` | READY |
 | mod | `phys.mod.intrinsic-semiconductors` | Intrinsic Semiconductors | Yes | Yes | `educational-brain/concepts/physics/phys.mod.intrinsic-semiconductors.md` | READY |
 | mod | `phys.mod.nuclear-fission` | Nuclear Fission and Chain Reactions | Yes | Yes | `educational-brain/concepts/physics/phys.mod.nuclear-fission.md` | READY |
 | mod | `phys.mod.nuclear-fusion` | Nuclear Fusion and Stellar Energy | Yes | Yes | `educational-brain/concepts/physics/phys.mod.nuclear-fusion.md` | READY |
@@ -1083,7 +1083,7 @@ its subject KG.
 | particle | `phys.particle.four-forces` | Four Fundamental Forces | Yes | Yes | `educational-brain/concepts/physics/phys.particle.four-forces.md` | READY |
 | particle | `phys.particle.gauge-bosons` | Gauge Bosons and Force Carriers | Yes | Yes | `educational-brain/concepts/physics/phys.particle.gauge-bosons.md` | READY |
 | particle | `phys.particle.hadron-quark-model` | Quark Model of Hadrons: Baryons and Mesons | Yes | Yes | `educational-brain/concepts/physics/phys.particle.hadron-quark-model.md` | READY |
-| particle | `phys.particle.higgs-mechanism` | The Higgs Mechanism | Yes | No | — | MISSING |
+| particle | `phys.particle.higgs-mechanism` | The Higgs Mechanism | Yes | Yes | `educational-brain/concepts/physics/phys.particle.higgs-mechanism.md` | READY |
 | particle | `phys.particle.leptons` | Leptons | Yes | Yes | `educational-brain/concepts/physics/phys.particle.leptons.md` | READY |
 | particle | `phys.particle.neutrinos` | Neutrinos | Yes | Yes | `educational-brain/concepts/physics/phys.particle.neutrinos.md` | READY |
 | particle | `phys.particle.particle-classification` | Particle Classification: Hadrons and Leptons | Yes | Yes | `educational-brain/concepts/physics/phys.particle.particle-classification.md` | READY |
