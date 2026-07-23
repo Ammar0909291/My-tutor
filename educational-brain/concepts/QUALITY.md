@@ -30,20 +30,20 @@ rather than hand-edit when entries change.
   Wave 2, 6 from Wave 3, 4 from Wave 4, 8 from Wave 5 of math.found)
   correctly read ✓.
 
-## Aggregate summary (190 entries)
+## Aggregate summary (198 entries)
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 183 / 190 | 7 genuinely have none yet — see note above; +11 from this batch (all 11 have existing Blueprints) |
-| Educational Brain | 190 / 190 | trivially true (this is the entry list) |
-| Mental Model | 190 / 190 | |
-| Misconceptions | 190 / 190 | |
-| Analogies | 190 / 190 | |
-| Recovery Strategy | 190 / 190 | |
-| Assessment Signals | 190 / 190 | |
-| Tutor Actions | 190 / 190 | |
-| Cross-links | 163 / 190 | +11 from this batch (all 11 physics Wave 11 entries discuss cross-subject connections) |
-| Version History | 119 / 190 | +11 from this batch (physics Wave 11, all 11 authored under the Standard) |
+| Blueprint | 191 / 198 | 7 genuinely have none yet — see note above; +8 from this batch (all 8 have existing Blueprints) |
+| Educational Brain | 198 / 198 | trivially true (this is the entry list) |
+| Mental Model | 198 / 198 | |
+| Misconceptions | 198 / 198 | |
+| Analogies | 198 / 198 | |
+| Recovery Strategy | 198 / 198 | |
+| Assessment Signals | 198 / 198 | |
+| Tutor Actions | 198 / 198 | |
+| Cross-links | 171 / 198 | +8 from this batch (all 8 physics Wave 12 entries discuss cross-subject connections) |
+| Version History | 127 / 198 | +8 from this batch (physics Wave 12, all 8 authored under the Standard) |
 
 ## Per-concept ledger
 
@@ -136,9 +136,11 @@ rather than hand-edit when entries change.
 | `phys.mech.circular-motion` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
 | `phys.mech.collisions-elastic` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.collisions-inelastic` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.mech.conservation-of-angular-momentum` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.conservation-of-energy` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.conservation-of-momentum` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.conservative-forces` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.mech.cyclic-coordinates-conservation-laws` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.displacement` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.mech.equilibrium` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.escape-velocity` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -149,6 +151,7 @@ rather than hand-edit when entries change.
 | `phys.mech.generalized-coordinates` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.gravitational-field` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.gravitational-potential` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.mech.hamiltonian` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.hookes-law` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.impulse` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.inclined-plane` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -180,11 +183,13 @@ rather than hand-edit when entries change.
 | `phys.mech.viscosity` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.work` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
 | `phys.mech.work-energy-theorem` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.mod.atomic-spectra` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.bohr-model` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.compton-effect` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.de-broglie` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.photoelectric-effect` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.photons` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.mod.wave-particle-duality` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.x-rays` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.opt.brewsters-law` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
 | `phys.opt.diffraction` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -201,9 +206,11 @@ rather than hand-edit when entries change.
 | `phys.opt.total-internal-reflection` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
 | `phys.opt.wave-optics` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.opt.youngs-experiment` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.rel.length-contraction` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.rel.postulates` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.rel.simultaneity` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.rel.time-dilation` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.stat.boltzmann-factor` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.stat.probability-basics` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.therm.calorimetry` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
 | `phys.therm.carnot-cycle` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -215,6 +222,7 @@ rather than hand-edit when entries change.
 | `phys.therm.internal-energy` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
 | `phys.therm.kinetic-theory` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
 | `phys.therm.phase-transitions` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ |
+| `phys.therm.refrigerators` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.therm.second-law` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.therm.specific-heat` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
 | `phys.therm.temperature` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |

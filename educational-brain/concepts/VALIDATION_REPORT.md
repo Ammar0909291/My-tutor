@@ -1,8 +1,8 @@
 # Educational Brain Production Pipeline — Validation Report
 
 Generated 2026-07-22 against the live repository state; re-run this batch
-(Physics Wave 11) against the post-push state (`origin/main` @
-`8540dab1`). Every check below was computed directly from
+(Physics Wave 12) against the post-push state (`origin/main` @
+`0000e08b`, pre-Wave-12-push tip). Every check below was computed directly from
 `docs/{subject}/kg/graph.json` (all 6 subjects), `docs/curriculum/blueprints/`,
 and `educational-brain/concepts/{subject}/` — none of the numbers here are
 estimated or copied from prior reports.
@@ -35,7 +35,7 @@ report).
 
 **✓ Every Educational Brain entry points to one existing KG concept.**
 Checked: every filename in `educational-brain/concepts/{subject}/`
-(190 files, re-checked this batch after 11 new `phys.*` Wave 11 entries)
+(198 files, re-checked this batch after 8 new `phys.*` Wave 12 entries)
 against that subject's live KG id set. **0 orphans** — every EB file
 resolves to a real, current KG concept.
 
@@ -46,25 +46,25 @@ filesystem could technically hold `Foo.md` and `foo.md` as distinct
 files) — **0 duplicates**.
 
 **◐ Every Educational Brain entry references one Blueprint — partially,
-honestly reported.** 183 of 190 EB entries' concepts have a matching
+honestly reported.** 191 of 198 EB entries' concepts have a matching
 Blueprint FILE on disk. The other 7 (`math.found.definition`,
 `inductive-reasoning`, `mathematical-modeling`, `mathematical-symbols`,
 `problem-solving-strategies` — Wave 2 — plus `reading-mathematics` —
 Wave 3 — plus `empty-set` — Wave 5) genuinely have no Blueprint yet —
 each states this explicitly in its own Blueprint References section per
-Quality Gate 2, rather than omitting the section. All 11 of this batch's
-new physics entries (Wave 11) DO have existing Blueprints, each reused by
-reference. 120 of the 190 now have an explicit, machine-checkable
+Quality Gate 2, rather than omitting the section. All 8 of this batch's
+new physics entries (Wave 12) DO have existing Blueprints, each reused by
+reference. 128 of the 198 now have an explicit, machine-checkable
 "Blueprint References" section citing it by name (or citing its absence)
 — `eng.phonics.print-concepts` plus this program's 31 `math.found.*`
 entries plus 12 `phys.*` Wave 6 entries plus 25 `phys.*` Wave 7 entries
 plus 15 `phys.*` Wave 8 entries plus 16 `phys.*` Wave 9 entries plus 9
-`phys.*` Wave 10 entries plus this batch's 11 `phys.*` Wave 11 entries,
-all authored under `EDUCATIONAL_BRAIN_STANDARD.md`. The remaining 70
-predate that section (authored under the old `TEMPLATE.md`) and
-reference their Blueprints only informally or not at all in prose — the
-migration debt already recorded in `EDUCATIONAL_BRAIN_STANDARD.md` §6
-and `QUALITY.md`.
+`phys.*` Wave 10 entries plus 11 `phys.*` Wave 11 entries plus this
+batch's 8 `phys.*` Wave 12 entries, all authored under
+`EDUCATIONAL_BRAIN_STANDARD.md`. The remaining 70 predate that section
+(authored under the old `TEMPLATE.md`) and reference their Blueprints
+only informally or not at all in prose — the migration debt already
+recorded in `EDUCATIONAL_BRAIN_STANDARD.md` §6 and `QUALITY.md`.
 
 **✓ No duplicate Educational Brain files.** 0 found (see above).
 
@@ -238,6 +238,32 @@ program. Physics KG re-validated fresh this batch: PASS, 238/238
 reachable, 0 failures/warnings — no KG file was touched. `physics` is
 now 155/238 — 65.13%.
 
+## Physics Wave 12 — mandatory-rules cycle continuation (2026-07-23)
+
+Continuation of the same mandatory-rules production cycle immediately
+following Wave 11 within the same conversation, per rule 10. Re-fetched
+`origin/main` after the Wave 11 push and confirmed 0 commits ahead/
+behind before starting — no other session had touched physics EB
+concurrently. Independently recomputed dependency levels via a fresh
+Kahn's-algorithm pass over the live KG's `requires` edges — the
+level-12 set (8 concepts) matched `AUTHORING_QUEUE.md`'s stored rows
+exactly, zero discrepancy. Authored all 8. All 8 individually pass every
+per-entry check: structural 21-section conformance verified by heading
+scan and exact heading-order diff (0 mismatches across all 8); 0
+orphans; 0 duplicates; Blueprint References section present and accurate
+(all 8 cite an existing Blueprint — all 8 cite all 4 of their
+Blueprint's documented misconceptions, extending the 4-misconception
+density pattern to 18 concepts across this program); no runtime-asset
+duplication (none of the 8 created any `AssetIdentity` records). This
+wave introduced the second Statistical Mechanics domain entry
+(`phys.stat.boltzmann-factor`) and reached the Hamiltonian formulation
+hub concept (`phys.mech.hamiltonian`), a genuine bridge into quantum
+mechanics via its KG unlock
+`phys.qm.scattering-theory-born-approximation`. Physics KG re-validated
+fresh this batch: PASS, 238/238 reachable, 0 failures/warnings — no KG
+file was touched; all 6 subject KGs re-validated PASS this batch.
+`physics` is now 163/238 — 68.49%.
+
 ## Domain Certification — math.found
 
 **Certification does NOT pass**, correctly: `math.found` has 82 total
@@ -264,7 +290,7 @@ three; all stay open until `math.found` reaches 82/82.
 ## Full index and queue
 
 See `EDUCATIONAL_BRAIN_INDEX.md` (1,775 rows, one per KG concept, with
-Blueprint/EB/Status columns) and `AUTHORING_QUEUE.md` (1,585 rows — every
+Blueprint/EB/Status columns) and `AUTHORING_QUEUE.md` (1,577 rows — every
 `MISSING` concept, with `math.found`'s remaining 51 called out as the
 default next targets per the current Domain Certification Mode, unless
 overridden by an equally explicit subject-specific instruction as this
@@ -275,8 +301,10 @@ this report.
 
 **No blocking defect found.** The two mathematics/chemistry cross-link
 findings (KG-level, pre-existing) remain informational, as does this
-batch's own new physics cross-link finding (11 empty-but-genuine
-cross-subject connections + 1 honest "none found" — an EB-authoring-level
+batch's own new physics cross-link finding (1 genuine cross-subject
+connection identified in Curriculum Feedback despite an empty KG
+`cross_links` field — `phys.stat.boltzmann-factor`'s Arrhenius-equation
+link to chemistry — + 7 honest "none found" — an EB-authoring-level
 observation, not a KG defect). None of these break any of the Phase 2
 checklist's pass/fail criteria. The two open items (Blueprint References
 migration debt on 70 pre-Standard entries; math.found domain at 31/82)

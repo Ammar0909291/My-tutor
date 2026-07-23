@@ -928,7 +928,7 @@ its subject KG.
 | trig | `math.trig.trig-identities` | Trigonometric Identities | Yes | No | — | MISSING |
 | trig | `math.trig.unit-circle` | Unit Circle | Yes | No | — | MISSING |
 
-## physics (238 concepts, 155 READY)
+## physics (238 concepts, 163 READY)
 
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
@@ -991,11 +991,11 @@ its subject KG.
 | mech | `phys.mech.circular-motion` | Uniform Circular Motion | Yes | Yes | `educational-brain/concepts/physics/phys.mech.circular-motion.md` | READY |
 | mech | `phys.mech.collisions-elastic` | Elastic Collisions | Yes | Yes | `educational-brain/concepts/physics/phys.mech.collisions-elastic.md` | READY |
 | mech | `phys.mech.collisions-inelastic` | Inelastic Collisions | Yes | Yes | `educational-brain/concepts/physics/phys.mech.collisions-inelastic.md` | READY |
-| mech | `phys.mech.conservation-of-angular-momentum` | Conservation of Angular Momentum | Yes | No | — | MISSING |
+| mech | `phys.mech.conservation-of-angular-momentum` | Conservation of Angular Momentum | Yes | Yes | `educational-brain/concepts/physics/phys.mech.conservation-of-angular-momentum.md` | READY |
 | mech | `phys.mech.conservation-of-energy` | Conservation of Mechanical Energy | Yes | Yes | `educational-brain/concepts/physics/phys.mech.conservation-of-energy.md` | READY |
 | mech | `phys.mech.conservation-of-momentum` | Conservation of Linear Momentum | Yes | Yes | `educational-brain/concepts/physics/phys.mech.conservation-of-momentum.md` | READY |
 | mech | `phys.mech.conservative-forces` | Conservative and Non-Conservative Forces | Yes | Yes | `educational-brain/concepts/physics/phys.mech.conservative-forces.md` | READY |
-| mech | `phys.mech.cyclic-coordinates-conservation-laws` | Cyclic Coordinates and Noether's Theorem | Yes | No | — | MISSING |
+| mech | `phys.mech.cyclic-coordinates-conservation-laws` | Cyclic Coordinates and Noether's Theorem | Yes | Yes | `educational-brain/concepts/physics/phys.mech.cyclic-coordinates-conservation-laws.md` | READY |
 | mech | `phys.mech.displacement` | Displacement and Distance | Yes | Yes | `educational-brain/concepts/physics/phys.mech.displacement.md` | READY |
 | mech | `phys.mech.equilibrium` | Static Equilibrium | Yes | Yes | `educational-brain/concepts/physics/phys.mech.equilibrium.md` | READY |
 | mech | `phys.mech.escape-velocity` | Escape Velocity | Yes | Yes | `educational-brain/concepts/physics/phys.mech.escape-velocity.md` | READY |
@@ -1007,7 +1007,7 @@ its subject KG.
 | mech | `phys.mech.gravitational-field` | Gravitational Field and Field Lines | Yes | Yes | `educational-brain/concepts/physics/phys.mech.gravitational-field.md` | READY |
 | mech | `phys.mech.gravitational-potential` | Gravitational Potential Energy | Yes | Yes | `educational-brain/concepts/physics/phys.mech.gravitational-potential.md` | READY |
 | mech | `phys.mech.hamilton-jacobi-equation` | Hamilton-Jacobi Equation and Action-Angle Variables | Yes | No | — | MISSING |
-| mech | `phys.mech.hamiltonian` | The Hamiltonian and Legendre Transform | Yes | No | — | MISSING |
+| mech | `phys.mech.hamiltonian` | The Hamiltonian and Legendre Transform | Yes | Yes | `educational-brain/concepts/physics/phys.mech.hamiltonian.md` | READY |
 | mech | `phys.mech.hamiltons-equations` | Hamilton's Equations of Motion | Yes | No | — | MISSING |
 | mech | `phys.mech.hookes-law` | Hooke's Law and Spring Force | Yes | Yes | `educational-brain/concepts/physics/phys.mech.hookes-law.md` | READY |
 | mech | `phys.mech.impulse` | Impulse and Momentum Change | Yes | Yes | `educational-brain/concepts/physics/phys.mech.impulse.md` | READY |
@@ -1041,7 +1041,7 @@ its subject KG.
 | mech | `phys.mech.viscosity` | Viscosity and Stokes' Law | Yes | Yes | `educational-brain/concepts/physics/phys.mech.viscosity.md` | READY |
 | mech | `phys.mech.work` | Work Done by a Force | Yes | Yes | `educational-brain/concepts/physics/phys.mech.work.md` | READY |
 | mech | `phys.mech.work-energy-theorem` | Work-Energy Theorem | Yes | Yes | `educational-brain/concepts/physics/phys.mech.work-energy-theorem.md` | READY |
-| mod | `phys.mod.atomic-spectra` | Atomic Spectra and Energy Levels | Yes | No | — | MISSING |
+| mod | `phys.mod.atomic-spectra` | Atomic Spectra and Energy Levels | Yes | Yes | `educational-brain/concepts/physics/phys.mod.atomic-spectra.md` | READY |
 | mod | `phys.mod.binding-energy` | Nuclear Binding Energy and Mass Defect | Yes | No | — | MISSING |
 | mod | `phys.mod.bohr-model` | Bohr Model of the Hydrogen Atom | Yes | Yes | `educational-brain/concepts/physics/phys.mod.bohr-model.md` | READY |
 | mod | `phys.mod.compton-effect` | Compton Scattering | Yes | Yes | `educational-brain/concepts/physics/phys.mod.compton-effect.md` | READY |
@@ -1060,7 +1060,7 @@ its subject KG.
 | mod | `phys.mod.radioactive-decay` | Radioactive Decay Law and Half-Life | Yes | No | — | MISSING |
 | mod | `phys.mod.radioactivity` | Radioactivity: Alpha, Beta, Gamma Decay | Yes | No | — | MISSING |
 | mod | `phys.mod.semiconductor-classification` | Conductors, Insulators, and Semiconductors | No | No | — | MISSING |
-| mod | `phys.mod.wave-particle-duality` | Wave-Particle Duality | Yes | No | — | MISSING |
+| mod | `phys.mod.wave-particle-duality` | Wave-Particle Duality | Yes | Yes | `educational-brain/concepts/physics/phys.mod.wave-particle-duality.md` | READY |
 | mod | `phys.mod.x-rays` | X-Rays and Their Properties | Yes | Yes | `educational-brain/concepts/physics/phys.mod.x-rays.md` | READY |
 | opt | `phys.opt.brewsters-law` | Brewster's Law and Malus's Law | Yes | Yes | `educational-brain/concepts/physics/phys.opt.brewsters-law.md` | READY |
 | opt | `phys.opt.diffraction` | Diffraction of Light | Yes | Yes | `educational-brain/concepts/physics/phys.opt.diffraction.md` | READY |
@@ -1112,7 +1112,7 @@ its subject KG.
 | qm | `phys.qm.variational-method` | Variational Method and Variational Principle | Yes | No | — | MISSING |
 | qm | `phys.qm.wave-function` | Wave Function and Probability Interpretation | Yes | No | — | MISSING |
 | qm | `phys.qm.wkb-approximation` | WKB Approximation (Semiclassical Limit) | Yes | No | — | MISSING |
-| rel | `phys.rel.length-contraction` | Length Contraction | Yes | No | — | MISSING |
+| rel | `phys.rel.length-contraction` | Length Contraction | Yes | Yes | `educational-brain/concepts/physics/phys.rel.length-contraction.md` | READY |
 | rel | `phys.rel.lorentz-transform` | Lorentz Transformations | Yes | No | — | MISSING |
 | rel | `phys.rel.mass-energy` | Mass-Energy Equivalence: E=mc² | Yes | No | — | MISSING |
 | rel | `phys.rel.postulates` | Postulates of Special Relativity | Yes | Yes | `educational-brain/concepts/physics/phys.rel.postulates.md` | READY |
@@ -1120,7 +1120,7 @@ its subject KG.
 | rel | `phys.rel.simultaneity` | Relativity of Simultaneity | Yes | Yes | `educational-brain/concepts/physics/phys.rel.simultaneity.md` | READY |
 | rel | `phys.rel.spacetime` | Spacetime Interval and Four-Vectors | Yes | No | — | MISSING |
 | rel | `phys.rel.time-dilation` | Time Dilation | Yes | Yes | `educational-brain/concepts/physics/phys.rel.time-dilation.md` | READY |
-| stat | `phys.stat.boltzmann-factor` | Boltzmann Factor and Statistical Weight | Yes | No | — | MISSING |
+| stat | `phys.stat.boltzmann-factor` | Boltzmann Factor and Statistical Weight | Yes | Yes | `educational-brain/concepts/physics/phys.stat.boltzmann-factor.md` | READY |
 | stat | `phys.stat.bose-einstein` | Bose-Einstein Statistics | Yes | No | — | MISSING |
 | stat | `phys.stat.chemical-potential` | Chemical Potential and Thermodynamic Equilibrium | Yes | No | — | MISSING |
 | stat | `phys.stat.entropy-statistical` | Statistical Definition of Entropy | Yes | No | — | MISSING |
@@ -1145,7 +1145,7 @@ its subject KG.
 | therm | `phys.therm.internal-energy` | Internal Energy of a System | Yes | Yes | `educational-brain/concepts/physics/phys.therm.internal-energy.md` | READY |
 | therm | `phys.therm.kinetic-theory` | Kinetic Theory of Gases | Yes | Yes | `educational-brain/concepts/physics/phys.therm.kinetic-theory.md` | READY |
 | therm | `phys.therm.phase-transitions` | Phase Transitions and Latent Heat | Yes | Yes | `educational-brain/concepts/physics/phys.therm.phase-transitions.md` | READY |
-| therm | `phys.therm.refrigerators` | Refrigerators and Heat Pumps | Yes | No | — | MISSING |
+| therm | `phys.therm.refrigerators` | Refrigerators and Heat Pumps | Yes | Yes | `educational-brain/concepts/physics/phys.therm.refrigerators.md` | READY |
 | therm | `phys.therm.second-law` | Second Law of Thermodynamics | Yes | Yes | `educational-brain/concepts/physics/phys.therm.second-law.md` | READY |
 | therm | `phys.therm.specific-heat` | Specific Heat Capacity | Yes | Yes | `educational-brain/concepts/physics/phys.therm.specific-heat.md` | READY |
 | therm | `phys.therm.temperature` | Temperature and Thermal Equilibrium | Yes | Yes | `educational-brain/concepts/physics/phys.therm.temperature.md` | READY |
