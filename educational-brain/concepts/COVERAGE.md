@@ -14,7 +14,7 @@ and this file's summary row should be corrected to match.
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
 | physics | 238 | 228 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 (2026-07-23, level 20, this batch): `phys.astro.dark-matter`, `phys.astro.black-holes`, `phys.particle.weak-interaction`, `phys.particle.conservation-laws`, `phys.mod.semiconductor-classification` — 10 concepts remain (95.80%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-19 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
-| chemistry | 186 | 121 | levels 0–13 complete (121/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock, chem.redox, chem.dblock, chem.org, chem.pblock, chem.solid — IN PROGRESS |
+| chemistry | 186 | 136 | levels 0–14 complete (136/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock, chem.redox, chem.dblock, chem.org, chem.pblock, chem.solid, chem.hyd, chem.hal, chem.coord — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
 
@@ -1136,3 +1136,6 @@ physics iteration should begin immediately with a fresh fetch/audit per
 this program's standing discipline, continuing without pausing until
 physics reaches 238/238. Only 10 physics concepts remain across levels
 21-24.
+
+### Batch 29 — Chemistry level 14 (2026-07-23)
+Authored 15 level-14 concepts in topological order: `chem.coord.applications`, `chem.coord.bonding`, `chem.coord.isomerism`, `chem.dblock.organometallics`, `chem.elect.batteries`, `chem.elect.corrosion`, `chem.elect.electrolysis`, `chem.elect.standard-electrode`, `chem.hal.introduction`, `chem.hyd.arenes`, `chem.hyd.conformations`, `chem.hyd.petroleum`, `chem.org.reactive-intermediates`, `chem.sblock.water`, `chem.state.liquids`. Chemistry: 121 → 136/186.
