@@ -14,7 +14,7 @@ and this file's summary row should be corrected to match.
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
 | physics | 238 | 179 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 (2026-07-23, level 14, this batch): `phys.mech.poisson-brackets`, `phys.mod.radioactive-decay`, `phys.qm.schrodinger-equation`, `phys.qm.uncertainty-principle`, `phys.rel.relativistic-momentum`, `phys.stat.bose-einstein`, `phys.stat.entropy-statistical`, `phys.stat.fluctuations-correlations`, `phys.stat.free-energy`, `phys.stat.grand-canonical-ensemble` — 59 concepts remain (75.21%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-13 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
-| chemistry | 186 | 66 | levels 0–9 complete (66/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock — IN PROGRESS |
+| chemistry | 186 | 73 | levels 0–10 complete (73/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock, chem.redox — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
 
@@ -858,3 +858,13 @@ Running total: 56/186 chemistry entries. Levels 0–8 complete.
 - `chem.surface.heterogeneous-cat` (advanced/analyze): three-step mechanism (adsorption→surface reaction→desorption); active sites (geometric+electronic); Sabatier principle; poisoning; promoters; Haber (Fe, rate-limiting N₂ chemisorption); Contact (V₂O₅, Mars-van Krevelen); catalytic converter; MC-1 catalyst provides energy; MC-2 Haber/Contact catalyst swap; MC-3 poisoning=total deactivation
 
 Chemistry: 56 → 66 entries. Levels 0–9 complete.
+
+### Batch 25 — Chemistry Level 10 (2026-07-23)
+7 concepts authored (level 10 complete, 73/186 chemistry entries):
+- chem.bond.covalent-bonding — developing/understand; Lewis structures, bond order, polarity, molecular polarity vector sum
+- chem.bond.ionic-bonding — developing/understand; electron transfer, lattice energy, Born-Haber overview, properties from lattice model
+- chem.equil.buffer — proficient/apply; Henderson-Hasselbalch, buffer capacity, blood buffer, component selection
+- chem.equil.hydrolysis — proficient/apply; salt classification, anion/cation hydrolysis, Kh=Kw/Ka, pH calculation
+- chem.equil.titration — proficient/apply; all four curve types, equivalence vs endpoint, indicator selection, pH at six stages
+- chem.period.periodic-properties — developing/analyze; synthesis node: Zeff/n framework, electronegativity, metallic character, reactivity, diagonal relationships
+- chem.redox.oxidation-state — developing/apply; OS rule set (priority cascade), OIL RIG, oxidising/reducing agent, disproportionation
