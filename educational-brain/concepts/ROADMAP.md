@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **394** |
-| Remaining | **1,381** |
-| Completion percentage | **22.20%** |
+| Concepts with an Educational Brain entry | **409** |
+| Remaining | **1,366** |
+| Completion percentage | **23.04%** |
 
 ---
 
@@ -26,7 +26,7 @@ below from source whenever this file is updated, never hand-estimate.
 | mathematics | 908 | 37 | 4.07% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 233 | 97.90% | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
-| chemistry | 186 | 121 | 65.05% | `chem.found.matter` | **Yes** |
+| chemistry | 186 | 136 | 73.12% | `chem.found.matter` | **Yes** |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
 
@@ -804,3 +804,29 @@ list computed in a prior turn is still accurate — this program's
 standing discipline), then author Wave 22 in full following the
 same reuse-by-reference-Blueprint discipline established these past
 fifteen batches.
+
+**Concurrent Chemistry EB level 13 (landed on `origin/main` during this
+session's Wave 19 merges, historical record preserved from that
+session's own ROADMAP.md entry)**: authored 15 concepts at dependency
+level 13 in strict topological order — chem.anal.spectroscopy,
+chem.anal.volumetric, chem.bond.intermolecular, chem.coord.cft,
+chem.coord.nomenclature, chem.coord.stability, chem.dblock.oxo-species,
+chem.elect.galvanic-cell, chem.hyd.alkanes, chem.org.aromaticity,
+chem.org.electronic-effects, chem.org.isomerism, chem.org.qualitative-
+analysis, chem.solid.ionic-solids, chem.solid.properties. Chemistry
+reached 121/186 (65.05%) at that point. Level 14 was next.
+
+**Concurrent Chemistry EB level 14 (landed on `origin/main` during this
+session's Wave 21 push, merged here)**: authored 15 concepts at
+dependency level 14 in strict topological order — chem.coord.
+applications, chem.coord.bonding, chem.coord.isomerism, chem.dblock.
+organometallics, chem.elect.batteries, chem.elect.corrosion, chem.elect.
+electrolysis, chem.elect.standard-electrode, chem.hal.introduction,
+chem.hyd.arenes, chem.hyd.conformations, chem.hyd.petroleum, chem.org.
+reactive-intermediates, chem.sblock.water, chem.state.liquids.
+Chemistry reached 136/186 (73.12%) at that point. True total after this
+merge, recomputed fresh: **409** entries (233 physics + 37 mathematics +
+136 chemistry + 3 english), out of 1,775 total KG concepts — 1,366
+remaining, 23.04%. This merge encountered no file overlap with the
+physics EB files authored this batch — see `COVERAGE.md`'s Delivery
+history for the reconciliation record.

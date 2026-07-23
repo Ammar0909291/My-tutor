@@ -14,13 +14,13 @@ rather than hand-edit when entries change.
   `docs/curriculum/blueprints/{id}.md`. A ✓ here means the section
   EXISTS, not that its content has been re-verified against the
   Standard's narrower scope rules.
-- **Blueprint column, 266/394**: 7 `math.found` concepts genuinely have
+- **Blueprint column, 266/409**: 7 `math.found` concepts genuinely have
   no Blueprint yet (`math.found.definition`, `inductive-reasoning`,
   `mathematical-modeling`, `mathematical-symbols`,
   `problem-solving-strategies` — Wave 2 — plus `reading-mathematics` —
   Wave 3 — plus `empty-set` — Wave 5), each stating this explicitly in
   its own Blueprint References section per Quality Gate 2. The remaining
-  121 concepts without a `docs/curriculum/blueprints/{id}.md` file are
+  136 concepts without a `docs/curriculum/blueprints/{id}.md` file are
   all chemistry: chemistry's own Blueprint production track has never
   started (confirmed by the 2026-07-23 Forensic Repository Audit — no
   chemistry Blueprint file has ever existed in this repository, on any
@@ -28,9 +28,11 @@ rather than hand-edit when entries change.
   reference `docs/chemistry/kg/graph.json` and standard chemistry
   pedagogy directly — correctly read as ✗ under this column's literal
   methodology (existence of the `docs/curriculum/blueprints/` file
-  specifically), not as missing content. This regeneration adds this
-  session's 5-concept Physics Wave 21 batch (all 5 have existing
-  Blueprints, reused by reference) on top of the prior 389-entry state.
+  specifically), not as missing content. This regeneration merges this
+  session's Physics Wave 21 (5 concepts, 228→233) with a concurrent
+  session's Chemistry level-14 batch (15 concepts, 121→136), both
+  landed on `origin/main` independently and reconciled via merge, on top
+  of the prior 389-entry state.
 - **Cross-links**: a ✓ means the entry's Transfer/Cross-Subject section
   *discusses* cross-subject connections — including entries that
   honestly conclude "none via KG cross_links at this node."
@@ -38,7 +40,7 @@ rather than hand-edit when entries change.
   pre-Standard entries correctly read ✗ (expected migration debt); all
   entries authored under the current Standard (math.found, physics,
   english, and chemistry batches from 2026-07-22 onward) correctly read ✓.
-- **Tutor Actions, 318/394**: the same 71 pre-Standard TEMPLATE.md-era
+- **Tutor Actions, 333/409**: the same 71 pre-Standard TEMPLATE.md-era
   entries plus 5 concurrent `math.found` Wave 6 entries
   (`logical-equivalence`, `ordinal-number`, `quantifiers`, `relation`,
   `subset`) use a different, numbered 21-section heading scheme
@@ -50,26 +52,27 @@ rather than hand-edit when entries change.
   migration debt (76 = 71 + 5), not introduced this batch — rewriting
   another session's freshly authored files remains out of scope.
 
-## Aggregate summary (394 entries)
+## Aggregate summary (409 entries)
 
-Adds this session's Physics Wave 21 (5 concepts, 228→233) on top of the
-prior 389-entry state (Physics Wave 20 5 concepts + prior Wave 19 8
-concepts + two concurrent Chemistry batches, 17 + 15 concepts). All
-numbers below were recomputed fresh by scanning every live file in
+Merges this session's Physics Wave 21 (5 concepts, 228→233) with a
+concurrent session's Chemistry level-14 batch (15 concepts, 121→136),
+both landed on `origin/main` independently and reconciled via merge, on
+top of the prior 389-entry state. All numbers below were recomputed
+fresh by scanning every live file in
 `educational-brain/concepts/{subject}/` — none hand-estimated.
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 266 / 394 | see methodology note above — 7 `math.found` + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file (confirmed by forensic audit: chemistry Blueprints have never existed) |
-| Educational Brain | 394 / 394 | trivially true (this is the entry list) |
-| Mental Model | 394 / 394 | |
-| Misconceptions | 394 / 394 | |
-| Analogies | 394 / 394 | |
-| Recovery Strategy | 394 / 394 | |
-| Assessment Signals | 394 / 394 | |
-| Tutor Actions | 318 / 394 | see methodology note above — 71 pre-existing TEMPLATE.md-era entries + 5 non-Standard `math.found` Wave 6 entries |
-| Cross-links | 318 / 394 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the 71 pre-Standard entries use a different section name |
-| Version History | 323 / 394 | the 71 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored under the current Standard read ✓ |
+| Blueprint | 266 / 409 | see methodology note above — 7 `math.found` + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file (confirmed by forensic audit: chemistry Blueprints have never existed) |
+| Educational Brain | 409 / 409 | trivially true (this is the entry list) |
+| Mental Model | 409 / 409 | |
+| Misconceptions | 409 / 409 | |
+| Analogies | 409 / 409 | |
+| Recovery Strategy | 409 / 409 | |
+| Assessment Signals | 409 / 409 | |
+| Tutor Actions | 333 / 409 | see methodology note above — 71 pre-existing TEMPLATE.md-era entries + 5 non-Standard `math.found` Wave 6 entries |
+| Cross-links | 333 / 409 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the 71 pre-Standard entries use a different section name |
+| Version History | 338 / 409 | the 71 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored under the current Standard read ✓ |
 
 ## Per-concept ledger
 
@@ -370,16 +373,24 @@ numbers below were recomputed fresh by scanning every live file in
 | `chem.bond.polar-molecules` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.bond.resonance` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.bond.vsepr` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.coord.applications` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.coord.bonding` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.coord.cft` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.coord.isomerism` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.coord.nomenclature` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.coord.stability` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.coord.werner` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.dblock.first-row` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.dblock.general` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.dblock.lanthanides` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.dblock.organometallics` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.dblock.oxo-species` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.elect.batteries` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.elect.conductance` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.elect.corrosion` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.elect.electrolysis` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.elect.galvanic-cell` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.elect.standard-electrode` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.env.air-pollution` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.env.atmosphere` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.env.ozone` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -403,7 +414,11 @@ numbers below were recomputed fresh by scanning every live file in
 | `chem.found.significant-figures` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.found.states-of-matter` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.found.stoichiometry` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.hal.introduction` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.hyd.alkanes` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.hyd.arenes` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.hyd.conformations` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.hyd.petroleum` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.kinet.arrhenius` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.kinet.catalysis` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.kinet.integrated-rate` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -418,6 +433,7 @@ numbers below were recomputed fresh by scanning every live file in
 | `chem.org.iupac` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.org.purification` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.org.qualitative-analysis` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.org.reactive-intermediates` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.org.spectroscopy` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.pblock.group13` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.pblock.group14` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -441,6 +457,7 @@ numbers below were recomputed fresh by scanning every live file in
 | `chem.sblock.alkali` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.sblock.alkaline-earth` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.sblock.hydrogen` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.sblock.water` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.sol.solubility` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.sol.types` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.solid.amorphous` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -451,6 +468,7 @@ numbers below were recomputed fresh by scanning every live file in
 | `chem.solid.properties` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.state.gas-laws` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.state.kinetic-theory` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chem.state.liquids` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.state.molar-mass-gas` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.state.real-gases` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.surface.adsorption` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
