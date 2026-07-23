@@ -56,10 +56,10 @@ export interface DispatchPlan {
   note: string
 }
 
-/** ENABLE_BRAIN_RUNTIME=false by default — '1'/'true' activates dispatch. */
+/** ENABLE_BRAIN_RUNTIME=true by default — '0'/'false' reverts to legacy. */
 export function isBrainRuntimeEnabled(): boolean {
   const v = process.env.ENABLE_BRAIN_RUNTIME
-  return v === '1' || v === 'true'
+  return v !== '0' && v !== 'false'
 }
 
 /**
