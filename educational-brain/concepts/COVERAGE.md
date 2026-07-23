@@ -14,7 +14,7 @@ and this file's summary row should be corrected to match.
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
 | physics | 238 | 179 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 (2026-07-23, level 14, this batch): `phys.mech.poisson-brackets`, `phys.mod.radioactive-decay`, `phys.qm.schrodinger-equation`, `phys.qm.uncertainty-principle`, `phys.rel.relativistic-momentum`, `phys.stat.bose-einstein`, `phys.stat.entropy-statistical`, `phys.stat.fluctuations-correlations`, `phys.stat.free-energy`, `phys.stat.grand-canonical-ensemble` — 59 concepts remain (75.21%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-13 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
-| chemistry | 186 | 89 | levels 0–11 complete (89/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock, chem.redox, chem.dblock, chem.org, chem.pblock, chem.solid — IN PROGRESS |
+| chemistry | 186 | 106 | levels 0–12 complete (106/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock, chem.redox, chem.dblock, chem.org, chem.pblock, chem.solid — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
 
@@ -873,3 +873,27 @@ Chemistry: 56 → 66 entries. Levels 0–9 complete.
 16 concepts authored (topological level 11):
 chem.bond.bond-parameters, chem.bond.coordinate-bond, chem.bond.hybridization, chem.bond.resonance, chem.bond.vsepr, chem.dblock.general, chem.org.iupac, chem.pblock.group13, chem.pblock.group14, chem.pblock.group15, chem.pblock.group16, chem.pblock.group17, chem.pblock.group18, chem.redox.balancing, chem.sblock.alkali, chem.solid.crystal-systems
 Chemistry: 73 → 89/186 entries (47.85%).
+
+### Batch 27 — Chemistry level 12 (17 concepts, 2026-07-23)
+17 concepts authored at topological level 12 in strict dependency order.
+
+Files authored:
+- chem.bond.mo-theory (MO theory: LCAO, bonding/antibonding, bond order, O₂ paramagnetism)
+- chem.bond.polar-molecules (dipole vector addition; CO₂ nonpolar despite polar bonds; BF₃ vs NF₃)
+- chem.coord.werner (Werner's primary/secondary valency; AgNO₃ precipitation; chelate effect)
+- chem.dblock.first-row (Cr/Cu anomalies; Fe/Cu/Mn/Cr OS; Fe²⁺/Fe³⁺/Cu²⁺/MnO₄⁻/Cr₂O₇²⁻ chemistry)
+- chem.dblock.lanthanides (f-block; lanthanide contraction; f–f transitions; NdFeB/Eu/Tb/Ce/Gd applications)
+- chem.org.hybridization (sp³/sp²/sp in organic; O and N heteroatom hybridization; pyridine-N vs pyrrole-N)
+- chem.org.purification (distillation/recrystallisation/extraction/TLC/column/GC-MS; mp as purity indicator)
+- chem.org.spectroscopy (MS M⁺/base peak/isotope patterns; IR key absorptions; ¹H NMR δ/splitting/integration)
+- chem.pblock.trends (oxide acidity Period 3; chloride hydrolysis; hydride bp anomalies; inert pair; first-member anomaly)
+- chem.redox.activity-series (E° definition; SHE; E°cell = E°cathode − E°anode; displacement reactions; activity series)
+- chem.redox.disproportionation (same element same OS → split to higher and lower; Cu⁺ unstable; Cl₂/alkali; H₂O₂; E° criterion)
+- chem.redox.titrations (KMnO₄ self-indicating/H₂SO₄ only; K₂Cr₂O₇/diphenylamine; iodometric/thiosulfate 2:1; starch near endpoint)
+- chem.sblock.alkaline-earth (Group 2; +2 always; reactivity ↑ down; hydroxide solubility ↑ down; sulphate solubility ↓ down; carbonate thermal stability; Be anomaly)
+- chem.solid.amorphous (no long-range order; isotropic; Tg; no sharp mp; glass/polymers/metallic glasses; glass-flow myth)
+- chem.solid.defects (Schottky/Frenkel point defects; density effects; non-stoichiometry FeO₁₋ₓ; F-centres; dislocations)
+- chem.solid.packing (CCP ABCABC vs HCP ABABAB; 74% packing; 2 tet + 1 oct holes per CCP atom; NaCl/ZnS/CaF₂ hole-filling)
+- chem.thermo.bond-enthalpy (mean bond enthalpies; ΔH ≈ Σbroken − Σformed; estimate not exact; F–F weakness; N≡N strength)
+
+Running total: 106/186 chemistry entries. Levels 0–12 complete.
