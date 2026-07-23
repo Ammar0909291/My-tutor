@@ -14,7 +14,7 @@ and this file's summary row should be corrected to match.
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
 | physics | 238 | 163 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 (2026-07-23, level 12, this batch): `phys.mech.conservation-of-angular-momentum`, `phys.mech.cyclic-coordinates-conservation-laws`, `phys.mech.hamiltonian`, `phys.therm.refrigerators`, `phys.mod.wave-particle-duality`, `phys.mod.atomic-spectra`, `phys.rel.length-contraction`, `phys.stat.boltzmann-factor` — 75 concepts remain (68.49%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-11 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
-| chemistry | 186 | 24 | levels 0–3 complete (24/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period — IN PROGRESS |
+| chemistry | 186 | 32 | levels 0–4 complete (32/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
 
@@ -682,4 +682,16 @@ retrieval engine. Per-entry completeness against the tracked fields is in
   `phys.stat.maxwell-boltzmann`, `phys.stat.partition-function`) is
   computed and next, but NOT started this batch. All six tracking files
   regenerated from source; re-validated 0 orphans, 0 duplicates across
-  all 227 entries.
+  all 227 entries.- **Curriculum Completion Program, Chemistry EB batch 2 — level 4**
+  (2026-07-23): continuation of the standing production run. Level 4
+  (8 concepts): `chem.atomic.bohr-model`, `chem.kinet.rate`,
+  `chem.sol.types`, `chem.state.molar-mass-gas`, `chem.state.real-gases`,
+  `chem.thermo.enthalpy`, `chem.thermo.entropy`,
+  `chem.thermo.heat-capacities`. All authored from KG data and domain
+  chemistry expertise (all chemistry Blueprints remain `[TEMPLATE]`
+  placeholder strings). All 8 verified against
+  `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and
+  heading order; 0 orphans, 0 duplicates. Chemistry is 32/186 — 17.20%
+  complete; Level 5 is next (6 concepts: `chem.atomic.quantum-numbers`,
+  `chem.kinet.photochemistry`, `chem.kinet.rate-law`, `chem.sol.solubility`,
+  `chem.thermo.gibbs`, `chem.thermo.third-law`).
