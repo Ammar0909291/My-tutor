@@ -1,9 +1,10 @@
 # Educational Brain Production Pipeline — Validation Report
 
 Generated 2026-07-22, re-run every batch since. Most recently re-run this
-batch (Physics Wave 23, see the dedicated section near the end of this
-file for full detail) — a straightforward 2-concept batch with no
-concurrent merges this time. All totals
+batch (**Physics Wave 24 — the FINAL physics wave**, see the dedicated
+section near the end of this file for full detail) — a single-concept
+batch, `phys.mod.diode-rectification`, that brought physics Educational
+Brain coverage to 238/238 (100%), with no concurrent merges. All totals
 (top-level summary and Phase 2 checklist) are recomputed fresh from the
 live `educational-brain/concepts/{subject}/` directories after the
 merge, not hand-merged from conflicting drafts or estimated — the
@@ -20,7 +21,7 @@ was written. Every check below was computed directly from
 for mathematics, physics, chemistry, biology, computer_science, and
 english — re-run fresh this batch, all 6 still PASS with unchanged
 concept counts (this batch authored Educational Brain entries only; no
-KG file was touched, Wave 23):
+KG file was touched, Wave 24 — the FINAL physics wave):
 
 | Subject | Status | Concepts | Reachable | Broken requires/unlocks |
 |---|---|---|---|---|
@@ -42,24 +43,25 @@ report).
 
 **✓ Every Educational Brain entry points to one existing KG concept.**
 Checked: every filename in `educational-brain/concepts/{subject}/`
-(413 files: 237 physics + 37 mathematics + 136 chemistry +
-3 english) against that subject's live KG id set. **0 orphans** — every
-EB file resolves to a real, current KG concept. **Reconciliation
-findings (Waves 12, 13, 15, 16, the Wave-19 merges, and the Wave-21
-merge, carried forward as history)**: multiple concurrent chemistry
-batches' commits authored their files but never added rows to
-`EDUCATIONAL_BRAIN_INDEX.md` or `QUALITY.md`, nor removed them from
-`AUTHORING_QUEUE.md` — a bookkeeping gap in each of those sessions' work,
-corrected during the respective merges/reconciliation passes (a 57-row
-`AUTHORING_QUEUE.md` gap corrected in Wave 15; a separate 21-row
-Blueprint-column accuracy bug in `EDUCATIONAL_BRAIN_INDEX.md`, affecting
-`phys.particle.*`/`phys.mod.*` semiconductor concepts unrelated to that
-batch's own new entries, corrected in Wave 16; two concurrent Chemistry
-batches — level 12, 17 rows, and level 13, 15 rows — found and corrected
-during the Wave 19 merges; a concurrent Chemistry level-14 batch, 15
-rows, found and corrected during the Wave 21 merge — see the Wave 21
-section below for full detail). Neither Wave 22 nor this Wave 23 batch
-encountered concurrent commits or required reconciliation.
+(414 files: **238 physics (100% — every physics KG concept covered)** +
+37 mathematics + 136 chemistry + 3 english) against that subject's live
+KG id set. **0 orphans** — every EB file resolves to a real, current KG
+concept. **Reconciliation findings (Waves 12, 13, 15, 16, the Wave-19
+merges, and the Wave-21 merge, carried forward as history)**: multiple
+concurrent chemistry batches' commits authored their files but never
+added rows to `EDUCATIONAL_BRAIN_INDEX.md` or `QUALITY.md`, nor removed
+them from `AUTHORING_QUEUE.md` — a bookkeeping gap in each of those
+sessions' work, corrected during the respective merges/reconciliation
+passes (a 57-row `AUTHORING_QUEUE.md` gap corrected in Wave 15; a
+separate 21-row Blueprint-column accuracy bug in `EDUCATIONAL_BRAIN_
+INDEX.md`, affecting `phys.particle.*`/`phys.mod.*` semiconductor
+concepts unrelated to that batch's own new entries, corrected in Wave
+16; two concurrent Chemistry batches — level 12, 17 rows, and level 13,
+15 rows — found and corrected during the Wave 19 merges; a concurrent
+Chemistry level-14 batch, 15 rows, found and corrected during the Wave
+21 merge — see the Wave 21 section below for full detail). Waves 22,
+23, and this final Wave 24 each encountered no concurrent commits and
+required no reconciliation.
 
 **✓ Every KG concept has at most one Educational Brain entry.**
 Structurally guaranteed by the 1:1 `{kg-id}.md` filename convention;
@@ -68,7 +70,7 @@ filesystem could technically hold `Foo.md` and `foo.md` as distinct
 files) — **0 duplicates**.
 
 **◐ Every Educational Brain entry references one Blueprint — partially,
-honestly reported.** 270 of 413 EB entries' concepts have a matching
+honestly reported.** 271 of 414 EB entries' concepts have a matching
 Blueprint FILE on disk. The other 143 are: 7 `math.found`
 concepts (`math.found.definition`, `inductive-reasoning`,
 `mathematical-modeling`, `mathematical-symbols`,
@@ -79,9 +81,10 @@ section per Quality Gate 2; plus all 136 chemistry concepts, which
 reference `docs/chemistry/kg/graph.json` and standard chemistry
 pedagogy directly instead — confirmed by the 2026-07-23 Forensic
 Repository Audit that no chemistry Blueprint file has ever existed in
-this repository's history, on any branch. Both of Wave 23's new physics
-entries DO have existing Blueprints, each reused by reference (raising
-the Blueprint-matched count from 268 to 270 with no methodology change).
+this repository's history, on any branch. Wave 24's final new physics
+entry (`phys.mod.diode-rectification`) DOES have an existing Blueprint,
+reused by reference (raising the Blueprint-matched count from 270 to
+271 with no methodology change).
 A separate, pre-existing Blueprint-column ACCURACY bug (not a coverage
 gap) was found and fixed in Wave 16 in `EDUCATIONAL_BRAIN_INDEX.md`:
 21 rows for concepts whose Blueprint files genuinely exist on disk
@@ -1097,3 +1100,85 @@ recomputed fresh from the live KG immediately after this batch's
 commit/push completes. This final wave will author the sole remaining
 concept, `phys.mod.diode-rectification`, bringing physics Educational
 Brain coverage to 238/238 (100%).
+
+## Physics Wave 24 — FINAL WAVE, mandatory-rules cycle completion (2026-07-23)
+
+Continuation of the same mandatory-rules production cycle immediately
+following Wave 23, per the same explicit standing instruction — "Keep
+continue until 238/238 done." Re-fetched `origin/main` and confirmed 0
+commits ahead/behind before starting. Re-audited physics EB state fresh
+from disk (237/238). Independently recomputed dependency levels via a
+fresh Kahn's-algorithm pass over the live KG's `requires` edges —
+confirmed exactly 1 concept remained, at level 24 (the highest
+dependency level in the entire physics KG): `phys.mod.diode-
+rectification`, unlocked from Wave 23's `phys.mod.pn-junction`. Verified
+it has an existing Blueprint on disk before starting. Authored it.
+
+This final entry passes every per-entry check: structural 21-section
+conformance verified by heading scan and exact heading-order diff (0
+mismatches); 0 orphans (the new file maps to a valid KG concept id,
+verified against `docs/physics/kg/graph.json`); 0 duplicates (verified
+via `git log --oneline` showing 0 prior commits touching the new file
+path, and via a repo-wide orphan/duplicate scan across all 6 subjects);
+Blueprint References section present and accurate (cites the existing
+Blueprint by exact path); no runtime-asset duplication (created no
+`AssetIdentity` records, checked against `brainSeedAssets.ts`); direct
+file-count verification (`ls educational-brain/concepts/physics/*.md |
+wc -l` = 238) confirms the physics directory now contains exactly 238
+files, matching the KG's 238 concepts exactly.
+
+Physics KG re-validated fresh this batch: PASS, 238/238 reachable, 0
+failures/warnings — no KG file was touched. All 6 subject KGs
+re-validated PASS this batch (mathematics 908/908, physics 238/238,
+english 216/216, chemistry 186/186, biology 108/108, computer_science
+119/119 — all 0 failures/0 warnings).
+
+**`physics` is now 238/238 — 100% COMPLETE.** Every physics KG concept,
+across all 12 domains (Mechanics, Waves, Optics, Electromagnetism,
+Modern Physics, Relativity, Quantum Mechanics, Statistical Mechanics,
+Astrophysics, Particle Physics, Measurement, and the Modern Physics
+semiconductor extension), now has a full Educational Brain entry
+conforming to `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section format.
+True total, recomputed fresh by scanning every live file across all 6
+subjects: **414** EB entries (238 physics + 37 mathematics + 136
+chemistry + 3 english), out of 1,775 total KG concepts, 1,361 remaining
+(23.32%).
+
+No concurrent commits landed on `origin/main` during this final batch —
+a single, uneventful fetch-verify-push cycle.
+
+**Final Phase 2 checklist numbers for the completed physics campaign
+(recomputed fresh)**:
+- Every Educational Brain entry points to one existing KG concept: 414
+  files checked, **0 orphans**.
+- Every KG concept has at most one Educational Brain entry: **0
+  duplicates** (case-insensitive check included).
+- Every Educational Brain entry references one Blueprint — partially:
+  **271/414** have a matching Blueprint file on disk. The other 143 are:
+  7 `math.found` concepts (genuinely Blueprint-less, stated explicitly
+  in each entry) plus all 136 chemistry concepts (chemistry's Blueprint
+  production track has never started). All 238 physics entries
+  (100%) have existing Blueprints, each reused by reference throughout
+  this entire physics campaign — no physics concept was ever authored
+  without a Blueprint to ground it.
+- No broken KG references: **0** across all 1,775 concepts, all 6
+  subjects (integrity table above, re-verified this batch).
+- Cross-links: the same 2 pre-existing unresolvable references carried
+  forward unchanged from prior batches (§ above) — neither touched or
+  affected by this batch's physics-only work.
+
+**This concludes the physics-focused phase of the Curriculum Completion
+Program's standing "Keep continue until 238/238 done" instruction.**
+Summary of the full physics campaign (Waves 6-24, this session):
+physics Educational Brain coverage rose from 67/238 (28.15%, pre-
+existing TEMPLATE.md-era entries) to 238/238 (100%) across 19 waves,
+totaling 171 newly-authored entries this session, spanning every one of
+physics's 12 domains and encountering, discovering, and correcting 4
+distinct concurrent-session merge conflicts along the way (Chemistry
+level 12, level 13, and level 14 batches, plus a stale-duplicate-rows
+data-quality bug found and fixed in a concurrent session's own
+`ROADMAP.md` during the Wave 21 merge). Absent a new explicit
+subject-specific override, future Curriculum Completion Program batches
+resume the program's default cross-subject priority order (`math.found`
+Wave 7+, per `ROADMAP.md` §5) — the standing instruction that redirected
+this session specifically to physics has now been fully satisfied.

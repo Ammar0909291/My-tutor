@@ -927,7 +927,7 @@ its subject KG.
 | trig | `math.trig.trig-identities` | Trigonometric Identities | Yes | No | — | MISSING |
 | trig | `math.trig.unit-circle` | Unit Circle | Yes | No | — | MISSING |
 
-## physics (238 concepts, 237 READY)
+## physics (238 concepts, 238 READY — 100% COMPLETE)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | astro | `phys.astro.black-holes` | Black Holes and Schwarzschild Radius | Yes | Yes | `educational-brain/concepts/physics/phys.astro.black-holes.md` | READY |
@@ -1044,7 +1044,7 @@ its subject KG.
 | mod | `phys.mod.bohr-model` | Bohr Model of the Hydrogen Atom | Yes | Yes | `educational-brain/concepts/physics/phys.mod.bohr-model.md` | READY |
 | mod | `phys.mod.compton-effect` | Compton Scattering | Yes | Yes | `educational-brain/concepts/physics/phys.mod.compton-effect.md` | READY |
 | mod | `phys.mod.de-broglie` | de Broglie Hypothesis — Matter Waves | Yes | Yes | `educational-brain/concepts/physics/phys.mod.de-broglie.md` | READY |
-| mod | `phys.mod.diode-rectification` | Diode Rectifying Behavior | Yes | No | — | MISSING |
+| mod | `phys.mod.diode-rectification` | Diode Rectifying Behavior | Yes | Yes | `educational-brain/concepts/physics/phys.mod.diode-rectification.md` | READY |
 | mod | `phys.mod.energy-bands` | Energy Bands in Solids | Yes | Yes | `educational-brain/concepts/physics/phys.mod.energy-bands.md` | READY |
 | mod | `phys.mod.extrinsic-semiconductors` | Extrinsic Semiconductors: Doping and Carrier Types | Yes | Yes | `educational-brain/concepts/physics/phys.mod.extrinsic-semiconductors.md` | READY |
 | mod | `phys.mod.intrinsic-semiconductors` | Intrinsic Semiconductors | Yes | Yes | `educational-brain/concepts/physics/phys.mod.intrinsic-semiconductors.md` | READY |

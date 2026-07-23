@@ -12,7 +12,7 @@ and this file's summary row should be corrected to match.
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
-| physics | 238 | 237 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 (2026-07-23, level 23, this batch): `phys.particle.standard-model`, `phys.mod.pn-junction` — 1 concept remains (99.58%), the entire Particle Physics domain now fully authored; see Delivery history for the full pre-existing-67, Wave-6 through Wave-22 name lists |
+| physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 136 | levels 0–14 complete (136/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock, chem.redox, chem.dblock, chem.org, chem.pblock, chem.solid, chem.hyd, chem.hal, chem.coord — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
@@ -1254,3 +1254,37 @@ standing discipline, continuing without pausing until physics reaches
 at level 24 — the terminal node of the entire physics KG. Physics
 Educational Brain coverage will reach 238/238 (100%) the moment this
 final concept is authored.
+
+### Physics EB Wave 24 (2026-07-23) — FINAL WAVE, PHYSICS 238/238 COMPLETE
+
+The single, final remaining physics concept authored: `phys.mod.diode-
+rectification` (dependency level 24, the terminal node of the entire
+physics knowledge graph), verified via a fresh Kahn's-algorithm
+recomputation against the live physics KG showing it as the sole
+remaining unauthored concept, per the same explicit standing instruction
+"Keep continue until 238/238 done." Unlocked from Wave 23's `phys.mod.
+pn-junction`, completing the six-concept semiconductor-physics extension
+of the Modern Physics domain in full (energy bands → classification →
+intrinsic → extrinsic/doping → p-n junction → diode rectification). Had
+an existing Blueprint, reused by reference. Verified against
+`EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and heading
+order (0 mismatches), zero duplicate filename/concept ID, zero orphan
+against the live physics KG (all 238 physics EB files map to a valid KG
+id — confirmed via direct file count, `ls educational-brain/concepts/
+physics/*.md | wc -l` = 238 — repo-wide scan across all 6 subjects also
+clean). Physics KG re-validated: PASS, 238/238 reachable, 0
+failures/warnings — no KG file was touched; all 6 subject KGs
+re-validated PASS. **`physics` is now 238/238 — 100% complete.** Every
+physics KG concept, across all 12 domains (Mechanics, Waves, Optics,
+Electromagnetism, Modern Physics, Relativity, Quantum Mechanics,
+Statistical Mechanics, Astrophysics, Particle Physics, Measurement, and
+the Modern Physics semiconductor extension), now has a full Educational
+Brain entry conforming to `EDUCATIONAL_BRAIN_STANDARD.md`. True total,
+recomputed fresh: **414** entries (238 physics + 37 mathematics + 136
+chemistry + 3 english), out of 1,775 total KG concepts — 1,361
+remaining, 23.32%. This is the terminal milestone of the physics-focused
+phase of the Curriculum Completion Program's standing instruction —
+future sessions resume the program's default cross-subject priority
+order (see `ROADMAP.md` §5) unless given an equally explicit,
+subject-specific override, exactly as this wave-24 physics campaign
+itself began.

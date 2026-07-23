@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **413** |
-| Remaining | **1,362** |
-| Completion percentage | **23.27%** |
+| Concepts with an Educational Brain entry | **414** |
+| Remaining | **1,361** |
+| Completion percentage | **23.32%** |
 
 ---
 
@@ -24,7 +24,7 @@ below from source whenever this file is updated, never hand-estimate.
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
 | mathematics | 908 | 37 | 4.07% | `math.found.mathematical-thinking` | **Yes** |
-| physics | 238 | 237 | 99.58% | `phys.meas.units` | Yes |
+| physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 136 | 73.12% | `chem.found.matter` | **Yes** |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
@@ -519,36 +519,36 @@ current-batch entry below.**
 
 ## 4. Current batch
 
-**Physics Wave 23 (this batch, explicit exception — standing Curriculum
-Completion Program 8-step cycle)**: continuing the same cycle
-immediately after Wave 22 in response to the user's "Keep continue until
+**Physics Wave 24 (this batch, FINAL WAVE — explicit exception, standing
+Curriculum Completion Program 8-step cycle)**: continuing the same cycle
+immediately after Wave 23 in response to the user's "Keep continue until
 238/238 done" instruction. Re-fetched `origin/main` and confirmed 0
 commits ahead/behind before starting. Re-audited physics EB state fresh
-(235/238, unchanged since Wave 22's push), and independently recomputed
+(237/238, unchanged since Wave 23's push), and independently recomputed
 dependency levels via a fresh Kahn's-algorithm pass over the live KG's
-`requires` edges. The level-23 set: `phys.particle.standard-model`,
-`phys.mod.pn-junction` — 2 concepts, both with existing Blueprints
-reused by reference. `phys.particle.standard-model` required all four
-of `phys.particle.hadron-quark-model`, `phys.particle.gauge-bosons`,
-`phys.particle.higgs-mechanism`, and `phys.particle.conservation-laws`
-jointly, completing the Particle Physics domain in full as its terminal
-capstone; `phys.mod.pn-junction` was unlocked from Wave 22's `phys.mod.
-extrinsic-semiconductors`. Both verified against
-`EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and heading
-order (0 mismatches), zero duplicate filenames/concept IDs, zero orphans
-against the live physics KG (all 237 physics EB files map to a valid KG
-id; repo-wide scan across all 6 subjects also clean). Physics KG
-re-validated PASS (238/238 reachable, 0 failures/warnings, no KG file
-touched); all 6 subject KGs re-validated PASS. Physics EB reached
-237/238 — 99.58%, with the Particle Physics domain now fully authored.
-True total, recomputed fresh: **413** EB entries (237 physics + 37
-mathematics + 136 chemistry + 3 english), out of 1,775 total KG concepts
-— 1,362 remaining, 23.27%. Wave 24 candidates were NOT computed this
-batch — the next physics iteration should begin with a fresh
-fetch/audit per this program's standing discipline, continuing without
-pausing until physics reaches 238/238. Only 1 physics concept remains:
-`phys.mod.diode-rectification` at level 24, the terminal node of the
-entire physics KG.
+`requires` edges — confirmed exactly 1 concept remained, at level 24:
+`phys.mod.diode-rectification`, unlocked from Wave 23's `phys.mod.pn-
+junction`. Had an existing Blueprint, reused by reference. Verified
+against `EDUCATIONAL_BRAIN_STANDARD.md`'s exact 21-section structure and
+heading order (0 mismatches), zero duplicate filename/concept ID, zero
+orphan against the live physics KG (all 238 physics EB files map to a
+valid KG id — confirmed via direct file count; repo-wide scan across
+all 6 subjects also clean). Physics KG re-validated PASS (238/238
+reachable, 0 failures/warnings, no KG file touched); all 6 subject KGs
+re-validated PASS. **Physics EB reached 238/238 — 100% COMPLETE.** Every
+physics KG concept, across all 12 domains, now has a full Educational
+Brain entry. True total, recomputed fresh: **414** EB entries (238
+physics + 37 mathematics + 136 chemistry + 3 english), out of 1,775
+total KG concepts — 1,361 remaining, 23.32%. This concludes the
+physics-focused phase of the standing "Keep continue until 238/238 done"
+instruction — see §5/§6 below for the program's resumed default priority
+order.
+
+**Prior batch (Physics Wave 23)**: continuing the same cycle immediately
+after Wave 22. Authored the level-23 set (2 concepts): `phys.particle.
+standard-model`, `phys.mod.pn-junction`, completing the Particle Physics
+domain in full. Physics EB reached 237/238 — 99.58%. True total at that
+point: 413 entries.
 
 **Prior batch (Physics Wave 22)**: continuing the same cycle immediately
 after Wave 21. Authored the level-22 set (2 concepts): `phys.particle.
@@ -822,36 +822,35 @@ procedure.
    `bio.found.what-is-biology`, `cs.found.intro-computers`, then
    physics's next dependency level (Wave 8), then everything else in
    prerequisite order.
-4. **Standing exception**: physics (or any subject) may be targeted
-   again ahead of this default order given an equally explicit,
-   subject-specific user instruction, as happened this batch and the
-   prior ones (§3b/§3c/§3d/§3e/§3f/§3g/§3h/§3i/§3j/§4). Physics currently
-   has 1 concept remaining (237/238 done, 99.58%); Wave 23 (dependency
-   level 23, 2 concepts) is now DONE (see §4), completing the entire
-   Particle Physics domain and leaving only the Modern Physics
-   semiconductor extension's final concept. Its own internal queue's
-   next wave (Wave 24 — the FINAL wave) has NOT been computed yet — the
-   next physics iteration must recompute it fresh from the live KG via
-   Kahn's algorithm rather than assuming any stored candidate list. The
-   user has instructed continuation of this cycle until physics reaches
-   238/238 — which this next wave will achieve.
+4. **Standing exception, now CLOSED for physics**: physics (or any
+   subject) may be targeted again ahead of this default order given an
+   equally explicit, subject-specific user instruction, as happened
+   across this multi-batch physics campaign (§3b/§3c/§3d/§3e/§3f/§3g/
+   §3h/§3i/§3j/§4/Waves 6-24). **Physics reached 238/238 (100%) in Wave
+   24 (see §4)** — every physics KG concept across all 12 domains
+   (Mechanics, Waves, Optics, Electromagnetism, Modern Physics,
+   Relativity, Quantum Mechanics, Statistical Mechanics, Astrophysics,
+   Particle Physics, Measurement, and the Modern Physics semiconductor
+   extension) now has a full Educational Brain entry. The standing "Keep
+   continue until 238/238 done" instruction has been fully satisfied for
+   physics. Absent a new explicit subject-specific override, the program
+   resumes its default order (item 1 above: `math.found` Wave 7+).
 
-Full computed order (all 1,362 remaining concepts, post-merge total —
-see §1 above): see `AUTHORING_QUEUE.md` — §5 above (the domain-
+Full computed order (all 1,361 remaining concepts, post-completion total
+— see §1 above): see `AUTHORING_QUEUE.md` — §5 above (the domain-
 completion constraint) takes precedence over that file's literal row
 order until `math.found` is complete, unless overridden per item 4.
 
 ## 6. Next batch
 
-**Batch 36 (standing override in effect — user has instructed
-continuation until physics reaches 238/238 — this is expected to be the
-FINAL physics batch)**: fetch/audit `main` fresh, recompute the physics
-Wave 24 candidate (expected: `phys.mod.diode-rectification`, the sole
-remaining concept) from the live KG (do NOT assume any list computed in
-a prior turn is still accurate — this program's standing discipline),
-then author it in full following the same reuse-by-reference-Blueprint
-discipline established these past seventeen batches, completing physics
-Educational Brain coverage at 238/238 (100%).
+**Batch 37 (physics campaign complete — resuming default priority
+order per §5 item 1, absent a new explicit override)**: `math.found`
+Wave 7 — compute the set of `math.found` nodes whose prerequisites are
+all now READY after Wave 6 (46 concepts remain in that domain), fresh
+from the live KG, following the same reuse-by-reference-Blueprint
+discipline established across the physics campaign's eighteen batches.
+If a new subject-specific override arrives instead, follow that
+explicit instruction per §5 item 4.
 
 **Concurrent Chemistry EB level 13 (landed on `origin/main` during this
 session's Wave 19 merges, historical record preserved from that

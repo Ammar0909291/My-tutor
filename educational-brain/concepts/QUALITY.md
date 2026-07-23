@@ -14,7 +14,7 @@ rather than hand-edit when entries change.
   `docs/curriculum/blueprints/{id}.md`. A ✓ here means the section
   EXISTS, not that its content has been re-verified against the
   Standard's narrower scope rules.
-- **Blueprint column, 270/413**: 7 `math.found` concepts genuinely have
+- **Blueprint column, 271/414**: 7 `math.found` concepts genuinely have
   no Blueprint yet (`math.found.definition`, `inductive-reasoning`,
   `mathematical-modeling`, `mathematical-symbols`,
   `problem-solving-strategies` — Wave 2 — plus `reading-mathematics` —
@@ -29,8 +29,11 @@ rather than hand-edit when entries change.
   pedagogy directly — correctly read as ✗ under this column's literal
   methodology (existence of the `docs/curriculum/blueprints/` file
   specifically), not as missing content. This regeneration adds this
-  session's 2-concept Physics Wave 23 batch (both have existing
-  Blueprints, reused by reference) on top of the prior 411-entry state.
+  session's final 1-concept Physics Wave 24 batch (`phys.mod.diode-
+  rectification`, with an existing Blueprint, reused by reference) on
+  top of the prior 413-entry state, **bringing physics to 238/238
+  (100%) — every physics KG concept now has an Educational Brain
+  entry.**
 - **Cross-links**: a ✓ means the entry's Transfer/Cross-Subject section
   *discusses* cross-subject connections — including entries that
   honestly conclude "none via KG cross_links at this node."
@@ -38,7 +41,7 @@ rather than hand-edit when entries change.
   pre-Standard entries correctly read ✗ (expected migration debt); all
   entries authored under the current Standard (math.found, physics,
   english, and chemistry batches from 2026-07-22 onward) correctly read ✓.
-- **Tutor Actions, 337/413**: the same 71 pre-Standard TEMPLATE.md-era
+- **Tutor Actions, 338/414**: the same 71 pre-Standard TEMPLATE.md-era
   entries plus 5 concurrent `math.found` Wave 6 entries
   (`logical-equivalence`, `ordinal-number`, `quantifiers`, `relation`,
   `subset`) use a different, numbered 21-section heading scheme
@@ -50,25 +53,26 @@ rather than hand-edit when entries change.
   migration debt (76 = 71 + 5), not introduced this batch — rewriting
   another session's freshly authored files remains out of scope.
 
-## Aggregate summary (413 entries)
+## Aggregate summary (414 entries)
 
-Adds this session's Physics Wave 23 (2 concepts, 235→237) on top of the
-prior 411-entry state (Physics Wave 22 2 concepts + prior 409-entry
-state). All numbers below were recomputed fresh by scanning every live
-file in `educational-brain/concepts/{subject}/` — none hand-estimated.
+Adds this session's final Physics Wave 24 (1 concept, 237→238) on top
+of the prior 413-entry state (Physics Wave 23 2 concepts + prior
+411-entry state). **Physics is now 238/238 (100%).** All numbers below
+were recomputed fresh by scanning every live file in
+`educational-brain/concepts/{subject}/` — none hand-estimated.
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 270 / 413 | see methodology note above — 7 `math.found` + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file (confirmed by forensic audit: chemistry Blueprints have never existed) |
-| Educational Brain | 413 / 413 | trivially true (this is the entry list) |
-| Mental Model | 413 / 413 | |
-| Misconceptions | 413 / 413 | |
-| Analogies | 413 / 413 | |
-| Recovery Strategy | 413 / 413 | |
-| Assessment Signals | 413 / 413 | |
-| Tutor Actions | 337 / 413 | see methodology note above — 71 pre-existing TEMPLATE.md-era entries + 5 non-Standard `math.found` Wave 6 entries |
-| Cross-links | 337 / 413 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the 71 pre-Standard entries use a different section name |
-| Version History | 342 / 413 | the 71 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored under the current Standard read ✓ |
+| Blueprint | 271 / 414 | see methodology note above — 7 `math.found` + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file (confirmed by forensic audit: chemistry Blueprints have never existed) |
+| Educational Brain | 414 / 414 | trivially true (this is the entry list) |
+| Mental Model | 414 / 414 | |
+| Misconceptions | 414 / 414 | |
+| Analogies | 414 / 414 | |
+| Recovery Strategy | 414 / 414 | |
+| Assessment Signals | 414 / 414 | |
+| Tutor Actions | 338 / 414 | see methodology note above — 71 pre-existing TEMPLATE.md-era entries + 5 non-Standard `math.found` Wave 6 entries |
+| Cross-links | 338 / 414 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the 71 pre-Standard entries use a different section name |
+| Version History | 343 / 414 | the 71 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored under the current Standard read ✓ |
 
 ## Per-concept ledger
 
@@ -188,6 +192,7 @@ file in `educational-brain/concepts/{subject}/` — none hand-estimated.
 | `phys.mod.bohr-model` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.compton-effect` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.de-broglie` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.mod.diode-rectification` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.energy-bands` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.extrinsic-semiconductors` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.intrinsic-semiconductors` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
