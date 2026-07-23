@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **361** |
+| Concepts with an Educational Brain entry | **376** |
 | Remaining | **1,414** |
-| Completion percentage | **20.34%** |
+| Completion percentage | **21.18%** |
 
 ---
 
@@ -26,7 +26,7 @@ below from source whenever this file is updated, never hand-estimate.
 | mathematics | 908 | 37 | 4.07% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 215 | 90.34% | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
-| chemistry | 186 | 106 | 56.99% | `chem.found.matter` | **Yes** |
+| chemistry | 186 | 121 | 65.05% | `chem.found.matter` | **Yes** |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
 
@@ -471,7 +471,7 @@ current-batch entry below.**
 
 ## 4. Current batch
 
-**Chemistry EB level 12 (this batch, standing production run)**: authored 17 concepts at dependency level 12 in strict topological order — chem.bond.mo-theory, chem.bond.polar-molecules, chem.coord.werner, chem.dblock.first-row, chem.dblock.lanthanides, chem.org.hybridization, chem.org.purification, chem.org.spectroscopy, chem.pblock.trends, chem.redox.activity-series, chem.redox.disproportionation, chem.redox.titrations, chem.sblock.alkaline-earth, chem.solid.amorphous, chem.solid.defects, chem.solid.packing, chem.thermo.bond-enthalpy. Chemistry is now 106/186 (56.99%). True total: **361** EB entries (215 physics + 37 mathematics + 106 chemistry + 3 english), out of 1,775 total KG concepts — 1,414 remaining, 20.34%. Level 13 is next.
+**Chemistry EB level 12 (this batch, standing production run)**: authored 17 concepts at dependency level 12 in strict topological order — chem.bond.mo-theory, chem.bond.polar-molecules, chem.coord.werner, chem.dblock.first-row, chem.dblock.lanthanides, chem.org.hybridization, chem.org.purification, chem.org.spectroscopy, chem.pblock.trends, chem.redox.activity-series, chem.redox.disproportionation, chem.redox.titrations, chem.sblock.alkaline-earth, chem.solid.amorphous, chem.solid.defects, chem.solid.packing, chem.thermo.bond-enthalpy. Chemistry is now 106/186 (56.99%). True total: **361** EB entries (215 physics + 37 mathematics + 106 chemistry + 3 english), out of 1,775 total KG concepts — 1,399 remaining, 21.18%. Level 13 is next.
 
 **Physics Wave 18 (this batch, explicit exception — standing Curriculum
 Completion Program 8-step cycle)**: continuing the same cycle
@@ -724,3 +724,5 @@ list computed in a prior turn is still accurate — this program's
 standing discipline), then author Wave 19 in full following the
 same reuse-by-reference-Blueprint discipline established these past
 twelve batches.
+
+**Chemistry EB level 13 (this batch, standing production run)**: authored 15 concepts at dependency level 13 in strict topological order — chem.anal.spectroscopy, chem.anal.volumetric, chem.bond.intermolecular, chem.coord.cft, chem.coord.nomenclature, chem.coord.stability, chem.dblock.oxo-species, chem.elect.galvanic-cell, chem.hyd.alkanes, chem.org.aromaticity, chem.org.electronic-effects, chem.org.isomerism, chem.org.qualitative-analysis, chem.solid.ionic-solids, chem.solid.properties. Chemistry is now 121/186 (65.05%). True total: **376** EB entries (215 physics + 37 mathematics + 121 chemistry + 3 english), out of 1,775 total KG concepts — 1,399 remaining, 21.18%. Level 14 is next.
