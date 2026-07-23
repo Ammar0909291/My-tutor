@@ -52,25 +52,24 @@ rather than hand-edit when entries change.
   are the pre-existing 71 TEMPLATE.md-era entries (partially overlapping
   the Version History gap above).
 
-## Aggregate summary (241 entries)
+## Aggregate summary (251 entries)
 
-Extends the prior 233-entry merged total with a concurrent Chemistry EB
-level-4 batch (8 concepts, 24→32) merged alongside this session's
-Physics Wave 13. All numbers below were recomputed fresh by scanning
-every live file in `educational-brain/concepts/{subject}/`.
+Extends the prior 241-entry merged total with this session's Physics
+Wave 14 (10 concepts, 169→179). All numbers below were recomputed fresh
+by scanning every live file in `educational-brain/concepts/{subject}/`.
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 202 / 241 | see methodology note above — 7 `math.found` + 32 chemistry genuinely lack a `docs/curriculum/blueprints/` file; the 8 new chemistry entries (level 4) reference `docs/chemistry/teaching-assets/assets.json` like the other 24 |
-| Educational Brain | 241 / 241 | trivially true (this is the entry list) |
-| Mental Model | 241 / 241 | |
-| Misconceptions | 241 / 241 | |
-| Analogies | 241 / 241 | |
-| Recovery Strategy | 241 / 241 | |
-| Assessment Signals | 241 / 241 | |
-| Tutor Actions | 165 / 241 | see new-finding note above — 5 `math.found` Wave 6 entries use non-Standard heading text; remainder are pre-existing 71 TEMPLATE.md-era entries |
-| Cross-links | 241 / 241 | all entries discuss cross-subject connections, including honest "none found" conclusions |
-| Version History | 170 / 241 | +8 chemistry level-4 entries (authored under the Standard); the pre-existing 71 TEMPLATE.md-era entries correctly read ✗ |
+| Blueprint | 212 / 251 | see methodology note above — 7 `math.found` + 32 chemistry genuinely lack a `docs/curriculum/blueprints/` file; +10 from this batch (all 10 physics Wave 14 have existing Blueprints) |
+| Educational Brain | 251 / 251 | trivially true (this is the entry list) |
+| Mental Model | 251 / 251 | |
+| Misconceptions | 251 / 251 | |
+| Analogies | 251 / 251 | |
+| Recovery Strategy | 251 / 251 | |
+| Assessment Signals | 251 / 251 | |
+| Tutor Actions | 175 / 251 | see new-finding note above — 5 `math.found` Wave 6 entries use non-Standard heading text; remainder are pre-existing 71 TEMPLATE.md-era entries |
+| Cross-links | 251 / 251 | all entries discuss cross-subject connections, including honest "none found" conclusions |
+| Version History | 180 / 251 | +10 from this batch (physics Wave 14, all 10 authored under the Standard); the pre-existing 71 TEMPLATE.md-era entries correctly read ✗ |
 
 ## Per-concept ledger
 
@@ -231,6 +230,7 @@ every live file in `educational-brain/concepts/{subject}/`.
 | `phys.mech.newtons-third-law` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ |
 | `phys.mech.normal-force` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.orbital-mechanics` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.mech.poisson-brackets` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.potential-energy` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.power` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mech.pressure-fluids` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -254,6 +254,7 @@ every live file in `educational-brain/concepts/{subject}/`.
 | `phys.mod.de-broglie` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.photoelectric-effect` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.photons` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.mod.radioactive-decay` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.radioactivity` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.wave-particle-duality` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.mod.x-rays` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -272,13 +273,21 @@ every live file in `educational-brain/concepts/{subject}/`.
 | `phys.opt.total-internal-reflection` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ |
 | `phys.opt.wave-optics` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✓ | ✗ |
 | `phys.opt.youngs-experiment` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.qm.schrodinger-equation` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.qm.uncertainty-principle` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.qm.wave-function` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.rel.length-contraction` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.rel.lorentz-transform` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.rel.postulates` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.rel.relativistic-momentum` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.rel.simultaneity` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.rel.time-dilation` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.stat.boltzmann-factor` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.stat.bose-einstein` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.stat.entropy-statistical` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.stat.fluctuations-correlations` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.stat.free-energy` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `phys.stat.grand-canonical-ensemble` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.stat.maxwell-boltzmann` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.stat.partition-function` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `phys.stat.probability-basics` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

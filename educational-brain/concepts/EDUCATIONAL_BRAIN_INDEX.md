@@ -928,7 +928,7 @@ its subject KG.
 | trig | `math.trig.trig-identities` | Trigonometric Identities | Yes | No | — | MISSING |
 | trig | `math.trig.unit-circle` | Unit Circle | Yes | No | — | MISSING |
 
-## physics (238 concepts, 169 READY)
+## physics (238 concepts, 179 READY)
 
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
@@ -1023,7 +1023,7 @@ its subject KG.
 | mech | `phys.mech.newtons-third-law` | Newton's Third Law — Action-Reaction | Yes | Yes | `educational-brain/concepts/physics/phys.mech.newtons-third-law.md` | READY |
 | mech | `phys.mech.normal-force` | Normal Force and Constraint Forces | Yes | Yes | `educational-brain/concepts/physics/phys.mech.normal-force.md` | READY |
 | mech | `phys.mech.orbital-mechanics` | Circular Orbital Mechanics | Yes | Yes | `educational-brain/concepts/physics/phys.mech.orbital-mechanics.md` | READY |
-| mech | `phys.mech.poisson-brackets` | Poisson Brackets and Phase Space Dynamics | Yes | No | — | MISSING |
+| mech | `phys.mech.poisson-brackets` | Poisson Brackets and Phase Space Dynamics | Yes | Yes | `educational-brain/concepts/physics/phys.mech.poisson-brackets.md` | READY |
 | mech | `phys.mech.potential-energy` | Potential Energy | Yes | Yes | `educational-brain/concepts/physics/phys.mech.potential-energy.md` | READY |
 | mech | `phys.mech.power` | Power | Yes | Yes | `educational-brain/concepts/physics/phys.mech.power.md` | READY |
 | mech | `phys.mech.pressure-fluids` | Pressure in Fluids | Yes | Yes | `educational-brain/concepts/physics/phys.mech.pressure-fluids.md` | READY |
@@ -1057,7 +1057,7 @@ its subject KG.
 | mod | `phys.mod.photoelectric-effect` | Photoelectric Effect | Yes | Yes | `educational-brain/concepts/physics/phys.mod.photoelectric-effect.md` | READY |
 | mod | `phys.mod.photons` | Photons and Quantization of Light | Yes | Yes | `educational-brain/concepts/physics/phys.mod.photons.md` | READY |
 | mod | `phys.mod.pn-junction` | The p-n Junction | No | No | — | MISSING |
-| mod | `phys.mod.radioactive-decay` | Radioactive Decay Law and Half-Life | Yes | No | — | MISSING |
+| mod | `phys.mod.radioactive-decay` | Radioactive Decay Law and Half-Life | Yes | Yes | `educational-brain/concepts/physics/phys.mod.radioactive-decay.md` | READY |
 | mod | `phys.mod.radioactivity` | Radioactivity: Alpha, Beta, Gamma Decay | Yes | Yes | `educational-brain/concepts/physics/phys.mod.radioactivity.md` | READY |
 | mod | `phys.mod.semiconductor-classification` | Conductors, Insulators, and Semiconductors | No | No | — | MISSING |
 | mod | `phys.mod.wave-particle-duality` | Wave-Particle Duality | Yes | Yes | `educational-brain/concepts/physics/phys.mod.wave-particle-duality.md` | READY |
@@ -1105,10 +1105,10 @@ its subject KG.
 | qm | `phys.qm.quantum-tunneling` | Quantum Tunneling | Yes | No | — | MISSING |
 | qm | `phys.qm.s-matrix-basics` | S-Matrix and Scattering Amplitudes | Yes | No | — | MISSING |
 | qm | `phys.qm.scattering-theory-born-approximation` | Scattering Theory and the Born Approximation | Yes | No | — | MISSING |
-| qm | `phys.qm.schrodinger-equation` | Time-Dependent Schrödinger Equation | Yes | No | — | MISSING |
+| qm | `phys.qm.schrodinger-equation` | Time-Dependent Schrödinger Equation | Yes | Yes | `educational-brain/concepts/physics/phys.qm.schrodinger-equation.md` | READY |
 | qm | `phys.qm.selection-rules` | Selection Rules and Transition Probabilities | Yes | No | — | MISSING |
 | qm | `phys.qm.spin` | Electron Spin and the Stern-Gerlach Experiment | Yes | No | — | MISSING |
-| qm | `phys.qm.uncertainty-principle` | Heisenberg's Uncertainty Principle | Yes | No | — | MISSING |
+| qm | `phys.qm.uncertainty-principle` | Heisenberg's Uncertainty Principle | Yes | Yes | `educational-brain/concepts/physics/phys.qm.uncertainty-principle.md` | READY |
 | qm | `phys.qm.variational-method` | Variational Method and Variational Principle | Yes | No | — | MISSING |
 | qm | `phys.qm.wave-function` | Wave Function and Probability Interpretation | Yes | Yes | `educational-brain/concepts/physics/phys.qm.wave-function.md` | READY |
 | qm | `phys.qm.wkb-approximation` | WKB Approximation (Semiclassical Limit) | Yes | No | — | MISSING |
@@ -1116,18 +1116,18 @@ its subject KG.
 | rel | `phys.rel.lorentz-transform` | Lorentz Transformations | Yes | Yes | `educational-brain/concepts/physics/phys.rel.lorentz-transform.md` | READY |
 | rel | `phys.rel.mass-energy` | Mass-Energy Equivalence: E=mc² | Yes | No | — | MISSING |
 | rel | `phys.rel.postulates` | Postulates of Special Relativity | Yes | Yes | `educational-brain/concepts/physics/phys.rel.postulates.md` | READY |
-| rel | `phys.rel.relativistic-momentum` | Relativistic Momentum and Energy | Yes | No | — | MISSING |
+| rel | `phys.rel.relativistic-momentum` | Relativistic Momentum and Energy | Yes | Yes | `educational-brain/concepts/physics/phys.rel.relativistic-momentum.md` | READY |
 | rel | `phys.rel.simultaneity` | Relativity of Simultaneity | Yes | Yes | `educational-brain/concepts/physics/phys.rel.simultaneity.md` | READY |
 | rel | `phys.rel.spacetime` | Spacetime Interval and Four-Vectors | Yes | No | — | MISSING |
 | rel | `phys.rel.time-dilation` | Time Dilation | Yes | Yes | `educational-brain/concepts/physics/phys.rel.time-dilation.md` | READY |
 | stat | `phys.stat.boltzmann-factor` | Boltzmann Factor and Statistical Weight | Yes | Yes | `educational-brain/concepts/physics/phys.stat.boltzmann-factor.md` | READY |
-| stat | `phys.stat.bose-einstein` | Bose-Einstein Statistics | Yes | No | — | MISSING |
+| stat | `phys.stat.bose-einstein` | Bose-Einstein Statistics | Yes | Yes | `educational-brain/concepts/physics/phys.stat.bose-einstein.md` | READY |
 | stat | `phys.stat.chemical-potential` | Chemical Potential and Thermodynamic Equilibrium | Yes | No | — | MISSING |
-| stat | `phys.stat.entropy-statistical` | Statistical Definition of Entropy | Yes | No | — | MISSING |
+| stat | `phys.stat.entropy-statistical` | Statistical Definition of Entropy | Yes | Yes | `educational-brain/concepts/physics/phys.stat.entropy-statistical.md` | READY |
 | stat | `phys.stat.fermi-dirac` | Fermi-Dirac Statistics | Yes | No | — | MISSING |
-| stat | `phys.stat.fluctuations-correlations` | Fluctuations, Response Functions, and Correlations | Yes | No | — | MISSING |
-| stat | `phys.stat.free-energy` | Helmholtz and Gibbs Free Energy | Yes | No | — | MISSING |
-| stat | `phys.stat.grand-canonical-ensemble` | Grand Canonical Ensemble | Yes | No | — | MISSING |
+| stat | `phys.stat.fluctuations-correlations` | Fluctuations, Response Functions, and Correlations | Yes | Yes | `educational-brain/concepts/physics/phys.stat.fluctuations-correlations.md` | READY |
+| stat | `phys.stat.free-energy` | Helmholtz and Gibbs Free Energy | Yes | Yes | `educational-brain/concepts/physics/phys.stat.free-energy.md` | READY |
+| stat | `phys.stat.grand-canonical-ensemble` | Grand Canonical Ensemble | Yes | Yes | `educational-brain/concepts/physics/phys.stat.grand-canonical-ensemble.md` | READY |
 | stat | `phys.stat.ising-model` | Ising Model | Yes | No | — | MISSING |
 | stat | `phys.stat.maxwell-boltzmann` | Maxwell-Boltzmann Speed Distribution | Yes | Yes | `educational-brain/concepts/physics/phys.stat.maxwell-boltzmann.md` | READY |
 | stat | `phys.stat.monte-carlo-basics` | Monte Carlo Methods in Statistical Physics | Yes | No | — | MISSING |

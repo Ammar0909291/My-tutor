@@ -12,7 +12,7 @@ and this file's summary row should be corrected to match.
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
-| physics | 238 | 169 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 (2026-07-23, level 13, this batch): `phys.mech.hamiltons-equations`, `phys.mod.radioactivity`, `phys.qm.wave-function`, `phys.rel.lorentz-transform`, `phys.stat.maxwell-boltzmann`, `phys.stat.partition-function` — 69 concepts remain (71.01%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-12 name lists |
+| physics | 238 | 179 | pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 (2026-07-23, level 14, this batch): `phys.mech.poisson-brackets`, `phys.mod.radioactive-decay`, `phys.qm.schrodinger-equation`, `phys.qm.uncertainty-principle`, `phys.rel.relativistic-momentum`, `phys.stat.bose-einstein`, `phys.stat.entropy-statistical`, `phys.stat.fluctuations-correlations`, `phys.stat.free-energy`, `phys.stat.grand-canonical-ensemble` — 59 concepts remain (75.21%); see Delivery history for the full pre-existing-67, Wave-6 through Wave-13 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 32 | levels 0–4 complete (32/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
@@ -751,3 +751,50 @@ retrieval engine. Per-entry completeness against the tracked fields is in
   add its 8 rows to `EDUCATIONAL_BRAIN_INDEX.md`/`QUALITY.md` or remove
   them from `AUTHORING_QUEUE.md` — corrected as part of the Wave 13
   merge above.
+
+- **Batch 19 — Physics Wave 14 (2026-07-23)**: continuing the same
+  mandatory-rules production cycle immediately following Wave 13's
+  second merge in this conversation, per rule 10's "fetch, re-audit,
+  continue" discipline. Re-fetched `origin/main` after the Wave 13
+  merge-push and confirmed 0 commits ahead/behind before starting — no
+  other session had touched physics EB concurrently this time.
+  `math.found` was NOT touched and remains 37/82. Independently
+  recomputed dependency levels via a fresh Kahn's-algorithm pass over
+  the live KG's `requires` edges — the level-14 set (10 concepts)
+  matched `AUTHORING_QUEUE.md`'s stored rows exactly, zero discrepancy.
+  Authored all 10: `phys.mech.poisson-brackets`,
+  `phys.mod.radioactive-decay`, `phys.qm.schrodinger-equation`,
+  `phys.qm.uncertainty-principle`, `phys.rel.relativistic-momentum`,
+  `phys.stat.bose-einstein`, `phys.stat.entropy-statistical`,
+  `phys.stat.fluctuations-correlations`, `phys.stat.free-energy`,
+  `phys.stat.grand-canonical-ensemble`. All 10 had existing Blueprints
+  (Component-format, mostly 4-misconception style; the two
+  `phys.stat.fluctuations-correlations` and
+  `phys.stat.grand-canonical-ensemble` entries used a Component-style
+  C2 Misconception Register table with only 2 documented misconceptions
+  each) reused by reference — each entry cites its Blueprint's
+  Misconception Engine/Register by name with birth-type classification
+  added, never re-deriving probe/bridge/replacement text. This wave
+  completed the Schrödinger-equation hub (`phys.qm.schrodinger-equation`,
+  unlocking 5 downstream quantum-mechanics concepts:
+  `phys.qm.harmonic-oscillator-qm`, `phys.qm.hydrogen-atom-qm`,
+  `phys.qm.operators`, `phys.qm.particle-in-box`,
+  `phys.qm.quantum-tunneling`) and expanded Statistical Mechanics with
+  four more hub concepts (Bose-Einstein statistics, statistical entropy,
+  fluctuations/correlations, free energy, grand canonical ensemble). All
+  10 entries verified against `EDUCATIONAL_BRAIN_STANDARD.md`'s exact
+  21-section structure and heading order (0 mismatches), zero duplicate
+  filenames/concept IDs, zero orphans against the live physics KG (all
+  179 physics EB files map to a valid KG id). Physics KG re-validated:
+  PASS, 238/238 reachable, 0 failures/warnings — no KG file was touched;
+  all 6 subject KGs re-validated PASS. `physics` is now 179/238 —
+  75.21% complete. True total, recomputed fresh: **251** entries (179
+  physics + 37 mathematics + 32 chemistry + 3 english), 1,524 remaining,
+  14.14%. Wave 15 (dependency level 15, 9 concepts —
+  `phys.mech.canonical-transformations`, `phys.mod.nuclear-reactions`,
+  `phys.qm.harmonic-oscillator-qm`, `phys.qm.operators`,
+  `phys.qm.particle-in-box`, `phys.qm.quantum-tunneling`,
+  `phys.rel.mass-energy`, `phys.stat.chemical-potential`,
+  `phys.stat.phase-transitions`) is computed and next, but NOT started
+  this batch. All six tracking files regenerated from source;
+  re-validated 0 orphans, 0 duplicates across all 251 entries.

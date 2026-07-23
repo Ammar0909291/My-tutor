@@ -1,12 +1,14 @@
 # Educational Brain Production Pipeline — Validation Report
 
 Generated 2026-07-22 against the live repository state; re-run this batch
-(Physics Wave 13) against the post-Wave-12-merge state. Wave 12's push
+(Physics Wave 14) against the post-Wave-13-merges state. Wave 12's push
 encountered a concurrent push to `origin/main` (a `math.found` Wave 6
 batch, 5 concepts, plus a Chemistry Educational Brain batch, 24
-concepts, chemistry's own levels 0-3, chemistry's first EB coverage) —
-merged rather than force-pushed. Wave 13 (this batch) encountered no
-concurrent push. All totals below are recomputed fresh from the live
+concepts, chemistry's own levels 0-3, chemistry's first EB coverage);
+Wave 13's push encountered a second concurrent push (a Chemistry EB
+level-4 batch, 8 concepts, 24→32) — both merged rather than
+force-pushed. Wave 14 (this batch) encountered no concurrent push. All
+totals below are recomputed fresh from the live
 `educational-brain/concepts/{subject}/` directories, not hand-merged
 from conflicting drafts or estimated. Every check below was computed
 directly from `docs/{subject}/kg/graph.json` (all 6 subjects),
@@ -41,14 +43,14 @@ report).
 
 **✓ Every Educational Brain entry points to one existing KG concept.**
 Checked: every filename in `educational-brain/concepts/{subject}/`
-(233 files: 169 physics + 37 mathematics + 24 chemistry + 3 english)
+(251 files: 179 physics + 37 mathematics + 32 chemistry + 3 english)
 against that subject's live KG id set. **0 orphans** — every EB file
-resolves to a real, current KG concept. **Reconciliation finding (Wave
-12, carried forward)**: the concurrent chemistry batch's own commits
-authored all 24 chemistry files but never added their rows to
+resolves to a real, current KG concept. **Reconciliation findings (Waves
+12 and 13, carried forward)**: both concurrent chemistry batches'
+commits authored their files but never added rows to
 `EDUCATIONAL_BRAIN_INDEX.md` or `QUALITY.md`, nor removed them from
-`AUTHORING_QUEUE.md` — a bookkeeping gap in that session's work,
-corrected during the Wave 12 merge.
+`AUTHORING_QUEUE.md` — a bookkeeping gap in each of those sessions'
+work, corrected during the respective merges.
 
 **✓ Every KG concept has at most one Educational Brain entry.**
 Structurally guaranteed by the 1:1 `{kg-id}.md` filename convention;
@@ -57,27 +59,28 @@ filesystem could technically hold `Foo.md` and `foo.md` as distinct
 files) — **0 duplicates**.
 
 **◐ Every Educational Brain entry references one Blueprint — partially,
-honestly reported.** 202 of 233 EB entries' concepts have a matching
-Blueprint FILE on disk. The other 31 are: 7 `math.found` concepts
+honestly reported.** 212 of 251 EB entries' concepts have a matching
+Blueprint FILE on disk. The other 39 are: 7 `math.found` concepts
 (`math.found.definition`, `inductive-reasoning`, `mathematical-modeling`,
 `mathematical-symbols`, `problem-solving-strategies` — Wave 2 — plus
 `reading-mathematics` — Wave 3 — plus `empty-set` — Wave 5) which
 genuinely have no Blueprint yet, each stating this explicitly in its own
-Blueprint References section per Quality Gate 2; plus all 24 chemistry
+Blueprint References section per Quality Gate 2; plus all 32 chemistry
 concepts, which reference `docs/chemistry/teaching-assets/assets.json`
 instead (that file's own entries are `[TEMPLATE]` placeholders per the
 chemistry batch's own discovery — chemistry's Blueprint production
-track has not started). All 6 of this batch's new physics entries (Wave
-13) DO have existing Blueprints, each reused by reference. 134+ of the
-233 have an explicit, machine-checkable "Blueprint References" section
+track has not started). All 10 of this batch's new physics entries (Wave
+14) DO have existing Blueprints, each reused by reference. 140+ of the
+251 have an explicit, machine-checkable "Blueprint References" section
 citing it by name (or citing its absence) — `eng.phonics.print-concepts`
 plus this program's 36 `math.found.*` entries plus 12 `phys.*` Wave 6
 entries plus 25 `phys.*` Wave 7 entries plus 15 `phys.*` Wave 8 entries
 plus 16 `phys.*` Wave 9 entries plus 9 `phys.*` Wave 10 entries plus 11
-`phys.*` Wave 11 entries plus 8 `phys.*` Wave 12 entries plus this
-batch's 6 `phys.*` Wave 13 entries plus all 24 chemistry entries, all
-authored under `EDUCATIONAL_BRAIN_STANDARD.md`. The remaining 70 predate
-that section (authored under the old `TEMPLATE.md`) and reference their
+`phys.*` Wave 11 entries plus 8 `phys.*` Wave 12 entries plus 6 `phys.*`
+Wave 13 entries plus this batch's 10 `phys.*` Wave 14 entries plus all
+32 chemistry entries, all authored under
+`EDUCATIONAL_BRAIN_STANDARD.md`. The remaining 70 predate that section
+(authored under the old `TEMPLATE.md`) and reference their
 Blueprints only informally or not at all in prose — the migration debt
 already
 recorded in `EDUCATIONAL_BRAIN_STANDARD.md` §6 and `QUALITY.md`. **New
@@ -312,6 +315,36 @@ Mechanics with two more hub concepts, including
 concepts). Physics KG re-validated fresh this batch: PASS, 238/238
 reachable, 0 failures/warnings — no KG file was touched; all 6 subject
 KGs re-validated PASS this batch. `physics` is now 169/238 — 71.01%.
+**Merge note**: this batch's push encountered a second concurrent
+Chemistry EB batch (level 4, 8 concepts, 24→32) — merged rather than
+force-pushed; found the same bookkeeping gap as Wave 12 (chemistry rows
+not added to `EDUCATIONAL_BRAIN_INDEX.md`/`QUALITY.md`, not removed from
+`AUTHORING_QUEUE.md`), corrected as part of that merge.
+
+## Physics Wave 14 — mandatory-rules cycle continuation (2026-07-23)
+
+Continuation of the same mandatory-rules production cycle immediately
+following Wave 13's second merge within the same conversation, per rule
+10. Re-fetched `origin/main` after the Wave 13 merge-push and confirmed
+0 commits ahead/behind before starting — no other session had touched
+physics EB concurrently this time. Independently recomputed dependency
+levels via a fresh Kahn's-algorithm pass over the live KG's `requires`
+edges — the level-14 set (10 concepts) matched `AUTHORING_QUEUE.md`'s
+stored rows exactly, zero discrepancy. Authored all 10. All 10
+individually pass every per-entry check: structural 21-section
+conformance verified by heading scan and exact heading-order diff (0
+mismatches across all 10); 0 orphans; 0 duplicates; Blueprint References
+section present and accurate (all 10 cite an existing Blueprint); no
+runtime-asset duplication (none of the 10 created any `AssetIdentity`
+records). This wave completed the Schrödinger-equation hub
+(`phys.qm.schrodinger-equation`, unlocking 5 downstream quantum-
+mechanics concepts) and expanded Statistical Mechanics with four more
+hub concepts (Bose-Einstein statistics, statistical entropy,
+fluctuations/correlations, free energy, grand canonical ensemble).
+Physics KG re-validated fresh this batch: PASS, 238/238 reachable, 0
+failures/warnings — no KG file was touched; all 6 subject KGs
+re-validated PASS this batch. `physics` is now 179/238 — 75.21%. No
+concurrent push encountered this time.
 
 ## Domain Certification — math.found
 
@@ -339,7 +372,7 @@ three; all stay open until `math.found` reaches 82/82.
 ## Full index and queue
 
 See `EDUCATIONAL_BRAIN_INDEX.md` (1,775 rows, one per KG concept, with
-Blueprint/EB/Status columns) and `AUTHORING_QUEUE.md` (1,542 rows —
+Blueprint/EB/Status columns) and `AUTHORING_QUEUE.md` (1,524 rows —
 every `MISSING` concept, with `math.found`'s remaining 46 called out as
 the default next targets per the current Domain Certification Mode,
 unless overridden by an equally explicit subject-specific instruction as
@@ -350,22 +383,26 @@ in this report.
 
 **No blocking defect found.** The two mathematics/chemistry cross-link
 findings (KG-level, pre-existing) remain informational, as does the
-accumulated physics cross-link findings from Waves 12-13 (4 genuine
+accumulated physics cross-link findings from Waves 12-14 (10 genuine
 cross-subject connections identified in Curriculum Feedback despite
 empty KG `cross_links` fields — `phys.stat.boltzmann-factor`'s and
 `phys.stat.maxwell-boltzmann`'s Arrhenius-equation links to chemistry,
-`phys.stat.partition-function`'s statistical-thermodynamics link to
-chemistry, and `phys.mod.radioactivity`'s nuclear-medicine link to
-chemistry/biology — + 10 honest "none found" across both waves — an
-EB-authoring-level observation, not a KG defect). None of these break
-any of the Phase 2 checklist's pass/fail criteria. The open items
-(Blueprint References migration debt on 70 pre-Standard entries;
-math.found domain at 37/82; the two bookkeeping gaps found in the
-concurrent chemistry batch, corrected as part of the Wave 12 merge; the
-structural heading non-conformance found in the concurrent `math.found`
-Wave 6 batch, flagged not corrected) are already tracked, already have
-owners (future reconciliation/continuation batches), and do not block
-new authoring
+`phys.stat.partition-function`'s and `phys.stat.grand-canonical-ensemble`'s
+statistical-thermodynamics/chemical-equilibrium links to chemistry,
+`phys.mod.radioactivity`'s and `phys.mod.radioactive-decay`'s nuclear-
+medicine/archaeology links, `phys.qm.schrodinger-equation`'s quantum-
+chemistry link, `phys.rel.relativistic-momentum`'s nuclear-engineering
+link, `phys.stat.entropy-statistical`'s information-theory link, and
+`phys.stat.free-energy`'s chemistry/biology links — + 14 honest "none
+found" across all three waves — an EB-authoring-level observation, not
+a KG defect). None of these break any of the Phase 2 checklist's pass/
+fail criteria. The open items (Blueprint References migration debt on
+70 pre-Standard entries; math.found domain at 37/82; the bookkeeping
+gaps found in both concurrent chemistry batches, corrected as part of
+the Wave 12 and Wave 13 merges; the structural heading non-conformance
+found in the concurrent `math.found` Wave 6 batch, flagged not
+corrected) are already tracked, already have owners (future
+reconciliation/continuation batches), and do not block new authoring
 under the current Standard.
 
 ---
