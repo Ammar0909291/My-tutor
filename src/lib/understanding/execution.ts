@@ -55,35 +55,54 @@ const RENDER_ROLES: Partial<Record<TeachingDecision['decision'], { role: string;
   },
 }
 
+export interface ExecutionBlockOptions {
+  retrievedSnippet?: string
+  teachingGoal?: string
+  strategyLabel?: string
+}
+
 /**
  * Build the authoritative execution block for a flag-ON turn.
  * Empty string for non-renderer executors (memory serves directly;
  * open escalation is the current pipeline as-is).
  */
-export function buildBrainExecutionBlock(plan: DispatchPlan, decision: TeachingDecision): string {
+export function buildBrainExecutionBlock(
+  plan: DispatchPlan,
+  decision: TeachingDecision,
+  opts?: ExecutionBlockOptions,
+): string {
   try {
     if (!plan || plan.executor !== 'LLM_RENDERER') return ''
     const role = RENDER_ROLES[plan.decision]
     if (!role) return ''
     const lines: string[] = [
-      '\n\nBRAIN DECISION (authoritative for this turn — the Educational Brain has already decided; do NOT choose a different action, activity, or topic):',
-      `- Decision: ${plan.decision} (rule ${decision.ruleId})`,
+      '\n\nBRAIN DECISION (authoritative — Brain decided; do NOT choose a different action/topic):',
+      `- Decision: ${plan.decision} (${decision.ruleId})`,
       `- ${role.directive}`,
     ]
     const p = decision.parameters ?? {}
     if (plan.decision === 'REVIEW_PREREQUISITE' && p.prerequisiteId) {
-      lines.push(`- Prerequisite to teach: ${p.prerequisiteId}`)
+      lines.push(`- Prerequisite: ${p.prerequisiteId}`)
     }
     if (plan.decision === 'VISUALIZATION' && p.visualType) {
-      lines.push(`- Visual to serve: ${p.visualType}`)
+      lines.push(`- Visual: ${p.visualType}`)
     }
     if (plan.decision === 'DETECT_MISCONCEPTION' && p.misconceptionLabel) {
-      lines.push(`- Misconception under repair: "${p.misconceptionLabel}"`)
+      lines.push(`- Misconception: "${p.misconceptionLabel}"`)
     }
-    lines.push(`- Your role this turn: ${role.role}. The engine decided WHAT happens; you only render it.`)
+    if (opts?.strategyLabel) {
+      lines.push(`- Strategy: ${opts.strategyLabel}`)
+    }
+    if (opts?.teachingGoal) {
+      lines.push(`- Goal: ${opts.teachingGoal}`)
+    }
+    if (opts?.retrievedSnippet) {
+      lines.push(`- Retrieved content (rewrite naturally, do NOT generate new): ${opts.retrievedSnippet.slice(0, 300)}`)
+    }
+    lines.push(`- Role: ${role.role}. The engine decided WHAT; you only render.`)
     return lines.join('\n')
   } catch {
-    return '' // execution scoping must never break a turn
+    return ''
   }
 }
 

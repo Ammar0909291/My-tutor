@@ -232,11 +232,54 @@ function realLifeExampleDirective(hasEstablishedExample: boolean): string {
  * additive/optional so pre-existing callers default to false (first-example
  * wording), matching prior behavior.
  */
+const STRATEGY_BLOCKS: Record<number, (vis: string | null, prereqId: string | null) => string> = {
+  0: () =>
+    '\n\nTEACHING ACTION: STRATEGY 0 — CONCISE EXPLANATION. ' +
+    'Give the shortest possible correct explanation: one sentence of core idea, one concrete example sentence. ' +
+    'No analogies, no stories, no questions. End with an invitation, not a question mark.',
+  1: () =>
+    '\n\nTEACHING ACTION: STRATEGY 1 — SIMPLER WORDING. ' +
+    'Re-explain using only common everyday words a 10-year-old would know. ' +
+    'Replace every technical term with a plain description. ' +
+    'Maximum two short sentences. No questions this turn.',
+  2: () =>
+    '\n\nTEACHING ACTION: STRATEGY 2 — ANALOGY. ' +
+    'Give ONE vivid analogy from the learner\'s everyday life. ' +
+    'Walk the concept through that analogy step by step. ' +
+    'Do NOT repeat any analogy already used this lesson (the server tracks this). ' +
+    'No definitions, no questions this turn.',
+  3: (vis) =>
+    '\n\nTEACHING ACTION: STRATEGY 3 — VISUAL DEMONSTRATION. ' +
+    (vis
+      ? `Lead with the visual: emit the VISUAL:${vis} tag first, then at most two short sentences pointing at what to look at.`
+      : 'Build the picture in text: a labelled ASCII/structured diagram or a precise step-by-step visual description ("imagine a horizontal line; on its left end…"), then one sentence of guidance.') +
+    ' Words support the visual, not the other way around. No prose explanation this turn.',
+  4: () =>
+    '\n\nTEACHING ACTION: STRATEGY 4 — PHYSICAL ACTIVITY (observation first, vocabulary second). ' +
+    'Design a simple physical activity the learner can do RIGHT NOW: ' +
+    '"Stand up." "Walk three steps forward." "Walk three steps back." "Where are you now?" ' +
+    'Then introduce the terminology AFTER they experience it. ' +
+    'The activity must be doable in any room. No explaining first — the body teaches.',
+  5: () =>
+    '\n\nTEACHING ACTION: STRATEGY 5 — GUIDED DISCOVERY. ' +
+    'Ask ONE carefully chosen question that leads the learner to discover the concept themselves. ' +
+    'The question must be answerable from what they already know — never ask them to guess something not yet shown. ' +
+    'Wait for their answer. Do not reveal the answer in the same turn.',
+  6: (_vis, prereqId) =>
+    '\n\nTEACHING ACTION: STRATEGY 6 — PREREQUISITE REMEDIATION. ' +
+    (prereqId
+      ? `Step back to the prerequisite concept "${prereqId}" — the current concept cannot land without it. Teach the prerequisite briefly, then reconnect to the current topic.`
+      : 'Step back to the most likely missing foundation for this concept. Teach it briefly, then reconnect.') +
+    ' Do not attempt the current concept again until the prerequisite is addressed.',
+}
+
 export function buildLearnerRequestBlock(
   request: LearnerRequest,
   availableVisualType: string | null,
   remediationTier = 0,
   hasEstablishedExample = false,
+  strategyIndex?: number,
+  prerequisiteId?: string | null,
 ): string {
   switch (request) {
     case 'diagram':
@@ -251,64 +294,15 @@ export function buildLearnerRequestBlock(
     case 'real_life_example':
       return realLifeExampleDirective(hasEstablishedExample)
     case 'explain_differently': {
-      // Tier 0 (first time this concept has needed it): a different
-      // explanation — same channel (prose), genuinely different content.
-      if (remediationTier <= 0) {
-        return (
-          '\n\nTEACHING ACTION: CHANGE_REPRESENTATION — DIFFERENT EXPLANATION ' +
-          '(learner said they did not understand). Your previous explanation did ' +
-          'not land — repeating similar wording is forbidden. Give a genuinely ' +
-          'different explanation: different angle, different words, different ' +
-          'starting point. Shorter than before, one idea only, no new vocabulary. ' +
-          'Do not ask a question this turn; end with an invitation.'
-        )
+      if (typeof strategyIndex === 'number' && strategyIndex >= 0 && strategyIndex <= 6) {
+        const builder = STRATEGY_BLOCKS[strategyIndex]
+        if (builder) {
+          return builder(availableVisualType, prerequisiteId ?? null) +
+            `\n- Strategy ${strategyIndex} of 7 (server-selected, never repeat a previous strategy).` +
+            `\n- Strategies already attempted this lesson: ${remediationTier}. Do NOT reuse any previous approach.`
+        }
       }
-      // Tier 1 (still confused after a different explanation): worked example.
-      if (remediationTier === 1) {
-        return (
-          '\n\nTEACHING ACTION: CHANGE_REPRESENTATION — WORKED EXAMPLE (this concept ' +
-          'has already needed one different explanation and it still did not land — ' +
-          'stop explaining in the abstract). Show ONE complete worked example, start ' +
-          'to finish, stating the reason for each step. No new theory, no question ' +
-          'this turn.'
-        )
-      }
-      // Tier 2: real-world example (reuses the existing directive verbatim —
-      // same teaching action the learner gets by asking for one directly).
-      if (remediationTier === 2) {
-        return realLifeExampleDirective(hasEstablishedExample).replace(
-          'TEACHING ACTION: REAL_LIFE_EXAMPLE (learner-requested — overrides the turn move).',
-          'TEACHING ACTION: CHANGE_REPRESENTATION — REAL_LIFE_EXAMPLE (a different ' +
-          'explanation and a worked example have both already failed to land this ' +
-          'concept — try the concrete, personal angle next).',
-        )
-      }
-      // Tier 3: visualization, through the existing Visualization Registry —
-      // the caller (route.ts) is responsible for force-rendering
-      // availableVisualType via shouldForceVisualRender/resolveResponseVisual
-      // exactly as it already does for an explicit 'diagram' request; this
-      // text only carries the instruction when no visual is registered.
-      if (remediationTier === 3) {
-        return (
-          '\n\nTEACHING ACTION: CHANGE_REPRESENTATION — VISUALIZATION (three different ' +
-          'explanations of this concept have not landed — words are not working; SHOW ' +
-          'it instead). ' +
-          (availableVisualType
-            ? `Lead with the visual: emit the VISUAL:${availableVisualType} tag first, then at most two short sentences.`
-            : 'No registered visual exists for this concept — build the clearest possible text diagram or step-by-step visual description instead.') +
-          ' No new prose explanation this turn.'
-        )
-      }
-      // Tier 4+: guided step-by-step — hand-holding, minimal questioning
-      // (task 4/5: repeated confusion reduces Socratic questioning and never
-      // asks the learner to infer something not yet taught).
-      return (
-        '\n\nTEACHING ACTION: CHANGE_REPRESENTATION — GUIDED STEP-BY-STEP (four prior ' +
-        'attempts at this concept have not landed). Switch to full co-production: walk ' +
-        'ONE micro-step at a time, doing it WITH the learner rather than asking them to ' +
-        'produce it. Do not ask them to predict, guess, or infer anything not already ' +
-        'shown. At most one very small confirming check, never an open question.'
-      )
+      return STRATEGY_BLOCKS[0]!(availableVisualType, prerequisiteId ?? null)
     }
   }
 }

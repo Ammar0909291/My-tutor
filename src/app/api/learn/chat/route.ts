@@ -354,6 +354,9 @@ export async function POST(req: Request) {
     // Sprint W gap A: the structured [HINT] tag's extracted text, hoisted so
     // it can be attached to the JSON response once cleanText is finalized.
     let hintHoisted: string | null = null
+    let teachingHistoryHoisted: import('@/lib/teaching/teachingHistory').TeachingHistory | null = null
+    let selectedStrategyHoisted: number | null = null
+    let retrievalCacheHoisted: import('@/lib/teaching/retrievalCache').RetrievalCache | null = null
 
     // Visual learning aids for SUBJECT_LIBRARY subjects — Sprint BW
     // detectVisual()/buildVisualsSystemBlock(), scoped to the Library lesson's
@@ -886,14 +889,29 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // unparseable blueprint never blocks the Teaching Engine.
           try {
             const { loadBlueprint, loadBlueprintContent, buildBlueprintContextBlock, loadEBConceptContext } = await import('@/lib/curriculum/blueprintLoader')
+            const { createRetrievalCache, CACHE_KEY_BLUEPRINT_SUMMARY, CACHE_KEY_EB_CONTEXT } = await import('@/lib/teaching/retrievalCache')
+            if (!retrievalCacheHoisted) retrievalCacheHoisted = createRetrievalCache()
             const blueprintResult = loadBlueprint(activeConceptIdForDecide)
             if (blueprintResult.found) {
               const contentResult = loadBlueprintContent(activeConceptIdForDecide)
               if (contentResult.found) {
-                // TQ-1/TQ-2: load EB Concept Entry for recovery notes,
-                // anti-analogies, voice cues, and opening scenario.
+                const bpParts: string[] = []
+                if (contentResult.content.conceptSpine) {
+                  bpParts.push(contentResult.content.conceptSpine.definition ?? '')
+                }
+                if (contentResult.content.misconceptions.length) {
+                  bpParts.push('Misconceptions: ' + contentResult.content.misconceptions.map(m => m.title).join('; '))
+                }
+                const bpSummary = bpParts.filter(Boolean).join(' | ').slice(0, 300)
+                if (bpSummary) retrievalCacheHoisted.set(CACHE_KEY_BLUEPRINT_SUMMARY, bpSummary)
                 const ebResult = loadEBConceptContext(activeConceptIdForDecide)
                 const ebContext = ebResult.found ? ebResult.context : null
+                if (ebContext) {
+                  retrievalCacheHoisted.set(CACHE_KEY_EB_CONTEXT, {
+                    recoveryNotes: ebContext.recoveryShrinkTo,
+                    misconceptions: ebContext.antiAnalogies,
+                  })
+                }
                 const block = buildBlueprintContextBlock(contentResult.content, ebContext)
                 if (block) systemPrompt += block
               }
@@ -1424,17 +1442,26 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               : decideVisualFirst(availableVisual, conversationStateHoisted, nextMove),
           })
           if (learnerRequestHoisted) {
-            // P2 fix (remaining risk closed): whether a real-life example
-            // has already been established for THIS concept, computed from
-            // ConversationState's own counters (exampleRequests — set by an
-            // earlier explicit request; remediationCount > 2 — tier 2 of the
-            // ladder already ran on a prior turn) rather than asking the LLM
-            // to infer it from a conversation history that may already have
-            // scrolled past the example (client.ts forwards only the last 6
-            // messages).
             const hasEstablishedExample =
               conversationStateHoisted.exampleRequests > 0 || conversationStateHoisted.remediationCount > 2
-            systemPrompt += buildLearnerRequestBlock(learnerRequestHoisted, availableVisual, remediationTier, hasEstablishedExample)
+            if (learnerRequestHoisted === 'explain_differently') {
+              const { readTeachingHistory, selectNextStrategy, hasExceededExplanationLimit } = await import('@/lib/teaching/teachingHistory')
+              const sessionSnap = learnSession.contextSnapshot as Record<string, unknown> | null
+              teachingHistoryHoisted = readTeachingHistory(sessionSnap?.teachingHistory, convConceptId)
+              selectedStrategyHoisted = selectNextStrategy(teachingHistoryHoisted)
+              if (selectedStrategyHoisted === -1) selectedStrategyHoisted = 6
+              if (hasExceededExplanationLimit(teachingHistoryHoisted) && selectedStrategyHoisted <= 1) {
+                selectedStrategyHoisted = Math.max(2, selectNextStrategy(teachingHistoryHoisted))
+                if (selectedStrategyHoisted < 2) selectedStrategyHoisted = 4
+              }
+              systemPrompt += buildLearnerRequestBlock(
+                learnerRequestHoisted, availableVisual, remediationTier,
+                hasEstablishedExample, selectedStrategyHoisted,
+                teachingHistoryHoisted.prerequisiteAttempts.length > 0 ? null : (convConceptId ?? null),
+              )
+            } else {
+              systemPrompt += buildLearnerRequestBlock(learnerRequestHoisted, availableVisual, remediationTier, hasEstablishedExample)
+            }
           }
           // Bug 8 — the client reports whether the previous long (collapsed)
           // explanation was ever expanded; unread text is never assumed read.
@@ -1591,6 +1618,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             userMessage: message,
           })
           assembled = await assembleLesson(memoryState)
+          if (assembled && retrievalCacheHoisted) {
+            const { CACHE_KEY_EXPLANATION } = await import('@/lib/teaching/retrievalCache')
+            retrievalCacheHoisted.set(CACHE_KEY_EXPLANATION, assembled.text)
+          }
           if (!assembled) {
             // Distinguish "nothing authored for this concept/language" from
             // "an asset exists but didn't clear the confidence threshold" —
@@ -1698,7 +1729,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // content and forbids the LLM from choosing a different action.
             // Empty for memory serves (no LLM at all) and open escalation.
             const { buildBrainExecutionBlock } = await import('@/lib/understanding/execution')
-            systemPrompt += buildBrainExecutionBlock(dispatchPlanHoisted, cueDecisionHoisted)
+            const { STRATEGY_LABELS } = await import('@/lib/teaching/strategyDirective')
+            const { buildRetrievedContext } = await import('@/lib/teaching/retrievalCache')
+            const execOpts: import('@/lib/understanding/execution').ExecutionBlockOptions = {}
+            if (selectedStrategyHoisted !== null && selectedStrategyHoisted >= 0) {
+              execOpts.strategyLabel = STRATEGY_LABELS[selectedStrategyHoisted] ?? `Strategy ${selectedStrategyHoisted}`
+            }
+            if (retrievalCacheHoisted) {
+              const conceptForCtx = resolvedConceptId ?? snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? ''
+              execOpts.retrievedSnippet = buildRetrievedContext(retrievalCacheHoisted, conceptForCtx)
+            }
+            systemPrompt += buildBrainExecutionBlock(dispatchPlanHoisted, cueDecisionHoisted, execOpts)
           }
         }
         // Brain runtime metrics — in-process observability only (no DB).
@@ -2036,6 +2077,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             learnerRequest: learnerRequestHoisted,
             misconceptionDetected: teachingSignal?.phrase !== undefined,
             isPriorKnowledgeProbe: isPriorKnowledgeProbe(cleanText),
+            strategyUsed: selectedStrategyHoisted ?? undefined,
+            signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
           })
           const stanceVerdict = enforceStance({
             text: cleanText,
@@ -2679,8 +2722,26 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 recoveryFired: recoveryKeyHoisted !== null,
                 learnerRequest: learnerRequestHoisted,
                 isPriorKnowledgeProbe: isPriorKnowledgeProbe(cleanText),
+                strategyUsed: selectedStrategyHoisted ?? undefined,
+                signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
               }),
             }
+          }
+          if (teachingHistoryHoisted && selectedStrategyHoisted !== null) {
+            const { updateTeachingHistory, computeFrustration, computeMastery } = await import('@/lib/teaching/teachingHistory')
+            const updatedHistory = updateTeachingHistory(teachingHistoryHoisted, {
+              strategiesUsed: [...new Set([...teachingHistoryHoisted.strategiesUsed, selectedStrategyHoisted])],
+              explanationCount: teachingHistoryHoisted.explanationCount + 1,
+              frustration: computeFrustration(
+                conversationStateHoisted?.consecutiveFailures ?? 0,
+                conversationStateHoisted?.remediationCount ?? 0,
+              ),
+              mastery: computeMastery(
+                conversationStateHoisted?.correctAtCheck ?? 0,
+                conversationStateHoisted?.correctAtPractice ?? 0,
+              ),
+            })
+            conversationStateUpdate = { ...conversationStateUpdate, teachingHistory: updatedHistory }
           }
 
           // EOS M1 — Evidence Spine: append this turn's typed events to the

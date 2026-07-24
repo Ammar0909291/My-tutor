@@ -43,36 +43,26 @@ export const PHASE_MAX_QUESTION_STAGE: Record<TeachingPhase, number> = {
 
 export interface ConversationState {
   phase: TeachingPhase
-  /** Phase is per-concept: a concept change resets the machine. */
   conceptId: string | null
-  /** Phase E counters (ask/teach budget). */
   questionsAskedSinceTeach: number
   teachSegmentsSinceQuestion: number
   consecutiveFailures: number
-  /** Evidence gates. */
   demonstrated: boolean
   correctAtCheck: number
   correctAtPractice: number
-  /** Student-state counters (mastery-gate work, Bug 11). All persisted
-   * per-concept and restored via readConversationState's spread-over-
-   * defaults, so pre-existing snapshots without them stay valid. */
   remediationCount: number
   diagramRequests: number
   exampleRequests: number
-  /** Stance Enforcement (Claude Recommendation #6): was a misconception
-   * detected on this concept at any point in the current lesson? Monotonic
-   * within one concept's lifetime (resets only when the concept changes,
-   * same as every other counter here) — feeds stanceEnforcement.ts's
-   * "misconception cannot be marked resolved without evidence" check. */
   misconceptionDetectedThisLesson: boolean
-  /** P0-4 (semantic loop detection): consecutive assistant turns whose
-   * question matched the prior-knowledge-elicitation family (isPriorKnow
-   * ledgeProbe), regardless of exact wording — "Have you seen X?" then
-   * "Can you think of X?" both count. Distinct from questionsAskedSince
-   * Teach (which counts ANY question): this tracks the SAME underlying
-   * ask repeated in different words. Resets whenever a turn's question
-   * (or non-question) isn't a probe of this family. */
   consecutivePriorKnowledgeProbes: number
+  strategiesUsed: number[]
+  analogiesUsed: string[]
+  demonstrationsShown: string[]
+  misconceptionsSeen: string[]
+  prerequisiteAttempts: string[]
+  explanationCount: number
+  learnerConfidence: 'high' | 'medium' | 'low' | 'unknown'
+  frustrationLevel: number
 }
 
 export function initialConversationState(conceptId: string | null): ConversationState {
@@ -90,6 +80,14 @@ export function initialConversationState(conceptId: string | null): Conversation
     exampleRequests: 0,
     misconceptionDetectedThisLesson: false,
     consecutivePriorKnowledgeProbes: 0,
+    strategiesUsed: [],
+    analogiesUsed: [],
+    demonstrationsShown: [],
+    misconceptionsSeen: [],
+    prerequisiteAttempts: [],
+    explanationCount: 0,
+    learnerConfidence: 'unknown',
+    frustrationLevel: 0,
   }
 }
 
@@ -114,26 +112,18 @@ export function readConversationState(
 // ── Post-AI evidence fold ─────────────────────────────────────────────────────
 
 export interface TurnEvidence {
-  /** The assistant's (clean) reply contained at least one question. */
   askedQuestion: boolean
-  /** Parsed SIGNAL correctness for the learner's answer; null = no signal. */
   signalCorrect: boolean | null
-  /** A recovery utterance fired this turn (failure by statement). */
   recoveryFired: boolean
-  /** Deterministic learner request detected this turn (masteryGate.ts):
-   * 'explain_differently' counts as remediation (confidence down, phase
-   * re-shows); 'diagram'/'real_life_example' update the student-state
-   * counters. Optional so pre-existing call sites stay valid. */
   learnerRequest?: 'diagram' | 'real_life_example' | 'explain_differently' | null
-  /** Stance Enforcement (Claude Recommendation #6): did this turn's parsed
-   * SIGNAL carry a misconception phrase (teachingSignal?.phrase present)?
-   * Optional so pre-existing call sites stay valid; undefined behaves as
-   * false (no misconception signal this turn). */
   misconceptionDetected?: boolean
-  /** P0-4: did the assistant's (clean) reply match the prior-knowledge-
-   * elicitation question family (isPriorKnowledgeProbe)? Optional so
-   * pre-existing call sites stay valid; undefined behaves as false. */
   isPriorKnowledgeProbe?: boolean
+  strategyUsed?: number
+  analogyLabel?: string
+  demonstrationLabel?: string
+  misconceptionId?: string
+  prerequisiteAttempted?: string
+  signalConfidence?: 'high' | 'medium' | 'low'
 }
 
 /**
@@ -208,13 +198,41 @@ export function advanceConversationState(
   if (evidence.learnerRequest === 'diagram') next.diagramRequests = prev.diagramRequests + 1
   if (evidence.learnerRequest === 'real_life_example') next.exampleRequests = prev.exampleRequests + 1
 
+  // Tracking fields from TurnEvidence — fold into ConversationState arrays.
+  if (evidence.strategyUsed !== undefined && evidence.strategyUsed >= 0) {
+    if (!next.strategiesUsed.includes(evidence.strategyUsed)) {
+      next.strategiesUsed = [...prev.strategiesUsed, evidence.strategyUsed]
+    }
+  }
+  if (evidence.analogyLabel) {
+    next.analogiesUsed = [...prev.analogiesUsed, evidence.analogyLabel]
+  }
+  if (evidence.demonstrationLabel) {
+    next.demonstrationsShown = [...prev.demonstrationsShown, evidence.demonstrationLabel]
+  }
+  if (evidence.misconceptionId) {
+    if (!prev.misconceptionsSeen.includes(evidence.misconceptionId)) {
+      next.misconceptionsSeen = [...prev.misconceptionsSeen, evidence.misconceptionId]
+    }
+  }
+  if (evidence.prerequisiteAttempted) {
+    next.prerequisiteAttempts = [...prev.prerequisiteAttempts, evidence.prerequisiteAttempted]
+  }
+  if (evidence.signalConfidence) {
+    next.learnerConfidence = evidence.signalConfidence
+  }
+
   // Bug 7 — "explain differently" / "I don't understand" is remediation:
   // confidence drops (consecutiveFailures++), remediation is counted, and
   // the phase re-shows (down one, floor DEMONSTRATE) instead of advancing.
   // A stray SIGNAL on such a turn can never advance the ladder.
   if (evidence.learnerRequest === 'explain_differently') {
     next.remediationCount = prev.remediationCount + 1
+    next.explanationCount = prev.explanationCount + 1
     next.consecutiveFailures = prev.consecutiveFailures + 1
+    next.frustrationLevel = Math.min(5, Math.round(
+      (prev.consecutiveFailures + 1) + (prev.remediationCount + 1) * 0.5
+    ))
     next.phase = phaseDown(prev.phase, next.demonstrated)
     return next
   }

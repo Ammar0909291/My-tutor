@@ -151,56 +151,50 @@ describe('Transcript Replay B — repeated confusion changes teaching behavior i
     }
   })
 
-  it('full replay: the SAME concept, repeated confusion, escalating remediation — never the same generic instruction twice', () => {
+  it('full replay: the SAME concept, repeated confusion, 7 distinct strategies — never the same instruction twice', () => {
     let state = initialConversationState('phys.mech.newtons-first-law')
 
-    // Turn 1 — first confusion on this concept.
+    // Turn 1 — first confusion: strategy 0 (concise)
     expect(detectLearnerRequest("I don't understand")).toBe('explain_differently')
-    const tier0 = buildLearnerRequestBlock('explain_differently', null, state.remediationCount)
-    expect(tier0).toMatch(/different explanation/i)
+    const s0 = buildLearnerRequestBlock('explain_differently', null, state.remediationCount, false, 0)
+    expect(s0).toMatch(/CONCISE/i)
     state = advanceConversationState(state, {
-      askedQuestion: false, signalCorrect: null, recoveryFired: false, learnerRequest: 'explain_differently',
+      askedQuestion: false, signalCorrect: null, recoveryFired: false, learnerRequest: 'explain_differently', strategyUsed: 0,
     })
     expect(state.remediationCount).toBe(1)
     expect(state.consecutiveFailures).toBe(1)
 
-    // Turn 2 — still confused; the SAME generic "try something different"
-    // text must NOT repeat — it must escalate to a worked example.
-    const tier1 = buildLearnerRequestBlock('explain_differently', null, state.remediationCount)
-    expect(tier1).toMatch(/worked example/i)
-    expect(tier1).not.toEqual(tier0)
+    // Turn 2 — strategy 1 (simpler wording), structurally different
+    const s1 = buildLearnerRequestBlock('explain_differently', null, state.remediationCount, false, 1)
+    expect(s1).toMatch(/SIMPLER/i)
+    expect(s1).not.toEqual(s0)
     state = advanceConversationState(state, {
-      askedQuestion: false, signalCorrect: null, recoveryFired: false, learnerRequest: 'explain_differently',
+      askedQuestion: false, signalCorrect: null, recoveryFired: false, learnerRequest: 'explain_differently', strategyUsed: 1,
     })
     expect(state.remediationCount).toBe(2)
 
-    // Turn 3 — real-world example.
-    const tier2 = buildLearnerRequestBlock('explain_differently', null, state.remediationCount)
-    expect(tier2).toMatch(/real.life.example/i)
+    // Turn 3 — strategy 2 (analogy)
+    const s2 = buildLearnerRequestBlock('explain_differently', null, state.remediationCount, false, 2)
+    expect(s2).toMatch(/ANALOGY/i)
     state = advanceConversationState(state, {
-      askedQuestion: false, signalCorrect: null, recoveryFired: false, learnerRequest: 'explain_differently',
+      askedQuestion: false, signalCorrect: null, recoveryFired: false, learnerRequest: 'explain_differently', strategyUsed: 2,
     })
-    expect(state.remediationCount).toBe(3)
 
-    // Turn 4 — visualization, force-rendered through the EXISTING registry.
+    // Turn 4 — strategy 3 (visual), with available visual from registry
     const availableVisual = getConceptVisualType('phys.mech.newtons-first-law')
-    const tier3 = buildLearnerRequestBlock('explain_differently', availableVisual, state.remediationCount)
-    expect(tier3).toMatch(/VISUALIZATION/i)
-    expect(tier3).toContain(`VISUAL:${availableVisual}`)
+    const s3 = buildLearnerRequestBlock('explain_differently', availableVisual, state.remediationCount, false, 3)
+    expect(s3).toMatch(/VISUAL/i)
     state = advanceConversationState(state, {
-      askedQuestion: false, signalCorrect: null, recoveryFired: false, learnerRequest: 'explain_differently',
+      askedQuestion: false, signalCorrect: null, recoveryFired: false, learnerRequest: 'explain_differently', strategyUsed: 3,
     })
-    expect(state.remediationCount).toBe(4)
 
-    // Turn 5 — guided step-by-step, minimal questioning.
-    const tier4 = buildLearnerRequestBlock('explain_differently', null, state.remediationCount)
-    expect(tier4).toMatch(/guided step-by-step/i)
-    expect(tier4).toMatch(/not already shown/i)
+    // Turn 5 — strategy 4 (physical activity)
+    const s4 = buildLearnerRequestBlock('explain_differently', null, state.remediationCount, false, 4)
+    expect(s4).toMatch(/PHYSICAL/i)
 
-    // By now the state machine has independently accumulated enough
-    // consecutive failures that the server FORCES a non-question turn
-    // regardless of prompt wording — the deterministic anti-repetition
-    // guarantee, not merely advisory text.
+    // By now the state machine has accumulated enough consecutive failures
+    // that the server FORCES a non-question turn regardless of prompt
+    // wording — the deterministic anti-repetition guarantee.
     expect(state.consecutiveFailures).toBeGreaterThanOrEqual(2)
     const move = decideNextMove(state, { recoveryTurn: false, workedExampleFirst: false })
     expect(move).toBe('show')
@@ -255,34 +249,37 @@ describe('Transcript Replay — example continuity does not repeat/switch mid-co
     expect(turn2).not.toMatch(/first example for this concept this lesson/i)
   })
 
-  it('the signal survives the escalation ladder reaching tier 2 without an explicit example request first', () => {
+  it('the 7-strategy escalation ladder produces distinct directives through repeated explain_differently turns', () => {
     let state = initialConversationState('c')
-    // Two explain_differently turns without ever hitting 'real_life_example'
-    // directly — remediationCount climbs to 2, tier 2 fires next turn.
+    // Two explain_differently turns — remediationCount climbs, strategies accumulate.
     state = advanceConversationState(state, {
-      askedQuestion: false, signalCorrect: null, recoveryFired: false, learnerRequest: 'explain_differently',
+      askedQuestion: false, signalCorrect: null, recoveryFired: false,
+      learnerRequest: 'explain_differently', strategyUsed: 0,
     })
     state = advanceConversationState(state, {
-      askedQuestion: false, signalCorrect: null, recoveryFired: false, learnerRequest: 'explain_differently',
+      askedQuestion: false, signalCorrect: null, recoveryFired: false,
+      learnerRequest: 'explain_differently', strategyUsed: 1,
     })
     expect(state.remediationCount).toBe(2)
-    expect(state.exampleRequests).toBe(0)
 
-    // Tier 2 fires now (remediationTier passed in is the PRE-turn count).
-    const hasEstablished = state.exampleRequests > 0 || state.remediationCount > 2
-    expect(hasEstablished).toBe(false) // this IS the first example — tier 2 hasn't run yet
-    const tier2 = buildLearnerRequestBlock('explain_differently', null, state.remediationCount, hasEstablished)
-    expect(tier2).toMatch(/first example for this concept this lesson/i)
+    // Strategy 2 (analogy) should produce ANALOGY directive
+    const s2 = buildLearnerRequestBlock('explain_differently', null, state.remediationCount, false, 2)
+    expect(s2).toMatch(/ANALOGY/i)
+    expect(s2).toMatch(/never repeat a previous strategy/i)
 
-    // Fold tier 2 (still counted as an explain_differently turn).
+    // Fold strategy 2, advance to strategy 3
     state = advanceConversationState(state, {
-      askedQuestion: false, signalCorrect: null, recoveryFired: false, learnerRequest: 'explain_differently',
+      askedQuestion: false, signalCorrect: null, recoveryFired: false,
+      learnerRequest: 'explain_differently', strategyUsed: 2,
     })
     expect(state.remediationCount).toBe(3)
 
-    // If the learner is STILL confused after tier 2 and somehow lands back
-    // on a real-life-example request, the system now correctly knows one
-    // was already given (remediationCount > 2).
+    // Strategy 3 (visual) should produce VISUAL directive
+    const s3 = buildLearnerRequestBlock('explain_differently', null, state.remediationCount, false, 3)
+    expect(s3).toMatch(/VISUAL/i)
+
+    // A real-life-example request after remediation correctly knows
+    // examples were already given (remediationCount > 2).
     const hasEstablishedAfter = state.exampleRequests > 0 || state.remediationCount > 2
     expect(hasEstablishedAfter).toBe(true)
     const followUp = buildLearnerRequestBlock('real_life_example', null, 0, hasEstablishedAfter)

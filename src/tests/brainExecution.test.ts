@@ -69,14 +69,14 @@ describe('Brain Execution — runtime ON, every decision verified', () => {
       },
     }, false)
     expect(block).toContain('misconception/remediation block appears above')
-    expect(block).toContain('Misconception under repair: "Bigger denominator = bigger fraction"')
-    expect(block).toContain('you only explain')
+    expect(block).toContain('Misconception: "Bigger denominator = bigger fraction"')
+    expect(block).toContain('you only render')
   })
 
   it('REVIEW_PREREQUISITE: prerequisite engine decides, LLM only teaches — KG prerequisite named', () => {
     const { decision, block } = pipeline({ sessionFailureCount: 2, conceptId: 'math.arith.fractions' }, false)
     expect(decision.decision).toBe('REVIEW_PREREQUISITE')
-    expect(block).toContain('Prerequisite to teach:')
+    expect(block).toContain('Prerequisite:')
     expect(block).toContain(decision.parameters.prerequisiteId as string)
   })
 
@@ -92,7 +92,7 @@ describe('Brain Execution — runtime ON, every decision verified', () => {
       lastSignal: { correctness: true },
       observations: { availableVisual: 'force_diagram', visualDetectionRan: true },
     }, false)
-    expect(block).toContain('Visual to serve: force_diagram')
+    expect(block).toContain('Visual: force_diagram')
     expect(block).toContain('narrate')
   })
 
@@ -135,7 +135,7 @@ describe('Brain Execution — runtime ON, every decision verified', () => {
     ]
     for (const { block } of cases) {
       expect(block).toContain('do NOT choose a different action')
-      expect(block).toContain('The engine decided WHAT happens; you only render it.')
+      expect(block).toContain('The engine decided WHAT; you only render.')
     }
   })
 
