@@ -185,7 +185,7 @@ describe('Brain Execution — the milestone measurements', () => {
   })
 
   it('shadow turns are counted separately when the flag is off', () => {
-    delete process.env.ENABLE_BRAIN_RUNTIME
+    process.env.ENABLE_BRAIN_RUNTIME = '0'
     const p = pipeline({}, false)
     recordDispatch(p.plan, isBrainRuntimeEnabled())
     const m = snapshotBrainMetrics()
