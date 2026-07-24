@@ -154,6 +154,18 @@ export function classifyConversation(
     }
   }
 
+  // A message ending in "?" outside an answer context is a real question,
+  // even when the CUE couldn't classify the intent — a human tutor always
+  // answers it. Confusion-phrased questions ("huh?", "what do you mean?")
+  // are caught above; inside an answer context, "is it 9.8?" stays a
+  // tentative answer — also handled above.
+  if (QUESTION_END.test(trimmed) && !opts.lastAssistantAskedQuestion) {
+    return {
+      type: 'DIRECT_QUESTION',
+      rendererDirective: 'The student asked a direct question. Answer it first — completely and concisely — before any teaching move. Never redirect to what you planned to teach instead.',
+    }
+  }
+
   return {
     type: 'NEUTRAL',
     rendererDirective: 'Continue the conversation naturally. Respond to what the student actually said before teaching.',

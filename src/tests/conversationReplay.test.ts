@@ -264,4 +264,23 @@ describe('Replay D — decision sequence matches human tutor behavior', () => {
     expect(d.rendererDirective).toMatch(/answer/i)
     expect(d.rendererDirective).not.toMatch(/later/i)
   })
+
+  it('a "?"-ending message with unknown intent is still a question, not NEUTRAL', () => {
+    const d = decide('so does friction always oppose motion?', base)
+    expect(d.type).toBe('DIRECT_QUESTION')
+    expect(d.rendererDirective).toMatch(/answer it first/i)
+  })
+
+  it('"huh?" stays CONFUSION, not DIRECT_QUESTION', () => {
+    const d = decide('huh?', base)
+    expect(d.type).toBe('CONFUSION')
+  })
+
+  it('"is it 9.8?" inside an answer context stays TENTATIVE_ANSWER', () => {
+    const d = decide('is it 9.8?', {
+      lastAssistantAskedQuestion: true,
+      hedged: true,
+    })
+    expect(d.type).toBe('TENTATIVE_ANSWER')
+  })
 })
