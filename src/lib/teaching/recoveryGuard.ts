@@ -75,6 +75,12 @@ const STRONG_PATTERNS: Array<[FailureStateKey, RegExp]> = [
 
 const MILD_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   ['dont_understand', /\bi\s+(really\s+|just\s+)?(don'?t|do\s+not)\s+understand\b/i],
+  // Past-tense / pronoun-less variants — "Didn't understand", "still didn't
+  // get it", "didn't follow" — the live-transcript bug: the present-tense
+  // pattern above missed the most common student phrasings.
+  ['dont_understand', /\b(didn'?t|did\s+not)\s+(understand|get\s+(?:it|that|this)|follow)\b/i],
+  ['dont_understand', /\bstill\s+(don'?t|do\s+not|didn'?t)\s+(understand|get\s+(?:it|that|this)|know\s+what\s+you|follow)\b/i],
+  ['dont_understand', /\bnot\s+understanding\b/i],
   ['confused',        /\bi(?:'?m|\s+am)\s+(so\s+|really\s+|totally\s+)?(confused|lost)\b/i],
   // "I'm nervous / anxious" — frequently replaces "scared" but shares the
   // same recovery script (name it, shrink stakes, slow down). Placed in MILD

@@ -45,12 +45,14 @@ describe('parseSignalTag (Blueprint Phase 3)', () => {
   // answer, so the model previously had no guidance on how to grade a
   // "no"/"I don't know" reply — leaving the app blind to repeated
   // non-knowledge responses outside recoveryGuard's own phrase patterns.
+  // Updated: "scissors" existence-question example makes the grading rule
+  // concrete and prevents correctness="true" on bare "yes" responses.
   it('instruction block tells the model how to grade a probe reply honestly', () => {
     const block = buildSignalInstruction()
     expect(block).toMatch(/PROBE/i)
-    expect(block).toMatch(/no objectively right answer|no single correct answer/i)
+    expect(block).toMatch(/ONLY when the reply demonstrates actual UNDERSTANDING/i)
     expect(block).toMatch(/correctness="false".*do NOT have the relevant prior knowledge/i)
-    expect(block).toMatch(/stop probing and switch to direct teaching/i)
+    expect(block).toMatch(/have you seen scissors/i)
   })
 })
 

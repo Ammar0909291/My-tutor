@@ -355,10 +355,10 @@ describe('turn directive invariants', () => {
     expect(teach).toContain('Ask NO questions')
   })
 
-  it('OBSERVE frame forbids vocabulary (no terminology before concrete)', () => {
+  it('OBSERVE frame forbids prior-knowledge probing (show anchor first)', () => {
     const s = initialConversationState('c')
     const d = buildTurnDirective({ state: s, nextMove: 'ask', maxParagraphs: 4, workedExampleFirst: false, visualType: null })
-    expect(d).toContain('no vocabulary')
+    expect(d).toContain('NOT prior-knowledge probing')
     expect(d).toContain('Stage 2')
   })
 

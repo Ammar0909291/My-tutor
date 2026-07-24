@@ -29,7 +29,10 @@ export interface TeachingSignal {
   probe?: 'below' | 'at' | 'above'
 }
 
-const SIGNAL_RE = /<!--\s*SIGNAL\s+([^>]*?)-->/i
+// Accept both standard HTML-comment close (-->) and XML/self-closing style
+// (/>), because the LLM sometimes produces <!--SIGNAL .../> instead of
+// <!--SIGNAL ...-->, and [^>]*? stops at the > in /> leaving --> unfound.
+const SIGNAL_RE = /<!--\s*SIGNAL\s+([\s\S]*?)(?:-->|\/>)/i
 
 /** Parse and strip the SIGNAL tag. Never throws; absent tag → signal null. */
 export function parseSignalTag(text: string): { signal: TeachingSignal | null; cleanText: string } {
@@ -73,14 +76,14 @@ export function buildSignalInstruction(): string {
     'If their last message was NOT an answer or attempt (a greeting, a ' +
     'question, small talk), do NOT emit the tag at all. ' +
     'If your last message was a PROBE — checking what the student already ' +
-    'knows before teaching, not a graded content question — there is no ' +
-    'objectively right answer, but the tag still applies: correctness="false" ' +
-    'when the reply shows they do NOT have the relevant prior knowledge ' +
-    '(e.g. "I don\'t know", "no", "not sure", a bare guess with no ' +
-    'substance), correctness="true" when it shows they genuinely do. This is ' +
-    'how the app knows when to stop probing and switch to direct teaching — ' +
-    'grade every probe reply honestly, never skip the tag just because the ' +
-    'question had no single correct answer. ' +
+    'knows before teaching, not a graded content question — the tag still ' +
+    'applies: correctness="false" when the reply shows they do NOT have the ' +
+    'relevant prior knowledge (e.g. "I don\'t know", "no", "not sure", a bare ' +
+    'guess with no substance). CRITICAL: correctness="true" ONLY when the reply ' +
+    'demonstrates actual UNDERSTANDING of the concept — a bare "yes" to an ' +
+    'existence question ("have you seen scissors?") does NOT count. "Yes, I\'ve ' +
+    'seen scissors" proves nothing about vector understanding; mark it ' +
+    'correctness="false". Grade every probe reply honestly, never skip the tag. ' +
     'Never mention this tag or its contents to the student.'
   )
 }

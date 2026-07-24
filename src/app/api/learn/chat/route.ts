@@ -2144,6 +2144,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             isPriorKnowledgeProbe: isPriorKnowledgeProbe(cleanText),
             strategyUsed: selectedStrategyHoisted ?? undefined,
             signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
+            dontKnowSignal: recoveryKeyHoisted === 'dont_know' || recoveryKeyHoisted === 'dont_understand',
           })
           const stanceVerdict = enforceStance({
             text: cleanText,
@@ -2789,6 +2790,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 isPriorKnowledgeProbe: isPriorKnowledgeProbe(cleanText),
                 strategyUsed: selectedStrategyHoisted ?? undefined,
                 signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
+                dontKnowSignal: recoveryKeyHoisted === 'dont_know' || recoveryKeyHoisted === 'dont_understand',
               }),
             }
           }
