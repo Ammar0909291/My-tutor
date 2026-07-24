@@ -76,6 +76,16 @@ const STRONG_PATTERNS: Array<[FailureStateKey, RegExp]> = [
 const MILD_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   ['dont_understand', /\bi\s+(really\s+|just\s+)?(don'?t|do\s+not)\s+understand\b/i],
   ['confused',        /\bi(?:'?m|\s+am)\s+(so\s+|really\s+|totally\s+)?(confused|lost)\b/i],
+  // "I'm nervous / anxious" — frequently replaces "scared" but shares the
+  // same recovery script (name it, shrink stakes, slow down). Placed in MILD
+  // because "I'm a bit nervous about the presentation" should not fire.
+  ['scared',          /\bi(?:'?m|\s+am)\s+(really\s+|so\s+|very\s+|a\s+bit\s+)?(nervous|anxious)\b/i],
+  // "I've always been bad at physics" / "I always fail at maths" / "physics
+  // is impossible for me" — negative academic identity, needs the same
+  // externalize-and-find-a-win script as hate_subject.
+  ['hate_subject',    /\b(always|never)\s+(been|was|am)\s+(bad|terrible|awful|hopeless|useless)\s+at\s+(this|math|maths|physics|science|chemistry|biology)\b/i],
+  ['hate_subject',    /\b(always\s+)?(fail|failed)\s+at\s+(it|this|math|maths|physics|science|chemistry|biology)\b/i],
+  ['hate_subject',    /\b(math|maths|physics|science|chemistry|biology|this)\s+(is|was)\s+(impossible|so\s+hard|too\s+hard|pointless)\s+for\s+me\b/i],
   ['confused',        /\b(really\s+confusing|this\s+is\s+confusing)\b/i],
   // P1: "makes no sense" was already covered elsewhere (masteryGate.ts's
   // explain-differently detector) but NOT the far more common phrasing

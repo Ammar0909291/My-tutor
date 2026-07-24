@@ -383,6 +383,10 @@ export interface TurnDirectiveParams {
   /** Phase G: server-decided visual for this turn (detectVisual output),
    *  or null when text teaches faster. */
   visualType: string | null
+  /** When true, the OBSERVE phase frame is replaced with one that does not
+   *  say "no teaching payload" — the First Lesson Protocol's opening move
+   *  IS a teaching payload (creating the need). */
+  firstLessonActive?: boolean
 }
 
 const PHASE_FRAME: Record<TeachingPhase, string> = {
@@ -408,7 +412,10 @@ const MOVE_LINE: Record<NextMove, string> = {
  */
 export function buildTurnDirective(p: TurnDirectiveParams): string {
   const lines: string[] = ['\n\nTURN DIRECTIVE (server-decided — follow exactly; overrides any earlier advisory pacing):']
-  lines.push(`- Teaching phase: ${PHASE_FRAME[p.state.phase]}`)
+  const phaseFrame = (p.firstLessonActive && p.state.phase === 'OBSERVE')
+    ? 'OBSERVE — follow the FIRST LESSON PROTOCOL opening approach: use the concrete hook the subject rule specifies to create the NEED. Then ask exactly ONE Stage 1–2 observation question.'
+    : PHASE_FRAME[p.state.phase]
+  lines.push(`- Teaching phase: ${phaseFrame}`)
   lines.push(`- Next move: ${MOVE_LINE[p.nextMove]}`)
   lines.push(`- Question stage ceiling: Stage ${PHASE_MAX_QUESTION_STAGE[p.state.phase]} (see QUESTION STAGE POLICY). Never ask above it this turn.`)
   if (p.maxParagraphs !== null) {

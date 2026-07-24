@@ -1228,7 +1228,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const priorUserMessage = learnSession.messages.find((m) => m.role === MessageRole.USER)?.content ?? null
         recoveryKeyHoisted = detectFailureState(message, priorUserMessage)
         const { buildSignalInstruction } = await import('@/lib/teaching/signals')
-        const { isFirstLessonContext, buildFirstLessonBlock } = await import('@/lib/teaching/firstLessonGuard')
+        const { isFirstLessonContext, buildFirstLessonBlock, buildFirstLessonCloseBlock } = await import('@/lib/teaching/firstLessonGuard')
         const { emptyPlacementState, nextProbe, buildPlacementProbeBlock, buildPlacementAwaitBlock } = await import('@/lib/teaching/placementVerification')
 
         // Step 2: the OBSERVE signal (decision-engine/08 step 1; Blueprint Phase 3)
@@ -1452,11 +1452,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           systemPrompt += buildTurnDirective({
             state: conversationStateHoisted,
             nextMove,
-            maxParagraphs: responseBudget(contentRegister, conversationStateHoisted.consecutiveFailures),
+            // First-lesson protocol mandates 2-sentence bursts; the regular
+            // responseBudget(beginner)=4 paragraphs conflicts with that and
+            // must be overridden for every first-lesson turn.
+            maxParagraphs: firstLessonActiveHoisted ? 2 : responseBudget(contentRegister, conversationStateHoisted.consecutiveFailures),
             workedExampleFirst,
             visualType: (learnerRequestHoisted === 'diagram' || explainDifferentlyNeedsVisual)
               ? availableVisual
               : decideVisualFirst(availableVisual, conversationStateHoisted, nextMove),
+            firstLessonActive: firstLessonActiveHoisted,
           })
           if (learnerRequestHoisted) {
             const hasEstablishedExample =
@@ -1485,6 +1489,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (lastExplanationRead === false) {
             systemPrompt += buildUnreadExplanationBlock()
           }
+        }
+
+        // First-lesson summit close — injected after TURN DIRECTIVE when the
+        // learner reaches PRACTICE phase in lesson one (first-lesson/04 §1
+        // "solo summit" rule: close now, never [LESSON_COMPLETE] this session).
+        if (firstLessonActiveHoisted && conversationStateHoisted.phase === 'PRACTICE') {
+          systemPrompt += buildFirstLessonCloseBlock()
         }
 
         // RECOVERY preemption (decision-engine/03 §0; foundations/01 §3
