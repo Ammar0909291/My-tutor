@@ -4,7 +4,7 @@
  * Pins: the complete decision→engine routing table, the three-executor
  * model and its groqRequired invariant (Groq only when the plan says so),
  * the fallback laws (memory decision without content, malformed decision),
- * the feature flag default (OFF), and end-to-end CUE→Decision→Dispatch
+ * the feature flag default (ON), and end-to-end CUE→Decision→Dispatch
  * consistency on real pipeline output.
  */
 import { describe, it, expect, afterEach } from 'vitest'
@@ -33,27 +33,27 @@ function decisionOf(type: TeachingDecision['decision']): TeachingDecision {
 afterEach(() => { delete process.env.ENABLE_BRAIN_RUNTIME })
 
 describe('Dispatcher — feature flag', () => {
-  it('is OFF by default', () => {
+  it('is ON by default', () => {
     delete process.env.ENABLE_BRAIN_RUNTIME
-    expect(isBrainRuntimeEnabled()).toBe(false)
-    process.env.ENABLE_BRAIN_RUNTIME = 'false'
-    expect(isBrainRuntimeEnabled()).toBe(false)
-    process.env.ENABLE_BRAIN_RUNTIME = '0'
-    expect(isBrainRuntimeEnabled()).toBe(false)
-  })
-
-  it('activates only on explicit 1/true', () => {
+    expect(isBrainRuntimeEnabled()).toBe(true)
     process.env.ENABLE_BRAIN_RUNTIME = '1'
     expect(isBrainRuntimeEnabled()).toBe(true)
     process.env.ENABLE_BRAIN_RUNTIME = 'true'
     expect(isBrainRuntimeEnabled()).toBe(true)
   })
 
+  it('deactivates only on explicit 0/false', () => {
+    process.env.ENABLE_BRAIN_RUNTIME = '0'
+    expect(isBrainRuntimeEnabled()).toBe(false)
+    process.env.ENABLE_BRAIN_RUNTIME = 'false'
+    expect(isBrainRuntimeEnabled()).toBe(false)
+  })
+
   it('M6: legacy decision blocks are suppressed exactly when the Brain runtime is ON (single decision authority)', () => {
     delete process.env.ENABLE_BRAIN_RUNTIME
-    expect(legacyDecisionBlocksSuppressed()).toBe(false) // flag OFF: legacy blocks injected as before
-    process.env.ENABLE_BRAIN_RUNTIME = '1'
-    expect(legacyDecisionBlocksSuppressed()).toBe(true)  // flag ON: Brain execution block is the only decision text
+    expect(legacyDecisionBlocksSuppressed()).toBe(true)  // flag ON (default): Brain execution block is the only decision text
+    process.env.ENABLE_BRAIN_RUNTIME = '0'
+    expect(legacyDecisionBlocksSuppressed()).toBe(false)  // flag OFF: legacy blocks injected as before
   })
 })
 

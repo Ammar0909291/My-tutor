@@ -107,6 +107,12 @@ const MILD_PATTERNS: Array<[FailureStateKey, RegExp]> = [
  * utterance (not merely contain it mid-paragraph). */
 const MILD_MAX_LENGTH = 120
 
+const REPHRASE_REQUEST_RE = /\b(explain|say|tell|show|try|put)\b.*?\b(differently|another\s+way|in\s+a\s+different\s+way|a\s+different\s+way)\b/i
+
+function isRephraseRequest(text: string): boolean {
+  return REPHRASE_REQUEST_RE.test(text)
+}
+
 /**
  * P0-3: structural "shouting" check — deliberately NOT a phrase list.
  * Requires enough alphabetic content (>= 8 letters) and multiple words so
@@ -151,7 +157,7 @@ export function detectFailureState(message: string, priorUserMessage?: string | 
   }
   if (isShoutingCaps(text)) return 'frustrated'
   if (isRepeatedAnswer(text, priorUserMessage)) return 'frustrated'
-  if (text.length <= MILD_MAX_LENGTH) {
+  if (text.length <= MILD_MAX_LENGTH && !isRephraseRequest(text)) {
     for (const [key, re] of MILD_PATTERNS) {
       if (re.test(text)) return key
     }

@@ -251,3 +251,31 @@ describe('buildRecoveryBlock — authored scripts, preemption, deltas', () => {
     expect(buildRecoveryBlock('confused', false)).toMatch(/reads as mockery/i)
   })
 })
+
+describe('detectFailureState — rephrase requests bypass mild patterns (BUG-02 regression)', () => {
+  it('"explain differently" with "I don\'t understand" does NOT fire recovery', () => {
+    expect(detectFailureState("I don't understand. Can you explain it differently?")).toBeNull()
+  })
+  it('"explain it another way" with confusion does NOT fire recovery', () => {
+    expect(detectFailureState("I'm confused. Can you explain it another way?")).toBeNull()
+  })
+  it('"try explaining differently" does NOT fire recovery', () => {
+    expect(detectFailureState("I don't get it. Try explaining differently")).toBeNull()
+  })
+  it('"say it in a different way" does NOT fire recovery', () => {
+    expect(detectFailureState("Can you say it in a different way?")).toBeNull()
+  })
+  it('"show me another way" does NOT fire recovery', () => {
+    expect(detectFailureState("I don't understand. Show me another way")).toBeNull()
+  })
+  it('bare "I don\'t understand" (no rephrase request) still fires', () => {
+    expect(detectFailureState("I don't understand")).toBe('dont_understand')
+  })
+  it('bare "I\'m confused" (no rephrase request) still fires', () => {
+    expect(detectFailureState("I'm confused")).toBe('confused')
+  })
+  it('strong patterns still fire even with a rephrase request', () => {
+    expect(detectFailureState("I give up, explain it differently")).toBe('give_up')
+    expect(detectFailureState("I hate maths, explain another way")).toBe('hate_subject')
+  })
+})
