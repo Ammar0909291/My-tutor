@@ -21758,6 +21758,689 @@
           "OpenStax University Physics Vol.3 Ch.11"
         ]
       }
+    },
+    {
+      "id": "asset.phys.particle.strong-interaction",
+      "concept_id": "phys.particle.strong-interaction",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to explain color charge as the strong-force analog of electric charge, describe how gluon exchange binds quarks, and explain confinement as the reason free quarks are never observed.",
+      "concept_summary": "Just as electric charge determines how particles respond to electromagnetism, COLOR CHARGE is the analogous property that determines how quarks respond to the STRONG INTERACTION. Despite the name (borrowed loosely from everyday color for a memorable label, with no connection to visible light), color charge comes in three types, conventionally called red, green, and blue (with corresponding anti-colors for antiquarks) — every observed hadron must be COLOR-NEUTRAL overall (a baryon combines one quark of each of the three colors; a meson combines a color and its exact anticolor), exactly paralleling how ordinary matter must be electrically neutral overall at the atomic scale. The strong interaction is mediated by GLUONS (met already), exchanged between quarks — but unlike the photon, gluons themselves CARRY color charge, meaning gluons can interact with OTHER gluons directly, a self-interaction with no electromagnetic analog. This gluon self-interaction is the deep reason behind CONFINEMENT (met already at the quarks concept): because gluons attract each other, the 'field lines' of the strong force between two separating quarks are squeezed into a narrow, tube-like region (unlike the spreading-out field lines of electromagnetism), so the force between the quarks does NOT weaken with distance the way electromagnetic or gravitational fields do — it remains roughly CONSTANT, meaning the potential energy grows linearly with separation, requiring ever-increasing energy input to pull quarks further apart, until eventually enough energy is available to spontaneously create a new quark-antiquark pair from the vacuum rather than ever yielding an isolated, free quark.",
+      "key_ideas": [
+        "Color charge is the strong-force analog of electric charge, coming in three types (red, green, blue) plus corresponding anticolors — every observed hadron must be overall color-neutral.",
+        "A baryon achieves color neutrality by combining one quark of each color; a meson achieves it by combining a color and its exact anticolor.",
+        "The strong interaction is mediated by gluons, which — unlike the photon — themselves carry color charge, allowing gluons to interact directly with other gluons.",
+        "This gluon self-interaction squeezes the strong force's field lines into a narrow tube between separating quarks, so the force stays roughly constant with distance rather than weakening.",
+        "This constant-force behavior is the physical mechanism behind confinement: separating quarks costs ever-increasing energy until a new quark-antiquark pair is spontaneously created rather than an isolated quark ever escaping."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "Color charge refers to the actual visible color of quarks or hadrons, as if you could see a quark and it would appear red, green, or blue.",
+          "correction": "Color charge is purely a technical label borrowed for convenience — it has absolutely no connection to visible light or actual color perception. Quarks and gluons are far too small to have any 'color' in the everyday visual sense; the red/green/blue naming was chosen because color-neutrality (mixing red+green+blue light gives white/neutral) provides a memorable analogy for how three quark colors combine to give an overall color-neutral hadron."
+        },
+        {
+          "misconception": "The strong force behaves just like electromagnetism, just stronger in overall magnitude, weakening with distance in the same inverse-square way.",
+          "correction": "The strong force's DISTANCE DEPENDENCE is qualitatively different from electromagnetism's, not merely stronger in magnitude — because gluons carry color charge and interact with each other (unlike photons), the strong force's field lines are squeezed into a narrow tube rather than spreading out, so the force stays roughly CONSTANT with distance instead of weakening — a fundamentally different behavior directly responsible for confinement, which electromagnetism (with its non-self-interacting photon) does not exhibit."
+        },
+        {
+          "misconception": "Since gluons mediate the strong force between quarks, gluons themselves are unaffected by the strong force.",
+          "correction": "Gluons DO carry color charge and are therefore themselves subject to the strong force, including interacting with OTHER gluons — this gluon self-interaction is precisely what makes the strong force's behavior (confinement, the roughly constant force with distance) so different from electromagnetism, where the photon carries no charge and is unaffected by the force it mediates."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "A baryon color-combination diagram: three quarks, each a different color (red, green, blue), combining to give an overall 'white'/neutral hadron, alongside a meson diagram showing a color and its exact anticolor combining similarly.",
+        "A field-line comparison diagram: electromagnetic field lines spreading out radially from a charge, contrasted with strong-force field lines squeezed into a narrow tube between two quarks, visually explaining the different distance-dependence.",
+        "A 'stretching and snapping' sequence diagram: two quarks being pulled apart, the connecting flux tube stretching and storing more energy, then snapping to create a new quark-antiquark pair rather than freeing an isolated quark."
+      ],
+      "worked_example_blueprint": {
+        "setup": "A proton contains three quarks: up (red), up (green), down (blue) — one of each color, as required for a color-neutral baryon. Explain what would happen, in terms of color charge, if an attempt were made to remove just the red up quark and observe it in isolation, and connect this to the confinement phenomenon.",
+        "steps": [
+          "Recognize that removing the red up quark alone would leave behind a two-quark system (green up, blue down) that is NOT color-neutral — it would carry a net, uncancelled color charge, which is not observed in nature (isolated colored objects are never seen, exactly paralleling how isolated net electric charge IS commonly observed, but isolated 'net color' is not).",
+          "As the red up quark is pulled away, the strong-force flux tube connecting it to the remaining two-quark system stretches, storing increasing potential energy (since the force stays roughly constant with distance, energy grows linearly with separation).",
+          "Once enough energy has been stored to equal the rest-mass energy of a new quark-antiquark pair, the flux tube 'snaps': a new down quark and down antiquark (or another suitable pair) are spontaneously created from this stored energy.",
+          "The newly created antiquark combines with the departing red up quark to form a NEW, color-neutral MESON (a meson, since it's now a quark-antiquark pair), while the newly created quark combines with the original remaining two quarks to form a new color-neutral BARYON.",
+          "Conclude: rather than ever obtaining a free, isolated red up quark, the attempt instead produces two new, complete, color-neutral hadrons — exactly the confinement phenomenon, now explained mechanistically via color charge and the gluon-mediated flux tube."
+        ],
+        "expected_outcome": "The student correctly explains that removing a single quark would leave a non-color-neutral remainder, correctly traces the flux-tube stretching and snapping mechanism, and correctly concludes that new hadrons are formed rather than a free quark ever being obtained."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "color-neutrality verification for given baryon/meson quark content",
+          "gluon self-interaction conceptual comparison items",
+          "confinement mechanism explanation exercises"
+        ],
+        "difficulty_progression": "Begin with verifying color-neutrality for given hadron quark-color combinations, move to conceptual items on gluon self-interaction versus the photon's lack thereof, and finish with full explanations of the confinement mechanism via the flux-tube picture.",
+        "suggested_count": 6
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "color-neutrality verification quiz",
+          "confinement mechanism explanation prompt"
+        ],
+        "bloom_alignment": "Analyze — students must analyze the color-charge and gluon self-interaction structure to explain the mechanistic origin of confinement, beyond simply stating that quarks are never observed alone.",
+        "mastery_signal": "The student correctly verifies color-neutrality for hadron quark content, correctly explains gluon self-interaction as the structural cause of confinement, and correctly describes the flux-tube stretching-and-snapping mechanism, at 75% accuracy or better."
+      },
+      "real_world_applications": [
+        "Quantum chromodynamics (QCD), the full quantum field theory of color charge and gluon exchange, is one of the most extensively tested theories in physics, validated to high precision at particle colliders worldwide.",
+        "Heavy-ion collision experiments (colliding gold or lead nuclei at facilities like RHIC and the LHC) briefly recreate a quark-gluon plasma, a state of matter where confinement temporarily breaks down at extremely high temperature and density, believed to have existed microseconds after the Big Bang.",
+        "Lattice QCD, a major computational physics technique, numerically simulates the strong force's confinement behavior on a discretized spacetime grid, since the strong-coupling regime cannot be solved analytically by the perturbative methods that work well for electromagnetism."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.particle.gauge-bosons",
+        "phys.particle.quarks"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "561a1ad9",
+        "kg_build_date": "2026-07-22",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "c12df7fe",
+        "source_references": [
+          "OpenStax University Physics Vol.3 Ch.11"
+        ]
+      }
+    },
+    {
+      "id": "asset.phys.particle.weak-interaction",
+      "concept_id": "phys.particle.weak-interaction",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to explain that the weak interaction is unique among the four forces in changing one particle flavor into another, and describe beta decay as a weak-interaction process at the quark level.",
+      "concept_summary": "Among the four fundamental forces, the WEAK INTERACTION has a genuinely unique role: while gravity, electromagnetism, and the strong force all act to attract or repel particles WITHOUT changing what TYPE of particle they are, the weak interaction can transform one FLAVOR of quark or lepton into a DIFFERENT flavor entirely — a down quark can become an up quark, or a muon can become an electron plus neutrinos, via weak-interaction processes mediated by the W and Z bosons (met already). The clearest, most familiar example is BETA DECAY (met already at radioactivity, now understood at the deeper quark level): a neutron (udd) decaying into a proton (uud) is, at the quark level, precisely a single DOWN quark converting into an UP quark, mediated by the emission of a W⁻ boson, which itself then decays into the observed electron and antineutrino — H = n → p + e⁻ + ν̄ₑ, now revealed as fundamentally d → u + W⁻, followed by W⁻ → e⁻ + ν̄ₑ. This flavor-changing capability is what makes the weak interaction essential to the STABILITY (or instability) of matter: without it, once formed, particles would be permanently locked into whatever flavor combination they started with, and radioactive decay, nuclear fusion in stars (which relies on weak-interaction-mediated proton-to-neutron conversion in early fusion steps), and the eventual decay of heavier, unstable particles into the familiar stable matter of ordinary atoms would all be impossible.",
+      "key_ideas": [
+        "The weak interaction is unique among the four forces: while the others act without changing particle type, the weak interaction can transform one flavor of quark or lepton into a different flavor entirely.",
+        "This flavor-changing occurs via W and Z boson exchange — a down quark can convert to an up quark, or a muon can convert to an electron plus neutrinos, mediated by the weak force.",
+        "Beta decay, at the quark level, is precisely a down quark converting to an up quark within a neutron, mediated by W⁻ boson emission, which then itself decays into the observed electron and antineutrino.",
+        "This two-step picture (d → u + W⁻, then W⁻ → e⁻ + ν̄ₑ) reveals beta decay's deeper mechanism beyond the simple 'neutron → proton + electron + antineutrino' statement met earlier.",
+        "The weak interaction's flavor-changing capability is essential to matter's stability behavior: without it, radioactive decay, stellar nuclear fusion's early steps, and unstable-particle decay into stable matter would all be impossible."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "The weak interaction is just a weaker version of the strong or electromagnetic force, doing the same kind of thing (attracting/repelling) only less effectively.",
+          "correction": "The weak interaction's defining, unique feature is not merely being 'weaker' — it is qualitatively DIFFERENT in kind: it changes particle FLAVOR (what type of quark or lepton something is), a capability none of the other three forces possess at all. Calling it 'weak' refers only to its comparative interaction strength, not to its fundamentally distinct flavor-changing role."
+        },
+        {
+          "misconception": "Beta decay (neutron → proton + electron + antineutrino) is a single, one-step process with no deeper underlying mechanism.",
+          "correction": "At the quark level, beta decay is actually a TWO-STEP process: first a down quark within the neutron converts to an up quark, emitting a (virtual) W⁻ boson; the W⁻ boson then itself decays into the observed electron and antineutrino. The familiar 'neutron → proton + electron + antineutrino' statement is the correct overall RESULT, but the weak interaction's actual mechanism operates at the quark level via W-boson emission and decay."
+        },
+        {
+          "misconception": "Only quarks can undergo weak-interaction flavor changes; leptons are unaffected.",
+          "correction": "Leptons CAN also undergo weak-interaction flavor changes — for instance, a muon can decay into an electron plus a muon-neutrino and an electron-antineutrino, a lepton-flavor-changing process mediated by the weak interaction exactly analogous to quark flavor change in beta decay. Both quarks and leptons are subject to weak-interaction flavor transformation."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "A two-step beta decay diagram: a neutron (udd) with one down quark emitting a W⁻ boson and converting to up (giving a proton, uud), with a second panel showing the W⁻ boson subsequently decaying into an electron and antineutrino.",
+        "A force-comparison table: for each of the four forces, whether it changes particle flavor (yes only for weak; no for the other three), directly highlighting the weak interaction's unique role.",
+        "A muon decay diagram: μ⁻ → e⁻ + ν̄ₑ + ν_μ, mediated by W boson exchange, shown as a lepton-sector parallel to the quark-sector beta decay diagram."
+      ],
+      "worked_example_blueprint": {
+        "setup": "Using the quark-level picture of beta decay, verify that electric charge is conserved at each step: (a) the initial down-to-up quark conversion with W⁻ emission, and (b) the subsequent W⁻ boson decay into an electron and antineutrino.",
+        "steps": [
+          "(a) A down quark has charge −⅓e; an up quark has charge +⅔e. The change in quark charge is (+⅔e) − (−⅓e) = +1e. For charge to be conserved, the emitted particle (W⁻) must carry away exactly −1e, matching the W boson's known charge of −1e (the '−' in W⁻ denoting this negative charge) — confirming charge conservation at this first step.",
+          "(b) The W⁻ boson (charge −1e) decays into an electron (charge −1e) and an electron antineutrino (charge 0, since neutrinos are electrically neutral): total final charge = (−1e) + (0) = −1e, exactly matching the W⁻ boson's initial −1e charge — confirming charge conservation at this second step as well.",
+          "Combine both steps: overall, the neutron's down quark (−⅓e) has effectively become an up quark (+⅔e) plus an electron (−1e) plus an antineutrino (0), with total charge unchanged throughout, consistent with the overall neutron (charge 0, since udd sums to 0) converting to a proton (charge +1e) plus electron (−1e) plus antineutrino (0), which also correctly sums to the neutron's original 0 total.",
+          "Note the deeper lesson: tracking charge conservation at the QUARK level, step by step through the W-boson intermediate stage, gives a more detailed and mechanistically satisfying confirmation than simply checking the overall neutron-to-proton-electron-antineutrino charge balance."
+        ],
+        "expected_outcome": "The student correctly verifies charge conservation at both the quark-to-quark-plus-W step and the W-to-electron-plus-antineutrino step, and correctly connects this detailed quark-level bookkeeping to the overall neutron decay's charge balance."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "flavor-change identification items (quark and lepton examples)",
+          "quark-level beta decay charge conservation verification exercises",
+          "weak vs. other-force flavor-changing conceptual comparison items"
+        ],
+        "difficulty_progression": "Begin with identifying flavor-changing weak-interaction examples among quarks and leptons, move to verifying charge conservation at each step of the quark-level beta decay mechanism, and finish with conceptual items distinguishing the weak interaction's unique flavor-changing role from the other three forces.",
+        "suggested_count": 8
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "flavor-change identification quiz",
+          "quark-level charge conservation problem set"
+        ],
+        "bloom_alignment": "Analyze — students must analyze the two-step quark-level mechanism of beta decay and verify conservation laws at each intermediate step, going beyond the simpler overall-reaction bookkeeping met at the radioactivity concept.",
+        "mastery_signal": "The student correctly identifies weak-interaction flavor-changing examples for both quarks and leptons, and correctly verifies charge conservation at each step of the quark-level beta decay mechanism (quark conversion plus W-boson decay), at 75% accuracy or better."
+      },
+      "real_world_applications": [
+        "The early steps of stellar nuclear fusion (the proton-proton chain powering the Sun) require a weak-interaction-mediated conversion of a proton into a neutron, without which stars could not fuse hydrogen into helium at all.",
+        "Radiocarbon dating and numerous medical radioisotope techniques rely directly on weak-interaction-mediated beta decay processes.",
+        "Neutrino detectors (met already at the neutrinos concept) directly observe weak-interaction events, since the weak force is the only way neutrinos can be detected at all."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.particle.gauge-bosons",
+        "phys.particle.hadron-quark-model",
+        "phys.mod.radioactivity"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "561a1ad9",
+        "kg_build_date": "2026-07-22",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "c12df7fe",
+        "source_references": [
+          "NCERT Physics Class 12 Ch.13",
+          "OpenStax University Physics Vol.3 Ch.11"
+        ]
+      }
+    },
+    {
+      "id": "asset.phys.particle.conservation-laws",
+      "concept_id": "phys.particle.conservation-laws",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to state baryon number and lepton number conservation, assign these quantum numbers to given particles, and use them to determine whether a proposed particle reaction is allowed or forbidden.",
+      "concept_summary": "Beyond the familiar conservation of energy, momentum, and electric charge (met already), particle interactions must also obey two further conservation laws that have no classical counterpart: BARYON NUMBER and LEPTON NUMBER conservation. BARYON NUMBER B is assigned +1 to every baryon (proton, neutron, and their relatives), −1 to every antibaryon, and 0 to every other particle (leptons, mesons, gauge bosons) — equivalently, at the quark level, each quark carries B=+⅓ and each antiquark B=−⅓, so that a baryon (three quarks) correctly totals B=+1. LEPTON NUMBER L is assigned +1 to every lepton (electron, muon, tau, and their neutrinos), −1 to every antilepton, and 0 to every other particle. Crucially, BOTH quantities are found to be conserved in EVERY known particle interaction — the total baryon number, and separately the total lepton number, must be exactly the same before and after any reaction — and a proposed reaction that violates EITHER conservation law is FORBIDDEN, REGARDLESS of whether it has enough available energy or would otherwise conserve charge and momentum. This makes baryon and lepton number conservation powerful PREDICTIVE and DIAGNOSTIC tools: given a proposed particle reaction, checking baryon number and lepton number balance (alongside charge, energy, and momentum) quickly reveals whether the reaction can occur at all, without needing any detailed calculation of interaction probabilities — and observing that PROTON DECAY (which would violate baryon number conservation) has never been detected, despite extensive dedicated searches, is itself powerful experimental evidence supporting baryon number conservation as a genuine, exact (or at least extraordinarily precisely obeyed) law of nature.",
+      "key_ideas": [
+        "Baryon number B is +1 for every baryon, −1 for every antibaryon, 0 for everything else; at the quark level, each quark carries B=+⅓ and antiquark B=−⅓, so a baryon (3 quarks) totals B=+1.",
+        "Lepton number L is +1 for every lepton, −1 for every antilepton, 0 for everything else.",
+        "Both baryon number and lepton number are conserved in every known particle interaction — total B and total L must each match before and after the reaction.",
+        "A proposed reaction violating EITHER conservation law is forbidden, regardless of energy availability or charge/momentum conservation — these are independent, additional constraints.",
+        "The absence of any observed proton decay (which would violate baryon number conservation), despite extensive dedicated searches, is strong experimental evidence supporting baryon number conservation as an extremely precisely obeyed law."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "As long as a proposed reaction conserves energy, momentum, and electric charge, it will occur.",
+          "correction": "Energy, momentum, and charge conservation are NECESSARY but not SUFFICIENT — a reaction must ALSO conserve baryon number and lepton number to be allowed. Many reactions that would satisfy energy/momentum/charge conservation are nonetheless FORBIDDEN and never observed, specifically because they would violate baryon or lepton number conservation."
+        },
+        {
+          "misconception": "Baryon number and lepton number are the same conservation law, or are automatically linked to each other.",
+          "correction": "Baryon number and lepton number are two SEPARATE, INDEPENDENT conservation laws, each checked on its own — a reaction must conserve BOTH independently; a reaction that happens to conserve lepton number does not automatically also conserve baryon number, and vice versa, and both must be verified separately when assessing whether a proposed reaction is allowed."
+        },
+        {
+          "misconception": "Antiparticles have the same baryon/lepton number as their corresponding particle, since they have the 'same' particle identity otherwise.",
+          "correction": "Antiparticles carry the OPPOSITE sign of baryon number or lepton number from their corresponding particle — an antiproton has B=−1 (not +1 like the proton), and a positron (antielectron) has L=−1 (not +1 like the electron) — this sign flip is essential and must be correctly applied whenever antiparticles appear in a proposed reaction."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "A baryon-number and lepton-number assignment table: proton, neutron, electron, positron, antiproton, neutrino, photon, each with its B and L values explicitly listed.",
+        "A worked 'allowed vs. forbidden' reaction comparison: two similar-looking proposed reactions shown side by side, one satisfying B and L conservation (allowed) and one violating it (forbidden), with the running totals shown explicitly.",
+        "A proton-decay search summary graphic: the enormous underground detector volumes and multi-year observation periods used to search for (never-observed) proton decay, illustrating the experimental effort behind confirming baryon number conservation."
+      ],
+      "worked_example_blueprint": {
+        "setup": "A proposed particle reaction is: proton (p) → positron (e⁺) + photon (γ). Determine whether this reaction is allowed or forbidden by checking baryon number and lepton number conservation (assume charge and energy are already checked and found to balance).",
+        "steps": [
+          "Assign baryon numbers: proton B=+1 (a baryon); positron B=0 (a lepton, not a baryon); photon B=0 (a gauge boson, not a baryon).",
+          "Check baryon number balance: initial total B = +1 (from the proton); final total B = 0+0 = 0. Since +1 ≠ 0, baryon number is NOT conserved.",
+          "Assign lepton numbers: proton L=0 (not a lepton); positron L=−1 (an ANTIlepton, opposite sign to the electron's L=+1); photon L=0.",
+          "Check lepton number balance: initial total L = 0; final total L = −1+0 = −1. Since 0 ≠ −1, lepton number is ALSO not conserved.",
+          "Conclude: this reaction (a hypothetical simple form of proton decay) is FORBIDDEN, violating BOTH baryon number and lepton number conservation — consistent with the fact that proton decay of this type has never been experimentally observed, exactly as baryon number conservation predicts."
+        ],
+        "expected_outcome": "The student correctly assigns baryon and lepton numbers to each particle (including the sign flip for the antiparticle positron), correctly computes that both conservation laws are violated, and correctly concludes the reaction is forbidden."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "baryon number and lepton number assignment items",
+          "allowed-vs-forbidden reaction determination exercises",
+          "reaction-balancing items requiring correct antiparticle sign handling"
+        ],
+        "difficulty_progression": "Begin with assigning baryon and lepton numbers to individual particles (including antiparticles), move to checking whether given proposed reactions conserve both quantities, and finish with more complex multi-particle reactions requiring careful antiparticle sign tracking.",
+        "suggested_count": 8
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "assignment and reaction-checking problem set",
+          "allowed/forbidden reaction justification exercise"
+        ],
+        "bloom_alignment": "Apply — students must apply baryon and lepton number conservation rules systematically to determine whether unfamiliar proposed reactions are physically allowed.",
+        "mastery_signal": "The student correctly assigns baryon and lepton numbers (including correct antiparticle signs) to particles in a proposed reaction, and correctly determines whether the reaction is allowed or forbidden based on both conservation laws, at 80% accuracy or better."
+      },
+      "real_world_applications": [
+        "Grand Unified Theories (GUTs), proposed extensions to the Standard Model, predict that baryon number conservation should be violated at an extremely small but nonzero rate — motivating massive, dedicated proton-decay-search experiments (like Super-Kamiokande) that have so far found no evidence, placing extremely strong lower limits on the proton's lifetime (over 10³⁴ years).",
+        "Particle accelerator experiments routinely use baryon and lepton number conservation as a fast, essential screening check when analyzing collision data for candidate new-particle discoveries, immediately ruling out impossible interpretations.",
+        "The observed matter-antimatter asymmetry of the universe (met at the antimatter concept) is closely connected to baryon number: understanding whether and how baryon number could have been violated in the extremely early universe is central to explaining why matter dominates over antimatter today."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.particle.hadron-quark-model",
+        "phys.particle.leptons"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "561a1ad9",
+        "kg_build_date": "2026-07-22",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "c12df7fe",
+        "source_references": [
+          "IB Physics Topic 7.3",
+          "AQA A-Level Physics: Particles and Radiation"
+        ]
+      }
+    },
+    {
+      "id": "asset.phys.particle.electroweak-unification",
+      "concept_id": "phys.particle.electroweak-unification",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to explain the concept of electroweak unification as electromagnetism and the weak force merging into a single interaction at high energy, and explain why this merging is not apparent at everyday, low energies.",
+      "concept_summary": "At everyday, low energies, electromagnetism and the weak interaction (met already) appear as two completely separate, very different-looking forces — electromagnetism, mediated by the massless photon, has infinite range and moderate strength; the weak force, mediated by the very massive W and Z bosons, has an extremely short range and appears feeble. ELECTROWEAK UNIFICATION is the theoretical (and experimentally confirmed) discovery that at sufficiently HIGH energy — far beyond everyday conditions, but routinely reached in high-energy particle collisions and believed to have been the norm throughout the very early universe, moments after the Big Bang — these two seemingly distinct forces MERGE into a single, unified ELECTROWEAK interaction, described by one unified theoretical framework (developed principally by Sheldon Glashow, Abdus Salam, and Steven Weinberg, earning them the 1979 Nobel Prize). The reason the unification is invisible at everyday, low energies is the HIGGS MECHANISM (developed at the next concept): it gives the W and Z bosons their large mass, while leaving the photon exactly massless — and it is precisely this large W/Z mass that suppresses the weak interaction's effective range and strength at low energy, making it LOOK like a separate, much weaker force from electromagnetism, even though at energies large enough that the W/Z mass becomes comparatively unimportant, the underlying symmetry connecting the two forces becomes fully apparent, and they behave as a single unified interaction with comparable strength and character.",
+      "key_ideas": [
+        "At everyday, low energies, electromagnetism and the weak interaction appear as two separate, very different forces (different mediator masses, different range, different apparent strength).",
+        "Electroweak unification is the discovery that at sufficiently high energy, these two forces merge into a single unified electroweak interaction, described by one theoretical framework.",
+        "This unification is experimentally confirmed and was theoretically developed principally by Glashow, Salam, and Weinberg (1979 Nobel Prize).",
+        "The reason unification is invisible at low energy is the Higgs mechanism (developed next), which gives the W and Z bosons large mass while leaving the photon massless.",
+        "This large W/Z mass suppresses the weak force's effective range and strength at low energy, making it appear separate from electromagnetism — at high enough energy, where the mass becomes comparatively unimportant, the underlying unified symmetry becomes apparent."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "Electroweak unification means electromagnetism and the weak force are literally identical, indistinguishable forces at all energies, including everyday low energies.",
+          "correction": "The unification is a HIGH-ENERGY phenomenon — at everyday, low energies (where the W/Z boson mass matters enormously compared to the available energy), electromagnetism and the weak force remain genuinely distinguishable in their observable behavior (different range, different apparent strength). It is only at sufficiently high energy that they become the same, unified interaction in an observable sense."
+        },
+        {
+          "misconception": "Electroweak unification was a purely theoretical proposal with no direct experimental confirmation.",
+          "correction": "Electroweak theory made specific, falsifiable predictions — including the existence, masses, and properties of the W and Z bosons — which were directly confirmed experimentally (the 1983 discovery of the W and Z bosons at CERN, met already at the gauge bosons concept), providing strong direct experimental confirmation of the electroweak unification framework, not merely theoretical speculation."
+        },
+        {
+          "misconception": "Electroweak unification also includes the strong force and gravity, making it a complete 'theory of everything'.",
+          "correction": "Electroweak unification specifically merges only electromagnetism and the weak force — it does NOT include the strong force (a further hypothetical unification with the strong force, called Grand Unification, remains an unconfirmed extension) or gravity (whose unification with the other forces remains one of the most significant open problems in theoretical physics, as noted at the gauge bosons concept). Electroweak unification is a genuine, confirmed, but PARTIAL unification of the four forces."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "An energy-scale diagram: at low energy, electromagnetism and the weak force shown as visually distinct (different mediator icons, different apparent range/strength labels); at high energy, the two converging into a single unified 'electroweak' region.",
+        "A historical timeline: Glashow's early unification proposal, Weinberg and Salam's completion of the theory, followed by the 1983 experimental W/Z boson discovery, visually connecting theoretical prediction to experimental confirmation.",
+        "An analogy diagram: two seemingly different rivers (electromagnetism and weak force) shown converging into one shared source (the unified electroweak interaction) further upstream (at higher energy)."
+      ],
+      "worked_example_blueprint": {
+        "setup": "Explain, in terms of the W and Z boson masses, why the weak interaction appears roughly 10⁵ to 10⁶ times weaker than electromagnetism at everyday, low-energy conditions, but is expected to become comparable in strength to electromagnetism at energies well above the W/Z boson's rest-mass energy (~80-90 GeV).",
+        "steps": [
+          "Recall (from the gauge bosons concept) that a force's effective range and low-energy strength are strongly suppressed by a large mediator mass — the weak force's apparent low-energy feebleness is a direct consequence of the W and Z bosons' large mass (~80-90 GeV/c²), not because the underlying coupling strength is intrinsically much weaker than electromagnetism's.",
+          "At LOW collision energies (far below the W/Z rest-mass energy), producing a real W or Z boson as an intermediate step is strongly energetically suppressed, so weak-interaction processes proceed only via short-lived, energy-'borrowing' virtual W/Z exchange — heavily penalized by the large mass, making the observed weak-interaction rate appear small.",
+          "At HIGH collision energies (comparable to or exceeding the W/Z rest-mass energy, ~80-90 GeV — routinely reached at modern colliders), producing an actual, real (not merely virtual) W or Z boson becomes energetically easy, removing this suppression.",
+          "Once this suppression is removed, the underlying (INTRINSIC) coupling strength of the weak interaction is revealed to be genuinely comparable to electromagnetism's — the two forces' 'true', high-energy strengths converge, exactly the electroweak unification prediction.",
+          "Conclude: the everyday appearance of the weak force as 'far weaker' than electromagnetism is a low-energy ARTIFACT of the large W/Z mass, not a fundamental difference in intrinsic force strength — precisely the reason electroweak unification is confirmed only at high energy, where this mass-suppression artifact is removed."
+        ],
+        "expected_outcome": "The student correctly explains that the weak force's apparent low-energy weakness is caused by W/Z boson mass suppression rather than a fundamentally weaker intrinsic coupling, and correctly explains that at high energy this suppression is removed, revealing the two forces' comparable underlying strength."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "unification-concept conceptual explanation items",
+          "mass-suppression reasoning exercises (why weak force looks weak at low energy)",
+          "historical confirmation and Nobel Prize significance items"
+        ],
+        "difficulty_progression": "Begin with basic conceptual items on what electroweak unification claims, move to mass-suppression reasoning explaining why the effect is hidden at low energy, and finish with items on the theory's historical development and experimental confirmation.",
+        "suggested_count": 6
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "conceptual explanation prompts",
+          "mass-suppression reasoning essay item"
+        ],
+        "bloom_alignment": "Evaluate — students must synthesize the relationship between gauge boson mass, energy scale, and apparent force strength to evaluate why unification is a genuine, high-energy phenomenon not obvious at everyday energies, matching this concept's evaluate-level Bloom classification.",
+        "mastery_signal": "The student correctly explains electroweak unification as a high-energy merging of electromagnetism and the weak force, and correctly explains via W/Z boson mass suppression why this unification is not apparent at everyday low energies, at 70% accuracy or better (mastery_threshold 0.7, per this concept's expert-level KG difficulty)."
+      },
+      "real_world_applications": [
+        "The Large Hadron Collider and other high-energy colliders operate at energies where electroweak unification effects become directly observable and testable, providing ongoing precision tests of the theory.",
+        "Electroweak unification's precise predictions (including the W and Z boson masses) were confirmed to remarkable precision before the bosons were even directly discovered, an impressive demonstration of the theory's predictive power.",
+        "Understanding electroweak unification is essential to modeling the very early universe, since the electroweak phase transition (when the unified force split into the separately-observed electromagnetic and weak forces as the universe cooled) is a key event in Big Bang cosmology."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.particle.weak-interaction"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "561a1ad9",
+        "kg_build_date": "2026-07-22",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "c12df7fe",
+        "source_references": [
+          "OpenStax University Physics Vol.3 Ch.11"
+        ]
+      }
+    },
+    {
+      "id": "asset.phys.particle.higgs-mechanism",
+      "concept_id": "phys.particle.higgs-mechanism",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to explain qualitatively how the Higgs field gives mass to the W and Z bosons and fundamental fermions while leaving the photon and gluon massless, and describe the significance of the 2012 Higgs boson discovery.",
+      "concept_summary": "Electroweak unification (met already) raises an immediate puzzle: if electromagnetism and the weak force are truly unified at high energy, why do their mediating gauge bosons have such wildly different masses — the photon exactly MASSLESS, but the W and Z bosons enormously MASSIVE (roughly 80-90 proton masses)? The HIGGS MECHANISM resolves this puzzle by proposing that space is permeated everywhere by a HIGGS FIELD, which — unlike most fields, which are zero in their lowest-energy (vacuum) state — has a NONZERO value even in the vacuum. Particles that INTERACT with this ever-present Higgs field experience a kind of constant 'drag' or resistance as they try to move or accelerate through it, and this resistance IS what we observe and measure as MASS — the more strongly a particle interacts with the Higgs field, the MORE mass it acquires. The W and Z bosons interact strongly with the Higgs field, acquiring their large observed mass; the photon and gluon, by contrast, do NOT interact with the Higgs field at all, remaining exactly massless, exactly as observed. The SAME mechanism also gives mass to the fundamental FERMIONS (quarks and leptons) — different fermions interact with the Higgs field with different strengths, directly explaining the otherwise-mysterious dramatic mass hierarchy between, say, the electron and the top quark (the heaviest known fundamental particle, roughly 340,000 times more massive than the electron). The Higgs field's own associated particle — the HIGGS BOSON, a ripple or excitation of the Higgs field itself, analogous to how a photon is an excitation of the electromagnetic field — was the last major undiscovered piece of the Standard Model, finally directly detected in 2012 at the Large Hadron Collider (earning François Englert and Peter Higgs the 2013 Nobel Prize), providing the capstone experimental confirmation of this entire mass-generating mechanism.",
+      "key_ideas": [
+        "Electroweak unification raises a puzzle: why do the photon (massless) and the W/Z bosons (very massive) have such different masses if the underlying force is unified?",
+        "The Higgs mechanism proposes a Higgs field permeating all space with a nonzero value even in the vacuum; particles interacting with it experience resistance to acceleration, which IS what is observed as mass.",
+        "The W and Z bosons interact strongly with the Higgs field and acquire large mass; the photon and gluon do not interact with it at all and remain exactly massless.",
+        "The same mechanism gives mass to fundamental fermions (quarks and leptons), with different interaction strengths explaining the dramatic mass hierarchy across different particles (e.g. the top quark being ~340,000 times more massive than the electron).",
+        "The Higgs boson — the Higgs field's own associated particle — was directly detected in 2012 at the LHC, the last major undiscovered piece of the Standard Model, earning Englert and Higgs the 2013 Nobel Prize."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "The Higgs field and the Higgs boson are the same thing, interchangeable terms for the same object.",
+          "correction": "The Higgs FIELD is the entity that permeates all space and gives particles mass through interaction; the Higgs BOSON is a specific, detectable PARTICLE — a localized excitation or ripple of the Higgs field, exactly analogous to how a photon is a localized excitation of the electromagnetic field. The field is the underlying, always-present entity; the boson is a specific, detectable quantum of that field, observable only in high-energy collisions."
+        },
+        {
+          "misconception": "The Higgs mechanism gives ALL mass in the universe, including things like a proton's mass, directly.",
+          "correction": "The Higgs mechanism gives mass to the FUNDAMENTAL particles (quarks, leptons, W/Z bosons) directly — but the PROTON's mass is overwhelmingly (about 99%) due to the strong-force binding energy and quark kinetic energy INSIDE the proton (via E=mc², met already), not the small direct Higgs-mechanism contribution of the individual up and down quark masses themselves, which are actually quite small compared to the proton's total mass."
+        },
+        {
+          "misconception": "Before the Higgs mechanism was proposed and confirmed, physicists had no idea why particles have different masses.",
+          "correction": "The Higgs mechanism's specific contribution was not simply noting that different particles have different masses (an obvious experimental fact known for decades) but providing a specific, mathematically consistent THEORETICAL MECHANISM for how gauge bosons could acquire mass at all without breaking the mathematical consistency (gauge symmetry) of the electroweak theory — a genuine, non-obvious theoretical puzzle that plain acknowledgment of differing masses does not resolve."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "A 'wading through molasses/syrup' analogy diagram: particles of different Higgs-field interaction strength shown moving through a resistive medium with different degrees of difficulty, visually representing differing mass acquisition.",
+        "A mass-hierarchy chart: electron, muon, tau, up/down quarks, top quark, W/Z bosons, plotted on a logarithmic mass scale, visually emphasizing the enormous range the Higgs mechanism must explain.",
+        "A Higgs boson discovery announcement graphic (July 2012, CERN): the characteristic 'bump' in collision data at the Higgs boson's mass (~125 GeV), the key experimental signature confirming its existence."
+      ],
+      "worked_example_blueprint": {
+        "setup": "Explain qualitatively why the photon remains exactly massless under the Higgs mechanism, while the closely related (via electroweak unification) W and Z bosons acquire large mass, given that both are gauge bosons emerging from the same underlying electroweak theory.",
+        "steps": [
+          "Recall that mass acquisition in the Higgs mechanism depends specifically on whether and how strongly a particle INTERACTS with the Higgs field — not merely on being a gauge boson in general.",
+          "The electroweak theory's underlying symmetry structure is such that the specific combination of fields corresponding to the PHOTON does not couple to (does not interact with) the Higgs field at all — a direct mathematical consequence of how the electroweak symmetry is structured and subsequently 'broken' by the Higgs field's nonzero vacuum value.",
+          "By contrast, the specific combinations of fields corresponding to the W and Z bosons DO couple strongly to the Higgs field as a direct consequence of that same symmetry-breaking structure.",
+          "This asymmetric outcome (photon decoupled, W/Z strongly coupled) is not an arbitrary, separately-imposed rule — it falls directly out of the specific mathematical structure of how the Higgs field's nonzero vacuum value interacts with (and partially 'breaks') the underlying electroweak gauge symmetry.",
+          "Conclude: the observed massless photon and massive W/Z bosons are not two independent facts requiring separate explanation, but two correlated CONSEQUENCES of the single underlying Higgs mechanism applied consistently to the unified electroweak theory."
+        ],
+        "expected_outcome": "The student correctly explains that mass acquisition depends on interaction strength with the Higgs field, correctly notes that the photon's field combination does not couple to the Higgs field while the W/Z combinations do, and correctly recognizes both outcomes as consequences of the same underlying mechanism."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "Higgs field vs. Higgs boson conceptual distinction items",
+          "mass-generation reasoning exercises (why do different particles get different mass?)",
+          "Higgs boson discovery historical/experimental significance items"
+        ],
+        "difficulty_progression": "Begin with distinguishing the Higgs field from the Higgs boson conceptually, move to reasoning about why different particles acquire different amounts of mass, and finish with items on the historical and experimental significance of the 2012 Higgs boson discovery.",
+        "suggested_count": 6
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "conceptual distinction and explanation prompts",
+          "mass-generation reasoning essay item"
+        ],
+        "bloom_alignment": "Evaluate — students must synthesize the Higgs mechanism's role in resolving the electroweak mass puzzle and evaluate the significance of its experimental confirmation, matching this concept's evaluate-level Bloom classification.",
+        "mastery_signal": "The student correctly distinguishes the Higgs field from the Higgs boson, correctly explains qualitatively why different particles (including the massless photon) acquire different masses via differing Higgs-field interaction strength, and correctly describes the significance of the 2012 discovery, at 70% accuracy or better (mastery_threshold 0.7, per this concept's expert-level KG difficulty)."
+      },
+      "real_world_applications": [
+        "The 2012 Higgs boson discovery at the LHC, using the ATLAS and CMS detectors, was one of the largest, most expensive, and most significant scientific collaborations in history, directly completing the Standard Model's particle content.",
+        "Precision measurements of the Higgs boson's properties (mass, decay modes, coupling strengths to other particles) remain an active, ongoing area of particle physics research, testing the Standard Model's predictions to ever-higher precision.",
+        "Theoretical questions about the Higgs field's role in the very early universe (including possible connections to cosmic inflation and the universe's vacuum stability) remain active areas of theoretical physics and cosmology research."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.particle.electroweak-unification",
+        "phys.particle.gauge-bosons"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "561a1ad9",
+        "kg_build_date": "2026-07-22",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "c12df7fe",
+        "source_references": [
+          "OpenStax University Physics Vol.3 Ch.11"
+        ]
+      }
+    },
+    {
+      "id": "asset.phys.particle.feynman-diagrams",
+      "concept_id": "phys.particle.feynman-diagrams",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to read a simple Feynman diagram qualitatively, identifying incoming and outgoing particles and the exchanged force-carrier at each interaction vertex, without calculating amplitudes.",
+      "concept_summary": "A FEYNMAN DIAGRAM is a pictorial, systematic way of representing a particle interaction, invented by Richard Feynman as a calculational tool but equally valuable as an intuitive QUALITATIVE picture of what is physically happening during an interaction — this concept focuses entirely on the qualitative READING of such diagrams, not on the (much more advanced) quantitative calculation of interaction probabilities (amplitudes) that Feynman diagrams also enable. In the standard convention, TIME runs along one axis (typically left to right, or sometimes bottom to top) and particle lines represent particles moving through time: incoming particle lines enter from one side, outgoing particle lines exit the other side, and at each INTERACTION VERTEX (a point where lines meet), an exchanged FORCE-CARRIER (gauge boson, met already) line connects two particle lines, representing the moment of interaction. Reading a diagram means identifying: which particles come IN, which particles go OUT, and at each vertex, which gauge boson is exchanged and therefore which FORCE is responsible for that part of the interaction. For instance, an electron-electron scattering diagram shows two incoming electron lines, a single photon line connecting them at a vertex (representing photon exchange, i.e. electromagnetic repulsion), and two outgoing electron lines — a direct pictorial statement of exactly the same physics described more abstractly by the exchange-particle force-mediation picture (met already at the gauge bosons concept). Conservation laws (met already: charge, baryon number, lepton number) must hold at EVERY vertex individually, not just for the diagram as a whole — a useful additional check when reading or constructing a diagram, since any vertex that violates a conservation law identifies an impossible interaction.",
+      "key_ideas": [
+        "A Feynman diagram is a pictorial representation of a particle interaction, with time running along one axis and particle lines representing particles moving through time.",
+        "Interaction vertices are points where particle lines meet, connected by an exchanged force-carrier (gauge boson) line, representing the moment of interaction and which force is responsible.",
+        "Reading a diagram qualitatively means identifying incoming particles, outgoing particles, and at each vertex, which gauge boson is exchanged (hence which force acts).",
+        "An electron-electron scattering diagram (two incoming electrons, a photon exchanged at a vertex, two outgoing electrons) is a direct pictorial statement of the same physics as the gauge-boson exchange picture.",
+        "Conservation laws (charge, baryon number, lepton number) must hold at EVERY individual vertex, not just for the overall diagram — a useful check for identifying impossible interactions."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "A Feynman diagram is a literal picture of particles' actual paths through physical space, like a photograph or a trajectory plot.",
+          "correction": "A Feynman diagram is a SCHEMATIC, symbolic representation — the axes typically represent time (and sometimes an abstracted notion of space), but the diagram is not meant to be read as a literal photograph of particles' spatial paths. It is a bookkeeping and calculational tool representing the LOGICAL structure of an interaction (what comes in, what goes out, what is exchanged), not a literal trajectory map."
+        },
+        {
+          "misconception": "Reading a Feynman diagram requires performing the full quantum mechanical amplitude calculation to understand what it shows.",
+          "correction": "At the QUALITATIVE level (the scope of this concept), a Feynman diagram can be read and understood — identifying particles and forces involved — without any calculation at all, simply by following the lines and identifying the exchanged force-carrier at each vertex. The quantitative amplitude calculation (converting the diagram into an actual interaction probability) is a separate, more advanced skill beyond this qualitative reading."
+        },
+        {
+          "misconception": "Any combination of particle lines and vertices can form a valid Feynman diagram representing a possible interaction.",
+          "correction": "A valid Feynman diagram must satisfy conservation laws (charge, baryon number, lepton number, and others) at EVERY individual vertex — a diagram with a vertex that violates any conservation law does not represent a physically possible interaction, exactly the same constraint met already for checking whether a proposed reaction (without a diagram) is allowed or forbidden."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "A basic electron-electron (Møller) scattering diagram: two incoming electron lines, a single photon line connecting them at a vertex, two outgoing electron lines, with time-axis direction clearly labeled.",
+        "A beta-decay Feynman diagram (connecting directly to the weak interaction concept): a down quark line converting to an up quark line at a vertex, with a W⁻ boson line emerging and subsequently splitting into an electron line and an antineutrino line at a second vertex.",
+        "A 'vertex conservation check' worked diagram: a single interaction vertex with incoming/outgoing particle labels and charges explicitly summed on each side, demonstrating the vertex-level conservation law check."
+      ],
+      "worked_example_blueprint": {
+        "setup": "A Feynman diagram shows: an incoming electron and an incoming electron antineutrino entering a single vertex, from which a single outgoing W⁻ boson line emerges (i.e. e⁻ + ν̄ₑ → W⁻, read at this one vertex). Check whether this vertex conserves electric charge and lepton number, and state whether it represents a valid interaction vertex.",
+        "steps": [
+          "Check electric charge: incoming electron has charge −1e, incoming antineutrino has charge 0, total incoming charge = −1e. Outgoing W⁻ boson has charge −1e. Since −1e = −1e, charge IS conserved at this vertex.",
+          "Check lepton number: incoming electron has L=+1 (a lepton), incoming antineutrino has L=−1 (an ANTIlepton, opposite sign), total incoming L = +1 + (−1) = 0. Outgoing W⁻ boson has L=0 (a gauge boson, not a lepton).",
+          "Since total incoming L (0) equals total outgoing L (0), lepton number IS conserved at this vertex.",
+          "Since both charge and lepton number are conserved at this single vertex, this is a VALID interaction vertex — indeed, this exact vertex (read in reverse, W⁻ → e⁻ + ν̄ₑ) is precisely the second step of the beta decay mechanism met already at the weak interaction concept.",
+          "Note the general method demonstrated: checking vertex validity requires summing each conserved quantity separately on the incoming side and the outgoing side of that ONE vertex, and confirming they match — exactly the same procedure as checking an overall reaction, just applied locally to a single vertex."
+        ],
+        "expected_outcome": "The student correctly verifies charge conservation (−1e = −1e) and lepton number conservation (0=0) at the given vertex, correctly concludes it is valid, and correctly connects it to the beta-decay mechanism met at the weak interaction concept."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "diagram reading items (identify incoming/outgoing particles and exchanged boson)",
+          "vertex-level conservation law checking exercises",
+          "diagram-to-physical-process matching items"
+        ],
+        "difficulty_progression": "Begin with reading simple given diagrams to identify particles and exchanged bosons, move to checking conservation laws at individual vertices, and finish with matching diagrams to the physical processes (electromagnetic scattering, beta decay) they represent.",
+        "suggested_count": 8
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "diagram-reading quiz",
+          "vertex conservation-law checking problem set"
+        ],
+        "bloom_alignment": "Apply — students must apply their knowledge of gauge bosons and conservation laws to correctly read and validate Feynman diagrams representing particle interactions.",
+        "mastery_signal": "The student correctly reads a Feynman diagram to identify incoming/outgoing particles and the exchanged gauge boson, and correctly checks conservation laws at individual vertices to determine validity, at 75% accuracy or better."
+      },
+      "real_world_applications": [
+        "Feynman diagrams are the standard visual and calculational language used throughout particle physics research, from textbook problems to cutting-edge theoretical calculations and experimental data analysis at facilities like the LHC.",
+        "Particle physicists use Feynman diagrams to systematically catalog and predict all possible ways a given initial state could evolve into various final states, essential for interpreting collider experiment results.",
+        "The qualitative diagram-reading skill developed here is the essential first step toward the quantitative calculation of interaction probabilities (scattering amplitudes), a core skill in advanced quantum field theory."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.particle.gauge-bosons",
+        "phys.particle.conservation-laws"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "561a1ad9",
+        "kg_build_date": "2026-07-22",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "c12df7fe",
+        "source_references": [
+          "IB Physics Topic 7.3"
+        ]
+      }
+    },
+    {
+      "id": "asset.phys.particle.accelerators-detectors",
+      "concept_id": "phys.particle.accelerators-detectors",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to explain why colliding particles at relativistic momentum enables the creation of new, massive particles, and apply conservation of energy and momentum to determine an unknown particle's mass from collision data.",
+      "concept_summary": "PARTICLE ACCELERATORS use strong electromagnetic fields to accelerate charged particles to extremely high, RELATIVISTIC speeds and momenta (met already at relativistic momentum), then collide them — either into a stationary target, or, more powerfully, head-on with another beam of oppositely-moving particles. The key physical reason accelerators must reach such extreme energies is E=mc² (met already): CREATING a new, massive particle in a collision requires making its entire rest-mass energy available from the collision's kinetic energy, so discovering or studying any sufficiently massive particle (like the W/Z bosons or the Higgs boson) requires an accelerator capable of reaching a correspondingly high collision energy. PARTICLE DETECTORS surrounding the collision point do not directly 'see' the particles produced — instead, layered detector systems measure the TRAJECTORIES, MOMENTA, and ENERGIES of the various STABLE (or long-enough-lived) particles that emerge from the collision and its subsequent decay chain. The existence, mass, and other properties of short-lived, directly-undetectable particles are then INFERRED by applying CONSERVATION OF ENERGY AND MOMENTUM to the measured detector data — if the detected products' combined energy and momentum are consistent with having come from a single, briefly-existing intermediate particle of some specific mass, that mass can be reconstructed mathematically, exactly the technique that revealed the W, Z, and Higgs bosons' masses (met already) before any of them could be observed directly, since all three decay far too quickly to ever be seen themselves — only their stable decay products, and the reconstructed conservation-law-consistent intermediate mass, provide the evidence for their existence and properties.",
+      "key_ideas": [
+        "Particle accelerators use electromagnetic fields to accelerate charged particles to relativistic momenta, then collide them, either into a stationary target or head-on with another beam.",
+        "Creating a new, massive particle in a collision requires the collision's kinetic energy to supply that particle's rest-mass energy (E=mc²) — studying massive particles requires correspondingly high-energy accelerators.",
+        "Particle detectors do not directly see short-lived particles; they measure the trajectories, momenta, and energies of the stable (or long-lived) particles that emerge from the collision and subsequent decays.",
+        "The existence, mass, and properties of short-lived particles are inferred by applying conservation of energy and momentum to the measured decay products — reconstructing the mass of the intermediate particle they must have come from.",
+        "This reconstruction technique revealed the masses of the W, Z, and Higgs bosons before any could be directly observed, since all three decay far too quickly to be seen themselves — only their decay products and the reconstructed mass provide evidence."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "Particle detectors take a literal picture or direct observation of short-lived particles like the Higgs boson.",
+          "correction": "Detectors never directly observe extremely short-lived particles — they measure the STABLE (or long-lived enough to travel a measurable distance) decay PRODUCTS, and physicists then use conservation of energy and momentum to mathematically RECONSTRUCT the mass and existence of the short-lived parent particle from that data. The Higgs boson, for instance, was 'discovered' entirely through this reconstruction technique applied to its decay products, not by any direct observation."
+        },
+        {
+          "misconception": "Higher collision energy is only useful for making particles move faster, not for creating new types of particles.",
+          "correction": "Higher collision energy is essential specifically because it is what makes NEW, MASSIVE particles possible to CREATE in the first place — by E=mc², a particle's rest-mass energy must be supplied from the collision's available kinetic energy, so a heavier target particle (like the Higgs boson, at ~125 GeV) simply cannot be produced at all in a collision below that energy threshold, regardless of how many collisions are attempted."
+        },
+        {
+          "misconception": "Reconstructing an unknown particle's mass from detector data is a rough estimate or guess, not a precise measurement.",
+          "correction": "Mass reconstruction via conservation of energy and momentum, applied to large numbers of collision events and combined with statistical analysis, is a precise, quantitative measurement technique — it is how the W, Z, and Higgs boson masses have been measured to remarkably high precision (fractions of a percent), not merely a rough qualitative estimate."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "A collider schematic: two particle beams accelerated in opposite directions around a ring, colliding head-on at a detector location, with the resulting shower of decay products radiating outward.",
+        "A layered detector cross-section diagram, showing different detector layers optimized for different particle types (tracking chambers for charged particle paths, calorimeters for energy measurement), connecting to the hadron/lepton classification met earlier.",
+        "A mass-reconstruction 'invariant mass' histogram: a plot of reconstructed mass from many collision events, showing a clear peak at the true particle mass (e.g. the Higgs boson's ~125 GeV peak) rising above a smooth background — the actual signature used in real particle discoveries."
+      ],
+      "worked_example_blueprint": {
+        "setup": "A short-lived particle decays into two photons, detected with momenta p₁ and p₂ (in natural units where c=1) at a known angle θ between them, with measured energies E₁ and E₂. Explain, using conservation of energy and momentum, how the parent particle's mass can be reconstructed from these measurements (the invariant mass formula), without deriving the full expression in detail.",
+        "steps": [
+          "Recall that the parent particle's total energy equals the sum of its decay products' energies (conservation of energy): E_parent = E₁ + E₂.",
+          "Recall that the parent particle's total momentum vector equals the vector sum of its decay products' momenta (conservation of momentum): p_parent = p₁ + p₂ (a vector sum, so the angle θ between the two photon momenta matters).",
+          "The parent particle's rest mass is related to its total energy and total momentum by the relativistic energy-momentum relation (met already, generalizing E=mc² to a moving particle): m²c⁴ = E_parent² − (p_parent c)².",
+          "Substituting the conservation-law expressions for E_parent and p_parent (including the angle-dependent vector sum for momentum) into this relation gives a computable formula for the parent's mass purely in terms of the two measured photon energies and the angle between them — the 'invariant mass' formula used throughout particle physics.",
+          "Conclude: this is exactly the general method (illustrated here for a two-photon decay, relevant to the Higgs boson's two-photon decay channel, one of the actual channels used in its 2012 discovery) by which detector measurements of stable decay products are converted into a precise mass measurement of an otherwise undetectable short-lived parent particle."
+        ],
+        "expected_outcome": "The student correctly explains that the parent's total energy and momentum are obtained by summing the decay products' measured energies and (vector) momenta, and correctly explains how the relativistic energy-momentum relation then yields the parent particle's mass — the invariant mass reconstruction technique."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "collision energy threshold reasoning items (can a given particle be produced at a given energy?)",
+          "conceptual mass-reconstruction explanation exercises",
+          "detector-and-decay-product identification items"
+        ],
+        "difficulty_progression": "Begin with reasoning about whether a given collision energy is sufficient to produce a particle of known mass, move to conceptual explanations of the mass-reconstruction technique from decay products, and finish with items connecting specific historical particle discoveries (W, Z, Higgs) to this detection methodology.",
+        "suggested_count": 8
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "energy-threshold reasoning problem set",
+          "mass-reconstruction conceptual explanation prompt"
+        ],
+        "bloom_alignment": "Apply — students must apply conservation of energy and momentum, together with relativistic mass-energy relations, to explain how accelerator and detector data reveal short-lived particles' properties.",
+        "mastery_signal": "The student correctly reasons about collision energy thresholds for particle production, and correctly explains the invariant-mass reconstruction technique connecting detected decay products to an inferred parent particle's mass, at 80% accuracy or better."
+      },
+      "real_world_applications": [
+        "The Large Hadron Collider's discovery of the Higgs boson in 2012 used exactly this invariant-mass reconstruction technique, most famously in the two-photon and four-lepton decay channels, to identify the characteristic mass peak at ~125 GeV.",
+        "Medical accelerator technology (used in proton therapy for cancer treatment) is a direct spin-off application of particle accelerator technology originally developed for fundamental physics research.",
+        "Synchrotron radiation facilities, built using accelerator technology, are widely used across materials science, biology, and chemistry for high-resolution structural analysis, a major practical application beyond fundamental particle physics itself."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.particle.conservation-laws",
+        "phys.rel.relativistic-momentum"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "561a1ad9",
+        "kg_build_date": "2026-07-22",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "c12df7fe",
+        "source_references": [
+          "OpenStax University Physics Vol.3 Ch.11"
+        ]
+      }
+    },
+    {
+      "id": "asset.phys.particle.standard-model",
+      "concept_id": "phys.particle.standard-model",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to describe the overall organization of the Standard Model (quarks, leptons, gauge bosons, Higgs boson), and explain both its major successes and its known, acknowledged limitations.",
+      "concept_summary": "The STANDARD MODEL is the single, unified theoretical framework that organizes EVERY particle and interaction developed throughout this domain into one coherent picture. Its particle content divides into three families: the QUARKS (six flavors, met already, building hadrons via the strong interaction), the LEPTONS (six types across three generations, met already), and the GAUGE BOSONS (the force carriers — photon, gluons, W/Z bosons, met already) — plus the HIGGS BOSON (met already), which sits somewhat apart from the other gauge bosons as the field responsible for mass generation rather than force mediation in the usual sense. Within this framework, EVERY known particle can be uniquely classified by its full set of interactions and quantum numbers (electric charge, color charge, baryon number, lepton number, and others) — a remarkably complete and precisely tested organizing scheme, confirmed to extraordinary precision (some Standard Model predictions match experiment to better than one part in a billion) across decades of accelerator experiments. Yet the Standard Model is explicitly known, and openly acknowledged by physicists, to be INCOMPLETE: it does not include GRAVITY at all (met already at the gauge bosons concept, gravity's quantum description remains unsolved); it provides no explanation for DARK MATTER or DARK ENERGY (which together comprise roughly 95% of the universe's total mass-energy content, based on independent astrophysical and cosmological evidence); it does not explain the observed MATTER-ANTIMATTER ASYMMETRY of the universe (met already at the antimatter concept); and it offers no fundamental reason for the specific values of its roughly 19 free parameters (particle masses, coupling strengths) — all of which must simply be measured experimentally rather than derived from the theory itself. The Standard Model thus represents both one of the most successful, precisely-tested scientific theories ever constructed, AND a demonstrably incomplete description of nature, actively motivating ongoing theoretical and experimental research into physics beyond it.",
+      "key_ideas": [
+        "The Standard Model organizes all particles into three families: quarks (six flavors, building hadrons), leptons (six types, three generations), and gauge bosons (force carriers), plus the Higgs boson.",
+        "Every known particle can be uniquely classified within this framework by its full set of interactions and quantum numbers (charge, color charge, baryon number, lepton number, and others).",
+        "The Standard Model is confirmed to extraordinary precision — some predictions match experiment to better than one part in a billion — across decades of accelerator experiments.",
+        "The Standard Model is explicitly incomplete: it excludes gravity entirely, provides no explanation for dark matter or dark energy (~95% of the universe's mass-energy content), and does not explain the observed matter-antimatter asymmetry.",
+        "The Standard Model also offers no fundamental derivation of its roughly 19 free parameters (masses, coupling strengths) — these must be measured experimentally, motivating ongoing research into physics beyond the Standard Model."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "The Standard Model is a complete 'theory of everything', explaining all of physics with nothing left unaccounted for.",
+          "correction": "The Standard Model is explicitly and openly acknowledged by physicists to be INCOMPLETE — it excludes gravity entirely, cannot explain dark matter or dark energy (the majority of the universe's content by mass-energy), does not explain the matter-antimatter asymmetry, and leaves its own parameters unexplained. It is an extraordinarily successful description of a large and important part of physics, but explicitly not a complete 'theory of everything'."
+        },
+        {
+          "misconception": "Because the Standard Model has known limitations and gaps, it must be fundamentally wrong or unreliable.",
+          "correction": "The Standard Model's known limitations (excluding gravity, dark matter, etc.) do not undermine its extraordinary, precisely-confirmed accuracy WITHIN its intended domain — it remains one of the most rigorously tested and successful scientific theories ever developed, correctly predicting particle properties (including the Higgs boson's existence and mass) years or decades in advance of experimental confirmation. Acknowledging its limitations is a sign of scientific honesty and active research, not a sign of the theory being wrong where it does apply."
+        },
+        {
+          "misconception": "Dark matter and dark energy are simply undiscovered ordinary particles that will eventually be added as new entries within the existing Standard Model framework.",
+          "correction": "Dark matter and dark energy are not merely 'missing entries' waiting to be slotted into the existing Standard Model table — their properties (as inferred from astrophysical observations) suggest they may require genuinely new physics beyond the Standard Model's current mathematical framework, not simply new particles that happen to fit into the existing quark/lepton/boson categorization scheme."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "The classic 'Standard Model table' diagram: three generations of quarks and leptons in columns, gauge bosons and the Higgs boson in a separate section, with mass, charge, and spin listed for each — the canonical visual summary of the entire domain.",
+        "A 'known vs. unknown' pie chart of the universe's mass-energy content: ordinary (Standard-Model-described) matter at only about 5%, with dark matter (~27%) and dark energy (~68%) shown as the much larger, Standard-Model-unexplained remainder.",
+        "A concept map connecting every prior concept in the Particle Physics domain (four forces, quarks, leptons, gauge bosons, Higgs, conservation laws) into this single Standard Model diagram, visually demonstrating how each earlier concept is a piece of this capstone picture."
+      ],
+      "worked_example_blueprint": {
+        "setup": "Using the full Standard Model framework developed across this domain, classify the tau lepton by stating: (a) which particle family it belongs to, (b) which forces it experiences, (c) its approximate relationship to the electron and muon, and (d) explain why, despite the Standard Model's completeness in classifying it, the Standard Model still cannot explain certain broader cosmological facts.",
+        "steps": [
+          "(a) The tau lepton belongs to the LEPTON family (not a hadron, not a gauge boson) — specifically the third generation of charged leptons.",
+          "(b) As a lepton, the tau experiences electromagnetism (it is charged), the weak force, and gravity, but does NOT experience the strong force (leptons never do).",
+          "(c) The tau is structurally identical to the electron and muon in every respect except mass — it is the heaviest of the three charged leptons, part of the same three-generation pattern.",
+          "(d) While the Standard Model fully and precisely classifies the tau lepton (and every other known particle) within its framework, it says NOTHING about, for instance, why dark matter (a large fraction of the universe's mass) exists or what it is made of — the tau lepton's complete Standard Model classification illustrates the model's precision WITHIN its scope, while simultaneously not resolving the model's acknowledged gaps regarding phenomena entirely outside its current particle content.",
+          "Conclude: this example demonstrates both facets of the Standard Model discussed in this concept — its remarkable internal completeness and precision for classifying every known particle, and its explicit, acknowledged incompleteness regarding phenomena (like dark matter) that lie outside its current framework entirely."
+        ],
+        "expected_outcome": "The student correctly classifies the tau lepton within the Standard Model framework (family, forces experienced, relationship to other leptons), and correctly explains that this precise classification does not resolve the Standard Model's separate, acknowledged gaps regarding dark matter and other unexplained cosmological phenomena."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "Standard Model classification exercises for various particles",
+          "Standard Model successes vs. limitations conceptual items",
+          "synthesis essay items connecting multiple domain concepts into the Standard Model framework"
+        ],
+        "difficulty_progression": "Begin with classifying given particles within the Standard Model framework, move to conceptual items distinguishing the model's confirmed successes from its acknowledged limitations, and finish with synthesis items requiring students to connect multiple concepts from across the domain into the unified Standard Model picture.",
+        "suggested_count": 8
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "classification and synthesis problem set",
+          "successes-and-limitations conceptual essay"
+        ],
+        "bloom_alignment": "Evaluate — students must synthesize the entire Particle Physics domain into the unified Standard Model framework and critically evaluate both its precisely-confirmed successes and its explicitly acknowledged limitations, matching this concept's evaluate-level Bloom classification and capstone role (10-hour estimated study time) at the end of the domain.",
+        "mastery_signal": "The student correctly classifies particles within the full Standard Model framework, correctly describes the model's major experimentally-confirmed successes, and correctly identifies and explains its explicitly acknowledged limitations (gravity, dark matter/energy, matter-antimatter asymmetry, unexplained parameters), at 70% accuracy or better (mastery_threshold 0.7, matching this concept's expert-level, capstone KG difficulty)."
+      },
+      "real_world_applications": [
+        "The Standard Model's precise, decades-long track record of successful predictions (including the Higgs boson's mass, years before its discovery) makes it one of the most rigorously validated scientific theories in human history, a benchmark for what a successful physical theory looks like.",
+        "Ongoing and planned experiments (future colliders, dark matter direct-detection experiments, precision measurements of Standard Model parameters) are actively searching for physics beyond the Standard Model, directly motivated by its acknowledged limitations discussed in this concept.",
+        "Theoretical frameworks proposed to extend or complete the Standard Model — supersymmetry, string theory, grand unified theories — represent major ongoing research programs across theoretical physics, all directly motivated by the specific gaps this concept identifies."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.particle.hadron-quark-model",
+        "phys.particle.gauge-bosons",
+        "phys.particle.higgs-mechanism",
+        "phys.particle.conservation-laws"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "561a1ad9",
+        "kg_build_date": "2026-07-22",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "c12df7fe",
+        "source_references": [
+          "OpenStax University Physics Vol.3 Ch.11"
+        ]
+      }
     }
   ]
 }
