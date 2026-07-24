@@ -81,10 +81,41 @@ export function hasTeachingPlan(ebContext: EBConceptContext | null | undefined):
  */
 export function extractFirstDiscoveryQuestion(raw: string | null): string | null {
   if (!raw) return null
-  const qMatch = raw.match(/[^.!?\n]*\?/)
-  if (qMatch) return qMatch[0].trim().replace(/\s+/g, ' ')
-  const firstSentence = raw.match(/^[^.!?\n]+[.!?]/)
-  return firstSentence ? firstSentence[0].trim().replace(/\s+/g, ' ') : raw.slice(0, 200).trim()
+  // Authored EB markdown is hard-wrapped at ~72-80 chars, so collapse
+  // whitespace (including newlines) before matching, or a multi-line
+  // prompt truncates to whatever text sits on its final line. Also strip
+  // the recurring "Discovery-style:" authoring label (present verbatim in
+  // ~158 physics EB entries) so it never leaks into the rendered prompt.
+  const normalized = raw
+    .replace(/\s+/g, ' ')
+    .replace(/^Discovery[- ]style:?\s*/i, '')
+    .trim()
+  // Verified across the physics corpus: every authored discovery prompt is
+  // written as a single double-quoted span (often context sentences plus
+  // the prompt together, e.g. `"...But bring 10²³ atoms together... What
+  // happens to those levels?"`) — the quote IS the intended unit to read
+  // aloud, not something to split further. Not every prompt is phrased as
+  // a literal question (some are imperatives, e.g. "Compute X and see if
+  // it explains Y."), so match the first quoted span regardless of
+  // whether it contains "?" — do not require one. Naive sentence-boundary
+  // splitting is unreliable here (decimal numbers like "2.269" and
+  // em-dash asides both false-trigger a "sentence end"), so prefer the
+  // full quoted span verbatim over any regex-reconstructed fragment.
+  // Require a substantial quoted span (>=20 chars) — a "direct instruction
+  // warranted" concept's explanatory prose sometimes quotes a short inline
+  // term or phrase (e.g. "type", "why this metre") that is NOT the
+  // discovery prompt; a real authored prompt is always a full sentence.
+  const quoted = normalized.match(/"([^"]{20,})"/)
+  if (quoted) return quoted[1].trim()
+  // No matched quote pair — either a genuinely unquoted "direct instruction
+  // warranted" concept, or (rarely) a quote whose closing mark falls past
+  // the 500-char truncation this field is limited to (parseEBDiscoveryQuestions).
+  // Either way, fall back to the first sentence of the block. A "."
+  // immediately followed by a digit (a decimal number like "2.269") is
+  // treated as part of the sentence, not a boundary.
+  const firstSentence = normalized.match(/^(?:[^.!?]|\.\d)*[.!?]/)
+  const result = firstSentence ? firstSentence[0].trim() : normalized.slice(0, 200)
+  return result.replace(/\*\*/g, '').replace(/^"+|"+$/g, '').trim()
 }
 
 /**

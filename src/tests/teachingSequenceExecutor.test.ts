@@ -46,13 +46,48 @@ describe('hasTeachingPlan', () => {
 })
 
 describe('extractFirstDiscoveryQuestion', () => {
-  it('extracts the first "?" sentence from a prose block', () => {
-    const raw = 'Consider a table with 4 different rulers. Why might two people measure the same table and disagree? A second question here?'
-    expect(extractFirstDiscoveryQuestion(raw)).toBe('Why might two people measure the same table and disagree?')
+  // The physics EB corpus wraps the authored prompt in a single double-quoted
+  // span (context sentences plus the question together) — this is the unit
+  // to extract verbatim, not something to re-split into individual sentences.
+  it('extracts the full quoted discovery prompt verbatim, context sentences included', () => {
+    const raw = 'Discovery-style: "Consider a table with 4 different rulers. Why might two people measure the same table and disagree?" — learner discovers the need for a shared standard.'
+    expect(extractFirstDiscoveryQuestion(raw)).toBe('Consider a table with 4 different rulers. Why might two people measure the same table and disagree?')
   })
-  it('falls back to the first sentence when there is no question mark (direct-instruction concepts)', () => {
+  it('extracts a quoted prompt even when phrased as an imperative with no literal "?"', () => {
+    // Regression: some authored prompts are instructions ("Compute X and see
+    // if...") rather than literal questions — the quote must still be found.
+    const raw = 'Discovery-style: "Metals contain many free electrons. Compute the fraction near E_F and see if that explains the discrepancy."'
+    expect(extractFirstDiscoveryQuestion(raw)).toBe('Metals contain many free electrons. Compute the fraction near E_F and see if that explains the discrepancy.')
+  })
+  it('strips the "Discovery-style:" label so it never leaks into the rendered prompt', () => {
+    // Regression: label leaked when the quote's closing mark fell outside
+    // the field's 500-char truncation, forcing the sentence-fallback path
+    // (which must ALSO strip the label, not just the primary quote path).
+    const raw = 'Discovery-style: "On September 14, 2015, two detectors felt spacetime vibrate. That signal had traveled 1.3 billion light-years through empty space to reach us'
+    const result = extractFirstDiscoveryQuestion(raw)
+    expect(result).not.toMatch(/Discovery[- ]style/i)
+    expect(result).not.toMatch(/^"/)
+  })
+  it('does not mistake a short inline quoted term for the discovery prompt', () => {
+    // Regression: "direct instruction" concepts' explanatory prose sometimes
+    // quotes a short term (e.g. "why this metre") that is not itself a prompt.
+    const raw = 'Direct instruction is warranted here. There is no "why this metre" to discover — the metre is defined to be what it is.'
+    expect(extractFirstDiscoveryQuestion(raw)).toBe('Direct instruction is warranted here.')
+  })
+  it('preserves a multi-line hard-wrapped quote as one continuous prompt', () => {
+    // Regression: a newline inside the quoted span used to truncate the
+    // question to whatever text sat on its final line.
+    const raw = 'Discovery-style: "But bring 10²³ atoms together into a\nsolid crystal. What happens to those once-sharp\nenergy levels?"'
+    expect(extractFirstDiscoveryQuestion(raw)).toBe('But bring 10²³ atoms together into a solid crystal. What happens to those once-sharp energy levels?')
+  })
+  it('falls back to the first sentence when there is no quoted prompt at all (direct-instruction concepts)', () => {
     const raw = 'Direct instruction is warranted here. SI units are a social convention, not a discovery.'
     expect(extractFirstDiscoveryQuestion(raw)).toBe('Direct instruction is warranted here.')
+  })
+  it('does not split a decimal number mid-value when falling back to first-sentence', () => {
+    // Regression: "2.269" was being split as if "." ended the sentence.
+    const raw = 'The critical point sits at kTc/J ≈ 2.269 for the 2D Ising model. Onsager solved this exactly in 1944.'
+    expect(extractFirstDiscoveryQuestion(raw)).toBe('The critical point sits at kTc/J ≈ 2.269 for the 2D Ising model.')
   })
   it('returns null for null input', () => {
     expect(extractFirstDiscoveryQuestion(null)).toBeNull()
