@@ -18688,6 +18688,515 @@
           "LIGO Scientific Collaboration"
         ]
       }
+    },
+    {
+      "id": "asset.phys.mod.energy-bands",
+      "concept_id": "phys.mod.energy-bands",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to explain why isolated-atom energy levels broaden into continuous bands when atoms are brought together into a crystal, identify the valence band, conduction band, and band gap on an energy diagram, and state qualitatively how band-gap size determines whether a solid conducts electricity.",
+      "concept_summary": "A single isolated atom has sharp, discrete allowed energy levels (met already in the atomic-spectra concept), because its electrons are confined by one nucleus's potential well. Bring roughly 10^23 atoms together into a crystal and the Pauli exclusion principle forbids any two electrons in the whole solid from sharing an identical quantum state — so each formerly-sharp atomic level splits into a tightly-spaced cluster of N distinct levels (N being the number of atoms), which for any macroscopic crystal are so close together they merge into a continuous ENERGY BAND. Between bands that correspond to different atomic shells, there can be a range of energies with no allowed states at all — a BAND GAP. The highest energy band that is normally filled with electrons at absolute zero is called the VALENCE BAND (built from the atoms' outer, bonding electrons); the next band up, normally empty at absolute zero, is the CONDUCTION BAND. Electrical conduction requires electrons that can accelerate into new, nearby empty states in response to an applied field — an electron sitting in a completely full band cannot do this, because every neighboring state is already occupied and the exclusion principle forbids it from moving there. This band picture, combined with Fermi-Dirac statistics (met already) which describes how electrons populate these bands at finite temperature, is what ultimately separates conductors, insulators, and semiconductors: the difference is not in whether bands exist (all solids have them) but in the size of the gap between the valence and conduction bands and how nearly the topmost band is filled.",
+      "key_ideas": [
+        "Bringing N atoms together into a crystal splits each sharp atomic energy level into N closely spaced sub-levels (Pauli exclusion forbids identical states), which merge into a continuous energy band for any macroscopic solid.",
+        "A band gap is a range of energy between two bands where no electron states exist at all — an electron cannot have an energy that falls inside the gap.",
+        "The valence band is the highest band normally filled with electrons at T = 0 K; the conduction band is the next band up, normally empty at T = 0 K.",
+        "An electron in a completely full band cannot respond to an applied electric field, because every neighboring energy state is already occupied — conduction requires accessible empty states nearby in energy.",
+        "The size of the band gap, together with how the bands are populated (governed by Fermi-Dirac statistics), determines whether a solid behaves as a conductor, insulator, or semiconductor."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "Energy bands are a completely different phenomenon from the discrete energy levels of a single atom, unrelated to atomic structure.",
+          "correction": "Bands are literally what atomic energy levels turn into when atoms are packed together: each atomic level splits into N sub-levels (N = number of atoms) that merge into a band. Zoom into any band closely enough and it is built entirely from the same discrete atomic levels covered in the atomic-spectra concept."
+        },
+        {
+          "misconception": "A band gap means there is a region of physical space inside the solid where electrons cannot go.",
+          "correction": "The band gap is a forbidden range of ENERGY, not a forbidden region of space. An electron can be anywhere in the crystal; what it cannot do is have an energy value that falls inside the gap."
+        },
+        {
+          "misconception": "Electrons in a full valence band are simply 'stuck' and therefore not moving at all.",
+          "correction": "Electrons in a full band are still in constant motion (they have nonzero velocity and kinetic energy) — what they cannot do is CHANGE their energy or momentum in response to a field, because every nearby state is already occupied. 'Cannot conduct' means cannot accelerate into a new state, not cannot move."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "An animated 'levels merging into bands' diagram: start with 2 atoms (2 split levels), then 10, then a shaded continuous band as atom count grows toward Avogadro-scale, directly building on the atomic-spectra energy-level diagram.",
+        "Side-by-side band diagrams for a small band gap, a large band gap, and overlapping bands, each with the valence band shaded and conduction band unshaded.",
+        "A 'full band cannot conduct' cartoon: a full row of parking spaces (electrons) with no empty spot to accelerate into, versus a row with empty spaces available."
+      ],
+      "worked_example_blueprint": {
+        "setup": "A crystal has a band gap of 5.5 eV. At room temperature, the thermal energy scale is roughly k_BT ≈ 0.025 eV. Explain qualitatively whether this material is likely to be a good electrical conductor, and contrast it with a hypothetical material of band gap 0.1 eV.",
+        "steps": [
+          "Compare the band gap to the thermal energy scale: 5.5 eV is roughly 220 times larger than k_BT ≈ 0.025 eV at room temperature.",
+          "Recognize that promoting an electron from the valence band to the conduction band requires an energy input of at least the band gap.",
+          "Since thermal energy at room temperature is utterly insufficient to bridge a 5.5 eV gap, essentially no electrons are thermally promoted to the conduction band — the valence band stays full and the conduction band stays empty.",
+          "Conclude the 5.5 eV material is an insulator: it has no available carriers in either band, so applying a field produces negligible current.",
+          "Contrast with the 0.1 eV material: k_BT ≈ 0.025 eV is only about 4 times smaller than this gap, so a non-negligible fraction of electrons are thermally promoted across it, giving the material some carriers and modest, temperature-sensitive conductivity — the qualitative signature of a semiconductor, developed further at the next concept."
+        ],
+        "expected_outcome": "The student explains that a 5.5 eV gap makes thermal promotion across it negligible at room temperature (insulator behavior), while a 0.1 eV gap allows a measurable population of thermally excited carriers (semiconductor-like behavior), reasoning entirely from the ratio of band gap to k_BT rather than from memorized labels."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "band-diagram labeling (valence band, conduction band, gap)",
+          "conceptual reasoning: why does a full band not conduct?",
+          "qualitative gap-size-versus-conductivity reasoning items"
+        ],
+        "difficulty_progression": "Begin with labeling a given band diagram, move to explaining in words why a filled band cannot conduct, then finish with comparative reasoning about how band-gap size relative to k_BT determines conductivity.",
+        "suggested_count": 8
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "diagram-labeling check",
+          "short conceptual explanation prompt"
+        ],
+        "bloom_alignment": "Understand — students must explain how bands arise from atomic levels and why gap size governs conduction, without yet needing to apply this quantitatively to real device behavior.",
+        "mastery_signal": "The student correctly labels valence band, conduction band, and band gap on a diagram, and correctly explains — using the full-band-cannot-conduct argument — why band gap size determines whether thermal excitation can populate the conduction band."
+      },
+      "real_world_applications": [
+        "Diamond (band gap ≈ 5.5 eV) is an excellent electrical insulator despite being made of carbon, the same element that forms conductive graphite — the difference is entirely in how the carbon atoms' bands are arranged.",
+        "Semiconductor device engineering (transistors, solar cells, LEDs, developed at later concepts in this domain) is fundamentally the engineering of band structure and band gap.",
+        "Band-gap engineering — alloying materials to tune the gap size — underlies the design of LEDs that emit different colors of light, since photon energy at emission is set by the gap."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.mod.atomic-spectra",
+        "phys.stat.fermi-dirac"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "561a1ad9",
+        "kg_build_date": "2026-07-22",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "3c622ff",
+        "source_references": [
+          "NCERT Physics Class 12 Ch.14",
+          "OpenStax University Physics Vol.3 Ch.9"
+        ]
+      }
+    },
+    {
+      "id": "asset.phys.mod.semiconductor-classification",
+      "concept_id": "phys.mod.semiconductor-classification",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to classify a material as a conductor, insulator, or semiconductor from its band structure (gap size and band filling), and explain semiconductors as a distinct third category rather than 'weak conductors' or 'leaky insulators'.",
+      "concept_summary": "Building on the energy-band picture, materials fall into three qualitative classes according to their band structure. CONDUCTORS (metals) either have a partially filled band, or have overlapping valence and conduction bands with no gap at all — either way, electrons sit right next to empty states at the top of the filled region, so even a tiny applied field lets them accelerate freely, giving high conductivity at any temperature, including near absolute zero. INSULATORS have a large band gap (typically several eV, like diamond's ≈5.5 eV) between a completely full valence band and an empty conduction band — thermal energy at ordinary temperatures is far too small to promote any meaningful number of electrons across such a large gap, so the material has essentially no available carriers and conducts negligibly. SEMICONDUCTORS occupy the middle ground: they have the SAME qualitative band structure as insulators (full valence band, empty conduction band at T=0, separated by a gap) but with a much SMALLER gap (typically under about 2 eV — silicon's is 1.1 eV, germanium's 0.67 eV) — small enough that at room temperature a modest but non-negligible number of electrons are thermally promoted across it. This is the crucial conceptual point: a semiconductor is not a physically different KIND of material from an insulator in its band structure — it is governed by the identical physics, differing only in how the gap size compares to the thermal energy scale k_BT. This is also why semiconductor conductivity is strongly temperature-dependent (rising with temperature, opposite to a metal) — a signature explored quantitatively at the next concept, intrinsic semiconductors.",
+      "key_ideas": [
+        "Conductors have a partially filled band or overlapping bands with no gap, so electrons always have adjacent empty states available — this gives high conductivity even near absolute zero.",
+        "Insulators have a large band gap (several eV) between a full valence band and empty conduction band; thermal energy at ordinary temperatures cannot bridge it, so there are essentially no available carriers.",
+        "Semiconductors have the SAME qualitative band structure as insulators — the difference is a much smaller gap (roughly under 2 eV), small enough that thermal excitation at room temperature populates the conduction band with a modest number of carriers.",
+        "A semiconductor is not a different kind of material from an insulator — it is governed by identical band physics, differing only in gap size relative to k_BT.",
+        "Because semiconductor conduction depends on thermally-excited carriers, semiconductor conductivity rises with temperature — the opposite temperature dependence of a metal, whose conductivity falls as temperature rises (more lattice scattering)."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "A semiconductor is just a 'medium-strength' conductor — a material that is inherently between a conductor and an insulator in some fixed, permanent way, like a resistor value.",
+          "correction": "A semiconductor's conductivity is not fixed — it depends strongly on temperature (and, as developed at later concepts, on doping). At very low temperature a pure semiconductor conducts almost as poorly as an insulator, and its conductivity can be engineered over many orders of magnitude by doping. 'Semiconductor' names a band structure (small gap), not a fixed conductivity value."
+        },
+        {
+          "misconception": "Insulators and semiconductors are fundamentally different physical phenomena, governed by different physics.",
+          "correction": "They share the exact same band picture — a full valence band, an empty conduction band, and a gap between them. The only distinction is quantitative: gap size relative to the thermal energy scale k_BT. A material with a 2 eV gap and one with a 5 eV gap are governed by identical physics; only the number of thermally excited carriers differs, often by many orders of magnitude."
+        },
+        {
+          "misconception": "A metal conducts better than a semiconductor simply because it has 'more free electrons available' in some raw, unqualified sense.",
+          "correction": "The key distinction is not merely electron count but whether electrons have EMPTY STATES immediately accessible in energy. A metal's partially filled or overlapping bands guarantee this at any temperature; a semiconductor's carriers must first be thermally promoted across a gap to reach the conduction band, which is why semiconductor conductivity is so much smaller and so temperature-sensitive."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "A three-panel band-diagram comparison: conductor (overlapping/partially filled bands), insulator (large gap), semiconductor (small gap) drawn to the same energy scale so the gap-size contrast is visually obvious.",
+        "A log-scale conductivity axis showing metals, semiconductors, and insulators spanning roughly 25 orders of magnitude, with silicon and germanium marked in the semiconductor region.",
+        "A conductivity-versus-temperature sketch contrasting a metal's slight downward slope with a semiconductor's steep upward (often exponential) rise, previewing the intrinsic-semiconductor concept."
+      ],
+      "worked_example_blueprint": {
+        "setup": "Given four materials with band gaps: copper (0 eV, overlapping bands), silicon (1.1 eV), diamond (5.5 eV), and germanium (0.67 eV), classify each as conductor, semiconductor, or insulator, and rank them from lowest to highest room-temperature conductivity.",
+        "steps": [
+          "Copper: zero gap / overlapping bands → always has adjacent empty states available → conductor.",
+          "Silicon (1.1 eV) and germanium (0.67 eV): both have a nonzero but relatively small gap, well within range of meaningful thermal excitation at room temperature → both semiconductors.",
+          "Diamond (5.5 eV): large gap, far beyond what room-temperature thermal energy can bridge → insulator.",
+          "Rank by expected room-temperature conductivity: copper (highest, always-available carriers) > germanium (smaller gap than silicon, more thermal carriers) > silicon (larger gap than germanium, fewer thermal carriers) > diamond (lowest, negligible carriers).",
+          "Note the reasoning pattern: within the semiconductor class, the SMALLER the gap, the MORE carriers are thermally excited at a given temperature, and the higher the intrinsic conductivity — germanium's smaller gap than silicon's is exactly why germanium was used in the earliest transistors before silicon's superior processability took over."
+        ],
+        "expected_outcome": "The student correctly classifies all four materials and produces the ranking copper > germanium > silicon > diamond, explicitly reasoning from gap size rather than from memorized labels."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "classification given band gap value",
+          "ranking exercises by expected conductivity",
+          "conceptual short-answer: why is X a semiconductor and not an insulator?"
+        ],
+        "difficulty_progression": "Start with classifying single materials given their gap, progress to ranking multiple materials, and finish with items requiring a written justification connecting gap size to k_BT and to temperature-dependence of conductivity.",
+        "suggested_count": 8
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "classification quiz",
+          "ranking exercise",
+          "short conceptual justification prompt"
+        ],
+        "bloom_alignment": "Apply — students must apply the gap-size-versus-k_BT criterion to classify and rank unfamiliar materials, not merely recite the three-category definitions.",
+        "mastery_signal": "The student correctly classifies materials from given band gap values, correctly ranks them by expected conductivity, and explains classification purely in terms of gap size relative to thermal energy rather than by rote category labels, at 75% accuracy or better."
+      },
+      "real_world_applications": [
+        "Silicon (1.1 eV) and germanium (0.67 eV) are the two materials that launched the semiconductor electronics industry — their gap sizes sit in the practical 'sweet spot' between negligible and excessive intrinsic conductivity.",
+        "Wide-band-gap semiconductors like gallium nitride (3.4 eV) and silicon carbide (3.3 eV) are increasingly used in high-power and high-temperature electronics precisely because their larger gap keeps thermally-generated leakage current low even at elevated operating temperatures.",
+        "Photovoltaic solar cell material choice is driven by band-gap matching to the solar spectrum — this classification concept is the starting point for that entire engineering discipline."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.mod.energy-bands"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "561a1ad9",
+        "kg_build_date": "2026-07-22",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "3c622ff",
+        "source_references": [
+          "NCERT Physics Class 12 Ch.14"
+        ]
+      }
+    },
+    {
+      "id": "asset.phys.mod.intrinsic-semiconductors",
+      "concept_id": "phys.mod.intrinsic-semiconductors",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to explain electron-hole pair generation in a pure (intrinsic) semiconductor, describe the hole as a genuine, independently-moving positive charge carrier rather than merely 'the absence of an electron', and explain why intrinsic conductivity rises with temperature.",
+      "concept_summary": "An INTRINSIC semiconductor is a chemically pure semiconductor crystal (pure silicon or germanium, with no deliberately added impurities). At absolute zero, its valence band is completely full and its conduction band completely empty, so it behaves exactly like an insulator — but at any temperature above zero, thermal vibrations of the lattice occasionally supply enough energy (≥ the band gap) to kick a valence electron up into the conduction band. This creates two carriers from one event, not one: the promoted ELECTRON now sits in the conduction band, free to move and contribute to current, while the EMPTY STATE it left behind in the valence band is called a HOLE. Crucially, the hole is not merely bookkeeping for 'an electron is missing here' — it behaves as a genuine, independently mobile POSITIVE charge carrier. This is because when a neighboring valence electron hops over to fill that empty state (a low-energy process, since it stays within the nearly-full valence band), the empty state itself appears to move in the opposite direction — exactly as if a positive charge carrier had moved that way. Since generating each electron-hole pair requires an energy input of at least the band gap, and the availability of that thermal energy is governed by Fermi-Dirac statistics (met already), the number of thermally generated pairs — and hence the material's conductivity — increases rapidly (roughly exponentially) as temperature rises. This is the direct opposite of a metal's temperature dependence, where conductivity FALLS with rising temperature because a metal already has abundant carriers and instead loses conductivity to increased lattice vibration scattering.",
+      "key_ideas": [
+        "An intrinsic semiconductor is a chemically pure crystal with no added impurities; at T = 0 K it behaves exactly like an insulator (full valence band, empty conduction band).",
+        "Thermal energy above absolute zero can promote a valence electron across the gap into the conduction band, creating an electron-hole PAIR — one event produces two carriers, not one.",
+        "The hole is a genuine, independently mobile POSITIVE charge carrier, not merely 'an absent electron' — as neighboring valence electrons hop to fill the empty state, the empty state itself propagates like a moving positive charge.",
+        "In an intrinsic semiconductor, electrons and holes are always created in exactly equal numbers (one pair per excitation event), so electron density n equals hole density p.",
+        "Because carrier generation requires thermal energy to bridge the gap, intrinsic conductivity rises (roughly exponentially) with temperature — the opposite of a metal, whose conductivity falls as temperature rises due to increased lattice scattering of its already-abundant carriers."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "A hole is not a real particle — it is just a convenient bookkeeping label for 'no electron is here', with no independent physical reality or motion of its own.",
+          "correction": "While a hole is not a fundamental particle like an electron, it behaves in every operationally meaningful way as a real, independently mobile positive charge: it has an effective mass, it drifts in an applied electric field in the direction opposite to electrons (i.e., along the field, like a positive charge), and it carries real electric current. Treating it as a fictional bookkeeping device leads to wrong predictions about current direction and magnitude."
+        },
+        {
+          "misconception": "Increasing temperature always makes a material a worse conductor, since 'heat causes more collisions and resistance'.",
+          "correction": "That reasoning is correct for METALS (more lattice scattering reduces the mobility of already-abundant carriers) but gives the WRONG direction for intrinsic semiconductors, where rising temperature instead generates MORE carriers (more electron-hole pairs) faster than mobility losses can offset — the net effect is that intrinsic semiconductor conductivity increases with temperature."
+        },
+        {
+          "misconception": "In an intrinsic semiconductor, electrons carry current but holes are a separate, secondary effect that barely matters.",
+          "correction": "In an intrinsic semiconductor electrons and holes are generated in EXACTLY equal numbers and both contribute meaningfully to conduction — n = p always holds for intrinsic material. Neither carrier type is secondary; ignoring hole conduction would undercount the total current by roughly half."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "An animated 'domino' diagram: a valence electron is thermally excited to the conduction band, leaving a hole; a neighboring electron then hops into that hole, and the sequence repeats, visually showing the hole 'moving' in the opposite direction to the electron hops.",
+        "A band diagram with a single upward arrow (thermal excitation, energy ≥ E_g) creating a filled circle in the conduction band (electron) and an open circle in the valence band (hole) simultaneously.",
+        "A conductivity-versus-temperature graph on a log scale for intrinsic silicon, showing the characteristic steep, roughly exponential rise, contrasted with a metal's gentle downward-sloping line on the same axes."
+      ],
+      "worked_example_blueprint": {
+        "setup": "A sample of pure (intrinsic) silicon is heated from 250 K to 400 K. Explain, using the electron-hole pair generation picture, what happens to (a) the number of electron-hole pairs, (b) the electron and hole densities relative to each other, and (c) the conductivity, and explain why this is the opposite of what happens to a copper wire over the same temperature range.",
+        "steps": [
+          "(a) Higher temperature means more thermal energy is available to bridge the 1.1 eV band gap, so more valence electrons are thermally excited into the conduction band — the number of electron-hole pairs increases with temperature, governed by Fermi-Dirac statistics.",
+          "(b) Since every excitation event creates exactly one electron and one hole, electron density n and hole density p remain equal to each other (n = p) at every temperature — both simply grow together as temperature rises.",
+          "(c) More carriers of both types directly means higher conductivity, since conductivity is proportional to carrier density (and mobility) — silicon's conductivity therefore rises substantially between 250 K and 400 K.",
+          "(d) Contrast with copper: copper already has a huge, essentially temperature-independent density of free electrons (roughly one per atom, from the overlapping-band conductor structure) — raising temperature does not create more carriers in copper, it only increases lattice vibrations that scatter the existing carriers more often, REDUCING copper's conductivity as temperature rises.",
+          "Conclude: the opposite temperature dependence arises because silicon's conductivity is CARRIER-GENERATION-LIMITED (more heat = more carriers = more conduction), while copper's is SCATTERING-LIMITED (more heat = more scattering = less conduction), with copper's carrier supply essentially fixed."
+        ],
+        "expected_outcome": "The student explains that silicon's conductivity rises with temperature because thermal generation of electron-hole pairs dominates, correctly maintains n = p throughout, and correctly attributes copper's opposite (falling) temperature dependence to scattering of an already-fixed, abundant carrier population."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "electron-hole pair generation conceptual items",
+          "hole-as-real-carrier reasoning items (current direction, drift direction)",
+          "temperature-dependence contrast items (intrinsic semiconductor vs. metal)"
+        ],
+        "difficulty_progression": "Begin with identifying electron-hole pair creation on a band diagram, move to reasoning about hole motion direction in an applied field, and finish with explaining the opposite temperature dependence of semiconductors versus metals in full physical terms.",
+        "suggested_count": 8
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "conceptual explanation prompts",
+          "diagram-based hole-motion items",
+          "temperature-dependence contrast essay item"
+        ],
+        "bloom_alignment": "Understand — students must explain electron-hole pair generation and its temperature dependence, treating the hole as a genuine carrier, without yet needing to compute carrier concentrations quantitatively (reserved for more advanced treatment beyond this concept's scope).",
+        "mastery_signal": "The student correctly explains electron-hole pair generation as a single event producing two carriers, correctly predicts hole drift direction in an applied field as that of a positive charge, and correctly contrasts the rising-with-temperature conductivity of an intrinsic semiconductor with a metal's falling conductivity, at 75% accuracy or better."
+      },
+      "real_world_applications": [
+        "Thermistors — resistors whose resistance changes sharply and predictably with temperature — exploit exactly this electron-hole pair generation mechanism and are widely used as temperature sensors in everything from ovens to car engines.",
+        "Intrinsic silicon's strong temperature sensitivity is precisely why real semiconductor devices are almost never made from pure intrinsic material — the next concept, extrinsic (doped) semiconductors, shows how doping is used to control carrier density independently of temperature for reliable device operation.",
+        "Infrared photodetectors use a closely related mechanism: an absorbed photon (rather than thermal energy) supplies the energy to generate an electron-hole pair, which is then collected as a measurable photocurrent."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.mod.semiconductor-classification",
+        "phys.stat.fermi-dirac"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "561a1ad9",
+        "kg_build_date": "2026-07-22",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "3c622ff",
+        "source_references": [
+          "NCERT Physics Class 12 Ch.14"
+        ]
+      }
+    },
+    {
+      "id": "asset.phys.mod.extrinsic-semiconductors",
+      "concept_id": "phys.mod.extrinsic-semiconductors",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to explain how doping with donor or acceptor impurities creates n-type or p-type semiconductors, correctly identify majority and minority carriers in each type, and explain why a doped semiconductor remains electrically neutral overall despite having a majority carrier.",
+      "concept_summary": "Intrinsic semiconductors are rarely used directly in devices because their carrier density is small and strongly temperature-dependent (met already). DOPING deliberately introduces a tiny, controlled concentration of impurity atoms (typically about 1 impurity atom per million host atoms) into the crystal to engineer a much larger, much more temperature-stable carrier density of a chosen sign. A DONOR impurity (e.g. phosphorus or arsenic added to silicon) has one MORE valence electron than the host atom it replaces; four of its five valence electrons bond into the crystal lattice exactly like the host atom, but the fifth is only weakly bound and is easily freed by thermal energy at room temperature, contributing a mobile electron to the conduction band WITHOUT creating a matching hole. This produces an N-TYPE semiconductor, in which electrons are the MAJORITY carrier and holes are the MINORITY carrier. An ACCEPTOR impurity (e.g. boron or gallium added to silicon) has one FEWER valence electron than the host atom; it can only form three of the four bonds the lattice expects, leaving a 'dangling bond' that readily accepts an electron from a neighboring silicon-silicon bond, thereby creating a mobile hole WITHOUT a matching free electron. This produces a P-TYPE semiconductor, in which holes are the MAJORITY carrier and electrons are the MINORITY carrier. In both cases, the crystal as a whole remains exactly electrically NEUTRAL: the donor or acceptor atom itself becomes a fixed, immobile ion (positively charged for an ionized donor, negatively charged for an ionized acceptor) that exactly balances the mobile carrier's charge — doping changes which carrier dominates conduction, not the material's overall charge.",
+      "key_ideas": [
+        "Doping introduces a tiny, controlled concentration of impurity atoms to engineer a semiconductor's carrier density and type, producing far larger and more temperature-stable conductivity than the intrinsic material alone.",
+        "A donor impurity has one more valence electron than the host atom; its extra electron is easily freed, contributing a mobile electron without creating a matching hole — this produces n-type material, with electrons as the majority carrier.",
+        "An acceptor impurity has one fewer valence electron than the host atom; it readily accepts an electron from a neighboring bond, creating a mobile hole without a matching free electron — this produces p-type material, with holes as the majority carrier.",
+        "In n-type material, electrons are majority carriers and holes are minority carriers; in p-type material, holes are majority carriers and electrons are minority carriers — both carrier types are always present, just in very unequal numbers.",
+        "A doped semiconductor is electrically NEUTRAL overall: each ionized donor (positive) or acceptor (negative) is a fixed lattice ion whose charge exactly balances the mobile carrier it released — doping changes which carrier dominates, not the net charge of the crystal."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "An n-type semiconductor is negatively charged overall (because it has 'extra' electrons), and a p-type semiconductor is positively charged overall (because it has 'extra' holes).",
+          "correction": "Both n-type and p-type material are electrically NEUTRAL as a whole. Every mobile carrier a dopant releases leaves behind a fixed, oppositely-charged ion in the lattice (a positive ion for a donor, a negative ion for an acceptor) that exactly cancels the carrier's charge across the crystal. 'n-type' and 'p-type' describe which carrier is the majority current carrier, not any net charge."
+        },
+        {
+          "misconception": "In p-type material there are no electrons at all, and in n-type material there are no holes at all.",
+          "correction": "Both carrier types are always present in both material types — doping only changes the RATIO drastically. In p-type material, holes (majority) vastly outnumber electrons (minority), and vice versa in n-type; minority carriers are few but not zero, and they matter significantly at a p-n junction, developed at the next concept."
+        },
+        {
+          "misconception": "Doping adds extra atoms on top of the existing crystal, rather than replacing host atoms within the lattice.",
+          "correction": "Dopant atoms substitute directly INTO the crystal lattice in place of a host atom (e.g., a phosphorus atom sits where a silicon atom would normally be), not as extra atoms squeezed in between. This is why the dopant's valence electron count relative to the host atom (one more for donors, one fewer for acceptors) is exactly what determines whether it releases an electron or creates a hole."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "A lattice diagram showing a phosphorus donor atom substituted into a silicon lattice: four bonds shown fully formed, the fifth valence electron drawn loosely orbiting and then freed with a dashed arrow into the conduction band, leaving a fixed '+' ion behind.",
+        "A parallel lattice diagram for a boron acceptor atom: three bonds fully formed, a dangling bond shown accepting an electron from a neighboring Si-Si bond (creating a hole there), leaving a fixed '−' ion behind.",
+        "A side-by-side n-type versus p-type summary table/diagram: majority carrier, minority carrier, fixed ion charge, and overall neutrality explicitly marked for each."
+      ],
+      "worked_example_blueprint": {
+        "setup": "Silicon (group IV, 4 valence electrons) is doped separately with (a) arsenic (group V, 5 valence electrons) and (b) gallium (group III, 3 valence electrons). For each case, determine the resulting semiconductor type, identify the majority and minority carriers, and state the sign of the fixed dopant ion once ionized.",
+        "steps": [
+          "(a) Arsenic has 5 valence electrons versus silicon's 4 — one extra electron per arsenic atom, which becomes only weakly bound. This is a DONOR impurity → n-type silicon.",
+          "In n-type silicon: majority carrier = electrons (from the freed donor electrons), minority carrier = holes (the small intrinsic population). The ionized arsenic atom, having given up its extra electron, becomes a fixed POSITIVE ion.",
+          "(b) Gallium has 3 valence electrons versus silicon's 4 — one fewer electron per gallium atom, leaving a dangling bond that accepts an electron from a neighbor. This is an ACCEPTOR impurity → p-type silicon.",
+          "In p-type silicon: majority carrier = holes (from the accepted-electron sites), minority carrier = electrons (the small intrinsic population). The ionized gallium atom, having accepted an extra electron, becomes a fixed NEGATIVE ion.",
+          "Both (a) and (b) remain electrically neutral overall: in each case the fixed ion's charge exactly cancels the mobile carrier the dopant released."
+        ],
+        "expected_outcome": "The student correctly identifies arsenic as a donor producing n-type silicon (electrons majority, positive fixed ion) and gallium as an acceptor producing p-type silicon (holes majority, negative fixed ion), and explicitly confirms overall neutrality in both cases."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "donor-vs-acceptor identification from valence electron count",
+          "majority/minority carrier identification for a given dopant",
+          "neutrality-reasoning conceptual items"
+        ],
+        "difficulty_progression": "Begin with classifying a given dopant as donor or acceptor from its valence electron count relative to the host, move to identifying majority/minority carriers and fixed ion sign, and finish with items requiring an explicit neutrality argument for a doped sample.",
+        "suggested_count": 8
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "classification and identification quiz",
+          "conceptual explanation prompt on overall neutrality"
+        ],
+        "bloom_alignment": "Apply — students must apply the donor/acceptor valence-electron rule to new dopant examples and correctly derive majority carrier, minority carrier, and fixed ion sign, not merely recall the n-type/p-type labels for silicon-boron/phosphorus specifically.",
+        "mastery_signal": "The student correctly classifies unfamiliar dopant-host pairs as donor or acceptor, correctly identifies majority and minority carriers and the sign of the resulting fixed ion, and correctly explains why the doped material remains electrically neutral overall, at 70% accuracy or better."
+      },
+      "real_world_applications": [
+        "Every silicon transistor, diode, and integrated circuit begins with precisely controlled doping — modern chip fabrication controls dopant concentration to parts-per-billion precision across nanometer-scale regions.",
+        "Solar cell efficiency depends critically on doping profile design, since the doped regions' majority/minority carrier populations directly set the device's photocurrent-generating behavior.",
+        "The n-type/p-type distinction developed here is the direct foundation for the p-n junction, the single most important building block in semiconductor electronics, developed at the next concept."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.mod.intrinsic-semiconductors"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "561a1ad9",
+        "kg_build_date": "2026-07-22",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "3c622ff",
+        "source_references": [
+          "NCERT Physics Class 12 Ch.14"
+        ]
+      }
+    },
+    {
+      "id": "asset.phys.mod.pn-junction",
+      "concept_id": "phys.mod.pn-junction",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to explain how diffusion of majority carriers across a p-n interface creates a depletion region and a built-in potential, and explain why this built-in potential exists precisely to STOP further net diffusion at equilibrium rather than to drive current.",
+      "concept_summary": "A P-N JUNCTION is formed when p-type and n-type regions meet within a single continuous silicon crystal (not two separate pieces glued together — the crystal lattice is unbroken across the junction). The moment the junction forms, a large concentration difference exists across it: the n-side has abundant free electrons and almost no holes near the interface (relatively), while the p-side has abundant holes and almost no electrons — so electrons DIFFUSE from the n-side into the p-side, and holes DIFFUSE from the p-side into the n-side, exactly as any concentration gradient drives diffusion (met already in a general context). But unlike neutral-particle diffusion, each carrier that diffuses across leaves behind a charged, IMMOBILE dopant ion (recall: donors become fixed positive ions once ionized, acceptors become fixed negative ions) and, on arrival, recombines with an opposite carrier and disappears as a mobile carrier. The result is a DEPLETION REGION straddling the junction: a narrow zone with almost no mobile carriers, but with exposed, uncompensated fixed ions — positive ions on the n-side of the boundary, negative ions on the p-side. These exposed fixed charges create an internal electric field pointing from the n-side toward the p-side (from + toward −), and hence a BUILT-IN POTENTIAL difference across the depletion region (roughly 0.6–0.7 V for silicon at room temperature). This built-in field opposes further diffusion: as more carriers try to diffuse across, the depletion region and the built-in field grow slightly, pushing back harder — the process self-limits and reaches EQUILIBRIUM when the built-in field's opposing drift current exactly balances the diffusion current, at which point net carrier flow across the junction is zero. Crucially, the built-in potential cannot be tapped by an external wire to drive current on its own (connecting a voltmeter across an isolated p-n junction reads zero) — it exists purely to enforce equilibrium, and only becomes functionally important once an external bias voltage is applied, developed at the next concept.",
+      "key_ideas": [
+        "A p-n junction forms when p-type and n-type regions meet within one continuous crystal; the large carrier concentration difference across the interface drives diffusion of electrons into the p-side and holes into the n-side.",
+        "Each carrier that diffuses across recombines and disappears, leaving behind an exposed, immobile, oppositely-signed dopant ion — positive ions exposed on the n-side of the boundary, negative ions exposed on the p-side.",
+        "This creates a DEPLETION REGION: a narrow zone straddling the junction with almost no mobile carriers, dominated instead by exposed fixed ion charge.",
+        "The exposed fixed ions create an internal electric field and a BUILT-IN POTENTIAL (≈0.6–0.7 V for silicon) across the depletion region, opposing further net diffusion.",
+        "Equilibrium is reached when the built-in field's opposing drift current exactly balances the diffusion current — net carrier flow becomes zero, and the built-in potential cannot be tapped externally to drive current on its own."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "The built-in potential of a p-n junction can be used as a tiny built-in battery — connect a wire across an isolated junction and it should drive a current.",
+          "correction": "It cannot. The built-in potential exists PRECISELY to stop further net carrier diffusion — it is an equilibrium feature, not a usable energy source. Any attempt to extract current from it (e.g. with an external wire and no other EMF source) is opposed by exactly-equal-and-opposite contact potentials at the wire-semiconductor junctions themselves, so a voltmeter across an isolated p-n junction correctly reads zero."
+        },
+        {
+          "misconception": "The depletion region is 'empty space' with literally nothing in it.",
+          "correction": "The depletion region is depleted of MOBILE carriers (electrons and holes), but it is NOT empty of charge — it contains the exposed, fixed, immobile dopant ions (positive on the n-side, negative on the p-side) left behind after mobile carriers diffused away and recombined. These fixed charges are exactly what create the built-in field."
+        },
+        {
+          "misconception": "Diffusion across the junction continues forever, or continues until all carriers have crossed over.",
+          "correction": "Diffusion is self-limiting: as carriers cross and expose more fixed ion charge, the built-in field grows and increasingly opposes further diffusion. The process reaches a stable EQUILIBRIUM (diffusion current balanced by drift current) at a finite depletion width — it does not run to completion or continue indefinitely."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "A step-by-step formation animation: uniform p and n regions joined → electrons and holes diffusing across and recombining → exposed fixed ions appearing on each side → depletion region and internal field stabilizing at equilibrium.",
+        "A charge-density and electric-field profile plotted directly beneath the depletion-region diagram, showing the positive ion layer, negative ion layer, and the resulting field pointing from n toward p.",
+        "A potential-energy diagram (band diagram bending across the junction) showing the built-in potential as a 'hill' that majority carriers must climb to diffuse further — directly connecting to the built-in field picture."
+      ],
+      "worked_example_blueprint": {
+        "setup": "Explain, step by step, what happens in the first instant after a p-type region and an n-type silicon region are brought into contact to form a p-n junction, through to the moment equilibrium is reached, and explain why the process does not continue indefinitely.",
+        "steps": [
+          "Immediately after contact: a sharp carrier concentration difference exists across the interface (abundant electrons on the n-side near the boundary, abundant holes on the p-side), so diffusion begins — electrons flow into the p-side, holes flow into the n-side.",
+          "As carriers cross, they recombine with the majority carrier on the other side and vanish as mobile carriers, exposing the fixed dopant ions they leave behind: positive ions exposed just inside the n-side of the boundary, negative ions exposed just inside the p-side.",
+          "The exposed fixed ions build up an internal electric field pointing from the n-side toward the p-side, and correspondingly a built-in potential difference.",
+          "This field opposes further diffusion by pushing electrons back toward the n-side and holes back toward the p-side (a drift current opposing the diffusion current).",
+          "As more carriers diffuse, the depletion region widens and the opposing field strengthens, until the opposing drift current grows to exactly match the diffusion current — net current becomes zero, and the system reaches equilibrium with a stable depletion width and built-in potential (~0.6–0.7 V for silicon), at which point the process stops changing, not because carriers ran out, but because the two opposing currents have balanced."
+        ],
+        "expected_outcome": "The student correctly narrates the diffusion → ion exposure → field buildup → equilibrium sequence, and explicitly explains equilibrium as diffusion current balanced by drift current rather than as carriers being exhausted."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "sequence-ordering items (formation stages of a p-n junction)",
+          "depletion-region charge and field reasoning items",
+          "equilibrium conceptual explanation prompts"
+        ],
+        "difficulty_progression": "Begin with ordering the formation stages correctly, move to identifying the sign of exposed charge and field direction in the depletion region, and finish with a full written explanation of why equilibrium is reached and why the built-in potential cannot drive external current alone.",
+        "suggested_count": 8
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "sequence/diagram-based items",
+          "conceptual explanation prompt"
+        ],
+        "bloom_alignment": "Apply — students must apply the diffusion/recombination/field mechanism to correctly predict depletion region charge distribution and explain equilibrium, going beyond recall of the term 'built-in potential'.",
+        "mastery_signal": "The student correctly describes the formation sequence of a p-n junction, correctly identifies the sign of exposed charge on each side of the depletion region, and correctly explains equilibrium as balanced diffusion and drift currents, explicitly rejecting the isolated-junction-as-battery misconception, at 70% accuracy or better."
+      },
+      "real_world_applications": [
+        "Every diode, transistor, solar cell, and LED contains at least one p-n junction — this concept is the single most consequential building block in all of semiconductor electronics.",
+        "Solar cells work by using light to generate electron-hole pairs specifically WITHIN or near the depletion region's built-in field, which then sweeps the carriers apart to produce usable current — a direct application of the built-in field developed here.",
+        "The depletion region's width can be modulated by an external voltage, which is exactly the mechanism behind diode rectification, developed at the next concept, and behind the varactor diodes used as voltage-tunable capacitors in radio-frequency circuits."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.mod.extrinsic-semiconductors"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "561a1ad9",
+        "kg_build_date": "2026-07-22",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "3c622ff",
+        "source_references": [
+          "NCERT Physics Class 12 Ch.14"
+        ]
+      }
+    },
+    {
+      "id": "asset.phys.mod.diode-rectification",
+      "concept_id": "phys.mod.diode-rectification",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to explain how forward and reverse bias change the depletion region width and current flow across a p-n junction, sketch a qualitative diode I-V characteristic, and explain half-wave rectification as a direct application of the diode's asymmetric conduction.",
+      "concept_summary": "At equilibrium (met already), a p-n junction's built-in potential exactly balances diffusion and drift, giving zero net current. Applying an external voltage upsets this balance in one of two opposite ways. FORWARD BIAS connects the external positive terminal to the p-side and negative terminal to the n-side: this pushes majority carriers TOWARD the junction (holes toward the boundary from the p-side, electrons toward the boundary from the n-side), which directly opposes and REDUCES the built-in field, NARROWING the depletion region and lowering the effective potential barrier. Once the applied voltage approaches the built-in potential (~0.6–0.7 V for silicon), majority carriers cross the junction in large and rapidly increasing numbers, so forward current rises steeply (roughly exponentially) with only a small further increase in voltage. REVERSE BIAS connects the terminals the opposite way (positive to n-side, negative to p-side): this pulls majority carriers AWAY from the junction, WIDENING the depletion region and INCREASING the effective potential barrier, which strongly suppresses majority-carrier diffusion. Only the small population of MINORITY carriers (met already: holes in n-type, electrons in p-type) can still cross, driven by the now-reinforced field, giving a tiny, nearly voltage-independent reverse saturation current — until a sufficiently large reverse voltage triggers junction breakdown, beyond this concept's normal operating scope. This asymmetry — large, rapidly rising current in one direction, vanishingly small current in the other — is exactly what makes a p-n junction diode a RECTIFIER: fed an alternating (AC) voltage, it conducts substantially only during the half-cycle that forward-biases it, passing a pulsating but single-direction (DC-like) current and blocking the opposite half-cycle almost entirely — the basis of half-wave rectification, the first stage of converting AC mains power into the DC power most electronic devices require.",
+      "key_ideas": [
+        "Forward bias (+ to p-side, − to n-side) pushes majority carriers toward the junction, opposing and reducing the built-in field, narrowing the depletion region, and allowing current to rise steeply once the applied voltage approaches the built-in potential.",
+        "Reverse bias (+ to n-side, − to p-side) pulls majority carriers away from the junction, widening the depletion region and reinforcing the barrier, suppressing majority-carrier flow almost entirely.",
+        "Under reverse bias, only the small minority-carrier population can cross, giving a tiny, nearly voltage-independent reverse saturation current — vastly smaller than the forward current at a comparable voltage magnitude.",
+        "The resulting I-V characteristic is strongly ASYMMETRIC: near-exponential current rise in forward bias, near-zero (saturating) current in reverse bias — this asymmetry is the defining behavior of a diode.",
+        "Because a diode conducts substantially in only one direction, it converts an alternating (AC) input into a pulsating single-direction output by blocking the reverse half-cycle — the basis of half-wave rectification."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "Reverse bias causes exactly zero current to flow — a reverse-biased diode is a perfect, absolute open circuit.",
+          "correction": "A reverse-biased diode carries a small but nonzero reverse saturation current, carried by minority carriers, which are always present in nonzero (if small) numbers in doped material. It is a very good, but not perfect, blocker — the current is small enough to be treated as approximately zero in many introductory circuit analyses, but it is not exactly zero, and becomes significant if reverse voltage is pushed to breakdown."
+        },
+        {
+          "misconception": "Forward bias current is carried by minority carriers, since bias is meant to 'push carriers across' regardless of type.",
+          "correction": "Forward-bias current is dominated by MAJORITY carriers: forward bias pushes the already-abundant majority carrier of each side (electrons on the n-side, holes on the p-side) toward and across the junction, which is exactly why forward current can be so much larger than the minority-carrier-limited reverse current."
+        },
+        {
+          "misconception": "A single diode converts AC into smooth, constant DC on its own.",
+          "correction": "A single diode performs half-wave RECTIFICATION — it removes (blocks) one half of the AC cycle, producing a pulsating, one-directional but still time-varying output, not smooth constant DC. Producing smooth DC additionally requires filtering (e.g. a capacitor) and, for full-wave rectification, typically more than one diode (a bridge rectifier) — extensions beyond this concept's core scope."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "Two side-by-side depletion-region diagrams under forward bias (narrow) and reverse bias (wide), with arrows showing majority carrier motion toward or away from the junction in each case.",
+        "A diode I-V characteristic curve: near-zero, flat current for negative (reverse) voltage, then a steep near-exponential rise for positive (forward) voltage beyond roughly the 0.6–0.7 V knee, drawn on a single labeled axis.",
+        "A half-wave rectifier circuit and waveform diagram: a sinusoidal AC input alongside the resulting pulsating output, with the diode symbol and the blocked half-cycle explicitly shaded out."
+      ],
+      "worked_example_blueprint": {
+        "setup": "A silicon diode (built-in potential ≈0.7 V) is connected in series with a resistor across a 5 V AC source. Sketch and explain the current through the circuit during (a) the half-cycle where the source forward-biases the diode, and (b) the half-cycle where the source reverse-biases it, and explain the resulting output waveform shape.",
+        "steps": [
+          "(a) During the forward-biasing half-cycle, once the source voltage exceeds the diode's ~0.7 V threshold, the depletion region narrows and majority carriers flow readily — current rises steeply and flows through the resistor, closely tracking the source voltage (minus the roughly constant ~0.7 V diode drop) for the remainder of that half-cycle.",
+          "(b) During the reverse-biasing half-cycle, the depletion region widens and only the tiny minority-carrier reverse saturation current flows — for circuit purposes this is well-approximated as zero current through the resistor.",
+          "(c) The output across the resistor therefore looks like the positive lobes of the original sine wave (slightly reduced by the ~0.7 V diode drop) during forward-bias half-cycles, and flat at approximately zero during reverse-bias half-cycles — a pulsating, single-direction waveform rather than the original smooth AC sine wave.",
+          "This pulsating one-directional output is exactly the defining signature of half-wave rectification: the negative half of every cycle has been removed, converting a bidirectional AC signal into a unidirectional (though still time-varying) one."
+        ],
+        "expected_outcome": "The student correctly identifies that current flows (following the source, minus ~0.7 V) only during forward-bias half-cycles and is effectively blocked during reverse-bias half-cycles, and correctly sketches/describes the resulting pulsating, one-directional output waveform as the half-wave rectified signal."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "forward/reverse bias identification from a given circuit polarity",
+          "qualitative I-V characteristic sketching/labeling",
+          "half-wave rectifier waveform prediction items"
+        ],
+        "difficulty_progression": "Begin with identifying forward vs. reverse bias from circuit polarity, move to labeling/sketching the diode I-V characteristic, and finish with predicting the output waveform of a half-wave rectifier circuit given an AC input.",
+        "suggested_count": 10
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "circuit-polarity identification quiz",
+          "I-V characteristic sketch/labeling task",
+          "waveform prediction item"
+        ],
+        "bloom_alignment": "Analyze — students must analyze circuit bias conditions and predict resulting current/waveform behavior from the underlying depletion-region mechanism, integrating the full chain from doping through junction formation to rectification.",
+        "mastery_signal": "The student correctly identifies forward versus reverse bias from circuit polarity, correctly sketches the asymmetric diode I-V characteristic, and correctly predicts the pulsating, single-direction output waveform of a half-wave rectifier given an AC input, at 70% accuracy or better."
+      },
+      "real_world_applications": [
+        "Every AC-to-DC power adapter (phone chargers, laptop power supplies) begins with diode rectification — typically a full-wave bridge rectifier built from four diodes, extending this concept's single-diode half-wave case.",
+        "Diode rectification in radio receivers historically enabled AM demodulation, extracting the audio signal envelope from a radio-frequency carrier wave.",
+        "Diode I-V nonlinearity (the same asymmetric behavior developed here) is also the basis of protective circuit elements, such as diodes used to prevent reverse-voltage damage to sensitive electronics."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.mod.pn-junction"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "561a1ad9",
+        "kg_build_date": "2026-07-22",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "3c622ff",
+        "source_references": [
+          "NCERT Physics Class 12 Ch.14"
+        ]
+      }
     }
   ]
 }
