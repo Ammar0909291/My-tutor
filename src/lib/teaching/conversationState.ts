@@ -55,6 +55,9 @@ export interface ConversationState {
   exampleRequests: number
   misconceptionDetectedThisLesson: boolean
   consecutivePriorKnowledgeProbes: number
+  /** Never resets — permanent high-water mark. Catches abbreviated probes
+   *  ("GPS?", "Maps?") that CPK misses when LLM evades the formal pattern. */
+  totalKnowledgeProbes: number
   strategiesUsed: number[]
   analogiesUsed: string[]
   demonstrationsShown: string[]
@@ -80,6 +83,7 @@ export function initialConversationState(conceptId: string | null): Conversation
     exampleRequests: 0,
     misconceptionDetectedThisLesson: false,
     consecutivePriorKnowledgeProbes: 0,
+    totalKnowledgeProbes: 0,
     strategiesUsed: [],
     analogiesUsed: [],
     demonstrationsShown: [],
@@ -190,9 +194,13 @@ export function advanceConversationState(
 
   // P0-4: consecutive prior-knowledge-probe counter — folded unconditionally
   // like the Phase E counters above, independent of which branch follows.
+  // totalKnowledgeProbes is monotonically increasing — never reset — so
+  // abbreviated probes ("GPS?", "Maps?") that fall outside PRIOR_KNOWLEDGE_PROBE_RE
+  // cannot erase the high-water mark the formal probes built up.
   next.consecutivePriorKnowledgeProbes = evidence.isPriorKnowledgeProbe
     ? prev.consecutivePriorKnowledgeProbes + 1
     : 0
+  next.totalKnowledgeProbes = (prev.totalKnowledgeProbes ?? 0) + (evidence.isPriorKnowledgeProbe ? 1 : 0)
 
   // Bug 5/6/11 — student-state counters for explicit action requests.
   if (evidence.learnerRequest === 'diagram') next.diagramRequests = prev.diagramRequests + 1
@@ -296,6 +304,12 @@ export interface NextMoveContext {
 export function decideNextMove(state: ConversationState, ctx: NextMoveContext): NextMove {
   // Recovery preempts — the recovery script already forbids questions.
   if (ctx.recoveryTurn) return 'teach'
+  // Permanent gate: after 2 total prior-knowledge probes the inquiry phase
+  // is definitively over. Unlike CPK, this counter never resets, so
+  // abbreviated probes that fall outside PRIOR_KNOWLEDGE_PROBE_RE cannot
+  // reset the gate once 2 formal probes have been seen. A human tutor stops
+  // asking "have you seen X?" after the student has said "no" twice.
+  if ((state.totalKnowledgeProbes ?? 0) >= 2) return 'show'
   // P0-4: semantic loop break — the same underlying question, reworded,
   // twice in a row. More specific than the generic question budget below
   // (which only counts, never recognizes repeated INTENT), so it is

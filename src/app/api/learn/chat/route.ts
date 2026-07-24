@@ -1030,9 +1030,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // Wave 1 (Runtime Guardian): the authored HOW for the action
             // decide() just selected — retrieved from the Brain's action
             // catalog / repair sequence instead of improvised per turn.
+            // Bug 1 fix: only inject INTERACTIVE_QUESTIONING procedure when
+            // the server-decided next move is 'ask'. On 'teach' and 'show'
+            // turns the TURN DIRECTIVE (injected below) forbids questions —
+            // the action procedure contradicted it and the LLM followed the
+            // earlier specific instruction, ignoring the later prohibition.
             {
               const { buildActionProcedureBlock } = await import('@/lib/teaching/actionProcedures')
-              systemPrompt += buildActionProcedureBlock(decision.action_type)
+              const { readConversationState: _readCS, decideNextMove: _decideMove } = await import('@/lib/teaching/conversationState')
+              // Use the raw contextSnapshot (outer scope) — the inner `snapshot`
+              // here is TeachingMemorySnapshot, which has no conversationState.
+              const _rawCtx = learnSession.contextSnapshot as Record<string, unknown> | null
+              const _earlyState = _readCS(_rawCtx?.conversationState, activeConceptIdForDecide)
+              const _earlyMove = _decideMove(_earlyState, {
+                recoveryTurn: false, // recoveryKeyHoisted not yet computed; recovery block overrides at end anyway
+                workedExampleFirst: snapshotSessionFailureCount >= 2 || strategyHoisted === 'FOUNDATION_REBUILD',
+              })
+              if (_earlyMove === 'ask') {
+                systemPrompt += buildActionProcedureBlock(decision.action_type)
+              }
             }
           }
 

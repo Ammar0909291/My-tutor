@@ -297,6 +297,31 @@ describe('scenario 9 — semantic question loop (paraphrased, not exact wording)
     expect(s.consecutivePriorKnowledgeProbes).toBe(2)
   })
 
+  it('totalKnowledgeProbes never resets — permanent gate fires even after an abbreviated probe resets CPK', () => {
+    // Simulates the failing transcript: formal probes → abbreviated probe (CPK resets) →
+    // must still be blocked from asking. The LLM uses "GPS?" instead of
+    // "Have you seen GPS?" after the TURN DIRECTIVE suppresses formal probes;
+    // CPK would drop to 0 for "GPS?" (regex miss) but totalKnowledgeProbes
+    // holds the high-water mark and the permanent gate keeps firing 'show'.
+    let s = initialConversationState('c')
+    // Turn 1 & 2: formal probes — CPK=2, total=2
+    s = playTurns(s, [
+      { asked: true, correct: null, priorKnowledgeProbe: true },  // "Have you seen vectors?"
+      { asked: true, correct: null, priorKnowledgeProbe: true },  // "Have you seen forces?"
+    ])
+    expect(s.consecutivePriorKnowledgeProbes).toBe(2)
+    expect(s.totalKnowledgeProbes).toBe(2)
+    expect(decideNextMove(s, { recoveryTurn: false, workedExampleFirst: false })).toBe('show')
+
+    // Turn 3: abbreviated probe ("GPS?") — CPK resets to 0 (regex miss), but total stays at 2
+    s = playTurns(s, [{ asked: true, correct: null, priorKnowledgeProbe: false }])
+    expect(s.consecutivePriorKnowledgeProbes).toBe(0)
+    expect(s.totalKnowledgeProbes).toBe(2)  // never decremented
+
+    // Permanent gate still fires — abbreviated probes cannot erase it
+    expect(decideNextMove(s, { recoveryTurn: false, workedExampleFirst: false })).toBe('show')
+  })
+
   it('the turn directive names the semantic loop specifically when it is what forced SHOW', () => {
     let s = initialConversationState('c')
     s = playTurns(s, [
