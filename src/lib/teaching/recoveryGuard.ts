@@ -62,6 +62,10 @@ const STRONG_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   // ignorance, they are objecting to being asked again ("I SAID NO",
   // "no no no", "how many times", "for the third time", "ugh", "omg").
   ['frustrated', /\bi\s+(already\s+)?(said|told\s+you)\s+no\b/i],
+  // "I already told you", "I already said", "I told you already [yes/that/so]"
+  // — objecting to being re-asked, regardless of what word follows "already".
+  ['frustrated', /\bi\s+already\s+(said|told(\s+you)?)\b/i],
+  ['frustrated', /\bi\s+(said|told\s+you)\s+already\b/i],
   ['frustrated', /\b(no[.,!]*\s+){2,}no\b/i],
   ['frustrated', /\bhow\s+many\s+times\b/i],
   ['frustrated', /\bfor\s+the\s+(second|third|fourth|fifth|\d+(st|nd|rd|th))\s+time\b/i],

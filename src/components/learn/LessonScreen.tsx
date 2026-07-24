@@ -1559,6 +1559,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // Real answer arrived — reset the consecutive-failure escalation counter.
       consecutiveTurnFailuresRef.current = 0
       let full = data.text
+      // Defense-in-depth: strip any <!--SIGNAL.../> tag that survived
+      // server-side stripping (e.g. regex edge case or dynamic-import failure).
+      // The tag is machine-internal metadata — it must never reach the UI.
+      full = full.replace(/<!--\s*SIGNAL\s+[\s\S]*?(?:-->|\/>)/gi, '').trimEnd()
       const provider = data.provider
       const responseVisual = data.visual
       // Lesson-sync bug fix: reconcile the Roadmap/Learn Panel to the exact
