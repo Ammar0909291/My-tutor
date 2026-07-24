@@ -358,6 +358,10 @@ export async function POST(req: Request) {
     let selectedStrategyHoisted: number | null = null
     let retrievalCacheHoisted: import('@/lib/teaching/retrievalCache').RetrievalCache | null = null
     let conversationDecisionHoisted: import('@/lib/teaching/conversationDecision').ConversationDecision | null = null
+    // Option B — Teaching Sequence Executor (physics only): the runtime-
+    // selected current step, persisted at end of turn so the next turn
+    // resumes from it instead of restarting or improvising.
+    let teachingStepUpdateHoisted: { teachingStepIndex: number; teachingStepConceptId: string } | null = null
 
     // Visual learning aids for SUBJECT_LIBRARY subjects — Sprint BW
     // detectVisual()/buildVisualsSystemBlock(), scoped to the Library lesson's
@@ -913,7 +917,47 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                     misconceptions: ebContext.antiAnalogies,
                   })
                 }
-                const block = buildBlueprintContextBlock(contentResult.content, ebContext)
+
+                // Option B — Teaching Sequence Executor (physics only): the
+                // runtime, not the LLM, decides which authored step is
+                // current. See src/lib/teaching/teachingSequenceExecutor.ts.
+                // firstLessonGuard's own block (injected later, and whose
+                // text already declares it "OVERRIDES ANY CONFLICTING
+                // GUIDANCE ABOVE") takes precedence by the existing
+                // block-ordering convention when both apply — no extra
+                // gating is needed here.
+                let currentStepBlock: string | null = null
+                const {
+                  hasTeachingPlan, readTeachingStepIndex, advanceTeachingStepIndex,
+                  buildTeachingStepContract, renderTeachingStepContractBlock,
+                } = await import('@/lib/teaching/teachingSequenceExecutor')
+                if (hasTeachingPlan(ebContext)) {
+                  // Read directly from learnSession.contextSnapshot rather than
+                  // the outer `snapshot` binding — this block later declares
+                  // its own `const snapshot` (teaching memory snapshot), whose
+                  // block-scoped TDZ shadows the outer variable for the whole
+                  // enclosing block, not just after its declaration line.
+                  const rawSnapshot = learnSession.contextSnapshot as Record<string, unknown> | null
+                  const { stepIndex: priorStepIndex, isFirstTurnOfConcept } =
+                    readTeachingStepIndex(rawSnapshot, activeConceptIdForDecide)
+                  const priorLastSignal = (rawSnapshot?.lastSignal && typeof rawSnapshot.lastSignal === 'object')
+                    ? rawSnapshot.lastSignal as { correctness?: boolean; confusion?: boolean }
+                    : null
+                  // A freshly-changed concept always starts at DISCOVERY,
+                  // regardless of a stale lastSignal left over from the
+                  // previous concept.
+                  const nextStepIndex = isFirstTurnOfConcept
+                    ? 0
+                    : advanceTeachingStepIndex(priorStepIndex, priorLastSignal)
+                  const contract = buildTeachingStepContract(ebContext!, nextStepIndex, isFirstTurnOfConcept)
+                  currentStepBlock = renderTeachingStepContractBlock(contract)
+                  teachingStepUpdateHoisted = {
+                    teachingStepIndex: nextStepIndex,
+                    teachingStepConceptId: activeConceptIdForDecide,
+                  }
+                }
+
+                const block = buildBlueprintContextBlock(contentResult.content, ebContext, currentStepBlock)
                 if (block) systemPrompt += block
               }
             }
@@ -2864,7 +2908,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             })
           } catch { /* spine is strictly parallel — never affects the turn */ }
 
-          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0) {
+          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0 || teachingStepUpdateHoisted) {
             // Atomic JSONB merge (same pattern as the school snapshot above).
             const libSnapshotDelta = {
               ...(conceptChanged ? { currentConceptNodeId: newLibConceptId } : {}),
@@ -2873,6 +2917,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               ...episodeUpdate,
               ...failureCountUpdate,
               ...conversationStateUpdate,
+              // Option B — Teaching Sequence Executor: persist the runtime-
+              // selected step so the next turn (or a resumed session) reads
+              // it back via readTeachingStepIndex() instead of restarting.
+              ...(teachingStepUpdateHoisted ?? {}),
             }
             prisma.$executeRaw`
               UPDATE "LearnSession"

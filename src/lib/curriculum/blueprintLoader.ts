@@ -1050,11 +1050,18 @@ export function loadBlueprintContent(conceptId: string): BlueprintContentResult 
  * Pass `ebContext` (TQ-1/TQ-2) to also inject recovery notes, anti-analogies,
  * voice detection cues, and the opening scenario from the EB Concept Entry.
  *
+ * Pass `currentStepBlock` (Option B — Teaching Sequence Executor,
+ * src/lib/teaching/teachingSequenceExecutor.ts) to replace the full
+ * "PHYSICS TEACHING PLAN" advisory dump with the runtime-selected CURRENT
+ * step only. When omitted, the full advisory dump is used as before
+ * (non-physics concepts, or physics concepts without a Teaching Plan).
+ *
  * Returns an empty string when content is empty (e.g. old-format blueprint).
  */
 export function buildBlueprintContextBlock(
   content: BlueprintContent,
   ebContext?: EBConceptContext | null,
+  currentStepBlock?: string | null,
 ): string {
   const lines: string[] = []
   let hasContent = false
@@ -1174,7 +1181,21 @@ export function buildBlueprintContextBlock(
     ebContext?.discoveryQuestions ||
     ebContext?.assessmentSignals
 
-  if (hasPhysicsPlan) {
+  // Option B (Teaching Sequence Executor): when the runtime has already
+  // selected a current step, inject ONLY that step's contract — never the
+  // full sequence, never future steps. This is what turns the plan from
+  // advisory text (LLM free to explain before discovery, skip/repeat steps)
+  // into an executed, one-step-at-a-time contract. Falls back to the full
+  // advisory dump when no contract is available, preserving existing
+  // behavior for non-physics concepts and physics concepts without a plan.
+  if (currentStepBlock) {
+    if (!hasContent) {
+      lines.push('\n\nBLUEPRINT CONTEXT')
+      lines.push(`Concept: ${content.conceptId}`)
+      hasContent = true
+    }
+    lines.push(currentStepBlock)
+  } else if (hasPhysicsPlan) {
     if (!hasContent) {
       lines.push('\n\nBLUEPRINT CONTEXT')
       lines.push(`Concept: ${content.conceptId}`)
