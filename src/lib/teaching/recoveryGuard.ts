@@ -75,6 +75,20 @@ const STRONG_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   // kept to unambiguous words to avoid false-firing on incidental subject
   // content (history/literature can legitimately mention milder words).
   ['frustrated', /\b(fuck(?:ing)?|shit|wtf|bullshit)\b/i],
+  // P2 (universal fix): bare question-marks — complete confusion, nothing
+  // the student can contribute; treat as confused, not dont_know (the
+  // distinction: confused means "I'm lost", dont_know means "I have no
+  // information" — ??? signals the former).
+  ['confused',          /^\?{2,}[!?.…\s]*$/],
+  // P2: explicit "you take over" imperatives — the student is not confused
+  // about the concept; they're objecting to the Socratic method and asking
+  // for direct instruction. Map to too_many_questions (stop asking, teach
+  // directly). Whole-message anchored to avoid catching "can you explain
+  // why gravity..." mid-sentence.
+  ['too_many_questions', /^(just\s+)?(you|u)\s+(explain|tell\s+me|show\s+me)[.!?\s]*$/i],
+  ['too_many_questions', /^just\s+(tell|show|explain)\s+(me|it|us)[.!?\s]*$/i],
+  ['too_many_questions', /^(re\s*[-–]?\s*explain|explain\s+again|explain\s+it\s+again|explain\s+that\s+again)[.!?\s]*$/i],
+  ['too_many_questions', /^(just\s+)?(tell|show)\s+(me|us)\s+(the\s+answer|what\s+it\s+is|how\s+it\s+works)[.!?\s]*$/i],
 ]
 
 const MILD_PATTERNS: Array<[FailureStateKey, RegExp]> = [
