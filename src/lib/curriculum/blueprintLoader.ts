@@ -172,6 +172,27 @@ export interface EBConceptContext {
    * lesson opening with a concrete scenario before any formal definition.
    */
   openingScenario: string | null
+  /**
+   * Physics-only (P1): Step-by-step teaching order from "## Teaching Sequence"
+   * or "## Teaching actions". Raw authored text — inject verbatim as the
+   * sequence the tutor must follow for this concept.
+   */
+  teachingSequence: string | null
+  /**
+   * Physics-only (P1): Authored action dispatch table from "## Tutor Actions".
+   * Maps student state to specific teaching action (e.g. WORKED-EXAMPLE, ANALOGY).
+   */
+  tutorActions: string | null
+  /**
+   * Physics-only (P1): Questions to draw from, from "## Discovery Questions"
+   * or "## Discovery lesson". Used as the authored question bank for this concept.
+   */
+  discoveryQuestions: string | null
+  /**
+   * Physics-only (P1): What to watch for — mastery gate cues from
+   * "## Assessment Signals" or "## Assessment".
+   */
+  assessmentSignals: string | null
 }
 
 export type EBConceptContextResult =
@@ -641,20 +662,27 @@ function extractComponentMisconceptions(content: string): MisconceptionEntry[] {
 
 /**
  * Returns the raw text of the first matching `## SectionName` block.
- * Accepts an array of alternative heading names to support both the older
- * EB authoring format (Deliveries 5–14) and the newer EDUCATIONAL_BRAIN_STANDARD.md
- * 21-section schema (Batch 4+ entries). Tries each candidate in order.
+ * Accepts an array of alternative heading names to support all three EB formats:
+ *   - New STANDARD (Batch 4+): plain title, e.g. `## Teaching Sequence`
+ *   - Old plain (Deliveries 5–14): plain title, e.g. `## Teaching actions`
+ *   - Old numbered (some physics): numbered, e.g. `## 9. Teaching Actions (dispatch table)`
+ * Each candidate is tried as both a plain match and a `\d+\. <candidate>` match.
  */
 function extractEBSection(content: string, ...sectionTitles: string[]): string | null {
   for (const sectionTitle of sectionTitles) {
-    const startRe = new RegExp(`^## ${sectionTitle}\\s*\\n`, 'mi')
-    const startMatch = startRe.exec(content)
-    if (!startMatch) continue
-    const afterStart = content.slice(startMatch.index + startMatch[0].length)
-    // End at the next ## heading.
-    const endMatch = /^## /m.exec(afterStart)
-    const raw = endMatch ? afterStart.slice(0, endMatch.index).trim() : afterStart.trim()
-    if (raw.length > 0) return raw
+    // Try plain heading first, then numbered prefix variant.
+    const patterns = [
+      new RegExp(`^## ${sectionTitle}\\s*\\n`, 'mi'),
+      new RegExp(`^## \\d+\\.\\s+${sectionTitle}[^\\n]*\\n`, 'mi'),
+    ]
+    for (const startRe of patterns) {
+      const startMatch = startRe.exec(content)
+      if (!startMatch) continue
+      const afterStart = content.slice(startMatch.index + startMatch[0].length)
+      const endMatch = /^## /m.exec(afterStart)
+      const raw = endMatch ? afterStart.slice(0, endMatch.index).trim() : afterStart.trim()
+      if (raw.length > 0) return raw
+    }
   }
   return null
 }
@@ -806,6 +834,54 @@ function parseEBOpeningScenario(content: string): string | null {
   return null
 }
 
+// ── Physics P1: Teaching Sequence / Tutor Actions / Discovery / Assessment ───
+
+/**
+ * P1 (physics-only): Extracts the teaching sequence / teaching actions section.
+ * All three format variants are tried in order:
+ *   New:     "## Teaching Sequence"
+ *   Old:     "## Teaching actions"
+ *   Numbered:"## 9. Teaching Actions (...)"
+ * Returns the raw authored text, trimmed to ≤600 chars to stay within budget.
+ */
+function parseEBTeachingSequence(content: string): string | null {
+  const raw = extractEBSection(content, 'Teaching Sequence', 'Teaching actions', 'Teaching Actions')
+  if (!raw) return null
+  return raw.slice(0, 600).trim()
+}
+
+/**
+ * P1 (physics-only): Extracts the Tutor Actions dispatch block (new format only).
+ * Old format embeds actions inside the Teaching actions section; new format has
+ * a dedicated "## Tutor Actions" block with compact WORKED-EXAMPLE / ANALOGY
+ * dispatch notation. Returns null if absent (graceful for old-format entries).
+ */
+function parseEBTutorActions(content: string): string | null {
+  const raw = extractEBSection(content, 'Tutor Actions')
+  if (!raw) return null
+  return raw.slice(0, 400).trim()
+}
+
+/**
+ * P1 (physics-only): Extracts discovery questions / discovery lesson.
+ * Returns the authored question bank for this concept (raw text, ≤500 chars).
+ */
+function parseEBDiscoveryQuestions(content: string): string | null {
+  const raw = extractEBSection(content, 'Discovery Questions', 'Discovery lesson', 'Discovery Lesson')
+  if (!raw) return null
+  return raw.slice(0, 500).trim()
+}
+
+/**
+ * P1 (physics-only): Extracts assessment signals / mastery gate cues.
+ * Returns the authored mastery-gate description for this concept (≤500 chars).
+ */
+function parseEBAssessmentSignals(content: string): string | null {
+  const raw = extractEBSection(content, 'Assessment Signals', 'Assessment')
+  if (!raw) return null
+  return raw.slice(0, 500).trim()
+}
+
 // ── Public API — EB Concept Entry (TQ-1 / TQ-2) ──────────────────────────────
 
 /**
@@ -832,6 +908,8 @@ export function loadEBConceptContext(conceptId: string): EBConceptContextResult 
 
   try {
     const { shrinkTo, triggers } = parseEBRecoveryNotes(raw)
+    // P1: physics-only teaching plan fields — zero cost for non-physics concepts.
+    const isPhysics = conceptId.startsWith('phys.')
     const context: EBConceptContext = {
       conceptId,
       recoveryShrinkTo: shrinkTo,
@@ -839,6 +917,10 @@ export function loadEBConceptContext(conceptId: string): EBConceptContextResult 
       antiAnalogies: parseEBAntiAnalogies(raw),
       voiceDetectionCues: parseEBVoiceDetectionCues(raw),
       openingScenario: parseEBOpeningScenario(raw),
+      teachingSequence: isPhysics ? parseEBTeachingSequence(raw) : null,
+      tutorActions: isPhysics ? parseEBTutorActions(raw) : null,
+      discoveryQuestions: isPhysics ? parseEBDiscoveryQuestions(raw) : null,
+      assessmentSignals: isPhysics ? parseEBAssessmentSignals(raw) : null,
     }
     ebContextCache.set(conceptId, context)
     return { found: true, context }
@@ -1082,6 +1164,38 @@ export function buildBlueprintContextBlock(
     }
     for (const t of ebContext!.recoveryTriggers) {
       lines.push(`${t.label}: ${t.text}`)
+    }
+  }
+
+  // P1 — Physics Teaching Plan (Teaching Sequence + Tutor Actions + Discovery + Assessment)
+  const hasPhysicsPlan =
+    ebContext?.teachingSequence ||
+    ebContext?.tutorActions ||
+    ebContext?.discoveryQuestions ||
+    ebContext?.assessmentSignals
+
+  if (hasPhysicsPlan) {
+    if (!hasContent) {
+      lines.push('\n\nBLUEPRINT CONTEXT')
+      lines.push(`Concept: ${content.conceptId}`)
+      hasContent = true
+    }
+    lines.push('\nPHYSICS TEACHING PLAN — follow this authored expert sequence for this concept:')
+    if (ebContext!.teachingSequence) {
+      lines.push('\nTEACHING SEQUENCE (follow this order — do not invent a different order):')
+      lines.push(ebContext!.teachingSequence)
+    }
+    if (ebContext!.tutorActions) {
+      lines.push('\nTUTOR ACTIONS (use these specific actions for this concept):')
+      lines.push(ebContext!.tutorActions)
+    }
+    if (ebContext!.discoveryQuestions) {
+      lines.push('\nDISCOVERY QUESTIONS (draw from this authored bank — do not invent new ones when these are provided):')
+      lines.push(ebContext!.discoveryQuestions)
+    }
+    if (ebContext!.assessmentSignals) {
+      lines.push('\nMASTERY SIGNALS (what mastery looks like for this specific concept):')
+      lines.push(ebContext!.assessmentSignals)
     }
   }
 
