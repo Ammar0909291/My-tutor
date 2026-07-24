@@ -14,7 +14,7 @@ and this file's summary row should be corrected to match.
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
-| chemistry | 186 | 136 | levels 0–14 complete (136/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock, chem.redox, chem.dblock, chem.org, chem.pblock, chem.solid, chem.hyd, chem.hal, chem.coord — IN PROGRESS |
+| chemistry | 186 | 148 | levels 0–15 complete (148/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock, chem.redox, chem.dblock, chem.org, chem.pblock, chem.solid, chem.hyd, chem.hal, chem.coord, chem.nitro — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
 
@@ -1288,3 +1288,22 @@ future sessions resume the program's default cross-subject priority
 order (see `ROADMAP.md` §5) unless given an equally explicit,
 subject-specific override, exactly as this wave-24 physics campaign
 itself began.
+### Batch 29 — Chemistry level 14 (2026-07-23)
+Authored 15 level-14 concepts in topological order: `chem.coord.applications`, `chem.coord.bonding`, `chem.coord.isomerism`, `chem.dblock.organometallics`, `chem.elect.batteries`, `chem.elect.corrosion`, `chem.elect.electrolysis`, `chem.elect.standard-electrode`, `chem.hal.introduction`, `chem.hyd.arenes`, `chem.hyd.conformations`, `chem.hyd.petroleum`, `chem.org.reactive-intermediates`, `chem.sblock.water`, `chem.state.liquids`. Chemistry: 121 → 136/186.
+
+### Batch 30 — Chemistry level 15 (2026-07-24)
+Authored 12 level-15 Chemistry Educational Brain entries in strict topological order:
+- `chem.elect.industrial` — Hall-Héroult, Down's cell, chloralkali, electroplating, electrorefining
+- `chem.elect.nernst` — Nernst equation, concentration cells, pH/ISE applications
+- `chem.hal.cfcs` — DCM, CHCl₃, CCl₄, iodoform test, CFC ozone depletion, Montreal Protocol, HCFCs/HFCs/HFOs
+- `chem.hal.haloarenes` — C–X partial double-bond character, resistance to SN, SNAr/Meisenheimer, Dow process, o/p-directing deactivators
+- `chem.hal.sn1` — two-step ionisation/attack, racemisation, factors, 1,2-shifts
+- `chem.hal.sn2` — concerted backside attack, Walden inversion, substrate/solvent/nucleophile effects, applications
+- `chem.hyd.polycyclic` — naphthalene/anthracene/phenanthrene EAS selectivity; pyridine/pyrrole/furan/thiophene aromaticity and reactivity; purines/pyrimidines
+- `chem.nitro.nitro-compounds` — nitro group structure, meta-direction, reduction ladder (Sn/HCl vs. Zn/NH₄Cl), nitronium electrophile, TNT
+- `chem.org.mechanisms` — NERP classification, curved-arrow conventions, bond cleavage types, mechanism identification from conditions
+- `chem.sol.vapour-pressure` — Raoult's law, vapour pressure lowering, ideal/non-ideal deviations, colligative property tree
+- `chem.state.phase-diagram` — P–T diagram features, triple point, critical point, water's negative fusion slope, CO₂ diagram, Clausius-Clapeyron
+- `chem.surface.surfactants` — amphiphilic structure, CMC, micelle formation (hydrophobic effect = entropic), surfactant types, detergency mechanism, HLB
+
+Chemistry total: 136 → 148 / 186 (79.57%). Level 15 complete.
