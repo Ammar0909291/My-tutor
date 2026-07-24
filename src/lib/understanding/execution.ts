@@ -59,6 +59,7 @@ export interface ExecutionBlockOptions {
   retrievedSnippet?: string
   teachingGoal?: string
   strategyLabel?: string
+  conversationDirective?: string
 }
 
 /**
@@ -75,11 +76,16 @@ export function buildBrainExecutionBlock(
     if (!plan || plan.executor !== 'LLM_RENDERER') return ''
     const role = RENDER_ROLES[plan.decision]
     if (!role) return ''
-    const lines: string[] = [
-      '\n\nBRAIN DECISION (authoritative — Brain decided; do NOT choose a different action/topic):',
+    const lines: string[] = []
+    if (opts?.conversationDirective) {
+      lines.push('\n\n' + opts.conversationDirective)
+    }
+    lines.push(
+      (opts?.conversationDirective ? '\n' : '\n\n') +
+      'BRAIN DECISION (authoritative — Brain decided; do NOT choose a different action/topic):',
       `- Decision: ${plan.decision} (${decision.ruleId})`,
       `- ${role.directive}`,
-    ]
+    )
     const p = decision.parameters ?? {}
     if (plan.decision === 'REVIEW_PREREQUISITE' && p.prerequisiteId) {
       lines.push(`- Prerequisite: ${p.prerequisiteId}`)

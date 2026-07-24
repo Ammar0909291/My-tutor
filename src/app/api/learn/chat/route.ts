@@ -357,6 +357,7 @@ export async function POST(req: Request) {
     let teachingHistoryHoisted: import('@/lib/teaching/teachingHistory').TeachingHistory | null = null
     let selectedStrategyHoisted: number | null = null
     let retrievalCacheHoisted: import('@/lib/teaching/retrievalCache').RetrievalCache | null = null
+    let conversationDecisionHoisted: import('@/lib/teaching/conversationDecision').ConversationDecision | null = null
 
     // Visual learning aids for SUBJECT_LIBRARY subjects — Sprint BW
     // detectVisual()/buildVisualsSystemBlock(), scoped to the Library lesson's
@@ -1687,6 +1688,27 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const teachingDecision = decideTeaching(understanding)
         cueDecisionHoisted = teachingDecision
         console.log('[learn/chat] CUE decision=' + JSON.stringify(teachingDecision))
+
+        // Conversation Decision — classify the student's message BEFORE
+        // any teaching decision. Every student message must first produce
+        // a conversation decision that the renderer acknowledges before
+        // teaching. Pipeline: Student → Understand → ConvDecision → TeachDecision → Render
+        try {
+          const { classifyConversation } = await import('@/lib/teaching/conversationDecision')
+          conversationDecisionHoisted = classifyConversation(message, {
+            recoveryKey: recoveryKeyHoisted,
+            studentIntent: understanding.studentIntent.value,
+            lastAssistantAskedQuestion: understanding.conversationSummary.lastAssistantAskedQuestion,
+            lastSignalCorrectness: understanding.confidence.source === 'signals:lastSignal'
+              ? (cueLastSignal?.correctness ?? null)
+              : null,
+            hedged: understanding.conversationSummary.hedged,
+            helpRequestKind: understanding.conversationSummary.helpRequestKind,
+          })
+          console.log('[learn/chat] conversation decision=' + conversationDecisionHoisted.type)
+        } catch (err) {
+          console.warn('[learn/chat] conversation decision skipped:', err)
+        }
       } catch (err) {
         console.warn('[learn/chat] CUE understanding skipped (never affects the turn):', err)
       }
@@ -1739,6 +1761,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               const conceptForCtx = resolvedConceptId ?? snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? ''
               execOpts.retrievedSnippet = buildRetrievedContext(retrievalCacheHoisted, conceptForCtx)
             }
+            if (conversationDecisionHoisted && conversationDecisionHoisted.type !== 'RECOVERY') {
+              const { buildConversationDirective } = await import('@/lib/teaching/conversationDecision')
+              execOpts.conversationDirective = buildConversationDirective(conversationDecisionHoisted)
+            }
             systemPrompt += buildBrainExecutionBlock(dispatchPlanHoisted, cueDecisionHoisted, execOpts)
           }
         }
@@ -1748,6 +1774,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       } catch (err) {
         console.warn('[learn/chat] dispatcher skipped (legacy serving choice retained):', err)
         serveFromMemory = assembled !== null
+      }
+
+      // Conversation Decision — standalone block for turns where the Brain
+      // execution block is empty (ESCALATE_TO_LLM, LLM_OPEN, brain off).
+      // The conversation directive must reach the LLM on EVERY turn that
+      // goes through Groq, not just Brain-renderer turns.
+      if (conversationDecisionHoisted && conversationDecisionHoisted.type !== 'RECOVERY' && !serveFromMemory) {
+        const brainBlockFired = brainRuntimeActive && dispatchPlanHoisted?.executor === 'LLM_RENDERER'
+        if (!brainBlockFired) {
+          const { buildConversationDirective } = await import('@/lib/teaching/conversationDecision')
+          systemPrompt += '\n\n' + buildConversationDirective(conversationDecisionHoisted)
+        }
       }
 
       let text: string
