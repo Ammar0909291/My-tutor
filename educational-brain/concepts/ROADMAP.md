@@ -16,8 +16,8 @@ below from source whenever this file is updated, never hand-estimate.
 | Concepts with an Educational Brain entry | **414** |
 | Concepts with an Educational Brain entry | **389** |
 | Concepts with an Educational Brain entry | **376** |
-| Remaining | **1,372** |
-| Completion percentage | **22.71%** |
+| Remaining | **1,363** |
+| Completion percentage | **23.21%** |
 
 ---
 
@@ -28,7 +28,7 @@ below from source whenever this file is updated, never hand-estimate.
 | mathematics | 908 | 37 | 4.07% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
-| chemistry | 186 | 148 | 79.57% | `chem.found.matter` | **Yes** |
+| chemistry | 186 | 157 | 84.41% | `chem.found.matter` | **Yes** |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
 
@@ -882,3 +882,5 @@ history for the reconciliation record.
 **Chemistry EB level 14 (this batch, standing production run)**: authored 15 concepts at dependency level 14 in strict topological order — chem.coord.applications, chem.coord.bonding, chem.coord.isomerism, chem.dblock.organometallics, chem.elect.batteries, chem.elect.corrosion, chem.elect.electrolysis, chem.elect.standard-electrode, chem.hal.introduction, chem.hyd.arenes, chem.hyd.conformations, chem.hyd.petroleum, chem.org.reactive-intermediates, chem.sblock.water, chem.state.liquids. Chemistry is now 136/186 (73.12%). True total: **391** EB entries (215 physics + 37 mathematics + 136 chemistry + 3 english), out of 1,775 total KG concepts — 1,384 remaining, 22.03%. Level 15 is next.
 
 **Chemistry EB level 15 (this batch, standing production run)**: authored 12 concepts at dependency level 15 in strict topological order — chem.elect.industrial, chem.elect.nernst, chem.hal.cfcs, chem.hal.haloarenes, chem.hal.sn1, chem.hal.sn2, chem.hyd.polycyclic, chem.nitro.nitro-compounds, chem.org.mechanisms, chem.sol.vapour-pressure, chem.state.phase-diagram, chem.surface.surfactants. Chemistry is now 148/186 (79.57%). True total: **403** EB entries (215 physics + 37 mathematics + 148 chemistry + 3 english), out of 1,775 total KG concepts — 1,372 remaining, 22.71%. Level 16 is next.
+
+**Chemistry EB level 16 (this batch, standing production run)**: authored 9 concepts at dependency level 16 in strict topological order — chem.alc.alcohols, chem.elect.concentration-cell, chem.hal.elimination, chem.hal.grignard, chem.hyd.alkenes, chem.org.arrow-pushing, chem.org.pericyclic, chem.sol.activity, chem.sol.colligative. Chemistry is now 157/186 (84.41%). True total: **412** EB entries (215 physics + 37 mathematics + 157 chemistry + 3 english), out of 1,775 total KG concepts — 1,363 remaining, 23.21%. Level 17 is next.

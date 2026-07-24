@@ -14,7 +14,7 @@ and this file's summary row should be corrected to match.
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
-| chemistry | 186 | 148 | levels 0–15 complete (148/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock, chem.redox, chem.dblock, chem.org, chem.pblock, chem.solid, chem.hyd, chem.hal, chem.coord, chem.nitro — IN PROGRESS |
+| chemistry | 186 | 157 | levels 0–16 complete (157/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock, chem.redox, chem.dblock, chem.org, chem.pblock, chem.solid, chem.hyd, chem.hal, chem.coord, chem.nitro, chem.alc — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
 
@@ -1307,3 +1307,17 @@ Authored 12 level-15 Chemistry Educational Brain entries in strict topological o
 - `chem.surface.surfactants` — amphiphilic structure, CMC, micelle formation (hydrophobic effect = entropic), surfactant types, detergency mechanism, HLB
 
 Chemistry total: 136 → 148 / 186 (79.57%). Level 15 complete.
+
+### Batch 31 — Chemistry level 16 (2026-07-24)
+Authored 9 level-16 Chemistry Educational Brain entries in strict topological order:
+- `chem.alc.alcohols` — classification; H-bonding bp; acidity/NaOH vs. phenol; substitution (Lucas test); dehydration (Zaitsev, 140°C ether vs 170°C alkene); oxidation (PCC→aldehyde, Jones→acid, 3°→none); esterification
+- `chem.elect.concentration-cell` — E° = 0 but E ≠ 0; Nernst; high concentration = cathode; entropic driving force; Nernst potential for neurons; pH electrode
+- `chem.hal.elimination` — E2 (concerted, anti-periplanar, bimolecular, Zaitsev); E1 (via carbocation, same RDS as SN1); Hofmann rule (bulky base → less substituted alkene); substitution vs. elimination decision guide
+- `chem.hal.grignard` — RMgX preparation; polarity inversion (C+ → C−); addition to HCHO/RCHO/ketone/ester/CO₂; anhydrous requirement (pKₐ ~50); organolithium comparison
+- `chem.hyd.alkenes` — sp² geometry; Markovnikov's rule (mechanistic); anti-Markovnikov hydroboration (BH₃/THF, H₂O₂); bromonium ion (anti addition of Br₂); acid hydration/oxymercuration; catalytic hydrogenation (syn); ozonolysis
+- `chem.org.arrow-pushing` — arrow = electron pair (tail = source, head = destination); 5 arrow types; chain rule; formal charge verification; common error diagnosis
+- `chem.org.pericyclic` — cycloaddition/electrocyclic/sigmatropic; W–H rules ([4n+2] thermal allowed, [4n] forbidden); Diels-Alder (s-cis, electron-rich diene + EWG dienophile, stereospecific); endo/exo (kinetic vs. thermodynamic)
+- `chem.sol.activity` — activity coefficient γ; a = γc; positive/negative deviations; ionic strength I = ½Σcᵢzᵢ²; Debye–Hückel limiting law; impact on K and Nernst equation
+- `chem.sol.colligative` — VP lowering/bp elevation/fp depression/osmotic pressure; ΔTb = Kbmi, ΔTf = Kfmi, π = iMRT; van 't Hoff factor i; one-cause-four-effects model; molar mass determination
+
+Chemistry total: 148 → 157 / 186 (84.41%). Level 16 complete.
