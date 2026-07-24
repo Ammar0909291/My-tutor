@@ -19197,6 +19197,694 @@
           "NCERT Physics Class 12 Ch.14"
         ]
       }
+    },
+    {
+      "id": "asset.phys.mech.generalized-coordinates",
+      "concept_id": "phys.mech.generalized-coordinates",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to identify the degrees of freedom of a constrained mechanical system, choose a minimal, independent set of generalized coordinates to describe its configuration, and explain why generalized coordinates need not be Cartesian or even have units of length.",
+      "concept_summary": "Newtonian mechanics describes a system of N particles with 3N Cartesian coordinates, but real systems are rarely free to explore all 3N dimensions — a bead on a wire, a pendulum bob, or a rigid rod each obey CONSTRAINTS that tie their coordinates together. A HOLONOMIC constraint is one expressible as an equation among the coordinates and time alone (e.g. x²+y²=L² for a pendulum bob of fixed length L), and each independent holonomic constraint removes exactly one degree of freedom from the system. GENERALIZED COORDINATES q₁,...,q_n are a minimal set of independent parameters — n equal to the true number of DEGREES OF FREEDOM remaining after all constraints are accounted for — that together uniquely specify the system's CONFIGURATION at any instant. Crucially, generalized coordinates need not be Cartesian, need not have units of length, and need not even be uniquely determined: a pendulum's single degree of freedom is most naturally described by the angle θ (units of radians, not metres), a rotating rigid body's orientation might use Euler angles, and a two-particle system's separation might use a distance and two angles. The abstract space spanned by (q₁,...,q_n) — not physical 3D space — is called CONFIGURATION SPACE, and a system's entire motion becomes a single trajectory through this space. This reformulation is not mere bookkeeping: constraint forces (like the tension in a pendulum's string, or the normal force from a wire) do no work along directions consistent with the constraint and therefore never need to appear explicitly once the coordinates are chosen correctly — they are automatically eliminated, setting up the far more powerful Lagrangian approach developed at the next concept.",
+      "key_ideas": [
+        "A holonomic constraint is expressible as an equation among coordinates and time alone; each independent holonomic constraint removes exactly one degree of freedom from a system.",
+        "Generalized coordinates are a minimal set of independent parameters, equal in number to the system's true degrees of freedom, that together uniquely specify its configuration.",
+        "Generalized coordinates need not be Cartesian and need not carry units of length — an angle, an arc length, or a normal-mode amplitude are all legitimate generalized coordinates.",
+        "The abstract space spanned by the generalized coordinates is called configuration space; the system's motion over time is a single trajectory through this space, not a set of separate particle trajectories in physical space.",
+        "Choosing generalized coordinates that respect the constraints automatically eliminates constraint forces (like string tension or normal force) from the description, since they do no work along the constraint-consistent directions of motion — the foundation for the Lagrangian method."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "Generalized coordinates are just a renaming of x, y, z — any coordinate system, including plain Cartesian coordinates, counts as 'generalized coordinates'.",
+          "correction": "While Cartesian coordinates are technically a valid special case, the term 'generalized coordinates' specifically signals a MINIMAL, constraint-respecting set — exactly as many coordinates as there are true degrees of freedom, chosen so that constraint equations are automatically satisfied rather than needing to be imposed separately. Using unconstrained Cartesian coordinates for a pendulum (2 numbers, x and y) is not using generalized coordinates in the intended sense, because it still requires the separate constraint equation x²+y²=L² — the single angle θ already IS the true, minimal generalized coordinate."
+        },
+        {
+          "misconception": "The number of generalized coordinates always equals the number of particles in the system.",
+          "correction": "The number of generalized coordinates equals the number of DEGREES OF FREEDOM, which depends on both the number of particles AND the constraints acting on them. A rigid body of any number of particles rigidly bonded together has only 6 degrees of freedom total (3 translational + 3 rotational) no matter how many particles it contains, because rigidity is an extremely restrictive set of holonomic constraints."
+        },
+        {
+          "misconception": "A generalized coordinate must be an angle or must be dimensionless.",
+          "correction": "Generalized coordinates can have any physical dimension appropriate to the problem — length, angle, area, or even a more abstract combination. What defines a generalized coordinate is not its units but its role: one of a minimal, independent set that fully specifies configuration."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "A simple pendulum diagram contrasted with a spring-mounted bead on a curved wire: in each case, showing the full 2D or 3D Cartesian coordinates being 'collapsed' by the constraint equation down to a single generalized coordinate (angle θ or arc length s).",
+        "A configuration-space diagram for a double pendulum: physical space (two swinging rods) mapped to an abstract 2D configuration space with axes θ₁ and θ₂, with a sample trajectory drawn in configuration space.",
+        "A table of common systems alongside their degrees of freedom and a natural choice of generalized coordinates: simple pendulum (1, angle), double pendulum (2, two angles), rigid body (6, 3 position + 3 orientation), bead on a wire (1, arc length)."
+      ],
+      "worked_example_blueprint": {
+        "setup": "A bead of mass m is constrained to slide frictionlessly along a rigid, fixed circular wire of radius R lying in a vertical plane. Determine the number of degrees of freedom and propose a suitable generalized coordinate.",
+        "steps": [
+          "Start in Cartesian coordinates: the bead's position in the vertical plane is (x, y), so naively 2 coordinates.",
+          "Identify the constraint: the bead must remain on the circle of radius R, giving the holonomic constraint equation x² + y² = R².",
+          "One independent holonomic constraint removes exactly one degree of freedom: 2 (Cartesian) − 1 (constraint) = 1 degree of freedom.",
+          "Choose a generalized coordinate that automatically satisfies the constraint: the angle φ measured from a fixed reference direction on the circle, so that x = R cos φ, y = R sin φ for ANY value of φ — the constraint x²+y²=R² is satisfied identically, for free, with no separate equation needed.",
+          "Conclude: the bead's configuration is fully and minimally specified by the single generalized coordinate φ, with configuration space simply being the interval [0, 2π) (or the circle itself, topologically)."
+        ],
+        "expected_outcome": "The student correctly reduces the 2 Cartesian coordinates to 1 degree of freedom using the constraint equation, and proposes the angle φ as a generalized coordinate that automatically satisfies the constraint for any value, eliminating the need to track the constraint equation separately."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "degree-of-freedom counting for constrained systems",
+          "generalized coordinate proposal exercises",
+          "constraint equation identification and elimination items"
+        ],
+        "difficulty_progression": "Begin with counting degrees of freedom for simple single-constraint systems, move to proposing an appropriate generalized coordinate that automatically satisfies the constraint, and finish with multi-constraint systems (e.g. double pendulum, rigid rod on an incline) requiring more than one generalized coordinate.",
+        "suggested_count": 8
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "degree-of-freedom computation set",
+          "generalized-coordinate proposal and justification prompts"
+        ],
+        "bloom_alignment": "Understand — students must correctly count degrees of freedom from constraints and select a coordinate set that respects them, a prerequisite skill for every subsequent concept in this domain.",
+        "mastery_signal": "The student correctly computes the number of degrees of freedom for a constrained system from its holonomic constraint equations, and proposes a generalized coordinate set of the correct minimal size that automatically satisfies those constraints, at 80% accuracy or better (mastery_threshold 0.85 reflects this concept's foundational role for the entire Lagrangian/Hamiltonian sequence)."
+      },
+      "real_world_applications": [
+        "Robotic arm kinematics is described entirely in generalized (joint) coordinates — joint angles — rather than the Cartesian position of every link, because joint angles are the true, minimal, constraint-respecting degrees of freedom of the mechanism.",
+        "Molecular vibration analysis in chemistry uses generalized 'normal coordinates' rather than the Cartesian positions of every atom, dramatically simplifying the description of a molecule's vibrational modes.",
+        "Spacecraft attitude control describes orientation using generalized coordinates (Euler angles or quaternions) rather than tracking the Cartesian position of every point on the spacecraft's body."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.mech.conservative-forces",
+        "phys.mech.kinematics-2d"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "3d62c0bc",
+        "kg_build_date": "2026-07-06",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "c040f1f0",
+        "source_references": [
+          "Goldstein Classical Mechanics Ch.1",
+          "Landau & Lifshitz Mechanics Ch.1",
+          "Taylor Classical Mechanics Ch.7"
+        ]
+      }
+    },
+    {
+      "id": "asset.phys.mech.euler-lagrange-equation",
+      "concept_id": "phys.mech.euler-lagrange-equation",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to state Hamilton's principle of stationary action, derive the Euler-Lagrange equation from it, define the Lagrangian L = T − V, and apply the Euler-Lagrange equation to obtain the equations of motion for a simple mechanical system.",
+      "concept_summary": "HAMILTON'S PRINCIPLE reformulates all of classical mechanics as a single statement: of all the possible paths a system could take between a fixed configuration at time t₁ and a fixed configuration at time t₂, the ACTUAL physical path is the one that makes the ACTION integral S = ∫L dt STATIONARY (an extremum — typically, though not always, a minimum) — where L = T − V is the LAGRANGIAN, the kinetic energy minus the potential energy, expressed in terms of generalized coordinates qᵢ and generalized velocities q̇ᵢ (met already: generalized coordinates). This is a profound conceptual shift from Newton's instant-by-instant force-based picture to a GLOBAL, whole-path statement about the entire trajectory at once. Applying the calculus of variations to the requirement δS = 0 (the action is unchanged to first order under any small variation of the path that keeps the endpoints fixed) yields, for each generalized coordinate independently, the EULER-LAGRANGE EQUATION: d/dt(∂L/∂q̇ᵢ) − ∂L/∂qᵢ = 0. This single equation, applied once per generalized coordinate, reproduces exactly the same physical predictions as Newton's second law — but derived purely from energy (a scalar) rather than force (a vector), and with constraint forces already eliminated automatically by the generalized-coordinate choice (met already), since only the constraint-respecting degrees of freedom appear in L at all. The practical payoff is enormous: for complicated constrained systems (a bead on a rotating wire, a pendulum whose pivot itself accelerates), writing down T and V in generalized coordinates and mechanically applying the Euler-Lagrange equation is often vastly simpler than resolving all the constraint forces by hand in a Newtonian free-body-diagram approach.",
+      "key_ideas": [
+        "Hamilton's principle states that the physical path of a system makes the action S = ∫L dt stationary among all paths with the same fixed endpoints, where L = T − V is the Lagrangian.",
+        "This is a GLOBAL statement about the entire trajectory (an extremum of an integral over the whole path), fundamentally different in character from Newton's local, instant-by-instant force law — yet mathematically equivalent to it.",
+        "Applying the calculus of variations (δS = 0) to Hamilton's principle yields the Euler-Lagrange equation, one per generalized coordinate: d/dt(∂L/∂q̇ᵢ) − ∂L/∂qᵢ = 0.",
+        "The Euler-Lagrange equation reproduces exactly Newton's second law's predictions, but is derived from a scalar (energy), automatically incorporates constraints via the choice of generalized coordinates, and requires no explicit resolution of constraint forces.",
+        "For complex constrained systems, writing T and V in generalized coordinates and applying the Euler-Lagrange equation is typically far simpler than a full Newtonian free-body-diagram analysis with unknown constraint forces."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "Hamilton's principle says the physical path always MINIMIZES the action, in the same sense a ball rolls to the bottom of a valley.",
+          "correction": "The action is only required to be STATIONARY (an extremum to first order), not necessarily a minimum — it can be a saddle point in the space of all possible paths. In most elementary mechanics problems it is indeed a minimum ('least action'), but the mathematically precise and always-correct statement is 'stationary action', which is why the principle is formally called the principle of stationary action."
+        },
+        {
+          "misconception": "The Euler-Lagrange equation is a completely new, independent physical law, unrelated to Newton's second law.",
+          "correction": "The Euler-Lagrange equation is mathematically EQUIVALENT to Newton's second law for a conservative system — it is a reformulation, not a new law of nature. Applying F = ma directly and applying the Euler-Lagrange equation to L = T − V for the same system yield identical equations of motion; the Lagrangian approach is a more powerful and often more convenient bookkeeping method, not new physics."
+        },
+        {
+          "misconception": "The Lagrangian L = T − V has some direct physical meaning of its own, analogous to total mechanical energy T + V.",
+          "correction": "Unlike total energy T + V (which is a conserved, physically measurable quantity for conservative systems), the Lagrangian T − V is a mathematical construction with no direct measurable meaning or conservation property of its own — its value is not an observable. Its significance lies entirely in how it generates the correct equations of motion via the Euler-Lagrange equation, not in its numerical value at any instant."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "A 'bundle of nearby paths' diagram: the true physical path drawn solid, with several nearby 'imagined' varied paths (all sharing the same fixed endpoints) drawn dashed, visually illustrating what δS = 0 means — the action doesn't change (to first order) if you nudge the path slightly.",
+        "A side-by-side derivation comparison: Newton's F = ma applied to a simple pendulum (showing the awkward tension-force elimination step) next to the Lagrangian derivation of the same pendulum's equation of motion (showing the constraint force never appears at all).",
+        "An action-integral schematic: a graph of L(t) along the true path, shaded to represent the area under the curve (the action S), with a callout explaining that Hamilton's principle concerns how this total shaded area responds to path variations."
+      ],
+      "worked_example_blueprint": {
+        "setup": "Using the Lagrangian method, derive the equation of motion for a simple pendulum of length l and bob mass m, using the angle θ from vertical as the single generalized coordinate (met already at the generalized-coordinates concept).",
+        "steps": [
+          "Write the kinetic energy in terms of θ and θ̇: the bob moves along an arc of radius l, so its speed is lθ̇, giving T = ½m l² θ̇².",
+          "Write the potential energy relative to the pivot, taking downward as the direction of decreasing height: V = −mgl cos θ (height below the pivot is l cos θ, so potential energy, measured from the pivot, decreases as θ moves away from vertical — the sign convention here matches taking θ=0 as the lowest point).",
+          "Form the Lagrangian: L = T − V = ½m l² θ̇² + mgl cos θ.",
+          "Compute the two Euler-Lagrange terms: ∂L/∂θ̇ = m l² θ̇, so d/dt(∂L/∂θ̇) = m l² θ̈; and ∂L/∂θ = −mgl sin θ.",
+          "Apply the Euler-Lagrange equation d/dt(∂L/∂θ̇) − ∂L/∂θ = 0: m l² θ̈ − (−mgl sin θ) = 0, i.e. m l² θ̈ + mgl sin θ = 0, which simplifies to θ̈ + (g/l) sin θ = 0 — exactly the familiar pendulum equation of motion, obtained here with no need to ever introduce or eliminate the string's tension force."
+        ],
+        "expected_outcome": "The student correctly writes T and V in terms of the single generalized coordinate θ, forms L = T − V, computes both required partial/time derivatives, and arrives at the standard pendulum equation θ̈ + (g/l) sin θ = 0, recognizing that the string tension never needed to be introduced."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "Lagrangian construction from T and V for a given system",
+          "Euler-Lagrange equation application to derive equations of motion",
+          "conceptual items on Hamilton's principle and stationary (not minimal) action"
+        ],
+        "difficulty_progression": "Begin with writing T and V for straightforward 1-degree-of-freedom systems, move to full Euler-Lagrange derivations of equations of motion, and finish with 2-degree-of-freedom systems (e.g. double pendulum setup, without necessarily solving the resulting coupled equations).",
+        "suggested_count": 10
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "full derivation problem set",
+          "conceptual explanation of Hamilton's principle vs. Newton's second law"
+        ],
+        "bloom_alignment": "Apply — students must apply the Euler-Lagrange equation mechanically and correctly to derive equations of motion for systems they have not seen worked before.",
+        "mastery_signal": "The student correctly constructs the Lagrangian for a constrained mechanical system in generalized coordinates and correctly applies the Euler-Lagrange equation to derive its equation of motion, matching the equivalent Newtonian result, at 85% accuracy or better (mastery_threshold 0.85, reflecting the graduate-level expert difficulty and 8-hour estimated study time of this concept)."
+      },
+      "real_world_applications": [
+        "The Lagrangian method is the standard tool in robotics for deriving the equations of motion of multi-link manipulators, where Newtonian free-body-diagram analysis of every joint constraint force would be prohibitively complex.",
+        "Lagrangian mechanics extends directly (met at later, more advanced study) to fields — the same stationary-action principle underlies the derivation of Maxwell's equations and the Standard Model of particle physics from a field Lagrangian.",
+        "Orbital mechanics and spacecraft trajectory optimization use Lagrangian and related variational methods to find fuel-optimal paths, directly generalizing the 'stationary action among all paths' idea to 'stationary cost among all trajectories'."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.mech.generalized-coordinates"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "3d62c0bc",
+        "kg_build_date": "2026-07-06",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "c040f1f0",
+        "source_references": [
+          "Goldstein Classical Mechanics Ch.1-2",
+          "Landau & Lifshitz Mechanics Ch.2",
+          "Taylor Classical Mechanics Ch.7"
+        ]
+      }
+    },
+    {
+      "id": "asset.phys.mech.cyclic-coordinates-conservation-laws",
+      "concept_id": "phys.mech.cyclic-coordinates-conservation-laws",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to identify cyclic (ignorable) coordinates in a Lagrangian, state and use the resulting conservation of the conjugate momentum, and explain Noether's theorem as the general statement that continuous symmetries of the Lagrangian imply conservation laws.",
+      "concept_summary": "A generalized coordinate qᵢ is called CYCLIC (or ignorable) if the Lagrangian does not depend on qᵢ explicitly — that is, ∂L/∂qᵢ = 0 — even though it may still depend on the corresponding generalized velocity q̇ᵢ. Substituting this condition directly into the Euler-Lagrange equation (met already), d/dt(∂L/∂q̇ᵢ) − ∂L/∂qᵢ = 0, the second term vanishes identically, leaving d/dt(∂L/∂q̇ᵢ) = 0 — meaning the CONJUGATE MOMENTUM pᵢ = ∂L/∂q̇ᵢ is a CONSTANT OF MOTION, conserved throughout the system's evolution. This is a strikingly direct and purely algebraic route to a conservation law, requiring no separate physical argument once a cyclic coordinate is spotted: linear momentum conservation along a translationally-symmetric direction, and angular momentum conservation about a rotationally-symmetric axis, both fall out this way with zero extra physical reasoning, purely from noticing which coordinate is absent from L. NOETHER'S THEOREM generalizes this observation far beyond individual coordinates being literally absent from L: it states that EVERY continuous symmetry of the Lagrangian — every smooth, continuous transformation of the coordinates that leaves L unchanged — implies a corresponding conserved quantity. Time-translation symmetry (L does not depend explicitly on t) implies conservation of energy; spatial-translation symmetry along a direction implies conservation of the corresponding linear momentum component; rotational symmetry about an axis implies conservation of the corresponding angular momentum component. Noether's theorem thus reveals that conservation laws are not separate postulates bolted onto mechanics — they are the direct, inevitable mathematical consequence of the symmetries a system's Lagrangian possesses, unifying what Newtonian mechanics treats as a list of separate empirical conservation laws into a single deep structural principle.",
+      "key_ideas": [
+        "A generalized coordinate qᵢ is cyclic if the Lagrangian does not depend on it explicitly (∂L/∂qᵢ = 0), even though L may depend on its velocity q̇ᵢ.",
+        "For a cyclic coordinate, the Euler-Lagrange equation reduces immediately to d/dt(pᵢ) = 0, where pᵢ = ∂L/∂q̇ᵢ is the conjugate momentum — so pᵢ is conserved, purely algebraically.",
+        "Spotting a cyclic coordinate is often the fastest route to a conservation law: linear momentum conservation along a symmetric direction and angular momentum conservation about a symmetric axis both emerge this way with no separate physical derivation.",
+        "Noether's theorem generalizes this: every continuous symmetry of the Lagrangian (a smooth transformation of coordinates that leaves L unchanged) implies a corresponding conserved quantity.",
+        "Time-translation symmetry implies energy conservation; spatial-translation symmetry implies linear momentum conservation; rotational symmetry implies angular momentum conservation — conservation laws are consequences of symmetry, not independent postulates."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "A coordinate is 'cyclic' only if it is literally an angle that goes around in a circle (like θ in polar coordinates), matching the everyday meaning of 'cyclic'.",
+          "correction": "'Cyclic' here is a technical term meaning the coordinate is ABSENT from the Lagrangian's explicit functional form, regardless of whether that coordinate happens to be an angle. A Cartesian coordinate x can be perfectly cyclic (if L does not depend on x, as in free translational motion), while an angle θ can fail to be cyclic (if L depends on θ, as in a pendulum, where the potential energy varies with angle)."
+        },
+        {
+          "misconception": "If a coordinate is cyclic, that coordinate itself is conserved (stays constant).",
+          "correction": "It is the CONJUGATE MOMENTUM pᵢ = ∂L/∂q̇ᵢ that is conserved, not the coordinate qᵢ itself. A cyclic angular coordinate θ in a central-force problem, for example, is very much NOT constant (the particle keeps orbiting, θ keeps changing) — what IS constant is the conjugate angular momentum pᵢ = ∂L/∂θ̇."
+        },
+        {
+          "misconception": "Noether's theorem is a specialized result only relevant to advanced or exotic physics (field theory, particle physics), not to ordinary classical mechanics.",
+          "correction": "Noether's theorem is exactly as relevant to a single pendulum or orbiting planet as to field theory — the FAMILIAR conservation laws of momentum, angular momentum, and energy from introductory mechanics are themselves instances of Noether's theorem applied to translational, rotational, and time-translation symmetry respectively. It is a foundational unifying principle across all of physics, not a specialized add-on for advanced topics."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "A Lagrangian written out explicitly for a free particle in polar coordinates, L = ½m(ṙ² + r²θ̇²), with θ visibly absent from L (only θ̇ appears) — annotated to show θ is cyclic and pθ = mr²θ̇ (angular momentum) is therefore conserved.",
+        "A symmetry-to-conservation-law mapping table: time-translation → energy, spatial translation → linear momentum, rotation → angular momentum, with a short symbolic Noether-theorem statement alongside each row.",
+        "A 'before Noether / after Noether' conceptual diagram: a list of separately memorized conservation laws (Newtonian view) collapsing into a single unifying arrow from 'symmetry of L' to 'conserved quantity' (Noether's view)."
+      ],
+      "worked_example_blueprint": {
+        "setup": "A particle of mass m moves in a plane under a central force (a force that depends only on distance r from a fixed center, described by potential energy V(r)). Using plane polar coordinates (r, θ), identify any cyclic coordinate and state the resulting conservation law.",
+        "steps": [
+          "Write the Lagrangian in polar coordinates: T = ½m(ṙ² + r²θ̇²), and since the force is central, V = V(r) only, so L = ½m(ṙ² + r²θ̇²) − V(r).",
+          "Inspect L for explicit dependence on each coordinate: L depends explicitly on r (through r² in T and through V(r)), but L does NOT depend explicitly on θ at all — θ appears only through θ̇.",
+          "Conclude θ is a cyclic coordinate: ∂L/∂θ = 0.",
+          "Apply the cyclic-coordinate result: the conjugate momentum pθ = ∂L/∂θ̇ = mr²θ̇ is conserved, i.e. d/dt(mr²θ̇) = 0.",
+          "Recognize mr²θ̇ as exactly the angular momentum of the particle about the force center — the Lagrangian method has reproduced, via pure algebra on a cyclic coordinate, the same central-force angular momentum conservation law usually derived in introductory mechanics from the fact that a central force exerts zero torque about its own center."
+        ],
+        "expected_outcome": "The student correctly identifies θ as cyclic (L independent of θ, though not of θ̇), correctly derives that mr²θ̇ is conserved, and correctly recognizes this quantity as the particle's angular momentum, matching the standard central-force result obtained via zero torque in the Newtonian picture."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "cyclic coordinate identification from a given Lagrangian",
+          "conjugate momentum derivation and conservation-law statement",
+          "symmetry-to-conservation-law matching items (Noether's theorem)"
+        ],
+        "difficulty_progression": "Begin with identifying cyclic coordinates in given Lagrangians, move to deriving and stating the resulting conservation law, and finish with matching a described physical symmetry (translational, rotational, time-independence) to the conservation law Noether's theorem predicts.",
+        "suggested_count": 8
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "cyclic-coordinate identification and derivation set",
+          "Noether's theorem symmetry-matching quiz"
+        ],
+        "bloom_alignment": "Analyze — students must analyze a given Lagrangian's symmetry structure to identify cyclic coordinates and correctly connect symmetries to conservation laws in unfamiliar systems, not merely recall memorized conservation laws.",
+        "mastery_signal": "The student correctly identifies cyclic coordinates in an unfamiliar Lagrangian, correctly derives the conserved conjugate momentum, and correctly matches translational, rotational, and time-translation symmetries to their corresponding conserved quantities per Noether's theorem, at 85% accuracy or better."
+      },
+      "real_world_applications": [
+        "Noether's theorem is the conceptual foundation of the Standard Model of particle physics: gauge symmetries of the field Lagrangian (met at the Particle Physics domain) directly generate the conservation laws for electric charge, color charge, and weak isospin.",
+        "Kepler's second law (equal areas in equal times) for planetary orbits is a direct geometric consequence of angular momentum conservation, itself a consequence of the rotational symmetry (cyclic angular coordinate) of the gravitational two-body Lagrangian.",
+        "Modern theoretical physics routinely uses Noether's theorem in reverse — proposing a new conservation law observed in nature and working backward to identify the underlying symmetry of the governing Lagrangian, a strategy that led to the discovery of several particle-physics selection rules."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.mech.euler-lagrange-equation",
+        "phys.mech.conservation-of-angular-momentum",
+        "phys.mech.conservation-of-momentum"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "3d62c0bc",
+        "kg_build_date": "2026-07-06",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "c040f1f0",
+        "source_references": [
+          "Goldstein Classical Mechanics Ch.2",
+          "Landau & Lifshitz Mechanics §6-7",
+          "Taylor Classical Mechanics Ch.7"
+        ]
+      }
+    },
+    {
+      "id": "asset.phys.mech.hamiltonian",
+      "concept_id": "phys.mech.hamiltonian",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to define the canonical momentum conjugate to a generalized coordinate, perform the Legendre transform from the Lagrangian to the Hamiltonian, and explain the conditions under which the Hamiltonian equals the total mechanical energy.",
+      "concept_summary": "The Lagrangian L(qᵢ, q̇ᵢ, t) is a function of coordinates and VELOCITIES. The HAMILTONIAN reformulates mechanics instead as a function of coordinates and MOMENTA — a change of the independent variables achieved by a LEGENDRE TRANSFORM, the same general mathematical device used in thermodynamics to pass between energy representations (e.g. internal energy to enthalpy). First, define the CANONICAL MOMENTUM (or generalized momentum) conjugate to each coordinate qᵢ as pᵢ = ∂L/∂q̇ᵢ — this is exactly the quantity that appeared as the conserved momentum for a cyclic coordinate (met already), now defined for every coordinate, cyclic or not. The Hamiltonian is then defined as H = Σᵢ pᵢq̇ᵢ − L, with q̇ᵢ subsequently eliminated in favor of pᵢ using the momentum definitions (inverted algebraically), so that H is properly expressed as a function H(qᵢ, pᵢ, t) — of coordinates and MOMENTA, not velocities. For the common and important case of a NATURAL system — one where the kinetic energy T is a purely quadratic (homogeneous degree-2) function of the velocities and the potential V depends only on position, not velocity or time — this construction has a remarkably clean physical payoff: the Hamiltonian works out to be exactly H = T + V, the TOTAL MECHANICAL ENERGY of the system, expressed in terms of q and p. This is not automatic for every possible system (a moving reference frame, velocity-dependent forces like the magnetic force, or time-dependent constraints can all break the T+V identification), but it holds for the overwhelming majority of introductory and intermediate mechanical systems, giving the Hamiltonian its natural interpretation as an ENERGY function living on PHASE SPACE — the abstract space of all (q,p) pairs — setting up Hamilton's equations of motion at the next concept.",
+      "key_ideas": [
+        "The canonical (generalized) momentum conjugate to a coordinate qᵢ is defined as pᵢ = ∂L/∂q̇ᵢ — the same quantity that is conserved for a cyclic coordinate, now defined for every coordinate.",
+        "The Hamiltonian H = Σᵢ pᵢq̇ᵢ − L is obtained by a Legendre transform, re-expressing the dynamics as a function of coordinates and MOMENTA, H(q,p,t), rather than coordinates and velocities, L(q,q̇,t).",
+        "For a NATURAL system (kinetic energy purely quadratic in velocities, potential depends only on position), the Hamiltonian equals the total mechanical energy, H = T + V.",
+        "This T+V identification is NOT automatic for every system — moving reference frames, velocity-dependent forces, or explicitly time-dependent constraints can make H differ from T + V, even though H is still a well-defined, conserved-when-time-independent quantity.",
+        "The Hamiltonian is naturally interpreted as an energy function living on PHASE SPACE, the abstract space of all (q,p) pairs, replacing configuration space as the natural arena for the next stage of the theory (Hamilton's equations)."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "The Hamiltonian is always exactly equal to the total mechanical energy T + V, for any system whatsoever.",
+          "correction": "H = T + V holds only for NATURAL systems, where kinetic energy is a purely quadratic function of velocities and the potential is velocity- and time-independent. For systems with explicitly time-dependent constraints, or with velocity-dependent forces (like a charged particle in a magnetic field, where the canonical momentum differs from mv), the Hamiltonian is still a well-defined, meaningful quantity, but it does not simply equal T + V — this is a common and important subtlety in more advanced treatments."
+        },
+        {
+          "misconception": "Canonical momentum pᵢ = ∂L/∂q̇ᵢ is always just mass times ordinary velocity, mq̇ᵢ, the same as in introductory momentum p = mv.",
+          "correction": "For simple Cartesian coordinates and velocity-independent potentials, pᵢ does reduce to the familiar mq̇ᵢ. But in general — curvilinear coordinates, or velocity-dependent potentials such as a charged particle's interaction with a magnetic field — the canonical momentum can differ substantially from mass times velocity; this distinction becomes essential in more advanced applications, including the transition to quantum mechanics, where it is the CANONICAL momentum, not simply mv, that gets promoted to a quantum operator."
+        },
+        {
+          "misconception": "The Legendre transform used to construct H is just a notational trick with no deeper mathematical meaning, interchangeable with any other way of rewriting the equations.",
+          "correction": "The Legendre transform is a specific, structured mathematical operation (the same one connecting different thermodynamic potentials) that changes the natural independent variable of a function from a 'velocity-like' variable to its conjugate 'momentum-like' variable, while preserving all the physical content — it is not an arbitrary substitution but a systematic transformation with well-defined geometric meaning (related to convex duality), which is precisely why it reliably produces a new, self-consistent formulation (Hamiltonian mechanics) from the old one (Lagrangian mechanics)."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "A side-by-side variable-map diagram: L(q, q̇, t) on the left with an arrow labeled 'Legendre transform' pointing to H(q, p, t) on the right, explicitly showing q̇ being eliminated in favor of p = ∂L/∂q̇.",
+        "A worked derivation panel for a simple 1D particle (L = ½mẋ² − V(x)) showing p = mẋ, then H = pẋ − L computed and simplified step by step to H = p²/2m + V(x) = T + V.",
+        "A phase-space sketch: a single point moving through the abstract (q, p) plane for a simple harmonic oscillator, contrasted with the same motion's representation as a trajectory purely in configuration space (q vs. t only), to preview the shift in perspective toward the next concept."
+      ],
+      "worked_example_blueprint": {
+        "setup": "A particle of mass m moves in one dimension under a conservative force with potential energy V(x). Using the Lagrangian L = ½mẋ² − V(x), derive the canonical momentum and the Hamiltonian, and confirm that H = T + V for this system.",
+        "steps": [
+          "Compute the canonical momentum: p = ∂L/∂ẋ = ∂/∂ẋ (½mẋ² − V(x)) = mẋ — here it reduces to the familiar Newtonian momentum, since this is a natural system with a simple quadratic kinetic energy.",
+          "Invert to express ẋ in terms of p: ẋ = p/m.",
+          "Form the Hamiltonian by definition: H = pẋ − L = p(p/m) − [½m(p/m)² − V(x)] = p²/m − ½p²/m + V(x) = ½p²/m + V(x).",
+          "Rewrite using p²/m = p·(p/m) = p·ẋ = mẋ² so ½p²/m = ½mẋ² = T: H = T + V, exactly the total mechanical energy, now expressed as a function of q=x and p rather than x and ẋ.",
+          "Confirm consistency: since this system is natural (T purely quadratic in ẋ, V depends only on x), the general theorem guaranteeing H = T+V applies directly, matching the explicit calculation."
+        ],
+        "expected_outcome": "The student correctly derives p = mẋ, correctly performs the Legendre-transform algebra to obtain H = ½p²/m + V(x), and correctly recognizes this as T + V expressed in terms of q and p, confirming the natural-system theorem by direct calculation rather than by assumption."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "canonical momentum derivation from a given Lagrangian",
+          "Legendre transform / Hamiltonian construction exercises",
+          "natural-system identification (does H = T+V apply?) conceptual items"
+        ],
+        "difficulty_progression": "Begin with deriving canonical momentum for simple systems, move to full Legendre-transform construction of H(q,p), and finish with conceptual items identifying whether a given system is natural (H=T+V) or not (e.g. involves a moving constraint or velocity-dependent force).",
+        "suggested_count": 8
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "derivation problem set (p and H from a given L)",
+          "conceptual justification prompt on when H = T+V holds"
+        ],
+        "bloom_alignment": "Understand — students must correctly perform the Legendre transform mechanically and explain the physical conditions under which the resulting Hamiltonian equals total energy.",
+        "mastery_signal": "The student correctly derives the canonical momentum from a given Lagrangian, correctly performs the Legendre transform to construct H(q,p), and correctly identifies whether a given system satisfies the natural-system conditions for H = T + V, at 85% accuracy or better."
+      },
+      "real_world_applications": [
+        "The transition from classical to quantum mechanics is built directly on the Hamiltonian: the Schrödinger equation is obtained by promoting the classical Hamiltonian H(q,p) to a quantum operator acting on the wavefunction, making this concept the direct classical precursor of quantum dynamics.",
+        "Statistical mechanics (met in the Statistical Mechanics domain) is built on phase space and the Hamiltonian: the probability of a system's microstate depends on its energy, computed via H(q,p), across the full ensemble of possible (q,p) configurations.",
+        "Spacecraft and satellite orbit propagation software uses Hamiltonian formulations because of their numerically favorable structure-preserving properties (symplectic integrators), which conserve energy-like quantities far more accurately over long simulated timescales than naive Newtonian integration."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.mech.euler-lagrange-equation"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "3d62c0bc",
+        "kg_build_date": "2026-07-06",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "c040f1f0",
+        "source_references": [
+          "Goldstein Classical Mechanics Ch.8",
+          "Landau & Lifshitz Mechanics Ch.7",
+          "Taylor Classical Mechanics Ch.13"
+        ]
+      }
+    },
+    {
+      "id": "asset.phys.mech.hamiltons-equations",
+      "concept_id": "phys.mech.hamiltons-equations",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to derive Hamilton's equations from the Hamiltonian, apply them to obtain a system's equations of motion as first-order equations in phase space, and explain the symmetry between coordinates and momenta that Hamilton's equations make explicit.",
+      "concept_summary": "Where the Euler-Lagrange equation (met already) is a single SECOND-order differential equation per generalized coordinate, HAMILTON'S EQUATIONS trade this for a pair of coupled FIRST-order differential equations per coordinate — a form that turns out to be far more symmetric and, for many purposes, more powerful. Starting from the Hamiltonian H(q,p,t) constructed by the Legendre transform (met already), taking the total differential of H = Σpᵢq̇ᵢ − L and comparing it against the definition of a total differential of H(q,p,t) directly yields two equations for each degree of freedom: q̇ᵢ = ∂H/∂pᵢ and ṗᵢ = −∂H/∂qᵢ. These are HAMILTON'S EQUATIONS (or the canonical equations of motion). Their most striking feature is a near-perfect symmetry between q and p: swapping q↔p and flipping one sign turns one equation into the other, a symmetry entirely hidden in the Lagrangian formulation, where q and q̇ play very different structural roles. Physically, Hamilton's equations describe a trajectory not through configuration space but through PHASE SPACE — the space of all (q,p) pairs (met already) — where a system's ENTIRE future and past state is captured by a single point, and time evolution is a deterministic flow of that point through phase space, governed entirely by the gradients of H. For an N-degree-of-freedom system, the Euler-Lagrange approach gives N second-order equations, while Hamilton's approach gives exactly 2N first-order equations — genuinely equivalent in content and solution, but structured differently, with the first-order, symmetric form proving essential for the deeper structures developed next: Poisson brackets, canonical transformations, and ultimately the bridge to quantum mechanics.",
+      "key_ideas": [
+        "Hamilton's equations, q̇ᵢ = ∂H/∂pᵢ and ṗᵢ = −∂H/∂qᵢ, are obtained by comparing the total differential of H = Σpᵢq̇ᵢ − L against the definition of dH(q,p,t) directly.",
+        "Hamilton's equations trade one second-order Euler-Lagrange equation per coordinate for two coupled first-order equations per coordinate — for N degrees of freedom, N second-order equations become 2N first-order equations, equivalent in content.",
+        "Hamilton's equations exhibit a near-perfect symmetry between q and p: swapping the two variables (with a sign flip) turns one equation into the other, a symmetry not visible in the Lagrangian formulation.",
+        "Hamilton's equations describe a trajectory through PHASE SPACE, the space of all (q,p) pairs, where a single point captures the system's entire instantaneous state and evolves deterministically under the flow generated by H.",
+        "This first-order, phase-space structure — not the physical content, which is identical to Lagrangian mechanics — is what makes Hamiltonian mechanics the natural starting point for Poisson brackets, canonical transformations, and the transition to quantum mechanics."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "Hamilton's equations describe different physics from the Euler-Lagrange equation — they are an alternative, competing theory that might give different predictions.",
+          "correction": "Hamilton's equations and the Euler-Lagrange equation are mathematically equivalent reformulations of the exact same physics, connected by the Legendre transform. Solving either set of equations for the same system produces identical physical trajectories; the choice between them is a matter of mathematical convenience and structural insight, not physical content."
+        },
+        {
+          "misconception": "Because Hamilton's equations are first-order, they are always simpler or easier to solve than the Euler-Lagrange equation's second-order form.",
+          "correction": "'First-order' does not automatically mean 'easier' — Hamilton's approach doubles the number of equations (2N instead of N) even though each individual equation looks simpler. The real advantages of the Hamiltonian formulation are structural (symmetry between q and p, the phase-space and Poisson-bracket machinery, the route to canonical transformations and quantum mechanics), not necessarily computational ease for any single specific problem."
+        },
+        {
+          "misconception": "Phase space is just another name for the physical 3D space the system moves through.",
+          "correction": "Phase space is an abstract mathematical space with 2N dimensions (N coordinates plus N momenta), entirely distinct from the 3D physical space (or even the N-dimensional configuration space, met already) the system actually occupies. A single point in phase space encodes the FULL instantaneous state (both position and momentum information) of the entire system, however many physical dimensions it lives in."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "A side-by-side comparison table: Euler-Lagrange (N second-order ODEs, configuration space) versus Hamilton's equations (2N first-order ODEs, phase space), with the harmonic oscillator worked out in both forms below.",
+        "A phase-space portrait for the simple harmonic oscillator: a closed elliptical trajectory in the (q,p) plane, with arrows indicating the direction of flow, directly generated by Hamilton's equations.",
+        "An annotated symmetric-equations diagram: q̇ = ∂H/∂p and ṗ = −∂H/∂q written one above the other with the q↔p, sign-flip symmetry highlighted with matching colors."
+      ],
+      "worked_example_blueprint": {
+        "setup": "A simple harmonic oscillator has Hamiltonian H(q,p) = p²/2m + ½kq². Derive Hamilton's equations of motion and show they reproduce the standard SHM equation of motion.",
+        "steps": [
+          "Apply the first Hamilton equation: q̇ = ∂H/∂p = ∂/∂p (p²/2m + ½kq²) = p/m.",
+          "Apply the second Hamilton equation: ṗ = −∂H/∂q = −∂/∂q (p²/2m + ½kq²) = −kq.",
+          "The result is a coupled pair of first-order equations: q̇ = p/m and ṗ = −kq.",
+          "Combine them into a single second-order equation by differentiating the first and substituting the second: q̈ = ṗ/m = −kq/m, i.e. q̈ + (k/m)q = 0 — exactly the standard simple harmonic oscillator equation of motion, with angular frequency ω=√(k/m).",
+          "Confirm this matches the Euler-Lagrange result for the same system (L = ½mq̇² − ½kq² gives the identical q̈ + (k/m)q = 0 directly), verifying the two formulations' equivalence explicitly for this concrete case."
+        ],
+        "expected_outcome": "The student correctly derives q̇ = p/m and ṗ = −kq from Hamilton's equations, correctly combines them into the standard SHM second-order equation, and explicitly confirms this matches the equivalent Euler-Lagrange result."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "Hamilton's equations derivation from a given H(q,p)",
+          "phase-space trajectory sketching for simple systems",
+          "cross-checking Hamilton's equations against Euler-Lagrange results"
+        ],
+        "difficulty_progression": "Begin with deriving Hamilton's equations for simple 1-degree-of-freedom systems, move to combining them into a single equation of motion and cross-checking against the Lagrangian result, and finish with sketching or describing qualitative phase-space trajectories (e.g. closed orbits for bound systems, open trajectories for unbound ones).",
+        "suggested_count": 8
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "derivation and cross-check problem set",
+          "phase-space trajectory identification/sketching task"
+        ],
+        "bloom_alignment": "Apply — students must apply Hamilton's equations mechanically to derive correct equations of motion and connect the resulting dynamics to a phase-space trajectory picture.",
+        "mastery_signal": "The student correctly derives Hamilton's equations from a given Hamiltonian, correctly combines them to recover the standard equation of motion, and correctly describes or sketches the resulting qualitative phase-space trajectory, at 85% accuracy or better."
+      },
+      "real_world_applications": [
+        "Symplectic numerical integrators — used in long-timescale simulations of planetary orbits and molecular dynamics — are built directly on Hamilton's equations' phase-space structure, because they conserve energy-like quantities far better over millions of simulated steps than naive Newtonian integration.",
+        "Chaos theory and nonlinear dynamics (e.g. the three-body problem) are typically formulated and numerically studied in phase space using Hamilton's equations, since phase-space portraits reveal structures like stable/unstable orbits that are far less visually apparent in configuration space.",
+        "Accelerator physics (designing the magnetic 'beam optics' that guide particles around a collider ring) is formulated almost entirely in Hamiltonian phase-space language, tracking each particle's (position, momentum) state through the accelerator lattice."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.mech.hamiltonian"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "3d62c0bc",
+        "kg_build_date": "2026-07-06",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "c040f1f0",
+        "source_references": [
+          "Goldstein Classical Mechanics Ch.8",
+          "Landau & Lifshitz Mechanics Ch.7",
+          "Taylor Classical Mechanics Ch.13"
+        ]
+      }
+    },
+    {
+      "id": "asset.phys.mech.poisson-brackets",
+      "concept_id": "phys.mech.poisson-brackets",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to compute the Poisson bracket of two phase-space functions, use {f,H} to express the time evolution of any dynamical quantity, state the fundamental brackets {qᵢ,pⱼ}=δᵢⱼ, and explain Liouville's theorem as conservation of phase-space volume.",
+      "concept_summary": "Hamilton's equations (met already) describe how q and p individually evolve in time — the POISSON BRACKET generalizes this into a single, elegant algebraic tool describing how ANY function of phase space evolves. For two functions f(q,p,t) and g(q,p,t), the Poisson bracket is defined as {f,g} = Σᵢ(∂f/∂qᵢ ∂g/∂pᵢ − ∂f/∂pᵢ ∂g/∂qᵢ). Its single most important consequence: for ANY dynamical quantity f(q,p,t), its total time derivative along the system's motion is exactly df/dt = {f,H} + ∂f/∂t — meaning the Hamiltonian, bracketed against any quantity, generates that quantity's time evolution. Hamilton's equations themselves are simply the special cases f=qᵢ and f=pᵢ: q̇ᵢ={qᵢ,H} and ṗᵢ={pᵢ,H}. A directly useful corollary: if {f,H}=0 (f 'Poisson-commutes' with H) and f has no explicit time dependence, then f is a CONSTANT OF MOTION — Poisson brackets give a completely general, systematic test for conserved quantities, subsuming the cyclic-coordinate result (met already) as one special case. The FUNDAMENTAL POISSON BRACKETS between the canonical variables themselves take a strikingly simple universal form: {qᵢ,pⱼ}=δᵢⱼ, {qᵢ,qⱼ}=0, {pᵢ,pⱼ}=0 — and these exact relations reappear, essentially unchanged in structure (replaced by ℏ times a commutator), as the canonical commutation relations that launch quantum mechanics, making Poisson brackets the direct classical shadow of quantum operator algebra. Finally, LIOUVILLE'S THEOREM states that the 'volume' occupied by a bundle of nearby phase-space trajectories is CONSERVED as the system evolves — points in phase space move like an incompressible fluid, a deep structural fact (provable directly from Hamilton's equations having zero phase-space 'divergence') that underlies the foundations of classical statistical mechanics.",
+      "key_ideas": [
+        "The Poisson bracket {f,g} = Σᵢ(∂f/∂qᵢ ∂g/∂pᵢ − ∂f/∂pᵢ ∂g/∂qᵢ) generalizes Hamilton's equations: for any phase-space function f, df/dt = {f,H} + ∂f/∂t, with Hamilton's equations themselves recovered as the special cases f=qᵢ and f=pᵢ.",
+        "If {f,H}=0 and f has no explicit time dependence, f is a conserved quantity — a general, systematic test for constants of motion that subsumes the cyclic-coordinate conservation result as a special case.",
+        "The fundamental Poisson brackets between canonical variables are {qᵢ,pⱼ}=δᵢⱼ, {qᵢ,qⱼ}=0, {pᵢ,pⱼ}=0 — a simple, universal algebraic structure independent of the specific system.",
+        "These fundamental brackets are the direct classical precursor of the quantum canonical commutation relations [q̂ᵢ,p̂ⱼ]=iℏδᵢⱼ — Poisson brackets are, in a precise sense, the classical shadow of quantum operator algebra.",
+        "Liouville's theorem states that phase-space 'volume' occupied by a bundle of nearby trajectories is conserved under time evolution — phase-space flow behaves like an incompressible fluid, a foundational fact for classical statistical mechanics."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "The Poisson bracket {f,g} is just a shorthand notation for the product f×g or some other simple algebraic combination, with no deeper structural meaning.",
+          "correction": "The Poisson bracket is a specific bilinear differential operation (involving partial derivatives of both functions with respect to ALL the canonical variables) — it is antisymmetric ({f,g}=−{g,f}), satisfies its own version of the product rule and the Jacobi identity, and is emphatically NOT a simple product. Its defining significance is that it generates time evolution via {f,H}, a role no simple algebraic product could play."
+        },
+        {
+          "misconception": "Liouville's theorem says that the SHAPE of a region of phase space is preserved as the system evolves, not just its volume.",
+          "correction": "Liouville's theorem guarantees only that the phase-space VOLUME is conserved — the shape can (and typically does) deform dramatically, often stretching in some directions and compressing in others (this stretching-while-preserving-volume behavior is in fact the origin of chaotic sensitivity to initial conditions in nonlinear systems). A sphere of initial conditions can evolve into a long, thin, twisted filament of exactly the same volume."
+        },
+        {
+          "misconception": "{f,H}=0 always means f is exactly zero, or that f and H are unrelated to each other.",
+          "correction": "{f,H}=0 means f is CONSERVED (constant along the motion) when f has no explicit time dependence — it says nothing about f's numerical value (which can be any nonzero constant) and does not mean f and H are unrelated; on the contrary, H itself always satisfies {H,H}=0 trivially, correctly reflecting energy conservation for a time-independent Hamiltonian."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "A worked symbolic derivation showing q̇ᵢ={qᵢ,H} reduces exactly to ∂H/∂pᵢ by direct substitution into the Poisson bracket definition, explicitly recovering Hamilton's first equation as a special case.",
+        "A phase-space 'ink drop' animation: a small blob of initial conditions evolving under Hamilton's equations, visibly stretching and deforming into an elongated shape while a grid overlay confirms the enclosed area (volume) stays constant — illustrating Liouville's theorem.",
+        "A side-by-side classical-to-quantum correspondence table: {q,p}=1 (classical) directly beside [q̂,p̂]=iℏ (quantum), with the general classical-to-quantum 'Poisson bracket to (1/iℏ)×commutator' correspondence rule stated explicitly."
+      ],
+      "worked_example_blueprint": {
+        "setup": "For a particle with Hamiltonian H = p²/2m + V(x), use the Poisson bracket df/dt = {f,H} to derive the time evolution of (a) the position x, (b) the momentum p, and (c) confirm that H itself is conserved.",
+        "steps": [
+          "(a) Compute {x,H} = ∂x/∂x · ∂H/∂p − ∂x/∂p · ∂H/∂x = (1)(∂H/∂p) − (0)(∂H/∂x) = ∂H/∂p = p/m. So ẋ = {x,H} = p/m — matching Hamilton's first equation directly.",
+          "(b) Compute {p,H} = ∂p/∂x · ∂H/∂p − ∂p/∂p · ∂H/∂x = (0)(∂H/∂p) − (1)(∂H/∂x) = −∂H/∂x = −V'(x). So ṗ = {p,H} = −V'(x) — matching Hamilton's second equation, and equivalent to Newton's second law F=−V'(x)=ma.",
+          "(c) Compute {H,H}: by the antisymmetry property of the Poisson bracket, {H,H} = −{H,H}, which forces {H,H}=0 for ANY function H bracketed with itself.",
+          "Since H has no explicit time dependence in this problem (V=V(x) only, no explicit t), dH/dt = {H,H} + ∂H/∂t = 0 + 0 = 0 — confirming energy conservation directly from the Poisson-bracket formalism, with zero extra physical argument beyond the antisymmetry property."
+        ],
+        "expected_outcome": "The student correctly computes {x,H}=p/m and {p,H}=−V'(x), recognizing these as reproductions of Hamilton's equations, and correctly uses the antisymmetry of the Poisson bracket to show {H,H}=0, concluding H is conserved for this time-independent system."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "Poisson bracket computation for given phase-space functions",
+          "conserved-quantity testing via {f,H}=0",
+          "fundamental bracket {qᵢ,pⱼ}=δᵢⱼ application items"
+        ],
+        "difficulty_progression": "Begin with direct Poisson bracket computations between simple functions, move to using {f,H} to test whether a given quantity is conserved, and finish with deriving Hamilton's equations themselves as a special case of the general df/dt={f,H} formula.",
+        "suggested_count": 8
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "computation problem set",
+          "conceptual proof/derivation task (deriving Hamilton's equations from the Poisson bracket formalism)"
+        ],
+        "bloom_alignment": "Analyze — students must analyze the algebraic structure of the Poisson bracket to test conservation, derive equations of motion, and connect the classical formalism to its quantum counterpart.",
+        "mastery_signal": "The student correctly computes Poisson brackets between phase-space functions, correctly uses {f,H}=0 to identify conserved quantities, and correctly derives Hamilton's equations as the special case f=qᵢ,pᵢ of the general df/dt={f,H} relation, at 85% accuracy or better."
+      },
+      "real_world_applications": [
+        "Quantum mechanics' canonical commutation relations [q̂,p̂]=iℏ — the foundation of the uncertainty principle and all of quantum operator formalism — are obtained by a direct, systematic replacement of classical Poisson brackets, making this concept the precise classical seed of quantum theory's mathematical structure.",
+        "Liouville's theorem underlies the derivation of the Boltzmann and Liouville equations in statistical mechanics and plasma physics, which describe how a probability distribution over phase space evolves in time for large systems of particles.",
+        "Chaos theory's characterization of sensitive dependence on initial conditions (the 'butterfly effect') is quantitatively described using how phase-space volumes stretch and fold while their total volume is conserved, a direct consequence of Liouville's theorem."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.mech.hamiltons-equations"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "3d62c0bc",
+        "kg_build_date": "2026-07-06",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "c040f1f0",
+        "source_references": [
+          "Goldstein Classical Mechanics Ch.9",
+          "Landau & Lifshitz Mechanics Ch.7"
+        ]
+      }
+    },
+    {
+      "id": "asset.phys.mech.canonical-transformations",
+      "concept_id": "phys.mech.canonical-transformations",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to define a canonical transformation as one that preserves Hamilton's equations and the fundamental Poisson bracket structure, use a generating function to construct a canonical transformation, and explain why the freedom to change variables so broadly is a distinctive strength of the Hamiltonian formulation.",
+      "concept_summary": "In the Lagrangian and Hamiltonian formulations developed so far, changing coordinates (e.g. Cartesian to polar) is always allowed, but it is restricted to POINT TRANSFORMATIONS — new coordinates Qᵢ that are functions of the old coordinates qᵢ alone (and possibly time), never mixing in momenta. A CANONICAL TRANSFORMATION is a dramatically more general change of phase-space variables (qᵢ,pᵢ)→(Qᵢ,Pᵢ), where the new momenta Pᵢ and new coordinates Qᵢ can each be complicated, mixed functions of BOTH the old coordinates and old momenta — Qᵢ=Qᵢ(q,p,t), Pᵢ=Pᵢ(q,p,t) — subject to exactly one requirement: the transformation must preserve Hamilton's equations' form (some new Hamiltonian K exists such that Q̇ᵢ=∂K/∂Pᵢ, Ṗᵢ=−∂K/∂Qᵢ) and, equivalently, must preserve the fundamental Poisson bracket structure {Qᵢ,Pⱼ}=δᵢⱼ (met already). This vastly larger freedom — allowed only because Hamilton's equations treat q and p on an equal, symmetric footing (met already) — has no counterpart in the Lagrangian formulation, where q and q̇ are not independent in the same sense. Canonical transformations are systematically constructed using GENERATING FUNCTIONS: a single function of a mixed set of old and new variables (four standard types, F₁(q,Q,t), F₂(q,P,t), F₃(p,Q,t), F₄(p,P,t), related to each other by Legendre transforms) from which the transformation equations for both old and new momenta are derived by partial differentiation. The strategic power of this freedom is enormous: a well-chosen canonical transformation can convert a hard problem (a complicated H(q,p)) into a trivially easy one (a new Hamiltonian K that is simply zero, or depends on only one variable) — this strategy, pushed to its logical extreme, is precisely the idea behind the Hamilton-Jacobi equation developed at the final concept in this sequence.",
+      "key_ideas": [
+        "A canonical transformation (q,p)→(Q,P) is far more general than a point transformation: the new momenta and coordinates can mix old coordinates and momenta together, as long as the transformation preserves Hamilton's equations' form.",
+        "Equivalently, a transformation is canonical exactly when it preserves the fundamental Poisson bracket structure {Qᵢ,Pⱼ}=δᵢⱼ, {Qᵢ,Qⱼ}=0, {Pᵢ,Pⱼ}=0.",
+        "This q-p-mixing freedom exists only because Hamilton's equations treat coordinates and momenta symmetrically — it has no counterpart in the Lagrangian formulation, where velocities are not independent variables in the same structural sense.",
+        "Canonical transformations are systematically generated by a generating function (one of four standard types, F₁ through F₄, related to each other by Legendre transforms), from which the transformation equations follow by partial differentiation.",
+        "The strategic value of canonical transformations is converting a hard problem (complicated H(q,p)) into an easy one (simple or even identically zero new Hamiltonian K) — an idea pursued to its logical conclusion in the Hamilton-Jacobi equation."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "A canonical transformation is just any change of variables (Q,P) = (some function of q,p) — as long as you can invert it, it counts as canonical.",
+          "correction": "Invertibility alone is not sufficient. A canonical transformation must specifically preserve Hamilton's equations' form (or equivalently, preserve the fundamental Poisson brackets) — this is a genuine, restrictive mathematical condition, and most arbitrary invertible changes of (q,p) variables do NOT satisfy it. Checking {Qᵢ,Pⱼ}=δᵢⱼ under the OLD variables' bracket is the standard test for whether a proposed transformation is truly canonical."
+        },
+        {
+          "misconception": "Canonical transformations only rename or rescale the coordinate q, similar to ordinary coordinate transformations like Cartesian to polar.",
+          "correction": "The defining and most powerful feature of canonical transformations is precisely that they can MIX q and p together — for instance, a simple but genuinely canonical transformation can swap the roles of coordinate and momentum entirely (Q=p, P=−q), something a mere coordinate renaming could never do. This mixing freedom is exactly what makes canonical transformations strictly more general than ordinary point transformations."
+        },
+        {
+          "misconception": "The 'new Hamiltonian' K after a canonical transformation is always just the old Hamiltonian H rewritten in new variables, with no other changes.",
+          "correction": "In general K differs from H not only by variable substitution but also by an extra term arising from any explicit time-dependence of the generating function itself (K = H + ∂F/∂t, for a time-dependent generating function F) — for time-INdependent transformations K is simply H re-expressed in the new variables, but the general case includes this extra term, which is precisely what allows K to be engineered to be simpler than H (even identically zero, as in the Hamilton-Jacobi approach)."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "A Venn-style diagram: 'point transformations' shown as a small circle fully contained within the much larger circle of 'canonical transformations', explicitly illustrating that every point transformation is canonical but not vice versa.",
+        "A generating-function family tree: F₁(q,Q,t) at the top, with arrows (labeled 'Legendre transform') branching to F₂(q,P,t), F₃(p,Q,t), F₄(p,P,t), each annotated with its defining partial-derivative relations.",
+        "A worked 'coordinate-momentum swap' example (Q=p, P=−q) shown explicitly satisfying {Q,P}={p,−q}=1, visually demonstrating a genuinely non-point canonical transformation passing the bracket test."
+      ],
+      "worked_example_blueprint": {
+        "setup": "Verify that the transformation Q = p and P = −q is a canonical transformation for a single degree of freedom system, by checking whether it preserves the fundamental Poisson bracket, and briefly discuss why this transformation could never arise from an ordinary point transformation.",
+        "steps": [
+          "Recall the canonical transformation test: (Q,P) is canonical if {Q,P} computed using the OLD variables' Poisson bracket definition equals 1 (matching {q,p}=1).",
+          "Compute {Q,P} = {p,−q} = ∂p/∂q · ∂(−q)/∂p − ∂p/∂p · ∂(−q)/∂q = (0)(0) − (1)(−1) = 1.",
+          "Since {Q,P}=1, matching the required fundamental bracket, the transformation Q=p, P=−q IS canonical, despite looking like a strange 'swap' of coordinate and momentum roles.",
+          "Note this transformation could never come from a point transformation, since a point transformation requires Q to be a function of q (and possibly t) alone — here Q=p depends entirely on the OLD MOMENTUM, not on q at all, which is only possible within the broader canonical-transformation framework.",
+          "Physical interpretation: this transformation literally exchanges the roles of 'position' and 'momentum' while preserving all of Hamiltonian mechanics' structure — a vivid illustration that in Hamiltonian mechanics, q and p are not fundamentally different kinds of quantity, merely two halves of a symmetric pair, exactly as anticipated by the q-p symmetry of Hamilton's equations (met already)."
+        ],
+        "expected_outcome": "The student correctly computes {Q,P}={p,−q}=1, confirms the transformation is canonical by this test, and correctly explains why such a coordinate-momentum-swapping transformation lies outside the scope of ordinary point transformations."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "canonical-transformation verification via the fundamental Poisson bracket test",
+          "generating function partial-derivative exercises",
+          "point-transformation-vs-canonical-transformation conceptual distinction items"
+        ],
+        "difficulty_progression": "Begin with verifying whether given simple transformations are canonical via the bracket test, move to deriving transformation equations from a specified generating function, and finish with conceptual items distinguishing which transformations could and could not arise from an ordinary point transformation.",
+        "suggested_count": 8
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "verification problem set (bracket test)",
+          "generating-function derivation exercise"
+        ],
+        "bloom_alignment": "Analyze — students must analyze whether a proposed transformation satisfies the canonical condition and correctly use a generating function to derive transformation equations, going beyond simple point-transformation manipulation.",
+        "mastery_signal": "The student correctly applies the fundamental Poisson bracket test to verify whether a given transformation is canonical, and correctly derives the transformation equations for a system from a specified generating function, at 85% accuracy or better."
+      },
+      "real_world_applications": [
+        "Action-angle variables (developed at the next concept, the Hamilton-Jacobi equation) are constructed via a canonical transformation specifically chosen to make the new Hamiltonian depend only on the action variables, dramatically simplifying the analysis of periodic and quasi-periodic systems like planetary orbits.",
+        "Canonical perturbation theory — used to compute small corrections to planetary orbits from other planets' gravitational influence — relies on sequences of canonical transformations to systematically simplify a perturbed Hamiltonian order by order.",
+        "In quantum mechanics, canonical transformations have a direct analog in unitary transformations between different operator representations (e.g. position versus momentum representation), reflecting the deep structural continuity between classical and quantum phase-space-like formalisms."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.mech.poisson-brackets"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "3d62c0bc",
+        "kg_build_date": "2026-07-06",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "c040f1f0",
+        "source_references": [
+          "Goldstein Classical Mechanics Ch.9"
+        ]
+      }
+    },
+    {
+      "id": "asset.phys.mech.hamilton-jacobi-equation",
+      "concept_id": "phys.mech.hamilton-jacobi-equation",
+      "version": "1.0.0",
+      "status": "draft",
+      "learning_objective": "Students will be able to state the Hamilton-Jacobi equation, explain it as the result of seeking a canonical transformation to a Hamiltonian identically equal to zero, describe the role of Hamilton's principal function, and explain action-angle variables as the natural outcome of separating the Hamilton-Jacobi equation for integrable systems.",
+      "concept_summary": "The strategic idea introduced with canonical transformations (met already) — simplify a hard problem by transforming to a new Hamiltonian K that is trivially easy — is pushed to its absolute logical extreme by the HAMILTON-JACOBI EQUATION: seek a canonical transformation to new coordinates and momenta (Q,P) that are BOTH CONSTANT in time. If every Qᵢ and Pᵢ is constant, Hamilton's equations for the new variables are trivially satisfied by K≡0 identically. Choosing a particular generating function of type F₂(q,P,t), traditionally called HAMILTON'S PRINCIPAL FUNCTION S(q,P,t), and demanding K=H+∂S/∂t=0, yields the HAMILTON-JACOBI EQUATION: H(q, ∂S/∂q, t) + ∂S/∂t = 0 — a single, first-order (though generally nonlinear) PARTIAL differential equation for S, replacing an entire system of ordinary differential equations. Remarkably, once S is found (by solving this one PDE), the ENTIRE solution to the mechanics problem — every qᵢ(t) and pᵢ(t) — follows by straightforward algebra and differentiation, with no further integration required. For a large and physically important class of systems (SEPARABLE, or completely INTEGRABLE systems, where the Hamilton-Jacobi equation can be split into N independent one-variable equations, one per degree of freedom), this procedure naturally produces ACTION-ANGLE VARIABLES (J,θ): the ACTION variables Jᵢ = ∮pᵢdqᵢ (an integral over one full period of motion) are constants of motion directly related to the system's adiabatic invariants, while the conjugate ANGLE variables θᵢ increase uniformly in time, making periodic and quasi-periodic motion (like planetary orbits or vibrating molecules) exceptionally transparent to analyze. This entire formalism is also historically and structurally the CLASSICAL PRECURSOR of the Schrödinger equation (met at a related concept): replacing S with (ℏ/i) ln ψ in the Hamilton-Jacobi equation and taking the appropriate limit reveals the deep continuity between classical mechanics and the quantum wave equation.",
+      "key_ideas": [
+        "The Hamilton-Jacobi equation arises from seeking a canonical transformation to new coordinates and momenta (Q,P) that are BOTH constant, forcing the new Hamiltonian K≡0.",
+        "Using the generating function S(q,P,t), called Hamilton's principal function, the condition K=H+∂S/∂t=0 gives the Hamilton-Jacobi equation: H(q,∂S/∂q,t)+∂S/∂t=0, a single first-order PDE replacing an entire system of ODEs.",
+        "Once S is found by solving the Hamilton-Jacobi equation, the entire solution qᵢ(t), pᵢ(t) follows by algebra and differentiation alone, with no further integration required.",
+        "For separable (completely integrable) systems, the Hamilton-Jacobi equation splits into N independent one-variable equations, naturally producing action-angle variables (J,θ): the action Jᵢ=∮pᵢdqᵢ is constant, and the conjugate angle θᵢ increases uniformly in time.",
+        "The Hamilton-Jacobi equation is the direct classical precursor of the Schrödinger equation — S plays a role in classical mechanics structurally analogous to the phase of the quantum wavefunction."
+      ],
+      "common_misconceptions": [
+        {
+          "misconception": "The Hamilton-Jacobi equation is a completely separate, unrelated method from Hamilton's equations and canonical transformations, requiring an entirely different conceptual starting point.",
+          "correction": "The Hamilton-Jacobi equation is the LOGICAL CONCLUSION of the canonical-transformation strategy (met already): it is simply the special, most extreme canonical transformation possible — one that makes the new Hamiltonian identically zero by making every new coordinate and momentum constant. It is not a separate method bolted on, but the natural endpoint of the sequence Lagrangian → Hamiltonian → Poisson brackets → canonical transformations."
+        },
+        {
+          "misconception": "Solving the Hamilton-Jacobi equation is always easier than solving the original Euler-Lagrange or Hamilton equations directly.",
+          "correction": "The Hamilton-Jacobi equation is a nonlinear PARTIAL differential equation, which is generally HARDER to solve than a system of ordinary differential equations — the method's real value is not that it is always computationally easier, but that for SEPARABLE systems (a large and physically important class), it reduces to a set of simple, solvable one-variable integrals, and it provides deep structural insight (action-angle variables, the classical-quantum connection) unavailable from the ODE approach."
+        },
+        {
+          "misconception": "The action variable J and the ordinary action S = ∫L dt from Hamilton's principle are the same quantity.",
+          "correction": "They are related but distinct: S (Hamilton's principal function / the action integral) is a function that generates the canonical transformation and generally varies continuously, while the action VARIABLE J = ∮p dq is a specific constant of motion defined by a closed-loop integral over one full period, used specifically in the action-angle variable formalism for periodic systems — using the same word 'action' for both is a genuine, well-known source of confusion in the literature that deserves explicit clarification."
+        }
+      ],
+      "visual_teaching_suggestions": [
+        "A conceptual flowchart: Lagrangian → Hamiltonian → Poisson brackets → canonical transformations → 'push to the extreme: make Q,P both constant' → Hamilton-Jacobi equation, showing this concept as the natural endpoint of the whole sequence.",
+        "A phase-space diagram for a periodic orbit (e.g. simple harmonic oscillator) with the action variable J shown as the enclosed phase-space area (∮p dq), and the angle variable θ shown advancing uniformly around the orbit.",
+        "A side-by-side classical-quantum correspondence panel: the Hamilton-Jacobi equation for S beside the time-dependent Schrödinger equation for ψ, with the substitution S ↔ (ℏ/i)lnψ noted explicitly as the connecting bridge."
+      ],
+      "worked_example_blueprint": {
+        "setup": "For a simple harmonic oscillator with Hamiltonian H = p²/2m + ½mω²q², use the Hamilton-Jacobi approach conceptually to explain how the action variable J relates to the total energy E, without carrying out the full PDE solution in detail.",
+        "steps": [
+          "Recognize that for this time-independent, separable, periodic system, the Hamilton-Jacobi equation reduces to finding S(q,E) such that H(q, ∂S/∂q) = E (energy is the natural separation constant for a time-independent Hamiltonian).",
+          "The action variable is defined as J = ∮p dq, the closed-loop integral of momentum over one full oscillation period — geometrically, this is exactly the AREA enclosed by the SHM's elliptical phase-space trajectory (met already at Hamilton's equations and Poisson brackets).",
+          "For the SHM ellipse defined by p²/2m + ½mω²q² = E, standard geometry of an ellipse with semi-axes √(2mE) (momentum axis) and √(2E/mω²) (position axis) gives an enclosed area of J = 2πE/ω.",
+          "Invert this relation to express energy directly in terms of the action variable: E = Jω/(2π), often written E = ωJ (using the convention J=∮p dq/2π, sometimes called the reduced action).",
+          "Interpret physically: the action variable J, a single constant number for a given orbit, completely determines the oscillator's energy — and conversely, since J is exactly what becomes quantized in the old (pre-Schrödinger) Bohr-Sommerfeld quantum theory, this classical result directly foreshadows quantum energy levels being evenly spaced by ℏω, obtained rigorously only later via the full Schrödinger equation."
+        ],
+        "expected_outcome": "The student explains that the action variable J is geometrically the phase-space area enclosed by one period of the SHM's elliptical orbit, correctly relates J to the total energy E via E∝Jω, and connects this to the historical Bohr-Sommerfeld precursor of quantum energy quantization."
+      },
+      "practice_blueprint": {
+        "item_types": [
+          "conceptual sequencing items (Hamilton-Jacobi as the endpoint of the canonical-transformation strategy)",
+          "action variable geometric interpretation exercises (phase-space area)",
+          "classical-to-quantum correspondence conceptual items"
+        ],
+        "difficulty_progression": "Begin with conceptual items placing the Hamilton-Jacobi equation correctly within the Lagrangian-to-Hamiltonian sequence, move to interpreting the action variable as enclosed phase-space area for simple periodic systems, and finish with items explaining the qualitative connection between the Hamilton-Jacobi equation and the Schrödinger equation.",
+        "suggested_count": 6
+      },
+      "assessment_blueprint": {
+        "formats": [
+          "conceptual explanation and sequencing prompts",
+          "action-variable geometric interpretation problem"
+        ],
+        "bloom_alignment": "Evaluate — students must synthesize the entire Lagrangian-to-Hamiltonian sequence to explain why the Hamilton-Jacobi equation represents its logical culmination, and evaluate the significance of action-angle variables and the classical-quantum correspondence, matching this concept's evaluate-level Bloom classification and 10-hour estimated study time.",
+        "mastery_signal": "The student correctly explains the Hamilton-Jacobi equation as the extreme case of a canonical transformation to a trivial (zero) Hamiltonian, correctly interprets the action variable geometrically for a simple periodic system, and correctly articulates the qualitative link between S and the phase of the quantum wavefunction, at 85% accuracy or better."
+      },
+      "real_world_applications": [
+        "Action-angle variables are the standard tool for analyzing near-integrable planetary and satellite orbits, including secular perturbation theory used to predict long-term orbital evolution in the solar system.",
+        "The historical Bohr-Sommerfeld quantization rule (∮p dq = nh), an early and partially successful precursor to full quantum mechanics, is a direct application of the action variable J developed in this concept, applied to atomic electron orbits before the Schrödinger equation existed.",
+        "Adiabatic invariants (quantities, closely related to action variables, that remain nearly constant under slow changes to a system) are used in plasma physics to understand charged particle confinement in slowly varying magnetic fields, such as in fusion reactor design."
+      ],
+      "prerequisite_review_triggers": [
+        "phys.mech.canonical-transformations",
+        "phys.qm.schrodinger-equation"
+      ],
+      "provenance": {
+        "kg_version": "1.0.0",
+        "kg_commit": "3d62c0bc",
+        "kg_build_date": "2026-07-06",
+        "domain_version": "1.1.0",
+        "asset_schema_version": "1.0.0",
+        "generator_version": "manual-authoring-v1",
+        "validation_version": "1.1.0",
+        "generated_at": "2026-07-24T00:00:00Z",
+        "generation_commit": "c040f1f0",
+        "source_references": [
+          "Goldstein Classical Mechanics Ch.10",
+          "Landau & Lifshitz Mechanics Ch.7",
+          "Goldstein Classical Mechanics Ch.11"
+        ]
+      }
     }
   ]
 }
