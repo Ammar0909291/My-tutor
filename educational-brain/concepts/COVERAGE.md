@@ -14,7 +14,7 @@ and this file's summary row should be corrected to match.
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
-| chemistry | 186 | 165 | levels 0–17 complete (165/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock, chem.redox, chem.dblock, chem.org, chem.pblock, chem.solid, chem.hyd, chem.hal, chem.coord, chem.nitro, chem.alc, chem.carb, chem.poly — IN PROGRESS |
+| chemistry | 186 | 167 | 167/186 (Completion Loop 2026-07-25, batch 1 of 5: chem.alc.epoxides, chem.alc.protection authored, closing the chem.alc domain to 6/6) — IN PROGRESS, 19 concepts remain across chem.carb (6), chem.bio (6), chem.nitro (3), chem.poly (4); all 186 now have fully authored Blueprints (`docs/curriculum/blueprints/chem.*.md`) and Teaching Assets (`docs/chemistry/teaching-assets/assets.json`, status draft) as of 2026-07-25 — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
 
@@ -632,6 +632,17 @@ retrieval engine. Per-entry completeness against the tracked fields is in
   their 24 rows to `EDUCATIONAL_BRAIN_INDEX.md`, `QUALITY.md`, or removed
   them from `AUTHORING_QUEUE.md` — a bookkeeping gap corrected as part of
   that merge, not left inconsistent.**
+  **Correction (2026-07-25, does not rewrite the historical record above):**
+  the "KEY DISCOVERY" claim that all 186 chemistry Blueprint entries are
+  `[TEMPLATE]` placeholders is now stale — a separate completion program
+  (2026-07-25) fully authored all 186 `docs/curriculum/blueprints/chem.*.md`
+  Blueprints (16-section format) and transcribed them into
+  `docs/chemistry/teaching-assets/assets.json` (all 186 entries now
+  `status: draft`, not `placeholder`). New chemistry EB entries authored
+  from 2026-07-25 onward correctly cite these real Blueprints in their
+  Blueprint References section; the 165 entries authored before this date
+  still carry the now-inaccurate "no Blueprint content exists" statement
+  and were not retroactively rewritten (out of scope for this batch).
 
 - **Batch 16 — Physics Wave 12 (2026-07-23)**: continuing the same
   mandatory-rules production cycle immediately following Wave 11 in this
