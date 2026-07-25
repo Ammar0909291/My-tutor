@@ -3608,48 +3608,62 @@
     {
       "id": "asset.chem.equil.weak-acid",
       "concept_id": "chem.equil.weak-acid",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Weak Acid and Base Equilibria\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Weak Acid and Base Equilibria\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Weak Acid and Base Equilibria\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "For a weak acid, degree of dissociation α = √(Ka/C₀) INCREASES as concentration C₀ decreases (dilution promotes dissociation as a fraction, even though absolute [H⁺]=C₀α still decreases overall) — approaching α→1 (complete dissociation) at infinite dilution for any weak acid, however weak; Ka and Kb of a conjugate acid-base pair are related MULTIPLICATIVELY (Ka×Kb=Kw), not additively, despite the superficially similar-looking logarithmic relationship (pKa+pKb=14) tempting an incorrect additive analogy for the non-log version; and the common \"5% approximation\" simplification (x=√(Ka·C₀)) is only valid when verified (x/C₀<0.05) — blindly applying it without checking can produce a physically impossible result (calculated [H⁺] exceeding the initial concentration), which is itself the clearest signal the approximation has failed and the full quadratic must be solved instead.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Weak Acid and Base Equilibria\"",
-        "[TEMPLATE] Key idea 2 for \"Weak Acid and Base Equilibria\"",
-        "[TEMPLATE] Key idea 3 for \"Weak Acid and Base Equilibria\""
+        "A weak acid's degree of dissociation (α) is given by α=√(Ka/C₀) — since C₀ appears in the denominator, DILUTING a weak acid solution (decreasing C₀) genuinely INCREASES α, the fraction of molecules that dissociate, even though the resulting absolute [H⁺]=C₀α still decreases overall (because C₀ shrinks proportionally faster than α grows). This reflects Le Chatelier's principle: adding water effectively shifts the dissociation equilibrium further toward products.",
+        "A conjugate acid-base pair's Ka and Kb values are related by MULTIPLICATION (Ka×Kb=Kw), not addition — the familiar additive pKa+pKb=14 relationship is simply the logarithm of this multiplicative rule, not an independently additive property of Ka and Kb themselves. Separately, the common simplifying approximation for weak-acid pH calculations (x=√(Ka·C₀)) is only valid when the resulting x is genuinely small relative to C₀ (specifically x/C₀<0.05) — this must always be checked after computing, since violating it (sometimes dramatically, as when x exceeds C₀ itself) signals the approximation has failed and the full quadratic must be solved.",
+        "Core misconception to avoid: Dilution increases α (fractional dissociation) even as it decreases [H⁺] (absolute concentration) — the two quantities are related but move in opposite directions with concentration change."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Weak Acid and Base Equilibria\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Dilution reduces [H⁺] so α decreases.",
+          "correction": "Dilution increases α (fractional dissociation) even as it decreases [H⁺] (absolute concentration) — the two quantities are related but move in opposite directions with concentration change."
+        },
+        {
+          "misconception": "Kb(CH₃COO⁻) = Kw − Ka = 10⁻¹⁴ − 1.8×10⁻⁵ (approximately −1.8×10⁻⁵).",
+          "correction": "Ka×Kb=Kw (multiplicative) is the fundamental relationship; pKa+pKb=14 (additive) is simply its logarithmic transformation, not a separate, independently-additive rule for Ka and Kb."
+        },
+        {
+          "misconception": "Calculate [H⁺] in 0.010 M chlorous acid (HClO₂), Ka = 1.1×10⁻².",
+          "correction": "Always verify x/C₀<0.05 after computing the shortcut approximation — if this check fails, discard the approximate answer and solve the full quadratic equation instead."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Weak Acid and Base Equilibria\""
+        "Demonstration 1 (α-vs-C₀ numeric comparison): Compute α explicitly for acetic acid at 0.10 M and 0.01 M, showing the numeric increase directly, alongside the separate computation of [H⁺] at each concentration showing its decrease.",
+        "Demonstration 2 (approximation-validity check drill): Present several weak-acid scenarios with varying Ka/C₀ ratios, having students compute the shortcut approximation AND check x/C₀ each time, discovering which cases require the full quadratic instead."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Weak Acid and Base Equilibria\"",
+        "setup": "A 0.10 M acetic acid solution has α=1.3%. What happens to α if diluted to 0.01 M?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (α-vs-C₀ numeric comparison): Compute α explicitly for acetic acid at 0.10 M and 0.01 M, showing the numeric increase directly, alongside the separate computation of [H⁺] at each concentration showing its decrease.",
+          "Demonstration 2 (approximation-validity check drill): Present several weak-acid scenarios with varying Ka/C₀ ratios, having students compute the shortcut approximation AND check x/C₀ each time, discovering which cases require the full quadratic instead."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Weak Acid and Base Equilibria\""
+        "expected_outcome": "Student can (a) correctly predict that dilution increases α even as [H⁺] decreases, (b) correctly compute a conjugate partner's K value using multiplication, not addition, (c) correctly check the 5% approximation's validity and switch to the full quadratic when it fails."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit α computation at two concentrations, showing the increase directly.",
+          "TA-2 (TELL): State the multiplicative Ka×Kb=Kw relationship explicitly, immediately followed by the log-derivation showing why pKa+pKb=14 is additive instead.",
+          "TA-3 (DO): Student computes the shortcut approximation for a given weak acid and checks x/C₀ validity before accepting the result.",
+          "TA-4 (TEST-THINKING): Present MC-3's HClO₂ probe and ask the student to recognize the physically impossible result (x exceeding C₀) as a validity-check failure."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Weak Acid and Base Equilibria from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A 0.10 M acetic acid solution has α=1.3%. What happens to α if diluted to 0.01 M?\"",
+          "FA-2: \"Acetic acid has Ka=1.8×10⁻⁵. Calculate Kb for acetate ion.\"",
+          "FA-3: \"Calculate [H⁺] in 0.010 M HClO₂, Ka=1.1×10⁻². Check whether the 5% approximation is valid.\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Weak Acid and Base Equilibria\""
+        "mastery_signal": "Student can (a) correctly predict that dilution increases α even as [H⁺] decreases, (b) correctly compute a conjugate partner's K value using multiplication, not addition, (c) correctly check the 5% approximation's validity and switch to the full quadratic when it fails."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Weak Acid and Base Equilibria\""
+        "Feeds directly into `chem.equil.buffer` (buffer capacity calculations require fluent weak-acid equilibrium reasoning), `chem.equil.hydrolysis` (salt hydrolysis directly applies the conjugate Ka/Kb relationship established here), and `chem.equil.titration` (titration curve analysis requires correct weak-acid dissociation behavior throughout)."
       ],
       "prerequisite_review_triggers": [
         "chem.equil.acids-bases"
@@ -3658,48 +3672,64 @@
     {
       "id": "asset.chem.equil.buffer",
       "concept_id": "chem.equil.buffer",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Buffer Solutions\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Buffer Solutions\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Buffer Solutions\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Diluting a buffer with pure water does NOT change its pH — both [A⁻] and [HA] are diluted equally, so their RATIO (which determines pH via Henderson-Hasselbalch: pH=pKa+log([A⁻]/[HA])) stays constant, even though buffer CAPACITY decreases (fewer total moles per liter to resist further additions); a weak acid ALONE is NOT a buffer — a genuine buffer requires BOTH conjugate pair members (HA and A⁻) present simultaneously at comparable concentrations, since a lone weak acid solution has no A⁻ \"reservoir\" and its pH changes dramatically upon the first addition of base, unlike a true buffer; maximum buffer capacity occurs at [A⁻]/[HA]=1 (equal reservoirs in both directions), NOT at some larger ratio like 10 — a 10:1 ratio can absorb added base well but has little HA reserve to resist added acid, making it a poor overall buffer despite skewing pH toward one side; and blood's H₂CO₃/HCO₃⁻ buffer (pKa≈6.1) is effective at physiological pH 7.4 DESPITE being far from its \"ideal\" pKa=pH point, because the OPEN SYSTEM (CO₂ exhaled via lungs) combined with active physiological regulation of both components compensates for the non-ideal pKa — buffer effectiveness isn't determined by pKa proximity to target pH alone.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Buffer Solutions\"",
-        "[TEMPLATE] Key idea 2 for \"Buffer Solutions\"",
-        "[TEMPLATE] Key idea 3 for \"Buffer Solutions\""
+        "A buffer's pH depends entirely on the ratio of its conjugate species' concentrations (Henderson-Hasselbalch: pH=pKa+log([A⁻]/[HA])), while its capacity to resist further pH changes depends on their absolute amounts — dilution changes the latter without affecting the former. A genuine buffer requires both HA and A⁻ present at comparable, substantial concentrations; a lone weak acid solution's tiny equilibrium [A⁻] is insufficient for meaningful buffering.",
+        "Buffer capacity is maximized when [A⁻]=[HA] (ratio=1), since this balances resistance to both added acid and added base — a skewed ratio necessarily sacrifices resistance in one direction. Real-world buffer effectiveness can also depend on system-level factors beyond simple pKa-vs-pH matching — blood's carbonate buffer, despite a pKa far from physiological pH, remains highly effective due to active physiological regulation and its open-system advantage of exhaling CO₂.",
+        "Core misconception to avoid: Diluting a buffer with pure water leaves pH unchanged (the [A⁻]/[HA] ratio is preserved) while decreasing buffer capacity — never assume dilution changes buffer pH."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Buffer Solutions\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "diluting it will change the pH.",
+          "correction": "Diluting a buffer with pure water leaves pH unchanged (the [A⁻]/[HA] ratio is preserved) while decreasing buffer capacity — never assume dilution changes buffer pH."
+        },
+        {
+          "misconception": "weak acid buffers the pH.",
+          "correction": "A genuine buffer requires both HA and A⁻ present at comparable, substantial concentrations — a lone weak acid solution (with only trace equilibrium A⁻) is not a buffer and will show dramatic pH change upon initial base addition."
+        },
+        {
+          "misconception": "(implicit, from confusing the buffer's effective range with maximum capacity).",
+          "correction": "Maximum buffer capacity occurs at [A⁻]=[HA] (ratio=1), balancing resistance to both added acid and added base equally — never assume a skewed ratio like 10:1 maximizes overall capacity."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Buffer Solutions\""
+        "Demonstration 1 (Henderson-Hasselbalch before/after dilution): Compute pH explicitly before and after doubling buffer volume with water, confirming the unchanged ratio and pH.",
+        "Demonstration 2 (titration-curve comparison, lone acid vs. true buffer): Present both titration curves side by side, contrasting the steep vs. flat pH-response regions.",
+        "Demonstration 3 (two-sided capacity comparison at different ratios): Compute resistance to both acid and base addition explicitly at ratio=1 and ratio=10, deriving the balanced optimum."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Buffer Solutions\"",
+        "setup": "What happens to the pH of a buffer if you double its volume with pure water?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (Henderson-Hasselbalch before/after dilution): Compute pH explicitly before and after doubling buffer volume with water, confirming the unchanged ratio and pH.",
+          "Demonstration 2 (titration-curve comparison, lone acid vs. true buffer): Present both titration curves side by side, contrasting the steep vs. flat pH-response regions.",
+          "Demonstration 3 (two-sided capacity comparison at different ratios): Compute resistance to both acid and base addition explicitly at ratio=1 and ratio=10, deriving the balanced optimum."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Buffer Solutions\""
+        "expected_outcome": "Student can (a) correctly predict pH unchanged upon dilution while capacity decreases, (b) correctly distinguish a genuine buffer from a lone weak acid solution, (c) correctly identify ratio=1 as the capacity-maximizing point."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit Henderson-Hasselbalch computation before and after dilution.",
+          "TA-2 (TELL): State the both-conjugate-species requirement for genuine buffering explicitly, anchored to the titration-curve comparison.",
+          "TA-3 (DO): Student computes buffer capacity resistance to both acid and base addition at different ratios.",
+          "TA-4 (TEST-THINKING): Present the blood-buffer pKa-mismatch probe and ask the student to justify its effectiveness from system-level factors."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Buffer Solutions from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"What happens to the pH of a buffer if you double its volume with pure water?\"",
+          "FA-2: \"Is 0.1 M acetic acid alone a buffer? What happens when you add NaOH?\"",
+          "FA-3: \"At what ratio is a buffer most resistant to adding either acid or base?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Buffer Solutions\""
+        "mastery_signal": "Student can (a) correctly predict pH unchanged upon dilution while capacity decreases, (b) correctly distinguish a genuine buffer from a lone weak acid solution, (c) correctly identify ratio=1 as the capacity-maximizing point."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Buffer Solutions\""
+        "This concept has no direct KG unlocks but consolidates weak-acid equilibrium reasoning built across `chem.equil.weak-acid`, forming a capstone application to physiological and analytical buffer-chemistry contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.equil.weak-acid"
@@ -3708,48 +3738,69 @@
     {
       "id": "asset.chem.equil.hydrolysis",
       "concept_id": "chem.equil.hydrolysis",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Salt Hydrolysis\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Salt Hydrolysis\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Salt Hydrolysis\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Hydrolysis is NOT the same as dissolving — dissolving (dissociation into ions, e.g., NaCl→Na⁺+Cl⁻) is a distinct process from hydrolysis (a specific ion REACTING with water to change [H⁺] or [OH⁻]) — NaCl dissolves without hydrolysis (neutral solution), while CH₃COONa both dissolves AND its acetate ion hydrolyzes; NOT all salts make solutions acidic — a salt's solution pH depends on the relative strengths of its PARENT acid and base (weak-acid/strong-base salts give basic solutions, strong-acid/weak-base salts give acidic solutions, strong-acid/strong-base salts give neutral solutions), so \"salts are acidic\" is a false blanket generalization; the hydrolysis constant Kh relates to Ka via Kh=Kw/Ka (NEVER Kh=Ka+Kb or Ka/Kb) — this follows directly from the conjugate acid-base pair relationship Ka×Kb=Kw; and NH₄Cl is genuinely ACIDIC (not basic, despite containing the \"base\" ammonia's conjugate), because NH₄⁺ is the CONJUGATE ACID of the weak base NH�3, and it is NH₄⁺ (not Cl⁻, which doesn't hydrolyze, being from strong acid HCl) that hydrolyzes to produce H₃O⁺.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Salt Hydrolysis\"",
-        "[TEMPLATE] Key idea 2 for \"Salt Hydrolysis\"",
-        "[TEMPLATE] Key idea 3 for \"Salt Hydrolysis\""
+        "Hydrolysis is a distinct chemical process (an ion reacting with water to shift [H⁺] or [OH⁻]) from simple dissociation (a salt separating into ions) — only ions that are conjugates of weak acids or bases hydrolyze appreciably. A salt's overall solution pH is determined by tracing each constituent ion back to its parent acid/base strength: weak-acid/strong-base salts give basic solutions, strong-acid/weak-base salts give acidic solutions, and strong-acid/strong-base salts give neutral solutions — salts are never universally acidic.",
+        "The hydrolysis constant Kh is derived directly from the conjugate acid-base pair relationship Ka×Kb=Kw, giving Kh=Kw/Ka — never an additive or divisive combination. A conjugate acid (like NH₄⁺) has the opposite acid-base character from its parent base (NH₃); NH₄⁺ hydrolyzes as an acid, producing an acidic solution, despite NH₃ itself being a familiar weak base.",
+        "Core misconception to avoid: Distinguish dissolving (dissociation into ions, occurs for essentially all soluble salts) from hydrolysis (a specific ion reacting with water to shift pH, occurs only for ions that are conjugates of weak acids/bases) — never treat them as the same process."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Salt Hydrolysis\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "hydrolysis is just dissolving.",
+          "correction": "Distinguish dissolving (dissociation into ions, occurs for essentially all soluble salts) from hydrolysis (a specific ion reacting with water to shift pH, occurs only for ions that are conjugates of weak acids/bases) — never treat them as the same process."
+        },
+        {
+          "misconception": "salts are acidic.",
+          "correction": "A salt's solution pH depends on the relative strengths of its parent acid and base (weak-acid/strong-base→basic; strong-acid/weak-base→acidic; strong-acid/strong-base→neutral) — never assume salts are universally acidic."
+        },
+        {
+          "misconception": "Ka and Kb add up.",
+          "correction": "Always derive Kh=Kw/Ka from the conjugate-pair relationship Ka×Kb=Kw — never use Kh=Ka+Kb or Ka/Kb."
+        },
+        {
+          "misconception": "(implicit, from attributing NH₃'s base character directly to the salt).",
+          "correction": "Always identify the SPECIFIC hydrolyzing ion and its role (conjugate acid or conjugate base) — never attribute a parent base's character directly to its conjugate acid cation."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Salt Hydrolysis\""
+        "Demonstration 1 (NaCl-vs-CH₃COONa dissolving/hydrolysis comparison): Present both salts side by side, tracing dissociation and hydrolysis occurrence for each.",
+        "Demonstration 2 (four-quadrant salt-classification table): Present the full parent-acid/parent-base classification table with example salts in each quadrant.",
+        "Demonstration 3 (Kh=Kw/Ka derivation from the conjugate-pair relationship): Derive Kh explicitly from Ka×Kb=Kw, substituting Kh for Kb."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Salt Hydrolysis\"",
+        "setup": "What is the difference between dissolving NaCl and CH₃COONa undergoing hydrolysis?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (NaCl-vs-CH₃COONa dissolving/hydrolysis comparison): Present both salts side by side, tracing dissociation and hydrolysis occurrence for each.",
+          "Demonstration 2 (four-quadrant salt-classification table): Present the full parent-acid/parent-base classification table with example salts in each quadrant.",
+          "Demonstration 3 (Kh=Kw/Ka derivation from the conjugate-pair relationship): Derive Kh explicitly from Ka×Kb=Kw, substituting Kh for Kb."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Salt Hydrolysis\""
+        "expected_outcome": "Student can (a) correctly distinguish dissolving from hydrolysis, (b) correctly predict salt solution pH from parent acid/base strengths, (c) correctly derive Kh=Kw/Ka and correctly identify the hydrolyzing ion's conjugate role."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit NaCl-vs-CH₃COONa dissolving/hydrolysis comparison.",
+          "TA-2 (TELL): State the four-way salt-classification rule explicitly, anchored to the classification table.",
+          "TA-3 (DO): Student derives Kh for an unfamiliar conjugate base from its parent acid's Ka.",
+          "TA-4 (TEST-THINKING): Present the NH₄Cl probe and ask the student to justify its acidity from NH₄⁺'s conjugate-acid role."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Salt Hydrolysis from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"What is the difference between dissolving NaCl and CH₃COONa undergoing hydrolysis?\"",
+          "FA-2: \"What is the pH of 0.1 M KNO₃? Of 0.1 M Na₂CO₃?\"",
+          "FA-3: \"What is the hydrolysis constant for the acetate ion if Ka = 1.8 × 10⁻⁵?\"",
+          "FA-4: \"Which ion in NH₄Cl undergoes hydrolysis, and does it produce H₃O⁺ or OH⁻?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Salt Hydrolysis\""
+        "mastery_signal": "Student can (a) correctly distinguish dissolving from hydrolysis, (b) correctly predict salt solution pH from parent acid/base strengths, (c) correctly derive Kh=Kw/Ka and correctly identify the hydrolyzing ion's conjugate role."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Salt Hydrolysis\""
+        "This concept has no direct KG unlocks but consolidates weak-acid equilibrium reasoning built across `chem.equil.weak-acid`, forming a capstone application to titration and analytical pH-prediction contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.equil.weak-acid"
@@ -3758,48 +3809,62 @@
     {
       "id": "asset.chem.equil.solubility",
       "concept_id": "chem.equil.solubility",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Solubility Equilibria\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Solubility Equilibria\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Solubility Equilibria\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "A larger Ksp does NOT always mean greater molar solubility — this comparison is only valid within the SAME formula stoichiometry type, since the mathematical relationship between Ksp and molar solubility s differs by formula type (s=√Ksp for 1:1 salts like AgCl, but s=(Ksp/4)^(1/3) for 2:1 salts like Ag₂CrO₄, so a salt with a smaller Ksp can genuinely have GREATER molar solubility if it has a different stoichiometric formula type); the Ksp expression must correctly reflect stoichiometric coefficients as exponents on ion concentrations DERIVED FROM s using the balanced dissolution equation (Ag₂CrO₄→2Ag⁺+CrO₄²⁻ gives [Ag⁺]=2s, not s, so Ksp=(2s)²(s)=4s³, not s²); and the reaction quotient Q_sp for predicting precipitation must be computed using concentrations IMMEDIATELY AFTER MIXING (before any reaction/equilibration occurs), never using post-equilibrium concentrations, since Q_sp's entire purpose is comparing the just-mixed state against the saturation threshold (Ksp) to predict whether precipitation will occur at all.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Solubility Equilibria\"",
-        "[TEMPLATE] Key idea 2 for \"Solubility Equilibria\"",
-        "[TEMPLATE] Key idea 3 for \"Solubility Equilibria\""
+        "Ksp and molar solubility (s) are related by a formula that depends on the specific stoichiometric type of the dissolving salt — for a 1:1 salt (Ksp=s²), for a 2:1 salt like Ag₂CrO₄ (Ksp=4s³, since [Ag⁺]=2s), and so on for other stoichiometries. This means direct comparison of raw Ksp values across compounds of DIFFERENT formula types can be genuinely misleading — the compound with the smaller Ksp can actually be more soluble, depending on how the stoichiometry translates Ksp into s.",
+        "To predict whether mixing two solutions will cause precipitation, compute Q_sp using the concentrations that exist IMMEDIATELY after mixing (accounting for dilution from combining volumes, before any reaction occurs) and compare against Ksp — if Q_sp exceeds Ksp, the solution is momentarily \"over-saturated\" relative to equilibrium, and precipitation will occur to bring the system back down to Q_sp=Ksp; using post-equilibrium concentrations for this comparison is circular and defeats the entire purpose of the test.",
+        "Core misconception to avoid: Always convert Ksp to actual molar solubility using the correct stoichiometry-specific formula before comparing solubility across compounds of different formula types — never compare raw Ksp values directly unless the formula types genuinely match."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Solubility Equilibria\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "AgCl is more soluble because its Ksp is larger.",
+          "correction": "Always convert Ksp to actual molar solubility using the correct stoichiometry-specific formula before comparing solubility across compounds of different formula types — never compare raw Ksp values directly unless the formula types genuinely match."
+        },
+        {
+          "misconception": "Ksp = s × s = s² (for Ag₂CrO₄).",
+          "correction": "Always derive each ion's concentration from s using the SPECIFIC balanced dissolution equation's stoichiometric coefficients — for Ag₂CrO₄, [Ag⁺]=2s and [CrO₄²⁻]=s, giving Ksp=4s³, never simply s²."
+        },
+        {
+          "misconception": "I calculated the equilibrium concentrations first, then checked if Q > Ksp.",
+          "correction": "Always compute Q_sp using the concentrations that exist immediately after mixing (accounting for dilution from combining volumes), never using concentrations after the system has re-equilibrated."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Solubility Equilibria\""
+        "Demonstration 1 (AgCl-vs-Ag₂CrO₄ solubility computation): Compute actual molar solubility explicitly for both compounds using their correct stoichiometry-specific formulas, showing the counterintuitive ranking (smaller Ksp, greater solubility).",
+        "Demonstration 2 (Q_sp just-mixed computation drill): Work through the explicit dilution-then-Q_sp calculation for the AgNO₃/NaCl mixing scenario, emphasizing the \"immediately after mixing\" timing requirement."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Solubility Equilibria\"",
+        "setup": "AgCl has Ksp=1.8×10⁻¹⁰; Ag₂CrO₄ has Ksp=1.1×10⁻¹². Which has greater molar solubility?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (AgCl-vs-Ag₂CrO₄ solubility computation): Compute actual molar solubility explicitly for both compounds using their correct stoichiometry-specific formulas, showing the counterintuitive ranking (smaller Ksp, greater solubility).",
+          "Demonstration 2 (Q_sp just-mixed computation drill): Work through the explicit dilution-then-Q_sp calculation for the AgNO₃/NaCl mixing scenario, emphasizing the \"immediately after mixing\" timing requirement."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Solubility Equilibria\""
+        "expected_outcome": "Student can (a) correctly convert Ksp to molar solubility using the stoichiometry-specific formula, avoiding direct Ksp comparison across formula types, (b) correctly derive ion concentrations from s using the balanced dissolution equation's coefficients, (c) correctly compute Q_sp using just-mixed (pre-equilibrium) concentrations."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit AgCl-vs-Ag₂CrO₄ molar solubility computation, showing the counterintuitive ranking.",
+          "TA-2 (TELL): State the stoichiometry-derived-ion-concentration rule explicitly, worked through for Ag₂CrO₄'s [Ag⁺]=2s.",
+          "TA-3 (DO): Student computes Q_sp for a new mixing scenario using correctly-diluted, just-mixed concentrations.",
+          "TA-4 (TEST-THINKING): Present MC-1's AgCl-vs-Ag₂CrO₄ probe and ask the student to justify which is more soluble using computed s values, not raw Ksp."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Solubility Equilibria from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"AgCl has Ksp=1.8×10⁻¹⁰; Ag₂CrO₄ has Ksp=1.1×10⁻¹². Which has greater molar solubility?\"",
+          "FA-2: \"Write the Ksp expression for Ag₂CrO₄ in terms of s.\"",
+          "FA-3: \"50 mL of 2.0×10⁻⁴ M AgNO₃ is mixed with 50 mL of 2.0×10⁻⁴ M NaCl. Will a precipitate form?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Solubility Equilibria\""
+        "mastery_signal": "Student can (a) correctly convert Ksp to molar solubility using the stoichiometry-specific formula, avoiding direct Ksp comparison across formula types, (b) correctly derive ion concentrations from s using the balanced dissolution equation's coefficients, (c) correctly compute Q_sp using just-mixed (pre-equilibrium) concentrations."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Solubility Equilibria\""
+        "Feeds directly into `chem.anal.gravimetric` (quantitative precipitation analysis directly applies solubility-product and Q_sp reasoning established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.equil.kc-kp"
@@ -3867,50 +3932,70 @@
     {
       "id": "asset.chem.equil.titration",
       "concept_id": "chem.equil.titration",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Acid–Base Titrations\".",
-      "concept_summary": "Titration curves for strong–strong, strong–weak, weak–weak; equivalence point pH; indicator choice.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Acid–Base Titrations\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The equivalence point of a titration has pH=7 ONLY when both acid and base are strong — for a weak acid/strong base titration, the resulting salt's conjugate base hydrolyzes (e.g., CH₃COO⁻+H₂O⇌CH₃COOH+OH⁻), genuinely producing pH>7 at equivalence; the equivalence point (defined by stoichiometry — moles acid=moles base) and the endpoint (defined by indicator color change) are DIFFERENT concepts, requiring an appropriately-matched indicator to minimize titration error — an indicator that changes color within a titration's steep, near-vertical pH-jump region (like methyl orange's ~3.5-4.5 range for a weak-acid/strong-base titration whose equivalence point is well above pH 7) will produce a false, premature endpoint; and the half-equivalence point of a weak-acid titration has pH=pKa specifically (from Henderson-Hasselbalch at [A⁻]=[HA]), NOT pH=7, since pH=7 would require pKa=7, which is not generally true for weak acids.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Acid–Base Titrations\"",
-        "[TEMPLATE] Key idea 2 for \"Acid–Base Titrations\"",
-        "[TEMPLATE] Key idea 3 for \"Acid–Base Titrations\""
+        "Equivalence-point pH depends on the strengths of the acid and base being titrated — pH=7 occurs only for strong-acid/strong-base titrations; weak-acid titrations produce a hydrolyzing conjugate base, shifting equivalence-point pH above 7 (and analogously below 7 for weak-base titrations). The equivalence point (a stoichiometric fact) and the endpoint (an indicator-observed color change) are distinct concepts, and accurate titration requires selecting an indicator whose color-change pH range falls within the titration's steep pH-jump region near the true equivalence point.",
+        "At the half-equivalence point of a weak-acid titration, exactly half the acid has converted to its conjugate base ([A⁻]=[HA]), and Henderson-Hasselbalch directly gives pH=pKa — a value determined by the specific acid's properties, not a universal pH=7, since \"halfway converted\" and \"pH 7\" are unrelated facts unless the acid's pKa happens to coincidentally equal 7.",
+        "Core misconception to avoid: Equivalence-point pH=7 only for strong-acid/strong-base titrations; weak-acid/strong-base titrations produce pH>7 (basic conjugate-base hydrolysis); weak-base/strong-acid titrations produce pH<7 (acidic conjugate-acid hydrolysis) — always check acid/base strength before assuming pH=7."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Acid–Base Titrations\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "acid + base = neutral.",
+          "correction": "Equivalence-point pH=7 only for strong-acid/strong-base titrations; weak-acid/strong-base titrations produce pH>7 (basic conjugate-base hydrolysis); weak-base/strong-acid titrations produce pH<7 (acidic conjugate-acid hydrolysis) — always check acid/base strength before assuming pH=7."
+        },
+        {
+          "misconception": "you stop at the endpoint because that's when the reaction is complete.",
+          "correction": "Equivalence point (stoichiometric, calculated) and endpoint (indicator-observed, experimental) are genuinely distinct concepts — indicator selection must ensure the endpoint closely approximates the true equivalence point to minimize titration error."
+        },
+        {
+          "misconception": "Why can't you use methyl orange (pKa ~3.5) for a weak acid–strong base titration?",
+          "correction": "Indicator selection requires matching the indicator's specific color-change pH range to the titration's steep pH-jump region near the true equivalence point — never assume any indicator works universally, since a mismatched indicator (like methyl orange for a weak-acid/strong-base titration) produces significant, systematic error."
+        },
+        {
+          "misconception": "half-neutralised means half way to neutral.",
+          "correction": "At the half-equivalence point, pH=pKa (from Henderson-Hasselbalch at [A⁻]=[HA]) — this equals 7 only if the acid's specific pKa happens to be 7, which is the exception, not the rule."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Acid–Base Titrations\""
+        "Demonstration 1 (weak-acid equivalence-point pH computation): Compute the actual equivalence-point pH for acetic acid/NaOH explicitly, tracing the hydrolysis mechanism producing pH>7.",
+        "Demonstration 2 (indicator-mismatch error visualization): Present the full titration curve with methyl orange's color-change range marked in the flat buffer region, contrasted with phenolphthalein's appropriately-matched range near the true equivalence point."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Acid–Base Titrations\"",
+        "setup": "What is the pH at the equivalence point when 0.1 M acetic acid is titrated with 0.1 M NaOH?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (weak-acid equivalence-point pH computation): Compute the actual equivalence-point pH for acetic acid/NaOH explicitly, tracing the hydrolysis mechanism producing pH>7.",
+          "Demonstration 2 (indicator-mismatch error visualization): Present the full titration curve with methyl orange's color-change range marked in the flat buffer region, contrasted with phenolphthalein's appropriately-matched range near the true equivalence point."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Acid–Base Titrations\""
+        "expected_outcome": "Student can (a) correctly predict equivalence-point pH direction based on acid/base strength, (b) correctly distinguish equivalence point from endpoint and select an appropriately-matched indicator, (c) correctly compute half-equivalence-point pH as pKa using Henderson-Hasselbalch."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the CH₃COO⁻ hydrolysis mechanism explicitly, connecting it to the above-7 equivalence-point pH.",
+          "TA-2 (TELL): State the equivalence-point-vs-endpoint distinction explicitly, immediately followed by the pH-gap error quantification.",
+          "TA-3 (DO): Student selects an appropriately-matched indicator for a given titration type, justifying the choice using the equivalence-point pH.",
+          "TA-4 (TEST-THINKING): Present MC-4's half-equivalence probe and ask the student to derive the pH=pKa result from Henderson-Hasselbalch directly."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Acid–Base Titrations from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"What is the pH at the equivalence point when 0.1 M acetic acid is titrated with 0.1 M NaOH?\"",
+          "FA-2: \"If an indicator changes colour at pH 6, but the equivalence point is pH 8.8, what error occurs?\"",
+          "FA-3: \"Why can't you use methyl orange for a weak acid–strong base titration?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Acid–Base Titrations\""
+        "mastery_signal": "Student can (a) correctly predict equivalence-point pH direction based on acid/base strength, (b) correctly distinguish equivalence point from endpoint and select an appropriately-matched indicator, (c) correctly compute half-equivalence-point pH as pKa using Henderson-Hasselbalch."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Acid–Base Titrations\""
+        "Feeds directly into `chem.anal.volumetric` (quantitative volumetric analysis directly applies titration curve and indicator-selection reasoning established here)."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.equil.weak-acid"
+      ]
     },
     {
       "id": "asset.chem.redox.oxidation-state",
