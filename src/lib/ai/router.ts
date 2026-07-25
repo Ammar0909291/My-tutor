@@ -8,7 +8,12 @@ import { AIProviderError } from './providers/types'
 
 // ─── Provider configuration (env-var driven) ─────────────────────────────────
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY ?? ''
-const GEMINI_MODEL = process.env.GEMINI_MODEL ?? 'gemini-2.5-flash'
+// 'gemini-2.5-flash' (this constant's value until 2026-07-25) returns a hard
+// 404 "no longer available to new users" for any Google AI Studio key issued
+// after Gemini 3's release — reproduced directly against the Generative
+// Language API with a live production key. 'gemini-3.5-flash' is confirmed
+// working (finishReason STOP, real text) against the same key/account.
+const GEMINI_MODEL = process.env.GEMINI_MODEL ?? 'gemini-3.5-flash'
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY ?? ''
 const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL ?? 'deepseek/deepseek-chat-v3.1'
 
