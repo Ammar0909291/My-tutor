@@ -4100,48 +4100,67 @@
     {
       "id": "asset.chem.redox.oxidation-state",
       "concept_id": "chem.redox.oxidation-state",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Oxidation State\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Oxidation State\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Oxidation State\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Oxidation state is a CALCULATED number derived from formal rules and the overall charge-balance sum rule — never an observable, physical ion charge (Mn in KMnO₄ has OS=+7, computed from K=+1, O=−2 (×4), summing to zero overall, entirely distinct from any literal, physically-measurable charge on the Mn atom); oxygen is NOT always −2 — the peroxide exception (O–O bond present, as in H₂O₂) gives O an oxidation state of −1, confirmed directly by the sum rule; the oxidizing agent CAUSES oxidation in another species while ITSELF being REDUCED (never \"gets oxidized\" itself, despite the superficially confusing name) — in 2H₂+O₂→2H₂O, O₂ (going from OS 0 to −2, gaining electrons, being reduced) is the oxidizing agent, while H₂ (going from OS 0 to +1, losing electrons, being oxidized) is the reducing agent; and hydrogen is NOT always +1 — in metal hydrides (like NaH), where the metal is more electropositive than hydrogen, hydrogen becomes the more electronegative species and receives formal electron ownership, giving OS(H)=−1.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Oxidation State\"",
-        "[TEMPLATE] Key idea 2 for \"Oxidation State\"",
-        "[TEMPLATE] Key idea 3 for \"Oxidation State\""
+        "Oxidation state is a calculated, formal bookkeeping number derived from standard rules (elements in their standard state = 0; common values for specific elements; the overall sum rule requiring all oxidation states in a compound to sum to the compound's overall charge) — it is never a literal, observable ionic charge, and must always be computed via these rules, never assumed or defaulted.",
+        "Common \"default\" oxidation states (oxygen=−2, hydrogen=+1) have well-established, structurally-grounded exceptions — oxygen becomes −1 in peroxides (O–O bond present), and hydrogen becomes −1 in metal hydrides (bonded to a more electropositive metal) — always check for these specific structural conditions before applying the default value. Separately, an \"oxidizing agent\" is named for the effect it causes in the OTHER reactant (oxidation), while the agent itself undergoes the OPPOSITE process (reduction) — the name describes external effect, not the agent's own fate.",
+        "Core misconception to avoid: Always compute oxidation state using the sum rule and standard element-specific rules, never assume it defaults to zero or equals a literal observable charge."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Oxidation State\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Mn has no charge, so OS = 0.",
+          "correction": "Always compute oxidation state using the sum rule and standard element-specific rules, never assume it defaults to zero or equals a literal observable charge."
+        },
+        {
+          "misconception": "oxygen is always minus two.",
+          "correction": "Oxygen is usually −2, but is −1 specifically in peroxides (O–O bond present) — always check for an O–O bond before assuming the standard −2 value."
+        },
+        {
+          "misconception": "the oxidising agent does the oxidising so it must get oxidised.",
+          "correction": "The oxidizing agent is itself reduced (gains electrons, OS decreases) while causing oxidation in the other reactant; the reducing agent is itself oxidized (loses electrons, OS increases) while causing reduction in the other reactant."
+        },
+        {
+          "misconception": "H is always +1.",
+          "correction": "Hydrogen is usually +1 (bonded to more electronegative elements), but is −1 specifically in metal hydrides (bonded to a more electropositive metal) — always check which element is relatively more electronegative in the specific bond before assuming +1."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Oxidation State\""
+        "Demonstration 1 (KMnO₄ sum-rule computation): Compute Mn's oxidation state in KMnO₄ explicitly using the sum rule, showing the derivation step by step to +7.",
+        "Demonstration 2 (2H₂+O₂→2H₂O agent identification): Track OS changes explicitly for both H₂ and O₂, connecting each change (oxidized vs. reduced) to the correct agent naming."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Oxidation State\"",
+        "setup": "What is the OS of Mn in KMnO₄?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (KMnO₄ sum-rule computation): Compute Mn's oxidation state in KMnO₄ explicitly using the sum rule, showing the derivation step by step to +7.",
+          "Demonstration 2 (2H₂+O₂→2H₂O agent identification): Track OS changes explicitly for both H₂ and O₂, connecting each change (oxidized vs. reduced) to the correct agent naming."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Oxidation State\""
+        "expected_outcome": "Student can (a) correctly compute oxidation states using the sum rule, never assuming a default value without verification, (b) correctly apply the peroxide and metal-hydride exceptions, (c) correctly identify oxidizing and reducing agents by tracking OS changes, not by the agent's name alone."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit KMnO₄ sum-rule computation.",
+          "TA-2 (TELL): State the peroxide oxygen exception explicitly, worked through for H₂O₂.",
+          "TA-3 (DO): Student identifies the oxidizing and reducing agents in a new redox reaction, tracking OS changes explicitly.",
+          "TA-4 (TEST-THINKING): Present MC-4's NaH probe and ask the student to justify H's −1 oxidation state using relative electronegativity."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Oxidation State from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"What is the OS of Mn in KMnO₄?\"",
+          "FA-2: \"What is the OS of O in H₂O₂?\"",
+          "FA-3: \"In 2H₂+O₂→2H₂O, which is the oxidising agent?\"",
+          "FA-4: \"What is the OS of H in NaH?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Oxidation State\""
+        "mastery_signal": "Student can (a) correctly compute oxidation states using the sum rule, never assuming a default value without verification, (b) correctly apply the peroxide and metal-hydride exceptions, (c) correctly identify oxidizing and reducing agents by tracking OS changes, not by the agent's name alone."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Oxidation State\""
+        "Feeds directly into `chem.redox.balancing` (redox equation balancing directly requires fluent, correct oxidation-state assignment established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.period.valency"
@@ -4150,48 +4169,62 @@
     {
       "id": "asset.chem.redox.balancing",
       "concept_id": "chem.redox.balancing",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Balancing Redox Equations\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Balancing Redox Equations\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Balancing Redox Equations\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The half-reaction method's H₂O/H⁺ balancing rule is NOT \"always add to a fixed side\" — H₂O goes specifically to whichever side is SHORT of oxygen, and H⁺ goes specifically to whichever side is SHORT of hydrogen, with the deficit side genuinely varying by which specific molecule/reaction is being balanced, requiring first-principles application every time rather than memorized fixed placement; electrons appear on the LEFT only in REDUCTION half-reactions (consumed, gaining electrons) and on the RIGHT only in OXIDATION half-reactions (produced, losing electrons) — never assume electrons always go on one fixed side (the mnemonic \"OAR\" — Oxidation Adds Right — captures this); and converting a balanced acidic-solution half-reaction to basic solution requires a specific THREE-STEP procedure (balance fully in acid first, then add OH⁻ to BOTH sides equal to the H⁺ count, then combine H⁺+OH⁻→H₂O and cancel any resulting duplicate H₂O molecules) — simply replacing every H⁺ with OH⁻ directly skips the essential H₂O-adjustment step and produces an incorrect equation.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Balancing Redox Equations\"",
-        "[TEMPLATE] Key idea 2 for \"Balancing Redox Equations\"",
-        "[TEMPLATE] Key idea 3 for \"Balancing Redox Equations\""
+        "Balancing redox half-reactions requires a systematic, first-principles procedure — balance atoms other than O/H, then add H₂O to whichever side is actually deficient in oxygen, then add H⁺ to whichever side is actually deficient in hydrogen, then balance charge with electrons placed according to the reaction's direction (right for oxidation, since electrons are produced; left for reduction, since electrons are consumed, following the OAR mnemonic) — this deficit-checking and directional reasoning must be reapplied for each specific reaction, never assumed from a fixed template.",
+        "Converting a balanced acidic-solution equation to basic solution requires a specific three-step procedure — balance fully in acid first, add OH⁻ to both sides equal to the H⁺ count present, then combine H⁺+OH⁻→H₂O and cancel any resulting duplicate H₂O — this genuinely changes the equation's species composition through real chemical combination, never achieved by simply substituting the OH⁻ symbol for H⁺ directly.",
+        "Core misconception to avoid: Always determine H₂O and H⁺ placement by checking the actual oxygen and hydrogen deficit for the SPECIFIC reaction being balanced — never assume a fixed placement pattern from a previous example."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Balancing Redox Equations\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Balance the half-reaction: NO₃⁻ → NO in acidic solution. Where does H₂O go, and where does H⁺ go?",
+          "correction": "Always determine H₂O and H⁺ placement by checking the actual oxygen and hydrogen deficit for the SPECIFIC reaction being balanced — never assume a fixed placement pattern from a previous example."
+        },
+        {
+          "misconception": "electrons are reactants so they go on the left.",
+          "correction": "Electrons appear on the right in oxidation half-reactions (produced) and on the left in reduction half-reactions (consumed) — never assume a fixed side without checking which direction (oxidation or reduction) the half-reaction represents."
+        },
+        {
+          "misconception": "swap H⁺ for OH⁻.",
+          "correction": "Convert to basic solution using the full three-step procedure (balance in acid, add OH⁻ to both sides equal to H⁺ count, combine and cancel H₂O) — never use direct H⁺-to-OH⁻ symbol substitution as a shortcut."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Balancing Redox Equations\""
+        "Demonstration 1 (NO₃⁻→NO deficit-checking walkthrough): Balance the NO₃⁻→NO half-reaction step by step, explicitly counting O and H atoms on each side before placing H₂O and H⁺.",
+        "Demonstration 2 (three-step acid-to-basic conversion): Convert a balanced acidic half-reaction to basic solution using the full three-step procedure explicitly, showing the genuine H₂O-adjustment and cancellation steps."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Balancing Redox Equations\"",
+        "setup": "Balance NO₃⁻ → NO in acidic solution. Where does H₂O go, and where does H⁺ go?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (NO₃⁻→NO deficit-checking walkthrough): Balance the NO₃⁻→NO half-reaction step by step, explicitly counting O and H atoms on each side before placing H₂O and H⁺.",
+          "Demonstration 2 (three-step acid-to-basic conversion): Convert a balanced acidic half-reaction to basic solution using the full three-step procedure explicitly, showing the genuine H₂O-adjustment and cancellation steps."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Balancing Redox Equations\""
+        "expected_outcome": "Student can (a) correctly determine H₂O/H⁺ placement from first-principles deficit-checking, not memorized pattern, (b) correctly place electrons based on oxidation-vs-reduction direction, (c) correctly convert an acidic equation to basic solution using the full three-step procedure."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit deficit-checking walkthrough for NO₃⁻→NO.",
+          "TA-2 (TELL): State the OAR mnemonic explicitly, worked through for Fe²⁺→Fe³⁺.",
+          "TA-3 (DO): Student converts a new balanced acidic half-reaction to basic solution using the full three-step procedure.",
+          "TA-4 (TEST-THINKING): Present MC-1's probe with a reaction where the deficit side differs from a prior example, asking the student to re-derive the correct placement."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Balancing Redox Equations from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Balance NO₃⁻ → NO in acidic solution. Where does H₂O go, and where does H⁺ go?\"",
+          "FA-2: \"Write the oxidation half-reaction for Fe²⁺ → Fe³⁺. Where are the electrons?\"",
+          "FA-3: \"Does converting to basic solution just mean replacing H⁺ with OH⁻?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Balancing Redox Equations\""
+        "mastery_signal": "Student can (a) correctly determine H₂O/H⁺ placement from first-principles deficit-checking, not memorized pattern, (b) correctly place electrons based on oxidation-vs-reduction direction, (c) correctly convert an acidic equation to basic solution using the full three-step procedure."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Balancing Redox Equations\""
+        "Feeds directly into `chem.redox.activity-series`, `chem.redox.disproportionation`, and `chem.redox.titrations` (all directly require fluent, correct redox-equation balancing established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.redox.oxidation-state"
@@ -4200,48 +4233,64 @@
     {
       "id": "asset.chem.redox.disproportionation",
       "concept_id": "chem.redox.disproportionation",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Disproportionation and Comproportionation\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Disproportionation and Comproportionation\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Disproportionation\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Disproportionation requires the SAME element to SIMULTANEOUSLY increase AND decrease in oxidation state within one reaction — Cl₂ genuinely disproportionates with NaOH (Cl: 0→−1 and 0→+1 simultaneously), but does NOT disproportionate when reacting with Fe²⁺ (Cl only decreases, 0→−1; only ordinary redox, since Fe is oxidized instead), so \"Cl₂ is reactive, therefore always disproportionates\" is false — the diagnostic test is whether the SAME element splits into two different oxidation states; a species' stability is THERMODYNAMIC and MEDIUM-DEPENDENT — Cu⁺ is genuinely stable in solid CuCl (stabilized by lattice/Madelung energy) but spontaneously disproportionates in aqueous solution (because Cu²⁺'s much greater hydration enthalpy, from its higher charge density, makes 2Cu⁺(aq) energetically less favorable than Cu+Cu²⁺), so stability in one medium does NOT guarantee stability in another; and in the disproportionation 2Cu⁺→Cu+Cu²⁺, the electron transfer genuinely DOES balance — each Cu⁺ undergoes a ONE-electron change (one gains 1e⁻ to become Cu⁰, one loses 1e⁻ to become Cu²⁺), and the 1 electron gained by one exactly equals the 1 electron lost by the other, with overall oxidation-state sums balancing on both sides (+2 total).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Disproportionation and Comproportionation\"",
-        "[TEMPLATE] Key idea 2 for \"Disproportionation and Comproportionation\"",
-        "[TEMPLATE] Key idea 3 for \"Disproportionation and Comproportionation\""
+        "Disproportionation is defined by a specific structural signature — the same element simultaneously appearing at two different oxidation states among the products of a single reaction — and must be verified case by case via this specific test, never inferred from an element's general reactivity, since the same element (Cl₂) can disproportionate with one reaction partner (NaOH) while undergoing ordinary redox with another (Fe²⁺).",
+        "A species' thermodynamic stability depends on the specific energetic factors relevant to its actual medium — solid-state lattice energy and aqueous hydration enthalpy are entirely different mechanisms, so stability in one medium (Cu⁺ in solid CuCl) provides no guarantee of stability in another (Cu⁺ in aqueous solution, where it spontaneously disproportionates). Electron balance in a disproportionation reaction should always be verified by writing out and counting each individual half-reaction's electrons, rather than intuiting from the overall equation's appearance.",
+        "Core misconception to avoid: Always apply the specific test — does the same element simultaneously increase AND decrease in oxidation state among the products? — before classifying a reaction as disproportionation; never infer it from general reactivity."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Disproportionation and Comproportionation\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Cl₂ is reactive, so it always disproportionates.",
+          "correction": "Always apply the specific test — does the same element simultaneously increase AND decrease in oxidation state among the products? — before classifying a reaction as disproportionation; never infer it from general reactivity."
+        },
+        {
+          "misconception": "Cu⁺ exists in CuCl, so Cu⁺ ions must be stable in solution.",
+          "correction": "Always assess stability specifically for the relevant medium (solid-state lattice energy vs. aqueous hydration enthalpy are different mechanisms) — never assume stability in one context transfers to another."
+        },
+        {
+          "misconception": "the electron transfer doesn't balance.",
+          "correction": "Always write out and count electrons in each individual half-reaction separately before judging overall balance — a disproportionation with two different products doesn't imply a mismatched electron count; verify via explicit half-reaction bookkeeping."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Disproportionation and Comproportionation\""
+        "Demonstration 1 (side-by-side Cl₂+NaOH vs. Cl₂+Fe²⁺ same-element-splits test): Apply the explicit oxidation-state test to both reactions, deriving the differing classification.",
+        "Demonstration 2 (lattice-energy-vs-hydration-enthalpy comparison for Cu⁺ stability): Present the explicit energetic comparison for solid CuCl vs. aqueous Cu⁺, deriving the differing stability outcome.",
+        "Demonstration 3 (per-half-reaction electron-balance verification for 2Cu⁺→Cu+Cu²⁺): Write out both half-reactions explicitly with electron counts, confirming the overall balance."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Disproportionation and Comproportionation\"",
+        "setup": "Cl₂ reacts with cold dilute NaOH to give Cl⁻ and ClO⁻. Is Cl₂ disproportionating here? What about Cl₂ reacting with Fe²⁺?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (side-by-side Cl₂+NaOH vs. Cl₂+Fe²⁺ same-element-splits test): Apply the explicit oxidation-state test to both reactions, deriving the differing classification.",
+          "Demonstration 2 (lattice-energy-vs-hydration-enthalpy comparison for Cu⁺ stability): Present the explicit energetic comparison for solid CuCl vs. aqueous Cu⁺, deriving the differing stability outcome.",
+          "Demonstration 3 (per-half-reaction electron-balance verification for 2Cu⁺→Cu+Cu²⁺): Write out both half-reactions explicitly with electron counts, confirming the overall balance."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Disproportionation and Comproportionation\""
+        "expected_outcome": "Student can (a) correctly apply the same-element-splits test to classify a reaction as disproportionation or ordinary redox, (b) correctly explain medium-dependent stability differences, (c) correctly verify electron balance in a disproportionation via half-reactions."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit side-by-side same-element-splits test for Cl₂+NaOH and Cl₂+Fe²⁺.",
+          "TA-2 (TELL): State the medium-dependent stability principle explicitly, anchored to the lattice-energy-vs-hydration-enthalpy comparison.",
+          "TA-3 (DO): Student applies the same-element-splits test to an unfamiliar reaction to classify it as disproportionation or ordinary redox.",
+          "TA-4 (TEST-THINKING): Present the 2Cu⁺→Cu+Cu²⁺ electron-balance probe and ask the student to verify balance via explicit half-reactions."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Disproportionation from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Cl₂ reacts with cold dilute NaOH to give Cl⁻ and ClO⁻. Is Cl₂ disproportionating here? What about Cl₂ reacting with Fe²⁺?\"",
+          "FA-2: \"CuCl is a stable crystalline solid. Why does Cu⁺ disproportionate when CuCl dissolves in water?\"",
+          "FA-3: \"Write the half-equations for 2Cu⁺ → Cu + Cu²⁺ and count electrons.\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Disproportionation and Comproportionation\""
+        "mastery_signal": "Student can (a) correctly apply the same-element-splits test to classify a reaction as disproportionation or ordinary redox, (b) correctly explain medium-dependent stability differences, (c) correctly verify electron balance in a disproportionation via half-reactions."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Disproportionation and Comproportionation\""
+        "This concept has no direct KG unlocks but consolidates redox-balancing reasoning built across `chem.redox.balancing`, forming a capstone application to inorganic chemistry and electrochemical-stability contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.redox.balancing"
@@ -4250,96 +4299,126 @@
     {
       "id": "asset.chem.redox.activity-series",
       "concept_id": "chem.redox.activity-series",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Activity (Electrochemical) Series\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Activity (Electrochemical) Series\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Electrochemical Activity Series\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "E°cell is computed by SUBTRACTING reduction potentials (E°cell=E°reduction(cathode)−E°reduction(anode)), never by flipping the anode's sign and adding — since IUPAC convention writes ALL half-reactions as reductions, there is no separate \"oxidation potential\" to add; a MORE POSITIVE E° means a species is more easily reduced (a stronger oxidizing agent, a LESS reactive/more noble metal), while a MORE NEGATIVE E° means a stronger reducing agent (a MORE reactive metal) — this is genuinely counterintuitive, since \"high E°\" corresponds to stable, unreactive metals like gold, the opposite of everyday \"high = more active\" intuition; and displacement reaction feasibility depends entirely on relative E° values (a stronger reducing agent, more negative E°, can displace a weaker one), never on a metal's visual appearance or superficial \"reactive-looking\" qualities — copper (E°=+0.34V) genuinely cannot displace zinc (E°=−0.76V) from ZnSO₄ solution, since Cu is the weaker reducing agent.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Activity (Electrochemical) Series\"",
-        "[TEMPLATE] Key idea 2 for \"Activity (Electrochemical) Series\"",
-        "[TEMPLATE] Key idea 3 for \"Activity (Electrochemical) Series\""
+        "E°cell is computed by subtracting the anode's tabulated reduction potential from the cathode's (E°cell=E°cathode−E°anode) — both potentials are always looked up AS reduction potentials, with no separate \"oxidation potential\" concept needed. The E° scale specifically measures ease of reduction, meaning reactive metals (strong reducing agents, easily oxidized) genuinely have the MOST NEGATIVE E° values, while unreactive, noble metals (weak reducing agents, easily reduced) have the MOST POSITIVE E° values — a deliberately counterintuitive convention relative to everyday \"high number = more active\" thinking.",
+        "Whether one metal can displace another from its ionic solution depends entirely on their relative E° values — a stronger reducing agent (more negative E°) can displace a weaker one (more positive E°), never predictable from visual appearance or general reactivity impressions; copper's more positive E° than zinc's means copper genuinely cannot displace zinc from solution, regardless of copper's superficially \"reactive-looking\" metallic appearance.",
+        "Core misconception to avoid: Always compute E°cell=E°reduction(cathode)−E°reduction(anode), subtracting two tabulated reduction potentials — never flip a sign and add, since this shortcut obscures the correct underlying logic."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Activity (Electrochemical) Series\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "flip the sign for the anode and add.",
+          "correction": "Always compute E°cell=E°reduction(cathode)−E°reduction(anode), subtracting two tabulated reduction potentials — never flip a sign and add, since this shortcut obscures the correct underlying logic."
+        },
+        {
+          "misconception": "Na reacts with water vigorously, so it has a high E°.",
+          "correction": "Reactive metals (strong reducing agents) have MORE NEGATIVE E°; unreactive, noble metals (weak reducing agents, easily reduced when in ionic form) have MORE POSITIVE E° — the scale is counterintuitive relative to everyday \"reactive = high number\" thinking."
+        },
+        {
+          "misconception": "metals always react with metal salt solutions.",
+          "correction": "Always predict displacement-reaction feasibility using actual E° values (a stronger reducing agent, more negative E°, can displace a weaker one) — never from a metal's visual appearance or general reactivity impression."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Activity (Electrochemical) Series\""
+        "Demonstration 1 (explicit E°cell subtraction computation): Compute E°cell for the Zn-Cu cell explicitly via subtraction, contrasted with the (coincidentally-matching but reasoning-obscuring) sign-flip-and-add shortcut.",
+        "Demonstration 2 (electrochemical series diagram): Present the full electrochemical series, with reactive metals at the negative-E° top and noble metals at the positive-E° bottom, having students locate several familiar metals on it."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Activity (Electrochemical) Series\"",
+        "setup": "Cu²⁺/Cu has E°=+0.34V and Zn²⁺/Zn has E°=−0.76V. Calculate E°cell for a Zn-Cu cell.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (explicit E°cell subtraction computation): Compute E°cell for the Zn-Cu cell explicitly via subtraction, contrasted with the (coincidentally-matching but reasoning-obscuring) sign-flip-and-add shortcut.",
+          "Demonstration 2 (electrochemical series diagram): Present the full electrochemical series, with reactive metals at the negative-E° top and noble metals at the positive-E° bottom, having students locate several familiar metals on it."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Activity (Electrochemical) Series\""
+        "expected_outcome": "Student can (a) correctly compute E°cell via subtraction of tabulated reduction potentials, (b) correctly rank metal reactivity using the counterintuitive E° sign convention, (c) correctly predict displacement-reaction feasibility from E° values, not visual appearance."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit E°cell subtraction computation for the Zn-Cu cell.",
+          "TA-2 (TELL): State the counterintuitive reactivity-vs-E° relationship explicitly, worked through with the full electrochemical series diagram.",
+          "TA-3 (DO): Student predicts displacement-reaction feasibility for a new metal pair using their E° values.",
+          "TA-4 (TEST-THINKING): Present MC-3's Cu-in-ZnSO₄ probe and ask the student to justify the \"no reaction\" outcome using E° comparison, not appearance."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Electrochemical Activity Series from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Cu²⁺/Cu has E°=+0.34V and Zn²⁺/Zn has E°=−0.76V. Calculate E°cell for a Zn-Cu cell.\"",
+          "FA-2: \"Which has the higher (more positive) E°: Na or Au?\"",
+          "FA-3: \"Predict whether Cu(s) will displace Zn²⁺ from ZnSO₄(aq).\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Activity (Electrochemical) Series\""
+        "mastery_signal": "Student can (a) correctly compute E°cell via subtraction of tabulated reduction potentials, (b) correctly rank metal reactivity using the counterintuitive E° sign convention, (c) correctly predict displacement-reaction feasibility from E° values, not visual appearance."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Activity (Electrochemical) Series\""
+        "Feeds directly into `chem.elect.galvanic-cell` (galvanic cell design and operation directly require fluent, correct E°cell computation and reactivity reasoning established here)."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.redox.balancing"
+      ]
     },
     {
       "id": "asset.chem.redox.titrations",
       "concept_id": "chem.redox.titrations",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Redox Titrations\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Redox Titrations\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Redox Titrations\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "KMnO₄ titrations require SPECIFICALLY dilute H₂SO₄ as the acidifying medium — not \"any acid\" — since HCl introduces Cl⁻, which KMnO₄ can itself oxidize (consuming extra KMnO₄ and inflating the apparent analyte concentration), and HNO₃ is itself an oxidizing acid that would similarly interfere; iodometric mole-ratio calculations require tracing through BOTH sequential half-reactions explicitly (Cu²⁺→I₂ via one equation, then I₂→S₂O₃²⁻ via a second equation) rather than assuming the thiosulfate-to-iodine ratio (2:1) directly transfers to a thiosulfate-to-copper ratio — combining 2Cu²⁺+4I⁻→2CuI+I₂ with I₂+2S₂O₃²⁻→products correctly gives n(S₂O₃²⁻):n(Cu²⁺)=2:2=1:1, NOT 2:1; and starch indicator must be added NEAR THE ENDPOINT (when the solution is pale straw yellow, [I₂] already low), never at the start — adding it early causes a premature, sluggish, imprecise color-change signal, since the starch-I₂ complex's reverse reaction is genuinely SLOW at high [I₂], only becoming sharp and reliable once [I₂] is already small.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Redox Titrations\"",
-        "[TEMPLATE] Key idea 2 for \"Redox Titrations\"",
-        "[TEMPLATE] Key idea 3 for \"Redox Titrations\""
+        "Redox titrations require careful selection of an inert acidifying medium, avoiding acids whose own anion (like HCl's Cl⁻) or inherent oxidizing character (like HNO₃) would introduce unwanted side reactions that consume titrant and corrupt the measured result — only dilute H₂SO₄ provides genuine chemical inertness for KMnO₄ titrations. Multi-step redox titration sequences (like iodometric determinations) require tracing mole ratios through EACH sequential step explicitly and combining them algebraically — a ratio from one step of the sequence never automatically describes the relationship between reagents from different steps.",
+        "Indicator addition timing in redox titrations must account for the underlying indicator-reaction kinetics — the starch-iodine complex's reverse reaction is genuinely slow at high iodine concentration, making early addition produce a sluggish, imprecise endpoint signal; adding starch only near the true endpoint (when iodine concentration is already low) ensures a sharp, kinetically fast, and reliable color-change signal.",
+        "Core misconception to avoid: Only dilute H₂SO₄ should be used to acidify KMnO₄ titrations — HCl (introduces oxidizable Cl⁻) and HNO₃ (itself an oxidizing acid) both introduce genuine interference."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Redox Titrations\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "acid is acid — use whatever is available.",
+          "correction": "Only dilute H₂SO₄ should be used to acidify KMnO₄ titrations — HCl (introduces oxidizable Cl⁻) and HNO₃ (itself an oxidizing acid) both introduce genuine interference."
+        },
+        {
+          "misconception": "thiosulfate to iodine is 2:1, so thiosulfate to copper is 2:1.",
+          "correction": "For multi-step reaction sequences, always trace through EACH step's mole ratio sequentially and combine them algebraically — never assume one step's ratio directly describes the relationship between reagents from different steps."
+        },
+        {
+          "misconception": "add the indicator at the start so you can track the colour from the beginning.",
+          "correction": "Add starch indicator only near the endpoint (when the solution is already pale yellow, [I₂] genuinely low) — adding it earlier, while [I₂] is high, produces a sluggish, imprecise, premature-appearing endpoint due to the complex's slow reverse-reaction kinetics at high iodine concentration."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Redox Titrations\""
+        "Demonstration 1 (HCl-vs-H₂SO₄ interference comparison): Present the explicit MnO₄⁻+Cl⁻ side reaction, connecting the extra KMnO₄ consumption directly to result inflation when HCl is used instead of H₂SO₄.",
+        "Demonstration 2 (sequential mole-ratio tracing): Walk through the Cu²⁺→I₂→S₂O₃²⁻ sequence explicitly and sequentially, deriving the correct 1:1 overall ratio step by step."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Redox Titrations\"",
+        "setup": "A student acidifies a KMnO₄ titration of Fe²⁺ with HCl. Would this give a correct result?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (HCl-vs-H₂SO₄ interference comparison): Present the explicit MnO₄⁻+Cl⁻ side reaction, connecting the extra KMnO₄ consumption directly to result inflation when HCl is used instead of H₂SO₄.",
+          "Demonstration 2 (sequential mole-ratio tracing): Walk through the Cu²⁺→I₂→S₂O₃²⁻ sequence explicitly and sequentially, deriving the correct 1:1 overall ratio step by step."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Redox Titrations\""
+        "expected_outcome": "Student can (a) correctly select dilute H₂SO₄ (not HCl or HNO₃) for KMnO₄ titrations, explaining the specific interference each alternative would cause, (b) correctly derive multi-step mole ratios by sequential tracing, not direct transfer, (c) correctly time starch-indicator addition near the endpoint, explaining the underlying kinetics."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit MnO₄⁻+Cl⁻ interference reaction.",
+          "TA-2 (TELL): State the sequential mole-ratio-tracing procedure explicitly, worked through for the Cu²⁺→I₂→S₂O₃²⁻ chain.",
+          "TA-3 (DO): Student determines the correct timing for starch-indicator addition in a new iodometric titration scenario.",
+          "TA-4 (TEST-THINKING): Present MC-3's probe and ask the student to explain the kinetic reason for late starch addition."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Redox Titrations from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A student acidifies a KMnO₄ titration of Fe²⁺ with HCl. Would this give a correct result?\"",
+          "FA-2: \"Derive the overall mole ratio of S₂O₃²⁻ to Cu²⁺ from the two given equations.\"",
+          "FA-3: \"Why is starch added near the endpoint rather than at the start?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Redox Titrations\""
+        "mastery_signal": "Student can (a) correctly select dilute H₂SO₄ (not HCl or HNO₃) for KMnO₄ titrations, explaining the specific interference each alternative would cause, (b) correctly derive multi-step mole ratios by sequential tracing, not direct transfer, (c) correctly time starch-indicator addition near the endpoint, explaining the underlying kinetics."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Redox Titrations\""
+        "Feeds directly into `chem.anal.volumetric` (quantitative volumetric analysis directly requires fluent, correct redox-titration technique established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.redox.balancing",
