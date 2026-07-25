@@ -1294,7 +1294,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // timestamps — the newest loaded message predates this turn's user
         // insert, so the gap is genuine learner inactivity, never LLM-claimed.
         {
-          const { isNewEpisode, deriveEpisode, buildOpeningBlock, buildAffectCloseBlock } = await import('@/lib/teaching/sessionLifecycle')
+          const { isNewEpisode, deriveEpisode, buildOpeningBlock, buildAffectCloseBlock, detectExplicitFinishRequest, forceClosing } = await import('@/lib/teaching/sessionLifecycle')
           const lastMsgAt = learnSession.messages[0]?.createdAt
             ? new Date(learnSession.messages[0].createdAt).getTime()
             : null
@@ -1307,7 +1307,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const boundary = isNewEpisode(lastMsgAt, turnReceivedAt)
           sessionEpisodeHoisted = deriveEpisode(prevEpisode, boundary, turnReceivedAt, prevLastSignal)
           sessionEpisodeFreshHoisted = boundary
-          if (boundary) {
+          // 07 §6 extension: an explicit, unambiguous "finish it now" outranks
+          // the affect-failure-budget trigger — close immediately this turn
+          // rather than waiting for a failure count to accumulate.
+          if (detectExplicitFinishRequest(message)) {
+            sessionEpisodeHoisted = forceClosing(sessionEpisodeHoisted)
+          }
+          if (boundary && sessionEpisodeHoisted.phase !== 'CLOSING') {
             // Spaced Retrieval Scheduler (Claude Recommendation #8, wired in
             // here per the follow-up recommendation): the session OPENING's
             // due-review count comes from the real forgetting-curve

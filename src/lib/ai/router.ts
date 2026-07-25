@@ -2,6 +2,7 @@ import { consumeAIBudget } from '@/lib/ai/budget'
 import { captureError } from '@/lib/monitoring'
 import { createGeminiProvider } from './providers/gemini'
 import { createOpenRouterProvider } from './providers/openrouter'
+import { createGroqProvider } from './providers/groq'
 import { createFailoverRouter } from './providers/failoverRouter'
 import type { AIProvider, AICompletionRequest } from './providers/types'
 import { AIProviderError } from './providers/types'
@@ -16,14 +17,23 @@ const GEMINI_API_KEY = process.env.GEMINI_API_KEY ?? ''
 const GEMINI_MODEL = process.env.GEMINI_MODEL ?? 'gemini-3.5-flash'
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY ?? ''
 const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL ?? 'deepseek/deepseek-chat-v3.1'
+// Third-tier automatic fallback — the model this app ran on before the
+// Gemini/OpenRouter migration, kept as a proven-working last resort so a
+// Gemini+OpenRouter outage together doesn't take teaching turns down.
+const GROQ_API_KEY = process.env.GROQ_API_KEY ?? ''
+const GROQ_MODEL = process.env.GROQ_MODEL ?? 'openai/gpt-oss-20b'
 
 let _router: ReturnType<typeof createFailoverRouter> | null = null
 
 function getRouter() {
   if (_router) return _router
-  const primary = createGeminiProvider(GEMINI_API_KEY, GEMINI_MODEL)
-  const fallback = createOpenRouterProvider(OPENROUTER_API_KEY, OPENROUTER_MODEL)
-  _router = createFailoverRouter({ primary, fallback })
+  _router = createFailoverRouter({
+    providers: [
+      createGeminiProvider(GEMINI_API_KEY, GEMINI_MODEL),
+      createOpenRouterProvider(OPENROUTER_API_KEY, OPENROUTER_MODEL),
+      createGroqProvider(GROQ_API_KEY, GROQ_MODEL),
+    ],
+  })
   return _router
 }
 

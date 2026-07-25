@@ -5,8 +5,10 @@ import { recordRequest, recordSuccess, recordFailure, recordFailover } from './m
 const RETRY_BACKOFF_MS = 500
 
 export interface FailoverRouterOptions {
-  primary: AIProvider
-  fallback: AIProvider
+  /** Ordered provider chain. providers[0] is primary and is the only tier
+   *  that gets a same-provider retry on a retryable error; every provider
+   *  after it is a straight one-shot fallback tried in order. */
+  providers: AIProvider[]
 }
 
 function isRetryable(err: unknown): boolean {
@@ -24,7 +26,8 @@ function failureKind(err: unknown): 'timeout' | 'rateLimit' | 'emptyResponse' | 
 }
 
 export function createFailoverRouter(opts: FailoverRouterOptions) {
-  const { primary, fallback } = opts
+  const { providers } = opts
+  if (providers.length === 0) throw new Error('createFailoverRouter requires at least one provider')
 
   async function tryProvider(provider: AIProvider, req: AICompletionRequest): Promise<AICompletionResult> {
     recordRequest(provider.name)
@@ -35,45 +38,52 @@ export function createFailoverRouter(opts: FailoverRouterOptions) {
   }
 
   async function complete(req: AICompletionRequest): Promise<AICompletionResult> {
-    // 1. Try primary
-    try {
-      return await tryProvider(primary, req)
-    } catch (primaryErr: any) {
-      recordFailure(primary.name, failureKind(primaryErr))
-      console.warn(`[ai/router] ${primary.name} failed: ${primaryErr.message}`)
+    let lastErr: any
 
-      // 2. If retryable, retry primary once with backoff
-      if (isRetryable(primaryErr)) {
-        try {
-          await new Promise((r) => setTimeout(r, RETRY_BACKOFF_MS))
+    for (let i = 0; i < providers.length; i++) {
+      const provider = providers[i]
+      const isPrimary = i === 0
+      try {
+        return await tryProvider(provider, req)
+      } catch (err: any) {
+        recordFailure(provider.name, failureKind(err))
+        console.warn(`[ai/router] ${provider.name} failed: ${err.message}`)
+        lastErr = err
 
-          const retryReq = primaryErr instanceof AIEmptyResponseError
-            ? { ...req, maxTokens: Math.max(req.maxTokens * 2, 2048) }
-            : req
-          return await tryProvider(primary, retryReq)
-        } catch (retryErr: any) {
-          recordFailure(primary.name, failureKind(retryErr))
-          console.warn(`[ai/router] ${primary.name} retry failed: ${retryErr.message}`)
+        // Only the primary (first) tier gets a same-provider retry — every
+        // tier after it is a backup already, tried once.
+        if (isPrimary && isRetryable(err)) {
+          try {
+            await new Promise((r) => setTimeout(r, RETRY_BACKOFF_MS))
+            const retryReq = err instanceof AIEmptyResponseError
+              ? { ...req, maxTokens: Math.max(req.maxTokens * 2, 2048) }
+              : req
+            return await tryProvider(provider, retryReq)
+          } catch (retryErr: any) {
+            recordFailure(provider.name, failureKind(retryErr))
+            console.warn(`[ai/router] ${provider.name} retry failed: ${retryErr.message}`)
+            lastErr = retryErr
+          }
+        }
+
+        const next = providers[i + 1]
+        if (next) {
+          recordFailover()
+          console.log(`[ai/router] failing over to ${next.name}`)
         }
       }
-
-      // 3. Failover to fallback
-      recordFailover()
-      console.log(`[ai/router] failing over to ${fallback.name}`)
-      try {
-        return await tryProvider(fallback, req)
-      } catch (fallbackErr: any) {
-        recordFailure(fallback.name, failureKind(fallbackErr))
-        console.error(`[ai/router] ${fallback.name} also failed: ${fallbackErr.message}`)
-        throw fallbackErr
-      }
     }
+
+    console.error(`[ai/router] all providers failed: ${lastErr?.message}`)
+    throw lastErr
   }
 
-  async function healthCheck(): Promise<{ primary: boolean; fallback: boolean }> {
-    const [p, f] = await Promise.all([primary.healthCheck(), fallback.healthCheck()])
-    return { primary: p, fallback: f }
+  async function healthCheck(): Promise<Record<string, boolean>> {
+    const results = await Promise.all(providers.map((p) => p.healthCheck()))
+    const status: Record<string, boolean> = {}
+    providers.forEach((p, i) => { status[p.name] = results[i] })
+    return status
   }
 
-  return { complete, healthCheck, primaryName: primary.name, fallbackName: fallback.name }
+  return { complete, healthCheck, providerNames: providers.map((p) => p.name) }
 }

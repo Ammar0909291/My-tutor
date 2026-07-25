@@ -5,7 +5,8 @@
 import { describe, it, expect } from 'vitest'
 import {
   SESSION_GAP_MS, isNewEpisode, deriveEpisode, applySignalToEpisode,
-  buildOpeningBlock, buildAffectCloseBlock, type SessionEpisode,
+  buildOpeningBlock, buildAffectCloseBlock, detectExplicitFinishRequest,
+  forceClosing, type SessionEpisode,
 } from '@/lib/teaching/sessionLifecycle'
 
 const NOW = 1_700_000_000_000
@@ -122,5 +123,57 @@ describe('prompt blocks', () => {
     const block = buildAffectCloseBlock()
     expect(block).toMatch(/do NOT introduce new content/i)
     expect(block).toMatch(/never frame the ending as caused by their mistakes/i)
+  })
+})
+
+// 07 §6 extension — explicit finish requests outrank the failure budget.
+// Root cause: a real transcript where "Finish it now." got "Let's wrap this
+// up!" followed immediately by a brand-new, unresolved scenario instead of
+// an actual close.
+describe('explicit finish request (07 §6 extension)', () => {
+  it('detects unambiguous session-stop phrasings', () => {
+    expect(detectExplicitFinishRequest('Finish it now.')).toBe(true)
+    expect(detectExplicitFinishRequest("let's wrap this up")).toBe(true)
+    expect(detectExplicitFinishRequest('wrap it up please')).toBe(true)
+    expect(detectExplicitFinishRequest("I'm done for today")).toBe(true)
+    expect(detectExplicitFinishRequest('can we stop here')).toBe(true)
+    expect(detectExplicitFinishRequest('i have to go')).toBe(true)
+    expect(detectExplicitFinishRequest("that's enough for today")).toBe(true)
+    expect(detectExplicitFinishRequest("let's end it")).toBe(true)
+  })
+
+  it('does NOT fire on finishing a problem/example, not the session', () => {
+    expect(detectExplicitFinishRequest("let's finish this equation")).toBe(false)
+    expect(detectExplicitFinishRequest('can we finish this problem first?')).toBe(false)
+    expect(detectExplicitFinishRequest('I got this topic move to next')).toBe(false)
+    expect(detectExplicitFinishRequest('what happens next?')).toBe(false)
+  })
+
+  it('empty/whitespace message never fires', () => {
+    expect(detectExplicitFinishRequest('')).toBe(false)
+    expect(detectExplicitFinishRequest('   ')).toBe(false)
+  })
+
+  it('forceClosing sets CLOSING regardless of current failure count', () => {
+    const ep = fresh({ phase: 'CORE', visibleFailures: 0 })
+    const closed = forceClosing(ep)
+    expect(closed.phase).toBe('CLOSING')
+    expect(closed.visibleFailures).toBe(0) // no fabricated failure
+  })
+
+  it('forceClosing is idempotent — already-CLOSING episode is returned unchanged (same reference)', () => {
+    const ep = fresh({ phase: 'CLOSING', visibleFailures: 2 })
+    expect(forceClosing(ep)).toBe(ep)
+  })
+
+  it('forceClosing never re-opens or rewinds — only ever moves toward CLOSING', () => {
+    const openingEp = fresh({ phase: 'OPENING' })
+    expect(forceClosing(openingEp).phase).toBe('CLOSING')
+  })
+
+  it('once forced CLOSING, applySignalToEpisode never downgrades it back out', () => {
+    const closed = forceClosing(fresh({ phase: 'CORE', visibleFailures: 0 }))
+    const afterSignal = applySignalToEpisode(closed, { correctness: true }, { isFirstLesson: false })
+    expect(afterSignal.phase).toBe('CLOSING')
   })
 })

@@ -81,11 +81,10 @@ describe('AI Provider Error Hierarchy', () => {
 
 // ─── 2. Failover Router ─────────────────────────────────────────────────────
 
-describe('Failover Router', () => {
+describe('Failover Router (2-tier)', () => {
   it('primary success returns primary result', async () => {
     const router = createFailoverRouter({
-      primary: mockProvider('gemini'),
-      fallback: mockProvider('openrouter'),
+      providers: [mockProvider('gemini'), mockProvider('openrouter')],
     })
     const result = await router.complete(REQ)
     expect(result.provider).toBe('gemini')
@@ -98,8 +97,7 @@ describe('Failover Router', () => {
       complete: async () => { calls++; throw new AIRateLimitError('gemini') },
     })
     const router = createFailoverRouter({
-      primary,
-      fallback: mockProvider('openrouter'),
+      providers: [primary, mockProvider('openrouter')],
     })
     const result = await router.complete(REQ)
     expect(calls).toBe(2) // initial + retry
@@ -112,22 +110,19 @@ describe('Failover Router', () => {
       complete: async () => { calls++; throw new AIQuotaError('gemini') },
     })
     const router = createFailoverRouter({
-      primary,
-      fallback: mockProvider('openrouter'),
+      providers: [primary, mockProvider('openrouter')],
     })
     const result = await router.complete(REQ)
     expect(calls).toBe(1) // no retry for non-retryable
     expect(result.provider).toBe('openrouter')
   })
 
-  it('both providers fail → throws the fallback error', async () => {
+  it('both providers fail → throws the last (fallback) error', async () => {
     const router = createFailoverRouter({
-      primary: mockProvider('gemini', {
-        complete: async () => { throw new AITimeoutError('gemini') },
-      }),
-      fallback: mockProvider('openrouter', {
-        complete: async () => { throw new AIServerError('openrouter', 503) },
-      }),
+      providers: [
+        mockProvider('gemini', { complete: async () => { throw new AITimeoutError('gemini') } }),
+        mockProvider('openrouter', { complete: async () => { throw new AIServerError('openrouter', 503) } }),
+      ],
     })
     await expect(router.complete(REQ)).rejects.toThrow('Server error (503)')
   })
@@ -143,8 +138,7 @@ describe('Failover Router', () => {
       },
     })
     const router = createFailoverRouter({
-      primary,
-      fallback: mockProvider('openrouter'),
+      providers: [primary, mockProvider('openrouter')],
     })
     const result = await router.complete(REQ)
     expect(calls).toBe(2)
@@ -164,27 +158,29 @@ describe('Failover Router', () => {
     const fallback = mockProvider('openrouter', {
       complete: async () => { throw new Error('should not be called') },
     })
-    const router = createFailoverRouter({ primary, fallback })
+    const router = createFailoverRouter({ providers: [primary, fallback] })
     const result = await router.complete(REQ)
     expect(result.text).toBe('recovered')
     expect(result.provider).toBe('gemini')
   })
 
-  it('healthCheck probes both providers concurrently', async () => {
+  it('healthCheck probes all providers concurrently, keyed by name', async () => {
     const router = createFailoverRouter({
-      primary: mockProvider('gemini', { healthCheck: async () => true }),
-      fallback: mockProvider('openrouter', { healthCheck: async () => false }),
+      providers: [
+        mockProvider('gemini', { healthCheck: async () => true }),
+        mockProvider('openrouter', { healthCheck: async () => false }),
+      ],
     })
     const status = await router.healthCheck()
-    expect(status).toEqual({ primary: true, fallback: false })
+    expect(status).toEqual({ gemini: true, openrouter: false })
   })
 
   it('500 from primary is retryable and triggers failover', async () => {
     const router = createFailoverRouter({
-      primary: mockProvider('gemini', {
-        complete: async () => { throw new AIServerError('gemini', 500) },
-      }),
-      fallback: mockProvider('openrouter'),
+      providers: [
+        mockProvider('gemini', { complete: async () => { throw new AIServerError('gemini', 500) } }),
+        mockProvider('openrouter'),
+      ],
     })
     const result = await router.complete(REQ)
     expect(result.provider).toBe('openrouter')
@@ -193,14 +189,98 @@ describe('Failover Router', () => {
   it('network error triggers retry then failover', async () => {
     let calls = 0
     const router = createFailoverRouter({
-      primary: mockProvider('gemini', {
-        complete: async () => { calls++; throw new AINetworkError('gemini') },
-      }),
-      fallback: mockProvider('openrouter'),
+      providers: [
+        mockProvider('gemini', { complete: async () => { calls++; throw new AINetworkError('gemini') } }),
+        mockProvider('openrouter'),
+      ],
     })
     const result = await router.complete(REQ)
     expect(calls).toBe(2)
     expect(result.provider).toBe('openrouter')
+  })
+})
+
+// ─── 2b. Failover Router (3-tier: Gemini → OpenRouter → Groq) ───────────────
+
+describe('Failover Router (3-tier)', () => {
+  it('all three healthy: primary serves, others untouched', async () => {
+    let openrouterCalls = 0
+    let groqCalls = 0
+    const router = createFailoverRouter({
+      providers: [
+        mockProvider('gemini'),
+        mockProvider('openrouter', { complete: async () => { openrouterCalls++; return { text: 'or', finishReason: 'stop', provider: 'openrouter' } } }),
+        mockProvider('groq', { complete: async () => { groqCalls++; return { text: 'groq', finishReason: 'stop', provider: 'groq' } } }),
+      ],
+    })
+    const result = await router.complete(REQ)
+    expect(result.provider).toBe('gemini')
+    expect(openrouterCalls).toBe(0)
+    expect(groqCalls).toBe(0)
+  })
+
+  it('Gemini fails (with retry) and OpenRouter fails → falls through to Groq', async () => {
+    let geminiCalls = 0
+    let openrouterCalls = 0
+    const router = createFailoverRouter({
+      providers: [
+        mockProvider('gemini', { complete: async () => { geminiCalls++; throw new AITimeoutError('gemini') } }),
+        mockProvider('openrouter', { complete: async () => { openrouterCalls++; throw new AIServerError('openrouter', 500) } }),
+        mockProvider('groq', { complete: async () => ({ text: 'groq saved it', finishReason: 'stop', provider: 'groq' }) }),
+      ],
+    })
+    const result = await router.complete(REQ)
+    expect(geminiCalls).toBe(2) // primary gets its retry
+    expect(openrouterCalls).toBe(1) // 2nd tier is a single shot, no retry
+    expect(result.provider).toBe('groq')
+    expect(result.text).toBe('groq saved it')
+  })
+
+  it('only Groq (3rd tier) does NOT get a same-provider retry on a retryable error', async () => {
+    let groqCalls = 0
+    const router = createFailoverRouter({
+      providers: [
+        mockProvider('gemini', { complete: async () => { throw new AIQuotaError('gemini') } }),
+        mockProvider('openrouter', { complete: async () => { throw new AIQuotaError('openrouter') } }),
+        mockProvider('groq', { complete: async () => { groqCalls++; throw new AITimeoutError('groq') } }),
+      ],
+    })
+    await expect(router.complete(REQ)).rejects.toThrow('groq')
+    expect(groqCalls).toBe(1) // last tier: one shot, then the chain is exhausted
+  })
+
+  it('all three fail → throws the last (Groq) error', async () => {
+    const router = createFailoverRouter({
+      providers: [
+        mockProvider('gemini', { complete: async () => { throw new AITimeoutError('gemini') } }),
+        mockProvider('openrouter', { complete: async () => { throw new AIServerError('openrouter', 503) } }),
+        mockProvider('groq', { complete: async () => { throw new AINetworkError('groq') } }),
+      ],
+    })
+    await expect(router.complete(REQ)).rejects.toThrow('Network error on groq')
+  })
+
+  it('healthCheck reports all three tiers by name', async () => {
+    const router = createFailoverRouter({
+      providers: [
+        mockProvider('gemini', { healthCheck: async () => true }),
+        mockProvider('openrouter', { healthCheck: async () => false }),
+        mockProvider('groq', { healthCheck: async () => true }),
+      ],
+    })
+    const status = await router.healthCheck()
+    expect(status).toEqual({ gemini: true, openrouter: false, groq: true })
+  })
+
+  it('providerNames reflects the configured chain in order', () => {
+    const router = createFailoverRouter({
+      providers: [mockProvider('gemini'), mockProvider('openrouter'), mockProvider('groq')],
+    })
+    expect(router.providerNames).toEqual(['gemini', 'openrouter', 'groq'])
+  })
+
+  it('createFailoverRouter throws on an empty provider list', () => {
+    expect(() => createFailoverRouter({ providers: [] })).toThrow()
   })
 })
 
@@ -353,10 +433,10 @@ describe('Security invariants', () => {
     console.error = (...args: any[]) => logs.push(args.join(' '))
 
     const router = createFailoverRouter({
-      primary: mockProvider('gemini', {
-        complete: async () => { throw new AITimeoutError('gemini') },
-      }),
-      fallback: mockProvider('openrouter'),
+      providers: [
+        mockProvider('gemini', { complete: async () => { throw new AITimeoutError('gemini') } }),
+        mockProvider('openrouter'),
+      ],
     })
 
     router.complete(REQ).then(() => {
@@ -402,8 +482,7 @@ describe('Edge cases', () => {
       },
     })
     const router = createFailoverRouter({
-      primary,
-      fallback: mockProvider('openrouter'),
+      providers: [primary, mockProvider('openrouter')],
     })
     const results = await Promise.all([
       router.complete(REQ),

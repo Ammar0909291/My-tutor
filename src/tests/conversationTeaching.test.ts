@@ -405,3 +405,73 @@ describe('base prompt laws (Phase A regression)', () => {
     expect(prompt).toContain('TURN DIRECTIVE is present')
   })
 })
+
+// ── Pacing/deflection/misconception-repair fixes (Tutor Max transcript review) ──
+
+describe('example ceiling + explicit topic-understanding (Principle 11)', () => {
+  const prompt = buildTutorSystemPrompt('physics', 'Sam', 'beginner', 'learn basics', null, 'en', null, undefined, 'beginner')
+
+  it('caps examples per sub-concept at two, as a ceiling not a requirement', () => {
+    expect(prompt).toContain('EXAMPLE CEILING')
+    expect(prompt).toMatch(/AT MOST TWO examples/i)
+    expect(prompt).toMatch(/ceiling, not a requirement/i)
+  })
+
+  it('an explicit "I got this topic" claim moves on immediately, not another example', () => {
+    expect(prompt).toMatch(/I got this topic/i)
+    expect(prompt).toMatch(/move to the next sub-concept IMMEDIATELY/i)
+  })
+})
+
+describe('bare acknowledgment is not an answer, capped at one retry (Principle 12)', () => {
+  const prompt = buildTutorSystemPrompt('physics', 'Sam', 'beginner', 'learn basics', null, 'en', null, undefined, 'beginner')
+
+  it('states the one-retry-then-accept rule', () => {
+    expect(prompt).toContain('A CLAIM IS NOT AN ANSWER')
+    expect(prompt).toMatch(/Re-ask that SAME question ONCE/i)
+    expect(prompt).toMatch(/do not ask a third time/i)
+  })
+})
+
+describe('misconception repair re-probes the original question (Principle 4 strengthened)', () => {
+  const prompt = buildTutorSystemPrompt('physics', 'Sam', 'beginner', 'learn basics', null, 'en', null, undefined, 'beginner')
+
+  it('requires re-asking the original question after a correction, not just a nicer explanation', () => {
+    expect(prompt).toMatch(/re-ask the same original question/i)
+    expect(prompt).toMatch(/confirm the corrected understanding actually landed/i)
+  })
+})
+
+describe('navigation rule does not misfire on within-lesson pacing requests', () => {
+  const prompt = buildTutorSystemPrompt('physics', 'Sam', 'beginner', 'learn basics', null, 'en', null, undefined, 'beginner')
+
+  it('lists "I got this topic move to next" as a continuation, not a lesson-switch', () => {
+    const navSection = prompt.slice(prompt.indexOf('NAVIGATION RULE'))
+    expect(navSection).toContain('I got this topic move to next')
+    expect(navSection).toMatch(/continue teaching/i)
+  })
+
+  it('still treats explicit lesson-switch phrases as navigation commands', () => {
+    expect(prompt).toContain('next lesson')
+    expect(prompt).toContain('Use the lesson navigation panel')
+  })
+})
+
+describe('Hindi and Russian prompts carry the same fixes (mirrored, not English-only)', () => {
+  it('Hindi: example ceiling + claim-is-not-an-answer + re-probe + nav exception', () => {
+    const hi = buildTutorSystemPrompt('physics', 'Sam', 'beginner', 'learn basics', null, 'hi', null, undefined, 'beginner')
+    expect(hi).toMatch(/EXAMPLE CEILING/i)
+    expect(hi).toMatch(/I got this topic/i)
+    expect(hi).toContain('EK CLAIM ANSWER NAHI HAI')
+    expect(hi).toMatch(/dobara.*poochein.*confirm/i)
+    expect(hi).toContain('I got this topic move to next')
+  })
+
+  it('Russian: example ceiling + claim-is-not-an-answer + re-probe + nav exception', () => {
+    const ru = buildTutorSystemPrompt('physics', 'Sam', 'beginner', 'learn basics', null, 'ru', null, undefined, 'beginner')
+    expect(ru).toContain('ПОТОЛОК ПРИМЕРОВ')
+    expect(ru).toContain('УТВЕРЖДЕНИЕ — ЭТО НЕ ОТВЕТ')
+    expect(ru).toMatch(/тот же исходный вопрос ещё раз/i)
+    expect(ru).toContain('ИСКЛЮЧЕНИЕ')
+  })
+})

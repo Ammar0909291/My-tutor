@@ -180,6 +180,53 @@ export function buildOpeningBlock(opts: {
 }
 
 /**
+ * decision-engine/07 §6 extension: an explicit, unambiguous request to stop
+ * ("finish it now", "let's wrap this up") is a HARDER signal than the
+ * affect-failure-budget trigger above — it must close the session
+ * immediately, regardless of visibleFailures. Root cause this fixes: a real
+ * transcript where the student said "Finish it now." and the tutor replied
+ * "Let's wrap this up, Roni!" — then immediately opened a brand-new,
+ * unresolved scenario (two hikers on different paths) instead of actually
+ * closing. The CLOSING phase previously only ever triggered from the
+ * failure budget (applySignalToEpisode) — an explicit stop request was not
+ * a recognized trigger at all.
+ *
+ * Deliberately conservative (whole-phrase patterns, not "finish"/"stop"
+ * alone) so a request to finish a PROBLEM or WORKED EXAMPLE ("let's finish
+ * this equation", "can we finish this problem") never misfires into ending
+ * the whole session — only unambiguous session-level stop requests match.
+ */
+const FINISH_REQUEST_PATTERNS: RegExp[] = [
+  /\bfinish\s+it\s+now\b/i,
+  // "let's finish/wrap/end it/this/up" only counts as a SESSION stop when
+  // nothing else follows the pronoun (optionally "now" + punctuation) — this
+  // is what excludes "let's finish this equation"/"this problem" (a real
+  // object follows "this", breaking the end-anchor) while still matching
+  // "let's finish this.", "let's wrap this up", "let's end it now".
+  /\blet'?s\s+(finish|end)\s+(it|this)(\s+now)?[.!?…\s]*$/i,
+  /\blet'?s\s+wrap\s+(it|this)\s+up(\s+now)?[.!?…\s]*$/i,
+  /\bwrap\s+(it|this)\s+up\b/i,
+  /\b(i'?m|i\s+am)\s+done\s+for\s+(today|now)\b/i,
+  /\b(stop|end)\s+(the\s+lesson|the\s+session|here|for\s+now|for\s+today)\b/i,
+  /\bi\s+(have\s+to|need\s+to|gotta)\s+go\b/i,
+  /\bthat'?s\s+enough\s+for\s+(today|now)\b/i,
+  /\bcan\s+we\s+(stop|end|finish)\s+(here|now|for\s+today)\b/i,
+]
+
+export function detectExplicitFinishRequest(message: string): boolean {
+  const text = message.trim()
+  if (!text) return false
+  return FINISH_REQUEST_PATTERNS.some((re) => re.test(text))
+}
+
+/** Force the episode into CLOSING this turn — idempotent, never downgrades
+ * an already-CLOSING episode, never re-opens/rewinds visibleFailures. */
+export function forceClosing(ep: SessionEpisode): SessionEpisode {
+  if (ep.phase === 'CLOSING') return ep
+  return { ...ep, phase: 'CLOSING' }
+}
+
+/**
  * CLOSING block (07 §6): the affect budget is spent — end via a win and
  * the close script. No new content is legal past this point this session.
  */
