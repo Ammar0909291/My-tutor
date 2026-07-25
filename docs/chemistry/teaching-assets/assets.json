@@ -9882,48 +9882,62 @@
     {
       "id": "asset.chem.env.atmosphere",
       "concept_id": "chem.env.atmosphere",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Atmosphere and Composition\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Atmosphere and Composition\" pending authoring (target depth: foundational).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Atmosphere and Composition\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The atmosphere is a mixture of gases (mainly N₂ 78%, O₂ 21%, Ar 0.9%, CO₂ ~0.04%, trace gases) held around Earth by gravity, organized into layers (troposphere, stratosphere, mesosphere, thermosphere) distinguished by temperature-vs-altitude behavior driven by which layer absorbs which radiation, not by composition — composition is nearly uniform (well-mixed) up to ~100 km. The chemistry of the atmosphere (ozone formation/destruction, greenhouse absorption, combustion products) all takes place within this same well-mixed gas mixture.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Atmosphere and Composition\"",
-        "[TEMPLATE] Key idea 2 for \"Atmosphere and Composition\"",
-        "[TEMPLATE] Key idea 3 for \"Atmosphere and Composition\""
+        "The atmosphere is one continuous, turbulently mixed gas envelope up to ~100 km, with nearly constant bulk composition (N₂ 78%, O₂ 21%, Ar 0.9%). It's divided into layers not by what gas is present, but by how temperature changes with altitude — a signature of which layer absorbs which type of incoming or outgoing radiation. The troposphere is warmed from below (by Earth's surface) and cools with height; the stratosphere is warmed by ozone absorbing UV and so warms with height; the pattern repeats for the mesosphere and thermosphere.",
+        "Trace gases — carbon dioxide, ozone, water vapor, methane — make up a tiny fraction of the atmosphere by volume, but disproportionately control temperature structure and radiation balance because of what wavelengths they absorb, unlike the bulk N₂/O₂ which is largely transparent to both incoming sunlight and outgoing infrared.",
+        "Core misconception to avoid: Distinguish \"the greenhouse effect exists and is necessary\" from \"the enhanced greenhouse effect from human emissions is a problem.\""
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Atmosphere and Composition\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "The greenhouse effect is what's causing global warming and destroying the planet.",
+          "correction": "Distinguish \"the greenhouse effect exists and is necessary\" from \"the enhanced greenhouse effect from human emissions is a problem.\""
+        },
+        {
+          "misconception": "CO₂ is the greenhouse gas.",
+          "correction": "The atmosphere contains multiple greenhouse gases, each with different concentration, potency, and lifetime; CO₂'s prominence is about total human-driven impact, not sole responsibility."
+        },
+        {
+          "misconception": "Ozone floats up in its own layer because it's a different, lighter gas.",
+          "correction": "The stratosphere has *elevated* ozone concentration (still a tiny trace, ~ppm level) embedded in the same bulk N₂/O₂/Ar mixture as the troposphere; it is not a separate ozone atmosphere."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Atmosphere and Composition\""
+        "Demonstration 1 (mass of air): Weigh an evacuated rigid container, then weigh it again after filling with air at known pressure/volume/temperature — shows air is matter with measurable mass, not \"nothing.\"",
+        "Demonstration 2 (temperature profile plot): Give students a real atmospheric temperature-vs-altitude dataset (radiosonde or standard atmosphere model) and have them mark where the slope changes sign — they discover the layer boundaries themselves as temperature-gradient inflection points, not composition changes."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Atmosphere and Composition\"",
+        "setup": "Why doesn't oxygen just float to the top of the atmosphere and leave nitrogen at the bottom?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (mass of air): Weigh an evacuated rigid container, then weigh it again after filling with air at known pressure/volume/temperature — shows air is matter with measurable mass, not \"nothing.\"",
+          "Demonstration 2 (temperature profile plot): Give students a real atmospheric temperature-vs-altitude dataset (radiosonde or standard atmosphere model) and have them mark where the slope changes sign — they discover the layer boundaries themselves as temperature-gradient inflection points, not composition changes."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Atmosphere and Composition\""
+        "expected_outcome": "Student can (a) state why atmospheric layers are thermally, not compositionally, defined, (b) distinguish natural vs. enhanced greenhouse effect, (c) name at least two greenhouse gases besides CO₂ and explain why CO₂ still dominates policy discussion."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the real temperature-vs-altitude curve for Earth's atmosphere and have the student identify the four layers from the curve's shape alone.",
+          "TA-2 (TELL): State the near-constant bulk composition up to 100 km explicitly, contrasted with trace-gas variability.",
+          "TA-3 (DO): Student classifies given data points (composition vs. temperature) as \"layer-boundary evidence\" or \"not layer-boundary evidence.\"",
+          "TA-4 (TEST-THINKING): Present MC-3's claim (\"ozone floats in its own layer because it's lighter\") and ask the student to argue for or against it using the mixing-timescale evidence."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Atmosphere and Composition from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Why doesn't oxygen just float to the top of the atmosphere and leave nitrogen at the bottom?\"",
+          "FA-2: \"Is the greenhouse effect a bad thing? Defend your answer.\"",
+          "FA-3: \"Name a greenhouse gas that isn't CO₂ and say why it matters.\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Atmosphere and Composition\""
+        "mastery_signal": "Student can (a) state why atmospheric layers are thermally, not compositionally, defined, (b) distinguish natural vs. enhanced greenhouse effect, (c) name at least two greenhouse gases besides CO₂ and explain why CO₂ still dominates policy discussion."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Atmosphere and Composition\""
+        "Feeds into `chem.env.air-pollution` (pollutant distribution assumes tropospheric mixing), `chem.env.ozone` (stratospheric ozone chemistry needs the \"elevated trace concentration, not separate layer\" correction already in place), and `chem.env.water-soil` (cross-media transport of pollutants relies on understanding air as one connected reservoir)."
       ],
       "prerequisite_review_triggers": [
         "chem.found.pure-substances"
@@ -9932,48 +9946,64 @@
     {
       "id": "asset.chem.env.air-pollution",
       "concept_id": "chem.env.air-pollution",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Air Pollution\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Air Pollution\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Air Pollution\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Ground-level ozone (O₃) is NEVER a direct, primary combustion product — cars emit NO₂ (a genuine primary pollutant), which UV light splits into NO+O•, and O•+O₂→O₃, making ozone a SECONDARY pollutant formed through atmospheric photochemistry, never directly emitted from any exhaust; CO₂ does NOT cause acid rain — pure rainwater is already mildly acidic (pH≈5.6) from dissolved CO₂ forming weak carbonic acid, but genuine \"acid rain\" (pH 4 or below) is caused specifically by SO₂ and NOₓ forming the much STRONGER acids H₂SO₄ and HNO₃ — CO₂'s role, while real, produces only the mild baseline acidity, never the severe acidification anthropogenic acid rain represents; and CO does NOT poison by physically DISPLACING oxygen from breathed air (a bulk-gas-crowding mechanism) — even at trace concentrations (200ppm, far too dilute to physically displace anything), CO is lethal because it binds HEMOGLOBIN at the same site as O₂ with ~200× greater AFFINITY, forming carboxyhemoglobin (COHb) and outcompeting O₂ for binding sites — the mechanism is genuinely BIOCHEMICAL (competitive binding), never physical displacement.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Air Pollution\"",
-        "[TEMPLATE] Key idea 2 for \"Air Pollution\"",
-        "[TEMPLATE] Key idea 3 for \"Air Pollution\""
+        "Ground-level ozone is always a secondary pollutant, formed through a specific atmospheric photochemical sequence (UV-driven splitting of primary NO₂, followed by O•+O₂ recombination) — never a direct combustion/exhaust product. Acid rain's severe acidification (pH≤4) is caused specifically by the strong acids H₂SO₄ and HNO₃, formed from anthropogenic SO₂ and NOₓ emissions — CO₂'s weak carbonic acid produces only the mild, natural baseline rainwater acidity (pH~5.6), a categorically different magnitude.",
+        "CO's lethality at trace concentrations arises from a targeted biochemical mechanism — competitive binding to hemoglobin's O₂-binding site with dramatically higher affinity than O₂ itself — never from bulk physical displacement of oxygen from ambient air, which trace CO concentrations could not plausibly achieve.",
+        "Core misconception to avoid: Ground-level ozone is always a secondary pollutant, formed through atmospheric photochemistry from primary NO₂ emissions — never a direct combustion/exhaust product."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Air Pollution\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Cars emit ozone as part of exhaust.",
+          "correction": "Ground-level ozone is always a secondary pollutant, formed through atmospheric photochemistry from primary NO₂ emissions — never a direct combustion/exhaust product."
+        },
+        {
+          "misconception": "Acid rain is caused by all greenhouse gases.",
+          "correction": "CO₂ produces only mild baseline rainwater acidity (pH~5.6, via weak carbonic acid) — genuine \"acid rain\" (pH≤4) is caused specifically by SO₂ and NOₓ forming strong acids (H₂SO₄, HNO₃), never attribute severe acidification to CO₂."
+        },
+        {
+          "misconception": "CO takes up the space in the air that oxygen would fill.",
+          "correction": "CO poisons via competitive, high-affinity binding to hemoglobin's O₂ site (a biochemical mechanism), never via bulk physical displacement of oxygen from the air — this explains its lethality even at trace concentrations."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Air Pollution\""
+        "Demonstration 1 (photochemical pathway diagram from NO₂ to O₃): Present the explicit atmospheric chemistry sequence, tracing ozone's secondary formation.",
+        "Demonstration 2 (pH-scale comparison for CO₂-derived vs. SO₂/NOₓ-derived acidity): Present the explicit pH comparison, isolating the magnitude difference between weak and strong acids.",
+        "Demonstration 3 (hemoglobin-binding-affinity comparison for CO vs. O₂): Present the explicit affinity comparison, deriving trace-level CO lethality from the biochemical competition mechanism."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Air Pollution\"",
+        "setup": "Is ground-level ozone emitted directly from cars? How does it form in photochemical smog?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (photochemical pathway diagram from NO₂ to O₃): Present the explicit atmospheric chemistry sequence, tracing ozone's secondary formation.",
+          "Demonstration 2 (pH-scale comparison for CO₂-derived vs. SO₂/NOₓ-derived acidity): Present the explicit pH comparison, isolating the magnitude difference between weak and strong acids.",
+          "Demonstration 3 (hemoglobin-binding-affinity comparison for CO vs. O₂): Present the explicit affinity comparison, deriving trace-level CO lethality from the biochemical competition mechanism."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Air Pollution\""
+        "expected_outcome": "Student can (a) correctly classify ozone as a secondary, not primary, pollutant, (b) correctly attribute severe acid rain to SO₂/NOₓ-derived strong acids, not CO₂, (c) correctly explain CO toxicity via biochemical hemoglobin competition, not physical displacement."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit photochemical pathway diagram from NO₂ to O₃.",
+          "TA-2 (TELL): State the weak-vs-strong-acid distinction for acid rain explicitly, anchored to the pH-scale comparison.",
+          "TA-3 (DO): Student predicts the mechanism (physical vs. biochemical) for an unfamiliar toxic-gas exposure scenario.",
+          "TA-4 (TEST-THINKING): Present the CO-at-200ppm probe and ask the student to justify why trace concentrations are still lethal."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Air Pollution from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Is ground-level ozone emitted directly from cars? How does it form in photochemical smog?\"",
+          "FA-2: \"Pure rainwater has pH ≈ 5.6 due to CO₂. Why is acid rain defined as below 5.6, not below 7?\"",
+          "FA-3: \"CO is toxic at concentrations of 200 ppm. At that level, it is not displacing room air. Why is it still lethal?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Air Pollution\""
+        "mastery_signal": "Student can (a) correctly classify ozone as a secondary, not primary, pollutant, (b) correctly attribute severe acid rain to SO₂/NOₓ-derived strong acids, not CO₂, (c) correctly explain CO toxicity via biochemical hemoglobin competition, not physical displacement."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Air Pollution\""
+        "This concept has no direct KG unlocks but consolidates atmospheric-chemistry reasoning built across `chem.env.atmosphere`, forming a capstone application to public-health and environmental-policy contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.env.atmosphere"
@@ -9982,48 +10012,64 @@
     {
       "id": "asset.chem.env.ozone",
       "concept_id": "chem.env.ozone",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Ozone Depletion\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Ozone Depletion\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Ozone Depletion\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "CFCs do NOT react directly with ozone without light — CFCs are actually chosen for refrigerant/industrial use PRECISELY because they are chemically inert in the troposphere (non-reactive, non-toxic, non-flammable), and only stratospheric UV-C photodissociation (CF₂Cl₂+hν) generates the reactive Cl• radical — without this photochemical initiation step, no ozone depletion occurs at all; the Cl• radical is NOT consumed in ozone destruction — it is genuinely CATALYTIC, regenerated in a two-step cycle (Cl•+O₃→ClO•+O₂, then ClO•+O•→Cl•+O₂, net O₃+O•→2O₂ with Cl• unchanged), allowing a single Cl• atom to cycle through ozone destruction roughly 100,000 times before eventual termination; and the ozone hole is NOT located over densely populated/industrial regions — it forms specifically over ANTARCTICA (and to a lesser extent the Arctic) because the POLAR VORTEX's isolation, polar stratospheric cloud (PSC) heterogeneous chemistry, and the burst of spring UV UNIQUELY concentrate active chlorine chemistry there — CFCs are released globally and drift to the stratosphere over years regardless of emission source location, but the depletion mechanism itself is worst specifically where polar conditions favor PSC formation and vortex-trapped air.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Ozone Depletion\"",
-        "[TEMPLATE] Key idea 2 for \"Ozone Depletion\"",
-        "[TEMPLATE] Key idea 3 for \"Ozone Depletion\""
+        "CFCs are genuinely chemically inert in the troposphere — ozone-depleting reactivity requires a specific, necessary photochemical initiation step (stratospheric UV-C photodissociation generating reactive Cl•) before any destructive chemistry can begin. Once formed, Cl• acts as a genuine catalyst in ozone destruction, regenerated in a two-step cycle (net O₃+O•→2O₂, Cl• unchanged), allowing repeated destruction (~100,000 cycles) rather than single-use consumption.",
+        "Because CFCs are long-lived and globally mixed before slowly reaching the stratosphere, the ozone hole's specific location (Antarctica) depends entirely on localized atmospheric conditions (polar vortex isolation, polar stratospheric cloud chemistry) that concentrate the depletion mechanism there, entirely independent of where the original CFC emissions occurred.",
+        "Core misconception to avoid: CFCs are genuinely inert until stratospheric UV-C photodissociation generates the reactive Cl• radical — this photochemical initiation step is a necessary bottleneck, never assume direct CFC-ozone reactivity without light."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Ozone Depletion\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "CFCs are reactive chemicals that react directly with ozone in the air.",
+          "correction": "CFCs are genuinely inert until stratospheric UV-C photodissociation generates the reactive Cl• radical — this photochemical initiation step is a necessary bottleneck, never assume direct CFC-ozone reactivity without light."
+        },
+        {
+          "misconception": "The chlorine radical reacts with ozone and is used up, so it can only destroy one ozone molecule.",
+          "correction": "Cl• is a genuine catalyst in ozone destruction, regenerated in the cycle's second step — never conclude \"consumed, one-time use\" from examining only the first mechanistic step."
+        },
+        {
+          "misconception": "The ozone hole is over industrial cities in Europe and North America where pollution is worst.",
+          "correction": "The ozone hole's severity depends on localized polar atmospheric conditions (vortex isolation, PSC chemistry), not proximity to CFC emission sources — CFCs mix globally before drifting to the stratosphere over years, making emission-source location largely irrelevant to depletion location."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Ozone Depletion\""
+        "Demonstration 1 (photodissociation mechanism as the required initiating step): Present the explicit CF₂Cl₂+hν→Cl• mechanism, reinforcing CFCs' otherwise genuine tropospheric inertness.",
+        "Demonstration 2 (full two-step Cl•/ClO• catalytic cycle diagram): Present the explicit cycle with Cl• labeled on both sides, deriving net-zero consumption.",
+        "Demonstration 3 (global-mixing-then-polar-concentration mechanism diagram): Present the explicit dispersal-and-concentration pathway, deriving the ozone hole's Antarctic location from local conditions, not emission proximity."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Ozone Depletion\"",
+        "setup": "Would CFCs deplete ozone in a room with no light? Explain.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (photodissociation mechanism as the required initiating step): Present the explicit CF₂Cl₂+hν→Cl• mechanism, reinforcing CFCs' otherwise genuine tropospheric inertness.",
+          "Demonstration 2 (full two-step Cl•/ClO• catalytic cycle diagram): Present the explicit cycle with Cl• labeled on both sides, deriving net-zero consumption.",
+          "Demonstration 3 (global-mixing-then-polar-concentration mechanism diagram): Present the explicit dispersal-and-concentration pathway, deriving the ozone hole's Antarctic location from local conditions, not emission proximity."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Ozone Depletion\""
+        "expected_outcome": "Student can (a) correctly identify the required photochemical activation step for CFC reactivity, (b) correctly explain Cl•'s catalytic (regenerated) role in ozone destruction, (c) correctly attribute the ozone hole's location to localized polar conditions, not emission proximity."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit photodissociation mechanism as the required initiating step.",
+          "TA-2 (TELL): State the catalytic (regenerated) nature of Cl• explicitly, anchored to the full two-step cycle diagram.",
+          "TA-3 (DO): Student traces the global-mixing-then-polar-concentration pathway for an unfamiliar CFC emission scenario.",
+          "TA-4 (TEST-THINKING): Present the ozone-hole-location probe and ask the student to justify why Antarctica, not industrial cities, is most affected."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Ozone Depletion from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Would CFCs deplete ozone in a room with no light? Explain.\"",
+          "FA-2: \"Chlorine radical reacts with ozone. Is the Cl• permanently consumed in the overall ozone destruction process?\"",
+          "FA-3: \"Where is the ozone depletion most severe? Why is it not over major cities?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Ozone Depletion\""
+        "mastery_signal": "Student can (a) correctly identify the required photochemical activation step for CFC reactivity, (b) correctly explain Cl•'s catalytic (regenerated) role in ozone destruction, (c) correctly attribute the ozone hole's location to localized polar conditions, not emission proximity."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Ozone Depletion\""
+        "This concept has no direct KG unlocks but consolidates atmospheric and photochemistry reasoning built across `chem.env.atmosphere` and `chem.kinet.photochemistry`, forming a capstone application to environmental policy (Montreal Protocol) contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.env.atmosphere",
@@ -10033,50 +10079,68 @@
     {
       "id": "asset.chem.env.water-soil",
       "concept_id": "chem.env.water-soil",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Water and Soil Pollution\".",
-      "concept_summary": "Eutrophication; BOD/COD; heavy metals; pesticides; soil acidity; 12 principles of green chemistry.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Water and Soil Pollution\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Fish do NOT die in eutrophic lakes because algae \"block sunlight\" so fish \"can't see\" — fish breathe DISSOLVED OXYGEN, not light — the actual mechanism is: algal blooms block light to submerged plants, those plants die, dead plant material is decomposed by AEROBIC BACTERIA that CONSUME dissolved O₂, and dissolved O₂ falls below ~4mg/L, causing fish to suffocate from HYPOXIA — an aerator maintaining O₂ at 8mg/L despite the bloom would keep fish alive, directly demonstrating the mechanism is about oxygen depletion, never light/visibility; BOD can NEVER exceed COD — COD (using strong oxidant K₂Cr₂O₇) oxidizes ALL oxidizable material (organic+inorganic), while BOD measures only the SUBSET that aerobic bacteria can actually metabolize — BOD≤COD ALWAYS by definition, so a measured BOD>COD is definitionally an ANALYTICAL ERROR, never a genuine finding; and \"green chemistry\" does NOT mean recycling or waste management — green chemistry specifically acts BEFORE the molecule is even made, designing syntheses/reagents/products to be inherently non-hazardous from the start (atom economy, safer solvents, biodegradable products are all SOURCE-PREVENTION strategies) — end-of-pipe remediation (like installing a chimney filter) is the OPPOSITE approach, addressing pollution after it's already created, never itself an example of green chemistry.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Water and Soil Pollution\"",
-        "[TEMPLATE] Key idea 2 for \"Water and Soil Pollution\"",
-        "[TEMPLATE] Key idea 3 for \"Water and Soil Pollution\""
+        "Fish deaths in eutrophic lakes result from a multi-step causal chain — algal light-blocking kills submerged plants, whose decomposition by aerobic bacteria consumes dissolved oxygen, ultimately causing fish to suffocate from hypoxia — never directly from light deprivation itself, as the aerator thought experiment (restoring O₂ while the bloom persists) demonstrates. BOD and COD measure nested categories (BOD a strict subset of COD's broader scope), making BOD≤COD a definitional constraint, never merely an empirical tendency.",
+        "\"Green chemistry\" specifically refers to preventive molecular/process design intervening BEFORE synthesis (atom economy, safer solvents, inherently non-hazardous products) — categorically different from end-of-pipe pollution-control or waste-management practices (like chimney filters or recycling), which intervene only AFTER hazardous substances have already been generated.",
+        "Core misconception to avoid: Fish die in eutrophic lakes from hypoxia (dissolved oxygen depletion via bacterial decomposition of dead plant material), never directly from light deprivation itself — always trace the full causal chain, not just the first step."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Water and Soil Pollution\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "The algae blocked all the light so the fish couldn't see and suffocated.",
+          "correction": "Fish die in eutrophic lakes from hypoxia (dissolved oxygen depletion via bacterial decomposition of dead plant material), never directly from light deprivation itself — always trace the full causal chain, not just the first step."
+        },
+        {
+          "misconception": "BOD measures more because bacteria are more thorough than chemicals.",
+          "correction": "BOD≤COD always, by definition (BOD measures a strict subset of what COD measures) — a measured BOD>COD result indicates an analytical error, never a genuine environmental finding."
+        },
+        {
+          "misconception": "Green chemistry means sorting waste and recycling solvents.",
+          "correction": "Green chemistry specifically means preventive molecular/process design (before synthesis) to avoid generating hazardous substances — never end-of-pipe waste management, recycling, or pollution-control remediation, which address pollution only after it's already created."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Water and Soil Pollution\""
+        "Demonstration 1 (multi-step eutrophication mechanism with aerator thought experiment): Present the explicit causal chain, applying the aerator experiment to isolate O₂ depletion as the actual killing mechanism.",
+        "Demonstration 2 (nested-category BOD/COD scope diagram): Present the explicit diagram showing COD's total scope fully encompassing BOD's subset, deriving the BOD≤COD constraint.",
+        "Demonstration 3 (before/after intervention-timing comparison for green chemistry vs. remediation): Present both practice types explicitly, isolating intervention timing as the key discriminator."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Water and Soil Pollution\"",
+        "setup": "If you put an aerator in a eutrophic lake that maintained dissolved O₂ at 8 mg/L despite the algal bloom, would fish still die?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (multi-step eutrophication mechanism with aerator thought experiment): Present the explicit causal chain, applying the aerator experiment to isolate O₂ depletion as the actual killing mechanism.",
+          "Demonstration 2 (nested-category BOD/COD scope diagram): Present the explicit diagram showing COD's total scope fully encompassing BOD's subset, deriving the BOD≤COD constraint.",
+          "Demonstration 3 (before/after intervention-timing comparison for green chemistry vs. remediation): Present both practice types explicitly, isolating intervention timing as the key discriminator."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Water and Soil Pollution\""
+        "expected_outcome": "Student can (a) correctly trace the full eutrophication mechanism to oxygen depletion, (b) correctly recognize BOD>COD as a definitional impossibility/analytical error, (c) correctly classify environmental-chemistry practices as green chemistry (preventive) or remediation (reactive)."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit multi-step eutrophication mechanism with the aerator thought experiment.",
+          "TA-2 (TELL): State the nested-category BOD/COD relationship explicitly, anchored to the scope diagram.",
+          "TA-3 (DO): Student classifies an unfamiliar environmental-chemistry practice as green chemistry or end-of-pipe remediation.",
+          "TA-4 (TEST-THINKING): Present the BOD/COD probe and ask the student to justify why BOD>COD indicates an analytical error."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Water and Soil Pollution from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"If you put an aerator in a eutrophic lake that maintained dissolved O₂ at 8 mg/L despite the algal bloom, would fish still die?\"",
+          "FA-2: \"A sample has BOD = 15 mg/L and COD = 12 mg/L. Is this possible?\"",
+          "FA-3: \"Is designing a synthesis with 95% atom economy an example of green chemistry? What about installing a filter on a factory chimney?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Water and Soil Pollution\""
+        "mastery_signal": "Student can (a) correctly trace the full eutrophication mechanism to oxygen depletion, (b) correctly recognize BOD>COD as a definitional impossibility/analytical error, (c) correctly classify environmental-chemistry practices as green chemistry (preventive) or remediation (reactive)."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Water and Soil Pollution\""
+        "This concept has no direct KG unlocks but consolidates atmospheric-chemistry reasoning built across `chem.env.atmosphere`, forming a capstone application to environmental engineering and sustainable-chemistry contexts."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.env.atmosphere"
+      ]
     },
     {
       "id": "asset.chem.anal.gravimetric",
