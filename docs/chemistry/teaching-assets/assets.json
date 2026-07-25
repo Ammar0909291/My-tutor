@@ -2638,48 +2638,62 @@
     {
       "id": "asset.chem.sol.types",
       "concept_id": "chem.sol.types",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Types of Solutions\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Types of Solutions\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Types of Solutions\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "A solution is a homogeneous mixture of two or more substances (solute dissolved in solvent) where composition and properties are uniform throughout at the molecular level. Solutions can be classified by the physical state of solute and solvent (gas-in-gas, liquid-in-liquid, solid-in-liquid, etc.), by amount of solute relative to the maximum that can dissolve (unsaturated, saturated, supersaturated), and by particle-level miscibility rules (\"like dissolves like\" — polarity matching between solute and solvent governs whether a homogeneous solution forms at all).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Types of Solutions\"",
-        "[TEMPLATE] Key idea 2 for \"Types of Solutions\"",
-        "[TEMPLATE] Key idea 3 for \"Types of Solutions\""
+        "A solution is a homogeneous mixture where solute particles are dispersed at the molecular/ionic level throughout the solvent. Whether a given solute-solvent pair forms a true solution (vs. staying visibly separate) depends primarily on intermolecular force compatibility (\"like dissolves like\") — polar/ionic solutes dissolve well in polar solvents (water), non-polar solutes dissolve well in non-polar solvents (hexane, oil), because similar intermolecular forces let new solute-solvent interactions replace the old solute-solute and solvent-solvent interactions without a large energy penalty.",
+        "Solutions are classified along two independent axes — physical state (9 possible solute-solvent state combinations) and saturation level (unsaturated: more solute could still dissolve; saturated: at the dissolving limit for that temperature; supersaturated: an unstable state holding more dissolved solute than the equilibrium limit, achieved by careful cooling or evaporation).",
+        "Core misconception to avoid: Ideal solutions follow Raoult's law because solute-solvent forces equal solute-solute and solvent-solvent forces; this is a mixing-energetics classification, separate from how much solute can dissolve."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Types of Solutions\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Ideal solution means it dissolves perfectly, more than a normal one.",
+          "correction": "Ideal solutions follow Raoult's law because solute-solvent forces equal solute-solute and solvent-solvent forces; this is a mixing-energetics classification, separate from how much solute can dissolve."
+        },
+        {
+          "misconception": "Oil never dissolves in water, period.",
+          "correction": "Solubility exists on a continuous scale from \"negligible\" to \"fully miscible\"; polarity matching predicts where on that scale a pair falls, not whether dissolving happens at all."
+        },
+        {
+          "misconception": "Dissolving a solid gives a solid solution; dissolving a gas gives a gas solution.",
+          "correction": "Classify solutions by the (solute state, solvent state) pair; the overall solution's observable state equals the solvent's state."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Types of Solutions\""
+        "Demonstration 1 (like dissolves like): Attempt to dissolve iodine crystals in water (poor solubility, faint color) vs. in hexane or rubbing alcohol (much stronger color, dissolves readily) — same solute, different solvent, dramatically different outcome.",
+        "Demonstration 2 (dissolved gas): Open a bottle of carbonated water and show fizzing (dissolved CO₂ gas leaving a liquid solution) as direct evidence that gas-in-liquid solutions exist and behave as liquids until disturbed."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Types of Solutions\"",
+        "setup": "Will naphthalene (non-polar) dissolve better in water or in hexane? Why?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (like dissolves like): Attempt to dissolve iodine crystals in water (poor solubility, faint color) vs. in hexane or rubbing alcohol (much stronger color, dissolves readily) — same solute, different solvent, dramatically different outcome.",
+          "Demonstration 2 (dissolved gas): Open a bottle of carbonated water and show fizzing (dissolved CO₂ gas leaving a liquid solution) as direct evidence that gas-in-liquid solutions exist and behave as liquids until disturbed."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Types of Solutions\""
+        "expected_outcome": "Student can (a) predict, using polarity, whether an unfamiliar solute-solvent pair will dissolve well, (b) explain why solubility is a continuous property with real counterexamples, (c) correctly determine the physical state of a solution from the solvent's state."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Live or video demonstration of iodine in water vs. iodine in a non-polar solvent.",
+          "TA-2 (TELL): State \"like dissolves like\" as a polarity-matching heuristic, immediately followed by the continuous-scale caveat.",
+          "TA-3 (DO): Student fills in the 3×3 solute-state × solvent-state classification grid with real examples.",
+          "TA-4 (TEST-THINKING): Present the O₂-in-water fact and ask the student to reconcile it with \"oil and water never mix.\""
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Types of Solutions from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Will naphthalene (non-polar) dissolve better in water or in hexane? Why?\"",
+          "FA-2: \"Explain how fish can survive underwater if oxygen 'doesn't dissolve' in water.\"",
+          "FA-3: \"What is the physical state of soda water, and why?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Types of Solutions\""
+        "mastery_signal": "Student can (a) predict, using polarity, whether an unfamiliar solute-solvent pair will dissolve well, (b) explain why solubility is a continuous property with real counterexamples, (c) correctly determine the physical state of a solution from the solvent's state."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Types of Solutions\""
+        "Feeds into `chem.sol.solubility` (quantitative solubility curves build directly on the continuous-scale correction from MC-2) and `chem.sol.vapour-pressure` (Raoult's law and ideal-solution behavior build directly on MC-1's corrected technical definition of \"ideal\")."
       ],
       "prerequisite_review_triggers": [
         "chem.found.pure-substances",
@@ -2689,48 +2703,64 @@
     {
       "id": "asset.chem.sol.solubility",
       "concept_id": "chem.sol.solubility",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Solubility and Henry's Law\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Solubility and Henry's Law\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Solubility and Henry's Law\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Gas solubility DECREASES with increasing temperature (the opposite of most solid solutes), because gas dissolution is EXOTHERMIC — Le Chatelier's principle then dictates that raising temperature shifts the equilibrium toward the endothermic direction (gas leaving solution), explaining why warm soda goes flat faster and warm rivers hold less dissolved O₂; Henry's law applies ONLY to GASES dissolved in liquids, never to solid solutes — pressure has negligible effect on solid solubility because solids are nearly incompressible with no comparable phase-volume change, while gas solubility responds to pressure because compressing the gas phase forces more molecules into solution; and non-reactive, non-polar gases (N₂, O₂, noble gases) are NOT literally insoluble in water — they have small but genuinely non-zero solubility (via weak London dispersion interactions), with O₂≈8mg/L and N₂≈14mg/L at 25°C/1atm being fully sufficient to sustain aquatic life and to cause decompression sickness (\"the bends\") from dissolved N₂ — \"insoluble\" in casual usage means very low solubility, never literally zero.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Solubility and Henry's Law\"",
-        "[TEMPLATE] Key idea 2 for \"Solubility and Henry's Law\"",
-        "[TEMPLATE] Key idea 3 for \"Solubility and Henry's Law\""
+        "Gas solubility in liquids depends on temperature in the OPPOSITE direction from many common solid solutes — because gas dissolution is exothermic, Le Chatelier's principle predicts that increasing temperature shifts equilibrium toward gas release, decreasing solubility (unlike many solids, whose endothermic dissolution means higher temperature increases solubility). Henry's law, which links pressure to increased solubility, applies specifically and only to gas solutes, since its mechanism depends on compressing a gas phase — a process with no analog for incompressible solid solutes.",
+        "Even non-reactive, non-polar gases like O₂ and N₂ have small but genuinely non-zero solubility in water, driven by weak London dispersion interactions present between any two molecules — this small solubility is nonetheless biologically and physically significant (sustaining aquatic respiration, causing decompression sickness), demonstrating that \"insoluble\" is a practical description of low magnitude, not a literal claim of zero dissolved molecules.",
+        "Core misconception to avoid: Gas solubility DECREASES with increasing temperature (exothermic dissolution, Le Chatelier's principle) — never assume the solid-solubility \"hotter=more soluble\" pattern applies to gases."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Solubility and Henry's Law\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Hot water dissolves things better, so more CO₂ would dissolve at higher temperatures.",
+          "correction": "Gas solubility DECREASES with increasing temperature (exothermic dissolution, Le Chatelier's principle) — never assume the solid-solubility \"hotter=more soluble\" pattern applies to gases."
+        },
+        {
+          "misconception": "Higher pressure makes everything more soluble, so increasing pressure on the NaCl solution should dissolve more salt.",
+          "correction": "Henry's law applies specifically and only to gas solutes dissolved in liquids — pressure has negligible effect on solid (or liquid) solute solubility, since there is no compressible gas phase to force additional dissolution."
+        },
+        {
+          "misconception": "Oxygen doesn't react with water and it's non-polar, so it won't dissolve.",
+          "correction": "Non-reactive, non-polar gases have small but genuinely non-zero, biologically/physically significant solubility in water via weak London dispersion interactions — never treat \"insoluble\" as literally zero solubility."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Solubility and Henry's Law\""
+        "Demonstration 1 (exothermic-dissolution/Le Chatelier derivation for warm soda): Derive the temperature-solubility relationship for CO₂ explicitly from exothermic dissolution and Le Chatelier's principle.",
+        "Demonstration 2 (gas-phase-compression mechanism for Henry's law): Present the explicit compression mechanism for a gas-liquid system, contrasted with a solid solute's lack of a comparable mechanism.",
+        "Demonstration 3 (O₂/N₂ solubility data with real-world consequences): Present the explicit O₂/N₂ solubility values, connecting them to aquatic respiration and decompression sickness."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Solubility and Henry's Law\"",
+        "setup": "Why does a warm soda go flat faster than a cold one?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (exothermic-dissolution/Le Chatelier derivation for warm soda): Derive the temperature-solubility relationship for CO₂ explicitly from exothermic dissolution and Le Chatelier's principle.",
+          "Demonstration 2 (gas-phase-compression mechanism for Henry's law): Present the explicit compression mechanism for a gas-liquid system, contrasted with a solid solute's lack of a comparable mechanism.",
+          "Demonstration 3 (O₂/N₂ solubility data with real-world consequences): Present the explicit O₂/N₂ solubility values, connecting them to aquatic respiration and decompression sickness."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Solubility and Henry's Law\""
+        "expected_outcome": "Student can (a) correctly predict gas solubility decreasing with temperature from exothermic-dissolution reasoning, (b) correctly restrict Henry's law application to gas solutes only, (c) correctly recognize non-reactive gases as having small but non-zero solubility."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit exothermic-dissolution/Le Chatelier derivation for CO₂ temperature-solubility behavior.",
+          "TA-2 (TELL): State Henry's law's gas-only scope explicitly, anchored to the gas-phase-compression mechanism.",
+          "TA-3 (DO): Student predicts the solubility response to a pressure change for both a gas solute and a solid solute.",
+          "TA-4 (TEST-THINKING): Present the \"is oxygen truly insoluble\" probe and ask the student to justify aquatic respiration from non-zero solubility."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Solubility and Henry's Law from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Why does a warm soda go flat faster than a cold one?\"",
+          "FA-2: \"If you increase the pressure on a saturated NaCl solution, does more NaCl dissolve?\"",
+          "FA-3: \"Is there any dissolved oxygen in lake water? How do fish breathe?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Solubility and Henry's Law\""
+        "mastery_signal": "Student can (a) correctly predict gas solubility decreasing with temperature from exothermic-dissolution reasoning, (b) correctly restrict Henry's law application to gas solutes only, (c) correctly recognize non-reactive gases as having small but non-zero solubility."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Solubility and Henry's Law\""
+        "This concept has no direct KG unlocks but consolidates equilibrium and gas-law reasoning built across `chem.sol.types` and `chem.state.gas-laws`, forming a capstone application to environmental and biological solubility contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.sol.types",
@@ -2740,48 +2770,62 @@
     {
       "id": "asset.chem.sol.vapour-pressure",
       "concept_id": "chem.sol.vapour-pressure",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Vapour Pressure of Solutions\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Vapour Pressure of Solutions\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Vapour Pressure of Solutions\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Vapour pressure lowering is primarily caused by SURFACE BLOCKADE/entropy effects (solute particles occupying surface positions, physically reducing the fraction of solvent molecules available to escape), not by chemical attraction \"trapping\" solvent molecules — proven by the fact that vapour pressure lowering per mole of dissolved particles is roughly the same regardless of whether the solute hydrogen-bonds strongly (like NaCl/HCl) or weakly (like glucose) to water; Raoult's law (P=x_solvent×P°) specifically requires the SOLVENT's mole fraction, not the solute's, and never uses molarity directly; and vapour pressure lowering and boiling point elevation are DIRECTLY connected, not independent phenomena — the solution's entire vapour-pressure-vs-temperature curve shifts down relative to pure solvent, meaning it crosses the atmospheric-pressure boiling threshold at a genuinely higher temperature, which IS the boiling point elevation.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Vapour Pressure of Solutions\"",
-        "[TEMPLATE] Key idea 2 for \"Vapour Pressure of Solutions\"",
-        "[TEMPLATE] Key idea 3 for \"Vapour Pressure of Solutions\""
+        "Vapour pressure lowering occurs primarily because dissolved solute particles physically occupy surface positions, reducing the fraction of the liquid's surface available for solvent molecules to escape into the vapour phase — this baseline effect depends on the NUMBER of dissolved particles, not their specific chemical bonding strength with the solvent (though genuine chemical attraction causes additional, secondary deviations). Raoult's law (P=x_solvent×P°) requires specifically the solvent's mole fraction — never the solute's mole fraction, and never molarity, which measures an entirely different quantity.",
+        "Vapour pressure lowering and boiling point elevation are directly, mechanistically connected — the solution's vapour pressure curve is shifted downward at every temperature relative to pure solvent, meaning it necessarily requires a higher temperature to reach the atmospheric-pressure boiling threshold; this higher crossing temperature IS the boiling point elevation, a direct, visualizable consequence of the same underlying vapour-pressure-lowering effect, not a separately-caused phenomenon.",
+        "Core misconception to avoid: Vapour pressure lowering is primarily caused by solute particles physically occupying surface positions (reducing the fraction of solvent molecules able to escape) — this baseline effect depends on particle COUNT, not bonding strength; genuine chemical attraction is a secondary, additional factor causing further deviations, not the core mechanism."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Vapour Pressure of Solutions\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "solute molecules are attracted to water so it can't escape",
+          "correction": "Vapour pressure lowering is primarily caused by solute particles physically occupying surface positions (reducing the fraction of solvent molecules able to escape) — this baseline effect depends on particle COUNT, not bonding strength; genuine chemical attraction is a secondary, additional factor causing further deviations, not the core mechanism."
+        },
+        {
+          "misconception": "x_solvent = 0.5/(0.5+2)",
+          "correction": "Always identify and use x_solvent (mole fraction of the SOLVENT specifically) in Raoult's law — never substitute the solute's mole fraction, and never use molarity."
+        },
+        {
+          "misconception": "VP lowering is about evaporation; boiling point elevation is a different effect",
+          "correction": "Boiling point elevation is a direct, mechanistic CONSEQUENCE of vapour pressure lowering — visualized on a single P-T diagram, both are the same underlying phenomenon viewed from different angles (VP lowering: the curve's height at any given temperature; bp elevation: the temperature where the shifted curve reaches the atmospheric threshold)."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Vapour Pressure of Solutions\""
+        "Demonstration 1 (per-mole-of-particles VP lowering comparison): Present VP lowering data for glucose versus NaCl at equal molar particle counts, showing the similarity despite very different bonding strength, directly supporting the surface-blockade mechanism.",
+        "Demonstration 2 (P-T diagram construction): Draw the full P-T diagram for pure solvent and solution side by side, tracing the vapour-pressure-curve shift directly to the resulting boiling-point elevation."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Vapour Pressure of Solutions\"",
+        "setup": "Why does glucose still lower water's vapour pressure despite weak hydrogen bonding?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (per-mole-of-particles VP lowering comparison): Present VP lowering data for glucose versus NaCl at equal molar particle counts, showing the similarity despite very different bonding strength, directly supporting the surface-blockade mechanism.",
+          "Demonstration 2 (P-T diagram construction): Draw the full P-T diagram for pure solvent and solution side by side, tracing the vapour-pressure-curve shift directly to the resulting boiling-point elevation."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Vapour Pressure of Solutions\""
+        "expected_outcome": "Student can (a) correctly explain vapour pressure lowering using the surface-blockade mechanism, not chemical trapping, (b) correctly apply Raoult's law using solvent mole fraction, never molarity or solute fraction, (c) correctly connect vapour pressure lowering to boiling point elevation via the shifted P-T curve."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the glucose-vs-NaCl per-mole VP lowering comparison explicitly.",
+          "TA-2 (TELL): State the solvent-mole-fraction requirement explicitly, immediately followed by a worked Raoult's law calculation.",
+          "TA-3 (DO): Student computes vapour pressure for a new solution, correctly identifying and using the solvent's mole fraction.",
+          "TA-4 (TEST-THINKING): Present MC-3's probe and ask the student to explain the VP-lowering-to-boiling-point-elevation connection using the P-T diagram."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Vapour Pressure of Solutions from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Why does glucose still lower water's vapour pressure despite weak hydrogen bonding?\"",
+          "FA-2: \"Calculate the vapour pressure of a solution with 0.5 mol glucose in 2 mol water, P°=24 mmHg.\"",
+          "FA-3: \"Why does dissolving salt in water both lower vapour pressure and raise boiling point? Are these connected?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Vapour Pressure of Solutions\""
+        "mastery_signal": "Student can (a) correctly explain vapour pressure lowering using the surface-blockade mechanism, not chemical trapping, (b) correctly apply Raoult's law using solvent mole fraction, never molarity or solute fraction, (c) correctly connect vapour pressure lowering to boiling point elevation via the shifted P-T curve."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Vapour Pressure of Solutions\""
+        "Feeds directly into `chem.sol.activity` (real-solution deviations from Raoult's law build on the baseline mechanism established here) and `chem.sol.colligative` (all four colligative properties are unified by the VP-lowering-to-derived-effects connection established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.sol.types",
@@ -2791,48 +2835,62 @@
     {
       "id": "asset.chem.sol.colligative",
       "concept_id": "chem.sol.colligative",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Colligative Properties\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Colligative Properties\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Colligative Properties\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Molarity and molality are genuinely DIFFERENT quantities, even in dilute aqueous solutions (10 g glucose in 100 g water gives molality≈0.556 mol/kg but molarity≈0.505 mol/L, close but not identical) — colligative-property formulas (ΔTb, ΔTf) specifically require MOLALITY (temperature-independent, since it's mass-based) rather than molarity (which changes with temperature, since volume changes); NaCl and glucose at the SAME molal concentration produce DIFFERENT colligative effects, since NaCl's van't Hoff factor (i≈2, dissociating into 2 ions) doubles its effect compared to glucose's non-dissociating i=1 — never assume equal molality means equal colligative effect without accounting for i; and osmotic pressure is NOT a small, negligible effect — at biological concentrations (like blood plasma's ~0.28 mol/L osmolarity), osmotic pressure reaches roughly 7-8 atm, a substantial mechanical force capable of lysing cells placed in pure water.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Colligative Properties\"",
-        "[TEMPLATE] Key idea 2 for \"Colligative Properties\"",
-        "[TEMPLATE] Key idea 3 for \"Colligative Properties\""
+        "Colligative properties (boiling point elevation, freezing point depression, osmotic pressure) all depend on the total number of dissolved solute PARTICLES, which requires using molality specifically (a mass-based, temperature-independent concentration measure, distinct from volume-based molarity) and the van't Hoff factor i (accounting for solutes that dissociate into multiple particles, like NaCl, versus non-dissociating solutes like glucose).",
+        "Osmotic pressure's formula (π=iMRT) produces genuinely large numeric values at realistic concentrations, since it scales with RT (a substantial energy-scale factor) — at biological concentrations like blood plasma, osmotic pressure reaches several atmospheres, a real, consequential mechanical force, not a negligible effect, despite sometimes appearing numerically small when comparing only ΔTb/ΔTf shifts at similarly moderate concentrations.",
+        "Core misconception to avoid: Molarity and molality are genuinely different quantities (volume-based vs. mass-based) — colligative-property formulas require molality specifically, for its temperature independence, never molarity as a casual substitute."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Colligative Properties\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "they're basically the same for dilute solutions",
+          "correction": "Molarity and molality are genuinely different quantities (volume-based vs. mass-based) — colligative-property formulas require molality specifically, for its temperature independence, never molarity as a casual substitute."
+        },
+        {
+          "misconception": "both 0.1 molal so ΔTb = Kb × 0.1 for both.",
+          "correction": "Always include the van't Hoff factor (i) in colligative-property calculations — a dissociating solute's effect scales with i, the actual number of particles produced per formula unit, never assumed equal to a non-dissociating solute's effect at the same molality."
+        },
+        {
+          "misconception": "osmotic pressure is too small to matter",
+          "correction": "Osmotic pressure is genuinely substantial even at moderate, realistic biological concentrations (several atmospheres) — never assume it's negligible without actually computing π=iMRT."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Colligative Properties\""
+        "Demonstration 1 (molarity-vs-molality dual computation): Compute both molarity and molality explicitly for the given glucose example, showing the numeric difference directly.",
+        "Demonstration 2 (NaCl-vs-glucose ΔTb comparison): Compute ΔTb explicitly for both solutes at equal molality, showing the i-factor's direct doubling effect for NaCl."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Colligative Properties\"",
+        "setup": "Is molality the same as molarity for a glucose solution made from 10 g in 100 g water?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (molarity-vs-molality dual computation): Compute both molarity and molality explicitly for the given glucose example, showing the numeric difference directly.",
+          "Demonstration 2 (NaCl-vs-glucose ΔTb comparison): Compute ΔTb explicitly for both solutes at equal molality, showing the i-factor's direct doubling effect for NaCl."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Colligative Properties\""
+        "expected_outcome": "Student can (a) correctly distinguish molarity from molality and use molality in colligative-property formulas, (b) correctly apply the van't Hoff factor when comparing dissociating and non-dissociating solutes, (c) correctly compute osmotic pressure and recognize its genuine, substantial magnitude at realistic concentrations."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit molarity-vs-molality dual computation for the glucose example.",
+          "TA-2 (TELL): State the van't Hoff factor requirement explicitly, worked through for the NaCl-vs-glucose ΔTb comparison.",
+          "TA-3 (DO): Student computes osmotic pressure explicitly for a given biological-concentration example.",
+          "TA-4 (TEST-THINKING): Present MC-3's blood-plasma probe and ask the student to connect the computed π value to real physiological consequences."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Colligative Properties from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Is molality the same as molarity for a glucose solution made from 10 g in 100 g water?\"",
+          "FA-2: \"Compare ΔTb for 0.1 mol/kg NaCl and 0.1 mol/kg glucose.\"",
+          "FA-3: \"Calculate the osmotic pressure of blood plasma (0.28 mol/L osmolarity) at 37°C.\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Colligative Properties\""
+        "mastery_signal": "Student can (a) correctly distinguish molarity from molality and use molality in colligative-property formulas, (b) correctly apply the van't Hoff factor when comparing dissociating and non-dissociating solutes, (c) correctly compute osmotic pressure and recognize its genuine, substantial magnitude at realistic concentrations."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Colligative Properties\""
+        "Feeds directly into `chem.sol.osmosis` (osmotic pressure applications, including reverse osmosis and biological transport, directly extend the reasoning established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.sol.vapour-pressure"
@@ -2841,48 +2899,64 @@
     {
       "id": "asset.chem.sol.osmosis",
       "concept_id": "chem.sol.osmosis",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Osmosis and Osmotic Pressure\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Osmosis and Osmotic Pressure\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Osmosis and Osmotic Pressure\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "In osmosis, it is the SOLVENT (water) that moves through the semipermeable membrane, never the solute — the membrane specifically BLOCKS the solute, and water moves from the region of higher water chemical potential (lower solute concentration) toward the region of lower water chemical potential (higher solute concentration), the OPPOSITE direction from what \"solute diffuses high-to-low\" intuition would predict; a HYPERTONIC solution (more solute outside the cell than inside) causes water to LEAVE the cell (not enter), so the cell SHRINKS (crenation), not swells — \"hyper\" does not mean \"more water in,\" and the correct mnemonic is HYPOtonic=water in=swells, HYPERtonic=water out=shrinks; and osmotic pressure is NOT negligibly small even for dilute biological solutions — because RT at physiological temperature (310K) is large (≈2577J/mol), even modest molarities produce substantial pressures (blood plasma's osmotic pressure is ≈7atm), making osmotic pressure one of the LARGER pressure scales relevant in biology and engineering, not a trivial effect.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Osmosis and Osmotic Pressure\"",
-        "[TEMPLATE] Key idea 2 for \"Osmosis and Osmotic Pressure\"",
-        "[TEMPLATE] Key idea 3 for \"Osmosis and Osmotic Pressure\""
+        "Osmosis moves the solvent (never the blocked solute) across a semipermeable membrane, from the region of higher solvent chemical potential (lower solute concentration) toward lower solvent chemical potential (higher solute concentration) — a direction that can feel counterintuitive if reasoning from the solute's own concentration gradient rather than the solvent's. Tonicity classification (hypo-/hyper-/isotonic) describes relative solute concentration outside vs. inside a cell, and water movement follows water's own gradient — hypertonic solutions (more solute outside) draw water OUT of cells, causing shrinkage, the reverse of the \"hyper=bigger\" intuition.",
+        "Osmotic pressure, computed via π=iMRT, is often larger than intuition suggests because the RT factor at physiological or ambient temperature is substantial — even dilute biological solutions (like blood plasma) produce multi-atmosphere osmotic pressures, making osmosis a genuinely significant physical force in biological membranes, tree water transport, and engineering applications like desalination.",
+        "Core misconception to avoid: In osmosis, only the solvent crosses the semipermeable membrane, moving from higher solvent concentration (lower solute concentration) to lower solvent concentration (higher solute concentration) — the solute never crosses, regardless of its own concentration gradient."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Osmosis and Osmotic Pressure\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "the sucrose diffuses from the 1 M side to the water side.",
+          "correction": "In osmosis, only the solvent crosses the semipermeable membrane, moving from higher solvent concentration (lower solute concentration) to lower solvent concentration (higher solute concentration) — the solute never crosses, regardless of its own concentration gradient."
+        },
+        {
+          "misconception": "hypertonic means more pressure so the cell swells.",
+          "correction": "Hypertonic (more solute outside) causes water to LEAVE the cell, causing it to SHRINK — use the explicit mnemonic HYPOtonic=water in=swells, HYPERtonic=water out=shrinks, never infer cell behavior directly from the prefix's everyday connotation."
+        },
+        {
+          "misconception": "it's such a dilute solution the pressure can't be significant.",
+          "correction": "Always compute the full π=iMRT value before judging osmotic pressure magnitude — even dilute biological solutions routinely produce multi-atmosphere osmotic pressures, never assume small M implies small π."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Osmosis and Osmotic Pressure\""
+        "Demonstration 1 (membrane-permeability diagram for solvent-only crossing): Present the explicit semipermeable-membrane diagram for a sucrose-water system, tracking only water's movement.",
+        "Demonstration 2 (hypotonic-vs-hypertonic cell-response comparison): Present both scenarios (RBC in hypotonic vs. hypertonic solution) side by side, deriving swelling vs. shrinking from water's chemical-potential gradient in each case.",
+        "Demonstration 3 (blood-plasma π=iMRT numerical computation): Compute the full osmotic pressure for blood plasma explicitly, comparing the result against atmospheric pressure as a reference."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Osmosis and Osmotic Pressure\"",
+        "setup": "A semipermeable membrane separates 1M sucrose from water. Which substance moves through the membrane, and in which direction?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (membrane-permeability diagram for solvent-only crossing): Present the explicit semipermeable-membrane diagram for a sucrose-water system, tracking only water's movement.",
+          "Demonstration 2 (hypotonic-vs-hypertonic cell-response comparison): Present both scenarios (RBC in hypotonic vs. hypertonic solution) side by side, deriving swelling vs. shrinking from water's chemical-potential gradient in each case.",
+          "Demonstration 3 (blood-plasma π=iMRT numerical computation): Compute the full osmotic pressure for blood plasma explicitly, comparing the result against atmospheric pressure as a reference."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Osmosis and Osmotic Pressure\""
+        "expected_outcome": "Student can (a) correctly identify the solvent (never the solute) as the substance crossing in osmosis, (b) correctly predict cell swelling/shrinking from tonicity classification, (c) correctly compute and appreciate the magnitude of osmotic pressure from π=iMRT."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit membrane-permeability diagram for the sucrose-water system.",
+          "TA-2 (TELL): State the HYPO/HYPER-water-in/out mnemonic explicitly, anchored to the chemical-potential-gradient explanation.",
+          "TA-3 (DO): Student predicts cell volume response for an unfamiliar tonicity scenario.",
+          "TA-4 (TEST-THINKING): Present the blood-plasma osmotic-pressure probe and ask the student to justify the multi-atmosphere result from the full π=iMRT computation."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Osmosis and Osmotic Pressure from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A semipermeable membrane separates 1M sucrose from water. Which substance moves through the membrane, and in which direction?\"",
+          "FA-2: \"A red blood cell is placed in 5% NaCl solution (hypertonic compared to blood). What happens to the cell?\"",
+          "FA-3: \"Calculate the osmotic pressure of blood plasma (osmolarity≈0.28Osmol/L) at 37°C.\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Osmosis and Osmotic Pressure\""
+        "mastery_signal": "Student can (a) correctly identify the solvent (never the solute) as the substance crossing in osmosis, (b) correctly predict cell swelling/shrinking from tonicity classification, (c) correctly compute and appreciate the magnitude of osmotic pressure from π=iMRT."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Osmosis and Osmotic Pressure\""
+        "This concept has no direct KG unlocks but consolidates colligative-property reasoning built across `chem.sol.colligative`, forming a capstone application to biological membrane transport and osmotic-pressure engineering contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.sol.colligative"
@@ -2891,48 +2965,64 @@
     {
       "id": "asset.chem.sol.activity",
       "concept_id": "chem.sol.activity",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Activity and Non-ideal Solutions\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Activity and Non-ideal Solutions\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Activity and Non-ideal Solutions\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Activity (a=γc) equals concentration ONLY as an approximation valid at low concentration (γ≈1) — treating a=c as an exact identity rather than a limiting-case approximation produces measurable errors (e.g., ~0.015V in a Nernst-equation EMF calculation) at higher, more realistic concentrations like seawater; the activity coefficient γ is NOT always ≤1 — the Debye-Hückel Limiting Law's γ<1 prediction applies specifically to ELECTROLYTES at LOW concentration, while molecular (non-electrolyte) solutions showing positive deviation from Raoult's law (higher-than-predicted vapor pressure) genuinely have γ>1; and ionic strength I=½Σcᵢzᵢ² requires the CHARGE-SQUARED term for every ion, not just concentration — for a polyvalent electrolyte like CaCl₂, I is substantially larger than the molar concentration (0.3mol/L for 0.1mol/L CaCl₂, not 0.1mol/L), because the z² factor amplifies the electrostatic contribution of higher-charged ions.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Activity and Non-ideal Solutions\"",
-        "[TEMPLATE] Key idea 2 for \"Activity and Non-ideal Solutions\"",
-        "[TEMPLATE] Key idea 3 for \"Activity and Non-ideal Solutions\""
+        "Activity (a=γc) genuinely equals concentration only in the low-concentration limit where γ≈1 — treating this as an exact identity rather than a limiting approximation introduces measurable errors in Nernst-equation, pH, and equilibrium calculations at non-negligible concentrations. The activity coefficient γ is not universally bounded by 1 — its value and direction of deviation from 1 depend on the specific physical mechanism at play, with dilute electrolytes typically showing γ<1 (Debye-Hückel) while some molecular solutions show γ>1 (positive Raoult's-law deviation).",
+        "Ionic strength must be computed via the general formula I=½Σcᵢzᵢ², which weights each ion's contribution by the square of its charge — the simplified I=c shortcut only coincidentally applies to 1:1 electrolytes, and substantially underestimates ionic strength for polyvalent electrolytes like CaCl₂.",
+        "Core misconception to avoid: Treat activity=concentration strictly as a low-concentration limiting approximation (γ≈1) — never as an exact identity; use actual activity (a=γc) whenever precision matters at non-negligible concentration."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Activity and Non-ideal Solutions\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "they mean the same thing",
+          "correction": "Treat activity=concentration strictly as a low-concentration limiting approximation (γ≈1) — never as an exact identity; use actual activity (a=γc) whenever precision matters at non-negligible concentration."
+        },
+        {
+          "misconception": "gamma must be ≤ 1, it can't go higher",
+          "correction": "Activity coefficients can be greater than, equal to, or less than 1 depending on the specific type of non-ideal deviation — the DHLL's γ<1 prediction is specific to dilute electrolytes, never assume it as a universal upper bound."
+        },
+        {
+          "misconception": "I = 0.1 mol/L",
+          "correction": "Always compute ionic strength via the full formula I=½Σcᵢzᵢ², weighting each ion by its charge squared — never use the simplified I=c shortcut except for genuine 1:1 electrolytes."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Activity and Non-ideal Solutions\""
+        "Demonstration 1 (dual Nernst-equation computation with concentration vs. activity): Compute the same EMF twice, once with raw concentration and once with actual activity, quantifying the discrepancy explicitly.",
+        "Demonstration 2 (positive-vs-negative Raoult's-law deviation diagram): Present both deviation types side by side, connecting each to the corresponding γ<1 or γ>1 outcome.",
+        "Demonstration 3 (z²-weighted ionic-strength computation for CaCl₂): Compute I explicitly for CaCl₂ using the full formula, contrasted with the naive I=c shortcut."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Activity and Non-ideal Solutions\"",
+        "setup": "In the Nernst equation, should you use concentration or activity? When does it matter?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (dual Nernst-equation computation with concentration vs. activity): Compute the same EMF twice, once with raw concentration and once with actual activity, quantifying the discrepancy explicitly.",
+          "Demonstration 2 (positive-vs-negative Raoult's-law deviation diagram): Present both deviation types side by side, connecting each to the corresponding γ<1 or γ>1 outcome.",
+          "Demonstration 3 (z²-weighted ionic-strength computation for CaCl₂): Compute I explicitly for CaCl₂ using the full formula, contrasted with the naive I=c shortcut."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Activity and Non-ideal Solutions\""
+        "expected_outcome": "Student can (a) correctly distinguish when the activity≈concentration approximation is valid, (b) correctly predict γ>1 or γ<1 from the type of non-ideal deviation, (c) correctly compute ionic strength using the full z²-weighted formula."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit dual Nernst-equation computation quantifying the activity-vs-concentration discrepancy.",
+          "TA-2 (TELL): State that γ can exceed 1 explicitly, anchored to the positive Raoult's-law deviation example.",
+          "TA-3 (DO): Student computes ionic strength for an unfamiliar polyvalent electrolyte using the full z²-weighted formula.",
+          "TA-4 (TEST-THINKING): Present the CaCl₂ ionic-strength probe and ask the student to justify why I≠c using the charge-squared weighting."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Activity and Non-ideal Solutions from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"In the Nernst equation, should you use concentration or activity? When does it matter?\"",
+          "FA-2: \"Ethanol in water shows positive deviation from Raoult's law at high concentration. What does this say about γ?\"",
+          "FA-3: \"Calculate the ionic strength of a 0.1 mol/L CaCl₂ solution.\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Activity and Non-ideal Solutions\""
+        "mastery_signal": "Student can (a) correctly distinguish when the activity≈concentration approximation is valid, (b) correctly predict γ>1 or γ<1 from the type of non-ideal deviation, (c) correctly compute ionic strength using the full z²-weighted formula."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Activity and Non-ideal Solutions\""
+        "This concept has no direct KG unlocks but consolidates vapor-pressure reasoning built across `chem.sol.vapour-pressure`, forming a capstone application to advanced non-ideal-solution and electrolyte-chemistry contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.sol.vapour-pressure"
