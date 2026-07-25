@@ -8,96 +8,127 @@
     {
       "id": "asset.chem.found.matter",
       "concept_id": "chem.found.matter",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Nature of Matter\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Nature of Matter\" pending authoring (target depth: foundational).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Nature of Matter\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "**One-sentence definition:** Matter is classified, at the substance level, into elements, compounds, and mixtures — a classification built entirely on whether a sample can be broken down by physical or chemical means, and whether its composition is fixed or variable.\n\n**The core insight:** Every physical sample a student will ever touch in a chemistry class falls into exactly one of three substance-level categories, and the category is determined by two yes/no questions applied in sequence: (1) Is the sample made of only one kind of substance throughout (pure), or more than one (a mixture)? (2) If pure, can it be broken down by chemical means into something simpler (a compound), or not (an element)? This two-question decision tree — not vague intuitions about appearance, uniformity, or \"how mixed something looks\" — is the actual, rigorous basis for the entire classification, and it is the single scaffold every later chemistry concept (atomic theory, stoichiometry, states of matter, solutions) hangs from.\n\n**Conceptual chain:**\n1. Matter is anything with mass that occupies space — the broadest possible category, encompassing everything a chemist studies.\n2. The first classification question is purity: can the sample's composition vary from one region/sample to another (a mixture), or is it fixed and uniform down to the smallest unit (a pure substance)?\n3. Mixtures split further into homogeneous (uniform composition throughout, e.g. salt water) and heterogeneous (visibly non-uniform, e.g. sand and iron filings) — but BOTH remain mixtures, separable by purely physical means (filtration, distillation, evaporation), because no new chemical bonds were formed or broken in creating them.\n4. Pure substances split into elements (cannot be broken down into simpler substances by ordinary chemical means — the ~118 entries on the periodic table) and compounds (CAN be broken down chemically into two or more elements, always combined in a fixed, definite mass ratio).\n5. The fixed-ratio property of compounds (the law of definite proportions) is what distinguishes a true compound from a mixture of the same elements — this becomes the empirical seed for atomic theory (the next concept), which explains WHY the ratio is fixed.\n6. Every subsequent chemistry concept — stoichiometry, solutions, reactions, states of matter — presupposes this classification is already automatic; a student who cannot instantly place a described sample into element/compound/homogeneous-mixture/heterogeneous-mixture will struggle with every downstream concept that assumes the classification as background knowledge.\n\n**Central relations:**\n- Matter → pure substance (fixed composition) OR mixture (variable composition).\n- Pure substance → element (cannot be chemically decomposed) OR compound (can be decomposed into elements, fixed ratio).\n- Mixture → homogeneous (uniform) OR heterogeneous (non-uniform) — both physically separable, neither chemically bonded as one substance.\n- The decomposition test (chemical, not physical) is what separates compounds from elements; the fixed-ratio test is what separates compounds from mixtures of the same elements.\n\n---",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Nature of Matter\"",
-        "[TEMPLATE] Key idea 2 for \"Nature of Matter\"",
-        "[TEMPLATE] Key idea 3 for \"Nature of Matter\""
+        "**Explanation A — The two-question decision tree (procedural/conceptual):**\n\"Every sample of matter can be classified with exactly two yes/no questions, asked in order. Question 1: is the composition the same everywhere in the sample, all the way down to the smallest possible piece (pure), or does it vary from point to point or sample to sample (a mixture)? If it's a mixture, ask whether it LOOKS ",
+        "Core misconception to avoid: Homogeneity (uniform appearance) and purity (fixed, single-substance composition) are independent properties — a sample can be homogeneous and still be a mixture."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Nature of Matter\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "It's a pure substance — it looks the same throughout.",
+          "correction": "Homogeneity (uniform appearance) and purity (fixed, single-substance composition) are independent properties — a sample can be homogeneous and still be a mixture."
+        },
+        {
+          "misconception": "Oxygen is an atom",
+          "correction": "\"Element\" describes a pure substance (substance level); \"atom\" describes an individual particle (particle level) — the two words are never interchangeable, even when both correctly apply to the same real-world sample."
+        },
+        {
+          "misconception": "You can make any amount of water — just combine hydrogen and oxygen in any ratio.",
+          "correction": "A compound's elements always combine in one fixed mass ratio; supplying reactants in any other ratio leaves the excess unreacted rather than producing a different or variable-ratio version of the compound."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Nature of Matter\""
+        "Demo 1 — Variable boiling point of salt water vs. pure water: Compare (physically or via described data) the fixed 100 °C boiling point of pure water against the rising, concentration-dependent boiling point of salt water at increasing salt concentrations — directly targeting MC-1.",
+        "Demo 2 — Electrolysis of water: Demonstrate (or describe) passing electric current through water, producing hydrogen and oxygen gas in the fixed 2:1 volume ratio (corresponding to the 1:8 mass ratio) — a chemical decomposition, directly distinguishing \"compound, chemically decomposable\" from \"element, cannot be simplified further.\"",
+        "Demo 3 — Sort-the-samples card exercise: Present 6-8 described or physical samples (iron filings + sand, copper wire, table salt, salt water, oxygen gas, granite, carbon dioxide, brass) and have students sort each into element / compound / homogeneous mixture / heterogeneous mixture using the two-question decision tree (Explanation A)."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Nature of Matter\"",
+        "setup": "A student says \"this solution looks completely uniform, so it must be a pure substance.\" Is this reasoning valid? Explain using boiling point.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demo 1 — Variable boiling point of salt water vs. pure water: Compare (physically or via described data) the fixed 100 °C boiling point of pure water against the rising, concentration-dependent boiling point of salt water at increasing salt concentrations — directly targeting MC-1.",
+          "Demo 2 — Electrolysis of water: Demonstrate (or describe) passing electric current through water, producing hydrogen and oxygen gas in the fixed 2:1 volume ratio (corresponding to the 1:8 mass ratio) — a chemical decomposition, directly distinguishing \"compound, chemically decomposable\" from \"element, cannot be simplified further.\"",
+          "Demo 3 — Sort-the-samples card exercise: Present 6-8 described or physical samples (iron filings + sand, copper wire, table salt, salt water, oxygen gas, granite, carbon dioxide, brass) and have students sort each into element / compound / homogeneous mixture / heterogeneous mixture using the two-question decision tree (Explanation A)."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Nature of Matter\""
+        "expected_outcome": "Student correctly classifies novel described samples into element/compound/homogeneous mixture/heterogeneous mixture using the two-question decision tree, and correctly explains the fixed-ratio property of compounds. Score ≥ 70%."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 [EXPLAIN + DEMONSTRATE]: Deliver Explanation A (the two-question decision tree) alongside Demo 1 (variable boiling point), directly probing MC-1 (homogeneous = pure).",
+          "TA-2 [DEMONSTRATE]: Demo 2 (electrolysis of water), directly probing MC-2 (element = atom) and MC-3 (fixed ratio optional).",
+          "TA-3 [EXPLAIN]: Deliver Explanation B (physical vs. chemical separation) as the precise element/compound/mixture dividing-line rule.",
+          "TA-4 [PRACTICE + TRANSFER]: Run Demo 3 (sort-the-samples exercise), then deliver Explanation C, previewing why this classification matters for every downstream concept."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Nature of Matter from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A student says \"this solution looks completely uniform, so it must be a pure substance.\" Is this reasoning valid? Explain using boiling point.\"",
+          "FA-2: \"Is chlorine gas (Cl₂) an element, a compound, an atom, or a molecule — and can more than one of these be true at once? Explain.\"",
+          "FA-3: \"2 g of hydrogen is ignited with 20 g of oxygen. Given water's fixed 1:8 hydrogen-to-oxygen mass ratio, how much water forms and how much of which element is left over?\"",
+          "FA-4: \"Classify each of the following as element, compound, homogeneous mixture, or heterogeneous mixture: brass (copper-zinc alloy), carbon dioxide gas, granite rock, neon gas.\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Nature of Matter\""
+        "mastery_signal": "Student correctly classifies novel described samples into element/compound/homogeneous mixture/heterogeneous mixture using the two-question decision tree, and correctly explains the fixed-ratio property of compounds. Score ≥ 70%."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Nature of Matter\""
+        "**Near transfer:** Atomic theory (the immediately following concept) explains the mechanistic WHY behind the fixed-ratio property established here empirically — every compound's fixed ratio reflects a fixed ratio of actual atoms combining.\n\n**Far transfer:** Stoichiometry (every mole/mass calculation for the rest of the course presupposes a compound's fixed formula ratio), solution chemistry (concentration only makes sense as a concept for mixtures, whose composition can vary — directly contrast"
       ],
       "prerequisite_review_triggers": []
     },
     {
       "id": "asset.chem.found.states-of-matter",
       "concept_id": "chem.found.states-of-matter",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"States of Matter\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"States of Matter\" pending authoring (target depth: foundational).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"States of Matter\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "**One-sentence definition:** Solid, liquid, and gas are three states of the SAME particles differing only in spacing, arrangement, and motion — heating or cooling interconverts between states without changing the particles' own chemical identity, and evaporation (a surface phenomenon, occurring at any temperature) must be distinguished from boiling (a bulk phenomenon, occurring only at one specific temperature).\n\n**The core insight:** A state change is a PHYSICAL change — the exact same particles, with the exact same internal bonds and identity, simply become more or less tightly packed and more or less free to move. Nothing about the particles themselves is created, destroyed, or chemically altered. The three states differ only in how closely particles are packed and how much they move relative to each other — a purely spatial/kinetic distinction, never a compositional one.\n\n**Conceptual chain:**\n1. Solids: particles tightly packed in a fixed arrangement, vibrating in place but not translating past each other — fixed shape, fixed volume.\n2. Liquids: particles close together (similar spacing to solids) but free to move past each other — fixed volume, but shape conforms to the container.\n3. Gases: particles far apart (roughly 10× the spacing of a liquid/solid) and moving freely and rapidly in all directions — no fixed shape or volume, expanding to fill any container.\n4. Heating increases average particle kinetic energy, eventually overcoming the attractive forces holding particles in a more ordered arrangement (solid -> liquid -> gas); cooling does the reverse.\n5. The particles' own internal identity (their own atoms, their own chemical bonds) is completely unchanged across all three states — only the spacing and motion between separate particles changes, never anything within a single particle.\n6. Evaporation is a SURFACE phenomenon: even well below the boiling point, a small fraction of surface molecules always have enough kinetic energy (from the distribution of particle energies) to escape into the gas phase — this is why a puddle evaporates at room temperature. Boiling is a BULK phenomenon: vaporization occurs throughout the entire liquid, only at one specific temperature (where vapor pressure equals atmospheric pressure).\n\n**Central relations:**\n- Solid < liquid < gas, in order of increasing particle spacing and freedom of motion.\n- Heating increases kinetic energy -> increasing spacing/freedom (solid -> liquid -> gas); cooling reverses this.\n- A single particle's internal identity/bonds are unchanged by any state change — only inter-particle spacing and motion change.\n- Evaporation (surface, any temperature) ≠ boiling (bulk, one specific temperature only).\n\n---",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"States of Matter\"",
-        "[TEMPLATE] Key idea 2 for \"States of Matter\"",
-        "[TEMPLATE] Key idea 3 for \"States of Matter\""
+        "**Explanation A — Same particle, three states (conceptual):**\n\"Solid, liquid, and gas are not three different SUBSTANCES — they are the same substance's same particles, differing only in how tightly packed and how free to move they are. A water molecule in ice, in liquid water, and in steam is the identical H₂O molecule in all three cases; heating and cooling never touch the molecule's own interna",
+        "Core misconception to avoid: State changes (melting, boiling, freezing, condensing) are physical changes — the same molecule, same bonds, same chemical identity throughout; only inter-particle spacing and motion change."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"States of Matter\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "When water boils it breaks into hydrogen and oxygen.",
+          "correction": "State changes (melting, boiling, freezing, condensing) are physical changes — the same molecule, same bonds, same chemical identity throughout; only inter-particle spacing and motion change."
+        },
+        {
+          "misconception": "The particles get bigger to fill the space.",
+          "correction": "Gas particles have a fixed size, unaffected by container volume; what changes with container size is the empty space between particles, not particle size itself."
+        },
+        {
+          "misconception": "Water can only become gas at 100 degrees.",
+          "correction": "Evaporation is a surface phenomenon occurring continuously at any temperature (some fraction of surface molecules always have enough energy to escape); boiling is a distinct, bulk phenomenon occurring only at one specific temperature."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"States of Matter\""
+        "Demo 1 — Same-molecule three-states particle diagram: Draw (or present) the identical H₂O molecule structure shown unchanged across solid, liquid, and gas depictions, directly targeting MC-1.",
+        "Demo 2 — Particle size vs. spacing scale diagram: Present actual scale numbers (particle size ~0.1-0.5 nm, fixed; gas inter-particle spacing ~10× particle size, variable with container volume) directly targeting MC-2.",
+        "Demo 3 — Puddle evaporation vs. pot boiling comparison: Contrast a slowly-disappearing puddle at room temperature against a vigorously bubbling pot at 100°C, directly targeting MC-3 and Explanation B."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"States of Matter\"",
+        "setup": "Explain, at the particle level, why steam condensing back into liquid water gives you water back, and not a mixture of hydrogen and oxygen.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demo 1 — Same-molecule three-states particle diagram: Draw (or present) the identical H₂O molecule structure shown unchanged across solid, liquid, and gas depictions, directly targeting MC-1.",
+          "Demo 2 — Particle size vs. spacing scale diagram: Present actual scale numbers (particle size ~0.1-0.5 nm, fixed; gas inter-particle spacing ~10× particle size, variable with container volume) directly targeting MC-2.",
+          "Demo 3 — Puddle evaporation vs. pot boiling comparison: Contrast a slowly-disappearing puddle at room temperature against a vigorously bubbling pot at 100°C, directly targeting MC-3 and Explanation B."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"States of Matter\""
+        "expected_outcome": "Student correctly explains why state changes preserve chemical identity, correctly distinguishes particle size from inter-particle spacing, and correctly distinguishes evaporation from boiling. Score ≥ 70%."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 [DEMONSTRATE + EXPLAIN]: Demo 1 (same-molecule three-states diagram) alongside Explanation A, directly probing MC-1.",
+          "TA-2 [DEMONSTRATE]: Demo 2 (particle size vs. spacing scale diagram), directly probing MC-2.",
+          "TA-3 [DEMONSTRATE + EXPLAIN]: Demo 3 (puddle vs. pot comparison) alongside Explanation B, directly probing MC-3.",
+          "TA-4 [TRANSFER]: Connect forward to kinetic molecular theory, previewing the quantitative formalization of the particle-motion picture."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing States of Matter from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Explain, at the particle level, why steam condensing back into liquid water gives you water back, and not a mixture of hydrogen and oxygen.\"",
+          "FA-2: \"A gas is transferred from a small container to a container twice the volume. What happens to the size of each gas particle? What happens to the space between particles?\"",
+          "FA-3: \"A cup of water at 25°C slowly loses volume over several days, without ever boiling. Explain this using the particle-energy-distribution idea.\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"States of Matter\""
+        "mastery_signal": "Student correctly explains why state changes preserve chemical identity, correctly distinguishes particle size from inter-particle spacing, and correctly distinguishes evaporation from boiling. Score ≥ 70%."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"States of Matter\""
+        "**Near transfer:** Kinetic molecular theory (the immediately following concept) formalizes this qualitative particle-spacing/motion picture into a full quantitative model with pressure, temperature, and velocity relationships.\n\n**Far transfer:** The water cycle and climate science (evaporation from oceans at ambient temperature, never requiring boiling) directly apply this concept's evaporation/boiling distinction; refrigeration and freeze-drying technology depend on precise control of state-cha"
       ],
       "prerequisite_review_triggers": [
         "chem.found.matter"
@@ -106,48 +137,63 @@
     {
       "id": "asset.chem.found.pure-substances",
       "concept_id": "chem.found.pure-substances",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Pure Substances and Mixtures\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Pure Substances and Mixtures\" pending authoring (target depth: foundational).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Pure Substances and Mixtures\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "**One-sentence definition:** Mixtures (unlike elements and compounds) can be separated back into their components by purely physical methods, and each separation technique exploits one specific physical property difference between the components — choosing the wrong technique for the property difference that actually exists is the central skill this concept builds.\n\n**The core insight:** Matter classification (chem.found.matter) established WHAT a mixture is; this concept establishes HOW mixtures are separated and WHY appearances (like \"looks uniform\") can be actively misleading about composition. Every separation technique (filtration, distillation, chromatography, evaporation) works because it exploits exactly one physical property difference — particle size, boiling point, solubility, or volatility — between the mixture's components. Choosing a technique requires first identifying WHICH property difference actually exists between the specific components in question, not applying a memorized technique-name to every mixture indiscriminately.\n\n**Conceptual chain:**\n1. A mixture's components retain their own individual chemical identities throughout — no new bonds are formed, so physical processes alone (which don't break chemical bonds) can separate them back apart.\n2. Each separation technique exploits exactly one physical property difference: filtration exploits particle-size difference (solid particles too large to pass through filter pores); distillation exploits boiling-point difference; evaporation exploits volatility difference (a volatile solvent evaporates, leaving a non-volatile solute behind); chromatography exploits differential solubility/adsorption.\n3. Choosing the WRONG technique for the actual property difference present fails — filtration cannot separate a true solution (particles far too small to be caught by any filter) or a fine colloid (particles small enough to pass through ordinary filter paper).\n4. A mixture's \"uniform appearance\" (homogeneity) is not evidence of purity — testing for purity requires checking a composition-dependent property (like boiling point) that a mixture, unlike a true pure substance, will not hold at one single fixed value.\n5. Distillation of a mixture like salt water recovers the PURE COMPOUND (water) that was already present in the mixture — it does not decompose that compound further into its own elements; distillation is a physical (not chemical) process.\n\n**Central relations:**\n- Separation technique choice depends on identifying the specific physical property difference present (particle size / boiling point / solubility / volatility).\n- Homogeneous appearance ≠ purity; purity requires a composition-independent property test (fixed boiling/melting point).\n- Distillation/evaporation/filtration are physical processes — they separate mixture components without breaking any chemical bonds, recovering pure substances (which may themselves be compounds) unchanged.\n\n---",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Pure Substances and Mixtures\"",
-        "[TEMPLATE] Key idea 2 for \"Pure Substances and Mixtures\"",
-        "[TEMPLATE] Key idea 3 for \"Pure Substances and Mixtures\""
+        "**Explanation A — Matching technique to property difference (procedural):**\n\"Every separation technique works by exploiting exactly one physical property difference between the mixture's components. Before choosing a technique, identify what property actually differs: particle size (filtration), boiling point (distillation), volatility (evaporation), or solubility/adsorption strength (chromatograp",
+        "Core misconception to avoid: Visual uniformity establishes homogeneity, not purity; purity requires a composition-independent test like a single fixed boiling/melting point."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Pure Substances and Mixtures\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Air is a pure substance — it's all the same.",
+          "correction": "Visual uniformity establishes homogeneity, not purity; purity requires a composition-independent test like a single fixed boiling/melting point."
+        },
+        {
+          "misconception": "How would you separate milk (a colloid of fat droplets in water) from water? Would filtration work? Why or why not?",
+          "correction": "Each separation technique exploits one specific physical property difference; choosing a technique requires first confirming that property difference actually exists between the mixture's components."
+        },
+        {
+          "misconception": "distil",
+          "correction": "Distillation is a physical process separating mixture components (e.g. water from dissolved salt); it does not decompose a compound into its constituent elements, which requires a chemical process instead."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Pure Substances and Mixtures\""
+        "Demo 1 — Fractional distillation of air (described or physical): Present the boiling points of nitrogen, oxygen, and argon and the fractional-distillation separation of liquid air into these components, directly targeting MC-1.",
+        "Demo 2 — Milk through filter paper: Physically demonstrate (or describe) pouring milk through filter paper — the fat droplets pass through unchanged, directly targeting MC-2 and motivating the particle-size-scale hierarchy (solution < colloid < suspension).",
+        "Demo 3 — Salt-water distillation, particle-level diagram: Draw or present the particle-level diagram of H₂O molecules evaporating from salt water and condensing unchanged, directly targeting MC-3."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Pure Substances and Mixtures\"",
+        "setup": "A clear, colorless liquid is assumed to be pure water because it looks uniform. What single test could confirm or refute this?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demo 1 — Fractional distillation of air (described or physical): Present the boiling points of nitrogen, oxygen, and argon and the fractional-distillation separation of liquid air into these components, directly targeting MC-1.",
+          "Demo 2 — Milk through filter paper: Physically demonstrate (or describe) pouring milk through filter paper — the fat droplets pass through unchanged, directly targeting MC-2 and motivating the particle-size-scale hierarchy (solution < colloid < suspension).",
+          "Demo 3 — Salt-water distillation, particle-level diagram: Draw or present the particle-level diagram of H₂O molecules evaporating from salt water and condensing unchanged, directly targeting MC-3."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Pure Substances and Mixtures\""
+        "expected_outcome": "Student correctly explains why appearance alone cannot establish purity, correctly matches a separation technique to the property difference it exploits, and correctly distinguishes physical separation from chemical decomposition. Score ≥ 70%."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 [DEMONSTRATE + EXPLAIN]: Demo 1 (fractional distillation of air) alongside Explanation B (purity test), directly probing MC-1.",
+          "TA-2 [DEMONSTRATE]: Demo 2 (milk through filter paper), directly probing MC-2.",
+          "TA-3 [EXPLAIN]: Deliver Explanation A (matching technique to property) as the general procedure.",
+          "TA-4 [DEMONSTRATE]: Demo 3 (salt-water distillation particle diagram), directly probing MC-3."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Pure Substances and Mixtures from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A clear, colorless liquid is assumed to be pure water because it looks uniform. What single test could confirm or refute this?\"",
+          "FA-2: \"A mixture contains dissolved sugar and water. Would filtration separate them? What technique would work, and what property does it exploit?\"",
+          "FA-3: \"Does distilling salt water change the chemical formula of the water recovered? Explain using the particle-level story.\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Pure Substances and Mixtures\""
+        "mastery_signal": "Student correctly explains why appearance alone cannot establish purity, correctly matches a separation technique to the property difference it exploits, and correctly distinguishes physical separation from chemical decomposition. Score ≥ 70%."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Pure Substances and Mixtures\""
+        "**Near transfer:** Solution types and colloids (the direct successor concepts) deepen the particle-size-scale hierarchy and solubility-based separation introduced here.\n\n**Far transfer:** Industrial purification (pharmaceutical manufacturing, petroleum refining) and environmental/food science analysis all directly apply this property-matching logic; the general principle of \"match your tool to the specific property difference present\" recurs throughout laboratory and engineering practice.\n\n**Str"
       ],
       "prerequisite_review_triggers": [
         "chem.found.matter"
@@ -156,48 +202,63 @@
     {
       "id": "asset.chem.found.measurement",
       "concept_id": "chem.found.measurement",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to recall \"Physical Quantities and SI Units\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Physical Quantities and SI Units\" pending authoring (target depth: foundational).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Physical Quantities and SI Units\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "**One-sentence definition:** Chemistry measurements are expressed in SI base and derived units with prefixes for scale, and every reported measurement's reliability is captured by two independent properties — accuracy (closeness to the true value) and precision (closeness among repeated measurements) — together with a significant-figures convention that communicates a measurement's actual resolution.\n\n**The core insight:** A measurement without a correctly stated unit and an honest statement of its own uncertainty is not a scientific measurement at all — it's a bare number. SI units and prefixes give every measurement an unambiguous scale; significant figures and the accuracy/precision distinction give it an honest statement of how much that number can actually be trusted. Every subsequent quantitative chemistry concept — mole calculations, gas laws, thermodynamics — silently assumes this measurement discipline is already automatic.\n\n**Conceptual chain:**\n1. Physical quantities require both a number AND a unit — \"10\" is meaningless in chemistry; \"10 g\" is not.\n2. SI base units (kilogram, metre, second, kelvin, mole, ampere, candela) combine to form derived units (e.g. mL, J, Pa); prefixes (milli-, kilo-, nano-) rescale a base unit by powers of ten without changing the underlying quantity.\n3. Precision describes how tightly repeated measurements of the SAME sample cluster together; accuracy describes how close a measurement (or the average of several) is to the TRUE, accepted value — these are independent properties, not synonyms.\n4. Significant figures communicate a measurement's actual resolution: every reported digit, including the LAST one (an estimated digit from the measuring instrument), carries real information, and reporting more digits than the instrument can support falsely implies more precision than actually exists.\n5. Unit conversion, done correctly, is dimensional analysis: multiplying by conversion factors written as fractions that equal 1, arranged so unwanted units cancel algebraically.\n\n**Central relations:**\n- Quantity = number + unit (always).\n- Precision (repeatability) is independent of accuracy (correctness) — a measurement can be one, both, or neither.\n- Significant figures: leading zeros never count; trailing zeros after a decimal point always count; trailing zeros before a decimal point (no decimal shown) are ambiguous.\n- Unit conversion = multiplying by a fraction equal to 1, arranged so units cancel.\n\n---",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Physical Quantities and SI Units\"",
-        "[TEMPLATE] Key idea 2 for \"Physical Quantities and SI Units\"",
-        "[TEMPLATE] Key idea 3 for \"Physical Quantities and SI Units\""
+        "**Explanation A — Why quantity always means number plus unit (conceptual):**\n\"A bare number in chemistry is meaningless — '10' could be 10 grams, 10 litres, or 10 moles, each an entirely different physical quantity. The unit is not decoration; it is half of what the measurement actually means, and dropping it during a calculation is exactly how unit errors silently propagate into wrong final answe",
+        "Core misconception to avoid: Precision (repeatability) and accuracy (correctness) are independent properties; a data set can be precise without accurate, accurate without precise, both, or neither."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Physical Quantities and SI Units\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "The measurements are very precise and accurate — they're all the same.",
+          "correction": "Precision (repeatability) and accuracy (correctness) are independent properties; a data set can be precise without accurate, accurate without precise, both, or neither."
+        },
+        {
+          "misconception": "How many significant figures are in 0.00450? In 4500? In 4500.?",
+          "correction": "Zero significance depends on position (leading/trailing/decimal-adjacent), governed by three distinct rules, not one blanket rule."
+        },
+        {
+          "misconception": "Convert 450 nm to metres. Show each step.",
+          "correction": "Unit conversion is dimensional analysis — multiply by a conversion factor written as a fraction equal to 1, oriented so the unwanted unit cancels; the correct multiply/divide direction is never guessed, it follows from algebraic cancellation."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Physical Quantities and SI Units\""
+        "Demo 1 — Archery target quadrant sort: Present four data sets (precise+accurate, precise-not-accurate, accurate-not-precise, neither) and have students sort each into the correct archery-target quadrant, directly targeting MC-1.",
+        "Demo 2 — Three-rule zero-counting drill: Present 6-8 numbers with zeros in different positions (0.0045, 4500, 4500., 100.0, 0.00450) and have students apply the three-rule summary to each, directly targeting MC-2.",
+        "Demo 3 — Unit-factor conversion chain: Walk through 2-3 multi-step conversions (nm to m, mL to L to m³) using the unit-factor method explicitly, with units visibly cancelling at each step, directly targeting MC-3."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Physical Quantities and SI Units\"",
+        "setup": "A thermometer reads 37.9, 38.1, 37.8, 38.0 °C for a sample known to be exactly 37.0 °C. Precise? Accurate? Explain both.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demo 1 — Archery target quadrant sort: Present four data sets (precise+accurate, precise-not-accurate, accurate-not-precise, neither) and have students sort each into the correct archery-target quadrant, directly targeting MC-1.",
+          "Demo 2 — Three-rule zero-counting drill: Present 6-8 numbers with zeros in different positions (0.0045, 4500, 4500., 100.0, 0.00450) and have students apply the three-rule summary to each, directly targeting MC-2.",
+          "Demo 3 — Unit-factor conversion chain: Walk through 2-3 multi-step conversions (nm to m, mL to L to m³) using the unit-factor method explicitly, with units visibly cancelling at each step, directly targeting MC-3."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Physical Quantities and SI Units\""
+        "expected_outcome": "Student correctly distinguishes precision from accuracy for a given data set, correctly applies the three-rule significant-figures test, and correctly performs a multi-step unit conversion via the unit-factor method. Score ≥ 70%."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 [EXPLAIN]: Deliver Explanation A (quantity = number + unit), setting up the whole concept's stakes.",
+          "TA-2 [DEMONSTRATE]: Demo 1 (archery target sort) alongside Explanation B, directly probing MC-1.",
+          "TA-3 [PRACTICE]: Demo 2 (zero-counting drill), directly probing MC-2.",
+          "TA-4 [PRACTICE + EXPLAIN]: Demo 3 (unit-factor conversion chain) alongside Explanation C, directly probing MC-3."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Physical Quantities and SI Units from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A thermometer reads 37.9, 38.1, 37.8, 38.0 °C for a sample known to be exactly 37.0 °C. Precise? Accurate? Explain both.\"",
+          "FA-2: \"How many significant figures in 0.0230, 230, and 230.0?\"",
+          "FA-3: \"Convert 2.5 mL to m³, using the unit-factor method (1 mL = 10⁻⁶ m³). Show your work.\""
         ],
         "bloom_alignment": "remember",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Physical Quantities and SI Units\""
+        "mastery_signal": "Student correctly distinguishes precision from accuracy for a given data set, correctly applies the three-rule significant-figures test, and correctly performs a multi-step unit conversion via the unit-factor method. Score ≥ 70%."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Physical Quantities and SI Units\""
+        "**Near transfer:** Significant figures in calculations (the immediately following concept applies these rules to addition/multiplication rounding rules specifically).\n\n**Far transfer:** Every quantitative chemistry concept for the rest of the course (mole calculations, gas laws, thermodynamics, solution concentration) depends on this measurement discipline being automatic; real-world dosage/engineering calculations depend on the identical unit-factor method.\n\n**Structural abstraction:** \"A repor"
       ],
       "prerequisite_review_triggers": [
         "chem.found.matter"
@@ -206,48 +267,63 @@
     {
       "id": "asset.chem.found.significant-figures",
       "concept_id": "chem.found.significant-figures",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Significant Figures and Error Analysis\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Significant Figures and Error Analysis\" pending authoring (target depth: foundational).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Significant Figures and Error Analysis\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "**One-sentence definition:** Significant figures in a CALCULATION follow two different rules depending on the operation — addition/subtraction is limited by decimal PLACES, multiplication/division is limited by sig fig COUNT — and exact (counted, not measured) numbers are excluded from significant-figure limits entirely.\n\n**The core insight:** chem.found.measurement introduced how to COUNT significant figures in a single reported number; this concept addresses the separate, commonly-confused question of how significant figures PROPAGATE through a calculation involving multiple measured numbers. The critical, most commonly missed distinction: addition and subtraction are governed by DECIMAL PLACES (not sig fig count), while multiplication and division are governed by SIG FIG COUNT (not decimal places) — applying the wrong rule to the wrong operation is the single most common error in this topic, and exact counted numbers (never measured, therefore infinitely precise) are exempt from both rules entirely.\n\n**Conceptual chain:**\n1. For addition/subtraction, the answer is limited by the LEAST number of decimal places among the numbers being combined — because you cannot claim more decimal-place precision in a sum than your least-precise addend actually supports.\n2. For multiplication/division, the answer is limited by the LEAST number of significant figures among the numbers being combined — a completely different rule from addition/subtraction, based on relative precision rather than absolute decimal position.\n3. Exact numbers (counted objects, or defined conversion constants like 12 inches per foot) have effectively INFINITE significant figures and never limit a calculation's precision.\n4. Ambiguous zero cases (trailing zeros with no decimal point shown, e.g. \"1200\") remain genuinely ambiguous unless resolved via scientific notation — this concept extends chem.found.measurement's zero-counting rules into calculation contexts.\n\n**Central relations:**\n- Addition/subtraction -> limited by fewest DECIMAL PLACES among the addends.\n- Multiplication/division -> limited by fewest SIGNIFICANT FIGURES among the factors.\n- Exact (counted) numbers -> excluded from sig-fig limiting entirely (infinite precision assumed).\n\n---",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Significant Figures and Error Analysis\"",
-        "[TEMPLATE] Key idea 2 for \"Significant Figures and Error Analysis\"",
-        "[TEMPLATE] Key idea 3 for \"Significant Figures and Error Analysis\""
+        "**Explanation A — Two different rules for two different operations (procedural):**\n\"Addition and subtraction ask: how far past the decimal point can I trust ANY of my numbers? The answer is limited to the fewest decimal places among the addends. Multiplication and division ask a different question: how many total digits of relative precision do I actually have? The answer is limited to the fewest ",
+        "Core misconception to avoid: Addition/subtraction answers are limited by the FEWEST decimal places among the addends, a rule entirely independent of total sig fig count."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Significant Figures and Error Analysis\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "The answer has 2 sig figs because 2.1 has 2 sig figs.",
+          "correction": "Addition/subtraction answers are limited by the FEWEST decimal places among the addends, a rule entirely independent of total sig fig count."
+        },
+        {
+          "misconception": "How many significant figures does the number 1200 have? What if it were written as 1200.? What about 1.200 × 10³?",
+          "correction": "Trailing zeros before an unstated decimal point are ambiguous, not automatically significant or insignificant; scientific notation resolves the ambiguity that ordinary notation cannot."
+        },
+        {
+          "misconception": "If you count 12 apples on a scale that reads 1.5 kg, what is the mass per apple to the correct sig figs?",
+          "correction": "Exact (counted or defined) numbers carry no significant-figure limit and never constrain a calculation's precision; only measured quantities do."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Significant Figures and Error Analysis\""
+        "Demo 1 — Column addition with decimal-place tracking: Walk through 15.3 + 1.46 + 2.1 explicitly, marking each number's last reliable decimal digit, arriving at the correctly-rounded 18.9, directly targeting MC-1.",
+        "Demo 2 — Ambiguous zero resolution via scientific notation: Present 1200, 1200., and 1.200×10³ side by side with sig fig counts for each, directly targeting MC-2.",
+        "Demo 3 — Measured vs. exact number classification: Present 3-4 mixed calculations (some involving counted objects, some involving only measured quantities) and have students classify each number before computing, directly targeting MC-3."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Significant Figures and Error Analysis\"",
+        "setup": "Calculate 24.6 + 0.372 + 3.11 to the correct number of decimal places.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demo 1 — Column addition with decimal-place tracking: Walk through 15.3 + 1.46 + 2.1 explicitly, marking each number's last reliable decimal digit, arriving at the correctly-rounded 18.9, directly targeting MC-1.",
+          "Demo 2 — Ambiguous zero resolution via scientific notation: Present 1200, 1200., and 1.200×10³ side by side with sig fig counts for each, directly targeting MC-2.",
+          "Demo 3 — Measured vs. exact number classification: Present 3-4 mixed calculations (some involving counted objects, some involving only measured quantities) and have students classify each number before computing, directly targeting MC-3."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Significant Figures and Error Analysis\""
+        "expected_outcome": "Student correctly applies the decimal-places rule for addition/subtraction, correctly applies the sig-fig-count rule for multiplication/division, and correctly excludes exact numbers from both rules. Score ≥ 75%."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 [DEMONSTRATE + EXPLAIN]: Demo 1 (column addition) alongside Explanation A, directly probing MC-1.",
+          "TA-2 [DEMONSTRATE]: Demo 2 (ambiguous zero resolution), directly probing MC-2.",
+          "TA-3 [DEMONSTRATE + EXPLAIN]: Demo 3 (measured vs. exact classification) alongside Explanation B, directly probing MC-3.",
+          "TA-4 [PRACTICE]: Multi-step mixed-operation practice problems requiring both rules applied correctly in sequence."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Significant Figures and Error Analysis from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Calculate 24.6 + 0.372 + 3.11 to the correct number of decimal places.\"",
+          "FA-2: \"Calculate 4.52 × 3.1 to the correct number of significant figures.\"",
+          "FA-3: \"A sample contains exactly 25 identical tablets with a total measured mass of 12.4 g. What is the mass per tablet, to the correct sig figs?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Significant Figures and Error Analysis\""
+        "mastery_signal": "Student correctly applies the decimal-places rule for addition/subtraction, correctly applies the sig-fig-count rule for multiplication/division, and correctly excludes exact numbers from both rules. Score ≥ 75%."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Significant Figures and Error Analysis\""
+        "**Near transfer:** Mole concept and stoichiometry calculations (both already in this curriculum wave or immediately following) require fluent sig-fig propagation through multi-step mass/mole/particle conversions.\n\n**Far transfer:** Every quantitative laboratory report across all of science and engineering requires honest significant-figure propagation as a matter of professional integrity; manufacturing tolerance specifications depend on the identical precision-propagation logic.\n\n**Structural a"
       ],
       "prerequisite_review_triggers": [
         "chem.found.measurement"
@@ -256,48 +332,63 @@
     {
       "id": "asset.chem.found.mole-concept",
       "concept_id": "chem.found.mole-concept",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Mole Concept and Avogadro's Number\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Mole Concept and Avogadro's Number\" pending authoring (target depth: foundational).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Mole Concept and Avogadro's Number\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "**One-sentence definition:** The mole is a fixed COUNT (6.022×10²³ entities, Avogadro's number) — not a mass — that lets chemists convert between the invisibly small scale of individual atoms/molecules and the measurable, weighable macroscopic scale of grams, via each substance's own molar mass.\n\n**The core insight:** You cannot count individual atoms one by one, but you can WEIGH a sample and, using the mole as a conversion bridge, know exactly how many atoms are present. The mole itself is always the same fixed count (like \"a dozen\" always means 12), but the MASS of one mole depends entirely on what you're counting — one mole of hydrogen weighs 1.008 g, one mole of uranium weighs 238 g, because each element's atoms have different individual masses. This mass-varies-but-count-is-fixed distinction is the single most load-bearing idea for every stoichiometry calculation that follows.\n\n**Conceptual chain:**\n1. Avogadro's number (6.022×10²³) is a fixed COUNT, exactly analogous to \"a dozen\" meaning 12 — it never changes regardless of what is being counted.\n2. One mole of ANY substance always contains exactly 6.022×10²³ entities (atoms, molecules, ions — whatever the substance's formula unit specifies).\n3. Molar mass (grams per mole) is DIFFERENT for every substance, because it depends on the actual atomic masses of the atoms making up one formula unit — this is where the substance-specific information enters.\n4. The numerical coincidence that one atom's mass in atomic mass units (u) equals one mole's mass in grams (e.g. carbon: 12.01 u per atom, 12.01 g per mole) is BY DESIGN — the mole was specifically defined this way to make the conversion convenient, not an accident to memorize as unrelated facts.\n5. Converting between mass, moles, and particle count requires a specific two-arrow bridge: mass ↔ moles (via molar mass) and moles ↔ particles (via Avogadro's number) — mass and particle count are never directly interconverted without passing through moles.\n\n**Central relations:**\n- 1 mole = 6.022×10²³ entities, always, for any substance (a fixed count).\n- Molar mass (g/mol) varies by substance, derived from atomic/molecular mass.\n- mass (g) ↔ moles (via ÷ or × molar mass) ↔ particles (via ÷ or × Avogadro's number) — always through moles as the bridge, never mass-to-particles directly.\n\n---",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Mole Concept and Avogadro's Number\"",
-        "[TEMPLATE] Key idea 2 for \"Mole Concept and Avogadro's Number\"",
-        "[TEMPLATE] Key idea 3 for \"Mole Concept and Avogadro's Number\""
+        "**Explanation A — The mole as a fixed count, like \"dozen\" (conceptual):**\n\"A dozen always means 12, whether you're counting eggs or watermelons — but a dozen eggs and a dozen watermelons weigh completely different amounts, because the individual items weigh different amounts. The mole works identically: it's always 6.022×10²³ entities, but the MASS of one mole depends entirely on what substance yo",
+        "Core misconception to avoid: The mole is a fixed count (6.022×10²³ entities), never itself a mass; the associated mass varies entirely by substance."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Mole Concept and Avogadro's Number\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "The mole is a mass — it's like a gram.",
+          "correction": "The mole is a fixed count (6.022×10²³ entities), never itself a mass; the associated mass varies entirely by substance."
+        },
+        {
+          "misconception": "What is the mass of one carbon atom in grams? What is the mass of one mole of carbon atoms in grams? Are these the same number? Why are the numbers the same?",
+          "correction": "Atomic mass (mass of one atom, in u) and molar mass (mass of one mole of atoms, in g/mol) are numerically equal by deliberate definitional design — not the same physical quantity with different labels."
+        },
+        {
+          "misconception": "How many molecules are in 2.5 mol of CO₂? Show each step.",
+          "correction": "Moles × Avogadro's number = particles, always in that direction; the bridge diagram (mass ↔ moles ↔ particles) removes the need to guess the operation."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Mole Concept and Avogadro's Number\""
+        "Demo 1 — Dozen eggs vs. dozen watermelons mass comparison: Present (or describe) the dramatically different masses of a dozen eggs versus a dozen watermelons, directly targeting MC-1.",
+        "Demo 2 — One-atom vs. one-mole mass calculation: Compute explicitly, side by side, the mass of one carbon atom in grams (1.99×10⁻²³ g) and the mass of one mole of carbon atoms (12.01 g), directly targeting MC-2.",
+        "Demo 3 — Bridge diagram walkthrough: Draw the mass-moles-particles bridge diagram explicitly and trace 2-3 example conversions (mass to moles, moles to particles, and a combined mass-to-particles two-step conversion) through it, directly targeting MC-3."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Mole Concept and Avogadro's Number\"",
+        "setup": "One mole of helium and one mole of lead both contain the same number of atoms. Explain why they have very different masses.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demo 1 — Dozen eggs vs. dozen watermelons mass comparison: Present (or describe) the dramatically different masses of a dozen eggs versus a dozen watermelons, directly targeting MC-1.",
+          "Demo 2 — One-atom vs. one-mole mass calculation: Compute explicitly, side by side, the mass of one carbon atom in grams (1.99×10⁻²³ g) and the mass of one mole of carbon atoms (12.01 g), directly targeting MC-2.",
+          "Demo 3 — Bridge diagram walkthrough: Draw the mass-moles-particles bridge diagram explicitly and trace 2-3 example conversions (mass to moles, moles to particles, and a combined mass-to-particles two-step conversion) through it, directly targeting MC-3."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Mole Concept and Avogadro's Number\""
+        "expected_outcome": "Student correctly explains the mole as a fixed count (not a mass), correctly explains why atomic mass and molar mass are numerically equal, and correctly performs mass-mole-particle conversions in the correct direction. Score ≥ 75%."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 [DEMONSTRATE + EXPLAIN]: Demo 1 (dozen eggs vs. watermelons) alongside Explanation A, directly probing MC-1.",
+          "TA-2 [DEMONSTRATE]: Demo 2 (one-atom vs. one-mole mass calculation), directly probing MC-2.",
+          "TA-3 [EXPLAIN + DEMONSTRATE]: Demo 3 (bridge diagram walkthrough) alongside Explanation B, directly probing MC-3.",
+          "TA-4 [PRACTICE]: Multi-step mass-to-particle conversion practice problems, consolidating all three misconceptions together."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Mole Concept and Avogadro's Number from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"One mole of helium and one mole of lead both contain the same number of atoms. Explain why they have very different masses.\"",
+          "FA-2: \"Oxygen's atomic mass is 16.00 u. What is the mass, in grams, of one mole of oxygen atoms? Explain why this number matches the atomic mass value.\"",
+          "FA-3: \"How many molecules are in 0.50 mol of NH₃? Show the conversion direction and calculation.\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Mole Concept and Avogadro's Number\""
+        "mastery_signal": "Student correctly explains the mole as a fixed count (not a mass), correctly explains why atomic mass and molar mass are numerically equal, and correctly performs mass-mole-particle conversions in the correct direction. Score ≥ 75%."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Mole Concept and Avogadro's Number\""
+        "**Near transfer:** Stoichiometry (the immediate successor) uses mole ratios from balanced chemical equations to predict reactant/product quantities, directly building on the mass-mole-particle bridge fluency established here.\n\n**Far transfer:** Solution concentration (molarity), gas molar volume calculations, and essentially every quantitative chemistry calculation for the rest of the course depend on mole-concept fluency; industrial chemical process scaling (translating lab-scale reactions to i"
       ],
       "prerequisite_review_triggers": [
         "chem.found.measurement"
@@ -306,48 +397,63 @@
     {
       "id": "asset.chem.found.stoichiometry",
       "concept_id": "chem.found.stoichiometry",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Stoichiometry\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Stoichiometry\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Stoichiometry\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "**One-sentence definition:** A balanced equation's coefficients specify MOLE ratios (never mass ratios), so every stoichiometry calculation must convert given masses to moles first, apply the mole ratio from the balanced equation, then convert back to mass — skipping the moles step and reading coefficients as mass ratios is the single most common error in the entire topic.\n\n**The core insight:** The equation 2H₂ + O₂ → 2H₂O does NOT mean \"2 grams of hydrogen reacts with 1 gram of oxygen\" — it means 2 MOLES of H₂ react with 1 MOLE of O₂, and since a mole of H₂ and a mole of O₂ have very different masses (2.016 g/mol vs. 32.00 g/mol), the actual mass ratio required is nothing like 2:1. Every stoichiometry problem is fundamentally a mole-ratio problem wearing a mass-ratio disguise, and the mandatory three-step conversion (mass → moles → mole ratio → moles → mass) is what correctly translates between them.\n\n**Conceptual chain:**\n1. A balanced chemical equation's coefficients state the MOLE ratio in which reactants combine and products form — never a mass ratio, never a volume ratio (except for gases under specific conditions, a separate later topic).\n2. To use a given mass in a stoichiometry calculation, first convert to moles (mass ÷ molar mass), then apply the mole ratio from the balanced equation, then convert the resulting moles back to whatever final unit is needed (mass, particles, volume).\n3. A LIMITING REAGENT is identified by comparing the ACTUAL mole ratio of reactants present to the REQUIRED mole ratio from the balanced equation — never by comparing raw masses or raw mole counts alone, since the required ratio itself may not be 1:1.\n4. Theoretical yield is the maximum product mass calculable from the limiting reagent via the mole-ratio method; actual yield (measured in the lab) is always LESS THAN OR EQUAL TO theoretical yield, since real reactions lose some product to side reactions, incomplete reaction, or physical transfer losses.\n5. Percent yield = (actual yield / theoretical yield) × 100 — a result GREATER than 100% signals a measurement or calculation error (contamination, arithmetic mistake), never a genuinely \"better than perfect\" reaction.\n\n**Central relations:**\n- Balanced equation coefficients = mole ratio (never mass ratio).\n- Stoichiometry calculation path: mass → moles (÷ molar mass) → mole ratio (× coefficient ratio) → moles → mass (× molar mass).\n- Limiting reagent: compare ACTUAL mole ratio present to REQUIRED mole ratio from the equation, not raw mass or raw mole count alone.\n- Percent yield = actual/theoretical × 100; a result >100% indicates an error, not a physically real outcome.\n\n---",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Stoichiometry\"",
-        "[TEMPLATE] Key idea 2 for \"Stoichiometry\"",
-        "[TEMPLATE] Key idea 3 for \"Stoichiometry\""
+        "**Explanation A — The four-step stoichiometry bridge (procedural):**\n\"Every stoichiometry calculation follows the same four-step path: given mass of substance A, divide by A's molar mass to get moles of A; multiply by the mole ratio from the balanced equation's coefficients (coefficient of B over coefficient of A) to get moles of B; multiply by B's molar mass to get the mass of B. Skipping the mol",
+        "Core misconception to avoid: Balanced-equation coefficients state mole ratios; converting to and from mass always requires the moles bridge (mass ÷ molar mass, then × mole ratio, then × molar mass)."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Stoichiometry\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "2 grams of hydrogen reacts with 1 gram of oxygen.",
+          "correction": "Balanced-equation coefficients state mole ratios; converting to and from mass always requires the moles bridge (mass ÷ molar mass, then × mole ratio, then × molar mass)."
+        },
+        {
+          "misconception": "H₂ is the limiting reagent because 4.0 g < 32.0 g.",
+          "correction": "Limiting reagent is identified by comparing the actual mole ratio of reactants present to the required mole ratio from the balanced equation — never by comparing raw mass or raw mole count in isolation."
+        },
+        {
+          "misconception": "If your percent yield calculation gives 112%, what does this mean? Is it possible in principle?",
+          "correction": "Percent yield above 100% is physically impossible for a genuine, pure product measurement; it signals a measurement error, calculation error, or contamination requiring investigation, not a valid \"better than perfect\" result."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Stoichiometry\""
+        "Demo 1 — Full four-step mass-to-mass conversion walkthrough: Work through the 4 g H₂ → grams O₂ calculation explicitly, labeling each of the four steps, directly targeting MC-1.",
+        "Demo 2 — Limiting reagent bar-chart comparison: Present available moles of two reactants as bars, with the required stoichiometric ratio overlaid, visually revealing which reactant runs out first, directly targeting MC-2.",
+        "Demo 3 — Percent yield sanity-check drill: Present several percent-yield results (72%, 95%, 108%) and have students classify each as plausible or requiring investigation, directly targeting MC-3."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Stoichiometry\"",
+        "setup": "For N₂ + 3H₂ → 2NH₃, how many grams of NH₃ form from 10.0 g of N₂ (assuming excess H₂)?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demo 1 — Full four-step mass-to-mass conversion walkthrough: Work through the 4 g H₂ → grams O₂ calculation explicitly, labeling each of the four steps, directly targeting MC-1.",
+          "Demo 2 — Limiting reagent bar-chart comparison: Present available moles of two reactants as bars, with the required stoichiometric ratio overlaid, visually revealing which reactant runs out first, directly targeting MC-2.",
+          "Demo 3 — Percent yield sanity-check drill: Present several percent-yield results (72%, 95%, 108%) and have students classify each as plausible or requiring investigation, directly targeting MC-3."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Stoichiometry\""
+        "expected_outcome": "Student correctly converts mass through the four-step stoichiometry bridge, correctly identifies the limiting reagent via ratio comparison, and correctly evaluates a percent yield result for physical plausibility. Score ≥ 75%."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 [DEMONSTRATE + EXPLAIN]: Demo 1 (four-step conversion) alongside Explanation A, directly probing MC-1.",
+          "TA-2 [DEMONSTRATE + EXPLAIN]: Demo 2 (limiting reagent bar chart) alongside Explanation B, directly probing MC-2.",
+          "TA-3 [DEMONSTRATE]: Demo 3 (percent yield sanity-check drill), directly probing MC-3.",
+          "TA-4 [PRACTICE]: Full multi-step practice problems combining limiting reagent identification, theoretical yield, and percent yield calculation."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Stoichiometry from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"For N₂ + 3H₂ → 2NH₃, how many grams of NH₃ form from 10.0 g of N₂ (assuming excess H₂)?\"",
+          "FA-2: \"For N₂ + 3H₂ → 2NH₃, you have 2.0 mol N₂ and 3.0 mol H₂. Which is limiting? Justify using the required ratio.\"",
+          "FA-3: \"A student calculates 95% yield in one experiment and 118% yield in another. Which result is plausible, and what should the student do about the other?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Stoichiometry\""
+        "mastery_signal": "Student correctly converts mass through the four-step stoichiometry bridge, correctly identifies the limiting reagent via ratio comparison, and correctly evaluates a percent yield result for physical plausibility. Score ≥ 75%."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Stoichiometry\""
+        "**Near transfer:** Gravimetric analysis (the immediate successor) uses the identical mole-ratio bridge to determine an unknown sample's composition from a precipitate's measured mass.\n\n**Far transfer:** Industrial process design (predicting reactant requirements and costs at production scale), pharmaceutical synthesis yield optimization, and environmental remediation calculations (reagent dosing for treatment reactions) all depend directly on this concept's mole-ratio and limiting-reagent framew"
       ],
       "prerequisite_review_triggers": [
         "chem.found.mole-concept"
@@ -356,48 +462,63 @@
     {
       "id": "asset.chem.found.concentration",
       "concept_id": "chem.found.concentration",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Concentration Units\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Concentration Units\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Concentration Units\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "**One-sentence definition:** Different concentration units (molarity, molality, mole fraction, mass percent, ppm) each define concentration relative to a DIFFERENT reference quantity (solution volume vs. solvent mass vs. total moles vs. total mass), and confusing which reference quantity a given unit uses is the central error this concept eliminates — most critically, molarity uses solution VOLUME while molality uses solvent MASS, a distinction with real, non-interchangeable numerical consequences.\n\n**The core insight:** \"Concentration\" is not one single idea — it is a family of related but numerically DIFFERENT quantities, each dividing \"how much solute\" by a different reference denominator. Molarity divides by total solution volume (which changes with temperature, since volume expands/contracts). Molality divides by solvent mass alone (unaffected by temperature, since mass doesn't change). Mixing up which denominator a given unit uses — especially the molarity/molality volume-vs-mass confusion — produces answers that are numerically wrong, not just imprecisely labeled.\n\n**Conceptual chain:**\n1. Molarity (M) = moles solute / litres of SOLUTION (the total volume after mixing, not the volume of solvent used before mixing).\n2. Molality (m) = moles solute / kilograms of SOLVENT alone (never solution mass or volume) — this is why molality, unlike molarity, does not change with temperature (mass doesn't expand/contract; volume does).\n3. Mole fraction (χ) = moles of one component / total moles of ALL components (solute + solvent combined).\n4. Mass percent = (mass of solute / mass of total solution) × 100 — a ratio of masses, not moles or volumes.\n5. Parts per million (ppm) generalizes mass percent to far more dilute solutions, and itself has TWO different conventions (mg solute per kg solution = ppm by mass; mg solute per L solution = ppm by volume) that coincide numerically only for dilute AQUEOUS solutions (density ≈ 1 g/mL) — not for denser or non-aqueous solutions.\n6. Dilution calculations (C₁V₁ = C₂V₂) use the FINAL total solution volume as V₂, never the volume of water added — a frequently confused distinction, since the volume of water added equals V₂ − V₁, appearing in neither side of the dilution equation directly.\n\n**Central relations:**\n- Molarity: moles / L of SOLUTION (volume, temperature-dependent).\n- Molality: moles / kg of SOLVENT (mass, temperature-independent).\n- C₁V₁ = C₂V₂: V₂ is the FINAL total solution volume, never the volume of water added.\n- ppm by mass ≠ ppm by volume in general; they coincide only for dilute aqueous solutions (density ≈ 1 g/mL).\n\n---",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Concentration Units\"",
-        "[TEMPLATE] Key idea 2 for \"Concentration Units\"",
-        "[TEMPLATE] Key idea 3 for \"Concentration Units\""
+        "**Explanation A — Different denominators, different units (conceptual):**\n\"Every concentration unit divides 'how much solute' by a DIFFERENT reference quantity. Molarity divides by solution volume — a quantity that expands and contracts with temperature. Molality divides by solvent mass alone — a quantity completely unaffected by temperature. Mole fraction divides by total moles of everything pres",
+        "Core misconception to avoid: Molality's denominator is solvent mass (kg), fundamentally different from molarity's solution-volume (L) denominator — never interchange the two."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Concentration Units\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "10.0 g NaCl in 500 mL of solution.",
+          "correction": "Molality's denominator is solvent mass (kg), fundamentally different from molarity's solution-volume (L) denominator — never interchange the two."
+        },
+        {
+          "misconception": "C₂ = C₁V₁/(water added) = 6.00 × 25.0 / 225.0.",
+          "correction": "V₂ in the dilution equation is always the final total solution volume; the volume of water added (V₂ − V₁) is a related but separate quantity that never appears directly in the formula."
+        },
+        {
+          "misconception": "Is 1 ppm of lead in seawater (density 1.025 g/mL) the same as 1 ppm in pure water? Why or why not?",
+          "correction": "ppm by mass and ppm by volume are numerically equal only for solutions with density approximately 1 g/mL; they diverge for denser or non-aqueous solutions, so the specific convention must always be checked."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Concentration Units\""
+        "Demo 1 — Molarity vs. molality preparation comparison: Contrast preparing a solution to a volumetric flask's calibration mark (molarity — final volume fixed) against weighing out a fixed mass of solvent first (molality — solvent mass fixed), directly targeting MC-1.",
+        "Demo 2 — Dilution volume-labeling diagram: Draw the dilution flask explicitly labeling V₁ (stock), V₂ (final total, after adding water), and V₂−V₁ (water added) as three separate, clearly distinguished quantities, directly targeting MC-2.",
+        "Demo 3 — ppm-by-mass vs. ppm-by-volume seawater calculation: Compute both conventions explicitly for the seawater density case, showing the genuine numerical divergence, directly targeting MC-3."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Concentration Units\"",
+        "setup": "A solution is made by dissolving 5.00 g of KCl in enough water to make 250.0 mL of solution. Is this scenario best solved using molarity or molality? Compute the value.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demo 1 — Molarity vs. molality preparation comparison: Contrast preparing a solution to a volumetric flask's calibration mark (molarity — final volume fixed) against weighing out a fixed mass of solvent first (molality — solvent mass fixed), directly targeting MC-1.",
+          "Demo 2 — Dilution volume-labeling diagram: Draw the dilution flask explicitly labeling V₁ (stock), V₂ (final total, after adding water), and V₂−V₁ (water added) as three separate, clearly distinguished quantities, directly targeting MC-2.",
+          "Demo 3 — ppm-by-mass vs. ppm-by-volume seawater calculation: Compute both conventions explicitly for the seawater density case, showing the genuine numerical divergence, directly targeting MC-3."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Concentration Units\""
+        "expected_outcome": "Student correctly applies the molarity and molality formulas using the correct denominator, correctly applies the dilution equation with the correct V₂, and correctly explains when ppm-by-mass and ppm-by-volume diverge. Score ≥ 75%."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 [DEMONSTRATE + EXPLAIN]: Demo 1 (molarity vs. molality preparation) alongside Explanation A, directly probing MC-1.",
+          "TA-2 [DEMONSTRATE + EXPLAIN]: Demo 2 (dilution volume-labeling diagram) alongside Explanation B, directly probing MC-2.",
+          "TA-3 [DEMONSTRATE]: Demo 3 (ppm-by-mass vs. ppm-by-volume), directly probing MC-3.",
+          "TA-4 [PRACTICE]: Mixed practice problems requiring students to first identify the correct denominator before calculating."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Concentration Units from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A solution is made by dissolving 5.00 g of KCl in enough water to make 250.0 mL of solution. Is this scenario best solved using molarity or molality? Compute the value.\"",
+          "FA-2: \"10.0 mL of 2.00 M NaOH is diluted to a final total volume of 100.0 mL. What is the new concentration? How much water was added?\"",
+          "FA-3: \"Explain why \"5 ppm of a contaminant\" in a dense industrial solvent (density 1.4 g/mL) might mean a different actual mass than \"5 ppm\" in dilute water, even using the same numerical value.\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Concentration Units\""
+        "mastery_signal": "Student correctly applies the molarity and molality formulas using the correct denominator, correctly applies the dilution equation with the correct V₂, and correctly explains when ppm-by-mass and ppm-by-volume diverge. Score ≥ 75%."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Concentration Units\""
+        "**Near transfer:** Titrations and volumetric analysis (direct successors) depend entirely on correct molarity and dilution reasoning to determine unknown concentrations from measured volumes.\n\n**Far transfer:** Chemical kinetics (rate laws expressed in molar concentration change over time), equilibrium (Kw/pH calculations directly using molarity), environmental/biomedical reporting (ppm-based contaminant/dosage reporting) all depend on this concept's unit-discrimination fluency.\n\n**Structural ab"
       ],
       "prerequisite_review_triggers": [
         "chem.found.mole-concept"
@@ -2512,9 +2633,7 @@
       "real_world_applications": [
         "[TEMPLATE] real-world application of \"First Law of Thermodynamics\""
       ],
-      "prerequisite_review_triggers": [
-        "chem.thermo.system-surroundings"
-      ]
+      "prerequisite_review_triggers": []
     },
     {
       "id": "asset.chem.thermo.enthalpy",
@@ -3609,9 +3728,7 @@
       "real_world_applications": [
         "[TEMPLATE] real-world application of \"Activity (Electrochemical) Series\""
       ],
-      "prerequisite_review_triggers": [
-        "chem.redox.redox-types"
-      ]
+      "prerequisite_review_triggers": []
     },
     {
       "id": "asset.chem.redox.titrations",
@@ -3711,8 +3828,7 @@
         "[TEMPLATE] real-world application of \"Galvanic Cell\""
       ],
       "prerequisite_review_triggers": [
-        "chem.redox.activity-series",
-        "chem.thermo.electrochemical-thermo"
+        "chem.redox.activity-series"
       ]
     },
     {
@@ -5109,9 +5225,7 @@
       "real_world_applications": [
         "[TEMPLATE] real-world application of \"Nomenclature of Complexes\""
       ],
-      "prerequisite_review_triggers": [
-        "chem.coord.werner-theory"
-      ]
+      "prerequisite_review_triggers": []
     },
     {
       "id": "asset.chem.coord.isomerism",
@@ -5210,7 +5324,6 @@
         "[TEMPLATE] real-world application of \"Crystal Field Theory\""
       ],
       "prerequisite_review_triggers": [
-        "chem.coord.werner-theory",
         "chem.atomic.orbitals"
       ]
     },
@@ -5309,8 +5422,7 @@
         "[TEMPLATE] real-world application of \"Stability Constants\""
       ],
       "prerequisite_review_triggers": [
-        "chem.equil.complex-equil",
-        "chem.coord.werner-theory"
+        "chem.equil.complex-equil"
       ]
     },
     {
@@ -6307,8 +6419,7 @@
         "[TEMPLATE] real-world application of \"Structural and Stereoisomerism\""
       ],
       "prerequisite_review_triggers": [
-        "chem.org.iupac",
-        "chem.org.hybridization-org"
+        "chem.org.iupac"
       ]
     },
     {
@@ -6405,9 +6516,7 @@
       "real_world_applications": [
         "[TEMPLATE] real-world application of \"Reactive Intermediates\""
       ],
-      "prerequisite_review_triggers": [
-        "chem.org.inductive"
-      ]
+      "prerequisite_review_triggers": []
     },
     {
       "id": "asset.chem.org.mechanisms",
@@ -6655,7 +6764,6 @@
         "[TEMPLATE] real-world application of \"Aromaticity\""
       ],
       "prerequisite_review_triggers": [
-        "chem.org.hybridization-org",
         "chem.bond.resonance"
       ]
     },
@@ -6804,8 +6912,7 @@
         "[TEMPLATE] real-world application of \"Alkanes\""
       ],
       "prerequisite_review_triggers": [
-        "chem.org.iupac",
-        "chem.org.hybridization-org"
+        "chem.org.iupac"
       ]
     },
     {
@@ -9217,7 +9324,6 @@
       ],
       "prerequisite_review_triggers": [
         "chem.found.concentration",
-        "chem.equil.acid-base-titration",
         "chem.redox.titrations"
       ]
     },
