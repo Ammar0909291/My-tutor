@@ -6439,48 +6439,62 @@
     {
       "id": "asset.chem.dblock.general",
       "concept_id": "chem.dblock.general",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Transition Metals — General Properties\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Transition Metals — General Properties\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Transition Metals — General Properties\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Transition metal ionization always removes 4s electrons FIRST, regardless of the Aufbau filling order (Fe atom=[Ar]3d⁶4s², Fe²⁺=[Ar]3d⁶ with both 4s removed, Fe³⁺=[Ar]3d⁵ with one 3d electron removed only AFTER both 4s are gone), since once the atom is formed, increased Zeff makes 3d genuinely lower in energy than 4s, making 4s the outermost, most easily removed shell; not all transition metal compounds are colored — color specifically requires a d-d transition, which requires partially-filled d orbitals, so d¹⁰ (Zn²⁺) and d⁰ (Ti⁴⁺) species are genuinely colorless despite being transition-metal-derived; and \"variable oxidation state\" does NOT mean an element can adopt any arbitrary whole-number oxidation state — it's bounded by the actual number of accessible d+s electrons and by whether the resulting compound is chemically stable (Mn's highest common oxidation state is +7, using all 3d⁵4s² electrons; +8 or +9 are not accessible under normal conditions).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Transition Metals — General Properties\"",
-        "[TEMPLATE] Key idea 2 for \"Transition Metals — General Properties\"",
-        "[TEMPLATE] Key idea 3 for \"Transition Metals — General Properties\""
+        "Transition metal ions are formed by removing 4s electrons FIRST, regardless of the neutral atom's Aufbau filling order — once the atom exists, increased effective nuclear charge makes 3d genuinely lower in energy than 4s, reversing the relative ordering compared to filling time. Color in transition-metal compounds requires partially-filled d orbitals for a genuine d-d electron transition — d⁰ and d¹⁰ configurations are colorless, since no such transition is structurally possible.",
+        "\"Variable oxidation state,\" a hallmark of transition metals, describes genuine flexibility across multiple accessible states — but this flexibility is bounded by the actual number of available d+s valence electrons and by whether the resulting compound is chemically stable, never an unlimited, arbitrary range of possible charges.",
+        "Core misconception to avoid: Always remove 4s electrons first when writing a transition-metal ion's configuration, regardless of the neutral atom's Aufbau filling order — this reflects the genuine, post-filling energy-level swap between 3d and 4s."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Transition Metals — General Properties\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Fe³⁺ is [Ar]3d³4s².",
+          "correction": "Always remove 4s electrons first when writing a transition-metal ion's configuration, regardless of the neutral atom's Aufbau filling order — this reflects the genuine, post-filling energy-level swap between 3d and 4s."
+        },
+        {
+          "misconception": "transition metals always make coloured compounds.",
+          "correction": "Color requires partially-filled d orbitals (d¹ through d⁹) for a genuine d-d transition — d⁰ and d¹⁰ configurations are genuinely colorless, regardless of transition-metal classification."
+        },
+        {
+          "misconception": "Can Mn exhibit OS = +8 or +9?",
+          "correction": "An element's accessible oxidation states are bounded by its actual available d+s electron count and by compound stability — \"variable\" means flexible within this bounded range, never unlimited."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Transition Metals — General Properties\""
+        "Demonstration 1 (Fe-to-Fe³⁺ step-by-step ionization): Write out Fe's neutral, Fe²⁺, and Fe³⁺ configurations explicitly and sequentially, removing 4s electrons before any 3d electron.",
+        "Demonstration 2 (Zn²⁺ colorlessness explanation): Present Zn²⁺'s explicit d¹⁰ configuration, connecting the absence of any empty d orbital directly to ZnSO₄'s observed colorlessness."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Transition Metals — General Properties\"",
+        "setup": "Write the electron configuration of Fe³⁺.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (Fe-to-Fe³⁺ step-by-step ionization): Write out Fe's neutral, Fe²⁺, and Fe³⁺ configurations explicitly and sequentially, removing 4s electrons before any 3d electron.",
+          "Demonstration 2 (Zn²⁺ colorlessness explanation): Present Zn²⁺'s explicit d¹⁰ configuration, connecting the absence of any empty d orbital directly to ZnSO₄'s observed colorlessness."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Transition Metals — General Properties\""
+        "expected_outcome": "Student can (a) correctly write transition-metal ion configurations with 4s removed first, (b) correctly predict colorlessness for d⁰/d¹⁰ configurations, (c) correctly bound an element's accessible oxidation states using its total available valence electron count."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the Fe→Fe²⁺→Fe³⁺ step-by-step ionization sequence explicitly.",
+          "TA-2 (TELL): State the color-requires-partial-d-filling rule explicitly, immediately followed by the Zn²⁺/Ti⁴⁺ colorless examples.",
+          "TA-3 (DO): Student determines the maximum accessible oxidation state for a given transition metal using its total d+s valence electron count.",
+          "TA-4 (TEST-THINKING): Present MC-1's Fe³⁺ probe and ask the student to justify the correct configuration using the post-filling energy-swap argument."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Transition Metals — General Properties from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Write the electron configuration of Fe³⁺.\"",
+          "FA-2: \"Why is ZnSO₄ solution colourless?\"",
+          "FA-3: \"Can Mn exhibit OS = +8 or +9?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Transition Metals — General Properties\""
+        "mastery_signal": "Student can (a) correctly write transition-metal ion configurations with 4s removed first, (b) correctly predict colorlessness for d⁰/d¹⁰ configurations, (c) correctly bound an element's accessible oxidation states using its total available valence electron count."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Transition Metals — General Properties\""
+        "Feeds directly into `chem.dblock.first-row` (first-row transition metal chemistry requires fluent ion-configuration and oxidation-state reasoning established here), `chem.dblock.lanthanides` (extends variable-oxidation-state reasoning to f-block elements), and `chem.dblock.organometallics` (organometallic chemistry assumes correct d-electron counting)."
       ],
       "prerequisite_review_triggers": [
         "chem.atomic.electronic-config",
@@ -6490,48 +6504,62 @@
     {
       "id": "asset.chem.dblock.first-row",
       "concept_id": "chem.dblock.first-row",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"First-Row Transition Metals\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"First-Row Transition Metals\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"First-Row Transition Metals\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Not all transition metal ions are colored — Sc³⁺ (d⁰, no d electrons at all) and Zn²⁺ (d¹⁰, completely filled d subshell) are both genuinely colorless, since color requires a d-d transition, which needs BOTH at least one d electron AND at least one d-orbital vacancy; the d¹⁰-stability argument (often invoked to explain why Cu⁺ \"should\" be stable) applies to isolated atoms/ions but breaks down in AQUEOUS solution specifically — Cu⁺(aq) genuinely disproportionates spontaneously to Cu(s)+Cu²⁺(aq), because Cu²⁺'s much higher hydration enthalpy (a charge² effect) more than compensates for the extra ionization energy required to reach +2, meaning Cu⁺ is only stable in insoluble salts or non-aqueous/soft-ligand environments, never freely in water; and transition-metal ion ionization removes 4s electrons FIRST, regardless of Aufbau filling order — Fe²⁺ is [Ar]3d⁶ (both 4s removed), and only Fe³⁺ removes a 3d electron ([Ar]3d⁵), a known, deliberate inconsistency in the simple Aufbau model, since 4s is genuinely the outermost, energetically highest orbital once the atom (or ion) actually exists.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"First-Row Transition Metals\"",
-        "[TEMPLATE] Key idea 2 for \"First-Row Transition Metals\"",
-        "[TEMPLATE] Key idea 3 for \"First-Row Transition Metals\""
+        "Color in first-row transition-metal ions requires genuinely partially-filled d orbitals for a d-d electron transition — d⁰ (Sc³⁺, Ti⁴⁺) and d¹⁰ (Zn²⁺) configurations are colorless, since no such transition is structurally possible in either case, regardless of the element's general transition-metal classification. Transition-metal ion configurations are always written with 4s electrons removed first, since 4s genuinely sits at higher energy than 3d once the atom/ion actually exists, reversing the neutral atom's Aufbau filling order.",
+        "Electron-configuration stability arguments (like d¹⁰ stability) describe only isolated atoms/ions and can be overridden by solvent-specific effects — in water, Cu²⁺'s much higher hydration enthalpy (a strong charge-dependent effect) makes Cu⁺(aq) genuinely unstable, driving spontaneous disproportionation to Cu(s)+Cu²⁺(aq), despite Cu⁺'s seemingly favorable d¹⁰ configuration; Cu⁺ remains stable only where no aqueous solvation occurs (insoluble salts, non-aqueous/soft-ligand environments).",
+        "Core misconception to avoid: Color requires partially-filled d orbitals (at least one electron AND at least one vacancy) for a genuine d-d transition — d⁰ and d¹⁰ configurations are genuinely colorless, regardless of transition-metal classification."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"First-Row Transition Metals\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "transition metals are always coloured.",
+          "correction": "Color requires partially-filled d orbitals (at least one electron AND at least one vacancy) for a genuine d-d transition — d⁰ and d¹⁰ configurations are genuinely colorless, regardless of transition-metal classification."
+        },
+        {
+          "misconception": "d¹⁰ means Cu⁺ is stable.",
+          "correction": "The d¹⁰-stability argument applies to isolated ions, but in aqueous solution, hydration enthalpy (strongly favoring higher-charge ions) can override this preference — Cu⁺ genuinely disproportionates in water, and is stable only in insoluble salts or non-aqueous/soft-ligand environments."
+        },
+        {
+          "misconception": "remove from 3d first.",
+          "correction": "Always remove 4s electrons first when writing a transition-metal ion's configuration, regardless of the neutral atom's Aufbau filling order — Fe²⁺ is [Ar]3d⁶, never [Ar]3d⁴4s²."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"First-Row Transition Metals\""
+        "Demonstration 1 (Sc³⁺/Zn²⁺ colorlessness comparison): Present both ions' explicit d⁰ and d¹⁰ configurations, connecting each directly to the absence of any possible d-d transition.",
+        "Demonstration 2 (Cu⁺ disproportionation hydration-enthalpy computation): Present the explicit hydration-enthalpy values for Cu⁺ and Cu²⁺ side by side, showing how the Cu²⁺ advantage drives the observed disproportionation."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"First-Row Transition Metals\"",
+        "setup": "What colour is a solution of Sc³⁺ or Zn²⁺?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (Sc³⁺/Zn²⁺ colorlessness comparison): Present both ions' explicit d⁰ and d¹⁰ configurations, connecting each directly to the absence of any possible d-d transition.",
+          "Demonstration 2 (Cu⁺ disproportionation hydration-enthalpy computation): Present the explicit hydration-enthalpy values for Cu⁺ and Cu²⁺ side by side, showing how the Cu²⁺ advantage drives the observed disproportionation."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"First-Row Transition Metals\""
+        "expected_outcome": "Student can (a) correctly predict colorlessness for d⁰/d¹⁰ transition-metal ions, (b) correctly explain why Cu⁺ disproportionates in water despite its d¹⁰ configuration, (c) correctly write transition-metal ion configurations with 4s removed first."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the Sc³⁺/Zn²⁺ d⁰/d¹⁰ colorlessness comparison explicitly.",
+          "TA-2 (TELL): State the hydration-enthalpy-overrides-isolated-stability principle explicitly, worked through for Cu⁺/Cu²⁺.",
+          "TA-3 (DO): Student writes Fe²⁺ and Fe³⁺ configurations correctly, removing 4s electrons first.",
+          "TA-4 (TEST-THINKING): Present MC-2's CuI probe and ask the student to explain why Cu⁺ is stable there but not in aqueous solution."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing First-Row Transition Metals from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"What colour is a solution of Sc³⁺ or Zn²⁺?\"",
+          "FA-2: \"What happens when you dissolve CuI in water?\"",
+          "FA-3: \"Write the electron configuration of Fe²⁺.\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"First-Row Transition Metals\""
+        "mastery_signal": "Student can (a) correctly predict colorlessness for d⁰/d¹⁰ transition-metal ions, (b) correctly explain why Cu⁺ disproportionates in water despite its d¹⁰ configuration, (c) correctly write transition-metal ion configurations with 4s removed first."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"First-Row Transition Metals\""
+        "Feeds directly into `chem.dblock.oxo-species` (transition-metal oxo-species chemistry requires fluent, correct ion-configuration and oxidation-state-stability reasoning established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.dblock.general"
@@ -6540,96 +6568,123 @@
     {
       "id": "asset.chem.dblock.oxo-species",
       "concept_id": "chem.dblock.oxo-species",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyse \"Oxides and Oxyanions of Transition Metals\".",
-      "concept_summary": "Chromate/dichromate equilibrium; permanganate as oxidant; vanadium pentoxide; industrial uses.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Oxides and Oxyanions of Transition Metals\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "MnO₄⁻'s purple color is NOT a d-d transition despite Mn being a d-block element — Mn in MnO₄⁻ is in the +7 oxidation state, meaning it is genuinely d⁰ (ZERO d electrons), so d-d transitions are structurally impossible (no electrons to promote); the color instead arises from LIGAND-TO-METAL CHARGE TRANSFER (LMCT), where oxygen lone-pair electrons are promoted into Mn's empty 3d/4p orbital manifold; adding acid to yellow chromate (CrO₄²⁻) does NOT leave the color unchanged — the equilibrium 2CrO₄²⁻+2H⁺⇌Cr₂O₇²⁻+H₂O genuinely shifts RIGHT under acidic conditions (Le Chatelier), turning the solution ORANGE as CrO₄²⁻ converts to Cr₂O₇²⁻, with alkali reversing this color change back to yellow; and in VO₂⁺, vanadium is NOT +2 despite the ion's overall \"+\" charge visually suggesting a simple match — with two oxygens each at −2, solving x+2(−2)=+1 gives x=+5, so VO₂⁺ genuinely contains V(+5) — the apparent numeral in the formula (and the ion's overall charge) refers to the OVERALL POLYATOMIC ION CHARGE, never directly to the central atom's individual oxidation state (exactly as NH₄⁺'s \"+1\" charge does not mean N is +1 — N is actually −3).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Oxides and Oxyanions of Transition Metals\"",
-        "[TEMPLATE] Key idea 2 for \"Oxides and Oxyanions of Transition Metals\"",
-        "[TEMPLATE] Key idea 3 for \"Oxides and Oxyanions of Transition Metals\""
+        "A transition metal's category membership (being a d-block element) does not guarantee d electrons are present in every ion of that element — Mn in MnO₄⁻ is in the +7 oxidation state, genuinely d⁰, ruling out d-d transitions and requiring an alternative mechanism (ligand-to-metal charge transfer) to explain its purple color. The chromate-dichromate equilibrium is genuinely pH-sensitive, with acid addition visibly shifting yellow chromate toward orange dichromate via Le Chatelier's principle.",
+        "A polyatomic ion's overall net charge is the sum of every constituent atom's oxidation-state contribution, never a direct readout of the central atom's individual oxidation state — VO₂⁺'s vanadium is actually +5 (not +2), requiring the full charge-balance equation to compute correctly, exactly paralleling the well-known NH₄⁺ case where nitrogen is −3 despite the ion's +1 overall charge.",
+        "Core misconception to avoid: Always compute the actual oxidation state and resulting d-electron count for the SPECIFIC species in question before attributing color to d-d transitions — d-block category membership alone does not guarantee d electrons are present."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Oxides and Oxyanions of Transition Metals\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "it must be d–d because manganese is a d-block element.",
+          "correction": "Always compute the actual oxidation state and resulting d-electron count for the SPECIFIC species in question before attributing color to d-d transitions — d-block category membership alone does not guarantee d electrons are present."
+        },
+        {
+          "misconception": "acid has no effect on chromate colour.",
+          "correction": "Adding acid to chromate solution genuinely shifts the equilibrium toward dichromate (yellow→orange), and alkali reverses this — never assume the color remains static upon pH change for this specific equilibrium."
+        },
+        {
+          "misconception": "VO₂⁺ has V²⁺ because it has a 2+ charge.",
+          "correction": "Always solve the full charge-balance equation (summing all atoms' oxidation-state contributions to equal the ion's overall charge) to find a central atom's oxidation state — never read it directly off the ion's overall charge or any formula numeral."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Oxides and Oxyanions of Transition Metals\""
+        "Demonstration 1 (Mn oxidation-state computation and d-electron count for MnO₄⁻): Compute Mn's oxidation state explicitly, deriving the d⁰ configuration and ruling out d-d transitions.",
+        "Demonstration 2 (chromate-dichromate Le Chatelier equilibrium with observable color change): Present the explicit equilibrium equation and its acid/alkali-driven shift, connecting it to the observed color change.",
+        "Demonstration 3 (full charge-balance computation for VO₂⁺ paralleled with NH₄⁺): Compute both examples explicitly side by side, reinforcing the general principle that ion charge ≠ central-atom oxidation state."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Oxides and Oxyanions of Transition Metals\"",
+        "setup": "How many d electrons does Mn in MnO₄⁻ have? What type of electronic transition causes the purple colour?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (Mn oxidation-state computation and d-electron count for MnO₄⁻): Compute Mn's oxidation state explicitly, deriving the d⁰ configuration and ruling out d-d transitions.",
+          "Demonstration 2 (chromate-dichromate Le Chatelier equilibrium with observable color change): Present the explicit equilibrium equation and its acid/alkali-driven shift, connecting it to the observed color change.",
+          "Demonstration 3 (full charge-balance computation for VO₂⁺ paralleled with NH₄⁺): Compute both examples explicitly side by side, reinforcing the general principle that ion charge ≠ central-atom oxidation state."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Oxides and Oxyanions of Transition Metals\""
+        "expected_outcome": "Student can (a) correctly determine d-electron count from actual oxidation state before attributing color to d-d transitions, (b) correctly predict the pH-dependent chromate-dichromate color shift, (c) correctly compute a central atom's oxidation state via full charge balance."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit Mn oxidation-state computation for MnO₄⁻, deriving the d⁰ configuration.",
+          "TA-2 (TELL): State the pH-dependent chromate-dichromate equilibrium explicitly, anchored to the Le Chatelier argument.",
+          "TA-3 (DO): Student computes the central-atom oxidation state for an unfamiliar polyatomic oxyanion via full charge balance.",
+          "TA-4 (TEST-THINKING): Present the VO₂⁺ probe and ask the student to justify V(+5) from the full charge-balance computation, not the ion's superficial charge."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Oxides and Oxyanions of Transition Metals from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"How many d electrons does Mn in MnO₄⁻ have? What type of electronic transition causes the purple colour?\"",
+          "FA-2: \"What happens to the colour when concentrated H₂SO₄ is added to a yellow K₂CrO₄ solution?\"",
+          "FA-3: \"Assign the oxidation state of V in VO₂⁺.\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Oxides and Oxyanions of Transition Metals\""
+        "mastery_signal": "Student can (a) correctly determine d-electron count from actual oxidation state before attributing color to d-d transitions, (b) correctly predict the pH-dependent chromate-dichromate color shift, (c) correctly compute a central atom's oxidation state via full charge balance."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Oxides and Oxyanions of Transition Metals\""
+        "This concept has no direct KG unlocks but consolidates first-row transition-metal reasoning built across `chem.dblock.first-row`, forming a capstone application to industrial (chromate/permanganate oxidants, V₂O₅ catalysis) and analytical chemistry contexts."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.dblock.first-row"
+      ]
     },
     {
       "id": "asset.chem.dblock.lanthanides",
       "concept_id": "chem.dblock.lanthanides",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Lanthanides and Actinides\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Lanthanides and Actinides\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Lanthanides and Actinides\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Lanthanide colors do NOT arise from d-d transitions like typical transition-metal colors — they arise from f-f transitions, which are SHIELDED from ligand-field effects because the 4f orbitals sit INSIDE the filled 5s/5p shell, making absorption energies (and hence color) nearly independent of the ligand — Nd³⁺'s absorption spectrum is nearly identical whether in water or complexed with EDTA, in sharp contrast to a d-block ion like Ti³⁺, whose color genuinely DOES change with ligand identity (since d-d transitions are sensitive to ligand-field splitting); and lanthanide contraction, while superficially resembling the ordinary decrease in atomic radius across a period, arises from a genuinely DIFFERENT, MORE SEVERE mechanism — ordinary periodic contraction comes from increasing effective nuclear charge (Zeff) with reasonably effective d/p/s electron shielding, while lanthanide contraction's larger-than-expected decrease comes specifically from POOR f-f shielding (f-electrons shield each other unusually poorly), producing a distinguishing hallmark consequence: near-identical atomic/ionic radii between 4d and 5d transition-metal series (e.g., Zr/Hf, Nb/Ta), a coincidence that would not occur from ordinary periodic contraction alone.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Lanthanides and Actinides\"",
-        "[TEMPLATE] Key idea 2 for \"Lanthanides and Actinides\"",
-        "[TEMPLATE] Key idea 3 for \"Lanthanides and Actinides\""
+        "Lanthanide ions' colors arise from f-f transitions, which are physically shielded from the surrounding ligand environment by the filled 5s/5p shell that encloses the 4f orbitals — this makes lanthanide absorption spectra nearly ligand-independent, in sharp contrast to transition-metal d-d transitions, whose energies (and resulting colors) are genuinely sensitive to the specific ligand field.",
+        "Lanthanide contraction shares the same qualitative mechanism as ordinary periodic radius contraction (increasing effective nuclear charge) but is quantitatively far more severe because f-electrons shield each other unusually poorly — this extra severity produces a real, distinguishing chemical consequence: 4d and 5d transition-metal pairs (like Zr and Hf) end up with near-identical atomic and ionic radii, a coincidence that would not occur from ordinary periodic contraction alone.",
+        "Core misconception to avoid: Lanthanide colors arise from f-f transitions, which are shielded from and nearly independent of ligand identity — never assume the d-d-transition explanation (ligand-sensitive) applies to lanthanide ions."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Lanthanides and Actinides\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "the pink colour of Nd³⁺ is from d–d transitions.",
+          "correction": "Lanthanide colors arise from f-f transitions, which are shielded from and nearly independent of ligand identity — never assume the d-d-transition explanation (ligand-sensitive) applies to lanthanide ions."
+        },
+        {
+          "misconception": "atomic radius always decreases left to right.",
+          "correction": "Lanthanide contraction shares the same qualitative mechanism as ordinary periodic contraction (increasing Zeff) but is quantitatively more severe specifically due to poor f-f shielding — always connect this extra severity to its distinguishing consequence (4d/5d radius near-identity), never treat it as an unremarkable instance of ordinary contraction."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Lanthanides and Actinides\""
+        "Demonstration 1 (orbital-shielding diagram for 4f orbitals inside the 5s/5p shell): Present the explicit orbital-nesting diagram, deriving f-f transition ligand-independence from this geometry.",
+        "Demonstration 2 (4d/5d radius-near-identity data, e.g., Zr vs. Hf): Present the explicit radius data, connecting the near-identity directly to lanthanide contraction's unusual severity."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Lanthanides and Actinides\"",
+        "setup": "Why is the absorption spectrum of Nd³⁺ nearly the same whether Nd is dissolved in water or complexed with EDTA?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (orbital-shielding diagram for 4f orbitals inside the 5s/5p shell): Present the explicit orbital-nesting diagram, deriving f-f transition ligand-independence from this geometry.",
+          "Demonstration 2 (4d/5d radius-near-identity data, e.g., Zr vs. Hf): Present the explicit radius data, connecting the near-identity directly to lanthanide contraction's unusual severity."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Lanthanides and Actinides\""
+        "expected_outcome": "Student can (a) correctly explain lanthanide color as ligand-independent f-f transitions, distinct from d-d transitions, (b) correctly attribute lanthanide contraction's unusual severity to poor f-shielding, connecting it to the 4d/5d radius-near-identity consequence."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit orbital-shielding diagram for 4f orbitals inside the 5s/5p shell.",
+          "TA-2 (TELL): State the poor-f-shielding mechanism for lanthanide contraction's severity explicitly, anchored to the 4d/5d radius-near-identity data.",
+          "TA-3 (DO): Student predicts whether an unfamiliar f-block ion's color will change upon ligand substitution.",
+          "TA-4 (TEST-THINKING): Present the lanthanide-contraction probe and ask the student to justify why it's more severe than ordinary periodic contraction."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Lanthanides and Actinides from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Why is the absorption spectrum of Nd³⁺ nearly the same whether Nd is dissolved in water or complexed with EDTA?\"",
+          "FA-2: \"Why does atomic radius decrease across the lanthanide series?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Lanthanides and Actinides\""
+        "mastery_signal": "Student can (a) correctly explain lanthanide color as ligand-independent f-f transitions, distinct from d-d transitions, (b) correctly attribute lanthanide contraction's unusual severity to poor f-shielding, connecting it to the 4d/5d radius-near-identity consequence."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Lanthanides and Actinides\""
+        "This concept has no direct KG unlocks but consolidates general d-block reasoning built across `chem.dblock.general`, forming a capstone application to advanced inorganic chemistry and periodic-trends contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.dblock.general"
@@ -6638,48 +6693,64 @@
     {
       "id": "asset.chem.dblock.organometallics",
       "concept_id": "chem.dblock.organometallics",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Organometallic Chemistry\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Organometallic Chemistry\" pending authoring (target depth: expert).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Organometallic Chemistry\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The 18-electron count for a complex like Cr(CO)₆ is NOT simply the ligand-donated electrons alone (6×2=12≠18) — the metal's OWN d electrons must be counted FIRST (Cr(0) is d⁶, contributing 6 electrons FROM THE METAL), and the ligand-donated electrons (6 CO×2e=12) are ADDED to this metal count, giving the correct total 6+12=18 — omitting the metal's own d-electron contribution is a common but fundamental counting error; ferrocene's stability does NOT come from simple ionic Fe²⁺/Cp⁻ electrostatic attraction — ferrocene is volatile (sublimes), soluble in non-polar solvents, and undergoes electrophilic aromatic substitution, all properties of a genuinely COVALENTLY bonded molecule (substantial Fe-d-orbital/Cp-π-system overlap, π-sandwich MO bonding) — the \"Fe²⁺+2Cp⁻\" formulation is a useful electron-counting FORMALISM only, never an accurate description of the actual bonding; and a catalyst that changes oxidation state during a mechanism (e.g., Rh(I)→Rh(III) upon oxidative addition) is NOT thereby \"consumed\" or \"used up\" — the catalytic cycle's defining feature is that reductive elimination RESTORES the original oxidation state (Rh(III)→Rh(I)) by the cycle's end, with the NET change over one complete cycle being exactly zero — oxidation-state changes mid-cycle do not imply consumption.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Organometallic Chemistry\"",
-        "[TEMPLATE] Key idea 2 for \"Organometallic Chemistry\"",
-        "[TEMPLATE] Key idea 3 for \"Organometallic Chemistry\""
+        "An organometallic complex's total electron count requires summing BOTH the metal's own retained d electrons (from its formal oxidation state) AND the total electrons donated by all coordinated ligands — omitting the metal's own contribution produces a systematic undercount. The formal \"ionic\" notation sometimes used for electron-counting purposes (like Fe²⁺+2Cp⁻ for ferrocene) is a bookkeeping convention only, never an accurate description of the actual bonding — ferrocene's genuine physical properties (volatility, non-polar solubility, electrophilic aromatic substitution) confirm it is covalently, not ionically, bonded.",
+        "A catalyst can genuinely undergo real, intermediate oxidation-state changes during its mechanism (like Rh(I)→Rh(III) upon oxidative addition) without being consumed — the defining feature of a catalytic cycle is that later steps (like reductive elimination) restore the catalyst to its exact original state, making the net change over one complete cycle exactly zero.",
+        "Core misconception to avoid: Always compute the total electron count as (metal's own d electrons, from its formal oxidation state) PLUS (total electrons donated by all ligands) — never omit the metal's own contribution."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Organometallic Chemistry\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "6 CO × 2e = 12 electrons total.",
+          "correction": "Always compute the total electron count as (metal's own d electrons, from its formal oxidation state) PLUS (total electrons donated by all ligands) — never omit the metal's own contribution."
+        },
+        {
+          "misconception": "Fe²⁺ and two Cp⁻ are just attracted by charges.",
+          "correction": "The \"Fe²⁺+2Cp⁻\" ionic formulation is an electron-counting formalism only — ferrocene's actual bonding is covalent (substantial Fe-d/Cp-π orbital overlap), as confirmed by its volatility, non-polar solubility, and electrophilic aromatic substitution reactivity."
+        },
+        {
+          "misconception": "it changes oxidation state so it must be used up.",
+          "correction": "A catalyst undergoing an intermediate oxidation-state change is not thereby consumed — check whether the COMPLETE cycle restores the original state (as it does for Wilkinson's catalyst, Rh(I)→Rh(III)→Rh(I)), confirming zero net consumption."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Organometallic Chemistry\""
+        "Demonstration 1 (two-step electron-count computation for Cr(CO)₆): Present the explicit metal-d-electron-count step followed by the ligand-donation step, summing to the correct total.",
+        "Demonstration 2 (ferrocene property-comparison table vs. genuine ionic salt): Present both property sets explicitly, matching ferrocene's actual properties to covalent, not ionic, bonding.",
+        "Demonstration 3 (full Wilkinson's-catalyst cycle diagram): Present the explicit cycle with oxidation states labeled at each step, confirming the net-zero restoration."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Organometallic Chemistry\"",
+        "setup": "What is the d electron count for Cr in Cr(CO)₆ BEFORE counting the CO donation?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (two-step electron-count computation for Cr(CO)₆): Present the explicit metal-d-electron-count step followed by the ligand-donation step, summing to the correct total.",
+          "Demonstration 2 (ferrocene property-comparison table vs. genuine ionic salt): Present both property sets explicitly, matching ferrocene's actual properties to covalent, not ionic, bonding.",
+          "Demonstration 3 (full Wilkinson's-catalyst cycle diagram): Present the explicit cycle with oxidation states labeled at each step, confirming the net-zero restoration."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Organometallic Chemistry\""
+        "expected_outcome": "Student can (a) correctly compute total electron count by summing metal d electrons and ligand donation, (b) correctly distinguish ferrocene's actual covalent bonding from the ionic electron-counting formalism, (c) correctly confirm a catalyst's net-zero consumption from its complete cycle."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit two-step electron-count computation for Cr(CO)₆.",
+          "TA-2 (TELL): State the formalism-vs-actual-bonding distinction for ferrocene explicitly, anchored to the property-comparison table.",
+          "TA-3 (DO): Student traces an unfamiliar catalytic cycle's oxidation-state changes to confirm net-zero consumption.",
+          "TA-4 (TEST-THINKING): Present the Wilkinson's-catalyst probe and ask the student to justify why the mid-cycle oxidation-state change doesn't imply consumption."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for expert-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Organometallic Chemistry from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"What is the d electron count for Cr in Cr(CO)₆ BEFORE counting the CO donation?\"",
+          "FA-2: \"What evidence would distinguish an ionic compound from a covalently bonded organometallic?\"",
+          "FA-3: \"After reductive elimination of the alkane, what is the oxidation state and electron count of rhodium?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Organometallic Chemistry\""
+        "mastery_signal": "Student can (a) correctly compute total electron count by summing metal d electrons and ligand donation, (b) correctly distinguish ferrocene's actual covalent bonding from the ionic electron-counting formalism, (c) correctly confirm a catalyst's net-zero consumption from its complete cycle."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Organometallic Chemistry\""
+        "This concept has no direct KG unlocks but consolidates crystal-field-theory and general d-block reasoning built across `chem.coord.cft` and `chem.dblock.general`, forming a capstone application to industrial catalysis (Ziegler-Natta, Wilkinson) contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.coord.cft",
