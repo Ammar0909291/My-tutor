@@ -5558,48 +5558,62 @@
     {
       "id": "asset.chem.solid.crystal-systems",
       "concept_id": "chem.solid.crystal-systems",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Crystal Systems\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Crystal Systems\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Crystal Systems\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Crystal structures are described by seven crystal systems and their associated Bravais lattices, built from unit cells whose atom count must account for SHARING between adjacent cells (corner atoms contribute 1/8 each, face atoms 1/2 each, edge atoms 1/4 each, body-center atoms fully, giving FCC's 4 atoms/cell from 8×1/8 + 6×1/2); structure type is determined by which SPECIES occupy which lattice positions, not merely the topological pattern (CsCl's body-centered-looking arrangement is a genuinely different structure from true BCC, because BCC requires all lattice positions to hold the SAME atomic species, while CsCl alternates two different ions); and coordination number in an ionic crystal (like NaCl's 6:6) describes nearest-neighbor electrostatic contacts, not covalent bond count or bond order, since ionic crystals contain no discrete covalent bonds at all.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Crystal Systems\"",
-        "[TEMPLATE] Key idea 2 for \"Crystal Systems\"",
-        "[TEMPLATE] Key idea 3 for \"Crystal Systems\""
+        "Crystal structures are classified by seven crystal systems and their Bravais lattices, built from repeating unit cells. Because unit cells tile together to fill space, atoms sitting at cell boundaries (corners, edges, faces) are shared among multiple adjacent cells — computing the true number of atoms belonging to a single unit cell requires summing fractional contributions (1/8 per corner, 1/4 per edge, 1/2 per face, 1 per body-center atom), not simply counting every visible atom position.",
+        "Two structures can share the same topological atom-position pattern (like CsCl's arrangement resembling BCC) while being genuinely different structure types, because structural classification depends on WHICH chemical species occupies each position, not merely the geometric pattern itself — and in ionic crystals specifically, the \"coordination number\" describes electrostatic nearest-neighbor contacts distributed across the lattice, fundamentally different from a discrete covalent bond count.",
+        "Core misconception to avoid: A structure is genuinely BCC only if a single atomic species occupies both corner and body-center positions; when two different species occupy those positions (as in CsCl), it's a distinct structure type, despite the superficially identical geometric arrangement."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Crystal Systems\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "CsCl is like iron — BCC.",
+          "correction": "A structure is genuinely BCC only if a single atomic species occupies both corner and body-center positions; when two different species occupy those positions (as in CsCl), it's a distinct structure type, despite the superficially identical geometric arrangement."
+        },
+        {
+          "misconception": "I count 14 atoms in the diagram.",
+          "correction": "Compute atoms per unit cell using sharing fractions — corner=1/8, edge=1/4, face=1/2, body-center=1 (fully contained) — summed across all occupied positions."
+        },
+        {
+          "misconception": "6 bonds means 6 covalent bonds.",
+          "correction": "Coordination number counts nearest-neighbor ions held by electrostatic attraction in an ionic lattice — it is not equivalent to a covalent bond count, and no discrete covalent bonds exist in a purely ionic crystal."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Crystal Systems\""
+        "Demonstration 1 (FCC atom-counting walkthrough): Work through the explicit 8×1/8 + 6×1/2 = 4 calculation for FCC step by step, having students verify each fractional contribution against a diagram.",
+        "Demonstration 2 (CsCl vs. BCC species comparison): Present both structures side by side, with atoms explicitly labeled by chemical species, having students identify the same-species-vs-different-species distinction directly."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Crystal Systems\"",
+        "setup": "Is the atom at the body centre of CsCl the same type as the corner atoms?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (FCC atom-counting walkthrough): Work through the explicit 8×1/8 + 6×1/2 = 4 calculation for FCC step by step, having students verify each fractional contribution against a diagram.",
+          "Demonstration 2 (CsCl vs. BCC species comparison): Present both structures side by side, with atoms explicitly labeled by chemical species, having students identify the same-species-vs-different-species distinction directly."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Crystal Systems\""
+        "expected_outcome": "Student can (a) correctly distinguish true BCC from a same-topology, different-species structure like CsCl, (b) correctly compute atoms-per-unit-cell using sharing fractions, (c) correctly explain why ionic coordination number isn't a covalent bond count."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit FCC sharing-fraction calculation step by step.",
+          "TA-2 (TELL): State the same-species requirement for true BCC explicitly, immediately contrasted with CsCl's two-species structure.",
+          "TA-3 (DO): Student computes atoms-per-unit-cell for a new, previously-unseen unit cell using sharing fractions.",
+          "TA-4 (TEST-THINKING): Present MC-3's probe and ask the student to explain why NaCl's coordination number isn't a covalent bond count, using the established ionic-bonding framework."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Crystal Systems from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Is the atom at the body centre of CsCl the same type as the corner atoms?\"",
+          "FA-2: \"How many atoms does the FCC unit cell contain, accounting for sharing?\"",
+          "FA-3: \"Is the Na–Cl interaction in NaCl a covalent bond?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Crystal Systems\""
+        "mastery_signal": "Student can (a) correctly distinguish true BCC from a same-topology, different-species structure like CsCl, (b) correctly compute atoms-per-unit-cell using sharing fractions, (c) correctly explain why ionic coordination number isn't a covalent bond count."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Crystal Systems\""
+        "Feeds directly into `chem.solid.amorphous` (contrasts crystalline order with amorphous disorder), `chem.solid.defects` (crystal imperfections are defined relative to the ideal lattice established here), and `chem.solid.packing` (packing efficiency calculations depend directly on correct atoms-per-unit-cell counting)."
       ],
       "prerequisite_review_triggers": [
         "chem.bond.metallic-bonding",
@@ -5609,48 +5623,62 @@
     {
       "id": "asset.chem.solid.packing",
       "concept_id": "chem.solid.packing",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Close Packing and Packing Efficiency\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Close Packing and Packing Efficiency\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Close Packing and Efficiency\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "HCP and CCP are IDENTICAL in coordination number (12 in each) AND packing efficiency (74.05% in each) — the ONLY difference is stacking sequence (ABAB for HCP versus ABCABC for CCP), producing different overall symmetry (hexagonal vs. cubic) despite identical local density and neighbor count; in the fluorite (CaF₂) structure, Ca²⁺ occupies CCP positions while F⁻ fills ALL TETRAHEDRAL holes (not octahedral) — the 1:2 stoichiometry arises because CCP genuinely has TWICE as many tetrahedral holes as atoms (2 per Ca²⁺), giving 2 F⁻ per Ca²⁺ naturally, not because octahedral holes are somehow linked to a 1:2 ratio; and simple cubic packing, despite its visually \"neat,\" grid-like appearance, is genuinely LESS efficient (52.4% packing efficiency) than close-packed structures like CCP/FCC (74%) — the apparent visual \"neatness\" of a square grid is not a quantitative measure of packing density.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Close Packing and Packing Efficiency\"",
-        "[TEMPLATE] Key idea 2 for \"Close Packing and Packing Efficiency\"",
-        "[TEMPLATE] Key idea 3 for \"Close Packing and Packing Efficiency\""
+        "HCP and CCP are two distinct ways of stacking identical, maximally-efficient layers of spheres — both achieve identical coordination number (12) and packing efficiency (74.05%), differing only in their specific stacking sequence (ABAB for HCP, ABCABC for CCP), which produces different overall crystal symmetry without any difference in local packing density. Ionic solids built on close-packed lattices derive their stoichiometry from the actual geometric ratio of available holes to atoms — tetrahedral holes occur at 2 per atom, octahedral holes at 1 per atom — with a compound's specific stoichiometric ratio (like CaF₂'s 1:2) directly indicating which hole type is being filled.",
+        "Packing efficiency must be computed quantitatively from the actual sphere volume divided by unit cell volume, not estimated from visual regularity — simple cubic packing, despite its visually \"neat,\" grid-like appearance, is genuinely less dense (52.4%) than close-packed arrangements like CCP/FCC (74%), since visual orderliness and quantitative packing density are unrelated properties.",
+        "Core misconception to avoid: HCP and CCP share identical coordination number (12) and packing efficiency (74.05%) — their only genuine difference is stacking sequence (ABAB vs. ABCABC), producing different crystal symmetry without changing local density."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Close Packing and Packing Efficiency\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "HCP and CCP are completely different types of packing.",
+          "correction": "HCP and CCP share identical coordination number (12) and packing efficiency (74.05%) — their only genuine difference is stacking sequence (ABAB vs. ABCABC), producing different crystal symmetry without changing local density."
+        },
+        {
+          "misconception": "1:2 stoichiometry → octahedral holes because there's one per atom.",
+          "correction": "Fluorite's Ca²⁺ occupies CCP lattice positions; F⁻ fills all tetrahedral holes (2 per Ca²⁺), correctly producing the 1:2 stoichiometry from the genuine 2-tetrahedral-holes-per-atom geometric ratio — never assume octahedral-hole occupancy from stoichiometry numbers alone."
+        },
+        {
+          "misconception": "the neat square grid must be more efficient than the irregular hexagonal arrangement.",
+          "correction": "Packing efficiency must be computed quantitatively (volume of spheres divided by total unit cell volume) — simple cubic's visually regular appearance does NOT correspond to higher density; close-packed structures (HCP/CCP, ≈74%) are genuinely denser than simple cubic (≈52.4%)."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Close Packing and Packing Efficiency\""
+        "Demonstration 1 (HCP-vs-CCP coordination/efficiency computation): Compute coordination number and packing efficiency explicitly and separately for HCP and CCP, showing the identical numeric results.",
+        "Demonstration 2 (fluorite tetrahedral-hole-filling diagram): Present the fluorite unit cell explicitly, showing Ca²⁺ in CCP positions and F⁻ filling all tetrahedral holes, connecting the 2-holes-per-atom count directly to the 1:2 stoichiometry."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Close Packing and Packing Efficiency\"",
+        "setup": "Compare the coordination number and packing efficiency of HCP and CCP.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (HCP-vs-CCP coordination/efficiency computation): Compute coordination number and packing efficiency explicitly and separately for HCP and CCP, showing the identical numeric results.",
+          "Demonstration 2 (fluorite tetrahedral-hole-filling diagram): Present the fluorite unit cell explicitly, showing Ca²⁺ in CCP positions and F⁻ filling all tetrahedral holes, connecting the 2-holes-per-atom count directly to the 1:2 stoichiometry."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Close Packing and Packing Efficiency\""
+        "expected_outcome": "Student can (a) correctly state that HCP and CCP share identical coordination number and packing efficiency, differing only in stacking sequence, (b) correctly identify tetrahedral-hole filling from a 1:2 stoichiometric ratio using the correct hole-count-per-atom reasoning, (c) correctly compute and compare packing efficiencies quantitatively, recognizing simple cubic as less efficient than close packing."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit HCP-vs-CCP coordination/efficiency computation, showing identical results.",
+          "TA-2 (TELL): State the tetrahedral-holes-per-atom (2) versus octahedral-holes-per-atom (1) rule explicitly, worked through for fluorite's 1:2 stoichiometry.",
+          "TA-3 (DO): Student computes simple cubic packing efficiency explicitly and compares it numerically to CCP.",
+          "TA-4 (TEST-THINKING): Present MC-2's fluorite probe and ask the student to justify tetrahedral (not octahedral) hole-filling using the correct hole-count ratio."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Close Packing and Efficiency from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Compare the coordination number and packing efficiency of HCP and CCP.\"",
+          "FA-2: \"In the fluorite structure, which type of hole do the F⁻ ions occupy, and why?\"",
+          "FA-3: \"Calculate the packing efficiency of simple cubic and compare to CCP.\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Close Packing and Packing Efficiency\""
+        "mastery_signal": "Student can (a) correctly state that HCP and CCP share identical coordination number and packing efficiency, differing only in stacking sequence, (b) correctly identify tetrahedral-hole filling from a 1:2 stoichiometric ratio using the correct hole-count-per-atom reasoning, (c) correctly compute and compare packing efficiencies quantitatively, recognizing simple cubic as less efficient than close packing."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Close Packing and Packing Efficiency\""
+        "Feeds directly into `chem.solid.ionic-solids` (ionic lattice structures like fluorite, rock-salt, and others directly apply the hole-filling and packing-efficiency reasoning established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.solid.crystal-systems"
@@ -5659,48 +5687,64 @@
     {
       "id": "asset.chem.solid.ionic-solids",
       "concept_id": "chem.solid.ionic-solids",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Ionic Crystal Structures\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Ionic Crystal Structures\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Ionic Crystal Structures\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Larger lattice energy does NOT universally mean \"more stable/better in every respect\" — solubility depends on ΔH_solution=−|U_lattice|+|ΔH_hydration|, so a large lattice energy can be OFFSET by an equally large hydration enthalpy, and thermal stability depends on possible decomposition pathways, not lattice energy alone — melting point IS generally correlated with |U|, but only strictly within the SAME structural/charge type; lattice energy is DEFINED as the enthalpy change for the specific process M⁺(g)+X⁻(g)→MX(s), starting from GASEOUS IONS, never from atoms — the separate Born-Haber cycle steps (sublimation, atomization, ionization, electron affinity) convert elements to gaseous ions BEFORE the lattice-energy step, which itself only assembles pre-formed ions; and the Madelung constant is NOT the coordination number — it is the SUM of an alternating series of coulombic terms from ALL ions in the lattice (nearest AND next-nearest AND beyond, for both attractions and repulsions), encoding the FULL electrostatic geometry — CsCl (Madelung A=1.763, coordination number 8:8) genuinely has a HIGHER Madelung constant than NaCl (A=1.748, coordination number 6:6), despite NaCl's lower coordination number, proving the two quantities are not equivalent.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Ionic Crystal Structures\"",
-        "[TEMPLATE] Key idea 2 for \"Ionic Crystal Structures\"",
-        "[TEMPLATE] Key idea 3 for \"Ionic Crystal Structures\""
+        "Lattice energy is one specific thermodynamic factor among several governing an ionic compound's properties — it correlates well with melting point within consistent structural/charge contexts, but for solubility specifically, it must be balanced against hydration enthalpy (ΔH_solution=−|U|+|ΔH_hyd|), meaning larger lattice energy alone cannot predict solubility or general \"stability\" without considering the competing term.",
+        "The lattice-energy step in a Born-Haber cycle is precisely defined as starting from gaseous ions (M⁺(g)+X⁻(g)→MX(s)), never from atoms — the atom-to-ion conversion is handled by separate, earlier cycle steps. The Madelung constant is a mathematically distinct quantity from coordination number — an infinite, alternating sum of coulombic contributions from the entire lattice, not a simple nearest-neighbor count, and the two quantities can genuinely diverge or coincidentally align in ranking without being equivalent.",
+        "Core misconception to avoid: Always identify which SPECIFIC property is being predicted and the relevant balancing factors (e.g., hydration enthalpy for solubility) before concluding \"larger lattice energy=better\" — never treat lattice energy as a universal, unqualified predictor."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Ionic Crystal Structures\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "larger |U| = better in every respect.",
+          "correction": "Always identify which SPECIFIC property is being predicted and the relevant balancing factors (e.g., hydration enthalpy for solubility) before concluding \"larger lattice energy=better\" — never treat lattice energy as a universal, unqualified predictor."
+        },
+        {
+          "misconception": "atoms go into the lattice, so the lattice energy starts from atoms.",
+          "correction": "The lattice-energy step in a Born-Haber cycle always starts from gaseous IONS (M⁺(g)+X⁻(g)), never from atoms — atom-to-ion conversion is handled by separate, earlier steps in the cycle."
+        },
+        {
+          "misconception": "Madelung = coordination number.",
+          "correction": "The Madelung constant is a converging infinite sum of alternating coulombic terms encoding the full lattice electrostatic geometry — never equate it with coordination number, even when their rankings happen to align for a given comparison."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Ionic Crystal Structures\""
+        "Demonstration 1 (ΔH_solution balance-equation check for NaF vs. NaCl): Compute the explicit ΔH_solution balance for both compounds, checking whether larger lattice energy actually predicts lower solubility.",
+        "Demonstration 2 (full Born-Haber cycle with labeled step boundaries): Present the complete cycle explicitly, labeling each step's precise starting/ending species, isolating the lattice-energy step's ion-only starting point.",
+        "Demonstration 3 (partial Madelung-series computation for NaCl): Compute the explicit alternating nearest/next-nearest series terms for NaCl, deriving the constant beyond simple neighbor counting."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Ionic Crystal Structures\"",
+        "setup": "NaF has a larger lattice energy than NaCl. Does this mean NaF is always more thermally stable or less soluble than NaCl?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (ΔH_solution balance-equation check for NaF vs. NaCl): Compute the explicit ΔH_solution balance for both compounds, checking whether larger lattice energy actually predicts lower solubility.",
+          "Demonstration 2 (full Born-Haber cycle with labeled step boundaries): Present the complete cycle explicitly, labeling each step's precise starting/ending species, isolating the lattice-energy step's ion-only starting point.",
+          "Demonstration 3 (partial Madelung-series computation for NaCl): Compute the explicit alternating nearest/next-nearest series terms for NaCl, deriving the constant beyond simple neighbor counting."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Ionic Crystal Structures\""
+        "expected_outcome": "Student can (a) correctly assess lattice energy's predictive power for a specific property by checking the relevant balancing factor, (b) correctly construct the lattice-energy step in a Born-Haber cycle starting from gaseous ions, (c) correctly distinguish the Madelung constant from coordination number."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit ΔH_solution balance-equation computation for NaF vs. NaCl.",
+          "TA-2 (TELL): State the ion-only starting point for the lattice-energy Born-Haber step explicitly, anchored to the full labeled cycle diagram.",
+          "TA-3 (DO): Student constructs a Born-Haber cycle for an unfamiliar ionic compound, correctly placing the lattice-energy step.",
+          "TA-4 (TEST-THINKING): Present the Madelung-constant-vs-CN probe and ask the student to justify why CsCl's higher Madelung constant doesn't simply equal its coordination number."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Ionic Crystal Structures from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"NaF has a larger lattice energy than NaCl. Does this mean NaF is always more thermally stable or less soluble than NaCl?\"",
+          "FA-2: \"What are the starting materials for the lattice energy step in the Born-Haber cycle?\"",
+          "FA-3: \"How does the Madelung constant relate to coordination number?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Ionic Crystal Structures\""
+        "mastery_signal": "Student can (a) correctly assess lattice energy's predictive power for a specific property by checking the relevant balancing factor, (b) correctly construct the lattice-energy step in a Born-Haber cycle starting from gaseous ions, (c) correctly distinguish the Madelung constant from coordination number."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Ionic Crystal Structures\""
+        "This concept has no direct KG unlocks but consolidates packing and ionic-bonding reasoning built across `chem.solid.packing` and `chem.bond.ionic-bonding`, forming a capstone application to advanced solid-state chemistry and thermodynamics contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.solid.packing",
@@ -5710,48 +5754,62 @@
     {
       "id": "asset.chem.solid.defects",
       "concept_id": "chem.solid.defects",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Crystal Defects\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Crystal Defects\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Crystal Defects\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Schottky and Frenkel defects have genuinely DIFFERENT effects on density — a Frenkel defect moves an ion to an INTERSTITIAL site WITHIN the same crystal (no ion removed, mass and volume essentially unchanged, density UNCHANGED), while only a Schottky defect (removing ions entirely to the crystal surface) genuinely decreases density; non-stoichiometric compounds (like FeO₀.₉₅) do NOT violate the law of definite proportions — that law applies specifically to molecular compounds with fixed molecular formulas, while non-stoichiometric compounds are extended solid-state structures where composition genuinely varies within a range (due to variable oxidation states and structural vacancies) — they are real, well-characterized materials revealing the limits of a model developed for molecular compounds, not violations of any fundamental law; and F-centres are named for the German \"Farbzentrum\" (color center), NOT for fluorine — F-centres occur in ANY alkali halide crystal (NaCl, KCl, LiF, KBr) when an anion vacancy traps an electron, with the resulting color depending on the specific vacancy size (NaCl: yellow; KCl: purple/violet; LiF: pink) — no fluorine is chemically required, the name is purely historical/etymological.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Crystal Defects\"",
-        "[TEMPLATE] Key idea 2 for \"Crystal Defects\"",
-        "[TEMPLATE] Key idea 3 for \"Crystal Defects\""
+        "Crystal defects have genuinely different consequences depending on their specific type — a Frenkel defect (ion displaced to an interstitial site, still within the crystal) leaves density unchanged, since no mass is actually lost, while a Schottky defect (ion pairs genuinely removed to the crystal surface) decreases density, since mass genuinely leaves the crystal. Non-stoichiometric compounds are real, well-characterized extended solid-state structures with genuinely variable composition (due to variable oxidation states and structural vacancies) — they don't violate the law of definite proportions, which applies specifically to fixed-formula molecular compounds, a different class of chemical material.",
+        "\"F-centre\" derives from the German word \"Farbzentrum\" (color center), not from fluorine — this defect (an electron trapped in an anion vacancy) occurs in any alkali halide crystal, with the resulting color depending on the specific crystal's vacancy size, entirely independent of whether fluorine is chemically present.",
+        "Core misconception to avoid: Frenkel defects (interstitial displacement, ion still present in the crystal) leave density UNCHANGED; only Schottky defects (genuine ion removal to the surface) DECREASE density — never assume all defects have the same density consequence."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Crystal Defects\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "defects always lower density because something is 'missing' from a proper site.",
+          "correction": "Frenkel defects (interstitial displacement, ion still present in the crystal) leave density UNCHANGED; only Schottky defects (genuine ion removal to the surface) DECREASE density — never assume all defects have the same density consequence."
+        },
+        {
+          "misconception": "a compound must have a fixed formula.",
+          "correction": "Non-stoichiometric compounds are real, well-characterized extended solid-state structures with genuinely variable composition — they don't violate the law of definite proportions, which applies specifically to fixed-formula molecular compounds, a different class of material entirely."
+        },
+        {
+          "misconception": "F-centre means fluoride.",
+          "correction": "F-centres (from German \"Farbzentrum,\" meaning color center) occur in ANY alkali halide crystal via an electron trapped in an anion vacancy — no fluorine is chemically required, and the specific resulting color depends on which alkali halide and its vacancy size, not on fluorine's presence."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Crystal Defects\""
+        "Demonstration 1 (Frenkel-vs-Schottky density comparison): Present both defect types' explicit structural diagrams, having students trace whether mass is genuinely lost (Schottky) or merely relocated (Frenkel).",
+        "Demonstration 2 (NaCl-plus-sodium-vapour F-centre formation): Present or describe the explicit NaCl-exposed-to-sodium-vapour experiment, connecting the observed yellow color directly to the electron-trapped-in-anion-vacancy mechanism, with no fluorine involved."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Crystal Defects\"",
+        "setup": "In a Frenkel defect, an Ag⁺ ion moves to an interstitial site in AgBr. What happens to crystal density?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (Frenkel-vs-Schottky density comparison): Present both defect types' explicit structural diagrams, having students trace whether mass is genuinely lost (Schottky) or merely relocated (Frenkel).",
+          "Demonstration 2 (NaCl-plus-sodium-vapour F-centre formation): Present or describe the explicit NaCl-exposed-to-sodium-vapour experiment, connecting the observed yellow color directly to the electron-trapped-in-anion-vacancy mechanism, with no fluorine involved."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Crystal Defects\""
+        "expected_outcome": "Student can (a) correctly distinguish Frenkel (density unchanged) from Schottky (density decreased) defects, (b) correctly explain why non-stoichiometric compounds don't violate the law of definite proportions, (c) correctly explain F-centre formation without any fluorine association."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit Frenkel-vs-Schottky structural comparison.",
+          "TA-2 (TELL): State the molecular-vs-extended-solid-state scope distinction explicitly, worked through with FeO₀.₉₅.",
+          "TA-3 (DO): Student determines the density consequence for a new, previously-unseen defect scenario.",
+          "TA-4 (TEST-THINKING): Present MC-3's NaCl-plus-sodium-vapour probe and ask the student to explain the yellow color using the F-centre mechanism, without invoking fluorine."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Crystal Defects from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"In a Frenkel defect, an Ag⁺ ion moves to an interstitial site in AgBr. What happens to crystal density?\"",
+          "FA-2: \"FeO₀.₉₅ has been isolated and characterised. Does this violate fundamental chemical laws?\"",
+          "FA-3: \"A crystal of NaCl exposed to sodium vapour turns yellow. What is causing the colour?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Crystal Defects\""
+        "mastery_signal": "Student can (a) correctly distinguish Frenkel (density unchanged) from Schottky (density decreased) defects, (b) correctly explain why non-stoichiometric compounds don't violate the law of definite proportions, (c) correctly explain F-centre formation without any fluorine association."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Crystal Defects\""
+        "Feeds directly into `chem.solid.properties` (bulk electrical, optical, and mechanical properties of solids directly build on the defect-type reasoning established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.solid.crystal-systems"
@@ -5760,48 +5818,64 @@
     {
       "id": "asset.chem.solid.properties",
       "concept_id": "chem.solid.properties",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Electrical and Magnetic Properties of Solids\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Electrical and Magnetic Properties of Solids\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Electrical and Magnetic Properties\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Ionic solids do NOT conduct electricity in the solid state despite containing charged ions — conductivity requires MOBILE charges, and in a rigid solid lattice, ions are held fixed in position, unable to migrate in response to an applied field (only molten or dissolved ionic compounds, where ions become mobile, conduct); having the SAME crystal structure does NOT guarantee the same electrical behavior — diamond (band gap 5.5eV, insulator) and silicon (band gap 1.12eV, semiconductor) share the identical diamond-cubic structure, but their vastly different BAND GAPS (arising from differing bond strength/orbital overlap between C and Si) produce completely different conductivity — structure alone does not determine electrical properties without also specifying band gap; and NTC/PTC do NOT describe absolute levels of thermal or electrical conductivity — \"NTC\" (Negative Temperature Coefficient) and \"PTC\" (Positive Temperature Coefficient) describe the SIGN of a property's TEMPERATURE DEPENDENCE (typically resistance/conductivity) — NTC means resistance DECREASES as temperature increases (conductivity increases), PTC means resistance INCREASES as temperature increases (conductivity decreases) — never \"not/poorly thermally conducting.\"",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Electrical and Magnetic Properties of Solids\"",
-        "[TEMPLATE] Key idea 2 for \"Electrical and Magnetic Properties of Solids\"",
-        "[TEMPLATE] Key idea 3 for \"Electrical and Magnetic Properties of Solids\""
+        "Electrical conductivity requires mobile charge carriers, not merely the presence of charged species — solid ionic compounds have immobile, lattice-fixed ions (zero conductivity), while molten or dissolved ionic compounds have mobile ions (genuine conductivity), the physical state being the determining factor. Identical crystal structure does not guarantee identical electrical behavior — diamond and silicon share the same diamond-cubic structure but differ enormously in band gap (5.5eV vs. 1.12eV), producing opposite electrical classifications (insulator vs. semiconductor).",
+        "\"NTC\" and \"PTC\" are precise technical abbreviations (Negative/Positive Temperature Coefficient) describing the direction of a property's (typically resistance's) dependence on temperature, never an absolute statement about conductivity magnitude — NTC materials become more conductive as temperature rises, PTC materials become less conductive.",
+        "Core misconception to avoid: Conductivity requires MOBILE charge carriers, not merely charged particles — solid ionic compounds have immobile ions (zero conductivity); molten or dissolved ionic compounds have mobile ions (genuine conductivity)."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Electrical and Magnetic Properties of Solids\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "ions carry charge, so ionic solids must conduct.",
+          "correction": "Conductivity requires MOBILE charge carriers, not merely charged particles — solid ionic compounds have immobile ions (zero conductivity); molten or dissolved ionic compounds have mobile ions (genuine conductivity)."
+        },
+        {
+          "misconception": "same structure = same conductivity.",
+          "correction": "Always check band gap specifically, never infer conductivity from crystal structure alone — identical structure does not guarantee identical electrical behavior."
+        },
+        {
+          "misconception": "NTC = not thermally conducting.",
+          "correction": "NTC/PTC describe the sign (negative/positive) of a property's temperature coefficient (typically resistance's dependence on temperature) — never interpret them as absolute statements about \"how well\" something conducts."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Electrical and Magnetic Properties of Solids\""
+        "Demonstration 1 (solid-vs-molten NaCl conductivity comparison): Present both states explicitly, isolating ion mobility (not ion presence) as the conductivity-determining factor.",
+        "Demonstration 2 (diamond-vs-silicon band-gap diagram): Present both band gaps explicitly alongside the shared crystal structure, deriving the opposite electrical classification.",
+        "Demonstration 3 (NTC/PTC resistance-vs-temperature graphs): Present both graphs explicitly, isolating slope direction as the defining feature of each term."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Electrical and Magnetic Properties of Solids\"",
+        "setup": "Why does solid NaCl not conduct electricity, while molten NaCl does?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (solid-vs-molten NaCl conductivity comparison): Present both states explicitly, isolating ion mobility (not ion presence) as the conductivity-determining factor.",
+          "Demonstration 2 (diamond-vs-silicon band-gap diagram): Present both band gaps explicitly alongside the shared crystal structure, deriving the opposite electrical classification.",
+          "Demonstration 3 (NTC/PTC resistance-vs-temperature graphs): Present both graphs explicitly, isolating slope direction as the defining feature of each term."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Electrical and Magnetic Properties of Solids\""
+        "expected_outcome": "Student can (a) correctly explain why solid ionic compounds don't conduct while molten ones do, (b) correctly attribute diamond-vs-silicon conductivity difference to band gap, not structure, (c) correctly interpret NTC/PTC as temperature-coefficient sign, not absolute conductivity."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit solid-vs-molten NaCl conductivity comparison.",
+          "TA-2 (TELL): State the band-gap-determines-conductivity principle explicitly, anchored to the diamond-vs-silicon comparison.",
+          "TA-3 (DO): Student interprets an unfamiliar NTC/PTC-labeled material's resistance-vs-temperature behavior correctly.",
+          "TA-4 (TEST-THINKING): Present the \"same structure, different conductivity\" probe and ask the student to justify the difference from band gap."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Electrical and Magnetic Properties from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Why does solid NaCl not conduct electricity, while molten NaCl does?\"",
+          "FA-2: \"Diamond and silicon have the same structure. Why is diamond an electrical insulator while silicon is a semiconductor?\"",
+          "FA-3: \"What do the T and C stand for in NTC and PTC, and what property do they describe?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Electrical and Magnetic Properties of Solids\""
+        "mastery_signal": "Student can (a) correctly explain why solid ionic compounds don't conduct while molten ones do, (b) correctly attribute diamond-vs-silicon conductivity difference to band gap, not structure, (c) correctly interpret NTC/PTC as temperature-coefficient sign, not absolute conductivity."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Electrical and Magnetic Properties of Solids\""
+        "This concept has no direct KG unlocks but consolidates defect and metallic-bonding reasoning built across `chem.solid.defects` and `chem.bond.metallic-bonding`, forming a capstone application to semiconductor and materials-science contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.solid.defects",
@@ -5811,48 +5885,64 @@
     {
       "id": "asset.chem.solid.amorphous",
       "concept_id": "chem.solid.amorphous",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Amorphous Solids\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Amorphous Solids\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Amorphous Solids\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Glass is NOT literally a liquid despite having a disordered, liquid-like structure and being termed a \"supercooled liquid\" — window glass's viscosity at 20°C is ≈10²¹Pa·s, so it would take longer than the age of the universe to flow perceptibly; \"liquid-like structure\" is a STRUCTURAL description (thermodynamic metastability), never a mechanical/flowing-behavior claim, and glass is mechanically a genuine solid by every practical measure; amorphous solids do NOT have \"no order at all\" — they possess SHORT-RANGE order (the immediate bonding environment of each atom remains regular — e.g., silica glass's SiO₄ tetrahedra with bond angles still roughly obeying 109.5°), with disorder specifically being LONG-RANGE (no repeating unit cell extending beyond ~1-2nm) — \"amorphous\" means no long-range periodic order, not the complete absence of any structural regularity; and amorphous solids do NOT melt sharply at a single temperature like crystalline solids — they SOFTEN progressively over a temperature range (glass transition Tg, then increasing workability at higher temperatures), with no discrete latent-heat-of-fusion event, since viscosity decreases continuously rather than dropping abruptly — this gradual softening (vs. sharp melting) is one of the defining diagnostic properties distinguishing amorphous from crystalline solids.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Amorphous Solids\"",
-        "[TEMPLATE] Key idea 2 for \"Amorphous Solids\"",
-        "[TEMPLATE] Key idea 3 for \"Amorphous Solids\""
+        "Glass's \"liquid-like structure\"/\"supercooled liquid\" description refers specifically to its atomic-scale disorder and thermodynamic metastability, never to actual observable flowing behavior — its viscosity (≈10²¹Pa·s) makes it mechanically indistinguishable from a genuine solid at any practical timescale. Amorphous solids retain short-range order (regular local bonding, like silica's SiO₄ tetrahedra) while specifically lacking long-range periodic order — \"amorphous\" means no long-range repetition, not the complete absence of structural regularity.",
+        "Amorphous solids, lacking the long-range periodic order whose sudden breakdown produces a crystalline solid's sharp melting point, instead soften gradually over a temperature range (marked by the glass transition Tg), with viscosity decreasing continuously rather than dropping abruptly at a discrete latent-heat-of-fusion event — this gradual softening is one of the defining diagnostic properties distinguishing amorphous from crystalline solids.",
+        "Core misconception to avoid: \"Liquid-like structure\"/\"supercooled liquid\" describes glass's atomic-scale disorder and thermodynamic metastability, never its mechanical/flowing behavior — glass is mechanically a genuine solid at room temperature by every practical measure."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Amorphous Solids\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "glass is a supercooled liquid, so it flows slowly.",
+          "correction": "\"Liquid-like structure\"/\"supercooled liquid\" describes glass's atomic-scale disorder and thermodynamic metastability, never its mechanical/flowing behavior — glass is mechanically a genuine solid at room temperature by every practical measure."
+        },
+        {
+          "misconception": "amorphous means totally random structure.",
+          "correction": "Amorphous solids retain short-range order (regular local bonding environment) while lacking long-range order (no repeating periodic structure beyond ~1-2nm) — never describe them as having no order whatsoever."
+        },
+        {
+          "misconception": "all solids have a melting point, just different values.",
+          "correction": "Amorphous solids soften gradually over a temperature range (marked by a glass transition temperature Tg, with no discrete latent heat of fusion), never melting sharply at a single fixed temperature like crystalline solids — this gradual behavior is a defining diagnostic feature."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Amorphous Solids\""
+        "Demonstration 1 (viscosity-vs-age-of-universe comparison): Present the explicit numerical comparison, quantifying glass's mechanical solidity at room temperature.",
+        "Demonstration 2 (SiO₄ tetrahedra short-range/long-range structural diagram): Present the explicit local bonding diagram embedded in a randomly-connected network, isolating short-range order from long-range disorder.",
+        "Demonstration 3 (viscosity-vs-temperature curve comparison, crystalline vs. amorphous): Present both curves explicitly, contrasting the sharp discontinuity against the smooth continuous decrease."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Amorphous Solids\"",
+        "setup": "Would you expect window glass at room temperature to flow perceptibly over 100 years?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (viscosity-vs-age-of-universe comparison): Present the explicit numerical comparison, quantifying glass's mechanical solidity at room temperature.",
+          "Demonstration 2 (SiO₄ tetrahedra short-range/long-range structural diagram): Present the explicit local bonding diagram embedded in a randomly-connected network, isolating short-range order from long-range disorder.",
+          "Demonstration 3 (viscosity-vs-temperature curve comparison, crystalline vs. amorphous): Present both curves explicitly, contrasting the sharp discontinuity against the smooth continuous decrease."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Amorphous Solids\""
+        "expected_outcome": "Student can (a) correctly distinguish glass's structural \"liquid-like\" description from actual flowing behavior, (b) correctly identify short-range order surviving within amorphous long-range disorder, (c) correctly predict gradual softening (not sharp melting) for amorphous solids."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit viscosity-vs-age-of-universe numerical comparison.",
+          "TA-2 (TELL): State the short-range-order/long-range-disorder distinction explicitly, anchored to the SiO₄ tetrahedra diagram.",
+          "TA-3 (DO): Student predicts melting behavior (sharp vs. gradual) for an unfamiliar crystalline or amorphous material.",
+          "TA-4 (TEST-THINKING): Present the soda-lime-glass-vs-quartz probe and ask the student to justify the absence of a sharp melting point for glass."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Amorphous Solids from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Would you expect window glass at room temperature to flow perceptibly over 100 years?\"",
+          "FA-2: \"Does silica glass have SiO₄ tetrahedra like crystalline quartz?\"",
+          "FA-3: \"How does the melting behaviour of soda-lime glass differ from that of quartz crystal?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Amorphous Solids\""
+        "mastery_signal": "Student can (a) correctly distinguish glass's structural \"liquid-like\" description from actual flowing behavior, (b) correctly identify short-range order surviving within amorphous long-range disorder, (c) correctly predict gradual softening (not sharp melting) for amorphous solids."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Amorphous Solids\""
+        "This concept has no direct KG unlocks but consolidates crystal-system reasoning built across `chem.solid.crystal-systems`, forming a capstone application to materials-science and glass-technology contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.solid.crystal-systems"
