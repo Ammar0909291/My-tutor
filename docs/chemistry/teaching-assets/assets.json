@@ -7293,51 +7293,66 @@
     {
       "id": "asset.chem.org.isomerism",
       "concept_id": "chem.org.isomerism",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Structural and Stereoisomerism\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Structural and Stereoisomerism\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Structural and Stereoisomerism\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "R/S configuration designators describe spatial arrangement using CIP priority rules and are entirely UNRELATED to the direction of optical rotation (+/−, dextrorotatory/levorotatory), which must be measured experimentally — R/S, +/−, d/l, and D/L are FOUR SEPARATE classification systems, sometimes correlated for specific compounds but never systematically linked; a meso compound is optically inactive because it is genuinely ACHIRAL (possessing an internal plane of symmetry making it superimposable on its own mirror image) — it is a SINGLE, pure compound, fundamentally different from a racemate (a 50:50 mixture of two separate enantiomers), even though both share the surface description \"contains stereocentres yet shows no net rotation\"; and true stereoisomers (geometric E/Z, enantiomers, diastereomers) require breaking a bond to interconvert (high barrier, ~200+ kJ/mol) and can genuinely be isolated as separate compounds, unlike conformational isomers (like staggered/eclipsed ethane), which interconvert via low-barrier bond rotation (~12 kJ/mol, essentially instantaneous at room temperature) and represent the SAME compound in different transient geometries, not separable distinct compounds.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Structural and Stereoisomerism\"",
-        "[TEMPLATE] Key idea 2 for \"Structural and Stereoisomerism\"",
-        "[TEMPLATE] Key idea 3 for \"Structural and Stereoisomerism\""
+        "R/S configuration designators describe a molecule's spatial arrangement of substituents using structural CIP priority rules — they are entirely independent of, and cannot predict, the direction of optical rotation (+/−), which must always be determined experimentally via polarimetry. A meso compound's optical inactivity arises from genuine internal molecular symmetry (an achiral molecule, superimposable on its own mirror image), making it a single pure compound, fundamentally distinct from a racemate's physical mixture of two separate enantiomers.",
+        "True stereoisomerism requires that the different spatial arrangements be persistent — unable to interconvert without breaking a bond (a high, ~200+ kJ/mol barrier) — which is what allows genuine stereoisomers to be physically isolated as separate compounds. Conformational isomers, interconverting via a much lower-barrier (~12 kJ/mol) bond rotation, fail this persistence requirement and represent the same compound at different transient instants, not distinct, separable stereoisomers.",
+        "Core misconception to avoid: R/S configuration must be determined structurally via CIP rules; the direction of optical rotation (+/−) must be determined experimentally via polarimetry — never infer one from the other without either the specific rule-based analysis or the actual experimental measurement."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Structural and Stereoisomerism\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "R = (+) = dextrorotatory.",
+          "correction": "R/S configuration must be determined structurally via CIP rules; the direction of optical rotation (+/−) must be determined experimentally via polarimetry — never infer one from the other without either the specific rule-based analysis or the actual experimental measurement."
+        },
+        {
+          "misconception": "the R and S cancel the rotation, so they average to zero.",
+          "correction": "A meso compound is a single, genuinely achiral molecule (due to internal symmetry), not a mixture of two opposing contributions — this distinction matters practically, since a pure meso compound is already one compound (nothing to separate), while a racemate genuinely requires chiral resolution to separate its two distinct enantiomeric components."
+        },
+        {
+          "misconception": "they have the same atoms in different spatial arrangements, so they are stereoisomers.",
+          "correction": "True stereoisomers require a high-energy-barrier interconversion pathway (bond-breaking, ~200+ kJ/mol), allowing physical separation as distinct compounds — conformational isomers, interconverting via a low-barrier bond rotation (~12 kJ/mol), are the SAME compound in different instantaneous geometries, not separable stereoisomers."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Structural and Stereoisomerism\""
+        "Demonstration 1 (R/S-vs-rotation independence table): Present several real compounds' R/S designations alongside their experimentally measured rotation directions, showing no consistent pattern links the two.",
+        "Demonstration 2 (meso-vs-racemate structural comparison): Present a meso compound's internal-mirror-plane structure directly alongside a racemate's two distinct enantiomer structures, having students identify which is genuinely one compound versus a mixture of two."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Structural and Stereoisomerism\"",
+        "setup": "Does the R configuration always rotate plane-polarised light clockwise?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (R/S-vs-rotation independence table): Present several real compounds' R/S designations alongside their experimentally measured rotation directions, showing no consistent pattern links the two.",
+          "Demonstration 2 (meso-vs-racemate structural comparison): Present a meso compound's internal-mirror-plane structure directly alongside a racemate's two distinct enantiomer structures, having students identify which is genuinely one compound versus a mixture of two."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Structural and Stereoisomerism\""
+        "expected_outcome": "Student can (a) correctly state that R/S and optical rotation direction are independent, requiring separate determination, (b) correctly distinguish a meso compound (single achiral molecule) from a racemate (mixture of two enantiomers), (c) correctly distinguish true stereoisomers (high interconversion barrier, separable) from conformational isomers (low barrier, same compound)."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the R/S-vs-rotation-direction independence table explicitly.",
+          "TA-2 (TELL): State the meso-compound-is-a-single-achiral-molecule principle explicitly, contrasted directly with a racemate's mixture structure.",
+          "TA-3 (DO): Student determines whether a given pair of structures represents true stereoisomers or mere conformations, using the persistence/energy-barrier criterion.",
+          "TA-4 (TEST-THINKING): Present MC-2's meso-compound probe and ask the student to justify its optical inactivity using symmetry, not a mixture-cancellation framing."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Structural and Stereoisomerism from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Does the R configuration always rotate plane-polarised light clockwise?\"",
+          "FA-2: \"A meso compound has stereocentres. Does it therefore have two enantiomers?\"",
+          "FA-3: \"Can staggered and eclipsed ethane be separated as distinct compounds at room temperature?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Structural and Stereoisomerism\""
+        "mastery_signal": "Student can (a) correctly state that R/S and optical rotation direction are independent, requiring separate determination, (b) correctly distinguish a meso compound (single achiral molecule) from a racemate (mixture of two enantiomers), (c) correctly distinguish true stereoisomers (high interconversion barrier, separable) from conformational isomers (low barrier, same compound)."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Structural and Stereoisomerism\""
+        "Feeds directly into `chem.bio.carbohydrates` (sugar stereochemistry — D/L sugars, anomers, epimers — directly applies the isomer classification distinctions established here)."
       ],
       "prerequisite_review_triggers": [
-        "chem.org.iupac"
+        "chem.org.iupac",
+        "chem.org.hybridization"
       ]
     },
     {
@@ -7408,96 +7423,130 @@
     {
       "id": "asset.chem.org.reactive-intermediates",
       "concept_id": "chem.org.reactive-intermediates",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Reactive Intermediates\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Reactive Intermediates\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Reactive Intermediates\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Alkyl-group electron donation (+I, hyperconjugation) STABILIZES electron-DEFICIENT carbocations (tertiary > secondary > primary) but DESTABILIZES electron-RICH carbanions (methyl > primary > secondary > tertiary) — the identical electronic effect produces OPPOSITE stability orderings depending on which species is electron-poor vs. electron-rich, so \"more alkyl groups = more stable\" cannot be applied universally across reactive intermediates; free radicals are ELECTRICALLY NEUTRAL species with an odd number of electrons (specifically one unpaired electron) — \"radical\" refers to electron-count PARITY (odd vs. even), never to net charge, so a carbon radical R₃C• is neither positively nor negatively charged; and carbene spin state (singlet vs. triplet) determines REACTION MECHANISM (concerted one-step vs. stepwise two-step with a rotating intermediate), which in turn determines STEREOCHEMICAL OUTCOME — singlet carbenes give STEREOSPECIFIC addition (retention of alkene geometry), while triplet carbenes give a MIXTURE of stereoisomers (rotation occurs during the stepwise process), so spin state is never a stereochemically-irrelevant detail.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Reactive Intermediates\"",
-        "[TEMPLATE] Key idea 2 for \"Reactive Intermediates\"",
-        "[TEMPLATE] Key idea 3 for \"Reactive Intermediates\""
+        "Carbocations (electron-deficient) and carbanions (electron-rich) respond oppositely to the same electron-donating alkyl substituents — donation stabilizes the electron-poor cation but destabilizes the already electron-rich anion, reversing the stability order between the two intermediate types (tertiary most stable for cations; methyl most stable for anions). Free radicals are a third, distinct category — electrically neutral species with one unpaired electron (odd electron-count parity), never to be confused with charged species based on the word \"extra.\"",
+        "Carbenes exist in singlet (paired, empty+filled orbital) and triplet (two unpaired electrons, diradical-like) spin states, and this spin state determines the addition mechanism to alkenes — singlet carbenes add in a single concerted step (retaining alkene geometry, stereospecific), while triplet carbenes add stepwise via a rotating intermediate (losing alkene geometry, giving a stereoisomer mixture). Mechanism, not just product identity, governs the stereochemical outcome.",
+        "Core misconception to avoid: Always re-derive stability from the reactive center's electron status (deficient vs. rich) before applying an alkyl-substitution rule — carbocations: tertiary>secondary>primary (most substituted most stable); carbanions: methyl>primary>secondary>tertiary (least substituted most stable) — the orders are opposite."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Reactive Intermediates\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "more alkyl groups = more stable for all reactive intermediates.",
+          "correction": "Always re-derive stability from the reactive center's electron status (deficient vs. rich) before applying an alkyl-substitution rule — carbocations: tertiary>secondary>primary (most substituted most stable); carbanions: methyl>primary>secondary>tertiary (least substituted most stable) — the orders are opposite."
+        },
+        {
+          "misconception": "radical means extra electron → negative.",
+          "correction": "A free radical is electrically neutral with one unpaired electron (odd electron count) — never assume \"unpaired\" implies \"excess\" or \"negatively charged.\""
+        },
+        {
+          "misconception": "the product is cyclopropane — it doesn't matter which spin state.",
+          "correction": "Singlet carbene addition is stereospecific (concerted, geometry retained); triplet carbene addition gives a stereoisomer mixture (stepwise, geometry scrambled by intermediate rotation) — never treat \"cyclopropane forms\" as the complete stereochemical answer."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Reactive Intermediates\""
+        "Demonstration 1 (side-by-side stability-order reversal): Present the carbocation stability order (tertiary→primary) and the carbanion stability order (methyl→tertiary) as mirror images, re-derived explicitly from electron-richness/deficiency.",
+        "Demonstration 2 (electron-count comparison across cation/radical/anion): Present R₃C⁺/R₃C•/R₃C⁻ with explicit electron counts (6/7/8) and resulting charges (+/neutral/−), isolating \"unpaired\" from \"charged.\"",
+        "Demonstration 3 (concerted vs. stepwise carbene mechanism): Walk through singlet carbene's simultaneous bond formation vs. triplet carbene's rotating-intermediate stepwise process, deriving the stereochemical consequence from each mechanism."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Reactive Intermediates\"",
+        "setup": "Rank CH₃⁻, CH₃CH₂⁻, and (CH₃)₃C⁻ by stability.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (side-by-side stability-order reversal): Present the carbocation stability order (tertiary→primary) and the carbanion stability order (methyl→tertiary) as mirror images, re-derived explicitly from electron-richness/deficiency.",
+          "Demonstration 2 (electron-count comparison across cation/radical/anion): Present R₃C⁺/R₃C•/R₃C⁻ with explicit electron counts (6/7/8) and resulting charges (+/neutral/−), isolating \"unpaired\" from \"charged.\"",
+          "Demonstration 3 (concerted vs. stepwise carbene mechanism): Walk through singlet carbene's simultaneous bond formation vs. triplet carbene's rotating-intermediate stepwise process, deriving the stereochemical consequence from each mechanism."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Reactive Intermediates\""
+        "expected_outcome": "Student can (a) correctly derive and apply opposite stability orders for carbocations vs. carbanions from electron-richness reasoning, (b) correctly identify a free radical as neutral from electron-count parity, (c) correctly predict stereochemical outcome (stereospecific vs. mixture) from carbene spin state."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the side-by-side carbocation/carbanion stability-order diagrams, re-derived from electron-richness/deficiency.",
+          "TA-2 (TELL): State the radical electron-parity definition explicitly, anchored to the R₃C⁺/R₃C•/R₃C⁻ electron-count comparison.",
+          "TA-3 (DO): Student predicts the stability order for an unfamiliar carbanion or carbocation series from first-principles electron reasoning.",
+          "TA-4 (TEST-THINKING): Present the singlet-vs-triplet carbene cis-2-butene probe and ask the student to justify the stereochemical outcome from mechanism, not from \"same product\" assumption."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Reactive Intermediates from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Rank CH₃⁻, CH₃CH₂⁻, and (CH₃)₃C⁻ by stability.\"",
+          "FA-2: \"Is R₃C• positively charged, negatively charged, or neutral? Justify with electron count.\"",
+          "FA-3: \"Predict whether singlet carbene addition to cis-2-butene gives a single stereoisomer or a mixture, and justify from mechanism.\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Reactive Intermediates\""
+        "mastery_signal": "Student can (a) correctly derive and apply opposite stability orders for carbocations vs. carbanions from electron-richness reasoning, (b) correctly identify a free radical as neutral from electron-count parity, (c) correctly predict stereochemical outcome (stereospecific vs. mixture) from carbene spin state."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Reactive Intermediates\""
+        "Feeds directly into `chem.hal.sn1` and `chem.hal.sn2` (carbocation stability reasoning is central to SN1 mechanism/rate prediction), `chem.org.mechanisms` (radical and carbene intermediates recur throughout mechanistic organic chemistry), and `chem.poly.addition` (radical intermediates drive addition polymerization mechanisms)."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.org.electronic-effects"
+      ]
     },
     {
       "id": "asset.chem.org.mechanisms",
       "concept_id": "chem.org.mechanisms",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Organic Reaction Mechanisms\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Organic Reaction Mechanisms\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Organic Reaction Mechanisms\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "A curved arrow always shows the movement of an ELECTRON PAIR, never the movement of an atom — in SN2, the nucleophile's arrow starts at its lone pair and points TO the carbon (electrons attacking), while the leaving-group arrow starts at the C–X bond and points TO X (electrons departing with the leaving group), so the arrows describe electron flow, which is frequently in a different direction from where atoms appear to \"go\"; radical mechanisms require single-barbed FISH-HOOK arrows (moving one electron at a time), never the double-headed arrows of ionic mechanisms (which move electron PAIRS), because a radical step genuinely breaks/forms bonds one electron at a time; and pericyclic reactions (e.g., Diels-Alder) are CONCERTED — all bonds break and form SIMULTANEOUSLY in a single cyclic transition state with no ionic or radical intermediate ever forming, driven by orbital overlap (HOMO-LUMO interaction) rather than by any catalyst or charged species.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Organic Reaction Mechanisms\"",
-        "[TEMPLATE] Key idea 2 for \"Organic Reaction Mechanisms\"",
-        "[TEMPLATE] Key idea 3 for \"Organic Reaction Mechanisms\""
+        "Curved arrows are a bookkeeping notation for electron movement, not atom movement — a double-headed arrow tracks an electron PAIR (ionic/heterolytic mechanisms), while a fish-hook (single-barbed) arrow tracks a single electron (radical/homolytic mechanisms), and the two notations must never be interchanged. Every arrow must be anchored at an actual electron source (lone pair or bond) and terminate at an actual electron destination (new bond or departing species).",
+        "Not every organic reaction proceeds through a discrete ionic or radical intermediate — pericyclic reactions like the Diels-Alder cycloaddition are genuinely concerted, with all bonds breaking and forming simultaneously in a single cyclic transition state driven by orbital overlap, requiring neither a catalyst nor any ionic/radical intermediate at any point.",
+        "Core misconception to avoid: Always ask \"where do the electrons start (lone pair/bond) and where do they end up (new bond/departing species)?\" before drawing any arrow — never reason from \"where does the atom go?\""
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Organic Reaction Mechanisms\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "I draw the arrow from the carbon to the bromine because the bromide leaves",
+          "correction": "Always ask \"where do the electrons start (lone pair/bond) and where do they end up (new bond/departing species)?\" before drawing any arrow — never reason from \"where does the atom go?\""
+        },
+        {
+          "misconception": "arrow",
+          "correction": "Use fish-hook (single-barbed) arrows exclusively for radical/homolytic steps, and double-headed arrows exclusively for ionic/heterolytic (electron-pair) steps — never mix the two notations."
+        },
+        {
+          "misconception": "there must be a carbocation somewhere",
+          "correction": "Pericyclic reactions proceed through a single concerted transition state with no ionic or radical intermediate and no required catalyst — never assume every organic reaction needs an intermediate or catalytic activation."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Organic Reaction Mechanisms\""
+        "Demonstration 1 (SN2 arrow-pushing with explicit electron anchoring): Draw the SN2 arrows for Br⁻+CH₃Br step by step, naming the electron source and destination for each arrow before drawing it.",
+        "Demonstration 2 (fish-hook vs. double-headed contrast): Present the chlorine radical H-abstraction step with fish-hook arrows alongside an ionic step with double-headed arrows on the same bond type, isolating the electron-count distinction.",
+        "Demonstration 3 (Diels-Alder concerted transition state): Draw the full six-membered cyclic transition state explicitly, pointing out the absence of any isolable ionic or radical intermediate."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Organic Reaction Mechanisms\"",
+        "setup": "Draw the curved arrows for Br⁻ attacking CH₃Br, and explain where each arrow starts and ends.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (SN2 arrow-pushing with explicit electron anchoring): Draw the SN2 arrows for Br⁻+CH₃Br step by step, naming the electron source and destination for each arrow before drawing it.",
+          "Demonstration 2 (fish-hook vs. double-headed contrast): Present the chlorine radical H-abstraction step with fish-hook arrows alongside an ionic step with double-headed arrows on the same bond type, isolating the electron-count distinction.",
+          "Demonstration 3 (Diels-Alder concerted transition state): Draw the full six-membered cyclic transition state explicitly, pointing out the absence of any isolable ionic or radical intermediate."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Organic Reaction Mechanisms\""
+        "expected_outcome": "Student can (a) correctly draw ionic mechanism arrows anchored at genuine electron sources/destinations, (b) correctly use fish-hook notation for radical steps, (c) correctly identify pericyclic reactions as concerted with no intermediate."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit SN2 arrow-pushing with electron-source/destination naming at each step.",
+          "TA-2 (TELL): State the fish-hook-vs-double-headed arrow rule explicitly, anchored to electron count per step.",
+          "TA-3 (DO): Student draws arrows for an unfamiliar radical propagation step, choosing correct fish-hook notation.",
+          "TA-4 (TEST-THINKING): Present the Diels-Alder probe and ask the student to justify the absence of any ionic intermediate from the concerted mechanism."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Organic Reaction Mechanisms from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Draw the curved arrows for Br⁻ attacking CH₃Br, and explain where each arrow starts and ends.\"",
+          "FA-2: \"Draw the propagation step of chlorine radical abstracting H from methane.\"",
+          "FA-3: \"What ionic intermediate forms in the Diels-Alder reaction?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Organic Reaction Mechanisms\""
+        "mastery_signal": "Student can (a) correctly draw ionic mechanism arrows anchored at genuine electron sources/destinations, (b) correctly use fish-hook notation for radical steps, (c) correctly identify pericyclic reactions as concerted with no intermediate."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Organic Reaction Mechanisms\""
+        "Feeds directly into `chem.org.arrow-pushing` (fluent, correct arrow notation is the direct prerequisite skill), `chem.carb.aldehydes`, `chem.hyd.alkenes`, `chem.nitro.amines` (mechanism-based reasoning recurs across all these functional-group reaction chapters), and `chem.org.pericyclic` (extends the concerted-mechanism concept established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.org.reactive-intermediates"
@@ -7572,50 +7621,68 @@
     {
       "id": "asset.chem.org.qualitative-analysis",
       "concept_id": "chem.org.qualitative-analysis",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Qualitative Organic Analysis\".",
-      "concept_summary": "Lassaigne's test; Tollens', Fehling's, iodoform, Victor Meyer tests; functional group identification.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Qualitative Organic Analysis\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "A positive Baeyer's test (KMnO₄ decolorization) does NOT prove specifically an alkene — KMnO₄ is a strong oxidizing agent reacting with ANY oxidizable organic functionality (alkenes, alkynes, aldehydes), so a positive result means \"oxidizable functionality present,\" never \"alkene confirmed\" alone — confirming an alkene specifically requires Baeyer's PLUS ruling out aldehyde (negative Tollens') and alkyne (negative AgNO₃/NH₃ test); Fehling's and Tollens' tests are NOT interchangeable \"aldehyde detectors\" — Tollens' (Ag⁺, a stronger oxidant) detects BOTH aliphatic AND aromatic aldehydes, while Fehling's (Cu²⁺, a weaker oxidant) detects ONLY aliphatic aldehydes — benzaldehyde gives a NEGATIVE Fehling's test despite being a genuine aldehyde, making the positive-Tollens'/negative-Fehling's combination a specific diagnostic for aromatic aldehydes; and the iodoform test's positive-result yellow precipitate is NOT elemental iodine — it is CHI₃ (iodoform, triiodomethane), a pale yellow CRYSTALLINE SOLID with a distinctive antiseptic smell, genuinely distinct from iodine's orange-brown solution color — a solution merely turning orange (without the characteristic pale yellow crystalline precipitate) indicates residual/unreacted iodine, NOT a positive test.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Qualitative Organic Analysis\"",
-        "[TEMPLATE] Key idea 2 for \"Qualitative Organic Analysis\"",
-        "[TEMPLATE] Key idea 3 for \"Qualitative Organic Analysis\""
+        "A chemical test's positive result confirms only the specific underlying reactive property it actually tests for — Baeyer's test (KMnO₄ decolorization) confirms general oxidizability, a property shared by alkenes, alkynes, AND aldehydes, requiring additional confirmatory tests to pin down alkene specifically. Similarly, Tollens' and Fehling's tests, while both broadly \"aldehyde tests,\" use genuinely different-strength oxidants (Ag⁺ vs. Cu²⁺), giving them different scopes — Fehling's specifically fails for aromatic aldehydes like benzaldehyde, making the differential result itself diagnostically useful.",
+        "A test's reagent (what is added) and its diagnostic product (what forms as evidence of a positive result) are distinct chemical entities — the iodoform test's positive-result signature is specifically the pale yellow crystalline CHI₃ precipitate with its antiseptic smell, never the orange-brown color of the iodine reagent itself, which merely indicates unreacted excess reagent when observed alone.",
+        "Core misconception to avoid: A positive Baeyer's test confirms only \"oxidizable functionality present\" — confirming an alkene specifically requires additionally ruling out aldehydes and alkynes via separate, more specific tests."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Qualitative Organic Analysis\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "KMnO₄ decolouration = alkene.",
+          "correction": "A positive Baeyer's test confirms only \"oxidizable functionality present\" — confirming an alkene specifically requires additionally ruling out aldehydes and alkynes via separate, more specific tests."
+        },
+        {
+          "misconception": "all aldehydes are positive for both tests.",
+          "correction": "Tollens' detects all aldehydes (aliphatic and aromatic); Fehling's detects only aliphatic aldehydes — a positive Tollens'/negative Fehling's combination is itself a useful diagnostic for aromatic aldehydes, never treat the two tests as interchangeable."
+        },
+        {
+          "misconception": "the yellow colour is iodine.",
+          "correction": "The iodoform test's positive-result diagnostic is the pale yellow CRYSTALLINE PRECIPITATE (CHI₃) with its characteristic antiseptic smell — never the orange-brown color of iodine itself, which indicates only unreacted reagent, not a positive result."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Qualitative Organic Analysis\""
+        "Demonstration 1 (Baeyer's-test-positive functional-group list with acetaldehyde example): Present the explicit list of oxidizable groups, demonstrating acetaldehyde's positive result despite lacking a C=C bond.",
+        "Demonstration 2 (Tollens'/Fehling's oxidant-strength comparison with benzaldehyde example): Present the explicit Ag⁺-vs-Cu²⁺ comparison, deriving benzaldehyde's differential result.",
+        "Demonstration 3 (iodoform-test reagent-vs-product identification): Present the explicit CHI₃-vs-I₂ physical-appearance comparison, isolating the genuine diagnostic signature."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Qualitative Organic Analysis\"",
+        "setup": "Acetaldehyde decolourises KMnO₄ solution. Does this prove it has an alkene?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (Baeyer's-test-positive functional-group list with acetaldehyde example): Present the explicit list of oxidizable groups, demonstrating acetaldehyde's positive result despite lacking a C=C bond.",
+          "Demonstration 2 (Tollens'/Fehling's oxidant-strength comparison with benzaldehyde example): Present the explicit Ag⁺-vs-Cu²⁺ comparison, deriving benzaldehyde's differential result.",
+          "Demonstration 3 (iodoform-test reagent-vs-product identification): Present the explicit CHI₃-vs-I₂ physical-appearance comparison, isolating the genuine diagnostic signature."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Qualitative Organic Analysis\""
+        "expected_outcome": "Student can (a) correctly interpret a positive Baeyer's test as indicating oxidizable functionality, not specifically alkene, (b) correctly predict differential Tollens'/Fehling's results for aromatic aldehydes, (c) correctly identify the iodoform test's genuine diagnostic product."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit Baeyer's-test-positive functional-group list.",
+          "TA-2 (TELL): State the Tollens'/Fehling's differential-sensitivity distinction explicitly, anchored to the oxidant-strength comparison.",
+          "TA-3 (DO): Student identifies the correct diagnostic signature (product, not reagent color) for an unfamiliar qualitative test.",
+          "TA-4 (TEST-THINKING): Present the iodoform-test probe and ask the student to justify why an orange solution alone isn't a positive result."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Qualitative Organic Analysis from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Acetaldehyde decolourises KMnO₄ solution. Does this prove it has an alkene?\"",
+          "FA-2: \"Would benzaldehyde (PhCHO) give a positive Fehling's test?\"",
+          "FA-3: \"What is the yellow precipitate formed in the iodoform test? Is it iodine?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Qualitative Organic Analysis\""
+        "mastery_signal": "Student can (a) correctly interpret a positive Baeyer's test as indicating oxidizable functionality, not specifically alkene, (b) correctly predict differential Tollens'/Fehling's results for aromatic aldehydes, (c) correctly identify the iodoform test's genuine diagnostic product."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Qualitative Organic Analysis\""
+        "This concept has no direct KG unlocks but consolidates purification and characterization reasoning built across `chem.org.purification`, forming a capstone application to organic synthesis and structure-elucidation contexts."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.org.purification"
+      ]
     },
     {
       "id": "asset.chem.org.spectroscopy",
@@ -7750,48 +7817,64 @@
     {
       "id": "asset.chem.org.arrow-pushing",
       "concept_id": "chem.org.arrow-pushing",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Electron Flow and Curved Arrows\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Electron Flow and Curved Arrows\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Electron Flow and Arrow Notation\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "A curved arrow's TAIL must start at a specific ELECTRON PAIR (a lone pair or a bond), NEVER at an atom's nucleus — in proton transfer from H₃O⁺ to NH₃, the arrow starts at the O–H σ-bond (not the O atom or H atom) and points to N, with the O–H bond's electron pair moving to form the new N–H bond; a single lone pair (two electrons) can support only ONE arrow in ONE step — drawing two arrows from the same lone pair simultaneously would require FOUR electrons from a pair that only has two, producing an impossible electron count (e.g., a 5-bond oxygen) — two bond-forming events from one atom's lone pairs require either two SEPARATE steps or two SEPARATE, distinct lone pairs; and a mechanism cannot be verified as correct merely by \"looking right\" from pattern-matching — explicit FORMAL CHARGE CHECKING at every intermediate is required, since an incorrect arrow (e.g., reversed direction) produces an impossible formal charge (like a neutral carbon becoming 5-valent) that visual pattern-matching alone will not catch.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Electron Flow and Curved Arrows\"",
-        "[TEMPLATE] Key idea 2 for \"Electron Flow and Curved Arrows\"",
-        "[TEMPLATE] Key idea 3 for \"Electron Flow and Curved Arrows\""
+        "Curved arrows specifically track electron-pair movement — their tails must always be anchored at a genuine electron source (a lone pair or an existing bond), never at an atomic nucleus, since nuclei themselves do not move during electron redistribution. A single lone pair (exactly two electrons) can support exactly one arrow per mechanistic step — attempting to draw two arrows from the same lone pair would require nonexistent electrons, producing an impossible over-bonded atom.",
+        "A mechanism's correctness cannot be reliably judged by visual pattern-matching alone, since subtle errors (like a reversed arrow) can produce a diagram that superficially resembles a correct mechanism while actually violating valence/charge rules — explicit formal-charge computation at every intermediate is the rigorous, reliable verification method that catches such errors.",
+        "Core misconception to avoid: Always anchor a curved arrow's tail at a specific electron pair (a lone pair or an existing bond), never at an atom's nucleus — identify the exact electron source before drawing any arrow."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Electron Flow and Curved Arrows\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "send the electrons from carbon to oxygen",
+          "correction": "Always anchor a curved arrow's tail at a specific electron pair (a lone pair or an existing bond), never at an atom's nucleus — identify the exact electron source before drawing any arrow."
+        },
+        {
+          "misconception": "student draws two arrows from the same lone pair on oxygen.",
+          "correction": "One lone pair (two electrons) can support exactly one arrow (one bond-forming event) per mechanistic step — two simultaneous bond-forming events from the same atom require either two separate steps or two genuinely distinct lone pairs."
+        },
+        {
+          "misconception": "I know it's right because it looks right",
+          "correction": "Always verify a drawn mechanism via explicit formal-charge computation at each intermediate — never rely on visual \"looks right\" pattern-matching alone, since subtle arrow errors can produce impossible charges that only explicit checking catches."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Electron Flow and Curved Arrows\""
+        "Demonstration 1 (explicit electron-source identification for proton transfer): Present the explicit H₃O⁺-to-NH₃ mechanism, having the student identify and label the O–H bond as the electron source before drawing the arrow.",
+        "Demonstration 2 (impossible electron-count consequence of two arrows from one lone pair): Present the explicit (invalid) two-arrow attempt, deriving the impossible 5-bond oxygen result.",
+        "Demonstration 3 (deliberately flawed mechanism with formal-charge-check exercise): Present a plausible-looking but subtly incorrect mechanism, having the student compute formal charges to discover the hidden error."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Electron Flow and Curved Arrows\"",
+        "setup": "In the proton transfer from H₃O⁺ to NH₃, draw the arrow. Where exactly does it start?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (explicit electron-source identification for proton transfer): Present the explicit H₃O⁺-to-NH₃ mechanism, having the student identify and label the O–H bond as the electron source before drawing the arrow.",
+          "Demonstration 2 (impossible electron-count consequence of two arrows from one lone pair): Present the explicit (invalid) two-arrow attempt, deriving the impossible 5-bond oxygen result.",
+          "Demonstration 3 (deliberately flawed mechanism with formal-charge-check exercise): Present a plausible-looking but subtly incorrect mechanism, having the student compute formal charges to discover the hidden error."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Electron Flow and Curved Arrows\""
+        "expected_outcome": "Student can (a) correctly anchor every arrow tail at a genuine electron source, (b) correctly recognize the one-arrow-per-lone-pair limit, (c) correctly verify a mechanism's validity via explicit formal-charge computation."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit electron-source identification for the H₃O⁺-to-NH₃ proton transfer.",
+          "TA-2 (TELL): State the one-arrow-per-lone-pair limit explicitly, anchored to the impossible-electron-count demonstration.",
+          "TA-3 (DO): Student computes formal charges at each intermediate of an unfamiliar drawn mechanism to verify correctness.",
+          "TA-4 (TEST-THINKING): Present the deliberately flawed mechanism and ask the student to locate the error via formal-charge checking."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Electron Flow and Arrow Notation from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"In the proton transfer from H₃O⁺ to NH₃, draw the arrow. Where exactly does it start?\"",
+          "FA-2: \"Can an oxygen atom use its lone pair to simultaneously attack two electrophiles in one step?\"",
+          "FA-3: \"Draw the mechanism for the addition of HCN to acetaldehyde. Now calculate formal charges at each intermediate.\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Electron Flow and Curved Arrows\""
+        "mastery_signal": "Student can (a) correctly anchor every arrow tail at a genuine electron source, (b) correctly recognize the one-arrow-per-lone-pair limit, (c) correctly verify a mechanism's validity via explicit formal-charge computation."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Electron Flow and Curved Arrows\""
+        "This concept has no direct KG unlocks but consolidates mechanism reasoning built across `chem.org.mechanisms`, forming the capstone, universally-applicable arrow-notation skill underlying all subsequent organic reaction mechanism drawing."
       ],
       "prerequisite_review_triggers": [
         "chem.org.mechanisms"
@@ -7800,50 +7883,66 @@
     {
       "id": "asset.chem.org.pericyclic",
       "concept_id": "chem.org.pericyclic",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to evaluate \"Pericyclic Reactions\".",
-      "concept_summary": "Cycloadditions (Diels–Alder); electrocyclic; sigmatropic; Woodward–Hoffmann rules; thermal vs photochemical.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Pericyclic Reactions\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "[2+2] cycloadditions are NOT thermally allowed simply because \"both molecules have π-electrons\" — the Woodward-Hoffmann rule is [4n+2] thermal=allowed, [4n] thermal=forbidden, and [2+2]'s total 4 electrons in the cyclic transition state IS 4n (n=1), making it thermally FORBIDDEN — direct thermal cyclobutane formation from two ethene molecules does NOT occur; the [2+2] reaction CAN proceed photochemically instead (opposite selection rule under light); the Diels-Alder reaction genuinely DOES have a stereochemical requirement on the diene — the diene must adopt the S-CIS conformation (terminal carbons ~2.3Å apart, reachable by the dienophile), while the S-TRANS conformer's terminal carbons (~4.5Å apart) are physically too far to bond — cyclopentadiene, LOCKED in s-cis by its ring, is extremely reactive, while (E,E)-hexa-2,4-diene (which can access s-trans) reacts far less readily; and the endo Diels-Alder product is NOT thermodynamically more stable despite forming as the major (kinetic) product — endo actually has MORE steric strain (the EWG positioned syn to the remaining double bond) than exo, so endo is kinetically favored (via secondary orbital interactions accelerating its formation) while exo is thermodynamically favored — this is a classic kinetic-vs-thermodynamic-control distinction, never \"major product=more stable.\"",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Pericyclic Reactions\"",
-        "[TEMPLATE] Key idea 2 for \"Pericyclic Reactions\"",
-        "[TEMPLATE] Key idea 3 for \"Pericyclic Reactions\""
+        "Thermal pericyclic reaction allowedness is governed by the specific Woodward-Hoffmann [4n+2] (allowed) vs. [4n] (forbidden) electron-counting rule — \"having π-electrons\" alone is insufficient; the EXACT total count in the cyclic transition state determines allowedness, explaining why [2+2] is thermally forbidden despite superficially resembling the allowed [4+2] Diels-Alder. The Diels-Alder reaction additionally requires the diene to adopt s-cis conformation (a purely geometric constraint on terminal-carbon distance), explaining cyclopentadiene's exceptional reactivity (locked s-cis) versus dienes that can access the unreactive s-trans form.",
+        "The endo Diels-Alder product's status as the major product (kinetic control, via secondary-orbital-interaction-lowered transition-state energy) is independent of its thermodynamic stability (which is actually LOWER than exo, due to greater steric strain) — \"major product\" and \"more stable product\" are separate properties that need not coincide.",
+        "Core misconception to avoid: Always apply the specific [4n+2] (thermally allowed) vs. [4n] (thermally forbidden) electron-counting rule — never assume \"having π-electrons\" alone guarantees thermal allowedness."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Pericyclic Reactions\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "it should work because both have π-bonds",
+          "correction": "Always apply the specific [4n+2] (thermally allowed) vs. [4n] (thermally forbidden) electron-counting rule — never assume \"having π-electrons\" alone guarantees thermal allowedness."
+        },
+        {
+          "misconception": "any conjugated diene works",
+          "correction": "The Diels-Alder reaction requires the diene in s-cis conformation (terminal carbons ~2.3Å apart, reachable by the dienophile) — a diene locked or strongly biased toward s-trans reacts far more slowly, regardless of its electronic conjugation."
+        },
+        {
+          "misconception": "endo is more stable because it's the major product",
+          "correction": "The endo Diels-Alder product is the kinetically-favored major product (via secondary orbital interactions lowering its transition-state energy) but is thermodynamically LESS stable than exo (which has less steric strain) — never assume \"major product\" implies \"more stable product.\""
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Pericyclic Reactions\""
+        "Demonstration 2 (s-cis/s-trans terminal-carbon-distance diagram): Present the explicit distance diagram, deriving the geometric reactivity requirement for Diels-Alder.",
+        "Demonstration 3 (endo/exo kinetic-vs-thermodynamic energy diagram): Present the explicit transition-state and product-state energy comparison for endo and exo pathways."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Pericyclic Reactions\"",
+        "setup": "Can you heat two ethene molecules together to form cyclobutane directly? Why or why not?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 2 (s-cis/s-trans terminal-carbon-distance diagram): Present the explicit distance diagram, deriving the geometric reactivity requirement for Diels-Alder.",
+          "Demonstration 3 (endo/exo kinetic-vs-thermodynamic energy diagram): Present the explicit transition-state and product-state energy comparison for endo and exo pathways."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Pericyclic Reactions\""
+        "expected_outcome": "Student can (a) correctly apply the [4n+2]/[4n] rule to predict thermal pericyclic allowedness, (b) correctly assess diene reactivity from s-cis conformational accessibility, (c) correctly distinguish kinetically-favored from thermodynamically-favored Diels-Alder products."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit electron-counting computation for [4+2] vs. [2+2].",
+          "TA-2 (TELL): State the s-cis geometric requirement for Diels-Alder explicitly, anchored to the terminal-carbon-distance diagram.",
+          "TA-3 (DO): Student predicts endo/exo product ratios for an unfamiliar Diels-Alder reaction under kinetic vs. thermodynamic control.",
+          "TA-4 (TEST-THINKING): Present the endo-stability probe and ask the student to justify why the major product isn't necessarily the more stable one."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for expert-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Pericyclic Reactions from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Can you heat two ethene molecules together to form cyclobutane directly? Why or why not?\"",
+          "FA-2: \"Would (E,E)-hexa-2,4-diene react in a Diels-Alder reaction as readily as cyclopentadiene? Why?\"",
+          "FA-3: \"Is the endo product of cyclopentadiene+maleic anhydride the thermodynamically more stable product?\""
         ],
         "bloom_alignment": "evaluate",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Pericyclic Reactions\""
+        "mastery_signal": "Student can (a) correctly apply the [4n+2]/[4n] rule to predict thermal pericyclic allowedness, (b) correctly assess diene reactivity from s-cis conformational accessibility, (c) correctly distinguish kinetically-favored from thermodynamically-favored Diels-Alder products."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Pericyclic Reactions\""
+        "This concept has no direct KG unlocks but consolidates mechanism reasoning built across `chem.org.mechanisms`, forming the capstone application of concerted-mechanism and selection-rule reasoning to advanced synthesis contexts."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.org.mechanisms"
+      ]
     },
     {
       "id": "asset.chem.hyd.alkanes",
