@@ -8011,48 +8011,62 @@
     {
       "id": "asset.chem.hal.introduction",
       "concept_id": "chem.hal.introduction",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Haloalkanes and Haloarenes — Introduction\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Haloalkanes and Haloarenes — Introduction\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Haloalkanes and Haloarenes\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Haloalkane reactivity toward nucleophilic substitution is governed by C–X BOND STRENGTH (how easily it breaks — the kinetic barrier), not by bond polarity (the thermodynamic driving force) — C–F is the most polar but also the STRONGEST bond, making it the SLOWEST to react, while C–I is the weakest and most polarizable, making it the FASTEST (reactivity order I>Br>Cl>>F, opposite to the polarity order); haloarenes are dramatically LESS reactive than haloalkanes toward nucleophilic substitution, despite being \"activated\" — that activation refers specifically to electrophilic aromatic substitution, not nucleophilic substitution, since the halogen's lone pair delocalizes into the ring (resonance), giving the C–X bond partial double-bond character and making it genuinely harder to break; and \"insoluble\" in water does not mean zero interaction — haloalkanes retain a small but real solubility and can slowly undergo hydrolysis, since solubility and reactivity are distinct concepts that must not be conflated.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Haloalkanes and Haloarenes — Introduction\"",
-        "[TEMPLATE] Key idea 2 for \"Haloalkanes and Haloarenes — Introduction\"",
-        "[TEMPLATE] Key idea 3 for \"Haloalkanes and Haloarenes — Introduction\""
+        "Haloalkane reactivity toward nucleophilic substitution is governed by bond STRENGTH (the kinetic barrier — how easily the C–X bond breaks), not bond polarity (the thermodynamic driving force) — these two properties actually run in OPPOSITE directions across the halogen series, with C–F being simultaneously the most polar AND the strongest (hence slowest to react), while C–I is the least polar AND the weakest (hence fastest to react).",
+        "Aromatic rings' \"activation\" specifically refers to electrophilic aromatic substitution reactivity, not a universal reactivity boost — the same resonance delocalization that activates the ring for EAS actually strengthens the C–X bond in haloarenes, making them LESS reactive than haloalkanes toward nucleophilic substitution. Separately, \"insoluble in water\" describes low but genuinely nonzero solubility, not complete inertness — haloalkanes retain small solubility and can undergo slow hydrolysis, since solubility and reactivity are distinct properties.",
+        "Core misconception to avoid: Nucleophilic substitution rate for haloalkanes follows I>Br>Cl>>F, governed by bond strength/polarizability (kinetic factors), not by bond polarity (a thermodynamic factor) — the two properties are inversely related here."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Haloalkanes and Haloarenes — Introduction\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "fluorine is most electronegative so C–F is most reactive.",
+          "correction": "Nucleophilic substitution rate for haloalkanes follows I>Br>Cl>>F, governed by bond strength/polarizability (kinetic factors), not by bond polarity (a thermodynamic factor) — the two properties are inversely related here."
+        },
+        {
+          "misconception": "aromatic = activated = reactive.",
+          "correction": "Aromatic rings are activated specifically for electrophilic aromatic substitution — the same resonance effect that causes this activation makes the C–X bond in haloarenes genuinely LESS reactive toward nucleophilic substitution than the analogous haloalkane bond."
+        },
+        {
+          "misconception": "insoluble = zero interaction.",
+          "correction": "Haloalkanes have low but genuinely nonzero water solubility, and can undergo slow hydrolysis reactions with water despite that limited solubility — \"insoluble\" and \"unreactive\" are separate claims, neither of which is literally absolute."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Haloalkanes and Haloarenes — Introduction\""
+        "Demonstration 1 (bond-strength-vs-polarity comparison table): Build a table of C–X bond polarity and bond enthalpy values across F/Cl/Br/I, showing the two properties trend in opposite directions, and connecting bond enthalpy directly to observed substitution rates.",
+        "Demonstration 2 (chlorobenzene vs. chloroalkane resonance comparison): Present the resonance structure for chlorobenzene showing lone-pair delocalization into the ring, contrasted with a simple chloroalkane where no such delocalization is possible, connecting the difference to relative nucleophilic-substitution reactivity."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Haloalkanes and Haloarenes — Introduction\"",
+        "setup": "Does C–F react faster with NaOH than C–I under the same conditions?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (bond-strength-vs-polarity comparison table): Build a table of C–X bond polarity and bond enthalpy values across F/Cl/Br/I, showing the two properties trend in opposite directions, and connecting bond enthalpy directly to observed substitution rates.",
+          "Demonstration 2 (chlorobenzene vs. chloroalkane resonance comparison): Present the resonance structure for chlorobenzene showing lone-pair delocalization into the ring, contrasted with a simple chloroalkane where no such delocalization is possible, connecting the difference to relative nucleophilic-substitution reactivity."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Haloalkanes and Haloarenes — Introduction\""
+        "expected_outcome": "Student can (a) correctly predict haloalkane nucleophilic-substitution reactivity order using bond strength, not polarity, (b) correctly explain why haloarenes are less (not more) reactive than haloalkanes toward nucleophilic substitution, (c) correctly distinguish \"insoluble\" from \"completely unreactive\" for haloalkane-water interactions."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit bond-polarity-vs-bond-strength comparison table across the halogen series.",
+          "TA-2 (TELL): State explicitly that \"activated\" refers to a specific reaction type (EAS), immediately contrasted with haloarenes' reduced nucleophilic-substitution reactivity.",
+          "TA-3 (DO): Student predicts relative nucleophilic-substitution rates for a new set of haloalkanes using bond-strength reasoning.",
+          "TA-4 (TEST-THINKING): Present MC-3's CHCl₃ probe and ask the student to distinguish \"insoluble\" from \"completely unreactive.\""
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Haloalkanes and Haloarenes from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Does C–F react faster with NaOH than C–I under the same conditions?\"",
+          "FA-2: \"Does benzene readily undergo nucleophilic substitution?\"",
+          "FA-3: \"Does CHCl₃'s dipole moment affect its interaction with water at all?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Haloalkanes and Haloarenes — Introduction\""
+        "mastery_signal": "Student can (a) correctly predict haloalkane nucleophilic-substitution reactivity order using bond strength, not polarity, (b) correctly explain why haloarenes are less (not more) reactive than haloalkanes toward nucleophilic substitution, (c) correctly distinguish \"insoluble\" from \"completely unreactive\" for haloalkane-water interactions."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Haloalkanes and Haloarenes — Introduction\""
+        "Feeds directly into `chem.hal.cfcs` (CFC stability/reactivity directly applies the bond-strength reasoning established here), `chem.hal.haloarenes` (extends the resonance-strengthening argument), and `chem.hal.sn1`/`chem.hal.sn2` (mechanism-specific reactivity trends build directly on this foundational bond-strength-governs-rate principle)."
       ],
       "prerequisite_review_triggers": [
         "chem.hyd.alkanes"
@@ -8061,48 +8075,64 @@
     {
       "id": "asset.chem.hal.sn1",
       "concept_id": "chem.hal.sn1",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"SN1 Mechanism\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"SN1 Mechanism\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"SN1 Mechanism\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Theoretical SN1 predicts perfect 50:50 racemization (planar carbocation attacked equally from both faces), but real systems show a SLIGHT EXCESS OF INVERSION because ion pairing between the carbocation and the departing leaving group partially blocks one face — perfect racemization remains the correct exam-level simplified model, while slight inversion excess is the observed practical reality; SN1's rate law is rate=k[R–X] ONLY, because the rate-determining step (ionization) involves only the substrate breaking apart, with the nucleophile entering in a separate, fast, non-rate-determining second step — doubling nucleophile concentration has NO EFFECT on SN1 rate, in sharp contrast to SN2's rate=k[R–X][Nu]; and SN1 is only accessible to substrates capable of forming a sufficiently STABLE carbocation (tertiary, allylic, benzylic, or otherwise resonance-stabilized) — methyl and primary substrates cannot undergo SN1 at all (their carbocations are far too unstable to form), so \"SN1 is simpler, therefore always preferred\" is false; substrate structure gates which mechanism is even accessible.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"SN1 Mechanism\"",
-        "[TEMPLATE] Key idea 2 for \"SN1 Mechanism\"",
-        "[TEMPLATE] Key idea 3 for \"SN1 Mechanism\""
+        "SN1 proceeds via a two-step mechanism — a slow, rate-determining ionization (forming a planar carbocation) followed by fast nucleophilic capture. Because the nucleophile participates only in the fast second step, the overall rate law is rate=k[R–X] alone, independent of nucleophile concentration, in sharp contrast to SN2's bimolecular rate=k[R–X][Nu]. This mechanism is only accessible when the substrate can form a sufficiently stable carbocation (tertiary, allylic, benzylic) — methyl and primary substrates cannot undergo SN1 at all.",
+        "The idealized SN1 model predicts perfect 50:50 racemization from a fully-planar, symmetric carbocation, but real systems show a slight inversion excess due to residual ion pairing between the carbocation and the departing leaving group, which asymmetrically shields one face of the carbocation from nucleophilic attack.",
+        "Core misconception to avoid: SN1 gives predominantly racemic product with a slight inversion excess in practice (due to ion pairing) — perfect 50:50 is the simplified theoretical model, not an exceptionless law of real systems."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"SN1 Mechanism\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "SN1 = always exactly racemic.",
+          "correction": "SN1 gives predominantly racemic product with a slight inversion excess in practice (due to ion pairing) — perfect 50:50 is the simplified theoretical model, not an exceptionless law of real systems."
+        },
+        {
+          "misconception": "SN1 and SN2 both depend on the nucleophile concentration.",
+          "correction": "SN1 rate depends only on [R–X] (unimolecular, from the ionization rate-determining step) — never assume the nucleophile appears in the rate law just because it appears somewhere in the mechanism."
+        },
+        {
+          "misconception": "SN1 is simpler so it's always preferred.",
+          "correction": "SN1 requires a substrate capable of forming a reasonably stable carbocation (tertiary, allylic, benzylic, or resonance-stabilized) — it is not a universally-available \"simpler\" shortcut, and is mechanistically inaccessible for methyl/primary substrates."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"SN1 Mechanism\""
+        "Demonstration 1 (two-step mechanism with rate-determining step highlighted): Draw the SN1 energy diagram explicitly, labeling the ionization step as rate-determining and the capture step as fast, deriving rate=k[R–X] from this.",
+        "Demonstration 2 (carbocation-stability substrate gate): Compare a tertiary substrate (SN1 viable) against methyl iodide (SN1 inaccessible), grounded in explicit carbocation stability reasoning.",
+        "Demonstration 3 (ion-pairing stereochemistry refinement): Present the idealized 50:50 model alongside the real ion-paired slight-inversion-excess outcome, tied to solvent polarity and carbocation lifetime."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"SN1 Mechanism\"",
+        "setup": "Why might a real SN1 reaction show slightly more inversion than retention, rather than perfect 50:50?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (two-step mechanism with rate-determining step highlighted): Draw the SN1 energy diagram explicitly, labeling the ionization step as rate-determining and the capture step as fast, deriving rate=k[R–X] from this.",
+          "Demonstration 2 (carbocation-stability substrate gate): Compare a tertiary substrate (SN1 viable) against methyl iodide (SN1 inaccessible), grounded in explicit carbocation stability reasoning.",
+          "Demonstration 3 (ion-pairing stereochemistry refinement): Present the idealized 50:50 model alongside the real ion-paired slight-inversion-excess outcome, tied to solvent polarity and carbocation lifetime."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"SN1 Mechanism\""
+        "expected_outcome": "Student can (a) correctly explain the real slight-inversion-excess outcome from ion pairing, (b) correctly derive rate=k[R–X] from the rate-determining ionization step, (c) correctly assess carbocation-stability gating for SN1 accessibility."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the two-step SN1 energy diagram, labeling the rate-determining step explicitly.",
+          "TA-2 (TELL): State the carbocation-stability gate explicitly, anchored to the tertiary-vs-methyl substrate contrast.",
+          "TA-3 (DO): Student predicts SN1 rate law dependence for an unfamiliar substrate/nucleophile-concentration scenario.",
+          "TA-4 (TEST-THINKING): Present the ion-pairing probe and ask the student to justify the observed slight inversion excess from first principles."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing SN1 Mechanism from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Why might a real SN1 reaction show slightly more inversion than retention, rather than perfect 50:50?\"",
+          "FA-2: \"Does doubling the nucleophile concentration change the SN1 rate? Justify from the mechanism.\"",
+          "FA-3: \"Would SN1 occur with methyl iodide? Explain using carbocation stability.\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"SN1 Mechanism\""
+        "mastery_signal": "Student can (a) correctly explain the real slight-inversion-excess outcome from ion pairing, (b) correctly derive rate=k[R–X] from the rate-determining ionization step, (c) correctly assess carbocation-stability gating for SN1 accessibility."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"SN1 Mechanism\""
+        "Feeds directly into `chem.hal.elimination` (E1 elimination shares SN1's carbocation intermediate and rate-determining ionization step, requiring fluent reasoning about both established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.org.reactive-intermediates",
@@ -8112,48 +8142,64 @@
     {
       "id": "asset.chem.hal.sn2",
       "concept_id": "chem.hal.sn2",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"SN2 Mechanism\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"SN2 Mechanism\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"SN2 Mechanism\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "PURE SN2 gives complete stereochemical inversion (Walden inversion), but on SECONDARY substrates, especially in polar protic solvents, competing SN1 can contaminate the outcome with racemization, producing a partially-inverted (not perfectly inverted) product — clean inversion is guaranteed only for primary substrates with a strong nucleophile in polar aprotic solvent; nucleophilicity and basicity are DIFFERENT properties (basicity = thermodynamic affinity for H⁺; nucleophilicity = kinetic rate of attack on carbon), and in POLAR PROTIC solvents they can genuinely diverge — small hard anions (F⁻) are heavily H-bond-solvated and must shed that shell before attacking carbon (slow), while large soft anions (I⁻) are weakly solvated and attack readily (fast), so I⁻ is a better nucleophile than F⁻ in methanol despite being the weaker base; and SN2 is a ONE-STEP CONCERTED mechanism with exactly ONE transition state and ONE energy-diagram maximum, with NO intermediate and NO dip between two peaks — a two-hump SN2 energy diagram is a category error that wrongly implies a discrete intermediate exists.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"SN2 Mechanism\"",
-        "[TEMPLATE] Key idea 2 for \"SN2 Mechanism\"",
-        "[TEMPLATE] Key idea 3 for \"SN2 Mechanism\""
+        "SN2 proceeds via a single concerted transition state in which the nucleophile attacks from the face opposite the leaving group (backside attack), producing complete stereochemical inversion (Walden inversion) — but this clean outcome is guaranteed only under conditions that suppress competing SN1 (primary substrate, strong nucleophile, polar aprotic solvent); secondary substrates in polar protic solvents can show partial racemization from competing SN1.",
+        "Nucleophilicity (kinetic rate of carbon attack) and basicity (thermodynamic proton affinity) are distinct properties that diverge in polar protic solvents, where heavy H-bond solvation slows small hard anions relative to large soft ones. Mechanistically, SN2 has exactly one transition state and no intermediate — its energy profile has a single maximum, never two humps with a dip, since bond formation and bond breaking are genuinely simultaneous.",
+        "Core misconception to avoid: Clean, complete inversion is only guaranteed for primary substrates with a strong nucleophile in a polar aprotic solvent — secondary substrates in polar protic solvents can show partial racemization from competing SN1, never assume 100% inversion by default."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"SN2 Mechanism\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "SN2 always gives inversion.",
+          "correction": "Clean, complete inversion is only guaranteed for primary substrates with a strong nucleophile in a polar aprotic solvent — secondary substrates in polar protic solvents can show partial racemization from competing SN1, never assume 100% inversion by default."
+        },
+        {
+          "misconception": "basicity = nucleophilicity.",
+          "correction": "In polar protic solvents, nucleophilicity depends heavily on desolvation ease (favoring large, soft, weakly-solvated anions like I⁻) and can diverge from basicity order; in polar aprotic solvents, nucleophilicity tracks basicity closely — always specify solvent before ranking nucleophile strength."
+        },
+        {
+          "misconception": "SN2 has the nucleophile attacking and then the leaving group leaving — two steps, two peaks.",
+          "correction": "SN2 has exactly one transition state and one energy maximum, with bond formation and bond breaking occurring simultaneously — never draw a two-hump profile or an intermediate well for concerted SN2."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"SN2 Mechanism\""
+        "Demonstration 1 (primary vs. secondary substrate stereochemical outcome): Contrast clean inversion for a primary substrate in aprotic solvent against partial racemization for a secondary substrate in protic solvent.",
+        "Demonstration 2 (solvation-shell nucleophilicity argument): Present the explicit H-bond-solvation comparison between F⁻ and I⁻ in methanol, deriving the reversed nucleophilicity order from desolvation energy.",
+        "Demonstration 3 (side-by-side SN2/SN1 energy profiles): Draw both profiles explicitly, counting maxima/minima and connecting the count to intermediate presence/absence."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"SN2 Mechanism\"",
+        "setup": "Would SN2 on a secondary substrate in water give perfectly clean inversion? Explain.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (primary vs. secondary substrate stereochemical outcome): Contrast clean inversion for a primary substrate in aprotic solvent against partial racemization for a secondary substrate in protic solvent.",
+          "Demonstration 2 (solvation-shell nucleophilicity argument): Present the explicit H-bond-solvation comparison between F⁻ and I⁻ in methanol, deriving the reversed nucleophilicity order from desolvation energy.",
+          "Demonstration 3 (side-by-side SN2/SN1 energy profiles): Draw both profiles explicitly, counting maxima/minima and connecting the count to intermediate presence/absence."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"SN2 Mechanism\""
+        "expected_outcome": "Student can (a) correctly predict clean vs. contaminated stereochemical outcomes from substrate/solvent conditions, (b) correctly rank nucleophile strength given solvent type, (c) correctly draw a one-maximum, no-intermediate SN2 energy profile."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the primary-vs-secondary substrate stereochemical-outcome comparison explicitly.",
+          "TA-2 (TELL): State the nucleophilicity-vs-basicity distinction explicitly, anchored to the solvation-shell mechanism.",
+          "TA-3 (DO): Student predicts the dominant nucleophile in a new protic-vs-aprotic solvent scenario.",
+          "TA-4 (TEST-THINKING): Present the \"how many steps\" probe and ask the student to justify a one-hump energy profile from the concerted mechanism."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing SN2 Mechanism from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Would SN2 on a secondary substrate in water give perfectly clean inversion? Explain.\"",
+          "FA-2: \"Why is I⁻ a better nucleophile than F⁻ toward CH₃Br in methanol, despite being the weaker base?\"",
+          "FA-3: \"How many transition states and intermediates does SN2 have? Draw the energy profile.\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"SN2 Mechanism\""
+        "mastery_signal": "Student can (a) correctly predict clean vs. contaminated stereochemical outcomes from substrate/solvent conditions, (b) correctly rank nucleophile strength given solvent type, (c) correctly draw a one-maximum, no-intermediate SN2 energy profile."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"SN2 Mechanism\""
+        "Feeds directly into `chem.alc.alcohols` (SN2 is a key alcohol-synthesis route), `chem.hal.elimination` (SN2/E2 competition directly requires this mechanism's substrate/nucleophile/solvent reasoning), and `chem.hal.grignard` (nucleophilic substitution reasoning underlies Grignard reactivity patterns)."
       ],
       "prerequisite_review_triggers": [
         "chem.org.reactive-intermediates",
@@ -8163,48 +8209,64 @@
     {
       "id": "asset.chem.hal.elimination",
       "concept_id": "chem.hal.elimination",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Elimination Reactions\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Elimination Reactions\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Elimination Reactions\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "E2 elimination cannot remove just ANY β-hydrogen — it requires the leaving group and the β-hydrogen to be ANTI-PERIPLANAR (180° dihedral angle), a genuine geometric constraint that can make certain stereoisomers (e.g., a cis-disubstituted cyclohexane) structurally unable to achieve the required conformation for a given elimination product; Zaitsev's rule (most-substituted alkene favored) is NOT universal — with a BULKY base (e.g., KOtBu), steric hindrance prevents the base from easily approaching the more hindered internal β-hydrogens, so it preferentially removes the more accessible terminal β-hydrogen, giving the LESS substituted (Hofmann) product instead; and a strong, bulky BASE reacting with a hindered (especially tertiary) alkyl halide does NOT default to substitution — SN2 is often sterically blocked entirely at a tertiary carbon, and a bulky, poor nucleophile/strong base preferentially abstracts a β-hydrogen (E2) rather than attacking carbon, so \"strong base\" does not automatically imply \"substitution.\"",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Elimination Reactions\"",
-        "[TEMPLATE] Key idea 2 for \"Elimination Reactions\"",
-        "[TEMPLATE] Key idea 3 for \"Elimination Reactions\""
+        "E2 elimination is a concerted mechanism requiring the leaving group and the departing β-hydrogen to be anti-periplanar — a genuine geometric constraint that can make certain β-hydrogens (or entire stereoisomers) unable to participate in a given elimination, regardless of simple structural adjacency. Zaitsev's rule (most-substituted product favored) holds only when the base can freely access all β-hydrogens; a sufficiently bulky base like KOtBu is sterically blocked from the more hindered internal hydrogens and instead gives the Hofmann (least-substituted) product.",
+        "Basicity and nucleophilicity are distinct properties — a bulky, strong base can be simultaneously a poor nucleophile (unable to perform SN2 backside attack, especially at hindered carbons) and an effective proton abstractor, making elimination (E2) the dominant pathway with hindered substrates, contrary to a blanket \"strong base implies substitution\" assumption.",
+        "Core misconception to avoid: Always check the anti-periplanar geometric requirement (via Newman projection or chair conformation) before predicting which β-H is eliminated in E2 — never assume any structurally adjacent H is automatically removable."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Elimination Reactions\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "it removes the nearest H",
+          "correction": "Always check the anti-periplanar geometric requirement (via Newman projection or chair conformation) before predicting which β-H is eliminated in E2 — never assume any structurally adjacent H is automatically removable."
+        },
+        {
+          "misconception": "always gives the most substituted alkene",
+          "correction": "Check base bulk before applying Zaitsev's rule — small, unhindered bases favor the Zaitsev (most-substituted) product, while bulky bases like KOtBu favor the Hofmann (least-substituted) product via steric accessibility."
+        },
+        {
+          "misconception": "the base acts as a nucleophile and attacks the carbon",
+          "correction": "A bulky, strong base (poor nucleophile) reacting with a hindered (especially tertiary) substrate favors elimination (E2), not substitution — never assume \"strong base\" implies substitution by default."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Elimination Reactions\""
+        "Demonstration 1 (chair/Newman anti-periplanar analysis): Draw the explicit chair conformations for trans- and cis-1-bromo-2-methylcyclohexane, identifying which β-H is genuinely anti-periplanar to Br.",
+        "Demonstration 2 (Zaitsev-vs-Hofmann base-bulk comparison): Present the same substrate reacting with a small base (Zaitsev product) and a bulky base (Hofmann product) side by side.",
+        "Demonstration 3 (SN2-blockage-vs-E2-accessibility argument): Draw the explicit steric blockage of SN2 backside attack at a tertiary carbon, contrasted with the base's continued access to a proton for E2."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Elimination Reactions\"",
+        "setup": "In the E2 reaction of trans-1-bromo-2-methylcyclohexane with KOH, what is the product?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (chair/Newman anti-periplanar analysis): Draw the explicit chair conformations for trans- and cis-1-bromo-2-methylcyclohexane, identifying which β-H is genuinely anti-periplanar to Br.",
+          "Demonstration 2 (Zaitsev-vs-Hofmann base-bulk comparison): Present the same substrate reacting with a small base (Zaitsev product) and a bulky base (Hofmann product) side by side.",
+          "Demonstration 3 (SN2-blockage-vs-E2-accessibility argument): Draw the explicit steric blockage of SN2 backside attack at a tertiary carbon, contrasted with the base's continued access to a proton for E2."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Elimination Reactions\""
+        "expected_outcome": "Student can (a) correctly identify anti-periplanar β-hydrogens for E2 from conformational analysis, (b) correctly predict Zaitsev vs. Hofmann product from base bulk, (c) correctly predict elimination dominance for bulky bases with hindered substrates."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit chair-conformation anti-periplanar analysis for trans- and cis-1-bromo-2-methylcyclohexane.",
+          "TA-2 (TELL): State the Zaitsev-vs-Hofmann base-bulk rule explicitly, anchored to the steric-accessibility argument.",
+          "TA-3 (DO): Student predicts the major elimination product for an unfamiliar substrate/base combination.",
+          "TA-4 (TEST-THINKING): Present the tert-butyl bromide+KOtBu probe and ask the student to justify E2 dominance from steric SN2 blockage."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Elimination Reactions from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"In the E2 reaction of trans-1-bromo-2-methylcyclohexane with KOH, what is the product?\"",
+          "FA-2: \"What is the major product of treating 2-bromo-2-methylbutane with KOtBu?\"",
+          "FA-3: \"What happens when tert-butyl bromide reacts with KOtBu in ethanol?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Elimination Reactions\""
+        "mastery_signal": "Student can (a) correctly identify anti-periplanar β-hydrogens for E2 from conformational analysis, (b) correctly predict Zaitsev vs. Hofmann product from base bulk, (c) correctly predict elimination dominance for bulky bases with hindered substrates."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Elimination Reactions\""
+        "This concept has no direct KG unlocks but consolidates the SN1/SN2/E1/E2 mechanistic reasoning built across `chem.hal.sn1` and `chem.hal.sn2`, forming the capstone competition-reasoning skill for haloalkane reactivity."
       ],
       "prerequisite_review_triggers": [
         "chem.hal.sn1",
@@ -8214,48 +8276,64 @@
     {
       "id": "asset.chem.hal.haloarenes",
       "concept_id": "chem.hal.haloarenes",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Haloarenes\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Haloarenes\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Haloarenes\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Chlorobenzene does NOT undergo SN2 substitution — SN2 requires backside attack demanding sp³ geometry, but the aryl carbon is sp², embedded in the benzene π-system, making backside attack geometrically impossible (the nucleophile would need to pass through the ring); SN1 also fails (phenyl cation is far too unstable); the ONLY mechanism for aryl nucleophilic substitution is SNAr (addition-elimination through the Meisenheimer complex); halogens are ortho/para DIRECTORS but NOT activating — despite directing to o/p positions, halogens genuinely DEACTIVATE the ring overall (slower than benzene toward EAS) because the −I inductive effect withdraws electron density more than the +M resonance effect restores it at o/p — halogens are the unique exception where directing behavior (o/p) and rate effect (deactivating) diverge, unlike all other substituents where activation/deactivation and directing behavior correlate; and plain (unactivated) aryl halides like chlorobenzene do NOT undergo SNAr under ordinary nucleophilic-substitution conditions (NaOH, 50°C) — SNAr requires either a powerful EWG (like -NO₂) at ortho/para to stabilize the Meisenheimer complex by resonance, or extreme conditions (300°C, 300atm, the Dow phenol process) for genuinely unactivated substrates — the required conditions themselves diagnose whether a substrate is haloalkane-like (mild conditions suffice) or unactivated-haloarene-like (extreme conditions needed).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Haloarenes\"",
-        "[TEMPLATE] Key idea 2 for \"Haloarenes\"",
-        "[TEMPLATE] Key idea 3 for \"Haloarenes\""
+        "Nucleophilic substitution on aryl halides cannot proceed via SN2 (blocked by the sp² carbon's geometric incompatibility with backside attack) or SN1 (phenyl cation too unstable) — the only viable mechanism is SNAr, addition-elimination through a Meisenheimer complex. Halogens are simultaneously o/p directors (via +M resonance at those positions) and overall ring deactivators (via dominant −I inductive withdrawal), a unique decoupling of directing behavior from rate effect not seen in most other substituents.",
+        "SNAr's Meisenheimer complex intermediate requires stabilization (typically via strong EWGs like -NO₂ at ortho/para positions) to be energetically accessible under mild conditions — plain, unactivated aryl halides lack this stabilization and require genuinely extreme conditions to react at all, with the required conditions themselves serving as a diagnostic for substrate activation level.",
+        "Core misconception to avoid: SN2 (and SN1) cannot occur on aryl (sp²) carbons — nucleophilic substitution on aryl halides proceeds exclusively via SNAr (addition-elimination through the Meisenheimer complex), never via the alkyl-halide mechanisms."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Haloarenes\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "all C–Cl bonds react the same way with nucleophiles.",
+          "correction": "SN2 (and SN1) cannot occur on aryl (sp²) carbons — nucleophilic substitution on aryl halides proceeds exclusively via SNAr (addition-elimination through the Meisenheimer complex), never via the alkyl-halide mechanisms."
+        },
+        {
+          "misconception": "o/p directors activate the ring.",
+          "correction": "Halogens are o/p directors that genuinely DEACTIVATE the ring (slower than benzene) — never assume \"o/p director\" implies \"activating,\" since halogens are a specific, well-known exception to this usual correlation."
+        },
+        {
+          "misconception": "all aryl halides undergo SNAr.",
+          "correction": "SNAr proceeds under mild conditions only when strong EWGs stabilize the Meisenheimer complex — unactivated aryl halides require extreme conditions instead, never assume all aryl halides react equally readily under standard conditions."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Haloarenes\""
+        "Demonstration 1 (sp³-vs-sp² backside-accessibility geometric comparison): Present the explicit geometric comparison, deriving SN2's impossibility on aryl carbons.",
+        "Demonstration 2 (−I-vs-+M competing-effects diagram for halogens): Present both effects explicitly, deriving the simultaneous deactivation and o/p-directing behavior.",
+        "Demonstration 3 (Meisenheimer-complex energy comparison, EWG-activated vs. unactivated): Present both energy profiles explicitly, deriving the differing condition requirements."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Haloarenes\"",
+        "setup": "What does the SN2 mechanism require at the carbon centre in terms of geometry? Is an sp² ring carbon compatible with that requirement?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (sp³-vs-sp² backside-accessibility geometric comparison): Present the explicit geometric comparison, deriving SN2's impossibility on aryl carbons.",
+          "Demonstration 2 (−I-vs-+M competing-effects diagram for halogens): Present both effects explicitly, deriving the simultaneous deactivation and o/p-directing behavior.",
+          "Demonstration 3 (Meisenheimer-complex energy comparison, EWG-activated vs. unactivated): Present both energy profiles explicitly, deriving the differing condition requirements."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Haloarenes\""
+        "expected_outcome": "Student can (a) correctly rule out SN2/SN1 and identify SNAr as the only aryl-halide substitution mechanism, (b) correctly predict halogens' simultaneous o/p-directing and deactivating behavior, (c) correctly assess whether mild or extreme conditions are needed for a given aryl halide's SNAr reaction."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit sp³-vs-sp² backside-accessibility geometric comparison.",
+          "TA-2 (TELL): State the directing-vs-activating decoupling for halogens explicitly, anchored to the competing-effects diagram.",
+          "TA-3 (DO): Student predicts whether an unfamiliar aryl halide requires mild or extreme SNAr conditions based on EWG presence.",
+          "TA-4 (TEST-THINKING): Present the chlorobenzene-plus-NaOH probe and ask the student to justify why standard conditions fail."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Haloarenes from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"What does the SN2 mechanism require at the carbon centre in terms of geometry? Is an sp² ring carbon compatible with that requirement?\"",
+          "FA-2: \"If chlorobenzene is ortho/para directing, does it react faster or slower than benzene with Cl₂/FeCl₃?\"",
+          "FA-3: \"Will chlorobenzene react with NaOH(aq) at 50°C? What conditions does SNAr require?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Haloarenes\""
+        "mastery_signal": "Student can (a) correctly rule out SN2/SN1 and identify SNAr as the only aryl-halide substitution mechanism, (b) correctly predict halogens' simultaneous o/p-directing and deactivating behavior, (c) correctly assess whether mild or extreme conditions are needed for a given aryl halide's SNAr reaction."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Haloarenes\""
+        "This concept has no direct KG unlocks but consolidates arene and haloalkane-introduction reasoning built across `chem.hyd.arenes` and `chem.hal.introduction`, forming a capstone application to industrial synthesis (Dow phenol process) and pharmaceutical-chemistry contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.hyd.arenes",
@@ -8265,96 +8343,130 @@
     {
       "id": "asset.chem.hal.grignard",
       "concept_id": "chem.hal.grignard",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Grignard and Organolithium Reagents\".",
-      "concept_summary": "Preparation of RMgX and RLi; reactions with electrophiles; quenching; limitations.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Grignard and Organolithium Reagents\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Grignard reagents CANNOT be stored in or diluted with water/aqueous acid before workup — the Grignard (pKₐ of RH~50) INSTANTLY and COMPLETELY deprotonates water (pKₐ 15.7, K≈10³⁴), destroying the Grignard entirely (producing RH+Mg(OH)X) — the aqueous NH₄Cl workup happens strictly AFTER the main reaction is complete, to protonate the resulting alkoxide, never as a step compatible with an active Grignard reaction mixture; the Grignard's nucleophilic carbon attacks the ELECTROPHILIC CARBON of a carbonyl (C=O), NEVER the oxygen — despite oxygen bearing the δ− charge, a nucleophile (the Grignard's carbanion) is attracted to the electrophilic (δ+) carbon, not to another electron-rich center (like charges repel, opposite charges attract) — the oxygen becomes an alkoxide as a CONSEQUENCE of the carbon attack, never the site of attack itself; and adding Grignard to an ester does NOT stop at a ketone intermediate with one equivalent — the tetrahedral intermediate collapses, expelling methoxide and regenerating a carbonyl (now a ketone), which is MORE reactive than the original ester, so a SECOND equivalent of Grignard adds immediately, giving a TERTIARY ALCOHOL as the final product (after workup) — the ketone intermediate cannot be isolated under standard Grignard conditions, since it's consumed as fast as (or faster than) it forms.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Grignard and Organolithium Reagents\"",
-        "[TEMPLATE] Key idea 2 for \"Grignard and Organolithium Reagents\"",
-        "[TEMPLATE] Key idea 3 for \"Grignard and Organolithium Reagents\""
+        "Grignard reagents must remain strictly anhydrous throughout the reaction stage (destroyed instantly and completely by even trace water, via an essentially irreversible acid-base reaction) — the aqueous workup stage is strictly sequential, occurring only after the Grignard has already reacted with its intended electrophile. In carbonyl addition, the Grignard's nucleophilic carbon always attacks the electrophilic carbonyl carbon (never the oxygen), following standard electrostatic attraction logic (nucleophile to electrophile), with the oxygen's negative charge in the product being a consequence, not the site, of attack.",
+        "Grignard addition to an ester proceeds through a ketone intermediate that is inherently MORE reactive than the starting ester (lacking the ester's resonance stabilization), so this intermediate reacts immediately with a second equivalent of Grignard reagent (present in excess under standard conditions), giving a tertiary alcohol as the isolable final product — the ketone stage is never isolable under normal Grignard reaction conditions.",
+        "Core misconception to avoid: Grignard reagents must remain strictly anhydrous throughout the reaction stage — water is introduced only in the separate, subsequent workup stage, after the Grignard has already reacted with its intended electrophile and is no longer present as a free, basic species."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Grignard and Organolithium Reagents\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "it's okay, I'll just add water at the end anyway",
+          "correction": "Grignard reagents must remain strictly anhydrous throughout the reaction stage — water is introduced only in the separate, subsequent workup stage, after the Grignard has already reacted with its intended electrophile and is no longer present as a free, basic species."
+        },
+        {
+          "misconception": "attacks the oxygen because it's negative",
+          "correction": "The Grignard's nucleophilic carbanion carbon always attacks the electrophilic carbonyl carbon, never the oxygen — the oxygen becomes negatively charged (alkoxide) as a consequence of this attack, not as the site of attack."
+        },
+        {
+          "misconception": "first you get a ketone and then you stop",
+          "correction": "Grignard addition to an ester proceeds through an unisolable ketone intermediate directly to a tertiary alcohol final product (with 2 equivalents of Grignard consumed) — never expect to isolate the ketone stage under standard Grignard conditions."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Grignard and Organolithium Reagents\""
+        "Demonstration 1 (Grignard-plus-water equilibrium-constant computation): Compute the explicit K value for Grignard deprotonating water, quantifying the instant, complete destruction.",
+        "Demonstration 2 (carbonyl charge-distribution diagram with correct attack-site arrow): Present the explicit charge diagram with the curved arrow attacking carbon, reinforcing the electrostatic logic.",
+        "Demonstration 3 (two-addition ester-to-tertiary-alcohol mechanism): Present the explicit full mechanism, tracking the ketone intermediate's heightened reactivity at each stage."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Grignard and Organolithium Reagents\"",
+        "setup": "You accidentally add one drop of water to your Grignard solution before adding the carbonyl compound. What happens?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (Grignard-plus-water equilibrium-constant computation): Compute the explicit K value for Grignard deprotonating water, quantifying the instant, complete destruction.",
+          "Demonstration 2 (carbonyl charge-distribution diagram with correct attack-site arrow): Present the explicit charge diagram with the curved arrow attacking carbon, reinforcing the electrostatic logic.",
+          "Demonstration 3 (two-addition ester-to-tertiary-alcohol mechanism): Present the explicit full mechanism, tracking the ketone intermediate's heightened reactivity at each stage."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Grignard and Organolithium Reagents\""
+        "expected_outcome": "Student can (a) correctly distinguish the anhydrous reaction stage from the aqueous workup stage, (b) correctly draw nucleophilic attack at the carbonyl carbon, never oxygen, (c) correctly predict the tertiary-alcohol final product from ester-plus-excess-Grignard."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit Grignard-plus-water equilibrium-constant computation.",
+          "TA-2 (TELL): State the carbon-attack (never oxygen-attack) rule explicitly, anchored to the charge-distribution diagram.",
+          "TA-3 (DO): Student predicts the final product for an unfamiliar ester-plus-excess-Grignard reaction.",
+          "TA-4 (TEST-THINKING): Present the CH₃MgBr-plus-acetone probe and ask the student to justify carbon (not oxygen) as the attack site."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Grignard and Organolithium Reagents from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"You accidentally add one drop of water to your Grignard solution before adding the carbonyl compound. What happens?\"",
+          "FA-2: \"In the reaction of CH₃MgBr with acetone, which atom does the methyl carbanion attack?\"",
+          "FA-3: \"What is the product of treating methyl benzoate with 2 equivalents of CH₃MgBr?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Grignard and Organolithium Reagents\""
+        "mastery_signal": "Student can (a) correctly distinguish the anhydrous reaction stage from the aqueous workup stage, (b) correctly draw nucleophilic attack at the carbonyl carbon, never oxygen, (c) correctly predict the tertiary-alcohol final product from ester-plus-excess-Grignard."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Grignard and Organolithium Reagents\""
+        "This concept has no direct KG unlocks but consolidates SN2 reasoning built across `chem.hal.sn2`, forming a capstone application to multi-step organic synthesis and carbon-carbon-bond-formation contexts."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.hal.sn2"
+      ]
     },
     {
       "id": "asset.chem.hal.cfcs",
       "concept_id": "chem.hal.cfcs",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Polyhalogen Compounds and CFCs\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Polyhalogen Compounds and CFCs\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Polyhalogen Compounds and CFCs\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Fluorine-containing compounds do NOT necessarily deplete ozone just because fluorine is \"similar to chlorine\" — HFCs (hydrofluorocarbons, containing only fluorine, no chlorine) have essentially ZERO ozone depletion potential, because fluorine radicals react extremely rapidly with stratospheric water vapor to form stable HF (F•+H₂O→HF+OH•), which is NOT regenerated from reservoir species the way Cl• is — chlorine specifically is the ozone-depleting atom due to its distinct catalytic Cl/ClO cycle chemistry and reservoir-release mechanism, not a general \"halogen\" property; Cl• is NOT \"used up\" after destroying one ozone molecule — it is genuinely REGENERATED in the catalytic cycle (Cl•+O₃→ClO•+O₂, then ClO•+O→Cl•+O₂, net: O₃+O→2O₂ with Cl• unchanged), meaning a single Cl• atom destroys ozone repeatedly (~10⁵ times) before eventual termination into reservoir species — \"one CFC molecule destroys one O₃\" drastically underestimates the catalytic amplification; and CCl₄, despite having FOUR polar C–Cl bonds, is genuinely NONPOLAR (μ=0) — its perfect tetrahedral symmetry (4 equivalent C–Cl bonds at 109.5°) means the four individual bond-dipole vectors point toward the tetrahedron's vertices and EXACTLY CANCEL by symmetry — molecular polarity requires BOTH polar bonds AND an asymmetric arrangement; CCl₄ has the former but not the latter, identical logic to CO₂'s cancellation in its linear geometry.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Polyhalogen Compounds and CFCs\"",
-        "[TEMPLATE] Key idea 2 for \"Polyhalogen Compounds and CFCs\"",
-        "[TEMPLATE] Key idea 3 for \"Polyhalogen Compounds and CFCs\""
+        "A halogen's specific atmospheric ozone-depletion behavior depends on its actual reaction pathway once released as a radical, not merely its halogen-category membership — chlorine radicals participate in a genuine catalytic cycle (Cl•+O₃→ClO•+O₂, then ClO•+O→Cl•+O₂, net O₃+O→2O₂ with Cl• regenerated), allowing repeated ozone destruction (~10⁵ times per atom), while fluorine radicals form stable, non-regenerated HF, giving HFCs essentially zero ozone depletion potential.",
+        "Molecular polarity depends on the vector sum of all individual bond dipoles, not simply the count or presence of polar bonds — CCl₄'s perfect tetrahedral symmetry causes its four polar C–Cl bond dipoles to exactly cancel, producing a net nonpolar molecule despite every individual bond being genuinely polar.",
+        "Core misconception to avoid: Ozone depletion potential depends on a halogen's specific atmospheric chemistry (whether it forms a catalytically-active, reservoir-releasable species), not merely its halogen-category membership — HFCs (fluorine only) have essentially zero ODP, genuinely different from CFCs (chlorine-containing)."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Polyhalogen Compounds and CFCs\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "F is a halogen like Cl, so HFCs also cause ozone depletion.",
+          "correction": "Ozone depletion potential depends on a halogen's specific atmospheric chemistry (whether it forms a catalytically-active, reservoir-releasable species), not merely its halogen-category membership — HFCs (fluorine only) have essentially zero ODP, genuinely different from CFCs (chlorine-containing)."
+        },
+        {
+          "misconception": "Cl• attacks ozone and then it's gone — consumed.",
+          "correction": "Cl• acts as a genuine catalyst in ozone destruction — regenerated in the second mechanistic step after being consumed in the first, allowing a single Cl• atom to destroy ozone repeatedly (~10⁵ times) before eventual termination, never assume \"one CFC destroys one O₃.\""
+        },
+        {
+          "misconception": "four C–Cl bonds must add up to a dipole.",
+          "correction": "Molecular polarity requires computing the VECTOR SUM of all bond dipoles — a molecule with multiple polar bonds can still be overall nonpolar if symmetric geometry causes the individual dipole vectors to cancel, as in CCl₄."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Polyhalogen Compounds and CFCs\""
+        "Demonstration 1 (F•-vs-Cl• stratospheric-fate comparison): Present both radical fates explicitly, deriving the ODP difference from the differing reaction pathways.",
+        "Demonstration 2 (full Cl/ClO catalytic cycle diagram): Present the explicit two-step cycle with Cl• tracked through both steps, deriving net-zero consumption.",
+        "Demonstration 3 (CCl₄ tetrahedral vector-sum diagram): Present the explicit bond-dipole vector diagram, deriving the exact cancellation from symmetric geometry."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Polyhalogen Compounds and CFCs\"",
+        "setup": "HFCs contain only fluorine, no chlorine. Do they deplete ozone?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (F•-vs-Cl• stratospheric-fate comparison): Present both radical fates explicitly, deriving the ODP difference from the differing reaction pathways.",
+          "Demonstration 2 (full Cl/ClO catalytic cycle diagram): Present the explicit two-step cycle with Cl• tracked through both steps, deriving net-zero consumption.",
+          "Demonstration 3 (CCl₄ tetrahedral vector-sum diagram): Present the explicit bond-dipole vector diagram, deriving the exact cancellation from symmetric geometry."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Polyhalogen Compounds and CFCs\""
+        "expected_outcome": "Student can (a) correctly distinguish fluorine's and chlorine's differing ozone-depletion potential from their specific atmospheric chemistry, (b) correctly explain Cl•'s catalytic (regenerated) role in ozone destruction, (c) correctly predict CCl₄'s nonpolarity from vector-sum cancellation."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit F•-vs-Cl• stratospheric-fate comparison.",
+          "TA-2 (TELL): State the catalytic (regenerated, never consumed) nature of Cl• explicitly, anchored to the full cycle diagram.",
+          "TA-3 (DO): Student computes the vector sum for an unfamiliar symmetric polyhalogenated molecule to predict overall polarity.",
+          "TA-4 (TEST-THINKING): Present the ClO•-fate probe and ask the student to justify why Cl• is catalytic, not consumed."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Polyhalogen Compounds and CFCs from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"HFCs contain only fluorine, no chlorine. Do they deplete ozone?\"",
+          "FA-2: \"After Cl• reacts with O₃ to give ClO• and O₂, what happens to the ClO•?\"",
+          "FA-3: \"Draw the tetrahedral structure of CCl₄ and add the bond dipole vectors. What is their vector sum?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Polyhalogen Compounds and CFCs\""
+        "mastery_signal": "Student can (a) correctly distinguish fluorine's and chlorine's differing ozone-depletion potential from their specific atmospheric chemistry, (b) correctly explain Cl•'s catalytic (regenerated) role in ozone destruction, (c) correctly predict CCl₄'s nonpolarity from vector-sum cancellation."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Polyhalogen Compounds and CFCs\""
+        "This concept has no direct KG unlocks but consolidates haloalkane-introduction reasoning built across `chem.hal.introduction`, forming a capstone application to environmental and atmospheric chemistry contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.hal.introduction"
