@@ -7658,98 +7658,129 @@
     {
       "id": "asset.chem.hyd.alkanes",
       "concept_id": "chem.hyd.alkanes",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Alkanes\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Alkanes\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Alkanes\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Alkanes undergo free-radical halogenation via a three-stage chain mechanism (initiation: X₂ homolytically breaks into X• radicals, forming NO product yet; propagation: two repeating steps, the SECOND of which — R•+X₂→R–X+X• — actually forms the organic product; termination: radical-radical combination), with chlorination's LOW selectivity and bromination's HIGH selectivity explained by transition-state timing (Cl–H bond formation is exothermic with an early, reactant-like transition state that barely discriminates between C–H bond types; Br–H bond formation is endothermic with a late, product-like transition state that strongly favors the more stable radical); and \"free rotation\" around C–C single bonds means no barrier PREVENTS rotation, not that all conformations are equally stable — staggered ethane is genuinely ~12 kJ/mol more stable than eclipsed (torsional strain), even though interconversion between them is essentially instantaneous at room temperature.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Alkanes\"",
-        "[TEMPLATE] Key idea 2 for \"Alkanes\"",
-        "[TEMPLATE] Key idea 3 for \"Alkanes\""
+        "Alkane free-radical halogenation proceeds through initiation (generating X• radicals, no product yet), propagation (a repeating two-step cycle where the SECOND step genuinely forms the organic product R–X), and termination (radical-radical combination, ending chains). The relative selectivity of different halogens is explained by transition-state timing: less reactive radicals (like Br•) react through later, more product-like transition states that strongly favor forming the most stable possible radical intermediate, making them more selective; more reactive radicals (like Cl•) react through earlier, less discriminating transition states, making them less selective.",
+        "\"Free rotation\" around C–C single bonds means no prohibitive energy barrier blocks rotation — genuinely distinct from C=C double bonds, where rotation would require breaking the pi bond and is truly restricted. However, \"free\" doesn't mean all rotational positions are equally stable — ethane's staggered conformation is measurably lower in energy than eclipsed, creating a real, quantifiable preference even though rotation between conformations remains extremely fast.",
+        "Core misconception to avoid: Initiation generates radicals with no product formed; propagation (specifically its second step) is where the organic product R–X is actually formed, repeatedly, in a self-sustaining chain."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Alkanes\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "initiation gives the product.",
+          "correction": "Initiation generates radicals with no product formed; propagation (specifically its second step) is where the organic product R–X is actually formed, repeatedly, in a self-sustaining chain."
+        },
+        {
+          "misconception": "chlorine is more reactive and selective.",
+          "correction": "Selectivity is governed by reactivity and transition-state timing, not electronegativity — the LESS reactive radical (Br•, endothermic abstraction, late TS) is MORE selective; the MORE reactive radical (Cl•, exothermic abstraction, early TS) is LESS selective."
+        },
+        {
+          "misconception": "free rotation means no preference.",
+          "correction": "Free rotation means rotation isn't blocked by a prohibitive energy barrier, not that all resulting conformations are equally stable — genuine energy differences (like staggered vs. eclipsed) can and do exist even for \"freely rotating\" bonds."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Alkanes\""
+        "Demonstration 1 (mechanism step-by-step tracing): Walk through the complete methane chlorination mechanism, having students identify exactly which species are present at each step and pinpoint the first appearance of CH₃Cl.",
+        "Demonstration 2 (selectivity reaction-coordinate comparison): Present side-by-side energy diagrams for chlorination and bromination H-abstraction, connecting TS position (early vs. late) to the resulting selectivity difference."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Alkanes\"",
+        "setup": "Which step of the free-radical chain mechanism actually forms the product R–X?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (mechanism step-by-step tracing): Walk through the complete methane chlorination mechanism, having students identify exactly which species are present at each step and pinpoint the first appearance of CH₃Cl.",
+          "Demonstration 2 (selectivity reaction-coordinate comparison): Present side-by-side energy diagrams for chlorination and bromination H-abstraction, connecting TS position (early vs. late) to the resulting selectivity difference."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Alkanes\""
+        "expected_outcome": "Student can (a) correctly identify the propagation step (not initiation) as where product forms, (b) correctly explain bromination's higher selectivity using TS-timing reasoning, not electronegativity, (c) correctly distinguish \"free rotation is possible\" from \"conformations are equally stable.\""
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the full mechanism step-by-step trace, explicitly marking where product first forms.",
+          "TA-2 (TELL): State the transition-state-timing explanation for selectivity explicitly, contrasted directly with the (incorrect) electronegativity-based intuition.",
+          "TA-3 (DO): Student predicts relative selectivity for a new halogenation scenario using reactivity/TS-timing reasoning.",
+          "TA-4 (TEST-THINKING): Present MC-3's staggered-vs-eclipsed probe and ask the student to reconcile \"free rotation\" with a genuine energy preference."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Alkanes from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Which step of the free-radical chain mechanism actually forms the product R–X?\"",
+          "FA-2: \"Which gives a more product distribution of isomers: monochlorination or monobromination of butane?\"",
+          "FA-3: \"Is the staggered conformation of ethane more or less stable than the eclipsed? By how much?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Alkanes\""
+        "mastery_signal": "Student can (a) correctly identify the propagation step (not initiation) as where product forms, (b) correctly explain bromination's higher selectivity using TS-timing reasoning, not electronegativity, (c) correctly distinguish \"free rotation is possible\" from \"conformations are equally stable.\""
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Alkanes\""
+        "Feeds directly into `chem.hal.introduction` (halogenation chemistry directly extends this mechanism), `chem.hyd.alkenes` (contrasts alkane's free single-bond rotation with alkene's restricted double-bond rotation), `chem.hyd.arenes`, `chem.hyd.conformations` (directly develops the staggered/eclipsed energy analysis introduced in MC-3), and `chem.hyd.petroleum`."
       ],
       "prerequisite_review_triggers": [
-        "chem.org.iupac"
+        "chem.org.iupac",
+        "chem.org.hybridization"
       ]
     },
     {
       "id": "asset.chem.hyd.alkenes",
       "concept_id": "chem.hyd.alkenes",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Alkenes\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Alkenes\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Alkenes\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Markovnikov's rule is not an arbitrary mnemonic but a direct consequence of carbocation stability — H⁺ adds to the alkene carbon that generates the MORE STABLE carbocation (e.g., the secondary over the primary from propene+HBr), and Br⁻ then attacks that more stable carbocation, so \"H goes to the carbon with more Hs\" is only a correct SUMMARY, never a substitute for the underlying mechanism, which correctly predicts outcomes even where the mnemonic fails (vinyl systems, 1,2-shifts); Br₂ addition to an alkene proceeds via a bromonium-ion intermediate that BRIDGES both carbons, sterically blocking same-face attack, so Br⁻ can only attack from the OPPOSITE face — addition is genuinely ANTI, never syn, meaning cis-alkenes give the racemic (d,l) dibromide pair, not the meso compound; and hydroboration (B adds to the LESS substituted carbon, giving anti-Markovnikov alcohol after oxidation) and oxymercuration (Hg activates the alkene, water attacks the MORE substituted carbon, giving Markovnikov alcohol) are genuinely OPPOSITE regiochemical outcomes from similarly-named \"alkene hydration\" methods, never interchangeable.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Alkenes\"",
-        "[TEMPLATE] Key idea 2 for \"Alkenes\"",
-        "[TEMPLATE] Key idea 3 for \"Alkenes\""
+        "Markovnikov's rule is a direct consequence of carbocation stability in electrophilic addition — H⁺ adds to whichever alkene carbon generates the more stable carbocation, and the nucleophile then attacks that carbocation. This mechanistic reasoning, not the surface mnemonic alone, correctly predicts outcomes even in cases (vinyl systems, rearrangements) where the simple mnemonic fails.",
+        "Br₂ addition proceeds through a bridging bromonium ion that physically blocks same-face attack, forcing genuinely anti addition (never syn). Hydroboration and oxymercuration are two structurally distinct hydration methods with opposite regiochemical outcomes — hydroboration places OH at the less substituted carbon (anti-Markovnikov, via a concerted transition state), while oxymercuration places OH at the more substituted carbon (Markovnikov, via a mercurinium-ion-like intermediate).",
+        "Core misconception to avoid: Always derive the major product from carbocation stability (draw both possible carbocations, identify the more stable one) — treat \"H goes to the carbon with more Hs\" only as a shortcut summary that follows from this mechanism, never as an independent rule."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Alkenes\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "H goes to the one with more Hs",
+          "correction": "Always derive the major product from carbocation stability (draw both possible carbocations, identify the more stable one) — treat \"H goes to the carbon with more Hs\" only as a shortcut summary that follows from this mechanism, never as an independent rule."
+        },
+        {
+          "misconception": "both Br atoms come from the same side",
+          "correction": "Br₂ addition to alkenes is ANTI (via the bridging bromonium ion), never syn — always predict stereochemistry from this bridged-intermediate geometry."
+        },
+        {
+          "misconception": "use hydroboration",
+          "correction": "For Markovnikov alcohol, use oxymercuration; for anti-Markovnikov alcohol, use hydroboration — always check the desired regiochemistry before selecting a method, never assume interchangeability."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Alkenes\""
+        "Demonstration 1 (carbocation-stability derivation of Markovnikov's rule): Draw both possible carbocations for propene+HBr explicitly, deriving the major product from relative stability rather than the mnemonic.",
+        "Demonstration 2 (bromonium-ion bridging and anti addition): Draw the explicit bromonium-ion intermediate for cis-but-2-ene+Br₂, showing the structural basis for anti (not syn) addition and the resulting d,l pair.",
+        "Demonstration 3 (hydroboration vs. oxymercuration two-column comparison): Present both methods side by side for the same alkene, tracking which carbon receives OH in each case."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Alkenes\"",
+        "setup": "Why does HBr add to propene to give 2-bromopropane? Explain via mechanism.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (carbocation-stability derivation of Markovnikov's rule): Draw both possible carbocations for propene+HBr explicitly, deriving the major product from relative stability rather than the mnemonic.",
+          "Demonstration 2 (bromonium-ion bridging and anti addition): Draw the explicit bromonium-ion intermediate for cis-but-2-ene+Br₂, showing the structural basis for anti (not syn) addition and the resulting d,l pair.",
+          "Demonstration 3 (hydroboration vs. oxymercuration two-column comparison): Present both methods side by side for the same alkene, tracking which carbon receives OH in each case."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Alkenes\""
+        "expected_outcome": "Student can (a) correctly derive the Markovnikov product from carbocation-stability reasoning, (b) correctly predict anti-addition stereochemistry for Br₂ addition, (c) correctly select hydroboration or oxymercuration for a target regiochemistry."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit carbocation-stability derivation for propene+HBr.",
+          "TA-2 (TELL): State the anti-addition rule for Br₂ explicitly, anchored to the bromonium-ion bridging structure.",
+          "TA-3 (DO): Student selects hydroboration or oxymercuration for a target regiochemistry on an unfamiliar alkene.",
+          "TA-4 (TEST-THINKING): Present the cis-but-2-ene+Br₂ stereochemistry probe and ask the student to justify the d,l (not meso) outcome from the bromonium mechanism."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Alkenes from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Why does HBr add to propene to give 2-bromopropane? Explain via mechanism.\"",
+          "FA-2: \"Adding Br₂ to cis-but-2-ene gives which stereochemical product — meso or d,l pair?\"",
+          "FA-3: \"To convert 1-methylcyclohexene to 1-methylcyclohexanol (Markovnikov), which method do you use?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Alkenes\""
+        "mastery_signal": "Student can (a) correctly derive the Markovnikov product from carbocation-stability reasoning, (b) correctly predict anti-addition stereochemistry for Br₂ addition, (c) correctly select hydroboration or oxymercuration for a target regiochemistry."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Alkenes\""
+        "Feeds directly into `chem.alc.epoxides` (epoxide-forming reactions build on alkene addition mechanisms), `chem.hyd.alkynes` (addition mechanisms extend directly to triple bonds), and `chem.poly.addition` (addition polymerization directly requires fluent carbocation/radical addition mechanism reasoning established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.hyd.alkanes",
@@ -7759,48 +7790,64 @@
     {
       "id": "asset.chem.hyd.alkynes",
       "concept_id": "chem.hyd.alkynes",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Alkynes\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Alkynes\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Alkynes\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Lindlar's catalyst (syn addition, both H atoms delivered from the same catalyst surface) gives the CIS-alkene, while Na/liquid NH₃ (anti addition, dissolving-metal mechanism via a vinyl radical) gives the TRANS-alkene — this is the OPPOSITE pairing from a common inversion error; Markovnikov hydration of a terminal alkyne (H₂SO₄/HgSO₄ catalyst) gives a KETONE (methyl ketone), never an aldehyde — OH adds to the MORE substituted carbon, and the resulting enol tautomerizes to the ketone; only anti-Markovnikov hydroboration (9-BBN or disiamylborane, then H₂O₂/NaOH) gives the aldehyde from a terminal alkyne; and terminal alkynes ARE genuinely acidic (pKₐ≈25 for the sp C–H), despite C–H bonds not commonly being thought of as acidic — this pKₐ is low enough that strong, non-basic-oxygen bases like NaNH₂ (conjugate acid NH₃, pKₐ≈38) readily deprotonate them (ΔpKₐ=13, K≈10¹³), though weaker bases like NaOH (conjugate acid water, pKₐ=15.7, weaker than the alkyne itself) cannot.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Alkynes\"",
-        "[TEMPLATE] Key idea 2 for \"Alkynes\"",
-        "[TEMPLATE] Key idea 3 for \"Alkynes\""
+        "Alkyne partial-hydrogenation stereochemistry follows directly from mechanism — Lindlar's catalyst delivers both hydrogens simultaneously from the same catalyst face (syn addition, cis product), while Na/liquid NH₃'s stepwise radical mechanism gives anti addition (trans product). Alkyne hydration regiochemistry likewise depends on method — Markovnikov hydration (H₂SO₄/HgSO₄) places OH at the more substituted carbon, giving a ketone after tautomerization, while anti-Markovnikov hydroboration gives the aldehyde instead.",
+        "Acidity is a matter of degree, quantified by pKₐ, not a binary property reserved for O–H/N–H bonds — a terminal alkyne's sp-hybridized C–H bond (pKₐ≈25) is substantially more acidic than typical alkane C–H bonds due to high s-character, making it deprotonatable by sufficiently strong bases (NaNH₂, n-BuLi) though not by weaker bases like hydroxide.",
+        "Core misconception to avoid: Lindlar's catalyst gives syn addition (cis product); Na/liquid NH₃ gives anti addition (trans product) — use the \"Lindlar=syn=cis\" hook, but always be able to derive it from the underlying mechanism if memory fails."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Alkynes\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Lindlar gives trans-but-2-ene because it blocks the second addition.",
+          "correction": "Lindlar's catalyst gives syn addition (cis product); Na/liquid NH₃ gives anti addition (trans product) — use the \"Lindlar=syn=cis\" hook, but always be able to derive it from the underlying mechanism if memory fails."
+        },
+        {
+          "misconception": "the OH goes to the terminal C → hexanal",
+          "correction": "Markovnikov hydration (H₂SO₄/HgSO₄) of a terminal alkyne gives a methyl KETONE (OH at the more substituted carbon, then tautomerization); only anti-Markovnikov hydroboration gives the ALDEHYDE — always check which hydration method is specified before predicting the carbonyl product."
+        },
+        {
+          "misconception": "NaNH₂ is a base but C–H bonds can't be deprotonated",
+          "correction": "Terminal alkyne C–H bonds are genuinely acidic (pKₐ≈25, due to sp-hybridization) — deprotonatable by strong bases like NaNH₂ or n-BuLi, but not by weaker bases like NaOH; never treat all C–H bonds as categorically non-acidic."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Alkynes\""
+        "Demonstration 1 (Lindlar-vs-Na/NH₃ mechanism comparison): Draw both partial-hydrogenation mechanisms explicitly for but-2-yne, deriving cis/trans outcome from syn/anti addition.",
+        "Demonstration 2 (Markovnikov-vs-anti-Markovnikov hydration comparison): Present both hydration methods for the same terminal alkyne side by side, deriving ketone vs. aldehyde product from regiochemistry.",
+        "Demonstration 3 (pKₐ/K computation for terminal alkyne deprotonation): Compute the explicit K value for NaNH₂ and NaOH reacting with a terminal alkyne, determining which base succeeds."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Alkynes\"",
+        "setup": "What is the product of treating but-2-yne with Lindlar's catalyst + H₂?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (Lindlar-vs-Na/NH₃ mechanism comparison): Draw both partial-hydrogenation mechanisms explicitly for but-2-yne, deriving cis/trans outcome from syn/anti addition.",
+          "Demonstration 2 (Markovnikov-vs-anti-Markovnikov hydration comparison): Present both hydration methods for the same terminal alkyne side by side, deriving ketone vs. aldehyde product from regiochemistry.",
+          "Demonstration 3 (pKₐ/K computation for terminal alkyne deprotonation): Compute the explicit K value for NaNH₂ and NaOH reacting with a terminal alkyne, determining which base succeeds."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Alkynes\""
+        "expected_outcome": "Student can (a) correctly predict cis/trans alkene product from Lindlar vs. Na/NH₃ mechanism, (b) correctly predict ketone/aldehyde product from Markovnikov vs. anti-Markovnikov hydration, (c) correctly assess whether a given base can deprotonate a terminal alkyne from pKₐ comparison."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit Lindlar-vs-Na/NH₃ mechanism comparison for but-2-yne.",
+          "TA-2 (TELL): State the Markovnikov-vs-anti-Markovnikov hydration regiochemistry rule explicitly, anchored to the side-by-side product comparison.",
+          "TA-3 (DO): Student computes the K value for a base+terminal-alkyne deprotonation and predicts whether it succeeds.",
+          "TA-4 (TEST-THINKING): Present the hex-1-yne hydration probe and ask the student to justify the ketone (not aldehyde) product from Markovnikov regiochemistry."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Alkynes from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"What is the product of treating but-2-yne with Lindlar's catalyst + H₂?\"",
+          "FA-2: \"What is the product of reacting hex-1-yne with dilute H₂SO₄ and HgSO₄ catalyst?\"",
+          "FA-3: \"Can NaNH₂ deprotonate a terminal alkyne? Write the equation and justify with pKₐ.\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Alkynes\""
+        "mastery_signal": "Student can (a) correctly predict cis/trans alkene product from Lindlar vs. Na/NH₃ mechanism, (b) correctly predict ketone/aldehyde product from Markovnikov vs. anti-Markovnikov hydration, (c) correctly assess whether a given base can deprotonate a terminal alkyne from pKₐ comparison."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Alkynes\""
+        "This concept has no direct KG unlocks but consolidates addition-mechanism and acid-base reasoning built across `chem.hyd.alkenes`, `chem.hal.sn1`/`chem.hal.sn2`, forming a capstone application of stereochemistry and regiochemistry reasoning to triple-bond systems."
       ],
       "prerequisite_review_triggers": [
         "chem.hyd.alkenes"
@@ -7809,48 +7856,62 @@
     {
       "id": "asset.chem.hyd.arenes",
       "concept_id": "chem.hyd.arenes",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Benzene and Arenes\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Benzene and Arenes\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Benzene and Arenes\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Electrophilic aromatic substitution (EAS) reactions require generating a genuinely reactive electrophile FIRST — in nitration, HNO₃ alone is too weak an electrophile, and concentrated H₂SO₄ acts catalytically to protonate it, generating the actual attacking species, the nitronium ion NO₂⁺; directing effects work by DEACTIVATION, not attraction — meta directors withdraw electron density from ortho/para positions more strongly than from meta, so the electrophile attacks meta not because it's attracted there, but because meta is comparatively the LEAST deactivated (least hostile) position available; and Friedel-Crafts alkylation proceeds through a genuine carbocation intermediate, which — unlike SN2's inversion-without-rearrangement mechanism — readily rearranges from an unstable primary carbocation to a more stable secondary or tertiary one before attacking the ring, meaning the alkyl group actually attached often differs from the alkyl halide's original structure.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Benzene and Arenes\"",
-        "[TEMPLATE] Key idea 2 for \"Benzene and Arenes\"",
-        "[TEMPLATE] Key idea 3 for \"Benzene and Arenes\""
+        "Electrophilic aromatic substitution requires a genuinely reactive electrophile, often generated through a preliminary activation step rather than being present directly in the starting reagent — nitration's true electrophile (NO₂⁺) is generated by H₂SO₄'s catalytic protonation of the comparatively weak HNO₃. Directing effects on a substituted ring work through relative deactivation — substituent groups withdraw or donate electron density unevenly across ring positions, and the electrophile attacks wherever that unevenness leaves the LEAST hostile (least deactivated, or most activated) position available, not wherever it's actively \"attracted.\"",
+        "Friedel-Crafts alkylation proceeds through a genuine carbocation electrophile, fundamentally different from SN2's direct, rearrangement-free mechanism — because carbocations readily rearrange toward greater stability (primary to secondary to tertiary) before the actual ring-attacking step, the alkyl group that ends up attached to the ring can differ from what the starting alkyl halide's structure alone would suggest.",
+        "Core misconception to avoid: The actual electrophile in nitration is NO₂⁺ (the nitronium ion), generated by H₂SO₄'s catalytic protonation of HNO₃ — not HNO₃ itself."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Benzene and Arenes\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "HNO₃ adds –NO₂ directly.",
+          "correction": "The actual electrophile in nitration is NO₂⁺ (the nitronium ion), generated by H₂SO₄'s catalytic protonation of HNO₃ — not HNO₃ itself."
+        },
+        {
+          "misconception": "meta directors attract electrophiles to meta.",
+          "correction": "Meta directors deactivate the entire ring, but especially strongly at ortho/para — meta substitution occurs because it's the least deactivated (not most attractive) position available."
+        },
+        {
+          "misconception": "the alkyl group just attaches directly without rearrangement.",
+          "correction": "Friedel-Crafts alkylation's carbocation intermediate can and often does rearrange to a more stable carbocation before ring attack — predict the actual product from the REARRANGED carbocation, not the original alkyl halide's unrearranged structure."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Benzene and Arenes\""
+        "Demonstration 1 (nitronium ion generation mechanism): Walk through the explicit two-step H₂SO₄-protonation sequence generating NO₂⁺ from HNO₃, connecting each step to why H₂SO₄ is catalytically required.",
+        "Demonstration 2 (Friedel-Crafts rearrangement product prediction): Present the propyl chloride/AlCl₃ Friedel-Crafts alkylation, having students predict the actual major product by first identifying the initial (unstable) carbocation and its rearranged (stable) form."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Benzene and Arenes\"",
+        "setup": "What is the role of H₂SO₄ in nitration?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (nitronium ion generation mechanism): Walk through the explicit two-step H₂SO₄-protonation sequence generating NO₂⁺ from HNO₃, connecting each step to why H₂SO₄ is catalytically required.",
+          "Demonstration 2 (Friedel-Crafts rearrangement product prediction): Present the propyl chloride/AlCl₃ Friedel-Crafts alkylation, having students predict the actual major product by first identifying the initial (unstable) carbocation and its rearranged (stable) form."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Benzene and Arenes\""
+        "expected_outcome": "Student can (a) correctly identify NO₂⁺ (not HNO₃) as nitration's true electrophile, (b) correctly explain meta-directing behavior using relative deactivation, not attraction, (c) correctly predict rearranged Friedel-Crafts alkylation products from an unstable starting carbocation."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit NO₂⁺-generation mechanism from HNO₃ and H₂SO₄.",
+          "TA-2 (TELL): State the relative-deactivation directing-effect principle explicitly, contrasted directly with the (incorrect) attraction framing.",
+          "TA-3 (DO): Student predicts the actual Friedel-Crafts alkylation product for a primary alkyl halide, accounting for carbocation rearrangement.",
+          "TA-4 (TEST-THINKING): Present MC-2's meta-director probe and ask the student to justify meta substitution using relative, not absolute, deactivation."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Benzene and Arenes from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"What is the role of H₂SO₄ in nitration?\"",
+          "FA-2: \"Does a meta director increase electron density at meta, or is meta simply less deactivated?\"",
+          "FA-3: \"What happens to a primary carbocation generated in Friedel-Crafts alkylation?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Benzene and Arenes\""
+        "mastery_signal": "Student can (a) correctly identify NO₂⁺ (not HNO₃) as nitration's true electrophile, (b) correctly explain meta-directing behavior using relative deactivation, not attraction, (c) correctly predict rearranged Friedel-Crafts alkylation products from an unstable starting carbocation."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Benzene and Arenes\""
+        "Feeds directly into `chem.alc.phenols` (phenol's EAS reactivity directly builds on directing-effect reasoning), `chem.hal.haloarenes` (haloarene EAS chemistry extends this mechanism), `chem.hyd.polycyclic` (extends aromatic reactivity to fused systems), `chem.nitro.diazonium`, and `chem.nitro.nitro-compounds` (nitro-group EAS chemistry directly applies the electrophile-generation and directing-effect principles established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.org.aromaticity",
@@ -7860,48 +7921,64 @@
     {
       "id": "asset.chem.hyd.conformations",
       "concept_id": "chem.hyd.conformations",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Conformational Analysis\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Conformational Analysis\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Conformational Analysis\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The eclipsed conformation is LESS stable, not more, despite \"more overlap sounds like more stability\" — the front/rear C–H bonds at 0° dihedral are NOT bonding to each other (bond overlap stabilizes only genuine covalent bonds), and the proximity instead creates torsional (Pitzer) strain via van der Waals repulsion between the bonding electrons of the C–H bonds — staggered conformation, minimizing this repulsion, is genuinely more stable; a Newman projection correctly shows 4 total bonds per carbon (3 explicit lines from the front carbon's central dot, or from the rear carbon's circle edge, PLUS the implied C–C bond represented by the viewing axis itself, i.e., the dot/circle pair) — this is CORRECT bookkeeping, not an error, since the C–C bond is the projection's viewing direction, never drawn as an explicit additional line; and after a cyclohexane ring flip, EVERY axial position becomes equatorial and every equatorial position becomes axial — substituents' spatial relationship to the ring axis completely INVERTS (never \"stays the same\"), so a substituent that was axial (typically less stable, e.g., methyl) becomes equatorial (typically more stable) after the flip, with the energy difference between the two resulting conformers defined as that substituent's A-value.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Conformational Analysis\"",
-        "[TEMPLATE] Key idea 2 for \"Conformational Analysis\"",
-        "[TEMPLATE] Key idea 3 for \"Conformational Analysis\""
+        "The eclipsed conformation's instability arises from non-bonded H-H proximity producing destabilizing van der Waals/torsional (Pitzer) strain, never from any bonding-like overlap stabilization — genuine covalent bond overlap and non-bonded atomic proximity are fundamentally different situations with opposite energetic consequences. A Newman projection's total bond count per carbon (4, consistent with valence) requires including the implied C–C bond (represented by the dot/circle viewing-axis convention) alongside the 3 explicitly drawn lines.",
+        "A cyclohexane ring flip completely inverts every substituent's specific axial/equatorial assignment, even though the ring's overall axial/equatorial position INVENTORY (always 6 of each) remains structurally unchanged — this distinction between \"total inventory conserved\" and \"each specific substituent's position conserved\" is essential for correctly predicting conformational stability changes.",
+        "Core misconception to avoid: Eclipsed conformation's close non-bonded H-H proximity produces destabilizing van der Waals/torsional (Pitzer) strain, never bonding-like stabilization — staggered conformation, minimizing this repulsion, is genuinely more stable."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Conformational Analysis\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "more overlap = more stable.",
+          "correction": "Eclipsed conformation's close non-bonded H-H proximity produces destabilizing van der Waals/torsional (Pitzer) strain, never bonding-like stabilization — staggered conformation, minimizing this repulsion, is genuinely more stable."
+        },
+        {
+          "misconception": "front carbon has three bonds shown plus the bond to rear carbon = four.",
+          "correction": "Count each carbon's total bonds as the 3 explicitly drawn lines PLUS the 1 implied C–C bond (represented by the dot/circle, not drawn as a line) = 4 total, consistent with carbon's valence."
+        },
+        {
+          "misconception": "the ring just changes shape but the substituents stay in the same place.",
+          "correction": "A ring flip completely inverts every substituent's specific axial/equatorial assignment — never assume \"the total count stays the same\" implies \"each substituent's position stays the same.\""
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Conformational Analysis\""
+        "Demonstration 1 (van der Waals repulsion argument for eclipsed vs. staggered): Present the explicit repulsion-based energy comparison, deriving staggered's greater stability.",
+        "Demonstration 2 (Newman-projection dot/circle implied-bond convention diagram): Present the explicit convention diagram, walking through why the C–C bond is represented implicitly.",
+        "Demonstration 3 (before/after ring-flip position-tracking diagram for methylcyclohexane): Present the explicit diagram tracking the methyl group's specific axial-to-equatorial inversion."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Conformational Analysis\"",
+        "setup": "If the H atoms on front and rear carbons point toward each other, does their proximity stabilise or destabilise the molecule?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (van der Waals repulsion argument for eclipsed vs. staggered): Present the explicit repulsion-based energy comparison, deriving staggered's greater stability.",
+          "Demonstration 2 (Newman-projection dot/circle implied-bond convention diagram): Present the explicit convention diagram, walking through why the C–C bond is represented implicitly.",
+          "Demonstration 3 (before/after ring-flip position-tracking diagram for methylcyclohexane): Present the explicit diagram tracking the methyl group's specific axial-to-equatorial inversion."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Conformational Analysis\""
+        "expected_outcome": "Student can (a) correctly attribute eclipsed conformation instability to non-bonded repulsion, (b) correctly count all 4 bonds per carbon in a Newman projection including the implied C–C bond, (c) correctly track complete axial/equatorial inversion through a ring flip."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit van der Waals repulsion argument for eclipsed vs. staggered ethane.",
+          "TA-2 (TELL): State the Newman-projection implied-bond convention explicitly, anchored to the dot/circle diagram.",
+          "TA-3 (DO): Student tracks a substituent's specific axial/equatorial position through a ring flip for an unfamiliar substituted cyclohexane.",
+          "TA-4 (TEST-THINKING): Present the Newman-projection bond-count probe and ask the student to justify the correct total of 4 bonds per carbon."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Conformational Analysis from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"If the H atoms on front and rear carbons point toward each other, does their proximity stabilise or destabilise the molecule?\"",
+          "FA-2: \"Count the bonds on the front carbon in the Newman projection. How many do you see? How many bonds does carbon have in total?\"",
+          "FA-3: \"If the methyl group on C1 was axial before a ring flip, where is it after the flip?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Conformational Analysis\""
+        "mastery_signal": "Student can (a) correctly attribute eclipsed conformation instability to non-bonded repulsion, (b) correctly count all 4 bonds per carbon in a Newman projection including the implied C–C bond, (c) correctly track complete axial/equatorial inversion through a ring flip."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Conformational Analysis\""
+        "This concept has no direct KG unlocks but consolidates alkane reasoning built across `chem.hyd.alkanes`, forming a capstone application to stereochemistry and substituted-cyclohexane conformational-analysis contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.hyd.alkanes"
@@ -7910,48 +7987,64 @@
     {
       "id": "asset.chem.hyd.petroleum",
       "concept_id": "chem.hyd.petroleum",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Petroleum Refining\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Petroleum Refining\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Petroleum Refining\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "In a fractionating column, heavy fractions collect at the BOTTOM, not the top, and the mechanism is NOT \"denser gases rise\" — the column separates by CONDENSATION TEMPERATURE, not density-based rising: vapors rise and cool as they ascend, and a fraction condenses (becomes liquid) specifically at the level where the column temperature matches its BOILING POINT — the HEAVIEST fractions (highest bp) condense FIRST, near the hot BOTTOM, while the LIGHTEST fractions (lowest bp) remain vapor longest, condensing only near the cool TOP; cracking is NOT the same process as distillation despite both being petroleum-refining steps — distillation is a PHYSICAL separation (no bonds broken, molecules already present are merely sorted by boiling point), while cracking is a genuine CHEMICAL REACTION (C–C covalent bonds are broken in large alkanes to produce smaller, NEW molecules — alkenes plus shorter alkanes) — cracking is performed AFTER distillation, on specific fractions, to increase yield of more useful lighter hydrocarbons; and octane number is a RELATIVE PERFORMANCE SCALE (comparing knocking tendency against a reference iso-octane/n-heptane mixture), NEVER a literal carbon-atom count — a fuel with octane number 95 does NOT contain molecules with 95 carbons; it knocks at the same rate as a 95%-iso-octane/5%-n-heptane reference mixture, saying nothing directly about the fuel's actual molecular composition (which is typically a complex mixture of C₅–C₁₂ hydrocarbons plus additives).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Petroleum Refining\"",
-        "[TEMPLATE] Key idea 2 for \"Petroleum Refining\"",
-        "[TEMPLATE] Key idea 3 for \"Petroleum Refining\""
+        "Fractionating-column separation is governed by boiling-point-matched condensation as vapors rise and cool — heavier (higher-boiling) fractions condense at the hot bottom, lighter (lower-boiling) fractions condense at the cool top, the opposite arrangement a naive density-based \"heavy sinks, light rises\" intuition would predict. Distillation (physical, no bonds broken) and cracking (a genuine chemical reaction breaking C–C bonds to create new, smaller molecules) are sequential, fundamentally different processing steps, never interchangeable \"separation\" descriptions.",
+        "Octane number is a relative anti-knock performance scale, calibrated against a standardized iso-octane/n-heptane reference mixture — it describes comparative combustion behavior, never a literal structural count, as directly demonstrated by iso-octane's own octane number of 100 despite having only 8 carbons.",
+        "Core misconception to avoid: Fractionating-column separation is governed by boiling-point-matched condensation temperature — heavy (high-bp) fractions condense at the BOTTOM (hot zone), light (low-bp) fractions condense at the TOP (cool zone) — never reason from a simple density-based rising/sinking mechanism."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Petroleum Refining\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "heavy things float to the top.",
+          "correction": "Fractionating-column separation is governed by boiling-point-matched condensation temperature — heavy (high-bp) fractions condense at the BOTTOM (hot zone), light (low-bp) fractions condense at the TOP (cool zone) — never reason from a simple density-based rising/sinking mechanism."
+        },
+        {
+          "misconception": "cracking and distillation both separate crude oil.",
+          "correction": "Distillation physically separates existing molecules by boiling point (no bonds broken); cracking chemically breaks C–C bonds to create new, smaller molecules — always treat these as sequential, categorically different processes, never as synonymous \"separation\" steps."
+        },
+        {
+          "misconception": "95 octane = C₉₅ molecules.",
+          "correction": "Octane number is a comparative anti-knock performance scale (calibrated against an iso-octane/n-heptane reference mixture), never a direct carbon-atom count or structural descriptor of the fuel."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Petroleum Refining\""
+        "Demonstration 1 (vapor-rising/cooling/condensation-point diagram): Present the explicit temperature-gradient diagram, deriving each fraction's condensation position from its boiling point.",
+        "Demonstration 2 (physical-vs-chemical process comparison for distillation and cracking): Present both processes explicitly side by side, isolating bond-breaking as the key discriminator.",
+        "Demonstration 3 (iso-octane reference-compound carbon-count demonstration): Present the explicit iso-octane example, directly disproving the literal-carbon-count interpretation of octane number."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Petroleum Refining\"",
+        "setup": "In which direction does density work in a gas — do denser gases rise or sink?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (vapor-rising/cooling/condensation-point diagram): Present the explicit temperature-gradient diagram, deriving each fraction's condensation position from its boiling point.",
+          "Demonstration 2 (physical-vs-chemical process comparison for distillation and cracking): Present both processes explicitly side by side, isolating bond-breaking as the key discriminator.",
+          "Demonstration 3 (iso-octane reference-compound carbon-count demonstration): Present the explicit iso-octane example, directly disproving the literal-carbon-count interpretation of octane number."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Petroleum Refining\""
+        "expected_outcome": "Student can (a) correctly predict fraction condensation position from boiling point, (b) correctly distinguish distillation (physical) from cracking (chemical), (c) correctly interpret octane number as a comparative performance scale."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit vapor-rising/cooling/condensation-point diagram.",
+          "TA-2 (TELL): State the physical-vs-chemical distinction between distillation and cracking explicitly, anchored to the bond-breaking comparison.",
+          "TA-3 (DO): Student predicts the condensation position for an unfamiliar fraction given its boiling point.",
+          "TA-4 (TEST-THINKING): Present the octane-number probe and ask the student to justify why iso-octane's rating of 100 doesn't mean 100 carbons."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Petroleum Refining from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"In which direction does density work in a gas — do denser gases rise or sink?\"",
+          "FA-2: \"Does cracking require a new bond to be broken, or does it just separate molecules that were already mixed?\"",
+          "FA-3: \"Regular petrol has octane number 95. Does that mean it contains only molecules with 95 carbons?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Petroleum Refining\""
+        "mastery_signal": "Student can (a) correctly predict fraction condensation position from boiling point, (b) correctly distinguish distillation (physical) from cracking (chemical), (c) correctly interpret octane number as a comparative performance scale."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Petroleum Refining\""
+        "This concept has no direct KG unlocks but consolidates alkane reasoning built across `chem.hyd.alkanes`, forming a capstone application to industrial and environmental petroleum-chemistry contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.hyd.alkanes"
@@ -7960,48 +8053,64 @@
     {
       "id": "asset.chem.hyd.polycyclic",
       "concept_id": "chem.hyd.polycyclic",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Polycyclic and Heterocyclic Systems\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Polycyclic and Heterocyclic Systems\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Polycyclic and Heterocyclic Systems\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Pyridine's nitrogen does NOT donate its lone pair into the ring like pyrrole's does — pyridine's nitrogen lone pair sits in an sp² orbital, IN-PLANE with the ring (orthogonal to the p_z π-system), structurally UNABLE to conjugate into the aromatic system, while pyrrole's nitrogen lone pair sits in a p_z orbital, PARALLEL to the ring π-system, genuinely ABLE to conjugate — \"nitrogen donates\" is correct for pyrrole but categorically wrong for pyridine, where the lone pair is instead available for basicity (acting as a Lewis base toward external electrophiles), never ring conjugation; naphthalene's α and β positions are NOT equally activated toward electrophilic aromatic substitution despite the molecule's overall symmetry — bromination occurs preferentially at C1 (α) rather than C2 (β) because the C1-attack Wheland intermediate preserves ONE ring's full aromaticity (3 resonance structures keep an intact aromatic ring), while C2 attack disrupts BOTH rings simultaneously, producing a less-stabilized intermediate; and furan is NOT less reactive than benzene toward EAS just because it's \"less aromatic\" (lower resonance/stabilization energy) — EAS reactivity depends on the ring's AVAILABLE π-ELECTRON DENSITY for donation to the electrophile (a KINETIC property), genuinely distinct from thermodynamic aromatic stability — furan's lone pair donates very effectively per electron, making it MORE reactive than benzene toward EAS despite having lower overall aromatic stabilization.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Polycyclic and Heterocyclic Systems\"",
-        "[TEMPLATE] Key idea 2 for \"Polycyclic and Heterocyclic Systems\"",
-        "[TEMPLATE] Key idea 3 for \"Polycyclic and Heterocyclic Systems\""
+        "Whether a heteroatom's lone pair conjugates into an aromatic ring depends specifically on its orbital geometry — pyridine's in-plane sp² lone pair cannot conjugate (available instead for basicity), while pyrrole's parallel p_z lone pair genuinely does conjugate, contributing to the aromatic π-system. Naphthalene's fused-ring structure creates genuinely non-equivalent α and β positions for electrophilic attack — α (C1) attack produces a more stabilized Wheland intermediate that preserves one ring's full aromaticity, while β (C2) attack disrupts both rings.",
+        "A ring's thermodynamic aromatic stability (a starting-material property) and its kinetic EAS reactivity (governed by available π-electron density for donation) are independent properties that can point in opposite directions — furan, despite lower overall aromatic stabilization than benzene, is genuinely MORE reactive toward EAS due to its highly effective lone-pair donation per available electron.",
+        "Core misconception to avoid: Always check the specific orbital (in-plane sp² vs. parallel p_z) housing a heteroatom's lone pair before assuming it conjugates into the ring — pyridine's lone pair cannot conjugate (available instead for basicity), while pyrrole's genuinely does."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Polycyclic and Heterocyclic Systems\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "nitrogen is always electron-donating.",
+          "correction": "Always check the specific orbital (in-plane sp² vs. parallel p_z) housing a heteroatom's lone pair before assuming it conjugates into the ring — pyridine's lone pair cannot conjugate (available instead for basicity), while pyrrole's genuinely does."
+        },
+        {
+          "misconception": "it's symmetric so it doesn't matter",
+          "correction": "Naphthalene's α (C1) and β (C2) positions are genuinely NOT equally activated — always assess Wheland-intermediate stability (via aromaticity preservation) for the specific fused-ring system, never assume symmetry-based equivalence from benzene."
+        },
+        {
+          "misconception": "less aromatic means harder to react",
+          "correction": "Thermodynamic aromatic stability and kinetic EAS reactivity are independent properties — never assume \"less aromatic\" (lower stabilization) implies \"less reactive\" toward EAS; furan is genuinely MORE reactive than benzene despite lower aromatic stabilization."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Polycyclic and Heterocyclic Systems\""
+        "Demonstration 1 (orbital-geometry diagram for pyridine vs. pyrrole lone pairs): Present both orbital diagrams explicitly, deriving conjugation capability from orientation.",
+        "Demonstration 2 (Wheland-intermediate comparison for naphthalene C1 vs. C2 attack): Present both intermediates explicitly, counting aromaticity-preserving resonance structures for each.",
+        "Demonstration 3 (thermodynamic-vs-kinetic separation for furan's EAS reactivity): Present the explicit separation argument, deriving furan's enhanced reactivity despite lower stabilization."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Polycyclic and Heterocyclic Systems\"",
+        "setup": "Draw the resonance structures that show pyridine's nitrogen donating its lone pair into the ring.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (orbital-geometry diagram for pyridine vs. pyrrole lone pairs): Present both orbital diagrams explicitly, deriving conjugation capability from orientation.",
+          "Demonstration 2 (Wheland-intermediate comparison for naphthalene C1 vs. C2 attack): Present both intermediates explicitly, counting aromaticity-preserving resonance structures for each.",
+          "Demonstration 3 (thermodynamic-vs-kinetic separation for furan's EAS reactivity): Present the explicit separation argument, deriving furan's enhanced reactivity despite lower stabilization."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Polycyclic and Heterocyclic Systems\""
+        "expected_outcome": "Student can (a) correctly determine lone-pair conjugation capability from orbital geometry, (b) correctly predict naphthalene's α-selectivity from Wheland-intermediate stability, (c) correctly rank EAS reactivity independently of thermodynamic aromatic stability."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit orbital-geometry diagram for pyridine vs. pyrrole lone pairs.",
+          "TA-2 (TELL): State the Wheland-intermediate-based positional-selectivity reasoning for naphthalene explicitly, anchored to the resonance-structure comparison.",
+          "TA-3 (DO): Student ranks an unfamiliar set of heteroaromatic rings by EAS reactivity, separating kinetic from thermodynamic reasoning.",
+          "TA-4 (TEST-THINKING): Present the furan-vs-benzene reactivity probe and ask the student to justify furan's higher EAS reactivity despite lower aromatic stability."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Polycyclic and Heterocyclic Systems from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Draw the resonance structures that show pyridine's nitrogen donating its lone pair into the ring.\"",
+          "FA-2: \"Why does naphthalene brominate preferentially at C1 rather than C2?\"",
+          "FA-3: \"Rank benzene, furan, and thiophene in order of EAS reactivity.\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Polycyclic and Heterocyclic Systems\""
+        "mastery_signal": "Student can (a) correctly determine lone-pair conjugation capability from orbital geometry, (b) correctly predict naphthalene's α-selectivity from Wheland-intermediate stability, (c) correctly rank EAS reactivity independently of thermodynamic aromatic stability."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Polycyclic and Heterocyclic Systems\""
+        "This concept has no direct KG unlocks but consolidates arene and aromaticity reasoning built across `chem.hyd.arenes` and `chem.org.aromaticity`, forming a capstone application to heterocyclic and medicinal-chemistry contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.hyd.arenes",
