@@ -1175,48 +1175,60 @@
     {
       "id": "asset.chem.period.classification",
       "concept_id": "chem.period.classification",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Early Classification of Elements\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Early Classification of Elements\" pending authoring (target depth: foundational).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Early Classification of Elements\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Early attempts to organize the ~60 known elements progressed through Döbereiner's triads (groups of three elements where the middle element's atomic mass approximates the average of the other two), Newlands' law of octaves (arranging by mass revealed every eighth element had similar properties, but broke down after calcium), and Mendeleev's periodic table (arranged primarily by increasing atomic mass, with chemical-property groupings taking priority when mass order conflicted, deliberately leaving gaps for undiscovered elements and predicting their properties) — later corrected by Moseley's discovery that atomic number, not atomic mass, is the true organizing principle, resolving the handful of mass-order anomalies Mendeleev had to force.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Early Classification of Elements\"",
-        "[TEMPLATE] Key idea 2 for \"Early Classification of Elements\"",
-        "[TEMPLATE] Key idea 3 for \"Early Classification of Elements\""
+        "Before atomic structure was understood, chemists searched for a pattern behind the recurring chemical properties of elements. Döbereiner found small three-element groups (triads) where the middle element's mass approximated the average of the outer two. Newlands extended this to a broader mass-ordered \"law of octaves,\" noticing every eighth element shared properties, but the pattern broke down after calcium. Mendeleev built a more complete mass-ordered table, deliberately leaving gaps for undiscovered elements and predicting their properties from the surrounding pattern — a prediction later confirmed by the discovery of gallium. Moseley subsequently showed the true ordering variable is atomic number, not mass, resolving Mendeleev's few forced exceptions.",
+        "Each system was a genuine advance over the last: Döbereiner found local three-element patterns; Newlands found a broader repeating pattern but no explanation for exceptions; Mendeleev built a working, predictive table using mass order with property-based exceptions; Moseley explained *why* the exceptions occurred by identifying the correct underlying variable (atomic number).",
+        "Core misconception to avoid: Mendeleev's deviations were exceptions made for good reason, not evidence that properties were his main organizing rule — Moseley later showed the \"correct\" underlying order was atomic number, which resolved those forced deviations without needing exceptions at all."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Early Classification of Elements\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "What was the primary criterion Mendeleev used to arrange elements? What did he do when following that criterion gave a chemically wrong grouping?",
+          "correction": "Mendeleev's deviations were exceptions made for good reason, not evidence that properties were his main organizing rule — Moseley later showed the \"correct\" underlying order was atomic number, which resolved those forced deviations without needing exceptions at all."
+        },
+        {
+          "misconception": "Mendeleev just organized what was already known.",
+          "correction": "Mendeleev's gaps in the table were not just \"missing data\" but active, falsifiable predictions later confirmed by measurement."
+        },
+        {
+          "misconception": "Why does the modern periodic table place argon (Z=18, A≈40) before potassium (Z=19, A≈39), even though argon is heavier? What would Mendeleev's mass-based table do?",
+          "correction": "Atomic number (proton count) is the true periodic-table ordering variable; mass number is a separate, isotope-dependent quantity that usually — but not always — tracks atomic number."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Early Classification of Elements\""
+        "Demonstration 1 (Döbereiner triad calculation): Give students the atomic masses of Li (6.94) and K (39.10) and ask them to predict Na's mass using Döbereiner's rule — (6.94+39.10)/2 = 23.02, versus the actual 22.99, a close match that validates the pattern and lets students \"discover\" it rather than just hear about it."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Early Classification of Elements\"",
+        "setup": "What was Mendeleev's primary organizing criterion? What did he do when it conflicted with chemistry?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (Döbereiner triad calculation): Give students the atomic masses of Li (6.94) and K (39.10) and ask them to predict Na's mass using Döbereiner's rule — (6.94+39.10)/2 = 23.02, versus the actual 22.99, a close match that validates the pattern and lets students \"discover\" it rather than just hear about it."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Early Classification of Elements\""
+        "expected_outcome": "Student can (a) state Mendeleev's primary organizing criterion and his key advance (gaps + predictions) and limitation (no mechanism), (b) compute a Döbereiner triad prediction for a given pair, (c) explain the Ar/K ordering using atomic number, (d) name one verified Mendeleev prediction."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the historical progression Döbereiner → Newlands → Mendeleev → Moseley as a narrative timeline with each one's key advance and breaking point.",
+          "TA-2 (TELL): State the gallium prediction-vs-measurement numbers explicitly as the emotional and evidentiary high point.",
+          "TA-3 (DO): Student runs Demonstration 1 (Döbereiner triad calculation for Na from Li and K).",
+          "TA-4 (TEST-THINKING): Present the Ar/K anomaly and ask the student to explain, using atomic number, why the modern table places argon first."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Early Classification of Elements from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"What was Mendeleev's primary organizing criterion? What did he do when it conflicted with chemistry?\"",
+          "FA-2: \"Name one element Mendeleev predicted before it was discovered.\"",
+          "FA-3: \"Why does argon come before potassium in the modern table despite being heavier?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Early Classification of Elements\""
+        "mastery_signal": "Student can (a) state Mendeleev's primary organizing criterion and his key advance (gaps + predictions) and limitation (no mechanism), (b) compute a Döbereiner triad prediction for a given pair, (c) explain the Ar/K ordering using atomic number, (d) name one verified Mendeleev prediction."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Early Classification of Elements\""
+        "Feeds directly into `chem.period.modern-periodic-law` (the formal atomic-number-based periodic law is the direct resolution of this concept's Moseley correction) and provides historical grounding for later periodic-trends concepts throughout the domain."
       ],
       "prerequisite_review_triggers": [
         "chem.atomic.subatomic-particles"
@@ -1225,48 +1237,62 @@
     {
       "id": "asset.chem.period.modern-periodic-law",
       "concept_id": "chem.period.modern-periodic-law",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Modern Periodic Law and Table\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Modern Periodic Law and Table\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Modern Periodic Law and Table\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The modern periodic law states that the properties of elements are a periodic function of their atomic number (not atomic mass), organized into the long-form periodic table by periods (rows, sharing the same highest principal quantum number n) and groups (columns, sharing the same valence electron configuration pattern), further divided into s-, p-, d-, and f-blocks based on which subshell is being filled — with hydrogen's placement in Group 1 reflecting only its 1s¹ valence configuration, not a genuine chemical kinship with the alkali metals, whose characteristic reactive-metal chemistry hydrogen does not share.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Modern Periodic Law and Table\"",
-        "[TEMPLATE] Key idea 2 for \"Modern Periodic Law and Table\"",
-        "[TEMPLATE] Key idea 3 for \"Modern Periodic Law and Table\""
+        "The modern periodic law states that element properties recur periodically as a function of atomic number. The long-form periodic table organizes elements into periods (rows, sharing the same highest principal quantum number n for their outermost electrons) and groups (columns, sharing the same valence electron configuration pattern), further divided into s-, p-, d-, and f-blocks by which subshell type is being filled — with the d-block's filling pattern offset by one period relative to its nominal period number, due to the 4s-before-3d (and analogous) energy ordering.",
+        "Hydrogen sits in Group 1 purely because its single valence electron (1s¹) matches the alkali metals' one-valence-electron pattern structurally — but this positional placement doesn't extend to genuine chemical kinship, since hydrogen's actual reactivity, physical state, and ion-forming behavior (both H⁺ and H⁻) diverge sharply from true alkali-metal chemistry.",
+        "Core misconception to avoid: The modern periodic law states element properties are a periodic function of atomic number Z, not atomic mass."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Modern Periodic Law and Table\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "The periodic table orders elements by increasing atomic mass.",
+          "correction": "The modern periodic law states element properties are a periodic function of atomic number Z, not atomic mass."
+        },
+        {
+          "misconception": "Fe has electrons in 4d because it's in period 4.",
+          "correction": "For d-block elements in period n, the d subshell being filled is (n−1)d, always offset by one from the period number."
+        },
+        {
+          "misconception": "Hydrogen is an alkali metal because it's in Group 1.",
+          "correction": "Hydrogen's periodic table position is a configurational convenience (1s¹), not a claim of shared chemistry with alkali metals — its actual chemistry (non-metallic, high ionization energy, forms both H⁺ and H⁻) is genuinely unique, and some periodic tables place it separately for exactly this reason."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Modern Periodic Law and Table\""
+        "Demonstration 1 (block-region mapping): Give students a blank long-form periodic table outline and have them shade in the s/p/d/f block regions using only electron-configuration rules, discovering the d-block's (n−1) offset themselves by checking a specific element like Fe.",
+        "Demonstration 2 (hydrogen chemistry comparison table): Build a side-by-side comparison table of hydrogen vs. sodium across physical state, reactivity with water, ionization energy, and ion types formed, making the chemical divergence concrete."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Modern Periodic Law and Table\"",
+        "setup": "Why is argon placed before potassium in the modern table despite being heavier?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (block-region mapping): Give students a blank long-form periodic table outline and have them shade in the s/p/d/f block regions using only electron-configuration rules, discovering the d-block's (n−1) offset themselves by checking a specific element like Fe.",
+          "Demonstration 2 (hydrogen chemistry comparison table): Build a side-by-side comparison table of hydrogen vs. sodium across physical state, reactivity with water, ionization energy, and ion types formed, making the chemical divergence concrete."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Modern Periodic Law and Table\""
+        "expected_outcome": "Student can (a) state the modern periodic law in terms of atomic number, not mass, (b) correctly identify a d-block element's actual filling subshell using the (n−1) rule, (c) correctly evaluate whether hydrogen's Group 1 position implies alkali-metal chemistry."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the Ar/K atomic-number-vs-mass comparison as the direct anchor for the modern periodic law's definition.",
+          "TA-2 (TELL): State the d-block (n−1) offset rule explicitly, worked through for Fe's configuration.",
+          "TA-3 (DO): Student maps a given unfamiliar element to its period, group, and block using only its electron configuration.",
+          "TA-4 (TEST-THINKING): Present MC-3's probe and ask the student to argue for or against hydrogen's alkali-metal classification using the comparison table."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Modern Periodic Law and Table from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Why is argon placed before potassium in the modern table despite being heavier?\"",
+          "FA-2: \"Fe is in period 4, d-block. What subshell are its d electrons in?\"",
+          "FA-3: \"Is hydrogen an alkali metal? Justify your answer.\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Modern Periodic Law and Table\""
+        "mastery_signal": "Student can (a) state the modern periodic law in terms of atomic number, not mass, (b) correctly identify a d-block element's actual filling subshell using the (n−1) rule, (c) correctly evaluate whether hydrogen's Group 1 position implies alkali-metal chemistry."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Modern Periodic Law and Table\""
+        "Feeds directly into `chem.period.atomic-radius`, `chem.period.electron-affinity`, `chem.period.ionization-energy`, `chem.period.valency` (all periodic-trend concepts assume fluent block/period/group mapping established here), `chem.bond.metallic-bonding` (block classification underlies metallic character trends), and `chem.sblock.hydrogen` (directly resolves and extends hydrogen's unique-placement discussion)."
       ],
       "prerequisite_review_triggers": [
         "chem.period.classification",
@@ -1276,48 +1302,62 @@
     {
       "id": "asset.chem.period.atomic-radius",
       "concept_id": "chem.period.atomic-radius",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Atomic and Ionic Radius\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Atomic and Ionic Radius\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Atomic and Ionic Radius\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Atomic radius DECREASES across a period (not increases), because effective nuclear charge (Zeff) rises faster than the modest additional shielding from electrons added to the SAME shell — sodium (186 pm) is genuinely larger than chlorine (99 pm) despite chlorine having more electrons, since Zeff rises from ~2.2 to ~6.1 across period 3, pulling the electron cloud inward; ionic radius depends on whether electrons are LOST (cation, smaller — same nuclear charge, less electron-electron repulsion) or GAINED (anion, larger — same nuclear charge, more electron-electron repulsion), NOT on the numeric sign of the charge itself (Na⁺ at 102 pm is genuinely smaller than Cl⁻ at 181 pm, which is smaller than neutral Na at 186 pm); and the general \"radius increases down a group\" rule has a genuine, dramatic exception at the period 5-to-6 d-block transition, where the lanthanide contraction (14 poorly-shielding f-electrons inserted before 5d→6d) nearly cancels the expected increase, making Zr and Hf (~155 vs ~159 pm) almost identical in size despite being two periods apart.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Atomic and Ionic Radius\"",
-        "[TEMPLATE] Key idea 2 for \"Atomic and Ionic Radius\"",
-        "[TEMPLATE] Key idea 3 for \"Atomic and Ionic Radius\""
+        "Atomic radius decreases across a period because effective nuclear charge (Zeff) rises substantially as protons are added, while same-shell electrons shield each other only poorly — this stronger net attraction pulls the electron cloud inward, outweighing the modest size contribution from additional electrons. Ionic radius is determined by whether electrons are lost (cations, smaller — reduced electron-electron repulsion at fixed nuclear charge) or gained (anions, larger — increased repulsion at fixed nuclear charge), never by the charge's numeric sign alone.",
+        "While atomic radius generally increases down a group (each period adding a new, more distant shell), this trend has a genuine exception at the period 5-to-6 d-block transition — the lanthanide series' 14 f-electrons, inserted between these rows, add substantial nuclear charge with very poor shielding, nearly cancelling the expected size increase and making period 5 and period 6 congeners (like Zr and Hf) almost identical in size.",
+        "Core misconception to avoid: Atomic radius DECREASES across a period, driven by rising effective nuclear charge (Zeff) outpacing the poor same-shell shielding from added electrons — electron count alone never predicts size correctly."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Atomic and Ionic Radius\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Chlorine is bigger than sodium because it has more electrons and therefore a larger electron cloud.",
+          "correction": "Atomic radius DECREASES across a period, driven by rising effective nuclear charge (Zeff) outpacing the poor same-shell shielding from added electrons — electron count alone never predicts size correctly."
+        },
+        {
+          "misconception": "Na⁺ is larger than Cl⁻ because Na has a positive charge and Cl has a negative charge.",
+          "correction": "Cations (electrons lost) are always smaller than their neutral parent atom; anions (electrons gained) are always larger — this is determined by electron loss/gain and its effect on electron-electron repulsion, never by the charge's numeric sign alone."
+        },
+        {
+          "misconception": "Hf is larger than Zr because it is in a lower period.",
+          "correction": "The general \"radius increases down a group\" rule has a genuine, well-documented exception at the period 5-to-6 d-block transition, caused by the lanthanide contraction — always check for this exception when comparing period 5 and period 6 transition metals specifically."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Atomic and Ionic Radius\""
+        "Demonstration 1 (Zeff-vs-radius comparison across period 3): Present explicit Zeff and radius data across period 3 (Na through Cl), having students connect the rising Zeff directly to the falling radius.",
+        "Demonstration 2 (three-way Na/Na⁺/Cl⁻ size ordering): Present the explicit radius values for Na, Na⁺, and Cl⁻ side by side, having students explain each size using electron-count-versus-nuclear-charge reasoning."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Atomic and Ionic Radius\"",
+        "setup": "Why does sodium have a larger atomic radius than chlorine, despite chlorine having more electrons?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (Zeff-vs-radius comparison across period 3): Present explicit Zeff and radius data across period 3 (Na through Cl), having students connect the rising Zeff directly to the falling radius.",
+          "Demonstration 2 (three-way Na/Na⁺/Cl⁻ size ordering): Present the explicit radius values for Na, Na⁺, and Cl⁻ side by side, having students explain each size using electron-count-versus-nuclear-charge reasoning."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Atomic and Ionic Radius\""
+        "expected_outcome": "Student can (a) correctly explain the across-period radius decrease using Zeff/shielding reasoning, (b) correctly rank a neutral atom against its cation and anion using electron-loss/gain reasoning, not charge sign, (c) correctly identify the period 5/6 d-block lanthanide-contraction exception when relevant."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit Zeff-vs-radius data across period 3.",
+          "TA-2 (TELL): State the electron-loss/gain principle explicitly, worked through for the Na/Na⁺/Cl⁻ three-way comparison.",
+          "TA-3 (DO): Student predicts relative radius for a new pair of atoms or ions using Zeff/electron-repulsion reasoning.",
+          "TA-4 (TEST-THINKING): Present MC-3's Zr/Hf probe and ask the student to explain the near-identical sizing using the lanthanide contraction."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Atomic and Ionic Radius from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Why does sodium have a larger atomic radius than chlorine, despite chlorine having more electrons?\"",
+          "FA-2: \"Compare the radius of Na, Na⁺, and Cl⁻. Which is largest?\"",
+          "FA-3: \"Compare the atomic radii of Zr and Hf. Which is larger?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Atomic and Ionic Radius\""
+        "mastery_signal": "Student can (a) correctly explain the across-period radius decrease using Zeff/shielding reasoning, (b) correctly rank a neutral atom against its cation and anion using electron-loss/gain reasoning, not charge sign, (c) correctly identify the period 5/6 d-block lanthanide-contraction exception when relevant."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Atomic and Ionic Radius\""
+        "Feeds directly into `chem.period.periodic-properties` (synthesizes atomic radius with ionization energy, electron affinity, and other periodic trends established in prior concepts)."
       ],
       "prerequisite_review_triggers": [
         "chem.period.modern-periodic-law"
@@ -1326,48 +1366,62 @@
     {
       "id": "asset.chem.period.ionization-energy",
       "concept_id": "chem.period.ionization-energy",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Ionization Energy\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Ionization Energy\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Ionization Energy\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Ionization energy (IE) generally increases across a period (rising effective nuclear charge) and decreases down a group (increasing atomic radius/electron-nucleus distance dominates over the modest change in effective nuclear charge from very effective inner-shell shielding), with two well-defined exceptions in each period (Group 2→13 drop, from removing an easier-to-remove p electron versus a filled s subshell; Group 15→16 drop, from removing an easier-to-remove paired p electron versus a stable half-filled p subshell) — successive ionization energies (IE₁, IE₂, IE₃...) show a large jump precisely between the last valence-shell electron removed and the first core-shell electron removed, so the jump's position (not its numeric label) reveals the number of valence electrons.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Ionization Energy\"",
-        "[TEMPLATE] Key idea 2 for \"Ionization Energy\"",
-        "[TEMPLATE] Key idea 3 for \"Ionization Energy\""
+        "Ionization energy generally rises across a period because effective nuclear charge (Zeff) increases while shielding stays roughly constant within the same shell, pulling electrons more tightly. Two anomalies interrupt this general rise within each period, both caused by subshell stability effects: removing a p electron (higher energy, less stable) is easier than removing a paired s electron from a full subshell (Group 2→13), and removing a paired p electron is easier than removing an electron from a stable half-filled p subshell (Group 15→16).",
+        "Down a group, IE decreases primarily because the outer electron occupies a shell of increasingly larger n, farther from the nucleus — shielding by inner shells stays quite effective throughout (Zeff barely changes), so distance, not shielding effectiveness, drives the trend. For successive ionization energies of a single element, a large jump appears precisely at the boundary between removing valence-shell electrons (relatively easy) and removing the first core-shell electron (much harder, since core electrons are both closer to the nucleus and no longer shielded by the now-removed valence electrons) — the count of electrons removed BEFORE that jump equals the valence electron count.",
+        "Core misconception to avoid: The period-3 IE order genuinely dips twice: Na < Mg > Al < Si < P > S < Cl < Ar — both dips are explained by subshell-type and pairing-repulsion effects, not violations of the underlying Zeff logic."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Ionization Energy\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "IE₁ always increases from Na to Ar, so Al > Mg and S > P.",
+          "correction": "The period-3 IE order genuinely dips twice: Na < Mg > Al < Si < P > S < Cl < Ar — both dips are explained by subshell-type and pairing-repulsion effects, not violations of the underlying Zeff logic."
+        },
+        {
+          "misconception": "The big jump is at IE₄, so the element has 4 valence electrons.",
+          "correction": "Count the number of ionization energies occurring before the large jump to determine the number of valence electrons — the jump's ordinal position (IE₄ in this case) is one more than the valence electron count."
+        },
+        {
+          "misconception": "Cs has lower IE₁ because it has so many more electrons that shielding is very poor — the electrons block each other from the nucleus.",
+          "correction": "The down-a-group IE decrease is primarily driven by the outer electron's increasing distance from the nucleus across successive periods, not by shielding becoming less effective (Zeff itself stays roughly constant, thanks to consistently effective inner-shell shielding)."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Ionization Energy\""
+        "Demonstration 1 (period-3 anomaly plotting): Plot the eight period-3 first ionization energies and have students identify both dips before being told where they are, then explain each using electron configuration.",
+        "Demonstration 2 (successive-IE jump counting): Present a successive-IE dataset for an unfamiliar element and have students count valence electrons correctly by identifying the jump's position, not its label."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Ionization Energy\"",
+        "setup": "Arrange the period-3 first ionization energies and note any deviations.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (period-3 anomaly plotting): Plot the eight period-3 first ionization energies and have students identify both dips before being told where they are, then explain each using electron configuration.",
+          "Demonstration 2 (successive-IE jump counting): Present a successive-IE dataset for an unfamiliar element and have students count valence electrons correctly by identifying the jump's position, not its label."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Ionization Energy\""
+        "expected_outcome": "Student can (a) correctly identify and explain both period-3-style IE dips using electron configuration, (b) correctly count valence electrons from a successive-IE dataset's jump position, (c) correctly identify distance (not shielding effectiveness) as the dominant cause of the down-group IE decrease."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the full period-3 IE plot with both dips marked, working through the electron-configuration explanation for each.",
+          "TA-2 (TELL): State explicitly that the valence-electron count equals the number of IEs BEFORE the jump, immediately followed by a worked counting example.",
+          "TA-3 (DO): Student identifies valence electron count from a new successive-IE dataset.",
+          "TA-4 (TEST-THINKING): Present MC-3's Li-vs-Cs probe and ask the student to compute/compare Zeff before concluding what actually drives the IE difference."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Ionization Energy from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Arrange the period-3 first ionization energies and note any deviations.\"",
+          "FA-2: \"An element's successive IEs jump sharply between IE₃ and IE₄. How many valence electrons does it have?\"",
+          "FA-3: \"Why does Cs have a lower IE₁ than Li?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Ionization Energy\""
+        "mastery_signal": "Student can (a) correctly identify and explain both period-3-style IE dips using electron configuration, (b) correctly count valence electrons from a successive-IE dataset's jump position, (c) correctly identify distance (not shielding effectiveness) as the dominant cause of the down-group IE decrease."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Ionization Energy\""
+        "Feeds directly into `chem.bond.ionic-bonding` (Born-Haber cycles use ionization energy values directly, requiring fluent, anomaly-aware IE reasoning) and `chem.period.periodic-properties` (synthesizes ionization energy with other periodic trends)."
       ],
       "prerequisite_review_triggers": [
         "chem.period.modern-periodic-law"
@@ -1376,48 +1430,62 @@
     {
       "id": "asset.chem.period.electron-affinity",
       "concept_id": "chem.period.electron-affinity",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Electron Affinity and Electronegativity\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Electron Affinity and Electronegativity\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Electron Affinity and Electronegativity\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Electron affinity (measured as electron-gain enthalpy, ΔegH) quantifies the energy change when a gaseous atom gains an electron, with more negative ΔegH indicating a stronger, more exothermic (favorable) tendency to gain an electron — genuine periodic anomalies exist (F's electron gain enthalpy is less negative than Cl's, due to F's small n=2 shell causing high electron-electron repulsion upon addition, distinct from the separate half-filled-subshell anomaly seen at N versus O), and second (and later) electron affinities are always positive (endothermic) since adding an electron to an already-negative ion requires overcoming electron-electron repulsion — meaning species like O²⁻ never form spontaneously in the gas phase, only becoming stable when embedded in an ionic crystal lattice whose large lattice energy compensates.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Electron Affinity and Electronegativity\"",
-        "[TEMPLATE] Key idea 2 for \"Electron Affinity and Electronegativity\"",
-        "[TEMPLATE] Key idea 3 for \"Electron Affinity and Electronegativity\""
+        "Electron affinity, measured as electron-gain enthalpy, quantifies how favorably an atom accepts an added electron. Following standard thermodynamic sign convention, a more negative ΔegH means more energy is released, indicating a stronger, more favorable tendency to gain that electron. Real periodic trends show two distinct anomaly types superimposed on the general increase-across-a-period pattern: a half-filled-subshell pairing-repulsion effect (nitrogen) and a small-shell electron-crowding effect (fluorine) — genuinely different mechanisms, not a single shared cause.",
+        "Every electron affinity beyond the first is positive (endothermic), because adding an electron to an already-negative ion must overcome direct electrostatic repulsion from the existing extra charge — multiply-charged anions like O²⁻ only become real, stable species once embedded in an ionic crystal lattice, where the crystal's large lattice energy (via the full Born-Haber cycle) more than compensates for the endothermic second electron affinity.",
+        "Core misconception to avoid: For electron affinity, more negative ΔegH = stronger, more favorable tendency to gain an electron; less negative (or positive) ΔegH = weaker or unfavorable tendency."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Electron Affinity and Electronegativity\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "F has ΔegH = −328 which is less negative than Cl's −349, so F gains electrons less readily than Cl.",
+          "correction": "For electron affinity, more negative ΔegH = stronger, more favorable tendency to gain an electron; less negative (or positive) ΔegH = weaker or unfavorable tendency."
+        },
+        {
+          "misconception": "F has a less negative EA than Cl because F's 2p subshell is half-filled.",
+          "correction": "N's anomaly is a half-filled-subshell (pairing repulsion) effect; F's anomaly is a small-shell (electron-crowding) effect — genuinely distinct mechanisms that happen to produce a similarly-shaped deviation from the general trend."
+        },
+        {
+          "misconception": "O²⁻ forms readily because oxygen has a high electron affinity and gains electrons easily.",
+          "correction": "Second (and later) electron affinities are always positive (endothermic) due to electron-electron repulsion with the existing negative charge; multiply-charged anions like O²⁻ are only stabilized by subsequent lattice-energy release in a crystal, never by a favorable gas-phase electron affinity."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Electron Affinity and Electronegativity\""
+        "Demonstration 1 (sign-convention drill): Present several pairs of ΔegH values and have students state, for each pair, which element attracts an electron more strongly, explicitly applying the negative-means-favorable convention each time.",
+        "Demonstration 2 (Born-Haber lattice-energy comparison): Present oxygen's second EA (+780 kJ/mol) alongside MgO's lattice energy (~3000-4000 kJ/mol) side by side, having students compute the net favorability of forming solid MgO from the elements."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Electron Affinity and Electronegativity\"",
+        "setup": "ΔegH for F is −328 kJ/mol and for Cl is −349 kJ/mol. Which has the stronger tendency to gain an electron?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (sign-convention drill): Present several pairs of ΔegH values and have students state, for each pair, which element attracts an electron more strongly, explicitly applying the negative-means-favorable convention each time.",
+          "Demonstration 2 (Born-Haber lattice-energy comparison): Present oxygen's second EA (+780 kJ/mol) alongside MgO's lattice energy (~3000-4000 kJ/mol) side by side, having students compute the net favorability of forming solid MgO from the elements."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Electron Affinity and Electronegativity\""
+        "expected_outcome": "Student can (a) correctly apply the sign convention to compare two electron affinities, (b) correctly distinguish the causes of the N-vs-O and F-vs-Cl anomalies, (c) correctly explain why O²⁻'s real-world stability doesn't require a favorable second electron affinity."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the F/Cl electron affinity comparison with explicit sign-convention reasoning worked through.",
+          "TA-2 (TELL): State the two distinct anomaly mechanisms (N's half-filled subshell vs. F's small-shell crowding) explicitly, side by side.",
+          "TA-3 (DO): Student determines, for a new pair of elements, which has the stronger electron-gaining tendency using the correct sign interpretation.",
+          "TA-4 (TEST-THINKING): Present MC-3's O²⁻ probe and ask the student to reconcile O²⁻'s real-world existence with a positive second EA using the lattice-energy argument."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Electron Affinity and Electronegativity from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"ΔegH for F is −328 kJ/mol and for Cl is −349 kJ/mol. Which has the stronger tendency to gain an electron?\"",
+          "FA-2: \"Are the F-vs-Cl and N-vs-O electron affinity anomalies caused by the same effect?\"",
+          "FA-3: \"Is the second electron affinity of oxygen positive or negative? How does O²⁻ exist in ionic oxides then?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Electron Affinity and Electronegativity\""
+        "mastery_signal": "Student can (a) correctly apply the sign convention to compare two electron affinities, (b) correctly distinguish the causes of the N-vs-O and F-vs-Cl anomalies, (c) correctly explain why O²⁻'s real-world stability doesn't require a favorable second electron affinity."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Electron Affinity and Electronegativity\""
+        "Feeds directly into `chem.bond.ionic-bonding` (Born-Haber cycles and lattice energy directly resolve and extend MC-3's O²⁻ stability reasoning), `chem.bond.covalent-bonding` (electron affinity contributes to electronegativity, relevant to bond polarity), and `chem.period.periodic-properties` (synthesizes electron affinity with other periodic trends)."
       ],
       "prerequisite_review_triggers": [
         "chem.period.modern-periodic-law"
@@ -1426,48 +1494,66 @@
     {
       "id": "asset.chem.period.periodic-properties",
       "concept_id": "chem.period.periodic-properties",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Periodic Trends Overview\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Periodic Trends Overview\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Periodic Trends Overview\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Electronegativity and electron affinity are genuinely DIFFERENT properties measured in different contexts (EA: energy change for an isolated gas-phase atom gaining one electron; electronegativity: an atom's tendency to attract BONDING electrons within a formed bond) — F is more electronegative than Cl despite having a LESS negative electron affinity, since electronegativity depends on multiple bonded-context factors, not just gas-phase EA alone; \"reactivity increases down a group\" is true specifically for METALS (easier electron loss, IE decreases down the group) but the OPPOSITE for NON-METALS (harder electron gain, EA becomes less negative down the group, so reactivity DECREASES) — the direction depends entirely on whether the element reacts by losing or gaining electrons; periodic trends are NOT perfectly smooth — two well-established anomalies recur in every period (Group 2→13 dip, Group 15→16 dip); and \"periodic law\" means properties recur PERIODICALLY (following a similar pattern each period), never IDENTICALLY, since Zeff and n both increase down each group, systematically changing properties — with the lanthanide contraction specifically making period 6 d-block elements resemble period 5 more closely than period 4.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Periodic Trends Overview\"",
-        "[TEMPLATE] Key idea 2 for \"Periodic Trends Overview\"",
-        "[TEMPLATE] Key idea 3 for \"Periodic Trends Overview\""
+        "Periodic properties (electronegativity, reactivity, and their underlying trends) synthesize multiple factors and must be evaluated carefully rather than assumed to follow one simple direction. Electronegativity is a broader, bonded-context property distinct from the narrower, isolated-atom electron affinity measurement; reactivity's down-group direction depends on whether an element characteristically loses electrons (metals, increasing reactivity down a group) or gains them (non-metals, decreasing reactivity down a group).",
+        "Periodic trends reliably include two specific, well-explained anomalies per period (at the Group 2→13 and Group 15→16 transitions), rather than being perfectly smooth throughout. Separately, \"periodic law\" describes a recurring PATTERN of chemical behavior driven by recurring valence-electron configurations — not literal identity between corresponding elements across different periods, with the lanthanide contraction providing a striking example of how systematic effects can disrupt naive expectations of simple repetition.",
+        "Core misconception to avoid: Electron affinity and electronegativity are related but genuinely distinct properties, measured in different contexts (isolated gas-phase atom vs. bonded electron-pulling tendency) — never assume they rank identically across elements."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Periodic Trends Overview\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "most electronegative means highest EA.",
+          "correction": "Electron affinity and electronegativity are related but genuinely distinct properties, measured in different contexts (isolated gas-phase atom vs. bonded electron-pulling tendency) — never assume they rank identically across elements."
+        },
+        {
+          "misconception": "down the group the trend is always increasing.",
+          "correction": "For metals, reactivity increases down a group (easier electron loss); for non-metals, reactivity DECREASES down a group (harder electron gain) — always identify whether the element is a metal or non-metal before predicting the direction of the down-group reactivity trend."
+        },
+        {
+          "misconception": "the trend is always increasing.",
+          "correction": "Periodic trends generally increase/decrease as expected, but reliably include two specific anomalies per period (Group 2→13, Group 15→16), both explained by electron-configuration effects — never assume a period's trend is perfectly smooth without checking for these known exceptions."
+        },
+        {
+          "misconception": "Do period 2 and period 4 elements in the same group have identical properties?",
+          "correction": "Periodic law describes a recurring PATTERN of chemical behavior (driven by recurring valence-electron configurations), not identical properties across periods — expect systematic variation (and occasional special effects like lanthanide contraction) between periods, not exact repetition."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Periodic Trends Overview\""
+        "Demonstration 1 (electronegativity-vs-EA ranking comparison): Present F and Cl's electron affinity and electronegativity data side by side, showing the ranking genuinely differs between the two properties.",
+        "Demonstration 2 (metal-vs-non-metal reactivity-direction comparison): Present alkali-metal and halogen reactivity trends side by side, connecting each direction to its underlying IE (metals) or EA (non-metals) mechanism."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Periodic Trends Overview\"",
+        "setup": "O has a more negative electron affinity than F. Which is more electronegative?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (electronegativity-vs-EA ranking comparison): Present F and Cl's electron affinity and electronegativity data side by side, showing the ranking genuinely differs between the two properties.",
+          "Demonstration 2 (metal-vs-non-metal reactivity-direction comparison): Present alkali-metal and halogen reactivity trends side by side, connecting each direction to its underlying IE (metals) or EA (non-metals) mechanism."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Periodic Trends Overview\""
+        "expected_outcome": "Student can (a) correctly distinguish electronegativity from electron affinity using their different contexts, (b) correctly predict reactivity direction down a group based on metal vs. non-metal character, (c) correctly identify known periodic anomalies and correctly interpret \"periodic\" as pattern-recurrence, not identical repetition."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the F-vs-Cl electronegativity-and-EA comparison explicitly.",
+          "TA-2 (TELL): State the metal-vs-non-metal reactivity-direction split explicitly, worked through with alkali metals and halogens.",
+          "TA-3 (DO): Student identifies both Group 2→13 and Group 15→16 anomalies in a given period's IE data.",
+          "TA-4 (TEST-THINKING): Present MC-4's period-2-vs-period-4 probe and ask the student to distinguish \"similar pattern\" from \"identical properties.\""
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Periodic Trends Overview from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"O has a more negative electron affinity than F. Which is more electronegative?\"",
+          "FA-2: \"Is iodine more reactive than fluorine?\"",
+          "FA-3: \"Does IE always increase from left to right across period 2?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Periodic Trends Overview\""
+        "mastery_signal": "Student can (a) correctly distinguish electronegativity from electron affinity using their different contexts, (b) correctly predict reactivity direction down a group based on metal vs. non-metal character, (c) correctly identify known periodic anomalies and correctly interpret \"periodic\" as pattern-recurrence, not identical repetition."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Periodic Trends Overview\""
+        "Feeds directly into `chem.dblock.general`, `chem.pblock.group13` through `chem.pblock.group18`, and `chem.sblock.alkali` — every group-specific chemistry concept directly applies the synthesized periodic-property reasoning (electronegativity, reactivity direction, anomaly awareness) established here."
       ],
       "prerequisite_review_triggers": [
         "chem.period.atomic-radius",
@@ -1478,48 +1564,62 @@
     {
       "id": "asset.chem.period.valency",
       "concept_id": "chem.period.valency",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Valency and Oxidation State\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Valency and Oxidation State\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Valency and Oxidation State\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The group number gives the MAXIMUM possible valency for period 3+ elements, not a fixed valency — sulfur (Group 16) has valency 2 in H₂S (using its 2 ground-state unpaired electrons) but valency 6 in H₂SO₄ (using expanded valency, enabled by accessible 3d orbitals), while period 2 elements (like carbon in Group 14) genuinely cannot exceed a valency of 4, having no accessible d orbitals for expansion; this same period-2-vs-period-3+ distinction explains why PCl₅ exists (P, period 3, has accessible 3d orbitals) but NCl₅ cannot exist (N, period 2, has only 2s/2p orbitals, capping its maximum valency at 4, as in NH₄⁺'s dative bond); and oxidation state is a BOOKKEEPING CONVENTION, not a claim about literal electron loss — Mn's +7 oxidation state in KMnO₄ means \"if all bonds were treated as fully ionic, 7 electrons would be formally assigned away from Mn,\" not that Mn has literally lost 7 real electrons (the real electron density around Mn remains substantial, since actual bonds are covalent, not fully ionic).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Valency and Oxidation State\"",
-        "[TEMPLATE] Key idea 2 for \"Valency and Oxidation State\"",
-        "[TEMPLATE] Key idea 3 for \"Valency and Oxidation State\""
+        "Valency for period 3+ elements has a MAXIMUM set by the group number (reflecting accessible d orbitals enabling valency expansion), but the ACTUAL valency in any specific compound depends on how many bonds are genuinely formed, which can be less than or up to that maximum — the same element can show genuinely different valencies in different compounds. Period 2 elements lack any accessible d orbitals, capping their maximum valency firmly at 4, meaning valency-expansion analogies from period 3+ congeners never transfer to period 2 elements.",
+        "Oxidation state is a formal bookkeeping convention that assumes fully ionic bond-splitting (electrons formally assigned entirely to the more electronegative atom) purely for counting and redox-tracking purposes — it is never a literal description of an atom's actual, physical electron count or charge, since real bonds in most compounds retain substantial covalent character.",
+        "Core misconception to avoid: Group number gives the maximum possible valency for period 3+ elements — actual valency in a specific compound varies and must be determined from that compound's actual bonding, not assumed fixed at the group number."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Valency and Oxidation State\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "S is in Group 16, so its valency is 6 in all compounds.",
+          "correction": "Group number gives the maximum possible valency for period 3+ elements — actual valency in a specific compound varies and must be determined from that compound's actual bonding, not assumed fixed at the group number."
+        },
+        {
+          "misconception": "NCl₅ can exist because N and P are in the same group and P can form PCl₅.",
+          "correction": "Period 2 elements (including N) cap at a maximum valency of 4, having no accessible d orbitals for expansion — valency-expansion analogies from period 3+ congeners (like P forming PCl₅) do NOT transfer to period 2 elements."
+        },
+        {
+          "misconception": "In KMnO₄, Mn has only 18 electrons left because it lost 7.",
+          "correction": "Oxidation state is a formal accounting convention (assuming fully ionic bond-splitting for counting purposes), never a literal description of an atom's actual electron count or physical charge."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Valency and Oxidation State\""
+        "Demonstration 1 (S valency comparison): Present H₂S and H₂SO₄'s actual bonding structures explicitly, having students count sulfur's real bonds in each to confirm the different valencies.",
+        "Demonstration 2 (N vs. P orbital-availability comparison): Present nitrogen's and phosphorus's orbital diagrams side by side, showing phosphorus's accessible 3d orbitals and nitrogen's absence of them, directly explaining why NCl₅ cannot exist."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Valency and Oxidation State\"",
+        "setup": "What is the valency of S in H₂S? What is it in H₂SO₄?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (S valency comparison): Present H₂S and H₂SO₄'s actual bonding structures explicitly, having students count sulfur's real bonds in each to confirm the different valencies.",
+          "Demonstration 2 (N vs. P orbital-availability comparison): Present nitrogen's and phosphorus's orbital diagrams side by side, showing phosphorus's accessible 3d orbitals and nitrogen's absence of them, directly explaining why NCl₅ cannot exist."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Valency and Oxidation State\""
+        "expected_outcome": "Student can (a) correctly determine actual (not maximum-assumed) valency from a compound's real bonding, (b) correctly predict whether an expanded-valency compound is possible using period/orbital-availability reasoning, (c) correctly interpret oxidation state as a formal convention, not literal electron count."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the H₂S-vs-H₂SO₄ sulfur valency comparison explicitly.",
+          "TA-2 (TELL): State the period-2-vs-period-3-orbital-availability principle explicitly, worked through with the N-vs-P comparison.",
+          "TA-3 (DO): Student predicts whether a new hypothetical expanded-valency compound is possible, using period/orbital-availability reasoning.",
+          "TA-4 (TEST-THINKING): Present MC-3's KMnO₄ probe and ask the student to explain oxidation state as a formal convention, not a literal electron count."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Valency and Oxidation State from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"What is the valency of S in H₂S? What is it in H₂SO₄?\"",
+          "FA-2: \"Can NCl₅ exist? Explain.\"",
+          "FA-3: \"In KMnO₄, does Mn's +7 oxidation state mean it has lost 7 real electrons?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Valency and Oxidation State\""
+        "mastery_signal": "Student can (a) correctly determine actual (not maximum-assumed) valency from a compound's real bonding, (b) correctly predict whether an expanded-valency compound is possible using period/orbital-availability reasoning, (c) correctly interpret oxidation state as a formal convention, not literal electron count."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Valency and Oxidation State\""
+        "Feeds directly into `chem.redox.oxidation-state` (formal redox balancing and oxidation-state assignment directly apply the bookkeeping-convention understanding established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.period.modern-periodic-law"
