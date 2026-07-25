@@ -4083,98 +4083,127 @@
     {
       "id": "asset.chem.elect.galvanic-cell",
       "concept_id": "chem.elect.galvanic-cell",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Galvanic Cell\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Galvanic Cell\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Galvanic Cell\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The electrode with the MORE NEGATIVE (lower) E° is genuinely the ANODE (where oxidation occurs, since a more negative reduction potential means \"more readily oxidized\") — the rule itself is correct, but students often confuse \"more negative\" with \"cathode\" rather than correctly assigning it to the anode; in the Nernst equation, n is the stoichiometric number of MOLES OF ELECTRONS transferred per mole of reaction AS WRITTEN — E°cell itself is INTENSIVE (unchanged when the equation is scaled, e.g., doubled), while ΔG°=−nFE° is EXTENSIVE (genuinely doubles if n doubles from scaling the equation) — the same principle established generally in `chem.thermo.cell-thermo`, now applied specifically within cell construction; and the salt bridge carries IONS (like K⁺ and NO₃⁻), never electrons — electrons travel exclusively through the EXTERNAL WIRE, while the salt bridge's specific function is maintaining electrical neutrality in both half-cells as ions accumulate or deplete during the reaction.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Galvanic Cell\"",
-        "[TEMPLATE] Key idea 2 for \"Galvanic Cell\"",
-        "[TEMPLATE] Key idea 3 for \"Galvanic Cell\""
+        "A galvanic cell's anode (more negative E°, where oxidation occurs, electrons lost) and cathode (more positive E°, where reduction occurs, electrons gained) are correctly identified by comparing the two half-cells' standard reduction potentials — the electrode more readily oxidized (more negative E°) is always the anode. The Nernst equation's n represents the moles of electrons transferred as specified by the SPECIFIC balanced equation being used — E°cell itself stays fixed (intensive) regardless of how the equation is scaled, while ΔG°=−nFE° genuinely scales with n (extensive).",
+        "A complete galvanic cell circuit requires two distinct conduction mechanisms working together — electrons flow through the external wire (electronic conduction), while ions flow through the salt bridge (ionic conduction), specifically to maintain electrical neutrality in each half-cell as the redox reaction proceeds and charge would otherwise build up or deplete.",
+        "Core misconception to avoid: Anode = more negative E° (oxidation occurs here, electrons lost); cathode = more positive E° (reduction occurs here, electrons gained) — apply this rule carefully, double-checking the direction rather than assuming from memory alone."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Galvanic Cell\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "the anode has the lower (more negative) E° always.",
+          "correction": "Anode = more negative E° (oxidation occurs here, electrons lost); cathode = more positive E° (reduction occurs here, electrons gained) — apply this rule carefully, double-checking the direction rather than assuming from memory alone."
+        },
+        {
+          "misconception": "For the Daniel cell (Zn + Cu²⁺ → Zn²⁺ + Cu), n = ?",
+          "correction": "n is the moles of electrons transferred as specified by the SPECIFIC balanced equation being used — always re-derive it from that exact equation, never assume a fixed value independent of how the equation is scaled."
+        },
+        {
+          "misconception": "electrons go through the salt bridge.",
+          "correction": "Electrons flow only through the external wire; the salt bridge carries ions specifically to maintain electrical neutrality in each half-cell as the reaction proceeds — never assume electrons pass through the salt bridge."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Galvanic Cell\""
+        "Demonstration 1 (Zn/Al anode-cathode assignment): Present the explicit E° comparison for Zn and Al, having students correctly assign anode/cathode roles using the more-negative-E°-is-anode rule.",
+        "Demonstration 2 (Daniel cell n-scaling comparison): Compute n and ΔG° for both the standard Daniel cell equation and its doubled version, showing E°cell stays fixed while ΔG° genuinely doubles."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Galvanic Cell\"",
+        "setup": "If you construct a cell from Zn (E°=−0.76V) and Al (E°=−1.66V), which is the anode?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (Zn/Al anode-cathode assignment): Present the explicit E° comparison for Zn and Al, having students correctly assign anode/cathode roles using the more-negative-E°-is-anode rule.",
+          "Demonstration 2 (Daniel cell n-scaling comparison): Compute n and ΔG° for both the standard Daniel cell equation and its doubled version, showing E°cell stays fixed while ΔG° genuinely doubles."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Galvanic Cell\""
+        "expected_outcome": "Student can (a) correctly assign anode/cathode roles using the more-negative-E°-is-anode rule, (b) correctly determine n from the specific balanced equation as written, recognizing E°cell's intensive nature, (c) correctly explain the salt bridge's ion-based function, distinct from the external wire's electron conduction."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit Zn/Al E°-comparison and anode/cathode assignment.",
+          "TA-2 (TELL): State the n-as-written rule explicitly, worked through with the Daniel cell doubling example.",
+          "TA-3 (DO): Student traces the specific ion movement through the salt bridge for a given cell as the reaction proceeds.",
+          "TA-4 (TEST-THINKING): Present MC-2's Daniel cell probe and ask the student to determine n directly from the given equation."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Galvanic Cell from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"If you construct a cell from Zn (E°=−0.76V) and Al (E°=−1.66V), which is the anode?\"",
+          "FA-2: \"For the Daniel cell (Zn + Cu²⁺ → Zn²⁺ + Cu), n = ?\"",
+          "FA-3: \"What species move through the salt bridge, and what is their purpose?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Galvanic Cell\""
+        "mastery_signal": "Student can (a) correctly assign anode/cathode roles using the more-negative-E°-is-anode rule, (b) correctly determine n from the specific balanced equation as written, recognizing E°cell's intensive nature, (c) correctly explain the salt bridge's ion-based function, distinct from the external wire's electron conduction."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Galvanic Cell\""
+        "Feeds directly into `chem.elect.batteries`, `chem.elect.corrosion`, `chem.elect.electrolysis`, and `chem.elect.standard-electrode` — all directly require fluent, correct galvanic cell construction and Nernst-equation reasoning established here."
       ],
       "prerequisite_review_triggers": [
-        "chem.redox.activity-series"
+        "chem.redox.activity-series",
+        "chem.thermo.cell-thermo"
       ]
     },
     {
       "id": "asset.chem.elect.standard-electrode",
       "concept_id": "chem.elect.standard-electrode",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Standard Electrode Potential\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Standard Electrode Potential\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Standard Electrode Potential\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "E°cell is computed by SUBTRACTING the anode's tabulated reduction potential from the cathode's (E°cell=E°cathode−E°anode), both values always looked up AS reduction potentials against the Standard Hydrogen Electrode (SHE, defined as exactly 0 V) — never by flipping the anode's sign and adding it, since this shortcut, while numerically coincidental in some cases, obscures the underlying subtraction logic and produces wrong signs when misapplied; a MORE NEGATIVE E° means a species is MORE EASILY OXIDIZED (a stronger, more reactive reducing agent), never \"less reactive,\" directly conflating negativity with weakness is the single most common electrochemical-series error; and a positive E°cell (thermodynamic spontaneity, ΔG°<0) says NOTHING about reaction RATE — a reaction can be thermodynamically favorable yet kinetically slow (e.g., MnO₄⁻/oxalate at room temperature), so \"positive E°cell guarantees the reaction happens\" conflates thermodynamics with kinetics.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Standard Electrode Potential\"",
-        "[TEMPLATE] Key idea 2 for \"Standard Electrode Potential\"",
-        "[TEMPLATE] Key idea 3 for \"Standard Electrode Potential\""
+        "Every tabulated E° value is a reduction potential measured relative to the Standard Hydrogen Electrode (SHE), fixed by convention at exactly 0 V. E°cell is always computed as E°cathode−E°anode (both as reduction potentials) — never the reverse — because the cathode is defined as the higher-potential electrode where electrons flow to. A more negative E° signals a stronger tendency to be oxidized, i.e., a more reactive, more powerful reducing agent — the opposite of \"less reactive.\"",
+        "A positive E°cell establishes only that a reaction is thermodynamically favorable (spontaneous in the equilibrium sense, ΔG°<0) — it makes no claim about how fast the reaction proceeds. Observable reaction rate is governed by kinetics (activation energy, temperature, catalysis), a genuinely separate question from thermodynamic spontaneity.",
+        "Core misconception to avoid: Always compute E°cell=E°cathode−E°anode (both as tabulated reduction potentials) — never anode minus cathode."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Standard Electrode Potential\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "cell potential = anode minus cathode.",
+          "correction": "Always compute E°cell=E°cathode−E°anode (both as tabulated reduction potentials) — never anode minus cathode."
+        },
+        {
+          "misconception": "negative E° = unreactive; positive E° = reactive.",
+          "correction": "More negative E° = stronger reducing agent = more reactive (as a reducer); more positive E° = weaker reducing agent = less reactive (more noble) — never equate \"negative\" with \"unreactive\" on this scale."
+        },
+        {
+          "misconception": "positive E°cell guarantees the reaction happens.",
+          "correction": "E°cell>0 establishes only thermodynamic favorability (spontaneity in the equilibrium sense) — never treat it as a guarantee of an observable reaction rate; rate requires separate kinetic evidence (activation energy, temperature, catalyst)."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Standard Electrode Potential\""
+        "Demonstration 1 (explicit E°cell subtraction with sanity check): Compute E°cell for the Daniell cell via the correct cathode-minus-anode formula, then deliberately compute the reversed (wrong) version and show it contradicts known spontaneous behavior.",
+        "Demonstration 2 (MnO₄⁻/oxalate thermodynamics-vs-kinetics case): Present E°cell>0 alongside the observed slow room-temperature rate and the rate acceleration on heating, making the thermodynamics/kinetics distinction concrete."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Standard Electrode Potential\"",
+        "setup": "For the Zn/Cu Daniell cell, compute E°cell correctly and verify the sign matches known spontaneous behavior.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (explicit E°cell subtraction with sanity check): Compute E°cell for the Daniell cell via the correct cathode-minus-anode formula, then deliberately compute the reversed (wrong) version and show it contradicts known spontaneous behavior.",
+          "Demonstration 2 (MnO₄⁻/oxalate thermodynamics-vs-kinetics case): Present E°cell>0 alongside the observed slow room-temperature rate and the rate acceleration on heating, making the thermodynamics/kinetics distinction concrete."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Standard Electrode Potential\""
+        "expected_outcome": "Student can (a) correctly compute E°cell via cathode-minus-anode subtraction with a sanity check, (b) correctly identify the stronger reducing/oxidizing agent from E° sign, (c) correctly distinguish thermodynamic spontaneity from reaction rate."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit E°cell=cathode−anode computation with the sanity-check step against known spontaneous behavior.",
+          "TA-2 (TELL): State the more-negative-E°-means-stronger-reducer rule explicitly, anchored to the zinc-displaces-copper evidence.",
+          "TA-3 (DO): Student computes E°cell for an unfamiliar half-cell pair and identifies the stronger reducing agent.",
+          "TA-4 (TEST-THINKING): Present the MnO₄⁻/oxalate probe and ask the student to separate what E°cell tells them (thermodynamics) from what it doesn't (rate)."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Standard Electrode Potential from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"For the Zn/Cu Daniell cell, compute E°cell correctly and verify the sign matches known spontaneous behavior.\"",
+          "FA-2: \"Zinc (E°=−0.76V) vs. copper (E°=+0.34V): which is the better reducing agent, and why?\"",
+          "FA-3: \"MnO₄⁻/oxalic acid has E°cell>0 but reacts slowly at room temperature. What does this tell you about the relationship between E°cell and reaction rate?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Standard Electrode Potential\""
+        "mastery_signal": "Student can (a) correctly compute E°cell via cathode-minus-anode subtraction with a sanity check, (b) correctly identify the stronger reducing/oxidizing agent from E° sign, (c) correctly distinguish thermodynamic spontaneity from reaction rate."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Standard Electrode Potential\""
+        "Feeds directly into `chem.elect.nernst` (the Nernst equation extends E°cell to non-standard conditions, requiring fluent, correct standard E°cell computation and sign reasoning established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.elect.galvanic-cell"
@@ -4183,48 +4212,64 @@
     {
       "id": "asset.chem.elect.nernst",
       "concept_id": "chem.elect.nernst",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Nernst Equation\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Nernst Equation\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Nernst Equation\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Q in the Nernst equation is the reaction quotient for the OVERALL cell reaction written in its spontaneous direction (products/reactants, stoichiometric exponents, solids omitted) — computed exactly like K_c/K_p, never as two separate half-reaction quotients combined afterward; E°=0 (as in a concentration cell) means the STANDARD potential is zero, NOT that the actual cell voltage E is zero — the Nernst correction term −(0.0592/n)logQ is nonzero whenever the two half-cell concentrations differ, so a concentration cell genuinely generates real voltage purely from the concentration gradient; and the voltage shift per decade of Q is (0.0592/n) volts at 298K, which DECREASES as n increases — reactions transferring more electrons are LESS sensitive to concentration changes per decade, so the n-value must always be correctly identified and divided into the 0.0592 factor.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Nernst Equation\"",
-        "[TEMPLATE] Key idea 2 for \"Nernst Equation\"",
-        "[TEMPLATE] Key idea 3 for \"Nernst Equation\""
+        "The Nernst equation's Q is computed exactly like any reaction quotient (K_c/K_p style) from the single balanced overall cell equation, never from separate half-cell terms. Standard potential E° and actual potential E are genuinely distinct quantities — E° is fixed at standard (1M) conditions, while E includes a correction term −(0.0592/n)logQ that captures the real, condition-dependent voltage, which can be substantial (and measurable) even when E°=0, as in a concentration cell.",
+        "The voltage change per 10-fold change in Q is (0.0592/n) volts at 298K — this factor is not a universal constant but scales inversely with n, the number of electrons transferred in the balanced half-reaction, so reactions transferring more electrons show a smaller voltage response per decade of concentration change.",
+        "Core misconception to avoid: Always combine the two half-reactions into the single balanced overall cell equation first, then write Q from that overall equation using standard products-over-reactants convention — never write separate half-cell Q terms."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Nernst Equation\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Q has four concentration terms, two for each half-cell.",
+          "correction": "Always combine the two half-reactions into the single balanced overall cell equation first, then write Q from that overall equation using standard products-over-reactants convention — never write separate half-cell Q terms."
+        },
+        {
+          "misconception": "E° = 0 means no voltage.",
+          "correction": "E°=0 is not the same as E=0 — it only means the standard potential is zero; the actual cell voltage is entirely determined by the Nernst correction term whenever real concentrations differ from standard, and this can be a real, nonzero, measurable voltage."
+        },
+        {
+          "misconception": "every 10× concentration change gives the same voltage shift.",
+          "correction": "Always divide 0.0592V by the correct n (electrons transferred in the balanced half-reaction) before computing per-decade voltage sensitivity — never apply 0.0592V directly regardless of n."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Nernst Equation\""
+        "Demonstration 1 (overall-equation Q derivation): Combine the Daniell cell's two half-reactions into the overall equation explicitly, then derive Q from it, contrasted with an incorrect four-term half-cell version.",
+        "Demonstration 2 (concentration-cell numerical Nernst computation): Compute E explicitly for the dilute/concentrated Cu²⁺ concentration cell, showing E°=0 substituted in but a nonzero final E.",
+        "Demonstration 3 (n-dependence side-by-side): Compute the per-decade voltage shift for n=1, n=2, and n=6 explicitly, isolating the 1/n scaling."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Nernst Equation\"",
+        "setup": "For the Daniell cell Zn/Cu, write Q correctly.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (overall-equation Q derivation): Combine the Daniell cell's two half-reactions into the overall equation explicitly, then derive Q from it, contrasted with an incorrect four-term half-cell version.",
+          "Demonstration 2 (concentration-cell numerical Nernst computation): Compute E explicitly for the dilute/concentrated Cu²⁺ concentration cell, showing E°=0 substituted in but a nonzero final E.",
+          "Demonstration 3 (n-dependence side-by-side): Compute the per-decade voltage shift for n=1, n=2, and n=6 explicitly, isolating the 1/n scaling."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Nernst Equation\""
+        "expected_outcome": "Student can (a) correctly write Q from the overall balanced cell equation, (b) correctly compute a nonzero E for a concentration cell despite E°=0, (c) correctly scale per-decade voltage sensitivity by 1/n."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the overall-equation Q derivation for the Daniell cell explicitly.",
+          "TA-2 (TELL): State the E°-vs-E distinction explicitly, anchored to the concentration-cell numerical example.",
+          "TA-3 (DO): Student computes E for an unfamiliar concentration cell with specified concentrations and n.",
+          "TA-4 (TEST-THINKING): Present the n=1-vs-n=2 probe and ask the student to justify why the per-decade voltage shift differs."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Nernst Equation from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"For the Daniell cell Zn/Cu, write Q correctly.\"",
+          "FA-2: \"Compute E for a Cu²⁺ concentration cell with [Cu²⁺]=0.001M and 1.0M on either side.\"",
+          "FA-3: \"What is the change in E per 10-fold change in oxidant concentration for n=1 vs. n=2?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Nernst Equation\""
+        "mastery_signal": "Student can (a) correctly write Q from the overall balanced cell equation, (b) correctly compute a nonzero E for a concentration cell despite E°=0, (c) correctly scale per-decade voltage sensitivity by 1/n."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Nernst Equation\""
+        "Feeds directly into `chem.elect.concentration-cell` (concentration cells are a direct, specialized application of the Nernst equation with E°=0 established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.elect.standard-electrode",
@@ -4234,48 +4279,64 @@
     {
       "id": "asset.chem.elect.concentration-cell",
       "concept_id": "chem.elect.concentration-cell",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Concentration Cells\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Concentration Cells\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Concentration Cells\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "A concentration cell CAN generate real, nonzero voltage despite having identical electrodes on both sides — the EMF source is the Gibbs energy of MIXING/concentration equalization, not any difference in electrode chemistry, so applying the Nernst equation with E°=0 still yields a genuine, nonzero E from the concentration term alone; in a concentration cell, the HIGHER-concentration side is ALWAYS the cathode (reduction/metal deposition occurs there, decreasing that side's concentration toward equilibrium), while the LOWER-concentration side is the anode (oxidation/metal dissolving occurs there, increasing its concentration) — this follows directly from the spontaneous drive toward equalizing concentrations, not from memorizing \"high=cathode\" as an arbitrary rule; and concentration-cell EMFs are NOT trivially small or practically unimportant — nerve cells' resting membrane potential (≈−89mV, computed directly from the Nernst equation applied to K⁺ concentration gradients) IS a concentration-cell phenomenon, forming the physical basis of nerve signal transmission.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Concentration Cells\"",
-        "[TEMPLATE] Key idea 2 for \"Concentration Cells\"",
-        "[TEMPLATE] Key idea 3 for \"Concentration Cells\""
+        "A concentration cell generates genuine, nonzero EMF from the Gibbs energy of concentration equalization alone, entirely independent of electrode chemistry (E°=0 is compatible with E≠0) — the Nernst equation's concentration-dependent term captures this driving force directly. The cathode/anode assignment follows mechanistically from the equalization drive: reduction (deposition, which decreases concentration) occurs at the higher-concentration side, while oxidation (dissolving, which increases concentration) occurs at the lower-concentration side.",
+        "Concentration-cell EMFs, computed via the same Nernst equation used for any electrochemical cell, are not merely theoretical exercises — the neuronal resting membrane potential is itself a concentration-cell phenomenon (driven by the K⁺ concentration gradient across the cell membrane), directly computable and matching observed physiological values, making concentration cells the literal physical basis of nerve signal transmission.",
+        "Core misconception to avoid: A concentration cell's EMF arises entirely from the concentration-equalization driving force (the Nernst correction term), independent of E° — always compute EMF via the full Nernst equation, never assume zero voltage from identical electrodes alone."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Concentration Cells\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "they'll cancel out to zero",
+          "correction": "A concentration cell's EMF arises entirely from the concentration-equalization driving force (the Nernst correction term), independent of E° — always compute EMF via the full Nernst equation, never assume zero voltage from identical electrodes alone."
+        },
+        {
+          "misconception": "the left because it has lower concentration",
+          "correction": "Always derive cathode/anode assignment from the equalization-driving mechanism (reduction=deposition=concentration decrease=occurs at higher-concentration side) — never apply \"high=cathode\" as an unexplained memorized rule susceptible to inversion."
+        },
+        {
+          "misconception": "it's a trivial effect",
+          "correction": "Concentration-cell EMFs, though numerically modest, are directly responsible for critical real-world phenomena (nerve signal transmission via neuronal resting potential) — never dismiss them as trivial or purely theoretical."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Concentration Cells\""
+        "Demonstration 1 (explicit Nernst-equation computation for Cu²⁺/Cu concentration cell): Compute E explicitly, isolating the nonzero concentration term despite E°=0.",
+        "Demonstration 2 (Q-and-spontaneity cathode/anode derivation): Walk through the explicit mechanistic reasoning chain for the Zn²⁺/Zn concentration cell, deriving cathode assignment from the equalization drive.",
+        "Demonstration 3 (neuronal Nernst-potential computation): Compute the K⁺ Nernst potential explicitly, comparing the result against the observed physiological resting potential."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Concentration Cells\"",
+        "setup": "A Cu²⁺/Cu cell has 0.01 M CuSO₄ on one side and 1 M CuSO₄ on the other. What is the EMF?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (explicit Nernst-equation computation for Cu²⁺/Cu concentration cell): Compute E explicitly, isolating the nonzero concentration term despite E°=0.",
+          "Demonstration 2 (Q-and-spontaneity cathode/anode derivation): Walk through the explicit mechanistic reasoning chain for the Zn²⁺/Zn concentration cell, deriving cathode assignment from the equalization drive.",
+          "Demonstration 3 (neuronal Nernst-potential computation): Compute the K⁺ Nernst potential explicitly, comparing the result against the observed physiological resting potential."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Concentration Cells\""
+        "expected_outcome": "Student can (a) correctly compute nonzero EMF for a concentration cell via the Nernst equation, (b) correctly derive cathode/anode assignment from equalization-drive reasoning, (c) correctly appreciate the real-world significance of concentration-cell EMFs."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit Nernst-equation computation for the Cu²⁺/Cu concentration cell.",
+          "TA-2 (TELL): State the mechanistic cathode/anode derivation explicitly, anchored to the Q-and-spontaneity reasoning chain.",
+          "TA-3 (DO): Student computes EMF for an unfamiliar concentration cell and identifies cathode/anode from first principles.",
+          "TA-4 (TEST-THINKING): Present the neuronal K⁺ probe and ask the student to justify the resting-potential connection from the Nernst equation."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Concentration Cells from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A Cu²⁺/Cu cell has 0.01 M CuSO₄ on one side and 1 M CuSO₄ on the other. What is the EMF?\"",
+          "FA-2: \"If I set up a Zn²⁺/Zn cell with 0.001 M on the left and 1 M on the right, which side is cathode, and why?\"",
+          "FA-3: \"A nerve cell maintains [K⁺] at 140 mM inside and 5 mM outside. Calculate the Nernst potential for K⁺ at 37°C.\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Concentration Cells\""
+        "mastery_signal": "Student can (a) correctly compute nonzero EMF for a concentration cell via the Nernst equation, (b) correctly derive cathode/anode assignment from equalization-drive reasoning, (c) correctly appreciate the real-world significance of concentration-cell EMFs."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Concentration Cells\""
+        "This concept has no direct KG unlocks but consolidates Nernst-equation reasoning built across `chem.elect.nernst`, forming a capstone application to biological electrochemistry and analytical concentration-measurement contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.elect.nernst"
@@ -4284,48 +4345,62 @@
     {
       "id": "asset.chem.elect.conductance",
       "concept_id": "chem.elect.conductance",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Electrolytic Conductance\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Electrolytic Conductance\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Electrolytic Conductance\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Conductance (G, 1/resistance) depends on cell geometry, while conductivity (κ = G × l/A) removes that geometry dependence to become a true material property; molar conductivity (Λm = κ/c) further normalizes for concentration, and Kohlrausch's law of independent ionic migration (Λm° = λ+° + λ−°, individual ionic contributions sum) is stated specifically at infinite dilution, because only there are ions far enough apart to migrate without interfering with each other — strong electrolytes dissociate essentially completely at all concentrations, but their molar conductivity still decreases with increasing concentration due to inter-ionic attractions slowing ion mobility, not due to reduced dissociation.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Electrolytic Conductance\"",
-        "[TEMPLATE] Key idea 2 for \"Electrolytic Conductance\"",
-        "[TEMPLATE] Key idea 3 for \"Electrolytic Conductance\""
+        "Conductance (G) is what's directly measured with a specific electrochemical cell and depends on that cell's geometry. Dividing out the geometry (κ = G × l/A) gives conductivity, a true material property. Dividing conductivity by concentration (Λm = κ/c) gives molar conductivity, letting different concentrations be compared on a per-mole basis. At infinite dilution, ions are far enough apart to migrate completely independently of each other, so their individual contributions simply add (Kohlrausch's law); at any finite concentration, inter-ionic attractions reduce ion mobility and cause Λm to decline as concentration rises.",
+        "For strong electrolytes, the decline in Λm with rising concentration comes entirely from reduced ion mobility (inter-ionic attraction), since dissociation itself stays essentially complete throughout — this is fundamentally different from weak electrolytes, where Λm's decline with concentration reflects a genuinely lower degree of dissociation at higher concentration (per the electrolyte's dissociation equilibrium).",
+        "Core misconception to avoid: κ = G × (l/A) — conductivity is conductance corrected for cell geometry, making it a genuine, comparable material property independent of which cell was used to measure it."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Electrolytic Conductance\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Conductivity is just another word for conductance.",
+          "correction": "κ = G × (l/A) — conductivity is conductance corrected for cell geometry, making it a genuine, comparable material property independent of which cell was used to measure it."
+        },
+        {
+          "misconception": "Why is Kohlrausch's law of independent migration specifically stated as being applicable at infinite dilution?",
+          "correction": "Kohlrausch's law (Λm° = λ+° + λ−°) holds exactly only at infinite dilution (denoted by the ° superscript); at any finite concentration, ionic interactions cause deviations from simple additivity."
+        },
+        {
+          "misconception": "Does the molar conductivity of NaCl change with concentration? What does that tell you about ionic interactions at higher concentrations?",
+          "correction": "For strong electrolytes, molar conductivity declines with concentration due to reduced ionic mobility from inter-ionic attraction, not due to any actual decrease in the degree of dissociation."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Electrolytic Conductance\""
+        "Demonstration 1 (geometry-dependence check): Measure or present conductance data for the identical solution in cells of different geometry, showing G changes while κ (computed via G×l/A) stays constant.",
+        "Demonstration 2 (Λm vs. √c extrapolation): Present real molar-conductivity-vs-concentration data for a strong electrolyte, having students extrapolate to c=0 to find Λm°, connecting the extrapolation directly to the infinite-dilution requirement of Kohlrausch's law."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Electrolytic Conductance\"",
+        "setup": "If you measure conductance of a solution in a small vs. large beaker, does it change? Does conductivity?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (geometry-dependence check): Measure or present conductance data for the identical solution in cells of different geometry, showing G changes while κ (computed via G×l/A) stays constant.",
+          "Demonstration 2 (Λm vs. √c extrapolation): Present real molar-conductivity-vs-concentration data for a strong electrolyte, having students extrapolate to c=0 to find Λm°, connecting the extrapolation directly to the infinite-dilution requirement of Kohlrausch's law."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Electrolytic Conductance\""
+        "expected_outcome": "Student can (a) correctly distinguish conductance from conductivity using the geometry-dependence argument, (b) explain why Kohlrausch's law specifically requires infinite dilution, (c) correctly attribute a strong electrolyte's declining Λm to mobility reduction, not reduced dissociation."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the G-vs-κ geometry-dependence comparison across different cell sizes for the same solution.",
+          "TA-2 (TELL): State the infinite-dilution requirement of Kohlrausch's law explicitly, connected to the \"ions far apart, no interaction\" physical reasoning.",
+          "TA-3 (DO): Student extrapolates a given Λm-vs-√c dataset to find Λm° for a strong electrolyte.",
+          "TA-4 (TEST-THINKING): Present MC-3's probe and ask the student to separate the dissociation question from the mobility question explicitly."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Electrolytic Conductance from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"If you measure conductance of a solution in a small vs. large beaker, does it change? Does conductivity?\"",
+          "FA-2: \"Why is Kohlrausch's law specifically stated for infinite dilution?\"",
+          "FA-3: \"Does NaCl's molar conductivity changing with concentration mean less of it is dissociating?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Electrolytic Conductance\""
+        "mastery_signal": "Student can (a) correctly distinguish conductance from conductivity using the geometry-dependence argument, (b) explain why Kohlrausch's law specifically requires infinite dilution, (c) correctly attribute a strong electrolyte's declining Λm to mobility reduction, not reduced dissociation."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Electrolytic Conductance\""
+        "Feeds directly into `chem.elect.electrolysis` (ionic migration and mobility concepts established here underlie electrolysis current-carrying mechanisms)."
       ],
       "prerequisite_review_triggers": [
         "chem.found.measurement"
@@ -4334,48 +4409,64 @@
     {
       "id": "asset.chem.elect.electrolysis",
       "concept_id": "chem.elect.electrolysis",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Electrolysis and Faraday's Laws\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Electrolysis and Faraday's Laws\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Electrolysis and Faraday's Laws\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The cathode is ALWAYS defined by the PROCESS occurring there (reduction), never by its sign — in a galvanic cell the cathode is the positive terminal, but in an electrolytic cell the cathode is connected to the NEGATIVE terminal of the external power supply (electrons pumped in to force reduction), so the sign flips between cell types while the defining process (reduction) never does; in AQUEOUS electrolysis, water genuinely competes with dissolved cations/anions for discharge at the electrodes, and the species with the more favorable (less negative, for cations; or, for common anions, kinetically favorable) discharge potential wins — so aqueous NaCl deposits H₂ at the cathode (water reduced far more readily than Na⁺, E°(Na⁺/Na)=−2.71V vs. E°(H₂O/H₂)=−0.83V), and only MOLTEN NaCl (Down's cell, no water present) deposits metallic Na; and Faraday's Second Law states EQUAL CHARGE passed gives EQUAL MOLES OF ELECTRONS, never equal MASS, across different electrolytic cells in series — mass deposited depends on M/n (the electrochemical equivalent), which differs by ion.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Electrolysis and Faraday's Laws\"",
-        "[TEMPLATE] Key idea 2 for \"Electrolysis and Faraday's Laws\"",
-        "[TEMPLATE] Key idea 3 for \"Electrolysis and Faraday's Laws\""
+        "Cathode and anode are defined by process (reduction=cathode, oxidation=anode), a definition that never changes between cell types — but the SIGN of each electrode depends on whether the cell is galvanic (spontaneous, generating current) or electrolytic (driven by an external power supply), and these signs are genuinely opposite between the two cell types. In electrolysis, the cathode connects to the power supply's negative terminal, forcing reduction that would not occur spontaneously.",
+        "In aqueous electrolysis, the species actually discharged at each electrode is determined by competitive discharge potentials — water itself is always a competitor, and frequently wins over dissolved ions like Na⁺, which is why aqueous NaCl electrolysis produces H₂, not Na (metallic Na requires molten NaCl electrolysis instead). Faraday's Second Law states that equal charge gives equal moles of electrons across different cells in series — but the resulting MASS deposited differs by ion, since mass depends on the electrochemical equivalent M/n (molar mass divided by electrons transferred per ion).",
+        "Core misconception to avoid: Always identify cathode/anode by process (reduction/oxidation) first, then deduce sign from cell type — never assume the galvanic-cell sign convention applies to an electrolytic cell."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Electrolysis and Faraday's Laws\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "cathode is positive in electrolysis too.",
+          "correction": "Always identify cathode/anode by process (reduction/oxidation) first, then deduce sign from cell type — never assume the galvanic-cell sign convention applies to an electrolytic cell."
+        },
+        {
+          "misconception": "Na⁺ migrates to cathode so Na must be deposited.",
+          "correction": "In aqueous electrolysis, always compare the discharge potential of the dissolved ion against water's own discharge potential before predicting the product — presence of an ion in solution does not guarantee its discharge."
+        },
+        {
+          "misconception": "same charge = same mass for both metals.",
+          "correction": "\"Same charge = same moles of electrons\" is the correct statement of Faraday's Second Law — mass deposited must be separately computed via M/n for each specific ion, never assumed equal across different metals."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Electrolysis and Faraday's Laws\""
+        "Demonstration 1 (galvanic vs. electrolytic circuit trace): Trace the external circuit for both cell types side by side, showing the cathode's process (reduction) stays fixed while its sign flips.",
+        "Demonstration 2 (aqueous vs. molten NaCl electrolysis): Compute the E° comparison for Na⁺/Na vs. H₂O/H₂, then explicitly contrast the aqueous product (H₂) against the molten product (Na).",
+        "Demonstration 3 (Faraday's Second Law worked comparison): Compute deposited mass for Cu²⁺ and Ag⁺ from identical charge side by side, highlighting the shared moles-of-electrons step and the diverging mass outcome."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Electrolysis and Faraday's Laws\"",
+        "setup": "In an electrolytic cell, which terminal of the external power supply connects to the cathode?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (galvanic vs. electrolytic circuit trace): Trace the external circuit for both cell types side by side, showing the cathode's process (reduction) stays fixed while its sign flips.",
+          "Demonstration 2 (aqueous vs. molten NaCl electrolysis): Compute the E° comparison for Na⁺/Na vs. H₂O/H₂, then explicitly contrast the aqueous product (H₂) against the molten product (Na).",
+          "Demonstration 3 (Faraday's Second Law worked comparison): Compute deposited mass for Cu²⁺ and Ag⁺ from identical charge side by side, highlighting the shared moles-of-electrons step and the diverging mass outcome."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Electrolysis and Faraday's Laws\""
+        "expected_outcome": "Student can (a) correctly identify cathode/anode by process and correctly deduce sign for a given cell type, (b) correctly predict which species is actually discharged in aqueous electrolysis via competitive discharge potentials, (c) correctly compute deposited mass for different ions from identical charge using M/n."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the side-by-side galvanic-vs-electrolytic circuit trace, anchoring cathode identity on process before sign.",
+          "TA-2 (TELL): State the aqueous-vs-molten NaCl electrolysis distinction explicitly, backed by the E° comparison.",
+          "TA-3 (DO): Student computes deposited mass for two different ions from an identical charge, using Faraday's Second Law correctly.",
+          "TA-4 (TEST-THINKING): Present the chloralkali probe and ask the student to justify why H₂, not Na, forms at the cathode using E° comparison, not ion presence alone."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Electrolysis and Faraday's Laws from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"In an electrolytic cell, which terminal of the external power supply connects to the cathode?\"",
+          "FA-2: \"Predict the cathode product when aqueous NaCl is electrolyzed, and justify using E° values.\"",
+          "FA-3: \"96 500 C is passed through CuSO₄ and AgNO₃ solutions in series. Compute the mass of each metal deposited.\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Electrolysis and Faraday's Laws\""
+        "mastery_signal": "Student can (a) correctly identify cathode/anode by process and correctly deduce sign for a given cell type, (b) correctly predict which species is actually discharged in aqueous electrolysis via competitive discharge potentials, (c) correctly compute deposited mass for different ions from identical charge using M/n."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Electrolysis and Faraday's Laws\""
+        "Feeds directly into `chem.elect.industrial` (industrial electrolysis processes — chloralkali, aluminum extraction, electrorefining — directly require fluent, correct electrode identification, competitive-discharge reasoning, and Faraday's Law mass computation established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.elect.galvanic-cell",
@@ -4385,48 +4476,64 @@
     {
       "id": "asset.chem.elect.batteries",
       "concept_id": "chem.elect.batteries",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Batteries and Fuel Cells\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Batteries and Fuel Cells\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Batteries and Fuel Cells\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Recharging a battery does NOT \"refill\" it with electricity like a water tank — it drives REVERSE CHEMICAL REACTIONS (e.g., converting PbSO₄ back into Pb and PbO₂ in a lead-acid battery), and a battery stores CHEMICAL potential energy, never electrical energy directly — electrical energy is only the output/input FORM during discharge/charge, not what is stored; a hydrogen fuel cell is NOT 100% efficient just because \"only water comes out\" — the thermodynamic maximum efficiency is ΔG/ΔH≈83% at room temperature (accounting for the entropy-related difference between ΔG and ΔH), and real cells suffer additional losses (activation overpotentials, ohmic resistance, concentration polarization), giving real-world efficiencies of only 40-60% — \"no CO₂ byproduct\" is not the same claim as \"100% thermodynamic efficiency\"; and hydrogen fuel cells do NOT \"burn\" hydrogen like a combustion engine — they operate at near room temperature (PEM: ~80°C) with NO flame, electrochemically oxidizing hydrogen at a catalytic Pt anode (H₂→2H⁺+2e⁻), directly converting chemical to electrical energy WITHOUT the thermal intermediate step that limits combustion-engine efficiency via the Carnot theorem (which applies to heat engines, not fuel cells).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Batteries and Fuel Cells\"",
-        "[TEMPLATE] Key idea 2 for \"Batteries and Fuel Cells\"",
-        "[TEMPLATE] Key idea 3 for \"Batteries and Fuel Cells\""
+        "A battery stores chemical potential energy in its electrode materials, not electrical energy directly — charging and discharging are forward and reverse chemical reactions (e.g., PbSO₄⇌Pb+PbO₂ in a lead-acid battery), with electrical energy being only the input/output form during these transformations, never the storage medium itself.",
+        "A hydrogen fuel cell's \"clean\" water-only byproduct is an independent claim from its energy efficiency — thermodynamic maximum efficiency is capped at ΔG/ΔH≈83%, with real-world losses (electrode overpotentials, resistance, polarization) further reducing practical efficiency to 40-60%. Fuel cells operate via electrochemical oxidation at a catalytic electrode (no flame, near room temperature), directly converting chemical to electrical energy without the thermal intermediate step that subjects combustion engines to the Carnot efficiency limit.",
+        "Core misconception to avoid: A battery stores chemical potential energy in its electrode materials — charging and discharging are forward/reverse chemical reactions, never a literal storage or \"refilling\" of electricity itself."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Batteries and Fuel Cells\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "charging puts electricity back into the battery.",
+          "correction": "A battery stores chemical potential energy in its electrode materials — charging and discharging are forward/reverse chemical reactions, never a literal storage or \"refilling\" of electricity itself."
+        },
+        {
+          "misconception": "only water comes out so all the energy is converted.",
+          "correction": "Fuel cell efficiency is capped thermodynamically at ΔG/ΔH≈83% and further reduced by real-world losses to 40-60% in practice — never infer high efficiency from a clean byproduct alone."
+        },
+        {
+          "misconception": "fuel cells combust the hydrogen electrochemically.",
+          "correction": "Hydrogen fuel cells electrochemically oxidize hydrogen at a catalytic electrode (no flame, near room temperature), directly converting chemical to electrical energy without a thermal intermediate step — never describe this process as \"burning\" or \"combustion.\""
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Batteries and Fuel Cells\""
+        "Demonstration 1 (lead-acid discharge/charge chemical-equation trace): Present the explicit chemical equations for both discharge and charge, tracing electrode material transformations in each direction.",
+        "Demonstration 2 (fuel-cell efficiency breakdown): Present the explicit ΔG/ΔH thermodynamic-maximum computation, layered with real-world loss mechanisms to arrive at practical efficiency.",
+        "Demonstration 3 (combustion-engine vs. fuel-cell mechanism/temperature comparison): Present both mechanisms side by side, isolating the presence/absence of a thermal intermediate step and its Carnot-theorem implication."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Batteries and Fuel Cells\"",
+        "setup": "In a lead-acid battery on discharge, what happens to the Pb and PbO₂ electrodes chemically? What drives the recharge?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (lead-acid discharge/charge chemical-equation trace): Present the explicit chemical equations for both discharge and charge, tracing electrode material transformations in each direction.",
+          "Demonstration 2 (fuel-cell efficiency breakdown): Present the explicit ΔG/ΔH thermodynamic-maximum computation, layered with real-world loss mechanisms to arrive at practical efficiency.",
+          "Demonstration 3 (combustion-engine vs. fuel-cell mechanism/temperature comparison): Present both mechanisms side by side, isolating the presence/absence of a thermal intermediate step and its Carnot-theorem implication."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Batteries and Fuel Cells\""
+        "expected_outcome": "Student can (a) correctly describe battery charging as a chemical reaction reversal, never literal electrical storage, (b) correctly distinguish fuel-cell byproduct cleanliness from energy efficiency, (c) correctly explain why fuel cells aren't subject to the Carnot efficiency limit."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit lead-acid discharge/charge chemical-equation trace.",
+          "TA-2 (TELL): State the efficiency-vs-cleanliness distinction explicitly, anchored to the ΔG/ΔH computation.",
+          "TA-3 (DO): Student computes theoretical maximum efficiency for an unfamiliar fuel-cell reaction from ΔG and ΔH.",
+          "TA-4 (TEST-THINKING): Present the \"is there a flame\" probe and ask the student to justify why fuel cells aren't Carnot-limited."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Batteries and Fuel Cells from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"In a lead-acid battery on discharge, what happens to the Pb and PbO₂ electrodes chemically? What drives the recharge?\"",
+          "FA-2: \"If ΔG°=−237kJ/mol and E°=1.23V, what is the maximum theoretical efficiency of a hydrogen fuel cell?\"",
+          "FA-3: \"What is the temperature in a hydrogen fuel cell? Is there a flame?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Batteries and Fuel Cells\""
+        "mastery_signal": "Student can (a) correctly describe battery charging as a chemical reaction reversal, never literal electrical storage, (b) correctly distinguish fuel-cell byproduct cleanliness from energy efficiency, (c) correctly explain why fuel cells aren't subject to the Carnot efficiency limit."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Batteries and Fuel Cells\""
+        "This concept has no direct KG unlocks but consolidates galvanic-cell reasoning built across `chem.elect.galvanic-cell`, forming a capstone application to energy-technology and environmental-chemistry contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.elect.galvanic-cell"
@@ -4435,48 +4542,64 @@
     {
       "id": "asset.chem.elect.corrosion",
       "concept_id": "chem.elect.corrosion",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Corrosion\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Corrosion\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Corrosion\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Tin (Sn) coating does NOT protect iron the same way zinc (Zn) galvanizing does — zinc (E°=−0.76V, MORE negative than Fe's −0.44V) is the anode when in contact with iron, corroding sacrificially and protecting Fe, while tin (E°=−0.14V, LESS negative than Fe) makes IRON the anode when the tin coating is scratched, ACCELERATING iron corrosion through any breach rather than preventing it — tin is a barrier coating only, not sacrificial; rust does NOT form at the location where iron is actually dissolving — Fe²⁺ ions form at the ANODE (low-O₂ region) but MIGRATE through the electrolyte to the CATHODE region (high-O₂), where they meet OH⁻ and precipitate as rust — the visible rust location is genuinely DIFFERENT from the actual corrosion (metal-loss) site; and \"cathodic protection\" means making the structure YOU WANT TO PROTECT into the CATHODE (since corrosion is fundamentally an oxidation/anodic process, and the cathode cannot be oxidized) — the term describes what the PROTECTED structure BECOMES, never \"protecting the cathode\" as if the cathode were the vulnerable component (it's actually the ANODE, e.g., the sacrificial block, that corrodes).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Corrosion\"",
-        "[TEMPLATE] Key idea 2 for \"Corrosion\"",
-        "[TEMPLATE] Key idea 3 for \"Corrosion\""
+        "A metal coating's protective mechanism against iron corrosion — sacrificial (zinc) vs. barrier-only (tin) — is determined entirely by the coating's E° relative to iron: a more negative E° (zinc) makes the coating itself the anode, sacrificially protecting iron even through breaches, while a less negative E° (tin) makes iron the anode once the coating is scratched, actually accelerating localized iron corrosion.",
+        "Visible rust forms where Fe²⁺ ions (generated at the anodic metal-loss site) migrate to and meet OH⁻ (generated at the cathodic, high-oxygen site) — the rust location and the actual metal-loss location are often spatially distinct. \"Cathodic protection\" specifically means forcing the protected structure to become the cathode (immune to oxidation), while a deliberately-provided anode (sacrificial block or impressed current) corrodes in its place.",
+        "Core misconception to avoid: Always compare E° values to determine sacrificial (coating more negative, protects even through breach) vs. barrier-only (coating less negative, accelerates corrosion through a breach) behavior — never assume all \"protective\" metal coatings function identically."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Corrosion\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "both Sn and Zn coatings protect by sacrificial action.",
+          "correction": "Always compare E° values to determine sacrificial (coating more negative, protects even through breach) vs. barrier-only (coating less negative, accelerates corrosion through a breach) behavior — never assume all \"protective\" metal coatings function identically."
+        },
+        {
+          "misconception": "the rust is the corroded spot.",
+          "correction": "The visible rust location and the actual metal-loss (anodic) site are often spatially separated, connected by Fe²⁺ ion migration through the electrolyte — never assume rust marks the exact location of iron dissolution."
+        },
+        {
+          "misconception": "you protect the cathode, that's why it's called cathodic.",
+          "correction": "\"Cathodic protection\" means forcing the structure to be protected to become the cathode (immune to oxidation) — the anode (sacrificial block or impressed-current source) is what actually corrodes, never interpret the phrase as \"protecting a vulnerable cathode.\""
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Corrosion\""
+        "Demonstration 1 (E° comparison for Zn/Fe and Sn/Fe pairings): Present both E° comparisons explicitly, deriving sacrificial vs. barrier-only behavior for each coating.",
+        "Demonstration 2 (corrosion-cell Fe²⁺-migration diagram): Draw the explicit anodic-origin/cathodic-precipitation diagram, tracing Fe²⁺ migration to the visible rust site.",
+        "Demonstration 3 (cathodic-protection role diagram for a ship hull): Present the explicit hull-as-cathode/sacrificial-block-as-anode diagram, clarifying which component actually corrodes."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Corrosion\"",
+        "setup": "Compare E°(Sn²⁺/Sn) and E°(Fe²⁺/Fe). Which metal is the anode when Sn and Fe are in electrical contact?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (E° comparison for Zn/Fe and Sn/Fe pairings): Present both E° comparisons explicitly, deriving sacrificial vs. barrier-only behavior for each coating.",
+          "Demonstration 2 (corrosion-cell Fe²⁺-migration diagram): Draw the explicit anodic-origin/cathodic-precipitation diagram, tracing Fe²⁺ migration to the visible rust site.",
+          "Demonstration 3 (cathodic-protection role diagram for a ship hull): Present the explicit hull-as-cathode/sacrificial-block-as-anode diagram, clarifying which component actually corrodes."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Corrosion\""
+        "expected_outcome": "Student can (a) correctly predict sacrificial vs. barrier-only coating behavior from E° comparison, (b) correctly explain the spatial separation between rust location and actual metal loss, (c) correctly identify the protected structure as the cathode in cathodic protection."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit E° comparison for both Zn/Fe and Sn/Fe pairings.",
+          "TA-2 (TELL): State the Fe²⁺-migration mechanism explicitly, anchored to the corrosion-cell diagram.",
+          "TA-3 (DO): Student predicts sacrificial vs. barrier-only behavior for an unfamiliar metal-coating pairing from E° comparison.",
+          "TA-4 (TEST-THINKING): Present the cathodic-protection probe and ask the student to justify which component (hull or sacrificial block) actually corrodes."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Corrosion from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Compare E°(Sn²⁺/Sn) and E°(Fe²⁺/Fe). Which metal is the anode when Sn and Fe are in electrical contact?\"",
+          "FA-2: \"Describe what happens to the Fe²⁺ ions that form at the anode — do they stay at the anode?\"",
+          "FA-3: \"In cathodic protection of a ship hull, is the hull the cathode or the anode?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Corrosion\""
+        "mastery_signal": "Student can (a) correctly predict sacrificial vs. barrier-only coating behavior from E° comparison, (b) correctly explain the spatial separation between rust location and actual metal loss, (c) correctly identify the protected structure as the cathode in cathodic protection."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Corrosion\""
+        "This concept has no direct KG unlocks but consolidates galvanic-cell reasoning built across `chem.elect.galvanic-cell`, forming a capstone application to materials-science and industrial-corrosion-prevention contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.elect.galvanic-cell"
@@ -4485,50 +4608,68 @@
     {
       "id": "asset.chem.elect.industrial",
       "concept_id": "chem.elect.industrial",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Industrial Electrolysis\".",
-      "concept_summary": "Chlor-alkali process; electroplating; copper refining; Hall–Héroult process for aluminium.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Industrial Electrolysis\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The chloralkali process (aqueous NaCl) is NOT the same as the Down's cell process (molten NaCl), despite both electrolyzing \"sodium chloride\" — the critical difference is physical state: molten NaCl (Down's cell) has no water to compete, so Na⁺ is reduced to metallic Na, while aqueous NaCl (chloralkali) has water present, and water is preferentially reduced at the cathode (giving H₂+OH⁻) because water's reduction potential is less negative than Na⁺/Na in aqueous solution — the Down's cell specifically operates at ~600°C on molten salt PRECISELY to exclude water and avoid this competition; in the Hall-Héroult process, the carbon anodes are NOT inert/permanent conductors — they genuinely REACT with the O₂ produced (C+O₂→CO₂), are consumed continuously, and must be regularly replaced (a major cost, ~10kg carbon per tonne Al, and a genuine CO₂-emission source) — true inert anodes remain an active research goal precisely because carbon-anode consumption/replacement is a real drawback; and in electroplating, the object to be plated is the CATHODE, not the anode — metal cations (M^n+, positively charged) are attracted to the NEGATIVE cathode (opposite charges attract), where they are REDUCED and deposited as solid metal — reasoning that \"the plate receives metal, so it must be positive\" gets the electrostatics backward (like charges repel, so positive cations could never be attracted to a positive anode).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Industrial Electrolysis\"",
-        "[TEMPLATE] Key idea 2 for \"Industrial Electrolysis\"",
-        "[TEMPLATE] Key idea 3 for \"Industrial Electrolysis\""
+        "Identical salt identity (NaCl) does not guarantee identical electrolysis products — the physical state (molten vs. aqueous) determines which species is actually reduced/oxidized at each electrode, since aqueous conditions introduce water as a genuine competing species with its own reduction pathway (preferentially reduced over Na⁺ in water), while molten conditions eliminate this competition entirely.",
+        "Electrode materials are not universally inert, passive conductors — carbon anodes in the Hall-Héroult process genuinely react with the oxygen produced there, becoming consumed and requiring regular replacement, a real cost and emissions source. In electroplating, basic electrostatics (opposite charges attract) dictates that positively charged metal cations migrate toward the negatively charged cathode, making the object to be plated the cathode, never the anode.",
+        "Core misconception to avoid: Always check the physical state (molten vs. aqueous) and presence of competing species (like water) before assuming identical electrolysis products from a shared salt identity — molten NaCl gives Na metal (Down's cell); aqueous NaCl gives H₂/NaOH (chloralkali)."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Industrial Electrolysis\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "both use NaCl, so both give sodium.",
+          "correction": "Always check the physical state (molten vs. aqueous) and presence of competing species (like water) before assuming identical electrolysis products from a shared salt identity — molten NaCl gives Na metal (Down's cell); aqueous NaCl gives H₂/NaOH (chloralkali)."
+        },
+        {
+          "misconception": "the anode is just a conductor — it doesn't react.",
+          "correction": "Always check whether the specific electrode material reacts with the specific product generated at that electrode — carbon anodes in the Hall-Héroult process are genuinely consumed via C+O₂→CO₂, never assume all electrodes are passive, permanent conductors."
+        },
+        {
+          "misconception": "the plate receives metal, so it must be the positive terminal.",
+          "correction": "The object to be plated is always the cathode (negative electrode), where positive metal cations are attracted and reduced/deposited — the anode is the sacrificial source metal that dissolves to replenish the solution, never assume \"receiving material\" implies a positive electrode."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Industrial Electrolysis\""
+        "Demonstration 1 (molten-vs-aqueous NaCl electrolysis product comparison): Present both electrolysis scenarios side by side, deriving the differing cathode products from the competing-reduction-potential argument.",
+        "Demonstration 2 (Hall-Héroult carbon-anode consumption reaction): Present the explicit C+O₂→CO₂ reaction, connecting it to anode replacement costs and CO₂ emissions.",
+        "Demonstration 3 (electroplating electrostatics diagram): Present the explicit cation-migration-toward-cathode diagram, deriving the object-to-be-plated's identity as the cathode from opposite-charges-attract reasoning."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Industrial Electrolysis\"",
+        "setup": "In the chloralkali process, does sodium metal form at the cathode? If not, what does?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (molten-vs-aqueous NaCl electrolysis product comparison): Present both electrolysis scenarios side by side, deriving the differing cathode products from the competing-reduction-potential argument.",
+          "Demonstration 2 (Hall-Héroult carbon-anode consumption reaction): Present the explicit C+O₂→CO₂ reaction, connecting it to anode replacement costs and CO₂ emissions.",
+          "Demonstration 3 (electroplating electrostatics diagram): Present the explicit cation-migration-toward-cathode diagram, deriving the object-to-be-plated's identity as the cathode from opposite-charges-attract reasoning."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Industrial Electrolysis\""
+        "expected_outcome": "Student can (a) correctly predict differing electrolysis products from molten vs. aqueous NaCl, (b) correctly explain carbon-anode consumption in the Hall-Héroult process, (c) correctly identify the cathode as the electroplating deposition site from electrostatic reasoning."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit molten-vs-aqueous NaCl electrolysis product comparison.",
+          "TA-2 (TELL): State the Hall-Héroult carbon-anode consumption explicitly, anchored to the C+O₂→CO₂ reaction.",
+          "TA-3 (DO): Student predicts electroplating cathode/anode roles for an unfamiliar metal-plating scenario.",
+          "TA-4 (TEST-THINKING): Present the electroplating probe and ask the student to justify the cathode assignment from electrostatic attraction."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Industrial Electrolysis from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"In the chloralkali process, does sodium metal form at the cathode? If not, what does?\"",
+          "FA-2: \"What gas is produced at the anode in the Hall-Héroult process? Does carbon react with that gas?\"",
+          "FA-3: \"In electrolysis, does the metal cation (e.g., Cu²⁺) travel toward the cathode or the anode?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Industrial Electrolysis\""
+        "mastery_signal": "Student can (a) correctly predict differing electrolysis products from molten vs. aqueous NaCl, (b) correctly explain carbon-anode consumption in the Hall-Héroult process, (c) correctly identify the cathode as the electroplating deposition site from electrostatic reasoning."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Industrial Electrolysis\""
+        "This concept has no direct KG unlocks but consolidates electrolysis reasoning built across `chem.elect.electrolysis`, forming a capstone application to industrial-scale electrochemical process contexts."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.elect.electrolysis"
+      ]
     },
     {
       "id": "asset.chem.kinet.rate",
