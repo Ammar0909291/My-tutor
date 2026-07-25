@@ -1,96 +1,34 @@
-import Groq from 'groq-sdk'
 import { consumeAIBudget } from '@/lib/ai/budget'
 import { captureError } from '@/lib/monitoring'
+import { createGeminiProvider } from './providers/gemini'
+import { createOpenRouterProvider } from './providers/openrouter'
+import { createFailoverRouter } from './providers/failoverRouter'
+import type { AIProvider, AICompletionRequest } from './providers/types'
+import { AIProviderError } from './providers/types'
 
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || '', timeout: 20000, maxRetries: 2 })
+// ─── Provider configuration (env-var driven) ─────────────────────────────────
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY ?? ''
+const GEMINI_MODEL = process.env.GEMINI_MODEL ?? 'gemini-2.5-flash'
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY ?? ''
+const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL ?? 'deepseek/deepseek-chat-v3.1'
 
-// ─── Groq (India + Global) ────────────────────────────────────────────────────
-async function callGroq(
-  messages: { role: 'user' | 'assistant'; content: string }[],
-  systemPrompt: string,
-  maxTokens = 800,
-): Promise<string> {
-  const req = {
-    model: 'openai/gpt-oss-20b' as const,
-    messages: [
-      { role: 'system' as const, content: systemPrompt },
-      ...messages.slice(-6),
-    ],
-    max_tokens: maxTokens,
-    temperature: 0.7,
-  }
-  await consumeAIBudget()
-  const response = await groq.chat.completions.create(req)
-  const text = response.choices[0]?.message?.content ?? ''
-  if (text) return text
-  // Empty content (null choice or null message) — transient model issue.
-  // The SDK maxRetries:2 only covers HTTP errors, not 200-OK-with-null-content.
-  // One explicit retry is sufficient for the common transient overload case.
-  console.warn('[routeAI] Groq returned empty content, retrying once')
-  await consumeAIBudget()
-  const retry = await groq.chat.completions.create(req)
-  return retry.choices[0]?.message?.content ?? ''
+let _router: ReturnType<typeof createFailoverRouter> | null = null
+
+function getRouter() {
+  if (_router) return _router
+  const primary = createGeminiProvider(GEMINI_API_KEY, GEMINI_MODEL)
+  const fallback = createOpenRouterProvider(OPENROUTER_API_KEY, OPENROUTER_MODEL)
+  _router = createFailoverRouter({ primary, fallback })
+  return _router
 }
 
-// ─── YandexGPT (Russia only) ──────────────────────────────────────────────────
-async function callYandexGPT(
-  messages: { role: 'user' | 'assistant'; content: string }[],
-  systemPrompt: string,
-  maxTokens = 800,
-): Promise<string> {
-  if (!process.env.YANDEX_API_KEY || !process.env.YANDEX_FOLDER_ID) {
-    console.warn('Yandex credentials missing — falling back to Groq')
-    return callGroq(messages, systemPrompt, maxTokens)
-  }
+export function getAIRouter() { return getRouter() }
 
-  try {
-    const yandexMessages = [
-      { role: 'system', text: systemPrompt },
-      ...messages.slice(-6).map((m) => ({
-        role: m.role === 'user' ? 'user' : 'assistant',
-        text: m.content,
-      })),
-    ]
-
-    const response = await fetch(
-      'https://llm.api.cloud.yandex.net/foundationModels/v1/completion',
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Api-Key ${process.env.YANDEX_API_KEY}`,
-          'x-folder-id': process.env.YANDEX_FOLDER_ID,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          modelUri: `gpt://${process.env.YANDEX_FOLDER_ID}/yandexgpt-lite/latest`,
-          completionOptions: {
-            stream: false,
-            temperature: 0.7,
-            maxTokens: maxTokens.toString(),
-          },
-          messages: yandexMessages,
-        }),
-        signal: AbortSignal.timeout(25000),
-      },
-    )
-
-    if (!response.ok) {
-      console.error('YandexGPT error:', response.status)
-      return callGroq(messages, systemPrompt, maxTokens)
-    }
-
-    const data = await response.json()
-    return data.result?.alternatives?.[0]?.message?.text ?? ''
-  } catch (error: any) {
-    console.error('YandexGPT exception:', error.message)
-    return callGroq(messages, systemPrompt, maxTokens)
-  }
-}
-
-// ─── Main router ──────────────────────────────────────────────────────────────
+// ─── Main router ─────────────────────────────────────────────────────────────
 export interface RouteAIResult {
   text: string
   provider: string
+  finishReason: string | null
 }
 
 export async function routeAI(
@@ -101,56 +39,65 @@ export async function routeAI(
   lang: 'ru' | 'en' | 'hi' = 'en',
   _meta?: Record<string, unknown>,
 ): Promise<RouteAIResult> {
-  console.log('AI Router: country =', country)
+  console.log('[ai/router] routing request, country =', country)
+
+  await consumeAIBudget()
+
+  const req: AICompletionRequest = {
+    messages: messages.slice(-6),
+    systemPrompt,
+    maxTokens,
+    temperature: 0.7,
+  }
 
   try {
-    if (country === 'ru') {
-      console.log('→ Routing to YandexGPT')
-      const text = await callYandexGPT(messages, systemPrompt, maxTokens)
-      return { text, provider: 'yandex' }
-    }
-    console.log('→ Routing to Groq')
-    const text = await callGroq(messages, systemPrompt, maxTokens)
-    return { text, provider: 'groq' }
+    const result = await getRouter().complete(req)
+    console.log(
+      `[ai/router] success provider=${result.provider} finish_reason=${result.finishReason}` +
+      ` chars=${result.text.length}`,
+    )
+    return { text: result.text, provider: result.provider, finishReason: result.finishReason }
   } catch (error: any) {
-    console.error('routeAI error:', error.message)
-    if (error.message?.includes('timeout') || error.message?.includes('timed out')) {
+    console.error('[ai/router] all providers failed:', error.message)
+    captureError(error, {
+      route: 'lib/ai/routeAI',
+      tags: { provider: error instanceof AIProviderError ? error.provider : 'unknown' },
+    })
+
+    if (
+      error.message?.includes('timeout') || error.message?.includes('timed out') ||
+      error.name === 'AITimeoutError'
+    ) {
       const timeoutMsg: Record<string, string> = {
         en: 'Taking longer than usual. Please try again.',
         ru: 'Думаю дольше обычного. Попробуй ещё раз.',
         hi: 'Thoda time lag raha hai. Please try again.',
       }
-      return { text: timeoutMsg[lang] || timeoutMsg.en, provider: 'fallback' }
+      return { text: timeoutMsg[lang] || timeoutMsg.en, provider: 'fallback', finishReason: null }
     }
     throw error
   }
 }
 
-// ─── JSON generation (always Groq — faster for structured output) ─────────────
+// ─── JSON generation ─────────────────────────────────────────────────────────
 export async function routeJSON(
   prompt: string,
   maxTokens = 1500,
 ): Promise<any> {
-  // routeJSON never throws (callers expect null on failure) — a spent budget
-  // degrades to null the same way a provider error does.
   try { await consumeAIBudget() } catch { return null }
   try {
-    const response = await groq.chat.completions.create({
-      model: 'openai/gpt-oss-20b',
-      messages: [{
-        role: 'user',
-        content: prompt + '\n\nReturn ONLY valid JSON. No markdown. No explanation.',
-      }],
-      max_tokens: maxTokens,
+    const req: AICompletionRequest = {
+      messages: [{ role: 'user', content: prompt + '\n\nReturn ONLY valid JSON. No markdown. No explanation.' }],
+      systemPrompt: 'You are a JSON generation assistant. Return ONLY valid JSON.',
+      maxTokens,
       temperature: 0.3,
-    })
-    const text = response.choices[0]?.message?.content ?? '[]'
-    const clean = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
+    }
+    const result = await getRouter().complete(req)
+    const clean = result.text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
     try { return JSON.parse(clean) } catch { return null }
   } catch (error: any) {
-    // Swallowed failure — without reporting it would be invisible in production.
-    console.error('routeJSON error:', error.message)
-    captureError(error, { route: 'lib/ai/routeJSON', tags: { provider: 'groq' } })
+    console.error('[ai/router] routeJSON error:', error.message)
+    captureError(error, { route: 'lib/ai/routeJSON', tags: { provider: 'gemini' } })
     return null
   }
 }
