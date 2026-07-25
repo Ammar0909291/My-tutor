@@ -8256,48 +8256,64 @@
     {
       "id": "asset.chem.carb.aldehydes",
       "concept_id": "chem.carb.aldehydes",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Aldehydes\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Aldehydes\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Aldehydes\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "A nucleophile attacks the ELECTROPHILIC carbonyl CARBON (δ+), never the oxygen (δ−) — the π-bond electrons are then pushed onto oxygen (forming the alkoxide), not because oxygen \"attracted\" the incoming nucleophile, but because carbon is the positively-polarized site a nucleophile is drawn to (like poles repel: a negative nucleophile does not attack another negative center); reducing an ALDEHYDE with NaBH₄ gives a PRIMARY alcohol (the carbonyl carbon has only one alkyl/H substituent plus the incoming H), never a secondary alcohol — secondary alcohols require a KETONE (two carbon substituents on the carbonyl carbon) as starting material, so \"aldehyde reduces to secondary alcohol\" conflates aldehyde and ketone reduction outcomes; and Fehling's test is positive ONLY for ALIPHATIC aldehydes, NOT for aromatic aldehydes like benzaldehyde — Cu²⁺ in alkaline tartrate cannot oxidize benzaldehyde under typical conditions, so a positive Fehling's result cannot be assumed from \"it's an aldehyde\" alone; Tollens' reagent (silver mirror), not Fehling's, is the correct diagnostic for aromatic aldehydes.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Aldehydes\"",
-        "[TEMPLATE] Key idea 2 for \"Aldehydes\"",
-        "[TEMPLATE] Key idea 3 for \"Aldehydes\""
+        "In nucleophilic addition to a carbonyl, the nucleophile always attacks the electrophilic (positively-polarized) carbon, never the oxygen — the resulting negative charge on oxygen (alkoxide) is a consequence of the displaced π-electrons, not evidence of the oxygen being the actual attack site. The product's classification as primary or secondary alcohol depends directly on the substrate class: aldehydes (one carbon substituent at the carbonyl carbon) always give primary alcohols; ketones (two carbon substituents) always give secondary alcohols.",
+        "Fehling's test, while a reliable positive diagnostic for aliphatic aldehydes, genuinely fails for aromatic aldehydes like benzaldehyde under normal conditions — Tollens' reagent (silver mirror test) is the correct choice when testing an aromatic aldehyde, since \"aldehyde\" as a functional-group label does not guarantee uniform reactivity across every oxidation-based test.",
+        "Core misconception to avoid: Nucleophiles always attack the electrophilic (positively-polarized) carbon of a carbonyl, never the oxygen — the oxygen becomes negatively charged in the product as a consequence of the π-electrons being pushed there, not as the site of nucleophilic attack."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Aldehydes\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "H⁻ attacks the oxygen because it's δ−",
+          "correction": "Nucleophiles always attack the electrophilic (positively-polarized) carbon of a carbonyl, never the oxygen — the oxygen becomes negatively charged in the product as a consequence of the π-electrons being pushed there, not as the site of nucleophilic attack."
+        },
+        {
+          "misconception": "the product is propan-2-ol",
+          "correction": "Aldehyde reduction (NaBH₄ or LiAlH₄) always gives a PRIMARY alcohol; ketone reduction always gives a SECONDARY alcohol — never conflate the two starting-material classes."
+        },
+        {
+          "misconception": "brick-red precipitate because benzaldehyde is an aldehyde.",
+          "correction": "Fehling's test is a positive diagnostic specifically for ALIPHATIC aldehydes — use Tollens' reagent (silver mirror test) to test for aromatic aldehydes like benzaldehyde, never assume Fehling's works universally for \"any aldehyde.\""
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Aldehydes\""
+        "Demonstration 1 (explicit curved-arrow mechanism with electrostatic justification): Draw the NaBH₄+ethanal mechanism step by step, justifying the arrow's direction from electrostatic attraction to the electrophilic carbon.",
+        "Demonstration 2 (aldehyde vs. ketone reduction product comparison): Reduce propanal and a comparable ketone side by side, tracking carbonyl-carbon substituent count before and after reduction.",
+        "Demonstration 3 (Fehling's vs. Tollens' aliphatic/aromatic contrast): Present the explicit positive/negative Fehling's results for an aliphatic and an aromatic aldehyde, then introduce Tollens' as the correct aromatic-aldehyde diagnostic."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Aldehydes\"",
+        "setup": "In the addition of NaBH₄ to ethanal, which atom does the hydride attack?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (explicit curved-arrow mechanism with electrostatic justification): Draw the NaBH₄+ethanal mechanism step by step, justifying the arrow's direction from electrostatic attraction to the electrophilic carbon.",
+          "Demonstration 2 (aldehyde vs. ketone reduction product comparison): Reduce propanal and a comparable ketone side by side, tracking carbonyl-carbon substituent count before and after reduction.",
+          "Demonstration 3 (Fehling's vs. Tollens' aliphatic/aromatic contrast): Present the explicit positive/negative Fehling's results for an aliphatic and an aromatic aldehyde, then introduce Tollens' as the correct aromatic-aldehyde diagnostic."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Aldehydes\""
+        "expected_outcome": "Student can (a) correctly draw nucleophilic addition arrows attacking the carbonyl carbon, (b) correctly predict primary-vs-secondary alcohol product from aldehyde-vs-ketone substrate, (c) correctly select Tollens' over Fehling's for aromatic aldehyde detection."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit curved-arrow mechanism for NaBH₄ addition, justifying attack-site selection electrostatically.",
+          "TA-2 (TELL): State the aldehyde-gives-primary/ketone-gives-secondary rule explicitly, anchored to the substituent-count comparison.",
+          "TA-3 (DO): Student predicts the reduction product for an unfamiliar aldehyde or ketone.",
+          "TA-4 (TEST-THINKING): Present the benzaldehyde-Fehling's probe and ask the student to justify the negative result from the aliphatic/aromatic distinction."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Aldehydes from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"In the addition of NaBH₄ to ethanal, which atom does the hydride attack?\"",
+          "FA-2: \"What is the product of reducing propanal with NaBH₄?\"",
+          "FA-3: \"What would you observe when benzaldehyde is added to Fehling's solution?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Aldehydes\""
+        "mastery_signal": "Student can (a) correctly draw nucleophilic addition arrows attacking the carbonyl carbon, (b) correctly predict primary-vs-secondary alcohol product from aldehyde-vs-ketone substrate, (c) correctly select Tollens' over Fehling's for aromatic aldehyde detection."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Aldehydes\""
+        "Feeds directly into `chem.carb.ketones` (comparative aldehyde/ketone reasoning established here is directly required), `chem.carb.carboxylic` (aldehyde oxidation is a direct route to carboxylic acids), and `chem.bio.carbohydrates` (carbonyl reactivity underlies sugar chemistry)."
       ],
       "prerequisite_review_triggers": [
         "chem.alc.alcohols",
@@ -8307,48 +8323,64 @@
     {
       "id": "asset.chem.carb.ketones",
       "concept_id": "chem.carb.ketones",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Ketones\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Ketones\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Ketones\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Keto-enol tautomers are NOT resonance structures (not two ways of drawing \"the same\" electron distribution) — they are genuinely DIFFERENT constitutional isomers with different connectivity (the enol has an O–H bond and a C=C bond; the keto form has a C=O bond and an extra C–H bond), interconverting via a real bond-breaking/forming equilibrium (tautomerization), never instantaneously via electron-pushing alone; the Baeyer-Villiger oxidation of an UNSYMMETRICAL ketone does NOT insert oxygen at a random or \"either\" position — the MORE SUBSTITUTED (better migrating-group-ability) carbon group migrates preferentially to oxygen, following a specific migratory-aptitude order (tertiary>secondary>aryl>primary>methyl), so the ester product's regiochemistry is predictable, not arbitrary; and ketones are NOT generally prepared by simple oxidation of secondary alcohols alone in industrial contexts — the Wacker process specifically converts terminal ALKENES directly to methyl ketones via Pd(II)/Cu(II) catalytic oxidation (Markovnikov-selective), an entirely different, industrially significant route that does not require a pre-existing alcohol at all.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Ketones\"",
-        "[TEMPLATE] Key idea 2 for \"Ketones\"",
-        "[TEMPLATE] Key idea 3 for \"Ketones\""
+        "Keto and enol tautomers are genuinely distinct constitutional isomers (different bond connectivity), interconverting via a real chemical equilibrium involving actual bond-breaking and bond-forming — fundamentally different from resonance structures, which share identical connectivity and differ only in electron-pair depiction with no true interconversion.",
+        "The Baeyer-Villiger oxidation's regiochemistry is predictable from migratory aptitude (tertiary>secondary>aryl>primary>methyl), reflecting which group best stabilizes developing positive character during the concerted migration step — never arbitrary. Ketones can be synthesized via multiple independent strategic routes (alcohol oxidation, the Wacker process, Friedel-Crafts acylation, alkyne hydration), not exclusively through alcohol oxidation.",
+        "Core misconception to avoid: Tautomers are genuine constitutional isomers with different bond connectivity, interconverting via a real equilibrium reaction (bond-breaking/forming) — never treat them as resonance structures of a single fixed-connectivity molecule."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Ketones\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "tautomers are just resonance forms, like drawing electrons differently.",
+          "correction": "Tautomers are genuine constitutional isomers with different bond connectivity, interconverting via a real equilibrium reaction (bond-breaking/forming) — never treat them as resonance structures of a single fixed-connectivity molecule."
+        },
+        {
+          "misconception": "either group could migrate, it's basically random.",
+          "correction": "Baeyer-Villiger oxidation follows a specific migratory aptitude order (tertiary>secondary>aryl>primary>methyl) — always predict the major product from this order, never assume random or arbitrary oxygen insertion."
+        },
+        {
+          "misconception": "ketones always come from oxidizing an alcohol.",
+          "correction": "Ketones can be prepared through multiple independent routes (alcohol oxidation, Wacker process from alkenes, Friedel-Crafts acylation, alkyne hydration) — never assume alcohol oxidation is the only pathway."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Ketones\""
+        "Demonstration 1 (bond-by-bond keto/enol comparison): Draw both tautomers explicitly, tracking every bond that breaks and forms during interconversion.",
+        "Demonstration 2 (migratory-aptitude-based Baeyer-Villiger prediction): Apply the explicit migratory-aptitude ranking to an unsymmetrical ketone, predicting the major ester product.",
+        "Demonstration 3 (Wacker-process catalytic cycle): Present the explicit Pd(II)/Cu(II) catalytic cycle converting a terminal alkene directly to a methyl ketone."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Ketones\"",
+        "setup": "Draw the keto and enol forms of acetone. Are these two resonance structures of one molecule, or two different molecules?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (bond-by-bond keto/enol comparison): Draw both tautomers explicitly, tracking every bond that breaks and forms during interconversion.",
+          "Demonstration 2 (migratory-aptitude-based Baeyer-Villiger prediction): Apply the explicit migratory-aptitude ranking to an unsymmetrical ketone, predicting the major ester product.",
+          "Demonstration 3 (Wacker-process catalytic cycle): Present the explicit Pd(II)/Cu(II) catalytic cycle converting a terminal alkene directly to a methyl ketone."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Ketones\""
+        "expected_outcome": "Student can (a) correctly distinguish tautomers from resonance structures, (b) correctly predict Baeyer-Villiger regiochemistry from migratory aptitude, (c) correctly identify multiple independent ketone-synthesis routes."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit bond-by-bond keto/enol comparison.",
+          "TA-2 (TELL): State the migratory-aptitude order explicitly, anchored to an unsymmetrical-ketone prediction.",
+          "TA-3 (DO): Student predicts the Baeyer-Villiger product for an unfamiliar unsymmetrical ketone.",
+          "TA-4 (TEST-THINKING): Present the Wacker-process probe and ask the student to justify a non-alcohol-oxidation ketone synthesis route."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Ketones from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Draw the keto and enol forms of acetone. Are these two resonance structures of one molecule, or two different molecules?\"",
+          "FA-2: \"In the Baeyer-Villiger oxidation of methyl tert-butyl ketone, which carbon group migrates to oxygen?\"",
+          "FA-3: \"Can a ketone be prepared directly from a terminal alkene, without first making an alcohol?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Ketones\""
+        "mastery_signal": "Student can (a) correctly distinguish tautomers from resonance structures, (b) correctly predict Baeyer-Villiger regiochemistry from migratory aptitude, (c) correctly identify multiple independent ketone-synthesis routes."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Ketones\""
+        "Feeds directly into `chem.carb.alpha-reactions` (keto-enol tautomerism is foundational to alpha-carbon chemistry) and `chem.carb.spectro` (distinguishing tautomers and predicting oxidation products informs spectroscopic structure elucidation)."
       ],
       "prerequisite_review_triggers": [
         "chem.carb.aldehydes"
@@ -8357,48 +8389,57 @@
     {
       "id": "asset.chem.carb.alpha-reactions",
       "concept_id": "chem.carb.alpha-reactions",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Alpha-Carbon Reactions\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Alpha-Carbon Reactions\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Alpha-Carbon Reactions\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Alpha-hydrogens are NOT acidic because they're attached to an electronegative atom like O-H or N-H — they are acidic (pKa ~20 for simple ketones) specifically because deprotonation generates an ENOLATE ion stabilized by RESONANCE DELOCALIZATION of the negative charge onto the carbonyl oxygen, a completely different acidifying mechanism than inductive electronegativity; and the aldol condensation is NOT a single-step reaction — it is a TWO-STAGE process where (1) the aldol ADDITION step forms a beta-hydroxy carbonyl compound first, and only THEN (2) a separate, often reversible, base- or acid-catalyzed dehydration (E1cb-like) step eliminates water to form the alpha,beta-unsaturated (conjugated) product — treating \"aldol condensation\" as producing the unsaturated enone directly in one step, without the intermediate beta-hydroxy compound, skips a mechanistically real and often isolable intermediate.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Alpha-Carbon Reactions\"",
-        "[TEMPLATE] Key idea 2 for \"Alpha-Carbon Reactions\"",
-        "[TEMPLATE] Key idea 3 for \"Alpha-Carbon Reactions\""
+        "Alpha-hydrogens are acidic because their removal generates a resonance-stabilized enolate ion, with the negative charge delocalized onto the carbonyl oxygen — this resonance stabilization, not inductive proximity to oxygen, explains why alpha-hydrogens (pKa ~20) are so much more acidic than ordinary alkane C-H bonds (pKa ~50).",
+        "Aldol condensation proceeds through two distinct stages — an aldol addition step forming a discrete beta-hydroxy carbonyl intermediate, followed by a separate dehydration step eliminating water to form the conjugated alpha,beta-unsaturated product — the overall name \"condensation\" describes this full two-stage sequence, not a single concerted transformation.",
+        "Core misconception to avoid: Alpha-hydrogens are acidic specifically because their deprotonation generates a resonance-stabilized enolate (charge delocalized onto the carbonyl oxygen), not because of inductive electronegativity from a nearby oxygen atom."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Alpha-Carbon Reactions\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "The alpha-hydrogen is acidic because it's near the electronegative oxygen, like in an O-H bond.",
+          "correction": "Alpha-hydrogens are acidic specifically because their deprotonation generates a resonance-stabilized enolate (charge delocalized onto the carbonyl oxygen), not because of inductive electronegativity from a nearby oxygen atom."
+        },
+        {
+          "misconception": "Aldol condensation directly gives the unsaturated enone product in one step.",
+          "correction": "Aldol condensation is a two-stage process — aldol addition (forming a discrete beta-hydroxy carbonyl intermediate) followed by a separate dehydration step (eliminating water to form the enone) — never a single concerted step."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Alpha-Carbon Reactions\""
+        "Demonstration 1 (enolate resonance-structure diagram): Present the explicit charge-delocalization diagram, deriving alpha-hydrogen acidity from resonance, not induction.",
+        "Demonstration 2 (two-step aldol mechanism diagram): Present the explicit addition-then-dehydration sequence, deriving the genuine intermediate stage."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Alpha-Carbon Reactions\"",
+        "setup": "Why is an alpha-hydrogen in acetone so much more acidic than a hydrogen in an ordinary alkane? Is it because the alpha-carbon is close to the electronegative oxygen?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (enolate resonance-structure diagram): Present the explicit charge-delocalization diagram, deriving alpha-hydrogen acidity from resonance, not induction.",
+          "Demonstration 2 (two-step aldol mechanism diagram): Present the explicit addition-then-dehydration sequence, deriving the genuine intermediate stage."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Alpha-Carbon Reactions\""
+        "expected_outcome": "Student can (a) correctly explain alpha-hydrogen acidity via enolate resonance stabilization, (b) correctly identify the beta-hydroxy intermediate as a distinct stage in an aldol condensation before dehydration."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit enolate resonance-structure diagram for alpha-hydrogen acidity.",
+          "TA-2 (TELL): State the two-stage aldol mechanism explicitly, anchored to the addition-then-dehydration diagram.",
+          "TA-3 (DO): Student draws the enolate resonance structures for an unfamiliar ketone and predicts the beta-hydroxy intermediate for an aldol reaction between two given carbonyl compounds.",
+          "TA-4 (TEST-THINKING): Present the MC-1 probe and ask the student to justify why alpha-hydrogen acidity is a resonance effect rather than an inductive one."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Alpha-Carbon Reactions from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Why is an alpha-hydrogen in acetone so much more acidic than a hydrogen in an ordinary alkane? Is it because the alpha-carbon is close to the electronegative oxygen?\"",
+          "FA-2: \"In an aldol condensation, does the alpha,beta-unsaturated product form directly in a single step, or is there a separate intermediate along the way?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Alpha-Carbon Reactions\""
+        "mastery_signal": "Student can (a) correctly explain alpha-hydrogen acidity via enolate resonance stabilization, (b) correctly identify the beta-hydroxy intermediate as a distinct stage in an aldol condensation before dehydration."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Alpha-Carbon Reactions\""
+        "This concept unlocks `chem.carb.named-reactions`, extending enolate and aldol reasoning to Claisen condensation, retro-aldol, and malonic ester synthesis."
       ],
       "prerequisite_review_triggers": [
         "chem.carb.ketones"
@@ -8407,48 +8448,64 @@
     {
       "id": "asset.chem.carb.carboxylic",
       "concept_id": "chem.carb.carboxylic",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Carboxylic Acids\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Carboxylic Acids\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Carboxylic Acids\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Carboxylic acid acidity is NOT explained merely by \"the OH can lose a proton\" (true of alcohols too, yet alcohols are far less acidic) — the DECISIVE factor is that the resulting carboxylate anion is stabilized by RESONANCE DELOCALIZATION across TWO equivalent oxygen atoms (a symmetric, doubly-stabilized anion), unlike an alkoxide anion (charge localized on one oxygen only) — this resonance stabilization, not mere \"having an OH,\" is why carboxylic acids (pKa~4-5) are dramatically more acidic than alcohols (pKa~16-18); electron-withdrawing groups near the carboxyl (like halogens) increase acidity via an INDUCTIVE effect that DECREASES sharply with distance — chloroacetic acid (pKa~2.8) is substantially more acidic than acetic acid (pKa~4.76), but this effect drops off rapidly as the halogen moves further from the carboxyl carbon (4-chlorobutanoic acid shows much less enhancement than 2-chlorobutanoic acid) — inductive effects are NOT distance-independent; and decarboxylation of a carboxylic acid does NOT occur spontaneously/readily for ordinary carboxylic acids at room temperature — it specifically requires either a β-keto acid or similar structure (providing a cyclic six-membered transition state where the carbonyl oxygen can accept the departing proton intramolecularly) or forcing conditions (like the Hunsdiecker reaction or specific decarboxylative catalysis) — plain acetic acid does not spontaneously lose CO₂ under mild conditions.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Carboxylic Acids\"",
-        "[TEMPLATE] Key idea 2 for \"Carboxylic Acids\"",
-        "[TEMPLATE] Key idea 3 for \"Carboxylic Acids\""
+        "Carboxylic acids are far more acidic than alcohols because the resulting carboxylate anion benefits from resonance delocalization across two equivalent oxygen atoms, dramatically stabilizing the negative charge — a stabilization mechanism entirely unavailable to the localized alkoxide anion from alcohol deprotonation, despite both starting materials sharing a superficially similar O–H bond.",
+        "Inductive acidity-enhancing effects from electron-withdrawing substituents decay steeply with increasing distance from the carboxyl group through the sigma-bond framework, unlike resonance effects which can persist through conjugation — always account for substituent position, not just presence. Decarboxylation proceeds readily only for structures (like β-keto acids) providing a low-energy cyclic transition state; ordinary carboxylic acids require forcing conditions, never spontaneous mild-condition decarboxylation.",
+        "Core misconception to avoid: Carboxylic acids are far more acidic than alcohols specifically because the carboxylate anion is resonance-stabilized across two equivalent oxygens — never attribute acidity merely to the presence of an ionizable O–H bond."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Carboxylic Acids\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "they both have OH so they should be similarly acidic.",
+          "correction": "Carboxylic acids are far more acidic than alcohols specifically because the carboxylate anion is resonance-stabilized across two equivalent oxygens — never attribute acidity merely to the presence of an ionizable O–H bond."
+        },
+        {
+          "misconception": "an electron-withdrawing group increases acidity by the same amount no matter where it is.",
+          "correction": "Always account for substituent distance when predicting inductive acidity effects — the same electron-withdrawing group produces a much smaller acidifying effect when positioned further from the carboxyl group along the carbon chain."
+        },
+        {
+          "misconception": "carboxylic acids can decarboxylate, so any of them should lose CO₂ easily.",
+          "correction": "Decarboxylation readily occurs only for structures providing a low-energy transition state (like β-keto acids, via a six-membered cyclic mechanism) — ordinary carboxylic acids require forcing conditions or specific reagents, never assume spontaneous decarboxylation under mild conditions."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Carboxylic Acids\""
+        "Demonstration 1 (carboxylate-vs-alkoxide resonance-structure comparison): Present both anion structures explicitly, deriving the acidity difference from resonance stabilization.",
+        "Demonstration 2 (pKa-vs-distance data for the chlorobutanoic acid series): Present the explicit pKa data, deriving the inductive-effect decay with distance.",
+        "Demonstration 3 (six-membered cyclic transition-state mechanism for β-keto acid decarboxylation): Present the explicit mechanism, contrasted with the absence of a comparable pathway for ordinary carboxylic acids."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Carboxylic Acids\"",
+        "setup": "Both ethanol and acetic acid have an O–H bond. Why is acetic acid so much more acidic?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (carboxylate-vs-alkoxide resonance-structure comparison): Present both anion structures explicitly, deriving the acidity difference from resonance stabilization.",
+          "Demonstration 2 (pKa-vs-distance data for the chlorobutanoic acid series): Present the explicit pKa data, deriving the inductive-effect decay with distance.",
+          "Demonstration 3 (six-membered cyclic transition-state mechanism for β-keto acid decarboxylation): Present the explicit mechanism, contrasted with the absence of a comparable pathway for ordinary carboxylic acids."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Carboxylic Acids\""
+        "expected_outcome": "Student can (a) correctly attribute carboxylic acid acidity to carboxylate resonance stabilization, (b) correctly predict the distance-dependent magnitude of inductive acidity effects, (c) correctly assess decarboxylation feasibility from structural features."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit carboxylate-vs-alkoxide resonance-structure comparison.",
+          "TA-2 (TELL): State the distance-dependent inductive-effect principle explicitly, anchored to the chlorobutanoic acid pKa data.",
+          "TA-3 (DO): Student predicts the decarboxylation feasibility for an unfamiliar carboxylic acid based on its structural features.",
+          "TA-4 (TEST-THINKING): Present the 2-chloro-vs-4-chlorobutanoic-acid probe and ask the student to justify the differing acidity enhancement."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Carboxylic Acids from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Both ethanol and acetic acid have an O–H bond. Why is acetic acid so much more acidic?\"",
+          "FA-2: \"Compare the pKa of 2-chlorobutanoic acid and 4-chlorobutanoic acid.\"",
+          "FA-3: \"Does acetic acid spontaneously lose CO₂ if you simply heat it gently at room temperature?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Carboxylic Acids\""
+        "mastery_signal": "Student can (a) correctly attribute carboxylic acid acidity to carboxylate resonance stabilization, (b) correctly predict the distance-dependent magnitude of inductive acidity effects, (c) correctly assess decarboxylation feasibility from structural features."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Carboxylic Acids\""
+        "Feeds directly into `chem.carb.derivatives` (carboxylic acid reactivity underlies ester/amide/acid-chloride formation) and `chem.nitro.amino-acids` (carboxylic acid acidity and decarboxylation reasoning directly apply to amino acid chemistry)."
       ],
       "prerequisite_review_triggers": [
         "chem.carb.aldehydes",
@@ -8458,48 +8515,57 @@
     {
       "id": "asset.chem.carb.derivatives",
       "concept_id": "chem.carb.derivatives",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Carboxylic Acid Derivatives\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Carboxylic Acid Derivatives\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Carboxylic Acid Derivatives\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Carboxylic acid derivative reactivity toward nucleophilic acyl substitution follows a FIXED order — acyl chloride > anhydride > ester > amide — driven ENTIRELY by the leaving-group ability of the group attached to the carbonyl carbon (Cl- best, carboxylate good, alkoxide poor, amide nitrogen worst), NOT by the electrophilicity of the carbonyl carbon alone as beginners often assume; and this reactivity order is a ONE-WAY STREET for direct interconversion — a MORE reactive derivative can be converted into any LESS reactive derivative (e.g., acyl chloride → ester), but a less reactive derivative CANNOT be directly converted into a more reactive one (e.g., you cannot directly convert an amide into an acyl chloride by simple nucleophilic acyl substitution) — attempting the \"wrong direction\" conversion requires activating reagents that circumvent the reactivity order entirely, not a straightforward substitution.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Carboxylic Acid Derivatives\"",
-        "[TEMPLATE] Key idea 2 for \"Carboxylic Acid Derivatives\"",
-        "[TEMPLATE] Key idea 3 for \"Carboxylic Acid Derivatives\""
+        "Carboxylic acid derivative reactivity in nucleophilic acyl substitution follows the fixed order acyl chloride > anhydride > ester > amide, governed by the leaving-group ability of the attached group (Cl- best, amide nitrogen worst) — not by carbonyl electrophilicity, which is essentially shared across all derivatives.",
+        "Direct derivative interconversion via simple substitution only flows downhill on the reactivity ladder (more reactive → less reactive derivative), because the incoming nucleophile must displace a leaving group no better than itself for the substitution to be favorable — converting uphill requires specialized activating reagents, not the same straightforward mechanism.",
+        "Core misconception to avoid: Carboxylic acid derivative reactivity follows the fixed order acyl chloride > anhydride > ester > amide, governed by leaving-group ability, not by carbonyl electrophilicity alone."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Carboxylic Acid Derivatives\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "They both have a C=O, so they should react about the same with water.",
+          "correction": "Carboxylic acid derivative reactivity follows the fixed order acyl chloride > anhydride > ester > amide, governed by leaving-group ability, not by carbonyl electrophilicity alone."
+        },
+        {
+          "misconception": "If you can go one way, you should be able to go back the same way.",
+          "correction": "Derivative interconversion via simple nucleophilic acyl substitution only flows downhill on the reactivity ladder (more reactive → less reactive) — converting \"uphill\" requires activating reagents, not the same straightforward approach."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Carboxylic Acid Derivatives\""
+        "Demonstration 1 (leaving-group-ability reactivity ladder): Present the explicit acyl chloride > anhydride > ester > amide ranking tied to leaving-group quality, deriving the reactivity order.",
+        "Demonstration 2 (directional interconversion diagram): Present the explicit downhill-only conversion diagram, deriving which interconversions are straightforward."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Carboxylic Acid Derivatives\"",
+        "setup": "Acetyl chloride and acetamide both have a carbonyl carbon. Would you expect them to hydrolyze in water at similar rates?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (leaving-group-ability reactivity ladder): Present the explicit acyl chloride > anhydride > ester > amide ranking tied to leaving-group quality, deriving the reactivity order.",
+          "Demonstration 2 (directional interconversion diagram): Present the explicit downhill-only conversion diagram, deriving which interconversions are straightforward."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Carboxylic Acid Derivatives\""
+        "expected_outcome": "Student can (a) correctly rank carboxylic acid derivative reactivity from leaving-group ability, (b) correctly judge whether a proposed derivative interconversion is straightforward or requires activation."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit leaving-group-ability reactivity ladder for the four derivative classes.",
+          "TA-2 (TELL): State the directional-interconversion rule explicitly, anchored to the downhill-only conversion diagram.",
+          "TA-3 (DO): Student predicts whether a proposed conversion between two unfamiliar derivatives is straightforward (downhill) or requires activation (uphill).",
+          "TA-4 (TEST-THINKING): Present the MC-1 probe and ask the student to justify why acetyl chloride and acetamide react so differently despite sharing a carbonyl group."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Carboxylic Acid Derivatives from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Acetyl chloride and acetamide both have a carbonyl carbon. Would you expect them to hydrolyze in water at similar rates?\"",
+          "FA-2: \"Acyl chlorides can be converted into amides easily. Can amides be converted back into acyl chlorides by the same simple nucleophilic substitution approach?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Carboxylic Acid Derivatives\""
+        "mastery_signal": "Student can (a) correctly rank carboxylic acid derivative reactivity from leaving-group ability, (b) correctly judge whether a proposed derivative interconversion is straightforward or requires activation."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Carboxylic Acid Derivatives\""
+        "This concept unlocks `chem.bio.lipids`, `chem.carb.named-reactions`, and `chem.poly.condensation`, extending derivative-reactivity reasoning to ester-based lipids, named acyl-substitution reactions, and condensation polymerization."
       ],
       "prerequisite_review_triggers": [
         "chem.carb.carboxylic"
@@ -8508,98 +8574,122 @@
     {
       "id": "asset.chem.carb.named-reactions",
       "concept_id": "chem.carb.named-reactions",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Named Carbonyl Reactions\".",
-      "concept_summary": "Perkin, Knoevenagel, Reformatsky, Wittig, Baeyer–Villiger; mechanism; retrosynthetic planning.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Named Carbonyl Reactions\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The Wittig reaction is NOT just \"another way to make an alkene\" interchangeable with E1/E2 elimination or catalytic reduction of an alkyne — it is SPECIFICALLY valuable because it installs a C=C double bond at a PREDICTABLE, DEFINED position (exactly where the phosphorus ylide's carbon and the carbonyl carbon were), avoiding the regiochemical ambiguity/mixture-of-products problem that plagues elimination reactions on unsymmetrical substrates — this positional certainty, not merely \"another alkene-forming method,\" is the Wittig's core synthetic value; and the Baeyer-Villiger oxidation's regiochemistry (which side of an unsymmetrical ketone the oxygen inserts on) is NOT random or determined by which carbon is \"closer\" to the peroxide — it follows a specific MIGRATORY APTITUDE order (roughly tertiary > secondary > aryl > primary > methyl) for which alkyl/aryl group migrates to oxygen during the concerted rearrangement step, so predicting the product requires ranking the two groups on the ketone by migratory aptitude, not by any other criterion like size or proximity alone.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Named Carbonyl Reactions\"",
-        "[TEMPLATE] Key idea 2 for \"Named Carbonyl Reactions\"",
-        "[TEMPLATE] Key idea 3 for \"Named Carbonyl Reactions\""
+        "The Wittig reaction's defining synthetic advantage is regiochemical certainty — the new C=C bond forms exactly at the position set by the chosen ylide and carbonyl compound, avoiding the regiochemical mixtures that can arise from elimination-based alkene synthesis on unsymmetrical substrates.",
+        "Baeyer-Villiger oxidation's regiochemistry is governed by migratory aptitude (tertiary > secondary > aryl > primary > methyl) — the group best able to stabilize developing positive character during the concerted migration step is the one that migrates to oxygen, which can run counter to simple size-based or proximity-based intuition.",
+        "Core misconception to avoid: The Wittig reaction's core synthetic value is regiochemical certainty — the alkene forms exactly at the position defined by the ylide and carbonyl compound chosen — distinguishing it from elimination reactions, which can produce regiochemical mixtures on unsymmetrical substrates."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Named Carbonyl Reactions\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "The Wittig reaction just makes an alkene — you could use elimination instead and get the same thing.",
+          "correction": "The Wittig reaction's core synthetic value is regiochemical certainty — the alkene forms exactly at the position defined by the ylide and carbonyl compound chosen — distinguishing it from elimination reactions, which can produce regiochemical mixtures on unsymmetrical substrates."
+        },
+        {
+          "misconception": "The oxygen should insert wherever there's more room, or on the smaller/simpler side.",
+          "correction": "Baeyer-Villiger regiochemistry is governed by migratory aptitude (tertiary > secondary > aryl > primary > methyl) — the higher-aptitude group migrates to oxygen — never assume the outcome from proximity or size alone."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Named Carbonyl Reactions\""
+        "Demonstration 1 (regiochemical-certainty comparison for Wittig vs. elimination): Present the explicit side-by-side product comparison, deriving the Wittig's specific synthetic advantage.",
+        "Demonstration 2 (Criegee intermediate mechanism with migratory aptitude ranking): Present the explicit mechanism and aptitude order, deriving the correct migrating group for an unsymmetrical ketone."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Named Carbonyl Reactions\"",
+        "setup": "Could you use E2 elimination on an unsymmetrical alkyl halide to achieve the exact same regiochemical outcome as a Wittig reaction targeting a specific alkene position?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (regiochemical-certainty comparison for Wittig vs. elimination): Present the explicit side-by-side product comparison, deriving the Wittig's specific synthetic advantage.",
+          "Demonstration 2 (Criegee intermediate mechanism with migratory aptitude ranking): Present the explicit mechanism and aptitude order, deriving the correct migrating group for an unsymmetrical ketone."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Named Carbonyl Reactions\""
+        "expected_outcome": "Student can (a) correctly explain why the Wittig reaction is chosen over elimination for regiochemically defined alkene synthesis, (b) correctly predict Baeyer-Villiger product regiochemistry from migratory aptitude ranking."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit regiochemical-certainty comparison between Wittig and elimination-based alkene synthesis.",
+          "TA-2 (TELL): State the migratory aptitude order explicitly, anchored to the Criegee intermediate mechanism diagram.",
+          "TA-3 (DO): Student predicts the Baeyer-Villiger product regiochemistry for an unfamiliar unsymmetrical ketone using the migratory aptitude order.",
+          "TA-4 (TEST-THINKING): Present the MC-1 probe and ask the student to justify why the Wittig reaction is specifically chosen over elimination for regiochemically sensitive alkene targets."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Named Carbonyl Reactions from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Could you use E2 elimination on an unsymmetrical alkyl halide to achieve the exact same regiochemical outcome as a Wittig reaction targeting a specific alkene position?\"",
+          "FA-2: \"In the Baeyer-Villiger oxidation of methyl tert-butyl ketone, does the oxygen insert next to the methyl group or the tert-butyl group? Is this determined by which group is smaller/closer?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Named Carbonyl Reactions\""
+        "mastery_signal": "Student can (a) correctly explain why the Wittig reaction is chosen over elimination for regiochemically defined alkene synthesis, (b) correctly predict Baeyer-Villiger product regiochemistry from migratory aptitude ranking."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Named Carbonyl Reactions\""
+        "This concept has no direct KG unlocks but consolidates alpha-carbon reasoning (`chem.carb.alpha-reactions`) and derivative reasoning (`chem.carb.derivatives`), forming a capstone application to retrosynthetic planning contexts."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.carb.alpha-reactions",
+        "chem.carb.derivatives"
+      ]
     },
     {
       "id": "asset.chem.carb.spectro",
       "concept_id": "chem.carb.spectro",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Spectroscopic ID of Carbonyls\".",
-      "concept_summary": "IR C=O absorption; ¹H and ¹³C NMR; mass spec α-cleavage and McLafferty rearrangement.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Spectroscopic ID of Carbonyls\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The carbonyl C=O stretch is NOT a single fixed IR frequency (~1715 cm-1) that beginners memorize and apply universally — its exact position SHIFTS predictably (roughly 1650-1850 cm-1) with conjugation (lowers frequency, e.g., conjugated enones ~1670-1680 cm-1), ring strain (raises frequency, e.g., cyclobutanone ~1775 cm-1, cyclopropanone even higher), and electronegative substituents (raises frequency, e.g., esters ~1735-1750 cm-1, acid chlorides ~1800 cm-1) — treating \"carbonyl = ~1715 cm-1, always\" ignores that the specific shifted value is itself diagnostic information identifying WHICH type of carbonyl compound is present; and the McLafferty rearrangement in mass spectrometry is NOT a simple bond-cleavage fragmentation — it is a SIX-MEMBERED-RING TRANSITION STATE process requiring a gamma-hydrogen (a hydrogen on the carbon three atoms away from the carbonyl carbon) to transfer to the carbonyl oxygen via this cyclic transition state, with simultaneous C(alpha)-C(beta) bond cleavage — a carbonyl compound lacking any gamma-hydrogen (e.g., one with a quaternary carbon at the gamma position, or too short a chain) CANNOT undergo McLafferty rearrangement at all, regardless of how favorable simple alpha-cleavage might be.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Spectroscopic ID of Carbonyls\"",
-        "[TEMPLATE] Key idea 2 for \"Spectroscopic ID of Carbonyls\"",
-        "[TEMPLATE] Key idea 3 for \"Spectroscopic ID of Carbonyls\""
+        "The carbonyl C=O IR stretch frequency reflects the C=O bond's force constant, which shifts systematically with structure — conjugation lowers the frequency (delocalizes double-bond character away from C=O), ring strain raises it (increased s-character strengthens the bond), and electronegative substituents raise it (reduced lone-pair donation into the carbonyl) — the specific shifted value is itself diagnostic, not noise around a fixed number.",
+        "McLafferty rearrangement proceeds through a six-membered cyclic transition state requiring a gamma-hydrogen to transfer to the carbonyl oxygen as the C(alpha)-C(beta) bond cleaves — a carbonyl compound without an accessible gamma-hydrogen cannot undergo this specific rearrangement, regardless of being a carbonyl compound in general.",
+        "Core misconception to avoid: The carbonyl C=O stretch shifts systematically with structure — conjugation lowers it, ring strain raises it, electronegative substituents raise it — the specific value, not a fixed universal number, is diagnostic of the carbonyl's structural environment."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Spectroscopic ID of Carbonyls\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "All carbonyls show their C=O stretch around 1715 cm-1.",
+          "correction": "The carbonyl C=O stretch shifts systematically with structure — conjugation lowers it, ring strain raises it, electronegative substituents raise it — the specific value, not a fixed universal number, is diagnostic of the carbonyl's structural environment."
+        },
+        {
+          "misconception": "McLafferty rearrangement is just how carbonyl compounds fragment in mass spec, so it should happen for any of them.",
+          "correction": "McLafferty rearrangement requires an accessible gamma-hydrogen for its six-membered cyclic transition state — a carbonyl compound lacking a gamma-hydrogen cannot undergo this rearrangement, even though it may still fragment via other pathways like alpha-cleavage."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Spectroscopic ID of Carbonyls\""
+        "Demonstration 1 (three-compound C=O frequency comparison): Present the explicit cyclobutanone/cyclohexanone/methyl-vinyl-ketone frequency comparison, deriving the shift direction from each structural feature.",
+        "Demonstration 2 (six-membered McLafferty transition-state diagram with a gamma-hydrogen-free counter-example): Present the explicit mechanism alongside a compound lacking a gamma-hydrogen, deriving the structural requirement."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Spectroscopic ID of Carbonyls\"",
+        "setup": "Cyclohexanone shows a C=O stretch around 1715 cm-1. Would you expect cyclobutanone's C=O stretch to appear at essentially the same frequency?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (three-compound C=O frequency comparison): Present the explicit cyclobutanone/cyclohexanone/methyl-vinyl-ketone frequency comparison, deriving the shift direction from each structural feature.",
+          "Demonstration 2 (six-membered McLafferty transition-state diagram with a gamma-hydrogen-free counter-example): Present the explicit mechanism alongside a compound lacking a gamma-hydrogen, deriving the structural requirement."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Spectroscopic ID of Carbonyls\""
+        "expected_outcome": "Student can (a) correctly predict the direction of C=O stretch frequency shift from conjugation/ring-strain/substituent effects, (b) correctly determine whether McLafferty rearrangement is structurally possible for a given carbonyl compound."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit three-compound C=O frequency comparison (ring-strained, baseline, conjugated).",
+          "TA-2 (TELL): State the gamma-hydrogen requirement for McLafferty rearrangement explicitly, anchored to the six-membered transition-state diagram.",
+          "TA-3 (DO): Student predicts the qualitative C=O stretch shift direction for an unfamiliar carbonyl compound given its structural features, and determines whether McLafferty rearrangement is possible for an unfamiliar structure.",
+          "TA-4 (TEST-THINKING): Present the MC-2 probe and ask the student to justify why a compound lacking a gamma-hydrogen cannot undergo McLafferty rearrangement."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Spectroscopic ID of Carbonyls from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Cyclohexanone shows a C=O stretch around 1715 cm-1. Would you expect cyclobutanone's C=O stretch to appear at essentially the same frequency?\"",
+          "FA-2: \"Does every carbonyl compound undergo McLafferty rearrangement in its mass spectrum, or does it depend on the compound's structure?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Spectroscopic ID of Carbonyls\""
+        "mastery_signal": "Student can (a) correctly predict the direction of C=O stretch frequency shift from conjugation/ring-strain/substituent effects, (b) correctly determine whether McLafferty rearrangement is structurally possible for a given carbonyl compound."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Spectroscopic ID of Carbonyls\""
+        "This concept has no direct KG unlocks but consolidates general spectroscopy reasoning (`chem.org.spectroscopy`) and ketone reasoning (`chem.carb.ketones`), forming a capstone application to structure-elucidation contexts combining IR, NMR, and mass spectrometry."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.org.spectroscopy",
+        "chem.carb.ketones"
+      ]
     },
     {
       "id": "asset.chem.nitro.amines",
