@@ -28,7 +28,7 @@ below from source whenever this file is updated, never hand-estimate.
 | mathematics | 908 | 37 | 4.07% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
-| chemistry | 186 | 173 | 93.01% | `chem.found.matter` | **Yes** (13 remain: chem.bio×6, chem.nitro×3, chem.poly×4 — Completion Loop 2026-07-25) |
+| chemistry | 186 | 176 | 94.62% | `chem.found.matter` | **Yes** (10 remain: chem.bio×6, chem.poly×4 — Completion Loop 2026-07-25) |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
 
