@@ -1657,48 +1657,62 @@
     {
       "id": "asset.chem.bond.vsepr",
       "concept_id": "chem.bond.vsepr",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"VSEPR Theory\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"VSEPR Theory\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"VSEPR Theory\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "VSEPR (valence shell electron pair repulsion) theory predicts molecular geometry by counting electron domains around a central atom, where a double or triple bond counts as exactly ONE domain regardless of how many electron pairs it contains; ELECTRON geometry (the arrangement of all domains including lone pairs) must be distinguished from MOLECULAR geometry (the arrangement of only the ATOMS, ignoring lone-pair positions in the name, though lone pairs still occupy space and affect atom positions) — H₂O has tetrahedral electron geometry but bent molecular geometry; the equatorial-lone-pair-preference rule applies specifically to trigonal bipyramidal (5-domain) geometry, NOT to octahedral (6-domain) geometry, where two lone pairs instead go trans (both axial), producing square planar molecular geometry; and a larger electron domain (like a double bond) repels MORE strongly, which compresses (not opens) the angles between its neighboring smaller domains.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"VSEPR Theory\"",
-        "[TEMPLATE] Key idea 2 for \"VSEPR Theory\"",
-        "[TEMPLATE] Key idea 3 for \"VSEPR Theory\""
+        "VSEPR theory predicts molecular shape by counting electron domains — spatial regions of electron density — around a central atom, with each single, double, or triple bond counting as exactly ONE domain regardless of how many electron pairs it contains. The resulting domain arrangement (electron geometry) includes lone pairs, but the final MOLECULAR geometry name describes only the resulting positions of the ATOMS, which is why a molecule like H₂O can have tetrahedral electron geometry but bent molecular geometry.",
+        "Lone-pair placement rules are specific to each electron-domain geometry — trigonal bipyramidal geometry (5 domains) favors equatorial lone-pair placement due to its distinct axial/equatorial position types, while octahedral geometry (6 domains) favors trans (maximally separated) lone-pair placement instead, since all six initial positions are equivalent. Separately, a larger electron domain (like a double bond, which repels more strongly than a single bond or lone pair) compresses — rather than opens — the angles between its neighboring smaller domains.",
+        "Core misconception to avoid: Count electron domains by spatial region, not electron-pair count — a single, double, or triple bond each counts as exactly ONE domain, regardless of how many electron pairs are shared within it."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"VSEPR Theory\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "CO₂ has 4 bonds (2 double bonds = 4 single bonds), so 4 electron domains.",
+          "correction": "Count electron domains by spatial region, not electron-pair count — a single, double, or triple bond each counts as exactly ONE domain, regardless of how many electron pairs are shared within it."
+        },
+        {
+          "misconception": "H₂O is tetrahedral.",
+          "correction": "Always distinguish electron geometry (counts all domains, including lone pairs) from molecular geometry (names the shape using only atom positions) — the two can differ whenever lone pairs are present."
+        },
+        {
+          "misconception": "Where are the lone pairs in XeF₄ (octahedral electron geometry, 2 lone pairs)?",
+          "correction": "Apply the equatorial-preference rule only to trigonal bipyramidal (5-domain) geometry; for octahedral (6-domain) geometry with 2 lone pairs, the lone pairs go trans (both axial, maximally separated), producing square planar molecular geometry."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"VSEPR Theory\""
+        "Demonstration 1 (electron-vs-molecular geometry drill): For H₂O and NH₃, have students explicitly separate the \"all domains\" count (for electron geometry) from the \"atoms only\" count (for molecular geometry), naming both shapes for each molecule.",
+        "Demonstration 2 (trigonal bipyramidal vs. octahedral lone-pair placement comparison): Present both geometries side by side with lone pairs added, having students justify the different placement rules (equatorial vs. trans) using position-equivalence reasoning."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"VSEPR Theory\"",
+        "setup": "How many electron domains does the central C in CO₂ have?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (electron-vs-molecular geometry drill): For H₂O and NH₃, have students explicitly separate the \"all domains\" count (for electron geometry) from the \"atoms only\" count (for molecular geometry), naming both shapes for each molecule.",
+          "Demonstration 2 (trigonal bipyramidal vs. octahedral lone-pair placement comparison): Present both geometries side by side with lone pairs added, having students justify the different placement rules (equatorial vs. trans) using position-equivalence reasoning."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"VSEPR Theory\""
+        "expected_outcome": "Student can (a) correctly count electron domains treating double/triple bonds as one domain each, (b) correctly distinguish electron geometry from molecular geometry for a lone-pair-containing molecule, (c) correctly apply the appropriate lone-pair placement rule (equatorial for trigonal bipyramidal, trans for octahedral)."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the CO₂ spatial-region-counting exercise explicitly, arriving at 2 domains.",
+          "TA-2 (TELL): State the electron-geometry-vs-molecular-geometry distinction explicitly, worked through for H₂O.",
+          "TA-3 (DO): Student determines lone-pair placement for a given octahedral-geometry molecule, using the trans (not equatorial) rule.",
+          "TA-4 (TEST-THINKING): Present MC-4's H₂C=O probe and ask the student to predict whether the H–C–H angle compresses or expands relative to 120°, given the double bond's stronger repulsion."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing VSEPR Theory from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"How many electron domains does the central C in CO₂ have?\"",
+          "FA-2: \"What is the molecular geometry of H₂O?\"",
+          "FA-3: \"Where are the lone pairs in XeF₄ (octahedral, 2 lone pairs)?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"VSEPR Theory\""
+        "mastery_signal": "Student can (a) correctly count electron domains treating double/triple bonds as one domain each, (b) correctly distinguish electron geometry from molecular geometry for a lone-pair-containing molecule, (c) correctly apply the appropriate lone-pair placement rule (equatorial for trigonal bipyramidal, trans for octahedral)."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"VSEPR Theory\""
+        "Feeds directly into `chem.bond.polar-molecules` (molecular polarity prediction requires correct molecular geometry, not electron geometry, established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.bond.covalent-bonding"
@@ -1771,48 +1785,62 @@
     {
       "id": "asset.chem.bond.mo-theory",
       "concept_id": "chem.bond.mo-theory",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Molecular Orbital Theory\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Molecular Orbital Theory\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Molecular Orbital Theory\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Molecular orbital theory computes bond order as ½(bonding electrons − antibonding electrons), and antibonding electrons genuinely CANCEL bonding electrons' stabilization (a bond order of exactly zero means the molecule simply does NOT form, as with He₂, not a \"neutral, still-existing\" molecule); MO theory correctly predicts O₂'s paramagnetism (2 unpaired electrons in degenerate π*2p orbitals, filled per Hund's rule) where simple Lewis-structure double-bond drawings incorrectly suggest all electrons are paired — the most famous case where Lewis theory and experiment disagree, with MO theory winning; and bond order predicts bond STRENGTH and bond LENGTH specifically, not overall chemical stability or reactivity in every context — comparing bond orders (like N₂'s 3 versus O₂'s 2) is only straightforward for isoelectronic species, and even a genuinely stronger bond (N₂'s) reflects kinetic inertness in one specific sense, not a universal \"more stable in all contexts\" claim.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Molecular Orbital Theory\"",
-        "[TEMPLATE] Key idea 2 for \"Molecular Orbital Theory\"",
-        "[TEMPLATE] Key idea 3 for \"Molecular Orbital Theory\""
+        "Molecular orbital theory computes bond order as ½(bonding electrons − antibonding electrons) — antibonding electrons genuinely cancel the stabilizing effect of bonding electrons, so a bond order of exactly zero (as in He₂) means the molecule has no net stabilization relative to separated atoms and simply does not form, not merely a \"neutral\" outcome.",
+        "MO theory can represent degenerate orbitals (orbitals of exactly equal energy) in a way simplified Lewis structures cannot — this is exactly why MO theory correctly predicts O₂'s genuine paramagnetism (2 unpaired electrons in degenerate π*2p orbitals, filled per Hund's rule), directly contradicting the Lewis structure's implicit all-paired-electrons picture, and experimentally confirmed by O₂'s real attraction to a magnet. Bond order reliably predicts bond strength and length specifically — extending this prediction into a broader, unqualified claim about overall chemical stability or reactivity goes beyond what bond order alone can support.",
+        "Core misconception to avoid: A bond order of zero means the molecule does not form — antibonding electrons genuinely eliminate the stabilization bonding electrons would otherwise provide, not merely \"balance\" into a still-viable, neutral molecular state."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Molecular Orbital Theory\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "bonding and antibonding just cancel.",
+          "correction": "A bond order of zero means the molecule does not form — antibonding electrons genuinely eliminate the stabilization bonding electrons would otherwise provide, not merely \"balance\" into a still-viable, neutral molecular state."
+        },
+        {
+          "misconception": "the double bond has 4 paired electrons.",
+          "correction": "O₂ is genuinely paramagnetic, with 2 unpaired electrons in its degenerate π*2p orbitals, correctly predicted by MO theory but missed entirely by the simplified Lewis double-bond structure."
+        },
+        {
+          "misconception": "BO 3 is always better than BO 2.",
+          "correction": "Bond order reliably predicts bond strength and bond length (and is directly comparable primarily among isoelectronic species) — it does not, by itself, predict overall chemical reactivity or \"stability\" in every possible sense."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Molecular Orbital Theory\""
+        "Demonstration 1 (He₂ bond-order computation): Compute He₂'s bond order explicitly from its electron configuration, connecting the zero result directly to He₂'s well-documented non-existence as a stable molecule.",
+        "Demonstration 2 (O₂ MO diagram construction): Build O₂'s full MO diagram explicitly, filling the degenerate π*2p orbitals per Hund's rule, connecting the resulting 2 unpaired electrons directly to observed paramagnetism."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Molecular Orbital Theory\"",
+        "setup": "If σ1s has 2 electrons and σ*1s also has 2 electrons, what is the bond order and does the molecule exist?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (He₂ bond-order computation): Compute He₂'s bond order explicitly from its electron configuration, connecting the zero result directly to He₂'s well-documented non-existence as a stable molecule.",
+          "Demonstration 2 (O₂ MO diagram construction): Build O₂'s full MO diagram explicitly, filling the degenerate π*2p orbitals per Hund's rule, connecting the resulting 2 unpaired electrons directly to observed paramagnetism."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Molecular Orbital Theory\""
+        "expected_outcome": "Student can (a) correctly interpret a bond order of zero as meaning the molecule does not form, (b) correctly predict O₂'s paramagnetism from its MO diagram, recognizing where Lewis structures fail, (c) correctly distinguish bond order's specific predictions (strength, length) from broader, unsupported claims about overall stability."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the He₂ bond-order computation explicitly, connecting zero bond order to non-existence.",
+          "TA-2 (TELL): State explicitly that Lewis structures cannot represent degenerate orbitals, immediately followed by the O₂ MO diagram showing unpaired electrons.",
+          "TA-3 (DO): Student computes bond order for a new diatomic species and predicts its magnetic behavior from the resulting electron configuration.",
+          "TA-4 (TEST-THINKING): Present MC-3's N₂-vs-O₂ probe and ask the student to distinguish the specific bond-strength claim from the broader stability claim."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Molecular Orbital Theory from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"If σ1s has 2 electrons and σ*1s also has 2 electrons, what is the bond order and does the molecule exist?\"",
+          "FA-2: \"Liquid oxygen is attracted to a magnet. What does that tell you about electron pairing in O₂?\"",
+          "FA-3: \"N₂ has BO=3 and O₂ has BO=2. Is N₂ definitely more stable than O₂ in all chemical contexts?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Molecular Orbital Theory\""
+        "mastery_signal": "Student can (a) correctly interpret a bond order of zero as meaning the molecule does not form, (b) correctly predict O₂'s paramagnetism from its MO diagram, recognizing where Lewis structures fail, (c) correctly distinguish bond order's specific predictions (strength, length) from broader, unsupported claims about overall stability."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Molecular Orbital Theory\""
+        "Feeds directly into `chem.coord.bonding` (coordination complex bonding theory builds directly on MO-theory-style reasoning about orbital interactions established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.atomic.orbitals",
@@ -1822,48 +1850,62 @@
     {
       "id": "asset.chem.bond.polar-molecules",
       "concept_id": "chem.bond.polar-molecules",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Polarity and Dipole Moment\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Polarity and Dipole Moment\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Polarity and Dipole Moment\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Molecular polarity requires computing the full vector sum of ALL dipole contributions after determining molecular geometry via VSEPR — polar bonds alone are insufficient if molecular symmetry causes them to cancel (CO₂'s two C=O dipoles, pointing in exactly opposite directions in its linear geometry, sum to zero net dipole despite each bond being individually polar); lone pairs on the central atom contribute their OWN dipole moment (not merely a passive geometric influence) — genuinely adding to the molecular dipole in the direction the lone pair points, which is why NF₃ (lone pair) is polar while BF₃ (no lone pair, same bond count) is nonpolar despite both having three identical M–F bonds; and adding MORE identical polar bonds in a symmetric arrangement can DECREASE net polarity to exactly zero (CCl₄'s four symmetric C–Cl bonds cancel completely, while CHCl₃'s three asymmetrically-arranged C–Cl bonds plus one different C–H bond do not cancel), directly contradicting a naive \"more bonds = more polar\" intuition.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Polarity and Dipole Moment\"",
-        "[TEMPLATE] Key idea 2 for \"Polarity and Dipole Moment\"",
-        "[TEMPLATE] Key idea 3 for \"Polarity and Dipole Moment\""
+        "Determining molecular polarity requires two steps in sequence: first, establish the correct molecular geometry using VSEPR; second, sum ALL dipole contributions as vectors — including bond dipoles AND any lone-pair contribution — according to that specific geometry. A molecule with polar bonds can still be nonpolar overall if geometric symmetry causes those bond dipoles to cancel exactly (as in linear CO₂ or tetrahedral CCl₄); conversely, breaking that symmetry (by replacing one substituent, as CHCl₃ does relative to CCl₄, or by adding a lone pair, as NF₃ does relative to BF₃) can introduce a genuine net dipole.",
+        "A central atom's lone pair is not merely a passive geometric influence that reshapes molecular geometry — it is itself a region of asymmetric electron density that contributes its own dipole vector, pointing away from the bonded atoms, directly adding to the overall molecular dipole sum alongside the bond dipoles.",
+        "Core misconception to avoid: Always perform the full vector sum of all bond dipoles (using the correct VSEPR-derived geometry) before concluding molecular polarity — never infer it from bond polarity alone."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Polarity and Dipole Moment\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "CO₂ must be polar because C–O is a polar bond.",
+          "correction": "Always perform the full vector sum of all bond dipoles (using the correct VSEPR-derived geometry) before concluding molecular polarity — never infer it from bond polarity alone."
+        },
+        {
+          "misconception": "the lone pair doesn't create a bond dipole.",
+          "correction": "A central atom's lone pair contributes its own genuine dipole moment (in the direction the lone pair points), in addition to reshaping molecular geometry — both effects must be accounted for when determining overall molecular polarity."
+        },
+        {
+          "misconception": "more polar bonds = bigger dipole.",
+          "correction": "Net molecular polarity depends on geometric symmetry (whether dipoles cancel or reinforce), not on the number of polar bonds present — more bonds in a highly symmetric arrangement can actually produce LESS net polarity, even zero."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Polarity and Dipole Moment\""
+        "Demonstration 1 (NF₃ vs. BF₃ vector comparison): Draw the full dipole vector diagrams for both molecules side by side, explicitly including the lone pair's own contribution in NF₃, showing why one is polar and the other isn't despite identical bond types and counts.",
+        "Demonstration 2 (CCl₄ vs. CHCl₃ symmetry-breaking comparison): Draw both molecules' dipole vectors explicitly, showing CCl₄'s perfect cancellation and CHCl₃'s incomplete cancellation from the single differing substituent."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Polarity and Dipole Moment\"",
+        "setup": "CO₂ has two C=O bonds. Is CO₂ a polar molecule?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (NF₃ vs. BF₃ vector comparison): Draw the full dipole vector diagrams for both molecules side by side, explicitly including the lone pair's own contribution in NF₃, showing why one is polar and the other isn't despite identical bond types and counts.",
+          "Demonstration 2 (CCl₄ vs. CHCl₃ symmetry-breaking comparison): Draw both molecules' dipole vectors explicitly, showing CCl₄'s perfect cancellation and CHCl₃'s incomplete cancellation from the single differing substituent."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Polarity and Dipole Moment\""
+        "expected_outcome": "Student can (a) correctly determine overall molecular polarity via vector-sum reasoning, not bond polarity alone, (b) correctly include a central atom's lone pair as an independent dipole contribution, (c) correctly recognize that more polar bonds in a symmetric arrangement can produce less (even zero) net polarity."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the CO₂ dipole-cancellation vector diagram explicitly.",
+          "TA-2 (TELL): State the lone-pair-contributes-its-own-dipole rule explicitly, worked through for NF₃ versus BF₃.",
+          "TA-3 (DO): Student determines overall polarity for CCl₄ and CHCl₃ by drawing and summing dipole vectors.",
+          "TA-4 (TEST-THINKING): Present MC-1's CO₂ probe and ask the student to justify nonpolarity despite polar bonds, using the vector-sum argument."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Polarity and Dipole Moment from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"CO₂ has two C=O bonds. Is CO₂ a polar molecule?\"",
+          "FA-2: \"NF₃ and BF₃ both have three M–F bonds. Why is one polar and the other not?\"",
+          "FA-3: \"CCl₄ has four C–Cl bonds. Is it more polar than CHCl₃, which has three?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Polarity and Dipole Moment\""
+        "mastery_signal": "Student can (a) correctly determine overall molecular polarity via vector-sum reasoning, not bond polarity alone, (b) correctly include a central atom's lone pair as an independent dipole contribution, (c) correctly recognize that more polar bonds in a symmetric arrangement can produce less (even zero) net polarity."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Polarity and Dipole Moment\""
+        "Feeds directly into `chem.bond.intermolecular` (intermolecular force type prediction — dipole-dipole, hydrogen bonding, London dispersion — depends entirely on correct molecular polarity determination established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.bond.vsepr"
@@ -1872,48 +1914,62 @@
     {
       "id": "asset.chem.bond.intermolecular",
       "concept_id": "chem.bond.intermolecular",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Intermolecular Forces\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Intermolecular Forces\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Intermolecular Forces\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Hydrogen bonding, despite its name, is a fundamentally different (and roughly 20× weaker) interaction than a covalent bond — an electrostatic attraction between a partially-positive H (bonded to F/O/N) and a lone pair on a nearby electronegative atom, not electron sharing; London dispersion forces are UNIVERSAL, present in every substance including nonpolar molecules and noble gases (never zero), meaning even \"nonpolar\" molecules like hexane have real, substantial intermolecular forces (explaining hexane's 69°C boiling point) — the correct statement is that nonpolar molecules have ONLY London forces, not \"no intermolecular forces\"; and ice's lower density than liquid water is a genuine EXCEPTION to the usual \"solids are denser than liquids\" rule, caused specifically by ice's open, hydrogen-bonded hexagonal lattice (each molecule forming exactly 4 H-bonds in a tetrahedral arrangement), which liquid water partially collapses upon melting, packing molecules more closely despite losing some hydrogen bonds.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Intermolecular Forces\"",
-        "[TEMPLATE] Key idea 2 for \"Intermolecular Forces\"",
-        "[TEMPLATE] Key idea 3 for \"Intermolecular Forces\""
+        "Hydrogen bonding, despite its name, is a genuinely different type of interaction from a covalent bond — an intermolecular electrostatic attraction (roughly 20× weaker than a covalent bond) between a partially-positive hydrogen and a nearby electronegative atom's lone pair, not electron sharing. Separately, London dispersion forces are a universal baseline present in ALL matter — nonpolar molecules experience ONLY this force (never zero total intermolecular force), which is why even simple hydrocarbons like hexane have real, substantial boiling points driven by their electron count and molecular surface area.",
+        "While most substances follow the general rule that solids are denser than liquids (from tighter particle packing upon solidification), water is a genuine, well-explained exception — ice's specific hydrogen-bonding requirement (each molecule forming exactly 4 tetrahedral H-bonds) forces an unusually open lattice structure, which liquid water partially collapses upon melting, making liquid water denser than its solid form.",
+        "Core misconception to avoid: Hydrogen bonding is an intermolecular electrostatic attraction (~20 kJ/mol), roughly 20 times weaker than and mechanistically distinct from a covalent bond (~460 kJ/mol) — never treat the two as the same type of interaction just because both involve hydrogen."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Intermolecular Forces\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "hydrogen bonding = hydrogen covalent bond.",
+          "correction": "Hydrogen bonding is an intermolecular electrostatic attraction (~20 kJ/mol), roughly 20 times weaker than and mechanistically distinct from a covalent bond (~460 kJ/mol) — never treat the two as the same type of interaction just because both involve hydrogen."
+        },
+        {
+          "misconception": "alkanes have no IMF.",
+          "correction": "Every substance, without exception, experiences London dispersion forces — nonpolar molecules have ONLY this force (no dipole-dipole, no hydrogen bonding), never zero total intermolecular force."
+        },
+        {
+          "misconception": "solids are always more dense than liquids.",
+          "correction": "While most substances follow \"solid denser than liquid,\" water is a genuine, structurally-explained exception — ice's open hydrogen-bonded lattice makes it LESS dense than liquid water, which packs more closely once some hydrogen bonds break upon melting."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Intermolecular Forces\""
+        "Demonstration 1 (covalent-vs-hydrogen-bond energy comparison): Present the explicit ~464 kJ/mol (covalent O–H) versus ~20 kJ/mol (hydrogen bond O–H···O) values side by side, connecting the magnitude difference to the different physical mechanisms.",
+        "Demonstration 2 (hexane electron-count and boiling-point connection): Present hexane's electron count and molecular structure alongside its measured boiling point, connecting London dispersion force magnitude directly to observable physical properties."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Intermolecular Forces\"",
+        "setup": "Is the O–H···O interaction in water the same type as the O–H covalent bond within one water molecule?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (covalent-vs-hydrogen-bond energy comparison): Present the explicit ~464 kJ/mol (covalent O–H) versus ~20 kJ/mol (hydrogen bond O–H···O) values side by side, connecting the magnitude difference to the different physical mechanisms.",
+          "Demonstration 2 (hexane electron-count and boiling-point connection): Present hexane's electron count and molecular structure alongside its measured boiling point, connecting London dispersion force magnitude directly to observable physical properties."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Intermolecular Forces\""
+        "expected_outcome": "Student can (a) correctly distinguish hydrogen bonding's electrostatic mechanism and magnitude from covalent bonding, (b) correctly identify London dispersion forces as universally present, even in nonpolar molecules, (c) correctly explain water's density anomaly using its specific hydrogen-bonding lattice geometry."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit covalent-vs-hydrogen-bond energy comparison.",
+          "TA-2 (TELL): State explicitly that London dispersion forces are universal, immediately followed by the hexane electron-count/boiling-point connection.",
+          "TA-3 (DO): Student identifies all intermolecular forces present for a given molecule (polar or nonpolar), always including London dispersion.",
+          "TA-4 (TEST-THINKING): Present MC-3's ice-floating probe and ask the student to explain the density anomaly using ice's specific hydrogen-bonding geometry."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Intermolecular Forces from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Is the O–H···O interaction in water the same type as the O–H covalent bond within one water molecule?\"",
+          "FA-2: \"Why does hexane have a boiling point of 69°C if it supposedly has no intermolecular forces?\"",
+          "FA-3: \"Ice floats on water. Explain this in terms of molecular structure.\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Intermolecular Forces\""
+        "mastery_signal": "Student can (a) correctly distinguish hydrogen bonding's electrostatic mechanism and magnitude from covalent bonding, (b) correctly identify London dispersion forces as universally present, even in nonpolar molecules, (c) correctly explain water's density anomaly using its specific hydrogen-bonding lattice geometry."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Intermolecular Forces\""
+        "Feeds directly into `chem.sblock.water` (water's unique hydrogen-bonding properties directly extend MC-1 and MC-3's content), `chem.state.liquids` (bulk liquid properties are explained by intermolecular force analysis established here), and `chem.surface.surfactants` (surfactant behavior depends on distinguishing polar and nonpolar intermolecular interactions)."
       ],
       "prerequisite_review_triggers": [
         "chem.bond.polar-molecules"
@@ -1986,48 +2042,62 @@
     {
       "id": "asset.chem.bond.resonance",
       "concept_id": "chem.bond.resonance",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Resonance Structures\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Resonance Structures\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Resonance Structures\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Resonance describes a single real molecule/ion whose true electron distribution is a weighted hybrid (blend) of multiple valid Lewis structures — NOT a molecule oscillating between distinct structures over time — with the molecular framework (atom positions/connectivity) invariant across all resonance structures, only electron positions (lone pairs, pi bonds) differing; the dominant (major) contributing structure is identified by minimizing formal charges (not by maximizing bond count), following the priority order: lowest formal charges first, then electronegative atoms bearing negative formal charge, then positive formal charge on less electronegative atoms; and true resonance requires adjacent lone pairs or pi bonds capable of electron delocalization without changing connectivity — not every molecule containing double bonds has resonance.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Resonance Structures\"",
-        "[TEMPLATE] Key idea 2 for \"Resonance Structures\"",
-        "[TEMPLATE] Key idea 3 for \"Resonance Structures\""
+        "Resonance describes a single real molecule or ion whose true electron distribution cannot be captured by any one Lewis structure alone — instead, it's a weighted blend (the resonance hybrid) of multiple valid contributing structures, which differ from each other ONLY in electron placement (never in atom position or connectivity). This is why measured bond lengths in a resonance-stabilized species (like NO₃⁻'s three equal N–O bonds) show one uniform, intermediate value rather than the mix of distinct lengths a single static Lewis structure would predict.",
+        "Not all contributing resonance structures are equally important — the dominant (major) contributor is identified by minimizing formal charges, following a specific priority order, never simply by counting bonds. Genuine resonance additionally requires adjacent lone pairs or pi-bond systems capable of electron delocalization without disrupting molecular connectivity — a molecule can contain double bonds and still lack any true resonance if no such adjacent delocalization pathway exists.",
+        "Core misconception to avoid: The real molecule is a single, static resonance hybrid — a genuine blend of the contributing structures' electron distributions — not a molecule that changes or oscillates between distinct states over time."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Resonance Structures\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "the electrons are switching back and forth.",
+          "correction": "The real molecule is a single, static resonance hybrid — a genuine blend of the contributing structures' electron distributions — not a molecule that changes or oscillates between distinct states over time."
+        },
+        {
+          "misconception": "Draw the resonance structures of NO₂⁻.",
+          "correction": "Only lone pairs and pi-bond electrons may shift position between resonance structures; every atom's position and every sigma-bond connectivity must stay exactly fixed."
+        },
+        {
+          "misconception": "For SO₂, which resonance contributor is dominant if S has formal charges of 0 vs. +1?",
+          "correction": "Rank resonance contributors by formal charge criteria (lowest overall, then electronegativity-appropriate charge placement), never by simple bond count."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Resonance Structures\""
+        "Demonstration 1 (bond-length evidence): Present the experimental equal-bond-length data for NO₃⁻ directly, having students reason about what this measurement rules out (an oscillating or single-fixed-structure interpretation) and what it confirms (a genuine blended hybrid).",
+        "Demonstration 2 (formal-charge ranking drill): Compute formal charges explicitly for multiple candidate resonance structures of SO₂ (or a similar species), having students rank them by the correct formal-charge criteria rather than bond count."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Resonance Structures\"",
+        "setup": "In NO₃⁻, does it have a long N–O bond and two short N–O bonds?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (bond-length evidence): Present the experimental equal-bond-length data for NO₃⁻ directly, having students reason about what this measurement rules out (an oscillating or single-fixed-structure interpretation) and what it confirms (a genuine blended hybrid).",
+          "Demonstration 2 (formal-charge ranking drill): Compute formal charges explicitly for multiple candidate resonance structures of SO₂ (or a similar species), having students rank them by the correct formal-charge criteria rather than bond count."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Resonance Structures\""
+        "expected_outcome": "Student can (a) correctly explain why equal bond lengths in a resonance-stabilized species rule out an oscillating-structure interpretation, (b) correctly draw resonance structures moving only electrons, never atoms, (c) correctly rank resonance contributors by formal charge, not bond count."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the NO₃⁻ equal-bond-length experimental evidence directly as the anchor for the resonance-hybrid concept.",
+          "TA-2 (TELL): State the atom-fixed, electrons-only-move rule explicitly, immediately followed by a worked example showing correct curved-arrow electron movement.",
+          "TA-3 (DO): Student ranks a set of candidate resonance structures by formal charge, not bond count.",
+          "TA-4 (TEST-THINKING): Present MC-4's CO₂-vs-ethylene probe and ask the student to identify which molecule genuinely has resonance and why."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Resonance Structures from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"In NO₃⁻, does it have a long N–O bond and two short N–O bonds?\"",
+          "FA-2: \"Draw the resonance structures of NO₂⁻.\"",
+          "FA-3: \"For SO₂, which resonance contributor is dominant if S has formal charges of 0 vs. +1?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Resonance Structures\""
+        "mastery_signal": "Student can (a) correctly explain why equal bond lengths in a resonance-stabilized species rule out an oscillating-structure interpretation, (b) correctly draw resonance structures moving only electrons, never atoms, (c) correctly rank resonance contributors by formal charge, not bond count."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Resonance Structures\""
+        "Feeds directly into `chem.org.aromaticity` (benzene's resonance stabilization is a direct, central application of this concept) and `chem.org.electronic-effects` (resonance/delocalization effects on reactivity build directly on this foundation)."
       ],
       "prerequisite_review_triggers": [
         "chem.bond.covalent-bonding"
