@@ -2334,48 +2334,63 @@
     {
       "id": "asset.chem.state.kinetic-theory",
       "concept_id": "chem.state.kinetic-theory",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Kinetic Molecular Theory of Gases\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Kinetic Molecular Theory of Gases\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Kinetic Molecular Theory of Gases\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "**One-sentence definition:** Temperature (in KELVIN, never Celsius) is directly proportional to the AVERAGE kinetic energy of gas particles, which themselves span a continuous distribution of speeds (never a single uniform speed) — even at everyday room temperature, gas particles move at genuinely extreme speeds (hundreds of metres per second), far faster than everyday intuition suggests.\n\n**The core insight:** Three specific quantitative facts consistently surprise beginners: (1) \"average kinetic energy\" is proportional to ABSOLUTE (Kelvin) temperature, meaning 0°C (273 K) has substantial nonzero kinetic energy, not zero; (2) gas particles at any given temperature have a whole DISTRIBUTION of individual speeds, not one shared uniform speed — the formula gives only the average or most-probable value, never a claim that every particle moves identically; (3) room-temperature gas particles move at hundreds of metres per second — nitrogen molecules in ordinary air travel faster than a commercial jet, a fact directly at odds with the \"still, calm air\" everyday intuition.\n\n**Conceptual chain:**\n1. Kinetic molecular theory (KMT) postulates gas particles are in constant, random motion, with negligible volume compared to the container, and negligible attractive forces between particles (the \"ideal gas\" idealization).\n2. Gas pressure arises from particles colliding with container walls, transferring momentum at each collision — more frequent or more forceful collisions (from more particles, higher speed, or smaller volume) mean higher pressure.\n3. Average kinetic energy is directly proportional to ABSOLUTE temperature (Kelvin): KE_avg = (3/2)k_BT — this proportionality requires Kelvin specifically, since Celsius has an arbitrary zero point that would break the direct proportionality.\n4. At any given temperature, gas particles do NOT all move at one shared speed — they follow a continuous distribution of speeds (the Maxwell-Boltzmann distribution), with the formula-derived \"average\" or \"most probable\" speed being just one feature of that whole distribution, not a claim about every individual particle.\n5. Computing v_rms = √(3RT/M) for common room-temperature gases (like N₂ at 298 K) gives genuinely startling results — roughly 515 m/s, about 1,855 km/h, faster than a commercial jet — directly contradicting the everyday \"still air\" intuition.\n\n**Central relations:**\n- KE_avg ∝ T (absolute, Kelvin temperature only — never Celsius).\n- Gas particles span a continuous speed distribution; no single \"the speed\" applies to all particles.\n- Room-temperature gas particle speeds are genuinely extreme (hundreds of m/s), not the \"still\" intuition everyday experience suggests.\n\n---",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Kinetic Molecular Theory of Gases\"",
-        "[TEMPLATE] Key idea 2 for \"Kinetic Molecular Theory of Gases\"",
-        "[TEMPLATE] Key idea 3 for \"Kinetic Molecular Theory of Gases\""
+        "**Explanation A — Why Kelvin, not Celsius, for kinetic energy (conceptual):**\n\"Kelvin's zero point is physically meaningful — it's the theoretical point where particle motion would cease entirely (unattainable in practice, but the honest zero reference). Celsius's zero point is arbitrary — it just happens to be where water freezes, with no special significance for particle kinetic energy. Any form",
+        "Core misconception to avoid: Kinetic energy proportionality to temperature requires absolute (Kelvin) temperature; Celsius's arbitrary zero point (water's freezing point) has no special physical meaning for particle motion."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Kinetic Molecular Theory of Gases\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "At 0 degrees, the kinetic energy is zero.",
+          "correction": "Kinetic energy proportionality to temperature requires absolute (Kelvin) temperature; Celsius's arbitrary zero point (water's freezing point) has no special physical meaning for particle motion."
+        },
+        {
+          "misconception": "All the molecules are moving at the average speed.",
+          "correction": "Gas particles at a given temperature span a continuous distribution of speeds; the \"average\" or \"most probable\" speed is one feature of that distribution, never a claim of uniform particle speed."
+        },
+        {
+          "misconception": "What is the approximate speed of nitrogen molecules in this room right now?",
+          "correction": "Room-temperature gas particles move at genuinely extreme speeds (hundreds of m/s); \"still air\" refers to the absence of organized bulk flow, not the absence of individual molecular motion."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Kinetic Molecular Theory of Gases\""
+        "Demo 1 — Kelvin vs. Celsius kinetic energy graph: Plot KE_avg against both Kelvin and Celsius temperature scales side by side, showing the Kelvin plot passes through the true origin while the Celsius plot does not, directly targeting MC-1.",
+        "Demo 2 — Maxwell-Boltzmann distribution curve: Present the distribution curve explicitly, marking most-probable, average, and rms speeds as distinct points on the spread, directly targeting MC-2.",
+        "Demo 3 — Room-temperature N₂ speed calculation: Compute v_rms for N₂ at 298 K explicitly, converting to km/h and comparing to a commercial jet's cruising speed, directly targeting MC-3."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Kinetic Molecular Theory of Gases\"",
+        "setup": "Does a gas at 25°C have zero, some, or maximum possible kinetic energy? Explain using the Kelvin conversion.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demo 1 — Kelvin vs. Celsius kinetic energy graph: Plot KE_avg against both Kelvin and Celsius temperature scales side by side, showing the Kelvin plot passes through the true origin while the Celsius plot does not, directly targeting MC-1.",
+          "Demo 2 — Maxwell-Boltzmann distribution curve: Present the distribution curve explicitly, marking most-probable, average, and rms speeds as distinct points on the spread, directly targeting MC-2.",
+          "Demo 3 — Room-temperature N₂ speed calculation: Compute v_rms for N₂ at 298 K explicitly, converting to km/h and comparing to a commercial jet's cruising speed, directly targeting MC-3."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Kinetic Molecular Theory of Gases\""
+        "expected_outcome": "Student correctly applies Kelvin temperature in kinetic energy calculations, correctly explains the speed distribution (not uniform speed), and correctly computes/interprets room-temperature particle speeds. Score ≥ 75%."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 [DEMONSTRATE]: Demo 3 (room-temperature N₂ speed calculation) as the opening hook, directly probing MC-3.",
+          "TA-2 [DEMONSTRATE + EXPLAIN]: Demo 1 (Kelvin vs. Celsius graph) alongside Explanation A, directly probing MC-1.",
+          "TA-3 [DEMONSTRATE + EXPLAIN]: Demo 2 (Maxwell-Boltzmann distribution) alongside Explanation B, directly probing MC-2.",
+          "TA-4 [TRANSFER]: Connect forward to gas laws, previewing the pressure-volume-temperature quantitative relationships built on this concept's collision mechanism."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Kinetic Molecular Theory of Gases from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Does a gas at 25°C have zero, some, or maximum possible kinetic energy? Explain using the Kelvin conversion.\"",
+          "FA-2: \"A gas sample's average speed is calculated as 400 m/s. Are all particles in the sample moving at exactly 400 m/s? Explain.\"",
+          "FA-3: \"Explain why nitrogen molecules moving at roughly 515 m/s in a room does not contradict the room feeling completely still.\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Kinetic Molecular Theory of Gases\""
+        "mastery_signal": "Student correctly applies Kelvin temperature in kinetic energy calculations, correctly explains the speed distribution (not uniform speed), and correctly computes/interprets room-temperature particle speeds. Score ≥ 75%."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Kinetic Molecular Theory of Gases\""
+        "**Near transfer:** Gas laws (the immediate successor) formalize the pressure-from-collisions mechanism into quantitative pressure-volume-temperature-amount relationships (ideal gas law).\n\n**Far transfer:** Atmospheric science (predicting gas behavior at different altitudes/temperatures), vacuum technology and gas turbine engineering (both depend on accurate particle-speed and collision-frequency predictions), and heat capacity calculations (energy absorbed per degree, directly connected to kinet"
       ],
       "prerequisite_review_triggers": [
         "chem.found.states-of-matter"
@@ -2384,48 +2399,63 @@
     {
       "id": "asset.chem.state.gas-laws",
       "concept_id": "chem.state.gas-laws",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Gas Laws\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Gas Laws\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Gas Laws\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "**One-sentence definition:** The individual gas laws (Boyle's, Charles's, Gay-Lussac's, Avogadro's) each isolate ONE pair of variables while holding the others constant, unify into the single ideal gas law PV=nRT, and every calculation requires temperature strictly in Kelvin (never Celsius) and a value of R matched to the pressure/volume units actually being used.\n\n**The core insight:** PV=nRT is not a formula to memorize in isolation — it is the unification of four separate empirical observations (Boyle's inverse P-V relationship, Charles's direct V-T relationship, Gay-Lussac's direct P-T relationship, Avogadro's direct V-n relationship), each discovered by holding the OTHER variables fixed. Getting gas-law calculations right requires three specific disciplines: correctly identifying whether a relationship is direct or inverse proportionality, converting temperature to Kelvin without exception, and matching R's numerical value to whatever pressure/volume units the problem actually uses.\n\n**Conceptual chain:**\n1. Boyle's law (constant T, n): P and V are INVERSELY proportional — P₁V₁ = P₂V₂. Compressing a gas (smaller V) increases collision frequency with container walls, increasing P.\n2. Charles's law (constant P, n): V and T are DIRECTLY proportional (T in Kelvin) — V₁/T₁ = V₂/T₂. Heating increases average particle speed and thus the volume needed to maintain constant pressure.\n3. Gay-Lussac's law (constant V, n): P and T are DIRECTLY proportional (T in Kelvin) — P₁/T₁ = P₂/T₂. Heating at fixed volume increases collision force/frequency, raising pressure.\n4. Avogadro's law (constant P, T): V and n (moles) are DIRECTLY proportional — equal volumes of different gases at the same temperature and pressure contain equal numbers of moles.\n5. Combining all four relationships into one equation gives the ideal gas law: PV = nRT, with R the gas constant, whose NUMERICAL VALUE depends entirely on which units P and V are expressed in (0.0821 L·atm/(mol·K) for atm/L; 8.314 J/(mol·K) for Pa/m³).\n6. Every gas-law calculation requires temperature in ABSOLUTE Kelvin — using Celsius directly produces answers that can be wrong by enormous factors, since gas-law proportionality is to absolute temperature, not to the arbitrary Celsius scale.\n\n**Central relations:**\n- Boyle's: P₁V₁ = P₂V₂ (inverse, constant T,n).\n- Charles's: V₁/T₁ = V₂/T₂ (direct, constant P,n, T in Kelvin).\n- Gay-Lussac's: P₁/T₁ = P₂/T₂ (direct, constant V,n, T in Kelvin).\n- Avogadro's: V₁/n₁ = V₂/n₂ (direct, constant P,T).\n- PV = nRT, with R's numerical value matched to the units of P and V being used.\n\n---",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Gas Laws\"",
-        "[TEMPLATE] Key idea 2 for \"Gas Laws\"",
-        "[TEMPLATE] Key idea 3 for \"Gas Laws\""
+        "**Explanation A — Four laws, one unifying equation (conceptual):**\n\"Each individual gas law isolates one specific pair of variables by holding everything else constant: Boyle's law holds T and n fixed to isolate the P-V relationship (inverse); Charles's law holds P and n fixed to isolate V-T (direct); Gay-Lussac's law holds V and n fixed to isolate P-T (direct); Avogadro's law holds P and T fixed ",
+        "Core misconception to avoid: Gas-law temperature proportionality requires absolute Kelvin temperature; Celsius conversion is mandatory, not optional, and skipping it can produce errors of a large multiplicative factor."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Gas Laws\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "The volume doubles because the temperature doubled from 25 to 50.",
+          "correction": "Gas-law temperature proportionality requires absolute Kelvin temperature; Celsius conversion is mandatory, not optional, and skipping it can produce errors of a large multiplicative factor."
+        },
+        {
+          "misconception": "Volume doubles when pressure doubles.",
+          "correction": "Boyle's law is an inverse relationship — doubling pressure halves volume (at constant T, n), confirmed by the collision-frequency mechanism."
+        },
+        {
+          "misconception": "PV = nRT. P = 2.0 atm, V = 5.0 L, n = 0.50 mol, T = 300 K. Calculate R from this data. What units does it have?",
+          "correction": "R's numerical value must be chosen to match the specific units of P and V used in a given problem — there is no single universal number to apply blindly."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Gas Laws\""
+        "Demo 1 — Celsius vs. Kelvin gas-law error comparison: Compute the 25°C-to-50°C volume-ratio problem explicitly using both Celsius (wrong) and Kelvin (correct) temperatures, quantifying the ~20x error magnitude, directly targeting MC-1.",
+        "Demo 2 — Syringe compression demonstration: Physically demonstrate (or describe) compressing a syringe's plunger, connecting increased resistance (pressure) to decreased volume, directly targeting MC-2.",
+        "Demo 3 — R-value unit-matching drill: Present 3-4 problems with different unit combinations (atm/L, Pa/m³) and have students select the matching R value for each, directly targeting MC-3."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Gas Laws\"",
+        "setup": "A gas at 100 kPa and 20°C is heated at constant volume until pressure reaches 150 kPa. Find the final temperature in Kelvin and Celsius.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demo 1 — Celsius vs. Kelvin gas-law error comparison: Compute the 25°C-to-50°C volume-ratio problem explicitly using both Celsius (wrong) and Kelvin (correct) temperatures, quantifying the ~20x error magnitude, directly targeting MC-1.",
+          "Demo 2 — Syringe compression demonstration: Physically demonstrate (or describe) compressing a syringe's plunger, connecting increased resistance (pressure) to decreased volume, directly targeting MC-2.",
+          "Demo 3 — R-value unit-matching drill: Present 3-4 problems with different unit combinations (atm/L, Pa/m³) and have students select the matching R value for each, directly targeting MC-3."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Gas Laws\""
+        "expected_outcome": "Student correctly converts to Kelvin before any gas-law calculation, correctly identifies direct vs. inverse relationships for each law, and correctly matches R's value to the given units. Score ≥ 75%."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 [DEMONSTRATE + EXPLAIN]: Demo 1 (Celsius vs. Kelvin comparison) alongside Explanation A, directly probing MC-1.",
+          "TA-2 [DEMONSTRATE]: Demo 2 (syringe compression), directly probing MC-2.",
+          "TA-3 [DEMONSTRATE + EXPLAIN]: Demo 3 (R-value unit-matching drill) alongside Explanation B, directly probing MC-3.",
+          "TA-4 [PRACTICE]: Mixed multi-law practice problems requiring correct law selection, Kelvin conversion, and R-value matching together."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Gas Laws from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A gas at 100 kPa and 20°C is heated at constant volume until pressure reaches 150 kPa. Find the final temperature in Kelvin and Celsius.\"",
+          "FA-2: \"For each of Boyle's, Charles's, and Gay-Lussac's laws, state whether the relationship is direct or inverse.\"",
+          "FA-3: \"A problem gives P in atm and V in L. Which value of R should be used, and why not the other common value?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Gas Laws\""
+        "mastery_signal": "Student correctly converts to Kelvin before any gas-law calculation, correctly identifies direct vs. inverse relationships for each law, and correctly matches R's value to the given units. Score ≥ 75%."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Gas Laws\""
+        "**Near transfer:** Molar mass determination from gas density (the immediate successor) directly applies PV=nRT to identify an unknown gas from its measured mass, volume, pressure, and temperature.\n\n**Far transfer:** Scuba diving decompression calculations, weather balloon design, and compressed gas cylinder safety engineering all depend directly on correct gas-law application, including the Kelvin-conversion and unit-matching disciplines established here.\n\n**Structural abstraction:** \"A complex "
       ],
       "prerequisite_review_triggers": [
         "chem.state.kinetic-theory",
@@ -2435,48 +2465,64 @@
     {
       "id": "asset.chem.state.molar-mass-gas",
       "concept_id": "chem.state.molar-mass-gas",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Molar Mass from Gas Data\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Molar Mass from Gas Data\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Molar Mass from Gas Data\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The formula M=dRT/P requires density d in g/L (matching R's units, L·atm/mol·K), never g/mL — using g/mL directly without conversion produces an absurdly large molar mass (a factor-of-1000 error) that should be immediately recognizable as physically impossible; effusion rate depends on average molecular SPEED, not momentum or mass alone — at the same temperature, all gases share the same average kinetic energy (½mv²), so a heavier gas must move SLOWER (not faster) to have equal KE, making the LIGHTER gas effuse faster (Graham's law, r∝1/√M); and when computing molecular formula from empirical formula mass (EFM) and experimentally measured molar mass, the ratio n=M/EFM should be ROUNDED to the nearest whole number (never rejected as \"wrong data\" for not being an exact integer), since experimental molar mass measurements inherently carry uncertainty.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Molar Mass from Gas Data\"",
-        "[TEMPLATE] Key idea 2 for \"Molar Mass from Gas Data\"",
-        "[TEMPLATE] Key idea 3 for \"Molar Mass from Gas Data\""
+        "Molar mass calculated from gas density (M=dRT/P) requires strict unit consistency — density must be expressed in g/L to match the gas constant R's units, and a resulting molar mass that seems implausibly large should be treated as a signal to re-check units, not as an unusual finding. Effusion rate depends on molecular speed, which — since kinetic energy is held constant across gases at a shared temperature — is inversely related to the square root of molar mass (Graham's law): lighter gases move faster and effuse faster, despite carrying less momentum per molecule.",
+        "When determining molecular formula from an empirical formula mass and an experimentally measured molar mass, the resulting ratio n=M/EFM should be rounded to the nearest whole integer, since real experimental measurements carry inherent uncertainty and rarely produce a perfectly exact ratio.",
+        "Core misconception to avoid: Always verify that density is expressed in g/L (matching R's units) before substituting into M=dRT/P — treat an implausibly large resulting molar mass as a signal to check units, never as evidence of an unusual gas."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Molar Mass from Gas Data\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "I used density = 1.25 and got M = 28 — oh wait, that's nitrogen, the density is in mL not L.",
+          "correction": "Always verify that density is expressed in g/L (matching R's units) before substituting into M=dRT/P — treat an implausibly large resulting molar mass as a signal to check units, never as evidence of an unusual gas."
+        },
+        {
+          "misconception": "O₂ is heavier so it hits the hole harder and escapes faster.",
+          "correction": "Effusion rate is inversely proportional to the square root of molar mass (Graham's law, r∝1/√M) — lighter gases effuse faster because they move faster at a given temperature, never assume heavier means faster from a momentum intuition."
+        },
+        {
+          "misconception": "88/30 = 2.93, which isn't a whole number, so the data is wrong.",
+          "correction": "Always round the experimental n=M/EFM ratio to the nearest whole integer before determining molecular formula — never reject data simply because the raw ratio isn't a perfect integer."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Molar Mass from Gas Data\""
+        "Demonstration 1 (unit-conversion checkpoint for M=dRT/P): Compute M with density left in g/mL (implausible result) and then correctly converted to g/L (plausible result), contrasting the two explicitly.",
+        "Demonstration 2 (KE-equality-derives-speed-difference for Graham's law): Derive the H₂/O₂ effusion-rate ratio explicitly from KE=½mv² equality at a shared temperature.",
+        "Demonstration 3 (rounding-with-uncertainty molecular-formula determination): Walk through the CH₂O/88g/mol example, rounding n=2.93 to 3 and deriving the molecular formula."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Molar Mass from Gas Data\"",
+        "setup": "A gas has density 1.25 g/mL at STP. What is its molar mass?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (unit-conversion checkpoint for M=dRT/P): Compute M with density left in g/mL (implausible result) and then correctly converted to g/L (plausible result), contrasting the two explicitly.",
+          "Demonstration 2 (KE-equality-derives-speed-difference for Graham's law): Derive the H₂/O₂ effusion-rate ratio explicitly from KE=½mv² equality at a shared temperature.",
+          "Demonstration 3 (rounding-with-uncertainty molecular-formula determination): Walk through the CH₂O/88g/mol example, rounding n=2.93 to 3 and deriving the molecular formula."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Molar Mass from Gas Data\""
+        "expected_outcome": "Student can (a) correctly apply M=dRT/P with proper unit consistency, catching implausible results as unit errors, (b) correctly rank effusion rates via Graham's law from molar mass, (c) correctly round an experimental n ratio to determine molecular formula."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit unit-conversion checkpoint for M=dRT/P.",
+          "TA-2 (TELL): State Graham's law explicitly, anchored to the KE=½mv² derivation.",
+          "TA-3 (DO): Student computes n=M/EFM for an unfamiliar empirical-formula/molar-mass pair and rounds correctly.",
+          "TA-4 (TEST-THINKING): Present the H₂-vs-O₂ effusion probe and ask the student to justify the 4× factor from kinetic energy equality."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Molar Mass from Gas Data from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A gas has density 1.25 g/mL at STP. What is its molar mass?\"",
+          "FA-2: \"H₂ and O₂ are in separate containers each with a tiny hole. Which gas effuses faster? By what factor?\"",
+          "FA-3: \"Empirical formula CH₂O, EFM=30g/mol. Measured M=88g/mol. What is the molecular formula?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Molar Mass from Gas Data\""
+        "mastery_signal": "Student can (a) correctly apply M=dRT/P with proper unit consistency, catching implausible results as unit errors, (b) correctly rank effusion rates via Graham's law from molar mass, (c) correctly round an experimental n ratio to determine molecular formula."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Molar Mass from Gas Data\""
+        "This concept has no direct KG unlocks but consolidates gas-law and mole-concept reasoning built across `chem.state.gas-laws` and `chem.found.mole-concept`, forming a capstone quantitative-application skill."
       ],
       "prerequisite_review_triggers": [
         "chem.state.gas-laws",
@@ -2486,48 +2532,62 @@
     {
       "id": "asset.chem.state.real-gases",
       "concept_id": "chem.state.real-gases",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Real Gases and van der Waals Equation\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Real Gases and van der Waals Equation\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Real Gases and van der Waals Equation\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Real gases do NOT always have Z<1 — at very high pressures, molecules are packed so closely that their own finite volume dominates over attractive forces, making the effective free volume (Vm−b) much smaller than Vm, genuinely pushing Z ABOVE 1 (repulsive/steric-exclusion effects exceeding attractive effects at extreme compression); deviations from ideal behavior are LARGEST at LOW temperature and HIGH pressure (not high temperature and low pressure, which is actually where the ideal gas law works BEST) — students must not confuse \"conditions where ideal behavior holds well\" with \"conditions where deviations are largest,\" since these are opposite conditions; and in the van der Waals equation, the constant \"a\" corrects for intermolecular ATTRACTIONS (a pressure correction, with larger a meaning stronger attractive forces, e.g., CO₂'s a=3.59 vs. He's a=0.034), while \"b\" corrects for molecular VOLUME (an excluded-volume correction, with larger b meaning larger molecular size) — never confuse which letter corresponds to which physical correction based on alphabetical position or arbitrary assumption.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Real Gases and van der Waals Equation\"",
-        "[TEMPLATE] Key idea 2 for \"Real Gases and van der Waals Equation\"",
-        "[TEMPLATE] Key idea 3 for \"Real Gases and van der Waals Equation\""
+        "Real-gas deviations from ideal behavior arise from a genuine competition between two opposing effects — intermolecular attractions (which reduce effective pressure, producing Z<1) and molecular volume/exclusion (which increases effective pressure, producing Z>1) — with the dominant effect shifting depending on conditions: attractions dominate at moderate pressures, while exclusion-volume effects dominate at very high pressures where molecules are forced into close proximity.",
+        "The ideal gas law is best approximated at high temperature and low pressure (conditions minimizing both attraction and exclusion-volume effects) — deviations from ideal behavior are therefore LARGEST at the opposite conditions, low temperature and high pressure, never confused with the \"ideal-law-works-well\" condition set. The van der Waals constants have fixed, specific physical meanings independent of their alphabetical position: a corrects for intermolecular attractions (a pressure correction), while b corrects for excluded molecular volume (a volume correction).",
+        "Core misconception to avoid: Z can be either less than or greater than 1, depending on conditions — attractive forces dominate (Z<1) at moderate pressures, while excluded-volume/repulsive effects dominate (Z>1) at very high pressures — never assume Z<1 universally."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Real Gases and van der Waals Equation\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Attractions always pull molecules back, so real gases always have lower pressure.",
+          "correction": "Z can be either less than or greater than 1, depending on conditions — attractive forces dominate (Z<1) at moderate pressures, while excluded-volume/repulsive effects dominate (Z>1) at very high pressures — never assume Z<1 universally."
+        },
+        {
+          "misconception": "Deviations are largest at high temperature because the gas has more energy.",
+          "correction": "Ideal gas behavior is best approximated at high T, low P; deviations are LARGEST at low T, high P — these are opposite condition sets, never confused with each other."
+        },
+        {
+          "misconception": "a is the volume correction because a is the first letter in the equation.",
+          "correction": "a = pressure correction for intermolecular attractions (mnemonic: a for \"attraction\"); b = bulk/excluded volume correction (mnemonic: b for \"bulk\") — never infer physical meaning from alphabetical letter order."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Real Gases and van der Waals Equation\""
+        "Demonstration 1 (Z-vs-P full-range plot): Present a Z-vs-P graph for a real gas across a wide pressure range, showing the dip below 1 at moderate pressure followed by the rise above 1 at very high pressure.",
+        "Demonstration 2 (a-vs-b physical-meaning comparison): Present the explicit CO₂-vs-He a-value comparison alongside a b-value comparison for gases of different molecular sizes, reinforcing the correct attraction/volume correspondence."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Real Gases and van der Waals Equation\"",
+        "setup": "At very high pressures, is Z for nitrogen likely to be greater than or less than 1?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (Z-vs-P full-range plot): Present a Z-vs-P graph for a real gas across a wide pressure range, showing the dip below 1 at moderate pressure followed by the rise above 1 at very high pressure.",
+          "Demonstration 2 (a-vs-b physical-meaning comparison): Present the explicit CO₂-vs-He a-value comparison alongside a b-value comparison for gases of different molecular sizes, reinforcing the correct attraction/volume correspondence."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Real Gases and van der Waals Equation\""
+        "expected_outcome": "Student can (a) correctly predict Z above or below 1 based on the dominant effect at given conditions, (b) correctly identify low-T/high-P as the largest-deviation condition set, distinct from high-T/low-P's ideal-behavior condition set, (c) correctly interpret the van der Waals a and b constants using their correct physical meanings."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the full Z-vs-P plot, showing both the below-1 and above-1 regions.",
+          "TA-2 (TELL): State the high-T/low-P-vs-low-T/high-P opposite-condition distinction explicitly.",
+          "TA-3 (DO): Student determines the physical meaning of a and b for a given pair of gases using their tabulated values.",
+          "TA-4 (TEST-THINKING): Present MC-1's high-pressure nitrogen probe and ask the student to justify Z>1 using the excluded-volume argument."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Real Gases and van der Waals Equation from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"At very high pressures, is Z for nitrogen likely to be greater than or less than 1?\"",
+          "FA-2: \"Under which conditions is deviation from ideal behaviour smallest? Largest?\"",
+          "FA-3: \"If two gases have the same a value but different b values, what physical property differs?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Real Gases and van der Waals Equation\""
+        "mastery_signal": "Student can (a) correctly predict Z above or below 1 based on the dominant effect at given conditions, (b) correctly identify low-T/high-P as the largest-deviation condition set, distinct from high-T/low-P's ideal-behavior condition set, (c) correctly interpret the van der Waals a and b constants using their correct physical meanings."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Real Gases and van der Waals Equation\""
+        "Feeds directly into `chem.state.phase-diagram` (critical-point and phase-boundary behavior directly builds on real-gas deviation reasoning established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.state.gas-laws"
@@ -2536,48 +2596,62 @@
     {
       "id": "asset.chem.state.liquids",
       "concept_id": "chem.state.liquids",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Liquid State Properties\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Liquid State Properties\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Liquid State Properties\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Vapour pressure and boiling point are INVERSELY related — higher vapour pressure (weaker intermolecular forces, easier molecular escape) means LOWER boiling point, since less heating is needed to raise vapour pressure to 1 atm; viscosity DECREASES with increasing temperature for liquids (opposite to gases, where viscosity increases with temperature), since heating disrupts the intermolecular attractions that dominate liquid viscosity, while gas viscosity is instead dominated by molecular collisions that increase with temperature; and evaporation and boiling are genuinely different processes despite both converting liquid to vapour — evaporation occurs at the surface only, at ANY temperature, while boiling occurs throughout the bulk liquid, specifically and only when vapour pressure equals external pressure.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Liquid State Properties\"",
-        "[TEMPLATE] Key idea 2 for \"Liquid State Properties\"",
-        "[TEMPLATE] Key idea 3 for \"Liquid State Properties\""
+        "Vapour pressure reflects how readily a liquid's molecules escape into the vapour phase at a given temperature, governed inversely by intermolecular force strength — weaker forces mean higher vapour pressure and correspondingly LOWER boiling point (less heating needed to reach the 1 atm threshold), while stronger forces mean lower vapour pressure and HIGHER boiling point. Viscosity, driven by intermolecular attraction resisting flow in liquids, decreases as temperature rises (more kinetic energy overcomes the attractions) — the opposite trend from gas viscosity, which is driven by collision frequency and increases with temperature.",
+        "Evaporation and boiling are mechanistically and conditionally distinct processes, despite both converting liquid to vapour — evaporation occurs continuously at the liquid's surface at any temperature, while boiling occurs throughout the bulk liquid only when the liquid's vapour pressure rises to match the external pressure exactly.",
+        "Core misconception to avoid: High vapour pressure = volatile = LOW boiling point; low vapour pressure = non-volatile = HIGH boiling point — the two properties are inversely related, governed by intermolecular force strength."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Liquid State Properties\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "more vapour pressure = harder to boil = higher boiling point.",
+          "correction": "High vapour pressure = volatile = LOW boiling point; low vapour pressure = non-volatile = HIGH boiling point — the two properties are inversely related, governed by intermolecular force strength."
+        },
+        {
+          "misconception": "warm = more viscous; hot liquids are thick.",
+          "correction": "For liquids, heating always decreases viscosity (easier flow) — the everyday \"cooking thickens with heat\" intuition reflects water loss via evaporation, not an intrinsic viscosity increase; gases show the opposite trend (viscosity increases with heating) due to a different underlying mechanism (collision frequency, not intermolecular attraction)."
+        },
+        {
+          "misconception": "evaporation is just slow boiling.",
+          "correction": "Evaporation happens at the surface, at any temperature, continuously; boiling happens throughout the bulk liquid, only when vapour pressure equals external pressure — two mechanistically and conditionally distinct processes, not \"fast vs. slow\" versions of the same thing."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Liquid State Properties\""
+        "Demonstration 1 (vapour-pressure-vs-boiling-point data comparison): Present diethyl ether and water's vapour pressure and boiling point data side by side, having students verify the inverse relationship directly.",
+        "Demonstration 2 (honey viscosity-temperature observation): Present or demonstrate honey's flow behavior warm versus cold, connecting the observation directly to the intermolecular-attraction mechanism."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Liquid State Properties\"",
+        "setup": "Which has the higher vapour pressure, diethyl ether or water? Which has the higher boiling point?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (vapour-pressure-vs-boiling-point data comparison): Present diethyl ether and water's vapour pressure and boiling point data side by side, having students verify the inverse relationship directly.",
+          "Demonstration 2 (honey viscosity-temperature observation): Present or demonstrate honey's flow behavior warm versus cold, connecting the observation directly to the intermolecular-attraction mechanism."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Liquid State Properties\""
+        "expected_outcome": "Student can (a) correctly predict relative boiling points from vapour pressure data using the inverse relationship, (b) correctly predict that liquid viscosity decreases with heating, (c) correctly distinguish evaporation (surface, any temperature) from boiling (bulk, vapour pressure = external pressure)."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the diethyl ether/water vapour-pressure-and-boiling-point comparison explicitly.",
+          "TA-2 (TELL): State the liquid-viscosity-decreases-with-heating rule explicitly, immediately followed by the honey example and the gas-viscosity contrast.",
+          "TA-3 (DO): Student determines, for a new liquid's vapour-pressure data, at what external pressure it would boil at a given temperature.",
+          "TA-4 (TEST-THINKING): Present MC-3's probe and ask the student to distinguish evaporation from boiling using both the location (surface vs. bulk) and condition (any temperature vs. vapour pressure = external pressure) criteria."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Liquid State Properties from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Which has the higher vapour pressure, diethyl ether or water? Which has the higher boiling point?\"",
+          "FA-2: \"Does honey flow more easily when warm or when cold?\"",
+          "FA-3: \"Can water evaporate at 20°C? Can it boil at 20°C at 1 atm?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Liquid State Properties\""
+        "mastery_signal": "Student can (a) correctly predict relative boiling points from vapour pressure data using the inverse relationship, (b) correctly predict that liquid viscosity decreases with heating, (c) correctly distinguish evaporation (surface, any temperature) from boiling (bulk, vapour pressure = external pressure)."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Liquid State Properties\""
+        "Feeds directly into `chem.sol.vapour-pressure` (Raoult's law and vapour-pressure lowering directly extend this concept's VP foundations), `chem.state.phase-diagram` (phase boundaries are defined by exactly the VP-equals-external-pressure condition established here), and `chem.surface.surfactants` (surface tension and surfactant behavior build on liquid surface properties)."
       ],
       "prerequisite_review_triggers": [
         "chem.bond.intermolecular",
@@ -2587,48 +2661,64 @@
     {
       "id": "asset.chem.state.phase-diagram",
       "concept_id": "chem.state.phase-diagram",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Phase Diagrams\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Phase Diagrams\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Phase Diagrams\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The triple point is a genuinely STABLE equilibrium at which all three phases coexist simultaneously with no net change, as long as pressure and temperature are held exactly there — it is not an inherently transient or unstable state that must \"quickly become one phase\"; water's solid-liquid phase boundary has a NEGATIVE slope (unlike most substances, which have a positive slope) because ice is LESS dense than liquid water, so increasing pressure at 0°C favors the denser phase (liquid), MELTING the ice rather than favoring the solid — the Clausius-Clapeyron equation's negative slope directly follows from water's negative ΔV of fusion; and beyond the critical point, a supercritical fluid is NOT \"neither liquid nor gas with no useful properties\" — it genuinely combines liquid-like density (enabling it to dissolve substances like a liquid solvent) with gas-like low viscosity and high diffusivity (enabling it to flow and penetrate like a gas), a distinctive property COMBINATION that makes supercritical fluids (e.g., scCO₂) practically useful, not property-less.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Phase Diagrams\"",
-        "[TEMPLATE] Key idea 2 for \"Phase Diagrams\"",
-        "[TEMPLATE] Key idea 3 for \"Phase Diagrams\""
+        "Every point on a phase diagram, including the triple point, represents a genuine thermodynamic condition — the triple point is a stable equilibrium where all three phases coexist with balanced, zero-net conversion rates, as long as pressure and temperature are held exactly there; its practical fragility stems from the difficulty of maintaining those exact conditions, not from any inherent instability of the equilibrium itself.",
+        "A substance's solid-liquid phase-boundary slope direction follows directly from the relative densities of its solid and liquid phases via Le Chatelier's principle — water's anomalously negative slope arises because ice is less dense than liquid water, the reverse of most substances. Beyond the critical point, a supercritical fluid genuinely combines liquid-like density with gas-like flow properties simultaneously, making it a distinctive and practically useful hybrid state, not a property-less \"neither\" phase.",
+        "Core misconception to avoid: The triple point is a genuinely stable equilibrium (all three phases coexist with no net conversion) as long as conditions are held precisely there — its apparent transience is a practical control challenge, not a thermodynamic instability."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Phase Diagrams\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "it would immediately change to one of the phases",
+          "correction": "The triple point is a genuinely stable equilibrium (all three phases coexist with no net conversion) as long as conditions are held precisely there — its apparent transience is a practical control challenge, not a thermodynamic instability."
+        },
+        {
+          "misconception": "higher pressure raises the melting point",
+          "correction": "Always derive solid-liquid boundary slope from the relative densities of the two phases for the SPECIFIC substance in question (via Le Chatelier's principle) — never assume a universal positive slope from a generic textbook diagram."
+        },
+        {
+          "misconception": "it's just a special gas",
+          "correction": "A supercritical fluid combines liquid-like density with gas-like viscosity/diffusivity simultaneously — never describe it as lacking the useful properties of either phase."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Phase Diagrams\""
+        "Demonstration 1 (equal-and-opposite conversion-rate argument for triple-point stability): Present the explicit equilibrium argument for the triple point, distinguishing genuine stability from practical control difficulty.",
+        "Demonstration 2 (ice-floats-on-water Le Chatelier derivation): Derive water's negative solid-liquid slope explicitly from the observable ice-floats fact and Le Chatelier's principle.",
+        "Demonstration 3 (scCO₂ property table): Present the explicit density/viscosity/diffusivity comparison table for scCO₂ against typical liquid and gas values."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Phase Diagrams\"",
+        "setup": "If you could perfectly control temperature and pressure at water's triple point, what would you see?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (equal-and-opposite conversion-rate argument for triple-point stability): Present the explicit equilibrium argument for the triple point, distinguishing genuine stability from practical control difficulty.",
+          "Demonstration 2 (ice-floats-on-water Le Chatelier derivation): Derive water's negative solid-liquid slope explicitly from the observable ice-floats fact and Le Chatelier's principle.",
+          "Demonstration 3 (scCO₂ property table): Present the explicit density/viscosity/diffusivity comparison table for scCO₂ against typical liquid and gas values."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Phase Diagrams\""
+        "expected_outcome": "Student can (a) correctly describe the triple point as a stable, not transient, equilibrium, (b) correctly derive water's negative solid-liquid slope from density comparison, (c) correctly describe supercritical fluid properties as a genuine liquid-gas hybrid."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit equal-and-opposite conversion-rate argument for triple-point stability.",
+          "TA-2 (TELL): State water's anomalous negative solid-liquid slope explicitly, anchored to the ice-floats-on-water observation.",
+          "TA-3 (DO): Student derives the expected slope direction for an unfamiliar substance from its relative solid/liquid densities.",
+          "TA-4 (TEST-THINKING): Present the scCO₂ probe and ask the student to justify its usefulness from the liquid-density/gas-viscosity property combination."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Phase Diagrams from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"If you could perfectly control temperature and pressure at water's triple point, what would you see?\"",
+          "FA-2: \"Increasing pressure on ice at 0°C causes it to...?\"",
+          "FA-3: \"What physical properties does supercritical CO₂ have that make it useful as a solvent?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Phase Diagrams\""
+        "mastery_signal": "Student can (a) correctly describe the triple point as a stable, not transient, equilibrium, (b) correctly derive water's negative solid-liquid slope from density comparison, (c) correctly describe supercritical fluid properties as a genuine liquid-gas hybrid."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Phase Diagrams\""
+        "This concept has no direct KG unlocks but consolidates phase-equilibrium reasoning built across `chem.state.liquids` and `chem.state.real-gases`, forming a capstone application of intermolecular-force and equilibrium reasoning to phase behavior."
       ],
       "prerequisite_review_triggers": [
         "chem.state.liquids",
