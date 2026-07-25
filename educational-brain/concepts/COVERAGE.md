@@ -14,7 +14,7 @@ and this file's summary row should be corrected to match.
 | mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
-| chemistry | 186 | 157 | levels 0–16 complete (157/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock, chem.redox, chem.dblock, chem.org, chem.pblock, chem.solid, chem.hyd, chem.hal, chem.coord, chem.nitro, chem.alc — IN PROGRESS |
+| chemistry | 186 | 165 | levels 0–17 complete (165/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock, chem.redox, chem.dblock, chem.org, chem.pblock, chem.solid, chem.hyd, chem.hal, chem.coord, chem.nitro, chem.alc, chem.carb, chem.poly — IN PROGRESS |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
 
@@ -1321,3 +1321,14 @@ Authored 9 level-16 Chemistry Educational Brain entries in strict topological or
 - `chem.sol.colligative` — VP lowering/bp elevation/fp depression/osmotic pressure; ΔTb = Kbmi, ΔTf = Kfmi, π = iMRT; van 't Hoff factor i; one-cause-four-effects model; molar mass determination
 
 Chemistry total: 148 → 157 / 186 (84.41%). Level 16 complete.
+
+### Batch 32 — Chemistry level 17 (2026-07-24)
+- `chem.alc.diols` — Diols and Polyols
+- `chem.alc.ethers` — Ethers
+- `chem.alc.phenols` — Phenols
+- `chem.carb.aldehydes` — Aldehydes
+- `chem.hyd.alkynes` — Alkynes
+- `chem.nitro.amines` — Amines
+- `chem.poly.addition` — Addition Polymerization
+- `chem.sol.osmosis` — Osmosis and Osmotic Pressure
+Chemistry: 157 → 165/186 (88.71%). New domains: chem.carb, chem.poly.
