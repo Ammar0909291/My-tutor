@@ -6496,48 +6496,62 @@
     {
       "id": "asset.chem.pblock.group13",
       "concept_id": "chem.pblock.group13",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Group 13 — Boron Family\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Group 13 — Boron Family\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Group 13 — Boron Family\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Group 13 elements do NOT all reliably form M³⁺ ions — the inert pair effect makes Tl⁺ (not Tl³⁺) the dominant thallium oxidation state, boron forms NO M³⁺ ion at all (boron chemistry is exclusively covalent), and +3 is the dominant, reliable oxidation state only for aluminum and gallium specifically; aluminum is genuinely AMPHOTERIC, reacting vigorously with concentrated NaOH (producing H₂ gas: 2Al+2NaOH+2H₂O→2NaAlO₂+3H₂) as well as with acids, since Al₂O₃ and Al(OH)₃ are both amphoteric — directly contradicting a \"metals react only with acids, not bases\" assumption; and boric acid, B(OH)₃, is a LEWIS acid, not a Brønsted acid — it does NOT donate a proton from its own structure, but instead ACCEPTS a lone pair from H₂O (or OH⁻) to form [B(OH)₄]⁻, releasing H⁺ only indirectly through this electron-pair-acceptance mechanism.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Group 13 — Boron Family\"",
-        "[TEMPLATE] Key idea 2 for \"Group 13 — Boron Family\"",
-        "[TEMPLATE] Key idea 3 for \"Group 13 — Boron Family\""
+        "Group 13's characteristic +3 oxidation state expectation, derived naively from the group number, genuinely breaks down for heavier members due to the inert pair effect (making Tl⁺ dominant) and for boron specifically (which forms no simple cation, being exclusively covalent) — +3 is reliably dominant only for aluminum and gallium. Aluminum's oxide and hydroxide are genuinely amphoteric, reacting vigorously with both acids and strong bases (producing H₂ gas with concentrated NaOH), directly contradicting a naive \"metals react only with acids\" assumption.",
+        "Boric acid's name and O–H-containing structure superficially suggest typical Brønsted-acid, direct-proton-donation behavior, but its actual mechanism is genuinely Lewis-acid (electron-pair acceptance from water, forming [B(OH)₄]⁻), with H⁺ release occurring only indirectly through water's own bond-breaking — a fundamentally different acid mechanism from ordinary Brønsted acids despite the shared \"acid\" name.",
+        "Core misconception to avoid: Group 13's dominant oxidation state genuinely varies by specific element — B forms no simple cation (fully covalent), Al and Ga reliably show +3, while Tl shows +1 dominantly (inert pair effect) — never assume a uniform +3 across the whole group."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Group 13 — Boron Family\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Group 13 means +3 always.",
+          "correction": "Group 13's dominant oxidation state genuinely varies by specific element — B forms no simple cation (fully covalent), Al and Ga reliably show +3, while Tl shows +1 dominantly (inert pair effect) — never assume a uniform +3 across the whole group."
+        },
+        {
+          "misconception": "metals react with acids, not bases.",
+          "correction": "Aluminum (and its oxide/hydroxide) is genuinely amphoteric, reacting with both acids and strong bases (producing H₂ gas with concentrated NaOH) — never assume a metal reacts only with acids without checking for amphoteric character."
+        },
+        {
+          "misconception": "Write the ionization of B(OH)₃ in water.",
+          "correction": "Boric acid, B(OH)₃, is a Lewis acid (electron-pair acceptor, forming [B(OH)₄]⁻ from water's lone pair), not a Brønsted acid (direct proton donor) — the H⁺ released comes indirectly from water's mechanism, not directly from boron's own structure."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Group 13 — Boron Family\""
+        "Demonstration 1 (Tl⁺-vs-Tl³⁺ inert pair effect comparison): Present the inert pair effect explicitly, connecting increasing atomic number down Group 13 directly to Tl⁺'s dominance.",
+        "Demonstration 2 (Al-NaOH reaction observation): Present or describe the vigorous reaction of aluminum foil with concentrated NaOH producing H₂ gas, directly demonstrating amphoteric behavior."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Group 13 — Boron Family\"",
+        "setup": "What ion does thallium most commonly form?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (Tl⁺-vs-Tl³⁺ inert pair effect comparison): Present the inert pair effect explicitly, connecting increasing atomic number down Group 13 directly to Tl⁺'s dominance.",
+          "Demonstration 2 (Al-NaOH reaction observation): Present or describe the vigorous reaction of aluminum foil with concentrated NaOH producing H₂ gas, directly demonstrating amphoteric behavior."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Group 13 — Boron Family\""
+        "expected_outcome": "Student can (a) correctly predict Group 13 elements' dominant oxidation states, accounting for the inert pair effect and boron's covalent-only chemistry, (b) correctly explain aluminum's amphoteric behavior with concrete reaction evidence, (c) correctly classify boric acid's acidity as Lewis, not Brønsted."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the inert pair effect explicitly, connecting it to Tl⁺'s dominance.",
+          "TA-2 (TELL): State aluminum's amphoteric character explicitly, worked through with the Al+NaOH equation.",
+          "TA-3 (DO): Student writes the Lewis acid-base mechanism for B(OH)₃'s reaction with water.",
+          "TA-4 (TEST-THINKING): Present MC-1's thallium probe and ask the student to justify Tl⁺'s dominance using the inert pair effect."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Group 13 — Boron Family from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"What ion does thallium most commonly form?\"",
+          "FA-2: \"What happens when aluminium foil is placed in concentrated NaOH solution?\"",
+          "FA-3: \"Write the ionization of B(OH)₃ in water.\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Group 13 — Boron Family\""
+        "mastery_signal": "Student can (a) correctly predict Group 13 elements' dominant oxidation states, accounting for the inert pair effect and boron's covalent-only chemistry, (b) correctly explain aluminum's amphoteric behavior with concrete reaction evidence, (c) correctly classify boric acid's acidity as Lewis, not Brønsted."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Group 13 — Boron Family\""
+        "Feeds directly into `chem.pblock.trends` (synthesizes p-block reactivity and acid-base mechanism reasoning across multiple groups, directly building on the arguments established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.period.periodic-properties"
@@ -6546,48 +6560,57 @@
     {
       "id": "asset.chem.pblock.group14",
       "concept_id": "chem.pblock.group14",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Group 14 — Carbon Family\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Group 14 — Carbon Family\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Group 14 — Carbon Family\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "SiO₂ does NOT behave like CO₂ despite carbon and silicon sharing Group 14 — SiO₂ is a network covalent solid that does NOT dissolve in water at room temperature (unlike CO₂, which readily forms carbonic acid), because the carbon-to-silicon analogy breaks down specifically at π-bonding: silicon cannot form π bonds with oxygen the way carbon does (Si's larger size prevents effective p-orbital overlap for π bonding), so SiO₂ forms an extended 3D covalent network rather than discrete molecules — SiO₂ instead reacts with molten NaOH or HF, not with liquid water; and diamond does NOT conduct electricity despite being made of the same element as graphite, since diamond uses all four of each carbon's valence electrons in localized σ bonds to four neighboring atoms (no delocalized electrons available), while graphite's layered structure leaves one electron per carbon delocalized across each layer's π system, enabling conduction — the BONDING ARRANGEMENT, not the element itself, determines conductivity.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Group 14 — Carbon Family\"",
-        "[TEMPLATE] Key idea 2 for \"Group 14 — Carbon Family\"",
-        "[TEMPLATE] Key idea 3 for \"Group 14 — Carbon Family\""
+        "Same-group elements share valence-electron count and general oxidation-state patterns, but this doesn't guarantee identical bonding CAPABILITIES — silicon's larger atomic size prevents the effective π-bond formation with oxygen that makes carbon's oxide (CO₂) a small, water-soluble molecule, causing silicon's oxide (SiO₂) to instead form an extended, insoluble covalent network. Carbon's own allotropes (diamond and graphite) demonstrate that even the SAME element can show dramatically different properties (like electrical conductivity) depending entirely on how its atoms are bonded together — diamond's fully localized bonding structure prevents conduction, while graphite's delocalized π system enables it.",
+        "Physical and chemical properties of a substance are determined by its actual bonding structure and arrangement, not merely by which element(s) are present — same-group or same-element comparisons can mislead if the specific bonding details (π-bond capability, electron localization/delocalization) genuinely differ between the substances being compared.",
+        "Core misconception to avoid: SiO₂ is a network covalent solid, insoluble in water at room temperature, due to silicon's inability to form effective π bonds with oxygen (unlike carbon) — never assume C-to-Si analogies transfer automatically, especially for π-bonding-dependent behavior."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Group 14 — Carbon Family\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "silicon dioxide + water = silicic acid.",
+          "correction": "SiO₂ is a network covalent solid, insoluble in water at room temperature, due to silicon's inability to form effective π bonds with oxygen (unlike carbon) — never assume C-to-Si analogies transfer automatically, especially for π-bonding-dependent behavior."
+        },
+        {
+          "misconception": "carbon conducts electricity.",
+          "correction": "Diamond (all electrons localized in σ bonds, no delocalization) is an electrical insulator; graphite (delocalized π system across each layer) is a conductor — the bonding arrangement, not the elemental identity (carbon), determines conductivity."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Group 14 — Carbon Family\""
+        "Demonstration 1 (SiO₂-vs-CO₂ solubility comparison): Attempt (or describe) dissolving SiO₂ (sand) in water directly, contrasting the observed non-dissolution with CO₂'s well-known ready dissolution.",
+        "Demonstration 2 (diamond-vs-graphite conductivity demonstration): Present or describe a conductivity test comparing diamond and graphite, connecting the observed result directly to each structure's localized-versus-delocalized electron arrangement."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Group 14 — Carbon Family\"",
+        "setup": "Write the equation for SiO₂ dissolving in water.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (SiO₂-vs-CO₂ solubility comparison): Attempt (or describe) dissolving SiO₂ (sand) in water directly, contrasting the observed non-dissolution with CO₂'s well-known ready dissolution.",
+          "Demonstration 2 (diamond-vs-graphite conductivity demonstration): Present or describe a conductivity test comparing diamond and graphite, connecting the observed result directly to each structure's localized-versus-delocalized electron arrangement."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Group 14 — Carbon Family\""
+        "expected_outcome": "Student can (a) correctly explain why SiO₂ doesn't dissolve in water like CO₂ does, using the π-bonding/atomic-size argument, (b) correctly explain diamond's insulating behavior versus graphite's conductivity using bonding-structure reasoning."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit atomic-size/p-orbital-overlap argument for why Si cannot form C=O-style π bonds.",
+          "TA-2 (TELL): State the localized-vs-delocalized-electron principle explicitly, worked through for diamond versus graphite.",
+          "TA-3 (DO): Student predicts whether a given Group 14 same-group analogy will hold, using the π-bonding-capability criterion.",
+          "TA-4 (TEST-THINKING): Present MC-2's diamond probe and ask the student to justify diamond's insulating behavior using its bonding structure."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Group 14 — Carbon Family from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Write the equation for SiO₂ dissolving in water.\"",
+          "FA-2: \"Which allotrope of carbon conducts electricity — diamond or graphite?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Group 14 — Carbon Family\""
+        "mastery_signal": "Student can (a) correctly explain why SiO₂ doesn't dissolve in water like CO₂ does, using the π-bonding/atomic-size argument, (b) correctly explain diamond's insulating behavior versus graphite's conductivity using bonding-structure reasoning."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Group 14 — Carbon Family\""
+        "Feeds directly into `chem.pblock.trends` (synthesizes p-block group behavior and analogy-breakdown reasoning across multiple groups, directly building on the arguments established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.period.periodic-properties"
@@ -6596,48 +6619,57 @@
     {
       "id": "asset.chem.pblock.group15",
       "concept_id": "chem.pblock.group15",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Group 15 — Nitrogen Family\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Group 15 — Nitrogen Family\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Group 15 — Nitrogen Family\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Unlike N₂ (with its genuine N≡N triple bond, enabled by strong 2p-orbital π overlap), phosphorus does NOT form an analogous P≡P triple bond — instead, phosphorus exists as tetrahedral P₄, with four P–P SINGLE bonds (bond order 1, unusual 60° bond angles), because phosphorus's larger 3p orbitals cannot form the strong π bonds needed for a triple bond — N≡N's strength is genuinely unique to nitrogen's small, effective 2p-orbital overlap; and nitrogen's oxidation state and its actual bond count are entirely DIFFERENT quantities — N in NO₃⁻ has an oxidation state of +5 (a formal bookkeeping number) but forms only 4 actual bonds (one to each of three oxygens, with a fourth involving a resonance-delocalized π system), since nitrogen's octet constraint genuinely limits it to a maximum of 4 bonds, regardless of its assigned oxidation state.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Group 15 — Nitrogen Family\"",
-        "[TEMPLATE] Key idea 2 for \"Group 15 — Nitrogen Family\"",
-        "[TEMPLATE] Key idea 3 for \"Group 15 — Nitrogen Family\""
+        "While nitrogen forms a uniquely strong triple bond (N≡N) enabled by its small, effective 2p-orbital π overlap, this bonding pattern does NOT generalize to heavier Group 15 congeners — phosphorus's larger, more diffuse 3p orbitals cannot achieve comparable π overlap, leading phosphorus to instead form tetrahedral P₄ with single bonds only, a structurally very different outcome despite sharing the same valence-electron count and group membership as nitrogen.",
+        "A species' formally-assigned oxidation state (a bookkeeping convention, computed via charge-balance rules) is entirely separate from its actual, structural bond count (a physical fact, constrained by quantum-mechanical limits like the octet rule) — nitrogen, being a period-2 element with no accessible d orbitals, is genuinely capped at 4 bonds structurally, even when its formal oxidation state (like +5 in NO₃⁻) might naively suggest otherwise.",
+        "Core misconception to avoid: N₂'s triple bond (N≡N) is unique to nitrogen's small, effective 2p-orbital overlap — phosphorus instead forms tetrahedral P₄ with single P–P bonds only, since its larger 3p orbitals cannot achieve comparable π-bond overlap."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Group 15 — Nitrogen Family\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "all Group 15 diatomics have triple bonds.",
+          "correction": "N₂'s triple bond (N≡N) is unique to nitrogen's small, effective 2p-orbital overlap — phosphorus instead forms tetrahedral P₄ with single P–P bonds only, since its larger 3p orbitals cannot achieve comparable π-bond overlap."
+        },
+        {
+          "misconception": "How many bonds does N have in NO₃⁻?",
+          "correction": "Oxidation state and actual bond count are genuinely different quantities — nitrogen's maximum bond count is 4 (octet-constrained, period 2, no d orbitals), regardless of its assigned oxidation state (which can be as high as +5 in NO₃⁻)."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Group 15 — Nitrogen Family\""
+        "Demonstration 1 (N₂-vs-P₄ orbital-overlap comparison): Present the explicit orbital-size comparison between nitrogen's 2p and phosphorus's 3p orbitals, connecting size directly to π-bonding effectiveness and the resulting structural difference (N₂ vs. P₄).",
+        "Demonstration 2 (NO₃⁻ bond-count vs. oxidation-state computation): Compute nitrogen's oxidation state in NO₃⁻ via the sum rule (+5) separately from counting its actual structural bonds (4), showing the two numbers explicitly side by side."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Group 15 — Nitrogen Family\"",
+        "setup": "What is the bond order between P atoms in P₄?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (N₂-vs-P₄ orbital-overlap comparison): Present the explicit orbital-size comparison between nitrogen's 2p and phosphorus's 3p orbitals, connecting size directly to π-bonding effectiveness and the resulting structural difference (N₂ vs. P₄).",
+          "Demonstration 2 (NO₃⁻ bond-count vs. oxidation-state computation): Compute nitrogen's oxidation state in NO₃⁻ via the sum rule (+5) separately from counting its actual structural bonds (4), showing the two numbers explicitly side by side."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Group 15 — Nitrogen Family\""
+        "expected_outcome": "Student can (a) correctly explain why P₄ has single bonds while N₂ has a triple bond, using orbital-size reasoning, (b) correctly distinguish oxidation state from actual bond count for nitrogen species."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit orbital-size comparison between nitrogen and phosphorus.",
+          "TA-2 (TELL): State the oxidation-state-vs-bond-count distinction explicitly, worked through for NO₃⁻.",
+          "TA-3 (DO): Student determines the actual bond count for a new nitrogen-containing species, separate from its oxidation state.",
+          "TA-4 (TEST-THINKING): Present MC-1's P₄ probe and ask the student to justify the single-bond, tetrahedral structure using orbital-size reasoning."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Group 15 — Nitrogen Family from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"What is the bond order between P atoms in P₄?\"",
+          "FA-2: \"How many bonds does N have in NO₃⁻?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Group 15 — Nitrogen Family\""
+        "mastery_signal": "Student can (a) correctly explain why P₄ has single bonds while N₂ has a triple bond, using orbital-size reasoning, (b) correctly distinguish oxidation state from actual bond count for nitrogen species."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Group 15 — Nitrogen Family\""
+        "Feeds directly into `chem.pblock.trends` (synthesizes p-block bonding and oxidation-state reasoning across multiple groups, directly building on the arguments established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.period.periodic-properties"
@@ -6646,48 +6678,62 @@
     {
       "id": "asset.chem.pblock.group16",
       "concept_id": "chem.pblock.group16",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Group 16 — Oxygen Family\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Group 16 — Oxygen Family\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Group 16 — Oxygen Family\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Water's anomalously high boiling point compared to H₂S is NOT explained by molecular size/packing — the genuine group trend (H₂S<H₂Se<H₂Te, boiling point increasing with molecular mass, via van der Waals forces) confirms size/mass isn't the special factor; water's anomaly is specifically caused by HYDROGEN BONDING, a much stronger intermolecular force absent in the heavier Group 16 hydrides; SO₂ and Cl₂ bleach by fundamentally DIFFERENT mechanisms — SO₂ bleaches by REDUCTION (forming a colorless compound that can be REVERSED when light re-oxidizes it, so color genuinely returns over time), while Cl₂ bleaches by OXIDATION (permanently destroying the chromophore, so color does NOT return) — never assume all \"bleaches\" work identically; and oxygen CANNOT form expanded octets the way heavier Group 16 elements can — being period 2 with no accessible d orbitals, oxygen is capped at a maximum of 2 bonds (or 3 with formal charge), while sulfur (period 3, accessible 3d orbitals) can form SO₄²⁻ with 6 bonds around S, a structural capability oxygen genuinely lacks.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Group 16 — Oxygen Family\"",
-        "[TEMPLATE] Key idea 2 for \"Group 16 — Oxygen Family\"",
-        "[TEMPLATE] Key idea 3 for \"Group 16 — Oxygen Family\""
+        "Group 16's hydride boiling-point trend genuinely increases with molecular mass (H₂S<H₂Se<H₂Te, via van der Waals forces) — water's dramatic deviation from this trend is caused specifically by hydrogen bonding, a qualitatively stronger intermolecular force, not by any size/packing argument (which would actually predict the opposite of water's observed anomaly). Different \"bleaching\" agents can operate via fundamentally different mechanisms — SO₂ bleaches reversibly by reduction (color can return via sunlight-driven re-oxidation), while Cl₂ bleaches permanently by oxidation (structurally destroying the chromophore).",
+        "Oxygen, as a period 2 element with no accessible d orbitals, is fundamentally incapable of forming expanded-octet structures (capped at 2-3 bonds), unlike sulfur (period 3, accessible 3d orbitals), which readily forms expanded-octet species like SO₄²⁻ — this orbital-availability distinction, not shared group membership, determines expanded-octet capability.",
+        "Core misconception to avoid: Water's anomalously high boiling point is caused specifically by hydrogen bonding, not by molecular size/packing — the genuine group trend (H₂S<H₂Se<H₂Te, increasing with mass via van der Waals forces) actually confirms that size/packing predicts the OPPOSITE of water's anomaly."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Group 16 — Oxygen Family\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "smaller molecules are closer together so bp is higher.",
+          "correction": "Water's anomalously high boiling point is caused specifically by hydrogen bonding, not by molecular size/packing — the genuine group trend (H₂S<H₂Se<H₂Te, increasing with mass via van der Waals forces) actually confirms that size/packing predicts the OPPOSITE of water's anomaly."
+        },
+        {
+          "misconception": "both bleaches do the same thing.",
+          "correction": "SO₂ bleaches by reduction (reversible — color can return upon re-oxidation by sunlight); Cl₂ bleaches by oxidation (permanent — chromophore destroyed, color never returns) — never assume all bleaching agents work identically."
+        },
+        {
+          "misconception": "Can SO₄²⁻ have S with an expanded octet? Can an analogous oxygen compound O(OH)₂ exist?",
+          "correction": "Oxygen (period 2, no accessible d orbitals) cannot form expanded octets, capped at a maximum of 2-3 bonds — sulfur (period 3, accessible 3d orbitals) genuinely can, forming species like SO₄²⁻ with 6 bonds — never assume expanded-octet capability transfers uniformly across a group."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Group 16 — Oxygen Family\""
+        "Demonstration 1 (H₂S/H₂Se/H₂Te/H₂O boiling-point comparison): Plot the full Group 16 hydride boiling points, showing the mass-dependent trend for H₂S through H₂Te and water's dramatic outlier position.",
+        "Demonstration 2 (SO₂-vs-Cl₂ bleaching mechanism comparison): Present the explicit reduction/re-oxidation mechanism for SO₂ bleaching alongside Cl₂'s permanent oxidative destruction mechanism."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Group 16 — Oxygen Family\"",
+        "setup": "Why does H₂S have a lower boiling point than H₂Te despite H₂S being smaller?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (H₂S/H₂Se/H₂Te/H₂O boiling-point comparison): Plot the full Group 16 hydride boiling points, showing the mass-dependent trend for H₂S through H₂Te and water's dramatic outlier position.",
+          "Demonstration 2 (SO₂-vs-Cl₂ bleaching mechanism comparison): Present the explicit reduction/re-oxidation mechanism for SO₂ bleaching alongside Cl₂'s permanent oxidative destruction mechanism."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Group 16 — Oxygen Family\""
+        "expected_outcome": "Student can (a) correctly attribute water's boiling-point anomaly to hydrogen bonding, not molecular size, (b) correctly distinguish SO₂'s reversible reduction-based bleaching from Cl₂'s permanent oxidation-based bleaching, (c) correctly predict that oxygen cannot form expanded octets while sulfur can."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the full Group 16 hydride boiling-point plot, highlighting water's anomalous position.",
+          "TA-2 (TELL): State the reduction-vs-oxidation bleaching-mechanism distinction explicitly, worked through with the SO₂-vs-Cl₂ comparison.",
+          "TA-3 (DO): Student determines whether a hypothetical oxygen-centered expanded-octet structure can exist, using orbital-availability reasoning.",
+          "TA-4 (TEST-THINKING): Present MC-1's H₂S-vs-H₂Te probe and ask the student to reconcile the size-based trend with water's anomaly."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Group 16 — Oxygen Family from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Why does H₂S have a lower boiling point than H₂Te despite H₂S being smaller?\"",
+          "FA-2: \"A coloured flower is bleached by SO₂. What happens if left in sunlight for weeks?\"",
+          "FA-3: \"Can SO₄²⁻ have S with an expanded octet? Can an analogous oxygen compound exist?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Group 16 — Oxygen Family\""
+        "mastery_signal": "Student can (a) correctly attribute water's boiling-point anomaly to hydrogen bonding, not molecular size, (b) correctly distinguish SO₂'s reversible reduction-based bleaching from Cl₂'s permanent oxidation-based bleaching, (c) correctly predict that oxygen cannot form expanded octets while sulfur can."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Group 16 — Oxygen Family\""
+        "Feeds directly into `chem.pblock.trends` (synthesizes p-block bonding, intermolecular force, and reactivity reasoning across multiple groups, directly building on the arguments established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.period.periodic-properties"
@@ -6696,48 +6742,62 @@
     {
       "id": "asset.chem.pblock.group17",
       "concept_id": "chem.pblock.group17",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Group 17 — Halogens\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Group 17 — Halogens\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Group 17 — Halogens\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Electron affinity alone does NOT predict oxidizing strength — despite Cl having a MORE negative electron affinity than F (the established F-vs-Cl anomaly), F₂ is genuinely the more powerful oxidizing agent, since the full thermodynamic cycle (weak F–F bond enthalpy PLUS very high F⁻ hydration enthalpy) together produce F₂/F⁻'s exceptionally high standard reduction potential (+2.87 V, the highest in the table); HF is a genuinely WEAK acid (despite high H–F bond polarity from fluorine's high electronegativity), because the H–F bond enthalpy is unusually HIGH (568 kJ/mol, versus 431 kJ/mol for HCl), making ionization harder — bond polarity determines electron distribution WITHIN the bond, but bond enthalpy determines whether the bond actually breaks; and halogen (non-metal) reactivity DECREASES down the group (opposite to metal reactivity trends), driven by decreasing electron affinity magnitude — never assume \"down the group means more reactive\" applies universally.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Group 17 — Halogens\"",
-        "[TEMPLATE] Key idea 2 for \"Group 17 — Halogens\"",
-        "[TEMPLATE] Key idea 3 for \"Group 17 — Halogens\""
+        "Oxidizing strength and acid strength are both multi-factor properties that cannot be predicted from a single contributing quantity alone. Oxidizing strength (captured in standard reduction potential) depends on the full thermodynamic cycle — bond enthalpy of X₂, hydration enthalpy of X⁻, and electron affinity together — which is why F₂ is the strongest oxidizer despite a less-negative EA than Cl. Acid strength depends specifically on bond enthalpy (how easily the H–X bond breaks for ionization), not on bond polarity/electronegativity alone — which is why HF, despite high polarity, is a weak acid due to its unusually strong H–F bond.",
+        "Halogen (non-metal) reactivity decreases down the group, driven by decreasing electron affinity magnitude — the opposite direction from metal reactivity trends (which increase down a group, driven by decreasing ionization energy) — because metals and non-metals react via fundamentally opposite electron-transfer mechanisms (electron loss versus electron gain).",
+        "Core misconception to avoid: Oxidizing strength depends on the FULL thermodynamic cycle (bond enthalpy + hydration enthalpy + EA together, captured in the standard reduction potential), never on electron affinity alone."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Group 17 — Halogens\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "most negative EA means most reactive.",
+          "correction": "Oxidizing strength depends on the FULL thermodynamic cycle (bond enthalpy + hydration enthalpy + EA together, captured in the standard reduction potential), never on electron affinity alone."
+        },
+        {
+          "misconception": "Measure the pH of 0.1 M HF — is it the same as 0.1 M HCl?",
+          "correction": "Acid strength depends on bond enthalpy (ease of bond-breaking for ionization), not bond polarity/electronegativity alone — HF's unusually strong H–F bond makes it a weak acid despite fluorine's high electronegativity."
+        },
+        {
+          "misconception": "down the group means more reactive.",
+          "correction": "Halogen (non-metal) reactivity DECREASES down the group, driven by decreasing electron affinity magnitude — the opposite direction from metal reactivity trends, since the underlying reaction mechanisms (electron gain vs. loss) are opposite."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Group 17 — Halogens\""
+        "Demonstration 1 (F₂/F⁻ thermodynamic cycle): Present the explicit bond enthalpy, hydration enthalpy, and EA values for F₂/F⁻ side by side, showing how they combine to produce the exceptionally high +2.87 V reduction potential.",
+        "Demonstration 2 (H–F vs. H–Cl bond enthalpy/pH comparison): Present the explicit bond enthalpy values (568 vs. 431 kJ/mol) alongside the measured pH values for HF and HCl, connecting bond strength directly to acid strength."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Group 17 — Halogens\"",
+        "setup": "Which has more negative EA: F or Cl? Which is the stronger oxidizer?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (F₂/F⁻ thermodynamic cycle): Present the explicit bond enthalpy, hydration enthalpy, and EA values for F₂/F⁻ side by side, showing how they combine to produce the exceptionally high +2.87 V reduction potential.",
+          "Demonstration 2 (H–F vs. H–Cl bond enthalpy/pH comparison): Present the explicit bond enthalpy values (568 vs. 431 kJ/mol) alongside the measured pH values for HF and HCl, connecting bond strength directly to acid strength."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Group 17 — Halogens\""
+        "expected_outcome": "Student can (a) correctly explain F₂'s superior oxidizing strength using the full thermodynamic cycle, not EA alone, (b) correctly explain HF's weak-acid behavior using bond enthalpy, not polarity, (c) correctly predict halogen reactivity as decreasing down the group."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit F₂/F⁻ thermodynamic cycle, showing all contributing factors.",
+          "TA-2 (TELL): State the bond-enthalpy-determines-acid-strength principle explicitly, worked through with the H–F/H–Cl comparison.",
+          "TA-3 (DO): Student predicts relative halogen reactivity for a new pair using the electron-gain mechanism.",
+          "TA-4 (TEST-THINKING): Present MC-3's Cl₂-vs-I₂ probe and ask the student to justify the correct reactivity ranking using EA-magnitude reasoning."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Group 17 — Halogens from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Which has more negative EA: F or Cl? Which is the stronger oxidizer?\"",
+          "FA-2: \"Measure the pH of 0.1 M HF versus 0.1 M HCl. Are they the same?\"",
+          "FA-3: \"Which is more reactive: Cl₂ or I₂?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Group 17 — Halogens\""
+        "mastery_signal": "Student can (a) correctly explain F₂'s superior oxidizing strength using the full thermodynamic cycle, not EA alone, (b) correctly explain HF's weak-acid behavior using bond enthalpy, not polarity, (c) correctly predict halogen reactivity as decreasing down the group."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Group 17 — Halogens\""
+        "Feeds directly into `chem.pblock.trends` (synthesizes p-block reactivity and acid-strength reasoning across multiple groups, directly building on the multi-factor arguments established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.period.periodic-properties"
@@ -6746,48 +6806,64 @@
     {
       "id": "asset.chem.pblock.group18",
       "concept_id": "chem.pblock.group18",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Group 18 — Noble Gases\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Group 18 — Noble Gases\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Group 18 — Noble Gases\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Noble gases are NOT \"completely inert\" because \"8 electrons=full stability\" — the octet rule is only a useful first approximation, and the REAL reason for noble-gas unreactivity is high first ionization energy (IE₁) making bond formation energetically unfavorable — XeF₂ genuinely EXISTS (Xe has a low-enough IE₁ that F₂ provides sufficient driving force), with Xe adopting an EXPANDED octet (10 electrons, using d orbitals) that the simple octet rule cannot even describe; argon is used in welding for CHEMICAL inertness (preventing hot molten metal from reacting with O₂/N₂ in air), NEVER because it \"doesn't conduct electricity\" — electrical conductivity is entirely irrelevant to its welding application; and \"neon sign\" is a GENERIC trade name, NOT a claim that every such sign contains only neon gas — the actual gas inside depends on the desired color (Ne=red-orange, Ar=blue-violet, He=yellow, Kr=green-yellow, Xe=blue-white), each producing its own characteristic emission spectrum, with \"neon sign\" functioning like \"kleenex\" — a brand name overgeneralized to the entire category.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Group 18 — Noble Gases\"",
-        "[TEMPLATE] Key idea 2 for \"Group 18 — Noble Gases\"",
-        "[TEMPLATE] Key idea 3 for \"Group 18 — Noble Gases\""
+        "Noble-gas unreactivity fundamentally arises from high first ionization energy (an energetic barrier to bond formation), not directly from \"having a full octet\" — the octet rule is a useful descriptive approximation, but genuine exceptions like XeF₂ exist because Xe's specifically lower IE₁ makes bond formation with sufficiently reactive partners (like F₂) energetically favorable, producing an expanded-octet compound the simple rule cannot describe.",
+        "A gas's suitability for a given application depends on the specific property that application actually requires — argon's welding use depends on chemical inertness (preventing metal oxidation/nitridation), with electrical conductivity being entirely irrelevant. \"Neon sign\" has become a genericized trade name covering gas-discharge signs using various noble gases (each with its own characteristic emission color), not a literal claim that every such sign contains neon gas specifically.",
+        "Core misconception to avoid: Noble-gas unreactivity is fundamentally due to high IE₁ (an energetic argument), never simply \"having 8 electrons\" — always check the specific element's IE₁ and potential reaction partners before assuming universal inertness."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Group 18 — Noble Gases\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "noble gases are completely inert.",
+          "correction": "Noble-gas unreactivity is fundamentally due to high IE₁ (an energetic argument), never simply \"having 8 electrons\" — always check the specific element's IE₁ and potential reaction partners before assuming universal inertness."
+        },
+        {
+          "misconception": "Ar is non-conducting.",
+          "correction": "Argon's welding application depends specifically on chemical inertness (preventing metal oxidation/nitridation), never on electrical conductivity, which is irrelevant to this context."
+        },
+        {
+          "misconception": "neon = neon sign.",
+          "correction": "\"Neon sign\" is a genericized trade name covering gas-discharge signs using various noble gases (each producing a different characteristic color) — never assume every \"neon sign\" literally contains neon gas."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Group 18 — Noble Gases\""
+        "Demonstration 1 (IE₁ comparison across the noble-gas group): Present the explicit IE₁ values for He through Xe, deriving Xe's relative reactivity from its comparatively lower value.",
+        "Demonstration 2 (oxidation/nitridation-prevention mechanism for welding): Present the explicit chemical mechanism argon prevents, isolating chemical inertness as the relevant property.",
+        "Demonstration 3 (gas-to-color correspondence table for gas-discharge signs): Present the explicit table of noble gases and their characteristic emission colors."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Group 18 — Noble Gases\"",
+        "setup": "Xenon difluoride XeF₂ exists. Using the octet rule, explain why it can't exist — then explain why it does.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (IE₁ comparison across the noble-gas group): Present the explicit IE₁ values for He through Xe, deriving Xe's relative reactivity from its comparatively lower value.",
+          "Demonstration 2 (oxidation/nitridation-prevention mechanism for welding): Present the explicit chemical mechanism argon prevents, isolating chemical inertness as the relevant property.",
+          "Demonstration 3 (gas-to-color correspondence table for gas-discharge signs): Present the explicit table of noble gases and their characteristic emission colors."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Group 18 — Noble Gases\""
+        "expected_outcome": "Student can (a) correctly explain noble-gas unreactivity from IE₁ reasoning, recognizing genuine exceptions, (b) correctly identify chemical inertness as argon's relevant welding property, (c) correctly recognize \"neon sign\" as a genericized term covering multiple gases."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit IE₁ comparison across the noble-gas group.",
+          "TA-2 (TELL): State the chemical-inertness (not conductivity) basis for argon's welding use explicitly, anchored to the oxidation-prevention mechanism.",
+          "TA-3 (DO): Student identifies the specific gas responsible for an unfamiliar gas-discharge sign's observed color.",
+          "TA-4 (TEST-THINKING): Present the XeF₂ probe and ask the student to justify its existence from IE₁ reasoning, not octet-rule reasoning."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Group 18 — Noble Gases from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Xenon difluoride XeF₂ exists. Using the octet rule, explain why it can't exist — then explain why it does.\"",
+          "FA-2: \"Why do welders specifically need an inert atmosphere rather than just a non-conducting gas?\"",
+          "FA-3: \"Why do different 'neon signs' emit different colours?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Group 18 — Noble Gases\""
+        "mastery_signal": "Student can (a) correctly explain noble-gas unreactivity from IE₁ reasoning, recognizing genuine exceptions, (b) correctly identify chemical inertness as argon's relevant welding property, (c) correctly recognize \"neon sign\" as a genericized term covering multiple gases."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Group 18 — Noble Gases\""
+        "This concept has no direct KG unlocks but consolidates periodic-properties reasoning built across `chem.period.periodic-properties`, forming a capstone application to inorganic chemistry and industrial-gas-application contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.period.periodic-properties"
@@ -6796,50 +6872,72 @@
     {
       "id": "asset.chem.pblock.trends",
       "concept_id": "chem.pblock.trends",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyse \"Trends Across p-Block\".",
-      "concept_summary": "Inert-pair effect; metallic character; anomalous first-member behaviour; diagonal relationships.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Trends Across p-Block\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Group 16 hydride boiling points are NOT a simple down-the-group increase — H₂S<H₂Se<H₂Te does follow the expected London-dispersion-driven trend, but H₂O (bp+100°C) is a dramatic ANOMALOUS EXCEPTION, far higher than even H₂Te (bp−2°C), due to hydrogen bonding — the trend is genuinely non-monotonic, not a clean \"increases down the group\" pattern; SiCl₄ hydrolyzes vigorously in water (unlike NaCl) despite both being \"chlorides,\" because SiCl₄ is COVALENT (water's lone pair attacks the electrophilic Si, which has vacant d orbitals available as a Lewis acid, breaking Si–Cl bonds with HCl evolution), while NaCl is IONIC (Na⁺/Cl⁻ simply hydrate, no covalent bonds to break) — the ionic/covalent distinction, not merely \"being a chloride,\" determines hydrolysis behavior; and \"maximum oxidation state=group number\" does NOT hold reliably for the HEAVIER p-block elements — the INERT PAIR EFFECT (relativistic stabilization of the ns² electron pair) makes it progressively harder to remove those two electrons for Tl, Pb, Bi, so lower oxidation states (Tl+1, Pb+2, Bi+3) are thermodynamically favored over the \"expected\" maximum (Tl+3, Pb+4, Bi+5) — the group-number rule applies reliably only to lighter members.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Trends Across p-Block\"",
-        "[TEMPLATE] Key idea 2 for \"Trends Across p-Block\"",
-        "[TEMPLATE] Key idea 3 for \"Trends Across p-Block\""
+        "Periodic trends can be genuinely non-monotonic, with specific, well-understood exceptions — Group 16 hydride boiling points follow a mass-driven (London dispersion) trend among the heavier members, but H₂O is a dramatic anomaly due to hydrogen bonding, an additional intermolecular force absent from the heavier hydrides. Similarly, a compound's \"chloride\" label alone does not determine its reactivity in water — the underlying bonding type (ionic vs. covalent, with an electrophilic central atom) is the actual discriminator, as demonstrated by SiCl₄'s vigorous covalent hydrolysis contrasted with NaCl's simple ionic dissolution.",
+        "The \"maximum oxidation state equals group number\" rule holds reliably only for lighter p-block elements — for heavier members (Tl, Pb, Bi), relativistic stabilization of the outermost ns² electron pair (the inert pair effect) makes this pair energetically costly to remove, favoring a lower, commonly-observed oxidation state (group number minus 2) over the naive maximum.",
+        "Core misconception to avoid: The Group 16 hydride boiling-point trend is non-monotonic — H₂S<H₂Se<H₂Te follows the mass-based (London dispersion) trend, but H₂O is a dramatic anomalous exception due to hydrogen bonding, positioned well above all the others."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Trends Across p-Block\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "bp always increases down the group.",
+          "correction": "The Group 16 hydride boiling-point trend is non-monotonic — H₂S<H₂Se<H₂Te follows the mass-based (London dispersion) trend, but H₂O is a dramatic anomalous exception due to hydrogen bonding, positioned well above all the others."
+        },
+        {
+          "misconception": "chlorides just dissolve in water.",
+          "correction": "Always check whether a chloride compound is ionic or covalent (and whether the central atom is a Lewis acid) before predicting its behavior in water — never assume all \"chlorides\" behave like NaCl."
+        },
+        {
+          "misconception": "maximum OS = group number always.",
+          "correction": "For heavier p-block elements (Tl, Pb, Bi), always check for the inert pair effect before assuming the maximum group-number oxidation state is common — the lower oxidation state (group number minus 2) is often thermodynamically favored instead."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Trends Across p-Block\""
+        "Demonstration 1 (Group 16 hydride boiling-point data table with H₂O anomaly isolated): Present the explicit boiling-point data for all four hydrides, isolating H₂O's anomalous position.",
+        "Demonstration 2 (NaCl-vs-SiCl₄ hydrolysis-mechanism comparison): Present both mechanisms explicitly, isolating bonding type as the determining factor for hydrolysis behavior.",
+        "Demonstration 3 (relativistic-stabilization argument for the inert pair effect): Present the explicit ns²-pair-stabilization argument, deriving Pb²⁺'s favorability over Pb⁴⁺."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Trends Across p-Block\"",
+        "setup": "Which of H₂O, H₂S, H₂Se, H₂Te has the highest boiling point?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (Group 16 hydride boiling-point data table with H₂O anomaly isolated): Present the explicit boiling-point data for all four hydrides, isolating H₂O's anomalous position.",
+          "Demonstration 2 (NaCl-vs-SiCl₄ hydrolysis-mechanism comparison): Present both mechanisms explicitly, isolating bonding type as the determining factor for hydrolysis behavior.",
+          "Demonstration 3 (relativistic-stabilization argument for the inert pair effect): Present the explicit ns²-pair-stabilization argument, deriving Pb²⁺'s favorability over Pb⁴⁺."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Trends Across p-Block\""
+        "expected_outcome": "Student can (a) correctly identify H₂O as an anomalous exception to the Group 16 hydride boiling-point trend, (b) correctly predict SiCl₄'s hydrolysis from its covalent bonding, distinct from NaCl, (c) correctly predict the inert-pair-effect-favored oxidation state for heavy p-block elements."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit Group 16 hydride boiling-point data table with H₂O's anomaly isolated.",
+          "TA-2 (TELL): State the ionic-vs-covalent hydrolysis distinction explicitly, anchored to the NaCl-vs-SiCl₄ mechanism comparison.",
+          "TA-3 (DO): Student predicts the commonly-favored oxidation state for an unfamiliar heavy p-block element using inert-pair-effect reasoning.",
+          "TA-4 (TEST-THINKING): Present the Pb²⁺-vs-Pb⁴⁺ probe and ask the student to justify the inert pair effect's stabilization mechanism."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Trends Across p-Block from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Which of H₂O, H₂S, H₂Se, H₂Te has the highest boiling point?\"",
+          "FA-2: \"Add SiCl₄ to water. What do you observe?\"",
+          "FA-3: \"Why is Pb²⁺ more common than Pb⁴⁺ in ordinary chemistry?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Trends Across p-Block\""
+        "mastery_signal": "Student can (a) correctly identify H₂O as an anomalous exception to the Group 16 hydride boiling-point trend, (b) correctly predict SiCl₄'s hydrolysis from its covalent bonding, distinct from NaCl, (c) correctly predict the inert-pair-effect-favored oxidation state for heavy p-block elements."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Trends Across p-Block\""
+        "This concept has no direct KG unlocks but consolidates reasoning built across all five p-block group chapters (`chem.pblock.group13` through `chem.pblock.group17`), forming a capstone application connecting cross-group periodic-trend reasoning."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.pblock.group13",
+        "chem.pblock.group14",
+        "chem.pblock.group15",
+        "chem.pblock.group16",
+        "chem.pblock.group17"
+      ]
     },
     {
       "id": "asset.chem.dblock.general",
