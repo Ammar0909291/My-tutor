@@ -6041,48 +6041,62 @@
     {
       "id": "asset.chem.surface.adsorption",
       "concept_id": "chem.surface.adsorption",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Adsorption\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Adsorption\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Adsorption\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Adsorption and absorption are genuinely different processes — adsorption is a SURFACE phenomenon (substance accumulates at the interface, as silica gel's water \"adsorption\"), while absorption is a BULK phenomenon (substance penetrates throughout the material's volume, like a sponge); physisorption DECREASES with increasing temperature (not increases) — since physisorption is exothermic (ΔHads<0), by Le Chatelier's principle rising temperature shifts equilibrium toward desorption, and the van der Waals forces involved need no activation energy to begin with, so added thermal energy simply helps adsorbed molecules escape back into the gas phase; and chemisorption is fundamentally limited to a SINGLE monolayer (unlike physisorption, which can stack multiple layers) — since chemisorption requires a specific chemical bond between adsorbate and adsorbent surface active sites, and once the monolayer is complete, no active sites remain for a genuine chemical bond to a second layer (only physisorption's non-specific van der Waals forces can act between adsorbate molecules themselves, enabling multilayer stacking).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Adsorption\"",
-        "[TEMPLATE] Key idea 2 for \"Adsorption\"",
-        "[TEMPLATE] Key idea 3 for \"Adsorption\""
+        "Adsorption is a surface phenomenon (substance accumulates at an interface), genuinely distinct from absorption (a bulk phenomenon, substance penetrating throughout a material's volume). Physisorption, driven by non-specific van der Waals forces, is exothermic and therefore genuinely decreases in extent as temperature rises (per Le Chatelier's principle), unlike processes limited by activation energy, which are sped up by heating.",
+        "Chemisorption requires a specific chemical bond to particular active sites on the adsorbent surface — this specificity is exactly what limits chemisorption to a single monolayer, since once all active sites are occupied, no further genuine chemical bonding is possible; physisorption's non-specific van der Waals forces, by contrast, can act between adsorbate molecules themselves, enabling multilayer stacking that chemisorption cannot achieve.",
+        "Core misconception to avoid: Adsorption = surface accumulation (interface phenomenon); absorption = bulk penetration (whole-volume phenomenon) — genuinely different processes despite the similar-sounding names, use the mnemonic \"adsorption is posted on the surface, like an AD on a billboard.\""
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Adsorption\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Silica gel absorbs water vapour from the air.",
+          "correction": "Adsorption = surface accumulation (interface phenomenon); absorption = bulk penetration (whole-volume phenomenon) — genuinely different processes despite the similar-sounding names, use the mnemonic \"adsorption is posted on the surface, like an AD on a billboard.\""
+        },
+        {
+          "misconception": "Higher temperature increases physisorption because molecules have more energy to stick.",
+          "correction": "Physisorption extent DECREASES with increasing temperature, driven by its exothermic nature and Le Chatelier's principle — never assume the general \"more heat = more reaction\" heuristic applies without checking whether the process is exothermic."
+        },
+        {
+          "misconception": "If pressure is high enough, chemisorption can build multiple layers just like physisorption.",
+          "correction": "Chemisorption is fundamentally limited to a single monolayer, since it requires genuine chemical bonding to specific surface active sites, which are exhausted once the monolayer is complete — only physisorption's non-specific van der Waals forces enable multilayer stacking."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Adsorption\""
+        "Demonstration 1 (silica-gel-vs-sponge comparison): Present or describe silica gel's water uptake (surface-only) alongside a sponge's water uptake (whole-volume), connecting each to the correct adsorption/absorption terminology.",
+        "Demonstration 2 (physisorption-temperature-curve plotting): Present a physisorption-extent-vs-temperature dataset, having students connect the observed decreasing trend directly to the exothermic Le Chatelier argument."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Adsorption\"",
+        "setup": "Silica gel absorbs moisture from the air. Is this correct terminology?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (silica-gel-vs-sponge comparison): Present or describe silica gel's water uptake (surface-only) alongside a sponge's water uptake (whole-volume), connecting each to the correct adsorption/absorption terminology.",
+          "Demonstration 2 (physisorption-temperature-curve plotting): Present a physisorption-extent-vs-temperature dataset, having students connect the observed decreasing trend directly to the exothermic Le Chatelier argument."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Adsorption\""
+        "expected_outcome": "Student can (a) correctly distinguish adsorption from absorption using the surface-vs-bulk criterion, (b) correctly predict physisorption's decreasing extent with rising temperature using Le Chatelier reasoning, (c) correctly explain why chemisorption is limited to one monolayer while physisorption can stack multiple layers."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the silica-gel-vs-sponge comparison explicitly, connecting each to the correct terminology.",
+          "TA-2 (TELL): State the exothermic-physisorption-decreases-with-temperature principle explicitly, worked through with Le Chatelier reasoning.",
+          "TA-3 (DO): Student predicts whether a given adsorption process (physisorption or chemisorption) can form multiple layers.",
+          "TA-4 (TEST-THINKING): Present MC-2's temperature probe and ask the student to justify the decreasing trend using the exothermic-equilibrium argument."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Adsorption from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Silica gel absorbs moisture from the air. Is this correct terminology?\"",
+          "FA-2: \"How does increasing temperature affect the extent of physisorption?\"",
+          "FA-3: \"Can chemisorption form a second layer once the first monolayer is complete?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Adsorption\""
+        "mastery_signal": "Student can (a) correctly distinguish adsorption from absorption using the surface-vs-bulk criterion, (b) correctly predict physisorption's decreasing extent with rising temperature using Le Chatelier reasoning, (c) correctly explain why chemisorption is limited to one monolayer while physisorption can stack multiple layers."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Adsorption\""
+        "Feeds directly into `chem.anal.chromatography` (chromatographic separation relies directly on adsorption-surface-interaction principles established here) and `chem.surface.heterogeneous-cat` (heterogeneous catalysis directly extends chemisorption's monolayer-limited, active-site-based mechanism)."
       ],
       "prerequisite_review_triggers": [
         "chem.kinet.catalysis"
@@ -6091,48 +6105,64 @@
     {
       "id": "asset.chem.surface.colloids",
       "concept_id": "chem.surface.colloids",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Colloids\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Colloids\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Colloids\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Colloids are NOT true solutions despite looking homogeneous to the naked eye — the diagnostic test is the Tyndall effect, where colloidal particles (1–1000nm) scatter a light beam visibly while true-solution solute particles (sub-nm, e.g., dissolved ions/small molecules) do not; Brownian motion is caused by the ASYMMETRIC, RANDOM BOMBARDMENT of a colloidal particle by surrounding dispersion-medium molecules (thermal motion of the medium), never by any intrinsic movement or \"activity\" of the particle itself — the particle is large enough to see but small enough that random impacts from all sides don't perfectly cancel; and coagulation of a lyophobic colloid does NOT require a highly concentrated electrolyte — by the Hardy-Schulze rule, even small amounts of a MULTIVALENT ion (opposite in charge to the colloid) coagulate far more effectively than a larger amount of a monovalent ion, so ion CHARGE, not concentration, is the dominant factor.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Colloids\"",
-        "[TEMPLATE] Key idea 2 for \"Colloids\"",
-        "[TEMPLATE] Key idea 3 for \"Colloids\""
+        "A colloid is distinguished from a true solution by particle size (1–1000nm) and the resulting Tyndall effect (visible light scattering), never by macroscopic visual homogeneity — a colloid can look perfectly uniform to the naked eye while still scattering light, unlike a true solution.",
+        "Brownian motion is a passive consequence of random thermal bombardment by dispersion-medium molecules, not any self-generated activity of the colloidal particle. Coagulation of a lyophobic colloid follows the Hardy-Schulze rule, where the charge of the added, oppositely-charged ion (not its concentration) is the dominant factor — small amounts of highly charged ions coagulate far more effectively than large amounts of low-charge ions.",
+        "Core misconception to avoid: Always use the Tyndall effect (light-scattering test), not visual homogeneity, to distinguish a colloid from a true solution — appearing \"uniform\" to the naked eye is consistent with both classifications."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Colloids\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Milk is a solution — it looks uniform.",
+          "correction": "Always use the Tyndall effect (light-scattering test), not visual homogeneity, to distinguish a colloid from a true solution — appearing \"uniform\" to the naked eye is consistent with both classifications."
+        },
+        {
+          "misconception": "The colloidal particles move by themselves.",
+          "correction": "Brownian motion originates entirely from random thermal bombardment by dispersion-medium molecules, never from any self-generated motion of the colloidal particle itself."
+        },
+        {
+          "misconception": "coagulation is hard to achieve, needs a lot of electrolyte.",
+          "correction": "Coagulating power is dominated by the charge of the oppositely-charged ion (Hardy-Schulze rule: trivalent > divalent > monovalent), not by electrolyte concentration — never assume a highly concentrated electrolyte is required."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Colloids\""
+        "Demonstration 1 (Tyndall effect comparison): Present the laser-through-milk vs. laser-through-salt-solution comparison explicitly, anchoring classification on the scattering test.",
+        "Demonstration 2 (random-bombardment Brownian motion diagram): Draw the explicit asymmetric-collision diagram for a colloidal particle, deriving the visible zigzag path from external random impacts.",
+        "Demonstration 3 (Hardy-Schulze ion-charge ranking): Present the explicit AlCl₃>CaCl₂>NaCl coagulation-effectiveness ranking for a negatively charged colloid, justified from ion charge alone."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Colloids\"",
+        "setup": "Does milk's uniform appearance mean it's a true solution? Justify using the Tyndall effect.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (Tyndall effect comparison): Present the laser-through-milk vs. laser-through-salt-solution comparison explicitly, anchoring classification on the scattering test.",
+          "Demonstration 2 (random-bombardment Brownian motion diagram): Draw the explicit asymmetric-collision diagram for a colloidal particle, deriving the visible zigzag path from external random impacts.",
+          "Demonstration 3 (Hardy-Schulze ion-charge ranking): Present the explicit AlCl₃>CaCl₂>NaCl coagulation-effectiveness ranking for a negatively charged colloid, justified from ion charge alone."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Colloids\""
+        "expected_outcome": "Student can (a) correctly classify a mixture as colloidal vs. true solution using the Tyndall effect, (b) correctly attribute Brownian motion to medium bombardment, not particle self-activity, (c) correctly rank coagulating-ion effectiveness via the Hardy-Schulze rule."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit Tyndall-effect laser comparison between a colloid and a true solution.",
+          "TA-2 (TELL): State the random-bombardment origin of Brownian motion explicitly, anchored to the collision diagram.",
+          "TA-3 (DO): Student ranks a set of electrolytes by coagulating effectiveness for a given colloid using the Hardy-Schulze rule.",
+          "TA-4 (TEST-THINKING): Present the \"would Brownian motion stop if the medium froze\" probe and ask the student to justify the medium-dependent origin of the motion."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Colloids from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Does milk's uniform appearance mean it's a true solution? Justify using the Tyndall effect.\"",
+          "FA-2: \"What would happen to Brownian motion if the dispersion medium molecules stopped moving?\"",
+          "FA-3: \"Rank NaCl, CaCl₂, and AlCl₃ by coagulating effectiveness for a negatively charged colloid.\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Colloids\""
+        "mastery_signal": "Student can (a) correctly classify a mixture as colloidal vs. true solution using the Tyndall effect, (b) correctly attribute Brownian motion to medium bombardment, not particle self-activity, (c) correctly rank coagulating-ion effectiveness via the Hardy-Schulze rule."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Colloids\""
+        "Feeds directly into `chem.surface.emulsions` (emulsion stability and coagulation/demulsification directly require the colloidal classification and Hardy-Schulze reasoning established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.found.pure-substances"
@@ -6141,48 +6171,57 @@
     {
       "id": "asset.chem.surface.emulsions",
       "concept_id": "chem.surface.emulsions",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Emulsions and Gels\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Emulsions and Gels\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Emulsions and Gels\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Emulsifiers do NOT make oil and water miscible (dissolve into each other at the molecular level) — instead, they STABILIZE the interface between the two immiscible phases, keeping oil as discrete DROPLETS suspended in water (or vice versa), preventing those droplets from coalescing back into separate bulk layers — the phases remain genuinely, fundamentally immiscible throughout; and oil-in-water (O/W) and water-in-oil (W/O) emulsion types are NOT interchangeable descriptions — the CONTINUOUS (surrounding) phase, not simply which liquids are present, determines the emulsion's dominant texture and properties, so butter (water droplets in continuous fat, W/O) feels oily/greasy because the CONTINUOUS phase is oil, while milk (fat droplets in continuous water, O/W) feels aqueous because the CONTINUOUS phase is water — identical component liquids can form emulsions with opposite textures depending on which phase is continuous.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Emulsions and Gels\"",
-        "[TEMPLATE] Key idea 2 for \"Emulsions and Gels\"",
-        "[TEMPLATE] Key idea 3 for \"Emulsions and Gels\""
+        "Emulsifiers achieve visible \"no separation\" not by making genuinely immiscible liquids miscible, but by stabilizing the interface of persistently discrete droplets against coalescence — the two phases remain fundamentally, molecularly immiscible throughout, with the emulsifier coating droplet surfaces rather than dissolving droplet contents.",
+        "An emulsion's dominant macroscopic texture and properties are determined by which phase is CONTINUOUS (surrounding the dispersed droplets), not merely by which two liquids are present — identical component liquids (like fat and water) can produce emulsions with opposite textures (butter's oily W/O vs. milk's aqueous O/W) depending on which phase is continuous.",
+        "Core misconception to avoid: Emulsifiers stabilize the interface between persistently separate oil and water droplets/phases, preventing coalescence — they never achieve true molecular-level miscibility between the two immiscible liquids."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Emulsions and Gels\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Soap makes oil dissolve in water.",
+          "correction": "Emulsifiers stabilize the interface between persistently separate oil and water droplets/phases, preventing coalescence — they never achieve true molecular-level miscibility between the two immiscible liquids."
+        },
+        {
+          "misconception": "(implicit, from failing to distinguish continuous from dispersed phase).",
+          "correction": "Always identify which phase is continuous (not merely which liquids are present) before predicting an emulsion's texture/properties — O/W and W/O with the same component liquids have genuinely opposite textures."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Emulsions and Gels\""
+        "Demonstration 1 (droplet-stabilization diagram for soap-emulsified oil-water): Present the explicit soap-film-coated-droplet diagram, contrasted with a hypothetical (incorrect) molecular-dissolution picture.",
+        "Demonstration 2 (continuous-vs-dispersed-phase diagram for butter and milk): Present both structural diagrams explicitly, deriving each material's texture from its continuous phase."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Emulsions and Gels\"",
+        "setup": "If you add soap to oil and water and shake, do the oil and water dissolve into each other? What does the soap actually do?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (droplet-stabilization diagram for soap-emulsified oil-water): Present the explicit soap-film-coated-droplet diagram, contrasted with a hypothetical (incorrect) molecular-dissolution picture.",
+          "Demonstration 2 (continuous-vs-dispersed-phase diagram for butter and milk): Present both structural diagrams explicitly, deriving each material's texture from its continuous phase."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Emulsions and Gels\""
+        "expected_outcome": "Student can (a) correctly explain emulsifiers as interface stabilizers, never achieving true miscibility, (b) correctly predict emulsion texture from continuous-phase identity."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit droplet-stabilization diagram for soap-emulsified oil-water.",
+          "TA-2 (TELL): State the continuous-phase-determines-texture principle explicitly, anchored to the butter-vs-milk comparison.",
+          "TA-3 (DO): Student predicts texture for an unfamiliar emulsion given its continuous-phase identity.",
+          "TA-4 (TEST-THINKING): Present the \"does soap dissolve oil\" probe and ask the student to justify the interface-stabilization (not miscibility) mechanism."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Emulsions and Gels from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"If you add soap to oil and water and shake, do the oil and water dissolve into each other? What does the soap actually do?\"",
+          "FA-2: \"Butter feels oily and greasy. Is it oil-in-water or water-in-oil? How does the type relate to its texture?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Emulsions and Gels\""
+        "mastery_signal": "Student can (a) correctly explain emulsifiers as interface stabilizers, never achieving true miscibility, (b) correctly predict emulsion texture from continuous-phase identity."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Emulsions and Gels\""
+        "This concept has no direct KG unlocks but consolidates colloid reasoning built across `chem.surface.colloids`, forming a capstone application to food science and cosmetic/pharmaceutical formulation contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.surface.colloids"
@@ -6191,98 +6230,136 @@
     {
       "id": "asset.chem.surface.surfactants",
       "concept_id": "chem.surface.surfactants",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Surfactants and Micelles\".",
-      "concept_summary": "Gibbs adsorption (qualitative); critical micelle concentration; detergency mechanism.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Surfactants and Micelles\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The hydrophobic effect is NOT driven by water \"hating\" oil via enthalpic repulsion — there is no direct water-hydrocarbon repulsion (van der Waals forces between them are actually attractive, just weaker than water-water interactions); the dominant driving force is ENTROPIC — highly ordered \"clathrate cage\" water structures around each hydrocarbon tail are RELEASED (gaining entropy) when tails cluster together in a micelle, making micellization spontaneous even when ΔH is small or slightly positive (endothermic); in a micelle, hydrophilic HEADS point OUTWARD (facing water, since heads are water-soluble) and hydrophobic TAILS point INWARD (clustered together, away from water) — never the reverse; and surface tension does NOT continue decreasing as more surfactant is added ABOVE the critical micelle concentration (CMC) — below CMC, surfactant accumulates at the surface, progressively lowering surface tension, but AT and ABOVE the CMC, the surface is already saturated, and additional surfactant instead forms micelles in the bulk solution, leaving surface tension approximately CONSTANT — the CMC is precisely the breakpoint where this leveling-off occurs.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Surfactants and Micelles\"",
-        "[TEMPLATE] Key idea 2 for \"Surfactants and Micelles\"",
-        "[TEMPLATE] Key idea 3 for \"Surfactants and Micelles\""
+        "The hydrophobic effect's spontaneity is driven predominantly by entropy (release of ordered clathrate water structures when hydrocarbon tails cluster), not by any direct enthalpic repulsion between water and oil — water-hydrocarbon van der Waals forces are actually attractive, just weaker than water-water interactions. In a micelle, hydrophilic heads (water-soluble) always orient outward toward water, while hydrophobic tails cluster inward, away from water.",
+        "Surface tension decreases with surfactant concentration only while the air-water interface has capacity to accommodate more surfactant molecules — once the interface saturates at the critical micelle concentration (CMC), additional surfactant instead forms bulk-solution micelles, and surface tension plateaus rather than continuing to decrease.",
+        "Core misconception to avoid: The hydrophobic effect is primarily entropy-driven (release of ordered clathrate water upon hydrocarbon clustering), never a matter of direct enthalpic repulsion between water and oil — always check the sign of ΔH before invoking a \"repulsion\" explanation."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Surfactants and Micelles\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "water repels oil, that's why they don't mix",
+          "correction": "The hydrophobic effect is primarily entropy-driven (release of ordered clathrate water upon hydrocarbon clustering), never a matter of direct enthalpic repulsion between water and oil — always check the sign of ΔH before invoking a \"repulsion\" explanation."
+        },
+        {
+          "misconception": "the polar part is inside",
+          "correction": "In a micelle, hydrophilic heads always face OUTWARD (toward water) and hydrophobic tails always cluster INWARD (away from water) — never reverse this orientation."
+        },
+        {
+          "misconception": "more soap = lower surface tension always",
+          "correction": "Surface tension decreases with surfactant concentration only up to the CMC, then plateaus (remains approximately constant) as additional surfactant forms bulk micelles rather than continuing to accumulate at the surface — never extrapolate the pre-CMC declining trend indefinitely."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Surfactants and Micelles\""
+        "Demonstration 1 (ΔG=ΔH−TΔS reasoning for octane dissolution): Present the explicit thermodynamic reasoning, deriving entropy as the necessary driving force from the observed spontaneity despite positive ΔH.",
+        "Demonstration 2 (micelle head-outward/tail-inward orientation with dye test): Present the explicit orientation diagram with a non-polar dye dissolving in the interior, confirming the correct arrangement.",
+        "Demonstration 3 (two-segment surface-tension-vs-concentration graph): Present the explicit graph with the CMC breakpoint labeled, contrasting the declining and plateau regimes."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Surfactants and Micelles\"",
+        "setup": "When octane dissolves in water, the dissolution is endothermic but spontaneous. How can it be spontaneous if it's endothermic?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (ΔG=ΔH−TΔS reasoning for octane dissolution): Present the explicit thermodynamic reasoning, deriving entropy as the necessary driving force from the observed spontaneity despite positive ΔH.",
+          "Demonstration 2 (micelle head-outward/tail-inward orientation with dye test): Present the explicit orientation diagram with a non-polar dye dissolving in the interior, confirming the correct arrangement.",
+          "Demonstration 3 (two-segment surface-tension-vs-concentration graph): Present the explicit graph with the CMC breakpoint labeled, contrasting the declining and plateau regimes."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Surfactants and Micelles\""
+        "expected_outcome": "Student can (a) correctly attribute hydrophobic-effect spontaneity to entropy, not enthalpic repulsion, (b) correctly draw micelle orientation with heads outward and tails inward, (c) correctly predict the surface-tension plateau above CMC."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit ΔG=ΔH−TΔS reasoning for octane dissolution.",
+          "TA-2 (TELL): State the head-outward/tail-inward micelle orientation explicitly, anchored to the \"which end is water-soluble\" question.",
+          "TA-3 (DO): Student predicts surface-tension behavior for an unfamiliar surfactant-concentration series, identifying the CMC breakpoint.",
+          "TA-4 (TEST-THINKING): Present the non-polar-dye probe and ask the student to justify interior dissolution from the correct micelle orientation."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Surfactants and Micelles from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"When octane dissolves in water, the dissolution is endothermic but spontaneous. How can it be spontaneous if it's endothermic?\"",
+          "FA-2: \"If you added a non-polar dye to a micellar solution, where would it dissolve?\"",
+          "FA-3: \"If you plot surface tension vs. log[surfactant], what happens at and beyond the CMC?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Surfactants and Micelles\""
+        "mastery_signal": "Student can (a) correctly attribute hydrophobic-effect spontaneity to entropy, not enthalpic repulsion, (b) correctly draw micelle orientation with heads outward and tails inward, (c) correctly predict the surface-tension plateau above CMC."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Surfactants and Micelles\""
+        "This concept has no direct KG unlocks but consolidates liquid-state and intermolecular-force reasoning built across `chem.state.liquids` and `chem.bond.intermolecular`, forming a capstone application to detergency and colloid-chemistry contexts."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.state.liquids",
+        "chem.bond.intermolecular"
+      ]
     },
     {
       "id": "asset.chem.surface.heterogeneous-cat",
       "concept_id": "chem.surface.heterogeneous-cat",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyse \"Mechanism of Heterogeneous Catalysis\".",
-      "concept_summary": "Adsorption, surface reaction, desorption steps; active sites; poisoning; Haber, Contact, cracking.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Mechanism of Heterogeneous Catalysis\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "A catalyst does NOT provide energy to reactants — it provides an ALTERNATIVE REACTION PATHWAY with a LOWER activation energy (e.g., the Fe catalyst in the Haber process lets N₂ adsorb onto its surface, where the Fe–N bond partially breaks the N≡N triple bond, starting bond-breaking at a lower-energy surface-mediated route) — the catalyst changes the ROUTE (makes the energy \"mountain\" smaller), never supplies energy to help molecules over the original barrier; the Haber process uses an Fe (iron) catalyst (activating N≡N via surface adsorption) while the Contact process uses V₂O₅ (vanadium pentoxide, via Mars-van Krevelen redox cycling between V⁵⁺ and V⁴⁺) — these are NOT interchangeable, and confusing them (assigning V₂O₅ to Haber) is a common but incorrect swap; and catalyst poisoning does NOT necessarily destroy ALL catalytic activity — the actual activity loss depends on WHICH sites are poisoned (if the most reactive/active sites are selectively poisoned first, as is often physically the case, activity loss can exceed the raw percentage of sites blocked; but if 90% of sites remain clean, substantial activity persists) — \"poison\" does not mean \"total, complete deactivation\" by definition.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Mechanism of Heterogeneous Catalysis\"",
-        "[TEMPLATE] Key idea 2 for \"Mechanism of Heterogeneous Catalysis\"",
-        "[TEMPLATE] Key idea 3 for \"Mechanism of Heterogeneous Catalysis\""
+        "A catalyst accelerates a reaction by providing an alternative reaction pathway with genuinely lower activation energy (e.g., Fe's surface-mediated N≡N activation in the Haber process) — it never supplies energy to reactant molecules, and the reaction reaches the same products via the same overall ΔH, just via a lower-barrier route. Industrial catalysts are tied to specific mechanistic roles — Fe for Haber's N≡N activation, V₂O₅ for Contact's Mars-van Krevelen redox cycling — never interchangeable.",
+        "Catalyst poisoning's actual effect on overall activity depends on the specific fraction and reactivity of the active sites blocked, not merely the raw percentage — poisoning the most reactive sites first (often the physically realistic case) can cause disproportionately large activity loss, while poisoning less-critical sites can leave substantial activity intact, contradicting a blanket \"poisoned=totally deactivated\" assumption.",
+        "Core misconception to avoid: A catalyst provides an alternative reaction pathway with lower activation energy — it never supplies energy to reactant molecules; the reaction proceeds faster because the barrier itself is lower, not because molecules have more energy to clear an unchanged barrier."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Mechanism of Heterogeneous Catalysis\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "The Fe catalyst gives the N₂ and H₂ molecules more energy so they can overcome the activation barrier.",
+          "correction": "A catalyst provides an alternative reaction pathway with lower activation energy — it never supplies energy to reactant molecules; the reaction proceeds faster because the barrier itself is lower, not because molecules have more energy to clear an unchanged barrier."
+        },
+        {
+          "misconception": "V₂O₅ is used in the Haber process for ammonia.",
+          "correction": "Always tie each catalyst to its specific mechanistic role (Fe activates N≡N in Haber; V₂O₅ cycles oxidation states via Mars-van Krevelen in Contact) — never treat the two catalyst assignments as interchangeable or arbitrary."
+        },
+        {
+          "misconception": "Catalyst poisoning means the catalyst is completely deactivated.",
+          "correction": "Catalyst poisoning's activity-loss consequence depends on the specific fraction and reactivity-ranking of the sites blocked — never assume any degree of poisoning implies total deactivation, and recognize that poisoning the MOST active sites can cause disproportionately large activity loss relative to the raw percentage blocked."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Mechanism of Heterogeneous Catalysis\""
+        "Demonstration 1 (side-by-side catalyzed/uncatalyzed energy diagram): Present both energy diagrams explicitly, showing identical start/end levels but a genuinely lower barrier for the catalyzed pathway.",
+        "Demonstration 2 (Fe/V₂O₅ mechanistic-role comparison): Present the explicit mechanistic role of each catalyst, grounding the Haber/Contact assignment in chemical necessity.",
+        "Demonstration 3 (random-vs-selective site-poisoning comparison): Present both poisoning scenarios explicitly, deriving the differing activity-loss consequences."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Mechanism of Heterogeneous Catalysis\"",
+        "setup": "Explain HOW the Fe catalyst in the Haber process makes the reaction go faster.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (side-by-side catalyzed/uncatalyzed energy diagram): Present both energy diagrams explicitly, showing identical start/end levels but a genuinely lower barrier for the catalyzed pathway.",
+          "Demonstration 2 (Fe/V₂O₅ mechanistic-role comparison): Present the explicit mechanistic role of each catalyst, grounding the Haber/Contact assignment in chemical necessity.",
+          "Demonstration 3 (random-vs-selective site-poisoning comparison): Present both poisoning scenarios explicitly, deriving the differing activity-loss consequences."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Mechanism of Heterogeneous Catalysis\""
+        "expected_outcome": "Student can (a) correctly explain a catalyst's role as providing a lower-Ea pathway, never energy, (b) correctly identify Fe for Haber and V₂O₅ for Contact from their specific mechanisms, (c) correctly assess poisoning's activity-loss consequence from site specificity."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit side-by-side catalyzed/uncatalyzed energy diagram.",
+          "TA-2 (TELL): State the Fe/V₂O₅ specific mechanistic roles explicitly, anchored to the Haber/Contact process distinction.",
+          "TA-3 (DO): Student assesses activity loss for an unfamiliar poisoning scenario, considering site specificity.",
+          "TA-4 (TEST-THINKING): Present the \"10% poisoning\" probe and ask the student to justify why activity loss might exceed 10%."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Mechanism of Heterogeneous Catalysis from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Explain HOW the Fe catalyst in the Haber process makes the reaction go faster.\"",
+          "FA-2: \"Which catalyst is used in the industrial production of ammonia? Which is used in sulfuric acid manufacture?\"",
+          "FA-3: \"A heterogeneous catalyst is poisoned by 10% coverage of its active sites. Does it lose exactly 10% of its activity?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Mechanism of Heterogeneous Catalysis\""
+        "mastery_signal": "Student can (a) correctly explain a catalyst's role as providing a lower-Ea pathway, never energy, (b) correctly identify Fe for Haber and V₂O₅ for Contact from their specific mechanisms, (c) correctly assess poisoning's activity-loss consequence from site specificity."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Mechanism of Heterogeneous Catalysis\""
+        "This concept has no direct KG unlocks but consolidates adsorption and reaction-mechanism reasoning built across `chem.surface.adsorption` and `chem.kinet.mechanism`, forming a capstone application to industrial catalysis and process-chemistry contexts."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.surface.adsorption",
+        "chem.kinet.mechanism"
+      ]
     },
     {
       "id": "asset.chem.coord.werner",
