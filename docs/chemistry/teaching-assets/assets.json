@@ -7165,48 +7165,62 @@
     {
       "id": "asset.chem.org.iupac",
       "concept_id": "chem.org.iupac",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"IUPAC Nomenclature\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"IUPAC Nomenclature\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"IUPAC Nomenclature\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "IUPAC nomenclature systematically names organic compounds by selecting a parent chain (which must include the highest-priority principal characteristic group present, taking precedence over simply choosing the longest chain), numbering that chain to give substituents/the principal group the lowest possible locants, placing each numerical locant immediately before the specific name element it modifies, alphabetizing substituent prefixes by their base name only (ignoring multiplying prefixes like di-/tri-/tetra-), and correctly matching characteristic-group suffixes to their exact structural meaning (e.g., -one specifically for ketones, distinct from -al for terminal aldehydes, even though both involve a C=O group).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"IUPAC Nomenclature\"",
-        "[TEMPLATE] Key idea 2 for \"IUPAC Nomenclature\"",
-        "[TEMPLATE] Key idea 3 for \"IUPAC Nomenclature\""
+        "IUPAC names are built by first identifying the principal characteristic group present in a molecule, then selecting the parent chain that includes that group (chain length is only a tie-breaker among chains that already satisfy this), then numbering to give the lowest possible locants, and finally placing substituent names alphabetically (by base name only) with each locant positioned immediately before the specific name element it modifies.",
+        "Characteristic-group suffixes encode precise structural information — \"-one\" specifically denotes a non-terminal C=O (ketone), while \"-al\" specifically denotes a terminal C=O (aldehyde) — so correctly assigning a suffix requires checking the exact position of the functional group within the molecule's structure, not just pattern-matching a familiar-sounding suffix.",
+        "Core misconception to avoid: Always select the parent chain that includes the principal characteristic group first; only among candidate chains that satisfy this does chain length become the deciding factor."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"IUPAC Nomenclature\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "I chose the 6-carbon chain.",
+          "correction": "Always select the parent chain that includes the principal characteristic group first; only among candidate chains that satisfy this does chain length become the deciding factor."
+        },
+        {
+          "misconception": "I put the number after the word.",
+          "correction": "Always place a locant immediately before the specific name element (substituent or suffix) it numbers, never after."
+        },
+        {
+          "misconception": "any -one must be a ketone.",
+          "correction": "A C=O group at a chain terminus is named with \"-al\" (aldehyde); a C=O group not at a terminus is named with \"-one\" (ketone) — check position, not merely which suffix looks familiar."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"IUPAC Nomenclature\""
+        "Demonstration 1 (parent-chain selection contest): Present a branched molecule with a functional group off the \"obvious\" longest chain, having students compare the longest-chain candidate against the group-including candidate and justify which is correct.",
+        "Demonstration 2 (suffix-position sort): Present several C=O-containing structures with the carbonyl in different positions (terminal vs. non-terminal, chain vs. ring) and have students assign the correct suffix (-al vs. -one) based on position alone."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"IUPAC Nomenclature\"",
+        "setup": "Name CH₃–CH₂–COOH with a propyl branch on C2.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (parent-chain selection contest): Present a branched molecule with a functional group off the \"obvious\" longest chain, having students compare the longest-chain candidate against the group-including candidate and justify which is correct.",
+          "Demonstration 2 (suffix-position sort): Present several C=O-containing structures with the carbonyl in different positions (terminal vs. non-terminal, chain vs. ring) and have students assign the correct suffix (-al vs. -one) based on position alone."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"IUPAC Nomenclature\""
+        "expected_outcome": "Student can (a) correctly select a parent chain that includes the principal characteristic group even when a longer excluding chain exists, (b) correctly place locants immediately before their modified element, (c) correctly distinguish -one (non-terminal, ketone) from -al (terminal, aldehyde) by structural position."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the group-including-chain vs. longest-chain comparison for a specific branched carboxylic acid example.",
+          "TA-2 (TELL): State the locant-immediately-before-modified-element rule explicitly, worked through with a corrected example.",
+          "TA-3 (DO): Student names a new branched molecule, correctly selecting the parent chain and placing locants.",
+          "TA-4 (TEST-THINKING): Present MC-3's cyclohexanone probe and ask the student to justify the ketone assignment using C=O position, not suffix pattern-matching alone."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing IUPAC Nomenclature from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Name CH₃–CH₂–COOH with a propyl branch on C2.\"",
+          "FA-2: \"Correct the name 'pentanone-3'.\"",
+          "FA-3: \"What is cyclohexanone's principal group?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"IUPAC Nomenclature\""
+        "mastery_signal": "Student can (a) correctly select a parent chain that includes the principal characteristic group even when a longer excluding chain exists, (b) correctly place locants immediately before their modified element, (c) correctly distinguish -one (non-terminal, ketone) from -al (terminal, aldehyde) by structural position."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"IUPAC Nomenclature\""
+        "Feeds directly into `chem.alc.alcohols`, `chem.hyd.alkanes` (naming fluency is a direct prerequisite for all subsequent organic-family concepts), `chem.org.isomerism` (correct naming underlies distinguishing structural isomers), `chem.org.purification`, and `chem.org.spectroscopy` (correctly identified structures assumed throughout)."
       ],
       "prerequisite_review_triggers": [
         "chem.bond.covalent-bonding"
@@ -7215,50 +7229,66 @@
     {
       "id": "asset.chem.org.hybridization",
       "concept_id": "chem.org.hybridization",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Carbon Hybridization\".",
-      "concept_summary": "sp³, sp², sp in organic molecules; geometry; σ and π bond framework; implications for reactivity.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Carbon Hybridization\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Applying hybridization to organic molecules requires the same rigorous electron-domain counting established generically (a double or triple bond, however many electron pairs it contains, still occupies exactly ONE electron domain), extended to two organic-specific traps: nitrogen's lone pair can occupy either an in-plane sp²/sp³ hybrid orbital OR an unhybridized p orbital contributing to an aromatic π system, so its presence alone doesn't fix hybridization — its exact LOCATION does; and correctly counting a carbon's total electron domains (not simply \"has a double bond, therefore sp²\") is essential, since a carbon with TWO double bonds (as in CO₂ or allene) has only 2 electron domains, giving sp (linear), not sp².",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Carbon Hybridization\"",
-        "[TEMPLATE] Key idea 2 for \"Carbon Hybridization\"",
-        "[TEMPLATE] Key idea 3 for \"Carbon Hybridization\""
+        "Applying hybridization within organic molecules follows the exact same electron-domain-counting rule established generically: a double or triple bond, no matter how many electron pairs it physically contains, occupies exactly ONE spatial electron domain. This rule must be applied rigorously and consistently at every relevant atom (carbon, nitrogen, oxygen) rather than pattern-matched from surface features like \"has a double bond\" or \"has a lone pair.\"",
+        "Nitrogen's hybridization specifically depends on whether its lone pair occupies a hybridized in-plane orbital (as in pyridine, where it stays out of the aromatic π system) or an unhybridized p orbital feeding directly into a delocalized π system (as in pyrrole) — the mere presence of a lone pair says nothing about hybridization without knowing its precise structural role.",
+        "Core misconception to avoid: Determine nitrogen's hybridization by counting its actual electron domains (bonds plus any lone pair occupying a hybridized orbital) — never assume sp³ from lone-pair presence alone."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Carbon Hybridization\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "N always has a lone pair, so N is always sp³.",
+          "correction": "Determine nitrogen's hybridization by counting its actual electron domains (bonds plus any lone pair occupying a hybridized orbital) — never assume sp³ from lone-pair presence alone."
+        },
+        {
+          "misconception": "double bond + 2 lone pairs = 4 domains for oxygen.",
+          "correction": "A carbonyl oxygen has 3 total electron domains (1 double-bond domain + 2 lone pairs), giving sp² hybridization — never split a double bond into 2 separate domains when counting."
+        },
+        {
+          "misconception": "C=O means sp² because C=O is a double bond.",
+          "correction": "Count ALL electron domains around the carbon (each double or triple bond counting as exactly one domain) before assigning hybridization — 2 domains gives sp (linear), 3 domains gives sp² (trigonal planar), 4 domains gives sp³ (tetrahedral)."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Carbon Hybridization\""
+        "Demonstration 1 (pyridine vs. pyrrole nitrogen comparison): Present both nitrogen-containing aromatic rings side by side, having students trace exactly where each nitrogen's lone pair sits and determine hybridization from that specific structural detail.",
+        "Demonstration 2 (CO₂ vs. ketone domain-counting drill): Compute total electron domains explicitly for CO₂'s central carbon (2) versus a ketone's carbonyl carbon (3), having students connect the different counts to their different resulting hybridizations (sp vs. sp²)."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Carbon Hybridization\"",
+        "setup": "What is the hybridization of the nitrogen atom in pyridine?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (pyridine vs. pyrrole nitrogen comparison): Present both nitrogen-containing aromatic rings side by side, having students trace exactly where each nitrogen's lone pair sits and determine hybridization from that specific structural detail.",
+          "Demonstration 2 (CO₂ vs. ketone domain-counting drill): Compute total electron domains explicitly for CO₂'s central carbon (2) versus a ketone's carbonyl carbon (3), having students connect the different counts to their different resulting hybridizations (sp vs. sp²)."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Carbon Hybridization\""
+        "expected_outcome": "Student can (a) correctly determine nitrogen's hybridization based on lone-pair location, not mere presence, (b) correctly count a carbonyl oxygen's electron domains (3, not 4), (c) correctly distinguish sp (2 domains, CO₂-style) from sp² (3 domains) hybridization based on total domain count, not surface pattern-matching."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the pyridine-vs-pyrrole nitrogen lone-pair-location comparison directly.",
+          "TA-2 (TELL): State the \"double bond = one domain, regardless of pair count\" rule explicitly, worked through for a carbonyl oxygen.",
+          "TA-3 (DO): Student counts total electron domains for CO₂'s central carbon and correctly assigns sp hybridization.",
+          "TA-4 (TEST-THINKING): Present MC-1's pyridine probe and ask the student to justify nitrogen's hybridization using lone-pair location, not mere presence."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Carbon Hybridization from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"What is the hybridization of the nitrogen atom in pyridine?\"",
+          "FA-2: \"How many σ bonds does the oxygen in C=O have? How many total electron domains?\"",
+          "FA-3: \"What is the hybridization and geometry of the central C in CO₂?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Carbon Hybridization\""
+        "mastery_signal": "Student can (a) correctly determine nitrogen's hybridization based on lone-pair location, not mere presence, (b) correctly count a carbonyl oxygen's electron domains (3, not 4), (c) correctly distinguish sp (2 domains, CO₂-style) from sp² (3 domains) hybridization based on total domain count, not surface pattern-matching."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Carbon Hybridization\""
+        "Feeds directly into `chem.hyd.alkanes` (sp³ carbon framework foundational to alkane structure), `chem.org.aromaticity` (correct lone-pair-location reasoning for nitrogen directly resolves the pyridine/pyrrole distinction central to this topic), `chem.org.electronic-effects` (hybridization underlies electron delocalization reasoning), and `chem.org.isomerism` (correct geometry prediction from hybridization is essential for distinguishing isomers)."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.bond.hybridization"
+      ]
     },
     {
       "id": "asset.chem.org.isomerism",
@@ -7313,50 +7343,67 @@
     {
       "id": "asset.chem.org.electronic-effects",
       "concept_id": "chem.org.electronic-effects",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyse \"Inductive and Mesomeric Effects\".",
-      "concept_summary": "+I, −I inductive effects; mesomeric effects; hyperconjugation; prediction of stability and reactivity.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Inductive and Mesomeric Effects\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Electron-withdrawing groups INCREASE acidity (not decrease it) — the correct mechanism is that they STABILIZE the conjugate base A⁻ by spreading/withdrawing its negative charge, and a MORE stable conjugate base means a STRONGER acid — \"more electrons concentrated on A⁻\" (from electron-DONATING groups) actually makes A⁻ LESS stable (weaker acid), the opposite of an \"more electrons = more acidic\" intuition; halogens are simultaneously ortho/para DIRECTORS (via +M resonance donation of a lone pair into the ring) AND overall ring DEACTIVATORS (via −I inductive electron withdrawal reducing net ring electron density below benzene) — these are two SEPARATE effects (position selectivity from resonance, rate from the net inductive-vs-resonance balance), never assume a single effect explains both; and aniline's substantially weaker basicity compared to methylamine is primarily a RESONANCE effect (the nitrogen lone pair delocalizing into the benzene π system), NOT an inductive effect — the ~6-pKa-unit difference (over 10 billion-fold) is far too large for pure induction to explain, and only resonance (which requires π-system conjugation, distinct from induction's through-σ-bond mechanism) accounts for the magnitude.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Inductive and Mesomeric Effects\"",
-        "[TEMPLATE] Key idea 2 for \"Inductive and Mesomeric Effects\"",
-        "[TEMPLATE] Key idea 3 for \"Inductive and Mesomeric Effects\""
+        "Acid strength is determined by conjugate-base (A⁻) stability, not by electron \"abundance\" anywhere in the molecule — electron-withdrawing groups stabilize A⁻ (by spreading/withdrawing its negative charge), genuinely STRENGTHENING the acid, while electron-donating groups destabilize A⁻ (concentrating charge), WEAKENING it — the opposite of a naive \"more electrons = more acidic\" intuition. A single substituent (like a halogen on benzene) can exert two genuinely separate effects simultaneously — resonance (+M, controlling directing/position selectivity) and induction (−I, contributing to overall deactivation/rate) — these are independently-analyzable mechanisms, not reducible to a single explanation.",
+        "Inductive effects operate through σ-bonds and decay with distance, while resonance effects require genuine π-system conjugation — when an observed effect's magnitude is far too large for induction alone to explain (as with aniline's basicity, a ~10-billion-fold difference), and correlates with resonance-sensitive substituent constants, this is strong evidence the effect is resonance-dominated, not inductive, even when a superficial inductive-sounding explanation might seem plausible.",
+        "Core misconception to avoid: Electron-withdrawing groups stabilize the conjugate base A⁻ (by spreading/withdrawing its negative charge), making the acid STRONGER — electron-donating groups destabilize A⁻ (concentrating negative charge), making the acid WEAKER — this is the opposite of a naive \"more electrons = more acidic\" intuition."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Inductive and Mesomeric Effects\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "more electrons around O = more acidic.",
+          "correction": "Electron-withdrawing groups stabilize the conjugate base A⁻ (by spreading/withdrawing its negative charge), making the acid STRONGER — electron-donating groups destabilize A⁻ (concentrating negative charge), making the acid WEAKER — this is the opposite of a naive \"more electrons = more acidic\" intuition."
+        },
+        {
+          "misconception": "chlorine withdraws electrons so it directs meta.",
+          "correction": "Halogens are ortho/para directors (resonance +M effect controls position) AND deactivators overall (net −I inductive effect exceeds +M for overall ring reactivity) — these are two separate effects from the same substituent, never conflated into a single explanation."
+        },
+        {
+          "misconception": "it's just inductive — Cl (or Ph) withdraws electrons from N.",
+          "correction": "Aniline's weakened basicity is primarily a resonance effect (nitrogen lone-pair delocalization into the aromatic π system), not an inductive effect — the sheer magnitude of the pKa difference and its correlation with resonance-sensitive substituent constants both point specifically to resonance as the dominant mechanism."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Inductive and Mesomeric Effects\""
+        "Demonstration 1 (acetic-acid-vs-trichloroacetic-acid pKa comparison): Present the explicit pKa values, connecting the electron-withdrawing chlorines directly to the observed stronger acidity.",
+        "Demonstration 2 (chlorobenzene resonance-vs-induction diagram): Present separate resonance-structure and inductive-withdrawal diagrams for chlorobenzene, showing the two distinct effects controlling directing versus deactivation independently."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Inductive and Mesomeric Effects\"",
+        "setup": "Does a more stable conjugate base make an acid stronger or weaker?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (acetic-acid-vs-trichloroacetic-acid pKa comparison): Present the explicit pKa values, connecting the electron-withdrawing chlorines directly to the observed stronger acidity.",
+          "Demonstration 2 (chlorobenzene resonance-vs-induction diagram): Present separate resonance-structure and inductive-withdrawal diagrams for chlorobenzene, showing the two distinct effects controlling directing versus deactivation independently."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Inductive and Mesomeric Effects\""
+        "expected_outcome": "Student can (a) correctly predict acid-strength changes from substituents using conjugate-base-stability reasoning, (b) correctly separate a halogen's resonance-based directing effect from its net-inductive deactivating effect, (c) correctly identify when an effect is resonance-dominated using magnitude and correlation evidence."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit acetic-acid-vs-trichloroacetic-acid pKa comparison.",
+          "TA-2 (TELL): State the separate resonance-directing/inductive-deactivating dual-effect principle explicitly, worked through with chlorobenzene.",
+          "TA-3 (DO): Student predicts acid-strength changes for a new substituted acid using conjugate-base-stability reasoning.",
+          "TA-4 (TEST-THINKING): Present MC-3's aniline probe and ask the student to justify the resonance (not inductive) explanation using magnitude evidence."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Inductive and Mesomeric Effects from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Does a more stable conjugate base make an acid stronger or weaker?\"",
+          "FA-2: \"In the monobromination of chlorobenzene, what is the major product? Is the ring deactivated or activated?\"",
+          "FA-3: \"Is the nitrogen lone pair delocalization in aniline an inductive or resonance effect?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Inductive and Mesomeric Effects\""
+        "mastery_signal": "Student can (a) correctly predict acid-strength changes from substituents using conjugate-base-stability reasoning, (b) correctly separate a halogen's resonance-based directing effect from its net-inductive deactivating effect, (c) correctly identify when an effect is resonance-dominated using magnitude and correlation evidence."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Inductive and Mesomeric Effects\""
+        "Feeds directly into `chem.org.reactive-intermediates` (carbocation/carbanion/radical stability analysis directly applies the electronic-effects reasoning established here)."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.org.hybridization",
+        "chem.bond.resonance"
+      ]
     },
     {
       "id": "asset.chem.org.reactive-intermediates",
@@ -7459,48 +7506,64 @@
     {
       "id": "asset.chem.org.purification",
       "concept_id": "chem.org.purification",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Purification Techniques\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Purification Techniques\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Purification Techniques\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "On normal-phase silica TLC, a HIGHER Rf value means a LESS polar compound (it interacts weakly with the polar stationary phase and travels further with the mobile phase), never \"more polar because it moved further\" — polar compounds interact strongly with polar silica and are held back, giving LOWER Rf; recrystallization is not simply \"dissolve and filter\" — dissolving in HOT solvent removes insoluble impurities via hot filtration and allows minimum solvent volume for maximum crystallization on cooling, while SLOW cooling specifically produces large, ordered crystals that exclude impurities, whereas fast cooling traps impurities in a microcrystalline powder — temperature control is the actual purification mechanism, not an optional step; and impurities DEPRESS melting point and WIDEN the melting range (a colligative property, exactly like freezing-point depression), never raise it — an impure sample's observed range (e.g., 65–80°C) sits below and spans wider than the pure literature value (82°C), because impurity molecules disrupt the ordered crystal lattice.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Purification Techniques\"",
-        "[TEMPLATE] Key idea 2 for \"Purification Techniques\"",
-        "[TEMPLATE] Key idea 3 for \"Purification Techniques\""
+        "On normal-phase silica TLC, Rf reflects an inverse relationship with polarity — polar compounds are held back by the polar stationary phase (low Rf), while non-polar compounds travel further with the mobile phase (high Rf); \"moved further\" therefore indicates LESS polar, not more. Recrystallization's purifying power comes specifically from controlled temperature: hot dissolution enables hot filtration of insoluble impurities and minimum solvent volume, while slow cooling grows large, ordered crystals that structurally exclude impurity molecules.",
+        "Melting point depends on the integrity of an ordered crystal lattice — impurity molecules, being structurally different from the target compound, disrupt this lattice and make it easier (requiring less energy) to break down, which is why impurities always DEPRESS and WIDEN the observed melting range relative to the pure compound's sharp literature value, a colligative property directly analogous to freezing-point depression.",
+        "Core misconception to avoid: On normal-phase silica, higher Rf means LESS polar (weaker interaction with the polar stationary phase, more affinity for the mobile phase) — never treat \"moved further\" as directly indicating \"more polar.\""
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Purification Techniques\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "higher Rf = more polar compound.",
+          "correction": "On normal-phase silica, higher Rf means LESS polar (weaker interaction with the polar stationary phase, more affinity for the mobile phase) — never treat \"moved further\" as directly indicating \"more polar.\""
+        },
+        {
+          "misconception": "dissolve and filter is enough.",
+          "correction": "Recrystallization requires hot dissolution (for hot filtration of insoluble impurities and minimum solvent volume) followed by slow cooling (for large, impurity-excluding ordered crystals) — \"dissolve and filter\" alone omits the actual purification mechanism."
+        },
+        {
+          "misconception": "more particles = higher mp.",
+          "correction": "Impurities depress melting point and widen the melting range (a colligative property) — never assume \"more particles present\" raises melting point; the mechanism is lattice disruption, which lowers the energy required to melt."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Purification Techniques\""
+        "Demonstration 1 (stationary-phase-vs-mobile-phase Rf derivation): Walk through the explicit polarity-interaction competition for a polar and a non-polar compound on the same silica plate.",
+        "Demonstration 2 (recrystallization flowchart with mechanism): Present the full hot-dissolve/hot-filter/slow-cool protocol explicitly, naming the specific purpose of each temperature-control step.",
+        "Demonstration 3 (crystal-lattice-disruption melting-point diagram): Draw a pure, ordered lattice next to an impurity-disrupted lattice, connecting the disruption to reduced melting energy."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Purification Techniques\"",
+        "setup": "A compound has a higher Rf than another on silica TLC. Which is more polar?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (stationary-phase-vs-mobile-phase Rf derivation): Walk through the explicit polarity-interaction competition for a polar and a non-polar compound on the same silica plate.",
+          "Demonstration 2 (recrystallization flowchart with mechanism): Present the full hot-dissolve/hot-filter/slow-cool protocol explicitly, naming the specific purpose of each temperature-control step.",
+          "Demonstration 3 (crystal-lattice-disruption melting-point diagram): Draw a pure, ordered lattice next to an impurity-disrupted lattice, connecting the disruption to reduced melting energy."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Purification Techniques\""
+        "expected_outcome": "Student can (a) correctly infer relative polarity from Rf value on normal-phase silica, (b) correctly explain the mechanistic purpose of hot dissolution and slow cooling in recrystallization, (c) correctly interpret a depressed/widened melting range as evidence of impurity."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit stationary-phase-vs-mobile-phase Rf derivation for a polar and non-polar compound.",
+          "TA-2 (TELL): State the recrystallization temperature-protocol mechanism explicitly, anchored to the flowchart.",
+          "TA-3 (DO): Student predicts the melting-range signature (depressed, widened) for an unfamiliar impure sample.",
+          "TA-4 (TEST-THINKING): Present the \"why hot dissolve, why slow cool\" probe and ask the student to justify each step from the crystal-purification mechanism."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Purification Techniques from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A compound has a higher Rf than another on silica TLC. Which is more polar?\"",
+          "FA-2: \"Why must a recrystallization be dissolved hot and cooled slowly?\"",
+          "FA-3: \"A sample melts over 65–80°C; the pure literature value is 82°C. What does this indicate?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Purification Techniques\""
+        "mastery_signal": "Student can (a) correctly infer relative polarity from Rf value on normal-phase silica, (b) correctly explain the mechanistic purpose of hot dissolution and slow cooling in recrystallization, (c) correctly interpret a depressed/widened melting range as evidence of impurity."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Purification Techniques\""
+        "Feeds directly into `chem.org.qualitative-analysis` (purity assessment via melting point and chromatography is a direct prerequisite skill for qualitative analysis techniques)."
       ],
       "prerequisite_review_triggers": [
         "chem.org.iupac"
@@ -7557,48 +7620,62 @@
     {
       "id": "asset.chem.org.spectroscopy",
       "concept_id": "chem.org.spectroscopy",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Introduction to Spectroscopy\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Introduction to Spectroscopy\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Introduction to Spectroscopy\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Three spectroscopic techniques combine to identify organic structures: mass spectrometry (the molecular ion appears at the HIGHEST m/z, which may or may not coincide with the base peak — the tallest peak, arbitrarily set to 100% intensity, which is often a fragment instead), ¹H NMR (the n+1 splitting rule means the NUMBER OF PEAKS in a multiplet equals ONE MORE than the number of neighboring protons — a triplet indicates 2 neighbors, a quartet indicates 3 neighbors), and IR spectroscopy (a broad O–H absorption must be interpreted in combination with the rest of the spectrum, since both alcohols, 3200–3550 cm⁻¹, and carboxylic acids, 2500–3300 cm⁻¹ very broad, show O–H absorption, distinguished definitively by whether a C=O peak near 1710 cm⁻¹ is also present).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Introduction to Spectroscopy\"",
-        "[TEMPLATE] Key idea 2 for \"Introduction to Spectroscopy\"",
-        "[TEMPLATE] Key idea 3 for \"Introduction to Spectroscopy\""
+        "Mass spectrometry identifies the molecular ion by its POSITION at the highest m/z value (representing the intact molecule), which is a separate question from peak HEIGHT (the base peak, often a more abundant fragment). ¹H NMR splitting follows the n+1 rule — the observed number of peaks in a multiplet is always one more than the actual number of neighboring protons, requiring a subtract-one step to correctly determine neighbor count from peak count.",
+        "IR spectroscopy peaks are frequently ambiguous when read in isolation — a broad O–H absorption alone cannot definitively distinguish an alcohol from a carboxylic acid, since both produce broad O–H signals in overlapping but distinguishable ranges; correct identification requires cross-checking the O–H band's specific frequency range together with the presence or absence of an accompanying carbonyl (C=O) peak, since only carboxylic acids show both features together.",
+        "Core misconception to avoid: Identify the molecular ion by finding the peak at the HIGHEST m/z value, regardless of that peak's height — never assume the tallest peak (base peak) is automatically the molecular ion."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Introduction to Spectroscopy\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "the tallest peak is the molecular mass.",
+          "correction": "Identify the molecular ion by finding the peak at the HIGHEST m/z value, regardless of that peak's height — never assume the tallest peak (base peak) is automatically the molecular ion."
+        },
+        {
+          "misconception": "triplet = 3 neighbours.",
+          "correction": "Peak count = neighbors + 1, so neighbors = peak count − 1 — always subtract one from the observed multiplet peak count to find the true neighbor count."
+        },
+        {
+          "misconception": "broad O–H = alcohol.",
+          "correction": "A very broad O–H absorption specifically combined with a strong nearby C=O peak (~1710 cm⁻¹) indicates a carboxylic acid, not an alcohol — always cross-check the O–H band's exact range and any accompanying carbonyl peak before concluding the functional group."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Introduction to Spectroscopy\""
+        "Demonstration 1 (molecular-ion-vs-base-peak identification drill): Present several mass spectra and have students identify the molecular ion (highest m/z) separately from the base peak (tallest), discovering they're frequently different peaks.",
+        "Demonstration 2 (n+1 rule application across multiple multiplets): Present several NMR multiplets (doublet, triplet, quartet, quintet) and have students apply the subtract-one rule consistently to determine neighbor counts for each."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Introduction to Spectroscopy\"",
+        "setup": "The mass spectrum shows peaks at m/z=29 (base peak), 43, 57, and 86. Which is the molecular ion?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (molecular-ion-vs-base-peak identification drill): Present several mass spectra and have students identify the molecular ion (highest m/z) separately from the base peak (tallest), discovering they're frequently different peaks.",
+          "Demonstration 2 (n+1 rule application across multiple multiplets): Present several NMR multiplets (doublet, triplet, quartet, quintet) and have students apply the subtract-one rule consistently to determine neighbor counts for each."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Introduction to Spectroscopy\""
+        "expected_outcome": "Student can (a) correctly identify the molecular ion by highest m/z, independent of peak height, (b) correctly apply the n+1 rule to determine neighboring proton count from a multiplet's peak count, (c) correctly distinguish alcohol from carboxylic acid using combined O–H and C=O IR evidence."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present a mass spectrum with the molecular ion clearly NOT being the base peak, working through the correct identification.",
+          "TA-2 (TELL): State the n+1 rule explicitly, worked through step by step for ethanol's CH₂ quartet.",
+          "TA-3 (DO): Student determines the functional group from a given IR spectrum showing combined O–H and C=O evidence.",
+          "TA-4 (TEST-THINKING): Present MC-1's mass-spectrum probe and ask the student to identify the molecular ion using position, not height."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Introduction to Spectroscopy from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"The mass spectrum shows peaks at m/z=29 (base peak), 43, 57, and 86. Which is the molecular ion?\"",
+          "FA-2: \"Ethanol's CH₂ group appears as a quartet. How many neighbours does CH₂ have?\"",
+          "FA-3: \"A compound has broad O–H (2500-3300 cm⁻¹), strong C=O at 1710 cm⁻¹, no C–O stretch. What's the functional group?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Introduction to Spectroscopy\""
+        "mastery_signal": "Student can (a) correctly identify the molecular ion by highest m/z, independent of peak height, (b) correctly apply the n+1 rule to determine neighboring proton count from a multiplet's peak count, (c) correctly distinguish alcohol from carboxylic acid using combined O–H and C=O IR evidence."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Introduction to Spectroscopy\""
+        "Feeds directly into `chem.anal.spectroscopy` (generalizes these three techniques into broader analytical chemistry practice) and `chem.carb.spectro` (applies spectroscopic identification specifically to carbonyl-containing compounds, directly building on MC-3's O–H/C=O combined-evidence reasoning)."
       ],
       "prerequisite_review_triggers": [
         "chem.atomic.electromagnetic-radiation",
@@ -7608,50 +7685,65 @@
     {
       "id": "asset.chem.org.aromaticity",
       "concept_id": "chem.org.aromaticity",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Aromaticity\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Aromaticity\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Aromaticity\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Aromaticity requires BOTH a fully conjugated, planar ring of sp² atoms AND exactly 4n+2 π electrons (Hückel's rule) — \"alternating double bonds in a ring\" alone is insufficient, since a molecule can satisfy neither condition (cyclooctatetraene avoids antiaromaticity, 4n π electrons, by adopting a non-planar tub shape instead, making it non-aromatic rather than aromatic or antiaromatic); a heteroatom's basicity depends critically on whether its lone pair is part of the aromatic π system (donating it, as in protonation, would destroy aromaticity and is strongly resisted, as with pyrrole's dramatically reduced basicity) or sits in-plane outside the π system (freely available for donation, as with pyridine); and π-electron counting for charged aromatic species must correctly add or subtract electrons based on charge sign (cyclopentadienyl anion, 6π, aromatic; cyclopentadienyl cation, 4π, antiaromatic — same ring skeleton, opposite stability, due to a 2-electron difference from the opposite charge).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Aromaticity\"",
-        "[TEMPLATE] Key idea 2 for \"Aromaticity\"",
-        "[TEMPLATE] Key idea 3 for \"Aromaticity\""
+        "True aromaticity requires satisfying BOTH parts of Hückel's rule simultaneously — a fully conjugated, planar ring of sp² atoms, AND exactly 4n+2 π electrons — \"alternating double bonds\" alone is only a superficial visual cue, not sufficient proof; a molecule that would be antiaromatic if planar (wrong electron count, like COT's 8π) can instead become non-aromatic by distorting out of planarity, avoiding the antiaromatic penalty at the cost of losing aromatic character entirely.",
+        "A heteroatom's basicity within an aromatic ring depends on whether its lone pair is structurally part of the π system (donating it destroys aromaticity, a large energetic penalty that suppresses basicity dramatically) or sits outside the π system entirely (donation is essentially free). Separately, since aromaticity depends on total π-electron count, charged species derived from the same ring skeleton must have their π electrons recounted for the specific charge state — adding electrons for anions, removing them for cations — since this can flip a species between aromatic and antiaromatic character entirely.",
+        "Core misconception to avoid: Aromaticity requires BOTH full planar conjugation (all sp², uninterrupted π system) AND 4n+2 π electrons — check both conditions independently before concluding aromaticity; failing either produces non-aromatic (if planarity/conjugation fails) or antiaromatic (if the ring stays planar with the wrong electron count) character instead."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Aromaticity\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "it has alternating double bonds in a ring, so it's like benzene.",
+          "correction": "Aromaticity requires BOTH full planar conjugation (all sp², uninterrupted π system) AND 4n+2 π electrons — check both conditions independently before concluding aromaticity; failing either produces non-aromatic (if planarity/conjugation fails) or antiaromatic (if the ring stays planar with the wrong electron count) character instead."
+        },
+        {
+          "misconception": "pyrrole has 2 lone pair electrons on N so it should be a stronger base.",
+          "correction": "A heteroatom's basicity in an aromatic system depends critically on whether its lone pair participates in the π system (donation destroys aromaticity, suppressing basicity) or sits outside it (donation is free, preserving normal basicity) — not on the raw count of available lone-pair electrons."
+        },
+        {
+          "misconception": "removing an anion from C₅H₅⁻ makes a cation that's also stable.",
+          "correction": "Always recount π electrons explicitly for the specific charge state in question — a cation and an anion derived from the same ring skeleton can have genuinely opposite aromatic character, since removing or adding electrons changes the count that Hückel's rule depends on."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Aromaticity\""
+        "Demonstration 1 (COT dual-failure check): Walk through COT's structure explicitly, checking BOTH Hückel criteria (electron count and planarity) separately, showing it fails both.",
+        "Demonstration 2 (pyrrole vs. pyridine pKa comparison): Present the pyrrolium/pyridinium pKa values side by side, connecting the massive difference directly to the aromatic-stabilization-cost argument."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Aromaticity\"",
+        "setup": "Is COT (cyclooctatetraene) aromatic?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (COT dual-failure check): Walk through COT's structure explicitly, checking BOTH Hückel criteria (electron count and planarity) separately, showing it fails both.",
+          "Demonstration 2 (pyrrole vs. pyridine pKa comparison): Present the pyrrolium/pyridinium pKa values side by side, connecting the massive difference directly to the aromatic-stabilization-cost argument."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Aromaticity\""
+        "expected_outcome": "Student can (a) correctly apply both Hückel criteria (electron count AND planarity) independently, (b) correctly explain a heteroatom's basicity using lone-pair role in the π system, not electron count alone, (c) correctly recount π electrons for a charged aromatic-derived species and determine its aromatic/antiaromatic status."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present COT's structure explicitly, checking both Hückel criteria side by side.",
+          "TA-2 (TELL): State the lone-pair-role basicity principle explicitly, immediately followed by the pyrrole/pyridine pKa comparison.",
+          "TA-3 (DO): Student recounts π electrons for a charged aromatic-derived species (like C₅H₅⁺), determining its aromatic/antiaromatic status.",
+          "TA-4 (TEST-THINKING): Present MC-2's pyrrole-basicity probe and ask the student to justify the low basicity using the aromaticity-cost argument, not electron count alone."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Aromaticity from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Is COT (cyclooctatetraene) aromatic?\"",
+          "FA-2: \"Compare the basicity of pyrrole and pyridine.\"",
+          "FA-3: \"Count the π electrons in C₅H₅⁺. Is it aromatic or antiaromatic?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Aromaticity\""
+        "mastery_signal": "Student can (a) correctly apply both Hückel criteria (electron count AND planarity) independently, (b) correctly explain a heteroatom's basicity using lone-pair role in the π system, not electron count alone, (c) correctly recount π electrons for a charged aromatic-derived species and determine its aromatic/antiaromatic status."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Aromaticity\""
+        "Feeds directly into `chem.hyd.arenes` (benzene and substituted arene chemistry directly applies this concept's aromaticity criteria), `chem.hyd.polycyclic` (extends aromaticity assessment to fused ring systems), and `chem.nitro.heterocycles` (directly builds on the pyrrole/pyridine lone-pair-role distinction established here)."
       ],
       "prerequisite_review_triggers": [
+        "chem.org.hybridization",
         "chem.bond.resonance"
       ]
     },
