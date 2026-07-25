@@ -8703,48 +8703,57 @@
     {
       "id": "asset.chem.bio.carbohydrates",
       "concept_id": "chem.bio.carbohydrates",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Carbohydrates\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Carbohydrates\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Carbohydrates\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Glucose's open-chain (Fischer) and Haworth (cyclic) forms are NOT two different compounds — they are the SAME molecule in dynamic equilibrium, interconverting via an intramolecular hemiacetal-forming reaction where the C-5 hydroxyl attacks the C-1 aldehyde; and glucose's alpha and beta ANOMERS are NOT interchangeable stereoisomers you can pick freely — they differ specifically in the configuration at the newly-formed anomeric carbon (C-1), and pure alpha-D-glucose or pure beta-D-glucose in water will each spontaneously drift toward the SAME equilibrium mixture (~36% alpha, ~64% beta, plus a tiny amount of open-chain form) via MUTAROTATION (repeated ring-opening/ring-closing through the open-chain form) — a change in observed optical rotation over time that beginners often mistake for a chemical reaction happening TO the sugar, when it's actually just the ring interconverting between anomeric forms already present as equilibrium species.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Carbohydrates\"",
-        "[TEMPLATE] Key idea 2 for \"Carbohydrates\"",
-        "[TEMPLATE] Key idea 3 for \"Carbohydrates\""
+        "Glucose's open-chain and cyclic (Haworth) forms are the same molecule connected by a fully reversible intramolecular hemiacetal reaction (C-5 OH attacking the C-1 aldehyde) — the cyclic forms dominate the equilibrium (>99%), but both representations describe one interconverting system, not two compounds.",
+        "A freshly dissolved pure anomer's changing optical rotation reflects the sugar's ring repeatedly opening and reclosing, gradually shifting the alpha:beta population ratio toward its natural equilibrium value — since both pure anomers converge to the identical final rotation value from opposite starting points, this is re-equilibration among existing forms, not the formation of a new substance.",
+        "Core misconception to avoid: The Fischer open-chain form and Haworth cyclic form of glucose are the SAME molecule in reversible equilibrium (heavily favoring the cyclic forms), connected by an intramolecular hemiacetal reaction — never treat them as different compounds."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Carbohydrates\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "The open-chain form and the ring form must be two different molecules since they look so different.",
+          "correction": "The Fischer open-chain form and Haworth cyclic form of glucose are the SAME molecule in reversible equilibrium (heavily favoring the cyclic forms), connected by an intramolecular hemiacetal reaction — never treat them as different compounds."
+        },
+        {
+          "misconception": "The changing rotation means the glucose must be reacting to form something different.",
+          "correction": "Mutarotation is the gradual approach to the alpha:beta:open-chain equilibrium ratio via repeated ring-opening/ring-closing, observable as a changing average optical rotation — it is not a chemical reaction creating a new substance."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Carbohydrates\""
+        "Demonstration 1 (ring-closure mechanism diagram): Present the explicit C-5-OH-attacks-C-1-aldehyde mechanism, deriving that open-chain and cyclic forms are the same molecule.",
+        "Demonstration 2 (convergent optical rotation dataset): Present the explicit alpha-from-+112°-down and beta-from-+19°-up convergence to +52.7°, deriving that mutarotation is equilibration, not new-substance formation."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Carbohydrates\"",
+        "setup": "Glucose is drawn as an open-chain Fischer projection with a free CHO group, and separately as a Haworth cyclic structure with an OH at C-1. Are these two different sugars?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (ring-closure mechanism diagram): Present the explicit C-5-OH-attacks-C-1-aldehyde mechanism, deriving that open-chain and cyclic forms are the same molecule.",
+          "Demonstration 2 (convergent optical rotation dataset): Present the explicit alpha-from-+112°-down and beta-from-+19°-up convergence to +52.7°, deriving that mutarotation is equilibration, not new-substance formation."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Carbohydrates\""
+        "expected_outcome": "Student can (a) correctly explain that Fischer and Haworth forms of glucose represent the same molecule in equilibrium, (b) correctly explain mutarotation as anomeric re-equilibration rather than new-substance formation."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit ring-closure mechanism diagram connecting Fischer and Haworth forms.",
+          "TA-2 (TELL): State the mutarotation-as-equilibration explanation explicitly, anchored to the convergent optical rotation dataset.",
+          "TA-3 (DO): Student predicts the qualitative direction of optical-rotation drift for a freshly dissolved pure anomer of an unfamiliar sugar, given its equilibrium alpha:beta ratio.",
+          "TA-4 (TEST-THINKING): Present the MC-1 probe and ask the student to justify why the open-chain and cyclic forms of glucose are the same compound."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Carbohydrates from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Glucose is drawn as an open-chain Fischer projection with a free CHO group, and separately as a Haworth cyclic structure with an OH at C-1. Are these two different sugars?\"",
+          "FA-2: \"A chemist dissolves pure alpha-D-glucose in water and watches its optical rotation change from +112° down to +52.7° over several hours. Has the glucose reacted to form a new substance?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Carbohydrates\""
+        "mastery_signal": "Student can (a) correctly explain that Fischer and Haworth forms of glucose represent the same molecule in equilibrium, (b) correctly explain mutarotation as anomeric re-equilibration rather than new-substance formation."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Carbohydrates\""
+        "This concept unlocks `chem.poly.natural`, extending monosaccharide ring-form and anomeric reasoning to glycosidic bond formation in di- and polysaccharides (sucrose, starch, cellulose)."
       ],
       "prerequisite_review_triggers": [
         "chem.carb.aldehydes",
@@ -8754,48 +8763,57 @@
     {
       "id": "asset.chem.bio.proteins",
       "concept_id": "chem.bio.proteins",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Proteins\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Proteins\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Proteins\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Denaturation is NOT the breaking of peptide bonds or a change to a protein's primary sequence — it is specifically the disruption of secondary/tertiary/quaternary structure (hydrogen bonds, hydrophobic interactions, ionic interactions, and sometimes disulfide bridges) while the primary sequence (the covalent amino acid backbone chain) remains completely intact — a denatured protein has the SAME amino acid sequence, just an unfolded/disordered three-dimensional shape, which is why denaturation is often reversible under mild conditions (renaturation); and the four structural \"levels\" (primary/secondary/tertiary/quaternary) are NOT a simple size hierarchy where each level is just \"a bigger version\" of the previous one — primary is the covalent sequence, secondary is LOCAL repeating hydrogen-bonded patterns (alpha-helix, beta-sheet) within a single chain, tertiary is the OVERALL 3D folding of a single chain (driven by side-chain interactions distant in sequence), and quaternary is the assembly of MULTIPLE separate polypeptide chains (only present in multi-subunit proteins like hemoglobin) — a single-chain protein like myoglobin genuinely has NO quaternary structure at all, not \"a quaternary structure of one unit.\"",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Proteins\"",
-        "[TEMPLATE] Key idea 2 for \"Proteins\"",
-        "[TEMPLATE] Key idea 3 for \"Proteins\""
+        "Denaturation disrupts the non-covalent interactions (hydrogen bonds, hydrophobic packing, ionic interactions) and sometimes disulfide bridges that maintain a protein's folded 3D shape, while leaving the covalent primary amino acid sequence completely intact — this is why some denatured proteins can renature (refold) when the denaturing condition is removed.",
+        "The four protein structural levels describe distinct organizational phenomena — primary (covalent sequence), secondary (local hydrogen-bonded motifs within one chain), tertiary (overall 3D fold of one chain), and quaternary (assembly of multiple separate chains) — quaternary structure is conditional on multi-subunit assembly, and is genuinely absent in single-chain proteins like myoglobin.",
+        "Core misconception to avoid: Denaturation disrupts non-covalent (and sometimes disulfide) interactions maintaining a protein's folded shape, leaving the primary amino acid sequence completely intact — it never breaks peptide bonds or alters the sequence."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Proteins\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Cooking the egg breaks down the protein's structure, so the amino acid sequence must be different now.",
+          "correction": "Denaturation disrupts non-covalent (and sometimes disulfide) interactions maintaining a protein's folded shape, leaving the primary amino acid sequence completely intact — it never breaks peptide bonds or alters the sequence."
+        },
+        {
+          "misconception": "Every protein should have all four levels of structure, including quaternary, since that's the highest level.",
+          "correction": "Quaternary structure only exists for proteins composed of multiple separate polypeptide chains assembled together — a single-chain protein like myoglobin genuinely has no quaternary structure, not a diminished or absent \"fourth level\" it otherwise would have."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Proteins\""
+        "Demonstration 1 (renaturation evidence for sequence preservation): Present the explicit renaturation example, deriving that the primary sequence survives denaturation.",
+        "Demonstration 2 (myoglobin-vs-hemoglobin structural-level comparison): Present the explicit single-chain-vs-multi-chain comparison, deriving the conditional nature of quaternary structure."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Proteins\"",
+        "setup": "When egg white is cooked and becomes solid/opaque, has the amino acid sequence of the ovalbumin protein changed?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (renaturation evidence for sequence preservation): Present the explicit renaturation example, deriving that the primary sequence survives denaturation.",
+          "Demonstration 2 (myoglobin-vs-hemoglobin structural-level comparison): Present the explicit single-chain-vs-multi-chain comparison, deriving the conditional nature of quaternary structure."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Proteins\""
+        "expected_outcome": "Student can (a) correctly explain that denaturation preserves the primary amino acid sequence while disrupting higher-order structure, (b) correctly determine whether an unfamiliar protein has quaternary structure based on its chain composition."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit renaturation evidence demonstrating primary-sequence preservation through denaturation.",
+          "TA-2 (TELL): State the conditional quaternary-structure rule explicitly, anchored to the myoglobin-vs-hemoglobin comparison.",
+          "TA-3 (DO): Student classifies an unfamiliar protein's structural levels (primary through quaternary, as applicable) given its chain composition.",
+          "TA-4 (TEST-THINKING): Present the MC-1 probe and ask the student to justify why denaturation doesn't change the amino acid sequence."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Proteins from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"When egg white is cooked and becomes solid/opaque, has the amino acid sequence of the ovalbumin protein changed?\"",
+          "FA-2: \"Myoglobin consists of a single polypeptide chain. Does myoglobin have a quaternary structure?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Proteins\""
+        "mastery_signal": "Student can (a) correctly explain that denaturation preserves the primary amino acid sequence while disrupting higher-order structure, (b) correctly determine whether an unfamiliar protein has quaternary structure based on its chain composition."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Proteins\""
+        "This concept unlocks `chem.bio.enzyme-kinetics`, `chem.bio.nucleic-acids`, `chem.bio.vitamins`, and `chem.poly.natural`, extending protein structural reasoning to enzyme function, nucleic acid biomolecules, vitamin cofactors, and natural polymer contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.nitro.amino-acids"
@@ -8804,48 +8822,57 @@
     {
       "id": "asset.chem.bio.nucleic-acids",
       "concept_id": "chem.bio.nucleic-acids",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Nucleic Acids\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Nucleic Acids\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Nucleic Acids\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Base-pairing in DNA is NOT an arbitrary or interchangeable pairing rule — adenine pairs SPECIFICALLY with thymine (2 hydrogen bonds) and guanine pairs SPECIFICALLY with cytosine (3 hydrogen bonds), a specificity determined by precise hydrogen-bond donor/acceptor geometry and ring-size complementarity (a purine always pairs with a pyrimidine to maintain a consistent helix width) — swapping which bases pair (e.g., proposing A-C or G-T pairing as equally valid) is not just \"less common,\" it is geometrically/chemically incompatible with the standard Watson-Crick double helix; and DNA and RNA are NOT simply \"the same molecule with U instead of T\" — while the T-to-U substitution is real, there are TWO OTHER independent structural differences: RNA's sugar is ribose (with a 2'-OH group) versus DNA's deoxyribose (lacking that 2'-OH), and RNA is typically single-stranded while DNA is typically double-stranded — the 2'-OH difference is chemically significant beyond naming, since it makes RNA considerably more susceptible to hydrolytic cleavage than DNA, a real chemical/functional consequence beyond simple nomenclature.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Nucleic Acids\"",
-        "[TEMPLATE] Key idea 2 for \"Nucleic Acids\"",
-        "[TEMPLATE] Key idea 3 for \"Nucleic Acids\""
+        "DNA base pairing (A-T, G-C) is determined by precise hydrogen-bond donor/acceptor geometry specific to each base and a purine-pyrimidine size-matching requirement needed to maintain the double helix's uniform structure — it is a physically necessary consequence of molecular structure, not an arbitrary convention.",
+        "DNA and RNA differ in three independent structural features — the base (thymine vs. uracil), the sugar (deoxyribose vs. ribose, with RNA's 2'-OH group making it chemically more susceptible to hydrolysis), and typical strandedness (double- vs. single-stranded) — not merely the commonly emphasized base substitution alone.",
+        "Core misconception to avoid: A-T and G-C base pairing is determined by precise hydrogen-bond geometry and purine-pyrimidine size complementarity required to maintain the double helix's structure — it is not an arbitrary convention that could be different."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Nucleic Acids\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "A-T and G-C pairing is just the rule we memorize — it could have been some other combination.",
+          "correction": "A-T and G-C base pairing is determined by precise hydrogen-bond geometry and purine-pyrimidine size complementarity required to maintain the double helix's structure — it is not an arbitrary convention that could be different."
+        },
+        {
+          "misconception": "DNA and RNA are basically the same thing, just RNA has U instead of T.",
+          "correction": "DNA and RNA differ in three independent structural features — base (T vs. U), sugar (deoxyribose vs. ribose, with the 2'-OH difference affecting chemical stability), and typical strandedness (double vs. single) — not merely the base substitution alone."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Nucleic Acids\""
+        "Demonstration 1 (hydrogen-bond geometry and purine-pyrimidine size-matching diagram): Present the explicit pairing-geometry argument, deriving base-pairing specificity from physical necessity.",
+        "Demonstration 2 (three-feature DNA-vs-RNA comparison table): Present the explicit base/sugar/strandedness comparison, deriving all three as independent structural differences."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Nucleic Acids\"",
+        "setup": "Could adenine just as easily pair with guanine instead of thymine in DNA's double helix, if that were the convention chosen?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (hydrogen-bond geometry and purine-pyrimidine size-matching diagram): Present the explicit pairing-geometry argument, deriving base-pairing specificity from physical necessity.",
+          "Demonstration 2 (three-feature DNA-vs-RNA comparison table): Present the explicit base/sugar/strandedness comparison, deriving all three as independent structural differences."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Nucleic Acids\""
+        "expected_outcome": "Student can (a) correctly explain why A-T/G-C base pairing is a physically necessary consequence of hydrogen-bond geometry and size-matching, (b) correctly identify all three independent structural differences between DNA and RNA."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit hydrogen-bond donor/acceptor geometry diagram for A-T and G-C pairing.",
+          "TA-2 (TELL): State the three independent DNA-vs-RNA structural differences explicitly, anchored to the comparison table.",
+          "TA-3 (DO): Student evaluates whether a proposed hypothetical base pair is geometrically feasible, and lists all three structural differences between DNA and RNA for an unfamiliar comparison scenario.",
+          "TA-4 (TEST-THINKING): Present the MC-1 probe and ask the student to justify why A-G pairing is not just uncommon but geometrically incompatible."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Nucleic Acids from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Could adenine just as easily pair with guanine instead of thymine in DNA's double helix, if that were the convention chosen?\"",
+          "FA-2: \"Besides the T-vs-U base difference, are there any other structural differences between DNA and RNA, or is that the whole story?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Nucleic Acids\""
+        "mastery_signal": "Student can (a) correctly explain why A-T/G-C base pairing is a physically necessary consequence of hydrogen-bond geometry and size-matching, (b) correctly identify all three independent structural differences between DNA and RNA."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Nucleic Acids\""
+        "This concept has no direct KG unlocks but consolidates protein reasoning (`chem.bio.proteins`), forming a capstone application to molecular genetics and biochemistry contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.bio.proteins"
@@ -8854,48 +8881,57 @@
     {
       "id": "asset.chem.bio.lipids",
       "concept_id": "chem.bio.lipids",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Lipids\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Lipids\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Lipids\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Saponification is NOT simply \"dissolving\" a fat in a base — it is a genuine ester HYDROLYSIS reaction (specifically base-promoted nucleophilic acyl substitution, irreversible due to the stable carboxylate product) that breaks each ester linkage in a triglyceride, releasing glycerol and three fatty acid CARBOXYLATE salts (soaps) — the fat is chemically transformed into different molecules, not merely solubilized while remaining chemically the same triglyceride; and \"unsaturated\" in a fatty acid does NOT simply mean \"healthier\" or \"liquid\" as a definitional property — it specifically means the fatty acid chain contains one or more C=C double bonds, and this structural feature is what CAUSES the physical consequence (kinks in the chain from cis double bonds prevent tight packing, lowering the melting point, making unsaturated fats typically liquid at room temperature) — the causal chain runs structure→packing→melting point, not \"unsaturated\" being a synonym for \"liquid\" that could be reversed (some highly unsaturated oils can still be solid, e.g., after partial hydrogenation reintroduces different packing).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Lipids\"",
-        "[TEMPLATE] Key idea 2 for \"Lipids\"",
-        "[TEMPLATE] Key idea 3 for \"Lipids\""
+        "Saponification is base-promoted ester hydrolysis — hydroxide attacks each ester linkage in the triglyceride, cleaving it to release glycerol and three fatty acid carboxylate salts (soap), a genuine, irreversible chemical transformation into new molecular species, not a physical dissolution of the original fat.",
+        "\"Unsaturated\" structurally means the fatty acid chain contains C=C double bonds; the typical liquid physical state at room temperature is a usual causal CONSEQUENCE (cis double bonds create chain kinks that reduce packing efficiency, lowering melting point), not a definitional synonym — exceptions like partially hydrogenated oils show the structural property and the physical-state generalization can diverge.",
+        "Core misconception to avoid: Saponification is a genuine ester hydrolysis reaction, converting the triglyceride into glycerol and fatty acid carboxylate salts (soap) — the original triglyceride molecule is chemically transformed, not merely dissolved."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Lipids\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Saponification just dissolves the fat into the basic solution.",
+          "correction": "Saponification is a genuine ester hydrolysis reaction, converting the triglyceride into glycerol and fatty acid carboxylate salts (soap) — the original triglyceride molecule is chemically transformed, not merely dissolved."
+        },
+        {
+          "misconception": "Unsaturated fats are liquid — that's basically what unsaturated means.",
+          "correction": "\"Unsaturated\" specifically denotes C=C double bond content in the fatty acid chain; the typical liquid state at room temperature is a usual but not absolute physical CONSEQUENCE of that structure (via reduced chain-packing efficiency), not a direct definitional synonym."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Lipids\""
+        "Demonstration 1 (ester-hydrolysis mechanism diagram for saponification): Present the explicit bond-cleavage mechanism, deriving the genuine chemical transformation.",
+        "Demonstration 2 (structure-to-packing-to-melting-point causal chain with a hydrogenated-oil counter-example): Present the explicit causal diagram alongside the exception case, deriving the causal (not definitional) relationship between unsaturation and physical state."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Lipids\"",
+        "setup": "When a triglyceride is treated with NaOH and forms soap, has the original fat molecule simply dissolved, or has something else happened?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (ester-hydrolysis mechanism diagram for saponification): Present the explicit bond-cleavage mechanism, deriving the genuine chemical transformation.",
+          "Demonstration 2 (structure-to-packing-to-melting-point causal chain with a hydrogenated-oil counter-example): Present the explicit causal diagram alongside the exception case, deriving the causal (not definitional) relationship between unsaturation and physical state."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Lipids\""
+        "expected_outcome": "Student can (a) correctly explain saponification as ester hydrolysis producing glycerol and fatty acid salts, (b) correctly distinguish the structural definition of unsaturation from its typical (but not absolute) physical-state consequence."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit ester-hydrolysis mechanism diagram for saponification.",
+          "TA-2 (TELL): State the structure-vs-physical-state distinction for unsaturation explicitly, anchored to the packing/melting-point causal chain.",
+          "TA-3 (DO): Student predicts the products of saponification for an unfamiliar triglyceride and reasons about the likely physical state of an unfamiliar fatty acid given its degree of unsaturation.",
+          "TA-4 (TEST-THINKING): Present the MC-1 probe and ask the student to justify why saponification is a chemical reaction rather than simple dissolution."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Lipids from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"When a triglyceride is treated with NaOH and forms soap, has the original fat molecule simply dissolved, or has something else happened?\"",
+          "FA-2: \"A fatty acid is described as unsaturated. Does this directly tell you it must be liquid at room temperature?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Lipids\""
+        "mastery_signal": "Student can (a) correctly explain saponification as ester hydrolysis producing glycerol and fatty acid salts, (b) correctly distinguish the structural definition of unsaturation from its typical (but not absolute) physical-state consequence."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Lipids\""
+        "This concept unlocks `chem.bio.vitamins`, extending lipid structural reasoning to fat-soluble vitamin transport and storage contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.carb.derivatives"
@@ -8904,48 +8940,57 @@
     {
       "id": "asset.chem.bio.vitamins",
       "concept_id": "chem.bio.vitamins",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Vitamins and Hormones\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Vitamins and Hormones\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Vitamins and Hormones\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The water-soluble vs. fat-soluble vitamin classification is NOT an arbitrary labeling scheme — it directly PREDICTS storage and toxicity behavior: water-soluble vitamins (B-complex, C) are generally NOT stored in significant amounts (excess is readily excreted in urine), making toxicity from over-supplementation rare, whereas fat-soluble vitamins (A, D, E, K) ARE stored in adipose tissue and the liver (since they partition into lipid environments rather than being readily excreted in an aqueous medium), making chronic over-supplementation of fat-soluble vitamins a genuine toxicity risk (e.g., vitamin A toxicity) that does not have a comparable water-soluble-vitamin counterpart under ordinary intake; and steroid hormones (built on a shared four-fused-ring cyclopentanoperhydrophenanthrene/steroid nucleus) are NOT chemically interchangeable or freely convertible into each other despite the shared core skeleton — small structural differences (which functional groups are attached to the shared ring system, and where) determine which specific receptor a given steroid hormone binds and activates, so testosterone, estrogen, and cortisol are NOT simply \"the same hormone in different amounts,\" but structurally distinct molecules with distinct, specific biological targets.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Vitamins and Hormones\"",
-        "[TEMPLATE] Key idea 2 for \"Vitamins and Hormones\"",
-        "[TEMPLATE] Key idea 3 for \"Vitamins and Hormones\""
+        "A vitamin's water/fat-solubility classification directly predicts its storage and toxicity behavior — fat-soluble vitamins partition into and accumulate within lipid-rich tissues (creating genuine over-supplementation toxicity risk), while water-soluble vitamins are efficiently excreted and rarely accumulate to toxic levels — the classification is chemically predictive, not an arbitrary label.",
+        "Steroid hormones sharing the same core ring skeleton (the steroid nucleus) are nonetheless structurally and functionally distinct molecules — their differing peripheral functional groups determine which specific receptor each binds and which distinct physiological effects result, never \"the same hormone in different amounts.\"",
+        "Core misconception to avoid: Fat-soluble vitamins accumulate in lipid-rich tissues and carry genuine over-supplementation toxicity risk; water-soluble vitamins are efficiently excreted and rarely accumulate to toxic levels — the solubility classification directly predicts this behavior, it is not an arbitrary label."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Vitamins and Hormones\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Water-soluble and fat-soluble are just two lists you memorize — they don't really predict anything else.",
+          "correction": "Fat-soluble vitamins accumulate in lipid-rich tissues and carry genuine over-supplementation toxicity risk; water-soluble vitamins are efficiently excreted and rarely accumulate to toxic levels — the solubility classification directly predicts this behavior, it is not an arbitrary label."
+        },
+        {
+          "misconception": "They're all steroid hormones with the same core structure, so they must basically be the same thing in different amounts.",
+          "correction": "Steroid hormones sharing the steroid nucleus are structurally related but functionally distinct molecules — their differing peripheral functional groups determine distinct receptor specificities and biological effects, never \"the same hormone in different amounts.\""
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Vitamins and Hormones\""
+        "Demonstration 1 (storage/excretion mechanism argument for vitamin toxicity risk): Present the explicit polarity-to-partitioning-to-toxicity-risk chain, deriving the solubility-toxicity relationship.",
+        "Demonstration 2 (structural comparison diagram for steroid hormone specificity): Present the explicit shared-core-vs-distinct-peripheral-groups diagram, deriving receptor specificity from structural differences."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Vitamins and Hormones\"",
+        "setup": "Would you expect chronic over-supplementation of vitamin C to carry the same toxicity risk as chronic over-supplementation of vitamin A? Why or why not?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (storage/excretion mechanism argument for vitamin toxicity risk): Present the explicit polarity-to-partitioning-to-toxicity-risk chain, deriving the solubility-toxicity relationship.",
+          "Demonstration 2 (structural comparison diagram for steroid hormone specificity): Present the explicit shared-core-vs-distinct-peripheral-groups diagram, deriving receptor specificity from structural differences."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Vitamins and Hormones\""
+        "expected_outcome": "Student can (a) correctly predict a vitamin's relative toxicity risk from its water/fat-solubility classification, (b) correctly explain that steroid hormones sharing a core skeleton are functionally distinct due to peripheral structural differences."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit storage/excretion mechanism argument for vitamin C vs. vitamin A.",
+          "TA-2 (TELL): State the steroid-hormone structural-specificity rule explicitly, anchored to the comparison diagram.",
+          "TA-3 (DO): Student predicts the relative toxicity risk of an unfamiliar vitamin given its solubility classification, and reasons about why two unfamiliar steroid hormones have distinct effects despite a shared core.",
+          "TA-4 (TEST-THINKING): Present the MC-1 probe and ask the student to justify why fat-soluble vitamins carry a toxicity risk that water-soluble vitamins generally do not."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Vitamins and Hormones from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Would you expect chronic over-supplementation of vitamin C to carry the same toxicity risk as chronic over-supplementation of vitamin A? Why or why not?\"",
+          "FA-2: \"Testosterone, estrogen, and cortisol are all built on the same core steroid ring skeleton. Are they essentially the same hormone at different concentrations, or something else?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Vitamins and Hormones\""
+        "mastery_signal": "Student can (a) correctly predict a vitamin's relative toxicity risk from its water/fat-solubility classification, (b) correctly explain that steroid hormones sharing a core skeleton are functionally distinct due to peripheral structural differences."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Vitamins and Hormones\""
+        "This concept has no direct KG unlocks but consolidates protein reasoning (`chem.bio.proteins`) and lipid reasoning (`chem.bio.lipids`), forming a capstone application to nutritional biochemistry and endocrinology contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.bio.proteins",
@@ -8955,50 +9000,62 @@
     {
       "id": "asset.chem.bio.enzyme-kinetics",
       "concept_id": "chem.bio.enzyme-kinetics",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyse \"Enzyme Kinetics\".",
-      "concept_summary": "Michaelis–Menten; Km and Vmax; turnover number; competitive/non-competitive inhibition; allosteric regulation.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Enzyme Kinetics\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Km is NOT a measure of how tightly or \"strongly\" an enzyme binds its substrate in a simple, direct sense — Km is the substrate concentration at which the reaction rate equals HALF of Vmax, and a LOWER Km actually indicates HIGHER apparent affinity (less substrate needed to reach half-maximal rate), which is the OPPOSITE of what \"Km = binding strength, bigger is stronger\" intuition would suggest — Km is more precisely a composite kinetic parameter (in the simplest case, (k-1+k2)/k1) that only equals the true dissociation constant under specific mechanistic assumptions; and competitive and non-competitive inhibition are NOT distinguished by \"how strongly\" the inhibitor binds — they are distinguished by WHERE and HOW the inhibitor binds and its effect on the kinetic parameters: competitive inhibition (inhibitor binds the SAME active site, competing with substrate) INCREASES apparent Km while leaving Vmax UNCHANGED (enough substrate can still out-compete the inhibitor to reach the same maximum rate), whereas non-competitive inhibition (inhibitor binds a DIFFERENT site, not competing with substrate) DECREASES Vmax while leaving Km UNCHANGED (adding more substrate cannot overcome the inhibition since the inhibitor isn't competing for the same site) — mixing up which parameter changes for which inhibition type is the central beginner error.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Enzyme Kinetics\"",
-        "[TEMPLATE] Key idea 2 for \"Enzyme Kinetics\"",
-        "[TEMPLATE] Key idea 3 for \"Enzyme Kinetics\""
+        "Km is the substrate concentration needed to reach half-maximal reaction rate — a LOWER Km means less substrate is needed to reach that milestone, indicating HIGHER apparent substrate affinity, the inverse of a naive \"bigger number = stronger binding\" interpretation.",
+        "Competitive inhibitors bind the same active site as substrate, so excess substrate can still reach the original Vmax but only at a higher substrate concentration (Km increases, Vmax unchanged); non-competitive inhibitors bind a separate site, permanently reducing active enzyme regardless of substrate concentration (Vmax decreases, Km unchanged) — the distinction is about binding location and its kinetic consequence, not binding strength.",
+        "Core misconception to avoid: A lower Km indicates higher apparent substrate affinity (less substrate needed to reach half-maximal rate); a higher Km indicates lower apparent affinity — never assume \"bigger Km = stronger binding.\""
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Enzyme Kinetics\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Enzyme B has the bigger Km number, so it must bind the substrate more strongly.",
+          "correction": "A lower Km indicates higher apparent substrate affinity (less substrate needed to reach half-maximal rate); a higher Km indicates lower apparent affinity — never assume \"bigger Km = stronger binding.\""
+        },
+        {
+          "misconception": "I'm not sure which type this is — I'd need to know how strongly the inhibitor binds.",
+          "correction": "Competitive inhibition raises apparent Km while leaving Vmax unchanged (same-site competition, out-competable by excess substrate); non-competitive inhibition lowers Vmax while leaving Km unchanged (different-site binding, not out-competable) — classify inhibition type from which kinetic parameter shifts, not from binding strength."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Enzyme Kinetics\""
+        "Demonstration 1 (half-Vmax operational definition walkthrough): Present the explicit definition and worked comparison between two enzymes, deriving the inverse Km-affinity relationship.",
+        "Demonstration 2 (side-by-side competitive/non-competitive Michaelis-Menten curve overlay): Present the explicit curve comparison, deriving the classification rule from parameter shifts."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Enzyme Kinetics\"",
+        "setup": "Enzyme A has Km = 0.1 mM and enzyme B has Km = 10 mM for the same substrate. Which enzyme has higher apparent affinity for the substrate?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (half-Vmax operational definition walkthrough): Present the explicit definition and worked comparison between two enzymes, deriving the inverse Km-affinity relationship.",
+          "Demonstration 2 (side-by-side competitive/non-competitive Michaelis-Menten curve overlay): Present the explicit curve comparison, deriving the classification rule from parameter shifts."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Enzyme Kinetics\""
+        "expected_outcome": "Student can (a) correctly interpret Km as inversely related to apparent substrate affinity, (b) correctly classify inhibition type from Km/Vmax shift patterns."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit half-Vmax operational definition and the two-enzyme Km comparison.",
+          "TA-2 (TELL): State the competitive-vs-non-competitive classification rule explicitly, anchored to the curve overlay.",
+          "TA-3 (DO): Student classifies an unfamiliar inhibition kinetics dataset (given Km/Vmax shifts) as competitive or non-competitive.",
+          "TA-4 (TEST-THINKING): Present the MC-1 probe and ask the student to justify why a lower Km indicates higher, not lower, apparent affinity."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Enzyme Kinetics from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Enzyme A has Km = 0.1 mM and enzyme B has Km = 10 mM for the same substrate. Which enzyme has higher apparent affinity for the substrate?\"",
+          "FA-2: \"An inhibitor is added to an enzyme reaction. In the resulting kinetics data, Km increases but Vmax stays the same. Is this competitive or non-competitive inhibition?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Enzyme Kinetics\""
+        "mastery_signal": "Student can (a) correctly interpret Km as inversely related to apparent substrate affinity, (b) correctly classify inhibition type from Km/Vmax shift patterns."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Enzyme Kinetics\""
+        "This concept has no direct KG unlocks but consolidates protein reasoning (`chem.bio.proteins`) and reaction mechanism reasoning (`chem.kinet.mechanism`), forming a capstone application to biochemical kinetics and pharmacology contexts."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.bio.proteins",
+        "chem.kinet.mechanism"
+      ]
     },
     {
       "id": "asset.chem.poly.addition",
