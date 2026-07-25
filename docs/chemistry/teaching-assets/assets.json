@@ -527,48 +527,63 @@
     {
       "id": "asset.chem.atomic.atomic-theory",
       "concept_id": "chem.atomic.atomic-theory",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Atomic Theory\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Atomic Theory\" pending authoring (target depth: foundational).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Atomic Theory\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "**One-sentence definition:** Atomic theory is the historical and evidential chain — Dalton's postulates, Thomson's electron discovery, and Rutherford's gold-foil experiment — that established matter is built from atoms containing a small, dense, positively charged nucleus surrounded by electrons, with each revision correcting a specific, testable feature of the previous model rather than discarding it wholesale.\n\n**The core insight:** Atomic theory is not one fixed model handed down complete — it is a sequence of models, each explaining evidence its predecessor could not, and each REVISION is specific and evidence-driven, not a wholesale replacement. Dalton's model (matter is made of indivisible, identical-per-element atoms combining in fixed ratios) explained the law of definite proportions (chem.found.matter) but could not explain electricity. Thomson's discovery of the electron (a negative particle inside the atom) forced revision of \"indivisible\" but did not overturn Dalton's ratio postulate. Rutherford's gold-foil experiment then forced revision of Thomson's own \"plum pudding\" model (uniform positive charge with embedded electrons) — but kept Thomson's electron intact, only relocating the POSITIVE charge into a small, dense nucleus. Seeing this as an evidence-driven correction chain, not a \"who was wrong\" narrative, is the actual historical and scientific content of this concept.\n\n**Conceptual chain:**\n1. Dalton (early 1800s): atoms are indivisible, identical within an element, and combine in fixed whole-number ratios — this explains the law of definite proportions empirically established in the prerequisite concept.\n2. J.J. Thomson (1897): discovers the electron via cathode-ray experiments — a negatively charged particle far lighter than any atom, proving atoms are NOT indivisible after all. Thomson proposes the \"plum pudding\" model: negative electrons embedded in a diffuse, uniform sphere of positive charge.\n3. Rutherford's gold-foil experiment (1909-1911): fires alpha particles at thin gold foil. Most pass straight through (unexpected only if you'd naively expect a dense obstacle everywhere) — but a very small fraction deflect sharply or bounce straight back, a result the uniform \"plum pudding\" charge distribution cannot explain at all.\n4. Rutherford's conclusion: atoms are mostly empty space (explaining the straight-through majority), with a tiny, extremely dense, POSITIVELY charged nucleus at the center (explaining the rare sharp deflections — only a concentrated charge could repel an alpha particle that strongly).\n5. Thomson's electron is RETAINED in Rutherford's model — only the distribution of positive charge changes, from diffuse (Thomson) to concentrated in a nucleus (Rutherford).\n6. Later refinement (isotopes) shows Dalton's fourth postulate — \"atoms of the same element are identical\" — needed revision: atoms of the same element share proton count but can differ in neutron count (different mass), while still being the same element chemically.\n\n**Central relations:**\n- Dalton: atoms indivisible, fixed-ratio combination (explains definite proportions; later revised on \"indivisible\" and \"identical\").\n- Thomson: discovers the electron (revises \"indivisible\"); plum-pudding model (diffuse positive charge, later revised).\n- Rutherford: gold-foil evidence -> nuclear model (small, dense, positive nucleus; electron retained from Thomson; positive-charge distribution revised from Thomson).\n- Isotopes (later evidence): revise Dalton's \"identical atoms\" postulate — same element, same proton count, variable neutron count.\n\n---",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Atomic Theory\"",
-        "[TEMPLATE] Key idea 2 for \"Atomic Theory\"",
-        "[TEMPLATE] Key idea 3 for \"Atomic Theory\""
+        "**Explanation A — The evidence-to-conclusion chain (procedural/conceptual):**\n\"Each historical model exists because of a SPECIFIC piece of evidence its predecessor couldn't explain. Dalton's fixed-ratio atoms explained definite proportions but said nothing about electricity — then Thomson's cathode-ray experiments found a light, negative particle INSIDE atoms, forcing the 'indivisible' postulate t",
+        "Core misconception to avoid: Rutherford's model retains Thomson's electron discovery unchanged; it revises only the positive-charge distribution, from diffuse to nuclear."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Atomic Theory\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Rutherford proved the plum-pudding model was completely wrong and that electrons don't exist in atoms.",
+          "correction": "Rutherford's model retains Thomson's electron discovery unchanged; it revises only the positive-charge distribution, from diffuse to nuclear."
+        },
+        {
+          "misconception": "All the alpha particles bounced back from the gold foil.",
+          "correction": "The overwhelming majority of alpha particles passed straight through (proving mostly empty space); only a tiny fraction deflected sharply (proving a small, dense, charged nucleus) — both facts together are required for the nuclear conclusion."
+        },
+        {
+          "misconception": "Dalton's postulate that atoms of the same element are identical needed a specific, targeted revision once isotopes were discovered — atoms of the same element share the same proton count (that's what makes them the same element, chemically) but can have different neutron counts, giving different masses. This is exactly the same 'targeted revision, not wholesale rejection' pattern you saw with Thomson and Rutherford.",
+          "correction": "Atoms of the same element share proton count (chemical identity) but can differ in neutron count (isotopes) — Dalton's \"identical\" postulate is the one later revised by isotope evidence."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Atomic Theory\""
+        "Demo 1 — Gold-foil deflection thought experiment: Present (physically, with a marbles-and-obstacle setup, or as a described thought experiment) the two competing predictions — uniform gentle deflection everywhere (Thomson's prediction) versus mostly-through-with-rare-sharp-bounces (Rutherford's actual finding) — and have students identify which observed pattern matches which model.",
+        "Demo 2 — \"Kept vs. changed\" timeline card sort: For each transition (Dalton→Thomson, Thomson→Rutherford, Dalton→isotope-revision), have students sort index cards into \"what was kept\" and \"what was changed,\" directly confronting MC-1's wholesale-rejection framing.",
+        "Demo 3 — Isotope notation practice: Present several isotope pairs (¹²C/¹⁴C, ¹H/²H/³H) and have students identify proton count (same, defines element) versus neutron count (different, defines isotope) for each pair."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Atomic Theory\"",
+        "setup": "What specifically did Rutherford's model change from Thomson's model, and what did it keep?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demo 1 — Gold-foil deflection thought experiment: Present (physically, with a marbles-and-obstacle setup, or as a described thought experiment) the two competing predictions — uniform gentle deflection everywhere (Thomson's prediction) versus mostly-through-with-rare-sharp-bounces (Rutherford's actual finding) — and have students identify which observed pattern matches which model.",
+          "Demo 2 — \"Kept vs. changed\" timeline card sort: For each transition (Dalton→Thomson, Thomson→Rutherford, Dalton→isotope-revision), have students sort index cards into \"what was kept\" and \"what was changed,\" directly confronting MC-1's wholesale-rejection framing.",
+          "Demo 3 — Isotope notation practice: Present several isotope pairs (¹²C/¹⁴C, ¹H/²H/³H) and have students identify proton count (same, defines element) versus neutron count (different, defines isotope) for each pair."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Atomic Theory\""
+        "expected_outcome": "Student correctly explains what each historical model kept and changed from its predecessor, correctly interprets the gold-foil deflection pattern (both halves), and correctly explains the proton/neutron basis of isotopes. Score ≥ 70%."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 [EXPLAIN]: Deliver Explanation A (evidence-to-conclusion chain), directly probing MC-1 (wholesale rejection framing).",
+          "TA-2 [DEMONSTRATE]: Demo 1 (gold-foil deflection thought experiment), directly probing MC-2 (all particles bounced back).",
+          "TA-3 [EXPLAIN + DEMONSTRATE]: Deliver Explanation B (why the deflection pattern implies a nucleus) alongside Demo 2 (kept vs. changed card sort).",
+          "TA-4 [PRACTICE]: Demo 3 (isotope notation practice), directly probing MC-3 (atoms of an element are identical)."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Atomic Theory from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"What specifically did Rutherford's model change from Thomson's model, and what did it keep?\"",
+          "FA-2: \"In the gold-foil experiment, most alpha particles passed straight through and only a rare few deflected sharply. Explain what EACH of these two observations, separately, tells you about atomic structure.\"",
+          "FA-3: \"Chlorine-35 and Chlorine-37 are both chlorine. Are they identical atoms? Explain using proton and neutron count.\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Atomic Theory\""
+        "mastery_signal": "Student correctly explains what each historical model kept and changed from its predecessor, correctly interprets the gold-foil deflection pattern (both halves), and correctly explains the proton/neutron basis of isotopes. Score ≥ 70%."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Atomic Theory\""
+        "**Near transfer:** Subatomic particles (the immediately following concept) quantifies the proton/neutron/electron properties this concept introduces qualitatively — mass, charge, and location within the nuclear model.\n\n**Far transfer:** Nuclear chemistry and radioactivity (isotope stability, half-life) build directly on the proton/neutron distinction established here; the general \"evidence forces targeted model revision\" pattern recurs throughout the history of science and is a transferable epis"
       ],
       "prerequisite_review_triggers": [
         "chem.found.matter"
@@ -577,48 +592,63 @@
     {
       "id": "asset.chem.atomic.subatomic-particles",
       "concept_id": "chem.atomic.subatomic-particles",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to recall \"Subatomic Particles\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Subatomic Particles\" pending authoring (target depth: foundational).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Subatomic Particles\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "**One-sentence definition:** An atom's identity is fixed entirely by its proton count (atomic number, Z); neutron count can vary (isotopes) without changing the element, and electron count can vary (ions) without changing either the element or the isotope — three independently adjustable counts, each with a specific, non-interchangeable role.\n\n**The core insight:** Three subatomic particles — proton (positive, defines element identity), neutron (neutral, adds mass without changing identity), electron (negative, adjustable via ionization) — combine in exactly three independent counts to fully describe any atomic species. Confusing WHICH count changes for isotopes (neutrons, not protons) versus WHICH count changes for ions (electrons, not protons) is the central discrimination this concept builds, on top of correctly distinguishing mass number (an integer particle count) from atomic mass (a weighted-average, rarely-integer measured quantity).\n\n**Conceptual chain:**\n1. Protons (mass ≈1 u, charge +1) define element identity — atomic number Z = proton count, and changing Z changes the element itself.\n2. Neutrons (mass ≈1 u, charge 0) add mass without affecting chemical identity — atoms of the same element (same Z) with different neutron counts are isotopes of each other.\n3. Electrons (mass ≈1/1836 u, negligible for mass number purposes, charge -1) determine charge balance — a neutral atom has electron count = proton count; gaining or losing electrons (without changing protons) creates an ion, not a different element or isotope.\n4. Mass number (A) = proton count + neutron count, always a whole integer for any specific isotope, computed by simple addition.\n5. Atomic mass (the number on the periodic table, e.g. chlorine's 35.45) is a WEIGHTED AVERAGE across all naturally-occurring isotopes' masses, weighted by their natural abundance — rarely an integer, and not the mass number of any single isotope.\n6. Ion charge directly tells you the electron adjustment: a +1 ion has LOST one electron (fewer electrons than protons); a -1 ion has GAINED one electron (more electrons than protons) — never adjust proton count to explain an ion's charge.\n\n**Central relations:**\n- Atomic number Z = proton count = defines the element.\n- Mass number A = protons + neutrons (integer, per isotope).\n- Atomic mass (periodic table value) = weighted average across isotope masses and abundances (not an integer, not any single isotope's mass number).\n- Ion charge = proton count − electron count (electrons adjust, protons never do, for ordinary chemical ionization).\n\n---",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Subatomic Particles\"",
-        "[TEMPLATE] Key idea 2 for \"Subatomic Particles\"",
-        "[TEMPLATE] Key idea 3 for \"Subatomic Particles\""
+        "**Explanation A — Three particles, three independent roles (conceptual):**\n\"Protons define WHICH element you have — change proton count, and you have a genuinely different element. Neutrons add mass without changing which element you have — change neutron count, and you have a different isotope of the SAME element. Electrons balance charge and are the ones that move during ionization — change elec",
+        "Core misconception to avoid: Mass number (integer, per isotope) and atomic mass (weighted average across isotopes, rarely integer) are different quantities describing different things."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Subatomic Particles\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "The atomic mass is 35.45, so the mass number is 35.45.",
+          "correction": "Mass number (integer, per isotope) and atomic mass (weighted average across isotopes, rarely integer) are different quantities describing different things."
+        },
+        {
+          "misconception": "C-12 and C-14 are different elements because their masses are different.",
+          "correction": "Isotopes share identical proton count (same element, same Z) and differ only in neutron count (different mass, potentially different nuclear stability) — never a different element."
+        },
+        {
+          "misconception": "Na⁺ has 11 electrons because sodium has 11 protons.",
+          "correction": "Ion formation changes electron count (never proton count); the ion's charge value directly indicates how many electrons were gained (negative ion) or lost (positive ion) relative to the neutral atom."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Subatomic Particles\""
+        "Demo 1 — Build-an-atom card exercise: Present target species (e.g. \"potassium-39, as a K⁺ ion\") and have students select the correct proton/neutron/electron counts, directly targeting all three misconceptions simultaneously.",
+        "Demo 2 — Chlorine isotope weighted-average calculation: Walk through the explicit weighted-average calculation for chlorine (75.77% × 35 + 24.23% × 37 = 35.45), directly targeting MC-1.",
+        "Demo 3 — Proton-electron charge table: Present a table of 4-5 common ions (Na⁺, Cl⁻, Mg²⁺, O²⁻) with proton count, electron count, and resulting charge computed explicitly for each, directly targeting MC-3."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Subatomic Particles\"",
+        "setup": "Boron has two natural isotopes: ¹⁰B (19.9% abundance) and ¹¹B (80.1% abundance). Is boron's periodic-table atomic mass closer to 10 or 11? Why?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demo 1 — Build-an-atom card exercise: Present target species (e.g. \"potassium-39, as a K⁺ ion\") and have students select the correct proton/neutron/electron counts, directly targeting all three misconceptions simultaneously.",
+          "Demo 2 — Chlorine isotope weighted-average calculation: Walk through the explicit weighted-average calculation for chlorine (75.77% × 35 + 24.23% × 37 = 35.45), directly targeting MC-1.",
+          "Demo 3 — Proton-electron charge table: Present a table of 4-5 common ions (Na⁺, Cl⁻, Mg²⁺, O²⁻) with proton count, electron count, and resulting charge computed explicitly for each, directly targeting MC-3."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Subatomic Particles\""
+        "expected_outcome": "Student correctly distinguishes mass number from atomic mass, correctly identifies isotopes as sharing element identity, and correctly computes electron count for a given ion. Score ≥ 70%."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 [DEMONSTRATE + EXPLAIN]: Demo 2 (chlorine weighted-average calculation) alongside Explanation B, directly probing MC-1.",
+          "TA-2 [EXPLAIN]: Deliver Explanation A (three particles, three roles) as the organizing framework.",
+          "TA-3 [PRACTICE]: Demo 1 (build-an-atom card exercise), directly probing MC-2.",
+          "TA-4 [PRACTICE]: Demo 3 (proton-electron charge table), directly probing MC-3."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Subatomic Particles from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Boron has two natural isotopes: ¹⁰B (19.9% abundance) and ¹¹B (80.1% abundance). Is boron's periodic-table atomic mass closer to 10 or 11? Why?\"",
+          "FA-2: \"Uranium-235 and uranium-238 — are these the same element? Justify using proton count.\"",
+          "FA-3: \"A magnesium ion Mg²⁺ has how many electrons, given magnesium's atomic number is 12?\""
         ],
         "bloom_alignment": "remember",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Subatomic Particles\""
+        "mastery_signal": "Student correctly distinguishes mass number from atomic mass, correctly identifies isotopes as sharing element identity, and correctly computes electron count for a given ion. Score ≥ 70%."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Subatomic Particles\""
+        "**Near transfer:** Atomic spectra and periodic classification (the immediate successor concepts) both depend directly on correctly distinguishing proton count (element identity, periodic table position) from electron behavior (spectra, reactivity).\n\n**Far transfer:** Nuclear chemistry and radioactivity (isotope stability directly depends on neutron-to-proton ratio); ionic bonding and compound formula prediction (directly depends on predictable electron gain/loss patterns); mass spectrometry (dir"
       ],
       "prerequisite_review_triggers": [
         "chem.atomic.atomic-theory"
@@ -627,48 +657,63 @@
     {
       "id": "asset.chem.atomic.electromagnetic-radiation",
       "concept_id": "chem.atomic.electromagnetic-radiation",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Electromagnetic Radiation\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Electromagnetic Radiation\" pending authoring (target depth: foundational).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Electromagnetic Radiation\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "**One-sentence definition:** Electromagnetic radiation's wavelength and frequency are inversely related through the constant speed of light (c = λν), and a photon's energy (E = hν) depends ONLY on frequency — never on the intensity (brightness/photon count) of the light source, a distinction that becomes essential for every spectroscopy and photochemistry concept that follows.\n\n**The core insight:** Two completely independent properties of light are constantly confused: how much energy EACH individual photon carries (set entirely by frequency, E = hν) versus how much TOTAL energy arrives (set by both photon energy AND how many photons arrive per second — intensity). A dim beam of high-frequency UV light delivers less total energy than a bright beam of low-frequency red light, yet each individual UV photon carries far more energy than each individual red photon — both statements are simultaneously true, describing different things, and conflating them is the central discrimination this concept builds.\n\n**Conceptual chain:**\n1. All electromagnetic radiation travels at the same constant speed c (in vacuum) — radio waves, visible light, X-rays, gamma rays all differ only in wavelength and frequency, never in speed.\n2. Wavelength (λ) and frequency (ν) are related by c = λν — since c is constant, wavelength and frequency are strictly INVERSELY related: higher frequency always means shorter wavelength, with no exceptions.\n3. The electromagnetic spectrum orders radiation types by frequency/wavelength: radio (lowest frequency, longest wavelength) through microwave, infrared, visible, ultraviolet, X-ray, to gamma rays (highest frequency, shortest wavelength).\n4. A photon's energy is given by E = hν (h = Planck's constant) — energy depends ONLY on frequency, meaning every photon of a given frequency carries exactly the same energy, regardless of how many such photons are present.\n5. Intensity (brightness) measures the TOTAL energy delivered per unit time, which depends on BOTH photon energy AND photon count (how many photons arrive per second) — a completely separate quantity from per-photon energy.\n6. Even very low-energy photons (like radio waves) carry SOME nonzero energy per photon; radio transmitters simply emit enormous numbers of these low-energy photons per second, delivering substantial total energy despite each individual photon being weak.\n\n**Central relations:**\n- c = λν (constant speed => inverse wavelength/frequency relationship).\n- E = hν (photon energy depends on frequency alone, never on intensity or photon count).\n- Intensity = (photon energy) × (photon count per second) — a genuinely separate quantity from per-photon energy.\n\n---",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Electromagnetic Radiation\"",
-        "[TEMPLATE] Key idea 2 for \"Electromagnetic Radiation\"",
-        "[TEMPLATE] Key idea 3 for \"Electromagnetic Radiation\""
+        "**Explanation A — The inverse wavelength-frequency relationship (procedural/conceptual):**\n\"The speed of light c never changes for electromagnetic radiation in vacuum. Since c = λν is a fixed product, wavelength and frequency must move in opposite directions — whenever frequency goes up, wavelength must come down, and vice versa, to keep their product equal to the same constant c. This is why gamm",
+        "Core misconception to avoid: Frequency and wavelength are strictly inversely related via c = λν; higher frequency always means shorter wavelength."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Electromagnetic Radiation\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "UV has a higher frequency and a longer wavelength.",
+          "correction": "Frequency and wavelength are strictly inversely related via c = λν; higher frequency always means shorter wavelength."
+        },
+        {
+          "misconception": "Bright light has more energy per photon than dim light.",
+          "correction": "Per-photon energy depends on frequency alone (E = hν); total delivered energy (intensity) depends on both per-photon energy and photon count — genuinely separate quantities."
+        },
+        {
+          "misconception": "A single gamma-ray photon has higher energy than a single radio-wave photon. Does that mean radio waves have zero energy? What would 10²⁸ radio photons deliver?",
+          "correction": "All electromagnetic radiation, including radio waves, carries nonzero energy per photon; low per-photon energy is compensated by high photon count to deliver substantial total energy."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Electromagnetic Radiation\""
+        "Demo 1 — c = λν rearrangement drill: Solve c = λν for wavelength given several different frequencies spanning the EM spectrum (radio to gamma), directly targeting MC-1.",
+        "Demo 2 — Dim-UV vs. bright-red energy comparison: Compute per-photon energy (E = hν) for a UV photon and a red photon, then separately discuss total delivered energy under different intensity assumptions, directly targeting MC-2.",
+        "Demo 3 — Radio-wave photon energy calculation: Compute E = hν explicitly for a typical radio frequency (~10⁶-10⁹ Hz), confirming a small but genuinely nonzero value, then multiply by a realistic photon-count-per-second to show substantial total delivered energy, directly targeting MC-3."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Electromagnetic Radiation\"",
+        "setup": "X-rays have a frequency of about 10¹⁸ Hz; radio waves have a frequency of about 10⁶ Hz. Which has the longer wavelength? Justify using c = λν.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demo 1 — c = λν rearrangement drill: Solve c = λν for wavelength given several different frequencies spanning the EM spectrum (radio to gamma), directly targeting MC-1.",
+          "Demo 2 — Dim-UV vs. bright-red energy comparison: Compute per-photon energy (E = hν) for a UV photon and a red photon, then separately discuss total delivered energy under different intensity assumptions, directly targeting MC-2.",
+          "Demo 3 — Radio-wave photon energy calculation: Compute E = hν explicitly for a typical radio frequency (~10⁶-10⁹ Hz), confirming a small but genuinely nonzero value, then multiply by a realistic photon-count-per-second to show substantial total delivered energy, directly targeting MC-3."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Electromagnetic Radiation\""
+        "expected_outcome": "Student correctly applies the inverse wavelength-frequency relationship, correctly distinguishes per-photon energy from total intensity, and correctly explains that all electromagnetic radiation carries nonzero photon energy. Score ≥ 70%."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 [DEMONSTRATE + EXPLAIN]: Demo 1 (c = λν rearrangement drill) alongside Explanation A, directly probing MC-1.",
+          "TA-2 [DEMONSTRATE + EXPLAIN]: Demo 2 (dim-UV vs. bright-red comparison) alongside Explanation B, directly probing MC-2.",
+          "TA-3 [DEMONSTRATE]: Demo 3 (radio-wave photon energy calculation), directly probing MC-3.",
+          "TA-4 [TRANSFER]: Preview the electromagnetic spectrum's role in atomic spectra and spectroscopy, connecting forward to the immediate successor concepts."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Electromagnetic Radiation from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"X-rays have a frequency of about 10¹⁸ Hz; radio waves have a frequency of about 10⁶ Hz. Which has the longer wavelength? Justify using c = λν.\"",
+          "FA-2: \"A dim violet light source and a bright infrared light source are compared. Which has higher energy per photon? Which could deliver more total energy? Explain both.\"",
+          "FA-3: \"Explain why radio waves are useful for long-distance communication despite each individual radio photon carrying very little energy.\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Electromagnetic Radiation\""
+        "mastery_signal": "Student correctly applies the inverse wavelength-frequency relationship, correctly distinguishes per-photon energy from total intensity, and correctly explains that all electromagnetic radiation carries nonzero photon energy. Score ≥ 70%."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Electromagnetic Radiation\""
+        "**Near transfer:** Atomic spectra and the photoelectric effect (both immediate successors) directly apply the E = hν relationship and the per-photon-vs-intensity distinction established here to explain specific atomic and material behavior.\n\n**Far transfer:** Spectroscopy (analytical and organic chemistry) uses the electromagnetic spectrum's frequency-to-energy relationship as its fundamental analytical tool; photochemistry depends on per-photon energy (not intensity) determining whether a speci"
       ],
       "prerequisite_review_triggers": [
         "chem.found.measurement"
@@ -677,48 +722,63 @@
     {
       "id": "asset.chem.atomic.atomic-spectra",
       "concept_id": "chem.atomic.atomic-spectra",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Atomic Spectra\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Atomic Spectra\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Atomic Spectra\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "**One-sentence definition:** A source's spectrum type (continuous vs. line) depends on whether its emitting particles are packed together (solid/liquid, continuous band of energies, continuous spectrum) or isolated (gas-phase atoms, discrete energy levels, line spectrum) — and emission and absorption spectra for the same substance are the SAME energy transitions viewed in opposite directions, not two independent fingerprints.\n\n**The core insight:** Whether a light source produces a continuous rainbow-like spectrum or a sparse set of discrete bright lines depends entirely on whether the emitting particles have continuous or discrete allowed energy levels — a hot solid filament's tightly-packed atoms produce continuous bands (like the band-structure concept in the Modern Physics domain), while isolated gas-phase atoms retain sharp, discrete energy levels, producing sharp spectral lines at specific wavelengths corresponding to specific electron energy-level transitions (via E = hν). Applying the Rydberg equation correctly requires careful bookkeeping about which energy level is \"initial\" (n_i) and which is \"final\" (n_f) for a GIVEN transition direction — a frequent source of sign errors.\n\n**Conceptual chain:**\n1. A CONTINUOUS spectrum (all wavelengths present, like a rainbow) arises from a hot, dense source (solid, liquid, or high-pressure gas) where particles are close enough together that their energy levels effectively merge into continuous bands (directly parallel to the band-structure concept for solids).\n2. A LINE spectrum (only specific, discrete wavelengths present) arises from isolated, low-pressure gas-phase atoms, whose electrons occupy discrete, sharp energy levels — light is emitted or absorbed only at the exact wavelengths corresponding to transitions between those specific discrete levels.\n3. When an excited electron falls from a higher energy level to a lower one, it EMITS a photon whose energy exactly equals the energy difference between the two levels (E_photon = E_initial − E_final, with initial being the higher, starting level).\n4. When ground-state (or lower-level) atoms absorb a photon of exactly the right energy, an electron is promoted from a lower level to a higher one — ABSORPTION is the same energy transition as emission, just running in the opposite direction.\n5. The Rydberg equation quantifies hydrogen's specific transition wavelengths: 1/λ = R(1/n_f² − 1/n_i²), where n_i is the level the electron STARTS at (higher energy for emission) and n_f is the level it ENDS at (lower energy for emission) — getting n_i and n_f backwards produces a sign error in the calculated wavelength.\n6. Emission and absorption spectra for the SAME element show lines at the SAME wavelengths (bright lines on a dark background for emission; dark lines on a continuous bright background for absorption) — because both represent the identical set of allowed energy-level transitions, just traversed in opposite directions.\n\n**Central relations:**\n- Continuous spectrum <- dense/solid source (merged, continuous energy bands).\n- Line spectrum <- isolated gas-phase atoms (discrete, sharp energy levels).\n- Emission: n_i (higher, start) -> n_f (lower, end); Absorption: same transition, opposite direction, same wavelength.\n- Rydberg equation: 1/λ = R(1/n_f² − 1/n_i²), with n_i always the HIGHER-energy level for an emission transition.\n\n---",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Atomic Spectra\"",
-        "[TEMPLATE] Key idea 2 for \"Atomic Spectra\"",
-        "[TEMPLATE] Key idea 3 for \"Atomic Spectra\""
+        "**Explanation A — Dense vs. isolated particles determine spectrum type (conceptual):**\n\"A source's spectrum type depends entirely on whether its particles have merged, continuous energy levels (a hot, dense solid or liquid, giving a continuous rainbow spectrum) or discrete, sharp energy levels (isolated, low-pressure gas-phase atoms, giving a line spectrum). The determining factor is the physical ",
+        "Core misconception to avoid: Spectrum type (continuous vs. line) depends on whether the source's particles have merged, continuous energy bands (dense solid/liquid) or discrete, isolated energy levels (gas-phase atoms) — not on whether the source visibly glows."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Atomic Spectra\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Both give the same kind of spectrum — they both glow.",
+          "correction": "Spectrum type (continuous vs. line) depends on whether the source's particles have merged, continuous energy bands (dense solid/liquid) or discrete, isolated energy levels (gas-phase atoms) — not on whether the source visibly glows."
+        },
+        {
+          "misconception": "n_i = 2 because it's the initial level before the electron moves.",
+          "correction": "For an emission transition, n_i is always the higher (starting) energy level and n_f is always the lower (ending) energy level, regardless of which number is mentioned first in a problem's phrasing."
+        },
+        {
+          "misconception": "If hydrogen's Balmer series has a red line at 656 nm in emission, would you expect to see a dark line at 656 nm in the absorption spectrum of cool hydrogen? Why?",
+          "correction": "Emission and absorption spectra for the same substance show lines at identical wavelengths, since both represent the same energy-level transitions traversed in opposite directions, not two independent fingerprints."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Atomic Spectra\""
+        "Demo 1 — Tungsten vs. neon spectrum comparison: Present (or describe) the continuous rainbow spectrum of a tungsten filament directly beside the sparse line spectrum of a neon discharge tube, directly targeting MC-1.",
+        "Demo 2 — Hydrogen energy-level transition diagram: Draw the hydrogen energy-level diagram with the n=4-to-n=2 transition explicitly labeled, showing n_i=4 (starting, higher) and n_f=2 (ending, lower), directly targeting MC-2.",
+        "Demo 3 — Emission/absorption same-wavelength overlay: Present hydrogen's emission spectrum and absorption spectrum stacked directly on top of each other at the same wavelength scale, showing the lines align exactly, directly targeting MC-3."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Atomic Spectra\"",
+        "setup": "A star's outer atmosphere consists of low-density, isolated gas atoms. Would you expect its light to show a continuous or line spectrum? Justify.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demo 1 — Tungsten vs. neon spectrum comparison: Present (or describe) the continuous rainbow spectrum of a tungsten filament directly beside the sparse line spectrum of a neon discharge tube, directly targeting MC-1.",
+          "Demo 2 — Hydrogen energy-level transition diagram: Draw the hydrogen energy-level diagram with the n=4-to-n=2 transition explicitly labeled, showing n_i=4 (starting, higher) and n_f=2 (ending, lower), directly targeting MC-2.",
+          "Demo 3 — Emission/absorption same-wavelength overlay: Present hydrogen's emission spectrum and absorption spectrum stacked directly on top of each other at the same wavelength scale, showing the lines align exactly, directly targeting MC-3."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Atomic Spectra\""
+        "expected_outcome": "Student correctly explains why a source produces a continuous vs. line spectrum, correctly assigns n_i/n_f for a given transition, and correctly explains the emission/absorption symmetry. Score ≥ 75%."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 [DEMONSTRATE + EXPLAIN]: Demo 1 (tungsten vs. neon comparison) alongside Explanation A, directly probing MC-1.",
+          "TA-2 [DEMONSTRATE + EXPLAIN]: Demo 2 (hydrogen transition diagram) alongside Explanation B, directly probing MC-2.",
+          "TA-3 [DEMONSTRATE]: Demo 3 (emission/absorption overlay), directly probing MC-3.",
+          "TA-4 [PRACTICE]: Rydberg equation practice problems for several different n_i/n_f transitions, including both emission and absorption directions."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Atomic Spectra from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A star's outer atmosphere consists of low-density, isolated gas atoms. Would you expect its light to show a continuous or line spectrum? Justify.\"",
+          "FA-2: \"An electron transitions from n=5 to n=1, emitting a photon (part of the Lyman series). Identify n_i and n_f, and state the sign of (1/n_f² − 1/n_i²).\"",
+          "FA-3: \"Sodium's emission spectrum shows a bright yellow line at 589 nm. Predict what a cool sodium vapor sample would show in its absorption spectrum, and explain why.\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Atomic Spectra\""
+        "mastery_signal": "Student correctly explains why a source produces a continuous vs. line spectrum, correctly assigns n_i/n_f for a given transition, and correctly explains the emission/absorption symmetry. Score ≥ 75%."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Atomic Spectra\""
+        "**Near transfer:** The Bohr model (the immediate successor) provides the theoretical mechanism (quantized angular momentum, specific allowed orbits) explaining why hydrogen's energy levels take the discrete values this concept treats empirically.\n\n**Far transfer:** Astronomical spectroscopy (determining distant stars' chemical composition from their absorption spectra) is one of the most far-reaching real-world applications of the emission/absorption symmetry principle established here; analytic"
       ],
       "prerequisite_review_triggers": [
         "chem.atomic.electromagnetic-radiation",
@@ -728,48 +788,62 @@
     {
       "id": "asset.chem.atomic.bohr-model",
       "concept_id": "chem.atomic.bohr-model",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Bohr Model of the Atom\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Bohr Model of the Atom\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Bohr Model of the Atom\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Bohr's model places electrons in fixed circular orbits (\"shells\") of specific allowed energies around the nucleus, with electrons absorbing or emitting a photon of exact energy equal to the gap between two allowed orbits when they jump between them — successfully explaining the discrete line spectrum of hydrogen (and giving the correct formula for hydrogen's spectral lines) by postulating that angular momentum is quantized, even though it was later superseded by the quantum mechanical model (electron clouds/orbitals) for anything beyond hydrogen-like one-electron systems.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Bohr Model of the Atom\"",
-        "[TEMPLATE] Key idea 2 for \"Bohr Model of the Atom\"",
-        "[TEMPLATE] Key idea 3 for \"Bohr Model of the Atom\""
+        "Bohr proposed that electrons orbit the nucleus only in specific allowed circular paths, each with a fixed energy, and that atoms emit or absorb light only in specific-energy photon \"jumps\" between these allowed orbits — explaining why hydrogen's emission spectrum shows sharp lines at specific wavelengths rather than a continuous smear of colors. The model's radius formula (rₙ = n²r₁) and energy formula (Eₙ = −13.6 eV/n² for hydrogen) together correctly predict hydrogen's observed spectral lines.",
+        "The Bohr model was later superseded by the full quantum mechanical model (Schrödinger's equation, electron probability clouds/orbitals instead of fixed circular paths) because it cannot correctly predict multi-electron atom behavior and conflicts with the wave nature of matter (de Broglie) and the uncertainty principle — but it remains the historically pivotal first successful quantum model of the atom and stays quantitatively accurate for hydrogen-like one-electron species.",
+        "Core misconception to avoid: As n increases, both orbit radius AND energy increase (energy becomes less negative, approaching zero at n=∞, meaning the electron is ionized/free)."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Bohr Model of the Atom\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Higher energy means closer to the nucleus, like being 'more attracted in.'",
+          "correction": "As n increases, both orbit radius AND energy increase (energy becomes less negative, approaching zero at n=∞, meaning the electron is ionized/free)."
+        },
+        {
+          "misconception": "The Bohr model is how all atoms work.",
+          "correction": "Distinguish \"Bohr diagrams as a bookkeeping tool for electron count per shell\" (still commonly used, approximately valid) from \"the Bohr model as a physically accurate description of orbits and energies\" (valid only for hydrogen-like one-electron atoms)."
+        },
+        {
+          "misconception": "The Bohr model is wrong, so it doesn't matter.",
+          "correction": "The Bohr model is a valid, quantitatively accurate approximation for one-electron systems and a useful qualitative bookkeeping tool elsewhere, even though the full quantum mechanical model (orbitals, not orbits) is needed for a complete, general description."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Bohr Model of the Atom\""
+        "Demonstration 1 (hydrogen spectrum): Show a hydrogen discharge tube through a diffraction grating or spectroscope — students see a small number of sharp colored lines (the Balmer series in the visible range), not a rainbow, providing the direct observational anchor for \"only certain photon energies are emitted.\"",
+        "Demonstration 2 (energy-level ladder): Build a physical or digital ladder diagram with unequally-spaced rungs (matching −13.6/n² spacing, which compresses as n increases) and have students draw arrows for all possible n=3→lower transitions, then match arrow lengths to observed spectral line positions."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Bohr Model of the Atom\"",
+        "setup": "Which is farther from the nucleus in the Bohr model: n=2 or n=4? Which has higher energy?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (hydrogen spectrum): Show a hydrogen discharge tube through a diffraction grating or spectroscope — students see a small number of sharp colored lines (the Balmer series in the visible range), not a rainbow, providing the direct observational anchor for \"only certain photon energies are emitted.\"",
+          "Demonstration 2 (energy-level ladder): Build a physical or digital ladder diagram with unequally-spaced rungs (matching −13.6/n² spacing, which compresses as n increases) and have students draw arrows for all possible n=3→lower transitions, then match arrow lengths to observed spectral line positions."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Bohr Model of the Atom\""
+        "expected_outcome": "Student can (a) correctly state how orbit radius and energy both change with n, (b) correctly identify the scope of validity of Bohr's quantitative model (hydrogen-like one-electron systems only), (c) explain why an outdated/superseded model can still be quantitatively useful within its domain."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the hydrogen discharge-tube spectrum (real or video) as the observational anchor.",
+          "TA-2 (TELL): State the radius and energy formulas explicitly, computing n=1,2,3 values together with the student.",
+          "TA-3 (DO): Student computes a predicted spectral line wavelength from the energy-level formula and compares it to a given experimental value.",
+          "TA-4 (TEST-THINKING): Present MC-2's claim about multi-electron atoms and ask the student to predict, using electron-electron repulsion reasoning, whether Bohr's simple formula would still match experiment for helium."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Bohr Model of the Atom from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Which is farther from the nucleus in the Bohr model: n=2 or n=4? Which has higher energy?\"",
+          "FA-2: \"Would Bohr's exact formula correctly predict the ionization energy of lithium? Why or why not?\"",
+          "FA-3: \"A classmate says 'the Bohr model is just wrong so we shouldn't bother learning it.' How would you respond?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Bohr Model of the Atom\""
+        "mastery_signal": "Student can (a) correctly state how orbit radius and energy both change with n, (b) correctly identify the scope of validity of Bohr's quantitative model (hydrogen-like one-electron systems only), (c) explain why an outdated/superseded model can still be quantitatively useful within its domain."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Bohr Model of the Atom\""
+        "Feeds directly into `chem.atomic.quantum-numbers` (n as the principal quantum number generalizes Bohr's orbit index into the full quantum mechanical description) and reinforces `chem.atomic.atomic-spectra` (the prerequisite spectral observations this model was built to explain)."
       ],
       "prerequisite_review_triggers": [
         "chem.atomic.atomic-spectra"
@@ -778,48 +852,60 @@
     {
       "id": "asset.chem.atomic.quantum-numbers",
       "concept_id": "chem.atomic.quantum-numbers",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Quantum Numbers\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Quantum Numbers\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Quantum Numbers\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Four quantum numbers fully specify an electron's state in an atom: principal (n, shell/energy/size, values 1,2,3...), azimuthal (l, subshell/shape, values 0 to n−1, labeled s/p/d/f), magnetic (mₗ, orbital orientation, values −l to +l), and spin (mₛ, intrinsic electron spin, ±½) — with the Pauli exclusion principle requiring every electron in an atom to have a unique (n, l, mₗ, mₛ) combination, and the total orbital count per shell (n²) and electron capacity (2n²) following directly from counting valid combinations.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Quantum Numbers\"",
-        "[TEMPLATE] Key idea 2 for \"Quantum Numbers\"",
-        "[TEMPLATE] Key idea 3 for \"Quantum Numbers\""
+        "Four quantum numbers together uniquely specify each electron's state. n (principal) sets the shell — roughly, energy and size. l (azimuthal) sets the subshell shape within that shell, running from 0 to n−1 and labeled s, p, d, f for l=0,1,2,3. mₗ (magnetic) sets orientation within a subshell, running from −l to +l. mₛ (spin) is the electron's own intrinsic ±½ property, independent of n, l, and mₗ. The Pauli exclusion principle requires every electron in an atom to have a unique full (n, l, mₗ, mₛ) combination.",
+        "The total number of orbitals in shell n is n² (sum of 2l+1 across l=0 to n−1), and since each orbital holds up to 2 electrons (one of each mₛ), the shell's electron capacity is 2n².",
+        "Core misconception to avoid: l runs from 0 to n−1 inclusive; for n=3, l=0,1,2 (s,p,d)."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Quantum Numbers\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "l = 1, 2, 3 because n = 3.",
+          "correction": "l runs from 0 to n−1 inclusive; for n=3, l=0,1,2 (s,p,d)."
+        },
+        {
+          "misconception": "mₗ = +1 is the x-direction.",
+          "correction": "mₗ is a quantum label for angular momentum orientation relative to a chosen quantization axis; the familiar p_x/p_y/p_z shapes are specific real combinations built from the mₗ eigenstates."
+        },
+        {
+          "misconception": "The 1s orbital is spin-up and the 1s orbital filled is spin-down, so the orbital has mₛ = +½ first.",
+          "correction": "mₛ belongs to the electron, not the orbital; orbitals are spatial regions, spin is an intrinsic property carried only by the electrons occupying them."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Quantum Numbers\""
+        "Demonstration 1 (allowed-set table construction): For each n from 1 to 4, have students build the full list of allowed (n, l, mₗ, mₛ) combinations from the nesting rules alone, then count totals and verify the 2n² formula — students discover the pattern rather than memorize it."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Quantum Numbers\"",
+        "setup": "For n=3, list all allowed values of l.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (allowed-set table construction): For each n from 1 to 4, have students build the full list of allowed (n, l, mₗ, mₛ) combinations from the nesting rules alone, then count totals and verify the 2n² formula — students discover the pattern rather than memorize it."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Quantum Numbers\""
+        "expected_outcome": "Student can (a) list all valid (n, l, mₗ, mₛ) sets for n=1 and n=2 without prompting, (b) identify an invalid set and name the exact violated rule, (c) count orbitals and max electrons for a given n, (d) state the physical significance of each of the four quantum numbers."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Build the n=1 through n=4 allowed-combination table live with the student, subshell by subshell.",
+          "TA-2 (TELL): State the l=0 to n−1 rule explicitly and immediately connect it to why 1s exists but 1p does not.",
+          "TA-3 (DO): Student computes the orbital count and electron capacity for a given n using the nesting rules.",
+          "TA-4 (TEST-THINKING): Present MC-3's \"the orbital has spin\" claim and ask the student to argue against it using the empty-orbital case."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Quantum Numbers from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"For n=3, list all allowed values of l.\"",
+          "FA-2: \"If mₗ=+1 for a p orbital, which direction in space does it point?\"",
+          "FA-3: \"Can we say the 1s orbital has mₛ=+½?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Quantum Numbers\""
+        "mastery_signal": "Student can (a) list all valid (n, l, mₗ, mₛ) sets for n=1 and n=2 without prompting, (b) identify an invalid set and name the exact violated rule, (c) count orbitals and max electrons for a given n, (d) state the physical significance of each of the four quantum numbers."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Quantum Numbers\""
+        "Feeds directly into `chem.atomic.orbitals` (orbital shapes are the spatial visualization of the l and mₗ values established here) and supports electron configuration work throughout the periodic-trends domain."
       ],
       "prerequisite_review_triggers": [
         "chem.atomic.bohr-model"
@@ -828,48 +914,62 @@
     {
       "id": "asset.chem.atomic.orbitals",
       "concept_id": "chem.atomic.orbitals",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Atomic Orbitals\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Atomic Orbitals\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Atomic Orbitals\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Atomic orbitals are three-dimensional probability distributions for finding an electron, with characteristic shapes determined by their quantum numbers: s orbitals are spherical (l=0), p orbitals are dumbbell-shaped along one axis (l=1, three orientations), d orbitals have more complex four-lobed (mostly) or dumbbell-plus-torus (dz²) shapes (l=2, five orientations) — each orbital has angular nodes (= l, planes/surfaces of zero probability from angular shape) and radial nodes (= n − l − 1, spherical shells of zero probability from the radial wavefunction), and in multielectron atoms, orbitals sharing the same n but different l split into different energies due to shielding and penetration.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Atomic Orbitals\"",
-        "[TEMPLATE] Key idea 2 for \"Atomic Orbitals\"",
-        "[TEMPLATE] Key idea 3 for \"Atomic Orbitals\""
+        "Each orbital's shape and node structure follows directly from its quantum numbers. The angular quantum number l sets both the orbital's basic shape family (s spherical, p dumbbell, d more complex) and the number of angular nodes (= l). The principal quantum number n, combined with l, sets the number of radial nodes (= n − l − 1), which shows up as additional concentric probability shells within the basic shape.",
+        "In hydrogen (one electron, no shielding), orbital energy depends only on n. In multielectron atoms, different l values within the same n shell penetrate the nucleus's charge differently — lower-l orbitals (like 2s) penetrate more, feel a higher effective nuclear charge, and sit at lower energy than higher-l orbitals of the same n (like 2p) — breaking hydrogen's n-only degeneracy.",
+        "Core misconception to avoid: Four of the five d orbitals are four-lobed clover shapes; the fifth, dz², is a dumbbell-plus-torus shape, all consistent with l=2's two angular nodes."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Atomic Orbitals\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "All d orbitals have 4 lobes in a clover-leaf pattern.",
+          "correction": "Four of the five d orbitals are four-lobed clover shapes; the fifth, dz², is a dumbbell-plus-torus shape, all consistent with l=2's two angular nodes."
+        },
+        {
+          "misconception": "3p has n − 1 = 2 radial nodes.",
+          "correction": "angular nodes = l; radial nodes = n − l − 1; total nodes = angular + radial = n − 1 (self-consistent, always)."
+        },
+        {
+          "misconception": "In any atom, 2s and 2p are at the same energy because they have the same n.",
+          "correction": "In multielectron atoms, orbital energy depends on both n and l — 2s sits below 2p, which would sit below a hypothetical 2d, due to shielding and penetration differences."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Atomic Orbitals\""
+        "Demonstration 1 (node counting): Give students a table of (n, l) pairs and have them compute angular nodes, radial nodes, and total nodes for each, verifying the totals always equal n−1.",
+        "Demonstration 2 (d-orbital shape comparison): Present 3D renderings or models of all five d orbitals side by side and have students identify which one (dz²) breaks the four-lobed clover pattern."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Atomic Orbitals\"",
+        "setup": "Draw or describe the dz² orbital. How is it different from dxy?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (node counting): Give students a table of (n, l) pairs and have them compute angular nodes, radial nodes, and total nodes for each, verifying the totals always equal n−1.",
+          "Demonstration 2 (d-orbital shape comparison): Present 3D renderings or models of all five d orbitals side by side and have students identify which one (dz²) breaks the four-lobed clover pattern."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Atomic Orbitals\""
+        "expected_outcome": "Student can (a) describe dz²'s shape correctly and distinguish it from the four clover-leaf d orbitals, (b) compute angular and radial node counts separately for any given (n, l), (c) explain why 2s sits below 2p in a multielectron atom using penetration/shielding."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present 3D models or renderings of s, p, and all five d orbital shapes, explicitly including dz².",
+          "TA-2 (TELL): State the angular-node/radial-node formulas explicitly, worked through for 3s, 3p, 3d.",
+          "TA-3 (DO): Student computes angular and radial node counts for a given (n, l) pair not previously worked as an example.",
+          "TA-4 (TEST-THINKING): Present MC-3's claim about carbon's 2s/2p energies and ask the student to argue for or against it using penetration/shielding reasoning."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Atomic Orbitals from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Draw or describe the dz² orbital. How is it different from dxy?\"",
+          "FA-2: \"How many radial nodes does a 3p orbital have? How many angular nodes?\"",
+          "FA-3: \"Is 2s at higher, lower, or the same energy as 2p in a carbon atom? Why?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Atomic Orbitals\""
+        "mastery_signal": "Student can (a) describe dz²'s shape correctly and distinguish it from the four clover-leaf d orbitals, (b) compute angular and radial node counts separately for any given (n, l), (c) explain why 2s sits below 2p in a multielectron atom using penetration/shielding."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Atomic Orbitals\""
+        "Feeds directly into `chem.atomic.electronic-config` (the Aufbau filling order depends on the energy splitting established here), `chem.atomic.quantum-mech-model` (formalizes the wavefunction origin of these shapes and nodes), `chem.bond.mo-theory` (orbital shapes determine overlap patterns in molecular orbital formation), and `chem.coord.cft` (d-orbital shapes are the foundation of crystal field theory's splitting diagrams)."
       ],
       "prerequisite_review_triggers": [
         "chem.atomic.quantum-numbers"
@@ -878,48 +978,62 @@
     {
       "id": "asset.chem.atomic.electronic-config",
       "concept_id": "chem.atomic.electronic-config",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Electronic Configuration\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Electronic Configuration\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Electronic Configuration\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Electron configurations are built using the Aufbau principle (fill lowest-energy orbitals first, in the order set by (n+l) rules with 4s filling before 3d), Hund's rule (within a degenerate set of orbitals, electrons occupy separate orbitals singly before pairing, to maximize unpaired spins), and the Pauli exclusion principle (no two electrons share all four quantum numbers) — with two well-known exceptions (chromium and copper) where an electron shifts from s to d to achieve a more stable half-filled or fully-filled d subshell via exchange energy, and with ionization of d-block atoms removing electrons from 4s first, not 3d, despite Aufbau's filling order.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Electronic Configuration\"",
-        "[TEMPLATE] Key idea 2 for \"Electronic Configuration\"",
-        "[TEMPLATE] Key idea 3 for \"Electronic Configuration\""
+        "Electron configurations are built by filling orbitals from lowest to highest energy (Aufbau), obeying the Pauli exclusion principle (no two electrons share all four quantum numbers) and Hund's rule (within a set of same-energy orbitals, spread electrons out singly before pairing, to maximize unpaired spins and lower energy via exchange interactions). Two exceptions, chromium and copper, arise because promoting one electron from s to d achieves a half-filled or fully-filled d subshell, which gains enough exchange-energy stabilization to outweigh the small energy cost of the promotion.",
+        "Once an atom's orbitals are filled, the relative energy ordering of 3d and 4s (and analogous pairs in later periods) reverses compared to the filling order — 3d becomes lower in energy than 4s in the filled/ionized configuration, so ionization always removes the highest-n electrons (4s) first, distinct from the order those electrons were originally added.",
+        "Core misconception to avoid: Ionization always removes electrons from the highest-n orbital present in the current ion — for transition metals, this means 4s electrons are removed before 3d electrons, regardless of the filling order used to build the neutral atom."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Electronic Configuration\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Fe²⁺ is [Ar] 3d⁴ 4s² because we remove the 3d electrons which are highest in energy according to the Aufbau order.",
+          "correction": "Ionization always removes electrons from the highest-n orbital present in the current ion — for transition metals, this means 4s electrons are removed before 3d electrons, regardless of the filling order used to build the neutral atom."
+        },
+        {
+          "misconception": "Hund's rule means each electron goes in its own orbital, so N has seven separate boxes each with one electron.",
+          "correction": "Within a degenerate set (e.g., the three 2p orbitals), place one electron in each before pairing any; lower-energy non-degenerate orbitals (like 2s) fill and pair normally before the degenerate set is even touched."
+        },
+        {
+          "misconception": "I only memorised Cr and Cu as exceptions. I can't predict Mo.",
+          "correction": "Check any d-block element's expected configuration for whether promoting one s electron into d would produce a half-filled (d⁵) or fully-filled (d¹⁰) subshell — if so, expect the same anomalous promotion seen in Cr and Cu."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Electronic Configuration\""
+        "Demonstration 1 (orbital-box construction): Build nitrogen's full orbital-box diagram step by step, explicitly marking which orbitals form a degenerate set before applying Hund's rule only within that set.",
+        "Demonstration 2 (Mo prediction from Cr pattern): Have students apply the exchange-energy reasoning used for chromium to predict molybdenum's actual configuration, then reveal the correct answer as confirmation."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Electronic Configuration\"",
+        "setup": "Write the electron configuration of Fe²⁺. Explain which electrons are removed first.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (orbital-box construction): Build nitrogen's full orbital-box diagram step by step, explicitly marking which orbitals form a degenerate set before applying Hund's rule only within that set.",
+          "Demonstration 2 (Mo prediction from Cr pattern): Have students apply the exchange-energy reasoning used for chromium to predict molybdenum's actual configuration, then reveal the correct answer as confirmation."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Electronic Configuration\""
+        "expected_outcome": "Student can (a) correctly write configurations for d-block cations with 4s removed first, (b) correctly apply Hund's rule only within a degenerate set, (c) predict an anomalous half-filled/full-filled configuration for an unfamiliar d-block element."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the orbital-box diagram for nitrogen, explicitly marking the degenerate 2p set.",
+          "TA-2 (TELL): State the filling-vs-removal energy-order distinction explicitly, worked through for Fe/Fe²⁺.",
+          "TA-3 (DO): Student writes the configuration for a given d-block cation, applying the 4s-removed-first rule.",
+          "TA-4 (TEST-THINKING): Present the molybdenum probe and ask the student to predict its anomalous configuration using the exchange-energy argument from chromium."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Electronic Configuration from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Write the electron configuration of Fe²⁺. Explain which electrons are removed first.\"",
+          "FA-2: \"Draw the orbital box diagram for nitrogen. How many unpaired electrons does it have?\"",
+          "FA-3: \"Molybdenum is directly below Cr in the periodic table. Predict its actual configuration.\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Electronic Configuration\""
+        "mastery_signal": "Student can (a) correctly write configurations for d-block cations with 4s removed first, (b) correctly apply Hund's rule only within a degenerate set, (c) predict an anomalous half-filled/full-filled configuration for an unfamiliar d-block element."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Electronic Configuration\""
+        "Feeds directly into `chem.dblock.general` (transition-metal chemistry assumes fluent d-block ion configuration writing) and `chem.period.modern-periodic-law` (periodic trends are explained by electron configuration patterns established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.atomic.orbitals"
@@ -928,48 +1042,64 @@
     {
       "id": "asset.chem.atomic.photoelectric-effect",
       "concept_id": "chem.atomic.photoelectric-effect",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Photoelectric Effect and Dual Nature\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Photoelectric Effect and Dual Nature\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Photoelectric Effect and Dual Nature\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Photoelectron ejection is governed by a per-photon energy threshold (hν≥φ, the work function), NEVER by total light intensity — each electron interacts with exactly one photon at a time, so no amount of sub-threshold-frequency photons, however intense, can eject an electron, while even a single dim above-threshold photon ejects one instantly; the de Broglie wavelength (λ=h/mv) applies universally to all matter, but is only OBSERVABLE when λ is comparable to the object's own characteristic dimensions — for macroscopic objects (a tennis ball) λ is ~10⁻³⁴m, utterly unobservable, while for electrons near atoms (~10⁻¹⁰m) λ is ~1–10nm, genuinely significant; and the Heisenberg Uncertainty Principle is a genuine, intrinsic property of quantum systems arising from wave-particle duality itself, NEVER a statement about instrument imprecision — even a perfect position measurement necessarily disturbs momentum, because probing position at the quantum scale requires an interaction (e.g., a photon) that transfers unknown momentum.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Photoelectric Effect and Dual Nature\"",
-        "[TEMPLATE] Key idea 2 for \"Photoelectric Effect and Dual Nature\"",
-        "[TEMPLATE] Key idea 3 for \"Photoelectric Effect and Dual Nature\""
+        "The photoelectric effect reveals light's particle-like, quantized nature — each photon carries a fixed energy E=hν, and ejection of a photoelectron is a one-photon, one-electron event requiring hν≥φ (the work function). Intensity determines only how many such above-threshold photons arrive per second (hence how many electrons are ejected), never whether ejection is possible at all — a fact that cannot be explained by treating light as a continuous wave whose cumulative energy eventually suffices.",
+        "The de Broglie relation (λ=h/mv) extends wave-particle duality to matter, but observable wave effects require λ comparable to the object's own size — utterly negligible for macroscopic objects, significant for subatomic particles. The Heisenberg Uncertainty Principle is a further, intrinsic consequence of this duality: measuring position at the quantum scale necessarily involves a physical interaction that disturbs momentum, a fundamental limit on simultaneous knowledge, not an artifact of instrument quality.",
+        "Core misconception to avoid: Photoelectron ejection depends solely on whether a single photon's energy (hν) meets or exceeds the work function (φ) — intensity controls only the NUMBER of electrons ejected once threshold is met, never whether ejection occurs."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Photoelectric Effect and Dual Nature\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "If you shine enough light, eventually it will eject electrons.",
+          "correction": "Photoelectron ejection depends solely on whether a single photon's energy (hν) meets or exceeds the work function (φ) — intensity controls only the NUMBER of electrons ejected once threshold is met, never whether ejection occurs."
+        },
+        {
+          "misconception": "Everything has a wave nature — even people.",
+          "correction": "The de Broglie relation applies universally as a formula, but observable wave behavior requires λ to be comparable to the object's characteristic size — always check the actual numerical scale before claiming observable wave nature."
+        },
+        {
+          "misconception": "The uncertainty principle just means our instruments aren't precise enough.",
+          "correction": "The uncertainty principle reflects an intrinsic property of quantum systems (Δx·Δp≥ħ/2), arising from the act of measurement itself disturbing the system — never attributable to instrument imprecision, however advanced."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Photoelectric Effect and Dual Nature\""
+        "Demonstration 1 (KE vs. frequency graph): Present the photoelectric KE-vs-frequency graph explicitly, showing the sharp threshold ν₀ and the linear KE=hν−φ relationship above it, with intensity's role (electron count only) marked separately.",
+        "Demonstration 2 (de Broglie scale comparison): Compute λ explicitly for a tennis ball and for an electron near an atom side by side, making the observability gap concrete via direct order-of-magnitude comparison.",
+        "Demonstration 3 (measurement-disturbance argument): Walk through why probing an electron's position (e.g., via a photon) necessarily transfers momentum, establishing the uncertainty principle's intrinsic origin."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Photoelectric Effect and Dual Nature\"",
+        "setup": "Bright red light (below threshold) vs. dim UV light (above threshold) on caesium — which ejects electrons, and why?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (KE vs. frequency graph): Present the photoelectric KE-vs-frequency graph explicitly, showing the sharp threshold ν₀ and the linear KE=hν−φ relationship above it, with intensity's role (electron count only) marked separately.",
+          "Demonstration 2 (de Broglie scale comparison): Compute λ explicitly for a tennis ball and for an electron near an atom side by side, making the observability gap concrete via direct order-of-magnitude comparison.",
+          "Demonstration 3 (measurement-disturbance argument): Walk through why probing an electron's position (e.g., via a photon) necessarily transfers momentum, establishing the uncertainty principle's intrinsic origin."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Photoelectric Effect and Dual Nature\""
+        "expected_outcome": "Student can (a) correctly predict ejection occurrence from frequency alone, independent of intensity, (b) correctly compute de Broglie wavelength and assess its observability against an object's characteristic scale, (c) correctly explain the uncertainty principle as intrinsic, not instrumental."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the KE-vs-frequency graph, highlighting the sharp threshold frequency and intensity's separate role.",
+          "TA-2 (TELL): State Einstein's photoelectric equation (KE=hν−φ) explicitly, anchored to the per-photon, one-electron mechanism.",
+          "TA-3 (DO): Student computes de Broglie wavelength for both a macroscopic object and a subatomic particle, comparing observability.",
+          "TA-4 (TEST-THINKING): Present the \"perfect instrument\" probe and ask the student to justify why uncertainty persists even with flawless equipment."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Photoelectric Effect and Dual Nature from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Bright red light (below threshold) vs. dim UV light (above threshold) on caesium — which ejects electrons, and why?\"",
+          "FA-2: \"Calculate the de Broglie wavelength of a 60g tennis ball at 50m/s. Is its wave nature observable?\"",
+          "FA-3: \"Would a perfect, zero-error position-measuring device let us know both position and momentum exactly?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Photoelectric Effect and Dual Nature\""
+        "mastery_signal": "Student can (a) correctly predict ejection occurrence from frequency alone, independent of intensity, (b) correctly compute de Broglie wavelength and assess its observability against an object's characteristic scale, (c) correctly explain the uncertainty principle as intrinsic, not instrumental."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Photoelectric Effect and Dual Nature\""
+        "Feeds directly into `chem.atomic.quantum-mech-model` (the quantum mechanical model of the atom directly requires fluent wave-particle duality reasoning and correct handling of measurement limits established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.atomic.electromagnetic-radiation"
@@ -978,48 +1108,64 @@
     {
       "id": "asset.chem.atomic.quantum-mech-model",
       "concept_id": "chem.atomic.quantum-mech-model",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Quantum Mechanical Model\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Quantum Mechanical Model\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Quantum Mechanical Model\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "ψ (the wave function) itself is NOT the probability — ψ can be negative or complex, representing the AMPLITUDE of the matter wave, while only |ψ|² (or ψ*×ψ for complex ψ) is the actual, always-non-negative probability density; the orbital \"boundary surface\" is NOT the electron's orbit or path — it is a surface enclosing the region where |ψ|² is sufficiently large (conventionally 90% probability), and the electron has no defined trajectory at all, existing only as a probability distribution that can extend anywhere inside (or occasionally outside) that surface; and the Heisenberg Uncertainty Principle is NOT a statement about instrument imprecision — it is intrinsic to quantum systems, since measuring an electron's position necessarily requires a photon interaction that imparts an uncontrollable momentum kick, meaning no instrument improvement, however perfect, could ever evade this disturbance.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Quantum Mechanical Model\"",
-        "[TEMPLATE] Key idea 2 for \"Quantum Mechanical Model\"",
-        "[TEMPLATE] Key idea 3 for \"Quantum Mechanical Model\""
+        "The wave function ψ is a mathematical amplitude that can be negative or complex, and therefore cannot itself represent probability (which must be non-negative) — only |ψ|² (the squared modulus) is the valid probability density, describing the likelihood of finding the electron at a given point. An orbital's boundary surface is correspondingly a region enclosing high |ψ|² probability (conventionally 90%), never a defined trajectory or path — the word \"orbital\" deliberately signals a departure from the Bohr model's defined orbits.",
+        "The Heisenberg Uncertainty Principle is a fundamental feature of quantum systems, not a limitation of measuring instruments — probing an electron's position necessarily involves a physical interaction (e.g., a photon) that unavoidably disturbs its momentum by an uncontrollable amount, a consequence of quantum mechanics itself rather than engineering imperfection.",
+        "Core misconception to avoid: Only |ψ|² (never ψ directly) represents probability density — always square (or take the modulus-squared of) the wave function before interpreting it probabilistically."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Quantum Mechanical Model\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "ψ is the probability of finding the electron at that point.",
+          "correction": "Only |ψ|² (never ψ directly) represents probability density — always square (or take the modulus-squared of) the wave function before interpreting it probabilistically."
+        },
+        {
+          "misconception": "The electron travels around the nucleus along the boundary surface of the 1s orbital.",
+          "correction": "An orbital is a probability region (a 3D distribution where |ψ|² is significant), never a defined path or trajectory — the electron's position within it is only knowable probabilistically, not by tracking a route."
+        },
+        {
+          "misconception": "With a good enough microscope, you could measure both position and momentum precisely.",
+          "correction": "The uncertainty principle reflects an intrinsic property of quantum systems (Δx·Δp≥ħ/2), arising from the act of measurement itself disturbing the system — never attributable to instrument imprecision, however advanced."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Quantum Mechanical Model\""
+        "Demonstration 1 (ψ-vs-|ψ|² numerical computation): Compute |ψ|² explicitly for a negative ψ value, confirming the result is a valid non-negative probability density.",
+        "Demonstration 2 (orbital probability-density diagram vs. Bohr orbit): Present the 1s orbital's dot-density diagram alongside a single-line Bohr orbit, visually contrasting the two models.",
+        "Demonstration 3 (measurement-disturbance argument): Walk through why probing an electron's position (e.g., via a photon) necessarily transfers momentum, establishing the uncertainty principle's intrinsic origin."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Quantum Mechanical Model\"",
+        "setup": "If ψ=−0.3 at some point, what is the probability density there?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (ψ-vs-|ψ|² numerical computation): Compute |ψ|² explicitly for a negative ψ value, confirming the result is a valid non-negative probability density.",
+          "Demonstration 2 (orbital probability-density diagram vs. Bohr orbit): Present the 1s orbital's dot-density diagram alongside a single-line Bohr orbit, visually contrasting the two models.",
+          "Demonstration 3 (measurement-disturbance argument): Walk through why probing an electron's position (e.g., via a photon) necessarily transfers momentum, establishing the uncertainty principle's intrinsic origin."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Quantum Mechanical Model\""
+        "expected_outcome": "Student can (a) correctly compute and interpret |ψ|² as probability density, never ψ directly, (b) correctly describe an orbital as a probability region rather than a trajectory, (c) correctly explain the uncertainty principle as intrinsic, not instrumental."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit ψ-vs-|ψ|² numerical computation.",
+          "TA-2 (TELL): State the orbital-as-probability-region concept explicitly, anchored to the dot-density diagram.",
+          "TA-3 (DO): Student computes |ψ|² for an unfamiliar wave-function value and interprets it as a probability density.",
+          "TA-4 (TEST-THINKING): Present the \"perfect instrument\" probe and ask the student to justify why uncertainty persists even with flawless equipment."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Quantum Mechanical Model from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"If ψ=−0.3 at some point, what is the probability density there?\"",
+          "FA-2: \"Describe what the electron is doing inside a 1s orbital's boundary surface.\"",
+          "FA-3: \"Would a perfect, zero-error position-measuring device let us know both position and momentum exactly?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Quantum Mechanical Model\""
+        "mastery_signal": "Student can (a) correctly compute and interpret |ψ|² as probability density, never ψ directly, (b) correctly describe an orbital as a probability region rather than a trajectory, (c) correctly explain the uncertainty principle as intrinsic, not instrumental."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Quantum Mechanical Model\""
+        "This concept has no direct KG unlocks but underlies all subsequent orbital-shape, electron-configuration, and bonding-theory reasoning throughout atomic structure and chemical bonding."
       ],
       "prerequisite_review_triggers": [
         "chem.atomic.orbitals",
