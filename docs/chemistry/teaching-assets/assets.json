@@ -1528,48 +1528,62 @@
     {
       "id": "asset.chem.bond.ionic-bonding",
       "concept_id": "chem.bond.ionic-bonding",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Ionic Bonding\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Ionic Bonding\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Ionic Bonding\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Ionic bonding forms an extended 3D crystal lattice of alternating cations and anions (not a discrete molecule with one privileged ion pair), held together by lattice energy — the total electrostatic attraction summed across the entire lattice, which scales strongly with ionic charge (e.g., MgO's +2/−2 ions give roughly 4× the lattice energy per formula unit compared to NaCl's +1/−1 ions, directly explaining MgO's much higher melting point) — and ionic compounds only conduct electricity when their ions become MOBILE (molten or dissolved in solution), not in the rigid solid state where ions are fixed in place, despite the compound genuinely containing charged particles throughout.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Ionic Bonding\"",
-        "[TEMPLATE] Key idea 2 for \"Ionic Bonding\"",
-        "[TEMPLATE] Key idea 3 for \"Ionic Bonding\""
+        "Ionic bonding produces an extended 3D crystal lattice, not discrete molecules — cations and anions arrange themselves in a repeating pattern (like NaCl's 6:6 coordination rock-salt structure) held together by electrostatic attraction summed across the entire lattice, called lattice energy. This lattice energy scales strongly with the product of the ions' charges (per Coulomb's law), which is why higher-charge ion pairs produce dramatically stronger lattices, reflected in much higher melting points.",
+        "Despite containing charged ions throughout, ionic compounds only conduct electricity when those ions are free to move — molten or dissolved in solution — because conductivity fundamentally requires mobile charge carriers, and a rigid solid lattice locks ions in fixed positions, preventing any net charge movement despite the charge itself being genuinely present.",
+        "Core misconception to avoid: Ionic compounds form extended crystal lattices with each ion surrounded by multiple oppositely-charged neighbors (coordination number depends on the specific structure), not discrete molecules with one bonded pair."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Ionic Bonding\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "the ionic bond between Na and Cl.",
+          "correction": "Ionic compounds form extended crystal lattices with each ion surrounded by multiple oppositely-charged neighbors (coordination number depends on the specific structure), not discrete molecules with one bonded pair."
+        },
+        {
+          "misconception": "Why does MgO have a much higher mp than NaCl if both are 'ionic bonds'?",
+          "correction": "Ionic compound melting points reflect total lattice energy, which scales strongly with the product of the ions' charges — higher-charge ion pairs (like Mg²⁺/O²⁻) produce dramatically stronger lattices and higher melting points than lower-charge pairs (like Na⁺/Cl⁻)."
+        },
+        {
+          "misconception": "ionic compounds have charged particles so they must conduct.",
+          "correction": "Ionic compounds conduct electricity only when their ions are mobile — molten (liquid) or dissolved in solution — never in the rigid solid state, regardless of how many charged particles are present."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Ionic Bonding\""
+        "Demonstration 1 (lattice structure model): Present or build a 3D model of the NaCl rock-salt structure, having students count the actual number of nearest-neighbor ions around a central Na⁺, discovering the 6:6 coordination directly.",
+        "Demonstration 2 (charge-product melting-point comparison): Build a table comparing NaCl (+1/−1, mp 801°C) and MgO (+2/−2, mp 2852°C), having students compute the Coulomb's-law charge product for each and connect it to the observed lattice-energy/melting-point ratio."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Ionic Bonding\"",
+        "setup": "Draw the structure of sodium chloride.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (lattice structure model): Present or build a 3D model of the NaCl rock-salt structure, having students count the actual number of nearest-neighbor ions around a central Na⁺, discovering the 6:6 coordination directly.",
+          "Demonstration 2 (charge-product melting-point comparison): Build a table comparing NaCl (+1/−1, mp 801°C) and MgO (+2/−2, mp 2852°C), having students compute the Coulomb's-law charge product for each and connect it to the observed lattice-energy/melting-point ratio."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Ionic Bonding\""
+        "expected_outcome": "Student can (a) correctly describe ionic compounds as extended lattices, not discrete molecules, (b) correctly predict relative melting points using the charge-product/lattice-energy relationship, (c) correctly predict conductivity based on physical state (solid vs. molten/dissolved)."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the 3D rock-salt lattice structure directly, with coordination numbers explicitly counted.",
+          "TA-2 (TELL): State the lattice-energy-scales-with-charge-product rule explicitly, worked through for the NaCl-vs-MgO comparison.",
+          "TA-3 (DO): Student predicts the relative melting point of a new ionic compound pair using charge-product reasoning.",
+          "TA-4 (TEST-THINKING): Present MC-3's probe and ask the student to explain, using the mobility requirement, why solid NaCl fails to conduct despite containing ions."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Ionic Bonding from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Draw the structure of sodium chloride.\"",
+          "FA-2: \"Why does MgO have a much higher melting point than NaCl?\"",
+          "FA-3: \"Does solid NaCl conduct electricity? Why or why not?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Ionic Bonding\""
+        "mastery_signal": "Student can (a) correctly describe ionic compounds as extended lattices, not discrete molecules, (b) correctly predict relative melting points using the charge-product/lattice-energy relationship, (c) correctly predict conductivity based on physical state (solid vs. molten/dissolved)."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Ionic Bonding\""
+        "Feeds directly into `chem.solid.crystal-systems` (lattice geometry and coordination numbers extend this concept's structural foundation) and `chem.solid.ionic-solids` (Born-Haber cycles and quantitative lattice-energy calculations build directly on the charge-product reasoning established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.period.ionization-energy",
@@ -1579,48 +1593,62 @@
     {
       "id": "asset.chem.bond.covalent-bonding",
       "concept_id": "chem.bond.covalent-bonding",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Covalent Bonding\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Covalent Bonding\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Covalent Bonding\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Covalent bonds form when atoms share electron pairs (represented in Lewis structures), classified by bond order (single, double, triple, with bond length decreasing and bond energy increasing as order rises) and by polarity (polar bonds have unequal electron sharing due to electronegativity difference; non-polar bonds share equally) — molecular polarity requires BOTH polar bonds AND a molecular geometry that doesn't cause the individual bond dipoles to cancel (a molecule with polar bonds can still be net non-polar if symmetric), melting a molecular covalent compound breaks weak intermolecular forces between molecules, never the strong covalent bonds within them (network covalent solids like diamond are the genuine high-melting-point exception, since every bond throughout the entire structure is covalent), and the octet rule generally holds but coordinate (dative) covalent bonds — where one atom contributes both electrons to the shared pair — are a real, common exception to \"each atom contributes one electron.\"",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Covalent Bonding\"",
-        "[TEMPLATE] Key idea 2 for \"Covalent Bonding\"",
-        "[TEMPLATE] Key idea 3 for \"Covalent Bonding\""
+        "A covalent bond forms when two atoms share a pair of electrons, represented in Lewis structures. Bond order (single, double, triple) reflects how many electron pairs are shared, with bond length decreasing and bond energy increasing as order rises. Whether a bond is polar depends on the electronegativity difference between the bonded atoms — but whether the whole MOLECULE is polar depends additionally on geometry, since individual bond dipoles are vectors that can reinforce or cancel depending on molecular shape.",
+        "Melting a molecular covalent compound breaks only the weak intermolecular forces between separate molecules, never the strong covalent bonds within each molecule — covalent network solids (where the entire structure is one continuous covalent framework) are the genuine exception with high melting points. Most covalent bonds form from one electron contributed by each atom, but coordinate (dative) bonds — where one atom donates both electrons — are a real exception that produces an indistinguishable final bond.",
+        "Core misconception to avoid: To determine molecular polarity, draw dipole vectors from each bond (pointing toward the more electronegative atom) and sum them as vectors — if the sum is zero, the molecule is non-polar regardless of individual bond polarity."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Covalent Bonding\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "CO₂ is a polar molecule because it contains polar C=O bonds.",
+          "correction": "To determine molecular polarity, draw dipole vectors from each bond (pointing toward the more electronegative atom) and sum them as vectors — if the sum is zero, the molecule is non-polar regardless of individual bond polarity."
+        },
+        {
+          "misconception": "Covalent compounds are hard to melt because covalent bonds are so strong.",
+          "correction": "Melting point of a molecular covalent compound reflects intermolecular force strength, not covalent bond strength; only covalent network solids (where the whole structure is one covalently-bonded network) have melting points that reflect covalent bond strength."
+        },
+        {
+          "misconception": "All four N–H bonds in NH₄⁺ are formed by N and H each contributing one electron.",
+          "correction": "Most covalent bonds form with each atom contributing one electron, but coordinate (dative) covalent bonds — where one atom donates both electrons to an atom or ion with an empty orbital — are a real, common exception, indistinguishable from ordinary bonds once formed."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Covalent Bonding\""
+        "Demonstration 1 (dipole vector-sum drill): Present several molecules (CO₂, H₂O, CCl₄, CHCl₃) and have students draw dipole vectors and sum them to determine overall polarity, discovering which ones cancel and which don't.",
+        "Demonstration 2 (bond-energy comparison table): Build a table comparing covalent bond energies (O–H: 459 kJ/mol) against intermolecular force energies (hydrogen bonds: ~20 kJ/mol; London dispersion: even weaker) to make the melting-point mechanism concrete."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Covalent Bonding\"",
+        "setup": "CO₂ has two polar C=O bonds. Is the CO₂ molecule polar?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (dipole vector-sum drill): Present several molecules (CO₂, H₂O, CCl₄, CHCl₃) and have students draw dipole vectors and sum them to determine overall polarity, discovering which ones cancel and which don't.",
+          "Demonstration 2 (bond-energy comparison table): Build a table comparing covalent bond energies (O–H: 459 kJ/mol) against intermolecular force energies (hydrogen bonds: ~20 kJ/mol; London dispersion: even weaker) to make the melting-point mechanism concrete."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Covalent Bonding\""
+        "expected_outcome": "Student can (a) correctly determine overall molecular polarity using vector-sum reasoning, not bond polarity alone, (b) correctly explain a molecular covalent compound's melting point using intermolecular, not covalent, bond breaking, (c) correctly identify a coordinate covalent bond and explain its formation mechanism."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the CO₂ dipole-vector-cancellation diagram explicitly, contrasted with H₂O's reinforcing dipoles.",
+          "TA-2 (TELL): State the intramolecular-vs-intermolecular distinction explicitly, worked through with the O–H bond energy vs. hydrogen bond energy comparison.",
+          "TA-3 (DO): Student determines overall polarity for a new molecule by drawing and summing bond dipole vectors.",
+          "TA-4 (TEST-THINKING): Present MC-3's NH₄⁺ probe and ask the student to identify which bond is coordinate and why it's formed differently."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Covalent Bonding from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"CO₂ has two polar C=O bonds. Is the CO₂ molecule polar?\"",
+          "FA-2: \"Why does ice melt at 0°C if the O–H bond energy is 459 kJ/mol?\"",
+          "FA-3: \"How is the fourth N–H bond in NH₄⁺ different from the other three?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Covalent Bonding\""
+        "mastery_signal": "Student can (a) correctly determine overall molecular polarity using vector-sum reasoning, not bond polarity alone, (b) correctly explain a molecular covalent compound's melting point using intermolecular, not covalent, bond breaking, (c) correctly identify a coordinate covalent bond and explain its formation mechanism."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Covalent Bonding\""
+        "Feeds directly into `chem.bond.bond-parameters` (bond order/length/energy relationships extend this concept's foundations), `chem.bond.coordinate-bond` (formally develops the exception introduced in MC-3), `chem.bond.hybridization` and `chem.bond.vsepr` (molecular geometry, essential for polarity reasoning, is developed here), `chem.bond.resonance` (extends Lewis structure reasoning), and `chem.org.iupac` (organic nomenclature assumes fluent covalent bond and Lewis structure understanding)."
       ],
       "prerequisite_review_triggers": [
         "chem.period.electron-affinity"
@@ -1679,48 +1707,62 @@
     {
       "id": "asset.chem.bond.hybridization",
       "concept_id": "chem.bond.hybridization",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Hybridization\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Hybridization\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Hybridization\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Hybridization (sp, sp², sp³, sp³d, sp³d²) is determined by counting ALL electron domains around a central atom — both bonding pairs AND lone pairs — with each central atom in a molecule hybridized independently of every other atom present; it is a mathematical MODEL describing the final wavefunction shape, not a physical process that occurs \"when atoms approach,\" and it establishes the underlying electron-domain geometry (e.g., sp² → trigonal planar electron geometry), not a fixed, universal bond angle, since lone pairs and electronegativity effects can shift the actual measured bond angle away from the idealized value.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Hybridization\"",
-        "[TEMPLATE] Key idea 2 for \"Hybridization\"",
-        "[TEMPLATE] Key idea 3 for \"Hybridization\""
+        "Hybridization is determined by counting the total number of electron domains — both bonding pairs and lone pairs — around a specific central atom, giving sp (2 domains), sp² (3 domains), sp³ (4 domains), sp³d (5 domains), or sp³d² (6 domains). This count must include lone pairs, since they occupy hybridized orbitals exactly as bonding pairs do, and each central atom in a molecule is hybridized independently based on its own local electron-domain environment.",
+        "Hybridization is best understood as a mathematical model describing the shape of the final bonded electron wavefunction, not a literal physical process occurring as atoms approach — the same bonding outcomes can equally be described using molecular orbital theory without hybridization at all. The hybridization type sets the idealized ELECTRON-domain geometry (e.g., sp² implies trigonal planar electron geometry, ideally 120°), but the actual measured bond angle can deviate from this ideal due to lone-pair repulsion and electronegativity effects.",
+        "Core misconception to avoid: Always count BOTH bonding pairs AND lone pairs together as the total electron-domain count when determining hybridization — never bonding pairs alone."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Hybridization\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "N has 3 bonds so it's sp².",
+          "correction": "Always count BOTH bonding pairs AND lone pairs together as the total electron-domain count when determining hybridization — never bonding pairs alone."
+        },
+        {
+          "misconception": "When does hybridization occur?",
+          "correction": "Hybridization is a model, not a mechanism — it describes the shape of the final bonded wavefunction mathematically, with no implied physical \"mixing moment\" as atoms approach."
+        },
+        {
+          "misconception": "In CH₃–CH=CH₂, what is the hybridization of each carbon atom?",
+          "correction": "Determine hybridization independently for each central atom in a molecule, based on that specific atom's own electron-domain count — never assume uniform hybridization across a whole structure."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Hybridization\""
+        "Demonstration 1 (electron-domain counting drill): Present several central atoms (including some with lone pairs) and have students explicitly count total electron domains (bonds + lone pairs) before assigning hybridization.",
+        "Demonstration 2 (multi-carbon hybridization mapping): Present a molecule like CH₃–CH=CH₂ and have students determine each carbon's hybridization independently, discovering the molecule contains more than one hybridization type."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Hybridization\"",
+        "setup": "What is the hybridization of N in NH₃?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (electron-domain counting drill): Present several central atoms (including some with lone pairs) and have students explicitly count total electron domains (bonds + lone pairs) before assigning hybridization.",
+          "Demonstration 2 (multi-carbon hybridization mapping): Present a molecule like CH₃–CH=CH₂ and have students determine each carbon's hybridization independently, discovering the molecule contains more than one hybridization type."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Hybridization\""
+        "expected_outcome": "Student can (a) correctly count total electron domains including lone pairs when determining hybridization, (b) correctly explain hybridization as a mathematical model rather than a physical process, (c) correctly determine hybridization independently for each central atom in a multi-atom molecule."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the NH₃ electron-domain count explicitly, including the lone pair.",
+          "TA-2 (TELL): State explicitly that hybridization is a mathematical model, not a physical mixing event, contrasted with molecular orbital theory as an alternative description.",
+          "TA-3 (DO): Student determines hybridization independently for each central atom in a multi-atom molecule.",
+          "TA-4 (TEST-THINKING): Present MC-4's HNO₂ probe (bond angle deviating from the sp² ideal) and ask the student to explain why the real angle isn't exactly 120°."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Hybridization from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"What is the hybridization of N in NH₃?\"",
+          "FA-2: \"When does hybridization occur, physically?\"",
+          "FA-3: \"In CH₃–CH=CH₂, what is the hybridization of each carbon atom?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Hybridization\""
+        "mastery_signal": "Student can (a) correctly count total electron domains including lone pairs when determining hybridization, (b) correctly explain hybridization as a mathematical model rather than a physical process, (c) correctly determine hybridization independently for each central atom in a multi-atom molecule."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Hybridization\""
+        "Feeds directly into `chem.bond.mo-theory` (contrasts the hybridization model with the alternative molecular-orbital-theory description) and `chem.org.hybridization` (applies hybridization reasoning throughout organic structure and reactivity analysis)."
       ],
       "prerequisite_review_triggers": [
         "chem.bond.covalent-bonding"
@@ -1880,52 +1922,65 @@
     {
       "id": "asset.chem.bond.metallic-bonding",
       "concept_id": "chem.bond.metallic-bonding",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Metallic Bonding\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Metallic Bonding\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Metallic Bonding\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Metallic bonding is modeled as a lattice of positive metal cations immersed in a delocalized \"sea\" of mobile valence electrons, non-directional and unlike covalent bonding's specific, localized electron-pair bonds between fixed atom pairs — this non-directional delocalization directly explains malleability (the lattice can deform without breaking any specific bond, since electrons simply redistribute) and electrical conductivity (mobile electrons carry current even in the liquid state, since melting only disrupts the rigid cation lattice, not electron mobility); metallic bond strength (and resulting melting point) generally increases with more delocalized valence electrons, but this simple counting rule holds cleanly only within a given block (s/p-block, like period 3) and fails for transition metals, where d-electrons also contribute variably to the delocalized sea.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Metallic Bonding\"",
-        "[TEMPLATE] Key idea 2 for \"Metallic Bonding\"",
-        "[TEMPLATE] Key idea 3 for \"Metallic Bonding\""
+        "Metallic bonding is modeled as a regular lattice of positive metal ions immersed in a \"sea\" of delocalized valence electrons, not tied to any specific pair of atoms. This non-directional character (unlike covalent bonding's localized, directional electron-pair bonds) explains why metals are malleable — deforming the lattice doesn't require breaking any specific bond, since the electron sea simply redistributes to accommodate the new shape.",
+        "Metallic conductivity comes from the mobility of the delocalized electrons themselves, which persists in both solid and liquid states — unlike ionic compounds, where conductivity specifically requires the mobility of ions, unlocked only upon melting. Metallic bond strength (reflected in melting point) generally increases with more delocalized electrons, but this simple counting rule is reliable only within a consistent block of the periodic table — transition metals' additional d-electron contributions make cross-block comparisons unpredictable using electron count alone.",
+        "Core misconception to avoid: Metallic bonding is a genuinely distinct bonding model from covalent bonding, characterized by non-directional delocalization across an entire lattice, not localized electron-pair sharing between specific atom pairs."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Metallic Bonding\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Metallic bonding is covalent bonding across the whole metal crystal.",
+          "correction": "Metallic bonding is a genuinely distinct bonding model from covalent bonding, characterized by non-directional delocalization across an entire lattice, not localized electron-pair sharing between specific atom pairs."
+        },
+        {
+          "misconception": "When sodium melts, the electron sea collapses so it stops conducting.",
+          "correction": "Metallic conductivity depends on electron mobility, which is present in both the solid and liquid states — melting a metal does not disrupt conductivity the way it enables conductivity in ionic compounds."
+        },
+        {
+          "misconception": "Al always has stronger metallic bonding than Fe because Al has 3 valence electrons and Fe has 2 [counting only 4s²].",
+          "correction": "The valence-electron-count heuristic reliably predicts relative metallic bond strength only within a consistent block/region (like period 3's s/p metals); comparing across blocks (especially into the d-block) requires accounting for d-electron contributions and other structural factors, not simple outer-shell electron counting."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Metallic Bonding\""
+        "Demonstration 1 (malleability comparison): Compare hammering a piece of metal foil (deforms smoothly) against attempting to deform a piece of a brittle covalent network solid (shatters), connecting the mechanical difference directly to bonding structure.",
+        "Demonstration 2 (liquid mercury conductivity): Present or demonstrate mercury's real-world use in electrical switches as direct evidence that a liquid metal remains highly conductive."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Metallic Bonding\"",
+        "setup": "How does metallic bonding differ from covalent bonding? Why can metals be hammered flat but covalent solids shatter?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (malleability comparison): Compare hammering a piece of metal foil (deforms smoothly) against attempting to deform a piece of a brittle covalent network solid (shatters), connecting the mechanical difference directly to bonding structure.",
+          "Demonstration 2 (liquid mercury conductivity): Present or demonstrate mercury's real-world use in electrical switches as direct evidence that a liquid metal remains highly conductive."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Metallic Bonding\""
+        "expected_outcome": "Student can (a) correctly explain malleability using the non-directional/delocalized bonding structure, (b) correctly explain why metals remain conductive when melted, (c) correctly identify when simple valence-electron counting fails to predict relative metallic bond strength (across block boundaries)."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the malleable-metal-versus-brittle-covalent-solid comparison directly, connecting structure to mechanical behavior.",
+          "TA-2 (TELL): State explicitly that metallic conductivity depends on electron mobility, not ion mobility, immediately followed by the mercury counterexample.",
+          "TA-3 (DO): Student predicts and explains the Na/Mg/Al melting point trend using valence-electron counting.",
+          "TA-4 (TEST-THINKING): Present MC-3's Al-vs-Fe probe and ask the student to identify why the naive valence-electron count fails across the block boundary."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Metallic Bonding from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"How does metallic bonding differ from covalent bonding? Why can metals be hammered flat but covalent solids shatter?\"",
+          "FA-2: \"Liquid mercury conducts electricity. Why?\"",
+          "FA-3: \"Predict the melting points of Na, Mg, Al. Does the same valence-electron-counting trend apply to Fe?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Metallic Bonding\""
+        "mastery_signal": "Student can (a) correctly explain malleability using the non-directional/delocalized bonding structure, (b) correctly explain why metals remain conductive when melted, (c) correctly identify when simple valence-electron counting fails to predict relative metallic bond strength (across block boundaries)."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Metallic Bonding\""
+        "Feeds directly into `chem.solid.crystal-systems` (metallic lattice packing structures build on the electron-sea model) and `chem.solid.properties` (bulk metal and alloy properties, including transition-metal examples, directly extend and test this concept's bond-strength reasoning)."
       ],
       "prerequisite_review_triggers": [
-        "chem.period.modern-periodic-law",
-        "chem.bond.ionic-bonding"
+        "chem.period.modern-periodic-law"
       ]
     },
     {
@@ -1981,48 +2036,62 @@
     {
       "id": "asset.chem.bond.bond-parameters",
       "concept_id": "chem.bond.bond-parameters",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Bond Parameters\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Bond Parameters\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Bond Parameters\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "A double bond is NOT twice as strong as a single bond — C=C's enthalpy (614 kJ/mol) is genuinely LESS than twice C–C's (348 kJ/mol, would be 696 if truly doubled), since the π bond component involves less effective orbital overlap than the σ bond, making it inherently weaker — the double bond total is genuinely stronger than a single bond, just not by a clean doubling factor; bond enthalpy is NOT a universally fixed value for a given bond type — tabulated values are AVERAGES, and the actual enthalpy of a specific bond genuinely varies with molecular environment (neighboring atoms affect electron density and hence bond strength), introducing a real ±5-10% uncertainty whenever using average bond-enthalpy tables for ΔH calculations; and a LONGER bond is NOT stronger — the correct relationship is the opposite: higher bond order (more shared electron pairs) produces BOTH a shorter bond length AND a higher bond enthalpy simultaneously (like a stiffer spring, harder to stretch, with a shorter equilibrium length and a deeper energy well), directly contradicting a \"more distance for electrons to hold atoms together\" intuition.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Bond Parameters\"",
-        "[TEMPLATE] Key idea 2 for \"Bond Parameters\"",
-        "[TEMPLATE] Key idea 3 for \"Bond Parameters\""
+        "Bond strength (enthalpy) increases with bond order, but not in a simple linear/multiplicative way, since the π bond component (present in double and triple bonds) is inherently weaker than the σ component due to less effective side-on orbital overlap — a double bond is genuinely stronger than a single bond, but not exactly twice as strong. Bond enthalpy values in standard tables represent averages across many molecular contexts, with the actual strength of any specific bond varying meaningfully based on its particular molecular environment (neighboring atoms' influence on electron density).",
+        "Bond length and bond strength move TOGETHER as bond order increases — higher bond order (more shared electron pairs) produces both a shorter equilibrium length and a higher bond enthalpy simultaneously, following a spring-like model (a stiffer spring is both shorter at rest and harder to stretch) — never a trade-off where longer bonds are somehow stronger.",
+        "Core misconception to avoid: A double bond is stronger than a single bond (since it includes an additional, if weaker, π-bond contribution), but never assume this means exactly double the enthalpy — the π component is inherently weaker than the σ component."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Bond Parameters\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "double bond means double strength.",
+          "correction": "A double bond is stronger than a single bond (since it includes an additional, if weaker, π-bond contribution), but never assume this means exactly double the enthalpy — the π component is inherently weaker than the σ component."
+        },
+        {
+          "misconception": "C–H bond is always 413 kJ/mol.",
+          "correction": "Bond enthalpy values in standard tables are averages with real, quantifiable uncertainty (±5-10%) — the actual strength of any specific bond genuinely depends on its molecular environment, never a fixed, universal constant."
+        },
+        {
+          "misconception": "Compare C–C (154 pm, 348 kJ/mol) with C≡C (120 pm, 839 kJ/mol). Which is longer? Which is stronger?",
+          "correction": "Higher bond order produces BOTH a shorter bond length AND a higher bond enthalpy simultaneously — shorter bonds are stronger, not weaker, directly contradicting a distance-based holding-power intuition."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Bond Parameters\""
+        "Demonstration 1 (C=C-vs-doubled-C–C numeric comparison): Present the explicit 614-vs-696 kJ/mol comparison, connecting the shortfall to the π bond's weaker orbital overlap.",
+        "Demonstration 2 (C–C-vs-C≡C length-and-strength comparison): Present both bonds' length and enthalpy values side by side, demonstrating the length-strength-together relationship directly."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Bond Parameters\"",
+        "setup": "C=C has enthalpy 614 kJ/mol and C–C has 348 kJ/mol — is C=C exactly twice C–C?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (C=C-vs-doubled-C–C numeric comparison): Present the explicit 614-vs-696 kJ/mol comparison, connecting the shortfall to the π bond's weaker orbital overlap.",
+          "Demonstration 2 (C–C-vs-C≡C length-and-strength comparison): Present both bonds' length and enthalpy values side by side, demonstrating the length-strength-together relationship directly."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Bond Parameters\""
+        "expected_outcome": "Student can (a) correctly explain why a double bond isn't exactly twice as strong as a single bond, using the σ/π distinction, (b) correctly recognize bond enthalpy tables as averages with genuine environmental variability, (c) correctly predict that higher bond order means both shorter AND stronger bonds."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit C=C-vs-696-kJ/mol comparison.",
+          "TA-2 (TELL): State the bond-enthalpy-averages-vary-by-environment principle explicitly, worked through with the C–H examples.",
+          "TA-3 (DO): Student predicts relative length and strength for a new bond-order comparison, using the length-strength-together relationship.",
+          "TA-4 (TEST-THINKING): Present MC-3's C–C-vs-C≡C probe and ask the student to justify the shorter-is-stronger relationship using the spring analogy."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Bond Parameters from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"C=C has enthalpy 614 kJ/mol and C–C has 348 kJ/mol — is C=C exactly twice C–C?\"",
+          "FA-2: \"Why does the bond enthalpy of C–H differ in CH₄, CHCl₃, and CH₃F?\"",
+          "FA-3: \"Compare C–C (154 pm, 348 kJ/mol) with C≡C (120 pm, 839 kJ/mol). Which is longer? Which is stronger?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Bond Parameters\""
+        "mastery_signal": "Student can (a) correctly explain why a double bond isn't exactly twice as strong as a single bond, using the σ/π distinction, (b) correctly recognize bond enthalpy tables as averages with genuine environmental variability, (c) correctly predict that higher bond order means both shorter AND stronger bonds."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Bond Parameters\""
+        "Feeds directly into `chem.thermo.bond-enthalpy` (Hess's-law-style bond-enthalpy calculations directly require fluent, correct understanding of bond-enthalpy averaging and uncertainty established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.bond.covalent-bonding"
@@ -2031,48 +2100,62 @@
     {
       "id": "asset.chem.bond.coordinate-bond",
       "concept_id": "chem.bond.coordinate-bond",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Coordinate and Dative Bonding\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Coordinate and Dative Bonding\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Coordinate and Dative Bonding\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "A coordinate (dative) covalent bond forms when one atom (a Lewis base) donates BOTH electrons of a shared pair to another atom or ion (a Lewis acid) that has an empty orbital — but once formed, this bond is experimentally IDENTICAL to any other covalent bond of the same type (in NH₄⁺, all four N–H bonds have identical length, strength, and every other measurable property; the \"coordinate\" origin is purely a historical labelling/bookkeeping convention, not a physical difference); Lewis acids ACCEPT electron pairs (having a vacancy), while Lewis bases DONATE them — the Brønsted/Arrhenius \"acid = H⁺ donor\" model is actually a SUBSET of Lewis acid behavior (H⁺ itself is a Lewis acid, accepting a lone pair), not a contradiction, and species with no exchangeable proton at all (BF₃, AlCl₃, metal cations) can still be genuine Lewis acids; and coordinate bonds specifically form when a Lewis base donates a lone pair to CREATE A NEW BOND (forming an adduct or complex) — this is distinct from acid-base neutralization reactions like HCl+NaOH→NaCl+H₂O, where ions exchange without forming any new discrete coordinate bond.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Coordinate and Dative Bonding\"",
-        "[TEMPLATE] Key idea 2 for \"Coordinate and Dative Bonding\"",
-        "[TEMPLATE] Key idea 3 for \"Coordinate and Dative Bonding\""
+        "A coordinate (dative) covalent bond forms when one atom or ion (acting as a Lewis base) donates BOTH electrons of a shared pair to another atom or ion with an empty orbital (acting as a Lewis acid) — but this formation-history distinction has no lasting effect on the resulting bond, which is experimentally identical to any ordinary covalent bond of the same type once formed.",
+        "Lewis acids accept electron pairs (having a vacancy); Lewis bases donate them — this framework is broader than, and consistent with, the Brønsted/Arrhenius proton-based acid-base model, since it includes species like BF₃ that have no exchangeable proton at all. Coordinate bond formation specifically describes creating a genuinely new bond within an adduct or complex, distinct from simple ionic exchange/neutralization reactions where no such new discrete bond forms.",
+        "Core misconception to avoid: Coordinate bonds are physically identical to ordinary covalent bonds once formed — \"coordinate\" describes only the electron-source history during formation, never a lasting physical difference in bond strength, length, or any other property."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Coordinate and Dative Bonding\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "the arrow bond is weaker.",
+          "correction": "Coordinate bonds are physically identical to ordinary covalent bonds once formed — \"coordinate\" describes only the electron-source history during formation, never a lasting physical difference in bond strength, length, or any other property."
+        },
+        {
+          "misconception": "acids give electrons.",
+          "correction": "Lewis acids ACCEPT electron pairs (having a vacancy); Lewis bases DONATE electron pairs — this framework includes but is broader than the Brønsted/Arrhenius proton-based model, encompassing species like BF₃ with no exchangeable proton at all."
+        },
+        {
+          "misconception": "Is the reaction HCl + NaOH → NaCl + H₂O a coordinate bond formation?",
+          "correction": "Coordinate bond formation specifically describes lone-pair donation creating a new bond within an adduct or complex — distinguish this from simple ionic exchange/neutralization reactions, even when lone pairs are conceptually present in the mechanism."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Coordinate and Dative Bonding\""
+        "Demonstration 1 (NH₄⁺ bond-property comparison): Present the experimental bond-length and bond-energy data for all four N–H bonds in NH₄⁺ side by side, showing they're indistinguishable.",
+        "Demonstration 2 (BF₃·NH₃ adduct formation): Walk through the explicit curved-arrow mechanism for BF₃+NH₃→BF₃·NH₃, identifying the Lewis acid (BF₃, empty orbital) and Lewis base (NH₃, lone pair donor) roles explicitly."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Coordinate and Dative Bonding\"",
+        "setup": "In NH₄⁺, which N–H bond is the coordinate bond and is it weaker than the other three?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (NH₄⁺ bond-property comparison): Present the experimental bond-length and bond-energy data for all four N–H bonds in NH₄⁺ side by side, showing they're indistinguishable.",
+          "Demonstration 2 (BF₃·NH₃ adduct formation): Walk through the explicit curved-arrow mechanism for BF₃+NH₃→BF₃·NH₃, identifying the Lewis acid (BF₃, empty orbital) and Lewis base (NH₃, lone pair donor) roles explicitly."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Coordinate and Dative Bonding\""
+        "expected_outcome": "Student can (a) correctly state that a coordinate bond is physically identical to an ordinary covalent bond once formed, (b) correctly identify Lewis acids as electron-pair acceptors and Lewis bases as donors, (c) correctly distinguish genuine coordinate-bond-forming adduct chemistry from simple ionic neutralization."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit NH₄⁺ bond-property comparison, showing all four bonds are identical.",
+          "TA-2 (TELL): State the Lewis acid=acceptor/Lewis base=donor distinction explicitly, immediately followed by the BF₃ empty-orbital example.",
+          "TA-3 (DO): Student identifies the Lewis acid and Lewis base roles in a new adduct-forming reaction.",
+          "TA-4 (TEST-THINKING): Present MC-3's HCl+NaOH probe and ask the student to distinguish this from genuine coordinate-bond-forming adduct chemistry."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Coordinate and Dative Bonding from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"In NH₄⁺, which N–H bond is the coordinate bond and is it weaker than the other three?\"",
+          "FA-2: \"Is BF₃ a Lewis acid or a Lewis base?\"",
+          "FA-3: \"Is the reaction HCl+NaOH→NaCl+H₂O a coordinate bond formation?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Coordinate and Dative Bonding\""
+        "mastery_signal": "Student can (a) correctly state that a coordinate bond is physically identical to an ordinary covalent bond once formed, (b) correctly identify Lewis acids as electron-pair acceptors and Lewis bases as donors, (c) correctly distinguish genuine coordinate-bond-forming adduct chemistry from simple ionic neutralization."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Coordinate and Dative Bonding\""
+        "Feeds directly into `chem.coord.werner` (Werner's coordination theory and complex-ion formation directly apply coordinate bonding concepts established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.bond.covalent-bonding"
