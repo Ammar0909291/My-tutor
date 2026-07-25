@@ -4840,48 +4840,62 @@
     {
       "id": "asset.chem.kinet.rate",
       "concept_id": "chem.kinet.rate",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Rate of Reaction\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Rate of Reaction\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Rate of Reaction\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Reaction rate measures how fast reactant concentration decreases or product concentration increases over time, expressed as average rate (Δconcentration/Δt over an interval) or instantaneous rate (the tangent slope of concentration vs. time at one moment) — with stoichiometric coefficients required to reconcile the differing rates of change of different species in the same reaction, and rate influenced by concentration, temperature, surface area, and catalysts through their effect on collision frequency and the fraction of collisions exceeding the activation energy.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Rate of Reaction\"",
-        "[TEMPLATE] Key idea 2 for \"Rate of Reaction\"",
-        "[TEMPLATE] Key idea 3 for \"Rate of Reaction\""
+        "Reaction rate is how fast concentration changes over time, measured as average rate (over an interval) or instantaneous rate (the tangent slope at one moment). Because different species in a reaction change concentration at different rates set by their stoichiometric coefficients, the rate expression divides each species' Δconcentration/Δt by its own coefficient so that all species give the same single \"rate of reaction\" value.",
+        "Rate depends on how often reactant particles collide with enough energy to react — concentration and surface area affect collision frequency, temperature affects both collision frequency and the fraction of collisions exceeding the activation energy, and catalysts provide an alternative pathway with lower activation energy.",
+        "Core misconception to avoid: rate = −(1/a)(Δ[A]/Δt) = −(1/b)(Δ[B]/Δt) = +(1/c)(Δ[C]/Δt) for aA + bB → cC, always normalized by coefficients."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Rate of Reaction\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Rate of SO₂ and O₂ decrease are the same — they're both reactants.",
+          "correction": "rate = −(1/a)(Δ[A]/Δt) = −(1/b)(Δ[B]/Δt) = +(1/c)(Δ[C]/Δt) for aA + bB → cC, always normalized by coefficients."
+        },
+        {
+          "misconception": "The rate is constant, then suddenly drops to zero when all A is used.",
+          "correction": "Instantaneous rate is the tangent slope of the concentration-time curve at a given moment; that slope shrinks continuously as the reaction proceeds."
+        },
+        {
+          "misconception": "Heat loosens the bonds so they break more easily.",
+          "correction": "Higher temperature shifts the molecular kinetic-energy distribution so more molecules carry enough energy to clear the activation-energy barrier upon collision."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Rate of Reaction\""
+        "Demonstration 1 (concentration effect): React marble chips (CaCO₃) with HCl at 0.5 mol L⁻¹ and 2 mol L⁻¹, timing by mass loss (CO₂ evolution) or gas volume collected; plot mass vs. time for both — the higher-concentration run is visibly faster.",
+        "Demonstration 2 (temperature effect): React sodium thiosulfate with HCl at 20°C and 40°C, timing until a precipitate obscures a cross drawn on paper beneath the flask — the 40°C run is roughly twice as fast, illustrating the \"rate doubles per 10°C\" rule of thumb."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Rate of Reaction\"",
+        "setup": "For 2SO₂ + O₂ → 2SO₃, if [SO₂] decreases at 0.040 mol L⁻¹ s⁻¹, at what rate does [O₂] decrease?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (concentration effect): React marble chips (CaCO₃) with HCl at 0.5 mol L⁻¹ and 2 mol L⁻¹, timing by mass loss (CO₂ evolution) or gas volume collected; plot mass vs. time for both — the higher-concentration run is visibly faster.",
+          "Demonstration 2 (temperature effect): React sodium thiosulfate with HCl at 20°C and 40°C, timing until a precipitate obscures a cross drawn on paper beneath the flask — the 40°C run is roughly twice as fast, illustrating the \"rate doubles per 10°C\" rule of thumb."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Rate of Reaction\""
+        "expected_outcome": "Student can (a) compute average rate from concentration-time data including the stoichiometric coefficient for any species, (b) correctly state that instantaneous rate requires a tangent, not a chord, (c) give the collision/activation-energy explanation for concentration, temperature, surface area, and catalyst effects."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present a real concentration-vs-time curve and mark the tangent slope at two different points.",
+          "TA-2 (TELL): State the coefficient-normalized rate expression explicitly, applied to a worked stoichiometric example.",
+          "TA-3 (DO): Student computes Δ[NH₃]/Δt from given Δ[H₂]/Δt using stoichiometry (Discovery Question 1 style).",
+          "TA-4 (TEST-THINKING): Present MC-3's \"heat loosens bonds\" claim and ask the student to reframe it using collision/activation-energy language."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Rate of Reaction from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"For 2SO₂ + O₂ → 2SO₃, if [SO₂] decreases at 0.040 mol L⁻¹ s⁻¹, at what rate does [O₂] decrease?\"",
+          "FA-2: \"Sketch [A] vs. time for a reaction. Is the line straight or curved? Why?\"",
+          "FA-3: \"Explain, at the molecular level, why raising temperature speeds up a reaction.\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Rate of Reaction\""
+        "mastery_signal": "Student can (a) compute average rate from concentration-time data including the stoichiometric coefficient for any species, (b) correctly state that instantaneous rate requires a tangent, not a chord, (c) give the collision/activation-energy explanation for concentration, temperature, surface area, and catalyst effects."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Rate of Reaction\""
+        "Feeds into `chem.kinet.rate-law` (rate expressions and reaction orders build directly on the coefficient-normalized rate definition) and `chem.kinet.photochemistry` (light-driven reaction rates use the same rate-definition machinery with a different energy source)."
       ],
       "prerequisite_review_triggers": [
         "chem.found.concentration"
@@ -4890,48 +4904,62 @@
     {
       "id": "asset.chem.kinet.rate-law",
       "concept_id": "chem.kinet.rate-law",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Rate Law and Order\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Rate Law and Order\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Rate Law and Order\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "A rate law (rate = k[A]ᵐ[B]ⁿ...) expresses how reaction rate depends on reactant concentrations, with the exponents (orders) determined purely by experiment — never assumed from the balanced equation's stoichiometric coefficients — and the rate constant k, fixed at a given temperature, absorbing every rate-affecting factor that is not itself a reactant concentration (collision frequency terms, steric factor, activation energy via the Arrhenius relationship). Orders can be zero, positive integers, fractions, or even negative (indicating inhibition).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Rate Law and Order\"",
-        "[TEMPLATE] Key idea 2 for \"Rate Law and Order\"",
-        "[TEMPLATE] Key idea 3 for \"Rate Law and Order\""
+        "A rate law expresses how measured reaction rate depends on reactant concentrations, in the form rate = k[A]ᵐ[B]ⁿ. The exponents m and n (orders with respect to each reactant) can only be determined by running experiments — typically the initial-rate method, comparing trials where one concentration is varied while others are held constant — because they reflect the actual step-by-step reaction mechanism, which the overall balanced equation does not reveal.",
+        "The rate constant k is fixed at a given temperature and absorbs every factor affecting rate that isn't itself a reactant concentration — it changes only with temperature (formalized by the Arrhenius equation), never with concentration; all concentration-dependence is captured entirely by the [A]ᵐ[B]ⁿ terms.",
+        "Core misconception to avoid: Reaction orders can ONLY be determined from experimental data (e.g., the initial-rate method), never assumed from the balanced equation."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Rate Law and Order\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Since there are 2 NO and 1 O₂, the rate law is rate = k[NO]²[O₂].",
+          "correction": "Reaction orders can ONLY be determined from experimental data (e.g., the initial-rate method), never assumed from the balanced equation."
+        },
+        {
+          "misconception": "More A means more collisions, so rate must increase.",
+          "correction": "The sign and magnitude of a reactant's order determines the direction and strength of its effect on rate — positive orders increase rate with concentration, negative orders decrease it, zero order means no effect at all."
+        },
+        {
+          "misconception": "As concentration increases, k gets bigger because the molecules are hitting more often.",
+          "correction": "k depends only on temperature (via the Arrhenius equation, covered next); all concentration-dependence lives entirely in the [A]ᵐ[B]ⁿ terms, never in k."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Rate Law and Order\""
+        "Demonstration 1 (initial-rate method): Provide a table of experimental trials with varying initial concentrations of two reactants and measured initial rates; have students isolate each reactant's order by comparing pairs of trials that hold one concentration constant while doubling the other.",
+        "Demonstration 2 (k self-consistency check): Using the rate law derived in Demonstration 1, have students compute k from two different trials and confirm the values match — directly disproving MC-3's \"k changes with concentration.\""
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Rate Law and Order\"",
+        "setup": "Could the rate law for 2NO + O₂ → 2NO₂ be rate = k[NO]²[O₂]²? Why or why not?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (initial-rate method): Provide a table of experimental trials with varying initial concentrations of two reactants and measured initial rates; have students isolate each reactant's order by comparing pairs of trials that hold one concentration constant while doubling the other.",
+          "Demonstration 2 (k self-consistency check): Using the rate law derived in Demonstration 1, have students compute k from two different trials and confirm the values match — directly disproving MC-3's \"k changes with concentration.\""
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Rate Law and Order\""
+        "expected_outcome": "Student can (a) determine rate-law orders from initial-rate experimental data without assuming they match stoichiometric coefficients, (b) correctly predict the rate effect of a negative-order reactant, (c) compute k from rate/concentration data and demonstrate its constancy across multiple trials."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the H₂/Br₂ fractional-order rate-law data as the definitive counterexample to coefficient-matching.",
+          "TA-2 (TELL): State explicitly that k depends only on temperature, worked through with the two-trial self-consistency check.",
+          "TA-3 (DO): Student determines orders m and n from a given initial-rate data table using the comparison method.",
+          "TA-4 (TEST-THINKING): Present MC-2's negative-order scenario and ask the student to predict the rate change when [A] doubles."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Rate Law and Order from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Could the rate law for 2NO + O₂ → 2NO₂ be rate = k[NO]²[O₂]²? Why or why not?\"",
+          "FA-2: \"For rate = k[A]⁻¹[B], what happens to the rate if [A] is doubled?\"",
+          "FA-3: \"If [A] doubles and rate quadruples in rate = k[A]², has k changed?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Rate Law and Order\""
+        "mastery_signal": "Student can (a) determine rate-law orders from initial-rate experimental data without assuming they match stoichiometric coefficients, (b) correctly predict the rate effect of a negative-order reactant, (c) compute k from rate/concentration data and demonstrate its constancy across multiple trials."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Rate Law and Order\""
+        "Feeds directly into `chem.kinet.arrhenius` (k's temperature dependence, established as concentration-independent here), `chem.kinet.integrated-rate` (integrated forms of the rate law for specific orders), and `chem.kinet.mechanism` (multi-step mechanisms explain why orders and coefficients diverge, directly resolving MC-1's root cause)."
       ],
       "prerequisite_review_triggers": [
         "chem.kinet.rate"
@@ -4940,48 +4968,62 @@
     {
       "id": "asset.chem.kinet.integrated-rate",
       "concept_id": "chem.kinet.integrated-rate",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Integrated Rate Laws\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Integrated Rate Laws\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Integrated Rate Laws\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Half-life is CONSTANT (concentration-independent) ONLY for first-order reactions — for second-order reactions, t½=1/(k[A]₀), which INCREASES as concentration decreases (the reaction genuinely slows down non-linearly, doubling t½ each time [A]₀ halves), and for zero-order reactions, t½ DECREASES as concentration falls — the famous constant-half-life property of radioactive decay is a first-order-SPECIFIC feature, never universal; the second-order integrated rate law 1/[A]_t=1/[A]₀+kt means 1/[A] INCREASES linearly with time (positive slope k), NOT decreases — even though [A] itself decreases, its reciprocal necessarily increases, contradicting a naive \"all kinetics plots decrease\" expectation; and the correct diagnostic plot for testing reaction order is order-SPECIFIC — [A] vs. t linear tests zero-order, ln[A] vs. t linear tests first-order, and 1/[A] vs. t linear tests second-order — plotting [A] vs. t and checking for a straight line ONLY correctly diagnoses zero-order; for a genuinely first-order reaction, [A] vs. t is a curved, decaying exponential, not linear.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Integrated Rate Laws\"",
-        "[TEMPLATE] Key idea 2 for \"Integrated Rate Laws\"",
-        "[TEMPLATE] Key idea 3 for \"Integrated Rate Laws\""
+        "Half-life's dependence on initial concentration is specific to each reaction order — only first-order reactions have a genuinely constant, concentration-independent half-life; second-order half-life increases as concentration decreases, and zero-order half-life decreases. The second-order integrated rate law (1/[A]_t=1/[A]₀+kt) produces an INCREASING 1/[A] vs. t plot (positive slope), a direct mathematical consequence of taking the reciprocal of a decreasing quantity.",
+        "Testing reaction order requires plotting the SPECIFIC transformed quantity appropriate to each hypothesized order — [A] for zero-order, ln[A] for first-order, 1/[A] for second-order — since each order's integrated rate law linearizes a different function; plotting the wrong quantity (e.g., raw [A] to test for first-order) will show a curve regardless of the reaction's actual order, and does not by itself rule out that order.",
+        "Core misconception to avoid: Half-life is concentration-independent ONLY for first-order reactions — always derive t½'s concentration-dependence from the specific order's integrated rate law, never assume universal constancy."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Integrated Rate Laws\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "The half-life is 50 s no matter what the concentration is.",
+          "correction": "Half-life is concentration-independent ONLY for first-order reactions — always derive t½'s concentration-dependence from the specific order's integrated rate law, never assume universal constancy."
+        },
+        {
+          "misconception": "1/[A] decreases because [A] is decreasing.",
+          "correction": "1/[A] vs. t has a POSITIVE slope for second-order reactions (1/[A] increases as [A] decreases, since reciprocals of decreasing quantities increase) — never assume all kinetics-related plots slope downward."
+        },
+        {
+          "misconception": "I plot [A] vs. t and check if it's a straight line.",
+          "correction": "Always match the specific transformed quantity to the order being tested — [A] for zero-order, ln[A] for first-order, 1/[A] for second-order — never plot [A] vs. t as a universal \"check for linearity\" test."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Integrated Rate Laws\""
+        "Demonstration 1 (second-order half-life doubling computation): Compute t½ explicitly at two concentrations, confirming the doubling relationship as [A]₀ halves.",
+        "Demonstration 3 (three-panel order-specific diagnostic-plot comparison): Present [A], ln[A], and 1/[A] vs. t for the same dataset, showing only the order-matched plot is linear."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Integrated Rate Laws\"",
+        "setup": "A second-order reaction has t₁/₂=50s when [A]₀=0.10M. What is t₁/₂ when [A] has fallen to 0.05M?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (second-order half-life doubling computation): Compute t½ explicitly at two concentrations, confirming the doubling relationship as [A]₀ halves.",
+          "Demonstration 3 (three-panel order-specific diagnostic-plot comparison): Present [A], ln[A], and 1/[A] vs. t for the same dataset, showing only the order-matched plot is linear."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Integrated Rate Laws\""
+        "expected_outcome": "Student can (a) correctly compute and interpret order-specific half-life behavior, (b) correctly predict the positive slope of 1/[A] vs. t for second-order reactions, (c) correctly select and apply the order-specific diagnostic plot."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit second-order half-life computation at two concentrations.",
+          "TA-2 (TELL): State the reciprocal-reversal logic for 1/[A] vs. t explicitly, anchored to the numerical computation.",
+          "TA-3 (DO): Student selects and applies the correct order-specific diagnostic plot for an unfamiliar kinetic dataset.",
+          "TA-4 (TEST-THINKING): Present the \"which plot tests first-order\" probe and ask the student to justify why [A] vs. t fails to test first-order correctly."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Integrated Rate Laws from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A second-order reaction has t₁/₂=50s when [A]₀=0.10M. What is t₁/₂ when [A] has fallen to 0.05M?\"",
+          "FA-2: \"Sketch the 1/[A] vs. t plot for a second-order reaction. Does it slope up or down?\"",
+          "FA-3: \"You want to test whether a reaction is first-order. What do you plot?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Integrated Rate Laws\""
+        "mastery_signal": "Student can (a) correctly compute and interpret order-specific half-life behavior, (b) correctly predict the positive slope of 1/[A] vs. t for second-order reactions, (c) correctly select and apply the order-specific diagnostic plot."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Integrated Rate Laws\""
+        "This concept has no direct KG unlocks but consolidates rate-law reasoning built across `chem.kinet.rate-law`, forming a capstone application to reaction-mechanism determination and pseudo-first-order kinetics contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.kinet.rate-law"
@@ -4990,48 +5032,62 @@
     {
       "id": "asset.chem.kinet.arrhenius",
       "concept_id": "chem.kinet.arrhenius",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Temperature Dependence and Arrhenius Equation\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Temperature Dependence and Arrhenius Equation\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Arrhenius Equation\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The Arrhenius equation (k = Ae^(−Ea/RT)) quantifies how the rate constant k depends on temperature, with Ea (activation energy, always positive) and A (the frequency/pre-exponential factor, representing the theoretical maximum rate constant if every collision led to reaction) as two distinct physical quantities; temperature must be in Kelvin (never Celsius) since the underlying Boltzmann factor e^(−Ea/RT) only has correct energy units with an absolute temperature scale, and Ea can be extracted experimentally from the slope (−Ea/R) of a ln k vs. 1/T plot, requiring careful sign handling since the slope itself is negative while Ea must always come out positive.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Temperature Dependence and Arrhenius Equation\"",
-        "[TEMPLATE] Key idea 2 for \"Temperature Dependence and Arrhenius Equation\"",
-        "[TEMPLATE] Key idea 3 for \"Temperature Dependence and Arrhenius Equation\""
+        "The Arrhenius equation, k = Ae^(−Ea/RT), describes how a reaction's rate constant depends on temperature. A represents the frequency factor — essentially the theoretical maximum rate constant if every molecular collision led to a successful reaction (no energy barrier at all). Ea (activation energy) is the energy barrier that must be overcome, and the exponential term e^(−Ea/RT) represents the fraction of collisions with enough energy to clear that barrier, which grows as temperature rises.",
+        "Taking the natural log of both sides gives ln k = ln A − (Ea/R)(1/T), a linear equation in 1/T with slope −Ea/R and y-intercept ln A — plotting experimental ln k values against 1/T lets you extract both Ea (from the negative slope, with correct sign handling) and A (from the intercept) directly from data.",
+        "Core misconception to avoid: Always convert T(°C) + 273 = T(K) before using any temperature value directly (not as a difference) in the Arrhenius equation."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Temperature Dependence and Arrhenius Equation\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "I used T = 27 and T = 17 in the two-temperature formula — both in Celsius.",
+          "correction": "Always convert T(°C) + 273 = T(K) before using any temperature value directly (not as a difference) in the Arrhenius equation."
+        },
+        {
+          "misconception": "slope = Ea/R, so Ea = slope × R = −8500 × 8.314 — but energy can't be negative, so something is wrong.",
+          "correction": "Ea = −(slope) × R, always — the slope itself is negative, and the extra negative sign in this formula converts it to the correct positive Ea."
+        },
+        {
+          "misconception": "A is the activation energy — that's what the 'A' stands for.",
+          "correction": "A is the frequency/pre-exponential factor (often remembered via the mnemonic \"A for Attempt frequency\"); Ea is the activation energy — distinct symbols, distinct physical meanings, distinct units."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Temperature Dependence and Arrhenius Equation\""
+        "Demonstration 1 (Kelvin-conversion two-point calculation): Work the two-temperature Arrhenius calculation with the given Celsius values, first incorrectly (without conversion) then correctly (with Kelvin conversion), comparing the two very different Ea results.",
+        "Demonstration 2 (slope sign-check): Extract Ea from a given negative slope value, first via the naive slope×R calculation (yielding an impossible negative Ea) and then via the correct −(slope)×R formula, using the sign-check itself as the error-detection tool."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Temperature Dependence and Arrhenius Equation\"",
+        "setup": "Calculate k at 27°C if k=0.050 s⁻¹ at 17°C and Ea=60 kJ/mol. Show your temperature conversion.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (Kelvin-conversion two-point calculation): Work the two-temperature Arrhenius calculation with the given Celsius values, first incorrectly (without conversion) then correctly (with Kelvin conversion), comparing the two very different Ea results.",
+          "Demonstration 2 (slope sign-check): Extract Ea from a given negative slope value, first via the naive slope×R calculation (yielding an impossible negative Ea) and then via the correct −(slope)×R formula, using the sign-check itself as the error-detection tool."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Temperature Dependence and Arrhenius Equation\""
+        "expected_outcome": "Student can (a) correctly convert and use Kelvin temperatures in the Arrhenius equation, (b) correctly extract a positive Ea from a given negative ln k vs. 1/T slope, (c) correctly distinguish A's physical meaning and units from Ea's."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the Kelvin-vs-Celsius side-by-side calculation for the two-temperature example.",
+          "TA-2 (TELL): State explicitly that Ea must always come out positive, as a standing sanity check for any slope-extraction calculation.",
+          "TA-3 (DO): Student extracts Ea from a given ln k vs. 1/T slope, applying the correct sign convention.",
+          "TA-4 (TEST-THINKING): Present MC-3's probe and ask the student to state A's units and physical meaning before naming Ea's."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Arrhenius Equation from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Calculate k at 27°C if k=0.050 s⁻¹ at 17°C and Ea=60 kJ/mol. Show your temperature conversion.\"",
+          "FA-2: \"A graph of ln k vs. 1/T has slope = −8500 K. What is Ea?\"",
+          "FA-3: \"What does A represent physically? What are its units?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Temperature Dependence and Arrhenius Equation\""
+        "mastery_signal": "Student can (a) correctly convert and use Kelvin temperatures in the Arrhenius equation, (b) correctly extract a positive Ea from a given negative ln k vs. 1/T slope, (c) correctly distinguish A's physical meaning and units from Ea's."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Temperature Dependence and Arrhenius Equation\""
+        "Feeds directly into `chem.kinet.catalysis` (catalysts are explained as lowering Ea, requiring fluent, correctly-signed Ea reasoning established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.kinet.rate-law"
@@ -5040,48 +5096,62 @@
     {
       "id": "asset.chem.kinet.mechanism",
       "concept_id": "chem.kinet.mechanism",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Reaction Mechanisms\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Reaction Mechanisms\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Reaction Mechanisms\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "A reaction mechanism is a sequence of elementary steps (each with a defined molecularity) that together account for the overall reaction, with the rate-determining step (RDS, the slowest step) setting the overall rate law — derived by writing rate = k[species]^(order) for the RDS, then eliminating any reaction intermediates (species that appear in the mechanism but not in the overall equation) using either the steady-state approximation or a fast pre-equilibrium assumption, since a valid rate law must contain only measurable species; a mechanism that produces a rate law matching experimental data is \"consistent with the evidence,\" never definitively \"proved,\" since multiple distinct mechanisms can produce identical rate laws.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Reaction Mechanisms\"",
-        "[TEMPLATE] Key idea 2 for \"Reaction Mechanisms\"",
-        "[TEMPLATE] Key idea 3 for \"Reaction Mechanisms\""
+        "A reaction mechanism breaks an overall reaction into elementary steps, each with a specific molecularity. The slowest step (the rate-determining step) controls the overall rate — write its rate expression, then eliminate any intermediates (species that appear mid-mechanism but not in the overall equation) using either a fast pre-equilibrium assumption or the steady-state approximation, arriving at a rate law expressed only in terms of measurable species.",
+        "Because different mechanisms can sometimes produce identical derived rate laws, matching the experimental rate law is necessary but never sufficient to establish a mechanism as correct — chemists treat mechanisms as working hypotheses \"consistent with the evidence so far,\" refined or replaced as new evidence (isotopic labelling, spectroscopic intermediate detection, stereochemistry, crossover experiments) becomes available.",
+        "Core misconception to avoid: Always derive the rate law from the RDS and intermediate elimination, never from the overall equation's coefficients directly — even when the final answer happens to match what stoichiometry alone would have suggested."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Reaction Mechanisms\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "The overall equation is 2NO + O₂ → 2NO₂, so rate = k[NO]²[O₂].",
+          "correction": "Always derive the rate law from the RDS and intermediate elimination, never from the overall equation's coefficients directly — even when the final answer happens to match what stoichiometry alone would have suggested."
+        },
+        {
+          "misconception": "Yes, rate = k₂[N₂O₂][O₂] is the rate law for this mechanism.",
+          "correction": "The derivation is never complete until every intermediate has been eliminated (via pre-equilibrium or the steady-state approximation) and replaced with expressions in terms of only measurable species."
+        },
+        {
+          "misconception": "The mechanism is correct because the derived rate law matches the experimental one.",
+          "correction": "A matching rate law is necessary but not sufficient evidence for a mechanism; further evidence — isotopic labelling, direct spectroscopic identification of intermediates, product stereochemistry, crossover experiments — is required to distinguish between mechanisms that all fit the same rate law; in practice, no mechanism is ever fully \"proved,\" only \"consistent with all available evidence so far, until refuted.\""
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Reaction Mechanisms\""
+        "Demonstration 1 (full derivation walkthrough): Work the complete NO/O₂ mechanism derivation step by step — write the RDS rate expression, identify N₂O₂ as an intermediate, eliminate it via the pre-equilibrium, and arrive at the final measurable-species rate law.",
+        "Demonstration 2 (alternative-mechanism construction): Have students attempt to construct a different two-step mechanism for the same NO/O₂ reaction that also derives to rate = k[NO]²[O₂], directly demonstrating non-uniqueness."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Reaction Mechanisms\"",
+        "setup": "The mechanism for 2NO + O₂ → 2NO₂ is given as two steps. Write the rate law.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (full derivation walkthrough): Work the complete NO/O₂ mechanism derivation step by step — write the RDS rate expression, identify N₂O₂ as an intermediate, eliminate it via the pre-equilibrium, and arrive at the final measurable-species rate law.",
+          "Demonstration 2 (alternative-mechanism construction): Have students attempt to construct a different two-step mechanism for the same NO/O₂ reaction that also derives to rate = k[NO]²[O₂], directly demonstrating non-uniqueness."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Reaction Mechanisms\""
+        "expected_outcome": "Student can (a) derive a rate law from an unfamiliar mechanism's RDS, (b) correctly eliminate an intermediate using pre-equilibrium or steady-state approximation, (c) explain why rate-law matching alone doesn't prove a mechanism."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the full NO/O₂ mechanism derivation, explicitly marking the RDS-then-eliminate-intermediate procedure step by step.",
+          "TA-2 (TELL): State explicitly that a rate law containing an intermediate is incomplete, immediately followed by the \"could you measure this in a beaker?\" question.",
+          "TA-3 (DO): Student derives a rate law for a new, previously-unseen multi-step mechanism, correctly eliminating any intermediate.",
+          "TA-4 (TEST-THINKING): Present MC-3's alternative-mechanism probe and ask the student to construct or evaluate a second mechanism giving the same rate law."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Reaction Mechanisms from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"The mechanism for 2NO + O₂ → 2NO₂ is given as two steps. Write the rate law.\"",
+          "FA-2: \"You derive rate = k₂[N₂O₂][O₂]. Is this the final rate law?\"",
+          "FA-3: \"Propose a different mechanism that also gives rate = k[NO]²[O₂]. Does this prove the first mechanism?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Reaction Mechanisms\""
+        "mastery_signal": "Student can (a) derive a rate law from an unfamiliar mechanism's RDS, (b) correctly eliminate an intermediate using pre-equilibrium or steady-state approximation, (c) explain why rate-law matching alone doesn't prove a mechanism."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Reaction Mechanisms\""
+        "Feeds directly into `chem.bio.enzyme-kinetics` (Michaelis-Menten kinetics is a specific application of steady-state-approximation mechanism analysis) and `chem.surface.heterogeneous-cat` (catalytic mechanisms are analyzed with the same RDS/intermediate-elimination procedure established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.kinet.rate-law"
@@ -5090,48 +5160,62 @@
     {
       "id": "asset.chem.kinet.catalysis",
       "concept_id": "chem.kinet.catalysis",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Catalysis\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Catalysis\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Catalysis\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "A catalyst does NOT shift equilibrium position or change K — it lowers activation energy EQUALLY for both forward and reverse reactions, increasing both rates by the same factor, so the ratio kf/kr=K remains unchanged; a catalyst is NOT consumed overall — though it may appear consumed in an early mechanistic step, it is REGENERATED in a later step (canceling out of the net equation), distinguishing it from an intermediate (which is PRODUCED first, then consumed, the opposite temporal pattern); and rate enhancement from lowering activation energy is NOT proportional (linear) to the Ea reduction — the Arrhenius equation's exponential relationship (k∝e^(−Ea/RT)) means even a modest Ea reduction produces an enormous rate increase (halving Ea from 80 to 40 kJ/mol at 298K increases rate by a factor of roughly 10 million, not merely 2×).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Catalysis\"",
-        "[TEMPLATE] Key idea 2 for \"Catalysis\"",
-        "[TEMPLATE] Key idea 3 for \"Catalysis\""
+        "A catalyst provides an alternative reaction pathway with lower activation energy, but this lowering applies EQUALLY to both the forward and reverse directions of a reaction — since the equilibrium constant K is the ratio of forward to reverse rate constants (kf/kr), and both increase by the same factor, K (and hence equilibrium position) remains genuinely unchanged; only the RATE of reaching that equilibrium is affected.",
+        "A catalyst is consumed in an early mechanistic step and regenerated in a later one, canceling from the overall net equation — distinguished from an intermediate (produced first, then consumed) by the opposite temporal sequence; both must be identified by summing the full mechanism, not by examining a single step alone. Separately, rate enhancement from a catalyst's Ea reduction follows the Arrhenius equation's exponential relationship, meaning even modest Ea reductions produce dramatic, multi-order-of-magnitude rate increases, never a simple proportional scaling.",
+        "Core misconception to avoid: A catalyst increases reaction rate (speed of reaching equilibrium) without changing K or equilibrium position/[products] — it lowers Ea equally for both forward and reverse reactions."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Catalysis\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "The catalyst shifts the equilibrium to the right, increasing product concentration.",
+          "correction": "A catalyst increases reaction rate (speed of reaching equilibrium) without changing K or equilibrium position/[products] — it lowers Ea equally for both forward and reverse reactions."
+        },
+        {
+          "misconception": "NO is used up in step 1, so it's consumed.",
+          "correction": "A catalyst is consumed in an early step and regenerated in a later step, canceling from the overall net equation — never conclude a catalyst is \"consumed overall\" from examining only its first appearance in the mechanism."
+        },
+        {
+          "misconception": "The reaction is twice as fast because the Ea is halved.",
+          "correction": "Rate enhancement from Ea reduction follows the exponential Arrhenius relationship, never a simple proportional/linear one — compute the actual ratio using k∝e^(−Ea/RT) rather than estimating a linear scaling."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Catalysis\""
+        "Demonstration 1 (kf/kr=K symmetric-scaling demonstration): Present hypothetical kf and kr values before and after adding a catalyst, both scaled by the same factor, showing K (their ratio) stays unchanged.",
+        "Demonstration 2 (Arrhenius exponential rate-ratio computation): Compute the exact rate-enhancement ratio explicitly for the given 80-to-40 kJ/mol example, showing the ~10-million-fold result directly."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Catalysis\"",
+        "setup": "You add a catalyst to a reaction at equilibrium. What happens to K? What happens to [products]?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (kf/kr=K symmetric-scaling demonstration): Present hypothetical kf and kr values before and after adding a catalyst, both scaled by the same factor, showing K (their ratio) stays unchanged.",
+          "Demonstration 2 (Arrhenius exponential rate-ratio computation): Compute the exact rate-enhancement ratio explicitly for the given 80-to-40 kJ/mol example, showing the ~10-million-fold result directly."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Catalysis\""
+        "expected_outcome": "Student can (a) correctly explain that a catalyst leaves K and equilibrium position unchanged, affecting only rate, (b) correctly identify a catalyst (consumed-then-regenerated) versus an intermediate (produced-then-consumed) by summing a full mechanism, (c) correctly compute the exponential (not linear) rate enhancement from a given Ea reduction."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the kf/kr=K symmetric-scaling demonstration explicitly.",
+          "TA-2 (TELL): State the catalyst-consumed-then-regenerated pattern explicitly, worked through with the NO/SO₂ mechanism summing.",
+          "TA-3 (DO): Student computes the exact Arrhenius rate-enhancement ratio for a given Ea reduction.",
+          "TA-4 (TEST-THINKING): Present MC-2's NO probe and ask the student to sum the full mechanism to confirm NO's regeneration."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Catalysis from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"You add a catalyst to a reaction at equilibrium. What happens to K? What happens to [products]?\"",
+          "FA-2: \"In the NO-catalysed oxidation of SO₂, is NO consumed overall?\"",
+          "FA-3: \"If a catalyst halves Ea from 80 to 40 kJ/mol at 298K, how much faster is the reaction?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Catalysis\""
+        "mastery_signal": "Student can (a) correctly explain that a catalyst leaves K and equilibrium position unchanged, affecting only rate, (b) correctly identify a catalyst (consumed-then-regenerated) versus an intermediate (produced-then-consumed) by summing a full mechanism, (c) correctly compute the exponential (not linear) rate enhancement from a given Ea reduction."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Catalysis\""
+        "Feeds directly into `chem.surface.adsorption` (heterogeneous catalysis and surface adsorption mechanisms directly extend the catalytic reasoning established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.kinet.arrhenius"
@@ -5140,48 +5224,62 @@
     {
       "id": "asset.chem.kinet.photochemistry",
       "concept_id": "chem.kinet.photochemistry",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Photochemical Reactions\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Photochemical Reactions\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Photochemical Reactions\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Photochemistry studies reactions initiated by light absorption: the primary process directly absorbs a photon (governed by the Stark-Einstein law — one photon activates one molecule/species in the primary step only), which can then trigger secondary (thermal/dark) processes that don't themselves require light, sometimes propagating into long radical chains that produce a quantum yield (Φ = molecules of product per photon absorbed) far greater than one; light absorption itself is quantified via the Beer-Lambert law using base-10 logarithm by spectroscopic convention (A = log₁₀(I₀/I) = εcl).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Photochemical Reactions\"",
-        "[TEMPLATE] Key idea 2 for \"Photochemical Reactions\"",
-        "[TEMPLATE] Key idea 3 for \"Photochemical Reactions\""
+        "A photochemical reaction begins with a primary process — the direct absorption of a photon by one molecule, governed by the Stark-Einstein law (one photon, one molecule activated, in this step only). That activated species can then undergo secondary processes, which proceed thermally (no further photons required) and can include chain-propagation steps that multiply the initial effect into a large number of product molecules, measured by the quantum yield Φ = product molecules formed per photon absorbed.",
+        "Light absorption by a solution is quantified by the Beer-Lambert law, A = εcl, where absorbance A is defined using base-10 logarithm (A = log₁₀(I₀/I)) by spectroscopic convention — distinct from the natural-log conventions used elsewhere in kinetics (like first-order integrated rate laws).",
+        "Core misconception to avoid: Quantum yield equals the total number of product molecules formed per photon absorbed across the entire mechanism, including any chain-propagated secondary steps — it is bounded by the chain length, not by 1."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Photochemical Reactions\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Quantum yield can't be more than 1 because one photon only excites one molecule.",
+          "correction": "Quantum yield equals the total number of product molecules formed per photon absorbed across the entire mechanism, including any chain-propagated secondary steps — it is bounded by the chain length, not by 1."
+        },
+        {
+          "misconception": "A = ln(I₀/I) = ln(10) = 2.303, so A = 2.303.",
+          "correction": "Beer-Lambert's absorbance is defined as A = log₁₀(I₀/I) = εcl, using base-10 logarithm by spectroscopic convention."
+        },
+        {
+          "misconception": "Ozone forms when UV light combines O and O₂ — light is needed for that step.",
+          "correction": "Only the primary step of a photochemical mechanism directly absorbs a photon; secondary steps proceed thermally, driven by the reactive species (radicals, excited states) the primary step produced."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Photochemical Reactions\""
+        "Demonstration 1 (quantum yield calculation): Present the HBr radical chain mechanism (initiation, propagation, termination steps) and have students count how many product molecules trace back to a single primary photon-absorption event, building Φ from mechanism structure rather than a formula alone.",
+        "Demonstration 2 (Beer-Lambert convention check): Give students a transmittance value and have them compute absorbance both with log₁₀ and ln, then state which one matches instrument-reported absorbance values from a real spectrometer."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Photochemical Reactions\"",
+        "setup": "The photochemical formation of HBr has Φ ≈ 10⁶. Is this physically possible? Explain.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (quantum yield calculation): Present the HBr radical chain mechanism (initiation, propagation, termination steps) and have students count how many product molecules trace back to a single primary photon-absorption event, building Φ from mechanism structure rather than a formula alone.",
+          "Demonstration 2 (Beer-Lambert convention check): Give students a transmittance value and have them compute absorbance both with log₁₀ and ln, then state which one matches instrument-reported absorbance values from a real spectrometer."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Photochemical Reactions\""
+        "expected_outcome": "Student can (a) explain how a chain mechanism produces Φ >> 1 without violating the Stark-Einstein law, (b) correctly compute absorbance using log₁₀, (c) correctly identify which steps in a given photochemical mechanism are primary (photon-driven) vs. secondary (thermal)."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the HBr radical chain mechanism, explicitly labeling the single photon-driven initiation step.",
+          "TA-2 (TELL): State the Beer-Lambert log₁₀ convention explicitly, immediately followed by a worked absorbance calculation.",
+          "TA-3 (DO): Student computes quantum yield from a given mechanism's product count and photon count.",
+          "TA-4 (TEST-THINKING): Present the Chapman cycle and ask the student to label each step as primary (photon-driven) or secondary (thermal)."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Photochemical Reactions from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"The photochemical formation of HBr has Φ ≈ 10⁶. Is this physically possible? Explain.\"",
+          "FA-2: \"A solution transmits 10% of incident light. Calculate its absorbance.\"",
+          "FA-3: \"In the Chapman ozone cycle, which step directly requires light? Which doesn't?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Photochemical Reactions\""
+        "mastery_signal": "Student can (a) explain how a chain mechanism produces Φ >> 1 without violating the Stark-Einstein law, (b) correctly compute absorbance using log₁₀, (c) correctly identify which steps in a given photochemical mechanism are primary (photon-driven) vs. secondary (thermal)."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Photochemical Reactions\""
+        "Feeds directly into `chem.env.ozone` (the Chapman cycle's primary/secondary step structure, and its light-driven initiation, are exactly this concept's core content applied to atmospheric ozone chemistry)."
       ],
       "prerequisite_review_triggers": [
         "chem.kinet.rate",
