@@ -6474,48 +6474,62 @@
     {
       "id": "asset.chem.sblock.hydrogen",
       "concept_id": "chem.sblock.hydrogen",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Hydrogen\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Hydrogen\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Hydrogen\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Hydrogen is NOT an alkali metal, despite its Group 1 placement — hydrogen is genuinely a gas (alkali metals are soft solids), has a far higher first ionization energy (1312 kJ/mol versus Li's 520 and Na's 496 kJ/mol), and forms H⁻ (a stable anion, via ionic hydrides), a behavior alkali metals never show; ice genuinely FLOATS on liquid water because it is LESS dense (0.917 g/cm³ versus liquid water's 1.000 g/cm³) — a well-documented exception to the usual \"solid denser than liquid\" rule, caused by freezing organizing H₂O molecules into an open, hexagonal hydrogen-bond network with substantial empty channels, more spacious than the partially-disordered liquid network; and H₂O₂ is NOT always an oxidizing agent — while commonly encountered as an oxidizer (bleach/disinfectant contexts), H₂O₂ contains oxygen at the intermediate −1 oxidation state, meaning it can go EITHER to 0 (forming O₂, acting as a REDUCING agent, as when reacting with the stronger oxidizer KMnO₄) or to −2 (forming H₂O, acting as an oxidizing agent) — the direction genuinely depends on what H₂O₂ is reacting with.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Hydrogen\"",
-        "[TEMPLATE] Key idea 2 for \"Hydrogen\"",
-        "[TEMPLATE] Key idea 3 for \"Hydrogen\""
+        "Hydrogen's Group 1 placement reflects only its shared 1s¹ valence configuration with alkali metals, not matching overall chemistry — concrete evidence (gaseous state versus alkali metals' soft solids, much higher ionization energy, genuine H⁻ anion formation) demonstrates hydrogen is chemically unique, not a true alkali-metal-family member. Ice's lower density than liquid water is a genuine, structurally-explained exception to the general solid-denser-than-liquid rule, caused by ice's open, hydrogen-bonded hexagonal lattice (each molecule forming exactly 4 tetrahedral H-bonds).",
+        "H₂O₂'s oxygen sits at an intermediate oxidation state (−1), genuinely capable of shifting toward either 0 (acting as a reducing agent, losing electrons) or −2 (acting as an oxidizing agent, gaining electrons), with the actual direction determined by the relative oxidizing/reducing strength of whatever H₂O₂ reacts with — its common role as an oxidizer (bleach, disinfectant contexts) reflects one specific reaction scenario, not a fixed, universal chemical identity.",
+        "Core misconception to avoid: Use the three-test framework — physical state (gas vs. solid), ionization energy (much higher for H), and anion-formation capability (H⁻ forms, M⁻ for alkali metals doesn't) — to concretely distinguish hydrogen from true alkali metals."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Hydrogen\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Hydrogen is a Group 1 element, so it's an alkali metal.",
+          "correction": "Use the three-test framework — physical state (gas vs. solid), ionization energy (much higher for H), and anion-formation capability (H⁻ forms, M⁻ for alkali metals doesn't) — to concretely distinguish hydrogen from true alkali metals."
+        },
+        {
+          "misconception": "Ice sinks because it is solid and all solids are denser than their liquids.",
+          "correction": "Ice is genuinely less dense than liquid water, due to its open, hydrogen-bonded hexagonal lattice with substantial empty channels — a real, biologically important exception to the usual solid-denser-than-liquid pattern (aquatic life survives under ice precisely because it forms an insulating floating layer)."
+        },
+        {
+          "misconception": "H₂O₂ always acts as an oxidising agent because it's a peroxide.",
+          "correction": "H₂O₂'s role (oxidizing or reducing agent) depends on its reaction partner — against a stronger oxidizer (like KMnO₄), H₂O₂ acts as a reducing agent; against a reducing agent, H₂O₂ acts as an oxidizing agent — never assume a fixed role from H₂O₂'s common bleach context alone."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Hydrogen\""
+        "Demonstration 1 (hydrogen-vs-alkali-metal three-test comparison): Present the explicit physical-state, ionization-energy, and anion-formation comparisons side by side for hydrogen versus a true alkali metal like sodium.",
+        "Demonstration 2 (H₂O₂+KMnO₄ half-equation): Present the explicit half-equation for H₂O₂'s reaction with KMnO₄, showing H₂O₂ losing electrons (acting as reducing agent) in this specific context."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Hydrogen\"",
+        "setup": "List two properties that distinguish hydrogen from the alkali metals, with evidence.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (hydrogen-vs-alkali-metal three-test comparison): Present the explicit physical-state, ionization-energy, and anion-formation comparisons side by side for hydrogen versus a true alkali metal like sodium.",
+          "Demonstration 2 (H₂O₂+KMnO₄ half-equation): Present the explicit half-equation for H₂O₂'s reaction with KMnO₄, showing H₂O₂ losing electrons (acting as reducing agent) in this specific context."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Hydrogen\""
+        "expected_outcome": "Student can (a) correctly distinguish hydrogen from alkali metals using concrete evidence (state, IE, anion formation), (b) correctly explain ice's lower density using its hydrogen-bond lattice structure, (c) correctly predict H₂O₂'s oxidizer/reducer role based on its reaction partner."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit three-test comparison (state, IE, anion formation) between hydrogen and sodium.",
+          "TA-2 (TELL): State the open hydrogen-bond lattice structure of ice explicitly, connecting it directly to the observed density difference.",
+          "TA-3 (DO): Student writes the half-equation for H₂O₂'s reaction with a stronger oxidizer, correctly identifying H₂O₂'s reducing-agent role.",
+          "TA-4 (TEST-THINKING): Present MC-1's probe and ask the student to justify hydrogen's non-alkali-metal status using all three concrete tests."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Hydrogen from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"List two properties that distinguish hydrogen from the alkali metals, with evidence.\"",
+          "FA-2: \"Ice cubes float in water. What does this tell you about density?\"",
+          "FA-3: \"H₂O₂ reacts with acidified KMnO₄, decolourising it. What is the role of H₂O₂ here?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Hydrogen\""
+        "mastery_signal": "Student can (a) correctly distinguish hydrogen from alkali metals using concrete evidence (state, IE, anion formation), (b) correctly explain ice's lower density using its hydrogen-bond lattice structure, (c) correctly predict H₂O₂'s oxidizer/reducer role based on its reaction partner."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Hydrogen\""
+        "Feeds directly into `chem.sblock.water` (water's unique properties, including its density anomaly and H₂O₂'s redox behavior, directly extend this concept's foundations)."
       ],
       "prerequisite_review_triggers": [
         "chem.period.modern-periodic-law"
@@ -6524,48 +6538,62 @@
     {
       "id": "asset.chem.sblock.alkali",
       "concept_id": "chem.sblock.alkali",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Alkali Metals\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Alkali Metals\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Alkali Metals\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "\"Alkali metals\" are named for their PRODUCT, not an affinity — all Group 1 metals react with water to produce strongly alkaline (basic) solutions of MOH, but the metals themselves are not alkalis; not all Group 1 metals burn in oxygen to form the simple oxide M₂O — sodium specifically forms the PEROXIDE Na₂O₂ (O oxidation state −1), while K/Rb/Cs form SUPEROXIDES (O oxidation state −½), with the specific oxide type determined by which anion size is best stabilized by the given cation's size (only Li, the smallest cation, forms the simple oxide Li₂O); and Group 1 reactivity INCREASES down the group (opposite the halogen trend), since metals react by LOSING electrons (easier with lower IE going down), making Li — despite being at the \"top\" — the LEAST reactive alkali metal, not the most.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Alkali Metals\"",
-        "[TEMPLATE] Key idea 2 for \"Alkali Metals\"",
-        "[TEMPLATE] Key idea 3 for \"Alkali Metals\""
+        "\"Alkali metal\" names Group 1 elements for the alkaline (basic) product their reaction with water produces (MOH), not for any inherent alkaline property of the metals themselves. While all Group 1 metals share the general pattern of reacting with oxygen, the SPECIFIC product type (simple oxide, peroxide, or superoxide) genuinely varies with cation size — only lithium, the smallest cation, is small enough to stabilize the compact simple-oxide anion; larger cations preferentially stabilize the less compact peroxide or superoxide anions instead.",
+        "Group 1 metal reactivity increases down the group, driven by decreasing ionization energy (easier electron loss) — genuinely opposite to non-metal groups like the halogens, where reactivity decreases down the group (driven by decreasing electron affinity magnitude, meaning harder electron gain); metal and non-metal reactivity trends move in opposite directions because they involve opposite electron-transfer mechanisms, and one group's trend direction should never be assumed to apply to another group type.",
+        "Core misconception to avoid: Group 1 metals are named \"alkali metals\" because reacting them with water produces strongly alkaline (basic) solutions — the name describes the reaction's product, not an inherent property of the metal itself."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Alkali Metals\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "they like alkalis.",
+          "correction": "Group 1 metals are named \"alkali metals\" because reacting them with water produces strongly alkaline (basic) solutions — the name describes the reaction's product, not an inherent property of the metal itself."
+        },
+        {
+          "misconception": "sodium oxide forms.",
+          "correction": "Li forms the simple oxide (Li₂O); Na forms the peroxide (Na₂O₂); K/Rb/Cs form superoxides — the specific product depends on cation-size-to-anion-size matching, not a single uniform M₂O product across the whole group."
+        },
+        {
+          "misconception": "higher up = more reactive for Group 1.",
+          "correction": "Group 1 metal reactivity increases down the group (Cs most reactive, Li least reactive) — this is the OPPOSITE direction from halogen (non-metal) reactivity trends, since metals and non-metals react via opposite electron-transfer mechanisms."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Alkali Metals\""
+        "Demonstration 1 (oxide-type-by-cation-size comparison): Present the explicit Li/Na/K oxide-product differences (simple oxide, peroxide, superoxide) alongside their cation sizes, connecting size-matching directly to product type.",
+        "Demonstration 2 (Li-vs-Cs water-reaction vigor comparison): Present or describe the observed reaction vigor difference between Li and Cs with water, connecting the trend directly to their ionization energies."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Alkali Metals\"",
+        "setup": "Why are Group 1 metals called alkali metals?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (oxide-type-by-cation-size comparison): Present the explicit Li/Na/K oxide-product differences (simple oxide, peroxide, superoxide) alongside their cation sizes, connecting size-matching directly to product type.",
+          "Demonstration 2 (Li-vs-Cs water-reaction vigor comparison): Present or describe the observed reaction vigor difference between Li and Cs with water, connecting the trend directly to their ionization energies."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Alkali Metals\""
+        "expected_outcome": "Student can (a) correctly explain the \"alkali metal\" naming as describing the reaction product, not the metal, (b) correctly predict the specific oxide/peroxide/superoxide product for a given Group 1 metal using cation-size reasoning, (c) correctly rank Group 1 reactivity as increasing down the group, opposite the halogen trend."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the water-reaction equation explicitly, showing the alkaline MOH as the product, not a property of the metal.",
+          "TA-2 (TELL): State the cation-size-to-oxide-type relationship explicitly, worked through for Li/Na/K.",
+          "TA-3 (DO): Student predicts the correct oxide type for a given Group 1 metal using cation-size reasoning.",
+          "TA-4 (TEST-THINKING): Present MC-3's Li-vs-Cs probe and ask the student to justify the correct reactivity ranking using the electron-loss mechanism."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Alkali Metals from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Why are Group 1 metals called alkali metals?\"",
+          "FA-2: \"Write the product of sodium burning in excess oxygen.\"",
+          "FA-3: \"Which reacts more vigorously with water — Li or Cs?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Alkali Metals\""
+        "mastery_signal": "Student can (a) correctly explain the \"alkali metal\" naming as describing the reaction product, not the metal, (b) correctly predict the specific oxide/peroxide/superoxide product for a given Group 1 metal using cation-size reasoning, (c) correctly rank Group 1 reactivity as increasing down the group, opposite the halogen trend."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Alkali Metals\""
+        "Feeds directly into `chem.sblock.alkaline-earth` (Group 2 chemistry directly extends and contrasts with the s-block reasoning established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.period.periodic-properties"
@@ -6574,48 +6602,64 @@
     {
       "id": "asset.chem.sblock.alkaline-earth",
       "concept_id": "chem.sblock.alkaline-earth",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Alkaline Earth Metals\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Alkaline Earth Metals\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Alkaline Earth Metals\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Group 2 elements do NOT all react vigorously with water like Group 1 metals — the reactivity trend is genuinely PROGRESSIVE, not uniform: Be does NOT react with cold water at all (protective BeO layer), Mg reacts very slowly with cold water but vigorously with steam, Ca reacts steadily with cold water, and only Sr and Ba react vigorously — \"Group 2 reacts vigorously with water\" overgeneralizes from the heaviest members to the whole group; sulphate solubility DECREASES down Group 2 (MgSO₄ very soluble→BaSO₄ essentially insoluble), the OPPOSITE trend from hydroxide solubility (which INCREASES down the group, Mg(OH)₂ sparingly soluble→Ba(OH)₂ soluble) — these two trends genuinely diverge because the anion's size determines which energy term (lattice or hydration) changes more steeply as the cation grows; and smaller cations do NOT always produce higher-thermal-stability salts via \"higher lattice energy\" — for carbonates/nitrates, it is specifically ANION-DESTABILIZING cation POLARIZATION that governs decomposition temperature, and SMALLER, higher-charge-density cations (like Mg²⁺) polarize and DESTABILIZE the carbonate anion MORE, causing LOWER decomposition temperatures (MgCO₃~540°C vs. BaCO₃~1360°C) — high lattice energy and high decomposition temperature do NOT track together here.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Alkaline Earth Metals\"",
-        "[TEMPLATE] Key idea 2 for \"Alkaline Earth Metals\"",
-        "[TEMPLATE] Key idea 3 for \"Alkaline Earth Metals\""
+        "Group 2's water reactivity is a genuinely progressive trend (Be essentially inert, through Mg's slow reaction, to Ba's vigorous reaction), unlike Group 1's more uniformly vigorous behavior — never assume uniform reactivity across the group. Solubility trends depend specifically on the anion involved: hydroxide solubility increases down the group, while sulphate solubility decreases, these opposite directions arising from which energy term (lattice vs. hydration) dominates for each specific anion size.",
+        "Carbonate and nitrate thermal decomposition temperature is governed by cation-polarization-induced anion destabilization, not simple lattice energy — smaller, higher-charge-density cations polarize and destabilize the anion more strongly, actually LOWERING decomposition temperature, the opposite consequence from a naive \"smaller cation=stronger lattice=more stable\" expectation.",
+        "Core misconception to avoid: Group 2's reactivity with water is progressive (Be~inert, Mg slow, Ca steady, Sr/Ba vigorous) — never assume uniform vigorous reactivity across the whole group."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Alkaline Earth Metals\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Group 2 elements all react with water quickly.",
+          "correction": "Group 2's reactivity with water is progressive (Be~inert, Mg slow, Ca steady, Sr/Ba vigorous) — never assume uniform vigorous reactivity across the whole group."
+        },
+        {
+          "misconception": "solubility increases down Group 2 for all salts.",
+          "correction": "Always check the SPECIFIC anion before predicting a Group 2 solubility trend direction — hydroxide solubility increases down the group, but sulphate solubility decreases, and these are genuinely opposite trends, not a single universal pattern."
+        },
+        {
+          "misconception": "small ion → strong lattice → more stable salt → higher decomposition temperature.",
+          "correction": "For carbonate/nitrate thermal stability specifically, smaller cations polarize and destabilize the anion MORE, LOWERING decomposition temperature — never assume \"smaller cation=higher lattice energy=more thermally stable\" for this class of decomposition reaction."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Alkaline Earth Metals\""
+        "Demonstration 1 (element-by-element Group 2 water-reactivity progression): Present the explicit Be→Mg→Ca→Sr→Ba reactivity trend, tracing the progression from inert to vigorous.",
+        "Demonstration 2 (hydroxide-vs-sulphate solubility-trend comparison): Present both trends explicitly side by side, deriving the opposite directions from the lattice/hydration-energy balance argument.",
+        "Demonstration 3 (cation-polarization-destabilizes-anion diagram for MgCO₃ vs. BaCO₃): Present the explicit polarization mechanism, deriving the inverse cation-size/decomposition-temperature relationship."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Alkaline Earth Metals\"",
+        "setup": "What happens when Mg metal is added to cold water?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (element-by-element Group 2 water-reactivity progression): Present the explicit Be→Mg→Ca→Sr→Ba reactivity trend, tracing the progression from inert to vigorous.",
+          "Demonstration 2 (hydroxide-vs-sulphate solubility-trend comparison): Present both trends explicitly side by side, deriving the opposite directions from the lattice/hydration-energy balance argument.",
+          "Demonstration 3 (cation-polarization-destabilizes-anion diagram for MgCO₃ vs. BaCO₃): Present the explicit polarization mechanism, deriving the inverse cation-size/decomposition-temperature relationship."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Alkaline Earth Metals\""
+        "expected_outcome": "Student can (a) correctly predict the progressive water-reactivity trend across Group 2, (b) correctly predict opposite solubility trends for hydroxides vs. sulphates, (c) correctly predict carbonate/nitrate thermal stability from cation-polarization reasoning."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit Group 2 water-reactivity progression from Be to Ba.",
+          "TA-2 (TELL): State the anion-dependent solubility-trend divergence explicitly, anchored to the hydroxide-vs-sulphate comparison.",
+          "TA-3 (DO): Student predicts decomposition temperature ranking for an unfamiliar set of Group 2 carbonates from cation-polarization reasoning.",
+          "TA-4 (TEST-THINKING): Present the MgCO₃-vs-BaCO₃ probe and ask the student to justify the counterintuitive thermal-stability trend."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Alkaline Earth Metals from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"What happens when Mg metal is added to cold water?\"",
+          "FA-2: \"Which is more soluble: MgSO₄ or BaSO₄?\"",
+          "FA-3: \"Which decomposes at a lower temperature: MgCO₃ or BaCO₃? Explain using polarisation.\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Alkaline Earth Metals\""
+        "mastery_signal": "Student can (a) correctly predict the progressive water-reactivity trend across Group 2, (b) correctly predict opposite solubility trends for hydroxides vs. sulphates, (c) correctly predict carbonate/nitrate thermal stability from cation-polarization reasoning."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Alkaline Earth Metals\""
+        "This concept has no direct KG unlocks but consolidates alkali-metal reasoning built across `chem.sblock.alkali`, forming a capstone application to industrial inorganic chemistry (cement, plaster) and periodic-trends contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.sblock.alkali"
@@ -6624,48 +6668,64 @@
     {
       "id": "asset.chem.sblock.water",
       "concept_id": "chem.sblock.water",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Water and its Chemistry\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Water and its Chemistry\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Chemistry of Water\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Ice is LESS dense than liquid water (0.917 vs. 1.000g/cm³), NOT denser despite being solid — this is a genuine, famous ANOMALY (almost all other substances have a denser solid than liquid) — ice's rigid hexagonal hydrogen-bonded lattice, with large open channels, forces molecules into positions at a slightly LARGER average distance than the partially-broken hydrogen-bond network of liquid water allows, making ice's structure genuinely less compact despite being solid; hard water and heavy water are COMPLETELY UNRELATED concepts despite sharing the word \"water\" — hard water contains dissolved Ca²⁺/Mg²⁺ ions (a concentration-level impurity, removable by treatment), while heavy water (D₂O) is chemically PURE water made of the deuterium isotope (mass 2, vs. protium's mass 1) — D₂O contains zero dissolved minerals, and its \"heaviness\" comes entirely from isotopic mass, never from contamination; and boiling water removes ONLY TEMPORARY hardness (Ca(HCO₃)₂/Mg(HCO₃)₂, via CO₂ escaping and CaCO₃ precipitating) — PERMANENT hardness (CaSO₄, MgSO₄, CaCl₂) is genuinely NOT removed by boiling, since these salts remain thermally stable and dissolved, requiring ion exchange, distillation, or washing soda (Na₂CO₃) addition instead.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Water and its Chemistry\"",
-        "[TEMPLATE] Key idea 2 for \"Water and its Chemistry\"",
-        "[TEMPLATE] Key idea 3 for \"Water and its Chemistry\""
+        "Ice's lower density than liquid water is a genuine, well-documented anomaly arising from its rigid hexagonal hydrogen-bonded lattice structure, which forces molecules into a less compact arrangement than the liquid's partially-broken hydrogen-bond network — this runs counter to the typical pattern where solids are denser than their liquid phase. \"Hard water\" (dissolved mineral ions) and \"heavy water\" (isotopically substituted, chemically pure D₂O) are entirely unrelated concepts despite their similar-sounding names.",
+        "Boiling removes hardness only through the specific mechanism of bicarbonate thermal decomposition (CO₂ escape, insoluble CaCO₃ precipitation) — this mechanism is unavailable for permanent-hardness salts (sulfates, chlorides), which remain thermally stable and fully dissolved regardless of boiling, requiring alternative treatment methods.",
+        "Core misconception to avoid: Ice is genuinely LESS dense than liquid water due to its open hydrogen-bonded lattice structure — never assume the general \"solid denser than liquid\" pattern applies to water without qualification."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Water and its Chemistry\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "solid = more compact = denser.",
+          "correction": "Ice is genuinely LESS dense than liquid water due to its open hydrogen-bonded lattice structure — never assume the general \"solid denser than liquid\" pattern applies to water without qualification."
+        },
+        {
+          "misconception": "heavy = contaminated / hard and heavy are the same thing.",
+          "correction": "Hard water (dissolved Ca²⁺/Mg²⁺ impurities) and heavy water (D₂O, isotopically pure) are entirely unrelated concepts — never conflate them based on their similar-sounding names."
+        },
+        {
+          "misconception": "boiling always softens hard water.",
+          "correction": "Boiling removes only temporary (bicarbonate-based) hardness via CO₂ escape and CaCO₃ precipitation — permanent (sulfate/chloride-based) hardness requires a different treatment method entirely, never assume boiling universally softens hard water."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Water and its Chemistry\""
+        "Demonstration 1 (hexagonal-lattice-vs-liquid-packing diagram): Present the explicit structural comparison, deriving ice's lower density from its open lattice geometry.",
+        "Demonstration 2 (hard-water/heavy-water comparison table): Present the explicit side-by-side comparison, isolating the genuinely different basis for each term.",
+        "Demonstration 3 (thermal-decomposition mechanism for temporary vs. permanent hardness): Present the explicit bicarbonate-decomposition reaction, contrasted with the lack of an analogous pathway for permanent-hardness salts."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Water and its Chemistry\"",
+        "setup": "Ice floats in water. What does that tell you about the density of ice relative to water?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (hexagonal-lattice-vs-liquid-packing diagram): Present the explicit structural comparison, deriving ice's lower density from its open lattice geometry.",
+          "Demonstration 2 (hard-water/heavy-water comparison table): Present the explicit side-by-side comparison, isolating the genuinely different basis for each term.",
+          "Demonstration 3 (thermal-decomposition mechanism for temporary vs. permanent hardness): Present the explicit bicarbonate-decomposition reaction, contrasted with the lack of an analogous pathway for permanent-hardness salts."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Water and its Chemistry\""
+        "expected_outcome": "Student can (a) correctly explain ice's lower density from its hydrogen-bonded lattice structure, (b) correctly distinguish hard water from heavy water, (c) correctly predict whether boiling removes a given type of hardness."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit hexagonal-lattice-vs-liquid-packing diagram.",
+          "TA-2 (TELL): State the hard-water/heavy-water distinction explicitly, anchored to the comparison table.",
+          "TA-3 (DO): Student predicts whether boiling will soften an unfamiliar hard-water sample based on its specific dissolved salts.",
+          "TA-4 (TEST-THINKING): Present the CaSO₄-boiling probe and ask the student to justify why permanent hardness resists boiling."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Chemistry of Water from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Ice floats in water. What does that tell you about the density of ice relative to water?\"",
+          "FA-2: \"Does heavy water (D₂O) contain any calcium or magnesium ions?\"",
+          "FA-3: \"If you boil water containing dissolved CaSO₄, does the calcium sulfate precipitate out?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Water and its Chemistry\""
+        "mastery_signal": "Student can (a) correctly explain ice's lower density from its hydrogen-bonded lattice structure, (b) correctly distinguish hard water from heavy water, (c) correctly predict whether boiling removes a given type of hardness."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Water and its Chemistry\""
+        "This concept has no direct KG unlocks but consolidates hydrogen and intermolecular-force reasoning built across `chem.sblock.hydrogen` and `chem.bond.intermolecular`, forming a capstone application to environmental and water-treatment chemistry contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.sblock.hydrogen",
