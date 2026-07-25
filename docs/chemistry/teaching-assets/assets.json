@@ -9310,48 +9310,64 @@
     {
       "id": "asset.chem.anal.gravimetric",
       "concept_id": "chem.anal.gravimetric",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Gravimetric Analysis\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Gravimetric Analysis\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Gravimetric Analysis\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The gravimetric factor (GF) converts precipitate mass to analyte mass, and must ALWAYS be M(analyte)/M(precipitate)×stoichiometric ratio — since the analyte is only PART of the precipitate (which also includes the precipitating counter-ion, like Ba²⁺ in BaSO₄), the analyte is necessarily LIGHTER, making GF always <1 for these pairs (0.41 for BaSO₄→SO₄²⁻, 0.25 for AgCl→Cl⁻) — a computed GF result LARGER than the precipitate mass is an immediate impossibility flag; co-precipitation does NOT lower the measured result — it ADDS extra mass to the precipitate (the co-precipitated impurity weighs the crucible down more), and when this excess mass is converted back via the GF, it is incorrectly attributed to the analyte, making the calculated %analyte HIGHER than the true value — only INCOMPLETE precipitation or filtration loss produces a low result, never contamination; and excess precipitating agent is NOT wasteful or erroneous — a deliberate 10-20% molar excess drives the solubility equilibrium further toward precipitation via the COMMON-ION EFFECT (lower effective solubility, more complete precipitation, less analyte lost to the filtrate), with the excess reagent simply washed away during filtration — this is an intentional Le Chatelier strategy, never a procedural mistake to avoid.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Gravimetric Analysis\"",
-        "[TEMPLATE] Key idea 2 for \"Gravimetric Analysis\"",
-        "[TEMPLATE] Key idea 3 for \"Gravimetric Analysis\""
+        "The gravimetric factor converts precipitate mass to analyte mass via M(analyte)/M(precipitate)×stoichiometric ratio, always less than 1, since the analyte is necessarily only part of the total precipitate mass (which also includes the precipitating counter-ion) — a sanity check confirming the analyte mass is smaller than the precipitate mass catches directional errors. Co-precipitation adds extra mass to the weighed precipitate, which the fixed gravimetric factor misattributes entirely to analyte, producing a systematically HIGH-biased result — the opposite of the intuitive \"contamination dilutes/lowers\" expectation.",
+        "A modest, deliberate excess of precipitating agent is a standard gravimetric-analysis strategy, exploiting the common-ion effect to shift the solubility equilibrium toward more complete precipitation (minimizing analyte loss to the filtrate) — this excess is intentionally added and easily removed by washing, never a procedural mistake to be avoided.",
+        "Core misconception to avoid: Always compute GF as M(analyte)/M(precipitate)×stoichiometric ratio (always<1 for these pairs) — apply the sanity check that the resulting analyte mass must be smaller than the starting precipitate mass."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Gravimetric Analysis\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "GF = 233.39/96.06",
+          "correction": "Always compute GF as M(analyte)/M(precipitate)×stoichiometric ratio (always<1 for these pairs) — apply the sanity check that the resulting analyte mass must be smaller than the starting precipitate mass."
+        },
+        {
+          "misconception": "Co-precipitation dilutes the precipitate so the result is lower than the true value.",
+          "correction": "Co-precipitation adds mass and inflates the calculated %analyte (high bias) — only actual loss of precipitate (incomplete reaction, filtration breakthrough) produces a low bias, never conflate the two error directions."
+        },
+        {
+          "misconception": "You should add exactly stoichiometric BaCl₂ to avoid contaminating the precipitate.",
+          "correction": "A modest, deliberate excess of precipitating agent is a standard strategy exploiting the common-ion effect to drive more complete precipitation — never treat excess reagent as inherently wasteful or erroneous in this context."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Gravimetric Analysis\""
+        "Demonstration 1 (explicit GF computation with sanity check): Compute GF for BaSO₄→SO₄²⁻ explicitly, applying the sanity check that analyte mass must be smaller than precipitate mass.",
+        "Demonstration 2 (mass-accounting diagram for co-precipitation bias): Present the explicit diagram tracing added impurity mass through the GF conversion, deriving the high-bias direction.",
+        "Demonstration 3 (common-ion-effect/Le Chatelier argument for deliberate excess): Present the explicit equilibrium-shift argument, deriving the completeness benefit of excess precipitating agent."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Gravimetric Analysis\"",
+        "setup": "A sample contains SO₄²⁻. You precipitate it as BaSO₄. Calculate the mass of SO₄²⁻ in 0.4856 g of BaSO₄.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (explicit GF computation with sanity check): Compute GF for BaSO₄→SO₄²⁻ explicitly, applying the sanity check that analyte mass must be smaller than precipitate mass.",
+          "Demonstration 2 (mass-accounting diagram for co-precipitation bias): Present the explicit diagram tracing added impurity mass through the GF conversion, deriving the high-bias direction.",
+          "Demonstration 3 (common-ion-effect/Le Chatelier argument for deliberate excess): Present the explicit equilibrium-shift argument, deriving the completeness benefit of excess precipitating agent."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Gravimetric Analysis\""
+        "expected_outcome": "Student can (a) correctly compute the gravimetric factor in the analyte/precipitate direction with sanity check, (b) correctly predict high bias from co-precipitation (mass-adding errors), (c) correctly justify deliberate reagent excess as an analytical strategy."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit GF computation with the sanity-check step.",
+          "TA-2 (TELL): State the mass-adding-inflates-result principle for co-precipitation explicitly, anchored to the mass-accounting diagram.",
+          "TA-3 (DO): Student predicts high/low bias for an unfamiliar gravimetric error source.",
+          "TA-4 (TEST-THINKING): Present the excess-BaCl₂ probe and ask the student to justify the deliberate-excess strategy from the common-ion effect."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Gravimetric Analysis from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A sample contains SO₄²⁻. You precipitate it as BaSO₄. Calculate the mass of SO₄²⁻ in 0.4856 g of BaSO₄.\"",
+          "FA-2: \"Co-precipitation of Na₂SO₄ occurs when precipitating BaSO₄. Does this make the measured %SO₄²⁻ too high or too low?\"",
+          "FA-3: \"Why is a 10–20% molar excess of BaCl₂ added when precipitating SO₄²⁻?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Gravimetric Analysis\""
+        "mastery_signal": "Student can (a) correctly compute the gravimetric factor in the analyte/precipitate direction with sanity check, (b) correctly predict high bias from co-precipitation (mass-adding errors), (c) correctly justify deliberate reagent excess as an analytical strategy."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Gravimetric Analysis\""
+        "This concept has no direct KG unlocks but consolidates stoichiometry and solubility-equilibrium reasoning built across `chem.found.stoichiometry` and `chem.equil.solubility`, forming a capstone application to quantitative analytical chemistry contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.found.stoichiometry",
@@ -9361,99 +9377,125 @@
     {
       "id": "asset.chem.anal.volumetric",
       "concept_id": "chem.anal.volumetric",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Volumetric Analysis\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Volumetric Analysis\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Volumetric Analysis\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "NOT any indicator can be used for any titration — an indicator's transition pH range must MATCH the specific equivalence-point pH of that titration, and using a mismatched indicator (like phenolphthalein, transitioning pH 8.2-10, for a strong-acid/weak-base titration whose equivalence point is ≈pH5) produces a SYSTEMATICALLY LOW result, since the color change occurs far before the true equivalence point; in a back-titration, the amount of analyte is NOT simply the moles of the back-titrant — the back-titrant measures the LEFTOVER (unreacted) portion of the original reagent, so the analyte's reacted amount must be computed as (moles of reagent originally added) MINUS (moles measured by back-titration), never the back-titrant moles used directly; and the Volhard method does NOT titrate halides directly with KSCN (there is no direct reaction between Cl⁻ and KSCN) — it is fundamentally a BACK TITRATION: a KNOWN EXCESS of AgNO₃ first precipitates AgCl, then the EXCESS (unreacted) Ag⁺ is back-titrated with standard KSCN (using Fe³⁺ indicator, red [FeSCN]²⁺ endpoint), with [Cl⁻] computed as (Ag⁺ added) MINUS (Ag⁺ remaining, from KSCN used).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Volumetric Analysis\"",
-        "[TEMPLATE] Key idea 2 for \"Volumetric Analysis\"",
-        "[TEMPLATE] Key idea 3 for \"Volumetric Analysis\""
+        "An indicator's color-change pH range must be deliberately matched to the specific titration's actual equivalence-point pH (which varies depending on the acid-base combination type) — a mismatched indicator produces a systematic error by triggering color change at the wrong titrant volume. Back-titration data specifically represents LEFTOVER (unreacted) reagent, never the amount that reacted with the analyte directly — the analyte's reacted amount requires an explicit subtraction (total reagent added minus leftover measured by back-titration).",
+        "The Volhard method for halide determination has no direct reaction between the halide and KSCN — instead, a known excess of Ag⁺ first precipitates the halide, and it is the LEFTOVER Ag⁺ (not the halide itself) that KSCN back-titrates, with the halide's concentration recovered indirectly through the same subtraction logic underlying any back-titration.",
+        "Core misconception to avoid: Always select an indicator whose transition pH range matches the SPECIFIC titration's equivalence-point pH — never assume indicator interchangeability across different acid-base combination types."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Volumetric Analysis\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "all indicators work the same.",
+          "correction": "Always select an indicator whose transition pH range matches the SPECIFIC titration's equivalence-point pH — never assume indicator interchangeability across different acid-base combination types."
+        },
+        {
+          "misconception": "use the NaOH directly.",
+          "correction": "In a back-titration, always compute (moles of reagent originally added) MINUS (moles measured by back-titration, representing leftover) to find the reagent actually consumed by the analyte — never use the back-titrant's moles directly as the analyte-reacted amount."
+        },
+        {
+          "misconception": "add KSCN to the Cl⁻ solution and use Fe³⁺ indicator.",
+          "correction": "The Volhard method is fundamentally a back-titration — Ag⁺ (added in known excess) reacts with Cl⁻, and the LEFTOVER Ag⁺ is what KSCN actually titrates, with [Cl⁻] computed by subtraction — never describe it as a direct Cl⁻/KSCN titration."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Volumetric Analysis\""
+        "Demonstration 1 (equivalence-point-pH-vs-indicator-transition-range comparison): Present the explicit pH comparison for a strong-acid/weak-base titration and phenolphthalein, deriving the mismatch consequence.",
+        "Demonstration 2 (back-titration mass-balance subtraction computation): Present the explicit step-by-step subtraction for the HCl/CaCO₃/NaOH example.",
+        "Demonstration 3 (three-step Volhard procedure with Ag⁺-intermediary logic): Present the explicit procedure, reinforcing the back-titration structure via Ag⁺ as the actual titrated species."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Volumetric Analysis\"",
+        "setup": "A student uses phenolphthalein for a strong acid/weak base titration and claims the result is valid. Are they correct?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (equivalence-point-pH-vs-indicator-transition-range comparison): Present the explicit pH comparison for a strong-acid/weak-base titration and phenolphthalein, deriving the mismatch consequence.",
+          "Demonstration 2 (back-titration mass-balance subtraction computation): Present the explicit step-by-step subtraction for the HCl/CaCO₃/NaOH example.",
+          "Demonstration 3 (three-step Volhard procedure with Ag⁺-intermediary logic): Present the explicit procedure, reinforcing the back-titration structure via Ag⁺ as the actual titrated species."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Volumetric Analysis\""
+        "expected_outcome": "Student can (a) correctly select an indicator matched to a specific titration's equivalence-point pH, (b) correctly compute analyte amount via the back-titration subtraction method, (c) correctly describe the Volhard method's back-titration structure with Ag⁺ as intermediary."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit equivalence-point-pH-vs-indicator-transition-range comparison.",
+          "TA-2 (TELL): State the back-titration subtraction requirement explicitly, anchored to the step-by-step mass-balance computation.",
+          "TA-3 (DO): Student computes the analyte amount for an unfamiliar back-titration scenario via the subtraction method.",
+          "TA-4 (TEST-THINKING): Present the Volhard-method probe and ask the student to justify why KSCN doesn't directly titrate Cl⁻."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Volumetric Analysis from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A student uses phenolphthalein for a strong acid/weak base titration and claims the result is valid. Are they correct?\"",
+          "FA-2: \"25.0 cm³ of 0.100 mol dm⁻³ HCl was added to excess CaCO₃; 10.0 cm³ of 0.100 mol dm⁻³ NaOH was required to neutralise the filtrate. Calculate the moles of CaCO₃ that reacted.\"",
+          "FA-3: \"Describe the steps to determine [Cl⁻] by the Volhard method.\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Volumetric Analysis\""
+        "mastery_signal": "Student can (a) correctly select an indicator matched to a specific titration's equivalence-point pH, (b) correctly compute analyte amount via the back-titration subtraction method, (c) correctly describe the Volhard method's back-titration structure with Ag⁺ as intermediary."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Volumetric Analysis\""
+        "This concept has no direct KG unlocks but consolidates concentration, titration, and redox-titration reasoning built across `chem.found.concentration`, `chem.equil.titration`, and `chem.redox.titrations`, forming a capstone application to industrial and pharmaceutical quality-control contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.found.concentration",
+        "chem.equil.titration",
         "chem.redox.titrations"
       ]
     },
     {
       "id": "asset.chem.anal.chromatography",
       "concept_id": "chem.anal.chromatography",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Chromatography\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Chromatography\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Chromatography\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "A LOW Rf value means HIGH affinity for the stationary phase, NOT low interaction — Rf=0.05 means the compound barely moved because it was STRONGLY RETAINED by the stationary phase (silica), with the mobile phase unable to pull it forward — \"didn't move\" correctly means \"strongly held,\" never \"doesn't interact with anything\"; and in SIZE-EXCLUSION chromatography, LARGE molecules elute FIRST, not last — large molecules cannot enter the gel's internal pores, so they are EXCLUDED and travel only through the shorter path between beads, while SMALL molecules enter the pores (a longer effective path), retarding them and making them elute LAST — this is the OPPOSITE of a simple sieving/\"large=slow\" intuition, since size-exclusion's mechanism is about pore ACCESS, not physical size-based obstruction.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Chromatography\"",
-        "[TEMPLATE] Key idea 2 for \"Chromatography\"",
-        "[TEMPLATE] Key idea 3 for \"Chromatography\""
+        "Rf reflects a competition between a compound's affinity for the stationary phase (holding it back) and the mobile phase (carrying it forward) — a low Rf specifically signals the stationary phase won this competition decisively, indicating HIGH (not low) stationary-phase affinity, the opposite of an intuitive \"didn't move=didn't interact\" interpretation.",
+        "Size-exclusion chromatography separates molecules based on their ability to access the gel beads' internal pore network — large molecules, excluded from the pores, travel a shorter path and elute first, while small molecules enter the pores, travel a longer effective path, and elute last — the opposite elution order from a naive sieving/\"large=slow\" intuition.",
+        "Core misconception to avoid: A low Rf value specifically indicates strong stationary-phase affinity (the compound was held back, not weakly interacting) — never interpret \"barely moved\" as \"doesn't interact.\""
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Chromatography\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Rf = 0.05 means compound X doesn't interact much with silica.",
+          "correction": "A low Rf value specifically indicates strong stationary-phase affinity (the compound was held back, not weakly interacting) — never interpret \"barely moved\" as \"doesn't interact.\""
+        },
+        {
+          "misconception": "Large proteins elute last because they're too big to move quickly.",
+          "correction": "In size-exclusion chromatography, large molecules (excluded from pores, shorter path) elute FIRST; small molecules (enter pores, longer path) elute LAST — genuinely opposite to a sieving-based intuition."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Chromatography\""
+        "Demonstration 1 (stationary-phase-vs-mobile-phase competition framing for Rf): Present the explicit competition argument, deriving the correct low-Rf interpretation.",
+        "Demonstration 2 (pore-accessibility diagram for size-exclusion chromatography): Present the explicit diagram showing large-molecule exclusion and small-molecule pore entry, deriving the resulting elution order."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Chromatography\"",
+        "setup": "Compound X has Rf = 0.05 on a silica TLC plate with hexane. What does this tell you about compound X's affinity for silica?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (stationary-phase-vs-mobile-phase competition framing for Rf): Present the explicit competition argument, deriving the correct low-Rf interpretation.",
+          "Demonstration 2 (pore-accessibility diagram for size-exclusion chromatography): Present the explicit diagram showing large-molecule exclusion and small-molecule pore entry, deriving the resulting elution order."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Chromatography\""
+        "expected_outcome": "Student can (a) correctly interpret a low Rf value as high stationary-phase affinity, (b) correctly predict elution order in size-exclusion chromatography from pore-accessibility reasoning."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit stationary-phase-vs-mobile-phase competition framing for Rf interpretation.",
+          "TA-2 (TELL): State the pore-accessibility mechanism for size-exclusion explicitly, anchored to the diagram.",
+          "TA-3 (DO): Student predicts elution order for an unfamiliar mixture in size-exclusion chromatography.",
+          "TA-4 (TEST-THINKING): Present the low-Rf probe and ask the student to justify why it indicates strong, not weak, stationary-phase affinity."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Chromatography from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Compound X has Rf = 0.05 on a silica TLC plate with hexane. What does this tell you about compound X's affinity for silica?\"",
+          "FA-2: \"In size-exclusion chromatography, a mixture of large proteins and small buffer salts is loaded onto a gel filtration column. Which elutes first?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Chromatography\""
+        "mastery_signal": "Student can (a) correctly interpret a low Rf value as high stationary-phase affinity, (b) correctly predict elution order in size-exclusion chromatography from pore-accessibility reasoning."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Chromatography\""
+        "This concept has no direct KG unlocks but consolidates adsorption reasoning built across `chem.surface.adsorption`, forming a capstone application to purification and biomolecule-separation contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.surface.adsorption"
@@ -9462,50 +9504,69 @@
     {
       "id": "asset.chem.anal.spectroscopy",
       "concept_id": "chem.anal.spectroscopy",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyse \"Spectroscopic Methods\".",
-      "concept_summary": "AAS, ICP-OES; UV-Vis (Beer–Lambert); IR structural ID; NMR structure; mass spec exact mass.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Spectroscopic Methods\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The Beer-Lambert law (A=εcl) does NOT apply at any concentration simply because a spectrophotometer is being used — it specifically assumes monochromatic radiation, no scattering, and no chemical changes (aggregation, speciation shifts) with concentration, ALL of which can break down at high concentration (molecular interactions altering effective ε, stray light becoming significant) — a curving calibration plot IS Beer-Lambert failing, requiring dilution into the linear range, never dismissed as an instrument issue; AAS and ICP-OES, despite both using light and atomic energy levels, are FUNDAMENTALLY OPPOSITE techniques — AAS is an ABSORPTION technique requiring a SEPARATE hollow cathode lamp matched exactly to each element's absorption wavelength (one lamp=one element), while ICP-OES is an EMISSION technique where the plasma-excited sample itself emits light for ALL elements SIMULTANEOUSLY, needing no per-element external light source — \"both use light\" does not imply \"the same type of technique\"; and in ICP-MS, the m/z value does NOT directly give \"the atomic mass of the element\" — since most ions are singly charged (z=1, so m/z=mass), multiple peaks at slightly different m/z values (e.g., 206, 207, 208 for lead) represent the DIFFERENT STABLE ISOTOPES of that SAME element, never different elements or some ambiguous \"atomic mass\" — ICP-MS directly measures isotope distributions, the basis for applications like geological dating and nuclear forensics.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Spectroscopic Methods\"",
-        "[TEMPLATE] Key idea 2 for \"Spectroscopic Methods\"",
-        "[TEMPLATE] Key idea 3 for \"Spectroscopic Methods\""
+        "Beer-Lambert law's validity depends on specific underlying physical assumptions (monochromatic light, no scattering, no concentration-dependent chemical change) that can genuinely break down at high concentration, regardless of instrument quality — a curving calibration plot is a real, diagnosable signal of this breakdown, requiring dilution into the linear range. AAS and ICP-OES, despite sharing the underlying principle of quantized atomic energy levels, are mechanistically opposite techniques (absorption vs. emission), requiring fundamentally different instrumentation (element-specific external lamps for AAS vs. no external source needed for ICP-OES's simultaneous multi-element emission).",
+        "For singly-charged ions, m/z genuinely equals mass, but closely-spaced m/z peaks for a single element specifically represent that element's distinct, naturally-occurring stable isotopes (each with its own precise mass) — ICP-MS's ability to resolve these individual isotope peaks (rather than showing one averaged mass) is the basis for its isotope-ratio applications in geology, food science, and forensics.",
+        "Core misconception to avoid: Always check calibration-curve linearity as a direct diagnostic for Beer-Lambert validity — a curving plot signals genuine law failure at that concentration, requiring dilution into the linear range, never an instrument-quality issue alone."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Spectroscopic Methods\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Beer-Lambert always works if you use the right instrument.",
+          "correction": "Always check calibration-curve linearity as a direct diagnostic for Beer-Lambert validity — a curving plot signals genuine law failure at that concentration, requiring dilution into the linear range, never an instrument-quality issue alone."
+        },
+        {
+          "misconception": "both use light so they must be the same type of technique.",
+          "correction": "AAS (absorption, requires element-specific external lamp) and ICP-OES (emission, sample itself emits, no per-element source needed) are mechanistically opposite techniques — never assume \"both use light\" implies similar instrumentation."
+        },
+        {
+          "misconception": "m/z = atomic mass of the ion.",
+          "correction": "Closely-spaced m/z peaks for a single element in ICP-MS represent that element's distinct stable ISOTOPES (each with its own precise mass), never an ambiguous \"averaged\" atomic mass reading — ICP-MS specifically resolves and quantifies isotope distributions."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Spectroscopic Methods\""
+        "Demonstration 1 (Beer-Lambert assumption-breakdown diagnosis for a curving calibration plot): Present the explicit list of underlying assumptions, connecting high-concentration breakdown of each to the observed curvature.",
+        "Demonstration 2 (absorption-vs-emission mechanism diagram for AAS/ICP-OES): Present both mechanisms explicitly, deriving the opposite instrumentation requirements.",
+        "Demonstration 3 (isotope-identification argument for the lead ICP-MS spectrum): Present the explicit isotope-resolution argument for the three m/z peaks, connecting to real-world isotope-ratio applications."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Spectroscopic Methods\"",
+        "setup": "A student makes a series of Cu²⁺ standards and plots A vs. c. At c > 0.02 mol dm⁻³ the plot curves downward. Is Beer-Lambert law failing?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (Beer-Lambert assumption-breakdown diagnosis for a curving calibration plot): Present the explicit list of underlying assumptions, connecting high-concentration breakdown of each to the observed curvature.",
+          "Demonstration 2 (absorption-vs-emission mechanism diagram for AAS/ICP-OES): Present both mechanisms explicitly, deriving the opposite instrumentation requirements.",
+          "Demonstration 3 (isotope-identification argument for the lead ICP-MS spectrum): Present the explicit isotope-resolution argument for the three m/z peaks, connecting to real-world isotope-ratio applications."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Spectroscopic Methods\""
+        "expected_outcome": "Student can (a) correctly diagnose Beer-Lambert failure from calibration-curve curvature, (b) correctly distinguish AAS's absorption mechanism from ICP-OES's emission mechanism, (c) correctly interpret closely-spaced ICP-MS peaks as isotopes of a single element."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit Beer-Lambert assumption-breakdown diagnosis for the curving calibration plot.",
+          "TA-2 (TELL): State the absorption-vs-emission distinction for AAS/ICP-OES explicitly, anchored to the mechanism diagram.",
+          "TA-3 (DO): Student interprets an unfamiliar ICP-MS spectrum's closely-spaced peaks as isotopes of a single element.",
+          "TA-4 (TEST-THINKING): Present the AAS-lamp probe and ask the student to justify why ICP-OES doesn't need the same per-element lamp requirement."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Spectroscopic Methods from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A student makes a series of Cu²⁺ standards and plots A vs. c. At c > 0.02 mol dm⁻³ the plot curves downward. Is Beer-Lambert law failing?\"",
+          "FA-2: \"In AAS, why must a different hollow cathode lamp be used for each element? Does this limitation apply to ICP-OES?\"",
+          "FA-3: \"An ICP-MS spectrum shows peaks at m/z = 206, 207, 208 for a lead-containing sample. What does this tell you?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Spectroscopic Methods\""
+        "mastery_signal": "Student can (a) correctly diagnose Beer-Lambert failure from calibration-curve curvature, (b) correctly distinguish AAS's absorption mechanism from ICP-OES's emission mechanism, (c) correctly interpret closely-spaced ICP-MS peaks as isotopes of a single element."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Spectroscopic Methods\""
+        "This concept has no direct KG unlocks but consolidates organic spectroscopy and electromagnetic-radiation reasoning built across `chem.org.spectroscopy` and `chem.atomic.electromagnetic-radiation`, forming a capstone application to instrumental analytical chemistry contexts."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.org.spectroscopy",
+        "chem.atomic.electromagnetic-radiation"
+      ]
     }
   ]
 }
