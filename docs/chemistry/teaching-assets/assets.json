@@ -3121,144 +3121,188 @@
     {
       "id": "asset.chem.thermo.system",
       "concept_id": "chem.thermo.system",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"System, Surroundings and State Functions\".",
-      "concept_summary": "System vs surroundings; open, closed, isolated; state functions vs path functions; extensive vs intensive.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"System, Surroundings and State Functions\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Thermodynamics begins by defining a system (the part of the universe under study) and its surroundings (everything else), classified as open (matter and energy cross the boundary), closed (only energy crosses), or isolated (neither crosses); properties are further classified as state functions (depend only on the current state — T, P, V, U, H, S, G) versus path functions (depend on the route taken — q, w), and as extensive (scale with amount — mass, volume) versus intensive (don't scale with amount — temperature, density).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"System, Surroundings and State Functions\"",
-        "[TEMPLATE] Key idea 2 for \"System, Surroundings and State Functions\"",
-        "[TEMPLATE] Key idea 3 for \"System, Surroundings and State Functions\""
+        "Thermodynamics starts by drawing a boundary around whatever is being studied (the system), with everything else called the surroundings. Whether matter and/or energy can cross that boundary defines the system as open, closed, or isolated. Properties describing the system fall into two independent classification pairs: state vs. path (does the property depend only on current condition, or on how you got there?) and extensive vs. intensive (does the property scale with the amount of substance, or not?).",
+        "State functions (T, P, V, U, H, S, G) depend only on the system's current condition — like a GPS reading altitude, which doesn't care what route you drove. Path functions (q, w) depend on the specific route taken between two states — like an odometer, which does care about the route. Remarkably, the first law shows that even though q and w individually depend on path, their sum (ΔU = q + w) does not.",
+        "Core misconception to avoid: Heat (q) is energy in transit across the boundary, a path function; internal energy (U) is what's stored, a state function; a system's temperature rising is evidence U increased, not that it now \"contains heat.\""
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"System, Surroundings and State Functions\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "After the reaction, the beaker contains more heat.",
+          "correction": "Heat (q) is energy in transit across the boundary, a path function; internal energy (U) is what's stored, a state function; a system's temperature rising is evidence U increased, not that it now \"contains heat.\""
+        },
+        {
+          "misconception": "If I have twice as much water, its temperature doubles.",
+          "correction": "Test every property with \"does doubling the amount double the property?\" — yes means extensive, no means intensive."
+        },
+        {
+          "misconception": "For a reaction happening in a flask sitting on a bench in a room: what is the system if the chemist cares about the reaction? What is the system if they care about energy lost to the room?",
+          "correction": "Changing the system boundary changes what counts as heat and work crossing it, but conservation of energy (ΔU of the universe = 0) holds regardless of where the boundary is drawn."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"System, Surroundings and State Functions\""
+        "Demonstration 1 (coffee-cup calorimeter): A polystyrene coffee cup with insulating walls, open top — nearly a closed system if a lid with a thermometer is added (matter mostly sealed, energy crosses via the boundary and is tracked through the temperature probe). Ask what would need to change to make it fully open (remove the lid) or fully isolated (perfect insulation, no probe reading escaping)."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"System, Surroundings and State Functions\"",
+        "setup": "Does the system 'contain' heat? What does it contain instead?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (coffee-cup calorimeter): A polystyrene coffee cup with insulating walls, open top — nearly a closed system if a lid with a thermometer is added (matter mostly sealed, energy crosses via the boundary and is tracked through the temperature probe). Ask what would need to change to make it fully open (remove the lid) or fully isolated (perfect insulation, no probe reading escaping)."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"System, Surroundings and State Functions\""
+        "expected_outcome": "Student can (a) classify 3 systems as open/closed/isolated with justification, (b) classify 6 of 8 given properties as state vs. path and extensive vs. intensive, (c) explain in one sentence why q is a path function."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the fence diagram with three labeled examples (open/closed/isolated) for the student to classify.",
+          "TA-2 (TELL): State the state-function vs. path-function distinction explicitly using the GPS-vs-odometer framing.",
+          "TA-3 (DO): Student classifies 6–8 given properties as state/path and extensive/intensive.",
+          "TA-4 (TEST-THINKING): Present the fireplace boundary-choice scenario and ask the student to predict how the sign of q changes with the boundary."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for foundational-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing System, Surroundings and State Functions from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Does the system 'contain' heat? What does it contain instead?\"",
+          "FA-2: \"If you double the amount of water, does the temperature double?\"",
+          "FA-3: \"For a reaction in a flask on a bench: is the system fixed by the problem, or a choice you make?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"System, Surroundings and State Functions\""
+        "mastery_signal": "Student can (a) classify 3 systems as open/closed/isolated with justification, (b) classify 6 of 8 given properties as state vs. path and extensive vs. intensive, (c) explain in one sentence why q is a path function."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"System, Surroundings and State Functions\""
+        "Feeds directly into `chem.thermo.first-law` (ΔU = q + w requires the state-function/path-function distinction and the heat-vs-internal-energy correction established here) and underlies all later thermodynamic quantity classification throughout the domain."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.found.measurement"
+      ]
     },
     {
       "id": "asset.chem.thermo.first-law",
       "concept_id": "chem.thermo.first-law",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"First Law of Thermodynamics\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"First Law of Thermodynamics\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"First Law of Thermodynamics\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The first law of thermodynamics states energy is conserved: ΔU = q + w, where q is heat added to the system and w is work done on the system (sign convention: both positive when energy flows into the system) — with PV work at constant external pressure given by w = −PextΔV, and the useful derived relationship ΔH = ΔU + ΔnRT connecting the heat measured at constant volume (qv = ΔU) to the heat measured at constant pressure (qp = ΔH) via the change in moles of gas.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"First Law of Thermodynamics\"",
-        "[TEMPLATE] Key idea 2 for \"First Law of Thermodynamics\"",
-        "[TEMPLATE] Key idea 3 for \"First Law of Thermodynamics\""
+        "The first law states that a system's internal energy can only change by heat flowing in or out (q) or work being done on or by the system (w): ΔU = q + w, using the convention where both q and w are positive when energy flows into the system. For gas expansion/compression against a constant external pressure, w = −PextΔV — negative for expansion (system loses energy pushing outward), positive for compression (system gains energy from being pushed inward).",
+        "Enthalpy (H = U + PV) is a convenience state function equal to the heat measured at constant pressure (qp = ΔH), just as internal energy is the heat measured at constant volume (qv = ΔU). The two are related by ΔH = ΔU + ΔngasRT, differing whenever a reaction changes the number of moles of gas.",
+        "Core misconception to avoid: Expansion against external pressure always gives w < 0 (system loses energy via work); compression always gives w > 0 (system gains energy via work), under the w = −PextΔV convention."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"First Law of Thermodynamics\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "The gas did work by expanding, so w is positive.",
+          "correction": "Expansion against external pressure always gives w < 0 (system loses energy via work); compression always gives w > 0 (system gains energy via work), under the w = −PextΔV convention."
+        },
+        {
+          "misconception": "ΔH and ΔU are just different names for the same thing.",
+          "correction": "ΔH = ΔU + ΔngasRT — the two state functions are related but distinct, differing by a term that depends on the reaction's gas-mole change."
+        },
+        {
+          "misconception": "A combustion reaction in a bomb calorimeter releases 500 kJ. Is this ΔH or ΔU? What additional information would you need to calculate ΔH?",
+          "correction": "Bomb calorimeter (constant volume) → qv = ΔU directly; open/constant-pressure setup → qp = ΔH directly; converting between them requires the Δngas correction."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"First Law of Thermodynamics\""
+        "Demonstration 1 (gas-syringe expansion): A gas-filled syringe pushes a weighted piston outward against atmospheric pressure — measure the distance moved and compute w = −PextΔV directly, then discuss where that energy went (into lifting the weight, i.e., out of the gas system).",
+        "Demonstration 2 (bomb vs. open calorimetry): Compare a sealed bomb calorimeter (constant volume, measures qv=ΔU) against an open coffee-cup calorimeter (constant pressure, measures qp=ΔH) for conceptually parallel reactions, highlighting that each apparatus measures a different state function."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"First Law of Thermodynamics\"",
+        "setup": "A gas expands from 1 L to 3 L against 2 atm external pressure. Is w positive or negative? Calculate it.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (gas-syringe expansion): A gas-filled syringe pushes a weighted piston outward against atmospheric pressure — measure the distance moved and compute w = −PextΔV directly, then discuss where that energy went (into lifting the weight, i.e., out of the gas system).",
+          "Demonstration 2 (bomb vs. open calorimetry): Compare a sealed bomb calorimeter (constant volume, measures qv=ΔU) against an open coffee-cup calorimeter (constant pressure, measures qp=ΔH) for conceptually parallel reactions, highlighting that each apparatus measures a different state function."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"First Law of Thermodynamics\""
+        "expected_outcome": "Student can (a) correctly compute and sign w for a given expansion or compression, (b) correctly state whether ΔH = ΔU for a given reaction based on Δngas, (c) correctly identify which state function a bomb calorimeter vs. an open calorimeter measures."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the gas-syringe expansion demonstration, computing w numerically live.",
+          "TA-2 (TELL): State the ΔH = ΔU + ΔngasRT relationship explicitly, worked through for methane combustion.",
+          "TA-3 (DO): Student computes w for a given expansion/compression scenario and correctly assigns the sign.",
+          "TA-4 (TEST-THINKING): Present MC-3's bomb-calorimeter scenario and ask the student to identify what's directly measured (qv=ΔU) and what additional data is needed for ΔH."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing First Law of Thermodynamics from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A gas expands from 1 L to 3 L against 2 atm external pressure. Is w positive or negative? Calculate it.\"",
+          "FA-2: \"Is ΔH the same as ΔU for methane combustion? Why or why not?\"",
+          "FA-3: \"A bomb calorimeter releases 500 kJ. Is this ΔH or ΔU? What else would you need to find the other one?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"First Law of Thermodynamics\""
+        "mastery_signal": "Student can (a) correctly compute and sign w for a given expansion or compression, (b) correctly state whether ΔH = ΔU for a given reaction based on Δngas, (c) correctly identify which state function a bomb calorimeter vs. an open calorimeter measures."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"First Law of Thermodynamics\""
+        "Feeds directly into `chem.thermo.enthalpy` (standard enthalpies and Hess's law build on the qp=ΔH identification established here), `chem.thermo.entropy` (state-function reasoning generalizes to entropy), and `chem.thermo.heat-capacities` (qv/qp distinctions underlie the definitions of Cv and Cp)."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.thermo.system"
+      ]
     },
     {
       "id": "asset.chem.thermo.enthalpy",
       "concept_id": "chem.thermo.enthalpy",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Enthalpy and Hess's Law\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Enthalpy and Hess's Law\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Enthalpy and Hess's Law\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Enthalpy (H = U + PV) is a state function equal to the heat exchanged at constant pressure (qp = ΔH), with standard enthalpies of formation, combustion, and neutralization defined against a fixed reference state (every element in its standard state has ΔH°f = 0 by definition); Hess's law exploits enthalpy's state-function property to compute an unknown ΔH by algebraically combining any set of reactions that sum to the target equation, regardless of whether that combination corresponds to a real laboratory pathway, with reversing a reaction always flipping the sign of its ΔH.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Enthalpy and Hess's Law\"",
-        "[TEMPLATE] Key idea 2 for \"Enthalpy and Hess's Law\"",
-        "[TEMPLATE] Key idea 3 for \"Enthalpy and Hess's Law\""
+        "Enthalpy (H) is a state function representing heat exchanged at constant pressure. Because it depends only on the current state, not the path taken, Hess's law lets you compute an unknown reaction's ΔH by algebraically combining any set of known-ΔH reactions that sum to the target equation — with reversing a reaction always flipping the sign of its ΔH, and scaling a reaction by a factor scaling its ΔH by the same factor.",
+        "Standard enthalpies of formation are measured relative to a defined zero baseline: every element in its standard state has ΔH°f = 0. This isn't a measured coincidence but a deliberate convention establishing the reference point from which every compound's formation enthalpy (energy change forming it from its elements) is measured.",
+        "Core misconception to avoid: Any algebraic combination of reactions (with known ΔH values) that sums to the target reaction gives the correct ΔH for that target, regardless of whether the intermediate steps are ever physically carried out."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Enthalpy and Hess's Law\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Hess's law requires reactions that you can actually do in sequence.",
+          "correction": "Any algebraic combination of reactions (with known ΔH values) that sums to the target reaction gives the correct ΔH for that target, regardless of whether the intermediate steps are ever physically carried out."
+        },
+        {
+          "misconception": "Oxygen in its gaseous state has some enthalpy that I need to look up.",
+          "correction": "ΔH°f(element, standard state) = 0 always, by definition and convention, not by measurement; only compounds have nonzero ΔH°f values."
+        },
+        {
+          "misconception": "Reversing gives ΔH = +393 kJ. I change the direction but keep the number positive.",
+          "correction": "ΔH_reverse = −ΔH_forward, always, with no exceptions — apply this as a direct sign flip regardless of whether the forward value was positive or negative."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Enthalpy and Hess's Law\""
+        "Demonstration 1 (cross-source Hess's law combination): Combine one reaction's ΔH sourced from combustion calorimetry with another reaction's ΔH sourced from a completely different measurement technique, and show the algebraic combination still correctly predicts a third, unmeasured reaction's ΔH.",
+        "Demonstration 2 (sign-flip drill): Present a series of reactions with known ΔH and have students write the reverse reaction with correctly flipped sign each time, checking against the physical exothermic/endothermic meaning."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Enthalpy and Hess's Law\"",
+        "setup": "Can you apply Hess's law if one of the intermediate reactions has never been performed in the laboratory?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (cross-source Hess's law combination): Combine one reaction's ΔH sourced from combustion calorimetry with another reaction's ΔH sourced from a completely different measurement technique, and show the algebraic combination still correctly predicts a third, unmeasured reaction's ΔH.",
+          "Demonstration 2 (sign-flip drill): Present a series of reactions with known ΔH and have students write the reverse reaction with correctly flipped sign each time, checking against the physical exothermic/endothermic meaning."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Enthalpy and Hess's Law\""
+        "expected_outcome": "Student can (a) combine reactions algebraically via Hess's law regardless of physical realizability, (b) correctly identify ΔH°f=0 for elements and nonzero for compounds, (c) correctly flip the sign of ΔH when reversing any reaction."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present a Hess's law cycle diagram combining reactions from different, genuinely unrelated data sources.",
+          "TA-2 (TELL): State the ΔH°f(element)=0 convention explicitly, immediately followed by asking \"what would forming oxygen from oxygen even mean?\"",
+          "TA-3 (DO): Student reverses a given reaction and correctly flips its ΔH sign, stating the physical exothermic/endothermic reasoning aloud.",
+          "TA-4 (TEST-THINKING): Present MC-2's probe (ΔH°f of O₂, C(graphite), H₂O) and ask the student to justify which values are zero and why."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Enthalpy and Hess's Law from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Can you apply Hess's law if one of the intermediate reactions has never been performed in the laboratory?\"",
+          "FA-2: \"What is ΔH°f of O₂(g)? Of C(graphite)? Of H₂O(l)?\"",
+          "FA-3: \"Reaction A: C(s) + O₂(g) → CO₂(g), ΔH = −393 kJ. Write the reverse reaction and its ΔH.\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Enthalpy and Hess's Law\""
+        "mastery_signal": "Student can (a) combine reactions algebraically via Hess's law regardless of physical realizability, (b) correctly identify ΔH°f=0 for elements and nonzero for compounds, (c) correctly flip the sign of ΔH when reversing any reaction."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Enthalpy and Hess's Law\""
+        "Feeds directly into `chem.thermo.bond-enthalpy` (bond-enthalpy cycles are a specific application of the same Hess's law algebra) and `chem.thermo.gibbs` (enthalpy is one of the two components combined into Gibbs free energy)."
       ],
       "prerequisite_review_triggers": [
         "chem.thermo.first-law"
@@ -3267,48 +3311,64 @@
     {
       "id": "asset.chem.thermo.bond-enthalpy",
       "concept_id": "chem.thermo.bond-enthalpy",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Bond Enthalpy and Born–Haber Cycle\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Bond Enthalpy and Born–Haber Cycle\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Bond Enthalpy\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Breaking a covalent bond ALWAYS requires energy INPUT (endothermic, ΔH positive) — the bonded atoms sit at a lower energy state than when separated, so pulling them apart costs energy, while bond FORMATION releases energy (exothermic) — the \"snapping rubber band\" intuition (breaking releases energy) is backward for covalent bonds; bond-enthalpy-based ΔH calculations give ESTIMATES using MEAN (averaged) values, so a discrepancy of several percent from the experimental value (obtained via Hess's law with ΔH_f° data) is EXPECTED, not evidence of a calculation error; and electronegativity does NOT universally predict bond strength — while more electronegative halogens do form stronger X–H bonds (H–F>H–Cl>H–Br>H–I), the opposite trend holds for HALOGEN–HALOGEN bonds (F–F is WEAKER than Cl–Cl) because F–F's very short bond length forces the two fluorine atoms' lone pairs into close, repulsive proximity — bond strength depends on both bonding-electron attraction AND non-bonding-electron repulsion.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Bond Enthalpy and Born–Haber Cycle\"",
-        "[TEMPLATE] Key idea 2 for \"Bond Enthalpy and Born–Haber Cycle\"",
-        "[TEMPLATE] Key idea 3 for \"Bond Enthalpy and Born–Haber Cycle\""
+        "Covalent bond breaking is universally endothermic (atoms move from a lower-energy bonded state to a higher-energy separated state, requiring energy input) and bond forming is universally exothermic — the opposite of a mechanical system like a rubber band, whose stored strain energy is released upon breaking. Bond-enthalpy-based ΔH calculations use MEAN (averaged) bond-enthalpy values, so they are estimates with an expected few-percent discrepancy from true experimental values obtained via Hess's law.",
+        "While electronegativity reliably predicts the X–H bond-strength trend (more electronegative halogen, stronger bond), it does not capture non-bonding electron-electron repulsion, which becomes significant in short bonds between lone-pair-rich atoms — F–F's unusually short bond length brings its lone pairs into repulsive proximity, weakening the bond below Cl–Cl's despite fluorine's higher electronegativity.",
+        "Core misconception to avoid: Bond breaking is always endothermic (energy input required, moving atoms from a lower-energy bonded state to a higher-energy separated state); bond forming is always exothermic — never transfer mechanical \"breaking releases energy\" intuition onto covalent bonds."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Bond Enthalpy and Born–Haber Cycle\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "bonds breaking → energy released.",
+          "correction": "Bond breaking is always endothermic (energy input required, moving atoms from a lower-energy bonded state to a higher-energy separated state); bond forming is always exothermic — never transfer mechanical \"breaking releases energy\" intuition onto covalent bonds."
+        },
+        {
+          "misconception": "if the calculation doesn't match experiment, there's an error.",
+          "correction": "Treat bond-enthalpy-based ΔH calculations as estimates with an expected few-percent discrepancy from experimental values — never assume a discrepancy indicates a calculation error; use Hess's law with ΔH_f° data for exact values."
+        },
+        {
+          "misconception": "more electronegative = stronger bond.",
+          "correction": "Electronegativity-based bond-strength trends hold reliably for X–H bonds but can be overridden by lone-pair repulsion effects in short, lone-pair-dense bonds like F–F — never assume electronegativity alone determines bond strength universally."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Bond Enthalpy and Born–Haber Cycle\""
+        "Demonstration 1 (energy-level diagram for bond breaking/forming): Present the explicit bonded-state-lower/separated-state-higher energy diagram, deriving the endothermic/exothermic sign pairing.",
+        "Demonstration 2 (averaged bond-enthalpy estimate vs. Hess's-law exact value): Compute a reaction's ΔH via both mean bond enthalpies and Hess's law, comparing the modest discrepancy explicitly.",
+        "Demonstration 3 (F–F vs. Cl–Cl bond-strength/lone-pair-repulsion comparison): Present the explicit bond-length and lone-pair-proximity diagram for F–F, contrasted with Cl–Cl's longer, less repulsive bond."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Bond Enthalpy and Born–Haber Cycle\"",
+        "setup": "Is the process of breaking a covalent bond endothermic or exothermic?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (energy-level diagram for bond breaking/forming): Present the explicit bonded-state-lower/separated-state-higher energy diagram, deriving the endothermic/exothermic sign pairing.",
+          "Demonstration 2 (averaged bond-enthalpy estimate vs. Hess's-law exact value): Compute a reaction's ΔH via both mean bond enthalpies and Hess's law, comparing the modest discrepancy explicitly.",
+          "Demonstration 3 (F–F vs. Cl–Cl bond-strength/lone-pair-repulsion comparison): Present the explicit bond-length and lone-pair-proximity diagram for F–F, contrasted with Cl–Cl's longer, less repulsive bond."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Bond Enthalpy and Born–Haber Cycle\""
+        "expected_outcome": "Student can (a) correctly assign endothermic/exothermic sign to bond breaking/forming, (b) correctly interpret a modest discrepancy in bond-enthalpy-based ΔH estimates as expected, (c) correctly identify lone-pair repulsion as an exception to electronegativity-based bond-strength trends."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit energy-level diagram for bond breaking/forming.",
+          "TA-2 (TELL): State the averaged-estimate nature of bond enthalpy calculations explicitly, anchored to the Hess's-law comparison.",
+          "TA-3 (DO): Student estimates ΔH for an unfamiliar reaction using mean bond enthalpies and predicts the expected discrepancy magnitude.",
+          "TA-4 (TEST-THINKING): Present the F–F/Cl–Cl probe and ask the student to justify the reversed trend from lone-pair repulsion."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Bond Enthalpy from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Is the process of breaking a covalent bond endothermic or exothermic?\"",
+          "FA-2: \"A bond-enthalpy calculation gives ΔH=−124kJ/mol; experiment gives −132kJ/mol. Is the calculation wrong?\"",
+          "FA-3: \"Does the electronegativity trend for H–X bonds also hold for F–F vs. Cl–Cl?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Bond Enthalpy and Born–Haber Cycle\""
+        "mastery_signal": "Student can (a) correctly assign endothermic/exothermic sign to bond breaking/forming, (b) correctly interpret a modest discrepancy in bond-enthalpy-based ΔH estimates as expected, (c) correctly identify lone-pair repulsion as an exception to electronegativity-based bond-strength trends."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Bond Enthalpy and Born–Haber Cycle\""
+        "This concept has no direct KG unlocks but consolidates enthalpy and bond-parameter reasoning built across `chem.thermo.enthalpy` and `chem.bond.bond-parameters`, forming a capstone application to Born-Haber cycle and lattice enthalpy calculations."
       ],
       "prerequisite_review_triggers": [
         "chem.thermo.enthalpy",
@@ -3318,48 +3378,62 @@
     {
       "id": "asset.chem.thermo.entropy",
       "concept_id": "chem.thermo.entropy",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Entropy and Second Law\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Entropy and Second Law\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Entropy and Second Law\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Entropy (S) measures the number of accessible microstates for a system's energy and positions, with the second law requiring total entropy of the universe (system + surroundings) to increase for any spontaneous process — standard entropy (S°) is an absolute quantity referenced to S=0 at 0 K (third law), unlike enthalpy's element-based zero convention, so every substance including elements has a positive S° at any temperature above absolute zero; spontaneity is governed by ΔS_universe > 0, not by the sign of ΔH alone, since exothermic reactions merely tend to increase surroundings' entropy (helping but not guaranteeing spontaneity) while endothermic processes can still be spontaneous if the system's own entropy increase is large enough.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Entropy and Second Law\"",
-        "[TEMPLATE] Key idea 2 for \"Entropy and Second Law\"",
-        "[TEMPLATE] Key idea 3 for \"Entropy and Second Law\""
+        "Entropy measures the number of ways a system's energy and particles can be arranged (microstates) for a given macroscopic state. The second law states that for any spontaneous process, the total entropy of the universe (system plus surroundings) must increase. This is a genuinely broader criterion than simply \"energy decreasing\" (exothermicity) — a process can be spontaneous even while absorbing energy, as long as the resulting increase in the system's own accessible microstates is large enough to outweigh the entropy cost imposed on the surroundings.",
+        "Unlike formation enthalpy, which uses a defined conventional zero (elements = 0), standard entropy is an absolute physical quantity: the third law states S=0 exactly for a perfect crystal at absolute zero (exactly one accessible microstate). Every substance above 0 K, including every element, therefore has a positive standard entropy, since thermal motion above absolute zero always creates additional accessible microstates.",
+        "Core misconception to avoid: Entropy increases whenever the number of accessible microstates increases, whether that's from energy dispersal (heat-driven) or from positional/spatial dispersal (volume-driven, as in free expansion) — no heat transfer is required for the latter."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Entropy and Second Law\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Entropy only increases when there is heat input, because disorder requires energy to create.",
+          "correction": "Entropy increases whenever the number of accessible microstates increases, whether that's from energy dispersal (heat-driven) or from positional/spatial dispersal (volume-driven, as in free expansion) — no heat transfer is required for the latter."
+        },
+        {
+          "misconception": "S° of H₂ is zero because it's an element in its standard state.",
+          "correction": "Every substance, including elements, has a positive S° at any temperature above 0 K; only a perfect crystal exactly at absolute zero has S=0."
+        },
+        {
+          "misconception": "If ΔH < 0, the reaction definitely happens.",
+          "correction": "The true spontaneity criterion is ΔS_universe = ΔS_system + ΔS_surroundings > 0 — not the sign of ΔH alone; endothermic processes can be spontaneous if ΔS_system is large enough to outweigh the negative ΔS_surroundings contribution."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Entropy and Second Law\""
+        "Demonstration 1 (free expansion): Present the free-expansion-into-vacuum scenario with explicit ΔU=0, q=0, w=0 bookkeeping alongside the microstate-counting argument for why ΔS>0 anyway.",
+        "Demonstration 2 (NH₄NO₃ dissolution entropy accounting): Compute ΔS_system and ΔS_surroundings separately for ammonium nitrate dissolving in water, showing the system term dominates to give ΔS_universe > 0 despite the endothermic process."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Entropy and Second Law\"",
+        "setup": "A gas expands isothermally into a vacuum. Is ΔS > 0? How, if no heat was transferred?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (free expansion): Present the free-expansion-into-vacuum scenario with explicit ΔU=0, q=0, w=0 bookkeeping alongside the microstate-counting argument for why ΔS>0 anyway.",
+          "Demonstration 2 (NH₄NO₃ dissolution entropy accounting): Compute ΔS_system and ΔS_surroundings separately for ammonium nitrate dissolving in water, showing the system term dominates to give ΔS_universe > 0 despite the endothermic process."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Entropy and Second Law\""
+        "expected_outcome": "Student can (a) explain how entropy increases without heat transfer using microstate counting, (b) correctly state that all substances have positive S° above 0 K, including elements, (c) correctly identify why an endothermic process can still be spontaneous using the ΔS_universe criterion."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the free-expansion bookkeeping (ΔU=0, q=0, w=0, ΔS>0) as a direct challenge to the \"entropy needs heat\" intuition.",
+          "TA-2 (TELL): State the third-law absolute-zero reference explicitly, contrasted directly against the formation-enthalpy conventional-zero reference.",
+          "TA-3 (DO): Student computes ΔS_system and ΔS_surroundings separately for the NH₄NO₃ dissolution example.",
+          "TA-4 (TEST-THINKING): Present MC-3's rusting-vs-dissolution contrast and ask the student to identify which entropy term dominates in each case."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Entropy and Second Law from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A gas expands isothermally into a vacuum. Is ΔS > 0? How, if no heat was transferred?\"",
+          "FA-2: \"What is the standard molar entropy of H₂(g)? Is it zero?\"",
+          "FA-3: \"Dissolving ammonium nitrate is endothermic and spontaneous. What drives it?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Entropy and Second Law\""
+        "mastery_signal": "Student can (a) explain how entropy increases without heat transfer using microstate counting, (b) correctly state that all substances have positive S° above 0 K, including elements, (c) correctly identify why an endothermic process can still be spontaneous using the ΔS_universe criterion."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Entropy and Second Law\""
+        "Feeds directly into `chem.thermo.gibbs` (Gibbs free energy formally combines ΔH and TΔS_system into one spontaneity indicator, building directly on this concept's ΔS_universe reasoning) and `chem.thermo.third-law` (formalizes the S=0-at-0K reference point introduced here)."
       ],
       "prerequisite_review_triggers": [
         "chem.thermo.first-law"
@@ -3368,48 +3442,62 @@
     {
       "id": "asset.chem.thermo.gibbs",
       "concept_id": "chem.thermo.gibbs",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Gibbs Free Energy and Spontaneity\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Gibbs Free Energy and Spontaneity\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Gibbs Free Energy and Spontaneity\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Gibbs free energy (ΔG = ΔH − TΔS) combines enthalpy and entropy into a single system-side spontaneity indicator at constant temperature and pressure, related to the equilibrium constant by ΔG° = −RT ln K (so ΔG°=0 means K=1, a genuine, actively-occurring equilibrium, not \"nothing happens\") — with the crucial distinction that ΔG° (the standard-state value) predicts spontaneity only at standard-state concentrations, while the actual driving force at any real concentration is ΔG = ΔG° + RT ln Q, meaning a positive ΔG° reaction can still proceed forward if Q is kept small enough (e.g., large reactant excess).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Gibbs Free Energy and Spontaneity\"",
-        "[TEMPLATE] Key idea 2 for \"Gibbs Free Energy and Spontaneity\"",
-        "[TEMPLATE] Key idea 3 for \"Gibbs Free Energy and Spontaneity\""
+        "Gibbs free energy combines enthalpy and entropy into a single system-side quantity, ΔG = ΔH − TΔS, that determines spontaneity at constant temperature and pressure without needing to separately track the surroundings. At standard-state concentrations, ΔG° relates directly to the equilibrium constant via ΔG° = −RT ln K — a negative ΔG° means K > 1 (products favored at equilibrium), a positive ΔG° means K < 1 (reactants favored), and ΔG° = 0 means K = 1 exactly (an evenly balanced equilibrium).",
+        "The true driving force for a reaction at any given (non-standard) set of concentrations is ΔG = ΔG° + RT ln Q, where Q is the reaction quotient computed from actual current concentrations — this correction term can be large enough to flip the sign of the overall driving force relative to ΔG° alone, which is why reactions with unfavorable ΔG° can still be driven forward by manipulating concentrations (e.g., large reactant excess).",
+        "Core misconception to avoid: ΔG° = 0 corresponds to K = 1, a genuine equilibrium with substantial forward and reverse reaction both occurring, not a \"nothing happens\" state."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Gibbs Free Energy and Spontaneity\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "ΔG° = 0 means no energy is available, so nothing happens.",
+          "correction": "ΔG° = 0 corresponds to K = 1, a genuine equilibrium with substantial forward and reverse reaction both occurring, not a \"nothing happens\" state."
+        },
+        {
+          "misconception": "ΔG° is positive, so the reaction won't go forward.",
+          "correction": "True spontaneity at any given concentration requires computing ΔG = ΔG° + RT ln Q (equivalently, comparing Q to K), not reading the sign of ΔG° alone."
+        },
+        {
+          "misconception": "T = −100/−200 = 0.5 K — the reaction stops being spontaneous at 0.5 K.",
+          "correction": "Always convert ΔH to J (or ΔS to kJ/K) before dividing to find T_cross — check that the resulting temperature is physically reasonable as a sanity check."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Gibbs Free Energy and Spontaneity\""
+        "Demonstration 1 (Q-driven spontaneity flip): Compute ΔG explicitly for the ΔG°=+20 kJ/mol example under the given reactant-excess concentrations, showing RT ln Q's magnitude flips the overall sign to negative.",
+        "Demonstration 2 (unit-check T_cross): Work the T_cross calculation both with and without unit conversion side by side (0.5 K vs. 500 K), having students judge which is chemically plausible."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Gibbs Free Energy and Spontaneity\"",
+        "setup": "For a reaction with ΔG° = 0, what is K? Does the reaction occur?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (Q-driven spontaneity flip): Compute ΔG explicitly for the ΔG°=+20 kJ/mol example under the given reactant-excess concentrations, showing RT ln Q's magnitude flips the overall sign to negative.",
+          "Demonstration 2 (unit-check T_cross): Work the T_cross calculation both with and without unit conversion side by side (0.5 K vs. 500 K), having students judge which is chemically plausible."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Gibbs Free Energy and Spontaneity\""
+        "expected_outcome": "Student can (a) correctly state what ΔG°=0 means physically (K=1, active equilibrium), (b) compute true spontaneity at non-standard concentrations using ΔG=ΔG°+RT ln Q, (c) correctly compute T_cross with consistent units and sanity-check the result."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the ΔG = ΔG° + RT ln Q computation explicitly for the reactant-excess example.",
+          "TA-2 (TELL): State the ΔG°=0 ⟺ K=1 relationship explicitly, emphasizing this describes an active, balanced equilibrium.",
+          "TA-3 (DO): Student computes T_cross with explicit unit conversion, checking the result's physical plausibility.",
+          "TA-4 (TEST-THINKING): Present MC-2's reactant-excess scenario and ask the student to predict spontaneity before computing, then check against the formal calculation."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Gibbs Free Energy and Spontaneity from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"For a reaction with ΔG° = 0, what is K? Does the reaction occur?\"",
+          "FA-2: \"A reaction has ΔG° = +20 kJ/mol but is mixed with reactants in large excess. Is the forward reaction spontaneous?\"",
+          "FA-3: \"ΔH = −100 kJ/mol, ΔS = −200 J/mol·K. At what temperature does ΔG change sign?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Gibbs Free Energy and Spontaneity\""
+        "mastery_signal": "Student can (a) correctly state what ΔG°=0 means physically (K=1, active equilibrium), (b) compute true spontaneity at non-standard concentrations using ΔG=ΔG°+RT ln Q, (c) correctly compute T_cross with consistent units and sanity-check the result."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Gibbs Free Energy and Spontaneity\""
+        "Feeds directly into `chem.equil.concept` (the equilibrium constant's full behavior builds directly on the ΔG°=−RT ln K relationship established here) and `chem.thermo.cell-thermo` (electrochemical cell potentials are directly related to ΔG via ΔG=−nFE)."
       ],
       "prerequisite_review_triggers": [
         "chem.thermo.enthalpy",
@@ -3419,48 +3507,64 @@
     {
       "id": "asset.chem.thermo.third-law",
       "concept_id": "chem.thermo.third-law",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Third Law and Absolute Entropy\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Third Law and Absolute Entropy\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Third Law and Absolute Entropy\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The Third Law specifically applies to a PERFECT CRYSTAL with a unique ground state — NOT to all materials universally — glasses (which retain structural disorder, unable to crystallize without energy input) and imperfect crystals with frozen-in disorder (like ice Ih's proton/H-bond orientation disorder) genuinely have NON-ZERO residual entropy at 0K, as directly demonstrated experimentally (CO's measured residual entropy ≈4.6J/mol·K vs. the perfect-crystal-predicted 0); entropy vs. temperature is NOT a smooth ramp — phase transitions (melting, boiling) produce large, INSTANTANEOUS JUMPS in the S-vs-T staircase (ΔS_transition=ΔH_transition/T_transition), so water's S-vs-T curve genuinely has sharp discontinuities at 273K and 373K, not a continuous slope; and Kirchhoff's law does NOT always require exact calculus integration — when ΔCp is approximately constant over the temperature range of interest (a common, valid approximation), the LINEAR form ΔH(T₂)=ΔH(T₁)+ΔCp×(T₂−T₁) is exact enough, and full integration is needed only when Cp varies significantly with T.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Third Law and Absolute Entropy\"",
-        "[TEMPLATE] Key idea 2 for \"Third Law and Absolute Entropy\"",
-        "[TEMPLATE] Key idea 3 for \"Third Law and Absolute Entropy\""
+        "The Third Law's \"S=0 at 0K\" claim applies specifically to a perfect crystal with a unique ground state — materials that retain structural or orientational disorder even at 0K (glasses, ice Ih, CO) genuinely have measurable, non-zero residual entropy, a well-documented experimental exception rather than a contradiction of the law. Entropy vs. temperature follows a staircase pattern: continuous within a single phase, but interrupted by large, discontinuous jumps at each phase transition, where latent heat is absorbed at constant temperature.",
+        "Kirchhoff's law's general form requires integrating Cp over a temperature range, but when ΔCp is approximately constant, this integral simplifies exactly to the linear expression ΔCp×(T₂−T₁) — this is not a lesser approximation but the direct mathematical consequence of integrating a constant, valid whenever the constant-ΔCp condition genuinely holds.",
+        "Core misconception to avoid: The Third Law's \"S=0 at 0K\" applies specifically to perfect crystals — glasses and materials with frozen-in structural/orientational disorder retain genuine, measurable residual entropy at 0K, never assume the law applies universally."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Third Law and Absolute Entropy\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "The third law says entropy is zero at 0 K, so everything has S = 0 when cooled enough.",
+          "correction": "The Third Law's \"S=0 at 0K\" applies specifically to perfect crystals — glasses and materials with frozen-in structural/orientational disorder retain genuine, measurable residual entropy at 0K, never assume the law applies universally."
+        },
+        {
+          "misconception": "Entropy increases smoothly from 0 K to any temperature.",
+          "correction": "Entropy vs. temperature follows a staircase pattern, with continuous increases within each phase interrupted by large, sudden jumps at each phase transition (computed via ΔS=ΔH_transition/T_transition) — never model it as a single smooth ramp."
+        },
+        {
+          "misconception": "I can't do this without calculus — I need to integrate Cₚ over the temperature range.",
+          "correction": "When ΔCp is approximately constant over the temperature range, use the linear form ΔH(T₂)=ΔH(T₁)+ΔCp×(T₂−T₁) — this is mathematically exact under that condition, not merely an approximation requiring apology; full integration is needed only when Cp varies significantly with T."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Third Law and Absolute Entropy\""
+        "Demonstration 1 (CO residual-entropy experimental comparison): Present the measured CO residual entropy against the perfect-crystal-predicted value, grounding the Third Law exception in real data.",
+        "Demonstration 2 (water S-vs-T staircase diagram): Plot the explicit S-vs-T curve for water from 0K to 400K, computing and marking the ΔS_fus and ΔS_vap jumps.",
+        "Demonstration 3 (Kirchhoff linear-form derivation): Derive the linear Kirchhoff form explicitly from integrating a constant ΔCp, showing it as an exact simplification, not a rough approximation."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Third Law and Absolute Entropy\"",
+        "setup": "Does a glass of water, if cooled to 0 K, have zero entropy?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (CO residual-entropy experimental comparison): Present the measured CO residual entropy against the perfect-crystal-predicted value, grounding the Third Law exception in real data.",
+          "Demonstration 2 (water S-vs-T staircase diagram): Plot the explicit S-vs-T curve for water from 0K to 400K, computing and marking the ΔS_fus and ΔS_vap jumps.",
+          "Demonstration 3 (Kirchhoff linear-form derivation): Derive the linear Kirchhoff form explicitly from integrating a constant ΔCp, showing it as an exact simplification, not a rough approximation."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Third Law and Absolute Entropy\""
+        "expected_outcome": "Student can (a) correctly identify the perfect-crystal qualifier and its exceptions for the Third Law, (b) correctly sketch/compute discontinuous entropy jumps at phase transitions, (c) correctly apply the linear Kirchhoff approximation when ΔCp is constant."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit CO residual-entropy experimental comparison against the perfect-crystal prediction.",
+          "TA-2 (TELL): State the staircase (not ramp) S-vs-T model explicitly, anchored to the computed ΔS_fus/ΔS_vap jumps for water.",
+          "TA-3 (DO): Student applies the linear Kirchhoff approximation to an unfamiliar constant-ΔCp scenario.",
+          "TA-4 (TEST-THINKING): Present the methane-combustion Kirchhoff probe and ask the student to justify using the linear form rather than full integration."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Third Law and Absolute Entropy from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Does a glass of water, if cooled to 0 K, have zero entropy?\"",
+          "FA-2: \"Sketch the S vs. T curve for water from 0 K to 400 K. Where are the discontinuities?\"",
+          "FA-3: \"Use Kirchhoff's law to estimate ΔH°rxn for methane combustion at 500 K given constant ΔCp.\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Third Law and Absolute Entropy\""
+        "mastery_signal": "Student can (a) correctly identify the perfect-crystal qualifier and its exceptions for the Third Law, (b) correctly sketch/compute discontinuous entropy jumps at phase transitions, (c) correctly apply the linear Kirchhoff approximation when ΔCp is constant."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Third Law and Absolute Entropy\""
+        "This concept has no direct KG unlocks but consolidates entropy reasoning built across `chem.thermo.entropy`, forming a capstone application to advanced thermodynamics and statistical-mechanics contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.thermo.entropy"
@@ -3469,98 +3573,133 @@
     {
       "id": "asset.chem.thermo.heat-capacities",
       "concept_id": "chem.thermo.heat-capacities",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Heat Capacities of Gases\".",
-      "concept_summary": "Cp and Cv; γ = Cp/Cv; equipartition theorem (qualitative); temperature dependence of ΔH.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Heat Capacities of Gases\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Cp is ALWAYS greater than Cv for an ideal gas (by exactly R), never equal — at constant pressure, the gas must EXPAND to maintain P constant as T rises, and this expansion requires doing PV work on the surroundings, so MORE heat is needed at constant pressure than at constant volume to achieve the same temperature rise; heat capacity per MOLE depends on the number of active DEGREES OF FREEDOM per molecule, not simply the number of atoms — diatomic N₂ (Cv=5/2R, translational+rotational) has HIGHER molar heat capacity than monatomic He (Cv=3/2R, translational only), because N₂'s additional rotational degrees of freedom store more energy per mole, not because it has \"more atoms\"; and γ=Cp/Cv is ALWAYS greater than 1 (never less than 1) — since Cp=Cv+R and R>0, Cp must always exceed Cv, so a computed γ<1 (e.g., from accidentally inverting the ratio) signals a genuine arithmetic error, not a valid physical result.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Heat Capacities of Gases\"",
-        "[TEMPLATE] Key idea 2 for \"Heat Capacities of Gases\"",
-        "[TEMPLATE] Key idea 3 for \"Heat Capacities of Gases\""
+        "Cp always exceeds Cv by exactly R for an ideal gas, a consequence of the PV expansion work required to maintain constant pressure as temperature rises — this mechanism is independent of the \"ideal\" (no intermolecular forces) simplification, so ideality never implies Cp=Cv. Molar heat capacity is determined by the number of active degrees of freedom per molecule (each contributing (1/2)R), not by atom count directly — diatomic gases have higher Cv than monatomic gases because of additional rotational degrees of freedom, not simply because they have more atoms.",
+        "Since Cp=Cv+R with R strictly positive, γ=Cp/Cv is mathematically guaranteed to exceed 1 for any ideal gas — a computed γ<1 is not a valid physical result but a reliable signal of an inverted ratio or other computational error.",
+        "Core misconception to avoid: Cp always exceeds Cv by exactly R for an ideal gas — this arises from constant-pressure expansion work, a mechanism entirely independent of the \"ideal\" (no intermolecular forces) simplification, never assume ideality implies Cp=Cv."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Heat Capacities of Gases\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Ideal gas means Cₚ = Cᵥ because there are no intermolecular forces.",
+          "correction": "Cp always exceeds Cv by exactly R for an ideal gas — this arises from constant-pressure expansion work, a mechanism entirely independent of the \"ideal\" (no intermolecular forces) simplification, never assume ideality implies Cp=Cv."
+        },
+        {
+          "misconception": "He has 1 atom, N₂ has 2, so N₂ can store more energy — but wait, He has more atoms in a mole...",
+          "correction": "Molar heat capacity depends on the number of active degrees of freedom per molecule (translational, rotational, vibrational) — never reason directly from atom count, even when the two happen to correlate in simple cases."
+        },
+        {
+          "misconception": "(implicit computational error, no single characteristic phrase given).",
+          "correction": "γ=Cp/Cv is always greater than 1 for an ideal gas — treat any computed γ<1 as a definite signal of an arithmetic or setup error, never as a valid physical result."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Heat Capacities of Gases\""
+        "Demonstration 1 (PV-work derivation of Cp−Cv=R): Derive the explicit expansion-work argument, computing w=−nRΔT and connecting it to the Cp>Cv inequality.",
+        "Demonstration 2 (degrees-of-freedom breakdown for He vs. N₂): Present the explicit degrees-of-freedom count for both gases, deriving each Cv value directly.",
+        "Demonstration 3 (γ=Cp/Cv>1 mathematical necessity): Derive γ>1 explicitly from Cp=Cv+R, contrasted with an inverted (invalid) computation."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Heat Capacities of Gases\"",
+        "setup": "For an ideal gas, why is more heat needed to raise the temperature 1 K at constant pressure than at constant volume?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (PV-work derivation of Cp−Cv=R): Derive the explicit expansion-work argument, computing w=−nRΔT and connecting it to the Cp>Cv inequality.",
+          "Demonstration 2 (degrees-of-freedom breakdown for He vs. N₂): Present the explicit degrees-of-freedom count for both gases, deriving each Cv value directly.",
+          "Demonstration 3 (γ=Cp/Cv>1 mathematical necessity): Derive γ>1 explicitly from Cp=Cv+R, contrasted with an inverted (invalid) computation."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Heat Capacities of Gases\""
+        "expected_outcome": "Student can (a) correctly derive Cp>Cv from the expansion-work argument, (b) correctly rank molar heat capacities from degrees-of-freedom reasoning, (c) correctly recognize γ<1 as an error signal."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit PV-work derivation of Cp−Cv=R.",
+          "TA-2 (TELL): State the degrees-of-freedom basis for molar heat capacity explicitly, anchored to the He-vs-N₂ comparison.",
+          "TA-3 (DO): Student computes γ for an unfamiliar gas and verifies the result exceeds 1.",
+          "TA-4 (TEST-THINKING): Present the CO₂ γ-computation probe and ask the student to justify why an inverted ratio (γ<1) signals an error."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Heat Capacities of Gases from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"For an ideal gas, why is more heat needed to raise the temperature 1 K at constant pressure than at constant volume?\"",
+          "FA-2: \"Compare Cᵥ per mole of He and N₂ at 298 K. Which is larger, and why?\"",
+          "FA-3: \"Calculate γ for CO₂ if Cᵥ=3R and Cₚ=4R. What's wrong with computing Cᵥ/Cₚ instead?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Heat Capacities of Gases\""
+        "mastery_signal": "Student can (a) correctly derive Cp>Cv from the expansion-work argument, (b) correctly rank molar heat capacities from degrees-of-freedom reasoning, (c) correctly recognize γ<1 as an error signal."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Heat Capacities of Gases\""
+        "This concept has no direct KG unlocks but consolidates first-law and kinetic-theory reasoning built across `chem.thermo.first-law` and `chem.state.kinetic-theory`, forming a capstone application to thermochemistry and temperature-dependence-of-ΔH contexts."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.thermo.first-law",
+        "chem.state.kinetic-theory"
+      ]
     },
     {
       "id": "asset.chem.thermo.cell-thermo",
       "concept_id": "chem.thermo.cell-thermo",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Electrochemical Thermodynamics\".",
-      "concept_summary": "ΔG = −nFE; cell EMF and equilibrium constant; temperature dependence of EMF.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Electrochemical Thermodynamics\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "ΔG=−nFE (the negative sign is mandatory, not optional) connects electrochemical cell potential to Gibbs free energy, maintaining consistency between the two independent sign conventions for spontaneity (thermodynamic: negative ΔG; electrochemical: positive E); E° is INTENSIVE (unchanged when a balanced equation is multiplied by a scaling factor, exactly like temperature or density) while ΔG°=−nFE° is EXTENSIVE (genuinely scales with n, since n itself changes when the equation is scaled) — doubling a cell reaction's coefficients doubles n and thus doubles ΔG°, even though E° stays exactly the same; and a larger E° (or more negative ΔG°) indicates a greater THERMODYNAMIC driving force toward equilibrium, never a faster reaction RATE, since rate is governed by activation energy (a kinetic property) entirely independent of the thermodynamic favorability described by E°/ΔG°.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Electrochemical Thermodynamics\"",
-        "[TEMPLATE] Key idea 2 for \"Electrochemical Thermodynamics\"",
-        "[TEMPLATE] Key idea 3 for \"Electrochemical Thermodynamics\""
+        "The relationship ΔG=−nFE connects a cell's measured potential to its Gibbs free energy change, with the negative sign essential for reconciling two independent sign conventions (negative ΔG and positive E both correctly indicate spontaneity). E° is an intensive property (fixed per the balanced equation as written, unaffected by scaling), while ΔG° is extensive (genuinely proportional to n, the number of electrons transferred as written) — scaling a balanced equation changes n and therefore changes ΔG°, even though E° itself remains fixed.",
+        "E° and ΔG° are purely thermodynamic quantities, describing how favorable a reaction is (its driving force toward equilibrium) — they carry no information about reaction RATE, which is governed entirely by activation energy, a separate kinetic property; a thermodynamically very favorable reaction can still proceed extremely slowly if its activation energy barrier is high.",
+        "Core misconception to avoid: ΔG=−nFE, always — the negative sign is mandatory and exists specifically to keep the thermodynamic and electrochemical spontaneity conventions consistent with each other."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Electrochemical Thermodynamics\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "ΔG = nFE = 2 × 96485 × 0.76 = +146,657 J. Since ΔG is positive... but E is positive too, so it should be spontaneous. I'm confused.",
+          "correction": "ΔG=−nFE, always — the negative sign is mandatory and exists specifically to keep the thermodynamic and electrochemical spontaneity conventions consistent with each other."
+        },
+        {
+          "misconception": "When I double the equation, neither E° nor ΔG° changes because they are both equilibrium properties.",
+          "correction": "E° is intensive (unchanged by scaling the equation); ΔG°=−nFE° is extensive (genuinely scales with n) — doubling the equation doubles n and thus doubles ΔG°, even though E° itself stays fixed."
+        },
+        {
+          "misconception": "A is faster because it has a larger cell potential, so it has more driving force.",
+          "correction": "E°/ΔG° predict thermodynamic favorability (driving force), never reaction rate — rate depends on activation energy, a separate, independent kinetic property that must be assessed separately."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Electrochemical Thermodynamics\""
+        "Demonstration 1 (sign-consistency check drill): Compute ΔG from several given E values (both positive and negative), having students verify the resulting ΔG sign is always consistent with the known E-based spontaneity direction.",
+        "Demonstration 2 (E°/ΔG° scaling comparison): Compute ΔG° explicitly for the same cell reaction written at n=2 and then doubled to n=4, showing E° stays fixed while ΔG° doubles."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Electrochemical Thermodynamics\"",
+        "setup": "A galvanic cell has E=+0.76V and n=2. Calculate ΔG. Is the reaction spontaneous?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (sign-consistency check drill): Compute ΔG from several given E values (both positive and negative), having students verify the resulting ΔG sign is always consistent with the known E-based spontaneity direction.",
+          "Demonstration 2 (E°/ΔG° scaling comparison): Compute ΔG° explicitly for the same cell reaction written at n=2 and then doubled to n=4, showing E° stays fixed while ΔG° doubles."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Electrochemical Thermodynamics\""
+        "expected_outcome": "Student can (a) correctly compute ΔG from E with the mandatory negative sign, verifying internal sign consistency, (b) correctly predict that E° stays fixed while ΔG° scales with n when an equation is multiplied, (c) correctly explain why a larger E°/ΔG° doesn't imply a faster reaction rate."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the sign-dropped-vs-correct ΔG calculation side by side, showing the internal contradiction the sign-dropped version produces.",
+          "TA-2 (TELL): State the intensive-E°/extensive-ΔG° distinction explicitly, worked through with the n=2-to-n=4 doubling example.",
+          "TA-3 (DO): Student computes ΔG° for a scaled version of a given cell reaction, correctly doubling ΔG° while keeping E° fixed.",
+          "TA-4 (TEST-THINKING): Present MC-3's diamond-to-graphite counterexample and ask the student to explain why high thermodynamic favorability doesn't guarantee a fast rate."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Electrochemical Thermodynamics from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A galvanic cell has E=+0.76V and n=2. Calculate ΔG. Is the reaction spontaneous?\"",
+          "FA-2: \"Write the Zn/Cu cell reaction with n=2, then double it to n=4. Do E° and ΔG° change?\"",
+          "FA-3: \"Reaction A has E°=+1.5V; Reaction B has E°=+0.2V. Which is necessarily faster?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Electrochemical Thermodynamics\""
+        "mastery_signal": "Student can (a) correctly compute ΔG from E with the mandatory negative sign, verifying internal sign consistency, (b) correctly predict that E° stays fixed while ΔG° scales with n when an equation is multiplied, (c) correctly explain why a larger E°/ΔG° doesn't imply a faster reaction rate."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Electrochemical Thermodynamics\""
+        "Feeds directly into `chem.elect.galvanic-cell` (galvanic cell design and operation require fluent, correctly-signed ΔG/E/n reasoning established here)."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.thermo.gibbs"
+      ]
     },
     {
       "id": "asset.chem.equil.concept",
