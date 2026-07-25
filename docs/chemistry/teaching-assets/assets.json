@@ -3285,48 +3285,62 @@
     {
       "id": "asset.chem.equil.concept",
       "concept_id": "chem.equil.concept",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Equilibrium Concept\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Equilibrium Concept\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Equilibrium Concept\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Chemical equilibrium is a dynamic state where forward and reverse reaction rates are equal (not zero), so macroscopic properties (concentrations) appear constant while molecular-level reaction continues in both directions — confirmed empirically by radiotracer experiments; \"equilibrium\" does NOT mean equal concentrations of reactants and products (K can be vastly greater or less than 1, indicating strong product or reactant favorability respectively); and ΔG°=0 is not a general feature of equilibrium — rather, ΔG=0 always holds at equilibrium (since Q=K makes the RT ln(Q/K) term vanish), while ΔG° is a fixed property of the reaction at a given temperature, related to K via ΔG°=−RT ln K, and equal to zero only in the special case where K happens to equal 1.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Equilibrium Concept\"",
-        "[TEMPLATE] Key idea 2 for \"Equilibrium Concept\"",
-        "[TEMPLATE] Key idea 3 for \"Equilibrium Concept\""
+        "Chemical equilibrium is a dynamic state, not a static one — the forward and reverse reactions both continue indefinitely, at exactly equal rates, so the macroscopically observable concentrations stop changing even though molecular-level reaction never actually stops. This is confirmed experimentally by radiotracer studies, which show labeled atoms from a reactant continuing to appear in products long after a system has reached apparent equilibrium.",
+        "The equilibrium constant K measures how far the equilibrium concentrations favor products versus reactants — a large K (like ammonia synthesis's ~977) means products dominate heavily, not that concentrations are \"equal.\" Separately, ΔG (the actual, current driving force) is always zero at equilibrium, but ΔG° (the fixed standard-state driving force) is related to K by ΔG°=−RT ln K and equals zero only in the special case K=1 — these two quantities, despite similar notation, describe genuinely different things.",
+        "Core misconception to avoid: At equilibrium, forward rate = reverse rate ≠ 0 — both reactions continue indefinitely at the same rate, which is exactly why the net (observable) concentrations don't change."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Equilibrium Concept\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "At equilibrium, the forward and reverse reactions have both stopped, so concentrations stay constant.",
+          "correction": "At equilibrium, forward rate = reverse rate ≠ 0 — both reactions continue indefinitely at the same rate, which is exactly why the net (observable) concentrations don't change."
+        },
+        {
+          "misconception": "At equilibrium there's the same amount of reactants as products — that's what equilibrium means.",
+          "correction": "Equilibrium means forward rate = reverse rate (a steady state), NOT equal concentrations — the actual product-to-reactant ratio at equilibrium is set by K, which can strongly favor either side."
+        },
+        {
+          "misconception": "At equilibrium ΔG must equal zero, so ΔG° = 0 at equilibrium too.",
+          "correction": "ΔG=0 always holds at equilibrium; ΔG° is a fixed value related to K by ΔG°=−RT ln K, and equals zero only when K=1 specifically — the Haber synthesis's ΔG°=−33.3 kJ/mol corresponds to a large, non-1 value of K, not to the reaction literally being \"at equilibrium under standard conditions\" in any special sense."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Equilibrium Concept\""
+        "Demonstration 1 (radiotracer thought experiment): Walk through the radioactively-labeled-reactant scenario in detail, having students predict then confirm that the label appears in products, directly demonstrating dynamic (not stopped) equilibrium.",
+        "Demonstration 2 (K-magnitude interpretation): Present several reactions with widely varying K values (very large, very small, near 1) and have students describe, in words, what each K value implies about relative product/reactant dominance at equilibrium."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Equilibrium Concept\"",
+        "setup": "If you add labeled reactant A* to a system at equilibrium, would you detect it in products?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (radiotracer thought experiment): Walk through the radioactively-labeled-reactant scenario in detail, having students predict then confirm that the label appears in products, directly demonstrating dynamic (not stopped) equilibrium.",
+          "Demonstration 2 (K-magnitude interpretation): Present several reactions with widely varying K values (very large, very small, near 1) and have students describe, in words, what each K value implies about relative product/reactant dominance at equilibrium."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Equilibrium Concept\""
+        "expected_outcome": "Student can (a) explain, using the radiotracer evidence, why equilibrium is dynamic rather than stopped, (b) correctly interpret a given K value in terms of which side of the reaction dominates, (c) correctly distinguish ΔG=0 (always true at equilibrium) from ΔG°=0 (true only if K=1)."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the radiotracer experiment as direct empirical evidence of dynamic equilibrium.",
+          "TA-2 (TELL): State explicitly that K's magnitude (not proximity to 1) determines which side of an equilibrium dominates.",
+          "TA-3 (DO): Student computes or interprets the ΔG°=−RT ln K relationship for a case where K≠1.",
+          "TA-4 (TEST-THINKING): Present MC-3's Haber-synthesis probe and ask the student to distinguish ΔG (equilibrium condition) from ΔG° (fixed reaction property)."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Equilibrium Concept from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"If you add labeled reactant A* to a system at equilibrium, would you detect it in products?\"",
+          "FA-2: \"K≈977 for the Haber synthesis. At equilibrium, is there more reactant or more product?\"",
+          "FA-3: \"For the Haber synthesis, ΔG°=−33.3 kJ/mol. Does this mean the reaction is at equilibrium?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Equilibrium Concept\""
+        "mastery_signal": "Student can (a) explain, using the radiotracer evidence, why equilibrium is dynamic rather than stopped, (b) correctly interpret a given K value in terms of which side of the reaction dominates, (c) correctly distinguish ΔG=0 (always true at equilibrium) from ΔG°=0 (true only if K=1)."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Equilibrium Concept\""
+        "Feeds directly into `chem.equil.kc-kp` (Kc and Kp expressions build directly on this concept's dynamic-equilibrium and K-magnitude understanding) and `chem.equil.kw-ph` (aqueous equilibria and pH calculations assume this foundational equilibrium concept is solid)."
       ],
       "prerequisite_review_triggers": [
         "chem.thermo.gibbs"
@@ -3335,48 +3349,62 @@
     {
       "id": "asset.chem.equil.kc-kp",
       "concept_id": "chem.equil.kc-kp",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Equilibrium Constants Kc and Kp\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Equilibrium Constants Kc and Kp\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Equilibrium Constants Kc and Kp\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Kc (concentration-based) and Kp (pressure-based) equilibrium constants are written from a balanced equation with stoichiometric coefficients appearing as EXPONENTS (never multipliers) on each species' concentration or partial pressure; pure solids and liquids are excluded entirely from equilibrium expressions (their activity is defined as 1, since it doesn't change with amount present), leaving only gases and dissolved species; and Kp relates to Kc via Kp = Kc(RT)^Δn, where Δn = moles of gaseous products − moles of gaseous reactants — meaning Kp equals Kc only in the special case Δn=0, not as a general rule.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Equilibrium Constants Kc and Kp\"",
-        "[TEMPLATE] Key idea 2 for \"Equilibrium Constants Kc and Kp\"",
-        "[TEMPLATE] Key idea 3 for \"Equilibrium Constants Kc and Kp\""
+        "The equilibrium constant expression is written directly from the balanced equation's law of mass action: each species' concentration (Kc) or partial pressure (Kp) is raised to a power equal to its stoichiometric coefficient — always as an exponent, never as a multiplying factor. Pure solids and liquids are excluded entirely, since their activity (effectively their own internal concentration) stays fixed at 1 regardless of the amount present, contributing no variable term to the expression.",
+        "Kp and Kc are related by Kp = Kc(RT)^Δn, where Δn is the change in moles of GAS ONLY between products and reactants — this factor equals 1 (making Kp=Kc) only when Δn=0; for any reaction where the number of gas moles changes across the reaction, Kp and Kc will genuinely differ by this (RT)^Δn factor.",
+        "Core misconception to avoid: In any K expression, each species' concentration (or pressure) is raised to a power equal to its stoichiometric coefficient — coefficients are always exponents in K expressions, never multipliers."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Equilibrium Constants Kc and Kp\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Kc = 2[SO₃] / (2[SO₂] × [O₂])",
+          "correction": "In any K expression, each species' concentration (or pressure) is raised to a power equal to its stoichiometric coefficient — coefficients are always exponents in K expressions, never multipliers."
+        },
+        {
+          "misconception": "Kp = [CaO][CO₂] / [CaCO₃]",
+          "correction": "Exclude all pure solids (s) and pure liquids (l) entirely from K expressions — only gases and dissolved (aqueous) species with genuinely variable concentrations appear."
+        },
+        {
+          "misconception": "Kp = Kc = 977.",
+          "correction": "Kp = Kc(RT)^Δn always, where Δn is computed from gas-phase species only — this reduces to Kp=Kc specifically and only when Δn=0."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Equilibrium Constants Kc and Kp\""
+        "Demonstration 1 (coefficient-to-exponent mapping): Write several balanced equations side by side with their correct K expressions, having students explicitly trace each coefficient's transformation into an exponent.",
+        "Demonstration 2 (Δn computation drill): Present several reactions with varying Δn (positive, negative, zero) and have students compute Kp from Kc for each, discovering when Kp=Kc holds and when it doesn't."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Equilibrium Constants Kc and Kp\"",
+        "setup": "Write Kc for 2SO₂(g) + O₂(g) ⇌ 2SO₃(g).",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (coefficient-to-exponent mapping): Write several balanced equations side by side with their correct K expressions, having students explicitly trace each coefficient's transformation into an exponent.",
+          "Demonstration 2 (Δn computation drill): Present several reactions with varying Δn (positive, negative, zero) and have students compute Kp from Kc for each, discovering when Kp=Kc holds and when it doesn't."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Equilibrium Constants Kc and Kp\""
+        "expected_outcome": "Student can (a) correctly write a K expression with coefficients as exponents, (b) correctly exclude pure solids/liquids from a heterogeneous K expression, (c) correctly compute Kp from Kc (or vice versa) using Δn, recognizing when Kp≠Kc."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the coefficient-to-exponent mapping explicitly for a worked example.",
+          "TA-2 (TELL): State the pure-solid/liquid exclusion rule explicitly, immediately followed by the \"does more solid change its own concentration?\" question.",
+          "TA-3 (DO): Student writes a K expression for a new heterogeneous equilibrium, correctly excluding solids/liquids and using exponents.",
+          "TA-4 (TEST-THINKING): Present MC-3's Δn=−2 probe and ask the student to compute Δn before attempting the Kp calculation."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Equilibrium Constants Kc and Kp from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Write Kc for 2SO₂(g) + O₂(g) ⇌ 2SO₃(g).\"",
+          "FA-2: \"Write Kp for CaCO₃(s) ⇌ CaO(s) + CO₂(g).\"",
+          "FA-3: \"For N₂(g)+3H₂(g)⇌2NH₃(g), calculate Kp if Kc=977 at 298K.\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Equilibrium Constants Kc and Kp\""
+        "mastery_signal": "Student can (a) correctly write a K expression with coefficients as exponents, (b) correctly exclude pure solids/liquids from a heterogeneous K expression, (c) correctly compute Kp from Kc (or vice versa) using Δn, recognizing when Kp≠Kc."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Equilibrium Constants Kc and Kp\""
+        "Feeds directly into `chem.elect.nernst` (equilibrium-constant reasoning underlies the Nernst equation's connection to cell potential), `chem.equil.complex-equil`, `chem.equil.le-chatelier` (predicting equilibrium shifts assumes fluent K-expression writing), and `chem.equil.solubility` (solubility product expressions are a direct application of this concept's rules)."
       ],
       "prerequisite_review_triggers": [
         "chem.equil.concept"
@@ -3385,48 +3413,64 @@
     {
       "id": "asset.chem.equil.le-chatelier",
       "concept_id": "chem.equil.le-chatelier",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Le Chatelier's Principle\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Le Chatelier's Principle\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Le Chatelier's Principle\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "A catalyst does NOT shift equilibrium position or change Kc — it accelerates the forward AND reverse reactions EQUALLY (lowering the activation-energy \"hill\" symmetrically from both directions), so equilibrium concentrations are unchanged and only the TIME to reach equilibrium decreases; adding more of a reactant does NOT change K (which depends only on temperature) — it increases Q above K temporarily, driving the system to shift forward until Q=K again, redistributing amounts to a new equilibrium position with the same K value, never a changed K; and increased pressure shifts equilibrium toward the side with FEWER gas moles, which means \"high pressure favors products\" is only true when Δn_gas<0 for that specific reaction — when Δn_gas=0 (e.g., H₂+I₂⇌2HI), pressure changes have NO effect on equilibrium position at all, even though reaction rate increases in both directions equally.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Le Chatelier's Principle\"",
-        "[TEMPLATE] Key idea 2 for \"Le Chatelier's Principle\"",
-        "[TEMPLATE] Key idea 3 for \"Le Chatelier's Principle\""
+        "A catalyst accelerates both forward and reverse reactions equally, changing only how quickly equilibrium is reached, never the equilibrium position, K, or equilibrium concentrations — this follows from the catalyst lowering the activation-energy barrier symmetrically without altering the reactant/product energy levels (and hence K=e^(−ΔG°/RT)). K itself depends only on temperature; adding reactant or product perturbs the system away from equilibrium (Q≠K), triggering a shift in AMOUNTS to restore Q=K, never a change in K itself.",
+        "Pressure changes shift equilibrium position specifically toward the side with fewer total gas moles — this effect depends entirely on Δn_gas for the specific reaction, and has zero effect on equilibrium position when Δn_gas=0, even though reaction rate still increases in both directions; \"high pressure favors products\" is a reaction-specific consequence, not a universal rule.",
+        "Core misconception to avoid: A catalyst changes only the rate at which equilibrium is reached, never the equilibrium position, K, or equilibrium concentrations — both forward and reverse rates are accelerated equally."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Le Chatelier's Principle\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "The catalyst shifts equilibrium to the right, increasing [product] at equilibrium.",
+          "correction": "A catalyst changes only the rate at which equilibrium is reached, never the equilibrium position, K, or equilibrium concentrations — both forward and reverse rates are accelerated equally."
+        },
+        {
+          "misconception": "Adding H₂ increases K because more NH₃ is produced.",
+          "correction": "K depends only on temperature — adding reactant shifts the AMOUNTS present at the new equilibrium (via the Q-approaches-K mechanism), never changes K itself."
+        },
+        {
+          "misconception": "Doubling pressure shifts the equilibrium toward HI (products), increasing yield.",
+          "correction": "Always compute Δn_gas (product gas moles minus reactant gas moles) before predicting a pressure effect — pressure shifts equilibrium toward the side with fewer gas moles, and has NO effect when Δn_gas=0, never assume \"high pressure favors products\" universally."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Le Chatelier's Principle\""
+        "Demonstration 1 (energy-diagram argument for catalyst's symmetric effect): Present the explicit activation-energy diagram before/after catalyst addition, showing valley depths (and K) unchanged.",
+        "Demonstration 2 (Q-vs-K reasoning sequence for reactant addition): Walk through the explicit Q>K→shift-forward→Q=K sequence for the Haber process after H₂ addition.",
+        "Demonstration 3 (Δn_gas comparison for pressure sensitivity): Compute Δn_gas explicitly for both the Haber process and H₂+I₂⇌2HI, deriving the differing pressure response."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Le Chatelier's Principle\"",
+        "setup": "A catalyst is added to an equilibrium mixture. What happens to the reaction rate, Kc, and the equilibrium concentrations?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (energy-diagram argument for catalyst's symmetric effect): Present the explicit activation-energy diagram before/after catalyst addition, showing valley depths (and K) unchanged.",
+          "Demonstration 2 (Q-vs-K reasoning sequence for reactant addition): Walk through the explicit Q>K→shift-forward→Q=K sequence for the Haber process after H₂ addition.",
+          "Demonstration 3 (Δn_gas comparison for pressure sensitivity): Compute Δn_gas explicitly for both the Haber process and H₂+I₂⇌2HI, deriving the differing pressure response."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Le Chatelier's Principle\""
+        "expected_outcome": "Student can (a) correctly state that a catalyst leaves K and equilibrium concentrations unchanged, (b) correctly distinguish a shift in amounts from a change in K when reactant/product is added, (c) correctly predict pressure effects from Δn_gas, including the Δn_gas=0 no-effect case."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit energy-diagram argument for a catalyst's symmetric rate enhancement.",
+          "TA-2 (TELL): State the Q-vs-K distinction explicitly, anchored to the Haber-process reactant-addition sequence.",
+          "TA-3 (DO): Student computes Δn_gas for an unfamiliar reaction and predicts the pressure effect.",
+          "TA-4 (TEST-THINKING): Present the H₂+I₂⇌2HI probe and ask the student to justify the absence of a pressure effect from Δn_gas=0."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Le Chatelier's Principle from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A catalyst is added to an equilibrium mixture. What happens to the reaction rate, Kc, and the equilibrium concentrations?\"",
+          "FA-2: \"You add more H₂ to the Haber process equilibrium at constant temperature. Does Kc change? Does [NH₃] change?\"",
+          "FA-3: \"For H₂(g)+I₂(g)⇌2HI(g), predict the effect of doubling the pressure.\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Le Chatelier's Principle\""
+        "mastery_signal": "Student can (a) correctly state that a catalyst leaves K and equilibrium concentrations unchanged, (b) correctly distinguish a shift in amounts from a change in K when reactant/product is added, (c) correctly predict pressure effects from Δn_gas, including the Δn_gas=0 no-effect case."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Le Chatelier's Principle\""
+        "This concept has no direct KG unlocks but consolidates equilibrium-constant reasoning built across `chem.equil.kc-kp`, forming a capstone application to industrial equilibrium optimization and van't Hoff isochore contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.equil.kc-kp"
@@ -3435,48 +3479,62 @@
     {
       "id": "asset.chem.equil.kw-ph",
       "concept_id": "chem.equil.kw-ph",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Water Ionization and pH\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Water Ionization and pH\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Water Ionization and pH\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Water self-ionizes to a small extent (2H₂O ⇌ H₃O⁺ + OH⁻), characterized by the ionic product Kw = [H⁺][OH⁻], which is temperature-dependent (Kw = 1.0×10⁻¹⁴ at 25°C but changes at other temperatures) — meaning \"neutral\" (defined as [H⁺]=[OH⁻]) corresponds to pH=7 only at 25°C, not universally; strong acids and bases dissociate completely, so [H⁺] or [OH⁻] can be read directly from the given concentration without any equilibrium (ICE-table) calculation, unlike weak acids/bases; and converting between pH and [H⁺] requires the antilog operation (10^(−pH)), never simple arithmetic subtraction or division, since pH is defined logarithmically (pH = −log[H⁺]).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Water Ionization and pH\"",
-        "[TEMPLATE] Key idea 2 for \"Water Ionization and pH\"",
-        "[TEMPLATE] Key idea 3 for \"Water Ionization and pH\""
+        "Water self-ionizes slightly, characterized by Kw=[H⁺][OH⁻], a genuine equilibrium constant that changes with temperature. Since \"neutral\" is fundamentally defined by [H⁺]=[OH⁻] (not by the specific number pH=7), the exact pH value corresponding to neutral shifts whenever Kw shifts with temperature — pH=7 is simply the neutral value that happens to occur at the commonly-cited 25°C reference temperature.",
+        "Strong acids and bases dissociate completely, so their [H⁺] or [OH⁻] can be read directly from the given concentration without any equilibrium calculation — reserving ICE tables and Ka/Kb expressions specifically for weak acids/bases, which genuinely only partially dissociate. Converting from pH back to [H⁺] requires the antilog operation, [H⁺]=10^(−pH), since pH is fundamentally a logarithmic quantity and only the corresponding exponential operation correctly inverts it.",
+        "Core misconception to avoid: Neutral means [H⁺]=[OH⁻] at any temperature; the corresponding numeric pH value (7 at 25°C, 6.81 at 37°C, etc.) depends on that temperature's specific Kw value."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Water Ionization and pH\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Neutral always means pH = 7.",
+          "correction": "Neutral means [H⁺]=[OH⁻] at any temperature; the corresponding numeric pH value (7 at 25°C, 6.81 at 37°C, etc.) depends on that temperature's specific Kw value."
+        },
+        {
+          "misconception": "Let x = [H⁺]. HCl ⇌ H⁺ + Cl⁻. Ka = x²/(0.050 − x). Solve for x.",
+          "correction": "For strong acids (and strong bases), read [H⁺] (or [OH⁻]) directly from the given concentration — memorize the ~6 common strong acids so this distinction is made immediately, before any calculation begins."
+        },
+        {
+          "misconception": "[H⁺] = 10 − 3.40 = 6.60",
+          "correction": "To convert pH to [H⁺], always use [H⁺]=10^(−pH), the antilog operation — never subtraction or division involving the number 10."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Water Ionization and pH\""
+        "Demonstration 1 (temperature-dependent neutral pH calculation): Compute the neutral pH at several different temperatures (25°C, 37°C, and one other given Kw value), showing the neutral pH value shifting away from 7 each time.",
+        "Demonstration 2 (strong-vs-weak acid pH contrast): Compute pH for a strong acid (direct concentration reading) side by side with a weak acid at the same nominal concentration (requiring an ICE table), showing the very different calculation paths and resulting pH values."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Water Ionization and pH\"",
+        "setup": "At 37°C, Kw = 2.4×10⁻¹⁴. What is the neutral pH?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (temperature-dependent neutral pH calculation): Compute the neutral pH at several different temperatures (25°C, 37°C, and one other given Kw value), showing the neutral pH value shifting away from 7 each time.",
+          "Demonstration 2 (strong-vs-weak acid pH contrast): Compute pH for a strong acid (direct concentration reading) side by side with a weak acid at the same nominal concentration (requiring an ICE table), showing the very different calculation paths and resulting pH values."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Water Ionization and pH\""
+        "expected_outcome": "Student can (a) correctly compute neutral pH at a non-25°C temperature given Kw, (b) correctly identify strong acids/bases and compute their pH by direct reading, without an unnecessary ICE table, (c) correctly convert pH to [H⁺] using the antilog operation."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the neutral-pH-at-37°C calculation explicitly, contrasted against the familiar 25°C value.",
+          "TA-2 (TELL): State the strong-acid-direct-reading rule explicitly, immediately followed by the memorized list of common strong acids.",
+          "TA-3 (DO): Student converts a given pH value to [H⁺] using the correct antilog operation.",
+          "TA-4 (TEST-THINKING): Present MC-2's HCl probe and ask the student to identify, before calculating, whether an ICE table is actually needed."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Water Ionization and pH from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"At 37°C, Kw = 2.4×10⁻¹⁴. What is the neutral pH?\"",
+          "FA-2: \"Calculate the pH of 0.050 M HCl.\"",
+          "FA-3: \"The pH of a solution is 3.40. Calculate [H⁺].\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Water Ionization and pH\""
+        "mastery_signal": "Student can (a) correctly compute neutral pH at a non-25°C temperature given Kw, (b) correctly identify strong acids/bases and compute their pH by direct reading, without an unnecessary ICE table, (c) correctly convert pH to [H⁺] using the antilog operation."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Water Ionization and pH\""
+        "Feeds directly into `chem.equil.acids-bases` (weak acid/base Ka/Kb calculations directly build on and require the strong-vs-weak distinction and pH/antilog fluency established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.equil.concept",
@@ -3486,48 +3544,62 @@
     {
       "id": "asset.chem.equil.acids-bases",
       "concept_id": "chem.equil.acids-bases",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Acid–Base Theories\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Acid–Base Theories\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Acid–Base Theories\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Three progressively broader acid-base theories coexist: Arrhenius (acids produce H⁺, bases produce OH⁻ in water — narrowest scope), Brønsted-Lowry (acids donate protons, bases accept protons — explains species like NH₃ as bases despite containing no OH), and Lewis (acids accept electron pairs, bases donate electron pairs — broadest, includes species like BF₃ and metal ions that contain no protons at all); conjugate acid-base pairs differ by EXACTLY one proton (never two, never an OH group); and pKa (=−log Ka) is an inverted strength scale — a LOWER pKa means a stronger acid (larger Ka), the opposite of an intuitive \"bigger number = stronger\" reading.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Acid–Base Theories\"",
-        "[TEMPLATE] Key idea 2 for \"Acid–Base Theories\"",
-        "[TEMPLATE] Key idea 3 for \"Acid–Base Theories\""
+        "Three acid-base theories exist at progressively broader scope: Arrhenius (narrowest — acids/bases defined by producing H⁺/OH⁻ specifically in water), Brønsted-Lowry (broader — acids donate protons, bases accept protons, regardless of solvent or whether OH is directly involved), and Lewis (broadest — acids accept electron pairs, bases donate electron pairs, encompassing species with no protons at all, like BF₃). A species can fail a narrower theory's test while genuinely satisfying a broader one — NH₃ is the classic example, failing Arrhenius but passing both Brønsted-Lowry and Lewis.",
+        "Conjugate acid-base pairs are defined by an exact, single-proton difference — never two protons, never an OH-based difference. Acid strength is measured by pKa=−log Ka, an inherently inverted scale where a numerically SMALLER pKa indicates a genuinely STRONGER acid (larger Ka), directly opposite to an intuitive \"bigger number is stronger\" reading.",
+        "Core misconception to avoid: Conjugate pairs differ by EXACTLY one proton (H⁺) — never two, never a hydroxide group — always verify this exact difference before naming a conjugate pair."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Acid–Base Theories\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "H₂SO₄ and SO₄²⁻ are a conjugate pair",
+          "correction": "Conjugate pairs differ by EXACTLY one proton (H⁺) — never two, never a hydroxide group — always verify this exact difference before naming a conjugate pair."
+        },
+        {
+          "misconception": "Acetic acid is stronger because pKa 4.76 > 3.17.",
+          "correction": "Lower pKa means stronger acid (larger Ka); use the mnemonic \"pKa down, strength up\" to counter the intuitive-but-wrong \"bigger number = stronger\" reading."
+        },
+        {
+          "misconception": "NH₃ is not a base because it contains no OH.",
+          "correction": "Whether a species counts as a \"base\" depends on which theory is being applied — NH₃ fails the narrow Arrhenius test (no OH group) but genuinely passes the broader Brønsted-Lowry test (accepts a proton) and the even broader Lewis test (donates an electron pair)."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Acid–Base Theories\""
+        "Demonstration 1 (conjugate-pair proton-counting drill): Present several multi-proton acid reactions (like H₂SO₄'s) and have students explicitly count proton differences before confirming any conjugate-pair assignment.",
+        "Demonstration 2 (pKa-to-Ka computation comparison): Compute Ka explicitly from the given HF and acetic acid pKa values, comparing the actual numeric Ka magnitudes to resolve which acid is genuinely stronger."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Acid–Base Theories\"",
+        "setup": "In H₂SO₄ + H₂O → HSO₄⁻ + H₃O⁺, identify BOTH conjugate pairs.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (conjugate-pair proton-counting drill): Present several multi-proton acid reactions (like H₂SO₄'s) and have students explicitly count proton differences before confirming any conjugate-pair assignment.",
+          "Demonstration 2 (pKa-to-Ka computation comparison): Compute Ka explicitly from the given HF and acetic acid pKa values, comparing the actual numeric Ka magnitudes to resolve which acid is genuinely stronger."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Acid–Base Theories\""
+        "expected_outcome": "Student can (a) correctly identify conjugate pairs verified by an exact one-proton difference, (b) correctly rank acid strength using pKa's inverted scale, (c) correctly classify a species like NH₃ as a base under the appropriate broader theory even when it fails the narrower Arrhenius definition."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the NH₃+H₂O proton-transfer mechanism explicitly, tracing the OH⁻'s actual origin.",
+          "TA-2 (TELL): State the pKa inversion rule explicitly (\"pKa down, strength up\"), immediately followed by the explicit Ka computation for HF and acetic acid.",
+          "TA-3 (DO): Student identifies both conjugate pairs in a multi-proton acid reaction, verifying the exact one-proton difference for each.",
+          "TA-4 (TEST-THINKING): Present MC-3's NH₃ probe and ask the student to classify it under all three theories, identifying where each theory succeeds or fails."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Acid–Base Theories from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"In H₂SO₄ + H₂O → HSO₄⁻ + H₃O⁺, identify BOTH conjugate pairs.\"",
+          "FA-2: \"Acetic acid has pKa=4.76, HF has pKa=3.17. Which is stronger?\"",
+          "FA-3: \"Is NH₃ a base? Explain using Brønsted-Lowry theory.\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Acid–Base Theories\""
+        "mastery_signal": "Student can (a) correctly identify conjugate pairs verified by an exact one-proton difference, (b) correctly rank acid strength using pKa's inverted scale, (c) correctly classify a species like NH₃ as a base under the appropriate broader theory even when it fails the narrower Arrhenius definition."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Acid–Base Theories\""
+        "Feeds directly into `chem.carb.carboxylic` (carboxylic acid chemistry directly applies acid-base theory and pKa reasoning) and `chem.equil.weak-acid` (weak-acid equilibrium calculations require fluent, correctly-directioned Ka/pKa reasoning established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.equil.kw-ph"
@@ -3736,48 +3808,57 @@
     {
       "id": "asset.chem.equil.complex-equil",
       "concept_id": "chem.equil.complex-equil",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Complex Ion Equilibria\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Complex Ion Equilibria\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Complex Ion Equilibria\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Combining (adding) two sequential equilibria requires MULTIPLYING their equilibrium constants (K_overall=K₁×K₂), not adding them — this follows directly from ΔG°_total=ΔG°₁+ΔG°₂ (free energies genuinely add) combined with K=e^(−ΔG°/RT) (exponentiating a sum of energies produces a PRODUCT of exponentials, hence a product of K values); and reversing an equilibrium reaction changes K to its RECIPROCAL (1/K), never to a negated value (−K) — since K is always a non-negative ratio of concentrations (never negative), and the correct derivation from ΔG°_reverse=−ΔG°_forward gives K_reverse=e^(−ΔG°_reverse/RT)=e^(ΔG°_forward/RT)=1/K_forward.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Complex Ion Equilibria\"",
-        "[TEMPLATE] Key idea 2 for \"Complex Ion Equilibria\"",
-        "[TEMPLATE] Key idea 3 for \"Complex Ion Equilibria\""
+        "Equilibrium constants relate to free energy exponentially (K=e^(−ΔG°/RT)), not linearly — this has two important, non-obvious consequences that contradict naive arithmetic intuition: combining (adding) sequential reactions requires MULTIPLYING their K values (since adding the underlying free energies, when passed through the exponential relationship, produces a product of K values), and reversing a reaction requires taking the RECIPROCAL of K (since flipping the sign of ΔG°, when passed through the exponential relationship, produces the reciprocal of K, not a negated value).",
+        "K is fundamentally a ratio of concentrations and can therefore never be negative — any calculation that produces a negative K value (such as directly negating K when reversing a reaction) is a clear signal that the wrong operation was applied; the correct approach always derives the resulting K by tracing the actual free-energy relationship through the exponential, never by directly manipulating K's sign or applying simple arithmetic addition/subtraction to K values themselves.",
+        "Core misconception to avoid: For sequential (added) equilibrium reactions, multiply the individual K values to get the overall K — never add them, since the underlying free-energy additivity translates into K-value multiplicativity through the exponential relationship."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Complex Ion Equilibria\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "K_overall = K₁ + K₂ = 3 × 10⁻⁵ + 7 × 10² ≈ 7 × 10².",
+          "correction": "For sequential (added) equilibrium reactions, multiply the individual K values to get the overall K — never add them, since the underlying free-energy additivity translates into K-value multiplicativity through the exponential relationship."
+        },
+        {
+          "misconception": "K for B ⇌ A is −500.",
+          "correction": "Reversing an equilibrium reaction takes the RECIPROCAL of K (K_reverse=1/K_forward), never negates it — K itself is always non-negative, so negation is never a valid operation to apply to it."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Complex Ion Equilibria\""
+        "Demonstration 1 (multiplicative K-combination derivation): Derive the K_total=K₁×K₂ relationship explicitly from ΔG°_total=ΔG°₁+ΔG°₂ through the exponential relationship, applying it to the given K₁=3×10⁻⁵ and K₂=7×10² example.",
+        "Demonstration 2 (reciprocal-K derivation for reversal): Derive the K_reverse=1/K_forward relationship explicitly from the ΔG° sign flip, applying it to the given K=500 example."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Complex Ion Equilibria\"",
+        "setup": "Reaction 1 has K₁=3×10⁻⁵. Reaction 2 has K₂=7×10². What is the overall K?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (multiplicative K-combination derivation): Derive the K_total=K₁×K₂ relationship explicitly from ΔG°_total=ΔG°₁+ΔG°₂ through the exponential relationship, applying it to the given K₁=3×10⁻⁵ and K₂=7×10² example.",
+          "Demonstration 2 (reciprocal-K derivation for reversal): Derive the K_reverse=1/K_forward relationship explicitly from the ΔG° sign flip, applying it to the given K=500 example."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Complex Ion Equilibria\""
+        "expected_outcome": "Student can (a) correctly combine sequential equilibrium K values via multiplication, not addition, (b) correctly compute a reversed reaction's K via reciprocal, not negation, recognizing K is always non-negative."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit ΔG°-to-K exponential derivation for the multiplicative combination rule.",
+          "TA-2 (TELL): State explicitly that K is always non-negative, immediately followed by the reciprocal derivation for reversed reactions.",
+          "TA-3 (DO): Student combines two given sequential equilibrium K values correctly via multiplication.",
+          "TA-4 (TEST-THINKING): Present MC-2's reversal probe and ask the student to derive the correct reciprocal result from the ΔG° sign flip."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Complex Ion Equilibria from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Reaction 1 has K₁=3×10⁻⁵. Reaction 2 has K₂=7×10². What is the overall K?\"",
+          "FA-2: \"Reaction A⇌B has K=500. Write K for B⇌A.\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Complex Ion Equilibria\""
+        "mastery_signal": "Student can (a) correctly combine sequential equilibrium K values via multiplication, not addition, (b) correctly compute a reversed reaction's K via reciprocal, not negation, recognizing K is always non-negative."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Complex Ion Equilibria\""
+        "Feeds directly into `chem.coord.stability` (stepwise complex-ion formation constants directly apply the multiplicative-combination and reciprocal-reversal rules established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.equil.kc-kp"
