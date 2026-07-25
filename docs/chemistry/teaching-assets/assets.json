@@ -7573,48 +7573,64 @@
     {
       "id": "asset.chem.alc.alcohols",
       "concept_id": "chem.alc.alcohols",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Alcohols\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Alcohols\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Alcohols\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Ordinary alcohols (pKₐ~16–18) do NOT react appreciably with NaOH (conjugate acid water, pKₐ~15.7) — the equilibrium constant K=10^(ΔpKₐ) is near or below 1, unfavorable for ordinary alcohols, while phenol (pKₐ~10) reacts strongly (K≈10⁵) — so \"alcohols are acidic, therefore they react with NaOH\" is true only for the specific, much-more-acidic phenol case, never for ordinary aliphatic alcohols; PCC (mild, anhydrous) stops oxidation cleanly AT the aldehyde stage for primary alcohols (no water present to hydrate the aldehyde into the gem-diol needed for further oxidation), while aqueous KMnO₄ (strong, aqueous) oxidizes all the way to the carboxylic acid — \"any oxidizing agent gives the same product\" ignores this genuine mechanistic endpoint difference; and tertiary alcohols CANNOT be oxidized under mild conditions to a ketone (or anything) because oxidation requires removing the α-hydrogen from the carbinol carbon, and a tertiary carbinol carbon has NO hydrogen to remove — carbon count around the OH is irrelevant to oxidizability.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Alcohols\"",
-        "[TEMPLATE] Key idea 2 for \"Alcohols\"",
-        "[TEMPLATE] Key idea 3 for \"Alcohols\""
+        "Alcohol acidity must be assessed by actual pKₐ comparison, not by the qualitative presence of an OH group — ordinary alcohols are far too weakly acidic (pKₐ~16–18) to react appreciably with NaOH, while phenol's much lower pKₐ (~10) makes its reaction with NaOH strongly favorable. Oxidation endpoint (aldehyde vs. carboxylic acid) is controlled by whether water is present to enable the gem-diol hydration pathway past the aldehyde — anhydrous PCC halts at the aldehyde, aqueous KMnO₄ proceeds to the acid.",
+        "Mild alcohol oxidation is mechanistically a removal of the α-hydrogen from the carbinol (C–OH) carbon — primary alcohols (two α-H) oxidize to aldehydes (then acids), secondary alcohols (one α-H) oxidize to ketones, and tertiary alcohols (zero α-H) cannot be oxidized under mild conditions at all, regardless of how many carbon substituents surround the OH.",
+        "Core misconception to avoid: Always compare actual pKₐ values via K=10^(ΔpKₐ) before predicting whether an alcohol reacts appreciably with NaOH — never assume from OH-group presence alone."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Alcohols\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "alcohols are acids so they react with all bases",
+          "correction": "Always compare actual pKₐ values via K=10^(ΔpKₐ) before predicting whether an alcohol reacts appreciably with NaOH — never assume from OH-group presence alone."
+        },
+        {
+          "misconception": "both give the oxidised product",
+          "correction": "Use PCC (anhydrous, mild) to stop cleanly at the aldehyde; use aqueous KMnO₄ (or similar aqueous strong oxidant) to proceed to the carboxylic acid — never assume \"an oxidizing agent\" is interchangeable with another for controlling reaction endpoint."
+        },
+        {
+          "misconception": "three carbon groups oxidised to give something",
+          "correction": "Alcohol oxidizability under mild conditions requires an α-hydrogen at the carbinol carbon — primary and secondary alcohols have one, tertiary alcohols do not, and therefore cannot be oxidized to a carbonyl compound under normal conditions."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Alcohols\""
+        "Demonstration 1 (explicit pKₐ/K comparison): Compute K for ethanol+NaOH and phenol+NaOH side by side, deriving the reactivity contrast numerically.",
+        "Demonstration 2 (gem-diol hydration mechanism): Draw the aldehyde-to-gem-diol hydration step explicitly, showing why anhydrous PCC cannot proceed past the aldehyde while aqueous KMnO₄ can.",
+        "Demonstration 3 (carbinol-carbon bond structure comparison): Draw the explicit bond structure at the carbinol carbon for primary, secondary, and tertiary alcohols, locating the available α-hydrogens (or their absence) in each."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Alcohols\"",
+        "setup": "Does ethanol react appreciably with NaOH? Justify with pKₐ values.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (explicit pKₐ/K comparison): Compute K for ethanol+NaOH and phenol+NaOH side by side, deriving the reactivity contrast numerically.",
+          "Demonstration 2 (gem-diol hydration mechanism): Draw the aldehyde-to-gem-diol hydration step explicitly, showing why anhydrous PCC cannot proceed past the aldehyde while aqueous KMnO₄ can.",
+          "Demonstration 3 (carbinol-carbon bond structure comparison): Draw the explicit bond structure at the carbinol carbon for primary, secondary, and tertiary alcohols, locating the available α-hydrogens (or their absence) in each."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Alcohols\""
+        "expected_outcome": "Student can (a) correctly predict NaOH reactivity from actual pKₐ comparison, (b) correctly predict oxidation endpoint (aldehyde vs. acid) from oxidant identity, (c) correctly identify tertiary alcohols as non-oxidizable under mild conditions from the α-hydrogen requirement."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit K computation for ethanol+NaOH vs. phenol+NaOH.",
+          "TA-2 (TELL): State the PCC-vs-KMnO₄ endpoint distinction explicitly, anchored to the gem-diol mechanism.",
+          "TA-3 (DO): Student predicts the oxidation product for an unfamiliar primary/secondary/tertiary alcohol under specified oxidant conditions.",
+          "TA-4 (TEST-THINKING): Present the t-butanol Jones-reagent probe and ask the student to justify \"no reaction\" from the α-hydrogen requirement."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Alcohols from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Does ethanol react appreciably with NaOH? Justify with pKₐ values.\"",
+          "FA-2: \"Convert 1-butanol to butanal — which reagent, PCC or KMnO₄? What does the other give?\"",
+          "FA-3: \"Can t-butanol be oxidised to a ketone? Explain using the carbinol carbon's bonding.\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Alcohols\""
+        "mastery_signal": "Student can (a) correctly predict NaOH reactivity from actual pKₐ comparison, (b) correctly predict oxidation endpoint (aldehyde vs. acid) from oxidant identity, (c) correctly identify tertiary alcohols as non-oxidizable under mild conditions from the α-hydrogen requirement."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Alcohols\""
+        "Feeds directly into `chem.carb.aldehydes` (alcohol oxidation is the direct synthetic route to aldehydes), `chem.alc.diols`, `chem.alc.ethers`, `chem.alc.phenols`, `chem.alc.protection` (all build on alcohol reactivity patterns established here), and `chem.nitro.amines` (comparative acid-base reasoning recurs)."
       ],
       "prerequisite_review_triggers": [
         "chem.hal.sn2",
@@ -7624,48 +7640,64 @@
     {
       "id": "asset.chem.alc.phenols",
       "concept_id": "chem.alc.phenols",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Phenols\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Phenols\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Phenols\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Phenol (pKₐ≈10) is a substantially STRONGER acid than both water (pKₐ=15.7) and ethanol (pKₐ≈16), not weaker or comparable — the phenoxide anion is stabilized by 5 resonance structures delocalizing negative charge into the ring, while the alkoxide anion from ethanol has only a single, localized structure, making phenoxide far more stable and phenol far more acidic; the OH group in phenol is an ORTHO/PARA DIRECTOR (activating, via +M resonance donation into the ring, which dominates any −I inductive withdrawal), NEVER a meta director — proof: bromination of phenol in water (no Lewis acid catalyst needed) gives 2,4,6-tribromophenol within seconds, with all three bromines at ortho/para positions, impossible for a deactivating meta-director; and the Kolbe-Schmitt synthesis places the new carboxyl group predominantly at the ORTHO position (giving salicylic acid, 2-hydroxybenzoic acid) via a chelation-controlled 6-membered transition state where the sodium cation coordinates both the phenoxide oxygen and CO₂ — para product is minor and only favored at higher temperature with the potassium salt, so \"para is the default EAS position\" does not apply to Kolbe-Schmitt.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Phenols\"",
-        "[TEMPLATE] Key idea 2 for \"Phenols\"",
-        "[TEMPLATE] Key idea 3 for \"Phenols\""
+        "Phenol's acidity (pKₐ≈10) substantially exceeds both water's and ethanol's because the phenoxide anion is stabilized by 5 resonance structures delocalizing negative charge into the aromatic ring, unlike the single-structure, fully-localized alkoxide anion — acid strength must always be assessed by this actual quantitative pKₐ comparison, not by everyday \"corrosiveness\" impressions. The OH group's resonance donation into the ring (+M effect) dominates its weak inductive withdrawal, making it a strong activator and ortho/para director, never meta.",
+        "The Kolbe-Schmitt carboxylation of phenol proceeds through a chelation-controlled 6-membered transition state, where the sodium cation bridges the phenoxide oxygen and the incoming CO₂ at the ortho position — this specific geometric mechanism, not typical EAS positional preferences, determines the major (ortho, salicylic acid) product.",
+        "Core misconception to avoid: Always compare actual pKₐ values on the full numerical scale — phenol (pKₐ≈10) is substantially more acidic than both water (15.7) and ethanol (~16), driven by phenoxide's resonance stabilization, regardless of phenol's everyday non-corrosive character."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Phenols\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "they're all roughly the same since none is a real acid",
+          "correction": "Always compare actual pKₐ values on the full numerical scale — phenol (pKₐ≈10) is substantially more acidic than both water (15.7) and ethanol (~16), driven by phenoxide's resonance stabilization, regardless of phenol's everyday non-corrosive character."
+        },
+        {
+          "misconception": "OH is weakly withdrawing so it directs meta.",
+          "correction": "OH is a strong activator and ortho/para director (resonance donation dominates) — never classify it as meta-directing by assuming all electronegative-atom-bearing groups behave like EWGs."
+        },
+        {
+          "misconception": "para-hydroxybenzoic acid (PHBA)",
+          "correction": "Kolbe-Schmitt synthesis gives ortho-hydroxybenzoic acid (salicylic acid) as the major product via chelation control with sodium phenoxide — para product only becomes favored under different conditions (potassium salt, higher temperature), never assume para by default EAS reasoning."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Phenols\""
+        "Demonstration 1 (explicit pKₐ scale with resonance-structure count): Present phenol, water, and ethanol on the same numerical pKₐ scale, connecting the ranking to each anion's resonance-structure count.",
+        "Demonstration 2 (fast catalyst-free tribromination): Present the phenol+Br₂-in-water reaction explicitly, locating all three bromine positions as ortho/para.",
+        "Demonstration 3 (Kolbe-Schmitt chelation transition state): Draw the explicit 6-membered sodium-bridged transition state, deriving the ortho product from its geometry."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Phenols\"",
+        "setup": "Compare the pKₐ of phenol, water, and ethanol. Which is the strongest acid?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (explicit pKₐ scale with resonance-structure count): Present phenol, water, and ethanol on the same numerical pKₐ scale, connecting the ranking to each anion's resonance-structure count.",
+          "Demonstration 2 (fast catalyst-free tribromination): Present the phenol+Br₂-in-water reaction explicitly, locating all three bromine positions as ortho/para.",
+          "Demonstration 3 (Kolbe-Schmitt chelation transition state): Draw the explicit 6-membered sodium-bridged transition state, deriving the ortho product from its geometry."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Phenols\""
+        "expected_outcome": "Student can (a) correctly rank phenol's acidity above water/ethanol from resonance-stabilization reasoning, (b) correctly predict ortho/para (not meta) EAS products for phenol, (c) correctly predict the Kolbe-Schmitt ortho product from the chelation mechanism."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit pKₐ scale and resonance-structure comparison for phenol, water, and ethanol.",
+          "TA-2 (TELL): State the OH ortho/para-directing rule explicitly, anchored to the fast catalyst-free tribromination evidence.",
+          "TA-3 (DO): Student predicts the EAS product distribution for an unfamiliar phenol derivative.",
+          "TA-4 (TEST-THINKING): Present the Kolbe-Schmitt probe and ask the student to justify the ortho product from the chelation transition state, not a default para assumption."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Phenols from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Compare the pKₐ of phenol, water, and ethanol. Which is the strongest acid?\"",
+          "FA-2: \"Where does Br₂ add to phenol in water? Draw the major product.\"",
+          "FA-3: \"What is the major product of the Kolbe synthesis from sodium phenoxide?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Phenols\""
+        "mastery_signal": "Student can (a) correctly rank phenol's acidity above water/ethanol from resonance-stabilization reasoning, (b) correctly predict ortho/para (not meta) EAS products for phenol, (c) correctly predict the Kolbe-Schmitt ortho product from the chelation mechanism."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Phenols\""
+        "Feeds directly into `chem.alc.protection` (phenol's distinct reactivity from alcohols directly motivates protecting-group strategy choices established here)."
       ],
       "prerequisite_review_triggers": [
         "chem.hyd.arenes",
@@ -7675,48 +7707,64 @@
     {
       "id": "asset.chem.alc.ethers",
       "concept_id": "chem.alc.ethers",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Ethers\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Ethers\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Ethers\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Ethers ARE meaningfully water-soluble (e.g., diethyl ether: 6.9g/100mL) despite lacking an OH group, because hydrogen bonding requires BOTH a donor (N–H/O–H) AND an acceptor (a lone pair on N or O) — water acts as the donor, and the ether oxygen's lone pair acts as the acceptor, so \"no OH means no hydrogen bonding\" is false; Williamson ether synthesis requires the ALKYL HALIDE to be PRIMARY (never secondary or tertiary), because a strong alkoxide base (like NaOCH₃) reacting with a secondary/tertiary halide favors E2 elimination over SN2 substitution — synthesizing methyl tert-butyl ether therefore requires tert-butoxide (the bulky, hindered nucleophile) PLUS methyl bromide (the small, primary electrophile), never the reverse pairing; and acidic ether cleavage (HI) attacks via SN1 at the MORE substituted carbon (forming the more stable carbocation) and via SN2 at the LESS substituted carbon — the mechanism, not the \"bigger/more important\" carbon, determines which C–O bond breaks, so for methyl tert-butyl ether the tert-butyl group leaves as the iodide (SN1, stable 3° carbocation) while methyl leaves as methanol/methyl iodide (SN2 at the less hindered carbon).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Ethers\"",
-        "[TEMPLATE] Key idea 2 for \"Ethers\"",
-        "[TEMPLATE] Key idea 3 for \"Ethers\""
+        "Hydrogen bonding requires only one donor and one acceptor between two interacting molecules — an ether, though lacking any O–H bond itself, fully supplies the acceptor role via its oxygen lone pair, giving it genuine water solubility when paired with water as the donor. Williamson ether synthesis requires the halide specifically to be primary, since a strong/hindered alkoxide paired with a secondary or tertiary halide favors E2 elimination over the desired SN2 substitution.",
+        "Acidic (HI) cleavage of an ether splits mechanistically by substitution level — the more substituted carbon, if capable of forming a stable carbocation, cleaves via SN1, while the less substituted carbon cleaves via SN2 — this mechanistic distinction, not a \"bigger carbon\" heuristic, determines which fragment becomes the alkyl iodide.",
+        "Core misconception to avoid: Hydrogen bonding requires only one donor and one acceptor across the interacting molecules — an ether's oxygen lone pair fully qualifies as an acceptor even without any O–H bond of its own, giving ethers genuine (if modest) water solubility."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Ethers\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "no OH so not water-soluble",
+          "correction": "Hydrogen bonding requires only one donor and one acceptor across the interacting molecules — an ether's oxygen lone pair fully qualifies as an acceptor even without any O–H bond of its own, giving ethers genuine (if modest) water solubility."
+        },
+        {
+          "misconception": "use sodium methoxide + tert-butyl bromide, because you want the tBu group in the product.",
+          "correction": "Always pair the bulkier/more hindered group as the alkoxide (nucleophile) and the LESS hindered (primary) group as the halide (electrophile) in Williamson synthesis — never select reagents by matching product-group identity alone."
+        },
+        {
+          "misconception": "HI attacks the tert-butyl group because it's bigger.",
+          "correction": "Predict ether cleavage regiochemistry from carbocation stability (SN1 at the more-substituted carbon if it can form a stable carbocation; SN2 at the less-substituted carbon) — never reason from \"bigger group\" alone."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Ethers\""
+        "Demonstration 1 (donor/acceptor role breakdown for ether-water H-bonding): Present the explicit water-donor/ether-acceptor H-bond diagram, contrasted with an alkane's inability to participate at all.",
+        "Demonstration 2 (Williamson reagent-pairing comparison): Present both possible reagent pairings for methyl tert-butyl ether side by side, deriving the SN2-vs-E2 outcome for each.",
+        "Demonstration 3 (oxonium-ion carbocation-stability cleavage diagram): Draw the explicit oxonium-ion intermediate for methyl tert-butyl ether+HI, deriving the SN1/SN2 split from carbocation stability at each carbon."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Ethers\"",
+        "setup": "Is diethyl ether soluble in water? Explain using hydrogen-bonding roles.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (donor/acceptor role breakdown for ether-water H-bonding): Present the explicit water-donor/ether-acceptor H-bond diagram, contrasted with an alkane's inability to participate at all.",
+          "Demonstration 2 (Williamson reagent-pairing comparison): Present both possible reagent pairings for methyl tert-butyl ether side by side, deriving the SN2-vs-E2 outcome for each.",
+          "Demonstration 3 (oxonium-ion carbocation-stability cleavage diagram): Draw the explicit oxonium-ion intermediate for methyl tert-butyl ether+HI, deriving the SN1/SN2 split from carbocation stability at each carbon."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Ethers\""
+        "expected_outcome": "Student can (a) correctly explain ether water solubility from donor/acceptor H-bonding reasoning, (b) correctly select Williamson synthesis reagents avoiding secondary/tertiary halide elimination, (c) correctly predict SN1/SN2 cleavage regiochemistry from carbocation stability."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit donor/acceptor H-bonding diagram for ether-water interaction.",
+          "TA-2 (TELL): State the Williamson primary-halide-as-electrophile rule explicitly, anchored to the E2-vs-SN2 competition.",
+          "TA-3 (DO): Student selects correct Williamson reagents for an unfamiliar target ether.",
+          "TA-4 (TEST-THINKING): Present the HI-cleavage probe and ask the student to justify the SN1/SN2 split from carbocation stability, not carbon size."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Ethers from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Is diethyl ether soluble in water? Explain using hydrogen-bonding roles.\"",
+          "FA-2: \"Which reagents make methyl tert-butyl ether via Williamson synthesis?\"",
+          "FA-3: \"What are the two organic products when methyl tert-butyl ether reacts with excess HI?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Ethers\""
+        "mastery_signal": "Student can (a) correctly explain ether water solubility from donor/acceptor H-bonding reasoning, (b) correctly select Williamson synthesis reagents avoiding secondary/tertiary halide elimination, (c) correctly predict SN1/SN2 cleavage regiochemistry from carbocation stability."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Ethers\""
+        "Feeds directly into `chem.alc.epoxides` (epoxide ring-opening regiochemistry directly extends the SN1/SN2 mechanistic split established here for ether cleavage)."
       ],
       "prerequisite_review_triggers": [
         "chem.alc.alcohols"
@@ -7725,96 +7773,121 @@
     {
       "id": "asset.chem.alc.diols",
       "concept_id": "chem.alc.diols",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Diols and Polyols\".",
-      "concept_summary": "Ethylene glycol; periodic acid cleavage; pinacol rearrangement; glycerol; industrial applications.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Diols and Polyols\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Periodate (NaIO₄) does NOT oxidize each OH of a vicinal diol separately to give two carboxylic acids — it forms a CYCLIC ester intermediate with BOTH oxygens simultaneously, and the ring collapses by BREAKING THE C–C BOND between the two diol carbons — for pinacol, this gives 2 equivalents of acetone directly, with NO C–C bond surviving periodate cleavage, genuinely different from sequential single-OH oxidation; OsO₄ dihydroxylation gives SYN addition (both OH groups delivered from the SAME face), NOT anti addition like Br₂ — OsO₄ reacts via a concerted [3+2] cycloaddition forming a cyclic osmate ester, delivering both oxygens from one face simultaneously — cis-but-2-ene+OsO₄ gives the (2R,3R)/(2S,3S) diol pair, never the meso compound that anti addition to a cis-alkene would produce; and the pinacol rearrangement converts a diol into a KETONE (via 1,2-alkyl/methyl shift), NEVER an ether or alkene as a typical monoalcohol dehydration might suggest — after protonation/water loss forms a stabilized carbocation, a group MIGRATES to the adjacent carbon bearing the remaining OH, forming an oxocarbenium ion that loses a proton to give the ketone product — this 1,2-shift is thermodynamically driven by C=O's much greater bond strength (~357kJ/mol) than C=C's (~260kJ/mol).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Diols and Polyols\"",
-        "[TEMPLATE] Key idea 2 for \"Diols and Polyols\"",
-        "[TEMPLATE] Key idea 3 for \"Diols and Polyols\""
+        "Periodate cleaves vicinal diols through a mechanistically distinct pathway from ordinary alcohol oxidation — a cyclic ester intermediate engaging both oxygens simultaneously, whose collapse specifically breaks the C–C bond between the diol carbons, producing two separate carbonyl fragments (never an intact dicarboxylic acid from sequential oxidation). OsO₄ dihydroxylation delivers syn stereochemistry (both new C–O bonds from the same face) via its concerted [3+2] cycloaddition mechanism, genuinely distinct from and opposite to the anti addition characteristic of bromonium-ion-mediated processes.",
+        "A vicinal diol under acid catalysis, after initial protonation and water loss to form a carbocation, can undergo a 1,2-alkyl/methyl group migration (enabled by the second, adjacent OH group) to form a ketone product — this pathway is thermodynamically favored over simple alkene-forming dehydration due to the greater bond strength of C=O compared to C=C.",
+        "Core misconception to avoid: Periodate cleaves vicinal diols at the C–C bond via a simultaneous, dual-oxygen cyclic ester mechanism, producing two separate carbonyl fragments — never treat it as sequential, independent oxidation of each OH."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Diols and Polyols\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "each OH oxidises to give a ketone and then further to an acid.",
+          "correction": "Periodate cleaves vicinal diols at the C–C bond via a simultaneous, dual-oxygen cyclic ester mechanism, producing two separate carbonyl fragments — never treat it as sequential, independent oxidation of each OH."
+        },
+        {
+          "misconception": "OsO₄ adds anti like Br₂ so the OHs are on opposite faces.",
+          "correction": "OsO₄ dihydroxylation gives syn addition (via its concerted [3+2] cyclic osmate ester mechanism) — never assume anti addition applies universally to all dihydroxylation-type reactions."
+        },
+        {
+          "misconception": "acid+diol→water leaves→ether",
+          "correction": "The pinacol rearrangement proceeds via carbocation formation followed by a 1,2-alkyl/methyl shift to give a ketone product — never assume simple ether formation or alkene dehydration, the diol's second OH enables this distinct rearrangement pathway."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Diols and Polyols\""
+        "Demonstration 1 (periodate cyclic-ester-intermediate mechanism for pinacol): Present the explicit mechanism, deriving the C–C-bond-cleaving collapse and the two-fragment acetone product.",
+        "Demonstration 3 (pinacol-rearrangement carbocation/methyl-migration mechanism): Present the explicit mechanism, deriving the pinacolone ketone product from the C=O-over-C=C thermodynamic preference."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Diols and Polyols\"",
+        "setup": "What are the products of treating (CH₃)₂C(OH)–C(OH)(CH₃)₂ with NaIO₄?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (periodate cyclic-ester-intermediate mechanism for pinacol): Present the explicit mechanism, deriving the C–C-bond-cleaving collapse and the two-fragment acetone product.",
+          "Demonstration 3 (pinacol-rearrangement carbocation/methyl-migration mechanism): Present the explicit mechanism, deriving the pinacolone ketone product from the C=O-over-C=C thermodynamic preference."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Diols and Polyols\""
+        "expected_outcome": "Student can (a) correctly predict periodate cleavage products via the cyclic-ester/C–C-cleavage mechanism, (b) correctly predict OsO₄'s syn-diol stereochemistry, (c) correctly predict the pinacol rearrangement's ketone product via 1,2-shift."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit periodate cyclic-ester mechanism for pinacol cleavage.",
+          "TA-2 (TELL): State OsO₄'s syn-addition mechanism explicitly, anchored to the concerted [3+2] cycloaddition diagram.",
+          "TA-3 (DO): Student predicts the pinacol-rearrangement product for an unfamiliar diol under acid catalysis.",
+          "TA-4 (TEST-THINKING): Present the cis-but-2-ene-plus-OsO₄ probe and ask the student to justify the syn (not anti) diol product."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Diols and Polyols from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"What are the products of treating (CH₃)₂C(OH)–C(OH)(CH₃)₂ with NaIO₄?\"",
+          "FA-2: \"What diol is obtained when cis-but-2-ene reacts with OsO₄ and then H₂O₂ workup?\"",
+          "FA-3: \"What is the major product of treating pinacol with dilute H₂SO₄?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Diols and Polyols\""
+        "mastery_signal": "Student can (a) correctly predict periodate cleavage products via the cyclic-ester/C–C-cleavage mechanism, (b) correctly predict OsO₄'s syn-diol stereochemistry, (c) correctly predict the pinacol rearrangement's ketone product via 1,2-shift."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Diols and Polyols\""
+        "This concept has no direct KG unlocks but consolidates alcohol reasoning built across `chem.alc.alcohols`, forming a capstone application to multi-step organic synthesis, structure-elucidation, and industrial (ethylene glycol, glycerol) contexts."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.alc.alcohols"
+      ]
     },
     {
       "id": "asset.chem.alc.epoxides",
       "concept_id": "chem.alc.epoxides",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Epoxides\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Epoxides\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Epoxides\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Epoxides are NOT unreactive just because ethers are unreactive — the three-membered ring's ~27 kcal/mol ring strain makes epoxides far MORE reactive than ordinary ethers toward ring-opening, reacting readily with nucleophiles/acids/bases where a normal ether would be inert; and epoxide ring-opening regiochemistry SWITCHES depending on conditions — under BASIC/neutral conditions (SN2-like), the nucleophile attacks the LESS hindered carbon, but under ACIDIC conditions, the nucleophile attacks the MORE substituted carbon (because protonation makes that carbon more carbocation-like/electrophilic, despite steric hindrance) — there is no single \"always attack here\" rule; it depends on acid vs. base conditions.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Epoxides\"",
-        "[TEMPLATE] Key idea 2 for \"Epoxides\"",
-        "[TEMPLATE] Key idea 3 for \"Epoxides\""
+        "Epoxides carry substantial ring strain (~27 kcal/mol) from their compressed ~60° C-O-C bond angle, making them far more reactive toward ring-opening by nucleophiles than acyclic ethers, which have no comparable strain to release.",
+        "Basic/neutral ring-opening proceeds SN2-like, with the nucleophile attacking the less hindered carbon; acidic ring-opening proceeds SN1-like after oxygen protonation, with the nucleophile attacking the more substituted carbon due to its greater positive-charge stabilization — the regiochemistry genuinely depends on the reaction conditions.",
+        "Core misconception to avoid: Epoxides are far more reactive than acyclic ethers because of substantial ring strain (~27 kcal/mol) released upon ring-opening — never assume \"ether-like\" unreactivity for an epoxide."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Epoxides\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Epoxides are ethers, so they shouldn't be very reactive.",
+          "correction": "Epoxides are far more reactive than acyclic ethers because of substantial ring strain (~27 kcal/mol) released upon ring-opening — never assume \"ether-like\" unreactivity for an epoxide."
+        },
+        {
+          "misconception": "The nucleophile always attacks the less hindered carbon in epoxide-opening.",
+          "correction": "Under basic/neutral conditions, attack occurs at the less hindered carbon (SN2-like); under acidic conditions, attack occurs at the more substituted carbon (SN1-like, protonation-activated) — the rule depends on conditions, not on the epoxide alone."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Epoxides\""
+        "Demonstration 1 (ring-strain/bond-angle diagram): Present the explicit strain-energy comparison between epoxide and acyclic ether, deriving the reactivity difference.",
+        "Demonstration 2 (side-by-side acidic vs. basic ring-opening mechanisms): Present both mechanisms for the same epoxide, deriving the site of nucleophilic attack in each case."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Epoxides\"",
+        "setup": "Would you expect an epoxide to react with methoxide ion under mild conditions? Compare to diethyl ether.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (ring-strain/bond-angle diagram): Present the explicit strain-energy comparison between epoxide and acyclic ether, deriving the reactivity difference.",
+          "Demonstration 2 (side-by-side acidic vs. basic ring-opening mechanisms): Present both mechanisms for the same epoxide, deriving the site of nucleophilic attack in each case."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Epoxides\""
+        "expected_outcome": "Student can (a) correctly predict that epoxides are much more reactive than acyclic ethers due to ring strain, (b) correctly predict the site of nucleophilic attack under both acidic and basic ring-opening conditions."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit ring-strain/bond-angle diagram comparing epoxide and acyclic ether.",
+          "TA-2 (TELL): State the conditional regiochemistry rule explicitly (basic→less hindered carbon; acidic→more substituted carbon), anchored to both mechanisms.",
+          "TA-3 (DO): Student predicts the ring-opening product and site of attack for an unfamiliar epoxide under both specified acidic and basic conditions.",
+          "TA-4 (TEST-THINKING): Present the MC-2 probe and ask the student to justify why the site of attack differs between conditions."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Epoxides from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Would you expect an epoxide to react with methoxide ion under mild conditions? Compare to diethyl ether.\"",
+          "FA-2: \"2-methyloxirane is opened (a) with NaOCH3 and (b) with CH3OH/H+. Does the nucleophile attack the same carbon in both cases?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Epoxides\""
+        "mastery_signal": "Student can (a) correctly predict that epoxides are much more reactive than acyclic ethers due to ring strain, (b) correctly predict the site of nucleophilic attack under both acidic and basic ring-opening conditions."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Epoxides\""
+        "This concept has no direct KG unlocks but consolidates ether reasoning (`chem.alc.ethers`) and alkene reasoning (`chem.hyd.alkenes`), forming a capstone application to multi-step organic synthesis contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.alc.ethers",
@@ -7824,48 +7897,57 @@
     {
       "id": "asset.chem.alc.protection",
       "concept_id": "chem.alc.protection",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Protecting Group Strategy\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Protecting Group Strategy\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Protecting Group Strategy\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "A protecting group is NOT permanently installed to \"improve\" the molecule — it is a TEMPORARY, DELIBERATELY REMOVABLE modification installed specifically so a reactive functional group survives conditions that would otherwise destroy it, then removed once no longer needed, restoring the original group; and choosing a protecting group is NOT just about \"blocking reactivity\" — it critically requires ORTHOGONALITY, meaning the group must be removable under conditions that do NOT also affect any OTHER protecting group or functional group present in the same molecule (e.g., a TBS ether removed by fluoride must survive the acidic conditions used to remove a THP acetal elsewhere in the same molecule) — picking a protecting group without checking orthogonality against every other group present risks accidentally removing the wrong group or damaging unprotected functionality.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Protecting Group Strategy\"",
-        "[TEMPLATE] Key idea 2 for \"Protecting Group Strategy\"",
-        "[TEMPLATE] Key idea 3 for \"Protecting Group Strategy\""
+        "A protecting group is a deliberately temporary, reversible modification — installed to let a reactive functional group survive specific reaction conditions, then removed later in the same synthesis to restore the original group; a synthesis scheme is incomplete until this deprotection step is shown.",
+        "Selecting deprotection conditions requires checking that the chosen reagent affects ONLY the intended target group, leaving every other protecting group and functional group present in the molecule untouched — this mutual independence (orthogonality) is what enables selective, sequential deprotection in molecules bearing multiple protected groups.",
+        "Core misconception to avoid: A protecting group is always temporary — installed to survive specific reaction conditions, then deliberately removed later in the same synthesis to restore the original functional group."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Protecting Group Strategy\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "The TBS group is now part of the molecule's structure.",
+          "correction": "A protecting group is always temporary — installed to survive specific reaction conditions, then deliberately removed later in the same synthesis to restore the original functional group."
+        },
+        {
+          "misconception": "Any reagent that removes the TBS group will work fine.",
+          "correction": "Selecting deprotection conditions requires checking orthogonality against every other protecting group and functional group present in the molecule, not just confirming removal of the intended target group."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Protecting Group Strategy\""
+        "Demonstration 1 (protect→react→deprotect scheme): Present the explicit three-step scheme for a TBS-protected Grignard synthesis, deriving that deprotection completes the route.",
+        "Demonstration 2 (orthogonality check for TBS/THP pair): Present the explicit reagent-selectivity table (TBAF removes TBS only; mild acid removes THP only), deriving the correct orthogonal pairing logic."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Protecting Group Strategy\"",
+        "setup": "A synthesis converts an alcohol to its TBS ether in step 2, then does a Grignard addition in step 3. Is the TBS ether part of the final product?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (protect→react→deprotect scheme): Present the explicit three-step scheme for a TBS-protected Grignard synthesis, deriving that deprotection completes the route.",
+          "Demonstration 2 (orthogonality check for TBS/THP pair): Present the explicit reagent-selectivity table (TBAF removes TBS only; mild acid removes THP only), deriving the correct orthogonal pairing logic."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Protecting Group Strategy\""
+        "expected_outcome": "Student can (a) correctly identify that a protecting group must be removed for a synthesis to be complete, (b) correctly select orthogonal deprotection conditions for a molecule bearing multiple protected groups."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit protect→react→deprotect three-step scheme.",
+          "TA-2 (TELL): State the orthogonality requirement explicitly, anchored to the TBS/THP reagent-selectivity table.",
+          "TA-3 (DO): Student selects an appropriate orthogonal protecting-group pair and removal sequence for an unfamiliar multi-functional-group synthesis target.",
+          "TA-4 (TEST-THINKING): Present the MC-1 probe and ask the student to justify why the synthesis scheme is incomplete without the deprotection step shown."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Protecting Group Strategy from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A synthesis converts an alcohol to its TBS ether in step 2, then does a Grignard addition in step 3. Is the TBS ether part of the final product?\"",
+          "FA-2: \"A molecule has both a TBS ether and a THP acetal. You want to remove only the TBS group and keep the THP group intact. Does it matter which reagent you choose?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Protecting Group Strategy\""
+        "mastery_signal": "Student can (a) correctly identify that a protecting group must be removed for a synthesis to be complete, (b) correctly select orthogonal deprotection conditions for a molecule bearing multiple protected groups."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Protecting Group Strategy\""
+        "This concept has no direct KG unlocks but consolidates alcohol reasoning (`chem.alc.alcohols`) and phenol reasoning (`chem.alc.phenols`), forming a capstone application to multi-step organic synthesis design contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.alc.alcohols",
