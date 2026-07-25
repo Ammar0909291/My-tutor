@@ -5433,144 +5433,190 @@
     {
       "id": "asset.chem.coord.werner",
       "concept_id": "chem.coord.werner",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Werner's Theory\".",
-      "concept_summary": "Primary and secondary valency; coordination number; complex ion formulation; Werner's evidence.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Werner's Theory\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Werner's theory distinguishes primary valency (oxidation state, satisfied by anions, determined via overall charge balance) from secondary valency (coordination number, the count of donor atoms directly bonded, determined structurally) — these are genuinely INDEPENDENT quantities, often numerically different for the same complex (e.g., [Co(NH₃)₆]Cl₃ has oxidation state +3 but coordination number 6); anions are not automatically counter-ions outside the coordination sphere — they CAN be ligands directly bonded inside the bracket (like Cl⁻ in [Co(NH₃)₄Cl₂]Cl, where two Cl⁻ are ligands and one is a counter-ion), with Werner's classic conductivity/precipitation experiments distinguishing the two roles; and coordination number is NOT universally 6 — it genuinely varies by metal and oxidation state (Ag⁺/Au⁺ commonly CN=2 linear; Cu²⁺/Ni²⁺ commonly CN=4 square planar or tetrahedral; CN=6 octahedral is common but far from universal for first-row transition metals).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Werner's Theory\"",
-        "[TEMPLATE] Key idea 2 for \"Werner's Theory\"",
-        "[TEMPLATE] Key idea 3 for \"Werner's Theory\""
+        "Werner's theory distinguishes two independently-determined properties of a coordination compound: primary valency (oxidation state, satisfied by the metal's charge balance against surrounding ionic species) and secondary valency (coordination number, the actual count of donor atoms directly bonded to the metal, determined structurally). These two numbers are measured by entirely different methods and frequently differ for the same complex — never assume they're equal.",
+        "Anions in a coordination compound's formula can serve as either ligands (bonded directly inside the coordination sphere, satisfying secondary valency) or counter-ions (free outside the sphere, balancing overall charge) — this role must be determined structurally or experimentally (as Werner did via precipitation and conductivity testing), never assumed from the anion's identity alone. Coordination number itself varies genuinely by metal and oxidation state, with common values of 2, 4, or 6 depending on the specific metal ion involved — never assumed to be universally 6.",
+        "Core misconception to avoid: Always compute oxidation state via charge balance and coordination number via direct bond-counting as two SEPARATE procedures — never assume one equals the other."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Werner's Theory\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Co is +6 because it has 6 ligands.",
+          "correction": "Always compute oxidation state via charge balance and coordination number via direct bond-counting as two SEPARATE procedures — never assume one equals the other."
+        },
+        {
+          "misconception": "the Cl atoms are always outside the bracket.",
+          "correction": "Anions can be either ligands (inside the coordination sphere, directly bonded) or counter-ions (outside, free in solution) — determine each anion's specific role experimentally (e.g., via precipitation testing) or from the given structural formula, never assume all anions are automatically counter-ions."
+        },
+        {
+          "misconception": "all complexes are octahedral.",
+          "correction": "Coordination number varies genuinely by metal and oxidation state — common values include 2 (linear, e.g., Ag⁺/Au⁺), 4 (square planar or tetrahedral, e.g., Cu²⁺/Ni²⁺), and 6 (octahedral, common for many first-row transition metals but not universal) — always determine CN case-by-case, never assume 6 by default."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Werner's Theory\""
+        "Demonstration 1 (OS-vs-CN dual computation): Compute both oxidation state (via charge balance) and coordination number (via bond counting) explicitly and separately for [Co(NH₃)₆]Cl₃, showing the two different resulting numbers.",
+        "Demonstration 2 (Werner's precipitation-test logic): Walk through the conceptual precipitation-test reasoning distinguishing ligand chlorides (don't precipitate, bound inside the sphere) from counter-ion chlorides (readily precipitate, free in solution) for [Co(NH₃)₄Cl₂]Cl."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Werner's Theory\"",
+        "setup": "In [Co(NH₃)₆]Cl₃, what is the oxidation state and coordination number of Co?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (OS-vs-CN dual computation): Compute both oxidation state (via charge balance) and coordination number (via bond counting) explicitly and separately for [Co(NH₃)₆]Cl₃, showing the two different resulting numbers.",
+          "Demonstration 2 (Werner's precipitation-test logic): Walk through the conceptual precipitation-test reasoning distinguishing ligand chlorides (don't precipitate, bound inside the sphere) from counter-ion chlorides (readily precipitate, free in solution) for [Co(NH₃)₄Cl₂]Cl."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Werner's Theory\""
+        "expected_outcome": "Student can (a) correctly compute oxidation state and coordination number as independent quantities for a given complex, (b) correctly identify which anions in a formula are ligands versus counter-ions, (c) correctly determine coordination number without assuming a universal value of 6."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the dual OS/CN computation for [Co(NH₃)₆]Cl₃ explicitly, side by side.",
+          "TA-2 (TELL): State the ligand-vs-counter-ion distinction explicitly, immediately followed by Werner's precipitation-test logic for [Co(NH₃)₄Cl₂]Cl.",
+          "TA-3 (DO): Student determines coordination number for a new, unfamiliar complex (like a silver or copper complex) without defaulting to 6.",
+          "TA-4 (TEST-THINKING): Present MC-2's CoCl₃·4NH₃ probe and ask the student to identify which chlorides are ligands versus counter-ions."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Werner's Theory from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"In [Co(NH₃)₆]Cl₃, what is the oxidation state and coordination number of Co?\"",
+          "FA-2: \"Write the formula and charge of the complex ion in CoCl₃·4NH₃.\"",
+          "FA-3: \"What is the coordination number of silver in [Ag(NH₃)₂]⁺?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Werner's Theory\""
+        "mastery_signal": "Student can (a) correctly compute oxidation state and coordination number as independent quantities for a given complex, (b) correctly identify which anions in a formula are ligands versus counter-ions, (c) correctly determine coordination number without assuming a universal value of 6."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Werner's Theory\""
+        "Feeds directly into `chem.coord.cft` (crystal field theory analysis requires fluent, correct coordination number and geometry determination), `chem.coord.nomenclature` (naming coordination compounds requires correctly distinguishing ligands from counter-ions), and `chem.coord.stability` (stability constant analysis assumes correct structural understanding of the coordination sphere)."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.bond.coordinate-bond"
+      ]
     },
     {
       "id": "asset.chem.coord.nomenclature",
       "concept_id": "chem.coord.nomenclature",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Nomenclature of Complexes\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Nomenclature of Complexes\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Nomenclature of Complexes\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "IUPAC coordination nomenclature requires listing ligands in strict ALPHABETICAL order (never by quantity), using the ligand's own base name for alphabetization while IGNORING multiplying prefixes (di-, tri-, tetra-) — [Co(NH₃)₄Cl₂]⁺ is correctly named tetraamminedichloridocobalt(III) because \"ammine\" (A) precedes \"chlorido\" (C) alphabetically, regardless of having 4 ammines versus 2 chlorides; the suffix \"-ate\" in coordination nomenclature specifically signals that the COMPLEX ITSELF carries overall negative charge (attached to the metal name/Latin root), never indicating oxygen content the way it does in simple oxyanion names like sulfate — hexacyanidoferrate(II) means [Fe(CN)₆]⁴⁻, an anionic complex, with \"ferrate\" simply being iron (ferrum) named as part of an anionic complex; and when a ligand's own name already contains a multiplying prefix or is otherwise complex (like \"ethane-1,2-diamine,\" which already contains \"di-\" within \"diamine\"), the alternate multiplying prefixes BIS-, TRIS-, TETRAKIS- must be used instead of di-/tri-/tetra- to avoid genuine ambiguity — \"diethylenediamine\" would be dangerously ambiguous (readable as one ligand with a diethylene backbone), while \"bis(ethane-1,2-diamine)\" unambiguously specifies two separate ligands.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Nomenclature of Complexes\"",
-        "[TEMPLATE] Key idea 2 for \"Nomenclature of Complexes\"",
-        "[TEMPLATE] Key idea 3 for \"Nomenclature of Complexes\""
+        "IUPAC coordination nomenclature requires strict alphabetical ordering of ligands by their base name (never by quantity, and ignoring multiplying prefixes for alphabetization purposes), and uses \"-ate\" specifically to signal that the overall complex is anionic (attached to the metal name/Latin root), a meaning genuinely distinct from \"-ate\"'s use in simple oxyanion names.",
+        "When a ligand's own name already contains a multiplying-prefix-like element (such as \"ethylenediamine\" containing \"di-\" within \"diamine\") or is otherwise structurally complex, the alternate multiplying prefixes bis-, tris-, tetrakis- must be used instead of the standard di-, tri-, tetra- specifically to avoid genuine naming ambiguity that combining standard prefixes with such ligand names would create.",
+        "Core misconception to avoid: Always order ligands alphabetically by their base name (ignoring multiplying prefixes), never by quantity present."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Nomenclature of Complexes\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "list by how many there are.",
+          "correction": "Always order ligands alphabetically by their base name (ignoring multiplying prefixes), never by quantity present."
+        },
+        {
+          "misconception": "-ate means it's an oxygen-containing anion.",
+          "correction": "In coordination nomenclature, \"-ate\" signals that the complex as a whole is anionic — it says nothing about oxygen content, unlike its use in simple oxyanion names."
+        },
+        {
+          "misconception": "diethylenediamine.",
+          "correction": "Use bis-, tris-, tetrakis- (not di-, tri-, tetra-) specifically for ligands whose own names already contain a multiplying-prefix-like element or are otherwise complex — [Ni(en)₂Cl₂] is correctly named dichloridobis(ethane-1,2-diamine)nickel(II), never \"diethylenediamine.\""
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Nomenclature of Complexes\""
+        "Demonstration 1 (alphabetical-ordering drill): Present several complexes with varying ligand quantities and have students name them, applying strict alphabetical ordering regardless of quantity each time.",
+        "Demonstration 2 (hexacyanidoferrate(II) structure check): Present the actual structure of [Fe(CN)₆]⁴⁻ explicitly, showing no oxygen present, directly disproving the \"-ate means oxyanion\" assumption."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Nomenclature of Complexes\"",
+        "setup": "Name [Co(NH₃)₄Cl₂]⁺.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (alphabetical-ordering drill): Present several complexes with varying ligand quantities and have students name them, applying strict alphabetical ordering regardless of quantity each time.",
+          "Demonstration 2 (hexacyanidoferrate(II) structure check): Present the actual structure of [Fe(CN)₆]⁴⁻ explicitly, showing no oxygen present, directly disproving the \"-ate means oxyanion\" assumption."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Nomenclature of Complexes\""
+        "expected_outcome": "Student can (a) correctly order ligands alphabetically by base name, ignoring quantity and multiplying prefixes, (b) correctly interpret \"-ate\" as signaling an anionic complex, not oxygen content, (c) correctly choose bis-/tris-/tetrakis- over di-/tri-/tetra- for ligands with internally complex names."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit alphabetical-ordering derivation for [Co(NH₃)₄Cl₂]⁺.",
+          "TA-2 (TELL): State the coordination-specific meaning of \"-ate\" explicitly, contrasted directly with its oxyanion meaning.",
+          "TA-3 (DO): Student names [Ni(en)₂Cl₂] correctly, using bis- rather than di- for the ethylenediamine ligands.",
+          "TA-4 (TEST-THINKING): Present MC-2's hexacyanidoferrate(II) probe and ask the student to justify the \"-ate\" meaning using the complex's actual structure."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Nomenclature of Complexes from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Name [Co(NH₃)₄Cl₂]⁺.\"",
+          "FA-2: \"What does the suffix -ate mean in hexacyanidoferrate(II)?\"",
+          "FA-3: \"Name [Ni(en)₂Cl₂]. Does the name include 'di-' or 'bis-'?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Nomenclature of Complexes\""
+        "mastery_signal": "Student can (a) correctly order ligands alphabetically by base name, ignoring quantity and multiplying prefixes, (b) correctly interpret \"-ate\" as signaling an anionic complex, not oxygen content, (c) correctly choose bis-/tris-/tetrakis- over di-/tri-/tetra- for ligands with internally complex names."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Nomenclature of Complexes\""
+        "Feeds directly into `chem.coord.isomerism` (correctly distinguishing coordination isomers requires fluent, unambiguous nomenclature established here)."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.coord.werner"
+      ]
     },
     {
       "id": "asset.chem.coord.isomerism",
       "concept_id": "chem.coord.isomerism",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Isomerism in Complexes\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Isomerism in Complexes\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Isomerism in Complexes\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Geometric isomers (cis/trans) are NOT the same as conformational isomers — geometric isomers have genuinely DIFFERENT CONNECTIVITY (different spatial arrangement of ligand positions) and interconversion requires BREAKING AND REFORMING metal-ligand bonds (high activation energy), making them isolable, distinct compounds with different properties (cisplatin vs. transplatin) — never freely interconverting conformations of \"the same compound,\" unlike organic conformational isomers that interconvert by simple bond rotation; linkage isomers CAN be isolated as genuinely distinct, stable compounds at room temperature (e.g., nitrito [Co(ONO)(NH₃)₅]²⁺ vs. nitro [Co(NO₂)(NH₃)₅]²⁺) — they interconvert only at elevated temperature or under UV irradiation (requiring bond-dissociation-level activation energy), NOT as a continuous room-temperature equilibrium; and whether a complex is chiral depends on the SPECIFIC GEOMETRIC ISOMER's own internal symmetry, never on the overall molecular formula's apparent symmetry — [Co(en)₂Cl₂]⁺'s trans isomer has an internal mirror plane (achiral), while its cis isomer lacks one (genuinely chiral, existing as Δ and Λ enantiomers) — the same formula can yield both a chiral and an achiral isomer.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Isomerism in Complexes\"",
-        "[TEMPLATE] Key idea 2 for \"Isomerism in Complexes\"",
-        "[TEMPLATE] Key idea 3 for \"Isomerism in Complexes\""
+        "Coordination-complex geometric isomers are structural isomers with genuinely different ligand connectivity, requiring metal-ligand bond-breaking (a high activation energy) to interconvert — they are isolable, distinct compounds (like cisplatin and transplatin, with different biological activities), never freely-interconverting conformational isomers as seen in organic chemistry. Linkage isomers, similarly, are kinetically stable at room temperature despite arising from an ambidentate ligand's structural flexibility — interconversion requires a genuine bond-dissociation-scale activation energy, accessible only via heat or UV irradiation, never a continuous room-temperature equilibrium.",
+        "Whether a coordination complex is chiral must be assessed for each SPECIFIC geometric isomer's own three-dimensional structure and internal symmetry, never inferred from the overall molecular formula — a single formula like [Co(en)₂Cl₂]⁺ can produce both an achiral isomer (trans, with an internal mirror plane) and a chiral isomer (cis, lacking one, existing as Δ/Λ enantiomers).",
+        "Core misconception to avoid: Geometric isomers of coordination complexes are structural isomers requiring bond-breaking to interconvert (isolable, distinct compounds) — never treat them as freely-interconverting conformational isomers like in organic chemistry."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Isomerism in Complexes\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "they're both square planar — just different conformations.",
+          "correction": "Geometric isomers of coordination complexes are structural isomers requiring bond-breaking to interconvert (isolable, distinct compounds) — never treat them as freely-interconverting conformational isomers like in organic chemistry."
+        },
+        {
+          "misconception": "they just interconvert continuously.",
+          "correction": "Linkage isomers are kinetically stable, isolable compounds at room temperature — interconversion requires a genuine activation-energy input (heat or UV), never a continuous room-temperature equilibrium."
+        },
+        {
+          "misconception": "it's symmetric, so no optical isomers.",
+          "correction": "Always assess chirality for the SPECIFIC geometric isomer's own three-dimensional structure and internal symmetry — never infer chirality (or its absence) from the overall molecular formula alone."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Isomerism in Complexes\""
+        "Demonstration 1 (cisplatin-vs-transplatin biological-activity and bond-breaking contrast): Present the explicit distinct-compound evidence (different biological activities, requiring bond-breaking to interconvert).",
+        "Demonstration 2 (linkage-isomerization activation-energy-barrier diagram): Present the explicit energy diagram for nitrito⇌nitro isomerization, showing the genuine barrier requiring heat or UV."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Isomerism in Complexes\"",
+        "setup": "Can you interconvert cis-[PtCl₂(NH₃)₂] and trans-[PtCl₂(NH₃)₂] by rotating bonds at room temperature?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (cisplatin-vs-transplatin biological-activity and bond-breaking contrast): Present the explicit distinct-compound evidence (different biological activities, requiring bond-breaking to interconvert).",
+          "Demonstration 2 (linkage-isomerization activation-energy-barrier diagram): Present the explicit energy diagram for nitrito⇌nitro isomerization, showing the genuine barrier requiring heat or UV."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Isomerism in Complexes\""
+        "expected_outcome": "Student can (a) correctly distinguish geometric (structural) isomers from conformational isomers by interconversion mechanism, (b) correctly explain the room-temperature stability of linkage isomers, (c) correctly assess chirality for a specific geometric isomer via its own internal symmetry."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit cisplatin-vs-transplatin distinct-compound evidence.",
+          "TA-2 (TELL): State the room-temperature stability of linkage isomers explicitly, anchored to the activation-energy-barrier diagram.",
+          "TA-3 (DO): Student checks an unfamiliar complex's specific geometric isomer for an internal mirror plane to assess chirality.",
+          "TA-4 (TEST-THINKING): Present the [Co(en)₂Cl₂]⁺ probe and ask the student to justify why cis and trans isomers have opposite chirality despite sharing a formula."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Isomerism in Complexes from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Can you interconvert cis-[PtCl₂(NH₃)₂] and trans-[PtCl₂(NH₃)₂] by rotating bonds at room temperature?\"",
+          "FA-2: \"What is the kinetic product of forming [Co(ONO)(NH₃)₅]²⁺ vs. the thermodynamic product, and can each be isolated?\"",
+          "FA-3: \"Which geometric isomers of [Co(en)₂Cl₂]⁺ exist? Does each of them have a mirror plane?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Isomerism in Complexes\""
+        "mastery_signal": "Student can (a) correctly distinguish geometric (structural) isomers from conformational isomers by interconversion mechanism, (b) correctly explain the room-temperature stability of linkage isomers, (c) correctly assess chirality for a specific geometric isomer via its own internal symmetry."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Isomerism in Complexes\""
+        "This concept has no direct KG unlocks but consolidates nomenclature reasoning built across `chem.coord.nomenclature`, forming a capstone application to advanced coordination chemistry, pharmacology (cisplatin/transplatin), and stereochemistry contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.coord.nomenclature"
@@ -5579,196 +5625,263 @@
     {
       "id": "asset.chem.coord.cft",
       "concept_id": "chem.coord.cft",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyze \"Crystal Field Theory\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Crystal Field Theory\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Crystal Field Theory\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Crystal field stabilization energy (CFSE) contributes to but does NOT solely determine complex stability — thermodynamic stability depends on multiple factors (ionic radius ratio, charge, CFSE, π-bonding, entropy), with strong-field ligands like CN⁻ often producing KINETICALLY inert (slow ligand exchange) rather than necessarily more thermodynamically stable complexes, and CFSE is exactly zero for d⁰ and d¹⁰ configurations regardless of ligand field strength; tetrahedral splitting (Δtet) is genuinely SMALLER than octahedral splitting (Δoct) — approximately Δtet≈(4/9)Δoct — due to fewer ligands (4 vs 6) AND poorer orbital-ligand overlap geometry (no tetrahedral ligand points directly along a d-orbital lobe), directly explaining why tetrahedral complexes are almost always high-spin; and color specifically requires a genuine d-d electron transition, which requires BOTH partially-filled d orbitals (an available excited state to promote an electron into) AND Δ falling in the visible range — d⁰ (like Ti⁴⁺) and d¹⁰ (like Zn²⁺) configurations are colorless, not because they're not transition metals, but because they lack any possible d-d transition.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Crystal Field Theory\"",
-        "[TEMPLATE] Key idea 2 for \"Crystal Field Theory\"",
-        "[TEMPLATE] Key idea 3 for \"Crystal Field Theory\""
+        "Crystal field theory explains how ligands split a metal's d-orbital energies, with the splitting magnitude (Δ) and resulting d-electron arrangement (high-spin vs. low-spin) contributing to, but not solely determining, overall complex properties — CFSE is a real but partial contributor to thermodynamic stability, which also depends on ionic radius ratio, charge, π-bonding, and entropy; separately, tetrahedral geometry produces a genuinely smaller splitting (Δtet≈4/9 Δoct) than octahedral geometry, due to fewer ligands and less favorable orbital-overlap geometry, explaining tetrahedral complexes' near-universal high-spin character.",
+        "Complex color arises from d-d electron transitions, which require both partially-filled d orbitals (providing an accessible excited state) and a splitting magnitude (Δ) falling in the visible-light range — configurations with completely empty (d⁰) or completely full (d¹⁰) d subshells cannot undergo any d-d transition and are therefore genuinely colorless, regardless of the metal's general transition-metal classification.",
+        "Core misconception to avoid: CFSE contributes to but never solely determines complex stability — always consider ionic radius ratio, charge, π-bonding, and entropy alongside CFSE, and explicitly distinguish kinetic inertness from thermodynamic stability."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Crystal Field Theory\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "CN⁻ always gives the most stable complex.",
+          "correction": "CFSE contributes to but never solely determines complex stability — always consider ionic radius ratio, charge, π-bonding, and entropy alongside CFSE, and explicitly distinguish kinetic inertness from thermodynamic stability."
+        },
+        {
+          "misconception": "fewer ligands, more concentrated field, larger splitting.",
+          "correction": "Δtet is smaller than Δoct (≈4/9 the magnitude), due to both fewer total ligands and less favorable orbital-ligand geometric overlap — this smaller splitting is why tetrahedral complexes are almost always high-spin."
+        },
+        {
+          "misconception": "all transition metal complexes are coloured.",
+          "correction": "Color requires partially-filled d orbitals (d¹ through d⁹) AND Δ in the visible range — d⁰ and d¹⁰ configurations are genuinely colorless, since no d-d transition can occur, regardless of the element being classified as a transition metal."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Crystal Field Theory\""
+        "Demonstration 1 (d⁰/d¹⁰ CFSE-zero examples): Present explicit CFSE calculations for d⁰ and d¹⁰ configurations across different ligand field strengths, showing CFSE=0 regardless, directly disproving the CFSE-alone-determines-stability claim.",
+        "Demonstration 2 (Zn²⁺ colorlessness explanation): Present Zn²⁺'s explicit d¹⁰ configuration and connect it directly to the absence of any possible d-d transition, explaining ZnSO₄'s colorlessness."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Crystal Field Theory\"",
+        "setup": "Is stability determined by CFSE alone? Give a counterexample.",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (d⁰/d¹⁰ CFSE-zero examples): Present explicit CFSE calculations for d⁰ and d¹⁰ configurations across different ligand field strengths, showing CFSE=0 regardless, directly disproving the CFSE-alone-determines-stability claim.",
+          "Demonstration 2 (Zn²⁺ colorlessness explanation): Present Zn²⁺'s explicit d¹⁰ configuration and connect it directly to the absence of any possible d-d transition, explaining ZnSO₄'s colorlessness."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Crystal Field Theory\""
+        "expected_outcome": "Student can (a) correctly explain why CFSE alone doesn't determine thermodynamic stability, distinguishing it from kinetic inertness, (b) correctly predict Δtet is smaller than Δoct and explain why, (c) correctly predict colorlessness for d⁰/d¹⁰ configurations using the d-d-transition requirement."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the d⁰/d¹⁰ CFSE=0 demonstration explicitly.",
+          "TA-2 (TELL): State the Δtet≈(4/9)Δoct relationship explicitly, worked through with the two combined geometric reasons.",
+          "TA-3 (DO): Student predicts whether a given complex (specified d-count and geometry) will be colored, using the partial-filling-plus-visible-Δ criterion.",
+          "TA-4 (TEST-THINKING): Present MC-1's CN⁻ probe and ask the student to distinguish kinetic inertness from thermodynamic stability using the d⁰/d¹⁰ counterexample."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Crystal Field Theory from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Is stability determined by CFSE alone? Give a counterexample.\"",
+          "FA-2: \"Compare Δoct and Δtet for the same metal and ligands.\"",
+          "FA-3: \"ZnSO₄ solution is colourless. Zn is a d-block element. Explain.\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Crystal Field Theory\""
+        "mastery_signal": "Student can (a) correctly explain why CFSE alone doesn't determine thermodynamic stability, distinguishing it from kinetic inertness, (b) correctly predict Δtet is smaller than Δoct and explain why, (c) correctly predict colorlessness for d⁰/d¹⁰ configurations using the d-d-transition requirement."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Crystal Field Theory\""
+        "Feeds directly into `chem.coord.applications` (practical applications of crystal field splitting and color prediction), `chem.coord.bonding` (extends crystal field theory into molecular orbital treatments of coordination bonding), and `chem.dblock.organometallics` (organometallic chemistry applies d-orbital splitting and stability reasoning established here)."
       ],
       "prerequisite_review_triggers": [
+        "chem.coord.werner",
         "chem.atomic.orbitals"
       ]
     },
     {
       "id": "asset.chem.coord.bonding",
       "concept_id": "chem.coord.bonding",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to analyse \"Bonding in Complexes\".",
-      "concept_summary": "VBT hybridization in octahedral, square planar, tetrahedral; limitations; introduction to LFT/MO.",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Bonding in Complexes\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "d²sp³ and sp³d² hybridization are NOT equivalent despite both producing six hybrid orbitals — d²sp³ uses the INNER (n−1)d orbitals (e.g., 3d in a first-row complex), while sp³d² uses the OUTER nd orbitals (4d in the same row) — these are genuinely DIFFERENT orbitals with different energies/radial extents, and inner-orbital (d²sp³) complexes are typically low-spin (stronger overlap, stronger Δ) while outer-orbital (sp³d²) complexes are typically high-spin; π-donor ligands are WEAK-field, not strong-field, despite \"donating more electron density\" sounding like it should strengthen the field — π-donation raises t₂g energy (donating INTO the metal's t₂g-based orbitals), DECREASING Δ, while π-ACCEPTOR ligands (back-donation FROM metal to ligand) LOWER t₂g energy, INCREASING Δ — the DIRECTION of donation (to vs. from the metal), not the sheer amount of electron density involved, determines the effect on Δ; and MO theory superseding VBT in scope/accuracy does NOT mean VBT should never be used — VBT correctly and simply predicts geometry and magnetic behavior (d²sp³→octahedral, diamagnetic; sp³→tetrahedral, paramagnetic) for many cases, retaining genuine pedagogical and predictive value for these specific questions, even though MO/LFT is required for spectroscopy, bond energies, π-effects, and quantitative Δ.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Bonding in Complexes\"",
-        "[TEMPLATE] Key idea 2 for \"Bonding in Complexes\"",
-        "[TEMPLATE] Key idea 3 for \"Bonding in Complexes\""
+        "Coordination-complex hybridization notation (d²sp³ vs. sp³d²) encodes a genuine physical distinction — which specific d-orbital shell (inner (n−1)d vs. outer nd) participates in bonding — with real consequences for orbital overlap strength and resulting spin state (low-spin for inner, high-spin for outer). A ligand's effect on the crystal field splitting Δ depends on the DIRECTION of π-interaction: π-donors raise t₂g energy (shrinking Δ, weak-field), while π-acceptors lower t₂g energy via back-donation (growing Δ, strong-field) — the sheer amount of electron density involved does not by itself determine field strength.",
+        "VBT and MO/LFT are not simply \"right\" or \"wrong\" relative to each other — each theory retains genuine validity within its own specific domain, with VBT correctly predicting geometry and magnetic behavior via hybridization, while MO/LFT is required for spectroscopy, bond energies, π-effects, and quantitative Δ values that VBT was never designed to address.",
+        "Core misconception to avoid: Always check whether the hybridization notation specifies inner (n−1)d (d²sp³, typically low-spin) or outer nd (sp³d², typically high-spin) orbitals — never treat the two notations as interchangeable just because they produce the same orbital count."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Bonding in Complexes\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "same six orbitals, just written differently.",
+          "correction": "Always check whether the hybridization notation specifies inner (n−1)d (d²sp³, typically low-spin) or outer nd (sp³d², typically high-spin) orbitals — never treat the two notations as interchangeable just because they produce the same orbital count."
+        },
+        {
+          "misconception": "more donation = stronger field.",
+          "correction": "π-donor ligands weaken the field (raise t₂g, decrease Δ); π-acceptor ligands strengthen the field (lower t₂g via back-donation, increase Δ) — always identify the DIRECTION of π-interaction, never assume \"more donation\" implies a stronger field."
+        },
+        {
+          "misconception": "VBT is outdated and wrong.",
+          "correction": "VBT remains valid and useful specifically for predicting geometry and magnetic behavior — MO/LFT is required for spectroscopy, bond energies, and quantitative Δ — never dismiss VBT as simply \"wrong\" because a more comprehensive theory exists."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Bonding in Complexes\""
+        "Demonstration 1 (inner-vs-outer orbital-shell diagram for d²sp³/sp³d²): Present the explicit orbital-shell diagram, tracking which specific d-orbital shell each notation involves.",
+        "Demonstration 2 (t₂g energy-shift diagram for π-donor vs. π-acceptor): Present both interaction diagrams explicitly, deriving the opposite Δ consequences from donation direction.",
+        "Demonstration 3 (VBT-vs-MO/LFT scope comparison): Present specific example questions each theory correctly answers, clarifying their respective domains of validity."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Bonding in Complexes\"",
+        "setup": "Which d orbitals are used in d²sp³ vs. sp³d²?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (inner-vs-outer orbital-shell diagram for d²sp³/sp³d²): Present the explicit orbital-shell diagram, tracking which specific d-orbital shell each notation involves.",
+          "Demonstration 2 (t₂g energy-shift diagram for π-donor vs. π-acceptor): Present both interaction diagrams explicitly, deriving the opposite Δ consequences from donation direction.",
+          "Demonstration 3 (VBT-vs-MO/LFT scope comparison): Present specific example questions each theory correctly answers, clarifying their respective domains of validity."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Bonding in Complexes\""
+        "expected_outcome": "Student can (a) correctly distinguish inner (d²sp³) from outer (sp³d²) orbital hybridization and predict resulting spin state, (b) correctly predict a ligand's effect on Δ from π-donor/acceptor character, (c) correctly identify the appropriate scope for VBT vs. MO/LFT."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit inner-vs-outer orbital-shell diagram for d²sp³/sp³d².",
+          "TA-2 (TELL): State the direction-dependent π-donor/acceptor effect on Δ explicitly, anchored to the t₂g energy-shift diagram.",
+          "TA-3 (DO): Student classifies an unfamiliar ligand as π-donor or π-acceptor and predicts its effect on Δ.",
+          "TA-4 (TEST-THINKING): Present the VBT-vs-MO/LFT probe and ask the student to justify VBT's continued usefulness for specific questions."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Bonding in Complexes from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Which d orbitals are used in d²sp³ vs. sp³d²?\"",
+          "FA-2: \"If a ligand donates electron density into the t₂g orbital, does the energy of t₂g go up or down? And what happens to Δ?\"",
+          "FA-3: \"For which questions is VBT still the simplest useful model?\""
         ],
         "bloom_alignment": "analyze",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Bonding in Complexes\""
+        "mastery_signal": "Student can (a) correctly distinguish inner (d²sp³) from outer (sp³d²) orbital hybridization and predict resulting spin state, (b) correctly predict a ligand's effect on Δ from π-donor/acceptor character, (c) correctly identify the appropriate scope for VBT vs. MO/LFT."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Bonding in Complexes\""
+        "This concept has no direct KG unlocks but consolidates crystal-field and molecular-orbital-theory reasoning built across `chem.coord.cft` and `chem.bond.mo-theory`, forming a capstone application to advanced coordination chemistry and spectroscopy contexts."
       ],
-      "prerequisite_review_triggers": []
+      "prerequisite_review_triggers": [
+        "chem.coord.cft",
+        "chem.bond.mo-theory"
+      ]
     },
     {
       "id": "asset.chem.coord.stability",
       "concept_id": "chem.coord.stability",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to apply \"Stability Constants\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Stability Constants\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Stability Constants\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "The chelate effect is NOT primarily due to stronger individual metal-donor bonds — individual M–N bond enthalpies are SIMILAR whether from a chelating (en) or monodentate (NH₃) ligand; the chelate effect is fundamentally ENTROPIC — replacing three bidentate en by six monodentate NH₃ molecules changes the number of free particles released (six H₂O displaced but only three en entering, vs. six NH₃ entering displacing six H₂O), dramatically increasing product-side entropy, so ΔH≈similar but ΔS strongly positive drives the greater stability via the TΔS term; kinetic inertness (slow ligand substitution) and thermodynamic stability (large formation constant Kf) are INDEPENDENT properties — [Cr(H₂O)₆]³⁺ is kinetically inert (slow exchange, due to its d³ configuration's exchange-stabilized, associative-transition-state-unfavorable geometry) but does NOT have an exceptionally large Kf, while [Ni(H₂O)₆]²⁺ has moderate Kf yet is highly labile (nanosecond exchange) — \"inert\" describes RATE, \"stable\" describes EQUILIBRIUM, and the two need not correlate; and the overall stability constant βₙ is the PRODUCT (not sum) of stepwise formation constants K₁×K₂×...×Kₙ — in logarithmic form, log βₙ=log K₁+log K₂+...+log Kₙ (logs ADD because the underlying constants MULTIPLY), never adding the raw K values directly.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Stability Constants\"",
-        "[TEMPLATE] Key idea 2 for \"Stability Constants\"",
-        "[TEMPLATE] Key idea 3 for \"Stability Constants\""
+        "The chelate effect's enhanced stability arises primarily from entropy, not stronger individual bonds — chelating ligand substitution typically releases more free water molecules per ligand molecule consumed than monodentate substitution, increasing the net particle count (and hence entropy) on the product side, driving a more favorable ΔG via the TΔS term despite similar bond enthalpies. Kinetic inertness (slow ligand exchange) and thermodynamic stability (large formation constant) are independent properties governed by different aspects of the reaction energy landscape (activation barrier vs. equilibrium position).",
+        "The overall stability constant βₙ is the product of the individual stepwise formation constants (βₙ=K₁×K₂×...×Kₙ), a direct consequence of combining sequential equilibrium expressions — in logarithmic form, this means the individual log K values ADD, never that the raw K values themselves add.",
+        "Core misconception to avoid: The chelate effect's enhanced stability is primarily entropic (from the net increase in free particle count upon chelate formation), never primarily from stronger individual metal-donor bonds."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Stability Constants\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "chelating ligands bind more tightly at each bond.",
+          "correction": "The chelate effect's enhanced stability is primarily entropic (from the net increase in free particle count upon chelate formation), never primarily from stronger individual metal-donor bonds."
+        },
+        {
+          "misconception": "inert = stable.",
+          "correction": "Kinetic inertness (slow substitution rate) and thermodynamic stability (large Kf) must be assessed independently — never infer one from the other."
+        },
+        {
+          "misconception": "add the individual constants.",
+          "correction": "Always compute βₙ as the PRODUCT of stepwise K values (equivalently, sum their logarithms) — never add the raw K values directly."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Stability Constants\""
+        "Demonstration 1 (particle-counting comparison for en vs. NH₃ substitution): Present the explicit particle-count balance for both reactions, deriving the entropy difference.",
+        "Demonstration 2 (independent kinetics/thermodynamics data comparison): Present [Cr(H₂O)₆]³⁺ and [Ni(H₂O)₆]²⁺'s independent kinetic and thermodynamic data side by side.",
+        "Demonstration 3 (telescoping stepwise-equilibrium derivation of βₙ): Derive β₂ explicitly by multiplying the two stepwise equilibrium expressions, showing the cancellation that produces the overall ratio."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Stability Constants\"",
+        "setup": "Compare ΔH and ΔS for the formation of [Ni(en)₃]²⁺ vs. [Ni(NH₃)₆]²⁺. Which term is primarily responsible for the chelate effect?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (particle-counting comparison for en vs. NH₃ substitution): Present the explicit particle-count balance for both reactions, deriving the entropy difference.",
+          "Demonstration 2 (independent kinetics/thermodynamics data comparison): Present [Cr(H₂O)₆]³⁺ and [Ni(H₂O)₆]²⁺'s independent kinetic and thermodynamic data side by side.",
+          "Demonstration 3 (telescoping stepwise-equilibrium derivation of βₙ): Derive β₂ explicitly by multiplying the two stepwise equilibrium expressions, showing the cancellation that produces the overall ratio."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Stability Constants\""
+        "expected_outcome": "Student can (a) correctly attribute the chelate effect to entropy, not bond strength, (b) correctly treat kinetic inertness and thermodynamic stability as independent properties, (c) correctly compute βₙ via multiplication/log-addition."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit particle-counting comparison for en vs. NH₃ substitution.",
+          "TA-2 (TELL): State the kinetics-vs-thermodynamics independence explicitly, anchored to the [Cr(H₂O)₆]³⁺/[Ni(H₂O)₆]²⁺ comparison.",
+          "TA-3 (DO): Student computes βₙ for an unfamiliar set of stepwise formation constants via correct multiplication/log-addition.",
+          "TA-4 (TEST-THINKING): Present the \"is inert always stable\" probe and ask the student to justify the independence of the two properties."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Stability Constants from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Compare ΔH and ΔS for the formation of [Ni(en)₃]²⁺ vs. [Ni(NH₃)₆]²⁺. Which term is primarily responsible for the chelate effect?\"",
+          "FA-2: \"[Cr(H₂O)₆]³⁺ is kinetically inert. Does this mean it has an exceptionally high K_f?\"",
+          "FA-3: \"If log K₁ = 4 and log K₂ = 3 for a bis-complex, what is log β₂?\""
         ],
         "bloom_alignment": "apply",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Stability Constants\""
+        "mastery_signal": "Student can (a) correctly attribute the chelate effect to entropy, not bond strength, (b) correctly treat kinetic inertness and thermodynamic stability as independent properties, (c) correctly compute βₙ via multiplication/log-addition."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Stability Constants\""
+        "This concept has no direct KG unlocks but consolidates complex-equilibrium and Werner-theory reasoning built across `chem.equil.complex-equil` and `chem.coord.werner`, forming a capstone application to analytical (EDTA titration) and medical (chelation therapy) contexts."
       ],
       "prerequisite_review_triggers": [
-        "chem.equil.complex-equil"
+        "chem.equil.complex-equil",
+        "chem.coord.werner"
       ]
     },
     {
       "id": "asset.chem.coord.applications",
       "concept_id": "chem.coord.applications",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Applications of Coordination Chemistry\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Applications of Coordination Chemistry\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Applications of Coordination Chemistry\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "CO poisoning does NOT permanently destroy hemoglobin — CO binds REVERSIBLY (though very tightly, Kf(CO-Hb)>>Kf(O₂-Hb)) to the same Fe²⁺ O₂-binding site, and with high-flow O₂ therapy, CO is slowly displaced and normal Hb function is restored — the damage is KINETIC (CO outcompeting O₂ for binding), never a permanent structural/covalent alteration of the protein; transplatin's clinical inactivity is NOT because it fails to react with DNA — BOTH cisplatin and transplatin react with DNA (displacing chloride, binding purine N7), but transplatin's geometry produces INTERSTRAND cross-links (a lesion efficiently repaired by cellular machinery) rather than cisplatin's specific INTRASTRAND GG cross-links (the lesion that effectively triggers apoptosis) — transplatin's inactivity is a matter of SELECTIVITY (wrong lesion type), never unreactivity; and chlorophyll's green color/light absorption is NOT due to Mg²⁺ — Mg²⁺ has a d⁰ configuration and CANNOT undergo d-d transitions (having no d electrons to promote), so it cannot be the chromophore — the porphyrin ring's extended π system is what actually absorbs light (red+blue wavelengths, reflecting green), with Mg²⁺ serving a purely STRUCTURAL role (rigidifying the porphyrin, centering the macrocycle, facilitating energy transfer).",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Applications of Coordination Chemistry\"",
-        "[TEMPLATE] Key idea 2 for \"Applications of Coordination Chemistry\"",
-        "[TEMPLATE] Key idea 3 for \"Applications of Coordination Chemistry\""
+        "CO poisoning is a reversible, kinetically-dominant binding competition (CO strongly outcompeting O₂ for the same Fe²⁺ site in hemoglobin), never a permanent structural destruction — treatment with high-flow O₂ works precisely by shifting this reversible equilibrium back toward O₂ binding. Similarly, transplatin's clinical inactivity results not from a lack of DNA reactivity (it genuinely reacts, just like cisplatin) but from producing a differently-repairable DNA lesion type (interstrand rather than intrastrand cross-links) — a matter of selectivity, not unreactivity.",
+        "A metal center's ability to serve as a chromophore via d-d transitions specifically requires d electrons available for promotion — Mg²⁺'s d⁰ configuration structurally rules this out, meaning chlorophyll's actual light absorption and green color arise from the porphyrin ring's extended π-electron system, with Mg²⁺ instead serving a purely structural role.",
+        "Core misconception to avoid: CO poisoning is a reversible, kinetic/equilibrium binding competition at the same Fe²⁺ site O₂ uses — never a permanent structural destruction of hemoglobin."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Applications of Coordination Chemistry\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "CO destroys the blood cells.",
+          "correction": "CO poisoning is a reversible, kinetic/equilibrium binding competition at the same Fe²⁺ site O₂ uses — never a permanent structural destruction of hemoglobin."
+        },
+        {
+          "misconception": "the trans isomer is stable/inert.",
+          "correction": "Transplatin genuinely reacts with DNA via the same mechanism as cisplatin — its clinical inactivity results from producing a differently-repairable lesion type (interstrand cross-links), a matter of selectivity, never unreactivity."
+        },
+        {
+          "misconception": "the Mg²⁺ is the chromophore.",
+          "correction": "Always check a metal center's d-electron configuration before attributing light absorption to it via d-d transitions — d⁰ metals (like Mg²⁺) cannot serve as chromophores this way; look instead to other light-absorbing structural features (like an extended π system)."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Applications of Coordination Chemistry\""
+        "Demonstration 1 (Kf comparison and O₂-therapy displacement mechanism): Present the explicit Kf(CO-Hb) vs. Kf(O₂-Hb) comparison, connecting high-flow O₂ therapy's effectiveness to the reversible equilibrium.",
+        "Demonstration 2 (intrastrand-vs-interstrand DNA-lesion diagram): Present both lesion types explicitly for cisplatin and transplatin, deriving the differing clinical outcome from lesion type.",
+        "Demonstration 3 (Mg²⁺ d⁰-configuration and porphyrin π-system diagram): Present the explicit electron-configuration argument alongside the porphyrin ring's actual light-absorbing structure."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Applications of Coordination Chemistry\"",
+        "setup": "After CO poisoning, can haemoglobin function again if CO is removed?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (Kf comparison and O₂-therapy displacement mechanism): Present the explicit Kf(CO-Hb) vs. Kf(O₂-Hb) comparison, connecting high-flow O₂ therapy's effectiveness to the reversible equilibrium.",
+          "Demonstration 2 (intrastrand-vs-interstrand DNA-lesion diagram): Present both lesion types explicitly for cisplatin and transplatin, deriving the differing clinical outcome from lesion type.",
+          "Demonstration 3 (Mg²⁺ d⁰-configuration and porphyrin π-system diagram): Present the explicit electron-configuration argument alongside the porphyrin ring's actual light-absorbing structure."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Applications of Coordination Chemistry\""
+        "expected_outcome": "Student can (a) correctly explain CO poisoning as reversible competitive binding, never permanent damage, (b) correctly attribute transplatin's inactivity to lesion-type selectivity, not unreactivity, (c) correctly identify the porphyrin π system (not Mg²⁺) as chlorophyll's chromophore."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit Kf comparison and O₂-therapy displacement mechanism for CO poisoning.",
+          "TA-2 (TELL): State the lesion-type-selectivity explanation for transplatin's inactivity explicitly, anchored to the intrastrand-vs-interstrand diagram.",
+          "TA-3 (DO): Student checks an unfamiliar metal center's d-electron configuration before attributing chromophore behavior to it.",
+          "TA-4 (TEST-THINKING): Present the chlorophyll-chromophore probe and ask the student to justify why Mg²⁺ cannot be responsible for light absorption."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Applications of Coordination Chemistry from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"After CO poisoning, can haemoglobin function again if CO is removed?\"",
+          "FA-2: \"Does transplatin react with DNA at all?\"",
+          "FA-3: \"Mg²⁺ has a d⁰ configuration. Can it undergo d–d transitions? So what absorbs in chlorophyll?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Applications of Coordination Chemistry\""
+        "mastery_signal": "Student can (a) correctly explain CO poisoning as reversible competitive binding, never permanent damage, (b) correctly attribute transplatin's inactivity to lesion-type selectivity, not unreactivity, (c) correctly identify the porphyrin π system (not Mg²⁺) as chlorophyll's chromophore."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Applications of Coordination Chemistry\""
+        "This concept has no direct KG unlocks but consolidates crystal-field-theory reasoning built across `chem.coord.cft`, forming a capstone application to bioinorganic chemistry, pharmacology, and photosynthesis-related contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.coord.cft"
