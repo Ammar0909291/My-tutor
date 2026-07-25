@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/db/prisma'
 import { redis } from '@/lib/redis/client'
 import { missingRequiredEnv } from '@/lib/env'
+import { snapshotProviderMetrics } from '@/lib/ai/providers/metrics'
 
 export const dynamic = 'force-dynamic'
 
@@ -15,6 +16,8 @@ export const dynamic = 'force-dynamic'
  * `config.missing` is purely informational (never affects the status
  * code) — it surfaces an incomplete deployment (per docs/DEPLOYMENT.md
  * §1's Required table) from the outside instead of as a later 500.
+ * `ai` reports in-process provider metrics (request counts, failovers,
+ * latency) — informational only, never affects the status code.
  */
 export async function GET() {
   let db = false
@@ -42,9 +45,10 @@ export async function GET() {
   }
 
   const missing = missingRequiredEnv()
+  const ai = snapshotProviderMetrics()
 
   return NextResponse.json(
-    { status: db ? 'ok' : 'degraded', db, redis: redisStatus, config: { missing } },
+    { status: db ? 'ok' : 'degraded', db, redis: redisStatus, ai, config: { missing } },
     { status: db ? 200 : 503 },
   )
 }
