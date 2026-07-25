@@ -10563,48 +10563,64 @@
     {
       "id": "asset.chem.poly.addition",
       "concept_id": "chem.poly.addition",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Addition Polymerization\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Addition Polymerization\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Addition Polymerization\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Addition and condensation polymerization are distinguished by MECHANISM (whether a small molecule is ejected per monomer-monomer bond), never by chain length — condensation polymers (e.g., nylon) eject H₂O or HCl at every amide/ester bond, so the repeat unit has FEWER atoms than the sum of its monomers, while addition polymers' repeat unit formula exactly equals the monomer formula, with no atom lost; a radical initiator does NOT react with just one monomer and terminate — the propagating radical adds thousands to hundreds of thousands of monomer units (degree of polymerization DP~10³–10⁵) before a rare bimolecular termination event, since two propagating radicals meeting in dilute solution is statistically uncommon; and polyethylene's physical properties depend critically on synthesis METHOD, not just monomer identity — free-radical polymerization gives LDPE (branched chains from backbiting, poor packing, low density, flexible), while Ziegler-Natta catalysis gives HDPE (linear chains, tight packing, high density, rigid) — \"same monomer\" does not mean \"same material.\"",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Addition Polymerization\"",
-        "[TEMPLATE] Key idea 2 for \"Addition Polymerization\"",
-        "[TEMPLATE] Key idea 3 for \"Addition Polymerization\""
+        "Addition and condensation polymerization are distinguished by mechanism — whether a small byproduct molecule is ejected at each monomer-monomer bond (condensation: yes, e.g., nylon ejecting H₂O; addition: no, e.g., polyethylene) — never by the resulting chain's length or size. In radical addition polymerization, a single initiator radical propagates through a long cascade of monomer additions (DP~10³–10⁵) before a comparatively rare bimolecular termination event; it is not consumed after a single reaction.",
+        "Identical monomers can yield materially different polymers depending on the synthesis mechanism used — free-radical polymerization of ethene produces branched LDPE (poor chain packing, low density, flexible), while Ziegler-Natta catalysis produces linear HDPE (tight packing, high density, rigid), demonstrating that monomer identity alone does not determine bulk polymer properties.",
+        "Core misconception to avoid: Always classify polymerization by checking whether a small molecule is ejected at each monomer-monomer bond (condensation: yes; addition: no) — never by chain length or polymer size."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Addition Polymerization\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "both types make long chains so it's the same",
+          "correction": "Always classify polymerization by checking whether a small molecule is ejected at each monomer-monomer bond (condensation: yes; addition: no) — never by chain length or polymer size."
+        },
+        {
+          "misconception": "the radical reacts with just one monomer then it's gone.",
+          "correction": "A propagating radical adds thousands to hundreds of thousands of monomer units before termination — never assume a radical is consumed after reacting with just one monomer."
+        },
+        {
+          "misconception": "they're all the same since the monomer is just ethene.",
+          "correction": "Polyethylene's properties depend on synthesis method (radical→LDPE, branched, flexible; Ziegler-Natta→HDPE, linear, rigid), never assume monomer identity alone determines material properties."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Addition Polymerization\""
+        "Demonstration 1 (atom-accounting addition-vs-condensation comparison): Compare nylon's amide-bond formation (H₂O ejected) against polyethylene's addition mechanism (no atom lost) explicitly.",
+        "Demonstration 2 (chain-growth cascade diagram): Draw the explicit radical-propagation cascade, tracking DP through thousands of successive monomer additions before termination.",
+        "Demonstration 3 (branched-vs-linear polyethylene packing diagram): Present LDPE's branched-chain packing against HDPE's linear-chain packing, connecting microstructure to density and rigidity."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Addition Polymerization\"",
+        "setup": "Is nylon formation addition or condensation polymerisation? What is lost in each bond formation?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (atom-accounting addition-vs-condensation comparison): Compare nylon's amide-bond formation (H₂O ejected) against polyethylene's addition mechanism (no atom lost) explicitly.",
+          "Demonstration 2 (chain-growth cascade diagram): Draw the explicit radical-propagation cascade, tracking DP through thousands of successive monomer additions before termination.",
+          "Demonstration 3 (branched-vs-linear polyethylene packing diagram): Present LDPE's branched-chain packing against HDPE's linear-chain packing, connecting microstructure to density and rigidity."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Addition Polymerization\""
+        "expected_outcome": "Student can (a) correctly classify a polymer as addition or condensation from mechanism, (b) correctly explain the persistent, long-cascade nature of radical propagation, (c) correctly attribute differing polyethylene properties to differing synthesis methods."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit atom-accounting comparison for nylon vs. polyethylene.",
+          "TA-2 (TELL): State the persistent-radical propagation cascade explicitly, anchored to the DP~10³–10⁵ range.",
+          "TA-3 (DO): Student classifies an unfamiliar polymer as addition or condensation from its monomer-bond-formation mechanism.",
+          "TA-4 (TEST-THINKING): Present the LDPE-vs-HDPE probe and ask the student to justify the property difference from synthesis-method microstructure."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Addition Polymerization from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Is nylon formation addition or condensation polymerisation? What is lost in each bond formation?\"",
+          "FA-2: \"How many monomer units does each initiator radical typically add before termination?\"",
+          "FA-3: \"Why is HDPE suitable for pipes but LDPE is used for plastic bags?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Addition Polymerization\""
+        "mastery_signal": "Student can (a) correctly classify a polymer as addition or condensation from mechanism, (b) correctly explain the persistent, long-cascade nature of radical propagation, (c) correctly attribute differing polyethylene properties to differing synthesis methods."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Addition Polymerization\""
+        "Feeds directly into `chem.poly.properties` (polymer bulk properties directly require the microstructure-property reasoning established here for LDPE vs. HDPE)."
       ],
       "prerequisite_review_triggers": [
         "chem.hyd.alkenes",
@@ -10614,48 +10630,57 @@
     {
       "id": "asset.chem.poly.condensation",
       "concept_id": "chem.poly.condensation",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Condensation Polymerization\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Condensation Polymerization\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Condensation Polymerization\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Condensation (step-growth) polymerization is NOT simply \"addition polymerization but with two different monomers\" — the defining structural feature is that a SMALL MOLECULE (typically water, sometimes HCl or methanol) is genuinely ELIMINATED at each new bond-forming step, so the resulting polymer's repeat unit has a LOWER total mass than the sum of the monomers that formed it — this small-molecule loss has no counterpart in addition polymerization, where every atom of every monomer is retained in the polymer chain; and step-growth polymerization does NOT require one monomer to fully react into a long chain before the next monomer joins — in the actual mechanism, ANY two reactive end groups (monomer-monomer, monomer-dimer, dimer-dimer, oligomer-oligomer) can react with each other at any stage, so early in the reaction the mixture consists mostly of dimers/trimers/short oligomers rather than a few very long chains and many unreacted monomers — high molecular weight is only reached very late, near complete conversion, which is why step-growth polymerizations require very high conversion (often >99%) to achieve useful chain lengths, unlike chain-growth (addition) polymerization where long chains appear almost immediately.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Condensation Polymerization\"",
-        "[TEMPLATE] Key idea 2 for \"Condensation Polymerization\"",
-        "[TEMPLATE] Key idea 3 for \"Condensation Polymerization\""
+        "Condensation polymerization is defined by the genuine elimination of a small molecule (water, HCl, methanol, etc.) at every new bond formed, giving the polymer's repeat unit less mass than the sum of its monomers — a structural distinction from addition polymerization, not merely a difference in monomer count.",
+        "In step-growth polymerization, any two molecules bearing reactive end groups can combine regardless of their current size, so the reaction mixture passes through a stage dominated by short oligomers, with genuinely high molecular weight achieved only near complete conversion — fundamentally different from chain-growth polymerization's early appearance of long chains.",
+        "Core misconception to avoid: Condensation polymerization is defined by the genuine elimination of a small molecule (water, HCl, methanol, etc.) at each new bond formed, giving the polymer's repeat unit less mass than its constituent monomers — this is structurally distinct from, and not merely a two-monomer variant of, addition polymerization."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Condensation Polymerization\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Condensation polymerization is basically the same as addition polymerization, just using two different monomers instead of one.",
+          "correction": "Condensation polymerization is defined by the genuine elimination of a small molecule (water, HCl, methanol, etc.) at each new bond formed, giving the polymer's repeat unit less mass than its constituent monomers — this is structurally distinct from, and not merely a two-monomer variant of, addition polymerization."
+        },
+        {
+          "misconception": "The polymer chain grows longer and longer from one monomer, just like in addition polymerization, so at 50% conversion there should be some long chains and some leftover monomer.",
+          "correction": "Step-growth polymerization proceeds via any two reactive end groups combining regardless of current size — at moderate conversion the mixture consists mostly of short oligomers, and high molecular weight is reached only near complete conversion, unlike chain-growth polymerization's early appearance of long chains."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Condensation Polymerization\""
+        "Demonstration 1 (mass-accounting comparison for nylon-6,6 vs. polyethylene): Present the explicit repeat-unit mass calculation, deriving the small-molecule-elimination signature.",
+        "Demonstration 2 (side-by-side chain-growth vs. step-growth reaction-progress diagram): Present the explicit chain-length-distribution comparison at moderate conversion, deriving the different progression patterns."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Condensation Polymerization\"",
+        "setup": "Nylon-6,6 is formed from a diamine and a diacid chloride. Does the resulting polymer's repeat unit contain every atom originally present in both monomers, the way polyethylene's repeat unit contains every atom of ethylene?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (mass-accounting comparison for nylon-6,6 vs. polyethylene): Present the explicit repeat-unit mass calculation, deriving the small-molecule-elimination signature.",
+          "Demonstration 2 (side-by-side chain-growth vs. step-growth reaction-progress diagram): Present the explicit chain-length-distribution comparison at moderate conversion, deriving the different progression patterns."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Condensation Polymerization\""
+        "expected_outcome": "Student can (a) correctly identify condensation polymerization from small-molecule elimination and repeat-unit mass loss, (b) correctly predict that step-growth polymerization produces mostly short oligomers until conversion is very high."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit mass-accounting comparison for nylon-6,6 vs. polyethylene.",
+          "TA-2 (TELL): State the step-growth any-size-combines-with-any-size rule explicitly, anchored to the reaction-progress diagram.",
+          "TA-3 (DO): Student predicts whether an unfamiliar polymer is condensation or addition from its repeat-unit mass compared to its monomers, and predicts the qualitative chain-length distribution for a step-growth polymerization at a given conversion.",
+          "TA-4 (TEST-THINKING): Present the MC-1 probe and ask the student to justify why condensation polymerization is structurally distinct from addition polymerization, not just a two-monomer variant."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Condensation Polymerization from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Nylon-6,6 is formed from a diamine and a diacid chloride. Does the resulting polymer's repeat unit contain every atom originally present in both monomers, the way polyethylene's repeat unit contains every atom of ethylene?\"",
+          "FA-2: \"In a step-growth polymerization at 50% monomer conversion, would you expect the mixture to contain mostly a few very long polymer chains alongside many still-unreacted monomers, or something else?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Condensation Polymerization\""
+        "mastery_signal": "Student can (a) correctly identify condensation polymerization from small-molecule elimination and repeat-unit mass loss, (b) correctly predict that step-growth polymerization produces mostly short oligomers until conversion is very high."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Condensation Polymerization\""
+        "This concept unlocks `chem.poly.biodegradable` and `chem.poly.properties`, extending condensation-polymer structural reasoning to biodegradability mechanisms and polymer property-structure relationships."
       ],
       "prerequisite_review_triggers": [
         "chem.carb.derivatives",
@@ -10665,48 +10690,57 @@
     {
       "id": "asset.chem.poly.natural",
       "concept_id": "chem.poly.natural",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Natural Polymers\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Natural Polymers\" pending authoring (target depth: developing).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Natural Polymers\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Starch and cellulose are NOT structurally similar polymers with different \"amounts\" of glucose — both are polymers of the SAME glucose monomer, but they differ specifically in the GLYCOSIDIC LINKAGE STEREOCHEMISTRY connecting the glucose units (starch uses alpha-1,4-glycosidic linkages; cellulose uses beta-1,4-glycosidic linkages), and this single stereochemical difference has an enormous structural/functional consequence — alpha linkages produce a helical, coiled polymer chain (digestible by human amylase, which specifically recognizes alpha linkages) while beta linkages produce fully extended, linear chains that pack into rigid, hydrogen-bonded microfibrils (completely indigestible by human enzymes, which cannot cleave beta linkages) — humans can digest starch but not cellulose specifically because of this one stereochemical difference, not because of any difference in overall composition; and vulcanization is NOT simply \"adding sulfur to rubber to make it stronger\" as a vague strengthening process — it is a SPECIFIC chemical reaction where sulfur forms CROSS-LINKING BRIDGES (disulfide or polysulfide bonds) between adjacent cis-polyisoprene chains at their residual double bonds, and it is these specific covalent cross-links (not merely \"more sulfur present\") that convert soft, tacky natural rubber into a resilient elastic material capable of returning to its original shape after deformation — without genuine inter-chain cross-linking, simply mixing in sulfur without the vulcanization reaction would not produce this elastic property.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Natural Polymers\"",
-        "[TEMPLATE] Key idea 2 for \"Natural Polymers\"",
-        "[TEMPLATE] Key idea 3 for \"Natural Polymers\""
+        "Starch and cellulose, both polymers of the identical glucose monomer, differ specifically in glycosidic linkage stereochemistry — starch's alpha-1,4-linkages (digestible by human amylase, coiled conformation) versus cellulose's beta-1,4-linkages (indigestible, extended/microfibril conformation) — this single stereochemical feature, not glucose quantity or packing tightness, explains human digestibility differences.",
+        "Vulcanization specifically forms covalent sulfur cross-linking bridges between adjacent cis-polyisoprene chains at their residual double bonds — it is this genuine inter-chain covalent cross-linking, not sulfur presence alone, that produces rubber's characteristic elasticity and shape-recovery properties.",
+        "Core misconception to avoid: Starch (alpha-1,4-linkages, digestible, helical) and cellulose (beta-1,4-linkages, indigestible, extended) differ specifically in glycosidic linkage stereochemistry — this single stereochemical feature, not glucose quantity or vague packing tightness, determines digestibility."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Natural Polymers\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "Cellulose must just be more tightly packed or have more glucose than starch, which is why we can't digest it.",
+          "correction": "Starch (alpha-1,4-linkages, digestible, helical) and cellulose (beta-1,4-linkages, indigestible, extended) differ specifically in glycosidic linkage stereochemistry — this single stereochemical feature, not glucose quantity or vague packing tightness, determines digestibility."
+        },
+        {
+          "misconception": "Vulcanization just adds sulfur to rubber to make it stronger.",
+          "correction": "Vulcanization specifically forms covalent sulfur cross-links between adjacent rubber polymer chains — it is this genuine cross-linking (not sulfur presence alone) that produces rubber's characteristic elasticity and shape recovery."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Natural Polymers\""
+        "Demonstration 1 (alpha-vs-beta glycosidic linkage structural diagram): Present the explicit linkage-stereochemistry comparison, deriving the digestibility difference from enzyme specificity.",
+        "Demonstration 2 (sulfur cross-linking mechanism diagram for vulcanization): Present the explicit cross-link-formation diagram, deriving the elasticity property from genuine covalent bonding between chains."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Natural Polymers\"",
+        "setup": "Starch and cellulose are both polymers of glucose. Why can humans digest starch but not cellulose?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (alpha-vs-beta glycosidic linkage structural diagram): Present the explicit linkage-stereochemistry comparison, deriving the digestibility difference from enzyme specificity.",
+          "Demonstration 2 (sulfur cross-linking mechanism diagram for vulcanization): Present the explicit cross-link-formation diagram, deriving the elasticity property from genuine covalent bonding between chains."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Natural Polymers\""
+        "expected_outcome": "Student can (a) correctly explain starch/cellulose digestibility differences from glycosidic linkage stereochemistry, (b) correctly explain vulcanization's elastic-property transformation as genuine covalent cross-linking."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit alpha-vs-beta glycosidic linkage structural diagram.",
+          "TA-2 (TELL): State the vulcanization cross-linking mechanism explicitly, anchored to the covalent-bridge diagram.",
+          "TA-3 (DO): Student predicts the digestibility of an unfamiliar polysaccharide given its linkage stereochemistry, and explains why cross-link density affects rubber's elastic properties.",
+          "TA-4 (TEST-THINKING): Present the MC-1 probe and ask the student to justify why humans can digest starch but not cellulose despite both being glucose polymers."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for developing-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Natural Polymers from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Starch and cellulose are both polymers of glucose. Why can humans digest starch but not cellulose?\"",
+          "FA-2: \"If you simply mixed sulfur powder into natural rubber without any chemical reaction occurring, would you get the same elastic, shape-recovering material as vulcanized rubber?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Natural Polymers\""
+        "mastery_signal": "Student can (a) correctly explain starch/cellulose digestibility differences from glycosidic linkage stereochemistry, (b) correctly explain vulcanization's elastic-property transformation as genuine covalent cross-linking."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Natural Polymers\""
+        "This concept has no direct KG unlocks but consolidates carbohydrate reasoning (`chem.bio.carbohydrates`) and protein reasoning (`chem.bio.proteins`), forming a capstone application to natural-materials-science contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.bio.carbohydrates",
@@ -10716,48 +10750,57 @@
     {
       "id": "asset.chem.poly.properties",
       "concept_id": "chem.poly.properties",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to explain \"Polymer Properties\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Polymer Properties\" pending authoring (target depth: proficient).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Polymer Properties\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "A polymer sample does NOT have a single, uniform molecular weight the way a small-molecule compound does — because polymerization (both addition and condensation) produces chains of VARYING length, any real polymer sample is a MIXTURE of chains with a distribution of molecular weights, requiring statistical averages (number-average Mn, weight-average Mw) to characterize it, with the ratio Mw/Mn (polydispersity index, PDI) quantifying how broad that distribution is — a PDI of exactly 1 would mean every chain is precisely the same length (essentially never achieved in practice), and PDI > 1 is the normal case; and the glass transition temperature (Tg) is NOT the melting point, and is NOT solely a property of \"how crystalline\" a polymer is — Tg is specifically the temperature at which an AMORPHOUS (non-crystalline) region of a polymer transitions between a hard, glassy state and a soft, rubbery state, a property distinct from (though related to) crystallinity — a highly crystalline polymer still has amorphous regions with their own Tg, and Tg and melting temperature (Tm, which applies only to the crystalline regions) are two separate, independently measurable thermal transitions that can both be present in the same semicrystalline polymer.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Polymer Properties\"",
-        "[TEMPLATE] Key idea 2 for \"Polymer Properties\"",
-        "[TEMPLATE] Key idea 3 for \"Polymer Properties\""
+        "A real polymer sample is a mixture of chains with a genuine distribution of molecular weights (arising from the statistical nature of both chain-growth and step-growth polymerization mechanisms), requiring statistical averages (Mn, Mw) and a polydispersity index (PDI = Mw/Mn) to characterize — never a single exact molecular weight value.",
+        "Tg specifically characterizes a polymer's amorphous regions transitioning between glassy and rubbery states (no lattice breakdown), while Tm specifically characterizes crystalline regions' actual lattice melting — a semicrystalline polymer genuinely exhibits both as separate, independent thermal transitions, never a single combined property.",
+        "Core misconception to avoid: A real polymer sample is a mixture of chains with a genuine distribution of molecular weights, requiring statistical averages (Mn, Mw) and a polydispersity index (PDI = Mw/Mn > 1 in practice) to characterize — never assume a single, exact molecular weight value like a small molecule has."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Polymer Properties\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "The polymer's molecular weight should be one specific number, just reported as an average for convenience.",
+          "correction": "A real polymer sample is a mixture of chains with a genuine distribution of molecular weights, requiring statistical averages (Mn, Mw) and a polydispersity index (PDI = Mw/Mn > 1 in practice) to characterize — never assume a single, exact molecular weight value like a small molecule has."
+        },
+        {
+          "misconception": "Tg is basically just the melting point of the polymer.",
+          "correction": "Tg (amorphous region's glassy-to-rubbery transition) and Tm (crystalline region's actual melting) are two distinct thermal properties — a semicrystalline polymer genuinely exhibits both, independently, never a single combined \"melting point.\""
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Polymer Properties\""
+        "Demonstration 1 (molecular-weight-distribution histogram with Mn/Mw/PDI): Present the explicit distribution diagram, deriving the statistical characterization requirement.",
+        "Demonstration 2 (two-transition thermal diagram for a semicrystalline polymer): Present the explicit Tg-and-Tm-both-present diagram, deriving their independence."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Polymer Properties\"",
+        "setup": "Does a batch of polyethylene have one single, exact molecular weight the way glucose has an exact molecular weight of 180.16 g/mol?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (molecular-weight-distribution histogram with Mn/Mw/PDI): Present the explicit distribution diagram, deriving the statistical characterization requirement.",
+          "Demonstration 2 (two-transition thermal diagram for a semicrystalline polymer): Present the explicit Tg-and-Tm-both-present diagram, deriving their independence."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Polymer Properties\""
+        "expected_outcome": "Student can (a) correctly explain why polymer molecular weight requires statistical characterization (Mn, Mw, PDI), (b) correctly distinguish Tg from Tm as independent properties of amorphous vs. crystalline regions."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit molecular-weight-distribution histogram with Mn/Mw/PDI marked.",
+          "TA-2 (TELL): State the Tg-vs-Tm distinction explicitly, anchored to the two-transition thermal diagram.",
+          "TA-3 (DO): Student calculates PDI from given Mn/Mw values and interprets distribution breadth; identifies both Tg and Tm for an unfamiliar semicrystalline polymer's thermal data.",
+          "TA-4 (TEST-THINKING): Present the MC-1 probe and ask the student to justify why a polymer sample cannot have a single exact molecular weight."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for proficient-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Polymer Properties from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"Does a batch of polyethylene have one single, exact molecular weight the way glucose has an exact molecular weight of 180.16 g/mol?\"",
+          "FA-2: \"A semicrystalline polymer has both crystalline and amorphous regions. Does it have just one relevant thermal transition temperature, or could it have more than one?\""
         ],
         "bloom_alignment": "understand",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Polymer Properties\""
+        "mastery_signal": "Student can (a) correctly explain why polymer molecular weight requires statistical characterization (Mn, Mw, PDI), (b) correctly distinguish Tg from Tm as independent properties of amorphous vs. crystalline regions."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Polymer Properties\""
+        "This concept has no direct KG unlocks but consolidates addition-polymer reasoning (`chem.poly.addition`) and condensation-polymer reasoning (`chem.poly.condensation`), forming a capstone application to materials-science (elastomers, plastics, fibers) contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.poly.addition",
@@ -10767,48 +10810,57 @@
     {
       "id": "asset.chem.poly.biodegradable",
       "concept_id": "chem.poly.biodegradable",
-      "version": "1.0.0",
-      "status": "placeholder",
-      "learning_objective": "By the end of this concept, the learner will be able to evaluate \"Biodegradable and Functional Polymers\".",
-      "concept_summary": "[TEMPLATE] One-paragraph summary of \"Biodegradable and Functional Polymers\" pending authoring (target depth: advanced).",
+      "version": "1.1.0",
+      "status": "draft",
+      "learning_objective": "By the end of this concept, the learner will be able to correctly apply \"Biodegradable and Functional Polymers\" and avoid its documented misconceptions, distinguishing it from superficially similar but incorrect reasoning.",
+      "concept_summary": "Biodegradability is NOT a property automatically guaranteed by using \"natural\" or \"green\" starting materials (e.g., PLA made from corn-derived lactic acid) — it is specifically a CONSEQUENCE of the polymer's backbone chemistry, particularly whether it contains hydrolytically-cleavable linkages (like PLA's ester linkages, which microorganisms/enzymes and environmental moisture can break down) versus a fully carbon-carbon backbone (like polyethylene's, which resists microbial/hydrolytic attack regardless of the monomer's biological origin) — a bio-based/renewable-feedstock origin and biodegradability are two INDEPENDENT properties that happen to correlate in some cases (PLA is both bio-based AND biodegradable) but not others (some bio-based polyethylene is chemically identical to petroleum-based polyethylene and equally non-biodegradable); and conducting polymers (like doped polyacetylene or polypyrrole) do NOT conduct electricity via the same free-electron \"sea\" mechanism as a metal — they conduct via an EXTENDED CONJUGATED pi-system (alternating single/double bonds along the backbone) that is subsequently DOPED (oxidized or reduced) to create charge carriers (polarons/solitons) that can migrate along and between chains — an undoped conjugated polymer is typically a poor conductor/semiconductor at best; doping is not optional decoration, it is the specific step that creates the mobile charge carriers responsible for meaningful conductivity.",
       "key_ideas": [
-        "[TEMPLATE] Key idea 1 for \"Biodegradable and Functional Polymers\"",
-        "[TEMPLATE] Key idea 2 for \"Biodegradable and Functional Polymers\"",
-        "[TEMPLATE] Key idea 3 for \"Biodegradable and Functional Polymers\""
+        "A polymer's biodegradability is determined by its backbone chemistry — specifically whether it contains hydrolytically-cleavable linkages (like PLA's ester bonds) that microorganisms and environmental moisture can break down — this is entirely independent of whether the feedstock used to make it was bio-based or petroleum-derived.",
+        "Conducting polymers achieve meaningful conductivity through a two-part structural basis — an extended conjugated pi-system providing a pathway for charge delocalization, combined with a subsequent doping step (chemical oxidation or reduction) that creates genuinely mobile charge carriers (polarons/solitons) — conjugation alone, without doping, yields only modest semiconductor behavior, fundamentally different from a metal's inherent free-electron conductivity.",
+        "Core misconception to avoid: Biodegradability is determined by backbone chemistry (presence of hydrolytically-cleavable linkages like esters), not by whether the feedstock is bio-based or petroleum-based — these are independent properties."
       ],
       "common_misconceptions": [
         {
-          "misconception": "[TEMPLATE] Common misconception about \"Biodegradable and Functional Polymers\" — to be authored.",
-          "correction": "[TEMPLATE] Correction for that misconception — to be authored."
+          "misconception": "It's made from plants, so it should be biodegradable, unlike regular plastic.",
+          "correction": "Biodegradability is determined by backbone chemistry (presence of hydrolytically-cleavable linkages like esters), not by whether the feedstock is bio-based or petroleum-based — these are independent properties."
+        },
+        {
+          "misconception": "Conducting polymers conduct electricity because they have a chain of connected atoms, like a wire of free electrons, the same way metals do.",
+          "correction": "Conducting polymers require both an extended conjugated pi-system AND a subsequent doping step (oxidation or reduction, creating mobile charge carriers) to achieve meaningful conductivity — conjugation alone, without doping, gives only modest semiconductor behavior."
         }
       ],
       "visual_teaching_suggestions": [
-        "[TEMPLATE] Visual/diagram suggestion for \"Biodegradable and Functional Polymers\""
+        "Demonstration 1 (backbone-structure comparison for bio-polyethylene vs. PLA): Present the explicit hydrolyzable-linkage-presence comparison, deriving biodegradability from backbone chemistry, not feedstock origin.",
+        "Demonstration 2 (undoped-vs-doped conjugated-chain charge-carrier diagram): Present the explicit doping mechanism, deriving the conductivity increase from genuinely mobile charge carriers."
       ],
       "worked_example_blueprint": {
-        "setup": "[TEMPLATE] Worked example setup for \"Biodegradable and Functional Polymers\"",
+        "setup": "A plastic is made from corn-derived ethanol instead of petroleum, but ends up chemically identical to conventional polyethylene. Would you expect it to be biodegradable?",
         "steps": [
-          "[TEMPLATE] Step 1",
-          "[TEMPLATE] Step 2"
+          "Demonstration 1 (backbone-structure comparison for bio-polyethylene vs. PLA): Present the explicit hydrolyzable-linkage-presence comparison, deriving biodegradability from backbone chemistry, not feedstock origin.",
+          "Demonstration 2 (undoped-vs-doped conjugated-chain charge-carrier diagram): Present the explicit doping mechanism, deriving the conductivity increase from genuinely mobile charge carriers."
         ],
-        "expected_outcome": "[TEMPLATE] Expected outcome for the worked example on \"Biodegradable and Functional Polymers\""
+        "expected_outcome": "Student can (a) correctly evaluate a polymer's biodegradability from its backbone chemistry independent of feedstock origin, (b) correctly explain that conducting polymers require both conjugation and doping for meaningful conductivity."
       },
       "practice_blueprint": {
         "item_types": [
-          "[TEMPLATE] practice item type"
+          "TA-1 (SHOW): Present the explicit backbone-structure comparison for bio-polyethylene vs. PLA.",
+          "TA-2 (TELL): State the two-part conducting-polymer requirement (conjugation + doping) explicitly, anchored to the charge-carrier diagram.",
+          "TA-3 (DO): Student evaluates the biodegradability of an unfamiliar \"bio-based\" polymer from its backbone structure, and explains why an unfamiliar undoped conjugated polymer would need doping to conduct well.",
+          "TA-4 (TEST-THINKING): Present the MC-1 probe and ask the student to justify why bio-polyethylene is not biodegradable despite its renewable origin."
         ],
-        "difficulty_progression": "[TEMPLATE] progression appropriate for advanced-level practice",
-        "suggested_count": 5
+        "difficulty_progression": "Begin with recognition-level items distinguishing Biodegradable and Functional Polymers from its documented misconceptions, progress to application items requiring the student to predict outcomes in unfamiliar scenarios, and finish with items requiring justification of the correct reasoning over the misconception.",
+        "suggested_count": 8
       },
       "assessment_blueprint": {
         "formats": [
-          "[TEMPLATE] assessment format"
+          "FA-1: \"A plastic is made from corn-derived ethanol instead of petroleum, but ends up chemically identical to conventional polyethylene. Would you expect it to be biodegradable?\"",
+          "FA-2: \"Does an undoped conjugated polymer like polyacetylene conduct electricity as well as a doped one, or is doping actually necessary?\""
         ],
         "bloom_alignment": "evaluate",
-        "mastery_signal": "[TEMPLATE] mastery signal for \"Biodegradable and Functional Polymers\""
+        "mastery_signal": "Student can (a) correctly evaluate a polymer's biodegradability from its backbone chemistry independent of feedstock origin, (b) correctly explain that conducting polymers require both conjugation and doping for meaningful conductivity."
       },
       "real_world_applications": [
-        "[TEMPLATE] real-world application of \"Biodegradable and Functional Polymers\""
+        "This concept has no direct KG unlocks but consolidates condensation-polymer reasoning (`chem.poly.condensation`), forming a capstone application to green chemistry evaluation and materials-science contexts."
       ],
       "prerequisite_review_triggers": [
         "chem.poly.condensation"
