@@ -1555,10 +1555,10 @@
   furthest along at 60/744 from a prior session, and the owner's follow-up explicitly redirected
   to it: complete Educational Brain + Blueprints + Teaching Assets + KG, proven pipeline, fully
   independent of Mohammad's Mathematics work).
-- Seeded 5 more batches (batches 4-8 of the pre-generated 38-batch set) via
+- Seeded 6 more batches (batches 4-9 of the pre-generated 38-batch set) via
   `mcp__Supabase__execute_sql`, same verified method as before (real `chemistrySeedAssets.ts`
-  content, real `seedCanonicalSlug`/`hashContent` helpers). Chemistry: 60/744 → **160/744**
-  (all EXPLANATION, all DRAFT). 584 items remain (roughly 212 more explanations, 372 probes —
+  content, real `seedCanonicalSlug`/`hashContent` helpers). Chemistry: 60/744 → **180/744**
+  (all EXPLANATION, all DRAFT). 564 items remain (roughly 192 more explanations, 372 probes —
   probes haven't been touched yet in any batch).
 - Full integrity re-verified after this turn's batches: 0 duplicate canonicalSlugs, 0 orphan
   `explanation_assets` rows, 0 `lengthChars` mismatches, KG validator PASS (186/186 reachable,
