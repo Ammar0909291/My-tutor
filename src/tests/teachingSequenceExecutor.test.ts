@@ -213,7 +213,7 @@ describe('buildBlueprintContextBlock — Option B integration', () => {
     explanations: [],
   }
 
-  it('when a currentStepBlock is supplied, it REPLACES the full advisory PHYSICS TEACHING PLAN dump', () => {
+  it('when a currentStepBlock is supplied, it REPLACES the full advisory TEACHING PLAN dump', () => {
     const eb = ebContext({
       teachingSequence: 'Full authored sequence text that must not leak.',
       discoveryQuestions: 'Why do units matter?',
@@ -225,14 +225,17 @@ describe('buildBlueprintContextBlock — Option B integration', () => {
     expect(rendered).toContain('FIRST CONCEPT TURN')
     expect(rendered).toContain('Why do units matter?')
     // The old full-dump heading and the raw future-step content must be absent.
-    expect(rendered).not.toContain('PHYSICS TEACHING PLAN — follow this authored expert sequence')
+    expect(rendered).not.toContain('TEACHING PLAN — follow this authored expert sequence')
     expect(rendered).not.toContain('Full authored sequence text that must not leak.')
   })
 
   it('falls back to the full advisory dump when no currentStepBlock is passed (back-compat)', () => {
     const eb = ebContext({ teachingSequence: 'Full authored sequence text.' })
     const rendered = buildBlueprintContextBlock(content, eb)
-    expect(rendered).toContain('PHYSICS TEACHING PLAN — follow this authored expert sequence')
+    // Label was corrected from "PHYSICS TEACHING PLAN" to "TEACHING PLAN"
+    // once the isPhysics gate in loadEBConceptContext was removed — this
+    // block now populates for any subject, not physics only.
+    expect(rendered).toContain('TEACHING PLAN — follow this authored expert sequence')
     expect(rendered).toContain('Full authored sequence text.')
   })
 })

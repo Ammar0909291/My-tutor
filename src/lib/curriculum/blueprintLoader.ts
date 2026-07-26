@@ -1065,9 +1065,11 @@ export function loadBlueprintContent(conceptId: string): BlueprintContentResult 
  *
  * Pass `currentStepBlock` (Option B — Teaching Sequence Executor,
  * src/lib/teaching/teachingSequenceExecutor.ts) to replace the full
- * "PHYSICS TEACHING PLAN" advisory dump with the runtime-selected CURRENT
+ * "TEACHING PLAN" advisory dump with the runtime-selected CURRENT
  * step only. When omitted, the full advisory dump is used as before
- * (non-physics concepts, or physics concepts without a Teaching Plan).
+ * (concepts without an executor-selected step, or with no Teaching Plan
+ * at all — populated for any subject whose EB entry has these sections,
+ * not physics-specific despite the historical "P1" name).
  *
  * Returns an empty string when content is empty (e.g. old-format blueprint).
  */
@@ -1187,7 +1189,11 @@ export function buildBlueprintContextBlock(
     }
   }
 
-  // P1 — Physics Teaching Plan (Teaching Sequence + Tutor Actions + Discovery + Assessment)
+  // P1 — Teaching Plan (Teaching Sequence + Tutor Actions + Discovery + Assessment).
+  // Historical name "hasPhysicsPlan" kept (originally physics-only; the
+  // isPhysics gate that limited these fields to phys.* concepts has been
+  // removed from loadEBConceptContext — this now populates for any subject
+  // whose EB entry carries the section, chemistry included).
   const hasPhysicsPlan =
     ebContext?.teachingSequence ||
     ebContext?.tutorActions ||
@@ -1214,7 +1220,7 @@ export function buildBlueprintContextBlock(
       lines.push(`Concept: ${content.conceptId}`)
       hasContent = true
     }
-    lines.push('\nPHYSICS TEACHING PLAN — follow this authored expert sequence for this concept:')
+    lines.push('\nTEACHING PLAN — follow this authored expert sequence for this concept:')
     if (ebContext!.teachingSequence) {
       lines.push('\nTEACHING SEQUENCE (follow this order — do not invent a different order):')
       lines.push(ebContext!.teachingSequence)
