@@ -1540,6 +1540,12 @@
   via birth-taxonomy diagnostic). `math.nt` 8/36 → 13/36. Wave 4
   candidates (`extended-euclidean-algorithm`, `modular-arithmetic`, both
   Blueprint-grounded) computed. Full detail: `COVERAGE.md`.
+  **Batch 37 — math.nt Wave 4** (2026-07-26, autonomous loop iteration
+  27): 2 concepts authored (`extended-euclidean-algorithm`,
+  `modular-arithmetic`; both Blueprint reused by reference). `math.nt`
+  13/36 → 15/36. Wave 5 candidates (`bezout-identity` no-Blueprint,
+  `congruence`/`modular-inverse`/`fermats-little-theorem` all
+  Blueprint-grounded) computed. Full detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
