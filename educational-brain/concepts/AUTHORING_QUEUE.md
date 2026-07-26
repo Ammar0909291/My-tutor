@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1195** (= 1,775 KG concepts − 580 already `READY`, per
+Total queued: **1193** (= 1,775 KG concepts − 582 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -1163,7 +1163,8 @@ READY.
 math.nt Wave 3 part 2, moved to READY.
 **Row 629 removed 2026-07-26** — `math.nt.prime-number` authored
 math.nt Wave 2, moved to READY.
-| 630 | mathematics | 17 | `math.nt.modular-arithmetic` | Modular Arithmetic |
+**Row 630 removed 2026-07-26** — `math.nt.modular-arithmetic` authored
+math.nt Wave 4, moved to READY.
 **Row 631 removed 2026-07-26** — `math.nt.induction-applications`
 authored math.nt Wave 3 part 2, moved to READY.
 | 632 | mathematics | 17 | `math.alg.expression` | Algebraic Expression |
@@ -1469,7 +1470,8 @@ math.nt Wave 3, moved to READY.
 **Row 914 removed 2026-07-26** — `math.arith.fraction-addition`
 authored math.arith Wave 10 (final wave), moved to READY. `math.arith`
 now 58/58 — DOMAIN CERTIFIED.
-| 915 | mathematics | 21 | `math.nt.extended-euclidean-algorithm` | Extended Euclidean Algorithm |
+**Row 915 removed 2026-07-26** — `math.nt.extended-euclidean-algorithm`
+authored math.nt Wave 4, moved to READY.
 | 916 | mathematics | 21 | `math.nt.continued-fractions` | Continued Fractions |
 | 917 | mathematics | 21 | `math.alg.simplification` | Algebraic Simplification |
 | 918 | mathematics | 21 | `math.alg.polynomial-operations` | Polynomial Operations |

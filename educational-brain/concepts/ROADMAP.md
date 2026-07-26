@@ -13,16 +13,16 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **580** |
-| Remaining | **1,195** |
-| Completion percentage | **32.68%** |
+| Concepts with an Educational Brain entry | **582** |
+| Remaining | **1,193** |
+| Completion percentage | **32.79%** |
 
 *(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
 with an Educational Brain entry" rows had accumulated from prior sessions
 without being reconciled. Recomputed from this same file's §2 Subject
-progress table as currently stated per subject: 153 mathematics + 238
+progress table as currently stated per subject: 155 mathematics + 238
 physics + 3 english + 186 chemistry + 0 biology + 0 computer_science =
-580. Only the mathematics figure was independently re-verified by this
+582. Only the mathematics figure was independently re-verified by this
 batch by direct file count; the other subjects' figures are taken as
 already-recorded in §2 below, not re-audited by this batch, per this
 program's "mathematics only" scope this turn.)*
@@ -33,7 +33,7 @@ program's "mathematics only" scope this turn.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 153 | 16.85% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 155 | 17.07% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
@@ -958,9 +958,15 @@ record; the active default has moved to item 1b.**
     start per this program's established precedent (stick to the
     originally-computed wave set, don't re-split an enlarged pool):
     `math.nt.extended-euclidean-algorithm` (Blueprint exists) and
-    `math.nt.modular-arithmetic` (Blueprint exists) — both become Wave
-    4 candidates, to be re-verified fresh, not assumed, when Wave 4
-    begins.
+    `math.nt.modular-arithmetic` (Blueprint exists). Wave 4 (2026-07-26,
+    iteration 27) re-verified both fresh against the live KG (confirmed
+    still the only 2 ready concepts) and authored both — both Blueprint
+    reused by reference — raising `math.nt` to **15/36**. Wave 4's
+    authoring unlocked 4 new candidates, computed fresh:
+    `math.nt.bezout-identity` (no Blueprint), `math.nt.congruence`,
+    `math.nt.modular-inverse`, and `math.nt.fermats-little-theorem`
+    (all 3 Blueprint-grounded) — to be re-verified fresh, not assumed,
+    when Wave 5 begins.
 1. **(Historical, satisfied) `math.found` Wave 7**: the set of
    `math.found` nodes whose prerequisites were all READY after Wave 6.
 2. **(Historical, satisfied) `math.found` Waves 8-16 (52 remaining

@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 153 READY)
+## mathematics (908 concepts, 155 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -684,7 +684,7 @@ its subject KG.
 | nt | `math.nt.euclidean-algorithm` | Euclidean Algorithm | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.euclidean-algorithm.md` | READY |
 | nt | `math.nt.eulers-theorem` | Euler's Theorem | Yes | No | — | MISSING |
 | nt | `math.nt.eulers-totient` | Euler's Totient Function | No | Yes | `educational-brain/concepts/mathematics/math.nt.eulers-totient.md` | READY |
-| nt | `math.nt.extended-euclidean-algorithm` | Extended Euclidean Algorithm | Yes | No | — | MISSING |
+| nt | `math.nt.extended-euclidean-algorithm` | Extended Euclidean Algorithm | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.extended-euclidean-algorithm.md` | READY |
 | nt | `math.nt.fermats-little-theorem` | Fermat's Little Theorem | Yes | No | — | MISSING |
 | nt | `math.nt.fundamental-theorem-arithmetic` | Fundamental Theorem of Arithmetic | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.fundamental-theorem-arithmetic.md` | READY |
 | nt | `math.nt.gcd` | Greatest Common Divisor | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.gcd.md` | READY |
@@ -692,7 +692,7 @@ its subject KG.
 | nt | `math.nt.induction-applications` | Induction in Number Theory | No | Yes | `educational-brain/concepts/mathematics/math.nt.induction-applications.md` | READY |
 | nt | `math.nt.lcm` | Least Common Multiple | No | Yes | `educational-brain/concepts/mathematics/math.nt.lcm.md` | READY |
 | nt | `math.nt.linear-diophantine` | Linear Diophantine Equations | No | No | — | MISSING |
-| nt | `math.nt.modular-arithmetic` | Modular Arithmetic | Yes | No | — | MISSING |
+| nt | `math.nt.modular-arithmetic` | Modular Arithmetic | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.modular-arithmetic.md` | READY |
 | nt | `math.nt.modular-inverse` | Modular Inverse | Yes | No | — | MISSING |
 | nt | `math.nt.number-fields` | Number Fields | No | No | — | MISSING |
 | nt | `math.nt.pells-equation` | Pell's Equation | No | No | — | MISSING |
