@@ -1487,6 +1487,12 @@
   had Blueprints, misconceptions authored via birth-taxonomy
   diagnostic). `math.arith` 35/58 → 40/58, Wave 6 complete. Wave 7
   candidates (12) computed. Full detail: `COVERAGE.md`.
+  **Batch 29 — math.arith Wave 7 part 1** (2026-07-26, autonomous loop
+  iteration 19): 6 concepts authored (`absolute-value`,
+  `integer-arithmetic`, `remainder`, `order-of-operations`,
+  `exponent-rules`, `square-numbers`; all had Blueprints, reused by
+  reference). `math.arith` 40/58 → 46/58. Wave 7 part 2 (6 no-Blueprint
+  concepts) deferred. Full detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
