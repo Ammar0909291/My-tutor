@@ -1505,6 +1505,13 @@
   Blueprints). `math.arith` 52/58 → 55/58, only 3 concepts remain, all
   blocked on unauthored `math.nt.gcd`/`math.nt.lcm`. Full detail:
   `COVERAGE.md`.
+  **Batch 32 — math.arith Wave 9 + math.nt Wave 1** (2026-07-26,
+  autonomous loop iteration 22): 2 concepts authored
+  (`math.arith.irrational-roots`, no Blueprint; `math.nt.divisibility`,
+  Blueprint reused by reference — first `math.nt` entry, a bounded
+  cross-domain step to unblock `math.arith`). `math.arith` 55/58 →
+  56/58, only 2 concepts remain (blocked on `math.nt.gcd`/`lcm`).
+  `math.nt` 0/36 → 1/36. Full detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
