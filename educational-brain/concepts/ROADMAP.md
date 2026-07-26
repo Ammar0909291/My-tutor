@@ -13,11 +13,19 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **414** |
-| Concepts with an Educational Brain entry | **389** |
-| Concepts with an Educational Brain entry | **376** |
-| Remaining | **1,355** |
-| Completion percentage | **23.66%** |
+| Concepts with an Educational Brain entry | **473** |
+| Remaining | **1,302** |
+| Completion percentage | **26.65%** |
+
+*(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
+with an Educational Brain entry" rows had accumulated from prior sessions
+without being reconciled. Recomputed from this same file's §2 Subject
+progress table as currently stated per subject: 46 mathematics + 238
+physics + 3 english + 186 chemistry + 0 biology + 0 computer_science =
+473. Only the mathematics figure was independently re-verified by this
+batch by direct file count; the other subjects' figures are taken as
+already-recorded in §2 below, not re-audited by this batch, per this
+program's "mathematics only" scope this turn.)*
 
 ---
 
@@ -25,7 +33,7 @@ below from source whenever this file is updated, never hand-estimate.
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 37 | 4.07% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 46 | 5.07% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
@@ -153,8 +161,8 @@ Brain entries.
 |---|---|
 | Domain | `math.found` (mathematics / Foundations) |
 | Total concepts in domain | 82 |
-| Authored this program | 36 |
-| Remaining | 46 |
+| Authored this program | 45 |
+| Remaining | 37 |
 | Status | **IN PROGRESS** — not eligible for Domain Certification yet |
 
 Wave 1 (5, level 0-1): `mathematical-thinking` (root), `abstraction`,
@@ -168,11 +176,20 @@ Wave 2 (8, level 2): `definition`, `generalization`,
 `logical-connectives`, `predicate`, `set`. Wave 5 (8, level 5): `cartesian-product`,
 `empty-set`, `ordered-pair`, `predicate-logic`, `set-builder-notation`,
 `set-membership`, `set-theory-axiomatic`, `truth-table`. Wave 6 (5, level 6,
-complete this batch): `logical-equivalence`, `ordinal-number`, `quantifiers`,
-`relation`, `subset`. Wave 7 (to be computed from the live KG before the next
-batch) is next. No other domain will be started until all 82 `math.found` concepts
-are `READY` and Domain Certification passes — **except by explicit,
-subject-specific user instruction, as happened this batch (§3b)**.
+found already on `main` at the start of this batch, authored by a prior
+session — uses a non-conformant numbered-heading scheme, a confirmed
+Quality Gate 3 violation, see `COVERAGE.md` Delivery history):
+`logical-equivalence`, `ordinal-number`, `quantifiers`,
+`relation`, `subset`. Wave 7 (9, level 7, this batch, 2026-07-26):
+`proper-subset`, `set-equality`, `set-operations`, `power-set`,
+`partition`, `reflexive-relation`, `symmetric-relation`,
+`transitive-relation`, `rules-of-inference`. Wave 8 candidates computed
+programmatically from the live KG (10): `proof`, `union`, `intersection`,
+`set-difference`, `complement`, `venn-diagram`, `equivalence-relation`,
+`partial-order`, `function-set-theoretic`, `cardinal-arithmetic`. No
+other domain will be started until all 82 `math.found` concepts are
+`READY` and Domain Certification passes — **except by explicit,
+subject-specific user instruction, as happened in §3b/§3c below**.
 
 ---
 

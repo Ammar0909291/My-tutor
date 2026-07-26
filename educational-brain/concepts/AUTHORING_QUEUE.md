@@ -21,7 +21,11 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1524** (= 1,775 KG concepts − 251 already `READY`).
+Total queued: **1302** (= 1,775 KG concepts − 473 already `READY`, per
+`ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
+at 1524/251 from an earlier point in the project; row numbers within the
+table below are not fully renumbered to match, see the row-removal note
+at math.found Wave 7's position below).
 
 **Domain Certification Mode override (binding until `math.found` reaches
 82/82, EXPLICITLY SUSPENDED for physics-specific batches by direct user
@@ -664,15 +668,17 @@ the program's default cross-subject priority order (`math.found` Wave
 | 159 | computer_science | 6 | `cs.net.application-protocols` | Application-Layer Protocols |
 | 160 | computer_science | 6 | `cs.net.wireless-mobile-networks` | Wireless and Mobile Networks |
 | 161 | computer_science | 6 | `cs.theory.context-free-grammars` | Context-Free Grammars |
-| 162 | mathematics | 7 | `math.found.rules-of-inference` | Rules of Inference |
-| 163 | mathematics | 7 | `math.found.proper-subset` | Proper Subset |
-| 164 | mathematics | 7 | `math.found.set-equality` | Set Equality |
-| 165 | mathematics | 7 | `math.found.set-operations` | Set Operations |
-| 166 | mathematics | 7 | `math.found.power-set` | Power Set |
-| 167 | mathematics | 7 | `math.found.reflexive-relation` | Reflexive Relation |
-| 168 | mathematics | 7 | `math.found.symmetric-relation` | Symmetric Relation |
-| 169 | mathematics | 7 | `math.found.transitive-relation` | Transitive Relation |
-| 170 | mathematics | 7 | `math.found.partition` | Partition |
+**Rows 162-170 removed 2026-07-26** — `math.found.rules-of-inference`,
+`math.found.proper-subset`, `math.found.set-equality`,
+`math.found.set-operations`, `math.found.power-set`,
+`math.found.reflexive-relation`, `math.found.symmetric-relation`,
+`math.found.transitive-relation`, `math.found.partition` were all
+authored this batch (Wave 7) and moved to READY in
+`EDUCATIONAL_BRAIN_INDEX.md`; no longer queued. Remaining row numbers
+below are NOT renumbered (documentation-only file, no automation reads
+row numbers as stable IDs — the concept ID column is the actual key) —
+a future full regeneration will re-derive clean sequential numbering
+from source, per this file's own standing generation script.
 | 171 | mathematics | 7 | `math.found.function-set-theoretic` | Function (Set-Theoretic) |
 | 172 | mathematics | 7 | `math.found.cardinal-arithmetic` | Cardinal Arithmetic |
 | 173 | mathematics | 7 | `math.geom.triangle-angle-sum` | Triangle Angle Sum Theorem |

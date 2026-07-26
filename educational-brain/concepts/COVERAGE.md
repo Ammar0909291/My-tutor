@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
+| mathematics | 908 | 46 | `math.arith.fractions` + 45 `math.found.*` entries (Waves 1-7) — math.found domain IN PROGRESS (45/82), see Delivery history. **Known bookkeeping note**: a `math.found` Wave 6 (5 entries: logical-equivalence, ordinal-number, quantifiers, relation, subset) was found already on `main` at the start of this batch, authored by a separate/prior session, using a non-conformant numbered-heading scheme (Quality Gate 3 violation, see Delivery history) — not corrected this batch, flagged as the top-priority item for the next mathematics session. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -1343,3 +1343,77 @@ Chemistry total: 148 → 157 / 186 (84.41%). Level 16 complete.
 - `chem.poly.addition` — Addition Polymerization
 - `chem.sol.osmosis` — Osmosis and Osmotic Pressure
 Chemistry: 157 → 165/186 (88.71%). New domains: chem.carb, chem.poly.
+
+### Mathematics — Curriculum Completion Program resumed, Forensic Audit + math.found Wave 7 (2026-07-26)
+
+**Forensic audit** (per this batch's own standing "audit first" instruction):
+resynced local `main` to `origin/main` (local branch pointer was stale,
+diverged 53/50 commits — reset per this program's own standing
+resync-if-clean instruction). Programmatic count confirmed the KG
+(908 concepts, 24 domains, unchanged), Blueprints (529/908), the
+Curriculum Production Pipeline's own Teaching Assets
+(`docs/mathematics/teaching-assets/assets.json`, 908/908 status=draft —
+complete since the 2026-07-05 dashboard's 877/908 snapshot, pipeline-owned,
+not touched by this program), AssetIdentity seed status
+(`src/lib/teaching/assets/brainSeedAssets.ts`: only `math.arith.fractions`
+seeded, 1/908 — Wave-0-era, unchanged), and runtime registration
+(mathematics fully registered in `knowledgeGraph.ts`'s `SUBJECT_ADAPTERS`/
+`ID_PREFIX_TO_SUBJECT`, confirmed live). Discovered a `math.found` Wave 6
+(5 entries — logical-equivalence, ordinal-number, quantifiers, relation,
+subset) already committed to `main` (commit `8bd06f6d`) that this
+program's own memory record had not yet caught up to — bringing the true
+pre-batch count to 36 `math.found` entries (31 Waves 1-5 + 5 Wave 6), not
+31.
+
+**Validation finding (Quality Gate 3 violation, confirmed against
+`QUALITY_GATES.md`'s own written criterion)**: all 5 Wave 6 entries use a
+numbered "1. Concept Identity" ... "21. Certification Status" heading
+scheme that `QUALITY_GATES.md` Gate 3 explicitly retires ("no
+numbered-heading variant (retired per the Standard's §1.2 finding)"). The
+other 31 pre-existing `math.found` entries, and this batch's own 9 new
+entries, all use the correct unnumbered `## Identity` ... `## Version
+History` scheme matching `EDUCATIONAL_BRAIN_STANDARD.md` §3 exactly
+(verified: identical heading list across all 9 new files via diff). This
+is a genuine, documented defect, not merely a style preference — but
+fixing it means restructuring content across section boundaries that
+don't map 1:1 (the numbered scheme lacks standalone "Learning Objective,"
+"Core Understanding," "Why Students Fail," and "Cross-Subject
+Connections" sections, and carries three sections — "Authoring Notes,"
+"Open Questions," "Certification Status" — the Standard doesn't specify),
+so it is a genuine reformatting/re-authoring task, not a find-and-replace.
+Following this program's own established precedent (Batch 2, 2026-07-22:
+"reconciliation is tracked as separate future work... not retroactively
+applied this batch"), this was NOT fixed in this batch — flagged here and
+in the mathematics summary row above as the top-priority item for the
+next mathematics session.
+
+**Wave 7** — authored the 9 concepts whose prerequisites became fully
+satisfied after Wave 6, verified programmatically against the live KG
+(`requires` every element already in the authored set): `math.found.proper-subset`,
+`math.found.set-equality`, `math.found.set-operations`,
+`math.found.power-set`, `math.found.partition`,
+`math.found.reflexive-relation`, `math.found.symmetric-relation`,
+`math.found.transitive-relation`, `math.found.rules-of-inference`. 7 of
+the 9 had existing Blueprints reused by reference (Misconception
+Registries cited by ID with birth-type classification added, worked
+examples/transfer probes/mastery gates never restated); 2
+(`proper-subset`, `set-equality`) had none, stated explicitly, with all
+misconceptions authored directly via the birth-taxonomy diagnostic
+procedure. One authoring-time self-correction recorded honestly: this
+batch's own first draft of `math.found.partition`'s Curriculum Feedback
+section briefly conflated the separate Blueprint-corpus and
+Educational-Brain-corpus production-order numbering (both called "this
+corpus" in the source Blueprint's own Component 7 note) — caught and
+corrected before commit; the corrected text distinguishes the two
+pipelines explicitly. All 9 entries verified against the Standard's
+exact 21-section heading order (identical across all 9, confirmed by
+diff). `math.found` 36/82 → **45/82** — still IN PROGRESS; Wave 8
+candidates computed programmatically against the live KG (10):
+`proof`, `union`, `intersection`, `set-difference`, `complement`,
+`venn-diagram`, `equivalence-relation`, `partial-order`,
+`function-set-theoretic`, `cardinal-arithmetic`. No other domain
+touched. All five tracking files (`EDUCATIONAL_BRAIN_INDEX.md`,
+`AUTHORING_QUEUE.md`, `ROADMAP.md`, `QUALITY.md`, `COVERAGE.md`)
+regenerated/updated for the 9 new entries in this same commit; re-validated
+0 duplicates, 0 orphans (every `math.found.*.md` filename resolves to a
+real KG id) across all 46 mathematics entries.
