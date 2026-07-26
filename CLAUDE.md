@@ -1446,6 +1446,11 @@
   iteration 11): 3 concepts authored (`mixed-numbers`,
   `improper-fractions`, `ratios`). `math.arith` 5/58 → 8/58, Wave 2
   complete. Wave 3 candidates computed (6). Full detail: `COVERAGE.md`.
+  **Batch 22 — math.arith Wave 3** (2026-07-26, autonomous loop
+  iteration 12): 6 concepts authored (`counting-sequence`,
+  `subitizing`, `place-value`, `number-line`, `proportion`,
+  `unit-rate`; 2 had no Blueprint). `math.arith` 8/58 → 14/58. Wave 4
+  candidates computed (8). Full detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
