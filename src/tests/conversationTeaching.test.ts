@@ -475,3 +475,148 @@ describe('Hindi and Russian prompts carry the same fixes (mirrored, not English-
     expect(ru).toContain('ИСКЛЮЧЕНИЕ')
   })
 })
+
+// Loop 4: bare acknowledgements must not reset confusion counters
+describe('Loop 4 — preserve confusion state across acknowledgements', () => {
+  it('consecutiveDontKnows survives a bare acknowledgement (no signal)', () => {
+    let state = initialConversationState('c1')
+    // Turn 1: "I don't know"
+    state = advanceConversationState(state, {
+      askedQuestion: false, signalCorrect: null, recoveryFired: true, dontKnowSignal: true,
+    })
+    expect(state.consecutiveDontKnows).toBe(1)
+
+    // Turn 2: "ok" — no signal, no recovery (bare acknowledgement)
+    state = advanceConversationState(state, {
+      askedQuestion: false, signalCorrect: null, recoveryFired: false, dontKnowSignal: false,
+    })
+    expect(state.consecutiveDontKnows).toBe(1) // NOT reset to 0
+
+    // Turn 3: "I still don't know"
+    state = advanceConversationState(state, {
+      askedQuestion: false, signalCorrect: null, recoveryFired: true, dontKnowSignal: true,
+    })
+    expect(state.consecutiveDontKnows).toBe(2) // correctly reaches the Hard Rule 1 threshold
+  })
+
+  it('consecutiveDontKnows resets on a genuine correct answer', () => {
+    let state = initialConversationState('c1')
+    state = advanceConversationState(state, {
+      askedQuestion: false, signalCorrect: null, recoveryFired: true, dontKnowSignal: true,
+    })
+    expect(state.consecutiveDontKnows).toBe(1)
+
+    // Correct answer resets the chain
+    state = advanceConversationState(state, {
+      askedQuestion: true, signalCorrect: true, recoveryFired: false, dontKnowSignal: false,
+    })
+    expect(state.consecutiveDontKnows).toBe(0)
+  })
+
+  it('consecutiveDontKnows does NOT reset on a wrong answer (non-recovery failure)', () => {
+    let state = initialConversationState('c1')
+    state = advanceConversationState(state, {
+      askedQuestion: false, signalCorrect: null, recoveryFired: true, dontKnowSignal: true,
+    })
+    expect(state.consecutiveDontKnows).toBe(1)
+
+    // Wrong answer without a recovery utterance — confusion is still present
+    state = advanceConversationState(state, {
+      askedQuestion: true, signalCorrect: false, recoveryFired: false, dontKnowSignal: false,
+    })
+    expect(state.consecutiveDontKnows).toBe(1) // preserved
+  })
+})
+
+// Loop 5: turn directive includes "already answered" guard when questions
+// have been answered correctly, preventing re-interrogation of resolved moments
+describe('Loop 5 — never re-interrogate resolved moments', () => {
+  it('turn directive includes already-answered count when asking after correct answers', () => {
+    const state = {
+      ...initialConversationState('c1'),
+      phase: 'PRACTICE' as const,
+      correctAtCheck: 1,
+      correctAtPractice: 1,
+      demonstrated: true,
+    }
+    const directive = buildTurnDirective({
+      state,
+      nextMove: 'ask',
+      maxParagraphs: 4,
+      workedExampleFirst: false,
+      visualType: null,
+    })
+    expect(directive).toContain('already answered 2 question(s) correctly')
+    expect(directive).toContain('DIFFERENT question')
+  })
+
+  it('turn directive omits the guard when no correct answers yet', () => {
+    const state = {
+      ...initialConversationState('c1'),
+      phase: 'OBSERVE' as const,
+    }
+    const directive = buildTurnDirective({
+      state,
+      nextMove: 'ask',
+      maxParagraphs: 4,
+      workedExampleFirst: false,
+      visualType: null,
+    })
+    expect(directive).not.toContain('already answered')
+  })
+
+  it('turn directive omits the guard on teach/show moves (no question to re-ask)', () => {
+    const state = {
+      ...initialConversationState('c1'),
+      phase: 'GUIDE' as const,
+      correctAtCheck: 1,
+      demonstrated: true,
+    }
+    const directive = buildTurnDirective({
+      state,
+      nextMove: 'teach',
+      maxParagraphs: 4,
+      workedExampleFirst: false,
+      visualType: null,
+    })
+    expect(directive).not.toContain('already answered')
+  })
+})
+
+// Loop 6: analogy world ceiling fires after demonstration + multiple explanations
+describe('Loop 6 — analogy control', () => {
+  it('analogy ceiling fires when demonstrated and explanationCount >= 2', () => {
+    const state = {
+      ...initialConversationState('c1'),
+      phase: 'GUIDE' as const,
+      demonstrated: true,
+      explanationCount: 2,
+    }
+    const directive = buildTurnDirective({
+      state,
+      nextMove: 'teach',
+      maxParagraphs: 4,
+      workedExampleFirst: false,
+      visualType: null,
+    })
+    expect(directive).toContain('ANALOGY CEILING')
+    expect(directive).toContain('reuse the SAME world')
+  })
+
+  it('analogy ceiling does not fire early in the lesson', () => {
+    const state = {
+      ...initialConversationState('c1'),
+      phase: 'OBSERVE' as const,
+      demonstrated: false,
+      explanationCount: 0,
+    }
+    const directive = buildTurnDirective({
+      state,
+      nextMove: 'ask',
+      maxParagraphs: 4,
+      workedExampleFirst: false,
+      visualType: null,
+    })
+    expect(directive).not.toContain('ANALOGY CEILING')
+  })
+})

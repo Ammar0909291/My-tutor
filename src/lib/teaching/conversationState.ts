@@ -220,11 +220,15 @@ export function advanceConversationState(
   next.totalKnowledgeProbes = (prev.totalKnowledgeProbes ?? 0) + (evidence.isPriorKnowledgeProbe ? 1 : 0)
 
   // Hard Rule 1: track consecutive student "I don't know / didn't understand"
-  // signals so decideNextMove can end discovery after 2. Resets on any turn
-  // where the student didn't fire a dont_know/dont_understand recovery.
-  next.consecutiveDontKnows = evidence.dontKnowSignal
-    ? (prev.consecutiveDontKnows ?? 0) + 1
-    : 0
+  // signals so decideNextMove can end discovery after 2. Loop 4 fix: only
+  // reset on a genuine correct answer — a bare acknowledgement ("ok", "hmm")
+  // between two confusion signals must NOT break the chain.
+  if (evidence.dontKnowSignal) {
+    next.consecutiveDontKnows = (prev.consecutiveDontKnows ?? 0) + 1
+  } else if (evidence.signalCorrect === true) {
+    next.consecutiveDontKnows = 0
+  }
+  // else: neutral turn (acknowledgement / no signal) — preserve the count
 
   // Bug 5/6/11 — student-state counters for explicit action requests.
   if (evidence.learnerRequest === 'diagram') next.diagramRequests = prev.diagramRequests + 1
@@ -468,6 +472,17 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   }
   if (p.visualType) {
     lines.push(`- Visual-first: a ${p.visualType.replace(/_/g, ' ')} teaches this faster than prose — lead with it (emit the VISUAL tag) and keep the text around it minimal.`)
+  }
+  // Loop 5: when questions have already been answered at this phase, tell
+  // the LLM explicitly — prevents re-asking resolved questions.
+  const answered = p.state.correctAtCheck + p.state.correctAtPractice
+  if (answered > 0 && p.nextMove === 'ask') {
+    lines.push(`- The student has already answered ${answered} question(s) correctly this lesson. Ask a DIFFERENT question — never re-ask one they already got right.`)
+  }
+  // Loop 6: analogy world ceiling — max 2 distinct analogy worlds per
+  // concept. After DEMONSTRATE, cap new analogy introductions.
+  if (p.state.demonstrated && p.state.explanationCount >= 2) {
+    lines.push('- ANALOGY CEILING: at most 2 analogy worlds per concept. If you already used analogies, reuse the SAME world — do not introduce a new metaphor.')
   }
   return lines.join('\n')
 }
