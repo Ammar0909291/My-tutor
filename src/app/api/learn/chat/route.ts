@@ -114,6 +114,10 @@ export async function POST(req: Request) {
     const snapshotLastPrereqGap = typeof snapshot?.lastPrerequisiteGap === 'string' ? snapshot.lastPrerequisiteGap : null
     // P1: cumulative failure counter — incremented on recovery turns and false SIGNALs
     const snapshotSessionFailureCount = typeof snapshot?.sessionFailureCount === 'number' ? snapshot.sessionFailureCount : 0
+    // Loop 2: narrative tracker state — hookDelivered/coreTaught/hookResolved
+    const snapshotNarrativeState = (snapshot?.narrativeState && typeof snapshot.narrativeState === 'object')
+      ? snapshot.narrativeState as import('@/lib/teaching/narrativeTracker').NarrativeState
+      : null
     // W2-2 (ADR 09): lesson stage progress carried across turns
     const snapshotLessonStageProgress = (
       snapshot?.lessonStageProgress &&
@@ -1273,6 +1277,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     let masteryGatePendingHoisted = false
     let learnerRequestHoisted: import('@/lib/teaching/masteryGate').LearnerRequest | null = null
     let conversationStateAfterTurnHoisted: import('@/lib/teaching/conversationState').ConversationState | null = null
+    // Loop 2: narrative arc tracking — gates lesson completion on core-taught milestone
+    let narrativeStateHoisted: import('@/lib/teaching/narrativeTracker').NarrativeState | null = null
     let masteryCompletionSuppressedHoisted = false
     // Stance Enforcement (Claude Recommendation #6) — violations found on
     // this turn by enforceStance(), for provenance/telemetry only; never
@@ -1459,6 +1465,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const convConceptId = snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? resolvedConceptId ?? null
           conversationStateHoisted = readConversationState(snapshot?.conversationState, convConceptId)
 
+          // Loop 2: read narrative state for this concept's teaching arc
+          {
+            const { readNarrativeState } = await import('@/lib/teaching/narrativeTracker')
+            narrativeStateHoisted = readNarrativeState(snapshotNarrativeState)
+          }
+
           // P3 — Learner autonomy, now mastery-gated (Bug 4): "next topic"
           // with verified mastery is honored as before; before mastery it
           // becomes an explicit Continue Learning / Skip Anyway choice —
@@ -1467,7 +1479,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (detectAutonomyRequest(message)) {
             evidenceAutonomyHoisted = true
             if (masteryVerified(conversationStateHoisted)) {
-              systemPrompt += buildAutonomyBlock()
+              // Loop 2: even with mastery verified, if the narrative arc is
+              // incomplete, inject a close block instead of full autonomy —
+              // the tutor must circle back before concluding.
+              const { narrativeComplete, buildNarrativeCloseBlock } = await import('@/lib/teaching/narrativeTracker')
+              if (!narrativeComplete(narrativeStateHoisted!)) {
+                systemPrompt += buildNarrativeCloseBlock(lessonCtx?.lessonTitle ?? 'this concept')
+              } else {
+                systemPrompt += buildAutonomyBlock()
+              }
             } else {
               systemPrompt += buildMasteryGateBlock()
               masteryGatePendingHoisted = true
@@ -2219,6 +2239,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
             dontKnowSignal: isDontKnowSignal(recoveryKeyHoisted),
           })
+
+          // Loop 2: advance narrative state with this turn's evidence
+          if (narrativeStateHoisted) {
+            const { advanceNarrativeState, deriveNarrativeEvidence } = await import('@/lib/teaching/narrativeTracker')
+            const evidence = deriveNarrativeEvidence(
+              conversationStateAfterTurnHoisted.phase,
+              conversationStateAfterTurnHoisted.demonstrated,
+              evidenceMoveHoisted ?? 'teach',
+            )
+            narrativeStateHoisted = advanceNarrativeState(narrativeStateHoisted, evidence)
+          }
+
           const stanceVerdict = enforceStance({
             text: cleanText,
             state: conversationStateAfterTurnHoisted,
@@ -2938,7 +2970,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             })
           } catch { /* spine is strictly parallel — never affects the turn */ }
 
-          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0 || teachingStepUpdateHoisted) {
+          const narrativeUpdate = narrativeStateHoisted ? { narrativeState: narrativeStateHoisted } : {}
+
+          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0 || Object.keys(narrativeUpdate).length > 0 || teachingStepUpdateHoisted) {
             // Atomic JSONB merge (same pattern as the school snapshot above).
             const libSnapshotDelta = {
               ...(conceptChanged ? { currentConceptNodeId: newLibConceptId } : {}),
@@ -2947,6 +2981,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               ...episodeUpdate,
               ...failureCountUpdate,
               ...conversationStateUpdate,
+              ...narrativeUpdate,
               // Option B — Teaching Sequence Executor: persist the runtime-
               // selected step so the next turn (or a resumed session) reads
               // it back via readTeachingStepIndex() instead of restarting.
