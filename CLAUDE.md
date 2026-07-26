@@ -1422,6 +1422,10 @@
   authored (`irrational-numbers`). `math.found` 79/82 → 80/82, only 2
   concepts remain (real-numbers → complex-numbers). Full detail:
   `COVERAGE.md`.
+  **Batch 17 — Wave 15** (2026-07-26, autonomous loop iteration 7): 1 concept
+  authored (`real-numbers`). `math.found` 80/82 → 81/82, only
+  `complex-numbers` remains — the final wave before Domain Certification
+  eligibility. Full detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
