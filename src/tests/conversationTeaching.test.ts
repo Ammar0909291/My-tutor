@@ -620,3 +620,52 @@ describe('Loop 6 — analogy control', () => {
     expect(directive).not.toContain('ANALOGY CEILING')
   })
 })
+
+// Loop 7: assessment anchor fires only at CHECK/PRACTICE/TRANSFER + 'ask' with lessonGoal
+describe('Loop 7 — lesson goal verification', () => {
+  it('assessment anchor fires at CHECK with ask move and lessonGoal', () => {
+    const state = { ...initialConversationState('c1'), phase: 'CHECK' as const }
+    const directive = buildTurnDirective({
+      state, nextMove: 'ask', maxParagraphs: 4, workedExampleFirst: false, visualType: null,
+      lessonGoal: 'Understand Newton\'s Second Law',
+    })
+    expect(directive).toContain('Assessment anchor')
+    expect(directive).toContain('Newton\'s Second Law')
+  })
+
+  it('assessment anchor fires at PRACTICE phase', () => {
+    const state = { ...initialConversationState('c1'), phase: 'PRACTICE' as const }
+    const directive = buildTurnDirective({
+      state, nextMove: 'ask', maxParagraphs: 4, workedExampleFirst: false, visualType: null,
+      lessonGoal: 'Apply fractions',
+    })
+    expect(directive).toContain('Assessment anchor')
+  })
+
+  it('assessment anchor does NOT fire at OBSERVE phase', () => {
+    const state = { ...initialConversationState('c1'), phase: 'OBSERVE' as const }
+    const directive = buildTurnDirective({
+      state, nextMove: 'ask', maxParagraphs: 4, workedExampleFirst: false, visualType: null,
+      lessonGoal: 'Understand gravity',
+    })
+    expect(directive).not.toContain('Assessment anchor')
+  })
+
+  it('assessment anchor does NOT fire on teach move', () => {
+    const state = { ...initialConversationState('c1'), phase: 'CHECK' as const }
+    const directive = buildTurnDirective({
+      state, nextMove: 'teach', maxParagraphs: 4, workedExampleFirst: false, visualType: null,
+      lessonGoal: 'Understand gravity',
+    })
+    expect(directive).not.toContain('Assessment anchor')
+  })
+
+  it('assessment anchor does NOT fire when lessonGoal is null', () => {
+    const state = { ...initialConversationState('c1'), phase: 'CHECK' as const }
+    const directive = buildTurnDirective({
+      state, nextMove: 'ask', maxParagraphs: 4, workedExampleFirst: false, visualType: null,
+      lessonGoal: null,
+    })
+    expect(directive).not.toContain('Assessment anchor')
+  })
+})

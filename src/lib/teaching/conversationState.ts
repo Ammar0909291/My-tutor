@@ -427,6 +427,7 @@ export interface TurnDirectiveParams {
    *  say "no teaching payload" — the First Lesson Protocol's opening move
    *  IS a teaching payload (creating the need). */
   firstLessonActive?: boolean
+  lessonGoal?: string | null
 }
 
 const PHASE_FRAME: Record<TeachingPhase, string> = {
@@ -483,6 +484,9 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   // concept. After DEMONSTRATE, cap new analogy introductions.
   if (p.state.demonstrated && p.state.explanationCount >= 2) {
     lines.push('- ANALOGY CEILING: at most 2 analogy worlds per concept. If you already used analogies, reuse the SAME world — do not introduce a new metaphor.')
+  }
+  if (p.lessonGoal && p.nextMove === 'ask' && (p.state.phase === 'CHECK' || p.state.phase === 'PRACTICE' || p.state.phase === 'TRANSFER')) {
+    lines.push(`- Assessment anchor: this question must verify the lesson goal "${p.lessonGoal}" — not a tangent, not trivia, not vocabulary alone.`)
   }
   return lines.join('\n')
 }
