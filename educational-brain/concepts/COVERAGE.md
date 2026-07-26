@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 148 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 8 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm` — `math.nt` domain IN PROGRESS, 8/36, now confirmed as a full-campaign active default per ROADMAP.md §5 item 1b), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
+| mathematics | 908 | 153 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 13 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications` — `math.nt` domain IN PROGRESS, 13/36, full-campaign active default per ROADMAP.md §5 item 1b), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -2980,6 +2980,68 @@ misconceptions to be authored directly via the birth-taxonomy
 diagnostic procedure. No other domain touched. All five tracking
 files updated in this same commit; re-validated 0 duplicates, 0
 orphans, 0 Quality Gate 3 violations across all 148 mathematics
+entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.nt Wave 3 part 2 (2026-07-26, autonomous loop iteration 26)
+
+Autonomous loop iteration 26, continuing immediately after Wave 3 part
+1. Git resync found zero concurrent commits at this iteration's start.
+
+**Repair-audit first**: re-ran the Quality Gate 3 heading-conformance
+check across all 148 pre-batch mathematics entries. **0 violations
+found**.
+
+**Wave 3 part 2 candidates re-verified programmatically**: the live KG
+now also shows `math.nt.extended-euclidean-algorithm` (Blueprint
+exists) and `math.nt.modular-arithmetic` (Blueprint exists) newly
+ready, unlocked by Wave 3 part 1's `euclidean-algorithm` and
+`division-algorithm` — per this program's established precedent, stuck
+to the originally-deferred 5-concept Wave 3 part 2 set rather than
+re-splitting the enlarged pool; the 2 new arrivals become Wave 4
+candidates, computed fresh at that wave's own start.
+
+Authored the 5 no-Blueprint concepts deferred from Wave 3's split,
+each via the birth-taxonomy diagnostic procedure:
+
+- `math.nt.divisibility-rules` (requires `divisibility`) — MC-1
+  DIVISIBILITY-RULE-FOR-3-CONFUSED-WITH-RULE-FOR-9 (FOUNDATIONAL,
+  Type 6 analogy overextension), MC-2
+  DIVISIBILITY-BY-4-CHECKED-USING-ONLY-THE-LAST-DIGIT (Type 1), MC-3
+  DIVISIBILITY-RULE-FOR-11-ALTERNATING-SIGNS-MISASSIGNED (Type 4).
+- `math.nt.composite-number` (requires `prime-number`) — MC-1
+  ONE-MISCLASSIFIED-AS-COMPOSITE-BY-EXCLUSION (FOUNDATIONAL, Type 1,
+  the mirror boundary case of `prime-number`'s own MC-1), MC-2
+  COMPOSITE-DEFINITION-CONFLATED-WITH-HAVING-ANY-FACTORS (Type 3
+  language contamination), MC-3
+  SMALLEST-COMPOSITE-NUMBER-MISIDENTIFIED (Type 2 perceptual
+  intuition).
+- `math.nt.sieve-of-eratosthenes` (requires `prime-number`,
+  `divisibility`) — MC-1
+  NUMBER-ITSELF-CROSSED-OUT-AS-A-MULTIPLE-OF-ITSELF (FOUNDATIONAL,
+  Type 4), MC-2 SIEVE-STOPPED-BEFORE-REACHING-SQRT-LIMIT (Type 1),
+  MC-3 SURVIVING-ONE-ROUND-ASSUMED-SUFFICIENT-FOR-PRIMALITY (Type 1).
+- `math.nt.eulers-totient` (requires `divisibility`,
+  `prime-factorization`) — MC-1
+  TOTIENT-FORMULA-COUNTS-PRIME-FACTOR-MULTIPLICITY-INSTEAD-OF-DISTINCT-PRIMES
+  (FOUNDATIONAL, Type 4), MC-2 COPRIME-CONFUSED-WITH-PRIME (Type 3
+  language contamination), MC-3 TOTIENT-OF-A-PRIME-OFF-BY-ONE (Type
+  1).
+- `math.nt.induction-applications` (requires
+  `math.found.proof-by-induction`, `divisibility`) — MC-1
+  INDUCTIVE-HYPOTHESIS-NOT-ACTUALLY-USED-IN-INDUCTIVE-STEP
+  (FOUNDATIONAL, Type 5), MC-2 BASE-CASE-OMITTED-OR-TRIVIALIZED (Type
+  5), MC-3
+  DIVISIBILITY-INDUCTIVE-STEP-NOT-STRUCTURED-TO-EXPOSE-THE-DIVISOR
+  (Type 6 analogy overextension, from the more common summation-proof
+  inductive-step pattern).
+
+`math.nt` now **13/36**. No other domain touched. All five tracking
+files updated in this same commit; re-validated 0 duplicates, 0
+orphans, 0 Quality Gate 3 violations across all 153 mathematics
 entries.
 
 Full validation this batch: all 6 subject KG validators PASS (0

@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1200** (= 1,775 KG concepts − 575 already `READY`, per
+Total queued: **1195** (= 1,775 KG concepts − 580 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -1159,11 +1159,13 @@ Wave 2 (part 2), moved to READY.
 **Rows 626-627 removed 2026-07-26** — `math.arith.square-roots`,
 `math.arith.mental-arithmetic` authored math.arith Wave 8, moved to
 READY.
-| 628 | mathematics | 17 | `math.nt.divisibility-rules` | Divisibility Rules |
+**Row 628 removed 2026-07-26** — `math.nt.divisibility-rules` authored
+math.nt Wave 3 part 2, moved to READY.
 **Row 629 removed 2026-07-26** — `math.nt.prime-number` authored
 math.nt Wave 2, moved to READY.
 | 630 | mathematics | 17 | `math.nt.modular-arithmetic` | Modular Arithmetic |
-| 631 | mathematics | 17 | `math.nt.induction-applications` | Induction in Number Theory |
+**Row 631 removed 2026-07-26** — `math.nt.induction-applications`
+authored math.nt Wave 3 part 2, moved to READY.
 | 632 | mathematics | 17 | `math.alg.expression` | Algebraic Expression |
 | 633 | mathematics | 17 | `math.geom.pythagorean-theorem` | Pythagorean Theorem |
 | 634 | mathematics | 17 | `math.geom.line-equation` | Equations of Lines |
@@ -1227,8 +1229,9 @@ math.arith Wave 5 part 1, moved to READY.
 authored math.arith Wave 9, moved to READY.
 **Row 690 removed 2026-07-26** — `math.arith.scientific-notation`
 authored math.arith Wave 7 part 2, moved to READY.
-| 691 | mathematics | 18 | `math.nt.composite-number` | Composite Number |
-| 692 | mathematics | 18 | `math.nt.sieve-of-eratosthenes` | Sieve of Eratosthenes |
+**Rows 691-692 removed 2026-07-26** — `math.nt.composite-number`,
+`math.nt.sieve-of-eratosthenes` authored math.nt Wave 3 part 2, moved
+to READY.
 **Row 693 removed 2026-07-26** — `math.nt.prime-factorization`
 authored math.nt Wave 2, moved to READY.
 | 694 | mathematics | 18 | `math.nt.congruence` | Congruence |
@@ -1310,7 +1313,8 @@ authored math.nt Wave 3, moved to READY.
 2, moved to READY.
 | 765 | mathematics | 19 | `math.nt.residue-classes` | Residue Classes |
 | 766 | mathematics | 19 | `math.nt.eulers-theorem` | Euler's Theorem |
-| 767 | mathematics | 19 | `math.nt.eulers-totient` | Euler's Totient Function |
+**Row 767 removed 2026-07-26** — `math.nt.eulers-totient` authored
+math.nt Wave 3 part 2, moved to READY.
 | 768 | mathematics | 19 | `math.nt.primality-testing` | Primality Testing |
 | 769 | mathematics | 19 | `math.alg.coefficient` | Coefficient |
 | 770 | mathematics | 19 | `math.alg.solution-set` | Solution Set |

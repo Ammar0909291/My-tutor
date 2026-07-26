@@ -13,16 +13,16 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **575** |
-| Remaining | **1,200** |
-| Completion percentage | **32.39%** |
+| Concepts with an Educational Brain entry | **580** |
+| Remaining | **1,195** |
+| Completion percentage | **32.68%** |
 
 *(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
 with an Educational Brain entry" rows had accumulated from prior sessions
 without being reconciled. Recomputed from this same file's §2 Subject
-progress table as currently stated per subject: 148 mathematics + 238
+progress table as currently stated per subject: 153 mathematics + 238
 physics + 3 english + 186 chemistry + 0 biology + 0 computer_science =
-575. Only the mathematics figure was independently re-verified by this
+580. Only the mathematics figure was independently re-verified by this
 batch by direct file count; the other subjects' figures are taken as
 already-recorded in §2 below, not re-audited by this batch, per this
 program's "mathematics only" scope this turn.)*
@@ -33,7 +33,7 @@ program's "mathematics only" scope this turn.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 148 | 16.30% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 153 | 16.85% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
@@ -945,21 +945,22 @@ record; the active default has moved to item 1b.**
     certification, and `math.nt` already had a running head start
     (5/36) plus strong Blueprint coverage, continuing `math.nt` is the
     natural, lowest-friction default — no stronger reason to switch
-    domains emerged. Wave 3 (2026-07-26, iteration 25): 8 candidates
-    computed fresh from the live KG (`divisibility-rules`,
-    `composite-number`, `sieve-of-eratosthenes`,
-    `fundamental-theorem-arithmetic`, `euclidean-algorithm`,
-    `division-algorithm`, `eulers-totient`,
-    `induction-applications`), split 3 Blueprint-grounded / 5
-    no-Blueprint, following this program's established
-    Blueprint-first split pattern — this wave authored the 3
+    domains emerged. Wave 3 (8 candidates, split 3 Blueprint-grounded /
+    5 no-Blueprint): part 1 (2026-07-26, iteration 25) authored the 3
     Blueprint-grounded concepts (`fundamental-theorem-arithmetic`,
-    `euclidean-algorithm`, `division-algorithm`), all reused by
-    reference. `math.nt` now **8/36**. Wave 3 part 2 (deferred): the 5
+    `euclidean-algorithm`, `division-algorithm`), raising `math.nt` to
+    8/36; part 2 (2026-07-26, iteration 26) authored the 5
     no-Blueprint concepts (`divisibility-rules`, `composite-number`,
     `sieve-of-eratosthenes`, `eulers-totient`,
-    `induction-applications`), misconceptions to be authored directly
-    via the birth-taxonomy diagnostic procedure.
+    `induction-applications`), each via the birth-taxonomy diagnostic
+    procedure, raising `math.nt` to **13/36**. Wave 3's authoring
+    unlocked 2 new candidates deliberately deferred at Wave 3's own
+    start per this program's established precedent (stick to the
+    originally-computed wave set, don't re-split an enlarged pool):
+    `math.nt.extended-euclidean-algorithm` (Blueprint exists) and
+    `math.nt.modular-arithmetic` (Blueprint exists) — both become Wave
+    4 candidates, to be re-verified fresh, not assumed, when Wave 4
+    begins.
 1. **(Historical, satisfied) `math.found` Wave 7**: the set of
    `math.found` nodes whose prerequisites were all READY after Wave 6.
 2. **(Historical, satisfied) `math.found` Waves 8-16 (52 remaining

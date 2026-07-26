@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 148 READY)
+## mathematics (908 concepts, 153 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -675,21 +675,21 @@ its subject KG.
 | nt | `math.nt.analytic-number-theory` | Analytic Number Theory | Yes | No | — | MISSING |
 | nt | `math.nt.bezout-identity` | Bézout's Identity | No | No | — | MISSING |
 | nt | `math.nt.chinese-remainder-theorem` | Chinese Remainder Theorem | Yes | No | — | MISSING |
-| nt | `math.nt.composite-number` | Composite Number | No | No | — | MISSING |
+| nt | `math.nt.composite-number` | Composite Number | No | Yes | `educational-brain/concepts/mathematics/math.nt.composite-number.md` | READY |
 | nt | `math.nt.congruence` | Congruence | Yes | No | — | MISSING |
 | nt | `math.nt.continued-fractions` | Continued Fractions | Yes | No | — | MISSING |
 | nt | `math.nt.divisibility` | Divisibility | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.divisibility.md` | READY |
-| nt | `math.nt.divisibility-rules` | Divisibility Rules | No | No | — | MISSING |
+| nt | `math.nt.divisibility-rules` | Divisibility Rules | No | Yes | `educational-brain/concepts/mathematics/math.nt.divisibility-rules.md` | READY |
 | nt | `math.nt.division-algorithm` | Division Algorithm | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.division-algorithm.md` | READY |
 | nt | `math.nt.euclidean-algorithm` | Euclidean Algorithm | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.euclidean-algorithm.md` | READY |
 | nt | `math.nt.eulers-theorem` | Euler's Theorem | Yes | No | — | MISSING |
-| nt | `math.nt.eulers-totient` | Euler's Totient Function | No | No | — | MISSING |
+| nt | `math.nt.eulers-totient` | Euler's Totient Function | No | Yes | `educational-brain/concepts/mathematics/math.nt.eulers-totient.md` | READY |
 | nt | `math.nt.extended-euclidean-algorithm` | Extended Euclidean Algorithm | Yes | No | — | MISSING |
 | nt | `math.nt.fermats-little-theorem` | Fermat's Little Theorem | Yes | No | — | MISSING |
 | nt | `math.nt.fundamental-theorem-arithmetic` | Fundamental Theorem of Arithmetic | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.fundamental-theorem-arithmetic.md` | READY |
 | nt | `math.nt.gcd` | Greatest Common Divisor | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.gcd.md` | READY |
 | nt | `math.nt.general-diophantine` | Diophantine Equations | No | No | — | MISSING |
-| nt | `math.nt.induction-applications` | Induction in Number Theory | No | No | — | MISSING |
+| nt | `math.nt.induction-applications` | Induction in Number Theory | No | Yes | `educational-brain/concepts/mathematics/math.nt.induction-applications.md` | READY |
 | nt | `math.nt.lcm` | Least Common Multiple | No | Yes | `educational-brain/concepts/mathematics/math.nt.lcm.md` | READY |
 | nt | `math.nt.linear-diophantine` | Linear Diophantine Equations | No | No | — | MISSING |
 | nt | `math.nt.modular-arithmetic` | Modular Arithmetic | Yes | No | — | MISSING |
@@ -705,7 +705,7 @@ its subject KG.
 | nt | `math.nt.residue-classes` | Residue Classes | No | No | — | MISSING |
 | nt | `math.nt.riemann-hypothesis` | Riemann Hypothesis | Yes | No | — | MISSING |
 | nt | `math.nt.rsa-basics` | RSA Cryptography (Number-Theoretic Basis) | No | No | — | MISSING |
-| nt | `math.nt.sieve-of-eratosthenes` | Sieve of Eratosthenes | No | No | — | MISSING |
+| nt | `math.nt.sieve-of-eratosthenes` | Sieve of Eratosthenes | No | Yes | `educational-brain/concepts/mathematics/math.nt.sieve-of-eratosthenes.md` | READY |
 | num | `math.num.cholesky` | Cholesky Factorization (Numerical) | No | No | — | MISSING |
 | num | `math.num.error-analysis` | Error Analysis | No | No | — | MISSING |
 | num | `math.num.euler-method` | Euler's Method (Numerical ODE) | No | No | — | MISSING |
