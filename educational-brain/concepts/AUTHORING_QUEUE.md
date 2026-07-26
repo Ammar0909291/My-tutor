@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1226** (= 1,775 KG concepts − 549 already `READY`, per
+Total queued: **1220** (= 1,775 KG concepts − 555 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -1082,15 +1082,17 @@ to READY.
 | 561 | computer_science | 15 | `cs.oop.inheritance` | Inheritance |
 | 562 | computer_science | 15 | `cs.db.relational-model` | The Relational Model |
 | 563 | computer_science | 15 | `cs.se.software-testing` | Software Testing Fundamentals |
-| 564 | mathematics | 16 | `math.arith.absolute-value` | Absolute Value |
-| 565 | mathematics | 16 | `math.arith.integer-arithmetic` | Integer Arithmetic |
+**Rows 564-565 removed 2026-07-26** — `math.arith.absolute-value`,
+`math.arith.integer-arithmetic` authored math.arith Wave 7 part 1,
+moved to READY.
 | 566 | mathematics | 16 | `math.arith.long-multiplication` | Long Multiplication |
 | 567 | mathematics | 16 | `math.arith.mental-multiplication` | Mental Multiplication |
-| 568 | mathematics | 16 | `math.arith.remainder` | Remainder |
+**Row 568 removed 2026-07-26** — `math.arith.remainder` authored
+math.arith Wave 7 part 1, moved to READY.
 | 569 | mathematics | 16 | `math.arith.divisor-dividend` | Divisor and Dividend |
-| 570 | mathematics | 16 | `math.arith.order-of-operations` | Order of Operations |
-| 571 | mathematics | 16 | `math.arith.exponent-rules` | Exponent Rules |
-| 572 | mathematics | 16 | `math.arith.square-numbers` | Perfect Squares |
+**Rows 570-572 removed 2026-07-26** — `math.arith.order-of-operations`,
+`math.arith.exponent-rules`, `math.arith.square-numbers` authored
+math.arith Wave 7 part 1, moved to READY.
 | 573 | mathematics | 16 | `math.arith.cube-numbers` | Perfect Cubes |
 | 574 | mathematics | 16 | `math.nt.divisibility` | Divisibility |
 | 575 | mathematics | 16 | `math.nt.division-algorithm` | Division Algorithm |
