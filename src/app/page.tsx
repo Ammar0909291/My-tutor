@@ -45,8 +45,6 @@ const FAQ_KEYS = [
   { q: 'faq_q5', a: 'faq_a5' },
 ] as const
 
-const AVATAR_COLORS = ['var(--orange)', 'var(--blue)', 'var(--green)', 'var(--yellow)', 'var(--pink)']
-
 const FEAT_ICON_BG = ['var(--purple)', 'var(--blue)', 'var(--green)']
 
 export default function HomePage() {
@@ -198,18 +196,6 @@ export default function HomePage() {
                   </Link>
                 </>
               )}
-            </div>
-
-            {/* Avatar row */}
-            <div className={styles.avatarRow}>
-              <div className={styles.avatarStack}>
-                {AVATAR_COLORS.map((c, i) => (
-                  <div key={i} className={styles.avatarChip} style={{ background: c, marginLeft: i > 0 ? -10 : 0, zIndex: 5 - i }}>
-                    {['А','М','Д','К','С'][i]}
-                  </div>
-                ))}
-              </div>
-              <p className={styles.avatarProofText}>{t('hero_social_proof')}</p>
             </div>
           </div>
 

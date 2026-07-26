@@ -224,7 +224,7 @@ describe('Brain Validation — milestone measurements (simulated mixed session)'
   })
 
   it('flag OFF: identical decisions are recorded as shadow — legacy serving untouched', () => {
-    delete process.env.ENABLE_BRAIN_RUNTIME
+    process.env.ENABLE_BRAIN_RUNTIME = '0'
     for (const t of TRAFFIC) {
       const decision = decideTeaching(understandStudentTurn(inputs(t.over)))
       const plan = planDispatch(decision, { assembledAvailable: t.assembled })

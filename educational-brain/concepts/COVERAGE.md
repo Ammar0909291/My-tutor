@@ -11,10 +11,10 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 37 | `math.arith.fractions` + 36 `math.found.*` entries (Waves 1-6) — math.found domain IN PROGRESS (36/82), see Delivery history |
+| mathematics | 908 | 128 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 46 `math.arith.*` entries (`fractions`, `counting`, `fraction-equivalence`, `fraction-multiplication`, `fraction-reciprocal`, `mixed-numbers`, `improper-fractions`, `ratios`, `counting-sequence`, `subitizing`, `place-value`, `number-line`, `proportion`, `unit-rate`, `ones-tens-hundreds`, `addition`, `decimals`, `expanded-form`, `number-base`, `ordering`, `direct-variation`, `inverse-variation`, `subtraction`, `multiplication`, `percentages`, `rounding`, `carrying`, `mental-addition`, `decimal-operations`, `terminating-decimals`, `repeating-decimals`, `negative-numbers`, `division`, `significant-figures`, `exponentiation`, `column-addition`, `borrowing`, `multiplication-table`, `percentage-calculations`, `estimation`, `absolute-value`, `integer-arithmetic`, `remainder`, `order-of-operations`, `exponent-rules`, `square-numbers` — `math.arith` domain IN PROGRESS, 46/58), see Delivery history. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
-| chemistry | 186 | 136 | levels 0–14 complete (136/186); domains started: chem.found, chem.atomic, chem.state, chem.thermo, chem.elect, chem.surface, chem.env, chem.period, chem.kinet, chem.sol, chem.equil, chem.anal, chem.bond, chem.sblock, chem.redox, chem.dblock, chem.org, chem.pblock, chem.solid, chem.hyd, chem.hal, chem.coord — IN PROGRESS |
+| chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
 
@@ -632,6 +632,17 @@ retrieval engine. Per-entry completeness against the tracked fields is in
   their 24 rows to `EDUCATIONAL_BRAIN_INDEX.md`, `QUALITY.md`, or removed
   them from `AUTHORING_QUEUE.md` — a bookkeeping gap corrected as part of
   that merge, not left inconsistent.**
+  **Correction (2026-07-25, does not rewrite the historical record above):**
+  the "KEY DISCOVERY" claim that all 186 chemistry Blueprint entries are
+  `[TEMPLATE]` placeholders is now stale — a separate completion program
+  (2026-07-25) fully authored all 186 `docs/curriculum/blueprints/chem.*.md`
+  Blueprints (16-section format) and transcribed them into
+  `docs/chemistry/teaching-assets/assets.json` (all 186 entries now
+  `status: draft`, not `placeholder`). New chemistry EB entries authored
+  from 2026-07-25 onward correctly cite these real Blueprints in their
+  Blueprint References section; the 165 entries authored before this date
+  still carry the now-inaccurate "no Blueprint content exists" statement
+  and were not retroactively rewritten (out of scope for this batch).
 
 - **Batch 16 — Physics Wave 12 (2026-07-23)**: continuing the same
   mandatory-rules production cycle immediately following Wave 11 in this
@@ -1288,3 +1299,1346 @@ future sessions resume the program's default cross-subject priority
 order (see `ROADMAP.md` §5) unless given an equally explicit,
 subject-specific override, exactly as this wave-24 physics campaign
 itself began.
+### Batch 29 — Chemistry level 14 (2026-07-23)
+Authored 15 level-14 concepts in topological order: `chem.coord.applications`, `chem.coord.bonding`, `chem.coord.isomerism`, `chem.dblock.organometallics`, `chem.elect.batteries`, `chem.elect.corrosion`, `chem.elect.electrolysis`, `chem.elect.standard-electrode`, `chem.hal.introduction`, `chem.hyd.arenes`, `chem.hyd.conformations`, `chem.hyd.petroleum`, `chem.org.reactive-intermediates`, `chem.sblock.water`, `chem.state.liquids`. Chemistry: 121 → 136/186.
+
+### Batch 30 — Chemistry level 15 (2026-07-24)
+Authored 12 level-15 Chemistry Educational Brain entries in strict topological order:
+- `chem.elect.industrial` — Hall-Héroult, Down's cell, chloralkali, electroplating, electrorefining
+- `chem.elect.nernst` — Nernst equation, concentration cells, pH/ISE applications
+- `chem.hal.cfcs` — DCM, CHCl₃, CCl₄, iodoform test, CFC ozone depletion, Montreal Protocol, HCFCs/HFCs/HFOs
+- `chem.hal.haloarenes` — C–X partial double-bond character, resistance to SN, SNAr/Meisenheimer, Dow process, o/p-directing deactivators
+- `chem.hal.sn1` — two-step ionisation/attack, racemisation, factors, 1,2-shifts
+- `chem.hal.sn2` — concerted backside attack, Walden inversion, substrate/solvent/nucleophile effects, applications
+- `chem.hyd.polycyclic` — naphthalene/anthracene/phenanthrene EAS selectivity; pyridine/pyrrole/furan/thiophene aromaticity and reactivity; purines/pyrimidines
+- `chem.nitro.nitro-compounds` — nitro group structure, meta-direction, reduction ladder (Sn/HCl vs. Zn/NH₄Cl), nitronium electrophile, TNT
+- `chem.org.mechanisms` — NERP classification, curved-arrow conventions, bond cleavage types, mechanism identification from conditions
+- `chem.sol.vapour-pressure` — Raoult's law, vapour pressure lowering, ideal/non-ideal deviations, colligative property tree
+- `chem.state.phase-diagram` — P–T diagram features, triple point, critical point, water's negative fusion slope, CO₂ diagram, Clausius-Clapeyron
+- `chem.surface.surfactants` — amphiphilic structure, CMC, micelle formation (hydrophobic effect = entropic), surfactant types, detergency mechanism, HLB
+
+Chemistry total: 136 → 148 / 186 (79.57%). Level 15 complete.
+
+### Batch 31 — Chemistry level 16 (2026-07-24)
+Authored 9 level-16 Chemistry Educational Brain entries in strict topological order:
+- `chem.alc.alcohols` — classification; H-bonding bp; acidity/NaOH vs. phenol; substitution (Lucas test); dehydration (Zaitsev, 140°C ether vs 170°C alkene); oxidation (PCC→aldehyde, Jones→acid, 3°→none); esterification
+- `chem.elect.concentration-cell` — E° = 0 but E ≠ 0; Nernst; high concentration = cathode; entropic driving force; Nernst potential for neurons; pH electrode
+- `chem.hal.elimination` — E2 (concerted, anti-periplanar, bimolecular, Zaitsev); E1 (via carbocation, same RDS as SN1); Hofmann rule (bulky base → less substituted alkene); substitution vs. elimination decision guide
+- `chem.hal.grignard` — RMgX preparation; polarity inversion (C+ → C−); addition to HCHO/RCHO/ketone/ester/CO₂; anhydrous requirement (pKₐ ~50); organolithium comparison
+- `chem.hyd.alkenes` — sp² geometry; Markovnikov's rule (mechanistic); anti-Markovnikov hydroboration (BH₃/THF, H₂O₂); bromonium ion (anti addition of Br₂); acid hydration/oxymercuration; catalytic hydrogenation (syn); ozonolysis
+- `chem.org.arrow-pushing` — arrow = electron pair (tail = source, head = destination); 5 arrow types; chain rule; formal charge verification; common error diagnosis
+- `chem.org.pericyclic` — cycloaddition/electrocyclic/sigmatropic; W–H rules ([4n+2] thermal allowed, [4n] forbidden); Diels-Alder (s-cis, electron-rich diene + EWG dienophile, stereospecific); endo/exo (kinetic vs. thermodynamic)
+- `chem.sol.activity` — activity coefficient γ; a = γc; positive/negative deviations; ionic strength I = ½Σcᵢzᵢ²; Debye–Hückel limiting law; impact on K and Nernst equation
+- `chem.sol.colligative` — VP lowering/bp elevation/fp depression/osmotic pressure; ΔTb = Kbmi, ΔTf = Kfmi, π = iMRT; van 't Hoff factor i; one-cause-four-effects model; molar mass determination
+
+Chemistry total: 148 → 157 / 186 (84.41%). Level 16 complete.
+
+### Batch 32 — Chemistry level 17 (2026-07-24)
+- `chem.alc.diols` — Diols and Polyols
+- `chem.alc.ethers` — Ethers
+- `chem.alc.phenols` — Phenols
+- `chem.carb.aldehydes` — Aldehydes
+- `chem.hyd.alkynes` — Alkynes
+- `chem.nitro.amines` — Amines
+- `chem.poly.addition` — Addition Polymerization
+- `chem.sol.osmosis` — Osmosis and Osmotic Pressure
+Chemistry: 157 → 165/186 (88.71%). New domains: chem.carb, chem.poly.
+
+### Mathematics — Curriculum Completion Program resumed, Forensic Audit + math.found Wave 7 (2026-07-26)
+
+**Forensic audit** (per this batch's own standing "audit first" instruction):
+resynced local `main` to `origin/main` (local branch pointer was stale,
+diverged 53/50 commits — reset per this program's own standing
+resync-if-clean instruction). Programmatic count confirmed the KG
+(908 concepts, 24 domains, unchanged), Blueprints (529/908), the
+Curriculum Production Pipeline's own Teaching Assets
+(`docs/mathematics/teaching-assets/assets.json`, 908/908 status=draft —
+complete since the 2026-07-05 dashboard's 877/908 snapshot, pipeline-owned,
+not touched by this program), AssetIdentity seed status
+(`src/lib/teaching/assets/brainSeedAssets.ts`: only `math.arith.fractions`
+seeded, 1/908 — Wave-0-era, unchanged), and runtime registration
+(mathematics fully registered in `knowledgeGraph.ts`'s `SUBJECT_ADAPTERS`/
+`ID_PREFIX_TO_SUBJECT`, confirmed live). Discovered a `math.found` Wave 6
+(5 entries — logical-equivalence, ordinal-number, quantifiers, relation,
+subset) already committed to `main` (commit `8bd06f6d`) that this
+program's own memory record had not yet caught up to — bringing the true
+pre-batch count to 36 `math.found` entries (31 Waves 1-5 + 5 Wave 6), not
+31.
+
+**Validation finding (Quality Gate 3 violation, confirmed against
+`QUALITY_GATES.md`'s own written criterion)**: all 5 Wave 6 entries use a
+numbered "1. Concept Identity" ... "21. Certification Status" heading
+scheme that `QUALITY_GATES.md` Gate 3 explicitly retires ("no
+numbered-heading variant (retired per the Standard's §1.2 finding)"). The
+other 31 pre-existing `math.found` entries, and this batch's own 9 new
+entries, all use the correct unnumbered `## Identity` ... `## Version
+History` scheme matching `EDUCATIONAL_BRAIN_STANDARD.md` §3 exactly
+(verified: identical heading list across all 9 new files via diff). This
+is a genuine, documented defect, not merely a style preference — but
+fixing it means restructuring content across section boundaries that
+don't map 1:1 (the numbered scheme lacks standalone "Learning Objective,"
+"Core Understanding," "Why Students Fail," and "Cross-Subject
+Connections" sections, and carries three sections — "Authoring Notes,"
+"Open Questions," "Certification Status" — the Standard doesn't specify),
+so it is a genuine reformatting/re-authoring task, not a find-and-replace.
+Following this program's own established precedent (Batch 2, 2026-07-22:
+"reconciliation is tracked as separate future work... not retroactively
+applied this batch"), this was NOT fixed in this batch — flagged here and
+in the mathematics summary row above as the top-priority item for the
+next mathematics session.
+
+**Wave 7** — authored the 9 concepts whose prerequisites became fully
+satisfied after Wave 6, verified programmatically against the live KG
+(`requires` every element already in the authored set): `math.found.proper-subset`,
+`math.found.set-equality`, `math.found.set-operations`,
+`math.found.power-set`, `math.found.partition`,
+`math.found.reflexive-relation`, `math.found.symmetric-relation`,
+`math.found.transitive-relation`, `math.found.rules-of-inference`. 7 of
+the 9 had existing Blueprints reused by reference (Misconception
+Registries cited by ID with birth-type classification added, worked
+examples/transfer probes/mastery gates never restated); 2
+(`proper-subset`, `set-equality`) had none, stated explicitly, with all
+misconceptions authored directly via the birth-taxonomy diagnostic
+procedure. One authoring-time self-correction recorded honestly: this
+batch's own first draft of `math.found.partition`'s Curriculum Feedback
+section briefly conflated the separate Blueprint-corpus and
+Educational-Brain-corpus production-order numbering (both called "this
+corpus" in the source Blueprint's own Component 7 note) — caught and
+corrected before commit; the corrected text distinguishes the two
+pipelines explicitly. All 9 entries verified against the Standard's
+exact 21-section heading order (identical across all 9, confirmed by
+diff). `math.found` 36/82 → **45/82** — still IN PROGRESS; Wave 8
+candidates computed programmatically against the live KG (10):
+`proof`, `union`, `intersection`, `set-difference`, `complement`,
+`venn-diagram`, `equivalence-relation`, `partial-order`,
+`function-set-theoretic`, `cardinal-arithmetic`. No other domain
+touched. All five tracking files (`EDUCATIONAL_BRAIN_INDEX.md`,
+`AUTHORING_QUEUE.md`, `ROADMAP.md`, `QUALITY.md`, `COVERAGE.md`)
+regenerated/updated for the 9 new entries in this same commit; re-validated
+0 duplicates, 0 orphans (every `math.found.*.md` filename resolves to a
+real KG id) across all 46 mathematics entries.
+
+### Mathematics — Quality Gate 3 repair + math.found Wave 8 (2026-07-26, same session)
+
+Per this batch's explicit standing instruction ("repair existing
+Mathematics Educational Brain entries FIRST if they violate the current
+standard"), ran a full Quality Gate 3 audit across all 46 pre-batch
+mathematics entries (comparing each file's `## ` heading list against
+`EDUCATIONAL_BRAIN_STANDARD.md`'s canonical 21-section list via diff).
+Found 6 violations, not 5: the previously-flagged `math.found` Wave 6
+batch (`logical-equivalence`, `ordinal-number`, `quantifiers`,
+`relation`, `subset`) plus a newly-discovered one — `math.arith.fractions`
+itself, the original Delivery-5 seed entry (2026-07-10), predates
+`EDUCATIONAL_BRAIN_STANDARD.md`'s existence and used its own earlier
+unnumbered-but-differently-named heading scheme (`Identity`, `Mental
+models`, `Why beginners fail here`, `Explanation library`, etc. — not
+the current Standard's exact section names).
+
+**All 6 repaired**, restructured to the exact 21-section Standard
+scheme, with all content preserved losslessly (verified: no bullet,
+example, misconception, or teaching note dropped in any of the 6
+diffs). For `math.arith.fractions` specifically — the only one of the
+6 with live runtime consumers — re-verified that
+`src/lib/teaching/assets/brainSeedAssets.ts`'s five `source:` citation
+comments (which name specific sub-labels: "Explanation library, Age
+8–11 (mechanism)", "Explanation library, Returning teen/adult",
+"Misconception library M1"/"M2") still resolve to the identical text,
+now nested under renamed parent sections; `brainSeedAssets.ts` itself
+was NOT modified (out of this program's scope). Also corrected this
+entry's own stale `estimated_hours: ~4` to the canonical KG value of 20.
+Added standalone Learning Objective, Teaching Sequence, Blueprint
+References, and Runtime Asset References sections to all 6 repaired
+files (none existed pre-repair); each file's Version History gained a
+v1.1 entry documenting the repair. **0 Quality Gate 3 violations remain
+in mathematics** as of this batch.
+
+**Wave 8** — authored the 10 concepts whose prerequisites became fully
+satisfied after Wave 7, verified programmatically against the live KG:
+`math.found.proof`, `union`, `intersection`, `set-difference`,
+`complement`, `venn-diagram`, `equivalence-relation`, `partial-order`,
+`function-set-theoretic`, `cardinal-arithmetic`. 5 of the 10 (`proof`,
+`equivalence-relation`, `partial-order`, `function-set-theoretic`,
+`cardinal-arithmetic`) had existing Blueprints reused by reference; 5
+(the direct children of `math.found.set-operations` — `union`,
+`intersection`, `set-difference`, `complement`, `venn-diagram`) had
+none, each authored directly via the birth-taxonomy diagnostic
+procedure while explicitly reusing `math.found.set-operations`'s own
+already-authored survey content by reference rather than duplicating it
+(e.g. `set-difference`'s and `complement`'s MC-1 entries cite that
+concept's own MC-3/MC-1 by ID instead of re-deriving the identical
+asymmetry/universal-set lessons). All 10 verified against the Standard's
+exact 21-section heading order.
+
+`math.found` 45/82 → **55/82** — still IN PROGRESS; Wave 9 candidates
+computed programmatically against the live KG (12): `direct-proof`,
+`proof-by-contradiction`, `proof-by-contrapositive`, `proof-by-cases`,
+`existence-proof`, `writing-mathematics`, `theorem`, `conjecture`,
+`equivalence-class`, `total-order`, `hasse-diagram`, `cardinality`. No
+other domain touched. All five tracking files (`EDUCATIONAL_BRAIN_INDEX.md`,
+`AUTHORING_QUEUE.md`, `ROADMAP.md`, `QUALITY.md`, `COVERAGE.md`)
+updated in this same commit; re-validated 0 duplicates, 0 orphans, and
+(newly, this batch) 0 Quality Gate 3 heading violations across all 56
+mathematics entries.
+
+### Mathematics — math.found Wave 9 (2026-07-26, autonomous loop iteration)
+
+Triggered by the user invoking a dynamic `/loop` continuation of the
+Mathematics Educational Brain Autonomous Completion Program. Re-synced
+`main` (no new commits since the prior batch's push) and re-ran the full
+Quality Gate 3 audit across all 56 pre-batch mathematics entries — 0
+violations found, confirming the prior batch's repair held.
+
+**Wave 9** — authored the 8 concepts whose prerequisites became fully
+satisfied after Wave 8, all forming one coherent sub-domain (the proof-
+family children of `math.found.proof`, plus its two freestanding
+siblings `theorem` and `conjecture`), verified programmatically against
+the live KG: `direct-proof`, `proof-by-contradiction`,
+`proof-by-contrapositive`, `proof-by-cases`, `existence-proof`,
+`writing-mathematics`, `theorem`, `conjecture`. None of the 8 had an
+existing Blueprint — all authored via the birth-taxonomy diagnostic
+procedure, each explicitly reusing `math.found.proof`'s own already-
+authored worked examples (the n-even/n²-even direct proof, the
+√2-irrationality contradiction proof, the n²−n+41 proof-by-example
+counterexample) by reference rather than restating them — e.g.
+`direct-proof`'s own Demonstrations section narrates `math.found.proof`'s
+existing example with structural labels added, not a new example;
+`conjecture`'s MC-1 explicitly extends `math.found.proof`'s own MC-1
+(proof-by-example) to the terminology of what counts as a theorem.
+`proof-by-contrapositive`'s MC-1 (confusing contrapositive with converse/
+inverse) was identified as the single highest-stakes misconception in
+this wave — arguably the most common named error in introductory proof-
+writing generally — and given Foundational weight accordingly.
+
+`math.found` 55/82 → **63/82** — still IN PROGRESS; Wave 10 candidates
+computed programmatically against the live KG (7): `uniqueness-proof`,
+`lemma`, `corollary`, `equivalence-class`, `total-order`,
+`hasse-diagram`, `cardinality`. No other domain touched. All five
+tracking files updated in this same commit; re-validated 0 duplicates,
+0 orphans, 0 Quality Gate 3 violations across all 64 mathematics
+entries.
+
+### Mathematics — math.found Wave 10 (2026-07-26, autonomous loop iteration 2)
+
+Re-synced `main` (one new unrelated commit, `6aed2aa2`, a Groq error-
+classification fix — fast-forwarded, zero overlap) and re-ran the full
+Quality Gate 3 audit across all 64 pre-batch mathematics entries — 0
+violations found.
+
+**Wave 10** — authored the 7 concepts whose prerequisites became fully
+satisfied after Wave 9, verified programmatically against the live KG:
+`uniqueness-proof`, `lemma`, `corollary`, `equivalence-class`,
+`total-order`, `hasse-diagram`, `cardinality`. 3 of the 7
+(`equivalence-class`, `total-order`, `cardinality`) had existing
+Blueprints reused by reference; 4 (`uniqueness-proof`, `lemma`,
+`corollary`, `hasse-diagram`) had none, authored via the birth-taxonomy
+diagnostic procedure. `lemma` and `corollary` are sibling entries — both
+cite `math.found.theorem`'s own MC-1 (role-vs-rigor conflation) by
+reference rather than re-deriving it, since both are direct, specific
+instances of that same misconception applied to their own labels; each
+then contributes one genuinely new misconception of its own (lemma's
+extraction-purpose question; corollary's restatement-vs-genuine-content
+distinction). `uniqueness-proof` directly extends `math.found.
+existence-proof`'s own existence/uniqueness scope distinction from the
+uniqueness side.
+
+`math.found` 63/82 → **70/82** — only 12 concepts now remain:
+`proof-by-induction`, `strong-induction`, `well-ordering-principle`,
+`finite-set`, `countable-set`, `uncountable-set`, `natural-numbers`,
+`integers`, `rational-numbers`, `irrational-numbers`, `real-numbers`,
+`complex-numbers`. Wave 11 candidates computed programmatically (2):
+`finite-set`, `natural-numbers` — the remaining concepts form a tight
+dependency chain (natural-numbers → integers → rational-numbers →
+irrational-numbers → real-numbers → complex-numbers, and separately
+proof-by-induction/strong-induction/well-ordering-principle depending
+on natural-numbers) that will resolve in a small number of further
+waves as math.found approaches Domain Certification. No other domain
+touched. All five tracking files updated in this same commit;
+re-validated 0 duplicates, 0 orphans, 0 Quality Gate 3 violations
+across all 71 mathematics entries.
+
+### Mathematics — math.found Wave 11 (2026-07-26, autonomous loop iteration 3)
+
+Autonomous `/loop` iteration 3, per the 2026-07-26 loop-activation
+standing instruction. Git resync: local `main` was in sync with
+`origin/main` at commit `8e102e44` (no divergence, no new commits to
+reconcile) at this iteration's start.
+
+**Repair-audit first** (per this program's standing per-iteration
+discipline): re-ran the Quality Gate 3 heading-conformance check across
+all 71 pre-batch mathematics entries. **0 violations found** — the
+prior iteration's repair work (Wave 6 batch + `math.arith.fractions`)
+remains intact; no new violations introduced by Wave 10.
+
+**Wave 11**: authored the 2 concepts whose prerequisites became fully
+satisfied after Wave 10, verified programmatically against the live KG:
+`finite-set`, `natural-numbers`.
+
+- `math.found.finite-set` — no existing Blueprint (confirmed via
+  `ls docs/curriculum/blueprints/math.found.finite-set.md`, not found).
+  Two misconceptions authored directly via the birth-taxonomy
+  diagnostic procedure: MC-1 (finite equated with "small" or "easily
+  writable" rather than the bijection-to-{1,…,n} definition, classified
+  Type 1 overgeneralization) and MC-2 (finite confused with "has a
+  maximum element," classified Type 1 overgeneralization, repaired via
+  the {red, green, blue} unordered finite-set counterexample). Reuses
+  `math.found.cardinality`'s own bijection-existence machinery
+  throughout rather than re-deriving it.
+- `math.found.natural-numbers` — grounded in an existing
+  PACKAGE_READY Blueprint (`docs/curriculum/blueprints/math.found.
+  natural-numbers.md`, V-1 through V-20 PASS, AIR PASS). Reused the
+  Blueprint's own 3-item Misconception Registry by reference (MC-1
+  ZERO-MEMBERSHIP — reclassified here as Type 3 language contamination,
+  since the learner imports one authoritative-sounding curriculum's
+  convention as though it were the symbol's only meaning, rather than
+  overgeneralizing from limited examples; FOUNDATIONAL per the
+  Blueprint's own MAMR, must clear before MC-2/MC-3; MC-2
+  PEANO-INFORMAL; MC-3 WELL-ORDER-FINITE) and the full TA-A07
+  mastery-gate item bank (Q1-Q6 + the P76 cross-link transfer probe)
+  cited directly by reference rather than restated. This concept's KG
+  `unlocks` (`math.arith.counting`, `math.found.proof-by-induction`,
+  `math.nt.divisibility`) match the Blueprint's own Component 7 Output
+  Unlocks table exactly, cross-checked as part of authoring.
+
+`math.found` 70/82 → **72/82** — only 10 concepts now remain:
+`proof-by-induction`, `strong-induction`, `well-ordering-principle`,
+`countable-set`, `uncountable-set`, `integers`, `rational-numbers`,
+`irrational-numbers`, `real-numbers`, `complex-numbers`. Wave 12
+candidates computed programmatically (4): `proof-by-induction`
+(now unblocked — both its prerequisites, `proof` and `natural-numbers`,
+are authored), `well-ordering-principle`, `countable-set`, `integers` —
+all four became ready specifically because `natural-numbers` cleared
+this wave; `strong-induction`, `uncountable-set`, and the
+`rational-numbers`→`irrational-numbers`→`real-numbers`→
+`complex-numbers` chain remain blocked pending their own direct
+prerequisites. No other domain touched. All five tracking files updated
+in this same commit; re-validated 0 duplicates, 0 orphans, 0 Quality
+Gate 3 violations across all 73 mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.found Wave 12 (2026-07-26, autonomous loop iteration 4)
+
+Autonomous `/loop` iteration 4, per the 2026-07-26 loop-activation
+standing instruction. Git resync: local `main` was in sync with
+`origin/main` at commit `00970aa4` (no divergence, no new commits to
+reconcile) at this iteration's start.
+
+**Repair-audit first** (per this program's standing per-iteration
+discipline): re-ran the Quality Gate 3 heading-conformance check across
+all 73 pre-batch mathematics entries. **0 violations found**.
+
+**Wave 12**: authored the 4 concepts whose prerequisites became fully
+satisfied after Wave 11, verified programmatically against the live KG:
+`proof-by-induction`, `well-ordering-principle`, `countable-set`,
+`integers`.
+
+- `math.found.proof-by-induction` — grounded in an existing
+  PACKAGE_READY Blueprint (V-1 through V-20 PASS). Reused the
+  Blueprint's own 3-item Misconception Registry by reference (MC-1
+  INDUCTIVE-HYPOTHESIS-TREATED-AS-CIRCULAR; MC-2
+  BASE-CASE-OMITTED-AS-UNNECESSARY; MC-3
+  HYPOTHESIS-NOT-EXPLICITLY-INVOKED — all classified Type 1
+  overgeneralization) and the full P77 4-problem set + P76 transfer
+  probe cited directly by reference.
+- `math.found.well-ordering-principle` — grounded in an existing
+  PACKAGE_READY Blueprint. Reused its 3-item Misconception Registry
+  (MC-1 EMPTY-SET-EXCEPTION-OVERLOOKED, Type 1; MC-2
+  MINIMAL-COUNTEREXAMPLE-STRUCTURE-NOT-RECOGNIZED, Type 1; MC-3
+  WELL-ORDERING-ASSUMED-TO-APPLY-BEYOND-NATURAL-NUMBERS, Type 6 analogy
+  overextension) and item bank by reference. States and applies the
+  Blueprint's own equivalence-to-induction sketch, directly connecting
+  to `math.found.proof-by-induction`.
+- `math.found.countable-set` — no existing Blueprint (confirmed via
+  `ls docs/curriculum/blueprints/math.found.countable-set.md`, not
+  found). Three misconceptions authored directly via the
+  birth-taxonomy diagnostic procedure: MC-1 (countable equated with
+  small, Type 1 overgeneralization), MC-2 (density assumed to increase
+  cardinality — the ℚ-vs-ℤ counterintuitive case, Type 6 analogy
+  overextension, repaired via Cantor's diagonal enumeration of ℚ⁺),
+  MC-3 (countable conflated with countably infinite, Type 3 language
+  contamination). Reuses `math.found.finite-set` and `math.found.
+  cardinality`'s own definitions throughout rather than re-deriving
+  them.
+- `math.found.integers` — grounded in an existing PACKAGE_READY
+  Blueprint. Reused its 3-item Misconception Registry (MC-1
+  NEGATIVE-AS-SUBTRACTION — reclassified here as Type 4 notation-
+  induced, since the "−" symbol is genuinely overloaded between binary
+  subtraction and unary sign-marking, rather than an overgeneralization
+  from limited examples; FOUNDATIONAL per the Blueprint's own MAMR; MC-2
+  RING-CONFUSION, Type 1; MC-3 ZERO-ASYMMETRY, Type 1) and the full
+  TA-A06 mastery-gate item bank by reference. This concept's KG
+  `unlocks` (`math.arith.negative-numbers`, `math.nt.divisibility`)
+  match the Blueprint's own Component 7 Output Unlocks table exactly.
+
+`math.found` 72/82 → **76/82** — only 6 concepts now remain:
+`strong-induction`, `uncountable-set`, `rational-numbers`,
+`irrational-numbers`, `real-numbers`, `complex-numbers`. Wave 13
+candidates computed programmatically (3): `strong-induction` (now
+unblocked — its prerequisite `proof-by-induction` cleared this wave),
+`uncountable-set` (unblocked — its prerequisite `countable-set` cleared
+this wave), `rational-numbers` (unblocked — its prerequisite `integers`
+cleared this wave); `irrational-numbers` → `real-numbers` →
+`complex-numbers` remain blocked pending `rational-numbers` and each
+other in sequence. No other domain touched. All five tracking files
+updated in this same commit; re-validated 0 duplicates, 0 orphans, 0
+Quality Gate 3 violations across all 77 mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.found Wave 13 (2026-07-26, autonomous loop iteration 5)
+
+Autonomous `/loop` iteration 5, per the 2026-07-26 loop-activation
+standing instruction. Git resync: local `main` was in sync with
+`origin/main` at commit `6ed1bb51` (no divergence, no new commits to
+reconcile) at this iteration's start.
+
+**Repair-audit first** (per this program's standing per-iteration
+discipline): re-ran the Quality Gate 3 heading-conformance check across
+all 77 pre-batch mathematics entries. **0 violations found**.
+
+**Wave 13**: authored the 3 concepts whose prerequisites became fully
+satisfied after Wave 12, verified programmatically against the live KG:
+`strong-induction`, `uncountable-set`, `rational-numbers`.
+
+- `math.found.strong-induction` — no existing Blueprint (confirmed via
+  `ls`, not found). Three misconceptions authored directly via the
+  birth-taxonomy diagnostic procedure: MC-1 (strong induction assumed
+  more powerful than standard induction, Type 3 language contamination
+  — the word "strong" imports its everyday-English connotation of
+  superiority rather than its technical meaning of a richer hypothesis;
+  repaired via the auxiliary-statement Q(n) equivalence construction),
+  MC-2 (overused by default, Type 1 overgeneralization), MC-3 (multiple
+  base cases omitted, Type 1 overgeneralization). Directly extends
+  `math.found.proof-by-induction`'s own base-case/inductive-step
+  vocabulary rather than re-deriving it.
+- `math.found.uncountable-set` — no existing Blueprint. Three
+  misconceptions authored via the birth-taxonomy diagnostic procedure:
+  MC-1 (uncountable equated with vague large size, Type 1, FOUNDATIONAL
+  parallel to `math.found.countable-set`'s own MC-1), MC-2 (diagonal
+  construction guarantee not understood, Type 1), MC-3 (diagonal
+  argument overextended to ℚ, Type 6 analogy overextension — conflating
+  the diagonal ARGUMENT that disproves a listing exists for ℝ with the
+  diagonal ENUMERATION that constructs one for ℚ, directly reusing
+  `math.found.countable-set`'s own Cantor grid-enumeration content by
+  reference for the contrast). Cantor's diagonal argument for (0,1)
+  authored directly as the concept's central demonstration, confirming
+  the strict cardinality inequality |ℝ|>|ℕ| previewed but not proven in
+  `math.found.cardinality`'s own Core Understanding.
+- `math.found.rational-numbers` — grounded in an existing PACKAGE_READY
+  Blueprint. Reused its 3-item Misconception Registry by reference
+  (MC-1 FRACTION-UNIQUE — reclassified here as Type 3 language
+  contamination, since elementary education presents each fraction
+  symbol as a self-contained complete object rather than the learner
+  overgeneralizing from limited examples; FOUNDATIONAL per the
+  Blueprint's own MAMR; MC-2 DENSITY-COMPLETENESS, also reclassified
+  Type 3 — the everyday sense of "dense" as "no gaps" is imported
+  wholesale; MC-3 RATIONAL-TERMINATING, Type 1) and the full TA-A07
+  mastery-gate item bank (Q1-Q6 + P76 cross-link transfer probe, citing
+  `math.arith.fractions` directly) by reference. Cross-checked against
+  the already-authored `math.arith.fractions` entry to avoid
+  duplicating its own Core Understanding/Mental Models content — cited
+  by reference instead. One genuine Curriculum Feedback finding
+  recorded honestly (not fixed, no KG file modified): `math.arith.
+  fractions` (Delivery 5, 2026-07-10, predating this program's strict
+  topological-order discipline) lists `math.found.rational-numbers`
+  among its own KG `requires`, meaning it was technically authored
+  before its own prerequisite — inherited pre-existing content, not an
+  ordering violation by this program's own Wave-by-wave process.
+
+`math.found` 76/82 → **79/82** — only 3 concepts now remain, forming a
+strict chain: `irrational-numbers` → `real-numbers` → `complex-numbers`
+(each directly requiring the previous, per the KG). Wave 14 candidates
+computed programmatically (1): `irrational-numbers` (now unblocked —
+its prerequisite `rational-numbers` cleared this wave); `real-numbers`
+and `complex-numbers` will each unblock one at a time as the chain
+resolves in subsequent waves. No other domain touched. All five
+tracking files updated in this same commit; re-validated 0 duplicates,
+0 orphans, 0 Quality Gate 3 violations across all 80 mathematics
+entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.found Wave 14 (2026-07-26, autonomous loop iteration 6)
+
+Autonomous `/loop` iteration 6, per the 2026-07-26 loop-activation
+standing instruction. Git resync: local `main` was in sync with
+`origin/main` at commit `fc612e68` (no divergence, no new commits to
+reconcile) at this iteration's start.
+
+**Repair-audit first** (per this program's standing per-iteration
+discipline): re-ran the Quality Gate 3 heading-conformance check across
+all 80 pre-batch mathematics entries. **0 violations found**.
+
+**Wave 14**: authored the single concept whose prerequisite became
+fully satisfied after Wave 13, verified programmatically against the
+live KG: `irrational-numbers`.
+
+- `math.found.irrational-numbers` — grounded in an existing
+  PACKAGE_READY Blueprint. Reused its 3-item Misconception Registry by
+  reference (MC-1 IRRATIONAL-IMPRECISE — reclassified here as Type 4
+  notation-induced, since the "=" sign is routinely used informally in
+  place of "≈" for decimal approximations in casual practice, directly
+  training the conflation at the notation level rather than the
+  learner overgeneralizing from limited examples; FOUNDATIONAL per the
+  Blueprint's own MAMR; MC-2 INFINITE-DECIMAL-IRRATIONAL, Type 1; MC-3
+  IRRATIONAL-RARE, Type 1) and the full TA-A05 mastery-gate item bank
+  (Q1-Q4 + P76 independence transfer probe) by reference. The √2
+  proof-by-contradiction authored directly as the concept's central
+  demonstration. Directly extends `math.found.rational-numbers`'s own
+  decimal-characterization diagnostic (terminating/repeating) into the
+  complementary non-terminating-non-repeating case, and reuses
+  `math.found.countable-set`/`math.found.uncountable-set`'s own
+  countability machinery for the abundance argument (ℚ countable, ℝ
+  uncountable, therefore ℝ∖ℚ uncountable) rather than re-deriving it.
+
+`math.found` 79/82 → **80/82** — only 2 concepts now remain, forming a
+strict chain: `real-numbers` → `complex-numbers`. Wave 15 candidates
+computed programmatically (1): `real-numbers` (now unblocked — both its
+prerequisites, `irrational-numbers` and `rational-numbers`, are
+authored); `complex-numbers` will unblock once `real-numbers` clears in
+the next wave — the final wave before `math.found` Domain Certification
+becomes eligible at 82/82. No other domain touched. All five tracking
+files updated in this same commit; re-validated 0 duplicates, 0
+orphans, 0 Quality Gate 3 violations across all 81 mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.found Wave 15 (2026-07-26, autonomous loop iteration 7)
+
+Autonomous `/loop` iteration 7, per the 2026-07-26 loop-activation
+standing instruction. Git resync: local `main` was in sync with
+`origin/main` at commit `2751c48f` (no divergence, no new commits to
+reconcile) at this iteration's start.
+
+**Repair-audit first** (per this program's standing per-iteration
+discipline): re-ran the Quality Gate 3 heading-conformance check across
+all 81 pre-batch mathematics entries. **0 violations found**.
+
+**Wave 15**: authored the single concept whose prerequisites became
+fully satisfied after Wave 14, verified programmatically against the
+live KG: `real-numbers`.
+
+- `math.found.real-numbers` — grounded in an existing PACKAGE_READY
+  Blueprint. Reused its 3-item Misconception Registry by reference
+  (MC-1 REAL-IS-DECIMAL — reclassified here as Type 3 language
+  contamination, since the phrase "real number" sounds like a distinct
+  category rather than the learner overgeneralizing from limited
+  examples; FOUNDATIONAL per the Blueprint's own MAMR; MC-2
+  RATIONAL-IS-COMPLETE, directly inherited from `math.found.
+  rational-numbers`'s own MC-2, Type 3; MC-3 IRRATIONALS-ARE-RARE,
+  directly inherited from `math.found.irrational-numbers`'s own MC-3,
+  Type 1) and the full P77/P76 mastery-gate item bank by reference.
+  Synthesizes both prerequisites directly via ℝ=ℚ∪(ℝ∖ℚ); the
+  completeness/LUB property authored directly as the concept's central
+  demonstration (the {q∈ℚ:q²<2} gap example), extending `math.found.
+  rational-numbers`'s own density-without-completeness distinction into
+  a fully general structural property. One honest Cross-Subject
+  Connections finding recorded (not fixed): both KG `cross_links`
+  targets (`math.calc.limits`, `math.real.completeness`) remain
+  unauthored — the Blueprint's own P76 transfer probe ((1+1/n)ⁿ→e)
+  anticipates `math.calc.limits`'s content directly, to be genuinely
+  activated once that concept is authored.
+
+`math.found` 80/82 → **81/82** — only **1 concept now remains**:
+`complex-numbers`. Wave 16 (the final wave for this domain) is already
+computable: `complex-numbers` — once authored, `math.found` reaches
+82/82 and becomes eligible for Domain Certification per `ROADMAP.md`
+§3's own standing gate. No other domain touched. All five tracking
+files updated in this same commit; re-validated 0 duplicates, 0
+orphans, 0 Quality Gate 3 violations across all 82 mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.found Wave 16 — FINAL WAVE, DOMAIN COMPLETE (2026-07-26, autonomous loop iteration 8)
+
+Autonomous `/loop` iteration 8, per the 2026-07-26 loop-activation
+standing instruction. Git resync: local `main` was in sync with
+`origin/main` at commit `39ab16ef` (no divergence, no new commits to
+reconcile) at this iteration's start.
+
+**Repair-audit first** (per this program's standing per-iteration
+discipline): re-ran the Quality Gate 3 heading-conformance check across
+all 82 pre-batch mathematics entries. **0 violations found**.
+
+**Wave 16 (final wave)**: authored the single remaining `math.found`
+concept, verified programmatically against the live KG:
+`complex-numbers`.
+
+- `math.found.complex-numbers` — grounded in an existing PACKAGE_READY
+  Blueprint. Reused its 3-item Misconception Registry by reference
+  (MC-1 SQRT-NEGATIVE-UNDEFINED — reclassified here as Type 4
+  notation-induced, since the specific symbol "√(−1)" is what triggers
+  the confusion via correct-but-misapplied prior instruction, rather
+  than a broad overgeneralization; FOUNDATIONAL per the Blueprint's own
+  MAMR; MC-2 I-IS-JUST-A-SYMBOL, Type 1; MC-3
+  COMPLEX-NUMBERS-ARE-NOT-REAL, Type 3 language contamination — the
+  everyday sense of "complex" as "complicated" is imported directly)
+  and the full P77/P76 mastery-gate item bank (cross-linking `math.
+  trig.polar-form-complex`) by reference. Directly extends `math.
+  found.real-numbers`'s own definitional-extension framing (i declared
+  by i²=−1, exactly as √2 and negative integers were declared at
+  earlier stages) and geometric distance intuition (modulus as
+  two-dimensional Pythagorean distance).
+
+**`math.found` reaches 82/82 (100%) — DOMAIN CERTIFIED.** Verified
+programmatically: 0 missing `math.found` concepts against the live KG.
+All 82 entries re-verified this batch against Quality Gate 3's exact
+21-section heading order — 0 violations across the full domain. 0
+duplicates, 0 orphans across all 83 mathematics entries. Full
+certification record, including 3 carried-forward-but-non-blocking
+KGCS review items, in `VALIDATION_REPORT.md`'s own "Domain
+Certification — math.found (UPDATE)" section.
+
+**Next mathematics domain identified (not yet started this batch, per
+this program's own "one small bounded batch per turn" discipline —
+Wave 16 was itself this batch's one bounded unit of work)**:
+`math.arith` (58 total concepts, 1 already authored —
+`math.arith.fractions`, the original Delivery-5 seed entry). Its sole
+zero-`math.arith`-prerequisite entry node is `math.arith.counting`,
+requiring only `math.found.natural-numbers` (already authored) — now
+unlocked and ready to be Wave 1 of the `math.arith` domain next
+iteration. Full reasoning for selecting `math.arith` over the other 22
+unauthored mathematics domains recorded in `ROADMAP.md` §5.
+
+All five tracking files updated in this same commit, including
+`ROADMAP.md` §3 (status flipped to COMPLETE — CERTIFIED) and §5 (new
+default target: `math.arith` Wave 1) and `VALIDATION_REPORT.md` (new
+Domain Certification record appended, superseding but not deleting the
+prior 31/82 "does NOT pass" record as historical audit trail).
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.arith Wave 1 (2026-07-26, autonomous loop iteration 9)
+
+Autonomous `/loop` iteration 9, per the 2026-07-26 loop-activation
+standing instruction. First batch in the `math.arith` domain,
+immediately following `math.found`'s Domain Certification. Git resync:
+after pushing the `math.found` certification commit, several
+concurrent commits landed (a temporary Chemistry AssetIdentity admin
+seeding endpoint, later reverted; then 19 "Chemistry AssetIdentity seed
+batch N" data-only commits from a parallel session bringing Chemistry's
+DB-backed AssetIdentity rows from ~0 toward 380/744) — all verified via
+`git diff --stat` to touch only `CLAUDE.md`, `docs/architecture/*`,
+`src/app/api/admin/seed-chemistry-assets/route.ts`, and `vercel.json`,
+zero overlap with `educational-brain/` or any KG file; merged cleanly
+across two rounds (a 403 push rejection on the first attempt required a
+second fetch+merge+push cycle, itself catching one more concurrent
+commit).
+
+**Repair-audit first** (per this program's standing per-iteration
+discipline): re-ran the Quality Gate 3 heading-conformance check across
+all 83 pre-batch mathematics entries (the 82 `math.found` entries plus
+`math.arith.fractions`). **0 violations found**.
+
+**Domain selection**: computed programmatically which mathematics
+domain to target next now that `math.found` is complete. `math.arith`
+was selected — the only one of 23 remaining unauthored domains with an
+existing authored entry (`math.arith.fractions`, the original
+Delivery-5 seed) and the domain immediately adjacent to `math.found` in
+the KG's own `requires` structure. Confirmed `math.arith`'s sole
+zero-`math.arith`-prerequisite entry node: `math.arith.counting`,
+requiring only `math.found.natural-numbers` (already authored).
+
+**Wave 1**: authored `math.arith.counting` — grounded in an existing
+PACKAGE_READY Blueprint. Reused its 3-item Misconception Registry by
+reference (MC-1 COUNTING-WITHOUT-BIJECTION, FOUNDATIONAL, Type 1
+overgeneralization; MC-2 ORDER-DEPENDENT-CARDINALITY, Type 1; MC-3
+PROCEDURE-REPLACES-STRUCTURE, Type 1) and the full P77/P76 mastery-gate
+item bank by reference. Directly reuses `math.found.natural-numbers`'s
+own successor-based tag sequence as the bijection's domain.
+
+**6 further Wave-1-eligible concepts identified and Blueprint-verified
+this batch but deliberately deferred to Wave 2** (all require only
+`math.arith.fractions`, already authored; all confirmed PACKAGE_READY
+via direct read): `math.arith.fraction-equivalence`, `math.arith.
+fraction-multiplication`, `math.arith.fraction-reciprocal`, `math.
+arith.mixed-numbers`, `math.arith.improper-fractions`, `math.arith.
+ratios`. Deferred specifically because their Blueprints use a
+substantially longer, more elaborate format (Educational Brain v1.0
+primitive-notation style, multi-protocol student-state-matrix
+structure, 900-1200 lines each) than the `math.found` domain's
+Blueprints (typically 300-650 lines) — authoring all 7 candidates in
+one turn risked exceeding this program's own "one small bounded batch"
+discipline and quality bar. No re-verification needed next iteration —
+proceed directly to authoring all 6 in Wave 2.
+
+`math.arith` now 2/58 (`fractions` + `counting`). No other domain
+touched. All five tracking files updated in this same commit (including
+`ROADMAP.md` §5's item 1a, updated with the Wave 2 candidate list and
+Blueprint-verification status); re-validated 0 duplicates, 0 orphans, 0
+Quality Gate 3 violations across all 84 mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.arith Wave 2 part 1 (2026-07-26, autonomous loop iteration 10)
+
+Autonomous loop iteration 10, triggered by a bare `/loop` re-invocation
+in the same session (the autonomous-default dynamic-pacing template);
+resolved to continuing the established, explicitly-active Mathematics
+Educational Brain Autonomous Completion Program, since the immediately
+prior turn had explicitly deferred 6 Blueprint-verified `math.arith`
+Wave 2 candidates for this exact next iteration. Git resync: one
+concurrent Chemistry AssetIdentity seed-batch commit (`CLAUDE.md` only,
+zero overlap) fast-forward merged cleanly at this iteration's start.
+
+**Repair-audit first** (per this program's standing per-iteration
+discipline): re-ran the Quality Gate 3 heading-conformance check across
+all 84 pre-batch mathematics entries. **0 violations found**.
+
+**Wave 2 part 1**: authored 3 of the 6 concepts deferred from Wave 1,
+all grounded in existing PACKAGE_READY Blueprints (Educational Brain
+v1.0 primitive-notation format, previously read in full):
+
+- `math.arith.fraction-equivalence` — reused its 2-item Misconception
+  Registry by reference (MC-1 ADDING-PRESERVES-EQUIVALENCE,
+  FOUNDATIONAL, Type 1 overgeneralization from the equation-solving
+  "same operation to both sides" heuristic; MC-2
+  ONLY-SIMPLIFIED-IS-VALID, Type 1) and the 5-probe mastery gate by
+  reference.
+- `math.arith.fraction-multiplication` — reused its 3-item
+  Misconception Registry (MC-1 addition-algorithm-for-multiplication,
+  FOUNDATIONAL for MC-2, Type 1; MC-2 dividing-parts-separately, Type
+  1; MC-3 whole-number-in-denominator, Type 1) and the area-model
+  demonstration by reference. Directly cross-references `math.arith.
+  fraction-reciprocal`'s own product-test definition for the division
+  algorithm's justification.
+- `math.arith.fraction-reciprocal` — reused its 3-item Misconception
+  Registry (MC-1 reciprocal-equals-negative — reclassified here as
+  Type 3 language contamination, since "opposite" colloquially names
+  both the additive and multiplicative inverse; FOUNDATIONAL; MC-2
+  whole-number-reciprocal-blind-spot, Type 1; MC-3
+  mixed-number-flip-error, Type 1) by reference. Its `math.abst.field`
+  cross-link is confirmed informational-only at this Bloom level per
+  the Blueprint's own Component 6 note — the word "field" is never
+  introduced.
+
+`math.arith` now 5/58 (`fractions`, `counting`, `fraction-equivalence`,
+`fraction-multiplication`, `fraction-reciprocal`). 3 further
+Wave-2-eligible concepts remain deferred to Wave 2 part 2, already
+Blueprint-verified PACKAGE_READY, no re-verification needed:
+`math.arith.mixed-numbers`, `math.arith.improper-fractions`, `math.
+arith.ratios`. No other domain touched. All five tracking files
+updated in this same commit; re-validated 0 duplicates, 0 orphans, 0
+Quality Gate 3 violations across all 87 mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.arith Wave 2 part 2 (2026-07-26, autonomous loop iteration 11)
+
+Autonomous loop iteration 11, continuing the same established Mathematics
+Educational Brain Autonomous Completion Program (dynamic-pacing
+`<<autonomous-loop-dynamic>>` sentinel fire). Git resync: one concurrent
+Chemistry AssetIdentity seed-batch commit (`CLAUDE.md` only, zero
+overlap with `educational-brain/`) fast-forward merged cleanly at this
+iteration's start.
+
+**Repair-audit first** (per this program's standing per-iteration
+discipline): re-ran the Quality Gate 3 heading-conformance check across
+all 87 pre-batch mathematics entries. **0 violations found**.
+
+**Wave 2 part 2**: authored the remaining 3 of the 6 concepts deferred
+from Wave 1, all grounded in existing Blueprints (Educational Brain
+v1.0 primitive-notation format, ~900-1300 lines each):
+
+- `math.arith.mixed-numbers` — reused its 3-item Misconception Registry
+  by reference: MC-1 "addition without LCD" (FOUNDATIONAL, Type 1
+  overgeneralization from whole-number addition), MC-2 "subtraction
+  regrouping omitted" (Type 1), MC-3 "mixed multiplication adds whole
+  parts separately" (Type 1, independent of MC-2). Documented in
+  Curriculum Feedback (not fixed, no KG/Blueprint file touched) that
+  `math.arith.improper-fractions` is a *related* concept, not a formal
+  prerequisite in either direction, per both Blueprints' own component
+  notes.
+- `math.arith.improper-fractions` — reused its 3-item Misconception
+  Registry by reference: MC-1 "improper fractions are wrong/invalid"
+  (FOUNDATIONAL, reclassified here as Type 3 language contamination —
+  the everyday sense of "improper" as "incorrect" contaminates the
+  mathematical term), MC-2 "mixed-to-improper conversion without
+  understanding" (Type 1), MC-3 "improper-to-mixed denominator loss"
+  (Type 1).
+- `math.arith.ratios` — reused its 3-item Misconception Registry by
+  reference: MC-1 "ratio is commutative" (FOUNDATIONAL, reclassified
+  here as Type 6 analogy overextension — overextends the ordinary
+  commutativity of addition/multiplication onto ratio notation, where
+  order is meaningful), MC-2 "part-to-part vs. part-to-whole confusion"
+  (Type 1), MC-3 "ratio simplification changes the underlying
+  quantities" (Type 1). Its `math.func.linear-function` cross-link
+  (KG `cross_links` field) was verified NOT yet authored in either
+  Educational Brain or Blueprint form — documented honestly in
+  Cross-Subject Connections rather than invented.
+
+`math.arith` now 8/58 (`fractions`, `counting`, `fraction-equivalence`,
+`fraction-multiplication`, `fraction-reciprocal`, `mixed-numbers`,
+`improper-fractions`, `ratios`) — Wave 2 fully complete (all 6 deferred
+concepts now authored). Wave 3 candidates computed programmatically
+from the live KG (all `requires` now satisfied): `math.arith.
+counting-sequence`, `math.arith.subitizing`, `math.arith.place-value`,
+`math.arith.number-line` (all four unlocked by `math.arith.counting`),
+plus `math.arith.proportion`, `math.arith.unit-rate` (both unlocked by
+`math.arith.ratios`) — 6 concepts, not yet Blueprint-checked. No other
+domain touched. All five tracking files updated in this same commit;
+re-validated 0 duplicates, 0 orphans, 0 Quality Gate 3 violations
+across all 90 mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+run, `npm run build` succeeded (exact figures recorded in the commit
+this section accompanies).
+
+### Mathematics — math.arith Wave 3 (2026-07-26, autonomous loop iteration 12)
+
+Autonomous loop iteration 12, continuing the same established
+Mathematics Educational Brain Autonomous Completion Program
+(dynamic-pacing `<<autonomous-loop-dynamic>>` sentinel fire). Git
+resync: one concurrent Chemistry AssetIdentity seed-batch commit
+(`CLAUDE.md` only, zero overlap with `educational-brain/`) fast-forward
+merged cleanly at this iteration's start.
+
+**Repair-audit first** (per this program's standing per-iteration
+discipline): re-ran the Quality Gate 3 heading-conformance check across
+all 90 pre-batch mathematics entries. **0 violations found**.
+
+**Wave 3**: authored the 6 concepts whose prerequisites became fully
+satisfied after Wave 2 — verified programmatically against the live
+KG, matching the expected candidate list exactly: `math.arith.
+counting-sequence`, `math.arith.subitizing`, `math.arith.place-value`,
+`math.arith.number-line` (all four unlocked by `math.arith.counting`),
+plus `math.arith.proportion`, `math.arith.unit-rate` (both unlocked by
+`math.arith.ratios`).
+
+- `math.arith.counting-sequence` — reused its Misconception Registry
+  by reference: MC-1 SEQUENCE-HAS-GAPS (FOUNDATIONAL, reclassified
+  Type 5 instruction-induced), MC-2 COUNT-ORDER-CHANGES-TOTAL (Type 2
+  perceptual intuition), MC-3 ZERO-STARTS-SEQUENCE (Type 6 analogy
+  overextension from zero-indexed programming conventions).
+- `math.arith.subitizing` — no Blueprint exists (verified via
+  directory listing); 3 misconceptions authored directly via the
+  birth-taxonomy diagnostic procedure: MC-1 SUBITIZING-RANGE-UNBOUNDED
+  (FOUNDATIONAL, Type 2 perceptual intuition), MC-2
+  SUBITIZING-REQUIRES-CANONICAL-PATTERN (Type 1 overgeneralization),
+  MC-3 SUBITIZING-EQUALS-FAST-COUNTING (Type 3 language
+  contamination — "instant" reinterpreted as "counting really fast").
+- `math.arith.place-value` — reused its Misconception Registry by
+  reference: MC-1 DIGIT-IS-VALUE (FOUNDATIONAL, Type 5
+  instruction-induced), MC-2 EXPANDED-FORM-ADDITIVE-CONFUSION (Type 4
+  notation-induced), MC-3 ZERO-PLACEHOLDER-INVISIBLE (Type 1
+  overgeneralization).
+- `math.arith.number-line` — reused its Misconception Registry by
+  reference: MC-1 NEGATIVE-ORDERING-BY-MAGNITUDE (FOUNDATIONAL, Type 1
+  overgeneralization from whole-number size intuition), MC-2
+  DISTANCE-FROM-ZERO-DETERMINES-ORDER (Type 1, MC-1 generalized), MC-3
+  NUMBER-LINE-HAS-GAPS (Type 2 perceptual intuition). Its Tier 1
+  cross-link to `math.geom.coordinate-plane` (already authored) is
+  used for a genuine cross-link transfer probe, not independence mode.
+- `math.arith.proportion` — reused its Misconception Registry by
+  reference: MC-1 QUANTITY-POSITIONS-MISMATCHED-ACROSS-RATIOS
+  (FOUNDATIONAL, Type 5 instruction-induced), MC-2
+  ANY-INCREASING-RELATIONSHIP-ASSUMED-PROPORTIONAL (Type 1
+  overgeneralization), MC-3
+  CROSS-MULTIPLICATION-APPLIED-WITHOUT-VALID-PROPORTION-SETUP (Type 5
+  instruction-induced). Its `math.func.linear-function` cross-link
+  confirmed genuinely not-yet-authored (same honest-gap pattern as
+  `math.arith.ratios`'s identical cross-link from Wave 2).
+- `math.arith.unit-rate` — no Blueprint exists (verified via directory
+  listing); 3 misconceptions authored directly via the birth-taxonomy
+  diagnostic procedure: MC-1 NUMERATOR-DENOMINATOR-CONFUSION
+  (FOUNDATIONAL, Type 5 instruction-induced), MC-2
+  UNIT-RATE-MEANS-PER-HOUR (Type 1 overgeneralization from the km/h
+  introductory example), MC-3 UNIT-MEANS-MEASUREMENT-UNIT (Type 3
+  language contamination — the everyday dual meaning of "unit").
+
+`math.arith` now 14/58. Wave 4 candidates computed programmatically
+from the live KG (all `requires` now satisfied): `math.arith.
+ones-tens-hundreds`, `math.arith.addition`, `math.arith.decimals`
+(Blueprints exist for all three), plus `math.arith.expanded-form`,
+`math.arith.number-base`, `math.arith.ordering`, `math.arith.
+direct-variation`, `math.arith.inverse-variation` (no Blueprints for
+these five) — 8 concepts, not yet authored. No other domain touched.
+All five tracking files updated in this same commit; re-validated 0
+duplicates, 0 orphans, 0 Quality Gate 3 violations across all 96
+mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.arith Wave 4 part 1 (2026-07-26, autonomous loop iteration 13)
+
+Autonomous loop iteration 13, continuing the same established
+Mathematics Educational Brain Autonomous Completion Program
+(dynamic-pacing `<<autonomous-loop-dynamic>>` sentinel fire). Git
+resync found zero concurrent commits at this iteration's start.
+
+**Repair-audit first** (per this program's standing per-iteration
+discipline): re-ran the Quality Gate 3 heading-conformance check across
+all 96 pre-batch mathematics entries. **0 violations found**.
+
+**Wave 4 candidates re-verified programmatically** (matching the prior
+iteration's computed list exactly): 8 concepts — `math.arith.
+ones-tens-hundreds`, `math.arith.addition`, `math.arith.decimals`
+(Blueprints exist for all three), plus `math.arith.expanded-form`,
+`math.arith.number-base`, `math.arith.ordering`, `math.arith.
+direct-variation`, `math.arith.inverse-variation` (no Blueprints for
+these five). Split into two parts given the heavier no-Blueprint load
+(5 of 8, versus Wave 3's 2 of 6) — this batch authors the 3
+Blueprint-grounded concepts as Wave 4 part 1.
+
+- `math.arith.ones-tens-hundreds` — reused its Misconception Registry
+  by reference: MC-1 ONES-TENS-HUNDREDS-ASSUMED-SEPARATE-CONCEPTS
+  (FOUNDATIONAL, Type 1 overgeneralization), MC-2
+  ZERO-COLUMN-ASSUMED-OMITTABLE (Type 1), MC-3
+  CARRYING-ASSUMED-ARBITRARY-RULE (Type 5 instruction-induced). Found
+  and honestly recorded two genuine Blueprint/KG metadata
+  discrepancies: the live KG lists `unlocks: [carrying, borrowing]`
+  while the Blueprint states "none listed"; the KG's `estimated_hours`
+  is 4 while the Blueprint states 3. Both resolved in favor of the KG
+  per this program's standing rule (KG authoritative on divergence);
+  neither affects the Blueprint's pedagogical content; no KG or
+  Blueprint file modified.
+- `math.arith.addition` — reused its Misconception Registry by
+  reference: MC-1 CARRYING-BREAKDOWN (FOUNDATIONAL, Type 5
+  instruction-induced), MC-2 COMMUTATIVITY-UNKNOWN (Type 2 perceptual
+  intuition), MC-3 ZERO-ANNIHILATES (Type 6 analogy overextension from
+  multiplication's a×0=0 rule). Its Tier 1 cross-link to `math.linalg.
+  vector-addition` used for a genuine cross-link transfer probe.
+- `math.arith.decimals` — reused its Misconception Registry by
+  reference: MC-1 LONGER-DECIMAL-IS-LARGER (FOUNDATIONAL, Type 1
+  overgeneralization — the extensively-documented "longer-is-larger"
+  error), MC-2 WHOLE-AND-DECIMAL-PARTS-SEPARATE (Type 1), MC-3
+  MULTIPLY-BIGGER-DIVIDE-SMALLER-ALWAYS (Type 1).
+
+`math.arith` now 17/58. Wave 4 part 2 (deferred): the 5 no-Blueprint
+concepts (`expanded-form`, `number-base`, `ordering`,
+`direct-variation`, `inverse-variation`), misconceptions to be
+authored directly via the birth-taxonomy diagnostic procedure. No
+other domain touched. All five tracking files updated in this same
+commit; re-validated 0 duplicates, 0 orphans, 0 Quality Gate 3
+violations across all 99 mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.arith Wave 4 part 2 (2026-07-26, autonomous loop iteration 14)
+
+Autonomous loop iteration 14, continuing the same established
+Mathematics Educational Brain Autonomous Completion Program
+(dynamic-pacing `<<autonomous-loop-dynamic>>` sentinel fire). Git
+resync found zero concurrent commits at this iteration's start.
+
+**Repair-audit first** (per this program's standing per-iteration
+discipline): re-ran the Quality Gate 3 heading-conformance check across
+all 99 pre-batch mathematics entries. **0 violations found**.
+
+**Wave 4 part 2**: authored the 5 no-Blueprint concepts deferred from
+Wave 4 part 1 — `math.arith.expanded-form`, `math.arith.number-base`,
+`math.arith.ordering`, `math.arith.direct-variation`, `math.arith.
+inverse-variation` — all misconceptions authored directly via the
+birth-taxonomy diagnostic procedure:
+
+- `math.arith.expanded-form` — MC-1 EXPANDED-FORM-AS-DIGIT-PRODUCT
+  (FOUNDATIONAL, Type 4 notation-induced), MC-2 ZERO-TERM-OMITTED
+  (Type 1), MC-3 DIGIT-ITSELF-AS-TERM (Type 6 analogy overextension
+  from an unrelated digit-sum procedure). Noted honestly in Curriculum
+  Feedback: substantial conceptual overlap with `math.arith.
+  place-value`'s own MC-2/MC-3, an expected consequence of
+  `expanded-form` being the dedicated writing-task concept for the
+  notation `place-value` first introduces.
+- `math.arith.number-base` — MC-1 BASE-10-DIGITS-ASSUMED-UNIVERSAL
+  (FOUNDATIONAL, Type 1), MC-2 POSITIONAL-VALUE-STAYS-POWERS-OF-TEN
+  (Type 6 analogy overextension), MC-3 HEXADECIMAL-LETTERS-AS-VARIABLES
+  (Type 3 language contamination).
+- `math.arith.ordering` — MC-1 INEQUALITY-SYMBOL-DIRECTION-REVERSED
+  (FOUNDATIONAL, Type 4 notation-induced), MC-2
+  STRICT-VS-NONSTRICT-CONFLATION (Type 1), MC-3
+  COMPOUND-INEQUALITY-MISREAD-AS-SEPARATE (Type 4 notation-induced).
+- `math.arith.direct-variation` — MC-1 CONSTANT-K-MISIDENTIFIED
+  (FOUNDATIONAL, Type 5 instruction-induced), MC-2
+  ANY-LINEAR-RELATIONSHIP-ASSUMED-DIRECT-VARIATION (FOUNDATIONAL,
+  Type 1, `math.arith.proportion`'s own MC-2 generalized to y=kx),
+  MC-3 DIRECT-VARIATION-ASSUMED-ONLY-POSITIVE-K (Type 1).
+- `math.arith.inverse-variation` — MC-1
+  INVERSE-VARIATION-CONFUSED-WITH-DIRECT-VARIATION (FOUNDATIONAL,
+  Type 3 language contamination — the shared word "variation"), MC-2
+  INVERSE-VARIATION-ASSUMED-LINEAR-GRAPH (Type 6 analogy
+  overextension), MC-3 PRODUCT-CONSTANT-NOT-CHECKED (Type 5
+  instruction-induced).
+
+**Genuine discovery, corrected same batch**: while authoring
+`direct-variation`, found that Blueprints for `math.func.
+linear-function` and `math.func.rational-function` (both dated
+2026-07-22) now exist — contradicting a "not yet authored" claim
+inherited from `math.arith.proportion`'s and `math.arith.ratios`'s
+own Blueprints (accurate at THOSE Blueprints' own authoring time, now
+stale). Used this to construct genuine cross-link transfer probes
+(Gate 5 in both `direct-variation.md` and `inverse-variation.md`,
+grounded in the actual documented content of the now-existing
+Blueprints) rather than independence mode. Added a small, targeted
+addendum to `math.arith.proportion.md`'s and `math.arith.ratios.md`'s
+own Cross-Subject Connections sections recording the correction —
+their existing P76 assessment content (each concept's OWN already-
+authored mastery-gate probe) was NOT rewritten, since it correctly
+reflects those concepts' own Blueprints' content as authored.
+
+`math.arith` now 22/58. Wave 5 candidates to be computed
+programmatically next iteration — the candidate pool grew
+substantially after Wave 4 (`addition` and `decimals` each unlocked
+several new children: `carrying`, `mental-addition`, `subtraction`,
+`multiplication`, `decimal-operations`, `terminating-decimals`,
+`repeating-decimals`, `percentages`, `rounding`), not yet re-verified
+this turn. No other domain touched. All five tracking files updated in
+this same commit; re-validated 0 duplicates, 0 orphans, 0 Quality Gate
+3 violations across all 104 mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.arith Wave 5 part 1 (2026-07-26, autonomous loop iteration 15)
+
+Autonomous loop iteration 15, continuing the same established
+Mathematics Educational Brain Autonomous Completion Program
+(dynamic-pacing `<<autonomous-loop-dynamic>>` sentinel fire). Git
+resync found zero concurrent commits at this iteration's start.
+
+**Repair-audit first** (per this program's standing per-iteration
+discipline): re-ran the Quality Gate 3 heading-conformance check across
+all 104 pre-batch mathematics entries. **0 violations found**.
+
+**Wave 5 candidates computed programmatically**: 9 concepts whose
+prerequisites became fully satisfied after Wave 4 — `math.arith.
+subtraction`, `math.arith.multiplication`, `math.arith.percentages`,
+`math.arith.rounding` (Blueprints exist for all four), plus `math.
+arith.carrying`, `math.arith.mental-addition`, `math.arith.
+decimal-operations`, `math.arith.terminating-decimals`, `math.arith.
+repeating-decimals` (no Blueprints for these five). Split into two
+parts given the heavier no-Blueprint load (5 of 9), following the same
+pattern as Wave 4 — this batch authors the 4 Blueprint-grounded
+concepts as Wave 5 part 1.
+
+- `math.arith.subtraction` — reused its Misconception Registry by
+  reference: MC-1 SMALLER-FROM-LARGER (FOUNDATIONAL, Type 1
+  overgeneralization), MC-2 COMMUTATIVITY-ASSUMED (Type 1, addition's
+  commutative law over-generalized), MC-3 BORROW-NOT-REDUCED (Type 5
+  instruction-induced).
+- `math.arith.multiplication` — reused its Misconception Registry by
+  reference: MC-1 ADDITION-CONFUSION (FOUNDATIONAL, Type 1), MC-2
+  COMMUTATIVITY-FALSE (Type 2 perceptual intuition), MC-3
+  ZERO-IDENTITY-CONFUSION (Type 6 analogy overextension from
+  addition's own a+0=a). Its two Tier 1 cross-links (`math.linalg.
+  matrix-multiplication`, `math.abst.ring-theory`) used for a genuine
+  cross-link transfer probe.
+- `math.arith.percentages` — reused its Misconception Registry by
+  reference: MC-1 PERCENT-ASSUMED-DIFFERENT-KIND-OF-NUMBER
+  (FOUNDATIONAL, Type 5 instruction-induced), MC-2
+  PERCENT-OF-ASSUMED-SPECIAL-PROCEDURE (Type 5), MC-3
+  SEQUENTIAL-PERCENT-CHANGES-ASSUMED-TO-CANCEL (Type 1). Found and
+  honestly recorded two more Blueprint/KG metadata discrepancies
+  (unlocks list, estimated_hours), resolved in favor of the KG per
+  standing rule — the same discrepancy pattern first found for
+  `ones-tens-hundreds` in Wave 4 part 1.
+- `math.arith.rounding` — reused its Misconception Registry by
+  reference: MC-1 SIGNIFICANT-FIGURES-CONFLATED-WITH-DECIMAL-PLACES
+  (FOUNDATIONAL, Type 3 language contamination), MC-2
+  ROUNDING-INTERMEDIATE-RESULTS-ASSUMED-HARMLESS (FOUNDATIONAL, Type
+  1), MC-3 LEADING-ZEROS-COUNTED-AS-SIGNIFICANT (Type 1). Its
+  `math.num.floating-point` cross-link confirmed genuinely
+  not-yet-authored (consistent with the Blueprint's own V-5 check).
+
+`math.arith` now 26/58. Wave 5 part 2 (deferred): the 5 no-Blueprint
+concepts (`carrying`, `mental-addition`, `decimal-operations`,
+`terminating-decimals`, `repeating-decimals`), misconceptions to be
+authored directly via the birth-taxonomy diagnostic procedure. No
+other domain touched. All five tracking files updated in this same
+commit; re-validated 0 duplicates, 0 orphans, 0 Quality Gate 3
+violations across all 108 mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.arith Wave 5 part 2 (2026-07-26, autonomous loop iteration 16)
+
+Autonomous loop iteration 16, continuing the same established
+Mathematics Educational Brain Autonomous Completion Program
+(dynamic-pacing `<<autonomous-loop-dynamic>>` sentinel fire). Git
+resync found zero concurrent commits at this iteration's start.
+
+**Repair-audit first** (per this program's standing per-iteration
+discipline): re-ran the Quality Gate 3 heading-conformance check across
+all 108 pre-batch mathematics entries. **0 violations found**.
+
+**Wave 5 candidates re-verified programmatically**: the pool had grown
+to 13 (from the original 9) after Wave 5 part 1 unlocked new children
+(`borrowing`, `negative-numbers`, `division`, `multiplication-table`,
+`estimation`, `significant-figures`, `exponentiation`) — this batch
+sticks to the previously-deferred 5-concept Wave 5 part 2 set rather
+than re-splitting the enlarged pool, following the same precedent set
+at the Wave 4→5 transition; the 8 newly-unlocked candidates become
+Wave 6, to be computed fresh next iteration.
+
+**Wave 5 part 2**: authored the 5 no-Blueprint concepts deferred from
+Wave 5 part 1 — `math.arith.carrying`, `math.arith.mental-addition`,
+`math.arith.decimal-operations`, `math.arith.terminating-decimals`,
+`math.arith.repeating-decimals` — all misconceptions authored directly
+via the birth-taxonomy diagnostic procedure:
+
+- `math.arith.carrying` — MC-1 CARRY-VALUE-CONFUSED-WITH-COLUMN-SUM
+  (FOUNDATIONAL, Type 4 notation-induced), MC-2 CARRY-CHAIN-BROKEN
+  (Type 5 instruction-induced), MC-3 CARRY-ADDED-TO-WRONG-COLUMN
+  (Type 4). Deliberately scoped to carrying MECHANICS (which digit
+  carries, chain propagation, column placement) rather than
+  re-deriving why carrying is necessary, already covered by
+  `math.arith.addition`'s own MC-1 and `math.arith.
+  ones-tens-hundreds`'s own MC-3 — noted honestly in Curriculum
+  Feedback to avoid duplication.
+- `math.arith.mental-addition` — MC-1
+  MENTAL-MATH-REQUIRES-WRITTEN-ALGORITHM-IN-HEAD (FOUNDATIONAL, Type
+  5), MC-2 DECOMPOSITION-ORDER-FIXED (Type 1), MC-3
+  MENTAL-ADDITION-LESS-ACCURATE-THAN-WRITTEN (Type 2 perceptual
+  intuition).
+- `math.arith.decimal-operations` — MC-1
+  DECIMAL-MULTIPLICATION-POINT-ALIGNMENT (FOUNDATIONAL, Type 6 analogy
+  overextension from addition/subtraction's alignment procedure), MC-2
+  DECIMAL-DIVISION-POINT-NOT-SHIFTED (Type 5), MC-3
+  DECIMAL-PLACE-COUNT-UNDERCOUNTED (Type 1). Deliberately scoped to
+  MULTIPLICATION/DIVISION procedures specifically, since `math.arith.
+  decimals`'s own registry already covers comparison and
+  addition/subtraction.
+- `math.arith.terminating-decimals` — MC-1
+  TERMINATING-DECIMAL-DETERMINED-BY-NUMERATOR (FOUNDATIONAL, Type 1),
+  MC-2 ANY-SIMPLE-LOOKING-FRACTION-ASSUMED-TERMINATING (Type 2), MC-3
+  TERMINATING-MEANS-EXACT-VALUE-DIFFERENT-FROM-FRACTION (Type 3
+  language contamination).
+- `math.arith.repeating-decimals` — MC-1
+  REPEATING-DECIMAL-ASSUMED-APPROXIMATE-NOT-EXACT (FOUNDATIONAL, Type
+  3 language contamination), MC-2 BAR-NOTATION-SCOPE-MISREAD (Type 4),
+  MC-3 ALL-INFINITE-DECIMALS-ASSUMED-REPEATING (Type 1).
+
+`math.arith` now 31/58. Wave 6 candidates to be computed
+programmatically next iteration (13 concepts identified this turn,
+not yet fully verified: `borrowing`, `negative-numbers`,
+`multiplication-table`, `division`, `decimal-operations` [now
+authored], `terminating-decimals` [now authored],
+`repeating-decimals` [now authored], `percentage-calculations`,
+`estimation`, `significant-figures`, `exponentiation`, plus `carrying`
+and `mental-addition` [now authored] — the live list will be
+recomputed fresh, not assumed, at the start of the next iteration). No
+other domain touched. All five tracking files updated in this same
+commit; re-validated 0 duplicates, 0 orphans, 0 Quality Gate 3
+violations across all 113 mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.arith Wave 6 part 1 (2026-07-26, autonomous loop iteration 17)
+
+Autonomous loop iteration 17, continuing the same established
+Mathematics Educational Brain Autonomous Completion Program
+(dynamic-pacing `<<autonomous-loop-dynamic>>` sentinel fire). Git
+resync found zero concurrent commits at this iteration's start.
+
+**Repair-audit first** (per this program's standing per-iteration
+discipline): re-ran the Quality Gate 3 heading-conformance check across
+all 113 pre-batch mathematics entries. **0 violations found**.
+
+**Wave 6 candidates computed programmatically**: 9 concepts whose
+prerequisites became fully satisfied after Wave 5 — `math.arith.
+negative-numbers`, `math.arith.division`, `math.arith.
+significant-figures`, `math.arith.exponentiation` (Blueprints exist
+for all four), plus `math.arith.column-addition`, `math.arith.
+borrowing`, `math.arith.multiplication-table`, `math.arith.
+percentage-calculations`, `math.arith.estimation` (no Blueprints for
+these five). Split into two parts given the heavier no-Blueprint load
+(5 of 9), following the same pattern as Waves 4 and 5 — this batch
+authors the 4 Blueprint-grounded concepts as Wave 6 part 1.
+
+- `math.arith.negative-numbers` — reused its Misconception Registry
+  by reference: MC-1 DOUBLE-NEGATIVE-STAYS-NEGATIVE (FOUNDATIONAL,
+  Type 2 perceptual intuition), MC-2
+  NEGATIVE-TIMES-NEGATIVE-IS-NEGATIVE (Type 2), MC-3
+  MINUS-X-IS-ALWAYS-NEGATIVE (Type 4 notation-induced).
+- `math.arith.division` — reused its Misconception Registry by
+  reference: MC-1 DIVISION-COMMUTATIVE (FOUNDATIONAL, Type 1
+  overgeneralization from multiplication), MC-2
+  DIVISION-BY-ZERO-DEFINED (Type 6 analogy overextension), MC-3
+  REMAINDER-IGNORED (Type 5 instruction-induced). Its Tier 1
+  cross-link to `math.nt.divisibility` used for a genuine cross-link
+  transfer probe.
+- `math.arith.significant-figures` — reused its Misconception
+  Registry by reference: MC-1
+  ADDITION-SUBTRACTION-RULE-CONFLATED-WITH-MULTIPLICATION-RULE
+  (FOUNDATIONAL, Type 1), MC-2
+  CALCULATOR-OUTPUT-REPORTED-WITHOUT-ROUNDING (FOUNDATIONAL, Type 5),
+  MC-3 LEAST-PRECISE-INPUT-MISIDENTIFIED (Type 5). Its `math.num.
+  floating-point` cross-link confirmed genuinely not-yet-authored,
+  consistent with `math.arith.rounding`'s own identical finding.
+- `math.arith.exponentiation` — reused its Misconception Registry by
+  reference: MC-1 EXPONENT-MULTIPLIES-BASE (FOUNDATIONAL, Type 4
+  notation-induced), MC-2 EXPONENT-ADDS-COPIES (Type 1), MC-3
+  ZERO-EXPONENT-GIVES-ZERO (Type 1).
+
+`math.arith` now 35/58. Wave 6 part 2 (deferred): the 5 no-Blueprint
+concepts (`column-addition`, `borrowing`, `multiplication-table`,
+`percentage-calculations`, `estimation`), misconceptions to be
+authored directly via the birth-taxonomy diagnostic procedure. No
+other domain touched. All five tracking files updated in this same
+commit; re-validated 0 duplicates, 0 orphans, 0 Quality Gate 3
+violations across all 117 mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.arith Wave 6 part 2 (2026-07-26, autonomous loop iteration 18)
+
+Autonomous loop iteration 18, continuing immediately after Wave 6 part
+1. Git resync found zero concurrent commits at this iteration's start
+(`git status --short` clean against the Wave 6 part 1 push).
+
+**Repair-audit first**: re-ran the Quality Gate 3 heading-conformance
+check across all 117 pre-batch mathematics entries. **0 violations
+found**.
+
+Authored the 5 no-Blueprint concepts deferred from Wave 6's split
+(confirmed via directory listing: none of the five have a
+`docs/curriculum/blueprints/` file), each via the birth-taxonomy
+diagnostic procedure:
+
+- `math.arith.column-addition` (requires `carrying`) — MC-1
+  COLUMN-MISALIGNMENT (FOUNDATIONAL, Type 4 notation-induced), MC-2
+  DIRECTION-REVERSED (Type 5 instruction-induced), MC-3
+  MISSING-DIGIT-MISHANDLED (Type 1 overgeneralization). Misconceptions
+  scoped to written-layout/processing-order, deliberately distinct
+  from `carrying`'s own regrouping-mechanics registry.
+- `math.arith.borrowing` (requires `subtraction`, `ones-tens-hundreds`)
+  — MC-1 BORROW-CHAIN-THROUGH-ZEROS-BROKEN (FOUNDATIONAL, Type 5), MC-2
+  BORROWED-TEN-MISCOMPUTED (Type 1), MC-3
+  BORROW-SOURCE-COLUMN-MISIDENTIFIED (Type 4). Scoped to the
+  zero-chain relay and paired-change mechanics, distinct from
+  `subtraction`'s conceptual registry and `carrying`'s
+  opposite-direction procedure.
+- `math.arith.multiplication-table` (requires `multiplication`) — MC-1
+  SKIP-COUNTING-SUBSTITUTED-FOR-RECALL (FOUNDATIONAL, Type 5), MC-2
+  COMMUTATIVE-PAIRS-MEMORIZED-SEPARATELY (Type 1), MC-3
+  NEAR-FACT-CONFUSION (Type 2 perceptual intuition). Scoped to
+  fact-recall fluency specifically.
+- `math.arith.percentage-calculations` (requires `percentages`) — MC-1
+  WHICH-QUANTITY-IS-THE-WHOLE-MISIDENTIFIED (FOUNDATIONAL, Type 5),
+  MC-2 FINDING-THE-WHOLE-CONFUSED-WITH-FINDING-THE-PART (Type 6 analogy
+  overextension), MC-3 PERCENT-EXCEEDING-100-ASSUMED-IMPOSSIBLE (Type
+  1). Its `related` sibling `math.arith.percentage-change` confirmed
+  not yet authored (no Blueprint, no EB entry) — P76 transfer probe
+  uses independence mode, flagged for revisit once that concept exists.
+- `math.arith.estimation` (requires `rounding`) — MC-1
+  ESTIMATION-REQUIRES-EXACT-COMPUTATION-FIRST (FOUNDATIONAL, Type 5),
+  MC-2 ESTIMATE-TREATED-AS-WRONG-ANSWER (Type 3 language
+  contamination), MC-3 ROUNDING-DIRECTION-NOT-CHOSEN-FOR-PURPOSE (Type
+  1). Its cross-link `math.num.error-analysis` confirmed not yet
+  authored (no Blueprint, no EB entry) — independence mode.
+
+`math.arith` now **40/58**. No other domain touched. All five tracking
+files updated in this same commit; re-validated 0 duplicates, 0
+orphans, 0 Quality Gate 3 violations across all 122 mathematics
+entries. Wave 7 candidates computed programmatically (12): 6
+Blueprint-grounded (`absolute-value`, `integer-arithmetic`,
+`remainder`, `order-of-operations`, `exponent-rules`, `square-numbers`)
+and 6 no-Blueprint (`long-multiplication`, `mental-multiplication`,
+`divisor-dividend`, `percentage-change`, `cube-numbers`,
+`scientific-notation`) — to be re-verified fresh, not assumed, when
+Wave 7 authoring begins.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.arith Wave 7 part 1 (2026-07-26, autonomous loop iteration 19)
+
+Autonomous loop iteration 19, continuing immediately after Wave 6 part
+2. Git resync found zero concurrent commits at this iteration's start.
+
+**Repair-audit first**: re-ran the Quality Gate 3 heading-conformance
+check across all 122 pre-batch mathematics entries. **0 violations
+found**.
+
+**Wave 7 candidates re-verified programmatically** (matching the
+prior batch's projection exactly): 12 concepts whose prerequisites
+became fully satisfied after Wave 6 — 6 Blueprint-grounded
+(`absolute-value`, `integer-arithmetic`, `remainder`,
+`order-of-operations`, `exponent-rules`, `square-numbers`) and 6
+no-Blueprint (`long-multiplication`, `mental-multiplication`,
+`divisor-dividend`, `percentage-change`, `cube-numbers`,
+`scientific-notation`). Split into two parts (an even 6/6 split, still
+following the established pattern of authoring Blueprint-grounded
+concepts first) — this batch authors the 6 Blueprint-grounded
+concepts as Wave 7 part 1, each reused by reference from its own
+Blueprint:
+
+- `math.arith.absolute-value` (requires `negative-numbers`,
+  `number-line`) — reused its Misconception Registry by reference:
+  MC-1 ABSOLUTE-VALUE-AS-SIGN-REMOVAL (FOUNDATIONAL, Type 4
+  notation-induced), MC-2 ABSOLUTE-VALUE-ASSUMED-SOMETIMES-NEGATIVE
+  (Type 1), MC-3
+  DISTANCE-FROM-ZERO-TREATED-AS-SEPARATE-FROM-DISTANCE-BETWEEN-POINTS
+  (Type 6). Its Tier 1 cross-link to `math.real.metric-space` (Blueprint
+  confirmed authored) used for a genuine cross-link transfer probe.
+- `math.arith.integer-arithmetic` (requires `negative-numbers`,
+  `multiplication`) — reused its Misconception Registry by reference:
+  MC-1 NEGATIVE-BASE-EXPONENT-ORDER-ERROR (FOUNDATIONAL, Type 4), MC-2
+  SIGN-COUNTING-OVERGENERALIZED-CANCELLATION (Type 1), MC-3
+  ZERO-DIVISION-SIGN-CONFUSION (Type 6). No cross-links (Blueprint
+  confirms empty).
+- `math.arith.remainder` (requires `division`) — reused its
+  Misconception Registry by reference: MC-1
+  DECIMAL-DIGITS-ARE-THE-REMAINDER (FOUNDATIONAL, Type 4), MC-2
+  REMAINDER-CAN-EQUAL-OR-EXCEED-DIVISOR (Type 5), MC-3
+  NEGATIVE-DIVIDEND-GIVES-NEGATIVE-REMAINDER (Type 2). Cross-link
+  `math.nt.modular-arithmetic` confirmed not yet authored — independence
+  mode, per the Blueprint's own GR-9 finding.
+- `math.arith.order-of-operations` (requires `addition`, `subtraction`,
+  `multiplication`, `division`) — reused its Misconception Registry by
+  reference: MC-1 LEFT-TO-RIGHT-ONLY (FOUNDATIONAL, Type 1), MC-2
+  ADDITION-BEFORE-MULTIPLICATION (Type 5), MC-3
+  MULTIPLICATION-BEFORE-DIVISION-ALWAYS (Type 6). No cross-links.
+- `math.arith.exponent-rules` (requires `exponentiation`) — reused its
+  Misconception Registry by reference: MC-1
+  PRODUCT-RULE-MULTIPLIES-EXPONENTS (FOUNDATIONAL, Type 6), MC-2
+  POWER-RULE-ADDS-EXPONENTS (Type 6), MC-3 NEGATIVE-EXPONENT-NEGATES
+  (Type 4). No cross-links.
+- `math.arith.square-numbers` (requires `exponentiation`) — reused its
+  Misconception Registry by reference: MC-1 SQUARING-MEANS-DOUBLING
+  (FOUNDATIONAL, Type 2), MC-2 NEGATIVE-SQUARED-IS-NEGATIVE (Type 1),
+  MC-3 LAST-DIGIT-DECIDES-PERFECT-SQUARE (Type 1). Its Tier 1
+  cross-link to `math.geom.area` (Blueprint confirmed authored) used
+  for a genuine cross-link transfer probe, per the Blueprint's own
+  P76_mode declaration.
+
+`math.arith` now **46/58**. Wave 7 part 2 (deferred): the 6
+no-Blueprint concepts (`long-multiplication`, `mental-multiplication`,
+`divisor-dividend`, `percentage-change`, `cube-numbers`,
+`scientific-notation`), misconceptions to be authored directly via the
+birth-taxonomy diagnostic procedure. No other domain touched. All five
+tracking files updated in this same commit; re-validated 0 duplicates,
+0 orphans, 0 Quality Gate 3 violations across all 128 mathematics
+entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.

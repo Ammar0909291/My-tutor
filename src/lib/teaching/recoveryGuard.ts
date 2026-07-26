@@ -62,6 +62,10 @@ const STRONG_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   // ignorance, they are objecting to being asked again ("I SAID NO",
   // "no no no", "how many times", "for the third time", "ugh", "omg").
   ['frustrated', /\bi\s+(already\s+)?(said|told\s+you)\s+no\b/i],
+  // "I already told you", "I already said", "I told you already [yes/that/so]"
+  // — objecting to being re-asked, regardless of what word follows "already".
+  ['frustrated', /\bi\s+already\s+(said|told(\s+you)?)\b/i],
+  ['frustrated', /\bi\s+(said|told\s+you)\s+already\b/i],
   ['frustrated', /\b(no[.,!]*\s+){2,}no\b/i],
   ['frustrated', /\bhow\s+many\s+times\b/i],
   ['frustrated', /\bfor\s+the\s+(second|third|fourth|fifth|\d+(st|nd|rd|th))\s+time\b/i],
@@ -71,11 +75,41 @@ const STRONG_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   // kept to unambiguous words to avoid false-firing on incidental subject
   // content (history/literature can legitimately mention milder words).
   ['frustrated', /\b(fuck(?:ing)?|shit|wtf|bullshit)\b/i],
+  // P2 (universal fix): bare question-marks — complete confusion, nothing
+  // the student can contribute; treat as confused, not dont_know (the
+  // distinction: confused means "I'm lost", dont_know means "I have no
+  // information" — ??? signals the former).
+  ['confused',          /^\?{2,}[!?.…\s]*$/],
+  // P2: explicit "you take over" imperatives — the student is not confused
+  // about the concept; they're objecting to the Socratic method and asking
+  // for direct instruction. Map to too_many_questions (stop asking, teach
+  // directly). Whole-message anchored to avoid catching "can you explain
+  // why gravity..." mid-sentence.
+  ['too_many_questions', /^(just\s+)?(you|u)\s+(explain|tell\s+me|show\s+me)[.!?\s]*$/i],
+  ['too_many_questions', /^just\s+(tell|show|explain)\s+(me|it|us)[.!?\s]*$/i],
+  ['too_many_questions', /^(re\s*[-–]?\s*explain|explain\s+again|explain\s+it\s+again|explain\s+that\s+again)[.!?\s]*$/i],
+  ['too_many_questions', /^(just\s+)?(tell|show)\s+(me|us)\s+(the\s+answer|what\s+it\s+is|how\s+it\s+works)[.!?\s]*$/i],
 ]
 
 const MILD_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   ['dont_understand', /\bi\s+(really\s+|just\s+)?(don'?t|do\s+not)\s+understand\b/i],
+  // Past-tense / pronoun-less variants — "Didn't understand", "still didn't
+  // get it", "didn't follow" — the live-transcript bug: the present-tense
+  // pattern above missed the most common student phrasings.
+  ['dont_understand', /\b(didn'?t|did\s+not)\s+(understand|get\s+(?:it|that|this)|follow)\b/i],
+  ['dont_understand', /\bstill\s+(don'?t|do\s+not|didn'?t)\s+(understand|get\s+(?:it|that|this)|know\s+what\s+you|follow)\b/i],
+  ['dont_understand', /\bnot\s+understanding\b/i],
   ['confused',        /\bi(?:'?m|\s+am)\s+(so\s+|really\s+|totally\s+)?(confused|lost)\b/i],
+  // "I'm nervous / anxious" — frequently replaces "scared" but shares the
+  // same recovery script (name it, shrink stakes, slow down). Placed in MILD
+  // because "I'm a bit nervous about the presentation" should not fire.
+  ['scared',          /\bi(?:'?m|\s+am)\s+(really\s+|so\s+|very\s+|a\s+bit\s+)?(nervous|anxious)\b/i],
+  // "I've always been bad at physics" / "I always fail at maths" / "physics
+  // is impossible for me" — negative academic identity, needs the same
+  // externalize-and-find-a-win script as hate_subject.
+  ['hate_subject',    /\b(always|never)\s+(been|was|am)\s+(bad|terrible|awful|hopeless|useless)\s+at\s+(this|math|maths|physics|science|chemistry|biology)\b/i],
+  ['hate_subject',    /\b(always\s+)?(fail|failed)\s+at\s+(it|this|math|maths|physics|science|chemistry|biology)\b/i],
+  ['hate_subject',    /\b(math|maths|physics|science|chemistry|biology|this)\s+(is|was)\s+(impossible|so\s+hard|too\s+hard|pointless)\s+for\s+me\b/i],
   ['confused',        /\b(really\s+confusing|this\s+is\s+confusing)\b/i],
   // P1: "makes no sense" was already covered elsewhere (masteryGate.ts's
   // explain-differently detector) but NOT the far more common phrasing
@@ -106,6 +140,12 @@ const MILD_PATTERNS: Array<[FailureStateKey, RegExp]> = [
 /** Mild utterances only fire when the message is short enough to BE the
  * utterance (not merely contain it mid-paragraph). */
 const MILD_MAX_LENGTH = 120
+
+const REPHRASE_REQUEST_RE = /\b(explain|say|tell|show|try|put)\b.*?\b(differently|another\s+way|in\s+a\s+different\s+way|a\s+different\s+way)\b/i
+
+function isRephraseRequest(text: string): boolean {
+  return REPHRASE_REQUEST_RE.test(text)
+}
 
 /**
  * P0-3: structural "shouting" check — deliberately NOT a phrase list.
@@ -151,7 +191,7 @@ export function detectFailureState(message: string, priorUserMessage?: string | 
   }
   if (isShoutingCaps(text)) return 'frustrated'
   if (isRepeatedAnswer(text, priorUserMessage)) return 'frustrated'
-  if (text.length <= MILD_MAX_LENGTH) {
+  if (text.length <= MILD_MAX_LENGTH && !isRephraseRequest(text)) {
     for (const [key, re] of MILD_PATTERNS) {
       if (re.test(text)) return key
     }

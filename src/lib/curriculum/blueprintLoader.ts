@@ -172,6 +172,33 @@ export interface EBConceptContext {
    * lesson opening with a concrete scenario before any formal definition.
    */
   openingScenario: string | null
+  /**
+   * P1: Step-by-step teaching order from "## Teaching Sequence"
+   * or "## Teaching actions". Raw authored text — inject verbatim as the
+   * sequence the tutor must follow for this concept. Populated for any
+   * subject whose EB entry carries this section (originally physics-only;
+   * gate removed once chemistry's entries were confirmed to use the same
+   * heading format).
+   */
+  teachingSequence: string | null
+  /**
+   * P1: Authored action dispatch table from "## Tutor Actions".
+   * Maps student state to specific teaching action (e.g. WORKED-EXAMPLE, ANALOGY).
+   * Populated for any subject whose EB entry carries this section.
+   */
+  tutorActions: string | null
+  /**
+   * P1: Questions to draw from, from "## Discovery Questions"
+   * or "## Discovery lesson". Used as the authored question bank for this
+   * concept. Populated for any subject whose EB entry carries this section.
+   */
+  discoveryQuestions: string | null
+  /**
+   * P1: What to watch for — mastery gate cues from
+   * "## Assessment Signals" or "## Assessment". Populated for any subject
+   * whose EB entry carries this section.
+   */
+  assessmentSignals: string | null
 }
 
 export type EBConceptContextResult =
@@ -640,59 +667,105 @@ function extractComponentMisconceptions(content: string): MisconceptionEntry[] {
 // ── EB Concept Entry parsers (TQ-1 / TQ-2) ───────────────────────────────────
 
 /**
- * Returns the raw text of a top-level `## SectionName` block from an EB entry.
- * EB entries use `## Title` (no number prefix).
+ * Returns the raw text of the first matching `## SectionName` block.
+ * Accepts an array of alternative heading names to support all three EB formats:
+ *   - New STANDARD (Batch 4+): plain title, e.g. `## Teaching Sequence`
+ *   - Old plain (Deliveries 5–14): plain title, e.g. `## Teaching actions`
+ *   - Old numbered (some physics): numbered, e.g. `## 9. Teaching Actions (dispatch table)`
+ * Each candidate is tried as both a plain match and a `\d+\. <candidate>` match.
  */
-function extractEBSection(content: string, sectionTitle: string): string | null {
-  const startRe = new RegExp(`^## ${sectionTitle}\\s*\\n`, 'm')
-  const startMatch = startRe.exec(content)
-  if (!startMatch) return null
-  const afterStart = content.slice(startMatch.index + startMatch[0].length)
-  // End at the next ## heading.
-  const endMatch = /^## /m.exec(afterStart)
-  return endMatch ? afterStart.slice(0, endMatch.index).trim() : afterStart.trim()
+function extractEBSection(content: string, ...sectionTitles: string[]): string | null {
+  for (const sectionTitle of sectionTitles) {
+    // Try plain heading first, then numbered prefix variant.
+    const patterns = [
+      new RegExp(`^## ${sectionTitle}\\s*\\n`, 'mi'),
+      new RegExp(`^## \\d+\\.\\s+${sectionTitle}[^\\n]*\\n`, 'mi'),
+    ]
+    for (const startRe of patterns) {
+      const startMatch = startRe.exec(content)
+      if (!startMatch) continue
+      const afterStart = content.slice(startMatch.index + startMatch[0].length)
+      const endMatch = /^## /m.exec(afterStart)
+      const raw = endMatch ? afterStart.slice(0, endMatch.index).trim() : afterStart.trim()
+      if (raw.length > 0) return raw
+    }
+  }
+  return null
 }
 
 /**
- * TQ-1: Parses the "## Recovery notes" section of an EB entry.
- * Extracts the "shrink to:" question and any M{n} recovery trigger blocks.
+ * TQ-1: Parses the recovery section of an EB entry.
+ * Supports both formats:
+ *   Old (Deliveries 5–14): "## Recovery notes" with "shrink to:" and M{n} trigger blocks.
+ *   New (STANDARD §14):    "## Tutor Recovery Strategy" with numbered prose steps.
  */
 function parseEBRecoveryNotes(content: string): {
   shrinkTo: string | null
   triggers: Array<{ label: string; text: string }>
 } {
-  const raw = extractEBSection(content, 'Recovery notes')
+  // Try old heading first, then new heading.
+  const raw = extractEBSection(content, 'Recovery notes', 'Tutor Recovery Strategy')
   if (!raw) return { shrinkTo: null, triggers: [] }
 
-  // "shrink to: ..." — grab everything up to the end of that sentence/clause.
-  const shrinkMatch = /shrink to:\s*([^.]+(?:\.[^*\n]+)*)/i.exec(raw)
-  const shrinkTo = shrinkMatch ? shrinkMatch[1].trim().replace(/\s+/g, ' ') : null
-
-  // M{n} recovery triggers: lines starting with "*M{n} recovery ..." italics blocks.
   const triggers: Array<{ label: string; text: string }> = []
-  const triggerRe = /\*(M\d+[^:]*(?:recovery[^:]*)?(?:trigger[^:]*)?)\*:\s*([\s\S]+?)(?=\n\n\*M\d+|\n\n\*[A-Z]|\n---|\n##|$)/gi
+
+  // OLD format: "shrink to: ..." sentence + M{n} trigger blocks.
+  const shrinkMatch = /shrink to:\s*([^.]+(?:\.[^*\n]+)*)/i.exec(raw)
+  if (shrinkMatch) {
+    const shrinkTo = shrinkMatch[1].trim().replace(/\s+/g, ' ')
+    const triggerRe = /\*(M\d+[^:]*(?:recovery[^:]*)?(?:trigger[^:]*)?)\*:\s*([\s\S]+?)(?=\n\n\*M\d+|\n\n\*[A-Z]|\n---|\n##|$)/gi
+    let m: RegExpExecArray | null
+    while ((m = triggerRe.exec(raw)) !== null) {
+      const label = m[1].trim()
+      const text = m[2].trim().replace(/\s+/g, ' ')
+      if (text.length > 10) triggers.push({ label, text })
+    }
+    return { shrinkTo, triggers }
+  }
+
+  // NEW format: numbered steps — extract each step as a trigger and first sentence as shrinkTo.
+  const stepRe = /^\d+\.\s+\*\*([^*]+)\*\*:\s*([\s\S]+?)(?=\n\d+\.|\n---|\n##|$)/gm
+  let firstStep: string | null = null
   let m: RegExpExecArray | null
-  while ((m = triggerRe.exec(raw)) !== null) {
+  while ((m = stepRe.exec(raw)) !== null) {
     const label = m[1].trim()
     const text = m[2].trim().replace(/\s+/g, ' ')
     if (text.length > 10) {
+      if (!firstStep) firstStep = `${label}: ${text}`
       triggers.push({ label, text })
     }
   }
+
+  // If no numbered bold steps, fall back to extracting each paragraph as a trigger.
+  if (triggers.length === 0) {
+    const paras = raw.split(/\n\n+/).filter(p => p.trim().length > 20)
+    paras.forEach((p, i) => {
+      triggers.push({ label: `Step ${i + 1}`, text: p.trim().replace(/\s+/g, ' ') })
+    })
+    firstStep = paras[0]?.trim().replace(/\s+/g, ' ') ?? null
+  }
+
+  // shrinkTo = opening sentence of the first step (the concrete anchor action).
+  const shrinkTo = firstStep
+    ? (firstStep.match(/^[^.!?]+[.!?]/)?.[0]?.trim() ?? firstStep.slice(0, 120))
+    : null
 
   return { shrinkTo, triggers }
 }
 
 /**
- * TQ-1: Parses "Anti-analogy to avoid:" entries from the "## Analogy library" section.
+ * TQ-1: Parses anti-analogy warnings from the analogy section of an EB entry.
+ * Supports both formats:
+ *   Old: "## Analogy library" with `**Anti-analogy to avoid**:` blocks.
+ *   New: "## Analogies"       with `**Anti-analogy — <Name>**:` blocks.
  */
 function parseEBAntiAnalogies(content: string): string[] {
-  const raw = extractEBSection(content, 'Analogy library')
+  const raw = extractEBSection(content, 'Analogy library', 'Analogies')
   if (!raw) return []
 
   const results: string[] = []
-  // Match "**Anti-analogy to avoid**:" or "- **Anti-analogy to avoid**:" blocks.
-  const re = /\*\*Anti-analogy to avoid\*\*:\s*([\s\S]+?)(?=\n- \*\*|\n\*\*|\n##|$)/gi
+  // Matches both "**Anti-analogy to avoid**:" (old) and "**Anti-analogy — ...**:" (new).
+  const re = /\*\*Anti-analogy[^*]*\*\*:\s*([\s\S]+?)(?=\n- \*\*|\n\*\*|\n##|---|\n\n\*\*|$)/gi
   let m: RegExpExecArray | null
   while ((m = re.exec(raw)) !== null) {
     const text = m[1].trim().replace(/\s+/g, ' ')
@@ -702,40 +775,117 @@ function parseEBAntiAnalogies(content: string): string[] {
 }
 
 /**
- * TQ-1: Parses the "What to listen for:" block from the "## Voice teaching" section.
- * Returns individual detection cue strings.
+ * TQ-1: Parses voice detection cues from the voice section of an EB entry.
+ * Supports both formats:
+ *   Old: "## Voice teaching"      with `*What to listen for*:` block.
+ *   New: "## Voice Teaching Notes" with free prose — latency signals, avoidance notes.
  */
 function parseEBVoiceDetectionCues(content: string): string[] {
-  const raw = extractEBSection(content, 'Voice teaching')
+  const raw = extractEBSection(content, 'Voice teaching', 'Voice Teaching Notes')
   if (!raw) return []
 
-  // Find "What to listen for:" paragraph.
+  // OLD format: explicit "What to listen for:" section.
   const listenMatch = /\*What to listen for\*:\s*([\s\S]+?)(?=\n\n\*|\n##|$)/i.exec(raw)
-  if (!listenMatch) return []
+  if (listenMatch) {
+    return listenMatch[1]
+      .trim()
+      .split(/;\s*|\n(?=learner )/)
+      .map(s => s.trim().replace(/\s+/g, ' '))
+      .filter(s => s.length > 10)
+  }
 
-  const block = listenMatch[1].trim()
-  // Split on semicolons or line breaks that separate individual cues.
-  return block
-    .split(/;\s*|\n(?=learner )/)
-    .map(s => s.trim().replace(/\s+/g, ' '))
-    .filter(s => s.length > 10)
+  // NEW format: extract named signal sentences (latency signal, avoid notes, if-student-pauses).
+  const cues: string[] = []
+  const signalRe = /(?:Latency signal|if a student pauses|Avoid using|listen for|signal)[^:]*:\s*([^.\n]+\.)/gi
+  let m: RegExpExecArray | null
+  while ((m = signalRe.exec(raw)) !== null) {
+    const text = m[1].trim().replace(/\s+/g, ' ')
+    if (text.length > 10) cues.push(text)
+  }
+  // If no specific signals found, return the first prose sentence as a general cue.
+  if (cues.length === 0) {
+    const firstSentence = raw.match(/^([^.\n]+[.!?])/m)?.[1]?.trim()
+    if (firstSentence && firstSentence.length > 10) cues.push(firstSentence)
+  }
+  return cues
 }
 
 /**
- * TQ-2: Extracts the opening scenario — the youngest / most concrete explanation
- * from the "## Explanation library" section (Age 10-12 entry, or the first entry).
+ * TQ-2: Extracts the opening / core explanation from an EB entry.
+ * Supports both formats:
+ *   Old: "## Explanation library" with `- **Age 10-12**:` age-banded bullets.
+ *   New: "## Core Understanding"  with prose paragraphs.
  */
 function parseEBOpeningScenario(content: string): string | null {
-  const raw = extractEBSection(content, 'Explanation library')
+  // Try old Explanation library format first.
+  const rawExplanation = extractEBSection(content, 'Explanation library')
+  if (rawExplanation) {
+    // Prefer "Age 10-12" entry (story/concrete anchor).
+    const ageMatch = /- \*\*Age 10[–-]12[^*]*\*\*:\s*([\s\S]+?)(?=\n- \*\*|\n##|$)/i.exec(rawExplanation)
+    if (ageMatch) return ageMatch[1].trim().replace(/\s+/g, ' ')
+    // Fallback: first bullet entry regardless of label.
+    const firstMatch = /- \*\*[^*]+\*\*:\s*([\s\S]+?)(?=\n- \*\*|\n##|$)/.exec(rawExplanation)
+    if (firstMatch) return firstMatch[1].trim().replace(/\s+/g, ' ')
+  }
+
+  // Try new Core Understanding format — return the first prose paragraph (≤400 chars).
+  const rawCore = extractEBSection(content, 'Core Understanding')
+  if (rawCore) {
+    const firstPara = rawCore.split(/\n\n+/)[0]?.trim()
+    if (firstPara && firstPara.length > 20) {
+      return firstPara.replace(/\s+/g, ' ').slice(0, 400)
+    }
+  }
+
+  return null
+}
+
+// ── P1: Teaching Sequence / Tutor Actions / Discovery / Assessment ──────────
+
+/**
+ * P1: Extracts the teaching sequence / teaching actions section.
+ * All three format variants are tried in order:
+ *   New:     "## Teaching Sequence"
+ *   Old:     "## Teaching actions"
+ *   Numbered:"## 9. Teaching Actions (...)"
+ * Returns the raw authored text, trimmed to ≤600 chars to stay within budget.
+ */
+function parseEBTeachingSequence(content: string): string | null {
+  const raw = extractEBSection(content, 'Teaching Sequence', 'Teaching actions', 'Teaching Actions')
   if (!raw) return null
+  return raw.slice(0, 600).trim()
+}
 
-  // Prefer "Age 10-12" entry (story/concrete anchor).
-  const ageMatch = /- \*\*Age 10[–-]12[^*]*\*\*:\s*([\s\S]+?)(?=\n- \*\*|\n##|$)/i.exec(raw)
-  if (ageMatch) return ageMatch[1].trim().replace(/\s+/g, ' ')
+/**
+ * P1: Extracts the Tutor Actions dispatch block (new format only).
+ * Old format embeds actions inside the Teaching actions section; new format has
+ * a dedicated "## Tutor Actions" block with compact WORKED-EXAMPLE / ANALOGY
+ * dispatch notation. Returns null if absent (graceful for old-format entries).
+ */
+function parseEBTutorActions(content: string): string | null {
+  const raw = extractEBSection(content, 'Tutor Actions')
+  if (!raw) return null
+  return raw.slice(0, 400).trim()
+}
 
-  // Fallback: first bullet entry regardless of label.
-  const firstMatch = /- \*\*[^*]+\*\*:\s*([\s\S]+?)(?=\n- \*\*|\n##|$)/.exec(raw)
-  return firstMatch ? firstMatch[1].trim().replace(/\s+/g, ' ') : null
+/**
+ * P1: Extracts discovery questions / discovery lesson.
+ * Returns the authored question bank for this concept (raw text, ≤500 chars).
+ */
+function parseEBDiscoveryQuestions(content: string): string | null {
+  const raw = extractEBSection(content, 'Discovery Questions', 'Discovery lesson', 'Discovery Lesson')
+  if (!raw) return null
+  return raw.slice(0, 500).trim()
+}
+
+/**
+ * P1: Extracts assessment signals / mastery gate cues.
+ * Returns the authored mastery-gate description for this concept (≤500 chars).
+ */
+function parseEBAssessmentSignals(content: string): string | null {
+  const raw = extractEBSection(content, 'Assessment Signals', 'Assessment')
+  if (!raw) return null
+  return raw.slice(0, 500).trim()
 }
 
 // ── Public API — EB Concept Entry (TQ-1 / TQ-2) ──────────────────────────────
@@ -764,6 +914,15 @@ export function loadEBConceptContext(conceptId: string): EBConceptContextResult 
 
   try {
     const { shrinkTo, triggers } = parseEBRecoveryNotes(raw)
+    // P1 teaching plan fields: format-agnostic section extraction (see
+    // parseEBTeachingSequence et al.) — not physics-specific. Previously
+    // gated to conceptId.startsWith('phys.'), which silently discarded
+    // these fields for every other subject's EB entries even when the
+    // entry carried correctly-headed "## Teaching Sequence" / "## Tutor
+    // Actions" / "## Discovery Questions" / "## Assessment Signals"
+    // sections (as chemistry's 186 entries do). Gate removed so any
+    // subject whose EB entry has these sections gets the same Teaching
+    // Sequence Executor treatment as physics — no new architecture.
     const context: EBConceptContext = {
       conceptId,
       recoveryShrinkTo: shrinkTo,
@@ -771,6 +930,10 @@ export function loadEBConceptContext(conceptId: string): EBConceptContextResult 
       antiAnalogies: parseEBAntiAnalogies(raw),
       voiceDetectionCues: parseEBVoiceDetectionCues(raw),
       openingScenario: parseEBOpeningScenario(raw),
+      teachingSequence: parseEBTeachingSequence(raw),
+      tutorActions: parseEBTutorActions(raw),
+      discoveryQuestions: parseEBDiscoveryQuestions(raw),
+      assessmentSignals: parseEBAssessmentSignals(raw),
     }
     ebContextCache.set(conceptId, context)
     return { found: true, context }
@@ -900,11 +1063,20 @@ export function loadBlueprintContent(conceptId: string): BlueprintContentResult 
  * Pass `ebContext` (TQ-1/TQ-2) to also inject recovery notes, anti-analogies,
  * voice detection cues, and the opening scenario from the EB Concept Entry.
  *
+ * Pass `currentStepBlock` (Option B — Teaching Sequence Executor,
+ * src/lib/teaching/teachingSequenceExecutor.ts) to replace the full
+ * "TEACHING PLAN" advisory dump with the runtime-selected CURRENT
+ * step only. When omitted, the full advisory dump is used as before
+ * (concepts without an executor-selected step, or with no Teaching Plan
+ * at all — populated for any subject whose EB entry has these sections,
+ * not physics-specific despite the historical "P1" name).
+ *
  * Returns an empty string when content is empty (e.g. old-format blueprint).
  */
 export function buildBlueprintContextBlock(
   content: BlueprintContent,
   ebContext?: EBConceptContext | null,
+  currentStepBlock?: string | null,
 ): string {
   const lines: string[] = []
   let hasContent = false
@@ -1014,6 +1186,56 @@ export function buildBlueprintContextBlock(
     }
     for (const t of ebContext!.recoveryTriggers) {
       lines.push(`${t.label}: ${t.text}`)
+    }
+  }
+
+  // P1 — Teaching Plan (Teaching Sequence + Tutor Actions + Discovery + Assessment).
+  // Historical name "hasPhysicsPlan" kept (originally physics-only; the
+  // isPhysics gate that limited these fields to phys.* concepts has been
+  // removed from loadEBConceptContext — this now populates for any subject
+  // whose EB entry carries the section, chemistry included).
+  const hasPhysicsPlan =
+    ebContext?.teachingSequence ||
+    ebContext?.tutorActions ||
+    ebContext?.discoveryQuestions ||
+    ebContext?.assessmentSignals
+
+  // Option B (Teaching Sequence Executor): when the runtime has already
+  // selected a current step, inject ONLY that step's contract — never the
+  // full sequence, never future steps. This is what turns the plan from
+  // advisory text (LLM free to explain before discovery, skip/repeat steps)
+  // into an executed, one-step-at-a-time contract. Falls back to the full
+  // advisory dump when no contract is available, preserving existing
+  // behavior for non-physics concepts and physics concepts without a plan.
+  if (currentStepBlock) {
+    if (!hasContent) {
+      lines.push('\n\nBLUEPRINT CONTEXT')
+      lines.push(`Concept: ${content.conceptId}`)
+      hasContent = true
+    }
+    lines.push(currentStepBlock)
+  } else if (hasPhysicsPlan) {
+    if (!hasContent) {
+      lines.push('\n\nBLUEPRINT CONTEXT')
+      lines.push(`Concept: ${content.conceptId}`)
+      hasContent = true
+    }
+    lines.push('\nTEACHING PLAN — follow this authored expert sequence for this concept:')
+    if (ebContext!.teachingSequence) {
+      lines.push('\nTEACHING SEQUENCE (follow this order — do not invent a different order):')
+      lines.push(ebContext!.teachingSequence)
+    }
+    if (ebContext!.tutorActions) {
+      lines.push('\nTUTOR ACTIONS (use these specific actions for this concept):')
+      lines.push(ebContext!.tutorActions)
+    }
+    if (ebContext!.discoveryQuestions) {
+      lines.push('\nDISCOVERY QUESTIONS (draw from this authored bank — do not invent new ones when these are provided):')
+      lines.push(ebContext!.discoveryQuestions)
+    }
+    if (ebContext!.assessmentSignals) {
+      lines.push('\nMASTERY SIGNALS (what mastery looks like for this specific concept):')
+      lines.push(ebContext!.assessmentSignals)
     }
   }
 

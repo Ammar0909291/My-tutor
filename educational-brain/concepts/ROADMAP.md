@@ -13,9 +13,19 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **414** |
-| Remaining | **1,361** |
-| Completion percentage | **23.32%** |
+| Concepts with an Educational Brain entry | **555** |
+| Remaining | **1,220** |
+| Completion percentage | **31.27%** |
+
+*(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
+with an Educational Brain entry" rows had accumulated from prior sessions
+without being reconciled. Recomputed from this same file's §2 Subject
+progress table as currently stated per subject: 128 mathematics + 238
+physics + 3 english + 186 chemistry + 0 biology + 0 computer_science =
+555. Only the mathematics figure was independently re-verified by this
+batch by direct file count; the other subjects' figures are taken as
+already-recorded in §2 below, not re-audited by this batch, per this
+program's "mathematics only" scope this turn.)*
 
 ---
 
@@ -23,10 +33,10 @@ below from source whenever this file is updated, never hand-estimate.
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 37 | 4.07% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 128 | 14.10% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
-| chemistry | 186 | 136 | 73.12% | `chem.found.matter` | **Yes** |
+| chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
 
@@ -145,15 +155,32 @@ Brain entries.
 
 ---
 
-## 3. Domain status — math.found (IN PROGRESS)
+## 3. Domain status — math.found (**COMPLETE — CERTIFIED**, 2026-07-26)
 
 | Metric | Value |
 |---|---|
 | Domain | `math.found` (mathematics / Foundations) |
 | Total concepts in domain | 82 |
-| Authored this program | 36 |
-| Remaining | 46 |
-| Status | **IN PROGRESS** — not eligible for Domain Certification yet |
+| Authored this program | 82 |
+| Remaining | 0 |
+| Status | **COMPLETE — DOMAIN CERTIFIED** (82/82, 100%, per `VALIDATION_REPORT.md`'s own "Domain Certification requires 100% of a domain's concepts authored" criterion) |
+
+**Domain Certification passes as of Wave 16 (2026-07-26)**: all 82
+`math.found` concepts authored, each individually verified against
+Quality Gate 3's exact 21-section heading order, 0 duplicates, 0
+orphans, every Blueprint Reference accurate (citing an existing
+Blueprint or stating none exists). **Three open KGCS review items
+carried forward, unresolved, not blocking certification** (no Canonical
+KG file has been modified for any of them, per this program's standing
+never-modify-the-KG constraint): (1) `math.found.mathematical-notation`
+and `math.found.mathematical-symbols` remain a genuinely thin KG
+distinction (near-identical descriptions, identical prerequisite,
+identical `bloom: remember`); (2) `math.found.set`'s Misconception
+Register substantially overlaps `math.found.set-theory`'s own
+(order/repetition, ∅-vs-{∅}); (3) the same ∅-vs-{∅} confusion is
+registered a third time in `math.found.empty-set`'s own Misconceptions.
+See `VALIDATION_REPORT.md`'s own Domain Certification section for the
+full record.
 
 Wave 1 (5, level 0-1): `mathematical-thinking` (root), `abstraction`,
 `pattern-recognition`, `problem-solving`, `mathematical-language`.
@@ -166,11 +193,56 @@ Wave 2 (8, level 2): `definition`, `generalization`,
 `logical-connectives`, `predicate`, `set`. Wave 5 (8, level 5): `cartesian-product`,
 `empty-set`, `ordered-pair`, `predicate-logic`, `set-builder-notation`,
 `set-membership`, `set-theory-axiomatic`, `truth-table`. Wave 6 (5, level 6,
-complete this batch): `logical-equivalence`, `ordinal-number`, `quantifiers`,
-`relation`, `subset`. Wave 7 (to be computed from the live KG before the next
-batch) is next. No other domain will be started until all 82 `math.found` concepts
-are `READY` and Domain Certification passes — **except by explicit,
-subject-specific user instruction, as happened this batch (§3b)**.
+found already on `main` at a prior batch's start, authored by a prior
+session — **repaired 2026-07-26**: originally used a non-conformant
+numbered-heading scheme, a confirmed Quality Gate 3 violation; fully
+restructured to the current Standard, all content preserved losslessly,
+see `COVERAGE.md` Delivery history):
+`logical-equivalence`, `ordinal-number`, `quantifiers`,
+`relation`, `subset`. Wave 7 (9, level 7, 2026-07-26):
+`proper-subset`, `set-equality`, `set-operations`, `power-set`,
+`partition`, `reflexive-relation`, `symmetric-relation`,
+`transitive-relation`, `rules-of-inference`. Wave 8 (10, level 8, this
+batch, 2026-07-26): `proof`, `union`, `intersection`, `set-difference`,
+`complement`, `venn-diagram`, `equivalence-relation`, `partial-order`,
+`function-set-theoretic`, `cardinal-arithmetic`. Also repaired same
+batch: `math.arith.fractions` (the original Delivery-5 seed entry,
+predating the Standard's existence — same Quality Gate 3 violation
+pattern as Wave 6, restructured losslessly, `brainSeedAssets.ts`
+citations re-verified intact). Wave 9 (8, level 9, this batch,
+2026-07-26, autonomous loop — proof-family sub-domain, none had
+Blueprints): `direct-proof`, `proof-by-contradiction`,
+`proof-by-contrapositive`, `proof-by-cases`, `existence-proof`,
+`writing-mathematics`, `theorem`, `conjecture`. Wave 10 (7, this batch,
+2026-07-26, autonomous loop iteration 2): `uniqueness-proof`, `lemma`,
+`corollary`, `equivalence-class`, `total-order`, `hasse-diagram`,
+`cardinality`. Wave 11 (2, 2026-07-26, autonomous loop iteration 3):
+`finite-set` (no Blueprint, misconceptions authored via the
+birth-taxonomy diagnostic procedure), `natural-numbers`
+(Blueprint-grounded, PACKAGE_READY). Wave 12 (4, 2026-07-26, autonomous
+loop iteration 4): `proof-by-induction`, `well-ordering-principle`,
+`integers` (all three Blueprint-grounded, PACKAGE_READY),
+`countable-set` (no Blueprint, misconceptions authored via the
+birth-taxonomy diagnostic procedure). Wave 13 (3, 2026-07-26,
+autonomous loop iteration 5): `strong-induction` (no Blueprint),
+`uncountable-set` (no Blueprint, Cantor's diagonal argument authored
+directly), `rational-numbers` (Blueprint-grounded, PACKAGE_READY,
+cross-links to already-authored `math.arith.fractions`). Wave 14 (1,
+2026-07-26, autonomous loop iteration 6): `irrational-numbers`
+(Blueprint-grounded, PACKAGE_READY, √2's proof-by-contradiction
+authored directly). Wave 15 (1, this batch, 2026-07-26, autonomous
+loop iteration 7): `real-numbers` (Blueprint-grounded, PACKAGE_READY,
+synthesizes rational-numbers + irrational-numbers via ℝ=ℚ∪(ℝ∖ℚ), the
+completeness/LUB property authored directly, cross-links to
+unauthored `math.calc.limits`/`math.real.completeness` noted as
+future activation points). `math.found` now 81/82 — only **1 concept
+remains**: `complex-numbers`. Wave 16 (the final wave) is already
+computable: `complex-numbers`. Once authored, `math.found` reaches
+82/82 and becomes eligible for Domain Certification per this section's
+own standing gate. No other domain will be started until all 82
+`math.found` concepts are `READY` and Domain Certification passes —
+**except by explicit, subject-specific user instruction, as happened
+in §3b/§3c below**.
 
 ---
 
@@ -811,16 +883,53 @@ procedure.
 
 ## 5. Priority queue
 
-1. **Default (resumes next batch unless given an equally explicit
-   subject-specific override): `math.found` Wave 7 (candidates to be
-   computed from the live KG before starting)**: the set of `math.found`
-   nodes whose prerequisites are all now READY after Wave 6.
-2. **`math.found` Waves 8+ (46 remaining concepts after Wave 7)**, in strict
-   topological order, until all 82 are `READY`.
-3. Only after `math.found` is 100% complete and certified: the queue
-   returns to cross-subject priorities — `chem.found.matter`,
-   `bio.found.what-is-biology`, `cs.found.intro-computers`, then
-   physics's next dependency level (Wave 8), then everything else in
+**`math.found` is now COMPLETE and CERTIFIED (82/82, 2026-07-26) — see
+§3. Items 1-2 below are historical record of how it was reached; the
+active default has moved to item 1a.**
+
+1a. **Active default (2026-07-26): `math.arith` domain, Waves 1-6
+    done, Wave 7 part 1 done, Wave 7 part 2 next**. `math.arith` has
+    58 total concepts. Waves 1-5 (historical, condensed): `counting`,
+    the 6 fraction-family concepts, and 24 more across Waves 3-5
+    (parts 1-2 each) — 31 concepts total; two genuine discoveries
+    along the way: a Blueprint/KG metadata discrepancy pattern (found
+    for `ones-tens-hundreds` and `percentages`, always resolved in
+    favor of the KG), and that Blueprints for
+    `math.func.linear-function`/`math.func.rational-function` now
+    exist, contradicting a stale claim in `proportion.md`/`ratios.md`
+    (corrected via a small addendum, no rewrite). Wave 6 (9 concepts,
+    split into two parts given the heavier no-Blueprint load,
+    following the same pattern as Waves 4 and 5): part 1 (2026-07-26,
+    iteration 17) authored the 4 Blueprint-grounded concepts
+    (`negative-numbers`, `division`, `significant-figures`,
+    `exponentiation`), raising `math.arith` to 35/58; part 2
+    (2026-07-26, iteration 18) authored the 5 no-Blueprint concepts
+    (`column-addition`, `borrowing`, `multiplication-table`,
+    `percentage-calculations`, `estimation`), each via the
+    birth-taxonomy diagnostic procedure, raising `math.arith` to
+    40/58. Wave 7 (12 concepts, split into two parts given the even
+    6/6 Blueprint-grounded/no-Blueprint split, same pattern as prior
+    waves): part 1 (2026-07-26, iteration 19) authored the 6
+    Blueprint-grounded concepts (`absolute-value`,
+    `integer-arithmetic`, `remainder`, `order-of-operations`,
+    `exponent-rules`, `square-numbers`), all reused by reference from
+    their existing Blueprints, raising `math.arith` to **46/58**.
+    Wave 7 part 2 (deferred): the 6 no-Blueprint concepts
+    (`long-multiplication`, `mental-multiplication`,
+    `divisor-dividend`, `percentage-change`, `cube-numbers`,
+    `scientific-notation`), misconceptions to be authored directly
+    via the birth-taxonomy diagnostic procedure.
+1. **(Historical, satisfied) `math.found` Wave 7**: the set of
+   `math.found` nodes whose prerequisites were all READY after Wave 6.
+2. **(Historical, satisfied) `math.found` Waves 8-16 (52 remaining
+   concepts after Wave 7)**, authored in strict topological order until
+   all 82 reached `READY`, completing 2026-07-26.
+3. Once `math.arith` (or whichever mathematics domain is active) is
+   itself 100% complete and certified, the queue returns to
+   cross-subject priorities — `chem.found.matter`, `bio.found.
+   what-is-biology`, `cs.found.intro-computers` — then continues through
+   mathematics's remaining 22 domains in whatever order Domain
+   Certification Mode selects next, then everything else in
    prerequisite order.
 4. **Standing exception, now CLOSED for physics**: physics (or any
    subject) may be targeted again ahead of this default order given an
@@ -877,3 +986,12 @@ merge, recomputed fresh: **409** entries (233 physics + 37 mathematics +
 remaining, 23.04%. This merge encountered no file overlap with the
 physics EB files authored this batch — see `COVERAGE.md`'s Delivery
 history for the reconciliation record.
+**Chemistry EB level 14 (this batch, standing production run)**: authored 15 concepts at dependency level 14 in strict topological order — chem.coord.applications, chem.coord.bonding, chem.coord.isomerism, chem.dblock.organometallics, chem.elect.batteries, chem.elect.corrosion, chem.elect.electrolysis, chem.elect.standard-electrode, chem.hal.introduction, chem.hyd.arenes, chem.hyd.conformations, chem.hyd.petroleum, chem.org.reactive-intermediates, chem.sblock.water, chem.state.liquids. Chemistry is now 136/186 (73.12%). True total: **391** EB entries (215 physics + 37 mathematics + 136 chemistry + 3 english), out of 1,775 total KG concepts — 1,384 remaining, 22.03%. Level 15 is next.
+
+**Chemistry EB level 15 (this batch, standing production run)**: authored 12 concepts at dependency level 15 in strict topological order — chem.elect.industrial, chem.elect.nernst, chem.hal.cfcs, chem.hal.haloarenes, chem.hal.sn1, chem.hal.sn2, chem.hyd.polycyclic, chem.nitro.nitro-compounds, chem.org.mechanisms, chem.sol.vapour-pressure, chem.state.phase-diagram, chem.surface.surfactants. Chemistry is now 148/186 (79.57%). True total: **403** EB entries (215 physics + 37 mathematics + 148 chemistry + 3 english), out of 1,775 total KG concepts — 1,372 remaining, 22.71%. Level 16 is next.
+
+**Chemistry EB level 16 (this batch, standing production run)**: authored 9 concepts at dependency level 16 in strict topological order — chem.alc.alcohols, chem.elect.concentration-cell, chem.hal.elimination, chem.hal.grignard, chem.hyd.alkenes, chem.org.arrow-pushing, chem.org.pericyclic, chem.sol.activity, chem.sol.colligative. Chemistry is now 157/186 (84.41%). True total: **412** EB entries (215 physics + 37 mathematics + 157 chemistry + 3 english), out of 1,775 total KG concepts — 1,355 remaining, 23.66%. Level 17 is next.
+#### Level 17 — 2026-07-24
+Authored 8 concepts: chem.alc.diols, chem.alc.ethers, chem.alc.phenols, chem.carb.aldehydes,
+chem.hyd.alkynes, chem.nitro.amines, chem.poly.addition, chem.sol.osmosis.
+Chemistry: 157 → 165/186 (88.71%). New domains: chem.carb, chem.poly.

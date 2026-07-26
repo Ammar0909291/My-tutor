@@ -297,6 +297,31 @@ describe('scenario 9 — semantic question loop (paraphrased, not exact wording)
     expect(s.consecutivePriorKnowledgeProbes).toBe(2)
   })
 
+  it('totalKnowledgeProbes never resets — permanent gate fires even after an abbreviated probe resets CPK', () => {
+    // Simulates the failing transcript: formal probes → abbreviated probe (CPK resets) →
+    // must still be blocked from asking. The LLM uses "GPS?" instead of
+    // "Have you seen GPS?" after the TURN DIRECTIVE suppresses formal probes;
+    // CPK would drop to 0 for "GPS?" (regex miss) but totalKnowledgeProbes
+    // holds the high-water mark and the permanent gate keeps firing 'show'.
+    let s = initialConversationState('c')
+    // Turn 1 & 2: formal probes — CPK=2, total=2
+    s = playTurns(s, [
+      { asked: true, correct: null, priorKnowledgeProbe: true },  // "Have you seen vectors?"
+      { asked: true, correct: null, priorKnowledgeProbe: true },  // "Have you seen forces?"
+    ])
+    expect(s.consecutivePriorKnowledgeProbes).toBe(2)
+    expect(s.totalKnowledgeProbes).toBe(2)
+    expect(decideNextMove(s, { recoveryTurn: false, workedExampleFirst: false })).toBe('show')
+
+    // Turn 3: abbreviated probe ("GPS?") — CPK resets to 0 (regex miss), but total stays at 2
+    s = playTurns(s, [{ asked: true, correct: null, priorKnowledgeProbe: false }])
+    expect(s.consecutivePriorKnowledgeProbes).toBe(0)
+    expect(s.totalKnowledgeProbes).toBe(2)  // never decremented
+
+    // Permanent gate still fires — abbreviated probes cannot erase it
+    expect(decideNextMove(s, { recoveryTurn: false, workedExampleFirst: false })).toBe('show')
+  })
+
   it('the turn directive names the semantic loop specifically when it is what forced SHOW', () => {
     let s = initialConversationState('c')
     s = playTurns(s, [
@@ -330,10 +355,10 @@ describe('turn directive invariants', () => {
     expect(teach).toContain('Ask NO questions')
   })
 
-  it('OBSERVE frame forbids vocabulary (no terminology before concrete)', () => {
+  it('OBSERVE frame forbids prior-knowledge probing (show anchor first)', () => {
     const s = initialConversationState('c')
     const d = buildTurnDirective({ state: s, nextMove: 'ask', maxParagraphs: 4, workedExampleFirst: false, visualType: null })
-    expect(d).toContain('no vocabulary')
+    expect(d).toContain('NOT prior-knowledge probing')
     expect(d).toContain('Stage 2')
   })
 
@@ -378,5 +403,75 @@ describe('base prompt laws (Phase A regression)', () => {
   })
   it('the turn directive owns pacing when present', () => {
     expect(prompt).toContain('TURN DIRECTIVE is present')
+  })
+})
+
+// ── Pacing/deflection/misconception-repair fixes (Tutor Max transcript review) ──
+
+describe('example ceiling + explicit topic-understanding (Principle 11)', () => {
+  const prompt = buildTutorSystemPrompt('physics', 'Sam', 'beginner', 'learn basics', null, 'en', null, undefined, 'beginner')
+
+  it('caps examples per sub-concept at two, as a ceiling not a requirement', () => {
+    expect(prompt).toContain('EXAMPLE CEILING')
+    expect(prompt).toMatch(/AT MOST TWO examples/i)
+    expect(prompt).toMatch(/ceiling, not a requirement/i)
+  })
+
+  it('an explicit "I got this topic" claim moves on immediately, not another example', () => {
+    expect(prompt).toMatch(/I got this topic/i)
+    expect(prompt).toMatch(/move to the next sub-concept IMMEDIATELY/i)
+  })
+})
+
+describe('bare acknowledgment is not an answer, capped at one retry (Principle 12)', () => {
+  const prompt = buildTutorSystemPrompt('physics', 'Sam', 'beginner', 'learn basics', null, 'en', null, undefined, 'beginner')
+
+  it('states the one-retry-then-accept rule', () => {
+    expect(prompt).toContain('A CLAIM IS NOT AN ANSWER')
+    expect(prompt).toMatch(/Re-ask that SAME question ONCE/i)
+    expect(prompt).toMatch(/do not ask a third time/i)
+  })
+})
+
+describe('misconception repair re-probes the original question (Principle 4 strengthened)', () => {
+  const prompt = buildTutorSystemPrompt('physics', 'Sam', 'beginner', 'learn basics', null, 'en', null, undefined, 'beginner')
+
+  it('requires re-asking the original question after a correction, not just a nicer explanation', () => {
+    expect(prompt).toMatch(/re-ask the same original question/i)
+    expect(prompt).toMatch(/confirm the corrected understanding actually landed/i)
+  })
+})
+
+describe('navigation rule does not misfire on within-lesson pacing requests', () => {
+  const prompt = buildTutorSystemPrompt('physics', 'Sam', 'beginner', 'learn basics', null, 'en', null, undefined, 'beginner')
+
+  it('lists "I got this topic move to next" as a continuation, not a lesson-switch', () => {
+    const navSection = prompt.slice(prompt.indexOf('NAVIGATION RULE'))
+    expect(navSection).toContain('I got this topic move to next')
+    expect(navSection).toMatch(/continue teaching/i)
+  })
+
+  it('still treats explicit lesson-switch phrases as navigation commands', () => {
+    expect(prompt).toContain('next lesson')
+    expect(prompt).toContain('Use the lesson navigation panel')
+  })
+})
+
+describe('Hindi and Russian prompts carry the same fixes (mirrored, not English-only)', () => {
+  it('Hindi: example ceiling + claim-is-not-an-answer + re-probe + nav exception', () => {
+    const hi = buildTutorSystemPrompt('physics', 'Sam', 'beginner', 'learn basics', null, 'hi', null, undefined, 'beginner')
+    expect(hi).toMatch(/EXAMPLE CEILING/i)
+    expect(hi).toMatch(/I got this topic/i)
+    expect(hi).toContain('EK CLAIM ANSWER NAHI HAI')
+    expect(hi).toMatch(/dobara.*poochein.*confirm/i)
+    expect(hi).toContain('I got this topic move to next')
+  })
+
+  it('Russian: example ceiling + claim-is-not-an-answer + re-probe + nav exception', () => {
+    const ru = buildTutorSystemPrompt('physics', 'Sam', 'beginner', 'learn basics', null, 'ru', null, undefined, 'beginner')
+    expect(ru).toContain('ПОТОЛОК ПРИМЕРОВ')
+    expect(ru).toContain('УТВЕРЖДЕНИЕ — ЭТО НЕ ОТВЕТ')
+    expect(ru).toMatch(/тот же исходный вопрос ещё раз/i)
+    expect(ru).toContain('ИСКЛЮЧЕНИЕ')
   })
 })

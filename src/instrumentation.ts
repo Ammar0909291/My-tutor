@@ -36,7 +36,19 @@ export async function register() {
 async function bootstrapAssets() {
   try {
     const { PrismaClient } = await import('@prisma/client')
-    const prisma = new PrismaClient()
+    const { withPoolParams } = await import('./lib/db/poolConfig')
+    // P5 (2026-07-26): this bootstrap ran its own unpooled PrismaClient on
+    // every cold start (default connection_limit = CPU count, pool_timeout
+    // = 10s), bypassing the P0 pool-sizing fix (poolConfig.ts /
+    // connection_limit=15, pool_timeout=20) that src/lib/db/prisma.ts's
+    // singleton already applies. That opened an extra unpooled connection
+    // at exactly the moment (cold start) request traffic is also spiking —
+    // worsening the "Timed out fetching a new connection from the
+    // connection pool" errors seen in production. Applying the same pool
+    // params here closes that gap without changing any bootstrap behavior.
+    const prisma = new PrismaClient({
+      ...(withPoolParams(process.env.DATABASE_URL) ? { datasources: { db: { url: withPoolParams(process.env.DATABASE_URL) } } } : {}),
+    })
 
     try {
       // Load seed arrays first so we know the expected total before querying.

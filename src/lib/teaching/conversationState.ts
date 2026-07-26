@@ -43,36 +43,38 @@ export const PHASE_MAX_QUESTION_STAGE: Record<TeachingPhase, number> = {
 
 export interface ConversationState {
   phase: TeachingPhase
-  /** Phase is per-concept: a concept change resets the machine. */
   conceptId: string | null
-  /** Phase E counters (ask/teach budget). */
   questionsAskedSinceTeach: number
   teachSegmentsSinceQuestion: number
   consecutiveFailures: number
-  /** Evidence gates. */
   demonstrated: boolean
   correctAtCheck: number
   correctAtPractice: number
-  /** Student-state counters (mastery-gate work, Bug 11). All persisted
-   * per-concept and restored via readConversationState's spread-over-
-   * defaults, so pre-existing snapshots without them stay valid. */
   remediationCount: number
   diagramRequests: number
   exampleRequests: number
-  /** Stance Enforcement (Claude Recommendation #6): was a misconception
-   * detected on this concept at any point in the current lesson? Monotonic
-   * within one concept's lifetime (resets only when the concept changes,
-   * same as every other counter here) — feeds stanceEnforcement.ts's
-   * "misconception cannot be marked resolved without evidence" check. */
   misconceptionDetectedThisLesson: boolean
-  /** P0-4 (semantic loop detection): consecutive assistant turns whose
-   * question matched the prior-knowledge-elicitation family (isPriorKnow
-   * ledgeProbe), regardless of exact wording — "Have you seen X?" then
-   * "Can you think of X?" both count. Distinct from questionsAskedSince
-   * Teach (which counts ANY question): this tracks the SAME underlying
-   * ask repeated in different words. Resets whenever a turn's question
-   * (or non-question) isn't a probe of this family. */
   consecutivePriorKnowledgeProbes: number
+  /** Never resets — permanent high-water mark. Catches abbreviated probes
+   *  ("GPS?", "Maps?") that CPK misses when LLM evades the formal pattern. */
+  totalKnowledgeProbes: number
+  /** Hard Rule 1: counts consecutive turns where the student fired a
+   *  dont_know or dont_understand recovery. When >= 2, discovery is over —
+   *  decideNextMove forces 'show' regardless of phase. Resets on any non-
+   *  failure turn. */
+  consecutiveDontKnows: number
+  /** Tracks how many times the OBSERVE phase ended in failure (recovery or
+   *  signal=false). When >= 2, decideNextMove forces 'show' so the phase
+   *  advances to DEMONSTRATE instead of repeating the observation loop. */
+  observeFailures: number
+  strategiesUsed: number[]
+  analogiesUsed: string[]
+  demonstrationsShown: string[]
+  misconceptionsSeen: string[]
+  prerequisiteAttempts: string[]
+  explanationCount: number
+  learnerConfidence: 'high' | 'medium' | 'low' | 'unknown'
+  frustrationLevel: number
 }
 
 export function initialConversationState(conceptId: string | null): ConversationState {
@@ -90,6 +92,17 @@ export function initialConversationState(conceptId: string | null): Conversation
     exampleRequests: 0,
     misconceptionDetectedThisLesson: false,
     consecutivePriorKnowledgeProbes: 0,
+    totalKnowledgeProbes: 0,
+    consecutiveDontKnows: 0,
+    observeFailures: 0,
+    strategiesUsed: [],
+    analogiesUsed: [],
+    demonstrationsShown: [],
+    misconceptionsSeen: [],
+    prerequisiteAttempts: [],
+    explanationCount: 0,
+    learnerConfidence: 'unknown',
+    frustrationLevel: 0,
   }
 }
 
@@ -114,26 +127,21 @@ export function readConversationState(
 // ── Post-AI evidence fold ─────────────────────────────────────────────────────
 
 export interface TurnEvidence {
-  /** The assistant's (clean) reply contained at least one question. */
   askedQuestion: boolean
-  /** Parsed SIGNAL correctness for the learner's answer; null = no signal. */
   signalCorrect: boolean | null
-  /** A recovery utterance fired this turn (failure by statement). */
   recoveryFired: boolean
-  /** Deterministic learner request detected this turn (masteryGate.ts):
-   * 'explain_differently' counts as remediation (confidence down, phase
-   * re-shows); 'diagram'/'real_life_example' update the student-state
-   * counters. Optional so pre-existing call sites stay valid. */
   learnerRequest?: 'diagram' | 'real_life_example' | 'explain_differently' | null
-  /** Stance Enforcement (Claude Recommendation #6): did this turn's parsed
-   * SIGNAL carry a misconception phrase (teachingSignal?.phrase present)?
-   * Optional so pre-existing call sites stay valid; undefined behaves as
-   * false (no misconception signal this turn). */
   misconceptionDetected?: boolean
-  /** P0-4: did the assistant's (clean) reply match the prior-knowledge-
-   * elicitation question family (isPriorKnowledgeProbe)? Optional so
-   * pre-existing call sites stay valid; undefined behaves as false. */
   isPriorKnowledgeProbe?: boolean
+  strategyUsed?: number
+  analogyLabel?: string
+  demonstrationLabel?: string
+  misconceptionId?: string
+  prerequisiteAttempted?: string
+  signalConfidence?: 'high' | 'medium' | 'low'
+  /** Hard Rule 1: true when the student fired a dont_know or dont_understand
+   *  recovery this turn — drives consecutiveDontKnows counter. */
+  dontKnowSignal?: boolean
 }
 
 /**
@@ -146,8 +154,11 @@ export interface TurnEvidence {
  * QUESTION_OPENERS/STRONG_PATTERNS already use elsewhere in this codebase.
  * Sibling to repliesWithQuestion(): both read the ASSISTANT's own text.
  */
+// Expanded to catch common variants the LLM uses that the narrow version
+// missed ("have you ever used", "have you ever tried", "have you ever noticed",
+// "are you familiar with") — the live transcript had ~8 undetected probes.
 const PRIOR_KNOWLEDGE_PROBE_RE =
-  /\b(have you (seen|heard( of)?|come across|encountered)|can you think of|what comes to mind|do you (know|recall|remember))\b/i
+  /\b(have you (seen|heard(\s+of)?|come across|encountered|used|tried|noticed|worked\s+with|thought\s+about)|can you think of|what comes to mind|do you (know|recall|remember)|are you familiar with)\b/i
 
 export function isPriorKnowledgeProbe(assistantText: string): boolean {
   const withoutCode = assistantText.replace(/```[\s\S]*?```/g, '')
@@ -200,13 +211,48 @@ export function advanceConversationState(
 
   // P0-4: consecutive prior-knowledge-probe counter — folded unconditionally
   // like the Phase E counters above, independent of which branch follows.
+  // totalKnowledgeProbes is monotonically increasing — never reset — so
+  // abbreviated probes ("GPS?", "Maps?") that fall outside PRIOR_KNOWLEDGE_PROBE_RE
+  // cannot erase the high-water mark the formal probes built up.
   next.consecutivePriorKnowledgeProbes = evidence.isPriorKnowledgeProbe
     ? prev.consecutivePriorKnowledgeProbes + 1
+    : 0
+  next.totalKnowledgeProbes = (prev.totalKnowledgeProbes ?? 0) + (evidence.isPriorKnowledgeProbe ? 1 : 0)
+
+  // Hard Rule 1: track consecutive student "I don't know / didn't understand"
+  // signals so decideNextMove can end discovery after 2. Resets on any turn
+  // where the student didn't fire a dont_know/dont_understand recovery.
+  next.consecutiveDontKnows = evidence.dontKnowSignal
+    ? (prev.consecutiveDontKnows ?? 0) + 1
     : 0
 
   // Bug 5/6/11 — student-state counters for explicit action requests.
   if (evidence.learnerRequest === 'diagram') next.diagramRequests = prev.diagramRequests + 1
   if (evidence.learnerRequest === 'real_life_example') next.exampleRequests = prev.exampleRequests + 1
+
+  // Tracking fields from TurnEvidence — fold into ConversationState arrays.
+  if (evidence.strategyUsed !== undefined && evidence.strategyUsed >= 0) {
+    if (!next.strategiesUsed.includes(evidence.strategyUsed)) {
+      next.strategiesUsed = [...prev.strategiesUsed, evidence.strategyUsed]
+    }
+  }
+  if (evidence.analogyLabel) {
+    next.analogiesUsed = [...prev.analogiesUsed, evidence.analogyLabel]
+  }
+  if (evidence.demonstrationLabel) {
+    next.demonstrationsShown = [...prev.demonstrationsShown, evidence.demonstrationLabel]
+  }
+  if (evidence.misconceptionId) {
+    if (!prev.misconceptionsSeen.includes(evidence.misconceptionId)) {
+      next.misconceptionsSeen = [...prev.misconceptionsSeen, evidence.misconceptionId]
+    }
+  }
+  if (evidence.prerequisiteAttempted) {
+    next.prerequisiteAttempts = [...prev.prerequisiteAttempts, evidence.prerequisiteAttempted]
+  }
+  if (evidence.signalConfidence) {
+    next.learnerConfidence = evidence.signalConfidence
+  }
 
   // Bug 7 — "explain differently" / "I don't understand" is remediation:
   // confidence drops (consecutiveFailures++), remediation is counted, and
@@ -214,7 +260,11 @@ export function advanceConversationState(
   // A stray SIGNAL on such a turn can never advance the ladder.
   if (evidence.learnerRequest === 'explain_differently') {
     next.remediationCount = prev.remediationCount + 1
+    next.explanationCount = prev.explanationCount + 1
     next.consecutiveFailures = prev.consecutiveFailures + 1
+    next.frustrationLevel = Math.min(5, Math.round(
+      (prev.consecutiveFailures + 1) + (prev.remediationCount + 1) * 0.5
+    ))
     next.phase = phaseDown(prev.phase, next.demonstrated)
     return next
   }
@@ -224,6 +274,12 @@ export function advanceConversationState(
 
   if (failed) {
     next.consecutiveFailures = prev.consecutiveFailures + 1
+    // Track OBSERVE-phase failures so decideNextMove can force 'show' after 2
+    // consecutive failures without waiting for totalKnowledgeProbes (which
+    // only counts formal "have you seen/know" patterns, not every probe type).
+    if (prev.phase === 'OBSERVE') {
+      next.observeFailures = (prev.observeFailures ?? 0) + 1
+    }
     next.phase = phaseDown(prev.phase, next.demonstrated)
     // Success evidence at CHECK/PRACTICE is voided by a later failure at
     // the same rung only in part — keep it (high-water mark), the phase
@@ -278,11 +334,23 @@ export interface NextMoveContext {
 export function decideNextMove(state: ConversationState, ctx: NextMoveContext): NextMove {
   // Recovery preempts — the recovery script already forbids questions.
   if (ctx.recoveryTurn) return 'teach'
+  // Hard Rule 1: the student has said "I don't know / didn't understand"
+  // twice in a row — Discovery is definitively over, teaching must begin.
+  if ((state.consecutiveDontKnows ?? 0) >= 2) return 'show'
+  // Permanent gate: after 2 total prior-knowledge probes the inquiry phase
+  // is definitively over. Unlike CPK, this counter never resets, so
+  // abbreviated probes that fall outside PRIOR_KNOWLEDGE_PROBE_RE cannot
+  // reset the gate once 2 formal probes have been seen. A human tutor stops
+  // asking "have you seen X?" after the student has said "no" twice.
+  if ((state.totalKnowledgeProbes ?? 0) >= 2) return 'show'
   // P0-4: semantic loop break — the same underlying question, reworded,
   // twice in a row. More specific than the generic question budget below
   // (which only counts, never recognizes repeated INTENT), so it is
   // checked first and can fire even where the generic count alone would not.
   if (state.consecutivePriorKnowledgeProbes >= 2) return 'show'
+  // Observe-failure gate: when the student has failed the OBSERVE observation
+  // question twice, stop repeating it — advance to DEMONSTRATE.
+  if ((state.observeFailures ?? 0) >= 2) return 'show'
   // Hard question budget: two asks without a give → give.
   if (state.questionsAskedSinceTeach >= 2) {
     return state.consecutiveFailures >= 1 ? 'show' : 'teach'
@@ -351,10 +419,14 @@ export interface TurnDirectiveParams {
   /** Phase G: server-decided visual for this turn (detectVisual output),
    *  or null when text teaches faster. */
   visualType: string | null
+  /** When true, the OBSERVE phase frame is replaced with one that does not
+   *  say "no teaching payload" — the First Lesson Protocol's opening move
+   *  IS a teaching payload (creating the need). */
+  firstLessonActive?: boolean
 }
 
 const PHASE_FRAME: Record<TeachingPhase, string> = {
-  OBSERVE:     'OBSERVE — anchor attention on something concrete the learner can notice. No teaching payload yet, no vocabulary, nothing to memorise.',
+  OBSERVE:     'OBSERVE — show ONE concrete anchor (a drawn arrow, a scenario, a physical object) then ask what the learner NOTICES about it. This is NOT prior-knowledge probing — never ask "have you seen / heard / used / tried / know" whether they have encountered the concept before. Show first. Then ask what they observe.',
   DEMONSTRATE: 'DEMONSTRATE — show the idea working (worked example, demonstration, concrete walkthrough). Explain after showing, never instead of showing.',
   GUIDE:       'GUIDE — do it WITH the learner: supported steps, you carry most of the weight, fade support gradually.',
   CHECK:       'CHECK — verify the basic idea landed with ONE small check at or below the stage ceiling. React to the answer contentfully.',
@@ -364,7 +436,7 @@ const PHASE_FRAME: Record<TeachingPhase, string> = {
 
 const MOVE_LINE: Record<NextMove, string> = {
   teach: 'TEACH — explain or advance the idea. Ask NO questions this turn; end with an invitation, not a question mark.',
-  show:  'SHOW — open with a short worked example or demonstration BEFORE anything else. Ask NO questions this turn.',
+  show:  'SHOW — open with a CONCRETE DEMONSTRATION of the concept BEFORE anything else. Ask NO questions this turn. DO NOT ask "have you seen / heard / used / know" — the student cannot answer those; show them the concept directly as if they know nothing.',
   ask:   'ASK — exactly ONE question, at or below the stage ceiling. Nothing else question-shaped in the response.',
 }
 
@@ -376,7 +448,10 @@ const MOVE_LINE: Record<NextMove, string> = {
  */
 export function buildTurnDirective(p: TurnDirectiveParams): string {
   const lines: string[] = ['\n\nTURN DIRECTIVE (server-decided — follow exactly; overrides any earlier advisory pacing):']
-  lines.push(`- Teaching phase: ${PHASE_FRAME[p.state.phase]}`)
+  const phaseFrame = (p.firstLessonActive && p.state.phase === 'OBSERVE')
+    ? 'OBSERVE — follow the FIRST LESSON PROTOCOL opening approach: use the concrete hook the subject rule specifies to create the NEED. Then ask exactly ONE Stage 1–2 observation question.'
+    : PHASE_FRAME[p.state.phase]
+  lines.push(`- Teaching phase: ${phaseFrame}`)
   lines.push(`- Next move: ${MOVE_LINE[p.nextMove]}`)
   lines.push(`- Question stage ceiling: Stage ${PHASE_MAX_QUESTION_STAGE[p.state.phase]} (see QUESTION STAGE POLICY). Never ask above it this turn.`)
   if (p.maxParagraphs !== null) {

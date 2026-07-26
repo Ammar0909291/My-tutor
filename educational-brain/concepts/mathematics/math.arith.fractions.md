@@ -20,19 +20,59 @@
   a **cut-node**: essentially all later proportional reasoning stands on it.
   Teaching it badly is the single largest documented source of secondary-school
   mathematics failure.
-- **Difficulty**: developing · **Bloom**: understand · **Mastery threshold**:
-  KG-authored · **Est. hours**: ~4
-- **Learning objectives** — the learner can:
-  1. State what the bottom number counts and what the top number counts, in
-     their own words, for any fraction shown.
-  2. Place 1/2, 1/3, 1/4, 3/4, 5/4 correctly on a number line 0–2.
-  3. Compare two unit fractions (which of 1/3, 1/4 is larger) and *explain
-     why* at mechanism level (rubric ≥3).
-  4. Produce a fraction for a fair-share situation they haven't seen
-     ("5 pancakes, 4 people").
-  5. Accept and explain a fraction greater than 1.
+- **Difficulty**: developing · **Bloom**: apply · **Mastery threshold**: 0.85
+  · **Est. hours**: 20 (canonical KG value; corrected 2026-07-26 from this
+  entry's own earlier approximate "~4," which understated the concept's true
+  scope — 20 hours is consistent with its cut-node status and six child
+  concepts)
 
-## Mental models
+## Learning Objective
+
+The learner can:
+1. State what the bottom number counts and what the top number counts, in
+   their own words, for any fraction shown.
+2. Place 1/2, 1/3, 1/4, 3/4, 5/4 correctly on a number line 0–2.
+3. Compare two unit fractions (which of 1/3, 1/4 is larger) and *explain
+   why* at mechanism level (rubric ≥3).
+4. Produce a fraction for a fair-share situation they haven't seen
+   ("5 pancakes, 4 people").
+5. Accept and explain a fraction greater than 1.
+
+## Core Understanding
+
+A fraction is one number with two roles bundled into its notation: the
+bottom number (denominator) names the SIZE of the piece a whole has been
+cut into, and the top number (numerator) COUNTS how many of those
+pieces are being described. This single idea generates every fraction
+skill that follows — comparison, addition, and the acceptance of
+fractions greater than 1 — and different explanations of it suit
+different learners:
+
+- **Age 5–7 / no background (story frame)**: "You have one chocolate
+  bar and two friends. Everyone gets a fair share. The bottom number
+  says how many fair shares you cut. The top number says how many
+  shares you get."
+- **Age 8–11 (mechanism)**: "A fraction is two answers in one: the
+  bottom says what SIZE of piece we're using — cut into 4, each piece
+  is a 'quarter'. The top COUNTS them — three quarters means three of
+  those pieces. Bottom names the piece, top counts the pieces."
+- **Returning-after-forgetting teen/adult**: "You probably remember
+  rules — flip this, common denominator that. Park the rules. A
+  fraction is just a division you haven't done yet: 3/4 IS 3 ÷ 4.
+  Everything else — comparing, adding, simplifying — falls out of that
+  one idea, and we can rebuild the rules from it in about ten minutes."
+- **Visual frame**: number line 0 to 1; cut the unit into equal hops; a
+  fraction is "how many hops from zero." (This is the intermediate-
+  model installer — deploy at the M3 moment.)
+- **Logical frame (older/advanced entry)**: "Whole numbers answer 'how
+  many?' Fractions answer 'how much?' — they were invented because
+  sharing broke counting" (leads directly into the discovery lesson
+  below).
+- **Anxious learner**: lead with what they already own: "You already
+  use fractions every day — half an hour, quarter past. You know this;
+  we're just writing down what you know."
+
+## Mental Models
 
 - **Beginner model — "pieces of one thing"**: a fraction is a number of
   pieces cut from one whole (pizza model). Runnable, correct for proper
@@ -57,7 +97,7 @@
   simulation on). Upgrade on the first failure the pizza can't handle,
   which arrives naturally within the first few lessons.
 
-## Why beginners fail here
+## Why Students Fail
 
 Fractions are the first numbers that break every rule whole numbers taught.
 The learner arrives with hard-won whole-number instincts — bigger digits mean
@@ -69,7 +109,7 @@ teaching consequence: fraction instruction must *explicitly* mark which
 whole-number rules survive and which retire, or the learner will discover the
 breakages alone and conclude that mathematics has become arbitrary.
 
-## Misconception library
+## Misconceptions
 
 **M1 — "Bigger denominator = bigger fraction" (1/8 > 1/3)**
 - *Why*: whole-number ordering transferred (8 > 3). Birth type 1.
@@ -134,31 +174,7 @@ breakages alone and conclude that mathematics has become arbitrary.
   node, plant the seed: "half OF eight" language from day one, so × already
   smells like "of".
 
-## Explanation library
-
-- **Age 5–7 / no background (story frame)**: "You have one chocolate bar
-  and two friends. Everyone gets a fair share. The bottom number says how
-  many fair shares you cut. The top number says how many shares you get."
-- **Age 8–11 (mechanism)**: "A fraction is two answers in one: the bottom
-  says what SIZE of piece we're using — cut into 4, each piece is a
-  'quarter'. The top COUNTS them — three quarters means three of those
-  pieces. Bottom names the piece, top counts the pieces."
-- **Returning-after-forgetting teen/adult**: "You probably remember rules —
-  flip this, common denominator that. Park the rules. A fraction is just a
-  division you haven't done yet: 3/4 IS 3 ÷ 4. Everything else — comparing,
-  adding, simplifying — falls out of that one idea, and we can rebuild the
-  rules from it in about ten minutes."
-- **Visual frame**: number line 0 to 1; cut the unit into equal hops; a
-  fraction is "how many hops from zero." (This is the intermediate-model
-  installer — deploy at the M3 moment.)
-- **Logical frame (older/advanced entry)**: "Whole numbers answer 'how
-  many?' Fractions answer 'how much?' — they were invented because sharing
-  broke counting" (leads directly into the discovery lesson below).
-- **Anxious learner**: lead with what they already own: "You already use
-  fractions every day — half an hour, quarter past. You know this; we're
-  just writing down what you know."
-
-## Analogy library
+## Analogies
 
 1. **Fair sharing / chocolate bar** (BEST — canonical): maps cut-count →
    denominator, share-count → numerator. *Breaking point*: improper
@@ -184,7 +200,7 @@ breakages alone and conclude that mathematics has become arbitrary.
   some worksheets) — reifies M2. The fraction must always be presented as
   ONE number with one position on a line, even when its parts are named.
 
-## Demonstration library
+## Demonstrations
 
 - **Home/physical (no equipment)**: one sheet of paper. Fold in half, in
   half again — unfold and label the quarter-creases. Predict first: "when I
@@ -199,11 +215,11 @@ breakages alone and conclude that mathematics has become arbitrary.
   inverse relationship FELT. Second view: same fraction highlighted on bar
   and line simultaneously (representation-translation practice).
 
-## Discovery lesson (this concept is discoverable — fully designed)
+## Discovery Questions
 
-Fair sharing is the one mathematical instinct every child ships with; this is
-the canonical discovery concept (Delivery 2 §2, worked design, expanded here
-to the anchor node):
+This concept is discoverable — fully designed (Delivery 2 §2, worked
+design, expanded here to the anchor node). Fair sharing is the one
+mathematical instinct every child ships with:
 
 1. **Need**: "Three chocolate bars, four children, everyone gets exactly the
    same amount. Whole bars each? (No — not enough.) So...?" Whole numbers
@@ -224,7 +240,30 @@ to the anchor node):
    4 people → 5/4 — improper arrives on day one, from sharing, before M3
    can form). Close with the versioning line for the pieces model.
 
-## Teaching actions (dispatch for this concept)
+## Teaching Sequence
+
+The discovery lesson above precedes named misconception work — it is a
+load-bearing cut-node, and the fair-share invention gives the learner
+ownership of the notation before any error can be named against it.
+M1 (bigger-denominator-means-bigger) is pre-empted BEFORE it is even
+voiced, via the predict-first teacher demonstration ("point to which
+piece will be bigger before I cut") — catching the misconception at the
+prediction stage is more effective than correcting it after it has been
+stated aloud. M2 (adds-across) is addressed next via its self-
+administered golden probe (1/2 + 1/2 = ?), since the collision with the
+learner's own real-world knowledge ("two halves make a whole") requires
+no external correction — the learner corrects themselves the moment the
+question is asked. M3 (rejects fractions greater than 1) is addressed
+as the trigger for the pieces-to-number-line model upgrade, arriving
+naturally within the discovery lesson's own compression step (5
+pancakes, 4 people) rather than as a separately staged lesson. M4 (the
+whole doesn't matter) is installed as a standing reflex ("...of WHAT?")
+threaded through every subsequent example rather than taught once. M5
+(multiplication makes smaller) is explicitly NOT resolved at this node
+— only seeded ("half OF eight" language) — since its full collision
+belongs to `math.arith.fraction-multiplication`.
+
+## Tutor Actions
 
 In order: **guided discovery** (above — this is a load-bearing cut-node;
 spend the time) → **demonstration** (paper folding, predict-first) →
@@ -237,7 +276,7 @@ flexibility) → **error analysis** (intermediate+: the M2 student's work) →
 parameter space worth exploring at this node — the interactive bar/line view
 is a visualization, not a simulation).
 
-## Voice teaching
+## Voice Teaching Notes
 
 - **Listen for the definite article**: "a third" vs "three" — learners who
   say "one three" or "three over four" as pure symbol-reading, with no
@@ -254,8 +293,12 @@ is a visualization, not a simulation).
   them."
 - Self-corrections ("2/5... wait, no, you need the same bottoms first") are
   M2 dying audibly — log and praise the catch.
+- **Voice channel note**: See `foundations/03-voice-first-learning-model.md §7`
+  for current instrument availability (added 2026-07-26 during Quality Gate
+  3 repair, cross-referencing the corrected general finding rather than
+  restating it).
 
-## Assessment
+## Assessment Signals
 
 - **Golden probe**: "1/2 + 1/2 = ?" (M2: 2/4 vs correct: 1). Secondary
   probe: the chocolate-bar choice ("1/3 or 1/8 of this bar?") for M1.
@@ -285,7 +328,7 @@ is a visualization, not a simulation).
   every comparison reveal (this concept's calibration is characteristically
   overconfident-wrong on M1 items — track it explicitly).
 
-## Recovery notes (concept-specific only — engine: Delivery 1)
+## Tutor Recovery Strategy
 
 - Likeliest utterances here: **"I hate fractions"** (this concept is the #1
   named object of math identity statements — run the identity script, then
@@ -298,7 +341,7 @@ is a visualization, not a simulation).
   "cut this bar so two people get fair shares — show me" — physical
   fair-sharing is below the floor of any learner who reached this node.
 
-## Memory & review
+## Memory Hooks
 
 - **Type**: concept (with an embedded micro-tool: instant recognition of
   1/2, 1/4, 3/4 positions, which gets automaticity bursts).
@@ -313,22 +356,52 @@ is a visualization, not a simulation).
   longer than the standard schedule — these misconceptions re-grow under
   time pressure for months (speeded re-probes per `../assessment/05 §3`).
 
-## Transfer map
+## Transfer Connections
 
 - **Near**: any fair-share situation; fractions of sets ("3/4 of 8
   sweets" — bridge to the operator model).
 - **Far**: time ("three quarters of an hour"), music (quarter notes — same
   word, same idea), maps and scales.
-- **Cross-subject** (KG cross_links lead to `math.alg.rational-expressions`):
-  measurement readings between marks (physics `phys.meas.*`); concentrations
-  ("half as strong") in chemistry.
 - **Real-world**: recipes at half quantity (the kitchen is the fraction
   gym); discounts; fuel gauges.
 - **Expert transfer**: the learner spontaneously asks "of what?" outside
   mathematics (news percentages, statistics claims) — record it as the
   strongest evidence this node ever produces.
 
-## Curriculum feedback
+## Cross-Subject Connections
+
+KG `cross_links` lead to `math.alg.rational-expressions` (not yet
+authored). Cross-subject applications: measurement readings between
+marks (physics `phys.meas.*`); concentrations ("half as strong") in
+chemistry.
+
+## Blueprint References
+
+Blueprint: `docs/curriculum/blueprints/math.arith.fractions.md`.
+
+## Runtime Asset References
+
+This concept is one of the three Wave-0 AssetIdentity seed entries
+(`src/lib/teaching/assets/brainSeedAssets.ts`) — 9 EXPLANATION + 5 PROBE
+assets are already transcribed from this file into the live seed
+script, citing specific sections by name: the Age 8–11 (mechanism) and
+Returning-after-forgetting teen/adult explanation variants (Core
+Understanding above), and the M1/M2 detection probes and M2 golden
+probe (Misconceptions above). Those citations were re-verified against
+this repair: all cited content is preserved verbatim under its renamed
+parent sections, so the existing seed script's `source:` comments
+remain accurate. `src/lib/teaching/assets/brainSeedAssets.ts` itself was
+NOT modified by this repair (out of this program's scope — production
+code).
+
+## Curriculum Feedback
 
 None yet. The KG's prerequisite pair (division + rational-number idea) and
 its unlocks match teaching reality at this node.
+
+## Version History
+
+| Version | Date | Author | Change |
+|---|---|---|---|
+| 1.0 | 2026-07-10 | Human Curator (Delivery 5, Curriculum Integration Layer) | Initial entry — one of three full-depth seed entries establishing the quality bar for the program. |
+| 1.1 | 2026-07-26 | Curriculum Completion Program (Quality Gate 3 repair) | Restructured from this entry's original pre-Standard heading scheme (predating `EDUCATIONAL_BRAIN_STANDARD.md`'s existence) to the current 21-section Standard scheme. All content preserved losslessly, including exact sub-labels ("Age 8–11 (mechanism)", "Returning-after-forgetting teen/adult", M1–M5 misconception labels) cited by `brainSeedAssets.ts`'s `source:` comments — re-verified those citations remain accurate after restructuring. Added standalone Learning Objective, Teaching Sequence, Blueprint References, and Runtime Asset References sections (none existed before); split Cross-Subject Connections out from Transfer Connections per Standard §3; corrected estimated_hours from this entry's own approximate "~4" to the canonical KG value of 20. No factual or pedagogical content removed; `brainSeedAssets.ts` itself not modified. |

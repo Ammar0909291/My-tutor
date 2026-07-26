@@ -354,6 +354,14 @@ export async function POST(req: Request) {
     // Sprint W gap A: the structured [HINT] tag's extracted text, hoisted so
     // it can be attached to the JSON response once cleanText is finalized.
     let hintHoisted: string | null = null
+    let teachingHistoryHoisted: import('@/lib/teaching/teachingHistory').TeachingHistory | null = null
+    let selectedStrategyHoisted: number | null = null
+    let retrievalCacheHoisted: import('@/lib/teaching/retrievalCache').RetrievalCache | null = null
+    let conversationDecisionHoisted: import('@/lib/teaching/conversationDecision').ConversationDecision | null = null
+    // Option B — Teaching Sequence Executor (physics only): the runtime-
+    // selected current step, persisted at end of turn so the next turn
+    // resumes from it instead of restarting or improvising.
+    let teachingStepUpdateHoisted: { teachingStepIndex: number; teachingStepConceptId: string } | null = null
 
     // Visual learning aids for SUBJECT_LIBRARY subjects — Sprint BW
     // detectVisual()/buildVisualsSystemBlock(), scoped to the Library lesson's
@@ -886,15 +894,70 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // unparseable blueprint never blocks the Teaching Engine.
           try {
             const { loadBlueprint, loadBlueprintContent, buildBlueprintContextBlock, loadEBConceptContext } = await import('@/lib/curriculum/blueprintLoader')
+            const { createRetrievalCache, CACHE_KEY_BLUEPRINT_SUMMARY, CACHE_KEY_EB_CONTEXT } = await import('@/lib/teaching/retrievalCache')
+            if (!retrievalCacheHoisted) retrievalCacheHoisted = createRetrievalCache()
             const blueprintResult = loadBlueprint(activeConceptIdForDecide)
             if (blueprintResult.found) {
               const contentResult = loadBlueprintContent(activeConceptIdForDecide)
               if (contentResult.found) {
-                // TQ-1/TQ-2: load EB Concept Entry for recovery notes,
-                // anti-analogies, voice cues, and opening scenario.
+                const bpParts: string[] = []
+                if (contentResult.content.conceptSpine) {
+                  bpParts.push(contentResult.content.conceptSpine.definition ?? '')
+                }
+                if (contentResult.content.misconceptions.length) {
+                  bpParts.push('Misconceptions: ' + contentResult.content.misconceptions.map(m => m.title).join('; '))
+                }
+                const bpSummary = bpParts.filter(Boolean).join(' | ').slice(0, 300)
+                if (bpSummary) retrievalCacheHoisted.set(CACHE_KEY_BLUEPRINT_SUMMARY, bpSummary)
                 const ebResult = loadEBConceptContext(activeConceptIdForDecide)
                 const ebContext = ebResult.found ? ebResult.context : null
-                const block = buildBlueprintContextBlock(contentResult.content, ebContext)
+                if (ebContext) {
+                  retrievalCacheHoisted.set(CACHE_KEY_EB_CONTEXT, {
+                    recoveryNotes: ebContext.recoveryShrinkTo,
+                    misconceptions: ebContext.antiAnalogies,
+                  })
+                }
+
+                // Option B — Teaching Sequence Executor (physics only): the
+                // runtime, not the LLM, decides which authored step is
+                // current. See src/lib/teaching/teachingSequenceExecutor.ts.
+                // firstLessonGuard's own block (injected later, and whose
+                // text already declares it "OVERRIDES ANY CONFLICTING
+                // GUIDANCE ABOVE") takes precedence by the existing
+                // block-ordering convention when both apply — no extra
+                // gating is needed here.
+                let currentStepBlock: string | null = null
+                const {
+                  hasTeachingPlan, readTeachingStepIndex, advanceTeachingStepIndex,
+                  buildTeachingStepContract, renderTeachingStepContractBlock,
+                } = await import('@/lib/teaching/teachingSequenceExecutor')
+                if (hasTeachingPlan(ebContext)) {
+                  // Read directly from learnSession.contextSnapshot rather than
+                  // the outer `snapshot` binding — this block later declares
+                  // its own `const snapshot` (teaching memory snapshot), whose
+                  // block-scoped TDZ shadows the outer variable for the whole
+                  // enclosing block, not just after its declaration line.
+                  const rawSnapshot = learnSession.contextSnapshot as Record<string, unknown> | null
+                  const { stepIndex: priorStepIndex, isFirstTurnOfConcept } =
+                    readTeachingStepIndex(rawSnapshot, activeConceptIdForDecide)
+                  const priorLastSignal = (rawSnapshot?.lastSignal && typeof rawSnapshot.lastSignal === 'object')
+                    ? rawSnapshot.lastSignal as { correctness?: boolean; confusion?: boolean }
+                    : null
+                  // A freshly-changed concept always starts at DISCOVERY,
+                  // regardless of a stale lastSignal left over from the
+                  // previous concept.
+                  const nextStepIndex = isFirstTurnOfConcept
+                    ? 0
+                    : advanceTeachingStepIndex(priorStepIndex, priorLastSignal)
+                  const contract = buildTeachingStepContract(ebContext!, nextStepIndex, isFirstTurnOfConcept)
+                  currentStepBlock = renderTeachingStepContractBlock(contract)
+                  teachingStepUpdateHoisted = {
+                    teachingStepIndex: nextStepIndex,
+                    teachingStepConceptId: activeConceptIdForDecide,
+                  }
+                }
+
+                const block = buildBlueprintContextBlock(contentResult.content, ebContext, currentStepBlock)
                 if (block) systemPrompt += block
               }
             }
@@ -1011,9 +1074,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // Wave 1 (Runtime Guardian): the authored HOW for the action
             // decide() just selected — retrieved from the Brain's action
             // catalog / repair sequence instead of improvised per turn.
+            // Bug 1 fix: only inject INTERACTIVE_QUESTIONING procedure when
+            // the server-decided next move is 'ask'. On 'teach' and 'show'
+            // turns the TURN DIRECTIVE (injected below) forbids questions —
+            // the action procedure contradicted it and the LLM followed the
+            // earlier specific instruction, ignoring the later prohibition.
             {
               const { buildActionProcedureBlock } = await import('@/lib/teaching/actionProcedures')
-              systemPrompt += buildActionProcedureBlock(decision.action_type)
+              const { readConversationState: _readCS, decideNextMove: _decideMove } = await import('@/lib/teaching/conversationState')
+              // Use the raw contextSnapshot (outer scope) — the inner `snapshot`
+              // here is TeachingMemorySnapshot, which has no conversationState.
+              const _rawCtx = learnSession.contextSnapshot as Record<string, unknown> | null
+              const _earlyState = _readCS(_rawCtx?.conversationState, activeConceptIdForDecide)
+              const _earlyMove = _decideMove(_earlyState, {
+                recoveryTurn: false, // recoveryKeyHoisted not yet computed; recovery block overrides at end anyway
+                workedExampleFirst: snapshotSessionFailureCount >= 2 || strategyHoisted === 'FOUNDATION_REBUILD',
+              })
+              if (_earlyMove === 'ask') {
+                systemPrompt += buildActionProcedureBlock(decision.action_type)
+              }
             }
           }
 
@@ -1193,7 +1272,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const priorUserMessage = learnSession.messages.find((m) => m.role === MessageRole.USER)?.content ?? null
         recoveryKeyHoisted = detectFailureState(message, priorUserMessage)
         const { buildSignalInstruction } = await import('@/lib/teaching/signals')
-        const { isFirstLessonContext, buildFirstLessonBlock } = await import('@/lib/teaching/firstLessonGuard')
+        const { isFirstLessonContext, buildFirstLessonBlock, buildFirstLessonCloseBlock } = await import('@/lib/teaching/firstLessonGuard')
         const { emptyPlacementState, nextProbe, buildPlacementProbeBlock, buildPlacementAwaitBlock } = await import('@/lib/teaching/placementVerification')
 
         // Step 2: the OBSERVE signal (decision-engine/08 step 1; Blueprint Phase 3)
@@ -1215,7 +1294,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // timestamps — the newest loaded message predates this turn's user
         // insert, so the gap is genuine learner inactivity, never LLM-claimed.
         {
-          const { isNewEpisode, deriveEpisode, buildOpeningBlock, buildAffectCloseBlock } = await import('@/lib/teaching/sessionLifecycle')
+          const { isNewEpisode, deriveEpisode, buildOpeningBlock, buildAffectCloseBlock, detectExplicitFinishRequest, forceClosing } = await import('@/lib/teaching/sessionLifecycle')
           const lastMsgAt = learnSession.messages[0]?.createdAt
             ? new Date(learnSession.messages[0].createdAt).getTime()
             : null
@@ -1228,7 +1307,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const boundary = isNewEpisode(lastMsgAt, turnReceivedAt)
           sessionEpisodeHoisted = deriveEpisode(prevEpisode, boundary, turnReceivedAt, prevLastSignal)
           sessionEpisodeFreshHoisted = boundary
-          if (boundary) {
+          // 07 §6 extension: an explicit, unambiguous "finish it now" outranks
+          // the affect-failure-budget trigger — close immediately this turn
+          // rather than waiting for a failure count to accumulate.
+          if (detectExplicitFinishRequest(message)) {
+            sessionEpisodeHoisted = forceClosing(sessionEpisodeHoisted)
+          }
+          if (boundary && sessionEpisodeHoisted.phase !== 'CLOSING') {
             // Spaced Retrieval Scheduler (Claude Recommendation #8, wired in
             // here per the follow-up recommendation): the session OPENING's
             // due-review count comes from the real forgetting-curve
@@ -1417,30 +1502,50 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           systemPrompt += buildTurnDirective({
             state: conversationStateHoisted,
             nextMove,
-            maxParagraphs: responseBudget(contentRegister, conversationStateHoisted.consecutiveFailures),
+            // First-lesson protocol mandates 2-sentence bursts; the regular
+            // responseBudget(beginner)=4 paragraphs conflicts with that and
+            // must be overridden for every first-lesson turn.
+            maxParagraphs: firstLessonActiveHoisted ? 2 : responseBudget(contentRegister, conversationStateHoisted.consecutiveFailures),
             workedExampleFirst,
             visualType: (learnerRequestHoisted === 'diagram' || explainDifferentlyNeedsVisual)
               ? availableVisual
               : decideVisualFirst(availableVisual, conversationStateHoisted, nextMove),
+            firstLessonActive: firstLessonActiveHoisted,
           })
           if (learnerRequestHoisted) {
-            // P2 fix (remaining risk closed): whether a real-life example
-            // has already been established for THIS concept, computed from
-            // ConversationState's own counters (exampleRequests — set by an
-            // earlier explicit request; remediationCount > 2 — tier 2 of the
-            // ladder already ran on a prior turn) rather than asking the LLM
-            // to infer it from a conversation history that may already have
-            // scrolled past the example (client.ts forwards only the last 6
-            // messages).
             const hasEstablishedExample =
               conversationStateHoisted.exampleRequests > 0 || conversationStateHoisted.remediationCount > 2
-            systemPrompt += buildLearnerRequestBlock(learnerRequestHoisted, availableVisual, remediationTier, hasEstablishedExample)
+            if (learnerRequestHoisted === 'explain_differently') {
+              const { readTeachingHistory, selectNextStrategy, hasExceededExplanationLimit } = await import('@/lib/teaching/teachingHistory')
+              const sessionSnap = learnSession.contextSnapshot as Record<string, unknown> | null
+              teachingHistoryHoisted = readTeachingHistory(sessionSnap?.teachingHistory, convConceptId)
+              selectedStrategyHoisted = selectNextStrategy(teachingHistoryHoisted)
+              if (selectedStrategyHoisted === -1) selectedStrategyHoisted = 6
+              if (hasExceededExplanationLimit(teachingHistoryHoisted) && selectedStrategyHoisted <= 1) {
+                selectedStrategyHoisted = Math.max(2, selectNextStrategy(teachingHistoryHoisted))
+                if (selectedStrategyHoisted < 2) selectedStrategyHoisted = 4
+              }
+              systemPrompt += buildLearnerRequestBlock(
+                learnerRequestHoisted, availableVisual, remediationTier,
+                hasEstablishedExample, selectedStrategyHoisted,
+                teachingHistoryHoisted.prerequisiteAttempts.length > 0 ? null : (convConceptId ?? null),
+              )
+            } else {
+              systemPrompt += buildLearnerRequestBlock(learnerRequestHoisted, availableVisual, remediationTier, hasEstablishedExample)
+            }
           }
           // Bug 8 — the client reports whether the previous long (collapsed)
           // explanation was ever expanded; unread text is never assumed read.
           if (lastExplanationRead === false) {
             systemPrompt += buildUnreadExplanationBlock()
           }
+        }
+
+        // First-lesson summit close — injected after TURN DIRECTIVE when the
+        // learner reaches PRACTICE phase in lesson one (first-lesson/04 §1
+        // "solo summit" rule: close now, never [LESSON_COMPLETE] this session).
+        if (firstLessonActiveHoisted && conversationStateHoisted.phase === 'PRACTICE') {
+          systemPrompt += buildFirstLessonCloseBlock()
         }
 
         // RECOVERY preemption (decision-engine/03 §0; foundations/01 §3
@@ -1591,6 +1696,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             userMessage: message,
           })
           assembled = await assembleLesson(memoryState)
+          if (assembled && retrievalCacheHoisted) {
+            const { CACHE_KEY_EXPLANATION } = await import('@/lib/teaching/retrievalCache')
+            retrievalCacheHoisted.set(CACHE_KEY_EXPLANATION, assembled.text)
+          }
           if (!assembled) {
             // Distinguish "nothing authored for this concept/language" from
             // "an asset exists but didn't clear the confidence threshold" —
@@ -1656,16 +1765,35 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const teachingDecision = decideTeaching(understanding)
         cueDecisionHoisted = teachingDecision
         console.log('[learn/chat] CUE decision=' + JSON.stringify(teachingDecision))
+
+        // Conversation Decision — classify the student's message BEFORE
+        // any teaching decision. Every student message must first produce
+        // a conversation decision that the renderer acknowledges before
+        // teaching. Pipeline: Student → Understand → ConvDecision → TeachDecision → Render
+        try {
+          const { classifyConversation } = await import('@/lib/teaching/conversationDecision')
+          conversationDecisionHoisted = classifyConversation(message, {
+            recoveryKey: recoveryKeyHoisted,
+            studentIntent: understanding.studentIntent.value,
+            lastAssistantAskedQuestion: understanding.conversationSummary.lastAssistantAskedQuestion,
+            lastSignalCorrectness: understanding.confidence.source === 'signals:lastSignal'
+              ? (cueLastSignal?.correctness ?? null)
+              : null,
+            hedged: understanding.conversationSummary.hedged,
+            helpRequestKind: understanding.conversationSummary.helpRequestKind,
+          })
+          console.log('[learn/chat] conversation decision=' + conversationDecisionHoisted.type)
+        } catch (err) {
+          console.warn('[learn/chat] conversation decision skipped:', err)
+        }
       } catch (err) {
         console.warn('[learn/chat] CUE understanding skipped (never affects the turn):', err)
       }
 
       // Runtime Dispatcher (Milestone 3) — the ONE place a TeachingDecision
       // is mapped onto an existing execution path. Flag-gated:
-      // ENABLE_BRAIN_RUNTIME off (default) = shadow compare mode — the plan
-      // is logged next to what the runtime actually does, and the legacy
-      // serving choice below is byte-for-byte unchanged. Flag on = the plan
-      // DRIVES the serve-from-memory-vs-LLM fork (the only externally
+      // ENABLE_BRAIN_RUNTIME on (default) = the plan DRIVES the
+      // serve-from-memory-vs-LLM fork (the only externally
       // visible fork at this point in the route); every other decision
       // executes through the engine blocks already injected above, with the
       // LLM in the renderer role (see dispatcher.ts executor honesty note).
@@ -1700,7 +1828,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // content and forbids the LLM from choosing a different action.
             // Empty for memory serves (no LLM at all) and open escalation.
             const { buildBrainExecutionBlock } = await import('@/lib/understanding/execution')
-            systemPrompt += buildBrainExecutionBlock(dispatchPlanHoisted, cueDecisionHoisted)
+            const { STRATEGY_LABELS } = await import('@/lib/teaching/strategyDirective')
+            const { buildRetrievedContext } = await import('@/lib/teaching/retrievalCache')
+            const execOpts: import('@/lib/understanding/execution').ExecutionBlockOptions = {}
+            if (selectedStrategyHoisted !== null && selectedStrategyHoisted >= 0) {
+              execOpts.strategyLabel = STRATEGY_LABELS[selectedStrategyHoisted] ?? `Strategy ${selectedStrategyHoisted}`
+            }
+            if (retrievalCacheHoisted) {
+              const conceptForCtx = resolvedConceptId ?? snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? ''
+              execOpts.retrievedSnippet = buildRetrievedContext(retrievalCacheHoisted, conceptForCtx)
+            }
+            if (conversationDecisionHoisted && conversationDecisionHoisted.type !== 'RECOVERY') {
+              const { buildConversationDirective } = await import('@/lib/teaching/conversationDecision')
+              execOpts.conversationDirective = buildConversationDirective(conversationDecisionHoisted)
+            }
+            systemPrompt += buildBrainExecutionBlock(dispatchPlanHoisted, cueDecisionHoisted, execOpts)
           }
         }
         // Brain runtime metrics — in-process observability only (no DB).
@@ -1709,6 +1851,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       } catch (err) {
         console.warn('[learn/chat] dispatcher skipped (legacy serving choice retained):', err)
         serveFromMemory = assembled !== null
+      }
+
+      // Conversation Decision — standalone block for turns where the Brain
+      // execution block is empty (ESCALATE_TO_LLM, LLM_OPEN, brain off).
+      // The conversation directive must reach the LLM on EVERY turn that
+      // goes through Groq, not just Brain-renderer turns.
+      if (conversationDecisionHoisted && conversationDecisionHoisted.type !== 'RECOVERY' && !serveFromMemory) {
+        const brainBlockFired = brainRuntimeActive && dispatchPlanHoisted?.executor === 'LLM_RENDERER'
+        if (!brainBlockFired) {
+          const { buildConversationDirective } = await import('@/lib/teaching/conversationDecision')
+          systemPrompt += '\n\n' + buildConversationDirective(conversationDecisionHoisted)
+        }
       }
 
       let text: string
@@ -2038,6 +2192,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             learnerRequest: learnerRequestHoisted,
             misconceptionDetected: teachingSignal?.phrase !== undefined,
             isPriorKnowledgeProbe: isPriorKnowledgeProbe(cleanText),
+            strategyUsed: selectedStrategyHoisted ?? undefined,
+            signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
+            dontKnowSignal: recoveryKeyHoisted === 'dont_know' || recoveryKeyHoisted === 'dont_understand',
           })
           const stanceVerdict = enforceStance({
             text: cleanText,
@@ -2681,8 +2838,27 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 recoveryFired: recoveryKeyHoisted !== null,
                 learnerRequest: learnerRequestHoisted,
                 isPriorKnowledgeProbe: isPriorKnowledgeProbe(cleanText),
+                strategyUsed: selectedStrategyHoisted ?? undefined,
+                signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
+                dontKnowSignal: recoveryKeyHoisted === 'dont_know' || recoveryKeyHoisted === 'dont_understand',
               }),
             }
+          }
+          if (teachingHistoryHoisted && selectedStrategyHoisted !== null) {
+            const { updateTeachingHistory, computeFrustration, computeMastery } = await import('@/lib/teaching/teachingHistory')
+            const updatedHistory = updateTeachingHistory(teachingHistoryHoisted, {
+              strategiesUsed: [...new Set([...teachingHistoryHoisted.strategiesUsed, selectedStrategyHoisted])],
+              explanationCount: teachingHistoryHoisted.explanationCount + 1,
+              frustration: computeFrustration(
+                conversationStateHoisted?.consecutiveFailures ?? 0,
+                conversationStateHoisted?.remediationCount ?? 0,
+              ),
+              mastery: computeMastery(
+                conversationStateHoisted?.correctAtCheck ?? 0,
+                conversationStateHoisted?.correctAtPractice ?? 0,
+              ),
+            })
+            conversationStateUpdate = { ...conversationStateUpdate, teachingHistory: updatedHistory }
           }
 
           // EOS M1 — Evidence Spine: append this turn's typed events to the
@@ -2738,7 +2914,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             })
           } catch { /* spine is strictly parallel — never affects the turn */ }
 
-          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0) {
+          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0 || teachingStepUpdateHoisted) {
             // Atomic JSONB merge (same pattern as the school snapshot above).
             const libSnapshotDelta = {
               ...(conceptChanged ? { currentConceptNodeId: newLibConceptId } : {}),
@@ -2747,6 +2923,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               ...episodeUpdate,
               ...failureCountUpdate,
               ...conversationStateUpdate,
+              // Option B — Teaching Sequence Executor: persist the runtime-
+              // selected step so the next turn (or a resumed session) reads
+              // it back via readTeachingStepIndex() instead of restarting.
+              ...(teachingStepUpdateHoisted ?? {}),
             }
             prisma.$executeRaw`
               UPDATE "LearnSession"

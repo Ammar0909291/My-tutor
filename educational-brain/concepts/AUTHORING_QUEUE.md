@@ -21,7 +21,11 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1524** (= 1,775 KG concepts − 251 already `READY`).
+Total queued: **1220** (= 1,775 KG concepts − 555 already `READY`, per
+`ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
+at 1524/251 from an earlier point in the project; row numbers within the
+table below are not fully renumbered to match, see the row-removal notes
+at math.found Waves 7-10's positions below).
 
 **Domain Certification Mode override (binding until `math.found` reaches
 82/82, EXPLICITLY SUSPENDED for physics-specific batches by direct user
@@ -664,17 +668,20 @@ the program's default cross-subject priority order (`math.found` Wave
 | 159 | computer_science | 6 | `cs.net.application-protocols` | Application-Layer Protocols |
 | 160 | computer_science | 6 | `cs.net.wireless-mobile-networks` | Wireless and Mobile Networks |
 | 161 | computer_science | 6 | `cs.theory.context-free-grammars` | Context-Free Grammars |
-| 162 | mathematics | 7 | `math.found.rules-of-inference` | Rules of Inference |
-| 163 | mathematics | 7 | `math.found.proper-subset` | Proper Subset |
-| 164 | mathematics | 7 | `math.found.set-equality` | Set Equality |
-| 165 | mathematics | 7 | `math.found.set-operations` | Set Operations |
-| 166 | mathematics | 7 | `math.found.power-set` | Power Set |
-| 167 | mathematics | 7 | `math.found.reflexive-relation` | Reflexive Relation |
-| 168 | mathematics | 7 | `math.found.symmetric-relation` | Symmetric Relation |
-| 169 | mathematics | 7 | `math.found.transitive-relation` | Transitive Relation |
-| 170 | mathematics | 7 | `math.found.partition` | Partition |
-| 171 | mathematics | 7 | `math.found.function-set-theoretic` | Function (Set-Theoretic) |
-| 172 | mathematics | 7 | `math.found.cardinal-arithmetic` | Cardinal Arithmetic |
+**Rows 162-170 removed 2026-07-26** — `math.found.rules-of-inference`,
+`math.found.proper-subset`, `math.found.set-equality`,
+`math.found.set-operations`, `math.found.power-set`,
+`math.found.reflexive-relation`, `math.found.symmetric-relation`,
+`math.found.transitive-relation`, `math.found.partition` were all
+authored this batch (Wave 7) and moved to READY in
+`EDUCATIONAL_BRAIN_INDEX.md`; no longer queued. Remaining row numbers
+below are NOT renumbered (documentation-only file, no automation reads
+row numbers as stable IDs — the concept ID column is the actual key) —
+a future full regeneration will re-derive clean sequential numbering
+from source, per this file's own standing generation script.
+**Rows 171-172 removed 2026-07-26** — `math.found.function-set-theoretic`,
+`math.found.cardinal-arithmetic` authored this batch (Wave 8), moved to
+READY. Row numbers not renumbered, per this file's own standing note.
 | 173 | mathematics | 7 | `math.geom.triangle-angle-sum` | Triangle Angle Sum Theorem |
 | 174 | mathematics | 7 | `math.geom.triangle-centers` | Triangle Centers |
 | 175 | mathematics | 7 | `math.geom.quadrilateral` | Quadrilateral |
@@ -710,15 +717,14 @@ the program's default cross-subject priority order (`math.found` Wave
 | 205 | computer_science | 7 | `cs.sec.network-web-security` | Network and Web Security |
 | 206 | computer_science | 7 | `cs.web.client-server-model` | The Client-Server Model |
 | 207 | computer_science | 7 | `cs.theory.turing-machines` | Turing Machines |
-| 208 | mathematics | 8 | `math.found.proof` | Mathematical Proof |
-| 209 | mathematics | 8 | `math.found.union` | Union |
-| 210 | mathematics | 8 | `math.found.intersection` | Intersection |
-| 211 | mathematics | 8 | `math.found.set-difference` | Set Difference |
-| 212 | mathematics | 8 | `math.found.complement` | Set Complement |
-| 213 | mathematics | 8 | `math.found.venn-diagram` | Venn Diagram |
-| 214 | mathematics | 8 | `math.found.equivalence-relation` | Equivalence Relation |
-| 215 | mathematics | 8 | `math.found.partial-order` | Partial Order |
-| 216 | mathematics | 8 | `math.found.cardinality` | Cardinality |
+**Rows 208-215 removed 2026-07-26** — `math.found.proof`,
+`math.found.union`, `math.found.intersection`, `math.found.set-difference`,
+`math.found.complement`, `math.found.venn-diagram`,
+`math.found.equivalence-relation`, `math.found.partial-order` all
+authored this batch (Wave 8), moved to READY. Row numbers not
+renumbered.
+**Row 216 removed 2026-07-26** — `math.found.cardinality` authored
+Wave 10, moved to READY.
 | 217 | mathematics | 8 | `math.geom.polygon-angle-sum` | Polygon Angle Sum |
 | 218 | mathematics | 8 | `math.geom.parallelogram` | Parallelogram |
 | 219 | mathematics | 8 | `math.geom.trapezoid` | Trapezoid |
@@ -758,18 +764,17 @@ the program's default cross-subject priority order (`math.found` Wave
 | 253 | computer_science | 8 | `cs.control.conditionals` | Conditional Statements |
 | 254 | computer_science | 8 | `cs.sec.data-protection-privacy` | Data Protection and Privacy |
 | 255 | computer_science | 8 | `cs.web.html-css-basics` | HTML and CSS Basics |
-| 256 | mathematics | 9 | `math.found.direct-proof` | Direct Proof |
-| 257 | mathematics | 9 | `math.found.proof-by-contradiction` | Proof by Contradiction |
-| 258 | mathematics | 9 | `math.found.proof-by-contrapositive` | Proof by Contrapositive |
-| 259 | mathematics | 9 | `math.found.proof-by-cases` | Proof by Cases |
-| 260 | mathematics | 9 | `math.found.existence-proof` | Existence Proof |
-| 261 | mathematics | 9 | `math.found.writing-mathematics` | Writing Mathematics |
-| 262 | mathematics | 9 | `math.found.theorem` | Theorem |
-| 263 | mathematics | 9 | `math.found.conjecture` | Conjecture |
-| 264 | mathematics | 9 | `math.found.equivalence-class` | Equivalence Class |
-| 265 | mathematics | 9 | `math.found.total-order` | Total Order |
-| 266 | mathematics | 9 | `math.found.hasse-diagram` | Hasse Diagram |
-| 267 | mathematics | 9 | `math.found.finite-set` | Finite Set |
+**Rows 256-263 removed 2026-07-26** — `math.found.direct-proof`,
+`math.found.proof-by-contradiction`, `math.found.proof-by-contrapositive`,
+`math.found.proof-by-cases`, `math.found.existence-proof`,
+`math.found.writing-mathematics`, `math.found.theorem`,
+`math.found.conjecture` all authored this batch (Wave 9), moved to
+READY. Row numbers not renumbered.
+**Rows 264-266 removed 2026-07-26** — `math.found.equivalence-class`,
+`math.found.total-order`, `math.found.hasse-diagram` authored Wave 10,
+moved to READY.
+**Row 267 removed 2026-07-26** — `math.found.finite-set` authored Wave 11,
+moved to READY.
 | 268 | mathematics | 9 | `math.geom.circle-area` | Area of a Circle |
 | 269 | mathematics | 9 | `math.geom.geometric-proof` | Geometric Proof |
 | 270 | mathematics | 9 | `math.geom.surface-area` | Surface Area |
@@ -806,10 +811,11 @@ the program's default cross-subject priority order (`math.found` Wave
 | 301 | computer_science | 9 | `cs.control.loops` | Iteration — while and for Loops |
 | 302 | computer_science | 9 | `cs.web.rest-apis` | REST APIs |
 | 303 | computer_science | 9 | `cs.theory.complexity-classes` | Computational Complexity Classes |
-| 304 | mathematics | 10 | `math.found.uniqueness-proof` | Uniqueness Proof |
-| 305 | mathematics | 10 | `math.found.lemma` | Lemma |
-| 306 | mathematics | 10 | `math.found.corollary` | Corollary |
-| 307 | mathematics | 10 | `math.found.natural-numbers` | Natural Numbers |
+**Rows 304-306 removed 2026-07-26** — `math.found.uniqueness-proof`,
+`math.found.lemma`, `math.found.corollary` authored Wave 10, moved to
+READY.
+**Row 307 removed 2026-07-26** — `math.found.natural-numbers` authored
+Wave 11, moved to READY.
 | 308 | mathematics | 10 | `math.func.bijection` | Bijective Function |
 | 309 | mathematics | 10 | `math.func.step-function` | Step Function |
 | 310 | mathematics | 10 | `math.prob.bayes-theorem` | Bayes' Theorem |
@@ -844,11 +850,12 @@ the program's default cross-subject priority order (`math.found` Wave
 | 339 | computer_science | 10 | `cs.prog.exception-handling` | Exception Handling |
 | 340 | computer_science | 10 | `cs.control.nested-control-patterns` | Nested Control Flow Patterns |
 | 341 | computer_science | 10 | `cs.data.strings` | Strings |
-| 342 | mathematics | 11 | `math.found.proof-by-induction` | Mathematical Induction |
-| 343 | mathematics | 11 | `math.found.well-ordering-principle` | Well-Ordering Principle |
-| 344 | mathematics | 11 | `math.found.countable-set` | Countable Set |
-| 345 | mathematics | 11 | `math.found.integers` | Integers |
-| 346 | mathematics | 11 | `math.arith.counting` | Counting |
+**Rows 342-345 removed 2026-07-26** — `math.found.proof-by-induction`,
+`math.found.well-ordering-principle`, `math.found.countable-set`,
+`math.found.integers` authored Wave 12, moved to READY.
+**Row 346 removed 2026-07-26** — `math.arith.counting` authored
+math.arith Wave 1 (first math.arith domain batch, following math.found
+Domain Certification), moved to READY.
 | 347 | mathematics | 11 | `math.func.inverse-functions` | Inverse Functions |
 | 348 | mathematics | 11 | `math.seq.sequence` | Sequence |
 | 349 | mathematics | 11 | `math.prob.bayesian-inference` | Bayesian Inference |
@@ -888,13 +895,12 @@ the program's default cross-subject priority order (`math.found` Wave
 | 383 | biology | 11 | `bio.immuno.vaccination-immunisation` | Vaccination and Immunisation |
 | 384 | computer_science | 11 | `cs.data.lists` | Lists |
 | 385 | computer_science | 11 | `cs.func.functions` | Functions |
-| 386 | mathematics | 12 | `math.found.strong-induction` | Strong Induction |
-| 387 | mathematics | 12 | `math.found.uncountable-set` | Uncountable Set |
-| 388 | mathematics | 12 | `math.found.rational-numbers` | Rational Numbers |
-| 389 | mathematics | 12 | `math.arith.counting-sequence` | Counting Sequence |
-| 390 | mathematics | 12 | `math.arith.subitizing` | Subitizing |
-| 391 | mathematics | 12 | `math.arith.place-value` | Place Value |
-| 392 | mathematics | 12 | `math.arith.number-line` | Number Line |
+**Rows 386-388 removed 2026-07-26** — `math.found.strong-induction`,
+`math.found.uncountable-set`, `math.found.rational-numbers` authored
+Wave 13, moved to READY.
+**Rows 389-392 removed 2026-07-26** — `math.arith.counting-sequence`,
+`math.arith.subitizing`, `math.arith.place-value`, `math.arith.
+number-line` authored math.arith Wave 3, moved to READY.
 | 393 | mathematics | 12 | `math.seq.arithmetic-sequence` | Arithmetic Sequence |
 | 394 | mathematics | 12 | `math.seq.geometric-sequence` | Geometric Sequence |
 | 395 | mathematics | 12 | `math.seq.recursive-sequences` | Recursive Sequences |
@@ -940,12 +946,14 @@ the program's default cross-subject priority order (`math.found` Wave
 | 435 | computer_science | 12 | `cs.file.text-files` | Text File Handling |
 | 436 | computer_science | 12 | `cs.struct.linear-search` | Linear Search |
 | 437 | computer_science | 12 | `cs.oop.oop-concepts` | Object-Oriented Programming Concepts |
-| 438 | mathematics | 13 | `math.found.irrational-numbers` | Irrational Numbers |
-| 439 | mathematics | 13 | `math.arith.ones-tens-hundreds` | Ones, Tens, Hundreds |
-| 440 | mathematics | 13 | `math.arith.expanded-form` | Expanded Form |
-| 441 | mathematics | 13 | `math.arith.number-base` | Number Base |
-| 442 | mathematics | 13 | `math.arith.addition` | Addition |
-| 443 | mathematics | 13 | `math.arith.ordering` | Ordering Numbers |
+**Row 438 removed 2026-07-26** — `math.found.irrational-numbers`
+authored Wave 14, moved to READY.
+**Rows 439, 442 removed 2026-07-26** — `math.arith.ones-tens-hundreds`,
+`math.arith.addition` authored math.arith Wave 4 part 1, moved to
+READY.
+**Rows 440-441, 443 removed 2026-07-26** — `math.arith.expanded-form`,
+`math.arith.number-base`, `math.arith.ordering` authored math.arith
+Wave 4 part 2, moved to READY.
 | 444 | mathematics | 13 | `math.seq.partial-sums` | Partial Sums |
 | 445 | mathematics | 13 | `math.seq.arithmetic-series` | Arithmetic Series |
 | 446 | mathematics | 13 | `math.seq.geometric-series` | Geometric Series |
@@ -989,11 +997,14 @@ the program's default cross-subject priority order (`math.found` Wave
 | 484 | computer_science | 13 | `cs.oop.classes-objects-python` | Classes and Objects in Python |
 | 485 | computer_science | 13 | `cs.db.database-concepts` | Database Concepts |
 | 486 | computer_science | 13 | `cs.se.sdlc` | Software Development Life Cycle |
-| 487 | mathematics | 14 | `math.found.real-numbers` | Real Numbers |
-| 488 | mathematics | 14 | `math.arith.carrying` | Carrying (Regrouping) |
-| 489 | mathematics | 14 | `math.arith.mental-addition` | Mental Addition |
-| 490 | mathematics | 14 | `math.arith.subtraction` | Subtraction |
-| 491 | mathematics | 14 | `math.arith.multiplication` | Multiplication |
+**Row 487 removed 2026-07-26** — `math.found.real-numbers` authored
+Wave 15, moved to READY.
+**Rows 488-489 removed 2026-07-26** — `math.arith.carrying`,
+`math.arith.mental-addition` authored math.arith Wave 5 part 2, moved
+to READY.
+**Rows 490-491 removed 2026-07-26** — `math.arith.subtraction`,
+`math.arith.multiplication` authored math.arith Wave 5 part 1, moved
+to READY.
 | 492 | mathematics | 14 | `math.seq.infinite-geometric-series` | Infinite Geometric Series |
 | 493 | mathematics | 14 | `math.seq.telescoping-series` | Telescoping Series |
 | 494 | mathematics | 14 | `math.prob.conditional-expectation` | Conditional Expectation |
@@ -1021,13 +1032,18 @@ the program's default cross-subject priority order (`math.found` Wave
 | 516 | computer_science | 14 | `cs.oop.encapsulation-abstraction` | Encapsulation and Abstraction |
 | 517 | computer_science | 14 | `cs.db.er-modeling` | Entity-Relationship Modeling |
 | 518 | computer_science | 14 | `cs.se.version-control-git` | Version Control with Git |
-| 519 | mathematics | 15 | `math.found.complex-numbers` | Complex Numbers |
-| 520 | mathematics | 15 | `math.arith.column-addition` | Column Addition |
-| 521 | mathematics | 15 | `math.arith.borrowing` | Borrowing (Regrouping in Subtraction) |
-| 522 | mathematics | 15 | `math.arith.negative-numbers` | Negative Numbers |
-| 523 | mathematics | 15 | `math.arith.multiplication-table` | Multiplication Table |
-| 524 | mathematics | 15 | `math.arith.division` | Division |
-| 525 | mathematics | 15 | `math.arith.exponentiation` | Exponentiation |
+**Row 519 removed 2026-07-26** — `math.found.complex-numbers`
+authored Wave 16 (FINAL wave), moved to READY. `math.found` domain now
+82/82 — COMPLETE.
+**Rows 520-521 removed 2026-07-26** — `math.arith.column-addition`,
+`math.arith.borrowing` authored math.arith Wave 6 part 2, moved to READY.
+**Row 522 removed 2026-07-26** — `math.arith.negative-numbers`
+authored math.arith Wave 6 part 1, moved to READY.
+**Row 523 removed 2026-07-26** — `math.arith.multiplication-table`
+authored math.arith Wave 6 part 2, moved to READY.
+**Rows 524-525 removed 2026-07-26** — `math.arith.division`,
+`math.arith.exponentiation` authored math.arith Wave 6 part 1, moved
+to READY.
 | 526 | mathematics | 15 | `math.geom.coordinate-plane` | Coordinate Plane |
 | 527 | mathematics | 15 | `math.func.real-valued-function` | Real-Valued Function |
 | 528 | mathematics | 15 | `math.prob.martingale` | Martingale |
@@ -1066,15 +1082,17 @@ the program's default cross-subject priority order (`math.found` Wave
 | 561 | computer_science | 15 | `cs.oop.inheritance` | Inheritance |
 | 562 | computer_science | 15 | `cs.db.relational-model` | The Relational Model |
 | 563 | computer_science | 15 | `cs.se.software-testing` | Software Testing Fundamentals |
-| 564 | mathematics | 16 | `math.arith.absolute-value` | Absolute Value |
-| 565 | mathematics | 16 | `math.arith.integer-arithmetic` | Integer Arithmetic |
+**Rows 564-565 removed 2026-07-26** — `math.arith.absolute-value`,
+`math.arith.integer-arithmetic` authored math.arith Wave 7 part 1,
+moved to READY.
 | 566 | mathematics | 16 | `math.arith.long-multiplication` | Long Multiplication |
 | 567 | mathematics | 16 | `math.arith.mental-multiplication` | Mental Multiplication |
-| 568 | mathematics | 16 | `math.arith.remainder` | Remainder |
+**Row 568 removed 2026-07-26** — `math.arith.remainder` authored
+math.arith Wave 7 part 1, moved to READY.
 | 569 | mathematics | 16 | `math.arith.divisor-dividend` | Divisor and Dividend |
-| 570 | mathematics | 16 | `math.arith.order-of-operations` | Order of Operations |
-| 571 | mathematics | 16 | `math.arith.exponent-rules` | Exponent Rules |
-| 572 | mathematics | 16 | `math.arith.square-numbers` | Perfect Squares |
+**Rows 570-572 removed 2026-07-26** — `math.arith.order-of-operations`,
+`math.arith.exponent-rules`, `math.arith.square-numbers` authored
+math.arith Wave 7 part 1, moved to READY.
 | 573 | mathematics | 16 | `math.arith.cube-numbers` | Perfect Cubes |
 | 574 | mathematics | 16 | `math.nt.divisibility` | Divisibility |
 | 575 | mathematics | 16 | `math.nt.division-algorithm` | Division Algorithm |
@@ -1121,13 +1139,16 @@ the program's default cross-subject priority order (`math.found` Wave
 | 616 | computer_science | 16 | `cs.db.sql-ddl-dml` | SQL — DDL and DML Basics |
 | 617 | computer_science | 16 | `cs.ds.numpy-arrays` | NumPy for Numerical Computing |
 | 618 | mathematics | 17 | `math.arith.long-division` | Long Division |
-| 619 | mathematics | 17 | `math.arith.fraction-equivalence` | Equivalent Fractions |
-| 620 | mathematics | 17 | `math.arith.fraction-multiplication` | Multiplication and Division of Fractions |
-| 621 | mathematics | 17 | `math.arith.fraction-reciprocal` | Reciprocal |
-| 622 | mathematics | 17 | `math.arith.mixed-numbers` | Mixed Numbers |
-| 623 | mathematics | 17 | `math.arith.improper-fractions` | Improper Fractions |
-| 624 | mathematics | 17 | `math.arith.decimals` | Decimals |
-| 625 | mathematics | 17 | `math.arith.ratios` | Ratio |
+**Rows 619-621 removed 2026-07-26** — `math.arith.fraction-equivalence`,
+`math.arith.fraction-multiplication`, `math.arith.fraction-reciprocal`
+authored math.arith Wave 2 (part 1), moved to READY.
+**Rows 622-623 removed 2026-07-26** — `math.arith.mixed-numbers`,
+`math.arith.improper-fractions` authored math.arith Wave 2 (part 2),
+moved to READY.
+**Row 624 removed 2026-07-26** — `math.arith.decimals` authored
+math.arith Wave 4 part 1, moved to READY.
+**Row 625 removed 2026-07-26** — `math.arith.ratios` authored math.arith
+Wave 2 (part 2), moved to READY.
 | 626 | mathematics | 17 | `math.arith.square-roots` | Square Roots |
 | 627 | mathematics | 17 | `math.arith.mental-arithmetic` | Mental Arithmetic |
 | 628 | mathematics | 17 | `math.nt.divisibility-rules` | Divisibility Rules |
@@ -1184,13 +1205,15 @@ the program's default cross-subject priority order (`math.found` Wave
 | 679 | computer_science | 17 | `cs.oop.class-static-methods` | Class Methods and Static Methods |
 | 680 | computer_science | 17 | `cs.db.sql-queries-functions` | SQL — Queries and Aggregate Functions |
 | 681 | computer_science | 17 | `cs.ds.pandas-dataframes` | Pandas for Data Analysis |
-| 682 | mathematics | 18 | `math.arith.decimal-operations` | Decimal Operations |
-| 683 | mathematics | 18 | `math.arith.terminating-decimals` | Terminating Decimals |
-| 684 | mathematics | 18 | `math.arith.repeating-decimals` | Repeating Decimals |
-| 685 | mathematics | 18 | `math.arith.percentages` | Percentages |
-| 686 | mathematics | 18 | `math.arith.proportion` | Proportion |
-| 687 | mathematics | 18 | `math.arith.unit-rate` | Unit Rate |
-| 688 | mathematics | 18 | `math.arith.rounding` | Rounding |
+**Rows 682-684 removed 2026-07-26** — `math.arith.decimal-operations`,
+`math.arith.terminating-decimals`, `math.arith.repeating-decimals`
+authored math.arith Wave 5 part 2, moved to READY.
+**Row 685 removed 2026-07-26** — `math.arith.percentages` authored
+math.arith Wave 5 part 1, moved to READY.
+**Rows 686-687 removed 2026-07-26** — `math.arith.proportion`,
+`math.arith.unit-rate` authored math.arith Wave 3, moved to READY.
+**Row 688 removed 2026-07-26** — `math.arith.rounding` authored
+math.arith Wave 5 part 1, moved to READY.
 | 689 | mathematics | 18 | `math.arith.irrational-roots` | Irrational Square Roots |
 | 690 | mathematics | 18 | `math.arith.scientific-notation` | Scientific Notation |
 | 691 | mathematics | 18 | `math.nt.composite-number` | Composite Number |
@@ -1260,11 +1283,15 @@ the program's default cross-subject priority order (`math.found` Wave
 | 755 | computer_science | 18 | `cs.oop.design-patterns-intro` | Introduction to Design Patterns |
 | 756 | computer_science | 18 | `cs.db.sql-joins-subqueries` | SQL — Joins and Subqueries |
 | 757 | computer_science | 18 | `cs.ds.data-visualisation` | Data Visualisation with Matplotlib |
-| 758 | mathematics | 19 | `math.arith.percentage-calculations` | Percentage Calculations |
-| 759 | mathematics | 19 | `math.arith.direct-variation` | Direct Variation |
-| 760 | mathematics | 19 | `math.arith.inverse-variation` | Inverse Variation |
-| 761 | mathematics | 19 | `math.arith.estimation` | Estimation |
-| 762 | mathematics | 19 | `math.arith.significant-figures` | Significant Figures |
+**Row 758 removed 2026-07-26** — `math.arith.percentage-calculations`
+authored math.arith Wave 6 part 2, moved to READY.
+**Rows 759-760 removed 2026-07-26** — `math.arith.direct-variation`,
+`math.arith.inverse-variation` authored math.arith Wave 4 part 2,
+moved to READY.
+**Row 761 removed 2026-07-26** — `math.arith.estimation`
+authored math.arith Wave 6 part 2, moved to READY.
+**Row 762 removed 2026-07-26** — `math.arith.significant-figures`
+authored math.arith Wave 6 part 1, moved to READY.
 | 763 | mathematics | 19 | `math.nt.fundamental-theorem-arithmetic` | Fundamental Theorem of Arithmetic |
 | 764 | mathematics | 19 | `math.nt.gcd` | Greatest Common Divisor |
 | 765 | mathematics | 19 | `math.nt.residue-classes` | Residue Classes |

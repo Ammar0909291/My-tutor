@@ -11,6 +11,7 @@ export const EDUCATIONAL_BRAIN_SUBJECTS: ReadonlySet<string> = new Set([
   'mathematics',
   'physics',
   'english',
+  'chemistry',
 ])
 
 export function isEduBrainEnabled(slug: string): boolean {

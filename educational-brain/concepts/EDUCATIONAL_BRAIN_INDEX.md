@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 37 READY)
+## mathematics (908 concepts, 128 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -114,64 +114,64 @@ its subject KG.
 | alg | `math.alg.term` | Term | Yes | No | — | MISSING |
 | alg | `math.alg.vietas-formulas` | Vieta's Formulas | No | No | — | MISSING |
 | alg | `math.alg.zero-exponent` | Zero Exponent | No | No | — | MISSING |
-| arith | `math.arith.absolute-value` | Absolute Value | Yes | No | — | MISSING |
-| arith | `math.arith.addition` | Addition | Yes | No | — | MISSING |
-| arith | `math.arith.borrowing` | Borrowing (Regrouping in Subtraction) | No | No | — | MISSING |
-| arith | `math.arith.carrying` | Carrying (Regrouping) | No | No | — | MISSING |
-| arith | `math.arith.column-addition` | Column Addition | No | No | — | MISSING |
-| arith | `math.arith.counting` | Counting | Yes | No | — | MISSING |
-| arith | `math.arith.counting-sequence` | Counting Sequence | Yes | No | — | MISSING |
+| arith | `math.arith.absolute-value` | Absolute Value | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.absolute-value.md` | READY |
+| arith | `math.arith.addition` | Addition | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.addition.md` | READY |
+| arith | `math.arith.borrowing` | Borrowing (Regrouping in Subtraction) | No | Yes | `educational-brain/concepts/mathematics/math.arith.borrowing.md` | READY |
+| arith | `math.arith.carrying` | Carrying (Regrouping) | No | Yes | `educational-brain/concepts/mathematics/math.arith.carrying.md` | READY |
+| arith | `math.arith.column-addition` | Column Addition | No | Yes | `educational-brain/concepts/mathematics/math.arith.column-addition.md` | READY |
+| arith | `math.arith.counting` | Counting | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.counting.md` | READY |
+| arith | `math.arith.counting-sequence` | Counting Sequence | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.counting-sequence.md` | READY |
 | arith | `math.arith.cube-numbers` | Perfect Cubes | No | No | — | MISSING |
-| arith | `math.arith.decimal-operations` | Decimal Operations | No | No | — | MISSING |
-| arith | `math.arith.decimals` | Decimals | Yes | No | — | MISSING |
-| arith | `math.arith.direct-variation` | Direct Variation | No | No | — | MISSING |
-| arith | `math.arith.division` | Division | Yes | No | — | MISSING |
+| arith | `math.arith.decimal-operations` | Decimal Operations | No | Yes | `educational-brain/concepts/mathematics/math.arith.decimal-operations.md` | READY |
+| arith | `math.arith.decimals` | Decimals | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.decimals.md` | READY |
+| arith | `math.arith.direct-variation` | Direct Variation | No | Yes | `educational-brain/concepts/mathematics/math.arith.direct-variation.md` | READY |
+| arith | `math.arith.division` | Division | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.division.md` | READY |
 | arith | `math.arith.divisor-dividend` | Divisor and Dividend | No | No | — | MISSING |
-| arith | `math.arith.estimation` | Estimation | No | No | — | MISSING |
-| arith | `math.arith.expanded-form` | Expanded Form | No | No | — | MISSING |
-| arith | `math.arith.exponent-rules` | Exponent Rules | Yes | No | — | MISSING |
-| arith | `math.arith.exponentiation` | Exponentiation | Yes | No | — | MISSING |
+| arith | `math.arith.estimation` | Estimation | No | Yes | `educational-brain/concepts/mathematics/math.arith.estimation.md` | READY |
+| arith | `math.arith.expanded-form` | Expanded Form | No | Yes | `educational-brain/concepts/mathematics/math.arith.expanded-form.md` | READY |
+| arith | `math.arith.exponent-rules` | Exponent Rules | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.exponent-rules.md` | READY |
+| arith | `math.arith.exponentiation` | Exponentiation | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.exponentiation.md` | READY |
 | arith | `math.arith.fraction-addition` | Addition and Subtraction of Fractions | No | No | — | MISSING |
-| arith | `math.arith.fraction-equivalence` | Equivalent Fractions | Yes | No | — | MISSING |
-| arith | `math.arith.fraction-multiplication` | Multiplication and Division of Fractions | Yes | No | — | MISSING |
-| arith | `math.arith.fraction-reciprocal` | Reciprocal | Yes | No | — | MISSING |
+| arith | `math.arith.fraction-equivalence` | Equivalent Fractions | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.fraction-equivalence.md` | READY |
+| arith | `math.arith.fraction-multiplication` | Multiplication and Division of Fractions | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.fraction-multiplication.md` | READY |
+| arith | `math.arith.fraction-reciprocal` | Reciprocal | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.fraction-reciprocal.md` | READY |
 | arith | `math.arith.fraction-simplification` | Fraction Simplification | No | No | — | MISSING |
 | arith | `math.arith.fractions` | Fractions | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.fractions.md` | READY |
-| arith | `math.arith.improper-fractions` | Improper Fractions | Yes | No | — | MISSING |
-| arith | `math.arith.integer-arithmetic` | Integer Arithmetic | Yes | No | — | MISSING |
-| arith | `math.arith.inverse-variation` | Inverse Variation | No | No | — | MISSING |
+| arith | `math.arith.improper-fractions` | Improper Fractions | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.improper-fractions.md` | READY |
+| arith | `math.arith.integer-arithmetic` | Integer Arithmetic | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.integer-arithmetic.md` | READY |
+| arith | `math.arith.inverse-variation` | Inverse Variation | No | Yes | `educational-brain/concepts/mathematics/math.arith.inverse-variation.md` | READY |
 | arith | `math.arith.irrational-roots` | Irrational Square Roots | No | No | — | MISSING |
 | arith | `math.arith.long-division` | Long Division | No | No | — | MISSING |
 | arith | `math.arith.long-multiplication` | Long Multiplication | No | No | — | MISSING |
-| arith | `math.arith.mental-addition` | Mental Addition | No | No | — | MISSING |
+| arith | `math.arith.mental-addition` | Mental Addition | No | Yes | `educational-brain/concepts/mathematics/math.arith.mental-addition.md` | READY |
 | arith | `math.arith.mental-arithmetic` | Mental Arithmetic | No | No | — | MISSING |
 | arith | `math.arith.mental-multiplication` | Mental Multiplication | No | No | — | MISSING |
-| arith | `math.arith.mixed-numbers` | Mixed Numbers | Yes | No | — | MISSING |
-| arith | `math.arith.multiplication` | Multiplication | Yes | No | — | MISSING |
-| arith | `math.arith.multiplication-table` | Multiplication Table | No | No | — | MISSING |
-| arith | `math.arith.negative-numbers` | Negative Numbers | Yes | No | — | MISSING |
-| arith | `math.arith.number-base` | Number Base | No | No | — | MISSING |
-| arith | `math.arith.number-line` | Number Line | Yes | No | — | MISSING |
-| arith | `math.arith.ones-tens-hundreds` | Ones, Tens, Hundreds | Yes | No | — | MISSING |
-| arith | `math.arith.order-of-operations` | Order of Operations | Yes | No | — | MISSING |
-| arith | `math.arith.ordering` | Ordering Numbers | No | No | — | MISSING |
-| arith | `math.arith.percentage-calculations` | Percentage Calculations | No | No | — | MISSING |
+| arith | `math.arith.mixed-numbers` | Mixed Numbers | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.mixed-numbers.md` | READY |
+| arith | `math.arith.multiplication` | Multiplication | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.multiplication.md` | READY |
+| arith | `math.arith.multiplication-table` | Multiplication Table | No | Yes | `educational-brain/concepts/mathematics/math.arith.multiplication-table.md` | READY |
+| arith | `math.arith.negative-numbers` | Negative Numbers | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.negative-numbers.md` | READY |
+| arith | `math.arith.number-base` | Number Base | No | Yes | `educational-brain/concepts/mathematics/math.arith.number-base.md` | READY |
+| arith | `math.arith.number-line` | Number Line | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.number-line.md` | READY |
+| arith | `math.arith.ones-tens-hundreds` | Ones, Tens, Hundreds | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.ones-tens-hundreds.md` | READY |
+| arith | `math.arith.order-of-operations` | Order of Operations | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.order-of-operations.md` | READY |
+| arith | `math.arith.ordering` | Ordering Numbers | No | Yes | `educational-brain/concepts/mathematics/math.arith.ordering.md` | READY |
+| arith | `math.arith.percentage-calculations` | Percentage Calculations | No | Yes | `educational-brain/concepts/mathematics/math.arith.percentage-calculations.md` | READY |
 | arith | `math.arith.percentage-change` | Percentage Change | No | No | — | MISSING |
-| arith | `math.arith.percentages` | Percentages | Yes | No | — | MISSING |
-| arith | `math.arith.place-value` | Place Value | Yes | No | — | MISSING |
-| arith | `math.arith.proportion` | Proportion | Yes | No | — | MISSING |
-| arith | `math.arith.ratios` | Ratio | Yes | No | — | MISSING |
-| arith | `math.arith.remainder` | Remainder | Yes | No | — | MISSING |
-| arith | `math.arith.repeating-decimals` | Repeating Decimals | No | No | — | MISSING |
-| arith | `math.arith.rounding` | Rounding | Yes | No | — | MISSING |
+| arith | `math.arith.percentages` | Percentages | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.percentages.md` | READY |
+| arith | `math.arith.place-value` | Place Value | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.place-value.md` | READY |
+| arith | `math.arith.proportion` | Proportion | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.proportion.md` | READY |
+| arith | `math.arith.ratios` | Ratio | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.ratios.md` | READY |
+| arith | `math.arith.remainder` | Remainder | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.remainder.md` | READY |
+| arith | `math.arith.repeating-decimals` | Repeating Decimals | No | Yes | `educational-brain/concepts/mathematics/math.arith.repeating-decimals.md` | READY |
+| arith | `math.arith.rounding` | Rounding | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.rounding.md` | READY |
 | arith | `math.arith.scientific-notation` | Scientific Notation | No | No | — | MISSING |
-| arith | `math.arith.significant-figures` | Significant Figures | Yes | No | — | MISSING |
-| arith | `math.arith.square-numbers` | Perfect Squares | Yes | No | — | MISSING |
+| arith | `math.arith.significant-figures` | Significant Figures | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.significant-figures.md` | READY |
+| arith | `math.arith.square-numbers` | Perfect Squares | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.square-numbers.md` | READY |
 | arith | `math.arith.square-roots` | Square Roots | Yes | No | — | MISSING |
-| arith | `math.arith.subitizing` | Subitizing | No | No | — | MISSING |
-| arith | `math.arith.subtraction` | Subtraction | Yes | No | — | MISSING |
-| arith | `math.arith.terminating-decimals` | Terminating Decimals | No | No | — | MISSING |
-| arith | `math.arith.unit-rate` | Unit Rate | No | No | — | MISSING |
+| arith | `math.arith.subitizing` | Subitizing | No | Yes | `educational-brain/concepts/mathematics/math.arith.subitizing.md` | READY |
+| arith | `math.arith.subtraction` | Subtraction | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.subtraction.md` | READY |
+| arith | `math.arith.terminating-decimals` | Terminating Decimals | No | Yes | `educational-brain/concepts/mathematics/math.arith.terminating-decimals.md` | READY |
+| arith | `math.arith.unit-rate` | Unit Rate | No | Yes | `educational-brain/concepts/mathematics/math.arith.unit-rate.md` | READY |
 | calc | `math.calc.antiderivatives` | Antiderivatives | Yes | No | — | MISSING |
 | calc | `math.calc.arc-length` | Arc Length | Yes | No | — | MISSING |
 | calc | `math.calc.chain-rule` | Chain Rule | Yes | No | — | MISSING |
@@ -403,30 +403,30 @@ its subject KG.
 | found | `math.found.abstraction` | Abstraction | Yes | Yes | `educational-brain/concepts/mathematics/math.found.abstraction.md` | READY |
 | found | `math.found.axiom` | Axiom | Yes | Yes | `educational-brain/concepts/mathematics/math.found.axiom.md` | READY |
 | found | `math.found.axiomatic-system` | Axiomatic System | Yes | Yes | `educational-brain/concepts/mathematics/math.found.axiomatic-system.md` | READY |
-| found | `math.found.cardinal-arithmetic` | Cardinal Arithmetic | Yes | No | — | MISSING |
-| found | `math.found.cardinality` | Cardinality | Yes | No | — | MISSING |
+| found | `math.found.cardinal-arithmetic` | Cardinal Arithmetic | Yes | Yes | `educational-brain/concepts/mathematics/math.found.cardinal-arithmetic.md` | READY |
+| found | `math.found.cardinality` | Cardinality | Yes | Yes | `educational-brain/concepts/mathematics/math.found.cardinality.md` | READY |
 | found | `math.found.cartesian-product` | Cartesian Product | Yes | Yes | `educational-brain/concepts/mathematics/math.found.cartesian-product.md` | READY |
-| found | `math.found.complement` | Set Complement | No | No | — | MISSING |
-| found | `math.found.complex-numbers` | Complex Numbers | Yes | No | — | MISSING |
-| found | `math.found.conjecture` | Conjecture | No | No | — | MISSING |
-| found | `math.found.corollary` | Corollary | No | No | — | MISSING |
-| found | `math.found.countable-set` | Countable Set | No | No | — | MISSING |
+| found | `math.found.complement` | Set Complement | No | Yes | `educational-brain/concepts/mathematics/math.found.complement.md` | READY |
+| found | `math.found.complex-numbers` | Complex Numbers | Yes | Yes | `educational-brain/concepts/mathematics/math.found.complex-numbers.md` | READY |
+| found | `math.found.conjecture` | Conjecture | No | Yes | `educational-brain/concepts/mathematics/math.found.conjecture.md` | READY |
+| found | `math.found.corollary` | Corollary | No | Yes | `educational-brain/concepts/mathematics/math.found.corollary.md` | READY |
+| found | `math.found.countable-set` | Countable Set | No | Yes | `educational-brain/concepts/mathematics/math.found.countable-set.md` | READY |
 | found | `math.found.deductive-reasoning` | Deductive Reasoning | Yes | Yes | `educational-brain/concepts/mathematics/math.found.deductive-reasoning.md` | READY |
 | found | `math.found.definition` | Mathematical Definition | No | Yes | `educational-brain/concepts/mathematics/math.found.definition.md` | READY |
-| found | `math.found.direct-proof` | Direct Proof | No | No | — | MISSING |
+| found | `math.found.direct-proof` | Direct Proof | No | Yes | `educational-brain/concepts/mathematics/math.found.direct-proof.md` | READY |
 | found | `math.found.empty-set` | Empty Set | No | Yes | `educational-brain/concepts/mathematics/math.found.empty-set.md` | READY |
-| found | `math.found.equivalence-class` | Equivalence Class | Yes | No | — | MISSING |
-| found | `math.found.equivalence-relation` | Equivalence Relation | Yes | No | — | MISSING |
-| found | `math.found.existence-proof` | Existence Proof | No | No | — | MISSING |
-| found | `math.found.finite-set` | Finite Set | No | No | — | MISSING |
-| found | `math.found.function-set-theoretic` | Function (Set-Theoretic) | Yes | No | — | MISSING |
+| found | `math.found.equivalence-class` | Equivalence Class | Yes | Yes | `educational-brain/concepts/mathematics/math.found.equivalence-class.md` | READY |
+| found | `math.found.equivalence-relation` | Equivalence Relation | Yes | Yes | `educational-brain/concepts/mathematics/math.found.equivalence-relation.md` | READY |
+| found | `math.found.existence-proof` | Existence Proof | No | Yes | `educational-brain/concepts/mathematics/math.found.existence-proof.md` | READY |
+| found | `math.found.finite-set` | Finite Set | No | Yes | `educational-brain/concepts/mathematics/math.found.finite-set.md` | READY |
+| found | `math.found.function-set-theoretic` | Function (Set-Theoretic) | Yes | Yes | `educational-brain/concepts/mathematics/math.found.function-set-theoretic.md` | READY |
 | found | `math.found.generalization` | Generalization | Yes | Yes | `educational-brain/concepts/mathematics/math.found.generalization.md` | READY |
-| found | `math.found.hasse-diagram` | Hasse Diagram | No | No | — | MISSING |
+| found | `math.found.hasse-diagram` | Hasse Diagram | No | Yes | `educational-brain/concepts/mathematics/math.found.hasse-diagram.md` | READY |
 | found | `math.found.inductive-reasoning` | Inductive Reasoning | No | Yes | `educational-brain/concepts/mathematics/math.found.inductive-reasoning.md` | READY |
-| found | `math.found.integers` | Integers | Yes | No | — | MISSING |
-| found | `math.found.intersection` | Intersection | No | No | — | MISSING |
-| found | `math.found.irrational-numbers` | Irrational Numbers | Yes | No | — | MISSING |
-| found | `math.found.lemma` | Lemma | No | No | — | MISSING |
+| found | `math.found.integers` | Integers | Yes | Yes | `educational-brain/concepts/mathematics/math.found.integers.md` | READY |
+| found | `math.found.intersection` | Intersection | No | Yes | `educational-brain/concepts/mathematics/math.found.intersection.md` | READY |
+| found | `math.found.irrational-numbers` | Irrational Numbers | Yes | Yes | `educational-brain/concepts/mathematics/math.found.irrational-numbers.md` | READY |
+| found | `math.found.lemma` | Lemma | No | Yes | `educational-brain/concepts/mathematics/math.found.lemma.md` | READY |
 | found | `math.found.logic` | Mathematical Logic | Yes | Yes | `educational-brain/concepts/mathematics/math.found.logic.md` | READY |
 | found | `math.found.logical-connectives` | Logical Connectives | Yes | Yes | `educational-brain/concepts/mathematics/math.found.logical-connectives.md` | READY |
 | found | `math.found.logical-equivalence` | Logical Equivalence | Yes | Yes | math.found.logical-equivalence.md | READY |
@@ -435,53 +435,53 @@ its subject KG.
 | found | `math.found.mathematical-notation` | Mathematical Notation | Yes | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-notation.md` | READY |
 | found | `math.found.mathematical-symbols` | Mathematical Symbols | No | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-symbols.md` | READY |
 | found | `math.found.mathematical-thinking` | Mathematical Thinking | Yes | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-thinking.md` | READY |
-| found | `math.found.natural-numbers` | Natural Numbers | Yes | No | — | MISSING |
+| found | `math.found.natural-numbers` | Natural Numbers | Yes | Yes | `educational-brain/concepts/mathematics/math.found.natural-numbers.md` | READY |
 | found | `math.found.ordered-pair` | Ordered Pair | Yes | Yes | `educational-brain/concepts/mathematics/math.found.ordered-pair.md` | READY |
 | found | `math.found.ordinal-number` | Ordinal Number | Yes | Yes | math.found.ordinal-number.md | READY |
-| found | `math.found.partial-order` | Partial Order | Yes | No | — | MISSING |
-| found | `math.found.partition` | Partition | Yes | No | — | MISSING |
+| found | `math.found.partial-order` | Partial Order | Yes | Yes | `educational-brain/concepts/mathematics/math.found.partial-order.md` | READY |
+| found | `math.found.partition` | Partition | Yes | Yes | `educational-brain/concepts/mathematics/math.found.partition.md` | READY |
 | found | `math.found.pattern-recognition` | Pattern Recognition | Yes | Yes | `educational-brain/concepts/mathematics/math.found.pattern-recognition.md` | READY |
-| found | `math.found.power-set` | Power Set | Yes | No | — | MISSING |
+| found | `math.found.power-set` | Power Set | Yes | Yes | `educational-brain/concepts/mathematics/math.found.power-set.md` | READY |
 | found | `math.found.predicate` | Predicate | Yes | Yes | `educational-brain/concepts/mathematics/math.found.predicate.md` | READY |
 | found | `math.found.predicate-logic` | Predicate Logic | Yes | Yes | `educational-brain/concepts/mathematics/math.found.predicate-logic.md` | READY |
 | found | `math.found.problem-solving` | Mathematical Problem Solving | Yes | Yes | `educational-brain/concepts/mathematics/math.found.problem-solving.md` | READY |
 | found | `math.found.problem-solving-strategies` | Problem-Solving Strategies | No | Yes | `educational-brain/concepts/mathematics/math.found.problem-solving-strategies.md` | READY |
-| found | `math.found.proof` | Mathematical Proof | Yes | No | — | MISSING |
-| found | `math.found.proof-by-cases` | Proof by Cases | No | No | — | MISSING |
-| found | `math.found.proof-by-contradiction` | Proof by Contradiction | No | No | — | MISSING |
-| found | `math.found.proof-by-contrapositive` | Proof by Contrapositive | No | No | — | MISSING |
-| found | `math.found.proof-by-induction` | Mathematical Induction | Yes | No | — | MISSING |
-| found | `math.found.proper-subset` | Proper Subset | No | No | — | MISSING |
+| found | `math.found.proof` | Mathematical Proof | Yes | Yes | `educational-brain/concepts/mathematics/math.found.proof.md` | READY |
+| found | `math.found.proof-by-cases` | Proof by Cases | No | Yes | `educational-brain/concepts/mathematics/math.found.proof-by-cases.md` | READY |
+| found | `math.found.proof-by-contradiction` | Proof by Contradiction | No | Yes | `educational-brain/concepts/mathematics/math.found.proof-by-contradiction.md` | READY |
+| found | `math.found.proof-by-contrapositive` | Proof by Contrapositive | No | Yes | `educational-brain/concepts/mathematics/math.found.proof-by-contrapositive.md` | READY |
+| found | `math.found.proof-by-induction` | Mathematical Induction | Yes | Yes | `educational-brain/concepts/mathematics/math.found.proof-by-induction.md` | READY |
+| found | `math.found.proper-subset` | Proper Subset | No | Yes | `educational-brain/concepts/mathematics/math.found.proper-subset.md` | READY |
 | found | `math.found.proposition` | Proposition | Yes | Yes | `educational-brain/concepts/mathematics/math.found.proposition.md` | READY |
 | found | `math.found.quantifiers` | Quantifiers | Yes | Yes | math.found.quantifiers.md | READY |
-| found | `math.found.rational-numbers` | Rational Numbers | Yes | No | — | MISSING |
+| found | `math.found.rational-numbers` | Rational Numbers | Yes | Yes | `educational-brain/concepts/mathematics/math.found.rational-numbers.md` | READY |
 | found | `math.found.reading-mathematics` | Reading Mathematics | No | Yes | `educational-brain/concepts/mathematics/math.found.reading-mathematics.md` | READY |
-| found | `math.found.real-numbers` | Real Numbers | Yes | No | — | MISSING |
-| found | `math.found.reflexive-relation` | Reflexive Relation | Yes | No | — | MISSING |
+| found | `math.found.real-numbers` | Real Numbers | Yes | Yes | `educational-brain/concepts/mathematics/math.found.real-numbers.md` | READY |
+| found | `math.found.reflexive-relation` | Reflexive Relation | Yes | Yes | `educational-brain/concepts/mathematics/math.found.reflexive-relation.md` | READY |
 | found | `math.found.relation` | Relation | Yes | Yes | math.found.relation.md | READY |
-| found | `math.found.rules-of-inference` | Rules of Inference | Yes | No | — | MISSING |
+| found | `math.found.rules-of-inference` | Rules of Inference | Yes | Yes | `educational-brain/concepts/mathematics/math.found.rules-of-inference.md` | READY |
 | found | `math.found.set` | Set | Yes | Yes | `educational-brain/concepts/mathematics/math.found.set.md` | READY |
 | found | `math.found.set-builder-notation` | Set-Builder Notation | Yes | Yes | `educational-brain/concepts/mathematics/math.found.set-builder-notation.md` | READY |
-| found | `math.found.set-difference` | Set Difference | No | No | — | MISSING |
-| found | `math.found.set-equality` | Set Equality | No | No | — | MISSING |
+| found | `math.found.set-difference` | Set Difference | No | Yes | `educational-brain/concepts/mathematics/math.found.set-difference.md` | READY |
+| found | `math.found.set-equality` | Set Equality | No | Yes | `educational-brain/concepts/mathematics/math.found.set-equality.md` | READY |
 | found | `math.found.set-membership` | Set Membership | Yes | Yes | `educational-brain/concepts/mathematics/math.found.set-membership.md` | READY |
-| found | `math.found.set-operations` | Set Operations | Yes | No | — | MISSING |
+| found | `math.found.set-operations` | Set Operations | Yes | Yes | `educational-brain/concepts/mathematics/math.found.set-operations.md` | READY |
 | found | `math.found.set-theory` | Set Theory | Yes | Yes | `educational-brain/concepts/mathematics/math.found.set-theory.md` | READY |
 | found | `math.found.set-theory-axiomatic` | Axiomatic Set Theory | Yes | Yes | `educational-brain/concepts/mathematics/math.found.set-theory-axiomatic.md` | READY |
-| found | `math.found.strong-induction` | Strong Induction | No | No | — | MISSING |
+| found | `math.found.strong-induction` | Strong Induction | No | Yes | `educational-brain/concepts/mathematics/math.found.strong-induction.md` | READY |
 | found | `math.found.subset` | Subset | Yes | Yes | math.found.subset.md | READY |
-| found | `math.found.symmetric-relation` | Symmetric Relation | Yes | No | — | MISSING |
-| found | `math.found.theorem` | Theorem | No | No | — | MISSING |
-| found | `math.found.total-order` | Total Order | Yes | No | — | MISSING |
-| found | `math.found.transitive-relation` | Transitive Relation | Yes | No | — | MISSING |
+| found | `math.found.symmetric-relation` | Symmetric Relation | Yes | Yes | `educational-brain/concepts/mathematics/math.found.symmetric-relation.md` | READY |
+| found | `math.found.theorem` | Theorem | No | Yes | `educational-brain/concepts/mathematics/math.found.theorem.md` | READY |
+| found | `math.found.total-order` | Total Order | Yes | Yes | `educational-brain/concepts/mathematics/math.found.total-order.md` | READY |
+| found | `math.found.transitive-relation` | Transitive Relation | Yes | Yes | `educational-brain/concepts/mathematics/math.found.transitive-relation.md` | READY |
 | found | `math.found.truth-table` | Truth Table | Yes | Yes | `educational-brain/concepts/mathematics/math.found.truth-table.md` | READY |
-| found | `math.found.uncountable-set` | Uncountable Set | No | No | — | MISSING |
-| found | `math.found.union` | Union | No | No | — | MISSING |
-| found | `math.found.uniqueness-proof` | Uniqueness Proof | No | No | — | MISSING |
+| found | `math.found.uncountable-set` | Uncountable Set | No | Yes | `educational-brain/concepts/mathematics/math.found.uncountable-set.md` | READY |
+| found | `math.found.union` | Union | No | Yes | `educational-brain/concepts/mathematics/math.found.union.md` | READY |
+| found | `math.found.uniqueness-proof` | Uniqueness Proof | No | Yes | `educational-brain/concepts/mathematics/math.found.uniqueness-proof.md` | READY |
 | found | `math.found.variable` | Variable | Yes | Yes | `educational-brain/concepts/mathematics/math.found.variable.md` | READY |
-| found | `math.found.venn-diagram` | Venn Diagram | No | No | — | MISSING |
-| found | `math.found.well-ordering-principle` | Well-Ordering Principle | Yes | No | — | MISSING |
-| found | `math.found.writing-mathematics` | Writing Mathematics | No | No | — | MISSING |
+| found | `math.found.venn-diagram` | Venn Diagram | No | Yes | `educational-brain/concepts/mathematics/math.found.venn-diagram.md` | READY |
+| found | `math.found.well-ordering-principle` | Well-Ordering Principle | Yes | Yes | `educational-brain/concepts/mathematics/math.found.well-ordering-principle.md` | READY |
+| found | `math.found.writing-mathematics` | Writing Mathematics | No | Yes | `educational-brain/concepts/mathematics/math.found.writing-mathematics.md` | READY |
 | func | `math.func.bijection` | Bijective Function | Yes | No | — | MISSING |
 | func | `math.func.composition` | Composition of Functions | Yes | No | — | MISSING |
 | func | `math.func.domain-range` | Domain and Range | No | No | — | MISSING |

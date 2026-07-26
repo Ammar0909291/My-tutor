@@ -72,6 +72,34 @@ const SUBJECT_ADAPTATIONS: Record<string, string> = {
 }
 
 /**
+ * Injected when the first lesson reaches PRACTICE phase — the "solo summit"
+ * (first-lesson/04 §1). At this point the learner has succeeded at their
+ * first solo attempt and the session must close warmly. NEVER [LESSON_COMPLETE]
+ * here: lesson-one completion is confirmed by the opening retrieval at lesson
+ * two (first-lesson/04 §1 criterion C2).
+ */
+export function buildFirstLessonCloseBlock(): string {
+  return (
+    '\n\nFIRST LESSON CLOSE — MANDATORY (source: first-lesson/04 §1, ' +
+    '"when the solo lands: that is the summit — bank it and close. ' +
+    'Do not add \'one more\'"):\n' +
+    'The learner has reached their solo summit for lesson one.\n' +
+    'DO NOT:\n' +
+    '- Add another question, problem, or probe\n' +
+    '- Introduce a new term, formula, or concept\n' +
+    '- Emit [LESSON_COMPLETE] — lesson-one completion is confirmed at the ' +
+    'OPENING retrieval of lesson two, not here\n' +
+    'DO:\n' +
+    '- Name ONE specific act the learner performed today (concrete, not ' +
+    '"you did great" — e.g. "you figured out why the two measurements ' +
+    'disagreed")\n' +
+    '- Forecast the next session in exactly one sentence\n' +
+    '- Leave one small open loop ("next time I\'ll show you the trick that...")\n' +
+    '- Keep the close to ~30 seconds of text — warm, brief, definite'
+  )
+}
+
+/**
  * The mandatory constraint block (Migration Blueprint Phase 1). Injected
  * into the system prompt AFTER all advisory blocks so it reads as the
  * final, overriding instruction set for this turn.

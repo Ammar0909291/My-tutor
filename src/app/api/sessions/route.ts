@@ -19,7 +19,19 @@ import type { RedisSessionState } from "@/types";
 // converts a hang into a normal thrown 500 well inside the client's
 // timeout, which the existing setInitError('connect_failed') retry UI
 // already handles correctly.
+//
+// P0 follow-up ("network hiccup" on lesson start): a timeout alone still
+// fails the WHOLE request on a Neon cold start — the first query after
+// compute auto-suspend dies instantly with P1001/P1017, the route 500s,
+// and the student lands on the hiccup screen even though the very next
+// attempt would succeed. Each blocking call is therefore also wrapped in
+// withRetry (connection-class errors only, short backoff), the same
+// pattern the other write-heavy routes here already use. One retry keeps
+// the worst hang-case inside the client's 15s window; the common
+// fast-fail cold start heals in under a second.
 const SESSION_DB_TIMEOUT_MS = 10000;
+const dbCall = <T>(label: string, fn: () => Promise<T>): Promise<T> =>
+  withRetry(() => withTimeout(fn(), SESSION_DB_TIMEOUT_MS, label), 2, 800);
 
 const createSchema = z.object({
   subjectSlug: z.string(),
@@ -34,12 +46,12 @@ export async function GET() {
   if (!session?.user?.id) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
 
   try {
-    const sessions = await withTimeout(withRetry(() => prisma.learnSession.findMany({
+    const sessions = await dbCall('sessions-list', () => prisma.learnSession.findMany({
       where: { userId: session.user.id },
       orderBy: { startedAt: "desc" },
       take: 20,
       include: { subject: { select: { name: true, slug: true } }, messages: { orderBy: { createdAt: "desc" }, take: 1 } },
-    })), SESSION_DB_TIMEOUT_MS, 'sessions-list')
+    }))
 
     return NextResponse.json({ success: true, data: sessions });
   } catch {
@@ -56,13 +68,13 @@ export async function POST(req: Request) {
     const { subjectSlug, memoryContext, schoolChapterId } = createSchema.parse(body);
 
 
-    const subject = await withTimeout(withRetry(() => prisma.subject.findUnique({ where: { slug: subjectSlug } })), SESSION_DB_TIMEOUT_MS, 'sessions-subject-lookup');
+    const subject = await dbCall('sessions-subject-lookup', () => prisma.subject.findUnique({ where: { slug: subjectSlug } }));
     if (!subject) return NextResponse.json({ success: false, error: "Subject not found" }, { status: 404 });
 
     // Resume an existing ACTIVE session from within the last 24 hours instead of
     // creating a new one — this preserves the conversation across page refreshes.
     const cutoff = new Date(Date.now() - 24 * 60 * 60 * 1000);
-    const existingSession = await withTimeout(withRetry(() => prisma.learnSession.findFirst({
+    const existingSession = await dbCall('sessions-existing-lookup', () => prisma.learnSession.findFirst({
       where: {
         userId: session.user.id,
         subjectId: subject.id,
@@ -80,7 +92,7 @@ export async function POST(req: Request) {
         // message from a long-running session was the dominant cost here.
         messages: { orderBy: { createdAt: "desc" }, take: 30 },
       },
-    })), SESSION_DB_TIMEOUT_MS, 'sessions-existing-lookup');
+    }));
 
     if (existingSession) {
       return NextResponse.json({ success: true, data: existingSession, resumed: true }, { status: 200 });
@@ -90,7 +102,7 @@ export async function POST(req: Request) {
     // on mobile or after a crash). This prevents orphaned ACTIVE rows accumulating.
     // Best-effort (errors swallowed) but still timeout-bounded — an unguarded hang
     // here would block session creation even though failures are non-fatal.
-    await withTimeout(prisma.learnSession.updateMany({
+    await dbCall('sessions-close-stale', () => prisma.learnSession.updateMany({
       where: {
         userId: session.user.id,
         subjectId: subject.id,
@@ -98,17 +110,17 @@ export async function POST(req: Request) {
         startedAt: { lt: cutoff },
       },
       data: { status: "COMPLETED", endedAt: new Date() },
-    }), SESSION_DB_TIMEOUT_MS, 'sessions-close-stale').catch(() => {});
+    })).catch(() => {});
 
-    const [profile, activePath] = await withTimeout(withRetry(() => Promise.all([
+    const [profile, activePath] = await dbCall('sessions-profile-path', () => Promise.all([
       prisma.profile.findUnique({ where: { userId: session.user.id } }),
       prisma.learningPath.findFirst({
         where: { userId: session.user.id, subjectId: subject.id, isActive: true },
         orderBy: { createdAt: "desc" },
       }),
-    ])), SESSION_DB_TIMEOUT_MS, 'sessions-profile-path');
+    ]));
 
-    const learnSession = await withTimeout(withRetry(() => prisma.learnSession.create({
+    const learnSession = await dbCall('sessions-create', () => prisma.learnSession.create({
       data: {
         userId: session.user.id,
         subjectId: subject.id,
@@ -121,7 +133,7 @@ export async function POST(req: Request) {
           schoolChapterId: schoolChapterId ?? null,
         },
       },
-    })), SESSION_DB_TIMEOUT_MS, 'sessions-create');
+    }));
 
     // Warm up Redis state (best-effort — Redis may not be running)
     const state: RedisSessionState = {
