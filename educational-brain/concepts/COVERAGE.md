@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 64 | `math.arith.fractions` + 63 `math.found.*` entries (Waves 1-9) — math.found domain IN PROGRESS (63/82), see Delivery history. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
+| mathematics | 908 | 71 | `math.arith.fractions` + 70 `math.found.*` entries (Waves 1-10) — math.found domain IN PROGRESS (70/82, only 12 concepts remain), see Delivery history. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -1516,3 +1516,42 @@ computed programmatically against the live KG (7): `uniqueness-proof`,
 tracking files updated in this same commit; re-validated 0 duplicates,
 0 orphans, 0 Quality Gate 3 violations across all 64 mathematics
 entries.
+
+### Mathematics — math.found Wave 10 (2026-07-26, autonomous loop iteration 2)
+
+Re-synced `main` (one new unrelated commit, `6aed2aa2`, a Groq error-
+classification fix — fast-forwarded, zero overlap) and re-ran the full
+Quality Gate 3 audit across all 64 pre-batch mathematics entries — 0
+violations found.
+
+**Wave 10** — authored the 7 concepts whose prerequisites became fully
+satisfied after Wave 9, verified programmatically against the live KG:
+`uniqueness-proof`, `lemma`, `corollary`, `equivalence-class`,
+`total-order`, `hasse-diagram`, `cardinality`. 3 of the 7
+(`equivalence-class`, `total-order`, `cardinality`) had existing
+Blueprints reused by reference; 4 (`uniqueness-proof`, `lemma`,
+`corollary`, `hasse-diagram`) had none, authored via the birth-taxonomy
+diagnostic procedure. `lemma` and `corollary` are sibling entries — both
+cite `math.found.theorem`'s own MC-1 (role-vs-rigor conflation) by
+reference rather than re-deriving it, since both are direct, specific
+instances of that same misconception applied to their own labels; each
+then contributes one genuinely new misconception of its own (lemma's
+extraction-purpose question; corollary's restatement-vs-genuine-content
+distinction). `uniqueness-proof` directly extends `math.found.
+existence-proof`'s own existence/uniqueness scope distinction from the
+uniqueness side.
+
+`math.found` 63/82 → **70/82** — only 12 concepts now remain:
+`proof-by-induction`, `strong-induction`, `well-ordering-principle`,
+`finite-set`, `countable-set`, `uncountable-set`, `natural-numbers`,
+`integers`, `rational-numbers`, `irrational-numbers`, `real-numbers`,
+`complex-numbers`. Wave 11 candidates computed programmatically (2):
+`finite-set`, `natural-numbers` — the remaining concepts form a tight
+dependency chain (natural-numbers → integers → rational-numbers →
+irrational-numbers → real-numbers → complex-numbers, and separately
+proof-by-induction/strong-induction/well-ordering-principle depending
+on natural-numbers) that will resolve in a small number of further
+waves as math.found approaches Domain Certification. No other domain
+touched. All five tracking files updated in this same commit;
+re-validated 0 duplicates, 0 orphans, 0 Quality Gate 3 violations
+across all 71 mathematics entries.

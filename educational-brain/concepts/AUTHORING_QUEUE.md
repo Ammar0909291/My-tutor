@@ -21,11 +21,11 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1284** (= 1,775 KG concepts − 491 already `READY`, per
+Total queued: **1277** (= 1,775 KG concepts − 498 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
-at math.found Waves 7-9's positions below).
+at math.found Waves 7-10's positions below).
 
 **Domain Certification Mode override (binding until `math.found` reaches
 82/82, EXPLICITLY SUSPENDED for physics-specific batches by direct user
@@ -723,7 +723,8 @@ READY. Row numbers not renumbered, per this file's own standing note.
 `math.found.equivalence-relation`, `math.found.partial-order` all
 authored this batch (Wave 8), moved to READY. Row numbers not
 renumbered.
-| 216 | mathematics | 8 | `math.found.cardinality` | Cardinality |
+**Row 216 removed 2026-07-26** — `math.found.cardinality` authored
+Wave 10, moved to READY.
 | 217 | mathematics | 8 | `math.geom.polygon-angle-sum` | Polygon Angle Sum |
 | 218 | mathematics | 8 | `math.geom.parallelogram` | Parallelogram |
 | 219 | mathematics | 8 | `math.geom.trapezoid` | Trapezoid |
@@ -769,9 +770,9 @@ renumbered.
 `math.found.writing-mathematics`, `math.found.theorem`,
 `math.found.conjecture` all authored this batch (Wave 9), moved to
 READY. Row numbers not renumbered.
-| 264 | mathematics | 9 | `math.found.equivalence-class` | Equivalence Class |
-| 265 | mathematics | 9 | `math.found.total-order` | Total Order |
-| 266 | mathematics | 9 | `math.found.hasse-diagram` | Hasse Diagram |
+**Rows 264-266 removed 2026-07-26** — `math.found.equivalence-class`,
+`math.found.total-order`, `math.found.hasse-diagram` authored Wave 10,
+moved to READY.
 | 267 | mathematics | 9 | `math.found.finite-set` | Finite Set |
 | 268 | mathematics | 9 | `math.geom.circle-area` | Area of a Circle |
 | 269 | mathematics | 9 | `math.geom.geometric-proof` | Geometric Proof |
@@ -809,9 +810,9 @@ READY. Row numbers not renumbered.
 | 301 | computer_science | 9 | `cs.control.loops` | Iteration — while and for Loops |
 | 302 | computer_science | 9 | `cs.web.rest-apis` | REST APIs |
 | 303 | computer_science | 9 | `cs.theory.complexity-classes` | Computational Complexity Classes |
-| 304 | mathematics | 10 | `math.found.uniqueness-proof` | Uniqueness Proof |
-| 305 | mathematics | 10 | `math.found.lemma` | Lemma |
-| 306 | mathematics | 10 | `math.found.corollary` | Corollary |
+**Rows 304-306 removed 2026-07-26** — `math.found.uniqueness-proof`,
+`math.found.lemma`, `math.found.corollary` authored Wave 10, moved to
+READY.
 | 307 | mathematics | 10 | `math.found.natural-numbers` | Natural Numbers |
 | 308 | mathematics | 10 | `math.func.bijection` | Bijective Function |
 | 309 | mathematics | 10 | `math.func.step-function` | Step Function |

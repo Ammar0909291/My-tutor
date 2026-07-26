@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **491** |
-| Remaining | **1,284** |
-| Completion percentage | **27.66%** |
+| Concepts with an Educational Brain entry | **498** |
+| Remaining | **1,277** |
+| Completion percentage | **28.06%** |
 
 *(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
 with an Educational Brain entry" rows had accumulated from prior sessions
@@ -33,7 +33,7 @@ program's "mathematics only" scope this turn.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 64 | 7.05% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 71 | 7.82% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
@@ -161,8 +161,8 @@ Brain entries.
 |---|---|
 | Domain | `math.found` (mathematics / Foundations) |
 | Total concepts in domain | 82 |
-| Authored this program | 63 |
-| Remaining | 19 |
+| Authored this program | 70 |
+| Remaining | 12 |
 | Status | **IN PROGRESS** — not eligible for Domain Certification yet |
 
 Wave 1 (5, level 0-1): `mathematical-thinking` (root), `abstraction`,
@@ -196,10 +196,15 @@ citations re-verified intact). Wave 9 (8, level 9, this batch,
 2026-07-26, autonomous loop — proof-family sub-domain, none had
 Blueprints): `direct-proof`, `proof-by-contradiction`,
 `proof-by-contrapositive`, `proof-by-cases`, `existence-proof`,
-`writing-mathematics`, `theorem`, `conjecture`. Wave 10 candidates
-computed programmatically from the live KG (7): `uniqueness-proof`,
-`lemma`, `corollary`, `equivalence-class`, `total-order`,
-`hasse-diagram`, `cardinality`. No other domain will be started until
+`writing-mathematics`, `theorem`, `conjecture`. Wave 10 (7, this batch,
+2026-07-26, autonomous loop iteration 2): `uniqueness-proof`, `lemma`,
+`corollary`, `equivalence-class`, `total-order`, `hasse-diagram`,
+`cardinality`. `math.found` now 70/82 — only 12 concepts remain:
+`proof-by-induction`, `strong-induction`, `well-ordering-principle`,
+`finite-set`, `countable-set`, `uncountable-set`, `natural-numbers`,
+`integers`, `rational-numbers`, `irrational-numbers`, `real-numbers`,
+`complex-numbers`. Wave 11 candidates computed programmatically (2):
+`finite-set`, `natural-numbers`. No other domain will be started until
 all 82 `math.found` concepts are `READY` and Domain Certification
 passes — **except by explicit, subject-specific user instruction, as
 happened in §3b/§3c below**.
