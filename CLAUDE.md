@@ -1570,6 +1570,13 @@
   birth-taxonomy diagnostic). `math.nt` 22/36 → 24/36 — two-thirds
   complete. `math.nt.rsa-basics` (no Blueprint) newly unlocked,
   deferred to Wave 7. Full detail: `COVERAGE.md`.
+  **Batch 42 — math.nt Wave 7** (2026-07-26, autonomous loop iteration
+  32): 2 concepts authored (`rsa-basics`, `general-diophantine`; both
+  no Blueprint, misconceptions authored via birth-taxonomy diagnostic).
+  `math.nt` 24/36 → 26/36. No further candidates unlocked; remaining 10
+  concepts blocked on deep analytic/algebraic-number-theory
+  prerequisites — Wave 8 needs a fresh domain-tail audit. Full detail:
+  `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
