@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1268** (= 1,775 KG concepts − 507 already `READY`, per
+Total queued: **1267** (= 1,775 KG concepts − 508 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -945,7 +945,8 @@ Wave 13, moved to READY.
 | 435 | computer_science | 12 | `cs.file.text-files` | Text File Handling |
 | 436 | computer_science | 12 | `cs.struct.linear-search` | Linear Search |
 | 437 | computer_science | 12 | `cs.oop.oop-concepts` | Object-Oriented Programming Concepts |
-| 438 | mathematics | 13 | `math.found.irrational-numbers` | Irrational Numbers |
+**Row 438 removed 2026-07-26** — `math.found.irrational-numbers`
+authored Wave 14, moved to READY.
 | 439 | mathematics | 13 | `math.arith.ones-tens-hundreds` | Ones, Tens, Hundreds |
 | 440 | mathematics | 13 | `math.arith.expanded-form` | Expanded Form |
 | 441 | mathematics | 13 | `math.arith.number-base` | Number Base |

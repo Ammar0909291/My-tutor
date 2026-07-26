@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 80 READY)
+## mathematics (908 concepts, 81 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -425,7 +425,7 @@ its subject KG.
 | found | `math.found.inductive-reasoning` | Inductive Reasoning | No | Yes | `educational-brain/concepts/mathematics/math.found.inductive-reasoning.md` | READY |
 | found | `math.found.integers` | Integers | Yes | Yes | `educational-brain/concepts/mathematics/math.found.integers.md` | READY |
 | found | `math.found.intersection` | Intersection | No | Yes | `educational-brain/concepts/mathematics/math.found.intersection.md` | READY |
-| found | `math.found.irrational-numbers` | Irrational Numbers | Yes | No | — | MISSING |
+| found | `math.found.irrational-numbers` | Irrational Numbers | Yes | Yes | `educational-brain/concepts/mathematics/math.found.irrational-numbers.md` | READY |
 | found | `math.found.lemma` | Lemma | No | Yes | `educational-brain/concepts/mathematics/math.found.lemma.md` | READY |
 | found | `math.found.logic` | Mathematical Logic | Yes | Yes | `educational-brain/concepts/mathematics/math.found.logic.md` | READY |
 | found | `math.found.logical-connectives` | Logical Connectives | Yes | Yes | `educational-brain/concepts/mathematics/math.found.logical-connectives.md` | READY |
