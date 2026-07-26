@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db/prisma";
+import { withRetry } from "@/lib/db/withRetry";
 import { withTimeout } from "@/lib/net/timeout";
 import { setSessionState, setUserActiveSession } from "@/lib/redis/client";
 import type { RedisSessionState } from "@/types";
@@ -33,12 +34,12 @@ export async function GET() {
   if (!session?.user?.id) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
 
   try {
-    const sessions = await withTimeout(prisma.learnSession.findMany({
+    const sessions = await withTimeout(withRetry(() => prisma.learnSession.findMany({
       where: { userId: session.user.id },
       orderBy: { startedAt: "desc" },
       take: 20,
       include: { subject: { select: { name: true, slug: true } }, messages: { orderBy: { createdAt: "desc" }, take: 1 } },
-    }), SESSION_DB_TIMEOUT_MS, 'sessions-list')
+    })), SESSION_DB_TIMEOUT_MS, 'sessions-list')
 
     return NextResponse.json({ success: true, data: sessions });
   } catch {
@@ -55,13 +56,13 @@ export async function POST(req: Request) {
     const { subjectSlug, memoryContext, schoolChapterId } = createSchema.parse(body);
 
 
-    const subject = await withTimeout(prisma.subject.findUnique({ where: { slug: subjectSlug } }), SESSION_DB_TIMEOUT_MS, 'sessions-subject-lookup');
+    const subject = await withTimeout(withRetry(() => prisma.subject.findUnique({ where: { slug: subjectSlug } })), SESSION_DB_TIMEOUT_MS, 'sessions-subject-lookup');
     if (!subject) return NextResponse.json({ success: false, error: "Subject not found" }, { status: 404 });
 
     // Resume an existing ACTIVE session from within the last 24 hours instead of
     // creating a new one — this preserves the conversation across page refreshes.
     const cutoff = new Date(Date.now() - 24 * 60 * 60 * 1000);
-    const existingSession = await withTimeout(prisma.learnSession.findFirst({
+    const existingSession = await withTimeout(withRetry(() => prisma.learnSession.findFirst({
       where: {
         userId: session.user.id,
         subjectId: subject.id,
@@ -79,7 +80,7 @@ export async function POST(req: Request) {
         // message from a long-running session was the dominant cost here.
         messages: { orderBy: { createdAt: "desc" }, take: 30 },
       },
-    }), SESSION_DB_TIMEOUT_MS, 'sessions-existing-lookup');
+    })), SESSION_DB_TIMEOUT_MS, 'sessions-existing-lookup');
 
     if (existingSession) {
       return NextResponse.json({ success: true, data: existingSession, resumed: true }, { status: 200 });
@@ -99,15 +100,15 @@ export async function POST(req: Request) {
       data: { status: "COMPLETED", endedAt: new Date() },
     }), SESSION_DB_TIMEOUT_MS, 'sessions-close-stale').catch(() => {});
 
-    const [profile, activePath] = await withTimeout(Promise.all([
+    const [profile, activePath] = await withTimeout(withRetry(() => Promise.all([
       prisma.profile.findUnique({ where: { userId: session.user.id } }),
       prisma.learningPath.findFirst({
         where: { userId: session.user.id, subjectId: subject.id, isActive: true },
         orderBy: { createdAt: "desc" },
       }),
-    ]), SESSION_DB_TIMEOUT_MS, 'sessions-profile-path');
+    ])), SESSION_DB_TIMEOUT_MS, 'sessions-profile-path');
 
-    const learnSession = await withTimeout(prisma.learnSession.create({
+    const learnSession = await withTimeout(withRetry(() => prisma.learnSession.create({
       data: {
         userId: session.user.id,
         subjectId: subject.id,
@@ -120,7 +121,7 @@ export async function POST(req: Request) {
           schoolChapterId: schoolChapterId ?? null,
         },
       },
-    }), SESSION_DB_TIMEOUT_MS, 'sessions-create');
+    })), SESSION_DB_TIMEOUT_MS, 'sessions-create');
 
     // Warm up Redis state (best-effort — Redis may not be running)
     const state: RedisSessionState = {
