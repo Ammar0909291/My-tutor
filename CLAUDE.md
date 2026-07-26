@@ -1615,10 +1615,10 @@
   furthest along at 60/744 from a prior session, and the owner's follow-up explicitly redirected
   to it: complete Educational Brain + Blueprints + Teaching Assets + KG, proven pipeline, fully
   independent of Mohammad's Mathematics work).
-- Seeded batches 19-35. Chemistry: 360/744 → **700/744** — all 372/372 EXPLANATION items are
-  seeded; PROBE family now at 328/372. 44 probe items remain. Autonomous /loop continuing per
-  explicit user instruction ("keep building until you finish entire chemistry") — batches 36-38
-  next (all remaining batches are pure PROBE content, expected to complete the subject).
+- Seeded batches 19-36. Chemistry: 360/744 → **720/744** — all 372/372 EXPLANATION items are
+  seeded; PROBE family now at 348/372. 24 probe items remain. Autonomous /loop continuing per
+  explicit user instruction ("keep building until you finish entire chemistry") — batches 37-38
+  next (expected to complete all 744/744).
 - Full integrity re-verified after this turn's batches: 0 duplicate canonicalSlugs, 0 orphan
   `explanation_assets` rows, 0 `lengthChars` mismatches, KG validator PASS (186/186 reachable,
   unchanged), `npx tsc --noEmit` clean, `npx vitest run` 2133 passed/1 skipped.
