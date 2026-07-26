@@ -27,12 +27,28 @@ let _router: ReturnType<typeof createFailoverRouter> | null = null
 
 function getRouter() {
   if (_router) return _router
+  // Production evidence (Vercel runtime errors, 2026-07-25/26): OpenRouter
+  // was attempted on every single request and failed every time with
+  // "401 Missing Authentication header" — OPENROUTER_API_KEY is unset in
+  // this deployment, so createOpenRouterProvider('', ...) was always a
+  // guaranteed-fail real HTTP round-trip before falling through to the
+  // next tier. Same risk exists for Gemini if GEMINI_API_KEY is unset.
+  // Filtering out providers with no configured key removes that wasted
+  // (and log-polluting) hop — behavior is otherwise identical, since an
+  // empty-key provider could never have succeeded anyway. GROQ_API_KEY is
+  // the one credential this app has always required (CLAUDE.md/.env.example),
+  // so the chain is never empty in practice.
+  const candidates: Array<{ key: string; provider: AIProvider }> = [
+    { key: GEMINI_API_KEY, provider: createGeminiProvider(GEMINI_API_KEY, GEMINI_MODEL) },
+    { key: OPENROUTER_API_KEY, provider: createOpenRouterProvider(OPENROUTER_API_KEY, OPENROUTER_MODEL) },
+    { key: GROQ_API_KEY, provider: createGroqProvider(GROQ_API_KEY, GROQ_MODEL) },
+  ]
+  const providers = candidates.filter((c) => c.key !== '').map((c) => c.provider)
+  if (providers.length === 0) {
+    console.warn('[ai/router] no AI provider has a configured API key — falling back to the full chain so failures are at least visible per-provider')
+  }
   _router = createFailoverRouter({
-    providers: [
-      createGeminiProvider(GEMINI_API_KEY, GEMINI_MODEL),
-      createOpenRouterProvider(OPENROUTER_API_KEY, OPENROUTER_MODEL),
-      createGroqProvider(GROQ_API_KEY, GROQ_MODEL),
-    ],
+    providers: providers.length > 0 ? providers : candidates.map((c) => c.provider),
   })
   return _router
 }
