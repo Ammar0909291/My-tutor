@@ -475,3 +475,55 @@ describe('Hindi and Russian prompts carry the same fixes (mirrored, not English-
     expect(ru).toContain('ИСКЛЮЧЕНИЕ')
   })
 })
+
+// Loop 4: bare acknowledgements must not reset confusion counters
+describe('Loop 4 — preserve confusion state across acknowledgements', () => {
+  it('consecutiveDontKnows survives a bare acknowledgement (no signal)', () => {
+    let state = initialConversationState('c1')
+    // Turn 1: "I don't know"
+    state = advanceConversationState(state, {
+      askedQuestion: false, signalCorrect: null, recoveryFired: true, dontKnowSignal: true,
+    })
+    expect(state.consecutiveDontKnows).toBe(1)
+
+    // Turn 2: "ok" — no signal, no recovery (bare acknowledgement)
+    state = advanceConversationState(state, {
+      askedQuestion: false, signalCorrect: null, recoveryFired: false, dontKnowSignal: false,
+    })
+    expect(state.consecutiveDontKnows).toBe(1) // NOT reset to 0
+
+    // Turn 3: "I still don't know"
+    state = advanceConversationState(state, {
+      askedQuestion: false, signalCorrect: null, recoveryFired: true, dontKnowSignal: true,
+    })
+    expect(state.consecutiveDontKnows).toBe(2) // correctly reaches the Hard Rule 1 threshold
+  })
+
+  it('consecutiveDontKnows resets on a genuine correct answer', () => {
+    let state = initialConversationState('c1')
+    state = advanceConversationState(state, {
+      askedQuestion: false, signalCorrect: null, recoveryFired: true, dontKnowSignal: true,
+    })
+    expect(state.consecutiveDontKnows).toBe(1)
+
+    // Correct answer resets the chain
+    state = advanceConversationState(state, {
+      askedQuestion: true, signalCorrect: true, recoveryFired: false, dontKnowSignal: false,
+    })
+    expect(state.consecutiveDontKnows).toBe(0)
+  })
+
+  it('consecutiveDontKnows does NOT reset on a wrong answer (non-recovery failure)', () => {
+    let state = initialConversationState('c1')
+    state = advanceConversationState(state, {
+      askedQuestion: false, signalCorrect: null, recoveryFired: true, dontKnowSignal: true,
+    })
+    expect(state.consecutiveDontKnows).toBe(1)
+
+    // Wrong answer without a recovery utterance — confusion is still present
+    state = advanceConversationState(state, {
+      askedQuestion: true, signalCorrect: false, recoveryFired: false, dontKnowSignal: false,
+    })
+    expect(state.consecutiveDontKnows).toBe(1) // preserved
+  })
+})

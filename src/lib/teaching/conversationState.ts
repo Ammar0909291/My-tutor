@@ -220,11 +220,15 @@ export function advanceConversationState(
   next.totalKnowledgeProbes = (prev.totalKnowledgeProbes ?? 0) + (evidence.isPriorKnowledgeProbe ? 1 : 0)
 
   // Hard Rule 1: track consecutive student "I don't know / didn't understand"
-  // signals so decideNextMove can end discovery after 2. Resets on any turn
-  // where the student didn't fire a dont_know/dont_understand recovery.
-  next.consecutiveDontKnows = evidence.dontKnowSignal
-    ? (prev.consecutiveDontKnows ?? 0) + 1
-    : 0
+  // signals so decideNextMove can end discovery after 2. Loop 4 fix: only
+  // reset on a genuine correct answer — a bare acknowledgement ("ok", "hmm")
+  // between two confusion signals must NOT break the chain.
+  if (evidence.dontKnowSignal) {
+    next.consecutiveDontKnows = (prev.consecutiveDontKnows ?? 0) + 1
+  } else if (evidence.signalCorrect === true) {
+    next.consecutiveDontKnows = 0
+  }
+  // else: neutral turn (acknowledgement / no signal) — preserve the count
 
   // Bug 5/6/11 — student-state counters for explicit action requests.
   if (evidence.learnerRequest === 'diagram') next.diagramRequests = prev.diagramRequests + 1
