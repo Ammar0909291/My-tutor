@@ -51,6 +51,10 @@ const STRONG_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   // Absolute-ignorance signals — strong because they leave no ambiguity
   ['dont_know',    /\bi\s+(know\s+)?nothing\s+(about\s+\S+\s+)?at\s+all\b|\bi\s+know\s+absolutely\s+nothing\b/i],
   ['dont_know',    /\b(i\s+have\s+no\s+idea|no\s+clue|how\s+would\s+i\s+know)\b/i],
+  // "I never learned this" / "we never studied that" / "never been taught it"
+  // — the learner is reporting an absent foundation, not confusion about a
+  // present one. Unambiguous wherever it appears in the message.
+  ['dont_know',    /\bnever\s+(learned|studied|been\s+taught)\s+(this|that|it|about)\b/i],
   // P1: the learner is objecting to the questioning itself, not the concept
   // — matches with or without a leading "I" ("why do you keep asking me
   // questions", "stop asking me so many questions", "too many questions").
@@ -88,6 +92,11 @@ const STRONG_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   ['too_many_questions', /^(just\s+)?(you|u)\s+(explain|tell\s+me|show\s+me)[.!?\s]*$/i],
   ['too_many_questions', /^just\s+(tell|show|explain)\s+(me|it|us)[.!?\s]*$/i],
   ['too_many_questions', /^(re\s*[-–]?\s*explain|explain\s+again|explain\s+it\s+again|explain\s+that\s+again)[.!?\s]*$/i],
+  // Bare imperative "Explain" / "please explain it" as the WHOLE message —
+  // the learner is asking to be taught, not answering. Whole-message
+  // anchored so "explain why the ball falls" (a real content question)
+  // never matches.
+  ['too_many_questions', /^(please\s+)?explain(\s+(it|this|that))?[.!?\s]*$/i],
   ['too_many_questions', /^(just\s+)?(tell|show)\s+(me|us)\s+(the\s+answer|what\s+it\s+is|how\s+it\s+works)[.!?\s]*$/i],
 ]
 
@@ -124,6 +133,9 @@ const MILD_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   // match only (never a substring) so "don't know if that's it, but..."
   // doesn't false-fire.
   ['dont_know',       /^(i\s+)?(don'?t|do\s+not|dunno)\s*(know)?[.!?…\s]*$/i],
+  // "I can't say" / "can't say" as the whole message — a polite refusal
+  // that means "I have no information", same treatment as dont_know.
+  ['dont_know',       /^(i\s+)?can'?t\s+say[.!?…\s]*$/i],
   // P1: present-tense "don't get it" — the existing masteryGate.ts pattern
   // only matched the past tense ("didn't get it"); this is the far more
   // common live phrasing.
@@ -201,8 +213,12 @@ export function detectFailureState(message: string, priorUserMessage?: string | 
 
 /** The authored scripts, foundations/01 §3 — validate, shrink, bank a win.
  * Each entry is the general script; the lesson-one delta swaps in
- * first-lesson/05's tighter version where one exists. */
-const SCRIPTS: Record<FailureStateKey, { general: string; lessonOne?: string }> = {
+ * first-lesson/05's tighter version where one exists. The preDemonstration
+ * delta (Rule 2 escalation) swaps in when NOTHING has been demonstrated
+ * for this concept yet — before demonstration there is nothing for the
+ * learner to answer from, so shrinking to a smaller QUESTION is still a
+ * question they cannot answer; the only correct move is to show/explain. */
+const SCRIPTS: Record<FailureStateKey, { general: string; lessonOne?: string; preDemonstration?: string }> = {
   dont_know: {
     general:
       'Validate lightly ("fair enough — let\'s make it smaller"), then SHRINK ' +
@@ -214,6 +230,13 @@ const SCRIPTS: Record<FailureStateKey, { general: string; lessonOne?: string }> 
       'Shrink all the way to ECHO — not even a two-choice: "no problem — say ' +
       'it with me: ..." Echo cannot fail. A question arrived too early; do ' +
       'not ask another one this turn.',
+    preDemonstration:
+      '"I don\'t know" BEFORE anything has been shown means the question ' +
+      'arrived before the teaching — that is the lesson\'s fault, never ' +
+      'theirs. Do NOT shrink to another question: there is nothing yet for ' +
+      'them to answer from. Say "of course — I haven\'t shown you yet", then ' +
+      'EXPLAIN the idea directly with one concrete demonstration or worked ' +
+      'example. No questions this turn.',
   },
   dont_understand: {
     general:
@@ -235,6 +258,11 @@ const SCRIPTS: Record<FailureStateKey, { general: string; lessonOne?: string }> 
       'Normalize and SKIP localization — a beginner cannot answer "which ' +
       'part?" about a whole they don\'t have. Go back one step silently and ' +
       'make the step smaller.',
+    preDemonstration:
+      'Normalize and SKIP localization — nothing has been demonstrated yet, ' +
+      'so there is no "which part?" to locate. Demonstrate the idea directly, ' +
+      'one concrete step, smaller than whatever was just attempted. No ' +
+      'questions this turn.',
   },
   forgot: {
     general:
@@ -349,16 +377,43 @@ const SCRIPTS: Record<FailureStateKey, { general: string; lessonOne?: string }> 
 }
 
 /**
+ * Rule 2 escalation membership — the SINGLE owner of "does this failure
+ * state count toward ConversationState.consecutiveDontKnows?" (the counter
+ * decideNextMove() reads to end discovery after two consecutive signals and
+ * force explanation). Previously this membership was decided inline, twice,
+ * in route.ts — the same decision in two places. 'confused' is included:
+ * "I'm confused" is an explain-me signal exactly like "I don't know", and
+ * two consecutive confusion signals must end questioning the same way.
+ */
+const DONT_KNOW_SIGNAL_KEYS: ReadonlySet<FailureStateKey> = new Set([
+  'dont_know', 'dont_understand', 'confused',
+])
+
+export function isDontKnowSignal(key: FailureStateKey | null): boolean {
+  return key !== null && DONT_KNOW_SIGNAL_KEYS.has(key)
+}
+
+/**
  * The RECOVERY block — injected LAST, preempting every other instruction
  * (decision-engine/03 §0: the teaching state is irrelevant; foundations/04
  * P5: no content enters a flooded mind).
  *
  * sessionFailureCount drives escalation so the same script never repeats
  * indefinitely (decision-engine/05: per-failure ladders, one-dimension-per-rung).
+ *
+ * preDemonstration: true when the conversation state machine has not yet
+ * recorded a demonstration for this concept (ConversationState.demonstrated
+ * === false) — scripts with a preDemonstration delta then explain/show
+ * instead of shrinking to another question the learner cannot answer.
+ * Lesson-one deltas outrank it (they already forbid questions and shrink
+ * further). Optional with default false so pre-existing callers keep their
+ * exact prior behavior.
  */
-export function buildRecoveryBlock(key: FailureStateKey, isFirstLesson: boolean, sessionFailureCount = 0): string {
+export function buildRecoveryBlock(key: FailureStateKey, isFirstLesson: boolean, sessionFailureCount = 0, preDemonstration = false): string {
   const script = SCRIPTS[key]
-  const body = (isFirstLesson && script.lessonOne) ? script.lessonOne : script.general
+  const body = (isFirstLesson && script.lessonOne) ? script.lessonOne
+    : (preDemonstration && script.preDemonstration) ? script.preDemonstration
+    : script.general
 
   let escalation = ''
   if (sessionFailureCount >= 4) {

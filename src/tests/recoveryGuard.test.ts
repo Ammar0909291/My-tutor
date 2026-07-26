@@ -3,7 +3,7 @@
  * preemption + foundations/01 §3 scripts as retrieved content).
  */
 import { describe, it, expect } from 'vitest'
-import { detectFailureState, buildRecoveryBlock } from '@/lib/teaching/recoveryGuard'
+import { detectFailureState, buildRecoveryBlock, isDontKnowSignal } from '@/lib/teaching/recoveryGuard'
 
 describe('detectFailureState — strong utterances fire anywhere', () => {
   it.each([
@@ -277,5 +277,80 @@ describe('detectFailureState — rephrase requests bypass mild patterns (BUG-02 
   it('strong patterns still fire even with a rephrase request', () => {
     expect(detectFailureState("I give up, explain it differently")).toBe('give_up')
     expect(detectFailureState("I hate maths, explain another way")).toBe('hate_subject')
+  })
+})
+
+// Rule 2 coverage extension: utterances from the escalation list that the
+// pre-existing patterns missed entirely.
+describe('detectFailureState — Rule 2 coverage extension', () => {
+  it.each([
+    ['I never learned this', 'dont_know'],
+    ['we never studied that in school', 'dont_know'],
+    ["I've never been taught it", 'dont_know'],
+    ["I can't say", 'dont_know'],
+    ["can't say...", 'dont_know'],
+  ] as const)('%s → %s', (msg, key) => {
+    expect(detectFailureState(msg)).toBe(key)
+  })
+
+  it.each([
+    'Explain',
+    'please explain',
+    'Explain it.',
+    'explain this',
+  ])('bare imperative "%s" → too_many_questions (teach me, not a question)', (msg) => {
+    expect(detectFailureState(msg)).toBe('too_many_questions')
+  })
+
+  it('content questions starting with "explain" never fire the bare-imperative pattern', () => {
+    expect(detectFailureState('explain why the sky is blue')).toBeNull()
+    expect(detectFailureState('Explain the difference between speed and velocity')).toBeNull()
+  })
+
+  it('"I can\'t say" with trailing content never fires (whole-message anchored)', () => {
+    expect(detectFailureState("I can't say whether it's A or B, both look right")).toBeNull()
+  })
+})
+
+// Rule 2 pre-demonstration escalation: before anything has been shown,
+// dont_know/confused must escalate to direct demonstration — never to a
+// smaller question the learner still cannot answer.
+describe('buildRecoveryBlock — pre-demonstration delta (Rule 2)', () => {
+  it("pre-demonstration don't-know explains directly, never shrinks to two-choice", () => {
+    const block = buildRecoveryBlock('dont_know', false, 0, true)
+    expect(block).toMatch(/haven'?t shown you yet/i)
+    expect(block).toMatch(/No questions this turn/i)
+    expect(block).not.toMatch(/two-choice/)
+  })
+  it("post-demonstration don't-know keeps the existing two-choice shrink", () => {
+    expect(buildRecoveryBlock('dont_know', false, 0, false)).toMatch(/two-choice/)
+  })
+  it('pre-demonstration confused skips localization and demonstrates', () => {
+    const block = buildRecoveryBlock('confused', false, 0, true)
+    expect(block).toMatch(/SKIP localization/i)
+    expect(block).toMatch(/No questions this turn/i)
+  })
+  it('the lesson-one delta outranks the pre-demonstration delta', () => {
+    expect(buildRecoveryBlock('dont_know', true, 0, true)).toMatch(/ECHO/)
+  })
+  it('keys without a pre-demonstration delta fall back to their general script', () => {
+    expect(buildRecoveryBlock('forgot', false, 0, true)).toMatch(/CUED RETRIEVAL/i)
+  })
+  it('omitting the parameter reproduces the exact prior behavior (backward compatible)', () => {
+    expect(buildRecoveryBlock('dont_know', false)).toBe(buildRecoveryBlock('dont_know', false, 0, false))
+  })
+})
+
+// Rule 2 escalation membership — the single owner of the decision that was
+// previously inlined twice in route.ts.
+describe('isDontKnowSignal — single-owner escalation membership', () => {
+  it.each(['dont_know', 'dont_understand', 'confused'] as const)('%s counts', (key) => {
+    expect(isDontKnowSignal(key)).toBe(true)
+  })
+  it.each(['frustrated', 'too_many_questions', 'give_up', 'guessing', 'forgot', 'scared', 'stupid', 'cant', 'too_hard', 'hate_subject'] as const)('%s does not count', (key) => {
+    expect(isDontKnowSignal(key)).toBe(false)
+  })
+  it('null never counts', () => {
+    expect(isDontKnowSignal(null)).toBe(false)
   })
 })
