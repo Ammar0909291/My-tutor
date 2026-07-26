@@ -13,16 +13,16 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **572** |
-| Remaining | **1,203** |
-| Completion percentage | **32.23%** |
+| Concepts with an Educational Brain entry | **575** |
+| Remaining | **1,200** |
+| Completion percentage | **32.39%** |
 
 *(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
 with an Educational Brain entry" rows had accumulated from prior sessions
 without being reconciled. Recomputed from this same file's §2 Subject
-progress table as currently stated per subject: 145 mathematics + 238
+progress table as currently stated per subject: 148 mathematics + 238
 physics + 3 english + 186 chemistry + 0 biology + 0 computer_science =
-572. Only the mathematics figure was independently re-verified by this
+575. Only the mathematics figure was independently re-verified by this
 batch by direct file count; the other subjects' figures are taken as
 already-recorded in §2 below, not re-audited by this batch, per this
 program's "mathematics only" scope this turn.)*
@@ -33,7 +33,7 @@ program's "mathematics only" scope this turn.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 145 | 15.97% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 148 | 16.30% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
@@ -938,18 +938,28 @@ record; the active default has moved to item 1b.**
     per-wave detail (exact concept lists, misconception IDs, birth
     types) lives in `COVERAGE.md`'s Delivery history, the
     authoritative record.
-1b. **Active default (2026-07-26): explicit decision point — continue
-    `math.nt` as a full campaign, or select a new domain**. `math.nt`
-    sits at 5/36 (from the bounded excursion above), with 31 concepts
-    remaining, most carrying existing Blueprints. Since both
-    mathematics domains attempted so far (`math.found`, `math.arith`)
-    were carried to full certification, and `math.nt` already has a
-    running head start plus strong Blueprint coverage, continuing
-    `math.nt` as the next fully-certified domain is the natural,
-    lowest-friction default — computed fresh each wave from the live
-    KG, not assumed from this note. If a stronger reason to switch
-    domains emerges (e.g., another domain's own entry point is more
-    urgent), that will be stated explicitly before deviating.
+1b. **Active default (2026-07-26): `math.nt` domain, continuing as a
+    full campaign toward Domain Certification**. Decision made
+    (2026-07-26, iteration 25): since both mathematics domains
+    attempted so far (`math.found`, `math.arith`) were carried to full
+    certification, and `math.nt` already had a running head start
+    (5/36) plus strong Blueprint coverage, continuing `math.nt` is the
+    natural, lowest-friction default — no stronger reason to switch
+    domains emerged. Wave 3 (2026-07-26, iteration 25): 8 candidates
+    computed fresh from the live KG (`divisibility-rules`,
+    `composite-number`, `sieve-of-eratosthenes`,
+    `fundamental-theorem-arithmetic`, `euclidean-algorithm`,
+    `division-algorithm`, `eulers-totient`,
+    `induction-applications`), split 3 Blueprint-grounded / 5
+    no-Blueprint, following this program's established
+    Blueprint-first split pattern — this wave authored the 3
+    Blueprint-grounded concepts (`fundamental-theorem-arithmetic`,
+    `euclidean-algorithm`, `division-algorithm`), all reused by
+    reference. `math.nt` now **8/36**. Wave 3 part 2 (deferred): the 5
+    no-Blueprint concepts (`divisibility-rules`, `composite-number`,
+    `sieve-of-eratosthenes`, `eulers-totient`,
+    `induction-applications`), misconceptions to be authored directly
+    via the birth-taxonomy diagnostic procedure.
 1. **(Historical, satisfied) `math.found` Wave 7**: the set of
    `math.found` nodes whose prerequisites were all READY after Wave 6.
 2. **(Historical, satisfied) `math.found` Waves 8-16 (52 remaining

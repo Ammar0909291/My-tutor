@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 145 READY)
+## mathematics (908 concepts, 148 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -680,13 +680,13 @@ its subject KG.
 | nt | `math.nt.continued-fractions` | Continued Fractions | Yes | No | — | MISSING |
 | nt | `math.nt.divisibility` | Divisibility | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.divisibility.md` | READY |
 | nt | `math.nt.divisibility-rules` | Divisibility Rules | No | No | — | MISSING |
-| nt | `math.nt.division-algorithm` | Division Algorithm | Yes | No | — | MISSING |
-| nt | `math.nt.euclidean-algorithm` | Euclidean Algorithm | Yes | No | — | MISSING |
+| nt | `math.nt.division-algorithm` | Division Algorithm | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.division-algorithm.md` | READY |
+| nt | `math.nt.euclidean-algorithm` | Euclidean Algorithm | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.euclidean-algorithm.md` | READY |
 | nt | `math.nt.eulers-theorem` | Euler's Theorem | Yes | No | — | MISSING |
 | nt | `math.nt.eulers-totient` | Euler's Totient Function | No | No | — | MISSING |
 | nt | `math.nt.extended-euclidean-algorithm` | Extended Euclidean Algorithm | Yes | No | — | MISSING |
 | nt | `math.nt.fermats-little-theorem` | Fermat's Little Theorem | Yes | No | — | MISSING |
-| nt | `math.nt.fundamental-theorem-arithmetic` | Fundamental Theorem of Arithmetic | Yes | No | — | MISSING |
+| nt | `math.nt.fundamental-theorem-arithmetic` | Fundamental Theorem of Arithmetic | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.fundamental-theorem-arithmetic.md` | READY |
 | nt | `math.nt.gcd` | Greatest Common Divisor | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.gcd.md` | READY |
 | nt | `math.nt.general-diophantine` | Diophantine Equations | No | No | — | MISSING |
 | nt | `math.nt.induction-applications` | Induction in Number Theory | No | No | — | MISSING |

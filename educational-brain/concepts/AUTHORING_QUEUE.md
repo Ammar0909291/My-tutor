@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1203** (= 1,775 KG concepts − 572 already `READY`, per
+Total queued: **1200** (= 1,775 KG concepts − 575 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -1100,7 +1100,8 @@ math.arith Wave 7 part 2, moved to READY.
 **Row 574 removed 2026-07-26** — `math.nt.divisibility` authored
 math.nt Wave 1 (cross-domain step to unblock math.arith), moved to
 READY.
-| 575 | mathematics | 16 | `math.nt.division-algorithm` | Division Algorithm |
+**Row 575 removed 2026-07-26** — `math.nt.division-algorithm` authored
+math.nt Wave 3, moved to READY.
 | 576 | mathematics | 16 | `math.geom.circle-equation` | Equation of a Circle |
 | 577 | mathematics | 16 | `math.geom.x-y-coordinates` | Cartesian Coordinates |
 | 578 | mathematics | 16 | `math.geom.quadrants` | Quadrants |
@@ -1303,7 +1304,8 @@ moved to READY.
 authored math.arith Wave 6 part 2, moved to READY.
 **Row 762 removed 2026-07-26** — `math.arith.significant-figures`
 authored math.arith Wave 6 part 1, moved to READY.
-| 763 | mathematics | 19 | `math.nt.fundamental-theorem-arithmetic` | Fundamental Theorem of Arithmetic |
+**Row 763 removed 2026-07-26** — `math.nt.fundamental-theorem-arithmetic`
+authored math.nt Wave 3, moved to READY.
 **Row 764 removed 2026-07-26** — `math.nt.gcd` authored math.nt Wave
 2, moved to READY.
 | 765 | mathematics | 19 | `math.nt.residue-classes` | Residue Classes |
@@ -1385,7 +1387,8 @@ authored math.arith Wave 10 (final wave), moved to READY. `math.arith`
 now 58/58 — DOMAIN CERTIFIED.
 **Row 840 removed 2026-07-26** — `math.arith.percentage-change`
 authored math.arith Wave 7 part 2, moved to READY.
-| 841 | mathematics | 20 | `math.nt.euclidean-algorithm` | Euclidean Algorithm |
+**Row 841 removed 2026-07-26** — `math.nt.euclidean-algorithm` authored
+math.nt Wave 3, moved to READY.
 **Row 842 removed 2026-07-26** — `math.nt.lcm` authored math.nt Wave
 2, moved to READY.
 | 843 | mathematics | 20 | `math.nt.chinese-remainder-theorem` | Chinese Remainder Theorem |
