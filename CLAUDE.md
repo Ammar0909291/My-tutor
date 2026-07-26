@@ -1564,6 +1564,12 @@
   reference). `math.nt` 19/36 → 22/36. Part 2 (`residue-classes`,
   `linear-diophantine`, both no-Blueprint) deferred. Full detail:
   `COVERAGE.md`.
+  **Batch 41 — math.nt Wave 6 part 2** (2026-07-26, autonomous loop
+  iteration 31): 2 concepts authored (`residue-classes`,
+  `linear-diophantine`; both no Blueprint, misconceptions authored via
+  birth-taxonomy diagnostic). `math.nt` 22/36 → 24/36 — two-thirds
+  complete. `math.nt.rsa-basics` (no Blueprint) newly unlocked,
+  deferred to Wave 7. Full detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
