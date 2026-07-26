@@ -1533,6 +1533,13 @@
   `division-algorithm`; all Blueprint reused by reference). `math.nt`
   5/36 → 8/36. Wave 3 part 2 (5 no-Blueprint concepts) deferred. Full
   detail: `COVERAGE.md`.
+  **Batch 36 — math.nt Wave 3 part 2** (2026-07-26, autonomous loop
+  iteration 26): 5 concepts authored (`divisibility-rules`,
+  `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`,
+  `induction-applications`; none had Blueprints, misconceptions authored
+  via birth-taxonomy diagnostic). `math.nt` 8/36 → 13/36. Wave 4
+  candidates (`extended-euclidean-algorithm`, `modular-arithmetic`, both
+  Blueprint-grounded) computed. Full detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
