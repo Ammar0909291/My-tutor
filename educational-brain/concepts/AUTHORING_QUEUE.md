@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1271** (= 1,775 KG concepts − 504 already `READY`, per
+Total queued: **1268** (= 1,775 KG concepts − 507 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -893,9 +893,9 @@ Wave 11, moved to READY.
 | 383 | biology | 11 | `bio.immuno.vaccination-immunisation` | Vaccination and Immunisation |
 | 384 | computer_science | 11 | `cs.data.lists` | Lists |
 | 385 | computer_science | 11 | `cs.func.functions` | Functions |
-| 386 | mathematics | 12 | `math.found.strong-induction` | Strong Induction |
-| 387 | mathematics | 12 | `math.found.uncountable-set` | Uncountable Set |
-| 388 | mathematics | 12 | `math.found.rational-numbers` | Rational Numbers |
+**Rows 386-388 removed 2026-07-26** — `math.found.strong-induction`,
+`math.found.uncountable-set`, `math.found.rational-numbers` authored
+Wave 13, moved to READY.
 | 389 | mathematics | 12 | `math.arith.counting-sequence` | Counting Sequence |
 | 390 | mathematics | 12 | `math.arith.subitizing` | Subitizing |
 | 391 | mathematics | 12 | `math.arith.place-value` | Place Value |

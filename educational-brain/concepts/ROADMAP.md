@@ -13,16 +13,16 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **504** |
-| Remaining | **1,271** |
-| Completion percentage | **28.39%** |
+| Concepts with an Educational Brain entry | **507** |
+| Remaining | **1,268** |
+| Completion percentage | **28.56%** |
 
 *(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
 with an Educational Brain entry" rows had accumulated from prior sessions
 without being reconciled. Recomputed from this same file's §2 Subject
-progress table as currently stated per subject: 77 mathematics + 238
+progress table as currently stated per subject: 80 mathematics + 238
 physics + 3 english + 186 chemistry + 0 biology + 0 computer_science =
-504. Only the mathematics figure was independently re-verified by this
+507. Only the mathematics figure was independently re-verified by this
 batch by direct file count; the other subjects' figures are taken as
 already-recorded in §2 below, not re-audited by this batch, per this
 program's "mathematics only" scope this turn.)*
@@ -33,7 +33,7 @@ program's "mathematics only" scope this turn.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 77 | 8.48% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 80 | 8.81% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
@@ -161,8 +161,8 @@ Brain entries.
 |---|---|
 | Domain | `math.found` (mathematics / Foundations) |
 | Total concepts in domain | 82 |
-| Authored this program | 76 |
-| Remaining | 6 |
+| Authored this program | 79 |
+| Remaining | 3 |
 | Status | **IN PROGRESS** — not eligible for Domain Certification yet |
 
 Wave 1 (5, level 0-1): `mathematical-thinking` (root), `abstraction`,
@@ -202,16 +202,21 @@ Blueprints): `direct-proof`, `proof-by-contradiction`,
 `cardinality`. Wave 11 (2, 2026-07-26, autonomous loop iteration 3):
 `finite-set` (no Blueprint, misconceptions authored via the
 birth-taxonomy diagnostic procedure), `natural-numbers`
-(Blueprint-grounded, PACKAGE_READY). Wave 12 (4, this batch, 2026-07-26,
-autonomous loop iteration 4): `proof-by-induction`, `well-ordering-
-principle`, `integers` (all three Blueprint-grounded, PACKAGE_READY),
+(Blueprint-grounded, PACKAGE_READY). Wave 12 (4, 2026-07-26, autonomous
+loop iteration 4): `proof-by-induction`, `well-ordering-principle`,
+`integers` (all three Blueprint-grounded, PACKAGE_READY),
 `countable-set` (no Blueprint, misconceptions authored via the
-birth-taxonomy diagnostic procedure). `math.found` now 76/82 — only 6
-concepts remain: `strong-induction`, `uncountable-set`, `rational-
-numbers`, `irrational-numbers`, `real-numbers`, `complex-numbers`. Wave
-13 candidates computed programmatically (3): `strong-induction`,
-`uncountable-set`, `rational-numbers`. No other domain will be started
-until all 82 `math.found` concepts are `READY` and Domain Certification
+birth-taxonomy diagnostic procedure). Wave 13 (3, this batch,
+2026-07-26, autonomous loop iteration 5): `strong-induction` (no
+Blueprint), `uncountable-set` (no Blueprint, Cantor's diagonal argument
+authored directly), `rational-numbers` (Blueprint-grounded,
+PACKAGE_READY, cross-links to already-authored `math.arith.fractions`).
+`math.found` now 79/82 — only 3 concepts remain, forming a strict chain:
+`irrational-numbers` → `real-numbers` → `complex-numbers`. Wave 14
+candidates computed programmatically (1): `irrational-numbers` — the
+remaining two (`real-numbers`, `complex-numbers`) will each unblock one
+at a time as the chain resolves. No other domain will be started until
+all 82 `math.found` concepts are `READY` and Domain Certification
 passes — **except by explicit, subject-specific user instruction, as
 happened in §3b/§3c below**.
 
