@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 96 READY)
+## mathematics (908 concepts, 99 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -115,7 +115,7 @@ its subject KG.
 | alg | `math.alg.vietas-formulas` | Vieta's Formulas | No | No | — | MISSING |
 | alg | `math.alg.zero-exponent` | Zero Exponent | No | No | — | MISSING |
 | arith | `math.arith.absolute-value` | Absolute Value | Yes | No | — | MISSING |
-| arith | `math.arith.addition` | Addition | Yes | No | — | MISSING |
+| arith | `math.arith.addition` | Addition | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.addition.md` | READY |
 | arith | `math.arith.borrowing` | Borrowing (Regrouping in Subtraction) | No | No | — | MISSING |
 | arith | `math.arith.carrying` | Carrying (Regrouping) | No | No | — | MISSING |
 | arith | `math.arith.column-addition` | Column Addition | No | No | — | MISSING |
@@ -123,7 +123,7 @@ its subject KG.
 | arith | `math.arith.counting-sequence` | Counting Sequence | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.counting-sequence.md` | READY |
 | arith | `math.arith.cube-numbers` | Perfect Cubes | No | No | — | MISSING |
 | arith | `math.arith.decimal-operations` | Decimal Operations | No | No | — | MISSING |
-| arith | `math.arith.decimals` | Decimals | Yes | No | — | MISSING |
+| arith | `math.arith.decimals` | Decimals | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.decimals.md` | READY |
 | arith | `math.arith.direct-variation` | Direct Variation | No | No | — | MISSING |
 | arith | `math.arith.division` | Division | Yes | No | — | MISSING |
 | arith | `math.arith.divisor-dividend` | Divisor and Dividend | No | No | — | MISSING |
@@ -152,7 +152,7 @@ its subject KG.
 | arith | `math.arith.negative-numbers` | Negative Numbers | Yes | No | — | MISSING |
 | arith | `math.arith.number-base` | Number Base | No | No | — | MISSING |
 | arith | `math.arith.number-line` | Number Line | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.number-line.md` | READY |
-| arith | `math.arith.ones-tens-hundreds` | Ones, Tens, Hundreds | Yes | No | — | MISSING |
+| arith | `math.arith.ones-tens-hundreds` | Ones, Tens, Hundreds | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.ones-tens-hundreds.md` | READY |
 | arith | `math.arith.order-of-operations` | Order of Operations | Yes | No | — | MISSING |
 | arith | `math.arith.ordering` | Ordering Numbers | No | No | — | MISSING |
 | arith | `math.arith.percentage-calculations` | Percentage Calculations | No | No | — | MISSING |

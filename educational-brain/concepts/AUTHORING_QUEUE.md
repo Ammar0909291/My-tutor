@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1252** (= 1,775 KG concepts − 523 already `READY`, per
+Total queued: **1249** (= 1,775 KG concepts − 526 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -948,10 +948,11 @@ number-line` authored math.arith Wave 3, moved to READY.
 | 437 | computer_science | 12 | `cs.oop.oop-concepts` | Object-Oriented Programming Concepts |
 **Row 438 removed 2026-07-26** — `math.found.irrational-numbers`
 authored Wave 14, moved to READY.
-| 439 | mathematics | 13 | `math.arith.ones-tens-hundreds` | Ones, Tens, Hundreds |
+**Rows 439, 442 removed 2026-07-26** — `math.arith.ones-tens-hundreds`,
+`math.arith.addition` authored math.arith Wave 4 part 1, moved to
+READY.
 | 440 | mathematics | 13 | `math.arith.expanded-form` | Expanded Form |
 | 441 | mathematics | 13 | `math.arith.number-base` | Number Base |
-| 442 | mathematics | 13 | `math.arith.addition` | Addition |
 | 443 | mathematics | 13 | `math.arith.ordering` | Ordering Numbers |
 | 444 | mathematics | 13 | `math.seq.partial-sums` | Partial Sums |
 | 445 | mathematics | 13 | `math.seq.arithmetic-series` | Arithmetic Series |
@@ -1137,7 +1138,8 @@ authored math.arith Wave 2 (part 1), moved to READY.
 **Rows 622-623 removed 2026-07-26** — `math.arith.mixed-numbers`,
 `math.arith.improper-fractions` authored math.arith Wave 2 (part 2),
 moved to READY.
-| 624 | mathematics | 17 | `math.arith.decimals` | Decimals |
+**Row 624 removed 2026-07-26** — `math.arith.decimals` authored
+math.arith Wave 4 part 1, moved to READY.
 **Row 625 removed 2026-07-26** — `math.arith.ratios` authored math.arith
 Wave 2 (part 2), moved to READY.
 | 626 | mathematics | 17 | `math.arith.square-roots` | Square Roots |

@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 96 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 14 `math.arith.*` entries (`fractions`, `counting`, `fraction-equivalence`, `fraction-multiplication`, `fraction-reciprocal`, `mixed-numbers`, `improper-fractions`, `ratios`, `counting-sequence`, `subitizing`, `place-value`, `number-line`, `proportion`, `unit-rate` — `math.arith` domain IN PROGRESS, 14/58), see Delivery history. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
+| mathematics | 908 | 99 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 17 `math.arith.*` entries (`fractions`, `counting`, `fraction-equivalence`, `fraction-multiplication`, `fraction-reciprocal`, `mixed-numbers`, `improper-fractions`, `ratios`, `counting-sequence`, `subitizing`, `place-value`, `number-line`, `proportion`, `unit-rate`, `ones-tens-hundreds`, `addition`, `decimals` — `math.arith` domain IN PROGRESS, 17/58), see Delivery history. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -2173,6 +2173,63 @@ these five) — 8 concepts, not yet authored. No other domain touched.
 All five tracking files updated in this same commit; re-validated 0
 duplicates, 0 orphans, 0 Quality Gate 3 violations across all 96
 mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.arith Wave 4 part 1 (2026-07-26, autonomous loop iteration 13)
+
+Autonomous loop iteration 13, continuing the same established
+Mathematics Educational Brain Autonomous Completion Program
+(dynamic-pacing `<<autonomous-loop-dynamic>>` sentinel fire). Git
+resync found zero concurrent commits at this iteration's start.
+
+**Repair-audit first** (per this program's standing per-iteration
+discipline): re-ran the Quality Gate 3 heading-conformance check across
+all 96 pre-batch mathematics entries. **0 violations found**.
+
+**Wave 4 candidates re-verified programmatically** (matching the prior
+iteration's computed list exactly): 8 concepts — `math.arith.
+ones-tens-hundreds`, `math.arith.addition`, `math.arith.decimals`
+(Blueprints exist for all three), plus `math.arith.expanded-form`,
+`math.arith.number-base`, `math.arith.ordering`, `math.arith.
+direct-variation`, `math.arith.inverse-variation` (no Blueprints for
+these five). Split into two parts given the heavier no-Blueprint load
+(5 of 8, versus Wave 3's 2 of 6) — this batch authors the 3
+Blueprint-grounded concepts as Wave 4 part 1.
+
+- `math.arith.ones-tens-hundreds` — reused its Misconception Registry
+  by reference: MC-1 ONES-TENS-HUNDREDS-ASSUMED-SEPARATE-CONCEPTS
+  (FOUNDATIONAL, Type 1 overgeneralization), MC-2
+  ZERO-COLUMN-ASSUMED-OMITTABLE (Type 1), MC-3
+  CARRYING-ASSUMED-ARBITRARY-RULE (Type 5 instruction-induced). Found
+  and honestly recorded two genuine Blueprint/KG metadata
+  discrepancies: the live KG lists `unlocks: [carrying, borrowing]`
+  while the Blueprint states "none listed"; the KG's `estimated_hours`
+  is 4 while the Blueprint states 3. Both resolved in favor of the KG
+  per this program's standing rule (KG authoritative on divergence);
+  neither affects the Blueprint's pedagogical content; no KG or
+  Blueprint file modified.
+- `math.arith.addition` — reused its Misconception Registry by
+  reference: MC-1 CARRYING-BREAKDOWN (FOUNDATIONAL, Type 5
+  instruction-induced), MC-2 COMMUTATIVITY-UNKNOWN (Type 2 perceptual
+  intuition), MC-3 ZERO-ANNIHILATES (Type 6 analogy overextension from
+  multiplication's a×0=0 rule). Its Tier 1 cross-link to `math.linalg.
+  vector-addition` used for a genuine cross-link transfer probe.
+- `math.arith.decimals` — reused its Misconception Registry by
+  reference: MC-1 LONGER-DECIMAL-IS-LARGER (FOUNDATIONAL, Type 1
+  overgeneralization — the extensively-documented "longer-is-larger"
+  error), MC-2 WHOLE-AND-DECIMAL-PARTS-SEPARATE (Type 1), MC-3
+  MULTIPLY-BIGGER-DIVIDE-SMALLER-ALWAYS (Type 1).
+
+`math.arith` now 17/58. Wave 4 part 2 (deferred): the 5 no-Blueprint
+concepts (`expanded-form`, `number-base`, `ordering`,
+`direct-variation`, `inverse-variation`), misconceptions to be
+authored directly via the birth-taxonomy diagnostic procedure. No
+other domain touched. All five tracking files updated in this same
+commit; re-validated 0 duplicates, 0 orphans, 0 Quality Gate 3
+violations across all 99 mathematics entries.
 
 Full validation this batch: all 6 subject KG validators PASS (0
 failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
