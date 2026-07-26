@@ -1264,6 +1264,65 @@
   further reconciliation needed. Per explicit stop condition, Wave 6 was NOT started this batch.
   All six tracking files regenerated from source; re-validated 0 orphans, 0 duplicates, 0 broken
   KG references, 0 invalid Blueprint references across all 102 entries.
+- **Batch 9 — Mathematics forensic audit + Domain Certification Mode, math.found
+  Wave 7** (2026-07-26): triggered by an explicit "audit first, then continue" task.
+  **Audit** (programmatic, all counts verified from repo state, not estimated):
+  resynced local `main` to `origin/main` (local branch pointer was stale, diverged
+  53/50 commits from a prior container). KG 908/908 concepts (unchanged, 24 domains).
+  Blueprints 529/908 (0 orphans/duplicates against KG ids). Curriculum Pipeline
+  Teaching Assets (`docs/mathematics/teaching-assets/assets.json`, pipeline-owned,
+  not touched by this program) — 908/908 status=draft, complete since the
+  2026-07-05 dashboard's 877/908 snapshot (external pipeline progress, not this
+  program's work). AssetIdentity/Explanation Memory DB seed
+  (`src/lib/teaching/assets/brainSeedAssets.ts`) — only `math.arith.fractions`
+  seeded (1/908, Wave-0-era); live DB state not accessible in this sandbox (no
+  `DATABASE_URL`), consistent with prior audits. Runtime registration confirmed
+  live (`knowledgeGraph.ts`'s `SUBJECT_ADAPTERS`/`ID_PREFIX_TO_SUBJECT`). "Brain
+  Packages" is not a term or artifact class that exists anywhere in this
+  repository — reported as N/A rather than guessed at. Discovered a `math.found`
+  Wave 6 (5 entries: `logical-equivalence`, `ordinal-number`, `quantifiers`,
+  `relation`, `subset`, commit `8bd06f6d`) already on `main` from a prior/parallel
+  session, not yet reflected in this file — corrected here.
+  **Validation finding (confirmed Quality Gate 3 violation)**: all 5 Wave 6
+  entries use a numbered "1. Concept Identity"..."21. Certification Status"
+  heading scheme that `educational-brain/concepts/QUALITY_GATES.md`'s own Gate 3
+  explicitly retires ("no numbered-heading variant"); the other 31 pre-existing
+  `math.found` entries and this batch's own 9 new entries all use the correct
+  unnumbered `## Identity`...`## Version History` scheme. Not fixed this batch —
+  restructuring across non-1:1 section boundaries, not a find-and-replace;
+  follows this program's own Batch 2 precedent of deferring reconciliation to
+  dedicated future work. Flagged as the top-priority item for the next
+  mathematics session.
+  **Wave 7**: authored the 9 concepts whose prerequisites became fully satisfied
+  after Wave 6, verified programmatically against the live KG: `proper-subset`,
+  `set-equality`, `set-operations`, `power-set`, `partition`,
+  `reflexive-relation`, `symmetric-relation`, `transitive-relation`,
+  `rules-of-inference`. 7 of 9 had existing Blueprints reused by reference
+  (Misconception Registries cited by ID with birth-type classification added,
+  worked examples/transfer probes/mastery gates never restated); 2
+  (`proper-subset`, `set-equality`) had none, misconceptions authored directly
+  via the birth-taxonomy diagnostic procedure. One authoring-time
+  self-correction caught and fixed before commit: `partition`'s first-draft
+  Curriculum Feedback conflated the separate Blueprint-corpus and
+  Educational-Brain-corpus production-order numbering (both blueprints and EB
+  entries use "batch"/wave language, and the source Blueprint's own note said
+  "this corpus" ambiguously) — corrected to distinguish the two pipelines
+  explicitly. `math.found` 36/82 → **45/82** — still IN PROGRESS; Wave 8
+  candidates already computed (`proof`, `union`, `intersection`,
+  `set-difference`, `complement`, `venn-diagram`, `equivalence-relation`,
+  `partial-order`, `function-set-theoretic`, `cardinal-arithmetic`). No other
+  domain touched. Also corrected a stale, triplicated "Totals" block in
+  `ROADMAP.md` (three differently-valued duplicate rows from unreconciled prior
+  sessions) — recomputed from currently-stated per-subject figures already
+  present in that same file (not new research into other subjects). All five
+  tracking files regenerated/updated; re-validated 0 orphans, 0 duplicates
+  across all 46 mathematics entries. Full validation: all 6 subject KGs PASS
+  (0 failures/warnings each), `npx tsc --noEmit` clean (0 errors, after `npm
+  install` — this sandbox started with no `node_modules`), full suite 2131
+  passed/1 skipped, `npm run build` succeeded. No KG, Blueprint, Physics, or
+  Chemistry file touched. Per this program's own standing "one small bounded
+  batch per turn" discipline (this section's own header), Wave 8 was
+  deliberately NOT started this turn.
 
 ## Run locally
 ```
