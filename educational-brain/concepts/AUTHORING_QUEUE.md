@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1182** (= 1,775 KG concepts − 593 already `READY`, per
+Total queued: **1181** (= 1,775 KG concepts − 594 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -1692,7 +1692,8 @@ authored math.nt Wave 7, moved to READY.
 | 1123 | english | 24 | `eng.linguistics.pragmatics-intro` | Introduction to Pragmatics |
 | 1124 | english | 24 | `eng.linguistics.psycholinguistics-intro` | Introduction to Psycholinguistics |
 | 1125 | mathematics | 25 | `math.nt.pythagorean-triples` | Pythagorean Triples |
-| 1126 | mathematics | 25 | `math.nt.pells-equation` | Pell's Equation |
+**Row 1126 removed 2026-07-26** — `math.nt.pells-equation` authored
+math.nt Wave 8, moved to READY.
 | 1127 | mathematics | 25 | `math.nt.algebraic-number-theory` | Algebraic Number Theory |
 | 1128 | mathematics | 25 | `math.nt.analytic-number-theory` | Analytic Number Theory |
 | 1129 | mathematics | 25 | `math.alg.substitution-method` | Substitution Method |

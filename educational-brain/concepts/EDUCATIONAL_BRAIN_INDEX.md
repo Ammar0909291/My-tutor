@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 166 READY)
+## mathematics (908 concepts, 167 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -695,7 +695,7 @@ its subject KG.
 | nt | `math.nt.modular-arithmetic` | Modular Arithmetic | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.modular-arithmetic.md` | READY |
 | nt | `math.nt.modular-inverse` | Modular Inverse | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.modular-inverse.md` | READY |
 | nt | `math.nt.number-fields` | Number Fields | No | No | — | MISSING |
-| nt | `math.nt.pells-equation` | Pell's Equation | No | No | — | MISSING |
+| nt | `math.nt.pells-equation` | Pell's Equation | No | Yes | `educational-brain/concepts/mathematics/math.nt.pells-equation.md` | READY |
 | nt | `math.nt.primality-testing` | Primality Testing | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.primality-testing.md` | READY |
 | nt | `math.nt.prime-distribution` | Distribution of Primes | Yes | No | — | MISSING |
 | nt | `math.nt.prime-factorization` | Prime Factorization | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.prime-factorization.md` | READY |

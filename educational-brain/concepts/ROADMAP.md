@@ -13,16 +13,16 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **593** |
-| Remaining | **1,182** |
-| Completion percentage | **33.41%** |
+| Concepts with an Educational Brain entry | **594** |
+| Remaining | **1,181** |
+| Completion percentage | **33.46%** |
 
 *(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
 with an Educational Brain entry" rows had accumulated from prior sessions
 without being reconciled. Recomputed from this same file's §2 Subject
-progress table as currently stated per subject: 166 mathematics + 238
+progress table as currently stated per subject: 167 mathematics + 238
 physics + 3 english + 186 chemistry + 0 biology + 0 computer_science =
-593. Only the mathematics figure was independently re-verified by this
+594. Only the mathematics figure was independently re-verified by this
 batch by direct file count; the other subjects' figures are taken as
 already-recorded in §2 below, not re-audited by this batch, per this
 program's "mathematics only" scope this turn.)*
@@ -33,7 +33,7 @@ program's "mathematics only" scope this turn.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 166 | 18.28% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 167 | 18.39% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
@@ -1003,6 +1003,21 @@ record; the active default has moved to item 1b.**
     (the remaining 10 concepts are all blocked on deep analytic/
     algebraic-number-theory prerequisites); the next wave requires
     re-auditing the domain's tail for genuinely reachable concepts.
+    Wave 8 (2026-07-26, iteration 33) re-audited the domain tail
+    fresh: only `math.nt.pells-equation` ready (no Blueprint) —
+    `math.nt.pythagorean-triples` also has this wave's own
+    `general-diophantine` prerequisite satisfied, but remains blocked
+    on `math.geom.pythagorean-theorem`, itself blocked behind a
+    4-concept `math.geom` chain (`triangle`, `perpendicular-lines`,
+    `right-triangle`, `pythagorean-theorem`) — evaluated and
+    deliberately NOT treated as a small bounded excursion (unlike the
+    earlier gcd/lcm case, entirely within math.nt) since it requires
+    starting an entirely separate domain; deferred as an open decision
+    for a future wave. Authored `math.nt.pells-equation` directly via
+    the birth-taxonomy diagnostic procedure, raising `math.nt` to
+    **27/36** — only `pythagorean-triples` (blocked on the math.geom
+    excursion) and 8 deep analytic/algebraic-number-theory concepts
+    remain.
 1. **(Historical, satisfied) `math.found` Wave 7**: the set of
    `math.found` nodes whose prerequisites were all READY after Wave 6.
 2. **(Historical, satisfied) `math.found` Waves 8-16 (52 remaining
