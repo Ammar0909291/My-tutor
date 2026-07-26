@@ -1518,6 +1518,14 @@
   completes the cross-domain chain unblocking `math.arith`'s final 2
   concepts (`fraction-simplification`, `fraction-addition`), both now
   ready. `math.nt` 1/36 → 5/36. Full detail: `COVERAGE.md`.
+  **Batch 34 — math.arith Wave 10, FINAL WAVE** (2026-07-26, autonomous
+  loop iteration 24): 2 concepts authored (`fraction-simplification`,
+  `fraction-addition`; neither had a Blueprint). **`math.arith` reaches
+  58/58 — DOMAIN CERTIFIED**, the second mathematics domain certified
+  after `math.found`. `math.nt` remains at 5/36 (31 concepts left,
+  most with existing Blueprints) — whether to continue it as a full
+  campaign or select a different domain is an open decision for the
+  next wave. Full detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
