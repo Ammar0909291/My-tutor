@@ -57,21 +57,38 @@ export function createGroqProvider(apiKey: string, model: string): AIProvider {
   }
 }
 
-function classifyError(err: any): Error {
+export function classifyError(err: any): Error {
+  const message = err?.message ?? ''
+  const status = err?.status ?? 0
+
+  // P4 (2026-07-26): production evidence showed Groq's daily-token-quota
+  // exhaustion ("Rate limit reached... on tokens per day (TPD): Limit
+  // 200000, Used 199489...", retry-after ~30min) was misclassified as
+  // AIRateLimitError (retryable=true), because the SDK throws
+  // Groq.RateLimitError for this case too, and that check ran BEFORE the
+  // message-based quota-keyword check below ever had a chance to run — so
+  // the keyword check never fired for this exact real error text (it says
+  // "tokens per day", not "quota"/"insufficient"). Every request during a
+  // TPD exhaustion window (which lasts until Groq's daily reset, never
+  // seconds away) then paid for a guaranteed-fail same-provider retry at
+  // failoverRouter.ts's 500ms backoff — pure wasted latency, since a daily
+  // quota cannot possibly clear in 500ms. Checking the message FIRST, for
+  // any 429, fixes this without touching the RPM/TPM burst-limit path
+  // (still correctly AIRateLimitError, still correctly retried).
+  if (status === 429 || err instanceof Groq.RateLimitError) {
+    if (/tokens per day|\bTPD\b|quota|insufficient/i.test(message)) {
+      return new AIQuotaError('groq', err)
+    }
+  }
+
   if (err instanceof Groq.APIConnectionTimeoutError) return new AITimeoutError('groq', err)
   if (err instanceof Groq.RateLimitError) return new AIRateLimitError('groq', err)
   if (err instanceof Groq.APIConnectionError) return new AINetworkError('groq', err)
-
-  const message = err?.message ?? ''
-  const status = err?.status ?? 0
 
   if (message.includes('timeout') || message.includes('timed out') || message.includes('ETIMEDOUT')) {
     return new AITimeoutError('groq', err)
   }
   if (status === 429) {
-    if (message.toLowerCase().includes('quota') || message.toLowerCase().includes('insufficient')) {
-      return new AIQuotaError('groq', err)
-    }
     return new AIRateLimitError('groq', err)
   }
   if (status >= 500) return new AIServerError('groq', status, err)
