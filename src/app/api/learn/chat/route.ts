@@ -1553,8 +1553,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // the affect band outranks every teaching instruction above it.
         if (recoveryKeyHoisted) {
           const { buildRecoveryBlock } = await import('@/lib/teaching/recoveryGuard')
-          // P2: pass session failure count so the script escalates on repeated struggle
-          systemPrompt += buildRecoveryBlock(recoveryKeyHoisted, firstLessonActiveHoisted, snapshotSessionFailureCount)
+          // P2: pass session failure count so the script escalates on repeated struggle.
+          // Rule 2 (pre-demonstration escalation): when nothing has been
+          // demonstrated for this concept yet, dont_know/confused scripts
+          // explain directly instead of shrinking to another question.
+          systemPrompt += buildRecoveryBlock(
+            recoveryKeyHoisted, firstLessonActiveHoisted, snapshotSessionFailureCount,
+            conversationStateHoisted?.demonstrated !== true,
+          )
         }
       } catch (err) {
         console.warn('[learn/chat] wave-0 brain blocks skipped:', err)
@@ -2184,6 +2190,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       if (conversationStateHoisted) {
         try {
           const { advanceConversationState, repliesWithQuestion, isPriorKnowledgeProbe } = await import('@/lib/teaching/conversationState')
+          const { isDontKnowSignal } = await import('@/lib/teaching/recoveryGuard')
           const { enforceStance } = await import('@/lib/teaching/stanceEnforcement')
           conversationStateAfterTurnHoisted = advanceConversationState(conversationStateHoisted, {
             askedQuestion: repliesWithQuestion(cleanText),
@@ -2194,7 +2201,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             isPriorKnowledgeProbe: isPriorKnowledgeProbe(cleanText),
             strategyUsed: selectedStrategyHoisted ?? undefined,
             signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
-            dontKnowSignal: recoveryKeyHoisted === 'dont_know' || recoveryKeyHoisted === 'dont_understand',
+            dontKnowSignal: isDontKnowSignal(recoveryKeyHoisted),
           })
           const stanceVerdict = enforceStance({
             text: cleanText,
@@ -2831,6 +2838,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             conversationStateUpdate = { conversationState: conversationStateAfterTurnHoisted }
           } else if (conversationStateHoisted) {
             const { advanceConversationState, repliesWithQuestion, isPriorKnowledgeProbe } = await import('@/lib/teaching/conversationState')
+            const { isDontKnowSignal } = await import('@/lib/teaching/recoveryGuard')
             conversationStateUpdate = {
               conversationState: advanceConversationState(conversationStateHoisted, {
                 askedQuestion: repliesWithQuestion(cleanText),
@@ -2840,7 +2848,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 isPriorKnowledgeProbe: isPriorKnowledgeProbe(cleanText),
                 strategyUsed: selectedStrategyHoisted ?? undefined,
                 signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
-                dontKnowSignal: recoveryKeyHoisted === 'dont_know' || recoveryKeyHoisted === 'dont_understand',
+                dontKnowSignal: isDontKnowSignal(recoveryKeyHoisted),
               }),
             }
           }
