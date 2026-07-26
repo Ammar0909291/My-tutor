@@ -312,6 +312,22 @@ export async function POST(req: Request) {
       contentRegister,
     )
 
+    // Loop 1: Topic Anchoring — inject CONCEPT ANCHOR block right after
+    // the base prompt, before any other blocks. Uses the already-resolved
+    // lessonCtx + resolvedConceptId from the curriculum resolution above.
+    try {
+      const { buildConceptAnchor, buildConceptAnchorBlock } = await import('@/lib/teaching/conceptAnchor')
+      const anchor = buildConceptAnchor(
+        resolvedConceptId,
+        lessonCtx?.lessonTitle,
+        lessonCtx?.lessonGoal,
+        lessonCtx?.unitTitle,
+      )
+      if (anchor) systemPrompt += buildConceptAnchorBlock(anchor)
+    } catch {
+      // non-fatal — concept anchor is purely additive
+    }
+
     // W2-1 (ADR 08 §4a): Library-mode concept tracking — hoisted for post-AI persist.
     let libraryConceptNodeIdHoisted: string | null = null
     // Visualization Registry Phase 2: server-authoritative visual attachment.
