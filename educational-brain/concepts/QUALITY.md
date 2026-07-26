@@ -53,29 +53,29 @@ rather than hand-edit when entries change.
   migration debt (76 = 71 + 5), not introduced this batch — rewriting
   another session's freshly authored files remains out of scope.
 
-## Aggregate summary (448 entries)
+## Aggregate summary (450 entries)
 
-Adds mathematics `math.found` Wave 10 (7 concepts, this batch,
-2026-07-26, autonomous loop iteration 2) on top of the prior 441-entry
-state (Wave 9 completion). 4 of the 7 Wave 10 entries had no Blueprint
-(`corollary`, `hasse-diagram`, `lemma`, `uniqueness-proof`); 3 were
-grounded in existing Blueprints (`cardinality`, `equivalence-class`,
-`total-order`). All numbers below were recomputed fresh by scanning
-every live file in `educational-brain/concepts/{subject}/` — none
-hand-estimated.
+Adds mathematics `math.found` Wave 11 (2 concepts, this batch,
+2026-07-26, autonomous loop iteration 3) on top of the prior 448-entry
+state (Wave 10 completion). 1 of the 2 Wave 11 entries had no Blueprint
+(`finite-set`, misconceptions authored via the birth-taxonomy
+diagnostic procedure); 1 was grounded in an existing PACKAGE_READY
+Blueprint (`natural-numbers`). All numbers below were recomputed fresh
+by scanning every live file in `educational-brain/concepts/{subject}/`
+— none hand-estimated.
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 286 / 448 | see methodology note above — 19 `math.found` (`proper-subset`, `set-equality`, `union`, `intersection`, `set-difference`, `complement`, `venn-diagram`, `direct-proof`, `proof-by-contradiction`, `proof-by-contrapositive`, `proof-by-cases`, `existence-proof`, `writing-mathematics`, `theorem`, `conjecture`, `corollary`, `hasse-diagram`, `lemma`, `uniqueness-proof` — none have a Blueprint) + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
-| Educational Brain | 448 / 448 | trivially true (this is the entry list) |
-| Mental Model | 448 / 448 | |
-| Misconceptions | 448 / 448 | |
-| Analogies | 448 / 448 | |
-| Recovery Strategy | 448 / 448 | |
-| Assessment Signals | 448 / 448 | |
-| Tutor Actions | 378 / 448 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
-| Cross-links | 378 / 448 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
-| Version History | 378 / 448 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
+| Blueprint | 287 / 450 | see methodology note above — 20 `math.found` (`proper-subset`, `set-equality`, `union`, `intersection`, `set-difference`, `complement`, `venn-diagram`, `direct-proof`, `proof-by-contradiction`, `proof-by-contrapositive`, `proof-by-cases`, `existence-proof`, `writing-mathematics`, `theorem`, `conjecture`, `corollary`, `hasse-diagram`, `lemma`, `uniqueness-proof`, `finite-set` — none have a Blueprint) + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
+| Educational Brain | 450 / 450 | trivially true (this is the entry list) |
+| Mental Model | 450 / 450 | |
+| Misconceptions | 450 / 450 | |
+| Analogies | 450 / 450 | |
+| Recovery Strategy | 450 / 450 | |
+| Assessment Signals | 450 / 450 | |
+| Tutor Actions | 380 / 450 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
+| Cross-links | 380 / 450 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
+| Version History | 380 / 450 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
 
 ## Per-concept ledger
 
@@ -336,6 +336,7 @@ hand-estimated.
 | `math.found.equivalence-class` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.equivalence-relation` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.existence-proof` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.finite-set` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.function-set-theoretic` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.generalization` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.hasse-diagram` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -350,6 +351,7 @@ hand-estimated.
 | `math.found.mathematical-notation` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.mathematical-symbols` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.mathematical-thinking` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.natural-numbers` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.ordered-pair` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.ordinal-number` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.partial-order` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

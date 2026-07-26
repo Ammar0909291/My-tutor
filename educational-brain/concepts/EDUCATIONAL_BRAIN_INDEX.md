@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 71 READY)
+## mathematics (908 concepts, 73 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -418,7 +418,7 @@ its subject KG.
 | found | `math.found.equivalence-class` | Equivalence Class | Yes | Yes | `educational-brain/concepts/mathematics/math.found.equivalence-class.md` | READY |
 | found | `math.found.equivalence-relation` | Equivalence Relation | Yes | Yes | `educational-brain/concepts/mathematics/math.found.equivalence-relation.md` | READY |
 | found | `math.found.existence-proof` | Existence Proof | No | Yes | `educational-brain/concepts/mathematics/math.found.existence-proof.md` | READY |
-| found | `math.found.finite-set` | Finite Set | No | No | — | MISSING |
+| found | `math.found.finite-set` | Finite Set | No | Yes | `educational-brain/concepts/mathematics/math.found.finite-set.md` | READY |
 | found | `math.found.function-set-theoretic` | Function (Set-Theoretic) | Yes | Yes | `educational-brain/concepts/mathematics/math.found.function-set-theoretic.md` | READY |
 | found | `math.found.generalization` | Generalization | Yes | Yes | `educational-brain/concepts/mathematics/math.found.generalization.md` | READY |
 | found | `math.found.hasse-diagram` | Hasse Diagram | No | Yes | `educational-brain/concepts/mathematics/math.found.hasse-diagram.md` | READY |
@@ -435,7 +435,7 @@ its subject KG.
 | found | `math.found.mathematical-notation` | Mathematical Notation | Yes | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-notation.md` | READY |
 | found | `math.found.mathematical-symbols` | Mathematical Symbols | No | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-symbols.md` | READY |
 | found | `math.found.mathematical-thinking` | Mathematical Thinking | Yes | Yes | `educational-brain/concepts/mathematics/math.found.mathematical-thinking.md` | READY |
-| found | `math.found.natural-numbers` | Natural Numbers | Yes | No | — | MISSING |
+| found | `math.found.natural-numbers` | Natural Numbers | Yes | Yes | `educational-brain/concepts/mathematics/math.found.natural-numbers.md` | READY |
 | found | `math.found.ordered-pair` | Ordered Pair | Yes | Yes | `educational-brain/concepts/mathematics/math.found.ordered-pair.md` | READY |
 | found | `math.found.ordinal-number` | Ordinal Number | Yes | Yes | math.found.ordinal-number.md | READY |
 | found | `math.found.partial-order` | Partial Order | Yes | Yes | `educational-brain/concepts/mathematics/math.found.partial-order.md` | READY |

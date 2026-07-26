@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1277** (= 1,775 KG concepts − 498 already `READY`, per
+Total queued: **1275** (= 1,775 KG concepts − 500 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -773,7 +773,8 @@ READY. Row numbers not renumbered.
 **Rows 264-266 removed 2026-07-26** — `math.found.equivalence-class`,
 `math.found.total-order`, `math.found.hasse-diagram` authored Wave 10,
 moved to READY.
-| 267 | mathematics | 9 | `math.found.finite-set` | Finite Set |
+**Row 267 removed 2026-07-26** — `math.found.finite-set` authored Wave 11,
+moved to READY.
 | 268 | mathematics | 9 | `math.geom.circle-area` | Area of a Circle |
 | 269 | mathematics | 9 | `math.geom.geometric-proof` | Geometric Proof |
 | 270 | mathematics | 9 | `math.geom.surface-area` | Surface Area |
@@ -813,7 +814,8 @@ moved to READY.
 **Rows 304-306 removed 2026-07-26** — `math.found.uniqueness-proof`,
 `math.found.lemma`, `math.found.corollary` authored Wave 10, moved to
 READY.
-| 307 | mathematics | 10 | `math.found.natural-numbers` | Natural Numbers |
+**Row 307 removed 2026-07-26** — `math.found.natural-numbers` authored
+Wave 11, moved to READY.
 | 308 | mathematics | 10 | `math.func.bijection` | Bijective Function |
 | 309 | mathematics | 10 | `math.func.step-function` | Step Function |
 | 310 | mathematics | 10 | `math.prob.bayes-theorem` | Bayes' Theorem |
