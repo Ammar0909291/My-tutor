@@ -95,22 +95,30 @@ point) at the time it shipped.
 
 ## 2. Remaining Operational Tasks
 
-All four have exact, copy-paste runbooks in
-`docs/architecture/ENGINEERING_RUNBOOK_BLOCKED_ITEMS.md` — each executable in under 15 minutes by
-anyone with production Supabase/database access:
+Updated 2026-07-26 (final operations session, Supabase + Vercel MCP enabled). Full detail for each
+in `docs/architecture/ENGINEERING_RUNBOOK_BLOCKED_ITEMS.md`:
 
-1. **Chemistry AssetIdentity seeding** — content is complete and script-verified-correct; blocked
-   only by this sandbox's lack of raw Postgres TCP access.
-2. **Explanation Asset promotion** — 694 DRAFT rows, all quality-gate-passing, awaiting your
-   manual review via the admin endpoint (by your own explicit choice to keep this a human
+1. **Chemistry AssetIdentity seeding** — IN PROGRESS: 60/744 rows (60 EXPLANATION / 0 PROBE)
+   seeded and verified this session via `mcp__Supabase__execute_sql` (0 duplicates, 0 orphans, 0
+   hash/length mismatches, all DRAFT). The original blocker (no raw Postgres TCP) is resolved now
+   that Supabase MCP is available — but completing the remaining ~684 rows this way would require
+   routing ~650KB more of authored content through the calling session's own context window, which
+   is a real, separate constraint. A deploy-and-invoke-in-Vercel-runtime workaround was attempted
+   and reverted: this sandbox's egress policy denies outbound HTTPS to the app's own production
+   domain (403, confirmed via the proxy status endpoint). Fastest completion path: run
+   `npx tsx scripts/brain/seed-knowledge-assets.ts --draft` from any environment with real
+   `DATABASE_URL` access (local machine, CI) — idempotent, skips the 60 already seeded.
+2. **Explanation Asset promotion** — unchanged: 694 DRAFT rows, all quality-gate-passing, awaiting
+   your manual review via the admin endpoint (by your own explicit choice to keep this a human
    decision).
-3. **Supabase pool-mode verification** — needs dashboard confirmation of Transaction vs Session
-   pooling mode and the pooler's own connection ceiling (separate from the app's
-   `connection_limit=15` parameter).
-4. **Migration-strategy verification** — `npx prisma migrate status` needs to be run against the
-   live production DB to resolve a real, unverified doc/reality mismatch (CLAUDE.md says "no
-   migration files"; 10 real migration directories exist on disk and `vercel.json` runs
-   `prisma migrate deploy` at build time).
+3. **Supabase pool-mode verification** — still blocked: neither the Supabase MCP nor Vercel MCP
+   tool surface available in this session exposes pooler mode (Transaction vs Session) or raw
+   environment-variable values. Needs dashboard confirmation.
+4. **Migration-strategy verification** — **RESOLVED** this session. Queried
+   `_prisma_migrations` directly via Supabase MCP: exactly 10 applied migrations, matching the 10
+   local `prisma/migrations/` directories 1:1, all `finished_at` populated, all `rolled_back_at`
+   null. `vercel.json`'s `prisma migrate deploy` build step is confirmed a genuine no-op — no
+   drift. CLAUDE.md's flagged note corrected accordingly.
 
 ## 3. Remaining Curriculum Tasks (Mohammad's ownership — informational only)
 
