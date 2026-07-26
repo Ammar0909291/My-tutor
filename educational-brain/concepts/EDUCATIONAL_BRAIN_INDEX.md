@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 134 READY)
+## mathematics (908 concepts, 137 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -141,10 +141,10 @@ its subject KG.
 | arith | `math.arith.integer-arithmetic` | Integer Arithmetic | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.integer-arithmetic.md` | READY |
 | arith | `math.arith.inverse-variation` | Inverse Variation | No | Yes | `educational-brain/concepts/mathematics/math.arith.inverse-variation.md` | READY |
 | arith | `math.arith.irrational-roots` | Irrational Square Roots | No | No | — | MISSING |
-| arith | `math.arith.long-division` | Long Division | No | No | — | MISSING |
+| arith | `math.arith.long-division` | Long Division | No | Yes | `educational-brain/concepts/mathematics/math.arith.long-division.md` | READY |
 | arith | `math.arith.long-multiplication` | Long Multiplication | No | Yes | `educational-brain/concepts/mathematics/math.arith.long-multiplication.md` | READY |
 | arith | `math.arith.mental-addition` | Mental Addition | No | Yes | `educational-brain/concepts/mathematics/math.arith.mental-addition.md` | READY |
-| arith | `math.arith.mental-arithmetic` | Mental Arithmetic | No | No | — | MISSING |
+| arith | `math.arith.mental-arithmetic` | Mental Arithmetic | No | Yes | `educational-brain/concepts/mathematics/math.arith.mental-arithmetic.md` | READY |
 | arith | `math.arith.mental-multiplication` | Mental Multiplication | No | Yes | `educational-brain/concepts/mathematics/math.arith.mental-multiplication.md` | READY |
 | arith | `math.arith.mixed-numbers` | Mixed Numbers | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.mixed-numbers.md` | READY |
 | arith | `math.arith.multiplication` | Multiplication | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.multiplication.md` | READY |
@@ -167,7 +167,7 @@ its subject KG.
 | arith | `math.arith.scientific-notation` | Scientific Notation | No | Yes | `educational-brain/concepts/mathematics/math.arith.scientific-notation.md` | READY |
 | arith | `math.arith.significant-figures` | Significant Figures | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.significant-figures.md` | READY |
 | arith | `math.arith.square-numbers` | Perfect Squares | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.square-numbers.md` | READY |
-| arith | `math.arith.square-roots` | Square Roots | Yes | No | — | MISSING |
+| arith | `math.arith.square-roots` | Square Roots | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.square-roots.md` | READY |
 | arith | `math.arith.subitizing` | Subitizing | No | Yes | `educational-brain/concepts/mathematics/math.arith.subitizing.md` | READY |
 | arith | `math.arith.subtraction` | Subtraction | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.subtraction.md` | READY |
 | arith | `math.arith.terminating-decimals` | Terminating Decimals | No | Yes | `educational-brain/concepts/mathematics/math.arith.terminating-decimals.md` | READY |

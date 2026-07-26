@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1214** (= 1,775 KG concepts − 561 already `READY`, per
+Total queued: **1211** (= 1,775 KG concepts − 564 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -1141,7 +1141,8 @@ math.arith Wave 7 part 2, moved to READY.
 | 615 | computer_science | 16 | `cs.db.normalisation` | Normalisation |
 | 616 | computer_science | 16 | `cs.db.sql-ddl-dml` | SQL — DDL and DML Basics |
 | 617 | computer_science | 16 | `cs.ds.numpy-arrays` | NumPy for Numerical Computing |
-| 618 | mathematics | 17 | `math.arith.long-division` | Long Division |
+**Row 618 removed 2026-07-26** — `math.arith.long-division` authored
+math.arith Wave 8, moved to READY.
 **Rows 619-621 removed 2026-07-26** — `math.arith.fraction-equivalence`,
 `math.arith.fraction-multiplication`, `math.arith.fraction-reciprocal`
 authored math.arith Wave 2 (part 1), moved to READY.
@@ -1152,8 +1153,9 @@ moved to READY.
 math.arith Wave 4 part 1, moved to READY.
 **Row 625 removed 2026-07-26** — `math.arith.ratios` authored math.arith
 Wave 2 (part 2), moved to READY.
-| 626 | mathematics | 17 | `math.arith.square-roots` | Square Roots |
-| 627 | mathematics | 17 | `math.arith.mental-arithmetic` | Mental Arithmetic |
+**Rows 626-627 removed 2026-07-26** — `math.arith.square-roots`,
+`math.arith.mental-arithmetic` authored math.arith Wave 8, moved to
+READY.
 | 628 | mathematics | 17 | `math.nt.divisibility-rules` | Divisibility Rules |
 | 629 | mathematics | 17 | `math.nt.prime-number` | Prime Number |
 | 630 | mathematics | 17 | `math.nt.modular-arithmetic` | Modular Arithmetic |
