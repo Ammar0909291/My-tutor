@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1235** (= 1,775 KG concepts − 540 already `READY`, per
+Total queued: **1231** (= 1,775 KG concepts − 544 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -1037,10 +1037,12 @@ authored Wave 16 (FINAL wave), moved to READY. `math.found` domain now
 82/82 — COMPLETE.
 | 520 | mathematics | 15 | `math.arith.column-addition` | Column Addition |
 | 521 | mathematics | 15 | `math.arith.borrowing` | Borrowing (Regrouping in Subtraction) |
-| 522 | mathematics | 15 | `math.arith.negative-numbers` | Negative Numbers |
+**Row 522 removed 2026-07-26** — `math.arith.negative-numbers`
+authored math.arith Wave 6 part 1, moved to READY.
 | 523 | mathematics | 15 | `math.arith.multiplication-table` | Multiplication Table |
-| 524 | mathematics | 15 | `math.arith.division` | Division |
-| 525 | mathematics | 15 | `math.arith.exponentiation` | Exponentiation |
+**Rows 524-525 removed 2026-07-26** — `math.arith.division`,
+`math.arith.exponentiation` authored math.arith Wave 6 part 1, moved
+to READY.
 | 526 | mathematics | 15 | `math.geom.coordinate-plane` | Coordinate Plane |
 | 527 | mathematics | 15 | `math.func.real-valued-function` | Real-Valued Function |
 | 528 | mathematics | 15 | `math.prob.martingale` | Martingale |
@@ -1283,7 +1285,8 @@ math.arith Wave 5 part 1, moved to READY.
 `math.arith.inverse-variation` authored math.arith Wave 4 part 2,
 moved to READY.
 | 761 | mathematics | 19 | `math.arith.estimation` | Estimation |
-| 762 | mathematics | 19 | `math.arith.significant-figures` | Significant Figures |
+**Row 762 removed 2026-07-26** — `math.arith.significant-figures`
+authored math.arith Wave 6 part 1, moved to READY.
 | 763 | mathematics | 19 | `math.nt.fundamental-theorem-arithmetic` | Fundamental Theorem of Arithmetic |
 | 764 | mathematics | 19 | `math.nt.gcd` | Greatest Common Divisor |
 | 765 | mathematics | 19 | `math.nt.residue-classes` | Residue Classes |

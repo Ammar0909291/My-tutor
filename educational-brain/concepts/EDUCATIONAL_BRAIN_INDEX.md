@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 113 READY)
+## mathematics (908 concepts, 117 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -125,12 +125,12 @@ its subject KG.
 | arith | `math.arith.decimal-operations` | Decimal Operations | No | Yes | `educational-brain/concepts/mathematics/math.arith.decimal-operations.md` | READY |
 | arith | `math.arith.decimals` | Decimals | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.decimals.md` | READY |
 | arith | `math.arith.direct-variation` | Direct Variation | No | Yes | `educational-brain/concepts/mathematics/math.arith.direct-variation.md` | READY |
-| arith | `math.arith.division` | Division | Yes | No | — | MISSING |
+| arith | `math.arith.division` | Division | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.division.md` | READY |
 | arith | `math.arith.divisor-dividend` | Divisor and Dividend | No | No | — | MISSING |
 | arith | `math.arith.estimation` | Estimation | No | No | — | MISSING |
 | arith | `math.arith.expanded-form` | Expanded Form | No | Yes | `educational-brain/concepts/mathematics/math.arith.expanded-form.md` | READY |
 | arith | `math.arith.exponent-rules` | Exponent Rules | Yes | No | — | MISSING |
-| arith | `math.arith.exponentiation` | Exponentiation | Yes | No | — | MISSING |
+| arith | `math.arith.exponentiation` | Exponentiation | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.exponentiation.md` | READY |
 | arith | `math.arith.fraction-addition` | Addition and Subtraction of Fractions | No | No | — | MISSING |
 | arith | `math.arith.fraction-equivalence` | Equivalent Fractions | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.fraction-equivalence.md` | READY |
 | arith | `math.arith.fraction-multiplication` | Multiplication and Division of Fractions | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.fraction-multiplication.md` | READY |
@@ -149,7 +149,7 @@ its subject KG.
 | arith | `math.arith.mixed-numbers` | Mixed Numbers | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.mixed-numbers.md` | READY |
 | arith | `math.arith.multiplication` | Multiplication | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.multiplication.md` | READY |
 | arith | `math.arith.multiplication-table` | Multiplication Table | No | No | — | MISSING |
-| arith | `math.arith.negative-numbers` | Negative Numbers | Yes | No | — | MISSING |
+| arith | `math.arith.negative-numbers` | Negative Numbers | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.negative-numbers.md` | READY |
 | arith | `math.arith.number-base` | Number Base | No | Yes | `educational-brain/concepts/mathematics/math.arith.number-base.md` | READY |
 | arith | `math.arith.number-line` | Number Line | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.number-line.md` | READY |
 | arith | `math.arith.ones-tens-hundreds` | Ones, Tens, Hundreds | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.ones-tens-hundreds.md` | READY |
@@ -165,7 +165,7 @@ its subject KG.
 | arith | `math.arith.repeating-decimals` | Repeating Decimals | No | Yes | `educational-brain/concepts/mathematics/math.arith.repeating-decimals.md` | READY |
 | arith | `math.arith.rounding` | Rounding | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.rounding.md` | READY |
 | arith | `math.arith.scientific-notation` | Scientific Notation | No | No | — | MISSING |
-| arith | `math.arith.significant-figures` | Significant Figures | Yes | No | — | MISSING |
+| arith | `math.arith.significant-figures` | Significant Figures | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.significant-figures.md` | READY |
 | arith | `math.arith.square-numbers` | Perfect Squares | Yes | No | — | MISSING |
 | arith | `math.arith.square-roots` | Square Roots | Yes | No | — | MISSING |
 | arith | `math.arith.subitizing` | Subitizing | No | Yes | `educational-brain/concepts/mathematics/math.arith.subitizing.md` | READY |

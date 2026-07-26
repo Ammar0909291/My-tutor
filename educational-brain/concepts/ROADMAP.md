@@ -13,16 +13,16 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **540** |
-| Remaining | **1,235** |
-| Completion percentage | **30.42%** |
+| Concepts with an Educational Brain entry | **544** |
+| Remaining | **1,231** |
+| Completion percentage | **30.65%** |
 
 *(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
 with an Educational Brain entry" rows had accumulated from prior sessions
 without being reconciled. Recomputed from this same file's §2 Subject
-progress table as currently stated per subject: 113 mathematics + 238
+progress table as currently stated per subject: 117 mathematics + 238
 physics + 3 english + 186 chemistry + 0 biology + 0 computer_science =
-540. Only the mathematics figure was independently re-verified by this
+544. Only the mathematics figure was independently re-verified by this
 batch by direct file count; the other subjects' figures are taken as
 already-recorded in §2 below, not re-audited by this batch, per this
 program's "mathematics only" scope this turn.)*
@@ -33,7 +33,7 @@ program's "mathematics only" scope this turn.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 113 | 12.45% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 117 | 12.89% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
@@ -887,31 +887,31 @@ procedure.
 §3. Items 1-2 below are historical record of how it was reached; the
 active default has moved to item 1a.**
 
-1a. **Active default (2026-07-26): `math.arith` domain, Waves 1-5
-    done, Wave 6 next**. `math.arith` has 58 total concepts. Waves
-    1-3 (historical, condensed): `counting`, the 6 fraction-family
-    concepts, and 6 more (4 Blueprint-grounded, 2 authored directly) —
-    14 concepts. Wave 4 (parts 1-2): 8 concepts —
-    `ones-tens-hundreds`, `addition`, `decimals`, `expanded-form`,
-    `number-base`, `ordering`, `direct-variation`,
-    `inverse-variation`; found and honestly recorded a Blueprint/KG
-    metadata discrepancy for `ones-tens-hundreds`, and a genuine
-    discovery that Blueprints for `math.func.linear-function`/
-    `math.func.rational-function` now exist (corrected via a small
-    addendum in `proportion.md`/`ratios.md`, no rewrite). Wave 5
-    (parts 1-2, 2026-07-26, iterations 15-16): 9 concepts —
-    `subtraction`, `multiplication`, `percentages`, `rounding`
-    (Blueprint-grounded; found one more Blueprint/KG discrepancy for
-    `percentages`), plus `carrying`, `mental-addition`,
-    `decimal-operations`, `terminating-decimals`,
-    `repeating-decimals` (no Blueprints, misconceptions authored
-    directly). `math.arith` now 31/58. Wave 6 candidates to be
-    computed programmatically from the live KG next iteration — the
-    pool grew further after Wave 5 (`subtraction`, `multiplication`,
-    `decimals`, `rounding` each unlocked new children, e.g.
-    `borrowing`, `negative-numbers`, `division`, `exponentiation`,
-    `significant-figures`, `estimation`; not yet re-verified this
-    turn).
+1a. **Active default (2026-07-26): `math.arith` domain, Waves 1-6
+    part 1 done, Wave 6 part 2 next**. `math.arith` has 58 total
+    concepts. Waves 1-5 (historical, condensed): `counting`, the 6
+    fraction-family concepts, and 24 more across Waves 3-5 (parts 1-2
+    each) — 31 concepts total; two genuine discoveries along the way:
+    a Blueprint/KG metadata discrepancy pattern (found for
+    `ones-tens-hundreds` and `percentages`, always resolved in favor
+    of the KG), and that Blueprints for `math.func.linear-function`/
+    `math.func.rational-function` now exist, contradicting a stale
+    claim in `proportion.md`/`ratios.md` (corrected via a small
+    addendum, no rewrite). Wave 6 candidates computed programmatically
+    after Wave 5 (all `requires` now satisfied): 9 concepts —
+    `math.arith.negative-numbers`, `math.arith.division`, `math.arith.
+    significant-figures`, `math.arith.exponentiation` (Blueprints exist
+    for all four), plus `math.arith.column-addition`, `math.arith.
+    borrowing`, `math.arith.multiplication-table`, `math.arith.
+    percentage-calculations`, `math.arith.estimation` (no Blueprints
+    for these five). Split into two parts given the heavier
+    no-Blueprint load (5 of 9), following the same pattern as Waves 4
+    and 5. Wave 6 part 1 (2026-07-26, iteration 17): the 4
+    Blueprint-grounded concepts authored. `math.arith` now 35/58. Wave
+    6 part 2 (deferred): the 5 no-Blueprint concepts (`column-addition`,
+    `borrowing`, `multiplication-table`, `percentage-calculations`,
+    `estimation`), misconceptions to be authored directly via the
+    birth-taxonomy diagnostic procedure.
 1. **(Historical, satisfied) `math.found` Wave 7**: the set of
    `math.found` nodes whose prerequisites were all READY after Wave 6.
 2. **(Historical, satisfied) `math.found` Waves 8-16 (52 remaining
