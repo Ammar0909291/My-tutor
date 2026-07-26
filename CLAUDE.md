@@ -1463,6 +1463,13 @@
   stale "not yet authored" claim about `math.func.linear-function`/
   `rational-function` Blueprints in 2 prior entries (small addendum,
   no rewrite). Full detail: `COVERAGE.md`.
+  **Batch 25 — math.arith Wave 5 part 1** (2026-07-26, autonomous loop
+  iteration 15): 4 concepts authored (`subtraction`, `multiplication`,
+  `percentages`, `rounding`; all had Blueprints). `math.arith` 22/58 →
+  26/58. Found 2 more Blueprint/KG metadata discrepancies for
+  `percentages` (unlocks, estimated_hours), resolved via KG per
+  standing rule. Wave 5 part 2 (5 no-Blueprint concepts) deferred.
+  Full detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
