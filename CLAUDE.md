@@ -1526,6 +1526,13 @@
   most with existing Blueprints) — whether to continue it as a full
   campaign or select a different domain is an open decision for the
   next wave. Full detail: `COVERAGE.md`.
+  **Batch 35 — math.nt Wave 3 part 1** (2026-07-26, autonomous loop
+  iteration 25): decision made — continue `math.nt` as a full campaign
+  (lowest-friction default, strong Blueprint coverage). 3 concepts
+  authored (`fundamental-theorem-arithmetic`, `euclidean-algorithm`,
+  `division-algorithm`; all Blueprint reused by reference). `math.nt`
+  5/36 → 8/36. Wave 3 part 2 (5 no-Blueprint concepts) deferred. Full
+  detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
