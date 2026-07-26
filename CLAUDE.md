@@ -1615,8 +1615,11 @@
   furthest along at 60/744 from a prior session, and the owner's follow-up explicitly redirected
   to it: complete Educational Brain + Blueprints + Teaching Assets + KG, proven pipeline, fully
   independent of Mohammad's Mathematics work).
-- Seeded batches 19-37. Chemistry: 360/744 → **740/744** — all 372/372 EXPLANATION items are
-  seeded; PROBE family now at 368/372. Only 4 probe items remain (batch 38, final batch).
+- Seeded batches 19-38. Chemistry: 360/744 → **744/744 — COMPLETE.** All 372/372 EXPLANATION and
+  372/372 PROBE items seeded (all HUMAN_CURATOR, DRAFT). Verified: 0 duplicate canonicalSlugs,
+  0 orphan explanation_assets/probe_assets rows. This closes the Chemistry AssetIdentity
+  Completion Program from the prioritization list in "AssetIdentity Completion Program — Global
+  Audit" above. Next per that list's priority order: Computer Science (476, not started).
 - Full integrity re-verified after this turn's batches: 0 duplicate canonicalSlugs, 0 orphan
   `explanation_assets` rows, 0 `lengthChars` mismatches, KG validator PASS (186/186 reachable,
   unchanged), `npx tsc --noEmit` clean, `npx vitest run` 2133 passed/1 skipped.
