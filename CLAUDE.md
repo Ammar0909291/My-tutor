@@ -1476,6 +1476,11 @@
   none had Blueprints). `math.arith` 26/58 → 31/58. Wave 6 candidates
   (13, pool grew after Wave 5) to be computed fresh next iteration.
   Full detail: `COVERAGE.md`.
+  **Batch 27 — math.arith Wave 6 part 1** (2026-07-26, autonomous loop
+  iteration 17): 4 concepts authored (`negative-numbers`, `division`,
+  `significant-figures`, `exponentiation`; all had Blueprints).
+  `math.arith` 31/58 → 35/58. Wave 6 part 2 (5 no-Blueprint concepts)
+  deferred. Full detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
