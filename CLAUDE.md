@@ -1456,6 +1456,13 @@
   `addition`, `decimals`; all had Blueprints). `math.arith` 14/58 →
   17/58. Wave 4 part 2 (5 no-Blueprint concepts) deferred. Full
   detail: `COVERAGE.md`.
+  **Batch 24 — math.arith Wave 4 part 2** (2026-07-26, autonomous loop
+  iteration 14): 5 concepts authored (`expanded-form`, `number-base`,
+  `ordering`, `direct-variation`, `inverse-variation`; none had
+  Blueprints). `math.arith` 17/58 → 22/58. Discovered and corrected a
+  stale "not yet authored" claim about `math.func.linear-function`/
+  `rational-function` Blueprints in 2 prior entries (small addendum,
+  no rewrite). Full detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
