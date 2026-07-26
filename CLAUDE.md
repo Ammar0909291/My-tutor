@@ -1548,6 +1548,29 @@
   No Mathematics Educational Brain/Blueprint/KG content touched (only AssetIdentity DB rows,
   which are Mohammad's non-owned data layer per the standing ownership split).
 
+## Chemistry AssetIdentity Completion — Subject Focus Session (2026-07-26, same day, Pappu)
+- Explicit owner decision: rather than spreading effort across all 6 subjects, finish ONE subject
+  completely before moving to the next, in the order Mathematics → Biology → Computer Science →
+  Chemistry → English → Physics — but this specific turn continued Chemistry (already
+  furthest along at 60/744 from a prior session, and the owner's follow-up explicitly redirected
+  to it: complete Educational Brain + Blueprints + Teaching Assets + KG, proven pipeline, fully
+  independent of Mohammad's Mathematics work).
+- Seeded 3 more batches (batches 4-6 of the pre-generated 38-batch set) via
+  `mcp__Supabase__execute_sql`, same verified method as before (real `chemistrySeedAssets.ts`
+  content, real `seedCanonicalSlug`/`hashContent` helpers). Chemistry: 60/744 → **120/744**
+  (all EXPLANATION, all DRAFT). 624 items remain (roughly 312 more explanations, 372 probes —
+  probes haven't been touched yet in any batch).
+- Full integrity re-verified after this turn's batches: 0 duplicate canonicalSlugs, 0 orphan
+  `explanation_assets` rows, 0 `lengthChars` mismatches, KG validator PASS (186/186 reachable,
+  unchanged), `npx tsc --noEmit` clean, `npx vitest run` 2133 passed/1 skipped.
+- Confirmed, unchanged from the prior session: the binding constraint on how much can be seeded
+  per turn is the calling session's own context budget (each ~20-statement batch requires the
+  full SQL text, including authored prose, to pass through context twice — once read, once as
+  the query argument) — not credentials, not KG validation, not tooling. 624/744 remaining will
+  need either continued Supabase-MCP batches across further sessions, or
+  `npx tsx scripts/brain/seed-knowledge-assets.ts --draft` run from an environment with real
+  `DATABASE_URL` access (idempotent, completes everything remaining in one run).
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
