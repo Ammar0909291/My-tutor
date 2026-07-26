@@ -1403,6 +1403,10 @@
   `proof-by-contradiction`, `proof-by-contrapositive`, `proof-by-cases`,
   `existence-proof`, `writing-mathematics`, `theorem`, `conjecture`), none
   with Blueprints. `math.found` 55/82 → 63/82. Full detail: `COVERAGE.md`.
+  **Batch 12 — Wave 10** (2026-07-26, autonomous loop iteration 2): 7 concepts
+  authored (`uniqueness-proof`, `lemma`, `corollary`, `equivalence-class`,
+  `total-order`, `hasse-diagram`, `cardinality`). `math.found` 63/82 → 70/82.
+  Full detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
