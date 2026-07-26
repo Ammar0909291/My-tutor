@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 90 READY)
+## mathematics (908 concepts, 96 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -120,7 +120,7 @@ its subject KG.
 | arith | `math.arith.carrying` | Carrying (Regrouping) | No | No | — | MISSING |
 | arith | `math.arith.column-addition` | Column Addition | No | No | — | MISSING |
 | arith | `math.arith.counting` | Counting | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.counting.md` | READY |
-| arith | `math.arith.counting-sequence` | Counting Sequence | Yes | No | — | MISSING |
+| arith | `math.arith.counting-sequence` | Counting Sequence | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.counting-sequence.md` | READY |
 | arith | `math.arith.cube-numbers` | Perfect Cubes | No | No | — | MISSING |
 | arith | `math.arith.decimal-operations` | Decimal Operations | No | No | — | MISSING |
 | arith | `math.arith.decimals` | Decimals | Yes | No | — | MISSING |
@@ -151,15 +151,15 @@ its subject KG.
 | arith | `math.arith.multiplication-table` | Multiplication Table | No | No | — | MISSING |
 | arith | `math.arith.negative-numbers` | Negative Numbers | Yes | No | — | MISSING |
 | arith | `math.arith.number-base` | Number Base | No | No | — | MISSING |
-| arith | `math.arith.number-line` | Number Line | Yes | No | — | MISSING |
+| arith | `math.arith.number-line` | Number Line | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.number-line.md` | READY |
 | arith | `math.arith.ones-tens-hundreds` | Ones, Tens, Hundreds | Yes | No | — | MISSING |
 | arith | `math.arith.order-of-operations` | Order of Operations | Yes | No | — | MISSING |
 | arith | `math.arith.ordering` | Ordering Numbers | No | No | — | MISSING |
 | arith | `math.arith.percentage-calculations` | Percentage Calculations | No | No | — | MISSING |
 | arith | `math.arith.percentage-change` | Percentage Change | No | No | — | MISSING |
 | arith | `math.arith.percentages` | Percentages | Yes | No | — | MISSING |
-| arith | `math.arith.place-value` | Place Value | Yes | No | — | MISSING |
-| arith | `math.arith.proportion` | Proportion | Yes | No | — | MISSING |
+| arith | `math.arith.place-value` | Place Value | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.place-value.md` | READY |
+| arith | `math.arith.proportion` | Proportion | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.proportion.md` | READY |
 | arith | `math.arith.ratios` | Ratio | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.ratios.md` | READY |
 | arith | `math.arith.remainder` | Remainder | Yes | No | — | MISSING |
 | arith | `math.arith.repeating-decimals` | Repeating Decimals | No | No | — | MISSING |
@@ -168,10 +168,10 @@ its subject KG.
 | arith | `math.arith.significant-figures` | Significant Figures | Yes | No | — | MISSING |
 | arith | `math.arith.square-numbers` | Perfect Squares | Yes | No | — | MISSING |
 | arith | `math.arith.square-roots` | Square Roots | Yes | No | — | MISSING |
-| arith | `math.arith.subitizing` | Subitizing | No | No | — | MISSING |
+| arith | `math.arith.subitizing` | Subitizing | No | Yes | `educational-brain/concepts/mathematics/math.arith.subitizing.md` | READY |
 | arith | `math.arith.subtraction` | Subtraction | Yes | No | — | MISSING |
 | arith | `math.arith.terminating-decimals` | Terminating Decimals | No | No | — | MISSING |
-| arith | `math.arith.unit-rate` | Unit Rate | No | No | — | MISSING |
+| arith | `math.arith.unit-rate` | Unit Rate | No | Yes | `educational-brain/concepts/mathematics/math.arith.unit-rate.md` | READY |
 | calc | `math.calc.antiderivatives` | Antiderivatives | Yes | No | — | MISSING |
 | calc | `math.calc.arc-length` | Arc Length | Yes | No | — | MISSING |
 | calc | `math.calc.chain-rule` | Chain Rule | Yes | No | — | MISSING |

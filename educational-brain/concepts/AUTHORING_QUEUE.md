@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1258** (= 1,775 KG concepts − 517 already `READY`, per
+Total queued: **1252** (= 1,775 KG concepts − 523 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -898,10 +898,9 @@ Domain Certification), moved to READY.
 **Rows 386-388 removed 2026-07-26** — `math.found.strong-induction`,
 `math.found.uncountable-set`, `math.found.rational-numbers` authored
 Wave 13, moved to READY.
-| 389 | mathematics | 12 | `math.arith.counting-sequence` | Counting Sequence |
-| 390 | mathematics | 12 | `math.arith.subitizing` | Subitizing |
-| 391 | mathematics | 12 | `math.arith.place-value` | Place Value |
-| 392 | mathematics | 12 | `math.arith.number-line` | Number Line |
+**Rows 389-392 removed 2026-07-26** — `math.arith.counting-sequence`,
+`math.arith.subitizing`, `math.arith.place-value`, `math.arith.
+number-line` authored math.arith Wave 3, moved to READY.
 | 393 | mathematics | 12 | `math.seq.arithmetic-sequence` | Arithmetic Sequence |
 | 394 | mathematics | 12 | `math.seq.geometric-sequence` | Geometric Sequence |
 | 395 | mathematics | 12 | `math.seq.recursive-sequences` | Recursive Sequences |
@@ -1201,8 +1200,8 @@ Wave 2 (part 2), moved to READY.
 | 683 | mathematics | 18 | `math.arith.terminating-decimals` | Terminating Decimals |
 | 684 | mathematics | 18 | `math.arith.repeating-decimals` | Repeating Decimals |
 | 685 | mathematics | 18 | `math.arith.percentages` | Percentages |
-| 686 | mathematics | 18 | `math.arith.proportion` | Proportion |
-| 687 | mathematics | 18 | `math.arith.unit-rate` | Unit Rate |
+**Rows 686-687 removed 2026-07-26** — `math.arith.proportion`,
+`math.arith.unit-rate` authored math.arith Wave 3, moved to READY.
 | 688 | mathematics | 18 | `math.arith.rounding` | Rounding |
 | 689 | mathematics | 18 | `math.arith.irrational-roots` | Irrational Square Roots |
 | 690 | mathematics | 18 | `math.arith.scientific-notation` | Scientific Notation |

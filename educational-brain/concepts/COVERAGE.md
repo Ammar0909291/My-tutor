@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 90 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 8 `math.arith.*` entries (`fractions`, `counting`, `fraction-equivalence`, `fraction-multiplication`, `fraction-reciprocal`, `mixed-numbers`, `improper-fractions`, `ratios` — `math.arith` domain IN PROGRESS, 8/58), see Delivery history. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
+| mathematics | 908 | 96 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 14 `math.arith.*` entries (`fractions`, `counting`, `fraction-equivalence`, `fraction-multiplication`, `fraction-reciprocal`, `mixed-numbers`, `improper-fractions`, `ratios`, `counting-sequence`, `subitizing`, `place-value`, `number-line`, `proportion`, `unit-rate` — `math.arith` domain IN PROGRESS, 14/58), see Delivery history. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -2100,3 +2100,80 @@ Full validation this batch: all 6 subject KG validators PASS (0
 failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
 run, `npm run build` succeeded (exact figures recorded in the commit
 this section accompanies).
+
+### Mathematics — math.arith Wave 3 (2026-07-26, autonomous loop iteration 12)
+
+Autonomous loop iteration 12, continuing the same established
+Mathematics Educational Brain Autonomous Completion Program
+(dynamic-pacing `<<autonomous-loop-dynamic>>` sentinel fire). Git
+resync: one concurrent Chemistry AssetIdentity seed-batch commit
+(`CLAUDE.md` only, zero overlap with `educational-brain/`) fast-forward
+merged cleanly at this iteration's start.
+
+**Repair-audit first** (per this program's standing per-iteration
+discipline): re-ran the Quality Gate 3 heading-conformance check across
+all 90 pre-batch mathematics entries. **0 violations found**.
+
+**Wave 3**: authored the 6 concepts whose prerequisites became fully
+satisfied after Wave 2 — verified programmatically against the live
+KG, matching the expected candidate list exactly: `math.arith.
+counting-sequence`, `math.arith.subitizing`, `math.arith.place-value`,
+`math.arith.number-line` (all four unlocked by `math.arith.counting`),
+plus `math.arith.proportion`, `math.arith.unit-rate` (both unlocked by
+`math.arith.ratios`).
+
+- `math.arith.counting-sequence` — reused its Misconception Registry
+  by reference: MC-1 SEQUENCE-HAS-GAPS (FOUNDATIONAL, reclassified
+  Type 5 instruction-induced), MC-2 COUNT-ORDER-CHANGES-TOTAL (Type 2
+  perceptual intuition), MC-3 ZERO-STARTS-SEQUENCE (Type 6 analogy
+  overextension from zero-indexed programming conventions).
+- `math.arith.subitizing` — no Blueprint exists (verified via
+  directory listing); 3 misconceptions authored directly via the
+  birth-taxonomy diagnostic procedure: MC-1 SUBITIZING-RANGE-UNBOUNDED
+  (FOUNDATIONAL, Type 2 perceptual intuition), MC-2
+  SUBITIZING-REQUIRES-CANONICAL-PATTERN (Type 1 overgeneralization),
+  MC-3 SUBITIZING-EQUALS-FAST-COUNTING (Type 3 language
+  contamination — "instant" reinterpreted as "counting really fast").
+- `math.arith.place-value` — reused its Misconception Registry by
+  reference: MC-1 DIGIT-IS-VALUE (FOUNDATIONAL, Type 5
+  instruction-induced), MC-2 EXPANDED-FORM-ADDITIVE-CONFUSION (Type 4
+  notation-induced), MC-3 ZERO-PLACEHOLDER-INVISIBLE (Type 1
+  overgeneralization).
+- `math.arith.number-line` — reused its Misconception Registry by
+  reference: MC-1 NEGATIVE-ORDERING-BY-MAGNITUDE (FOUNDATIONAL, Type 1
+  overgeneralization from whole-number size intuition), MC-2
+  DISTANCE-FROM-ZERO-DETERMINES-ORDER (Type 1, MC-1 generalized), MC-3
+  NUMBER-LINE-HAS-GAPS (Type 2 perceptual intuition). Its Tier 1
+  cross-link to `math.geom.coordinate-plane` (already authored) is
+  used for a genuine cross-link transfer probe, not independence mode.
+- `math.arith.proportion` — reused its Misconception Registry by
+  reference: MC-1 QUANTITY-POSITIONS-MISMATCHED-ACROSS-RATIOS
+  (FOUNDATIONAL, Type 5 instruction-induced), MC-2
+  ANY-INCREASING-RELATIONSHIP-ASSUMED-PROPORTIONAL (Type 1
+  overgeneralization), MC-3
+  CROSS-MULTIPLICATION-APPLIED-WITHOUT-VALID-PROPORTION-SETUP (Type 5
+  instruction-induced). Its `math.func.linear-function` cross-link
+  confirmed genuinely not-yet-authored (same honest-gap pattern as
+  `math.arith.ratios`'s identical cross-link from Wave 2).
+- `math.arith.unit-rate` — no Blueprint exists (verified via directory
+  listing); 3 misconceptions authored directly via the birth-taxonomy
+  diagnostic procedure: MC-1 NUMERATOR-DENOMINATOR-CONFUSION
+  (FOUNDATIONAL, Type 5 instruction-induced), MC-2
+  UNIT-RATE-MEANS-PER-HOUR (Type 1 overgeneralization from the km/h
+  introductory example), MC-3 UNIT-MEANS-MEASUREMENT-UNIT (Type 3
+  language contamination — the everyday dual meaning of "unit").
+
+`math.arith` now 14/58. Wave 4 candidates computed programmatically
+from the live KG (all `requires` now satisfied): `math.arith.
+ones-tens-hundreds`, `math.arith.addition`, `math.arith.decimals`
+(Blueprints exist for all three), plus `math.arith.expanded-form`,
+`math.arith.number-base`, `math.arith.ordering`, `math.arith.
+direct-variation`, `math.arith.inverse-variation` (no Blueprints for
+these five) — 8 concepts, not yet authored. No other domain touched.
+All five tracking files updated in this same commit; re-validated 0
+duplicates, 0 orphans, 0 Quality Gate 3 violations across all 96
+mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
