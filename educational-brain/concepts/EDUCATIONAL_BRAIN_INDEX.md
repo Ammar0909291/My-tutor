@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 83 READY)
+## mathematics (908 concepts, 84 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -119,7 +119,7 @@ its subject KG.
 | arith | `math.arith.borrowing` | Borrowing (Regrouping in Subtraction) | No | No | — | MISSING |
 | arith | `math.arith.carrying` | Carrying (Regrouping) | No | No | — | MISSING |
 | arith | `math.arith.column-addition` | Column Addition | No | No | — | MISSING |
-| arith | `math.arith.counting` | Counting | Yes | No | — | MISSING |
+| arith | `math.arith.counting` | Counting | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.counting.md` | READY |
 | arith | `math.arith.counting-sequence` | Counting Sequence | Yes | No | — | MISSING |
 | arith | `math.arith.cube-numbers` | Perfect Cubes | No | No | — | MISSING |
 | arith | `math.arith.decimal-operations` | Decimal Operations | No | No | — | MISSING |

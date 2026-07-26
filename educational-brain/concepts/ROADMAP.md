@@ -13,16 +13,16 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **510** |
-| Remaining | **1,265** |
-| Completion percentage | **28.73%** |
+| Concepts with an Educational Brain entry | **511** |
+| Remaining | **1,264** |
+| Completion percentage | **28.79%** |
 
 *(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
 with an Educational Brain entry" rows had accumulated from prior sessions
 without being reconciled. Recomputed from this same file's §2 Subject
-progress table as currently stated per subject: 83 mathematics + 238
+progress table as currently stated per subject: 84 mathematics + 238
 physics + 3 english + 186 chemistry + 0 biology + 0 computer_science =
-510. Only the mathematics figure was independently re-verified by this
+511. Only the mathematics figure was independently re-verified by this
 batch by direct file count; the other subjects' figures are taken as
 already-recorded in §2 below, not re-audited by this batch, per this
 program's "mathematics only" scope this turn.)*
@@ -33,7 +33,7 @@ program's "mathematics only" scope this turn.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 83 | 9.14% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 84 | 9.25% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
@@ -887,22 +887,24 @@ procedure.
 §3. Items 1-2 below are historical record of how it was reached; the
 active default has moved to item 1a.**
 
-1a. **New default (2026-07-26, active — resumes next batch unless given
-    an equally explicit subject-specific override): `math.arith`
-    Wave 1**. Computed programmatically: `math.arith` has 58 total
-    concepts, 1 already authored (`math.arith.fractions`, the original
-    Delivery-5 seed entry). Its sole zero-`math.arith`-prerequisite
-    entry node is `math.arith.counting`, requiring only `math.found.
-    natural-numbers` (already authored) — the domain's own root per
-    Domain Certification Mode's entry-point-first discipline. `math.
-    arith` was chosen over the other 22 unauthored mathematics domains
-    because it is the only one with an existing authored entry
-    (`fractions`) and its own KG `requires` chain sits immediately
-    adjacent to the just-completed `math.found` domain, minimizing
-    cross-domain context-switching cost for the next several waves.
-    Not yet started this batch — Wave 16 (`complex-numbers`) was this
-    batch's own one bounded unit of work, per this program's standing
-    "one small bounded batch per turn" discipline.
+1a. **Active default (2026-07-26): `math.arith` domain, Wave 1 done,
+    Wave 2 next**. `math.arith` has 58 total concepts. Wave 1 (this
+    batch, 2026-07-26, autonomous loop iteration 9): `math.arith.
+    counting` — the domain's zero-prerequisite entry node, requiring
+    only `math.found.natural-numbers` (already authored). `math.arith`
+    now 2/58 (`fractions` + `counting`). 6 further Wave-1-eligible
+    concepts were identified and Blueprint-verified this batch but
+    deliberately deferred to Wave 2 (kept this batch to one bounded
+    unit of work, per this program's standing "one small bounded batch
+    per turn" discipline — the fraction-family blueprints are
+    substantially longer than typical `math.found` blueprints): `math.
+    arith.fraction-equivalence`, `math.arith.fraction-multiplication`,
+    `math.arith.fraction-reciprocal`, `math.arith.mixed-numbers`,
+    `math.arith.improper-fractions`, `math.arith.ratios` — all six
+    require only `math.arith.fractions` (already authored) and all six
+    already have PACKAGE_READY Blueprints, verified via `ls
+    docs/curriculum/blueprints/`. No re-verification needed next
+    iteration — proceed directly to authoring.
 1. **(Historical, satisfied) `math.found` Wave 7**: the set of
    `math.found` nodes whose prerequisites were all READY after Wave 6.
 2. **(Historical, satisfied) `math.found` Waves 8-16 (52 remaining

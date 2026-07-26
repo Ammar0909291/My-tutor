@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1265** (= 1,775 KG concepts − 510 already `READY`, per
+Total queued: **1264** (= 1,775 KG concepts − 511 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -853,7 +853,9 @@ Wave 11, moved to READY.
 **Rows 342-345 removed 2026-07-26** — `math.found.proof-by-induction`,
 `math.found.well-ordering-principle`, `math.found.countable-set`,
 `math.found.integers` authored Wave 12, moved to READY.
-| 346 | mathematics | 11 | `math.arith.counting` | Counting |
+**Row 346 removed 2026-07-26** — `math.arith.counting` authored
+math.arith Wave 1 (first math.arith domain batch, following math.found
+Domain Certification), moved to READY.
 | 347 | mathematics | 11 | `math.func.inverse-functions` | Inverse Functions |
 | 348 | mathematics | 11 | `math.seq.sequence` | Sequence |
 | 349 | mathematics | 11 | `math.prob.bayesian-inference` | Bayesian Inference |
