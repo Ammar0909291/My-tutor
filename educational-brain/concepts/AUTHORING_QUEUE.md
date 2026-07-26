@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1193** (= 1,775 KG concepts − 582 already `READY`, per
+Total queued: **1190** (= 1,775 KG concepts − 585 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -1235,8 +1235,9 @@ authored math.arith Wave 7 part 2, moved to READY.
 to READY.
 **Row 693 removed 2026-07-26** — `math.nt.prime-factorization`
 authored math.nt Wave 2, moved to READY.
-| 694 | mathematics | 18 | `math.nt.congruence` | Congruence |
-| 695 | mathematics | 18 | `math.nt.fermats-little-theorem` | Fermat's Little Theorem |
+**Rows 694-695 removed 2026-07-26** — `math.nt.congruence`,
+`math.nt.fermats-little-theorem` authored math.nt Wave 5 part 1, moved
+to READY.
 | 696 | mathematics | 18 | `math.nt.prime-distribution` | Distribution of Primes |
 | 697 | mathematics | 18 | `math.alg.term` | Term |
 | 698 | mathematics | 18 | `math.alg.equation` | Equation |
@@ -1534,7 +1535,8 @@ authored math.nt Wave 4, moved to READY.
 | 975 | computer_science | 21 | `cs.struct.minimum-spanning-tree` | Minimum Spanning Trees |
 | 976 | computer_science | 21 | `cs.ds.neural-networks-intro` | Introduction to Neural Networks |
 | 977 | mathematics | 22 | `math.nt.bezout-identity` | Bézout's Identity |
-| 978 | mathematics | 22 | `math.nt.modular-inverse` | Modular Inverse |
+**Row 978 removed 2026-07-26** — `math.nt.modular-inverse` authored
+math.nt Wave 5 part 1, moved to READY.
 | 979 | mathematics | 22 | `math.alg.linear-equation-1var` | Linear Equation in One Variable |
 | 980 | mathematics | 22 | `math.alg.polynomial-division` | Polynomial Division |
 | 981 | mathematics | 22 | `math.alg.change-of-base` | Change of Base Formula |

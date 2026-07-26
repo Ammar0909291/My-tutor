@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 155 READY)
+## mathematics (908 concepts, 158 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -676,7 +676,7 @@ its subject KG.
 | nt | `math.nt.bezout-identity` | Bézout's Identity | No | No | — | MISSING |
 | nt | `math.nt.chinese-remainder-theorem` | Chinese Remainder Theorem | Yes | No | — | MISSING |
 | nt | `math.nt.composite-number` | Composite Number | No | Yes | `educational-brain/concepts/mathematics/math.nt.composite-number.md` | READY |
-| nt | `math.nt.congruence` | Congruence | Yes | No | — | MISSING |
+| nt | `math.nt.congruence` | Congruence | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.congruence.md` | READY |
 | nt | `math.nt.continued-fractions` | Continued Fractions | Yes | No | — | MISSING |
 | nt | `math.nt.divisibility` | Divisibility | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.divisibility.md` | READY |
 | nt | `math.nt.divisibility-rules` | Divisibility Rules | No | Yes | `educational-brain/concepts/mathematics/math.nt.divisibility-rules.md` | READY |
@@ -685,7 +685,7 @@ its subject KG.
 | nt | `math.nt.eulers-theorem` | Euler's Theorem | Yes | No | — | MISSING |
 | nt | `math.nt.eulers-totient` | Euler's Totient Function | No | Yes | `educational-brain/concepts/mathematics/math.nt.eulers-totient.md` | READY |
 | nt | `math.nt.extended-euclidean-algorithm` | Extended Euclidean Algorithm | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.extended-euclidean-algorithm.md` | READY |
-| nt | `math.nt.fermats-little-theorem` | Fermat's Little Theorem | Yes | No | — | MISSING |
+| nt | `math.nt.fermats-little-theorem` | Fermat's Little Theorem | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.fermats-little-theorem.md` | READY |
 | nt | `math.nt.fundamental-theorem-arithmetic` | Fundamental Theorem of Arithmetic | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.fundamental-theorem-arithmetic.md` | READY |
 | nt | `math.nt.gcd` | Greatest Common Divisor | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.gcd.md` | READY |
 | nt | `math.nt.general-diophantine` | Diophantine Equations | No | No | — | MISSING |
@@ -693,7 +693,7 @@ its subject KG.
 | nt | `math.nt.lcm` | Least Common Multiple | No | Yes | `educational-brain/concepts/mathematics/math.nt.lcm.md` | READY |
 | nt | `math.nt.linear-diophantine` | Linear Diophantine Equations | No | No | — | MISSING |
 | nt | `math.nt.modular-arithmetic` | Modular Arithmetic | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.modular-arithmetic.md` | READY |
-| nt | `math.nt.modular-inverse` | Modular Inverse | Yes | No | — | MISSING |
+| nt | `math.nt.modular-inverse` | Modular Inverse | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.modular-inverse.md` | READY |
 | nt | `math.nt.number-fields` | Number Fields | No | No | — | MISSING |
 | nt | `math.nt.pells-equation` | Pell's Equation | No | No | — | MISSING |
 | nt | `math.nt.primality-testing` | Primality Testing | Yes | No | — | MISSING |
