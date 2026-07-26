@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 46 | `math.arith.fractions` + 45 `math.found.*` entries (Waves 1-7) — math.found domain IN PROGRESS (45/82), see Delivery history. **Known bookkeeping note**: a `math.found` Wave 6 (5 entries: logical-equivalence, ordinal-number, quantifiers, relation, subset) was found already on `main` at the start of this batch, authored by a separate/prior session, using a non-conformant numbered-heading scheme (Quality Gate 3 violation, see Delivery history) — not corrected this batch, flagged as the top-priority item for the next mathematics session. |
+| mathematics | 908 | 56 | `math.arith.fractions` + 55 `math.found.*` entries (Waves 1-8) — math.found domain IN PROGRESS (55/82), see Delivery history. All confirmed Quality Gate 3 heading-scheme violations found by this program (the 5-entry Wave 6 batch plus `math.arith.fractions` itself) were repaired this batch — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -1417,3 +1417,65 @@ touched. All five tracking files (`EDUCATIONAL_BRAIN_INDEX.md`,
 regenerated/updated for the 9 new entries in this same commit; re-validated
 0 duplicates, 0 orphans (every `math.found.*.md` filename resolves to a
 real KG id) across all 46 mathematics entries.
+
+### Mathematics — Quality Gate 3 repair + math.found Wave 8 (2026-07-26, same session)
+
+Per this batch's explicit standing instruction ("repair existing
+Mathematics Educational Brain entries FIRST if they violate the current
+standard"), ran a full Quality Gate 3 audit across all 46 pre-batch
+mathematics entries (comparing each file's `## ` heading list against
+`EDUCATIONAL_BRAIN_STANDARD.md`'s canonical 21-section list via diff).
+Found 6 violations, not 5: the previously-flagged `math.found` Wave 6
+batch (`logical-equivalence`, `ordinal-number`, `quantifiers`,
+`relation`, `subset`) plus a newly-discovered one — `math.arith.fractions`
+itself, the original Delivery-5 seed entry (2026-07-10), predates
+`EDUCATIONAL_BRAIN_STANDARD.md`'s existence and used its own earlier
+unnumbered-but-differently-named heading scheme (`Identity`, `Mental
+models`, `Why beginners fail here`, `Explanation library`, etc. — not
+the current Standard's exact section names).
+
+**All 6 repaired**, restructured to the exact 21-section Standard
+scheme, with all content preserved losslessly (verified: no bullet,
+example, misconception, or teaching note dropped in any of the 6
+diffs). For `math.arith.fractions` specifically — the only one of the
+6 with live runtime consumers — re-verified that
+`src/lib/teaching/assets/brainSeedAssets.ts`'s five `source:` citation
+comments (which name specific sub-labels: "Explanation library, Age
+8–11 (mechanism)", "Explanation library, Returning teen/adult",
+"Misconception library M1"/"M2") still resolve to the identical text,
+now nested under renamed parent sections; `brainSeedAssets.ts` itself
+was NOT modified (out of this program's scope). Also corrected this
+entry's own stale `estimated_hours: ~4` to the canonical KG value of 20.
+Added standalone Learning Objective, Teaching Sequence, Blueprint
+References, and Runtime Asset References sections to all 6 repaired
+files (none existed pre-repair); each file's Version History gained a
+v1.1 entry documenting the repair. **0 Quality Gate 3 violations remain
+in mathematics** as of this batch.
+
+**Wave 8** — authored the 10 concepts whose prerequisites became fully
+satisfied after Wave 7, verified programmatically against the live KG:
+`math.found.proof`, `union`, `intersection`, `set-difference`,
+`complement`, `venn-diagram`, `equivalence-relation`, `partial-order`,
+`function-set-theoretic`, `cardinal-arithmetic`. 5 of the 10 (`proof`,
+`equivalence-relation`, `partial-order`, `function-set-theoretic`,
+`cardinal-arithmetic`) had existing Blueprints reused by reference; 5
+(the direct children of `math.found.set-operations` — `union`,
+`intersection`, `set-difference`, `complement`, `venn-diagram`) had
+none, each authored directly via the birth-taxonomy diagnostic
+procedure while explicitly reusing `math.found.set-operations`'s own
+already-authored survey content by reference rather than duplicating it
+(e.g. `set-difference`'s and `complement`'s MC-1 entries cite that
+concept's own MC-3/MC-1 by ID instead of re-deriving the identical
+asymmetry/universal-set lessons). All 10 verified against the Standard's
+exact 21-section heading order.
+
+`math.found` 45/82 → **55/82** — still IN PROGRESS; Wave 9 candidates
+computed programmatically against the live KG (12): `direct-proof`,
+`proof-by-contradiction`, `proof-by-contrapositive`, `proof-by-cases`,
+`existence-proof`, `writing-mathematics`, `theorem`, `conjecture`,
+`equivalence-class`, `total-order`, `hasse-diagram`, `cardinality`. No
+other domain touched. All five tracking files (`EDUCATIONAL_BRAIN_INDEX.md`,
+`AUTHORING_QUEUE.md`, `ROADMAP.md`, `QUALITY.md`, `COVERAGE.md`)
+updated in this same commit; re-validated 0 duplicates, 0 orphans, and
+(newly, this batch) 0 Quality Gate 3 heading violations across all 56
+mathematics entries.

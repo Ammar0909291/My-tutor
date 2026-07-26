@@ -21,11 +21,11 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1302** (= 1,775 KG concepts − 473 already `READY`, per
+Total queued: **1292** (= 1,775 KG concepts − 483 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
-table below are not fully renumbered to match, see the row-removal note
-at math.found Wave 7's position below).
+table below are not fully renumbered to match, see the row-removal notes
+at math.found Waves 7-8's positions below).
 
 **Domain Certification Mode override (binding until `math.found` reaches
 82/82, EXPLICITLY SUSPENDED for physics-specific batches by direct user
@@ -679,8 +679,9 @@ below are NOT renumbered (documentation-only file, no automation reads
 row numbers as stable IDs — the concept ID column is the actual key) —
 a future full regeneration will re-derive clean sequential numbering
 from source, per this file's own standing generation script.
-| 171 | mathematics | 7 | `math.found.function-set-theoretic` | Function (Set-Theoretic) |
-| 172 | mathematics | 7 | `math.found.cardinal-arithmetic` | Cardinal Arithmetic |
+**Rows 171-172 removed 2026-07-26** — `math.found.function-set-theoretic`,
+`math.found.cardinal-arithmetic` authored this batch (Wave 8), moved to
+READY. Row numbers not renumbered, per this file's own standing note.
 | 173 | mathematics | 7 | `math.geom.triangle-angle-sum` | Triangle Angle Sum Theorem |
 | 174 | mathematics | 7 | `math.geom.triangle-centers` | Triangle Centers |
 | 175 | mathematics | 7 | `math.geom.quadrilateral` | Quadrilateral |
@@ -716,14 +717,12 @@ from source, per this file's own standing generation script.
 | 205 | computer_science | 7 | `cs.sec.network-web-security` | Network and Web Security |
 | 206 | computer_science | 7 | `cs.web.client-server-model` | The Client-Server Model |
 | 207 | computer_science | 7 | `cs.theory.turing-machines` | Turing Machines |
-| 208 | mathematics | 8 | `math.found.proof` | Mathematical Proof |
-| 209 | mathematics | 8 | `math.found.union` | Union |
-| 210 | mathematics | 8 | `math.found.intersection` | Intersection |
-| 211 | mathematics | 8 | `math.found.set-difference` | Set Difference |
-| 212 | mathematics | 8 | `math.found.complement` | Set Complement |
-| 213 | mathematics | 8 | `math.found.venn-diagram` | Venn Diagram |
-| 214 | mathematics | 8 | `math.found.equivalence-relation` | Equivalence Relation |
-| 215 | mathematics | 8 | `math.found.partial-order` | Partial Order |
+**Rows 208-215 removed 2026-07-26** — `math.found.proof`,
+`math.found.union`, `math.found.intersection`, `math.found.set-difference`,
+`math.found.complement`, `math.found.venn-diagram`,
+`math.found.equivalence-relation`, `math.found.partial-order` all
+authored this batch (Wave 8), moved to READY. Row numbers not
+renumbered.
 | 216 | mathematics | 8 | `math.found.cardinality` | Cardinality |
 | 217 | mathematics | 8 | `math.geom.polygon-angle-sum` | Polygon Angle Sum |
 | 218 | mathematics | 8 | `math.geom.parallelogram` | Parallelogram |
