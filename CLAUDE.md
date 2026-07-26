@@ -1493,6 +1493,12 @@
   `exponent-rules`, `square-numbers`; all had Blueprints, reused by
   reference). `math.arith` 40/58 → 46/58. Wave 7 part 2 (6 no-Blueprint
   concepts) deferred. Full detail: `COVERAGE.md`.
+  **Batch 30 — math.arith Wave 7 part 2** (2026-07-26, autonomous loop
+  iteration 20): 6 concepts authored (`long-multiplication`,
+  `mental-multiplication`, `divisor-dividend`, `percentage-change`,
+  `cube-numbers`, `scientific-notation`; none had Blueprints,
+  misconceptions authored via birth-taxonomy diagnostic). `math.arith`
+  46/58 → 52/58, only 6 concepts remain. Full detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
