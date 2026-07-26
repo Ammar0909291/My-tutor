@@ -1426,6 +1426,12 @@
   authored (`real-numbers`). `math.found` 80/82 → 81/82, only
   `complex-numbers` remains — the final wave before Domain Certification
   eligibility. Full detail: `COVERAGE.md`.
+  **Batch 18 — Wave 16, FINAL WAVE** (2026-07-26, autonomous loop iteration
+  8): 1 concept authored (`complex-numbers`). **`math.found` 81/82 → 82/82 —
+  DOMAIN CERTIFIED** (first mathematics domain, third domain overall after
+  chemistry/physics). Next mathematics domain: `math.arith` (58 concepts, 1
+  already authored, entry node `math.arith.counting` now unlocked). Full
+  detail: `COVERAGE.md`, certification record in `VALIDATION_REPORT.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
