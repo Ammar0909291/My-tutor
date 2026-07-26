@@ -21,11 +21,11 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1292** (= 1,775 KG concepts − 483 already `READY`, per
+Total queued: **1284** (= 1,775 KG concepts − 491 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
-at math.found Waves 7-8's positions below).
+at math.found Waves 7-9's positions below).
 
 **Domain Certification Mode override (binding until `math.found` reaches
 82/82, EXPLICITLY SUSPENDED for physics-specific batches by direct user
@@ -763,14 +763,12 @@ renumbered.
 | 253 | computer_science | 8 | `cs.control.conditionals` | Conditional Statements |
 | 254 | computer_science | 8 | `cs.sec.data-protection-privacy` | Data Protection and Privacy |
 | 255 | computer_science | 8 | `cs.web.html-css-basics` | HTML and CSS Basics |
-| 256 | mathematics | 9 | `math.found.direct-proof` | Direct Proof |
-| 257 | mathematics | 9 | `math.found.proof-by-contradiction` | Proof by Contradiction |
-| 258 | mathematics | 9 | `math.found.proof-by-contrapositive` | Proof by Contrapositive |
-| 259 | mathematics | 9 | `math.found.proof-by-cases` | Proof by Cases |
-| 260 | mathematics | 9 | `math.found.existence-proof` | Existence Proof |
-| 261 | mathematics | 9 | `math.found.writing-mathematics` | Writing Mathematics |
-| 262 | mathematics | 9 | `math.found.theorem` | Theorem |
-| 263 | mathematics | 9 | `math.found.conjecture` | Conjecture |
+**Rows 256-263 removed 2026-07-26** — `math.found.direct-proof`,
+`math.found.proof-by-contradiction`, `math.found.proof-by-contrapositive`,
+`math.found.proof-by-cases`, `math.found.existence-proof`,
+`math.found.writing-mathematics`, `math.found.theorem`,
+`math.found.conjecture` all authored this batch (Wave 9), moved to
+READY. Row numbers not renumbered.
 | 264 | mathematics | 9 | `math.found.equivalence-class` | Equivalence Class |
 | 265 | mathematics | 9 | `math.found.total-order` | Total Order |
 | 266 | mathematics | 9 | `math.found.hasse-diagram` | Hasse Diagram |

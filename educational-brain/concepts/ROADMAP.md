@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **483** |
-| Remaining | **1,292** |
-| Completion percentage | **27.21%** |
+| Concepts with an Educational Brain entry | **491** |
+| Remaining | **1,284** |
+| Completion percentage | **27.66%** |
 
 *(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
 with an Educational Brain entry" rows had accumulated from prior sessions
@@ -33,7 +33,7 @@ program's "mathematics only" scope this turn.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 56 | 6.17% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 64 | 7.05% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
@@ -161,8 +161,8 @@ Brain entries.
 |---|---|
 | Domain | `math.found` (mathematics / Foundations) |
 | Total concepts in domain | 82 |
-| Authored this program | 55 |
-| Remaining | 27 |
+| Authored this program | 63 |
+| Remaining | 19 |
 | Status | **IN PROGRESS** — not eligible for Domain Certification yet |
 
 Wave 1 (5, level 0-1): `mathematical-thinking` (root), `abstraction`,
@@ -188,18 +188,21 @@ see `COVERAGE.md` Delivery history):
 `transitive-relation`, `rules-of-inference`. Wave 8 (10, level 8, this
 batch, 2026-07-26): `proof`, `union`, `intersection`, `set-difference`,
 `complement`, `venn-diagram`, `equivalence-relation`, `partial-order`,
-`function-set-theoretic`, `cardinal-arithmetic`. Also repaired this
+`function-set-theoretic`, `cardinal-arithmetic`. Also repaired same
 batch: `math.arith.fractions` (the original Delivery-5 seed entry,
 predating the Standard's existence — same Quality Gate 3 violation
 pattern as Wave 6, restructured losslessly, `brainSeedAssets.ts`
-citations re-verified intact). Wave 9 candidates computed
-programmatically from the live KG (12): `direct-proof`,
-`proof-by-contradiction`, `proof-by-contrapositive`, `proof-by-cases`,
-`existence-proof`, `writing-mathematics`, `theorem`, `conjecture`,
-`equivalence-class`, `total-order`, `hasse-diagram`, `cardinality`. No
-other domain will be started until all 82 `math.found` concepts are
-`READY` and Domain Certification passes — **except by explicit,
-subject-specific user instruction, as happened in §3b/§3c below**.
+citations re-verified intact). Wave 9 (8, level 9, this batch,
+2026-07-26, autonomous loop — proof-family sub-domain, none had
+Blueprints): `direct-proof`, `proof-by-contradiction`,
+`proof-by-contrapositive`, `proof-by-cases`, `existence-proof`,
+`writing-mathematics`, `theorem`, `conjecture`. Wave 10 candidates
+computed programmatically from the live KG (7): `uniqueness-proof`,
+`lemma`, `corollary`, `equivalence-class`, `total-order`,
+`hasse-diagram`, `cardinality`. No other domain will be started until
+all 82 `math.found` concepts are `READY` and Domain Certification
+passes — **except by explicit, subject-specific user instruction, as
+happened in §3b/§3c below**.
 
 ---
 

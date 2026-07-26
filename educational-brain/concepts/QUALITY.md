@@ -53,31 +53,27 @@ rather than hand-edit when entries change.
   migration debt (76 = 71 + 5), not introduced this batch — rewriting
   another session's freshly authored files remains out of scope.
 
-## Aggregate summary (433 entries)
+## Aggregate summary (441 entries)
 
-Adds mathematics `math.found` Wave 8 (10 concepts, this batch,
-2026-07-26) on top of the prior 423-entry state (Wave 7 completion).
-This batch also REPAIRED 6 mathematics entries in place (the 5-entry
-`math.found` Wave 6 plus `math.arith.fractions`) — both were confirmed
-Quality Gate 3 violations (non-Standard heading schemes), now fully
-restructured to conform; their Tutor Actions/Cross-links/Version
-columns flip from ✗ to ✓ below, with no change to the total entry count
-(a repair, not a new entry). All numbers below were recomputed fresh by
-scanning every live file in `educational-brain/concepts/{subject}/` —
-none hand-estimated.
+Adds mathematics `math.found` Wave 9 (8 concepts, this batch,
+2026-07-26, autonomous loop iteration) on top of the prior 433-entry
+state (Wave 8 completion). All 8 Wave 9 entries are proof-family
+concepts with no Blueprint (Blueprint column ✗ for all 8). All numbers
+below were recomputed fresh by scanning every live file in
+`educational-brain/concepts/{subject}/` — none hand-estimated.
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 283 / 433 | see methodology note above — 7 `math.found` (`proper-subset`, `set-equality`, `union`, `intersection`, `set-difference`, `complement`, `venn-diagram` — none have a Blueprint) + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
-| Educational Brain | 433 / 433 | trivially true (this is the entry list) |
-| Mental Model | 433 / 433 | |
-| Misconceptions | 433 / 433 | |
-| Analogies | 433 / 433 | |
-| Recovery Strategy | 433 / 433 | |
-| Assessment Signals | 433 / 433 | |
-| Tutor Actions | 363 / 433 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
-| Cross-links | 363 / 433 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
-| Version History | 363 / 433 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
+| Blueprint | 283 / 441 | see methodology note above — 15 `math.found` (`proper-subset`, `set-equality`, `union`, `intersection`, `set-difference`, `complement`, `venn-diagram`, `direct-proof`, `proof-by-contradiction`, `proof-by-contrapositive`, `proof-by-cases`, `existence-proof`, `writing-mathematics`, `theorem`, `conjecture` — none have a Blueprint) + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
+| Educational Brain | 441 / 441 | trivially true (this is the entry list) |
+| Mental Model | 441 / 441 | |
+| Misconceptions | 441 / 441 | |
+| Analogies | 441 / 441 | |
+| Recovery Strategy | 441 / 441 | |
+| Assessment Signals | 441 / 441 | |
+| Tutor Actions | 371 / 441 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
+| Cross-links | 371 / 441 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
+| Version History | 371 / 441 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
 
 ## Per-concept ledger
 
@@ -328,10 +324,13 @@ none hand-estimated.
 | `math.found.cardinal-arithmetic` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.cartesian-product` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.complement` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.conjecture` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.deductive-reasoning` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.direct-proof` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.definition` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.empty-set` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.equivalence-relation` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.existence-proof` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.function-set-theoretic` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.generalization` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.inductive-reasoning` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -352,6 +351,9 @@ none hand-estimated.
 | `math.found.power-set` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.predicate-logic` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.predicate` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.proof-by-cases` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.proof-by-contradiction` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.proof-by-contrapositive` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.problem-solving-strategies` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.problem-solving` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.proof` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -372,11 +374,13 @@ none hand-estimated.
 | `math.found.set` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.subset` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.symmetric-relation` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.theorem` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.transitive-relation` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.truth-table` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.union` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.variable` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.venn-diagram` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.writing-mathematics` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.anal.chromatography` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.anal.gravimetric` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.anal.spectroscopy` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

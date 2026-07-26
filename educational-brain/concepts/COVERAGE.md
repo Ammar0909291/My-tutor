@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 56 | `math.arith.fractions` + 55 `math.found.*` entries (Waves 1-8) — math.found domain IN PROGRESS (55/82), see Delivery history. All confirmed Quality Gate 3 heading-scheme violations found by this program (the 5-entry Wave 6 batch plus `math.arith.fractions` itself) were repaired this batch — 0 known violations remain in mathematics. |
+| mathematics | 908 | 64 | `math.arith.fractions` + 63 `math.found.*` entries (Waves 1-9) — math.found domain IN PROGRESS (63/82), see Delivery history. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -1479,3 +1479,40 @@ other domain touched. All five tracking files (`EDUCATIONAL_BRAIN_INDEX.md`,
 updated in this same commit; re-validated 0 duplicates, 0 orphans, and
 (newly, this batch) 0 Quality Gate 3 heading violations across all 56
 mathematics entries.
+
+### Mathematics — math.found Wave 9 (2026-07-26, autonomous loop iteration)
+
+Triggered by the user invoking a dynamic `/loop` continuation of the
+Mathematics Educational Brain Autonomous Completion Program. Re-synced
+`main` (no new commits since the prior batch's push) and re-ran the full
+Quality Gate 3 audit across all 56 pre-batch mathematics entries — 0
+violations found, confirming the prior batch's repair held.
+
+**Wave 9** — authored the 8 concepts whose prerequisites became fully
+satisfied after Wave 8, all forming one coherent sub-domain (the proof-
+family children of `math.found.proof`, plus its two freestanding
+siblings `theorem` and `conjecture`), verified programmatically against
+the live KG: `direct-proof`, `proof-by-contradiction`,
+`proof-by-contrapositive`, `proof-by-cases`, `existence-proof`,
+`writing-mathematics`, `theorem`, `conjecture`. None of the 8 had an
+existing Blueprint — all authored via the birth-taxonomy diagnostic
+procedure, each explicitly reusing `math.found.proof`'s own already-
+authored worked examples (the n-even/n²-even direct proof, the
+√2-irrationality contradiction proof, the n²−n+41 proof-by-example
+counterexample) by reference rather than restating them — e.g.
+`direct-proof`'s own Demonstrations section narrates `math.found.proof`'s
+existing example with structural labels added, not a new example;
+`conjecture`'s MC-1 explicitly extends `math.found.proof`'s own MC-1
+(proof-by-example) to the terminology of what counts as a theorem.
+`proof-by-contrapositive`'s MC-1 (confusing contrapositive with converse/
+inverse) was identified as the single highest-stakes misconception in
+this wave — arguably the most common named error in introductory proof-
+writing generally — and given Foundational weight accordingly.
+
+`math.found` 55/82 → **63/82** — still IN PROGRESS; Wave 10 candidates
+computed programmatically against the live KG (7): `uniqueness-proof`,
+`lemma`, `corollary`, `equivalence-class`, `total-order`,
+`hasse-diagram`, `cardinality`. No other domain touched. All five
+tracking files updated in this same commit; re-validated 0 duplicates,
+0 orphans, 0 Quality Gate 3 violations across all 64 mathematics
+entries.

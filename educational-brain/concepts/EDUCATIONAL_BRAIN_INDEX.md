@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 56 READY)
+## mathematics (908 concepts, 64 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -408,16 +408,16 @@ its subject KG.
 | found | `math.found.cartesian-product` | Cartesian Product | Yes | Yes | `educational-brain/concepts/mathematics/math.found.cartesian-product.md` | READY |
 | found | `math.found.complement` | Set Complement | No | Yes | `educational-brain/concepts/mathematics/math.found.complement.md` | READY |
 | found | `math.found.complex-numbers` | Complex Numbers | Yes | No | — | MISSING |
-| found | `math.found.conjecture` | Conjecture | No | No | — | MISSING |
+| found | `math.found.conjecture` | Conjecture | No | Yes | `educational-brain/concepts/mathematics/math.found.conjecture.md` | READY |
 | found | `math.found.corollary` | Corollary | No | No | — | MISSING |
 | found | `math.found.countable-set` | Countable Set | No | No | — | MISSING |
 | found | `math.found.deductive-reasoning` | Deductive Reasoning | Yes | Yes | `educational-brain/concepts/mathematics/math.found.deductive-reasoning.md` | READY |
 | found | `math.found.definition` | Mathematical Definition | No | Yes | `educational-brain/concepts/mathematics/math.found.definition.md` | READY |
-| found | `math.found.direct-proof` | Direct Proof | No | No | — | MISSING |
+| found | `math.found.direct-proof` | Direct Proof | No | Yes | `educational-brain/concepts/mathematics/math.found.direct-proof.md` | READY |
 | found | `math.found.empty-set` | Empty Set | No | Yes | `educational-brain/concepts/mathematics/math.found.empty-set.md` | READY |
 | found | `math.found.equivalence-class` | Equivalence Class | Yes | No | — | MISSING |
 | found | `math.found.equivalence-relation` | Equivalence Relation | Yes | Yes | `educational-brain/concepts/mathematics/math.found.equivalence-relation.md` | READY |
-| found | `math.found.existence-proof` | Existence Proof | No | No | — | MISSING |
+| found | `math.found.existence-proof` | Existence Proof | No | Yes | `educational-brain/concepts/mathematics/math.found.existence-proof.md` | READY |
 | found | `math.found.finite-set` | Finite Set | No | No | — | MISSING |
 | found | `math.found.function-set-theoretic` | Function (Set-Theoretic) | Yes | Yes | `educational-brain/concepts/mathematics/math.found.function-set-theoretic.md` | READY |
 | found | `math.found.generalization` | Generalization | Yes | Yes | `educational-brain/concepts/mathematics/math.found.generalization.md` | READY |
@@ -447,9 +447,9 @@ its subject KG.
 | found | `math.found.problem-solving` | Mathematical Problem Solving | Yes | Yes | `educational-brain/concepts/mathematics/math.found.problem-solving.md` | READY |
 | found | `math.found.problem-solving-strategies` | Problem-Solving Strategies | No | Yes | `educational-brain/concepts/mathematics/math.found.problem-solving-strategies.md` | READY |
 | found | `math.found.proof` | Mathematical Proof | Yes | Yes | `educational-brain/concepts/mathematics/math.found.proof.md` | READY |
-| found | `math.found.proof-by-cases` | Proof by Cases | No | No | — | MISSING |
-| found | `math.found.proof-by-contradiction` | Proof by Contradiction | No | No | — | MISSING |
-| found | `math.found.proof-by-contrapositive` | Proof by Contrapositive | No | No | — | MISSING |
+| found | `math.found.proof-by-cases` | Proof by Cases | No | Yes | `educational-brain/concepts/mathematics/math.found.proof-by-cases.md` | READY |
+| found | `math.found.proof-by-contradiction` | Proof by Contradiction | No | Yes | `educational-brain/concepts/mathematics/math.found.proof-by-contradiction.md` | READY |
+| found | `math.found.proof-by-contrapositive` | Proof by Contrapositive | No | Yes | `educational-brain/concepts/mathematics/math.found.proof-by-contrapositive.md` | READY |
 | found | `math.found.proof-by-induction` | Mathematical Induction | Yes | No | — | MISSING |
 | found | `math.found.proper-subset` | Proper Subset | No | Yes | `educational-brain/concepts/mathematics/math.found.proper-subset.md` | READY |
 | found | `math.found.proposition` | Proposition | Yes | Yes | `educational-brain/concepts/mathematics/math.found.proposition.md` | READY |
@@ -471,7 +471,7 @@ its subject KG.
 | found | `math.found.strong-induction` | Strong Induction | No | No | — | MISSING |
 | found | `math.found.subset` | Subset | Yes | Yes | math.found.subset.md | READY |
 | found | `math.found.symmetric-relation` | Symmetric Relation | Yes | Yes | `educational-brain/concepts/mathematics/math.found.symmetric-relation.md` | READY |
-| found | `math.found.theorem` | Theorem | No | No | — | MISSING |
+| found | `math.found.theorem` | Theorem | No | Yes | `educational-brain/concepts/mathematics/math.found.theorem.md` | READY |
 | found | `math.found.total-order` | Total Order | Yes | No | — | MISSING |
 | found | `math.found.transitive-relation` | Transitive Relation | Yes | Yes | `educational-brain/concepts/mathematics/math.found.transitive-relation.md` | READY |
 | found | `math.found.truth-table` | Truth Table | Yes | Yes | `educational-brain/concepts/mathematics/math.found.truth-table.md` | READY |
@@ -481,7 +481,7 @@ its subject KG.
 | found | `math.found.variable` | Variable | Yes | Yes | `educational-brain/concepts/mathematics/math.found.variable.md` | READY |
 | found | `math.found.venn-diagram` | Venn Diagram | No | Yes | `educational-brain/concepts/mathematics/math.found.venn-diagram.md` | READY |
 | found | `math.found.well-ordering-principle` | Well-Ordering Principle | Yes | No | — | MISSING |
-| found | `math.found.writing-mathematics` | Writing Mathematics | No | No | — | MISSING |
+| found | `math.found.writing-mathematics` | Writing Mathematics | No | Yes | `educational-brain/concepts/mathematics/math.found.writing-mathematics.md` | READY |
 | func | `math.func.bijection` | Bijective Function | Yes | No | — | MISSING |
 | func | `math.func.composition` | Composition of Functions | Yes | No | — | MISSING |
 | func | `math.func.domain-range` | Domain and Range | No | No | — | MISSING |
