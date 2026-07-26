@@ -12,7 +12,8 @@
     "src/app/api/sessions/end/route.ts":                  { "maxDuration": 30 },
     "src/app/api/sessions/[sessionId]/messages/route.ts": { "maxDuration": 60 },
     "src/app/api/final-assessment/generate/route.ts":     { "maxDuration": 30 },
-    "src/app/api/cron/evidence-report/route.ts":          { "maxDuration": 30 }
+    "src/app/api/cron/evidence-report/route.ts":          { "maxDuration": 30 },
+    "src/app/api/admin/seed-chemistry-assets/route.ts":   { "maxDuration": 60 }
   },
   "crons": [
     {
