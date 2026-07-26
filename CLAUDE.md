@@ -1558,6 +1558,12 @@
   (`residue-classes` no-Blueprint,
   `chinese-remainder-theorem`/`eulers-theorem`/`primality-testing` all
   Blueprint-grounded) computed. Full detail: `COVERAGE.md`.
+  **Batch 40 — math.nt Wave 6 part 1** (2026-07-26, autonomous loop
+  iteration 30): 3 concepts authored (`chinese-remainder-theorem`,
+  `eulers-theorem`, `primality-testing`; all Blueprint reused by
+  reference). `math.nt` 19/36 → 22/36. Part 2 (`residue-classes`,
+  `linear-diophantine`, both no-Blueprint) deferred. Full detail:
+  `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
