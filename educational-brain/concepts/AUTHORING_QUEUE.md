@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1186** (= 1,775 KG concepts − 589 already `READY`, per
+Total queued: **1184** (= 1,775 KG concepts − 591 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -1313,7 +1313,8 @@ authored math.arith Wave 6 part 1, moved to READY.
 authored math.nt Wave 3, moved to READY.
 **Row 764 removed 2026-07-26** — `math.nt.gcd` authored math.nt Wave
 2, moved to READY.
-| 765 | mathematics | 19 | `math.nt.residue-classes` | Residue Classes |
+**Row 765 removed 2026-07-26** — `math.nt.residue-classes` authored
+math.nt Wave 6 part 2, moved to READY.
 **Row 766 removed 2026-07-26** — `math.nt.eulers-theorem` authored
 math.nt Wave 6 part 1, moved to READY.
 **Row 767 removed 2026-07-26** — `math.nt.eulers-totient` authored
@@ -1601,7 +1602,8 @@ math.nt Wave 5 part 1, moved to READY.
 | 1036 | english | 22 | `eng.literature.poetry-basics` | Poetry Basics |
 | 1037 | english | 22 | `eng.linguistics.syntax-theory-intro` | Introduction to Syntactic Theory |
 | 1038 | english | 22 | `eng.linguistics.historical-linguistics-intro` | Introduction to Historical Linguistics |
-| 1039 | mathematics | 23 | `math.nt.linear-diophantine` | Linear Diophantine Equations |
+**Row 1039 removed 2026-07-26** — `math.nt.linear-diophantine` authored
+math.nt Wave 6 part 2, moved to READY.
 | 1040 | mathematics | 23 | `math.nt.rsa-basics` | RSA Cryptography (Number-Theoretic Basis) |
 | 1041 | mathematics | 23 | `math.alg.inequality-1var` | Linear Inequality in One Variable |
 | 1042 | mathematics | 23 | `math.alg.absolute-value-equations` | Absolute Value Equations and Inequalities |

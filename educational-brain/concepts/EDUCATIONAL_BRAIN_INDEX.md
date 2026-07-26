@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 162 READY)
+## mathematics (908 concepts, 164 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -691,7 +691,7 @@ its subject KG.
 | nt | `math.nt.general-diophantine` | Diophantine Equations | No | No | — | MISSING |
 | nt | `math.nt.induction-applications` | Induction in Number Theory | No | Yes | `educational-brain/concepts/mathematics/math.nt.induction-applications.md` | READY |
 | nt | `math.nt.lcm` | Least Common Multiple | No | Yes | `educational-brain/concepts/mathematics/math.nt.lcm.md` | READY |
-| nt | `math.nt.linear-diophantine` | Linear Diophantine Equations | No | No | — | MISSING |
+| nt | `math.nt.linear-diophantine` | Linear Diophantine Equations | No | Yes | `educational-brain/concepts/mathematics/math.nt.linear-diophantine.md` | READY |
 | nt | `math.nt.modular-arithmetic` | Modular Arithmetic | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.modular-arithmetic.md` | READY |
 | nt | `math.nt.modular-inverse` | Modular Inverse | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.modular-inverse.md` | READY |
 | nt | `math.nt.number-fields` | Number Fields | No | No | — | MISSING |
@@ -702,7 +702,7 @@ its subject KG.
 | nt | `math.nt.prime-number` | Prime Number | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.prime-number.md` | READY |
 | nt | `math.nt.prime-number-theorem` | Prime Number Theorem | Yes | No | — | MISSING |
 | nt | `math.nt.pythagorean-triples` | Pythagorean Triples | No | No | — | MISSING |
-| nt | `math.nt.residue-classes` | Residue Classes | No | No | — | MISSING |
+| nt | `math.nt.residue-classes` | Residue Classes | No | Yes | `educational-brain/concepts/mathematics/math.nt.residue-classes.md` | READY |
 | nt | `math.nt.riemann-hypothesis` | Riemann Hypothesis | Yes | No | — | MISSING |
 | nt | `math.nt.rsa-basics` | RSA Cryptography (Number-Theoretic Basis) | No | No | — | MISSING |
 | nt | `math.nt.sieve-of-eratosthenes` | Sieve of Eratosthenes | No | Yes | `educational-brain/concepts/mathematics/math.nt.sieve-of-eratosthenes.md` | READY |
