@@ -173,24 +173,30 @@ export interface EBConceptContext {
    */
   openingScenario: string | null
   /**
-   * Physics-only (P1): Step-by-step teaching order from "## Teaching Sequence"
+   * P1: Step-by-step teaching order from "## Teaching Sequence"
    * or "## Teaching actions". Raw authored text — inject verbatim as the
-   * sequence the tutor must follow for this concept.
+   * sequence the tutor must follow for this concept. Populated for any
+   * subject whose EB entry carries this section (originally physics-only;
+   * gate removed once chemistry's entries were confirmed to use the same
+   * heading format).
    */
   teachingSequence: string | null
   /**
-   * Physics-only (P1): Authored action dispatch table from "## Tutor Actions".
+   * P1: Authored action dispatch table from "## Tutor Actions".
    * Maps student state to specific teaching action (e.g. WORKED-EXAMPLE, ANALOGY).
+   * Populated for any subject whose EB entry carries this section.
    */
   tutorActions: string | null
   /**
-   * Physics-only (P1): Questions to draw from, from "## Discovery Questions"
-   * or "## Discovery lesson". Used as the authored question bank for this concept.
+   * P1: Questions to draw from, from "## Discovery Questions"
+   * or "## Discovery lesson". Used as the authored question bank for this
+   * concept. Populated for any subject whose EB entry carries this section.
    */
   discoveryQuestions: string | null
   /**
-   * Physics-only (P1): What to watch for — mastery gate cues from
-   * "## Assessment Signals" or "## Assessment".
+   * P1: What to watch for — mastery gate cues from
+   * "## Assessment Signals" or "## Assessment". Populated for any subject
+   * whose EB entry carries this section.
    */
   assessmentSignals: string | null
 }
@@ -834,10 +840,10 @@ function parseEBOpeningScenario(content: string): string | null {
   return null
 }
 
-// ── Physics P1: Teaching Sequence / Tutor Actions / Discovery / Assessment ───
+// ── P1: Teaching Sequence / Tutor Actions / Discovery / Assessment ──────────
 
 /**
- * P1 (physics-only): Extracts the teaching sequence / teaching actions section.
+ * P1: Extracts the teaching sequence / teaching actions section.
  * All three format variants are tried in order:
  *   New:     "## Teaching Sequence"
  *   Old:     "## Teaching actions"
@@ -851,7 +857,7 @@ function parseEBTeachingSequence(content: string): string | null {
 }
 
 /**
- * P1 (physics-only): Extracts the Tutor Actions dispatch block (new format only).
+ * P1: Extracts the Tutor Actions dispatch block (new format only).
  * Old format embeds actions inside the Teaching actions section; new format has
  * a dedicated "## Tutor Actions" block with compact WORKED-EXAMPLE / ANALOGY
  * dispatch notation. Returns null if absent (graceful for old-format entries).
@@ -863,7 +869,7 @@ function parseEBTutorActions(content: string): string | null {
 }
 
 /**
- * P1 (physics-only): Extracts discovery questions / discovery lesson.
+ * P1: Extracts discovery questions / discovery lesson.
  * Returns the authored question bank for this concept (raw text, ≤500 chars).
  */
 function parseEBDiscoveryQuestions(content: string): string | null {
@@ -873,7 +879,7 @@ function parseEBDiscoveryQuestions(content: string): string | null {
 }
 
 /**
- * P1 (physics-only): Extracts assessment signals / mastery gate cues.
+ * P1: Extracts assessment signals / mastery gate cues.
  * Returns the authored mastery-gate description for this concept (≤500 chars).
  */
 function parseEBAssessmentSignals(content: string): string | null {
@@ -908,8 +914,15 @@ export function loadEBConceptContext(conceptId: string): EBConceptContextResult 
 
   try {
     const { shrinkTo, triggers } = parseEBRecoveryNotes(raw)
-    // P1: physics-only teaching plan fields — zero cost for non-physics concepts.
-    const isPhysics = conceptId.startsWith('phys.')
+    // P1 teaching plan fields: format-agnostic section extraction (see
+    // parseEBTeachingSequence et al.) — not physics-specific. Previously
+    // gated to conceptId.startsWith('phys.'), which silently discarded
+    // these fields for every other subject's EB entries even when the
+    // entry carried correctly-headed "## Teaching Sequence" / "## Tutor
+    // Actions" / "## Discovery Questions" / "## Assessment Signals"
+    // sections (as chemistry's 186 entries do). Gate removed so any
+    // subject whose EB entry has these sections gets the same Teaching
+    // Sequence Executor treatment as physics — no new architecture.
     const context: EBConceptContext = {
       conceptId,
       recoveryShrinkTo: shrinkTo,
@@ -917,10 +930,10 @@ export function loadEBConceptContext(conceptId: string): EBConceptContextResult 
       antiAnalogies: parseEBAntiAnalogies(raw),
       voiceDetectionCues: parseEBVoiceDetectionCues(raw),
       openingScenario: parseEBOpeningScenario(raw),
-      teachingSequence: isPhysics ? parseEBTeachingSequence(raw) : null,
-      tutorActions: isPhysics ? parseEBTutorActions(raw) : null,
-      discoveryQuestions: isPhysics ? parseEBDiscoveryQuestions(raw) : null,
-      assessmentSignals: isPhysics ? parseEBAssessmentSignals(raw) : null,
+      teachingSequence: parseEBTeachingSequence(raw),
+      tutorActions: parseEBTutorActions(raw),
+      discoveryQuestions: parseEBDiscoveryQuestions(raw),
+      assessmentSignals: parseEBAssessmentSignals(raw),
     }
     ebContextCache.set(conceptId, context)
     return { found: true, context }

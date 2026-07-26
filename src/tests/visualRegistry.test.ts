@@ -20,7 +20,11 @@ describe('visualRegistry', () => {
   })
 
   it('returns exact match for chemistry bonding', () => {
-    expect(getConceptVisualType('chem.bond.molecular-geometry')).toBe('three_molecular_shapes')
+    // 'chem.bond.molecular-geometry' was a stale/invented concept ID that
+    // never existed in the canonical KG (docs/chemistry/kg/graph.json) —
+    // VSEPR IS the real molecular-geometry concept. Corrected to the real
+    // KG id during the chemistry runtime audit fix.
+    expect(getConceptVisualType('chem.bond.vsepr')).toBe('three_molecular_shapes')
   })
 
   it('returns scene generator for concept with one', () => {

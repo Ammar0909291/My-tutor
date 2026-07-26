@@ -178,19 +178,32 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'phys.mech.kinematics-2d':          { primary: 'coordinate_plane', all: ['coordinate_plane'], sceneGenerator: 'kinematics_graphs' },
 
   // Chemistry — Atomic structure
-  'chem.found.atomic-theory':         { primary: 'three_atomic_structure', all: ['three_atomic_structure'] },
-  'chem.found.atom-structure':        { primary: 'three_atomic_structure', all: ['three_atomic_structure', 'three_electron_shells'] },
-  'chem.found.electron-config':       { primary: 'three_electron_shells', all: ['three_electron_shells', 'three_atomic_structure'], sceneGenerator: 'electron_shells' },
-  'chem.found.periodic-table':        { primary: 'three_electron_shells', all: ['three_electron_shells'], sceneGenerator: 'periodic_trends' },
-  'chem.found.periodic-trends':       { primary: 'three_electron_shells', all: ['three_electron_shells'], sceneGenerator: 'periodic_trends' },
+  // NOTE (corrected): these 5 keys previously used a stale chem.found.* /
+  // chem.bond.* draft-KG naming that does not match the frozen 186-concept
+  // canonical KG (docs/chemistry/kg/graph.json). Renamed to the real
+  // concept IDs; visual assignments (three_* asset + sceneGenerator)
+  // unchanged, since they were already thematically correct — only the
+  // key was wrong, so these entries never fired for a real lesson before.
+  'chem.atomic.atomic-theory':        { primary: 'three_atomic_structure', all: ['three_atomic_structure'] },
+  'chem.atomic.subatomic-particles':  { primary: 'three_atomic_structure', all: ['three_atomic_structure', 'three_electron_shells'] },
+  'chem.atomic.electronic-config':    { primary: 'three_electron_shells', all: ['three_electron_shells', 'three_atomic_structure'], sceneGenerator: 'electron_shells' },
+  'chem.period.modern-periodic-law':  { primary: 'three_electron_shells', all: ['three_electron_shells'], sceneGenerator: 'periodic_trends' },
+  'chem.period.periodic-properties':  { primary: 'three_electron_shells', all: ['three_electron_shells'], sceneGenerator: 'periodic_trends' },
 
   // Chemistry — Bonding
-  'chem.bond.ionic-bond':             { primary: 'three_bond_formation', all: ['three_bond_formation'] },
-  'chem.bond.covalent-bond':          { primary: 'three_bond_formation', all: ['three_bond_formation', 'three_molecular_shapes'] },
-  'chem.bond.metallic-bond':          { primary: 'three_bond_formation', all: ['three_bond_formation', 'three_crystal_lattice'] },
-  'chem.bond.molecular-geometry':     { primary: 'three_molecular_shapes', all: ['three_molecular_shapes'], sceneGenerator: 'molecule' },
+  // NOTE (corrected): 'chem.bond.ionic-bond'/'covalent-bond'/'metallic-bond'
+  // renamed to their real KG suffix ('-bonding'). 'chem.bond.molecular-
+  // geometry' removed as a duplicate — no such concept exists separately
+  // from 'chem.bond.vsepr' in the canonical KG (VSEPR IS the molecular-
+  // geometry concept), so this was an invented key mapping to the exact
+  // same visual as the entry below it. 'chem.bond.crystal-structures'
+  // renamed to its real KG id, which lives in the chem.solid domain, not
+  // chem.bond.
+  'chem.bond.ionic-bonding':          { primary: 'three_bond_formation', all: ['three_bond_formation'] },
+  'chem.bond.covalent-bonding':       { primary: 'three_bond_formation', all: ['three_bond_formation', 'three_molecular_shapes'] },
+  'chem.bond.metallic-bonding':       { primary: 'three_bond_formation', all: ['three_bond_formation', 'three_crystal_lattice'] },
   'chem.bond.vsepr':                  { primary: 'three_molecular_shapes', all: ['three_molecular_shapes'], sceneGenerator: 'molecule' },
-  'chem.bond.crystal-structures':     { primary: 'three_crystal_lattice', all: ['three_crystal_lattice'], sceneGenerator: 'lattice' },
+  'chem.solid.crystal-systems':       { primary: 'three_crystal_lattice', all: ['three_crystal_lattice'], sceneGenerator: 'lattice' },
 
   // Chemistry — States of matter
   'chem.found.states-of-matter':      { primary: 'three_crystal_lattice', all: ['three_crystal_lattice'] },
@@ -320,8 +333,22 @@ const DOMAIN_VISUALS: DomainRule[] = [
   domainRule('phys.meas',  'three_vector_visualization', ['three_vector_visualization']),
 
   // Chemistry domains
-  domainRule('chem.bond',  'three_bond_formation', ['three_bond_formation', 'three_molecular_shapes']),
-  domainRule('chem.found', 'three_atomic_structure', ['three_atomic_structure']),
+  domainRule('chem.bond',   'three_bond_formation', ['three_bond_formation', 'three_molecular_shapes']),
+  domainRule('chem.found',  'three_atomic_structure', ['three_atomic_structure']),
+  // Added: chem.atomic/chem.period/chem.solid previously had no domain
+  // default at all (25 of chemistry's 27 KG domains had neither an exact
+  // entry nor a fallback). These three reuse already-built chemistry
+  // visual assets that are a genuine thematic fit for the whole domain,
+  // matching the established pattern (e.g. math.calc -> coordinate_plane
+  // above). The other 22 chemistry domains (chem.thermo, chem.equil,
+  // chem.org, chem.carb, etc.) have no existing chemistry-specific visual
+  // asset that fits them without inventing a new one — left unmapped
+  // rather than assigning a poorly-fitting default; see the runtime audit
+  // report for this as a flagged content/architecture gap, not a renamed
+  // bug.
+  domainRule('chem.atomic', 'three_atomic_structure', ['three_atomic_structure', 'three_electron_shells']),
+  domainRule('chem.period', 'three_electron_shells', ['three_electron_shells']),
+  domainRule('chem.solid',  'three_crystal_lattice', ['three_crystal_lattice']),
 
   // Biology domains
   domainRule('bio.eco',    'food_chain', ['food_chain', 'water_cycle']),
