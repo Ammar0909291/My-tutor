@@ -51,6 +51,12 @@ const STRONG_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   // Absolute-ignorance signals — strong because they leave no ambiguity
   ['dont_know',    /\bi\s+(know\s+)?nothing\s+(about\s+\S+\s+)?at\s+all\b|\bi\s+know\s+absolutely\s+nothing\b/i],
   ['dont_know',    /\b(i\s+have\s+no\s+idea|no\s+clue|how\s+would\s+i\s+know)\b/i],
+  // "idk" — the most common texting abbreviation for "I don't know"
+  ['dont_know',    /\bidk\b/i],
+  // "beats me" / "I'm clueless" / "I'm drawing a blank"
+  ['dont_know',    /\b(beats\s+me|i(?:'?m|\s+am)\s+clueless|drawing\s+a\s+blank)\b/i],
+  // "I quit" — unambiguous surrender, same weight as "I give up"
+  ['give_up',      /\bi\s+(just\s+)?quit\b/i],
   // "I never learned this" / "we never studied that" / "never been taught it"
   // — the learner is reporting an absent foundation, not confusion about a
   // present one. Unambiguous wherever it appears in the message.
@@ -78,7 +84,7 @@ const STRONG_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   // Profanity is one signal among several here, never the sole detector —
   // kept to unambiguous words to avoid false-firing on incidental subject
   // content (history/literature can legitimately mention milder words).
-  ['frustrated', /\b(fuck(?:ing)?|shit|wtf|bullshit)\b/i],
+  ['frustrated', /\b(fuck(?:ing)?|shit|wtf|bullshit|ffs|smh)\b/i],
   // P2 (universal fix): bare question-marks — complete confusion, nothing
   // the student can contribute; treat as confused, not dont_know (the
   // distinction: confused means "I'm lost", dont_know means "I have no
@@ -142,6 +148,12 @@ const MILD_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   ['dont_understand', /\b(i\s+)?(still\s+)?(don'?t|do\s+not)\s+get\s+(it|that|this)\b/i],
   ['forgot',          /\bi\s+(forgot|forget)\b|\bi\s+can'?t\s+remember\b/i],
   ['guessing',        /\bi(?:'?m|\s+was)\s+(just\s+)?guessing\b|\bthat\s+was\s+a\s+guess\b/i],
+  // "huh" / "huh?" — bare confusion, not a genuine question
+  ['confused',        /^huh\s*[?!.…]*$/i],
+  // "my mind is blank" / "mind blank" / "I'm blank" — unable to produce
+  ['dont_know',       /\b(mind\s+(is\s+|went\s+)?blank|i(?:'?m|\s+am)\s+blank)\b/i],
+  // "no idea" as a standalone short reply (not "I have no idea" which is STRONG)
+  ['dont_know',       /^no\s+idea[.!?…\s]*$/i],
   // P1: a terse one-word interrogative echo, and ONLY that echo, is a
   // strong signal the learner doesn't have enough to answer with — not a
   // genuine substantive question (those come with content: "why does it

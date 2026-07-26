@@ -341,6 +341,55 @@ describe('buildRecoveryBlock — pre-demonstration delta (Rule 2)', () => {
   })
 })
 
+// Loop 3: expanded detection coverage — texting abbreviations, terse
+// confusion signals, and missing ignorance/surrender phrasings.
+describe('detectFailureState — Loop 3 coverage expansion', () => {
+  it.each([
+    ['idk', 'dont_know'],
+    ['idk lol', 'dont_know'],
+    ['beats me', 'dont_know'],
+    ["I'm clueless", 'dont_know'],
+    ["i am clueless", 'dont_know'],
+    ['drawing a blank', 'dont_know'],
+    ["I'm drawing a blank here", 'dont_know'],
+    ['I quit', 'give_up'],
+    ['I just quit', 'give_up'],
+  ] as const)('STRONG: %s → %s', (msg, key) => {
+    expect(detectFailureState(msg)).toBe(key)
+  })
+
+  it.each([
+    ['huh?', 'confused'],
+    ['huh', 'confused'],
+    ['no idea', 'dont_know'],
+    ['no idea...', 'dont_know'],
+    ['my mind is blank', 'dont_know'],
+    ['mind went blank', 'dont_know'],
+    ["I'm blank", 'dont_know'],
+  ] as const)('MILD: %s → %s', (msg, key) => {
+    expect(detectFailureState(msg)).toBe(key)
+  })
+
+  it('ffs and smh fire as frustration', () => {
+    expect(detectFailureState('ffs')).toBe('frustrated')
+    expect(detectFailureState('smh this is ridiculous')).toBe('frustrated')
+  })
+
+  it('"idk" inside a longer sentence still fires (STRONG)', () => {
+    expect(detectFailureState('honestly idk what any of this means')).toBe('dont_know')
+  })
+
+  it('bare "no idea" as a standalone short reply fires, but not inside a longer message', () => {
+    expect(detectFailureState('no idea')).toBe('dont_know')
+    // "no idea" without "I have" in a long message does not fire (MILD, whole-message anchored)
+    expect(detectFailureState('There is no idea too complex for this, but the formula uses...')).toBeNull()
+  })
+
+  it('"huh" inside a longer message does NOT fire (MILD, whole-message anchored)', () => {
+    expect(detectFailureState('huh, that makes sense actually')).toBeNull()
+  })
+})
+
 // Rule 2 escalation membership — the single owner of the decision that was
 // previously inlined twice in route.ts.
 describe('isDontKnowSignal — single-owner escalation membership', () => {
