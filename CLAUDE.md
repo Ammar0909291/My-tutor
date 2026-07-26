@@ -1546,6 +1546,11 @@
   13/36 → 15/36. Wave 5 candidates (`bezout-identity` no-Blueprint,
   `congruence`/`modular-inverse`/`fermats-little-theorem` all
   Blueprint-grounded) computed. Full detail: `COVERAGE.md`.
+  **Batch 38 — math.nt Wave 5 part 1** (2026-07-26, autonomous loop
+  iteration 28): 3 concepts authored (`congruence`, `modular-inverse`,
+  `fermats-little-theorem`; all Blueprint reused by reference). `math.nt`
+  15/36 → 18/36. Part 2 (`bezout-identity`, no Blueprint) deferred. Full
+  detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
