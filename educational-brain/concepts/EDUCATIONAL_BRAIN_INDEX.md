@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 117 READY)
+## mathematics (908 concepts, 122 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -116,9 +116,9 @@ its subject KG.
 | alg | `math.alg.zero-exponent` | Zero Exponent | No | No | — | MISSING |
 | arith | `math.arith.absolute-value` | Absolute Value | Yes | No | — | MISSING |
 | arith | `math.arith.addition` | Addition | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.addition.md` | READY |
-| arith | `math.arith.borrowing` | Borrowing (Regrouping in Subtraction) | No | No | — | MISSING |
+| arith | `math.arith.borrowing` | Borrowing (Regrouping in Subtraction) | No | Yes | `educational-brain/concepts/mathematics/math.arith.borrowing.md` | READY |
 | arith | `math.arith.carrying` | Carrying (Regrouping) | No | Yes | `educational-brain/concepts/mathematics/math.arith.carrying.md` | READY |
-| arith | `math.arith.column-addition` | Column Addition | No | No | — | MISSING |
+| arith | `math.arith.column-addition` | Column Addition | No | Yes | `educational-brain/concepts/mathematics/math.arith.column-addition.md` | READY |
 | arith | `math.arith.counting` | Counting | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.counting.md` | READY |
 | arith | `math.arith.counting-sequence` | Counting Sequence | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.counting-sequence.md` | READY |
 | arith | `math.arith.cube-numbers` | Perfect Cubes | No | No | — | MISSING |
@@ -127,7 +127,7 @@ its subject KG.
 | arith | `math.arith.direct-variation` | Direct Variation | No | Yes | `educational-brain/concepts/mathematics/math.arith.direct-variation.md` | READY |
 | arith | `math.arith.division` | Division | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.division.md` | READY |
 | arith | `math.arith.divisor-dividend` | Divisor and Dividend | No | No | — | MISSING |
-| arith | `math.arith.estimation` | Estimation | No | No | — | MISSING |
+| arith | `math.arith.estimation` | Estimation | No | Yes | `educational-brain/concepts/mathematics/math.arith.estimation.md` | READY |
 | arith | `math.arith.expanded-form` | Expanded Form | No | Yes | `educational-brain/concepts/mathematics/math.arith.expanded-form.md` | READY |
 | arith | `math.arith.exponent-rules` | Exponent Rules | Yes | No | — | MISSING |
 | arith | `math.arith.exponentiation` | Exponentiation | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.exponentiation.md` | READY |
@@ -148,14 +148,14 @@ its subject KG.
 | arith | `math.arith.mental-multiplication` | Mental Multiplication | No | No | — | MISSING |
 | arith | `math.arith.mixed-numbers` | Mixed Numbers | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.mixed-numbers.md` | READY |
 | arith | `math.arith.multiplication` | Multiplication | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.multiplication.md` | READY |
-| arith | `math.arith.multiplication-table` | Multiplication Table | No | No | — | MISSING |
+| arith | `math.arith.multiplication-table` | Multiplication Table | No | Yes | `educational-brain/concepts/mathematics/math.arith.multiplication-table.md` | READY |
 | arith | `math.arith.negative-numbers` | Negative Numbers | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.negative-numbers.md` | READY |
 | arith | `math.arith.number-base` | Number Base | No | Yes | `educational-brain/concepts/mathematics/math.arith.number-base.md` | READY |
 | arith | `math.arith.number-line` | Number Line | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.number-line.md` | READY |
 | arith | `math.arith.ones-tens-hundreds` | Ones, Tens, Hundreds | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.ones-tens-hundreds.md` | READY |
 | arith | `math.arith.order-of-operations` | Order of Operations | Yes | No | — | MISSING |
 | arith | `math.arith.ordering` | Ordering Numbers | No | Yes | `educational-brain/concepts/mathematics/math.arith.ordering.md` | READY |
-| arith | `math.arith.percentage-calculations` | Percentage Calculations | No | No | — | MISSING |
+| arith | `math.arith.percentage-calculations` | Percentage Calculations | No | Yes | `educational-brain/concepts/mathematics/math.arith.percentage-calculations.md` | READY |
 | arith | `math.arith.percentage-change` | Percentage Change | No | No | — | MISSING |
 | arith | `math.arith.percentages` | Percentages | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.percentages.md` | READY |
 | arith | `math.arith.place-value` | Place Value | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.place-value.md` | READY |

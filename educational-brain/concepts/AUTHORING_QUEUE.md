@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1231** (= 1,775 KG concepts − 544 already `READY`, per
+Total queued: **1226** (= 1,775 KG concepts − 549 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -1035,11 +1035,12 @@ to READY.
 **Row 519 removed 2026-07-26** — `math.found.complex-numbers`
 authored Wave 16 (FINAL wave), moved to READY. `math.found` domain now
 82/82 — COMPLETE.
-| 520 | mathematics | 15 | `math.arith.column-addition` | Column Addition |
-| 521 | mathematics | 15 | `math.arith.borrowing` | Borrowing (Regrouping in Subtraction) |
+**Rows 520-521 removed 2026-07-26** — `math.arith.column-addition`,
+`math.arith.borrowing` authored math.arith Wave 6 part 2, moved to READY.
 **Row 522 removed 2026-07-26** — `math.arith.negative-numbers`
 authored math.arith Wave 6 part 1, moved to READY.
-| 523 | mathematics | 15 | `math.arith.multiplication-table` | Multiplication Table |
+**Row 523 removed 2026-07-26** — `math.arith.multiplication-table`
+authored math.arith Wave 6 part 2, moved to READY.
 **Rows 524-525 removed 2026-07-26** — `math.arith.division`,
 `math.arith.exponentiation` authored math.arith Wave 6 part 1, moved
 to READY.
@@ -1280,11 +1281,13 @@ math.arith Wave 5 part 1, moved to READY.
 | 755 | computer_science | 18 | `cs.oop.design-patterns-intro` | Introduction to Design Patterns |
 | 756 | computer_science | 18 | `cs.db.sql-joins-subqueries` | SQL — Joins and Subqueries |
 | 757 | computer_science | 18 | `cs.ds.data-visualisation` | Data Visualisation with Matplotlib |
-| 758 | mathematics | 19 | `math.arith.percentage-calculations` | Percentage Calculations |
+**Row 758 removed 2026-07-26** — `math.arith.percentage-calculations`
+authored math.arith Wave 6 part 2, moved to READY.
 **Rows 759-760 removed 2026-07-26** — `math.arith.direct-variation`,
 `math.arith.inverse-variation` authored math.arith Wave 4 part 2,
 moved to READY.
-| 761 | mathematics | 19 | `math.arith.estimation` | Estimation |
+**Row 761 removed 2026-07-26** — `math.arith.estimation`
+authored math.arith Wave 6 part 2, moved to READY.
 **Row 762 removed 2026-07-26** — `math.arith.significant-figures`
 authored math.arith Wave 6 part 1, moved to READY.
 | 763 | mathematics | 19 | `math.nt.fundamental-theorem-arithmetic` | Fundamental Theorem of Arithmetic |
