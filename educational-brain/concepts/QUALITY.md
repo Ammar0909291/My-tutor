@@ -53,31 +53,31 @@ rather than hand-edit when entries change.
   migration debt (76 = 71 + 5), not introduced this batch — rewriting
   another session's freshly authored files remains out of scope.
 
-## Aggregate summary (536 entries)
+## Aggregate summary (539 entries)
 
-Adds `math.nt` Wave 5 part 2 (1 concept, this batch, 2026-07-26,
-autonomous loop iteration 29) on top of the prior 535-entry state
-(math.nt Wave 5 part 1 completion). The new entry (`bezout-identity`)
-has no Blueprint and was authored via the birth-taxonomy diagnostic
-procedure. All numbers below were recomputed fresh by scanning every
-live file in `educational-brain/concepts/{subject}/` — none
-hand-estimated. Note: this ledger's chemistry row count (136)
-understates chemistry's true 186/186-complete state (CLAUDE.md) — a
-pre-existing gap outside this batch's mathematics-only scope, not
-corrected here.
+Adds `math.nt` Wave 6 part 1 (3 concepts, this batch, 2026-07-26,
+autonomous loop iteration 30) on top of the prior 536-entry state
+(math.nt Wave 5 part 2 completion). All 3 entries
+(`chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`)
+have existing Blueprints, reused by reference. All numbers below were
+recomputed fresh by scanning every live file in
+`educational-brain/concepts/{subject}/` — none hand-estimated. Note:
+this ledger's chemistry row count (136) understates chemistry's true
+186/186-complete state (CLAUDE.md) — a pre-existing gap outside this
+batch's mathematics-only scope, not corrected here.
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 335 / 536 | see methodology note above — 23 `math.found` (`proper-subset`, `set-equality`, `union`, `intersection`, `set-difference`, `complement`, `venn-diagram`, `direct-proof`, `proof-by-contradiction`, `proof-by-contrapositive`, `proof-by-cases`, `existence-proof`, `writing-mathematics`, `theorem`, `conjecture`, `corollary`, `hasse-diagram`, `lemma`, `uniqueness-proof`, `finite-set`, `countable-set`, `strong-induction`, `uncountable-set`) + 28 `math.arith` (`subitizing`, `unit-rate`, `expanded-form`, `number-base`, `ordering`, `direct-variation`, `inverse-variation`, `carrying`, `mental-addition`, `decimal-operations`, `terminating-decimals`, `repeating-decimals`, `column-addition`, `borrowing`, `multiplication-table`, `percentage-calculations`, `estimation`, `long-multiplication`, `mental-multiplication`, `divisor-dividend`, `percentage-change`, `cube-numbers`, `scientific-notation`, `long-division`, `mental-arithmetic`, `irrational-roots`, `fraction-simplification`, `fraction-addition`) + 7 `math.nt` (`lcm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `bezout-identity`) — none of these 58 have a Blueprint — + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
-| Educational Brain | 536 / 536 | trivially true (this is the entry list) |
-| Mental Model | 536 / 536 | |
-| Misconceptions | 536 / 536 | |
-| Analogies | 536 / 536 | |
-| Recovery Strategy | 536 / 536 | |
-| Assessment Signals | 536 / 536 | |
-| Tutor Actions | 466 / 536 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
-| Cross-links | 466 / 536 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
-| Version History | 466 / 536 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
+| Blueprint | 338 / 539 | see methodology note above — 23 `math.found` (`proper-subset`, `set-equality`, `union`, `intersection`, `set-difference`, `complement`, `venn-diagram`, `direct-proof`, `proof-by-contradiction`, `proof-by-contrapositive`, `proof-by-cases`, `existence-proof`, `writing-mathematics`, `theorem`, `conjecture`, `corollary`, `hasse-diagram`, `lemma`, `uniqueness-proof`, `finite-set`, `countable-set`, `strong-induction`, `uncountable-set`) + 28 `math.arith` (`subitizing`, `unit-rate`, `expanded-form`, `number-base`, `ordering`, `direct-variation`, `inverse-variation`, `carrying`, `mental-addition`, `decimal-operations`, `terminating-decimals`, `repeating-decimals`, `column-addition`, `borrowing`, `multiplication-table`, `percentage-calculations`, `estimation`, `long-multiplication`, `mental-multiplication`, `divisor-dividend`, `percentage-change`, `cube-numbers`, `scientific-notation`, `long-division`, `mental-arithmetic`, `irrational-roots`, `fraction-simplification`, `fraction-addition`) + 7 `math.nt` (`lcm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `bezout-identity`) — none of these 58 have a Blueprint — + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
+| Educational Brain | 539 / 539 | trivially true (this is the entry list) |
+| Mental Model | 539 / 539 | |
+| Misconceptions | 539 / 539 | |
+| Analogies | 539 / 539 | |
+| Recovery Strategy | 539 / 539 | |
+| Assessment Signals | 539 / 539 | |
+| Tutor Actions | 469 / 539 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
+| Cross-links | 469 / 539 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
+| Version History | 469 / 539 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
 
 ## Per-concept ledger
 
@@ -462,12 +462,14 @@ corrected here.
 | `math.found.well-ordering-principle` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.writing-mathematics` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.bezout-identity` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.nt.chinese-remainder-theorem` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.composite-number` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.congruence` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.divisibility` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.divisibility-rules` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.division-algorithm` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.euclidean-algorithm` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.nt.eulers-theorem` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.eulers-totient` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.extended-euclidean-algorithm` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.fermats-little-theorem` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -477,6 +479,7 @@ corrected here.
 | `math.nt.lcm` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.modular-arithmetic` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.modular-inverse` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.nt.primality-testing` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.prime-factorization` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.prime-number` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.sieve-of-eratosthenes` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

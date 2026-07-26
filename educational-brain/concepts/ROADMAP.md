@@ -13,16 +13,16 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **586** |
-| Remaining | **1,189** |
-| Completion percentage | **33.01%** |
+| Concepts with an Educational Brain entry | **589** |
+| Remaining | **1,186** |
+| Completion percentage | **33.18%** |
 
 *(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
 with an Educational Brain entry" rows had accumulated from prior sessions
 without being reconciled. Recomputed from this same file's §2 Subject
-progress table as currently stated per subject: 159 mathematics + 238
+progress table as currently stated per subject: 162 mathematics + 238
 physics + 3 english + 186 chemistry + 0 biology + 0 computer_science =
-586. Only the mathematics figure was independently re-verified by this
+589. Only the mathematics figure was independently re-verified by this
 batch by direct file count; the other subjects' figures are taken as
 already-recorded in §2 below, not re-audited by this batch, per this
 program's "mathematics only" scope this turn.)*
@@ -33,7 +33,7 @@ program's "mathematics only" scope this turn.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 159 | 17.51% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 162 | 17.84% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
@@ -978,7 +978,16 @@ record; the active default has moved to item 1b.**
     `eulers-theorem`, `primality-testing`, deliberately deferred to
     Wave 6) and authored `math.nt.bezout-identity` directly via the
     birth-taxonomy diagnostic procedure (no Blueprint exists),
-    raising `math.nt` to **19/36**.
+    raising `math.nt` to **19/36**. Wave 6 (2026-07-26, iteration 30)
+    re-verified candidates fresh against the live KG: 5 ready, an
+    enlarged pool from `math.nt.linear-diophantine` newly unlocking
+    (via `bezout-identity`) alongside the 4 already-projected
+    candidates — split into part 1 (the 3 Blueprint-grounded
+    concepts, `chinese-remainder-theorem`, `eulers-theorem`,
+    `primality-testing`, all Blueprint reused by reference) and part
+    2 (2 no-Blueprint concepts, `residue-classes` and
+    `linear-diophantine`, deferred). Part 1 authored, raising
+    `math.nt` to **22/36**.
 1. **(Historical, satisfied) `math.found` Wave 7**: the set of
    `math.found` nodes whose prerequisites were all READY after Wave 6.
 2. **(Historical, satisfied) `math.found` Waves 8-16 (52 remaining
