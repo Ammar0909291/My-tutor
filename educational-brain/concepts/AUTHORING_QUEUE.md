@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1209** (= 1,775 KG concepts − 566 already `READY`, per
+Total queued: **1205** (= 1,775 KG concepts − 570 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -1159,7 +1159,8 @@ Wave 2 (part 2), moved to READY.
 `math.arith.mental-arithmetic` authored math.arith Wave 8, moved to
 READY.
 | 628 | mathematics | 17 | `math.nt.divisibility-rules` | Divisibility Rules |
-| 629 | mathematics | 17 | `math.nt.prime-number` | Prime Number |
+**Row 629 removed 2026-07-26** — `math.nt.prime-number` authored
+math.nt Wave 2, moved to READY.
 | 630 | mathematics | 17 | `math.nt.modular-arithmetic` | Modular Arithmetic |
 | 631 | mathematics | 17 | `math.nt.induction-applications` | Induction in Number Theory |
 | 632 | mathematics | 17 | `math.alg.expression` | Algebraic Expression |
@@ -1227,7 +1228,8 @@ authored math.arith Wave 9, moved to READY.
 authored math.arith Wave 7 part 2, moved to READY.
 | 691 | mathematics | 18 | `math.nt.composite-number` | Composite Number |
 | 692 | mathematics | 18 | `math.nt.sieve-of-eratosthenes` | Sieve of Eratosthenes |
-| 693 | mathematics | 18 | `math.nt.prime-factorization` | Prime Factorization |
+**Row 693 removed 2026-07-26** — `math.nt.prime-factorization`
+authored math.nt Wave 2, moved to READY.
 | 694 | mathematics | 18 | `math.nt.congruence` | Congruence |
 | 695 | mathematics | 18 | `math.nt.fermats-little-theorem` | Fermat's Little Theorem |
 | 696 | mathematics | 18 | `math.nt.prime-distribution` | Distribution of Primes |
@@ -1302,7 +1304,8 @@ authored math.arith Wave 6 part 2, moved to READY.
 **Row 762 removed 2026-07-26** — `math.arith.significant-figures`
 authored math.arith Wave 6 part 1, moved to READY.
 | 763 | mathematics | 19 | `math.nt.fundamental-theorem-arithmetic` | Fundamental Theorem of Arithmetic |
-| 764 | mathematics | 19 | `math.nt.gcd` | Greatest Common Divisor |
+**Row 764 removed 2026-07-26** — `math.nt.gcd` authored math.nt Wave
+2, moved to READY.
 | 765 | mathematics | 19 | `math.nt.residue-classes` | Residue Classes |
 | 766 | mathematics | 19 | `math.nt.eulers-theorem` | Euler's Theorem |
 | 767 | mathematics | 19 | `math.nt.eulers-totient` | Euler's Totient Function |
@@ -1381,7 +1384,8 @@ authored math.arith Wave 6 part 1, moved to READY.
 **Row 840 removed 2026-07-26** — `math.arith.percentage-change`
 authored math.arith Wave 7 part 2, moved to READY.
 | 841 | mathematics | 20 | `math.nt.euclidean-algorithm` | Euclidean Algorithm |
-| 842 | mathematics | 20 | `math.nt.lcm` | Least Common Multiple |
+**Row 842 removed 2026-07-26** — `math.nt.lcm` authored math.nt Wave
+2, moved to READY.
 | 843 | mathematics | 20 | `math.nt.chinese-remainder-theorem` | Chinese Remainder Theorem |
 | 844 | mathematics | 20 | `math.alg.like-terms` | Like Terms |
 | 845 | mathematics | 20 | `math.alg.fractional-exponent` | Fractional Exponent |

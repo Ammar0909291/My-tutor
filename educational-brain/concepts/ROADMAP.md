@@ -13,16 +13,16 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **566** |
-| Remaining | **1,209** |
-| Completion percentage | **31.89%** |
+| Concepts with an Educational Brain entry | **570** |
+| Remaining | **1,205** |
+| Completion percentage | **32.11%** |
 
 *(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
 with an Educational Brain entry" rows had accumulated from prior sessions
 without being reconciled. Recomputed from this same file's §2 Subject
-progress table as currently stated per subject: 139 mathematics + 238
+progress table as currently stated per subject: 143 mathematics + 238
 physics + 3 english + 186 chemistry + 0 biology + 0 computer_science =
-566. Only the mathematics figure was independently re-verified by this
+570. Only the mathematics figure was independently re-verified by this
 batch by direct file count; the other subjects' figures are taken as
 already-recorded in §2 below, not re-audited by this batch, per this
 program's "mathematics only" scope this turn.)*
@@ -33,7 +33,7 @@ program's "mathematics only" scope this turn.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 139 | 15.31% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 143 | 15.75% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
@@ -888,67 +888,38 @@ procedure.
 active default has moved to item 1a.**
 
 1a. **Active default (2026-07-26): `math.arith` domain, Waves 1-8
-    done, Wave 9 in progress (cross-domain unblocking underway)**.
-    `math.arith` has 58 total concepts. Waves 1-5 (historical,
-    condensed): `counting`, the 6 fraction-family concepts, and 24
-    more across Waves 3-5 (parts 1-2 each) — 31 concepts total; two
-    genuine discoveries along the way: a Blueprint/KG metadata
-    discrepancy pattern (found for `ones-tens-hundreds` and
-    `percentages`, always resolved in favor of the KG), and that
-    Blueprints for `math.func.linear-function`/
-    `math.func.rational-function` now exist, contradicting a stale
-    claim in `proportion.md`/`ratios.md` (corrected via a small
-    addendum, no rewrite). Wave 6 (9 concepts, split into two parts
-    given the heavier no-Blueprint load, following the same pattern as
-    Waves 4 and 5): part 1 (2026-07-26, iteration 17) authored the 4
-    Blueprint-grounded concepts (`negative-numbers`, `division`,
-    `significant-figures`, `exponentiation`), raising `math.arith` to
-    35/58; part 2 (2026-07-26, iteration 18) authored the 5
-    no-Blueprint concepts (`column-addition`, `borrowing`,
-    `multiplication-table`, `percentage-calculations`, `estimation`),
-    each via the birth-taxonomy diagnostic procedure, raising
-    `math.arith` to 40/58. Wave 7 (12 concepts, split into two parts
-    given the even 6/6 Blueprint-grounded/no-Blueprint split, same
-    pattern as prior waves): part 1 (2026-07-26, iteration 19)
-    authored the 6 Blueprint-grounded concepts (`absolute-value`,
-    `integer-arithmetic`, `remainder`, `order-of-operations`,
-    `exponent-rules`, `square-numbers`), all reused by reference from
-    their existing Blueprints, raising `math.arith` to 46/58; part 2
-    (2026-07-26, iteration 20) authored the 6 no-Blueprint concepts
-    (`long-multiplication`, `mental-multiplication`,
-    `divisor-dividend`, `percentage-change`, `cube-numbers`,
-    `scientific-notation`), each via the birth-taxonomy diagnostic
-    procedure, raising `math.arith` to 52/58. Wave 8 (2026-07-26,
-    iteration 21): 3 candidates — `square-roots` (Blueprint exists,
-    reused by reference), plus 2 no-Blueprint concepts
-    (`long-division`, `mental-arithmetic`), raising `math.arith` to
-    55/58. Only 3 concepts then remained
-    (`fraction-simplification`, `fraction-addition`,
-    `irrational-roots`) — the last of these, `irrational-roots`,
-    became ready in the same wave (its prerequisites, `square-roots`
-    and the already-authored `math.found.irrational-numbers`, were
-    both now satisfied), but was deliberately deferred to Wave 9 per
-    this program's precedent of sticking to the originally-computed
-    wave set. The remaining 2 concepts are genuinely blocked on
-    `math.nt.gcd`/`math.nt.lcm`, neither authored, themselves gated
-    behind a 3-concept `math.nt` chain (`divisibility` →
-    `prime-number` → `prime-factorization` → `gcd`). Wave 9
-    (2026-07-26, iteration 22, first of a bounded cross-domain
-    unblocking sequence): authored `math.arith.irrational-roots`
-    (no Blueprint, birth-taxonomy diagnostic procedure), raising
-    `math.arith` to **56/58** — only 2 concepts remain, both blocked
-    on the `math.nt.gcd`/`math.nt.lcm` chain. Also authored
-    `math.nt.divisibility` (Blueprint exists, reused by reference,
-    Tier 1 cross-link to `math.abst.ring-theory`) as the FIRST concept
-    of `math.nt` — a deliberate, bounded, explicitly-justified
-    cross-domain step (not a full `math.nt` campaign commitment)
-    taken specifically to begin unblocking `math.arith`'s final 2
-    concepts. `math.nt` now 1/36. Remaining chain to unblock
-    `math.arith`: `math.nt.prime-number` → `math.nt.prime-factorization`
-    → `math.nt.gcd` (unblocks `fraction-simplification`) →
-    `math.nt.lcm` (unblocks `fraction-addition`) — 4 more `math.nt`
-    concepts, to be authored in upcoming waves before returning to
-    close `math.arith` out at 58/58 CERTIFIED.
+    done (condensed record below), Wave 9 unblocked and ready to
+    close the domain**. `math.arith` has 58 total concepts. Waves 1-8
+    (2026-07-26, iterations 1-21, condensed): authored 55/58 concepts
+    across 8 waves (several split into Blueprint-grounded/no-Blueprint
+    parts given uneven load), reaching 55/58 by Wave 8 with only 3
+    concepts remaining (`fraction-simplification`, `fraction-addition`,
+    `irrational-roots`). Two genuine discoveries along the way: a
+    Blueprint/KG metadata discrepancy pattern (`ones-tens-hundreds`,
+    `percentages`, always resolved in favor of the KG), and stale
+    cross-subject claims in `proportion.md`/`ratios.md` corrected via
+    small addenda once `math.func.linear-function`/
+    `math.func.rational-function` Blueprints appeared. Full per-wave
+    detail (exact concept lists, misconception IDs, birth types) lives
+    in `COVERAGE.md`'s Delivery history, the authoritative record.
+    Wave 9 (2026-07-26, iteration 22): authored
+    `math.arith.irrational-roots` (no Blueprint), raising `math.arith`
+    to 56/58 — only 2 concepts remained, both genuinely blocked on
+    unauthored `math.nt.gcd`/`math.nt.lcm`. Began a deliberate, bounded
+    cross-domain excursion into `math.nt` (not a full campaign
+    commitment) specifically to unblock them: authored
+    `math.nt.divisibility` (Blueprint exists, Tier 1 cross-link to
+    `math.abst.ring-theory`). `math.nt` Wave 2 (2026-07-26, iteration
+    23): continued the excursion, authoring `math.nt.prime-number` →
+    `math.nt.prime-factorization` → `math.nt.gcd` (unlocks
+    `fraction-simplification`) → `math.nt.lcm` (no Blueprint, unlocks
+    `fraction-addition`) as each became ready in turn — 4 concepts in
+    one wave, completing the full minimal chain. `math.nt` now
+    **5/36**. Both of `math.arith`'s final 2 concepts are now
+    unblocked — authoring them next reaches `math.arith` **58/58,
+    DOMAIN CERTIFIED** (the second mathematics domain certified,
+    after `math.found`), at which point the excursion into `math.nt`
+    will be evaluated for continuation as a full campaign or paused.
 1. **(Historical, satisfied) `math.found` Wave 7**: the set of
    `math.found` nodes whose prerequisites were all READY after Wave 6.
 2. **(Historical, satisfied) `math.found` Waves 8-16 (52 remaining

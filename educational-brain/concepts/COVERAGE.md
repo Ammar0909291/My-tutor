@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 139 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 56 `math.arith.*` entries (`fractions`, `counting`, `fraction-equivalence`, `fraction-multiplication`, `fraction-reciprocal`, `mixed-numbers`, `improper-fractions`, `ratios`, `counting-sequence`, `subitizing`, `place-value`, `number-line`, `proportion`, `unit-rate`, `ones-tens-hundreds`, `addition`, `decimals`, `expanded-form`, `number-base`, `ordering`, `direct-variation`, `inverse-variation`, `subtraction`, `multiplication`, `percentages`, `rounding`, `carrying`, `mental-addition`, `decimal-operations`, `terminating-decimals`, `repeating-decimals`, `negative-numbers`, `division`, `significant-figures`, `exponentiation`, `column-addition`, `borrowing`, `multiplication-table`, `percentage-calculations`, `estimation`, `absolute-value`, `integer-arithmetic`, `remainder`, `order-of-operations`, `exponent-rules`, `square-numbers`, `long-multiplication`, `mental-multiplication`, `divisor-dividend`, `percentage-change`, `cube-numbers`, `scientific-notation`, `long-division`, `square-roots`, `mental-arithmetic`, `irrational-roots` — `math.arith` domain IN PROGRESS, 56/58, only 2 concepts remain, both blocked on unauthored `math.nt.gcd`/`math.nt.lcm`) + 1 `math.nt.*` entry (`divisibility` — `math.nt` domain STARTED, 1/36, a bounded cross-domain step to unblock `math.arith`), see Delivery history. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
+| mathematics | 908 | 143 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 56 `math.arith.*` entries (`math.arith` domain IN PROGRESS, 56/58, only `fraction-simplification`/`fraction-addition` remain — both now UNBLOCKED, ready to author next wave) + 5 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm` — `math.nt` domain STARTED, 5/36, a bounded cross-domain excursion to unblock `math.arith`'s final 2 concepts, now complete), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -2813,6 +2813,67 @@ before `math.arith` can return to close out its final 2 concepts and
 reach 58/58 CERTIFIED. All five tracking files updated in this same
 commit; re-validated 0 duplicates, 0 orphans, 0 Quality Gate 3
 violations across all 139 mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.nt Wave 2 (2026-07-26, autonomous loop iteration 23)
+
+Autonomous loop iteration 23, continuing immediately after math.nt
+Wave 1. Git resync found zero concurrent commits at this iteration's
+start.
+
+**Repair-audit first**: re-ran the Quality Gate 3 heading-conformance
+check across all 139 pre-batch mathematics entries. **0 violations
+found**.
+
+**math.nt candidates re-verified programmatically**: 4 concepts
+ready — `divisibility-rules`, `prime-number`, `division-algorithm`,
+`induction-applications`. Deliberately authored only `prime-number`
+(the critical-path concept toward `gcd`/`lcm`), keeping the excursion
+bounded rather than drifting into a full `math.nt` campaign; the
+other 3 ready concepts remain available for a future `math.nt`
+campaign decision, not authored this wave. Continued authoring each
+next concept as it became ready in turn:
+
+- `math.nt.prime-number` (requires `divisibility`) — Blueprint
+  exists, reused by reference. MC-1 PRIME-INCLUDES-ONE
+  (FOUNDATIONAL, Type 4 notation-induced), MC-2 ODD-EQUALS-PRIME
+  (Type 1), MC-3 LAST-DIGIT-HEURISTIC (Type 1). Cross-link
+  `math.nt.fundamental-theorem-arithmetic` confirmed NOT Tier 1 —
+  independence mode, using a cryptography-context transfer probe.
+- `math.nt.prime-factorization` (requires `prime-number`,
+  `divisibility`) — Blueprint exists, reused by reference. MC-1
+  STOPS-AT-COMPOSITE-FACTOR (FOUNDATIONAL, Type 5), MC-2
+  ONE-IS-PRIME (Type 1, `prime-number`'s own MC-1 recurring in a new
+  procedural context), MC-3 FACTORIZATION-ORDER-MATTERS (Type 6
+  analogy overextension).
+- `math.nt.gcd` (requires `divisibility`, `prime-factorization`) —
+  Blueprint exists, reused by reference. MC-1
+  GCD-LCM-EXPONENT-CONFUSION (FOUNDATIONAL, Type 6 analogy
+  overextension), MC-2 COPRIME-REQUIRES-A-PRIME-NUMBER (Type 1),
+  MC-3 EUCLIDEAN-ALGORITHM-WRONG-STOPPING-POINT (Type 1). Directly
+  unlocks `math.arith.fraction-simplification`.
+- `math.nt.lcm` (requires `prime-factorization`, `gcd`) — no
+  Blueprint, authored via the birth-taxonomy diagnostic procedure.
+  MC-1 LCM-COMPUTED-AS-SIMPLE-PRODUCT (FOUNDATIONAL, Type 1), MC-2
+  LCM-EXPONENT-RULE-CONFUSED-WITH-GCD (Type 6, the mirror-image of
+  `gcd`'s own MC-1), MC-3 LCM-ASSUMED-BOUNDED-LIKE-GCD (Type 6).
+  Directly unlocks `math.arith.fraction-addition`.
+
+`math.nt` now **5/36**. This completes the bounded cross-domain
+excursion begun in Wave 1 — both of `math.arith`'s final 2 concepts
+(`fraction-simplification`, `fraction-addition`) are now unblocked and
+ready to be authored, at which point `math.arith` reaches 58/58 —
+DOMAIN CERTIFIED (the second mathematics domain to reach
+certification, after `math.found`). Whether to continue `math.nt` as
+a full campaign (31 concepts remain, most with existing Blueprints)
+or pause it once `math.arith` closes is an explicit decision for the
+next wave, not assumed here. No other domain touched. All five
+tracking files updated in this same commit; re-validated 0
+duplicates, 0 orphans, 0 Quality Gate 3 violations across all 143
+mathematics entries.
 
 Full validation this batch: all 6 subject KG validators PASS (0
 failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite

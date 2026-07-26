@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 139 READY)
+## mathematics (908 concepts, 143 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -687,10 +687,10 @@ its subject KG.
 | nt | `math.nt.extended-euclidean-algorithm` | Extended Euclidean Algorithm | Yes | No | — | MISSING |
 | nt | `math.nt.fermats-little-theorem` | Fermat's Little Theorem | Yes | No | — | MISSING |
 | nt | `math.nt.fundamental-theorem-arithmetic` | Fundamental Theorem of Arithmetic | Yes | No | — | MISSING |
-| nt | `math.nt.gcd` | Greatest Common Divisor | Yes | No | — | MISSING |
+| nt | `math.nt.gcd` | Greatest Common Divisor | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.gcd.md` | READY |
 | nt | `math.nt.general-diophantine` | Diophantine Equations | No | No | — | MISSING |
 | nt | `math.nt.induction-applications` | Induction in Number Theory | No | No | — | MISSING |
-| nt | `math.nt.lcm` | Least Common Multiple | No | No | — | MISSING |
+| nt | `math.nt.lcm` | Least Common Multiple | No | Yes | `educational-brain/concepts/mathematics/math.nt.lcm.md` | READY |
 | nt | `math.nt.linear-diophantine` | Linear Diophantine Equations | No | No | — | MISSING |
 | nt | `math.nt.modular-arithmetic` | Modular Arithmetic | Yes | No | — | MISSING |
 | nt | `math.nt.modular-inverse` | Modular Inverse | Yes | No | — | MISSING |
@@ -698,8 +698,8 @@ its subject KG.
 | nt | `math.nt.pells-equation` | Pell's Equation | No | No | — | MISSING |
 | nt | `math.nt.primality-testing` | Primality Testing | Yes | No | — | MISSING |
 | nt | `math.nt.prime-distribution` | Distribution of Primes | Yes | No | — | MISSING |
-| nt | `math.nt.prime-factorization` | Prime Factorization | Yes | No | — | MISSING |
-| nt | `math.nt.prime-number` | Prime Number | Yes | No | — | MISSING |
+| nt | `math.nt.prime-factorization` | Prime Factorization | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.prime-factorization.md` | READY |
+| nt | `math.nt.prime-number` | Prime Number | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.prime-number.md` | READY |
 | nt | `math.nt.prime-number-theorem` | Prime Number Theorem | Yes | No | — | MISSING |
 | nt | `math.nt.pythagorean-triples` | Pythagorean Triples | No | No | — | MISSING |
 | nt | `math.nt.residue-classes` | Residue Classes | No | No | — | MISSING |
