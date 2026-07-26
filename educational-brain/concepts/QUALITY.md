@@ -53,32 +53,33 @@ rather than hand-edit when entries change.
   migration debt (76 = 71 + 5), not introduced this batch — rewriting
   another session's freshly authored files remains out of scope.
 
-## Aggregate summary (505 entries)
+## Aggregate summary (511 entries)
 
-Adds mathematics `math.arith` Wave 7 part 1 (6 concepts, this batch,
-2026-07-26, autonomous loop iteration 19) on top of the prior 499-entry
-state (Wave 6 part 2 completion). All six Wave 7 part 1 entries
-(`absolute-value`, `integer-arithmetic`, `remainder`,
-`order-of-operations`, `exponent-rules`, `square-numbers`) have an
-existing Blueprint, reused by reference. All numbers below were
-recomputed fresh by scanning every live file in
-`educational-brain/concepts/{subject}/` — none hand-estimated. Note:
-this ledger's chemistry row count (136) understates chemistry's true
-186/186-complete state (CLAUDE.md) — a pre-existing gap outside this
-batch's mathematics-only scope, not corrected here.
+Adds mathematics `math.arith` Wave 7 part 2 (6 concepts, this batch,
+2026-07-26, autonomous loop iteration 20) on top of the prior 505-entry
+state (Wave 7 part 1 completion). All six Wave 7 part 2 entries
+(`long-multiplication`, `mental-multiplication`, `divisor-dividend`,
+`percentage-change`, `cube-numbers`, `scientific-notation`) have no
+Blueprint and were authored directly via the birth-taxonomy diagnostic
+procedure. All numbers below were recomputed fresh by scanning every
+live file in `educational-brain/concepts/{subject}/` — none
+hand-estimated. Note: this ledger's chemistry row count (136)
+understates chemistry's true 186/186-complete state (CLAUDE.md) — a
+pre-existing gap outside this batch's mathematics-only scope, not
+corrected here.
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 322 / 505 | see methodology note above — 23 `math.found` (`proper-subset`, `set-equality`, `union`, `intersection`, `set-difference`, `complement`, `venn-diagram`, `direct-proof`, `proof-by-contradiction`, `proof-by-contrapositive`, `proof-by-cases`, `existence-proof`, `writing-mathematics`, `theorem`, `conjecture`, `corollary`, `hasse-diagram`, `lemma`, `uniqueness-proof`, `finite-set`, `countable-set`, `strong-induction`, `uncountable-set`) + 17 `math.arith` (`subitizing`, `unit-rate`, `expanded-form`, `number-base`, `ordering`, `direct-variation`, `inverse-variation`, `carrying`, `mental-addition`, `decimal-operations`, `terminating-decimals`, `repeating-decimals`, `column-addition`, `borrowing`, `multiplication-table`, `percentage-calculations`, `estimation`) — none of these 40 have a Blueprint — + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
-| Educational Brain | 505 / 505 | trivially true (this is the entry list) |
-| Mental Model | 505 / 505 | |
-| Misconceptions | 505 / 505 | |
-| Analogies | 505 / 505 | |
-| Recovery Strategy | 505 / 505 | |
-| Assessment Signals | 505 / 505 | |
-| Tutor Actions | 435 / 505 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
-| Cross-links | 435 / 505 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
-| Version History | 435 / 505 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
+| Blueprint | 322 / 511 | see methodology note above — 23 `math.found` (`proper-subset`, `set-equality`, `union`, `intersection`, `set-difference`, `complement`, `venn-diagram`, `direct-proof`, `proof-by-contradiction`, `proof-by-contrapositive`, `proof-by-cases`, `existence-proof`, `writing-mathematics`, `theorem`, `conjecture`, `corollary`, `hasse-diagram`, `lemma`, `uniqueness-proof`, `finite-set`, `countable-set`, `strong-induction`, `uncountable-set`) + 23 `math.arith` (`subitizing`, `unit-rate`, `expanded-form`, `number-base`, `ordering`, `direct-variation`, `inverse-variation`, `carrying`, `mental-addition`, `decimal-operations`, `terminating-decimals`, `repeating-decimals`, `column-addition`, `borrowing`, `multiplication-table`, `percentage-calculations`, `estimation`, `long-multiplication`, `mental-multiplication`, `divisor-dividend`, `percentage-change`, `cube-numbers`, `scientific-notation`) — none of these 46 have a Blueprint — + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
+| Educational Brain | 511 / 511 | trivially true (this is the entry list) |
+| Mental Model | 511 / 511 | |
+| Misconceptions | 511 / 511 | |
+| Analogies | 511 / 511 | |
+| Recovery Strategy | 511 / 511 | |
+| Assessment Signals | 511 / 511 | |
+| Tutor Actions | 441 / 511 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
+| Cross-links | 441 / 511 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
+| Version History | 441 / 511 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
 
 ## Per-concept ledger
 
@@ -329,10 +330,12 @@ batch's mathematics-only scope, not corrected here.
 | `math.arith.column-addition` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.counting` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.counting-sequence` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.arith.cube-numbers` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.decimal-operations` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.decimals` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.direct-variation` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.division` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.arith.divisor-dividend` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.estimation` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.expanded-form` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.exponent-rules` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -344,7 +347,9 @@ batch's mathematics-only scope, not corrected here.
 | `math.arith.improper-fractions` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.integer-arithmetic` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.inverse-variation` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.arith.long-multiplication` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.mental-addition` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.arith.mental-multiplication` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.mixed-numbers` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.multiplication` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.multiplication-table` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -355,6 +360,7 @@ batch's mathematics-only scope, not corrected here.
 | `math.arith.order-of-operations` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.ordering` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.percentage-calculations` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.arith.percentage-change` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.percentages` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.place-value` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.proportion` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -362,6 +368,7 @@ batch's mathematics-only scope, not corrected here.
 | `math.arith.remainder` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.repeating-decimals` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.rounding` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.arith.scientific-notation` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.significant-figures` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.square-numbers` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.subitizing` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

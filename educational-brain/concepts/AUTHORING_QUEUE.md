@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1220** (= 1,775 KG concepts − 555 already `READY`, per
+Total queued: **1214** (= 1,775 KG concepts − 561 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -1085,15 +1085,18 @@ to READY.
 **Rows 564-565 removed 2026-07-26** — `math.arith.absolute-value`,
 `math.arith.integer-arithmetic` authored math.arith Wave 7 part 1,
 moved to READY.
-| 566 | mathematics | 16 | `math.arith.long-multiplication` | Long Multiplication |
-| 567 | mathematics | 16 | `math.arith.mental-multiplication` | Mental Multiplication |
+**Rows 566-567 removed 2026-07-26** — `math.arith.long-multiplication`,
+`math.arith.mental-multiplication` authored math.arith Wave 7 part 2,
+moved to READY.
 **Row 568 removed 2026-07-26** — `math.arith.remainder` authored
 math.arith Wave 7 part 1, moved to READY.
-| 569 | mathematics | 16 | `math.arith.divisor-dividend` | Divisor and Dividend |
+**Row 569 removed 2026-07-26** — `math.arith.divisor-dividend`
+authored math.arith Wave 7 part 2, moved to READY.
 **Rows 570-572 removed 2026-07-26** — `math.arith.order-of-operations`,
 `math.arith.exponent-rules`, `math.arith.square-numbers` authored
 math.arith Wave 7 part 1, moved to READY.
-| 573 | mathematics | 16 | `math.arith.cube-numbers` | Perfect Cubes |
+**Row 573 removed 2026-07-26** — `math.arith.cube-numbers` authored
+math.arith Wave 7 part 2, moved to READY.
 | 574 | mathematics | 16 | `math.nt.divisibility` | Divisibility |
 | 575 | mathematics | 16 | `math.nt.division-algorithm` | Division Algorithm |
 | 576 | mathematics | 16 | `math.geom.circle-equation` | Equation of a Circle |
@@ -1215,7 +1218,8 @@ math.arith Wave 5 part 1, moved to READY.
 **Row 688 removed 2026-07-26** — `math.arith.rounding` authored
 math.arith Wave 5 part 1, moved to READY.
 | 689 | mathematics | 18 | `math.arith.irrational-roots` | Irrational Square Roots |
-| 690 | mathematics | 18 | `math.arith.scientific-notation` | Scientific Notation |
+**Row 690 removed 2026-07-26** — `math.arith.scientific-notation`
+authored math.arith Wave 7 part 2, moved to READY.
 | 691 | mathematics | 18 | `math.nt.composite-number` | Composite Number |
 | 692 | mathematics | 18 | `math.nt.sieve-of-eratosthenes` | Sieve of Eratosthenes |
 | 693 | mathematics | 18 | `math.nt.prime-factorization` | Prime Factorization |
@@ -1369,7 +1373,8 @@ authored math.arith Wave 6 part 1, moved to READY.
 | 837 | computer_science | 19 | `cs.se.agile-design-principles` | Agile Practices and Software Design Principles |
 | 838 | computer_science | 19 | `cs.ds.intro-machine-learning` | Introduction to Machine Learning |
 | 839 | mathematics | 20 | `math.arith.fraction-simplification` | Fraction Simplification |
-| 840 | mathematics | 20 | `math.arith.percentage-change` | Percentage Change |
+**Row 840 removed 2026-07-26** — `math.arith.percentage-change`
+authored math.arith Wave 7 part 2, moved to READY.
 | 841 | mathematics | 20 | `math.nt.euclidean-algorithm` | Euclidean Algorithm |
 | 842 | mathematics | 20 | `math.nt.lcm` | Least Common Multiple |
 | 843 | mathematics | 20 | `math.nt.chinese-remainder-theorem` | Chinese Remainder Theorem |
