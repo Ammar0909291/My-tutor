@@ -13,16 +13,16 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **591** |
-| Remaining | **1,184** |
-| Completion percentage | **33.30%** |
+| Concepts with an Educational Brain entry | **593** |
+| Remaining | **1,182** |
+| Completion percentage | **33.41%** |
 
 *(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
 with an Educational Brain entry" rows had accumulated from prior sessions
 without being reconciled. Recomputed from this same file's §2 Subject
-progress table as currently stated per subject: 164 mathematics + 238
+progress table as currently stated per subject: 166 mathematics + 238
 physics + 3 english + 186 chemistry + 0 biology + 0 computer_science =
-591. Only the mathematics figure was independently re-verified by this
+593. Only the mathematics figure was independently re-verified by this
 batch by direct file count; the other subjects' figures are taken as
 already-recorded in §2 below, not re-audited by this batch, per this
 program's "mathematics only" scope this turn.)*
@@ -33,7 +33,7 @@ program's "mathematics only" scope this turn.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 164 | 18.06% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 166 | 18.28% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
@@ -994,7 +994,15 @@ record; the active default has moved to item 1b.**
     deferred to Wave 7 per this program's stick-to-the-original-set
     precedent) and authored both no-Blueprint concepts directly via
     the birth-taxonomy diagnostic procedure, raising `math.nt` to
-    **24/36**, exactly two-thirds complete.
+    **24/36**, exactly two-thirds complete. Wave 7 (2026-07-26,
+    iteration 32) re-verified fresh: 2 ready, `math.nt.rsa-basics`
+    (originally projected) plus `math.nt.general-diophantine` (newly
+    unlocked via `linear-diophantine`), both no Blueprint — authored
+    both directly via the birth-taxonomy diagnostic procedure, raising
+    `math.nt` to **26/36**. No further candidates unlocked this wave
+    (the remaining 10 concepts are all blocked on deep analytic/
+    algebraic-number-theory prerequisites); the next wave requires
+    re-auditing the domain's tail for genuinely reachable concepts.
 1. **(Historical, satisfied) `math.found` Wave 7**: the set of
    `math.found` nodes whose prerequisites were all READY after Wave 6.
 2. **(Historical, satisfied) `math.found` Waves 8-16 (52 remaining

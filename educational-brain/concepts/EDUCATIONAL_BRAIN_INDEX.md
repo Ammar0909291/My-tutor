@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 164 READY)
+## mathematics (908 concepts, 166 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -688,7 +688,7 @@ its subject KG.
 | nt | `math.nt.fermats-little-theorem` | Fermat's Little Theorem | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.fermats-little-theorem.md` | READY |
 | nt | `math.nt.fundamental-theorem-arithmetic` | Fundamental Theorem of Arithmetic | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.fundamental-theorem-arithmetic.md` | READY |
 | nt | `math.nt.gcd` | Greatest Common Divisor | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.gcd.md` | READY |
-| nt | `math.nt.general-diophantine` | Diophantine Equations | No | No | — | MISSING |
+| nt | `math.nt.general-diophantine` | Diophantine Equations | No | Yes | `educational-brain/concepts/mathematics/math.nt.general-diophantine.md` | READY |
 | nt | `math.nt.induction-applications` | Induction in Number Theory | No | Yes | `educational-brain/concepts/mathematics/math.nt.induction-applications.md` | READY |
 | nt | `math.nt.lcm` | Least Common Multiple | No | Yes | `educational-brain/concepts/mathematics/math.nt.lcm.md` | READY |
 | nt | `math.nt.linear-diophantine` | Linear Diophantine Equations | No | Yes | `educational-brain/concepts/mathematics/math.nt.linear-diophantine.md` | READY |
@@ -704,7 +704,7 @@ its subject KG.
 | nt | `math.nt.pythagorean-triples` | Pythagorean Triples | No | No | — | MISSING |
 | nt | `math.nt.residue-classes` | Residue Classes | No | Yes | `educational-brain/concepts/mathematics/math.nt.residue-classes.md` | READY |
 | nt | `math.nt.riemann-hypothesis` | Riemann Hypothesis | Yes | No | — | MISSING |
-| nt | `math.nt.rsa-basics` | RSA Cryptography (Number-Theoretic Basis) | No | No | — | MISSING |
+| nt | `math.nt.rsa-basics` | RSA Cryptography (Number-Theoretic Basis) | No | Yes | `educational-brain/concepts/mathematics/math.nt.rsa-basics.md` | READY |
 | nt | `math.nt.sieve-of-eratosthenes` | Sieve of Eratosthenes | No | Yes | `educational-brain/concepts/mathematics/math.nt.sieve-of-eratosthenes.md` | READY |
 | num | `math.num.cholesky` | Cholesky Factorization (Numerical) | No | No | — | MISSING |
 | num | `math.num.error-analysis` | Error Analysis | No | No | — | MISSING |

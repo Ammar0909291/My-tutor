@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1184** (= 1,775 KG concepts − 591 already `READY`, per
+Total queued: **1182** (= 1,775 KG concepts − 593 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -1604,7 +1604,8 @@ math.nt Wave 5 part 1, moved to READY.
 | 1038 | english | 22 | `eng.linguistics.historical-linguistics-intro` | Introduction to Historical Linguistics |
 **Row 1039 removed 2026-07-26** — `math.nt.linear-diophantine` authored
 math.nt Wave 6 part 2, moved to READY.
-| 1040 | mathematics | 23 | `math.nt.rsa-basics` | RSA Cryptography (Number-Theoretic Basis) |
+**Row 1040 removed 2026-07-26** — `math.nt.rsa-basics` authored
+math.nt Wave 7, moved to READY.
 | 1041 | mathematics | 23 | `math.alg.inequality-1var` | Linear Inequality in One Variable |
 | 1042 | mathematics | 23 | `math.alg.absolute-value-equations` | Absolute Value Equations and Inequalities |
 | 1043 | mathematics | 23 | `math.alg.linear-equation-2var` | Linear Equation in Two Variables |
@@ -1648,7 +1649,8 @@ math.nt Wave 6 part 2, moved to READY.
 | 1081 | english | 23 | `eng.linguistics.semantics-intro` | Introduction to Semantics |
 | 1082 | english | 23 | `eng.linguistics.language-families` | Language Families |
 | 1083 | english | 23 | `eng.linguistics.language-acquisition-intro` | Introduction to Language Acquisition |
-| 1084 | mathematics | 24 | `math.nt.general-diophantine` | Diophantine Equations |
+**Row 1084 removed 2026-07-26** — `math.nt.general-diophantine`
+authored math.nt Wave 7, moved to READY.
 | 1085 | mathematics | 24 | `math.alg.inequality-2var` | Linear Inequality in Two Variables |
 | 1086 | mathematics | 24 | `math.alg.system-linear-equations` | Systems of Linear Equations |
 | 1087 | mathematics | 24 | `math.alg.factor-theorem` | Factor Theorem |
