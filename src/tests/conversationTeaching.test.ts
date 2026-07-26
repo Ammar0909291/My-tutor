@@ -582,3 +582,41 @@ describe('Loop 5 — never re-interrogate resolved moments', () => {
     expect(directive).not.toContain('already answered')
   })
 })
+
+// Loop 6: analogy world ceiling fires after demonstration + multiple explanations
+describe('Loop 6 — analogy control', () => {
+  it('analogy ceiling fires when demonstrated and explanationCount >= 2', () => {
+    const state = {
+      ...initialConversationState('c1'),
+      phase: 'GUIDE' as const,
+      demonstrated: true,
+      explanationCount: 2,
+    }
+    const directive = buildTurnDirective({
+      state,
+      nextMove: 'teach',
+      maxParagraphs: 4,
+      workedExampleFirst: false,
+      visualType: null,
+    })
+    expect(directive).toContain('ANALOGY CEILING')
+    expect(directive).toContain('reuse the SAME world')
+  })
+
+  it('analogy ceiling does not fire early in the lesson', () => {
+    const state = {
+      ...initialConversationState('c1'),
+      phase: 'OBSERVE' as const,
+      demonstrated: false,
+      explanationCount: 0,
+    }
+    const directive = buildTurnDirective({
+      state,
+      nextMove: 'ask',
+      maxParagraphs: 4,
+      workedExampleFirst: false,
+      visualType: null,
+    })
+    expect(directive).not.toContain('ANALOGY CEILING')
+  })
+})

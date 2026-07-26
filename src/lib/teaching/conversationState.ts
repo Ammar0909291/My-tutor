@@ -479,6 +479,11 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   if (answered > 0 && p.nextMove === 'ask') {
     lines.push(`- The student has already answered ${answered} question(s) correctly this lesson. Ask a DIFFERENT question — never re-ask one they already got right.`)
   }
+  // Loop 6: analogy world ceiling — max 2 distinct analogy worlds per
+  // concept. After DEMONSTRATE, cap new analogy introductions.
+  if (p.state.demonstrated && p.state.explanationCount >= 2) {
+    lines.push('- ANALOGY CEILING: at most 2 analogy worlds per concept. If you already used analogies, reuse the SAME world — do not introduce a new metaphor.')
+  }
   return lines.join('\n')
 }
 
