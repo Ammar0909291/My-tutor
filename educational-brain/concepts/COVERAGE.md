@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 158 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 18 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem` — `math.nt` domain IN PROGRESS, 18/36, full-campaign active default per ROADMAP.md §5 item 1b), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
+| mathematics | 908 | 159 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 19 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity` — `math.nt` domain IN PROGRESS, 19/36, full-campaign active default per ROADMAP.md §5 item 1b), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -3148,3 +3148,50 @@ mathematics entries.
 Full validation this batch: all 6 subject KG validators PASS (0
 failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
 run, `npm run build` succeeded.
+
+### Mathematics — math.nt Wave 5 part 2 (2026-07-26, autonomous loop iteration 29)
+
+Autonomous loop iteration 29, continuing immediately after Wave 5 part
+1. Git resync found zero concurrent commits at this iteration's start.
+
+**Wave 5 part 2 candidates re-verified programmatically** against the
+live KG (not assumed from part 1's projection): confirmed
+`math.nt.bezout-identity` still the only originally-deferred concept,
+per this program's established precedent (stick to the
+originally-deferred set rather than re-splitting an enlarged pool).
+The live KG now also shows 4 further candidates newly ready, unlocked
+by Wave 5 part 1's authoring of `congruence`, `modular-inverse`, and
+`fermats-little-theorem`: `math.nt.residue-classes` (no Blueprint),
+`math.nt.chinese-remainder-theorem`, `math.nt.eulers-theorem`, and
+`math.nt.primality-testing` (all 3 Blueprint-grounded) — deliberately
+deferred to Wave 6, computed fresh at that wave's own start.
+
+Authored `math.nt.bezout-identity` (requires
+`math.nt.extended-euclidean-algorithm`, `math.nt.gcd`; unlocks
+`math.nt.linear-diophantine`) directly via the birth-taxonomy
+diagnostic procedure, no Blueprint existing for this concept.
+Deliberately distinguished from the already-authored
+`extended-euclidean-algorithm` entry by focusing on the EXISTENCE
+theorem's own distinct misconceptions rather than restating that
+entry's computational-procedure misconceptions:
+
+- MC BEZOUT-IDENTITY-ASSUMED-TO-REQUIRE-COPRIME-INTEGERS
+  (FOUNDATIONAL, Type 6 analogy overextension, over-applying the
+  frequently-used coprime special case — modular inverse construction
+  — as if it defined the theorem's entire scope).
+- MC BEZOUT-COEFFICIENTS-ASSUMED-POSITIVE (Foundational, Type 2
+  perceptual intuition, from "combination" language's positive-
+  quantities connotation).
+- MC BEZOUT-IDENTITY-TREATED-AS-A-NEW-COMPUTATIONAL-METHOD-RATHER-
+  THAN-AN-EXISTENCE-STATEMENT (Moderate, Type 5 instruction-induced,
+  from the two closely-related concepts being taught back-to-back and
+  blurring into one perceived topic).
+
+`math.nt` now **19/36**, just past the halfway point. No other domain
+touched. All five tracking files updated in this same commit;
+re-validated 0 duplicates, 0 orphans, 0 Quality Gate 3 violations
+across all 159 mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2164 passed / 1 skipped (112 files), `npm run build` succeeded.

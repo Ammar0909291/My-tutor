@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1190** (= 1,775 KG concepts − 585 already `READY`, per
+Total queued: **1189** (= 1,775 KG concepts − 586 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -1534,7 +1534,8 @@ authored math.nt Wave 4, moved to READY.
 | 974 | biology | 21 | `bio.sys.synthetic-biology` | Synthetic Biology |
 | 975 | computer_science | 21 | `cs.struct.minimum-spanning-tree` | Minimum Spanning Trees |
 | 976 | computer_science | 21 | `cs.ds.neural-networks-intro` | Introduction to Neural Networks |
-| 977 | mathematics | 22 | `math.nt.bezout-identity` | Bézout's Identity |
+**Row 977 removed 2026-07-26** — `math.nt.bezout-identity` authored
+math.nt Wave 5 part 2, moved to READY.
 **Row 978 removed 2026-07-26** — `math.nt.modular-inverse` authored
 math.nt Wave 5 part 1, moved to READY.
 | 979 | mathematics | 22 | `math.alg.linear-equation-1var` | Linear Equation in One Variable |

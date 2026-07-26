@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 158 READY)
+## mathematics (908 concepts, 159 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -673,7 +673,7 @@ its subject KG.
 | nt | `math.nt.algebraic-integers` | Algebraic Integers | No | No | — | MISSING |
 | nt | `math.nt.algebraic-number-theory` | Algebraic Number Theory | No | No | — | MISSING |
 | nt | `math.nt.analytic-number-theory` | Analytic Number Theory | Yes | No | — | MISSING |
-| nt | `math.nt.bezout-identity` | Bézout's Identity | No | No | — | MISSING |
+| nt | `math.nt.bezout-identity` | Bézout's Identity | No | Yes | `educational-brain/concepts/mathematics/math.nt.bezout-identity.md` | READY |
 | nt | `math.nt.chinese-remainder-theorem` | Chinese Remainder Theorem | Yes | No | — | MISSING |
 | nt | `math.nt.composite-number` | Composite Number | No | Yes | `educational-brain/concepts/mathematics/math.nt.composite-number.md` | READY |
 | nt | `math.nt.congruence` | Congruence | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.congruence.md` | READY |
