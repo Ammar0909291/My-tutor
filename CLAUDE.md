@@ -1551,6 +1551,13 @@
   `fermats-little-theorem`; all Blueprint reused by reference). `math.nt`
   15/36 → 18/36. Part 2 (`bezout-identity`, no Blueprint) deferred. Full
   detail: `COVERAGE.md`.
+  **Batch 39 — math.nt Wave 5 part 2** (2026-07-26, autonomous loop
+  iteration 29): 1 concept authored (`bezout-identity`, no Blueprint,
+  misconceptions authored via birth-taxonomy diagnostic). `math.nt`
+  18/36 → 19/36 — past the halfway point. Wave 6 candidates
+  (`residue-classes` no-Blueprint,
+  `chinese-remainder-theorem`/`eulers-theorem`/`primality-testing` all
+  Blueprint-grounded) computed. Full detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
