@@ -301,16 +301,25 @@ equation-of-two-ratios definition builds on directly).
 
 ## Cross-Subject Connections
 
-Per KG `cross_links` [`math.func.linear-function`]: verified via
-directory listing that no Educational Brain entry or Blueprint yet
-exists for `math.func.linear-function` — per the Blueprint's own V-5
-determination, P76_mode is independence (a self-contained
-photo-enlargement/print-cost probe), not a genuine cross-link probe. A
-future revision, once that concept is authored, may connect this
-concept's genuine-proportionality test directly to that concept's
-classification of y = mx (proportional) versus y = mx + b, b≠0
-(linear but not proportional). Not fabricated beyond what the KG and
-Blueprint state.
+Per KG `cross_links` [`math.func.linear-function`]: this entry's own
+Blueprint (`docs/curriculum/blueprints/math.arith.proportion.md`)
+determined P76_mode = independence, having verified via directory
+listing at the Blueprint's own authoring time that no Blueprint yet
+existed for `math.func.linear-function`. **Correction (2026-07-26,
+Wave 4 part 2, discovered while authoring `math.arith.
+direct-variation`)**: a Blueprint for `math.func.linear-function` now
+exists (`docs/curriculum/blueprints/math.func.linear-function.md`,
+dated 2026-07-22) — the claim above was accurate when this concept's
+own Blueprint was authored but is now stale. No Educational Brain
+entry yet exists for `math.func.linear-function` itself (verified via
+directory listing). This entry's own P76 mastery-gate content (the
+photo-enlargement/print-cost probe, independence mode) is NOT rewritten
+here, since it correctly reflects this concept's OWN Blueprint's
+already-authored assessment content; a future revision may add a
+genuine cross-link probe alongside it, connecting this concept's
+genuine-proportionality test to `math.func.linear-function`'s own
+documented classification of y = mx (proportional) versus y = mx + b,
+b≠0 (linear but not proportional).
 
 ## Blueprint References
 

@@ -322,14 +322,26 @@ logic directly reuses).
 
 ## Cross-Subject Connections
 
-Per KG `cross_links` [`math.func.linear-function`]: not yet authored
-(verified via directory listing) — the Blueprint's own P76 mastery-gate
-probe explicitly bridges to this cross-link at a conceptual level
-appropriate for the "understand" Bloom level (identifying a rate as a
-linear function's slope/constant of proportionality, without requiring
-formal linear-function machinery), to be genuinely activated once that
-concept is authored. Not fabricated beyond what the KG and Blueprint
-state.
+Per KG `cross_links` [`math.func.linear-function`]: this entry's own
+Blueprint stated this target was "not yet authored" (verified via
+directory listing at that Blueprint's own authoring time) — the
+Blueprint's own P76 mastery-gate probe explicitly bridges to this
+cross-link at a conceptual level appropriate for the "understand"
+Bloom level (identifying a rate as a linear function's slope/constant
+of proportionality, without requiring formal linear-function
+machinery). **Correction (2026-07-26, Wave 4 part 2, discovered while
+authoring `math.arith.direct-variation`)**: a Blueprint for `math.func.
+linear-function` now exists (`docs/curriculum/blueprints/math.func.
+linear-function.md`, dated 2026-07-22) — the claim above was accurate
+when this concept's own Blueprint was authored but is now stale. No
+Educational Brain entry yet exists for `math.func.linear-function`
+itself (verified via directory listing). This entry's own P76 content
+is not rewritten here, since it correctly reflects this concept's OWN
+Blueprint's already-authored assessment content, and per the
+Blueprint's own note already anticipates being "genuinely activated
+once that concept is authored" — a future revision may formally wire
+this bridge against `math.func.linear-function`'s own documented slope/
+rate-of-change content now that its Blueprint exists.
 
 ## Blueprint References
 

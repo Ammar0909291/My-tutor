@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1249** (= 1,775 KG concepts − 526 already `READY`, per
+Total queued: **1244** (= 1,775 KG concepts − 531 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -951,9 +951,9 @@ authored Wave 14, moved to READY.
 **Rows 439, 442 removed 2026-07-26** — `math.arith.ones-tens-hundreds`,
 `math.arith.addition` authored math.arith Wave 4 part 1, moved to
 READY.
-| 440 | mathematics | 13 | `math.arith.expanded-form` | Expanded Form |
-| 441 | mathematics | 13 | `math.arith.number-base` | Number Base |
-| 443 | mathematics | 13 | `math.arith.ordering` | Ordering Numbers |
+**Rows 440-441, 443 removed 2026-07-26** — `math.arith.expanded-form`,
+`math.arith.number-base`, `math.arith.ordering` authored math.arith
+Wave 4 part 2, moved to READY.
 | 444 | mathematics | 13 | `math.seq.partial-sums` | Partial Sums |
 | 445 | mathematics | 13 | `math.seq.arithmetic-series` | Arithmetic Series |
 | 446 | mathematics | 13 | `math.seq.geometric-series` | Geometric Series |
@@ -1275,8 +1275,9 @@ Wave 2 (part 2), moved to READY.
 | 756 | computer_science | 18 | `cs.db.sql-joins-subqueries` | SQL — Joins and Subqueries |
 | 757 | computer_science | 18 | `cs.ds.data-visualisation` | Data Visualisation with Matplotlib |
 | 758 | mathematics | 19 | `math.arith.percentage-calculations` | Percentage Calculations |
-| 759 | mathematics | 19 | `math.arith.direct-variation` | Direct Variation |
-| 760 | mathematics | 19 | `math.arith.inverse-variation` | Inverse Variation |
+**Rows 759-760 removed 2026-07-26** — `math.arith.direct-variation`,
+`math.arith.inverse-variation` authored math.arith Wave 4 part 2,
+moved to READY.
 | 761 | mathematics | 19 | `math.arith.estimation` | Estimation |
 | 762 | mathematics | 19 | `math.arith.significant-figures` | Significant Figures |
 | 763 | mathematics | 19 | `math.nt.fundamental-theorem-arithmetic` | Fundamental Theorem of Arithmetic |

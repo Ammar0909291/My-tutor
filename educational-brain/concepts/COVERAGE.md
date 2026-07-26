@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 99 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 17 `math.arith.*` entries (`fractions`, `counting`, `fraction-equivalence`, `fraction-multiplication`, `fraction-reciprocal`, `mixed-numbers`, `improper-fractions`, `ratios`, `counting-sequence`, `subitizing`, `place-value`, `number-line`, `proportion`, `unit-rate`, `ones-tens-hundreds`, `addition`, `decimals` — `math.arith` domain IN PROGRESS, 17/58), see Delivery history. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
+| mathematics | 908 | 104 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 22 `math.arith.*` entries (`fractions`, `counting`, `fraction-equivalence`, `fraction-multiplication`, `fraction-reciprocal`, `mixed-numbers`, `improper-fractions`, `ratios`, `counting-sequence`, `subitizing`, `place-value`, `number-line`, `proportion`, `unit-rate`, `ones-tens-hundreds`, `addition`, `decimals`, `expanded-form`, `number-base`, `ordering`, `direct-variation`, `inverse-variation` — `math.arith` domain IN PROGRESS, 22/58), see Delivery history. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -2230,6 +2230,81 @@ authored directly via the birth-taxonomy diagnostic procedure. No
 other domain touched. All five tracking files updated in this same
 commit; re-validated 0 duplicates, 0 orphans, 0 Quality Gate 3
 violations across all 99 mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.arith Wave 4 part 2 (2026-07-26, autonomous loop iteration 14)
+
+Autonomous loop iteration 14, continuing the same established
+Mathematics Educational Brain Autonomous Completion Program
+(dynamic-pacing `<<autonomous-loop-dynamic>>` sentinel fire). Git
+resync found zero concurrent commits at this iteration's start.
+
+**Repair-audit first** (per this program's standing per-iteration
+discipline): re-ran the Quality Gate 3 heading-conformance check across
+all 99 pre-batch mathematics entries. **0 violations found**.
+
+**Wave 4 part 2**: authored the 5 no-Blueprint concepts deferred from
+Wave 4 part 1 — `math.arith.expanded-form`, `math.arith.number-base`,
+`math.arith.ordering`, `math.arith.direct-variation`, `math.arith.
+inverse-variation` — all misconceptions authored directly via the
+birth-taxonomy diagnostic procedure:
+
+- `math.arith.expanded-form` — MC-1 EXPANDED-FORM-AS-DIGIT-PRODUCT
+  (FOUNDATIONAL, Type 4 notation-induced), MC-2 ZERO-TERM-OMITTED
+  (Type 1), MC-3 DIGIT-ITSELF-AS-TERM (Type 6 analogy overextension
+  from an unrelated digit-sum procedure). Noted honestly in Curriculum
+  Feedback: substantial conceptual overlap with `math.arith.
+  place-value`'s own MC-2/MC-3, an expected consequence of
+  `expanded-form` being the dedicated writing-task concept for the
+  notation `place-value` first introduces.
+- `math.arith.number-base` — MC-1 BASE-10-DIGITS-ASSUMED-UNIVERSAL
+  (FOUNDATIONAL, Type 1), MC-2 POSITIONAL-VALUE-STAYS-POWERS-OF-TEN
+  (Type 6 analogy overextension), MC-3 HEXADECIMAL-LETTERS-AS-VARIABLES
+  (Type 3 language contamination).
+- `math.arith.ordering` — MC-1 INEQUALITY-SYMBOL-DIRECTION-REVERSED
+  (FOUNDATIONAL, Type 4 notation-induced), MC-2
+  STRICT-VS-NONSTRICT-CONFLATION (Type 1), MC-3
+  COMPOUND-INEQUALITY-MISREAD-AS-SEPARATE (Type 4 notation-induced).
+- `math.arith.direct-variation` — MC-1 CONSTANT-K-MISIDENTIFIED
+  (FOUNDATIONAL, Type 5 instruction-induced), MC-2
+  ANY-LINEAR-RELATIONSHIP-ASSUMED-DIRECT-VARIATION (FOUNDATIONAL,
+  Type 1, `math.arith.proportion`'s own MC-2 generalized to y=kx),
+  MC-3 DIRECT-VARIATION-ASSUMED-ONLY-POSITIVE-K (Type 1).
+- `math.arith.inverse-variation` — MC-1
+  INVERSE-VARIATION-CONFUSED-WITH-DIRECT-VARIATION (FOUNDATIONAL,
+  Type 3 language contamination — the shared word "variation"), MC-2
+  INVERSE-VARIATION-ASSUMED-LINEAR-GRAPH (Type 6 analogy
+  overextension), MC-3 PRODUCT-CONSTANT-NOT-CHECKED (Type 5
+  instruction-induced).
+
+**Genuine discovery, corrected same batch**: while authoring
+`direct-variation`, found that Blueprints for `math.func.
+linear-function` and `math.func.rational-function` (both dated
+2026-07-22) now exist — contradicting a "not yet authored" claim
+inherited from `math.arith.proportion`'s and `math.arith.ratios`'s
+own Blueprints (accurate at THOSE Blueprints' own authoring time, now
+stale). Used this to construct genuine cross-link transfer probes
+(Gate 5 in both `direct-variation.md` and `inverse-variation.md`,
+grounded in the actual documented content of the now-existing
+Blueprints) rather than independence mode. Added a small, targeted
+addendum to `math.arith.proportion.md`'s and `math.arith.ratios.md`'s
+own Cross-Subject Connections sections recording the correction —
+their existing P76 assessment content (each concept's OWN already-
+authored mastery-gate probe) was NOT rewritten, since it correctly
+reflects those concepts' own Blueprints' content as authored.
+
+`math.arith` now 22/58. Wave 5 candidates to be computed
+programmatically next iteration — the candidate pool grew
+substantially after Wave 4 (`addition` and `decimals` each unlocked
+several new children: `carrying`, `mental-addition`, `subtraction`,
+`multiplication`, `decimal-operations`, `terminating-decimals`,
+`repeating-decimals`, `percentages`, `rounding`), not yet re-verified
+this turn. No other domain touched. All five tracking files updated in
+this same commit; re-validated 0 duplicates, 0 orphans, 0 Quality Gate
+3 violations across all 104 mathematics entries.
 
 Full validation this batch: all 6 subject KG validators PASS (0
 failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite

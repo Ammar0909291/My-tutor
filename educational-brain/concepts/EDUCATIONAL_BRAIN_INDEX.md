@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 99 READY)
+## mathematics (908 concepts, 104 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -124,11 +124,11 @@ its subject KG.
 | arith | `math.arith.cube-numbers` | Perfect Cubes | No | No | — | MISSING |
 | arith | `math.arith.decimal-operations` | Decimal Operations | No | No | — | MISSING |
 | arith | `math.arith.decimals` | Decimals | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.decimals.md` | READY |
-| arith | `math.arith.direct-variation` | Direct Variation | No | No | — | MISSING |
+| arith | `math.arith.direct-variation` | Direct Variation | No | Yes | `educational-brain/concepts/mathematics/math.arith.direct-variation.md` | READY |
 | arith | `math.arith.division` | Division | Yes | No | — | MISSING |
 | arith | `math.arith.divisor-dividend` | Divisor and Dividend | No | No | — | MISSING |
 | arith | `math.arith.estimation` | Estimation | No | No | — | MISSING |
-| arith | `math.arith.expanded-form` | Expanded Form | No | No | — | MISSING |
+| arith | `math.arith.expanded-form` | Expanded Form | No | Yes | `educational-brain/concepts/mathematics/math.arith.expanded-form.md` | READY |
 | arith | `math.arith.exponent-rules` | Exponent Rules | Yes | No | — | MISSING |
 | arith | `math.arith.exponentiation` | Exponentiation | Yes | No | — | MISSING |
 | arith | `math.arith.fraction-addition` | Addition and Subtraction of Fractions | No | No | — | MISSING |
@@ -139,7 +139,7 @@ its subject KG.
 | arith | `math.arith.fractions` | Fractions | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.fractions.md` | READY |
 | arith | `math.arith.improper-fractions` | Improper Fractions | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.improper-fractions.md` | READY |
 | arith | `math.arith.integer-arithmetic` | Integer Arithmetic | Yes | No | — | MISSING |
-| arith | `math.arith.inverse-variation` | Inverse Variation | No | No | — | MISSING |
+| arith | `math.arith.inverse-variation` | Inverse Variation | No | Yes | `educational-brain/concepts/mathematics/math.arith.inverse-variation.md` | READY |
 | arith | `math.arith.irrational-roots` | Irrational Square Roots | No | No | — | MISSING |
 | arith | `math.arith.long-division` | Long Division | No | No | — | MISSING |
 | arith | `math.arith.long-multiplication` | Long Multiplication | No | No | — | MISSING |
@@ -150,11 +150,11 @@ its subject KG.
 | arith | `math.arith.multiplication` | Multiplication | Yes | No | — | MISSING |
 | arith | `math.arith.multiplication-table` | Multiplication Table | No | No | — | MISSING |
 | arith | `math.arith.negative-numbers` | Negative Numbers | Yes | No | — | MISSING |
-| arith | `math.arith.number-base` | Number Base | No | No | — | MISSING |
+| arith | `math.arith.number-base` | Number Base | No | Yes | `educational-brain/concepts/mathematics/math.arith.number-base.md` | READY |
 | arith | `math.arith.number-line` | Number Line | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.number-line.md` | READY |
 | arith | `math.arith.ones-tens-hundreds` | Ones, Tens, Hundreds | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.ones-tens-hundreds.md` | READY |
 | arith | `math.arith.order-of-operations` | Order of Operations | Yes | No | — | MISSING |
-| arith | `math.arith.ordering` | Ordering Numbers | No | No | — | MISSING |
+| arith | `math.arith.ordering` | Ordering Numbers | No | Yes | `educational-brain/concepts/mathematics/math.arith.ordering.md` | READY |
 | arith | `math.arith.percentage-calculations` | Percentage Calculations | No | No | — | MISSING |
 | arith | `math.arith.percentage-change` | Percentage Change | No | No | — | MISSING |
 | arith | `math.arith.percentages` | Percentages | Yes | No | — | MISSING |
