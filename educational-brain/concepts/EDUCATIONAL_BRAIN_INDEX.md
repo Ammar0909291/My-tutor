@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 87 READY)
+## mathematics (908 concepts, 90 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -137,7 +137,7 @@ its subject KG.
 | arith | `math.arith.fraction-reciprocal` | Reciprocal | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.fraction-reciprocal.md` | READY |
 | arith | `math.arith.fraction-simplification` | Fraction Simplification | No | No | — | MISSING |
 | arith | `math.arith.fractions` | Fractions | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.fractions.md` | READY |
-| arith | `math.arith.improper-fractions` | Improper Fractions | Yes | No | — | MISSING |
+| arith | `math.arith.improper-fractions` | Improper Fractions | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.improper-fractions.md` | READY |
 | arith | `math.arith.integer-arithmetic` | Integer Arithmetic | Yes | No | — | MISSING |
 | arith | `math.arith.inverse-variation` | Inverse Variation | No | No | — | MISSING |
 | arith | `math.arith.irrational-roots` | Irrational Square Roots | No | No | — | MISSING |
@@ -146,7 +146,7 @@ its subject KG.
 | arith | `math.arith.mental-addition` | Mental Addition | No | No | — | MISSING |
 | arith | `math.arith.mental-arithmetic` | Mental Arithmetic | No | No | — | MISSING |
 | arith | `math.arith.mental-multiplication` | Mental Multiplication | No | No | — | MISSING |
-| arith | `math.arith.mixed-numbers` | Mixed Numbers | Yes | No | — | MISSING |
+| arith | `math.arith.mixed-numbers` | Mixed Numbers | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.mixed-numbers.md` | READY |
 | arith | `math.arith.multiplication` | Multiplication | Yes | No | — | MISSING |
 | arith | `math.arith.multiplication-table` | Multiplication Table | No | No | — | MISSING |
 | arith | `math.arith.negative-numbers` | Negative Numbers | Yes | No | — | MISSING |
@@ -160,7 +160,7 @@ its subject KG.
 | arith | `math.arith.percentages` | Percentages | Yes | No | — | MISSING |
 | arith | `math.arith.place-value` | Place Value | Yes | No | — | MISSING |
 | arith | `math.arith.proportion` | Proportion | Yes | No | — | MISSING |
-| arith | `math.arith.ratios` | Ratio | Yes | No | — | MISSING |
+| arith | `math.arith.ratios` | Ratio | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.ratios.md` | READY |
 | arith | `math.arith.remainder` | Remainder | Yes | No | — | MISSING |
 | arith | `math.arith.repeating-decimals` | Repeating Decimals | No | No | — | MISSING |
 | arith | `math.arith.rounding` | Rounding | Yes | No | — | MISSING |

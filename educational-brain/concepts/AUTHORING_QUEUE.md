@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1261** (= 1,775 KG concepts − 514 already `READY`, per
+Total queued: **1258** (= 1,775 KG concepts − 517 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -1135,10 +1135,12 @@ authored Wave 16 (FINAL wave), moved to READY. `math.found` domain now
 **Rows 619-621 removed 2026-07-26** — `math.arith.fraction-equivalence`,
 `math.arith.fraction-multiplication`, `math.arith.fraction-reciprocal`
 authored math.arith Wave 2 (part 1), moved to READY.
-| 622 | mathematics | 17 | `math.arith.mixed-numbers` | Mixed Numbers |
-| 623 | mathematics | 17 | `math.arith.improper-fractions` | Improper Fractions |
+**Rows 622-623 removed 2026-07-26** — `math.arith.mixed-numbers`,
+`math.arith.improper-fractions` authored math.arith Wave 2 (part 2),
+moved to READY.
 | 624 | mathematics | 17 | `math.arith.decimals` | Decimals |
-| 625 | mathematics | 17 | `math.arith.ratios` | Ratio |
+**Row 625 removed 2026-07-26** — `math.arith.ratios` authored math.arith
+Wave 2 (part 2), moved to READY.
 | 626 | mathematics | 17 | `math.arith.square-roots` | Square Roots |
 | 627 | mathematics | 17 | `math.arith.mental-arithmetic` | Mental Arithmetic |
 | 628 | mathematics | 17 | `math.nt.divisibility-rules` | Divisibility Rules |
