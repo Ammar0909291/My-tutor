@@ -527,3 +527,58 @@ describe('Loop 4 — preserve confusion state across acknowledgements', () => {
     expect(state.consecutiveDontKnows).toBe(1) // preserved
   })
 })
+
+// Loop 5: turn directive includes "already answered" guard when questions
+// have been answered correctly, preventing re-interrogation of resolved moments
+describe('Loop 5 — never re-interrogate resolved moments', () => {
+  it('turn directive includes already-answered count when asking after correct answers', () => {
+    const state = {
+      ...initialConversationState('c1'),
+      phase: 'PRACTICE' as const,
+      correctAtCheck: 1,
+      correctAtPractice: 1,
+      demonstrated: true,
+    }
+    const directive = buildTurnDirective({
+      state,
+      nextMove: 'ask',
+      maxParagraphs: 4,
+      workedExampleFirst: false,
+      visualType: null,
+    })
+    expect(directive).toContain('already answered 2 question(s) correctly')
+    expect(directive).toContain('DIFFERENT question')
+  })
+
+  it('turn directive omits the guard when no correct answers yet', () => {
+    const state = {
+      ...initialConversationState('c1'),
+      phase: 'OBSERVE' as const,
+    }
+    const directive = buildTurnDirective({
+      state,
+      nextMove: 'ask',
+      maxParagraphs: 4,
+      workedExampleFirst: false,
+      visualType: null,
+    })
+    expect(directive).not.toContain('already answered')
+  })
+
+  it('turn directive omits the guard on teach/show moves (no question to re-ask)', () => {
+    const state = {
+      ...initialConversationState('c1'),
+      phase: 'GUIDE' as const,
+      correctAtCheck: 1,
+      demonstrated: true,
+    }
+    const directive = buildTurnDirective({
+      state,
+      nextMove: 'teach',
+      maxParagraphs: 4,
+      workedExampleFirst: false,
+      visualType: null,
+    })
+    expect(directive).not.toContain('already answered')
+  })
+})

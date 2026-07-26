@@ -473,6 +473,12 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   if (p.visualType) {
     lines.push(`- Visual-first: a ${p.visualType.replace(/_/g, ' ')} teaches this faster than prose — lead with it (emit the VISUAL tag) and keep the text around it minimal.`)
   }
+  // Loop 5: when questions have already been answered at this phase, tell
+  // the LLM explicitly — prevents re-asking resolved questions.
+  const answered = p.state.correctAtCheck + p.state.correctAtPractice
+  if (answered > 0 && p.nextMove === 'ask') {
+    lines.push(`- The student has already answered ${answered} question(s) correctly this lesson. Ask a DIFFERENT question — never re-ask one they already got right.`)
+  }
   return lines.join('\n')
 }
 
