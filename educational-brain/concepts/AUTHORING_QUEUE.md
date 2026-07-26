@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1275** (= 1,775 KG concepts − 500 already `READY`, per
+Total queued: **1271** (= 1,775 KG concepts − 504 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -850,10 +850,9 @@ Wave 11, moved to READY.
 | 339 | computer_science | 10 | `cs.prog.exception-handling` | Exception Handling |
 | 340 | computer_science | 10 | `cs.control.nested-control-patterns` | Nested Control Flow Patterns |
 | 341 | computer_science | 10 | `cs.data.strings` | Strings |
-| 342 | mathematics | 11 | `math.found.proof-by-induction` | Mathematical Induction |
-| 343 | mathematics | 11 | `math.found.well-ordering-principle` | Well-Ordering Principle |
-| 344 | mathematics | 11 | `math.found.countable-set` | Countable Set |
-| 345 | mathematics | 11 | `math.found.integers` | Integers |
+**Rows 342-345 removed 2026-07-26** — `math.found.proof-by-induction`,
+`math.found.well-ordering-principle`, `math.found.countable-set`,
+`math.found.integers` authored Wave 12, moved to READY.
 | 346 | mathematics | 11 | `math.arith.counting` | Counting |
 | 347 | mathematics | 11 | `math.func.inverse-functions` | Inverse Functions |
 | 348 | mathematics | 11 | `math.seq.sequence` | Sequence |

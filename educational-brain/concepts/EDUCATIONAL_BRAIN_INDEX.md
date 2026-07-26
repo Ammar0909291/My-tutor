@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 73 READY)
+## mathematics (908 concepts, 77 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -410,7 +410,7 @@ its subject KG.
 | found | `math.found.complex-numbers` | Complex Numbers | Yes | No | — | MISSING |
 | found | `math.found.conjecture` | Conjecture | No | Yes | `educational-brain/concepts/mathematics/math.found.conjecture.md` | READY |
 | found | `math.found.corollary` | Corollary | No | Yes | `educational-brain/concepts/mathematics/math.found.corollary.md` | READY |
-| found | `math.found.countable-set` | Countable Set | No | No | — | MISSING |
+| found | `math.found.countable-set` | Countable Set | No | Yes | `educational-brain/concepts/mathematics/math.found.countable-set.md` | READY |
 | found | `math.found.deductive-reasoning` | Deductive Reasoning | Yes | Yes | `educational-brain/concepts/mathematics/math.found.deductive-reasoning.md` | READY |
 | found | `math.found.definition` | Mathematical Definition | No | Yes | `educational-brain/concepts/mathematics/math.found.definition.md` | READY |
 | found | `math.found.direct-proof` | Direct Proof | No | Yes | `educational-brain/concepts/mathematics/math.found.direct-proof.md` | READY |
@@ -423,7 +423,7 @@ its subject KG.
 | found | `math.found.generalization` | Generalization | Yes | Yes | `educational-brain/concepts/mathematics/math.found.generalization.md` | READY |
 | found | `math.found.hasse-diagram` | Hasse Diagram | No | Yes | `educational-brain/concepts/mathematics/math.found.hasse-diagram.md` | READY |
 | found | `math.found.inductive-reasoning` | Inductive Reasoning | No | Yes | `educational-brain/concepts/mathematics/math.found.inductive-reasoning.md` | READY |
-| found | `math.found.integers` | Integers | Yes | No | — | MISSING |
+| found | `math.found.integers` | Integers | Yes | Yes | `educational-brain/concepts/mathematics/math.found.integers.md` | READY |
 | found | `math.found.intersection` | Intersection | No | Yes | `educational-brain/concepts/mathematics/math.found.intersection.md` | READY |
 | found | `math.found.irrational-numbers` | Irrational Numbers | Yes | No | — | MISSING |
 | found | `math.found.lemma` | Lemma | No | Yes | `educational-brain/concepts/mathematics/math.found.lemma.md` | READY |
@@ -450,7 +450,7 @@ its subject KG.
 | found | `math.found.proof-by-cases` | Proof by Cases | No | Yes | `educational-brain/concepts/mathematics/math.found.proof-by-cases.md` | READY |
 | found | `math.found.proof-by-contradiction` | Proof by Contradiction | No | Yes | `educational-brain/concepts/mathematics/math.found.proof-by-contradiction.md` | READY |
 | found | `math.found.proof-by-contrapositive` | Proof by Contrapositive | No | Yes | `educational-brain/concepts/mathematics/math.found.proof-by-contrapositive.md` | READY |
-| found | `math.found.proof-by-induction` | Mathematical Induction | Yes | No | — | MISSING |
+| found | `math.found.proof-by-induction` | Mathematical Induction | Yes | Yes | `educational-brain/concepts/mathematics/math.found.proof-by-induction.md` | READY |
 | found | `math.found.proper-subset` | Proper Subset | No | Yes | `educational-brain/concepts/mathematics/math.found.proper-subset.md` | READY |
 | found | `math.found.proposition` | Proposition | Yes | Yes | `educational-brain/concepts/mathematics/math.found.proposition.md` | READY |
 | found | `math.found.quantifiers` | Quantifiers | Yes | Yes | math.found.quantifiers.md | READY |
@@ -480,7 +480,7 @@ its subject KG.
 | found | `math.found.uniqueness-proof` | Uniqueness Proof | No | Yes | `educational-brain/concepts/mathematics/math.found.uniqueness-proof.md` | READY |
 | found | `math.found.variable` | Variable | Yes | Yes | `educational-brain/concepts/mathematics/math.found.variable.md` | READY |
 | found | `math.found.venn-diagram` | Venn Diagram | No | Yes | `educational-brain/concepts/mathematics/math.found.venn-diagram.md` | READY |
-| found | `math.found.well-ordering-principle` | Well-Ordering Principle | Yes | No | — | MISSING |
+| found | `math.found.well-ordering-principle` | Well-Ordering Principle | Yes | Yes | `educational-brain/concepts/mathematics/math.found.well-ordering-principle.md` | READY |
 | found | `math.found.writing-mathematics` | Writing Mathematics | No | Yes | `educational-brain/concepts/mathematics/math.found.writing-mathematics.md` | READY |
 | func | `math.func.bijection` | Bijective Function | Yes | No | — | MISSING |
 | func | `math.func.composition` | Composition of Functions | Yes | No | — | MISSING |

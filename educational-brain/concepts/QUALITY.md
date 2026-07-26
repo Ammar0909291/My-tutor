@@ -53,29 +53,30 @@ rather than hand-edit when entries change.
   migration debt (76 = 71 + 5), not introduced this batch — rewriting
   another session's freshly authored files remains out of scope.
 
-## Aggregate summary (450 entries)
+## Aggregate summary (454 entries)
 
-Adds mathematics `math.found` Wave 11 (2 concepts, this batch,
-2026-07-26, autonomous loop iteration 3) on top of the prior 448-entry
-state (Wave 10 completion). 1 of the 2 Wave 11 entries had no Blueprint
-(`finite-set`, misconceptions authored via the birth-taxonomy
-diagnostic procedure); 1 was grounded in an existing PACKAGE_READY
-Blueprint (`natural-numbers`). All numbers below were recomputed fresh
-by scanning every live file in `educational-brain/concepts/{subject}/`
-— none hand-estimated.
+Adds mathematics `math.found` Wave 12 (4 concepts, this batch,
+2026-07-26, autonomous loop iteration 4) on top of the prior 450-entry
+state (Wave 11 completion). 1 of the 4 Wave 12 entries had no Blueprint
+(`countable-set`, misconceptions authored via the birth-taxonomy
+diagnostic procedure); 3 were grounded in existing PACKAGE_READY
+Blueprints (`proof-by-induction`, `well-ordering-principle`,
+`integers`). All numbers below were recomputed fresh by scanning every
+live file in `educational-brain/concepts/{subject}/` — none
+hand-estimated.
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 287 / 450 | see methodology note above — 20 `math.found` (`proper-subset`, `set-equality`, `union`, `intersection`, `set-difference`, `complement`, `venn-diagram`, `direct-proof`, `proof-by-contradiction`, `proof-by-contrapositive`, `proof-by-cases`, `existence-proof`, `writing-mathematics`, `theorem`, `conjecture`, `corollary`, `hasse-diagram`, `lemma`, `uniqueness-proof`, `finite-set` — none have a Blueprint) + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
-| Educational Brain | 450 / 450 | trivially true (this is the entry list) |
-| Mental Model | 450 / 450 | |
-| Misconceptions | 450 / 450 | |
-| Analogies | 450 / 450 | |
-| Recovery Strategy | 450 / 450 | |
-| Assessment Signals | 450 / 450 | |
-| Tutor Actions | 380 / 450 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
-| Cross-links | 380 / 450 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
-| Version History | 380 / 450 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
+| Blueprint | 290 / 454 | see methodology note above — 21 `math.found` (`proper-subset`, `set-equality`, `union`, `intersection`, `set-difference`, `complement`, `venn-diagram`, `direct-proof`, `proof-by-contradiction`, `proof-by-contrapositive`, `proof-by-cases`, `existence-proof`, `writing-mathematics`, `theorem`, `conjecture`, `corollary`, `hasse-diagram`, `lemma`, `uniqueness-proof`, `finite-set`, `countable-set` — none have a Blueprint) + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
+| Educational Brain | 454 / 454 | trivially true (this is the entry list) |
+| Mental Model | 454 / 454 | |
+| Misconceptions | 454 / 454 | |
+| Analogies | 454 / 454 | |
+| Recovery Strategy | 454 / 454 | |
+| Assessment Signals | 454 / 454 | |
+| Tutor Actions | 384 / 454 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
+| Cross-links | 384 / 454 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
+| Version History | 384 / 454 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
 
 ## Per-concept ledger
 
@@ -329,6 +330,7 @@ by scanning every live file in `educational-brain/concepts/{subject}/`
 | `math.found.complement` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.conjecture` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.corollary` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.countable-set` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.deductive-reasoning` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.direct-proof` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.definition` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -341,6 +343,7 @@ by scanning every live file in `educational-brain/concepts/{subject}/`
 | `math.found.generalization` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.hasse-diagram` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.inductive-reasoning` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.integers` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.intersection` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.lemma` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.logic` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -366,6 +369,7 @@ by scanning every live file in `educational-brain/concepts/{subject}/`
 | `math.found.problem-solving-strategies` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.problem-solving` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.proof` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.proof-by-induction` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.proper-subset` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.proposition` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.quantifiers` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -391,6 +395,7 @@ by scanning every live file in `educational-brain/concepts/{subject}/`
 | `math.found.uniqueness-proof` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.variable` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.venn-diagram` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.well-ordering-principle` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.writing-mathematics` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.anal.chromatography` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `chem.anal.gravimetric` | chemistry | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
