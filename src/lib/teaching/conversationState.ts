@@ -452,6 +452,7 @@ export interface TurnDirectiveParams {
    *  IS a teaching payload (creating the need). */
   firstLessonActive?: boolean
   lessonGoal?: string | null
+  returningMidLesson?: boolean
 }
 
 const PHASE_FRAME: Record<TeachingPhase, string> = {
@@ -511,6 +512,9 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   }
   if (p.lessonGoal && p.nextMove === 'ask' && (p.state.phase === 'CHECK' || p.state.phase === 'PRACTICE' || p.state.phase === 'TRANSFER')) {
     lines.push(`- Assessment anchor: this question must verify the lesson goal "${p.lessonGoal}" — not a tangent, not trivia, not vocabulary alone.`)
+  }
+  if (p.returningMidLesson && PHASE_ORDER.indexOf(p.state.phase) > 0) {
+    lines.push(`- RE-ANCHOR: the student is returning after a break. They were at the ${p.state.phase} stage. Briefly restate what was covered so far before continuing — one sentence, not a recap lecture.`)
   }
   return lines.join('\n')
 }

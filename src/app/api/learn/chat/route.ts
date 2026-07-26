@@ -1551,6 +1551,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               : decideVisualFirst(availableVisual, conversationStateHoisted, nextMove),
             firstLessonActive: firstLessonActiveHoisted,
             lessonGoal: lessonCtx?.lessonGoal ?? null,
+            returningMidLesson: sessionEpisodeFreshHoisted,
           })
           if (learnerRequestHoisted) {
             const hasEstablishedExample =

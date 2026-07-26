@@ -704,3 +704,34 @@ describe('Loop 8 — adaptive response budget', () => {
     expect(responseBudget('expert', 0)).toBeNull()
   })
 })
+
+// Loop 10: session re-anchoring — returning mid-lesson gets a restatement
+describe('Loop 10 — session re-anchoring', () => {
+  it('re-anchor fires when returning mid-lesson at GUIDE phase', () => {
+    const state = { ...initialConversationState('c1'), phase: 'GUIDE' as const, demonstrated: true }
+    const directive = buildTurnDirective({
+      state, nextMove: 'teach', maxParagraphs: 4, workedExampleFirst: false, visualType: null,
+      returningMidLesson: true,
+    })
+    expect(directive).toContain('RE-ANCHOR')
+    expect(directive).toContain('GUIDE')
+  })
+
+  it('re-anchor does NOT fire at OBSERVE (nothing to restate)', () => {
+    const state = { ...initialConversationState('c1'), phase: 'OBSERVE' as const }
+    const directive = buildTurnDirective({
+      state, nextMove: 'teach', maxParagraphs: 4, workedExampleFirst: false, visualType: null,
+      returningMidLesson: true,
+    })
+    expect(directive).not.toContain('RE-ANCHOR')
+  })
+
+  it('re-anchor does NOT fire when not returning', () => {
+    const state = { ...initialConversationState('c1'), phase: 'CHECK' as const }
+    const directive = buildTurnDirective({
+      state, nextMove: 'ask', maxParagraphs: 4, workedExampleFirst: false, visualType: null,
+      returningMidLesson: false,
+    })
+    expect(directive).not.toContain('RE-ANCHOR')
+  })
+})
