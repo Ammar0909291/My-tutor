@@ -1499,6 +1499,12 @@
   `cube-numbers`, `scientific-notation`; none had Blueprints,
   misconceptions authored via birth-taxonomy diagnostic). `math.arith`
   46/58 → 52/58, only 6 concepts remain. Full detail: `COVERAGE.md`.
+  **Batch 31 — math.arith Wave 8** (2026-07-26, autonomous loop
+  iteration 21): 3 concepts authored (`square-roots`, Blueprint
+  reused by reference; `long-division`, `mental-arithmetic`, no
+  Blueprints). `math.arith` 52/58 → 55/58, only 3 concepts remain, all
+  blocked on unauthored `math.nt.gcd`/`math.nt.lcm`. Full detail:
+  `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
