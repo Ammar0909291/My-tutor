@@ -1470,6 +1470,12 @@
   `percentages` (unlocks, estimated_hours), resolved via KG per
   standing rule. Wave 5 part 2 (5 no-Blueprint concepts) deferred.
   Full detail: `COVERAGE.md`.
+  **Batch 26 — math.arith Wave 5 part 2** (2026-07-26, autonomous loop
+  iteration 16): 5 concepts authored (`carrying`, `mental-addition`,
+  `decimal-operations`, `terminating-decimals`, `repeating-decimals`;
+  none had Blueprints). `math.arith` 26/58 → 31/58. Wave 6 candidates
+  (13, pool grew after Wave 5) to be computed fresh next iteration.
+  Full detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
