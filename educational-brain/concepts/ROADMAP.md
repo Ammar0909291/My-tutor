@@ -13,16 +13,16 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **570** |
-| Remaining | **1,205** |
-| Completion percentage | **32.11%** |
+| Concepts with an Educational Brain entry | **572** |
+| Remaining | **1,203** |
+| Completion percentage | **32.23%** |
 
 *(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
 with an Educational Brain entry" rows had accumulated from prior sessions
 without being reconciled. Recomputed from this same file's §2 Subject
-progress table as currently stated per subject: 143 mathematics + 238
+progress table as currently stated per subject: 145 mathematics + 238
 physics + 3 english + 186 chemistry + 0 biology + 0 computer_science =
-570. Only the mathematics figure was independently re-verified by this
+572. Only the mathematics figure was independently re-verified by this
 batch by direct file count; the other subjects' figures are taken as
 already-recorded in §2 below, not re-audited by this batch, per this
 program's "mathematics only" scope this turn.)*
@@ -33,7 +33,7 @@ program's "mathematics only" scope this turn.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 143 | 15.75% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 145 | 15.97% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
@@ -243,6 +243,35 @@ own standing gate. No other domain will be started until all 82
 `math.found` concepts are `READY` and Domain Certification passes —
 **except by explicit, subject-specific user instruction, as happened
 in §3b/§3c below**.
+
+---
+
+## 3k. Domain status — math.arith (**COMPLETE — CERTIFIED**, 2026-07-26)
+
+| Metric | Value |
+|---|---|
+| Domain | `math.arith` (mathematics / Arithmetic) |
+| Total concepts in domain | 58 |
+| Authored this program | 58 |
+| Remaining | 0 |
+| Status | **COMPLETE — DOMAIN CERTIFIED** (58/58, 100%) |
+
+**Domain Certification passes as of Wave 10 (2026-07-26)**: all 58
+`math.arith` concepts authored across 10 waves, each individually
+verified against Quality Gate 3's exact 21-section heading order, 0
+duplicates, 0 orphans, every Blueprint Reference accurate. The final 2
+concepts (`fraction-simplification`, `fraction-addition`) required a
+genuine cross-domain dependency resolution — `math.nt.gcd` and
+`math.nt.lcm`, neither authored at the time, themselves gated behind a
+3-concept chain (`divisibility` → `prime-number` → `prime-factorization`).
+This was resolved via a deliberate, bounded, explicitly-justified
+cross-domain excursion (5 `math.nt` concepts authored, not a full
+`math.nt` campaign commitment) rather than stalling `math.arith`'s
+closure indefinitely. Full per-wave delivery history (exact concept
+lists, misconception IDs and birth types, Blueprint-reuse citations)
+lives in `COVERAGE.md`'s Delivery history — the authoritative record;
+this section states only the certification outcome, per this file's
+own condensation discipline for long-running domains.
 
 ---
 
@@ -883,43 +912,44 @@ procedure.
 
 ## 5. Priority queue
 
-**`math.found` is now COMPLETE and CERTIFIED (82/82, 2026-07-26) — see
-§3. Items 1-2 below are historical record of how it was reached; the
-active default has moved to item 1a.**
+**`math.found` (82/82) and `math.arith` (58/58) are now both COMPLETE
+and CERTIFIED (2026-07-26) — see §3/§3k. Items 1-2 below are historical
+record; the active default has moved to item 1b.**
 
-1a. **Active default (2026-07-26): `math.arith` domain, Waves 1-8
-    done (condensed record below), Wave 9 unblocked and ready to
-    close the domain**. `math.arith` has 58 total concepts. Waves 1-8
-    (2026-07-26, iterations 1-21, condensed): authored 55/58 concepts
-    across 8 waves (several split into Blueprint-grounded/no-Blueprint
-    parts given uneven load), reaching 55/58 by Wave 8 with only 3
-    concepts remaining (`fraction-simplification`, `fraction-addition`,
-    `irrational-roots`). Two genuine discoveries along the way: a
-    Blueprint/KG metadata discrepancy pattern (`ones-tens-hundreds`,
-    `percentages`, always resolved in favor of the KG), and stale
-    cross-subject claims in `proportion.md`/`ratios.md` corrected via
-    small addenda once `math.func.linear-function`/
-    `math.func.rational-function` Blueprints appeared. Full per-wave
-    detail (exact concept lists, misconception IDs, birth types) lives
-    in `COVERAGE.md`'s Delivery history, the authoritative record.
-    Wave 9 (2026-07-26, iteration 22): authored
-    `math.arith.irrational-roots` (no Blueprint), raising `math.arith`
-    to 56/58 — only 2 concepts remained, both genuinely blocked on
-    unauthored `math.nt.gcd`/`math.nt.lcm`. Began a deliberate, bounded
-    cross-domain excursion into `math.nt` (not a full campaign
-    commitment) specifically to unblock them: authored
-    `math.nt.divisibility` (Blueprint exists, Tier 1 cross-link to
-    `math.abst.ring-theory`). `math.nt` Wave 2 (2026-07-26, iteration
-    23): continued the excursion, authoring `math.nt.prime-number` →
-    `math.nt.prime-factorization` → `math.nt.gcd` (unlocks
-    `fraction-simplification`) → `math.nt.lcm` (no Blueprint, unlocks
-    `fraction-addition`) as each became ready in turn — 4 concepts in
-    one wave, completing the full minimal chain. `math.nt` now
-    **5/36**. Both of `math.arith`'s final 2 concepts are now
-    unblocked — authoring them next reaches `math.arith` **58/58,
-    DOMAIN CERTIFIED** (the second mathematics domain certified,
-    after `math.found`), at which point the excursion into `math.nt`
-    will be evaluated for continuation as a full campaign or paused.
+1a. **(Historical, satisfied) `math.arith` domain, Waves 1-10**.
+    `math.arith`'s 58 concepts were authored across 10 waves
+    (2026-07-26, iterations 1-24), several split into
+    Blueprint-grounded/no-Blueprint parts given uneven load. Two
+    genuine discoveries along the way: a Blueprint/KG metadata
+    discrepancy pattern (`ones-tens-hundreds`, `percentages`, always
+    resolved in favor of the KG), and stale cross-subject claims in
+    `proportion.md`/`ratios.md` corrected via small addenda once
+    `math.func.linear-function`/`math.func.rational-function`
+    Blueprints appeared. The final 2 concepts
+    (`fraction-simplification`, `fraction-addition`) were genuinely
+    blocked on unauthored number-theory prerequisites
+    (`math.nt.gcd`/`math.nt.lcm`) — resolved via a deliberate, bounded
+    cross-domain excursion into `math.nt` (Waves 1-2, 5 concepts:
+    `divisibility` → `prime-number` → `prime-factorization` → `gcd` →
+    `lcm`), not a full `math.nt` campaign commitment. Wave 10
+    (2026-07-26, iteration 24) authored the final 2 concepts (both no
+    Blueprint), bringing `math.arith` to **58/58 — DOMAIN CERTIFIED**,
+    the second mathematics domain certified after `math.found`. Full
+    per-wave detail (exact concept lists, misconception IDs, birth
+    types) lives in `COVERAGE.md`'s Delivery history, the
+    authoritative record.
+1b. **Active default (2026-07-26): explicit decision point — continue
+    `math.nt` as a full campaign, or select a new domain**. `math.nt`
+    sits at 5/36 (from the bounded excursion above), with 31 concepts
+    remaining, most carrying existing Blueprints. Since both
+    mathematics domains attempted so far (`math.found`, `math.arith`)
+    were carried to full certification, and `math.nt` already has a
+    running head start plus strong Blueprint coverage, continuing
+    `math.nt` as the next fully-certified domain is the natural,
+    lowest-friction default — computed fresh each wave from the live
+    KG, not assumed from this note. If a stronger reason to switch
+    domains emerges (e.g., another domain's own entry point is more
+    urgent), that will be stated explicitly before deviating.
 1. **(Historical, satisfied) `math.found` Wave 7**: the set of
    `math.found` nodes whose prerequisites were all READY after Wave 6.
 2. **(Historical, satisfied) `math.found` Waves 8-16 (52 remaining

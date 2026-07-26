@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 143 READY)
+## mathematics (908 concepts, 145 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -131,11 +131,11 @@ its subject KG.
 | arith | `math.arith.expanded-form` | Expanded Form | No | Yes | `educational-brain/concepts/mathematics/math.arith.expanded-form.md` | READY |
 | arith | `math.arith.exponent-rules` | Exponent Rules | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.exponent-rules.md` | READY |
 | arith | `math.arith.exponentiation` | Exponentiation | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.exponentiation.md` | READY |
-| arith | `math.arith.fraction-addition` | Addition and Subtraction of Fractions | No | No | — | MISSING |
+| arith | `math.arith.fraction-addition` | Addition and Subtraction of Fractions | No | Yes | `educational-brain/concepts/mathematics/math.arith.fraction-addition.md` | READY |
 | arith | `math.arith.fraction-equivalence` | Equivalent Fractions | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.fraction-equivalence.md` | READY |
 | arith | `math.arith.fraction-multiplication` | Multiplication and Division of Fractions | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.fraction-multiplication.md` | READY |
 | arith | `math.arith.fraction-reciprocal` | Reciprocal | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.fraction-reciprocal.md` | READY |
-| arith | `math.arith.fraction-simplification` | Fraction Simplification | No | No | — | MISSING |
+| arith | `math.arith.fraction-simplification` | Fraction Simplification | No | Yes | `educational-brain/concepts/mathematics/math.arith.fraction-simplification.md` | READY |
 | arith | `math.arith.fractions` | Fractions | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.fractions.md` | READY |
 | arith | `math.arith.improper-fractions` | Improper Fractions | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.improper-fractions.md` | READY |
 | arith | `math.arith.integer-arithmetic` | Integer Arithmetic | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.integer-arithmetic.md` | READY |

@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1205** (= 1,775 KG concepts − 570 already `READY`, per
+Total queued: **1203** (= 1,775 KG concepts − 572 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -1380,7 +1380,9 @@ authored math.arith Wave 6 part 1, moved to READY.
 | 836 | computer_science | 19 | `cs.db.mysql-python` | Connecting Python to MySQL |
 | 837 | computer_science | 19 | `cs.se.agile-design-principles` | Agile Practices and Software Design Principles |
 | 838 | computer_science | 19 | `cs.ds.intro-machine-learning` | Introduction to Machine Learning |
-| 839 | mathematics | 20 | `math.arith.fraction-simplification` | Fraction Simplification |
+**Row 839 removed 2026-07-26** — `math.arith.fraction-simplification`
+authored math.arith Wave 10 (final wave), moved to READY. `math.arith`
+now 58/58 — DOMAIN CERTIFIED.
 **Row 840 removed 2026-07-26** — `math.arith.percentage-change`
 authored math.arith Wave 7 part 2, moved to READY.
 | 841 | mathematics | 20 | `math.nt.euclidean-algorithm` | Euclidean Algorithm |
@@ -1457,7 +1459,9 @@ authored math.arith Wave 7 part 2, moved to READY.
 | 911 | computer_science | 20 | `cs.db.nosql-intro` | Introduction to NoSQL Databases |
 | 912 | computer_science | 20 | `cs.ds.supervised-learning-models` | Supervised Learning Models |
 | 913 | computer_science | 20 | `cs.ds.unsupervised-learning-models` | Unsupervised Learning Models |
-| 914 | mathematics | 21 | `math.arith.fraction-addition` | Addition and Subtraction of Fractions |
+**Row 914 removed 2026-07-26** — `math.arith.fraction-addition`
+authored math.arith Wave 10 (final wave), moved to READY. `math.arith`
+now 58/58 — DOMAIN CERTIFIED.
 | 915 | mathematics | 21 | `math.nt.extended-euclidean-algorithm` | Extended Euclidean Algorithm |
 | 916 | mathematics | 21 | `math.nt.continued-fractions` | Continued Fractions |
 | 917 | mathematics | 21 | `math.alg.simplification` | Algebraic Simplification |
