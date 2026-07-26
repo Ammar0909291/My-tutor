@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1264** (= 1,775 KG concepts − 511 already `READY`, per
+Total queued: **1261** (= 1,775 KG concepts − 514 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -1132,9 +1132,9 @@ authored Wave 16 (FINAL wave), moved to READY. `math.found` domain now
 | 616 | computer_science | 16 | `cs.db.sql-ddl-dml` | SQL — DDL and DML Basics |
 | 617 | computer_science | 16 | `cs.ds.numpy-arrays` | NumPy for Numerical Computing |
 | 618 | mathematics | 17 | `math.arith.long-division` | Long Division |
-| 619 | mathematics | 17 | `math.arith.fraction-equivalence` | Equivalent Fractions |
-| 620 | mathematics | 17 | `math.arith.fraction-multiplication` | Multiplication and Division of Fractions |
-| 621 | mathematics | 17 | `math.arith.fraction-reciprocal` | Reciprocal |
+**Rows 619-621 removed 2026-07-26** — `math.arith.fraction-equivalence`,
+`math.arith.fraction-multiplication`, `math.arith.fraction-reciprocal`
+authored math.arith Wave 2 (part 1), moved to READY.
 | 622 | mathematics | 17 | `math.arith.mixed-numbers` | Mixed Numbers |
 | 623 | mathematics | 17 | `math.arith.improper-fractions` | Improper Fractions |
 | 624 | mathematics | 17 | `math.arith.decimals` | Decimals |

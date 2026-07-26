@@ -53,29 +53,29 @@ rather than hand-edit when entries change.
   migration debt (76 = 71 + 5), not introduced this batch — rewriting
   another session's freshly authored files remains out of scope.
 
-## Aggregate summary (461 entries)
+## Aggregate summary (464 entries)
 
-Adds mathematics `math.arith` Wave 1 (1 concept, this batch,
-2026-07-26, autonomous loop iteration 9) on top of the prior 460-entry
-state (`math.found` Domain Certification). The single Wave 1 entry
-(`math.arith.counting`) was grounded in an existing PACKAGE_READY
-Blueprint — the first concept authored in the newly-opened `math.arith`
-domain, following `math.found`'s 82/82 completion. All numbers below
-were recomputed fresh by scanning every live file in
+Adds mathematics `math.arith` Wave 2 part 1 (3 concepts, this batch,
+2026-07-26, autonomous loop iteration 10) on top of the prior 461-entry
+state (Wave 1 completion). All three Wave 2 part 1 entries
+(`fraction-equivalence`, `fraction-multiplication`, `fraction-
+reciprocal`) were grounded in existing PACKAGE_READY Blueprints
+(Educational Brain v1.0 format). All numbers below were recomputed
+fresh by scanning every live file in
 `educational-brain/concepts/{subject}/` — none hand-estimated.
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 295 / 461 | see methodology note above — 23 `math.found` (`proper-subset`, `set-equality`, `union`, `intersection`, `set-difference`, `complement`, `venn-diagram`, `direct-proof`, `proof-by-contradiction`, `proof-by-contrapositive`, `proof-by-cases`, `existence-proof`, `writing-mathematics`, `theorem`, `conjecture`, `corollary`, `hasse-diagram`, `lemma`, `uniqueness-proof`, `finite-set`, `countable-set`, `strong-induction`, `uncountable-set` — none have a Blueprint) + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
-| Educational Brain | 461 / 461 | trivially true (this is the entry list) |
-| Mental Model | 461 / 461 | |
-| Misconceptions | 461 / 461 | |
-| Analogies | 461 / 461 | |
-| Recovery Strategy | 461 / 461 | |
-| Assessment Signals | 461 / 461 | |
-| Tutor Actions | 391 / 461 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
-| Cross-links | 391 / 461 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
-| Version History | 391 / 461 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
+| Blueprint | 298 / 464 | see methodology note above — 23 `math.found` (`proper-subset`, `set-equality`, `union`, `intersection`, `set-difference`, `complement`, `venn-diagram`, `direct-proof`, `proof-by-contradiction`, `proof-by-contrapositive`, `proof-by-cases`, `existence-proof`, `writing-mathematics`, `theorem`, `conjecture`, `corollary`, `hasse-diagram`, `lemma`, `uniqueness-proof`, `finite-set`, `countable-set`, `strong-induction`, `uncountable-set` — none have a Blueprint) + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
+| Educational Brain | 464 / 464 | trivially true (this is the entry list) |
+| Mental Model | 464 / 464 | |
+| Misconceptions | 464 / 464 | |
+| Analogies | 464 / 464 | |
+| Recovery Strategy | 464 / 464 | |
+| Assessment Signals | 464 / 464 | |
+| Tutor Actions | 394 / 464 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
+| Cross-links | 394 / 464 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
+| Version History | 394 / 464 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
 
 ## Per-concept ledger
 
@@ -320,6 +320,9 @@ were recomputed fresh by scanning every live file in
 | `phys.wave.wave-properties` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | ✗ |
 | `phys.wave.wave-speed` | physics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | ✗ | ✗ |
 | `math.arith.counting` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.arith.fraction-equivalence` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.arith.fraction-multiplication` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.arith.fraction-reciprocal` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.arith.fractions` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.abstraction` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.axiom` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

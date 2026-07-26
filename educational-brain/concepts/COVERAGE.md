@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 84 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 2 `math.arith.*` entries (`fractions`, `counting` — `math.arith` domain IN PROGRESS, 2/58), see Delivery history. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
+| mathematics | 908 | 87 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 5 `math.arith.*` entries (`fractions`, `counting`, `fraction-equivalence`, `fraction-multiplication`, `fraction-reciprocal` — `math.arith` domain IN PROGRESS, 5/58), see Delivery history. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -1979,6 +1979,61 @@ touched. All five tracking files updated in this same commit (including
 `ROADMAP.md` §5's item 1a, updated with the Wave 2 candidate list and
 Blueprint-verification status); re-validated 0 duplicates, 0 orphans, 0
 Quality Gate 3 violations across all 84 mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.arith Wave 2 part 1 (2026-07-26, autonomous loop iteration 10)
+
+Autonomous loop iteration 10, triggered by a bare `/loop` re-invocation
+in the same session (the autonomous-default dynamic-pacing template);
+resolved to continuing the established, explicitly-active Mathematics
+Educational Brain Autonomous Completion Program, since the immediately
+prior turn had explicitly deferred 6 Blueprint-verified `math.arith`
+Wave 2 candidates for this exact next iteration. Git resync: one
+concurrent Chemistry AssetIdentity seed-batch commit (`CLAUDE.md` only,
+zero overlap) fast-forward merged cleanly at this iteration's start.
+
+**Repair-audit first** (per this program's standing per-iteration
+discipline): re-ran the Quality Gate 3 heading-conformance check across
+all 84 pre-batch mathematics entries. **0 violations found**.
+
+**Wave 2 part 1**: authored 3 of the 6 concepts deferred from Wave 1,
+all grounded in existing PACKAGE_READY Blueprints (Educational Brain
+v1.0 primitive-notation format, previously read in full):
+
+- `math.arith.fraction-equivalence` — reused its 2-item Misconception
+  Registry by reference (MC-1 ADDING-PRESERVES-EQUIVALENCE,
+  FOUNDATIONAL, Type 1 overgeneralization from the equation-solving
+  "same operation to both sides" heuristic; MC-2
+  ONLY-SIMPLIFIED-IS-VALID, Type 1) and the 5-probe mastery gate by
+  reference.
+- `math.arith.fraction-multiplication` — reused its 3-item
+  Misconception Registry (MC-1 addition-algorithm-for-multiplication,
+  FOUNDATIONAL for MC-2, Type 1; MC-2 dividing-parts-separately, Type
+  1; MC-3 whole-number-in-denominator, Type 1) and the area-model
+  demonstration by reference. Directly cross-references `math.arith.
+  fraction-reciprocal`'s own product-test definition for the division
+  algorithm's justification.
+- `math.arith.fraction-reciprocal` — reused its 3-item Misconception
+  Registry (MC-1 reciprocal-equals-negative — reclassified here as
+  Type 3 language contamination, since "opposite" colloquially names
+  both the additive and multiplicative inverse; FOUNDATIONAL; MC-2
+  whole-number-reciprocal-blind-spot, Type 1; MC-3
+  mixed-number-flip-error, Type 1) by reference. Its `math.abst.field`
+  cross-link is confirmed informational-only at this Bloom level per
+  the Blueprint's own Component 6 note — the word "field" is never
+  introduced.
+
+`math.arith` now 5/58 (`fractions`, `counting`, `fraction-equivalence`,
+`fraction-multiplication`, `fraction-reciprocal`). 3 further
+Wave-2-eligible concepts remain deferred to Wave 2 part 2, already
+Blueprint-verified PACKAGE_READY, no re-verification needed:
+`math.arith.mixed-numbers`, `math.arith.improper-fractions`, `math.
+arith.ratios`. No other domain touched. All five tracking files
+updated in this same commit; re-validated 0 duplicates, 0 orphans, 0
+Quality Gate 3 violations across all 87 mathematics entries.
 
 Full validation this batch: all 6 subject KG validators PASS (0
 failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite

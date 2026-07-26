@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 84 READY)
+## mathematics (908 concepts, 87 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -132,9 +132,9 @@ its subject KG.
 | arith | `math.arith.exponent-rules` | Exponent Rules | Yes | No | — | MISSING |
 | arith | `math.arith.exponentiation` | Exponentiation | Yes | No | — | MISSING |
 | arith | `math.arith.fraction-addition` | Addition and Subtraction of Fractions | No | No | — | MISSING |
-| arith | `math.arith.fraction-equivalence` | Equivalent Fractions | Yes | No | — | MISSING |
-| arith | `math.arith.fraction-multiplication` | Multiplication and Division of Fractions | Yes | No | — | MISSING |
-| arith | `math.arith.fraction-reciprocal` | Reciprocal | Yes | No | — | MISSING |
+| arith | `math.arith.fraction-equivalence` | Equivalent Fractions | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.fraction-equivalence.md` | READY |
+| arith | `math.arith.fraction-multiplication` | Multiplication and Division of Fractions | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.fraction-multiplication.md` | READY |
+| arith | `math.arith.fraction-reciprocal` | Reciprocal | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.fraction-reciprocal.md` | READY |
 | arith | `math.arith.fraction-simplification` | Fraction Simplification | No | No | — | MISSING |
 | arith | `math.arith.fractions` | Fractions | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.fractions.md` | READY |
 | arith | `math.arith.improper-fractions` | Improper Fractions | Yes | No | — | MISSING |
