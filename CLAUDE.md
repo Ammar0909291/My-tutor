@@ -96,6 +96,13 @@
 
 ## Architecture facts
 - Next.js 14 App Router, NextAuth v5 (JWT), Prisma + PostgreSQL (`db push`, no migration files).
+  **Correction flagged 2026-07-26 (Engineering Program close-out, unverified — see
+  `docs/architecture/ENGINEERING_RUNBOOK_BLOCKED_ITEMS.md` item 4):** `prisma/migrations/`
+  actually contains 10 real migration directories on disk, and `vercel.json`'s build command
+  runs `prisma migrate deploy`. Whether this is harmless (idempotent no-op against an
+  already-`db push`'d schema) or a real drift risk was NOT resolved this session — needs
+  `npx prisma migrate status` run against the live production DB by someone with direct
+  access. Do not delete/rewrite this original line until that's confirmed either way.
 - AI: Groq primary (`openai/gpt-oss-20b`), YandexGPT fallback (Russia only, `country === 'ru'`;
   itself falls back to Groq on missing credentials or any error). Redis optional (app runs without it).
 - KnowledgeNode: `{ id, domain, title, description, difficulty, prerequisites[] }`.
@@ -1396,6 +1403,45 @@
   `proof-by-contradiction`, `proof-by-contrapositive`, `proof-by-cases`,
   `existence-proof`, `writing-mathematics`, `theorem`, `conjecture`), none
   with Blueprints. `math.found` 55/82 → 63/82. Full detail: `COVERAGE.md`.
+
+## Engineering Program close-out (2026-07-26)
+- A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
+  scoped away from curriculum content — Mathematics remained Mohammad's exclusive ownership
+  throughout) reached its stop condition and retired. Full record:
+  `docs/architecture/ENGINEERING_HANDOVER.md` (what was completed, what remains, roadmap) and
+  `docs/architecture/ENGINEERING_RUNBOOK_BLOCKED_ITEMS.md` (copy-paste runbooks for the 4 items
+  blocked on infrastructure/credentials this session couldn't reach: Chemistry AssetIdentity
+  seeding, Explanation Asset promotion, Supabase pool verification, migration-strategy
+  verification).
+- 6 real production bugs found and fixed with direct evidence (not estimated): Chemistry's
+  Teaching Sequence Executor was gated physics-only (`isPhysics` check in `blueprintLoader.ts`,
+  removed); a stale "PHYSICS TEACHING PLAN" prompt label leaked into chemistry lessons (renamed);
+  10 stale chemistry visual-registry concept IDs (corrected to real KG ids, 1 true duplicate
+  removed, 3 legitimate domain defaults added); the AI provider failover chain wasted a
+  guaranteed-fail HTTP round-trip to OpenRouter on every single chat turn when its key was unset
+  (`src/lib/ai/router.ts`, filtered); `src/instrumentation.ts`'s cold-start asset-bootstrap
+  routine ran an unpooled second `PrismaClient`, bypassing the P0 connection-pool fix at exactly
+  the highest-risk moment for pool exhaustion (fixed to use the same pooled config); Groq's daily
+  token-quota exhaustion (TPD) was misclassified as a retryable rate limit, wasting a
+  guaranteed-fail duplicate request on every turn during outage windows (fixed to classify as
+  non-retryable `AIQuotaError`).
+- Security: RLS enabled on all 112 public Supabase tables (Supabase security advisor: 109 ERROR
+  findings → 0), verified safe via the app's confirmed `rolbypassrls=true` Postgres role and
+  direct read-back validation against a representative sample of the most sensitive tables
+  (payments, users, subscriptions, student_progress, learn_sessions, organizations,
+  asset_identity, eb_concept).
+- Explanation Memory: verified end-to-end (AssetIdentity → matcher → assembleLesson()) works
+  correctly; 694 DRAFT explanation-asset rows (eng/math/phys) were verified against the project's
+  own quality gate (`src/lib/teaching/assets/validation.ts`) and ALL pass — conclusively confirmed
+  (checked twice, two separate sessions) that manual approval via
+  `PATCH /api/admin/knowledge-assets` is the only supported promotion path; none were
+  auto-promoted, per explicit standing user decision to keep that review authority manual.
+  Chemistry AssetIdentity remains unseeded (0 rows) — seed content is complete and
+  script-verified-correct, but this sandbox cannot reach Postgres directly to run it (see the
+  runbook doc, item 1).
+- Explicitly NOT done, and NOT part of this program's scope: any Mathematics/Physics/
+  Chemistry/English/Biology/Computer Science curriculum content, KG authoring, Blueprint
+  authoring, or Educational Brain concept-entry authoring.
 
 ## Run locally
 ```
