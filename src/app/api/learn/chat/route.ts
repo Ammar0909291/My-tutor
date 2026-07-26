@@ -1541,7 +1541,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // First-lesson protocol mandates 2-sentence bursts; the regular
             // responseBudget(beginner)=4 paragraphs conflicts with that and
             // must be overridden for every first-lesson turn.
-            maxParagraphs: firstLessonActiveHoisted ? 2 : responseBudget(contentRegister, conversationStateHoisted.consecutiveFailures),
+            maxParagraphs: firstLessonActiveHoisted ? 2 : responseBudget(contentRegister, conversationStateHoisted.consecutiveFailures, {
+              phase: conversationStateHoisted.phase,
+              consecutiveDontKnows: conversationStateHoisted.consecutiveDontKnows,
+            }),
             workedExampleFirst,
             visualType: (learnerRequestHoisted === 'diagram' || explainDifferentlyNeedsVisual)
               ? availableVisual

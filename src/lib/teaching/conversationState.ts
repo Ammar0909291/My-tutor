@@ -383,11 +383,35 @@ export type Register = 'beginner' | 'intermediate' | 'expert'
  * never longer — a flooded mind gets less text, not more
  * (foundations/04 P5). null = unlimited.
  */
-export function responseBudget(register: Register, consecutiveFailures: number): number | null {
+export function responseBudget(
+  register: Register,
+  consecutiveFailures: number,
+  opts?: { phase?: TeachingPhase; consecutiveDontKnows?: number },
+): number | null {
   const struggling = consecutiveFailures >= 2
-  if (register === 'beginner') return struggling ? 2 : 4
-  if (register === 'intermediate') return struggling ? 4 : 7
-  return struggling ? 6 : null
+  let budget: number | null
+  if (register === 'beginner') budget = struggling ? 2 : 4
+  else if (register === 'intermediate') budget = struggling ? 4 : 7
+  else budget = struggling ? 6 : null
+
+  if (budget === null) return null
+
+  // Confusion tightening: when the learner has said "I don't know" 2+ times
+  // in a row, shorten responses to reduce cognitive load (Brain foundations/02).
+  if ((opts?.consecutiveDontKnows ?? 0) >= 2 && budget > 2) {
+    budget = Math.max(2, budget - 2)
+  }
+
+  // Phase-based tightening: CHECK/PRACTICE questions should be terse (ask,
+  // don't lecture); OBSERVE should be short (show, then ask what they notice).
+  const phase = opts?.phase
+  if (phase === 'CHECK' || phase === 'PRACTICE') {
+    budget = Math.min(budget, 3)
+  } else if (phase === 'OBSERVE') {
+    budget = Math.min(budget, 3)
+  }
+
+  return budget
 }
 
 // ── Learner autonomy detection (moved out of route.ts for testability) ────────

@@ -669,3 +669,38 @@ describe('Loop 7 — lesson goal verification', () => {
     expect(directive).not.toContain('Assessment anchor')
   })
 })
+
+// Loop 8: adaptive response budget — confusion + phase tighten the budget
+describe('Loop 8 — adaptive response budget', () => {
+  it('confusion (consecutiveDontKnows >= 2) tightens budget', () => {
+    const normal = responseBudget('intermediate', 0)
+    const confused = responseBudget('intermediate', 0, { consecutiveDontKnows: 2 })
+    expect(confused!).toBeLessThan(normal!)
+  })
+
+  it('CHECK phase caps budget at 3', () => {
+    const budget = responseBudget('intermediate', 0, { phase: 'CHECK' })
+    expect(budget).toBeLessThanOrEqual(3)
+  })
+
+  it('OBSERVE phase caps budget at 3', () => {
+    const budget = responseBudget('beginner', 0, { phase: 'OBSERVE' })
+    expect(budget).toBeLessThanOrEqual(3)
+  })
+
+  it('DEMONSTRATE phase does not cap budget', () => {
+    const budget = responseBudget('intermediate', 0, { phase: 'DEMONSTRATE' })
+    expect(budget).toBe(responseBudget('intermediate', 0))
+  })
+
+  it('confusion + struggling compounds to floor of 2', () => {
+    const budget = responseBudget('beginner', 2, { consecutiveDontKnows: 3 })
+    expect(budget).toBe(2)
+  })
+
+  it('backward compatible when opts omitted', () => {
+    expect(responseBudget('beginner', 0)).toBe(4)
+    expect(responseBudget('beginner', 2)).toBe(2)
+    expect(responseBudget('expert', 0)).toBeNull()
+  })
+})
