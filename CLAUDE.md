@@ -1451,6 +1451,11 @@
   `subitizing`, `place-value`, `number-line`, `proportion`,
   `unit-rate`; 2 had no Blueprint). `math.arith` 8/58 → 14/58. Wave 4
   candidates computed (8). Full detail: `COVERAGE.md`.
+  **Batch 23 — math.arith Wave 4 part 1** (2026-07-26, autonomous loop
+  iteration 13): 3 concepts authored (`ones-tens-hundreds`,
+  `addition`, `decimals`; all had Blueprints). `math.arith` 14/58 →
+  17/58. Wave 4 part 2 (5 no-Blueprint concepts) deferred. Full
+  detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
