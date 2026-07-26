@@ -1577,6 +1577,15 @@
   concepts blocked on deep analytic/algebraic-number-theory
   prerequisites — Wave 8 needs a fresh domain-tail audit. Full detail:
   `COVERAGE.md`.
+  **Batch 43 — math.nt Wave 8** (2026-07-26, autonomous loop iteration
+  33): 1 concept authored (`pells-equation`, no Blueprint,
+  misconceptions authored via birth-taxonomy diagnostic). `math.nt`
+  26/36 → 27/36. `pythagorean-triples` remains blocked on a genuine
+  4-concept `math.geom` cross-domain excursion (`triangle`,
+  `perpendicular-lines`, `right-triangle`, `pythagorean-theorem`),
+  deliberately deferred as an open decision (not a small bounded
+  excursion like gcd/lcm). 8 deep analytic/algebraic-number-theory
+  concepts also remain. Full detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
