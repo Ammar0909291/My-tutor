@@ -1382,6 +1382,20 @@
   more concepts at this program's own established professor-quality bar,
   each requiring comparable authoring depth to Waves 7-8) and was not
   attempted; a future session should pick up at Wave 9 above.
+- **Autonomous /loop mode activated (2026-07-26)**: user asked to "continue in loop
+  now onwards" — this program now runs as a dynamic-mode `/loop`, self-pacing
+  through repeated repair-audit → author-next-wave → validate → commit → push
+  cycles without per-iteration user re-prompting, until 908/908 or a verified
+  blocker. **Going forward, per-iteration CLAUDE.md updates are intentionally
+  terse** (one line: wave number, concepts authored, new math.found count) —
+  full per-wave detail (concepts list, misconceptions, repair notes) lives in
+  `educational-brain/concepts/COVERAGE.md`'s Delivery history, which remains
+  the authoritative full record; this file would otherwise grow unboundedly
+  across a long-running loop. **Batch 11 — Wave 9** (2026-07-26, autonomous
+  loop iteration 1): 8 proof-family concepts authored (`direct-proof`,
+  `proof-by-contradiction`, `proof-by-contrapositive`, `proof-by-cases`,
+  `existence-proof`, `writing-mathematics`, `theorem`, `conjecture`), none
+  with Blueprints. `math.found` 55/82 → 63/82. Full detail: `COVERAGE.md`.
 
 ## Run locally
 ```
