@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 81 READY)
+## mathematics (908 concepts, 82 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -456,7 +456,7 @@ its subject KG.
 | found | `math.found.quantifiers` | Quantifiers | Yes | Yes | math.found.quantifiers.md | READY |
 | found | `math.found.rational-numbers` | Rational Numbers | Yes | Yes | `educational-brain/concepts/mathematics/math.found.rational-numbers.md` | READY |
 | found | `math.found.reading-mathematics` | Reading Mathematics | No | Yes | `educational-brain/concepts/mathematics/math.found.reading-mathematics.md` | READY |
-| found | `math.found.real-numbers` | Real Numbers | Yes | No | — | MISSING |
+| found | `math.found.real-numbers` | Real Numbers | Yes | Yes | `educational-brain/concepts/mathematics/math.found.real-numbers.md` | READY |
 | found | `math.found.reflexive-relation` | Reflexive Relation | Yes | Yes | `educational-brain/concepts/mathematics/math.found.reflexive-relation.md` | READY |
 | found | `math.found.relation` | Relation | Yes | Yes | math.found.relation.md | READY |
 | found | `math.found.rules-of-inference` | Rules of Inference | Yes | Yes | `educational-brain/concepts/mathematics/math.found.rules-of-inference.md` | READY |

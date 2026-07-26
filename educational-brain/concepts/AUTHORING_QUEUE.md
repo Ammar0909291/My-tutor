@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1267** (= 1,775 KG concepts − 508 already `READY`, per
+Total queued: **1266** (= 1,775 KG concepts − 509 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -995,7 +995,8 @@ authored Wave 14, moved to READY.
 | 484 | computer_science | 13 | `cs.oop.classes-objects-python` | Classes and Objects in Python |
 | 485 | computer_science | 13 | `cs.db.database-concepts` | Database Concepts |
 | 486 | computer_science | 13 | `cs.se.sdlc` | Software Development Life Cycle |
-| 487 | mathematics | 14 | `math.found.real-numbers` | Real Numbers |
+**Row 487 removed 2026-07-26** — `math.found.real-numbers` authored
+Wave 15, moved to READY.
 | 488 | mathematics | 14 | `math.arith.carrying` | Carrying (Regrouping) |
 | 489 | mathematics | 14 | `math.arith.mental-addition` | Mental Addition |
 | 490 | mathematics | 14 | `math.arith.subtraction` | Subtraction |

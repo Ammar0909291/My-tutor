@@ -53,28 +53,27 @@ rather than hand-edit when entries change.
   migration debt (76 = 71 + 5), not introduced this batch — rewriting
   another session's freshly authored files remains out of scope.
 
-## Aggregate summary (458 entries)
+## Aggregate summary (459 entries)
 
-Adds mathematics `math.found` Wave 14 (1 concept, this batch,
-2026-07-26, autonomous loop iteration 6) on top of the prior 457-entry
-state (Wave 13 completion). The single Wave 14 entry
-(`irrational-numbers`) was grounded in an existing PACKAGE_READY
-Blueprint. All numbers below were recomputed fresh by scanning every
-live file in `educational-brain/concepts/{subject}/` — none
-hand-estimated.
+Adds mathematics `math.found` Wave 15 (1 concept, this batch,
+2026-07-26, autonomous loop iteration 7) on top of the prior 458-entry
+state (Wave 14 completion). The single Wave 15 entry (`real-numbers`)
+was grounded in an existing PACKAGE_READY Blueprint. All numbers below
+were recomputed fresh by scanning every live file in
+`educational-brain/concepts/{subject}/` — none hand-estimated.
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 292 / 458 | see methodology note above — 23 `math.found` (`proper-subset`, `set-equality`, `union`, `intersection`, `set-difference`, `complement`, `venn-diagram`, `direct-proof`, `proof-by-contradiction`, `proof-by-contrapositive`, `proof-by-cases`, `existence-proof`, `writing-mathematics`, `theorem`, `conjecture`, `corollary`, `hasse-diagram`, `lemma`, `uniqueness-proof`, `finite-set`, `countable-set`, `strong-induction`, `uncountable-set` — none have a Blueprint) + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
-| Educational Brain | 458 / 458 | trivially true (this is the entry list) |
-| Mental Model | 458 / 458 | |
-| Misconceptions | 458 / 458 | |
-| Analogies | 458 / 458 | |
-| Recovery Strategy | 458 / 458 | |
-| Assessment Signals | 458 / 458 | |
-| Tutor Actions | 388 / 458 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
-| Cross-links | 388 / 458 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
-| Version History | 388 / 458 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
+| Blueprint | 293 / 459 | see methodology note above — 23 `math.found` (`proper-subset`, `set-equality`, `union`, `intersection`, `set-difference`, `complement`, `venn-diagram`, `direct-proof`, `proof-by-contradiction`, `proof-by-contrapositive`, `proof-by-cases`, `existence-proof`, `writing-mathematics`, `theorem`, `conjecture`, `corollary`, `hasse-diagram`, `lemma`, `uniqueness-proof`, `finite-set`, `countable-set`, `strong-induction`, `uncountable-set` — none have a Blueprint) + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
+| Educational Brain | 459 / 459 | trivially true (this is the entry list) |
+| Mental Model | 459 / 459 | |
+| Misconceptions | 459 / 459 | |
+| Analogies | 459 / 459 | |
+| Recovery Strategy | 459 / 459 | |
+| Assessment Signals | 459 / 459 | |
+| Tutor Actions | 389 / 459 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
+| Cross-links | 389 / 459 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
+| Version History | 389 / 459 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
 
 ## Per-concept ledger
 
@@ -374,6 +373,7 @@ hand-estimated.
 | `math.found.quantifiers` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.rational-numbers` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.reading-mathematics` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.found.real-numbers` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.reflexive-relation` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.relation` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.found.rules-of-inference` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
