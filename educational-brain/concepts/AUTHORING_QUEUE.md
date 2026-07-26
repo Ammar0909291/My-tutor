@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1240** (= 1,775 KG concepts − 535 already `READY`, per
+Total queued: **1235** (= 1,775 KG concepts − 540 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -999,8 +999,9 @@ Wave 4 part 2, moved to READY.
 | 486 | computer_science | 13 | `cs.se.sdlc` | Software Development Life Cycle |
 **Row 487 removed 2026-07-26** — `math.found.real-numbers` authored
 Wave 15, moved to READY.
-| 488 | mathematics | 14 | `math.arith.carrying` | Carrying (Regrouping) |
-| 489 | mathematics | 14 | `math.arith.mental-addition` | Mental Addition |
+**Rows 488-489 removed 2026-07-26** — `math.arith.carrying`,
+`math.arith.mental-addition` authored math.arith Wave 5 part 2, moved
+to READY.
 **Rows 490-491 removed 2026-07-26** — `math.arith.subtraction`,
 `math.arith.multiplication` authored math.arith Wave 5 part 1, moved
 to READY.
@@ -1199,9 +1200,9 @@ Wave 2 (part 2), moved to READY.
 | 679 | computer_science | 17 | `cs.oop.class-static-methods` | Class Methods and Static Methods |
 | 680 | computer_science | 17 | `cs.db.sql-queries-functions` | SQL — Queries and Aggregate Functions |
 | 681 | computer_science | 17 | `cs.ds.pandas-dataframes` | Pandas for Data Analysis |
-| 682 | mathematics | 18 | `math.arith.decimal-operations` | Decimal Operations |
-| 683 | mathematics | 18 | `math.arith.terminating-decimals` | Terminating Decimals |
-| 684 | mathematics | 18 | `math.arith.repeating-decimals` | Repeating Decimals |
+**Rows 682-684 removed 2026-07-26** — `math.arith.decimal-operations`,
+`math.arith.terminating-decimals`, `math.arith.repeating-decimals`
+authored math.arith Wave 5 part 2, moved to READY.
 **Row 685 removed 2026-07-26** — `math.arith.percentages` authored
 math.arith Wave 5 part 1, moved to READY.
 **Rows 686-687 removed 2026-07-26** — `math.arith.proportion`,

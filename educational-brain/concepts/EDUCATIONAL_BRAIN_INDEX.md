@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 108 READY)
+## mathematics (908 concepts, 113 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -117,12 +117,12 @@ its subject KG.
 | arith | `math.arith.absolute-value` | Absolute Value | Yes | No | — | MISSING |
 | arith | `math.arith.addition` | Addition | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.addition.md` | READY |
 | arith | `math.arith.borrowing` | Borrowing (Regrouping in Subtraction) | No | No | — | MISSING |
-| arith | `math.arith.carrying` | Carrying (Regrouping) | No | No | — | MISSING |
+| arith | `math.arith.carrying` | Carrying (Regrouping) | No | Yes | `educational-brain/concepts/mathematics/math.arith.carrying.md` | READY |
 | arith | `math.arith.column-addition` | Column Addition | No | No | — | MISSING |
 | arith | `math.arith.counting` | Counting | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.counting.md` | READY |
 | arith | `math.arith.counting-sequence` | Counting Sequence | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.counting-sequence.md` | READY |
 | arith | `math.arith.cube-numbers` | Perfect Cubes | No | No | — | MISSING |
-| arith | `math.arith.decimal-operations` | Decimal Operations | No | No | — | MISSING |
+| arith | `math.arith.decimal-operations` | Decimal Operations | No | Yes | `educational-brain/concepts/mathematics/math.arith.decimal-operations.md` | READY |
 | arith | `math.arith.decimals` | Decimals | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.decimals.md` | READY |
 | arith | `math.arith.direct-variation` | Direct Variation | No | Yes | `educational-brain/concepts/mathematics/math.arith.direct-variation.md` | READY |
 | arith | `math.arith.division` | Division | Yes | No | — | MISSING |
@@ -143,7 +143,7 @@ its subject KG.
 | arith | `math.arith.irrational-roots` | Irrational Square Roots | No | No | — | MISSING |
 | arith | `math.arith.long-division` | Long Division | No | No | — | MISSING |
 | arith | `math.arith.long-multiplication` | Long Multiplication | No | No | — | MISSING |
-| arith | `math.arith.mental-addition` | Mental Addition | No | No | — | MISSING |
+| arith | `math.arith.mental-addition` | Mental Addition | No | Yes | `educational-brain/concepts/mathematics/math.arith.mental-addition.md` | READY |
 | arith | `math.arith.mental-arithmetic` | Mental Arithmetic | No | No | — | MISSING |
 | arith | `math.arith.mental-multiplication` | Mental Multiplication | No | No | — | MISSING |
 | arith | `math.arith.mixed-numbers` | Mixed Numbers | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.mixed-numbers.md` | READY |
@@ -162,7 +162,7 @@ its subject KG.
 | arith | `math.arith.proportion` | Proportion | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.proportion.md` | READY |
 | arith | `math.arith.ratios` | Ratio | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.ratios.md` | READY |
 | arith | `math.arith.remainder` | Remainder | Yes | No | — | MISSING |
-| arith | `math.arith.repeating-decimals` | Repeating Decimals | No | No | — | MISSING |
+| arith | `math.arith.repeating-decimals` | Repeating Decimals | No | Yes | `educational-brain/concepts/mathematics/math.arith.repeating-decimals.md` | READY |
 | arith | `math.arith.rounding` | Rounding | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.rounding.md` | READY |
 | arith | `math.arith.scientific-notation` | Scientific Notation | No | No | — | MISSING |
 | arith | `math.arith.significant-figures` | Significant Figures | Yes | No | — | MISSING |
@@ -170,7 +170,7 @@ its subject KG.
 | arith | `math.arith.square-roots` | Square Roots | Yes | No | — | MISSING |
 | arith | `math.arith.subitizing` | Subitizing | No | Yes | `educational-brain/concepts/mathematics/math.arith.subitizing.md` | READY |
 | arith | `math.arith.subtraction` | Subtraction | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.subtraction.md` | READY |
-| arith | `math.arith.terminating-decimals` | Terminating Decimals | No | No | — | MISSING |
+| arith | `math.arith.terminating-decimals` | Terminating Decimals | No | Yes | `educational-brain/concepts/mathematics/math.arith.terminating-decimals.md` | READY |
 | arith | `math.arith.unit-rate` | Unit Rate | No | Yes | `educational-brain/concepts/mathematics/math.arith.unit-rate.md` | READY |
 | calc | `math.calc.antiderivatives` | Antiderivatives | Yes | No | — | MISSING |
 | calc | `math.calc.arc-length` | Arc Length | Yes | No | — | MISSING |
