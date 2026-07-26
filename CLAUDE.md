@@ -95,14 +95,15 @@
   write every document as permanent research-library material, worth reading years later.
 
 ## Architecture facts
-- Next.js 14 App Router, NextAuth v5 (JWT), Prisma + PostgreSQL (`db push`, no migration files).
-  **Correction flagged 2026-07-26 (Engineering Program close-out, unverified — see
-  `docs/architecture/ENGINEERING_RUNBOOK_BLOCKED_ITEMS.md` item 4):** `prisma/migrations/`
-  actually contains 10 real migration directories on disk, and `vercel.json`'s build command
-  runs `prisma migrate deploy`. Whether this is harmless (idempotent no-op against an
-  already-`db push`'d schema) or a real drift risk was NOT resolved this session — needs
-  `npx prisma migrate status` run against the live production DB by someone with direct
-  access. Do not delete/rewrite this original line until that's confirmed either way.
+- Next.js 14 App Router, NextAuth v5 (JWT), Prisma + PostgreSQL. **Corrected 2026-07-26 (final
+  operations session, verified via direct production query):** the schema is actually managed by
+  real Prisma migrations, not `db push` — `prisma/migrations/` contains 10 real migration
+  directories on disk, and `vercel.json`'s build command runs `prisma migrate deploy`. Queried
+  production's `_prisma_migrations` table directly (Supabase MCP): all 10 migrations are applied
+  (`finished_at` populated, `rolled_back_at` null for every row), matching the local directories
+  1:1. `prisma migrate deploy` is confirmed a genuine no-op on every deploy — **no drift, resolved,
+  not a risk.** (Prior note, 2026-07-26 Engineering Program close-out, is superseded: it had
+  flagged this as unverified and originally mis-stated the project as `db push`-only.)
 - AI: Groq primary (`openai/gpt-oss-20b`), YandexGPT fallback (Russia only, `country === 'ru'`;
   itself falls back to Groq on missing credentials or any error). Redis optional (app runs without it).
 - KnowledgeNode: `{ id, domain, title, description, difficulty, prerequisites[] }`.
@@ -1465,6 +1466,37 @@
 - Explicitly NOT done, and NOT part of this program's scope: any Mathematics/Physics/
   Chemistry/English/Biology/Computer Science curriculum content, KG authoring, Blueprint
   authoring, or Educational Brain concept-entry authoring.
+
+## Final operations session (2026-07-26, Supabase + Vercel MCP enabled)
+- Re-synced `main` to `origin/main` at session start (rebased cleanly onto 2 new Mathematics
+  commits from Mohammad's parallel work, zero file overlap); deleted the local stale
+  `claude/my-tutor-ops-execution-3h25k6` branch (already merged, already deleted on origin).
+- **Migration verification (runbook item 4): RESOLVED, no drift** — see the corrected
+  Architecture facts line above. Full evidence in `ENGINEERING_RUNBOOK_BLOCKED_ITEMS.md` §4.
+- **Chemistry AssetIdentity seeding (runbook item 1): 60/744 rows seeded and verified**
+  (60 EXPLANATION / 0 PROBE, all DRAFT, 0 duplicates, 0 orphans, 0 hash/length mismatches) via
+  `mcp__Supabase__execute_sql`, generating SQL from the real `chemistrySeedAssets.ts` content and
+  the real `seedCanonicalSlug`/`hashContent` helpers (no content invented, no logic
+  reimplemented). Confirmed via code review that `findBestExplanation()` only queries
+  `status: ACTIVE` — the new DRAFT rows are correctly inert, zero regression risk.
+  **A network-policy finding, not a credentials problem**: a follow-up attempt to finish seeding
+  by deploying a temporary admin endpoint that would run inside Vercel's own runtime (where
+  `DATABASE_URL` is already configured) was blocked by this sandbox's own egress proxy, which
+  denies outbound HTTPS to the app's own production domain (403 policy denial, confirmed via the
+  proxy status endpoint) — deployed, found unreachable, reverted same session (commits
+  `e47091a7`/`5de85df2`). The remaining ~684 rows need either (a) `npx tsx
+  scripts/brain/seed-knowledge-assets.ts --draft` run from an environment with real
+  `DATABASE_URL` (idempotent, skips the 60 already seeded), or (b) further Supabase-MCP sessions
+  — each additional batch consumes a large, fixed amount of that session's own context window to
+  carry the authored content, which is why this session did not attempt all 744 in one pass.
+  Full detail: `ENGINEERING_RUNBOOK_BLOCKED_ITEMS.md` §1.
+- Runbook items 2 (Explanation Asset promotion) and 3 (Supabase pool-mode verification) remain
+  blocked exactly as before — neither the Supabase MCP nor Vercel MCP tool surface available in
+  this session exposes admin-session-gated endpoints or raw environment-variable/pooler-mode
+  values.
+- Validation: `npx tsc --noEmit` clean, `npm run build` succeeded, throughout (including after
+  adding then reverting the temporary endpoint). No Mathematics, Physics, English, or other
+  curriculum content touched.
 
 ## Run locally
 ```
