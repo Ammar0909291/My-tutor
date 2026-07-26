@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 137 READY)
+## mathematics (908 concepts, 139 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -140,7 +140,7 @@ its subject KG.
 | arith | `math.arith.improper-fractions` | Improper Fractions | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.improper-fractions.md` | READY |
 | arith | `math.arith.integer-arithmetic` | Integer Arithmetic | Yes | Yes | `educational-brain/concepts/mathematics/math.arith.integer-arithmetic.md` | READY |
 | arith | `math.arith.inverse-variation` | Inverse Variation | No | Yes | `educational-brain/concepts/mathematics/math.arith.inverse-variation.md` | READY |
-| arith | `math.arith.irrational-roots` | Irrational Square Roots | No | No | — | MISSING |
+| arith | `math.arith.irrational-roots` | Irrational Square Roots | No | Yes | `educational-brain/concepts/mathematics/math.arith.irrational-roots.md` | READY |
 | arith | `math.arith.long-division` | Long Division | No | Yes | `educational-brain/concepts/mathematics/math.arith.long-division.md` | READY |
 | arith | `math.arith.long-multiplication` | Long Multiplication | No | Yes | `educational-brain/concepts/mathematics/math.arith.long-multiplication.md` | READY |
 | arith | `math.arith.mental-addition` | Mental Addition | No | Yes | `educational-brain/concepts/mathematics/math.arith.mental-addition.md` | READY |
@@ -678,7 +678,7 @@ its subject KG.
 | nt | `math.nt.composite-number` | Composite Number | No | No | — | MISSING |
 | nt | `math.nt.congruence` | Congruence | Yes | No | — | MISSING |
 | nt | `math.nt.continued-fractions` | Continued Fractions | Yes | No | — | MISSING |
-| nt | `math.nt.divisibility` | Divisibility | Yes | No | — | MISSING |
+| nt | `math.nt.divisibility` | Divisibility | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.divisibility.md` | READY |
 | nt | `math.nt.divisibility-rules` | Divisibility Rules | No | No | — | MISSING |
 | nt | `math.nt.division-algorithm` | Division Algorithm | Yes | No | — | MISSING |
 | nt | `math.nt.euclidean-algorithm` | Euclidean Algorithm | Yes | No | — | MISSING |

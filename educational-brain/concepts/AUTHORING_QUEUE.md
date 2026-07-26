@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1211** (= 1,775 KG concepts − 564 already `READY`, per
+Total queued: **1209** (= 1,775 KG concepts − 566 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -1097,7 +1097,9 @@ authored math.arith Wave 7 part 2, moved to READY.
 math.arith Wave 7 part 1, moved to READY.
 **Row 573 removed 2026-07-26** — `math.arith.cube-numbers` authored
 math.arith Wave 7 part 2, moved to READY.
-| 574 | mathematics | 16 | `math.nt.divisibility` | Divisibility |
+**Row 574 removed 2026-07-26** — `math.nt.divisibility` authored
+math.nt Wave 1 (cross-domain step to unblock math.arith), moved to
+READY.
 | 575 | mathematics | 16 | `math.nt.division-algorithm` | Division Algorithm |
 | 576 | mathematics | 16 | `math.geom.circle-equation` | Equation of a Circle |
 | 577 | mathematics | 16 | `math.geom.x-y-coordinates` | Cartesian Coordinates |
@@ -1219,7 +1221,8 @@ math.arith Wave 5 part 1, moved to READY.
 `math.arith.unit-rate` authored math.arith Wave 3, moved to READY.
 **Row 688 removed 2026-07-26** — `math.arith.rounding` authored
 math.arith Wave 5 part 1, moved to READY.
-| 689 | mathematics | 18 | `math.arith.irrational-roots` | Irrational Square Roots |
+**Row 689 removed 2026-07-26** — `math.arith.irrational-roots`
+authored math.arith Wave 9, moved to READY.
 **Row 690 removed 2026-07-26** — `math.arith.scientific-notation`
 authored math.arith Wave 7 part 2, moved to READY.
 | 691 | mathematics | 18 | `math.nt.composite-number` | Composite Number |
