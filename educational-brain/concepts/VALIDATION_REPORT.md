@@ -1182,3 +1182,41 @@ subject-specific override, future Curriculum Completion Program batches
 resume the program's default cross-subject priority order (`math.found`
 Wave 7+, per `ROADMAP.md` §5) — the standing instruction that redirected
 this session specifically to physics has now been fully satisfied.
+
+## Domain Certification — math.found (UPDATE, 2026-07-26, Wave 16)
+
+**Certification NOW PASSES**: `math.found` reached 82/82 (100%) with
+Wave 16's single concept, `math.found.complex-numbers` — the domain's
+final node, requiring only `math.found.real-numbers` (itself completed
+Wave 15). This supersedes the "Certification does NOT pass" verdict
+recorded above (dated to the 31/82 state after Wave 5); that record is
+kept as historical audit trail, not corrected retroactively.
+
+Verified programmatically before declaring certification: `node -e`
+script comparing the live KG's `math.found.*` concept list against the
+live `educational-brain/concepts/mathematics/` directory contents —
+0 missing, 82/82 present. All 82 individually re-verified this same
+batch (not merely the newest) against Quality Gate 3's exact 21-section
+heading order — 0 violations across the full domain. 0 duplicates, 0
+orphans across all 83 mathematics entries (82 `math.found.*` +
+`math.arith.fractions`).
+
+**The three open KGCS review items from the prior (31/82) certification
+check remain open and unresolved, carried forward one final time**:
+(1) `math.found.mathematical-notation`/`math.found.mathematical-symbols`
+thin-distinction finding; (2) `math.found.set`'s Misconception Register
+overlap with `math.found.set-theory`'s own; (3) the ∅-vs-{∅} confusion
+registered a third time in `math.found.empty-set`. None require a
+Canonical KG file change (all are Educational-Brain-authoring-side
+observations about content overlap, not KG structural defects), so none
+were fixed — consistent with this program's standing never-modify-the-
+KG constraint. These remain open items for a future dedicated
+cross-reference cleanup pass, not blockers to certification (which
+requires only 100% concept coverage, per this document's own original
+criterion above).
+
+**Verdict: math.found DOMAIN CERTIFIED, 82/82, 2026-07-26.** This is
+the first mathematics domain (of 24 total) and the third domain
+overall (after chemistry's 186/186 and physics's 238/238, both
+completed in prior sessions) to reach full Educational Brain coverage
+under this program.

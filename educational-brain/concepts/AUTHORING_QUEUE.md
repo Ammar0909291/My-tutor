@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1266** (= 1,775 KG concepts − 509 already `READY`, per
+Total queued: **1265** (= 1,775 KG concepts − 510 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -1028,7 +1028,9 @@ Wave 15, moved to READY.
 | 516 | computer_science | 14 | `cs.oop.encapsulation-abstraction` | Encapsulation and Abstraction |
 | 517 | computer_science | 14 | `cs.db.er-modeling` | Entity-Relationship Modeling |
 | 518 | computer_science | 14 | `cs.se.version-control-git` | Version Control with Git |
-| 519 | mathematics | 15 | `math.found.complex-numbers` | Complex Numbers |
+**Row 519 removed 2026-07-26** — `math.found.complex-numbers`
+authored Wave 16 (FINAL wave), moved to READY. `math.found` domain now
+82/82 — COMPLETE.
 | 520 | mathematics | 15 | `math.arith.column-addition` | Column Addition |
 | 521 | mathematics | 15 | `math.arith.borrowing` | Borrowing (Regrouping in Subtraction) |
 | 522 | mathematics | 15 | `math.arith.negative-numbers` | Negative Numbers |

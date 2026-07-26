@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 82 | `math.arith.fractions` + 81 `math.found.*` entries (Waves 1-15) — math.found domain IN PROGRESS (81/82, only `complex-numbers` remains — the final concept before Domain Certification eligibility), see Delivery history. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
+| mathematics | 908 | 83 | `math.arith.fractions` + 82 `math.found.*` entries (Waves 1-16) — **math.found domain COMPLETE, 82/82, DOMAIN CERTIFIED 2026-07-26** (see `VALIDATION_REPORT.md`), see Delivery history. Next mathematics domain: `math.arith` (58 concepts, 1 already authored). All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -1854,6 +1854,67 @@ computable: `complex-numbers` — once authored, `math.found` reaches
 §3's own standing gate. No other domain touched. All five tracking
 files updated in this same commit; re-validated 0 duplicates, 0
 orphans, 0 Quality Gate 3 violations across all 82 mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.found Wave 16 — FINAL WAVE, DOMAIN COMPLETE (2026-07-26, autonomous loop iteration 8)
+
+Autonomous `/loop` iteration 8, per the 2026-07-26 loop-activation
+standing instruction. Git resync: local `main` was in sync with
+`origin/main` at commit `39ab16ef` (no divergence, no new commits to
+reconcile) at this iteration's start.
+
+**Repair-audit first** (per this program's standing per-iteration
+discipline): re-ran the Quality Gate 3 heading-conformance check across
+all 82 pre-batch mathematics entries. **0 violations found**.
+
+**Wave 16 (final wave)**: authored the single remaining `math.found`
+concept, verified programmatically against the live KG:
+`complex-numbers`.
+
+- `math.found.complex-numbers` — grounded in an existing PACKAGE_READY
+  Blueprint. Reused its 3-item Misconception Registry by reference
+  (MC-1 SQRT-NEGATIVE-UNDEFINED — reclassified here as Type 4
+  notation-induced, since the specific symbol "√(−1)" is what triggers
+  the confusion via correct-but-misapplied prior instruction, rather
+  than a broad overgeneralization; FOUNDATIONAL per the Blueprint's own
+  MAMR; MC-2 I-IS-JUST-A-SYMBOL, Type 1; MC-3
+  COMPLEX-NUMBERS-ARE-NOT-REAL, Type 3 language contamination — the
+  everyday sense of "complex" as "complicated" is imported directly)
+  and the full P77/P76 mastery-gate item bank (cross-linking `math.
+  trig.polar-form-complex`) by reference. Directly extends `math.
+  found.real-numbers`'s own definitional-extension framing (i declared
+  by i²=−1, exactly as √2 and negative integers were declared at
+  earlier stages) and geometric distance intuition (modulus as
+  two-dimensional Pythagorean distance).
+
+**`math.found` reaches 82/82 (100%) — DOMAIN CERTIFIED.** Verified
+programmatically: 0 missing `math.found` concepts against the live KG.
+All 82 entries re-verified this batch against Quality Gate 3's exact
+21-section heading order — 0 violations across the full domain. 0
+duplicates, 0 orphans across all 83 mathematics entries. Full
+certification record, including 3 carried-forward-but-non-blocking
+KGCS review items, in `VALIDATION_REPORT.md`'s own "Domain
+Certification — math.found (UPDATE)" section.
+
+**Next mathematics domain identified (not yet started this batch, per
+this program's own "one small bounded batch per turn" discipline —
+Wave 16 was itself this batch's one bounded unit of work)**:
+`math.arith` (58 total concepts, 1 already authored —
+`math.arith.fractions`, the original Delivery-5 seed entry). Its sole
+zero-`math.arith`-prerequisite entry node is `math.arith.counting`,
+requiring only `math.found.natural-numbers` (already authored) — now
+unlocked and ready to be Wave 1 of the `math.arith` domain next
+iteration. Full reasoning for selecting `math.arith` over the other 22
+unauthored mathematics domains recorded in `ROADMAP.md` §5.
+
+All five tracking files updated in this same commit, including
+`ROADMAP.md` §3 (status flipped to COMPLETE — CERTIFIED) and §5 (new
+default target: `math.arith` Wave 1) and `VALIDATION_REPORT.md` (new
+Domain Certification record appended, superseding but not deleting the
+prior 31/82 "does NOT pass" record as historical audit trail).
 
 Full validation this batch: all 6 subject KG validators PASS (0
 failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite

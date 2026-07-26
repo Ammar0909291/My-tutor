@@ -13,16 +13,16 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **509** |
-| Remaining | **1,266** |
-| Completion percentage | **28.68%** |
+| Concepts with an Educational Brain entry | **510** |
+| Remaining | **1,265** |
+| Completion percentage | **28.73%** |
 
 *(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
 with an Educational Brain entry" rows had accumulated from prior sessions
 without being reconciled. Recomputed from this same file's §2 Subject
-progress table as currently stated per subject: 82 mathematics + 238
+progress table as currently stated per subject: 83 mathematics + 238
 physics + 3 english + 186 chemistry + 0 biology + 0 computer_science =
-509. Only the mathematics figure was independently re-verified by this
+510. Only the mathematics figure was independently re-verified by this
 batch by direct file count; the other subjects' figures are taken as
 already-recorded in §2 below, not re-audited by this batch, per this
 program's "mathematics only" scope this turn.)*
@@ -33,7 +33,7 @@ program's "mathematics only" scope this turn.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 82 | 9.03% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 83 | 9.14% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
@@ -155,15 +155,32 @@ Brain entries.
 
 ---
 
-## 3. Domain status — math.found (IN PROGRESS)
+## 3. Domain status — math.found (**COMPLETE — CERTIFIED**, 2026-07-26)
 
 | Metric | Value |
 |---|---|
 | Domain | `math.found` (mathematics / Foundations) |
 | Total concepts in domain | 82 |
-| Authored this program | 81 |
-| Remaining | 1 |
-| Status | **IN PROGRESS** — not eligible for Domain Certification yet |
+| Authored this program | 82 |
+| Remaining | 0 |
+| Status | **COMPLETE — DOMAIN CERTIFIED** (82/82, 100%, per `VALIDATION_REPORT.md`'s own "Domain Certification requires 100% of a domain's concepts authored" criterion) |
+
+**Domain Certification passes as of Wave 16 (2026-07-26)**: all 82
+`math.found` concepts authored, each individually verified against
+Quality Gate 3's exact 21-section heading order, 0 duplicates, 0
+orphans, every Blueprint Reference accurate (citing an existing
+Blueprint or stating none exists). **Three open KGCS review items
+carried forward, unresolved, not blocking certification** (no Canonical
+KG file has been modified for any of them, per this program's standing
+never-modify-the-KG constraint): (1) `math.found.mathematical-notation`
+and `math.found.mathematical-symbols` remain a genuinely thin KG
+distinction (near-identical descriptions, identical prerequisite,
+identical `bloom: remember`); (2) `math.found.set`'s Misconception
+Register substantially overlaps `math.found.set-theory`'s own
+(order/repetition, ∅-vs-{∅}); (3) the same ∅-vs-{∅} confusion is
+registered a third time in `math.found.empty-set`'s own Misconceptions.
+See `VALIDATION_REPORT.md`'s own Domain Certification section for the
+full record.
 
 Wave 1 (5, level 0-1): `mathematical-thinking` (root), `abstraction`,
 `pattern-recognition`, `problem-solving`, `mathematical-language`.
@@ -866,16 +883,37 @@ procedure.
 
 ## 5. Priority queue
 
-1. **Default (resumes next batch unless given an equally explicit
-   subject-specific override): `math.found` Wave 7 (candidates to be
-   computed from the live KG before starting)**: the set of `math.found`
-   nodes whose prerequisites are all now READY after Wave 6.
-2. **`math.found` Waves 8+ (46 remaining concepts after Wave 7)**, in strict
-   topological order, until all 82 are `READY`.
-3. Only after `math.found` is 100% complete and certified: the queue
-   returns to cross-subject priorities — `chem.found.matter`,
-   `bio.found.what-is-biology`, `cs.found.intro-computers`, then
-   physics's next dependency level (Wave 8), then everything else in
+**`math.found` is now COMPLETE and CERTIFIED (82/82, 2026-07-26) — see
+§3. Items 1-2 below are historical record of how it was reached; the
+active default has moved to item 1a.**
+
+1a. **New default (2026-07-26, active — resumes next batch unless given
+    an equally explicit subject-specific override): `math.arith`
+    Wave 1**. Computed programmatically: `math.arith` has 58 total
+    concepts, 1 already authored (`math.arith.fractions`, the original
+    Delivery-5 seed entry). Its sole zero-`math.arith`-prerequisite
+    entry node is `math.arith.counting`, requiring only `math.found.
+    natural-numbers` (already authored) — the domain's own root per
+    Domain Certification Mode's entry-point-first discipline. `math.
+    arith` was chosen over the other 22 unauthored mathematics domains
+    because it is the only one with an existing authored entry
+    (`fractions`) and its own KG `requires` chain sits immediately
+    adjacent to the just-completed `math.found` domain, minimizing
+    cross-domain context-switching cost for the next several waves.
+    Not yet started this batch — Wave 16 (`complex-numbers`) was this
+    batch's own one bounded unit of work, per this program's standing
+    "one small bounded batch per turn" discipline.
+1. **(Historical, satisfied) `math.found` Wave 7**: the set of
+   `math.found` nodes whose prerequisites were all READY after Wave 6.
+2. **(Historical, satisfied) `math.found` Waves 8-16 (52 remaining
+   concepts after Wave 7)**, authored in strict topological order until
+   all 82 reached `READY`, completing 2026-07-26.
+3. Once `math.arith` (or whichever mathematics domain is active) is
+   itself 100% complete and certified, the queue returns to
+   cross-subject priorities — `chem.found.matter`, `bio.found.
+   what-is-biology`, `cs.found.intro-computers` — then continues through
+   mathematics's remaining 22 domains in whatever order Domain
+   Certification Mode selects next, then everything else in
    prerequisite order.
 4. **Standing exception, now CLOSED for physics**: physics (or any
    subject) may be targeted again ahead of this default order given an

@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 82 READY)
+## mathematics (908 concepts, 83 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -407,7 +407,7 @@ its subject KG.
 | found | `math.found.cardinality` | Cardinality | Yes | Yes | `educational-brain/concepts/mathematics/math.found.cardinality.md` | READY |
 | found | `math.found.cartesian-product` | Cartesian Product | Yes | Yes | `educational-brain/concepts/mathematics/math.found.cartesian-product.md` | READY |
 | found | `math.found.complement` | Set Complement | No | Yes | `educational-brain/concepts/mathematics/math.found.complement.md` | READY |
-| found | `math.found.complex-numbers` | Complex Numbers | Yes | No | — | MISSING |
+| found | `math.found.complex-numbers` | Complex Numbers | Yes | Yes | `educational-brain/concepts/mathematics/math.found.complex-numbers.md` | READY |
 | found | `math.found.conjecture` | Conjecture | No | Yes | `educational-brain/concepts/mathematics/math.found.conjecture.md` | READY |
 | found | `math.found.corollary` | Corollary | No | Yes | `educational-brain/concepts/mathematics/math.found.corollary.md` | READY |
 | found | `math.found.countable-set` | Countable Set | No | Yes | `educational-brain/concepts/mathematics/math.found.countable-set.md` | READY |
