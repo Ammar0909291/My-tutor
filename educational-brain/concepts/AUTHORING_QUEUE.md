@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1244** (= 1,775 KG concepts − 531 already `READY`, per
+Total queued: **1240** (= 1,775 KG concepts − 535 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -1001,8 +1001,9 @@ Wave 4 part 2, moved to READY.
 Wave 15, moved to READY.
 | 488 | mathematics | 14 | `math.arith.carrying` | Carrying (Regrouping) |
 | 489 | mathematics | 14 | `math.arith.mental-addition` | Mental Addition |
-| 490 | mathematics | 14 | `math.arith.subtraction` | Subtraction |
-| 491 | mathematics | 14 | `math.arith.multiplication` | Multiplication |
+**Rows 490-491 removed 2026-07-26** — `math.arith.subtraction`,
+`math.arith.multiplication` authored math.arith Wave 5 part 1, moved
+to READY.
 | 492 | mathematics | 14 | `math.seq.infinite-geometric-series` | Infinite Geometric Series |
 | 493 | mathematics | 14 | `math.seq.telescoping-series` | Telescoping Series |
 | 494 | mathematics | 14 | `math.prob.conditional-expectation` | Conditional Expectation |
@@ -1201,10 +1202,12 @@ Wave 2 (part 2), moved to READY.
 | 682 | mathematics | 18 | `math.arith.decimal-operations` | Decimal Operations |
 | 683 | mathematics | 18 | `math.arith.terminating-decimals` | Terminating Decimals |
 | 684 | mathematics | 18 | `math.arith.repeating-decimals` | Repeating Decimals |
-| 685 | mathematics | 18 | `math.arith.percentages` | Percentages |
+**Row 685 removed 2026-07-26** — `math.arith.percentages` authored
+math.arith Wave 5 part 1, moved to READY.
 **Rows 686-687 removed 2026-07-26** — `math.arith.proportion`,
 `math.arith.unit-rate` authored math.arith Wave 3, moved to READY.
-| 688 | mathematics | 18 | `math.arith.rounding` | Rounding |
+**Row 688 removed 2026-07-26** — `math.arith.rounding` authored
+math.arith Wave 5 part 1, moved to READY.
 | 689 | mathematics | 18 | `math.arith.irrational-roots` | Irrational Square Roots |
 | 690 | mathematics | 18 | `math.arith.scientific-notation` | Scientific Notation |
 | 691 | mathematics | 18 | `math.nt.composite-number` | Composite Number |
