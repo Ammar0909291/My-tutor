@@ -1498,6 +1498,56 @@
   adding then reverting the temporary endpoint). No Mathematics, Physics, English, or other
   curriculum content touched.
 
+## AssetIdentity Completion Program — Global Audit (2026-07-26, same day, Pappu)
+- Explicit instruction: before continuing Chemistry seeding, audit ALL subjects' AssetIdentity
+  state directly against production, so effort isn't sunk into one subject while others turn out
+  equally incomplete. Full audit performed via direct Supabase queries (never estimated) — see
+  `docs/architecture/ASSETIDENTITY_AUDIT.md` for the complete table and methodology.
+- **Major finding, previously unknown**: the "694 DRAFT explanation rows (eng/math/phys)" this
+  program's prior sessions described as "quality-gate-verified content awaiting review" are NOT
+  script-seeded authored content at all — they carry a 3-segment canonicalSlug
+  (`conceptId:familyKind:language`, no gradeBand) matching the LIVE-CAPTURE format written by
+  `explanationMemory.ts`'s real-time DRAFT-after-every-LLM-generation path (ADR 14 Phase 2/3),
+  NOT the seed-script's 4-segment format (`conceptId:familyKind:language:gradeband`,
+  `authorKind=HUMAN_CURATOR`). Confirmed `authorKind` on every math/physics/english row in
+  production is `AI_AUTHORED`, 0 `HUMAN_CURATOR`. Prior sessions' claim that these rows were
+  "quality-gate-passing, human-reviewable authored content" was a mischaracterization of their
+  actual provenance — they are organic, unreviewed LLM output, not the curated
+  `authoredSeedAssets.ts`/`brainSeedAssets.ts` batch.
+- **Second major finding**: the live-capture path has NO deduplication — the same canonicalSlug
+  was captured up to 73× for a single concept (`phys.mech.conservative-forces`, 73 duplicate
+  DRAFT rows; several others 20-53×). Real distinct concept coverage from live capture is far
+  smaller than raw row counts suggest: math 7 distinct concepts (144 rows), physics 13 distinct
+  concepts (312 rows), english 30 distinct concepts (240 rows). This is a genuine data-quality
+  risk for any future bulk-promotion workflow and is flagged, NOT fixed — deleting/deduplicating
+  hundreds of rows was out of this program's scope (seeding, not cleanup) and would need explicit
+  owner authorization given the scale.
+- **Third finding**: before this session, this specific Supabase production project had ZERO
+  `HUMAN_CURATOR` AssetIdentity rows for ANY subject — the authored seed scripts
+  (`brainSeedAssets.ts`'s original Wave-0 entries, `authoredSeedAssets.ts`'s larger batch,
+  `chemistrySeedAssets.ts`, `biologySeedAssets.ts`, `csSeedAssets.ts`) had never been run against
+  this database. Chemistry's 60 rows (seeded in the prior session) were the first authored-seed
+  content this production database ever received.
+- **Biology and Computer Science: 0 AssetIdentity rows, 0% seeded** — despite each having a
+  complete, KG-validated authored seed source ready (`biologySeedAssets.ts`: 432 items /
+  `csSeedAssets.ts`: 476 items). Structurally the least-seeded subjects, tied with every other
+  subject's HUMAN_CURATOR count before this session.
+- **Mathematics: 20/179 authored-seed rows now seeded this turn** (20 EXPLANATION covering 10
+  concepts — fractions, addition, subtraction, multiplication, division, algebra basics, sets —
+  0 duplicates, 0 orphans, coexists cleanly alongside the pre-existing 144 unrelated AI_AUTHORED
+  live-capture rows). 159 authored-seed items remain (76 explanations, 83 probes).
+- Prioritization (Phase 2, reasoned not assumed): Chemistry is NOT the only incomplete subject —
+  every subject is at or near 0% of its own authored seed source. Ranked by fastest full
+  completion (smallest remaining authored-seed volume first, to bank complete subjects and spread
+  limited per-session context budget across more of the platform rather than exhausting it on
+  one): Mathematics (179 total, IN PROGRESS) → Biology (432, not started) → Chemistry (744,
+  60 seeded) → Computer Science (476, not started) → English (1056, not started) → Physics (1639,
+  not started, largest). This is a multi-session program; each session should continue down this
+  list in order rather than defaulting back to Chemistry.
+- Validation: `npx tsc --noEmit` clean, `npx vitest run` 2133 passed/1 skipped, no code changed.
+  No Mathematics Educational Brain/Blueprint/KG content touched (only AssetIdentity DB rows,
+  which are Mohammad's non-owned data layer per the standing ownership split).
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
