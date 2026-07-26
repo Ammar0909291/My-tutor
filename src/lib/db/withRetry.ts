@@ -14,11 +14,14 @@ export async function withRetry<T>(
         error.code === 'P1002' ||
         error.code === 'P1008' ||
         error.code === 'P1017' ||
+        error.code === 'P2024' ||
         error.message?.includes("Can't reach database") ||
         error.message?.includes('Connection reset') ||
         error.message?.includes('terminating connection') ||
         error.message?.includes('connection terminated') ||
-        error.message?.includes('connection closed')
+        error.message?.includes('connection closed') ||
+        error.message?.toLowerCase().includes('socket timeout') ||
+        error.message?.includes('fetching a new connection from the connection pool')
 
       if (isConnectionError && i < retries - 1) {
         console.log(`DB connection failed, retry ${i + 1}/${retries}...`)

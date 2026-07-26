@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { withPoolParams } from './poolConfig'
+import { withTimeout } from '@/lib/net/timeout'
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined
@@ -47,10 +48,16 @@ const ENSURE_COLUMN_STATEMENTS = [
   `ALTER TABLE profiles ADD COLUMN IF NOT EXISTS "voiceSpeed" DOUBLE PRECISION NOT NULL DEFAULT 1.0`,
 ]
 
+// P0 (2026-07-26): bounded per-statement — under real production load this
+// loop was observed competing with genuine user queries for the same scarce
+// pooled connections on every cold start. An unbounded raw query here could
+// hold a pool slot for as long as the DB stayed unresponsive; capping each
+// statement means a struggling DB releases the slot quickly instead of
+// starving user-facing requests for the full duration of the outage.
 async function ensureColumns() {
   for (const sql of ENSURE_COLUMN_STATEMENTS) {
     try {
-      await prisma.$executeRawUnsafe(sql)
+      await withTimeout(prisma.$executeRawUnsafe(sql), 5000, 'ensure-columns')
     } catch (e: any) {
       console.log('DB column check:', e.message)
     }
@@ -76,6 +83,7 @@ const RETRYABLE = [
   'P1002', // Database server reached but timed out
   'P1008', // Operation timed out
   'P1017', // Server has closed the connection
+  'P2024', // Timed out fetching a new connection from the connection pool
 ]
 
 function isRetryable(err: unknown): boolean {
@@ -87,7 +95,9 @@ function isRetryable(err: unknown): boolean {
     msg.includes("can't reach database") ||
     msg.includes('connection closed') ||
     msg.includes('terminating connection') ||
-    msg.includes('connection reset')
+    msg.includes('connection reset') ||
+    msg.includes('socket timeout') ||
+    msg.includes('fetching a new connection from the connection pool')
   )
 }
 
