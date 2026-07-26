@@ -2048,9 +2048,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }).catch((err) => console.warn('[learn/chat] MemoryServingEvent write failed (non-fatal):', err))
       }
 
-      if (!text) {
-        console.error('[learn/chat] empty response from model, finish_reason:', finishReason ?? 'unknown')
-        return NextResponse.json({ success: false, error: 'Empty response from model' }, { status: 502 })
+      const isInfraFailure = !text || provider === 'fallback'
+      if (isInfraFailure) {
+        const fallbackMsg: Record<string, string> = {
+          en: "I'm having a brief technical hiccup — please send your message again.",
+          ru: 'Небольшой технический сбой — пожалуйста, отправьте сообщение ещё раз.',
+          hi: 'Ek chhota technical issue hai — please apna message dobara bhejein.',
+        }
+        const friendlyText = text || fallbackMsg[teachingLang] || fallbackMsg.en
+        if (!text) console.error('[learn/chat] empty response from model, finish_reason:', finishReason ?? 'unknown')
+        return NextResponse.json({
+          success: true,
+          message: friendlyText,
+          retryable: true,
+        })
       }
 
       // Wave 0 Step 2/4 (Blueprint Phase 3): extract and strip the SIGNAL
