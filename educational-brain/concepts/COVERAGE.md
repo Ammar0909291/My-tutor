@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 134 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 52 `math.arith.*` entries (`fractions`, `counting`, `fraction-equivalence`, `fraction-multiplication`, `fraction-reciprocal`, `mixed-numbers`, `improper-fractions`, `ratios`, `counting-sequence`, `subitizing`, `place-value`, `number-line`, `proportion`, `unit-rate`, `ones-tens-hundreds`, `addition`, `decimals`, `expanded-form`, `number-base`, `ordering`, `direct-variation`, `inverse-variation`, `subtraction`, `multiplication`, `percentages`, `rounding`, `carrying`, `mental-addition`, `decimal-operations`, `terminating-decimals`, `repeating-decimals`, `negative-numbers`, `division`, `significant-figures`, `exponentiation`, `column-addition`, `borrowing`, `multiplication-table`, `percentage-calculations`, `estimation`, `absolute-value`, `integer-arithmetic`, `remainder`, `order-of-operations`, `exponent-rules`, `square-numbers`, `long-multiplication`, `mental-multiplication`, `divisor-dividend`, `percentage-change`, `cube-numbers`, `scientific-notation` — `math.arith` domain IN PROGRESS, 52/58, only 6 concepts remain), see Delivery history. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
+| mathematics | 908 | 139 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 56 `math.arith.*` entries (`fractions`, `counting`, `fraction-equivalence`, `fraction-multiplication`, `fraction-reciprocal`, `mixed-numbers`, `improper-fractions`, `ratios`, `counting-sequence`, `subitizing`, `place-value`, `number-line`, `proportion`, `unit-rate`, `ones-tens-hundreds`, `addition`, `decimals`, `expanded-form`, `number-base`, `ordering`, `direct-variation`, `inverse-variation`, `subtraction`, `multiplication`, `percentages`, `rounding`, `carrying`, `mental-addition`, `decimal-operations`, `terminating-decimals`, `repeating-decimals`, `negative-numbers`, `division`, `significant-figures`, `exponentiation`, `column-addition`, `borrowing`, `multiplication-table`, `percentage-calculations`, `estimation`, `absolute-value`, `integer-arithmetic`, `remainder`, `order-of-operations`, `exponent-rules`, `square-numbers`, `long-multiplication`, `mental-multiplication`, `divisor-dividend`, `percentage-change`, `cube-numbers`, `scientific-notation`, `long-division`, `square-roots`, `mental-arithmetic`, `irrational-roots` — `math.arith` domain IN PROGRESS, 56/58, only 2 concepts remain, both blocked on unauthored `math.nt.gcd`/`math.nt.lcm`) + 1 `math.nt.*` entry (`divisibility` — `math.nt` domain STARTED, 1/36, a bounded cross-domain step to unblock `math.arith`), see Delivery history. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -2706,6 +2706,113 @@ diagnostic procedure:
 other domain touched. All five tracking files updated in this same
 commit; re-validated 0 duplicates, 0 orphans, 0 Quality Gate 3
 violations across all 134 mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.arith Wave 8 (2026-07-26, autonomous loop iteration 21)
+
+Autonomous loop iteration 21, continuing immediately after Wave 7 part
+2. Git resync found zero concurrent commits at this iteration's start.
+
+**Repair-audit first**: re-ran the Quality Gate 3 heading-conformance
+check across all 134 pre-batch mathematics entries. **0 violations
+found**.
+
+**Wave 8 candidates re-verified programmatically**: 3 concepts ready
+— `math.arith.long-division`, `math.arith.square-roots` (Blueprint
+exists — became ready when `square-numbers` was authored in Wave 7
+part 1, deliberately deferred to this wave per this program's
+established precedent), and `math.arith.mental-arithmetic`. Small
+enough to author in one part without splitting.
+
+- `math.arith.square-roots` (requires `square-numbers`) — reused its
+  Misconception Registry by reference: MC-1
+  SQRT-SYMBOL-CONFLATED-WITH-ALL-ROOTS (FOUNDATIONAL, Type 6 analogy
+  overextension), MC-2 NEGATIVE-RADICAND-ALWAYS-UNDEFINED (Type 1),
+  MC-3 ESTIMATION-ROUNDS-TO-NEAREST-INTEGER-ONLY (Type 5). Both KG
+  cross-links (`math.alg.radicals`, `math.geom.pythagorean-theorem`)
+  confirmed not yet authored — independence mode, per the Blueprint's
+  own Component 7 finding.
+- `math.arith.long-division` (requires `division`,
+  `long-multiplication`) — no Blueprint. MC-1
+  DIGIT-BRING-DOWN-SKIPPED (FOUNDATIONAL, Type 5), MC-2
+  QUOTIENT-DIGIT-COLUMN-MISALIGNED (Type 4), MC-3
+  PROCESS-TERMINATED-BEFORE-ALL-DIGITS-BROUGHT-DOWN (Type 1). Scoped
+  to the iterative four-step algorithm's procedural failure modes,
+  distinct from `math.arith.remainder`'s conceptual registry.
+- `math.arith.mental-arithmetic` (requires `mental-addition`,
+  `mental-multiplication`) — no Blueprint. MC-1
+  STRATEGY-NOT-MATCHED-TO-NUMBER-STRUCTURE (FOUNDATIONAL, Type 1),
+  MC-2 COMPENSATION-ADJUSTMENT-NOT-REVERSED (Type 5), MC-3
+  MENTAL-DECOMPOSITION-FORCED-INTO-WRITTEN-ALGORITHM-ORDER (Type 6
+  analogy overextension).
+
+`math.arith` now **55/58** — only 3 concepts remain
+(`fraction-simplification`, `fraction-addition`, `irrational-roots`),
+all currently blocked on unauthored number-theory prerequisites
+(`math.nt.gcd`, `math.nt.lcm`, and — for `irrational-roots` — this
+wave's own `square-roots`, now resolved). `math.arith` cannot reach
+Domain Certification until at least `math.nt.gcd` and `math.nt.lcm`
+are authored — a genuine cross-domain dependency, to be addressed in
+Wave 9. No other domain touched. All five tracking files updated in
+this same commit; re-validated 0 duplicates, 0 orphans, 0 Quality Gate
+3 violations across all 137 mathematics entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2133 passed / 1 skipped (112 files), `npm run build` succeeded.
+
+### Mathematics — math.arith Wave 9 + math.nt Wave 1 (2026-07-26, autonomous loop iteration 22)
+
+Autonomous loop iteration 22, continuing immediately after Wave 8. Git
+resync found zero concurrent commits at this iteration's start.
+
+**Repair-audit first**: re-ran the Quality Gate 3 heading-conformance
+check across all 137 pre-batch mathematics entries. **0 violations
+found**.
+
+**Genuine cross-domain blocker confirmed**: re-verified programmatically
+that `math.arith`'s remaining 3 concepts split into one immediately
+ready item (`irrational-roots` — its prerequisites `square-roots` and
+`math.found.irrational-numbers` are both now satisfied) and two
+genuinely blocked items (`fraction-simplification` needs
+`math.nt.gcd`; `fraction-addition` needs `math.nt.lcm`), neither
+authored. Traced the full `math.nt` dependency chain needed:
+`math.nt.divisibility` (ready, Blueprint exists) → `math.nt.prime-number`
+(Blueprint exists) → `math.nt.prime-factorization` (Blueprint exists)
+→ `math.nt.gcd` (Blueprint exists) → `math.nt.lcm` (no Blueprint) — a
+4-concept minimal chain, not a full `math.nt` campaign commitment.
+
+Authored 2 concepts this wave:
+
+- `math.arith.irrational-roots` (requires `square-roots`,
+  `math.found.irrational-numbers`) — no Blueprint. MC-1
+  DECIMAL-APPROXIMATION-TREATED-AS-EXACT-VALUE (FOUNDATIONAL, Type 1),
+  MC-2 IRRATIONALITY-DOUBTED-AS-PATTERN-NOT-YET-FOUND (Type 2
+  perceptual intuition), MC-3
+  ALL-INTEGER-SQUARE-ROOTS-ASSUMED-IRRATIONAL (Type 1).
+- `math.nt.divisibility` (requires `math.arith.division`,
+  `math.found.integers`) — Blueprint exists, reused by reference. MC-1
+  DIVISIBILITY-CONFUSED-WITH-DIVISION (FOUNDATIONAL, Type 4
+  notation-induced), MC-2 DIVISIBILITY-SYMMETRIC (Type 6 analogy
+  overextension), MC-3 DIVISIBILITY-RESTRICTED-TO-POSITIVES (Type 1).
+  Its Tier 1 cross-link to `math.abst.ring-theory` (Blueprint
+  confirmed authored) used for a genuine cross-link transfer probe
+  (the polynomial-ring divisibility extension).
+
+`math.arith` now **56/58** — only 2 concepts remain
+(`fraction-simplification`, `fraction-addition`), both blocked on the
+`math.nt.gcd`/`math.nt.lcm` chain. `math.nt` now **1/36** — the first
+concept of a deliberately bounded cross-domain step, not a full
+`math.nt` campaign commitment; the next 3 concepts needed
+(`prime-number`, `prime-factorization`, `gcd`) all have existing
+Blueprints, and `lcm` (no Blueprint) is the final unblocking concept
+before `math.arith` can return to close out its final 2 concepts and
+reach 58/58 CERTIFIED. All five tracking files updated in this same
+commit; re-validated 0 duplicates, 0 orphans, 0 Quality Gate 3
+violations across all 139 mathematics entries.
 
 Full validation this batch: all 6 subject KG validators PASS (0
 failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
