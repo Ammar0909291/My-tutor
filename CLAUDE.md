@@ -1512,6 +1512,12 @@
   cross-domain step to unblock `math.arith`). `math.arith` 55/58 →
   56/58, only 2 concepts remain (blocked on `math.nt.gcd`/`lcm`).
   `math.nt` 0/36 → 1/36. Full detail: `COVERAGE.md`.
+  **Batch 33 — math.nt Wave 2** (2026-07-26, autonomous loop iteration
+  23): 4 concepts authored (`prime-number`, `prime-factorization`,
+  `gcd`, all Blueprint reused by reference; `lcm`, no Blueprint) —
+  completes the cross-domain chain unblocking `math.arith`'s final 2
+  concepts (`fraction-simplification`, `fraction-addition`), both now
+  ready. `math.nt` 1/36 → 5/36. Full detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
