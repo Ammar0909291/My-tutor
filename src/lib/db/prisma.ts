@@ -1,6 +1,5 @@
 import { PrismaClient } from '@prisma/client'
 import { withPoolParams } from './poolConfig'
-import { withTimeout } from '@/lib/net/timeout'
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined
@@ -21,51 +20,6 @@ export const prisma =
   })
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
-
-// Auto-migrate missing columns on startup (idempotent — safe to run every boot).
-// Each statement runs in its own try/catch so one failure never blocks the
-// rest, matching the pattern already established in scripts/fix-db.ts.
-//
-// Added 2026-07-08: users.role and profiles.voiceSpeed close the exact gap
-// that was taking login down in production — the credentials authorize()
-// path (and several other reads) implicitly select every column the current
-// Prisma Client knows about, so a database that predates the migration
-// adding these two columns throws "column does not exist" on every login
-// attempt. This self-heals it the moment this code deploys, without waiting
-// on `prisma migrate deploy` to run separately. It does NOT substitute for
-// deploying prisma/migrations/20260707120000_sync_untracked_schema_drift in
-// full — the ~40 other objects in that migration (Educational Brain tables,
-// Evidence Engine, Knowledge Asset tables, etc.) still need a real
-// `prisma migrate deploy` against production; this only covers the two
-// columns already confirmed to break core auth.
-const ENSURE_COLUMN_STATEMENTS = [
-  `ALTER TABLE profiles ADD COLUMN IF NOT EXISTS country VARCHAR(10) DEFAULT 'global'`,
-  `DO $$ BEGIN
-     CREATE TYPE "PlatformRole" AS ENUM ('STUDENT', 'ADMIN');
-   EXCEPTION WHEN duplicate_object THEN NULL;
-   END $$`,
-  `ALTER TABLE users ADD COLUMN IF NOT EXISTS "role" "PlatformRole" NOT NULL DEFAULT 'STUDENT'`,
-  `ALTER TABLE profiles ADD COLUMN IF NOT EXISTS "voiceSpeed" DOUBLE PRECISION NOT NULL DEFAULT 1.0`,
-]
-
-// P0 (2026-07-26): bounded per-statement — under real production load this
-// loop was observed competing with genuine user queries for the same scarce
-// pooled connections on every cold start. An unbounded raw query here could
-// hold a pool slot for as long as the DB stayed unresponsive; capping each
-// statement means a struggling DB releases the slot quickly instead of
-// starving user-facing requests for the full duration of the outage.
-async function ensureColumns() {
-  for (const sql of ENSURE_COLUMN_STATEMENTS) {
-    try {
-      await withTimeout(prisma.$executeRawUnsafe(sql), 5000, 'ensure-columns')
-    } catch (e: any) {
-      console.log('DB column check:', e.message)
-    }
-  }
-  console.log('✅ DB columns verified')
-}
-
-ensureColumns()
 
 /**
  * Retry wrapper for Prisma queries against Neon serverless.
