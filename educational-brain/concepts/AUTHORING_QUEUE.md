@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1146** (= 1,775 KG concepts − 629 already `READY`, per
+Total queued: **1145** (= 1,775 KG concepts − 630 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -581,7 +581,7 @@ Wave 4 part 2, moved to READY.
 | 66 | computer_science | 4 | `cs.net.ip-addressing` | IP Addressing and Subnetting |
 | 67 | computer_science | 4 | `cs.net.tcp-udp-transport` | TCP and UDP — Transport Layer |
 | 68 | computer_science | 4 | `cs.theory.finite-automata` | Finite Automata |
-| 69 | mathematics | 5 | `math.geom.angle-types` | Types of Angles |
+**Row 69 removed 2026-07-27** — `math.geom.angle-types` authored math.geom Wave 10 part 1, moved to READY.
 **Row 70 removed 2026-07-26** — `math.geom.angle-measurement` authored
 math.geom Wave 5, moved to READY.
 **Row 71 removed 2026-07-26** — `math.geom.angle-pairs` authored

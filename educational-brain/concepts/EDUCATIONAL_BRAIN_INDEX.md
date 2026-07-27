@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 202 READY)
+## mathematics (908 concepts, 203 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -514,7 +514,7 @@ its subject KG.
 | geom | `math.geom.angle` | Angle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.angle.md` | READY |
 | geom | `math.geom.angle-measurement` | Angle Measurement | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.angle-measurement.md` | READY |
 | geom | `math.geom.angle-pairs` | Angle Pairs | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.angle-pairs.md` | READY |
-| geom | `math.geom.angle-types` | Types of Angles | No | No | — | MISSING |
+| geom | `math.geom.angle-types` | Types of Angles | No | Yes | `educational-brain/concepts/mathematics/math.geom.angle-types.md` | READY |
 | geom | `math.geom.area` | Area | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.area.md` | READY |
 | geom | `math.geom.area-polygon` | Area of Polygons | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.area-polygon.md` | READY |
 | geom | `math.geom.area-triangle` | Area of a Triangle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.area-triangle.md` | READY |
