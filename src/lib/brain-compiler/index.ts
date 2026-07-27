@@ -7,6 +7,8 @@ export * from './types'
 export { parse } from './parser'
 export { lowerToAST, emitCompiledPack } from './lowering'
 export { compile, compileSingle } from './compile'
+export { buildFromCekr, serializeLock, lockMatches, type BrainLock, type BuildResult } from './build'
+export { compileFromCekr, type CekrCompileOptions, type CekrCompileResult } from './fromCekr'
 export { loadPack, mergePacks, packRegistry } from './registry'
 export { canonicalize, canonicalJsonHash, hashSource } from './hash'
 export {

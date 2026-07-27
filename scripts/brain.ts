@@ -14,15 +14,16 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { check, formatReport, fmt, isFormatted } from '../src/lib/cekr/cli'
 import { importKg, importAssets, coverage, formatCoverage } from '../src/lib/cekr/import'
 import type { CekrRecord } from '../src/lib/cekr/types'
+import { buildFromCekr, serializeLock } from '../src/lib/brain-compiler'
 
 const SUBJECTS = ['mathematics', 'physics', 'chemistry', 'biology', 'computer-science', 'english']
 
 /** Read every subject's KG + assets and lower them to CEKR. Read-only. */
-function importAll(): { records: CekrRecord[]; diagnostics: Array<{ code: string; id: string; detail: string }> } {
+function importAll(only?: string): { records: CekrRecord[]; diagnostics: Array<{ code: string; id: string; detail: string }> } {
   const records: CekrRecord[] = []
   const diagnostics: Array<{ code: string; id: string; detail: string }> = []
   const graphs: Array<{ file: string; graph: ReturnType<typeof JSON.parse> }> = []
-  for (const s of SUBJECTS) {
+  for (const s of only ? [only] : SUBJECTS) {
     const file = `docs/${s}/kg/graph.json`
     try { graphs.push({ file, graph: JSON.parse(readFileSync(file, 'utf8')) }) } catch { /* subject absent */ }
   }
@@ -33,7 +34,7 @@ function importAll(): { records: CekrRecord[]; diagnostics: Array<{ code: string
     const r = importKg(graph, { file, knownConceptIds: known })
     records.push(...r.records); diagnostics.push(...r.diagnostics)
   }
-  for (const s of SUBJECTS) {
+  for (const s of only ? [only] : SUBJECTS) {
     const file = `docs/${s}/teaching-assets/assets.json`
     try {
       const r = importAssets(JSON.parse(readFileSync(file, 'utf8')), { file, knownConceptIds: known })
@@ -44,7 +45,7 @@ function importAll(): { records: CekrRecord[]; diagnostics: Array<{ code: string
 }
 
 function usage(): never {
-  console.error('usage: brain check <files...> | brain fmt [--check] <files...> | brain coverage')
+  console.error('usage: brain check <files...> | brain fmt [--check] <files...> | brain coverage | brain build <subject> [--include-draft] [--emit]')
   process.exit(2)
 }
 
@@ -78,6 +79,31 @@ function main(): void {
     }
     console.log(`ok — ${unformatted} file(s) rewritten`)
     process.exit(0)
+  }
+
+  if (command === 'build') {
+    const subject = rest[0]
+    if (!subject) usage()
+    // Imported CEKR is DRAFT (it has had no human review), so a build over the
+    // import must say so explicitly rather than silently promoting it.
+    const servable = rest.includes('--include-draft')
+      ? new Set(['ACTIVE', 'REVIEW', 'DRAFT'])
+      : undefined
+    const { records } = importAll(subject)
+    const r = buildFromCekr(records, {
+      packId: `${subject}-cekr`, packVersion: '0.1.0', servableStatuses: servable,
+    })
+    for (const d of r.diagnostics) console.log(`${d.severity === 'E' ? 'error' : d.severity === 'W' ? 'warn ' : 'info '} ${d.code} — ${d.message}`)
+    if (!r.pack || !r.lock) { console.log('FAILED — no pack emitted'); process.exit(1) }
+    console.log(`pack ${r.pack.manifest.packId}@${r.pack.manifest.packVersion}`)
+    console.log(`rules ${r.pack.rules.length}  contentHash ${r.pack.manifest.contentHash}`)
+    console.log(`double-build determinism: ${r.deterministic ? 'PASS' : 'FAIL'}`)
+    if (rest.includes('--emit')) {
+      writeFileSync(`brain/${subject}.pack.json`, JSON.stringify(r.pack, null, 2) + '\n')
+      writeFileSync(`brain/${subject}.brain.lock`, serializeLock(r.lock))
+      console.log(`emitted brain/${subject}.pack.json and brain/${subject}.brain.lock`)
+    }
+    process.exit(r.ok ? 0 : 1)
   }
 
   if (command === 'import' || command === 'coverage') {
