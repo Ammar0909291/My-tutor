@@ -45,7 +45,8 @@ const SIGNALS: Array<{ correct: boolean | null; confidence: 'low' | 'medium' | '
   { correct: null, confidence: null },        // no answer to read
   { correct: false, confidence: 'high' },     // D1 misconceiving quadrant
   { correct: true, confidence: 'low' },       // D1 fragile quadrant
-  { correct: true, confidence: 'high' },      // fluent mastery
+  { correct: false, confidence: 'low' },      // D1 confused/guessing quadrant
+  { correct: true, confidence: 'high' },      // fluent mastery (TSM's, not Band 4's)
 ]
 const INTERRUPTS = [false, true] as const
 const FIRST_LESSON = [false, true] as const
@@ -127,7 +128,7 @@ function tableDigest(): { digest: string; lines: string[] } {
 
 // Pinned by the commit that introduced this test. Change it ONLY together
 // with the pack change that caused it.
-const PINNED_DIGEST = '3a3eb0e104e77e6985755ce934ab6a59d8d12e3add7f2d0b57d39fa84cc421a3'
+const PINNED_DIGEST = 'e15b3f6b538121ca56c34debe73452968c7c33b8e103b2eca042e7a7ec7fe60e'
 
 describe('Golden decision grid (RS T-3)', () => {
   it('covers at least the 200 rows RS T-3 requires', () => {
@@ -308,18 +309,18 @@ describe('replay diff — engine vs the legacy decision path', () => {
     // Pinned: promotion to primary is a data decision, and the data is this
     // number. It must move only when someone changes a rule on purpose.
     //
-    // The 1872 decompose exactly, with nothing left over — and they are the
-    // SAME 624 causes seen across all three legality values, since the
-    // Band-2 gate changes the move and never a budget:
-    //   1296 — every recovery row (432 × 3). Band 0 sets its own tighter
-    //          budget (2 paragraphs, 0 new terms) and the legacy formulas
-    //          have no recovery case. Intentional; the direction is safe.
-    //    144 — beginner + strained (48 × 3), maxNewTerms → 0 (foundations/04 P5).
-    //    432 — every expert row (144 × 3), maxNewTerms → 3; the route's
+    // The 2340 decompose exactly, with nothing left over. They are the same
+    // three causes seen across every signal quadrant and legality value,
+    // because neither the D1 grid nor the Band-2 gate touches a budget:
+    //   1620 — every recovery row (half the grid). Band 0 sets its own
+    //          tighter budget (2 paragraphs, 0 new terms) and the legacy
+    //          formulas have no recovery case. Intentional; direction safe.
+    //    180 — beginner + strained, maxNewTerms → 0 (foundations/04 P5).
+    //    540 — every expert row, maxNewTerms → 3; the route's
     //          `beginner ? 1 : 2` has no expert tier.
     // Zero rows diverge on maxParagraphs outside recovery — that is what the
     // preceding test asserts, and it is what makes these numbers a promotion
     // signal rather than noise.
-    expect({ rows: diffs.length, diverged }).toEqual({ rows: ROWS.length, diverged: 1872 })
+    expect({ rows: diffs.length, diverged }).toEqual({ rows: ROWS.length, diverged: 2340 })
   })
 })

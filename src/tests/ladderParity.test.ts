@@ -258,6 +258,34 @@ describe('what the pack adds to the ladder, on purpose', () => {
     expect(gated.move).toBe('SHOW')
   })
 
+  it('covers three D1 quadrants and deliberately leaves the fourth to the TSM', () => {
+    const at = (correct: boolean | null, confidence: 'low' | 'medium' | 'high' | null) =>
+      decide(BASE_PACK, {
+        ...toInputs(baseState('CHECK'), false),
+        lastSignalCorrect: correct, lastSignalConfidence: confidence,
+      })
+
+    // MISCONCEIVING — the dangerous quadrant: repair, never spot-correct.
+    expect(at(false, 'high').actionClass).toBe('MISCONCEPTION_FIX')
+    // FRAGILE — hold at the same level, one more of the same type.
+    expect(at(true, 'low').actionClass).toBe('REPEAT_SAME_TYPE')
+    // CONFUSED / GUESSING — step back; asking again is pushing on hope.
+    const confused = at(false, 'low')
+    expect(confused.move).toBe('SHOW')
+    expect(confused.provenance.map((t) => t.ruleId)).toContain('B4.d1.confused.v1')
+
+    // FLUENT MASTERY is the TSM's advance decision, not a Band-4 move: the
+    // phase default carries the turn and no D1 rule fires.
+    const fluent = at(true, 'high')
+    expect(fluent.provenance.some((t) => t.ruleId.startsWith('B4.d1.'))).toBe(false)
+    expect(fluent.move).toBe('ASK')          // CHECK's phase default
+
+    // 'medium' asserts neither side of the confident/hesitant axis, so no
+    // quadrant is invented from it.
+    expect(at(false, 'medium').provenance.some((t) => t.ruleId.startsWith('B4.d1.'))).toBe(false)
+    expect(at(true, 'medium').provenance.some((t) => t.ruleId.startsWith('B4.d1.'))).toBe(false)
+  })
+
   it('a Band-2 illegality still outranks the entire decision matrix', () => {
     const d = decide(BASE_PACK, {
       ...toInputs({ ...baseState('CHECK'), teachSegmentsSinceQuestion: 2 } as ConversationState, false),

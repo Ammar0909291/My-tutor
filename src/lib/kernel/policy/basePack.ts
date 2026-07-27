@@ -125,7 +125,19 @@ const b2BeginnerVocab = P(
 
 /**
  * The D1 grid (foundations/02 §1): speed × correctness × confidence → quadrant.
- * K4 v1 captures the two most actionable quadrants (validation/03).
+ *
+ * Three of the four quadrants are here. The fourth, FLUENT MASTERY
+ * (fast + correct + confident), is deliberately absent: its authored decision
+ * is "advance" (§2), and advancement is the TSM's — it fires on three fluent
+ * successes in a row, a streak the machine tracks and Band 4 does not. A
+ * Band-4 rule for it would either restate the phase default, adding nothing,
+ * or become a second owner of advancement. The phase default already carries
+ * that turn correctly.
+ *
+ * `confidence: 'medium'` is likewise unhandled on purpose. The grid's axis is
+ * confident-versus-hesitant, and 'medium' asserts neither; inventing a
+ * quadrant from an ambiguous signal is the exact error §1 warns about
+ * ("read the quadrant, never the correctness bit in isolation").
  */
 const b4FastWrongConfident = P(
   'B4.d1.misconceiving.v1', 4,
@@ -140,6 +152,23 @@ const b4HesitantCorrect = P(
   'foundations/02 §1',
   { reads: ['lastSignalCorrect', 'lastSignalConfidence'], match: (i) => i.lastSignalCorrect === true && i.lastSignalConfidence === 'low', describe: 'hesitant-correct = FRAGILE — hold' },
   { move: 'ASK', actionClass: 'REPEAT_SAME_TYPE' },
+  { specificity: 2 },
+)
+
+/**
+ * CONFUSED / GUESSING — slow or hesitant AND wrong. foundations/02 §1:
+ * "treat as a gap; step back one level; do not push forward on hope."
+ *
+ * The quadrant the pack was missing, and the one where asking again is most
+ * tempting and most wrong: the learner has just told you, twice over, that
+ * they cannot reach the answer — once by getting it wrong, once by hedging.
+ * A question here is pushing forward on hope.
+ */
+const b4ConfusedGuessing = P(
+  'B4.d1.confused.v1', 4,
+  'foundations/02 §1 (CONFUSED / GUESSING quadrant)',
+  { reads: ['lastSignalCorrect', 'lastSignalConfidence'], match: (i) => i.lastSignalCorrect === false && i.lastSignalConfidence === 'low', describe: 'hesitant-wrong = confused/guessing — step back, do not push' },
+  { move: 'SHOW', actionClass: 'DEMONSTRATION' },
   { specificity: 2 },
 )
 
@@ -425,7 +454,8 @@ export const BASE_PACK: PolicyPack = {
   // 0.7.0: the Band-4 decision matrix — the six ladder gates the pack was
   // missing, plus the GUIDE ask branch. Band 4 now reproduces
   // decideNextMoveHeuristic in full (proven by ladderParity.test.ts).
-  packVersion: '0.7.0-k4',
+  // 0.8.0: the D1 grid's CONFUSED/GUESSING quadrant (foundations/02 §1).
+  packVersion: '0.8.0-k4',
   rules: [
     b0Recovery,
     b1RetroWin, b1DueReviews,
@@ -434,7 +464,7 @@ export const BASE_PACK: PolicyPack = {
     b4DontKnowGate, b4TotalProbesGate, b4LoopBreakGate, b4ObserveFailureGate,
     b4QuestionBudgetShow, b4QuestionBudgetTeach,
     b4RepeatedStruggle, b4WorkedExampleFirst,
-    b4FastWrongConfident, b4HesitantCorrect, b4QuestionCeiling,
+    b4FastWrongConfident, b4HesitantCorrect, b4ConfusedGuessing, b4QuestionCeiling,
     b4DefaultAsk, b4DefaultShow, b4DefaultTeach, b4GuideAsk, b4DefaultCheck, b4Fallback,
     b5BeginnerBudget, b5BeginnerStrained,
     b5IntermediateBudget, b5IntermediateStrained,
