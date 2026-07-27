@@ -43,6 +43,7 @@ export function tsmStepStage(a: TsmAdapters): Stage<KernelState, KernelState> {
         scaffoldDial: a.scaffoldDial ?? 2,
         stageCeiling: stageCeilingFor(phase),
         demonstrated: cs?.demonstrated === true,
+        taughtThisSession: cs?.taughtThisSession === true,
         consecutiveFailures: cs?.consecutiveFailures ?? 0,
         transitionThisTurn: {
           from: a.previousPhase ?? null,

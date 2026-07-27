@@ -36,6 +36,7 @@ function state(over: Partial<KernelState> = {}): KernelState {
     },
     teachingState: {
       phase: 'OBSERVE', scaffoldDial: 0, stageCeiling: 2, demonstrated: false,
+      taughtThisSession: false,
       consecutiveFailures: 0, transitionThisTurn: { from: null, to: null, direction: 'none' },
     },
     ...over,
@@ -180,6 +181,91 @@ describe('the gate serves the pack the registry says is active', () => {
     const g = policyGate({ state: state(), mode: 'shadow' })
     expect(g.band3Rules).toBe(1)                       // loaded…
     expect(g.decision!.actionClass).toBe('OBSERVATION_QUESTION')  // …but did not fire
+  })
+})
+
+// ── Band 2 legality (masterplan K4: "capability gates live HERE") ───────────
+
+describe('the Band-2 ask-legality gate', () => {
+  const taught = (v: boolean) => state({
+    teachingState: { ...state().teachingState!, taughtThisSession: v },
+  })
+
+  it('permits ASK when the caller says nothing about legality', () => {
+    // Backward compatibility is the assertion: a pack that has not been told
+    // a turn is illegal must not invent an illegality.
+    expect(policyGate({ state: state(), mode: 'shadow' }).decision!.move).toBe('ASK')
+  })
+
+  it('removes ASK — subtractively — when the verdict says it is illegal', () => {
+    const d = policyGate({
+      state: state(), mode: 'shadow',
+      legality: { askLegal: false, blockedReason: 'QL4_MISSING_CAPABILITY' },
+    }).decision!
+    expect(d.move).not.toBe('ASK')
+    expect(d.budgets.maxQuestions).toBe(0)
+    expect(d.provenance.map((t) => t.ruleId)).toContain('B2.legality.ask-illegal.v1')
+  })
+
+  it('gives a SHOW before anything is taught and a TEACH after', () => {
+    const blocked = { askLegal: false, blockedReason: 'QL1_NO_ANSWERABLE_SOURCE' }
+    expect(policyGate({ state: taught(false), mode: 'shadow', legality: blocked }).decision!.move).toBe('SHOW')
+    expect(policyGate({ state: taught(true), mode: 'shadow', legality: blocked }).decision!.move).toBe('TEACH')
+  })
+
+  it('the legality give outranks the repeated-struggle heuristic', () => {
+    // decideNextMoveDetailed RETURNS from its blocked branch — the heuristic
+    // ladder never runs on a blocked turn. If repeated-struggle (Band 4,
+    // specificity 3) could outrank the give, a blocked turn would resolve
+    // differently in the pack than in the ladder.
+    const s = state({
+      teachingState: { ...state().teachingState!, taughtThisSession: true, consecutiveFailures: 3 },
+    })
+    const d = policyGate({
+      state: s, mode: 'shadow', legality: { askLegal: false, blockedReason: 'QL2_DIAGNOSTIC_CONCLUDED' },
+    }).decision!
+    expect(d.move).toBe('TEACH')
+    expect(d.provenance.map((t) => t.ruleId)).toContain('B4.legality-give.teach.v1')
+  })
+
+  it('an interrupt still wins over legality — Band 0 owns the turn', () => {
+    const s = state({
+      interrupt: { active: true, failureStateKey: 'dont_know', autonomyRequested: false, preemptsPolicy: true },
+    })
+    const d = policyGate({
+      state: s, mode: 'shadow', legality: { askLegal: false, blockedReason: 'QL4_MISSING_CAPABILITY' },
+    }).decision!
+    expect(d.move).toBe('RECOVER')
+    // …and Band 2 still ran, because a mandatory legality rule an interrupt
+    // can switch off is not mandatory.
+    expect(d.provenance.map((t) => t.ruleId)).toContain('B2.legality.ask-illegal.v1')
+  })
+})
+
+// ── parity with the module that owns this decision today ────────────────────
+
+describe('parity — the pack resolves a blocked turn exactly as the ladder does', () => {
+  it('agrees with decideNextMoveDetailed on every blocked-ask combination', () => {
+    // This is the replacement-parity test. The ladder is the shipping owner;
+    // the pack rules were transcribed FROM it, so agreement must be provable
+    // rather than asserted in a comment.
+    for (const taughtThisSession of [false, true])
+      for (const consecutiveFailures of [0, 1, 3])
+        for (const phase of ['OBSERVE', 'GUIDE', 'CHECK'] as const) {
+          const key = `${taughtThisSession}|${consecutiveFailures}|${phase}`
+          const ladderMove: 'teach' | 'show' = taughtThisSession ? 'teach' : 'show'
+          const expected = ladderMove === 'teach' ? 'TEACH' : 'SHOW'
+          const s = state({
+            teachingState: {
+              ...state().teachingState!, phase, taughtThisSession, consecutiveFailures,
+            },
+          })
+          const d = policyGate({
+            state: s, mode: 'shadow',
+            legality: { askLegal: false, blockedReason: 'QL1_NO_ANSWERABLE_SOURCE' },
+          }).decision!
+          expect(d.move, key).toBe(expected)
+        }
   })
 })
 

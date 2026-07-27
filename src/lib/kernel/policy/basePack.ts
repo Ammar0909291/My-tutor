@@ -91,6 +91,24 @@ const b2FirstLessonVocab = P(
   { specificity: 1 },
 )
 
+/**
+ * The Band-2 legality gate the masterplan places here ("capability gates
+ * live HERE"). Purely subtractive: it removes ASK from the legal move set
+ * and says nothing about what to do instead — Band 4 selects from what
+ * remains, which is the band separation working as designed.
+ *
+ * The verdict arrives as an input from questionLegality.ts. Restating QL-1…
+ * QL-4 as pack predicates would put the capability lattice in two places
+ * and guarantee they drift.
+ */
+const b2AskIllegal = P(
+  'B2.legality.ask-illegal.v1', 2,
+  'questionLegality QL-1…QL-4 + capabilityModel.capabilityLegality',
+  { reads: ['askLegal'], match: (i) => i.askLegal === false, describe: 'ASK ruled illegal this turn' },
+  { bannedMoves: ['ASK'] },
+  { specificity: 1 },
+)
+
 const b2BeginnerVocab = P(
   'B2.legality.beginner-vocab.v1', 2,
   'foundations/03 §5 register floor',
@@ -123,6 +141,37 @@ const b4HesitantCorrect = P(
   { reads: ['lastSignalCorrect', 'lastSignalConfidence'], match: (i) => i.lastSignalCorrect === true && i.lastSignalConfidence === 'low', describe: 'hesitant-correct = FRAGILE — hold' },
   { move: 'ASK', actionClass: 'REPEAT_SAME_TYPE' },
   { specificity: 2 },
+)
+
+/**
+ * The give that replaces a blocked question.
+ *
+ * decideNextMoveDetailed evaluates legality BEFORE the heuristic ladder and
+ * RETURNS from the blocked branch — the heuristic (repeated struggle, the
+ * question budget, worked-example-first) never runs on that turn. These two
+ * rules mirror that ordering: specificity 4 puts them above repeated-struggle
+ * (3) and the D1 grid (2), so a blocked turn resolves the same way in the
+ * pack as it does in the ladder. Anything lower would let a Band-4 heuristic
+ * re-answer a question legality had already answered.
+ *
+ * The teach/show split is the ladder's own: `taughtThisSession ? 'teach' :
+ * 'show'` — before anything is taught the learner needs to SEE the thing;
+ * afterwards an explanation is what is missing.
+ */
+const b4LegalityGiveShow = P(
+  'B4.legality-give.show.v1', 4,
+  'conversationState decideNextMoveDetailed (blocked-ask branch)',
+  { reads: ['askLegal', 'taughtThisSession'], match: (i) => i.askLegal === false && i.taughtThisSession !== true, describe: 'ASK illegal and nothing taught yet → show' },
+  { move: 'SHOW', actionClass: 'DEMONSTRATION' },
+  { specificity: 4 },
+)
+
+const b4LegalityGiveTeach = P(
+  'B4.legality-give.teach.v1', 4,
+  'conversationState decideNextMoveDetailed (blocked-ask branch)',
+  { reads: ['askLegal', 'taughtThisSession'], match: (i) => i.askLegal === false && i.taughtThisSession === true, describe: 'ASK illegal after teaching → teach' },
+  { move: 'TEACH', actionClass: 'GUIDED_EXPLANATION' },
+  { specificity: 4 },
 )
 
 /** Repeated struggle → SHOW, don't interrogate (foundations/01 §3 + Phase F). */
@@ -277,11 +326,14 @@ export const BASE_PACK: PolicyPack = {
   // 0.5.0: Band-5 struggling tiers for intermediate/expert (transcription
   // gap against responseBudget). Bumped because a pack whose rules changed
   // under an unchanged version makes the provenance string a lie.
-  packVersion: '0.5.0-k4',
+  // 0.6.0: Band-2 ask-legality gate + the two Band-4 gives that replace a
+  // blocked question (masterplan K4: "capability gates live HERE").
+  packVersion: '0.6.0-k4',
   rules: [
     b0Recovery,
     b1RetroWin, b1DueReviews,
-    b2StageCeiling, b2QuestionBudget, b2FirstLessonVocab, b2BeginnerVocab,
+    b2StageCeiling, b2QuestionBudget, b2AskIllegal, b2FirstLessonVocab, b2BeginnerVocab,
+    b4LegalityGiveShow, b4LegalityGiveTeach,
     b4FastWrongConfident, b4HesitantCorrect, b4RepeatedStruggle, b4QuestionCeiling,
     b4DefaultAsk, b4DefaultShow, b4DefaultTeach, b4DefaultCheck, b4Fallback,
     b5BeginnerBudget, b5BeginnerStrained,

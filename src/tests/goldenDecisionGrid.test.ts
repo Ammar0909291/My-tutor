@@ -49,6 +49,14 @@ const SIGNALS: Array<{ correct: boolean | null; confidence: 'low' | 'medium' | '
 ]
 const INTERRUPTS = [false, true] as const
 const FIRST_LESSON = [false, true] as const
+/** Band-2 ask legality, and the taught/untaught split that chooses the give
+ *  when it blocks. Three values rather than a 2×2, because taughtThisSession
+ *  only reaches a decision through the blocked branch. */
+const LEGALITY = [
+  { name: 'legal', askLegal: undefined, taughtThisSession: undefined },
+  { name: 'blocked-untaught', askLegal: false, taughtThisSession: false },
+  { name: 'blocked-taught', askLegal: false, taughtThisSession: true },
+] as const
 
 const BASE: PolicyInputs = {
   turnId: 'grid', learnerId: 'L', sessionId: 'S',
@@ -69,23 +77,27 @@ function grid(): GridRow[] {
       for (const consecutiveFailures of FAILURES)
         for (const signal of SIGNALS)
           for (const interruptActive of INTERRUPTS)
-            for (const isFirstLessonContext of FIRST_LESSON) {
-              rows.push({
-                key: [phase, contentRegister, `f${consecutiveFailures}`,
-                  `s${signal.correct}/${signal.confidence}`,
-                  interruptActive ? 'int' : '-', isFirstLessonContext ? 'L1' : '-'].join('|'),
-                inputs: {
-                  ...BASE, phase, contentRegister, consecutiveFailures,
-                  lastSignalCorrect: signal.correct, lastSignalConfidence: signal.confidence,
-                  interruptActive,
-                  // An interrupt without a failure state is not an interrupt
-                  // the Band-0 rule can act on (it reads both fields), so the
-                  // grid supplies the key whenever the flag is set.
-                  failureStateKey: interruptActive ? 'dont_know' : null,
-                  isFirstLessonContext,
-                },
-              })
-            }
+            for (const isFirstLessonContext of FIRST_LESSON)
+              for (const legality of LEGALITY) {
+                rows.push({
+                  key: [phase, contentRegister, `f${consecutiveFailures}`,
+                    `s${signal.correct}/${signal.confidence}`,
+                    interruptActive ? 'int' : '-', isFirstLessonContext ? 'L1' : '-',
+                    legality.name].join('|'),
+                  inputs: {
+                    ...BASE, phase, contentRegister, consecutiveFailures,
+                    lastSignalCorrect: signal.correct, lastSignalConfidence: signal.confidence,
+                    interruptActive,
+                    // An interrupt without a failure state is not an interrupt
+                    // the Band-0 rule can act on (it reads both fields), so the
+                    // grid supplies the key whenever the flag is set.
+                    failureStateKey: interruptActive ? 'dont_know' : null,
+                    isFirstLessonContext,
+                    askLegal: legality.askLegal,
+                    taughtThisSession: legality.taughtThisSession,
+                  },
+                })
+              }
   return rows
 }
 
@@ -115,7 +127,7 @@ function tableDigest(): { digest: string; lines: string[] } {
 
 // Pinned by the commit that introduced this test. Change it ONLY together
 // with the pack change that caused it.
-const PINNED_DIGEST = '8ffc05018956dac8e54c22ceeb7ce75d444bdf5279302e0e7638f28e149472c5'
+const PINNED_DIGEST = '3a3eb0e104e77e6985755ce934ab6a59d8d12e3add7f2d0b57d39fa84cc421a3'
 
 describe('Golden decision grid (RS T-3)', () => {
   it('covers at least the 200 rows RS T-3 requires', () => {
@@ -204,6 +216,17 @@ describe('grid invariants (RS §5.2 completeness + §5.4 mandatory set)', () => 
     }
   })
 
+  it('an illegal ASK never survives, in any phase, register or quadrant', () => {
+    // Band 2 is subtractive, so this must hold regardless of what Band 3, 4
+    // or 5 would have preferred — including the D1 grid's FRAGILE rule,
+    // whose whole effect is to ASK one more of the same type.
+    for (const { key, inputs, d } of decisions) {
+      if (inputs.askLegal !== false) continue
+      expect(d.move, key).not.toBe('ASK')
+      expect(d.budgets.maxQuestions, key).toBe(0)
+    }
+  })
+
   it('repeated struggle never ends in a question, in any phase or register', () => {
     // The single most consequential Band-4 rule: interrogating a learner who
     // has failed twice is the failure the worked-example-first rule exists to
@@ -285,16 +308,18 @@ describe('replay diff — engine vs the legacy decision path', () => {
     // Pinned: promotion to primary is a data decision, and the data is this
     // number. It must move only when someone changes a rule on purpose.
     //
-    // The 624 decompose exactly, with nothing left over:
-    //   432 — every recovery row. Band 0 sets its own tighter budget
-    //         (2 paragraphs, 0 new terms) and the legacy formulas have no
-    //         recovery case at all. Intentional, and the direction is safe.
-    //    48 — beginner + strained, on maxNewTerms (engine 0, foundations/04 P5).
-    //   144 — every expert row, on maxNewTerms (engine 3; the route's
-    //         `beginner ? 1 : 2` has no expert tier).
+    // The 1872 decompose exactly, with nothing left over — and they are the
+    // SAME 624 causes seen across all three legality values, since the
+    // Band-2 gate changes the move and never a budget:
+    //   1296 — every recovery row (432 × 3). Band 0 sets its own tighter
+    //          budget (2 paragraphs, 0 new terms) and the legacy formulas
+    //          have no recovery case. Intentional; the direction is safe.
+    //    144 — beginner + strained (48 × 3), maxNewTerms → 0 (foundations/04 P5).
+    //    432 — every expert row (144 × 3), maxNewTerms → 3; the route's
+    //          `beginner ? 1 : 2` has no expert tier.
     // Zero rows diverge on maxParagraphs outside recovery — that is what the
-    // preceding test asserts, and it is what makes these two numbers a
-    // promotion signal rather than noise.
-    expect({ rows: diffs.length, diverged }).toEqual({ rows: ROWS.length, diverged: 624 })
+    // preceding test asserts, and it is what makes these numbers a promotion
+    // signal rather than noise.
+    expect({ rows: diffs.length, diverged }).toEqual({ rows: ROWS.length, diverged: 1872 })
   })
 })

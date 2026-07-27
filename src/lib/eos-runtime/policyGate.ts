@@ -65,6 +65,24 @@ export interface LastSignalFacts {
 export const NO_SIGNAL: LastSignalFacts = { correct: null, confidence: null }
 
 /**
+ * The Band-2 legality verdict, from questionLegality.ts via the ladder.
+ * Carried in for the same reason the signal is: the kernel does not hold it
+ * as an artifact, and the caller has already computed it. Re-deriving it
+ * here would put "may this turn ask a question" in two places.
+ *
+ * The default is LEGAL. A gate that has not been told a turn is illegal must
+ * not invent an illegality — the conservative direction for a legality
+ * filter is to permit and let the measurement show the divergence, never to
+ * silently suppress a question the runtime allowed.
+ */
+export interface AskLegalityFacts {
+  askLegal: boolean
+  blockedReason: string | null
+}
+
+export const ASK_LEGAL: AskLegalityFacts = { askLegal: true, blockedReason: null }
+
+/**
  * KernelState → PolicyInputs. Total: every field has a defined value even
  * on a partially-populated state, because a policy engine that throws on a
  * missing artifact is a policy engine that takes the turn down.
@@ -80,6 +98,7 @@ export const NO_SIGNAL: LastSignalFacts = { correct: null, confidence: null }
 export function policyInputsFromState(
   state: KernelState,
   lastSignal: LastSignalFacts = NO_SIGNAL,
+  legality: AskLegalityFacts = ASK_LEGAL,
 ): PolicyInputs {
   const { context, view, interrupt, agenda, teachingState } = state
   return {
@@ -93,6 +112,7 @@ export function policyInputsFromState(
     phase: teachingState?.phase ?? 'OBSERVE',
     stageCeiling: teachingState?.stageCeiling ?? 2,
     demonstrated: teachingState?.demonstrated === true,
+    taughtThisSession: teachingState?.taughtThisSession === true,
     consecutiveFailures: teachingState?.consecutiveFailures ?? 0,
     interruptActive: interrupt?.active === true,
     failureStateKey: interrupt?.failureStateKey ?? null,
@@ -103,6 +123,8 @@ export function policyInputsFromState(
     lastSignalCorrect: lastSignal.correct,
     lastSignalConfidence: lastSignal.confidence,
     currentConceptId: agenda?.activeConceptId ?? view?.currentConceptId ?? null,
+    askLegal: legality.askLegal,
+    askBlockedReason: legality.blockedReason,
   }
 }
 
@@ -138,6 +160,7 @@ const OFF: PolicyGateResult = {
 export function policyGate(args: {
   state: KernelState
   lastSignal?: LastSignalFacts
+  legality?: AskLegalityFacts
   /** Override for tests; production reads the flag. */
   mode?: PolicyMode
 }): PolicyGateResult {
@@ -145,7 +168,9 @@ export function policyGate(args: {
   if (mode === 'off') return OFF
   try {
     const pack = packRegistry.runtimePack()
-    const decision = decide(pack, policyInputsFromState(args.state, args.lastSignal ?? NO_SIGNAL))
+    const decision = decide(pack, policyInputsFromState(
+      args.state, args.lastSignal ?? NO_SIGNAL, args.legality ?? ASK_LEGAL,
+    ))
     return {
       mode, ran: true, decision,
       packVersion: pack.packVersion,

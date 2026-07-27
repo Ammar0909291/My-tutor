@@ -91,6 +91,11 @@ export interface TeachingStateView {
   scaffoldDial: number                 // 0..4; 0 = full worked, 4 = solo
   stageCeiling: number                 // 1..7 (question stage policy)
   demonstrated: boolean
+  /** Has anything been taught this SESSION? Distinct from `demonstrated`,
+   *  which tracks the concept ladder. The policy layer needs both: the
+   *  blocked-ask give is chosen by this one, the worked-example-first rule
+   *  by the other. */
+  taughtThisSession: boolean
   consecutiveFailures: number
   transitionThisTurn: {
     from: string | null

@@ -36,6 +36,29 @@ export interface PolicyInputs {
   lastSignalConfidence: 'low' | 'medium' | 'high' | null
   // Concept
   currentConceptId: string | null
+  // Band 2 legality — the VERDICT, not the raw evidence.
+  //
+  // Masterplan K4: "Band 0–2 legality (capability gates live HERE …)".
+  // The verdict is computed by questionLegality.ts (QL-1 no answerable
+  // source · QL-2 diagnostic concluded · QL-3 learner directive · QL-4
+  // missing capability, which itself delegates to capabilityModel's
+  // capabilityLegality). It is carried in rather than re-derived: two
+  // modules computing "may this turn ask a question" is exactly the
+  // duplicate ownership the band structure exists to prevent, and the
+  // capability lattice is far too large to restate as pack predicates.
+  //
+  // OPTIONAL, and absence means legal. A pack that has never been told a
+  // turn is illegal must not invent an illegality, and every existing
+  // caller keeps its behaviour unchanged.
+  askLegal?: boolean
+  /** questionLegality's LegalityReason, for provenance only. */
+  askBlockedReason?: string | null
+  /** Has anything been taught this session? The ladder's blocked-ask branch
+   *  gives a SHOW before anything is taught and a TEACH after
+   *  (conversationState decideNextMoveDetailed), and the pack mirrors that
+   *  split exactly. Distinct from `demonstrated`, which tracks the concept
+   *  ladder rather than the session. */
+  taughtThisSession?: boolean
 }
 
 // ── Effect (partial PolicyDecision fields a rule can set) ────────────────────

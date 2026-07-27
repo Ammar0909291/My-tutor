@@ -10,6 +10,6 @@ export { ensureBrainPacksLoaded, __resetBrainPacksLoaderForTests } from './packL
 export { verifierGate, type GateInputs, type GateResult } from './verifierGate'
 export { buildVerifierContext, type BuildContextInput } from './buildContext'
 export {
-  policyGate, policyInputsFromState, NO_SIGNAL,
-  type PolicyGateResult, type LastSignalFacts,
+  policyGate, policyInputsFromState, NO_SIGNAL, ASK_LEGAL,
+  type PolicyGateResult, type LastSignalFacts, type AskLegalityFacts,
 } from './policyGate'

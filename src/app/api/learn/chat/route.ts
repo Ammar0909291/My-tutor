@@ -1843,6 +1843,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               : undefined
             const gate = policyGate({
               state: shadowResult.state,
+              // The Band-2 verdict the route ITSELF applied this turn,
+              // computed once by questionLegality inside the ladder and
+              // hoisted. Passed in rather than recomputed so the engine is
+              // measured against the same legality call the learner got.
+              legality: {
+                askLegal: legalityBlockedReasonHoisted === null,
+                blockedReason: legalityBlockedReasonHoisted,
+              },
               lastSignal: {
                 correct: enginePrevSignal?.correctness ?? null,
                 confidence: (enginePrevSignal?.confidence === 'low' || enginePrevSignal?.confidence === 'medium' || enginePrevSignal?.confidence === 'high')
