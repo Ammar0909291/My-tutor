@@ -3,6 +3,29 @@ import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
 import { MessageRole } from '@prisma/client'
+import { parseSignalTag } from '@/lib/teaching/signals'
+
+/**
+ * ISS-14 — read-time control-markup strip (masterplan P0).
+ *
+ * Assistant messages are tag-stripped at WRITE time today, but rows written
+ * before each stripper existed can still carry control markup — the
+ * `<!--SIGNAL-->` block above all (it can quote the learner's own phrasing
+ * verbatim, ISS-18 territory). Stripping at read time makes the guarantee
+ * hold for the whole table without a backfill migration.
+ *
+ * Reuses the tag owners rather than restating their grammars: parseSignalTag
+ * is THE signal grammar; the remaining patterns are the literal tag tokens
+ * the route strips at write time (worked-example / lesson markers), kept to
+ * exact-token matches so prose that merely mentions a tag name is untouched.
+ */
+function stripControlMarkup<T extends { content: string }>(m: T): T {
+  let content = parseSignalTag(m.content).cleanText
+  content = content.replace(/\[(?:\/)?(?:WE|LESSON|HINT|INLINE_PRACTICE)\]/g, '')
+    .replace(/\[LESSON_COMPLETE\]/g, '')
+    .trimEnd()
+  return content === m.content ? m : { ...m, content }
+}
 
 /**
  * Recent conversation history for a subject — WhatsApp-style.
@@ -51,7 +74,7 @@ export async function GET(req: Request) {
       take: HISTORY_DISPLAY_LIMIT,
       select: { id: true, role: true, content: true, createdAt: true, sessionId: true, provider: true },
     }))
-    const messages = raw.reverse()
+    const messages = raw.reverse().map(stripControlMarkup)
 
     return NextResponse.json({ success: true, data: { messages } })
   } catch (err) {
@@ -68,7 +91,7 @@ export async function GET(req: Request) {
         take: HISTORY_DISPLAY_LIMIT,
         select: { id: true, role: true, content: true, createdAt: true, sessionId: true },
       }))
-      const messages = rawFallback.reverse()
+      const messages = rawFallback.reverse().map(stripControlMarkup)
       return NextResponse.json({ success: true, data: { messages } })
     } catch (fallbackErr) {
       console.error('[sessions/history GET]', fallbackErr)
