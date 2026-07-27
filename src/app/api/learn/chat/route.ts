@@ -1270,6 +1270,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     let kernelParityMetricsHoisted:
       import('@/lib/kernel/parity').ParityMetrics | null = null
     let kernelParityTagsHoisted: string[] = []
+    // K4 — parity between the route's decision and the POLICY ENGINE's.
+    // Separate from kernelParity above on purpose: that one measures whether
+    // a stage extraction is behaviour-identical, this one measures whether
+    // the rule pack would teach the same turn. Same shape, opposite fixes.
+    let enginePolicyParityHoisted:
+      import('@/lib/kernel/parity').ParityMetrics | null = null
+    let enginePolicyTagsHoisted: string[] = []
     // EOS v2 Capability Model — session-tier state + this concept's demands.
     let capabilityStateHoisted:
       import('@/lib/teaching/capabilityModel').CapabilityState | null = null
@@ -1785,16 +1792,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         if (shadowResult.invoked && shadowResult.state?.policy) {
           const { compareDecisions, foldParityMetrics, parityTags } = await import('@/lib/kernel/parity')
           const k = shadowResult.state.policy
+          // The decision the route ACTUALLY made this turn. Named once and
+          // reused by both comparisons below: restating it would let the two
+          // parities disagree about what the baseline was, which is the exact
+          // drift kernel/policyMove.ts exists to prevent.
+          const routeFacts = {
+            move: kernelPolicyMoveHoisted,
+            stageCeiling: evidenceStageCeilingHoisted ?? null,
+            maxQuestions: kernelMaxQuestionsHoisted,
+            maxNewTerms: contentRegister === 'beginner' ? 1 : 2,
+            maxParagraphs: routeMaxParagraphsHoisted,
+            phase: conversationStateHoisted?.phase ?? null,
+            recoveryActive: recoveryKeyHoisted !== null,
+          }
           const parity = compareDecisions(
-            {
-              move: kernelPolicyMoveHoisted,
-              stageCeiling: evidenceStageCeilingHoisted ?? null,
-              maxQuestions: kernelMaxQuestionsHoisted,
-              maxNewTerms: contentRegister === 'beginner' ? 1 : 2,
-              maxParagraphs: routeMaxParagraphsHoisted,
-              phase: conversationStateHoisted?.phase ?? null,
-              recoveryActive: recoveryKeyHoisted !== null,
-            },
+            routeFacts,
             {
               move: k.move,
               stageCeiling: k.stageCeiling,
@@ -1809,6 +1821,53 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             snapshot?.kernelParity as never, parity,
           )
           kernelParityTagsHoisted = parityTags(parity)
+
+          // K4 — the Policy Engine's production consumer. Runs the 7-band
+          // engine over the runtime pack (BASE_PACK + any activated C4
+          // overlays) on THIS turn's kernel artifacts, compares its decision
+          // to the one the route actually made, and discards it. Shadow by
+          // construction: policyGate never returns a path to the response,
+          // and the engine is pure, so the whole measurement costs
+          // microseconds. This is what makes K4's "replay diff vs pre-pack
+          // behaviour" a number instead of an intention — and the promotion
+          // criterion is the same as K3's: divergences to zero first.
+          const { readEosFlags, policyGate } = await import('@/lib/eos-runtime')
+          if (readEosFlags().policyMode !== 'off') {
+            // The D1-grid inputs. Same snapshot field the LAST-ANSWER READ
+            // prompt overlay reads (~700 lines up) — the engine's Band-4 grid
+            // rules and that overlay encode the SAME two quadrants, so they
+            // must read the same source or the shadow decision would be
+            // measured against a grid the route never applied.
+            const enginePrevSignal = (snapshot?.lastSignal && typeof snapshot.lastSignal === 'object')
+              ? snapshot.lastSignal as { correctness?: boolean; confidence?: string }
+              : undefined
+            const gate = policyGate({
+              state: shadowResult.state,
+              lastSignal: {
+                correct: enginePrevSignal?.correctness ?? null,
+                confidence: (enginePrevSignal?.confidence === 'low' || enginePrevSignal?.confidence === 'medium' || enginePrevSignal?.confidence === 'high')
+                  ? enginePrevSignal.confidence : null,
+              },
+            })
+            if (gate.decision) {
+              const engineParity = compareDecisions(routeFacts, {
+                move: gate.decision.move,
+                stageCeiling: gate.decision.stageCeiling,
+                maxQuestions: gate.decision.budgets.maxQuestions,
+                maxNewTerms: gate.decision.budgets.maxNewTerms,
+                maxParagraphs: gate.decision.budgets.maxParagraphs,
+                // Phase and recovery are INPUTS to the engine, not outputs —
+                // it reads them off the same artifacts the route produced, so
+                // comparing them measures the input path, not the rules.
+                phase: routeFacts.phase,
+                recoveryActive: routeFacts.recoveryActive,
+              })
+              enginePolicyParityHoisted = foldParityMetrics(
+                snapshot?.enginePolicyParity as never, engineParity,
+              )
+              enginePolicyTagsHoisted = parityTags(engineParity, 'engine')
+            }
+          }
         }
       } catch { /* strangler: kernel failure never affects the turn */ }
     }
@@ -3081,6 +3140,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (kernelParityMetricsHoisted) {
             conversationStateUpdate.kernelParity = kernelParityMetricsHoisted
           }
+          // K4: engine-vs-route parity rides the same snapshot persist.
+          if (enginePolicyParityHoisted) {
+            conversationStateUpdate.enginePolicyParity = enginePolicyParityHoisted
+          }
           // Capability session tier — same snapshot persist, no new store.
           if (capabilityStateHoisted && Object.keys(capabilityStateHoisted).length > 0) {
             conversationStateUpdate.capabilities = capabilityStateHoisted
@@ -3160,6 +3223,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 // K6 — record EOS verifier outcomes as provenance atoms
                 ...eosVerifierTagsHoisted,
                 ...kernelParityTagsHoisted,
+                ...enginePolicyTagsHoisted,
                 ...(eosVerifierEvents.some((e) => e.kind === 'OutputRejected') ? ['verifier:rejected'] : []),
                 ...(eosVerifierUsedTemplate ? ['verifier:template-fallback'] : []),
                 ...(eosVerifierAttempts === 2 && !eosVerifierUsedTemplate ? ['verifier:rerendered'] : []),

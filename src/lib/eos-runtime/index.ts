@@ -9,3 +9,7 @@ export * from './flags'
 export { ensureBrainPacksLoaded, __resetBrainPacksLoaderForTests } from './packLoader'
 export { verifierGate, type GateInputs, type GateResult } from './verifierGate'
 export { buildVerifierContext, type BuildContextInput } from './buildContext'
+export {
+  policyGate, policyInputsFromState, NO_SIGNAL,
+  type PolicyGateResult, type LastSignalFacts,
+} from './policyGate'

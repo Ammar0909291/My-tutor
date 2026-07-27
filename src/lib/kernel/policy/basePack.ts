@@ -213,12 +213,44 @@ const b5IntermediateBudget = P(
   { specificity: 1 },
 )
 
+/**
+ * The struggling tier for the other two registers.
+ *
+ * These rules restore a transcription gap, they do not introduce policy.
+ * responseBudget() — the shipping owner these Band-5 rules cite — shortens
+ * the reply for EVERY register once consecutiveFailures ≥ 2 (beginner 4→2,
+ * intermediate 7→4, expert unlimited→6). The pack implemented that tier for
+ * beginner only, so a struggling intermediate learner would have been handed
+ * seven paragraphs where the runtime gives four. The golden grid's replay
+ * diff surfaced it as a maxParagraphs divergence on 1/3 of all rows.
+ *
+ * maxNewTerms is deliberately NOT touched here. Only the beginner-strained
+ * rule zeroes it, on foundations/04 P5's authority; extending that to other
+ * registers would be inventing policy no authored source states, which is
+ * exactly what a pack transcribed from a source must not do.
+ */
+const b5IntermediateStrained = P(
+  'B5.personalize.intermediate-strained.v1', 5,
+  'Phase D response budgets (responseBudget struggling tier)',
+  { reads: ['contentRegister', 'consecutiveFailures'], match: (i) => i.contentRegister === 'intermediate' && i.consecutiveFailures >= 2, describe: 'intermediate + strained' },
+  { budgets: { maxParagraphs: 4 } },
+  { specificity: 2 },
+)
+
 const b5ExpertBudget = P(
   'B5.personalize.expert-budget.v1', 5,
   'Phase D response budgets',
   { reads: ['contentRegister'], match: (i) => i.contentRegister === 'expert', describe: 'expert register' },
   { budgets: { maxParagraphs: null, maxNewTerms: 3 } },
   { specificity: 1 },
+)
+
+const b5ExpertStrained = P(
+  'B5.personalize.expert-strained.v1', 5,
+  'Phase D response budgets (responseBudget struggling tier)',
+  { reads: ['contentRegister', 'consecutiveFailures'], match: (i) => i.contentRegister === 'expert' && i.consecutiveFailures >= 2, describe: 'expert + strained' },
+  { budgets: { maxParagraphs: 6 } },
+  { specificity: 2 },
 )
 
 const b5AutonomyHonor = P(
@@ -242,14 +274,20 @@ const b6FallbackChain = P(
 // ── Assembled pack ──────────────────────────────────────────────────────────
 
 export const BASE_PACK: PolicyPack = {
-  packVersion: '0.4.0-k4',
+  // 0.5.0: Band-5 struggling tiers for intermediate/expert (transcription
+  // gap against responseBudget). Bumped because a pack whose rules changed
+  // under an unchanged version makes the provenance string a lie.
+  packVersion: '0.5.0-k4',
   rules: [
     b0Recovery,
     b1RetroWin, b1DueReviews,
     b2StageCeiling, b2QuestionBudget, b2FirstLessonVocab, b2BeginnerVocab,
     b4FastWrongConfident, b4HesitantCorrect, b4RepeatedStruggle, b4QuestionCeiling,
     b4DefaultAsk, b4DefaultShow, b4DefaultTeach, b4DefaultCheck, b4Fallback,
-    b5BeginnerBudget, b5BeginnerStrained, b5IntermediateBudget, b5ExpertBudget, b5AutonomyHonor,
+    b5BeginnerBudget, b5BeginnerStrained,
+    b5IntermediateBudget, b5IntermediateStrained,
+    b5ExpertBudget, b5ExpertStrained,
+    b5AutonomyHonor,
     b6FallbackChain,
   ],
 }

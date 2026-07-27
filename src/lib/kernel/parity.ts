@@ -115,8 +115,14 @@ export function agreementRate(m: ParityMetrics, minSample = 20): number | null {
 }
 
 /** Compact tags for the existing evidence-tag array — reuses the persistence
- *  path already carrying verifier tags rather than adding a second one. */
-export function parityTags(result: ParityResult): string[] {
+ *  path already carrying verifier tags rather than adding a second one.
+ *
+ *  `prefix` names WHICH comparison diverged. Two independent parities now
+ *  ride this array — the K3 stage extraction ('kernel') and the K4 policy
+ *  engine ('engine') — and merging them under one tag would make a Band-4
+ *  rule disagreement indistinguishable from an unfinished stage extraction,
+ *  which are opposite problems with opposite fixes. */
+export function parityTags(result: ParityResult, prefix = 'kernel'): string[] {
   if (result.agree) return []
-  return ['kernel:parity:diverged', ...result.divergences.map((d) => `kernel:parity:${d.field}`)]
+  return [`${prefix}:parity:diverged`, ...result.divergences.map((d) => `${prefix}:parity:${d.field}`)]
 }

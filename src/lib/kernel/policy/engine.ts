@@ -8,11 +8,14 @@
  * externally.
  *
  * Evaluation order (RS §5.2):
- *   Band 0 — if any fires, entire skeleton is that rule's effect;
- *            bands 1–4 SKIPPED; bands 5–6 refine surface only.
+ *   Band 0 — if any fires, entire skeleton is that rule's effect; the
+ *            SELECTION bands (1, 3, 4) are SKIPPED; bands 2, 5 and 6 still
+ *            run — legality and surface refinement are never preempted.
  *   Band 1 — obligations (order-preserving concat of contentSlots).
  *   Band 2 — legality: subtractive only (bannedMoves, vocabularyBans,
- *            stageCeiling floor).
+ *            stageCeiling floor). Runs on EVERY turn, including preempted
+ *            ones: a mandatory rule an interrupt can switch off is not
+ *            mandatory (RS §5.4).
  *   Band 3 — authored dispatch: if a matching rule exists it sets
  *            move/actionClass/contentSlots outright and Band 4 is
  *            SKIPPED for those fields. (K4 v1: empty; C4 populates.)
@@ -84,6 +87,16 @@ function applyEffect(d: WorkingDecision, e: RuleEffect, opts: { subtractive: boo
     if (e.move !== undefined && (opts.forceMove || d.move === null) && !d.bannedMoves.has(e.move)) {
       d.move = e.move; set.push('move')
     }
+    // vocabularyBans are a UNION on every band, not just Band 2. Before this,
+    // the non-subtractive branch had no case for them at all, so the Band-0
+    // recovery rule's declared bans ('formula', 'notation') were parsed,
+    // carried through the pack, and then silently dropped by the engine — the
+    // one band where a ban matters most, since a preempted turn skips the
+    // Band-2 filters that would otherwise have supplied some.
+    if (e.vocabularyBans) {
+      d.vocabularyBans = Array.from(new Set([...d.vocabularyBans, ...e.vocabularyBans]))
+      set.push('vocabularyBans')
+    }
     if (e.actionClass !== undefined && d.actionClass === null) { d.actionClass = e.actionClass; set.push('actionClass') }
     if (e.visualClass !== undefined && d.visualClass === null) { d.visualClass = e.visualClass; set.push('visualClass') }
     if (e.budgets) {
@@ -125,11 +138,23 @@ function rulesInBand(pack: PolicyPack, band: BandId): Rule[] {
   return sortBand(pack.rules.filter((r) => r.band === band))
 }
 
+/**
+ * Fields with UNION or APPEND semantics. Two rules contributing to one of
+ * these are not in conflict — both apply, in full, and no tie-break runs.
+ * Reporting them as conflicts was not merely noisy: PolicyConflictDetected is
+ * an evidence event meant to surface pack ambiguity a human must resolve, and
+ * a first-lesson beginner turn produced one on every single turn (the
+ * first-lesson ban set and the beginner ban set, both adding to the same
+ * union). A conflict channel that fires constantly for non-conflicts hides
+ * the real ones, which is the failure mode the channel exists to prevent.
+ */
+const UNION_FIELDS = new Set<keyof RuleEffect>(['vocabularyBans', 'bannedMoves', 'contentSlots'])
+
 function detectConflicts(d: WorkingDecision, band: BandId, fired: Rule[]): void {
   const byField = new Map<string, Rule[]>()
   for (const r of fired) {
     for (const key of Object.keys(r.effect) as (keyof RuleEffect)[]) {
-      if (r.effect[key] === undefined) continue
+      if (r.effect[key] === undefined || UNION_FIELDS.has(key)) continue
       const list = byField.get(key) ?? []
       list.push(r); byField.set(key, list)
     }
@@ -155,27 +180,46 @@ export function decide(pack: PolicyPack, inputs: PolicyInputs): EnginePolicyDeci
   const b0 = rulesInBand(pack, 0).filter((r) => r.guard.match(inputs))
   if (b0.length > 0) {
     // First-match by specificity (already sorted). Preemption sets the
-    // whole skeleton; bands 1–4 SKIPPED.
+    // whole skeleton; the SELECTION bands (1, 3, 4) are skipped.
     const rule = b0[0]
     const set = applyEffect(d, rule.effect, { subtractive: false, personalization: false, forceMove: true })
     trace(d, rule, set)
     d.preemptedBy = rule.ruleId
     detectConflicts(d, 0, b0)
-  } else {
+  }
+
+  // Band 2 — legality (subtractive). Runs on BOTH paths.
+  //
+  // It used to run only when no interrupt fired, and that was a safety
+  // inversion. Band 2 is where the mandatory set lives (RS §5.4: stage
+  // ceiling, question budget) plus the first-lesson and beginner vocabulary
+  // floors — and a rule an interrupt can switch off is not mandatory. The
+  // concrete failure: a lesson-one beginner says "I don't know", recovery
+  // preempts, and the bans that keep "SI" and "phoneme" out of a frightened
+  // beginner's turn disappear at exactly the moment the learner is least able
+  // to absorb them.
+  //
+  // It is safe on the preempted path precisely because Band 2 is subtractive:
+  // it can add bans and tighten budgets, and has no expression that sets or
+  // clears `move`. Running it after Band 0 therefore preserves both
+  // invariants at once — the interrupt still owns the turn, and legality
+  // still wins over selection. Band 5 already ran on both paths for the same
+  // reason; Band 2 has a stronger claim to it than Band 5 does.
+  const b2Fired: Rule[] = []
+  for (const rule of rulesInBand(pack, 2)) {
+    if (!rule.guard.match(inputs)) continue
+    const set = applyEffect(d, rule.effect, { subtractive: true, personalization: false })
+    trace(d, rule, set); b2Fired.push(rule)
+  }
+  detectConflicts(d, 2, b2Fired)
+
+  if (b0.length === 0) {
     // Band 1 — obligations
     for (const rule of rulesInBand(pack, 1)) {
       if (!rule.guard.match(inputs)) continue
       const set = applyEffect(d, rule.effect, { subtractive: false, personalization: false })
       trace(d, rule, set)
     }
-    // Band 2 — legality (subtractive)
-    const b2Fired: Rule[] = []
-    for (const rule of rulesInBand(pack, 2)) {
-      if (!rule.guard.match(inputs)) continue
-      const set = applyEffect(d, rule.effect, { subtractive: true, personalization: false })
-      trace(d, rule, set); b2Fired.push(rule)
-    }
-    detectConflicts(d, 2, b2Fired)
 
     // Band 3 — authored dispatch (K4 v1: empty; C4 fills)
     const b3 = rulesInBand(pack, 3).filter((r) => r.guard.match(inputs))
