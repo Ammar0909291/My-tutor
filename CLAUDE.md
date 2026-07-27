@@ -1604,6 +1604,10 @@
   Blueprint but no EB entry yet, cross-link probe mode). `math.geom`
   1/69 → 2/69. `math.geom.plane` becomes ready next wave. Full detail:
   `COVERAGE.md`.
+  **Batch 46 — math.geom Wave 3** (2026-07-26, autonomous loop
+  iteration 36): 3 concepts authored (`line-segment`, `ray`, `plane`;
+  all Blueprint reused by reference). `math.geom` 2/69 → 5/69. Full
+  detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
