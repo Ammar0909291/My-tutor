@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 177 READY)
+## mathematics (908 concepts, 182 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -512,8 +512,8 @@ its subject KG.
 | func | `math.func.vertical-asymptote` | Vertical Asymptote | No | No | — | MISSING |
 | func | `math.func.zero-of-function` | Zero of a Function | No | No | — | MISSING |
 | geom | `math.geom.angle` | Angle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.angle.md` | READY |
-| geom | `math.geom.angle-measurement` | Angle Measurement | Yes | No | — | MISSING |
-| geom | `math.geom.angle-pairs` | Angle Pairs | Yes | No | — | MISSING |
+| geom | `math.geom.angle-measurement` | Angle Measurement | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.angle-measurement.md` | READY |
+| geom | `math.geom.angle-pairs` | Angle Pairs | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.angle-pairs.md` | READY |
 | geom | `math.geom.angle-types` | Types of Angles | No | No | — | MISSING |
 | geom | `math.geom.area` | Area | Yes | No | — | MISSING |
 | geom | `math.geom.area-polygon` | Area of Polygons | Yes | No | — | MISSING |
@@ -521,7 +521,7 @@ its subject KG.
 | geom | `math.geom.circle` | Circle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.circle.md` | READY |
 | geom | `math.geom.circle-area` | Area of a Circle | No | No | — | MISSING |
 | geom | `math.geom.circle-circumference` | Circumference of a Circle | No | No | — | MISSING |
-| geom | `math.geom.circle-equation` | Equation of a Circle | Yes | No | — | MISSING |
+| geom | `math.geom.circle-equation` | Equation of a Circle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.circle-equation.md` | READY |
 | geom | `math.geom.circle-parts` | Parts of a Circle | No | No | — | MISSING |
 | geom | `math.geom.circle-theorems` | Circle Theorems | No | No | — | MISSING |
 | geom | `math.geom.congruent-triangles` | Congruent Triangles | Yes | No | — | MISSING |
@@ -548,7 +548,7 @@ its subject KG.
 | geom | `math.geom.parallel-lines` | Parallel Lines | Yes | No | — | MISSING |
 | geom | `math.geom.parallelogram` | Parallelogram | No | No | — | MISSING |
 | geom | `math.geom.perimeter` | Perimeter | No | Yes | `educational-brain/concepts/mathematics/math.geom.perimeter.md` | READY |
-| geom | `math.geom.perpendicular-lines` | Perpendicular Lines | Yes | No | — | MISSING |
+| geom | `math.geom.perpendicular-lines` | Perpendicular Lines | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.perpendicular-lines.md` | READY |
 | geom | `math.geom.plane` | Plane | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.plane.md` | READY |
 | geom | `math.geom.platonic-solids` | Platonic Solids | No | No | — | MISSING |
 | geom | `math.geom.point` | Point | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.point.md` | READY |
@@ -572,7 +572,7 @@ its subject KG.
 | geom | `math.geom.transformations` | Geometric Transformations | Yes | No | — | MISSING |
 | geom | `math.geom.translation` | Translation | No | No | — | MISSING |
 | geom | `math.geom.trapezoid` | Trapezoid | No | No | — | MISSING |
-| geom | `math.geom.triangle` | Triangle | Yes | No | — | MISSING |
+| geom | `math.geom.triangle` | Triangle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.triangle.md` | READY |
 | geom | `math.geom.triangle-angle-sum` | Triangle Angle Sum Theorem | No | No | — | MISSING |
 | geom | `math.geom.triangle-centers` | Triangle Centers | No | No | — | MISSING |
 | geom | `math.geom.triangle-types` | Types of Triangles | No | No | — | MISSING |

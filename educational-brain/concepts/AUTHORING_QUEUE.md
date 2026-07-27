@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1171** (= 1,775 KG concepts − 604 already `READY`, per
+Total queued: **1166** (= 1,775 KG concepts − 609 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -582,10 +582,14 @@ Wave 4 part 2, moved to READY.
 | 67 | computer_science | 4 | `cs.net.tcp-udp-transport` | TCP and UDP — Transport Layer |
 | 68 | computer_science | 4 | `cs.theory.finite-automata` | Finite Automata |
 | 69 | mathematics | 5 | `math.geom.angle-types` | Types of Angles |
-| 70 | mathematics | 5 | `math.geom.angle-measurement` | Angle Measurement |
-| 71 | mathematics | 5 | `math.geom.angle-pairs` | Angle Pairs |
-| 72 | mathematics | 5 | `math.geom.perpendicular-lines` | Perpendicular Lines |
-| 73 | mathematics | 5 | `math.geom.triangle` | Triangle |
+**Row 70 removed 2026-07-26** — `math.geom.angle-measurement` authored
+math.geom Wave 5, moved to READY.
+**Row 71 removed 2026-07-26** — `math.geom.angle-pairs` authored
+math.geom Wave 5, moved to READY.
+**Row 72 removed 2026-07-26** — `math.geom.perpendicular-lines` authored
+math.geom Wave 5, moved to READY.
+**Row 73 removed 2026-07-26** — `math.geom.triangle` authored math.geom
+Wave 5, moved to READY.
 | 74 | mathematics | 5 | `math.geom.circle-parts` | Parts of a Circle |
 | 75 | mathematics | 5 | `math.geom.circle-circumference` | Circumference of a Circle |
 | 76 | mathematics | 5 | `math.prob.event` | Event |
@@ -1109,7 +1113,8 @@ math.nt Wave 1 (cross-domain step to unblock math.arith), moved to
 READY.
 **Row 575 removed 2026-07-26** — `math.nt.division-algorithm` authored
 math.nt Wave 3, moved to READY.
-| 576 | mathematics | 16 | `math.geom.circle-equation` | Equation of a Circle |
+**Row 576 removed 2026-07-26** — `math.geom.circle-equation` authored
+math.geom Wave 5, moved to READY.
 | 577 | mathematics | 16 | `math.geom.x-y-coordinates` | Cartesian Coordinates |
 | 578 | mathematics | 16 | `math.geom.quadrants` | Quadrants |
 | 579 | mathematics | 16 | `math.geom.midpoint-formula` | Midpoint Formula |
