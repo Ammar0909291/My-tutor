@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 203 READY)
+## mathematics (908 concepts, 204 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -575,7 +575,7 @@ its subject KG.
 | geom | `math.geom.triangle` | Triangle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.triangle.md` | READY |
 | geom | `math.geom.triangle-angle-sum` | Triangle Angle Sum Theorem | No | No | — | MISSING |
 | geom | `math.geom.triangle-centers` | Triangle Centers | No | No | — | MISSING |
-| geom | `math.geom.triangle-types` | Types of Triangles | No | No | — | MISSING |
+| geom | `math.geom.triangle-types` | Types of Triangles | No | Yes | `educational-brain/concepts/mathematics/math.geom.triangle-types.md` | READY |
 | geom | `math.geom.vectors-2d` | Vectors in 2D | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.vectors-2d.md` | READY |
 | geom | `math.geom.vectors-3d` | Vectors in 3D | Yes | No | — | MISSING |
 | geom | `math.geom.volume` | Volume | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.volume.md` | READY |

@@ -13,17 +13,17 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **630** |
-| Remaining | **1,145** |
-| Completion percentage | **35.49%** |
+| Concepts with an Educational Brain entry | **631** |
+| Remaining | **1,144** |
+| Completion percentage | **35.55%** |
 
 *(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
 with an Educational Brain entry" rows had accumulated from prior sessions
 without being reconciled. Recomputed from this same file's §2 Subject
-progress table as currently stated per subject: 203 mathematics + 238
+progress table as currently stated per subject: 204 mathematics + 238
 physics + 3 english + 186 chemistry + 0 biology + 0 computer_science =
-630. Mathematics was re-verified by independent Batch 54 authoring (Batch
-53 Wave 9 + Batch 54 Wave 10 part 1, angle-types); the other subjects'
+631. Mathematics was re-verified by independent Batch 54 authoring (Batch
+54 Wave 10 part 1, triangle-types); the other subjects'
 figures are taken as already-recorded in §2 below, not re-audited by this
 batch, per this program's "mathematics only" ongoing scope.)*
 
@@ -33,7 +33,7 @@ batch, per this program's "mathematics only" ongoing scope.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 203 | 22.35% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 204 | 22.46% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |

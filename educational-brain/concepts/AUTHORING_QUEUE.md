@@ -21,11 +21,11 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1145** (= 1,775 KG concepts − 630 already `READY`, per
-`ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
+Total queued: **1144** (= 1,775 KG concepts − 631 already `READY`, per
+`ROADMAP.md`'s §1 Totals as updated 2026-07-27 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
-at math.found Waves 7-10's positions below).
+at math.found Waves 7-10's and math.geom Wave 10's positions below).
 
 **Domain Certification Mode override (binding until `math.found` reaches
 82/82, EXPLICITLY SUSPENDED for physics-specific batches by direct user
@@ -634,7 +634,8 @@ Wave 5, moved to READY.
 | 115 | computer_science | 5 | `cs.theory.regular-expressions` | Regular Expressions and Regular Languages |
 **Row 116 removed 2026-07-26** — `math.geom.parallel-lines` authored
 math.geom Wave 7, moved to READY.
-| 117 | mathematics | 6 | `math.geom.triangle-types` | Types of Triangles |
+**Row 117 removed 2026-07-27** — `math.geom.triangle-types` authored
+math.geom Wave 10 part 1, moved to READY.
 **Row 118 removed 2026-07-26** — `math.geom.right-triangle` authored
 math.geom Wave 6, moved to READY.
 **Row 119 removed 2026-07-26** — `math.geom.congruent-triangles`
