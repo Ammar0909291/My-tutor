@@ -30,6 +30,12 @@ export interface DecisionFacts {
   stageCeiling: number | null
   maxQuestions: 0 | 1
   maxNewTerms: number
+  /** Added when stage 8 was promoted to derive it. Until then the route used
+   *  responseBudget() while the shadow adapter was passed a hardcoded null —
+   *  a permanent divergence the field set did not measure. Measuring a field
+   *  only after both sides derive it is the wrong order; this is the
+   *  correction. */
+  maxParagraphs: number | null
   phase: string | null
   recoveryActive: boolean
 }
@@ -43,7 +49,8 @@ export interface ParityResult {
 }
 
 const FIELDS: ParityField[] = [
-  'move', 'stageCeiling', 'maxQuestions', 'maxNewTerms', 'phase', 'recoveryActive',
+  'move', 'stageCeiling', 'maxQuestions', 'maxNewTerms', 'maxParagraphs',
+  'phase', 'recoveryActive',
 ]
 
 /** Compare the route's decision against the shadow pipeline's. Pure. */

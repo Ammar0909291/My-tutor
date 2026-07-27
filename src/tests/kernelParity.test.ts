@@ -17,7 +17,7 @@ import { commit1Stage } from '@/lib/kernel/stages/commit1'
 import { initialState, makeTurnContext } from '@/lib/kernel/context'
 import {
   initialConversationState, decideNextMoveDetailed, PHASE_MAX_QUESTION_STAGE,
-  PHASE_ORDER, type ConversationState,
+  PHASE_ORDER, responseBudget, type ConversationState,
 } from '@/lib/teaching/conversationState'
 import {
   compareDecisions, foldParityMetrics, initialParityMetrics, readParityMetrics,
@@ -84,7 +84,7 @@ describe('toPolicyMove — one owner, authority-ordered', () => {
 
 const facts = (over: Partial<DecisionFacts> = {}): DecisionFacts => ({
   move: 'SHOW', stageCeiling: 2, maxQuestions: 0, maxNewTerms: 1,
-  phase: 'DEMONSTRATE', recoveryActive: false, ...over,
+  maxParagraphs: 4, phase: 'DEMONSTRATE', recoveryActive: false, ...over,
 })
 
 describe('compareDecisions', () => {
@@ -245,8 +245,8 @@ describe('PROMOTED stage 7 (TSM-STEP) — parity with the route formula', () => 
 describe('PROMOTED stage 8 (POLICY) — parity with the route decision', () => {
   const POL_BASE = {
     legality: {}, contentRegister: 'beginner' as const, episodePhase: 'CORE',
-    workedExampleFirst: false, actionClass: null, maxParagraphs: 4,
-    visualClass: null, vocabularyBans: [], provenance: [],
+    workedExampleFirst: false, actionClass: null,
+    availableVisualType: null, vocabularyBans: [], provenance: [],
   }
 
   it('derives the same move the route derives, across the ladder', async () => {
@@ -323,13 +323,126 @@ describe('PROMOTED stage 8 (POLICY) — parity with the route decision', () => {
       const parity = compareDecisions(
         { move: routeMove, stageCeiling: PHASE_MAX_QUESTION_STAGE[phase],
           maxQuestions: maxQuestionsFor(routeMove), maxNewTerms: 1,
-          phase, recoveryActive: false },
+          maxParagraphs: responseBudget('beginner', 0), phase, recoveryActive: false },
         { move: s.policy!.move, stageCeiling: s.policy!.stageCeiling,
           maxQuestions: s.policy!.budgets.maxQuestions, maxNewTerms: s.policy!.budgets.maxNewTerms,
+          maxParagraphs: s.policy!.budgets.maxParagraphs,
           phase: s.teachingState!.phase, recoveryActive: s.interrupt?.active === true },
       )
       expect(parity.divergences).toEqual([])
       expect(parity.agree).toBe(true)
+    }
+  })
+})
+
+
+// ── PROMOTED: maxParagraphs (the last extractable POLICY input) ─────────────
+
+describe('PROMOTED maxParagraphs — parity with the route formula', () => {
+  const POL = {
+    legality: {}, contentRegister: 'beginner' as const, episodePhase: 'CORE',
+    workedExampleFirst: false, actionClass: null, availableVisualType: null,
+    vocabularyBans: [], provenance: [],
+  }
+  const withView = async (register: 'beginner' | 'intermediate' | 'expert', failures: number, firstLesson: boolean) => {
+    const { foldStage } = await import('@/lib/kernel/stages/fold')
+    let s = initialState(makeTurnContext(CTX))
+    s = await foldStage({
+      contentRegister: register, profileLevel: null, sessionFailureCount: failures,
+      currentConceptId: 'c', hasVerifiedPlacement: false, pendingPlacementProbe: null,
+      isFirstLessonContext: firstLesson,
+    }).run(s)
+    s = await interruptScanStage.run({ ...s, committed: [] })
+    s = await tsmStepStage({ conversationState: cs('GUIDE', { consecutiveFailures: failures }) }).run(s)
+    s = await policyStage({ ...POL, contentRegister: register, conversationState: cs('GUIDE', { consecutiveFailures: failures }) }).run(s)
+    return s.policy!.budgets.maxParagraphs
+  }
+
+  it('matches responseBudget() across register x struggle', async () => {
+    for (const register of ['beginner', 'intermediate', 'expert'] as const) {
+      for (const failures of [0, 1, 2, 3]) {
+        expect(await withView(register, failures, false)).toBe(responseBudget(register, failures))
+      }
+    }
+  })
+
+  it('the first-lesson override wins — 2 paragraphs, not the beginner 4', async () => {
+    // The protocol mandates two-sentence bursts; the ordinary beginner budget
+    // would silently widen it.
+    expect(await withView('beginner', 0, true)).toBe(2)
+    expect(await withView('expert', 0, true)).toBe(2)
+  })
+
+  it('struggle SHRINKS the budget, never widens it', async () => {
+    expect(await withView('beginner', 2, false)!).toBeLessThan(
+      (await withView('beginner', 0, false))!,
+    )
+  })
+
+  it('REGRESSION — the field is now measured by parity', () => {
+    // Before the promotion the route used responseBudget() while the shadow
+    // adapter was handed a hardcoded null, and the field set did not include
+    // maxParagraphs — so a permanent divergence read as perfect agreement.
+    const r = compareDecisions(facts({ maxParagraphs: 4 }), facts({ maxParagraphs: null }))
+    expect(r.agree).toBe(false)
+    expect(r.divergences.map((d) => d.field)).toContain('maxParagraphs')
+  })
+})
+
+
+// ── PROMOTED: visualClass (the phase rule now runs inside the stage) ────────
+
+describe('PROMOTED visualClass — the stage decides, it is not told', () => {
+  const POL = {
+    legality: {}, contentRegister: 'beginner' as const, episodePhase: 'CORE',
+    workedExampleFirst: false, actionClass: null, vocabularyBans: [], provenance: [],
+  }
+  const run = async (phase: string, available: string | null, requested = false) => {
+    let s = initialState(makeTurnContext(CTX))
+    s = await interruptScanStage.run({ ...s, committed: [] })
+    s = await tsmStepStage({ conversationState: cs(phase) }).run(s)
+    s = await policyStage({
+      ...POL, conversationState: cs(phase),
+      availableVisualType: available, learnerRequestedVisual: requested,
+    }).run(s)
+    return s.policy!.visualDirective
+  }
+
+  it('leads with a visual while anchoring/showing', async () => {
+    for (const phase of ['OBSERVE', 'DEMONSTRATE', 'GUIDE']) {
+      const d = await run(phase, 'number_line')
+      // OBSERVE derives ASK, and decideVisualFirst suppresses visuals on ask —
+      // the phase rule and the move rule compose exactly as in the route.
+      if (phase === 'OBSERVE') expect(d.visualClass).toBeNull()
+      else expect(d.visualClass).toBe('number_line')
+    }
+  })
+
+  it('suppresses an unrequested visual once the learner is producing', async () => {
+    for (const phase of ['CHECK', 'PRACTICE', 'TRANSFER']) {
+      expect((await run(phase, 'number_line')).visualClass).toBeNull()
+    }
+  })
+
+  it('an explicit learner request overrides the phase rule', async () => {
+    expect((await run('PRACTICE', 'number_line', true)).visualClass).toBe('number_line')
+  })
+
+  it('no matched visual ⇒ no directive, in any phase', async () => {
+    for (const phase of PHASE_ORDER) {
+      const d = await run(phase, null)
+      expect(d.use).toBe(false)
+      expect(d.visualClass).toBeNull()
+    }
+  })
+
+  it('parity: the stage equals decideVisualFirst applied to the same inputs', async () => {
+    const { decideVisualFirst, decideNextMoveDetailed: dnm } = await import('@/lib/teaching/conversationState')
+    for (const phase of PHASE_ORDER) {
+      const state = cs(phase)
+      const ladder = dnm(state, { recoveryTurn: false, workedExampleFirst: false }).move
+      const expected = decideVisualFirst('number_line', state, ladder)
+      expect((await run(phase, 'number_line')).visualClass).toBe(expected)
     }
   })
 })

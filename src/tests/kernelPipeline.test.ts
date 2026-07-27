@@ -33,8 +33,8 @@ const TSM: TsmAdapters = { conversationState: CS }
 const POL: PolicyAdapters = {
   conversationState: CS, legality: {}, contentRegister: 'beginner',
   episodePhase: 'CORE', workedExampleFirst: false,
-  actionClass: 'INTERACTIVE_QUESTIONING', maxParagraphs: 4,
-  visualClass: null, vocabularyBans: [], provenance: ['turn-directive'],
+  actionClass: 'INTERACTIVE_QUESTIONING',
+  availableVisualType: null, vocabularyBans: [], provenance: ['turn-directive'],
 }
 const RES: ResolveAdapters = { objective: 'observe' }
 const PLN: PlanAdapters = { systemPrompt: 'You are a tutor.', history: [{ role: 'user', content: 'hi' }] }

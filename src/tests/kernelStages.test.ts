@@ -25,8 +25,7 @@ const CS = (phase: string, over: Record<string, unknown> = {}) => ({
 
 const POLICY_BASE = {
   legality: {}, contentRegister: 'beginner' as const, episodePhase: 'CORE',
-  recoveryKey: null, workedExampleFirst: false, actionClass: null,
-  maxParagraphs: 4, visualClass: null, vocabularyBans: [], provenance: [],
+  recoveryKey: null, workedExampleFirst: false, actionClass: null, availableVisualType: null, vocabularyBans: [], provenance: [],
 }
 
 const CTX_INPUT = {
@@ -171,7 +170,7 @@ describe('POLICY', () => {
       let s = initialState(makeTurnContext({ ...CTX_INPUT, turnId: 'fixed', receivedAtMs: 0 }))
       s = await tsmStepStage({ conversationState: CS('OBSERVE') }).run(s)
       s = await policyStage({
-        ...POLICY_BASE, conversationState: CS('GUIDE'), maxParagraphs: 3,
+        ...POLICY_BASE, conversationState: CS('GUIDE'),
         provenance: ['x'],
       }).run(s)
       return { ...s.policy!, decisionId: 'DETERMINISTIC_MASK' }
@@ -183,10 +182,14 @@ describe('POLICY', () => {
 describe('RESOLVE', () => {
   it('binds visual_and_text when a visual class is set', async () => {
     let s = initialState(makeTurnContext(CTX_INPUT))
-    s = await tsmStepStage({ phase: 'DEMONSTRATE', stageCeiling: 2, demonstrated: true, consecutiveFailures: 0 }).run(s)
+    // DEMONSTRATE + a matched visual ⇒ the stage DECIDES to lead with it
+    // (decideVisualFirst's phase rule), rather than being told to.
+    const demo = CS('DEMONSTRATE', { demonstrated: true })
+    s = await interruptScanStage.run({ ...s, committed: [] })
+    s = await tsmStepStage({ conversationState: demo }).run(s)
     s = await policyStage({
-      move: 'SHOW', actionClass: 'DEMONSTRATION', maxQuestions: 0, maxParagraphs: null,
-      maxNewTerms: 1, visualClass: 'number_line', vocabularyBans: [], provenance: [],
+      ...POLICY_BASE, conversationState: demo,
+      actionClass: 'DEMONSTRATION', availableVisualType: 'number_line',
     }).run(s)
     s = await resolveStage({ objective: 'anchor the concept' }).run(s)
     expect(s.action?.presentationMode).toBe('visual_and_text')

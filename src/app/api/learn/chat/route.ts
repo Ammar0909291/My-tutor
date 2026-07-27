@@ -1265,6 +1265,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // K3 — the mapped kernel move + its budget, one owner, three consumers.
     let kernelPolicyMoveHoisted: import('@/lib/kernel/policyMove').MappedMove | null = null
     let kernelMaxQuestionsHoisted: 0 | 1 = 0
+    let routeMaxParagraphsHoisted: number | null = null
     // K3 — parity between the route's decision and the shadow pipeline's.
     let kernelParityMetricsHoisted:
       import('@/lib/kernel/parity').ParityMetrics | null = null
@@ -1569,6 +1570,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           })
           const nextMove = moveDecision.move
           legalityBlockedReasonHoisted = moveDecision.blockedReason
+          // The length budget the route actually applies this turn. Hoisted so
+          // the parity observer compares the REAL value rather than restating
+          // the formula — a restated formula would agree with itself even if
+          // the route changed.
+          routeMaxParagraphsHoisted = firstLessonActiveHoisted
+            ? 2
+            : responseBudget(contentRegister, conversationStateHoisted.consecutiveFailures)
           // Single move owner (kernel/policyMove) — computed once here and
           // reused by the shadow pipeline and the verifier context, so the two
           // can never disagree about what move this turn is.
@@ -1622,7 +1630,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // First-lesson protocol mandates 2-sentence bursts; the regular
             // responseBudget(beginner)=4 paragraphs conflicts with that and
             // must be overridden for every first-lesson turn.
-            maxParagraphs: firstLessonActiveHoisted ? 2 : responseBudget(contentRegister, conversationStateHoisted.consecutiveFailures),
+            maxParagraphs: routeMaxParagraphsHoisted,
             workedExampleFirst,
             visualType: (learnerRequestHoisted === 'diagram' || explainDifferentlyNeedsVisual)
               ? availableVisual
@@ -1755,8 +1763,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             workedExampleFirst:
               snapshotSessionFailureCount >= 2 || strategyHoisted === 'FOUNDATION_REBUILD',
             actionClass: null,
-            maxParagraphs: null,
-            visualClass: null,
+            availableVisualType: availableVisualHoisted,
+            learnerRequestedVisual: learnerRequestHoisted === 'diagram',
             vocabularyBans: [],
             provenance: [
               ...(recoveryKeyHoisted ? [`recovery:${recoveryKeyHoisted}`] : []),
@@ -1783,6 +1791,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               stageCeiling: evidenceStageCeilingHoisted ?? null,
               maxQuestions: kernelMaxQuestionsHoisted,
               maxNewTerms: contentRegister === 'beginner' ? 1 : 2,
+              maxParagraphs: routeMaxParagraphsHoisted,
               phase: conversationStateHoisted?.phase ?? null,
               recoveryActive: recoveryKeyHoisted !== null,
             },
@@ -1791,6 +1800,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               stageCeiling: k.stageCeiling,
               maxQuestions: k.budgets.maxQuestions,
               maxNewTerms: k.budgets.maxNewTerms,
+              maxParagraphs: k.budgets.maxParagraphs,
               phase: shadowResult.state.teachingState?.phase ?? null,
               recoveryActive: shadowResult.state.interrupt?.active === true,
             },

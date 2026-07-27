@@ -18,6 +18,7 @@ import { decide } from '../policy/engine'
 import { decideNextMoveDetailed, type ConversationState } from '@/lib/teaching/conversationState'
 import type { LegalityContext } from '@/lib/teaching/questionLegality'
 import { toPolicyMove, maxQuestionsFor } from '../policyMove'
+import { responseBudget, decideVisualFirst } from '@/lib/teaching/conversationState'
 
 /**
  * EXTRACTED (K3 promotion 2 of 2). `move` and `maxNewTerms` were previously
@@ -45,8 +46,14 @@ export interface PolicyAdapters {
   recoveryKey?: string | null
   workedExampleFirst: boolean
   actionClass: string | null
-  maxParagraphs: number | null
-  visualClass: string | null
+  /** The visual the registry/detector matched for this lesson, or null.
+   *  A context-derived FACT (DB/lesson strings), supplied like every FOLD
+   *  input because RS P-R1 forbids I/O in stages 4-10. The DECISION of
+   *  whether to lead with it is made here, not by the caller. */
+  availableVisualType: string | null
+  /** The learner explicitly asked for a diagram / a different explanation
+   *  needing one — overrides the phase rule, as the route does. */
+  learnerRequestedVisual?: boolean
   vocabularyBans: string[]
   provenance: string[]
 }
@@ -86,6 +93,29 @@ export function policyStage(a: PolicyAdapters): Stage<KernelState, KernelState> 
         ladderMove: ladder,
       })
       const maxNewTerms = a.contentRegister === 'beginner' ? 1 : 2
+      // maxParagraphs: the route's exact expression —
+      //   firstLesson ? 2 : responseBudget(register, consecutiveFailures)
+      // Both inputs are already kernel artifacts: the register from FOLD
+      // (stage 4) and the failure count from TSM-STEP (stage 7, promoted).
+      // The first-lesson override is 2 because that protocol mandates
+      // two-sentence bursts, which the ordinary beginner budget of 4 would
+      // silently widen.
+      const maxParagraphs = state.view?.isFirstLessonContext === true
+        ? 2
+        : responseBudget(a.contentRegister, teachingState?.consecutiveFailures ?? 0)
+
+      // visualClass: the route's exact expression —
+      //   learnerRequested ? available : decideVisualFirst(available, state, move)
+      // decideVisualFirst is pure and already the owner of the phase rule
+      // (visuals lead while anchoring/showing; during CHECK/PRACTICE/TRANSFER
+      // the learner produces, so an unrequested visual is noise).
+      const visualClass = a.availableVisualType === null
+        ? null
+        : a.learnerRequestedVisual === true
+          ? a.availableVisualType
+          : (a.conversationState && ladder
+              ? decideVisualFirst(a.availableVisualType, a.conversationState, ladder)
+              : null)
 
       const decision: PolicyDecision = {
         decisionId: newId('d'),
@@ -94,12 +124,12 @@ export function policyStage(a: PolicyAdapters): Stage<KernelState, KernelState> 
         actionClass: a.actionClass,
         budgets: {
           maxQuestions: maxQuestionsFor(move),
-          maxParagraphs: a.maxParagraphs,
+          maxParagraphs,
           maxNewTerms,
         },
         stageCeiling,
         vocabularyBans: a.vocabularyBans,
-        visualDirective: { use: a.visualClass !== null, visualClass: a.visualClass },
+        visualDirective: { use: visualClass !== null, visualClass },
         provenance: [
           ...(interrupt?.preemptsPolicy ? [`recovery:${interrupt.failureStateKey ?? ''}`] : []),
           ...(interrupt?.autonomyRequested ? ['autonomy'] : []),
