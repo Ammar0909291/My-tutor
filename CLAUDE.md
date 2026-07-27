@@ -1586,6 +1586,18 @@
   deliberately deferred as an open decision (not a small bounded
   excursion like gcd/lcm). 8 deep analytic/algebraic-number-theory
   concepts also remain. Full detail: `COVERAGE.md`.
+  **Batch 44 — pivot to math.geom domain** (2026-07-26, autonomous
+  loop iteration 34): decision made — `math.nt`'s remaining 9 concepts
+  all require deep, multi-level cross-domain prerequisites (calculus/
+  complex-analysis/abstract-algebra, or a 4-concept `math.geom` chain
+  for `pythagorean-triples`); none is a small bounded excursion.
+  Started `math.geom` as its own full Domain Certification campaign
+  instead, since progressing it will naturally reach
+  `pythagorean-theorem` and unblock `pythagorean-triples` along the
+  way. `math.nt` parked at 27/36 (blocked on cross-domain campaigns,
+  not abandoned). 1 concept authored (`math.geom.point`, Blueprint
+  reused by reference). `math.geom` 0/69 → 1/69. Full detail:
+  `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
