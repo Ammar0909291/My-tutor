@@ -478,7 +478,28 @@ export function responseBudget(register: Register, consecutiveFailures: number):
 
 // ── Learner autonomy detection (moved out of route.ts for testability) ────────
 
-const AUTONOMY_RE = /\b(next\s+topic|next\s+lesson|move\s+on|skip\s+this|let'?s?\s+continue|let'?s?\s+move\s+on|can\s+we\s+move\s+on|ready\s+to\s+move\s+on)\b/i
+/**
+ * ISS-09 — the ru/hi pattern sets sit alongside the English ones rather than
+ * behind a language parameter: Cyrillic and Devanagari cannot collide with
+ * Latin patterns or each other, so the script discriminates and every call
+ * site is unchanged. Romanized Hindi is anchored to multi-word phrases with
+ * no English reading, the same discipline recoveryGuard uses.
+ */
+const AUTONOMY_RE =
+  /\b(next\s+topic|next\s+lesson|move\s+on|skip\s+this|let'?s?\s+continue|let'?s?\s+move\s+on|can\s+we\s+move\s+on|ready\s+to\s+move\s+on)\b/i
+const AUTONOMY_RU_RE =
+  /(след(ующая|ующую)\s+тема|след(ующий|ующую)\s+урок|дальше|двигаемся\s+дальше|идём\s+дальше|идем\s+дальше|пропустить\s+это|продолжим)/iu
+const AUTONOMY_HI_RE =
+  /(अगला\s+(विषय|पाठ)|आगे\s+बढ़(ें|ो|ते)|छोड़\s+(दो|दें)|जारी\s+रख)|\b(agla\s+topic|aage\s+badh(o|ein|te)|chhod\s+do)\b/iu
+
+/** Negators for the ru/hi sets — same asymmetry as English: a request to
+ *  STAY must never advance the learner past unfinished work. */
+// JavaScript's \b is ASCII-only, so `\bне\b` can never match Cyrillic —
+// Unicode-aware boundaries are required or the guard is silently dead code.
+const AUTONOMY_RU_NEGATOR_RE =
+  /(?<!\p{L})(не|нет|стоп|подожди|погоди|пока|прежде)(?!\p{L})/iu
+const AUTONOMY_HI_NEGATOR_RE =
+  /(नहीं|मत|रुक|पहले)|(?<!\p{L})(nahi+|mat|ruk(o|iye))(?!\p{L})/iu
 
 /**
  * ISS-08 — the negation guard.
@@ -512,13 +533,20 @@ const AUTONOMY_MENTION_RE = /["“'‘][^"”'’]*\b(?:move\s+on|next\s+topic|n
 /** The learner explicitly asked to advance — server-detected, honored.
  *  Guarded per ISS-08: negated and merely-mentioned forms do not count. */
 export function detectAutonomyRequest(message: string): boolean {
-  const m = AUTONOMY_RE.exec(message)
-  if (!m) return false
-  if (AUTONOMY_MENTION_RE.test(message)) return false
-  // Negation is scoped to the text BEFORE the match: "move on, I'm not
-  // confused" is still a request to advance, and a whole-message scan would
-  // suppress it.
-  return !AUTONOMY_NEGATOR_RE.test(message.slice(0, m.index))
+  for (const [re, negator] of [
+    [AUTONOMY_RE, AUTONOMY_NEGATOR_RE],
+    [AUTONOMY_RU_RE, AUTONOMY_RU_NEGATOR_RE],
+    [AUTONOMY_HI_RE, AUTONOMY_HI_NEGATOR_RE],
+  ] as const) {
+    const m = re.exec(message)
+    if (!m) continue
+    if (AUTONOMY_MENTION_RE.test(message)) return false
+    // Negation is scoped to the text BEFORE the match: "move on, I'm not
+    // confused" is still a request to advance, and a whole-message scan would
+    // suppress it.
+    if (!negator.test(message.slice(0, m.index))) return true
+  }
+  return false
 }
 
 /** ONLY injected when masteryVerified(state) is already true (see
