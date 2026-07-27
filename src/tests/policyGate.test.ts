@@ -37,6 +37,11 @@ function state(over: Partial<KernelState> = {}): KernelState {
     teachingState: {
       phase: 'OBSERVE', scaffoldDial: 0, stageCeiling: 2, demonstrated: false,
       taughtThisSession: false,
+      counters: {
+        consecutiveDontKnows: 0, totalKnowledgeProbes: 0,
+        consecutivePriorKnowledgeProbes: 0, observeFailures: 0,
+        questionsAskedSinceTeach: 0, teachSegmentsSinceQuestion: 0,
+      },
       consecutiveFailures: 0, transitionThisTurn: { from: null, to: null, direction: 'none' },
     },
     ...over,
@@ -200,7 +205,7 @@ describe('the Band-2 ask-legality gate', () => {
   it('removes ASK — subtractively — when the verdict says it is illegal', () => {
     const d = policyGate({
       state: state(), mode: 'shadow',
-      legality: { askLegal: false, blockedReason: 'QL4_MISSING_CAPABILITY' },
+      caller: { askLegal: false, blockedReason: 'QL4_MISSING_CAPABILITY' },
     }).decision!
     expect(d.move).not.toBe('ASK')
     expect(d.budgets.maxQuestions).toBe(0)
@@ -209,8 +214,8 @@ describe('the Band-2 ask-legality gate', () => {
 
   it('gives a SHOW before anything is taught and a TEACH after', () => {
     const blocked = { askLegal: false, blockedReason: 'QL1_NO_ANSWERABLE_SOURCE' }
-    expect(policyGate({ state: taught(false), mode: 'shadow', legality: blocked }).decision!.move).toBe('SHOW')
-    expect(policyGate({ state: taught(true), mode: 'shadow', legality: blocked }).decision!.move).toBe('TEACH')
+    expect(policyGate({ state: taught(false), mode: 'shadow', caller: blocked }).decision!.move).toBe('SHOW')
+    expect(policyGate({ state: taught(true), mode: 'shadow', caller: blocked }).decision!.move).toBe('TEACH')
   })
 
   it('the legality give outranks the repeated-struggle heuristic', () => {
@@ -222,7 +227,7 @@ describe('the Band-2 ask-legality gate', () => {
       teachingState: { ...state().teachingState!, taughtThisSession: true, consecutiveFailures: 3 },
     })
     const d = policyGate({
-      state: s, mode: 'shadow', legality: { askLegal: false, blockedReason: 'QL2_DIAGNOSTIC_CONCLUDED' },
+      state: s, mode: 'shadow', caller: { askLegal: false, blockedReason: 'QL2_DIAGNOSTIC_CONCLUDED' },
     }).decision!
     expect(d.move).toBe('TEACH')
     expect(d.provenance.map((t) => t.ruleId)).toContain('B4.legality-give.teach.v1')
@@ -233,7 +238,7 @@ describe('the Band-2 ask-legality gate', () => {
       interrupt: { active: true, failureStateKey: 'dont_know', autonomyRequested: false, preemptsPolicy: true },
     })
     const d = policyGate({
-      state: s, mode: 'shadow', legality: { askLegal: false, blockedReason: 'QL4_MISSING_CAPABILITY' },
+      state: s, mode: 'shadow', caller: { askLegal: false, blockedReason: 'QL4_MISSING_CAPABILITY' },
     }).decision!
     expect(d.move).toBe('RECOVER')
     // …and Band 2 still ran, because a mandatory legality rule an interrupt
@@ -262,7 +267,7 @@ describe('parity — the pack resolves a blocked turn exactly as the ladder does
           })
           const d = policyGate({
             state: s, mode: 'shadow',
-            legality: { askLegal: false, blockedReason: 'QL1_NO_ANSWERABLE_SOURCE' },
+            caller: { askLegal: false, blockedReason: 'QL1_NO_ANSWERABLE_SOURCE' },
           }).decision!
           expect(d.move, key).toBe(expected)
         }

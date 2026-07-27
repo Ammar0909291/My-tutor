@@ -163,7 +163,7 @@ const b4LegalityGiveShow = P(
   'conversationState decideNextMoveDetailed (blocked-ask branch)',
   { reads: ['askLegal', 'taughtThisSession'], match: (i) => i.askLegal === false && i.taughtThisSession !== true, describe: 'ASK illegal and nothing taught yet → show' },
   { move: 'SHOW', actionClass: 'DEMONSTRATION' },
-  { specificity: 4 },
+  { specificity: 10 },
 )
 
 const b4LegalityGiveTeach = P(
@@ -171,7 +171,80 @@ const b4LegalityGiveTeach = P(
   'conversationState decideNextMoveDetailed (blocked-ask branch)',
   { reads: ['askLegal', 'taughtThisSession'], match: (i) => i.askLegal === false && i.taughtThisSession === true, describe: 'ASK illegal after teaching → teach' },
   { move: 'TEACH', actionClass: 'GUIDED_EXPLANATION' },
-  { specificity: 4 },
+  { specificity: 10 },
+)
+
+/**
+ * ── The decision matrix (masterplan K4: "Band 4 tables (D1 grid + decision
+ * matrix)") ────────────────────────────────────────────────────────────────
+ *
+ * decideNextMoveHeuristic is a SEQUENCE of guards, first match wins. Band 4
+ * is a specificity-ordered set. The transcription is only faithful if the
+ * specificities reproduce the sequence, so they are assigned from the ladder's
+ * own order rather than from a notion of how "specific" each guard looks:
+ *
+ *   10  legality gives          (the ladder RETURNS before the heuristic)
+ *    8  the four "inquiry is over" gates
+ *    7  the question budget (two asks without a give)
+ *    6  repeated struggle
+ *    5  worked-example-first
+ *    2  the D1 grid + the GUIDE ask branch
+ *    1  phase defaults
+ *    0  final fallback
+ *
+ * The four gates at 8 all produce SHOW and are kept as SEPARATE rules rather
+ * than one OR: provenance has to answer "why did the tutor stop asking?", and
+ * "consecutive don't-knows" and "the inquiry phase is permanently over" are
+ * different answers a reviewer must be able to tell apart.
+ */
+const b4DontKnowGate = P(
+  'B4.gate.consecutive-dont-knows.v1', 4,
+  'conversationState decideNextMoveHeuristic (Hard Rule 1)',
+  { reads: ['consecutiveDontKnows'], match: (i) => (i.consecutiveDontKnows ?? 0) >= 2, describe: 'two consecutive "I don\'t know" → discovery is over' },
+  { move: 'SHOW', actionClass: 'DEMONSTRATION' },
+  { specificity: 8 },
+)
+
+const b4TotalProbesGate = P(
+  'B4.gate.total-knowledge-probes.v1', 4,
+  'conversationState decideNextMoveHeuristic (permanent gate)',
+  { reads: ['totalKnowledgeProbes'], match: (i) => (i.totalKnowledgeProbes ?? 0) >= 2, describe: 'two prior-knowledge probes asked this session, ever' },
+  { move: 'SHOW', actionClass: 'DEMONSTRATION' },
+  { specificity: 8 },
+)
+
+const b4LoopBreakGate = P(
+  'B4.gate.repeated-probe-intent.v1', 4,
+  'conversationState decideNextMoveHeuristic (P0-4 semantic loop break)',
+  { reads: ['consecutivePriorKnowledgeProbes'], match: (i) => (i.consecutivePriorKnowledgeProbes ?? 0) >= 2, describe: 'the same question, reworded, twice' },
+  { move: 'SHOW', actionClass: 'DEMONSTRATION' },
+  { specificity: 8 },
+)
+
+const b4ObserveFailureGate = P(
+  'B4.gate.observe-failures.v1', 4,
+  'conversationState decideNextMoveHeuristic (observe-failure gate)',
+  { reads: ['observeFailures'], match: (i) => (i.observeFailures ?? 0) >= 2, describe: 'the observation question has failed twice' },
+  { move: 'SHOW', actionClass: 'DEMONSTRATION' },
+  { specificity: 8 },
+)
+
+/** Two asks without a give → give. Which give depends on whether the learner
+ *  is currently failing, exactly as the ladder splits it. */
+const b4QuestionBudgetShow = P(
+  'B4.gate.question-budget.show.v1', 4,
+  'conversationState decideNextMoveHeuristic (hard question budget)',
+  { reads: ['questionsAskedSinceTeach', 'consecutiveFailures'], match: (i) => (i.questionsAskedSinceTeach ?? 0) >= 2 && i.consecutiveFailures >= 1, describe: 'question budget spent while failing' },
+  { move: 'SHOW', actionClass: 'DEMONSTRATION' },
+  { specificity: 7 },
+)
+
+const b4QuestionBudgetTeach = P(
+  'B4.gate.question-budget.teach.v1', 4,
+  'conversationState decideNextMoveHeuristic (hard question budget)',
+  { reads: ['questionsAskedSinceTeach', 'consecutiveFailures'], match: (i) => (i.questionsAskedSinceTeach ?? 0) >= 2 && i.consecutiveFailures < 1, describe: 'question budget spent, not failing' },
+  { move: 'TEACH', actionClass: 'GUIDED_EXPLANATION' },
+  { specificity: 7 },
 )
 
 /** Repeated struggle → SHOW, don't interrogate (foundations/01 §3 + Phase F). */
@@ -180,10 +253,17 @@ const b4RepeatedStruggle = P(
   'foundations/01 §3 (worked-example-first)',
   { reads: ['consecutiveFailures'], match: (i) => i.consecutiveFailures >= 2, describe: '≥2 consecutive failures' },
   { move: 'SHOW', actionClass: 'DEMONSTRATION' },
-  // Specificity 3 = deliberately higher than phase-defaults (1) and D1 grid
-  // rules (2). Repeated-struggle is the most selective Band-4 rule because
-  // it fires only after other Band-4 rules would (accumulated failure signal).
-  { specificity: 3 },
+  { specificity: 6 },
+)
+
+/** Until something has been demonstrated, show — when the caller asked for
+ *  worked-example-first. */
+const b4WorkedExampleFirst = P(
+  'B4.worked-example-first.show.v1', 4,
+  'conversationState decideNextMoveHeuristic (worked-example-first)',
+  { reads: ['workedExampleFirst', 'demonstrated'], match: (i) => i.workedExampleFirst === true && !i.demonstrated, describe: 'worked-example-first requested, nothing demonstrated' },
+  { move: 'SHOW', actionClass: 'DEMONSTRATION' },
+  { specificity: 5 },
 )
 
 /** Two-question ceiling (RS §4.10 planner rule). */
@@ -218,6 +298,20 @@ const b4DefaultTeach = P(
   { reads: ['phase'], match: (i) => i.phase === 'GUIDE' || i.phase === 'GUIDED' || i.phase === 'FORMALIZE', describe: 'guided phase → teach' },
   { move: 'TEACH', actionClass: 'GUIDED_EXPLANATION' },
   { specificity: 1 },
+)
+
+/** The GUIDE phase's ask branch: two teach segments without a question and
+ *  the ladder switches to asking. Specificity 2 places it above the phase
+ *  default (1); it ties with the D1 grid, which wins the lexical tie-break
+ *  ('B4.d1.' sorts before 'B4.default.') — a read of the learner's LAST
+ *  ANSWER outranking a count of teach segments is the right authority order,
+ *  and it is deterministic either way. */
+const b4GuideAsk = P(
+  'B4.default.guide-ask.v1', 4,
+  'conversationState decideNextMoveHeuristic (GUIDE branch)',
+  { reads: ['phase', 'teachSegmentsSinceQuestion'], match: (i) => (i.phase === 'GUIDE' || i.phase === 'GUIDED' || i.phase === 'FORMALIZE') && (i.teachSegmentsSinceQuestion ?? 0) >= 2, describe: 'guided phase, two teach segments without a question → ask' },
+  { move: 'ASK', actionClass: 'PROBE' },
+  { specificity: 2 },
 )
 
 const b4DefaultCheck = P(
@@ -328,14 +422,20 @@ export const BASE_PACK: PolicyPack = {
   // under an unchanged version makes the provenance string a lie.
   // 0.6.0: Band-2 ask-legality gate + the two Band-4 gives that replace a
   // blocked question (masterplan K4: "capability gates live HERE").
-  packVersion: '0.6.0-k4',
+  // 0.7.0: the Band-4 decision matrix — the six ladder gates the pack was
+  // missing, plus the GUIDE ask branch. Band 4 now reproduces
+  // decideNextMoveHeuristic in full (proven by ladderParity.test.ts).
+  packVersion: '0.7.0-k4',
   rules: [
     b0Recovery,
     b1RetroWin, b1DueReviews,
     b2StageCeiling, b2QuestionBudget, b2AskIllegal, b2FirstLessonVocab, b2BeginnerVocab,
     b4LegalityGiveShow, b4LegalityGiveTeach,
-    b4FastWrongConfident, b4HesitantCorrect, b4RepeatedStruggle, b4QuestionCeiling,
-    b4DefaultAsk, b4DefaultShow, b4DefaultTeach, b4DefaultCheck, b4Fallback,
+    b4DontKnowGate, b4TotalProbesGate, b4LoopBreakGate, b4ObserveFailureGate,
+    b4QuestionBudgetShow, b4QuestionBudgetTeach,
+    b4RepeatedStruggle, b4WorkedExampleFirst,
+    b4FastWrongConfident, b4HesitantCorrect, b4QuestionCeiling,
+    b4DefaultAsk, b4DefaultShow, b4DefaultTeach, b4GuideAsk, b4DefaultCheck, b4Fallback,
     b5BeginnerBudget, b5BeginnerStrained,
     b5IntermediateBudget, b5IntermediateStrained,
     b5ExpertBudget, b5ExpertStrained,

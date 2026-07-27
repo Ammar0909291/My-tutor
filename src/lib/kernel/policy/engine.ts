@@ -159,10 +159,19 @@ function detectConflicts(d: WorkingDecision, band: BandId, fired: Rule[]): void 
       list.push(r); byField.set(key, list)
     }
   }
-  for (const [, rs] of byField) {
+  for (const [field, rs] of byField) {
     if (rs.length < 2) continue
     const same = rs.filter((r) => r.specificity === rs[0].specificity)
     if (same.length < 2) continue
+    // Rules that AGREE are not in conflict. The decision matrix has four
+    // independent gates that all conclude SHOW — two consecutive
+    // "I don't know"s, the permanent probe gate, the semantic loop break,
+    // the observe-failure gate — and they are separate rules precisely so
+    // provenance can say which one fired. Reporting agreement as conflict
+    // would make every one of those turns look like a pack ambiguity a
+    // human must resolve.
+    const values = new Set(same.map((r) => JSON.stringify(r.effect[field as keyof RuleEffect])))
+    if (values.size < 2) continue
     d.conflicts.push({
       band, ruleIds: same.map((r) => r.ruleId).sort(),
       resolvedBy: same.some((r) => r.mandatory && !same.every((s) => s.mandatory)) ? 'mandatory'

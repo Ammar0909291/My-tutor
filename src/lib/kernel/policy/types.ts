@@ -53,6 +53,21 @@ export interface PolicyInputs {
   askLegal?: boolean
   /** questionLegality's LegalityReason, for provenance only. */
   askBlockedReason?: string | null
+  // Band 4 decision matrix — the counters the conversation ladder's heuristic
+  // reads (conversationState decideNextMoveHeuristic). Each exists because of
+  // an observed failure: a tutor that kept asking after two "I don't know"s,
+  // that re-probed prior knowledge forever, that asked three questions without
+  // giving anything. Optional, and absent means zero, so a caller that does
+  // not supply them gets the phase defaults exactly as before.
+  consecutiveDontKnows?: number
+  totalKnowledgeProbes?: number
+  consecutivePriorKnowledgeProbes?: number
+  observeFailures?: number
+  questionsAskedSinceTeach?: number
+  teachSegmentsSinceQuestion?: number
+  /** The caller's worked-example-first request (≥2 session failures or a
+   *  FOUNDATION_REBUILD strategy) — a NextMoveContext input, not ladder state. */
+  workedExampleFirst?: boolean
   /** Has anything been taught this session? The ladder's blocked-ask branch
    *  gives a SHOW before anything is taught and a TEACH after
    *  (conversationState decideNextMoveDetailed), and the pack mirrors that

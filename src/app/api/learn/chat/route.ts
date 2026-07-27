@@ -1847,9 +1847,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // computed once by questionLegality inside the ladder and
               // hoisted. Passed in rather than recomputed so the engine is
               // measured against the same legality call the learner got.
-              legality: {
+              caller: {
                 askLegal: legalityBlockedReasonHoisted === null,
                 blockedReason: legalityBlockedReasonHoisted,
+                // Same expression the route feeds decideNextMoveDetailed, so
+                // Band 4's worked-example-first rule sees what the ladder saw.
+                workedExampleFirst:
+                  snapshotSessionFailureCount >= 2 || strategyHoisted === 'FOUNDATION_REBUILD',
               },
               lastSignal: {
                 correct: enginePrevSignal?.correctness ?? null,

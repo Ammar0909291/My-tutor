@@ -45,6 +45,14 @@ export function tsmStepStage(a: TsmAdapters): Stage<KernelState, KernelState> {
         demonstrated: cs?.demonstrated === true,
         taughtThisSession: cs?.taughtThisSession === true,
         consecutiveFailures: cs?.consecutiveFailures ?? 0,
+        counters: {
+          consecutiveDontKnows: cs?.consecutiveDontKnows ?? 0,
+          totalKnowledgeProbes: cs?.totalKnowledgeProbes ?? 0,
+          consecutivePriorKnowledgeProbes: cs?.consecutivePriorKnowledgeProbes ?? 0,
+          observeFailures: cs?.observeFailures ?? 0,
+          questionsAskedSinceTeach: cs?.questionsAskedSinceTeach ?? 0,
+          teachSegmentsSinceQuestion: cs?.teachSegmentsSinceQuestion ?? 0,
+        },
         transitionThisTurn: {
           from: a.previousPhase ?? null,
           to: phase,

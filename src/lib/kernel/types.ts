@@ -97,6 +97,17 @@ export interface TeachingStateView {
    *  by the other. */
   taughtThisSession: boolean
   consecutiveFailures: number
+  /** The counters the Band-4 decision matrix reads. Carried on the TSM view
+   *  because they ARE teaching-state — the ladder owns them, the policy layer
+   *  only reads them. */
+  counters: {
+    consecutiveDontKnows: number
+    totalKnowledgeProbes: number
+    consecutivePriorKnowledgeProbes: number
+    observeFailures: number
+    questionsAskedSinceTeach: number
+    teachSegmentsSinceQuestion: number
+  }
   transitionThisTurn: {
     from: string | null
     to: string | null

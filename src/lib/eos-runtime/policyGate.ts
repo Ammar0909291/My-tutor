@@ -25,26 +25,29 @@
  * which. Reading one set of artifacts makes every divergence attributable
  * to the rules — which is the only thing the measurement is for.
  *
- * ── Why primary is not reachable yet, and what blocks it ─────────────────
- * PRIMARY mode would make the engine's `move` drive the turn. It cannot,
- * today, and the blocker is in code rather than in judgement:
+ * ── Why primary is not reachable yet ─────────────────────────────────────
+ * CORRECTION. An earlier version of this note claimed the blocker was that
+ * PolicyMove → NextMove is not invertible, because RECOVER and CLOSE have no
+ * ladder preimage. That was wrong, and it is recorded here rather than
+ * quietly deleted. The inverse exists given the route's own context: the
+ * route already knows recoveryKey and the episode phase — they are the very
+ * inputs toPolicyMove reads — so RECOVER and CLOSE correspond to control
+ * paths the route already owns and already drives with `nextMove: 'teach'`
+ * plus their own injected blocks. Nothing would need inventing.
  *
- *   buildTurnDirective() takes `nextMove: NextMove`, and
- *   conversationState.ts declares `NextMove = 'teach' | 'show' | 'ask'`.
- *   The engine emits PolicyMove, and kernel/policyMove.ts maps
- *   (recoveryKey, episodePhase, ladderMove) → 5 values including RECOVER
- *   and CLOSE. Those two have NO ladder preimage: policyMove.ts documents
- *   that decideNextMove() returns 'teach' on a recovery turn and that
- *   CLOSING lives entirely in the session machine. So PolicyMove → NextMove
- *   is not invertible, and a primary engine could only drive the prompt
- *   builder by inventing a ladder move the ladder would not have produced.
+ * The real blocker was Band 4's completeness, and this milestone closed it:
+ * the pack encoded ONE of the ladder's seven heuristic gates, so a primary
+ * engine would have silently dropped the question budget, the semantic loop
+ * break, the observe-failure gate and the two prior-knowledge probe gates —
+ * every one of which exists because of an observed failure.
+ * src/tests/ladderParity.test.ts now proves Band 4 reproduces
+ * decideNextMoveHeuristic across the full counter space.
  *
- * The masterplan already owns that unification: K3's "Files migrated:
- * conversationState.ts → kernel/tsm.ts (with state migration)". Until it
- * lands, honouring "one decision authority" means the engine is measured,
- * not half-installed — a turn whose move comes from the ladder and whose
- * budgets come from the engine has two authorities, which is worse than
- * having one that is merely older.
+ * What remains before primary is therefore a measurement, not a missing
+ * mechanism: the engine-vs-route parity this module records has to be read
+ * from real traffic. That is the masterplan's own gate for K4 ("replay diff
+ * vs pre-pack behavior REVIEWED AND ACCEPTED") — a human decision on real
+ * data, not something a session can conclude for itself.
  */
 import type { KernelState } from '@/lib/kernel/types'
 import type { EnginePolicyDecision, PolicyInputs } from '@/lib/kernel/policy/types'
@@ -65,22 +68,30 @@ export interface LastSignalFacts {
 export const NO_SIGNAL: LastSignalFacts = { correct: null, confidence: null }
 
 /**
- * The Band-2 legality verdict, from questionLegality.ts via the ladder.
- * Carried in for the same reason the signal is: the kernel does not hold it
- * as an artifact, and the caller has already computed it. Re-deriving it
- * here would put "may this turn ask a question" in two places.
+ * Decision facts the KERNEL does not hold as artifacts and the caller has
+ * already computed. Both members share that rationale, which is why they
+ * share a type: re-deriving either here would put a decision in two places.
  *
- * The default is LEGAL. A gate that has not been told a turn is illegal must
- * not invent an illegality — the conservative direction for a legality
- * filter is to permit and let the measurement show the divergence, never to
- * silently suppress a question the runtime allowed.
+ *  · the Band-2 legality verdict, from questionLegality.ts via the ladder
+ *    (QL-1…QL-4, with QL-4 delegating to capabilityModel)
+ *  · workedExampleFirst, a NextMoveContext input the route computes from the
+ *    session failure count and the active teaching strategy
+ *
+ * The defaults are permissive: legal, and no worked-example-first request. A
+ * gate that has not been told a turn is illegal must not invent an
+ * illegality — the conservative direction for a legality filter is to permit
+ * and let the measurement show the divergence, never to silently suppress a
+ * question the runtime allowed.
  */
-export interface AskLegalityFacts {
+export interface CallerDecisionFacts {
   askLegal: boolean
   blockedReason: string | null
+  workedExampleFirst?: boolean
 }
 
-export const ASK_LEGAL: AskLegalityFacts = { askLegal: true, blockedReason: null }
+export const DEFAULT_CALLER_FACTS: CallerDecisionFacts = {
+  askLegal: true, blockedReason: null, workedExampleFirst: false,
+}
 
 /**
  * KernelState → PolicyInputs. Total: every field has a defined value even
@@ -98,7 +109,7 @@ export const ASK_LEGAL: AskLegalityFacts = { askLegal: true, blockedReason: null
 export function policyInputsFromState(
   state: KernelState,
   lastSignal: LastSignalFacts = NO_SIGNAL,
-  legality: AskLegalityFacts = ASK_LEGAL,
+  caller: CallerDecisionFacts = DEFAULT_CALLER_FACTS,
 ): PolicyInputs {
   const { context, view, interrupt, agenda, teachingState } = state
   return {
@@ -123,8 +134,15 @@ export function policyInputsFromState(
     lastSignalCorrect: lastSignal.correct,
     lastSignalConfidence: lastSignal.confidence,
     currentConceptId: agenda?.activeConceptId ?? view?.currentConceptId ?? null,
-    askLegal: legality.askLegal,
-    askBlockedReason: legality.blockedReason,
+    askLegal: caller.askLegal,
+    askBlockedReason: caller.blockedReason,
+    consecutiveDontKnows: teachingState?.counters?.consecutiveDontKnows ?? 0,
+    totalKnowledgeProbes: teachingState?.counters?.totalKnowledgeProbes ?? 0,
+    consecutivePriorKnowledgeProbes: teachingState?.counters?.consecutivePriorKnowledgeProbes ?? 0,
+    observeFailures: teachingState?.counters?.observeFailures ?? 0,
+    questionsAskedSinceTeach: teachingState?.counters?.questionsAskedSinceTeach ?? 0,
+    teachSegmentsSinceQuestion: teachingState?.counters?.teachSegmentsSinceQuestion ?? 0,
+    workedExampleFirst: caller.workedExampleFirst === true,
   }
 }
 
@@ -160,7 +178,7 @@ const OFF: PolicyGateResult = {
 export function policyGate(args: {
   state: KernelState
   lastSignal?: LastSignalFacts
-  legality?: AskLegalityFacts
+  caller?: CallerDecisionFacts
   /** Override for tests; production reads the flag. */
   mode?: PolicyMode
 }): PolicyGateResult {
@@ -169,7 +187,7 @@ export function policyGate(args: {
   try {
     const pack = packRegistry.runtimePack()
     const decision = decide(pack, policyInputsFromState(
-      args.state, args.lastSignal ?? NO_SIGNAL, args.legality ?? ASK_LEGAL,
+      args.state, args.lastSignal ?? NO_SIGNAL, args.caller ?? DEFAULT_CALLER_FACTS,
     ))
     return {
       mode, ran: true, decision,

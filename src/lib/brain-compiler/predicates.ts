@@ -25,6 +25,9 @@ export const GUARDABLE_FIELDS: readonly (keyof PolicyInputs)[] = [
   'retroWinOwed', 'dueReviewCount', 'freshBoundary',
   'lastSignalCorrect', 'lastSignalConfidence', 'currentConceptId',
   'askLegal', 'askBlockedReason', 'taughtThisSession',
+  'consecutiveDontKnows', 'totalKnowledgeProbes', 'consecutivePriorKnowledgeProbes',
+  'observeFailures', 'questionsAskedSinceTeach', 'teachSegmentsSinceQuestion',
+  'workedExampleFirst',
 ] as const
 
 export function isGuardableField(name: string): name is keyof PolicyInputs {
