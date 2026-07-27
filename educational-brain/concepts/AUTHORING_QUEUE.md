@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1151** (= 1,775 KG concepts − 624 already `READY`, per
+Total queued: **1146** (= 1,775 KG concepts − 629 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -798,7 +798,6 @@ moved to READY.
 | 268 | mathematics | 9 | `math.geom.circle-area` | Area of a Circle |
 **Row 269 removed 2026-07-26** — `math.geom.geometric-proof` authored
 math.geom Wave 8, moved to READY.
-| 270 | mathematics | 9 | `math.geom.surface-area` | Surface Area |
 | 271 | mathematics | 9 | `math.func.domain-range` | Domain and Range |
 | 272 | mathematics | 9 | `math.func.function-notation` | Function Notation |
 | 273 | mathematics | 9 | `math.func.injectivity` | Injective (One-to-One) Function |
@@ -1126,12 +1125,8 @@ READY.
 math.nt Wave 3, moved to READY.
 **Row 576 removed 2026-07-26** — `math.geom.circle-equation` authored
 math.geom Wave 5, moved to READY.
-| 577 | mathematics | 16 | `math.geom.x-y-coordinates` | Cartesian Coordinates |
 | 578 | mathematics | 16 | `math.geom.quadrants` | Quadrants |
 | 579 | mathematics | 16 | `math.geom.midpoint-formula` | Midpoint Formula |
-| 580 | mathematics | 16 | `math.geom.slope` | Slope |
-| 581 | mathematics | 16 | `math.geom.transformations` | Geometric Transformations |
-| 582 | mathematics | 16 | `math.geom.vectors-2d` | Vectors in 2D |
 | 583 | mathematics | 16 | `math.func.graph-of-function` | Graph of a Function |
 | 584 | mathematics | 16 | `math.calc.limits` | Limit of a Function |
 | 585 | mathematics | 16 | `math.calc.parametric-curves` | Parametric Equations and Curves |

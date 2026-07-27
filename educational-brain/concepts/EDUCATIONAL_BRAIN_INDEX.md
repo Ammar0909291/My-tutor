@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 197 READY)
+## mathematics (908 concepts, 202 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -566,20 +566,20 @@ its subject KG.
 | geom | `math.geom.right-triangle` | Right Triangle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.right-triangle.md` | READY |
 | geom | `math.geom.rotation` | Rotation | No | No | — | MISSING |
 | geom | `math.geom.similar-triangles` | Similar Triangles | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.similar-triangles.md` | READY |
-| geom | `math.geom.slope` | Slope | Yes | No | — | MISSING |
+| geom | `math.geom.slope` | Slope | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.slope.md` | READY |
 | geom | `math.geom.solid-3d` | Three-Dimensional Solids | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.solid-3d.md` | READY |
-| geom | `math.geom.surface-area` | Surface Area | Yes | No | — | MISSING |
-| geom | `math.geom.transformations` | Geometric Transformations | Yes | No | — | MISSING |
+| geom | `math.geom.surface-area` | Surface Area | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.surface-area.md` | READY |
+| geom | `math.geom.transformations` | Geometric Transformations | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.transformations.md` | READY |
 | geom | `math.geom.translation` | Translation | No | No | — | MISSING |
 | geom | `math.geom.trapezoid` | Trapezoid | No | No | — | MISSING |
 | geom | `math.geom.triangle` | Triangle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.triangle.md` | READY |
 | geom | `math.geom.triangle-angle-sum` | Triangle Angle Sum Theorem | No | No | — | MISSING |
 | geom | `math.geom.triangle-centers` | Triangle Centers | No | No | — | MISSING |
 | geom | `math.geom.triangle-types` | Types of Triangles | No | No | — | MISSING |
-| geom | `math.geom.vectors-2d` | Vectors in 2D | Yes | No | — | MISSING |
+| geom | `math.geom.vectors-2d` | Vectors in 2D | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.vectors-2d.md` | READY |
 | geom | `math.geom.vectors-3d` | Vectors in 3D | Yes | No | — | MISSING |
 | geom | `math.geom.volume` | Volume | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.volume.md` | READY |
-| geom | `math.geom.x-y-coordinates` | Cartesian Coordinates | Yes | No | — | MISSING |
+| geom | `math.geom.x-y-coordinates` | Cartesian Coordinates | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.x-y-coordinates.md` | READY |
 | graph | `math.graph.algebraic-graph-theory` | Algebraic Graph Theory | Yes | No | — | MISSING |
 | graph | `math.graph.connectivity` | Connectivity | Yes | No | — | MISSING |
 | graph | `math.graph.eulerian-circuit` | Eulerian Circuit | No | No | — | MISSING |

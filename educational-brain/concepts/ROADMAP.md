@@ -13,16 +13,16 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **624** |
-| Remaining | **1,151** |
-| Completion percentage | **35.15%** |
+| Concepts with an Educational Brain entry | **629** |
+| Remaining | **1,146** |
+| Completion percentage | **35.44%** |
 
 *(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
 with an Educational Brain entry" rows had accumulated from prior sessions
 without being reconciled. Recomputed from this same file's §2 Subject
-progress table as currently stated per subject: 197 mathematics + 238
+progress table as currently stated per subject: 202 mathematics + 238
 physics + 3 english + 186 chemistry + 0 biology + 0 computer_science =
-624. Only the mathematics figure was independently re-verified by this
+629. Only the mathematics figure was independently re-verified by this
 batch by direct file count; the other subjects' figures are taken as
 already-recorded in §2 below, not re-audited by this batch, per this
 program's "mathematics only" scope this turn.)*
@@ -33,7 +33,7 @@ program's "mathematics only" scope this turn.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 197 | 21.70% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 202 | 22.25% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
@@ -1137,7 +1137,20 @@ record; the active default has moved to item 1b.**
     `volume` — deferring the coordinate-plane-family Blueprint-grounded
     concepts (`x-y-coordinates`, `slope`, `transformations`,
     `vectors-2d`) and all no-Blueprint concepts to future waves. Raised
-    `math.geom` to **29/69**.
+    `math.geom` to **29/69**. Wave 9 (2026-07-27, iteration 43)
+    re-verified fresh: 20 ready. Authored the 5 remaining
+    Blueprint-grounded candidates — the coordinate-plane family Wave 8
+    deferred (`x-y-coordinates`, `slope`, `transformations`,
+    `vectors-2d`) plus `surface-area` (unlocked by `area` + `solid-3d`)
+    — deferring all 15 no-Blueprint candidates (`angle-types`,
+    `triangle-types`, `triangle-angle-sum`, `pythagorean-converse`,
+    `triangle-centers`, `parallelogram`, `trapezoid`, `regular-polygon`,
+    `circle-parts`, `circle-circumference`, `circle-area`,
+    `circle-theorems`, `quadrants`, `midpoint-formula`,
+    `geometric-constructions`) to future waves. Two Curriculum Feedback
+    findings recorded (surface-area Blueprint/KG metadata divergence,
+    resolved per KG; transformations Blueprint's stale
+    cross-link-absence claim). Raised `math.geom` to **34/69**.
 1. **(Historical, satisfied) `math.found` Wave 7**: the set of
    `math.found` nodes whose prerequisites were all READY after Wave 6.
 2. **(Historical, satisfied) `math.found` Waves 8-16 (52 remaining

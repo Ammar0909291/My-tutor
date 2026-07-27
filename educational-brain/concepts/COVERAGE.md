@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 197 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 28 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation`, `pythagorean-triples` — `math.nt` domain otherwise PARKED at 28/36, blocked on cross-domain campaigns per ROADMAP.md §5 item 1c) + 29 `math.geom.*` entries (`point`, `line`, `line-segment`, `ray`, `plane`, `angle`, `circle`, `coordinate-plane`, `perimeter`, `length`, `angle-measurement`, `angle-pairs`, `perpendicular-lines`, `triangle`, `circle-equation`, `right-triangle`, `congruent-triangles`, `similar-triangles`, `area-triangle`, `polygon`, `pythagorean-theorem`, `parallel-lines`, `area-polygon`, `solid-3d`, `distance-formula`, `geometric-proof`, `quadrilateral`, `area`, `volume` — `math.geom` domain IN PROGRESS, 29/69, started per ROADMAP.md §5 item 1c to resolve math.nt's own pythagorean-triples dependency, now resolved), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
+| mathematics | 908 | 202 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 28 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation`, `pythagorean-triples` — `math.nt` domain otherwise PARKED at 28/36, blocked on cross-domain campaigns per ROADMAP.md §5 item 1c) + 34 `math.geom.*` entries (`point`, `line`, `line-segment`, `ray`, `plane`, `angle`, `circle`, `coordinate-plane`, `perimeter`, `length`, `angle-measurement`, `angle-pairs`, `perpendicular-lines`, `triangle`, `circle-equation`, `right-triangle`, `congruent-triangles`, `similar-triangles`, `area-triangle`, `polygon`, `pythagorean-theorem`, `parallel-lines`, `area-polygon`, `solid-3d`, `distance-formula`, `geometric-proof`, `quadrilateral`, `area`, `volume`, `x-y-coordinates`, `slope`, `transformations`, `vectors-2d`, `surface-area` — `math.geom` domain IN PROGRESS, 34/69, started per ROADMAP.md §5 item 1c to resolve math.nt's own pythagorean-triples dependency, now resolved), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -4074,3 +4074,93 @@ entries.
 Full validation this batch: all 6 subject KG validators PASS (0
 failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
 2213 passed / 1 skipped (114 files), `npm run build` succeeded.
+
+
+### Mathematics — math.geom Wave 9 (2026-07-27, autonomous loop iteration 43)
+
+Loop resumed by explicit user instruction ("go") after the Batch 52
+stop. Re-synced `main` first: 18 new commits on `origin/main` (an
+unrelated parallel EOS v3 / kernel / CEKR runtime engineering track —
+zero file overlap with `educational-brain/concepts/`), fast-forwarded
+cleanly.
+
+**Wave 9 candidates re-verified programmatically**: 20 ready. Authored
+the 5 remaining Blueprint-grounded candidates — exactly the
+coordinate-plane family Wave 8 deferred, plus `surface-area`:
+
+- `math.geom.x-y-coordinates` (requires `coordinate-plane`; no unlocks,
+  no cross-links, independence mode; mastery 0.95 → the domain's
+  strictest 5/5 gate) — MC-1 COORDINATE-SWAP (Foundational, Type 4
+  notation-induced, the parenthesized pair carrying no visual cue which
+  slot is horizontal), MC-2 SIGN-IGNORED (Type 1 overgeneralization,
+  unsigned counting-distance experience over-applied to signed
+  coordinates), MC-3 ORIGIN-MISSING (Type 2 perceptual intuition, the
+  grid corner as the perceptually salient start point).
+- `math.geom.slope` (requires `coordinate-plane`; unlocks
+  `line-equation`; cross-link `math.calc.derivative-intro`, Blueprint
+  exists, cross-link probe mode — the secant-to-tangent P76) — MC-1
+  DELTA-Y-OVER-DELTA-X-REVERSED (Foundational, Type 4 notation-induced,
+  the visually symmetric "difference over difference" shape), MC-2
+  SLOPE-DEPENDS-ON-POINT-CHOICE (High, Type 1 overgeneralization,
+  point-pair-dependent measurements over-applied to the invariant
+  ratio), MC-3 PERPENDICULAR-SLOPES-EQUAL (High, Type 5
+  instruction-induced, the parallel rule garbling into "related pairs
+  have equal slopes").
+- `math.geom.transformations` (requires `coordinate-plane`; unlocks
+  `math.linalg.linear-map`; cross-links `math.linalg.linear-map` +
+  `math.abst.group-action`, Blueprint-declared independence mode — see
+  the Curriculum Feedback finding below) — MC-1
+  ALL-TRANSFORMATIONS-PRESERVE-CONGRUENCE (Foundational, Type 1
+  overgeneralization, the isometry property absorbed into the whole
+  category), MC-2 COMPOSITION-ASSUMED-COMMUTATIVE (Foundational, Type 6
+  analogy overextension from commutative arithmetic), MC-3
+  ROTATION-CENTER-ASSUMED-ORIGIN (Moderate, Type 5 instruction-induced,
+  every taught formula being origin-centered).
+- `math.geom.vectors-2d` (requires `coordinate-plane` +
+  `math.arith.addition`; unlocks `vectors-3d` + `math.linalg.vector`;
+  cross-link `math.linalg.vector`, Blueprint exists, cross-link probe
+  mode — the ℝ²/Euclidean-norm P76) — MC-1 VECTOR-IS-A-POINT
+  (Foundational, Type 4 notation-induced, the (a,b) notation shared
+  between points and vectors), MC-2 MAGNITUDE-IS-COORDINATE-SUM (High,
+  Type 1 overgeneralization, component-wise operations over-applied to
+  the Pythagorean magnitude), MC-3 NEGATIVE-SCALAR-REVERSES-MAGNITUDE
+  (Moderate, Type 1 overgeneralization, arithmetic sign-propagation
+  over-applied to a structurally non-negative length).
+- `math.geom.surface-area` (requires `area` + `solid-3d`; unlocks
+  `math.calc.surface-area-integral` per the KG; cross-link the same
+  target, no Blueprint, independence mode) — MC-1
+  SURFACE-AREA-ASSUMED-NEW-TECHNIQUE (Foundational, Type 5
+  instruction-induced, one standalone formula taught per solid hiding
+  the shared face-summing structure), MC-2 MISSED-FACE-ASSUMED-MINOR-
+  ERROR (High, Type 2 perceptual intuition, the dropped faces being
+  exactly the perceptually hidden ones), MC-3
+  SPHERE-ASSUMED-COMPUTABLE-BY-FACE-SUMMING (Moderate, Type 1
+  overgeneralization, face-summing over-applied to a solid with no
+  face list).
+
+All 15 no-Blueprint Wave 9 candidates (`angle-types`, `triangle-types`,
+`triangle-angle-sum`, `pythagorean-converse`, `triangle-centers`,
+`parallelogram`, `trapezoid`, `regular-polygon`, `circle-parts`,
+`circle-circumference`, `circle-area`, `circle-theorems`, `quadrants`,
+`midpoint-formula`, `geometric-constructions`) deferred to future
+waves.
+
+**Two genuine Curriculum Feedback findings recorded (not fixed — no KG
+or Blueprint file modified)**:
+1. `math.geom.surface-area`'s Blueprint Component 0 states
+   estimated_hours 5 and "unlocks: none"; the KG states 8 hours and
+   unlocks `math.calc.surface-area-integral`. Resolved in the KG's
+   favor per the standing rule; both divergences recorded in the
+   entry's own Curriculum Feedback section.
+2. `math.geom.transformations`'s Blueprint claims the
+   `math.linalg.linear-map` and `math.abst.group-action` Blueprints
+   "do not exist — verified via ls" and sets P76_mode = independence on
+   that basis; both Blueprints NOW exist on disk (authored after that
+   check). The Blueprint's own Component 7 anticipates a future
+   revision adding a genuine cross-link probe. The EB entry follows
+   the Blueprint's declared independence mode as written.
+
+`math.geom` now **34/69**. No other domain touched. All five tracking
+files updated in this same commit; re-validated 0 duplicates, 0
+orphans, 0 Quality Gate 3 violations across all 202 mathematics
+entries.
