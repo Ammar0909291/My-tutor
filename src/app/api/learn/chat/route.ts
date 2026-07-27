@@ -1281,6 +1281,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     let frustrationAfterTurnHoisted:
       import('@/lib/kernel/frustration').FrustrationMachine | null = null
     let frustrationBandHoisted: 'calm' | 'strained' | 'flooded' | null = null
+    // ISS-13 — re-derivations for the optimistic-concurrency retry.
+    //
+    // Every ACCUMULATIVE snapshot field is a fold over the snapshot read at
+    // the start of this turn. If a concurrent turn commits before we persist,
+    // that base no longer exists and re-applying the folded RESULT discards
+    // the other turn's increment. Each fold therefore registers how to redo
+    // itself against whatever the snapshot actually is at write time.
+    //
+    // Registered AT THE FOLD SITE, never in a central list: only the code
+    // that folded knows how to re-fold, and a list here would be a second
+    // owner of every fold in the turn.
+    const snapshotRederivers: Array<(fresh: Record<string, unknown>) => Record<string, unknown>> = []
     // EOS v2 Capability Model — session-tier state + this concept's demands.
     let capabilityStateHoisted:
       import('@/lib/teaching/capabilityModel').CapabilityState | null = null
@@ -1825,6 +1837,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             snapshot?.kernelParity as never, parity,
           )
           kernelParityTagsHoisted = parityTags(parity)
+          snapshotRederivers.push((fresh) => ({
+            kernelParity: foldParityMetrics(fresh.kernelParity as never, parity),
+          }))
 
           // K4 — the Policy Engine's production consumer. Runs the 7-band
           // engine over the runtime pack (BASE_PACK + any activated C4
@@ -1882,6 +1897,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 snapshot?.enginePolicyParity as never, engineParity,
               )
               enginePolicyTagsHoisted = parityTags(engineParity, 'engine')
+              snapshotRederivers.push((fresh) => ({
+                enginePolicyParity: foldParityMetrics(fresh.enginePolicyParity as never, engineParity),
+              }))
             }
           }
         }
@@ -2386,15 +2404,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // remains only as the no-machine-state fallback).
       try {
         const { readFrustration, stepFrustration, affectBandOf } = await import('@/lib/kernel/frustration')
+        const frustrationEvidence = {
+          failed: teachingSignal ? teachingSignal.correctness === false : null,
+          recoveryFired: recoveryKeyHoisted !== null,
+          succeeded: teachingSignal?.correctness === true,
+        }
         frustrationAfterTurnHoisted = stepFrustration(
-          readFrustration(snapshot?.frustration),
-          {
-            failed: teachingSignal ? teachingSignal.correctness === false : null,
-            recoveryFired: recoveryKeyHoisted !== null,
-            succeeded: teachingSignal?.correctness === true,
-          },
+          readFrustration(snapshot?.frustration), frustrationEvidence,
         )
         frustrationBandHoisted = affectBandOf(frustrationAfterTurnHoisted.state)
+        snapshotRederivers.push((fresh) => ({
+          frustration: stepFrustration(readFrustration(fresh.frustration), frustrationEvidence),
+        }))
       } catch { /* affect estimation never takes a turn down */ }
 
       let eosVerifierEvents: import('@/lib/kernel/verifier').OutputEvent[] = []
@@ -2500,6 +2521,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               turnOutcome,
             )
             eosVerifierTagsHoisted = verifierTags(turnOutcome)
+            snapshotRederivers.push((fresh) => ({
+              verifierMetrics: foldVerifierMetrics(fresh.verifierMetrics as never, turnOutcome),
+            }))
           }
         } catch (err) {
           // Fail-open: never break the turn on verifier failure.
@@ -3160,6 +3184,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const failureThisTurn = recoveryKeyHoisted !== null || teachingSignal?.correctness === false
           const newSessionFailureCount = failureThisTurn ? snapshotSessionFailureCount + 1 : snapshotSessionFailureCount
           const failureCountUpdate = failureThisTurn ? { sessionFailureCount: newSessionFailureCount } : {}
+          // ISS-13: the counter is an increment over the base, so a concurrent
+          // turn's increment must not be overwritten by ours.
+          if (failureThisTurn) {
+            snapshotRederivers.push((fresh) => ({
+              sessionFailureCount: (typeof fresh.sessionFailureCount === 'number' ? fresh.sessionFailureCount : 0) + 1,
+            }))
+          }
 
           // Session lifecycle fold (07 §1/§6): this turn's signal advances
           // the episode machine — OPENING→CORE on the first answered item,
@@ -3321,11 +3352,29 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // it back via readTeachingStepIndex() instead of restarting.
               ...(teachingStepUpdateHoisted ?? {}),
             }
-            prisma.$executeRaw`
-              UPDATE "LearnSession"
-              SET "contextSnapshot" = COALESCE("contextSnapshot", '{}'::jsonb) || ${JSON.stringify(libSnapshotDelta)}::jsonb
-              WHERE id = ${sessionId}
-            `.catch(() => {})
+            // ISS-13: conditional on the version read at the start of this
+            // turn. If a concurrent turn committed in between, the write
+            // conflicts and is retried ONCE against the snapshot as it
+            // actually is, with every accumulative field re-folded by the
+            // rederivers its own fold site registered. Fail-soft throughout:
+            // a second conflict loses this turn's accumulative state, exactly
+            // as the unconditional write always did, and never the reply.
+            const { writeSnapshotDelta, readSnapshotVersion } = await import('@/lib/db/snapshotWrite')
+            const rederivers = snapshotRederivers
+            writeSnapshotDelta(prisma, {
+              sessionId,
+              expectedVersion: readSnapshotVersion(snapshot),
+              delta: libSnapshotDelta,
+              rederive: rederivers.length === 0
+                ? undefined
+                : (fresh) => Object.assign({}, ...rederivers.map((f) => f(fresh))),
+            }).then((r) => {
+              if (!r.applied) {
+                console.warn('[learn/chat] snapshot write not applied', {
+                  sessionId, conflicted: r.conflicted, error: r.error,
+                })
+              }
+            }).catch(() => {})
           }
         } catch (err) {
           console.warn('[learn/chat] wave-0 library persist skipped:', err)
