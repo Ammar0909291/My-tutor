@@ -1277,6 +1277,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     let enginePolicyParityHoisted:
       import('@/lib/kernel/parity').ParityMetrics | null = null
     let enginePolicyTagsHoisted: string[] = []
+    // K7 — Frustration machine state after this turn (persisted on snapshot).
+    let frustrationAfterTurnHoisted:
+      import('@/lib/kernel/frustration').FrustrationMachine | null = null
+    let frustrationBandHoisted: 'calm' | 'strained' | 'flooded' | null = null
     // EOS v2 Capability Model — session-tier state + this concept's demands.
     let capabilityStateHoisted:
       import('@/lib/teaching/capabilityModel').CapabilityState | null = null
@@ -2356,6 +2360,26 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Fires only for Library turns (K6 scope: School Mode untouched); a
       // memory-served (assembled) turn is skipped since it's already
       // human-curated.
+      // K7 — Frustration machine (RS §4.14): step the persisted state with
+      // THIS turn's evidence (the SIGNAL correctness parsed above, the
+      // recovery-guard verdict). UNCONDITIONAL — the fast affect variable
+      // must accumulate whether or not any consumer is enabled, or the state
+      // would be stale on the day a consumer turns on. Consumer today: the
+      // verifier's affect band (the pre-K7 floor in buildVerifierContext
+      // remains only as the no-machine-state fallback).
+      try {
+        const { readFrustration, stepFrustration, affectBandOf } = await import('@/lib/kernel/frustration')
+        frustrationAfterTurnHoisted = stepFrustration(
+          readFrustration(snapshot?.frustration),
+          {
+            failed: teachingSignal ? teachingSignal.correctness === false : null,
+            recoveryFired: recoveryKeyHoisted !== null,
+            succeeded: teachingSignal?.correctness === true,
+          },
+        )
+        frustrationBandHoisted = affectBandOf(frustrationAfterTurnHoisted.state)
+      } catch { /* affect estimation never takes a turn down */ }
+
       let eosVerifierEvents: import('@/lib/kernel/verifier').OutputEvent[] = []
       let eosVerifierMetricsHoisted:
         import('@/lib/kernel/verifier').VerifierMetrics | null = null
@@ -2388,6 +2412,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               vocabularyUnlocked: !firstLessonActiveHoisted,
               formulaUnlocked: !firstLessonActiveHoisted && contentRegister !== 'beginner',
               recoveryActive: recoveryKeyHoisted !== null,
+              affectBand: frustrationBandHoisted ?? undefined,
               maxQuestions: maxQuestionsFor(verifierMove),
               maxParagraphs: null,
               maxNewTerms: contentRegister === 'beginner' ? 1 : 2,
@@ -3155,6 +3180,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // K4: engine-vs-route parity rides the same snapshot persist.
           if (enginePolicyParityHoisted) {
             conversationStateUpdate.enginePolicyParity = enginePolicyParityHoisted
+          }
+          // K7: the Frustration machine's state rides the same persist.
+          if (frustrationAfterTurnHoisted) {
+            conversationStateUpdate.frustration = frustrationAfterTurnHoisted
           }
           // Capability session tier — same snapshot persist, no new store.
           if (capabilityStateHoisted && Object.keys(capabilityStateHoisted).length > 0) {

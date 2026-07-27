@@ -34,6 +34,10 @@ export interface BuildContextInput {
   lessonCompletionAuthorized: boolean
   // Affect band (derived from sessionFailureCount today; K7 upgrades)
   sessionFailureCount: number
+  /** K7 — the Frustration machine's band (kernel/frustration affectBandOf).
+   *  When supplied it is authoritative; the floor below remains only for
+   *  callers that have no machine state (backward compatible). */
+  affectBand?: 'calm' | 'strained' | 'flooded'
   // The learner's own message (for V-REACT LOG only)
   learnerText: string
   // Whether the assistant is expected to REACT (learner produced content)
@@ -47,8 +51,11 @@ export interface BuildContextInput {
   noCapabilities?: string[]
 }
 
-/** Map register + failure count → affect band. Conservative floor:
- *  strained above the first failure; flooded at recovery-active. */
+/** The pre-K7 floor, kept ONLY as the fallback for callers without machine
+ *  state. The Frustration machine (kernel/frustration.ts, RS §4.14) is the
+ *  owner of this derivation now — it is stricter (STRAINED at ONE failure,
+ *  per spec) and stateful (the 3-turn window), which a per-call floor can
+ *  never be. */
 function affectBandFrom(recoveryActive: boolean, failures: number): VerifierContext['affectBand'] {
   if (recoveryActive) return 'flooded'
   if (failures >= 2) return 'strained'
@@ -71,7 +78,7 @@ export function buildVerifierContext(input: BuildContextInput): VerifierContext 
     assessmentActive: input.assessmentActive,
     lessonCompletionAuthorized: input.lessonCompletionAuthorized,
     reactMandated: input.reactMandated,
-    affectBand: affectBandFrom(input.recoveryActive, input.sessionFailureCount),
+    affectBand: input.affectBand ?? affectBandFrom(input.recoveryActive, input.sessionFailureCount),
     bannedConceptTerms: input.bannedConceptTerms,
     noCapabilities: input.noCapabilities ?? [],
     learnerText: input.learnerText,
