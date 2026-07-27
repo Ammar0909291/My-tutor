@@ -1635,6 +1635,15 @@
   path toward `math.geom.pythagorean-theorem`. `parallel-lines` +
   coordinate-plane-family + no-Blueprint candidates deferred. Full
   detail: `COVERAGE.md`.
+  **Batch 51 — math.geom Wave 7 + math.nt.pythagorean-triples**
+  (2026-07-26, autonomous loop iteration 41): 4 `math.geom` concepts
+  authored (`pythagorean-theorem`, `parallel-lines`, `area-polygon`,
+  `solid-3d`; all Blueprint reused by reference), plus
+  `math.nt.pythagorean-triples` (no Blueprint, small bounded
+  cross-domain step, unblocked by `pythagorean-theorem`). `math.geom`
+  20/69 → 24/69. `math.nt` 27/36 → 28/36 (otherwise still parked, 8
+  concepts remain blocked on deep analytic/algebraic-number-theory
+  chains). Mathematics 187 → 192. Full detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
