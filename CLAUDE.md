@@ -1627,6 +1627,14 @@
   toward `math.geom.pythagorean-theorem`, unblocking the parked
   `math.nt.pythagorean-triples`. 9 remaining Wave 5 candidates
   deferred. Full detail: `COVERAGE.md`.
+  **Batch 50 — math.geom Wave 6** (2026-07-26, autonomous loop
+  iteration 40): 5 concepts authored (`right-triangle`,
+  `congruent-triangles`, `similar-triangles`, `area-triangle`,
+  `polygon`; all Blueprint reused by reference). `math.geom` 15/69 →
+  20/69. Mathematics 182 → 187. `right-triangle` continues the direct
+  path toward `math.geom.pythagorean-theorem`. `parallel-lines` +
+  coordinate-plane-family + no-Blueprint candidates deferred. Full
+  detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
