@@ -1608,6 +1608,11 @@
   iteration 36): 3 concepts authored (`line-segment`, `ray`, `plane`;
   all Blueprint reused by reference). `math.geom` 2/69 → 5/69. Full
   detail: `COVERAGE.md`.
+  **Batch 47 — math.geom Wave 4 part 1** (2026-07-26, autonomous loop
+  iteration 37): 3 concepts authored (`angle`, `circle`,
+  `coordinate-plane`; all Blueprint reused by reference). `math.geom`
+  5/69 → 8/69. Part 2 (`perimeter`, `length`, both no-Blueprint)
+  deferred. Full detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
