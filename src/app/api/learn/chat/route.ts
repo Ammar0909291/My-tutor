@@ -1262,6 +1262,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // EOS M1 (Evidence Spine): decision facts hoisted for the parallel spine
     // emitter — observation only, zero effect on the turn.
     let evidenceMoveHoisted: string | null = null
+    // Band 2 (questionLegality.ts): which invariant, if any, removed ASK from
+    // the legal set this turn. Folded into the session's legality metrics at
+    // persist time — the automatically-measurable half of the layer.
+    let legalityBlockedReasonHoisted:
+      import('@/lib/teaching/questionLegality').LegalityReason | null = null
     let evidenceStageCeilingHoisted: number | null = null
     let evidenceWorkedExampleFirstHoisted = false
     let evidenceAutonomyHoisted = false
@@ -1496,10 +1501,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
           const workedExampleFirst =
             snapshotSessionFailureCount >= 2 || strategyHoisted === 'FOUNDATION_REBUILD'
-          const nextMove = decideNextMove(conversationStateHoisted, {
+          const { decideNextMoveDetailed } = await import('@/lib/teaching/conversationState')
+          // Band 2 (questionLegality.ts): evidenced prior knowledge makes a
+          // diagnostic question answerable even before anything is taught.
+          // A resumed concept with real progress is exactly that case.
+          const hasEvidencedPriorKnowledge =
+            (studentProgress?.completedLessons?.length ?? 0) > 0
+          const moveDecision = decideNextMoveDetailed(conversationStateHoisted, {
             recoveryTurn: recoveryKeyHoisted !== null,
             workedExampleFirst,
+            legality: { hasEvidencedPriorKnowledge },
           })
+          const nextMove = moveDecision.move
+          legalityBlockedReasonHoisted = moveDecision.blockedReason
           // EOS M1: record the decision facts for the spine (observation only).
           evidenceMoveHoisted = nextMove
           evidenceWorkedExampleFirstHoisted = workedExampleFirst
@@ -1547,6 +1561,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               ? availableVisual
               : decideVisualFirst(availableVisual, conversationStateHoisted, nextMove),
             firstLessonActive: firstLessonActiveHoisted,
+            legalityRationale: moveDecision.rationale,
+            directiveJustIssued: recoveryKeyHoisted === 'too_many_questions',
           })
           if (learnerRequestHoisted) {
             const hasEstablishedExample =
@@ -2238,6 +2254,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             strategyUsed: selectedStrategyHoisted ?? undefined,
             signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
             dontKnowSignal: isDontKnowSignal(recoveryKeyHoisted),
+            // QL-3: an explicit "explain rather than keep asking" directive is
+            // exactly recoveryGuard's too_many_questions family; it suppresses
+            // ASK for several turns, not just this one.
+            learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
           })
 
           // Loop 2: advance narrative state with this turn's evidence
@@ -2897,6 +2917,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 strategyUsed: selectedStrategyHoisted ?? undefined,
                 signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
                 dontKnowSignal: isDontKnowSignal(recoveryKeyHoisted),
+                learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
               }),
             }
           }

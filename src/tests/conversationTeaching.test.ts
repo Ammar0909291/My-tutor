@@ -269,8 +269,16 @@ describe('scenario 9 — semantic question loop (paraphrased, not exact wording)
   })
 
   it('a single probe does not yet force the break', () => {
+    // Updated 2026-07-27 (questionLegality.ts QL-1): the original version of
+    // this test opened with a probe on a virgin state and asserted 'ask'. That
+    // is now structurally illegal — a question needs a source to answer from —
+    // so the setup teaches first. The test's actual subject is unchanged: the
+    // semantic-loop counter alone must not fire at 1.
     let s = initialConversationState('c')
-    s = playTurns(s, [{ asked: true, correct: null, priorKnowledgeProbe: true }])
+    s = playTurns(s, [
+      { asked: false, correct: null },                             // give: a source now exists
+      { asked: true, correct: null, priorKnowledgeProbe: true },    // one probe
+    ])
     expect(s.consecutivePriorKnowledgeProbes).toBe(1)
     expect(decideNextMove(s, { recoveryTurn: false, workedExampleFirst: false })).toBe('ask')
   })

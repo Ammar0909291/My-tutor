@@ -22,6 +22,15 @@
  * Recovery Engine's exit-one-step-below-entry law.
  */
 
+import {
+  questionLegality,
+  phaseAfterConcludedDiagnostic,
+  foldAskSuppression,
+  buildDirectiveAcknowledgementLine,
+  type LegalityContext,
+  type LegalityReason,
+} from './questionLegality'
+
 export type TeachingPhase =
   | 'OBSERVE' | 'DEMONSTRATE' | 'GUIDE' | 'CHECK' | 'PRACTICE' | 'TRANSFER'
 
@@ -67,6 +76,14 @@ export interface ConversationState {
    *  signal=false). When >= 2, decideNextMove forces 'show' so the phase
    *  advances to DEMONSTRATE instead of repeating the observation loop. */
   observeFailures: number
+  /** QL-1 (questionLegality.ts): has ANYTHING been taught this session for
+   *  this concept — anchor, demonstration, or explanation? Distinct from
+   *  `demonstrated`, which deliberately ignores OBSERVE-phase gives; a
+   *  question needs a source even when that source was only the anchor. */
+  taughtThisSession: boolean
+  /** QL-3: turns of ASK suppression remaining after an explicit learner
+   *  directive ("explain it rather than keep asking"). Decays one per turn. */
+  askSuppressedTurns: number
   strategiesUsed: number[]
   analogiesUsed: string[]
   demonstrationsShown: string[]
@@ -95,6 +112,8 @@ export function initialConversationState(conceptId: string | null): Conversation
     totalKnowledgeProbes: 0,
     consecutiveDontKnows: 0,
     observeFailures: 0,
+    taughtThisSession: false,
+    askSuppressedTurns: 0,
     strategiesUsed: [],
     analogiesUsed: [],
     demonstrationsShown: [],
@@ -142,6 +161,11 @@ export interface TurnEvidence {
   /** Hard Rule 1: true when the student fired a dont_know or dont_understand
    *  recovery this turn — drives consecutiveDontKnows counter. */
   dontKnowSignal?: boolean
+  /** QL-3: the learner explicitly asked to be taught rather than questioned
+   *  ("stop asking", "just explain it", "explain rather than keep asking").
+   *  Sourced from recoveryGuard's `too_many_questions` failure state, which
+   *  is the detector for exactly this family of utterances. */
+  learnerIssuedDirective?: boolean
 }
 
 /**
@@ -207,7 +231,17 @@ export function advanceConversationState(
     // A no-question turn in DEMONSTRATE (or later) means the teacher showed
     // something — the evidence gate DEMONSTRATE→GUIDE needs.
     if (prev.phase !== 'OBSERVE') next.demonstrated = true
+    // QL-1: any give — including the OBSERVE-phase anchor, which `demonstrated`
+    // deliberately excludes — creates a source the learner can answer from.
+    next.taughtThisSession = true
   }
+
+  // QL-3: fold the learner-directive suppression counter before any early
+  // return below, so a directive issued on a remediation turn still sticks.
+  next.askSuppressedTurns = foldAskSuppression(
+    prev.askSuppressedTurns,
+    evidence.learnerIssuedDirective === true,
+  )
 
   // P0-4: consecutive prior-knowledge-probe counter — folded unconditionally
   // like the Phase E counters above, independent of which branch follows.
@@ -285,6 +319,12 @@ export function advanceConversationState(
       next.observeFailures = (prev.observeFailures ?? 0) + 1
     }
     next.phase = phaseDown(prev.phase, next.demonstrated)
+    // QL-2: a concluded diagnostic must MOVE the machine, not merely change
+    // this turn's move. Forcing 'show' while the phase stays at OBSERVE is
+    // what produced the observed loop — the tutor showed once, re-entered
+    // OBSERVE, and the observation question came back. The diagnostic's own
+    // result ("nothing here yet") is the evidence DEMONSTRATE needs.
+    next.phase = phaseAfterConcludedDiagnostic(next.phase, next.consecutiveDontKnows)
     // Success evidence at CHECK/PRACTICE is voided by a later failure at
     // the same rung only in part — keep it (high-water mark), the phase
     // drop alone forces re-earning the transition.
@@ -329,6 +369,19 @@ export interface NextMoveContext {
   /** Phase F: worked-example-first is in force (failures ≥ 2 or
    *  FOUNDATION_REBUILD strategy). */
   workedExampleFirst: boolean
+  /** Band-2 inputs (questionLegality.ts). Optional: omitted means the
+   *  conservative reading — no evidenced prior knowledge — which can only
+   *  ever remove ASK, never add it. */
+  legality?: LegalityContext
+}
+
+export interface NextMoveDecision {
+  move: NextMove
+  /** Non-null when the Band-2 legality layer removed ASK from the legal set.
+   *  Emitted as measurement (foldLegalityMetrics) and surfaced as a rationale
+   *  line in the turn directive. */
+  blockedReason: LegalityReason | null
+  rationale: string | null
 }
 
 /**
@@ -336,8 +389,40 @@ export interface NextMoveContext {
  * Deterministic replacement for "the LLM decides whether to quiz".
  */
 export function decideNextMove(state: ConversationState, ctx: NextMoveContext): NextMove {
+  return decideNextMoveDetailed(state, ctx).move
+}
+
+/**
+ * The decision, with the Band-2 rationale attached. decideNextMove() is a
+ * thin wrapper over this so existing callers are unchanged.
+ *
+ * Order: recovery interrupt → Band 2 legality (subtractive) → the existing
+ * heuristic ladder. Legality runs BEFORE the ladder because a heuristic can
+ * only choose among legal moves; running it after would let a heuristic
+ * re-introduce an illegal one.
+ */
+export function decideNextMoveDetailed(
+  state: ConversationState,
+  ctx: NextMoveContext,
+): NextMoveDecision {
   // Recovery preempts — the recovery script already forbids questions.
-  if (ctx.recoveryTurn) return 'teach'
+  if (ctx.recoveryTurn) return { move: 'teach', blockedReason: null, rationale: null }
+
+  // ── Band 2 · LEGALITY (subtractive only) ───────────────────────────────
+  const verdict = questionLegality(state, ctx.legality)
+  if (!verdict.askLegal) {
+    // Nothing taught yet ⇒ the give must be a SHOW (the learner needs to see
+    // the thing). Otherwise an explanation is what was asked for.
+    const move: NextMove = state.taughtThisSession ? 'teach' : 'show'
+    return { move, blockedReason: verdict.reason, rationale: verdict.rationale }
+  }
+
+  return { move: decideNextMoveHeuristic(state, ctx), blockedReason: null, rationale: null }
+}
+
+/** The pre-existing heuristic ladder, unchanged in behaviour. Only reachable
+ *  once Band 2 has confirmed ASK is legal. */
+function decideNextMoveHeuristic(state: ConversationState, ctx: NextMoveContext): NextMove {
   // Hard Rule 1: the student has said "I don't know / didn't understand"
   // twice in a row — Discovery is definitively over, teaching must begin.
   if ((state.consecutiveDontKnows ?? 0) >= 2) return 'show'
@@ -427,6 +512,13 @@ export interface TurnDirectiveParams {
    *  say "no teaching payload" — the First Lesson Protocol's opening move
    *  IS a teaching payload (creating the need). */
   firstLessonActive?: boolean
+  /** Band-2 rationale from decideNextMoveDetailed, when ASK was removed.
+   *  Naming the reason materially raises compliance over a bare "do not ask". */
+  legalityRationale?: string | null
+  /** QL-3: the learner issued the directive on THIS turn — trigger the
+   *  one-clause self-correction. Only on arrival; a repeated apology is
+   *  worse than none. */
+  directiveJustIssued?: boolean
 }
 
 const PHASE_FRAME: Record<TeachingPhase, string> = {
@@ -458,6 +550,14 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   lines.push(`- Teaching phase: ${phaseFrame}`)
   lines.push(`- Next move: ${MOVE_LINE[p.nextMove]}`)
   lines.push(`- Question stage ceiling: Stage ${PHASE_MAX_QUESTION_STAGE[p.state.phase]} (see QUESTION STAGE POLICY). Never ask above it this turn.`)
+  // Band 2 — stated before every other constraint below it, because it is the
+  // only one the model must not trade off against anything else.
+  if (p.legalityRationale) {
+    lines.push(`- QUESTIONS ARE NOT LEGAL THIS TURN. ${p.legalityRationale}`)
+  }
+  if (p.directiveJustIssued) {
+    lines.push(buildDirectiveAcknowledgementLine())
+  }
   if (p.maxParagraphs !== null) {
     lines.push(`- Length budget: at most ${p.maxParagraphs} short paragraphs. If the learner is struggling, shorter is better — never longer.`)
   }
