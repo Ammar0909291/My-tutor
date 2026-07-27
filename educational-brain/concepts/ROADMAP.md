@@ -13,16 +13,16 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **599** |
-| Remaining | **1,176** |
-| Completion percentage | **33.75%** |
+| Concepts with an Educational Brain entry | **602** |
+| Remaining | **1,173** |
+| Completion percentage | **33.92%** |
 
 *(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
 with an Educational Brain entry" rows had accumulated from prior sessions
 without being reconciled. Recomputed from this same file's §2 Subject
-progress table as currently stated per subject: 172 mathematics + 238
+progress table as currently stated per subject: 175 mathematics + 238
 physics + 3 english + 186 chemistry + 0 biology + 0 computer_science =
-599. Only the mathematics figure was independently re-verified by this
+602. Only the mathematics figure was independently re-verified by this
 batch by direct file count; the other subjects' figures are taken as
 already-recorded in §2 below, not re-audited by this batch, per this
 program's "mathematics only" scope this turn.)*
@@ -33,7 +33,7 @@ program's "mathematics only" scope this turn.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 172 | 18.94% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 175 | 19.27% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
@@ -1050,7 +1050,13 @@ record; the active default has moved to item 1b.**
     `math.geom.plane` becomes ready next wave. Wave 3 (2026-07-26,
     iteration 36) re-verified fresh: 3 ready, all Blueprint-grounded
     (`line-segment`, `ray`, `plane`, all unlocked by `line`) — authored
-    all 3 (no split needed), raising `math.geom` to **5/69**.
+    all 3 (no split needed), raising `math.geom` to **5/69**. Wave 4
+    (2026-07-26, iteration 37) re-verified fresh: 5 ready
+    (`angle`, `perimeter`, `circle`, `length`, `coordinate-plane`),
+    split into part 1 (3 Blueprint-grounded: `angle`, `circle`,
+    `coordinate-plane`) and part 2 (2 no-Blueprint: `perimeter`,
+    `length`, deferred). Part 1 authored, raising `math.geom` to
+    **8/69**.
 1. **(Historical, satisfied) `math.found` Wave 7**: the set of
    `math.found` nodes whose prerequisites were all READY after Wave 6.
 2. **(Historical, satisfied) `math.found` Waves 8-16 (52 remaining

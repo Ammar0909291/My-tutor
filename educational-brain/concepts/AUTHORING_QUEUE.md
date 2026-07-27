@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1176** (= 1,775 KG concepts − 599 already `READY`, per
+Total queued: **1173** (= 1,775 KG concepts − 602 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -548,9 +548,11 @@ READY.
 | 37 | computer_science | 3 | `cs.os.process-management` | Process Management |
 | 38 | computer_science | 3 | `cs.net.osi-tcp-ip-models` | OSI and TCP/IP Reference Models |
 | 39 | computer_science | 3 | `cs.sec.cryptography-basics` | Cryptography Fundamentals |
-| 40 | mathematics | 4 | `math.geom.angle` | Angle |
+**Row 40 removed 2026-07-26** — `math.geom.angle` authored math.geom
+Wave 4 part 1, moved to READY.
 | 41 | mathematics | 4 | `math.geom.perimeter` | Perimeter |
-| 42 | mathematics | 4 | `math.geom.circle` | Circle |
+**Row 42 removed 2026-07-26** — `math.geom.circle` authored math.geom
+Wave 4 part 1, moved to READY.
 | 43 | mathematics | 4 | `math.geom.length` | Length |
 | 44 | mathematics | 4 | `math.prob.sample-space` | Sample Space |
 | 45 | mathematics | 4 | `math.disc.graph` | Graph |
@@ -1046,7 +1048,8 @@ authored math.arith Wave 6 part 2, moved to READY.
 **Rows 524-525 removed 2026-07-26** — `math.arith.division`,
 `math.arith.exponentiation` authored math.arith Wave 6 part 1, moved
 to READY.
-| 526 | mathematics | 15 | `math.geom.coordinate-plane` | Coordinate Plane |
+**Row 526 removed 2026-07-26** — `math.geom.coordinate-plane` authored
+math.geom Wave 4 part 1, moved to READY.
 | 527 | mathematics | 15 | `math.func.real-valued-function` | Real-Valued Function |
 | 528 | mathematics | 15 | `math.prob.martingale` | Martingale |
 | 529 | mathematics | 15 | `math.disc.counting-principles` | Counting Principles |
