@@ -12,13 +12,14 @@
  */
 import { senseStage } from '../stages/sense'
 import { commit1Stage } from '../stages/commit1'
+import { foldStage } from '../stages/fold'
 import { interruptScanStage } from '../stages/interruptScan'
 import { tsmStepStage } from '../stages/tsmStep'
-import { policyStage } from '../stages/policy'
+import { policyStage, engineDecisionToPolicyDecision } from '../stages/policy'
 import { initialState, makeTurnContext } from '../context'
 import {
   initialConversationState, advanceConversationState, repliesWithQuestion,
-  type ConversationState,
+  decideNextMoveDetailed, type ConversationState,
 } from '@/lib/teaching/conversationState'
 import { detectFailureState, isDontKnowSignal } from '@/lib/teaching/recoveryGuard'
 import { rng, type Persona } from './personas'
@@ -30,6 +31,15 @@ export interface EpisodeOptions {
   turns: number
   conceptId?: string
   contentRegister?: 'beginner' | 'intermediate' | 'expert'
+  /**
+   * Run the K4 POLICY ENGINE in shadow on every turn, alongside the adapter
+   * path, and subject ITS decisions to the same invariant battery. The engine
+   * is fed from the same kernel artifacts (tsmStep counters, interrupt scan)
+   * and the same Band-2 verdict the adapter path derives — so a divergence is
+   * attributable to the rules, exactly as in the live route's measurement.
+   * Off by default: existing battery results stay byte-identical.
+   */
+  engineShadow?: boolean
 }
 
 export interface EpisodeResult {
@@ -46,6 +56,14 @@ export interface EpisodeResult {
     finalPhase: string
     reachedPhase: string[]
   }
+  /** Present only when engineShadow was requested. */
+  engine?: {
+    /** The engine's decisions, run through the SAME invariant battery. */
+    violations: InvariantViolation[]
+    /** Turns where the engine's move differed from the adapter path's. */
+    moveDivergences: Array<{ turnIndex: number; adapter: string | null; engine: string }>
+    turnsCompared: number
+  }
 }
 
 /** Run ONE episode. Deterministic in (persona, seed, turns). */
@@ -54,8 +72,11 @@ export async function runEpisode(opts: EpisodeOptions): Promise<EpisodeResult> {
   const register = opts.contentRegister ?? 'beginner'
   let cs: ConversationState = initialConversationState(opts.conceptId ?? 'sim.concept')
   const turns: EpisodeTurn[] = []
+  const engineTurns: EpisodeTurn[] = []
+  const moveDivergences: NonNullable<EpisodeResult['engine']>['moveDivergences'] = []
   const reached = new Set<string>([cs.phase])
   let lastMoveWasAsk = false
+  let prevCorrect: boolean | null = null
   let asks = 0, gives = 0, recoveries = 0
 
   for (let i = 0; i < opts.turns; i++) {
@@ -69,6 +90,14 @@ export async function runEpisode(opts: EpisodeOptions): Promise<EpisodeResult> {
     }))
     s = await senseStage({ message: pt.message }).run(s)
     s = await commit1Stage.run(s)
+    // FOLD carries the register the engine reads; the adapter path receives
+    // it as an argument, so both paths see the same value by construction.
+    s = await foldStage({
+      contentRegister: register, profileLevel: null, sessionFailureCount: 0,
+      currentConceptId: opts.conceptId ?? 'sim.concept',
+      hasVerifiedPlacement: false, pendingPlacementProbe: null,
+      isFirstLessonContext: false,
+    }).run(s)
     s = await interruptScanStage.run(s)
     s = await tsmStepStage({ conversationState: cs }).run(s)
     s = await policyStage({
@@ -87,6 +116,33 @@ export async function runEpisode(opts: EpisodeOptions): Promise<EpisodeResult> {
     const recoveryActive = s.interrupt?.active === true
     turns.push({ turnIndex: i, stateBefore: cs, decision, recoveryActive })
 
+    if (opts.engineShadow) {
+      // The Band-2 verdict, from the ladder's own legality call — the same
+      // wiring the live route uses (it hoists moveDecision.blockedReason and
+      // hands it to the gate). Lazy import: eos-runtime is wiring, and the
+      // simulator must not load it for callers that never asked for it.
+      const { policyGate } = await import('@/lib/eos-runtime/policyGate')
+      const detail = decideNextMoveDetailed(cs, {
+        recoveryTurn: recoveryActive, workedExampleFirst: false, legality: {},
+      })
+      const gate = policyGate({
+        state: s, mode: 'shadow',
+        lastSignal: { correct: prevCorrect, confidence: null },
+        caller: { askLegal: detail.blockedReason === null, blockedReason: detail.blockedReason },
+      })
+      if (gate.decision) {
+        engineTurns.push({
+          turnIndex: i, stateBefore: cs, recoveryActive,
+          decision: engineDecisionToPolicyDecision(gate.decision, {
+            learnerId: s.context.learnerId, sessionId: s.context.sessionId, turnId: s.context.turnId,
+          }),
+        })
+        if (gate.decision.move !== decision.move) {
+          moveDivergences.push({ turnIndex: i, adapter: decision.move, engine: gate.decision.move })
+        }
+      }
+    }
+
     if (decision.move === 'ASK') asks++; else gives++
     if (decision.move === 'RECOVER') recoveries++
     lastMoveWasAsk = decision.move === 'ASK'
@@ -103,6 +159,7 @@ export async function runEpisode(opts: EpisodeOptions): Promise<EpisodeResult> {
       dontKnowSignal: isDontKnowSignal(recoveryKey),
       learnerIssuedDirective: recoveryKey === 'too_many_questions',
     })
+    prevCorrect = pt.correct ?? null
     reached.add(cs.phase)
   }
 
@@ -116,6 +173,13 @@ export async function runEpisode(opts: EpisodeOptions): Promise<EpisodeResult> {
       finalPhase: cs.phase,
       reachedPhase: [...reached],
     },
+    ...(opts.engineShadow ? {
+      engine: {
+        violations: checkEpisode(engineTurns),
+        moveDivergences,
+        turnsCompared: engineTurns.length,
+      },
+    } : {}),
   }
 }
 
@@ -126,6 +190,8 @@ export interface BatteryOptions {
   /** Base seed; episode n uses baseSeed + n so a failing episode is
    *  reproducible from its reported seed alone. */
   baseSeed?: number
+  /** Also run the K4 engine in shadow on every turn (see EpisodeOptions). */
+  engineShadow?: boolean
 }
 
 export interface BatteryResult {
@@ -133,6 +199,13 @@ export interface BatteryResult {
   totalTurns: number
   violations: Array<InvariantViolation & { personaId: string; seed: number }>
   byPersona: Record<string, { episodes: number; asks: number; gives: number; recoveries: number }>
+  /** Present only when engineShadow was requested. Same merge-gate contract:
+   *  `violations` must be empty for the ENGINE too. */
+  engine?: {
+    violations: Array<InvariantViolation & { personaId: string; seed: number }>
+    turnsCompared: number
+    moveDivergences: number
+  }
 }
 
 /**
@@ -144,14 +217,18 @@ export interface BatteryResult {
 export async function runBattery(opts: BatteryOptions): Promise<BatteryResult> {
   const base = opts.baseSeed ?? 1
   const violations: BatteryResult['violations'] = []
+  const engineViolations: NonNullable<BatteryResult['engine']>['violations'] = []
   const byPersona: BatteryResult['byPersona'] = {}
   let episodes = 0, totalTurns = 0
+  let engineTurnsCompared = 0, engineMoveDivergences = 0
 
   for (const persona of opts.personas) {
     byPersona[persona.id] = { episodes: 0, asks: 0, gives: 0, recoveries: 0 }
     for (let n = 0; n < opts.episodesPerPersona; n++) {
       const seed = base + n
-      const r = await runEpisode({ persona, seed, turns: opts.turnsPerEpisode })
+      const r = await runEpisode({
+        persona, seed, turns: opts.turnsPerEpisode, engineShadow: opts.engineShadow,
+      })
       episodes++
       totalTurns += r.turns.length
       byPersona[persona.id].episodes++
@@ -159,7 +236,21 @@ export async function runBattery(opts: BatteryOptions): Promise<BatteryResult> {
       byPersona[persona.id].gives += r.outcome.gives
       byPersona[persona.id].recoveries += r.outcome.recoveries
       for (const v of r.violations) violations.push({ ...v, personaId: persona.id, seed })
+      if (r.engine) {
+        engineTurnsCompared += r.engine.turnsCompared
+        engineMoveDivergences += r.engine.moveDivergences.length
+        for (const v of r.engine.violations) engineViolations.push({ ...v, personaId: persona.id, seed })
+      }
     }
   }
-  return { episodes, totalTurns, violations, byPersona }
+  return {
+    episodes, totalTurns, violations, byPersona,
+    ...(opts.engineShadow ? {
+      engine: {
+        violations: engineViolations,
+        turnsCompared: engineTurnsCompared,
+        moveDivergences: engineMoveDivergences,
+      },
+    } : {}),
+  }
 }

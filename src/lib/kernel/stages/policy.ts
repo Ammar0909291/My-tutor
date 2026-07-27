@@ -150,6 +150,35 @@ export interface EnginePolicyInputs {
   inputs: PolicyInputs
 }
 
+/**
+ * EnginePolicyDecision → the pipeline's PolicyDecision artifact. ONE owner:
+ * the engine stage and the simulation battery both need this mapping, and
+ * two copies would let the shadow measurement and the merge gate disagree
+ * about what the engine decided.
+ */
+export function engineDecisionToPolicyDecision(
+  engineDecision: EnginePolicyDecision,
+  ctx: { learnerId: string; sessionId: string; turnId: string },
+): PolicyDecision {
+  return {
+    decisionId: newId('d'),
+    turnId: ctx.turnId,
+    move: engineDecision.move,
+    actionClass: engineDecision.actionClass,
+    budgets: {
+      maxQuestions: engineDecision.budgets.maxQuestions,
+      maxParagraphs: engineDecision.budgets.maxParagraphs,
+      maxNewTerms: engineDecision.budgets.maxNewTerms,
+    },
+    stageCeiling: engineDecision.stageCeiling,
+    vocabularyBans: engineDecision.vocabularyBans,
+    visualDirective: { use: engineDecision.visualClass !== null, visualClass: engineDecision.visualClass },
+    provenance: engineDecision.provenance.map((t) => t.ruleId),
+    prngSeed: seededFrom(ctx.learnerId, ctx.sessionId, ctx.turnId),
+    fallbackChain: engineDecision.fallbackChain,
+  }
+}
+
 /** Kernel-authoritative POLICY stage. Uses the 7-band engine. Behaviour:
  *   1. Engine decides move / budgets / vocabulary / content slots with
  *      full provenance.
@@ -165,23 +194,7 @@ export function enginePolicyStage(args: EnginePolicyInputs): Stage<KernelState, 
     async run(state) {
       const { context } = state
       const engineDecision: EnginePolicyDecision = decide(args.pack, args.inputs)
-      const decision: PolicyDecision = {
-        decisionId: newId('d'),
-        turnId: context.turnId,
-        move: engineDecision.move,
-        actionClass: engineDecision.actionClass,
-        budgets: {
-          maxQuestions: engineDecision.budgets.maxQuestions,
-          maxParagraphs: engineDecision.budgets.maxParagraphs,
-          maxNewTerms: engineDecision.budgets.maxNewTerms,
-        },
-        stageCeiling: engineDecision.stageCeiling,
-        vocabularyBans: engineDecision.vocabularyBans,
-        visualDirective: { use: engineDecision.visualClass !== null, visualClass: engineDecision.visualClass },
-        provenance: engineDecision.provenance.map((t) => t.ruleId),
-        prngSeed: seededFrom(context.learnerId, context.sessionId, context.turnId),
-        fallbackChain: engineDecision.fallbackChain,
-      }
+      const decision = engineDecisionToPolicyDecision(engineDecision, context)
       // Stash the full engine trace on the adapters bag for downstream
       // consumers that want it (RESOLVE reads visualClass; PLAN reads
       // contentSlots via the same bag). Keeps the pipeline artifact
