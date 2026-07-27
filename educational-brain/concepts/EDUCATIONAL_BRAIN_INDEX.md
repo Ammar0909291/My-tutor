@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 192 READY)
+## mathematics (908 concepts, 197 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -515,7 +515,7 @@ its subject KG.
 | geom | `math.geom.angle-measurement` | Angle Measurement | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.angle-measurement.md` | READY |
 | geom | `math.geom.angle-pairs` | Angle Pairs | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.angle-pairs.md` | READY |
 | geom | `math.geom.angle-types` | Types of Angles | No | No | — | MISSING |
-| geom | `math.geom.area` | Area | Yes | No | — | MISSING |
+| geom | `math.geom.area` | Area | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.area.md` | READY |
 | geom | `math.geom.area-polygon` | Area of Polygons | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.area-polygon.md` | READY |
 | geom | `math.geom.area-triangle` | Area of a Triangle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.area-triangle.md` | READY |
 | geom | `math.geom.circle` | Circle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.circle.md` | READY |
@@ -532,12 +532,12 @@ its subject KG.
 | geom | `math.geom.differential-geometry-curves` | Curves in Space | Yes | No | — | MISSING |
 | geom | `math.geom.differential-geometry-surfaces` | Differential Geometry of Surfaces | Yes | No | — | MISSING |
 | geom | `math.geom.dilation` | Dilation | No | No | — | MISSING |
-| geom | `math.geom.distance-formula` | Distance Formula | Yes | No | — | MISSING |
+| geom | `math.geom.distance-formula` | Distance Formula | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.distance-formula.md` | READY |
 | geom | `math.geom.dot-product` | Dot Product | Yes | No | — | MISSING |
 | geom | `math.geom.ellipse` | Ellipse | No | No | — | MISSING |
 | geom | `math.geom.frenet-serret` | Frenet-Serret Formulas | No | No | — | MISSING |
 | geom | `math.geom.geometric-constructions` | Geometric Constructions | No | No | — | MISSING |
-| geom | `math.geom.geometric-proof` | Geometric Proof | Yes | No | — | MISSING |
+| geom | `math.geom.geometric-proof` | Geometric Proof | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.geometric-proof.md` | READY |
 | geom | `math.geom.hyperbola` | Hyperbola | No | No | — | MISSING |
 | geom | `math.geom.length` | Length | No | Yes | `educational-brain/concepts/mathematics/math.geom.length.md` | READY |
 | geom | `math.geom.line` | Line | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.line.md` | READY |
@@ -559,7 +559,7 @@ its subject KG.
 | geom | `math.geom.pythagorean-converse` | Converse of the Pythagorean Theorem | No | No | — | MISSING |
 | geom | `math.geom.pythagorean-theorem` | Pythagorean Theorem | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.pythagorean-theorem.md` | READY |
 | geom | `math.geom.quadrants` | Quadrants | No | No | — | MISSING |
-| geom | `math.geom.quadrilateral` | Quadrilateral | Yes | No | — | MISSING |
+| geom | `math.geom.quadrilateral` | Quadrilateral | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.quadrilateral.md` | READY |
 | geom | `math.geom.ray` | Ray | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.ray.md` | READY |
 | geom | `math.geom.reflection` | Reflection | No | No | — | MISSING |
 | geom | `math.geom.regular-polygon` | Regular Polygon | No | No | — | MISSING |
@@ -578,7 +578,7 @@ its subject KG.
 | geom | `math.geom.triangle-types` | Types of Triangles | No | No | — | MISSING |
 | geom | `math.geom.vectors-2d` | Vectors in 2D | Yes | No | — | MISSING |
 | geom | `math.geom.vectors-3d` | Vectors in 3D | Yes | No | — | MISSING |
-| geom | `math.geom.volume` | Volume | Yes | No | — | MISSING |
+| geom | `math.geom.volume` | Volume | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.volume.md` | READY |
 | geom | `math.geom.x-y-coordinates` | Cartesian Coordinates | Yes | No | — | MISSING |
 | graph | `math.graph.algebraic-graph-theory` | Algebraic Graph Theory | Yes | No | — | MISSING |
 | graph | `math.graph.connectivity` | Connectivity | Yes | No | — | MISSING |

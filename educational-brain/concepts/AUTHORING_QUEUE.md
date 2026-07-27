@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1156** (= 1,775 KG concepts − 619 already `READY`, per
+Total queued: **1151** (= 1,775 KG concepts − 624 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -699,7 +699,8 @@ from source, per this file's own standing generation script.
 READY. Row numbers not renumbered, per this file's own standing note.
 | 173 | mathematics | 7 | `math.geom.triangle-angle-sum` | Triangle Angle Sum Theorem |
 | 174 | mathematics | 7 | `math.geom.triangle-centers` | Triangle Centers |
-| 175 | mathematics | 7 | `math.geom.quadrilateral` | Quadrilateral |
+**Row 175 removed 2026-07-26** — `math.geom.quadrilateral` authored
+math.geom Wave 8, moved to READY.
 | 176 | mathematics | 7 | `math.geom.regular-polygon` | Regular Polygon |
 **Row 177 removed 2026-07-26** — `math.geom.area-polygon` authored
 math.geom Wave 7, moved to READY.
@@ -745,8 +746,10 @@ Wave 10, moved to READY.
 | 217 | mathematics | 8 | `math.geom.polygon-angle-sum` | Polygon Angle Sum |
 | 218 | mathematics | 8 | `math.geom.parallelogram` | Parallelogram |
 | 219 | mathematics | 8 | `math.geom.trapezoid` | Trapezoid |
-| 220 | mathematics | 8 | `math.geom.area` | Area |
-| 221 | mathematics | 8 | `math.geom.volume` | Volume |
+**Row 220 removed 2026-07-26** — `math.geom.area` authored math.geom
+Wave 8, moved to READY.
+**Row 221 removed 2026-07-26** — `math.geom.volume` authored
+math.geom Wave 8, moved to READY.
 | 222 | mathematics | 8 | `math.geom.platonic-solids` | Platonic Solids |
 | 223 | mathematics | 8 | `math.func.function-concept` | Function |
 | 224 | mathematics | 8 | `math.prob.conditional-probability` | Conditional Probability |
@@ -793,7 +796,8 @@ moved to READY.
 **Row 267 removed 2026-07-26** — `math.found.finite-set` authored Wave 11,
 moved to READY.
 | 268 | mathematics | 9 | `math.geom.circle-area` | Area of a Circle |
-| 269 | mathematics | 9 | `math.geom.geometric-proof` | Geometric Proof |
+**Row 269 removed 2026-07-26** — `math.geom.geometric-proof` authored
+math.geom Wave 8, moved to READY.
 | 270 | mathematics | 9 | `math.geom.surface-area` | Surface Area |
 | 271 | mathematics | 9 | `math.func.domain-range` | Domain and Range |
 | 272 | mathematics | 9 | `math.func.function-notation` | Function Notation |
@@ -1266,7 +1270,8 @@ to READY.
 | 701 | mathematics | 18 | `math.geom.pythagorean-converse` | Converse of the Pythagorean Theorem |
 **Row 702 removed 2026-07-26** — `math.geom.similar-triangles` authored
 math.geom Wave 6, moved to READY.
-| 703 | mathematics | 18 | `math.geom.distance-formula` | Distance Formula |
+**Row 703 removed 2026-07-26** — `math.geom.distance-formula` authored
+math.geom Wave 8, moved to READY.
 | 704 | mathematics | 18 | `math.geom.dilation` | Dilation |
 | 705 | mathematics | 18 | `math.geom.cross-product` | Cross Product |
 | 706 | mathematics | 18 | `math.geom.differential-geometry-curves` | Curves in Space |

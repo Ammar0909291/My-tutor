@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 192 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 28 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation`, `pythagorean-triples` — `math.nt` domain otherwise PARKED at 28/36, blocked on cross-domain campaigns per ROADMAP.md §5 item 1c) + 24 `math.geom.*` entries (`point`, `line`, `line-segment`, `ray`, `plane`, `angle`, `circle`, `coordinate-plane`, `perimeter`, `length`, `angle-measurement`, `angle-pairs`, `perpendicular-lines`, `triangle`, `circle-equation`, `right-triangle`, `congruent-triangles`, `similar-triangles`, `area-triangle`, `polygon`, `pythagorean-theorem`, `parallel-lines`, `area-polygon`, `solid-3d` — `math.geom` domain IN PROGRESS, 24/69, started per ROADMAP.md §5 item 1c to resolve math.nt's own pythagorean-triples dependency, now resolved), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
+| mathematics | 908 | 197 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 28 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation`, `pythagorean-triples` — `math.nt` domain otherwise PARKED at 28/36, blocked on cross-domain campaigns per ROADMAP.md §5 item 1c) + 29 `math.geom.*` entries (`point`, `line`, `line-segment`, `ray`, `plane`, `angle`, `circle`, `coordinate-plane`, `perimeter`, `length`, `angle-measurement`, `angle-pairs`, `perpendicular-lines`, `triangle`, `circle-equation`, `right-triangle`, `congruent-triangles`, `similar-triangles`, `area-triangle`, `polygon`, `pythagorean-theorem`, `parallel-lines`, `area-polygon`, `solid-3d`, `distance-formula`, `geometric-proof`, `quadrilateral`, `area`, `volume` — `math.geom` domain IN PROGRESS, 29/69, started per ROADMAP.md §5 item 1c to resolve math.nt's own pythagorean-triples dependency, now resolved), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -3979,3 +3979,98 @@ violations across all 192 mathematics entries.
 Full validation this batch: all 6 subject KG validators PASS (0
 failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
 run, `npm run build` succeeded.
+
+### Mathematics — math.geom Wave 8 (2026-07-26, autonomous loop iteration 42)
+
+Autonomous loop iteration 42, continuing immediately after Wave 7 +
+`math.nt.pythagorean-triples`. Git resync found zero concurrent
+commits at this iteration's start.
+
+**Wave 8 candidates re-verified programmatically** against the live
+KG: 21 ready — `angle-types`/`triangle-types` (no Blueprint),
+`triangle-angle-sum` (no Blueprint), `pythagorean-converse` (no
+Blueprint), `triangle-centers` (no Blueprint), `quadrilateral` (newly
+unlocked by Wave 7's `parallel-lines`), `regular-polygon` (no
+Blueprint), `area` (newly unlocked by Wave 7's `area-polygon`),
+`circle-parts`/`circle-circumference`/`circle-theorems` (no
+Blueprint), `geometric-proof` (newly unlocked by
+`congruent-triangles` + `parallel-lines`), `volume` (newly unlocked by
+Wave 7's `solid-3d`), `x-y-coordinates`, `quadrants` (no Blueprint),
+`distance-formula` (newly unlocked by Wave 7's
+`pythagorean-theorem`), `midpoint-formula` (no Blueprint), `slope`,
+`transformations`, `vectors-2d`, `geometric-constructions` (no
+Blueprint). Authored the 5 Blueprint-grounded concepts that close out
+the triangle/proof/area/volume threads this program's recent waves
+opened — `distance-formula`, `geometric-proof`, `quadrilateral`,
+`area`, `volume` — deferring the coordinate-plane-family
+Blueprint-grounded concepts (`x-y-coordinates`, `slope`,
+`transformations`, `vectors-2d`) and all no-Blueprint concepts to
+future waves.
+
+Authored all 5, each reused by reference:
+
+- `math.geom.distance-formula` (requires
+  `math.geom.pythagorean-theorem`, `math.geom.coordinate-plane`;
+  unlocks `math.geom.circle-equation`, `math.geom.midpoint-formula`;
+  cross-link `math.linalg.norm`, Blueprint exists, no EB entry, P76
+  cross-link probe) — MC-1
+  COORDINATE-DIFFERENCES-ADDED-WITHOUT-SQUARING (Foundational, Type 1
+  overgeneralization, one-dimensional distance's simple subtraction
+  over-applied to two dimensions), MC-2
+  POINT-ORDER-ASSUMED-TO-AFFECT-DISTANCE (Foundational, Type 6 analogy
+  overextension, `math.geom.coordinate-plane`'s own order-matters rule
+  over-applied where it doesn't), MC-3
+  VERTICAL-OR-HORIZONTAL-SEGMENTS-ASSUMED-TO-NEED-A-SEPARATE-FORMULA
+  (Moderate, Type 4 notation-induced, the two-term formula's visual
+  appearance obscuring that a term can silently vanish).
+- `math.geom.geometric-proof` (requires `math.found.proof`,
+  `math.geom.congruent-triangles`, `math.geom.parallel-lines`; no
+  unlocks; no cross-links, independence mode) — MC-1
+  JUSTIFICATION-COLUMN-ASSUMED-FORMALITY (Foundational, Type 5
+  instruction-induced, intuitive early examples training "obvious" as
+  sufficient justification), MC-2
+  PROOF-ASSUMED-TO-END-AT-MAIN-CONCLUSION (High, Type 5
+  instruction-induced, introductory exercises stopping at the
+  congruence conclusion without modeling CPCTC-chaining), MC-3
+  PARAGRAPH-PROOF-ASSUMED-LESS-RIGOROUS (Moderate, Type 3 language
+  contamination, tabular appearance conflated with rigor itself).
+- `math.geom.quadrilateral` (requires `math.geom.polygon`,
+  `math.geom.parallel-lines`; no unlocks; no cross-links, independence
+  mode) — MC-1 QUADRILATERAL-CLASSIFICATION-ASSUMED-VISUAL-IMPRESSION
+  (Foundational, Type 2 perceptual intuition, visual similarity as the
+  most available classification cue), MC-2
+  CATEGORIES-ASSUMED-MUTUALLY-EXCLUSIVE (High, Type 1
+  overgeneralization, everyday one-label-at-a-time naming
+  over-generalized to mutual exclusivity), MC-3
+  CONTAINMENT-ASSUMED-ARBITRARY-CONVENTION (Moderate, Type 3 language
+  contamination, ordinary-sounding vocabulary obscuring provable
+  containments).
+- `math.geom.area` (requires `math.geom.area-polygon`; unlocks
+  `math.geom.surface-area`, `math.calc.integral-area`; cross-link
+  `math.calc.integral-area`, unauthored, independence mode) — MC-1
+  AREA-PERIMETER-CONFLATED (Foundational, Type 3 language
+  contamination, everyday "bigger" blurring two independent measures),
+  MC-2 LINEAR-SCALING-OF-AREA (Foundational, Type 1
+  overgeneralization, single-length scaling over-applied directly to
+  area), MC-3 CIRCLE-AREA-AS-ISOLATED-FORMULA (Moderate, Type 4
+  notation-induced, π's special-constant framing obscuring the
+  polygon-limit connection).
+- `math.geom.volume` (requires `math.geom.solid-3d`; no unlocks;
+  cross-link `math.calc.volume-revolution`, unauthored, independence
+  mode) — MC-1 VOLUME-ASSUMED-SINGLE-UNIVERSAL-FORMULA (Foundational,
+  Type 1 overgeneralization, `math.geom.area`'s own unifying framing
+  over-extended to volume despite genuinely different formula
+  structures), MC-2 ONE-THIRD-FACTOR-ASSUMED-ARBITRARY (High, Type 4
+  notation-induced, a bare fraction carrying no visible geometric
+  cause), MC-3 STANDARD-FORMULAS-ASSUMED-UNDERIVABLE (Moderate, Type 5
+  instruction-induced, formulas drilled as given facts without the
+  cross-sectional-integration derivation).
+
+`math.geom` now **29/69**. No other domain touched. All five tracking
+files updated in this same commit; re-validated 0 duplicates, 0
+orphans, 0 Quality Gate 3 violations across all 197 mathematics
+entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+2213 passed / 1 skipped (114 files), `npm run build` succeeded.
