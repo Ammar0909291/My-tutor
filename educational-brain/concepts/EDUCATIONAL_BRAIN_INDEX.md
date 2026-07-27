@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 169 READY)
+## mathematics (908 concepts, 172 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -542,14 +542,14 @@ its subject KG.
 | geom | `math.geom.length` | Length | No | No | — | MISSING |
 | geom | `math.geom.line` | Line | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.line.md` | READY |
 | geom | `math.geom.line-equation` | Equations of Lines | Yes | No | — | MISSING |
-| geom | `math.geom.line-segment` | Line Segment | Yes | No | — | MISSING |
+| geom | `math.geom.line-segment` | Line Segment | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.line-segment.md` | READY |
 | geom | `math.geom.midpoint-formula` | Midpoint Formula | No | No | — | MISSING |
 | geom | `math.geom.parabola` | Parabola | No | No | — | MISSING |
 | geom | `math.geom.parallel-lines` | Parallel Lines | Yes | No | — | MISSING |
 | geom | `math.geom.parallelogram` | Parallelogram | No | No | — | MISSING |
 | geom | `math.geom.perimeter` | Perimeter | No | No | — | MISSING |
 | geom | `math.geom.perpendicular-lines` | Perpendicular Lines | Yes | No | — | MISSING |
-| geom | `math.geom.plane` | Plane | Yes | No | — | MISSING |
+| geom | `math.geom.plane` | Plane | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.plane.md` | READY |
 | geom | `math.geom.platonic-solids` | Platonic Solids | No | No | — | MISSING |
 | geom | `math.geom.point` | Point | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.point.md` | READY |
 | geom | `math.geom.polar-coordinates` | Polar Coordinates | Yes | No | — | MISSING |
@@ -560,7 +560,7 @@ its subject KG.
 | geom | `math.geom.pythagorean-theorem` | Pythagorean Theorem | Yes | No | — | MISSING |
 | geom | `math.geom.quadrants` | Quadrants | No | No | — | MISSING |
 | geom | `math.geom.quadrilateral` | Quadrilateral | Yes | No | — | MISSING |
-| geom | `math.geom.ray` | Ray | Yes | No | — | MISSING |
+| geom | `math.geom.ray` | Ray | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.ray.md` | READY |
 | geom | `math.geom.reflection` | Reflection | No | No | — | MISSING |
 | geom | `math.geom.regular-polygon` | Regular Polygon | No | No | — | MISSING |
 | geom | `math.geom.right-triangle` | Right Triangle | Yes | No | — | MISSING |

@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 169 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 27 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation` — `math.nt` domain PARKED at 27/36, blocked on cross-domain campaigns per ROADMAP.md §5 item 1c) + 2 `math.geom.*` entries (`point`, `line` — `math.geom` domain IN PROGRESS, 2/69, started per ROADMAP.md §5 item 1c to resolve math.nt's own pythagorean-triples dependency along the way), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
+| mathematics | 908 | 172 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 27 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation` — `math.nt` domain PARKED at 27/36, blocked on cross-domain campaigns per ROADMAP.md §5 item 1c) + 5 `math.geom.*` entries (`point`, `line`, `line-segment`, `ray`, `plane` — `math.geom` domain IN PROGRESS, 5/69, started per ROADMAP.md §5 item 1c to resolve math.nt's own pythagorean-triples dependency along the way), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -3515,3 +3515,49 @@ entries.
 Full validation this batch: all 6 subject KG validators PASS (0
 failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
 2213 passed / 1 skipped (114 files), `npm run build` succeeded.
+
+### Mathematics — math.geom Wave 3 (2026-07-26, autonomous loop iteration 36)
+
+Autonomous loop iteration 36, continuing immediately after Wave 2. Git
+resync found zero concurrent commits at this iteration's start.
+
+**Wave 3 candidates re-verified programmatically** against the live
+KG: 3 ready, all unlocked by `math.geom.line` and all Blueprint-
+grounded — `math.geom.line-segment`, `math.geom.ray`,
+`math.geom.plane`. No split needed (small, uniform load, all
+Blueprint-backed).
+
+Authored all 3, each reused by reference:
+
+- `math.geom.line-segment` (requires `math.geom.line`; unlocks
+  `math.geom.length`) — MC-1 SEGMENT-IS-LINE (FOUNDATIONAL, Type 3
+  language contamination, from everyday speech using "line" to mean a
+  finite segment), MC-2 SEGMENT-DIRECTED (Type 6 analogy
+  overextension, over-applying vector directedness to symmetric
+  segments), MC-3 SEGMENT-NEEDS-MEASUREMENT (Type 5
+  instruction-induced).
+- `math.geom.ray` (requires `math.geom.line`; unlocks
+  `math.geom.angle`) — MC-1 RAY-HAS-TWO-ENDPOINTS (FOUNDATIONAL, Type
+  4 notation-induced, from the →AB notation visually naming two
+  points), MC-2 RAY-DIRECTION-INDETERMINATE (Type 6 analogy
+  overextension, over-applying segment symmetry to directed rays),
+  MC-3 RAY-IS-HALF-SEGMENT (Type 3 language contamination, misreading
+  "half-line" as halving a finite object).
+- `math.geom.plane` (requires `math.geom.line`; unlocks
+  `math.geom.polygon`, `math.geom.coordinate-plane`; cross-link
+  `math.geom.coordinate-plane`, Blueprint exists, no EB entry, P76
+  cross-link probe) — MC-1 PLANE-HAS-BOUNDARY (FOUNDATIONAL, Type 2
+  perceptual intuition, from every physical plane-model having visible
+  edges), MC-2 PLANE-FROM-TWO-POINTS (Type 1 overgeneralization,
+  over-applying the two-points-determine-a-line rule), MC-3
+  ONE-PLANE-PER-LINE (Type 1 overgeneralization, conflating plane
+  uniqueness-from-three-points with per-line exclusivity).
+
+`math.geom` now **5/69**. No other domain touched. All five tracking
+files updated in this same commit; re-validated 0 duplicates, 0
+orphans, 0 Quality Gate 3 violations across all 172 mathematics
+entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+run, `npm run build` succeeded.

@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1179** (= 1,775 KG concepts − 596 already `READY`, per
+Total queued: **1176** (= 1,775 KG concepts − 599 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -533,9 +533,9 @@ Wave 2, moved to READY.
 | 22 | computer_science | 2 | `cs.found.os-concepts` | Operating System Fundamentals |
 | 23 | computer_science | 2 | `cs.algo.algorithms` | Algorithms |
 | 24 | computer_science | 2 | `cs.net.networking-basics` | Networking Basics |
-| 25 | mathematics | 3 | `math.geom.line-segment` | Line Segment |
-| 26 | mathematics | 3 | `math.geom.ray` | Ray |
-| 27 | mathematics | 3 | `math.geom.plane` | Plane |
+**Rows 25-27 removed 2026-07-26** — `math.geom.line-segment`,
+`math.geom.ray`, `math.geom.plane` authored math.geom Wave 3, moved to
+READY.
 | 28 | english | 3 | `eng.phonetics.consonant-sounds` | Consonant Phoneme Classification |
 | 29 | english | 3 | `eng.phonetics.vowel-sounds` | Vowel Phoneme Classification |
 | 30 | biology | 3 | `bio.found.five-kingdom` | Five Kingdom Classification |
