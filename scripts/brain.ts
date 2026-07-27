@@ -13,6 +13,10 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { check, formatReport, fmt, isFormatted } from '../src/lib/cekr/cli'
 import { importKg, importAssets, coverage, formatCoverage } from '../src/lib/cekr/import'
+import {
+  buildIndex, entityCard, findReferences, impactOf, neighborhood, resolveId,
+  formatCard, formatReferences, formatImpact, formatNeighborhood,
+} from '../src/lib/cekr/query'
 import type { CekrRecord } from '../src/lib/cekr/types'
 import { buildFromCekr, serializeLock } from '../src/lib/brain-compiler'
 
@@ -45,7 +49,10 @@ function importAll(only?: string): { records: CekrRecord[]; diagnostics: Array<{
 }
 
 function usage(): never {
-  console.error('usage: brain check <files...> | brain fmt [--check] <files...> | brain coverage | brain build <subject> [--include-draft] [--emit]')
+  console.error(
+    'usage: brain check <files...> | brain fmt [--check] <files...> | brain coverage\n' +
+    '     | brain build <subject> [--include-draft] [--emit]\n' +
+    '     | brain show <id> | brain refs <id> | brain impact <id> | brain near <id> [radius]')
   process.exit(2)
 }
 
@@ -104,6 +111,27 @@ function main(): void {
       console.log(`emitted brain/${subject}.pack.json and brain/${subject}.brain.lock`)
     }
     process.exit(r.ok ? 0 : 1)
+  }
+
+  // C5 — the language service, on the CLI. Same pure queries a future LSP
+  // or web IDE will call; this is the consumer that exists today.
+  if (command === 'show' || command === 'refs' || command === 'impact' || command === 'near') {
+    const id = rest[0]
+    if (!id) usage()
+    const index = buildIndex(importAll().records)
+    // Authors type KG slugs; entity ids are cekr:<Kind>/<slug>. Resolve, and
+    // say so plainly when the slug is unknown or ambiguous rather than
+    // answering a question about an entity that does not exist.
+    const resolved = resolveId(index, id)
+    if (!resolved) {
+      console.log(`unknown or ambiguous id: ${id}`)
+      process.exit(1)
+    }
+    if (command === 'show') console.log(formatCard(entityCard(index, resolved), resolved))
+    else if (command === 'refs') console.log(formatReferences(findReferences(index, resolved), resolved))
+    else if (command === 'impact') console.log(formatImpact(impactOf(index, resolved)))
+    else console.log(formatNeighborhood(neighborhood(index, resolved, Number(rest[1] ?? 1) || 1)))
+    process.exit(0)
   }
 
   if (command === 'import' || command === 'coverage') {
