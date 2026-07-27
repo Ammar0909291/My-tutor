@@ -2192,10 +2192,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           : memoryFallbackReason === 'Explanation Memory lookup error' ? 'lookup_error'
           : memoryFallbackReason === 'Brain decision' ? 'brain_decision'
           : 'no_asset'
-        const routed = await routeAI(
-          [...historyMessages, { role: 'user', content: message }],
-          systemPrompt,
-          country,
+        // K6 — Degraded deterministic mode (RS P-3). When EVERY provider in
+        // the failover chain has thrown, the turn is served by a K5 template
+        // instead of an HTTP 500: the learner gets a teaching-shaped,
+        // verifier-clean-by-construction turn, banner-free ("learner not
+        // told 'AI down'"). AIBudgetExceededError still propagates — budget
+        // exhaustion is load management with a deliberate 429, not an outage.
+        let routed: { text: string; provider: string; finishReason: string | null }
+        try {
+          routed = await routeAI(
+            [...historyMessages, { role: 'user', content: message }],
+            systemPrompt,
+            country,
           // Was 1024. gpt-oss-20b is a reasoning model — it spends output
           // tokens on internal reasoning BEFORE the final answer, so a tight
           // completion budget can be exhausted mid-reasoning, yielding an
@@ -2207,8 +2215,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // real headroom for reasoning + this app's long teaching replies.
           2048,
           teachingLang,
-          { userId, subject: learnSession.subject.slug },
-        )
+            { userId, subject: learnSession.subject.slug },
+          )
+        } catch (aiError) {
+          if (aiError instanceof AIBudgetExceededError) throw aiError
+          console.error('[learn/chat] all providers down — serving degraded template (RS P-3):',
+            aiError instanceof Error ? aiError.message : String(aiError))
+          captureError(aiError, { route: 'api/learn/chat', tags: { stage: 'ai-degraded' } })
+          const { degradedTurn } = await import('@/lib/eos-runtime')
+          const degraded = degradedTurn({ register: contentRegister, learnerText: message })
+          routed = { text: degraded.text, provider: degraded.provider, finishReason: degraded.finishReason }
+        }
         text = routed.text
         provider = routed.provider
         finishReason = routed.finishReason
