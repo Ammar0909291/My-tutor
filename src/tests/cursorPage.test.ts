@@ -7,7 +7,23 @@
  * repeats them forever (`<=`). Both are silent.
  */
 import { describe, it, expect } from 'vitest'
-import { olderThan, isOlderThan, type PageCursor } from '@/lib/db/cursorPage'
+import { olderThan, type PageCursor } from '@/lib/db/cursorPage'
+
+/**
+ * The in-memory twin of `olderThan`, kept HERE rather than in the module.
+ *
+ * It is a second encoding of the same ordering law, and production never
+ * executed it — shipping it was duplicated logic with no caller. It stays as
+ * test scaffolding because a keyset walk cannot be simulated without a
+ * comparator; the test above pins `olderThan`'s exact clause shape, which is
+ * what ties the two encodings together.
+ */
+function isOlderThan(row: PageCursor, cursor: PageCursor): boolean {
+  const rowMs = row.createdAt.getTime()
+  const curMs = cursor.createdAt.getTime()
+  if (rowMs !== curMs) return rowMs < curMs
+  return row.id < cursor.id
+}
 
 const at = (ms: number, id: string): PageCursor => ({ createdAt: new Date(ms), id })
 

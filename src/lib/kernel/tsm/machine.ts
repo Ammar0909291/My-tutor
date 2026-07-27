@@ -6,11 +6,20 @@
  * step (floor DEMONSTRATE once demonstrated); recovery preempts and exits
  * one below entry.
  *
- * K4 v1 does NOT swap conversationState.ts's per-concept advancement
- * counters — the runtime still runs the Phase-C/G machine as the shipping
- * decision-maker. This module runs alongside behind ENABLE_POLICY_PACKS
- * and its outputs feed the Policy Engine. Kernel-authoritative behaviour
- * lands when the flag flips on in production.
+ * STATUS, corrected by the final audit. This module has NO callers — not in
+ * production, not behind a flag, not in tests. An earlier version of this
+ * header claimed it "runs alongside behind ENABLE_POLICY_PACKS and its
+ * outputs feed the Policy Engine"; that was never true, and the policy path
+ * that DID ship (eos-runtime/policyGate) reads the legacy phase verbatim
+ * because BASE_PACK's guards accept both vocabularies.
+ *
+ * It is retained rather than deleted because it is the declared landing pad
+ * for the masterplan's K3 item "conversationState.ts → kernel/tsm.ts (with
+ * state migration)" — the work that unifies the 6-phase and 10-state
+ * ladders. Until that migration runs, treat this as a specification of the
+ * target machine, not as live code.
+ *
+ * `./phases.ts` beside it IS live: basePack imports getStageCeiling from it.
  */
 import { legacyToCanonical, PHASE_ORDER_10, type CanonicalPhase } from './phases'
 

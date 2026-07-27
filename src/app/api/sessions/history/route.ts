@@ -67,9 +67,17 @@ export async function GET(req: Request) {
   // already holds. Absent ⇒ the newest page, byte-identical to the previous
   // behaviour, so existing clients are unaffected.
   const before = searchParams.get('before')
+  // Scoped to the SUBJECT as well as the user. Without the subject clause a
+  // cursor from one subject resolved against another and produced a page of
+  // subject B's messages older than subject A's timestamp — a silently wrong
+  // page rather than an error. Not a leak (the user clause always held), but
+  // wrong is wrong.
   const cursorRow = before
     ? await prisma.message.findFirst({
-        where: { id: before, session: { userId: session.user.id } },
+        where: {
+          id: before,
+          session: { userId: session.user.id, subject: { slug: subjectSlug } },
+        },
         select: { createdAt: true, id: true },
       })
     : null
