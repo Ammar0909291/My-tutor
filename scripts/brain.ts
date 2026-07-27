@@ -52,11 +52,12 @@ function usage(): never {
   console.error(
     'usage: brain check <files...> | brain fmt [--check] <files...> | brain coverage\n' +
     '     | brain build <subject> [--include-draft] [--emit]\n' +
-    '     | brain show <id> | brain refs <id> | brain impact <id> | brain near <id> [radius]')
+    '     | brain show <id> | brain refs <id> | brain impact <id> | brain near <id> [radius]\n' +
+    '     | brain replay <persona> [--seed n] [--turns n] [--engine] [--rules]')
   process.exit(2)
 }
 
-function main(): void {
+async function main(): Promise<void> {
   const [command, ...rest] = process.argv.slice(2)
   if (!command) usage()
 
@@ -113,6 +114,40 @@ function main(): void {
     process.exit(r.ok ? 0 : 1)
   }
 
+  // C6 — replay theater. Runs the REAL kernel stages via runEpisode and
+  // renders what they decided; nothing here decides anything itself.
+  if (command === 'replay') {
+    const personaId = rest[0]
+    if (!personaId) usage()
+    const { PERSONAS, personaById } = await import('../src/lib/kernel/simulation/personas')
+    const persona = personaById(personaId)
+    if (!persona) {
+      console.error(`unknown persona: ${personaId}`)
+      console.error(`available: ${PERSONAS.map((p) => p.id).join(', ')}`)
+      process.exit(2)
+    }
+    const flag = (name: string, fallback: number): number => {
+      const i = rest.indexOf(`--${name}`)
+      return i >= 0 ? Number(rest[i + 1]) || fallback : fallback
+    }
+    const engine = rest.includes('--engine')
+    const { runEpisode } = await import('../src/lib/kernel/simulation/run')
+    const { formatReplay, stageJumps } = await import('../src/lib/kernel/simulation/replay')
+    const result = await runEpisode({
+      persona, seed: flag('seed', 1), turns: flag('turns', 12),
+      // The engine transcript needs the shadow run; asking for --engine
+      // without it would print an empty theatre.
+      engineShadow: engine,
+    })
+    console.log(formatReplay(result, { engine, rules: rest.includes('--rules') }))
+    const jumps = stageJumps((engine ? result.engine?.turns : result.turns) ?? [])
+    console.log(jumps.length === 0
+      ? '  QUESTION-STAGE: no jumps'
+      : `  QUESTION-STAGE: ${jumps.length} phase skip(s) — ${jumps.map((j) => `t${j.turnIndex} ${j.from}→${j.to}`).join(', ')}`)
+    const violations = (engine ? result.engine?.violations : result.violations) ?? []
+    process.exit(violations.length === 0 && jumps.length === 0 ? 0 : 1)
+  }
+
   // C5 — the language service, on the CLI. Same pure queries a future LSP
   // or web IDE will call; this is the consumer that exists today.
   if (command === 'show' || command === 'refs' || command === 'impact' || command === 'near') {
@@ -153,4 +188,7 @@ function main(): void {
   usage()
 }
 
-main()
+main().catch((err) => {
+  console.error(err instanceof Error ? err.message : String(err))
+  process.exit(1)
+})
