@@ -53,14 +53,18 @@ rather than hand-edit when entries change.
   migration debt (76 = 71 + 5), not introduced this batch — rewriting
   another session's freshly authored files remains out of scope.
 
-## Aggregate summary (564 entries)
+## Aggregate summary (569 entries)
 
-Adds `math.geom` Wave 6 (5 concepts, this batch, 2026-07-26, autonomous
-loop iteration 40) on top of the prior 559-entry state (math.geom Wave
-5 completion). All 5 new entries (`right-triangle`,
-`congruent-triangles`, `similar-triangles`, `area-triangle`, `polygon`)
-have an existing Blueprint, reused by reference. All numbers below
-were recomputed fresh by scanning every live file in
+Adds `math.geom` Wave 7 (4 concepts, this batch, 2026-07-26, autonomous
+loop iteration 41) plus `math.nt.pythagorean-triples` (a small bounded
+cross-domain step, unblocked by this wave's authoring of
+`math.geom.pythagorean-theorem`) on top of the prior 564-entry state
+(math.geom Wave 6 completion). The 4 new `math.geom` entries
+(`pythagorean-theorem`, `parallel-lines`, `area-polygon`, `solid-3d`)
+have an existing Blueprint, reused by reference; `math.nt.
+pythagorean-triples` has no Blueprint and was authored via the
+birth-taxonomy diagnostic procedure. All numbers below were
+recomputed fresh by scanning every live file in
 `educational-brain/concepts/{subject}/` — none hand-estimated. Note:
 this ledger's chemistry row count (136) understates chemistry's true
 186/186-complete state (CLAUDE.md) — a pre-existing gap outside this
@@ -68,16 +72,16 @@ batch's mathematics-only scope, not corrected here.
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 346 / 564 | see methodology note above — 23 `math.found` (`proper-subset`, `set-equality`, `union`, `intersection`, `set-difference`, `complement`, `venn-diagram`, `direct-proof`, `proof-by-contradiction`, `proof-by-contrapositive`, `proof-by-cases`, `existence-proof`, `writing-mathematics`, `theorem`, `conjecture`, `corollary`, `hasse-diagram`, `lemma`, `uniqueness-proof`, `finite-set`, `countable-set`, `strong-induction`, `uncountable-set`) + 28 `math.arith` (`subitizing`, `unit-rate`, `expanded-form`, `number-base`, `ordering`, `direct-variation`, `inverse-variation`, `carrying`, `mental-addition`, `decimal-operations`, `terminating-decimals`, `repeating-decimals`, `column-addition`, `borrowing`, `multiplication-table`, `percentage-calculations`, `estimation`, `long-multiplication`, `mental-multiplication`, `divisor-dividend`, `percentage-change`, `cube-numbers`, `scientific-notation`, `long-division`, `mental-arithmetic`, `irrational-roots`, `fraction-simplification`, `fraction-addition`) + 12 `math.nt` (`lcm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `bezout-identity`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation`) + 2 `math.geom` (`perimeter`, `length`) — none of these 65 have a Blueprint — + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
-| Educational Brain | 564 / 564 | trivially true (this is the entry list) |
-| Mental Model | 564 / 564 | |
-| Misconceptions | 564 / 564 | |
-| Analogies | 564 / 564 | |
-| Recovery Strategy | 564 / 564 | |
-| Assessment Signals | 564 / 564 | |
-| Tutor Actions | 494 / 564 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
-| Cross-links | 494 / 564 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
-| Version History | 494 / 564 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
+| Blueprint | 350 / 569 | see methodology note above — 23 `math.found` (`proper-subset`, `set-equality`, `union`, `intersection`, `set-difference`, `complement`, `venn-diagram`, `direct-proof`, `proof-by-contradiction`, `proof-by-contrapositive`, `proof-by-cases`, `existence-proof`, `writing-mathematics`, `theorem`, `conjecture`, `corollary`, `hasse-diagram`, `lemma`, `uniqueness-proof`, `finite-set`, `countable-set`, `strong-induction`, `uncountable-set`) + 28 `math.arith` (`subitizing`, `unit-rate`, `expanded-form`, `number-base`, `ordering`, `direct-variation`, `inverse-variation`, `carrying`, `mental-addition`, `decimal-operations`, `terminating-decimals`, `repeating-decimals`, `column-addition`, `borrowing`, `multiplication-table`, `percentage-calculations`, `estimation`, `long-multiplication`, `mental-multiplication`, `divisor-dividend`, `percentage-change`, `cube-numbers`, `scientific-notation`, `long-division`, `mental-arithmetic`, `irrational-roots`, `fraction-simplification`, `fraction-addition`) + 13 `math.nt` (`lcm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `bezout-identity`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation`, `pythagorean-triples`) + 2 `math.geom` (`perimeter`, `length`) — none of these 66 have a Blueprint — + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
+| Educational Brain | 569 / 569 | trivially true (this is the entry list) |
+| Mental Model | 569 / 569 | |
+| Misconceptions | 569 / 569 | |
+| Analogies | 569 / 569 | |
+| Recovery Strategy | 569 / 569 | |
+| Assessment Signals | 569 / 569 | |
+| Tutor Actions | 499 / 569 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
+| Cross-links | 499 / 569 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
+| Version History | 499 / 569 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
 
 ## Per-concept ledger
 
@@ -464,6 +468,7 @@ batch's mathematics-only scope, not corrected here.
 | `math.geom.angle` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.angle-measurement` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.angle-pairs` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.area-polygon` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.area-triangle` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.circle` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.circle-equation` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -472,14 +477,17 @@ batch's mathematics-only scope, not corrected here.
 | `math.geom.length` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.line` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.line-segment` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.parallel-lines` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.perimeter` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.perpendicular-lines` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.plane` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.point` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.polygon` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.pythagorean-theorem` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.ray` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.right-triangle` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.similar-triangles` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.solid-3d` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.triangle` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.bezout-identity` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.chinese-remainder-theorem` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -505,6 +513,7 @@ batch's mathematics-only scope, not corrected here.
 | `math.nt.primality-testing` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.prime-factorization` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.prime-number` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.nt.pythagorean-triples` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.residue-classes` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.rsa-basics` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.nt.sieve-of-eratosthenes` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

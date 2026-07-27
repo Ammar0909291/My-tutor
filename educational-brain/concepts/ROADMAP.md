@@ -13,16 +13,16 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **614** |
-| Remaining | **1,161** |
-| Completion percentage | **34.59%** |
+| Concepts with an Educational Brain entry | **619** |
+| Remaining | **1,156** |
+| Completion percentage | **34.87%** |
 
 *(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
 with an Educational Brain entry" rows had accumulated from prior sessions
 without being reconciled. Recomputed from this same file's §2 Subject
-progress table as currently stated per subject: 187 mathematics + 238
+progress table as currently stated per subject: 192 mathematics + 238
 physics + 3 english + 186 chemistry + 0 biology + 0 computer_science =
-614. Only the mathematics figure was independently re-verified by this
+619. Only the mathematics figure was independently re-verified by this
 batch by direct file count; the other subjects' figures are taken as
 already-recorded in §2 below, not re-audited by this batch, per this
 program's "mathematics only" scope this turn.)*
@@ -33,7 +33,7 @@ program's "mathematics only" scope this turn.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 187 | 20.59% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 192 | 21.15% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
@@ -1093,7 +1093,32 @@ record; the active default has moved to item 1b.**
     coordinate-plane-family Blueprint-grounded concepts
     (`x-y-coordinates`, `slope`, `transformations`, `vectors-2d`) and
     all no-Blueprint concepts to future waves. Raised `math.geom` to
-    **20/69**.
+    **20/69**. Wave 7 (2026-07-26, iteration 41) re-verified fresh: 18
+    ready — `angle-types` (no Blueprint), `parallel-lines`,
+    `triangle-types` (no Blueprint), `math.geom.pythagorean-theorem`
+    (unlocked by `right-triangle`), `triangle-centers` (no Blueprint),
+    `regular-polygon` (no Blueprint), `area-polygon` (unlocked by
+    `area-triangle`), `circle-parts`/`circle-circumference`/
+    `circle-theorems` (no Blueprint), `solid-3d` (unlocked by
+    `polygon`), `x-y-coordinates`, `quadrants` (no Blueprint),
+    `midpoint-formula` (no Blueprint), `slope`, `transformations`,
+    `vectors-2d`, `geometric-constructions` (no Blueprint). Authored
+    the 4 Blueprint-grounded concepts prioritized for reaching
+    `math.geom.pythagorean-theorem` — `pythagorean-theorem`,
+    `parallel-lines`, `area-polygon`, `solid-3d` — deferring the
+    coordinate-plane-family Blueprint-grounded concepts and all
+    no-Blueprint concepts to future waves. Raised `math.geom` to
+    **24/69**. With `pythagorean-theorem` now authored,
+    `math.nt.pythagorean-triples`'s own `requires`
+    (`math.nt.general-diophantine`, already authored;
+    `math.geom.pythagorean-theorem`, authored this same wave) became
+    fully satisfied — authored it as a small bounded cross-domain step
+    (no Blueprint, misconceptions via the birth-taxonomy diagnostic
+    procedure), closing `math.nt` from its long-PARKED 27/36 to
+    **28/36**. `math.nt`'s remaining 8 concepts are still the deep
+    analytic/algebraic-number-theory chain identified at the Batch 44
+    pivot — `math.nt` remains otherwise parked, not further pursued
+    this wave.
 1. **(Historical, satisfied) `math.found` Wave 7**: the set of
    `math.found` nodes whose prerequisites were all READY after Wave 6.
 2. **(Historical, satisfied) `math.found` Waves 8-16 (52 remaining

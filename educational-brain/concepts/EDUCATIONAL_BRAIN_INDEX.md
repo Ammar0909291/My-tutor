@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 187 READY)
+## mathematics (908 concepts, 192 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -516,7 +516,7 @@ its subject KG.
 | geom | `math.geom.angle-pairs` | Angle Pairs | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.angle-pairs.md` | READY |
 | geom | `math.geom.angle-types` | Types of Angles | No | No | — | MISSING |
 | geom | `math.geom.area` | Area | Yes | No | — | MISSING |
-| geom | `math.geom.area-polygon` | Area of Polygons | Yes | No | — | MISSING |
+| geom | `math.geom.area-polygon` | Area of Polygons | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.area-polygon.md` | READY |
 | geom | `math.geom.area-triangle` | Area of a Triangle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.area-triangle.md` | READY |
 | geom | `math.geom.circle` | Circle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.circle.md` | READY |
 | geom | `math.geom.circle-area` | Area of a Circle | No | No | — | MISSING |
@@ -545,7 +545,7 @@ its subject KG.
 | geom | `math.geom.line-segment` | Line Segment | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.line-segment.md` | READY |
 | geom | `math.geom.midpoint-formula` | Midpoint Formula | No | No | — | MISSING |
 | geom | `math.geom.parabola` | Parabola | No | No | — | MISSING |
-| geom | `math.geom.parallel-lines` | Parallel Lines | Yes | No | — | MISSING |
+| geom | `math.geom.parallel-lines` | Parallel Lines | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.parallel-lines.md` | READY |
 | geom | `math.geom.parallelogram` | Parallelogram | No | No | — | MISSING |
 | geom | `math.geom.perimeter` | Perimeter | No | Yes | `educational-brain/concepts/mathematics/math.geom.perimeter.md` | READY |
 | geom | `math.geom.perpendicular-lines` | Perpendicular Lines | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.perpendicular-lines.md` | READY |
@@ -557,7 +557,7 @@ its subject KG.
 | geom | `math.geom.polygon` | Polygon | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.polygon.md` | READY |
 | geom | `math.geom.polygon-angle-sum` | Polygon Angle Sum | No | No | — | MISSING |
 | geom | `math.geom.pythagorean-converse` | Converse of the Pythagorean Theorem | No | No | — | MISSING |
-| geom | `math.geom.pythagorean-theorem` | Pythagorean Theorem | Yes | No | — | MISSING |
+| geom | `math.geom.pythagorean-theorem` | Pythagorean Theorem | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.pythagorean-theorem.md` | READY |
 | geom | `math.geom.quadrants` | Quadrants | No | No | — | MISSING |
 | geom | `math.geom.quadrilateral` | Quadrilateral | Yes | No | — | MISSING |
 | geom | `math.geom.ray` | Ray | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.ray.md` | READY |
@@ -567,7 +567,7 @@ its subject KG.
 | geom | `math.geom.rotation` | Rotation | No | No | — | MISSING |
 | geom | `math.geom.similar-triangles` | Similar Triangles | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.similar-triangles.md` | READY |
 | geom | `math.geom.slope` | Slope | Yes | No | — | MISSING |
-| geom | `math.geom.solid-3d` | Three-Dimensional Solids | Yes | No | — | MISSING |
+| geom | `math.geom.solid-3d` | Three-Dimensional Solids | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.solid-3d.md` | READY |
 | geom | `math.geom.surface-area` | Surface Area | Yes | No | — | MISSING |
 | geom | `math.geom.transformations` | Geometric Transformations | Yes | No | — | MISSING |
 | geom | `math.geom.translation` | Translation | No | No | — | MISSING |
@@ -701,7 +701,7 @@ its subject KG.
 | nt | `math.nt.prime-factorization` | Prime Factorization | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.prime-factorization.md` | READY |
 | nt | `math.nt.prime-number` | Prime Number | Yes | Yes | `educational-brain/concepts/mathematics/math.nt.prime-number.md` | READY |
 | nt | `math.nt.prime-number-theorem` | Prime Number Theorem | Yes | No | — | MISSING |
-| nt | `math.nt.pythagorean-triples` | Pythagorean Triples | No | No | — | MISSING |
+| nt | `math.nt.pythagorean-triples` | Pythagorean Triples | No | Yes | `educational-brain/concepts/mathematics/math.nt.pythagorean-triples.md` | READY |
 | nt | `math.nt.residue-classes` | Residue Classes | No | Yes | `educational-brain/concepts/mathematics/math.nt.residue-classes.md` | READY |
 | nt | `math.nt.riemann-hypothesis` | Riemann Hypothesis | Yes | No | — | MISSING |
 | nt | `math.nt.rsa-basics` | RSA Cryptography (Number-Theoretic Basis) | No | Yes | `educational-brain/concepts/mathematics/math.nt.rsa-basics.md` | READY |

@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1161** (= 1,775 KG concepts − 614 already `READY`, per
+Total queued: **1156** (= 1,775 KG concepts − 619 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -632,7 +632,8 @@ Wave 5, moved to READY.
 | 113 | computer_science | 5 | `cs.net.dns-dhcp` | DNS and DHCP |
 | 114 | computer_science | 5 | `cs.net.routing-congestion` | Routing and Congestion Control |
 | 115 | computer_science | 5 | `cs.theory.regular-expressions` | Regular Expressions and Regular Languages |
-| 116 | mathematics | 6 | `math.geom.parallel-lines` | Parallel Lines |
+**Row 116 removed 2026-07-26** — `math.geom.parallel-lines` authored
+math.geom Wave 7, moved to READY.
 | 117 | mathematics | 6 | `math.geom.triangle-types` | Types of Triangles |
 **Row 118 removed 2026-07-26** — `math.geom.right-triangle` authored
 math.geom Wave 6, moved to READY.
@@ -700,8 +701,10 @@ READY. Row numbers not renumbered, per this file's own standing note.
 | 174 | mathematics | 7 | `math.geom.triangle-centers` | Triangle Centers |
 | 175 | mathematics | 7 | `math.geom.quadrilateral` | Quadrilateral |
 | 176 | mathematics | 7 | `math.geom.regular-polygon` | Regular Polygon |
-| 177 | mathematics | 7 | `math.geom.area-polygon` | Area of Polygons |
-| 178 | mathematics | 7 | `math.geom.solid-3d` | Three-Dimensional Solids |
+**Row 177 removed 2026-07-26** — `math.geom.area-polygon` authored
+math.geom Wave 7, moved to READY.
+**Row 178 removed 2026-07-26** — `math.geom.solid-3d` authored
+math.geom Wave 7, moved to READY.
 | 179 | mathematics | 7 | `math.trig.degree-radian-conversion` | Degree-Radian Conversion |
 | 180 | mathematics | 7 | `math.prob.probability-axioms` | Axioms of Probability |
 | 181 | mathematics | 7 | `math.disc.spanning-tree` | Spanning Tree |
@@ -1184,7 +1187,8 @@ math.nt Wave 4, moved to READY.
 **Row 631 removed 2026-07-26** — `math.nt.induction-applications`
 authored math.nt Wave 3 part 2, moved to READY.
 | 632 | mathematics | 17 | `math.alg.expression` | Algebraic Expression |
-| 633 | mathematics | 17 | `math.geom.pythagorean-theorem` | Pythagorean Theorem |
+**Row 633 removed 2026-07-26** — `math.geom.pythagorean-theorem`
+authored math.geom Wave 7, moved to READY.
 | 634 | mathematics | 17 | `math.geom.line-equation` | Equations of Lines |
 | 635 | mathematics | 17 | `math.geom.translation` | Translation |
 | 636 | mathematics | 17 | `math.geom.reflection` | Reflection |
@@ -1708,7 +1712,9 @@ authored math.nt Wave 7, moved to READY.
 | 1122 | english | 24 | `eng.literature.literary-periods-survey` | Survey of Literary Periods |
 | 1123 | english | 24 | `eng.linguistics.pragmatics-intro` | Introduction to Pragmatics |
 | 1124 | english | 24 | `eng.linguistics.psycholinguistics-intro` | Introduction to Psycholinguistics |
-| 1125 | mathematics | 25 | `math.nt.pythagorean-triples` | Pythagorean Triples |
+**Row 1125 removed 2026-07-26** — `math.nt.pythagorean-triples`
+authored as a small bounded cross-domain step in math.geom Wave 7,
+unblocked by `math.geom.pythagorean-theorem`, moved to READY.
 **Row 1126 removed 2026-07-26** — `math.nt.pells-equation` authored
 math.nt Wave 8, moved to READY.
 | 1127 | mathematics | 25 | `math.nt.algebraic-number-theory` | Algebraic Number Theory |
