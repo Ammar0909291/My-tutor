@@ -2164,6 +2164,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // memory-served (assembled) turn is skipped since it's already
       // human-curated.
       let eosVerifierEvents: import('@/lib/kernel/verifier').OutputEvent[] = []
+      let eosVerifierMetricsHoisted:
+        import('@/lib/kernel/verifier').VerifierMetrics | null = null
+      let eosVerifierTagsHoisted: string[] = []
       let eosVerifierUsedTemplate = false
       let eosVerifierAttempts: 1 | 2 = 1
       if (!assembled) {
@@ -2171,17 +2174,29 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const { readEosFlags, buildVerifierContext, verifierGate } = await import('@/lib/eos-runtime')
           const eosFlags = readEosFlags()
           if (eosFlags.outputVerifier) {
+            // Move mapping. RECOVER and CLOSE are checked FIRST and are not
+            // derivable from evidenceMoveHoisted: decideNextMove() returns
+            // 'teach' on a recovery turn, and the session layer owns CLOSING
+            // entirely. Before this, every recovery turn reached the verifier
+            // labelled TEACH and every closing turn as whatever the concept
+            // ladder happened to say — so V-REC and V-Q2's RECOVER/CLOSE arms
+            // were unreachable in production, and V-CLOSE could never fire.
+            const verifierMove =
+              recoveryKeyHoisted !== null ? 'RECOVER' as const
+              : sessionEpisodeHoisted?.phase === 'CLOSING' ? 'CLOSE' as const
+              : evidenceMoveHoisted === 'teach' ? 'TEACH' as const
+              : evidenceMoveHoisted === 'show' ? 'SHOW' as const
+              : evidenceMoveHoisted === 'ask' ? 'ASK' as const
+              : null
             const ctx = buildVerifierContext({
               contentRegister,
-              move: evidenceMoveHoisted === 'teach' ? 'TEACH'
-                : evidenceMoveHoisted === 'show' ? 'SHOW'
-                : evidenceMoveHoisted === 'ask'  ? 'ASK' : null,
+              move: verifierMove,
               phase: conversationStateHoisted?.phase ?? null,
               stageCeiling: evidenceStageCeilingHoisted,
               vocabularyUnlocked: !firstLessonActiveHoisted,
               formulaUnlocked: !firstLessonActiveHoisted && contentRegister !== 'beginner',
               recoveryActive: recoveryKeyHoisted !== null,
-              maxQuestions: (evidenceMoveHoisted === 'ask' ? 1 : 0) as 0 | 1,
+              maxQuestions: (verifierMove === 'ASK' ? 1 : 0) as 0 | 1,
               maxParagraphs: null,
               maxNewTerms: contentRegister === 'beginner' ? 1 : 2,
               vocabularyBans: [],
@@ -2196,6 +2211,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const gate = await verifierGate({
               draftText: cleanText,
               ctx,
+              mode: eosFlags.verifierMode,
               learnerText: message,
               fallbackChain: ['SHOW_EASIEST_LEGAL', 'ECHO_MICROWIN', 'WARM_CLOSE'],
               rerender: async (violationAppendix) => {
@@ -2216,6 +2232,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             eosVerifierEvents = gate.events
             eosVerifierUsedTemplate = gate.usedTemplate
             eosVerifierAttempts = gate.attempts
+            // K5 metrics: the rules and the loop already existed; nothing
+            // aggregated them, so RS P-3's violation SLO was unmeasurable.
+            const { foldVerifierMetrics, verifierTags } = await import('@/lib/kernel/verifier')
+            const turnOutcome = {
+              mode: gate.mode,
+              decision: gate.loopResult.decision,
+              attempts: gate.attempts,
+              usedTemplate: gate.usedTemplate,
+            }
+            eosVerifierMetricsHoisted = foldVerifierMetrics(
+              (snapshot?.verifierMetrics as Record<string, unknown> | undefined) as never,
+              turnOutcome,
+            )
+            eosVerifierTagsHoisted = verifierTags(turnOutcome)
           }
         } catch (err) {
           // Fail-open: never break the turn on verifier failure.
@@ -2902,12 +2932,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // persists that value. The re-fold fallback covers the gate's
           // catch path, where conversationStateAfterTurnHoisted stays null.
           let conversationStateUpdate: Record<string, unknown> = {}
+          // K5: session-scoped verifier metrics ride the same snapshot persist
+          // as every other counter — no new store, no new writer.
+          if (eosVerifierMetricsHoisted) {
+            conversationStateUpdate.verifierMetrics = eosVerifierMetricsHoisted
+          }
           if (conversationStateAfterTurnHoisted) {
-            conversationStateUpdate = { conversationState: conversationStateAfterTurnHoisted }
+            conversationStateUpdate.conversationState = conversationStateAfterTurnHoisted
           } else if (conversationStateHoisted) {
             const { advanceConversationState, repliesWithQuestion, isPriorKnowledgeProbe } = await import('@/lib/teaching/conversationState')
             const { isDontKnowSignal } = await import('@/lib/teaching/recoveryGuard')
-            conversationStateUpdate = {
+            Object.assign(conversationStateUpdate, {
               conversationState: advanceConversationState(conversationStateHoisted, {
                 askedQuestion: repliesWithQuestion(cleanText),
                 signalCorrect: teachingSignal?.correctness ?? null,
@@ -2919,7 +2954,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 dontKnowSignal: isDontKnowSignal(recoveryKeyHoisted),
                 learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
               }),
-            }
+            })
           }
           if (teachingHistoryHoisted && selectedStrategyHoisted !== null) {
             const { updateTeachingHistory, computeFrustration, computeMastery } = await import('@/lib/teaching/teachingHistory')
@@ -2974,6 +3009,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 ...(evidenceMoveHoisted ? ['turn-directive'] : []),
                 ...(firstLessonActiveHoisted ? ['first-lesson'] : []),
                 // K6 — record EOS verifier outcomes as provenance atoms
+                ...eosVerifierTagsHoisted,
                 ...(eosVerifierEvents.some((e) => e.kind === 'OutputRejected') ? ['verifier:rejected'] : []),
                 ...(eosVerifierUsedTemplate ? ['verifier:template-fallback'] : []),
                 ...(eosVerifierAttempts === 2 && !eosVerifierUsedTemplate ? ['verifier:rerendered'] : []),

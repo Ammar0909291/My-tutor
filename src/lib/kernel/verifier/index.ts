@@ -10,7 +10,7 @@ export { verify, buildViolationAppendix } from './verifier'
 export {
   RULES, withoutCodeFences, paragraphCount, questionCount,
   stripUnknownTags, vQ1, vQ2, vStage, vVocName, vVocFormula, vVocReg,
-  vTerms, vLen, vCap, vRec, vAssess, vTag, vComplete, vPraise, vReact,
+  vTerms, vLen, vCap, vRec, vClose, vAssess, vTag, vComplete, vPraise, vReact,
 } from './rules'
 export {
   renderFallback, chooseFallback, templateMove, type FallbackKind, type TemplateContext,
@@ -18,4 +18,5 @@ export {
 export {
   runVerifierLoop, type RenderCallback, type OutputEvent, type LoopResult,
 } from './loop'
+export * from './metrics'
 export * as lexicons from './lexicons'

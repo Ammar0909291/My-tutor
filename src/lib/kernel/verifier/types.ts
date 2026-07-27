@@ -35,6 +35,7 @@ export const RULE_CODES = [
   'V-COMPLETE', // completion-claim patterns when not authorized
   'V-PRAISE',   // banned praise/mockery for current affect band
   'V-REACT',    // (LOG-only in v1) REACT mandated but missing
+  'V-CLOSE',    // CLOSE move introduces new content (RS I-14)
 ] as const
 
 export type RuleCode = (typeof RULE_CODES)[number]
@@ -59,6 +60,7 @@ export const SEVERITY: Record<RuleCode, Severity> = {
   'V-COMPLETE':  'REJECT',
   'V-PRAISE':    'REJECT',
   'V-REACT':     'LOG',
+  'V-CLOSE':     'REJECT',
 }
 
 export interface Violation {

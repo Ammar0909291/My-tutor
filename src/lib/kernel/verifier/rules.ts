@@ -16,6 +16,7 @@ import {
   HYPERBOLIC_PRAISE_PATTERNS, ASSESSMENT_RESULT_PATTERN,
   LESSON_COMPLETE_PATTERN, BRACKET_TAG_PATTERN, DEFAULT_LEGAL_TAGS,
   IMPERATIVE_TASK_PATTERNS, CONCEPT_TERM_SEED, TECHNICAL_TERM_SEED,
+  CLOSE_NEW_CONTENT_PATTERNS,
 } from './lexicons'
 
 /** Excise ```code``` blocks; scans run on the remainder. Pure. */
@@ -261,6 +262,48 @@ export function vReact(text: string, ctx: VerifierContext): Violation | null {
   return null
 }
 
+// ── V-CLOSE · CLOSE move introduces new content ────────────────────────────
+/**
+ * RS I-14: "CLOSE contains no new content." The invariant is stated in the
+ * spec and was enforced by no rule — §9.2's 15 codes have no CLOSE-specific
+ * check, so a CLOSE turn that carried on teaching passed the gate as long as
+ * it did not end in a question (V-Q2). Filed as a spec-bug candidate against
+ * RS §9.2; implemented here as the 16th code.
+ *
+ * "New content" is read exactly as the other rules read it, reusing their
+ * lexicons rather than inventing a third notion of novelty: introducing a
+ * registered technical term, or demanding a calculation. A CLOSE turn should
+ * be naming what was learned, forecasting next, and leaving one open loop —
+ * none of which requires either.
+ */
+export function vClose(text: string, ctx: VerifierContext): Violation | null {
+  if (ctx.move !== 'CLOSE') return null
+  const clean = withoutCodeFences(text)
+  for (const re of CALCULATION_DEMAND_PATTERNS) {
+    const m = match(re, clean)
+    if (m) return { code: 'V-CLOSE', severity: 'REJECT', matched: m,
+                    detail: 'CLOSE must not demand work (RS I-14)' }
+  }
+  // Structural, subject-independent: a turn still introducing content.
+  for (const re of CLOSE_NEW_CONTENT_PATTERNS) {
+    const m = match(re, clean)
+    if (m) return { code: 'V-CLOSE', severity: 'REJECT', matched: m,
+                    detail: 'CLOSE is still introducing content (RS I-14)' }
+  }
+  // Term-based, where a lexicon exists. Pack-supplied concept terms first;
+  // the seed list is a fallback and covers only three subjects.
+  const lower = clean.toLowerCase()
+  const terms = ctx.bannedConceptTerms.length > 0 ? ctx.bannedConceptTerms : TECHNICAL_TERM_SEED
+  for (const term of terms) {
+    const escaped = term.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    if (new RegExp(`\\b${escaped}\\b`).test(lower)) {
+      return { code: 'V-CLOSE', severity: 'REJECT', matched: term,
+               detail: 'new technical term during CLOSE (RS I-14)' }
+    }
+  }
+  return null
+}
+
 /** Ordered rule set. Authorization gates (V-ASSESS, V-COMPLETE) run
  *  BEFORE V-TAG so an illegally-emitted control tag REJECTS rather
  *  than being quietly stripped. V-TAG then handles all remaining
@@ -271,5 +314,5 @@ export const RULES = [
   vAssess, vComplete,
   vTag,
   vQ1, vQ2, vStage, vVocName, vVocFormula, vVocReg,
-  vTerms, vLen, vCap, vRec, vPraise, vReact,
+  vTerms, vLen, vCap, vRec, vClose, vPraise, vReact,
 ] as const

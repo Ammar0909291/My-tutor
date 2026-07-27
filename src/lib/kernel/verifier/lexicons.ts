@@ -76,6 +76,28 @@ export const CONCEPT_TERM_SEED = [
 
 /** Registered technical-term seed for V-TERMS accounting. Very
  *  conservative in MVP; real per-subject registries land with SDK/CEKR. */
+/**
+ * Discourse markers that INTRODUCE content — the structural signature of a
+ * turn that is still teaching. Used by V-CLOSE (RS I-14).
+ *
+ * Lexicon-free by design: TECHNICAL_TERM_SEED below covers physics, maths and
+ * English only, so a term-based check silently does nothing for chemistry,
+ * biology, and computer science. These markers are subject-independent, which
+ * is what a rule enforcing a universal invariant requires.
+ *
+ * "Next time / next session / next lesson / next week" are deliberately NOT
+ * matched: forecasting the next session is what a close is FOR.
+ */
+export const CLOSE_NEW_CONTENT_PATTERNS = [
+  /\bnow,?\s+(the|let'?s|we'?ll|we\s+will|i'?ll)\b/i,
+  /\bthe\s+(next|second|other|final)\s+(idea|concept|step|part|thing|topic|rule|law)\s+is\b/i,
+  /\bmoving\s+on\s+to\b/i,
+  /\bhere'?s\s+(how|why|what)\b/i,
+  /\blet\s+me\s+(explain|show\s+you|walk\s+you\s+through)\b/i,
+  /\bnext\s+(up|we'?ll|we\s+will)\b/i,
+  /\bwhich\s+(means|relates|tells\s+us|describes)\b/i,
+] as const
+
 export const TECHNICAL_TERM_SEED = [
   'velocity', 'acceleration', 'momentum', 'force', 'mass',
   'inertia', 'newton', 'joule',
