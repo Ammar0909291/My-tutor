@@ -1613,6 +1613,12 @@
   `coordinate-plane`; all Blueprint reused by reference). `math.geom`
   5/69 → 8/69. Part 2 (`perimeter`, `length`, both no-Blueprint)
   deferred. Full detail: `COVERAGE.md`.
+  **Batch 48 — math.geom Wave 4 part 2** (2026-07-26, autonomous loop
+  iteration 38): 2 concepts authored (`perimeter`, `length`; neither
+  had a Blueprint, misconceptions authored via birth-taxonomy
+  diagnostic). `math.geom` 8/69 → 10/69. Mathematics 175 → 177. Wave 5
+  candidates (13, pool grew after Wave 4 part 1) deferred. Full
+  detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
