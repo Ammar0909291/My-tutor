@@ -60,13 +60,20 @@ export function parse(file: string, source: string): ParseResult {
   let currentFields: Record<string, unknown> = {}
   let startLine = 0
 
-  const OPEN_RE = /^::([a-z][a-z0-9_-]*)\s*(.*)$/
-  const FIELD_RE = /^([a-zA-Z_][a-zA-Z0-9_]*)\s*:\s*(.*)$/
+  // Widened for C2: CEKR kinds are PascalCase (§2.2). Lowercase still
+  // matches, so every existing source parses identically.
+  const OPEN_RE = /^::([A-Za-z][A-Za-z0-9_-]*)\s*(.*)$/
+  // `@` opens the envelope-directive namespace (C2): @status, @tags, @cite.
+  // Reserved so a directive can never collide with a body field name.
+  const FIELD_RE = /^(@?[a-zA-Z_][a-zA-Z0-9_]*)\s*:\s*(.*)$/
 
   for (let i = 0; i < lines.length; i++) {
     const raw = lines[i]
     const lineNo = i + 1
-    const line = raw.replace(/\s+$/, '')
+    // Right-trim always; left-trim so INDENTED fields are legal. `fmt`
+    // indents field lines, and a grammar that rejects its own formatter's
+    // output would be self-contradictory. Unindented sources are unaffected.
+    const line = raw.replace(/\s+$/, '').replace(/^[ \t]+/, '')
 
     // Skip pure blank + comment lines (outside AND inside blocks)
     if (line === '' || line.trim().startsWith('#')) continue

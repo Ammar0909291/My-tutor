@@ -1,0 +1,139 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# C2 PILOT SLICE — the fractions constellation, authored by hand as
+# BrainScript and lowered to CEKR.
+#
+# This file is the DSL usability test the masterplan asks for: if a human
+# cannot author and edit this comfortably, the grammar is wrong and the
+# grammar changes, not the author's expectations.
+#
+# It is deliberately a CONSTELLATION rather than one entity: a concept alone
+# proves nothing about the representation. What is exercised here is a concept
+# with its prerequisite edges, the mental model it should install, the
+# misconception it must not install, the analogy that breeds that misconception
+# (declared, not hidden), an assessment item whose distractors are mapped, and
+# a recovery script — the same shape every future subject will need.
+#
+# Every entity is DRAFT. Nothing here is ACTIVE: ACTIVE requires human review
+# (CEKR §2.1) and this file has had none.
+# ─────────────────────────────────────────────────────────────────────────────
+
+::Concept math.arith.fractions
+  title: "Fractions"
+  core: {"claim":"A fraction names a number of equal parts of one whole."}
+  prereqsComplete: true
+  estimatedHours: 20
+  bloom: "understand"
+  @tags: []
+::end
+
+::Concept math.arith.division
+  title: "Division"
+  core: {"claim":"Division splits a quantity into equal groups."}
+  prereqsComplete: true
+  @tags: []
+::end
+
+::Capability divide
+  operation: "divide"
+  cluster: "numeric"
+::end
+
+# The prerequisite relation, and its mirror. V-8 requires both — an UNLOCKS
+# without its REQUIRES is a claim nobody made.
+::edge REQUIRES cekr:Concept/math.arith.fractions -> cekr:Concept/math.arith.division
+  strength: "HARD"
+  rationale: "Equal-parts reasoning presupposes equal grouping."
+::end
+
+::edge UNLOCKS cekr:Concept/math.arith.division -> cekr:Concept/math.arith.fractions
+  derived: true
+::end
+
+::edge REQUIRES_CAPABILITY cekr:Concept/math.arith.fractions -> cekr:Capability/divide
+  demand: "operational"
+::end
+
+# ── What the learner should end up holding ──────────────────────────────────
+
+::MentalModel fractions.equal-parts-of-one-whole
+  statements: ["The whole is fixed before the parts are counted.","Parts must be equal.","The denominator names how many parts the whole was cut into."]
+  boundaryCases: ["Two halves of different wholes are not equal."]
+  replaces: ["fractions.two-separate-whole-numbers"]
+::end
+
+::edge EXPLAINS cekr:MentalModel/fractions.equal-parts-of-one-whole -> cekr:Concept/math.arith.fractions
+  phaseFit: ["ANCHOR","DEMONSTRATE"]
+::end
+
+# ── What must not be installed ──────────────────────────────────────────────
+
+::Misconception fractions.numerator-denominator-as-two-numbers
+  wrongClaim: "A fraction is two separate whole numbers, so 1/2 + 1/3 = 2/5."
+  birthType: 4
+  characteristicPhrases: ["you add the tops and the bottoms"]
+::end
+
+::edge TARGETS cekr:Misconception/fractions.numerator-denominator-as-two-numbers -> cekr:Concept/math.arith.fractions
+  prevalence: "high"
+::end
+
+# ── The analogy, with its boundary and its cost declared ────────────────────
+# V-11 is the reason this block cannot be written carelessly: an analogy with
+# no retirementBoundary is a scheduled misconception, and one that breeds a
+# known misconception must say so rather than leave it to be discovered.
+
+::Analogy fractions.pizza-slices
+  sourceDomain: "sharing a pizza"
+  carries: ["equal parts","one whole","more parts means smaller parts"]
+  doesNotCarry: ["negative quantities","parts of different wholes","improper fractions above one pizza"]
+  retirementBoundary: "the first improper fraction, where the analogy needs a second pizza and stops being one whole"
+::end
+
+::edge EXPLAINS cekr:Analogy/fractions.pizza-slices -> cekr:Concept/math.arith.fractions
+  phaseFit: ["ANCHOR"]
+::end
+
+::edge BREEDS cekr:Analogy/fractions.pizza-slices -> cekr:Misconception/fractions.numerator-denominator-as-two-numbers
+  mechanism: "counting slices across two pizzas invites adding numerators and denominators"
+::end
+
+# ── How it is checked ───────────────────────────────────────────────────────
+# V-12: every distractor either SIGNALS a misconception or declares itself a
+# plausible slip. There are no meaningless wrong answers.
+
+::AssessmentItem fractions.add-halves-and-thirds
+  stem: "1/2 + 1/3 = ?"
+  stage: 4
+  correct: "5/6"
+  distractors: [{"text":"2/5"},{"text":"5/5","distractorBasis":"PLAUSIBLE_SLIP"}]
+::end
+
+::edge ASSESSES cekr:AssessmentItem/fractions.add-halves-and-thirds -> cekr:Concept/math.arith.fractions
+  stage: 4
+  diagnostic: true
+::end
+
+::edge SIGNALS cekr:AssessmentItem/fractions.add-halves-and-thirds -> cekr:Misconception/fractions.numerator-denominator-as-two-numbers
+  distractorIndex: 0
+::end
+
+# ── What mastery of this concept actually requires ──────────────────────────
+# V-10: gate + retention + transfer, or an explicit rationale for less.
+
+::MasteryCondition fractions.mastery
+  proofKinds: ["GATE","RETENTION","TRANSFER"]
+  minGapDays: 7
+  minTransferDistance: 1
+::end
+
+# ── What the tutor does when it goes wrong ──────────────────────────────────
+
+::RecoveryScript fractions.stuck-on-unequal-parts
+  failureState: "confused"
+  move: "SHOW"
+  script: "Let's go back to one whole thing and cut it together, and we will count the pieces out loud."
+::end
+
+::edge REPAIRS cekr:RecoveryScript/fractions.stuck-on-unequal-parts -> cekr:Misconception/fractions.numerator-denominator-as-two-numbers
+  step: "collide"
+::end
