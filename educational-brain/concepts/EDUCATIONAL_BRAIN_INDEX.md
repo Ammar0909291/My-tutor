@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 175 READY)
+## mathematics (908 concepts, 177 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -539,7 +539,7 @@ its subject KG.
 | geom | `math.geom.geometric-constructions` | Geometric Constructions | No | No | — | MISSING |
 | geom | `math.geom.geometric-proof` | Geometric Proof | Yes | No | — | MISSING |
 | geom | `math.geom.hyperbola` | Hyperbola | No | No | — | MISSING |
-| geom | `math.geom.length` | Length | No | No | — | MISSING |
+| geom | `math.geom.length` | Length | No | Yes | `educational-brain/concepts/mathematics/math.geom.length.md` | READY |
 | geom | `math.geom.line` | Line | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.line.md` | READY |
 | geom | `math.geom.line-equation` | Equations of Lines | Yes | No | — | MISSING |
 | geom | `math.geom.line-segment` | Line Segment | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.line-segment.md` | READY |
@@ -547,7 +547,7 @@ its subject KG.
 | geom | `math.geom.parabola` | Parabola | No | No | — | MISSING |
 | geom | `math.geom.parallel-lines` | Parallel Lines | Yes | No | — | MISSING |
 | geom | `math.geom.parallelogram` | Parallelogram | No | No | — | MISSING |
-| geom | `math.geom.perimeter` | Perimeter | No | No | — | MISSING |
+| geom | `math.geom.perimeter` | Perimeter | No | Yes | `educational-brain/concepts/mathematics/math.geom.perimeter.md` | READY |
 | geom | `math.geom.perpendicular-lines` | Perpendicular Lines | Yes | No | — | MISSING |
 | geom | `math.geom.plane` | Plane | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.plane.md` | READY |
 | geom | `math.geom.platonic-solids` | Platonic Solids | No | No | — | MISSING |

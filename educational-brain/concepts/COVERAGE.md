@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 175 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 27 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation` — `math.nt` domain PARKED at 27/36, blocked on cross-domain campaigns per ROADMAP.md §5 item 1c) + 8 `math.geom.*` entries (`point`, `line`, `line-segment`, `ray`, `plane`, `angle`, `circle`, `coordinate-plane` — `math.geom` domain IN PROGRESS, 8/69, started per ROADMAP.md §5 item 1c to resolve math.nt's own pythagorean-triples dependency along the way), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
+| mathematics | 908 | 177 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 27 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation` — `math.nt` domain PARKED at 27/36, blocked on cross-domain campaigns per ROADMAP.md §5 item 1c) + 10 `math.geom.*` entries (`point`, `line`, `line-segment`, `ray`, `plane`, `angle`, `circle`, `coordinate-plane`, `perimeter`, `length` — `math.geom` domain IN PROGRESS, 10/69, started per ROADMAP.md §5 item 1c to resolve math.nt's own pythagorean-triples dependency along the way), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -3616,3 +3616,58 @@ violations across all 175 mathematics entries.
 Full validation this batch: all 6 subject KG validators PASS (0
 failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
 2213 passed / 1 skipped (114 files), `npm run build` succeeded.
+
+### Mathematics — math.geom Wave 4 part 2 (2026-07-26, autonomous loop iteration 38)
+
+Autonomous loop iteration 38, continuing immediately after Wave 4 part
+1. Git resync found zero concurrent commits at this iteration's start.
+
+**Wave 4 part 2 candidates re-verified programmatically** against the
+live KG: confirmed `math.geom.perimeter` and `math.geom.length` remain
+the two originally-deferred no-Blueprint concepts and are still ready,
+per this program's stick-to-the-original-set precedent. Noted the live
+ready pool had grown to 15 total (13 newly unlocked by Wave 4 part 1's
+authoring of `angle`, `circle`, `coordinate-plane`) — the 13 new
+arrivals (`angle-types` no-Blueprint, `angle-measurement`,
+`angle-pairs`, `perpendicular-lines`, `triangle`, `circle-parts`
+no-Blueprint, `circle-equation`, `x-y-coordinates`, `quadrants`
+no-Blueprint, `midpoint-formula` no-Blueprint, `slope`,
+`transformations`, `vectors-2d`) are deliberately deferred to Wave 5,
+to be re-verified fresh at that wave's own start rather than assumed
+unchanged.
+
+Authored both deferred no-Blueprint concepts via the birth-taxonomy
+diagnostic procedure:
+
+- `math.geom.perimeter` (requires `math.geom.line-segment`; unlocks
+  `math.geom.circle-circumference`) — MC-1
+  PERIMETER-CONFLATED-WITH-AREA (FOUNDATIONAL, Type 3 language
+  contamination, from everyday language and shared rectangle examples
+  blurring which formula answers which question), MC-2
+  PERIMETER-AREA-RELATIONSHIP-ASSUMED-FIXED (Type 1
+  overgeneralization, from the uniform-scaling special case), MC-3
+  PERIMETER-ASSUMED-NOT-APPLICABLE-TO-CIRCLES (Type 4
+  notation-induced, from the distinct vocabulary word
+  "circumference").
+- `math.geom.length` (requires `math.geom.line-segment`; unlocks
+  `math.geom.distance-formula`; cross-link `math.geom.distance-formula`,
+  Blueprint exists, no EB entry, P76 cross-link probe) — MC-1
+  LENGTH-VALUE-INCOMPLETE-WITHOUT-UNITS (FOUNDATIONAL, Type 4
+  notation-induced), MC-2 LENGTH-ASSUMED-ADDITIVE-FOR-ANY-PATH (Type 1
+  overgeneralization, over-applying collinear segment additivity to
+  bent paths), MC-3
+  LENGTH-COMPARISON-ASSUMED-VALID-ACROSS-UNITS-WITHOUT-CONVERSION
+  (Type 2 perceptual intuition, larger numeral feels larger regardless
+  of unit scale). Deliberately distinguished from `math.geom.
+  line-segment`'s own SEGMENT-NEEDS-MEASUREMENT misconception (which
+  covers existence-independent-of-measurement) by developing the
+  actual measurement concept itself.
+
+`math.geom` now **10/69**. No other domain touched. All five tracking
+files updated in this same commit; re-validated 0 duplicates, 0
+orphans, 0 Quality Gate 3 violations across all 177 mathematics
+entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+run, `npm run build` succeeded.

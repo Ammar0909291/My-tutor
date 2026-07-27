@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1173** (= 1,775 KG concepts − 602 already `READY`, per
+Total queued: **1171** (= 1,775 KG concepts − 604 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -550,10 +550,12 @@ READY.
 | 39 | computer_science | 3 | `cs.sec.cryptography-basics` | Cryptography Fundamentals |
 **Row 40 removed 2026-07-26** — `math.geom.angle` authored math.geom
 Wave 4 part 1, moved to READY.
-| 41 | mathematics | 4 | `math.geom.perimeter` | Perimeter |
+**Row 41 removed 2026-07-26** — `math.geom.perimeter` authored
+math.geom Wave 4 part 2, moved to READY.
 **Row 42 removed 2026-07-26** — `math.geom.circle` authored math.geom
 Wave 4 part 1, moved to READY.
-| 43 | mathematics | 4 | `math.geom.length` | Length |
+**Row 43 removed 2026-07-26** — `math.geom.length` authored math.geom
+Wave 4 part 2, moved to READY.
 | 44 | mathematics | 4 | `math.prob.sample-space` | Sample Space |
 | 45 | mathematics | 4 | `math.disc.graph` | Graph |
 | 46 | mathematics | 4 | `math.abst.algebraic-structure` | Algebraic Structure |
