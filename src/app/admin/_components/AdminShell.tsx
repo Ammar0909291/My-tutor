@@ -2,19 +2,20 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, Users, BookOpen, GitBranch, BarChart2, Bot, Settings, ChevronRight, Activity, Menu, X } from 'lucide-react'
+import { LayoutDashboard, Users, BookOpen, GitBranch, BarChart2, Bot, Settings, ChevronRight, Activity, Menu, X, Brain } from 'lucide-react'
 import { EagleMascot } from '@/components/ui/candy'
 
 const NAV = [
-  { href: '/admin',                  label: 'Overview',        icon: LayoutDashboard },
-  { href: '/admin/users',            label: 'Users',           icon: Users },
-  { href: '/admin/subjects',         label: 'Subjects',        icon: BookOpen },
-  { href: '/admin/curriculum',       label: 'Curriculum',      icon: GitBranch },
-  { href: '/admin/knowledge-graphs', label: 'Knowledge Graphs',icon: GitBranch },
-  { href: '/admin/analytics',        label: 'Analytics',       icon: BarChart2 },
-  { href: '/admin/ai-ops',           label: 'AI Operations',   icon: Bot },
-  { href: '/admin/ops',              label: 'Ops Center',      icon: Activity },
-  { href: '/admin/settings',         label: 'System Settings', icon: Settings },
+  { href: '/admin',                    label: 'Overview',          icon: LayoutDashboard },
+  { href: '/admin/users',              label: 'Users',             icon: Users },
+  { href: '/admin/subjects',           label: 'Subjects',          icon: BookOpen },
+  { href: '/admin/knowledge-assets',   label: 'Knowledge Assets',  icon: Brain },
+  { href: '/admin/curriculum',         label: 'Curriculum',        icon: GitBranch },
+  { href: '/admin/knowledge-graphs',   label: 'Knowledge Graphs',  icon: GitBranch },
+  { href: '/admin/analytics',          label: 'Analytics',         icon: BarChart2 },
+  { href: '/admin/ai-ops',             label: 'AI Operations',     icon: Bot },
+  { href: '/admin/ops',                label: 'Ops Center',        icon: Activity },
+  { href: '/admin/settings',           label: 'System Settings',   icon: Settings },
 ]
 
 function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
@@ -22,7 +23,7 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <nav style={{ flex: 1, padding: '12px 8px', display: 'flex', flexDirection: 'column', gap: 2 }}>
       {NAV.map(({ href, label, icon: Icon }) => {
-        const active = pathname === href
+        const active = href === '/admin' ? pathname === '/admin' : pathname.startsWith(href)
         return (
           <Link
             key={href}

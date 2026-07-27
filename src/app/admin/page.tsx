@@ -1,35 +1,38 @@
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
 import Link from 'next/link'
-import { Users, BookOpen, GitBranch, BarChart2, Bot, Settings, ArrowRight } from 'lucide-react'
+import { Users, BookOpen, GitBranch, BarChart2, Bot, Settings, ArrowRight, Brain } from 'lucide-react'
 import { Card, SectionTitle } from '@/components/ui/candy'
 
 const SECTIONS = [
-  { href: '/admin/users',            label: 'Users',           icon: Users,     desc: 'View, search and manage student accounts', color: 'var(--candy-red)',    bg: 'rgba(255, 75, 75, 0.12)' },
-  { href: '/admin/subjects',         label: 'Subjects',        icon: BookOpen,  desc: 'Manage the subject and curriculum catalog', color: 'var(--candy-blue)',   bg: 'rgba(59, 158, 255, 0.12)' },
-  { href: '/admin/curriculum',       label: 'Curriculum',      icon: GitBranch, desc: 'Chapter, lesson and module structure',      color: 'var(--candy-purple)', bg: 'rgba(139, 92, 246, 0.12)' },
-  { href: '/admin/knowledge-graphs', label: 'Knowledge Graphs',icon: GitBranch, desc: 'KG nodes, misconceptions and mastery weights', color: 'var(--candy-pink)', bg: 'rgba(255, 95, 162, 0.12)' },
-  { href: '/admin/analytics',        label: 'Analytics',       icon: BarChart2, desc: 'Platform-wide engagement and completion metrics', color: 'var(--candy-green)', bg: 'rgba(88, 204, 2, 0.12)' },
-  { href: '/admin/ai-ops',           label: 'AI Operations',   icon: Bot,       desc: 'AI usage, budget, model routing and quality', color: 'var(--candy-orange)', bg: 'rgba(255, 150, 0, 0.12)' },
-  { href: '/admin/settings',         label: 'System Settings', icon: Settings,  desc: 'Environment, feature flags and admin roster', color: 'var(--candy-ink-soft)', bg: 'var(--candy-bg)' },
+  { href: '/admin/users',              label: 'Users',             icon: Users,     desc: 'View, search and manage student accounts',         color: 'var(--candy-red)',      bg: 'rgba(255, 75, 75, 0.12)' },
+  { href: '/admin/subjects',           label: 'Subjects',          icon: BookOpen,  desc: 'Manage the subject and curriculum catalog',         color: 'var(--candy-blue)',     bg: 'rgba(59, 158, 255, 0.12)' },
+  { href: '/admin/knowledge-assets',   label: 'Knowledge Assets',  icon: Brain,     desc: 'Review and promote explanation & probe assets',     color: 'var(--candy-purple)',   bg: 'rgba(139, 92, 246, 0.12)' },
+  { href: '/admin/curriculum',         label: 'Curriculum',        icon: GitBranch, desc: 'Chapter, lesson and module structure',               color: 'var(--candy-pink)',     bg: 'rgba(255, 95, 162, 0.12)' },
+  { href: '/admin/knowledge-graphs',   label: 'Knowledge Graphs',  icon: GitBranch, desc: 'KG nodes, misconceptions and mastery weights',       color: 'var(--candy-pink)',    bg: 'rgba(255, 95, 162, 0.12)' },
+  { href: '/admin/analytics',          label: 'Analytics',         icon: BarChart2, desc: 'Platform-wide engagement and completion metrics',    color: 'var(--candy-green)',    bg: 'rgba(88, 204, 2, 0.12)' },
+  { href: '/admin/ai-ops',             label: 'AI Operations',     icon: Bot,       desc: 'AI usage, budget, model routing and quality',        color: 'var(--candy-orange)',   bg: 'rgba(255, 150, 0, 0.12)' },
+  { href: '/admin/settings',           label: 'System Settings',   icon: Settings,  desc: 'Environment, feature flags and admin roster',        color: 'var(--candy-ink-soft)', bg: 'var(--candy-bg)' },
 ]
 
 async function getStats() {
   try {
-    const [users, admins] = await withRetry(() =>
+    const [users, admins, draftAssets, activeAssets] = await withRetry(() =>
       Promise.all([
         prisma.user.count({ where: { isDeleted: false } }),
         prisma.user.count({ where: { role: 'ADMIN', isDeleted: false } }),
+        prisma.assetIdentity.count({ where: { status: 'DRAFT' } }),
+        prisma.assetIdentity.count({ where: { status: 'ACTIVE' } }),
       ])
     )
-    return { users, admins }
+    return { users, admins, draftAssets, activeAssets }
   } catch {
-    return { users: null, admins: null }
+    return { users: null, admins: null, draftAssets: null, activeAssets: null }
   }
 }
 
 export default async function AdminOverviewPage() {
-  const { users, admins } = await getStats()
+  const { users, admins, draftAssets, activeAssets } = await getStats()
 
   return (
     <div style={{ maxWidth: 960 }}>
@@ -39,7 +42,7 @@ export default async function AdminOverviewPage() {
       </div>
 
       {/* Quick stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16, marginBottom: 32 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16, marginBottom: 16 }}>
         {[
           { label: 'Total Students', value: users },
           { label: 'Admins',         value: admins },
@@ -50,6 +53,23 @@ export default async function AdminOverviewPage() {
               {value ?? '—'}
             </p>
           </Card>
+        ))}
+      </div>
+
+      {/* Asset stats */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16, marginBottom: 32 }}>
+        {[
+          { label: 'DRAFT Assets (pending review)', value: draftAssets, color: '#888',           href: '/admin/knowledge-assets?status=DRAFT' },
+          { label: 'ACTIVE Assets (serving)',        value: activeAssets, color: 'var(--candy-green)', href: '/admin/knowledge-assets?status=ACTIVE' },
+        ].map(({ label, value, color, href }) => (
+          <a key={label} href={href} style={{ textDecoration: 'none' }}>
+            <Card style={{ padding: 20, border: `1px solid ${color}33` }}>
+              <p style={{ fontSize: 11, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--candy-ink-soft)', margin: 0 }}>{label}</p>
+              <p style={{ fontSize: 32, fontWeight: 800, color, margin: '4px 0 0' }}>
+                {value ?? '—'}
+              </p>
+            </Card>
+          </a>
         ))}
       </div>
 
