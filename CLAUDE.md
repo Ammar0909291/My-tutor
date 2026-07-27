@@ -1619,6 +1619,14 @@
   diagnostic). `math.geom` 8/69 → 10/69. Mathematics 175 → 177. Wave 5
   candidates (13, pool grew after Wave 4 part 1) deferred. Full
   detail: `COVERAGE.md`.
+  **Batch 49 — math.geom Wave 5** (2026-07-26, autonomous loop
+  iteration 39): 5 concepts authored (`angle-measurement`,
+  `angle-pairs`, `perpendicular-lines`, `triangle`, `circle-equation`;
+  all Blueprint reused by reference). `math.geom` 10/69 → 15/69.
+  Mathematics 177 → 182. `triangle` is this program's direct step
+  toward `math.geom.pythagorean-theorem`, unblocking the parked
+  `math.nt.pythagorean-triples`. 9 remaining Wave 5 candidates
+  deferred. Full detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
