@@ -42,6 +42,14 @@ export interface TurnFacts {
   freshSessionBoundary: boolean
   boundaryGapMs: number | null
   lessonCompleted: boolean
+  /** Capability Model: this turn's attributed observations, already computed
+   *  by capabilityModel.observationsFromTurn(). The route passes them; the
+   *  emitter never derives them (attribution honesty lives in one place). */
+  capabilityObservations?: ReadonlyArray<{
+    capabilityId: string
+    direction: 'success' | 'failure' | 'stated_no'
+    diagnostic: boolean
+  }>
 }
 
 export function buildTurnEvents(f: TurnFacts): NewSpineEvent[] {
@@ -66,9 +74,18 @@ export function buildTurnEvents(f: TurnFacts): NewSpineEvent[] {
         statedConfidence: (f.signal.confidence === 'low' || f.signal.confidence === 'medium' || f.signal.confidence === 'high') ? f.signal.confidence : null,
         confusion: f.signal.confusion === true,
         conceptId: f.resolvedConceptId,
-        capabilityRefs: [],           // capability wiring is a later milestone
-        diagnostic: false,
+        capabilityRefs: (f.capabilityObservations ?? []).map((o) => o.capabilityId),
+        diagnostic: (f.capabilityObservations ?? []).some((o) => o.diagnostic),
       },
+    })
+  }
+  // CapabilityObserved — one per attributed observation. The discriminator is
+  // the capabilityId so several observations on one turn get distinct
+  // idempotency keys; re-emitting the same turn is still a no-op.
+  for (const o of f.capabilityObservations ?? []) {
+    events.push({
+      ...base, type: 'CapabilityObserved', discriminator: o.capabilityId,
+      payload: { capabilityId: o.capabilityId, direction: o.direction, diagnostic: o.diagnostic },
     })
   }
   events.push({

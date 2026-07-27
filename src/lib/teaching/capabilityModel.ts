@@ -249,6 +249,30 @@ export function readCapabilityState(raw: unknown): CapabilityState {
   return out
 }
 
+/**
+ * Durable → session tier. Maps the evidence spine's CapabilityProjection onto
+ * the session working set, so a returning learner starts with everything the
+ * spine already knows.
+ *
+ * This is a PROJECTION COPY, not a second fold: the spine produced those
+ * statuses by running foldCapability over the durable event log, so hydrating
+ * cannot diverge from replay and cannot double-count. It is called only when
+ * the session cache is cold (design §3.2's "copied forward ... lazily on next
+ * session open"), which is what keeps the two tiers consistent within a
+ * session without a reconciliation step.
+ */
+export function hydrateFromProjection(
+  projection: { capabilities: Record<string, { status: CapabilityStatus; succ: number; fail: number; diagnosticSucc: number }> } | null | undefined,
+): CapabilityState {
+  if (!projection?.capabilities) return {}
+  const out: CapabilityState = {}
+  for (const [id, rec] of Object.entries(projection.capabilities)) {
+    if (!isCapabilityId(id)) continue
+    out[id] = { status: rec.status, succ: rec.succ, fail: rec.fail, diagnosticSucc: rec.diagnosticSucc }
+  }
+  return out
+}
+
 export function statusOf(state: CapabilityState, id: CapabilityId): CapabilityStatus {
   return state[id]?.status ?? 'UNKNOWN'
 }

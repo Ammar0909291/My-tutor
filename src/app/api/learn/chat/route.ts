@@ -1267,6 +1267,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       import('@/lib/teaching/capabilityModel').CapabilityState | null = null
     let requiredCapabilitiesHoisted:
       import('@/lib/teaching/capabilityModel').CapabilityId[] = []
+    // This turn's attributed capability observations — computed once by the
+    // Capability Model, folded into the session tier, and handed to the spine
+    // emitter. Never re-derived at the emit site.
+    let capabilityObservationsHoisted:
+      import('@/lib/teaching/capabilityModel').CapabilityObservation[] = []
     // Band 2 (questionLegality.ts): which invariant, if any, removed ASK from
     // the legal set this turn. Folded into the session's legality metrics at
     // persist time — the automatically-measurable half of the layer.
@@ -1514,12 +1519,31 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // instantly (design §2.1) — never LLM-detected.
           const capMod = await import('@/lib/teaching/capabilityModel')
           capabilityStateHoisted = capMod.readCapabilityState(snapshot?.capabilities)
+          // Durable tier: contextSnapshot is per-LearnSession, so a new session
+          // starts with an empty cache. Rehydrate it from the evidence spine —
+          // the spine's projection is itself produced by foldCapability over
+          // the durable log, so this cannot diverge from replay and cannot
+          // double-count. Cold cache only: one extra read per NEW session, none
+          // per turn.
+          if (Object.keys(capabilityStateHoisted).length === 0) {
+            try {
+              const { replayStudentView } = await import('@/lib/evidence-spine/replay')
+              const view = await replayStudentView(prisma, userId)
+              capabilityStateHoisted = capMod.hydrateFromProjection(view.capability)
+            } catch {
+              // Fail-open: an unavailable spine means no inherited capabilities,
+              // never a broken turn. An empty state blocks nothing.
+            }
+          }
           const statedNo = capMod.detectStatedInability(message)
           if (statedNo.length > 0) {
-            capabilityStateHoisted = capMod.foldCapabilityState(
-              capabilityStateHoisted,
-              statedNo.map((capabilityId) => ({ capabilityId, direction: 'stated_no' as const, diagnostic: true })),
-            )
+            const statedObs = statedNo.map((capabilityId) => ({
+              capabilityId, direction: 'stated_no' as const, diagnostic: true,
+            }))
+            // Durable too: a learner saying "I can't divide" must survive the
+            // session, so the observation goes to the spine as well as the cache.
+            capabilityObservationsHoisted = statedObs
+            capabilityStateHoisted = capMod.foldCapabilityState(capabilityStateHoisted, statedObs)
           }
           requiredCapabilitiesHoisted = capMod.requiredCapabilities(convConceptId)
           // Band 2 (questionLegality.ts): evidenced prior knowledge makes a
@@ -2277,6 +2301,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               correct: teachingSignal?.correctness ?? null,
             })
             if (obs.length > 0) {
+              // Append: a single turn can carry BOTH a stated inability and an
+              // answered outcome. Replacing would silently drop the former.
+              capabilityObservationsHoisted = [...capabilityObservationsHoisted, ...obs]
               capabilityStateHoisted = capMod2.foldCapabilityState(capabilityStateHoisted, obs)
             }
           }
@@ -3034,6 +3061,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const lastAssistantForLatency = learnSession.messages.find((m) => m.role === MessageRole.ASSISTANT)
             const phaseAfter = (conversationStateUpdate.conversationState as { phase?: string } | undefined)?.phase ?? null
             emitTurn(prisma, {
+              capabilityObservations: capabilityObservationsHoisted,
               learnerId: userId,
               sessionId,
               turnId: assistantMessage.id,
