@@ -40,6 +40,9 @@
  */
 
 import type { ConversationState, TeachingPhase } from './conversationState'
+import {
+  capabilityLegality, type CapabilityId, type CapabilityState,
+} from './capabilityModel'
 
 /** Why ASK was removed from the legal set. Stable codes — these are emitted
  *  as measurement, so renaming one is a breaking change to the metric. */
@@ -47,6 +50,7 @@ export type LegalityReason =
   | 'QL1_NO_ANSWERABLE_SOURCE'
   | 'QL2_DIAGNOSTIC_CONCLUDED'
   | 'QL3_LEARNER_DIRECTIVE_ACTIVE'
+  | 'QL4_MISSING_CAPABILITY'
 
 export interface LegalityVerdict {
   /** false ⇒ 'ask' has been removed from the legal move set this turn. */
@@ -67,6 +71,12 @@ export interface LegalityContext {
   /** The number of consecutive non-answers that concludes a diagnostic.
    *  Pack-tunable (v2 BrainConfig style), not hardcoded at the call site. */
   diagnosticConcludesAfter?: number
+  /** QL-4 (arch §6.1 Band 2, the Capability Legality Filter): the learner's
+   *  operational-skill state and the operations this concept demands. Omitted
+   *  means the conservative reading — no capability blocks — which can only
+   *  ever leave ASK legal, never make it illegal. */
+  capabilityState?: CapabilityState
+  requiredCapabilities?: readonly CapabilityId[]
 }
 
 /** Non-answers that conclude the diagnostic and force a PHASE transition. */
@@ -168,6 +178,21 @@ export function questionLegality(
     }
   }
 
+  // QL-4 — the question demands an operation the learner cannot perform.
+  // Ranked below the learner's own statement and below a concluded diagnostic
+  // (both are about THIS turn), and above QL-1 because a capability block is
+  // specific: it names what to do instead, where QL-1 only says "teach first".
+  if (ctx.capabilityState && ctx.requiredCapabilities?.length) {
+    const capVerdict = capabilityLegality(ctx.capabilityState, ctx.requiredCapabilities)
+    if (!capVerdict.legal) {
+      return {
+        askLegal: false,
+        reason: 'QL4_MISSING_CAPABILITY',
+        rationale: capVerdict.rationale,
+      }
+    }
+  }
+
   // QL-1 — nothing to answer from.
   if (answerableSource(state, ctx) === 'none') {
     return {
@@ -221,6 +246,10 @@ export interface LegalityMetrics {
   ql1Blocks: number
   ql2Blocks: number
   ql3Blocks: number
+  /** QL-4: the lesson demanded an operation the learner cannot perform. A
+   *  rising count means the curriculum is sequenced above the learner's
+   *  operational floor — a placement or prerequisite defect, not a teaching one. */
+  ql4Blocks: number
   /** Monitoring only — never a gate. Compare against the per-activity human
    *  baseline once a human-tutor corpus exists; a global target is wrong. */
   gives: number
@@ -228,13 +257,14 @@ export interface LegalityMetrics {
 }
 
 export function initialLegalityMetrics(): LegalityMetrics {
-  return { askViolations: 0, ql1Blocks: 0, ql2Blocks: 0, ql3Blocks: 0, gives: 0, asks: 0 }
+  return { askViolations: 0, ql1Blocks: 0, ql2Blocks: 0, ql3Blocks: 0, ql4Blocks: 0, gives: 0, asks: 0 }
 }
 
 const REASON_TO_FIELD: Record<LegalityReason, keyof LegalityMetrics> = {
   QL1_NO_ANSWERABLE_SOURCE: 'ql1Blocks',
   QL2_DIAGNOSTIC_CONCLUDED: 'ql2Blocks',
   QL3_LEARNER_DIRECTIVE_ACTIVE: 'ql3Blocks',
+  QL4_MISSING_CAPABILITY: 'ql4Blocks',
 }
 
 /** Fold one completed turn into the metrics. Pure. */

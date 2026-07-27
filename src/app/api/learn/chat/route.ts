@@ -1262,6 +1262,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // EOS M1 (Evidence Spine): decision facts hoisted for the parallel spine
     // emitter — observation only, zero effect on the turn.
     let evidenceMoveHoisted: string | null = null
+    // EOS v2 Capability Model — session-tier state + this concept's demands.
+    let capabilityStateHoisted:
+      import('@/lib/teaching/capabilityModel').CapabilityState | null = null
+    let requiredCapabilitiesHoisted:
+      import('@/lib/teaching/capabilityModel').CapabilityId[] = []
     // Band 2 (questionLegality.ts): which invariant, if any, removed ASK from
     // the legal set this turn. Folded into the session's legality metrics at
     // persist time — the automatically-measurable half of the layer.
@@ -1502,6 +1507,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const workedExampleFirst =
             snapshotSessionFailureCount >= 2 || strategyHoisted === 'FOUNDATION_REBUILD'
           const { decideNextMoveDetailed } = await import('@/lib/teaching/conversationState')
+          // ── EOS v2 Capability Model (arch §4.2) ──────────────────────────
+          // Session tier per CAPABILITY_MODEL_DESIGN §3.1: the state rides
+          // contextSnapshot, read here and folded at persist. Stated inability
+          // is server-detected from the learner's own words and trusted
+          // instantly (design §2.1) — never LLM-detected.
+          const capMod = await import('@/lib/teaching/capabilityModel')
+          capabilityStateHoisted = capMod.readCapabilityState(snapshot?.capabilities)
+          const statedNo = capMod.detectStatedInability(message)
+          if (statedNo.length > 0) {
+            capabilityStateHoisted = capMod.foldCapabilityState(
+              capabilityStateHoisted,
+              statedNo.map((capabilityId) => ({ capabilityId, direction: 'stated_no' as const, diagnostic: true })),
+            )
+          }
+          requiredCapabilitiesHoisted = capMod.requiredCapabilities(convConceptId)
           // Band 2 (questionLegality.ts): evidenced prior knowledge makes a
           // diagnostic question answerable even before anything is taught.
           // A resumed concept with real progress is exactly that case.
@@ -1510,7 +1530,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const moveDecision = decideNextMoveDetailed(conversationStateHoisted, {
             recoveryTurn: recoveryKeyHoisted !== null,
             workedExampleFirst,
-            legality: { hasEvidencedPriorKnowledge },
+            legality: {
+              hasEvidencedPriorKnowledge,
+              capabilityState: capabilityStateHoisted ?? undefined,
+              requiredCapabilities: requiredCapabilitiesHoisted,
+            },
           })
           const nextMove = moveDecision.move
           legalityBlockedReasonHoisted = moveDecision.blockedReason
@@ -1563,6 +1587,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             firstLessonActive: firstLessonActiveHoisted,
             legalityRationale: moveDecision.rationale,
             directiveJustIssued: recoveryKeyHoisted === 'too_many_questions',
+            // Recovery routing: a learner blocked on an OPERATION is not
+            // stuck on the idea, and re-explaining the concept cannot help.
+            capabilityRepair: (() => {
+              if (!capabilityStateHoisted || requiredCapabilitiesHoisted.length === 0) return null
+              const cls = capMod.classifyFailure(capabilityStateHoisted, requiredCapabilitiesHoisted)
+              return cls.kind === 'capability_missing' ? cls.blockingCapabilities : null
+            })(),
           })
           if (learnerRequestHoisted) {
             const hasEstablishedExample =
@@ -2207,6 +2238,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               reactMandated: true,
               legalTags: ['VISUAL', 'HINT', 'INLINE_PRACTICE', 'WE', 'LESSON'],
               bannedConceptTerms: [],
+              noCapabilities: capabilityStateHoisted
+                ? (await import('@/lib/teaching/capabilityModel')).noCapabilities(capabilityStateHoisted)
+                : [],
             })
             const gate = await verifierGate({
               draftText: cleanText,
@@ -2232,7 +2266,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             eosVerifierEvents = gate.events
             eosVerifierUsedTemplate = gate.usedTemplate
             eosVerifierAttempts = gate.attempts
-            // K5 metrics: the rules and the loop already existed; nothing
+            // Capability evidence (design §4): the answered turn's outcome
+          // updates operational skills. Attribution honesty lives in
+          // observationsFromTurn — a compound-item FAILURE updates nothing,
+          // because failure proves the conjunction failed, not which conjunct.
+          if (capabilityStateHoisted && requiredCapabilitiesHoisted.length > 0) {
+            const capMod2 = await import('@/lib/teaching/capabilityModel')
+            const obs = capMod2.observationsFromTurn({
+              requiredCapabilities: requiredCapabilitiesHoisted,
+              correct: teachingSignal?.correctness ?? null,
+            })
+            if (obs.length > 0) {
+              capabilityStateHoisted = capMod2.foldCapabilityState(capabilityStateHoisted, obs)
+            }
+          }
+          // K5 metrics: the rules and the loop already existed; nothing
             // aggregated them, so RS P-3's violation SLO was unmeasurable.
             const { foldVerifierMetrics, verifierTags } = await import('@/lib/kernel/verifier')
             const turnOutcome = {
@@ -2936,6 +2984,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // as every other counter — no new store, no new writer.
           if (eosVerifierMetricsHoisted) {
             conversationStateUpdate.verifierMetrics = eosVerifierMetricsHoisted
+          }
+          // Capability session tier — same snapshot persist, no new store.
+          if (capabilityStateHoisted && Object.keys(capabilityStateHoisted).length > 0) {
+            conversationStateUpdate.capabilities = capabilityStateHoisted
           }
           if (conversationStateAfterTurnHoisted) {
             conversationStateUpdate.conversationState = conversationStateAfterTurnHoisted

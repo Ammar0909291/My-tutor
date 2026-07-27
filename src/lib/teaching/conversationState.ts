@@ -30,6 +30,7 @@ import {
   type LegalityContext,
   type LegalityReason,
 } from './questionLegality'
+import { buildCapabilityRepairLine } from './capabilityModel'
 
 export type TeachingPhase =
   | 'OBSERVE' | 'DEMONSTRATE' | 'GUIDE' | 'CHECK' | 'PRACTICE' | 'TRANSFER'
@@ -519,6 +520,9 @@ export interface TurnDirectiveParams {
    *  one-clause self-correction. Only on arrival; a repeated apology is
    *  worse than none. */
   directiveJustIssued?: boolean
+  /** Capability Model: blocking capability ids when the learner is stuck on an
+   *  OPERATION rather than on the concept. null = not a capability gap. */
+  capabilityRepair?: readonly string[] | null
 }
 
 const PHASE_FRAME: Record<TeachingPhase, string> = {
@@ -557,6 +561,9 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   }
   if (p.directiveJustIssued) {
     lines.push(buildDirectiveAcknowledgementLine())
+  }
+  if (p.capabilityRepair && p.capabilityRepair.length > 0) {
+    lines.push(buildCapabilityRepairLine(p.capabilityRepair as never))
   }
   if (p.maxParagraphs !== null) {
     lines.push(`- Length budget: at most ${p.maxParagraphs} short paragraphs. If the learner is struggling, shorter is better — never longer.`)

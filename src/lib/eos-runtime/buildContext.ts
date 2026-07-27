@@ -43,6 +43,8 @@ export interface BuildContextInput {
   // Per-concept concept-term bans (pack-supplied when C4 packs carry them;
   // undefined uses the lexicon default in K5)
   bannedConceptTerms: string[]
+  /** Capability ids in a NO state — feeds V-CAP. */
+  noCapabilities?: string[]
 }
 
 /** Map register + failure count → affect band. Conservative floor:
@@ -71,6 +73,7 @@ export function buildVerifierContext(input: BuildContextInput): VerifierContext 
     reactMandated: input.reactMandated,
     affectBand: affectBandFrom(input.recoveryActive, input.sessionFailureCount),
     bannedConceptTerms: input.bannedConceptTerms,
+    noCapabilities: input.noCapabilities ?? [],
     learnerText: input.learnerText,
     legalTags: input.legalTags,
   }

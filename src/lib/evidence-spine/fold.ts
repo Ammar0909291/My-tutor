@@ -86,7 +86,11 @@ export function initialStudentView(learnerId: string): StudentViewProjection {
 
 // ── Capability skeleton transitions (RS §4.11 subset) ────────────────────────
 
-function foldCapability(
+/** The capability lattice (RS §4.11 subset). Exported so the runtime
+ *  Capability Model reuses these transitions rather than defining a second,
+ *  divergent lattice — the spine owns the lattice; capabilityModel.ts owns
+ *  the vocabulary, the prerequisite DAG and the concept binding. */
+export function foldCapability(
   cap: CapabilityProjection['capabilities'][string] | undefined,
   direction: 'success' | 'failure' | 'stated_no',
   diagnostic: boolean,

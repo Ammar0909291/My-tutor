@@ -11,6 +11,7 @@
  */
 import { repliesWithQuestion } from '@/lib/teaching/conversationState'
 import type { VerifierContext, Violation } from './types'
+import { CAPABILITY_DEMAND_PATTERNS } from '@/lib/teaching/capabilityModel'
 import {
   CALCULATION_DEMAND_PATTERNS, FORMULA_PATTERNS, IPA_PATTERNS,
   HYPERBOLIC_PRAISE_PATTERNS, ASSESSMENT_RESULT_PATTERN,
@@ -165,10 +166,32 @@ export function vLen(text: string, ctx: VerifierContext): Violation | null {
   return null
 }
 
-// ── V-CAP · references an operation whose capability is NO ─────────────────
-// K5 v1: honours vocabularyBans as a proxy for banned operations. The
-// CEKR capability model (K7 integration) upgrades this to a real check.
-export function vCap(_text: string, _ctx: VerifierContext): Violation | null {
+// ── V-CAP · demands an operation whose capability is NO ────────────────────
+/**
+ * Real as of the Capability Model milestone (was a stub returning null).
+ *
+ * Rejects a draft that asks the learner to PERFORM an operation their
+ * capability state records as OBSERVED_NO or STATED_NO. Demand patterns are
+ * imported from capabilityModel — the single owner of capability semantics —
+ * so the verifier holds no second lexicon and cannot drift from the model.
+ *
+ * Matches the imperative form only. "Multiplication is repeated addition" is
+ * legal teaching about an operation the learner cannot yet do; "multiply 6 by
+ * 7" is a demand that they do it. That distinction is the whole rule: the
+ * Brain may decide to TEACH a missing operation, and must never demand it.
+ */
+export function vCap(text: string, ctx: VerifierContext): Violation | null {
+  if (!ctx.noCapabilities || ctx.noCapabilities.length === 0) return null
+  const clean = withoutCodeFences(text)
+  for (const id of ctx.noCapabilities) {
+    const re = CAPABILITY_DEMAND_PATTERNS[id as keyof typeof CAPABILITY_DEMAND_PATTERNS]
+    if (!re) continue
+    const m = match(re, clean)
+    if (m) {
+      return { code: 'V-CAP', severity: 'REJECT', matched: m,
+               detail: `capability '${id}' is NO for this learner` }
+    }
+  }
   return null
 }
 

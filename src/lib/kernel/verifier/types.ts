@@ -103,6 +103,11 @@ export interface VerifierContext {
   /** Concept terms currently banned as new (V-VOC-NAME lexicon per RS §9.2).
    *  Pack-supplied per language; MVP ships an English seed. */
   bannedConceptTerms: string[]
+  /** Capability ids currently in a NO state (OBSERVED_NO / STATED_NO) for
+   *  this learner. Supplied by capabilityModel.noCapabilities(); V-CAP scans
+   *  only for these. Empty ⇒ V-CAP is a no-op, which is the correct
+   *  behaviour for a learner with no recorded operational failures. */
+  noCapabilities?: string[]
   /** Learner content preview (short) — the REACT rule reads it. */
   learnerText: string
   /** Legal single-line tags for this turn (V-TAG whitelist). */
