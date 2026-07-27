@@ -13,6 +13,10 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { check, formatReport, fmt, isFormatted } from '../src/lib/cekr/cli'
 import { importKg, importAssets, coverage, formatCoverage } from '../src/lib/cekr/import'
+import {
+  buildIndex, entityCard, findReferences, impactOf, neighborhood, resolveId,
+  formatCard, formatReferences, formatImpact, formatNeighborhood,
+} from '../src/lib/cekr/query'
 import type { CekrRecord } from '../src/lib/cekr/types'
 import { buildFromCekr, serializeLock } from '../src/lib/brain-compiler'
 
@@ -45,11 +49,15 @@ function importAll(only?: string): { records: CekrRecord[]; diagnostics: Array<{
 }
 
 function usage(): never {
-  console.error('usage: brain check <files...> | brain fmt [--check] <files...> | brain coverage | brain build <subject> [--include-draft] [--emit]')
+  console.error(
+    'usage: brain check <files...> | brain fmt [--check] <files...> | brain coverage\n' +
+    '     | brain build <subject> [--include-draft] [--emit]\n' +
+    '     | brain show <id> | brain refs <id> | brain impact <id> | brain near <id> [radius]\n' +
+    '     | brain replay <persona> [--seed n] [--turns n] [--engine] [--rules]')
   process.exit(2)
 }
 
-function main(): void {
+async function main(): Promise<void> {
   const [command, ...rest] = process.argv.slice(2)
   if (!command) usage()
 
@@ -106,6 +114,61 @@ function main(): void {
     process.exit(r.ok ? 0 : 1)
   }
 
+  // C6 — replay theater. Runs the REAL kernel stages via runEpisode and
+  // renders what they decided; nothing here decides anything itself.
+  if (command === 'replay') {
+    const personaId = rest[0]
+    if (!personaId) usage()
+    const { PERSONAS, personaById } = await import('../src/lib/kernel/simulation/personas')
+    const persona = personaById(personaId)
+    if (!persona) {
+      console.error(`unknown persona: ${personaId}`)
+      console.error(`available: ${PERSONAS.map((p) => p.id).join(', ')}`)
+      process.exit(2)
+    }
+    const flag = (name: string, fallback: number): number => {
+      const i = rest.indexOf(`--${name}`)
+      return i >= 0 ? Number(rest[i + 1]) || fallback : fallback
+    }
+    const engine = rest.includes('--engine')
+    const { runEpisode } = await import('../src/lib/kernel/simulation/run')
+    const { formatReplay, stageJumps } = await import('../src/lib/kernel/simulation/replay')
+    const result = await runEpisode({
+      persona, seed: flag('seed', 1), turns: flag('turns', 12),
+      // The engine transcript needs the shadow run; asking for --engine
+      // without it would print an empty theatre.
+      engineShadow: engine,
+    })
+    console.log(formatReplay(result, { engine, rules: rest.includes('--rules') }))
+    const jumps = stageJumps((engine ? result.engine?.turns : result.turns) ?? [])
+    console.log(jumps.length === 0
+      ? '  QUESTION-STAGE: no jumps'
+      : `  QUESTION-STAGE: ${jumps.length} phase skip(s) — ${jumps.map((j) => `t${j.turnIndex} ${j.from}→${j.to}`).join(', ')}`)
+    const violations = (engine ? result.engine?.violations : result.violations) ?? []
+    process.exit(violations.length === 0 && jumps.length === 0 ? 0 : 1)
+  }
+
+  // C5 — the language service, on the CLI. Same pure queries a future LSP
+  // or web IDE will call; this is the consumer that exists today.
+  if (command === 'show' || command === 'refs' || command === 'impact' || command === 'near') {
+    const id = rest[0]
+    if (!id) usage()
+    const index = buildIndex(importAll().records)
+    // Authors type KG slugs; entity ids are cekr:<Kind>/<slug>. Resolve, and
+    // say so plainly when the slug is unknown or ambiguous rather than
+    // answering a question about an entity that does not exist.
+    const resolved = resolveId(index, id)
+    if (!resolved) {
+      console.log(`unknown or ambiguous id: ${id}`)
+      process.exit(1)
+    }
+    if (command === 'show') console.log(formatCard(entityCard(index, resolved), resolved))
+    else if (command === 'refs') console.log(formatReferences(findReferences(index, resolved), resolved))
+    else if (command === 'impact') console.log(formatImpact(impactOf(index, resolved)))
+    else console.log(formatNeighborhood(neighborhood(index, resolved, Number(rest[1] ?? 1) || 1)))
+    process.exit(0)
+  }
+
   if (command === 'import' || command === 'coverage') {
     const { records, diagnostics } = importAll()
     console.log(formatCoverage(coverage(records)))
@@ -125,4 +188,7 @@ function main(): void {
   usage()
 }
 
-main()
+main().catch((err) => {
+  console.error(err instanceof Error ? err.message : String(err))
+  process.exit(1)
+})

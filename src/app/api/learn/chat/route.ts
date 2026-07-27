@@ -1281,6 +1281,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     let frustrationAfterTurnHoisted:
       import('@/lib/kernel/frustration').FrustrationMachine | null = null
     let frustrationBandHoisted: 'calm' | 'strained' | 'flooded' | null = null
+    // ISS-13 — re-derivations for the optimistic-concurrency retry.
+    //
+    // Every ACCUMULATIVE snapshot field is a fold over the snapshot read at
+    // the start of this turn. If a concurrent turn commits before we persist,
+    // that base no longer exists and re-applying the folded RESULT discards
+    // the other turn's increment. Each fold therefore registers how to redo
+    // itself against whatever the snapshot actually is at write time.
+    //
+    // Registered AT THE FOLD SITE, never in a central list: only the code
+    // that folded knows how to re-fold, and a list here would be a second
+    // owner of every fold in the turn.
+    const snapshotRederivers: Array<(fresh: Record<string, unknown>) => Record<string, unknown>> = []
     // EOS v2 Capability Model — session-tier state + this concept's demands.
     let capabilityStateHoisted:
       import('@/lib/teaching/capabilityModel').CapabilityState | null = null
@@ -1825,6 +1837,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             snapshot?.kernelParity as never, parity,
           )
           kernelParityTagsHoisted = parityTags(parity)
+          snapshotRederivers.push((fresh) => ({
+            kernelParity: foldParityMetrics(fresh.kernelParity as never, parity),
+          }))
 
           // K4 — the Policy Engine's production consumer. Runs the 7-band
           // engine over the runtime pack (BASE_PACK + any activated C4
@@ -1882,6 +1897,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 snapshot?.enginePolicyParity as never, engineParity,
               )
               enginePolicyTagsHoisted = parityTags(engineParity, 'engine')
+              snapshotRederivers.push((fresh) => ({
+                enginePolicyParity: foldParityMetrics(fresh.enginePolicyParity as never, engineParity),
+              }))
             }
           }
         }
@@ -2192,10 +2210,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           : memoryFallbackReason === 'Explanation Memory lookup error' ? 'lookup_error'
           : memoryFallbackReason === 'Brain decision' ? 'brain_decision'
           : 'no_asset'
-        const routed = await routeAI(
-          [...historyMessages, { role: 'user', content: message }],
-          systemPrompt,
-          country,
+        // K6 — Degraded deterministic mode (RS P-3). When EVERY provider in
+        // the failover chain has thrown, the turn is served by a K5 template
+        // instead of an HTTP 500: the learner gets a teaching-shaped,
+        // verifier-clean-by-construction turn, banner-free ("learner not
+        // told 'AI down'"). AIBudgetExceededError still propagates — budget
+        // exhaustion is load management with a deliberate 429, not an outage.
+        let routed: { text: string; provider: string; finishReason: string | null }
+        try {
+          routed = await routeAI(
+            [...historyMessages, { role: 'user', content: message }],
+            systemPrompt,
+            country,
           // Was 1024. gpt-oss-20b is a reasoning model — it spends output
           // tokens on internal reasoning BEFORE the final answer, so a tight
           // completion budget can be exhausted mid-reasoning, yielding an
@@ -2207,8 +2233,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // real headroom for reasoning + this app's long teaching replies.
           2048,
           teachingLang,
-          { userId, subject: learnSession.subject.slug },
-        )
+            { userId, subject: learnSession.subject.slug },
+          )
+        } catch (aiError) {
+          if (aiError instanceof AIBudgetExceededError) throw aiError
+          console.error('[learn/chat] all providers down — serving degraded template (RS P-3):',
+            aiError instanceof Error ? aiError.message : String(aiError))
+          captureError(aiError, { route: 'api/learn/chat', tags: { stage: 'ai-degraded' } })
+          const { degradedTurn } = await import('@/lib/eos-runtime')
+          const degraded = degradedTurn({ register: contentRegister, learnerText: message })
+          routed = { text: degraded.text, provider: degraded.provider, finishReason: degraded.finishReason }
+        }
         text = routed.text
         provider = routed.provider
         finishReason = routed.finishReason
@@ -2369,15 +2404,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // remains only as the no-machine-state fallback).
       try {
         const { readFrustration, stepFrustration, affectBandOf } = await import('@/lib/kernel/frustration')
+        const frustrationEvidence = {
+          failed: teachingSignal ? teachingSignal.correctness === false : null,
+          recoveryFired: recoveryKeyHoisted !== null,
+          succeeded: teachingSignal?.correctness === true,
+        }
         frustrationAfterTurnHoisted = stepFrustration(
-          readFrustration(snapshot?.frustration),
-          {
-            failed: teachingSignal ? teachingSignal.correctness === false : null,
-            recoveryFired: recoveryKeyHoisted !== null,
-            succeeded: teachingSignal?.correctness === true,
-          },
+          readFrustration(snapshot?.frustration), frustrationEvidence,
         )
         frustrationBandHoisted = affectBandOf(frustrationAfterTurnHoisted.state)
+        snapshotRederivers.push((fresh) => ({
+          frustration: stepFrustration(readFrustration(fresh.frustration), frustrationEvidence),
+        }))
       } catch { /* affect estimation never takes a turn down */ }
 
       let eosVerifierEvents: import('@/lib/kernel/verifier').OutputEvent[] = []
@@ -2483,6 +2521,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               turnOutcome,
             )
             eosVerifierTagsHoisted = verifierTags(turnOutcome)
+            snapshotRederivers.push((fresh) => ({
+              verifierMetrics: foldVerifierMetrics(fresh.verifierMetrics as never, turnOutcome),
+            }))
           }
         } catch (err) {
           // Fail-open: never break the turn on verifier failure.
@@ -2898,7 +2939,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       }
       // MISCONCEPTION contract (student-state/03 §1: verbatim phrase evidence —
       // "the learner's own phrasing is the elicit-step script for the repair").
+      // ISS-18: the PERSISTED copy is hashed for minors. The repair contract
+      // above reads the live signal in memory and is unaffected; what the
+      // hash removes is a later reader's ability to reconstruct a child's
+      // sentence, while identical phrases still group identically.
       if (teachingSignal?.phrase) {
+        const { persistableVerbatim } = await import('@/lib/teaching/verbatimRedaction')
         appendEvidenceEvent({
           userId,
           sessionId,
@@ -2907,7 +2953,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           language:  teachingLang,
           gradeBand: memoryState?.gradeBand ?? GradeBand.ADULT,
           category:  EvidenceCategory.MISCONCEPTION_DETECTED,
-          outcome:   teachingSignal.phrase.slice(0, 200),
+          outcome:   persistableVerbatim(teachingSignal.phrase.slice(0, 200), { grade: profile?.grade }),
           strength:  0.5,
         })
       }
@@ -3138,6 +3184,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const failureThisTurn = recoveryKeyHoisted !== null || teachingSignal?.correctness === false
           const newSessionFailureCount = failureThisTurn ? snapshotSessionFailureCount + 1 : snapshotSessionFailureCount
           const failureCountUpdate = failureThisTurn ? { sessionFailureCount: newSessionFailureCount } : {}
+          // ISS-13: the counter is an increment over the base, so a concurrent
+          // turn's increment must not be overwritten by ours.
+          if (failureThisTurn) {
+            snapshotRederivers.push((fresh) => ({
+              sessionFailureCount: (typeof fresh.sessionFailureCount === 'number' ? fresh.sessionFailureCount : 0) + 1,
+            }))
+          }
 
           // Session lifecycle fold (07 §1/§6): this turn's signal advances
           // the episode machine — OPENING→CORE on the first answered item,
@@ -3299,11 +3352,29 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // it back via readTeachingStepIndex() instead of restarting.
               ...(teachingStepUpdateHoisted ?? {}),
             }
-            prisma.$executeRaw`
-              UPDATE "LearnSession"
-              SET "contextSnapshot" = COALESCE("contextSnapshot", '{}'::jsonb) || ${JSON.stringify(libSnapshotDelta)}::jsonb
-              WHERE id = ${sessionId}
-            `.catch(() => {})
+            // ISS-13: conditional on the version read at the start of this
+            // turn. If a concurrent turn committed in between, the write
+            // conflicts and is retried ONCE against the snapshot as it
+            // actually is, with every accumulative field re-folded by the
+            // rederivers its own fold site registered. Fail-soft throughout:
+            // a second conflict loses this turn's accumulative state, exactly
+            // as the unconditional write always did, and never the reply.
+            const { writeSnapshotDelta, readSnapshotVersion } = await import('@/lib/db/snapshotWrite')
+            const rederivers = snapshotRederivers
+            writeSnapshotDelta(prisma, {
+              sessionId,
+              expectedVersion: readSnapshotVersion(snapshot),
+              delta: libSnapshotDelta,
+              rederive: rederivers.length === 0
+                ? undefined
+                : (fresh) => Object.assign({}, ...rederivers.map((f) => f(fresh))),
+            }).then((r) => {
+              if (!r.applied) {
+                console.warn('[learn/chat] snapshot write not applied', {
+                  sessionId, conflicted: r.conflicted, error: r.error,
+                })
+              }
+            }).catch(() => {})
           }
         } catch (err) {
           console.warn('[learn/chat] wave-0 library persist skipped:', err)

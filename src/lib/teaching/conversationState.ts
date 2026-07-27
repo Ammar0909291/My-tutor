@@ -478,11 +478,75 @@ export function responseBudget(register: Register, consecutiveFailures: number):
 
 // ── Learner autonomy detection (moved out of route.ts for testability) ────────
 
-const AUTONOMY_RE = /\b(next\s+topic|next\s+lesson|move\s+on|skip\s+this|let'?s?\s+continue|let'?s?\s+move\s+on|can\s+we\s+move\s+on|ready\s+to\s+move\s+on)\b/i
+/**
+ * ISS-09 — the ru/hi pattern sets sit alongside the English ones rather than
+ * behind a language parameter: Cyrillic and Devanagari cannot collide with
+ * Latin patterns or each other, so the script discriminates and every call
+ * site is unchanged. Romanized Hindi is anchored to multi-word phrases with
+ * no English reading, the same discipline recoveryGuard uses.
+ */
+const AUTONOMY_RE =
+  /\b(next\s+topic|next\s+lesson|move\s+on|skip\s+this|let'?s?\s+continue|let'?s?\s+move\s+on|can\s+we\s+move\s+on|ready\s+to\s+move\s+on)\b/i
+const AUTONOMY_RU_RE =
+  /(след(ующая|ующую)\s+тема|след(ующий|ующую)\s+урок|дальше|двигаемся\s+дальше|идём\s+дальше|идем\s+дальше|пропустить\s+это|продолжим)/iu
+const AUTONOMY_HI_RE =
+  /(अगला\s+(विषय|पाठ)|आगे\s+बढ़(ें|ो|ते)|छोड़\s+(दो|दें)|जारी\s+रख)|\b(agla\s+topic|aage\s+badh(o|ein|te)|chhod\s+do)\b/iu
 
-/** The learner explicitly asked to advance — server-detected, honored. */
+/** Negators for the ru/hi sets — same asymmetry as English: a request to
+ *  STAY must never advance the learner past unfinished work. */
+// JavaScript's \b is ASCII-only, so `\bне\b` can never match Cyrillic —
+// Unicode-aware boundaries are required or the guard is silently dead code.
+const AUTONOMY_RU_NEGATOR_RE =
+  /(?<!\p{L})(не|нет|стоп|подожди|погоди|пока|прежде)(?!\p{L})/iu
+const AUTONOMY_HI_NEGATOR_RE =
+  /(नहीं|मत|रुक|पहले)|(?<!\p{L})(nahi+|mat|ruk(o|iye))(?!\p{L})/iu
+
+/**
+ * ISS-08 — the negation guard.
+ *
+ * The bare pattern fires on "I don't want to move on", "not ready to move
+ * on", "can we NOT move on yet" — every one of them a request to STAY, read
+ * as a request to leave. The cost is asymmetric and severe: a false positive
+ * appends [LESSON_COMPLETE] and advances the learner past a concept they
+ * just said they were not done with, which is the hollow-advancement failure
+ * the mastery gate exists to prevent. A false negative merely means the
+ * learner asks again.
+ *
+ * So the guard is deliberately blunt: a negator ANYWHERE before the matched
+ * phrase suppresses the request. "Move on" is a short, fixed idiom — there is
+ * no construction where "I don't want to ... move on" means "advance me".
+ */
+const AUTONOMY_NEGATOR_RE =
+  /\b(?:not|never|no|stop|wait|hold\s+on|before|until|unless|rather)\b|\b(?:do|does|did|wo|can|is|are|was|were|should|would|could)n'?t\b|\bcannot\b/i
+
+/**
+ * ISS-08 — the anchoring guard.
+ *
+ * A learner quoting or asking ABOUT the phrase is not issuing it: "what does
+ * 'move on' mean here?", "the book says to move on after each section".
+ * Quoted spans and interrogatives about the phrase are excluded. Anchoring
+ * follows recoveryGuard's own precedent, where mild patterns only count when
+ * the short message IS the utterance rather than mentions it.
+ */
+const AUTONOMY_MENTION_RE = /["“'‘][^"”'’]*\b(?:move\s+on|next\s+topic|next\s+lesson|skip\s+this)\b[^"”'’]*["”'’]|\bwhat\s+(?:does|do\s+you\s+mean\s+by)\b/i
+
+/** The learner explicitly asked to advance — server-detected, honored.
+ *  Guarded per ISS-08: negated and merely-mentioned forms do not count. */
 export function detectAutonomyRequest(message: string): boolean {
-  return AUTONOMY_RE.test(message)
+  for (const [re, negator] of [
+    [AUTONOMY_RE, AUTONOMY_NEGATOR_RE],
+    [AUTONOMY_RU_RE, AUTONOMY_RU_NEGATOR_RE],
+    [AUTONOMY_HI_RE, AUTONOMY_HI_NEGATOR_RE],
+  ] as const) {
+    const m = re.exec(message)
+    if (!m) continue
+    if (AUTONOMY_MENTION_RE.test(message)) return false
+    // Negation is scoped to the text BEFORE the match: "move on, I'm not
+    // confused" is still a request to advance, and a whole-message scan would
+    // suppress it.
+    if (!negator.test(message.slice(0, m.index))) return true
+  }
+  return false
 }
 
 /** ONLY injected when masteryVerified(state) is already true (see

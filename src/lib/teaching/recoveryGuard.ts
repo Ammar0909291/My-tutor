@@ -115,6 +115,59 @@ const STRONG_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   // never matches.
   ['too_many_questions', /^(please\s+)?explain(\s+(it|this|that))?[.!?\s]*$/i],
   ['too_many_questions', /^(just\s+)?(tell|show)\s+(me|us)\s+(the\s+answer|what\s+it\s+is|how\s+it\s+works)[.!?\s]*$/i],
+
+  // ── ISS-09 — Russian and Hindi pattern sets ────────────────────────────
+  //
+  // The app teaches in ru and hi (TeachingLanguage), and every pattern above
+  // is English-only: a Russian learner writing «я не понимаю» reached the
+  // Recovery Engine as an ordinary answer and got a follow-up QUESTION,
+  // which is the exact failure recovery exists to prevent — for the two
+  // languages least able to ask for help in English.
+  //
+  // NO LANGUAGE PARAMETER, deliberately. Cyrillic and Devanagari cannot
+  // collide with the Latin patterns above, and those cannot collide with
+  // these, so the SCRIPT is the discriminator and every call site stays
+  // unchanged. Romanized Hindi is the one exception and is anchored
+  // accordingly (see below).
+  //
+  // These live in STRONG (not MILD) for the same reason their English
+  // counterparts do: they are absolute-ignorance and identity utterances
+  // that leave no ambiguity, and the MILD tier's ≤80-char gate would drop
+  // them from a longer sentence.
+
+  // Russian. NOTE: JavaScript's \b is ASCII-only — `\bя` can never match,
+  // because `я` is not a \w character, so a first draft using \b was dead
+  // code that silently matched nothing. Unicode-aware boundaries
+  // ((?<!\p{L}) / (?!\p{L}) with the u flag) are used instead.
+  ['dont_know',    /(?<!\p{L})я\s+не\s+знаю(?!\p{L})|(?<!\p{L})понятия\s+не\s+имею(?!\p{L})|(?<!\p{L})не\s+имею\s+понятия(?!\p{L})/iu],
+  ['dont_understand', /(?<!\p{L})(я\s+)?не\s+понимаю(?!\p{L})|(?<!\p{L})ничего\s+не\s+понятно(?!\p{L})|(?<!\p{L})не\s+понял[аи]?(?!\p{L})/iu],
+  ['forgot',       /(?<!\p{L})(я\s+)?забы(л|ла|ли)(?!\p{L})/iu],
+  ['give_up',      /(?<!\p{L})(я\s+)?сдаю́?сь(?!\p{L})|(?<!\p{L})я\s+больше\s+не\s+могу(?!\p{L})/iu],
+  ['cant',         /(?<!\p{L})я\s+не\s+могу\s+(это|этого)(?!\p{L})|(?<!\p{L})у\s+меня\s+не\s+получается(?!\p{L})/iu],
+  ['stupid',       /(?<!\p{L})я\s+(такой\s+|такая\s+)?(тупой|тупая|глупый|глупая|дурак)(?!\p{L})/iu],
+  ['too_hard',     /(?<!\p{L})(это\s+)?слишком\s+(сложно|трудно|тяжело)(?!\p{L})/iu],
+  ['scared',       /(?<!\p{L})мне\s+страшно(?!\p{L})|(?<!\p{L})я\s+боюсь(?!\p{L})/iu],
+  ['hate_subject', /(?<!\p{L})я\s+ненавижу\s+\p{L}+/iu],
+  ['too_many_questions', /(?<!\p{L})(хватит\s+вопросов|слишком\s+много\s+вопросов|перестань\s+спрашивать|просто\s+объясни)(?!\p{L})/iu],
+
+  // Hindi (Devanagari) — «मुझे नहीं पता», «समझ नहीं आया», «भूल गया»
+  ['dont_know',    /मुझे\s+(कुछ\s+)?नहीं\s+पता|पता\s+नहीं|मालूम\s+नहीं/u],
+  ['dont_understand', /समझ\s+(में\s+)?नहीं\s+आया|मुझे\s+समझ\s+नहीं|समझ\s+नहीं\s+आ\s+रहा/u],
+  ['forgot',       /भूल\s+ग(या|यी|ये)/u],
+  ['give_up', /मैं\s+हार\s+(मान\s+)?(गया|गयी|मानता|मानती)|छोड़\s+(दो|दिया)/u],
+  ['cant',         /मुझसे\s+नहीं\s+होगा|मैं\s+नहीं\s+कर\s+सकता|मैं\s+नहीं\s+कर\s+सकती/u],
+  ['too_hard',     /बहुत\s+(मुश्किल|कठिन)\s*(है)?/u],
+  ['scared',       /मुझे\s+डर\s+लग/u],
+  ['too_many_questions', /बहुत\s+सारे\s+सवाल|सवाल\s+मत\s+पूछो|बस\s+बताओ|सिर्फ\s+बताओ/u],
+
+  // Romanized Hindi (Hinglish) — the one set written in Latin script, so
+  // each is anchored to a multi-word phrase with no English reading:
+  // "nahi pata" / "samajh nahi aaya" / "bhool gaya" are not substrings of
+  // any English sentence this tutor would see.
+  ['dont_know',    /\b(mujhe\s+)?(kuch\s+)?nah?i+\s+pata\b|\bpata\s+nah?i+\b|\bmalum\s+nah?i+\b/i],
+  ['dont_understand', /\bsamajh\s+(mein\s+)?nah?i+\s+(aaya|aa\s+raha)\b|\bsamajh\s+nah?i+\b/i],
+  ['forgot',       /\bbh?ool\s+gay[ai]\b/i],
+  ['cant',         /\bmujhse\s+nah?i+\s+hoga\b/i],
 ]
 
 const MILD_PATTERNS: Array<[FailureStateKey, RegExp]> = [

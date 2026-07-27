@@ -23,6 +23,11 @@ export interface EpisodeTurn {
   stateBefore: ConversationState
   decision: PolicyDecision
   recoveryActive: boolean
+  /** What the persona said this turn. Synthetic by construction — no learner
+   *  text ever reaches the simulator. Carried so a replay transcript is
+   *  readable; a replay that shows decisions without the utterance that
+   *  provoked them cannot be reasoned about (C6). */
+  message?: string
 }
 
 export interface InvariantViolation {

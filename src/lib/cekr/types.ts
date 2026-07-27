@@ -198,6 +198,24 @@ export function makeEntityId(kind: Kind, slug: string): EntityId {
   return `cekr:${kind}/${slug}`
 }
 
+/**
+ * The inverse of makeEntityId: recover the authored slug from an entity id.
+ *
+ * Lives beside its inverse deliberately. The id shape is one decision, and a
+ * consumer that re-derives the slug by its own string surgery is a second
+ * owner of it — which is exactly how the compiler came to guard Band-3 rules
+ * on `cekr:Concept/x` for hand-authored concepts while the runtime matched on
+ * `x`, producing rules that compiled, loaded and could never fire.
+ *
+ * Returns the input unchanged when it is not a CEKR id, so callers holding
+ * either form can pass it straight through.
+ */
+export function slugOf(entityId: string): string {
+  if (!entityId.startsWith('cekr:')) return entityId
+  const slash = entityId.indexOf('/')
+  return slash >= 0 ? entityId.slice(slash + 1) : entityId
+}
+
 // ── Schema-version registry (V-2) ──────────────────────────────────────────
 
 /** Current schemaVersion per kind. A decode encountering a HIGHER version

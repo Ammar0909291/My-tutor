@@ -60,6 +60,10 @@ export interface EpisodeResult {
   engine?: {
     /** The engine's decisions, run through the SAME invariant battery. */
     violations: InvariantViolation[]
+    /** The engine's per-turn decisions, for the C6 replay transcript. Same
+     *  objects the battery checked — a transcript rendered from anything else
+     *  would not be showing what was verified. */
+    turns: EpisodeTurn[]
     /** Turns where the engine's move differed from the adapter path's. */
     moveDivergences: Array<{ turnIndex: number; adapter: string | null; engine: string }>
     turnsCompared: number
@@ -114,7 +118,7 @@ export async function runEpisode(opts: EpisodeOptions): Promise<EpisodeResult> {
 
     const decision = s.policy!
     const recoveryActive = s.interrupt?.active === true
-    turns.push({ turnIndex: i, stateBefore: cs, decision, recoveryActive })
+    turns.push({ turnIndex: i, stateBefore: cs, decision, recoveryActive, message: pt.message })
 
     if (opts.engineShadow) {
       // The Band-2 verdict, from the ladder's own legality call — the same
@@ -132,7 +136,7 @@ export async function runEpisode(opts: EpisodeOptions): Promise<EpisodeResult> {
       })
       if (gate.decision) {
         engineTurns.push({
-          turnIndex: i, stateBefore: cs, recoveryActive,
+          turnIndex: i, stateBefore: cs, recoveryActive, message: pt.message,
           decision: engineDecisionToPolicyDecision(gate.decision, {
             learnerId: s.context.learnerId, sessionId: s.context.sessionId, turnId: s.context.turnId,
           }),
@@ -176,6 +180,7 @@ export async function runEpisode(opts: EpisodeOptions): Promise<EpisodeResult> {
     ...(opts.engineShadow ? {
       engine: {
         violations: checkEpisode(engineTurns),
+        turns: engineTurns,
         moveDivergences,
         turnsCompared: engineTurns.length,
       },

@@ -29,7 +29,7 @@
 import type {
   CekrEdge, CekrEnvelope, CekrRecord,
 } from '@/lib/cekr/types'
-import { isEdge } from '@/lib/cekr/types'
+import { isEdge, slugOf } from '@/lib/cekr/types'
 import type { Diagnostic, GuardAST, PackAST, RuleAST, SourceSpan } from './types'
 import type { GuardClause } from './types'
 import { fieldsRead, describeGuard } from './predicates'
@@ -121,7 +121,13 @@ export function compileFromCekr(
 
   for (const conceptId of conceptIds) {
     const concept = entities.get(conceptId)!
-    const kgId = typeof concept.body.kgId === 'string' ? concept.body.kgId : conceptId
+    // The guard must key on the slug the RUNTIME sees. PolicyInputs
+    // .currentConceptId is a KG slug, never a CEKR id — so falling back to the
+    // raw entity id (as this did) emitted rules that compiled, loaded, and
+    // could never fire. Imported concepts carry body.kgId; hand-authored ones
+    // (C2 BrainScript) do not, and for those the slug is recoverable from the
+    // id by its own inverse. Caught by the ISS-24 golden thread.
+    const kgId = typeof concept.body.kgId === 'string' ? concept.body.kgId : slugOf(conceptId)
 
     const explanations = (explainsByConcept.get(conceptId) ?? [])
       .filter((x) => servable.has(x.status))
