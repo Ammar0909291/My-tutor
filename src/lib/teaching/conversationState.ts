@@ -480,9 +480,45 @@ export function responseBudget(register: Register, consecutiveFailures: number):
 
 const AUTONOMY_RE = /\b(next\s+topic|next\s+lesson|move\s+on|skip\s+this|let'?s?\s+continue|let'?s?\s+move\s+on|can\s+we\s+move\s+on|ready\s+to\s+move\s+on)\b/i
 
-/** The learner explicitly asked to advance — server-detected, honored. */
+/**
+ * ISS-08 — the negation guard.
+ *
+ * The bare pattern fires on "I don't want to move on", "not ready to move
+ * on", "can we NOT move on yet" — every one of them a request to STAY, read
+ * as a request to leave. The cost is asymmetric and severe: a false positive
+ * appends [LESSON_COMPLETE] and advances the learner past a concept they
+ * just said they were not done with, which is the hollow-advancement failure
+ * the mastery gate exists to prevent. A false negative merely means the
+ * learner asks again.
+ *
+ * So the guard is deliberately blunt: a negator ANYWHERE before the matched
+ * phrase suppresses the request. "Move on" is a short, fixed idiom — there is
+ * no construction where "I don't want to ... move on" means "advance me".
+ */
+const AUTONOMY_NEGATOR_RE =
+  /\b(?:not|never|no|stop|wait|hold\s+on|before|until|unless|rather)\b|\b(?:do|does|did|wo|can|is|are|was|were|should|would|could)n'?t\b|\bcannot\b/i
+
+/**
+ * ISS-08 — the anchoring guard.
+ *
+ * A learner quoting or asking ABOUT the phrase is not issuing it: "what does
+ * 'move on' mean here?", "the book says to move on after each section".
+ * Quoted spans and interrogatives about the phrase are excluded. Anchoring
+ * follows recoveryGuard's own precedent, where mild patterns only count when
+ * the short message IS the utterance rather than mentions it.
+ */
+const AUTONOMY_MENTION_RE = /["“'‘][^"”'’]*\b(?:move\s+on|next\s+topic|next\s+lesson|skip\s+this)\b[^"”'’]*["”'’]|\bwhat\s+(?:does|do\s+you\s+mean\s+by)\b/i
+
+/** The learner explicitly asked to advance — server-detected, honored.
+ *  Guarded per ISS-08: negated and merely-mentioned forms do not count. */
 export function detectAutonomyRequest(message: string): boolean {
-  return AUTONOMY_RE.test(message)
+  const m = AUTONOMY_RE.exec(message)
+  if (!m) return false
+  if (AUTONOMY_MENTION_RE.test(message)) return false
+  // Negation is scoped to the text BEFORE the match: "move on, I'm not
+  // confused" is still a request to advance, and a whole-message scan would
+  // suppress it.
+  return !AUTONOMY_NEGATOR_RE.test(message.slice(0, m.index))
 }
 
 /** ONLY injected when masteryVerified(state) is already true (see
