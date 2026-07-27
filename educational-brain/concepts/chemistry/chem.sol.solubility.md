@@ -169,6 +169,128 @@ No AssetIdentity records seeded for `chem.sol.solubility` as of 2026-07-23.
 
 This is a terminal node with no unlocks. The placement is appropriate — solubility and Henry's law are applications of gas-laws (chem.state.gas-laws via Dalton's law of partial pressures) and solution-type knowledge (chem.sol.types via like-dissolves-like). The ecological and physiological connections make this a high-transfer concept despite its terminal position.
 
+## Live Transcript Analysis (2026-07-27)
+
+**Source**: a real student session on Lesson 44 (Solubility and Henry's Law) with
+Tutor Max, analyzed turn-by-turn below. This section exists to inform future
+runtime improvements — it is teaching knowledge derived from observed failure,
+not runtime code.
+
+### What the Tutor Did (turn-by-turn diagnosis)
+
+| Turn | Tutor action | Educational Brain rule | Verdict |
+|------|-------------|----------------------|---------|
+| 1 | "Picture a glass of soda with bubbles..." + "Read more" | OBSERVE (01§3 demo1 opening) | **Correct** — concrete anchor |
+| 2 | "What do you notice about the bubbles?" | OBSERVE phase ask | **Correct** — observation question after showing |
+| 3 | Student gives a good answer (buoyancy, dissolved CO₂). Tutor: "Imagine an unopened bottle. Do you see lots of bubbles?" | Second observation question | **Borderline** — the student already answered well; advancing to DEMONSTRATE would have been better |
+| 4–8 | Student says "Not lots of", "Nope", "I think yes", "Got it." Tutor keeps asking: "Have you seen a similar situation?", "What do you see?", "Have you seen..." — 6 consecutive questions | QUIZ register (conversation-engine/06§1) — **max 2 questions in a row, violated** | **FAILED** — the tutor fell into the QUIZ anti-pattern. After 2 questions, the next turn MUST give something (a statement, demonstration, or observation) |
+| 9–11 | Student sends "?", "No I don't have it.", ":(". Tutor: "Sorry, I got cut off" (error) × 2, then "Imagine a glass of soda..." — restarting the same anchor | ROBOT register (06§1) — no acknowledgment, identical restart | **FAILED** — the tutor restarts the same observation without acknowledging the student's distress |
+| 12 | **Student: "Can you explain me the law rather than keep asking the questions?"** | too_many_questions recovery trigger (recoveryGuard.ts) | **FAILED TO DETECT** — this exact phrasing did not match any pattern; the student's clearest signal was missed by the system |
+| 13 | Tutor gives a good explanation: Henry's Law stated, formula, worked example, soda/diving applications | DEMONSTRATE + EXPLAIN | **Correct** — this is what should have happened at turn 3 |
+| 14 | Student: "Got it." Tutor: "Which everyday situation involves gas dissolving?" | Back to asking | **FAILED** — the correct next move after a successful explanation is GUIDED PRACTICE (a calculation), not another observation question |
+| 15–end | Student says "Mineral water bottle", "No idea", "I don't have any idea about amount of co2", "I don't know" × 2. Tutor keeps asking the same observation question ("What do you notice about the gas and the liquid?") | Multiple recovery triggers missed; QUIZ register sustained | **FAILED** — the tutor ignored 5 consecutive failure signals and kept asking observation questions |
+
+### How a Chemistry Professor Would Teach This
+
+A chemistry professor teaching Henry's Law to a student at this level would follow
+a structure closer to this:
+
+**Phase 1 — Create the Need (30 seconds)**
+- "Let me show you something." Open a bottle of soda (or describe it vividly).
+  Hiss, bubbles, fizzing. "What just happened?" ONE question. If the student
+  says anything about gas/bubbles/CO₂: "Exactly — the CO₂ that was dissolved
+  came out. The question is: WHY was it dissolved before, and WHY did it come
+  out now?"
+
+**Phase 2 — Teach the Law (2 minutes)**
+- State the law directly: "Henry's Law says the amount of gas that dissolves
+  in a liquid is proportional to the pressure of that gas above the liquid.
+  Double the pressure → double the dissolved gas."
+- Write the equation: C = k_H × P
+- Connect to the bottle: "The factory sealed CO₂ at ~3 atm. That's why so
+  much dissolved. You opened it → pressure dropped to almost zero → CO₂
+  can't stay → bubbles."
+
+**Phase 3 — Guided Calculation (3 minutes)**
+- "Let's calculate. k_H for CO₂ = 0.034 mol/L/atm. Under the cap, P = 3 atm.
+  What's C?" Walk through together: 0.034 × 3 = 0.102 mol/L.
+- "Now you open it. P drops to 0.0004 atm. What's C?" Student calculates:
+  0.034 × 0.0004 = 0.0000136 mol/L. "That's 7500× less. All that CO₂ has
+  to go somewhere — that's the fizz."
+
+**Phase 4 — Application (2 minutes)**
+- "Same law explains the bends. At 30m depth, pressure is 4 atm. N₂ in air is
+  78%. What's the partial pressure of N₂?" Student: 0.78 × 4 = 3.12 atm.
+  "So 4× more N₂ dissolves in the diver's blood. Rise too fast → pressure
+  drops → N₂ bubbles in the blood."
+
+**Phase 5 — Transfer Check (1 minute)**
+- "Why do fish die in warm water?" This is the genuine test — it combines
+  Henry's law with the temperature effect. If the student can answer it,
+  they own the concept.
+
+**Critical differences from the observed session:**
+1. The professor TEACHES before asking. The tutor ASKED before teaching.
+2. The professor gives ONE question, waits, then teaches. The tutor gave
+   7+ consecutive questions before any teaching.
+3. The professor moves to guided CALCULATION after explaining. The tutor
+   moved back to observation questions.
+4. The professor reads "I don't know" as "teach me now." The tutor read it
+   as "try asking differently."
+5. The professor's entire sequence takes ~10 minutes. The observed session
+   spent more than 10 minutes in observation questions alone.
+
+### Recovery Guard Gaps Discovered
+
+Three real student messages from this transcript were not detected by the
+recovery guard (`src/lib/teaching/recoveryGuard.ts`). Fixed in the same
+commit as this entry:
+
+1. **"Can you explain me the law rather than keep asking the questions?"**
+   — the learner explicitly contrasts wanting an explanation with the
+   questioning they're getting. Not matched by any existing `too_many_questions`
+   pattern (those require "stop asking" / "too many questions" / "just explain"
+   as whole-message imperatives). **Added**: pattern for
+   `(explain|teach|tell|show) ... (rather than|instead of) ... (asking|question)`.
+
+2. **"I don't have any idea about amount of co2"** — the `dont_know` strong
+   pattern matched "I have no idea" but not "I don't have any idea" (the
+   negated-verb variant). **Fixed**: expanded the existing pattern to include
+   `i (don't|do not) have any idea`.
+
+3. **"?"** (single bare question mark) — the confused pattern required 2+
+   question marks (`\?{2,}`). A single `?` carries the same confused signal.
+   **Fixed**: changed to `\?{1,}`.
+
+4. **":("** (sad emoticon) — no emoticon detection existed. **Added**: bare
+   sad-emoticon pattern (whole-message anchored, maps to `scared`).
+
+### Root Cause: Why the System Kept Asking
+
+The structural cause is a compounding bias across three layers:
+
+1. **Teaching Engine default**: `INTERACTIVE_QUESTIONING` is the default action
+   type for conceptual concepts — the engine's posture is "ask" unless evidence
+   overrides it.
+
+2. **Conversation State Machine**: 4 of 6 phases (`OBSERVE`, `CHECK`, `PRACTICE`,
+   `TRANSFER`) call `decideNextMove() → 'ask'` by default. Only `DEMONSTRATE`
+   defaults to `'show'`.
+
+3. **Detection gaps**: the recovery guard's `too_many_questions` patterns were
+   designed for direct imperatives ("stop asking", "just explain"), not for the
+   more polite contrast form ("explain rather than asking") that real students
+   actually use.
+
+The safeguards (consecutiveDontKnows ≥ 2 forces 'show'; questionsAskedSinceTeach
+≥ 2 forces 'teach') exist and work — but the student's responses ("Got it",
+"Yed", "Ok", ":(" — bare acknowledgements and emoticons) did not fire the
+counters reliably, allowing the OBSERVE-phase loop to persist across many turns.
+
 ## Version History
 
 - v1.0.0 — 2026-07-23 — initial entry, authored per EDUCATIONAL_BRAIN_STANDARD.md v1.0
+- v1.1.0 — 2026-07-27 — added Live Transcript Analysis section from a real
+  student session; identified and documented 4 recovery guard detection gaps
+  (fixed in the same commit); added turn-by-turn teaching diagnosis and
+  professor-vs-AI comparison

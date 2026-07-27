@@ -50,7 +50,7 @@ const STRONG_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   ['cant',         /\bi\s+(just\s+)?can'?t\s+do\s+(this|it|maths?|math|any of this)\b/i],
   // Absolute-ignorance signals — strong because they leave no ambiguity
   ['dont_know',    /\bi\s+(know\s+)?nothing\s+(about\s+\S+\s+)?at\s+all\b|\bi\s+know\s+absolutely\s+nothing\b/i],
-  ['dont_know',    /\b(i\s+have\s+no\s+idea|no\s+clue|how\s+would\s+i\s+know)\b/i],
+  ['dont_know',    /\b(i\s+have\s+no\s+idea|i\s+(don'?t|do\s+not)\s+have\s+any\s+idea|no\s+clue|how\s+would\s+i\s+know)\b/i],
   // "idk" — the most common texting abbreviation for "I don't know"
   ['dont_know',    /\bidk\b/i],
   // "beats me" / "I'm clueless" / "I'm drawing a blank"
@@ -68,6 +68,12 @@ const STRONG_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   ['too_many_questions', /\b(stop|quit)\s+asking\s+(me\s+)?(so\s+many\s+)?questions\b/i],
   ['too_many_questions', /\btoo\s+many\s+questions\b/i],
   ['too_many_questions', /\bwhy\s+(do\s+you\s+)?keep\s+(quizzing|questioning|testing)\s+me\b/i],
+  // "Can you explain ... rather than (keep) asking" / "instead of asking
+  // (me) questions" / "rather than asking questions" — the learner contrasts
+  // a request for teaching with the questioning they're getting. The pattern
+  // requires both halves (explain/teach AND asking/questions) to avoid false-
+  // firing on either alone.
+  ['too_many_questions', /\b(explain|teach|tell|show)\b.*\b(rather\s+than|instead\s+of)\b.*\b(ask(ing)?|question)/i],
   // P0-3: emphatic repetition/exasperation — the learner is not admitting
   // ignorance, they are objecting to being asked again ("I SAID NO",
   // "no no no", "how many times", "for the third time", "ugh", "omg").
@@ -85,11 +91,16 @@ const STRONG_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   // kept to unambiguous words to avoid false-firing on incidental subject
   // content (history/literature can legitimately mention milder words).
   ['frustrated', /\b(fuck(?:ing)?|shit|wtf|bullshit|ffs|smh)\b/i],
+  // Sad emoticons as the whole message — a nonverbal distress signal.
+  // Whole-message anchored (never matches mid-sentence typos).
+  ['scared',     /^[:;][\s]*[(\[]+[.\s!?]*$|^[)\]]+[\s]*[:;][.\s!?]*$/],
   // P2 (universal fix): bare question-marks — complete confusion, nothing
   // the student can contribute; treat as confused, not dont_know (the
   // distinction: confused means "I'm lost", dont_know means "I have no
-  // information" — ??? signals the former).
-  ['confused',          /^\?{2,}[!?.…\s]*$/],
+  // information" — ? / ??? signals the former). A single bare ? carries
+  // the same signal as multiple — the live transcript shows students
+  // sending exactly one question mark when completely lost.
+  ['confused',          /^\?{1,}[!?.…\s]*$/],
   // P2: explicit "you take over" imperatives — the student is not confused
   // about the concept; they're objecting to the Socratic method and asking
   // for direct instruction. Map to too_many_questions (stop asking, teach
