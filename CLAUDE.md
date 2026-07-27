@@ -1644,6 +1644,14 @@
   20/69 → 24/69. `math.nt` 27/36 → 28/36 (otherwise still parked, 8
   concepts remain blocked on deep analytic/algebraic-number-theory
   chains). Mathematics 187 → 192. Full detail: `COVERAGE.md`.
+  **Batch 52 — math.geom Wave 8** (2026-07-26, autonomous loop
+  iteration 42): 5 concepts authored (`distance-formula`,
+  `geometric-proof`, `quadrilateral`, `area`, `volume`; all Blueprint
+  reused by reference), closing out the triangle/proof/area/volume
+  threads recent waves opened. `math.geom` 24/69 → 29/69. Mathematics
+  192 → 197. Coordinate-plane-family + no-Blueprint candidates
+  deferred. Full detail: `COVERAGE.md`. **Loop stopped by explicit user
+  instruction after this batch** — resume only when asked.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly
