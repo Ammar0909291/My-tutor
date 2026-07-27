@@ -400,34 +400,131 @@ and build order, the twelve invariants, the residual limits, and the prohibition
 
 ---
 
-## 9. Honest positioning against the existing repo architecture
+## 9. Honest positioning against EOS v2
 
-v3 is a clean-sheet derivation, but it did not appear in a vacuum. Stated plainly:
+**Revised 2026-07-27 after a full read of all three v2 documents** —
+`EOS_V2_ARCHITECTURE.md` (1,397 lines), `EOS_V2_RUNTIME_SPECIFICATION.md` (921), and
+`EOS_IMPLEMENTATION_MASTERPLAN.md` (388). The first version of this section was written
+from section headings only and was wrong in three material ways. It is corrected below
+rather than quietly edited, because a comparison document that misrepresents what it is
+compared against is worse than no comparison.
 
-**Inherited from EOS v2 and kept, because they are correct.**
-PERCEIVE → DECIDE → RENDER as the turn spine; the sensor plane as an explicit
-architectural layer; the teaching state machine as a legality structure; the verifier
-gate as a hard boundary; educational memory as a filesystem-like plane; the principle
-that prompt engineering is a symptom to be replaced by mechanism.
+### 9.1 Three claims retracted
 
-**Replaced.**
-- v2 keeps the learner model as a *suite of models*; v3 makes it a single Twin over one
-  ledger with typed sub-models, because independent models drift and produce competing
-  authorities (violating A17).
-- v2's policy layer is a policy *engine*; v3 splits it into a strictly banded kernel
-  (A13) so that safety and affect can never be outvoted by pedagogy — v2 leaves this to
-  ordering convention.
-- v2 has no learner simulator. v3 makes it a first-class component (C-42) and makes it
-  a *gate* (A20), because otherwise every pedagogical change is tested on children.
-- v2 treats content as memory; v3 treats it as an economy with a lifecycle and an
-  explicit depreciating/appreciating split (C-14), because that is what determines
-  whether the system's value compounds.
-- v3 adds five components with no v2 equivalent: Identity & Motivation (C-21), Transfer
-  Graph (C-11), Relationship Engine (C-40), Human Plane (C-41), Budget Governor (C-07).
+| First-draft claim | Reality | Verdict |
+|---|---|---|
+| "v2's policy layer leaves band ordering to convention; v3 adds strict preemption" | v2 §6.1 specifies a **seven-band filter network** (0 INTERRUPTS → 6 TIE-BREAK), explicitly "ordered by *authority*, not by confidence." RS §5.2 makes it normative: a Band-0 firing makes its effect "the whole decision skeleton; bands 1–4 are SKIPPED." | **Retracted.** v2's banding is finer than v3's four bands and is normatively specified. v3's scheme is a coarsening. |
+| "v2 has no learner simulator; v3 makes it a first-class gate" | v2 §15.4 specifies persona automata — 6 canonical personas, ≥10⁴ episodes per release candidate, invariant violations must be zero. RS T-5 makes it a **merge gate**. Masterplan K6 budgets 4 ew to build it. | **Retracted.** v2 got there first and specified it more concretely (episode counts, named personas, merge-blocking). |
+| "v2's model *suite* drifts into competing authorities; v3's single Twin fixes it" | v2 §4.0 defines **one** estimator contract; all 12 models are pure folds over **one** evidence log. The §4 global critique names the double-counting risk and resolves it with the designated-owner rule, enforced by RS §5.1's `reads[]` declaration — the pack compiler *rejects* a rule reading a non-owned proxy field. | **Retracted, and the reasoning was backwards.** v2 solved this more rigorously than v3, which merely asserts single ownership. v2's 12 estimators are also deliberately finer than v3's 5, with a stated reason v3 does not answer: their time constants differ by orders of magnitude (seconds / sessions / weeks), and merging time scales smears signal. |
 
-**Not addressed here.** Migration from the current live system. v3 is a target
-architecture; a migration arc would be a separate document, and per the repo's standing
-governance rules nothing in this blueprint authorizes implementation.
+Two further first-draft claims were overstated: v2 **does** have an asset lifecycle,
+capture-on-miss, cost tiers T0–T3, and cross-learner outcome tables (Teacher Memory,
+§10; the "asset flywheel," §16.2) — so "v2 treats content as memory, v3 makes it an
+economy" is wrong; only the *depreciating-vs-appreciating* framing is new. And of the
+"five components with no v2 equivalent," two were wrong: Identity & Motivation is
+largely covered by v2's Motivation Model (§4.7), Curiosity Model (§4.6), and the
+Capability model's `STATED_NO` (a learner's "I can't do maths" is trusted instantly);
+Budget Governor is largely covered by Law L8 plus the budget fields in PolicyDecision.
+
+### 9.2 What v2 already has, and v3 inherits wholesale
+
+The inversion itself (v2 L1: "nothing probabilistic lives in DECIDE"; the LLM as
+"device driver, never the CPU"). Evidence-log-as-truth with folds and re-fold (L4).
+Determinism given committed evidence (L2). Provenance or it is a bug (L3). Loyalty to
+future competence enforced in code (L5). Descriptions never verdicts (L6). Asymmetric
+certify/protect (L7). Budgets enforced by the OS (L8). The 15-stage turn pipeline. The
+three-layer teaching statechart with evidence-gated transitions and one-step-down
+failure. The Output Verifier with a closed rule-code set and a two-attempt rejection
+protocol. Recovery as an interrupt controller with its own micro-machine. Policy as
+compiled, semver'd, citation-bearing data. Degraded deterministic mode. Replay testing.
+Architecture tests for kernel bypass. Every one of v3's twelve invariants has a v2
+ancestor in RS §14's I-1…I-24.
+
+**The honest summary: v3 did not discover the inversion. v2 did, and specified it to a
+depth v3 does not reach.**
+
+### 9.3 What v3 genuinely adds
+
+Nine items survive the full read. Each is absent from all three v2 documents.
+
+1. **Immutable claim identities** (C-08). v2 keys everything on `conceptId`. v3 stores
+   evidence against identities that are minted once and never reused, with graph nodes
+   as *views* over them. This is what lets a learner record survive a decade of
+   curriculum rebuilds; v2 pins *pack* versions but has no answer for graph churn.
+2. **Curriculum Compiler with evidence-preserving migration** (C-12): learners pinned to
+   curriculum builds, migration maps per build, and the rule that a split node inherits
+   *reduced* confidence on each child. v2 has no curriculum-versioning story.
+3. **Curriculum recall** (C-16/C-45): because the ledger records what each learner was
+   taught, a corrected claim yields the exact affected population. This falls out of
+   v2's own L4 and v2 never claims it.
+4. **Practice/Disposition nodes** for interpretive domains — literature, ethics, design,
+   argument. v2's model is built for determinate knowledge throughout and is silent here.
+5. **Ad-hoc Intent Bridge** (C-46). v2 is curriculum-first end to end: the Scheduler owns
+   concept activation and there is no path for "help me with question 7." This is the
+   largest product-level gap in v2 and the one most likely to decide adoption.
+6. **Human Plane** (C-41) — teacher, parent, institution views and the human correction
+   channel. v2 mentions guardian views once, as future Evolution.
+7. **Relationship Engine** (C-40). v2 has continuity *mechanics* (Episode Memory threads,
+   continuity beats) but no relationship model, no promises ledger, no earned-permission
+   framing for proactive contact.
+8. **Refer-Out** (C-48) and the **outcome hierarchy with named anti-metrics** (C-44).
+   v2's success metrics are engineering-facing (AI-Decision Ratio, violation rate); v3
+   adds the ranked learning-outcome hierarchy and the structural prohibition on
+   engagement, retention, and satisfaction ever becoming targets.
+9. **Social Learning Plane** (C-47). v2's action catalog has a SOCIAL family; there is
+   no peer architecture.
+
+Three further additions are refinements rather than gaps: cost and latency as
+*pedagogical* budgets that narrow contracts (v2's §16 budgets are operational);
+instructional-language proficiency as a Twin dimension with language-vs-knowledge
+failure disambiguation (v2 notes RU/HI lexicon lag but does not model the learner's
+language); and multimodal ink/camera capture as a first-class plane (v2 has prosody as
+a future sensor).
+
+### 9.4 Where v2 is stronger, and v3 should adopt from it
+
+- **The Capability Model** (v2 §4.2) — subject-agnostic operational skills with their own
+  lattice, prerequisite DAG, context tags, and a legality filter that structurally
+  prevents "square roots before multiplication" *across subjects*. v3 has no equivalent
+  and is worse for its absence. This is the single best idea in v2.
+- **The attribution algorithm**: only diagnostic items update strongly; a compound-item
+  *failure* updates nothing, because failure proves the conjunction failed, not which
+  conjunct. v3 lacks this and would have made the error.
+- **The Hint Engine** (v2 §9.2), typed by *what is missing* — concept missing means no
+  hint at all, route to teach. v3's hint discipline is a paragraph by comparison.
+- **Sensors do not read model state** (RS §20.6), specified as a resolved ambiguity with
+  its cost acknowledged. v3 asserts "blinded sensors" without the analysis.
+- **Normative precision.** RS gives 36 event types with exhaustive payloads, 14 machines
+  with full transition tables, 24 release-blocking invariants, 15 verifier rule codes,
+  and shipped BrainConfig defaults. v3 is a vision document; RS is buildable.
+- **The masterplan exists**: ~70 engineer-weeks, a dependency graph, a critical path
+  (C1→C2→C4→K4→K5→K6), and a model-tier assignment table.
+
+### 9.5 Verdict
+
+v3 is **not** a replacement for v2 and should not be read as one. v2 is the deeper and
+more implementable document; v3's value is a set of nine genuine gaps plus an outside-in
+re-derivation that independently reproduced v2's core inversion — which is meaningful
+evidence that the inversion is correct, since it was reached twice from different
+starting points.
+
+The defensible use of this blueprint: **treat §9.3 as a proposed amendment list against
+v2, and §9.4 as v3's own defect list.** Anyone building should build v2 with the RS in
+hand, and fold in v3's nine additions where they fit. Nothing here justifies restarting.
+
+### 9.6 Correction to an earlier estimate in this session
+
+Session-count estimates given before this read (≈65–95 sessions for a core, "roughly one
+month") were made without knowledge of `EOS_IMPLEMENTATION_MASTERPLAN.md`, which already
+costs the work at ~70 engineer-weeks core, 18–24 months for one engineer, 6–7 months for
+five, with K3 (kernelization of a 2,700-line route) alone at 6 ew and marked "frontier
+required." The masterplan's §6 also already answers the smaller-model-versus-frontier
+question this session was asked. **Treat the masterplan's numbers as authoritative and
+this session's as superseded** — they were optimistic, and they were uninformed.
+
+**Not addressed here.** Migration from the live system: v2 §17 and the masterplan own
+that, and per the standing G1/G2 governance rules nothing in this blueprint authorizes
+implementation.
 
 ---
 

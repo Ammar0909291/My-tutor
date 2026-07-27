@@ -212,6 +212,40 @@ condition met.
 
 ---
 
+## Round 7 — the prior-art round (2026-07-27, after the fact)
+
+The most damaging critique of this document was not found by attacking the design. It was
+found by reading the document it claimed to improve on.
+
+**W18 · The comparison against EOS v2 was written from section headings.** §9 of the
+index asserted that v2 lacked strict band preemption, lacked a learner simulator, and
+suffered from a drifting model suite. A full read of all three v2 documents (2,706 lines)
+showed all three claims false: v2 specifies a seven-band authority-ordered filter network
+with normative skip semantics, persona-automata simulation as a merge gate at 10⁴
+episodes per release, and a single estimator contract over one evidence log with
+compiler-enforced field ownership. v2 is the deeper document.
+
+*Change made.* §9 rewritten as a five-part correction — retractions first, then what v3
+inherits wholesale, then the nine gaps that genuinely survive, then a list of six places
+where **v2 is stronger and v3 should adopt from it** (the Capability Model above all),
+then the verdict: v3 is an amendment list against v2, not a replacement for it. An
+earlier session estimate was also superseded by the masterplan's own costing.
+
+**The generalizable lesson, which belongs in the architecture and not only in this
+file.** The failure mode was reading an index instead of a source and then writing
+confident comparative claims from it. That is precisely the failure this architecture is
+built to prevent in its own runtime — asserting a conclusion from a signal that was never
+verified. The design already forbids it for learners (A10: absence of evidence is not
+evidence; C-23's promotion thresholds; the sensor abstention option). It was not applied
+to the author. Recorded as a residual limit in Part D: **a design document is subject to
+its own invariants, and this one violated A10 in its first draft.**
+
+Stopping condition: met again after this round, but with less confidence than before —
+Round 7 found the largest error in the document on its seventh pass, which is evidence
+that the earlier rounds' stopping conditions were reached too easily.
+
+---
+
 # Part B · The regret test
 
 *"Someone shows me a better Educational OS. What would I regret not including?"*
@@ -465,6 +499,12 @@ regardless of tiering.
   adaptation takes sessions to earn.
 - **Human review capacity, not compute, is the binding scale constraint** on the
   appreciating half of the content economy.
+- **This document violated its own A10 in its first draft** (Round 7): comparative claims
+  about EOS v2 were asserted from section headings rather than from the source. Corrected,
+  but the lesson stands — a design document is subject to its own invariants, and no
+  claim here about another document should be trusted further than the read behind it.
+- **v3 is an amendment list against EOS v2, not a replacement for it.** v2 plus its
+  runtime specification is the deeper and more buildable design; see index §9.
 
 ## Prohibitions — what must never be built
 
