@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 182 READY)
+## mathematics (908 concepts, 187 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -517,14 +517,14 @@ its subject KG.
 | geom | `math.geom.angle-types` | Types of Angles | No | No | — | MISSING |
 | geom | `math.geom.area` | Area | Yes | No | — | MISSING |
 | geom | `math.geom.area-polygon` | Area of Polygons | Yes | No | — | MISSING |
-| geom | `math.geom.area-triangle` | Area of a Triangle | Yes | No | — | MISSING |
+| geom | `math.geom.area-triangle` | Area of a Triangle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.area-triangle.md` | READY |
 | geom | `math.geom.circle` | Circle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.circle.md` | READY |
 | geom | `math.geom.circle-area` | Area of a Circle | No | No | — | MISSING |
 | geom | `math.geom.circle-circumference` | Circumference of a Circle | No | No | — | MISSING |
 | geom | `math.geom.circle-equation` | Equation of a Circle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.circle-equation.md` | READY |
 | geom | `math.geom.circle-parts` | Parts of a Circle | No | No | — | MISSING |
 | geom | `math.geom.circle-theorems` | Circle Theorems | No | No | — | MISSING |
-| geom | `math.geom.congruent-triangles` | Congruent Triangles | Yes | No | — | MISSING |
+| geom | `math.geom.congruent-triangles` | Congruent Triangles | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.congruent-triangles.md` | READY |
 | geom | `math.geom.conic-sections` | Conic Sections | Yes | No | — | MISSING |
 | geom | `math.geom.coordinate-plane` | Coordinate Plane | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.coordinate-plane.md` | READY |
 | geom | `math.geom.cross-product` | Cross Product | No | No | — | MISSING |
@@ -554,7 +554,7 @@ its subject KG.
 | geom | `math.geom.point` | Point | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.point.md` | READY |
 | geom | `math.geom.polar-coordinates` | Polar Coordinates | Yes | No | — | MISSING |
 | geom | `math.geom.polar-curves` | Polar Curves | No | No | — | MISSING |
-| geom | `math.geom.polygon` | Polygon | Yes | No | — | MISSING |
+| geom | `math.geom.polygon` | Polygon | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.polygon.md` | READY |
 | geom | `math.geom.polygon-angle-sum` | Polygon Angle Sum | No | No | — | MISSING |
 | geom | `math.geom.pythagorean-converse` | Converse of the Pythagorean Theorem | No | No | — | MISSING |
 | geom | `math.geom.pythagorean-theorem` | Pythagorean Theorem | Yes | No | — | MISSING |
@@ -563,9 +563,9 @@ its subject KG.
 | geom | `math.geom.ray` | Ray | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.ray.md` | READY |
 | geom | `math.geom.reflection` | Reflection | No | No | — | MISSING |
 | geom | `math.geom.regular-polygon` | Regular Polygon | No | No | — | MISSING |
-| geom | `math.geom.right-triangle` | Right Triangle | Yes | No | — | MISSING |
+| geom | `math.geom.right-triangle` | Right Triangle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.right-triangle.md` | READY |
 | geom | `math.geom.rotation` | Rotation | No | No | — | MISSING |
-| geom | `math.geom.similar-triangles` | Similar Triangles | Yes | No | — | MISSING |
+| geom | `math.geom.similar-triangles` | Similar Triangles | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.similar-triangles.md` | READY |
 | geom | `math.geom.slope` | Slope | Yes | No | — | MISSING |
 | geom | `math.geom.solid-3d` | Three-Dimensional Solids | Yes | No | — | MISSING |
 | geom | `math.geom.surface-area` | Surface Area | Yes | No | — | MISSING |

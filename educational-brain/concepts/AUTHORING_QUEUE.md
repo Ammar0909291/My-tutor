@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1166** (= 1,775 KG concepts − 609 already `READY`, per
+Total queued: **1161** (= 1,775 KG concepts − 614 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -634,10 +634,14 @@ Wave 5, moved to READY.
 | 115 | computer_science | 5 | `cs.theory.regular-expressions` | Regular Expressions and Regular Languages |
 | 116 | mathematics | 6 | `math.geom.parallel-lines` | Parallel Lines |
 | 117 | mathematics | 6 | `math.geom.triangle-types` | Types of Triangles |
-| 118 | mathematics | 6 | `math.geom.right-triangle` | Right Triangle |
-| 119 | mathematics | 6 | `math.geom.congruent-triangles` | Congruent Triangles |
-| 120 | mathematics | 6 | `math.geom.area-triangle` | Area of a Triangle |
-| 121 | mathematics | 6 | `math.geom.polygon` | Polygon |
+**Row 118 removed 2026-07-26** — `math.geom.right-triangle` authored
+math.geom Wave 6, moved to READY.
+**Row 119 removed 2026-07-26** — `math.geom.congruent-triangles`
+authored math.geom Wave 6, moved to READY.
+**Row 120 removed 2026-07-26** — `math.geom.area-triangle` authored
+math.geom Wave 6, moved to READY.
+**Row 121 removed 2026-07-26** — `math.geom.polygon` authored
+math.geom Wave 6, moved to READY.
 | 122 | mathematics | 6 | `math.geom.circle-theorems` | Circle Theorems |
 | 123 | mathematics | 6 | `math.geom.geometric-constructions` | Geometric Constructions |
 | 124 | mathematics | 6 | `math.trig.angle-measure` | Angle Measure |
@@ -1256,7 +1260,8 @@ to READY.
 | 699 | mathematics | 18 | `math.alg.polynomial` | Polynomial |
 | 700 | mathematics | 18 | `math.alg.exponent-rules` | Exponent Rules (Algebraic) |
 | 701 | mathematics | 18 | `math.geom.pythagorean-converse` | Converse of the Pythagorean Theorem |
-| 702 | mathematics | 18 | `math.geom.similar-triangles` | Similar Triangles |
+**Row 702 removed 2026-07-26** — `math.geom.similar-triangles` authored
+math.geom Wave 6, moved to READY.
 | 703 | mathematics | 18 | `math.geom.distance-formula` | Distance Formula |
 | 704 | mathematics | 18 | `math.geom.dilation` | Dilation |
 | 705 | mathematics | 18 | `math.geom.cross-product` | Cross Product |
