@@ -1262,6 +1262,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // EOS M1 (Evidence Spine): decision facts hoisted for the parallel spine
     // emitter — observation only, zero effect on the turn.
     let evidenceMoveHoisted: string | null = null
+    // K3 — the mapped kernel move + its budget, one owner, three consumers.
+    let kernelPolicyMoveHoisted: import('@/lib/kernel/policyMove').MappedMove | null = null
+    let kernelMaxQuestionsHoisted: 0 | 1 = 0
+    // K3 — parity between the route's decision and the shadow pipeline's.
+    let kernelParityMetricsHoisted:
+      import('@/lib/kernel/parity').ParityMetrics | null = null
+    let kernelParityTagsHoisted: string[] = []
     // EOS v2 Capability Model — session-tier state + this concept's demands.
     let capabilityStateHoisted:
       import('@/lib/teaching/capabilityModel').CapabilityState | null = null
@@ -1562,6 +1569,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           })
           const nextMove = moveDecision.move
           legalityBlockedReasonHoisted = moveDecision.blockedReason
+          // Single move owner (kernel/policyMove) — computed once here and
+          // reused by the shadow pipeline and the verifier context, so the two
+          // can never disagree about what move this turn is.
+          {
+            const { toPolicyMove, maxQuestionsFor } = await import('@/lib/kernel/policyMove')
+            kernelPolicyMoveHoisted = toPolicyMove({
+              recoveryKey: recoveryKeyHoisted,
+              episodePhase: sessionEpisodeHoisted?.phase,
+              ladderMove: nextMove,
+            })
+            kernelMaxQuestionsHoisted = maxQuestionsFor(kernelPolicyMoveHoisted)
+          }
           // EOS M1: record the decision facts for the spine (observation only).
           evidenceMoveHoisted = nextMove
           evidenceWorkedExampleFirstHoisted = workedExampleFirst
@@ -1693,7 +1712,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     if (process.env.ENABLE_KERNEL_PIPELINE && process.env.ENABLE_KERNEL_PIPELINE !== '0') {
       try {
         const { runShadowPipeline } = await import('@/lib/kernel/shadow')
-        void runShadowPipeline({
+        const shadowResult = await runShadowPipeline({
           learnerId: userId,
           sessionId,
           subjectSlug: subjectCode,
@@ -1722,12 +1741,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             consecutiveFailures: conversationStateHoisted?.consecutiveFailures ?? 0,
           },
           policy: {
-            move: evidenceMoveHoisted === 'teach' ? 'TEACH'
-              : evidenceMoveHoisted === 'show' ? 'SHOW'
-              : evidenceMoveHoisted === 'ask' ? 'ASK'
-              : null,
+            // Same owner as the verifier path (kernel/policyMove). Before
+            // this, the shadow used a three-way mapping that had no RECOVER
+            // or CLOSE — so parity would have measured a decision the route
+            // no longer makes.
+            move: kernelPolicyMoveHoisted,
             actionClass: null,
-            maxQuestions: (evidenceMoveHoisted === 'ask' ? 1 : 0) as 0 | 1,
+            maxQuestions: kernelMaxQuestionsHoisted,
             maxParagraphs: null,
             maxNewTerms: contentRegister === 'beginner' ? 1 : 2,
             visualClass: null,
@@ -1742,7 +1762,38 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             systemPrompt,
             history: historyMessages,
           },
-        }).catch(() => { /* shadow-mode is fire-and-forget */ })
+        })
+        // The parity observer (masterplan K3 DoD: "byte-similar outputs on the
+        // golden set"). Awaited rather than fire-and-forget because stages
+        // 1–10 are pure and do no I/O — the cost is microseconds, and a
+        // discarded result cannot prove anything. Read-only: it can change no
+        // field of the response.
+        if (shadowResult.invoked && shadowResult.state?.policy) {
+          const { compareDecisions, foldParityMetrics, parityTags } = await import('@/lib/kernel/parity')
+          const k = shadowResult.state.policy
+          const parity = compareDecisions(
+            {
+              move: kernelPolicyMoveHoisted,
+              stageCeiling: evidenceStageCeilingHoisted ?? null,
+              maxQuestions: kernelMaxQuestionsHoisted,
+              maxNewTerms: contentRegister === 'beginner' ? 1 : 2,
+              phase: conversationStateHoisted?.phase ?? null,
+              recoveryActive: recoveryKeyHoisted !== null,
+            },
+            {
+              move: k.move,
+              stageCeiling: k.stageCeiling,
+              maxQuestions: k.budgets.maxQuestions,
+              maxNewTerms: k.budgets.maxNewTerms,
+              phase: shadowResult.state.teachingState?.phase ?? null,
+              recoveryActive: shadowResult.state.interrupt?.active === true,
+            },
+          )
+          kernelParityMetricsHoisted = foldParityMetrics(
+            snapshot?.kernelParity as never, parity,
+          )
+          kernelParityTagsHoisted = parityTags(parity)
+        }
       } catch { /* strangler: kernel failure never affects the turn */ }
     }
 
@@ -2236,13 +2287,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // labelled TEACH and every closing turn as whatever the concept
             // ladder happened to say — so V-REC and V-Q2's RECOVER/CLOSE arms
             // were unreachable in production, and V-CLOSE could never fire.
-            const verifierMove =
-              recoveryKeyHoisted !== null ? 'RECOVER' as const
-              : sessionEpisodeHoisted?.phase === 'CLOSING' ? 'CLOSE' as const
-              : evidenceMoveHoisted === 'teach' ? 'TEACH' as const
-              : evidenceMoveHoisted === 'show' ? 'SHOW' as const
-              : evidenceMoveHoisted === 'ask' ? 'ASK' as const
-              : null
+            const { toPolicyMove, maxQuestionsFor } = await import('@/lib/kernel/policyMove')
+            const verifierMove = toPolicyMove({
+              recoveryKey: recoveryKeyHoisted,
+              episodePhase: sessionEpisodeHoisted?.phase,
+              ladderMove: evidenceMoveHoisted,
+            })
             const ctx = buildVerifierContext({
               contentRegister,
               move: verifierMove,
@@ -2251,7 +2301,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               vocabularyUnlocked: !firstLessonActiveHoisted,
               formulaUnlocked: !firstLessonActiveHoisted && contentRegister !== 'beginner',
               recoveryActive: recoveryKeyHoisted !== null,
-              maxQuestions: (verifierMove === 'ASK' ? 1 : 0) as 0 | 1,
+              maxQuestions: maxQuestionsFor(verifierMove),
               maxParagraphs: null,
               maxNewTerms: contentRegister === 'beginner' ? 1 : 2,
               vocabularyBans: [],
@@ -3012,6 +3062,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (eosVerifierMetricsHoisted) {
             conversationStateUpdate.verifierMetrics = eosVerifierMetricsHoisted
           }
+          if (kernelParityMetricsHoisted) {
+            conversationStateUpdate.kernelParity = kernelParityMetricsHoisted
+          }
           // Capability session tier — same snapshot persist, no new store.
           if (capabilityStateHoisted && Object.keys(capabilityStateHoisted).length > 0) {
             conversationStateUpdate.capabilities = capabilityStateHoisted
@@ -3090,6 +3143,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 ...(firstLessonActiveHoisted ? ['first-lesson'] : []),
                 // K6 — record EOS verifier outcomes as provenance atoms
                 ...eosVerifierTagsHoisted,
+                ...kernelParityTagsHoisted,
                 ...(eosVerifierEvents.some((e) => e.kind === 'OutputRejected') ? ['verifier:rejected'] : []),
                 ...(eosVerifierUsedTemplate ? ['verifier:template-fallback'] : []),
                 ...(eosVerifierAttempts === 2 && !eosVerifierUsedTemplate ? ['verifier:rerendered'] : []),
