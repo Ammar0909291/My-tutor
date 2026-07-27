@@ -9,6 +9,16 @@
 
 import { describe, it, expect } from 'vitest'
 import { toPolicyMove, maxQuestionsFor } from '@/lib/kernel/policyMove'
+import { tsmStepStage, stageCeilingFor } from '@/lib/kernel/stages/tsmStep'
+import { policyStage } from '@/lib/kernel/stages/policy'
+import { interruptScanStage } from '@/lib/kernel/stages/interruptScan'
+import { senseStage } from '@/lib/kernel/stages/sense'
+import { commit1Stage } from '@/lib/kernel/stages/commit1'
+import { initialState, makeTurnContext } from '@/lib/kernel/context'
+import {
+  initialConversationState, decideNextMoveDetailed, PHASE_MAX_QUESTION_STAGE,
+  PHASE_ORDER, type ConversationState,
+} from '@/lib/teaching/conversationState'
 import {
   compareDecisions, foldParityMetrics, initialParityMetrics, readParityMetrics,
   agreementRate, parityTags, type DecisionFacts,
@@ -198,6 +208,128 @@ describe('behavioural proof — the extraction changed no decision', () => {
       const move = toPolicyMove({ recoveryKey, episodePhase, ladderMove })
       const f = facts({ move, maxQuestions: maxQuestionsFor(move), recoveryActive: recoveryKey !== null })
       expect(compareDecisions(f, f).agree).toBe(true)
+    }
+  })
+})
+
+
+// ── PROMOTION EVIDENCE — stages 7 and 8 derive what the route computes ──────
+
+const CTX = { learnerId: 'L1', sessionId: 'S1', subjectSlug: 'physics', messageLength: 5, isSchoolMode: false }
+const cs = (phase: string, over: Partial<ConversationState> = {}): ConversationState => ({
+  ...initialConversationState('c'), phase: phase as never, taughtThisSession: true, ...over,
+})
+
+describe('PROMOTED stage 7 (TSM-STEP) — parity with the route formula', () => {
+  it('derives the ceiling identically to the route, for every phase', async () => {
+    for (const phase of PHASE_ORDER) {
+      const s = await tsmStepStage({ conversationState: cs(phase) })
+        .run(initialState(makeTurnContext(CTX)))
+      // The route's own expression: PHASE_MAX_QUESTION_STAGE[state.phase]
+      expect(s.teachingState?.stageCeiling).toBe(PHASE_MAX_QUESTION_STAGE[phase])
+      expect(s.teachingState?.phase).toBe(phase)
+    }
+  })
+
+  it('falls back to the OBSERVE floor when there is no ladder state', async () => {
+    const s = await tsmStepStage({ conversationState: null }).run(initialState(makeTurnContext(CTX)))
+    expect(s.teachingState?.stageCeiling).toBe(PHASE_MAX_QUESTION_STAGE.OBSERVE)
+  })
+
+  it('stageCeilingFor is total over unknown phases', () => {
+    expect(stageCeilingFor('NOT_A_PHASE')).toBe(PHASE_MAX_QUESTION_STAGE.OBSERVE)
+    expect(stageCeilingFor(null)).toBe(PHASE_MAX_QUESTION_STAGE.OBSERVE)
+  })
+})
+
+describe('PROMOTED stage 8 (POLICY) — parity with the route decision', () => {
+  const POL_BASE = {
+    legality: {}, contentRegister: 'beginner' as const, episodePhase: 'CORE',
+    workedExampleFirst: false, actionClass: null, maxParagraphs: 4,
+    visualClass: null, vocabularyBans: [], provenance: [],
+  }
+
+  it('derives the same move the route derives, across the ladder', async () => {
+    for (const phase of PHASE_ORDER) {
+      const state = cs(phase)
+      // What the route computes.
+      const routeMove = toPolicyMove({
+        recoveryKey: null, episodePhase: 'CORE',
+        ladderMove: decideNextMoveDetailed(state, { recoveryTurn: false, workedExampleFirst: false }).move,
+      })
+      // What the kernel derives, independently, inside the stage.
+      let s = initialState(makeTurnContext(CTX))
+      s = await interruptScanStage.run({ ...s, committed: [] })
+      s = await tsmStepStage({ conversationState: state }).run(s)
+      s = await policyStage({ ...POL_BASE, conversationState: state }).run(s)
+      expect(s.policy?.move).toBe(routeMove)
+      expect(s.policy?.budgets.maxQuestions).toBe(maxQuestionsFor(routeMove))
+    }
+  })
+
+  it('senses recovery END-TO-END with no adapter telling it', async () => {
+    // The whole point of the promotion: the message alone drives the decision.
+    let s = initialState(makeTurnContext(CTX))
+    s = await senseStage({ message: "I don't know" }).run(s)
+    s = await commit1Stage.run(s)
+    s = await interruptScanStage.run(s)
+    s = await tsmStepStage({ conversationState: cs('OBSERVE') }).run(s)
+    s = await policyStage({ ...POL_BASE, conversationState: cs('OBSERVE') }).run(s)
+    expect(s.policy?.move).toBe('RECOVER')
+    expect(s.policy?.budgets.maxQuestions).toBe(0)
+  })
+
+  it('CLOSING outranks the ladder inside the stage', async () => {
+    let s = initialState(makeTurnContext(CTX))
+    s = await interruptScanStage.run({ ...s, committed: [] })
+    s = await tsmStepStage({ conversationState: cs('OBSERVE') }).run(s)
+    s = await policyStage({ ...POL_BASE, conversationState: cs('OBSERVE'), episodePhase: 'CLOSING' }).run(s)
+    expect(s.policy?.move).toBe('CLOSE')
+  })
+
+  it('derives maxNewTerms from the register, as the route does', async () => {
+    const run = async (contentRegister: 'beginner' | 'intermediate') => {
+      let s = initialState(makeTurnContext(CTX))
+      s = await interruptScanStage.run({ ...s, committed: [] })
+      s = await tsmStepStage({ conversationState: cs('OBSERVE') }).run(s)
+      s = await policyStage({ ...POL_BASE, contentRegister, conversationState: cs('OBSERVE') }).run(s)
+      return s.policy?.budgets.maxNewTerms
+    }
+    expect(await run('beginner')).toBe(1)
+    expect(await run('intermediate')).toBe(2)
+  })
+
+  it('an undefined recoveryKey does NOT read as an active interrupt', async () => {
+    // Regression: `!== null` treated undefined as a live interrupt and forced
+    // RECOVER on every caller that omitted the field.
+    let s = initialState(makeTurnContext(CTX))
+    s = await interruptScanStage.run({ ...s, committed: [] })
+    s = await tsmStepStage({ conversationState: cs('OBSERVE') }).run(s)
+    s = await policyStage({ ...POL_BASE, conversationState: cs('OBSERVE') }).run(s)
+    expect(s.policy?.move).not.toBe('RECOVER')
+  })
+
+  it('full-parity check: kernel decision equals route decision on every phase', async () => {
+    for (const phase of PHASE_ORDER) {
+      const state = cs(phase)
+      let s = initialState(makeTurnContext(CTX))
+      s = await interruptScanStage.run({ ...s, committed: [] })
+      s = await tsmStepStage({ conversationState: state }).run(s)
+      s = await policyStage({ ...POL_BASE, conversationState: state }).run(s)
+      const routeMove = toPolicyMove({
+        recoveryKey: null, episodePhase: 'CORE',
+        ladderMove: decideNextMoveDetailed(state, { recoveryTurn: false, workedExampleFirst: false }).move,
+      })
+      const parity = compareDecisions(
+        { move: routeMove, stageCeiling: PHASE_MAX_QUESTION_STAGE[phase],
+          maxQuestions: maxQuestionsFor(routeMove), maxNewTerms: 1,
+          phase, recoveryActive: false },
+        { move: s.policy!.move, stageCeiling: s.policy!.stageCeiling,
+          maxQuestions: s.policy!.budgets.maxQuestions, maxNewTerms: s.policy!.budgets.maxNewTerms,
+          phase: s.teachingState!.phase, recoveryActive: s.interrupt?.active === true },
+      )
+      expect(parity.divergences).toEqual([])
+      expect(parity.agree).toBe(true)
     }
   })
 })

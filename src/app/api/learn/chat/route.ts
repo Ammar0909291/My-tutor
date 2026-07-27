@@ -1734,22 +1734,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             retroWinOwed: sessionEpisodeHoisted?.retroWinOwed === true,
             dueReviewCount: libraryDueRevisionCountHoisted,
           },
-          tsm: {
-            phase: conversationStateHoisted?.phase ?? 'OBSERVE',
-            stageCeiling: evidenceStageCeilingHoisted ?? 2,
-            demonstrated: conversationStateHoisted?.demonstrated === true,
-            consecutiveFailures: conversationStateHoisted?.consecutiveFailures ?? 0,
-          },
+          // Promotion 1: the stage now DERIVES phase/ceiling/demonstrated/
+          // failures from the ladder state instead of being handed them.
+          tsm: { conversationState: conversationStateHoisted },
+          // Promotion 2: the stage DECIDES the move (Band-2 legality + the
+          // authority-ordered mapping) instead of being handed it, and
+          // derives maxQuestions/maxNewTerms from that decision. These are
+          // the same inputs the route used to reach kernelPolicyMoveHoisted,
+          // so parity is an equality check on two independent evaluations.
           policy: {
-            // Same owner as the verifier path (kernel/policyMove). Before
-            // this, the shadow used a three-way mapping that had no RECOVER
-            // or CLOSE — so parity would have measured a decision the route
-            // no longer makes.
-            move: kernelPolicyMoveHoisted,
+            conversationState: conversationStateHoisted,
+            legality: {
+              hasEvidencedPriorKnowledge: (studentProgress?.completedLessons?.length ?? 0) > 0,
+              capabilityState: capabilityStateHoisted ?? undefined,
+              requiredCapabilities: requiredCapabilitiesHoisted,
+            },
+            contentRegister,
+            episodePhase: sessionEpisodeHoisted?.phase,
+            recoveryKey: recoveryKeyHoisted,
+            workedExampleFirst:
+              snapshotSessionFailureCount >= 2 || strategyHoisted === 'FOUNDATION_REBUILD',
             actionClass: null,
-            maxQuestions: kernelMaxQuestionsHoisted,
             maxParagraphs: null,
-            maxNewTerms: contentRegister === 'beginner' ? 1 : 2,
             visualClass: null,
             vocabularyBans: [],
             provenance: [

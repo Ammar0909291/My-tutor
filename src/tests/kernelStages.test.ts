@@ -11,6 +11,23 @@ import {
   commit2Stage, persistStage, postStage, makeTurnContext, initialState,
   buildStudentView, type FoldAdapters,
 } from '@/lib/kernel'
+import { initialConversationState } from '@/lib/teaching/conversationState'
+
+/** Stages 7-8 were promoted from adapter-fed to real: they now DERIVE the
+ *  phase, ceiling and move from the ladder state instead of being handed the
+ *  answers. These tests therefore supply inputs. `taughtThisSession` is set
+ *  because QL-1 makes a question illegal with no source to answer from — the
+ *  same gate the route applies. */
+const CS = (phase: string, over: Record<string, unknown> = {}) => ({
+  ...initialConversationState('c'),
+  phase, taughtThisSession: true, ...over,
+}) as never
+
+const POLICY_BASE = {
+  legality: {}, contentRegister: 'beginner' as const, episodePhase: 'CORE',
+  recoveryKey: null, workedExampleFirst: false, actionClass: null,
+  maxParagraphs: 4, visualClass: null, vocabularyBans: [], provenance: [],
+}
 
 const CTX_INPUT = {
   learnerId: 'L1', sessionId: 'S1', subjectSlug: 'physics',
@@ -117,7 +134,7 @@ describe('SCHEDULE', () => {
 describe('TSM-STEP', () => {
   it('records transition direction when phase changes', async () => {
     const s = await tsmStepStage({
-      phase: 'DEMONSTRATE', stageCeiling: 2, demonstrated: true, consecutiveFailures: 0,
+      conversationState: CS('DEMONSTRATE', { demonstrated: true }),
       previousPhase: 'OBSERVE',
     }).run(initialState(makeTurnContext(CTX_INPUT)))
     expect(s.teachingState?.transitionThisTurn.direction).toBe('up')
@@ -128,11 +145,10 @@ describe('POLICY', () => {
   it('records a decision with provenance and a seeded PRNG', async () => {
     let s = initialState(makeTurnContext(CTX_INPUT))
     s = await interruptScanStage.run({ ...s, committed: [] })
-    s = await tsmStepStage({ phase: 'OBSERVE', stageCeiling: 2, demonstrated: false, consecutiveFailures: 0 }).run(s)
+    s = await tsmStepStage({ conversationState: CS('OBSERVE') }).run(s)
     s = await policyStage({
-      move: 'ASK', actionClass: 'INTERACTIVE_QUESTIONING',
-      maxQuestions: 1, maxParagraphs: 4, maxNewTerms: 1,
-      visualClass: null, vocabularyBans: [], provenance: ['turn-directive'],
+      ...POLICY_BASE, conversationState: CS('OBSERVE'),
+      actionClass: 'INTERACTIVE_QUESTIONING', provenance: ['turn-directive'],
     }).run(s)
     expect(s.policy?.move).toBe('ASK')
     expect(s.policy?.budgets.maxQuestions).toBe(1)
@@ -144,20 +160,19 @@ describe('POLICY', () => {
     s = await senseStage({ message: "I don't know" }).run(s)
     s = await commit1Stage.run(s)
     s = await interruptScanStage.run(s)
-    s = await tsmStepStage({ phase: 'OBSERVE', stageCeiling: 2, demonstrated: false, consecutiveFailures: 1 }).run(s)
+    s = await tsmStepStage({ conversationState: CS('OBSERVE', { consecutiveFailures: 1 }) }).run(s)
     s = await policyStage({
-      move: 'ASK', actionClass: null, maxQuestions: 1, maxParagraphs: 4,
-      maxNewTerms: 1, visualClass: null, vocabularyBans: [], provenance: [],
+      ...POLICY_BASE, conversationState: CS('OBSERVE'), recoveryKey: 'dont_know',
     }).run(s)
     expect(s.policy?.move).toBe('RECOVER')
   })
   it('is deterministic given identical inputs', async () => {
     const build = async () => {
       let s = initialState(makeTurnContext({ ...CTX_INPUT, turnId: 'fixed', receivedAtMs: 0 }))
-      s = await tsmStepStage({ phase: 'OBSERVE', stageCeiling: 2, demonstrated: false, consecutiveFailures: 0 }).run(s)
+      s = await tsmStepStage({ conversationState: CS('OBSERVE') }).run(s)
       s = await policyStage({
-        move: 'TEACH', actionClass: null, maxQuestions: 0, maxParagraphs: 3,
-        maxNewTerms: 1, visualClass: null, vocabularyBans: [], provenance: ['x'],
+        ...POLICY_BASE, conversationState: CS('GUIDE'), maxParagraphs: 3,
+        provenance: ['x'],
       }).run(s)
       return { ...s.policy!, decisionId: 'DETERMINISTIC_MASK' }
     }
@@ -182,10 +197,9 @@ describe('RESOLVE', () => {
 describe('PLAN', () => {
   it('carries budgets and vocabulary bans from policy', async () => {
     let s = initialState(makeTurnContext(CTX_INPUT))
-    s = await tsmStepStage({ phase: 'OBSERVE', stageCeiling: 2, demonstrated: false, consecutiveFailures: 0 }).run(s)
+    s = await tsmStepStage({ conversationState: CS('OBSERVE') }).run(s)
     s = await policyStage({
-      move: 'ASK', actionClass: null, maxQuestions: 1, maxParagraphs: 4,
-      maxNewTerms: 1, visualClass: null,
+      ...POLICY_BASE, conversationState: CS('OBSERVE'),
       vocabularyBans: ['SI', 'metric system'], provenance: ['first-lesson'],
     }).run(s)
     s = await resolveStage({ objective: '' }).run(s)

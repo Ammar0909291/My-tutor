@@ -11,6 +11,7 @@ import {
   type FoldAdapters, type ScheduleAdapters, type TsmAdapters,
   type PolicyAdapters, type ResolveAdapters, type PlanAdapters,
 } from '@/lib/kernel'
+import { initialConversationState } from '@/lib/teaching/conversationState'
 import { runShadowPipeline } from '@/lib/kernel/shadow'
 
 const CTX = {
@@ -24,10 +25,15 @@ const FOLD: FoldAdapters = {
   isFirstLessonContext: true,
 }
 const SCHED: ScheduleAdapters = { freshBoundary: false, boundaryGapMs: null, retroWinOwed: false, dueReviewCount: 0 }
-const TSM: TsmAdapters = { phase: 'OBSERVE', stageCeiling: 2, demonstrated: false, consecutiveFailures: 0 }
+// Stages 7-8 now DERIVE phase/ceiling/move rather than receiving them, so the
+// fixtures supply the ladder state. `taughtThisSession` satisfies QL-1 (a
+// question needs a source to answer from) exactly as the route does.
+const CS = { ...initialConversationState('c1'), phase: 'OBSERVE' as const, taughtThisSession: true }
+const TSM: TsmAdapters = { conversationState: CS }
 const POL: PolicyAdapters = {
-  move: 'ASK', actionClass: 'INTERACTIVE_QUESTIONING',
-  maxQuestions: 1, maxParagraphs: 4, maxNewTerms: 1,
+  conversationState: CS, legality: {}, contentRegister: 'beginner',
+  episodePhase: 'CORE', workedExampleFirst: false,
+  actionClass: 'INTERACTIVE_QUESTIONING', maxParagraphs: 4,
   visualClass: null, vocabularyBans: [], provenance: ['turn-directive'],
 }
 const RES: ResolveAdapters = { objective: 'observe' }

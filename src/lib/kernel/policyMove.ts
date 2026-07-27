@@ -30,7 +30,7 @@ export type MappedMove = Extract<PolicyMove, 'TEACH' | 'SHOW' | 'ASK' | 'RECOVER
 export interface MoveInputs {
   /** recoveryGuard's failure-state key, or null. Highest authority: an
    *  interrupt owns the turn regardless of what the ladder decided. */
-  recoveryKey: string | null
+  recoveryKey: string | null | undefined
   /** sessionLifecycle phase. CLOSING outranks the concept ladder because the
    *  close is protected — it is never sacrificed to content. */
   episodePhase: string | null | undefined
@@ -44,7 +44,9 @@ export interface MoveInputs {
  * authority can never override a higher one.
  */
 export function toPolicyMove(input: MoveInputs): MappedMove | null {
-  if (input.recoveryKey !== null) return 'RECOVER'
+  // `!= null` deliberately: a caller passing undefined must not read as
+  // an active interrupt. `!== null` did, which silently forced RECOVER.
+  if (input.recoveryKey != null) return 'RECOVER'
   if (input.episodePhase === 'CLOSING') return 'CLOSE'
   if (input.ladderMove === 'teach') return 'TEACH'
   if (input.ladderMove === 'show') return 'SHOW'

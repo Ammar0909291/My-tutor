@@ -15,13 +15,37 @@ import type { KernelState, Stage, PolicyDecision, PolicyMove } from '../types'
 import { newId } from '../context'
 import type { PolicyInputs, PolicyPack, EnginePolicyDecision } from '../policy/types'
 import { decide } from '../policy/engine'
+import { decideNextMoveDetailed, type ConversationState } from '@/lib/teaching/conversationState'
+import type { LegalityContext } from '@/lib/teaching/questionLegality'
+import { toPolicyMove, maxQuestionsFor } from '../policyMove'
 
+/**
+ * EXTRACTED (K3 promotion 2 of 2). `move` and `maxNewTerms` were previously
+ * handed in already-decided; the stage now DERIVES both from the same inputs
+ * route.ts uses — the Band-2 legality gate, the ladder, the interrupt and the
+ * session phase — via decideNextMoveDetailed() and toPolicyMove().
+ *
+ * The remaining fields are genuinely produced elsewhere (visual selection,
+ * length budget, pack vocabulary bans) and are still supplied. They are the
+ * next extraction targets, in that order.
+ */
 export interface PolicyAdapters {
-  move: PolicyMove | null
+  /** Ladder state at decision time. null ⇒ no move can be derived. */
+  conversationState: ConversationState | null
+  /** Band-2 inputs: prior-knowledge evidence + capability state/demands. */
+  legality: LegalityContext
+  /** Drives maxNewTerms (beginner 1, otherwise 2) — the route's own rule. */
+  contentRegister: 'beginner' | 'intermediate' | 'expert'
+  /** Session layer; CLOSING outranks the ladder. */
+  episodePhase: string | null | undefined
+  /** Interrupt key. OPTIONAL and normally omitted: the kernel already
+   *  senses it in stage 5 (INTERRUPT-SCAN reads the utterance-state sensor),
+   *  so POLICY reads its own upstream artifact and only falls back to this
+   *  when the caller has an interrupt the pipeline could not sense. */
+  recoveryKey?: string | null
+  workedExampleFirst: boolean
   actionClass: string | null
-  maxQuestions: 0 | 1
   maxParagraphs: number | null
-  maxNewTerms: number
   visualClass: string | null
   vocabularyBans: string[]
   provenance: string[]
@@ -40,16 +64,38 @@ export function policyStage(a: PolicyAdapters): Stage<KernelState, KernelState> 
     async run(state) {
       const { context, teachingState, interrupt } = state
       const stageCeiling = teachingState?.stageCeiling ?? 2
-      const move: PolicyMove | null = interrupt?.preemptsPolicy ? 'RECOVER' : a.move
+
+      // The stage decides. Same functions, same inputs, same order as the
+      // route: Band-2 legality first, then the authority-ordered mapping.
+      // Prefer the pipeline's OWN sensing over anything the caller supplies:
+      // stage 5 already classified the utterance. This is what makes the
+      // recovery path kernel-derived end to end rather than adapter-fed.
+      const recoveryKey = interrupt?.preemptsPolicy
+        ? (interrupt.failureStateKey ?? 'unknown')
+        : (a.recoveryKey ?? null)
+      const ladder = a.conversationState
+        ? decideNextMoveDetailed(a.conversationState, {
+            recoveryTurn: recoveryKey != null,
+            workedExampleFirst: a.workedExampleFirst,
+            legality: a.legality,
+          }).move
+        : null
+      const move: PolicyMove | null = toPolicyMove({
+        recoveryKey,
+        episodePhase: a.episodePhase,
+        ladderMove: ladder,
+      })
+      const maxNewTerms = a.contentRegister === 'beginner' ? 1 : 2
+
       const decision: PolicyDecision = {
         decisionId: newId('d'),
         turnId: context.turnId,
         move,
         actionClass: a.actionClass,
         budgets: {
-          maxQuestions: (move === 'ASK' ? 1 : 0) as 0 | 1,
+          maxQuestions: maxQuestionsFor(move),
           maxParagraphs: a.maxParagraphs,
-          maxNewTerms: a.maxNewTerms,
+          maxNewTerms,
         },
         stageCeiling,
         vocabularyBans: a.vocabularyBans,

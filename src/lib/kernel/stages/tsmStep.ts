@@ -1,38 +1,54 @@
 /**
  * Stage 7 — TSM STEP. Owner: Teaching State Machine (RS §5).
  *
- * K3 v1: reads the phase from ConversationState (Phase C-G ladder) supplied
- * by the caller; ISS-01 (mapping to the RS 10-state ladder) lands with K4
- * per masterplan. The transition itself still runs inside route.ts /
- * conversationState.ts; this stage records what it observed so downstream
- * stages have a typed view.
+ * EXTRACTED (K3 promotion 1 of 2). Previously the caller handed this stage
+ * the already-computed phase, stage ceiling, demonstrated flag and failure
+ * count — the stage recorded an answer route.ts had derived. It now takes the
+ * ConversationState itself and DERIVES all four, so the ceiling has one owner
+ * instead of two computing it in parallel.
+ *
+ * The ladder transition still runs in conversationState.advanceConversationState
+ * (post-turn, evidence-driven) and is deliberately not moved here: this stage
+ * observes the state at decision time, which is what stages 8-10 consume.
+ * ISS-01 (mapping the Phase C-G ladder onto the RS 10-state ladder) remains
+ * K4 work.
  */
 import type { KernelState, Stage, TeachingStateView } from '../types'
+import { PHASE_MAX_QUESTION_STAGE, type ConversationState, type TeachingPhase } from '@/lib/teaching/conversationState'
 
 export interface TsmAdapters {
-  phase: string
-  stageCeiling: number
-  demonstrated: boolean
-  consecutiveFailures: number
-  scaffoldDial?: number
+  /** The live ladder state. null on pre-directive / school-mode turns, where
+   *  the stage falls back to the conservative OBSERVE floor. */
+  conversationState: ConversationState | null
+  /** Phase at the START of the previous turn, for the transition record. */
   previousPhase?: string | null
+  scaffoldDial?: number
+}
+
+/** The ceiling is a pure function of the phase — the same table route.ts
+ *  reads. Exported so the parity harness can assert both paths agree. */
+export function stageCeilingFor(phase: string | null | undefined): number {
+  const p = (phase ?? 'OBSERVE') as TeachingPhase
+  return PHASE_MAX_QUESTION_STAGE[p] ?? PHASE_MAX_QUESTION_STAGE.OBSERVE
 }
 
 export function tsmStepStage(a: TsmAdapters): Stage<KernelState, KernelState> {
   return {
     name: 'TSM-STEP',
     async run(state) {
+      const cs = a.conversationState
+      const phase = cs?.phase ?? 'OBSERVE'
       const teachingState: TeachingStateView = {
-        phase: a.phase,
+        phase,
         scaffoldDial: a.scaffoldDial ?? 2,
-        stageCeiling: a.stageCeiling,
-        demonstrated: a.demonstrated,
-        consecutiveFailures: a.consecutiveFailures,
+        stageCeiling: stageCeilingFor(phase),
+        demonstrated: cs?.demonstrated === true,
+        consecutiveFailures: cs?.consecutiveFailures ?? 0,
         transitionThisTurn: {
           from: a.previousPhase ?? null,
-          to: a.phase,
-          direction: a.previousPhase == null || a.previousPhase === a.phase ? 'none'
-            : a.previousPhase === 'OBSERVE' && a.phase === 'DEMONSTRATE' ? 'up'
+          to: phase,
+          direction: a.previousPhase == null || a.previousPhase === phase ? 'none'
+            : a.previousPhase === 'OBSERVE' && phase === 'DEMONSTRATE' ? 'up'
             : 'down',
         },
       }
