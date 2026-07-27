@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1180** (= 1,775 KG concepts − 595 already `READY`, per
+Total queued: **1179** (= 1,775 KG concepts − 596 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -520,7 +520,8 @@ Wave 1, moved to READY.
 | 10 | computer_science | 1 | `cs.found.software-concepts` | Software Concepts |
 | 11 | computer_science | 1 | `cs.algo.problem-solving` | Problem Solving Methodology |
 | 12 | computer_science | 1 | `cs.sec.cyber-ethics-safety` | Cyber Ethics and Online Safety |
-| 13 | mathematics | 2 | `math.geom.line` | Line |
+**Row 13 removed 2026-07-26** — `math.geom.line` authored math.geom
+Wave 2, moved to READY.
 | 14 | english | 2 | `eng.phonics.blending-segmenting` | Blending and Segmenting |
 | 15 | english | 2 | `eng.phonetics.articulation-organs` | Organs of Articulation |
 | 16 | english | 2 | `eng.writing.handwriting-and-formation` | Handwriting and Letter Formation |

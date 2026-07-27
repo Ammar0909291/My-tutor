@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 168 READY)
+## mathematics (908 concepts, 169 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -540,7 +540,7 @@ its subject KG.
 | geom | `math.geom.geometric-proof` | Geometric Proof | Yes | No | — | MISSING |
 | geom | `math.geom.hyperbola` | Hyperbola | No | No | — | MISSING |
 | geom | `math.geom.length` | Length | No | No | — | MISSING |
-| geom | `math.geom.line` | Line | Yes | No | — | MISSING |
+| geom | `math.geom.line` | Line | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.line.md` | READY |
 | geom | `math.geom.line-equation` | Equations of Lines | Yes | No | — | MISSING |
 | geom | `math.geom.line-segment` | Line Segment | Yes | No | — | MISSING |
 | geom | `math.geom.midpoint-formula` | Midpoint Formula | No | No | — | MISSING |
