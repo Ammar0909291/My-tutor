@@ -2915,7 +2915,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       }
       // MISCONCEPTION contract (student-state/03 §1: verbatim phrase evidence —
       // "the learner's own phrasing is the elicit-step script for the repair").
+      // ISS-18: the PERSISTED copy is hashed for minors. The repair contract
+      // above reads the live signal in memory and is unaffected; what the
+      // hash removes is a later reader's ability to reconstruct a child's
+      // sentence, while identical phrases still group identically.
       if (teachingSignal?.phrase) {
+        const { persistableVerbatim } = await import('@/lib/teaching/verbatimRedaction')
         appendEvidenceEvent({
           userId,
           sessionId,
@@ -2924,7 +2929,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           language:  teachingLang,
           gradeBand: memoryState?.gradeBand ?? GradeBand.ADULT,
           category:  EvidenceCategory.MISCONCEPTION_DETECTED,
-          outcome:   teachingSignal.phrase.slice(0, 200),
+          outcome:   persistableVerbatim(teachingSignal.phrase.slice(0, 200), { grade: profile?.grade }),
           strength:  0.5,
         })
       }
