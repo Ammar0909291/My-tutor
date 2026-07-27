@@ -53,13 +53,14 @@ rather than hand-edit when entries change.
   migration debt (76 = 71 + 5), not introduced this batch — rewriting
   another session's freshly authored files remains out of scope.
 
-## Aggregate summary (581 entries)
+## Aggregate summary (582 entries)
 
-Adds `math.geom` Wave 10 part 1 (1 concept, this batch, 2026-07-27,
-autonomous loop iteration 43 resumption) on top of the prior 579-entry
+Adds `math.geom` Wave 10 part 1 (2 concepts, this batch, 2026-07-27,
+autonomous loop iteration 43 resumption) on top of the prior 580-entry
 state (Batch 53 Wave 9 + prior physics/english/chemistry/math batches).
-The new entry (`angle-types`) has no existing Blueprint. All numbers
-below were recomputed fresh by scanning every live file in
+The two new entries (`angle-types`, `triangle-angle-sum`; `triangle-types`
+was also added this batch, see below) have no existing Blueprint. All
+numbers below were recomputed fresh by scanning every live file in
 `educational-brain/concepts/{subject}/` — none hand-estimated. Note:
 this ledger's chemistry row count (136) understates chemistry's true
 186/186-complete state (CLAUDE.md) — a pre-existing gap outside this
@@ -67,16 +68,16 @@ batch's mathematics-only scope, not corrected here.
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 360 / 580 | see methodology note above — 24 `math.found` + 28 `math.arith` + 13 `math.nt` + 3 `math.geom` (`perimeter`, `length`, `angle-types`) — none of these 67 have a Blueprint — + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
-| Educational Brain | 580 / 580 | trivially true (this is the entry list) |
-| Mental Model | 580 / 580 | |
-| Misconceptions | 580 / 580 | |
-| Analogies | 580 / 580 | |
-| Recovery Strategy | 580 / 580 | |
-| Assessment Signals | 580 / 580 | |
-| Tutor Actions | 510 / 580 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
-| Cross-links | 510 / 580 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
-| Version History | 505 / 580 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
+| Blueprint | 360 / 582 | see methodology note above — 24 `math.found` + 28 `math.arith` + 13 `math.nt` + 5 `math.geom` (`perimeter`, `length`, `angle-types`, `triangle-types`, `triangle-angle-sum`) — none of these 69 have a Blueprint — + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
+| Educational Brain | 582 / 582 | trivially true (this is the entry list) |
+| Mental Model | 582 / 582 | |
+| Misconceptions | 582 / 582 | |
+| Analogies | 582 / 582 | |
+| Recovery Strategy | 582 / 582 | |
+| Assessment Signals | 582 / 582 | |
+| Tutor Actions | 512 / 582 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
+| Cross-links | 512 / 582 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
+| Version History | 507 / 582 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
 
 ## Per-concept ledger
 
@@ -492,6 +493,7 @@ batch's mathematics-only scope, not corrected here.
 | `math.geom.surface-area` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.transformations` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.triangle` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.triangle-angle-sum` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.triangle-types` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.vectors-2d` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.volume` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1144** (= 1,775 KG concepts − 631 already `READY`, per
+Total queued: **1143** (= 1,775 KG concepts − 632 already `READY`, per
 `ROADMAP.md`'s §1 Totals as updated 2026-07-27 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -698,7 +698,8 @@ from source, per this file's own standing generation script.
 **Rows 171-172 removed 2026-07-26** — `math.found.function-set-theoretic`,
 `math.found.cardinal-arithmetic` authored this batch (Wave 8), moved to
 READY. Row numbers not renumbered, per this file's own standing note.
-| 173 | mathematics | 7 | `math.geom.triangle-angle-sum` | Triangle Angle Sum Theorem |
+**Row 173 removed 2026-07-27** — `math.geom.triangle-angle-sum` authored
+math.geom Wave 10 part 1, moved to READY.
 | 174 | mathematics | 7 | `math.geom.triangle-centers` | Triangle Centers |
 **Row 175 removed 2026-07-26** — `math.geom.quadrilateral` authored
 math.geom Wave 8, moved to READY.
