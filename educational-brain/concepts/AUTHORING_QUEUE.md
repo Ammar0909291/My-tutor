@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1181** (= 1,775 KG concepts − 594 already `READY`, per
+Total queued: **1180** (= 1,775 KG concepts − 595 already `READY`, per
 `ROADMAP.md`'s §1 Totals as corrected 2026-07-26 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -509,7 +509,8 @@ the program's default cross-subject priority order (`math.found` Wave
 |---|---|---|---|---|
 | 1 | biology | 0 | `bio.found.what-is-biology` | What is Biology |
 | 2 | computer_science | 0 | `cs.found.intro-computers` | Introduction to Computers |
-| 3 | mathematics | 1 | `math.geom.point` | Point |
+**Row 3 removed 2026-07-26** — `math.geom.point` authored math.geom
+Wave 1, moved to READY.
 | 4 | english | 1 | `eng.phonics.alphabet-recognition` | Alphabet Recognition |
 | 5 | english | 1 | `eng.phonics.rhyming` | Rhyming |
 | 6 | english | 1 | `eng.phonetics.speech-sounds-overview` | Overview of Speech Sounds |

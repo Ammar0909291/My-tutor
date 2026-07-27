@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 167 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 27 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation` — `math.nt` domain IN PROGRESS, 27/36, full-campaign active default per ROADMAP.md §5 item 1b), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
+| mathematics | 908 | 168 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 27 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation` — `math.nt` domain PARKED at 27/36, blocked on cross-domain campaigns per ROADMAP.md §5 item 1c) + 1 `math.geom.*` entry (`point` — `math.geom` domain NEW, 1/69, started per ROADMAP.md §5 item 1c to resolve math.nt's own pythagorean-triples dependency along the way), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -3422,3 +3422,58 @@ entries.
 Full validation this batch: all 6 subject KG validators PASS (0
 failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
 2205 passed / 1 skipped (114 files), `npm run build` succeeded.
+
+### Mathematics — math.geom Wave 1, domain pivot decision (2026-07-26, autonomous loop iteration 34)
+
+Autonomous loop iteration 34, continuing immediately after Wave 8's
+own closing decision point. Git resync found zero concurrent commits
+at this iteration's start.
+
+**Domain pivot decision**: investigated the full cross-domain
+prerequisite depth of all 9 remaining `math.nt` concepts.
+`math.nt.pythagorean-triples` needs only a 4-concept `math.geom` chain
+(`triangle`, `perpendicular-lines`, `right-triangle`,
+`pythagorean-theorem`) — the other 8 (`prime-distribution`,
+`prime-number-theorem`, `riemann-hypothesis`, `continued-fractions`,
+`algebraic-number-theory`, `algebraic-integers`, `number-fields`,
+`analytic-number-theory`) each require calculus (`math.calc.limits`),
+complex analysis (`math.cx.*`), or abstract algebra (`math.abst.*`)
+prerequisites that are themselves multi-level-deep and entirely
+unauthored — none is a small bounded excursion. Rather than treating
+the `pythagorean-triples` chain as an isolated excursion, decided to
+start `math.geom` as its own full Domain Certification campaign:
+`math.geom.point` is the domain's single reachable entry node
+(`requires: math.found.mathematical-thinking`, already certified;
+verified programmatically that 0 of `math.geom`'s 69 concepts have
+`requires: []`, but exactly 1 has all prerequisites already
+satisfied). Progressing this campaign will naturally reach
+`pythagorean-theorem` and unblock `math.nt.pythagorean-triples` along
+the way, without a special-cased detour. `math.nt` remains explicitly
+parked at **27/36**, recorded as blocked on cross-domain campaigns,
+not abandoned.
+
+Authored `math.geom.point` (requires `math.found.mathematical-
+thinking`; unlocks `math.geom.line`, `math.geom.plane`) — Blueprint
+exists (`docs/curriculum/blueprints/math.geom.point.md`, a different
+authoring format from the math.nt/math.found/math.arith corpus,
+using named primitives P03/P06/P11/P27/P41/P49/P64/P91 rather than
+"Primitive P—: —" labels; content mapped into the Standard's 21
+sections, reused by reference throughout):
+
+- MC-1 POINT-HAS-SIZE (FOUNDATIONAL, Type 2 perceptual intuition —
+  every physical representation of a point genuinely has visible
+  size).
+- MC-2 POINT-AS-MARK (Type 3 language contamination — everyday
+  language routinely conflates a physical mark with the abstract
+  point it represents).
+- MC-3 COORDINATE-REQUIRED (Type 5 instruction-induced — most
+  students first encounter points via coordinate plotting).
+
+`math.geom` now **1/69**. No other domain touched. All five tracking
+files updated in this same commit; re-validated 0 duplicates, 0
+orphans, 0 Quality Gate 3 violations across all 168 mathematics
+entries.
+
+Full validation this batch: all 6 subject KG validators PASS (0
+failures, 0 warnings each), `npx tsc --noEmit` clean, full vitest suite
+run, `npm run build` succeeded.

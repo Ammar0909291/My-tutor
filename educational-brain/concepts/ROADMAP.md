@@ -13,16 +13,16 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **594** |
-| Remaining | **1,181** |
-| Completion percentage | **33.46%** |
+| Concepts with an Educational Brain entry | **595** |
+| Remaining | **1,180** |
+| Completion percentage | **33.52%** |
 
 *(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
 with an Educational Brain entry" rows had accumulated from prior sessions
 without being reconciled. Recomputed from this same file's §2 Subject
-progress table as currently stated per subject: 167 mathematics + 238
+progress table as currently stated per subject: 168 mathematics + 238
 physics + 3 english + 186 chemistry + 0 biology + 0 computer_science =
-594. Only the mathematics figure was independently re-verified by this
+595. Only the mathematics figure was independently re-verified by this
 batch by direct file count; the other subjects' figures are taken as
 already-recorded in §2 below, not re-audited by this batch, per this
 program's "mathematics only" scope this turn.)*
@@ -33,7 +33,7 @@ program's "mathematics only" scope this turn.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 167 | 18.39% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 168 | 18.50% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
@@ -1018,6 +1018,30 @@ record; the active default has moved to item 1b.**
     **27/36** — only `pythagorean-triples` (blocked on the math.geom
     excursion) and 8 deep analytic/algebraic-number-theory concepts
     remain.
+1c. **Decision (2026-07-26, iteration 34): pivot to `math.geom` as the
+    next full domain campaign.** Investigated the depth of all 9
+    remaining `math.nt` concepts' cross-domain prerequisite chains:
+    the 8 analytic/algebraic-number-theory concepts each require
+    calculus (`math.calc.limits`), complex analysis
+    (`math.cx.complex-integration`, `math.cx.riemann-zeta`, etc.), or
+    abstract algebra (`math.abst.ring-theory`, `math.abst.field-
+    extension`) concepts that are themselves multiple levels deep and
+    unauthored — none is a small bounded excursion. Separately,
+    `math.nt.pythagorean-triples` needs only a 4-concept `math.geom`
+    chain (`triangle`, `perpendicular-lines`, `right-triangle`,
+    `pythagorean-theorem`). Rather than treating that chain as an
+    isolated excursion, chose to start `math.geom` as its own full
+    Domain Certification campaign — `math.geom.point` is the domain's
+    single reachable entry node (`requires: math.found.mathematical-
+    thinking`, already certified; verified programmatically — 0 of
+    `math.geom`'s 69 concepts have `requires: []`, but exactly 1 has
+    all prerequisites already satisfied). Progressing this campaign
+    will naturally reach `pythagorean-theorem` and thereby unblock
+    `math.nt.pythagorean-triples` without a special-cased detour.
+    `math.nt` remains parked at **27/36**, explicitly recorded as
+    blocked on cross-domain campaigns, not abandoned. Wave 1
+    authored `math.geom.point` (Blueprint exists, reused by
+    reference), raising `math.geom` to **1/69**.
 1. **(Historical, satisfied) `math.found` Wave 7**: the set of
    `math.found` nodes whose prerequisites were all READY after Wave 6.
 2. **(Historical, satisfied) `math.found` Waves 8-16 (52 remaining

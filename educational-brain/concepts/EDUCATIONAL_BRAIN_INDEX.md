@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 167 READY)
+## mathematics (908 concepts, 168 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -551,7 +551,7 @@ its subject KG.
 | geom | `math.geom.perpendicular-lines` | Perpendicular Lines | Yes | No | — | MISSING |
 | geom | `math.geom.plane` | Plane | Yes | No | — | MISSING |
 | geom | `math.geom.platonic-solids` | Platonic Solids | No | No | — | MISSING |
-| geom | `math.geom.point` | Point | Yes | No | — | MISSING |
+| geom | `math.geom.point` | Point | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.point.md` | READY |
 | geom | `math.geom.polar-coordinates` | Polar Coordinates | Yes | No | — | MISSING |
 | geom | `math.geom.polar-curves` | Polar Curves | No | No | — | MISSING |
 | geom | `math.geom.polygon` | Polygon | Yes | No | — | MISSING |
