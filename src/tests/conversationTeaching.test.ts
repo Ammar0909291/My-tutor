@@ -21,6 +21,8 @@ import {
   decideVisualFirst,
   PHASE_MAX_QUESTION_STAGE,
   PHASE_ORDER,
+  isLowSignalAcknowledgement,
+  detectFillerTurn,
   type ConversationState,
 } from '@/lib/teaching/conversationState'
 import { detectFailureState, buildRecoveryBlock } from '@/lib/teaching/recoveryGuard'
@@ -626,5 +628,188 @@ describe('Loop 6 — analogy control', () => {
       visualType: null,
     })
     expect(directive).not.toContain('ANALOGY CEILING')
+  })
+})
+
+// ── Bug 1: off-topic OBSERVE anchor guard ────────────────────────────────────
+
+describe('Bug 1 — OBSERVE phase anchor must reference the lesson concept', () => {
+  const baseState = { ...initialConversationState('c1'), phase: 'OBSERVE' as const }
+
+  it('injects concept-anchor warning when lessonTitle is provided', () => {
+    const directive = buildTurnDirective({
+      state: baseState, nextMove: 'ask', maxParagraphs: 4,
+      workedExampleFirst: false, visualType: null,
+      lessonTitle: 'Molecular Orbital Theory',
+    })
+    expect(directive).toContain('Molecular Orbital Theory')
+    expect(directive).toContain('never open with an example from a different concept')
+  })
+
+  it('omits concept-anchor warning when lessonTitle is absent', () => {
+    const directive = buildTurnDirective({
+      state: baseState, nextMove: 'ask', maxParagraphs: 4,
+      workedExampleFirst: false, visualType: null,
+    })
+    expect(directive).not.toContain('never open with an example from a different concept')
+  })
+
+  it('does NOT inject concept-anchor warning for non-OBSERVE phases', () => {
+    for (const phase of ['DEMONSTRATE', 'GUIDE', 'CHECK', 'PRACTICE', 'TRANSFER'] as const) {
+      const st = { ...initialConversationState('c1'), phase }
+      const directive = buildTurnDirective({
+        state: st, nextMove: 'teach', maxParagraphs: 4,
+        workedExampleFirst: false, visualType: null,
+        lessonTitle: 'Henry\'s Law',
+      })
+      expect(directive).not.toContain('never open with an example from a different concept')
+    }
+  })
+
+  it('first-lesson frame overrides concept-anchor when firstLessonActive', () => {
+    const directive = buildTurnDirective({
+      state: baseState, nextMove: 'ask', maxParagraphs: 2,
+      workedExampleFirst: false, visualType: null,
+      lessonTitle: 'Letter-Sound Correspondence', firstLessonActive: true,
+    })
+    expect(directive).toContain('FIRST LESSON PROTOCOL')
+    // concept-anchor language must not double-inject
+    expect(directive).not.toContain('never open with an example from a different concept')
+  })
+})
+
+// ── Bug 2: low-signal acknowledgement detector ───────────────────────────────
+
+describe('Bug 2 — isLowSignalAcknowledgement', () => {
+  const LOW_SIGNAL = [
+    'Got it', 'got it', 'okay', 'Okay', 'ok', 'OK', 'Ok',
+    'I see', 'I understand', 'understood', 'makes sense',
+    'alright', 'sure', 'right', 'yep', 'yup', 'yeah', 'cool',
+    'I get it', 'Sounds good', 'Fine', 'hmm', 'Uh huh', 'mhm',
+    'Got it!', 'Okay.', 'Ok, understood.',
+    'yes', 'of course', 'noted', 'no problem',
+  ]
+  const NOT_LOW_SIGNAL = [
+    'Got it, but what does the orbital mean exactly?',
+    'okay so the pressure increases because more molecules hit the walls?',
+    'I understand, but could you explain the bonding part again?',
+    'that makes sense — so Henry\'s law says concentration goes up with pressure',
+    'H₂ has two electrons in the bonding orbital',
+    'What is Henry\'s law?',
+    '',
+    'I think I get it but I\'m still confused about the second part',
+  ]
+
+  it.each(LOW_SIGNAL)('flags %j as low-signal', (msg) => {
+    expect(isLowSignalAcknowledgement(msg)).toBe(true)
+  })
+
+  it.each(NOT_LOW_SIGNAL)('does NOT flag %j as low-signal', (msg) => {
+    expect(isLowSignalAcknowledgement(msg)).toBe(false)
+  })
+})
+
+describe('Bug 2 — directive injects LOW-SIGNAL line when flagged', () => {
+  const state = { ...initialConversationState('c1'), phase: 'CHECK' as const }
+
+  it('injects LOW-SIGNAL RESPONSE DETECTED when lowSignalAcknowledgement=true', () => {
+    const directive = buildTurnDirective({
+      state, nextMove: 'ask', maxParagraphs: 4,
+      workedExampleFirst: false, visualType: null,
+      lowSignalAcknowledgement: true,
+    })
+    expect(directive).toContain('LOW-SIGNAL RESPONSE DETECTED')
+    expect(directive).toContain('concrete check question')
+  })
+
+  it('omits LOW-SIGNAL line when lowSignalAcknowledgement=false', () => {
+    const directive = buildTurnDirective({
+      state, nextMove: 'ask', maxParagraphs: 4,
+      workedExampleFirst: false, visualType: null,
+      lowSignalAcknowledgement: false,
+    })
+    expect(directive).not.toContain('LOW-SIGNAL RESPONSE DETECTED')
+  })
+})
+
+// ── Bug 3: stay-on-current-example guard ─────────────────────────────────────
+
+describe('Bug 3 — STAY ON CURRENT EXAMPLE directive in early phases', () => {
+  it('is injected in OBSERVE phase when correctAtCheck=0', () => {
+    const state = { ...initialConversationState('c1'), phase: 'OBSERVE' as const, correctAtCheck: 0 }
+    const directive = buildTurnDirective({
+      state, nextMove: 'ask', maxParagraphs: 4,
+      workedExampleFirst: false, visualType: null,
+    })
+    expect(directive).toContain('STAY ON CURRENT EXAMPLE')
+  })
+
+  it('is injected in DEMONSTRATE phase when correctAtCheck=0', () => {
+    const state = { ...initialConversationState('c1'), phase: 'DEMONSTRATE' as const, correctAtCheck: 0 }
+    const directive = buildTurnDirective({
+      state, nextMove: 'show', maxParagraphs: 4,
+      workedExampleFirst: false, visualType: null,
+    })
+    expect(directive).toContain('STAY ON CURRENT EXAMPLE')
+  })
+
+  it('is injected in GUIDE phase when correctAtCheck=0', () => {
+    const state = { ...initialConversationState('c1'), phase: 'GUIDE' as const, correctAtCheck: 0 }
+    const directive = buildTurnDirective({
+      state, nextMove: 'teach', maxParagraphs: 4,
+      workedExampleFirst: false, visualType: null,
+    })
+    expect(directive).toContain('STAY ON CURRENT EXAMPLE')
+  })
+
+  it('is NOT injected once correctAtCheck >= 1', () => {
+    const state = { ...initialConversationState('c1'), phase: 'OBSERVE' as const, correctAtCheck: 1 }
+    const directive = buildTurnDirective({
+      state, nextMove: 'ask', maxParagraphs: 4,
+      workedExampleFirst: false, visualType: null,
+    })
+    expect(directive).not.toContain('STAY ON CURRENT EXAMPLE')
+  })
+
+  it('is NOT injected in CHECK/PRACTICE/TRANSFER phases', () => {
+    for (const phase of ['CHECK', 'PRACTICE', 'TRANSFER'] as const) {
+      const st = { ...initialConversationState('c1'), phase, correctAtCheck: 0 }
+      const directive = buildTurnDirective({
+        state: st, nextMove: 'ask', maxParagraphs: 4,
+        workedExampleFirst: false, visualType: null,
+      })
+      expect(directive).not.toContain('STAY ON CURRENT EXAMPLE')
+    }
+  })
+})
+
+// ── Bug 4: filler turn detector ──────────────────────────────────────────────
+
+describe('Bug 4 — detectFillerTurn', () => {
+  const FILLER = [
+    "Let's take one small step together. We can continue whenever you're ready.",
+    "Take your time, no rush.",
+    "We can continue whenever you're ready.",
+    "Feel free to take a moment.",
+    "Let's move forward whenever you're ready.",
+    "We'll continue at your own pace.",
+  ]
+  const NOT_FILLER = [
+    "Henry's law states that the concentration of a dissolved gas is proportional to its partial pressure above the liquid.",
+    "What happens to gas solubility when you increase pressure?",
+    "Let's take one small step: H₂ has two electrons in bonding MOs — what does that tell us about bond order?",
+    "That's a great observation. Now let's think about what happens when pressure doubles.",
+    "The bond order is calculated as (bonding electrons - antibonding electrons) / 2.",
+    "",
+    "The answer is 1.5. Does that match what you calculated?",
+    "Okay, so the key idea is that when pressure increases, more gas molecules dissolve in the liquid — this is why carbonated drinks go flat when you open them.",
+  ]
+
+  it.each(FILLER)('flags %j as filler', (text) => {
+    expect(detectFillerTurn(text)).toBe(true)
+  })
+
+  it.each(NOT_FILLER)('does NOT flag %j as filler', (text) => {
+    expect(detectFillerTurn(text)).toBe(false)
   })
 })

@@ -1502,6 +1502,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             readConversationState, decideNextMove, responseBudget,
             buildTurnDirective, decideVisualFirst,
             detectAutonomyRequest, buildAutonomyBlock,
+            isLowSignalAcknowledgement,
           } = await import('@/lib/teaching/conversationState')
           const {
             masteryVerified, buildMasteryGateBlock,
@@ -1661,6 +1662,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             firstLessonActive: firstLessonActiveHoisted,
             legalityRationale: moveDecision.rationale,
             directiveJustIssued: recoveryKeyHoisted === 'too_many_questions',
+            // Bug 1: anchor OBSERVE hook to the lesson concept being taught.
+            lessonTitle: lessonCtx?.lessonTitle ?? null,
+            // Bug 2: flag bare social acknowledgements so the directive forces
+            // a concrete check question rather than letting the phase advance.
+            lowSignalAcknowledgement: isLowSignalAcknowledgement(message),
             // Recovery routing: a learner blocked on an OPERATION is not
             // stuck on the idea, and re-explaining the concept cannot help.
             capabilityRepair: (() => {
@@ -2397,6 +2403,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // since IPA is allowed (optionally/fully) at those registers.
       if (contentRegister === 'beginner') {
         cleanText = stripIpaNotation(cleanText)
+      }
+
+      // Bug 4 — filler turn detection: a turn with no explanation, no question,
+      // and no concrete content is a wasted turn. Replace it with a minimum
+      // viable teaching move (one concrete check question) so the learner gets
+      // something actionable. Runs on Library turns only (assembled turns are
+      // human-curated and never filler).
+      if (!assembled) {
+        try {
+          const { detectFillerTurn } = await import('@/lib/teaching/conversationState')
+          if (detectFillerTurn(cleanText)) {
+            const conceptHint = lessonCtx?.lessonTitle ? ` about ${lessonCtx.lessonTitle}` : ''
+            cleanText = `Let me ask you something concrete${conceptHint}: what's one thing you notice or find surprising about what we just covered?`
+          }
+        } catch { /* non-fatal */ }
       }
 
       // K6 — EOS Runtime integration: run the K5 Output Verifier on the

@@ -549,6 +549,61 @@ export function detectAutonomyRequest(message: string): boolean {
   return false
 }
 
+/**
+ * Bug 2 — low-signal acknowledgement detector.
+ *
+ * "Got it" / "okay" / "I see" are social courtesy turns, not evidence that
+ * the learner understood. Advancing the phase on these signals is the same
+ * hollow-advancement failure the mastery gate prevents at the lesson level.
+ *
+ * Detection criteria: the message is short (≤ 10 words) AND consists almost
+ * entirely of one or more bare acknowledgement tokens, with no substantive
+ * content (no question, no technical term, no number). We intentionally keep
+ * the token set tight to avoid false positives on short but real answers.
+ */
+const LOW_SIGNAL_TOKENS_RE =
+  /^[\s,!.]*(?:(?:got it|i see|okay|ok|alright|sure|right|yep|yup|yeah|i understand|understood|makes sense|i get it|i got it|sounds good|sounds right|fine|hmm|uh huh|uh-huh|mhm|m-hm|cool|great|perfect|nice|good|yes|no problem|fair enough|noted|of course|definitely)[,!.\s]*)+([\?].*)?$/i
+
+export function isLowSignalAcknowledgement(message: string): boolean {
+  const trimmed = message.trim()
+  if (!trimmed) return false
+  // More than 10 words: the learner added real content — not a bare ack.
+  if (trimmed.split(/\s+/).length > 10) return false
+  // A question mark means they asked something substantive.
+  if (trimmed.includes('?')) return false
+  return LOW_SIGNAL_TOKENS_RE.test(trimmed)
+}
+
+/**
+ * Bug 4 — filler turn detector (applied to the LLM's OWN output).
+ *
+ * A filler turn contains zero teaching payload: no explanation, no question,
+ * no concrete example, no number, no formula. It is pure transitional prose
+ * ("Let's take one small step together. We can continue whenever you're ready.")
+ * The post-processing layer replaces such turns with a minimum viable teaching
+ * move (one concrete check question) rather than letting a content-free turn
+ * count as a real teaching turn.
+ *
+ * Detection: short (≤ 30 words) + no `?` + no digit/formula + contains one or
+ * more known filler phrases. Deliberate false-positive caution: requires both
+ * the length/no-question criteria AND an explicit filler phrase — a very short
+ * but concrete statement ("An orbital is a region where electrons can be found.")
+ * will not fire because it contains no filler phrase.
+ */
+const FILLER_PHRASE_RE =
+  /\b(?:whenever you'?re ready|when(?:ever)? you'?re ready|take your time|in your own time|we can continue|let'?s take (?:a|one) (?:small )?step|feel free to|we'?ll continue|take a moment|no rush|we can go|let'?s move forward whenever|at your own pace)\b/i
+
+export function detectFillerTurn(text: string): boolean {
+  const wordCount = text.trim().split(/\s+/).length
+  if (wordCount > 30) return false
+  if (text.includes('?')) return false
+  // Must have at least one digit or uppercase letter sequence (formula/symbol)
+  // for a turn NOT to be a filler — inverted: if it has neither, the turn is
+  // more likely content-free, but we still require the phrase check.
+  if (!FILLER_PHRASE_RE.test(text)) return false
+  return true
+}
+
 /** ONLY injected when masteryVerified(state) is already true (see
  * masteryGate.ts) — an autonomy request before mastery gets
  * buildMasteryGateBlock() instead, never this. */
@@ -587,6 +642,14 @@ export interface TurnDirectiveParams {
   /** Capability Model: blocking capability ids when the learner is stuck on an
    *  OPERATION rather than on the concept. null = not a capability gap. */
   capabilityRepair?: readonly string[] | null
+  /** Bug 1: the lesson concept title, used to anchor the OBSERVE phase frame
+   *  to the concept actually being taught — prevents off-topic opening hooks. */
+  lessonTitle?: string | null
+  /** Bug 2: true when the learner's incoming message was a bare social
+   *  acknowledgement ("got it", "okay", "I see") with no verifiable content.
+   *  Injects a mandatory check-question directive so the phase cannot advance
+   *  on a signal that carries no evidence of understanding. */
+  lowSignalAcknowledgement?: boolean
 }
 
 const PHASE_FRAME: Record<TeachingPhase, string> = {
@@ -612,11 +675,30 @@ const MOVE_LINE: Record<NextMove, string> = {
  */
 export function buildTurnDirective(p: TurnDirectiveParams): string {
   const lines: string[] = ['\n\nTURN DIRECTIVE (server-decided — follow exactly; overrides any earlier advisory pacing):']
-  const phaseFrame = (p.firstLessonActive && p.state.phase === 'OBSERVE')
-    ? 'OBSERVE — follow the FIRST LESSON PROTOCOL opening approach: use the concrete hook the subject rule specifies to create the NEED. Then ask exactly ONE Stage 1–2 observation question.'
-    : PHASE_FRAME[p.state.phase]
+  let phaseFrame: string
+  if (p.firstLessonActive && p.state.phase === 'OBSERVE') {
+    phaseFrame = 'OBSERVE — follow the FIRST LESSON PROTOCOL opening approach: use the concrete hook the subject rule specifies to create the NEED. Then ask exactly ONE Stage 1–2 observation question.'
+  } else if (p.state.phase === 'OBSERVE' && p.lessonTitle) {
+    // Bug 1: anchor the OBSERVE hook to the concept being taught so the opening
+    // example cannot drift to a different concept (e.g. NaCl for an MO Theory lesson).
+    phaseFrame = `${PHASE_FRAME.OBSERVE} The anchor MUST be drawn from "${p.lessonTitle}" itself — never open with an example from a different concept.`
+  } else {
+    phaseFrame = PHASE_FRAME[p.state.phase]
+  }
   lines.push(`- Teaching phase: ${phaseFrame}`)
   lines.push(`- Next move: ${MOVE_LINE[p.nextMove]}`)
+
+  // Bug 2: bare acknowledgements are not evidence of understanding. Require a
+  // concrete check question before allowing the phase to advance.
+  if (p.lowSignalAcknowledgement) {
+    lines.push('- LOW-SIGNAL RESPONSE DETECTED: the learner sent a bare social acknowledgement ("Got it", "okay", "I see", etc.). This is NOT evidence of understanding. You MUST ask ONE concrete check question to verify comprehension before doing anything else — do not advance, do not explain further, ask now.')
+  }
+
+  // Bug 3: prevent sequential sub-example jumping before mastery. Stay on the
+  // current example until at least one correct signal has been confirmed.
+  if ((p.state.phase === 'OBSERVE' || p.state.phase === 'DEMONSTRATE' || p.state.phase === 'GUIDE') && p.state.correctAtCheck === 0) {
+    lines.push('- STAY ON CURRENT EXAMPLE: do not introduce a second example, molecule, compound, or entity until the learner answers at least one question about the current one correctly. One confirmed correct signal per sub-example before moving on.')
+  }
   lines.push(`- Question stage ceiling: Stage ${PHASE_MAX_QUESTION_STAGE[p.state.phase]} (see QUESTION STAGE POLICY). Never ask above it this turn.`)
   // Band 2 — stated before every other constraint below it, because it is the
   // only one the model must not trade off against anything else.
