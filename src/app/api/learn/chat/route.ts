@@ -384,11 +384,12 @@ export async function POST(req: Request) {
     // resumes from it instead of restarting or improvising.
     let teachingStepUpdateHoisted: { teachingStepIndex: number; teachingStepConceptId: string } | null = null
 
-    // Visual learning aids for SUBJECT_LIBRARY subjects — Sprint BW
-    // detectVisual()/buildVisualsSystemBlock(), scoped to the Library lesson's
-    // own unit/lesson titles. Purely additive; never blocks a lesson.
+    // D.23-30: Visual Intelligence — enhanced visual selection, relevance,
+    // repeat avoidance, URL stripping, narration sync. Replaces the simpler
+    // buildVisualsSystemBlock with teaching-objective-aligned directives.
     try {
-      const { detectVisual, buildVisualsSystemBlock } = await import('@/lib/school/visuals/detectVisual')
+      const { detectVisual } = await import('@/lib/school/visuals/detectVisual')
+      const { buildVisualIntelligenceBlock } = await import('@/lib/teaching/visualIntelligence')
       const availableVisual = detectVisual({
         subjectSlug: subjectCode,
         chapterTitle: lessonCtx?.unitTitle ?? '',
@@ -396,8 +397,11 @@ export async function POST(req: Request) {
       })
       cueObservations.availableVisual = availableVisual
       cueObservations.visualDetectionRan = true
-      const visualBlock = buildVisualsSystemBlock(availableVisual)
-      if (visualBlock) systemPrompt += visualBlock
+      systemPrompt += buildVisualIntelligenceBlock(
+        availableVisual,
+        lessonCtx?.lessonTitle ?? null,
+        false,
+      )
     } catch (err) {
       console.warn('[learn/chat] library visual aids context skipped:', err)
     }
@@ -1651,6 +1655,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           cueObservations.availableVisual = availableVisual
           cueObservations.visualDetectionRan = true
           availableVisualHoisted = availableVisual
+          // D.23-30: Visual Intelligence block for the conversation state
+          // machine path. alreadyShown = true when we've been in a visual-
+          // capable phase (OBSERVE/DEMONSTRATE/GUIDE) for >0 turns — the
+          // visual was likely already emitted on the first turn of this phase.
+          const { buildVisualIntelligenceBlock } = await import('@/lib/teaching/visualIntelligence')
+          const visualAlreadyShown = conversationStateHoisted.turnsInCurrentPhase > 0
+            && (conversationStateHoisted.phase === 'OBSERVE'
+              || conversationStateHoisted.phase === 'DEMONSTRATE'
+              || conversationStateHoisted.phase === 'GUIDE')
+          systemPrompt += buildVisualIntelligenceBlock(
+            availableVisual,
+            lessonCtx?.lessonTitle ?? null,
+            visualAlreadyShown,
+          )
           // Bugs 5/6/7 — explicit learner requests are detected in code and
           // dispatched as forced TeachingActions, injected AFTER the turn
           // directive so they override the phase's default move. A diagram
@@ -2443,6 +2461,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       if (contentRegister === 'beginner') {
         cleanText = stripIpaNotation(cleanText)
       }
+
+      // D.28: strip markdown image links and raw image URLs the LLM may have
+      // emitted — they render as broken images or expose internal URLs. The
+      // VISUAL tag pipeline renders visuals; no other image mechanism is used.
+      try {
+        const { stripRawImageUrls } = await import('@/lib/teaching/visualIntelligence')
+        cleanText = stripRawImageUrls(cleanText)
+      } catch { /* non-fatal */ }
 
       // K6 — EOS Runtime integration: run the K5 Output Verifier on the
       // cleaned text. Off by default; behind ENABLE_OUTPUT_VERIFIER (or the
