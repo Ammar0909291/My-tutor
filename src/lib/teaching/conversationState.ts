@@ -805,6 +805,13 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   if ((p.state.turnsInCurrentPhase ?? 0) >= 4) {
     lines.push(`- STALE LOOP (${p.state.turnsInCurrentPhase} turns in ${p.state.phase}): your previous approach is not landing. Try a COMPLETELY DIFFERENT angle — a new analogy, a concrete physical demo, a worked example from a different domain, or a simpler sub-problem. Do NOT rephrase the same explanation.`)
   }
+  // E.33: maintain lesson continuity — after any side question, example
+  // request, or tangent, the LLM must return to the lesson's main thread
+  // rather than drifting or starting a new topic. Standing rule.
+  lines.push('- CONTINUITY: every response must connect back to the concept being taught. After answering a side question or showing an example, explicitly link it back to the main lesson objective before proceeding.')
+  // E.35: smooth transitions — when moving between sub-topics or phases,
+  // bridge the gap rather than jumping abruptly. Standing rule.
+  lines.push('- TRANSITIONS: when shifting focus (new sub-topic, new angle, new phase), use a brief bridging sentence that connects where you were to where you are going. Never start a new section without linking it to the previous one.')
   return lines.join('\n')
 }
 
