@@ -1660,12 +1660,12 @@
   202. Remaining 15 math.geom candidates are all no-Blueprint. Full
   detail: `COVERAGE.md`.
   **Batch 54 — math.geom Wave 10 part 1** (2026-07-27, autonomous loop
-  iteration 43 resumption): 4 concepts authored (`angle-types`,
-  `triangle-types`, `triangle-angle-sum`, `pythagorean-converse`; none
-  had a Blueprint, all via birth-taxonomy diagnostic). `math.geom`
-  34/69 → 38/69. Mathematics 202 → 206. 11 remaining no-Blueprint
-  candidates deferred to future Batch 54 part 2/subsequent batches.
-  Full detail: `COVERAGE.md`.
+  iteration 43 resumption): 5 concepts authored (`angle-types`,
+  `triangle-types`, `triangle-angle-sum`, `pythagorean-converse`,
+  `triangle-centers`; none had a Blueprint, all via birth-taxonomy
+  diagnostic). `math.geom` 34/69 → 39/69. Mathematics 202 → 207. 10
+  remaining no-Blueprint candidates deferred to future Batch 54 part
+  2/subsequent batches. Full detail: `COVERAGE.md`.
 
 ## Engineering Program close-out (2026-07-26)
 - A multi-session "Pappu" engineering program (runtime/infra/security/performance, explicitly

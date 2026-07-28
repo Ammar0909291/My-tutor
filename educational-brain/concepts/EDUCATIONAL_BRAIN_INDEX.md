@@ -574,7 +574,7 @@ its subject KG.
 | geom | `math.geom.trapezoid` | Trapezoid | No | No | — | MISSING |
 | geom | `math.geom.triangle` | Triangle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.triangle.md` | READY |
 | geom | `math.geom.triangle-angle-sum` | Triangle Angle Sum Theorem | No | Yes | `educational-brain/concepts/mathematics/math.geom.triangle-angle-sum.md` | READY |
-| geom | `math.geom.triangle-centers` | Triangle Centers | No | No | — | MISSING |
+| geom | `math.geom.triangle-centers` | Triangle Centers | No | Yes | `educational-brain/concepts/mathematics/math.geom.triangle-centers.md` | READY |
 | geom | `math.geom.triangle-types` | Types of Triangles | No | Yes | `educational-brain/concepts/mathematics/math.geom.triangle-types.md` | READY |
 | geom | `math.geom.vectors-2d` | Vectors in 2D | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.vectors-2d.md` | READY |
 | geom | `math.geom.vectors-3d` | Vectors in 3D | Yes | No | — | MISSING |

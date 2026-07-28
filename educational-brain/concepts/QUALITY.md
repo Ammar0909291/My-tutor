@@ -53,13 +53,12 @@ rather than hand-edit when entries change.
   migration debt (76 = 71 + 5), not introduced this batch — rewriting
   another session's freshly authored files remains out of scope.
 
-## Aggregate summary (583 entries)
+## Aggregate summary (584 entries)
 
-Adds `math.geom.pythagorean-converse` (1 concept, 2026-07-27, autonomous
-loop iteration 43 resumption continued) on top of the prior 582-entry
-state (`angle-types`, `triangle-types`, `triangle-angle-sum` + all prior
-batches). No Blueprint exists for `pythagorean-converse`. All numbers
-below were recomputed fresh by scanning every live file in
+Adds `math.geom.pythagorean-converse` and `math.geom.triangle-centers`
+(2 concepts, 2026-07-27, autonomous loop iteration 43 resumption
+continued) on top of the prior 582-entry state. Neither has a Blueprint.
+All numbers below were recomputed fresh by scanning every live file in
 `educational-brain/concepts/{subject}/` — none hand-estimated. Note:
 this ledger's chemistry row count (136) understates chemistry's true
 186/186-complete state (CLAUDE.md) — a pre-existing gap outside this
@@ -67,15 +66,15 @@ batch's mathematics-only scope, not corrected here.
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 360 / 583 | see methodology note above — 24 `math.found` + 28 `math.arith` + 13 `math.nt` + 6 `math.geom` (`perimeter`, `length`, `angle-types`, `triangle-types`, `triangle-angle-sum`, `pythagorean-converse`) — none of these 71 have a Blueprint — + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
-| Educational Brain | 583 / 583 | trivially true (this is the entry list) |
-| Mental Model | 583 / 583 | |
-| Misconceptions | 583 / 583 | |
-| Analogies | 583 / 583 | |
-| Recovery Strategy | 583 / 583 | |
-| Assessment Signals | 583 / 583 | |
-| Tutor Actions | 513 / 583 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
-| Cross-links | 513 / 583 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
+| Blueprint | 360 / 584 | see methodology note above — 24 `math.found` + 28 `math.arith` + 13 `math.nt` + 7 `math.geom` (`perimeter`, `length`, `angle-types`, `triangle-types`, `triangle-angle-sum`, `pythagorean-converse`, `triangle-centers`) — none of these 72 have a Blueprint — + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
+| Educational Brain | 584 / 584 | trivially true (this is the entry list) |
+| Mental Model | 584 / 584 | |
+| Misconceptions | 584 / 584 | |
+| Analogies | 584 / 584 | |
+| Recovery Strategy | 584 / 584 | |
+| Assessment Signals | 584 / 584 | |
+| Tutor Actions | 514 / 584 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
+| Cross-links | 514 / 584 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
 | Version History | 507 / 582 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
 
 ## Per-concept ledger
@@ -483,6 +482,7 @@ batch's mathematics-only scope, not corrected here.
 | `math.geom.point` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.polygon` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.pythagorean-converse` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.triangle-centers` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.pythagorean-theorem` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.quadrilateral` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.ray` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
