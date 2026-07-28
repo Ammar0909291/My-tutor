@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 205 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 28 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation`, `pythagorean-triples` — `math.nt` domain otherwise PARKED at 28/36, blocked on cross-domain campaigns per ROADMAP.md §5 item 1c) + 37 `math.geom.*` entries (`point`, `line`, `line-segment`, `ray`, `plane`, `angle`, `angle-measurement`, `angle-pairs`, `angle-types`, `circle`, `coordinate-plane`, `perimeter`, `length`, `perpendicular-lines`, `triangle`, `triangle-types`, `triangle-angle-sum`, `circle-equation`, `right-triangle`, `congruent-triangles`, `similar-triangles`, `area-triangle`, `polygon`, `pythagorean-theorem`, `parallel-lines`, `area-polygon`, `solid-3d`, `distance-formula`, `geometric-proof`, `quadrilateral`, `area`, `volume`, `x-y-coordinates`, `slope`, `transformations`, `vectors-2d`, `surface-area` — `math.geom` domain IN PROGRESS, 37/69, Wave 10 part 1 continuing), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
+| mathematics | 908 | 206 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 28 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation`, `pythagorean-triples` — `math.nt` domain otherwise PARKED at 28/36, blocked on cross-domain campaigns per ROADMAP.md §5 item 1c) + 38 `math.geom.*` entries (`point`, `line`, `line-segment`, `ray`, `plane`, `angle`, `angle-measurement`, `angle-pairs`, `angle-types`, `circle`, `coordinate-plane`, `perimeter`, `length`, `perpendicular-lines`, `triangle`, `triangle-types`, `triangle-angle-sum`, `circle-equation`, `right-triangle`, `congruent-triangles`, `similar-triangles`, `area-triangle`, `polygon`, `pythagorean-theorem`, `pythagorean-converse`, `parallel-lines`, `area-polygon`, `solid-3d`, `distance-formula`, `geometric-proof`, `quadrilateral`, `area`, `volume`, `x-y-coordinates`, `slope`, `transformations`, `vectors-2d`, `surface-area` — `math.geom` domain IN PROGRESS, 38/69, Wave 10 part 1 continuing), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -4245,3 +4245,39 @@ commit; re-validated 0 duplicates, 0 orphans, 0 Quality Gate 3
 violations across all 205 mathematics entries. Full suite 2769 passed/1
 skipped (post-merge with concurrent `iss-24`/engineering commits), `npx
 tsc --noEmit` clean, mathematics KG PASS (908/908 reachable).
+
+Continuing Wave 10 part 1, authored the fourth candidate:
+
+- `math.geom.pythagorean-converse` (developing/apply, mastery 0.85) —
+  no Blueprint exists (stated explicitly in Blueprint References section;
+  references Euclid's Elements Book I Proposition 48, NCERT Grade 10,
+  OpenStax Geometry). Requires `math.geom.pythagorean-theorem` only.
+  No `unlocks` currently in the live KG. Core concept: the converse
+  (if a²+b²=c² then the triangle is right-angled with hypotenuse c) is
+  a SEPARATE theorem from the original — not automatically true — proven
+  via SSS uniqueness. Full three-way classification tool: a²+b²=c² →
+  right, a²+b²>c² → acute, a²+b²<c² → obtuse (c must always be the
+  LONGEST side). MC-1 CONVERSE-AUTOMATICALLY-TRUE-BECAUSE-ORIGINAL-IS-
+  TRUE (Type 6 analogy overextension — treating the logical reverse as
+  self-evident without recognizing it requires separate proof; the
+  square/rectangle false-converse counterexample is the repair anchor),
+  MC-2 WRONG-SIDE-DESIGNATED-AS-C (Type 4 notation-induced — using a
+  non-longest side as c, producing nonsensical results), MC-3 EQUALITY-
+  ONLY-NO-ACUTE-OBTUSE-EXTENSION (Type 5 instruction-induced — knowing
+  only the right-triangle test, stopping at "not equal" without
+  classifying acute vs. obtuse), MC-4 SKIPS-TRIANGLE-INEQUALITY-
+  PRECHECK (Type 5 instruction-induced — applying the converse test to
+  side lengths that cannot form a triangle, without checking the
+  Triangle Inequality first). Mental models: the diagnostic-test model
+  (like a lab test checking for a specific condition), the three-outcome
+  number line (a²+b² vs c²: less→obtuse, equal→right, greater→acute),
+  the construction-and-uniqueness argument (SSS uniqueness means if a
+  right triangle with those lengths exists, the given triangle MUST be
+  it).
+
+`math.geom` now **38/69**. All six tracking files (INDEX, QUEUE,
+ROADMAP, QUALITY, COVERAGE, CLAUDE.md) updated; mathematics 205 → 206.
+Remaining Wave 10 part 1 candidates (11): `triangle-centers`,
+`parallelogram`, `trapezoid`, `regular-polygon`, `circle-parts`,
+`circle-circumference`, `circle-area`, `circle-theorems`, `quadrants`,
+`midpoint-formula`, `geometric-constructions`.

@@ -556,7 +556,7 @@ its subject KG.
 | geom | `math.geom.polar-curves` | Polar Curves | No | No | — | MISSING |
 | geom | `math.geom.polygon` | Polygon | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.polygon.md` | READY |
 | geom | `math.geom.polygon-angle-sum` | Polygon Angle Sum | No | No | — | MISSING |
-| geom | `math.geom.pythagorean-converse` | Converse of the Pythagorean Theorem | No | No | — | MISSING |
+| geom | `math.geom.pythagorean-converse` | Converse of the Pythagorean Theorem | No | Yes | `educational-brain/concepts/mathematics/math.geom.pythagorean-converse.md` | READY |
 | geom | `math.geom.pythagorean-theorem` | Pythagorean Theorem | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.pythagorean-theorem.md` | READY |
 | geom | `math.geom.quadrants` | Quadrants | No | No | — | MISSING |
 | geom | `math.geom.quadrilateral` | Quadrilateral | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.quadrilateral.md` | READY |

@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1143** (= 1,775 KG concepts − 632 already `READY`, per
+Total queued: **1142** (= 1,775 KG concepts − 633 already `READY`, per
 `ROADMAP.md`'s §1 Totals as updated 2026-07-27 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -1264,7 +1264,8 @@ to READY.
 | 698 | mathematics | 18 | `math.alg.equation` | Equation |
 | 699 | mathematics | 18 | `math.alg.polynomial` | Polynomial |
 | 700 | mathematics | 18 | `math.alg.exponent-rules` | Exponent Rules (Algebraic) |
-| 701 | mathematics | 18 | `math.geom.pythagorean-converse` | Converse of the Pythagorean Theorem |
+**Row 701 removed 2026-07-27** — `math.geom.pythagorean-converse` authored
+math.geom Wave 10 part 1, moved to READY.
 **Row 702 removed 2026-07-26** — `math.geom.similar-triangles` authored
 math.geom Wave 6, moved to READY.
 **Row 703 removed 2026-07-26** — `math.geom.distance-formula` authored
