@@ -133,7 +133,13 @@ function _speakTextImpl(
   const speakFrom = (index: number, voice: SpeechSynthesisVoice | undefined) => {
     if (myGeneration !== ttsGeneration) return
     if (index >= segments.length) { onEnd?.(); return }
-    const segment = segments[index]
+    // Strip trailing sentence-ending periods before creating the utterance —
+    // some browser TTS voices (especially British English) read a bare "."
+    // as "full stop" instead of using it as a natural pause cue. The pause
+    // itself is handled by pauseBeforeSegment() between segments, so removing
+    // the period changes nothing about rhythm while fixing the pronunciation.
+    // Decimal points ("3.14") are safe: they sit between digits, not at end.
+    const segment = segments[index].replace(/\.\s*$/, '')
     const utter = new SpeechSynthesisUtterance(segment)
     utter.lang = locale
     utter.pitch = config.pitch

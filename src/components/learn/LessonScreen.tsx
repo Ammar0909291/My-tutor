@@ -12,6 +12,7 @@ import { useLanguage } from '@/components/ui/LanguageToggle'
 import { useCountry, useTheme } from '@/components/Providers'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { speakText, stopSpeaking, VOICE_SPEED_OPTIONS, SERVER_TTS_LANGS, LANG_LOCALE, canUseSpeechRecognition, type VoiceType, type TeachingLang } from '@/lib/tts'
+import { cleanTextForTTS } from '@/lib/tts-cleaner'
 import type { VoiceTimingSignal } from '@/lib/voice/voiceSignal'
 import { fetchWithTimeout } from '@/lib/net/timeout'
 import { isFallbackResponse, pickRecoveryMessage } from '@/lib/learn/tutorRecovery'
@@ -1152,6 +1153,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         // learner has taken over (initializedRef set at Start-press time),
         // the restore loses — never overwrite a live conversation.
         if (initializedRef.current) return
+        // Race guard: if a lesson-switch is already in progress (the user
+        // pressed Skip Anyway or navigated to a new lesson while this fetch
+        // was still in flight), pendingLessonRunRef is set. Restoring old
+        // history now would clobber the welcome screen for the new lesson
+        // and set lessonStarted=true, silently bypassing "Start Lesson".
+        if (pendingLessonRunRef.current !== null) return
         setMessages(restored)
         setLessonStarted(true) // skip the "Start Lesson" welcome screen
         // Prevent startLesson() from firing a duplicate opening prompt if
@@ -1360,10 +1367,16 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // the browser speechSynthesis path on any fetch/playback failure, so
   // worst case matches pre-existing behavior, never silence.
   const speakViaServerTTS = useCallback((id: string, text: string, onDone: () => void) => {
+    // Clean before sending to the server-side TTS provider (Sarvam/Yandex):
+    // Greek letters, math symbols, markdown artefacts, and trailing periods
+    // that some TTS providers read as "full stop" are all resolved here,
+    // matching what the browser-TTS path already does via cleanTextForTTS
+    // inside speakText(). Both paths now receive the same clean text.
+    const cleanedText = cleanTextForTTS(text)
     fetch('/api/tts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, lang: teachingLanguage, voice: voiceType, country }),
+      body: JSON.stringify({ text: cleanedText, lang: teachingLanguage, voice: voiceType, country }),
     })
       .then((res) => { if (!res.ok) throw new Error('tts failed'); return res.blob() })
       .then((blob) => {

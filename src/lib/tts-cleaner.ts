@@ -60,6 +60,38 @@ const CURRENCY_NAMES: Record<string, string> = {
 
 import { speakifyIpaNotation } from '@/lib/text/ipaToSpeech'
 
+// Greek letters → spoken names. Ordered so uppercase entries come first
+// (Sigma before sigma) to avoid an uppercase char being caught by a shorter
+// lowercase pattern that matches its Unicode numeric neighbour.
+// π is listed here for completeness but the standalone `/π/g` rule below
+// still takes priority — having it here only matters inside longer words.
+const GREEK_LETTERS: [RegExp, string][] = [
+  [/Α/g, 'Alpha'], [/α/g, 'alpha'],
+  [/Β/g, 'Beta'],  [/β/g, 'beta'],
+  [/Γ/g, 'Gamma'], [/γ/g, 'gamma'],
+  [/Δ/g, 'Delta'], [/δ/g, 'delta'],
+  [/Ε/g, 'Epsilon'],[/ε/g, 'epsilon'],
+  [/Ζ/g, 'Zeta'],  [/ζ/g, 'zeta'],
+  [/Η/g, 'Eta'],   [/η/g, 'eta'],
+  [/Θ/g, 'Theta'], [/θ/g, 'theta'],
+  [/Ι/g, 'Iota'],  [/ι/g, 'iota'],
+  [/Κ/g, 'Kappa'], [/κ/g, 'kappa'],
+  [/Λ/g, 'Lambda'],[/λ/g, 'lambda'],
+  [/Μ/g, 'Mu'],    [/μ/g, 'mu'],
+  [/Ν/g, 'Nu'],    [/ν/g, 'nu'],
+  [/Ξ/g, 'Xi'],    [/ξ/g, 'xi'],
+  [/Ο/g, 'Omicron'],[/ο/g, 'omicron'],
+  [/Π/g, 'Pi'],    [/π/g, 'pi'],
+  [/Ρ/g, 'Rho'],   [/ρ/g, 'rho'],
+  [/Σ/g, 'Sigma'], [/σ/g, 'sigma'], [/ς/g, 'sigma'],
+  [/Τ/g, 'Tau'],   [/τ/g, 'tau'],
+  [/Υ/g, 'Upsilon'],[/υ/g, 'upsilon'],
+  [/Φ/g, 'Phi'],   [/φ/g, 'phi'],
+  [/Χ/g, 'Chi'],   [/χ/g, 'chi'],
+  [/Ψ/g, 'Psi'],   [/ψ/g, 'psi'],
+  [/Ω/g, 'Omega'], [/ω/g, 'omega'],
+]
+
 function escapeRegExp(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
@@ -197,6 +229,13 @@ export function cleanTextForTTS(text: string): string {
     return `${base} to the power of ${digits}`
   })
 
+  // Greek letters — before math-symbol substitution so e.g. "ωt" becomes
+  // "omega t" rather than a raw Unicode codepoint that TTS voices render
+  // inconsistently (or announce as a character name mid-sentence).
+  for (const [re, name] of GREEK_LETTERS) {
+    t = t.replace(re, ` ${name} `)
+  }
+
   // Math and comparison symbols — multi-character forms before single-character ones
   t = t.replace(/−/g, '-') // normalize unicode minus to ascii hyphen
   // "leads to" reads naturally for both a chemical equation and a general
@@ -212,6 +251,8 @@ export function cleanTextForTTS(text: string): string {
   t = t.replace(/×/g, ' times ')
   t = t.replace(/÷/g, ' divided by ')
   t = t.replace(/±/g, ' plus or minus ')
+  // π already handled by GREEK_LETTERS above; the rule below is a harmless no-op
+  // but kept for clarity (the text now contains "pi" not "π").
   t = t.replace(/π/g, ' pi ')
   t = t.replace(/√/g, ' square root of ')
   t = t.replace(/∞/g, ' infinity ')
