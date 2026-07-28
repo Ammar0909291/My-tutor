@@ -1510,7 +1510,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             buildTurnDirective, decideVisualFirst,
             detectAutonomyRequest, buildAutonomyBlock,
             detectNavigationRequest, buildNavigationAcknowledgementBlock,
-            detectLearnerQuestion,
+            detectLearnerQuestion, classifyAcknowledgementContext,
           } = await import('@/lib/teaching/conversationState')
           const {
             masteryVerified, buildMasteryGateBlock,
@@ -1687,6 +1687,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             conceptPreviouslyMastered: conceptPreviouslyMasteredHoisted,
             phaseJustAdvanced: (conversationStateHoisted.turnsInCurrentPhase ?? 0) === 0
               && conversationStateHoisted.phase !== 'OBSERVE',
+            acknowledgementContext: (() => {
+              const prevSig = (snapshot?.lastSignal && typeof snapshot.lastSignal === 'object')
+                ? (snapshot.lastSignal as { correctness?: boolean }).correctness ?? null
+                : null
+              return classifyAcknowledgementContext(
+                conversationStateHoisted, prevSig, recoveryKeyHoisted !== null, navigationRequestHoisted,
+              )
+            })(),
           })
           if (learnerRequestHoisted) {
             const hasEstablishedExample =

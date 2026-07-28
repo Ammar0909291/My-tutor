@@ -612,6 +612,57 @@ export function detectLearnerQuestion(message: string): boolean {
   return QUESTION_RE.test(message) && message.includes('?')
 }
 
+// ── B.13-17: Natural Acknowledgement Engine ─────────────────────────────────
+// Context-aware acknowledgement instruction that replaces generic "Great!"
+// with acknowledgements matched to what actually happened.
+
+export type AcknowledgementContext =
+  | 'correct_answer'
+  | 'understanding'
+  | 'progress'
+  | 'confidence_building'
+  | 'correction'
+  | 'confusion'
+  | 'recovery'
+  | 'navigation'
+  | 'neutral'
+
+export function classifyAcknowledgementContext(
+  state: ConversationState,
+  signalCorrect: boolean | null,
+  recoveryFired: boolean,
+  navigationRequest: boolean,
+): AcknowledgementContext {
+  if (recoveryFired) return 'recovery'
+  if (navigationRequest) return 'navigation'
+  if (state.consecutiveFailures >= 2) return 'confusion'
+  if (signalCorrect === false) return 'correction'
+  if (signalCorrect === true) {
+    if (state.learnerConfidence === 'low') return 'confidence_building'
+    if (state.correctAtCheck + state.correctAtPractice >= 3) return 'progress'
+    if (state.phase === 'TRANSFER') return 'understanding'
+    return 'correct_answer'
+  }
+  return 'neutral'
+}
+
+const ACKNOWLEDGEMENT_INSTRUCTIONS: Record<AcknowledgementContext, string> = {
+  correct_answer: 'Acknowledge the correct answer concisely and specifically — name what they got right, not just "Great!" (e.g. "That\'s correct — the force really does point inward").',
+  understanding: 'Acknowledge the depth of their understanding — note the connection they made, not just correctness (e.g. "I can see how you\'re connecting these ideas").',
+  progress: 'Acknowledge their progress arc — reference how far they\'ve come this lesson (e.g. "You\'ve built up a solid understanding — let\'s see if you can apply it").',
+  confidence_building: 'This student\'s confidence is low — acknowledge gently and build them up (e.g. "That\'s exactly right — you know more than you think").',
+  correction: 'Acknowledge the mistake without judgment — normalize it and redirect (e.g. "That\'s a really common place to get tripped up — let me show you why").',
+  confusion: 'The student has struggled multiple times — validate their effort, not the confusion (e.g. "This is genuinely tricky — let me try a completely different angle").',
+  recovery: 'The student expressed frustration or is stuck — acknowledge their feeling first, then pivot to support (e.g. "I hear you — let\'s take a step back and try something different").',
+  navigation: 'The student asked to change topic — acknowledge the request warmly (e.g. "Great choice — we\'ll get to that!").',
+  neutral: 'No special acknowledgement needed — proceed directly to teaching content without a filler opener.',
+}
+
+export function buildAcknowledgementInstruction(ctx: AcknowledgementContext): string {
+  if (ctx === 'neutral') return ''
+  return `\n- ACKNOWLEDGEMENT: ${ACKNOWLEDGEMENT_INSTRUCTIONS[ctx]} Never open with generic filler ("Great!", "Okay!", "Nice!", "Exactly!"). Acknowledge HOW they are learning, not just THAT they answered.`
+}
+
 // ── The turn directive (the ONLY prompt surface of this module) ───────────────
 
 export interface TurnDirectiveParams {
@@ -646,6 +697,8 @@ export interface TurnDirectiveParams {
   /** A.10: the phase just advanced this turn (the previous turn's signal
    *  moved the ladder). Triggers a brief recap before the new phase. */
   phaseJustAdvanced?: boolean
+  /** B.13-17: context-aware acknowledgement instruction. */
+  acknowledgementContext?: AcknowledgementContext
 }
 
 const PHASE_FRAME: Record<TeachingPhase, string> = {
@@ -677,6 +730,11 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   lines.push(`- Teaching phase: ${phaseFrame}`)
   lines.push(`- Next move: ${MOVE_LINE[p.nextMove]}`)
   lines.push(`- Question stage ceiling: Stage ${PHASE_MAX_QUESTION_STAGE[p.state.phase]} (see QUESTION STAGE POLICY). Never ask above it this turn.`)
+  // B.13-17: context-aware acknowledgement replaces generic openers.
+  if (p.acknowledgementContext) {
+    const ackLine = buildAcknowledgementInstruction(p.acknowledgementContext)
+    if (ackLine) lines.push(ackLine.trim())
+  }
   // Band 2 — stated before every other constraint below it, because it is the
   // only one the model must not trade off against anything else.
   if (p.legalityRationale) {
