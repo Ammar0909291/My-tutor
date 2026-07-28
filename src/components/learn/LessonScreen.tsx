@@ -1297,8 +1297,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       .finally(() => setCurriculumLoaded(true))
   }, [subjectSlug])
 
-  // Detect lesson completion
-  const handleLessonComplete = useCallback(async (lessonOrder: number, lesson?: { lessonTitle: string; lessonGoal: string; topicSlug?: string }, mastered = true) => {
+  // Detect lesson completion — returns the fresh server progress on success
+  // so callers that need to derive the next lesson from authoritative data
+  // (e.g. handleSkipAnyway) don't read the stale React state set by
+  // setCurriculumProgress on the same tick.
+  const handleLessonComplete = useCallback(async (lessonOrder: number, lesson?: { lessonTitle: string; lessonGoal: string; topicSlug?: string }, mastered = true): Promise<CurriculumProgress | null> => {
     try {
       const res = await fetch('/api/curriculum/progress', {
         method: 'PATCH',
@@ -1322,18 +1325,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           fireConfetti()
           setTimeout(() => setXpCelebration(false), 3000)
         }
+        return data.progress as CurriculumProgress
       }
     } catch { /* ignore */ }
+    return null
   }, [subjectSlug, curriculumLessons.length])
 
-  // P0-4 fix: "Skip Anyway" used to call handleLessonComplete directly —
-  // indistinguishable from a genuine mastery-verified completion (no gap
-  // recorded, and the chat session kept re-teaching the skipped concept
-  // because its own concept pointer was never cleared). mastered=false
-  // tells the server this was an explicit skip, not evidence of learning.
-  const handleSkipAnyway = useCallback((lessonOrder: number, lesson?: { lessonTitle: string; lessonGoal: string; topicSlug?: string }) => {
-    handleLessonComplete(lessonOrder, lesson, false)
-  }, [handleLessonComplete])
 
   const handleLessonRestart = useCallback(async (lessonOrder: number, topicSlug?: string) => {
     try {
@@ -1820,6 +1817,32 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       setIsStreaming(false)
     }
   }, [teachingLanguage, curriculumLessons.length, curriculumProgress.completedLessons])
+
+  // P0-4 fix: "Skip Anyway" used to call handleLessonComplete directly —
+  // indistinguishable from a genuine mastery-verified completion (no gap
+  // recorded, and the chat session kept re-teaching the skipped concept
+  // because its own concept pointer was never cleared). mastered=false
+  // tells the server this was an explicit skip, not evidence of learning.
+  //
+  // Task 3 fix: after recording the skip, trigger the full lesson-init
+  // flow for the next lesson — same pendingLesson + pendingLessonRunRef
+  // pattern used by confirmLessonSwitch's forward-navigation branch, so
+  // the learner sees the "Start Lesson" welcome screen and the server
+  // resets conversationState to OBSERVE before teaching begins.
+  const handleSkipAnyway = useCallback(async (lessonOrder: number, lesson?: { lessonTitle: string; lessonGoal: string; topicSlug?: string }) => {
+    const newProgress = await handleLessonComplete(lessonOrder, lesson, false)
+    if (!newProgress || !sessionId) return
+    const next = findNextLesson(curriculumLessons, newProgress)
+    if (!next) return
+    setMessages([])
+    setLessonStarted(false)
+    initializedRef.current = false
+    setPendingLesson(next)
+    pendingLessonRunRef.current = async () => {
+      await callLessonInit(sessionId, 'next', next)
+      setActiveTab('chat')
+    }
+  }, [handleLessonComplete, curriculumLessons, sessionId, callLessonInit])
 
   // Start revision mode for a completed/mastered topic — the richer
   // "previous lesson" restoration: patches TopicProgress to REVISION
