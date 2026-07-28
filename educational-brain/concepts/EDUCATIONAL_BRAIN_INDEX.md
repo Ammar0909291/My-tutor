@@ -546,7 +546,7 @@ its subject KG.
 | geom | `math.geom.midpoint-formula` | Midpoint Formula | No | No | — | MISSING |
 | geom | `math.geom.parabola` | Parabola | No | No | — | MISSING |
 | geom | `math.geom.parallel-lines` | Parallel Lines | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.parallel-lines.md` | READY |
-| geom | `math.geom.parallelogram` | Parallelogram | No | No | — | MISSING |
+| geom | `math.geom.parallelogram` | Parallelogram | No | Yes | `educational-brain/concepts/mathematics/math.geom.parallelogram.md` | READY |
 | geom | `math.geom.perimeter` | Perimeter | No | Yes | `educational-brain/concepts/mathematics/math.geom.perimeter.md` | READY |
 | geom | `math.geom.perpendicular-lines` | Perpendicular Lines | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.perpendicular-lines.md` | READY |
 | geom | `math.geom.plane` | Plane | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.plane.md` | READY |
@@ -562,7 +562,7 @@ its subject KG.
 | geom | `math.geom.quadrilateral` | Quadrilateral | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.quadrilateral.md` | READY |
 | geom | `math.geom.ray` | Ray | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.ray.md` | READY |
 | geom | `math.geom.reflection` | Reflection | No | No | — | MISSING |
-| geom | `math.geom.regular-polygon` | Regular Polygon | No | No | — | MISSING |
+| geom | `math.geom.regular-polygon` | Regular Polygon | No | Yes | `educational-brain/concepts/mathematics/math.geom.regular-polygon.md` | READY |
 | geom | `math.geom.right-triangle` | Right Triangle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.right-triangle.md` | READY |
 | geom | `math.geom.rotation` | Rotation | No | No | — | MISSING |
 | geom | `math.geom.similar-triangles` | Similar Triangles | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.similar-triangles.md` | READY |
@@ -571,7 +571,7 @@ its subject KG.
 | geom | `math.geom.surface-area` | Surface Area | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.surface-area.md` | READY |
 | geom | `math.geom.transformations` | Geometric Transformations | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.transformations.md` | READY |
 | geom | `math.geom.translation` | Translation | No | No | — | MISSING |
-| geom | `math.geom.trapezoid` | Trapezoid | No | No | — | MISSING |
+| geom | `math.geom.trapezoid` | Trapezoid | No | Yes | `educational-brain/concepts/mathematics/math.geom.trapezoid.md` | READY |
 | geom | `math.geom.triangle` | Triangle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.triangle.md` | READY |
 | geom | `math.geom.triangle-angle-sum` | Triangle Angle Sum Theorem | No | Yes | `educational-brain/concepts/mathematics/math.geom.triangle-angle-sum.md` | READY |
 | geom | `math.geom.triangle-centers` | Triangle Centers | No | Yes | `educational-brain/concepts/mathematics/math.geom.triangle-centers.md` | READY |

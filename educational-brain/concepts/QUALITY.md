@@ -53,29 +53,29 @@ rather than hand-edit when entries change.
   migration debt (76 = 71 + 5), not introduced this batch — rewriting
   another session's freshly authored files remains out of scope.
 
-## Aggregate summary (584 entries)
+## Aggregate summary (587 entries)
 
-Adds `math.geom.pythagorean-converse` and `math.geom.triangle-centers`
-(2 concepts, 2026-07-27, autonomous loop iteration 43 resumption
-continued) on top of the prior 582-entry state. Neither has a Blueprint.
-All numbers below were recomputed fresh by scanning every live file in
-`educational-brain/concepts/{subject}/` — none hand-estimated. Note:
-this ledger's chemistry row count (136) understates chemistry's true
-186/186-complete state (CLAUDE.md) — a pre-existing gap outside this
-batch's mathematics-only scope, not corrected here.
+Adds `math.geom.parallelogram`, `math.geom.trapezoid`, and
+`math.geom.regular-polygon` (3 concepts, 2026-07-28, autonomous loop
+iteration 43 resumption continued) on top of the prior 584-entry state.
+None has a Blueprint. All numbers below were recomputed fresh by scanning
+every live file in `educational-brain/concepts/{subject}/` — none
+hand-estimated. Note: this ledger's chemistry row count (136) understates
+chemistry's true 186/186-complete state (CLAUDE.md) — a pre-existing gap
+outside this batch's mathematics-only scope, not corrected here.
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 360 / 584 | see methodology note above — 24 `math.found` + 28 `math.arith` + 13 `math.nt` + 7 `math.geom` (`perimeter`, `length`, `angle-types`, `triangle-types`, `triangle-angle-sum`, `pythagorean-converse`, `triangle-centers`) — none of these 72 have a Blueprint — + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
-| Educational Brain | 584 / 584 | trivially true (this is the entry list) |
-| Mental Model | 584 / 584 | |
-| Misconceptions | 584 / 584 | |
-| Analogies | 584 / 584 | |
-| Recovery Strategy | 584 / 584 | |
-| Assessment Signals | 584 / 584 | |
-| Tutor Actions | 514 / 584 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
-| Cross-links | 514 / 584 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
-| Version History | 507 / 582 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
+| Blueprint | 360 / 587 | see methodology note above — 24 `math.found` + 28 `math.arith` + 13 `math.nt` + 10 `math.geom` (`perimeter`, `length`, `angle-types`, `triangle-types`, `triangle-angle-sum`, `pythagorean-converse`, `triangle-centers`, `parallelogram`, `trapezoid`, `regular-polygon`) — none of these 75 have a Blueprint — + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
+| Educational Brain | 587 / 587 | trivially true (this is the entry list) |
+| Mental Model | 587 / 587 | |
+| Misconceptions | 587 / 587 | |
+| Analogies | 587 / 587 | |
+| Recovery Strategy | 587 / 587 | |
+| Assessment Signals | 587 / 587 | |
+| Tutor Actions | 517 / 587 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
+| Cross-links | 517 / 587 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
+| Version History | 510 / 585 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
 
 ## Per-concept ledger
 
@@ -476,6 +476,7 @@ batch's mathematics-only scope, not corrected here.
 | `math.geom.line` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.line-segment` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.parallel-lines` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.parallelogram` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.perimeter` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.perpendicular-lines` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.plane` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -486,12 +487,14 @@ batch's mathematics-only scope, not corrected here.
 | `math.geom.pythagorean-theorem` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.quadrilateral` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.ray` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.regular-polygon` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.right-triangle` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.similar-triangles` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.slope` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.solid-3d` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.surface-area` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.transformations` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.trapezoid` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.triangle` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.triangle-angle-sum` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.triangle-types` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

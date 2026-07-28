@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 207 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 28 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation`, `pythagorean-triples` — `math.nt` domain otherwise PARKED at 28/36, blocked on cross-domain campaigns per ROADMAP.md §5 item 1c) + 39 `math.geom.*` entries (`point`, `line`, `line-segment`, `ray`, `plane`, `angle`, `angle-measurement`, `angle-pairs`, `angle-types`, `circle`, `coordinate-plane`, `perimeter`, `length`, `perpendicular-lines`, `triangle`, `triangle-types`, `triangle-angle-sum`, `triangle-centers`, `circle-equation`, `right-triangle`, `congruent-triangles`, `similar-triangles`, `area-triangle`, `polygon`, `pythagorean-theorem`, `pythagorean-converse`, `parallel-lines`, `area-polygon`, `solid-3d`, `distance-formula`, `geometric-proof`, `quadrilateral`, `area`, `volume`, `x-y-coordinates`, `slope`, `transformations`, `vectors-2d`, `surface-area` — `math.geom` domain IN PROGRESS, 39/69, Wave 10 part 1 continuing), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
+| mathematics | 908 | 210 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 28 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation`, `pythagorean-triples` — `math.nt` domain otherwise PARKED at 28/36, blocked on cross-domain campaigns per ROADMAP.md §5 item 1c) + 42 `math.geom.*` entries (`point`, `line`, `line-segment`, `ray`, `plane`, `angle`, `angle-measurement`, `angle-pairs`, `angle-types`, `circle`, `coordinate-plane`, `perimeter`, `length`, `perpendicular-lines`, `triangle`, `triangle-types`, `triangle-angle-sum`, `triangle-centers`, `circle-equation`, `right-triangle`, `congruent-triangles`, `similar-triangles`, `area-triangle`, `polygon`, `pythagorean-theorem`, `pythagorean-converse`, `parallel-lines`, `area-polygon`, `solid-3d`, `distance-formula`, `geometric-proof`, `quadrilateral`, `area`, `volume`, `x-y-coordinates`, `slope`, `transformations`, `vectors-2d`, `surface-area`, `parallelogram`, `trapezoid`, `regular-polygon` — `math.geom` domain IN PROGRESS, 42/69, Wave 10 part 1 continuing), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -4310,3 +4310,63 @@ Remaining Wave 10 part 1 candidates (10): `parallelogram`, `trapezoid`,
 `regular-polygon`, `circle-parts`, `circle-circumference`, `circle-area`,
 `circle-theorems`, `quadrants`, `midpoint-formula`,
 `geometric-constructions`.
+
+Continuing Wave 10 part 1, authored three more candidates as a batch:
+
+- `math.geom.parallelogram` (developing/understand, mastery 0.85) — no
+  Blueprint exists (stated explicitly; references NCERT Grade 9, Common
+  Core Geometry). Requires `math.geom.quadrilateral`. No `unlocks` in
+  the live KG. Core properties derived from two pairs of parallel sides:
+  opposite sides equal, opposite angles equal, consecutive angles
+  supplementary, diagonals bisect each other (NOT equal). Area A = base
+  × height (perpendicular height, not the slant side). Rectangles,
+  rhombuses, and squares ARE special parallelograms (inherit all
+  properties). MC-1 SLANT-SIDE-AS-HEIGHT (Type 5 instruction-induced —
+  confusing the oblique side with the perpendicular height in area
+  computation), MC-2 OPPOSITE-ANGLES-SUPPLEMENTARY (Type 5 instruction-
+  induced — believing opposite angles are supplementary rather than equal,
+  likely a confusion with consecutive-angle rule), MC-3 DIAGONALS-EQUAL-
+  IN-PARALLELOGRAM (Type 1 overgeneralization from rectangles), MC-4
+  SPECIAL-CASES-NOT-INHERITED (Type 1 overgeneralization — failing to
+  recognize that rectangles/rhombuses/squares are subtypes that share all
+  parallelogram properties).
+
+- `math.geom.trapezoid` (developing/apply, mastery 0.80) — no Blueprint
+  exists (stated explicitly; references NCERT Grade 8, Common Core
+  Geometry). Requires `math.geom.quadrilateral`. No `unlocks` in the
+  live KG. Exactly one pair of parallel sides (the bases b₁ and b₂);
+  non-parallel sides are the legs. Area A = ½(b₁+b₂)×h where h is the
+  perpendicular height. Isosceles trapezoid: equal legs, equal base
+  angles, equal diagonals. Inclusive vs. exclusive definition convention
+  documented (inclusive treats parallelograms as degenerate trapezoids;
+  exclusive requires exactly one pair). MC-1 LEG-AS-HEIGHT (Type 5
+  instruction-induced — using the slant leg length as h), MC-2 ONE-BASE-
+  ONLY (Type 3 language contamination — "base" evokes only the bottom
+  edge, missing the second parallel side in the area formula), MC-3
+  ALL-TRAPEZOIDS-ARE-ISOSCELES (Type 5 instruction-induced — textbook
+  diagrams overwhelmingly show isosceles trapezoids), MC-4 PARALLELOGRAM-
+  TRAPEZOID-CATEGORY-CONFUSION (Type 1 overgeneralization — incorrect
+  inclusion or exclusion depending on which convention was taught).
+
+- `math.geom.regular-polygon` (developing/understand, mastery 0.85) — no
+  Blueprint exists (stated explicitly; references NCERT Grade 8, OpenStax
+  Geometry, AoPS Geometry). Requires `math.geom.polygon`. No `unlocks`
+  in the live KG; cross-link to `math.geom.circle`. Both conditions
+  required simultaneously: all sides equal AND all angles equal. Interior
+  angle = (n−2)×180°/n (derived from polygon angle sum); exterior angle =
+  360°/n (derived from full-rotation model); interior + exterior = 180°
+  at each vertex. All vertices lie on a circumscribed circle. As n→∞,
+  the polygon approaches a circle. MC-1 ONE-CONDITION-SUFFICIENT (Type 5
+  instruction-induced — accepting equilateral-only like a rhombus, or
+  equiangular-only like a rectangle, as "regular"), MC-2 INTERIOR-
+  EXTERIOR-ANGLE-SWAP (Type 4 notation-induced — applying 360°/n to the
+  interior angle question), MC-3 INTERIOR-ANGLE-AS-180/n (Type 5
+  instruction-induced — dropping the (n−2) factor, computing 180°/n
+  instead of (n−2)×180°/n), MC-4 EXTERIOR-ANGLE-NOT-SEEN-AS-SUPPLEMENT
+  (Type 1 overgeneralization — treating the two angle formulas as
+  unrelated rather than supplementary pairs at each vertex).
+
+`math.geom` now **42/69**. Mathematics 207 → 210.
+Remaining Wave 10 part 1 candidates (7): `circle-parts`,
+`circle-circumference`, `circle-area`, `circle-theorems`, `quadrants`,
+`midpoint-formula`, `geometric-constructions`.

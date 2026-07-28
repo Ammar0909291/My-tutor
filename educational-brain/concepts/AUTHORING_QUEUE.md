@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1141** (= 1,775 KG concepts − 634 already `READY`, per
+Total queued: **1138** (= 1,775 KG concepts − 637 already `READY`, per
 `ROADMAP.md`'s §1 Totals as updated 2026-07-27 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -704,7 +704,8 @@ math.geom Wave 10 part 1, moved to READY.
 math.geom Wave 10 part 1, moved to READY.
 **Row 175 removed 2026-07-26** — `math.geom.quadrilateral` authored
 math.geom Wave 8, moved to READY.
-| 176 | mathematics | 7 | `math.geom.regular-polygon` | Regular Polygon |
+**Row 176 removed 2026-07-27** — `math.geom.regular-polygon` authored
+math.geom Wave 10 part 1, moved to READY.
 **Row 177 removed 2026-07-26** — `math.geom.area-polygon` authored
 math.geom Wave 7, moved to READY.
 **Row 178 removed 2026-07-26** — `math.geom.solid-3d` authored
@@ -747,8 +748,10 @@ renumbered.
 **Row 216 removed 2026-07-26** — `math.found.cardinality` authored
 Wave 10, moved to READY.
 | 217 | mathematics | 8 | `math.geom.polygon-angle-sum` | Polygon Angle Sum |
-| 218 | mathematics | 8 | `math.geom.parallelogram` | Parallelogram |
-| 219 | mathematics | 8 | `math.geom.trapezoid` | Trapezoid |
+**Row 218 removed 2026-07-27** — `math.geom.parallelogram` authored
+math.geom Wave 10 part 1, moved to READY.
+**Row 219 removed 2026-07-27** — `math.geom.trapezoid` authored
+math.geom Wave 10 part 1, moved to READY.
 **Row 220 removed 2026-07-26** — `math.geom.area` authored math.geom
 Wave 8, moved to READY.
 **Row 221 removed 2026-07-26** — `math.geom.volume` authored
