@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 217 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 28 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation`, `pythagorean-triples` — `math.nt` domain otherwise PARKED at 28/36, blocked on cross-domain campaigns per ROADMAP.md §5 item 1c) + 49 `math.geom.*` entries (`point`, `line`, `line-segment`, `ray`, `plane`, `angle`, `angle-measurement`, `angle-pairs`, `angle-types`, `circle`, `coordinate-plane`, `perimeter`, `length`, `perpendicular-lines`, `triangle`, `triangle-types`, `triangle-angle-sum`, `triangle-centers`, `circle-equation`, `right-triangle`, `congruent-triangles`, `similar-triangles`, `area-triangle`, `polygon`, `pythagorean-theorem`, `pythagorean-converse`, `parallel-lines`, `area-polygon`, `solid-3d`, `distance-formula`, `geometric-proof`, `quadrilateral`, `area`, `volume`, `x-y-coordinates`, `slope`, `transformations`, `vectors-2d`, `surface-area`, `parallelogram`, `trapezoid`, `regular-polygon`, `circle-parts`, `circle-circumference`, `circle-area`, `circle-theorems`, `quadrants`, `midpoint-formula`, `geometric-constructions` — `math.geom` domain IN PROGRESS, 49/69, Wave 10 complete, Wave 11 next), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
+| mathematics | 908 | 224 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 28 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation`, `pythagorean-triples` — `math.nt` domain otherwise PARKED at 28/36, blocked on cross-domain campaigns per ROADMAP.md §5 item 1c) + 56 `math.geom.*` entries (`point`, `line`, `line-segment`, `ray`, `plane`, `angle`, `angle-measurement`, `angle-pairs`, `angle-types`, `circle`, `coordinate-plane`, `perimeter`, `length`, `perpendicular-lines`, `triangle`, `triangle-types`, `triangle-angle-sum`, `triangle-centers`, `circle-equation`, `right-triangle`, `congruent-triangles`, `similar-triangles`, `area-triangle`, `polygon`, `pythagorean-theorem`, `pythagorean-converse`, `parallel-lines`, `area-polygon`, `solid-3d`, `distance-formula`, `geometric-proof`, `quadrilateral`, `area`, `volume`, `x-y-coordinates`, `slope`, `transformations`, `vectors-2d`, `surface-area`, `parallelogram`, `trapezoid`, `regular-polygon`, `circle-parts`, `circle-circumference`, `circle-area`, `circle-theorems`, `quadrants`, `midpoint-formula`, `geometric-constructions`, `line-equation`, `vectors-3d`, `polygon-angle-sum`, `platonic-solids`, `translation`, `reflection`, `dilation` — `math.geom` domain IN PROGRESS, 56/69, Wave 11 complete, Wave 12 next), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -4446,3 +4446,99 @@ References section in each states this explicitly per Quality Gate 2.
 `math.geom` now **49/69**. Mathematics 210 → 217. Wave 10 is complete.
 20 concepts remain in `math.geom` — Wave 11 candidates to be computed
 fresh from the live KG at the next iteration.
+
+### Batch 56 — math.geom Wave 11 (2026-07-28, autonomous loop)
+
+7 concepts authored in strict topological order (Wave 11 — all prerequisites
+satisfied by the 49 `math.geom` EB entries authored through Wave 10,
+verified programmatically via a Node.js script against the live KG's
+`requires` edges). 2 had existing Blueprints reused by reference; 5 had none
+— all 5 authored via the birth-taxonomy diagnostic procedure, with Blueprint
+References section in each stating the absence explicitly per Quality Gate 2.
+
+- **`math.geom.line-equation`** (proficient/apply, mastery 0.85, 8 hr) —
+  Blueprint-grounded (PACKAGE_READY). Three equivalent forms: slope-intercept
+  y=mx+b, point-slope y−y₁=m(x−x₁), standard ax+by=c; form-selection
+  principle (use the form that matches what you're given, not always
+  slope-intercept); intercept extraction (set x=0 or y=0); parallel (same m)
+  vs perpendicular (m₁·m₂=−1). 3 misconceptions: MC-1
+  POINT-SLOPE-FORM-AVOIDED (Type 1 — overgeneralizing slope-intercept as
+  always the start), MC-2 INTERCEPTS-EXTRACTED-VIA-CONVERSION-ONLY (Type 1
+  — converting before reading intercepts from standard form), MC-3
+  FORMS-TREATED-AS-DIFFERENT-LINES (Type 1 — different forms seen as
+  different mathematical objects).
+
+- **`math.geom.vectors-3d`** (proficient/apply, mastery 0.80, 6 hr) —
+  Blueprint-grounded (PACKAGE_READY). 3D extension of 2D vector ops: triples
+  (a,b,c), magnitude √(a²+b²+c²); dot product (scalar, u·v=Σuᵢvᵢ,
+  u·v=|u||v|cosθ); cross product (anticommutative vector, u×v=−v×u,
+  right-hand rule); standard basis i,j,k. Scope: defers full computational
+  treatment to child EB entries (`math.geom.dot-product`,
+  `math.geom.cross-product`). 3 misconceptions: MC-1 Z-AXIS-IS-DECORATIVE
+  (Type 2 — perceptual; z invisible on flat page), MC-2
+  CROSS-PRODUCT-IS-COMMUTATIVE (Type 6 — analogy overextension from dot
+  product commutativity), MC-3 DOT-PRODUCT-IS-A-VECTOR (Type 1 —
+  overgeneralizing that vector ops always produce vectors).
+
+- **`math.geom.polygon-angle-sum`** (developing/apply, mastery 0.85, 4 hr) —
+  No Blueprint. (n−2)×180° via triangulation from one vertex; regular polygon
+  each angle = (n−2)×180°/n; exterior angle sum always 360°; applies to
+  convex polygons. 4 misconceptions: MC-1 N-TIMES-180-ERROR (Type 5 —
+  "triangulate" instruction without n−2 grounding), MC-2
+  FORMULA-FOR-EACH-ANGLE-APPLIED-TO-IRREGULAR-POLYGON (Type 1 — dividing by
+  n for non-regular), MC-3 EXTERIOR-INTERIOR-CONFUSION (Type 5 — both
+  introduced simultaneously with different summation rules), MC-4
+  APPLYING-TO-CONCAVE-POLYGONS-UNCHANGED (Type 1 — overgeneralizing from
+  convex).
+
+- **`math.geom.platonic-solids`** (proficient/understand, mastery 0.75, 5 hr)
+  — No Blueprint. Exactly 5 convex regular polyhedra: tetrahedron (4T/4V/6E),
+  cube (6F/8V/12E), octahedron (8F/6V/12E), dodecahedron (12F/20V/30E),
+  icosahedron (20F/12V/30E); Euler's formula V−E+F=2; why exactly 5 (vertex
+  angle budget <360°); dual pairs. 4 misconceptions: MC-1
+  CUBE-IS-NOT-PLATONIC-BECAUSE-NOT-TRIANGLES (Type 3 — language
+  contamination), MC-2 RECTANGULAR-BOX-IS-ALSO-PLATONIC (Type 2 —
+  perceptual), MC-3 EULER-FORMULA-SIGN-CONFUSION (Type 5 — memorization
+  error), MC-4 DODECAHEDRON-ICOSAHEDRON-FACE-COUNT-SWAP (Type 4 — Greek
+  prefix unfamiliar).
+
+- **`math.geom.translation`** (proficient/apply, mastery 0.85, 2 hr) —
+  No Blueprint. (x,y)→(x+h,y+k); same vector (h,k) applied to every point;
+  no fixed points (except identity); isometry; orientation preserved;
+  composition commutative (translation vectors add). 3 misconceptions: MC-1
+  INCONSISTENT-SHIFT-PER-VERTEX (Type 2 — arithmetic errors produce varying
+  shifts that still "look close"), MC-2 DIRECTION-SIGN-ERROR (Type 5 —
+  "3 left" → student writes +3 instead of −3), MC-3 TRANSLATION-AS-ROTATION
+  (Type 1 — diagonal movement confused with rotation).
+
+- **`math.geom.reflection`** (proficient/apply, mastery 0.85, 3 hr) —
+  No Blueprint. Mirror line = perpendicular bisector of PP′; standard rules
+  (x-axis: y→−y; y-axis: x→−x; y=x: swap; y=−x: swap+negate; x=a: x→2a−x;
+  y=b: y→2b−y); isometry; orientation REVERSED (only rigid motion to reverse
+  it); finding mirror line = perpendicular bisector of any pre-image/image
+  pair. 4 misconceptions: MC-1 Y-EQUALS-X-REFLECTION-NEGATES-COORDINATES
+  (Type 5 — confusing y=x rule with y=−x rule), MC-2
+  PERPENDICULAR-DISTANCE-NOT-MAINTAINED (Type 2 — eyeballing instead of
+  constructing), MC-3 REFLECTION-PRESERVES-ORIENTATION (Type 1 —
+  overgeneralizing orientation preservation from other transformations), MC-4
+  REFLECTION-OVER-Y-AXIS-NEGATES-Y-COORDINATE (Type 5 — swapping which axis
+  rule applies to which coordinate).
+
+- **`math.geom.dilation`** (proficient/apply, mastery 0.80, 3 hr) —
+  No Blueprint. CP′=k×CP; center-at-origin rule (x,y)→(kx,ky); general
+  center rule (cx+k(x−cx), cy+k(y−cy)); preserves angles+shape (similarity);
+  lengths scale by |k|; area scales by k² (quadratic); k=1 identity, k=−1
+  point reflection, |k|>1 enlargement, 0<|k|<1 reduction. 4 misconceptions:
+  MC-1 AREA-SCALES-BY-K-NOT-K² (Type 1 — linearizing quadratic area
+  scaling), MC-2 CENTER-ALWAYS-AT-ORIGIN (Type 5 — instruction-induced from
+  origin-only examples), MC-3 NEGATIVE-SCALE-FACTOR-MEANS-REFLECTION (Type 1
+  — ignoring the scaling component of negative k), MC-4
+  DILATION-CHANGES-ANGLE-MEASURES (Type 1 — overgeneralizing size change to
+  angle change).
+
+`math.geom` now **56/69**. Mathematics 217 → 224. Wave 11 is complete. 13
+concepts remain in `math.geom`; Wave 12 has 1 immediately unlocked candidate
+(`cross-product`), the remaining 12 are blocked on `math.alg` or `math.trig`
+prerequisites not yet in the EB. All six tracking files updated in the same
+commit; re-validated 0 duplicates, 0 orphans, 0 broken KG references, 0
+invalid Blueprint references across all 224 mathematics entries.

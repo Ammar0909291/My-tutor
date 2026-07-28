@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1131** (= 1,775 KG concepts − 644 already `READY`, per
+Total queued: **1124** (= 1,775 KG concepts − 651 already `READY`, per
 `ROADMAP.md`'s §1 Totals as updated 2026-07-28 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -747,7 +747,7 @@ authored this batch (Wave 8), moved to READY. Row numbers not
 renumbered.
 **Row 216 removed 2026-07-26** — `math.found.cardinality` authored
 Wave 10, moved to READY.
-| 217 | mathematics | 8 | `math.geom.polygon-angle-sum` | Polygon Angle Sum |
+**Row 217 removed 2026-07-28** — `math.geom.polygon-angle-sum` authored Batch 56 Wave 11, moved to READY.
 **Row 218 removed 2026-07-27** — `math.geom.parallelogram` authored
 math.geom Wave 10 part 1, moved to READY.
 **Row 219 removed 2026-07-27** — `math.geom.trapezoid` authored
@@ -756,7 +756,7 @@ math.geom Wave 10 part 1, moved to READY.
 Wave 8, moved to READY.
 **Row 221 removed 2026-07-26** — `math.geom.volume` authored
 math.geom Wave 8, moved to READY.
-| 222 | mathematics | 8 | `math.geom.platonic-solids` | Platonic Solids |
+**Row 222 removed 2026-07-28** — `math.geom.platonic-solids` authored Batch 56 Wave 11, moved to READY.
 | 223 | mathematics | 8 | `math.func.function-concept` | Function |
 | 224 | mathematics | 8 | `math.prob.conditional-probability` | Conditional Probability |
 | 225 | mathematics | 8 | `math.abst.binary-operation` | Binary Operation |
@@ -1194,10 +1194,10 @@ authored math.nt Wave 3 part 2, moved to READY.
 | 632 | mathematics | 17 | `math.alg.expression` | Algebraic Expression |
 **Row 633 removed 2026-07-26** — `math.geom.pythagorean-theorem`
 authored math.geom Wave 7, moved to READY.
-| 634 | mathematics | 17 | `math.geom.line-equation` | Equations of Lines |
-| 635 | mathematics | 17 | `math.geom.translation` | Translation |
-| 636 | mathematics | 17 | `math.geom.reflection` | Reflection |
-| 637 | mathematics | 17 | `math.geom.vectors-3d` | Vectors in 3D |
+**Row 634 removed 2026-07-28** — `math.geom.line-equation` authored Batch 56 Wave 11, moved to READY.
+**Row 635 removed 2026-07-28** — `math.geom.translation` authored Batch 56 Wave 11, moved to READY.
+**Row 636 removed 2026-07-28** — `math.geom.reflection` authored Batch 56 Wave 11, moved to READY.
+**Row 637 removed 2026-07-28** — `math.geom.vectors-3d` authored Batch 56 Wave 11, moved to READY.
 | 638 | mathematics | 17 | `math.func.zero-of-function` | Zero of a Function |
 | 639 | mathematics | 17 | `math.func.even-odd-functions` | Even and Odd Functions |
 | 640 | mathematics | 17 | `math.func.transformations-functions` | Transformations of Functions |
@@ -1274,7 +1274,7 @@ math.geom Wave 10 part 1, moved to READY.
 math.geom Wave 6, moved to READY.
 **Row 703 removed 2026-07-26** — `math.geom.distance-formula` authored
 math.geom Wave 8, moved to READY.
-| 704 | mathematics | 18 | `math.geom.dilation` | Dilation |
+**Row 704 removed 2026-07-28** — `math.geom.dilation` authored Batch 56 Wave 11, moved to READY.
 | 705 | mathematics | 18 | `math.geom.cross-product` | Cross Product |
 | 706 | mathematics | 18 | `math.geom.differential-geometry-curves` | Curves in Space |
 | 707 | mathematics | 18 | `math.seq.divergent-sequence` | Divergent Sequence |

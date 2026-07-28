@@ -13,13 +13,13 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **644** |
-| Remaining | **1,131** |
-| Completion percentage | **36.28%** |
+| Concepts with an Educational Brain entry | **651** |
+| Remaining | **1,124** |
+| Completion percentage | **36.68%** |
 
-*(Recomputed from §2 Subject progress table: 217 mathematics + 238 physics
-+ 3 english + 186 chemistry + 0 biology + 0 computer_science = 644.
-Mathematics updated after Batch 55 (7 concepts, math.geom Wave 10 final);
+*(Recomputed from §2 Subject progress table: 224 mathematics + 238 physics
++ 3 english + 186 chemistry + 0 biology + 0 computer_science = 651.
+Mathematics updated after Batch 56 (7 concepts, math.geom Wave 11);
 the other subjects' figures are taken as already-recorded in §2 below,
 not re-audited by this batch, per this program's "mathematics only"
 ongoing scope.)*
@@ -30,7 +30,7 @@ ongoing scope.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 217 | 23.90% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 224 | 24.67% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
@@ -1161,6 +1161,11 @@ record; the active default has moved to item 1b.**
     `circle-area`, `circle-theorems`, `quadrants`, `midpoint-formula`,
     `geometric-constructions` (7 concepts). Raised `math.geom` to
     **49/69**. Wave 10 is complete. 20 concepts remain in `math.geom`.
+    Wave 11 (Batch 56, 2026-07-28, 2 Blueprint-grounded + 5 no-Blueprint):
+    `line-equation` (Blueprint), `vectors-3d` (Blueprint),
+    `polygon-angle-sum`, `platonic-solids`, `translation`, `reflection`,
+    `dilation` (7 concepts). Raised `math.geom` to **56/69**. 13 concepts
+    remain in `math.geom`.
 1. **(Historical, satisfied) `math.found` Wave 7**: the set of
    `math.found` nodes whose prerequisites were all READY after Wave 6.
 2. **(Historical, satisfied) `math.found` Waves 8-16 (52 remaining
@@ -1194,13 +1199,17 @@ order until `math.found` is complete, unless overridden per item 4.
 
 ## 6. Next batch
 
-**Batch 56 (math.geom Wave 11)**: compute the set of `math.geom` nodes
-whose prerequisites are all now READY after Wave 10's 7 new entries
-(49/69 reached). Candidates include concepts unlocked by
-`circle-theorems`, `midpoint-formula`, `geometric-constructions`, and the
-coordinate-plane / circle-parts family. Author in strict topological
-order, Blueprint-grounded first, then no-Blueprint via the birth-taxonomy
-diagnostic procedure.
+**Batch 57 (math.geom Wave 12)**: compute the set of `math.geom` nodes
+whose prerequisites are all now READY after Wave 11's 7 new entries
+(56/69 reached). New unlocks include: `conic-sections` (requires
+`circle-equation` ✓ and `math.alg.quadratic-equation` — NOT yet READY,
+blocked); `cross-product` (requires `vectors-3d` ✓ — UNLOCKED); `parabola`,
+`ellipse`, `hyperbola` (blocked on `conic-sections`); `polar-coordinates`
+and `rotation` (blocked on `math.trig.trig-functions` — NOT yet READY);
+`dot-product` (requires `vectors-3d` ✓ and `math.trig.trig-functions` — NOT
+yet READY). Immediate Wave 12 candidate: `cross-product` (requires only
+`vectors-3d` ✓, fully unlocked). Remaining 12 candidates blocked on
+`math.alg` or `math.trig` prerequisites not yet authored.
 If a new subject-specific override arrives instead, follow that
 explicit instruction per §5 item 4.
 
