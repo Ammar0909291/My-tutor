@@ -1311,6 +1311,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     let evidenceStageCeilingHoisted: number | null = null
     let evidenceWorkedExampleFirstHoisted = false
     let evidenceAutonomyHoisted = false
+    let navigationRequestHoisted = false
     // Mastery gate (server-authoritative lesson completion):
     // - masteryGatePendingHoisted: the learner asked to advance before
     //   mastery — the client renders Continue Learning / Skip Anyway.
@@ -1502,6 +1503,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             readConversationState, decideNextMove, responseBudget,
             buildTurnDirective, decideVisualFirst,
             detectAutonomyRequest, buildAutonomyBlock,
+            detectNavigationRequest, buildNavigationAcknowledgementBlock,
           } = await import('@/lib/teaching/conversationState')
           const {
             masteryVerified, buildMasteryGateBlock,
@@ -1538,6 +1540,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               systemPrompt += buildMasteryGateBlock()
               masteryGatePendingHoisted = true
             }
+          } else if (detectNavigationRequest(message)) {
+            // A.2: explicit navigation ("teach me about X", "go back to Y")
+            // is acknowledged warmly; mastery-verified → auto-complete so
+            // the system can navigate; otherwise note what's left.
+            navigationRequestHoisted = true
+            systemPrompt += buildNavigationAcknowledgementBlock()
           }
 
           const workedExampleFirst =
@@ -1695,6 +1703,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // explanation was ever expanded; unread text is never assumed read.
           if (lastExplanationRead === false) {
             systemPrompt += buildUnreadExplanationBlock()
+          }
+
+          // A.1: when mastery is already verified and the learner keeps
+          // answering correctly in TRANSFER, prompt natural conclusion
+          // rather than generating transfer questions indefinitely.
+          if (!evidenceAutonomyHoisted && !navigationRequestHoisted && !recoveryKeyHoisted && !learnerRequestHoisted) {
+            const { shouldConcludeNaturally, buildNaturalConclusionBlock } = await import('@/lib/teaching/masteryGate')
+            if (shouldConcludeNaturally(conversationStateHoisted)) {
+              systemPrompt += buildNaturalConclusionBlock()
+            }
           }
         }
 

@@ -14,6 +14,7 @@ import {
   masteryVerified, gateLessonCompletion, isBareAcknowledgement,
   detectLearnerRequest, buildLearnerRequestBlock, buildMasteryGateBlock,
   buildMasterySummary, buildUnreadExplanationBlock,
+  shouldConcludeNaturally, buildNaturalConclusionBlock,
   MASTERY_CHECK_REQUIRED, MASTERY_PRACTICE_REQUIRED,
 } from '@/lib/teaching/masteryGate'
 import {
@@ -323,5 +324,46 @@ describe('state persistence and restore', () => {
     const restored = readConversationState(masteredState(), 'a.different.concept')
     expect(masteryVerified(restored)).toBe(false)
     expect(restored.phase).toBe('OBSERVE')
+  })
+})
+
+// ── A.1: Natural lesson conclusion ──────────────────────────────────────────
+
+describe('shouldConcludeNaturally', () => {
+  it('fires when mastery verified, TRANSFER phase, and surplus practice evidence', () => {
+    const s = stateWith({
+      phase: 'TRANSFER', demonstrated: true,
+      correctAtCheck: MASTERY_CHECK_REQUIRED,
+      correctAtPractice: MASTERY_PRACTICE_REQUIRED + 1,
+    })
+    expect(shouldConcludeNaturally(s)).toBe(true)
+  })
+
+  it('does NOT fire when mastery is exactly met (no surplus)', () => {
+    expect(shouldConcludeNaturally(masteredState())).toBe(false)
+  })
+
+  it('does NOT fire before TRANSFER phase', () => {
+    const s = stateWith({
+      phase: 'PRACTICE', demonstrated: true,
+      correctAtCheck: MASTERY_CHECK_REQUIRED,
+      correctAtPractice: MASTERY_PRACTICE_REQUIRED + 1,
+    })
+    expect(shouldConcludeNaturally(s)).toBe(false)
+  })
+
+  it('does NOT fire without mastery evidence', () => {
+    const s = stateWith({ phase: 'TRANSFER', demonstrated: true, correctAtCheck: 0, correctAtPractice: 5 })
+    expect(shouldConcludeNaturally(s)).toBe(false)
+  })
+
+  it('returns false for null state', () => {
+    expect(shouldConcludeNaturally(null)).toBe(false)
+  })
+
+  it('buildNaturalConclusionBlock includes LESSON_COMPLETE instruction', () => {
+    const block = buildNaturalConclusionBlock()
+    expect(block).toContain('[LESSON_COMPLETE]')
+    expect(block).toContain('Do NOT ask another question')
   })
 })

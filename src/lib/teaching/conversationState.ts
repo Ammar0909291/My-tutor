@@ -530,6 +530,34 @@ const AUTONOMY_NEGATOR_RE =
  */
 const AUTONOMY_MENTION_RE = /["“'‘][^"”'’]*\b(?:move\s+on|next\s+topic|next\s+lesson|skip\s+this)\b[^"”'’]*["”'’]|\bwhat\s+(?:does|do\s+you\s+mean\s+by)\b/i
 
+/**
+ * A.2: Detect explicit navigation commands — the learner wants to go
+ * somewhere specific rather than just "next." Returns the intent string
+ * or null. This is NOT an autonomy request (advance to next concept); it
+ * is a navigation request (go to a specific concept or revisit one).
+ *
+ * The system prompt should acknowledge the intent rather than treating
+ * it as off-topic, even though the server cannot change the concept
+ * mid-turn — the concept resolution happens before the LLM call.
+ */
+const NAVIGATION_RE =
+  /\b(?:go\s+back\s+to|take\s+me\s+(?:back\s+)?to|teach\s+me\s+about|switch\s+to|change\s+(?:topic\s+)?to|i\s+want\s+to\s+learn\s+about|can\s+(?:we|you)\s+(?:do|cover|go\s+over))\b/i
+
+export function detectNavigationRequest(message: string): boolean {
+  return NAVIGATION_RE.test(message)
+}
+
+export function buildNavigationAcknowledgementBlock(): string {
+  return (
+    '\n\nNAVIGATION REQUEST — the student asked to switch to a different topic. ' +
+    'Acknowledge their request warmly in one sentence ("Great choice — we\'ll ' +
+    'get to that!"). Then: if the current lesson is not yet mastered, briefly ' +
+    'note what\'s left and offer to finish or skip. If mastery is verified, ' +
+    'wrap up with [LESSON_COMPLETE] so the system can navigate. ' +
+    'Never ignore the request or pretend it was not made.'
+  )
+}
+
 /** The learner explicitly asked to advance — server-detected, honored.
  *  Guarded per ISS-08: negated and merely-mentioned forms do not count. */
 export function detectAutonomyRequest(message: string): boolean {

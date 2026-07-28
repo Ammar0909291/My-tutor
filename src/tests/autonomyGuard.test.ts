@@ -8,7 +8,7 @@
  * every ambiguous form is asserted to NOT advance.
  */
 import { describe, it, expect } from 'vitest'
-import { detectAutonomyRequest } from '@/lib/teaching/conversationState'
+import { detectAutonomyRequest, detectNavigationRequest } from '@/lib/teaching/conversationState'
 
 /** Genuine requests to advance — these MUST still be honored. Regressing any
  *  of these would make the platform ignore an explicit learner instruction,
@@ -83,6 +83,58 @@ describe('ISS-08 — unrelated messages are untouched', () => {
   it('is deterministic and total', () => {
     for (const m of [...ADVANCE, ...STAY, ...MENTIONS]) {
       expect(detectAutonomyRequest(m)).toBe(detectAutonomyRequest(m))
+    }
+  })
+})
+
+// ── A.2 — Navigation detection ─────────────────────────────────────────
+const NAVIGATE = [
+  'go back to fractions',
+  'take me to algebra',
+  'take me back to the first lesson',
+  'teach me about gravity',
+  'switch to chemistry',
+  'change topic to quadratics',
+  'change to geometry',
+  'I want to learn about photosynthesis',
+  'can we do trigonometry',
+  'can you cover Newton\'s laws',
+  'can we go over derivatives again',
+]
+
+const NOT_NAVIGATE = [
+  'what is gravity?',
+  'this is hard',
+  'move on',
+  'next topic',
+  'ok',
+  '',
+  'I like learning about math',
+  'can you explain this differently',
+  'show me a diagram',
+]
+
+describe('A.2 — navigation detection fires on explicit requests', () => {
+  it.each(NAVIGATE)('detects %j', (msg) => {
+    expect(detectNavigationRequest(msg)).toBe(true)
+  })
+})
+
+describe('A.2 — navigation detection ignores non-navigation messages', () => {
+  it.each(NOT_NAVIGATE)('does NOT fire on %j', (msg) => {
+    expect(detectNavigationRequest(msg)).toBe(false)
+  })
+})
+
+describe('A.2 — navigation and autonomy are mutually exclusive paths', () => {
+  it('autonomy phrases are not navigation', () => {
+    for (const msg of ADVANCE) {
+      expect(detectNavigationRequest(msg)).toBe(false)
+    }
+  })
+  it('navigation phrases are not autonomy', () => {
+    for (const msg of NAVIGATE) {
+      expect(detectAutonomyRequest(msg)).toBe(false)
     }
   })
 })
