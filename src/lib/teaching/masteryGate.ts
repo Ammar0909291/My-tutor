@@ -138,6 +138,37 @@ export function stripCompletionOnBareAcknowledgement(text: string, learnerMessag
   return text.replace(LESSON_COMPLETE_RE, ' ').replace(/\s+$/g, '').trim()
 }
 
+// ── A.1: repeated mastery detection (natural lesson conclusion) ─────────────
+
+/**
+ * Detects when the learner has exceeded mastery thresholds and continues
+ * answering correctly in TRANSFER — the lesson should conclude naturally
+ * rather than continuing to generate more transfer questions indefinitely.
+ *
+ * Returns true when:
+ *   - mastery is verified (CHECK + PRACTICE gates passed)
+ *   - the phase is TRANSFER
+ *   - correctAtPractice exceeds the required threshold (surplus evidence)
+ *
+ * The caller injects a directive prompting the LLM to wrap up; the gate
+ * itself (gateLessonCompletion) still authorizes the [LESSON_COMPLETE] tag.
+ */
+export function shouldConcludeNaturally(state: ConversationState | null): boolean {
+  if (!state) return false
+  if (!masteryVerified(state)) return false
+  return state.phase === 'TRANSFER' && state.correctAtPractice > MASTERY_PRACTICE_REQUIRED
+}
+
+export function buildNaturalConclusionBlock(): string {
+  return (
+    '\n\nNATURAL CONCLUSION — the student has demonstrated mastery: they passed ' +
+    'the check and practice gates and answered additional transfer questions ' +
+    'correctly. Wrap up this lesson NOW: briefly celebrate what they achieved, ' +
+    'give one sentence on what comes next, and append [LESSON_COMPLETE] at the ' +
+    'very end. Do NOT ask another question — the evidence is sufficient.'
+  )
+}
+
 // ── Bug 4: autonomy without mastery → explicit choice, never silent skip ─────
 
 /**

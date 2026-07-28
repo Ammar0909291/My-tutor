@@ -393,6 +393,20 @@ describe('turn directive invariants', () => {
     expect(readConversationState(persisted, 'b').phase).toBe('OBSERVE')
     expect(readConversationState('garbage', 'a').phase).toBe('OBSERVE')
   })
+
+  it('E.33: every turn directive contains lesson continuity rule', () => {
+    const s = initialConversationState('c')
+    const d = buildTurnDirective({ state: s, nextMove: 'teach', maxParagraphs: 4, workedExampleFirst: false, visualType: null })
+    expect(d).toContain('CONTINUITY')
+    expect(d).toContain('connect back to the concept')
+  })
+
+  it('E.35: every turn directive contains smooth transition rule', () => {
+    const s = initialConversationState('c')
+    const d = buildTurnDirective({ state: s, nextMove: 'teach', maxParagraphs: 4, workedExampleFirst: false, visualType: null })
+    expect(d).toContain('TRANSITIONS')
+    expect(d).toContain('bridging sentence')
+  })
 })
 
 describe('base prompt laws (Phase A regression)', () => {

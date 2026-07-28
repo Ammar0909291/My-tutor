@@ -346,6 +346,7 @@ export async function POST(req: Request) {
     // (still parsed/preferred when present), never the sole path to render.
     let availableVisualHoisted: string | null = null
     let forceVisualRenderHoisted = false
+    let conceptPreviouslyMasteredHoisted = false
     // Library Mode duplication cleanup: this used to be set from
     // spacedRevision.ts's per-turn revision block (removed — see the
     // Library-mode teaching-strategy section below). The session OPENING's
@@ -383,11 +384,12 @@ export async function POST(req: Request) {
     // resumes from it instead of restarting or improvising.
     let teachingStepUpdateHoisted: { teachingStepIndex: number; teachingStepConceptId: string } | null = null
 
-    // Visual learning aids for SUBJECT_LIBRARY subjects — Sprint BW
-    // detectVisual()/buildVisualsSystemBlock(), scoped to the Library lesson's
-    // own unit/lesson titles. Purely additive; never blocks a lesson.
+    // D.23-30: Visual Intelligence — enhanced visual selection, relevance,
+    // repeat avoidance, URL stripping, narration sync. Replaces the simpler
+    // buildVisualsSystemBlock with teaching-objective-aligned directives.
     try {
-      const { detectVisual, buildVisualsSystemBlock } = await import('@/lib/school/visuals/detectVisual')
+      const { detectVisual } = await import('@/lib/school/visuals/detectVisual')
+      const { buildVisualIntelligenceBlock } = await import('@/lib/teaching/visualIntelligence')
       const availableVisual = detectVisual({
         subjectSlug: subjectCode,
         chapterTitle: lessonCtx?.unitTitle ?? '',
@@ -395,8 +397,11 @@ export async function POST(req: Request) {
       })
       cueObservations.availableVisual = availableVisual
       cueObservations.visualDetectionRan = true
-      const visualBlock = buildVisualsSystemBlock(availableVisual)
-      if (visualBlock) systemPrompt += visualBlock
+      systemPrompt += buildVisualIntelligenceBlock(
+        availableVisual,
+        lessonCtx?.lessonTitle ?? null,
+        false,
+      )
     } catch (err) {
       console.warn('[learn/chat] library visual aids context skipped:', err)
     }
@@ -775,6 +780,11 @@ export async function POST(req: Request) {
           .filter((r) => r.status === 'COMPLETED' || r.status === 'MASTERED' || r.status === 'REVISION')
           .map((r) => r.topicSlug)
         const completedSet = new Set(completedSlugs)
+        // A.7: check if the current concept was previously mastered
+        const currentConceptForMastery = snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? resolvedConceptId ?? null
+        if (currentConceptForMastery && completedSet.has(currentConceptForMastery)) {
+          conceptPreviouslyMasteredHoisted = true
+        }
 
         const inProgressSlug = topicProgressRows.find((r) => r.status === 'IN_PROGRESS')?.topicSlug
         const kgContext = buildKnowledgeGraphContext(subjectCode, completedSlugs, inProgressSlug)
@@ -1311,6 +1321,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     let evidenceStageCeilingHoisted: number | null = null
     let evidenceWorkedExampleFirstHoisted = false
     let evidenceAutonomyHoisted = false
+    let navigationRequestHoisted = false
     // Mastery gate (server-authoritative lesson completion):
     // - masteryGatePendingHoisted: the learner asked to advance before
     //   mastery — the client renders Continue Learning / Skip Anyway.
@@ -1484,6 +1495,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           firstLessonActiveHoisted = true
         }
 
+        // C.18-22: Math Speech layer — injected once for STEM subjects.
+        {
+          const { isStemSubject, buildMathSpeechBlock } = await import('@/lib/teaching/mathSpeech')
+          if (isStemSubject(subjectCode)) {
+            systemPrompt += buildMathSpeechBlock()
+          }
+        }
+
         // Phases C–G (2026-07-14): the conversation state machine. The
         // SERVER decides the teaching phase (OBSERVE→…→TRANSFER), whether
         // this turn teaches/shows/asks (Phase E counters), the question-
@@ -1503,6 +1522,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             buildTurnDirective, decideVisualFirst,
             detectAutonomyRequest, buildAutonomyBlock,
             isLowSignalAcknowledgement,
+            detectNavigationRequest, buildNavigationAcknowledgementBlock,
+            detectLearnerQuestion, classifyAcknowledgementContext,
           } = await import('@/lib/teaching/conversationState')
           const {
             masteryVerified, buildMasteryGateBlock,
@@ -1539,6 +1560,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               systemPrompt += buildMasteryGateBlock()
               masteryGatePendingHoisted = true
             }
+          } else if (detectNavigationRequest(message)) {
+            // A.2: explicit navigation ("teach me about X", "go back to Y")
+            // is acknowledged warmly; mastery-verified → auto-complete so
+            // the system can navigate; otherwise note what's left.
+            navigationRequestHoisted = true
+            systemPrompt += buildNavigationAcknowledgementBlock()
           }
 
           const workedExampleFirst =
@@ -1629,6 +1656,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           cueObservations.availableVisual = availableVisual
           cueObservations.visualDetectionRan = true
           availableVisualHoisted = availableVisual
+          // D.23-30: Visual Intelligence block for the conversation state
+          // machine path. alreadyShown = true when we've been in a visual-
+          // capable phase (OBSERVE/DEMONSTRATE/GUIDE) for >0 turns — the
+          // visual was likely already emitted on the first turn of this phase.
+          const { buildVisualIntelligenceBlock } = await import('@/lib/teaching/visualIntelligence')
+          const visualAlreadyShown = conversationStateHoisted.turnsInCurrentPhase > 0
+            && (conversationStateHoisted.phase === 'OBSERVE'
+              || conversationStateHoisted.phase === 'DEMONSTRATE'
+              || conversationStateHoisted.phase === 'GUIDE')
+          systemPrompt += buildVisualIntelligenceBlock(
+            availableVisual,
+            lessonCtx?.lessonTitle ?? null,
+            visualAlreadyShown,
+          )
           // Bugs 5/6/7 — explicit learner requests are detected in code and
           // dispatched as forced TeachingActions, injected AFTER the turn
           // directive so they override the phase's default move. A diagram
@@ -1674,6 +1715,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               const cls = capMod.classifyFailure(capabilityStateHoisted, requiredCapabilitiesHoisted)
               return cls.kind === 'capability_missing' ? cls.blockingCapabilities : null
             })(),
+            learnerAskedQuestion: detectLearnerQuestion(message),
+            conceptPreviouslyMastered: conceptPreviouslyMasteredHoisted,
+            phaseJustAdvanced: (conversationStateHoisted.turnsInCurrentPhase ?? 0) === 0
+              && conversationStateHoisted.phase !== 'OBSERVE',
+            acknowledgementContext: (() => {
+              const prevSig = (snapshot?.lastSignal && typeof snapshot.lastSignal === 'object')
+                ? (snapshot.lastSignal as { correctness?: boolean }).correctness ?? null
+                : null
+              return classifyAcknowledgementContext(
+                conversationStateHoisted, prevSig, recoveryKeyHoisted !== null, navigationRequestHoisted,
+              )
+            })(),
           })
           if (learnerRequestHoisted) {
             const hasEstablishedExample =
@@ -1701,6 +1754,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // explanation was ever expanded; unread text is never assumed read.
           if (lastExplanationRead === false) {
             systemPrompt += buildUnreadExplanationBlock()
+          }
+
+          // A.1: when mastery is already verified and the learner keeps
+          // answering correctly in TRANSFER, prompt natural conclusion
+          // rather than generating transfer questions indefinitely.
+          if (!evidenceAutonomyHoisted && !navigationRequestHoisted && !recoveryKeyHoisted && !learnerRequestHoisted) {
+            const { shouldConcludeNaturally, buildNaturalConclusionBlock } = await import('@/lib/teaching/masteryGate')
+            if (shouldConcludeNaturally(conversationStateHoisted)) {
+              systemPrompt += buildNaturalConclusionBlock()
+            }
           }
         }
 
@@ -2419,6 +2482,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           }
         } catch { /* non-fatal */ }
       }
+
+      // D.28: strip markdown image links and raw image URLs the LLM may have
+      // emitted — they render as broken images or expose internal URLs. The
+      // VISUAL tag pipeline renders visuals; no other image mechanism is used.
+      try {
+        const { stripRawImageUrls } = await import('@/lib/teaching/visualIntelligence')
+        cleanText = stripRawImageUrls(cleanText)
+      } catch { /* non-fatal */ }
 
       // K6 — EOS Runtime integration: run the K5 Output Verifier on the
       // cleaned text. Off by default; behind ENABLE_OUTPUT_VERIFIER (or the

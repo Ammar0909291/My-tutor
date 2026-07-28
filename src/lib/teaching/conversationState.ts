@@ -93,6 +93,9 @@ export interface ConversationState {
   explanationCount: number
   learnerConfidence: 'high' | 'medium' | 'low' | 'unknown'
   frustrationLevel: number
+  /** A.6: turns spent in the current phase without advancing. Resets to 0
+   *  on any phase transition. Used to detect stale teaching loops. */
+  turnsInCurrentPhase: number
 }
 
 export function initialConversationState(conceptId: string | null): ConversationState {
@@ -123,6 +126,7 @@ export function initialConversationState(conceptId: string | null): Conversation
     explanationCount: 0,
     learnerConfidence: 'unknown',
     frustrationLevel: 0,
+    turnsInCurrentPhase: 0,
   }
 }
 
@@ -357,6 +361,11 @@ export function advanceConversationState(
     }
   }
 
+  // A.6: track turns in the current phase — reset on transition.
+  next.turnsInCurrentPhase = next.phase === prev.phase
+    ? (prev.turnsInCurrentPhase ?? 0) + 1
+    : 0
+
   return next
 }
 
@@ -530,6 +539,34 @@ const AUTONOMY_NEGATOR_RE =
  */
 const AUTONOMY_MENTION_RE = /["“'‘][^"”'’]*\b(?:move\s+on|next\s+topic|next\s+lesson|skip\s+this)\b[^"”'’]*["”'’]|\bwhat\s+(?:does|do\s+you\s+mean\s+by)\b/i
 
+/**
+ * A.2: Detect explicit navigation commands — the learner wants to go
+ * somewhere specific rather than just "next." Returns the intent string
+ * or null. This is NOT an autonomy request (advance to next concept); it
+ * is a navigation request (go to a specific concept or revisit one).
+ *
+ * The system prompt should acknowledge the intent rather than treating
+ * it as off-topic, even though the server cannot change the concept
+ * mid-turn — the concept resolution happens before the LLM call.
+ */
+const NAVIGATION_RE =
+  /\b(?:go\s+back\s+to|take\s+me\s+(?:back\s+)?to|teach\s+me\s+about|switch\s+to|change\s+(?:topic\s+)?to|i\s+want\s+to\s+learn\s+about|can\s+(?:we|you)\s+(?:do|cover|go\s+over))\b/i
+
+export function detectNavigationRequest(message: string): boolean {
+  return NAVIGATION_RE.test(message)
+}
+
+export function buildNavigationAcknowledgementBlock(): string {
+  return (
+    '\n\nNAVIGATION REQUEST — the student asked to switch to a different topic. ' +
+    'Acknowledge their request warmly in one sentence ("Great choice — we\'ll ' +
+    'get to that!"). Then: if the current lesson is not yet mastered, briefly ' +
+    'note what\'s left and offer to finish or skip. If mastery is verified, ' +
+    'wrap up with [LESSON_COMPLETE] so the system can navigate. ' +
+    'Never ignore the request or pretend it was not made.'
+  )
+}
+
 /** The learner explicitly asked to advance — server-detected, honored.
  *  Guarded per ISS-08: negated and merely-mentioned forms do not count. */
 export function detectAutonomyRequest(message: string): boolean {
@@ -617,6 +654,70 @@ export function buildAutonomyBlock(): string {
   )
 }
 
+// ── A.4: student-intent detection ────────────────────────────────────────────
+// When the learner asks a genuine question ("why does X?", "what if Y?",
+// "how do I Z?"), relay it into the directive so the LLM addresses it
+// directly instead of falling back to its phase template.
+
+const QUESTION_RE =
+  /\b(?:why\b|how\b|what\s+(?:if|is|does|happens|about|do)\b|when\b|where\b|can\s+(?:you|we)\b|could\s+(?:you|we)\b|is\s+(?:it|that|this)\b|does\s+(?:it|that|this)\b)/i
+
+export function detectLearnerQuestion(message: string): boolean {
+  if (message.length < 8) return false
+  return QUESTION_RE.test(message) && message.includes('?')
+}
+
+// ── B.13-17: Natural Acknowledgement Engine ─────────────────────────────────
+// Context-aware acknowledgement instruction that replaces generic "Great!"
+// with acknowledgements matched to what actually happened.
+
+export type AcknowledgementContext =
+  | 'correct_answer'
+  | 'understanding'
+  | 'progress'
+  | 'confidence_building'
+  | 'correction'
+  | 'confusion'
+  | 'recovery'
+  | 'navigation'
+  | 'neutral'
+
+export function classifyAcknowledgementContext(
+  state: ConversationState,
+  signalCorrect: boolean | null,
+  recoveryFired: boolean,
+  navigationRequest: boolean,
+): AcknowledgementContext {
+  if (recoveryFired) return 'recovery'
+  if (navigationRequest) return 'navigation'
+  if (state.consecutiveFailures >= 2) return 'confusion'
+  if (signalCorrect === false) return 'correction'
+  if (signalCorrect === true) {
+    if (state.learnerConfidence === 'low') return 'confidence_building'
+    if (state.correctAtCheck + state.correctAtPractice >= 3) return 'progress'
+    if (state.phase === 'TRANSFER') return 'understanding'
+    return 'correct_answer'
+  }
+  return 'neutral'
+}
+
+const ACKNOWLEDGEMENT_INSTRUCTIONS: Record<AcknowledgementContext, string> = {
+  correct_answer: 'Acknowledge the correct answer concisely and specifically — name what they got right, not just "Great!" (e.g. "That\'s correct — the force really does point inward").',
+  understanding: 'Acknowledge the depth of their understanding — note the connection they made, not just correctness (e.g. "I can see how you\'re connecting these ideas").',
+  progress: 'Acknowledge their progress arc — reference how far they\'ve come this lesson (e.g. "You\'ve built up a solid understanding — let\'s see if you can apply it").',
+  confidence_building: 'This student\'s confidence is low — acknowledge gently and build them up (e.g. "That\'s exactly right — you know more than you think").',
+  correction: 'Acknowledge the mistake without judgment — normalize it and redirect (e.g. "That\'s a really common place to get tripped up — let me show you why").',
+  confusion: 'The student has struggled multiple times — validate their effort, not the confusion (e.g. "This is genuinely tricky — let me try a completely different angle").',
+  recovery: 'The student expressed frustration or is stuck — acknowledge their feeling first, then pivot to support (e.g. "I hear you — let\'s take a step back and try something different").',
+  navigation: 'The student asked to change topic — acknowledge the request warmly (e.g. "Great choice — we\'ll get to that!").',
+  neutral: 'No special acknowledgement needed — proceed directly to teaching content without a filler opener.',
+}
+
+export function buildAcknowledgementInstruction(ctx: AcknowledgementContext): string {
+  if (ctx === 'neutral') return ''
+  return `\n- ACKNOWLEDGEMENT: ${ACKNOWLEDGEMENT_INSTRUCTIONS[ctx]} Never open with generic filler ("Great!", "Okay!", "Nice!", "Exactly!"). Acknowledge HOW they are learning, not just THAT they answered.`
+}
+
 // ── The turn directive (the ONLY prompt surface of this module) ───────────────
 
 export interface TurnDirectiveParams {
@@ -650,6 +751,17 @@ export interface TurnDirectiveParams {
    *  Injects a mandatory check-question directive so the phase cannot advance
    *  on a signal that carries no evidence of understanding. */
   lowSignalAcknowledgement?: boolean
+  /** A.4: true when the learner's message contains a genuine question the
+   *  LLM must address before following the phase template. */
+  learnerAskedQuestion?: boolean
+  /** A.7: true when this concept was previously completed/mastered by the
+   *  learner — skip re-teaching from scratch, treat as review/refresh. */
+  conceptPreviouslyMastered?: boolean
+  /** A.10: the phase just advanced this turn (the previous turn's signal
+   *  moved the ladder). Triggers a brief recap before the new phase. */
+  phaseJustAdvanced?: boolean
+  /** B.13-17: context-aware acknowledgement instruction. */
+  acknowledgementContext?: AcknowledgementContext
 }
 
 const PHASE_FRAME: Record<TeachingPhase, string> = {
@@ -700,6 +812,11 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
     lines.push('- STAY ON CURRENT EXAMPLE: do not introduce a second example, molecule, compound, or entity until the learner answers at least one question about the current one correctly. One confirmed correct signal per sub-example before moving on.')
   }
   lines.push(`- Question stage ceiling: Stage ${PHASE_MAX_QUESTION_STAGE[p.state.phase]} (see QUESTION STAGE POLICY). Never ask above it this turn.`)
+  // B.13-17: context-aware acknowledgement replaces generic openers.
+  if (p.acknowledgementContext) {
+    const ackLine = buildAcknowledgementInstruction(p.acknowledgementContext)
+    if (ackLine) lines.push(ackLine.trim())
+  }
   // Band 2 — stated before every other constraint below it, because it is the
   // only one the model must not trade off against anything else.
   if (p.legalityRationale) {
@@ -737,6 +854,46 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   if (p.state.demonstrated && p.state.explanationCount >= 2) {
     lines.push('- ANALOGY CEILING: at most 2 analogy worlds per concept. If you already used analogies, reuse the SAME world — do not introduce a new metaphor.')
   }
+  // A.4: when the learner asked a genuine question, the LLM must address
+  // it directly BEFORE following the phase template — intent > template.
+  if (p.learnerAskedQuestion) {
+    lines.push('- STUDENT QUESTION DETECTED: the student asked a genuine question. Address their specific question FIRST, directly and concisely. Then continue with the teaching phase above. Never ignore a student question to follow a template.')
+  }
+  // A.10: brief concept recap on phase advancement — grounds the student
+  // before moving to the next teaching mode.
+  if (p.phaseJustAdvanced && p.state.phase !== 'OBSERVE') {
+    const recapPhases: Record<string, string> = {
+      DEMONSTRATE: 'You noticed something — now show how it works.',
+      GUIDE: 'The demonstration landed — now work through it together.',
+      CHECK: 'Guided practice went well — now verify with a check question.',
+      PRACTICE: 'Basic understanding confirmed — now apply independently.',
+      TRANSFER: 'Practice is solid — now stretch to a new context.',
+    }
+    const cue = recapPhases[p.state.phase]
+    if (cue) lines.push(`- PHASE TRANSITION: ${cue} Start with a one-sentence recap of the key idea before proceeding.`)
+  }
+  // A.8: resume planned lesson after examples — when the student previously
+  // requested an example/diagram (counters > 0) and this turn is NOT another
+  // request, explicitly tell the LLM to return to the teaching flow.
+  if ((p.state.exampleRequests > 0 || p.state.diagramRequests > 0) && !p.learnerAskedQuestion) {
+    lines.push('- RESUME LESSON: the previous example/diagram was a detour. Return to the planned teaching flow for this phase — do not start a new tangent or repeat the example.')
+  }
+  // A.7: never reteach mastered concepts from scratch.
+  if (p.conceptPreviouslyMastered && p.state.phase === 'OBSERVE') {
+    lines.push('- REVIEW MODE: this student has already mastered this concept. Do NOT re-teach from the beginning. Instead, give a concise refresher or go straight to a challenging application/transfer question. Skip observation and basic demonstration.')
+  }
+  // A.6: stale-loop breaker — when the same phase has persisted for 4+
+  // turns without advancement, force the LLM to try a different approach.
+  if ((p.state.turnsInCurrentPhase ?? 0) >= 4) {
+    lines.push(`- STALE LOOP (${p.state.turnsInCurrentPhase} turns in ${p.state.phase}): your previous approach is not landing. Try a COMPLETELY DIFFERENT angle — a new analogy, a concrete physical demo, a worked example from a different domain, or a simpler sub-problem. Do NOT rephrase the same explanation.`)
+  }
+  // E.33: maintain lesson continuity — after any side question, example
+  // request, or tangent, the LLM must return to the lesson's main thread
+  // rather than drifting or starting a new topic. Standing rule.
+  lines.push('- CONTINUITY: every response must connect back to the concept being taught. After answering a side question or showing an example, explicitly link it back to the main lesson objective before proceeding.')
+  // E.35: smooth transitions — when moving between sub-topics or phases,
+  // bridge the gap rather than jumping abruptly. Standing rule.
+  lines.push('- TRANSITIONS: when shifting focus (new sub-topic, new angle, new phase), use a brief bridging sentence that connects where you were to where you are going. Never start a new section without linking it to the previous one.')
   return lines.join('\n')
 }
 
