@@ -93,6 +93,9 @@ export interface ConversationState {
   explanationCount: number
   learnerConfidence: 'high' | 'medium' | 'low' | 'unknown'
   frustrationLevel: number
+  /** A.6: turns spent in the current phase without advancing. Resets to 0
+   *  on any phase transition. Used to detect stale teaching loops. */
+  turnsInCurrentPhase: number
 }
 
 export function initialConversationState(conceptId: string | null): ConversationState {
@@ -123,6 +126,7 @@ export function initialConversationState(conceptId: string | null): Conversation
     explanationCount: 0,
     learnerConfidence: 'unknown',
     frustrationLevel: 0,
+    turnsInCurrentPhase: 0,
   }
 }
 
@@ -357,6 +361,11 @@ export function advanceConversationState(
     }
   }
 
+  // A.6: track turns in the current phase — reset on transition.
+  next.turnsInCurrentPhase = next.phase === prev.phase
+    ? (prev.turnsInCurrentPhase ?? 0) + 1
+    : 0
+
   return next
 }
 
@@ -590,6 +599,19 @@ export function buildAutonomyBlock(): string {
   )
 }
 
+// ── A.4: student-intent detection ────────────────────────────────────────────
+// When the learner asks a genuine question ("why does X?", "what if Y?",
+// "how do I Z?"), relay it into the directive so the LLM addresses it
+// directly instead of falling back to its phase template.
+
+const QUESTION_RE =
+  /\b(?:why\b|how\b|what\s+(?:if|is|does|happens|about|do)\b|when\b|where\b|can\s+(?:you|we)\b|could\s+(?:you|we)\b|is\s+(?:it|that|this)\b|does\s+(?:it|that|this)\b)/i
+
+export function detectLearnerQuestion(message: string): boolean {
+  if (message.length < 8) return false
+  return QUESTION_RE.test(message) && message.includes('?')
+}
+
 // ── The turn directive (the ONLY prompt surface of this module) ───────────────
 
 export interface TurnDirectiveParams {
@@ -615,6 +637,15 @@ export interface TurnDirectiveParams {
   /** Capability Model: blocking capability ids when the learner is stuck on an
    *  OPERATION rather than on the concept. null = not a capability gap. */
   capabilityRepair?: readonly string[] | null
+  /** A.4: true when the learner's message contains a genuine question the
+   *  LLM must address before following the phase template. */
+  learnerAskedQuestion?: boolean
+  /** A.7: true when this concept was previously completed/mastered by the
+   *  learner — skip re-teaching from scratch, treat as review/refresh. */
+  conceptPreviouslyMastered?: boolean
+  /** A.10: the phase just advanced this turn (the previous turn's signal
+   *  moved the ladder). Triggers a brief recap before the new phase. */
+  phaseJustAdvanced?: boolean
 }
 
 const PHASE_FRAME: Record<TeachingPhase, string> = {
@@ -682,6 +713,39 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   // concept. After DEMONSTRATE, cap new analogy introductions.
   if (p.state.demonstrated && p.state.explanationCount >= 2) {
     lines.push('- ANALOGY CEILING: at most 2 analogy worlds per concept. If you already used analogies, reuse the SAME world — do not introduce a new metaphor.')
+  }
+  // A.4: when the learner asked a genuine question, the LLM must address
+  // it directly BEFORE following the phase template — intent > template.
+  if (p.learnerAskedQuestion) {
+    lines.push('- STUDENT QUESTION DETECTED: the student asked a genuine question. Address their specific question FIRST, directly and concisely. Then continue with the teaching phase above. Never ignore a student question to follow a template.')
+  }
+  // A.10: brief concept recap on phase advancement — grounds the student
+  // before moving to the next teaching mode.
+  if (p.phaseJustAdvanced && p.state.phase !== 'OBSERVE') {
+    const recapPhases: Record<string, string> = {
+      DEMONSTRATE: 'You noticed something — now show how it works.',
+      GUIDE: 'The demonstration landed — now work through it together.',
+      CHECK: 'Guided practice went well — now verify with a check question.',
+      PRACTICE: 'Basic understanding confirmed — now apply independently.',
+      TRANSFER: 'Practice is solid — now stretch to a new context.',
+    }
+    const cue = recapPhases[p.state.phase]
+    if (cue) lines.push(`- PHASE TRANSITION: ${cue} Start with a one-sentence recap of the key idea before proceeding.`)
+  }
+  // A.8: resume planned lesson after examples — when the student previously
+  // requested an example/diagram (counters > 0) and this turn is NOT another
+  // request, explicitly tell the LLM to return to the teaching flow.
+  if ((p.state.exampleRequests > 0 || p.state.diagramRequests > 0) && !p.learnerAskedQuestion) {
+    lines.push('- RESUME LESSON: the previous example/diagram was a detour. Return to the planned teaching flow for this phase — do not start a new tangent or repeat the example.')
+  }
+  // A.7: never reteach mastered concepts from scratch.
+  if (p.conceptPreviouslyMastered && p.state.phase === 'OBSERVE') {
+    lines.push('- REVIEW MODE: this student has already mastered this concept. Do NOT re-teach from the beginning. Instead, give a concise refresher or go straight to a challenging application/transfer question. Skip observation and basic demonstration.')
+  }
+  // A.6: stale-loop breaker — when the same phase has persisted for 4+
+  // turns without advancement, force the LLM to try a different approach.
+  if ((p.state.turnsInCurrentPhase ?? 0) >= 4) {
+    lines.push(`- STALE LOOP (${p.state.turnsInCurrentPhase} turns in ${p.state.phase}): your previous approach is not landing. Try a COMPLETELY DIFFERENT angle — a new analogy, a concrete physical demo, a worked example from a different domain, or a simpler sub-problem. Do NOT rephrase the same explanation.`)
   }
   return lines.join('\n')
 }

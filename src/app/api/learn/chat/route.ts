@@ -346,6 +346,7 @@ export async function POST(req: Request) {
     // (still parsed/preferred when present), never the sole path to render.
     let availableVisualHoisted: string | null = null
     let forceVisualRenderHoisted = false
+    let conceptPreviouslyMasteredHoisted = false
     // Library Mode duplication cleanup: this used to be set from
     // spacedRevision.ts's per-turn revision block (removed — see the
     // Library-mode teaching-strategy section below). The session OPENING's
@@ -775,6 +776,11 @@ export async function POST(req: Request) {
           .filter((r) => r.status === 'COMPLETED' || r.status === 'MASTERED' || r.status === 'REVISION')
           .map((r) => r.topicSlug)
         const completedSet = new Set(completedSlugs)
+        // A.7: check if the current concept was previously mastered
+        const currentConceptForMastery = snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? resolvedConceptId ?? null
+        if (currentConceptForMastery && completedSet.has(currentConceptForMastery)) {
+          conceptPreviouslyMasteredHoisted = true
+        }
 
         const inProgressSlug = topicProgressRows.find((r) => r.status === 'IN_PROGRESS')?.topicSlug
         const kgContext = buildKnowledgeGraphContext(subjectCode, completedSlugs, inProgressSlug)
@@ -1504,6 +1510,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             buildTurnDirective, decideVisualFirst,
             detectAutonomyRequest, buildAutonomyBlock,
             detectNavigationRequest, buildNavigationAcknowledgementBlock,
+            detectLearnerQuestion,
           } = await import('@/lib/teaching/conversationState')
           const {
             masteryVerified, buildMasteryGateBlock,
@@ -1676,6 +1683,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               const cls = capMod.classifyFailure(capabilityStateHoisted, requiredCapabilitiesHoisted)
               return cls.kind === 'capability_missing' ? cls.blockingCapabilities : null
             })(),
+            learnerAskedQuestion: detectLearnerQuestion(message),
+            conceptPreviouslyMastered: conceptPreviouslyMasteredHoisted,
+            phaseJustAdvanced: (conversationStateHoisted.turnsInCurrentPhase ?? 0) === 0
+              && conversationStateHoisted.phase !== 'OBSERVE',
           })
           if (learnerRequestHoisted) {
             const hasEstablishedExample =
