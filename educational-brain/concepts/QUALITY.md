@@ -53,29 +53,30 @@ rather than hand-edit when entries change.
   migration debt (76 = 71 + 5), not introduced this batch — rewriting
   another session's freshly authored files remains out of scope.
 
-## Aggregate summary (587 entries)
+## Aggregate summary (594 entries)
 
-Adds `math.geom.parallelogram`, `math.geom.trapezoid`, and
-`math.geom.regular-polygon` (3 concepts, 2026-07-28, autonomous loop
-iteration 43 resumption continued) on top of the prior 584-entry state.
-None has a Blueprint. All numbers below were recomputed fresh by scanning
-every live file in `educational-brain/concepts/{subject}/` — none
-hand-estimated. Note: this ledger's chemistry row count (136) understates
-chemistry's true 186/186-complete state (CLAUDE.md) — a pre-existing gap
-outside this batch's mathematics-only scope, not corrected here.
+Adds `math.geom.circle-parts`, `math.geom.circle-circumference`,
+`math.geom.circle-area`, `math.geom.circle-theorems`,
+`math.geom.quadrants`, `math.geom.midpoint-formula`, and
+`math.geom.geometric-constructions` (7 concepts, 2026-07-28, Batch 55)
+on top of the prior 587-entry state. None has a Blueprint. All numbers
+below were recomputed fresh. Note: this ledger's chemistry row count (136)
+understates chemistry's true 186/186-complete state (CLAUDE.md) — a
+pre-existing gap outside this batch's mathematics-only scope, not
+corrected here.
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 360 / 587 | see methodology note above — 24 `math.found` + 28 `math.arith` + 13 `math.nt` + 10 `math.geom` (`perimeter`, `length`, `angle-types`, `triangle-types`, `triangle-angle-sum`, `pythagorean-converse`, `triangle-centers`, `parallelogram`, `trapezoid`, `regular-polygon`) — none of these 75 have a Blueprint — + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
-| Educational Brain | 587 / 587 | trivially true (this is the entry list) |
-| Mental Model | 587 / 587 | |
-| Misconceptions | 587 / 587 | |
-| Analogies | 587 / 587 | |
-| Recovery Strategy | 587 / 587 | |
-| Assessment Signals | 587 / 587 | |
-| Tutor Actions | 517 / 587 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
-| Cross-links | 517 / 587 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
-| Version History | 510 / 585 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
+| Blueprint | 360 / 594 | see methodology note above — 24 `math.found` + 28 `math.arith` + 13 `math.nt` + 17 `math.geom` (`perimeter`, `length`, `angle-types`, `triangle-types`, `triangle-angle-sum`, `pythagorean-converse`, `triangle-centers`, `parallelogram`, `trapezoid`, `regular-polygon`, `circle-parts`, `circle-circumference`, `circle-area`, `circle-theorems`, `quadrants`, `midpoint-formula`, `geometric-constructions`) — none of these 82 have a Blueprint — + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
+| Educational Brain | 594 / 594 | trivially true (this is the entry list) |
+| Mental Model | 594 / 594 | |
+| Misconceptions | 594 / 594 | |
+| Analogies | 594 / 594 | |
+| Recovery Strategy | 594 / 594 | |
+| Assessment Signals | 594 / 594 | |
+| Tutor Actions | 524 / 594 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
+| Cross-links | 524 / 594 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
+| Version History | 517 / 592 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
 
 ## Per-concept ledger
 
@@ -467,14 +468,20 @@ outside this batch's mathematics-only scope, not corrected here.
 | `math.geom.area-polygon` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.area-triangle` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.circle` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.circle-area` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.circle-circumference` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.circle-equation` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.circle-parts` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.circle-theorems` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.congruent-triangles` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.coordinate-plane` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.distance-formula` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.geometric-constructions` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.geometric-proof` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.length` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.line` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.line-segment` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.midpoint-formula` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.parallel-lines` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.parallelogram` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.perimeter` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -485,6 +492,7 @@ outside this batch's mathematics-only scope, not corrected here.
 | `math.geom.pythagorean-converse` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.triangle-centers` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.pythagorean-theorem` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.quadrants` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.quadrilateral` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.ray` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.regular-polygon` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

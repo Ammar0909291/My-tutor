@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 205 READY)
+## mathematics (908 concepts, 217 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -519,11 +519,11 @@ its subject KG.
 | geom | `math.geom.area-polygon` | Area of Polygons | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.area-polygon.md` | READY |
 | geom | `math.geom.area-triangle` | Area of a Triangle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.area-triangle.md` | READY |
 | geom | `math.geom.circle` | Circle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.circle.md` | READY |
-| geom | `math.geom.circle-area` | Area of a Circle | No | No | — | MISSING |
-| geom | `math.geom.circle-circumference` | Circumference of a Circle | No | No | — | MISSING |
+| geom | `math.geom.circle-area` | Area of a Circle | No | Yes | `mathematics/math.geom.circle-area.md` | READY |
+| geom | `math.geom.circle-circumference` | Circumference of a Circle | No | Yes | `mathematics/math.geom.circle-circumference.md` | READY |
 | geom | `math.geom.circle-equation` | Equation of a Circle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.circle-equation.md` | READY |
-| geom | `math.geom.circle-parts` | Parts of a Circle | No | No | — | MISSING |
-| geom | `math.geom.circle-theorems` | Circle Theorems | No | No | — | MISSING |
+| geom | `math.geom.circle-parts` | Parts of a Circle | No | Yes | `mathematics/math.geom.circle-parts.md` | READY |
+| geom | `math.geom.circle-theorems` | Circle Theorems | No | Yes | `mathematics/math.geom.circle-theorems.md` | READY |
 | geom | `math.geom.congruent-triangles` | Congruent Triangles | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.congruent-triangles.md` | READY |
 | geom | `math.geom.conic-sections` | Conic Sections | Yes | No | — | MISSING |
 | geom | `math.geom.coordinate-plane` | Coordinate Plane | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.coordinate-plane.md` | READY |
@@ -536,14 +536,14 @@ its subject KG.
 | geom | `math.geom.dot-product` | Dot Product | Yes | No | — | MISSING |
 | geom | `math.geom.ellipse` | Ellipse | No | No | — | MISSING |
 | geom | `math.geom.frenet-serret` | Frenet-Serret Formulas | No | No | — | MISSING |
-| geom | `math.geom.geometric-constructions` | Geometric Constructions | No | No | — | MISSING |
+| geom | `math.geom.geometric-constructions` | Geometric Constructions | No | Yes | `mathematics/math.geom.geometric-constructions.md` | READY |
 | geom | `math.geom.geometric-proof` | Geometric Proof | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.geometric-proof.md` | READY |
 | geom | `math.geom.hyperbola` | Hyperbola | No | No | — | MISSING |
 | geom | `math.geom.length` | Length | No | Yes | `educational-brain/concepts/mathematics/math.geom.length.md` | READY |
 | geom | `math.geom.line` | Line | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.line.md` | READY |
 | geom | `math.geom.line-equation` | Equations of Lines | Yes | No | — | MISSING |
 | geom | `math.geom.line-segment` | Line Segment | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.line-segment.md` | READY |
-| geom | `math.geom.midpoint-formula` | Midpoint Formula | No | No | — | MISSING |
+| geom | `math.geom.midpoint-formula` | Midpoint Formula | No | Yes | `mathematics/math.geom.midpoint-formula.md` | READY |
 | geom | `math.geom.parabola` | Parabola | No | No | — | MISSING |
 | geom | `math.geom.parallel-lines` | Parallel Lines | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.parallel-lines.md` | READY |
 | geom | `math.geom.parallelogram` | Parallelogram | No | Yes | `educational-brain/concepts/mathematics/math.geom.parallelogram.md` | READY |
@@ -558,7 +558,7 @@ its subject KG.
 | geom | `math.geom.polygon-angle-sum` | Polygon Angle Sum | No | No | — | MISSING |
 | geom | `math.geom.pythagorean-converse` | Converse of the Pythagorean Theorem | No | Yes | `educational-brain/concepts/mathematics/math.geom.pythagorean-converse.md` | READY |
 | geom | `math.geom.pythagorean-theorem` | Pythagorean Theorem | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.pythagorean-theorem.md` | READY |
-| geom | `math.geom.quadrants` | Quadrants | No | No | — | MISSING |
+| geom | `math.geom.quadrants` | Quadrants | No | Yes | `mathematics/math.geom.quadrants.md` | READY |
 | geom | `math.geom.quadrilateral` | Quadrilateral | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.quadrilateral.md` | READY |
 | geom | `math.geom.ray` | Ray | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.ray.md` | READY |
 | geom | `math.geom.reflection` | Reflection | No | No | — | MISSING |

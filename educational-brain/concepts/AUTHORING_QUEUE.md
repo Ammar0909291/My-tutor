@@ -21,8 +21,8 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1138** (= 1,775 KG concepts − 637 already `READY`, per
-`ROADMAP.md`'s §1 Totals as updated 2026-07-27 — this header was stale
+Total queued: **1131** (= 1,775 KG concepts − 644 already `READY`, per
+`ROADMAP.md`'s §1 Totals as updated 2026-07-28 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
 at math.found Waves 7-10's and math.geom Wave 10's positions below).
@@ -590,8 +590,8 @@ math.geom Wave 5, moved to READY.
 math.geom Wave 5, moved to READY.
 **Row 73 removed 2026-07-26** — `math.geom.triangle` authored math.geom
 Wave 5, moved to READY.
-| 74 | mathematics | 5 | `math.geom.circle-parts` | Parts of a Circle |
-| 75 | mathematics | 5 | `math.geom.circle-circumference` | Circumference of a Circle |
+**Row 74 removed 2026-07-28** — `math.geom.circle-parts` authored Batch 55 Wave 10, moved to READY.
+**Row 75 removed 2026-07-28** — `math.geom.circle-circumference` authored Batch 55 Wave 10, moved to READY.
 | 76 | mathematics | 5 | `math.prob.event` | Event |
 | 77 | mathematics | 5 | `math.disc.graph-types` | Types of Graphs |
 | 78 | mathematics | 5 | `math.disc.graph-connectivity` | Graph Connectivity |
@@ -644,8 +644,8 @@ authored math.geom Wave 6, moved to READY.
 math.geom Wave 6, moved to READY.
 **Row 121 removed 2026-07-26** — `math.geom.polygon` authored
 math.geom Wave 6, moved to READY.
-| 122 | mathematics | 6 | `math.geom.circle-theorems` | Circle Theorems |
-| 123 | mathematics | 6 | `math.geom.geometric-constructions` | Geometric Constructions |
+**Row 122 removed 2026-07-28** — `math.geom.circle-theorems` authored Batch 55 Wave 10, moved to READY.
+**Row 123 removed 2026-07-28** — `math.geom.geometric-constructions` authored Batch 55 Wave 10, moved to READY.
 | 124 | mathematics | 6 | `math.trig.angle-measure` | Angle Measure |
 | 125 | mathematics | 6 | `math.prob.probability-measure` | Probability Measure |
 | 126 | mathematics | 6 | `math.disc.euler-hamiltonian` | Euler and Hamiltonian Paths |
@@ -801,7 +801,7 @@ READY. Row numbers not renumbered.
 moved to READY.
 **Row 267 removed 2026-07-26** — `math.found.finite-set` authored Wave 11,
 moved to READY.
-| 268 | mathematics | 9 | `math.geom.circle-area` | Area of a Circle |
+**Row 268 removed 2026-07-28** — `math.geom.circle-area` authored Batch 55 Wave 10, moved to READY.
 **Row 269 removed 2026-07-26** — `math.geom.geometric-proof` authored
 math.geom Wave 8, moved to READY.
 | 271 | mathematics | 9 | `math.func.domain-range` | Domain and Range |
@@ -1131,8 +1131,8 @@ READY.
 math.nt Wave 3, moved to READY.
 **Row 576 removed 2026-07-26** — `math.geom.circle-equation` authored
 math.geom Wave 5, moved to READY.
-| 578 | mathematics | 16 | `math.geom.quadrants` | Quadrants |
-| 579 | mathematics | 16 | `math.geom.midpoint-formula` | Midpoint Formula |
+**Row 578 removed 2026-07-28** — `math.geom.quadrants` authored Batch 55 Wave 10, moved to READY.
+**Row 579 removed 2026-07-28** — `math.geom.midpoint-formula` authored Batch 55 Wave 10, moved to READY.
 | 583 | mathematics | 16 | `math.func.graph-of-function` | Graph of a Function |
 | 584 | mathematics | 16 | `math.calc.limits` | Limit of a Function |
 | 585 | mathematics | 16 | `math.calc.parametric-curves` | Parametric Equations and Curves |

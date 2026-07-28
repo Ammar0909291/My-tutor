@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 210 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 28 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation`, `pythagorean-triples` — `math.nt` domain otherwise PARKED at 28/36, blocked on cross-domain campaigns per ROADMAP.md §5 item 1c) + 42 `math.geom.*` entries (`point`, `line`, `line-segment`, `ray`, `plane`, `angle`, `angle-measurement`, `angle-pairs`, `angle-types`, `circle`, `coordinate-plane`, `perimeter`, `length`, `perpendicular-lines`, `triangle`, `triangle-types`, `triangle-angle-sum`, `triangle-centers`, `circle-equation`, `right-triangle`, `congruent-triangles`, `similar-triangles`, `area-triangle`, `polygon`, `pythagorean-theorem`, `pythagorean-converse`, `parallel-lines`, `area-polygon`, `solid-3d`, `distance-formula`, `geometric-proof`, `quadrilateral`, `area`, `volume`, `x-y-coordinates`, `slope`, `transformations`, `vectors-2d`, `surface-area`, `parallelogram`, `trapezoid`, `regular-polygon` — `math.geom` domain IN PROGRESS, 42/69, Wave 10 part 1 continuing), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
+| mathematics | 908 | 217 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 28 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation`, `pythagorean-triples` — `math.nt` domain otherwise PARKED at 28/36, blocked on cross-domain campaigns per ROADMAP.md §5 item 1c) + 49 `math.geom.*` entries (`point`, `line`, `line-segment`, `ray`, `plane`, `angle`, `angle-measurement`, `angle-pairs`, `angle-types`, `circle`, `coordinate-plane`, `perimeter`, `length`, `perpendicular-lines`, `triangle`, `triangle-types`, `triangle-angle-sum`, `triangle-centers`, `circle-equation`, `right-triangle`, `congruent-triangles`, `similar-triangles`, `area-triangle`, `polygon`, `pythagorean-theorem`, `pythagorean-converse`, `parallel-lines`, `area-polygon`, `solid-3d`, `distance-formula`, `geometric-proof`, `quadrilateral`, `area`, `volume`, `x-y-coordinates`, `slope`, `transformations`, `vectors-2d`, `surface-area`, `parallelogram`, `trapezoid`, `regular-polygon`, `circle-parts`, `circle-circumference`, `circle-area`, `circle-theorems`, `quadrants`, `midpoint-formula`, `geometric-constructions` — `math.geom` domain IN PROGRESS, 49/69, Wave 10 complete, Wave 11 next), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -4370,3 +4370,79 @@ Continuing Wave 10 part 1, authored three more candidates as a batch:
 Remaining Wave 10 part 1 candidates (7): `circle-parts`,
 `circle-circumference`, `circle-area`, `circle-theorems`, `quadrants`,
 `midpoint-formula`, `geometric-constructions`.
+
+---
+
+### Batch 55 — math.geom Wave 10 part 2 (2026-07-28, autonomous loop,
+Wave 10 final)
+
+All 7 remaining no-Blueprint Wave 10 candidates, all via birth-taxonomy
+diagnostic procedure. No Blueprint exists for any of the 7; Blueprint
+References section in each states this explicitly per Quality Gate 2.
+
+- **`math.geom.circle-parts`** (developing/remember, mastery 0.90, 4 hr)
+  — radius, diameter (= 2r, longest chord), chord, arc (minor vs major),
+  sector ("pie slice": 2 radii + arc), segment (chord + arc, no radii).
+  4 misconceptions: MC-1 SECTOR-SEGMENT-SWAP (Type 1), MC-2
+  DIAMETER-RADIUS-CONFUSION-IN-FORMULA (Type 5), MC-3
+  CHORD-MEANS-DIAMETER (Type 3), MC-4 ARC-MEASURE-CONFUSION (Type 4).
+
+- **`math.geom.circle-circumference`** (developing/apply, mastery 0.90,
+  3 hr) — C = 2πr = πd; π = C/d universally; exact (keep π symbol) vs
+  approximate (compute decimal); estimation C ≈ 3d. 4 misconceptions:
+  MC-1 WRONG-FORMULA-VARIANT (Type 5 — plugging diameter into C=2πr
+  giving 2× answer), MC-2 π-IS-EXACTLY-22/7-OR-3 (Type 5), MC-3
+  CIRCUMFERENCE-AREA-FORMULA-SWAP (Type 1), MC-4
+  EXACT-VS-APPROXIMATE-CONTEXT-CONFUSION (Type 4).
+
+- **`math.geom.circle-area`** (developing/apply, mastery 0.90, 3 hr) —
+  A = πr²; ring-unrolling derivation (base=2πr, height=r,
+  area=½×2πr×r=πr²); area scales as r² (quadratic — doubling r
+  quadruples A); estimation A ≈ 3r²; uses radius not diameter. 4
+  misconceptions: MC-1 DIAMETER-IN-AREA-FORMULA (Type 5 — giving 4×
+  answer), MC-2 AREA-CIRCUMFERENCE-FORMULA-SWAP (Type 1), MC-3
+  RADIUS-NOT-SQUARED (Type 5 — computing πr instead of πr²), MC-4
+  AREA-SCALES-LINEARLY-WITH-RADIUS (Type 1 — doubling r doubles A).
+
+- **`math.geom.circle-theorems`** (proficient/apply, mastery 0.80,
+  10 hr) — 5 core theorems: (1) inscribed angle = ½ central angle on
+  same arc; (2) inscribed angles on same arc equal; (3) angle in
+  semicircle = 90°; (4) tangent ⊥ radius at tangency point; (5) equal
+  chords equidistant from centre; isosceles triangle factory (draw all
+  radii first). 4 misconceptions: MC-1
+  CENTRAL-ANGLE-HALVED-WHEN-NOT-INSCRIBED (Type 5), MC-2
+  SEMICIRCLE-RULE-OVERGENERALISED (Type 1), MC-3
+  MISSING-THE-ISOSCELES-TRIANGLE (Type 2 perceptual), MC-4
+  TANGENT-SECANT-CONFUSION (Type 4).
+
+- **`math.geom.quadrants`** (elementary/remember, mastery 0.95, 1 hr)
+  — I(++), II(−+), III(−−), IV(+−); counter-clockwise from upper-right;
+  axis points belong to no quadrant; Roman numeral convention. 4
+  misconceptions: MC-1 CLOCKWISE-LABELLING (Type 5), MC-2
+  QUADRANT-II-IV-SIGN-SWAP (Type 1), MC-3
+  AXES-POINTS-PLACED-IN-QUADRANTS (Type 5), MC-4
+  ARABIC-VS-ROMAN-NUMERAL-CONFUSION (Type 4).
+
+- **`math.geom.midpoint-formula`** (intermediate/apply, mastery 0.90,
+  2 hr) — M = ((x₁+x₂)/2, (y₁+y₂)/2); two separate independent
+  averages; inverse: x₂ = 2M_x − x₁ (double then subtract);
+  verification by distance check. 4 misconceptions: MC-1
+  MIXED-COORDINATE-AVERAGE (Type 5), MC-2
+  MIDPOINT-DISTANCE-FORMULA-CONFUSION (Type 1), MC-3
+  INVERSE-ENDPOINT-BY-HALVING (Type 5), MC-4 LABEL-ASSIGNMENT-ERROR
+  (Type 4).
+
+- **`math.geom.geometric-constructions`** (intermediate/apply, mastery
+  0.75, 10 hr) — compass (equal lengths only) + unmarked straightedge
+  (lines through known points only); 6 fundamental constructions;
+  equidistance foundation; SSS-congruence for angle bisector;
+  impossibility results (trisection, squaring the circle, doubling the
+  cube — mathematical not practical impossibility, Gauss-Wantzel
+  theorem). cross_link: `math.abst.galois-theory`. 4 misconceptions:
+  MC-1 MEASUREMENT-AS-CONSTRUCTION (Type 5), MC-2 ARCS-ERASED (Type 5),
+  MC-3 WRONG-JUSTIFICATION-FOR-BISECTOR (Type 1), MC-4
+  IMPOSSIBILITY-RESULTS-DISBELIEVED (Type 6 analogy overextension).
+
+`math.geom` now **49/69**. Mathematics 210 → 217. Wave 10 is complete.
+20 concepts remain in `math.geom` — Wave 11 candidates to be computed
+fresh from the live KG at the next iteration.

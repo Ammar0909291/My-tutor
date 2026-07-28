@@ -13,19 +13,16 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **637** |
-| Remaining | **1,138** |
-| Completion percentage | **35.89%** |
+| Concepts with an Educational Brain entry | **644** |
+| Remaining | **1,131** |
+| Completion percentage | **36.28%** |
 
-*(Table deduplicated 2026-07-26 — three stale, differently-valued "Concepts
-with an Educational Brain entry" rows had accumulated from prior sessions
-without being reconciled. Recomputed from this same file's §2 Subject
-progress table as currently stated per subject: 205 mathematics + 238
-physics + 3 english + 186 chemistry + 0 biology + 0 computer_science =
-632. Mathematics was re-verified by independent Batch 54 authoring (Batch
-54 Wave 10 part 1, triangle-angle-sum); the other subjects'
-figures are taken as already-recorded in §2 below, not re-audited by this
-batch, per this program's "mathematics only" ongoing scope.)*
+*(Recomputed from §2 Subject progress table: 217 mathematics + 238 physics
++ 3 english + 186 chemistry + 0 biology + 0 computer_science = 644.
+Mathematics updated after Batch 55 (7 concepts, math.geom Wave 10 final);
+the other subjects' figures are taken as already-recorded in §2 below,
+not re-audited by this batch, per this program's "mathematics only"
+ongoing scope.)*
 
 ---
 
@@ -33,7 +30,7 @@ batch, per this program's "mathematics only" ongoing scope.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 210 | 23.13% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 217 | 23.90% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
@@ -1151,6 +1148,19 @@ record; the active default has moved to item 1b.**
     findings recorded (surface-area Blueprint/KG metadata divergence,
     resolved per KG; transformations Blueprint's stale
     cross-link-absence claim). Raised `math.geom` to **34/69**.
+    Wave 10 part 1 (Batch 54, 2026-07-27/28, all no-Blueprint, all via
+    birth-taxonomy diagnostic): `angle-types`, `triangle-types`,
+    `triangle-angle-sum`, `pythagorean-converse`, `triangle-centers`,
+    `parallelogram`, `trapezoid`, `regular-polygon` (8 concepts). Raised
+    `math.geom` to **42/69**. Remaining 7 no-Blueprint candidates
+    (`circle-parts`, `circle-circumference`, `circle-area`,
+    `circle-theorems`, `quadrants`, `midpoint-formula`,
+    `geometric-constructions`) deferred to Wave 10 part 2.
+    Wave 10 part 2 (Batch 55, 2026-07-28, all no-Blueprint, all via
+    birth-taxonomy diagnostic): `circle-parts`, `circle-circumference`,
+    `circle-area`, `circle-theorems`, `quadrants`, `midpoint-formula`,
+    `geometric-constructions` (7 concepts). Raised `math.geom` to
+    **49/69**. Wave 10 is complete. 20 concepts remain in `math.geom`.
 1. **(Historical, satisfied) `math.found` Wave 7**: the set of
    `math.found` nodes whose prerequisites were all READY after Wave 6.
 2. **(Historical, satisfied) `math.found` Waves 8-16 (52 remaining
@@ -1184,12 +1194,13 @@ order until `math.found` is complete, unless overridden per item 4.
 
 ## 6. Next batch
 
-**Batch 37 (physics campaign complete — resuming default priority
-order per §5 item 1, absent a new explicit override)**: `math.found`
-Wave 7 — compute the set of `math.found` nodes whose prerequisites are
-all now READY after Wave 6 (46 concepts remain in that domain), fresh
-from the live KG, following the same reuse-by-reference-Blueprint
-discipline established across the physics campaign's eighteen batches.
+**Batch 56 (math.geom Wave 11)**: compute the set of `math.geom` nodes
+whose prerequisites are all now READY after Wave 10's 7 new entries
+(49/69 reached). Candidates include concepts unlocked by
+`circle-theorems`, `midpoint-formula`, `geometric-constructions`, and the
+coordinate-plane / circle-parts family. Author in strict topological
+order, Blueprint-grounded first, then no-Blueprint via the birth-taxonomy
+diagnostic procedure.
 If a new subject-specific override arrives instead, follow that
 explicit instruction per §5 item 4.
 
