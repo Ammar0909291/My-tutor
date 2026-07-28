@@ -1,20 +1,23 @@
 /**
  * Stage 8 — POLICY. Owner: Policy Engine (RS §5).
  *
- * K3 provided an adapter-driven stub. K4 upgrades it: when the caller
- * supplies a PolicyPack (typically BASE_PACK), the engine's 7-band
- * evaluation is authoritative and its EnginePolicyDecision is mapped
- * onto the pipeline's PolicyDecision artifact — with full provenance.
+ * This stage runs the K3 adapter path: the ladder, the Band-2 legality gate
+ * and the authority-ordered move mapping.
  *
- * The adapter-driven path remains for K3 callers that haven't opted in
- * yet (ENABLE_POLICY_PACKS off): pass PolicyAdapters and the previous
- * behaviour applies verbatim. Strangler discipline preserved.
+ * It does NOT run the K4 engine. An `enginePolicyStage` used to live here as
+ * a second entry point to the engine and was removed in the final audit: it
+ * had zero callers and zero tests, because the engine's actual production
+ * consumer is eos-runtime/policyGate (which reads the pack REGISTRY rather
+ * than a caller-supplied pack). Two ways to run the engine is one more than
+ * there should be, and the unused one would have drifted.
+ *
+ * What survives from that path is engineDecisionToPolicyDecision below —
+ * genuinely shared, by policyGate's callers and the K6 simulation battery.
  */
 import { createHash } from 'node:crypto'
 import type { KernelState, Stage, PolicyDecision, PolicyMove } from '../types'
 import { newId } from '../context'
-import type { PolicyInputs, PolicyPack, EnginePolicyDecision } from '../policy/types'
-import { decide } from '../policy/engine'
+import type { EnginePolicyDecision } from '../policy/types'
 import { decideNextMoveDetailed, type ConversationState } from '@/lib/teaching/conversationState'
 import type { LegalityContext } from '@/lib/teaching/questionLegality'
 import { toPolicyMove, maxQuestionsFor } from '../policyMove'
@@ -145,11 +148,6 @@ export function policyStage(a: PolicyAdapters): Stage<KernelState, KernelState> 
 
 // ── K4 engine path — the policy engine as decision authority ─────────────────
 
-export interface EnginePolicyInputs {
-  pack: PolicyPack
-  inputs: PolicyInputs
-}
-
 /**
  * EnginePolicyDecision → the pipeline's PolicyDecision artifact. ONE owner:
  * the engine stage and the simulation battery both need this mapping, and
@@ -176,31 +174,5 @@ export function engineDecisionToPolicyDecision(
     provenance: engineDecision.provenance.map((t) => t.ruleId),
     prngSeed: seededFrom(ctx.learnerId, ctx.sessionId, ctx.turnId),
     fallbackChain: engineDecision.fallbackChain,
-  }
-}
-
-/** Kernel-authoritative POLICY stage. Uses the 7-band engine. Behaviour:
- *   1. Engine decides move / budgets / vocabulary / content slots with
- *      full provenance.
- *   2. Stage packs the result into the pipeline's PolicyDecision shape,
- *      preserving the K3 artifact contract downstream.
- *   3. K3-style provenance strings are derived from engine traces so
- *      existing consumers keep working (union of both worlds while K5
- *      and K6 land).
- */
-export function enginePolicyStage(args: EnginePolicyInputs): Stage<KernelState, KernelState> {
-  return {
-    name: 'POLICY',
-    async run(state) {
-      const { context } = state
-      const engineDecision: EnginePolicyDecision = decide(args.pack, args.inputs)
-      const decision = engineDecisionToPolicyDecision(engineDecision, context)
-      // Stash the full engine trace on the adapters bag for downstream
-      // consumers that want it (RESOLVE reads visualClass; PLAN reads
-      // contentSlots via the same bag). Keeps the pipeline artifact
-      // typed while carrying the deeper provenance.
-      const adapters = { ...(state.adapters ?? {}), engineDecision }
-      return { ...state, policy: decision, adapters }
-    },
   }
 }

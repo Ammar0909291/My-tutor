@@ -2293,8 +2293,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       }
 
       if (!text) {
+        // RS P-3, the second half. A provider that THROWS is handled at the
+        // routeAI call site above; a provider that returns an EMPTY body is
+        // the same failure — no usable model output — and this path returned
+        // a 502 the client renders as "Sorry, I got cut off". By the comment
+        // on the maxTokens argument above, that is not a rare outage: it
+        // recurs whenever a reasoning model exhausts its budget mid-thought.
+        // So the most FREQUENT degraded case was still shipping the learner a
+        // banner, which is exactly what P-3 forbids. Same remedy, same owner.
         console.error('[learn/chat] empty response from model, finish_reason:', finishReason ?? 'unknown')
-        return NextResponse.json({ success: false, error: 'Empty response from model' }, { status: 502 })
+        const { degradedTurn } = await import('@/lib/eos-runtime')
+        const degraded = degradedTurn({ register: contentRegister, learnerText: message })
+        text = degraded.text
+        provider = degraded.provider
+        finishReason = degraded.finishReason
       }
 
       // Wave 0 Step 2/4 (Blueprint Phase 3): extract and strip the SIGNAL
@@ -3241,6 +3253,26 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // Capability session tier — same snapshot persist, no new store.
           if (capabilityStateHoisted && Object.keys(capabilityStateHoisted).length > 0) {
             conversationStateUpdate.capabilities = capabilityStateHoisted
+            // ISS-13: capability state is a fold too — readCapabilityState off
+            // the turn-start snapshot, then this turn's observations folded in
+            // (a stated inability early, an answered outcome later, both
+            // accumulated in capabilityObservationsHoisted). Re-fold ONLY this
+            // turn's observations onto the fresh base, so a concurrent turn's
+            // capability evidence is not overwritten. Also missed in the
+            // original ISS-13 pass.
+            if (capabilityObservationsHoisted.length > 0) {
+              const capturedObs = capabilityObservationsHoisted
+              // The re-deriver is a SYNC callback, so the module is resolved
+              // HERE (where await is legal) and captured — not required from
+              // inside it. This file is ESM; `require` would not resolve.
+              const { foldCapabilityState, readCapabilityState } =
+                await import('@/lib/teaching/capabilityModel')
+              snapshotRederivers.push((fresh) => ({
+                capabilities: foldCapabilityState(
+                  readCapabilityState(fresh.capabilities), capturedObs,
+                ),
+              }))
+            }
           }
           if (conversationStateAfterTurnHoisted) {
             conversationStateUpdate.conversationState = conversationStateAfterTurnHoisted
@@ -3262,7 +3294,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             })
           }
           if (teachingHistoryHoisted && selectedStrategyHoisted !== null) {
-            const { updateTeachingHistory, computeFrustration, computeMastery } = await import('@/lib/teaching/teachingHistory')
+            const { updateTeachingHistory, computeFrustration, computeMastery, readTeachingHistory } = await import('@/lib/teaching/teachingHistory')
             const updatedHistory = updateTeachingHistory(teachingHistoryHoisted, {
               strategiesUsed: [...new Set([...teachingHistoryHoisted.strategiesUsed, selectedStrategyHoisted])],
               explanationCount: teachingHistoryHoisted.explanationCount + 1,
@@ -3276,6 +3308,33 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               ),
             })
             conversationStateUpdate = { ...conversationStateUpdate, teachingHistory: updatedHistory }
+            // ISS-13: teachingHistory is a fold over the snapshot read at the
+            // start of this turn (readTeachingHistory, ~1700 lines up), so a
+            // concurrent turn's update would be discarded by re-applying our
+            // value. Re-fold this turn's contribution onto whatever is
+            // actually there. Missed in the original ISS-13 pass, which
+            // registered five of the seven accumulative fields.
+            const capturedStrategy = selectedStrategyHoisted
+            // The history carries the concept it was read for, so the re-read
+            // is scoped identically without reaching for an out-of-scope id.
+            const historyConceptId = teachingHistoryHoisted.conceptId
+            snapshotRederivers.push((fresh) => {
+              const base = readTeachingHistory(fresh.teachingHistory, historyConceptId)
+              return {
+                teachingHistory: updateTeachingHistory(base, {
+                  strategiesUsed: [...new Set([...base.strategiesUsed, capturedStrategy])],
+                  explanationCount: base.explanationCount + 1,
+                  frustration: computeFrustration(
+                    conversationStateHoisted?.consecutiveFailures ?? 0,
+                    conversationStateHoisted?.remediationCount ?? 0,
+                  ),
+                  mastery: computeMastery(
+                    conversationStateHoisted?.correctAtCheck ?? 0,
+                    conversationStateHoisted?.correctAtPractice ?? 0,
+                  ),
+                }),
+              }
+            })
           }
 
           // EOS M1 — Evidence Spine: append this turn's typed events to the

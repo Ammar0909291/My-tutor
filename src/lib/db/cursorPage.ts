@@ -36,17 +36,3 @@ export function olderThan(cursor: PageCursor | null | undefined): Record<string,
     ],
   }
 }
-
-/**
- * Does `row` fall strictly before `cursor` in `(createdAt desc, id desc)`
- * order? The in-memory twin of `olderThan`, and the reason this module is
- * testable: the SQL fragment and this function must agree, so the tests
- * assert the ordering law on the function and the fragment is built from the
- * same two clauses.
- */
-export function isOlderThan(row: PageCursor, cursor: PageCursor): boolean {
-  const rowMs = row.createdAt.getTime()
-  const curMs = cursor.createdAt.getTime()
-  if (rowMs !== curMs) return rowMs < curMs
-  return row.id < cursor.id
-}
