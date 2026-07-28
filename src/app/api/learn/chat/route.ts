@@ -1491,6 +1491,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           firstLessonActiveHoisted = true
         }
 
+        // C.18-22: Math Speech layer — injected once for STEM subjects.
+        {
+          const { isStemSubject, buildMathSpeechBlock } = await import('@/lib/teaching/mathSpeech')
+          if (isStemSubject(subjectCode)) {
+            systemPrompt += buildMathSpeechBlock()
+          }
+        }
+
         // Phases C–G (2026-07-14): the conversation state machine. The
         // SERVER decides the teaching phase (OBSERVE→…→TRANSFER), whether
         // this turn teaches/shows/asks (Phase E counters), the question-
