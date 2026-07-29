@@ -33,7 +33,15 @@ After this concept, the learner can:
 
 ## Core Understanding
 
-_Measurement errors quantify the deviation of a measured value from the true value._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+Every measurement you will ever make is wrong. Not because you made a mistake — but because the universe does not let you measure anything exactly. Your ruler has a smallest mark. Your stopwatch has a reaction time. Your thermometer has a resolution limit. This irreducible imperfection is called uncertainty, and the skill of measurement science is not to eliminate it (you can't) but to QUANTIFY it: to say precisely how wrong you might be.
+
+Two fundamentally different sources of uncertainty exist, and confusing them is one of the most common reasoning errors in experimental science:
+
+**Random errors** scatter your measurements both above and below the true value — like rifle shots scattered around a bullseye. Their effect on your MEAN decreases as you take more measurements (average of 100 measurements is more precise than average of 5).
+
+**Systematic errors** push ALL your measurements in the same direction — like a rifle sight bent to one side, every shot lands consistently right of the bullseye. Averaging more measurements does NOT help: it gives you a more precise version of the WRONG answer. Only identifying and correcting the source of bias helps.
+
+The correct way to report a measurement is: (best estimate) ± (uncertainty) units — where the ± quantifies the range within which the true value likely lies. Not "the answer is 5.23." The full, honest answer is "5.23 ± 0.05 cm."
 
 ## Mental Models
 
@@ -415,3 +423,4 @@ lies and distinguishes systematic bias from random scatter."
 ## Version History
 
 - **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.
+- **v1.1** (2026-07-29): Teaching quality upgrade. Core Understanding rewritten — replaced textbook sentence with "every measurement is wrong, here's why" framing; explicit random/systematic contrast with archery-shot mental images; correct reporting format stated as part of core insight.

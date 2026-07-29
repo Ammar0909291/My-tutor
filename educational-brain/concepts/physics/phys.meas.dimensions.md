@@ -36,7 +36,11 @@ After this concept, the learner can:
 
 ## Core Understanding
 
-_Dimensional analysis checks the consistency of equations by examining the dimensions of each term._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+You just saw a formula. Is it right? You could run an experiment — but that takes time, equipment, and trust. There is a faster, cheaper check: dimensional analysis. It asks one question: *is the left side the same TYPE of physical quantity as the right side?*
+
+Every physical quantity has a dimension — a TYPE label — that is independent of the unit system. Length is L whether you measure in metres, feet, or light-years. Time is T whether in seconds or centuries. When you write an equation, you are claiming the two sides are equal. Dimensional analysis checks whether they are even the same type. Metres cannot equal seconds. Mass cannot equal energy. A failed check is a mathematical proof that the formula is wrong — no experiment needed.
+
+This is a necessary-but-not-sufficient check: it catches type-errors, but it cannot catch coefficient errors. "F = ma" and "F = 2ma" are BOTH dimensionally [MLT⁻²]. Experiments distinguish them; dimensions cannot. Knowing this limitation is as important as knowing how to use the tool — every learner who says "I checked by dimensions so it's correct" has learned half of the lesson.
 
 ## Mental Models
 
@@ -404,3 +408,4 @@ the skill requires genuine understanding, not just memory.
 ## Version History
 
 - **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.
+- **v1.1** (2026-07-29): Teaching quality upgrade. Core Understanding rewritten — replaced textbook sentence with visceral "faster check than experiment" framing, type vs. coefficient distinction, and the necessary-but-not-sufficient limitation stated as part of the core insight rather than deferred.

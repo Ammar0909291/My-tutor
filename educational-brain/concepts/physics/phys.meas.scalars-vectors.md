@@ -34,7 +34,9 @@ After this concept, the learner can:
 
 ## Core Understanding
 
-_Scalars have magnitude only while vectors have both magnitude and direction._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+Consider two pieces of information: "the temperature outside is 25°C" and "the nearest tiger is 3 metres away." For temperature, the number 25 is complete — you know everything that matters. For the tiger, "3 metres" is dangerously incomplete. You need to know which direction. This is the scalar/vector distinction in one sentence: some physical quantities are complete with just a magnitude (scalars), while others can only do their job when a direction is also specified (vectors).
+
+Scalars add like regular numbers: 25°C + 25°C = 50°C. Vectors add like arrows — direction must be accounted for. Two 10-newton forces in opposite directions cancel to 0; in the same direction they add to 20 N. The NUMBER is identical in both cases; only the direction changes. This is not a technicality — it determines the physical outcome every single time. Every Newton's law calculation, every momentum problem, every field description depends on whether the learner is treating quantities as scalars or vectors.
 
 ## Mental Models
 
@@ -149,24 +151,27 @@ signed)**
 
 ## Analogies
 
-- **Best analogy**: a phone number vs. a GPS pin. A phone number is just a number —
-  no direction, no location (scalar). A GPS pin is coordinates AND a point on a
-  map — direction to it matters (vector-like). The information type determines how
-  you USE it.
-  *Breaking point*: a GPS pin is technically two numbers (lat/lon), not a magnitude
-  + direction pair. Don't extend the analogy past "some quantities need direction
-  to be useful."
-- **Alternative — temperature vs. wind**: temperature is "30 degrees" — no
-  direction needed (scalar). Wind is "30 km/h from the northwest" — direction is
-  essential (vector). A weather forecast without wind direction would be almost
-  useless. This is concrete and immediately relatable.
-  *Breaking point*: wind speed (30 km/h) is still a scalar; wind VELOCITY
-  (30 km/h northwest) is the vector. Careful to use the full phrase "wind
-  velocity" not "wind speed" — or the analogy accidentally installs M2.
-- **Anti-analogy to avoid**: "scalars are small, vectors are big" — has been
-  observed in learner free-writing, probably a confusion with the word "magnitude."
-  Pre-empt by noting: a scalar can be enormous (1 billion km is still a scalar
-  distance) and a vector can be tiny (0.001 m east is still a vector displacement).
+- **Best analogy (treasure map)**: "Walk 100 metres to find the treasure." Is that
+  enough? No — 100 metres in which direction? The number alone is useless; you need
+  both the distance AND the direction. Now contrast: "The temperature outside is 35
+  degrees." Is that enough? Yes — you know everything useful. No direction needed.
+  Physical quantities work exactly the same way: distance (100 m) is scalar —
+  the number is complete. Displacement (100 m north) is vector — direction is not a
+  footnote, it is part of the measurement.
+  *Breaking point*: in everyday life, "100 metres" often implies "away from where you
+  are", not in a specific compass direction — so the analogy requires being explicit
+  that the destination is ambiguous without compass direction.
+- **Alternative — temperature vs. wind velocity**: the temperature "30°C" tells you
+  everything — no direction needed (scalar). "Wind at 30 km/h" is incomplete — from
+  which direction? A weather forecast without wind direction is nearly useless (vector).
+  *Breaking point*: wind SPEED (30 km/h alone) is a scalar; wind VELOCITY (30 km/h
+  from the northwest) is the vector. Always say "wind velocity" in this analogy, not
+  "wind speed" — otherwise M2 is accidentally installed.
+- **Anti-analogy to avoid**: "scalars are small, vectors are big" — observed in learner
+  free-writing, probably a confusion with the word "magnitude." Pre-empt explicitly:
+  a scalar can be enormous (1 billion km is still scalar distance) and a vector can
+  be tiny (0.0001 m east is still a vector displacement). Size has nothing to do with
+  it.
 
 ## Demonstrations
 
@@ -395,3 +400,4 @@ attribute to become operational.
 ## Version History
 
 - **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.
+- **v1.1** (2026-07-29): Teaching quality upgrade. Core Understanding rewritten — replaced textbook sentence with tiger/temperature contrast and force-cancellation stakes. Analogies: GPS/phone-number analogy (too abstract) replaced with treasure-map direction analogy as primary.

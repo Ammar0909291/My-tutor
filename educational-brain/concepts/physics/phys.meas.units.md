@@ -29,36 +29,42 @@ After this concept, the learner can:
 
 ## Core Understanding
 
-_The International System of Units defines seven base units used to express all physical quantities._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+A unit is a chosen reference object. When you say "5 metres", you mean "this distance is 5 times longer than the object we agreed to call 1 metre." That's it. Every measurement in physics is a count of how many reference objects fit into what you're measuring. Change the reference object, and the COUNT must change — but the physical reality doesn't.
+
+The SI system answers one question: *what reference objects should the whole world use?* It chose seven — one for each independent dimension of physical reality (length, mass, time, electric current, temperature, amount of substance, luminous intensity). Every other unit in physics — newtons, joules, volts, pascals — is one algebraic combination of these seven. You can always unpack any unit back to its seven ingredients. This unpacking is called dimensional analysis, and it is one of physics's most powerful self-checks.
+
+The stakes are real: in 1999, NASA's Mars Climate Orbiter crashed because one team measured thrust in pound-force-seconds and another team expected newton-seconds. Same numbers. Different reference objects. $327 million gone. Unit literacy is not a bureaucratic formality.
 
 ## Mental Models
 
-- **Beginner (arriving)**: units are labels teachers put on numbers, interchangeable
-  names, no deep structure. "5 km/h" and "5 m/s" mean the same kind of thing —
-  both are "speed" — the number just changes when you switch labels. There is no
-  sense that the quantity itself is being re-expressed in a different count-of-unit.
-- **Intermediate**: units are specific, not interchangeable, and you have to be
-  consistent in one system. The seven base units are a set to memorise. Derived
-  units "come from" the base units somehow, but the derivation feels like a
-  definition, not a logical consequence.
-- **Advanced**: every physical quantity is a ratio — "how many of this reference
-  object fits into the thing I'm measuring." The SI system chose seven independent
-  dimensions; every other unit in physics is one algebraic combination of them.
-  Converting is multiplying by 1 (in a clever form), never altering the physical
-  quantity itself.
-- **Expert**: the seven base dimensions reflect the structure of physical law (mass,
-  length, time, current, temperature, amount, luminous intensity). This particular
-  choice is a deliberate minimisation — fewer independent dimensions would either
-  lose expressive power or force constants to carry units (which they still sometimes
-  do, flagging where our theory has arbitrary choices). The 2019 SI redefinition
-  (fixing h, e, k, N_A to exact values) shows that units are ultimately defined by
-  physical constants, not artefacts.
-- **Versioning notes**: the intermediate model — "units as labels to memorise" — is
-  entirely correct for this concept's required Bloom level (remember/understand).
-  The advanced model is earned over the whole first measurement domain; install the
-  beginner→intermediate transition here. Explicitly say at the intermediate stage:
-  "this model will evolve — there's a deeper idea we'll reach once you've practised
-  with more quantities."
+- **Beginner (arriving)**: units are labels teachers put on numbers — interchangeable
+  names that only affect the number superficially. "5 km/h" and "5 m/s" both mean
+  "speed" — the student doesn't sense that the number MUST change when the unit
+  changes, or that the two numbers represent the same physical reality. Units feel
+  like optional annotation, not constitutive of the measurement.
+- **Intermediate (target for this concept)**: a unit is a chosen reference object.
+  "60 km/h" means "this speed is 60 times the speed of something that travels one
+  kilometre in one hour." Change the reference object (to m/s), and the count must
+  change (to 16.7) — but the physical speed is identical. The seven SI base units
+  are seven agreed reference objects, one for each independent dimension of reality.
+  Derived units are combinations: newton = kg·m/s² (mass × length / time²). This
+  isn't memorisation — it's algebra.
+- **Advanced**: every physical quantity is a ratio of "how many of this reference
+  object fits into what I'm measuring." Conversion is multiplying by 1 in a clever
+  form — (1000 m / 1 km) equals exactly 1, so multiplying by it changes the count
+  without altering the physical quantity. Dimensional analysis (tracking units as
+  algebra) becomes a self-checking tool: if the units don't work out, the physics
+  doesn't either.
+- **Expert**: the seven base dimensions reflect the structure of physical law. The
+  choice is a deliberate minimisation — fewer would lose expressive power; more
+  would introduce redundancy. The 2019 SI redefinition (fixing h, e, k, Nₐ to exact
+  values) shows that units are ultimately defined by physical constants, not
+  artefacts — the kilogram now is what it is because Planck's constant is exactly
+  what it is.
+- **Versioning note**: install the beginner→intermediate transition here. Explicitly
+  flag at the intermediate stage: "this model will deepen — once you've practised
+  with more quantities, you'll see why 'multiplying by 1' is the most powerful
+  idea in measurement."
 
 ## Why Students Fail
 
@@ -125,31 +131,50 @@ internalised the symbol as a distinct identity or merely a letter.
   the radian as a base unit).
 - *Detection probe*: "List all seven SI base units. Stop at seven." — count them;
   note which is missing or spuriously added.
-- *Recovery*: the mnemonic "My Kindly Teacher Approves My Little Claim" (mass /
-  kelvin / time / ampere / mole / luminous intensity / candela — mnemonic with
-  initials m, K, t, A, mol, cd, lm — adjust for local mnemonic tradition). Pin
-  "seven" explicitly: this is a design decision of the system.
+- *Recovery*: group by physical domain — this is more memorable than a mnemonic.
+  Three mechanical base units (the MKS trio, familiar from everyday science):
+  metre (m) for length, kilogram (kg) for mass, second (s) for time.
+  Plus four specialist additions: ampere (A) for electric current, kelvin (K) for
+  temperature, mole (mol) for amount of substance, candela (cd) for luminous
+  intensity. Remember it as "3 mechanical + 4 specialist = 7 total." If a phrase
+  helps: "**M**any **K**ind **S**cientists **A**re **K**een on **M**easuring
+  **C**arefully" — metre, kilogram, second, ampere, kelvin, mole, candela. Note
+  that K appears twice (kilogram and kelvin) and M appears twice (metre and mole) —
+  this is deliberate: those pairs are the ones students most often confuse.
+- *Pin "seven" explicitly*: this is a deliberate design decision, not a natural
+  constant. There are exactly seven because physicists chose the minimum set of
+  independent dimensions needed to describe all physical law. Memorise the number,
+  not just the list.
 - *Verification*: from-memory list (all seven, no extras, correct names + symbols
   + quantities measured).
 
 ## Analogies
 
-- **Best analogy**: the seven base units are like the three primary colours — you
-  can mix them to get every other colour (derived unit), but you cannot reduce them
-  further. Just as "orange = red + yellow" is a derivation, not a definition,
-  "newton = kg·m/s²" is a derivation: the newton is what a kilogram-metre-per-
-  second-squared IS.
-  *Breaking point*: the colour analogy suggests only three primaries; SI has seven.
-  Don't extend the colour mixing metaphor past the "primaries → everything else" idea.
-- **Alternative**: the alphabet analogy — 26 letters combine to form every English
-  word; 7 base units combine to form every physics unit.
-  *Breaking point*: letter combinations are arbitrary convention; unit combinations
-  are forced by the definitions of the physical quantities. The analogy works for
-  "small set → large vocabulary" but not for "why these seven specifically."
-- **Anti-analogy to avoid**: "units are just different names for the same thing,
-  like Celsius and Fahrenheit." This installs the M1 misconception actively — both
-  scales measure temperature but they are NOT the same scale and DO NOT name the
-  same numbers. Avoid entirely.
+- **Best analogy (currency — use this first)**: £5 and approximately $6.30 are the
+  same amount of purchasing power — different numbers, different units, same
+  underlying reality. Nobody thinks £5 "becomes" $6.30 when you cross the Channel;
+  the money is the same, only the counting unit changed. Unit conversion works
+  identically: 20 m/s and 72 km/h are the same speed. The physical reality is
+  identical; the counting unit changed. Converting is not calculating a new answer —
+  it is RE-EXPRESSING the same answer.
+  *Breaking point*: exchange rates fluctuate; unit conversion factors are exact,
+  fixed constants. Use the analogy for grasping "same reality, different count" but
+  not for implying conversion is approximate.
+- **Secondary analogy (primary colours)**: the seven base units are like three
+  primary colours — you mix them to get every other colour (derived unit), but you
+  cannot reduce them further. "Orange = red + yellow" is a derivation; "newton =
+  kg·m/s²" is a derivation: the newton is what a kilogram-metre-per-second-squared
+  IS.
+  *Breaking point*: colours have three primaries; SI has seven. Don't extend past
+  "small set → everything else."
+- **Tertiary (alphabet)**: 26 letters combine to form every English word; 7 base
+  units combine to form every physics unit.
+  *Breaking point*: letter combinations are arbitrary; unit combinations are forced
+  by the physical definitions. Works for "small set → large vocabulary" only.
+- **Anti-analogy to avoid**: "units are just different names for the same thing, like
+  Celsius and Fahrenheit." This actively installs M1 — Celsius and Fahrenheit are NOT
+  the same scale, do NOT name the same numbers, and are NOT related by simple
+  multiplication (unlike SI unit conversions). Avoid entirely.
 
 ## Demonstrations
 
@@ -185,21 +210,39 @@ correctly) → consolidation (from-memory list, timed).
 ## Teaching Sequence
 
 From the dispatch library (Delivery 2 §6):
-1. **Tell → show → apply** (highest fit): this is definitional/conventional content.
-   Tell: the seven base units and their symbols. Show: how derived units are built.
-   Apply: classify quantities, write symbols in equations.
-2. **Error exposure** (high fit): the Mars Orbiter demonstration drives home WHY
-   the convention matters. Exposure to real-world unit failures is the best
-   motivator for taking symbols seriously.
-3. **Retrieval practice** (high fit): flash-card style — given quantity, produce
-   unit name + symbol; given symbol, produce quantity + name. The Bloom level is
-   "remember" — retrieval is exactly the right practice form.
+
+**Step 0 — Create the need (before listing a single unit)**
+Ask: "NASA spent $327 million on a Mars probe. It crashed on arrival. Why?"
+Let the learner guess freely. After they answer, reveal: "Both software teams were
+calculating correctly — but one team measured thrust in pound-force-seconds and the
+other expected newton-seconds. Same numbers. Different units. Spacecraft destroyed."
+Then ask: "What would have caught this?" Wait. The answer is unit analysis. Now the
+learner has just discovered WHY a universal unit system exists — before you have said
+the word "SI." The content that follows is the SOLUTION to a problem they now own.
+
+**Step 1 — Tell → show → apply** (definitional/conventional content):
+Tell: the seven base units, grouped as "3 mechanical (MKS) + 4 specialist." Show:
+how derived units unpack — newton = kg·m/s² (what does each piece mean?); joule =
+kg·m²/s². Apply: classify 10 physical quantities as base or derived; write all
+symbols with correct capitalisation.
+
+**Step 2 — Error exposure / worked conversion**:
+Show the 72 km/h → m/s conversion with every unit tracked at every line:
+72 km/h × (1000 m / 1 km) × (1 h / 3600 s) = 20 m/s.
+Ask: "What did I multiply by?" Answer: 1 (twice — each conversion factor equals
+exactly 1). The physical quantity didn't change; the counting unit did. This is the
+deepest insight of measurement: converting is always multiplying by 1.
+
+**Step 3 — Retrieval practice**:
+From session 2 onward: quantity → unit name + symbol; symbol → quantity + name.
+Rotate through all seven across weeks 1–2. Stop when the learner produces all seven
+without hesitation. This is the Bloom "remember" target — retrieval is the
+correct practice form.
 
 Actions that DON'T fit:
-- **Guided discovery**: see Discovery section — conventions cannot be discovered,
-  only told and then practised.
-- **Debate / argumentation**: no productive controversy exists here at this level.
-  Reserve argumentation for concepts with genuine physical debates.
+- **Guided discovery**: conventions cannot be discovered — the metre is defined, not
+  derived from first principles. See Discovery Questions section.
+- **Debate**: no productive controversy exists at this level.
 
 
 ## Tutor Actions
@@ -229,23 +272,38 @@ foundational level).
 
 ## Voice Teaching Notes
 
-*How it sounds when taught well*: slow and deliberate when listing the seven base
-units; the SYMBOL is always spoken directly after the name ("ampere — capital A");
-the concept is embedded in the Mars Orbiter story before any list is produced, so
-learners are curious rather than passive.
+*How it sounds when taught well*: the Mars Orbiter story comes FIRST — before the
+word "SI" is spoken. The teacher is curious, not declarative. The list of seven units
+arrives as the punchline to a problem the student now cares about. Symbols are always
+spoken aloud immediately after the name ("ampere — capital A, not lowercase a").
+Pace slows to a stop on the unit-conversion insight.
+
+*Scripted opening move (verbatim)*: "Before I tell you what SI units are — a
+question. NASA spent $327 million on a Mars probe. It was supposed to orbit Mars.
+Instead it crashed. Why? I'll give you thirty seconds." [Wait.] "Here's what
+actually happened..." [Mars Orbiter story.] "So. What would have caught this?" [Wait
+for "units".] "Exactly. Let me show you the system that exists precisely so this
+never happens again."
 
 *Load-bearing sentence to slow down on*: "Every other unit in physics — newtons,
 joules, watts, pascals — is just a name for a specific combination of these seven.
-If you know the seven, you can derive every other unit." Read this once, pause, then
-ask: "what does that mean for energy units? For pressure units?"
+If you know the seven, you can derive every other unit." Pause. Then: "What does
+that mean for energy? For pressure? Let's check." Then unpack joule = kg·m²/s²
+together.
 
-*What to listen for*: the learner says "kilogram of force" or "kg of weight" → M2
-active; the learner drops the unit mid-sentence ("velocity is 5") → M1 active; the
-learner writes "sec" or "amp" instead of "s" and "A" → M3 active.
+*The multiplying-by-one moment*: after writing the 72 km/h conversion, ask: "What
+did I actually multiply the original number by?" Most learners say "1000, then
+divided by 3600." Rewrite it: "(1000 m / 1 km) is exactly equal to 1. So is
+(1 h / 3600 s). I multiplied by 1, twice. The SPEED didn't change. Only the
+measuring stick changed." Let this land before moving on.
 
-*Capitalisation stakes*: "k" (kilo) vs "K" (kelvin) will create errors in
-thermodynamics; "m" (milli OR metre) vs "M" (mega) — context-dependent ambiguity
-that only explicit teaching removes.
+*What to listen for*: "kilogram of force" or "kg of weight" → M2 active; dropping
+the unit mid-sentence ("velocity is 5") → M1 active; writing "sec", "amp", or
+"n" instead of "s", "A", "N" → M3 active; listing six or eight units → M4 active.
+
+*Capitalisation stakes*: "k" (kilo, ×10³) vs "K" (kelvin) — one letter apart, two
+completely different meanings. "m" (milli OR metre) vs "M" (mega) — context-
+dependent ambiguity. These must be explicitly taught, not assumed.
 
 ## Assessment Signals
 
@@ -389,3 +447,4 @@ units as the root of the entire physics measurement domain.
 ## Version History
 
 - **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.
+- **v1.1** (2026-07-29): Teaching quality upgrade. Core Understanding rewritten from Wikipedia-bland to visceral insight (unit = chosen reference object; Mars Orbiter stakes). Mental Models beginner/intermediate levels clarified with "counting reference objects" framing. Analogies: currency added as best first analogy; primary-colours demoted to secondary. M4 recovery: broken mnemonic ("My Kindly Teacher…", wrong initials, wrong terminal unit) replaced with 3-mechanical+4-specialist grouping + correct "MKS/AKMC" phrase. Teaching Sequence: Step 0 (need-creation via Mars Orbiter question-first) inserted before content. Voice Teaching Notes: scripted opening move added; multiplying-by-one moment scripted explicitly.
