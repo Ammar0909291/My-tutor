@@ -28,7 +28,18 @@ The learner can:
 
 ## Core Understanding
 
-_Thermal expansion describes how solids, liquids, and gases change dimensions with temperature._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+The Eiffel Tower is 15 centimetres taller in summer than in winter. No construction work happened — it is the same steel structure that expanded as it warmed. Every material, with the notable exception of water below 4°C, expands when heated and contracts when cooled. This is thermal expansion, and it is not a small effect — it must be accounted for in bridges, railways, pipelines, precision instruments, and engine components.
+
+The physical reason: when a material heats up, its particles vibrate more energetically. In a solid, atoms are bonded to each other in a lattice, but they don't simply vibrate symmetrically — the interatomic potential is asymmetric (the bond resists compression more than extension), so on average, hotter atoms sit slightly farther apart. More energy → larger average separation → larger macroscopic dimensions.
+
+The quantitative relationships for a solid:
+- Linear expansion: ΔL = αL₀ΔT — length changes proportionally to original length and temperature change; α is the linear expansion coefficient (different for each material, typically ~10⁻⁵ to 10⁻⁶ per °C)
+- Area expansion: ΔA = 2αA₀ΔT — area coefficient is approximately twice α
+- Volume expansion: ΔV = γV₀ΔT — volume coefficient γ ≈ 3α (volume scales as the cube of linear dimension)
+
+Water is the critical exception: it contracts between 4°C and 0°C as it cools, reaching maximum density at 4°C. Ice (solid water) is less dense than liquid water — which is why ice floats. This anomaly has enormous consequences: lakes freeze from the top down rather than the bottom up, preserving aquatic life through winter. Most other substances contract continuously on cooling and their solid form sinks in their liquid form.
+
+Thermal expansion explains bimetallic strips (two metals with different α bonded together: they bend when heated, used in thermostats and circuit breakers), expansion joints in bridges (gaps that allow the deck to expand without buckling), and the pop of a car tyre in summer heat.
 
 ## Mental Models
 

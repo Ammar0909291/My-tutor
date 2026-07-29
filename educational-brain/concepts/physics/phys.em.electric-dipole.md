@@ -29,7 +29,15 @@ The learner can:
 
 ## Core Understanding
 
-_An electric dipole consists of two equal and opposite charges separated by a small distance; it experiences torque in a uniform field._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+A water molecule has a positive end (the hydrogen atoms) and a negative end (the oxygen atom). No net charge — if you count all the protons and electrons, they balance exactly. And yet water is polarised: there is a separation of positive and negative charge within the molecule. This is an electric dipole: equal and opposite charges separated by a distance.
+
+A dipole is characterised by its dipole moment p = qd — the product of the charge magnitude q and the separation distance d, pointing from the negative charge to the positive charge. The direction matters: the moment vector tells you which end is positive.
+
+In a uniform electric field, a dipole experiences no net force (equal and opposite forces on each charge cancel). But it does experience a torque: the field pulls the positive charge one way and the negative charge the other, and since they're separated, this creates a rotational effect. The torque is τ = p × E, and it acts to align the dipole with the field. This is why compass needles align with magnetic fields, why polar molecules align in electric fields, and why microwave ovens work: microwave photons carry an oscillating electric field that drives water molecules' dipoles to rotate millions of times per second — the rotation is the friction that generates heat.
+
+In a non-uniform field, a dipole does experience a net force — stronger field pulls the charges unequally. This is how electrostatic precipitation works: non-uniform fields attract polarised particles regardless of whether they have net charge.
+
+Dipole fields fall off faster than monopole (single charge) fields: a dipole's field decreases as 1/r³ rather than 1/r². At large distances, the positive and negative contributions nearly cancel, leaving only the small difference. This is why molecules with dipole moments interact over shorter range than ions with net charge.
 
 ## Mental Models
 

@@ -21,9 +21,19 @@ See Blueprint (`docs/curriculum/blueprints/phys.mech.newtons-third-law.md §1 Le
 
 ## Core Understanding
 
-For every action force there is an equal and opposite reaction force acting on a different body.
+If forces always come in equal and opposite pairs, how does anything ever accelerate? This is the question that reveals whether a learner truly understands Newton's Third Law — or has only memorised it.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+The law: when object A exerts a force on object B, object B simultaneously exerts an equal and opposite force on object A. These two forces are equal in magnitude, opposite in direction, and act on different objects. They always exist simultaneously and always disappear simultaneously. You cannot have one without the other.
+
+The resolution to the "nothing should accelerate" confusion: Newton's Third Law pairs act on different objects; Newton's Second Law applies to the forces on one object. When you push a box, the box pushes back on you with equal force — but the box accelerates forward and you stay still (mostly) because the net force on the box is your push minus friction, while the net force on you includes the box's push plus your legs' friction with the floor. The two objects experience different net forces even though each force has an equal-and-opposite partner somewhere.
+
+Three specific examples of Third Law pairs that confuse learners:
+
+The book on the table: the book pushes down on the table with its weight (gravitational force), and the table pushes up on the book with a normal force. These look like a Third Law pair but are not — they happen to cancel because the book is in equilibrium, but they are different TYPES of forces (gravity and contact). The actual Third Law pairs are: Earth's gravity pulls book down ↔ book's gravity pulls Earth up; table pushes book up ↔ book pushes table down.
+
+The rocket in space: "there's nothing to push against" is the misconception. The rocket pushes exhaust gas backward; exhaust gas pushes rocket forward. The reaction is not with the environment — it is with the exhaust.
+
+Walking: you push backward on the ground with your foot; the ground pushes forward on you. You accelerate forward because of the ground's push on you, not because of your own push — you cannot push yourself forward directly.
 
 ## Mental Models
 

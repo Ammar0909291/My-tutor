@@ -24,9 +24,17 @@ See Blueprint (`docs/curriculum/blueprints/phys.mech.newtons-second-law.md §1 L
 
 ## Core Understanding
 
-The net force on a body equals the product of its mass and acceleration: F = ma.
+Newton's Second Law is the engine at the centre of classical mechanics: it transforms physics from describing how objects move (kinematics) to explaining why they move as they do (dynamics). The law is F = ma — net force equals mass times acceleration. Read in the other direction, a = F/m — acceleration equals net force divided by mass. That reading is more revealing: force is the cause, acceleration is the effect, and mass is the resistance.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+Three consequences that non-obvious and must be stated explicitly:
+
+First: F = ma applies to the NET force — the vector sum of all forces acting. If a 10 N force pushes right and friction exerts 3 N left, the net force is 7 N right, and acceleration is 7/m to the right. Applying F = ma to one individual force (rather than the net) is the most common error in dynamics problems.
+
+Second: F and a are both vectors, and they must point in the same direction. If the net force is north, acceleration is north — not in the direction of current velocity. A car braking (force south) while moving north has southward acceleration — it is slowing down. A car braking while moving south has southward force and southward acceleration — it is speeding up. Force direction and velocity direction are independent.
+
+Third: F = ma is valid only in an inertial reference frame. In a non-inertial frame (an accelerating car, a rotating carousel), objects appear to accelerate without net force — fictitious forces (centrifugal force, Coriolis force) appear in the equations. Newton's Second Law, applied naively in a non-inertial frame, gives wrong predictions.
+
+The equation also defines what we mean by "mass": it is the ratio of net force to produced acceleration. Twice the mass means twice the force needed to produce the same acceleration. This is inertial mass — distinct in concept from gravitational mass (the "heaviness" that determines gravitational force), though experiment shows the two are equal to extraordinary precision.
 
 ## Mental Models
 

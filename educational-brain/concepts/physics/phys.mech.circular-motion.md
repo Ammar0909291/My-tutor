@@ -21,9 +21,13 @@ See Blueprint (`docs/curriculum/blueprints/phys.mech.circular-motion.md §1 Lear
 
 ## Core Understanding
 
-Uniform circular motion involves constant speed along a circular path with centripetal acceleration directed toward the centre.
+Tie a ball on a string and swing it in a horizontal circle. You feel the string pulling on your hand — you are exerting a force on the ball through the string. Stop pulling (let go) and the ball flies off in a straight line, tangent to the circle at the moment of release. This demonstrates Newton's First Law: the ball's natural state is straight-line motion. The string is the thing that keeps forcing it away from the straight line — continuously redirecting it inward.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+This is the key insight: circular motion at constant speed requires a continuous inward force, even though the speed is not changing. The direction is changing at every instant, and changing direction means changing velocity (velocity is speed plus direction), which means acceleration, which requires a force. This centripetal acceleration always points toward the centre of the circle, and its magnitude is a = v²/r.
+
+The centripetal force F = mv²/r is not a new type of force — it is simply the label for whatever real force is providing the inward pull. For a ball on a string: the tension IS the centripetal force. For a planet orbiting the Sun: gravity IS the centripetal force. For a car on a circular road: friction between tyres and road IS the centripetal force. For charged particles in a magnetic field: the magnetic force IS the centripetal force. Asking "where is the centripetal force?" always means asking "which real force is providing the inward pull?"
+
+The common error is the "centrifugal force" confusion: the feeling of being pushed outward in a turning car. This is not a real force pushing you out — it is inertia. Your body wants to go straight; the car is pushing you inward (the seat and door exert a centripetal force on you). From inside the car (a non-inertial frame), it feels like something is pushing you outward. From an inertial frame outside, you are simply being pushed inward while wanting to go straight. Centrifugal force is a fictitious force that appears in the rotating frame's description; it does not appear in a proper inertial-frame analysis.
 
 ## Mental Models
 
