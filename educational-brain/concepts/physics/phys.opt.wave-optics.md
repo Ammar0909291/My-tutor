@@ -132,7 +132,15 @@ The discovery sequence: paradox (shadow has structure) → failure of geometric 
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **CONTRAST-CASES** — geometric optics (ray) vs. wave optics: "When does treating light as a ray fail?" Answer: when the aperture or obstacle is comparable in size to the wavelength. Geometric optics predicts a sharp shadow at a pinhole; wave optics predicts diffraction rings. The condition λ << obstacle size separates the two regimes.
+
+2. **WORKED-EXAMPLE** — single-slit diffraction: first dark fringe at sinθ = λ/a. Three traces: (a) find θ for red vs. blue light through same slit (blue diffracts less — higher frequency, shorter λ). (b) Find minimum slit width to barely resolve two stars 1 arcsecond apart using the Rayleigh criterion: θ_min = 1.22 λ/D. (c) Apply to human eye: D ≈ 5 mm → minimum angular resolution.
+
+3. **MISCONCEPTION-PROBE M2** — "Diffraction only happens when light goes through a slit." Expected wrong: true. Correct: diffraction happens around any edge, any aperture, any obstacle when the size is comparable to λ. The reason we don't see it around doorways is that visible light (λ ~ 500 nm) is far smaller than the door (1 m) — geometric optics holds. Try with radio waves (λ ~ 1 m) and the diffraction around a door is significant.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "A telescope with a 10 cm aperture observes at λ = 550 nm. What is its angular resolution limit (Rayleigh criterion)? A 10 m telescope? By what factor does the larger telescope improve resolution?" (Tests the 1.22 λ/D formula and the proportional improvement — critical for understanding why large telescopes are built.)
 
 ## Voice Teaching Notes
 

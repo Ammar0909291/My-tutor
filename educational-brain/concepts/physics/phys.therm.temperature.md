@@ -126,7 +126,15 @@ The particle model of temperature is not intuitive and cannot be re-derived from
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **CONCRETE-THEN-ABSTRACT** — "Hold a metal spoon and a wooden spoon left in a cold room. Which feels colder? Are they the same temperature?" (They are — same room temperature. The spoon that feels colder is metal because it conducts heat away faster. Temperature ≠ heat flow rate.) This separates temperature from thermal sensation before any definition.
+
+2. **MISCONCEPTION-PROBE M1** — "Describe what is physically different at the molecular level between a glass of water at 20°C and one at 80°C." Expect: vague answers about "more heat" without mentioning kinetic energy. Correction: temperature is the average translational kinetic energy of the molecules — faster random motion at 80°C.
+
+3. **WORKED-EXAMPLE** — three-scale conversion: 100°C → K (add 273.15) → °F (multiply by 9/5, add 32). Then the inverse: body temperature 98.6°F → °C. Make the formulas algebraic transformations, not memorised lists.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Absolute zero is −273.15°C. What is it in Kelvin? What does it physically mean? Why can't you go colder?" (Tests the molecular-energy interpretation, not just unit conversion.)
 
 ## Voice Teaching Notes
 

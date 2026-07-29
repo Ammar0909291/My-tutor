@@ -135,7 +135,15 @@ The physical picture (wavefront compression) is the discovery. The formula is th
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **PREDICTION-BEFORE-DEMO** — "An ambulance siren approaches you and then passes. Describe what you hear." (Higher pitch approaching, lower as it recedes.) "Is the siren actually changing pitch?" (No.) Let learner articulate why — then the Doppler formula is the quantification of their intuition.
+
+2. **WORKED-EXAMPLE** — three traces: (a) source moving toward stationary observer: f_obs = f_s × v/(v − v_s). (b) Source moving away: v + v_s in denominator. (c) Observer moving toward stationary source: f_obs = f_s × (v + v_o)/v. Keep the sign convention consistent (numerator: observer, denominator: source).
+
+3. **MISCONCEPTION-PROBE M2** — "The source is stationary and the observer moves toward it. Is the observed frequency the same as when the source moves toward a stationary observer at the same relative speed?" Expected wrong: yes (same relative motion). Correct: no — the two cases give different formulas and different observed frequencies. Relative motion is not the only thing that matters; which one is moving relative to the medium matters too.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "A police car with a 700 Hz siren moves at 30 m/s toward a stationary wall (v_sound = 340 m/s). What frequency does the wall 'hear'? The wall reflects the sound — what frequency does the driver hear from the reflection?" (Tests source-moving-toward-stationary-observer, then observer-moving-toward-stationary-source in sequence.)
 
 ## Voice Teaching Notes
 

@@ -175,7 +175,15 @@ Students sometimes reason: "stronger magnet → stronger attraction, just like h
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **CONTRAST-CASES** — three material types side-by-side: diamagnetic (weakly repelled — copper, bismuth), paramagnetic (weakly attracted — aluminium, oxygen), ferromagnetic (strongly attracted, retains magnetism — iron, nickel, cobalt). "What is physically different inside each material?" Diamagnetic: all spins paired, no net moment; paramagnetic: unpaired spins, but randomly oriented; ferromagnetic: domains of aligned spins.
+
+2. **GUIDED-DISCOVERY** — "You have two identical iron bars, A and B. One is magnetised, one is not. They both attract to each other at both ends. How can you tell which is magnetised and which isn't — using only the bars themselves?" Correct: suspend each bar's midpoint. The magnetised one has no poles at its centre; the unmagnetised one will be attracted equally to both ends of the other bar (induced magnetisation). The only diagnostic is the middle-point test.
+
+3. **MISCONCEPTION-PROBE M2** — "If you break a bar magnet in half, you get a north-half and a south-half with no south and north respectively." Expected wrong: true. Correct: each half is a complete dipole with its own N and S poles. Magnetic monopoles do not exist — break the magnet as many times as you like, you never isolate a pole.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Above the Curie temperature, ferromagnets become paramagnetic. Explain what physically changes at the Curie temperature in terms of domain structure and thermal energy." (Tests the domain → disordered transition as the thermal energy exceeds the alignment energy of the magnetic domains.)
 
 ## Voice Teaching Notes
 

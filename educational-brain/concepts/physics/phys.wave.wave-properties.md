@@ -128,7 +128,15 @@ For the "medium determines speed" principle, present: same source (same f) in tw
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **PREDICTION-BEFORE-DEMO** — "You create a wave on a rope by shaking it. If you shake faster (higher frequency), what happens to wavelength and wave speed?" Let learner commit. Then: v = fλ — at fixed medium speed, higher frequency means shorter wavelength; speed doesn't change (it's fixed by the medium). This surprises most learners.
+
+2. **WORKED-EXAMPLE** — three traces: (a) given f = 440 Hz, v = 340 m/s in air — find λ. (b) Given λ and v — find f and T = 1/f. (c) Given two snapshots (different wave patterns) — identify which has higher f, higher λ, higher v.
+
+3. **MISCONCEPTION-PROBE M2** — "A sound wave travels from air into water (higher density). Does the wave slow down or speed up? Does the frequency change?" Expected wrong: slows down (incorrect — water is denser but stiffer; sound actually speeds up in water). Correct: v increases in water; f is fixed by the source; λ changes to maintain v = fλ. Frequency never changes when a wave crosses a medium boundary.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Two tuning forks vibrate at 440 Hz and 880 Hz in the same air. Which produces a longer wavelength? Which wave travels faster?" (Tests the v = fλ relationship and the fixed-medium-speed principle in parallel.)
 
 ## Voice Teaching Notes
 

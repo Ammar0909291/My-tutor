@@ -175,7 +175,15 @@ In colloquial use, "hotter = more energy." This is true within a phase for an id
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **GUIDED-DISCOVERY** — "You compress a gas in a cylinder with an insulating piston (no heat in or out). Does the temperature of the gas rise, fall, or stay the same?" Let learner reason. (Rises — work done ON the gas increases internal energy, which increases temperature.) Then: "Now you let the gas expand against a load, pushing the piston out. What happens to temperature?" Makes ΔU = Q − W operational from two directions.
+
+2. **MISCONCEPTION-PROBE M2** — "A gas absorbs 500 J of heat and simultaneously does 200 J of work on its surroundings. What is ΔU?" Expected wrong: 700 J (adding both). Correct: ΔU = Q − W = 500 − 200 = 300 J. The sign of W (work done BY the gas) reduces internal energy, not increases it.
+
+3. **WORKED-EXAMPLE** — three first-law traces: (a) Q positive, W = 0 (isochoric, constant volume). (b) Q = 0, W negative (adiabatic compression). (c) Cyclic process — sum ΔU over the cycle = 0, so net Q = net W. Makes the law visible in all three directions.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Why does a bicycle pump get warm when you inflate a tyre quickly? Identify each term in ΔU = Q − W." (Tests application: work done on gas, near-adiabatic rapid compression, internal energy rise → temperature rise.)
 
 ## Voice Teaching Notes
 

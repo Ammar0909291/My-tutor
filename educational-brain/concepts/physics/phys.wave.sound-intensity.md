@@ -131,7 +131,15 @@ The discovery sequence: enormous range problem → linear scale fails → logari
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **CONCRETE-THEN-ABSTRACT** — "Hold a phone 0.5 m away playing music at 70 dB. You walk to 1 m away. How much quieter does it seem?" (Not half — inverse-square law: intensity drops by factor 4 at double the distance.) Make the inverse-square spreading concrete before the decibel formula.
+
+2. **WORKED-EXAMPLE** — two traces: (a) I = P/(4πr²) for a point source — find I at r = 2 m, then at r = 4 m. (b) dB calculation: β = 10 log₁₀(I/I₀). Show that doubling I adds only 3 dB; multiplying I by 10 adds 10 dB. The log scale is the key non-intuition.
+
+3. **MISCONCEPTION-PROBE M1** — "A sound of 80 dB and a sound of 80 dB are combined. What is the total level?" Expected wrong: 160 dB. Correct: intensities add linearly (double I), so the level increases by 3 dB → 83 dB. The decibel scale is logarithmic, not linear.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "The threshold of pain is 120 dB. The threshold of hearing is 0 dB. How many times more intense is the pain threshold?" (Tests the log relationship: 10^12 — tests whether the learner can reverse the dB formula rather than just apply it forward.)
 
 ## Voice Teaching Notes
 

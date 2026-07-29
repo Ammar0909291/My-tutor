@@ -124,7 +124,15 @@ Ask: "You already know that in any wave, the medium's particles don't travel for
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **PHYSICAL-MANIPULATION** — rope wave: learner shakes one end horizontally. "Which direction do the rope particles actually move? Which direction does the disturbance travel?" The key distinction: particle motion is perpendicular to energy travel. Let learner experience this before any definition.
+
+2. **MISCONCEPTION-PROBE M1** — "A transverse wave travels to the right. A crest passes a particular point. Does that point move to the right with the crest?" Expected wrong: yes. Correct: no — the point oscillates up and down (transversely), not in the direction of wave travel. The crest is a pattern, not a moving particle.
+
+3. **GRAPH-INTERPRETATION** — two graphs side-by-side: displacement vs. position (snapshot at one instant) vs. displacement vs. time (one particle's history). "On the position graph, what does the wavelength look like? On the time graph, what does the period look like?" Many learners confuse the two axes.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "EM waves (light, radio) are transverse but travel through vacuum. Water waves look transverse at the surface but are actually elliptical. Rope waves are purely transverse. What is the one thing they all share?" (Tests the defining property: particle motion perpendicular to propagation direction.)
 
 ## Voice Teaching Notes
 

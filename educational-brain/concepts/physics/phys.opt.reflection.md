@@ -131,7 +131,15 @@ The discovery sequence: observe → measure → find pattern (θᵢ = θᵣ from
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **PREDICTION-BEFORE-DEMO** — "You shine a laser at a flat mirror at 30° to the normal. Where does the reflected beam go? Can you catch it with your eye directly?" Let learner draw the diagram, then verify. The geometry of law of reflection (θᵢ = θᵣ, same normal) must be constructed from scratch, not recalled from memory.
+
+2. **WORKED-EXAMPLE** — two traces: (a) plane mirror: image location, orientation, and magnification (virtual, erect, same size — derive from geometry). (b) Multiple reflections: two plane mirrors at 90° — count the images and trace the ray path. Makes reflection a geometric construction tool.
+
+3. **MISCONCEPTION-PROBE M1** — "The image in a mirror is behind the glass — the light travels through the mirror to reach it." Correct: the image is virtual — no light is actually behind the mirror. The image location is where the reflected rays appear to diverge from when extended backward. The light never crosses the mirror surface.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "A person 1.8 m tall stands 2 m from a plane mirror. How tall must the mirror be to show their full reflection? Does it matter how far they stand from the mirror?" (Tests the geometry result: minimum mirror height = half the person's height, independent of distance — a non-obvious result that validates the angle-equality law.)
 
 ## Voice Teaching Notes
 

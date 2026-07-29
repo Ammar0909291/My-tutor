@@ -150,7 +150,15 @@ The discovery sequence matches Faraday's 1831 approach and is highly motivating.
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **PREDICTION-BEFORE-DEMO** — "You push a bar magnet into a coil of wire. Does an EMF appear? What determines the direction of the induced current?" Let learner guess. Then: "Now pull it out — does the direction reverse?" Establish the flux-change → EMF connection physically before Faraday's law.
+
+2. **WORKED-EXAMPLE** — three traces: (a) rectangular coil moving at constant speed through uniform B: calculate EMF = BLv. (b) Coil rotating in uniform B: EMF = NBAω sin(ωt) — the AC generator derivation. (c) A changing current in a primary coil inducing EMF in a secondary (mutual inductance basis).
+
+3. **MISCONCEPTION-PROBE M1** — "A coil is held stationary in a strong magnetic field. Is there an induced EMF?" Expected wrong: yes (strong field → big induction). Correct: no — EMF requires changing flux (Faraday: ε = −dΦ/dt). A static field, however strong, produces zero EMF if the flux is constant.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "A square coil (50 turns, 0.1 m side) rotates at 60 rev/s in a 0.5 T field. Find the peak EMF." (Tests the rotating-coil AC generator formula — requires identifying ω = 2π×60, A = 0.01 m², N = 50, and computing the product.)
 
 ## Voice Teaching Notes
 

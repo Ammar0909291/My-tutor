@@ -135,7 +135,15 @@ Never apply RHR-1 to force problems or RHR-2 to field-around-wire problems.
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **PREDICTION-BEFORE-DEMO** — "A positive charge moves to the right. A magnetic field points into the page. What direction is the force?" Let learner use the right-hand rule (or try to guess). F = qv × B — three mutually perpendicular directions. Confirm: force is upward. Now: "What if the charge is negative?" (Force reverses — downward.)
+
+2. **WORKED-EXAMPLE** — three traces: (a) F = qvB sinθ for various angles (0°: no force; 90°: maximum force; 180°: no force). (b) Circular motion of a charge in a uniform B: qvB = mv²/r → r = mv/qB (cyclotron radius). (c) Hall effect setup — identify which face becomes positive in a given B direction and current direction.
+
+3. **MISCONCEPTION-PROBE M1** — "A magnetic force acts on a moving charge. Does it do work? Does it change the charge's kinetic energy?" Expected wrong: yes. Correct: F is always perpendicular to v (from the cross product); perpendicular force does zero work; therefore KE is unchanged. Magnetic forces change direction, not speed.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "An electron moves at 3×10⁶ m/s perpendicular to a 0.01 T field. Find: (a) the magnetic force magnitude, (b) the radius of its circular path. Why is the path circular rather than spiral?" (Tests the force formula, cyclotron radius, and the work-free nature of the magnetic force.)
 
 ## Voice Teaching Notes
 

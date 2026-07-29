@@ -185,7 +185,15 @@ White light contains all wavelengths. The prism does not add colour — it separ
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **PREDICTION-BEFORE-DEMO** — "White light hits a glass prism. Does it come out as white light on the other side?" (No — spectrum.) "Why does the glass separate the colours?" Let learner think. Then: refractive index depends on wavelength (n is higher for violet, lower for red in glass) — so different colours refract by different amounts.
+
+2. **WORKED-EXAMPLE** — two traces: (a) use Cauchy's formula (qualitative) to show n_violet > n_red → more bending for violet. (b) Rainbow geometry: single raindrop — refraction at entry, internal reflection, refraction at exit, with different angles for each colour → 42° red, 40° violet.
+
+3. **MISCONCEPTION-PROBE M1** — "White light is a mix of different frequencies. After passing through a prism, has the frequency of each colour changed?" Expected wrong: yes (the prism changes them). Correct: frequency does not change when light refracts — only the speed (and hence wavelength) changes. The colour is determined by frequency, which is a property of the source, not the medium.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Why do red stars look red and blue stars look blue? Is it the same type of dispersion as in a prism?" (Tests transfer: no — stellar colour is from the blackbody emission spectrum (different peak λ by temperature), not dispersion. Tests whether learner can distinguish two different phenomena that both involve colour.)
 
 ## Voice Teaching Notes
 

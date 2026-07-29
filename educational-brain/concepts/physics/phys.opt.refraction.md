@@ -131,7 +131,15 @@ The discovery sequence: observe bending → determine direction → derive formu
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **PREDICTION-BEFORE-DEMO** — "A straw in a glass of water appears bent. Is the straw actually bent? Why does it look bent?" Let learner reason. Then extend: "A fish is at the apparent position in the water — where is it actually?" (Deeper than it appears.) Makes refraction a real-world distortion problem before Snell's law.
+
+2. **WORKED-EXAMPLE** — two traces: (a) n₁ sinθ₁ = n₂ sinθ₂ for air→glass and glass→air with numerical values — find the refracted angle and check direction (toward/away from normal). (b) Critical angle calculation: θ_c = arcsin(n₂/n₁) for glass→air.
+
+3. **MISCONCEPTION-PROBE M1** — "The light bends toward the normal when going from less dense to more dense medium. So it always slows down in glass." Correct: the bending-toward-normal rule applies to denser optical media (higher n), and light does slow down. But: "denser" optically (higher n) ≠ denser materially. Diamond is very dense optically (n=2.42) but water is not as optically dense as glass despite being physically between them in mass density.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "A ray of light passes from water (n = 1.33) into glass (n = 1.50) at an incident angle of 40°. Find: (a) the refracted angle, (b) whether it bends toward or away from the normal, (c) what would the critical angle be for light going glass → water?" (Tests Snell's law in both directions and the critical angle formula.)
 
 ## Voice Teaching Notes
 

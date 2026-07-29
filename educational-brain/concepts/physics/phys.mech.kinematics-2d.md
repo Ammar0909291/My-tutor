@@ -134,7 +134,15 @@ This discovery works here because both prerequisites are genuinely understood an
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **COMPONENT-ISOLATION GATE** — before any 2D problem, require the learner to write (v₀ₓ, v₀ᵧ) and (aₓ, aᵧ) explicitly. "You have the initial velocity — 20 m/s at 30°. Before I let you touch a kinematic equation, write down the four numbers that replace it." Do not allow the magnitude to enter any equation.
+
+2. **MISCONCEPTION-PROBE M2** — "Write the kinematic equations for the x and y motion of a projectile in free flight. Both. Go." Check for g appearing in the x equation. If it does: draw the FBD, identify the one force (gravity, pointing −y only), then re-derive aₓ = 0, aᵧ = −g from Newton's second law before continuing.
+
+3. **WORKED-EXAMPLE** — simultaneous-drop demo first (two balls, one pushed sideways, both dropped from same height — same landing time), then a full algebraic trace: ball at 20 m/s, 30°. Step 1: decompose. Step 2: x equation (no g). Step 3: y equation (solve for t). Step 4: substitute t into x. Step 5: reconstruct final speed and angle if asked.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "A ball is thrown horizontally at 12 m/s from a cliff 45 m high. No angle decomposition needed this time — what are aₓ and aᵧ, and how far from the base does it land?" (Tests shared-clock principle without the trigonometry step.)
 
 ## Voice Teaching Notes
 

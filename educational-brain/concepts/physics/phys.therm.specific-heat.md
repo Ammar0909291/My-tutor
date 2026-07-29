@@ -127,7 +127,15 @@ Present D1 (water vs. oil heating demo) without naming the concept. Ask: "Both a
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **PREDICTION-BEFORE-DEMO** — "Equal masses of water and iron, both at 20°C, are each given the same amount of heat. Which reaches a higher temperature first?" Let learner commit. (Iron — specific heat capacity of iron is ~9× less than water.) The demo makes the c formula operational before defining it.
+
+2. **WORKED-EXAMPLE** — three traces: (a) 0.5 kg water from 20°C to 80°C — calculate Q. (b) Same Q to 0.5 kg iron — find ΔT. (c) Mixed: two different metals in thermal contact — find equilibrium temperature using Q_lost = Q_gained. Each trace makes one variable the unknown.
+
+3. **MISCONCEPTION-PROBE M2** — "Which requires more heat: raising 1 kg of water by 10°C, or raising 2 kg of aluminium by 10°C? (c_water = 4200, c_Al = 900 J/kg·K)" Expected wrong: "water, because it has higher specific heat." Correct: Q_water = 42,000 J, Q_Al = 18,000 J — the mass matters alongside c.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Why do coastal cities have milder climates than inland cities at the same latitude?" (Tests transfer: water's high specific heat as a thermal buffer — the physics principle applied to geography.)
 
 ## Voice Teaching Notes
 

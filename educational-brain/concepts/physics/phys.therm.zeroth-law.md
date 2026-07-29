@@ -124,7 +124,15 @@ Present the three-cup demonstration. Ask: "The thermometer tells us the hot cup 
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **GUIDED-DISCOVERY** — "You have three objects: A, B, and C. A and B are in thermal equilibrium. A and C are in thermal equilibrium. Without putting B and C in contact, what can you say about their temperatures?" Let learner reason aloud. The Zeroth Law makes this inference legal — it is not obvious without the law.
+
+2. **MISCONCEPTION-PROBE M1** — "A thermometer reads 37°C when in contact with your hand. What has to be true for that reading to be accurate?" Expected wrong: learner describes the thermometer mechanism without mentioning equilibrium. Correction: the reading is accurate only when thermometer and hand have reached the same temperature — i.e., thermal equilibrium with the thermometer.
+
+3. **ANALOGY-EXTENSION** — thermometers as equilibrium probes: explain why you hold a clinical thermometer for 2–3 minutes (waiting for equilibrium), and why touching it briefly gives a wrong reading (thermometer hasn't reached equilibrium with your body). Make the Zeroth Law visible in everyday measurement practice.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Three objects A, B, C. A is in equilibrium with B. B is in equilibrium with C. You now separate B. Are A and C in equilibrium? How do you know without measurement?" (Forces the learner to state the Zeroth Law as a logical inference, not a definition.)
 
 ## Voice Teaching Notes
 

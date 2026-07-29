@@ -131,7 +131,15 @@ For the quantitative laws (Fourier's, Stefan-Boltzmann), direct instruction is a
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **CONTRAST-CASES** — present three identical-temperature scenarios: (a) metal rod touching hot plate, (b) hot plate in a room with a fan, (c) sun warming the earth across vacuum. "In each case, is there conduction, convection, or radiation? Can you tell?" Work through each: conduction needs contact through matter, convection needs fluid, radiation needs neither.
+
+2. **MISCONCEPTION-PROBE M2** — "On a cold night, wearing a woollen blanket keeps you warm. Does the wool generate heat?" Expected wrong: "yes, wool generates heat." Correct: wool is an insulator (low k), not a heat source — it slows the conductive heat loss from your body. Your body is the heat source.
+
+3. **WORKED-EXAMPLE** — conduction through a window pane: Q/t = kA(ΔT)/L. Double the thickness — halve the heat flow. Double the area — double the heat flow. Make each variable's lever individually visible.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Why does blowing on hot soup cool it faster than letting it sit still? Which mechanism is dominant?" (Tests convective enhancement: moving air removes the thin hot boundary layer, exposing hotter liquid to cooler air continuously — not conduction or radiation.)
 
 ## Voice Teaching Notes
 

@@ -180,7 +180,15 @@ Interference and diffraction arise from the wave's *phase* relationships between
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **PHYSICAL-MANIPULATION** — two polarising filters: hold one up to the light → partially dims. Rotate it → no change. Now add a second one → rotate it → brightness changes from maximum to zero. "What are the two filters doing to the light that causes this?" Establish the orientation-of-oscillation concept physically before the mathematics.
+
+2. **WORKED-EXAMPLE** — Malus's law: I = I₀ cos²θ. Three traces: (a) θ = 0° → I = I₀ (aligned). (b) θ = 90° → I = 0 (crossed). (c) θ = 45° → I = I₀/2. Then: two crossed filters with a third at 45° between them — why does inserting the middle filter increase the output intensity? (Counterintuitive — tests the sequential application of Malus's law.)
+
+3. **MISCONCEPTION-PROBE M2** — "Polarised sunglasses just dim the light uniformly." Correct: they transmit only one polarisation direction, which happens to be oriented horizontally (blocking horizontal glare from reflections off water/roads). They do not simply reduce intensity — they selectively block reflected glare better than absorbed solar light. This is why they help on water more than ordinary tinted lenses.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Brewster's angle for glass-air interface is about 56°. What happens to light reflected at this angle? Can the reflected beam drive a fire through a second piece of glass?" (Tests Brewster's law: reflected light is fully polarised; the second question tests that a fully polarised beam through a cross-polarising glass at Brewster's would be extinguished — connecting to the two-filter demo.)
 
 ## Voice Teaching Notes
 

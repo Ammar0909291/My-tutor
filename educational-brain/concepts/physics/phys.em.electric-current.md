@@ -128,7 +128,15 @@ For the definitions (I = Q/t, drift velocity formula): direct instruction is app
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **CONTRAST-CASES** — conventional vs. electron current: conventional current (+ to −) is historical; electrons actually flow (− to +). But the physics is equivalent — a negative charge moving left is electrically identical to a positive charge moving right. Show both on the same circuit diagram and confirm that all measured quantities (V, R, P) come out the same.
+
+2. **WORKED-EXAMPLE** — three traces: (a) given a wire carrying 2 A — how many electrons pass a cross-section per second? (I = nqAv_d — identify each term). (b) Drift velocity of electrons in a typical copper wire (surprisingly slow: ~mm/s). (c) Why does the light come on instantly if electrons move so slowly? (Disturbance travels at ~c, not the electrons.)
+
+3. **MISCONCEPTION-PROBE M1** — "Current is 'used up' by a resistor — less comes out the other end." Probe: "What is the current in a simple circuit on the output side of a resistor vs. the input side?" Correct: the same. Current is conserved at every junction (Kirchhoff's Current Law). What the resistor uses is energy, not current.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "A wire carries 5 A. The electrons have charge 1.6×10⁻¹⁹ C. How many electrons pass any cross-section in 1 second? In 1 minute?" (Tests the fundamental I = Q/t definition and its particle-counting interpretation.)
 
 ## Voice Teaching Notes
 

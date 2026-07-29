@@ -197,7 +197,15 @@ Steam delivers ≈9.5× more energy. The calculation makes the danger of steam p
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **GRAPH-INTERPRETATION** — show the heating curve for water (temperature vs. heat added): rising slope (solid), flat plateau (melting), rising slope (liquid), flat plateau (boiling), rising slope (gas). "Why is the graph flat during melting even though heat is being added?" This is the central question — temperature does not measure all the energy.
+
+2. **MISCONCEPTION-PROBE M1** — "During boiling, you add heat. Does the water temperature rise?" Expected wrong: "yes." Correct: temperature stays at 100°C (at 1 atm) until all liquid has converted to gas — all the added heat goes into breaking intermolecular bonds, not raising kinetic energy. The plateau is the signature.
+
+3. **WORKED-EXAMPLE** — full ice-to-steam calculation: 50 g of ice at −10°C → steam at 110°C. Five stages: Q₁ = mcΔT (ice warming), Q₂ = mL_f (melting), Q₃ = mcΔT (water warming), Q₄ = mL_v (boiling), Q₅ = mcΔT (steam warming). Learner adds each stage sequentially.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Why does sweating cool you down? Name the phase transition and identify where the latent heat comes from." (Tests transfer: evaporation removes latent heat of vaporisation from your skin surface.)
 
 ## Voice Teaching Notes
 

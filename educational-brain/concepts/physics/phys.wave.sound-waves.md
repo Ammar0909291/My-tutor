@@ -132,7 +132,15 @@ For v = √(γRT/M): this is not discoverable from everyday experience. Present 
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **PREDICTION-BEFORE-DEMO** — "A bell rings in a jar. You pump the air out slowly. What happens to the sound?" (Gets quieter, disappears in vacuum.) Then: "Astronauts in space suits can still hear each other if helmets touch. Why?" (Vibration travels through solid suit material.) Establishes sound as a mechanical wave requiring a medium before any formal definition.
+
+2. **MISCONCEPTION-PROBE M2** — "A louder sound has a higher pitch. True or false?" Expected wrong: true — many learners conflate amplitude and frequency. Correct: loudness = amplitude (how hard the air is compressed), pitch = frequency (how often per second). Independent quantities.
+
+3. **WORKED-EXAMPLE** — standing wave in a closed pipe: frequency fn = n·v/2L. Find the first three harmonics for a 0.5 m pipe at 340 m/s. Then open pipe: fn = n·v/2L but with antinodes at both ends. Compare the mode patterns and explain why the closed pipe has only odd harmonics.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "You hear a sound that is both louder and lower-pitched than before. Which physical property of the sound wave changed for loudness, and which changed for pitch?" (Tests the amplitude-frequency independence — the core vocabulary distinction.)
 
 ## Voice Teaching Notes
 

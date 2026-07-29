@@ -129,7 +129,15 @@ For the closed-loop nature of field lines: follow D1 with the question "Where do
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **PREDICTION-BEFORE-DEMO** — "A compass needle is a small magnet. What happens to it near a current-carrying wire?" (It deflects — Oersted's discovery.) Let learner predict, then observe. This establishes the electric→magnetic connection before field lines.
+
+2. **WORKED-EXAMPLE** — two traces: (a) right-hand rule for a straight wire: wrap fingers in the direction of B, thumb pointing in I direction. Find B direction at points above, below, left, right of wire. (b) Superposition for two parallel wires carrying current in the same direction — find net B at the midpoint.
+
+3. **MISCONCEPTION-PROBE M2** — "A magnetic field line represents the path a free charged particle would follow." Expected wrong: true. Correct: B field lines show the direction of the magnetic force on a north pole (or the direction a compass needle points). A charged particle's path depends on its velocity direction relative to B, not just the B direction — a particle moving parallel to B experiences no force.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Two long parallel wires 0.1 m apart carry currents of 3 A and 5 A in the same direction. Find the magnetic force per unit length between them (using F/L = μ₀I₁I₂/2πd). Is it attractive or repulsive?" (Tests the currents-attract/repel rule and the force formula.)
 
 ## Voice Teaching Notes
 

@@ -183,7 +183,15 @@ Mixing red and blue paint gives purple — irreversible, both original colours a
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **PHYSICAL-MANIPULATION** — two pulses on a rope travelling toward each other. "When they meet, what happens? Does the rope tear? Do the pulses cancel permanently?" Let learner observe: they pass through each other (superposition, not collision). The waves are unchanged after crossing. This distinguishes waves from particles.
+
+2. **GRAPH-INTERPRETATION** — show two sinusoids and their superposition graphically. "At point A, wave 1 is at +3 cm, wave 2 is at +2 cm. What is the displacement at A?" (5 cm — add algebraically.) Then: "At point B, wave 1 is +3 cm, wave 2 is −3 cm — net displacement?" (0.) Makes the addition rule concrete with numbers before formulas.
+
+3. **MISCONCEPTION-PROBE M2** — "Two equal-amplitude waves meet and cancel completely (destructive interference at that point). Is the superposition principle violated? Has energy been destroyed at that point?" Correct: the principle is obeyed — their sum is algebraically zero at that instant. Energy is stored in other parts of the medium where the amplitudes add constructively.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "What is the difference between superposition (the principle) and interference (the phenomenon)? Give an example of each and explain how one leads to the other." (Tests the relationship between the mathematical rule and its physical consequence.)
 
 ## Voice Teaching Notes
 

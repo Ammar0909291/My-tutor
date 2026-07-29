@@ -131,7 +131,15 @@ The formal formula follows from the geometric intuition; the intuition is earned
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **ANALOGY-EXTENSION** — light through a window: if light (uniform, parallel) shines at a window, the amount passing through depends on the window area AND the angle of incidence. Tilt the window (reduce θ between normal and rays) → less light. Magnetic flux works identically: Φ = BAcosθ.
+
+2. **WORKED-EXAMPLE** — three traces: (a) uniform B = 0.5 T through a 0.1 m² coil at 0°, 45°, 90° to the field. (b) Non-uniform field: divide the area into strips, integrate (conceptually). (c) Closed surface: Gauss's law for magnetism — total flux through any closed surface = 0 (no magnetic monopoles).
+
+3. **MISCONCEPTION-PROBE M2** — "If the magnetic field is zero everywhere inside a loop, the flux through the loop is zero." Expected wrong: true (many learners check only the field inside the loop boundary). Correct: flux depends on the field through the entire surface bounded by the loop, not just the field at the loop boundary. (Key for understanding flux in situations like a solenoid.)
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "A rectangular coil 0.2 m × 0.3 m rotates in a uniform 0.8 T field. Find the flux when the coil is (a) parallel to B, (b) perpendicular to B, (c) at 60° to B." (Tests all three angles and confirms which angle convention applies — area vector vs. field direction.)
 
 ## Voice Teaching Notes
 

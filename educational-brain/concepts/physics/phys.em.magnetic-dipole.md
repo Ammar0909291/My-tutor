@@ -150,7 +150,15 @@ Use a dip circle (inclinometer) to measure the angle of Earth's B-field below ho
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **CONCRETE-THEN-ABSTRACT** — "A bar magnet has a North and South pole. A current loop also behaves like a bar magnet. Can you draw the field line pattern for both and identify what they have in common?" They are identical far-field patterns — both are magnetic dipoles. The current loop IS the fundamental magnetic dipole; bar magnets are collections of atomic current loops (electron spin).
+
+2. **WORKED-EXAMPLE** — two traces: (a) magnetic moment of a current loop: m = IA (magnitude), direction from right-hand rule. (b) Torque on a magnetic dipole in external field: τ = m × B — find equilibrium orientations. Connect to the electric dipole (τ = p × E) to show structural parallel.
+
+3. **MISCONCEPTION-PROBE M2** — "The Earth is a magnetic dipole. If the geographic North Pole is where 'north' is on a map, is the Earth's magnetic north pole (the one compasses point to) near the geographic North Pole or South Pole?" Expected wrong: North. Correct: the Earth's magnetic north pole (attracting compass north needles) is actually a magnetic south pole — opposite poles attract. The geographic and magnetic poles are also not quite coincident.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "A circular loop of radius 0.05 m carries 2 A. Find its magnetic dipole moment. If placed in a 0.3 T external field perpendicular to the loop plane, find the torque." (Tests both formulas and connects the geometric setup to the torque formula.)
 
 ## Voice Teaching Notes
 

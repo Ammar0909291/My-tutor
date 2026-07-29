@@ -138,7 +138,15 @@ If the learner cannot recall the 2D kinematic equations or the axis-setup protoc
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **PREDICTION-BEFORE-DEMO** — "A ball is launched at 45° and another at 30°, both at the same speed. Which goes farther? Which stays in the air longer?" Let learner commit verbally. Then: "At the very top of the 45° path, what is the vertical velocity? What about the horizontal velocity?" — targets M1 (acceleration at peak).
+
+2. **MISCONCEPTION-PROBE M1** — "At the very peak, what are vₓ, vᵧ, and aᵧ?" Expected wrong answer: aᵧ = 0. Correction: draw FBD at peak — weight still acts downward. Gravity does not know the ball paused; aᵧ = −g at every instant of flight, including the peak.
+
+3. **CONTRAST-CASES** — place the range formula R = v₀² sin 2θ / g next to a cliff-launch problem where y₀ ≠ y_final. "Apply the formula to each. Do both work?" When the cliff case gives a wrong answer: trace back to the derivation assumption (level ground). Show why writing y(t) = 0 from scratch always works and the shortcut sometimes doesn't.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "A ball is kicked from the top of a 10 m cliff at 15 m/s, 30°. Find: (a) time in air, (b) horizontal range, (c) speed at landing." Learner must set up from the y equation, not the range formula.
 
 ## Voice Teaching Notes
 

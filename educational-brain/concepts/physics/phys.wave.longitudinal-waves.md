@@ -126,7 +126,15 @@ After the rope transverse wave demonstration, show the slinky demo (D1). Ask: "W
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **PHYSICAL-MANIPULATION** — slinky or spring: push one end toward the other and release. "Where is the compression (particles closer together)? Where is the rarefaction (particles farther apart)? In which direction are the particles actually moving?" Make compressions and rarefactions visible before defining them.
+
+2. **MISCONCEPTION-PROBE M1** — "A sound wave is a longitudinal wave in air. Do the air molecules travel from the speaker to your ear?" Expected wrong: yes. Correct: no — each molecule oscillates back and forth around its equilibrium position in the direction of propagation; the disturbance (pattern of compressions/rarefactions) travels, but the individual molecule does not. Net displacement of any molecule over one full cycle = 0.
+
+3. **CONTRAST-CASES** — place a longitudinal wave diagram next to a transverse wave diagram. "On which one can you point to where the compressions and rarefactions are? On which one can you identify crests and troughs?" Connect the vocabulary to the geometry.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Why can sound travel through solids, liquids, and gases, but transverse mechanical waves cannot travel through liquids or gases?" (Tests the mechanism: longitudinal waves need stiffness in compression only; transverse waves need shear stiffness, which fluids lack.)
 
 ## Voice Teaching Notes
 

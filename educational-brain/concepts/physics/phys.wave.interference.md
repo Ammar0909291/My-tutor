@@ -186,7 +186,15 @@ Dark fringes are dark only along the direct line to the screen at that specific 
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **PREDICTION-BEFORE-DEMO** — "Two speakers play the same pure tone in phase, aimed at you. You walk sideways across the room. Do you expect the sound to be the same everywhere?" (No — you move in and out of constructive/destructive interference regions.) Most learners are surprised. Demo or simulation first, then the path-difference explanation.
+
+2. **WORKED-EXAMPLE** — double-slit: λ = 600 nm, d = 0.1 mm, L = 1 m. Find: (a) position of 1st bright fringe (y = λL/d), (b) fringe spacing, (c) what happens to spacing if λ doubles, (d) what happens if d halves. Each calculation reveals one design lever.
+
+3. **MISCONCEPTION-PROBE M1** — "At a destructive interference point, the two waves cancel. Where does the energy go?" Expected wrong: "it disappears." Correct: energy is redistributed — the bright fringes are brighter than each source alone would make them; the dark fringes are compensated by the bright ones. Total energy is conserved.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Two speakers 1 m apart produce the same 680 Hz tone in air (v = 340 m/s). Find the wavelength. What is the minimum path difference for destructive interference? At what angle from the midpoint does the first destructive fringe appear?" (Tests path-difference → angle → interference condition chain.)
 
 ## Voice Teaching Notes
 

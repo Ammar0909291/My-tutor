@@ -149,7 +149,15 @@ The point charge case V = kQ/r is then derived analytically from the field E = k
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **ANALOGY-EXTENSION** — gravitational PE as the bridge: "Water flows downhill — from high gravitational PE to low. A positive charge in an electric field does the same: it moves from high electric potential to low potential. What does a negative charge do?" (Moves from low to high potential — opposite.) The analogy makes potential intuitive before the formula.
+
+2. **WORKED-EXAMPLE** — three traces: (a) potential at distance r from a point charge: V = kQ/r (scalar). (b) Work done moving a charge between two potentials: W = qΔV. (c) Potential at a point from two charges: add V₁ + V₂ algebraically (not as vectors).
+
+3. **MISCONCEPTION-PROBE M2** — "Two points in an electric field are at the same potential. A charge is moved between them. How much work is done by the field?" Expected wrong: some nonzero amount. Correct: zero — work = qΔV = q(0) = 0. Equipotential surfaces require zero work to traverse.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "A proton accelerates through a potential difference of 1000 V from rest. Find its final kinetic energy (in eV and in joules) and its final speed." (Tests the energy-potential link: KE = qV, then ½mv² = KE — a chain requiring the two different forms of the relation.)
 
 ## Voice Teaching Notes
 

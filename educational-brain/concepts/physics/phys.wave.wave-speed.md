@@ -133,7 +133,15 @@ Tune a guitar string to different frequencies by tightening (higher f) or loosen
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **GUIDED-DISCOVERY** — "You pluck a guitar string. What properties of the string do you think affect how fast the wave travels?" (Tension and linear density.) Higher tension → stiffer → faster. Higher mass per unit length → harder to accelerate → slower. Let learner predict the direction of each factor before writing v = √(T/μ).
+
+2. **WORKED-EXAMPLE** — two traces: (a) guitar string: given T = 80 N, μ = 0.002 kg/m — find v. (b) Sound in air at 20°C: v = 331 + 0.6T(°C) — find v at 35°C. Make the medium-dependence concrete for both mechanical and sound waves.
+
+3. **MISCONCEPTION-PROBE M2** — "If you double the frequency of a wave in the same medium, what happens to wave speed?" Expected wrong: doubles. Correct: wave speed depends only on the medium properties (T, μ for strings; bulk modulus, density for sound) — not on the source's frequency. v stays the same; λ halves.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Sound travels at 340 m/s in air at 15°C and 1500 m/s in water. What is structurally different about water that explains this? Name the relevant medium property." (Tests the mechanism: bulk modulus of water >> air, despite higher density, because stiffness effect dominates.)
 
 ## Voice Teaching Notes
 

@@ -142,7 +142,15 @@ The discovery path is feasible in a lab with a ray box, glass block, protractor,
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **GUIDED-DISCOVERY** — "Sunglasses help with glare off water at shallow angles. What property of the reflected light makes them work?" Lead learner to polarisation. Then: "At one specific angle, the reflected light is perfectly polarised. What determines that angle?" (It depends on the refractive indices of the two media.) This is Brewster's angle.
+
+2. **WORKED-EXAMPLE** — two traces: (a) tanθ_B = n₂/n₁ for air→glass: θ_B = arctan(1.5) ≈ 56.3°. (b) Verify that at Brewster's angle, reflected and refracted rays are at 90° to each other — use Snell's law and the definition to derive this geometrically.
+
+3. **MISCONCEPTION-PROBE M1** — "At Brewster's angle, there is no reflected ray." Expected wrong: true. Correct: there IS a reflected ray — it is just completely polarised (one polarisation direction only). The other polarisation component is entirely transmitted. The reflected intensity is small but nonzero.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Laser sources often use Brewster windows (tilted glass plates at Brewster's angle) to reduce reflection losses. Which polarisation does the window preferentially transmit? Which does it reflect? Why is this useful for laser design?" (Tests application: Brewster windows transmit the p-polarisation (in the plane of incidence) without any reflection loss, establishing a definite polarisation state in the laser beam.)
 
 ## Voice Teaching Notes
 

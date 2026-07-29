@@ -147,7 +147,15 @@ This reverse-engineering approach gives physical motivation without requiring Ma
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **ANALOGY-EXTENSION** — Biot-Savart is to magnetic fields what Coulomb's law is to electric fields: both give the field contribution from a small source element, both have inverse-square distance dependence. Key structural difference: the magnetic contribution involves the cross product of the current direction and the displacement vector — so direction requires the right-hand rule, not just sign of the charge.
+
+2. **WORKED-EXAMPLE** — two traces: (a) dB from a small current element Idl at point P: magnitude and direction using right-hand rule. (b) Integrate for an infinite straight wire → recover B = μ₀I/2πr. Show this is consistent with Ampère's law result (connects the two approaches).
+
+3. **MISCONCEPTION-PROBE M1** — "A current element at point A creates a magnetic field at point P. Does the current element also create a field at the location of A itself?" Correct: the Biot-Savart law gives zero contribution at the element's own location (the cross product involves r̂ which is zero there) — self-field is zero in classical electromagnetism.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Use Biot-Savart to find the magnetic field at the centre of a circular current loop of radius R carrying current I. Express the answer in terms of μ₀, I, R." (A standard integration that tests setup of the current-element geometry, the cross product, and integration with symmetry.)
 
 ## Voice Teaching Notes
 

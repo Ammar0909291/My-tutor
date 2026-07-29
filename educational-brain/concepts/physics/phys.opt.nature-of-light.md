@@ -132,7 +132,15 @@ The absence of a medium for light can be motivated by asking: "Sound needs air t
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **HISTORICAL-TIMELINE as a CONTROVERSY** — Newton (corpuscles, 1704) vs. Huygens (waves, 1678): each model explained some phenomena and failed on others. Young's double-slit (1801): wave wins. Photoelectric effect (1905): particle returns. De Broglie (1924): everything is both. Use the historical debate to motivate wave-particle duality as a discovered fact, not a definition.
+
+2. **CONTRAST-CASES** — phenomena explained by WAVE model: interference, diffraction, polarisation. Phenomena explained by PARTICLE (photon) model: photoelectric effect, Compton scattering. Learner must categorise new phenomena into the right column.
+
+3. **MISCONCEPTION-PROBE M1** — "Light is either a wave or a particle — scientists just haven't decided which yet." Correct: the duality is not ignorance — both models are correct in their respective experimental regimes. An individual photon's position is uncertain (wave-like probability distribution), but its interaction with matter is discrete (particle-like energy exchange). This is not a measurement problem; it is fundamental.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Name one experiment that demonstrates light behaves as a wave. Name one that demonstrates it behaves as a particle. For each, identify what measured quantity reveals the wave or particle nature." (Tests whether the learner can operationally distinguish the two descriptions rather than just labelling them.)
 
 ## Voice Teaching Notes
 

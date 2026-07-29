@@ -188,7 +188,15 @@ Mirrors work by reflection; lenses work by refraction at two surfaces. Mirror fo
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **RAY-TRACING FIRST** — before any formula, require three key rays for a converging lens: (1) parallel to axis → through far focal point; (2) through optical centre → straight; (3) through near focal point → parallel to axis. Where all three intersect = image. Make the geometry primary, the formula secondary.
+
+2. **WORKED-EXAMPLE** — three traces: (a) object beyond 2f → real, inverted, between f and 2f on other side. (b) Object between f and lens → virtual, erect, magnified (magnifying glass). (c) Diverging lens → always virtual, erect, diminished. Use 1/v − 1/u = 1/f (or the sign-convention version your standard uses) to confirm the ray-trace results numerically.
+
+3. **MISCONCEPTION-PROBE M3** — "A concave (diverging) lens can never produce a real image." Correct: true in isolation. But: a combination of a strong converging lens and a weaker diverging lens can still produce a real image — what matters is the net focal power. The diverging lens always reduces convergence but doesn't always prevent a real image if another converging element is present.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "An object 15 cm tall is placed 30 cm in front of a converging lens of focal length 20 cm. Find: (a) image distance, (b) image height and orientation, (c) is the image real or virtual?" (Tests lens formula, magnification formula, and sign-convention interpretation together.)
 
 ## Voice Teaching Notes
 

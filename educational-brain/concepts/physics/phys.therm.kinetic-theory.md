@@ -170,7 +170,15 @@ Students sometimes explain gas pressure as arising from mutual repulsion between
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **CONCRETE-THEN-ABSTRACT** — "Why does a tyre inflate when you pump air in? Why does pressure increase when you heat the air?" Start with the molecular picture: molecules collide with walls. More molecules → more collisions per second → more pressure. Faster molecules → harder collisions → more pressure. Then write PV = ⅓Nm⟨v²⟩ as the quantitative version of this picture.
+
+2. **MISCONCEPTION-PROBE M1** — "At the same temperature, a sample of hydrogen (H₂, M = 2 g/mol) and oxygen (O₂, M = 32 g/mol) have the same average kinetic energy. Which has the higher average speed?" Expected wrong: same speed (because same KE). Correct: ½m⟨v²⟩ = 3/2 kT → same KE, but lighter H₂ must move faster to have the same kinetic energy.
+
+3. **WORKED-EXAMPLE** — derive rms speed: v_rms = √(3RT/M) for O₂ at 300 K. Then: "The same molecule at 1200 K — how does v_rms change?" (Doubles — √4 = 2.) Makes the temperature-dependence visible as a square root.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Why does a gas smell spread faster in a warm room than a cold room? Name the specific kinetic quantity that changes and how it changes with temperature." (Tests transfer to diffusion: v_rms increases with √T, so faster molecular motion → faster diffusion.)
 
 ## Voice Teaching Notes
 

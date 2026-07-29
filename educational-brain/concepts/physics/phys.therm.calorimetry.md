@@ -179,7 +179,15 @@ As shown in M2, the arithmetic mean is a special case. The analogy of "meeting i
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **GUIDED-DISCOVERY** — "You drop a 0.1 kg iron block (at 80°C) into 0.2 kg of water (at 20°C) in an insulated cup. The iron cools and the water warms. What does energy conservation tell you about Q_iron and Q_water?" Let learner write Q_lost = Q_gained before any calculation.
+
+2. **WORKED-EXAMPLE** — two traces: (a) find equilibrium temperature (standard calorimetry setup). (b) unknown specific heat: measure how much a metal warms the water and solve for c_metal. Make the experiment the calculation.
+
+3. **MISCONCEPTION-PROBE M1** — "In a calorimetry experiment, the hot block cools by 50°C and the cold water warms by 10°C. A student says: 'The temperature changes are different, so more heat went into the water than came from the block.' Is this right?" Correct: temperature change ≠ heat. Q = mcΔT — the heat depends on both mass and specific heat alongside ΔT.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "A 0.05 kg copper block (c = 390 J/kg·K) at 100°C is dropped into 0.1 kg water at 25°C. Find the equilibrium temperature." (Standard calorimetry solve — tests set-up, equation, and algebra.)
 
 ## Voice Teaching Notes
 

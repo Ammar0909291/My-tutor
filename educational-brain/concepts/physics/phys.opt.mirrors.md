@@ -184,7 +184,15 @@ A plane mirror always produces a virtual, upright, same-size image at the same d
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **RAY-TRACING FIRST** — three key rays for a concave mirror: (1) parallel to axis → through focal point; (2) through focal point → parallel to axis; (3) through centre of curvature → back on itself. Require learner to sketch the image before applying the mirror formula.
+
+2. **WORKED-EXAMPLE** — three traces: (a) object beyond C: real, inverted, smaller. (b) Object between F and C: real, inverted, larger (projector/headlight geometry). (c) Object inside F: virtual, erect, larger (make-up mirror). All three with the mirror formula 1/v + 1/u = 1/f and sign convention.
+
+3. **MISCONCEPTION-PROBE M2** — "A convex mirror is always better than a plane mirror for rear-view because you see more." Correct the implicit claim: convex mirrors give a wider field of view but produce a virtual image that appears farther away than the object actually is — this is why "objects in mirror are closer than they appear" is printed on them. Wider field ≠ accurate distance perception.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "A dentist's mirror (concave, f = 2 cm) is held 1.5 cm from a tooth. Find the image position and state its nature (real/virtual, erect/inverted, magnified/diminished)." (Object inside F → virtual, erect, magnified — tests the make-up-mirror regime and the sign convention for virtual images.)
 
 ## Voice Teaching Notes
 

@@ -131,7 +131,15 @@ From there, the superposition calculation (E1) is direct instruction — learner
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **CONCRETE-THEN-ABSTRACT** — "Hold up a water molecule model. One end is δ+, the other δ−. What happens when you put this molecule in an electric field?" (It rotates to align with the field — torque on a dipole.) This makes the dipole concept physically motivated before defining p = qd.
+
+2. **WORKED-EXAMPLE** — two traces: (a) dipole moment calculation: p = qd for a known charge separation. (b) Torque on a dipole in uniform field: τ = pE sinθ — find torque at 0°, 45°, 90° to the field. Identify the equilibrium (θ = 0) and unstable equilibrium (θ = 180°) positions.
+
+3. **MISCONCEPTION-PROBE M1** — "A dipole in a uniform electric field experiences a torque. Does it also experience a net force?" Expected wrong: yes. Correct: in a UNIFORM field, net force = 0 (equal and opposite forces on ±q). In a NON-UNIFORM field, a dipole does experience a net force (used in dielectrophoresis and optical traps).
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Why does a plastic rod rubbed with fur attract small pieces of paper, which are neutral? Explain using the dipole concept." (Tests induced-dipole transfer: the electric field of the charged rod polarises the paper molecules, creating net attractive force — a non-uniform field acting on an induced dipole.)
 
 ## Voice Teaching Notes
 

@@ -127,7 +127,15 @@ The three gas laws (Boyle's, Charles's, Gay-Lussac's) should each be motivated b
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **PREDICTION-BEFORE-DEMO** — "A sealed syringe (constant amount of gas) is compressed to half its volume at constant temperature. What happens to the pressure?" Let learner predict. (Doubles — Boyle's Law as a special case.) Then: "Now heat the syringe at constant volume. What happens to pressure?" (Rises — Gay-Lussac's Law.) Then combine into PV = nRT.
+
+2. **WORKED-EXAMPLE** — three traces: (a) PV = nRT to find n (moles) for a gas at known P, V, T. (b) Isothermal process: P₁V₁ = P₂V₂. (c) Combined: find final P when both V and T change. Each trace isolates one relationship within the unified law.
+
+3. **MISCONCEPTION-PROBE M3** — "A balloon is heated from 300 K to 600 K at constant pressure. Does the volume double?" Expected wrong: some learners say yes immediately without noting the Kelvin requirement. Probe: "What if the temperatures were 27°C and 54°C — does volume double then?" (54 − 27 ≠ 327 → 600 K, so no.) Correct: must convert to Kelvin first; the ratio V₂/V₁ = T₂/T₁ only holds in Kelvin.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "A tyre is inflated to 220 kPa at 15°C. After driving, the temperature rises to 40°C. What is the new pressure (assume constant volume)?" (Standard combined-law problem — tests Kelvin conversion and single-variable isolation.)
 
 ## Voice Teaching Notes
 

@@ -129,7 +129,15 @@ After the formula, the discovery-style task is applying it to ratio questions (M
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **CONTRAST-CASES** — gravity vs. Coulomb: both are inverse-square, both act at a distance, both have a product of source quantities in the numerator. Key differences: Coulomb can repel (gravity never does); Coulomb is ~10³⁶ times stronger at the atomic scale. Make the structural analogy explicit before identifying the breaking points.
+
+2. **WORKED-EXAMPLE** — two traces: (a) two point charges 1 µC and −2 µC, 0.1 m apart — find F, identify direction. (b) Three charges in a line — find the net force on the middle charge by vector addition of two Coulomb forces. Direction is the step most likely to go wrong.
+
+3. **MISCONCEPTION-PROBE M2** — "Two charges exert a force on each other. If you double one charge, how does the force on the other change?" Expected wrong: "the force on the doubled charge doubles, but the force on the other stays the same." Correct: Newton's third law — the force on each charge changes identically. F = kq₁q₂/r² is symmetric; both forces are the same magnitude and opposite direction.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Two protons in a nucleus are ~10⁻¹⁵ m apart. Calculate the Coulomb repulsion force. Then calculate the gravitational attraction. By what factor does Coulomb exceed gravity?" (Tests the scale contrast and reinforces why the strong nuclear force must exist to hold the nucleus together.)
 
 ## Voice Teaching Notes
 

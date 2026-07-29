@@ -131,7 +131,15 @@ This guides learners to Gauss's law as a generalisation of Coulomb's law, not as
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **GUIDED-DISCOVERY** — "Imagine concentric spherical shells around a point charge. Does the number of field lines passing through the inner shell vs. the outer shell change? Does their density (lines per unit area) change?" Both: same total lines (constant flux), but lower density (field weakens with r²). Gauss's law is this counting argument made rigorous.
+
+2. **WORKED-EXAMPLE** — three Gaussian surfaces: (a) spherical shell around point charge — derive E = kQ/r². (b) Infinite plane of charge — find E using a cylindrical pillbox Gaussian surface (uniform E perpendicular to plate). (c) Infinite line of charge — cylindrical Gaussian surface (E = λ/2πε₀r).
+
+3. **MISCONCEPTION-PROBE M1** — "The electric flux through a closed surface is zero. Does that mean there is no charge inside?" Expected wrong: yes. Correct: zero flux means zero NET enclosed charge — equal positive and negative charges inside would give zero flux. Also: a closed surface with zero flux could contain no charge at all or equal + and − charges; you cannot distinguish without more information.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "A Gaussian sphere of radius r is centred on a +3 µC charge. Another Gaussian sphere of radius 2r is also centred on the same charge. Compare the electric flux through each surface. Compare the electric field magnitude at the surface of each." (Tests the distinction between total flux (same) and field strength (different) as r changes.)
 
 ## Voice Teaching Notes
 

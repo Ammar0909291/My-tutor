@@ -142,7 +142,15 @@ This semi-guided approach is feasible in a lab with ray boxes or laser benches.
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **CONCRETE-THEN-ABSTRACT** — "A reading-glasses lens is labelled +2.5 D. What does that mean in metres? In centimetres?" (Focal length = 1/2.5 = 0.4 m = 40 cm.) Make the dioptre a reciprocal focal length, not a separate quantity.
+
+2. **WORKED-EXAMPLE** — two traces: (a) combination of two thin lenses in contact: P_total = P₁ + P₂ (or 1/f_total = 1/f₁ + 1/f₂). (b) Near-point correction: a person's near point is 50 cm, normal is 25 cm — find required lens power to read at 25 cm.
+
+3. **MISCONCEPTION-PROBE M1** — "A higher-power lens always produces a bigger image." Expected wrong: true. Correct: power determines how strongly a lens converges light (shorter focal length), but image size (magnification) depends on the object distance relative to f. A very high-power lens with the object well beyond 2f produces a small image; the same lens used as a magnifier (object inside f) produces a large virtual image.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "A person is short-sighted — their far point is 2 m. What lens power corrects their distance vision to infinity? Is the correction lens converging or diverging?" (Tests the far-point correction: virtual image at the far point formed by a diverging lens of power −0.5 D — tests sign convention and clinical application.)
 
 ## Voice Teaching Notes
 

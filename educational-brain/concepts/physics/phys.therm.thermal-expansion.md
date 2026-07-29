@@ -131,7 +131,15 @@ For the water anomaly and the hole expansion, direct instruction is required —
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **PREDICTION-BEFORE-DEMO** — "A metal lid on a glass jar is stuck. You run it under hot water and it loosens. Why? Which expanded more — the lid or the jar?" Let learner predict, then reason through α_metal > α_glass as the mechanism.
+
+2. **WORKED-EXAMPLE** — three traces: (a) steel rail 10 m at 20°C, heated to 40°C — find ΔL. (b) Same material, 2D: square plate — what happens to the area? (c) Gap design: bridge segment needs 5 mm gap at 15°C to remain gap-free up to 45°C — find the required segment length. Makes expansion engineering-concrete.
+
+3. **MISCONCEPTION-PROBE M2** — "A circular metal ring is heated uniformly. Does the hole get larger or smaller?" Expected wrong: "smaller — the metal expands inward." Correct: the hole expands. Heat every part of the ring proportionally — each arc segment lengthens, so the circumference grows, so the hole grows. Analogy: imagine drawing the ring on a rubber sheet and stretching it uniformly.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "A glass thermometer works because the liquid inside expands. Why does the glass tube need to be capillary (very narrow)? What would happen if the tube were wider?" (Tests proportionality of ΔV to the cross-section — the narrower tube makes the expansion visible.)
 
 ## Voice Teaching Notes
 

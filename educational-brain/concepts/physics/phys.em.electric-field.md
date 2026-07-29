@@ -131,7 +131,15 @@ Start with a settled result: "We know that the force between two point charges i
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **GUIDED-DISCOVERY** — "Before we put a test charge in a region, how can we describe the force it would experience? What quantity could we define so we don't need to know the test charge's size?" Lead learner to define E = F/q₀ as a property of the region — independent of the test charge. This is the conceptual leap that distinguishes field theory from force-at-a-distance.
+
+2. **WORKED-EXAMPLE** — three traces: (a) field from a single point charge: E = kQ/r² with direction. (b) Field at a point from two charges — vector addition of individual E fields. (c) Force on a charge placed in a known field: F = qE, with sign determining direction.
+
+3. **MISCONCEPTION-PROBE M3** — "A negative test charge is placed in an electric field pointing to the right. Which direction does the force act?" Expected wrong: to the right (following the field direction). Correct: to the left — F = qE, q is negative, so force is opposite to E. Field lines show the direction of force on a positive charge.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Draw the electric field line pattern for: (a) a single positive charge, (b) a positive and negative charge of equal magnitude side-by-side, (c) two equal positive charges side-by-side. Where is the field zero in (c)?" (Tests field-line rules and the superposition principle visually.)
 
 ## Voice Teaching Notes
 

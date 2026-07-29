@@ -168,7 +168,15 @@ One-way mirrors (two-way mirrors) depend on *lighting* conditions — the side w
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **PREDICTION-BEFORE-DEMO** — "Shine a laser from inside a glass block toward the glass-air interface, increasing the angle of incidence. What happens at small angles? What happens as you increase the angle?" Let learner predict: refraction diminishes, eventually the refracted ray disappears — total internal reflection. The critical angle is the transition point.
+
+2. **WORKED-EXAMPLE** — two traces: (a) critical angle for glass→air: θ_c = arcsin(n_air/n_glass) = arcsin(1/1.5) ≈ 42°. (b) Optical fibre: why the fibre must be bent beyond a certain radius before TIR breaks down — relates critical angle to fibre geometry.
+
+3. **MISCONCEPTION-PROBE M2** — "TIR occurs whenever light goes from any denser medium to any less dense medium." Expected wrong: true. Correct: TIR also requires exceeding the critical angle. If the incident angle is below θ_c, there is still refraction (though some is reflected). TIR requires both conditions: denser→less dense AND angle > θ_c.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — "Optical fibres carry internet data by TIR. If the core has n = 1.50 and the cladding has n = 1.45, find the critical angle. Why does the cladding need to have a lower n than the core rather than simply being air?" (Tests critical angle calculation and the engineering reason for cladding: controlled n to maintain TIR without the fragility of a bare glass-air interface.)
 
 ## Voice Teaching Notes
 
