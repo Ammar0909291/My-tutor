@@ -57,6 +57,10 @@ export interface BuildContextInput {
   recoveryKey?: string | null
   /** S1 — the phase this turn is expected to land on (feeds V-OSCILLATE). */
   phaseAfter?: string | null
+  /** S2 — is the current objective already completed? Feeds V-OBJ. */
+  objectiveCompleted?: boolean
+  /** S2 — has the current objective stalled? Feeds V-NOPROGRESS (LOG only). */
+  objectiveStalled?: boolean
 }
 
 /** The pre-K7 floor, kept ONLY as the fallback for callers without machine
@@ -94,5 +98,7 @@ export function buildVerifierContext(input: BuildContextInput): VerifierContext 
     turnHistory: input.turnHistory,
     recoveryKey: input.recoveryKey,
     phaseAfter: input.phaseAfter,
+    objectiveCompleted: input.objectiveCompleted,
+    objectiveStalled: input.objectiveStalled,
   }
 }

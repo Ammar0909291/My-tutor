@@ -424,6 +424,45 @@ export function vOscillate(_text: string, ctx: VerifierContext): Violation | nul
   return null
 }
 
+// ── S2 (Runtime Redesign Mission Part 5) — objective-model rules ──────────
+// Both LOG severity (types.ts SEVERITY table) — same promotion discipline
+// as S1's history-aware rules. Both no-op when the caller hasn't wired
+// ObjectiveState yet (ctx.objectiveCompleted / objectiveStalled undefined),
+// matching this file's existing optionality convention.
+
+// ── V-OBJ · assessment-shaped draft targets an already-completed objective ─
+/**
+ * I-3: "a completed objective is never re-entered as an assessment target."
+ * Assessment-shaped is read the same way V-Q1 already reads "asked a
+ * question" (questionCount > 0) combined with move==='ASK' — reusing the
+ * existing signal rather than inventing a second notion of "this turn is
+ * an assessment," matching this file's own reuse discipline throughout.
+ */
+export function vObj(text: string, ctx: VerifierContext): Violation | null {
+  if (ctx.objectiveCompleted !== true) return null
+  if (ctx.move !== 'ASK') return null
+  const q = questionCount(withoutCodeFences(text))
+  if (q > 0) {
+    return { code: 'V-OBJ', severity: 'LOG', matched: `${q} question(s)`,
+             detail: 'objective already completed (masteryVerified) — re-assessment is illegal' }
+  }
+  return null
+}
+
+// ── V-NOPROGRESS · no objective advancement in N turns ─────────────────────
+/**
+ * I-10, LOG severity ONLY — deliberately never REJECT. Per the design
+ * report: "a rising count means the curriculum is sequenced above the
+ * learner's floor, or teaching is stuck — a rerender cannot fix a
+ * curriculum problem." This rule exists purely to surface the signal for
+ * authoring/ops review, never to gate a turn.
+ */
+export function vNoProgress(_text: string, ctx: VerifierContext): Violation | null {
+  if (ctx.objectiveStalled !== true) return null
+  return { code: 'V-NOPROGRESS', severity: 'LOG',
+           detail: 'no objective advancement observed for NO_PROGRESS_TURN_THRESHOLD consecutive turns' }
+}
+
 /** Ordered rule set. Authorization gates (V-ASSESS, V-COMPLETE) run
  *  BEFORE V-TAG so an illegally-emitted control tag REJECTS rather
  *  than being quietly stripped. V-TAG then handles all remaining
@@ -439,4 +478,5 @@ export const RULES = [
   // of them strip or reject, so their position cannot affect any earlier
   // rule's view of the text.
   vDupExact, vDupNear, vDupQuestion, vRecRepeat, vOscillate,
+  vObj, vNoProgress,
 ] as const

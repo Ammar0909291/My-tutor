@@ -46,6 +46,10 @@ export const RULE_CODES = [
   'V-DUP-QUESTION', // draft asks a near-duplicate question of a recent one
   'V-REC-REPEAT',   // recovery turn near-duplicates an earlier rung's script
   'V-OSCILLATE',    // phase sequence shows an A→B→A→B cycle
+  // S2 (Runtime Redesign Mission Part 5) — objective-model rules. See
+  // teaching/objectiveModel.ts.
+  'V-OBJ',          // assessment-shaped draft targets an already-completed objective
+  'V-NOPROGRESS',   // no objective advancement in NO_PROGRESS_TURN_THRESHOLD turns
 ] as const
 
 export type RuleCode = (typeof RULE_CODES)[number]
@@ -78,6 +82,9 @@ export const SEVERITY: Record<RuleCode, Severity> = {
   'V-DUP-QUESTION': 'LOG',
   'V-REC-REPEAT':   'LOG',
   'V-OSCILLATE':    'LOG',
+  // S2 — LOG only; see S1's note above (never guess a threshold to REJECT).
+  'V-OBJ':          'LOG',
+  'V-NOPROGRESS':   'LOG',
 }
 
 export interface Violation {
@@ -141,6 +148,15 @@ export interface VerifierContext {
   /** The phase this turn is expected to land on (legacy 6-phase name) —
    *  feeds V-OSCILLATE. */
   phaseAfter?: string | null
+  /** S2 — is the CURRENT objective already completed (ObjectiveState.
+   *  completedAt !== null, per objectiveModel.isObjectiveLockedFromAssessment)?
+   *  Feeds V-OBJ. Undefined ⇒ no-op (additive, matching every other optional
+   *  field in this context). */
+  objectiveCompleted?: boolean
+  /** S2 — has the current objective stalled (objectiveModel.hasStalled)?
+   *  Feeds V-NOPROGRESS (LOG only — a rerender cannot fix a curriculum
+   *  problem, per the design report). */
+  objectiveStalled?: boolean
 }
 
 /** The verifier's output. Consumers apply the rejection protocol below. */

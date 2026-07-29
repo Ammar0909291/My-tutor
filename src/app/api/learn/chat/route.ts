@@ -1344,6 +1344,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // V-OSCILLATE rules' persisted state), merged into the final snapshot
     // delta alongside conversationStateUpdate below.
     let turnHistoryUpdateHoisted: Record<string, unknown> | null = null
+    // S2 — the objective ledger for the current concept (attempts,
+    // assessments, completion, stall detection). Read pre-turn near
+    // conversationStateHoisted above; folded with this turn's evidence and
+    // persisted alongside conversationStateUpdate below.
+    let objectiveStateHoisted: import('@/lib/teaching/objectiveModel').ObjectiveState | null = null
     // Loop 2: narrative arc tracking — gates lesson completion on core-taught milestone
     let narrativeStateHoisted: import('@/lib/teaching/narrativeTracker').NarrativeState | null = null
     let masteryCompletionSuppressedHoisted = false
@@ -1542,6 +1547,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           } = await import('@/lib/teaching/masteryGate')
           const convConceptId = snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? resolvedConceptId ?? null
           conversationStateHoisted = readConversationState(snapshot?.conversationState, convConceptId)
+
+          // S2 (Runtime Redesign Mission Part 5): objective state resets on
+          // the same conceptId change conversationState does — one
+          // objective per concept, see objectiveModel.ts's scope note.
+          const { readObjectiveState } = await import('@/lib/teaching/objectiveModel')
+          objectiveStateHoisted = readObjectiveState(snapshot?.objectiveState, convConceptId)
 
           // Loop 2: read narrative state for this concept's teaching arc
           {
@@ -2584,6 +2595,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               turnHistory: snapshotTurnHistory,
               recoveryKey: recoveryKeyHoisted,
               phaseAfter: conversationStateHoisted?.phase ?? null,
+              // S2 — objective-model LOG rules (additive).
+              objectiveCompleted: objectiveStateHoisted
+                ? (await import('@/lib/teaching/objectiveModel')).isObjectiveLockedFromAssessment(objectiveStateHoisted)
+                : undefined,
+              objectiveStalled: objectiveStateHoisted
+                ? (await import('@/lib/teaching/objectiveModel')).hasStalled(objectiveStateHoisted)
+                : undefined,
             })
             const gate = await verifierGate({
               draftText: cleanText,
@@ -3420,6 +3438,39 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               }),
             })
           }
+
+          // S2 — fold this turn's evidence into the objective ledger, using
+          // whichever post-fold ConversationState the block above actually
+          // produced (mastery-gate rework's own upstream fold takes
+          // priority; the else-branch fold is the fallback, exactly the
+          // same precedence conversationStateUpdate.conversationState uses).
+          if (objectiveStateHoisted) {
+            const { advanceObjectiveState } = await import('@/lib/teaching/objectiveModel')
+            const stateAfterTurn = (conversationStateUpdate.conversationState as
+              import('@/lib/teaching/conversationState').ConversationState | undefined)
+              ?? conversationStateAfterTurnHoisted
+              ?? conversationStateHoisted
+            const wasAttempt = teachingSignal?.correctness !== undefined && teachingSignal?.correctness !== null
+            const preFoldPhase = conversationStateHoisted?.phase ?? null
+            const wasAssessmentAttempt = wasAttempt && (preFoldPhase === 'CHECK' || preFoldPhase === 'PRACTICE' || preFoldPhase === 'TRANSFER')
+            const phaseAdvanced = preFoldPhase !== null && stateAfterTurn?.phase !== undefined && stateAfterTurn.phase !== preFoldPhase
+            const objectiveNowIso = new Date(turnReceivedAt).toISOString()
+            const updatedObjectiveState = advanceObjectiveState(objectiveStateHoisted, {
+              wasAttempt,
+              wasAssessmentAttempt,
+              stateAfterTurn: stateAfterTurn ?? null,
+              phaseAdvanced,
+              nowIso: objectiveNowIso,
+            })
+            conversationStateUpdate.objectiveState = updatedObjectiveState
+            const capturedObjectiveId = objectiveStateHoisted.objectiveId
+            const capturedEv = { wasAttempt, wasAssessmentAttempt, stateAfterTurn: stateAfterTurn ?? null, phaseAdvanced, nowIso: objectiveNowIso }
+            snapshotRederivers.push((fresh) => {
+              const { readObjectiveState: readFreshObj } = require('@/lib/teaching/objectiveModel') as typeof import('@/lib/teaching/objectiveModel')
+              return { objectiveState: advanceObjectiveState(readFreshObj(fresh.objectiveState, capturedObjectiveId), capturedEv) }
+            })
+          }
+
           if (teachingHistoryHoisted && selectedStrategyHoisted !== null) {
             const { updateTeachingHistory, computeFrustration, computeMastery, readTeachingHistory } = await import('@/lib/teaching/teachingHistory')
             const updatedHistory = updateTeachingHistory(teachingHistoryHoisted, {
