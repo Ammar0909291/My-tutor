@@ -16,13 +16,6 @@
   must have before moving into mechanics.
 - **Difficulty**: foundational · **Bloom**: apply · **Mastery threshold**: 0.70 ·
   **Est. hours**: 1 · **References**: NCERT Physics Class 11 Ch. 2
-     "multiply by 1" (fraction method) approach, showing all unit cancellations.
-2. Apply the SI prefix table (pico through tera) to express a quantity with
-     a convenient prefix.
-3. Convert a compound unit (e.g. km/h to m/s) by applying the conversion
-     to each component unit separately.
-4. Verify a conversion is correct by checking the direction of the conversion
-     (smaller unit → larger number; larger unit → smaller number).
 
 ## Learning Objective
 

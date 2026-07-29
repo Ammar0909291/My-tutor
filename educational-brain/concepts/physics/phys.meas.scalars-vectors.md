@@ -17,14 +17,6 @@
   depends on this distinction being automatic.
 - **Difficulty**: foundational · **Bloom**: understand · **Mastery threshold**: 0.70 ·
   **Est. hours**: 2 · **References**: NCERT Physics Class 11 Ch. 4
-     memorised list of examples.
-2. Classify a novel physical quantity (one not previously seen in instruction)
-     as scalar or vector by reasoning, not recall.
-3. Explain why two identical scalar values (e.g. 40 km/h north and 40 km/h
-     south) are NOT the same vector quantity.
-4. State that direction must be specified to fully describe a vector, and give
-     a direction reference system (compass, angle, sign convention) for at least
-     one example.
 
 ## Learning Objective
 

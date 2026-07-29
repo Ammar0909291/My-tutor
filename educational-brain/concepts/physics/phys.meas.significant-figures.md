@@ -16,13 +16,6 @@
   significant figures; this concept is the licence to do so.
 - **Difficulty**: developing · **Bloom**: apply · **Mastery threshold**: 0.75 ·
   **Est. hours**: 2 · **References**: NCERT Physics Class 11 Ch. 2
-     cases with leading, trailing, and embedded zeros.
-2. Round a calculated result to the correct number of significant figures for
-     addition/subtraction and multiplication/division.
-3. Explain WHY the number of significant figures in a result cannot exceed the
-     precision of the least precise measurement used.
-4. Express a number in scientific notation to clarify ambiguous significant
-     figures (trailing zeros in large numbers).
 
 ## Learning Objective
 

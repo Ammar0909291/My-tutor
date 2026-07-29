@@ -20,14 +20,6 @@
   or both products.
 - **Difficulty**: proficient · **Bloom**: apply · **Mastery threshold**: 0.80 ·
   **Est. hours**: 4 · **References**: NCERT Physics Class 11 Ch. 4; H.C. Verma Vol. 1
-     (A·B = |A||B|cos θ) and the component formula (A·B = AxBx + AyBy + AzBz),
-     and state the result is a scalar.
-2. Determine the angle between two vectors using the dot product.
-3. Compute the magnitude of the cross product (|A × B| = |A||B|sin θ), find its
-     direction by the right-hand rule, and state the result is a vector perpendicular
-     to both operands.
-4. Identify which product (dot or cross) is appropriate for a given physical
-     context (work → dot; torque → cross) and justify the choice.
 
 ## Learning Objective
 

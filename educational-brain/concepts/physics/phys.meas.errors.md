@@ -17,13 +17,6 @@
   gateway to scientific thinking about evidence quality.
 - **Difficulty**: developing · **Bloom**: apply · **Mastery threshold**: 0.75 ·
   **Est. hours**: 3 · **References**: NCERT Physics Class 11 Ch. 2
-     (unpredictable scatter) and give an example of each.
-2. Calculate absolute uncertainty, relative (fractional) uncertainty, and
-     percentage uncertainty for a given measurement.
-3. Propagate uncertainty through addition/subtraction and
-     multiplication/division using the standard rules.
-4. Express a measurement result in the correct form: (value ± uncertainty) unit,
-     with uncertainty to 1 significant figure.
 
 ## Learning Objective
 

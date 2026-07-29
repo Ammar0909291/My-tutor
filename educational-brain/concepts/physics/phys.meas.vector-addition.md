@@ -18,14 +18,6 @@
   or field problems. This is the first major procedural tool in physics.
 - **Difficulty**: developing · **Bloom**: apply · **Mastery threshold**: 0.80 ·
   **Est. hours**: 3 · **References**: NCERT Physics Class 11 Ch. 4
-     parallelogram law, with correct magnitude (by Pythagoras or the cosine rule)
-     and direction (by trigonometry).
-2. Resolve any vector into perpendicular (x and y) components using sine and
-     cosine.
-3. Add multiple vectors by resolving all into components, summing components
-     separately, and reconstructing the resultant.
-4. Verify a vector addition result by checking both the magnitude and the
-     direction of the resultant.
 
 ## Learning Objective
 
