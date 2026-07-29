@@ -24,9 +24,13 @@ See Blueprint (`docs/curriculum/blueprints/phys.therm.calorimetry.md §1 Learnin
 
 ## Core Understanding
 
-Calorimetry measures heat exchange using the principle that heat lost by a hot body equals heat gained by a cold body.
+You drop a 100 g iron block, heated to 200 °C, into 200 g of water at 20 °C. Where does the system end up? You have two unknowns — the final temperature and how much energy moved — but really only one equation: all the heat that left the iron went into the water. That single constraint, energy conservation in a closed system, is the entirety of calorimetry.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+The equation is Q_lost = Q_gained, which expands to m₁c₁(T_initial,1 − T_f) = m₂c₂(T_f − T_initial,2). Note the sign convention carefully: the left side is written so that a positive number means heat flowing out; the right side so that a positive number means heat flowing in. Both sides must be positive. If you get a negative final temperature, you've set up the equation backwards.
+
+Three things that trip students: (1) **Heat is not temperature.** A 100 g iron block and a 100 g water sample at 200 °C do not contain the same heat energy — iron's specific heat is roughly 8× lower than water's, so equal masses at the same temperature hold very different amounts of energy. (2) **Phase changes break the simple equation.** At a phase boundary, temperature stops changing even as heat flows — you must add a latent heat term Q = mL on whichever side is melting or vaporising. (3) **Calorimeters are not perfect.** A real calorimeter absorbs some heat itself (the water equivalent of the calorimeter, typically 5–15 g of water equivalent), and this must be added to the equation or the result is systematically wrong.
+
+The practical power: if you know the specific heats and masses, you can measure unknown specific heats or heats of reaction by measuring only temperatures — a thermometer substituting for a direct energy measurement that would otherwise be impossible.
 
 ## Mental Models
 
