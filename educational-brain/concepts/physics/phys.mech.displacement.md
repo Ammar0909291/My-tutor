@@ -20,27 +20,22 @@
   problem involving direction changes.
 - **Difficulty**: foundational · **Bloom**: remember · **Mastery threshold**: 0.70 ·
   **Est. hours**: 2 · **References**: NCERT Physics Class 9 Ch. 8
-- **Learning objectives** — the learner can:
-  1. Define displacement as the straight-line vector from initial to final position
      (including direction), and distance as the total scalar path length.
-  2. Correctly compute both displacement and distance for a described motion path.
-  3. Identify scenarios where displacement and distance are equal (straight-line
+2. Correctly compute both displacement and distance for a described motion path.
+3. Identify scenarios where displacement and distance are equal (straight-line
      motion in one direction) and where they differ (any change of direction).
-  4. State that displacement can be zero even when distance is not (return to start).
-
+4. State that displacement can be zero even when distance is not (return to start).
 
 ## Learning Objective
 
 After this concept, the learner can:
 
-s** — the learner can:
-  1. Define displacement as the straight-line vector from initial to final position
+1. Define displacement as the straight-line vector from initial to final position
      (including direction), and distance as the total scalar path length.
-  2. Correctly compute both displacement and distance for a described motion path.
-  3. Identify scenarios where displacement and distance are equal (straight-line
+2. Correctly compute both displacement and distance for a described motion path.
+3. Identify scenarios where displacement and distance are equal (straight-line
      motion in one direction) and where they differ (any change of direction).
-  4. State that displacement can be zero even when distance is not (return to start).
-
+4. State that displacement can be zero even when distance is not (return to start).
 
 ## Core Understanding
 
@@ -218,7 +213,6 @@ From the dispatch library (Delivery 2 §6):
 3. **Error exposure** (high fit): the round-trip (displacement = 0) is the key
    collision with M1.
 
-
 ## Tutor Actions
 
 See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
@@ -323,7 +317,6 @@ just means you ended up on the other side of the start."
 - *Expert transfer*: in general relativity, the displacement concept generalises
   to the metric tensor and the geodesic deviation; the straight-line distance
   becomes the spacetime interval.
-
 
 ## Cross-Subject Connections
 

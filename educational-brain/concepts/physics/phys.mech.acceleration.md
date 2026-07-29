@@ -18,33 +18,28 @@
   deceleration, upward/downward acceleration, or circular motion.
 - **Difficulty**: developing · **Bloom**: understand · **Mastery threshold**: 0.75 ·
   **Est. hours**: 3 · **References**: NCERT Physics Class 9 Ch. 8
-- **Learning objectives** — the learner can:
-  1. Define acceleration as the rate of change of velocity (Δv/Δt), and correctly
      compute it including sign.
-  2. Distinguish between speeding up, slowing down (deceleration), and direction
+2. Distinguish between speeding up, slowing down (deceleration), and direction
      change as three distinct manifestations of non-zero acceleration.
-  3. Identify the sign of acceleration from a described scenario (positive means
+3. Identify the sign of acceleration from a described scenario (positive means
      accelerating in the positive direction; negative means decelerating or
      accelerating in the negative direction).
-  4. Explain why an object moving at constant speed can still be accelerating
+4. Explain why an object moving at constant speed can still be accelerating
      (if direction is changing — e.g. circular motion).
-
 
 ## Learning Objective
 
 After this concept, the learner can:
 
-s** — the learner can:
-  1. Define acceleration as the rate of change of velocity (Δv/Δt), and correctly
+1. Define acceleration as the rate of change of velocity (Δv/Δt), and correctly
      compute it including sign.
-  2. Distinguish between speeding up, slowing down (deceleration), and direction
+2. Distinguish between speeding up, slowing down (deceleration), and direction
      change as three distinct manifestations of non-zero acceleration.
-  3. Identify the sign of acceleration from a described scenario (positive means
+3. Identify the sign of acceleration from a described scenario (positive means
      accelerating in the positive direction; negative means decelerating or
      accelerating in the negative direction).
-  4. Explain why an object moving at constant speed can still be accelerating
+4. Explain why an object moving at constant speed can still be accelerating
      (if direction is changing — e.g. circular motion).
-
 
 ## Core Understanding
 
@@ -246,7 +241,6 @@ From the dispatch library (Delivery 2 §6):
    explicitly confronted; the "constant speed = no acceleration" misconception (M2)
    must be confronted with the turning example.
 
-
 ## Tutor Actions
 
 See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
@@ -352,7 +346,6 @@ signs." Have the learner classify their problem on this diagram.
   free fall is accelerating in Newtonian mechanics but not in general relativity —
   the equivalence principle); non-inertial frame forces (fictitious forces appear
   when the frame itself accelerates).
-
 
 ## Cross-Subject Connections
 

@@ -20,17 +20,14 @@
   problem requires these equations.
 - **Difficulty**: developing · **Bloom**: apply · **Mastery threshold**: 0.80 ·
   **Est. hours**: 4 · **References**: NCERT Physics Class 11 Ch. 3
-- **Learning objectives** — the learner can:
-  1. State the four kinematic equations for constant acceleration and identify
      which variables appear in each (to enable choosing the right equation).
-  2. Solve for any one unknown given the other three kinematic quantities (u, v,
+2. Solve for any one unknown given the other three kinematic quantities (u, v,
      a, s, t) using the appropriate equation.
-  3. Set up a sign convention for a given problem and apply it consistently —
+3. Set up a sign convention for a given problem and apply it consistently —
      choosing positive and negative directions and treating all signed quantities
      accordingly.
-  4. Apply the equations to free-fall problems (a = ±g = ±9.8 m/s²), including
+4. Apply the equations to free-fall problems (a = ±g = ±9.8 m/s²), including
      objects thrown upward.
-
 
 ## Learning Objective
 
@@ -42,17 +39,14 @@ predict the future state
   problem requires these equations.
 - **Difficulty**: developing · **Bloom**: apply · **Mastery threshold**: 0.80 ·
   **Est. hours**: 4 · **References**: NCERT Physics Class 11 Ch. 3
-- **Learning objectives** — the learner can:
-  1. State the four kinematic equations for constant acceleration and identify
      which variables appear in each (to enable choosing the right equation).
-  2. Solve for any one unknown given the other three kinematic quantities (u, v,
+2. Solve for any one unknown given the other three kinematic quantities (u, v,
      a, s, t) using the appropriate equation.
-  3. Set up a sign convention for a given problem and apply it consistently —
+3. Set up a sign convention for a given problem and apply it consistently —
      choosing positive and negative directions and treating all signed quantities
      accordingly.
-  4. Apply the equations to free-fall problems (a = ±g = ±9.8 m/s²), including
+4. Apply the equations to free-fall problems (a = ±g = ±9.8 m/s²), including
      objects thrown upward.
-
 
 ## Core Understanding
 
@@ -236,7 +230,6 @@ From the dispatch library (Delivery 2 §6):
 4. **Error exposure**: M1 (sign error), M4 (peak error), and M3 (wrong equation)
    should each be demonstrated as counterexamples before independent practice.
 
-
 ## Tutor Actions
 
 See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
@@ -346,7 +339,6 @@ explicit written act.
 - *Expert transfer*: Taylor expansion of position around t₀ — s(t₀ + Δt) ≈
   s(t₀) + v(t₀)Δt + ½a(t₀)(Δt)² — this IS the kinematic equation, as the first
   three terms of the Taylor series, exact when a is constant.
-
 
 ## Cross-Subject Connections
 

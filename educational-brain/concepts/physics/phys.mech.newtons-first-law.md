@@ -18,31 +18,26 @@
 - **Difficulty**: developing · **Bloom**: understand · **Mastery
   threshold**: 0.75 (KG-authored) · **Est. hours**: 3 ·
   **Reference (KG)**: NCERT Physics Class 9 Ch. 9
-- **Learning objectives** — the learner can:
-  1. Predict correctly what happens to a moving object when ALL forces on
      it stop (it keeps moving, same speed, same direction).
-  2. Explain why moving things around us DO stop (friction/air are forces
+2. Explain why moving things around us DO stop (friction/air are forces
      — the everyday world hides the law rather than showing it).
-  3. Identify, for a given scenario, whether a net force is acting — from
+3. Identify, for a given scenario, whether a net force is acting — from
      the *motion's change*, not from whether it "looks pushed."
-  4. State the law's both halves (rest stays rest / motion stays motion)
+4. State the law's both halves (rest stays rest / motion stays motion)
      and why they are one statement, not two.
-
 
 ## Learning Objective
 
 After this concept, the learner can:
 
-s** — the learner can:
-  1. Predict correctly what happens to a moving object when ALL forces on
+1. Predict correctly what happens to a moving object when ALL forces on
      it stop (it keeps moving, same speed, same direction).
-  2. Explain why moving things around us DO stop (friction/air are forces
+2. Explain why moving things around us DO stop (friction/air are forces
      — the everyday world hides the law rather than showing it).
-  3. Identify, for a given scenario, whether a net force is acting — from
+3. Identify, for a given scenario, whether a net force is acting — from
      the *motion's change*, not from whether it "looks pushed."
-  4. State the law's both halves (rest stays rest / motion stays motion)
+4. State the law's both halves (rest stays rest / motion stays motion)
      and why they are one statement, not two.
-
 
 ## Core Understanding
 
@@ -243,7 +238,6 @@ it going" answer to dissect) → **teach-back** with the tutor performing M1.
 animism here — story is garnish only); games (no natural mechanic embodies
 "nothing happens without cause" — a game about nothing happening isn't one).
 
-
 ## Tutor Actions
 
 See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
@@ -343,7 +337,6 @@ See `../teaching-actions/` dispatch library. The specific actions for this conce
 - **Expert transfer**: the learner spontaneously reframes any "what keeps
   it going?" question — in economics, in habit formation, anywhere — into
   "what's acting to change it?"; the law as a thinking template.
-
 
 ## Cross-Subject Connections
 

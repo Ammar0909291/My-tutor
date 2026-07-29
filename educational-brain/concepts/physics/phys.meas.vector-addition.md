@@ -18,33 +18,28 @@
   or field problems. This is the first major procedural tool in physics.
 - **Difficulty**: developing · **Bloom**: apply · **Mastery threshold**: 0.80 ·
   **Est. hours**: 3 · **References**: NCERT Physics Class 11 Ch. 4
-- **Learning objectives** — the learner can:
-  1. Find the resultant of two vectors at any angle using the triangle law or
      parallelogram law, with correct magnitude (by Pythagoras or the cosine rule)
      and direction (by trigonometry).
-  2. Resolve any vector into perpendicular (x and y) components using sine and
+2. Resolve any vector into perpendicular (x and y) components using sine and
      cosine.
-  3. Add multiple vectors by resolving all into components, summing components
+3. Add multiple vectors by resolving all into components, summing components
      separately, and reconstructing the resultant.
-  4. Verify a vector addition result by checking both the magnitude and the
+4. Verify a vector addition result by checking both the magnitude and the
      direction of the resultant.
-
 
 ## Learning Objective
 
 After this concept, the learner can:
 
-s** — the learner can:
-  1. Find the resultant of two vectors at any angle using the triangle law or
+1. Find the resultant of two vectors at any angle using the triangle law or
      parallelogram law, with correct magnitude (by Pythagoras or the cosine rule)
      and direction (by trigonometry).
-  2. Resolve any vector into perpendicular (x and y) components using sine and
+2. Resolve any vector into perpendicular (x and y) components using sine and
      cosine.
-  3. Add multiple vectors by resolving all into components, summing components
+3. Add multiple vectors by resolving all into components, summing components
      separately, and reconstructing the resultant.
-  4. Verify a vector addition result by checking both the magnitude and the
+4. Verify a vector addition result by checking both the magnitude and the
      direction of the resultant.
-
 
 ## Core Understanding
 
@@ -237,10 +232,32 @@ Actions that DON'T fit:
 - **Flashcard retrieval**: the skill here is procedural (apply a method), not
   factual recall. Practice problems, not flashcards.
 
-
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **ERROR-ANALYSIS** — begin here (before the component method): "Two forces act on
+   an object — 3 N east and 4 N north. What is the total force?" Wait for the learner's
+   answer. Most say "7 N" (M1 — arithmetic sum). Then show the correct answer (5 N,
+   northeast at 53°). Ask: "what went wrong?" This collision against M1 must happen
+   on the first day, before teaching the method, so the learner understands WHY a
+   method is needed.
+
+2. **WORKED-EXAMPLE** — three component-method traces at increasing difficulty:
+   (a) Two perpendicular vectors: Fₓ = 3 N, Fᵧ = 4 N → |F| = 5 N, θ = arctan(4/3) = 53°
+   (b) Two vectors at 60° to each other — requires cos/sin decomposition first
+   (c) Three vectors — show two rounds of addition; reinforce the method is iterative
+   Draw EVERY step; learner draws every step alongside.
+
+3. **PHYSICAL-MANIPULATION** — force-table demo or PhET Vectors simulation: learner
+   drags vectors, observes the resultant changing in real time. Prediction required
+   before each manipulation. Builds geometric intuition that the algebraic method
+   is encoding.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — three session openers:
+   "A 6 N force east and an 8 N force north — resultant magnitude and direction?" →
+   "What is the component method and why is it more general than the triangle method?" →
+   "Two forces of 5 N each act at 120° to each other. What is their resultant?"
 
 ## Voice Teaching Notes
 
@@ -344,10 +361,22 @@ a habit.
   polynomial spaces, quantum state spaces. The learner who deeply understands
   R² vector addition is prepared for this generalisation.
 
-
 ## Cross-Subject Connections
 
-Mathematics: significant figures tie directly to scientific notation and logarithms; dimensional analysis is a special case of algebraic unit-tracking; vector components use trigonometry. Chemistry: all lab measurements use SI units; concentration, moles, and temperature all live in this domain. Biology: biological measurements (cell size in micrometres, metabolic rates) use the same SI framework; dimensional analysis applies to enzyme kinetics.
+- **Mathematics**: vector addition is the defining operation of a vector space. The
+  parallelogram law of vector addition is equivalent to the coordinate-wise addition in
+  ℝⁿ. Triangle inequality |a + b| ≤ |a| + |b| is a theorem about vector magnitudes.
+- **Engineering (statics)**: force addition is the central tool of structural analysis.
+  The resultant of multiple forces on a joint or beam determines whether it is in
+  equilibrium. Truss analysis uses repeated vector addition.
+- **Navigation**: dead reckoning adds displacement vectors (bearing + distance) to track
+  position. Wind speed and aircraft heading compose by vector addition to give ground
+  track and ground speed.
+- **Computer Graphics / Game physics**: velocity, acceleration, and impulse are all
+  vectors. Every physics engine (Unity, Unreal) adds vectors at each simulation step.
+  Projectile motion is computed as the vector sum of horizontal and vertical components.
+- **Biology / Biomechanics**: forces from multiple muscles on a single joint add as
+  vectors. Net joint torque is the vector sum of muscle moment arms × forces.
 
 ## Blueprint References
 

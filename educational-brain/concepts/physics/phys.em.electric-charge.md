@@ -19,9 +19,16 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply electric charge and conservation at the **understand** level (Bloom) with difficulty tier **developing**.
+After this concept, the learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.em.electric-charge.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+1. State that electric charge is a fundamental, quantised, conserved property of matter.
+2. Explain that rubbing transfers electrons (not creates them), and determine the resulting sign
+   of each object using a charge ledger.
+3. Use the elementary charge (e = 1.6 × 10⁻¹⁹ C) to convert between coulombs and number of
+   elementary charges.
+4. Distinguish conventional current direction from the direction of electron flow.
+5. Apply conservation of charge to a problem involving charging by rubbing, conduction,
+   or induction, stating the sign and magnitude of each object after the process.
 
 
 ## Core Understanding
@@ -128,7 +135,25 @@ The naming convention (positive/negative, proton/electron) is purely historical 
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **WORKED-EXAMPLE** — the charge ledger. For every charging problem, write:
+   "System before: [object A] = 0 C, [object B] = 0 C. Electrons move from A to B.
+   System after: A has lost n electrons → A = +ne, B has gained n electrons → B = −ne.
+   Total: still 0." Do this explicitly every time until the learner runs it unprompted.
+
+2. **ERROR-ANALYSIS** — Present: "A student says rubbing a glass rod with silk creates
+   positive charge on the glass." Ask the learner to find the error before correcting.
+   The diagnosis skill (spotting the M1 "creation" error) matters as much as the repair.
+
+3. **MATCHING** — Bidirectional conventional/electron current matching. Given a circuit
+   diagram, the learner labels both the electron-flow arrow and the conventional-current
+   arrow. One-way labelling is not sufficient.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — Session opener for next 3 sessions: "What is the
+   elementary charge in coulombs?" → then "An object has charge −3.2 × 10⁻¹⁹ C. How
+   many excess electrons is that?" → then "In which direction does conventional current
+   flow relative to electrons in a wire?"
 
 ## Voice Teaching Notes
 
@@ -208,7 +233,18 @@ Draw the circuit. Label: "Electrons flow this way (arrow)." Write "Conventional 
 
 ## Cross-Subject Connections
 
-Mathematics: vector calculus (divergence, curl) formalises Maxwell's equations; complex exponentials describe AC circuits. Chemistry: electrochemistry (Faraday's laws, electrolysis, galvanic cells) maps directly onto electric-current concepts; atomic spectroscopy uses electromagnetic waves. Biology: membrane potentials and nerve impulses are electrical circuits; MRI and ECG are direct clinical applications.
+- **Chemistry**: ionic bonding is charge transfer between atoms. Oxidation state tracks
+  electrons lost/gained. Electrolysis uses charge flow through an electrolyte (positive
+  ions and negative ions carry current, not electrons — the contrast reinforces the
+  concept of charge carriers).
+- **Biology**: the nerve action potential is a controlled charge imbalance across a
+  membrane. Sodium ions (positive) and potassium ions (positive) move in opposite phases;
+  the resting potential (−70 mV) is a direct consequence of charge separation.
+- **Mathematics**: charge problems require signed arithmetic (algebraic sum of positive
+  and negative charges). Scientific notation is essential for expressing e = 1.6 × 10⁻¹⁹ C.
+- **Computing / Engineering**: electrostatic discharge (ESD) in electronics is uncontrolled
+  charge transfer — it destroys chips. Anti-static precautions in lab/manufacturing
+  environments are direct applications of charge control.
 
 ## Blueprint References
 

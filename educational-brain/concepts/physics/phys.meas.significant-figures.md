@@ -16,31 +16,26 @@
   significant figures; this concept is the licence to do so.
 - **Difficulty**: developing · **Bloom**: apply · **Mastery threshold**: 0.75 ·
   **Est. hours**: 2 · **References**: NCERT Physics Class 11 Ch. 2
-- **Learning objectives** — the learner can:
-  1. Count the number of significant figures in a given measured value, including
      cases with leading, trailing, and embedded zeros.
-  2. Round a calculated result to the correct number of significant figures for
+2. Round a calculated result to the correct number of significant figures for
      addition/subtraction and multiplication/division.
-  3. Explain WHY the number of significant figures in a result cannot exceed the
+3. Explain WHY the number of significant figures in a result cannot exceed the
      precision of the least precise measurement used.
-  4. Express a number in scientific notation to clarify ambiguous significant
+4. Express a number in scientific notation to clarify ambiguous significant
      figures (trailing zeros in large numbers).
-
 
 ## Learning Objective
 
 After this concept, the learner can:
 
-s** — the learner can:
-  1. Count the number of significant figures in a given measured value, including
+1. Count the number of significant figures in a given measured value, including
      cases with leading, trailing, and embedded zeros.
-  2. Round a calculated result to the correct number of significant figures for
+2. Round a calculated result to the correct number of significant figures for
      addition/subtraction and multiplication/division.
-  3. Explain WHY the number of significant figures in a result cannot exceed the
+3. Explain WHY the number of significant figures in a result cannot exceed the
      precision of the least precise measurement used.
-  4. Express a number in scientific notation to clarify ambiguous significant
+4. Express a number in scientific notation to clarify ambiguous significant
      figures (trailing zeros in large numbers).
-
 
 ## Core Understanding
 
@@ -222,10 +217,29 @@ Actions that DON'T fit:
 - **Open-ended inquiry for the rules themselves**: see Discovery lesson — reason
   is discoverable, rules are not.
 
-
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **DISCRIMINATION-TRAINING** — zero classification is the bottleneck skill.
+   Give 10 numbers one at a time; learner classifies each zero as significant or not,
+   with reason: 1200 (ambiguous), 1200. (4 sig figs, trailing with decimal), 0.0012
+   (leading), 1020 (sandwiched = significant). No answers before the learner commits.
+   The zero-type rule must be applied explicitly, not guessed.
+
+2. **WORKED-EXAMPLE** — two operation traces at increasing difficulty:
+   (a) Addition: 12.3 + 4.56 + 0.789 → 17.6 (limited by tenths place, not sig figs)
+   (b) Multiplication: 4.57 × 2.3 = 10.511 → 11 (2 sig figs, answer to fewest in inputs)
+   Show where the limiting factor comes from before performing the rounding.
+
+3. **ERROR-ANALYSIS** — present: "A student computes 8.543 ÷ 2.1 = 4.068095238
+   and reports all digits." Ask: why is this wrong? How many sig figs should the
+   answer have? Then: "The same student writes 4.07 — is that correct?" (No — should
+   be 4.1, only 2 sig figs.) The two-step diagnosis is the skill.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — three session openers:
+   "How many significant figures in 0.00340?" → "Round 8.675 × 2.1 to the correct
+   sig figs" → "In addition, what determines the number of significant figures?"
 
 ## Voice Teaching Notes
 
@@ -329,10 +343,24 @@ This walks through the WHY; the rule follows from it.
   with floating-point representation and the different ways "precision" manifests
   in numerical computation vs. physical measurement.
 
-
 ## Cross-Subject Connections
 
-Mathematics: significant figures tie directly to scientific notation and logarithms; dimensional analysis is a special case of algebraic unit-tracking; vector components use trigonometry. Chemistry: all lab measurements use SI units; concentration, moles, and temperature all live in this domain. Biology: biological measurements (cell size in micrometres, metabolic rates) use the same SI framework; dimensional analysis applies to enzyme kinetics.
+- **Mathematics**: significant figures are the physics cousin of decimal places in
+  arithmetic — both are about precision claims. In pure maths, numbers are exact;
+  in physics, every measured number has a precision limit. Scientific notation
+  (1.23 × 10⁴) makes significant figures explicit.
+- **Chemistry**: significant figures in stoichiometric calculations determine the
+  precision of computed product masses. Atomic mass (12.011 for carbon) is given to
+  4 significant figures by convention; using more in a calculation implies false precision.
+- **Engineering**: machining tolerances, circuit component values (resistors: 5% tolerance
+  = 2 sig figs of precision), and material properties are all expressed to their actual
+  measurement precision, never more.
+- **Data Science**: rounding rules and precision loss in floating-point arithmetic mirror
+  significant-figure rules — IEEE 754 double has ~15 sig figs; accumulated rounding error
+  in numerical algorithms is the computing equivalent of sig-fig accumulation.
+- **Real world**: a calculator displaying 3.141592653 for π does not mean the answer
+  should be reported to 10 sig figs — the limiting measured quantity determines the answer's
+  precision. This is among the most consistently violated rules in student lab reports.
 
 ## Blueprint References
 

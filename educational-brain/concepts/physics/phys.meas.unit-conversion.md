@@ -16,31 +16,26 @@
   must have before moving into mechanics.
 - **Difficulty**: foundational · **Bloom**: apply · **Mastery threshold**: 0.70 ·
   **Est. hours**: 1 · **References**: NCERT Physics Class 11 Ch. 2
-- **Learning objectives** — the learner can:
-  1. Convert a measurement between SI and common non-SI units using the
      "multiply by 1" (fraction method) approach, showing all unit cancellations.
-  2. Apply the SI prefix table (pico through tera) to express a quantity with
+2. Apply the SI prefix table (pico through tera) to express a quantity with
      a convenient prefix.
-  3. Convert a compound unit (e.g. km/h to m/s) by applying the conversion
+3. Convert a compound unit (e.g. km/h to m/s) by applying the conversion
      to each component unit separately.
-  4. Verify a conversion is correct by checking the direction of the conversion
+4. Verify a conversion is correct by checking the direction of the conversion
      (smaller unit → larger number; larger unit → smaller number).
-
 
 ## Learning Objective
 
 After this concept, the learner can:
 
-s** — the learner can:
-  1. Convert a measurement between SI and common non-SI units using the
+1. Convert a measurement between SI and common non-SI units using the
      "multiply by 1" (fraction method) approach, showing all unit cancellations.
-  2. Apply the SI prefix table (pico through tera) to express a quantity with
+2. Apply the SI prefix table (pico through tera) to express a quantity with
      a convenient prefix.
-  3. Convert a compound unit (e.g. km/h to m/s) by applying the conversion
+3. Convert a compound unit (e.g. km/h to m/s) by applying the conversion
      to each component unit separately.
-  4. Verify a conversion is correct by checking the direction of the conversion
+4. Verify a conversion is correct by checking the direction of the conversion
      (smaller unit → larger number; larger unit → smaller number).
-
 
 ## Core Understanding
 
@@ -208,10 +203,29 @@ From the dispatch library (Delivery 2 §6):
 3. **Error exposure** (high fit for M2/M3): demonstrate the wrong direction (M2)
    and the missing denominator unit (M3) as counterexamples before independent practice.
 
-
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **WORKED-EXAMPLE** — four conversion traces, one per type:
+   (a) Single prefix: 3.5 km → m: 3.5 km × (1000 m / 1 km) = 3500 m
+   (b) Single prefix, inverse: 8500 m → km: 8500 m × (1 km / 1000 m) = 8.5 km
+   (c) Compound unit: 72 km/h → m/s: 72 × (1000 m / 1 km) × (1 h / 3600 s) = 20 m/s
+   (d) Squared unit: 1 m² → cm²: 1 m² × (100 cm / 1 m)² = 10,000 cm²
+   Show the fraction explicitly for all four. The learner must write it before computing.
+
+2. **ERROR-ANALYSIS** — present the wrong-direction error: student writes "8500 m ×
+   (1000 m / 1 km) = 8,500,000 m/km." Ask the learner to find the error. The unit
+   analysis (m × m/km = m²/km, not km) must catch it — teach unit-tracking as the
+   bug detector, not intuition about which way to go.
+
+3. **PREDICTION-BEFORE-DEMO** — before trace (d), ask: "If 1 m = 100 cm, how many
+   cm² is 1 m²?" Most learners say 100; the correct answer is 10,000. The surprise
+   creates cognitive readiness for the "square the conversion factor" rule.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — next three sessions:
+   "Convert 90 km/h to m/s without looking anything up" → "Convert 5 cm² to m²" →
+   "A pressure is 101.3 kPa. What is it in Pa? What is it in MPa?"
 
 ## Voice Teaching Notes
 
@@ -304,10 +318,23 @@ learner to write both fractions explicitly before any arithmetic.
   with the "multiply by 1" framework and the idea that any self-consistent unit
   system works.
 
-
 ## Cross-Subject Connections
 
-Mathematics: significant figures tie directly to scientific notation and logarithms; dimensional analysis is a special case of algebraic unit-tracking; vector components use trigonometry. Chemistry: all lab measurements use SI units; concentration, moles, and temperature all live in this domain. Biology: biological measurements (cell size in micrometres, metabolic rates) use the same SI framework; dimensional analysis applies to enzyme kinetics.
+- **Mathematics**: unit conversion is dimensional algebra — multiplying by fractions equal
+  to 1 (equivalents). The same technique appears in ratio and proportion problems, and in
+  changing coordinate systems via scale factors.
+- **Chemistry**: concentration conversions (mol/L ↔ g/L ↔ mg/dL ↔ ppm) are unit
+  conversions. Stoichiometry problems require converting between mass, moles, and molecules
+  using molar mass and Avogadro's number.
+- **Biology**: drug dosing (mg/kg of body mass), enzyme turnover (μmol/min/mg protein),
+  and flow rates (mL/min) require fluent conversion between metric prefixes and between
+  time units.
+- **Engineering**: SI ↔ Imperial conversion is a live professional skill (aerospace
+  bridging US and international standards); energy unit conversions (kWh, BTU, joule,
+  calorie) appear in thermodynamics and energy auditing.
+- **Geography / Meteorology**: temperature (°C ↔ K ↔ °F), speed (km/h ↔ m/s ↔ knots),
+  and pressure (Pa ↔ bar ↔ mmHg ↔ atm) conversions are used daily in scientific
+  reporting and international communication.
 
 ## Blueprint References
 

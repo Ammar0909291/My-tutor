@@ -18,15 +18,12 @@
   deceleration (negative acceleration with the direction of motion).
 - **Difficulty**: foundational · **Bloom**: understand · **Mastery threshold**: 0.70 ·
   **Est. hours**: 2 · **References**: NCERT Physics Class 9 Ch. 8
-- **Learning objectives** — the learner can:
-  1. Define average speed as total distance/total time and average velocity as
      total displacement/total time, and explain why they differ when direction
      changes.
-  2. Compute average speed and average velocity from a described motion.
-  3. Explain what instantaneous velocity means (rate of change of position at a
+2. Compute average speed and average velocity from a described motion.
+3. Explain what instantaneous velocity means (rate of change of position at a
      single instant) and how it differs from average velocity over a time interval.
-  4. Use the sign of velocity to indicate direction in a chosen coordinate system.
-
+4. Use the sign of velocity to indicate direction in a chosen coordinate system.
 
 ## Learning Objective
 
@@ -42,15 +39,12 @@ not understand why speed (distance/time) and
   deceleration (negative acceleration with the direction of motion).
 - **Difficulty**: foundational · **Bloom**: understand · **Mastery threshold**: 0.70 ·
   **Est. hours**: 2 · **References**: NCERT Physics Class 9 Ch. 8
-- **Learning objectives** — the learner can:
-  1. Define average speed as total distance/total time and average velocity as
      total displacement/total time, and explain why they differ when direction
      changes.
-  2. Compute average speed and average velocity from a described motion.
-  3. Explain what instantaneous velocity means (rate of change of position at a
+2. Compute average speed and average velocity from a described motion.
+3. Explain what instantaneous velocity means (rate of change of position at a
      single instant) and how it differs from average velocity over a time interval.
-  4. Use the sign of velocity to indicate direction in a chosen coordinate system.
-
+4. Use the sign of velocity to indicate direction in a chosen coordinate system.
 
 ## Core Understanding
 
@@ -228,7 +222,6 @@ From the dispatch library (Delivery 2 §6):
 4. **Graph interpretation** (high fit): position-time graph, slope = velocity —
    install the graph interpretation alongside the formula.
 
-
 ## Tutor Actions
 
 See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
@@ -327,7 +320,6 @@ different aspects of the same trip."
   Lorentz transformation, not simple addition. Understanding why Newtonian velocity
   (additive) fails at high speeds is grounded in having a precise definition of
   velocity as displacement/time in a given reference frame.
-
 
 ## Cross-Subject Connections
 

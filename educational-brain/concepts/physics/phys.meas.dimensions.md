@@ -17,32 +17,21 @@
   cross-cutting tool, not a terminal concept.
 - **Difficulty**: developing · **Bloom**: apply · **Mastery threshold**: 0.75 ·
   **Est. hours**: 3 · **References**: NCERT Physics Class 11 Ch. 2
-- **Learning objectives** — the learner can:
-  1. Write the dimensional formula of a given physical quantity using the symbols
-     M (mass), L (length), T (time), A (current), Θ (temperature), N (amount),
-     J (luminous intensity).
-  2. Verify whether a given physical equation is dimensionally consistent
-     (both sides have the same dimensional formula).
-  3. Derive the unit of a physical quantity from its dimensional formula.
-  4. Identify the limitations of dimensional analysis (cannot determine
-     dimensionless constants, cannot distinguish additive from multiplicative
-     forms).
 
 
 ## Learning Objective
 
 After this concept, the learner can:
 
-s** — the learner can:
-  1. Write the dimensional formula of a given physical quantity using the symbols
-     M (mass), L (length), T (time), A (current), Θ (temperature), N (amount),
-     J (luminous intensity).
-  2. Verify whether a given physical equation is dimensionally consistent
-     (both sides have the same dimensional formula).
-  3. Derive the unit of a physical quantity from its dimensional formula.
-  4. Identify the limitations of dimensional analysis (cannot determine
-     dimensionless constants, cannot distinguish additive from multiplicative
-     forms).
+1. Write the dimensional formula of a given physical quantity using the symbols
+   M (mass), L (length), T (time), A (current), Θ (temperature), N (amount),
+   J (luminous intensity).
+2. Verify whether a given physical equation is dimensionally consistent
+   (both sides have the same dimensional formula).
+3. Derive the SI unit of a physical quantity from its dimensional formula.
+4. Identify the limitations of dimensional analysis: it cannot determine
+   dimensionless constants and cannot distinguish between multiple
+   dimensionally consistent forms of a formula.
 
 
 ## Core Understanding
@@ -236,7 +225,26 @@ Actions that DON'T fit:
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **GUIDED-DISCOVERY** — run the apples/oranges/metres/seconds sequence
+   (Discovery Questions step 1) before introducing dimensional symbols. The
+   learner must arrive at "you can only add same-type quantities" by reasoning,
+   not by hearing it stated.
+
+2. **WORKED-EXAMPLE** — three traces at increasing difficulty:
+   (a) [½mv²] → [M·(LT⁻¹)²] = [ML²T⁻²] (energy)
+   (b) [F = ma] → [M·LT⁻²] = [MLT⁻²] ✓ (verification of equation)
+   (c) [P = F/A] → [MLT⁻²/L²] = [ML⁻¹T⁻²] → SI unit: Pa (derivation of unit)
+   Show the ½ in (a) as dimensionless — it disappears in the check.
+
+3. **ERROR-ANALYSIS** — present F = ½mv² and F = ma side by side, both dimensionally
+   [MLT⁻²]. Ask: "which is correct?" The dimension check cannot tell you.
+   This is the M1 inoculation — must happen during first teaching, not later.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — next three session openers:
+   "What are the dimensions of kinetic energy?" → "What is the dimensional formula
+   of pressure?" → "Can a dimensionally correct formula still be wrong — give an example?"
 
 ## Voice Teaching Notes
 
@@ -352,7 +360,19 @@ right one?" Shift focus to what dimensions CANNOT tell you.
 
 ## Cross-Subject Connections
 
-Mathematics: significant figures tie directly to scientific notation and logarithms; dimensional analysis is a special case of algebraic unit-tracking; vector components use trigonometry. Chemistry: all lab measurements use SI units; concentration, moles, and temperature all live in this domain. Biology: biological measurements (cell size in micrometres, metabolic rates) use the same SI framework; dimensional analysis applies to enzyme kinetics.
+- **Mathematics**: dimensional analysis is applied algebraic type-checking. The rule
+  "you can only add quantities of the same type" mirrors the algebraic rule that
+  you can only add like terms. Ratio of same-dimension quantities is dimensionless
+  — exactly the condition required for logarithm and trig function arguments.
+- **Chemistry**: rate laws (mol·L⁻¹·s⁻¹) and equilibrium constants require
+  dimensional consistency. The ideal gas law PV = nRT can be verified dimensionally
+  using [ML⁻¹T⁻²][L³] = [N][ML²T⁻²K⁻¹N⁻¹][K].
+- **Engineering**: dimensional analysis is the foundation of the method of similitude
+  — building scale models of bridges, aircraft, and ships that behave the same as
+  the real thing when Reynolds numbers and other dimensionless groups are matched.
+- **Computer Science**: dimensional types in physical simulation code — languages like
+  F# and Haskell have unit-of-measure type systems that catch dimensional errors at
+  compile time, exactly the programming analogue of this concept.
 
 ## Blueprint References
 

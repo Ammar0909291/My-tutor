@@ -17,31 +17,26 @@
   gateway to scientific thinking about evidence quality.
 - **Difficulty**: developing · **Bloom**: apply · **Mastery threshold**: 0.75 ·
   **Est. hours**: 3 · **References**: NCERT Physics Class 11 Ch. 2
-- **Learning objectives** — the learner can:
-  1. Distinguish between systematic error (consistent bias) and random error
      (unpredictable scatter) and give an example of each.
-  2. Calculate absolute uncertainty, relative (fractional) uncertainty, and
+2. Calculate absolute uncertainty, relative (fractional) uncertainty, and
      percentage uncertainty for a given measurement.
-  3. Propagate uncertainty through addition/subtraction and
+3. Propagate uncertainty through addition/subtraction and
      multiplication/division using the standard rules.
-  4. Express a measurement result in the correct form: (value ± uncertainty) unit,
+4. Express a measurement result in the correct form: (value ± uncertainty) unit,
      with uncertainty to 1 significant figure.
-
 
 ## Learning Objective
 
 After this concept, the learner can:
 
-s** — the learner can:
-  1. Distinguish between systematic error (consistent bias) and random error
+1. Distinguish between systematic error (consistent bias) and random error
      (unpredictable scatter) and give an example of each.
-  2. Calculate absolute uncertainty, relative (fractional) uncertainty, and
+2. Calculate absolute uncertainty, relative (fractional) uncertainty, and
      percentage uncertainty for a given measurement.
-  3. Propagate uncertainty through addition/subtraction and
+3. Propagate uncertainty through addition/subtraction and
      multiplication/division using the standard rules.
-  4. Express a measurement result in the correct form: (value ± uncertainty) unit,
+4. Express a measurement result in the correct form: (value ± uncertainty) unit,
      with uncertainty to 1 significant figure.
-
 
 ## Core Understanding
 
@@ -237,10 +232,33 @@ Actions that DON'T fit:
   are not discoverable by learner reasoning from scratch; they require direct
   instruction. The principle (errors exist) is discoverable; the rules are not.
 
-
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **GUIDED-DISCOVERY** — discovery before naming: "You measure a table's width ten
+   times and get slightly different values. Are you making a mistake?" Force the
+   learner to articulate WHY variation exists before introducing "random error."
+   Then: "What if the ruler's zero mark is slightly off from the edge?" — why does
+   taking more measurements not fix this? This generates the systematic/random
+   distinction from the learner's own reasoning.
+
+2. **WORKED-EXAMPLE** — three propagation traces at increasing difficulty:
+   (a) x = 10.0 ± 0.1 cm; y = 5.0 ± 0.1 cm; z = x + y → z = 15.0 ± 0.2 cm
+   (b) A = length × width = 8.0 ± 0.1 cm × 3.0 ± 0.1 cm → relative uncertainty
+   (c) v = d/t with uncertainties — relative uncertainty method
+   Show every intermediate step; students omit steps and lose track of signs.
+
+3. **CONTRAST-CASES** — averaging demo: take five "measurements" (teacher announces
+   values aloud) with deliberate scatter but no bias. Mean converges. Then announce
+   same five values shifted up by 0.5 (systematic). Mean does not converge to true
+   value. Ask: "What did averaging do to the random part? What did it do to the
+   systematic part?" The difference must be visible, not just stated.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — three session openers:
+   "What does taking more readings fix, and what does it NOT fix?" → "What is the
+   rule for propagating uncertainty through a sum?" → "If A = B × C and each has
+   2% relative uncertainty, what is A's relative uncertainty?"
 
 ## Voice Teaching Notes
 
@@ -354,10 +372,24 @@ numerically first; the propagation rule is a shortcut for that calculation.
   as instrument uncertainty, but understanding classical uncertainty first clears
   the conceptual space for the quantum version.
 
-
 ## Cross-Subject Connections
 
-Mathematics: significant figures tie directly to scientific notation and logarithms; dimensional analysis is a special case of algebraic unit-tracking; vector components use trigonometry. Chemistry: all lab measurements use SI units; concentration, moles, and temperature all live in this domain. Biology: biological measurements (cell size in micrometres, metabolic rates) use the same SI framework; dimensional analysis applies to enzyme kinetics.
+- **Mathematics**: uncertainty arithmetic mirrors interval arithmetic and significant-figure
+  rules. Error bars on graphs are a statistical concept — mean, standard deviation, and
+  confidence intervals are the mathematical formalisation of random-error quantification.
+- **Chemistry**: every experimental result in chemistry carries uncertainty. Titration
+  (reading a burette to ±0.05 mL), pH measurement, and spectrophotometry all require
+  uncertainty propagation — adding errors in quadrature is standard lab practice.
+- **Biology**: ecological sampling, clinical measurement (blood pressure, BMI), and
+  epidemiological data all require systematic vs. random error literacy. A clinical
+  thermometer's calibration error is a systematic error; patient-to-patient variation
+  is random error.
+- **Engineering**: manufacturing tolerance (±0.1 mm), calibration certificates, and
+  measurement system analysis (gauge R&R) are direct industrial applications of
+  uncertainty quantification.
+- **Statistics / Data Science**: error propagation → linear error propagation formula;
+  random error → standard error of the mean; systematic error → bias, requiring
+  calibration, not more data.
 
 ## Blueprint References
 

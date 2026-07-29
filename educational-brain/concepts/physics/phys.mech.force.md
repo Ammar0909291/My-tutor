@@ -18,33 +18,28 @@
   of one object) will systematically misapply Newton's third law.
 - **Difficulty**: foundational · **Bloom**: understand · **Mastery threshold**: 0.70 ·
   **Est. hours**: 2 · **References**: NCERT Physics Class 9 Ch. 9
-- **Learning objectives** — the learner can:
-  1. Define force as a vector quantity representing an INTERACTION between two
      objects, requiring both an agent (what exerts the force) and a recipient
      (what experiences it).
-  2. Classify forces as contact forces (normal, friction, tension, applied) or
+2. Classify forces as contact forces (normal, friction, tension, applied) or
      field forces (gravity, electric, magnetic) and give examples of each.
-  3. Identify all forces acting ON a single object in a given scenario and draw
+3. Identify all forces acting ON a single object in a given scenario and draw
      a free-body diagram showing them as vectors.
-  4. Explain why net force (vector sum of all forces on an object) — not any
+4. Explain why net force (vector sum of all forces on an object) — not any
      individual force — determines the change in motion.
-
 
 ## Learning Objective
 
 After this concept, the learner can:
 
-s** — the learner can:
-  1. Define force as a vector quantity representing an INTERACTION between two
+1. Define force as a vector quantity representing an INTERACTION between two
      objects, requiring both an agent (what exerts the force) and a recipient
      (what experiences it).
-  2. Classify forces as contact forces (normal, friction, tension, applied) or
+2. Classify forces as contact forces (normal, friction, tension, applied) or
      field forces (gravity, electric, magnetic) and give examples of each.
-  3. Identify all forces acting ON a single object in a given scenario and draw
+3. Identify all forces acting ON a single object in a given scenario and draw
      a free-body diagram showing them as vectors.
-  4. Explain why net force (vector sum of all forces on an object) — not any
+4. Explain why net force (vector sum of all forces on an object) — not any
      individual force — determines the change in motion.
-
 
 ## Core Understanding
 
@@ -227,7 +222,6 @@ From the dispatch library (Delivery 2 §6):
 4. **Free-body diagram practice** (high fit): drawing free-body diagrams is
    the primary procedural tool for identifying forces.
 
-
 ## Tutor Actions
 
 See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
@@ -329,7 +323,6 @@ No force = no change in motion = constant velocity. That's Newton's first law."
   virtual bosons. The concept of "two-party interaction" remains — the boson is
   exchanged between two particles. Understanding forces as interactions is the
   classical foundation for the QFT picture.
-
 
 ## Cross-Subject Connections
 

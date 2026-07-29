@@ -20,17 +20,14 @@
   or both products.
 - **Difficulty**: proficient · **Bloom**: apply · **Mastery threshold**: 0.80 ·
   **Est. hours**: 4 · **References**: NCERT Physics Class 11 Ch. 4; H.C. Verma Vol. 1
-- **Learning objectives** — the learner can:
-  1. Compute the dot product of two vectors using both the geometric formula
      (A·B = |A||B|cos θ) and the component formula (A·B = AxBx + AyBy + AzBz),
      and state the result is a scalar.
-  2. Determine the angle between two vectors using the dot product.
-  3. Compute the magnitude of the cross product (|A × B| = |A||B|sin θ), find its
+2. Determine the angle between two vectors using the dot product.
+3. Compute the magnitude of the cross product (|A × B| = |A||B|sin θ), find its
      direction by the right-hand rule, and state the result is a vector perpendicular
      to both operands.
-  4. Identify which product (dot or cross) is appropriate for a given physical
+4. Identify which product (dot or cross) is appropriate for a given physical
      context (work → dot; torque → cross) and justify the choice.
-
 
 ## Learning Objective
 
@@ -42,17 +39,14 @@ only do
   or both products.
 - **Difficulty**: proficient · **Bloom**: apply · **Mastery threshold**: 0.80 ·
   **Est. hours**: 4 · **References**: NCERT Physics Class 11 Ch. 4; H.C. Verma Vol. 1
-- **Learning objectives** — the learner can:
-  1. Compute the dot product of two vectors using both the geometric formula
      (A·B = |A||B|cos θ) and the component formula (A·B = AxBx + AyBy + AzBz),
      and state the result is a scalar.
-  2. Determine the angle between two vectors using the dot product.
-  3. Compute the magnitude of the cross product (|A × B| = |A||B|sin θ), find its
+2. Determine the angle between two vectors using the dot product.
+3. Compute the magnitude of the cross product (|A × B| = |A||B|sin θ), find its
      direction by the right-hand rule, and state the result is a vector perpendicular
      to both operands.
-  4. Identify which product (dot or cross) is appropriate for a given physical
+4. Identify which product (dot or cross) is appropriate for a given physical
      context (work → dot; torque → cross) and justify the choice.
-
 
 ## Core Understanding
 
@@ -239,10 +233,32 @@ From the dispatch library (Delivery 2 §6):
 4. **Error exposure**: show the cross product computed with left hand vs. right
    hand — different result. Show why anti-commutativity matters in torque.
 
-
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **WORKED-EXAMPLE** — one dot-product trace and one cross-product trace side by side:
+   Dot: A = (3, 4, 0), B = (1, 2, 0); A·B = 3×1 + 4×2 + 0 = 11 (scalar — no direction)
+   Cross: A × B = (0×0−0×2, 0×1−3×0, 3×2−4×1) = (0, 0, 2) (vector — has direction)
+   State the result type BEFORE computing: "dot gives a number; cross gives a vector
+   perpendicular to both." State again AFTER: "number (11) vs. vector pointing out of
+   the page (0, 0, 2)." The type distinction must frame every calculation.
+
+2. **DISCRIMINATION-TRAINING** — five physics scenarios, learner identifies which
+   product to use BEFORE computing: (a) work done by a force on a displacement;
+   (b) torque of a force about a pivot; (c) projection of velocity onto a surface normal;
+   (d) magnetic force on a moving charge; (e) power delivered by a force.
+   The selection skill is separate from the computation skill — drill both.
+
+3. **ERROR-ANALYSIS** — present: student computes A × B using left-hand rule.
+   Show the sign error in the direction. Ask: "what did the right-hand rule
+   predict?" Reinforce: anti-commutativity (A × B = −B × A) as verification
+   tool — if you get the same result both ways, you made an error.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — three session openers:
+   "What type of quantity does each product return?" → "In torque τ = r × F, which
+   direction does τ point if r is east and F is north?" → "When would you use
+   the dot product vs. the cross product in a new physics problem?"
 
 ## Voice Teaching Notes
 
@@ -339,10 +355,22 @@ position with every problem until the hand motion is automatic.
 - *Expert transfer*: generalised inner products in Hilbert spaces (quantum
   mechanics — the overlap integral ⟨ψ|φ⟩ is a dot product in function space).
 
-
 ## Cross-Subject Connections
 
-Mathematics: significant figures tie directly to scientific notation and logarithms; dimensional analysis is a special case of algebraic unit-tracking; vector components use trigonometry. Chemistry: all lab measurements use SI units; concentration, moles, and temperature all live in this domain. Biology: biological measurements (cell size in micrometres, metabolic rates) use the same SI framework; dimensional analysis applies to enzyme kinetics.
+- **Mathematics**: dot product defines the Euclidean inner product; cross product is the
+  exterior product in 3D — it generalises to wedge products in differential geometry.
+  Determinant of a 3×3 matrix equals the scalar triple product a·(b×c).
+- **Electromagnetism**: F = qv × B (magnetic force) is a cross product. Torque τ = r × F
+  is a cross product. Magnetic flux Φ = B·A is a dot product. These are among the most
+  important vector products in physics.
+- **Engineering (structural mechanics)**: torque τ = r × F appears in lever analysis,
+  gear systems, and moment calculations. Work W = F·d (dot product) determines energy
+  transferred.
+- **Computer Graphics**: surface normals are computed via cross product of edge vectors —
+  essential for lighting calculations. The dot product of the normal with the light
+  direction gives diffuse shading (Lambertian reflectance).
+- **Quantum Mechanics / Chemistry**: orbital angular momentum L = r × p is a cross
+  product. Molecular interaction energies involve dot products of dipole vectors.
 
 ## Blueprint References
 

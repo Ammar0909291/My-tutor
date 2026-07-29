@@ -17,33 +17,28 @@
   depends on this distinction being automatic.
 - **Difficulty**: foundational · **Bloom**: understand · **Mastery threshold**: 0.70 ·
   **Est. hours**: 2 · **References**: NCERT Physics Class 11 Ch. 4
-- **Learning objectives** — the learner can:
-  1. Define scalar and vector, using the direction criterion — not just a
      memorised list of examples.
-  2. Classify a novel physical quantity (one not previously seen in instruction)
+2. Classify a novel physical quantity (one not previously seen in instruction)
      as scalar or vector by reasoning, not recall.
-  3. Explain why two identical scalar values (e.g. 40 km/h north and 40 km/h
+3. Explain why two identical scalar values (e.g. 40 km/h north and 40 km/h
      south) are NOT the same vector quantity.
-  4. State that direction must be specified to fully describe a vector, and give
+4. State that direction must be specified to fully describe a vector, and give
      a direction reference system (compass, angle, sign convention) for at least
      one example.
-
 
 ## Learning Objective
 
 After this concept, the learner can:
 
-s** — the learner can:
-  1. Define scalar and vector, using the direction criterion — not just a
+1. Define scalar and vector, using the direction criterion — not just a
      memorised list of examples.
-  2. Classify a novel physical quantity (one not previously seen in instruction)
+2. Classify a novel physical quantity (one not previously seen in instruction)
      as scalar or vector by reasoning, not recall.
-  3. Explain why two identical scalar values (e.g. 40 km/h north and 40 km/h
+3. Explain why two identical scalar values (e.g. 40 km/h north and 40 km/h
      south) are NOT the same vector quantity.
-  4. State that direction must be specified to fully describe a vector, and give
+4. State that direction must be specified to fully describe a vector, and give
      a direction reference system (compass, angle, sign convention) for at least
      one example.
-
 
 ## Core Understanding
 
@@ -236,10 +231,28 @@ Actions that DON'T fit:
   recalling a list; heavy retrieval practice on the list will deepen M1. Retrieval
   practice is appropriate only for the definitions, not for the classification task.
 
-
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **GUIDED-DISCOVERY** — walk-and-distance demo first (Discovery step 1). Learner
+   describes the walk; tutor asks: "Is the description complete?" Keep asking until the
+   learner adds direction unprompted. The word "direction" must come from the learner,
+   not the tutor, for the criterion to be internalised.
+
+2. **CONTRAST-CASES** — after every definition, give a scalar/vector pair:
+   temperature 37°C / velocity 37 m/s south; distance 5 km / displacement 5 km NW;
+   speed 60 km/h / force 60 N upward. For each pair: "which one needs direction to
+   be complete?" Never announce the answer — require the learner to apply the criterion.
+
+3. **ERROR-ANALYSIS** — two equal forces in opposite directions: "A 10 N force east
+   and a 10 N force west on the same object. What is the net force?" Wait. Then: "If
+   we added them as scalars: 10 + 10 = 20 N — why is that wrong?" The learner must
+   articulate the direction-cancellation, not just accept it.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — next three sessions: "Give me a scalar and a vector
+   that both measure the same physical situation" (e.g. speed/velocity, distance/
+   displacement). Fluent examples on demand = operational criterion, not list recall.
 
 ## Voice Teaching Notes
 
@@ -345,10 +358,20 @@ information gap.
   this requires the learner to have first deeply internalised what a "true" vector
   IS.
 
-
 ## Cross-Subject Connections
 
-Mathematics: significant figures tie directly to scientific notation and logarithms; dimensional analysis is a special case of algebraic unit-tracking; vector components use trigonometry. Chemistry: all lab measurements use SI units; concentration, moles, and temperature all live in this domain. Biology: biological measurements (cell size in micrometres, metabolic rates) use the same SI framework; dimensional analysis applies to enzyme kinetics.
+- **Mathematics**: vectors are mathematical objects from linear algebra — scalars are
+  elements of a field (ℝ), vectors are elements of a vector space (ℝⁿ). The scalar/vector
+  distinction is fundamental to tensor notation used in advanced mechanics and GR.
+- **Chemistry**: molecular dipole moment is a vector quantity — direction matters, not
+  just magnitude. Bond polarity is scalar (electronegativity difference); molecular polarity
+  requires vector summation of bond dipoles.
+- **Biology**: force is a vector in biomechanics (muscle force has both direction and
+  magnitude). Blood pressure is scalar; blood flow velocity is vector.
+- **Navigation / Geography**: displacement (vector) vs. distance (scalar) is foundational
+  to GPS, mapping, and route planning. Wind velocity is a vector; wind speed is a scalar.
+- **Computer Graphics**: vectors are the core data structure for 3D positions, velocities,
+  and lighting directions. The scalar/vector distinction maps directly to shader programming.
 
 ## Blueprint References
 

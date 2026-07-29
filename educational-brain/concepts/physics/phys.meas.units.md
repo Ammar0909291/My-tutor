@@ -13,26 +13,18 @@
 - **Difficulty**: foundational · **Bloom**: remember · **Mastery threshold**: 0.70 ·
   **Est. hours**: 2 · **References**: NCERT Physics Class 11 Ch. 2; Halliday &
   Resnick Ch. 1
-- **Learning objectives** — the learner can:
-  1. Name all seven SI base quantities and their units, including the unit symbol.
-  2. Classify a given physical quantity as a base or derived quantity and state which
-     base quantities it is built from.
-  3. Write the correct unit symbol for a given measurement, respecting capitalisation
-     conventions (N not n, Pa not pa, s not S).
-  4. Explain WHY a universal measurement system is necessary and what it replaced.
 
 
 ## Learning Objective
 
 After this concept, the learner can:
 
-s** — the learner can:
-  1. Name all seven SI base quantities and their units, including the unit symbol.
-  2. Classify a given physical quantity as a base or derived quantity and state which
-     base quantities it is built from.
-  3. Write the correct unit symbol for a given measurement, respecting capitalisation
-     conventions (N not n, Pa not pa, s not S).
-  4. Explain WHY a universal measurement system is necessary and what it replaced.
+1. Name all seven SI base quantities and their units, including the unit symbol.
+2. Classify a given physical quantity as a base or derived quantity and state which
+   base quantities it is built from.
+3. Write the correct unit symbol for a given measurement, respecting capitalisation
+   conventions (N not n, Pa not pa, s not S).
+4. Explain WHY a universal measurement system is necessary and what it replaced.
 
 
 ## Core Understanding
@@ -212,7 +204,28 @@ Actions that DON'T fit:
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **WORKED-EXAMPLE** — open with a single unit-conversion chain, written step-by-step
+   with units tracked through every line. Canonical example: 72 km/h → m/s:
+   `72 km/h × (1000 m / 1 km) × (1 h / 3600 s) = 20 m/s`. The learner watches
+   units cancel like algebra, not arithmetic. Prerequisite for M1 to shift.
+
+2. **ERROR-ANALYSIS** — show the Mars Climate Orbiter failure as a real worked error.
+   Ask "what went wrong?" before explaining. Learners must identify the unit mismatch
+   themselves. This is the motivational anchor for why symbols matter.
+
+3. **RETRIEVAL-SCHEDULE-PROMPT** — at every session opening: one unit from memory
+   (name + symbol + quantity measured). Rotate through all seven across the first two
+   weeks. Stop when the learner names all seven without hesitation.
+
+4. **MATCHING** — table completion (base quantity ↔ unit name ↔ symbol). Bidirectional:
+   given "ampere", produce "electric current" + "A"; given "A", produce "ampere" +
+   "electric current". One-way fluency is not mastery.
+
+Actions that do NOT fit this concept: GUIDED-DISCOVERY (conventions cannot be
+discovered, see Discovery Questions section), DEBATE (no genuine controversy at
+foundational level).
 
 ## Voice Teaching Notes
 
@@ -332,7 +345,21 @@ Delivery 1 Recovery Engine for the universal recovery ladder.
 
 ## Cross-Subject Connections
 
-Mathematics: significant figures tie directly to scientific notation and logarithms; dimensional analysis is a special case of algebraic unit-tracking; vector components use trigonometry. Chemistry: all lab measurements use SI units; concentration, moles, and temperature all live in this domain. Biology: biological measurements (cell size in micrometres, metabolic rates) use the same SI framework; dimensional analysis applies to enzyme kinetics.
+- **Mathematics**: dimensional analysis is algebraic unit-tracking — same rules as
+  fraction cancellation. Scientific notation and significant figures use the same
+  precision language. Vector components use trigonometry; unit vectors are
+  dimensionless.
+- **Chemistry**: all laboratory measurements use SI units. Moles (mol) are an SI base
+  unit shared with physics. Concentration (mol/L = mol·m⁻³) is a derived SI unit.
+  Temperature in kelvin is non-negotiable in thermodynamic equations.
+- **Biology**: cell dimensions use micrometres (μm); metabolic rates use kJ/mol;
+  both require the same SI prefix fluency. Dimensional analysis applies to enzyme
+  kinetics and pharmacokinetics (mg/kg dosing).
+- **Computing**: bytes and bits are NOT SI units — an instructive contrast. Data
+  rates (MB/s, Gbps) mix SI prefixes with non-SI base units. "kilo" in computing
+  historically meant 1024, now standardised as 1000 for SI compatibility (IEC 80000).
+- **Real world**: nutrition labels (kJ), weather (°C ↔ K), medical dosing (mg/kg),
+  engineering specs (MPa), speedometers (km/h ↔ m/s) — all tested by unit literacy.
 
 ## Blueprint References
 
