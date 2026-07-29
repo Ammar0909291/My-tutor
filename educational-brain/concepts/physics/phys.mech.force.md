@@ -35,7 +35,13 @@ After this concept, the learner can:
 
 ## Core Understanding
 
-_A force is a vector quantity representing an interaction that can change an object's state of motion._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+You cannot see a force. You can only see what a force does. Push a stationary object — it accelerates. Push a moving object in the opposite direction — it slows down. Push a moving object sideways — it curves. Forces are not visible things; they are the invisible interactions that cause changes in motion.
+
+A force is any interaction between two objects that has the potential to change an object's velocity. It is a vector — it has both magnitude (how strong) and direction (which way). Forces come in fundamental types: gravity (between any two masses), electromagnetic (between charges and currents, which includes all contact forces at the atomic level), and the nuclear forces. When you push a box, you are exerting a contact force — but at the atomic scale, this is the electromagnetic repulsion between the electron clouds of your hand and the box.
+
+Forces do not cause motion — this is the central misconception. Forces cause changes in motion. An object moving at constant velocity has zero net force. An object at rest has zero net force. It is only when the net force is nonzero that the velocity changes (Newton's Second Law: F = ma). A book sitting on a table has two forces: gravity pulling down and the table's normal force pushing up. They are equal and opposite — zero net force — which is why the book is stationary. Remove the table and the net force becomes gravity alone, downward — and the book accelerates.
+
+Forces always exist in pairs (Newton's Third Law). Every force on an object comes from some other specific object. "What is the force?" is never complete without "what object is exerting it and on what object?"
 
 ## Mental Models
 

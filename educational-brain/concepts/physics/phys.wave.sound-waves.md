@@ -29,7 +29,13 @@ The learner can:
 
 ## Core Understanding
 
-_Sound waves are longitudinal mechanical waves that propagate through a medium via pressure fluctuations._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+You clap your hands. The air molecules directly in front of your hands are squeezed together — a region of high pressure (compression). That compression pushes outward, squeezing the next layer of molecules, which squeeze the next layer. Meanwhile, behind the initial compression, the air momentarily spreads out — a region of low pressure (rarefaction). The alternating compressions and rarefactions propagate outward as a wave. This is sound: a longitudinal pressure wave travelling through a medium.
+
+Longitudinal means the air molecules oscillate back and forth in the same direction the wave travels — not side to side like water waves on a surface (which are transverse). Individual air molecules don't travel from your hands to someone's ear; they oscillate locally, passing the pressure disturbance from neighbour to neighbour. The compression pattern travels across the room; the individual molecules just vibrate around their equilibrium positions.
+
+Sound requires a medium — it cannot travel through vacuum. The speed of sound depends on the medium's properties: for air at room temperature, approximately 343 m/s. Warmer air is less dense and more elastic, so sound travels faster: roughly 0.6 m/s faster for every degree Celsius of temperature rise. In water (~1,500 m/s) and steel (~5,000 m/s), sound travels much faster than in air — the higher stiffness overwhelms the higher density.
+
+The frequency of a sound wave determines its pitch: higher frequency → higher pitch. The amplitude determines its loudness: larger pressure fluctuations → louder sound. The speed of sound in a given medium is fixed and independent of frequency — high-pitched sounds and low-pitched sounds travel at the same speed (which is why thunder and lightning are perceived with the same delay regardless of the pitch of the thunder).
 
 ## Mental Models
 

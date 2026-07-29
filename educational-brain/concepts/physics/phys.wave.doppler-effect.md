@@ -29,7 +29,16 @@ The learner can:
 
 ## Core Understanding
 
-_The Doppler effect is the change in observed frequency due to relative motion between source and observer._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+An ambulance approaches you with its siren on. You hear a high pitch. The ambulance passes and recedes. The pitch drops noticeably. The siren has not changed — the driver hears a constant pitch the entire time. You are hearing a different pitch because you are moving relative to the source (or the source is moving relative to you). This is the Doppler effect.
+
+Here is why it happens. Sound travels as a series of compressions. If the source is stationary, compressions are emitted in evenly spaced concentric circles. If the source moves toward you, each successive compression is emitted from a point slightly closer to you than the last — the compressions in front of the source are squashed closer together. More compressions per second reach your ear → higher observed frequency → higher pitch. Behind the moving source, compressions are spread apart → lower frequency → lower pitch.
+
+The formula: f_observed = f_source × (v ± v_observer)/(v ∓ v_source), where v is the speed of sound, v_observer is the observer's speed, and v_source is the source's speed. Sign convention: use + in the numerator when observer moves toward source, − when moving away; use − in denominator when source moves toward observer, + when moving away. The formula is not symmetric — moving source and moving observer at the same speed produce slightly different observed frequencies.
+
+The Doppler effect applies to all waves, not just sound:
+- Radar speed guns: police emit a microwave signal; a moving car reflects it with a Doppler-shifted frequency; the speed is computed from the shift.
+- Redshift in astronomy: distant galaxies emit light at specific spectral frequencies; we observe those frequencies shifted toward lower frequencies (redder) — they are moving away from us. This is the observational evidence for the universe's expansion.
+- Medical ultrasound: Doppler ultrasound measures blood flow speed by detecting the frequency shift of ultrasound reflected from moving blood cells.
 
 ## Mental Models
 

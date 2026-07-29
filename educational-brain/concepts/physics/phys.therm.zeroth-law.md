@@ -28,7 +28,13 @@ The learner can:
 
 ## Core Understanding
 
-_If two systems are each in thermal equilibrium with a third, they are in thermal equilibrium with each other._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+You touch a metal spoon and a wooden spoon — both left in the same room for hours. The metal feels cold; the wood feels warm. A thermometer placed in the room reads 20°C. You place the thermometer against the metal spoon: it also reads 20°C. Against the wooden spoon: 20°C. Both objects are at the same temperature as the room — even though they feel different. The feeling is about heat flow rate (conductivity), not temperature.
+
+The Zeroth Law provides the conceptual foundation for the entire idea of temperature as a meaningful quantity: if object A is in thermal equilibrium with object C, and object B is also in thermal equilibrium with object C, then A and B must be in thermal equilibrium with each other. They are at the same temperature.
+
+Why is this called the "Zeroth" Law? Because the First, Second, and Third Laws of thermodynamics were established before physicists recognised that this even more fundamental principle had been assumed all along without being stated. It was numbered zero retroactively.
+
+The Zeroth Law is what makes thermometers work. A thermometer (object C) reaches thermal equilibrium with whatever it measures (object A or B). If both A and B separately equilibrate to the same thermometer reading, they are at the same temperature — even if A and B are in different locations and have never touched each other. This transitive property of thermal equilibrium is the logical foundation for the concept of temperature as a single, well-defined number that can be meaningfully compared between objects.
 
 ## Mental Models
 

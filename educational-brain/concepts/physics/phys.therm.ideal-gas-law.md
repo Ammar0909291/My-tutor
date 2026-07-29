@@ -29,7 +29,13 @@ The learner can:
 
 ## Core Understanding
 
-_The ideal gas law PV = nRT relates pressure, volume, amount, and absolute temperature of an ideal gas._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+Pump up a bicycle tyre. As you push more air in (increasing n, the amount of gas), the pressure rises — you can feel the tyre getting harder. Heat the tyre in summer sunlight (increasing T), and the pressure rises again — the molecules hit the walls harder and more often. Squeeze the tyre to reduce its volume (decreasing V), and pressure rises once more. All three effects are unified by one equation: PV = nRT.
+
+The ideal gas law is remarkable for what it does NOT contain: the identity of the gas. Whether the container holds hydrogen, oxygen, nitrogen, or argon, the same equation applies with the same value of R = 8.314 J/(mol·K). At the microscopic level, pressure arises from gas molecules colliding with the walls of the container. The pressure does not depend on what the molecules are — only on how many there are (n), how fast they're moving on average (which temperature T encodes), and how much space they have (V).
+
+Absolute temperature (Kelvin) is mandatory. Pressure and volume must be zero at T = 0 K (absolute zero) — and they are: the equation requires it. Using Celsius gives nonsensical results because 0°C is not the true zero of thermal energy. A gas at 0°C still has kinetic energy; a gas at 0 K would have none.
+
+The ideal gas assumptions that limit the law: molecules have negligible volume compared to the container, and intermolecular forces are negligible (they interact only through elastic collisions). Real gases deviate at high pressure (molecules are no longer negligible in size — the van der Waals correction adds a volume term) or low temperature (intermolecular attractions become significant, causing condensation). But at moderate pressures and temperatures well above the boiling point of the gas, the ideal gas law is an excellent approximation.
 
 ## Mental Models
 

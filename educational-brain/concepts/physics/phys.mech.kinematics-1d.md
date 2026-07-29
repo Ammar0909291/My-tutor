@@ -34,7 +34,19 @@ predict the future state
 
 ## Core Understanding
 
-_Kinematic equations relate displacement, velocity, acceleration and time for uniform acceleration in one dimension._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+A car brakes from 30 m/s to rest with a deceleration of 5 m/s². How far does it travel before stopping? You could answer by calculus, drawing a v-t graph, or using the kinematic equations. The kinematic equations are the algebraic shortcut — five relationships between the five kinematic variables (u, v, a, s, t) that are valid whenever acceleration is constant.
+
+The five equations derive from two definitions:
+- Acceleration is constant: v = u + at
+- Displacement is the area under the v-t graph: s = ½(u + v)t
+
+From these two, three more equations follow by substitution: s = ut + ½at², v² = u² + 2as, s = vt − ½at².
+
+Each equation leaves out one of the five variables. This is how you choose which to use: identify which three quantities you know, identify which one you want, find the equation that contains exactly those four and omits the fifth.
+
+For the braking car: know u = 30, v = 0, a = −5. Want s. The equation that contains u, v, a, s and omits t is v² = u² + 2as. So: 0 = 900 + 2(−5)s → s = 90 m.
+
+The non-obvious constraint: these equations only hold for constant acceleration. Use them for a car braking at constant deceleration, or for free fall (constant g). Do NOT use them for a car stuck in traffic (acceleration varying), or for circular motion (direction of acceleration changing), or for any situation where acceleration changes with time. When acceleration varies, you must use calculus (integrate) or numerical methods.
 
 ## Mental Models
 

@@ -30,7 +30,15 @@ The learner can:
 
 ## Core Understanding
 
-_The Lorentz force F = q(E + v × B) acts on a charge q moving with velocity v in electric and magnetic fields._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+A charged particle moves through space. What forces act on it? Two fields can exert forces on charges: the electric field E (which acts on any charge, stationary or moving) and the magnetic field B (which acts only on moving charges). The Lorentz force is the complete expression for both acting together: F = q(E + v × B).
+
+The electric component (qE) is straightforward: force in the direction of E for positive charges, opposite for negative charges, with magnitude proportional to both the field strength and the charge. This component does work on the charge (it has a component parallel to the displacement).
+
+The magnetic component (q·v × B) is more subtle. Its direction is always perpendicular to the velocity — this means it changes the direction of the particle's motion but never its speed. It does zero work (force ⊥ velocity → zero dot product). The magnitude is qvBsinθ, where θ is the angle between v and B. When the particle moves parallel to B, the magnetic force is zero; when perpendicular, it is maximum.
+
+The practical consequence of this combination: in a region with both E and B fields oriented correctly, the Lorentz force can balance — the electric force upward and the magnetic force downward can cancel for a specific speed. A particle at that speed passes through undeflected; others are deflected. This is the velocity selector — a device that filters charged particles by their speed, used in mass spectrometers. The selected velocity is v = E/B.
+
+The Lorentz force also explains why charged particles spiral in magnetic fields in the presence of plasma: the component of velocity parallel to B is unaffected (no magnetic force), while the perpendicular component circles. The combination is a helix along the field direction. This is how charged particles are trapped in Earth's magnetic field, creating the Van Allen belts.
 
 ## Mental Models
 
