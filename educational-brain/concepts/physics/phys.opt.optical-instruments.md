@@ -35,29 +35,15 @@ properties.
 
 ## Core Understanding
 
-Every optical instrument covered here — the eye, the microscope, the
-telescope — works by combining one or more lenses (or lens-equivalent
-curved mirrors) to control where and how large an image forms on a
-light-sensitive surface (the retina, in the case of the eye, or the
-observer's eye itself, in the case of instruments meant to be looked
-through). The eye is a single-lens system with variable power
-(accommodation, achieved by the lens changing shape) that focuses images
-onto the retina; when the eye's resting or accommodated power doesn't match
-its actual eyeball length, images form in front of or behind the retina
-(myopia or hyperopia respectively), correctable by adding an external lens
-that shifts the effective focal point back onto the retina. A compound
-microscope and a refracting telescope both use exactly two lenses — an
-objective (forming a real, magnified intermediate image) and an eyepiece
-(acting as a simple magnifier on that intermediate image) — but they serve
-genuinely different optical problems: a microscope magnifies a nearby,
-physically small object by placing it very close to a short-focal-length
-objective, producing a large intermediate image; a telescope magnifies a
-distant object that already fills a certain angular size in the sky, using
-a long-focal-length objective to produce a bright, appropriately-scaled
-intermediate image, which the eyepiece then magnifies angularly for the
-eye. The same two-lens architecture is being repurposed for two structurally
-similar but functionally distinct optical tasks, and correctly reasoning
-about either instrument requires being clear about which task is at hand.
+A microscope and a telescope look almost identical from the outside — two tubes, two lenses each. Yet they do opposite things. A microscope takes a tiny nearby object and makes it look large. A telescope takes a large distant object and makes it look close. Same two-lens recipe; completely different optical problem. Understanding why requires knowing what problem each instrument is actually solving.
+
+The eye is the starting point. It is a single variable-power lens focused onto the retina. The lens changes shape (accommodation) to shift focus between near and far objects. When the eye's power at rest doesn't match its physical length, the focal point lands in front of or behind the retina — myopia (short-sighted) or hyperopia (long-sighted). Corrective lenses don't fix the eye; they shift where the focal point lands so the eye's own lens can do the rest. This is the power-addition principle from the prerequisite: P_total = P_correction + P_eye.
+
+A compound microscope uses a short-focal-length objective very close to the specimen — just outside f — to produce a real, highly magnified intermediate image inside the tube. The eyepiece then acts as a simple magnifier on that intermediate image. Total magnification = (objective magnification) × (eyepiece magnification). The key is the short focal length of the objective: f = 4 mm produces a powerful lens that, placed 5 mm from the specimen, can create an intermediate image 100× larger.
+
+A refracting telescope has the opposite geometry: a long-focal-length objective collects parallel light from a distant object and brings it to focus inside the tube. The eyepiece magnifies this intermediate image for the eye. Angular magnification = f_objective / f_eyepiece. A larger objective doesn't give more magnification — it gathers more light (seeing fainter objects), while magnification is set by the focal-length ratio. This is why a 200 mm diameter telescope can have various magnifications simply by swapping eyepieces.
+
+The unifying principle: every optical instrument is a pipeline managing where light converges and at what apparent angle it arrives at the eye. Lens power controls convergence; position relative to the object controls whether the image is real or virtual, magnified or reduced.
 
 ## Mental Models
 
