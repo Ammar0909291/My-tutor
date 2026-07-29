@@ -21,9 +21,13 @@ See Blueprint (`docs/curriculum/blueprints/phys.opt.lens-power.md §1 Learning O
 
 ## Core Understanding
 
-The power of a lens is the reciprocal of focal length in metres; combined lenses have powers that add algebraically.
+An optometrist measures your vision and prescribes "−2.5 dioptre lenses for distance vision." They do not say "focal length 40 cm diverging lenses" — though that is what they mean. The dioptre (D) is the standard unit of lens power in optics and medicine: P = 1/f, where f is in metres. A 2 D lens has focal length 0.5 m; a 0.5 D lens has focal length 2 m. Stronger lenses have more dioptres and shorter focal lengths.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+The power of a lens, not its focal length, is what adds simply when lenses are combined. Two thin lenses in contact: P_total = P₁ + P₂. Equivalently, 1/f_total = 1/f₁ + 1/f₂. This is because each lens bends the light by a fixed amount (in terms of angle change per unit of lens height), and adding a second lens adds another fixed bend — the bends add, not the focal lengths. In an optometrist's office, your distance prescription combined with a reading add prescription (+1.5 D for reading) gives you the near-vision power: your total near prescription is your distance prescription + 1.5 D.
+
+Sign convention: converging (convex) lenses have positive power; diverging (concave) lenses have negative power. Your prescription −2.5 D means diverging lenses (you are myopic — short-sighted; the lenses push the focal point back to fall on the retina). A reading lens (+2.5 D) helps focus nearby objects.
+
+The combination rule fails when lenses are separated: then the thin-lens combination formula must include the separation distance d: P_total = P₁ + P₂ − d·P₁·P₂. For thick lenses, internal geometry also matters. The simple addition rule is exact only for thin lenses in contact.
 
 ## Mental Models
 

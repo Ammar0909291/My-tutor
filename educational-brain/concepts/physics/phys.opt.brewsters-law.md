@@ -21,9 +21,13 @@ See Blueprint (`docs/curriculum/blueprints/phys.opt.brewsters-law.md §1 Learnin
 
 ## Core Understanding
 
-Brewster's law gives the angle at which reflected light is completely polarized; Malus's law relates transmitted intensity to analyser angle.
+Look at light reflected off a lake surface and put on polarising sunglasses. The glare drops dramatically — but the surrounding landscape stays bright. The polarising filter is blocking the horizontally polarised reflected glare selectively, while passing the unpolarised light that comes directly from the sky and trees. This works because at a specific angle of incidence — Brewster's angle — reflected light is completely polarised.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+At Brewster's angle θ_B, the reflected beam is completely polarised parallel to the surface (horizontal for a horizontal surface). Brewster's law: tan(θ_B) = n₂/n₁. For water (n = 1.33), θ_B = 53°; for glass (n = 1.5), θ_B = 56°. The physical reason: at this angle, the reflected and refracted rays are perpendicular to each other. Electromagnetic oscillations parallel to the reflected-ray direction would require the refracted electrons in the medium to oscillate in the direction they are radiating — which is impossible for a transverse wave; this polarisation component has zero reflection at this angle. The component parallel to the surface still reflects normally, producing fully polarised reflected light.
+
+Malus's law describes what happens when polarised light passes through a second polariser (the analyser) at angle θ to the first: I = I₀cos²θ. At θ = 0°: full intensity transmitted. At θ = 90°: zero intensity. At θ = 45°: half the intensity.
+
+Brewster's law has practical applications beyond sunglasses: laser windows are cut at Brewster's angle to minimise reflection losses for one polarisation (light bouncing off glass windows inside a laser cavity would destroy the beam — Brewster-angle windows eliminate this for the operating polarisation). Photography using a circular polariser (which rotates the polarisation plane) allows photographers to remove reflections from windows and water surfaces at arbitrary orientations without needing to align the filter precisely with Brewster's angle.
 
 ## Mental Models
 

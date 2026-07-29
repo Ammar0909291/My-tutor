@@ -24,9 +24,13 @@ See Blueprint (`docs/curriculum/blueprints/phys.opt.polarization.md §1 Learning
 
 ## Core Understanding
 
-Polarization describes the orientation of the electric field oscillation in transverse electromagnetic waves.
+Hold two polaroid filters in front of a light source. Rotate them until their polarisation axes are perpendicular — the light disappears completely, blocked as if by an opaque sheet. Rotate one back 45° and light reappears. This is not a mechanical blocking effect; it is the interference of two perpendicular components of the electric field. Polarisation reveals something fundamental about the nature of light as a transverse wave.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+Light is an electromagnetic wave: oscillating electric and magnetic fields. The electric field oscillates perpendicular to the direction of travel — but in which perpendicular direction? Unpolarised light (like sunlight or most artificial light) has its electric field oscillating in all perpendicular directions simultaneously, with no preferred orientation. Polarised light has its electric field oscillating in one specific direction only.
+
+A polaroid filter (or polariser) transmits only the component of the electric field aligned with its polarisation axis and absorbs the rest. Unpolarised light of intensity I₀ passes through a polariser at intensity I₀/2 (Malus's law for unpolarised light: half the intensity is transmitted because the field can be split into two equal perpendicular components and only one passes). A second polariser at angle θ to the first transmits I = I₀cos²θ (Malus's law for polarised light). At θ = 90°: I = 0.
+
+Polarisation by reflection: at a specific angle (Brewster's angle, θ_B = arctan(n₂/n₁)), reflected light is completely polarised parallel to the surface. This is why polarising sunglasses — with a vertical axis — cut glare from horizontal surfaces: sunlight reflected from water or roads at Brewster's angle is horizontally polarised, and the vertical polariser blocks it entirely. Polarisation by scattering: the blue sky is partially polarised (light scattered at 90° to the sun is maximally polarised), which is how bees navigate using polarised skylight even on cloudy days.
 
 ## Mental Models
 

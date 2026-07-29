@@ -24,9 +24,19 @@ See Blueprint (`docs/curriculum/blueprints/phys.opt.lenses.md §1 Learning Objec
 
 ## Core Understanding
 
-The thin lens formula 1/f = 1/v − 1/u relates focal length, image distance, and object distance for thin lenses.
+Hold a magnifying glass in sunlight. Focus the beam of light to a bright spot on a piece of paper — you can start a fire. All the parallel rays from the distant sun converge to a single point: the focal point. The distance from the lens to that point is the focal length f. This is what a converging lens does: it bends parallel rays to meet.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+The thin lens formula describes how object position, image position, and focal length are related: 1/v − 1/u = 1/f (sign conventions vary by textbook — the key is to apply one convention consistently throughout any problem). Object distance u is measured from the lens to the object; image distance v from the lens to the image; focal length f is positive for converging lenses, negative for diverging lenses.
+
+Three cases determine what you see:
+
+Object beyond 2f (object distance > 2f): the image is real (on the opposite side of the lens), inverted, and smaller than the object if u > 2f, equal size at u = 2f, and larger between f and 2f. "Real" means actual light rays converge there — a screen placed at the image distance shows the image. This is how a camera or projector works.
+
+Object between f and the lens (u < f): the image is virtual (on the same side as the object, where no real light rays go), upright, and magnified. No screen can show it — you must look through the lens toward the object. This is how a magnifying glass works.
+
+Object at the focal plane (u = f): parallel rays are produced — the image is at infinity. Telescopes and collimators use this to generate parallel beams.
+
+Magnification m = v/u — negative for inverted images, positive for upright. A magnification of −2 means real image, inverted, twice the size of the object.
 
 ## Mental Models
 

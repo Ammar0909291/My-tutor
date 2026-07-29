@@ -24,9 +24,13 @@ See Blueprint (`docs/curriculum/blueprints/phys.opt.total-internal-reflection.md
 
 ## Core Understanding
 
-Total internal reflection occurs when light hits a boundary at an angle greater than the critical angle and all light is reflected.
+Bend a glass fibre. Light put in one end emerges from the other, even though the fibre bends through curves and corners. The light is trapped inside by total internal reflection — every time it hits the glass-air boundary at too steep an angle, it bounces back instead of escaping. This is the principle behind optical fibres that carry the internet.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+Total internal reflection occurs when three conditions are met: (1) light travels from a denser medium (higher n) to a less dense medium (lower n); (2) the angle of incidence exceeds the critical angle θ_c = arcsin(n₂/n₁). When these conditions hold, Snell's law n₁sinθ₁ = n₂sinθ₂ has no solution for θ₂ — there is no refracted ray. All of the light reflects back into the denser medium, with zero energy loss.
+
+The critical angle depends on the refractive index contrast. For glass (n ≈ 1.5) to air (n = 1): θ_c = arcsin(1/1.5) = 41.8°. Light hitting the boundary steeper than 41.8° from the normal reflects completely. For diamond (n = 2.42) to air: θ_c = 24.4° — a much smaller critical angle, so most light hitting diamond's facets reflects internally. Cut diamond facets cleverly and the light bounces around inside, exiting only through the top face in a brilliant display. This is precisely what diamond cutters are designed to achieve.
+
+Optical fibres keep light hitting the fibre-cladding interface above the critical angle by choosing a core with higher n than the cladding. Light injected into the core bounces along it, even through bends, losing almost no energy per reflection. Modern optical fibres can carry data for tens of kilometres with only controlled repeater amplification — this is what makes transcontinental internet cables possible.
 
 ## Mental Models
 

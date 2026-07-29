@@ -21,9 +21,17 @@ See Blueprint (`docs/curriculum/blueprints/phys.em.biot-savart.md §1 Learning O
 
 ## Core Understanding
 
-The Biot-Savart law gives the infinitesimal magnetic field contribution dB from a current element Id𝑙.
+Coulomb's law gives the electric field from a point charge. The Biot-Savart law is its magnetic analogue: it gives the magnetic field contribution from a tiny element of current-carrying wire. Like Coulomb's law, it is a building block — you sum (integrate) contributions from all current elements to find the total magnetic field from any current distribution.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+The Biot-Savart law for a small current element Id**l**: d**B** = (μ₀/4π) × I(d**l** × r̂)/r². Four things control the field contribution: the current I (more current → stronger field), the element length dl (larger element → stronger contribution), the inverse square of the distance r (same inverse-square falloff as Coulomb's law), and the cross product with the unit vector r̂ pointing from the element to the field point (the field points perpendicular to both the current direction and the radial direction).
+
+The cross product is the key departure from Coulomb's law. Electric fields point radially away from charges; magnetic fields curl around currents. A current element pointing north produces a magnetic field that circles around it: east on one side, west on the other, and nothing directly ahead or behind (where the cross product is zero — sin 0° = 0).
+
+Applying Biot-Savart to a complete circuit requires integrating dB over all current elements. This is typically done for high-symmetry situations:
+- Infinite straight wire: B = μ₀I/(2πr) — field circles the wire, strength falling as 1/r (not 1/r², since we're integrating over an infinite line of current elements)
+- Circular loop at the centre: B = μ₀I/(2R) — field points along the axis
+
+For arbitrary geometries, numerical integration is required. Ampère's law is the shortcut for cases with high symmetry, just as Gauss's law shortcuts Coulomb's law for symmetric charge distributions.
 
 ## Mental Models
 

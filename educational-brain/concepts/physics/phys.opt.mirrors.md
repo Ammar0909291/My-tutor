@@ -24,9 +24,17 @@ See Blueprint (`docs/curriculum/blueprints/phys.opt.mirrors.md §1 Learning Obje
 
 ## Core Understanding
 
-The mirror formula 1/f = 1/v + 1/u relates focal length, image distance, and object distance for spherical mirrors.
+Stand far from a concave mirror — like the inside of a spoon. You see yourself upside down, small, and a real image is formed in front of the mirror. Move very close to the concave mirror — you see yourself upright and magnified, a virtual image behind the mirror. Move to a convex mirror (like the outside of a spoon, or a car's wide-angle wing mirror): you always see yourself upright, small, and virtual. These different image types arise from the same mirror formula, with different object positions.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+The mirror formula: 1/v + 1/u = 1/f, where u is the object distance (positive if in front of the mirror), v is the image distance (positive if in front of the mirror — real image; negative if behind — virtual image), and f is the focal length (positive for concave mirrors, negative for convex mirrors).
+
+The focal length of a spherical mirror is half the radius of curvature: f = R/2. This is a geometric consequence of reflection law — parallel rays all reflect through the same focal point only when f = R/2.
+
+Concave mirrors: when object is beyond the focal length, image is real and inverted (formed in front of the mirror — a real image means actual light rays converge there). When object is inside the focal length, image is virtual, upright, and magnified (behind the mirror). Use cases: shaving/makeup mirrors (u < f, magnified), satellite dishes, reflecting telescopes, solar concentrators.
+
+Convex mirrors: image is always virtual, upright, and diminished — the image appears smaller but covers a wider field of view. Use cases: security mirrors in shops, car rear-view mirrors, supermarket corner mirrors. The formula gives v negative and |v| < u for convex mirrors always.
+
+Magnification m = −v/u — negative means inverted image (real). Positive means upright (virtual).
 
 ## Mental Models
 

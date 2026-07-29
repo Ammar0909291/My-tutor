@@ -24,9 +24,15 @@ See Blueprint (`docs/curriculum/blueprints/phys.opt.dispersion.md §1 Learning O
 
 ## Core Understanding
 
-Dispersion is the separation of white light into its constituent wavelengths by a prism due to wavelength-dependent refractive index.
+White light passes through a prism and a rainbow appears on the other side. Sunlight hits raindrops after a storm and a rainbow arc forms in the sky. A thin film of oil on water shows swirling colours. All three phenomena share one cause: different wavelengths of light travel at different speeds in a medium — and therefore refract by different amounts.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+The refractive index n of most materials is slightly higher for shorter wavelengths (blue/violet) than for longer wavelengths (red). Because n = c/v, a higher n means slower speed in the medium. Because Snell's law n₁sinθ₁ = n₂sinθ₂ determines the bending angle, and n₂ is different for each wavelength, each colour bends by a different amount. Violet light bends more than red light through a prism, spreading white light into a spectrum.
+
+This wavelength dependence of n is called dispersion. The Cauchy equation approximates it: n ≈ A + B/λ², where A and B are material constants — higher B means stronger dispersion. Crown glass (low dispersion, used for camera lenses) and flint glass (high dispersion, used for spectroscopes and decorative prisms) are designed with different dispersion characteristics.
+
+The rainbow: white sunlight enters a spherical raindrop, reflects internally, and exits. Each colour exits at a slightly different angle. Red exits at about 42° from the incoming sunlight; violet at about 40°. You see red at the top of the rainbow and violet at the bottom because you observe different drops for each colour — the ones at 42° from the antisolar point appear red to your eye, those at 40° appear violet. The rainbow is always a circle centred on the antisolar point (the point directly opposite the sun from your head).
+
+Dispersion is the enemy in optical systems: a lens that bends red more than blue would produce coloured fringes (chromatic aberration). Camera lenses use pairs of crown and flint glass elements to cancel each other's dispersion while keeping the overall focusing power — this is the achromatic doublet.
 
 ## Mental Models
 

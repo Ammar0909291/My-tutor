@@ -24,9 +24,15 @@ See Blueprint (`docs/curriculum/blueprints/phys.em.magnetic-materials.md §1 Lea
 
 ## Core Understanding
 
-Materials are classified as diamagnetic, paramagnetic, or ferromagnetic based on their response to external magnetic fields.
+Hold a magnet near copper — nothing happens. Near iron — it is attracted strongly. Near liquid oxygen — it is attracted weakly. Near bismuth — it is very weakly repelled. All materials respond to magnetic fields, but in dramatically different ways, determined by the behaviour of their atomic magnetic moments.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+Every material has magnetic properties, because every electron has a magnetic moment. The three classifications describe how these atomic moments behave collectively:
+
+Diamagnetic materials (copper, gold, bismuth, water, most organic compounds): every electron is paired, cancelling the spin moments. In the absence of a field, there is no net magnetic moment. When a field is applied, quantum mechanics requires that each atomic current loop generates an opposing moment (Lenz's law at the atomic level). The material is weakly repelled by the field — the diamagnetic effect is always present but usually tiny (susceptibility χ ≈ −10⁻⁵). Every material has a diamagnetic contribution; for paramagnetic and ferromagnetic materials, this is overwhelmed by larger effects.
+
+Paramagnetic materials (aluminium, platinum, oxygen): some electrons are unpaired, giving atoms a permanent net magnetic moment. Normally, thermal agitation keeps these moments pointing in random directions — no net magnetisation. When a field is applied, moments tend to align with the field, giving a weak attraction. Paramagnetism scales inversely with temperature (Curie's law: M = C·B/T): cooling strengthens it as thermal agitation decreases.
+
+Ferromagnetic materials (iron, cobalt, nickel, rare-earth magnets): unpaired electrons' moments are coupled so strongly by quantum exchange interactions that they spontaneously align over regions called domains — even without an external field. Domains of aligned moments can be reoriented by an external field, producing very strong magnetisation. Once aligned, the magnetisation can persist after the field is removed — this is permanent magnetism. Heating above the Curie temperature (768°C for iron) destroys this ordering, and the material becomes paramagnetic.
 
 ## Mental Models
 
