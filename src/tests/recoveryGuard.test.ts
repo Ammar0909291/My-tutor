@@ -205,6 +205,59 @@ describe('buildRecoveryBlock — frustrated (P0-3)', () => {
   })
 })
 
+// ── G3 (S4, Runtime Redesign Mission Part 3) — recovery must escalate ───────
+//
+// Before this rung, sessionFailureCount 0 and 1 both fell through to
+// escalation='', so two consecutive same-key failures — "I don't know"
+// said twice in a row, the single most common recovery pattern — produced
+// a byte-identical RECOVERY block both times. This suite proves every
+// failure-count value now produces genuinely different text.
+describe('buildRecoveryBlock — G3 rung distinctness (every count differs)', () => {
+  it('count 0 and count 1 are no longer byte-identical for the same key', () => {
+    const first = buildRecoveryBlock('dont_know', false, 0)
+    const second = buildRecoveryBlock('dont_know', false, 1)
+    expect(first).not.toBe(second)
+  })
+
+  it('count 1 carries an explicit second-occurrence variation directive', () => {
+    const block = buildRecoveryBlock('dont_know', false, 1)
+    expect(block).toMatch(/SECOND OCCURRENCE THIS SESSION/i)
+    expect(block).toMatch(/do not reuse the same wording/i)
+  })
+
+  it('count 0 does NOT carry the second-occurrence directive (nothing to escalate from yet)', () => {
+    const block = buildRecoveryBlock('dont_know', false, 0)
+    expect(block).not.toMatch(/SECOND OCCURRENCE THIS SESSION/i)
+  })
+
+  it('every threshold in 0/1/2/4 produces text distinct from its neighbors, for every key', () => {
+    const keys: Array<Parameters<typeof buildRecoveryBlock>[0]> = [
+      'dont_know', 'dont_understand', 'confused', 'forgot', 'guessing',
+      'too_hard', 'give_up', 'hate_subject', 'scared', 'stupid', 'cant',
+      'too_many_questions', 'frustrated',
+    ]
+    for (const key of keys) {
+      const counts = [0, 1, 2, 4]
+      const blocks = counts.map((c) => buildRecoveryBlock(key, false, c))
+      for (let i = 1; i < blocks.length; i++) {
+        expect(blocks[i]).not.toBe(blocks[i - 1])
+      }
+    }
+  })
+
+  it('the rung-1 directive still preempts and still bans answering with a question', () => {
+    const block = buildRecoveryBlock('dont_know', false, 1)
+    expect(block).toMatch(/PREEMPTS EVERYTHING/)
+    expect(block).toMatch(/never answer it with a question/i)
+  })
+
+  it('the rung-1 directive coexists correctly with the lesson-one script variant', () => {
+    const block = buildRecoveryBlock('dont_know', true, 1)
+    expect(block).toMatch(/SECOND OCCURRENCE THIS SESSION/i)
+    expect(block).toMatch(/ECHO/) // lesson-one body still selected
+  })
+})
+
 describe('buildRecoveryBlock — too_many_questions (P1)', () => {
   it('stops questioning and switches to direct demonstration, general script', () => {
     const block = buildRecoveryBlock('too_many_questions', false)

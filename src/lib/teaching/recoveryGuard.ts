@@ -491,6 +491,19 @@ export function buildRecoveryBlock(key: FailureStateKey, isFirstLesson: boolean,
     : (preDemonstration && script.preDemonstration) ? script.preDemonstration
     : script.general
 
+  // S4 (Runtime Redesign Mission Part 3, closes design-report gap G3):
+  // "recovery must escalate, never repeat identical." Before this rung,
+  // sessionFailureCount 0 and 1 both fell through to escalation='', so two
+  // consecutive same-key failures (the single most common recovery pattern
+  // — "I don't know" said twice in a row) produced a byte-identical
+  // RECOVERY block both times. This rung-1 tier is the smallest change that
+  // makes every failure-count value produce genuinely different text: it
+  // does not change WHAT the tutor must do (still validate-and-shrink, per
+  // the base script), only ADDS an explicit variation directive so a second
+  // occurrence of the same struggle is never handled with the identical
+  // words as the first. S1's V-REC-REPEAT (kernel/verifier/history.ts) is
+  // the detector that would have caught a violation of this; this rung is
+  // the source-side fix that makes the violation structurally rarer.
   let escalation = ''
   if (sessionFailureCount >= 4) {
     escalation =
@@ -504,6 +517,12 @@ export function buildRecoveryBlock(key: FailureStateKey, isFirstLesson: boolean,
       'turn. Do not offer a two-choice question. Validate once ("I hear you — this ' +
       'one is stubborn"), give a SHORT demonstration of the concept yourself (show, ' +
       'don\'t ask), say "we\'ll come back to this" and move to a simpler related point.'
+  } else if (sessionFailureCount >= 1) {
+    escalation =
+      '\n- SECOND OCCURRENCE THIS SESSION: this struggle already came up once ' +
+      'today. Do not reuse the same wording, the same example, or the same ' +
+      'analogy you used last time — vary the approach even though the goal ' +
+      '(validate, shrink, bank one win) stays the same.'
   }
 
   return (

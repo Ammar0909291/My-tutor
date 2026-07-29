@@ -276,6 +276,41 @@ describe('Band 2 is subtractive only', () => {
   })
 })
 
+// ── G1 verification (S4) — UNKNOWN is already structurally closed ──────────
+//
+// The S4 design review considered adding an explicit UNKNOWN phase (index -1
+// on PHASE_ORDER, per the original design report's G1) so that "assessment
+// is not structurally banned on turn one of a concept" would have a state to
+// attach to. Before building it, this suite verifies the invariant the
+// mission actually asks for: NO question of any kind — assessment or
+// otherwise — is legal on a fresh concept with no taught content and no
+// evidenced prior knowledge. QL-1 already enforces exactly this (it predates
+// S4). Adding a second, parallel UNKNOWN state to the live 6-phase machine
+// to re-derive an invariant QL-1 already guarantees would be exactly the
+// kind of duplicate authority the OWNERSHIP DECISION discipline forbids —
+// so G1 closes here as a verification, not a new module.
+
+describe('G1 — assessment is already structurally banned on turn one (via QL-1)', () => {
+  it('a completely fresh concept state blocks ANY question, not just assessment-shaped ones', () => {
+    const fresh = initialConversationState('phys.mech.newtons-first-law')
+    const v = questionLegality(fresh)
+    expect(v.askLegal).toBe(false)
+    expect(v.reason).toBe('QL1_NO_ANSWERABLE_SOURCE')
+  })
+
+  it('remains blocked across every phase name if nothing has been taught yet', () => {
+    for (const phase of ['OBSERVE', 'DEMONSTRATE', 'GUIDE', 'CHECK', 'PRACTICE', 'TRANSFER'] as const) {
+      const v = questionLegality(S({ phase, taughtThisSession: false, demonstrated: false, explanationCount: 0 }))
+      expect(v.askLegal).toBe(false)
+    }
+  })
+
+  it('is lifted the instant a source exists — an anchor, a demonstration, or evidenced prior knowledge', () => {
+    expect(questionLegality(S({ taughtThisSession: true })).askLegal).toBe(true)
+    expect(questionLegality(S(), { hasEvidencedPriorKnowledge: true }).askLegal).toBe(true)
+  })
+})
+
 // ── QL-5 · REFLECTION QUESTION BUDGET (S3, closes design-report gap G2) ─────
 
 describe('QL-5 — at most one reflection question per CHECK entry', () => {
