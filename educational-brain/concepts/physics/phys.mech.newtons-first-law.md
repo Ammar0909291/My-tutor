@@ -35,7 +35,15 @@ After this concept, the learner can:
 
 ## Core Understanding
 
-_An object remains at rest or in uniform motion unless acted upon by a net external force._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+In everyday experience, things stop moving when you stop pushing them. A book you slide across a table slows and stops. A ball you kick rolls and then stops. From this, our intuition builds a model: motion requires effort; rest is natural. This intuition is wrong — and Newton's First Law is the correction.
+
+The book doesn't stop because motion naturally ends. It stops because friction is pushing it backward. If you could remove friction entirely — an ice rink, or better yet, outer space — the object would keep moving forever, at the same speed, in the same direction, without any force at all. Constant velocity is the natural state. Rest is just one special case of it (velocity = zero, which is also constant).
+
+Newton's First Law: an object continues in its current state of motion — whether at rest or moving at constant velocity — unless a net external force acts on it. The key word is net: if two equal forces push in opposite directions, they cancel. Zero NET force means no change in motion, even if individual forces are present.
+
+This law defines inertia — the resistance of any object to changes in its motion. More massive objects have more inertia. You need more force to accelerate a loaded lorry than an empty one. You need more force to stop a fast-moving object than a slow one. Inertia is not a force — it is the property of matter that describes how much it resists having its velocity changed.
+
+The law also defines what an inertial reference frame is: a frame where this law holds — where an object with no net force moves at constant velocity. Non-inertial frames (like an accelerating car or a rotating carousel) are ones where objects appear to accelerate without any force — the frame itself is accelerating, creating fictitious forces. Newton's Second Law only holds in inertial frames.
 
 ## Mental Models
 

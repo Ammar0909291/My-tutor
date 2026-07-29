@@ -30,7 +30,17 @@ The learner can:
 
 ## Core Understanding
 
-_Projectile motion combines uniform horizontal velocity with uniformly accelerated vertical motion under gravity._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+You fire a cannonball horizontally and drop an identical cannonball from the same height at the same instant. Which hits the ground first? Most people say the dropped ball — it's falling straight down with no horizontal distraction. The correct answer is: they hit simultaneously, to within experimental precision.
+
+This is the independence principle: horizontal and vertical motions in projectile motion are completely independent. Gravity acts only downward. It accelerates the projectile vertically at 9.8 m/s² regardless of what the projectile is doing horizontally. The horizontal velocity — set at launch — has no force acting on it (ignoring air resistance), so it remains constant throughout the flight. The two motions proceed in parallel, sharing only one quantity: time.
+
+This independence makes projectile problems solvable. Split the motion into two separate 1D problems:
+- Horizontal: constant velocity, vₓ = v₀cosθ, x = vₓt (no acceleration)
+- Vertical: constant acceleration g downward, y = v₀sinθ·t − ½gt², vᵧ = v₀sinθ − gt
+
+Time is the bridge. You solve for the time the projectile is in the air from one axis (usually when y = 0, finding the range) and substitute it into the other axis to find horizontal range, maximum height, or velocity at impact.
+
+The non-obvious consequences are beautiful. The range formula R = v₀²sin(2θ)/g shows that complementary launch angles give equal ranges: a ball launched at 30° travels exactly as far as one launched at 60° with the same speed. Maximum range is at 45° — the compromise between giving the ball enough height to stay in the air and enough horizontal velocity to cover distance. And the trajectory is a perfect parabola — provably so from the parametric equations x = v₀cosθ·t and y = v₀sinθ·t − ½gt².
 
 ## Mental Models
 

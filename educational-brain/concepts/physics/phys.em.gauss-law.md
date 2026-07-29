@@ -29,7 +29,13 @@ The learner can:
 
 ## Core Understanding
 
-_Gauss's law relates the total electric flux through a closed surface to the enclosed charge: Φ = Q_enc/ε₀._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+Imagine electric field lines as streams of water flowing out of a positive charge. If you draw any closed surface around that charge — a sphere, a cube, a potato shape — the same amount of water crosses your surface per second, regardless of the shape. That is Gauss's law.
+
+The total electric flux through any closed surface equals the total charge enclosed, divided by ε₀: Φ = Q_enc/ε₀. Flux is the total "flow" of the electric field through the surface — the integral of E·dA over every patch of the surface. The insight is that this total depends only on the enclosed charge, not on the surface shape or size, and not on how the charge is distributed inside. A charge outside the surface contributes zero net flux: every field line that enters the surface also exits it.
+
+Gauss's law and Coulomb's law contain the same physics for static charges — they are mathematically equivalent for point charges. But Gauss's law is far more powerful as a calculation tool whenever the charge distribution has symmetry. For a uniformly charged sphere, the field outside is identical to a point charge at the centre — Gauss's law proves this in three lines. For an infinite line of charge, a cylindrical Gaussian surface gives E = λ/(2πε₀r) in three lines. For an infinite plane of charge, a pillbox Gaussian surface gives E = σ/(2ε₀) — uniform field, independent of distance from the plane. Doing these from Coulomb's law requires integration over all the distributed charges; Gauss's law with the right symmetry is instant.
+
+The limitation: Gauss's law in integral form is only useful as a calculation shortcut when you can choose a Gaussian surface where E is constant and parallel (or perpendicular) to the surface everywhere. Without that symmetry, the flux integral cannot be evaluated without knowing E first — making the law circular as a calculation tool. For asymmetric distributions, Coulomb's law (or numerical methods) must be used instead.
 
 ## Mental Models
 

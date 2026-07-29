@@ -21,9 +21,13 @@ See Blueprint (`docs/curriculum/blueprints/phys.em.electric-potential.md §1 Lea
 
 ## Core Understanding
 
-Electric potential is the work done per unit charge to bring a positive test charge from infinity to a given point.
+Every point in space around a charged object has two electric properties: the electric field (the force per unit charge — a vector that tells you which way a charge would be pushed and how hard) and the electric potential (the potential energy per unit charge — a scalar that tells you how much energy a charge would have at that location). Both describe the same electric environment; they emphasise different aspects of it.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+Electric potential V at a point is the work done per unit positive charge to bring a test charge from a reference point (conventionally infinity, where the field is zero) to that point: V = W/q. For a point charge Q at distance r, V = kQ/r. Potential is a scalar — no direction, just a number. This makes it often easier to work with than the electric field.
+
+The gradient connection is the deep insight: the electric field is the negative gradient of the potential. E = −∇V, or in one dimension, E = −dV/dx. Where potential drops steeply (a cliff on the potential landscape), the field is strong. Where potential is flat (a plateau), the field is zero. This means you can derive the field from the potential — and working with potentials (scalars, which add simply) is often much easier than working with fields (vectors, which add as vectors).
+
+The practical consequence is voltage. The potential difference between two points — voltage — is what drives charges to move. Charges flow from high potential to low potential, just as water flows downhill. A 9V battery maintains a potential difference of 9 volts between its terminals; connect a circuit and charges flow through it, converting potential energy to other forms. Every circuit in electronics is an exercise in managing potential differences.
 
 ## Mental Models
 

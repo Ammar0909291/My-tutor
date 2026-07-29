@@ -29,7 +29,15 @@ The learner can:
 
 ## Core Understanding
 
-_Specific heat capacity is the amount of heat required to raise the temperature of unit mass of a substance by one degree._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+On a sunny summer day, the sand at the beach becomes almost too hot to walk on. The water a metre away stays cool enough to swim in. Both have been in the same sunlight for the same number of hours. Why is the sand so much hotter?
+
+They absorbed the same energy from the sun, but sand and water respond to heat differently. Water has an unusually high specific heat capacity: it takes about 4,186 joules to raise 1 kg of water by 1°C. Sand requires only about 800 joules to achieve the same temperature rise. Water is more than five times better at "absorbing" heat without its temperature rising. This is why coastal regions have milder climates (the ocean acts as a temperature buffer) and why your radiator uses water as a coolant.
+
+The formula Q = mcΔT captures this: the heat energy Q required equals the mass m times the specific heat capacity c times the temperature change ΔT. This equation is linear in all three variables: double the mass, double the heat required; double the temperature rise, double the heat required; choose a material with double the specific heat, double the heat required.
+
+The physical reason water has such a high specific heat: water molecules are polar and form hydrogen bonds with each other. Much of the energy added to water goes into disrupting or stretching these bonds rather than speeding up the molecules. More of the energy goes into temperature (random kinetic energy) for substances without such bonds. This is also why water stores so much thermal energy — it is not easy to cool down once heated, which is why the ocean releases heat slowly through autumn and makes coastal winters milder than inland winters at the same latitude.
+
+Specific heat capacity is distinct from latent heat (the energy needed to change phase at constant temperature). When ice melts at 0°C, temperature does not change — all the energy goes into breaking the crystal structure. Q = mcΔT applies only within a phase; at phase transitions, Q = mL applies instead.
 
 ## Mental Models
 
