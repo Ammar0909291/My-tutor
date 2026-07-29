@@ -1,6 +1,6 @@
 # phys.opt.lens-power — Lens Power and Combined Lenses
 
-## 1. Identity
+## Identity
 - **Canonical KG ID**: `phys.opt.lens-power`
 - **Canonical name**: Lens Power and Combined Lenses
 - **Curriculum domain**: Optics
@@ -13,7 +13,19 @@
 
 ---
 
-## 2. Mental Models (4-stage progression)
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.opt.lens-power.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+The power of a lens is the reciprocal of focal length in metres; combined lenses have powers that add algebraically.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Concrete (power as "bending strength")**
 A thick magnifying glass bends light more sharply than a thin weak one. Power is how hard a lens bends a ray per metre of travel. A strong lens has short focal length; weak lens has long focal length.
@@ -43,7 +55,7 @@ Opticians prescribe in dioptres because powers add without reciprocal arithmetic
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Unit confusion**: mixing cm and m when computing P = 1/f. f = 20 cm must become 0.20 m first, giving P = 5 D, not P = 0.05 D.
 2. **Forgetting sign**: a diverging lens with f = −0.25 m has P = −4 D; students drop the negative and then misapply the combination law.
@@ -52,7 +64,7 @@ Opticians prescribe in dioptres because powers add without reciprocal arithmetic
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 **M1 — "Power and magnification are the same"**
 - Probe: "A +10 D lens always magnifies more than a +5 D lens." True or false?
@@ -76,25 +88,7 @@ Opticians prescribe in dioptres because powers add without reciprocal arithmetic
 
 ---
 
-## 5. Explanation Library
-
-**E1 — Definition first**
-Power = reciprocal focal length in SI units. P = 1/f (f in metres, P in dioptres, symbol D). Converging lens: f > 0 → P > 0. Diverging: f < 0 → P < 0.
-
-**E2 — Why powers add (not focal lengths)**
-Two thin lenses in contact: first lens deflects ray by angle α₁ = h/f₁ (small angle); second lens by α₂ = h/f₂. Total deflection α = α₁ + α₂ = h(1/f₁ + 1/f₂) = h/f_combined. So 1/f_combined = 1/f₁ + 1/f₂ → P_combined = P₁ + P₂. The additivity is a direct consequence of linear ray-deflection superposition.
-
-**E3 — Correction of eye defects**
-- Myopia (near-sighted, far point < ∞): the eye's lens is too strong (short f). A diverging spectacle lens (negative P) places the corrected far point image at the eye's natural far point.
-- Hyperopia (far-sighted, near point > 25 cm): the eye is too weak. A converging lens (positive P) shifts the virtual image of a near object out to the eye's comfortable near point.
-- Power needed: P_correction = 1/image_distance − 1/object_distance (sign careful with conventions).
-
-**E4 — Equivalent focal length formula**
-For N thin lenses in contact: 1/f_eq = Σ(1/fᵢ), equivalently P_eq = ΣPᵢ. For two lenses separated by distance d: 1/f_eq = 1/f₁ + 1/f₂ − d/(f₁f₂). At d = 0 the last term vanishes, recovering P_total = P₁ + P₂.
-
----
-
-## 6. Analogy Library
+## Analogies
 
 **Primary analogy — Gravity wells adding**
 Two hills of known steepness placed end-to-end: the total slope is the sum of individual slopes. Focal length is like the run (horizontal distance to focus); power is slope (1/run). Adding slopes (powers) is natural; adding runs (focal lengths) is not.
@@ -105,7 +99,7 @@ Two hills of known steepness placed end-to-end: the total slope is the sum of in
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 **D1 — Two magnifying glasses stacked**
 Hold two converging lenses in contact (or nearly so). Focus sunlight (or a distant lamp) through one, then both. Observe that the combined focus is closer than either lens alone, confirming greater combined power. Measure focal lengths separately (f₁, f₂) and verify P₁ + P₂ = 1/f_combined.
@@ -118,7 +112,7 @@ Use a water-filled plastic bag as an adjustable converging lens (squeeze to chan
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 *Direct instruction is argued here*: The power formula P = 1/f is definitional — there is no discovery path that avoids stating the SI convention for dioptres. However, the combination law P_total = P₁ + P₂ can be discovered:
 
@@ -133,7 +127,7 @@ This semi-guided approach is feasible in a lab with ray boxes or laser benches.
 
 ---
 
-## 9. Teaching Actions (dispatch table)
+## Teaching Sequence
 
 | Situation | Action |
 |---|---|
@@ -145,7 +139,12 @@ This semi-guided approach is feasible in a lab with ray boxes or laser benches.
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 "Power tells you how strongly a lens bends light — high power, tight bend, short focal length. The key formula is just: P equals one over f, where f is in metres. If your focal length is half a metre, your power is two dioptres. Converging is positive, diverging is negative — just like with focal lengths.
 
@@ -155,7 +154,7 @@ The trap everyone falls into: forgetting to convert centimetres to metres. A twe
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 **Mastery gate**: Student correctly computes combined power of two lenses (including a diverging lens) in dioptres, converts focal length from cm to m, and explains why powers add rather than focal lengths. Three correct independent problems with sign discipline satisfied.
 
@@ -170,7 +169,7 @@ The trap everyone falls into: forgetting to convert centimetres to metres. A twe
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **If student cannot remember which to add (f or P)**:
 Return to D1 experimental result. The combined focal length was shorter than either individual lens, not longer (which adding f would produce). Power addition matches observation; focal-length addition contradicts it.
@@ -183,7 +182,7 @@ Anchor: diverging lens spreads rays. Spreading rays never converge to a real foc
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Declarative (definition P = 1/f) + procedural (combination law application)
 **Forgetting risk**: Medium — the law is simple but the unit trap (cm vs m) and sign trap are persistent error sources even months later.
@@ -192,7 +191,7 @@ Anchor: diverging lens spreads rays. Spreading rays never converge to a real foc
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 **Near transfer**: Corrective spectacle prescriptions (computing required dioptre correction from far/near point defect data).
 **Medium transfer**: Compound microscope / telescope power computation (objective + eyepiece combination).
@@ -201,7 +200,25 @@ Anchor: diverging lens spreads rays. Spreading rays never converge to a real foc
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: ray diagrams use similar triangles; Snell's law uses trigonometry; wave optics uses Fourier analysis. Chemistry: spectrophotometry and colorimetry measure concentrations optically; X-ray diffraction uses diffraction physics. Biology: the eye is a biological optical instrument; microscopy, endoscopy, and photoreception are optics applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.opt.lens-power.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 - KG prerequisite `phys.opt.lenses` is necessary and sufficient — this concept requires sign convention and the lens formula, both covered there.
 - The unlock `phys.opt.optical-instruments` is natural: microscope and telescope analysis requires the combination law as a prerequisite.
@@ -211,3 +228,7 @@ Anchor: diverging lens spreads rays. Spreading rays never converge to a real foc
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

@@ -16,7 +16,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply zeroth law of thermodynamics at the **understand** level (Bloom) with difficulty tier **developing**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.therm.zeroth-law.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_If two systems are each in thermal equilibrium with a third, they are in thermal equilibrium with each other._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: If you put two objects next to each other and wait long enough, they reach the same temperature — they stop exchanging heat. This final shared temperature is called thermal equilibrium. The zeroth law says: if object A is in equilibrium with object C, and object B is also in equilibrium with object C, then A and B are in equilibrium with each other (they have the same temperature).
 
@@ -30,7 +42,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **confusing equilibrium with equality**: learners think thermal equilibrium means the objects are "the same" in some global sense (same material, same size, same total energy), not just that they share a temperature. They are surprised that a large iron block and a small glass marble can be in thermal equilibrium — same temperature does not mean same thermal energy.
 
@@ -38,7 +50,7 @@ The secondary root cause is **the zeroth law reading as "obvious"**: learners di
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "Objects in thermal equilibrium are the same material or same size"**
 - Characteristic phrase: "They can't be in equilibrium — one is iron and the other is wood."
@@ -66,20 +78,7 @@ The secondary root cause is **the zeroth law reading as "obvious"**: learners di
 
 ---
 
-## Explanation library
-
-**E1 — The thermometer justification (motivation for the law)**
-"Why do thermometers work? When you put a thermometer in a cup of water, heat flows until the thermometer and the water reach the same temperature. At that point, the thermometer reads its own temperature — and the zeroth law says this equals the water's temperature. Without the zeroth law, you couldn't claim a thermometer tells you anything about the object; you could only say it tells you about itself."
-
-**E2 — The equivalence-class picture**
-"Imagine all objects in the universe sorted into boxes, where every object in the same box is in thermal equilibrium with every other object in the same box. What label would you put on each box? Temperature. The zeroth law is the mathematical reason why this sorting is possible and consistent — it says that equilibrium is a transitive property, so the boxes don't overlap and every object belongs in exactly one box at any given moment."
-
-**E3 — Operational definition of temperature**
-"The zeroth law gives us the operational method for measuring temperature: take a standard object (the thermometer), bring it into contact with the object you want to measure, wait for equilibrium, then read the thermometer scale. This works because at equilibrium, the thermometer and the object share the same temperature value. Without the zeroth law, 'temperature' would be a concept we believe in but cannot operationally verify."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — The referee analogy**
 Two athletes (A and B) want to compare their heights. They cannot stand back-to-back because they are in different cities. Instead, a referee (C) measures both of them using a standard ruler. If A = 182 cm and B = 182 cm, then A and B are the same height — even without direct comparison. The zeroth law plays the same role: the thermometer (C) compares two objects (A and B) without them touching. If A = 300 K and B = 300 K on the thermometer, they are in thermal equilibrium.
@@ -91,7 +90,7 @@ Do NOT use the phrase "equal energy" as a synonym for thermal equilibrium. A lar
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — The three-cup temperature comparison**
 Fill three cups: one with hot water (~60 °C), one with cold water (~5 °C), one with room-temperature water (~22 °C). Immerse a thermometer in each and record the stable reading. Then immerse the thermometer in the hot cup and record, remove, immerse in the cold cup and record. The thermometer is functioning as the zeroth law's "third object" — comparing the temperatures of the three cups indirectly.
@@ -104,7 +103,7 @@ Insert a room-temperature thermometer into a cup of hot water (60 °C). Watch th
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for guided discovery** (the zeroth law can be abstracted from observable temperature-comparison experiments):
 
@@ -112,7 +111,7 @@ Present the three-cup demonstration. Ask: "The thermometer tells us the hot cup 
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Equilibrium ≠ equality drill**: Whenever "equilibrium" appears in a problem, require the learner to state: "What are the temperatures of the two objects? Are they equal? What is their total thermal energy?" This forces the separation of temperature equality (equilibrium condition) from total energy equality (not implied).
 
@@ -122,7 +121,12 @@ Present the three-cup demonstration. Ask: "The thermometer tells us the hot cup 
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "The zeroth law tells you why thermometers work. When you put a thermometer in hot water, heat flows until the thermometer and the water are at the same temperature — equilibrium. At that point, the thermometer's reading equals the water's temperature. Without the zeroth law, you couldn't trust that; you'd only know the thermometer's own temperature. The law says: if two things are both in equilibrium with a third thing, they're in equilibrium with each other. The thermometer is that third thing."
 
@@ -132,7 +136,7 @@ Present the three-cup demonstration. Ask: "The thermometer tells us the hot cup 
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can state the zeroth law, explain why it makes thermometry possible, distinguish thermal equilibrium from equal thermal energy, and correctly identify when two objects are in equilibrium from temperature data alone.
 
@@ -151,7 +155,7 @@ After (d): "How confident are you that iron and marble at the same temperature a
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — Equilibrium confused with energy equality (M2)**
 Ask: "Can two objects have the same temperature but different amounts of thermal energy?" Offer an example: lake at 20 °C vs. teacup at 20 °C — in equilibrium but vastly different total energy. Confirm that equilibrium is purely a temperature condition.
@@ -164,7 +168,7 @@ Ask the harder question: "Before the zeroth law was formalised, how would you pr
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Principle (the transitive property of thermal equilibrium) + application (why thermometers work).
 
@@ -180,7 +184,7 @@ Ask the harder question: "Before the zeroth law was formalised, how would you pr
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.therm.ideal-gas-law`: PV = nRT requires T to be the equilibrium temperature; the zeroth law justifies that all parts of a gas in a container share one temperature value
@@ -195,7 +199,25 @@ Ask the harder question: "Before the zeroth law was formalised, how would you pr
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: calculus underlies heat-flow equations; statistical probability distributions govern thermal averages. Chemistry: thermochemistry, chemical equilibrium (Gibbs free energy), and reaction spontaneity are thermodynamics applied to molecular systems; the ideal-gas law is shared. Biology: metabolism is biochemical thermodynamics; body temperature regulation is heat-transfer in a biological system.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.therm.zeroth-law.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG correctly places the zeroth law after temperature and before the ideal gas law. The single unlock (ideal-gas-law) is appropriate — the ideal gas law's temperature variable is defined as the equilibrium temperature established by the zeroth law.
 
@@ -204,3 +226,7 @@ One gap: the zeroth law also underpins `phys.therm.heat-transfer` conceptually (
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

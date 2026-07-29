@@ -1,6 +1,6 @@
 # phys.wave.superposition — Superposition Principle
 
-## 1. Identity
+## Identity
 
 | Field | Value |
 |---|---|
@@ -16,7 +16,19 @@
 
 ---
 
-## 2. Mental Models
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.wave.superposition.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+The superposition principle states that the resultant displacement is the algebraic sum of displacements of individual waves.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 ### Stage 1 — Intuitive (no formalism)
 
@@ -61,7 +73,7 @@ Non-linear media break superposition: shock waves (very loud sound, Mach >1), la
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Magnitude addition** — learners add absolute values instead of signed values. Two equal waves in antiphase give |A| + |A| = 2A (wrong) instead of A + (−A) = 0 (correct). This error blocks all destructive-interference problems.
 2. **Permanent combination** — learners think that when two waves superpose, they "merge into one" permanently. After seeing ripples cross on a pond, they think both ripples should change direction or amplitude. The fact that waves emerge unchanged is not intuitive.
@@ -70,7 +82,7 @@ Non-linear media break superposition: shock waves (very loud sound, Mach >1), la
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 ### M1 — "Adding waves means adding their magnitudes"
 
@@ -102,32 +114,7 @@ Non-linear media break superposition: shock waves (very loud sound, Mach >1), la
 
 ---
 
-## 5. Explanation Library
-
-### Explanation A — Algebraic displacement addition
-
-At any point x and time t, the medium can only be in one physical state (one displacement y). If wave 1 alone would produce y₁ and wave 2 alone would produce y₂, then with both present the medium is simultaneously influenced by both — and the restoring force acts on the total deviation from equilibrium. In a linear medium, restoring force ∝ displacement → both contributions add independently → y = y₁ + y₂. This is not a law imposed from outside; it is a consequence of linearity.
-
-### Explanation B — Standing waves derived from superposition
-
-Two sinusoidal waves, same A, k, ω, opposite directions:
-
-y₁ = A sin(kx − ωt)  
-y₂ = A sin(kx + ωt)  
-
-Use sum-to-product: sin P + sin Q = 2 sin((P+Q)/2) cos((P−Q)/2):
-
-y = 2A sin(kx) cos(ωt)
-
-This factors into a *space part* [2A sin(kx)] and a *time part* [cos(ωt)]. The spatial amplitude pattern (2A sin(kx)) is *fixed* — nodes at kx = nπ → x = nλ/2, antinodes midway. All points oscillate in phase (or antiphase). No energy transport along x. Standing waves are superposition made visible.
-
-### Explanation C — Phasor (vector) addition for sinusoidal waves
-
-When two sinusoidal waves have the same frequency but different phases, represent each as a rotating phasor (vector of length A, angle = phase). The resultant amplitude and phase are found by vector addition of phasors. This method extends naturally to multiple sources and underpins the double-slit analysis.
-
----
-
-## 6. Analogy Library
+## Analogies
 
 ### Primary analogy — Two conversations in one room
 
@@ -141,7 +128,7 @@ Mixing red and blue paint gives purple — irreversible, both original colours a
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 ### Demo A — Slinky pulse superposition
 
@@ -163,7 +150,7 @@ Mixing red and blue paint gives purple — irreversible, both original colours a
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 ### Stance: Argue the inductive case — *start with the phenomenon, derive the principle*
 
@@ -181,7 +168,7 @@ Mixing red and blue paint gives purple — irreversible, both original colours a
 
 ---
 
-## 9. Teaching Actions
+## Teaching Sequence
 
 | Prior state | Action |
 |---|---|
@@ -193,7 +180,12 @@ Mixing red and blue paint gives purple — irreversible, both original colours a
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 ### Opening
 "Two ripples on a pond — watch what happens when they meet. The water rises extra high where both crests coincide, drops extra low where both troughs coincide, and for a moment goes flat where a crest meets a trough. Then both ripples keep going exactly as before. This is superposition."
@@ -209,7 +201,7 @@ Mixing red and blue paint gives purple — irreversible, both original colours a
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 ### Mastery gate
 
@@ -238,7 +230,7 @@ Expected: Standing wave; nodes at x = nλ/2 (where sin(kx) = 0). If the learner 
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **Recovery for signed addition failure**:
 1. Give a simple number example: y₁ = +3, y₂ = −3 → y_total = 0. "The medium cannot be in two positions at once."
@@ -252,7 +244,7 @@ Expected: Standing wave; nodes at x = nλ/2 (where sin(kx) = 0). If the learner 
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Principled derivation + graphical pattern recognition
 
@@ -272,7 +264,7 @@ Expected: Standing wave; nodes at x = nλ/2 (where sin(kx) = 0). If the learner 
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 | Target concept | Bridge |
 |---|---|
@@ -286,7 +278,25 @@ Expected: Standing wave; nodes at x = nλ/2 (where sin(kx) = 0). If the learner 
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: wave equations use trigonometry (sin/cos) and Fourier analysis. Chemistry: spectroscopy (IR, UV-vis, NMR) identifies molecules by wave-matter interactions. Biology: sound (hearing, ultrasound imaging), light (vision, photosynthesis), and seismic waves all use wave physics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.wave.superposition.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 **KG note**: `phys.wave.wave-speed` is the correct minimum prerequisite — the learner needs wave parameters (A, k, ω, λ) fluently before algebraic superposition is tractable. `phys.wave.interference` is the correct immediate unlock: sustained interference patterns are the quantitative consequence of superposition applied to coherent sources.
 
@@ -295,3 +305,7 @@ Expected: Standing wave; nodes at x = nλ/2 (where sin(kx) = 0). If the learner 
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

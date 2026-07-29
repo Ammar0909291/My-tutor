@@ -1,6 +1,6 @@
 # phys.therm.phase-transitions — Phase Transitions and Latent Heat
 
-## 1. Identity
+## Identity
 
 | Field | Value |
 |---|---|
@@ -16,7 +16,19 @@
 
 ---
 
-## 2. Mental Models
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.therm.phase-transitions.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+Phase transitions absorb or release latent heat at constant temperature as a substance changes between solid, liquid, and gas phases.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 ### Stage 1 — Intuitive (no formalism)
 
@@ -71,7 +83,7 @@ For water at 100 °C: RT ≈ 2.5 kJ/mol; ΔH_vap ≈ 40.7 kJ/mol. The PΔV term 
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Latent heat adds to temperature** — learners expect Q = mcΔT to hold always; they predict that adding heat during melting causes ΔT > 0. The constant-temperature plateau during a phase change is non-intuitive.
 2. **L_f and L_v are similar in magnitude** — learners treat both latent heats as interchangeable or guess L_v < L_f ("it takes less to boil than to melt"). In fact L_v ≈ 7× L_f for water. The large energy needed for vaporisation surprises learners.
@@ -80,7 +92,7 @@ For water at 100 °C: RT ≈ 2.5 kJ/mol; ΔH_vap ≈ 40.7 kJ/mol. The PΔV term 
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 ### M1 — "Adding heat during melting raises temperature"
 
@@ -112,29 +124,7 @@ For water at 100 °C: RT ≈ 2.5 kJ/mol; ΔH_vap ≈ 40.7 kJ/mol. The PΔV term 
 
 ---
 
-## 5. Explanation Library
-
-### Explanation A — Why temperature is constant during a phase change
-
-During melting, the system consists of a mixture of solid and liquid water. The temperature of this two-phase mixture is fixed at the melting point (0 °C at 1 atm) by equilibrium: if T rose above 0 °C, any remaining ice would melt (removing energy, cooling the mixture back to 0 °C); if T fell below 0 °C, some liquid would freeze (releasing L_f, warming back to 0 °C). The two-phase equilibrium enforces T = T_melt until one phase is exhausted. Thermodynamically: at the melting point, ΔG = 0 → the two phases are in equilibrium → any added energy changes the phase fractions, not the temperature.
-
-### Explanation B — Heat balance with phase changes (procedure)
-
-1. Identify all substances and their initial/final phases.
-2. Check if a phase change occurs by testing whether enough energy exists to complete it.
-3. For each substance, write Q terms:
-   - Heating within a phase: Q = mcΔT (signed: ΔT = T_f − T_i)
-   - Phase change: Q = ±mL (+ if absorbing/melting/vaporising; − if releasing/freezing/condensing)
-4. Set ΣQ = 0.
-5. Solve for T_f (or for m, or for L).
-
-### Explanation C — Vapour pressure and phase diagram
-
-The liquid-gas boundary represents the vapour pressure P_vap(T): the equilibrium partial pressure of the vapour above a liquid. Liquids boil when P_vap = P_external. At sea level (P = 101 kPa), water boils at 100 °C. At high altitude (P < 101 kPa), P_vap = P_external at a lower T → water boils below 100 °C → pasta takes longer to cook. In a pressure cooker (P > 101 kPa), water boils above 100 °C → food cooks faster.
-
----
-
-## 6. Analogy Library
+## Analogies
 
 ### Primary analogy — Filling a bucket with a hole at a fixed level
 
@@ -148,7 +138,7 @@ Learners sometimes say "steam condenses → it gets cool → less heat." In fact
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 ### Demo A — Temperature-time graph of water being heated
 
@@ -173,7 +163,7 @@ Steam delivers ≈9.5× more energy. The calculation makes the danger of steam p
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 ### Stance: Argue the inductive case — *measure the plateau, then account for the hidden energy*
 
@@ -192,7 +182,7 @@ Steam delivers ≈9.5× more energy. The calculation makes the danger of steam p
 
 ---
 
-## 9. Teaching Actions
+## Teaching Sequence
 
 | Prior state | Action |
 |---|---|
@@ -204,7 +194,12 @@ Steam delivers ≈9.5× more energy. The calculation makes the danger of steam p
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 ### Opening
 "You add heat to boiling water. The temperature does not go up. You keep adding heat. Still 100 °C. Where is the energy going? Not into speed — the molecules are already moving at the speed that defines 100 °C. The energy is going into separating molecules that were clinging to each other. That energy is called latent heat: hidden heat that changes the structure, not the temperature."
@@ -220,7 +215,7 @@ Steam delivers ≈9.5× more energy. The calculation makes the danger of steam p
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 ### Mastery gate
 
@@ -257,7 +252,7 @@ Expected: 0.05 × 334,000 + 0.05 × 4200 × T_f + 0.1 × 4200 × (T_f − 60) = 
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **Recovery for omitted latent heat in calorimetry**:
 1. Ask explicitly before every problem: "Does any substance start and end in different phases?"
@@ -271,7 +266,7 @@ Expected: 0.05 × 334,000 + 0.05 × 4200 × T_f + 0.1 × 4200 × (T_f − 60) = 
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Quantitative (L_f, L_v for water) + procedural (heat balance with phase terms) + conceptual (constant-T plateau, molecular picture)
 
@@ -291,7 +286,7 @@ Expected: 0.05 × 334,000 + 0.05 × 4200 × T_f + 0.1 × 4200 × (T_f − 60) = 
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 | Target concept | Bridge |
 |---|---|
@@ -305,7 +300,25 @@ Expected: 0.05 × 334,000 + 0.05 × 4200 × T_f + 0.1 × 4200 × (T_f − 60) = 
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: calculus underlies heat-flow equations; statistical probability governs thermal averages. Chemistry: thermochemistry, chemical equilibrium (Gibbs free energy), and reaction spontaneity are thermodynamics applied to molecules; the ideal-gas law is shared. Biology: metabolism is biochemical thermodynamics; body-temperature regulation is biological heat transfer.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.therm.phase-transitions.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 **KG note**: `phys.therm.calorimetry` is the necessary prerequisite — the heat-balance equation (ΣQ = 0) must be fluent before adding the mL term. The concept has no listed downstream unlocks in the KG but feeds naturally into `phys.therm.internal-energy` (U_P interpretation of latent heat) and any thermodynamic cycle treatment.
 
@@ -314,3 +327,7 @@ Expected: 0.05 × 334,000 + 0.05 × 4200 × T_f + 0.1 × 4200 × (T_f − 60) = 
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

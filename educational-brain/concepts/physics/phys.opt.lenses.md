@@ -1,6 +1,6 @@
 # phys.opt.lenses — Thin Lenses and Lens Formula
 
-## 1. Identity
+## Identity
 
 | Field | Value |
 |---|---|
@@ -16,7 +16,19 @@
 
 ---
 
-## 2. Mental Models
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.opt.lenses.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+The thin lens formula 1/f = 1/v − 1/u relates focal length, image distance, and object distance for thin lenses.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 ### Stage 1 — Intuitive (no formalism)
 
@@ -64,7 +76,7 @@ Image formed by a two-lens system: treat the image from lens 1 as the object for
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Sign convention errors in the lens formula** — in the New Cartesian convention, u < 0 for real objects and the formula is 1/f = 1/v − 1/u. Learners either use the mirror formula (1/f = 1/v + 1/u, wrong for lenses) or forget that u is negative and substitute a positive number.
 2. **Confusing converging and diverging lenses** — converging = thicker in centre; diverging = thinner in centre. Both are called "glass lenses" and look similar without handling. Learners apply converging-lens ray rules to diverging lenses.
@@ -73,7 +85,7 @@ Image formed by a two-lens system: treat the image from lens 1 as the object for
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 ### M1 — "The lens formula for lenses is the same as for mirrors (1/v + 1/u = 1/f)"
 
@@ -105,31 +117,7 @@ Image formed by a two-lens system: treat the image from lens 1 as the object for
 
 ---
 
-## 5. Explanation Library
-
-### Explanation A — Thin lens formula derivation via similar triangles
-
-Consider an object of height h₀ at |u| from a converging lens (f > 0). The image at |v| has height hᵢ. Two pairs of similar triangles (one through the optical centre, one using the focal rays) give:
-
-hᵢ/h₀ = −v/u (from the central ray through the optical centre, giving magnification)
-
-Combine with the focal-ray geometry → 1/v − 1/u = 1/f.
-
-### Explanation B — Power and the dioptre
-
-The power of a lens P = 1/f (dioptres, D, when f in metres). Powers of thin lenses in contact add: P_total = P₁ + P₂. Example: eyeglass prescription "−2.0 D" means a diverging lens with f = −0.5 m. "Reading glasses +1.5 D" means converging lens, f = 0.67 m. The eye's own power (lens + cornea combined) is ~60 D.
-
-### Explanation C — Sequential image formation in a two-lens system
-
-Step 1: Ignore lens 2. Compute where lens 1 would form an image of the original object. Call this Image₁.  
-Step 2: Image₁ is the object for lens 2. If Image₁ would form on the far side of lens 2 (where lens 2 is in the way), Image₁ is a virtual object for lens 2 (positive u for lens 2 in some conventions). Apply the lens formula again.  
-Step 3: The final image is where lens 2 forms an image of Image₁.
-
-This sequencing is essential — there is no shortcut except for the special case of two thin lenses in contact (d = 0).
-
----
-
-## 6. Analogy Library
+## Analogies
 
 ### Primary analogy — The lens as a prism array
 
@@ -143,7 +131,7 @@ Mirrors work by reflection; lenses work by refraction at two surfaces. Mirror fo
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 ### Demo A — Five cases with a converging lens and a candle
 
@@ -166,7 +154,7 @@ Mirrors work by reflection; lenses work by refraction at two surfaces. Mirror fo
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 ### Stance: Argue the inductive case — *measure first, derive second*
 
@@ -185,7 +173,7 @@ Mirrors work by reflection; lenses work by refraction at two surfaces. Mirror fo
 
 ---
 
-## 9. Teaching Actions
+## Teaching Sequence
 
 | Prior state | Action |
 |---|---|
@@ -197,7 +185,12 @@ Mirrors work by reflection; lenses work by refraction at two surfaces. Mirror fo
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 ### Opening
 "A magnifying glass makes things look bigger — but only when you hold it close to the object. Hold it farther away, and the image flips upside down and shrinks. The thin lens formula explains exactly when each happens."
@@ -213,7 +206,7 @@ Mirrors work by reflection; lenses work by refraction at two surfaces. Mirror fo
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 ### Mastery gate
 
@@ -242,7 +235,7 @@ Expected: 1/v − 1/u = 1/f; f > 0 converging, f < 0 diverging. If the learner w
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **Recovery for sign convention errors**:
 1. Write a template at the top of every problem: "Real object in front of lens: u = −|distance|. Real image behind lens: v = +|distance|. Virtual image in front: v = −|distance|. Converging lens: f = +|f|. Diverging: f = −|f|."
@@ -257,7 +250,7 @@ Expected: 1/v − 1/u = 1/f; f > 0 converging, f < 0 diverging. If the learner w
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Procedural (formula + sign convention) + tabular case knowledge + formula network (lensmaker's equation, power)
 
@@ -278,7 +271,7 @@ Expected: 1/v − 1/u = 1/f; f > 0 converging, f < 0 diverging. If the learner w
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 | Target concept | Bridge |
 |---|---|
@@ -291,7 +284,25 @@ Expected: 1/v − 1/u = 1/f; f > 0 converging, f < 0 diverging. If the learner w
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: ray diagrams use similar triangles; Snell's law uses trigonometry; wave optics uses Fourier analysis. Chemistry: spectrophotometry and colorimetry measure concentrations optically; X-ray diffraction uses diffraction physics. Biology: the eye is a biological optical instrument; microscopy, endoscopy, and photoreception are optics applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.opt.lenses.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 **KG note**: `phys.opt.refraction` is the necessary prerequisite — Snell's law and refractive index must be fluent. The concept is tagged "developing" in difficulty in the KG but marked "proficient" in this entry based on the formula complexity, sign convention discipline, and the five-cases mastery requirement. The KG tag may warrant review. `phys.opt.lens-power` is the correct downstream unlock — the dioptre formalism and prescription calculation build directly on 1/f.
 
@@ -300,3 +311,7 @@ Expected: 1/v − 1/u = 1/f; f > 0 converging, f < 0 diverging. If the learner w
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

@@ -16,7 +16,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply electric current and drift velocity at the **understand** level (Bloom) with difficulty tier **developing**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.em.electric-current.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_Electric current is the rate of flow of charge; drift velocity is the average velocity of charge carriers under an electric field._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: Electric current is the flow of electric charge through a conductor. In a wire, electrons move from one end to the other. A battery pushes the electrons around the circuit. The more charge that flows per second, the larger the current.
 
@@ -30,7 +42,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **current-as-consumption misconception**: learners think current is "used up" in a resistor or light bulb — that less current comes out of the bulb than goes in. This model makes the circuit unsolvable for multi-loop problems and leads to errors in Kirchhoff's current law. The correct model: charge is conserved; the same current that enters a series component exits it. Energy is dissipated (not current).
 
@@ -38,7 +50,7 @@ The secondary root cause is **drift velocity vs. signal speed confusion**: learn
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "Current is consumed in resistors / less comes out than goes in"**
 - Characteristic phrase: "The current through the bulb is less than through the wire because the bulb uses it up."
@@ -66,20 +78,7 @@ The secondary root cause is **drift velocity vs. signal speed confusion**: learn
 
 ---
 
-## Explanation library
-
-**E1 — Current as a flow rate (quantitative definition)**
-"Current I = ΔQ/Δt: the charge flowing past a cross-section per unit time. If 10 C flows past a point in 2 s, the current is 5 A. If 1 A flows for 1 minute (60 s), the total charge transferred is Q = It = 1 × 60 = 60 C. The ampere is the unit; one ampere means one coulomb of charge passes per second."
-
-**E2 — The train-push analogy for signal speed vs. electron speed**
-"Push a very long train from the rear. The push signal travels to the front at the speed of sound in the train's material (nearly instantaneously at human scale) — but no individual train car moves from back to front. Similarly, the electric field signal travels along a wire at nearly the speed of light; individual electrons drift at mm/s. You are the battery pushing the electrons; the train car movement is the electron drift; the push signal is the EM field."
-
-**E3 — Charge conservation in a circuit (Kirchhoff's current law preview)**
-"Charge cannot be created or destroyed in a circuit. At any junction, the total charge flowing in per second must equal the total charge flowing out per second. In a series circuit: no junction → same current everywhere. This is why both ammeters (before and after the bulb) read the same. The bulb converts energy, not charge."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — The water pipe analogy**
 Current = water flow rate (litres per second); charge = water; voltage = pressure difference; resistance = pipe narrowness. Water flows from high pressure to low pressure; conventional current flows from high potential to low potential. The water pipe analogy is useful for circuits and Ohm's law — but:
@@ -91,7 +90,7 @@ Current is a FLOW RATE — it is not stored in wires. A wire with no current is 
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Two ammeters in series**
 Connect two ammeters before and after a resistor or bulb in a series circuit. Both read the same. Ask the class to predict first (most will predict different values). The identical readings resolve M1 empirically. This is the single most important electrics demonstration at secondary level.
@@ -104,7 +103,7 @@ Draw a circuit with conventional current direction (arrows from + terminal aroun
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for guided discovery for M1** (the conservation principle):
 
@@ -114,7 +113,7 @@ For the definitions (I = Q/t, drift velocity formula): direct instruction is app
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Series-circuit current quiz**: Whenever a series circuit is presented, ask before any calculation: "What is the current at every point in this circuit?" Answer: the same. This addresses M1 pre-emptively for every series circuit problem.
 
@@ -126,7 +125,12 @@ For the definitions (I = Q/t, drift velocity formula): direct instruction is app
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "Current is a flow rate — charge per second. One ampere is one coulomb of charge passing a cross-section every second. It's like measuring water flow in litres per second: the number tells you how fast charge is moving through the circuit, not how much is stored there."
 
@@ -136,7 +140,7 @@ For the definitions (I = Q/t, drift velocity formula): direct instruction is app
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) define I = Q/t and use it to calculate current, charge, or time; (2) state that current is the same throughout a series circuit; (3) correctly state conventional current direction vs. electron flow direction; (4) calculate drift velocity from I = nqv_dA.
 
@@ -156,7 +160,7 @@ After (b): "How confident are you that all three ammeters read the same?" (1–5
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — M1 persists (current consumed)**
 Run D1 (two ammeters). The physical observation of identical readings is the fastest resolution. Then use the charge-conservation argument: "If current were consumed, where would the missing charge go? Could it pile up inside the bulb?" This reductio leads the learner to the correct model.
@@ -169,7 +173,7 @@ Compute the drift velocity from I = nqv_dA: v_d ≈ 10⁻⁴ m/s. Compute the ti
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Definition (I = Q/t), conservation law (same current throughout series), convention (direction rule), and drift-velocity formula (I = nqv_dA).
 
@@ -185,7 +189,7 @@ Compute the drift velocity from I = nqv_dA: v_d ≈ 10⁻⁴ m/s. Compute the ti
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.em.ohms-law`: V = IR connects current to voltage and resistance — the next building block in circuit analysis
@@ -201,7 +205,25 @@ Compute the drift velocity from I = nqv_dA: v_d ≈ 10⁻⁴ m/s. Compute the ti
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: vector calculus (divergence, curl) formalises Maxwell's equations; complex exponentials describe AC circuits. Chemistry: electrochemistry (Faraday's laws, electrolysis, galvanic cells) maps directly onto electric-current concepts; atomic spectroscopy uses electromagnetic waves. Biology: membrane potentials and nerve impulses are electrical circuits; MRI and ECG are direct clinical applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.em.electric-current.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG description correctly identifies I = dQ/dt and drift velocity as the key content. The two unlocks (magnetic-field, ohms-law) are appropriate.
 
@@ -212,3 +234,7 @@ A second gap: the KG says "drift velocity is the average velocity of charge carr
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

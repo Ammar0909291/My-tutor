@@ -18,7 +18,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply introduction to wave optics at the **understand** level (Bloom) with difficulty tier **proficient**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.opt.wave-optics.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_Wave optics treats light as a wave and uses Huygens' principle to explain interference and diffraction phenomena._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: Light doesn't always travel in straight lines. When light passes through a very narrow slit or around a sharp edge, it spreads out — this is diffraction. When two light beams overlap, they can reinforce each other (bright) or cancel each other (dark) — this is interference. These effects prove that light is a wave. You can see them: the rainbow pattern on a soap bubble and the coloured rings on a CD come from wave interference.
 
@@ -32,7 +44,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **treating interference as addition of intensities, not amplitudes**: learners know that two light sources together are brighter than one — so they cannot accept that two coherent sources can produce a dark spot at some positions. They sum intensities (I₁ + I₂ = always brighter) rather than amplitudes (E₁ + E₂ can cancel). The correct model is that superposition operates on the electric field amplitudes; intensity is proportional to (amplitude)² — and when E₁ = −E₂ at a point (destructive interference), the amplitude is zero, so the intensity is zero. Total energy is conserved — dark fringes are compensated by brighter bright fringes — but the distribution of intensity changes.
 
@@ -40,7 +52,7 @@ The secondary root cause is **confusing diffraction with reflection or scatterin
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "Two light sources together can never produce darkness — they always add brightness"**
 - Characteristic phrase: "If you have two beams of light, you always get more light — never a dark spot."
@@ -68,20 +80,7 @@ The secondary root cause is **confusing diffraction with reflection or scatterin
 
 ---
 
-## Explanation library
-
-**E1 — Huygens' principle (constructive explanation)**
-"Every point on an advancing wavefront acts as a tiny new point source, emitting secondary spherical wavelets. The new wavefront is the common tangent (envelope) of all these wavelets. In open space, the wavelets going sideways cancel each other (by superposition) while those going forward reinforce — so the wavefront advances straight. At an edge (aperture), the sideways-going wavelets on the open side have nothing to cancel them — so the wave bends around the edge. Narrower slit: fewer secondary sources, but the cancellation in the sides is less complete, so more light goes sideways. This predicts: wider pattern from narrower slit — consistent with experiment."
-
-**E2 — Intensity vs. amplitude superposition (the key distinction)**
-"Superposition acts on the wave amplitude (the electric field E), not on the intensity (I ∝ E²). If two waves arrive in phase: E_total = E + E = 2E; I_total = (2E)² = 4E² — four times the single-wave intensity (not twice). If they arrive out of phase by λ/2: E_total = E + (−E) = 0; I_total = 0. The average over all positions is still 2E² (energy conserved), but the distribution is non-uniform — bright fringes are 4× brighter, dark fringes are 0. The total power over the screen equals the power that would arrive with no interference. No energy is created or destroyed — only redistributed."
-
-**E3 — The model-selection criterion**
-"When should you use geometric optics vs. wave optics? Compare λ to the relevant size scale a: if λ << a, geometric optics; if λ ~ a or λ > a, wave optics. Visible light: λ ≈ 400–700 nm. A doorway (a ≈ 1 m): λ/a ≈ 5×10⁻⁷ — geometric optics fine. A human hair (a ≈ 100 µm): λ/a ≈ 5×10⁻³ — some wave effects at the edges. A CD groove (a ≈ 1.5 µm): λ/a ≈ 0.3 — strong diffraction, which is what makes the rainbow pattern. A wavelength-scale aperture: λ/a ≈ 1 — completely in the wave optics regime."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — Water waves passing through a gap in a harbour wall**
 Drop a stone in a pond: circular ripples spread outward. Put a wall with a gap in the path. When the gap is much larger than the wavelength, water waves pass through mostly straight (like geometric optics). When the gap is comparable to the wavelength, the waves spread in all directions beyond the gap — diffraction. Two gaps: the two emerging wave patterns overlap and interfere, producing alternating high and low amplitude bands — interference pattern in water. Light behaves exactly the same way. The water-wave analogy is nearly exact for these phenomena and gives the correct qualitative results for slit width effects and double-slit patterns.
@@ -93,7 +92,7 @@ Destructive interference is NOT the destruction of energy. The dark fringe at on
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — CD or soap bubble colours (zero-equipment)**
 Hold a CD or soap bubble in white light. Observe the rainbow pattern. Ask: "Why does white light produce colours on the CD?" (Each wavelength constructively interferes at a different angle from the grooves, separating colours.) "Does the CD have a filter inside it?" No — the colours come from constructive interference of specific wavelengths, not from selective absorption. This is a universally available demonstration of thin-film/diffraction-grating interference requiring no equipment beyond a CD.
@@ -106,7 +105,7 @@ A ripple tank with a gap in a barrier demonstrates diffraction directly. Two gap
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for phenomenon-first guided inquiry**:
 
@@ -118,7 +117,7 @@ The discovery sequence: paradox (shadow has structure) → failure of geometric 
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Amplitude-not-intensity superposition check**: For every interference problem, require the learner to state: "I am adding electric field amplitudes, not intensities." Then: "Constructive: E_total = 2E; I_total = 4I₁. Destructive: E_total = 0; I_total = 0. Average: 2I₁ — energy conserved." Never allow adding intensities directly for coherent sources.
 
@@ -130,7 +129,12 @@ The discovery sequence: paradox (shadow has structure) → failure of geometric 
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "Huygens' principle: every point on a wavefront is a secondary source. In open space, secondary wavelets going sideways cancel each other; only the forward wavelets add up — light goes straight. At a narrow slit, there aren't enough secondary sources to cancel the side directions — light spreads. Narrower slit, more spreading. This is diffraction — not a paradox, but a prediction of the wave model."
 
@@ -140,7 +144,7 @@ The discovery sequence: paradox (shadow has structure) → failure of geometric 
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) state Huygens' principle and explain how it produces diffraction; (2) state the condition for constructive and destructive interference (path difference = mλ and (m+½)λ respectively); (3) explain why two independent (incoherent) sources don't produce a stable interference pattern; (4) state the model-selection criterion (compare λ to relevant length scale).
 
@@ -160,7 +164,7 @@ After (b): "How confident are you that two red LEDs of the same wavelength won't
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — M1 persists (interference must increase brightness)**
 Use the vector addition picture: draw two wave cycles, one displaced by λ/2 from the other. At every point, label the amplitude of each wave. Add: the sum at every point is zero. "Is the result a dimmer wave or no wave at all?" No wave — zero amplitude, zero intensity. "Where did the energy go?" Point to the adjacent bright fringe (draw the pattern). "The pattern is not globally dimmer — it's redistributed: brighter at some points, zero at others." The vector picture makes amplitude cancellation concrete.
@@ -173,7 +177,7 @@ Run the experiment mentally: "Two independent red lasers. At a given instant, th
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Huygens' principle (every wavefront point is a secondary source) + interference conditions (Δ = mλ bright; Δ = (m+½)λ dark) + coherence definition (fixed phase relationship) + model-selection rule (λ vs. a).
 
@@ -189,7 +193,7 @@ Run the experiment mentally: "Two independent red lasers. At a given instant, th
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.opt.youngs-experiment`: the double-slit geometry — fringe spacing y = λL/d derives directly from the path-difference conditions d sinθ = mλ established here
@@ -205,7 +209,25 @@ Run the experiment mentally: "Two independent red lasers. At a given instant, th
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: geometry (ray diagrams use similar triangles); Snell's law uses trigonometry; wave optics uses Fourier analysis. Chemistry: spectrophotometry and colorimetry measure concentrations optically; X-ray diffraction of molecules uses diffraction physics. Biology: the eye is a biological optical instrument; microscopy and endoscopy depend on lenses and fibre optics; bioluminescence and plant photoreception are optics applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.opt.wave-optics.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG description "wave optics treats light as a wave and uses Huygens' principle to explain interference and diffraction phenomena" is correct and complete in scope.
 
@@ -216,3 +238,7 @@ A second gap: the model-selection criterion (when to use geometric vs. wave opti
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

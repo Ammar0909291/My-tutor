@@ -16,7 +16,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply electric charge and conservation at the **understand** level (Bloom) with difficulty tier **developing**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.em.electric-charge.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_Electric charge is a fundamental property of matter that is quantised and conserved in all interactions._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: Everything is made of atoms. Atoms contain a positive nucleus and negative electrons surrounding it. When two objects are rubbed together, electrons can transfer from one to the other. The object that gains electrons becomes negatively charged; the one that loses electrons becomes positively charged. Like charges repel; unlike charges attract.
 
@@ -30,7 +42,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **sign confusion**: learners know that there are positive and negative charges, but when asked to track what happens to charge during a process — rubbing, grounding, induction — they lose the sign. The failure is not conceptual but arithmetic: they cannot keep track of which object gave up electrons and which received them, and they confuse "gaining electrons" (becoming negative) with "becoming positive."
 
@@ -38,7 +50,7 @@ The secondary root cause is **"electricity = electrons flowing out of a battery"
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "Charging by rubbing creates charge from nothing"**
 - Characteristic phrase: "Rubbing makes the electrons appear" or "The charge came from the rubbing."
@@ -66,20 +78,7 @@ The secondary root cause is **"electricity = electrons flowing out of a battery"
 
 ---
 
-## Explanation library
-
-**E1 — The atom as a charge accounting ledger**
-Every atom starts neutral: the number of protons (positive, in the nucleus, fixed) equals the number of electrons (negative, in orbitals, can be removed or added). The atomic number Z is both the proton count and the normal electron count. If you remove one electron: net charge = +e. If you add two electrons: net charge = −2e. Charging is always about moving electrons, not protons (which are bound in the nucleus).
-
-**E2 — Conservation of charge as accounting**
-Before any charging process, write down the total charge of the system. After, write it again. They must be equal. "Glass rod (0) + silk (0) = 0 total. After rubbing: glass (+ne) + silk (−ne) = 0 total." This ledger approach catches every error: if the totals disagree, electrons were invented or destroyed, which is impossible.
-
-**E3 — The electron flow vs. conventional current distinction**
-"Franklin chose 'positive' for the type of charge that accumulated on his glass rod, before anyone knew about electrons. When electrons were discovered, they turned out to have negative charge — opposite to Franklin's convention. So the direction of electron flow in a wire is opposite to the conventional current direction. Both descriptions are valid; you just must be consistent about which one you are using."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — Charge as financial credit and debt**
 Positive charge is like money (an excess of positive credits). Negative charge is like debt (an excess of negative). A neutral object has balanced books. Rubbing transfers credits from one object to another — one gets richer (positive), one gets more indebted (negative). The total money in the system (charge) is conserved: no rubbing process prints money or destroys it. Like-signed accounts (both in debt, both in credit) push each other away; unlike accounts (one rich, one in debt) attract each other.
@@ -91,7 +90,7 @@ The water-in-pipe analogy is useful for circuits but harmful at the charge-conce
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Van de Graaff generator hair demonstration**
 A student places their hand on a Van de Graaff generator dome. Their hair stands on end. Each hair strand acquires the same sign charge; they repel each other and point away from the head. This demonstrates: (1) charge can be transferred, (2) like charges repel, (3) even very small forces are detectable when charges are macroscopically separated.
@@ -104,7 +103,7 @@ Bring a charged rod near (not touching) an electroscope: the leaves diverge (ind
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for direct instruction with discovery elements** (appropriate because the atomic model is not self-evident from observation):
 
@@ -114,7 +113,7 @@ The naming convention (positive/negative, proton/electron) is purely historical 
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Charge ledger for every problem**: For any problem involving charge transfer, require the learner to write total charge before and after the process as a ledger. Totals must match. This enforces conservation and catches sign errors.
 
@@ -126,7 +125,12 @@ The naming convention (positive/negative, proton/electron) is purely historical 
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "Everything starts neutral — equal protons and electrons. Charging is always about moving electrons, because protons are locked in the nucleus. If you pull electrons away from an object, it becomes positive. If you push extra electrons onto it, it becomes negative. The total count of charges — positive plus negative — across your whole system never changes. No rubbing creates charge; it only moves it."
 
@@ -136,7 +140,7 @@ The naming convention (positive/negative, proton/electron) is purely historical 
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) explain charge as a property of particles, not a substance; (2) apply conservation of charge to a charging-by-rubbing or conduction problem with correct signs; (3) state the elementary charge and use it to count charges; (4) distinguish conventional current direction from electron flow direction.
 
@@ -155,7 +159,7 @@ After (b): "How confident are you about which direction the electrons move?" (1�
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — Sign confusion in charging problems**
 Return to the charge ledger (TA1). Write every step: "Before: glass = 0, silk = 0. Electrons move from glass to silk. After: glass has lost electrons → positive. Silk has gained electrons → negative." Enforce the ledger until sign tracking is automatic.
@@ -168,7 +172,7 @@ Draw the circuit. Label: "Electrons flow this way (arrow)." Write "Conventional 
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Concept (charge as property, conservation) + fact (like/unlike, e = 1.6 × 10⁻¹⁹ C) + procedure (charge ledger, sign tracking).
 
@@ -184,7 +188,7 @@ Draw the circuit. Label: "Electrons flow this way (arrow)." Write "Conventional 
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.em.coulombs-law`: force between two charges requires the sign and magnitude of each charge; conservation and quantisation are used to determine charge quantities
@@ -201,7 +205,25 @@ Draw the circuit. Label: "Electrons flow this way (arrow)." Write "Conventional 
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: vector calculus (divergence, curl) formalises Maxwell's equations; complex exponentials describe AC circuits. Chemistry: electrochemistry (Faraday's laws, electrolysis, galvanic cells) maps directly onto electric-current concepts; atomic spectroscopy uses electromagnetic waves. Biology: membrane potentials and nerve impulses are electrical circuits; MRI and ECG are direct clinical applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.em.electric-charge.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG description correctly identifies quantisation and conservation as the two defining properties. The two unlocks (Coulomb's law, electric current) are the correct immediate applications.
 
@@ -212,3 +234,7 @@ The KG does not mention the distinction between conductors and insulators — a 
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

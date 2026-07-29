@@ -17,7 +17,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply sound waves at the **understand** level (Bloom) with difficulty tier **developing**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.wave.sound-waves.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_Sound waves are longitudinal mechanical waves that propagate through a medium via pressure fluctuations._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: Sound is produced by a vibrating object (a speaker, a guitar string, vocal cords). The vibration pushes air molecules, which push the next set, creating a disturbance that travels outward. Your ears detect the disturbance and your brain interprets it as sound. No air → no sound (space is silent).
 
@@ -31,7 +43,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **sound-as-particles misconception**: learners think sound "carries" air molecules from the source to the receiver. They imagine a puff of air leaving the speaker and entering the ear. This model predicts that sound would push you backward (it does not, significantly), that sound in a closed room would deplete the air (it does not), and that you could see wind from a loudspeaker (you cannot, for ordinary sound). The molecules oscillate in place; only the disturbance travels.
 
@@ -39,7 +51,7 @@ The secondary root cause is **pitch-loudness conflation at the wave level**: lea
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "Sound carries air from the source to the listener"**
 - Characteristic phrase: "You hear it because the speaker pushes air into your ear."
@@ -67,20 +79,7 @@ The secondary root cause is **pitch-loudness conflation at the wave level**: lea
 
 ---
 
-## Explanation library
-
-**E1 — The compression-rarefaction propagation story**
-"A speaker diaphragm vibrates 440 times per second (A note). Each forward push compresses nearby air molecules (a compression). The compression passes that energy to the next layer of molecules, then the next — the compression zone travels forward. Each backward pull of the diaphragm creates a rarefaction (low-pressure zone) that follows. This alternating pattern of high-pressure and low-pressure zones travels at 343 m/s through air. When it reaches your eardrum, the eardrum vibrates 440 times per second in response — you hear the A note."
-
-**E2 — Speed of sound temperature dependence (practical)**
-"Speed of sound in air ≈ 331 + 0.6 T_C m/s, where T_C is temperature in Celsius. At 20 °C: v ≈ 343 m/s. At 0 °C: v ≈ 331 m/s. Warmer air = faster sound. This is because warmer molecules move faster and transmit collisions more quickly. At constant density, temperature controls v — pressure alone does not (at constant T, higher pressure compresses the gas but also increases density proportionally, and the two effects cancel)."
-
-**E3 — The audible frequency range and its extremes**
-"Human ears respond to ~20 Hz – 20 kHz. Middle A (440 Hz) has wavelength λ = 343/440 ≈ 0.78 m. A 20 Hz bass note: λ = 343/20 = 17.15 m (longer than a bus). A 20 kHz whistle: λ = 343/20000 ≈ 0.017 m (17 mm, about the diameter of a 1 cent coin). Low pitch = long wavelength; high pitch = short wavelength. Ultrasound medical probes at 10 MHz give λ ≈ 0.15 mm in tissue — small enough to image fine anatomical structures."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — The Newton's cradle**
 In Newton's cradle, a ball strikes one end; the impulse travels through the stationary balls and kicks the ball at the other end. No ball travels from one end to the other — only the disturbance does. Sound is the same: the air molecule near the speaker gets hit, passes the impulse to the next, and returns to rest. The sound "message" travels; the air molecules stay put.
@@ -92,7 +91,7 @@ Sound is not like throwing a ball or puffing air at someone. A thrown ball trave
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Bell jar vacuum demonstration**
 Place a ringing electric bell (or buzzing phone) inside a jar connected to a vacuum pump. Pump out the air; the sound fades and eventually (near-vacuum) becomes inaudible even though the bell is still vibrating visibly. Restore the air: the sound returns. This directly demonstrates that sound requires a medium — it is not an electromagnetic wave that travels through vacuum.
@@ -108,7 +107,7 @@ Connect a speaker to a signal generator. Sweep from 20 Hz to 20 kHz. Learners ob
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for guided discovery on the core structure, direct instruction on speed formula**:
 
@@ -118,7 +117,7 @@ For v = √(γRT/M): this is not discoverable from everyday experience. Present 
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — "No medium, no sound" gate**: For any sound problem, ask first: "What is the medium?" If "vacuum" — no sound propagates. This prevents the common error of applying sound equations to situations in space.
 
@@ -130,7 +129,12 @@ For v = √(γRT/M): this is not discoverable from everyday experience. Present 
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "Sound is a longitudinal mechanical wave — the air molecules don't travel from the speaker to your ear. The disturbance does. Think of Newton's cradle: the ball at one end gets hit, the impulse travels across the stationary balls, and the ball at the other end swings. No ball travelled from end to end. Sound is exactly that: each air molecule nudges the next, and the nudge — the pattern of compressions and rarefactions — travels at 343 m/s. The air molecules stay in roughly the same place."
 
@@ -140,7 +144,7 @@ For v = √(γRT/M): this is not discoverable from everyday experience. Present 
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) describe sound as a longitudinal pressure wave, (2) correctly link frequency to pitch and amplitude to loudness, (3) apply v = fλ to find any third variable given two, (4) explain why sound requires a medium, and (5) state why all frequencies travel at the same speed in the same medium.
 
@@ -161,7 +165,7 @@ After (d): "How confident are you that both frequencies travel at the same speed
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — M1 persists (sound carries air)**
 Ask: "If sound carried air, what would happen in a completely sealed room after an hour of loud music? Would all the air pile up near the listeners?" The learner should recognise this is absurd. Then demonstrate with incense smoke: the smoke drifts by convection current (temperature differences), not by sound. The sound propagates through the still air without moving it in bulk.
@@ -174,7 +178,7 @@ Run D1 (bell jar). As the pump removes air, the sound fades — not just gets qu
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Concept (longitudinal pressure wave) + medium-requirement rule + pitch/loudness mapping + speed invariance principle.
 
@@ -190,7 +194,7 @@ Run D1 (bell jar). As the pump removes air, the sound fades — not just gets qu
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.wave.doppler-effect`: requires a moving source or observer in a medium — sound is the canonical Doppler case (approaching ambulance)
@@ -207,7 +211,25 @@ Run D1 (bell jar). As the pump removes air, the sound fades — not just gets qu
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: wave equations use trigonometry (sin/cos) and complex exponentials; Fourier analysis decomposes any periodic signal into waves. Chemistry: spectroscopy — IR, UV-vis, NMR — identifies molecules by their wave-matter interactions. Biology: sound (hearing, ultrasound imaging), light (vision, photosynthesis), and seismic waves in geophysics all use wave physics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.wave.sound-waves.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG correctly identifies sound as a longitudinal mechanical wave propagating through pressure fluctuations, and the two unlocks (Doppler effect, sound intensity) are directly built on this foundation.
 
@@ -216,3 +238,7 @@ Two gaps: (1) The KG does not mention the audible frequency range (20 Hz–20 kH
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

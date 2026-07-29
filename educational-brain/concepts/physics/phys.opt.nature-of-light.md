@@ -17,7 +17,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply nature of light: ray and wave models at the **understand** level (Bloom) with difficulty tier **proficient**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.opt.nature-of-light.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_Light exhibits both ray (geometric) and wave (physical) behaviour depending on the scale of the optical phenomena._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: Light is something that travels in straight lines very fast from a source to an object or your eye. You need light to see. It bounces off smooth surfaces (reflection) and bends when it enters a new material (refraction). The Sun and light bulbs produce light; most objects just reflect it.
 
@@ -31,7 +43,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **light-as-a-thing misconception**: learners treat light as a substance ("stuff" that fills a room) rather than a wave or energy. They think rooms stay lit after you turn off the light bulb, that you can "store" light in a room by covering the windows, or that mirrors "catch" the light and keep it inside. This leads to errors in reasoning about reflections, shadows, and the travel time of light.
 
@@ -39,7 +51,7 @@ The secondary root cause is **medium requirement from sound analogy**: learners 
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "Light needs a medium (like air) to travel"**
 - Characteristic phrase: "Without air in space, you can't see the Sun" or "Light travels through the air."
@@ -67,20 +79,7 @@ The secondary root cause is **medium requirement from sound analogy**: learners 
 
 ---
 
-## Explanation library
-
-**E1 — The EM wave self-sustaining picture**
-"A changing electric field creates a magnetic field (Faraday-Maxwell); a changing magnetic field creates an electric field (Ampere-Maxwell). These two changes feed each other indefinitely, forming a self-sustaining travelling wave. No matter is needed — the fields sustain each other through empty space. Maxwell calculated the speed of this wave from the constants of the E and B field equations and got 3 × 10⁸ m/s — exactly the measured speed of light. This was the discovery that light is an electromagnetic wave."
-
-**E2 — The electromagnetic spectrum as one family**
-"From lowest to highest frequency: radio waves (kHz–GHz), microwaves (GHz), infrared (IR), visible (~430–750 THz), ultraviolet (UV), X-rays, gamma rays. All travel at c = 3 × 10⁸ m/s in vacuum. All obey c = fλ. Visible light is the narrow band our eyes evolved to detect — a tiny slice of the full spectrum. The only difference between them is frequency."
-
-**E3 — Ray vs. wave applicability**
-"Use the ray model when: structures are much larger than λ (lenses, mirrors, prisms). Use the wave model when: structures are comparable to λ (diffraction gratings, single-slit diffraction, thin film interference). In everyday life, almost everything we call 'optics' — cameras, glasses, telescopes — uses the ray model. Diffraction is only noticeable when you build structures with gaps of order λ ≈ 500 nm."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — The ocean wave and the rope wave**
 Sound is like an ocean wave — it needs water (or air) to oscillate. Light is like... neither of those. There is no perfect material analogy for an EM wave because there is no medium. The closest is: imagine two children playing catch with a ball. They can play in air, water, or vacuum — the ball carries energy through space independently of the medium. EM fields carry energy through space themselves. This is why light is unlike any mechanical wave.
@@ -92,7 +91,7 @@ In the 19th century, physicists invented "the luminiferous ether" — a medium t
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Vacuum and light**
 Unlike the bell-jar sound demonstration, light travels through a vacuum flask or a glass jar from which air has been removed — it passes through just as before. (Or simply: astronauts in space see the Sun through the vacuum of space.) Contrast with D1 from sound waves: both sound and light experiments side by side make the distinction visceral.
@@ -108,7 +107,7 @@ Shine a point source of light at an object in a darkened room. The shadow has sh
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for direct instruction with discovery elements**:
 
@@ -118,7 +117,7 @@ The absence of a medium for light can be motivated by asking: "Sound needs air t
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Medium check at every light problem**: "Does this involve light?" → "Does light need a medium to travel this path?" → "No. But check: is it travelling through a material (glass, water)? Then it slows to c/n." This enforces the vacuum/medium distinction.
 
@@ -130,7 +129,12 @@ The absence of a medium for light can be motivated by asking: "Sound needs air t
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "Light and sound are both waves, but there is one crucial difference: sound needs a medium; light doesn't. Light is an electromagnetic wave — oscillating electric and magnetic fields that sustain each other through completely empty space. Maxwell worked this out in 1865, calculated the wave speed, and got 3 × 10⁸ m/s — exactly the speed light had been measured at. He had proved that light is electromagnetic radiation."
 
@@ -140,7 +144,7 @@ The absence of a medium for light can be motivated by asking: "Sound needs air t
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) state that light is a transverse EM wave requiring no medium, (2) apply c = fλ to visible light wavelengths and frequencies, (3) identify the visible band within the EM spectrum, (4) state when ray vs. wave models apply, and (5) calculate light travel time over a given distance.
 
@@ -161,7 +165,7 @@ After (b): "How confident are you that light does not need a medium?" (1–5).
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — M1 persists (light needs medium)**
 Use the historical narrative: scientists in the 19th century believed the same — they invented the "ether." The Michelson-Morley experiment (1887) searched for the ether and found no evidence. Einstein's 1905 paper showed no medium is needed. Pair this with the contrast demonstration: sound jar (sound disappears in vacuum), light jar (light passes through unaffected). The physical experiment is the most direct refutation.
@@ -174,7 +178,7 @@ Run D3 (diffraction fringes) and D4 (sharp shadow) with the same laser. "Same li
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Concept (transverse EM wave, no medium) + constants (c = 3 × 10⁸ m/s, visible range 400–700 nm) + model selector (ray for large structures, wave for λ-scale structures).
 
@@ -190,7 +194,7 @@ Run D3 (diffraction fringes) and D4 (sharp shadow) with the same laser. "Same li
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.opt.reflection`: ray model — angle of incidence = angle of reflection
@@ -208,7 +212,25 @@ Run D3 (diffraction fringes) and D4 (sharp shadow) with the same laser. "Same li
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: geometry (ray diagrams use similar triangles); Snell's law uses trigonometry; wave optics uses Fourier analysis. Chemistry: spectrophotometry and colorimetry measure concentrations optically; X-ray diffraction of molecules uses diffraction physics. Biology: the eye is a biological optical instrument; microscopy and endoscopy depend on lenses and fibre optics; bioluminescence and plant photoreception are optics applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.opt.nature-of-light.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG description "light exhibits both ray (geometric) and wave (physical) behaviour depending on the scale of the optical phenomena" is precisely correct. The three unlocks (reflection, refraction, wave-optics) appropriately partition the two models' applications.
 
@@ -219,3 +241,7 @@ A second gap: c = 3 × 10⁸ m/s and the visible wavelength range (400–700 nm)
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

@@ -28,7 +28,27 @@
   4. State the law's both halves (rest stays rest / motion stays motion)
      and why they are one statement, not two.
 
-## Mental models
+
+## Learning Objective
+
+After this concept, the learner can:
+
+s** — the learner can:
+  1. Predict correctly what happens to a moving object when ALL forces on
+     it stop (it keeps moving, same speed, same direction).
+  2. Explain why moving things around us DO stop (friction/air are forces
+     — the everyday world hides the law rather than showing it).
+  3. Identify, for a given scenario, whether a net force is acting — from
+     the *motion's change*, not from whether it "looks pushed."
+  4. State the law's both halves (rest stays rest / motion stays motion)
+     and why they are one statement, not two.
+
+
+## Core Understanding
+
+_An object remains at rest or in uniform motion unless acted upon by a net external force._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 - **Beginner (arriving, wrong) — the "impetus" model**: motion is a
   substance the object *contains*; pushes pour it in, it leaks out over
@@ -58,7 +78,7 @@
   Aristotle built, from the same evidence. It took humanity 2,000 years to
   find the flaw — we get to do it in an afternoon."
 
-## Why beginners fail here
+## Why Students Fail
 
 Every moving thing the learner has ever released has stopped. Their model
 (motion runs out) is a *correct induction from a biased sample* — the bias
@@ -71,7 +91,7 @@ model for life — the textbook answer and the gut model coexist for decades
 problem is not transmitting the law; it is making friction VISIBLE as a
 force, because the law only looks true once the hidden force is seen.
 
-## Misconception library
+## Misconceptions
 
 **M1 — Motion needs force ("what keeps it moving?") — the impetus model**
 - *Why*: perceptual intuition (type 2); universal, pre-verbal, self-rebuilding.
@@ -135,35 +155,7 @@ weight/friction)**
 - *Verification*: state-the-law items scored for both halves; better,
   prediction items that only the motion half answers.
 
-## Explanation library
-
-- **Age 8–11 (story frame)**: "Things are lazy. Not lazy like they want to
-  stop — lazy like they hate CHANGE. A parked ball hates starting. A
-  rolling ball hates stopping. If nothing bothers them, they keep doing
-  exactly what they were doing. The only reason rolling balls stop is that
-  the ground keeps bothering them — that bothering is called friction."
-- **Age 12+ (mechanism)**: "Force doesn't cause motion — force causes
-  CHANGE of motion. Keeping-going is free; starting, stopping, and turning
-  are what cost. Everything you've ever seen stop was being acted on by a
-  force you didn't see. The law just says: no net force, no change."
-- **Returning adult**: "You memorized 'objects in motion stay in motion'
-  and it never felt true — because on Earth it never LOOKS true. The
-  missing piece is that friction and air are forces, as real as a push.
-  Once you count them, every 'thing slowing down' you've ever seen becomes
-  the law working, not the law failing."
-- **Visual frame**: three motion strips (photos at equal time gaps):
-  equal spacing = no net force; growing/shrinking spacing = force at work.
-  "Read the spacing, find the force."
-- **Logical frame (advanced entry)**: "The first law isn't a special case
-  of F=ma with F=0 — it's the claim that there EXIST frames where force-free
-  objects move uniformly. It tells you where the rest of mechanics is
-  allowed to be used. That's why it's first."
-- **Anxious learner**: start from their competence: "You already know this
-  law in your body — you brace when the bus brakes. Your body predicted
-  that IT would keep going when the bus stopped. We're just writing down
-  what your body knows."
-
-## Analogy library
+## Analogies
 
 1. **The bus-brake lurch** (BEST — it is not an analogy but a felt
    instance): passengers keep going when the bus stops; nothing pushed
@@ -192,7 +184,7 @@ weight/friction)**
   it's introduced ("that was our joke version — the real version: it just
   doesn't change unless changed").
 
-## Demonstration library
+## Demonstrations
 
 - **The friction dial (the core demo, predict-first, home-doable)**: same
   coin, same flick, across sandpaper → wood/table → glass/ice tray. Predict
@@ -213,7 +205,7 @@ weight/friction)**
   predict, then run"); inverse items ("what friction setting made this
   motion strip?") per `../assessment/08 §5`.
 
-## Discovery lesson (discoverable — fully designed)
+## Discovery Questions
 
 1. **Need**: the friction-dial demo creates it — the learner's own
    predictions succeed for rough surfaces and the pattern demands
@@ -237,7 +229,7 @@ weight/friction)**
    (both halves, both directions), same session; the versioning speech
    about Aristotle closes it.
 
-## Teaching actions (dispatch for this concept)
+## Teaching Sequence
 
 In order: **prediction activity** (every demo here is prediction-first —
 this concept without committed predictions is a recitation exercise) →
@@ -251,7 +243,12 @@ it going" answer to dissect) → **teach-back** with the tutor performing M1.
 animism here — story is garnish only); games (no natural mechanic embodies
 "nothing happens without cause" — a game about nothing happening isn't one).
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 - **Listen for impetus vocabulary**: "the force of the throw", "its force
   runs out", "it loses its push" — each is M1 audible in ordinary talk;
@@ -269,7 +266,7 @@ animism here — story is garnish only); games (no natural mechanic embodies
 - Self-corrections ("it stops because— wait, WHAT stops it?") are the
   advanced model arriving; celebrate the question itself.
 
-## Assessment
+## Assessment Signals
 
 - **Golden probe**: the frictionless-puck item (M1: "slows and stops" /
   correct: "same speed forever" / M3 variant appears when masses differ).
@@ -304,7 +301,7 @@ animism here — story is garnish only); games (no natural mechanic embodies
   both quadrants are expected stations, not anomalies; certify only at
   confident-correct-fast.
 
-## Recovery notes (concept-specific only — engine: Delivery 1)
+## Tutor Recovery Strategy
 
 - Likeliest utterances: **"but that's obviously wrong"** (the learner's
   intuition outranking the law — this is engagement, not defiance; route
@@ -318,7 +315,7 @@ animism here — story is garnish only); games (no natural mechanic embodies
   it, or did it just... stop?" — touchable, immediate, and already the
   whole lesson in miniature.
 
-## Memory & review
+## Memory Hooks
 
 - **Type**: concept, with a repaired-misconception overlay (M1) — which
   puts it on the LONGEST verification tail in the physics curriculum:
@@ -333,7 +330,7 @@ animism here — story is garnish only); games (no natural mechanic embodies
 - **Deviation from default**: never certify from slow-correct answers on
   this node (see calibration note) — hold at current interval until fast.
 
-## Transfer map
+## Transfer Connections
 
 - **Near**: any released/coasting object (curling, ice, casters, space).
 - **Far**: seatbelts, headrests, tablecloth trick, why you can't throw
@@ -347,10 +344,32 @@ animism here — story is garnish only); games (no natural mechanic embodies
   it going?" question — in economics, in habit formation, anywhere — into
   "what's acting to change it?"; the law as a thinking template.
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: kinematics uses calculus (differentiation for velocity/acceleration, integration for displacement); vectors require linear algebra; energy methods use algebra and trigonometry. Chemistry: thermochemistry uses energy concepts (enthalpy, bond energies); reaction kinetics ties to activation energy. Biology: biomechanics (muscle force, gait), fluid mechanics in circulation (blood pressure, flow rate), and structural biology (bone stress) all apply mechanical principles.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.mech.newtons-first-law.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG marks this node `bloom: understand` — correct, but its mastery
 verification depends unusually heavily on *delayed, speeded* evidence
 (M1 regrowth). No structural feedback; noting here that any future
 KG-level assessment metadata could usefully flag "regrowing-misconception
 node" — this entry serves as that flag meanwhile.
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

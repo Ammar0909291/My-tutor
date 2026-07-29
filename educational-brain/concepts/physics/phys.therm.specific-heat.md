@@ -17,7 +17,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply specific heat capacity at the **apply** level (Bloom) with difficulty tier **developing**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.therm.specific-heat.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_Specific heat capacity is the amount of heat required to raise the temperature of unit mass of a substance by one degree._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: Different materials heat up at different rates when given the same amount of heat. Metal heats up quickly; water heats up slowly. Specific heat capacity measures how "resistant" a material is to temperature change — how much heat you need to add to raise its temperature by one degree.
 
@@ -31,7 +43,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **specific heat as a property of heat, not of material**: learners think "specific heat" refers to a property of heat (how "specific" or special it is) rather than a property of the material. They confuse c with Q or ΔT. The equation Q = mcΔT has three quantities beyond c, and learners systematically confuse which is the specific heat and which is the heat transferred.
 
@@ -39,7 +51,7 @@ The secondary root cause is **reversing the direction**: learners correctly comp
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "A high specific heat means the material heats up quickly"**
 - Characteristic phrase: "Water has a high specific heat, so it warms up fast."
@@ -67,20 +79,7 @@ The secondary root cause is **reversing the direction**: learners correctly comp
 
 ---
 
-## Explanation library
-
-**E1 — The definition through the equation**
-"Q = mcΔT. Specific heat capacity c is the heat required per unit mass per degree of temperature change. Rearranging: c = Q/(mΔT). If you add 1000 J to 1 kg of a material and its temperature rises 2 °C, then c = 1000/(1×2) = 500 J/(kg·°C). Materials with high c (like water) require much more heat per degree; materials with low c (like iron) heat up with much less."
-
-**E2 — Why water has high specific heat (conceptual)**
-"Water molecules form hydrogen bonds with neighbouring molecules. When you heat water, much of the energy goes into breaking and reforming these bonds — energy that does NOT raise the temperature. Only energy going into the kinetic energy of the molecules raises the temperature. Because so much energy is 'occupied' by hydrogen-bond disruption, water's temperature rises slowly per joule added. Iron has no such bonds — all added energy goes directly into kinetic energy, so it heats up quickly per joule."
-
-**E3 — Sign convention for heating and cooling**
-"Q = mcΔT. If the material is heated: ΔT > 0, Q > 0 (heat is added to the material). If the material is cooled: ΔT < 0, Q < 0 (heat is removed from the material; Q is negative means heat flows OUT). This sign discipline is essential for calorimetry problems where heat lost by one substance equals heat gained by another."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — The heat reservoir capacity**
 Specific heat is like the capacity of a bucket for holding heat per unit temperature rise per unit mass. A material with high specific heat is a "big bucket" — it can absorb a lot of heat energy with only a small temperature rise. A material with low specific heat is a "small bucket" — a little heat causes a large temperature rise. The "bucket" (c) is a property of the material, not of the heat.
@@ -92,7 +91,7 @@ Specific heat is a material property, not a state property. Temperature tells yo
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Heating equal masses of water and cooking oil**
 Place equal masses of water and cooking oil in identical containers. Heat both on identical hot plates simultaneously. Measure temperature every 30 seconds. The oil heats much faster (lower c). After 2 minutes, plot temperature vs. time for each. The oil's line is steeper. This is a direct measurement of different specific heats.
@@ -105,7 +104,7 @@ Use a temperature sensor to monitor a sample of ice being heated continuously fr
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for guided discovery**:
 
@@ -113,7 +112,7 @@ Present D1 (water vs. oil heating demo) without naming the concept. Ask: "Both a
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Symbol audit before calculation**: Require learner to identify: "Which is Q? Which is m? Which is c? Which is ΔT?" before writing any numbers. This prevents symbol confusion (M1 root cause).
 
@@ -125,7 +124,12 @@ Present D1 (water vs. oil heating demo) without naming the concept. Ask: "Both a
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "Q = mcΔT. Specific heat c is the heat per kilogram per degree — it's how stubborn the material is about changing temperature. Water is very stubborn: c = 4186 J/(kg·K). Iron is less stubborn: c = 450 J/(kg·K). You need about ten times more heat to raise a kilogram of water by one degree than to raise a kilogram of iron by one degree."
 
@@ -135,7 +139,7 @@ Present D1 (water vs. oil heating demo) without naming the concept. Ask: "Both a
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) state and apply Q = mcΔT; (2) correctly identify which of Q, m, c, ΔT is being asked for; (3) apply the correct c for the phase; (4) handle sign conventions correctly for heating and cooling problems.
 
@@ -155,7 +159,7 @@ After (b): "Does it surprise you that iron ends up so much hotter than water for
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — M1 persists (high c = heats up quickly)**
 Run D1 (water vs. oil heating). Ask before the demo: "Which will heat faster?" After: "Which heated faster?" Oil (lower c) heats faster. "So what does higher specific heat actually mean?" The demo forces the correct interpretation. Follow with the bucket analogy.
@@ -168,7 +172,7 @@ Show a table of ice, liquid water, and steam specific heats side by side. Ask: "
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Formula (Q = mcΔT) + key values (c_water ≈ 4186, c_iron ≈ 450, c_al ≈ 900 J/(kg·K)) + sign convention + phase dependence of c.
 
@@ -184,7 +188,7 @@ Show a table of ice, liquid water, and steam specific heats side by side. Ask: "
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.therm.calorimetry`: heat conservation in a calorimeter — Q_lost = Q_gained — uses Q = mcΔT for all objects in the system
@@ -199,7 +203,25 @@ Show a table of ice, liquid water, and steam specific heats side by side. Ask: "
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: calculus underlies heat-flow equations; statistical probability distributions govern thermal averages. Chemistry: thermochemistry, chemical equilibrium (Gibbs free energy), and reaction spontaneity are thermodynamics applied to molecular systems; the ideal-gas law is shared. Biology: metabolism is biochemical thermodynamics; body temperature regulation is heat-transfer in a biological system.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.therm.specific-heat.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG description "specific heat capacity is the amount of heat required to raise the temperature of unit mass of a substance by one degree" is correct and complete. The single unlock (calorimetry) is the direct application.
 
@@ -210,3 +232,7 @@ A second gap: the sign convention for Q (positive = heat added, negative = heat 
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

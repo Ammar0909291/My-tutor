@@ -17,7 +17,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply electric field and field lines at the **understand** level (Bloom) with difficulty tier **proficient**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.em.electric-field.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_The electric field at a point is the electrostatic force per unit positive test charge placed at that point._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: An electric field is the "invisible influence" a charged object creates in the space around it. If you put a small positive test charge at any point near a source charge, the field tells you which way the test charge would be pushed or pulled, and how hard. Field lines are a map of this influence: they show the direction a positive charge would move at every point.
 
@@ -31,7 +43,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **field as a property of the test charge, not the source**: learners believe "the electric field at a point depends on what charge you put there." They reason: "If I put a larger charge at the point, there will be a larger force, so there must be a larger field." This conflates the force (which depends on the test charge) with the field (which does not). The field is a property of the source arrangement alone — it exists even with no test charge present, and it tells you what force would act on a unit positive charge placed there.
 
@@ -39,7 +51,7 @@ The secondary root cause is **field line density confusion**: learners treat fie
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "The electric field depends on the test charge placed there"**
 - Characteristic phrase: "If I put a bigger charge there, the field gets stronger."
@@ -67,20 +79,7 @@ The secondary root cause is **field line density confusion**: learners treat fie
 
 ---
 
-## Explanation library
-
-**E1 — The field as a test-charge ratio (definition)**
-"Set up the source charge arrangement. Now imagine placing a tiny +1 C test charge at every point in space and measuring the force on it. At each point, the electric field E = F/q₀. The field is what the source creates — a property of the source and the point, not of the test charge. If you then placed a +2 C charge, the force would double, but E = (2F)/(2q₀) = F/q₀ — unchanged. The test charge 'reveals' the field; it doesn't create or change it."
-
-**E2 — Field from a point charge (quantitative)**
-"For a point charge Q, the field at distance r is E = kQ/r². Direction: away from Q if Q > 0; toward Q if Q < 0. The field falls off as 1/r² — at twice the distance, the field is one-quarter as strong. At r = 0.1 m from a +1 µC charge: E = (8.99×10⁹ × 10⁻⁶) / (0.1)² = 8.99×10⁵ N/C. A +2 µC test charge placed there feels F = q₀E = 2×10⁻⁶ × 8.99×10⁵ ≈ 1.8 N toward the test charge."
-
-**E3 — Superposition of fields (two charges)**
-"To find the field from two charges, find **E**₁ and **E**₂ separately (each using E = kQ/r² in the correct direction) and add them as vectors. If the two charges are +Q and −Q separated by distance d (a dipole), the fields reinforce between the charges and at the midpoint they add constructively. At a point far away (r >> d), the field falls off as 1/r³ (not 1/r²) because the near and far contributions partially cancel, leaving only the 'net' dipole contribution."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — Gravitational field (structure-identical)**
 The gravitational field **g** at a point is defined as the gravitational force per unit mass placed there: **g** = **F**/m. The electric field **E** at a point is the electrostatic force per unit positive test charge: **E** = **F**/q₀. Both are "force per unit something" fields; both follow an inverse-square law; both use superposition; both have field lines (mass plays the role of charge, but gravity is always attractive). This analogy is nearly exact at the mathematical structure level and makes field lines immediately intuitive for learners who have met gravitational fields.
@@ -92,7 +91,7 @@ The electric field is NOT the force on the test charge — it is the force per u
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Van de Graaff generator field mapping (qualitative)**
 Use grass seeds (or hair) suspended in a non-conducting liquid (castor oil) around a Van de Graaff generator. The seeds align with the electric field direction — a real-time map of field lines around the sphere. Change the geometry (add a grounded plate) and the pattern changes. This shows that field lines are a real spatial structure, not a cartoon.
@@ -105,7 +104,7 @@ Place a small radio (or LED circuit) inside a metal mesh cage. The signal is att
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for direct instruction with guided derivation**:
 
@@ -117,7 +116,7 @@ Start with a settled result: "We know that the force between two point charges i
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Source vs. test charge discipline**: Before any field calculation, require the learner to identify: "Which is the source? Which is the test charge?" The field is calculated from the source configuration; the force on any given charge is then F = qE. Never conflate the two roles.
 
@@ -129,7 +128,12 @@ Start with a settled result: "We know that the force between two point charges i
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "The electric field at a point is not what a charge feels — it's what any unit positive charge would feel if placed there. E = F/q₀. The source creates the field; the test charge merely reveals it. Change the test charge and the force changes, but F/q₀ — the field — stays the same. The field is a property of the source arrangement, not of whatever probe you use."
 
@@ -139,7 +143,7 @@ Start with a settled result: "We know that the force between two point charges i
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) define **E** = **F**/q₀ and state that it is a property of the source, not the test charge; (2) calculate E from a point charge (E = kQ/r², correct direction); (3) apply superposition to find the net field from two or more charges by vector addition; (4) correctly draw or interpret a field-line diagram (start/end rules, no crossing, density = strength).
 
@@ -159,7 +163,7 @@ After (c): "How sure are you that the field didn't change when the test charge c
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — M1 persists (field depends on test charge)**
 Run the ratio argument explicitly: "Write down F = kQq₀/r². Now divide both sides by q₀. What do you get on the left? On the right?" The learner should see that q₀ cancels from the right side — the ratio F/q₀ = kQ/r² has no q₀ in it. "So if q₀ doubles, what happens to F/q₀?" The arithmetic forces the conclusion that the ratio is invariant. Then name the ratio E.
@@ -172,7 +176,7 @@ Draw two field-line maps: a sphere with 8 lines at r=1 (large circle) vs. the sa
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Definition (E = F/q₀) + formula (E = kQ/r² for point charge) + four field-line rules + superposition principle.
 
@@ -188,7 +192,7 @@ Draw two field-line maps: a sphere with 8 lines at r=1 (large circle) vs. the sa
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.em.electric-dipole`: two equal and opposite charges — the dipole field pattern is the canonical application of field superposition
@@ -205,7 +209,25 @@ Draw two field-line maps: a sphere with 8 lines at r=1 (large circle) vs. the sa
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: vector calculus (divergence, curl) formalises Maxwell's equations; complex exponentials describe AC circuits. Chemistry: electrochemistry (Faraday's laws, electrolysis, galvanic cells) maps directly onto electric-current concepts; atomic spectroscopy uses electromagnetic waves. Biology: membrane potentials and nerve impulses are electrical circuits; MRI and ECG are direct clinical applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.em.electric-field.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG description "the electric field at a point is the electrostatic force per unit positive test charge placed at that point" is precise and complete. The three unlocks (electric-dipole, gauss-law, magnetic-force) represent appropriate immediate applications.
 
@@ -216,3 +238,7 @@ A second gap: the KG does not mention that **E** = kQ/r² gives the field from a
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

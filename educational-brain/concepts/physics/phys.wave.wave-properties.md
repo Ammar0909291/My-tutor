@@ -16,7 +16,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply wave properties: amplitude, period, frequency at the **understand** level (Bloom) with difficulty tier **developing**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.wave.wave-properties.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_Waves are characterised by amplitude, wavelength, period, frequency, and phase, related by v = fλ._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: A wave is a disturbance that moves through a medium (like water or air) or through space. The wave moves but the medium itself does not travel along — the water in an ocean wave goes up and down, not forward to shore. Waves carry energy without carrying the material they move through.
 
@@ -30,7 +42,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **wave speed confusion**: learners conflate the speed of the wave (how fast the disturbance moves through the medium) with the speed of the particles in the medium (how fast individual particles oscillate). These are completely different — a sound wave travels at ~340 m/s through air, but individual air molecules oscillate at tiny amplitudes and their oscillation speed depends on amplitude and frequency, not on the wave's propagation speed.
 
@@ -38,7 +50,7 @@ The secondary root cause is **frequency–wavelength direction confusion**: lear
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "The medium moves with the wave"**
 - Characteristic phrase: "The water rushes toward shore when a wave comes" or "Sound pushes the air forward."
@@ -66,20 +78,7 @@ The secondary root cause is **frequency–wavelength direction confusion**: lear
 
 ---
 
-## Explanation library
-
-**E1 — The rope wave (introductory)**
-Hold one end of a long rope and flick your wrist up and down once. A single pulse travels along the rope away from you. You can see: (1) the pulse moves along the rope; (2) each piece of the rope moves up and then back to its original position — it does not travel with the pulse. This is the clearest physical demonstration that energy travels without matter transport.
-
-**E2 — v = fλ from first principles**
-"In one period T, the wave travels exactly one wavelength λ (by definition — a wavelength is the spatial length of one full cycle). So the wave speed is: v = distance/time = λ/T = λf. This gives v = fλ. The speed is set by the medium. If v is fixed, then f and λ must multiply to give that fixed value — double f, halve λ."
-
-**E3 — The five parameters with units (systematic)**
-Draw a snapshot of a sinusoidal wave and annotate: amplitude A (m) — height from equilibrium to peak; wavelength λ (m) — crest to next crest. Then draw the wave over time at a fixed point: period T (s) — time from peak to next peak; frequency f = 1/T (Hz). The wave speed v = fλ = λ/T (m/s).
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — Stadium wave (Mexican wave)**
 Imagine thousands of fans in a football stadium doing the Mexican wave. Each fan stands up and sits down (oscillates vertically); the wave pattern travels around the stadium. No fan moves around the stadium — they stay in their seat. Energy (the "wave") travels; the "medium" (the fans) stays. Frequency = how often each fan stands up per second; wavelength = the arc-length of the stadium covered by one complete wave at any instant; wave speed = how fast the wave travels around the stadium.
@@ -91,7 +90,7 @@ Water surface waves are transverse; sound waves are longitudinal. Although both 
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Rope pulse**
 Stretch a long rope along the floor. Flick one end. Observe the pulse travel. Observe that once the pulse passes any marked point, that point returns to rest. This directly addresses M1.
@@ -104,7 +103,7 @@ Connect a signal generator to a speaker in water (or use a ripple tank). Fix the
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for guided discovery** (appropriate because the key relationship v = fλ can be derived from the operational definitions of the quantities):
 
@@ -114,7 +113,7 @@ For the "medium determines speed" principle, present: same source (same f) in tw
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Particle motion vs. wave motion distinction**: For every wave problem introduced, ask first: "What direction does the wave travel? What direction do the particles in the medium oscillate?" This forces the M1 check at every encounter.
 
@@ -126,7 +125,12 @@ For the "medium determines speed" principle, present: same source (same f) in tw
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "A wave is a moving pattern, not a moving thing. The medium doesn't travel; the disturbance does. Think of the Mexican wave in a stadium — the fans don't run around the stadium, but the wave of standing-and-sitting does. Same here: air molecules don't rush from a speaker to your ear; a pattern of compressions and rarefactions does, and each molecule mostly just vibrates back and forth in place."
 
@@ -136,7 +140,7 @@ For the "medium determines speed" principle, present: same source (same f) in tw
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can define all five wave parameters, state v = fλ, apply it to find any one of v, f, or λ given the other two, predict the direction of wavelength change when frequency changes in the same medium, and identify what determines wave speed.
 
@@ -155,7 +159,7 @@ After (d): "How confident are you that the frequency doesn't change when the wav
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — M1 persists (medium travels with wave)**
 Use D1 (rope pulse) or a video of a buoy in open water. The perceptual experience of watching a single marked point oscillate without drifting is more effective than diagrams. Ask the learner to trace the path of one piece of the rope during the wave; they should draw a vertical oscillation, not a horizontal translation.
@@ -168,7 +172,7 @@ Use a concrete time-series diagram: draw a sinusoidal wave over time, mark one f
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Concept + formula schema (the five parameters must be recalled by name and unit; v = fλ and T = 1/f must be automatic).
 
@@ -184,7 +188,7 @@ Use a concrete time-series diagram: draw a sinusoidal wave over time, mark one f
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.wave.transverse-waves` and `phys.wave.longitudinal-waves`: the five parameters apply to both; classification by particle-oscillation direction is the new content
@@ -202,7 +206,25 @@ Use a concrete time-series diagram: draw a sinusoidal wave over time, mark one f
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: wave equations use trigonometry (sin/cos) and complex exponentials; Fourier analysis decomposes any periodic signal into waves. Chemistry: spectroscopy — IR, UV-vis, NMR — identifies molecules by their wave-matter interactions. Biology: sound (hearing, ultrasound imaging), light (vision, photosynthesis), and seismic waves in geophysics all use wave physics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.wave.wave-properties.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG correctly places `phys.wave.wave-properties` as the root concept for the entire waves domain. All five unlocks are correctly positioned downstream.
 
@@ -213,3 +235,7 @@ The description "Waves are characterised by amplitude, wavelength, period, frequ
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

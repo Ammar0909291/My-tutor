@@ -17,7 +17,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply refraction and snell's law at the **apply** level (Bloom) with difficulty tier **developing**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.opt.refraction.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_Snell's law n₁sinθ₁ = n₂sinθ₂ describes how light bends at an interface between media of different refractive indices._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: When light passes from one transparent material to another (like from air into water), it bends. This is why a straw in a glass of water looks broken, and why swimming pools look shallower than they are. The bending happens because light travels at different speeds in different materials — slower in denser materials.
 
@@ -31,7 +43,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **"denser means faster" (reversed speed-density relationship)**: learners know that denser materials have slower light but reverse the bending direction in diagrams. They reason: "denser material, more resistance, so light bends away from the normal." The correct rule is the opposite — slower speed bends the ray toward the normal (like a car wheel hitting soft ground at an angle turns toward the soft ground, not away). The sign of the bending is the persistent error; Snell's law gives the magnitude correctly but the learner draws the refracted ray on the wrong side of the normal.
 
@@ -39,7 +51,7 @@ The secondary root cause is **applying the sin rule to the wrong angles** (measu
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "Denser medium bends light away from the normal"**
 - Characteristic phrase: "Light slows down in glass, so it bends outward — away from the normal — because it's being pushed back."
@@ -67,20 +79,7 @@ The secondary root cause is **applying the sin rule to the wrong angles** (measu
 
 ---
 
-## Explanation library
-
-**E1 — Snell's law from the speed change (physical derivation)**
-"Light travels slower in a denser medium (speed v = c/n). Consider a wavefront — a line connecting points of equal phase — crossing the boundary. The left edge of the wavefront enters the glass first and slows down. While that edge travels a shorter distance in the glass, the right edge is still in air and travels a longer distance. The wavefront pivots — the slower edge lags, the faster edge leads — and the whole ray direction turns toward the normal. Quantify: the distance travelled in medium 1 along the boundary in time t is v₁t sinθ₁; in medium 2 it is v₂t sinθ₂. For the wavefront to remain continuous: v₁sinθ₁ = v₂sinθ₂. Substitute v = c/n: sinθ₁/n₁ = sinθ₂/n₂, rearranged to n₁sinθ₁ = n₂sinθ₂."
-
-**E2 — Apparent depth formula (application)**
-"A fish is 2 m below the surface of water (n = 1.33). Looking from above at near-normal incidence, the apparent depth is d_apparent = d_actual/n = 2/1.33 ≈ 1.5 m. The fish appears to be 1.5 m deep, not 2 m. This is why swimming pools look shallower than they are — and why spearfishing requires aiming below where the fish appears to be."
-
-**E3 — Critical angle and total internal reflection**
-"Total internal reflection occurs when light tries to go from a denser to a less dense medium (n₁ > n₂) at a steep enough angle. Snell's law: n₁sinθ₁ = n₂sinθ₂. As θ₁ increases, θ₂ increases faster (since n₁ > n₂). When θ₂ reaches 90°: n₁sinθ_c = n₂sin90° = n₂, so sinθ_c = n₂/n₁. For θ₁ > θ_c: no solution exists for sinθ₂ — no refracted ray; 100% of the light is reflected. This is the basis of optical fibres (light trapped in the glass core by TIR at the core-cladding boundary)."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — Marching soldiers crossing a mud line**
 A line of soldiers marching at an angle toward a strip of mud (slow ground) on their left. When the left end of the line reaches the mud, it slows down. The right end is still on firm ground, moving fast. The line pivots — the left end lags, the right end leads — and the whole formation turns toward the mud. This is exactly what happens to a wavefront crossing into a denser medium (slower light). The angle toward the mud corresponds to the ray bending toward the normal when entering a denser medium.
@@ -92,7 +91,7 @@ A ball rolling from a hard surface onto sand slows down — but it doesn't chang
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Straw in water (broken appearance)**
 Place a straw in a glass of water at an angle. Viewed from the side, the straw appears to bend at the water surface. Ask: "What does this suggest about the path of light from the straw to your eye?" (It bends at the air-water interface.) "Does the straw bend toward or away from the normal at the surface?" (Away — going from water to air, less dense, so bends away from normal.) "Which way would it bend going from air into water?" (Toward the normal.) Simple, universal, requires no equipment beyond a glass of water and a straw.
@@ -105,7 +104,7 @@ Place a coin at the bottom of an opaque cup. Position a viewer so the coin is ju
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for guided empirical discovery with derivation**:
 
@@ -117,7 +116,7 @@ The discovery sequence: observe bending → determine direction → derive formu
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Draw the normal first (same rule as reflection)**: Before any Snell's law calculation, require the learner to draw the normal. "No normal drawn → no marks for the geometry." This is identical to the reflection discipline — one more repetition of the universal optics angle convention.
 
@@ -129,7 +128,12 @@ The discovery sequence: observe bending → determine direction → derive formu
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "Snell's law: n₁sinθ₁ = n₂sinθ₂. Angles from the normal — always. Going into glass (denser, higher n): the angle decreases — the ray bends toward the normal. Coming out of glass (into air, lower n): the angle increases — the ray bends away from the normal. The marching-soldiers picture: the slower end of the line lags, the whole line turns toward the slower medium. That's the direction. The formula gives you the exact angle."
 
@@ -139,7 +143,7 @@ The discovery sequence: observe bending → determine direction → derive formu
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) state Snell's law and identify which way the ray bends (toward/away from normal) when n₂ > n₁ vs. n₂ < n₁; (2) calculate θ₂ given n₁, θ₁, and n₂; (3) identify that frequency is invariant and wavelength changes; (4) calculate the critical angle for TIR given n₁ and n₂.
 
@@ -159,7 +163,7 @@ After (b): "Why does the ray bend toward the normal in water? Can you explain it
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — M1 persists (bending direction reversed)**
 Run the soldiers analogy explicitly: draw a line of dots (soldiers) marching at an angle toward a boundary. "When the left end hits mud (slow) and the right end is still on firm ground (fast) — which end moves forward faster? Which end lags?" (Right fast, left lags.) "The whole line turns — which way? Toward the mud or away?" (Toward the mud.) "Mud = denser medium = slower light. Light bends toward the denser medium." Then verify with Snell's law: if n₂ > n₁, then sinθ₂ < sinθ₁, so θ₂ < θ₁ — consistent with bending toward the normal.
@@ -172,7 +176,7 @@ Identical recovery to reflection M1: draw the normal physically; measure from it
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Formula (n₁sinθ₁ = n₂sinθ₂) + direction rule (denser → toward normal) + invariant (frequency fixed, wavelength changes) + critical angle (sinθ_c = n₂/n₁).
 
@@ -188,7 +192,7 @@ Identical recovery to reflection M1: draw the normal physically; measure from it
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.opt.total-internal-reflection`: the critical-angle condition sinθ_c = n₂/n₁ is derived directly from Snell's law; optical fibres and TIR prisms are the applications
@@ -205,7 +209,25 @@ Identical recovery to reflection M1: draw the normal physically; measure from it
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: geometry (ray diagrams use similar triangles); Snell's law uses trigonometry; wave optics uses Fourier analysis. Chemistry: spectrophotometry and colorimetry measure concentrations optically; X-ray diffraction of molecules uses diffraction physics. Biology: the eye is a biological optical instrument; microscopy and endoscopy depend on lenses and fibre optics; bioluminescence and plant photoreception are optics applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.opt.refraction.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG description "Snell's law n₁sinθ₁ = n₂sinθ₂ describes how light bends at an interface between media of different refractive indices" is accurate.
 
@@ -216,3 +238,7 @@ A second gap: the KG does not mention the critical angle or total internal refle
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

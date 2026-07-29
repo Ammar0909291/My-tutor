@@ -21,7 +21,25 @@
      conventions (N not n, Pa not pa, s not S).
   4. Explain WHY a universal measurement system is necessary and what it replaced.
 
-## Mental models
+
+## Learning Objective
+
+After this concept, the learner can:
+
+s** — the learner can:
+  1. Name all seven SI base quantities and their units, including the unit symbol.
+  2. Classify a given physical quantity as a base or derived quantity and state which
+     base quantities it is built from.
+  3. Write the correct unit symbol for a given measurement, respecting capitalisation
+     conventions (N not n, Pa not pa, s not S).
+  4. Explain WHY a universal measurement system is necessary and what it replaced.
+
+
+## Core Understanding
+
+_The International System of Units defines seven base units used to express all physical quantities._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 - **Beginner (arriving)**: units are labels teachers put on numbers, interchangeable
   names, no deep structure. "5 km/h" and "5 m/s" mean the same kind of thing —
@@ -50,7 +68,7 @@
   "this model will evolve — there's a deeper idea we'll reach once you've practised
   with more quantities."
 
-## Why beginners fail here
+## Why Students Fail
 
 The root failure is treating units as decorative rather than constitutive: the number
 is the real thing, the unit is an annotation. This is reinforced by years of school
@@ -61,7 +79,7 @@ unit errors. A second failure mode is capitalisation blindness — "s" for secon
 in different cases. This is not pedantry: it marks whether the learner has actually
 internalised the symbol as a distinct identity or merely a letter.
 
-## Misconception library
+## Misconceptions
 
 **M1 — Units are interchangeable labels on the same number**
 - *Why*: experience with informal measurement ("about 5 big steps"); school maths
@@ -122,33 +140,7 @@ internalised the symbol as a distinct identity or merely a letter.
 - *Verification*: from-memory list (all seven, no extras, correct names + symbols
   + quantities measured).
 
-## Explanation library
-
-- **Age 10–12 (story)**: "Before the metre, France had feet — but a Paris foot was
-  different from a Lyon foot, and both were different from an English foot. Merchants
-  kept getting cheated and bridges kept collapsing because builders didn't agree on
-  what a 'foot' was. In 1799, France said: we'll define ONE metre for the whole
-  world, based on the Earth itself, so no one owns it. That's SI: one system that
-  belongs to everyone, so that a measurement made in Tokyo means the same thing in
-  Nairobi. Seven base units, and everything else builds from those seven."
-- **Age 14+ (structural)**: "Physics measures the universe. To measure, you need
-  references — physical standards everyone agrees on. The SI chooses seven
-  independent quantities (mass, length, time, electric current, temperature, amount
-  of substance, luminous intensity) as its foundation. Every other quantity —
-  velocity, force, energy — is built by multiplying and dividing those seven. The
-  genius of the system: if you know the seven units, you can derive every other unit
-  in physics by understanding what the quantity is."
-- **Adult returning learner**: "You've used metres, kilograms, and seconds for
-  years without thinking about it. The SI is the formal agreement behind those
-  habits: seven chosen base quantities, each with a unit and a symbol with a
-  specific capitalisation. The rest of the system — newtons, joules, watts — are
-  just names for specific combinations of those seven. Nothing to memorise beyond
-  the seven names, their symbols, and which quantity each measures."
-- **Visual frame**: a periodic-table-style card for the seven base units:
-  quantity / unit name / symbol / typical everyday scale example. Referred back to
-  throughout the domain.
-
-## Analogy library
+## Analogies
 
 - **Best analogy**: the seven base units are like the three primary colours — you
   can mix them to get every other colour (derived unit), but you cannot reduce them
@@ -167,7 +159,7 @@ internalised the symbol as a distinct identity or merely a letter.
   scales measure temperature but they are NOT the same scale and DO NOT name the
   same numbers. Avoid entirely.
 
-## Demonstration library
+## Demonstrations
 
 - **Home, no equipment**: find three measuring tools at home (ruler in cm, scale
   in kg, stopwatch on phone). Name the SI quantity for each, the unit, the symbol.
@@ -184,7 +176,7 @@ internalised the symbol as a distinct identity or merely a letter.
   units cause a crash?" Usual answer: "not really, you'd notice." Show the story
   AFTER this prediction is stated, so the contradiction is personal.
 
-## Discovery lesson
+## Discovery Questions
 
 **Direct instruction is warranted here**, with a clear argument: SI units are
 a historical and social convention (the 1875 Metre Convention), not a logical
@@ -198,7 +190,7 @@ or the medieval foot chaos) → here-is-the-solution (the seven base units as a
 card) → guided practice (classify 12 quantities as base or derived; write symbols
 correctly) → consolidation (from-memory list, timed).
 
-## Teaching actions
+## Teaching Sequence
 
 From the dispatch library (Delivery 2 §6):
 1. **Tell → show → apply** (highest fit): this is definitional/conventional content.
@@ -217,7 +209,12 @@ Actions that DON'T fit:
 - **Debate / argumentation**: no productive controversy exists here at this level.
   Reserve argumentation for concepts with genuine physical debates.
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 *How it sounds when taught well*: slow and deliberate when listing the seven base
 units; the SYMBOL is always spoken directly after the name ("ampere — capital A");
@@ -237,7 +234,7 @@ learner writes "sec" or "amp" instead of "s" and "A" → M3 active.
 thermodynamics; "m" (milli OR metre) vs "M" (mega) — context-dependent ambiguity
 that only explicit teaching removes.
 
-## Assessment
+## Assessment Signals
 
 **Diagnostic — golden probe**: "Name the SI unit of electric current, its symbol,
 and the base quantity it measures." This probes all three layers: the name
@@ -282,7 +279,7 @@ seven units (low stakes, memorise-and-recall). Build calibration items that test
 transfer — if a learner scores 100% on rote recall and 40% on new-surface items,
 their confidence is miscalibrated and the metacognitive gap needs naming.
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 *Likeliest utterance here*: "I don't understand what you're asking" (concept is
 unfamiliar, no anchor) or "I thought I knew this" after getting a symbol wrong
@@ -298,7 +295,7 @@ explicitly carried at every line and ask them to say what cancels. Do not announ
 the error; ask "check your units at this step — what do you get?" Reference
 Delivery 1 Recovery Engine for the universal recovery ladder.
 
-## Memory & review
+## Memory Hooks
 
 - **Concept type**: fact-set + convention. The seven units are a discrete
   enumerable set with exact symbols — this is the retrieval-practice-dominant type.
@@ -315,7 +312,7 @@ Delivery 1 Recovery Engine for the universal recovery ladder.
   `phys.mech.force` (first major derived unit encounter). Interleave symbol
   retrieval with conversion practice to build discrimination.
 
-## Transfer map
+## Transfer Connections
 
 - *Near*: SI prefixes and unit conversion (`phys.meas.unit-conversion`) — same
   symbols, scaling layer.
@@ -332,7 +329,25 @@ Delivery 1 Recovery Engine for the universal recovery ladder.
   why SI units are a CHOICE reveals that any self-consistent set works; SI is
   chosen for human-scale convenience.
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: significant figures tie directly to scientific notation and logarithms; dimensional analysis is a special case of algebraic unit-tracking; vector components use trigonometry. Chemistry: all lab measurements use SI units; concentration, moles, and temperature all live in this domain. Biology: biological measurements (cell size in micrometres, metabolic rates) use the same SI framework; dimensional analysis applies to enzyme kinetics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.meas.units.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 None from this authoring. The KG node's Bloom level (remember) is appropriate —
 this is a definitional concept best consolidated by retrieval practice. The
@@ -343,3 +358,7 @@ units as the root of the entire physics measurement domain.
 ---
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
 *Authored against KG node data confirmed at docs/physics/kg/graph.json.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

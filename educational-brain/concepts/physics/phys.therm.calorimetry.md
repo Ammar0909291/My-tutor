@@ -1,6 +1,6 @@
 # phys.therm.calorimetry — Calorimetry
 
-## 1. Identity
+## Identity
 
 | Field | Value |
 |---|---|
@@ -16,7 +16,19 @@
 
 ---
 
-## 2. Mental Models
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.therm.calorimetry.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+Calorimetry measures heat exchange using the principle that heat lost by a hot body equals heat gained by a cold body.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 ### Stage 1 — Intuitive (no formalism)
 
@@ -56,7 +68,7 @@ When a substance changes phase at constant temperature, Q = mL (L = specific lat
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Sign errors** — learners apply Q = mcΔT with ΔT = T_higher − T_lower for both bodies instead of always using T_f − T_i (signed). The hot body's ΔT should be negative.
 2. **Forgetting the calorimeter** — the container is a thermal body too. Neglecting its heat capacity systematically biases the computed specific heat upward (the calorimeter's absorbed heat is wrongly attributed to the sample).
@@ -65,7 +77,7 @@ When a substance changes phase at constant temperature, Q = mL (L = specific lat
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 ### M1 — "Hotter substance loses more degrees of temperature than cooler one gains"
 
@@ -97,29 +109,7 @@ When a substance changes phase at constant temperature, Q = mL (L = specific lat
 
 ---
 
-## 5. Explanation Library
-
-### Explanation A — Heat balance as energy accounting
-
-Calorimetry is conservation of energy applied to thermal systems. The total energy "account" of the insulated system is fixed: Q_in to any body = Q_out from another. Write the ledger as: Σ mc(T_f − T_i) = 0. Sum every term, positive for bodies heating up, negative for bodies cooling down. Solve for the unknown (usually T_f or one specific heat c).
-
-### Explanation B — Measuring specific heat by the method of mixtures
-
-Procedure: (1) Measure mass of calorimeter m_c; determine its water equivalent W. (2) Fill with water of known mass m_w at temperature T_w. (3) Heat sample of known mass m_s to temperature T_s. (4) Drop sample into calorimeter; stir; record T_f.
-
-Heat balance: m_s c_s (T_f − T_s) + (m_w + W) c_w (T_f − T_w) = 0
-
-Solve for c_s: c_s = [(m_w + W) c_w (T_f − T_w)] / [m_s (T_s − T_f)]
-
-Sources of error: heat loss to surroundings (T_f underestimated → c_s underestimated), heat gain from stirring (T_f overestimated), incomplete thermal equilibrium (if T measured too soon).
-
-### Explanation C — Coffee-cup calorimetry (solution calorimetry)
-
-Two aqueous solutions at room temperature are mixed in a polystyrene cup (negligible heat capacity, good insulation). Temperature change ΔT is measured. Q_reaction = −(m_total × c_soln × ΔT), where c_soln ≈ c_water for dilute solutions. The sign convention: if T rises (exothermic reaction), ΔT > 0 → Q_reaction < 0 (heat released by reaction into solution). If T falls (endothermic), ΔT < 0 → Q_reaction > 0 (heat absorbed from solution by reaction).
-
----
-
-## 6. Analogy Library
+## Analogies
 
 ### Primary analogy — Balancing a thermal scale
 
@@ -133,7 +123,7 @@ As shown in M2, the arithmetic mean is a special case. The analogy of "meeting i
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 ### Demo A — The classic method of mixtures (copper + water)
 
@@ -156,7 +146,7 @@ As shown in M2, the arithmetic mean is a special case. The analogy of "meeting i
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 ### Stance: Argue the inductive case — *measure first, derive the conservation law second*
 
@@ -174,7 +164,7 @@ As shown in M2, the arithmetic mean is a special case. The analogy of "meeting i
 
 ---
 
-## 9. Teaching Actions
+## Teaching Sequence
 
 | Prior state | Action |
 |---|---|
@@ -186,7 +176,12 @@ As shown in M2, the arithmetic mean is a special case. The analogy of "meeting i
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 ### Opening
 "Drop a hot spoon into a cold bowl of soup. What happens? The spoon cools, the soup warms, and they meet somewhere in the middle. Calorimetry is just making that 'somewhere in the middle' precise — calculating exactly where they meet, and using that to measure properties of materials."
@@ -202,7 +197,7 @@ As shown in M2, the arithmetic mean is a special case. The analogy of "meeting i
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 ### Mastery gate
 
@@ -231,7 +226,7 @@ Expected: 50 × c × (T_f − T₁) + (100 + 20) × 4200 × (T_f − T₂) = 0. 
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **Recovery for sign errors**:
 1. Write out T_f − T_i explicitly for each body before substituting numbers.
@@ -249,7 +244,7 @@ Expected: 50 × c × (T_f − T₁) + (100 + 20) × 4200 × (T_f − T₂) = 0. 
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Procedural (algorithm) + quantitative (formula)
 
@@ -269,7 +264,7 @@ Expected: 50 × c × (T_f − T₁) + (100 + 20) × 4200 × (T_f − T₂) = 0. 
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 | Target concept | Bridge |
 |---|---|
@@ -282,7 +277,25 @@ Expected: 50 × c × (T_f − T₁) + (100 + 20) × 4200 × (T_f − T₂) = 0. 
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: calculus underlies heat-flow equations; statistical probability governs thermal averages. Chemistry: thermochemistry, chemical equilibrium (Gibbs free energy), and reaction spontaneity are thermodynamics applied to molecules; the ideal-gas law is shared. Biology: metabolism is biochemical thermodynamics; body-temperature regulation is biological heat transfer.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.therm.calorimetry.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 **KG note**: The prerequisite `phys.therm.specific-heat` is the correct and sufficient gate — Q = mcΔT must be fluent before multi-body heat-balance problems are tractable. The difficulty tag "developing" is appropriate — the concept is algorithmically accessible (write the equation, solve for unknown) but conceptually demands careful sign discipline.
 
@@ -291,3 +304,7 @@ Expected: 50 × c × (T_f − T₁) + (100 + 20) × 4200 × (T_f − T₂) = 0. 
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

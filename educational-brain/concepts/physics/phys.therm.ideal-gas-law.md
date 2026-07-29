@@ -17,7 +17,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply ideal gas law at the **apply** level (Bloom) with difficulty tier **proficient**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.therm.ideal-gas-law.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_The ideal gas law PV = nRT relates pressure, volume, amount, and absolute temperature of an ideal gas._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: Gases have three quantities that change together — pressure (how hard the gas pushes on the container walls), volume (how much space the gas occupies), and temperature (how hot the gas is). When you heat a gas in a sealed container, the pressure goes up. When you compress a gas, the pressure goes up. These three quantities are related.
 
@@ -31,7 +43,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **Celsius substitution**: learners substitute temperature in Celsius into PV = nRT and get wrong answers. The failure is reinforced by the fact that Celsius works perfectly for thermal expansion (ΔT is the same in both scales) but fails catastrophically here because the ideal gas law uses absolute temperature, not temperature difference.
 
@@ -39,7 +51,7 @@ The secondary root cause is **variable isolation errors**: learners use PV = nRT
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "Temperature can be in Celsius in PV = nRT"**
 - Characteristic phrase: "Room temperature is 25 °C, so T = 25."
@@ -67,20 +79,7 @@ The secondary root cause is **variable isolation errors**: learners use PV = nRT
 
 ---
 
-## Explanation library
-
-**E1 — PV = nRT as a synthesis of three laws**
-"Boyle (1662): at fixed T and n, PV = constant — compress a gas, pressure rises. Charles (1787): at fixed P and n, V/T = constant — heat a gas, it expands. Gay-Lussac (1802): at fixed V and n, P/T = constant — heat a sealed container, pressure rises. PV = nRT unifies all three: it reduces to each when the appropriate variable is held constant. You only need to know one law."
-
-**E2 — The Kelvin requirement explained from the law itself**
-"At absolute zero (T = 0 K), PV = nR × 0 = 0. This says: at 0 K, either pressure = 0 or volume = 0 — the gas has collapsed. This makes physical sense: at absolute zero, particles have no kinetic energy to push on walls. If you use Celsius, 0 °C gives PV = nR × 0 in Celsius terms — which incorrectly predicts zero pressure/volume at the freezing point of water. The law only works when zero means zero kinetic energy, which is 0 K, not 0 °C."
-
-**E3 — The combined law for two-state problems**
-"For a fixed amount of gas (n constant), P₁V₁/T₁ = P₂V₂/T₂. Write the initial state with subscript 1, final state with subscript 2. Identify which variable is constant (P, V, or T, or some combination). Cross-cancel the constant, solve for the unknown. Always convert T to Kelvin before substituting."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — The gas as a room full of bouncing balls**
 Imagine a room (the container) full of rubber balls (gas molecules) bouncing off the walls. Temperature = how fast the balls move (average speed). Pressure = how hard the balls collectively hit the walls per unit area. Volume = the size of the room. If you heat the balls (more T), they move faster and hit harder → pressure increases. If you compress the room (less V), the balls hit the walls more often → pressure increases. PV = nRT formalises these relationships.
@@ -92,7 +91,7 @@ A compressed gas (high pressure) is not necessarily hot. You can have cold compr
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Heating a balloon**
 Inflate a balloon at room temperature. Place it in hot water: it expands (V increases at roughly constant P and fixed n, consistent with Charles's law: V ∝ T). Place it in ice water: it contracts. This demonstrates Charles's law as a special case of PV = nRT.
@@ -105,7 +104,7 @@ Block the tip of a syringe and push the plunger in (decrease V). The increasing 
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for direct instruction + guided synthesis**:
 
@@ -113,7 +112,7 @@ The three gas laws (Boyle's, Charles's, Gay-Lussac's) should each be motivated b
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Kelvin conversion as step 0**: Before writing PV = nRT or P₁V₁/T₁ = P₂V₂/T₂, require the learner to write "T₁ = ___ + 273 = ___ K" as the very first step. No substitution until T is in Kelvin. This prevents M1 at the procedural level.
 
@@ -125,7 +124,12 @@ The three gas laws (Boyle's, Charles's, Gay-Lussac's) should each be motivated b
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "PV = nRT. Before anything else — T is in Kelvin. Always. The gas law uses absolute temperature because the 'zero' in the law means no kinetic energy; Celsius zero is just the freezing point of water, which has nothing to do with it. Convert first, calculate second. Every single time."
 
@@ -135,7 +139,7 @@ The three gas laws (Boyle's, Charles's, Gay-Lussac's) should each be motivated b
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) state PV = nRT and identify each symbol; (2) convert temperature to Kelvin as the first step in every calculation; (3) apply P₁V₁/T₁ = P₂V₂/T₂ to two-state problems; (4) identify which subsidiary law (Boyle's, Charles's, Gay-Lussac's) applies for a given constraint.
 
@@ -155,7 +159,7 @@ After (a): "How confident are you that 27 °C = 300 K?" (1–5). Consistent erro
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — Celsius substitution persists (M1)**
 Run the motivating calculation: "At 0 °C, what does the gas law predict for V if T = 0 (Celsius)?" The law gives V = 0 — zero volume at the freezing point of water, which is absurd. "At 0 K, V = 0 makes physical sense: no kinetic energy, gas collapses. Celsius zero is irrelevant to the gas law. Always Kelvin." This argument from the physical absurdity of the Celsius result is more memorable than "it's a rule."
@@ -168,7 +172,7 @@ Require TA4 (units audit) before every problem. Write R = 8.314 J/(mol·K) = 8.3
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Formula (PV = nRT) + constant (R = 8.314 J/(mol·K)) + conversion rule (T in Kelvin) + three special-case names (Boyle's/Charles's/Gay-Lussac's).
 
@@ -184,7 +188,7 @@ Require TA4 (units audit) before every problem. Write R = 8.314 J/(mol·K) = 8.3
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.therm.kinetic-theory`: KE_avg = (3/2)kT connects PV = nRT at the molecular level — the macroscopic gas law is derived from the microscopic kinetic theory
@@ -199,7 +203,25 @@ Require TA4 (units audit) before every problem. Write R = 8.314 J/(mol·K) = 8.3
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: calculus underlies heat-flow equations; statistical probability distributions govern thermal averages. Chemistry: thermochemistry, chemical equilibrium (Gibbs free energy), and reaction spontaneity are thermodynamics applied to molecular systems; the ideal-gas law is shared. Biology: metabolism is biochemical thermodynamics; body temperature regulation is heat-transfer in a biological system.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.therm.ideal-gas-law.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG correctly identifies PV = nRT and requires both zeroth-law and temperature as prerequisites. The single unlock (kinetic-theory) is appropriate — kinetic theory derives the gas law from molecular mechanics.
 
@@ -210,3 +232,7 @@ A second gap: the KG does not mention the three special-case gas laws (Boyle's, 
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

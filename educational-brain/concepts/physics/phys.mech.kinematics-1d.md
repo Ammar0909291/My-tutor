@@ -31,7 +31,34 @@
   4. Apply the equations to free-fall problems (a = ±g = ±9.8 m/s²), including
      objects thrown upward.
 
-## Mental models
+
+## Learning Objective
+
+After this concept, the learner can:
+
+predict the future state
+  of a moving object from its initial conditions — the essence of deterministic
+  classical mechanics. Every projectile, every falling object, every car chase
+  problem requires these equations.
+- **Difficulty**: developing · **Bloom**: apply · **Mastery threshold**: 0.80 ·
+  **Est. hours**: 4 · **References**: NCERT Physics Class 11 Ch. 3
+- **Learning objectives** — the learner can:
+  1. State the four kinematic equations for constant acceleration and identify
+     which variables appear in each (to enable choosing the right equation).
+  2. Solve for any one unknown given the other three kinematic quantities (u, v,
+     a, s, t) using the appropriate equation.
+  3. Set up a sign convention for a given problem and apply it consistently —
+     choosing positive and negative directions and treating all signed quantities
+     accordingly.
+  4. Apply the equations to free-fall problems (a = ±g = ±9.8 m/s²), including
+     objects thrown upward.
+
+
+## Core Understanding
+
+_Kinematic equations relate displacement, velocity, acceleration and time for uniform acceleration in one dimension._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 - **Beginner (arriving)**: the kinematic equations are four formulas to memorise
   and "plug numbers into." The signs are an inconvenience — the learner substitutes
@@ -60,7 +87,7 @@
   the advanced model: "these four equations come directly from integrating a = const
   — you'll see this derivation when you study calculus."
 
-## Why beginners fail here
+## Why Students Fail
 
 There are three distinct failure modes. First, sign errors: the learner treats
 displacement, velocity, and acceleration as magnitudes, substitutes positive
@@ -72,7 +99,7 @@ for what's asked because that equation doesn't contain it. Third, the "ball at
 the peak" error (from acceleration): the learner treats v = 0 at the peak as
 meaning a = 0 also, causing the equations to collapse to wrong solutions.
 
-## Misconception library
+## Misconceptions
 
 **M1 — Plug magnitudes; decide signs at the end by intuition**
 - *Why*: sign-convention maintenance is unfamiliar; students have used calculators
@@ -144,29 +171,7 @@ constant)**
 - *Verification*: multi-phase problem (ball thrown up) — compute time to peak,
   height at peak, velocity when returning to start. All require a = −g throughout.
 
-## Explanation library
-
-- **Age 13–15 (build-up)**: "You already know: velocity = displacement / time.
-  For constant acceleration: v = u + at (velocity grows linearly with time — this
-  is the definition of constant acceleration). Integrate once: the area under the
-  v-t graph gives displacement. For a straight line on the v-t graph, the area is
-  a trapezoid: s = (u + v)/2 × t. Substituting v = u + at: s = ut + ½at². That's
-  three of the four equations — derived, not memorised. The fourth (v² = u² + 2as)
-  is obtained by eliminating t between the first and third."
-- **Age 15+**: "The four kinematic equations are a complete set for constant
-  acceleration. Any three of {u, v, a, s, t} determines the other two. The
-  key discipline: signs. Choose a positive direction; assign signs to u, v, a, s.
-  Treat every signed quantity as an algebraic symbol throughout. Never change a
-  sign based on physical intuition mid-calculation — let the algebra carry the
-  sign. If you get a negative displacement at the end, it means the object moved
-  in the negative direction."
-- **Adult returning**: "These four equations relate the five kinematic quantities
-  for an object moving in one dimension with constant acceleration. For every
-  problem: (1) write down what's given, (2) write what's unknown, (3) choose the
-  equation containing all the given quantities and the unknown. Everything else is
-  algebra — but sign discipline is essential."
-
-## Analogy library
+## Analogies
 
 - **Best analogy**: a GPS journey planner. You know: starting speed, final speed,
   acceleration rate (engine, brakes). The kinematic equations are the "calculation
@@ -184,7 +189,7 @@ constant)**
   actively installs M1. Signs in kinematics must be algebraic, not intuitive —
   intuition fails for upward throws and deceleration below zero.
 
-## Demonstration library
+## Demonstrations
 
 - **Home, no equipment**: drop a ball from 1 m height. Estimate the time of fall
   (≈ 0.45 s). Predict from s = ut + ½at² (u=0, a=9.8, s=1): t = √(2s/a) = √(2/9.8)
@@ -201,7 +206,7 @@ constant)**
   guesses: "5 m", "50 m", "100 m"). Compute: v² = 0 = 400 + 2(−4)s → s = 50 m.
   The spread of predictions shows the value of the equations.
 
-## Discovery lesson
+## Discovery Questions
 
 **Guided discovery** for the derivation (two equations from definitions → other
 two by algebra); **direct instruction** for the application strategy.
@@ -219,7 +224,7 @@ two by algebra); **direct instruction** for the application strategy.
 5. *Formalization*: state all four equations; state the condition (constant a).
 6. *Practice*: equation-selection algorithm — given, unknown, choose equation.
 
-## Teaching actions
+## Teaching Sequence
 
 From the dispatch library (Delivery 2 §6):
 1. **Guided discovery** for derivation (high fit — learner can derive from
@@ -231,7 +236,12 @@ From the dispatch library (Delivery 2 §6):
 4. **Error exposure**: M1 (sign error), M4 (peak error), and M3 (wrong equation)
    should each be demonstrated as counterexamples before independent practice.
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 *How it sounds when taught well*: the tutor writes "Let up = + direction" or
 "Let right = + direction" as Step 0 of EVERY problem, out loud; every substituted
@@ -248,7 +258,7 @@ with v = u + at regardless of what's given → M3; learner says "these equations
 don't apply because the car isn't constant" without checking → (correct caution —
 praise the metacognitive awareness, then confirm/deny).
 
-## Assessment
+## Assessment Signals
 
 **Diagnostic — golden probe**: "A ball is thrown upward at 15 m/s. Using upward as
 positive and a = −9.8 m/s²: (a) how long to reach the peak? (b) what is the height
@@ -287,7 +297,7 @@ problem (ball thrown up, caught at a lower level) where two separate kinematic
 phases must be tracked. Confidence collapses here for learners whose mastery is
 superficial. Include this in the gate.
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 *Likeliest utterance*: "which equation do I use?" (M3); "I used the right formula
 but got the wrong sign" (M1); "at the top, v = 0 so a = 0" (M4).
@@ -302,7 +312,7 @@ acceleration in the + or − direction? Write that down before any algebra. Neve
 change that sign during the problem." Force the sign-convention step as an
 explicit written act.
 
-## Memory & review
+## Memory Hooks
 
 - **Concept type**: procedure (equation selection + signed algebra) + limited fact-set
   (four equations — ideally derived rather than memorised).
@@ -319,7 +329,7 @@ explicit written act.
   two perpendicular 1D problems simultaneously); `phys.mech.newtons-second-law`
   (a = F/m links kinematics to dynamics).
 
-## Transfer map
+## Transfer Connections
 
 - *Near*: `phys.mech.kinematics-2d` — applies the same equations independently
   to x and y components.
@@ -337,7 +347,25 @@ explicit written act.
   s(t₀) + v(t₀)Δt + ½a(t₀)(Δt)² — this IS the kinematic equation, as the first
   three terms of the Taylor series, exact when a is constant.
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: kinematics uses calculus (differentiation for velocity/acceleration, integration for displacement); vectors require linear algebra; energy methods use algebra and trigonometry. Chemistry: thermochemistry uses energy concepts (enthalpy, bond energies); reaction kinetics ties to activation energy. Biology: biomechanics (muscle force, gait), fluid mechanics in circulation (blood pressure, flow rate), and structural biology (bone stress) all apply mechanical principles.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.mech.kinematics-1d.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG correctly identifies the three direct unlocks. The `mastery_threshold: 0.80`
 is the highest in the kinematic chain — appropriate, as this is a multi-equation
@@ -352,3 +380,7 @@ condition.
 ---
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
 *Authored against KG node data confirmed at docs/physics/kg/graph.json.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

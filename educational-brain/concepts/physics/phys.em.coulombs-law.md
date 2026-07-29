@@ -17,7 +17,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply coulomb's law at the **apply** level (Bloom) with difficulty tier **developing**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.em.coulombs-law.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_Coulomb's law states that the electrostatic force between two point charges is proportional to their product and inversely proportional to the square of their separation._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: Two charged objects exert forces on each other even without touching. Like charges (both positive or both negative) repel; unlike charges (one positive, one negative) attract. The closer together they are, the stronger the force.
 
@@ -31,7 +43,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **inverse-square law misapplication**: learners know the F ∝ 1/r² relationship but fail to apply it correctly when r changes by a factor. They compute "r doubles → F halves" instead of "r doubles → F decreases by a factor of 4." The 1/r² behaviour requires squaring the factor before taking the reciprocal.
 
@@ -39,7 +51,7 @@ The secondary root cause is **sign handling in the force direction**: learners p
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "Doubling the distance halves the force"**
 - Characteristic phrase: "If you move twice as far, the force is half as much."
@@ -67,20 +79,7 @@ The secondary root cause is **sign handling in the force direction**: learners p
 
 ---
 
-## Explanation library
-
-**E1 — The inverse-square ratio method (procedural)**
-"F ∝ 1/r². If r changes by a factor of n, then r² changes by n², and F changes by 1/n². Always: (1) compute the factor change in r. (2) Square it. (3) Take the reciprocal. That's the factor change in F. Example: r triples → r² × 9 → F ÷ 9. No formula needed; just this three-step ratio."
-
-**E2 — Coulomb's law vs. gravitational law**
-Both F_gravity = Gm₁m₂/r² and F_Coulomb = kq₁q₂/r² have the same 1/r² dependence and the same product-of-sources structure. Differences: (1) gravity is always attractive (masses are always positive); Coulomb force can attract or repel. (2) k = 8.99 × 10⁹ >> G = 6.67 × 10⁻¹¹ — electrostatic forces are enormously stronger than gravity for fundamental particles. The proton–proton electrostatic repulsion inside a nucleus is ~10³⁶ times stronger than their gravitational attraction.
-
-**E3 — Superposition principle**
-"Each pair of charges exerts a Coulomb force independently. The total force on a charge is the vector sum of all the individual Coulomb forces. Three charges on a line: find F₁₂ and F₁₃ separately; add as vectors (same line → add with signs based on direction). In 2D: find each force as a vector with x and y components; add components separately."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — The gravitational analogy (structure only)**
 Coulomb's law has the exact same mathematical form as Newton's law of gravitation. A student who has studied gravity already knows: "force is proportional to the product of the sources and inversely proportional to the square of the distance." The only additions for electrostatics are: (1) sources can be positive or negative (masses are always positive), so force direction must be determined by sign, and (2) the constant k >> G means electric forces dwarf gravitational forces between fundamental particles.
@@ -92,7 +91,7 @@ The 1/r² relationship is specific to inverse-square laws. Not all forces get st
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Charged rods and force observation**
 Charge two identical rods (glass rubbed with silk → positive). Suspend one on a pivot. Bring the other near: repulsion is visible. Charge one rod oppositely (PVC rubbed with wool → negative). Now attraction is visible. This demonstrates the sign-dependent direction qualitatively.
@@ -105,7 +104,7 @@ Three charges in a line: +2 μC at x = 0, −3 μC at x = 0.3 m, +1 μC at x = 0
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for direct instruction** (the 1/r² dependence is not guessable from everyday experience and requires either the historical torsion-balance measurement or a simulation):
 
@@ -115,7 +114,7 @@ After the formula, the discovery-style task is applying it to ratio questions (M
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Inverse-square ratio before formula**: For any "r changes by factor n" question, require the three-step ratio method (factor n → square → reciprocal) BEFORE substituting numbers. This prevents M1 permanently.
 
@@ -127,7 +126,12 @@ After the formula, the discovery-style task is applying it to ratio questions (M
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "Coulomb's law: F = kq₁q₂/r². The key word is 'inverse-square.' When the distance doubles, r² quadruples, and F drops to one-quarter — not one-half. When the distance triples, F drops to one-ninth. Always square the distance ratio first, then flip it. That's the whole trick for ratio questions."
 
@@ -137,7 +141,7 @@ After the formula, the discovery-style task is applying it to ratio questions (M
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) calculate the force between two point charges using F = kq₁q₂/r², (2) determine direction from charge signs without error, (3) correctly apply the inverse-square scaling for ratio questions, and (4) add two Coulomb forces as vectors in 1D.
 
@@ -157,7 +161,7 @@ After (c): "How confident are you that the force decreased by a factor of 9, not
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — Inverse-square error persists (M1)**
 Run the three-step ratio method as a standalone drill: "r changes by factor 3 → r² changes by factor ___? → F changes by factor ___?" Do this for factors of 2, 3, 4, 5 with only mental arithmetic, no formula. Repeat until automatic. Only then return to formula-based problems.
@@ -170,7 +174,7 @@ Draw the force diagram: q₁ on the left, q₂ on the right. Draw the force arro
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Formula (F = kq₁q₂/r²) + constant (k = 8.99 × 10⁹ N·m²/C²) + rule (inverse-square ratio, sign determines direction) + superposition procedure.
 
@@ -186,7 +190,7 @@ Draw the force diagram: q₁ on the left, q₂ on the right. Draw the force arro
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.em.electric-field`: the electric field is defined as E = F/q₀ = kq/r² for a point charge — Coulomb's law per unit test charge
@@ -202,7 +206,25 @@ Draw the force diagram: q₁ on the left, q₂ on the right. Draw the force arro
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: vector calculus (divergence, curl) formalises Maxwell's equations; complex exponentials describe AC circuits. Chemistry: electrochemistry (Faraday's laws, electrolysis, galvanic cells) maps directly onto electric-current concepts; atomic spectroscopy uses electromagnetic waves. Biology: membrane potentials and nerve impulses are electrical circuits; MRI and ECG are direct clinical applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.em.coulombs-law.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG correctly identifies the inverse-square law and the proportionality to charge product. The two unlocks (electric-field, bohr-model) are appropriate.
 
@@ -213,3 +235,7 @@ A second gap: the KG description does not mention that Coulomb's law applies exa
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

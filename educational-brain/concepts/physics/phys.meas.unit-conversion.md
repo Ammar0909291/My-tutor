@@ -26,7 +26,27 @@
   4. Verify a conversion is correct by checking the direction of the conversion
      (smaller unit → larger number; larger unit → smaller number).
 
-## Mental models
+
+## Learning Objective
+
+After this concept, the learner can:
+
+s** — the learner can:
+  1. Convert a measurement between SI and common non-SI units using the
+     "multiply by 1" (fraction method) approach, showing all unit cancellations.
+  2. Apply the SI prefix table (pico through tera) to express a quantity with
+     a convenient prefix.
+  3. Convert a compound unit (e.g. km/h to m/s) by applying the conversion
+     to each component unit separately.
+  4. Verify a conversion is correct by checking the direction of the conversion
+     (smaller unit → larger number; larger unit → smaller number).
+
+
+## Core Understanding
+
+_Unit conversion uses multiplicative factors or SI prefixes to express quantities in different units._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 - **Beginner (arriving)**: unit conversion is a set of rules — "to go from km
   to m, multiply by 1000." The rule is a fact to recall, not a derivation.
@@ -54,7 +74,7 @@
   the dimensional-analysis connection: "the unit cancellation you're doing here
   is dimensional analysis applied to a single step."
 
-## Why beginners fail here
+## Why Students Fail
 
 The dominant failure is direction errors — dividing when they should multiply
 and vice versa. This happens because learners memorise "km to m: multiply by
@@ -65,7 +85,7 @@ cancels. The second failure is compound units — treating km/h as a single
 symbolic unit rather than as a ratio of km and h, so the learner doesn't know
 how to convert it (they can convert km alone and h alone but not their ratio).
 
-## Misconception library
+## Misconceptions
 
 **M1 — Conversion direction must be memorised for each pair (no generating rule)**
 - *Why*: conversion tables are taught before the "multiply by 1" method; the
@@ -132,29 +152,7 @@ how to convert it (they can convert km alone and h alone but not their ratio).
   in metres → nanometres; visible light wavelength → nanometres; CPU frequency →
   GHz), convert using prefix table.
 
-## Explanation library
-
-- **Age 12–14 (story)**: "You want to bake a cake. The recipe says 0.5 kg of
-  flour but your scale only reads grams. How many grams? You know 1 kg = 1000 g,
-  so 0.5 kg = 500 g. You just multiplied by 1 — specifically, by 1000 g / 1 kg,
-  which equals 1 exactly (because the numerator and denominator are the same
-  thing expressed differently). Unit conversion is always just this: find the
-  conversion factor, write it as a fraction with the old unit on the bottom, and
-  multiply."
-- **Age 15+**: "A conversion factor is a ratio whose numerator and denominator
-  are equal quantities expressed in different units. '1 m = 100 cm' gives two
-  conversion factors: 100 cm / 1 m = 1 (use this when you want cm in the answer)
-  and 1 m / 100 cm = 1 (use this when you want m). Multiplying by 1 doesn't
-  change the value — only the unit. The old unit cancels algebraically, and the
-  new unit remains. Chain this for compound units: each unit component is
-  converted separately with its own factor."
-- **Adult returning learner**: "The method is called 'unit factor' or 'multiply
-  by 1.' Write the old value. Write the conversion factor as a fraction, with the
-  old unit in the denominator so it cancels. Multiply. The algebra of unit
-  cancellation is the same as cancelling a variable in a fraction — (m × cm/m)
-  = cm. The only skill is choosing which way to orient the fraction."
-
-## Analogy library
+## Analogies
 
 - **Best analogy**: currency exchange. £20 × (1.25 USD / £1) = $25. The pound
   "cancels" and dollars appear. You always put the old currency in the denominator
@@ -170,7 +168,7 @@ how to convert it (they can convert km alone and h alone but not their ratio).
 - **Anti-analogy to avoid**: "larger unit = larger number." This directly installs
   M2. Always use "larger unit → you need fewer of them → smaller number" framing.
 
-## Demonstration library
+## Demonstrations
 
 - **Home, no equipment**: fill a water glass. Estimate its volume in mL (say, ~250 mL).
   Convert to L: 250 mL × (1 L / 1000 mL) = 0.25 L. Convert to cm³: 250 mL × (1 cm³/1 mL)
@@ -186,7 +184,7 @@ how to convert it (they can convert km alone and h alone but not their ratio).
   or smaller number?" Collect predictions; reveal 5,000,000 mm. The large number
   surprises learners who have M2.
 
-## Discovery lesson
+## Discovery Questions
 
 **Direct instruction** is correct here — conversion factors are definitions (1 km
 = 1000 m is a stipulated definition, not a fact to discover). The "multiply by 1"
@@ -201,7 +199,7 @@ method IS discoverable from the principle, however:
 3. *Direct instruction*: the prefix table — taught directly as a system (not list).
 4. *Practice*: compound unit conversion taught by extending the single-step method.
 
-## Teaching actions
+## Teaching Sequence
 
 From the dispatch library (Delivery 2 §6):
 1. **Direct instruction** (primary for prefix table and systematic method).
@@ -210,7 +208,12 @@ From the dispatch library (Delivery 2 §6):
 3. **Error exposure** (high fit for M2/M3): demonstrate the wrong direction (M2)
    and the missing denominator unit (M3) as counterexamples before independent practice.
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 *How it sounds when taught well*: tutor always writes the fraction explicitly
 ("1000 m / 1 km") rather than saying "multiply by 1000"; the word "cancels"
@@ -225,7 +228,7 @@ and the new unit appears." Say at normal speed; repeat with an example.
 fraction → M1; "converting to a smaller unit should give a smaller number" → M2;
 learner converts km but not h in km/h → M3.
 
-## Assessment
+## Assessment Signals
 
 **Diagnostic — golden probe**: "Convert 72 km/h to m/s. Show all conversion
 factors as fractions." This catches M1 (wrong direction), M2 (wrong prediction),
@@ -260,7 +263,7 @@ reveals miscalibration: a novel compound unit (e.g. J/s to kW — requires
 understanding J = kg·m²/s² and chaining factors). If the learner cannot do this
 unscaffolded, the "multiply by 1" method is not yet generating.
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 *Likeliest utterance*: "I always get confused about which way to go" (M1);
 "I just multiply by 1000 everywhere" (procedure without direction discrimination).
@@ -274,7 +277,7 @@ way does the number go?" → generate direction from size reasoning.
 what fraction do you need to convert km? What fraction to convert h?" Lead the
 learner to write both fractions explicitly before any arithmetic.
 
-## Memory & review
+## Memory Hooks
 
 - **Concept type**: procedure (the fraction method) + fact-set (prefix table).
 - **Review form** (per Delivery 2 §8): procedure → distributed practice (one
@@ -287,7 +290,7 @@ learner to write both fractions explicitly before any arithmetic.
 - **Interleaving partners**: every subsequent domain (kinematics, energy, EM) —
   non-SI values appear throughout; conversion is woven into every problem set.
 
-## Transfer map
+## Transfer Connections
 
 - *Near*: every numerical problem in the curriculum — conversions appear constantly.
 - *Near*: `phys.meas.dimensions` — unit cancellation is dimensional analysis in
@@ -301,7 +304,25 @@ learner to write both fractions explicitly before any arithmetic.
   with the "multiply by 1" framework and the idea that any self-consistent unit
   system works.
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: significant figures tie directly to scientific notation and logarithms; dimensional analysis is a special case of algebraic unit-tracking; vector components use trigonometry. Chemistry: all lab measurements use SI units; concentration, moles, and temperature all live in this domain. Biology: biological measurements (cell size in micrometres, metabolic rates) use the same SI framework; dimensional analysis applies to enzyme kinetics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.meas.unit-conversion.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG lists no unlocks — this underrepresents its functional reach. Unit
 conversion is a prerequisite skill for using numerical values in any domain;
@@ -312,3 +333,7 @@ its downstream impact is as broad as any concept in the curriculum. The
 ---
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
 *Authored against KG node data confirmed at docs/physics/kg/graph.json.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

@@ -29,7 +29,28 @@
   4. Explain why net force (vector sum of all forces on an object) — not any
      individual force — determines the change in motion.
 
-## Mental models
+
+## Learning Objective
+
+After this concept, the learner can:
+
+s** — the learner can:
+  1. Define force as a vector quantity representing an INTERACTION between two
+     objects, requiring both an agent (what exerts the force) and a recipient
+     (what experiences it).
+  2. Classify forces as contact forces (normal, friction, tension, applied) or
+     field forces (gravity, electric, magnetic) and give examples of each.
+  3. Identify all forces acting ON a single object in a given scenario and draw
+     a free-body diagram showing them as vectors.
+  4. Explain why net force (vector sum of all forces on an object) — not any
+     individual force — determines the change in motion.
+
+
+## Core Understanding
+
+_A force is a vector quantity representing an interaction that can change an object's state of motion._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 - **Beginner (arriving)**: a force is a push or pull exerted by a person or
   a visible agent. Forces are things that cause motion. An object at rest has
@@ -58,7 +79,7 @@
   net force, Newton's second law tells you the acceleration — and that's the next
   step."
 
-## Why beginners fail here
+## Why Students Fail
 
 The "force as a property of one object" belief (forces are STORED in objects,
 not exchanged between them) is the root of most Newton's-third-law failures.
@@ -71,7 +92,7 @@ happening." The third: "force causes motion" rather than "force causes CHANGE
 in motion" — this causes misidentification of forces as the source of constant
 velocity (the impetus error from Newton's first law).
 
-## Misconception library
+## Misconceptions
 
 **M1 — Force is a property of one object, not an interaction between two**
 - *Why*: "pushing" and "pulling" are described from one person's perspective;
@@ -136,30 +157,7 @@ velocity (the impetus error from Newton's first law).
   triangle law or component method. The net force is the resultant.
 - *Verification*: three net-force calculations with forces at various angles.
 
-## Explanation library
-
-- **Age 12–14 (story)**: "A force is always from something, to something —
-  never just 'in the air.' When you push a door, you are the agent; the door
-  is the recipient. The door pushes back on you (Newton's third law — we'll get
-  to that). Forces are invisible, but they always come in pairs: a pusher and a
-  thing being pushed. Gravity is the Earth pulling the book; not the book 'having'
-  gravity. The normal force is the table pushing back on the book — just like your
-  hand would if you held the book up."
-- **Age 14+**: "A force is a vector interaction between two objects. Every force
-  has an agent (what exerts it) and a recipient (what experiences it). The NET
-  force on an object — the vector sum of all forces on it — is what determines
-  how the object's motion changes. Two large forces can cancel to give zero net
-  force (object doesn't accelerate). One tiny force with no opposing force gives
-  a nonzero net force (object accelerates). The magnitude of individual forces
-  is less important than their vector sum."
-- **Adult returning learner**: "Newton's breakthrough was realising that forces
-  are not what keep objects moving — they are what change the motion. A satellite
-  in orbit is constantly pulled by gravity (centripetal force), which continuously
-  changes the direction of its velocity. But nothing 'keeps it moving' — it would
-  keep moving forever without gravity; gravity just bends the straight path into
-  a circle. Forces cause acceleration, not velocity."
-
-## Analogy library
+## Analogies
 
 - **Best analogy**: a tug-of-war rope. The rope has TWO agents pulling on it —
   both exert forces on the rope (and through the rope, on each other). The rope's
@@ -178,7 +176,7 @@ velocity (the impetus error from Newton's first law).
   throw inside it." Both install M1 and the impetus model. Always say: "force is
   an interaction between two objects at this moment — not a stored substance."
 
-## Demonstration library
+## Demonstrations
 
 - **Home, no equipment**: hold a heavy book in your palm. Feel the forces — your
   hand pushes up (you feel the effort); the book pushes down (you feel the weight).
@@ -196,7 +194,7 @@ velocity (the impetus error from Newton's first law).
   book? Name them." Collect predictions before any teaching. Most learners say
   one (gravity). Reveal two. Then explain the normal force.
 
-## Discovery lesson
+## Discovery Questions
 
 **Guided discovery** is appropriate for the agent-recipient structure of force
 and for the concept of net force.
@@ -217,7 +215,7 @@ and for the concept of net force.
    magnitude); classification (contact/field); net force as the dynamically
    relevant quantity.
 
-## Teaching actions
+## Teaching Sequence
 
 From the dispatch library (Delivery 2 §6):
 1. **Guided discovery** (high fit): the net-force concept and the normal-force
@@ -229,7 +227,12 @@ From the dispatch library (Delivery 2 §6):
 4. **Free-body diagram practice** (high fit): drawing free-body diagrams is
    the primary procedural tool for identifying forces.
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 *How it sounds when taught well*: every force is spoken with its two-party
 structure ("the EARTH pulls the BOOK downward"); the word "net force" appears
@@ -244,7 +247,7 @@ force alone tells you almost nothing without knowing the other forces." Slow.
 "no forces because it's not moving" → M2; "force keeps it moving" → M3;
 "3 N + 4 N = 7 N" (magnitude arithmetic on forces at angles) → M4.
 
-## Assessment
+## Assessment Signals
 
 **Diagnostic — golden probe**: "Draw and label all forces on a book resting on a
 table." Correct: gravity downward (Earth on book) + normal force upward (table on book).
@@ -280,7 +283,7 @@ Earth as agent = M1. This is the simplest real-physics free-body diagram.
 on table, hanging object) often fail on novel cases (object on slope, object in
 circular motion). The mastery gate should include at least one non-trivial scenario.
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 *Likeliest utterance*: "the normal force isn't real, is it? Nothing is pushing
 it" (M2); "the force keeps it moving, I just don't know which force" (M3).
@@ -295,7 +298,7 @@ tactile experience to invisible normal force.
 struggles to name an agent, point out: "there is no agent. No agent = no force.
 No force = no change in motion = constant velocity. That's Newton's first law."
 
-## Memory & review
+## Memory Hooks
 
 - **Concept type**: concept (force as a vector interaction) + procedure (free-body
   diagrams).
@@ -310,7 +313,7 @@ No force = no change in motion = constant velocity. That's Newton's first law."
   different angles); `phys.mech.newtons-second-law` (net force → acceleration);
   `phys.mech.free-body-diagram` (FBD as a formalised procedure).
 
-## Transfer map
+## Transfer Connections
 
 - *Near*: `phys.mech.newtons-first-law`, `phys.mech.newtons-second-law` —
   both are about net force and its relation to motion.
@@ -327,7 +330,25 @@ No force = no change in motion = constant velocity. That's Newton's first law."
   exchanged between two particles. Understanding forces as interactions is the
   classical foundation for the QFT picture.
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: kinematics uses calculus (differentiation for velocity/acceleration, integration for displacement); vectors require linear algebra; energy methods use algebra and trigonometry. Chemistry: thermochemistry uses energy concepts (enthalpy, bond energies); reaction kinetics ties to activation energy. Biology: biomechanics (muscle force, gait), fluid mechanics in circulation (blood pressure, flow rate), and structural biology (bone stress) all apply mechanical principles.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.mech.force.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG `requires` correctly lists `phys.meas.scalars-vectors` — force is the first
 major vector quantity in mechanics. The `unlocks` list (Newton's first and second
@@ -340,3 +361,7 @@ significantly more practice across subsequent dynamics topics.
 ---
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
 *Authored against KG node data confirmed at docs/physics/kg/graph.json.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

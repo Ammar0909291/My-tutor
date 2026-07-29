@@ -1,6 +1,6 @@
 # phys.mech.circular-motion — Uniform Circular Motion
 
-## 1. Identity
+## Identity
 - **Canonical KG ID**: `phys.mech.circular-motion`
 - **Canonical name**: Uniform Circular Motion
 - **Curriculum domain**: Mechanics
@@ -13,7 +13,19 @@
 
 ---
 
-## 2. Mental Models (4-stage progression)
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.mech.circular-motion.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+Uniform circular motion involves constant speed along a circular path with centripetal acceleration directed toward the centre.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Concrete (ball on a string)**
 Swing a ball on a string in a horizontal circle. Speed stays constant (uniform); direction changes continuously. Something must be pulling the ball inward — the string tension. Let go: the ball flies off tangentially, not radially outward. The inward pull (centripetal force) is real; the apparent outward pull (centrifugal force) is a fictitious perception from inside the rotating frame.
@@ -48,7 +60,7 @@ The acceleration vector points toward the centre (opposite to position vector r�
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Centrifugal force is real (incorrect)**: Students insist there is a real outward centrifugal force. This is the most persistent error in circular motion. The feeling of being "thrown outward" is inertia — the body continues in a straight line while the car turns. In the ground (inertial) frame, the only real force is inward.
 2. **Centripetal force as a separate extra force**: Students draw a free-body diagram and add a centripetal force arrow as a separate force alongside tension/gravity. Centripetal force is the NET inward force, not an additional force. If tension provides the centripetal force, there is no additional "F_c" — tension IS F_c.
@@ -57,7 +69,7 @@ The acceleration vector points toward the centre (opposite to position vector r�
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 **M1 — "There is a real centrifugal force pushing outward"**
 - Probe: "You're in a car taking a sharp left turn. What force pushes you to the right against the door?"
@@ -81,31 +93,7 @@ The acceleration vector points toward the centre (opposite to position vector r�
 
 ---
 
-## 5. Explanation Library
-
-**E1 — Why acceleration with constant speed?**
-Acceleration = rate of change of velocity (a vector). Velocity can change in magnitude OR direction. In circular motion, speed is constant but direction changes continuously — the velocity vector rotates. The rate of change of the velocity vector (dv⃗/dt) is nonzero and points inward. This is centripetal acceleration: a_c = v²/r. No contradiction with constant speed — speed is |v⃗|, not v⃗.
-
-**E2 — Derivation of a_c = v²/r (geometric)**
-In time dt, the particle moves through angle dθ = ω dt. The velocity vector also rotates by dθ. Change in velocity: |dv⃗| = v dθ (arc length on the velocity circle of radius v).
-a = |dv⃗|/dt = v dθ/dt = v × ω = v × (v/r) = v²/r. ✓
-Direction: dv⃗ points perpendicular to v⃗ and toward the centre.
-
-**E3 — Vertical circle energy + force analysis**
-Ball on string in vertical circle, radius r. At top: T + mg = mv²_top/r. At bottom: T − mg = mv²_bot/r. Energy: (1/2)mv²_top + mg(2r) = (1/2)mv²_bot (taking bottom as reference).
-If string goes slack at top (T = 0): v²_top_min = gr → v²_bot = gr + 4gr = 5gr.
-Minimum speed at bottom to maintain contact at top: v_bot = √(5gr). Classic exam problem.
-
-**E4 — Banked curve (no friction)**
-Forces: N (normal, perpendicular to road surface), mg (weight, down).
-N cosθ = mg (vertical equilibrium)
-N sinθ = mv²/r (centripetal)
-Divide: tanθ = v²/(rg) → θ = arctan(v²/rg).
-For a specific design speed v, this is the ideal banking angle — cars can go around the curve at this speed with zero friction required.
-
----
-
-## 6. Analogy Library
+## Analogies
 
 **Primary analogy — Twirling on an office chair**
 Sit in a spinning chair and hold a heavy book with both hands stretched outward. Arms (muscles) must exert an inward force to keep the book on the circular path. The book "feels" heavy — that pull outward is the book's inertia. Let go: the book flies tangentially (not radially outward). The inward arm force is centripetal; the outward tendency is inertia, not a centrifugal force.
@@ -116,7 +104,7 @@ Sit in a spinning chair and hold a heavy book with both hands stretched outward.
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 **D1 — Ball on string released**
 Swing a rubber ball on a string in a horizontal circle. Release the string at a specific point. The ball flies off tangentially — not radially outward. Mark the expected radial direction on the floor; observe that the ball misses it completely, flying tangent to the circle. Demonstrates that inertia produces tangential motion, not outward radial motion — the centrifugal misconception is directly refuted.
@@ -129,7 +117,7 @@ Cut a curved section of ramp banked at angle θ. Roll marbles at different speed
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 *Guided inquiry is effective* (the direction of centripetal acceleration can be discovered):
 
@@ -141,7 +129,7 @@ Cut a curved section of ramp banked at angle θ. Roll marbles at different speed
 
 ---
 
-## 9. Teaching Actions (dispatch table)
+## Teaching Sequence
 
 | Situation | Action |
 |---|---|
@@ -153,7 +141,12 @@ Cut a curved section of ramp banked at angle θ. Roll marbles at different speed
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 "Uniform circular motion: constant speed, changing direction. The velocity vector rotates around the circle without changing length — but its direction changes constantly, so there IS acceleration. That acceleration is v-squared over r, always pointed toward the centre. We call it centripetal — centre-seeking.
 
@@ -165,7 +158,7 @@ And speed: the centripetal force is always perpendicular to velocity. Perpendicu
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 **Mastery gate**: Student correctly draws a FBD with no fictitious centrifugal force, applies F_net = mv²/r with the correct inward forces, computes centripetal acceleration and force for standard geometries (horizontal circle, banked curve, vertical circle), and explains why speed is constant despite nonzero net force. Four independent problems required.
 
@@ -181,7 +174,7 @@ And speed: the centripetal force is always perpendicular to velocity. Perpendicu
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **If centrifugal force misconception persists**:
 Return to D1 (ball released from string). The ball's trajectory is tangential, not radial — the physical evidence refutes the outward force story. Then analyse the rotating frame: to make Newton's law work in the car frame, you must ADD a fictitious centrifugal force, but this is a mathematical accounting trick for the accelerating frame, not a real force. Emphasise: in the inertial (ground) frame, no centrifugal force exists.
@@ -194,7 +187,7 @@ Do the vector change calculation explicitly: draw velocity at position A (east) 
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Declarative (a_c = v²/r; centripetal direction = inward; centripetal force = net inward real force) + procedural (FBD for circular motion, applying F_net = mv²/r)
 **Forgetting risk**: High — the centrifugal misconception returns easily; the centripetal-force-as-extra-force error recurs; sign errors at the top/bottom of a vertical circle are persistent.
@@ -203,7 +196,7 @@ Do the vector change calculation explicitly: draw velocity at position A (east) 
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 **Near transfer**: Angular kinematics (direct unlock — ω, α, θ with the rotational analogues of linear kinematics); orbital mechanics (gravity as centripetal force → Kepler's laws, satellite speed).
 **Medium transfer**: Centrifuges (very high ω → large centripetal acceleration used to separate particles of different densities). Roller coasters (vertical circle forces at hills and loops). Banked road and railway curve design.
@@ -212,7 +205,25 @@ Do the vector change calculation explicitly: draw velocity at position A (east) 
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: kinematics uses calculus (differentiation for velocity/acceleration, integration for displacement); vectors use linear algebra; energy methods use algebra and trigonometry. Chemistry: thermochemistry uses energy and work; reaction kinetics connects to activation energy. Biology: biomechanics (muscle force, gait), fluid mechanics in circulation (blood pressure, flow), and structural biology (bone stress) apply mechanics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.mech.circular-motion.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 - KG prerequisites `phys.mech.kinematics-2d` (vector velocity) and `phys.mech.newtons-second-law` (F_net = ma) are both necessary — circular motion requires 2D velocity reasoning and Newton's second law.
 - Unlocks `phys.mech.angular-kinematics` and `phys.mech.orbital-mechanics` are well-motivated: angular kinematics extends v = rω to rotational quantities; orbital mechanics applies the centripetal-force framework to gravity.
@@ -222,3 +233,7 @@ Do the vector change calculation explicitly: draw velocity at position A (east) 
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

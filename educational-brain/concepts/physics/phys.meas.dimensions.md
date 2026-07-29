@@ -28,7 +28,28 @@
      dimensionless constants, cannot distinguish additive from multiplicative
      forms).
 
-## Mental models
+
+## Learning Objective
+
+After this concept, the learner can:
+
+s** — the learner can:
+  1. Write the dimensional formula of a given physical quantity using the symbols
+     M (mass), L (length), T (time), A (current), Θ (temperature), N (amount),
+     J (luminous intensity).
+  2. Verify whether a given physical equation is dimensionally consistent
+     (both sides have the same dimensional formula).
+  3. Derive the unit of a physical quantity from its dimensional formula.
+  4. Identify the limitations of dimensional analysis (cannot determine
+     dimensionless constants, cannot distinguish additive from multiplicative
+     forms).
+
+
+## Core Understanding
+
+_Dimensional analysis checks the consistency of equations by examining the dimensions of each term._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 - **Beginner (arriving)**: dimensional analysis is a formula or recipe — "write
   M, L, T, A, Θ for each quantity and substitute." It is a procedure to execute,
@@ -55,7 +76,7 @@
   derive equations you haven't seen yet — that's dimensional analysis at the
   advanced level." Do not attempt to teach the π theorem.
 
-## Why beginners fail here
+## Why Students Fail
 
 The dominant failure is executing the procedure without understanding the principle:
 learners write M, L, T mechanically (often from a memorised table) but cannot
@@ -66,7 +87,7 @@ confirm the numerical coefficient. The most pernicious failure: using a
 dimensionally correct "check" as proof that the formula is right, then defending
 the wrong formula on that basis.
 
-## Misconception library
+## Misconceptions
 
 **M1 — Dimensional consistency proves a formula is correct**
 - *Why*: the check is taught before its limitations are stated; learners see it
@@ -130,31 +151,7 @@ dimensionally wrong**
 - *Verification*: items that require recognising dimensionless ratios; equations
   involving trigonometric functions (no units issue).
 
-## Explanation library
-
-- **Age 12–14 (metaphor)**: "Every physical quantity has a type — a 'kind' of
-  thing it is. Length is a different KIND from time, which is a different KIND
-  from mass. Dimensional analysis is asking: are both sides of an equation the
-  same KIND of thing? You wouldn't say '5 apples = 5 oranges' — different kinds.
-  An equation that adds length to time is doing exactly that. This analysis doesn't
-  check the numbers — only the KINDS. If the kinds match, the equation at least
-  passes the type-check. If they don't match, the equation is guaranteed wrong."
-- **Age 15+ (structural)**: "Physical quantities are labelled by their dimensional
-  formula — a combination of M, L, T, A, Θ, N, J — representing which base
-  quantities compose them and at what powers. When you manipulate an equation,
-  these labels follow the same algebraic rules as variables: multiply → add
-  exponents; divide → subtract exponents; add only if dimensions are identical.
-  A valid physical equation must be dimensionally homogeneous: both sides must
-  have the same label. This is a necessary (but not sufficient) condition for
-  correctness."
-- **Practitioner explanation (for formula derivation)**: "If you forget a formula,
-  you can often reconstruct its structure using dimensions. For the period of a
-  pendulum, you know it depends on length L and gravitational acceleration g = LT⁻².
-  Combine them to get dimensions of time T: L/g = L/(LT⁻²) = T² → √(L/g) has
-  dimensions T. The actual formula is T = 2π√(L/g) — dimensional analysis gave
-  you the structure; the 2π came from the full derivation."
-
-## Analogy library
+## Analogies
 
 - **Best analogy**: type-checking in a programming language. In typed languages,
   you cannot add an integer to a string — it fails at compile time, not run time.
@@ -175,7 +172,7 @@ dimensionally wrong**
   dimensional analysis is just checking your units match." This installs M3.
   Always keep the dimension/unit distinction explicit.
 
-## Demonstration library
+## Demonstrations
 
 - **Home, no equipment**: write v = √(2as) on paper. Check dimensions: v is [LT⁻¹],
   a is [LT⁻²], s is [L]. So 2as is [L²T⁻²]. √([L²T⁻²]) = [LT⁻¹]. Both sides
@@ -195,7 +192,7 @@ dimensionally wrong**
   you write it as v = at + ½at (missing a factor) — show what a failed check
   looks like concretely.
 
-## Discovery lesson
+## Discovery Questions
 
 **Guided discovery is the right form here** — the idea that physical equations
 must have the same "type" on both sides can be reached by the learner from a
@@ -218,7 +215,7 @@ clear set of contrasting examples.
 6. *Compression*: "Dimensions check TYPE. They catch type-errors. They can't
    catch coefficient errors."
 
-## Teaching actions
+## Teaching Sequence
 
 From the dispatch library (Delivery 2 §6):
 1. **Guided discovery** (highest fit): see Discovery lesson — the type-checking
@@ -236,7 +233,12 @@ Actions that DON'T fit:
   Some formulae do need memorisation (M, L, T for mass/length/time); others should
   be derived each time.
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 *How it sounds when taught well*: the word "type" is used before "dimension" is
 introduced; the tutor says "same type on both sides?" out loud when checking every
@@ -251,7 +253,7 @@ learner says "I checked by dimensions so it's correct" → M1 active; learner wr
 "[2L]" when adding two lengths → M2 active; learner says "cos(θ) has no unit so
 it breaks the equation" → M4 active.
 
-## Assessment
+## Assessment Signals
 
 **Diagnostic — golden probe**: "What are the dimensions of kinetic energy (½mv²)?
 Show your working." This requires: knowing m is [M] and v is [LT⁻¹]; computing
@@ -300,7 +302,7 @@ correctly and feel done. Probe with the limitation question (M1 risk) and with
 a derivation from dimensions task (novel surface). Both should be in the mastery
 gate before logging this concept as complete.
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 *Likeliest utterance*: "I don't know the formula for ___'s dimension" — this is
 a working-memory gap, not a conceptual failure. The recovery is: "what IS ___?
@@ -316,7 +318,7 @@ immediately present a counterexample: "Here's a formula that's dimensionally
 correct but physically wrong. Which experiment would distinguish it from the
 right one?" Shift focus to what dimensions CANNOT tell you.
 
-## Memory & review
+## Memory Hooks
 
 - **Concept type**: concept + procedure. The principle (type-checking) is a
   concept; writing dimensional formulae is a procedure. Both need different review
@@ -332,7 +334,7 @@ right one?" Shift focus to what dimensions CANNOT tell you.
   `phys.mech.force` (first test case: [MLT⁻²]); `phys.therm.ideal-gas-law`
   (dimensional check of PV = nRT is a good reinforcement later).
 
-## Transfer map
+## Transfer Connections
 
 - *Near*: verifying equations in all domains — every physics formula can be checked.
 - *Near*: deriving units of new quantities from their dimensional formula.
@@ -347,7 +349,25 @@ right one?" Shift focus to what dimensions CANNOT tell you.
   dimensional analysis — understanding them requires first deeply understanding
   what dimensions ARE.
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: significant figures tie directly to scientific notation and logarithms; dimensional analysis is a special case of algebraic unit-tracking; vector components use trigonometry. Chemistry: all lab measurements use SI units; concentration, moles, and temperature all live in this domain. Biology: biological measurements (cell size in micrometres, metabolic rates) use the same SI framework; dimensional analysis applies to enzyme kinetics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.meas.dimensions.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG shows `unlocks: []` for this concept — this underrepresents its role as
 a cross-cutting tool. A curriculum feedback note to the Pipeline: `phys.meas.dimensions`
@@ -360,3 +380,7 @@ the skill requires genuine understanding, not just memory.
 ---
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
 *Authored against KG node data confirmed at docs/physics/kg/graph.json.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

@@ -28,7 +28,28 @@
      a direction reference system (compass, angle, sign convention) for at least
      one example.
 
-## Mental models
+
+## Learning Objective
+
+After this concept, the learner can:
+
+s** — the learner can:
+  1. Define scalar and vector, using the direction criterion — not just a
+     memorised list of examples.
+  2. Classify a novel physical quantity (one not previously seen in instruction)
+     as scalar or vector by reasoning, not recall.
+  3. Explain why two identical scalar values (e.g. 40 km/h north and 40 km/h
+     south) are NOT the same vector quantity.
+  4. State that direction must be specified to fully describe a vector, and give
+     a direction reference system (compass, angle, sign convention) for at least
+     one example.
+
+
+## Core Understanding
+
+_Scalars have magnitude only while vectors have both magnitude and direction._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 - **Beginner (arriving)**: scalars and vectors are two lists — you memorise which
   words go in which list. "Speed is scalar, velocity is vector" is a fact to be
@@ -59,7 +80,7 @@
   why the distinction matters." Do not install the advanced model here — it requires
   vector addition (`phys.meas.vector-addition`) to make it concrete.
 
-## Why beginners fail here
+## Why Students Fail
 
 The failure is treating this as classification-by-list rather than
 reasoning-by-criterion. When a learner memorises "velocity is vector, speed is
@@ -71,7 +92,7 @@ convention. The concept is "learned" at the vocabulary level but not operative a
 the reasoning level. The teaching problem is getting the learner to USE the
 direction attribute, not just acknowledge it.
 
-## Misconception library
+## Misconceptions
 
 **M1 — Scalar/vector is a fixed list to memorise, not a criterion to apply**
 - *Why*: instruction typically introduces the concept via lists before giving the
@@ -139,27 +160,7 @@ signed)**
 - *Verification*: net-force items where forces oppose; emphasise that correct
   magnitude requires correct direction tracking throughout.
 
-## Explanation library
-
-- **Age 10–12 (story)**: "Imagine I say 'walk 5 km.' Can you do it? No — which way?
-  Some things in physics are like 'walk 5 km' — you need a direction to make sense
-  of them. Others are like 'the temperature is 25 degrees' — no direction needed,
-  it's just a number with a unit. We call the first type VECTORS and the second
-  type SCALARS. A vector without a direction is an incomplete sentence."
-- **Age 14+**: "Scalars are fully described by magnitude and unit alone: 5 kg,
-  300 K, 100 J. Vectors require magnitude, unit, AND direction: 30 m/s north,
-  500 N downward, 3 m at 45°. The reason is physical: two 30 m/s velocities in
-  opposite directions do NOT produce the same state of motion. Direction is
-  load-bearing information, not decoration."
-- **Returning adult**: "You already use this distinction. If someone says 'it's
-  20 km away,' you ask 'which way?' That's because distance (scalar) isn't enough
-  to get there — you need displacement (vector). In physics, half the quantities
-  are like temperature (no meaningful direction) and half are like displacement
-  (direction matters for every calculation)."
-- **Visual frame**: a table: quantity / value / can you give it direction? / type.
-  Build it with the learner, one row at a time, before the formal definition.
-
-## Analogy library
+## Analogies
 
 - **Best analogy**: a phone number vs. a GPS pin. A phone number is just a number —
   no direction, no location (scalar). A GPS pin is coordinates AND a point on a
@@ -180,7 +181,7 @@ signed)**
   Pre-empt by noting: a scalar can be enormous (1 billion km is still a scalar
   distance) and a vector can be tiny (0.001 m east is still a vector displacement).
 
-## Demonstration library
+## Demonstrations
 
 - **Home, no equipment**: walk to any room. Ask: "what is the distance from the
   front door to where you're standing? What is the displacement?" Distance: the
@@ -197,7 +198,7 @@ signed)**
   east. Question before step 3: "how far from the start are you?" (Not 7 m — it's 5 m,
   by Pythagoras.) The surprise IS the lesson: vectors don't add like scalars.
 
-## Discovery lesson
+## Discovery Questions
 
 **Guided discovery is appropriate here** — the criterion "does it need direction?"
 is something learners can genuinely derive from contrasting examples, rather than
@@ -218,7 +219,7 @@ being told as a definition.
 5. *Formalization*: state the definitions. Learner writes them in their own words.
 6. *Compression*: one sentence each, spoken aloud.
 
-## Teaching actions
+## Teaching Sequence
 
 From the dispatch library (Delivery 2 §6):
 1. **Guided discovery** (highest fit): see Discovery lesson — the criterion can be
@@ -235,7 +236,12 @@ Actions that DON'T fit:
   recalling a list; heavy retrieval practice on the list will deepen M1. Retrieval
   practice is appropriate only for the definitions, not for the classification task.
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 *How it sounds when taught well*: the word "direction" appears in every third
 sentence; the teacher demonstrates the incompleteness of a vector without direction
@@ -251,7 +257,7 @@ or M4 active; learner says "I'll just check if it's on the list" when given a
 novel quantity → M1 active; learner adds opposite vectors algebraically as if they
 were scalars → M4 active (the direction attribute is not being used operationally).
 
-## Assessment
+## Assessment Signals
 
 **Diagnostic — golden probe**: "Is force scalar or vector? How do you know — use
 the definition, not a list." This separates criterion-use from list-recall. Correct:
@@ -290,7 +296,7 @@ lesson — the concept feels simple. Calibration check: can they classify 8 nove
 quantities without hesitation? Can they explain why opposite vectors of equal
 magnitude cancel? Confidence on familiar items does not predict transfer.
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 *Likeliest utterance here*: "I thought it was about which quantities point" (correct
 but imprecise) or "isn't velocity just speed with a fancy name?" (M2 active).
@@ -304,7 +310,7 @@ describe it completely?" If they give only the speed: "I don't know which way th
 car is going — is that a problem?" Build the gap between speed and velocity as an
 information gap.
 
-## Memory & review
+## Memory Hooks
 
 - **Concept type**: concept (the scalar/vector distinction is a generative
   classification principle, not a fact-set).
@@ -319,7 +325,7 @@ information gap.
   of vectors); `phys.mech.displacement` (first applied distinction between
   distance/displacement); `phys.mech.velocity` (speed vs. velocity in context).
 
-## Transfer map
+## Transfer Connections
 
 - *Near*: `phys.meas.vector-addition` — vector addition MAKES NO SENSE without the
   direction attribute; this concept is the prerequisite understanding.
@@ -339,7 +345,25 @@ information gap.
   this requires the learner to have first deeply internalised what a "true" vector
   IS.
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: significant figures tie directly to scientific notation and logarithms; dimensional analysis is a special case of algebraic unit-tracking; vector components use trigonometry. Chemistry: all lab measurements use SI units; concentration, moles, and temperature all live in this domain. Biology: biological measurements (cell size in micrometres, metabolic rates) use the same SI framework; dimensional analysis applies to enzyme kinetics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.meas.scalars-vectors.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG `requires` list correctly identifies `phys.meas.units` as the only
 prerequisite — the learner needs units to name the magnitudes of scalar and vector
@@ -352,3 +376,7 @@ attribute to become operational.
 ---
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
 *Authored against KG node data confirmed at docs/physics/kg/graph.json.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

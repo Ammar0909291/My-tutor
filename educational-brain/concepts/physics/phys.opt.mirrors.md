@@ -1,6 +1,6 @@
 # phys.opt.mirrors — Spherical Mirrors and Mirror Formula
 
-## 1. Identity
+## Identity
 
 | Field | Value |
 |---|---|
@@ -16,7 +16,19 @@
 
 ---
 
-## 2. Mental Models
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.opt.mirrors.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+The mirror formula 1/f = 1/v + 1/u relates focal length, image distance, and object distance for spherical mirrors.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 ### Stage 1 — Intuitive (no formalism)
 
@@ -60,7 +72,7 @@ The mirror formula holds exactly only for **paraxial rays** — rays close to an
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Sign errors** — the New Cartesian sign convention assigns negative values to "obvious positive" quantities (e.g., object in front of mirror has u < 0). Learners substitute positive values and get wrong signs for image distances, misidentifying real vs. virtual.
 2. **Confusing concave and convex** — "concave" = caves inward (like a cave) = converging; "convex" = bulges outward = diverging. Learners reverse this, or cannot determine which type a mirror is from a diagram without a label.
@@ -69,7 +81,7 @@ The mirror formula holds exactly only for **paraxial rays** — rays close to an
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 ### M1 — "Concave mirrors always magnify"
 
@@ -101,38 +113,7 @@ The mirror formula holds exactly only for **paraxial rays** — rays close to an
 
 ---
 
-## 5. Explanation Library
-
-### Explanation A — Deriving the mirror formula from similar triangles
-
-Consider an object of height h at distance |u| in front of a concave mirror. The image at distance |v| has height h'. Two triangles are similar (formed by the principal axis and the top of the object/image with the pole):
-
-h'/h = −v/u (magnification by similar triangles)
-
-A second pair of similar triangles (formed by rays through the focal point) gives:
-
-h'/h = (v − f)/f or equivalent
-
-Equating and rearranging gives: 1/f = 1/v + 1/u.
-
-This shows the mirror formula is a geometric result, not an empirical law.
-
-### Explanation B — The five cases for concave mirror, summarised
-
-Draw a number line for object distance u (all negative in front of mirror). Mark the positions of F (at −f) and C (at −2f). Object position determines image character:
-- Object beyond C: real, inverted, diminished (camera-like)
-- Object at C: real, inverted, same size (range-finder use)
-- Object between F and C: real, inverted, magnified (projector-like)
-- Object at F: no image (rays reflected parallel → meet at ∞)
-- Object between F and P (pole): virtual, upright, magnified (bathroom mirror, dentist's mirror)
-
-### Explanation C — Convex mirror field of view advantage
-
-A convex mirror's image of an extended scene is compressed — a wide angular field is imaged in a small area. The mirror formula gives v = uf/(u − f); for convex, f > 0 in our convention when taking its magnitude, so v < f always and the image is always diminished. The trade-off: you see more of the scene (wide angle) but everything appears further away than it is. This is why car passenger-side mirrors warn "objects in mirror are closer than they appear."
-
----
-
-## 6. Analogy Library
+## Analogies
 
 ### Primary analogy — The reflective bowl and balloon
 
@@ -146,7 +127,7 @@ A plane mirror always produces a virtual, upright, same-size image at the same d
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 ### Demo A — Concave mirror: five cases with a candle
 
@@ -169,7 +150,7 @@ A plane mirror always produces a virtual, upright, same-size image at the same d
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 ### Stance: Argue the inductive case — *observe the five cases, then derive the formula*
 
@@ -188,7 +169,7 @@ A plane mirror always produces a virtual, upright, same-size image at the same d
 
 ---
 
-## 9. Teaching Actions
+## Teaching Sequence
 
 | Prior state | Action |
 |---|---|
@@ -200,7 +181,12 @@ A plane mirror always produces a virtual, upright, same-size image at the same d
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 ### Opening
 "A bathroom magnifying mirror is concave — it bends the reflected light inward and lets you see a magnified image of your face. But that only works when you are closer to the mirror than its focal length. Move farther away and the magic breaks — the mirror still works, but now the image is real and inverted, like a projector's image on a screen. One mirror, two completely different behaviours, depending only on where you stand."
@@ -216,7 +202,7 @@ A plane mirror always produces a virtual, upright, same-size image at the same d
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 ### Mastery gate
 
@@ -245,7 +231,7 @@ Expected: u = 4 < f = 6 → object inside focal length → virtual, upright, mag
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **Recovery for persistent sign errors**:
 1. Before every calculation, write out: "Incident light travels [left/right]. Pole at origin. Distances in the direction of incident light are positive; against are negative."
@@ -261,7 +247,7 @@ Expected: u = 4 < f = 6 → object inside focal length → virtual, upright, mag
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Procedural (formula + sign convention + ray rules) + case-by-case tabular knowledge
 
@@ -282,7 +268,7 @@ Expected: u = 4 < f = 6 → object inside focal length → virtual, upright, mag
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 | Target concept | Bridge |
 |---|---|
@@ -294,7 +280,25 @@ Expected: u = 4 < f = 6 → object inside focal length → virtual, upright, mag
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: ray diagrams use similar triangles; Snell's law uses trigonometry; wave optics uses Fourier analysis. Chemistry: spectrophotometry and colorimetry measure concentrations optically; X-ray diffraction uses diffraction physics. Biology: the eye is a biological optical instrument; microscopy, endoscopy, and photoreception are optics applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.opt.mirrors.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 **KG note**: `phys.opt.reflection` is the correct prerequisite — the law θᵢ = θᵣ (measured from the normal) must be fluent, plus the concept of a normal to a surface, before ray diagrams for curved mirrors are tractable. `phys.opt.optical-instruments` is the correct immediate unlock — telescope and camera designs require the five-cases analysis as prerequisite knowledge.
 
@@ -303,3 +307,7 @@ Expected: u = 4 < f = 6 → object inside focal length → virtual, upright, mag
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

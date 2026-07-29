@@ -29,7 +29,28 @@
   4. Explain why an object moving at constant speed can still be accelerating
      (if direction is changing — e.g. circular motion).
 
-## Mental models
+
+## Learning Objective
+
+After this concept, the learner can:
+
+s** — the learner can:
+  1. Define acceleration as the rate of change of velocity (Δv/Δt), and correctly
+     compute it including sign.
+  2. Distinguish between speeding up, slowing down (deceleration), and direction
+     change as three distinct manifestations of non-zero acceleration.
+  3. Identify the sign of acceleration from a described scenario (positive means
+     accelerating in the positive direction; negative means decelerating or
+     accelerating in the negative direction).
+  4. Explain why an object moving at constant speed can still be accelerating
+     (if direction is changing — e.g. circular motion).
+
+
+## Core Understanding
+
+_Acceleration is the rate of change of velocity with respect to time._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 - **Beginner (arriving)**: acceleration = speeding up. Deceleration is the
   opposite of acceleration (a different phenomenon). An object moving at constant
@@ -57,7 +78,7 @@
   when we study circular motion — a car turning at constant speed is accelerating
   toward the centre of the curve."
 
-## Why beginners fail here
+## Why Students Fail
 
 The deepest failure is the "acceleration = speeding up" model, which is both
 extremely robust (built from years of everyday usage) and strategically
@@ -73,7 +94,7 @@ incorrect. This misconception causes the learner to:
 The resolution requires explicitly installing the "velocity-change" definition
 before the "speeding-up" shortcut is allowed.
 
-## Misconception library
+## Misconceptions
 
 **M1 — Acceleration means speeding up (not slowing down, not direction change)**
 - *Why*: "accelerate" in everyday English means to go faster (cars, economies);
@@ -151,30 +172,7 @@ before the "speeding-up" shortcut is allowed.
   uniform acceleration (constant a ≠ 0). Learner must state both velocity and
   acceleration for each.
 
-## Explanation library
-
-- **Age 12–14 (narrative)**: "Acceleration is how quickly your velocity is
-  changing — not just how quickly you're going faster. If your velocity goes from
-  10 m/s east to 20 m/s east in 5 s, the acceleration is 2 m/s east every second —
-  you're gaining 2 m/s of eastward velocity every second. If your velocity goes
-  from 20 m/s east to 10 m/s east in 5 s, the acceleration is −2 m/s every second
-  — you're losing 2 m/s of eastward velocity every second. 'Deceleration' is just
-  this: negative acceleration in the direction of travel."
-- **Age 15+**: "Acceleration = Δv/Δt — the rate of change of velocity. This has
-  a direction (it's a vector). In 1D, positive means velocity is increasing in the
-  positive direction; negative means velocity is decreasing or increasing in the
-  negative direction. A car braking at 5 m/s² has a = −5 m/s² (negative because
-  opposing the positive direction of travel). The sign of a relative to the sign
-  of v tells you whether the car is speeding up (same sign) or slowing down
-  (opposite signs)."
-- **Adult returning learner**: "You knew acceleration as 'how fast you're speeding
-  up.' Physics defines it as 'how fast your velocity is changing' — which includes
-  direction changes, not just speed changes. The sign matters. A car at v = −15 m/s
-  with a = −3 m/s² is going faster (both negative → magnitudes growing); a car at
-  v = +15 m/s with a = −3 m/s² is slowing down (opposite signs → magnitude shrinking).
-  You need the full sign picture for every kinematics and dynamics problem."
-
-## Analogy library
+## Analogies
 
 - **Best analogy**: the elevator. Going up (positive v): the elevator starting
   to move has upward acceleration (positive a, same sign as v → speeding up).
@@ -194,7 +192,7 @@ before the "speeding-up" shortcut is allowed.
   treats them as two separate phenomena and prevents the sign convention from taking
   root. Always: "deceleration = negative acceleration in the direction of motion."
 
-## Demonstration library
+## Demonstrations
 
 - **Home, no equipment**: hold a ball and let it fall (positive acceleration
   downward = 9.8 m/s²). Throw it gently upward (negative acceleration relative
@@ -214,7 +212,7 @@ before the "speeding-up" shortcut is allowed.
   on the board and ask the learner to PREDICT the shape of the v-t graph. The
   prediction is the diagnostic.
 
-## Discovery lesson
+## Discovery Questions
 
 **Guided discovery** is appropriate for the core concept (velocity can change in
 both magnitude and direction; the rate of that change is acceleration). The sign
@@ -236,7 +234,7 @@ convention requires direct instruction after the concept is built.
 6. *Compression*: "acceleration = Δv/Δt, always; same-sign = speeding up;
    opposite-sign = slowing down."
 
-## Teaching actions
+## Teaching Sequence
 
 From the dispatch library (Delivery 2 §6):
 1. **Guided discovery** (high fit): see above.
@@ -248,7 +246,12 @@ From the dispatch library (Delivery 2 §6):
    explicitly confronted; the "constant speed = no acceleration" misconception (M2)
    must be confronted with the turning example.
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 *How it sounds when taught well*: the tutor always says "acceleration is the rate
 of change of VELOCITY" (never "rate of change of speed"); every answer is given
@@ -264,7 +267,7 @@ so no acceleration" → M2 (especially in circular motion previews); "negative
 acceleration means slowing down" in a context with negative velocity → M3;
 "uniform acceleration means constant velocity" → M4.
 
-## Assessment
+## Assessment Signals
 
 **Diagnostic — golden probe**: "A car moves at +15 m/s. It brakes to rest in 3 s.
 (a) What is the acceleration? (b) Is it speeding up or slowing down?" Correct:
@@ -304,7 +307,7 @@ signs). This tests sign calculation (M1) and the speeding-up/slowing-down rule.
 under time pressure. The delayed test for "ball at the peak — is acceleration zero?"
 is the most sensitive detection probe for M1 persistence. Include it.
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 *Likeliest utterance*: "at the top of the throw, the velocity is zero so the
 acceleration is zero" (M1 in disguise — velocity-as-indicator-of-acceleration
@@ -320,7 +323,7 @@ y-axis, + acceleration / − acceleration on the x-axis). "Speeding up is top-ri
 OR bottom-left — same sign. Slowing down is top-left OR bottom-right — opposite
 signs." Have the learner classify their problem on this diagram.
 
-## Memory & review
+## Memory Hooks
 
 - **Concept type**: concept (rate-of-change-of-velocity) + procedure (computing
   and classifying acceleration by sign).
@@ -334,7 +337,7 @@ signs." Have the learner classify their problem on this diagram.
   `phys.mech.kinematics-1d` (acceleration as the key variable in kinematic
   equations); `phys.mech.circular-motion` (direction-change acceleration reappears).
 
-## Transfer map
+## Transfer Connections
 
 - *Near*: `phys.mech.kinematics-1d` — all kinematic equations involve acceleration.
 - *Near*: `phys.mech.newtons-second-law` — F = ma; acceleration links kinematics
@@ -350,7 +353,25 @@ signs." Have the learner classify their problem on this diagram.
   the equivalence principle); non-inertial frame forces (fictitious forces appear
   when the frame itself accelerates).
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: kinematics uses calculus (differentiation for velocity/acceleration, integration for displacement); vectors require linear algebra; energy methods use algebra and trigonometry. Chemistry: thermochemistry uses energy concepts (enthalpy, bond energies); reaction kinetics ties to activation energy. Biology: biomechanics (muscle force, gait), fluid mechanics in circulation (blood pressure, flow rate), and structural biology (bone stress) all apply mechanical principles.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.mech.acceleration.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG `requires` correctly lists `phys.mech.velocity`. The `difficulty: developing`
 and `mastery_threshold: 0.75` are appropriate — the sign convention and the
@@ -363,3 +384,7 @@ made explicit by adding it to the `requires` chain for the mechanics domain.
 ---
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
 *Authored against KG node data confirmed at docs/physics/kg/graph.json.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

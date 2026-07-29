@@ -1,6 +1,6 @@
 # phys.em.electric-potential — Electric Potential
 
-## 1. Identity
+## Identity
 - **Canonical KG ID**: `phys.em.electric-potential`
 - **Canonical name**: Electric Potential
 - **Curriculum domain**: Electromagnetism
@@ -13,7 +13,19 @@
 
 ---
 
-## 2. Mental Models (4-stage progression)
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.em.electric-potential.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+Electric potential is the work done per unit charge to bring a positive test charge from infinity to a given point.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Concrete (gravitational height analogy)**
 Imagine altitude as gravitational potential energy per kilogram. A ball at high altitude has high PE; it rolls naturally to lower altitude. Electric potential works the same way: high potential is "high altitude" for positive charges; they flow naturally from high to low potential. A positive charge at high V is like a ball on a hill — it naturally moves to lower V, doing work in the process.
@@ -50,7 +62,7 @@ This scalar property is the main computational advantage of potential over field
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **V is a vector** (incorrect): Students treat V like E⃗ and try to add components. V is a scalar; signs matter but direction does not.
 2. **V = 0 means no field**: Zero potential at a point does NOT mean zero electric field there. The field is the gradient of potential; V can be zero while dV/dx ≠ 0.
@@ -59,7 +71,7 @@ This scalar property is the main computational advantage of potential over field
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 **M1 — "Electric potential is a vector"**
 - Probe: "Two charges +3 μC and −3 μC are placed 10 cm apart. What is the potential at the midpoint?"
@@ -83,32 +95,7 @@ This scalar property is the main computational advantage of potential over field
 
 ---
 
-## 5. Explanation Library
-
-**E1 — Definition from work**
-V(P) = W_∞→P / q₀, where W is work done by an external agent against the electric force. Equivalently, V = U/q₀ (potential energy per unit charge). The reference V = 0 at r = ∞ is a convention — only differences ΔV = V_B − V_A are physically meaningful.
-
-**E2 — Point charge potential derivation**
-Work to bring q₀ from ∞ to r against field of charge Q:
-W = −∫_∞^r F·dr = −∫_∞^r kQq₀/r² dr = kQq₀/r
-V = W/q₀ = kQ/r ✓
-
-**E3 — Work-energy theorem link**
-The work done by the electric field on charge q moving from A to B:
-W_field = q(V_A − V_B) = −ΔU (where U = qV)
-By work-energy theorem: ΔKE = W_field → q(V_A − V_B) = ½mv_B² − ½mv_A²
-This is the key equation for charged-particle acceleration problems (e.g. electron guns, CRTs).
-
-**E4 — E from V (1D)**
-If V(x) is known: E_x = −dV/dx
-Geometrically: E-field lines point in the direction of steepest decrease in V (downhill on the potential landscape). Regions of tightly packed equipotentials = large |E|; widely spaced equipotentials = small |E|.
-
-**E5 — Superposition advantage**
-For a dipole (+Q at x = +d/2, −Q at x = −d/2), V at point P: V = kQ/r₊ + k(−Q)/r₋ = kQ(1/r₊ − 1/r₋). This scalar calculation is far simpler than finding E⃗_x and E⃗_y components separately and adding vectors. For N charges: V_total = Σᵢ kQᵢ/rᵢ — one scalar sum replaces N vector sums.
-
----
-
-## 6. Analogy Library
+## Analogies
 
 **Primary analogy — Gravitational potential (height map)**
 Gravitational potential = gh (energy per kg due to height). Electric potential = V (energy per coulomb due to electric field). High altitude → high gravitational PE; high V → high electrical PE for positive charges. Positive charges flow from high V to low V (downhill); negative charges flow from low V to high V (uphill for them, because they're anti-correlated with the field). A contour map of V on paper is exactly like a topographic map — equipotential lines correspond to contour lines.
@@ -119,7 +106,7 @@ Gravitational potential = gh (energy per kg due to height). Electric potential =
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 **D1 — Electrostatic field mapper (parallel plates)**
 Set up two parallel conducting plates connected to a battery (known voltage). Use a high-impedance voltmeter to map potential at grid points between the plates. Plot equipotential lines. Observe: uniform spacing → uniform field. Compare measured E = ΔV/Δx with expected E = V/d. Show that equipotentials are perpendicular to field lines drawn on the same diagram.
@@ -132,7 +119,7 @@ In a CRT or vintage oscilloscope (or simulation), electrons are accelerated thro
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 *Direct instruction is appropriate here* for the definition (V = W/q₀ is a defined quantity, not discoverable from first principles). However, the relationship E = −dV/dx can be discovered:
 
@@ -147,7 +134,7 @@ The point charge case V = kQ/r is then derived analytically from the field E = k
 
 ---
 
-## 9. Teaching Actions (dispatch table)
+## Teaching Sequence
 
 | Situation | Action |
 |---|---|
@@ -159,7 +146,12 @@ The point charge case V = kQ/r is then derived analytically from the field E = k
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 "Electric potential is energy per charge — how much work per coulomb it took to assemble this charge configuration from scratch. At any point in space there's a number, V, that tells you this. It's a scalar — just a number at each location, positive or negative, no direction.
 
@@ -173,7 +165,7 @@ The beautiful thing about potential: adding it up from multiple charges is just 
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 **Mastery gate**: Student correctly: (1) computes V at a field point due to multiple point charges using scalar superposition; (2) computes work done by the field using W = qΔV with correct sign; (3) finds E from V in a uniform-field or point-charge context using E = −dV/dx; (4) identifies that V = 0 does not imply E = 0. Four independent multi-step problems required.
 
@@ -190,7 +182,7 @@ Answers:
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **If the concept of "work per unit charge" is not sticking**:
 Return to the gravitational PE analogy. Ask: "Gravitational PE = mgh. What is the PE per kilogram?" (gh) "That's gravitational potential — the PE a 1 kg mass would have at that height. Now do the same for electricity: electrical PE per unit charge = V." The dimensional analogy (J/kg ↔ J/C) is the cleanest bridge.
@@ -203,7 +195,7 @@ Give the result V = kQ/r and verify it by differentiation: dV/dr = −kQ/r² →
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Declarative (V = kQ/r; V is scalar; E = −∇V) + procedural (multi-charge superposition; work calculation with W = qΔV)
 **Forgetting risk**: High — the scalar nature of V and the E = −∇V relationship are often forgotten; sign errors in work calculations are very common at the 3-week mark.
@@ -212,7 +204,7 @@ Give the result V = kQ/r and verify it by differentiation: dV/dr = −kQ/r² →
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 **Near transfer**: Capacitance (V = Q/C — potential difference between capacitor plates); Ohm's law (current driven by ΔV — the direct unlock in the KG).
 **Medium transfer**: Electron gun / particle accelerator design (kinetic energy from ΔV); electrochemical cell EMF (ΔV drives ion current across electrolyte).
@@ -221,7 +213,25 @@ Give the result V = kQ/r and verify it by differentiation: dV/dr = −kQ/r² →
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: vector calculus (divergence, curl) formalises Maxwell's equations; complex exponentials describe AC circuits. Chemistry: electrochemistry (Faraday's laws, electrolysis, galvanic cells); atomic spectroscopy uses electromagnetic waves. Biology: membrane potentials and nerve impulses are electrical circuits; MRI and ECG are direct clinical applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.em.electric-potential.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 - KG prerequisite `phys.em.gauss-law` is necessary — the concept requires comfort with the field concept and the inverse-square law (Coulomb/Gauss). Without that foundation, V = kQ/r is unmotivated.
 - The two unlocks `phys.em.capacitance` and `phys.em.ohms-law` are both appropriate: capacitance is defined via ΔV; Ohm's law requires the concept of potential difference driving current.
@@ -231,3 +241,7 @@ Give the result V = kQ/r and verify it by differentiation: dV/dr = −kQ/r² →
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

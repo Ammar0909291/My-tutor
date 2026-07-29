@@ -1,6 +1,6 @@
 # phys.em.magnetic-materials — Dia-, Para-, and Ferromagnetism
 
-## 1. Identity
+## Identity
 
 | Field | Value |
 |---|---|
@@ -16,7 +16,19 @@
 
 ---
 
-## 2. Mental Models
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.em.magnetic-materials.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+Materials are classified as diamagnetic, paramagnetic, or ferromagnetic based on their response to external magnetic fields.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 ### Stage 1 — Intuitive (no formalism)
 
@@ -50,7 +62,7 @@ The three-category scheme is a mean-field approximation. Full picture adds: anti
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Category conflation** — learners merge diamagnetic and paramagnetic under "non-magnetic" and treat ferromagnetic as the only meaningful class, missing that every material has a susceptibility.
 2. **Direction confusion** — paramagnets are attracted; diamagnets are repelled. Beginners expect all materials near a magnet to be attracted, so diamagnetic repulsion seems impossible or exotic.
@@ -59,7 +71,7 @@ The three-category scheme is a mean-field approximation. Full picture adds: anti
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 ### M1 — "All materials are either magnetic or non-magnetic"
 
@@ -91,31 +103,7 @@ The three-category scheme is a mean-field approximation. Full picture adds: anti
 
 ---
 
-## 5. Explanation Library
-
-### Explanation A — Susceptibility as a response coefficient
-
-A material's magnetic response is characterised by how much internal magnetisation **M** it develops per unit applied field **H**: **M** = χ**H**. Total **B** inside = μ₀(**H** + **M**) = μ₀(1 + χ)**H**. This single number χ classifies all three types: negative (dia), small positive (para), large positive (ferro). The classification is not binary — it is a continuous spectrum with ferromagnets at the extreme end.
-
-### Explanation B — Hysteresis loop and its engineering parameters
-
-Plot B (y-axis) vs. H (x-axis) as H cycles from +H_max to −H_max and back. The loop does not retrace itself — B lags H. Key parameters:
-- **Saturation B_s**: maximum B achievable (all domains aligned)
-- **Remnant field B_r**: B when H returns to zero (read-out state for magnetic recording)
-- **Coercive field H_c**: magnitude of reverse H needed to drive B to zero
-
-*Hard* magnetic materials (permanent magnets): large H_c, large B_r — domains hard to move.  
-*Soft* magnetic materials (transformer cores): small H_c, small B_r — domains easy to move, low hysteresis loss per cycle.
-
-### Explanation C — Temperature dependence
-
-Paramagnetism: χ_para = C/T (Curie's law). Cooling concentrates the alignment; heating randomises it. At room temperature, χ_para ~ 10⁻³ even at saturation; practical effect negligible.
-
-Ferromagnetism: below T_C, exchange interaction dominates kT — domain order stable. Above T_C, kT wins — collapses to paramagnetism. For iron: T_C = 1043 K; for nickel: 627 K; for cobalt: 1388 K.
-
----
-
-## 6. Analogy Library
+## Analogies
 
 ### Primary analogy — The classroom and the teacher
 
@@ -129,7 +117,7 @@ Students sometimes reason: "stronger magnet → stronger attraction, just like h
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 ### Demo A — Bismuth repulsion (diamagnetism visible)
 
@@ -152,7 +140,7 @@ Students sometimes reason: "stronger magnet → stronger attraction, just like h
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 ### Stance: Argue the inductive case — *observe first, classify second*
 
@@ -172,7 +160,7 @@ Students sometimes reason: "stronger magnet → stronger attraction, just like h
 
 ---
 
-## 9. Teaching Actions
+## Teaching Sequence
 
 | Prior state | Action |
 |---|---|
@@ -184,7 +172,12 @@ Students sometimes reason: "stronger magnet → stronger attraction, just like h
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 ### Opening (curiosity spike)
 "Here is a piece of bismuth. And here is a very strong magnet. I'm going to bring them together — and the bismuth is going to *move away* from the magnet. Watch."
@@ -200,7 +193,7 @@ Students sometimes reason: "stronger magnet → stronger attraction, just like h
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 ### Mastery gate
 
@@ -229,7 +222,7 @@ Expected: Ferromagnet retains B_r; paramagnet returns to zero. If the learner sa
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **Recovery sequence for persistent domain/hysteresis confusion**:
 1. Start with a single domain (one arrow). External H flips it above H_c. Below H_c it stays. That is the one-domain hysteresis loop (a rectangle). Draw it.
@@ -244,7 +237,7 @@ Expected: Ferromagnet retains B_r; paramagnet returns to zero. If the learner sa
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Categorical + relational (three-way classification with quantitative anchor)
 
@@ -264,7 +257,7 @@ Expected: Ferromagnet retains B_r; paramagnet returns to zero. If the learner sa
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 | Target concept | Bridge |
 |---|---|
@@ -278,7 +271,25 @@ Expected: Ferromagnet retains B_r; paramagnet returns to zero. If the learner sa
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: vector calculus (divergence, curl) formalises Maxwell's equations; complex exponentials describe AC circuits. Chemistry: electrochemistry (Faraday's laws, electrolysis, galvanic cells); atomic spectroscopy uses electromagnetic waves. Biology: membrane potentials and nerve impulses are electrical circuits; MRI and ECG are direct clinical applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.em.magnetic-materials.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 **KG note**: The prerequisite `phys.em.magnetic-field` is sufficient — no quantum mechanics is assumed. The concept lives comfortably at the proficient level. `phys.em.magnetic-dipole` is the correct downstream unlock: the atomic dipole *is* the microscopic element of susceptibility, and understanding its torque and precession deepens every mechanism in this entry.
 
@@ -287,3 +298,7 @@ Expected: Ferromagnet retains B_r; paramagnet returns to zero. If the learner sa
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

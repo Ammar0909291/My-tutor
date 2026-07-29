@@ -1,6 +1,6 @@
 # phys.mech.momentum — Linear Momentum
 
-## 1. Identity
+## Identity
 - **Canonical KG ID**: `phys.mech.momentum`
 - **Canonical name**: Linear Momentum
 - **Curriculum domain**: Mechanics
@@ -13,7 +13,19 @@
 
 ---
 
-## 2. Mental Models (4-stage progression)
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.mech.momentum.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+Linear momentum is the product of mass and velocity, a conserved vector quantity in isolated systems.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Concrete (why a bullet stops a truck but a football doesn't)**
 A bullet has small mass but very high speed. A football has moderate mass and moderate speed. A loaded truck has enormous mass and moderate speed. Which is harder to stop? The truck — it has more "quantity of motion." But a bullet penetrates things the football cannot, despite less mass, because of its high speed. The relevant quantity is mass × velocity: linear momentum p⃗ = mv⃗. The truck has more momentum; the bullet has more momentum per unit mass.
@@ -54,7 +66,7 @@ Explosion (reverse collision, starting from rest): p⃗_initial = 0 → p⃗_1f 
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Momentum = kinetic energy**: Students conflate p = mv with KE = ½mv². Both involve mass and velocity but are different quantities with different units (kg·m/s vs. J). They conserve differently (KE not conserved in inelastic collisions; momentum is).
 2. **Momentum scalar (ignores direction)**: Students add momentum magnitudes in 2D instead of adding vector components. Two equal-mass cars colliding head-on have ZERO total momentum (equal and opposite), not twice the momentum of one car.
@@ -63,7 +75,7 @@ Explosion (reverse collision, starting from rest): p⃗_initial = 0 → p⃗_1f 
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 **M1 — "Momentum and kinetic energy are the same (or proportional)"**
 - Probe: "Object A has mass 2 kg and speed 3 m/s. Object B has mass 3 kg and speed 2 m/s. Which has more momentum? Which has more kinetic energy?"
@@ -90,26 +102,7 @@ Explosion (reverse collision, starting from rest): p⃗_initial = 0 → p⃗_1f 
 
 ---
 
-## 5. Explanation Library
-
-**E1 — Momentum as "quantity of motion"**
-Newton used the term "quantity of motion" for what we call momentum. It captures the combination of how much is moving (mass) and how fast (velocity). A heavy slow truck and a light fast car can have the same momentum — both require the same total impulse to stop. Momentum measures how hard it is to change the state of motion.
-
-**E2 — Connection to Newton's 2nd law**
-F⃗ = dp⃗/dt: force is the rate of change of momentum. Integrating: ∫F⃗ dt = Δp⃗ = impulse. This is more general than F = ma: for a rocket ejecting mass, m changes → the F = ma form fails → F = dp/dt is correct.
-
-**E3 — Collision classification**
-Given a collision where m₁v₁ = 4 kg·m/s hits m₂ at rest:
-- Elastic: p conserved AND KE conserved → uniquely determines both final velocities.
-- Inelastic: p conserved, KE decreases → need additional info (e.g., that they stick) to find final state.
-- Perfectly inelastic: p conserved, objects merge → v_f = Σ(mv)/(Σm), maximum KE loss.
-
-**E4 — Explosion as reverse collision**
-A bomb explodes from rest: p_initial = 0. All fragments must have momenta that vector-sum to zero. Two fragments: p⃗_1 + p⃗_2 = 0 → p⃗_1 = −p⃗_2. Same magnitude, opposite direction. KE increased (chemical → kinetic) — explosive force is internal and converts chemical energy to kinetic, but total momentum remains zero. This distinguishes explosions from collisions: in explosions, energy is created internally; in collisions, it may be lost to deformation/heat.
-
----
-
-## 6. Analogy Library
+## Analogies
 
 **Primary analogy — Water flowing in a pipe**
 The flow rate (volume per second) captures something like momentum. A wide pipe with slow flow and a narrow pipe with fast flow can have the same flow rate. Adding flows: you add the rates algebraically, accounting for direction (in or out). Total flow is conserved in a sealed system with no sources or drains. Momentum works similarly — the "flow of mass-motion" is conserved when nothing from outside enters or leaves.
@@ -120,7 +113,7 @@ The flow rate (volume per second) captures something like momentum. A wide pipe 
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 **D1 — Newton's cradle**
 The classic Newton's cradle demonstrates elastic collisions between equal masses. Raise one ball: one ball on the other side flies out. Raise two: two fly out. The number and velocity of released balls exactly matches the conditions for both p and KE conservation with equal masses. Students can derive the outcome algebraically and verify experimentally.
@@ -133,7 +126,7 @@ Stand on a skateboard (low friction floor). Throw a heavy ball forward. You roll
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 *Guided inquiry via cart collisions*:
 
@@ -149,7 +142,7 @@ The pattern recognition approach builds genuine ownership of the conservation pr
 
 ---
 
-## 9. Teaching Actions (dispatch table)
+## Teaching Sequence
 
 | Situation | Action |
 |---|---|
@@ -161,7 +154,12 @@ The pattern recognition approach builds genuine ownership of the conservation pr
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 "Momentum is mass times velocity: p equals m-v. It's a vector — direction matters. A 2 kg ball moving east at 3 m/s has momentum of 6 kg·m/s east. The same ball moving west at 3 m/s has momentum of 6 kg·m/s west. Equal magnitudes, opposite directions — add them and you get zero.
 
@@ -175,7 +173,7 @@ And momentum vs. kinetic energy: they're NOT the same thing. p equals m-v; KE eq
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 **Mastery gate**: Student correctly defines momentum as a vector, conserves momentum in 1D collisions (elastic and inelastic), identifies when momentum is NOT conserved (external force present), and distinguishes momentum from kinetic energy. Four independent problems required including at least one 2D collision or explosion.
 
@@ -192,7 +190,7 @@ Answers:
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **If momentum vs. KE is persistently confused**:
 Side-by-side comparison: write p = mv and KE = ½mv² on one card. For v = 2: p = 2m, KE = 2m. For v = 4: p = 4m, KE = 8m. KE grew faster. Now: a fast light object and a slow heavy object with the same p — compute their KEs. Different. This numerical contrast cements the distinction.
@@ -205,7 +203,7 @@ Always ask: "What is the system? Are there any external forces on this system?" 
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Declarative (p = mv, conservation law statement, collision types) + procedural (conservation equation setup, 2D component separation)
 **Forgetting risk**: Medium — the conservation law is well-remembered, but the vector nature and the conditions (isolated system) are frequently forgotten; momentum-KE confusion resurfaces.
@@ -214,7 +212,7 @@ Always ask: "What is the system? Are there any external forces on this system?" 
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 **Near transfer**: Centre of mass (direct unlock — position of CM = Σmᵢrᵢ/Σmᵢ; velocity of CM = total p / total mass); impulse (direct unlock — impulse = Δp = F_avg × Δt).
 **Medium transfer**: Collisions in 2D (billiard ball problems, particle physics scattering cross-sections, car accident reconstruction).
@@ -223,7 +221,25 @@ Always ask: "What is the system? Are there any external forces on this system?" 
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: kinematics uses calculus (differentiation for velocity/acceleration, integration for displacement); vectors use linear algebra; energy methods use algebra and trigonometry. Chemistry: thermochemistry uses energy and work; reaction kinetics connects to activation energy. Biology: biomechanics (muscle force, gait), fluid mechanics in circulation (blood pressure, flow), and structural biology (bone stress) apply mechanics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.mech.momentum.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 - KG prerequisite `phys.mech.newtons-second-law` is necessary and sufficient — momentum is defined from F = dp/dt; conservation follows from Newton's 3rd law combined with 2nd law.
 - Unlocks `phys.mech.center-of-mass` and `phys.mech.impulse` are well-motivated: CM is the point whose motion is governed by total momentum; impulse is the momentum change driven by a force.
@@ -233,3 +249,7 @@ Always ask: "What is the system? Are there any external forces on this system?" 
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

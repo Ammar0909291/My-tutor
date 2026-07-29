@@ -16,7 +16,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply longitudinal waves at the **understand** level (Bloom) with difficulty tier **proficient**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.wave.longitudinal-waves.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_In longitudinal waves the particle displacement is parallel to the direction of wave propagation, forming compressions and rarefactions._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: A longitudinal wave is one where the particles of the medium move back and forth in the same direction as the wave travels. Sound is the most important example: air molecules push forward, then pull back, while the sound wave moves forward. This creates regions of compressed air (compressions) and stretched-out air (rarefactions) that travel through the medium.
 
@@ -30,7 +42,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **mental picture failure**: learners cannot visualise a longitudinal wave. Transverse waves have an obvious shape (the sine-curve rope); longitudinal waves don't look like their standard diagram. When they see a sinusoidal curve labelled "pressure variation vs. position," they treat it as a transverse wave diagram and draw particles moving up and down — which is wrong. The compression-rarefaction picture must be developed through explicit demonstration before the standard diagram is introduced.
 
@@ -38,7 +50,7 @@ The secondary root cause is **wavelength identification error in the compression
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "Longitudinal wave particles move up and down"**
 - Characteristic phrase: "Sound waves look like this [draws transverse sine curve with vertical particle arrows]."
@@ -66,20 +78,7 @@ The secondary root cause is **wavelength identification error in the compression
 
 ---
 
-## Explanation library
-
-**E1 — The compression-rarefaction picture (primary explanation)**
-"Imagine a row of air molecules side by side: ○ ○ ○ ○ ○ ○ ○. A speaker diaphragm pushes right → it pushes the first molecule right, which pushes the next, which pushes the next: ○○○○ ○ ○ ○ (a compression forms). Then the diaphragm pulls back → the first molecule follows, pulling a gap: ○○○○  ○○○ (a rarefaction follows the compression). The diaphragm oscillates, creating alternating compressions and rarefactions that travel to the right while each individual molecule oscillates left and right in place."
-
-**E2 — The slinky demonstration explained**
-"Push the end of a slinky forward → a compression (coils bunched together) travels down the slinky. Pull it back → a rarefaction (coils spread out) follows. The coils oscillate back and forth; the compression/rarefaction pattern travels along the slinky. The coil motion (parallel to slinky axis) is parallel to the wave motion (also along the slinky axis). That parallel relationship is the definition of longitudinal."
-
-**E3 — Why all three media support longitudinal waves**
-"Compressions require a restoring force — the medium resists being compressed (bulk modulus). Every state of matter — solid, liquid, gas — resists compression. So every state of matter can support longitudinal waves. Shear (transverse) requires resistance to sideways deformation, which only solids have. So transverse waves work only in solids (and EM in vacuum); longitudinal waves work everywhere."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — Spring queue**
 Imagine a queue of people holding coil springs connecting each person to the next (front-to-back). When the person at the front steps forward, they compress the spring to the next person, who then steps forward, compressing the next spring — a compression travels down the queue. When the front person steps back, a rarefaction (stretched spring) travels similarly. Each person steps forward and backward (parallel to the queue direction) while the compression/rarefaction pattern travels forward down the queue. This is a longitudinal wave.
@@ -91,7 +90,7 @@ Do NOT present a transverse sine-curve diagram as the "shape" of sound. If a sin
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Slinky longitudinal wave**
 Stretch a slinky along the floor. Push one end forward (along the slinky axis) and release. A compression pulse travels down the slinky. Pull and release: a rarefaction pulse. Oscillate continuously: a series of compressions and rarefactions travel while each coil oscillates parallel to the slinky axis. Label clearly: "The coil moves THIS way [along slinky]; the wave travels THIS way [also along slinky]. They're the same direction → longitudinal."
@@ -104,7 +103,7 @@ Speak or hum into one end of a long tube (or the cardboard core of a paper towel
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for guided discovery through contrast with transverse waves**:
 
@@ -112,7 +111,7 @@ After the rope transverse wave demonstration, show the slinky demo (D1). Ask: "W
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — 0° check (contrast with 90°)**: For every longitudinal wave problem, require the two-arrow diagram (wave direction, particle direction) and confirm they are parallel. If learner draws perpendicular arrows, they are thinking transversely.
 
@@ -124,7 +123,12 @@ After the rope transverse wave demonstration, show the slinky demo (D1). Ask: "W
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "Longitudinal waves are harder to visualise than transverse waves because the particles move in the same direction as the wave, not across it. For sound in air: the air molecules jiggle left and right — the same direction as the sound is traveling. The wave is not a visible hump; it's an invisible pattern of high-pressure and low-pressure regions moving through the air. A slinky demonstrates it best: push the end, watch the compression travel — coils move the same direction as the compression pattern."
 
@@ -134,7 +138,7 @@ After the rope transverse wave demonstration, show the slinky demo (D1). Ask: "W
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) state the defining 0°/parallel relationship, (2) draw and label compressions and rarefactions in a longitudinal wave, (3) apply v = fλ to a longitudinal wave, and (4) explain why longitudinal waves propagate through all three states of matter.
 
@@ -155,7 +159,7 @@ After (a): "How confident are you about the oscillation direction?" (1–5).
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — M1 persists (particles move up-down)**
 Run D1 (slinky). Tie a ribbon to one coil of the slinky. Push the slinky end: watch where the ribbon goes. It moves left-right along the slinky axis — not up-down. Ask: "Which direction is the ribbon moving? Which direction is the compression moving?" Both along the slinky axis. That's longitudinal.
@@ -168,7 +172,7 @@ Recall from the prerequisite (wave-properties) that v = fλ is universal for all
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Definition (parallel oscillation) + two physical phenomena (compressions/rarefactions, propagates in all media) + contrast with transverse (cannot be polarised).
 
@@ -184,7 +188,7 @@ Recall from the prerequisite (wave-properties) that v = fλ is universal for all
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.wave.wave-speed`: v = √(B/ρ) for longitudinal waves in fluids — the bulk modulus and density of the medium determine speed
@@ -201,7 +205,25 @@ Recall from the prerequisite (wave-properties) that v = fλ is universal for all
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: wave equations use trigonometry (sin/cos) and complex exponentials; Fourier analysis decomposes any periodic signal into waves. Chemistry: spectroscopy — IR, UV-vis, NMR — identifies molecules by their wave-matter interactions. Biology: sound (hearing, ultrasound imaging), light (vision, photosynthesis), and seismic waves in geophysics all use wave physics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.wave.longitudinal-waves.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG description "particle displacement is parallel to the direction of wave propagation, forming compressions and rarefactions" is correct and complete. `phys.wave.wave-speed` as the unlock is appropriate.
 
@@ -212,3 +234,7 @@ The KG does not explicitly flag the inability of longitudinal waves to be polari
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

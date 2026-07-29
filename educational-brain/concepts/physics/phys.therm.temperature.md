@@ -16,7 +16,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply temperature and thermal equilibrium at the **understand** level (Bloom) with difficulty tier **foundational**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.therm.temperature.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_Temperature measures the average kinetic energy of particles; thermal equilibrium exists when two bodies in contact have equal temperatures._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: Temperature is a number that tells you how hot or cold something is, measured with a thermometer. The Celsius scale is the most familiar: 0 °C is the freezing point of water, 100 °C is the boiling point. Higher number = hotter.
 
@@ -30,7 +42,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **heat–temperature conflation**: learners treat temperature and heat as synonyms. They say "the object has a lot of heat" when they mean "the object has a high temperature," and they conflate "heat flows" with "temperature is high." This error propagates into heat transfer (a bigger object at the same temperature as a smaller object has more internal energy but the same temperature) and specific heat (adding the same heat to different materials produces different temperature changes).
 
@@ -38,7 +50,7 @@ A secondary root cause is **scale conflation**: learners learn Celsius and then 
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "Temperature and heat are the same thing"**
 - Characteristic phrase: "This object has more heat because it's bigger" or "The coffee lost all its heat."
@@ -66,20 +78,7 @@ A secondary root cause is **scale conflation**: learners learn Celsius and then 
 
 ---
 
-## Explanation library
-
-**E1 — The particle-speed picture (conceptual anchor)**
-Imagine the molecules in a cup of hot water as tiny billiard balls, bouncing around at high speed. In a cup of cold water, the same billiard balls move more slowly. Temperature is the average speed of this bouncing. When you heat the water, you speed up the balls; when you cool it, you slow them down. Absolute zero is the speed limit in the other direction: you cannot make the balls completely still (in classical terms), and 0 K is the state where you have removed as much kinetic energy as possible.
-
-**E2 — The Kelvin conversion explained (procedural)**
-Celsius zero was chosen for human convenience (water freezes at 0 °C). Kelvin zero is chosen for physics: it is where average particle kinetic energy goes to zero. The gap between them is 273.15 (approximately 273 for most school-level work). To convert: K = °C + 273. To check: −273 °C → 0 K ✓; 0 °C → 273 K ✓; 100 °C → 373 K ✓.
-
-**E3 — Temperature vs. thermal energy (distinction drill)**
-"A swimming pool at 25 °C and a teacup at 25 °C are at the same temperature. But the pool contains vastly more thermal energy. If you dipped your hand in the pool vs. the teacup at the same temperature, they feel equally warm (same temperature). But the pool could melt far more ice (it has more total energy). Temperature = intensity. Thermal energy = amount × intensity."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — Particle speed as temperature**
 Temperature is like the average speed of cars on a motorway. "Rush hour with slow, jammed traffic" = low temperature (slow particles). "Late night motorway at 130 km/h" = high temperature (fast particles). Average speed goes up when cars drive faster; temperature goes up when particles move faster.
@@ -91,7 +90,7 @@ Do NOT frame "coldness" as a property or substance. There is no "cold energy." C
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Thermometer calibration points**
 Place a thermometer in a mixture of ice and water: observe 0 °C. Place it in boiling water: observe 100 °C (at standard atmospheric pressure). This grounds the scale in reproducible physical phenomena — not arbitrary numbers.
@@ -104,7 +103,7 @@ Ask: "If I heat a gas from 10 °C to 20 °C, does the volume double?" Measure (o
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for direct instruction** (appropriate for this foundational concept):
 
@@ -112,7 +111,7 @@ The particle model of temperature is not intuitive and cannot be re-derived from
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Heat–temperature audit at first use**: The first time a learner uses "heat" when they mean "temperature," pause and ask: "Is this a temperature or an amount of energy?" This distinction must be enforced early before it becomes embedded.
 
@@ -124,7 +123,12 @@ The particle model of temperature is not intuitive and cannot be re-derived from
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "Temperature and heat — these are the two words people use interchangeably and they shouldn't. Temperature is like the speed of particles — how fast the molecules are moving, on average. Heat is energy in transit — it's what moves when something warm and something cool are put next to each other. A swimming pool at 25 °C and a teacup at 25 °C are at the same temperature. But the pool has far more thermal energy. Same particle speed, more particles."
 
@@ -134,7 +138,7 @@ The particle model of temperature is not intuitive and cannot be re-derived from
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) state the particle-speed interpretation of temperature, (2) distinguish temperature from thermal energy with a concrete example, (3) convert between Celsius and Kelvin correctly, (4) explain why Kelvin must be used in physics formulas.
 
@@ -154,7 +158,7 @@ After (e): "How confident are you that you must double in Kelvin, not Celsius?" 
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — Heat–temperature conflation persists**
 Use D2 (metal vs. wood at room temperature) to create a concrete perceptual experience that separates the two. The metal "feels colder" even though both are at the same temperature — this is viscerally jarring and creates a memorable collision with M1. After the demonstration, ask: "Same temperature, different feel. What explains the difference?" Guide to heat-flow rate (thermal conductivity), not temperature.
@@ -167,7 +171,7 @@ Ask: "What substance is cold? What is it made of? Can you put cold in a bottle?"
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Concept + conversion procedure (the particle model is the core concept; the Kelvin conversion is the essential procedure).
 
@@ -183,7 +187,7 @@ Ask: "What substance is cold? What is it made of? Can you put cold in a bottle?"
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.therm.zeroth-law`: thermal equilibrium defined directly in terms of temperature equality
@@ -202,7 +206,25 @@ Ask: "What substance is cold? What is it made of? Can you put cold in a bottle?"
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: calculus underlies heat-flow equations; statistical probability distributions govern thermal averages. Chemistry: thermochemistry, chemical equilibrium (Gibbs free energy), and reaction spontaneity are thermodynamics applied to molecular systems; the ideal-gas law is shared. Biology: metabolism is biochemical thermodynamics; body temperature regulation is heat-transfer in a biological system.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.therm.temperature.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG description correctly identifies temperature as "average kinetic energy of particles" — the particle model is the right entry point. The four unlocks (heat-transfer, ideal-gas-law, thermal-expansion, zeroth-law) are all correctly placed downstream.
 
@@ -211,3 +233,7 @@ One gap: the KG does not list `phys.therm.specific-heat` as unlocked by temperat
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

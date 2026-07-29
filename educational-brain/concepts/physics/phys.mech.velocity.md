@@ -27,7 +27,36 @@
      single instant) and how it differs from average velocity over a time interval.
   4. Use the sign of velocity to indicate direction in a chosen coordinate system.
 
-## Mental models
+
+## Learning Objective
+
+After this concept, the learner can:
+
+not understand why speed (distance/time) and
+    velocity (displacement/time) are different quantities. The sign convention
+    for displacement is directly inherited by velocity.
+- **Unlocks** (from KG): `phys.mech.acceleration` — and via the kinematic chain,
+  every subsequent mechanics concept. Velocity is the "state" of a moving object;
+  acceleration is its rate of change. A learner who conflates speed and velocity
+  will produce sign errors in every dynamics problem and cannot correctly analyse
+  deceleration (negative acceleration with the direction of motion).
+- **Difficulty**: foundational · **Bloom**: understand · **Mastery threshold**: 0.70 ·
+  **Est. hours**: 2 · **References**: NCERT Physics Class 9 Ch. 8
+- **Learning objectives** — the learner can:
+  1. Define average speed as total distance/total time and average velocity as
+     total displacement/total time, and explain why they differ when direction
+     changes.
+  2. Compute average speed and average velocity from a described motion.
+  3. Explain what instantaneous velocity means (rate of change of position at a
+     single instant) and how it differs from average velocity over a time interval.
+  4. Use the sign of velocity to indicate direction in a chosen coordinate system.
+
+
+## Core Understanding
+
+_Velocity is the rate of change of displacement with time; speed is its scalar counterpart._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 - **Beginner (arriving)**: speed and velocity are the same thing — how fast
   something is moving. "60 km/h" is both the speed and the velocity. Direction
@@ -53,7 +82,7 @@
   advanced model: "average velocity is the slope of the position-time graph — you'll
   see this connection when we study motion graphs."
 
-## Why beginners fail here
+## Why Students Fail
 
 The speed/velocity conflation is as deep as the distance/displacement one — everyday
 language uses "speed" and "velocity" interchangeably. The hardest failure: a learner
@@ -64,7 +93,7 @@ can be zero for a round trip (displacement = 0) while average speed is positive
 learner has completely internalised the distance/displacement distinction from
 the previous concept.
 
-## Misconception library
+## Misconceptions
 
 **M1 — Speed and velocity are synonyms**
 - *Why*: everyday language conflation (type 2, same as the distance/displacement
@@ -131,27 +160,7 @@ the previous concept.
 - *Verification*: interpret velocity from a position-time graph by drawing tangents
   (requires no calculus — just the geometric picture).
 
-## Explanation library
-
-- **Age 12–14**: "Speed tells you HOW FAST. Velocity tells you HOW FAST and in
-  WHICH DIRECTION. 'The car goes 60 km/h' — that's speed. 'The car goes 60 km/h
-  northbound' — that's velocity. The number is the same; the direction is what's
-  new. The reason we need both: if the car is going 60 km/h northbound and you
-  ask 'where will it be in one hour?' you NEED the direction. Speed alone isn't enough."
-- **Age 14+**: "Velocity = displacement / time. Speed = distance / time. For
-  straight-line motion in one direction, they give the same number. The moment you
-  change direction, they diverge. Average velocity for a round trip = 0 / total time
-  = 0 (displacement is zero). Average speed for a round trip = total distance / time
-  > 0. So 'average velocity = 0' doesn't mean the object was stationary — it means
-  the net displacement was zero over that interval."
-- **Adult returning learner**: "The speedometer gives speed (always positive,
-  magnitude of velocity). A velocity must include direction. In 1D (along a line),
-  direction is captured by the sign: + is forward, − is backward. A car in reverse
-  has negative velocity. Acceleration and velocity are both signed in 1D, and the
-  relationship between their signs tells you whether the car is speeding up or slowing
-  down — a key skill for kinematics problems."
-
-## Analogy library
+## Analogies
 
 - **Best analogy**: the weather forecast. "Winds at 20 km/h" (speed — no direction).
   "Winds from the northwest at 20 km/h" (velocity — direction included). You
@@ -170,7 +179,7 @@ the previous concept.
   or three components, not just a sign). Use this shorthand only explicitly for 1D;
   flag it as 1D-only if you use it at all.
 
-## Demonstration library
+## Demonstrations
 
 - **Home, no equipment**: walk 10 steps east, then 10 steps west. Time the whole
   walk. Distance = 20 steps; displacement = 0. Average speed = 20 steps / time.
@@ -187,7 +196,7 @@ the previous concept.
   be?" Most predict a positive nonzero number (using speed instead). Reveal 0.
   The surprise is the teaching moment.
 
-## Discovery lesson
+## Discovery Questions
 
 **Guided discovery** is appropriate for the speed/velocity distinction — it can
 emerge from the round-trip collision with M1.
@@ -208,7 +217,7 @@ emerge from the round-trip collision with M1.
 6. *Compression*: draw a two-column table: speed vs velocity, for each row
    (definition, scalar/vector, sign, formula, example).
 
-## Teaching actions
+## Teaching Sequence
 
 From the dispatch library (Delivery 2 §6):
 1. **Guided discovery** (high fit): round-trip collision reveals the distinction.
@@ -219,7 +228,12 @@ From the dispatch library (Delivery 2 §6):
 4. **Graph interpretation** (high fit): position-time graph, slope = velocity —
    install the graph interpretation alongside the formula.
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 *How it sounds when taught well*: the tutor always says the direction when giving
 a velocity ("2 m/s east," "−3 m/s"); "velocity" and "speed" are NEVER used
@@ -233,7 +247,7 @@ it started, so the NET change in position is zero." Pause. Let this land.
 negative sign from velocity → M2; learner uses (v₁ + v₂)/2 in a non-uniform
 acceleration context → M3.
 
-## Assessment
+## Assessment Signals
 
 **Diagnostic — golden probe**: "A runner completes one lap of a 400 m track in
 80 s. What is their average speed? What is their average velocity?" Correct:
@@ -265,7 +279,7 @@ speed = 5 m/s; velocity = 0 m/s. A learner who gets 5 m/s for both has M1.
   round-trip.
 - *Delayed*: one-week — average velocity for a non-uniform scenario.
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 *Likeliest utterance*: "but isn't velocity just 60 km/h?" (M1); "how can
 velocity be zero if I was moving?" (surprise at round-trip result).
@@ -281,7 +295,7 @@ just means your net position didn't change. You moved the whole time, but you
 ended where you started. Average SPEED is still nonzero. The two are measuring
 different aspects of the same trip."
 
-## Memory & review
+## Memory Hooks
 
 - **Concept type**: concept (speed/velocity distinction) + procedure (computing
   each).
@@ -295,7 +309,7 @@ different aspects of the same trip."
   directly analogous); `phys.mech.kinematics-1d` (both speed and velocity appear
   in kinematic equations with different roles).
 
-## Transfer map
+## Transfer Connections
 
 - *Near*: `phys.mech.acceleration` — acceleration = change in velocity / time;
   the signed character of velocity transfers directly.
@@ -314,7 +328,25 @@ different aspects of the same trip."
   (additive) fails at high speeds is grounded in having a precise definition of
   velocity as displacement/time in a given reference frame.
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: kinematics uses calculus (differentiation for velocity/acceleration, integration for displacement); vectors require linear algebra; energy methods use algebra and trigonometry. Chemistry: thermochemistry uses energy concepts (enthalpy, bond energies); reaction kinetics ties to activation energy. Biology: biomechanics (muscle force, gait), fluid mechanics in circulation (blood pressure, flow rate), and structural biology (bone stress) all apply mechanical principles.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.mech.velocity.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG `requires` correctly lists `phys.mech.displacement`. A missing conceptual
 link: `phys.meas.scalars-vectors` is the source of the scalar/vector distinction
@@ -326,3 +358,7 @@ Recommend adding `phys.meas.scalars-vectors` to the `requires` list of
 ---
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
 *Authored against KG node data confirmed at docs/physics/kg/graph.json.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

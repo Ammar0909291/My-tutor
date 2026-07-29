@@ -26,7 +26,27 @@
   4. Express a number in scientific notation to clarify ambiguous significant
      figures (trailing zeros in large numbers).
 
-## Mental models
+
+## Learning Objective
+
+After this concept, the learner can:
+
+s** — the learner can:
+  1. Count the number of significant figures in a given measured value, including
+     cases with leading, trailing, and embedded zeros.
+  2. Round a calculated result to the correct number of significant figures for
+     addition/subtraction and multiplication/division.
+  3. Explain WHY the number of significant figures in a result cannot exceed the
+     precision of the least precise measurement used.
+  4. Express a number in scientific notation to clarify ambiguous significant
+     figures (trailing zeros in large numbers).
+
+
+## Core Understanding
+
+_Significant figures indicate the precision of a measurement by specifying which digits are meaningful._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 - **Beginner (arriving)**: significant figures are a counting rule about zeros —
   a set of arbitrary distinctions (leading zeros don't count; trailing zeros do
@@ -56,7 +76,7 @@
   information; the operation rules as precision-preserving). The expert limitations
   are stated briefly but not dwelt upon — this concept is the introductory tool.
 
-## Why beginners fail here
+## Why Students Fail
 
 There are two distinct failure modes. First, the rules-without-reason failure:
 the learner memorises "leading zeros don't count" but cannot explain WHY, and
@@ -67,7 +87,7 @@ addition and the addition rule to a multiplication. The root of both: learning
 the rules as arbitrary conventions rather than as consequences of how measurement
 precision works.
 
-## Misconception library
+## Misconceptions
 
 **M1 — Trailing zeros never count as significant figures**
 - *Why*: "zeros don't count" is the first rule taught and learners overgeneralise
@@ -130,28 +150,7 @@ multiplication and division**
 - *Verification*: convert ambiguous trailing-zero numbers to scientific notation,
   choosing a sig-fig count.
 
-## Explanation library
-
-- **Age 13–15 (story)**: "You weigh 68 kg on a bathroom scale. Your friend is a
-  biochemist and weighs 68.3124 kg on a precision lab scale. If I ask 'what do the
-  two of you weigh together?', and you add 68 + 68.3124, the calculator says
-  136.3124 kg. But you only know your weight to the nearest kilogram. Claiming
-  136.3124 is a false claim — you're pretending you know your weight to the
-  nearest 0.0001 kg. The honest answer is 136 kg. Significant figures prevent this
-  false precision."
-- **Age 15+**: "Significant figures are a shorthand for communicating measurement
-  precision. Each significant digit represents a measured quantity; non-significant
-  zeros are either placeholders (leading zeros) or ambiguous (trailing zeros in
-  integers). Operations cannot create precision: multiplying 3.5 (2 sig figs) ×
-  2.1 (2 sig figs) = 7.35 (calculator) → 7.4 (2 sig figs, rounded). The rule
-  reflects that the result is only as precise as the least precise input."
-- **Adult returning learner**: "Your calculator doesn't know what your ruler can
-  measure. Every number you type into a calculator carries hidden context: how many
-  of these digits came from an actual measurement, vs. how many are placeholders or
-  calculator artefacts? Significant figures are the convention for keeping that
-  context attached to the number as you calculate."
-
-## Analogy library
+## Analogies
 
 - **Best analogy**: a team relay race score. Your team's average time is only
   as accurate as the worst stopwatch used. If one timer is accurate to 0.1 s and
@@ -170,7 +169,7 @@ multiplication and division**
   come from real measurements. Invented precision is worse than acknowledged
   imprecision."
 
-## Demonstration library
+## Demonstrations
 
 - **Home, no equipment**: measure the length of a piece of paper with a ruler
   (to 1 mm), then compute the perimeter. Show: the perimeter calculation on a
@@ -187,7 +186,7 @@ multiplication and division**
   figures? Write your answer before I explain." Collect predictions, show the
   spread, then teach. The disagreement motivates the rule.
 
-## Discovery lesson
+## Discovery Questions
 
 **Direct instruction** is warranted for the counting rules — the conventions for
 leading/trailing zeros are genuinely arbitrary human choices, not discoverable
@@ -205,7 +204,7 @@ the agreed-upon implementation of that reason.
    not measurement), trailing zeros (context-dependent), embedded zeros (always
    significant). Then the operation rules with the WHY stated before the HOW.
 
-## Teaching actions
+## Teaching Sequence
 
 From the dispatch library (Delivery 2 §6):
 1. **Direct instruction** (primary for rules): after the motivating reason is built
@@ -223,7 +222,12 @@ Actions that DON'T fit:
 - **Open-ended inquiry for the rules themselves**: see Discovery lesson — reason
   is discoverable, rules are not.
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 *How it sounds when taught well*: when demonstrating the counting rules, the tutor
 says WHY each zero is or isn't significant; the word "false precision" is used
@@ -238,7 +242,7 @@ misleading." Pause. Then: "significant figures are how physicists stop this."
 transcribes calculator output without rounding → M2; applies sig-fig rule to
 addition → M3; says 1700 has exactly 4 sig figs → M4.
 
-## Assessment
+## Assessment Signals
 
 **Diagnostic — golden probe**: "You measure d = 1.30 cm and t = 0.5 s. Compute
 v = d/t and express it to the correct number of significant figures." This requires:
@@ -279,7 +283,7 @@ simple). True mastery check: unscaffolded mix of add-sub and mult-div rounding
 with ambiguous zeros in inputs. Miscalibration is common here — probe with novel
 cases before confirming mastery.
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 *Likeliest utterance*: "so I just round to 3?" (correct answer but by rote,
 not by understanding rule type); "the zero doesn't count" (M1); "the calculator
@@ -296,7 +300,7 @@ three decimal places.) "Which dominates the SUM?" (12.1's uncertainty, because i
 bigger.) "So your result can only be trusted to ___?" (one decimal place.)
 This walks through the WHY; the rule follows from it.
 
-## Memory & review
+## Memory Hooks
 
 - **Concept type**: procedure (rules for counting and rounding), with an underlying
   concept (precision communication).
@@ -310,7 +314,7 @@ This walks through the WHY; the rule follows from it.
   sig figs as shorthand for ±); any calculation-heavy concept in the curriculum
   (kinematics, energy, forces) where results must be expressed correctly.
 
-## Transfer map
+## Transfer Connections
 
 - *Near*: any calculation in the physics curriculum — the sig-fig habit must
   be sustained throughout.
@@ -325,7 +329,25 @@ This walks through the WHY; the rule follows from it.
   with floating-point representation and the different ways "precision" manifests
   in numerical computation vs. physical measurement.
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: significant figures tie directly to scientific notation and logarithms; dimensional analysis is a special case of algebraic unit-tracking; vector components use trigonometry. Chemistry: all lab measurements use SI units; concentration, moles, and temperature all live in this domain. Biology: biological measurements (cell size in micrometres, metabolic rates) use the same SI framework; dimensional analysis applies to enzyme kinetics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.meas.significant-figures.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG lists no unlocks — this is an underrepresentation. Significant figures
 affects the EXPRESSION of every result in the curriculum. A suitable structural
@@ -337,3 +359,7 @@ become automatic only through practice across many subsequent topics.
 ---
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
 *Authored against KG node data confirmed at docs/physics/kg/graph.json.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

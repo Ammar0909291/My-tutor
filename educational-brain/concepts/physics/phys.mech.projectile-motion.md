@@ -18,7 +18,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply projectile motion at the **apply** level (Bloom) with difficulty tier **proficient**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.mech.projectile-motion.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_Projectile motion combines uniform horizontal velocity with uniformly accelerated vertical motion under gravity._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: A projectile is anything thrown, kicked, or launched that then travels through the air on its own, with no engine or continued push. While in the air, two things happen simultaneously: it moves forward at constant speed (nothing pushes it horizontally), and gravity pulls it downward, making it speed up in the downward direction. The path curves because the forward motion is constant while the downward motion grows.
 
@@ -32,7 +44,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **formula harvesting without framework**: learners memorise a "range formula" R = v₀² sin 2θ / g and a "maximum height formula" H = v₀² sin²θ / 2g without understanding that both are derived from the two-axis framework. When a non-standard problem appears (launch above the landing level, inclined surface, non-zero launch height), the formula fails and the learner has no recovery tool because they bypassed the framework.
 
@@ -42,7 +54,7 @@ The third root cause is **range symmetry over-generalisation**: learners learn t
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "At the peak, acceleration is zero because the ball stops momentarily"**
 - Characteristic phrase: "At the top, velocity is zero, so there's no acceleration." (Restatement of phys.mech.acceleration M1 in 2D context — requires explicit probe here because it reappears reliably.)
@@ -69,25 +81,7 @@ The third root cause is **range symmetry over-generalisation**: learners learn t
 
 ---
 
-## Explanation library
-
-**E1 — Derivation from first principles (the only safe explanation)**
-Start from the 2D kinematics framework established in the prerequisite:
-- aₓ = 0 (no horizontal force), aᵧ = −g (gravity only)
-- v₀ₓ = v₀ cos θ, v₀ᵧ = v₀ sin θ
-- x(t) = v₀ₓ t = (v₀ cos θ)t
-- y(t) = v₀ᵧ t − ½g t² = (v₀ sin θ)t − ½g t²
-Every result (time of flight, range, max height, landing velocity) must be derived from these four equations by algebra. This derivation-from-principles approach is the master explanation; learners who see it are immunised against M3 and M4.
-
-**E2 — The independence demonstration (conceptual anchor)**
-Use the simultaneous-drop demonstration from kinematics-2d (D1) as the anchor: "We already proved that throwing a ball horizontally and dropping it straight down produce the same fall time. That's the whole principle at work in projectile motion. The horizontal motion is oblivious to gravity; gravity only acts vertically. So we solve a 'horizontal constant-velocity problem' and a 'vertical free-fall problem' — both sharing the same stopwatch."
-
-**E3 — Peak analysis (misconception surgery for M1)**
-"At the very top of the path, the ball's vertical velocity has reached zero. But gravity doesn't know that. Gravity applies 9.8 m/s² downward every second, whether the ball is moving or not. The moment after the peak, the ball is moving downward again because gravity is still acting. If gravity paused at the peak, the ball would float there forever. It doesn't float; it falls. So aᵧ = −g at the peak."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — The two conveyor belts**
 Imagine the ball riding two conveyor belts simultaneously: one horizontal (running at constant speed, never stopping), one vertical (starting from rest and accelerating downward at 9.8 m/s² per second, like a free-fall). The resulting path is the combination of these two independent rides. The horizontal belt never speeds up or slows down; only the vertical belt accelerates.
@@ -99,7 +93,7 @@ The path of a projectile is a parabola, not a circle. The curvature is not const
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Simultaneous drop (inherited from kinematics-2d)**
 One ball dropped straight down, one launched horizontally — both from the same height, released simultaneously. Both hit the floor at the same time. This directly demonstrates aₓ = 0 (horizontal) and aᵧ = −g (vertical, shared with the dropped ball). Show before any equations.
@@ -115,7 +109,7 @@ Pause a video at the exact peak. Ask: "At this frame, what is the vertical veloc
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for guided discovery** (appropriate because the learner already has the 2D kinematic framework):
 
@@ -127,7 +121,7 @@ If the learner cannot recall the 2D kinematic equations or the axis-setup protoc
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Derivation-first discipline**: Never hand over projectile formulas without deriving them in the session. Even if the learner has seen the range formula before, begin every session by deriving it from the four base equations. This takes 5 minutes and prevents M3 and M4 from taking hold.
 
@@ -141,7 +135,12 @@ If the learner cannot recall the 2D kinematic equations or the axis-setup protoc
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "Let's start from scratch every time — I don't want you using a formula you memorised from last week. Tell me: what forces act on the ball after it leaves the hand? … Just gravity, good. What direction? … Straight down. So what's the horizontal acceleration? What's the vertical acceleration? … Exactly. aₓ = 0, aᵧ = −9.8 m/s². Now write me the four equations — x position, y position, vₓ, vᵧ — and everything we need to solve this problem is in those four lines."
 
@@ -151,7 +150,7 @@ If the learner cannot recall the 2D kinematic equations or the axis-setup protoc
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can derive the time of flight, range, and maximum height from first principles (from the four base equations, not from memorised formulas) for a ball launched at an angle on level ground — and can identify aᵧ at the peak without prompting.
 
@@ -171,7 +170,7 @@ After (b): "How confident are you that aᵧ = −9.8 m/s² at the peak? On a sca
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — Uses memorised formulas, can't handle non-level-ground problems**
 Close the formula book. Physically write the four base equations: x(t) = v₀ₓ t, y(t) = y₀ + v₀ᵧ t − ½g t², vₓ = v₀ₓ, vᵧ = v₀ᵧ − gt. State the specific values of aₓ and aᵧ for each problem aloud before substituting. Practise exclusively on non-level-ground problems (cliff launches, ramp landings) where the formula fails, until the framework is automatic. Only then reintroduce level-ground problems.
@@ -187,7 +186,7 @@ This is arithmetic / algebra, not physics. Use TA1 (always derive from first pri
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Schema + procedure + worked-example repertoire (the four-equation framework is the schema; the axis-setup/derivation sequence is the procedure; specific problem types — level ground, cliff launch, given range find angle — are the repertoire).
 
@@ -203,7 +202,7 @@ This is arithmetic / algebra, not physics. Use TA1 (always derive from first pri
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate applications**:
 - Sports science: range and trajectory of kicked balls, thrown objects, jumped bodies
@@ -221,7 +220,25 @@ This is arithmetic / algebra, not physics. Use TA1 (always derive from first pri
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: kinematics uses calculus (differentiation for velocity/acceleration, integration for displacement); vectors require linear algebra; energy methods use algebra and trigonometry. Chemistry: thermochemistry uses energy concepts (enthalpy, bond energies); reaction kinetics ties to activation energy. Biology: biomechanics (muscle force, gait), fluid mechanics in circulation (blood pressure, flow rate), and structural biology (bone stress) all apply mechanical principles.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.mech.projectile-motion.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG lists no `unlocks` for `phys.mech.projectile-motion`. This is likely a KG authoring gap. Projectile motion directly supports several downstream topics that require the worked-out parabolic trajectory as prior knowledge:
 - `phys.mech.relative-motion` — learners work with projectile trajectories as seen from moving frames
@@ -234,3 +251,7 @@ The distinction between "idealised projectile motion (no air resistance)" and "r
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

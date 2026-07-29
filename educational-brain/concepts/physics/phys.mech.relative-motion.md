@@ -1,6 +1,6 @@
 # phys.mech.relative-motion — Relative Motion and Reference Frames
 
-## 1. Identity
+## Identity
 - **Canonical KG ID**: `phys.mech.relative-motion`
 - **Canonical name**: Relative Motion and Reference Frames
 - **Curriculum domain**: Mechanics
@@ -13,7 +13,19 @@
 
 ---
 
-## 2. Mental Models (4-stage progression)
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.mech.relative-motion.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+Relative motion describes the velocity and position of one object as observed from a moving reference frame.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Concrete (train and platform)**
 You sit on a train moving at 60 km/h. A person on the platform sees you moving at 60 km/h forward. You see them moving at 60 km/h backward. A bird flying at 80 km/h in the same direction as the train: platform observer sees 80 km/h; you see the bird moving at only 20 km/h forward. All motion is relative to the observer's reference frame — there is no absolute "at rest."
@@ -53,7 +65,7 @@ Non-inertial frames (accelerating frames): Newton's laws fail in their standard 
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Subscript order confusion**: Students write v_AB when they mean v_BA. The rule "outer subscripts give the answer, middle cancel" is not intuitive — students must practice the subscript chain until it is automatic.
 2. **Scalar addition in 2D**: Adding speeds (magnitudes) instead of vectors. "Boat speed = 4, current = 3, so total = 7" is wrong when the velocities are perpendicular; the correct magnitude is 5 (Pythagorean).
@@ -62,7 +74,7 @@ Non-inertial frames (accelerating frames): Newton's laws fail in their standard 
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 **M1 — "Adding speeds (not velocities) in 2D"**
 - Probe: "A boat moves at 5 m/s northward in a river flowing east at 12 m/s. What is the boat's speed relative to the ground?"
@@ -86,28 +98,7 @@ Non-inertial frames (accelerating frames): Newton's laws fail in their standard 
 
 ---
 
-## 5. Explanation Library
-
-**E1 — Reference frame definition**
-A reference frame is a coordinate system attached to an observer, used to measure positions, velocities, and accelerations. Two observers in relative motion use different reference frames. Neither is "more correct" — measurements are frame-dependent, but the laws of physics (Newton's laws for inertial frames) are the same.
-
-**E2 — Subscript chain rule**
-v_AC = v_AB + v_BC: A is moving relative to C; break the path into A-relative-to-B plus B-relative-to-C. The B subscripts (middle) cancel. Memory aid: "the middle pair cancels." Works for any chain of frames: v_AD = v_AB + v_BC + v_CD.
-
-**E3 — River problem worked (minimum drift)**
-River flows east at u = 3 m/s. Boat can do v = 4 m/s relative to water. Width = d = 120 m. Find: direction to cross with minimum downstream drift.
-
-If boat aims angle α west of north: v_BG = (v cosα) north + (−v sinα + u) east
-For zero drift: −v sinα + u = 0 → sinα = u/v = 3/4 → α = 48.6° west of north.
-Crossing time: t = d/(v cosα) = 120/(4 × 0.75²/4)... = 120/(4 × 0.661) = 45.4 s.
-Compare straight-across (α = 0): t = d/v = 30 s, but drift = ut = 90 m east.
-
-**E4 — Rain problem (1D relative motion)**
-Rain falls vertically at 5 m/s. A cyclist moves east at 12 m/s. To the cyclist: rain appears to come from the front-north direction at arctan(12/5) ≈ 67° from vertical. Speed of rain relative to cyclist: √(5² + 12²) = 13 m/s. The cyclist must tilt the umbrella 67° from vertical (toward the front) to keep dry — a direct application of relative velocity.
-
----
-
-## 6. Analogy Library
+## Analogies
 
 **Primary analogy — Moving walkway at an airport**
 You walk at 1 m/s forward on a walkway moving at 2 m/s forward relative to the ground. Ground observer sees you at 3 m/s. A friend walking beside you (also on the walkway, also at 1 m/s relative to walkway) sees you at 0 m/s — you appear stationary to each other. The walkway is the intermediate reference frame B; you are A; ground is C. v_AC = v_AB + v_BC = 1 + 2 = 3 m/s. The chain-rule is immediately intuitive.
@@ -118,7 +109,7 @@ You walk at 1 m/s forward on a walkway moving at 2 m/s forward relative to the g
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 **D1 — Projectile from moving cart**
 Roll a cart at constant speed and shoot a ball vertically upward from it (spring launcher). To an observer on the ground: the ball follows a parabolic path. To the person on the cart: the ball goes straight up and comes straight back down. Same event, two descriptions — both correct in their frames. Demonstrates that "straight up" is frame-dependent.
@@ -131,7 +122,7 @@ A plane aims due north at 250 km/h airspeed. Wind blows east at 50 km/h. Ground 
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 *Guided discovery is effective here*:
 
@@ -143,7 +134,7 @@ A plane aims due north at 250 km/h airspeed. Wind blows east at 50 km/h. Ground 
 
 ---
 
-## 9. Teaching Actions (dispatch table)
+## Teaching Sequence
 
 | Situation | Action |
 |---|---|
@@ -155,7 +146,12 @@ A plane aims due north at 250 km/h airspeed. Wind blows east at 50 km/h. Ground 
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 "The key insight: all motion is measured relative to an observer. There is no absolute rest. When you're on a train doing 60, the platform is moving at minus 60 from your frame. Both descriptions are equally valid.
 
@@ -167,7 +163,7 @@ River problems always have two goals mixed up: crossing in minimum time means ai
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 **Mastery gate**: Student correctly applies v⃗_AC = v⃗_AB + v⃗_BC with proper vector addition in 2D, determines the correct heading to achieve a straight-line ground track, and explains that all inertial frames are equivalent. Three multi-part problems including at least one 2D river/wind problem and one subscript-reversal check.
 
@@ -182,7 +178,7 @@ River problems always have two goals mixed up: crossing in minimum time means ai
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **If vector addition in 2D is not reliable**:
 Return to `phys.meas.vector-addition` (prerequisite). The relative motion problem reduces to a vector addition problem with a specific physical story. If the student cannot add two vectors given as magnitude + direction, the arithmetic tool is not ready.
@@ -195,7 +191,7 @@ Use a "middle-cancels" mnemonic on paper. Write all three frames as boxes; draw 
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Procedural (vector addition chain rule, 2D decomposition) + declarative (frame equivalence principle)
 **Forgetting risk**: Medium — the chain rule is straightforward, but the 2D geometry errors (scalar addition, heading vs. track) resurface easily.
@@ -204,7 +200,7 @@ Use a "middle-cancels" mnemonic on paper. Write all three frames as boxes; draw 
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 **Near transfer**: Special relativity (`phys.rel.postulates` — the direct unlock): Galilean addition fails at speeds near c; Einstein's postulates replace it with the Lorentz transformation.
 **Medium transfer**: River navigation, aircraft heading computation, interceptor course calculation (military and aerospace applications of relative motion).
@@ -213,7 +209,25 @@ Use a "middle-cancels" mnemonic on paper. Write all three frames as boxes; draw 
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: kinematics uses calculus (differentiation for velocity/acceleration, integration for displacement); vectors use linear algebra; energy methods use algebra and trigonometry. Chemistry: thermochemistry uses energy and work; reaction kinetics connects to activation energy. Biology: biomechanics (muscle force, gait), fluid mechanics in circulation (blood pressure, flow), and structural biology (bone stress) apply mechanics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.mech.relative-motion.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 - KG prerequisite `phys.mech.kinematics-2d` is necessary — 2D vector decomposition and addition are the tools for relative motion in 2D problems.
 - The unlock `phys.rel.postulates` is well-motivated: special relativity begins with the failure of Galilean velocity addition at relativistic speeds.
@@ -223,3 +237,7 @@ Use a "middle-cancels" mnemonic on paper. Write all three frames as boxes; draw 
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

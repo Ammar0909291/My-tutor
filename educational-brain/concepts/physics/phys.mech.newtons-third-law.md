@@ -1,6 +1,6 @@
 # phys.mech.newtons-third-law — Newton's Third Law of Motion
 
-## 1. Identity
+## Identity
 - **Canonical KG ID**: `phys.mech.newtons-third-law`
 - **Canonical name**: Newton's Third Law of Motion
 - **Curriculum domain**: Mechanics
@@ -13,7 +13,19 @@
 
 ---
 
-## 2. Mental Models (4-stage progression)
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.mech.newtons-third-law.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+For every action force there is an equal and opposite reaction force acting on a different body.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Concrete (pushing a wall)**
 Push a wall with your hand. The wall pushes back — you feel it. If you stand on a skateboard and push the wall, you roll away. The wall exerts an equal and opposite force on you. You cannot push something without it pushing you back. This mutual pushing is Newton's Third Law: forces always come in equal and opposite pairs.
@@ -48,7 +60,7 @@ This is the foundation of momentum conservation: if F_ext = 0 → Δp = 0.
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Action-reaction on same object**: Students draw FBDs with both the action and reaction force on the same object. The law requires the pair to act on DIFFERENT objects. Any force on object A's FBD comes FROM another object — not from A itself.
 2. **"The heavier object exerts more force"**: Students think the truck hits the car harder than the car hits the truck. By Newton's 3rd law, the force magnitudes are equal. The truck is harder to stop (more momentum), but the force exerted on the car equals the force exerted on the truck.
@@ -57,7 +69,7 @@ This is the foundation of momentum conservation: if F_ext = 0 → Δp = 0.
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 **M1 — "The heavier object pushes harder"**
 - Probe: "A 5000 kg truck collides with a 1000 kg car. Which object experiences a larger force during the collision?"
@@ -81,28 +93,7 @@ This is the foundation of momentum conservation: if F_ext = 0 → Δp = 0.
 
 ---
 
-## 5. Explanation Library
-
-**E1 — Identifying pairs systematically**
-For every force in a problem, ask: "What is the type? What object is exerting it? What object is receiving it?" The Newton's 3rd law pair reverses the exerter and receiver, keeps the type, and reverses the direction:
-- Earth (gravity) pulls book down → book (gravity) pulls Earth up
-- Hand (contact) pushes door → door (contact) pushes hand
-- Magnet (magnetic) attracts iron → iron (magnetic) attracts magnet
-
-Any correct pair: same type, same magnitude, opposite direction, different objects.
-
-**E2 — Walking and propulsion**
-A person walks by pushing the ground backward (foot on ground, backward). The ground pushes the foot forward (Newton's 3rd law). The forward push on the foot is what accelerates the person forward. Without friction from the ground (ice), there is no reaction force → the person cannot walk. All terrestrial locomotion is a Newton's 3rd law exchange.
-
-**E3 — Rocket propulsion (in vacuum)**
-A rocket expels gas backward (rocket exerts force on gas backward). Gas exerts equal force on rocket forward (Newton's 3rd law). No ground, no air — the reaction from the expelled gas drives the rocket. This is why rockets work in space: they need nothing to "push against" externally — the reaction is from the ejected mass itself.
-
-**E4 — System and internal forces**
-Throw a ball inside a closed spaceship. Ball moves one way; you recoil the other way. From outside the spaceship: the ball and you exchange equal-opposite internal forces; your individual momenta change; the system's total momentum is unchanged (F_ext = 0 → Δp_system = 0). Internal action-reaction pairs cancel for the system as a whole.
-
----
-
-## 6. Analogy Library
+## Analogies
 
 **Primary analogy — Two ice skaters**
 Two skaters push off each other from rest. They fly apart. Small skater flies far; large skater moves less. Same force on each (Newton's 3rd law). Different accelerations (Newton's 2nd law). The force pair is easy to identify — each skater exerts a contact force on the other. Neither is "cause" or "effect" — the push is mutual and simultaneous.
@@ -113,7 +104,7 @@ Two skaters push off each other from rest. They fly apart. Small skater flies fa
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 **D1 — Two carts on a track with spring bumper**
 Place two carts on a frictionless track, one heavy and one light, with a compressed spring between them. Release: both fly apart. Measure velocities. Verify: m₁v₁ = m₂v₂ (magnitudes equal = equal impulse = equal force × time = Newton's 3rd law). The small cart moves faster — different accelerations from equal forces (Newton's 2nd).
@@ -126,7 +117,7 @@ Inflate a balloon and release it. Air jets backward; balloon flies forward. Acti
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 *Guided discovery is highly effective for Newton's 3rd law*:
 
@@ -139,7 +130,7 @@ Inflate a balloon and release it. Air jets backward; balloon flies forward. Acti
 
 ---
 
-## 9. Teaching Actions (dispatch table)
+## Teaching Sequence
 
 | Situation | Action |
 |---|---|
@@ -151,7 +142,12 @@ Inflate a balloon and release it. Air jets backward; balloon flies forward. Acti
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 "Newton's Third Law: every force has a partner force, equal in magnitude, opposite in direction, acting on a different object. Always on a different object — that's the crucial part.
 
@@ -163,7 +159,7 @@ And the action-reaction language is misleading — it sounds like A acts and the
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 **Mastery gate**: Student correctly identifies Newton's 3rd law pair for a given force (same type, opposite direction, different object), draws a FBD with no self-forces, explains why action-reaction pairs do not cancel in Newton's 2nd law applications, and correctly predicts which object accelerates more when forces are equal. Three multi-step problems including at least one FBD identification task.
 
@@ -177,7 +173,7 @@ And the action-reaction language is misleading — it sounds like A acts and the
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **If weight-normal pair confusion persists**:
 Make the type distinction explicit: gravitational forces act between any two masses over any distance. Contact forces require physical contact. Weight and normal force are different types. The Newton's 3rd law weight partner is NOT a contact force — it is the gravitational pull the book exerts on the Earth. Draw this carefully, including the Earth as a body with an upward gravitational pull from the book.
@@ -190,7 +186,7 @@ Use the sentence template: "Object A exerts a [type] force on Object B." The New
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Declarative (the law statement + pair properties) + conceptual (why unequal accelerations occur, why pairs don't cancel)
 **Forgetting risk**: Medium — the law is easily stated but misapplied. The weight-normal pair error and the "forces cancel" error are highly persistent.
@@ -199,7 +195,7 @@ Use the sentence template: "Object A exerts a [type] force on Object B." The New
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 **Near transfer**: Momentum conservation (Newton's 3rd law + 2nd law → Δp_total = 0 when F_ext = 0). Impulse-momentum theorem for collisions.
 **Medium transfer**: Rocket propulsion (ejected mass provides reaction thrust — Newton's 3rd law in vacuum). Walking, swimming, flying (all locomotion involves Newton's 3rd law reaction forces from the environment).
@@ -208,7 +204,25 @@ Use the sentence template: "Object A exerts a [type] force on Object B." The New
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: kinematics uses calculus (differentiation for velocity/acceleration, integration for displacement); vectors use linear algebra; energy methods use algebra and trigonometry. Chemistry: thermochemistry uses energy and work; reaction kinetics connects to activation energy. Biology: biomechanics (muscle force, gait), fluid mechanics in circulation (blood pressure, flow), and structural biology (bone stress) apply mechanics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.mech.newtons-third-law.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 - KG prerequisite `phys.mech.newtons-second-law` is necessary — students need F_net = ma before the question "why do the objects accelerate differently despite equal forces?" can be answered.
 - No unlocks listed in the current KG; natural future extensions are `phys.mech.momentum` and `phys.mech.impulse`, for which Newton's 3rd law is the foundational derivation.
@@ -218,3 +232,7 @@ Use the sentence template: "Object A exerts a [type] force on Object B." The New
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

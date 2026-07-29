@@ -18,7 +18,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply kinematics in two dimensions at the **apply** level (Bloom) with difficulty tier **proficient**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.mech.kinematics-2d.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_Two-dimensional kinematics applies vector decomposition to analyse motion in a plane._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: Two-dimensional motion is one-dimensional motion that happens to be "diagonal." A ball thrown sideways moves forward and down at the same time, and those are just two separate motions that share the same stopwatch. The word "component" means the shadow the ball's path casts on each axis.
 
@@ -32,7 +44,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **axis conflation**: treating the x and y motion as two parts of one equation rather than two separate equations linked only by t. A learner with this misconception writes a single "2D kinematic equation," tries to substitute a diagonal initial velocity as one number, and gets confused when the equation produces wrong answers. The sub-root cause is that 1D kinematics can be done by treating all motion as one number (with sign); 2D demands a qualitative shift to pairs of numbers.
 
@@ -42,7 +54,7 @@ A third root cause is **time confusion**: students sometimes use a different t f
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "The total speed at any instant is √(vₓ² + vᵧ²) but I can use v₀ in the 1D kinematic equations"**
 - Characteristic phrase: "The velocity is 20 m/s at 30°, so I'll use 20 in the equation."
@@ -68,20 +80,7 @@ A third root cause is **time confusion**: students sometimes use a different t f
 
 ---
 
-## Explanation library
-
-**E1 — The two-clock thought experiment (conceptual entry)**
-Imagine you have a toy car on a track running east at constant speed, and someone picks up the track and carries it north at constant speed while you watch. The car moves northeast. The eastward motion obeys its own equations; the northward motion obeys its own equations. They share the same stopwatch. This is 2D kinematics: two independent 1D problems sharing t.
-
-**E2 — Axis setup protocol (procedural)**
-Before writing any equation: (1) draw the coordinate axes, (2) label positive direction for each axis, (3) decompose every vector into components along those axes, (4) write two separate sets of equations — one for x, one for y — each with its own initial position, velocity, and acceleration. Only at the end, reconstruct magnitude and direction from the components.
-
-**E3 — Why time links them (deep conceptual)**
-Position x(t) and position y(t) are both functions of the same variable t. If you eliminate t between x(t) and y(t) you get the shape of the trajectory (e.g., a parabola for constant vertical acceleration and constant horizontal velocity). Time is the parameter that traces the trajectory; the two axes are projections.
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — The two-rower model**
 Two rowers, one dedicated to rowing north, one dedicated to rowing east, both sitting in the same boat. Each rower obeys their own separate set of rowing rules (each axis's kinematic equations). But they are in the same boat, so time is shared. What you see from the bank is the combined diagonal motion, but inside the boat there are always two separate, independent operations.
@@ -93,7 +92,7 @@ Do NOT frame the total speed of 20 m/s as "the speed for the equations." The 20 
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Horizontal launch vs. drop (the independence demo)**
 Hold one ball at table height with your hand extended horizontally, and drop a second ball straight down from the same height at the same instant you push the first ball horizontally off the table. Both hit the floor at the same time (within experimental uncertainty). This directly proves vertical motion is independent of horizontal motion: horizontal push added no vertical velocity and changed no vertical time.
@@ -108,7 +107,7 @@ Give a vector at 37° above horizontal with magnitude 25 m/s. Demand that the le
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for guided discovery** (appropriate for proficient-level concept requiring procedural transfer from prior knowledge):
 
@@ -118,7 +117,7 @@ This discovery works here because both prerequisites are genuinely understood an
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Component isolation gate**: Before any 2D problem, insist on seeing the two-axis setup in writing. Do not accept a learner beginning with the magnitude of the initial velocity; send them back to write (v₀ₓ, v₀ᵧ) and (aₓ, aᵧ) explicitly.
 
@@ -132,7 +131,12 @@ This discovery works here because both prerequisites are genuinely understood an
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "Before we write a single number, I want you to do one thing: draw me two axes and tell me which direction is positive on each one. Go ahead. … Great. Now, this initial velocity — 20 m/s at 30° — split it. What's the x-part? What's the y-part? … Those two numbers — those are the only ones that go into your equations. The 20 disappears. You now have two separate motion problems sitting in front of you, and they share a clock. Solve the y-problem for t, and then use that same t in the x-problem. At the very end, if the question asks for speed or direction, reconstruct from your x and y answers. Never from the middle."
 
@@ -140,7 +144,7 @@ This discovery works here because both prerequisites are genuinely understood an
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can set up the two-axis equation system from scratch, solve for t from one axis, substitute into the other, and reconstruct magnitude and direction of the result — for problems with both initial velocity at an angle and uniform acceleration — without prompting.
 
@@ -157,7 +161,7 @@ After completing the probe: "How confident are you that you set up the axes and 
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — Axis conflation persists after explanation**
 Go back to D1 (simultaneous drop). Do the physical demonstration if possible; use a simulation if not. The perceptual experience of both balls hitting simultaneously is more convincing than algebra. Only after the learner says "they really do land at the same time" proceed to the equations.
@@ -173,7 +177,7 @@ Ask: "Is 15 m/s the answer to 'how fast is the ball moving' or 'how fast is it m
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Schema + procedure (the axis-setup protocol must become automatic; the component-independence principle must be a lasting schema).
 
@@ -189,7 +193,7 @@ Ask: "Is 15 m/s the answer to 'how fast is the ball moving' or 'how fast is it m
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers** (unlocked by this concept):
 - `phys.mech.projectile-motion` — special case with aₓ = 0, aᵧ = −g, first worked application of the 2D framework
@@ -207,7 +211,25 @@ Ask: "Is 15 m/s the answer to 'how fast is the ball moving' or 'how fast is it m
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: kinematics uses calculus (differentiation for velocity/acceleration, integration for displacement); vectors require linear algebra; energy methods use algebra and trigonometry. Chemistry: thermochemistry uses energy concepts (enthalpy, bond energies); reaction kinetics ties to activation energy. Biology: biomechanics (muscle force, gait), fluid mechanics in circulation (blood pressure, flow rate), and structural biology (bone stress) all apply mechanical principles.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.mech.kinematics-2d.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG requires `phys.meas.vector-addition` as a prerequisite, which is correct and essential. The KG does not list `phys.meas.scalars-vectors` as a prerequisite, but in practice a learner needs the scalar/vector distinction to understand why the x and y components are vectors that add by components and not scalars that add arithmetically. Consider adding `phys.meas.scalars-vectors` as a transitive prerequisite here or confirming it is already required by `phys.meas.vector-addition` (which it is — so the chain is satisfied).
 
@@ -216,3 +238,7 @@ The `phys.mech.generalized-coordinates` unlock is correctly placed here; the axi
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

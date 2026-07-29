@@ -17,7 +17,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply gauss's law at the **apply** level (Bloom) with difficulty tier **proficient**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.em.gauss-law.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_Gauss's law relates the total electric flux through a closed surface to the enclosed charge: Φ = Q_enc/ε₀._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: Imagine wrapping any closed surface (like a bag of any shape) around an electric charge. The total number of field lines poking outward through the bag depends only on how much charge is inside — not on the shape of the bag. More charge inside → more lines through the bag. No charge inside (but charges outside) → the same number of lines enter as leave → zero net lines through the bag.
 
@@ -31,7 +43,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **treating Gauss's law as a formula for the total field, not for the flux**: learners see ∮ **E**·d**A** = Q_enc/ε₀ and treat the left side as "E times area," computing E = Q_enc/(ε₀ × A) for any surface they choose. The formula only simplifies to E × A when |E| is constant on the Gaussian surface and **E** is parallel to d**A** everywhere on it — conditions that require symmetry. Without the right Gaussian surface, the integral is not E × A, and the formula cannot be solved for E. Learners who choose arbitrary surfaces (non-symmetric boxes, triangles) cannot factor out E and get stuck.
 
@@ -39,7 +51,7 @@ The secondary root cause is **including charges outside the Gaussian surface in 
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "Any surface can be used in Gauss's law to find E"**
 - Characteristic phrase: "I drew a rectangular box around the charge. Now I use Gauss's law to find E."
@@ -67,20 +79,7 @@ The secondary root cause is **including charges outside the Gaussian surface in 
 
 ---
 
-## Explanation library
-
-**E1 — Why the surface shape doesn't matter (flux as field lines)**
-"Think of field lines as rain. The total number of raindrops that fall through any closed surface depends on how much 'rain source' is inside — not on the shape of the surface. A spherical umbrella and a cubic umbrella catch the same total rain if the same cloud is inside. Similarly, for an electric charge inside a closed surface: all field lines that originate on the charge must exit through the surface (field lines can't just stop in space). The total flux — the total number of 'exits' — equals Q_enc/ε₀, regardless of the surface shape."
-
-**E2 — Three-step Gaussian surface procedure**
-"Step 1: identify the symmetry. Spherical charge → use a spherical surface. Cylindrical charge → use a cylindrical surface. Planar charge → use a pillbox (flat cylinder). Step 2: choose the Gaussian surface so that on each part of the surface, either (a) **E** is constant in magnitude and parallel to d**A** (so E contributes a factor of +E × area) or (b) **E** is perpendicular to d**A** (so E contributes zero flux). Step 3: factor |E| out of the integral (because it's constant) and solve E × A_relevant = Q_enc/ε₀."
-
-**E3 — E = 0 inside a conductor (Gauss's law proof)**
-"In electrostatic equilibrium, no charges are moving. If **E** ≠ 0 inside the conductor, the free electrons would feel a force and accelerate — contradicting our assumption of equilibrium. Therefore **E** = 0 inside. Now apply Gauss's law to a surface just inside the conductor: Φ = ∮ E·dA = 0 (since E = 0 everywhere on this surface) → Q_enc = 0. All charge must be on the surfaces — none in the bulk."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — Rain through a bag (flux as net flow)**
 Imagine rain falling straight down. Put a bag (open on top, sealed otherwise) in the rain. The number of raindrops landing inside the bag per second depends only on the horizontal cross-sectional area of the opening at the top — not on the bag's shape, or on rain falling outside the bag. "Electric flux" through a closed surface is the same concept: the net outward "flow" of field lines depends only on the charge inside, not on the shape of the surface or on charges outside. Charges outside contribute rain that enters from one side and exits from another — zero net contribution to the flux.
@@ -92,7 +91,7 @@ Gauss's law gives the total flux ∮ **E**·d**A** = Q_enc/ε₀. It gives E onl
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Spherical shell field mapping**
 Charge a conducting sphere with a Van de Graaff generator. Use an electric field sensor (or grass seeds in oil around the sphere) to map the field outside. Show that E decreases as 1/r² outside. Then show that a hollow conducting sphere has zero field inside (the sensor reads zero inside the shell). This directly demonstrates the Gauss's law result: conductor → E = 0 inside; charge distributes on the surface; field outside as if all charge at the centre.
@@ -105,7 +104,7 @@ Use a simulation (PhET "Charges and Fields") to place a large sheet of charge an
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for guided derivation starting from a known result**:
 
@@ -117,7 +116,7 @@ This guides learners to Gauss's law as a generalisation of Coulomb's law, not as
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Symmetry identification before Gaussian surface selection**: For every Gauss's law problem, require the learner to state: "What is the symmetry of this charge distribution? Spherical / cylindrical / planar?" Then: "What surface shape matches this symmetry?" (Sphere / cylinder / pillbox.) Only after naming the symmetry may the learner draw the Gaussian surface.
 
@@ -129,7 +128,12 @@ This guides learners to Gauss's law as a generalisation of Coulomb's law, not as
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "Gauss's law: the total electric flux through any closed surface equals the enclosed charge divided by ε₀. ∮ E·dA = Q_enc/ε₀. It's always true. But it only gives you E easily when you can choose a surface where E is constant and parallel to dA everywhere — that requires symmetry. Point charge → sphere. Infinite wire → cylinder. Infinite plane → pillbox. Wrong surface → correct flux, but you can't extract E."
 
@@ -139,7 +143,7 @@ This guides learners to Gauss's law as a generalisation of Coulomb's law, not as
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) state Gauss's law in integral form and define all terms; (2) choose the correct Gaussian surface for a given symmetry (spherical, cylindrical, planar); (3) apply Gauss's law to derive E for a uniformly charged sphere, infinite wire, or infinite plane; (4) correctly identify Q_enc (only charges inside the surface); (5) state that E = 0 inside a conductor in electrostatic equilibrium.
 
@@ -158,7 +162,7 @@ After (c)(i): "Were you surprised that the field inside the cavity is non-zero e
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — M1 (wrong Gaussian surface, non-symmetric)**
 "Does your choice of surface give you a surface where E is constant and parallel to dA?" If no — "what symmetry does the charge distribution have?" For a point charge: spherical symmetry → choose a sphere. "On a sphere centred at the charge, is E constant everywhere?" Yes. "Is E parallel to dA everywhere?" Yes (both radial). "Now factor E out: E × 4πr² = Q/ε₀. Solve for E." The step-by-step symmetry argument makes the correct surface choice compulsory.
@@ -171,7 +175,7 @@ Derive the infinite wire result from Coulomb's law by integration (tedious but d
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Law (∮ **E**·dA = Q_enc/ε₀) + three canonical results (sphere: E = Q/4πε₀r²; infinite wire: E = λ/2πε₀r; infinite plane: E = σ/2ε₀) + conductor rule (E = 0 inside metal; charge on surface) + Q_enc = inside only.
 
@@ -187,7 +191,7 @@ Derive the infinite wire result from Coulomb's law by integration (tedious but d
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.em.electric-potential`: V = ∫ E·dr — the field derived from Gauss's law is the input for computing the potential (E already known from Gauss's law → potential computed by integration)
@@ -203,7 +207,25 @@ Derive the infinite wire result from Coulomb's law by integration (tedious but d
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: vector calculus (divergence, curl) formalises Maxwell's equations; complex exponentials describe AC circuits. Chemistry: electrochemistry (Faraday's laws, electrolysis, galvanic cells) maps directly onto electric-current concepts; atomic spectroscopy uses electromagnetic waves. Biology: membrane potentials and nerve impulses are electrical circuits; MRI and ECG are direct clinical applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.em.gauss-law.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG description "Gauss's law relates the total electric flux through a closed surface to the enclosed charge: Φ = Q_enc/ε₀" is accurate.
 
@@ -214,3 +236,7 @@ A second gap: the conductor result (E = 0 inside, charge on surface) is not ment
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

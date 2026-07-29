@@ -1,6 +1,6 @@
 # phys.opt.brewsters-law — Brewster's Law and Complete Polarisation by Reflection
 
-## 1. Identity
+## Identity
 - **Canonical KG ID**: `phys.opt.brewsters-law`
 - **Canonical name**: Brewster's Law and Complete Polarisation by Reflection
 - **Curriculum domain**: Optics
@@ -13,7 +13,19 @@
 
 ---
 
-## 2. Mental Models (4-stage progression)
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.opt.brewsters-law.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+Brewster's law gives the angle at which reflected light is completely polarized; Malus's law relates transmitted intensity to analyser angle.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Concrete (glare from water)**
 Sunlight glinting off a lake is uncomfortably bright. Polarised sunglasses cut this glare because reflected light is mostly horizontally polarised. There exists one special angle — the Brewster angle — at which the reflection is 100 % polarised and the reflected beam contains only the horizontal E-field component. The transmitted beam is partially polarised in the perpendicular direction.
@@ -36,7 +48,7 @@ Dipoles in the refracting medium are driven by the transmitted E-field and rerad
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Formula inversion**: Using tanθ_B = n₁/n₂ instead of n₂/n₁. The ratio is refracting medium over incident medium.
 2. **Brewster's law and Snell's law conflated**: Students try to use sinθ_B = n₂/n₁ (wrong — that is Snell with θ_r = 90°, i.e. the TIR critical angle formula). Brewster uses tan, not sin.
@@ -45,7 +57,7 @@ Dipoles in the refracting medium are driven by the transmitted E-field and rerad
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 **M1 — "tanθ_B = n₁/n₂ (incident over refracting)"**
 - Probe: "Light travels from glass (n=1.5) into air (n=1). What is the Brewster angle?"
@@ -76,27 +88,7 @@ Dipoles in the refracting medium are driven by the transmitted E-field and rerad
 
 ---
 
-## 5. Explanation Library
-
-**E1 — Core statement**
-When unpolarised light strikes a dielectric interface at Brewster's angle θ_B = arctan(n₂/n₁), the reflected beam is completely linearly polarised with its E-field oscillating perpendicular to the plane of incidence (s-polarisation). The transmitted beam is partially polarised.
-
-**E2 — Geometric derivation**
-At Brewster's angle, θ_reflected + θ_refracted = 90°. Proof:
-- By Snell's law: n₁ sinθ_B = n₂ sinθ_r
-- By law of reflection: θ_reflected = θ_B
-- Condition θ_B + θ_r = 90° means sinθ_r = cosθ_B
-- Substituting: n₁ sinθ_B = n₂ cosθ_B → tanθ_B = n₂/n₁ ✓
-
-**E3 — Pile-of-plates polariser**
-A single Brewster reflection gives 100 % polarised reflected beam (weak) but only partially polarised transmitted beam. Stacking N glass plates at Brewster's angle: each plate removes a fraction of s from the transmitted beam. After ~8–10 plates in air-glass, the transmitted beam approaches linear p-polarisation. Used in high-power laser polarisers where absorption losses in sheet polarisers would be destructive.
-
-**E4 — Brewster windows in laser cavities**
-Gas lasers (He-Ne, Ar-ion) use windows tilted at θ_B to seal the gas tube. p-polarised light passes with zero reflection loss; s-polarised light suffers reflection at every pass. The laser naturally oscillates in the p-polarisation mode (lower round-trip loss), producing a linearly polarised output. A practical application of Brewster's law in precision optics.
-
----
-
-## 6. Analogy Library
+## Analogies
 
 **Primary analogy — Tuning fork and resonance direction**
 A tuning fork vibrating in one direction cannot excite a microphone diaphragm aligned exactly along the vibration axis — it excites it maximally when perpendicular. Similarly, p-polarised E-field oscillations driven parallel to the refracted-beam direction cannot radiate energy back along the reflected-beam direction. The reflected direction is the "dead angle" for p-dipoles.
@@ -107,7 +99,7 @@ A tuning fork vibrating in one direction cannot excite a microphone diaphragm al
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 **D1 — Camera polarising filter on lake glare**
 Photograph (or video) a water surface at roughly 53° to horizontal. Without polarising filter: bright glare. With filter aligned to block s-polarisation: glare disappears, underwater features visible. Rotate filter 90°: glare returns. This is direct observation of Brewster polarisation. Measuring the reflection angle and computing n = tanθ_B gives n_water ≈ 1.33 — a real index-of-refraction measurement.
@@ -120,7 +112,7 @@ Aim a vertically polarised laser at a glass slide at ~56° incidence. The p-pola
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 *Guided inquiry is viable here* (unlike some optics topics where the formula is purely definitional):
 
@@ -135,7 +127,7 @@ The discovery path is feasible in a lab with a ray box, glass block, protractor,
 
 ---
 
-## 9. Teaching Actions (dispatch table)
+## Teaching Sequence
 
 | Situation | Action |
 |---|---|
@@ -147,7 +139,12 @@ The discovery path is feasible in a lab with a ray box, glass block, protractor,
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 "Brewster's angle is the one special angle where everything that bounces off a surface is s-polarised — vibrating perpendicular to the plane where the light bends. The formula is compact: tangent of theta-B equals n₂ over n₁. Notice it's tangent, not sine — that's the easy thing to mix up.
 
@@ -159,7 +156,7 @@ The real-world consequence: polarised sunglasses are aligned to block horizontal
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 **Mastery gate**: Student correctly computes θ_B for a given interface using tanθ_B = n₂/n₁ (with correct ratio direction), states which polarisation is absent from the reflected beam (p), and distinguishes the reflection polarisation state from the transmission polarisation state. Three correct multi-step problems.
 
@@ -174,7 +171,7 @@ The real-world consequence: polarised sunglasses are aligned to block horizontal
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **If student cannot distinguish s and p polarisations at this point**:
 Revisit `phys.opt.polarization` — s-polarisation is perpendicular to the plane of incidence (senkrecht = German "perpendicular"), p-polarisation is parallel (parallel to the plane of incidence). Draw the geometry each time: plane of incidence is the plane containing incident ray and surface normal; s is in-plane vibrating ⊥ to that; p is vibrating in that plane.
@@ -187,7 +184,7 @@ The reflected beam is 100 % s-polarised. Memory aid: the reflected beam is the w
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Declarative (Brewster condition + which beam is polarised) + procedural (tanθ_B = n₂/n₁ computation)
 **Forgetting risk**: High — the formula is similar to Snell's and TIR formulas; ratio direction and sin-vs-tan confusions resurface rapidly.
@@ -196,7 +193,7 @@ The reflected beam is 100 % s-polarised. Memory aid: the reflected beam is the w
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 **Near transfer**: Pile-of-plates polariser (multiple Brewster transmissions produce linearly polarised transmitted beam).
 **Medium transfer**: Laser Brewster windows (polarisation selection mechanism in gas lasers).
@@ -205,7 +202,25 @@ The reflected beam is 100 % s-polarised. Memory aid: the reflected beam is the w
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: ray diagrams use similar triangles; Snell's law uses trigonometry; wave optics uses Fourier analysis. Chemistry: spectrophotometry and colorimetry measure concentrations optically; X-ray diffraction uses diffraction physics. Biology: the eye is a biological optical instrument; microscopy, endoscopy, and photoreception are optics applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.opt.brewsters-law.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 - KG prerequisite `phys.opt.polarization` is necessary and sufficient — s/p distinction, Malus's law, and the three polarisation mechanisms are all needed before this entry.
 - No unlocks listed in the current KG; the concept is a natural prerequisite for pile-of-plates and laser-cavity discussions if those are added in future KG extensions.
@@ -215,3 +230,7 @@ The reflected beam is 100 % s-polarised. Memory aid: the reflected beam is the w
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

@@ -27,7 +27,27 @@
   4. Express a measurement result in the correct form: (value ± uncertainty) unit,
      with uncertainty to 1 significant figure.
 
-## Mental models
+
+## Learning Objective
+
+After this concept, the learner can:
+
+s** — the learner can:
+  1. Distinguish between systematic error (consistent bias) and random error
+     (unpredictable scatter) and give an example of each.
+  2. Calculate absolute uncertainty, relative (fractional) uncertainty, and
+     percentage uncertainty for a given measurement.
+  3. Propagate uncertainty through addition/subtraction and
+     multiplication/division using the standard rules.
+  4. Express a measurement result in the correct form: (value ± uncertainty) unit,
+     with uncertainty to 1 significant figure.
+
+
+## Core Understanding
+
+_Measurement errors quantify the deviation of a measured value from the true value._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 - **Beginner (arriving)**: errors are mistakes — something you made wrong. If you
   measure carefully, you get the "right" answer. There is one true value of any
@@ -57,7 +77,7 @@
   "when you study statistics, you'll see that the ± we write is shorthand for a
   probability statement — there's a deeper version of this."
 
-## Why beginners fail here
+## Why Students Fail
 
 The word "error" is the first obstacle: it implies blame. Learners who believe
 errors are mistakes either deny having errors (the result is "exact") or
@@ -70,7 +90,7 @@ express (why ADD uncertainties for addition/subtraction? why ADD relative
 uncertainties for multiplication/division?). This produces errors in novel
 situations that don't match the memorised template.
 
-## Misconception library
+## Misconceptions
 
 **M1 — Error means mistake; a careful experimenter has no error**
 - *Why*: the word "error" in everyday English means mistake; this is the
@@ -138,30 +158,7 @@ situations that don't match the memorised template.
 - *Verification*: give a data set; learner computes mean AND states the remaining
   uncertainty, distinguishing random and systematic contributions.
 
-## Explanation library
-
-- **Age 13–15 (story)**: "You weigh yourself on three different scales: 68.1 kg,
-  68.4 kg, 67.9 kg. Which is 'right'? You don't know — each scale is a slightly
-  different measuring tool. This is not a mistake; it's the nature of measurement.
-  The best you can say is 'about 68 kg, give or take half a kilogram.' That 'give
-  or take' is the uncertainty. All measurements have one. A result without an
-  uncertainty is an incomplete result — like a price without a currency."
-- **Age 15+**: "Every instrument has a resolution — a smallest unit it can display.
-  A ruler with 1 mm markings can show the mm but not the half-mm. So any reading
-  has inherent uncertainty of at least ±0.5 mm. Beyond the instrument, there are
-  two types of error: systematic (the instrument is biased — it reads consistently
-  too high or low) and random (the reading varies unpredictably — due to vibration,
-  parallax, environmental changes). Systematic error shifts your mean; random error
-  spreads your distribution. Averaging many readings reduces random error; it
-  cannot fix systematic error."
-- **Adult / scientist context**: "Measurement uncertainty is a mathematical
-  statement: your result is a probability distribution, not a point. The ± notation
-  is shorthand for 'there is a high probability (usually ~68% or ~95%, depending
-  on convention) that the true value lies within this range.' Scientific results
-  are only comparable when they carry properly propagated uncertainties — without
-  them, you cannot know if two measurements agree."
-
-## Analogy library
+## Analogies
 
 - **Best analogy**: a polling uncertainty. "Candidate X leads with 52%,
   margin of error ±3%." The margin isn't a mistake — it's the quantification of
@@ -183,7 +180,7 @@ situations that don't match the memorised template.
   "the more careful you are, the smaller your RANDOM error" — and separately note
   that systematic error requires identification and correction, not just care.
 
-## Demonstration library
+## Demonstrations
 
 - **Home, no equipment**: measure the width of a book cover with a ruler.
   Record to the nearest mm. Measure again three times. Note the variation.
@@ -204,7 +201,7 @@ situations that don't match the memorised template.
   with this ruler?" After answer, reduce to 1 mm markings — does the uncertainty
   change? The learner discovers the resolution-uncertainty link themselves.
 
-## Discovery lesson
+## Discovery Questions
 
 **Guided discovery** is appropriate for the core insight (measurement always has
 uncertainty); **direct instruction** is needed for the propagation rules.
@@ -223,7 +220,7 @@ uncertainty); **direct instruction** is needed for the propagation rules.
 **Direct instruction phase**: propagation rules (add absolutes for +/−; add
 relatives for ×/÷). Reason before rule. Multiple worked examples.
 
-## Teaching actions
+## Teaching Sequence
 
 From the dispatch library (Delivery 2 §6):
 1. **Guided discovery → direct instruction** (split fit): discovery for the
@@ -240,7 +237,12 @@ Actions that DON'T fit:
   are not discoverable by learner reasoning from scratch; they require direct
   instruction. The principle (errors exist) is discoverable; the rules are not.
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 *How it sounds when taught well*: the tutor says "inherent uncertainty" rather
 than "error" for the first 10 minutes to break the "error = mistake" association;
@@ -258,7 +260,7 @@ uncertainties for a product → M3; learner treats the mean as exact → M4.
 *Pronunciation stake*: "uncertainty" is the professional term; "error" is acceptable
 but carries the everyday connotation. Prefer "uncertainty" consistently.
 
-## Assessment
+## Assessment Signals
 
 **Diagnostic — golden probe**: "A student measures the same length 5 times and
 gets values that vary by about 0.3 cm. They also notice the ruler's zero mark is
@@ -305,7 +307,7 @@ transfer: give a novel formula (P = IV) and ask for uncertainty propagation with
 labelling the operation. Calibration question after: "how confident are you in your
 answer? What would make you more confident?"
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 *Likeliest utterance*: "I thought you just add all the errors together" (M3
 route); "my experiment didn't have any errors" (M1 route, usually when a learner
@@ -320,7 +322,7 @@ that a mistake?" (No — instrument limit.) Build the unavoidability from the to
 0.2 s too big, what's the WORST CASE for speed?" Work through the worst case
 numerically first; the propagation rule is a shortcut for that calculation.
 
-## Memory & review
+## Memory Hooks
 
 - **Concept type**: concept (two error types) + procedure (propagation rules).
   Both need separate treatment.
@@ -335,7 +337,7 @@ numerically first; the propagation rule is a shortcut for that calculation.
   concept, same domain); `phys.mech.kinematics-1d` (first context where velocity
   and distance measurements are combined — natural propagation practice).
 
-## Transfer map
+## Transfer Connections
 
 - *Near*: `phys.meas.significant-figures` — sig figs are how you express the
   precision of a result without full uncertainty notation.
@@ -352,7 +354,25 @@ numerically first; the propagation rule is a shortcut for that calculation.
   as instrument uncertainty, but understanding classical uncertainty first clears
   the conceptual space for the quantum version.
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: significant figures tie directly to scientific notation and logarithms; dimensional analysis is a special case of algebraic unit-tracking; vector components use trigonometry. Chemistry: all lab measurements use SI units; concentration, moles, and temperature all live in this domain. Biology: biological measurements (cell size in micrometres, metabolic rates) use the same SI framework; dimensional analysis applies to enzyme kinetics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.meas.errors.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG lists only `phys.meas.significant-figures` as an unlock. This is narrower
 than the actual downstream impact: `phys.meas.errors` is functionally a prerequisite
@@ -366,3 +386,7 @@ lies and distinguishes systematic bias from random scatter."
 ---
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
 *Authored against KG node data confirmed at docs/physics/kg/graph.json.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

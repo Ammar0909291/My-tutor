@@ -1,6 +1,6 @@
 # phys.em.biot-savart — The Biot-Savart Law
 
-## 1. Identity
+## Identity
 - **Canonical KG ID**: `phys.em.biot-savart`
 - **Canonical name**: The Biot-Savart Law
 - **Curriculum domain**: Electromagnetism
@@ -13,7 +13,19 @@
 
 ---
 
-## 2. Mental Models (4-stage progression)
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.em.biot-savart.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+The Biot-Savart law gives the infinitesimal magnetic field contribution dB from a current element Id𝑙.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Concrete (current as source of magnetic field)**
 Every tiny segment of a wire carrying current creates a magnetic field in the surrounding space. The Biot-Savart law is the recipe: it tells you how large that contribution is (depends on current and segment length) and what direction it points (perpendicular to both the segment and the line to the field point). Sum up all the tiny contributions → net field.
@@ -48,7 +60,7 @@ Biot-Savart is the general source law; Ampere's law (∮B⃗·dl⃗ = μ₀I_enc
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Cross-product direction**: Finding the direction of dl⃗ × r̂ is the most common error. Students need to identify dl⃗ (along the current), r̂ (from element to field point), and apply the right-hand rule correctly.
 2. **r̂ vs r⃗ confusion**: r̂ is the unit vector FROM source TO field point; r⃗ is the position vector of the field point relative to the source. Students often reverse the direction or use r⃗ instead of r̂.
@@ -57,7 +69,7 @@ Biot-Savart is the general source law; Ampere's law (∮B⃗·dl⃗ = μ₀I_enc
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 **M1 — "r̂ points FROM field point TO source (reversed)"**
 - Probe: "A horizontal wire carries current to the right. A field point is directly above the wire. What direction does r̂ point?"
@@ -81,31 +93,7 @@ Biot-Savart is the general source law; Ampere's law (∮B⃗·dl⃗ = μ₀I_enc
 
 ---
 
-## 5. Explanation Library
-
-**E1 — Analogy to Coulomb / superposition**
-Coulomb's law: dE⃗ = (1/4πε₀)(dq r̂)/r² — each charge element contributes to E.
-Biot-Savart: dB⃗ = (μ₀/4π)(Idl⃗ × r̂)/r² — each current element contributes to B.
-Key structural difference: Coulomb is a scalar (magnitude) with separate direction assignment; Biot-Savart is inherently a cross product (direction is built in). This is why finding B directions requires more care than E directions.
-
-**E2 — Infinite straight wire derivation (key result)**
-Set up coordinates: wire along z-axis, field point at perpendicular distance d.
-Consider element Idz at position z. Distance to field point: r = √(d²+z²). Angle θ: sinθ = d/r.
-dB = (μ₀/4π) × Idz × sinθ / r² = (μ₀/4π) × Idz × d / (d²+z²)^(3/2)
-All elements produce B in the same direction (azimuthal, by right-hand rule).
-B = (μ₀Id/4π) ∫_{-∞}^{∞} dz/(d²+z²)^(3/2) = (μ₀Id/4π) × [2/d²] = μ₀I/(2πd) ✓
-
-**E3 — Circular loop at centre (key result)**
-Every element dl of the loop is perpendicular to r̂ (which points radially inward from the loop toward the centre). So sinθ = 1 for all elements.
-All elements contribute dB pointing along the axis (same direction by right-hand rule).
-B = ∮ (μ₀/4π)(Idl)/R² = (μ₀I/4πR²) × 2πR = μ₀I/(2R) ✓
-
-**E4 — When to use Biot-Savart vs. Ampere's law**
-Use Ampere's law when the geometry has sufficient symmetry for ∮B⃗·dl⃗ to factor (∞ straight wire, ∞ solenoid, toroid). Use Biot-Savart for all other geometries: finite wire, circular arc, off-axis points, irregular current distributions.
-
----
-
-## 6. Analogy Library
+## Analogies
 
 **Primary analogy — Sound from a speaker array**
 A line of speaker elements (phased array) each produces sound. The total sound pressure at any point is the sum (integral) of contributions from each element. Each element contributes based on its distance and orientation relative to the listener. Biot-Savart is identical in structure: current elements are the "speakers," magnetic field at the observation point is the "total sound."
@@ -116,7 +104,7 @@ A line of speaker elements (phased array) each produces sound. The total sound p
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 **D1 — Compass deflection around a wire**
 Run a large DC current (10–20 A) through a thick wire. Place compasses at various distances. Observe: field is circumferential (tangential), magnitude decreases with distance. Verify B ∝ 1/d by measuring deflection angle and computing tan(θ) ∝ B_wire/B_Earth at different distances. Quantitative if Earth's horizontal field is known (~2×10⁻⁵ T at midlatitudes).
@@ -129,7 +117,7 @@ Two identical circular loops separated by a distance equal to their radius creat
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 *Direct instruction is appropriate* — the Biot-Savart law is a foundational empirical law (discovered by Biot and Savart in 1820 by measuring fields from wire segments); it cannot be derived from more fundamental electricity principles without Maxwell's equations. However, the structure of the integral can be "discovered" by building from the infinite-wire Ampere result:
 
@@ -144,7 +132,7 @@ This reverse-engineering approach gives physical motivation without requiring Ma
 
 ---
 
-## 9. Teaching Actions (dispatch table)
+## Teaching Sequence
 
 | Situation | Action |
 |---|---|
@@ -156,7 +144,12 @@ This reverse-engineering approach gives physical motivation without requiring Ma
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 "The Biot-Savart law tells you the field from a tiny piece of wire. Take a current element — a small length dl carrying current I. It creates a field dB whose magnitude is mu-naught over four-pi times I dl sine-theta over r-squared. And the direction? It's perpendicular to both dl and the line from that element to your field point — that's the cross product dl cross r-hat.
 
@@ -168,7 +161,7 @@ And one efficiency rule: if you're asked about an infinite wire or a solenoid, d
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 **Mastery gate**: Student correctly sets up the Biot-Savart integral for a specified current geometry, identifies the correct direction using the cross product, evaluates a standard result (infinite wire or circular loop) without formula lookup, and recognises when Ampere's law is more efficient. Three multi-step problems including at least one where the direction must be determined from the cross product.
 
@@ -183,7 +176,7 @@ And one efficiency rule: if you're asked about an infinite wire or a solenoid, d
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **If cross-product direction is persistently wrong**:
 Practice isolated cross-product calculations before returning to the law: a⃗ × b⃗ for six standard orientation pairs using the right-hand rule. Do not proceed with Biot-Savart applications until the cross product is reliable.
@@ -196,7 +189,7 @@ Cover the formula sheet and ask: "Set up the dB expression from scratch using on
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Declarative (the law formula, standard results) + procedural (integration setup, cross-product direction)
 **Forgetting risk**: High — the cross-product direction and the r̂ convention are the first things forgotten; the distinction from Ampere's law also blurs.
@@ -205,7 +198,7 @@ Cover the formula sheet and ask: "Set up the dB expression from scratch using on
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 **Near transfer**: Ampere's law (the direct unlock — recognising when symmetry makes the line integral factorable).
 **Medium transfer**: Magnetic field of a solenoid (Ampere's law application using the Biot-Savart foundation for physical motivation).
@@ -214,7 +207,25 @@ Cover the formula sheet and ask: "Set up the dB expression from scratch using on
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: vector calculus (divergence, curl) formalises Maxwell's equations; complex exponentials describe AC circuits. Chemistry: electrochemistry (Faraday's laws, electrolysis, galvanic cells); atomic spectroscopy uses electromagnetic waves. Biology: membrane potentials and nerve impulses are electrical circuits; MRI and ECG are direct clinical applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.em.biot-savart.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 - KG prerequisite `phys.em.magnetic-force` is necessary and sufficient — understanding B-field direction and its effect on moving charges (F = qv×B) is needed before understanding where B comes from (Biot-Savart). The cross-product structure is introduced in the force law prerequisite.
 - The unlock `phys.em.amperes-law` is well-motivated: Ampere's law is the symmetry-exploiting consequence of Biot-Savart, and students who have done Biot-Savart integrations are primed to appreciate Ampere's efficiency.
@@ -224,3 +235,7 @@ Cover the formula sheet and ask: "Set up the dB expression from scratch using on
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

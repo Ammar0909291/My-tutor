@@ -1,6 +1,6 @@
 # phys.opt.dispersion — Dispersion and Prisms
 
-## 1. Identity
+## Identity
 
 | Field | Value |
 |---|---|
@@ -16,7 +16,19 @@
 
 ---
 
-## 2. Mental Models
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.opt.dispersion.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+Dispersion is the separation of white light into its constituent wavelengths by a prism due to wavelength-dependent refractive index.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 ### Stage 1 — Intuitive (no formalism)
 
@@ -61,7 +73,7 @@ This gives the same focal length for two wavelengths (typically F and C lines) w
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Dispersion = refraction** — learners conflate dispersion with refraction in general. Refraction is the bending of light at an interface; dispersion is the *differential* bending by wavelength. A single-wavelength laser beam is refracted by a prism but not dispersed (no splitting). White light is refracted AND dispersed.
 2. **Violet bends least** — learners reason "violet is a short wavelength → small bending" by analogy with wavelength and distance. In fact, shorter wavelength → higher n → more bending. The analogy with, say, diffraction (longer wavelength bends more) confuses the direction.
@@ -70,7 +82,7 @@ This gives the same focal length for two wavelengths (typically F and C lines) w
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 ### M1 — "Dispersion is the same as refraction"
 
@@ -102,23 +114,7 @@ This gives the same focal length for two wavelengths (typically F and C lines) w
 
 ---
 
-## 5. Explanation Library
-
-### Explanation A — Why n depends on λ
-
-Light is an oscillating electromagnetic field. In a dielectric medium, the field polarises bound electrons, creating oscillating dipoles. The refractive index is determined by how strongly the medium responds. Closer to an electronic resonance frequency (in the UV for glass), the response is stronger → higher n. Violet is closer to the UV resonance than red → n_violet > n_red. This is the physical origin of normal dispersion.
-
-### Explanation B — Deviation angle and the thin-prism formula
-
-For a thin prism (small apex angle A, small incidence angle), the minimum deviation approximation is δ ≈ (n − 1)A for both surfaces combined. Since n > 1 and n varies with λ, δ varies with λ. Total angular spread (violet to red): Δδ = (n_V − n_R) × A. For crown glass (Δn ≈ 0.018) with A = 30°: Δδ ≈ 0.018 × 30° = 0.54° of spread. This small angle is all that separates the colours in a real prism — visible because the coloured bands are observed at long distance.
-
-### Explanation C — Rainbow geometry
-
-Primary rainbow: sunlight enters raindrop (refraction), reflects once off the back surface (TIR), exits (refraction). The geometry of these two refractions and one reflection produces a deviation of ≈138° for red (minimum deviation angle) and ≈140° for violet. Observer sees the reflected light at 180° − 138° = 42° from the antisolar point (red) and 180° − 140° = 40° (violet). Red forms the outer arc; violet the inner arc. The sky inside the rainbow is brighter (more orders of reflection from drops at smaller angles all overlap) than outside.
-
----
-
-## 6. Analogy Library
+## Analogies
 
 ### Primary analogy — Runners on different surfaces
 
@@ -132,7 +128,7 @@ White light contains all wavelengths. The prism does not add colour — it separ
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 ### Demo A — White light through a prism on a white wall
 
@@ -154,7 +150,7 @@ White light contains all wavelengths. The prism does not add colour — it separ
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 ### Stance: Argue the inductive case — *observe the rainbow, then build the model*
 
@@ -174,7 +170,7 @@ White light contains all wavelengths. The prism does not add colour — it separ
 
 ---
 
-## 9. Teaching Actions
+## Teaching Sequence
 
 | Prior state | Action |
 |---|---|
@@ -186,7 +182,12 @@ White light contains all wavelengths. The prism does not add colour — it separ
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 ### Opening
 "Why is a rainbow red on the outside and violet on the inside? A raindrop is not coloured — it is full of white sunlight. The drop disperses that light: violet bends more inside the drop than red does, so it exits at a slightly different angle. Your eye picks up each colour from a slightly different drop, arranged in a ring. Dispersion turns one beam of white light into a sorted spread of wavelengths."
@@ -202,7 +203,7 @@ White light contains all wavelengths. The prism does not add colour — it separ
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 ### Mastery gate
 
@@ -231,7 +232,7 @@ Expected: n decreases as λ increases (violet has higher n than red). If reverse
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **Recovery for violet/red confusion**:
 1. Provide the n table: n_violet ≈ 1.53, n_red ≈ 1.51.
@@ -246,7 +247,7 @@ Expected: n decreases as λ increases (violet has higher n than red). If reverse
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Relational (n vs. λ relationship) + mechanistic (Snell's law applied per wavelength) + phenomenon (rainbow geometry)
 
@@ -266,7 +267,7 @@ Expected: n decreases as λ increases (violet has higher n than red). If reverse
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 | Target concept | Bridge |
 |---|---|
@@ -279,7 +280,25 @@ Expected: n decreases as λ increases (violet has higher n than red). If reverse
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: ray diagrams use similar triangles; Snell's law uses trigonometry; wave optics uses Fourier analysis. Chemistry: spectrophotometry and colorimetry measure concentrations optically; X-ray diffraction uses diffraction physics. Biology: the eye is a biological optical instrument; microscopy, endoscopy, and photoreception are optics applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.opt.dispersion.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 **KG note**: `phys.opt.refraction` is the correct prerequisite — Snell's law and n must be fluent. No KG unlocks are listed, but this concept feeds naturally into `phys.opt.lenses` (chromatic aberration) and spectroscopy applications. The "proficient / understand" tags are correct — the core is conceptual (n vs. λ, mechanism), with light calculation only in the thin-prism formula.
 
@@ -288,3 +307,7 @@ Expected: n decreases as λ increases (violet has higher n than red). If reverse
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

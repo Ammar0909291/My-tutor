@@ -1,6 +1,6 @@
 # phys.wave.interference — Wave Interference
 
-## 1. Identity
+## Identity
 
 | Field | Value |
 |---|---|
@@ -16,7 +16,19 @@
 
 ---
 
-## 2. Mental Models
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.wave.interference.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+Wave interference is the superposition of two or more waves producing regions of reinforcement or cancellation.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 ### Stage 1 — Intuitive (no formalism)
 
@@ -62,7 +74,7 @@ Perfect coherence is an idealisation. Real sources have finite spectral bandwidt
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Interference requires waves to be "in phase" at the sources** — learners confuse coherence (constant phase *relationship*) with being in-phase (phase difference = 0). Two coherent sources can have any fixed phase offset; what matters is that the offset stays constant.
 2. **Destructive interference destroys energy** — at a dark fringe, I = 0. Learners conclude the energy has been annihilated. In fact, the energy is redistributed: bright fringes have 4× the intensity of a single source, compensating exactly for the dark fringes; total power is conserved.
@@ -71,7 +83,7 @@ Perfect coherence is an idealisation. Real sources have finite spectral bandwidt
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 ### M1 — "The two sources must be in phase (Δφ = 0) for interference to occur"
 
@@ -103,30 +115,7 @@ Perfect coherence is an idealisation. Real sources have finite spectral bandwidt
 
 ---
 
-## 5. Explanation Library
-
-### Explanation A — Why coherence is the key requirement
-
-Coherence means the phase difference between two sources remains constant (or varies slowly compared to the detector's integration time). If the phase difference fluctuates randomly in τ_c (coherence time), the interference pattern shifts position at the rate 1/τ_c. If τ_c is shorter than the detector's response time, many pattern positions are averaged → uniform intensity → no visible pattern. Laser light: τ_c ~ 10⁻⁸–10⁻³ s → patterns visible. Incandescent: τ_c ~ 10⁻¹⁵ s → no pattern.
-
-### Explanation B — Two-slit fringe derivation
-
-For two slits separated by d at a screen distance D, the path difference to a point at height y is:
-
-r₁ ≈ √(D² + (y + d/2)²) ≈ D + (y + d/2)²/2D  
-r₂ ≈ D + (y − d/2)²/2D  
-Δ = r₁ − r₂ ≈ yd/D (for y, d ≪ D)
-
-Bright fringe: yd/D = mλ → y_m = mλD/d.  
-Fringe spacing: Δy = y_{m+1} − y_m = λD/d.
-
-### Explanation C — Intensity pattern (phasor addition)
-
-Two waves of amplitude A, path difference Δ → phase difference φ = 2πΔ/λ. Phasor addition: resultant amplitude E_R = 2A cos(φ/2). Intensity I ∝ E_R² = 4A² cos²(φ/2) = 4I₀ cos²(φ/2). At φ = 0 (Δ = 0): I = 4I₀. At φ = π (Δ = λ/2): I = 0. Pattern: raised cosine squared from 0 to 4I₀.
-
----
-
-## 6. Analogy Library
+## Analogies
 
 ### Primary analogy — Two loudspeakers in phase
 
@@ -140,7 +129,7 @@ Dark fringes are dark only along the direct line to the screen at that specific 
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 ### Demo A — Ripple tank with two point sources
 
@@ -162,7 +151,7 @@ Dark fringes are dark only along the direct line to the screen at that specific 
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 ### Stance: Argue the inductive case — *observe the pattern, then derive the condition*
 
@@ -182,7 +171,7 @@ Dark fringes are dark only along the direct line to the screen at that specific 
 
 ---
 
-## 9. Teaching Actions
+## Teaching Sequence
 
 | Prior state | Action |
 |---|---|
@@ -194,7 +183,12 @@ Dark fringes are dark only along the direct line to the screen at that specific 
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 ### Opening
 "Two sources of the same wave. At some points in space, they add up: double the amplitude, four times the intensity. At other points, they cancel: zero amplitude, zero intensity. The pattern of adds and cancels depends on the path difference — how much farther the wave travels from one source than the other. That is interference."
@@ -210,7 +204,7 @@ Dark fringes are dark only along the direct line to the screen at that specific 
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 ### Mastery gate
 
@@ -242,7 +236,7 @@ Expected: Δy = 600 × 10⁻⁹ × 2 / (3 × 10⁻⁴) = 4 mm. If the learner ca
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **Recovery for path-difference condition confusion**:
 1. Draw a picture: two sources S₁ and S₂, point P on the screen.
@@ -257,7 +251,7 @@ Expected: Δy = 600 × 10⁻⁹ × 2 / (3 × 10⁻⁴) = 4 mm. If the learner ca
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Quantitative formula + physical criteria + conceptual (coherence, energy conservation)
 
@@ -277,7 +271,7 @@ Expected: Δy = 600 × 10⁻⁹ × 2 / (3 × 10⁻⁴) = 4 mm. If the learner ca
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 | Target concept | Bridge |
 |---|---|
@@ -291,7 +285,25 @@ Expected: Δy = 600 × 10⁻⁹ × 2 / (3 × 10⁻⁴) = 4 mm. If the learner ca
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: wave equations use trigonometry (sin/cos) and Fourier analysis. Chemistry: spectroscopy (IR, UV-vis, NMR) identifies molecules by wave-matter interactions. Biology: sound (hearing, ultrasound imaging), light (vision, photosynthesis), and seismic waves all use wave physics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.wave.interference.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 **KG note**: `phys.wave.superposition` is the necessary prerequisite — the signed displacement addition and the concept that waves pass through each other must be fluent. The three unlocks (`phys.opt.youngs-experiment`, `phys.wave.beats`, `phys.wave.standing-waves`) are all direct applications of the path-difference framework developed in this concept.
 
@@ -300,3 +312,7 @@ Expected: Δy = 600 × 10⁻⁹ × 2 / (3 × 10⁻⁴) = 4 mm. If the learner ca
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

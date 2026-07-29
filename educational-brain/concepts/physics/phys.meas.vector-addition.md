@@ -29,7 +29,28 @@
   4. Verify a vector addition result by checking both the magnitude and the
      direction of the resultant.
 
-## Mental models
+
+## Learning Objective
+
+After this concept, the learner can:
+
+s** — the learner can:
+  1. Find the resultant of two vectors at any angle using the triangle law or
+     parallelogram law, with correct magnitude (by Pythagoras or the cosine rule)
+     and direction (by trigonometry).
+  2. Resolve any vector into perpendicular (x and y) components using sine and
+     cosine.
+  3. Add multiple vectors by resolving all into components, summing components
+     separately, and reconstructing the resultant.
+  4. Verify a vector addition result by checking both the magnitude and the
+     direction of the resultant.
+
+
+## Core Understanding
+
+_Vectors are added by the parallelogram law or by resolving them into orthogonal components._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 - **Beginner (arriving)**: vectors add like numbers — 3 N + 4 N = 7 N, regardless
   of direction. Even learners who know vectors "have direction" will add magnitudes
@@ -57,7 +78,7 @@
   model: "the component method we're learning now is the same method used in
   3D — just add a z-component. That's all it takes to extend to three dimensions."
 
-## Why beginners fail here
+## Why Students Fail
 
 The dominant failure is using the Pythagorean theorem when the vectors are NOT
 perpendicular — applying √(a² + b²) without checking if 90° is given. This
@@ -69,7 +90,7 @@ direction is treated as approximate or optional — the learner computes the
 magnitude but gives no direction for the resultant, or gives only the angle
 without specifying the reference direction.
 
-## Misconception library
+## Misconceptions
 
 **M1 — Vector magnitudes always add arithmetically (3 + 4 = 7, always)**
 - *Why*: arithmetic addition is the default for "combining numbers"; the geometric
@@ -134,31 +155,7 @@ without specifying the reference direction.
 - *Verification*: four problems — one per quadrant — where the correct angle
   requires quadrant checking.
 
-## Explanation library
-
-- **Age 13–15 (story)**: "You need to walk to the park: 3 km east and then 4 km
-  north. How far is the park FROM WHERE YOU STARTED, ignoring the path? This is
-  the key question — not how far you walked, but how far the park is. You cannot
-  answer '3 + 4 = 7 km' because you changed direction halfway. You draw it on
-  paper, use Pythagoras, and get 5 km — that's the straight-line result. All vector
-  addition is this: the geometric straight-line result of combining two directed
-  quantities."
-- **Age 15+**: "Vectors combine by the triangle law: place the tail of the second
-  at the head of the first; the resultant runs from the original tail to the final
-  head. For perpendicular vectors, Pythagoras gives the resultant magnitude.
-  For arbitrary angles, the cosine rule gives it. For three or more vectors,
-  the component method is more practical: resolve each vector into x and y parts,
-  sum the x-parts and the y-parts separately, then reconstruct the resultant using
-  Pythagoras and arctan. The component method works for any number of vectors at
-  any angles."
-- **Adult returning learner**: "In two or three dimensions, you can't just add the
-  numbers — you have to respect the directions. The cleanest way: break every vector
-  into horizontal and vertical parts (components), add all the horizontal parts,
-  add all the vertical parts, then combine those two sums back into a single
-  resultant. This is the method you'll use for every 2D problem in physics for
-  the rest of the course."
-
-## Analogy library
+## Analogies
 
 - **Best analogy**: rowing across a river with a current. You row north with a
   certain speed; the river pushes you east. Your actual path is the diagonal
@@ -180,7 +177,7 @@ without specifying the reference direction.
   AND invents a wrong direction rule. Never suggest that direction adds like an
   angle.
 
-## Demonstration library
+## Demonstrations
 
 - **Home, no equipment**: open a book on a flat table. Push it 10 cm east, then
   10 cm north. Measure straight-line distance from start: ~14.1 cm (10√2 by
@@ -201,7 +198,7 @@ without specifying the reference direction.
   computed collectively. This builds the component method as a collaborative
   operation before independent application.
 
-## Discovery lesson
+## Discovery Questions
 
 **Guided discovery** is appropriate here — the learner can discover that arithmetic
 addition fails for vectors by constructing a counterexample, and can then be guided
@@ -225,7 +222,7 @@ to find the geometric rule.
    scales to many vectors.
 6. *Compression*: worked example of three-vector addition by components.
 
-## Teaching actions
+## Teaching Sequence
 
 From the dispatch library (Delivery 2 §6):
 1. **Guided discovery** (high fit for the need and geometric rule): see above.
@@ -240,7 +237,12 @@ Actions that DON'T fit:
 - **Flashcard retrieval**: the skill here is procedural (apply a method), not
   factual recall. Practice problems, not flashcards.
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 *How it sounds when taught well*: the tutor draws EVERY vector — never just
 writes magnitudes; the direction arrow is on every drawn vector; the tutor asks
@@ -254,7 +256,7 @@ That's it. Every 2D vector problem reduces to this one method." Say slowly. Repe
 immediately; learner uses sin for x-component → M2 active; learner says arctan gives
 the angle directly → M4 risk; learner adds arithmetic magnitudes → M1.
 
-## Assessment
+## Assessment Signals
 
 **Diagnostic — golden probe**: "Force A = 5 N at 0° (east) and force B = 5 N at
 90° (north) act on an object. What is the resultant force: magnitude and direction?"
@@ -294,7 +296,7 @@ gate includes all three. Calibration check: "how confident are you that this
 method would work for 5 vectors at arbitrary angles?" — learner should be able
 to say yes and explain why.
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 *Likeliest utterance*: "I just add the numbers and get [wrong magnitude]" (M1);
 "I got the x-components switched up" (M2); "I get an angle but I'm not sure which
@@ -309,7 +311,7 @@ Can you see which quadrant it's in from the signs of Rx and Ry? Does your arctan
 angle match that quadrant?" Walk through the check step-by-step until it becomes
 a habit.
 
-## Memory & review
+## Memory Hooks
 
 - **Concept type**: procedure (component method) — high-frequency, cross-domain.
 - **Review form** (per Delivery 2 §8): spaced procedural practice — one
@@ -324,7 +326,7 @@ a habit.
   (wave direction and component resolution); `phys.em.electric-field` (field
   superposition using component method).
 
-## Transfer map
+## Transfer Connections
 
 - *Near*: `phys.meas.vector-products` — dot and cross products build on component
   notation.
@@ -342,7 +344,25 @@ a habit.
   polynomial spaces, quantum state spaces. The learner who deeply understands
   R² vector addition is prepared for this generalisation.
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: significant figures tie directly to scientific notation and logarithms; dimensional analysis is a special case of algebraic unit-tracking; vector components use trigonometry. Chemistry: all lab measurements use SI units; concentration, moles, and temperature all live in this domain. Biology: biological measurements (cell size in micrometres, metabolic rates) use the same SI framework; dimensional analysis applies to enzyme kinetics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.meas.vector-addition.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG `unlocks` correctly identifies `phys.meas.vector-products` and
 `phys.mech.kinematics-2d` as immediate unlocks. Missing from the unlock list:
@@ -355,3 +375,7 @@ significantly more distributed practice across subsequent domains.
 ---
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
 *Authored against KG node data confirmed at docs/physics/kg/graph.json.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

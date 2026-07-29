@@ -16,7 +16,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply transverse waves at the **understand** level (Bloom) with difficulty tier **proficient**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.wave.transverse-waves.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_In transverse waves the particle displacement is perpendicular to the direction of wave propagation._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: A transverse wave is one where the particles of the medium move up and down (or side to side) while the wave moves forward. Like wiggling a rope side-to-side: your wrist moves up and down, and a travelling hump moves along the rope.
 
@@ -30,7 +42,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **direction confusion in a 2D diagram**: learners see a sinusoidal wave drawn on a page (horizontal axis = position or time, vertical axis = displacement) and cannot identify which direction is the wave direction and which is the particle displacement. They read the diagram as a snapshot of a curvy rope and assume the rope curves forward — which conflates the wave shape with the particle trajectory.
 
@@ -38,7 +50,7 @@ The secondary root cause is **"transverse means on the surface"**: learners asso
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "Particles in a transverse wave move along the wave's path"**
 - Characteristic phrase: "A piece of the rope would travel forward as the wave does."
@@ -66,20 +78,7 @@ The secondary root cause is **"transverse means on the surface"**: learners asso
 
 ---
 
-## Explanation library
-
-**E1 — The perpendicular motion definition**
-"Transverse: from Latin 'transversus' — across. In a transverse wave, the oscillation is ACROSS the propagation direction — perpendicular to it. Draw the wave moving right (+x). Now draw an arrow for how a single particle moves. The particle's arrow must be perpendicular: up-down (+y or −y). Those two arrows must be at 90°. If they're at 90°, it's transverse."
-
-**E2 — The rope demonstration explained**
-"Hold one end of a rope attached to a wall. Flick your wrist upward, then downward. A transverse pulse travels along the rope. Your hand moved in y; the pulse moved in x. At any point along the rope, you can watch a small section move up and then back down as the pulse passes. That section never moves in x — only in y. The pulse moved in x; the material moved in y. That is a transverse wave."
-
-**E3 — Why fluids can't support transverse waves**
-"Imagine pushing a layer of water sideways (shear). The water simply flows — it doesn't spring back. A solid pushed sideways does spring back (it has shear stiffness). The transverse wave needs that spring-back to drive the restoring force. Without it, there's no oscillation — just flow. Liquids and gases have no shear stiffness, so they can't support the restoring force that makes a transverse wave oscillate."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — The Mexican wave (revisited)**
 The stadium Mexican wave was introduced in `phys.wave.wave-properties`. Now identify it explicitly as transverse: each fan moves UP and DOWN (vertical) while the wave travels SIDEWAYS (horizontal) around the stadium. The fans' motion (vertical) is perpendicular to the wave's motion (horizontal). This is the defining geometry of a transverse wave.
@@ -91,7 +90,7 @@ Sound is often drawn as a sinusoidal curve for visualisation purposes — but so
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Rope flick (transverse wave generation)**
 Attach a rope to a wall. Hold the free end. Flick up-and-down continuously to create a sinusoidal wave. Observe: (a) wave travels horizontally, (b) rope segments move vertically, (c) a piece of tape attached to the rope bobs vertically without drifting horizontally. This directly demonstrates Stage 2 and resolves M1.
@@ -104,7 +103,7 @@ Stretch a rope through two slotted boards (acting as polarisers). When the slots
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for guided discovery** (learners already know that particles don't travel with the wave, from the prerequisite):
 
@@ -112,7 +111,7 @@ Ask: "You already know that in any wave, the medium's particles don't travel for
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — 90° check**: For every scenario, require the learner to draw two arrows: one for wave propagation direction, one for particle displacement direction. Measure (or confirm) the angle. If 90°: transverse. If 0° or 180°: longitudinal.
 
@@ -122,7 +121,12 @@ Ask: "You already know that in any wave, the medium's particles don't travel for
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "Transverse means the particle moves across — perpendicular to — the direction the wave travels. Rope wave going right: the rope goes up and down. That's 90°. Two arrows, perpendicular. That's all the definition is. The wave moves in x; the particles move in y."
 
@@ -132,7 +136,7 @@ Ask: "You already know that in any wave, the medium's particles don't travel for
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) state the defining 90° relationship, (2) identify transverse waves from scenarios and diagrams, (3) explain why fluids don't support transverse waves, (4) demonstrate that polarisation is a transverse-wave-only phenomenon.
 
@@ -151,7 +155,7 @@ After (d): "How confident are you that a transverse wave cannot travel through a
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — M1 persists (particles move forward)**
 Tie a coloured ribbon to the rope at a fixed position. Run the rope demo (D1). The ribbon moves up and down and returns to its original x-position when the wave passes. The learner sees the ribbon's path: vertical, not horizontal. Ask: "Did the ribbon move forward?" No. "So which direction did it move?" Vertical. That is the particle direction.
@@ -164,7 +168,7 @@ Show two sinusoidal diagrams side by side: one labelled "Displacement (m) vs. Po
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Definition (90° relationship) + constraint (solids/EM only, not fluids) + unique property (polarisable).
 
@@ -180,7 +184,7 @@ Show two sinusoidal diagrams side by side: one labelled "Displacement (m) vs. Po
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.wave.wave-speed`: for a string, v = √(T/μ) — derivable from the transverse wave model
@@ -196,7 +200,25 @@ Show two sinusoidal diagrams side by side: one labelled "Displacement (m) vs. Po
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: wave equations use trigonometry (sin/cos) and complex exponentials; Fourier analysis decomposes any periodic signal into waves. Chemistry: spectroscopy — IR, UV-vis, NMR — identifies molecules by their wave-matter interactions. Biology: sound (hearing, ultrasound imaging), light (vision, photosynthesis), and seismic waves in geophysics all use wave physics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.wave.transverse-waves.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG correctly identifies the perpendicular displacement as the defining property and lists `phys.wave.wave-speed` as the unlock — wave-speed for a string is derived from the transverse wave model (tension and linear density).
 
@@ -205,3 +227,7 @@ The KG does not list polarisation as content for this concept. Polarisation is t
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

@@ -1,6 +1,6 @@
 # phys.opt.total-internal-reflection — Total Internal Reflection and Critical Angle
 
-## 1. Identity
+## Identity
 
 | Field | Value |
 |---|---|
@@ -16,7 +16,19 @@
 
 ---
 
-## 2. Mental Models
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.opt.total-internal-reflection.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+Total internal reflection occurs when light hits a boundary at an angle greater than the critical angle and all light is reflected.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 ### Stage 1 — Intuitive (no formalism)
 
@@ -46,7 +58,7 @@ In a step-index optical fibre, a high-n core is surrounded by a lower-n cladding
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Direction of travel assumption** — learners apply the critical angle formula to light going from a less dense to a more dense medium (e.g., air to glass), where TIR is impossible. The condition n₁ > n₂ is forgotten.
 2. **Critical angle as the TIR angle** — learners think θ_c is the angle at which TIR occurs. TIR occurs for all angles *greater than* θ_c; at exactly θ_c the refracted ray grazes the surface but still exists.
@@ -55,7 +67,7 @@ In a step-index optical fibre, a high-n core is surrounded by a lower-n cladding
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 ### M1 — "TIR can happen when light goes from air into glass"
 
@@ -87,27 +99,7 @@ In a step-index optical fibre, a high-n core is surrounded by a lower-n cladding
 
 ---
 
-## 5. Explanation Library
-
-### Explanation A — Deriving θ_c from Snell's law
-
-Set θ₂ = 90° (refracted ray along the boundary):
-n₁ sin θ_c = n₂ sin 90° = n₂ × 1 = n₂
-sin θ_c = n₂/n₁
-
-This is exact within the geometric optics approximation (valid when the feature size ≫ λ). Three sentences, one derivation, one formula. Done.
-
-### Explanation B — Fresnel equations and the approach to TIR
-
-The Fresnel equations give the reflection coefficient as a function of θ₁ for both polarisations. At θ₁ = 0 (normal incidence), R = ((n₁−n₂)/(n₁+n₂))². For n₁ = 1.5, n₂ = 1: R ≈ 4%. As θ₁ increases toward θ_c, R increases smoothly to 1. Above θ_c, R = 1 exactly for both polarisations. The transition is continuous, not a step function — this is important for fibre design (rays near θ_c are less efficiently guided because R < 1 in the approach zone).
-
-### Explanation C — Numerical aperture and acceptance cone
-
-In an optical fibre: sin(acceptance angle in air) = √(n_core² − n_clad²) = NA (numerical aperture). Light entering the fibre end within this cone undergoes TIR at the core-cladding interface and propagates. Outside this cone, it leaks out. For typical single-mode silica fibre: n_core = 1.4682, n_clad = 1.4629 → NA = √(1.4682² − 1.4629²) ≈ 0.124 → acceptance half-angle ≈ 7.1° in air.
-
----
-
-## 6. Analogy Library
+## Analogies
 
 ### Primary analogy — The fish-eye view
 
@@ -121,7 +113,7 @@ One-way mirrors (two-way mirrors) depend on *lighting* conditions — the side w
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 ### Demo A — Semicircular glass block
 
@@ -143,7 +135,7 @@ One-way mirrors (two-way mirrors) depend on *lighting* conditions — the side w
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 ### Stance: Argue the deductive case — *predict from Snell's law before observing*
 
@@ -161,7 +153,7 @@ One-way mirrors (two-way mirrors) depend on *lighting* conditions — the side w
 
 ---
 
-## 9. Teaching Actions
+## Teaching Sequence
 
 | Prior state | Action |
 |---|---|
@@ -173,7 +165,12 @@ One-way mirrors (two-way mirrors) depend on *lighting* conditions — the side w
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 ### Opening
 "Look up at the underside of a water surface from below. You see a circular window to the sky — outside that circle, the water surface is a mirror. The edge of the window is the critical angle. That is total internal reflection: at steep enough angles, the boundary becomes a perfect mirror."
@@ -189,7 +186,7 @@ One-way mirrors (two-way mirrors) depend on *lighting* conditions — the side w
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 ### Mastery gate
 
@@ -218,7 +215,7 @@ Expected: sin θ_c = n₂/n₁; conditions: (1) n₁ > n₂, (2) θ₁ > θ_c.
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **Recovery for direction confusion** (applying TIR to wrong-direction travel):
 1. Write n₁ and n₂ for the incident and transmitted media explicitly. Check n₁ > n₂.
@@ -233,7 +230,7 @@ Expected: sin θ_c = n₂/n₁; conditions: (1) n₁ > n₂, (2) θ₁ > θ_c.
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Conditional rule + formula + physical phenomenon (fibre/diamond)
 
@@ -253,7 +250,7 @@ Expected: sin θ_c = n₂/n₁; conditions: (1) n₁ > n₂, (2) θ₁ > θ_c.
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 | Target concept | Bridge |
 |---|---|
@@ -267,7 +264,25 @@ Expected: sin θ_c = n₂/n₁; conditions: (1) n₁ > n₂, (2) θ₁ > θ_c.
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: ray diagrams use similar triangles; Snell's law uses trigonometry; wave optics uses Fourier analysis. Chemistry: spectrophotometry and colorimetry measure concentrations optically; X-ray diffraction uses diffraction physics. Biology: the eye is a biological optical instrument; microscopy, endoscopy, and photoreception are optics applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.opt.total-internal-reflection.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 **KG note**: `phys.opt.refraction` is the necessary and sufficient prerequisite — Snell's law and the concept of refractive index must be fluent. This concept has no downstream unlocks listed in the KG, but it is the prerequisite for understanding optical instruments (fibre, endoscope, prism binoculars) and connects naturally to wave-optic phenomena (evanescent wave) and atmospheric optics (mirages).
 
@@ -276,3 +291,7 @@ Expected: sin θ_c = n₂/n₁; conditions: (1) n₁ > n₂, (2) θ₁ > θ_c.
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

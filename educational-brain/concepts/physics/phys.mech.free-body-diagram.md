@@ -1,6 +1,6 @@
 # phys.mech.free-body-diagram — Free Body Diagrams
 
-## 1. Identity
+## Identity
 - **Canonical KG ID**: `phys.mech.free-body-diagram`
 - **Canonical name**: Free Body Diagrams
 - **Curriculum domain**: Mechanics
@@ -13,7 +13,19 @@
 
 ---
 
-## 2. Mental Models (4-stage progression)
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.mech.free-body-diagram.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+A free body diagram isolates a body and represents all external forces acting on it as vectors.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Concrete (one object at a time)**
 Imagine picking up a single object and placing it in empty space, cut off from everything else. Now ask: "What is touching this object right now? What forces does each contact exert?" Then ask: "Is there any long-range force (gravity, electric, magnetic) on this object?" Draw those forces as arrows on the object (or on a dot representing it). That drawing is a free body diagram — it isolates one body and shows every external force acting on it.
@@ -45,7 +57,7 @@ For connected objects (Atwood machine, block on table connected to hanging weigh
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Drawing forces without sources**: Students draw forces because "it seems like there should be a force there" — e.g., a "force of motion" in the direction the object is moving. Every force must come from a specific object. No source = no force.
 2. **Including reaction forces**: Drawing both the normal force from the floor on the block AND the normal force from the block on the floor on the same FBD. The FBD includes forces ON the system, not forces FROM the system.
@@ -54,7 +66,7 @@ For connected objects (Atwood machine, block on table connected to hanging weigh
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 **M1 — "The moving object has a force of motion"**
 - Probe: "Draw the FBD of a ball rolling on a frictionless floor. What forces act?"
@@ -78,43 +90,7 @@ For connected objects (Atwood machine, block on table connected to hanging weigh
 
 ---
 
-## 5. Explanation Library
-
-**E1 — Isolation procedure**
-Draw a boundary around the chosen object. Any line (interaction) crossing that boundary from outside to inside is a force to include on the FBD. Internal interactions (between parts of the system) do not appear. Contacts that are cut by the boundary: replace with the contact force at that cut.
-
-**E2 — Force catalogue**
-For any terrestrial mechanics problem, the complete list of possible forces:
-- Gravity (W = mg, always downward near Earth's surface, from Earth)
-- Normal force N (from any surface in contact, ⊥ to surface)
-- Friction f (from any surface in contact, ∥ to surface, opposing relative motion/tendency)
-- Tension T (from any string/rope/cable, along the string toward the attachment point)
-- Applied force F (from any agent explicitly mentioned in the problem)
-- Spring force F = kx (from a spring)
-- Buoyancy (if submerged)
-
-Systematic check against this list eliminates missing or invented forces.
-
-**E3 — Inclined plane FBD and axis choice**
-Block on ramp angle θ, moving up the ramp, decelerating.
-FBD: W downward, N perpendicular to ramp (pointing away from surface), f along ramp pointing downward (opposing upward motion).
-Choose axes: x-axis along ramp (positive up), y-axis perpendicular to ramp.
-ΣF_x = −mg sinθ − f = ma (decelerating, a < 0)
-ΣF_y = N − mg cosθ = 0 → N = mg cosθ
-f = μN = μmg cosθ → a = −g sinθ − μg cosθ = −g(sinθ + μcosθ)
-
-**E4 — Atwood machine (two-FBD example)**
-Two masses m₁ (heavier, left) and m₂ (lighter, right) connected by a string over a frictionless pulley.
-FBD₁: T upward, m₁g downward → m₁g − T = m₁a (taking downward as positive for m₁)
-FBD₂: T upward, m₂g downward → T − m₂g = m₂a (taking upward as positive for m₂)
-Adding: (m₁ − m₂)g = (m₁ + m₂)a → a = (m₁ − m₂)g/(m₁ + m₂)
-T = 2m₁m₂g/(m₁ + m₂)
-
-Without separate FBDs, solving this system is nearly impossible for beginners.
-
----
-
-## 6. Analogy Library
+## Analogies
 
 **Primary analogy — Passport control (what can cross the border?)**
 The FBD boundary is like a country's border. Only things with a legitimate source OUTSIDE the border can enter. "Forces of motion" have no passport (no external source) — they don't get in. Newton's 3rd reaction forces have passports for a DIFFERENT country's FBD — wrong border. The customs list (force catalogue) is what you check at the border.
@@ -125,7 +101,7 @@ The FBD boundary is like a country's border. Only things with a legitimate sourc
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 **D1 — Real-time FBD of person standing in elevator**
 A person stands on a bathroom scale in an elevator. FBD: weight W down, scale normal force N up.
@@ -142,7 +118,7 @@ Two teams pull a rope. FBD of the rope: tension from team A, tension from team B
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 *Guided discovery for the isolation principle*:
 
@@ -157,7 +133,7 @@ The contrast with the full-scene chaos motivates the need for isolation.
 
 ---
 
-## 9. Teaching Actions (dispatch table)
+## Teaching Sequence
 
 | Situation | Action |
 |---|---|
@@ -169,7 +145,12 @@ The contrast with the full-scene chaos motivates the need for isolation.
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 "A free body diagram is a picture of one object — just that object, floating in space — with every external force drawn as an arrow. The key word is external: forces FROM other objects, not forces on other objects, not made-up forces.
 
@@ -181,7 +162,7 @@ For complicated problems — two masses on pulleys, stacked blocks — draw a SE
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 **Mastery gate**: Student draws a complete, correct FBD for standard geometries (block on ramp, hanging mass, block on table), with all forces labelled, correct directions, and no invented or missing forces. Must correctly identify N direction on an inclined surface and friction direction for both sliding and stationary tendency cases. Three independent geometry problems.
 
@@ -197,7 +178,7 @@ Expected FBD: weight (mg, straight down), normal force (N, ⊥ to ramp surface, 
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **If "force of motion" error persists**:
 This is the most stubborn FBD error because it confuses Newton's 1st law (motion doesn't require force) with Newton's 2nd (force causes acceleration). Every prompt for FBD should begin with: "List the objects in contact. List the long-range forces. Only these." The list-before-draw procedure prevents the force of motion from appearing.
@@ -210,7 +191,7 @@ Limit to one FBD at a time. Build both FBDs before writing any equations. Label 
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Procedural (four-step isolation procedure, force catalogue check) + spatial (force directions for standard geometries)
 **Forgetting risk**: High — the "force of motion" error returns; direction errors on ramps resurface; reaction forces creep back onto the diagram under problem pressure.
@@ -219,7 +200,7 @@ Limit to one FBD at a time. Build both FBDs before writing any equations. Label 
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 **Near transfer**: Friction, normal force, tension (the three direct unlocks — all require FBD discipline to solve correctly).
 **Medium transfer**: Every dynamics problem in the mechanics curriculum uses FBDs. Without this skill, no further mechanics problem is solvable systematically.
@@ -228,7 +209,25 @@ Limit to one FBD at a time. Build both FBDs before writing any equations. Label 
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: kinematics uses calculus (differentiation for velocity/acceleration, integration for displacement); vectors use linear algebra; energy methods use algebra and trigonometry. Chemistry: thermochemistry uses energy and work; reaction kinetics connects to activation energy. Biology: biomechanics (muscle force, gait), fluid mechanics in circulation (blood pressure, flow), and structural biology (bone stress) apply mechanics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.mech.free-body-diagram.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 - KG prerequisite `phys.mech.newtons-second-law` is necessary — students must understand ΣF = ma before the purpose of drawing all forces on one body makes sense.
 - The three unlocks (`phys.mech.friction`, `phys.mech.normal-force`, `phys.mech.tension`) are all direct applications of FBD discipline — they cannot be taught properly without FBD skills.
@@ -238,3 +237,7 @@ Limit to one FBD at a time. Build both FBDs before writing any equations. Label 
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

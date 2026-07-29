@@ -16,7 +16,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply thermal expansion at the **apply** level (Bloom) with difficulty tier **developing**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.therm.thermal-expansion.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_Thermal expansion describes how solids, liquids, and gases change dimensions with temperature._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: When things get hotter, they expand (get bigger); when they cool down, they contract (get smaller). This is why gaps are left in railway tracks and concrete pavements — to allow for expansion without buckling.
 
@@ -30,7 +42,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **hole misconception**: learners believe that when a solid with a hole expands, the hole gets smaller (the solid "fills in" the hole). The opposite is true — both the material and the hole expand proportionally. The hole expands at the same rate as a solid disc of the same material would.
 
@@ -38,7 +50,7 @@ The secondary root cause is **water anomaly surprise**: learners expect water to
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "A hole in a solid gets smaller when the solid expands"**
 - Characteristic phrase: "When you heat a metal ring, the hole in the middle gets smaller."
@@ -66,20 +78,7 @@ The secondary root cause is **water anomaly surprise**: learners expect water to
 
 ---
 
-## Explanation library
-
-**E1 — The particle-vibration explanation**
-"Atoms in a solid are like balls connected by springs — they vibrate around their equilibrium positions. When you add energy (heat), they vibrate with greater amplitude. Because the inter-atomic force is not perfectly symmetric (pushing atoms apart is easier than compressing them), greater vibration means a slightly larger average separation. Summed across billions of atom pairs, this microscopic effect produces a macroscopic length change."
-
-**E2 — The linear expansion formula derived**
-"For every degree of temperature increase, a rod of length L grows by α L — a fixed fraction of its current length. For a small change ΔT: ΔL = α L₀ ΔT. The coefficient α tells you what fraction of the length is added per degree. Steel: α ≈ 12 × 10⁻⁶ K⁻¹, meaning each metre of steel grows by 12 micrometres per degree Celsius of heating."
-
-**E3 — The hole expansion derivation**
-"Imagine the washer as a large metal disc with a circular notch cut out. Heating expands the disc uniformly — every dimension grows by α ΔT × original dimension. The inner notch's diameter is a dimension of the washer; it grows too. If you are still unconvinced: imagine the washer is made of rubber. Stretch it uniformly in all directions — both the solid parts and the hole get bigger."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — The photograph scaling**
 Imagine printing a photograph of a metal washer and then enlarging it on a photocopier. Every part of the image — solid regions and the white circle (hole) in the middle — gets larger. The hole in the enlarged photograph is bigger than in the original. Thermal expansion is uniform scaling: the solid scales up, and so does every gap within it.
@@ -91,7 +90,7 @@ Do NOT use any language suggesting that the expanding solid material "flows into
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Ball and ring demonstration**
 A metal ball just barely fits through a metal ring at room temperature. Heat only the ring: the ball now passes through easily (ring expanded, hole grew). Cool only the ring: ball still passes. Heat the ball (not the ring): the ball no longer fits through the ring (ball expanded, ring unchanged). This directly demonstrates M1 recovery: the hole in the ring expanded when the ring was heated.
@@ -107,7 +106,7 @@ Place an ice cube in a glass of water: it floats. Ask: "What does this tell you 
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for guided discovery with direct instruction for exceptions**:
 
@@ -117,7 +116,7 @@ For the water anomaly and the hole expansion, direct instruction is required —
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Hole-expansion prediction before demo**: Before the ball-and-ring demonstration, ask the learner to predict: "If I heat the ring, does the hole get larger or smaller?" Record the answer. Run the demo. This creates a deliberate collision with M1 that the physical outcome resolves.
 
@@ -129,7 +128,12 @@ For the water anomaly and the hole expansion, direct instruction is required —
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "The most surprising thing about thermal expansion is the hole. When a ring is heated, the hole gets bigger — not smaller. I know your instinct says the ring expands inward and closes the gap. But expansion is uniform: every dimension grows, including the inner diameter. Think of blowing up a photograph — the white space in the picture gets bigger too. The ring is that photograph."
 
@@ -139,7 +143,7 @@ For the water anomaly and the hole expansion, direct instruction is required —
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can apply ΔL = α L₀ ΔT correctly, explain that holes expand when a solid is heated, and identify the water anomaly as an exception to normal thermal contraction.
 
@@ -158,7 +162,7 @@ After (b): "How confident are you that the hole expands?" (1–5). A learner who
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — Hole misconception persists (M1)**
 Run D1 (ball-and-ring demo, even as a video). The ball not fitting through the heated ball-alone scenario (ball expanded, ring did not) and fitting through the heated-ring scenario (ring hole expanded) must be seen. Then ask: "If you heat the ring and the ball by the same amount, does the ball fit?" (No — both expand by the same fraction, so the ball remains too large for the hole if it started tight. This is a beautiful extension question.)
@@ -171,7 +175,7 @@ Write explicitly: T₁ = 20 °C = 293 K. T₂ = 80 °C = 353 K. ΔT = T₂ − T
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Formula (ΔL = α L₀ ΔT) + two factual exceptions (hole expands, water anomaly).
 
@@ -187,7 +191,7 @@ Write explicitly: T₁ = 20 °C = 293 K. T₂ = 80 °C = 353 K. ΔT = T₂ − T
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate applications**:
 - Engineering: railway expansion joints, pavement expansion joints, precision measurement instruments (compensating for thermal drift), bimetallic thermostats and circuit breakers
@@ -203,7 +207,25 @@ Write explicitly: T₁ = 20 °C = 293 K. T₂ = 80 °C = 353 K. ΔT = T₂ − T
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: calculus underlies heat-flow equations; statistical probability distributions govern thermal averages. Chemistry: thermochemistry, chemical equilibrium (Gibbs free energy), and reaction spontaneity are thermodynamics applied to molecular systems; the ideal-gas law is shared. Biology: metabolism is biochemical thermodynamics; body temperature regulation is heat-transfer in a biological system.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.therm.thermal-expansion.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG lists no unlocks for `phys.therm.thermal-expansion`. In teaching sequence, thermal expansion is foundational for understanding ideal gas behaviour (gases expand dramatically with temperature) and for engineering applications. Consider adding `phys.therm.ideal-gas-law` as a soft conceptual unlock — students benefit from seeing that gases are the extreme case of thermal expansion, while solids expand by tiny fractions per degree and gases expand by factors at constant pressure.
 
@@ -212,3 +234,7 @@ The description "solids, liquids, and gases change dimensions with temperature" 
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

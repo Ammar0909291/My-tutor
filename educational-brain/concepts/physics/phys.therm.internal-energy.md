@@ -1,6 +1,6 @@
 # phys.therm.internal-energy — Internal Energy of a System
 
-## 1. Identity
+## Identity
 
 | Field | Value |
 |---|---|
@@ -16,7 +16,19 @@
 
 ---
 
-## 2. Mental Models
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.therm.internal-energy.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+Internal energy is the total kinetic and potential energy of all molecules in a thermodynamic system.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 ### Stage 1 — Intuitive (no formalism)
 
@@ -53,7 +65,7 @@ Internal energy U is a **state function**: its value depends only on the current
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **U = total energy of the object** — learners include gravitational PE or bulk KE in U. "If I lift a gas container, its internal energy increases." Wrong — U is molecular-level energy only; lifting adds macroscopic gravitational PE, not U.
 2. **Temperature and U are the same thing** — learners say "U is just temperature." For an ideal gas U ∝ T, so they are proportional. But for a substance undergoing a phase change, T is constant while U increases — which breaks the T=U equivalence decisively.
@@ -62,7 +74,7 @@ Internal energy U is a **state function**: its value depends only on the current
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 ### M1 — "Internal energy includes the kinetic energy of the container moving"
 
@@ -94,35 +106,7 @@ Internal energy U is a **state function**: its value depends only on the current
 
 ---
 
-## 5. Explanation Library
-
-### Explanation A — U for an ideal gas: the equipartition derivation
-
-From kinetic theory, each translational degree of freedom stores (1/2)kT of energy per molecule. For a monatomic ideal gas (3 translational DOF only): U per molecule = (3/2)kT. For N molecules: U = (3/2)NkT = (3/2)nRT.
-
-For a diatomic gas: two rotational DOF add (1/2)kT each → U per molecule = (5/2)kT → U = (5/2)nRT.
-
-This is the *average* U; fluctuations around the mean are small (∝1/√N for large N) and negligible for macroscopic systems.
-
-### Explanation B — U as a state function and the implication for C_V
-
-Since U depends only on T (for an ideal gas), the rate of change of U with T is the same regardless of the process:
-
-C_V ≡ (1/n)(dU/dT) = f/2 × R
-
-This is defined at constant volume, where all heat goes into U with no work done (W = PΔV = 0 when ΔV = 0). At constant pressure, some heat does work of expansion, so C_P = C_V + R (Mayer's relation). Both C_V and C_P are derived from U.
-
-### Explanation C — U in a real substance (sketch)
-
-Solid → liquid → gas:  
-- Solid: molecules vibrate around fixed positions. U_K (vibrational KE) and U_P (bonds at equilibrium distance) both present. C_V ≈ 3R per mole (Dulong-Petit law for most simple solids at room T).  
-- At melting: T stays constant; U increases by mL_f per unit mass (latent heat of fusion goes into breaking bonds → increasing U_P).  
-- Liquid → gas: similarly, T stays constant at boiling; U increases by mL_v.  
-- Plot of U vs. T: straight lines within each phase (slope = C_V or C_P for that phase), with vertical jumps at phase transitions (latent heat).
-
----
-
-## 6. Analogy Library
+## Analogies
 
 ### Primary analogy — The thermal bank account
 
@@ -136,7 +120,7 @@ In colloquial use, "hotter = more energy." This is true within a phase for an id
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 ### Demo A — Ice-water temperature plateau (U ≠ T)
 
@@ -158,7 +142,7 @@ In colloquial use, "hotter = more energy." This is true within a phase for an id
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 ### Stance: Argue the inductive case — *observe the temperature plateau, then account for the missing energy*
 
@@ -176,7 +160,7 @@ In colloquial use, "hotter = more energy." This is true within a phase for an id
 
 ---
 
-## 9. Teaching Actions
+## Teaching Sequence
 
 | Prior state | Action |
 |---|---|
@@ -188,7 +172,12 @@ In colloquial use, "hotter = more energy." This is true within a phase for an id
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 ### Opening
 "When you heat a block of ice, you add energy. The temperature rises — until you reach 0 °C. Then it stops rising, even though heat keeps flowing in. The temperature is flat for several minutes while the ice melts. Where is the energy going? Not into molecular speed — into breaking the bonds that hold the ice together. That is internal energy: the sum of molecular kinetic energy AND potential energy."
@@ -204,7 +193,7 @@ In colloquial use, "hotter = more energy." This is true within a phase for an id
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 ### Mastery gate
 
@@ -236,7 +225,7 @@ Expected: Latent heat increases U_P (intermolecular potential energy, breaking b
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **Recovery for U = T confusion**:
 1. Draw the T vs. Q graph for a substance being heated from solid to vapour (Demo A trace).
@@ -250,7 +239,7 @@ Expected: Latent heat increases U_P (intermolecular potential energy, breaking b
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Conceptual definition + formula network (U, C_V, f) + state-function property
 
@@ -270,7 +259,7 @@ Expected: Latent heat increases U_P (intermolecular potential energy, breaking b
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 | Target concept | Bridge |
 |---|---|
@@ -283,7 +272,25 @@ Expected: Latent heat increases U_P (intermolecular potential energy, breaking b
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: calculus underlies heat-flow equations; statistical probability governs thermal averages. Chemistry: thermochemistry, chemical equilibrium (Gibbs free energy), and reaction spontaneity are thermodynamics applied to molecules; the ideal-gas law is shared. Biology: metabolism is biochemical thermodynamics; body-temperature regulation is biological heat transfer.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.therm.internal-energy.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 **KG note**: `phys.therm.kinetic-theory` is the necessary prerequisite — equipartition and degrees of freedom must be established before U = (f/2)nRT is meaningful. `phys.therm.first-law` is correctly gated on this concept: you cannot teach ΔU = Q − W until U is defined and its state-function property is established.
 
@@ -292,3 +299,7 @@ Expected: Latent heat increases U_P (intermolecular potential energy, breaking b
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

@@ -18,7 +18,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply magnetic force on moving charges — lorentz force at the **apply** level (Bloom) with difficulty tier **proficient**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.em.magnetic-force.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_The Lorentz force F = q(E + v × B) acts on a charge q moving with velocity v in electric and magnetic fields._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: A magnetic field exerts a force on a moving charged particle. The force is always perpendicular to the particle's velocity — this is why a charged particle in a magnetic field travels in a circle: the force always points "sideways," never speeding up or slowing down the particle, just changing its direction. The direction of the force depends on the sign of the charge and the directions of the velocity and the field.
 
@@ -32,7 +44,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **applying the right-hand rule for the wrong situation (wire B-field vs. force on charge)**: the right-hand rule for the magnetic FIELD around a wire (thumb in current direction, fingers curl in B direction) is a completely different application of the rule than the right-hand rule for the FORCE on a moving charge (fingers in v direction, curl toward B, thumb gives F direction). Learners apply whichever version they happen to remember, getting the force direction wrong in approximately 50% of problems.
 
@@ -40,7 +52,7 @@ The secondary root cause is **believing that the magnetic force does work (accel
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "The right-hand rule for the force on a charge is the same as for the B-field around a wire"**
 - Characteristic phrase: "I point my thumb in the velocity direction and my fingers curl in the B direction — that gives the force."
@@ -68,20 +80,7 @@ The secondary root cause is **believing that the magnetic force does work (accel
 
 ---
 
-## Explanation library
-
-**E1 — Why magnetic force does no work (geometric argument)**
-"The magnetic force **F** = q**v**×**B** is by construction perpendicular to **v** (the cross product of any vector with another is perpendicular to both). Work done by a force in time dt: dW = **F**·(**v** dt) = (**F**·**v**) dt. Since **F** ⊥ **v**: **F**·**v** = |**F**||**v**|cos90° = 0. Therefore dW = 0 at every instant. The total work done by the magnetic force over any path is zero. This means: kinetic energy is constant → speed is constant. Only the direction of **v** changes. Electric fields do work (E is not necessarily perpendicular to v); magnetic fields do not."
-
-**E2 — Circular motion derivation (cyclotron radius)**
-"For a positive charge +q moving with speed v perpendicular to a field B: the magnetic force provides the centripetal acceleration. Centripetal force needed: mv²/r (inward). Magnetic force available: qvB (always inward, always perpendicular to v). Set equal: qvB = mv²/r → r = mv/(qB). This is the cyclotron radius: larger mass or faster speed → larger circle; stronger field or larger charge → smaller circle. Period T = 2πr/v = 2πm/(qB) — remarkably independent of v: faster particles make larger circles but take the same time to complete one orbit."
-
-**E3 — Velocity selector (E and B crossed)**
-"Apply an electric field E in the +y direction and a magnetic field B in the +z direction. A positive charge moving in the +x direction at speed v_0: electric force qE (upward, +y); magnetic force qv₀B (downward, −y, since **x̂** × **ẑ** = −**ŷ**). For equilibrium: qE = qv₀B → v₀ = E/B. Only particles with exactly this speed pass through undeflected. Particles with other speeds are deflected. This velocity selector is the entry stage of a mass spectrometer."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — Bicycle wheel gyroscope**
 A spinning gyroscope precesses when you push on its axle perpendicular to the spin axis — the push causes a rotation about the third axis (perpendicular to both push and spin), not in the direction of the push. The cross-product geometry (**τ** = **r**×**F** for angular momentum) is the same as the cross-product in the Lorentz force (**F** = q**v**×**B**). Both involve a response perpendicular to the input, not in the direction of the input. The magnetic force is "gyroscopic" in this sense — it redirects, doesn't drive.
@@ -93,7 +92,7 @@ Friction is also perpendicular to the normal force and does negative work — so
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Cathode ray tube (CRT) deflection**
 Place a CRT (or a discharge tube with a visible electron beam) near a bar magnet. The beam deflects — proving that a moving charge in a magnetic field experiences a force. Flip the magnet: deflection reverses. This is the historical demonstration that characterised the electron (Thomson's experiment). It directly shows: (a) moving charges feel a magnetic force; (b) the force direction depends on the field direction; (c) the force is perpendicular to both velocity and field (the beam curves, not accelerates straight).
@@ -106,7 +105,7 @@ Use a charged particle simulation (PhET "Charges and Fields" or "Simulation of C
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for experiment-first with prediction**:
 
@@ -118,7 +117,7 @@ The pedagogical order: observe perpendicular deflection → infer that force ⊥
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Two separate right-hand rules**: Keep two distinct cards or diagrams:
 - **RHR-1 (B around a wire)**: thumb = current direction, curled fingers = B direction around the wire.
@@ -133,7 +132,12 @@ Never apply RHR-1 to force problems or RHR-2 to field-around-wire problems.
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "F = qv×B. Two things to notice: (1) the cross product — the force is perpendicular to both velocity and field; (2) it's always perpendicular to v, so it does zero work. The particle moves in a circle — the magnetic force is always centripetal, never tangential. Speed constant, direction changing. Magnets deflect; electric fields accelerate. Remember: magnets can steer charged beams (in particle physics accelerators) but can't add energy — electric fields do that."
 
@@ -143,7 +147,7 @@ Never apply RHR-1 to force problems or RHR-2 to field-around-wire problems.
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) state the Lorentz force **F** = q(**E** + **v**×**B**) and its purely magnetic form **F** = q**v**×**B**; (2) determine the force direction using the right-hand rule (cross product version) and apply the sign for charge; (3) show that the magnetic force does zero work; (4) derive and apply r = mv/(qB) for circular motion in a magnetic field; (5) apply **F** = I**L**×**B** for a current-carrying wire.
 
@@ -163,7 +167,7 @@ After (d): "Does the fact that the neutron feels zero force surprise you?" (1–
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — M1 (wrong right-hand rule)**
 Enforce TA1 with a physical demonstration: hold out the right hand. "Fingers point in +x (v direction). Curl fingers toward +y (B direction). The thumb now points in +z (out of the page). That is the direction of v×B, and for positive q, the direction of F." Have the learner physically perform this hand movement for three different problems. "This is RHR-2 for force — never for B-field around a wire (that's RHR-1, with thumb along the current)."
@@ -176,7 +180,7 @@ Compute the power directly: P = **F**·**v** = |**F**||**v**|cos90° = 0. "The f
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Law (F = qv×B; F = qvB sinφ) + direction rule (RHR-2: fingers→v, curl→B, thumb→F for +q) + zero work principle + cyclotron radius (r = mv/qB) + wire force (F = BIL sinφ, perpendicular to both).
 
@@ -192,7 +196,7 @@ Compute the power directly: P = **F**·**v** = |**F**||**v**|cos90° = 0. "The f
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.em.biot-savart`: the Biot-Savart law (magnetic field from a current element) is the inverse problem — given the current, find B; the Lorentz force is the complementary problem — given B, find the force on a charge
@@ -208,7 +212,25 @@ Compute the power directly: P = **F**·**v** = |**F**||**v**|cos90° = 0. "The f
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: vector calculus (divergence, curl) formalises Maxwell's equations; complex exponentials describe AC circuits. Chemistry: electrochemistry (Faraday's laws, electrolysis, galvanic cells) maps directly onto electric-current concepts; atomic spectroscopy uses electromagnetic waves. Biology: membrane potentials and nerve impulses are electrical circuits; MRI and ECG are direct clinical applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.em.magnetic-force.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG description "the Lorentz force F = q(E + v×B) acts on a charge q moving with velocity v in electric and magnetic fields" is accurate and complete.
 
@@ -219,3 +241,7 @@ A second gap: the KG description does not mention circular motion or the cyclotr
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

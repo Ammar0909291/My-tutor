@@ -18,7 +18,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply wave speed and the wave equation at the **apply** level (Bloom) with difficulty tier **proficient**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.wave.wave-speed.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_Wave speed is determined by the medium's properties; the wave equation relates displacement to position and time._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: Wave speed depends on the medium — not on the wave's frequency or amplitude. A ripple in water travels at a fixed speed set by the water's properties (depth, surface tension), not by how often you wiggle your hand.
 
@@ -37,7 +49,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **density-speed intuition reversal**: learners expect denser materials to carry waves faster ("denser = stronger = faster"), but for most wave types, higher density SLOWS the wave (more inertia). The correct intuition is: stiffness (restoring force) makes the wave faster; density (inertia) makes it slower. This is the opposite of the "heavy = strong" intuition from everyday experience.
 
@@ -45,7 +57,7 @@ The secondary root cause is **confusing medium speed with wave speed change at b
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "A denser medium means faster waves"**
 - Characteristic phrase: "Sound travels faster in water than in air because water is denser."
@@ -73,20 +85,7 @@ The secondary root cause is **confusing medium speed with wave speed change at b
 
 ---
 
-## Explanation library
-
-**E1 — The structure of all wave speed formulas**
-"Every mechanical wave speed formula has the structure v = √(stiffness/inertia). For a rope: T (tension = the stiffness trying to restore the string) and μ (mass per unit length = the inertia resisting acceleration). For sound in air: B (bulk modulus = the air's stiffness against compression) and ρ (density = the air's inertia). Higher stiffness → faster wave (restores disturbance more quickly). Higher inertia → slower wave (responds to restoring force more slowly)."
-
-**E2 — Guitar string derivation**
-"A guitar string: tighten it (more T → higher v = √(T/μ) → higher frequency for same length). Use thicker string (higher μ → lower v → lower frequency). Both effects are used in guitar design: high strings are thin (low μ) and high-tension; low strings are thick (high μ) and lower-tension. The wave speed formula explains the engineering."
-
-**E3 — Temperature dependence of sound speed**
-"Sound in air: v = √(γRT/M) where T is in Kelvin. Warmer air = faster molecules = faster impulse transmission. At 0 °C (273 K): v ≈ 331 m/s. At 20 °C (293 K): v ≈ 343 m/s. The approximation v ≈ 331 + 0.6T_C works well for everyday temperatures. This is why concert pitch drifts as orchestras warm up — the speed of sound in the air (and the resonant frequencies of wind instruments) changes with air temperature."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — The taut vs. slack rope**
 Hold a slack rope between two people. Flick one end: the wave travels slowly, wiggles loosely. Now pull the rope taut (increase tension). Flick: the wave snaps across quickly. The restoring force (tension) made the wave faster. Now imagine the same taut rope but made of lead (very high μ). The wave would travel more slowly despite the same tension, because the high inertia of each lead segment resists acceleration. Stiffness speeds up; inertia slows down.
@@ -98,7 +97,7 @@ Amplitude (loudness for sound) and wave speed are completely independent. A wave
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Slinky speed vs. tension**
 Stretch a slinky between two people at two different tensions (loose vs. taut). Send a transverse pulse. The more stretched (more tension) slinky carries the pulse faster. This demonstrates v ∝ √T qualitatively.
@@ -111,7 +110,7 @@ Tune a guitar string to different frequencies by tightening (higher f) or loosen
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for guided inquiry with dimensional analysis**:
 
@@ -119,7 +118,7 @@ Tune a guitar string to different frequencies by tightening (higher f) or loosen
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Stiffness-over-inertia mantra**: For every wave speed question, require the learner to state "stiffness in numerator, inertia in denominator" before writing the specific formula. This encodes the universal structure (M1 prevention).
 
@@ -131,7 +130,12 @@ Tune a guitar string to different frequencies by tightening (higher f) or loosen
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "Wave speed comes from two competing properties of the medium: the stiffness trying to restore the wave, and the inertia resisting that restoration. Stiffer → faster. Denser (more inertia) → slower. The formula is always v = √(stiffness/inertia). For a string: √(T/μ). For sound in a fluid: √(B/ρ). For sound in air: √(γP/ρ) ≈ 331 + 0.6T_C. The structure is the same; only the physical quantities differ."
 
@@ -141,7 +145,7 @@ Tune a guitar string to different frequencies by tightening (higher f) or loosen
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) state v = √(T/μ) and v = √(B/ρ), (2) predict qualitatively what happens to v when T, μ, B, or ρ change, (3) apply v = fλ at a medium boundary (keeping f fixed), and (4) calculate v for string and sound problems numerically.
 
@@ -162,7 +166,7 @@ After (e): "How confident are you that the frequency stays at 200 Hz in the heav
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — Density-speed confusion persists (M1)**
 Calculate the bulk modulus and density of water vs. air explicitly:
@@ -179,7 +183,7 @@ Ask: "Show me in the formula v = √(T/μ) where the amplitude appears." It does
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Two formulas (v = √(T/μ) and v = √(B/ρ)) + universal structure (stiffness/inertia) + boundary rule (f fixed, v and λ change).
 
@@ -195,7 +199,7 @@ Ask: "Show me in the formula v = √(T/μ) where the amplitude appears." It does
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.wave.superposition`: interference and standing waves use wave speed to calculate resonant frequencies (f = v/2L for strings, f = v/4L for closed pipes)
@@ -211,7 +215,25 @@ Ask: "Show me in the formula v = √(T/μ) where the amplitude appears." It does
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: wave equations use trigonometry (sin/cos) and complex exponentials; Fourier analysis decomposes any periodic signal into waves. Chemistry: spectroscopy — IR, UV-vis, NMR — identifies molecules by their wave-matter interactions. Biology: sound (hearing, ultrasound imaging), light (vision, photosynthesis), and seismic waves in geophysics all use wave physics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.wave.wave-speed.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG description "wave speed is determined by the medium's properties; the wave equation relates displacement to position and time" is correct but understated. The two key formulas (v = √(T/μ) for transverse, v = √(B/ρ) for longitudinal) should be explicitly listed as learning outcomes — they are the primary calculational content of this concept.
 
@@ -222,3 +244,7 @@ One gap: the KG does not mention the temperature dependence of sound speed in ai
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

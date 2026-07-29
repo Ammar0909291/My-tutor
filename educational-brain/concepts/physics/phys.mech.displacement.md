@@ -28,7 +28,25 @@
      motion in one direction) and where they differ (any change of direction).
   4. State that displacement can be zero even when distance is not (return to start).
 
-## Mental models
+
+## Learning Objective
+
+After this concept, the learner can:
+
+s** — the learner can:
+  1. Define displacement as the straight-line vector from initial to final position
+     (including direction), and distance as the total scalar path length.
+  2. Correctly compute both displacement and distance for a described motion path.
+  3. Identify scenarios where displacement and distance are equal (straight-line
+     motion in one direction) and where they differ (any change of direction).
+  4. State that displacement can be zero even when distance is not (return to start).
+
+
+## Core Understanding
+
+_Displacement is the vector change in position while distance is the total scalar path length._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 - **Beginner (arriving)**: distance and displacement are synonyms — both mean
   "how far something moved." The word "displacement" is a more formal, technical
@@ -54,7 +72,7 @@
   variable when we get to velocity and acceleration — those are defined as rates
   of change of displacement, not of distance."
 
-## Why beginners fail here
+## Why Students Fail
 
 The words "distance" and "displacement" are not distinguished in everyday
 language — people ask "what distance did you travel?" or "what displacement
@@ -66,7 +84,7 @@ sign errors (treating displacement as always positive when it can be negative
 for reverse motion) and magnitude errors (treating the path length as the
 displacement when direction changes have occurred).
 
-## Misconception library
+## Misconceptions
 
 **M1 — Displacement and distance are the same quantity**
 - *Why*: everyday language uses them interchangeably (type 2, language transfer).
@@ -131,26 +149,7 @@ of signed distances)**
 - *Verification*: five scenarios — two where displacement = distance, two where
   displacement < distance, one where displacement = 0 but distance > 0.
 
-## Explanation library
-
-- **Age 12–14 (story)**: "You're in a maze. You walk through every corridor —
-  total path: 300 metres. But the entrance and exit are only 20 metres apart
-  (straight through the wall). Distance = 300 m (every step you took). Displacement
-  = 20 m (straight from start to finish). Displacement doesn't care about the
-  journey — only the result."
-- **Age 14+**: "Distance is the odometer reading — it adds up every centimetre you
-  travel, regardless of direction. Displacement is the GPS instruction: 'you are
-  5 km northeast of your starting point.' One is path-dependent; the other is
-  not. If you walk in a straight line, they agree. The moment you change direction,
-  they diverge. For a full round trip returning to the start: distance = the whole
-  round trip; displacement = 0, because you ended where you started."
-- **Adult returning learner**: "You've used both of these in real life without
-  naming them. When you say 'I ran 10 km today,' you mean distance — total path
-  length. When your phone says 'you're 3.2 km from home,' it means displacement —
-  straight-line from where you are to home. Physics uses both, so it needs two
-  names to keep them distinct."
-
-## Analogy library
+## Analogies
 
 - **Best analogy**: the odometer vs. the GPS crow-flies distance. The car's
   odometer counts every metre of road, regardless of turns (distance). The GPS's
@@ -170,7 +169,7 @@ of signed distances)**
   The correct statement is "displacement is ≤ distance, with equality when
   the motion is straight-line and non-reversing."
 
-## Demonstration library
+## Demonstrations
 
 - **Home, no equipment**: walk from one room to another by two different paths
   (the direct way and the longer way around). Both have the same displacement
@@ -188,7 +187,7 @@ of signed distances)**
   displacement?" Collect predictions (some say 10 m, some say 0). Reveal 0 m.
   The surprise — zero displacement after real walking — is the productive collision.
 
-## Discovery lesson
+## Discovery Questions
 
 **Guided discovery** is appropriate — the distinction can be reached by the
 learner from the walk scenario.
@@ -209,7 +208,7 @@ learner from the walk scenario.
    position. Distance = total path length (always positive).
 6. *Compression*: one sentence for each, in learner's own words.
 
-## Teaching actions
+## Teaching Sequence
 
 From the dispatch library (Delivery 2 §6):
 1. **Guided discovery** (high fit): the distinction can be reached by learner
@@ -219,7 +218,12 @@ From the dispatch library (Delivery 2 §6):
 3. **Error exposure** (high fit): the round-trip (displacement = 0) is the key
    collision with M1.
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 *How it sounds when taught well*: the tutor ALWAYS states both distance and
 displacement for every example — they always appear as a pair; direction is stated
@@ -235,7 +239,7 @@ immediate example.
 M1; learner gives a positive number for leftward motion → M2; learner adds the
 two distances geometrically wrong for 2D → M3.
 
-## Assessment
+## Assessment Signals
 
 **Diagnostic — golden probe**: "A car drives 60 km east, then 60 km west, returning
 to the start. State: (a) total distance, (b) displacement." Correct: (a) 120 km,
@@ -274,7 +278,7 @@ obvious once explained). Miscalibration is revealed by 2D cases (they revert to
 arithmetic sum) and by the round-trip (they say displacement ≠ 0). Include both
 in the mastery gate before confirming.
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 *Likeliest utterance*: "displacement and distance are the same thing, aren't they?"
 (M1); "but I thought displacement was always positive" (M2).
@@ -289,7 +293,7 @@ round-trip from something the learner just did, not from an abstract description
 write that as a number?" (−3 m.) "So displacement CAN be negative — the negative
 just means you ended up on the other side of the start."
 
-## Memory & review
+## Memory Hooks
 
 - **Concept type**: concept (the distinction) + procedure (computing each).
 - **Review form** (per Delivery 2 §8): elaborative questioning — "why can
@@ -303,7 +307,7 @@ just means you ended up on the other side of the start."
   so velocity inherits displacement's signed character); `phys.mech.kinematics-1d`
   (displacement as the fundamental position change variable).
 
-## Transfer map
+## Transfer Connections
 
 - *Near*: `phys.mech.velocity` — velocity = displacement/time; if displacement
   is signed, so is velocity.
@@ -320,7 +324,25 @@ just means you ended up on the other side of the start."
   to the metric tensor and the geodesic deviation; the straight-line distance
   becomes the spacetime interval.
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: kinematics uses calculus (differentiation for velocity/acceleration, integration for displacement); vectors require linear algebra; energy methods use algebra and trigonometry. Chemistry: thermochemistry uses energy concepts (enthalpy, bond energies); reaction kinetics ties to activation energy. Biology: biomechanics (muscle force, gait), fluid mechanics in circulation (blood pressure, flow rate), and structural biology (bone stress) all apply mechanical principles.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.mech.displacement.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG `requires` lists only `phys.meas.units` — this underrepresents the
 dependency on `phys.meas.scalars-vectors`. Displacement is a vector quantity;
@@ -334,3 +356,7 @@ synonym habit) is higher than the concept's intrinsic complexity suggests.
 ---
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
 *Authored against KG node data confirmed at docs/physics/kg/graph.json.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

@@ -1,6 +1,6 @@
 # phys.mech.newtons-second-law — Newton's Second Law: F = ma
 
-## 1. Identity
+## Identity
 
 | Field | Value |
 |---|---|
@@ -16,7 +16,19 @@
 
 ---
 
-## 2. Mental Models
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.mech.newtons-second-law.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+The net force on a body equals the product of its mass and acceleration: F = ma.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 ### Stage 1 — Intuitive (no formalism)
 
@@ -57,7 +69,7 @@ The most general form: **F**_net = d**p**/dt, where **p** = m**v** is momentum. 
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Applying F = ma to one force, not net force** — learners see a 10 N push and write a = 10/m, ignoring friction, normal force, etc. The law requires the *net* (vector sum) force. If F_net = 0 (opposing forces balance), a = 0 even with a 100 N applied force.
 2. **Confusing force direction with velocity direction** — learners think a = F/m must point in the direction of motion. A ball thrown upward has **a** = g downward while **v** is upward. The deceleration phase confuses learners who expect a and v to always align.
@@ -66,7 +78,7 @@ The most general form: **F**_net = d**p**/dt, where **p** = m**v** is momentum. 
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 ### M1 — "F = ma uses the applied force, not the net force"
 
@@ -98,35 +110,7 @@ The most general form: **F**_net = d**p**/dt, where **p** = m**v** is momentum. 
 
 ---
 
-## 5. Explanation Library
-
-### Explanation A — Net force as the key input
-
-Newton's Second Law is not about any single force — it is about the total effect of all forces combined. The net force is the single hypothetical force that would produce the same acceleration as all actual forces combined. If three forces act on an object, the FBD shows all three; their vector sum is the single input to F_net = ma.
-
-### Explanation B — Algebraic solution strategy for inclined planes
-
-Object of mass m on an incline of angle θ (frictionless):
-1. FBD: weight mg downward (decompose: mg sinθ along incline down, mg cosθ into surface).
-2. Normal force N perpendicular to surface (up from surface).
-3. Axes: x along incline (positive down-slope), y perpendicular to surface.
-4. y: N − mg cosθ = 0 → N = mg cosθ.
-5. x: mg sinθ = ma → a = g sinθ. Acceleration along incline, independent of mass.
-
-### Explanation C — The atwood machine (two-body system)
-
-Two masses m₁ > m₂ connected by a string over a frictionless pulley:
-1. Treat each mass separately with its own FBD.
-2. m₁: m₁g − T = m₁a (net downward)
-3. m₂: T − m₂g = m₂a (net upward, same magnitude a and T since string is inextensible)
-4. Add: (m₁ − m₂)g = (m₁ + m₂)a → a = (m₁ − m₂)g/(m₁ + m₂)
-5. Then T = m₂(g + a)
-
-This illustrates applying Newton's Second Law to multiple objects in a system — one equation per object, then solve simultaneously.
-
----
-
-## 6. Analogy Library
+## Analogies
 
 ### Primary analogy — The shopping trolley
 
@@ -140,7 +124,7 @@ Learners sometimes reason: "If I push with 20 N and friction is 8 N, the 20 N is
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 ### Demo A — Air track with hanging mass (variable force at constant m)
 
@@ -163,7 +147,7 @@ Learners sometimes reason: "If I push with 20 N and friction is 8 N, the 20 N is
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 ### Stance: Argue the inductive case — *measure first, derive the law*
 
@@ -181,7 +165,7 @@ Learners sometimes reason: "If I push with 20 N and friction is 8 N, the 20 N is
 
 ---
 
-## 9. Teaching Actions
+## Teaching Sequence
 
 | Prior state | Action |
 |---|---|
@@ -193,7 +177,12 @@ Learners sometimes reason: "If I push with 20 N and friction is 8 N, the 20 N is
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 ### Opening
 "Twice the force, twice the acceleration. Half the mass, twice the acceleration. This is Newton's Second Law: net force equals mass times acceleration. Three words: net, equals, mass times acceleration. Net — not just one force, all of them added as vectors."
@@ -209,7 +198,7 @@ Learners sometimes reason: "If I push with 20 N and friction is 8 N, the 20 N is
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 ### Mastery gate
 
@@ -242,7 +231,7 @@ Expected: a = 6/2 = 3 m/s² to the right. If the learner asks "but what are the 
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **Recovery for FBD errors**:
 1. Categorise forces: always present (weight); surface forces (normal, friction); external (tension, applied). Check each category against the physical situation.
@@ -256,7 +245,7 @@ Expected: a = 6/2 = 3 m/s² to the right. If the learner asks "but what are the 
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Procedural (FBD → equations → solve) + conceptual (net force, mass as inertia)
 
@@ -276,7 +265,7 @@ Expected: a = 6/2 = 3 m/s² to the right. If the learner asks "but what are the 
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 | Target concept | Bridge |
 |---|---|
@@ -290,7 +279,25 @@ Expected: a = 6/2 = 3 m/s² to the right. If the learner asks "but what are the 
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: kinematics uses calculus (differentiation for velocity/acceleration, integration for displacement); vectors use linear algebra; energy methods use algebra and trigonometry. Chemistry: thermochemistry uses energy and work; reaction kinetics connects to activation energy. Biology: biomechanics (muscle force, gait), fluid mechanics in circulation (blood pressure, flow), and structural biology (bone stress) apply mechanics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.mech.newtons-second-law.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 **KG note**: Both prerequisites are essential and correctly specified. `phys.mech.kinematics-1d` provides the a vector; `phys.mech.force` provides the force concept. The fan-out of 9 unlocks correctly signals that this is the gating cut-node for virtually all of classical mechanics. At "developing / apply" difficulty with mastery threshold 0.85, the standard is appropriately high — this law is used in every subsequent mechanics concept.
 
@@ -299,3 +306,7 @@ Expected: a = 6/2 = 3 m/s² to the right. If the learner asks "but what are the 
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

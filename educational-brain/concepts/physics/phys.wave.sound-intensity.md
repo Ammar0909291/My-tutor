@@ -17,7 +17,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply sound intensity and the decibel scale at the **apply** level (Bloom) with difficulty tier **proficient**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.wave.sound-intensity.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_Sound intensity is power per unit area; the decibel scale logarithmically measures intensity relative to a reference level._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: Sound intensity is how much energy per second passes through a unit area — it's the "power" of the sound at a given place. The decibel (dB) is the unit used to measure loudness levels on a scale that matches how the human ear actually perceives sound. Doubling the energy doesn't double the perceived loudness — you need ten times the energy to sound twice as loud. The decibel scale is logarithmic for this reason.
 
@@ -31,7 +43,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **treating decibels as linear (additive) rather than logarithmic**: learners add decibel values directly. "60 dB + 60 dB = 120 dB." The actual answer is about 63 dB — combining two equal sources adds 3 dB (doubles the intensity), not 100%. This error is intuitive (why wouldn't numbers add?) but physically wrong. The logarithmic nature of the decibel is not just a convention — it reflects the logarithmic response of the human ear.
 
@@ -39,7 +51,7 @@ The secondary root cause is **confusing intensity and loudness (or decibels and 
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "Decibels add linearly: two sources at X dB give 2X dB"**
 - Characteristic phrase: "Two 60 dB speakers together give 120 dB."
@@ -67,20 +79,7 @@ The secondary root cause is **confusing intensity and loudness (or decibels and 
 
 ---
 
-## Explanation library
-
-**E1 — Why the logarithmic scale (psychoacoustics)**
-"The human ear responds to intensity ratios, not intensity differences. A sound that is 10× more intense than another sounds about twice as loud — not 10 times as loud. To go from 'just audible' (0 dB, I = 10⁻¹² W/m²) to 'painfully loud' (120 dB), the intensity increases by 10¹²  — a factor of one trillion. If we used a linear scale, we'd need to say '1,000,000,000,000 units of intensity.' The decibel scale compresses this enormous range into 0–120 — a 120-unit range instead of a 10¹²-unit range. This works because the ear's response is approximately logarithmic — equal dB steps feel like equal loudness steps."
-
-**E2 — Inverse-square law for intensity**
-"A point source radiates sound uniformly in all directions. At distance r, the sound is spread over a sphere of area 4πr². All the power P passes through this sphere: I = P/(4πr²). If you move from r to 2r, the area becomes 4π(2r)² = 4 × 4πr² — four times larger. The same power P now spreads over four times the area → intensity drops by factor of 4. In dB: 10 log(1/4) = 10 × (−0.602) ≈ −6 dB. Every doubling of distance drops the intensity by 6 dB."
-
-**E3 — Converting between I, β, and I₀**
-"β = 10 log₁₀(I/I₀). To go from dB to intensity: I = I₀ × 10^(β/10). Example: 80 dB: I = 10⁻¹² × 10^8 = 10⁻⁴ W/m². Example: 110 dB: I = 10⁻¹² × 10^11 = 10⁻¹ = 0.1 W/m². Each 10 dB step multiplies I by 10. Each 3 dB step approximately doubles I (since 10^0.3 ≈ 2). Memo: +3 dB ≈ ×2 intensity; +6 dB ≈ ×4 intensity; +10 dB ≈ ×10 intensity; +20 dB ≈ ×100 intensity."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — The Richter scale for earthquakes**
 The Richter scale for earthquake magnitude is also logarithmic: a magnitude 7 earthquake releases roughly 31 times more energy than a magnitude 6 (one unit up = 31× energy). Most people misread the Richter scale as linear — the same error as misreading decibels. The decibel scale is the acoustic Richter scale. Both exist because the phenomena range over many orders of magnitude and human perception is roughly logarithmic. "A 10 dB increase is to the ear what a 1-magnitude increase is to earthquake energy."
@@ -92,7 +91,7 @@ Temperature can be added meaningfully (in some contexts) and is an absolute line
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Smartphone decibel meter (quantitative)**
 Use a free sound level meter app on a smartphone. Measure: (a) ambient noise in the classroom; (b) a whisper at 1 m; (c) a clap at 1 m; (d) a shout at 1 m. Record the dB values. Discuss: "If we use two phones clapping simultaneously, what do you predict the level will be?" (Most predict double — expose M1.) Measure: the combined level is about 3 dB higher. Then discuss M3: move the phone from 1 m to 2 m while someone speaks at a constant level — measure the ~6 dB drop per doubling.
@@ -105,7 +104,7 @@ Play a sine wave through a speaker at fixed amplitude, sweeping from 20 Hz to 20
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for data-first guided discovery**:
 
@@ -117,7 +116,7 @@ The discovery sequence: enormous range problem → linear scale fails → logari
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Convert to intensity first, then add**: For any problem combining multiple sources, require the learner to: (1) convert each dB value to intensity (I = I₀ × 10^(β/10)), (2) add the intensities numerically, (3) convert back to dB. Never add dB values directly. State: "Decibels do not add — intensities add."
 
@@ -129,7 +128,12 @@ The discovery sequence: enormous range problem → linear scale fails → logari
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "Intensity is power per unit area. As sound spreads from a point source, the same power covers an ever-expanding sphere: I = P/(4πr²). Double the distance → four times the area → one-quarter the intensity → 6 dB drop. That's the inverse-square law in dB: every doubling of distance costs 6 dB. Not half the dB number — subtract 6."
 
@@ -139,7 +143,7 @@ The discovery sequence: enormous range problem → linear scale fails → logari
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) calculate intensity I from power P and distance r; (2) convert between intensity I and sound level β using β = 10 log(I/I₀); (3) apply the inverse-square law (doubling r → 6 dB drop); (4) correctly combine two sources by adding intensities, not decibel values.
 
@@ -159,7 +163,7 @@ After (d): "Did you predict that two identical sources would give 115 dB rather 
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — M1 (adding decibels)**
 Run the calculation from first principles: "What is the intensity at P from source 1?" (I₁.) "What is the intensity from source 2?" (I₂ = I₁.) "What is the total intensity when both play?" (I₁ + I₂ = 2I₁.) "Now convert 2I₁ to dB: β = 10 log(2I₁/I₀) = 10 log(2) + 10 log(I₁/I₀) = 3 + β₁. The answer is β₁ + 3, not 2β₁." Then ask: "What would 2β₁ mean physically?" (β = 10 log(I/I₀) → 2β₁ = 10 log(I/I₀) × 2 → I = I₀ × 10^(2β₁/10) = I₁² / I₀ — which has units of W²/m⁴·(W/m²)⁻¹ = W/m² only if I₀ = 1 — nonsensical. The arithmetic contradiction exposes the error.)
@@ -172,7 +176,7 @@ Run the calculation from first principles: "What is the intensity at P from sour
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Formula (β = 10 log(I/I₀), I₀ = 10⁻¹² W/m²) + inverse-square law (6 dB per distance doubling) + quick conversions (+3 dB = ×2 intensity, +10 dB = ×10 intensity) + combination rule (add intensities, not dB values).
 
@@ -188,7 +192,7 @@ Run the calculation from first principles: "What is the intensity at P from sour
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.wave.doppler-effect` (related, same prerequisite): Doppler changes frequency; intensity changes with distance — two independent properties of a sound wave that learners should learn to analyse separately
@@ -203,7 +207,25 @@ Run the calculation from first principles: "What is the intensity at P from sour
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: wave equations use trigonometry (sin/cos) and complex exponentials; Fourier analysis decomposes any periodic signal into waves. Chemistry: spectroscopy — IR, UV-vis, NMR — identifies molecules by their wave-matter interactions. Biology: sound (hearing, ultrasound imaging), light (vision, photosynthesis), and seismic waves in geophysics all use wave physics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.wave.sound-intensity.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG description "sound intensity is power per unit area; the decibel scale logarithmically measures intensity relative to a reference level" is accurate and complete in scope.
 
@@ -214,3 +236,7 @@ A second gap: the KG description does not mention the inverse-square law for a p
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

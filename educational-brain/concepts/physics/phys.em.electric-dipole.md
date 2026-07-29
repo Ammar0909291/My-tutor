@@ -17,7 +17,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply electric dipole at the **apply** level (Bloom) with difficulty tier **proficient**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.em.electric-dipole.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_An electric dipole consists of two equal and opposite charges separated by a small distance; it experiences torque in a uniform field._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: An electric dipole is two equal but opposite electric charges (+q and −q) held close together — like the two poles of a tiny battery. The combination has zero net charge, but it still has an electric field (unlike a neutral sphere with charges distributed uniformly). The field is strongest near the charges and drops off faster with distance than the field from a single charge.
 
@@ -31,7 +43,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **treating the dipole as if it has zero field (because it has zero net charge)**: learners know that a neutral object produces no net Coulomb force at large distances — and they over-generalise this to conclude that the dipole field is zero everywhere. The key distinction: zero net charge means the monopole term (1/r²) of the field is zero; the dipole term (1/r³) is non-zero. A dipole is electrically neutral overall but still has a spatial charge separation that creates a non-trivial field at all finite distances.
 
@@ -39,7 +51,7 @@ The secondary root cause is **confusing the direction of the dipole moment vecto
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "A neutral dipole has no electric field (zero net charge = zero field)"**
 - Characteristic phrase: "The charges cancel out, so there's no electric field outside the dipole."
@@ -67,20 +79,7 @@ The secondary root cause is **confusing the direction of the dipole moment vecto
 
 ---
 
-## Explanation library
-
-**E1 — Superposition to build the dipole field (physical derivation)**
-"Place +q at z = +d/2 and −q at z = −d/2. At a point P on the axis at distance r >> d: the field from +q points away from +q (upward if P is above) with magnitude k q/(r − d/2)² ≈ k q/r²(1 + d/r). The field from −q points toward −q (also upward, since P is above −q) with magnitude k q/(r + d/2)² ≈ k q/r²(1 − d/r). Net field E = k q/r² [(1 + d/r) − (1 − d/r)] = k q/r² × 2d/r = 2kqd/r³ = 2kp/r³. The 1/r³ comes from the subtraction of two nearly equal 1/r² terms — the small difference is proportional to d/r, giving the extra 1/r factor."
-
-**E2 — Torque in a uniform field (alignment mechanism)**
-"A dipole **p** in a uniform field **E** has the + charge pushed in the +**E** direction and the − charge pushed in the −**E** direction. These form a couple — two equal and opposite parallel forces separated by distance d sinθ (perpendicular distance between the lines of action when the dipole is at angle θ to **E**). Torque magnitude: τ = qE × d sinθ = pE sinθ. In vector form: **τ** = **p** × **E**. The torque is maximum when **p** ⊥ **E** (θ = 90°) and zero when **p** ∥ **E** (θ = 0° or 180°). Stable equilibrium: **p** aligned with **E** (U = −pE cosθ, minimum at θ = 0°). Unstable equilibrium: **p** anti-aligned (θ = 180°, U = +pE)."
-
-**E3 — Polar molecules as permanent dipoles (real-world connection)**
-"A water molecule (H₂O) has a bent shape — the oxygen pulls electrons more strongly than the hydrogen atoms. The electron density shifts toward oxygen, giving it a partial negative charge (δ−) and each hydrogen a partial positive charge (δ+). This creates a permanent dipole moment p ≈ 6.2×10⁻³⁰ C·m. In an external electric field (like in a microwave oven), the water molecules experience a torque and oscillate to align with the rapidly alternating field — this oscillation is the mechanism of microwave heating. The dipole concept is the bridge between the macroscopic electric field and the molecular structure of matter."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — A compass needle in a magnetic field**
 A bar magnet (magnetic dipole, with North and South poles) in an external magnetic field behaves exactly like an electric dipole in an electric field: the magnet experiences torque τ = **m** × **B** (where **m** is the magnetic dipole moment) that aligns the North pole with the external field direction. A compass needle is a magnetic dipole being aligned by Earth's magnetic field. The electric dipole is the electrical counterpart of the magnetic dipole — same mathematical structure, same torque formula (with p replacing m and E replacing B).
@@ -92,7 +91,7 @@ The dipole is not just "two point charges drawn next to each other." At large di
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Electric field lines of a dipole (Van de Graaff with two spheres)**
 Using two conducting spheres, one connected to a Van de Graaff generator (positive) and one grounded (negative), with grass seeds in castor oil between them — the seeds align to show the classic dipole field pattern: lines leaving the positive sphere, curving around, and entering the negative sphere, with the characteristic "figure-eight" shape (dense near the charges, spreading and weakening rapidly with distance). Compare to the single-charge field: the dipole field is clearly non-zero despite zero net charge, directly addressing M1.
@@ -105,7 +104,7 @@ Discuss: "Why does a microwave oven heat water but not a dry ceramic plate?" The
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for guided derivation (not discovery) for the field, with inquiry for the concept**:
 
@@ -117,7 +116,7 @@ From there, the superposition calculation (E1) is direct instruction — learner
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Dipole moment direction declaration**: Before any torque or potential energy calculation, require the learner to draw the dipole with **p** labeled, explicitly stating "p points from −q to +q." This prevents M2 systematically.
 
@@ -129,7 +128,12 @@ From there, the superposition calculation (E1) is direct instruction — learner
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "A dipole: +q and −q separated by distance d. Net charge zero — but don't confuse 'net charge zero' with 'no field.' The two charges are not at the same point, so their fields don't cancel everywhere. On the axis of the dipole, both fields from + and − point in the same direction — they add. The result: E ∝ 1/r³ — drops faster than a single charge (1/r²), but definitely not zero."
 
@@ -139,7 +143,7 @@ From there, the superposition calculation (E1) is direct instruction — learner
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) define the electric dipole moment p = qd and state its direction (−q to +q); (2) state that the dipole field falls off as 1/r³ (not 1/r²); (3) calculate the torque on a dipole in a uniform field (τ = pE sinθ); (4) state that in a uniform field, the net force on a dipole is zero but the torque is non-zero.
 
@@ -159,7 +163,7 @@ After (c): "Were you surprised that there's no net force even though the field e
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — M1 (zero net charge = zero field)**
 Run the superposition calculation at a specific axial point (E1). Show the field from +q (magnitude k q/(r − d/2)², pointing away from +q) and from −q (magnitude k q/(r + d/2)², pointing toward −q — which for an axial point above the dipole is also upward). "Both vectors point in the same direction at this axial point. Add them — are they zero?" No. "Why doesn't the equal and opposite charge cancel the field?" Because the fields don't point in opposite directions at axial points — the geometry of a point above the pair makes both contributions point the same way.
@@ -172,7 +176,7 @@ Use the scaling argument: "At r = 1 m, the dipole field is some value E₁. At r
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Definition (p = qd from − to +) + field scaling (1/r³ along axis: E = 2kp/r³; perpendicular: E = kp/r³) + torque (τ = pE sinθ, or τ = p × E) + net force in uniform field (zero) + polar molecule connection.
 
@@ -188,7 +192,7 @@ Use the scaling argument: "At r = 1 m, the dipole field is some value E₁. At r
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - Dielectric materials: polar molecules with permanent dipole moments partially align in an external field, reducing the net internal field → this is the mechanism behind the dielectric constant ε_r (the ratio of the field in vacuum to the field in the material)
@@ -204,7 +208,25 @@ Use the scaling argument: "At r = 1 m, the dipole field is some value E₁. At r
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: vector calculus (divergence, curl) formalises Maxwell's equations; complex exponentials describe AC circuits. Chemistry: electrochemistry (Faraday's laws, electrolysis, galvanic cells) maps directly onto electric-current concepts; atomic spectroscopy uses electromagnetic waves. Biology: membrane potentials and nerve impulses are electrical circuits; MRI and ECG are direct clinical applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.em.electric-dipole.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG description "an electric dipole consists of two equal and opposite charges separated by a small distance; it experiences torque in a uniform field" is accurate.
 
@@ -215,3 +237,7 @@ A second gap: the KG description does not mention the dipole moment vector p = q
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

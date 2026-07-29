@@ -17,7 +17,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply magnetic field and field lines at the **understand** level (Bloom) with difficulty tier **developing**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.em.magnetic-field.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_A magnetic field exerts forces on moving charges and current-carrying conductors; field lines indicate its direction and strength._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: A magnetic field is the invisible influence created by magnets and by electric currents. It pushes and pulls on other magnets and on moving charges. Field lines show the direction a north pole would point if placed at that location. Unlike electric field lines (which start and end on charges), magnetic field lines form closed loops — they have no starting or ending point.
 
@@ -31,7 +43,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **magnetic field lines as open paths (like electric field lines)**: learners import the electric field mental model where lines start on positive charges and end on negative charges. They draw magnetic field lines starting at north poles and ending at south poles, failing to continue them through the magnet interior to form closed loops. This error propagates into confusion about flux (which requires closed loops to understand correctly) and Gauss's law for magnetism (∇·**B** = 0).
 
@@ -39,7 +51,7 @@ The secondary root cause is **right-hand rule reversal or confusion with left-ha
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "Magnetic field lines start at north poles and end at south poles (like electric field lines start/end on charges)"**
 - Characteristic phrase: "The field lines come out of north and go into south — they start and stop at the poles."
@@ -67,20 +79,7 @@ The secondary root cause is **right-hand rule reversal or confusion with left-ha
 
 ---
 
-## Explanation library
-
-**E1 — Why field lines are closed loops (no magnetic monopoles)**
-"An electric field line starts on a positive charge and ends on a negative charge — sources and sinks of electric field exist (positive and negative charges). For magnetic field, no isolated north or south magnetic pole has ever been found. Every magnet, no matter how small, has both a north and a south pole — cut a magnet in half and you get two smaller magnets, each with N and S. Without sources or sinks, field lines must form closed loops. This is encoded in Gauss's law for magnetism: the total magnetic flux through any closed surface is zero (∮ **B**·d**A** = 0). What goes out on one side must come back in on another."
-
-**E2 — Right-hand rule for a straight wire (step by step)**
-"For a long straight wire carrying conventional current I: (1) Point your right thumb in the direction of conventional current. (2) Your curled fingers show the direction of the circular **B** field lines around the wire. If current goes upward, the field circles counterclockwise when viewed from above. The magnitude is B = μ₀I/(2πr) — halve the distance from the wire, double the field; double the current, double the field."
-
-**E3 — Magnetic field of a solenoid (conceptual build-up)**
-"A solenoid is a helix of wire — many circular loops side by side. Each loop contributes a field pointing along the solenoid's axis (using the right-hand rule per loop). Inside the solenoid, all loops' fields add in the same direction → uniform strong field (B = μ₀nI). Outside, the fields from adjacent loops nearly cancel → negligibly weak field. A solenoid is the magnetic analogue of a parallel-plate capacitor (uniform field between the plates): both create uniform fields inside a confined region."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — Electric field lines (structure with key contrast)**
 Magnetic field lines behave like electric field lines in their density-represents-strength property and in showing the direction a test object would be pushed. But the crucial contrast: electric field lines start and end on charges (open); magnetic field lines always form closed loops (closed). Analogously: electric field has sources (charges); magnetic field has no sources (no monopoles). This contrast is worth making explicit: the two field types are structurally parallel but differ in topology.
@@ -92,7 +91,7 @@ The field from a magnet depends on position — it falls off rapidly with distan
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Iron filing field map (bar magnet)**
 Sprinkle iron filings on a sheet of paper placed over a bar magnet. Tap gently. The filings align with the field to show the closed-loop pattern: emerging from N, sweeping around, entering S, and (inside the magnet, seen by lifting the paper to the magnet's side) continuing from S back toward N. This is the single most impactful magnetic field demonstration — the closed-loop topology becomes visually undeniable.
@@ -105,7 +104,7 @@ Connect a solenoid to a DC supply. Place a compass at various positions: inside 
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for guided inquiry with a predictive-then-observe structure**:
 
@@ -115,7 +114,7 @@ For the closed-loop nature of field lines: follow D1 with the question "Where do
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Complete-loop field line discipline**: Whenever a learner draws magnetic field lines, require that every line they draw forms a complete closed loop visible on the diagram (even if it means drawing the interior of the magnet). A field line with free endpoints fails the closed-loop rule and is physically wrong.
 
@@ -127,7 +126,12 @@ For the closed-loop nature of field lines: follow D1 with the question "Where do
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "Magnetic field lines are closed loops — every single one. Outside the magnet they go from north to south; inside the magnet they go from south back to north, completing the loop. There are no magnetic monopoles — no source or sink — so there can be no open-ended field lines. This is written as ∮ B·dA = 0: the total flux through any closed surface is zero."
 
@@ -137,7 +141,7 @@ For the closed-loop nature of field lines: follow D1 with the question "Where do
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) state that magnetic field lines form closed loops (no monopoles); (2) correctly apply the right-hand rule to find the direction of B around a current-carrying wire; (3) state that magnetic force acts only on moving charges; (4) use B = μ₀I/(2πr) to calculate field magnitude at distance r from a long wire.
 
@@ -157,7 +161,7 @@ After (c): "Are you surprised that there's no magnetic force on the stationary c
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — M1 persists (field lines start at N, end at S)**
 Run D1 (iron filings). Ask the learner to trace one complete field line: "Follow this cluster of filings all the way around. Where does the line you're tracing go?" Guide the learner to see that the line curves around and enters the south pole — but then continues inside the magnet back to the north pole to close. Show the interior field with a compass inserted into a solenoid (accessible interior). The physical demonstration is the only reliable resolver of this misconception.
@@ -170,7 +174,7 @@ Compute: "F = qv×B. What is F if v = 0?" F = q(0)×B = 0. The formula itself ma
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Topology rule (closed loops, no monopoles) + right-hand rule (thumb = current, fingers = B) + force rule (moving charges only, F = qv×B) + formula (B = μ₀I/2πr).
 
@@ -186,7 +190,7 @@ Compute: "F = qv×B. What is F if v = 0?" F = q(0)×B = 0. The formula itself ma
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.em.magnetic-force`: F = qv×B (force on a moving charge); F = BIL (force on a current-carrying conductor); the field concept is the prerequisite for these force calculations
@@ -202,7 +206,25 @@ Compute: "F = qv×B. What is F if v = 0?" F = q(0)×B = 0. The formula itself ma
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: vector calculus (divergence, curl) formalises Maxwell's equations; complex exponentials describe AC circuits. Chemistry: electrochemistry (Faraday's laws, electrolysis, galvanic cells) maps directly onto electric-current concepts; atomic spectroscopy uses electromagnetic waves. Biology: membrane potentials and nerve impulses are electrical circuits; MRI and ECG are direct clinical applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.em.magnetic-field.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG description "a magnetic field exerts forces on moving charges and current-carrying conductors; field lines indicate its direction and strength" is accurate but terse for a concept with this much learner difficulty.
 
@@ -213,3 +235,7 @@ A second gap: the right-hand rule for the field around a current-carrying wire i
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

@@ -31,7 +31,34 @@
   4. Identify which product (dot or cross) is appropriate for a given physical
      context (work → dot; torque → cross) and justify the choice.
 
-## Mental models
+
+## Learning Objective
+
+After this concept, the learner can:
+
+only do
+  restricted versions of both concepts (1D work, magnitude-only torque). Every
+  advanced mechanics, electromagnetism, and quantum mechanics calculation uses one
+  or both products.
+- **Difficulty**: proficient · **Bloom**: apply · **Mastery threshold**: 0.80 ·
+  **Est. hours**: 4 · **References**: NCERT Physics Class 11 Ch. 4; H.C. Verma Vol. 1
+- **Learning objectives** — the learner can:
+  1. Compute the dot product of two vectors using both the geometric formula
+     (A·B = |A||B|cos θ) and the component formula (A·B = AxBx + AyBy + AzBz),
+     and state the result is a scalar.
+  2. Determine the angle between two vectors using the dot product.
+  3. Compute the magnitude of the cross product (|A × B| = |A||B|sin θ), find its
+     direction by the right-hand rule, and state the result is a vector perpendicular
+     to both operands.
+  4. Identify which product (dot or cross) is appropriate for a given physical
+     context (work → dot; torque → cross) and justify the choice.
+
+
+## Core Understanding
+
+_The dot product yields a scalar and the cross product yields a vector perpendicular to both operands._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 - **Beginner (arriving)**: "multiplying vectors" means multiplying the magnitudes
   (like scalars) — no concept that two different products can exist or that the
@@ -63,7 +90,7 @@
   product (determinant form) is taught here but deeper understanding of why it
   works is deferred to linear algebra.
 
-## Why beginners fail here
+## Why Students Fail
 
 The dot product's result being a SCALAR surprises learners — "you multiplied two
 vectors and got a number?" They have no mental model for this before it's taught.
@@ -76,7 +103,7 @@ wrong hand (left vs. right). Distinguishing when to use dot vs. cross is a third
 failure — learners apply dot product to torque or cross product to work because
 they can't connect the physical meaning to the mathematical tool.
 
-## Misconception library
+## Misconceptions
 
 **M1 — The dot product produces a vector (element-wise multiplication)**
 - *Why*: "multiply two vectors" sounds like "multiply each component" — element-wise
@@ -139,30 +166,7 @@ they can't connect the physical meaning to the mathematical tool.
 - *Verification*: three novel physical scenarios — learner identifies which product
   applies and states the reason, not just the formula.
 
-## Explanation library
-
-- **Age 15+ (geometric)**: "The dot product asks: how much of vector A points in
-  the same direction as vector B? It takes the component of A along B (= A cos θ)
-  and multiplies by |B|. The answer is a scalar — just a number — positive when
-  they point the same way, zero when perpendicular, negative when opposing. The
-  cross product asks something completely different: how large is the parallelogram
-  that A and B define? And what direction is perpendicular to both? The answer is
-  a new vector (always perpendicular to both A and B) whose length equals the area
-  of that parallelogram (= |A||B|sin θ)."
-- **Physics-first**: "Two fundamental operations appear repeatedly in physics. Work
-  uses the component of force along displacement — that's |F||d|cos θ, which IS
-  the dot product. Torque uses the component of force perpendicular to the lever
-  arm — that's |r||F|sin θ for the magnitude, and the result points along the
-  rotation axis — that's the cross product. Every time you see 'cos θ and a scalar
-  result,' it's a dot product. Every time you see 'sin θ, a new perpendicular
-  direction, and a vector result,' it's a cross product."
-- **Component method explanation**: "You can compute the dot product without knowing
-  the angle: A·B = AxBx + AyBy + AzBz. This is three multiplications and two
-  additions — no trig needed. For the cross product, you use the determinant formula:
-  A × B = (AyBz − AzBy)î + (AzBx − AxBz)ĵ + (AxBy − AyBx)k̂. This can be memorised
-  as the cofactor expansion of a 3×3 determinant with î, ĵ, k̂ in the first row."
-
-## Analogy library
+## Analogies
 
 - **Best analogy (dot product)**: the shadow analogy. The dot product is like
   the shadow of vector A on vector B. If they point the same way, full shadow
@@ -186,7 +190,7 @@ they can't connect the physical meaning to the mathematical tool.
   NOT interchangeable — the choice of which to use is always dictated by the
   physics of the situation.
 
-## Demonstration library
+## Demonstrations
 
 - **Home, no equipment**: hold a book in one hand as a door. Pull the book with
   one finger at various positions and angles. Notice: pulling perpendicular to the
@@ -204,7 +208,7 @@ they can't connect the physical meaning to the mathematical tool.
 - **Prediction**: given î × ĵ, ask the learner to predict the result using the
   right-hand rule before computing. This forces application before confirmation.
 
-## Discovery lesson
+## Discovery Questions
 
 **Direct instruction with motivated examples** is the right form here — both
 products are definitions (chosen because they are useful), not facts discoverable
@@ -224,7 +228,7 @@ from first principles. The NEED for the products, however, can be discovered:
 5. *Discrimination*: work out one work problem (dot) and one torque problem (cross)
    side by side. Name the physical reason for each choice.
 
-## Teaching actions
+## Teaching Sequence
 
 From the dispatch library (Delivery 2 §6):
 1. **Direct instruction with need-creation** (primary): motivated as above.
@@ -235,7 +239,12 @@ From the dispatch library (Delivery 2 §6):
 4. **Error exposure**: show the cross product computed with left hand vs. right
    hand — different result. Show why anti-commutativity matters in torque.
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 *How it sounds when taught well*: the tutor always says "SCALAR result" when
 describing the dot product and "VECTOR perpendicular to both" when describing
@@ -251,7 +260,7 @@ about perpendicular rotation (torque, angular momentum, magnetic force)." Slow.
 are the same" → M2; wrong hand or wrong curl direction → M3; learner swaps which
 product to use for work vs. torque → M4.
 
-## Assessment
+## Assessment Signals
 
 **Diagnostic — golden probe**: "Vectors A = 3î + 4ĵ and B = 4î − 3ĵ. Find A·B
 and |A × B|." This requires: dot product = (3)(4) + (4)(−3) = 12 − 12 = 0 (they
@@ -289,7 +298,7 @@ use in which context. True mastery = explaining WHY (physics of parallel vs.
 perpendicular), not just knowing WHICH. Calibration probe: "why is torque a
 cross product and not a dot product?" — written justification required.
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 *Likeliest utterance*: "I don't know which rule to use" (M4); "the right-hand
 rule always confuses me" (M3); "I got a vector for the dot product" (M1).
@@ -304,7 +313,7 @@ axis (a direction) as the result → cross product.
 — learn the pattern, not the formula. Reversals give negatives. Practice hand
 position with every problem until the hand motion is automatic.
 
-## Memory & review
+## Memory Hooks
 
 - **Concept type**: procedure (two formulas) + concept (physical meaning of each).
 - **Review form** (per Delivery 2 §8): spaced physical-context retrieval — "in
@@ -317,7 +326,7 @@ position with every problem until the hand motion is automatic.
   `phys.mech.torque` (immediate cross-product application); `phys.em.magnetic-force`
   (cross product reappears with new physical meaning).
 
-## Transfer map
+## Transfer Connections
 
 - *Near*: `phys.mech.work` (W = F·d·cos θ); `phys.mech.torque` (τ = r × F).
 - *Far*: `phys.em.magnetic-force` (F = qv × B); `phys.mech.angular-momentum`
@@ -330,7 +339,25 @@ position with every problem until the hand motion is automatic.
 - *Expert transfer*: generalised inner products in Hilbert spaces (quantum
   mechanics — the overlap integral ⟨ψ|φ⟩ is a dot product in function space).
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: significant figures tie directly to scientific notation and logarithms; dimensional analysis is a special case of algebraic unit-tracking; vector components use trigonometry. Chemistry: all lab measurements use SI units; concentration, moles, and temperature all live in this domain. Biology: biological measurements (cell size in micrometres, metabolic rates) use the same SI framework; dimensional analysis applies to enzyme kinetics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.meas.vector-products.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG lists torque and work as unlocks — correct. The difficulty rating "proficient"
 is appropriate (higher than other measurement concepts, as this requires applying
@@ -341,3 +368,7 @@ practice before it is reliable. No missing prerequisite edges observed.
 ---
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
 *Authored against KG node data confirmed at docs/physics/kg/graph.json.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

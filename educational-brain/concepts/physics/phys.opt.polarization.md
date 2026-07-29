@@ -1,6 +1,6 @@
 # phys.opt.polarization — Polarization of Light
 
-## 1. Identity
+## Identity
 
 | Field | Value |
 |---|---|
@@ -16,7 +16,19 @@
 
 ---
 
-## 2. Mental Models
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.opt.polarization.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+Polarization describes the orientation of the electric field oscillation in transverse electromagnetic waves.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 ### Stage 1 — Intuitive (no formalism)
 
@@ -56,7 +68,7 @@ Polarisation state is fully described by a Jones vector (2×1 complex column vec
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Polarisation = the direction light is going** — learners confuse the polarisation direction (direction of **E** oscillation) with the direction of propagation. These are perpendicular: polarisation is in the plane perpendicular to propagation.
 2. **Two crossed polarisers block all light — but adding a third at 45° lets some through** — this is counterintuitive and violates the "blocking is blocking" intuition. Learners cannot accept that inserting a polariser between two crossed ones increases transmitted intensity.
@@ -65,7 +77,7 @@ Polarisation state is fully described by a Jones vector (2×1 complex column vec
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 ### M1 — "Polarisation means the direction the light is travelling"
 
@@ -97,27 +109,7 @@ Polarisation state is fully described by a Jones vector (2×1 complex column vec
 
 ---
 
-## 5. Explanation Library
-
-### Explanation A — Malus's law derivation
-
-Linearly polarised wave, electric field amplitude E₀, polarisation along the x-axis. Passes through a polariser with transmission axis at angle θ to x. The transmitted E-field component: E_t = E₀ cosθ. Intensity ∝ E²: I = I₀ cos²θ. This is Malus's law. Notably, the blocked component (E₀ sinθ) is absorbed by the polariser — its energy goes into heating the material.
-
-### Explanation B — Three-polariser paradox
-
-Initial intensity I₀ after first polariser (0°): I₁ = I₀ (all passes, output polarised at 0°).  
-After second polariser (45°): I₂ = I₁ cos²45° = I₀/2. Output polarised at 45°.  
-After third polariser (90°): I₃ = I₂ cos²45° = (I₀/2)(1/2) = I₀/4. Output polarised at 90°.  
-Without the middle polariser: after first (0°) and third (90°), I = I₀ cos²90° = 0.  
-The middle polariser "rotates" the polarisation in two steps of 45° rather than trying to project 0° onto 90° directly.
-
-### Explanation C — Brewster's angle
-
-The reflected beam is polarised because the p-component (polarisation in the plane of incidence) radiates from oscillating dipoles in the material. At the Brewster angle, the reflected p-direction coincides with the direction of dipole oscillation — dipoles do not radiate along their axis — so the p-component cannot be reflected. Only the s-component (perpendicular to the plane of incidence) appears in the reflected beam. The condition for this is: reflected ray ⊥ refracted ray → θ_r + θ_t = 90° → tan θ_B = n₂/n₁.
-
----
-
-## 6. Analogy Library
+## Analogies
 
 ### Primary analogy — Venetian blinds for waves
 
@@ -131,7 +123,7 @@ Interference and diffraction arise from the wave's *phase* relationships between
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 ### Demo A — Two and three Polaroids
 
@@ -153,7 +145,7 @@ Interference and diffraction arise from the wave's *phase* relationships between
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 ### Stance: Argue the inductive case — *manipulate first, model second*
 
@@ -173,7 +165,7 @@ Interference and diffraction arise from the wave's *phase* relationships between
 
 ---
 
-## 9. Teaching Actions
+## Teaching Sequence
 
 | Prior state | Action |
 |---|---|
@@ -185,7 +177,12 @@ Interference and diffraction arise from the wave's *phase* relationships between
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 ### Opening
 "Hold two Polaroid sheets up to a light. Rotate one — watch the light go dark when they are at 90°. Now put a third sheet between them at 45°. Light comes back through. More filters, more light — welcome to polarisation, where optics gets strange."
@@ -201,7 +198,7 @@ Interference and diffraction arise from the wave's *phase* relationships between
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 ### Mastery gate
 
@@ -233,7 +230,7 @@ Expected: I = I₀cos²θ; θ = angle between the input polarisation direction a
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **Recovery for Malus's law applied to unpolarised light**:
 1. Ask: "What is the polarisation angle of unpolarised light?" (There is none — it changes randomly.) "Then what is θ in Malus's law?" (Undefined.) "Therefore Malus's law cannot be applied — instead, use the averaging result: ⟨cos²θ⟩ = 1/2 → I = I₀/2."
@@ -246,7 +243,7 @@ Expected: I = I₀cos²θ; θ = angle between the input polarisation direction a
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Law + mechanism + three scenarios (absorption, reflection, scattering)
 
@@ -267,7 +264,7 @@ Expected: I = I₀cos²θ; θ = angle between the input polarisation direction a
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 | Target concept | Bridge |
 |---|---|
@@ -281,7 +278,25 @@ Expected: I = I₀cos²θ; θ = angle between the input polarisation direction a
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: ray diagrams use similar triangles; Snell's law uses trigonometry; wave optics uses Fourier analysis. Chemistry: spectrophotometry and colorimetry measure concentrations optically; X-ray diffraction uses diffraction physics. Biology: the eye is a biological optical instrument; microscopy, endoscopy, and photoreception are optics applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.opt.polarization.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 **KG note**: `phys.opt.wave-optics` is the correct prerequisite — the transverse nature of electromagnetic waves (established in wave optics) is the physical foundation for polarisation. `phys.opt.brewsters-law` is correctly the downstream unlock — it deepens the reflection-polarisation mechanism with the full Fresnel equation treatment.
 
@@ -290,3 +305,7 @@ Expected: I = I₀cos²θ; θ = angle between the input polarisation direction a
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

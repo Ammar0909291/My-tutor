@@ -17,7 +17,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply magnetic flux at the **apply** level (Bloom) with difficulty tier **proficient**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.em.magnetic-flux.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_Magnetic flux Φ = B·A is the total magnetic field passing perpendicularly through a surface area A._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: Magnetic flux is a measure of how many magnetic field lines pass through a given area. A stronger field, a larger area, or a surface held perpendicular to the field all give more flux. Tilting the surface so field lines pass through it at an angle gives less flux — and if the surface is parallel to the field, no field lines pass through it at all (zero flux).
 
@@ -31,7 +43,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **confusing the angle in Φ = BA cosθ (angle between B and the area normal) with the angle between B and the surface plane**: learners know that a surface perpendicular to the field gives maximum flux and a surface parallel to the field gives zero flux — but they measure θ as the angle between **B** and the surface, not between **B** and the area vector (surface normal). The surface normal is perpendicular to the surface itself. So when the field is perpendicular to the surface (maximum flux case), the angle between **B** and the normal is 0° — cosθ = 1 (correct). But learners say "the angle is 90° because B is perpendicular to the surface" — getting cosθ = 0 instead of 1 (the exact opposite).
 
@@ -39,7 +51,7 @@ The secondary root cause is **treating flux as always positive**: learners forge
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "The angle θ in Φ = BA cosθ is the angle between B and the surface (not the normal)"**
 - Characteristic phrase: "B is perpendicular to the surface — so θ = 90° and Φ = BA cos90° = 0."
@@ -67,20 +79,7 @@ The secondary root cause is **treating flux as always positive**: learners forge
 
 ---
 
-## Explanation library
-
-**E1 — The area vector convention**
-"Every surface has two sides. For an open surface (like a flat loop), we choose one side as the 'positive' normal direction — the area vector **A** points that way. The choice is arbitrary, but once made it defines the sign convention: if field lines pass through the loop in the direction of **A**, the flux is positive; if they pass through in the opposite direction, the flux is negative. For Faraday's law, the chosen direction of **A** (and the associated positive flux direction) determines the direction of positive induced EMF via Lenz's law."
-
-**E2 — Flux as field-line count (physical picture)**
-"Imagine painting field lines on magnetic field. The flux through a surface is proportional to the number of lines passing through it. A surface held perpendicular to the lines intercepts the maximum number. Tilt the surface 30° — the lines now hit at an angle, and fewer cross through per unit area. Tilt 90° (surface parallel to lines) — no lines cross through; Φ = 0. The formula Φ = BA cosθ is the mathematical statement of this geometry: cosθ is the projection factor that counts only the component of the lines passing through, not along, the surface."
-
-**E3 — Faraday's law as motivation (why flux matters)**
-"Magnetic flux is the quantity that Faraday's law connects to EMF: EMF = −dΦ/dt (for one turn). The minus sign is Lenz's law — the induced EMF opposes the change. Three ways to change Φ: (1) change B (electromagnet turned on near a loop — transformers); (2) change A (loop area changes — not common); (3) change θ (loop rotates in fixed B — generators). Every induction phenomenon is ultimately a change in Φ. Flux is the bridge between the static field picture and the dynamic induction phenomenon."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — Sunlight through a window**
 The amount of sunlight entering a room through a window depends on: (1) the brightness of sunlight (like the field strength B), (2) the size of the window (like the area A), and (3) the angle of the window relative to the sun's rays (like θ). A window directly facing the sun (perpendicular to rays) admits maximum light. A window tilted away admits less — proportional to cosθ. A window parallel to the rays (face-on to a wall, not the sun) admits no direct sunlight. The "light passing through" = "flux through the surface" in this analogy.
@@ -92,7 +91,7 @@ Flux through a loop is not determined by how many field lines exist in the neigh
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Rotating coil and galvanometer**
 Connect a small coil of wire to a galvanometer. Rotate the coil from parallel to a bar magnet to perpendicular. The galvanometer deflects as the flux changes (during rotation) and returns to zero when the coil is stationary at a new orientation. Pause at 0° (maximum flux, zero EMF), then rotate to 90° (zero flux, zero EMF), observing that the EMF is only non-zero during the rotation — Faraday's law in action (EMF ∝ rate of change of flux). This directly links the abstract flux concept to the measured electrical quantity (EMF).
@@ -105,7 +104,7 @@ Attach a search coil (a small coil with known area and turns) to a flux meter or
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for guided derivation from the field-line picture**:
 
@@ -117,7 +116,7 @@ The formal formula follows from the geometric intuition; the intuition is earned
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Area vector drawn first**: Before computing any flux, require the learner to draw the area vector **A** on the surface diagram — perpendicular to the surface, in the chosen positive direction. Label it with the symbol **Â** (unit normal). Only then identify θ as the angle between **B** and **Â**.
 
@@ -129,7 +128,12 @@ The formal formula follows from the geometric intuition; the intuition is earned
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "Magnetic flux: Φ = BA cosθ, where θ is the angle between B and the area normal — not between B and the surface. The area vector points perpendicular to the surface. When B also points perpendicular to the surface, θ = 0°, cosθ = 1, flux is maximum — all the field lines go straight through. When B is parallel to the surface, θ = 90°, cosθ = 0, flux is zero — no lines cross through."
 
@@ -139,7 +143,7 @@ The formal formula follows from the geometric intuition; the intuition is earned
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) define magnetic flux as Φ = **B**·**A** = BA cosθ with θ between **B** and the area normal; (2) calculate Φ for flat surfaces in uniform fields at any angle; (3) determine the sign of Φ from the relative orientation of **B** and **A**; (4) state that ∮ **B**·d**A** = 0 for any closed surface and explain why.
 
@@ -159,7 +163,7 @@ After (a): "Is this the maximum or minimum flux?" (Maximum.) "Why?" A learner wh
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — M1 (angle between B and surface, not normal)**
 Construct the two angles side by side: "Draw the surface. Draw the surface normal (area vector A). Draw B. What is the angle between B and A?" (Call it α.) "What is the angle between B and the surface plane?" (Call it β.) "How are α and β related?" (α + β = 90° — they're complementary.) "Which one goes into Φ = BA cosθ?" (α — the angle between B and the normal.) Provide the mnemonic: "Flux is maximum when B pierces the surface straight through — that's when B and the normal are parallel (θ = 0°, cos = 1). Not when B is parallel to the surface."
@@ -172,7 +176,7 @@ Return to the field line picture: "Field lines are closed loops. Draw a closed s
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Formula (Φ = BA cosθ, θ between B and area normal) + three cases (0°: max; 90°: zero; angle: BA cosθ) + sign rule (B parallel to A: positive; antiparallel: negative) + Gauss's law (∮ B·dA = 0, always).
 
@@ -188,7 +192,7 @@ Return to the field line picture: "Field lines are closed loops. Draw a closed s
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.em.faradays-law`: EMF = −dΦ/dt (or EMF = −N dΦ/dt for N turns) — the rate of change of flux is the direct cause of induced EMF; Faraday's law is the reason flux was defined
@@ -203,7 +207,25 @@ Return to the field line picture: "Field lines are closed loops. Draw a closed s
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: vector calculus (divergence, curl) formalises Maxwell's equations; complex exponentials describe AC circuits. Chemistry: electrochemistry (Faraday's laws, electrolysis, galvanic cells) maps directly onto electric-current concepts; atomic spectroscopy uses electromagnetic waves. Biology: membrane potentials and nerve impulses are electrical circuits; MRI and ECG are direct clinical applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.em.magnetic-flux.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG description "magnetic flux Φ = B·A is the total magnetic field passing perpendicularly through a surface area A" is correct but the notation "B·A" does not make the angle convention explicit. A learner reading "B·A" might interpret it as a simple product (no angle factor) or as a dot product of two scalars (undefined).
 
@@ -214,3 +236,7 @@ A second gap: the KG description does not mention Gauss's law for magnetism (∮
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

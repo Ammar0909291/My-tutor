@@ -17,7 +17,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply reflection and laws of reflection at the **apply** level (Bloom) with difficulty tier **developing**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.opt.reflection.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_The law of reflection states that the angle of incidence equals the angle of reflection with both angles measured from the normal._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: When light hits a smooth mirror, it bounces off at the same angle it arrived. This is why you see yourself in a mirror — light from your face hits the mirror and bounces toward your eyes at a predictable angle. On rough surfaces, light still bounces but in many different directions (diffuse reflection), which is why rough paper isn't a mirror.
 
@@ -31,7 +43,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **measuring angles from the surface, not from the normal**: learners read θᵢ = θᵣ but measure angles from the reflecting surface (the glancing angle) rather than from the normal. If the incident angle from the surface is 30°, the actual angle of incidence is 60° (complement). A learner measuring from the surface who reads θᵢ = θᵣ gets the reflected ray on the wrong side of the normal — they draw the reflected ray at 30° on the same side as the incident ray instead of 60° on the opposite side. The error is invisible in symmetric cases (45°) and catastrophic in asymmetric ones.
 
@@ -39,7 +51,7 @@ The secondary root cause is **confusing specular and diffuse reflection conceptu
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "Angles are measured from the surface, not the normal"**
 - Characteristic phrase: "The angle of incidence is 30° — so the reflected ray is 30° on the other side of the point."
@@ -67,20 +79,7 @@ The secondary root cause is **confusing specular and diffuse reflection conceptu
 
 ---
 
-## Explanation library
-
-**E1 — The normal and the angle convention (step-by-step)**
-"Step 1: draw the surface. Step 2: draw the normal — a line perpendicular (90°) to the surface at the exact point where the ray hits. Step 3: the incident ray comes in and makes an angle θᵢ with the normal (not with the surface). Step 4: the reflected ray leaves on the other side of the normal at angle θᵣ = θᵢ. Step 5: confirm all three — incident ray, normal, reflected ray — lie in the same plane. The normal is the reference; every angle is measured from it."
-
-**E2 — Why we need the normal (not the surface)**
-"If you measured from the surface, the law would look like: angle from surface in = angle from surface out. That's mathematically equivalent to the normal-based law (since both angles add to 90°), but it confuses 30° from surface with 30° from normal. Standardizing on the normal means every optics formula (reflection, refraction, critical angle) uses the same reference line — the normal. Learn this convention once; it applies to every optics problem in the course."
-
-**E3 — Specular vs. diffuse (microscopic picture)**
-"Both a mirror and a sheet of paper obey θᵢ = θᵣ at every microscopic point. Mirror: the surface is flat at the microscopic level — all normals point the same direction. Every reflected ray goes in the same direction → you see a sharp image. Paper: the surface is rough at the microscopic level — normals point in thousands of different directions. Each tiny reflection is perfect, but the aggregate sends light in all directions → you see no image, but you can see the paper from anywhere in the room. Diffuse reflection is not random; it's many perfect reflections from a disordered surface."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — A ball bouncing off a floor**
 A ball thrown at the floor bounces off at the same angle as it arrived (ignoring spin and energy loss) — angle of incidence equals angle of rebound, both from the vertical (the normal to the floor). Light follows the same rule. The analogy is nearly exact for the direction rule, which is why "bouncing" is an intuitive entry point and why the normal is like the "vertical direction" at the floor — the natural perpendicular reference.
@@ -92,7 +91,7 @@ The reflection rule describes where the reflected RAY goes — not where the IMA
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Laser and protractor on a mirror**
 Shine a laser pointer at a flat mirror on a sheet of paper. Mark the incident ray and the reflected ray. Draw the normal. Measure θᵢ and θᵣ with a protractor. Repeat at three different angles. Each time, θᵢ = θᵣ within measurement error. This is a direct, quantitative verification of the law. Learners who measured from the surface will get different numbers — immediately exposing M1.
@@ -105,7 +104,7 @@ Build a simple periscope with two plane mirrors at 45° to the light path. The l
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for guided empirical discovery**:
 
@@ -117,7 +116,7 @@ The discovery sequence: observe → measure → find pattern (θᵢ = θᵣ from
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Draw the normal first**: For every reflection problem, require the learner to draw the normal before doing anything else. "No normal drawn → no marks for the geometry." This makes the angle reference line physically present and prevents M1.
 
@@ -129,7 +128,12 @@ The discovery sequence: observe → measure → find pattern (θᵢ = θᵣ from
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "The law of reflection: angle of incidence equals angle of reflection, both measured from the normal. Not from the surface — from the normal. The normal is a line perpendicular to the surface at the hit point. Always draw it first. If you know θᵢ from the normal, the reflected ray is on the other side of the normal at the same angle. That's it. One rule; all mirrors."
 
@@ -139,7 +143,7 @@ The discovery sequence: observe → measure → find pattern (θᵢ = θᵣ from
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) state the law of reflection with the correct angle convention (from the normal); (2) draw an accurate ray diagram showing incident ray, normal, and reflected ray with angles labeled; (3) distinguish specular from diffuse reflection and explain why diffuse reflection doesn't violate the law; (4) locate the image in a plane mirror (same distance behind as object is in front, virtual).
 
@@ -160,7 +164,7 @@ After (a): "How confident are you that the angle of incidence is 70° (not 20°)
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — M1 persists (angles from surface)**
 Run D1 (laser and protractor). Require the learner to draw the normal physically (a physical ruler perpendicular to the mirror), then measure θᵢ from the normal and θᵣ from the normal. Compare to their previous surface-based measurements. The numbers will match (θᵢ = θᵣ) with the normal; they may or may not match without it. Lock in the rule: "Every optics angle in this course is measured from the normal. Never from the surface."
@@ -173,7 +177,7 @@ Use D3 (periscope) or a simple mirror experiment: place an object in front of a 
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Law statement (θᵢ = θᵣ from normal) + angle convention + two-type classification (specular/diffuse) + plane mirror image location (virtual, same distance behind).
 
@@ -189,7 +193,7 @@ Use D3 (periscope) or a simple mirror experiment: place an object in front of a 
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.opt.mirrors`: curved mirrors (concave/convex) — the law of reflection still applies at each point on the curved surface; the geometry of the normal at each point determines the focal properties
@@ -205,7 +209,25 @@ Use D3 (periscope) or a simple mirror experiment: place an object in front of a 
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: geometry (ray diagrams use similar triangles); Snell's law uses trigonometry; wave optics uses Fourier analysis. Chemistry: spectrophotometry and colorimetry measure concentrations optically; X-ray diffraction of molecules uses diffraction physics. Biology: the eye is a biological optical instrument; microscopy and endoscopy depend on lenses and fibre optics; bioluminescence and plant photoreception are optics applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.opt.reflection.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG description "the law of reflection states that the angle of incidence equals the angle of reflection with both angles measured from the normal" is complete and precise — it includes the critical normal-based convention.
 
@@ -216,3 +238,7 @@ A second gap: the KG does not mention the plane of incidence (incident ray, norm
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

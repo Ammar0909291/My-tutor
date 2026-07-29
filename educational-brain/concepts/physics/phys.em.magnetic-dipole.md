@@ -1,6 +1,6 @@
 # phys.em.magnetic-dipole — Magnetic Dipole Moment
 
-## 1. Identity
+## Identity
 - **Canonical KG ID**: `phys.em.magnetic-dipole`
 - **Canonical name**: Magnetic Dipole Moment
 - **Curriculum domain**: Electromagnetism
@@ -13,7 +13,19 @@
 
 ---
 
-## 2. Mental Models (4-stage progression)
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.em.magnetic-dipole.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+A magnetic dipole has a moment m = NIA; Earth behaves as a giant magnetic dipole with geographic and magnetic poles.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Concrete (bar magnet as a dipole)**
 A bar magnet has a north pole and a south pole separated by a distance 2l. It behaves like a magnetic dipole — it aligns with an external field, and it creates a characteristic field pattern (field lines loop from north to south outside, south to north inside). Every permanent magnet, compass needle, and current-carrying loop is a magnetic dipole.
@@ -50,7 +62,7 @@ Earth's magnetic field approximates a dipole with:
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Area vector direction**: Students know m = NIA but forget m⃗ is a vector with direction given by the right-hand rule applied to the current circulation. They compute the magnitude correctly but assign the wrong direction for torque calculations.
 2. **Confusing geographic and magnetic poles**: Earth's geographic north ≠ magnetic north. The magnetic pole near geographic north is actually a magnetic south pole (it attracts compass north). This double-inversion confuses learners every time.
@@ -59,7 +71,7 @@ Earth's magnetic field approximates a dipole with:
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 **M1 — "Compass points to geographic north because Earth's magnetic north pole is there"**
 - Probe: "Why does a compass needle's north pole point north?"
@@ -83,32 +95,7 @@ Earth's magnetic field approximates a dipole with:
 
 ---
 
-## 5. Explanation Library
-
-**E1 — Definition and formula**
-A magnetic dipole is the simplest magnetic source configuration. For a current loop of area A carrying current I in N turns: m⃗ = NIA n̂, where n̂ is the unit normal to the loop given by the right-hand rule. This is the exact analogue of the electric dipole moment p⃗ = qd⃗.
-
-**E2 — Torque derivation for a rectangular loop**
-A rectangular loop (sides a × b) in uniform B⃗ (along x-axis), current I, m⃗ along z-axis initially:
-Forces on the two sides of length a (parallel to B⃗): F = IBa × 0 = 0 (current parallel to B — zero force).
-Forces on the two sides of length b (perpendicular to B⃗): F = IBb (each side), in opposite directions.
-Torque = F × (a/2) + F × (a/2) = IBb × a = IAB = mB (when m⃗ ⊥ B⃗).
-General: τ = mB sinθ → τ⃗ = m⃗ × B⃗. ✓
-
-**E3 — Energy derivation**
-Work done rotating dipole from θ = 90° (reference U = 0) to angle θ:
-W = −∫_{90°}^{θ} τ dθ' = −∫_{90°}^{θ} mB sinθ' dθ' = mB cosθ − 0 = mB cosθ
-U = −W = −mB cosθ = −m⃗·B⃗ ✓
-
-**E4 — Earth's dipole approximation**
-The external field of Earth approximates a magnetic dipole:
-On the axis (geographic poles): B_poles ≈ 2 × 10⁻⁴ T (observed ~6 × 10⁻⁵ T — deviates from pure dipole due to crustal anomalies).
-On the equator: B_equator ≈ 1 × 10⁻⁴ T (observed ~3 × 10⁻⁵ T).
-Ratio B_poles/B_equator = 2 — characteristic of a dipole, consistent with the 1/r³ field structure.
-
----
-
-## 6. Analogy Library
+## Analogies
 
 **Primary analogy — Electric dipole (exact structural parallel)**
 Electric dipole: p⃗ = qd⃗ (from − to + charge), τ⃗ = p⃗ × E⃗, U = −p⃗·E⃗, field ∝ 1/r³.
@@ -121,7 +108,7 @@ Every formula has an exact structural analogue. Once the electric dipole is unde
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 **D1 — Coil in a Helmholtz coil field**
 Hang a small, N-turn coil by a thin fibre in the uniform field of a Helmholtz coil (known B). When the coil is displaced from equilibrium, it oscillates. Period T = 2π√(I_rot/mB), where I_rot is the moment of inertia of the coil. Measure T and B → compute m = NIA from the known coil geometry → verify the formula. This is also the working principle of the tangent galvanometer and magnetometer.
@@ -134,7 +121,7 @@ Use a dip circle (inclinometer) to measure the angle of Earth's B-field below ho
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 *Direct instruction with guided discovery for the torque formula*:
 
@@ -148,7 +135,7 @@ Use a dip circle (inclinometer) to measure the angle of Earth's B-field below ho
 
 ---
 
-## 9. Teaching Actions (dispatch table)
+## Teaching Sequence
 
 | Situation | Action |
 |---|---|
@@ -160,7 +147,12 @@ Use a dip circle (inclinometer) to measure the angle of Earth's B-field below ho
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 "A magnetic dipole is the simplest thing you can make from magnetism — a current loop. The loop has a magnetic moment: m equals N times I times A. N for turns, I for current, A for area. The direction: right-hand rule around the current gives you which way m points. That's it for the definition.
 
@@ -172,7 +164,7 @@ One more fact to lock in: the dipole's own field falls as 1 over r-cubed, not r-
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 **Mastery gate**: Student correctly computes m = NIA for a coil, determines the direction of m⃗ from the right-hand rule, calculates torque τ = mB sinθ in a uniform field, and explains why the dipole experiences torque but not translation in a uniform field. Three multi-step problems required.
 
@@ -189,7 +181,7 @@ Answers:
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **If student cannot remember whether τ = mB sin or cos**:
 Use limiting cases: at θ = 0° (aligned), clearly zero torque (no reason to rotate) → sin(0°) = 0 ✓. At θ = 90° (perpendicular), maximum torque → sin(90°) = 1 ✓. The sine form is correct.
@@ -202,7 +194,7 @@ Two poles separated by 2l: at large r, B_north ∝ 1/(r−l)² ≈ 1/r²(1 − l
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Declarative (m = NIA, τ = m × B, U = −m·B, Earth's pole geography) + procedural (right-hand rule for direction, torque calculation)
 **Forgetting risk**: Medium — the formula is straightforward, but the Earth pole geography and the 1/r³ vs 1/r² falloff are frequently confused at the 2-week mark.
@@ -211,7 +203,7 @@ Two poles separated by 2l: at large r, B_north ∝ 1/(r−l)² ≈ 1/r²(1 − l
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 **Near transfer**: Torque on a current loop in a motor (the electric motor operating principle is torque on a current-carrying coil in a magnetic field — the fundamental application of τ = m × B).
 **Medium transfer**: Spin magnetic moment of electrons (m = g_s × (e/2m_e) × ħ/2 for spin-½ — same formula structure, different source); NMR and MRI (nuclear magnetic moments aligned by B₀, tipped by RF pulses, emit at Larmor frequency ω = γB₀).
@@ -220,7 +212,25 @@ Two poles separated by 2l: at large r, B_north ∝ 1/(r−l)² ≈ 1/r²(1 − l
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: vector calculus (divergence, curl) formalises Maxwell's equations; complex exponentials describe AC circuits. Chemistry: electrochemistry (Faraday's laws, electrolysis, galvanic cells); atomic spectroscopy uses electromagnetic waves. Biology: membrane potentials and nerve impulses are electrical circuits; MRI and ECG are direct clinical applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.em.magnetic-dipole.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 - KG prerequisite `phys.em.magnetic-materials` is appropriate — magnetic materials introduced the concept of magnetic domains and atomic magnetic moments, which motivates why m = NIA scales from a single loop to macroscopic magnets.
 - No unlocks are listed in the current KG — a natural future extension would be `phys.em.inductance` or `phys.em.ac-basics`, since inductance depends on the magnetic moment of coils.
@@ -230,3 +240,7 @@ Two poles separated by 2l: at large r, B_north ∝ 1/(r−l)² ≈ 1/r²(1 − l
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

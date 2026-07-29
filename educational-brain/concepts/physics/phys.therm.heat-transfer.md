@@ -16,7 +16,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply heat transfer: conduction, convection, radiation at the **understand** level (Bloom) with difficulty tier **developing**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.therm.heat-transfer.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_Heat transfers between systems by conduction (contact), convection (fluid flow), or radiation (electromagnetic waves)._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: Heat can move from one place to another in three ways: conduction (through direct contact, like a hot pan heating the handle), convection (through moving fluid, like warm air rising from a heater), and radiation (through space, like the Sun warming your skin without touching you). Heat always moves from hotter regions to cooler regions.
 
@@ -30,7 +42,7 @@
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **mechanism conflation**: learners know there are three mechanisms but cannot reliably classify a scenario. They apply conduction when convection is operating (a heater warming a room is convection, not conduction through air) or claim radiation requires a medium (it does not). The classification failure is compounded by the fact that all three can operate simultaneously — learners try to identify a single mechanism per situation.
 
@@ -38,7 +50,7 @@ The secondary root cause is **temperature vs. heat-flow-rate confusion**: learne
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "Radiation requires a medium (like air or water)"**
 - Characteristic phrase: "The Sun can't warm you in space — there's no air to carry the heat."
@@ -66,26 +78,7 @@ The secondary root cause is **temperature vs. heat-flow-rate confusion**: learne
 
 ---
 
-## Explanation library
-
-**E1 — The three mechanisms compared as a table**
-| Mechanism | Physical carrier | Medium required? | Example |
-|-----------|-----------------|-----------------|---------|
-| Conduction | Molecular collisions / free electrons | Yes (solid or fluid) | Metal spoon in hot soup |
-| Convection | Bulk fluid movement | Yes (fluid) | Warm air rising from radiator |
-| Radiation | Electromagnetic waves | No | Sunlight warming Earth |
-
-This table is the reference; classification questions reduce to identifying which column applies.
-
-**E2 — Fourier's law of conduction (procedural)**
-"Q/t = kA ΔT/Δx — the rate of heat transfer through a wall is proportional to the thermal conductivity k (material property), the area A (more area, more heat), and the temperature gradient ΔT/Δx (greater temperature difference across a thinner wall → more heat). Increasing any of these increases the heat flow rate."
-
-**E3 — Stefan-Boltzmann radiation (conceptual)**
-"Every object above absolute zero radiates electromagnetic energy. The hotter the object, the more it radiates — and the emission scales as T⁴ (T in Kelvin). An object twice as hot (in Kelvin) radiates 2⁴ = 16 times more energy per second. This is why the Sun, at ~5778 K, radiates enormously while a human at ~310 K radiates much less — but still radiates (in the infrared)."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — Three postal services**
 Sending a package across a city: (1) Hand-to-hand relay — each person passes the package directly to the next (conduction). (2) Truck delivery — a vehicle collects the package and drives it (convection). (3) Wireless transmission — the message is sent as a radio signal (radiation). The relay requires a chain of people (medium); the truck requires roads and a vehicle (fluid medium); the radio works in empty space (no medium).
@@ -97,7 +90,7 @@ Convection is not simply "hot things moving" — it is a circulation driven by d
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Thermal conductivity comparison**
 Hold one end of a metal rod and one end of a wooden rod in hot water simultaneously. The metal rod feels hot at the held end much sooner. This demonstrates different k values for conduction through different materials.
@@ -113,7 +106,7 @@ Open (or show) a vacuum flask: outer layer (insulates against conduction and con
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for guided discovery (mechanism classification) + direct instruction (formulas)**:
 
@@ -123,7 +116,7 @@ For the quantitative laws (Fourier's, Stefan-Boltzmann), direct instruction is a
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Mechanism classification test before any formula**: For every heat-transfer problem, require the learner to identify the dominant mechanism(s) before writing any equation. "Is this conduction, convection, or radiation? How do you know?"
 
@@ -135,7 +128,12 @@ For the quantitative laws (Fourier's, Stefan-Boltzmann), direct instruction is a
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "Three ways to move heat. Conduction: molecules passing energy along a chain, like dominoes. Convection: fluid picking up energy and carrying it somewhere — the fluid moves. Radiation: electromagnetic waves through empty space — no medium needed. Sunlight is radiation. Warm air from a heater is convection. A metal spoon in soup conducts heat to your hand. Most real situations use at least two of these at once."
 
@@ -145,7 +143,7 @@ For the quantitative laws (Fourier's, Stefan-Boltzmann), direct instruction is a
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can classify a heat-transfer scenario by mechanism (with reasoning), state Fourier's law qualitatively and apply it to predict how changing k, A, or ΔT affects conduction rate, and explain why radiation is unique in requiring no medium.
 
@@ -166,7 +164,7 @@ After (e): "How confident are you that this is radiation and not conduction?" (1
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — M1 persists (radiation needs a medium)**
 Ask: "How do we know the Sun's energy reaches Earth? We measure it with satellites in space — where there is no air. Yet the satellites detect radiation. The energy must travel through vacuum." Then confirm: electromagnetic waves do not require a medium (this is a fundamental feature distinguishing EM waves from mechanical waves like sound).
@@ -179,7 +177,7 @@ Use TA2 (vacuum test + fluid movement test) as a decision tree. Apply it explici
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Three-category schema (conduction/convection/radiation) + qualitative rates + one key exception (radiation works in vacuum).
 
@@ -195,7 +193,7 @@ Use TA2 (vacuum test + fluid movement test) as a decision tree. Apply it explici
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.therm.specific-heat`: heat transfer (Q = rate × time) determines how much thermal energy enters a substance; specific heat then gives the resulting temperature change
@@ -212,7 +210,25 @@ Use TA2 (vacuum test + fluid movement test) as a decision tree. Apply it explici
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: calculus underlies heat-flow equations; statistical probability distributions govern thermal averages. Chemistry: thermochemistry, chemical equilibrium (Gibbs free energy), and reaction spontaneity are thermodynamics applied to molecular systems; the ideal-gas law is shared. Biology: metabolism is biochemical thermodynamics; body temperature regulation is heat-transfer in a biological system.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.therm.heat-transfer.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG correctly places heat-transfer after temperature and before specific-heat. The single unlock (specific-heat) is appropriate.
 
@@ -223,3 +239,7 @@ A second gap: the Stefan-Boltzmann law involves T⁴, which requires that T be i
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

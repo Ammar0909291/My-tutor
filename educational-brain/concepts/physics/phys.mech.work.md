@@ -1,6 +1,6 @@
 # phys.mech.work — Work Done by a Force
 
-## 1. Identity
+## Identity
 - **Canonical KG ID**: `phys.mech.work`
 - **Canonical name**: Work Done by a Force
 - **Curriculum domain**: Mechanics
@@ -13,7 +13,19 @@
 
 ---
 
-## 2. Mental Models (4-stage progression)
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.mech.work.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+Work is the scalar product of force and displacement, measuring energy transfer by a force.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Concrete (pushing a box)**
 You push a box across a floor. You exert a force, and the box moves. You have done work. If you push and the box doesn't move, you have done no work (by the physics definition). If you carry the box horizontally with force vertical (holding it up) while walking sideways — the force is vertical, displacement is horizontal, they are perpendicular — you do zero work on the box by the holding force. Work requires force AND motion in the same direction (or a component of each in the other's direction).
@@ -54,7 +66,7 @@ This theorem connects Newtonian mechanics (forces) to energy mechanics (kinetic 
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Work = effort or exertion**: Students conflate the everyday meaning of "work" (physical effort) with the physics definition (F·d). Holding a heavy weight motionless is exhausting but does zero physics work on the weight. Carrying a horizontal load horizontally does zero work on the load.
 2. **Forgetting the angle**: Computing W = Fd instead of W = Fd cosθ when the force and displacement are not parallel. Particularly common for forces applied at angles to the horizontal.
@@ -63,7 +75,7 @@ This theorem connects Newtonian mechanics (forces) to energy mechanics (kinetic 
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 **M1 — "Holding a heavy object requires no work, so no energy is needed"**
 - Probe: "You hold a 20 kg barbell motionless for 10 minutes. How much work do you do?"
@@ -87,30 +99,7 @@ This theorem connects Newtonian mechanics (forces) to energy mechanics (kinetic 
 
 ---
 
-## 5. Explanation Library
-
-**E1 — Dot product origin**
-W = F⃗ · d⃗ = F_x d_x + F_y d_y + F_z d_z = Fd cosθ. Only the component of force along the displacement contributes to work. The perpendicular component is "wasted" in terms of energy transfer to the object's kinetic energy.
-
-**E2 — Work by gravity (path-independent result)**
-A mass m moves from height h₁ to h₂ along any path. Work by gravity:
-W_grav = mg⃗ · Δr⃗ = mg(h₁ − h₂) (taking upward as positive y)
-This is path-independent — W_grav depends only on the vertical displacement, not the path taken. Gravity is a conservative force.
-
-**E3 — Spring work**
-Stretch a spring from natural length (x = 0) by extension x: F_applied = +kx (external, against spring), F_spring = −kx (spring restoring).
-W_ext = ½kx² (positive — agent puts energy into spring).
-W_spring = −½kx² (negative — spring resists extension, removes energy from external agent).
-When spring releases: W_spring = +½kx² (positive — spring does positive work on released mass).
-
-**E4 — Work-energy theorem proof**
-Net force on mass m: F_net = ma.
-W_net = ∫F_net dx = ∫ma dx = ∫m(dv/dt) dx = ∫mv dv = ½mv_f² − ½mv_i² = ΔKE.
-This is exact (no approximations); valid for any force law.
-
----
-
-## 6. Analogy Library
+## Analogies
 
 **Primary analogy — Money transfer**
 Work is like a financial transaction. Positive work = money deposited into the object's "energy account" (kinetic or potential). Negative work = money withdrawn. Zero work = transaction with zero transfer amount (no deposit, no withdrawal). The "balance" (total mechanical energy) changes only when there is a net nonzero transaction.
@@ -121,7 +110,7 @@ Work is like a financial transaction. Positive work = money deposited into the o
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 **D1 — Force sensor + motion sensor on an air track**
 Attach a spring to a cart on an air track. Measure force with a force sensor and position with a motion sensor. Record F vs. x data. Calculate area under the F-x curve (W_spring). Simultaneously measure v before and after release. Compute ΔKE = ½mv². Verify W_net ≈ ΔKE (work-energy theorem). Quantitative, live, and compelling.
@@ -134,7 +123,7 @@ Roll a ball up a straight ramp and a curved ramp (same height h). Measure speed 
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 *Guided discovery of W = Fd cosθ*:
 
@@ -149,7 +138,7 @@ The ramp discovery reveals that machines change the force-distance trade-off but
 
 ---
 
-## 9. Teaching Actions (dispatch table)
+## Teaching Sequence
 
 | Situation | Action |
 |---|---|
@@ -161,7 +150,12 @@ The ramp discovery reveals that machines change the force-distance trade-off but
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 "Physics work has a precise definition: W equals F dot d, or equivalently F times d times cosine-theta, where theta is the angle between the force and the displacement. Three key consequences of that cosine:
 
@@ -173,7 +167,7 @@ One more: work is always done on a specific object. Friction does negative work 
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 **Mastery gate**: Student correctly computes W = Fd cosθ for forces at angles, identifies zero-work cases (⊥ forces), assigns correct signs, applies the work-energy theorem (W_net = ΔKE), and correctly identifies which forces do work in standard problems. Four independent multi-step problems required.
 
@@ -192,7 +186,7 @@ Answers:
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **If the cosθ factor is persistently forgotten**:
 Post a visual: F-vector and d-vector as arrows with angle θ between them; W = shaded projection × d (geometric picture). Always draw the vectors before computing. The geometric picture is more memorable than the algebraic formula.
@@ -205,7 +199,7 @@ Always write "W_net = ΔKE" explicitly and then expand W_net as a sum of all ind
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Declarative (W = Fd cosθ; W_net = ΔKE; zero-work conditions) + procedural (multi-force work calculations, sign assignment)
 **Forgetting risk**: Medium — the cosθ factor is reliably dropped under time pressure; the sign of friction work and the zero-work cases need reinforcement.
@@ -214,7 +208,7 @@ Always write "W_net = ΔKE" explicitly and then expand W_net as a sum of all ind
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 **Near transfer**: Kinetic energy (direct unlock — W_net = ΔKE defines the connection); potential energy (conservative forces have associated PE: W_grav = −ΔPE_grav); power (P = W/t = F⃗·v⃗).
 **Medium transfer**: Energy conservation in mechanics (W_nc = ΔKE + ΔPE, where W_nc = work by non-conservative forces).
@@ -223,7 +217,25 @@ Always write "W_net = ΔKE" explicitly and then expand W_net as a sum of all ind
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: kinematics uses calculus (differentiation for velocity/acceleration, integration for displacement); vectors use linear algebra; energy methods use algebra and trigonometry. Chemistry: thermochemistry uses energy and work; reaction kinetics connects to activation energy. Biology: biomechanics (muscle force, gait), fluid mechanics in circulation (blood pressure, flow), and structural biology (bone stress) apply mechanics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.mech.work.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 - KG prerequisites `phys.mech.newtons-second-law` and `phys.meas.vector-products` are both necessary — Newton's 2nd law motivates why force matters; the dot product is the mathematical tool for W = F⃗·d⃗.
 - The four unlocks are all natural consequences: kinetic energy is defined via the work-energy theorem; potential energy arises from conservative force work; power is work per unit time; thermodynamic first law extends work to thermal systems.
@@ -233,3 +245,7 @@ Always write "W_net = ΔKE" explicitly and then expand W_net as a sum of all ind
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

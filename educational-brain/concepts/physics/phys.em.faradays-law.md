@@ -1,6 +1,6 @@
 # phys.em.faradays-law — Faraday's Law of Electromagnetic Induction
 
-## 1. Identity
+## Identity
 - **Canonical KG ID**: `phys.em.faradays-law`
 - **Canonical name**: Faraday's Law of Electromagnetic Induction
 - **Curriculum domain**: Electromagnetism
@@ -13,7 +13,19 @@
 
 ---
 
-## 2. Mental Models (4-stage progression)
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.em.faradays-law.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+Faraday's law states that the induced EMF equals the negative rate of change of magnetic flux through a circuit: ε = −dΦ/dt.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Concrete (moving magnet / changing field)**
 Push a bar magnet into a coil and a current flows. Pull it out and the current reverses. Hold the magnet still and no current flows. The key: it is the CHANGE in flux that produces the EMF, not the flux itself. Flux changing → EMF → (if there is a closed circuit) current.
@@ -51,7 +63,7 @@ This is the origin of sinusoidal AC current. Higher N, B, A, or ω → higher pe
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Forgetting the negative sign**: ε = −dΦ/dt. Students write ε = dΦ/dt and then separately apply Lenz's law as a direction rule, not realising the negative sign encodes Lenz's law. Both are correct approaches if consistently applied, but the sign must not be ignored.
 2. **Flux vs. field**: Students compute the magnitude of B where the current flows rather than the flux through the circuit area. Induction depends on Φ_B through the bounded area, not on B at the wire location.
@@ -60,7 +72,7 @@ This is the origin of sinusoidal AC current. Higher N, B, A, or ω → higher pe
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 **M1 — "Large flux → large EMF"**
 - Probe: "A coil sits in a very strong magnetic field of 10 T. Is a large EMF induced?"
@@ -84,26 +96,7 @@ This is the origin of sinusoidal AC current. Higher N, B, A, or ω → higher pe
 
 ---
 
-## 5. Explanation Library
-
-**E1 — Faraday's experiment reconstructed**
-1831: Faraday wound two coils on an iron ring. Connecting a battery to coil 1 produced a momentary deflection in a galvanometer on coil 2 — only when the switch was opened or closed (changing B). Steady current in coil 1 → no deflection in coil 2. Increasing or decreasing → deflection. This is transformer action; the changing B in coil 1 changes flux in coil 2 → EMF in coil 2.
-
-**E2 — Three sources of dΦ/dt**
-Φ = BA cosθ → dΦ/dt = (dB/dt)A cosθ + B(dA/dt)cosθ − BA sinθ(dθ/dt)
-(1) Transformer: dB/dt ≠ 0, dA/dt = 0, dθ/dt = 0 → ε = −(dB/dt) × A cosθ
-(2) Motional EMF: dB/dt = 0, dA/dt = Lv, dθ/dt = 0 → ε = −BLv cosθ (= BLv for B ⊥ plane)
-(3) AC generator: dB/dt = 0, dA/dt = 0, dθ/dt = ω → ε = NBAω sinωt
-
-**E3 — Motional EMF from force on charges**
-Alternative derivation of ε = BLv: A rod of length L moves at velocity v ⊥ to B. Free charges in the rod experience F = qv×B along the rod. Work done per unit charge moving from one end to the other: W/q = F/q × L = vBL = ε. The magnetic force acts as an "EMF source" — it separates charges, creating a potential difference BLv. No circular reasoning: this force is the mechanical work being converted to electrical energy.
-
-**E4 — Energy conservation in sliding rod**
-Rod slides on rails in field B, resistance R. Current I = BLv/R. Power dissipated: P = I²R = B²L²v²/R. Force needed to keep rod at constant v (opposing the braking force F_braking = BIL = B²L²v/R): P_mechanical = Fv = B²L²v²/R = P_electrical. Mechanical power in = electrical power dissipated. Energy is conserved — Faraday's law plus Lenz's law guarantees this.
-
----
-
-## 6. Analogy Library
+## Analogies
 
 **Primary analogy — Water flow through a paddlewheel**
 Flux is the amount of water through a pipe cross-section per second. Changing flux is the flow rate increasing or decreasing. The paddlewheel (EMF) is driven by the change in flow rate — a steady flow spins the wheel at constant speed but doesn't accelerate it; accelerating flow (increasing dΦ/dt) produces a driving torque. Steady state = no EMF; change of state = EMF.
@@ -114,7 +107,7 @@ Flux is the amount of water through a pipe cross-section per second. Changing fl
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 **D1 — Magnet through coil + galvanometer**
 Drop a bar magnet through a coil connected to a galvanometer. Observe: (a) deflection as north pole enters (one direction), (b) zero deflection when magnet is inside stationary, (c) deflection in opposite direction as south pole exits, (d) larger deflection if magnet dropped faster (larger dΦ/dt). Quantify: catch the magnet to stop it mid-coil; observe zero deflection despite nonzero flux. Conclusive demonstration of "rate of change, not amount."
@@ -127,7 +120,7 @@ Spin a rectangular coil between two magnets (or use a commercial hand generator)
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 *Guided inquiry is effective here* (Faraday's original discovery path is reproducible):
 
@@ -142,7 +135,7 @@ The discovery sequence matches Faraday's 1831 approach and is highly motivating.
 
 ---
 
-## 9. Teaching Actions (dispatch table)
+## Teaching Sequence
 
 | Situation | Action |
 |---|---|
@@ -154,7 +147,12 @@ The discovery sequence matches Faraday's 1831 approach and is highly motivating.
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 "Faraday's law in one sentence: EMF equals minus the rate of change of flux. Epsilon equals minus dΦ-over-dt. The minus sign is Lenz's law built in — it says the induced EMF opposes whatever caused it.
 
@@ -168,7 +166,7 @@ The single most important thing to remember: a large constant flux gives zero EM
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 **Mastery gate**: Student correctly applies ε = −dΦ/dt with the correct sign and direction (via Lenz's law), computes motional EMF (ε = BLv) for a sliding rod, identifies three distinct physical situations that change flux, and derives the AC generator peak EMF formula. Four independent problems including at least one direction-determination problem.
 
@@ -185,7 +183,7 @@ Answers:
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **If student cannot find the direction of induced current**:
 Use the two-step method: (1) Determine whether Φ is increasing or decreasing. (2) Apply Lenz's law: induced current opposes the change (if Φ increasing → induced B opposes original B inside loop; if Φ decreasing → induced B in same direction as original B). Then use the right-hand rule on the induced B to find the current direction. Do not skip step 1 — the sign of dΦ/dt is the starting point for direction.
@@ -198,7 +196,7 @@ Accept for magnitude problems, but require explicit Lenz's law statement for dir
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Declarative (ε = −dΦ/dt; three sources of dΦ/dt; ε = BLv motional EMF; ε₀ = NBAω generator) + procedural (flux computation, direction determination via Lenz's law)
 **Forgetting risk**: High — the sign and direction are consistently dropped; the transformer case (no motion, changing B) is often forgotten; the generator formula components are confused.
@@ -207,7 +205,7 @@ Accept for magnitude problems, but require explicit Lenz's law statement for dir
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 **Near transfer**: Lenz's law (direct unlock — the opposition principle embedded in the sign, elaborated as a full predictive tool). Self-inductance (ε = −L dI/dt — same law applied to a coil's own changing flux). AC basics (the generator derivation is the direct source of AC current).
 **Medium transfer**: Transformers (step-up/step-down voltage via turns ratio N₁/N₂ = V₁/V₂, derived from Faraday's law for two coils sharing flux).
@@ -216,7 +214,25 @@ Accept for magnitude problems, but require explicit Lenz's law statement for dir
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: vector calculus (divergence, curl) formalises Maxwell's equations; complex exponentials describe AC circuits. Chemistry: electrochemistry (Faraday's laws, electrolysis, galvanic cells); atomic spectroscopy uses electromagnetic waves. Biology: membrane potentials and nerve impulses are electrical circuits; MRI and ECG are direct clinical applications.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.em.faradays-law.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 - KG prerequisite `phys.em.magnetic-flux` is necessary and sufficient — students need Φ_B = BA cosθ and the three ways to change Φ before Faraday's law can be applied. Area vector convention (prerequisite) is essential.
 - Four unlocks (`phys.em.ac-basics`, `phys.em.lenzs-law`, `phys.em.maxwells-equations`, `phys.em.self-inductance`) are all well-motivated: Faraday's law is the foundational source for each of these topics.
@@ -226,3 +242,7 @@ Accept for magnitude problems, but require explicit Lenz's law statement for dir
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

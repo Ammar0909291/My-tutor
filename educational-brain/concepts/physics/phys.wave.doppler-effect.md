@@ -17,7 +17,19 @@
 
 ---
 
-## Mental models (4-stage progression)
+
+## Learning Objective
+
+After this concept, the learner can accurately apply doppler effect at the **apply** level (Bloom) with difficulty tier **proficient**.
+
+See the Blueprint (`docs/curriculum/blueprints/phys.wave.doppler-effect.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+_The Doppler effect is the change in observed frequency due to relative motion between source and observer._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 **Stage 1 — Beginner**: When an ambulance with its siren on comes toward you, the pitch sounds higher than when it passes and moves away. This is the Doppler effect — the apparent frequency of a wave changes when the source or observer is moving. The siren itself hasn't changed; it's your position relative to the moving source that changes what you hear.
 
@@ -35,7 +47,7 @@ Sign convention: upper signs (+ numerator, − denominator) when the observer/so
 
 ---
 
-## Why beginners fail
+## Why Students Fail
 
 The dominant root cause is **"moving source changes the speed of sound"**: learners think the Doppler effect occurs because the source "pushes" the waves faster in the forward direction — that the wavefronts travel faster ahead of a moving ambulance than behind it. This is wrong: the speed of sound is determined by the medium (air properties), not by the source motion. What actually changes is the wavelength (wavefronts are compressed ahead, stretched behind), and because v = fλ with v fixed, the frequency changes. Learners who believe speed changes cannot correctly apply the Doppler formula and produce systematic errors.
 
@@ -43,7 +55,7 @@ The secondary root cause is **sign confusion in the Doppler formula**: the formu
 
 ---
 
-## Misconception library
+## Misconceptions
 
 **M1 — "The moving source makes the sound travel faster in front of it"**
 - Characteristic phrase: "The ambulance is moving forward, so the sound in front of it moves at 343 + v_s m/s."
@@ -71,20 +83,7 @@ The secondary root cause is **sign confusion in the Doppler formula**: the formu
 
 ---
 
-## Explanation library
-
-**E1 — Why the wavelength compresses ahead (physical picture)**
-"Imagine a stationary source emitting one wavefront per second. Each wavefront expands as a sphere — adjacent wavefronts are 1 wavelength apart. Now the source moves forward. When the next wavefront is emitted, the source has moved into the space where the previous wavefront was. The new wavefront starts closer to the previous one in the forward direction — the wavelength in front is compressed. Behind, the source has moved away from where the previous wavefront was emitted — the wavelength behind is stretched. Speed of sound: unchanged (air doesn't know the source is moving). Compressed λ + fixed v → higher f (f = v/λ). Stretched λ + fixed v → lower f. No speed change; only wavelength and therefore frequency change."
-
-**E2 — Deriving the Doppler formula from wavelength compression**
-"Source moving at v_s toward stationary observer. In time T (one period), the source emits one wavefront and moves forward by v_s T. The wavefront travels forward by vT. The gap between this wavefront and the previous one is λ' = vT − v_s T = (v − v_s)T = (v − v_s)/f. Since f' = v/λ' = v/((v − v_s)/f) = f × v/(v − v_s). With observer also moving: multiply numerator by (v + v_o). Full formula: f' = f(v + v_o)/(v − v_s) for approach. Sign rules: approach → top sign (both); recession → bottom sign (both)."
-
-**E3 — The bat/SONAR application**
-"A bat emits ultrasound at 40,000 Hz. An insect flies toward the bat at 3 m/s; the bat flies toward the insect at 5 m/s. Speed of sound: 343 m/s. What frequency echo does the bat hear? Step 1: frequency of the bat's call reaching the insect: the bat (source) moves toward the insect (observer): f₁ = 40,000 × (343 + 3)/(343 − 5) = 40,000 × 346/338 ≈ 40,946 Hz. Step 2: the insect reflects f₁ as a 'source'; the bat is now the 'observer': f₂ = 40,946 × (343 + 5)/(343 − 3) = 40,946 × 348/340 ≈ 41,910 Hz. The bat's auditory system computes the ratio f₂/f_emitted and extracts the target's closing speed."
-
----
-
-## Analogy library
+## Analogies
 
 **Primary analogy — Boat in water producing bow waves**
 A stationary boat emits water waves equally in all directions — circular ripples, equally spaced. A moving boat piles up the wave crests ahead of it (closer together — shorter wavelength) and leaves them stretched out behind (longer wavelength). The wave speed in water doesn't change — only the spacing (wavelength) changes, because the source is moving into the space where the previous wave was generated. Light and sound do exactly the same — just in three dimensions with non-visible wavefronts.
@@ -96,7 +95,7 @@ Volume (intensity) does change with distance — an approaching ambulance gets l
 
 ---
 
-## Demonstration library
+## Demonstrations
 
 **D1 — Whirling buzzer (qualitative)**
 Tie a small buzzer (or phone playing a steady tone) to a string and whirl it in a circle around your head. Students listening hear a periodic pitch change — high as it approaches, low as it recedes. The pitch is not gradually changing; it is approximately constant during each approach phase and drops as the source passes closest. This directly verifies M3: the pitch is constant for constant speed, not increasing throughout approach.
@@ -109,7 +108,7 @@ Show a clip of medical Doppler ultrasound measuring blood flow velocity in an ar
 
 ---
 
-## Discovery lesson
+## Discovery Questions
 
 **Argue for phenomenon-first, equation-second**:
 
@@ -121,7 +120,7 @@ The physical picture (wavefront compression) is the discovery. The formula is th
 
 ---
 
-## Teaching actions
+## Teaching Sequence
 
 **TA1 — Speed-of-sound invariance check**: Before any Doppler calculation, ask: "Is the speed of sound changed by the motion of the source or observer?" (No — always ~343 m/s in still air, determined by medium properties.) This pre-empts M1 systematically.
 
@@ -133,7 +132,12 @@ The physical picture (wavefront compression) is the discovery. The formula is th
 
 ---
 
-## Voice teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+
+## Voice Teaching Notes
 
 > "The Doppler effect: moving source or observer changes the apparent frequency, not the wave speed. The ambulance's sound always travels at 343 m/s through the air. What changes: the spacing between wavefronts. Ahead of the moving ambulance, each new wavefront starts closer to the previous one — compressed wavelength, same wave speed, higher frequency. Behind: stretched wavelength, lower frequency. f' = f × v/(v − v_s) for approach."
 
@@ -143,7 +147,7 @@ The physical picture (wavefront compression) is the discovery. The formula is th
 
 ---
 
-## Assessment
+## Assessment Signals
 
 **Mastery gate**: The learner can (1) explain qualitatively why a moving source compresses or stretches wavefronts (without appealing to a speed change); (2) correctly apply f' = f(v ± v_o)/(v ∓ v_s) with the correct sign choice from the physical picture; (3) state that the wave speed is determined by the medium, not the source motion; (4) state that the Doppler effect applies to all wave types (sound, EM).
 
@@ -163,7 +167,7 @@ After (d): "Did it surprise you that (a) and (c) are different, even though the 
 
 ---
 
-## Recovery notes
+## Tutor Recovery Strategy
 
 **Failure mode A — M1 persists (sound travels faster from moving source)**
 Draw two scenarios side by side: (A) source stationary — sound emitted at 343 m/s in all directions; (B) source moving forward at v_s — sound emitted at 343 m/s in all directions from the new position. "In both cases, what is the speed of the newly emitted sound?" (343 m/s in both.) "Then what is different in scenario B?" The position of the new emission point has moved — the wavefront was emitted closer to the previous wavefront in the forward direction. The wavelength (spacing) changes; the speed does not. Draw the compressed wavefronts in front and stretched ones behind — the picture makes the mechanism visible.
@@ -176,7 +180,7 @@ Play or simulate D1 (whirling buzzer). Ask: "During the half-cycle when the sour
 
 ---
 
-## Memory & review
+## Memory Hooks
 
 **Memory type**: Physical mechanism (wavefront compression/stretching) + formula (f' = f(v ± v_o)/(v ∓ v_s)) + sign rule from physical outcome + speed-invariance principle + applications (radar, ultrasound, redshift).
 
@@ -192,7 +196,7 @@ Play or simulate D1 (whirling buzzer). Ask: "During the half-cycle when the sour
 
 ---
 
-## Transfer map
+## Transfer Connections
 
 **Immediate transfers**:
 - `phys.wave.sound-waves` (prerequisite, reinforced): f = v/λ and v = fλ — the Doppler effect is the quantitative consequence of λ compression with fixed v
@@ -209,7 +213,25 @@ Play or simulate D1 (whirling buzzer). Ask: "During the half-cycle when the sour
 
 ---
 
-## Curriculum feedback
+
+## Cross-Subject Connections
+
+Mathematics: wave equations use trigonometry (sin/cos) and complex exponentials; Fourier analysis decomposes any periodic signal into waves. Chemistry: spectroscopy — IR, UV-vis, NMR — identifies molecules by their wave-matter interactions. Biology: sound (hearing, ultrasound imaging), light (vision, photosynthesis), and seismic waves in geophysics all use wave physics.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.wave.doppler-effect.md` (authoritative Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite these sections by reference, never re-state them here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages the runtime-served explanation and probe assets for this concept. Authored seed assets are in `src/lib/teaching/assets/authoredSeedAssets.ts`. Once seeded and promoted to ACTIVE status, `assembleLesson()` serves them directly; the LLM acts as voice-renderer only.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) including core_explanation, worked_example, and misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe variants, distractor-mapped to this entry's misconception IDs
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required
+
+## Curriculum Feedback
 
 The KG description "the Doppler effect is the change in observed frequency due to relative motion between source and observer" is correct.
 
@@ -220,3 +242,7 @@ A second gap: the KG description does not mention the key principle that wave sp
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.

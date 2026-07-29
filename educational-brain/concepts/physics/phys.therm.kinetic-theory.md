@@ -1,6 +1,6 @@
 # phys.therm.kinetic-theory — Kinetic Theory of Gases
 
-## 1. Identity
+## Identity
 
 | Field | Value |
 |---|---|
@@ -16,7 +16,19 @@
 
 ---
 
-## 2. Mental Models
+
+## Learning Objective
+
+See Blueprint (`docs/curriculum/blueprints/phys.therm.kinetic-theory.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
+
+
+## Core Understanding
+
+Kinetic theory derives macroscopic gas properties from the statistical mechanics of molecular motion.
+
+This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+
+## Mental Models
 
 ### Stage 1 — Intuitive (no formalism)
 
@@ -50,7 +62,7 @@ Assumptions of kinetic theory: molecules are point masses, elastic collisions on
 
 ---
 
-## 3. Why Beginners Fail
+## Why Students Fail
 
 1. **Conflating T with total energy** — learners say "hotter gas has more energy," which is true but imprecise. Kinetic theory makes this precise: each translational degree of freedom holds exactly (1/2)kT, so *total translational energy = (3/2)NkT*. Confusing T with total energy blocks work with mixtures and polyatomic molecules.
 2. **Treating all molecules as moving at v_rms** — the distribution is invisible in the standard derivation. Learners apply v_rms as if it were the actual speed of every molecule, missing the physical meaning of the tail (evaporation, chemical reactions).
@@ -59,7 +71,7 @@ Assumptions of kinetic theory: molecules are point masses, elastic collisions on
 
 ---
 
-## 4. Misconception Library
+## Misconceptions
 
 ### M1 — "Temperature is the total energy of the gas"
 
@@ -91,33 +103,7 @@ Assumptions of kinetic theory: molecules are point masses, elastic collisions on
 
 ---
 
-## 5. Explanation Library
-
-### Explanation A — The derivation as a proof
-
-The pressure derivation is not a derivation to memorise — it is a proof to understand:
-
-1. Single molecule, mass m, speed vₓ toward wall in box of side L.
-2. Elastic collision: momentum change = 2mvₓ.
-3. Time between successive hits on same wall: 2L/vₓ.
-4. Force from one molecule: F = Δp/Δt = mvₓ²/L.
-5. N molecules, random directions: replace vₓ² → ⟨vₓ²⟩ = ⟨v²⟩/3.
-6. Total force: F = Nm⟨v²⟩/(3L); pressure P = F/L² = Nm⟨v²⟩/(3V).
-7. Compare with PV = NkT: ⟨(1/2)mv²⟩ = (3/2)kT. QED.
-
-### Explanation B — Internal energy and heat capacity
-
-For a monatomic ideal gas: U = N × (3/2)kT = (3/2)nRT. At constant volume, all heat goes into raising T: C_V = (3/2)R per mole. At constant pressure, gas also does work expanding (PΔV = nRΔT), so C_P = C_V + R = (5/2)R. Ratio γ = C_P/C_V = 5/3 ≈ 1.67 (monatomic); measured values confirm this for noble gases.
-
-For diatomic (N₂, O₂ at room T): 2 rotational modes → U = (5/2)nRT; C_V = (5/2)R; γ = 7/5 = 1.4 — confirmed by measurement.
-
-### Explanation C — Mean free path
-
-Molecules do not travel freely — they collide with each other. Mean free path λ = 1/(√2 π d² n), where d is molecular diameter and n = N/V. At STP for nitrogen: d ≈ 3.7 × 10⁻¹⁰ m, n ≈ 2.7 × 10²⁵ m⁻³ → λ ≈ 60 nm — tiny compared with a macro system but large compared with d. Collision frequency: z = v_rms/λ ≈ 7 × 10⁹ s⁻¹ at STP. This underpins diffusion and viscosity.
-
----
-
-## 6. Analogy Library
+## Analogies
 
 ### Primary analogy — Popcorn in a sealed container
 
@@ -131,7 +117,7 @@ Students sometimes explain gas pressure as arising from mutual repulsion between
 
 ---
 
-## 7. Demonstration Library
+## Demonstrations
 
 ### Demo A — Marshmallow in a vacuum jar
 
@@ -152,7 +138,7 @@ Students sometimes explain gas pressure as arising from mutual repulsion between
 
 ---
 
-## 8. Discovery Lesson
+## Discovery Questions
 
 ### Stance: Argue the deductive case — *derive before naming*
 
@@ -169,7 +155,7 @@ Students sometimes explain gas pressure as arising from mutual repulsion between
 
 ---
 
-## 9. Teaching Actions
+## Teaching Sequence
 
 | Prior state | Action |
 |---|---|
@@ -181,7 +167,12 @@ Students sometimes explain gas pressure as arising from mutual repulsion between
 
 ---
 
-## 10. Voice Teaching
+
+## Tutor Actions
+
+See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+
+## Voice Teaching Notes
 
 ### Opening
 "The ideal gas law PV = nRT is a fact we measured. Kinetic theory does something more interesting — it *explains* where that law comes from. The explanation is: pressure is just molecules hitting walls."
@@ -197,7 +188,7 @@ Students sometimes explain gas pressure as arising from mutual repulsion between
 
 ---
 
-## 11. Assessment
+## Assessment Signals
 
 ### Mastery gate
 
@@ -226,7 +217,7 @@ Expected: (3/2)kT. If the learner writes (3/2)RT, probe: "Is k or R the right co
 
 ---
 
-## 12. Recovery Notes
+## Tutor Recovery Strategy
 
 **Recovery for pressure-derivation confusion**:
 1. Do the 1D case first: one molecule, one wall, moving in x-only. Pressure in x-direction: P_x = m⟨vₓ²⟩/V.
@@ -242,7 +233,7 @@ Expected: (3/2)kT. If the learner writes (3/2)RT, probe: "Is k or R the right co
 
 ---
 
-## 13. Memory & Review
+## Memory Hooks
 
 **Memory type**: Mechanistic derivation + quantitative formula network
 
@@ -261,7 +252,7 @@ Expected: (3/2)kT. If the learner writes (3/2)RT, probe: "Is k or R the right co
 
 ---
 
-## 14. Transfer Map
+## Transfer Connections
 
 | Target concept | Bridge |
 |---|---|
@@ -275,7 +266,25 @@ Expected: (3/2)kT. If the learner writes (3/2)RT, probe: "Is k or R the right co
 
 ---
 
-## 15. Curriculum Feedback
+
+## Cross-Subject Connections
+
+Mathematics: calculus underlies heat-flow equations; statistical probability governs thermal averages. Chemistry: thermochemistry, chemical equilibrium (Gibbs free energy), and reaction spontaneity are thermodynamics applied to molecules; the ideal-gas law is shared. Biology: metabolism is biochemical thermodynamics; body-temperature regulation is biological heat transfer.
+
+## Blueprint References
+
+- **Blueprint**: `docs/curriculum/blueprints/phys.therm.kinetic-theory.md` (authoritative for Learning Objective, Diagnostic Battery, Protocol Library, Misconception Engine, Assessment Battery — cite sections by reference, never restate here)
+- **Blueprint status**: PACKAGE_READY
+
+## Runtime Asset References
+
+The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served explanation and probe assets. Authored seed assets for this concept are in `src/lib/teaching/assets/authoredSeedAssets.ts`.
+
+- **Explanation assets**: multiple grade-band variants (MIDDLE / HIGH / ADULT) — core_explanation, worked_example, misconception_repair kinds
+- **Probe assets**: MCQ and misconception_probe kinds, distractor-mapped to this entry's misconception IDs  
+- **Status**: authored in `authoredSeedAssets.ts`; seeding to production database required to activate
+
+## Curriculum Feedback
 
 **KG note**: The prerequisite `phys.therm.ideal-gas-law` is necessary and sufficient — the derivation uses PV = NkT as its check. The `phys.stat.probability-basics` unlock is appropriate: M-B is the natural first encounter with continuous distributions in a physics context. `phys.therm.internal-energy` is correctly gated here — U = (3/2)nRT requires the kinetic-theory equipartition result to be more than an empirical formula.
 
@@ -284,3 +293,7 @@ Expected: (3/2)kT. If the learner writes (3/2)RT, probe: "Is k or R the right co
 ---
 
 *PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*
+
+## Version History
+
+- **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.
