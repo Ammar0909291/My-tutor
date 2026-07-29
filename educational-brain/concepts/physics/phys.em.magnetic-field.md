@@ -20,10 +20,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply magnetic field and field lines at the **understand** level (Bloom) with difficulty tier **developing**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.em.magnetic-field.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. State that a magnetic field is produced by moving charges (currents) and describe the direction of the B field around a straight current-carrying wire using the right-hand rule.
+2. State that magnetic field lines form closed loops (no magnetic monopoles) and apply this to explain why opposite ends of a bar magnet attract.
+3. Apply the formula B = μ₀I/2πr for the field of an infinite straight wire to calculate B at a given distance from a wire, and state how B varies with r.
+4. Apply the right-hand rule to find the direction of B at any point around a straight wire, inside a solenoid (B = μ₀nI, uniform inside), or at the centre of a current loop.
 
 ## Core Understanding
 

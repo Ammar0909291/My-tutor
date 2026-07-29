@@ -20,10 +20,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply sound intensity and the decibel scale at the **apply** level (Bloom) with difficulty tier **proficient**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.wave.sound-intensity.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. Calculate sound intensity using I = P/(4πr²) for a point source — including how intensity changes when distance from the source doubles (intensity decreases by a factor of 4: the inverse-square law).
+2. Convert between intensity (W/m²) and intensity level in decibels: β = 10 log₁₀(I/I₀), where I₀ = 10⁻¹² W/m² is the threshold of hearing. Correctly apply the formula in both directions.
+3. Explain the logarithmic nature of the decibel scale: doubling intensity adds ~3 dB; multiplying intensity by 10 adds 10 dB; combining two equal sound sources increases level by ~3 dB, not by doubling the decibel reading.
+4. Apply the inverse-square law and decibel formula together: calculate the intensity level at a new distance given the level at a known distance from a point source.
 
 ## Core Understanding
 

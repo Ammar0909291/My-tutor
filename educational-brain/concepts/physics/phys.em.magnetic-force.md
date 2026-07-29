@@ -21,10 +21,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply magnetic force on moving charges — lorentz force at the **apply** level (Bloom) with difficulty tier **proficient**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.em.magnetic-force.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. Calculate the magnetic force on a moving charge: F = qv × B, finding its magnitude (F = qvBsinθ) and direction using the right-hand rule (then reversing for negative charges).
+2. Explain why a magnetic force does zero work and cannot change the kinetic energy of a charge — because the force is always perpendicular to the velocity.
+3. Derive and apply the cyclotron radius formula r = mv/(qB) for a charge moving in a plane perpendicular to a uniform magnetic field, explaining why the path is circular.
+4. Calculate the force per unit length on a current-carrying wire in a magnetic field (F/L = BIsinθ) and determine whether parallel wires with currents in the same direction attract or repel.
 
 ## Core Understanding
 

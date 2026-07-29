@@ -20,10 +20,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply nature of light: ray and wave models at the **understand** level (Bloom) with difficulty tier **proficient**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.opt.nature-of-light.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. Name two experiments that demonstrate wave behaviour of light (interference — Young's double slit; diffraction) and two that demonstrate particle behaviour (photoelectric effect; Compton scattering) — and identify what measured quantity in each reveals the wave or particle nature.
+2. Explain wave-particle duality: light exhibits wave properties when propagating (interference patterns) and particle properties when interacting with matter (discrete energy exchange). These are not contradictory — they are complementary descriptions appropriate to different experimental regimes.
+3. State the photon energy formula E = hf = hc/λ and calculate the energy of a photon of given wavelength; explain why higher-frequency light (shorter wavelength) corresponds to more energetic photons.
+4. Explain why the photoelectric effect cannot be explained by the classical wave model (intensity, not frequency, should determine energy transfer in the wave picture) and how Einstein's photon model resolves it.
 
 ## Core Understanding
 

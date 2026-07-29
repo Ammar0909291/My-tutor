@@ -20,10 +20,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply reflection and laws of reflection at the **apply** level (Bloom) with difficulty tier **developing**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.opt.reflection.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. State the law of reflection (angle of incidence = angle of reflection, measured from the normal) and apply it to find the direction of the reflected ray for a plane mirror.
+2. Locate the image formed by a plane mirror using geometry: the image is virtual, erect, the same size as the object, and the same distance behind the mirror as the object is in front.
+3. Determine the minimum length of plane mirror needed for a person to see their full reflection (half their height) and explain why this result is independent of the person's distance from the mirror.
+4. Trace at least two reflected rays from an extended object in front of a plane mirror to locate the image, correctly extending reflected rays behind the mirror surface.
 
 ## Core Understanding
 

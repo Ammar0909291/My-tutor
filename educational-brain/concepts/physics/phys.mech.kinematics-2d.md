@@ -21,10 +21,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply kinematics in two dimensions at the **apply** level (Bloom) with difficulty tier **proficient**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.mech.kinematics-2d.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. Decompose any initial velocity vector at an angle into its x and y components before setting up any kinematic equation — and refuse to substitute the vector magnitude directly into either axis's equation.
+2. Write and apply the independent kinematic equations for each axis (aₓ = 0 in free flight, aᵧ = −g), correctly recognizing that the x and y motions share one clock (time t is the same in both equations).
+3. Find the time of flight by solving the y-equation, then substitute that time into the x-equation to find horizontal displacement — distinguishing the problem correctly from a 1D kinematics problem.
+4. Reconstruct the final speed (|v| = √(vₓ² + vᵧ²)) and direction (θ = arctan(vᵧ/vₓ)) from the component solutions when the question asks for them.
 
 ## Core Understanding
 

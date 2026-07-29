@@ -20,10 +20,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply refraction and snell's law at the **apply** level (Bloom) with difficulty tier **developing**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.opt.refraction.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. State Snell's law (n₁ sinθ₁ = n₂ sinθ₂) and apply it to calculate the refracted angle when light passes between two media of given refractive indices — correctly identifying whether the ray bends toward or away from the normal.
+2. Explain why light bends at a medium boundary in terms of the change in wave speed (v = c/n) while frequency remains constant, causing wavelength to change.
+3. Calculate the critical angle for total internal reflection (θ_c = arcsin(n₂/n₁)) for a denser-to-less-dense medium transition, and state the conditions (angle > θ_c, going from denser to less dense medium) required for TIR.
+4. Explain why a glass rod, optical fibre, or diamond appears to trap light using TIR, and why the apparent depth of an object in water is less than its actual depth.
 
 ## Core Understanding
 

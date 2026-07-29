@@ -20,10 +20,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply doppler effect at the **apply** level (Bloom) with difficulty tier **proficient**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.wave.doppler-effect.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. Apply the Doppler formula for a moving source: f_obs = f_s × v/(v ∓ v_s) — using the minus sign when the source approaches and the plus sign when it recedes — and calculate the observed frequency for given source frequency and speeds.
+2. Apply the Doppler formula for a moving observer: f_obs = f_s × (v ± v_o)/v — plus when approaching, minus when receding — and calculate the observed frequency.
+3. Explain that the Doppler effect changes the observed frequency (and hence perceived pitch) but not the speed of the sound waves in the medium, and that frequency is fully determined by source motion relative to the medium (not to the observer alone).
+4. Explain why the moving-source and moving-observer cases at the same relative approach speed give different observed frequencies — the wave pattern in the medium differs in each case.
 
 ## Core Understanding
 

@@ -21,10 +21,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply wave speed and the wave equation at the **apply** level (Bloom) with difficulty tier **proficient**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.wave.wave-speed.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. Apply v = √(T/μ) to calculate wave speed on a stretched string given tension T (in N) and linear mass density μ (in kg/m), and predict the direction of change in speed when tension is increased or string replaced with a heavier one.
+2. Explain that wave speed in a medium is determined solely by the medium's properties (tension, density, bulk modulus, etc.) — not by the wave's frequency or amplitude. Changing frequency in the same medium changes wavelength, not speed.
+3. Apply v ≈ 331 + 0.6T(°C) m/s for sound in air to calculate the speed at a given temperature, and explain the physical reason for this temperature dependence (higher T → faster molecules → faster pressure-disturbance propagation).
+4. Use v = fλ together with a medium-specific formula for v to find the frequency or wavelength of a wave of given frequency in a medium where v is known.
 
 ## Core Understanding
 

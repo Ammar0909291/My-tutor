@@ -21,10 +21,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply projectile motion at the **apply** level (Bloom) with difficulty tier **proficient**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.mech.projectile-motion.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. State that at the peak of a projectile's path, vᵧ = 0 but aᵧ = −g (gravity is not switched off), and correctly calculate the height, time to peak, and horizontal distance to peak.
+2. Solve the full horizontal-range problem from first principles (writing y(t) from scratch) rather than applying the range formula — and identify when the range formula is invalid (launch height ≠ landing height).
+3. Determine the launch angle that maximises range for level ground (45°) and explain why this differs from 45° for non-level ground.
+4. Identify the symmetry of the projectile path: speed at any height on the way up equals speed at the same height on the way down; landing speed equals launch speed (for level ground).
 
 ## Core Understanding
 

@@ -19,10 +19,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply transverse waves at the **understand** level (Bloom) with difficulty tier **proficient**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.wave.transverse-waves.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. Describe a transverse wave as one where particle oscillation is perpendicular to the direction of energy propagation, give two examples (EM waves, waves on a string), and explain what cannot be a transverse mechanical wave in a fluid (fluids have no shear stiffness).
+2. Distinguish between the motion of the wave (propagation direction, speed v = fλ) and the motion of the medium particles (perpendicular oscillation, speed depends on amplitude and frequency — zero at the node of a standing wave).
+3. Read a transverse wave diagram: identify wavelength (distance between two successive crests), amplitude (maximum displacement from equilibrium), period (from a displacement-time graph), and frequency from these.
+4. Explain what a crest represents physically (point of maximum positive displacement from equilibrium) and why a crest does NOT move with individual particles — it is a pattern that travels through the medium, not a collection of matter that translates.
 
 ## Core Understanding
 

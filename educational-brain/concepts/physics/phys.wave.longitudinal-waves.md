@@ -19,10 +19,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply longitudinal waves at the **understand** level (Bloom) with difficulty tier **proficient**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.wave.longitudinal-waves.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. Describe a longitudinal wave as one where the particle oscillation direction is parallel (along the direction of) energy propagation, identify compressions (high density, high pressure regions) and rarefactions (low density, low pressure regions), and give two real-world examples (sound in air, seismic P-waves).
+2. Explain why individual air molecules do NOT travel from sound source to ear — they oscillate back and forth around their equilibrium positions; only the disturbance pattern (pressure wave) travels.
+3. Explain why longitudinal waves can travel through solids, liquids, AND gases (all resist compression), while transverse mechanical waves can only travel through solids (which resist shear, unlike fluids).
+4. Represent a longitudinal wave using a displacement-position graph (showing the sinusoidal oscillation pattern) and identify the wavelength, amplitude, compressions, and rarefactions on such a graph.
 
 ## Core Understanding
 

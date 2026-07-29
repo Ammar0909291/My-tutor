@@ -19,10 +19,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply thermal expansion at the **apply** level (Bloom) with difficulty tier **developing**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.therm.thermal-expansion.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. Apply the linear thermal expansion formula ΔL = αLΔT and the volumetric expansion formula ΔV = βVΔT (β ≈ 3α for isotropic solids) to calculate dimensional changes for given α, initial size, and temperature change.
+2. Explain why a hole in a metal plate or the inside of a ring expands when heated (every linear dimension, including gaps, expands proportionally) — and apply this to explain how an expansion gap in a bridge rail is designed.
+3. Explain the anomalous expansion of water: water contracts when cooled from room temperature to 4°C, then expands as it freezes, reaching its maximum density at 4°C. State why this is ecologically important for aquatic life.
+4. Calculate the required gap between two railway rails that are each L_0 metres long at temperature T₀ so they just barely touch at temperature T_max — a direct application of ΔL = αL₀ΔT.
 
 ## Core Understanding
 

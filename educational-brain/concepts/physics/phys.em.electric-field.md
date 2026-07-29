@@ -20,10 +20,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply electric field and field lines at the **understand** level (Bloom) with difficulty tier **proficient**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.em.electric-field.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. Define the electric field at a point as E = F/q₀ (force per unit positive test charge) and explain why the field is a property of the source charges, independent of the test charge's magnitude.
+2. Calculate the electric field at a point due to a single point charge (E = kQ/r², with direction) and due to multiple charges using vector superposition.
+3. Draw electric field lines correctly — starting on positive charges, ending on negative charges, denser where E is stronger, never crossing — and read field direction and relative magnitude from a given field-line diagram.
+4. Calculate the force on a charge q placed in a known field E using F = qE — including sign: a negative charge experiences force opposite to E.
 
 ## Core Understanding
 

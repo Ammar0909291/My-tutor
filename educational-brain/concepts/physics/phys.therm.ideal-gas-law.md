@@ -20,10 +20,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply ideal gas law at the **apply** level (Bloom) with difficulty tier **proficient**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.therm.ideal-gas-law.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. Apply the ideal gas law PV = nRT (converting temperatures to Kelvin first) to calculate any one of P, V, n, or T when the others are given — for both static states and state-change problems.
+2. Derive and apply the combined gas law P₁V₁/T₁ = P₂V₂/T₂ for a fixed amount of gas undergoing a state change, and identify which special cases reduce to Boyle's law (constant T), Charles's law (constant P), or Gay-Lussac's law (constant V).
+3. Explain why temperature must be in Kelvin: the gas law ratios are valid only on the absolute scale where T = 0 corresponds to zero molecular kinetic energy (Celsius zero is arbitrary, not physically zero).
+4. Calculate the number of moles of gas from PV = nRT, or the volume of gas at STP (0°C, 1 atm), for a given mass of a known gas using the molar mass.
 
 ## Core Understanding
 

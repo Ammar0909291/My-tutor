@@ -20,10 +20,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply sound waves at the **understand** level (Bloom) with difficulty tier **developing**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.wave.sound-waves.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. Explain that sound is a longitudinal mechanical wave requiring a material medium (cannot travel through vacuum), and identify the physical mechanism: compressions and rarefactions of the medium propagating outward from the source.
+2. State that loudness (amplitude of pressure variation) and pitch (frequency) are independent properties of a sound wave, and correctly associate amplitude with perceived loudness and frequency with perceived pitch.
+3. Calculate the wavelength of a standing wave in a tube: for a closed tube (closed-open), λ_n = 4L/n for odd n only; for an open tube (open-open), λ_n = 2L/n for all n. Find the corresponding frequencies using v = fλ.
+4. Explain why the speed of sound in a medium depends on the medium's stiffness (bulk modulus) and density — not on frequency — and apply v ≈ 331 + 0.6T(°C) m/s for sound in air at temperature T.
 
 ## Core Understanding
 

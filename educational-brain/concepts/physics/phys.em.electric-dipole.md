@@ -20,10 +20,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply electric dipole at the **apply** level (Bloom) with difficulty tier **proficient**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.em.electric-dipole.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. Calculate the electric dipole moment p = qd (magnitude) and assign its direction (from negative to positive charge, by convention) for a given charge pair.
+2. Calculate the torque on a dipole in a uniform external field: τ = pE sinθ, identify the stable equilibrium (θ = 0, aligned) and unstable equilibrium (θ = 180°), and describe the dynamics near each.
+3. Explain that a dipole in a uniform field experiences zero net force but non-zero torque, and that a dipole in a non-uniform field experiences both a torque and a net force.
+4. Explain the polarisation of a neutral object (induced dipole) in an external electric field and use this to explain why a charged rod attracts uncharged pieces of paper.
 
 ## Core Understanding
 

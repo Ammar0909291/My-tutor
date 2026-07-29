@@ -20,10 +20,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply coulomb's law at the **apply** level (Bloom) with difficulty tier **developing**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.em.coulombs-law.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. Calculate the magnitude of the electrostatic force between two point charges using F = kq₁q₂/r² and correctly assign the direction (attractive for unlike signs, repulsive for like signs).
+2. Determine the net force on a charge due to multiple surrounding charges by treating each pair independently (superposition) and adding the force vectors — including correct direction for each.
+3. Apply Newton's third law to state that the force charge A exerts on B is equal in magnitude and opposite in direction to the force B exerts on A — regardless of which charge is larger.
+4. Compare the magnitude of Coulomb and gravitational forces between two charged particles and explain why Coulomb forces dominate at atomic scales.
 
 ## Core Understanding
 

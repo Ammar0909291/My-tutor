@@ -19,10 +19,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply wave properties: amplitude, period, frequency at the **understand** level (Bloom) with difficulty tier **developing**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.wave.wave-properties.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. Define and interrelate the four fundamental wave properties: amplitude (A — maximum displacement from equilibrium), period (T — time for one complete oscillation), frequency (f = 1/T — oscillations per second), and wavelength (λ — spatial distance between two equivalent points in phase).
+2. Apply v = fλ to calculate wave speed, frequency, or wavelength given the other two — and explain that wave speed is determined by the medium (not the source), while frequency is set by the source.
+3. Predict what happens to wavelength when frequency changes in the same medium (inverse relationship: higher f → shorter λ at fixed v) and when a wave crosses from one medium to another (frequency stays the same; v and λ both change).
+4. Distinguish amplitude from frequency in terms of what each represents physically and what each determines perceptually (amplitude → loudness/brightness; frequency → pitch/colour) — amplitude does NOT affect wave speed.
 
 ## Core Understanding
 

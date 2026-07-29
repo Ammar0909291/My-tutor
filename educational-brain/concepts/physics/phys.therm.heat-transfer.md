@@ -19,10 +19,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply heat transfer: conduction, convection, radiation at the **understand** level (Bloom) with difficulty tier **developing**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.therm.heat-transfer.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. Identify the mechanism of heat transfer in a given scenario (conduction — through matter by molecular collisions; convection — by bulk fluid motion; radiation — by electromagnetic waves through any medium) and explain what distinguishes the three.
+2. Apply Fourier's law of heat conduction (Q/t = kAΔT/L) to calculate the rate of heat flow through a slab, and identify how it changes when thickness, area, temperature difference, or material conductivity changes.
+3. Explain why good thermal insulators (wool, fibreglass, foam) do not generate heat — they slow heat transfer — and correctly identify the actual heat source in everyday insulation scenarios.
+4. Explain why radiation can transfer heat through a vacuum (unlike conduction and convection), and apply Stefan's law qualitatively: power radiated ∝ T⁴ (so small temperature increases cause large radiation increases).
 
 ## Core Understanding
 

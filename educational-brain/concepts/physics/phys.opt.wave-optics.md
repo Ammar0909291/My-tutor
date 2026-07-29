@@ -21,10 +21,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply introduction to wave optics at the **understand** level (Bloom) with difficulty tier **proficient**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.opt.wave-optics.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. State the condition for geometric optics to hold (object/aperture size >> λ) and identify when wave optics effects (diffraction, interference) become significant.
+2. Apply the single-slit diffraction condition for the first dark fringe: sinθ = λ/a, and calculate the angular width of the central maximum for given slit width and wavelength.
+3. Apply the Rayleigh criterion (θ_min = 1.22 λ/D) to determine the minimum angular resolution of an optical instrument (eye, telescope, microscope) and explain why a larger aperture gives better resolution.
+4. Explain why diffraction sets a fundamental limit on optical resolution that cannot be overcome by improving lens quality, and calculate the minimum resolvable feature size for a given instrument and wavelength.
 
 ## Core Understanding
 

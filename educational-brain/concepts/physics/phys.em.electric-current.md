@@ -19,10 +19,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply electric current and drift velocity at the **understand** level (Bloom) with difficulty tier **developing**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.em.electric-current.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. Define electric current as I = Q/t (charge per unit time) and calculate the number of charge carriers passing a cross-section per second from a given current value.
+2. Explain the distinction between conventional current (direction of positive charge flow) and electron flow (actual direction of negative charge movement) and use whichever convention consistently.
+3. Apply I = nqAv_d to relate current to carrier density (n), carrier charge (q), cross-sectional area (A), and drift velocity (v_d) — and calculate drift velocity for a copper wire.
+4. Explain why the light turns on instantly despite electrons' slow drift speed (~mm/s): the electric field signal propagates at ~c, not the electrons themselves.
 
 ## Core Understanding
 

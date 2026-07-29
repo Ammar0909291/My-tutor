@@ -19,10 +19,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply temperature and thermal equilibrium at the **understand** level (Bloom) with difficulty tier **foundational**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.therm.temperature.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. Distinguish temperature (average translational kinetic energy of molecules — a microscopic average) from heat (energy transferred due to a temperature difference — a process quantity) and explain why a metal rod feels colder than a wooden rod at the same temperature.
+2. Convert temperatures correctly between Celsius, Kelvin, and Fahrenheit — and explain why absolute zero (0 K = −273.15°C) represents the lowest possible temperature in terms of molecular motion.
+3. State that when two objects are in thermal equilibrium, they are at the same temperature and there is no net heat flow between them — and use this as the operational definition of thermometer accuracy.
+4. Explain the molecular-level picture of temperature rising: as thermal energy is added, molecules move faster on average (higher average KE), while temperature measures only the average, not the spread, of molecular speeds.
 
 ## Core Understanding
 

@@ -20,10 +20,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply magnetic flux at the **apply** level (Bloom) with difficulty tier **proficient**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.em.magnetic-flux.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. Calculate the magnetic flux through a flat surface: Φ = BAcosθ, where θ is the angle between B and the area vector (normal to the surface) — correctly applying the cosine for arbitrary orientations.
+2. State Gauss's law for magnetism (total magnetic flux through any closed surface = 0) and explain its physical meaning: there are no magnetic monopoles.
+3. Calculate the change in flux (ΔΦ) when a coil is rotated, moved out of a field, or when the field changes — as the input to Faraday's law.
+4. Identify the maximum flux (B perpendicular to the surface, θ = 0°) and zero flux (B parallel to the surface, θ = 90°) orientations for a coil in a uniform field.
 
 ## Core Understanding
 

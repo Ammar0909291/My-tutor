@@ -20,10 +20,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply gauss's law at the **apply** level (Bloom) with difficulty tier **proficient**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.em.gauss-law.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. State and apply Gauss's law (Φ_E = Q_enc/ε₀) to calculate the electric flux through a closed Gaussian surface, given the enclosed charge.
+2. Use Gauss's law to derive the electric field of a point charge, an infinite line of charge, and an infinite plane of charge — by choosing a Gaussian surface that exploits the symmetry.
+3. Explain why zero flux through a closed surface means zero NET enclosed charge (not necessarily no field and not necessarily no charge), and give a concrete example.
+4. State that the E field at any point on a conductor's surface is perpendicular to the surface and equals σ/ε₀, and that the field inside a conductor in electrostatic equilibrium is zero.
 
 ## Core Understanding
 

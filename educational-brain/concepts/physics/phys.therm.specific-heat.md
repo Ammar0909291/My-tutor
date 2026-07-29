@@ -20,10 +20,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply specific heat capacity at the **apply** level (Bloom) with difficulty tier **developing**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.therm.specific-heat.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. Apply Q = mcΔT to calculate the heat required to raise a known mass of a known material by a given temperature — selecting the correct specific heat capacity and working in consistent units.
+2. Explain why water's high specific heat capacity makes it effective as a thermal buffer (why coastal climates are milder, why it is used as a coolant) in terms of the large amount of heat required to change its temperature.
+3. Set up and solve a calorimetry problem (Q_lost = Q_gained in an insulated system) to find an equilibrium temperature or an unknown specific heat capacity.
+4. Distinguish between specific heat capacity (J/kg·K — per unit mass of a substance) and heat capacity (J/K — for a particular object) and convert correctly between them.
 
 ## Core Understanding
 

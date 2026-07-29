@@ -19,10 +19,12 @@
 
 ## Learning Objective
 
-After this concept, the learner can accurately apply zeroth law of thermodynamics at the **understand** level (Bloom) with difficulty tier **developing**.
+The learner can:
 
-See the Blueprint (`docs/curriculum/blueprints/phys.therm.zeroth-law.md §1 Learning Objective`) for the full graded objective with accuracy thresholds and protocol assignments.
-
+1. State the Zeroth Law of Thermodynamics: if A is in thermal equilibrium with B, and B is in thermal equilibrium with C, then A is in thermal equilibrium with C — and explain why this makes temperature a well-defined, transitive property.
+2. Explain how the Zeroth Law justifies the use of thermometers: a thermometer reading is meaningful only after it has reached thermal equilibrium with the object being measured, and it then reports the temperature of both.
+3. Explain what it means physically for two objects to be in thermal equilibrium: no net heat flows between them, because they are at the same temperature (same average molecular kinetic energy).
+4. Use the Zeroth Law to reason about temperature equality without direct measurement: if you know A is at the same temperature as B (from equilibrium), you can infer B is at the same temperature as C (from equilibrium) without putting A and C in contact.
 
 ## Core Understanding
 
