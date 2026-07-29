@@ -20,6 +20,28 @@
  * target machine, not as live code.
  *
  * `./phases.ts` beside it IS live: basePack imports getStageCeiling from it.
+ *
+ * ⚠ DO NOT WIRE THIS AS THE LIVE LADDER. BLOCKED — see
+ * `docs/architecture/ISS_01_LADDER_RECONCILIATION.md` and the exhaustive
+ * evidence in `src/tests/ladderConformance.test.ts`.
+ *
+ * The `phases.ts` mapping round-trips to identity, which makes promoting
+ * this machine look mechanical. It is not. Three verified defects:
+ *
+ *   D1  The mapping INVERTS the CHECK/PRACTICE order relation (legacy CHECK
+ *       precedes PRACTICE; canonical ASSESS(8) follows INDEPENDENT(6)) —
+ *       and order is what every ±1 transition below is computed from.
+ *   D2  This machine and the legacy ladder write the SAME fields
+ *       (correctAtCheck / correctAtPractice) under INVERTED thresholds.
+ *       Walking this ladder to TRANSFER yields check=2/practice=1, but
+ *       masteryGate requires check>=1/practice>=2 — so promoting this
+ *       machine would make masteryVerified() permanently false and NO
+ *       LESSON COULD EVER COMPLETE. Silent: no throw, no type error.
+ *   D3  7 of 12 transitions diverge from the shipping ladder, including
+ *       CHECK+correct → TRANSFER (skips practice entirely).
+ *
+ * These are a pedagogical decision (formative check vs summative gate), not
+ * a refactor. Resolve ISS-01 first; the exit criteria are in §5 of that doc.
  */
 import { legacyToCanonical, PHASE_ORDER_10, type CanonicalPhase } from './phases'
 
