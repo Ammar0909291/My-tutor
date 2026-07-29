@@ -29,7 +29,13 @@ The learner can:
 
 ## Core Understanding
 
-_Light exhibits both ray (geometric) and wave (physical) behaviour depending on the scale of the optical phenomena._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+Point a laser at a tiny pinhole. A large diffraction pattern spreads out on the wall — light bends around the tiny edge and creates concentric bright and dark rings. Now shine a torch through a large doorway. Light travels in straight lines and casts a sharp shadow. Same light; completely different behaviour. Why?
+
+Light is an electromagnetic wave — oscillating electric and magnetic fields propagating through space. As a wave, it interferes, diffracts, and polarises. But it also travels in straight lines and casts sharp shadows at scales much larger than its wavelength. The wave nature becomes visible only when light encounters features comparable in size to its wavelength (400–700 nm for visible light). A doorway (metres wide) is billions of wavelengths wide — wave effects are negligibly small, and geometric optics (rays) is an excellent approximation. A pinhole (micrometres wide) is only a few wavelengths — wave effects dominate.
+
+Light is also quantised into photons. A single photon carries energy E = hf, where h is Planck's constant and f is the frequency. This particle nature appears in the photoelectric effect (light ejects electrons one at a time, with each ejection requiring a minimum frequency threshold, not minimum intensity). But a single photon still passes through both slits of a double-slit experiment simultaneously and interferes with itself — it is both particle and wave.
+
+The practical model to use: geometric optics (rays) for systems much larger than the wavelength (lenses, mirrors, prisms, eyeglasses). Wave optics for phenomena at the wavelength scale (diffraction gratings, thin-film interference, fibre optics). Photon model for interactions that exchange energy at the atomic level (photoelectric effect, atomic emission/absorption, lasers). Choose the right model for the scale of the phenomenon — they are not contradictory, they are complementary descriptions of the same physical entity.
 
 ## Mental Models
 

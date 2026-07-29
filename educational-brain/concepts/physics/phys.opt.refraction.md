@@ -29,7 +29,13 @@ The learner can:
 
 ## Core Understanding
 
-_Snell's law n₁sinθ₁ = n₂sinθ₂ describes how light bends at an interface between media of different refractive indices._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+A straw in a glass of water appears bent at the water surface. A fish in a pond looks shallower than it actually is. A diamond sparkles with an inner fire that glass does not. All three are caused by refraction — the change in direction that light undergoes when it crosses from one medium into another.
+
+Why does light bend? Light travels at different speeds in different media. In vacuum, it travels at c = 3 × 10⁸ m/s. In glass, at roughly 2 × 10⁸ m/s. In diamond, at about 1.24 × 10⁸ m/s. When a wave crosses from a faster medium to a slower one at an angle, the part of the wavefront that enters the slower medium first slows down while the rest still moves fast — this asymmetry bends the wavefront. The refractive index n = c/v quantifies how much a medium slows light down.
+
+Snell's law describes the geometry: n₁sinθ₁ = n₂sinθ₂. Both angles are measured from the normal at the surface. When light passes from a low-n medium (fast, like air, n ≈ 1) to a high-n medium (slow, like glass, n ≈ 1.5), it bends toward the normal (θ₂ < θ₁). When it passes from slow to fast, it bends away from the normal.
+
+Total internal reflection is the crucial consequence: when light travels from slow to fast (n₂ < n₁) and the angle of incidence exceeds a critical angle θ_c = arcsin(n₂/n₁), Snell's law has no solution — no refracted ray exists, and all light reflects back inside. This is the principle behind optical fibres (glass core, lower-n cladding; light bounces along the fibre indefinitely), diamond brilliance (high n = 2.42 → very small critical angle, most light reflects internally and exits through the top), and the apparent shallowness of pools.
 
 ## Mental Models
 

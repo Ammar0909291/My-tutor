@@ -28,7 +28,13 @@ The learner can:
 
 ## Core Understanding
 
-_In transverse waves the particle displacement is perpendicular to the direction of wave propagation._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+Shake one end of a rope sideways. A wave travels along the rope — but the rope particles move up and down, not along the rope's length. The wave travels to the right while each bit of rope moves vertically. This perpendicular oscillation is the defining feature of transverse waves.
+
+In a transverse wave, each particle of the medium oscillates at right angles to the direction the wave is travelling. The wave carries energy forward while individual particles simply oscillate in place, perpendicular to that forward direction. Transverse waves in ropes and strings can oscillate up-down or left-right or diagonally — any direction perpendicular to the propagation axis. Polarisation refers to which perpendicular direction is selected: a rope wave oscillating in the vertical plane is vertically polarised.
+
+Transverse waves can only propagate through media that resist shear deformation — they require the medium to "snap back" when displaced sideways. Solids resist shear, so transverse waves travel through solids (seismic S-waves traverse the Earth's solid mantle). Fluids (liquids and gases) cannot resist shear — they simply flow — so transverse mechanical waves cannot propagate through them. Seismic S-waves stop at the Earth's liquid outer core, which is how we know the outer core is liquid.
+
+Electromagnetic waves (light, radio, X-rays) are transverse waves that propagate without a medium — they can travel through vacuum. The oscillating quantities are the electric and magnetic field vectors, both perpendicular to the direction of travel. This is why light can be polarised: a polarising filter selects only the electric field component oscillating in one specific direction. Unpolarised light has electric field oscillations in random directions; after a polariser, they are all aligned.
 
 ## Mental Models
 

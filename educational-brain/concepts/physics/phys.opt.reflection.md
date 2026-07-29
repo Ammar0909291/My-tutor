@@ -29,7 +29,13 @@ The learner can:
 
 ## Core Understanding
 
-_The law of reflection states that the angle of incidence equals the angle of reflection with both angles measured from the normal._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+Look at a mirror. You see yourself. Look at a white wall under the same light. You see the wall — not yourself. Both surfaces are reflecting light — the wall reflects MORE light than a mirror (most mirrors absorb some). The difference is regularity. Mirror surfaces are smooth down to the scale of visible light wavelengths; incoming parallel rays stay parallel after reflection — specular reflection. Wall surfaces are rough at that scale; each incoming ray hits a micro-surface oriented in a slightly different direction and scatters in all directions — diffuse reflection. Both obey the same underlying law; only the surface geometry differs.
+
+The law of reflection: the angle of incidence equals the angle of reflection, both measured from the normal to the surface at the point of incidence. The normal is the line perpendicular to the surface at the point where the ray strikes. This is not the angle from the surface — beginners habitually measure from the surface (call this the grazing angle = 90° − θ) and get the law backwards. By convention, all optical angles are measured from the normal.
+
+The law is a consequence of wave mechanics (Huygens' principle): each point on a smooth surface acts as a source of reflected wavelets, and their combined wavefront travels away at the mirror angle. But for geometric optics purposes, it can be stated as a simple rule and applied to ray diagrams.
+
+Every image formed by a flat mirror is: virtual (behind the mirror, not real light), the same size as the object, the same distance behind the mirror as the object is in front, and laterally inverted (left and right swapped relative to the line of sight, though not top-to-bottom). This is why text in a mirror reads backwards — the left side of your face appears on the right side of your reflection.
 
 ## Mental Models
 

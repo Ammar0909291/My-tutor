@@ -28,7 +28,13 @@ The learner can:
 
 ## Core Understanding
 
-_In longitudinal waves the particle displacement is parallel to the direction of wave propagation, forming compressions and rarefactions._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+Hold a slinky horizontally and push one end forward — you create a local compression that travels along the slinky. The coils move back and forth in the same direction the compression travels. Pull the end backward and you create a rarefaction. This back-and-forth oscillation parallel to the direction of travel is the defining feature of longitudinal waves.
+
+In a longitudinal wave, each particle of the medium oscillates along the direction the wave is travelling — not across it. When particles are pushed close together, a region of high density and high pressure forms: a compression. When they spread apart, a region of low density and low pressure forms: a rarefaction. The compression-rarefaction pattern propagates through the medium as successive particles are pushed by their neighbours.
+
+This parallel oscillation means longitudinal waves can propagate through any medium (solid, liquid, or gas) that can be compressed — they don't require the transverse rigidity that transverse waves need (which is why transverse shear waves can travel through solids but not through liquids or gases). Sound is the most important longitudinal wave: air molecules oscillate back and forth along the direction of sound travel, not side to side.
+
+The wavelength of a longitudinal wave is the distance from one compression to the next compression (or one rarefaction to the next) — the spatial period of the pressure pattern. A longitudinal wave still has amplitude (the maximum displacement of particles from equilibrium), frequency (the number of compressions passing a point per second), and speed (determined by the medium's compressibility and density, as v = √(B/ρ) for a fluid of bulk modulus B and density ρ). All the standard wave relationships (v = fλ, etc.) apply exactly as for transverse waves.
 
 ## Mental Models
 

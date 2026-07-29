@@ -29,7 +29,13 @@ The learner can:
 
 ## Core Understanding
 
-_Sound intensity is power per unit area; the decibel scale logarithmically measures intensity relative to a reference level._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+A sound that is 10 dB louder sounds about twice as loud to the human ear. But that 10 dB increase corresponds to 10 times more sound intensity (power per unit area). A sound at 20 dB louder sounds about four times louder — but the intensity is 100 times greater. This mismatch between what we hear and what is physically happening is why the decibel scale exists — it is a logarithmic scale that matches the logarithmic sensitivity of human hearing.
+
+Sound intensity I is the power carried by a sound wave per unit area perpendicular to the direction of travel, measured in watts per square metre (W/m²). The threshold of human hearing is approximately I₀ = 10⁻¹² W/m² — a pressure fluctuation 10 billion times smaller than atmospheric pressure. Normal conversation is about 10⁻⁶ W/m² — one million times more intense. Expressing these on a linear scale is impractical; logarithms compress the range.
+
+The decibel level is: β = 10 log₁₀(I/I₀), where I₀ = 10⁻¹² W/m² is the reference level. Working backwards: 0 dB = threshold of hearing. 60 dB (normal conversation) = 10⁶ × I₀. 120 dB (threshold of pain) = 10¹² × I₀ = 1 W/m². Every increase of 10 dB multiplies intensity by 10. Every increase of 3 dB approximately doubles intensity (since log₁₀(2) ≈ 0.3).
+
+Intensity falls with distance from a point source: I = P/(4πr²) — the inverse square law. Double the distance from a point sound source and intensity drops by a factor of 4, which is a 6 dB reduction. This is why you can hold a conversation at 1 metre that becomes inaudible at 100 metres — the intensity drops 10,000-fold (40 dB) over that distance.
 
 ## Mental Models
 

@@ -30,7 +30,15 @@ The learner can:
 
 ## Core Understanding
 
-_Wave optics treats light as a wave and uses Huygens' principle to explain interference and diffraction phenomena._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+Hold a CD in sunlight at different angles. A rainbow of colours shifts across its surface — not because the CD is painted, but because its closely spaced data tracks (about 1.6 μm apart — comparable to visible light's wavelength) act as a diffraction grating, spreading different wavelengths of white light into different directions. This is wave optics at work, and geometric optics cannot explain it at all.
+
+Wave optics is built on two phenomena that only waves produce:
+
+Interference: when two coherent light waves (same frequency, stable phase relationship) overlap, their amplitudes add. If crests meet crests (in phase), they reinforce — constructive interference, a bright fringe. If crests meet troughs (180° out of phase), they cancel — destructive interference, a dark fringe. The alternating bright and dark bands in Young's double-slit experiment (fringe spacing = λL/d, where L is the screen distance and d is the slit separation) are direct evidence that light is a wave.
+
+Diffraction: light bends around edges and through apertures, spreading into regions that geometric optics would call "in shadow." The extent of diffraction is proportional to the ratio λ/a, where a is the aperture width. A 1 mm aperture barely diffracts visible light (λ/a ≈ 0.0005). A 1 μm slit diffracts it into a wide semicircle. This is why geometric optics (straight-ray propagation) is valid when features are much larger than λ, and fails when they are comparable to λ.
+
+Huygens' principle unifies both: every point on a wavefront acts as a source of secondary spherical wavelets. The new wavefront is the tangent to all these secondary wavelets. This correctly predicts straight-line propagation in open space, bending around edges, and the detailed pattern of interference fringes — all from one simple principle.
 
 ## Mental Models
 
