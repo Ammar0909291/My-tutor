@@ -36,7 +36,13 @@ not understand why speed (distance/time) and
 
 ## Core Understanding
 
-_Velocity is the rate of change of displacement with time; speed is its scalar counterpart._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+A car travelling at 60 km/h tells you how fast it is moving. But a police dispatch report saying "the suspect is travelling at 60 km/h" is almost useless without knowing which direction. Speed is how fast. Velocity is how fast AND which direction. That single addition changes everything downstream.
+
+Velocity is defined as displacement divided by time: how much straight-line position change per second, in a specific direction. Speed is distance divided by time: total path length per second. For straight-line motion in one direction, they have the same numerical value. The moment direction changes, they diverge.
+
+Average velocity = total displacement / total time. If you drive 100 km east in 2 hours, your average velocity is 50 km/h east. If you then drive 100 km back west in 2 hours, your total displacement is zero — and your average velocity for the whole journey is zero km/h, even though you were moving the entire time. Your average speed for the whole journey is 100 km / 4 hours = 25 km/h. Same journey, two different answers.
+
+Instantaneous velocity is the velocity at one specific moment — the limit of displacement/time as the time interval shrinks to zero. This is what a speedometer reads (its magnitude — the direction is the current heading). In calculus terms, instantaneous velocity is the derivative of the position vector with respect to time. This is the velocity that enters Newton's second law, kinetic energy calculations, and every equation of motion.
 
 ## Mental Models
 

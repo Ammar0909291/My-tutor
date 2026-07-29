@@ -29,7 +29,13 @@ The learner can:
 
 ## Core Understanding
 
-_The electric field at a point is the electrostatic force per unit positive test charge placed at that point._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+You remove a proton from an electron and place them 1 cm apart. The electron feels a force — an attraction toward the proton. Now you move the proton away. The force disappears. Where did it go? The pre-twentieth-century answer was "action at a distance" — some mysterious force that acts across empty space. The field concept is a deeper answer: the proton does not act on the electron directly. The proton creates a field that fills all of space around it, and the electron responds to the field in its immediate location.
+
+The electric field E at a point in space is defined as the force a positive test charge would experience per unit of charge: E = F/q, measured in newtons per coulomb (N/C) or equivalently volts per metre (V/m). The definition uses a test charge that is positive and small enough that it doesn't disturb the field it's measuring. The field has both a magnitude (how strong the force would be) and a direction (which way a positive charge would be pushed). A negative charge in the same field feels a force in the opposite direction.
+
+Why introduce this concept at all — why not just use Coulomb's law directly? Because field thinking is enormously more powerful. For a single point charge, the field tells you the force on any other charge without recalculating from scratch. For complex charge distributions (sheets, cylinders, spheres), you calculate the field once using Gauss's law, then use F = qE for any charge you place in that field. And most importantly: electromagnetic waves are oscillating electric and magnetic fields that propagate through space entirely without charges — you cannot describe light using Coulomb's law, but you can describe it using fields.
+
+Field lines visualise the electric field: they point in the direction a positive test charge would move, and their density represents field strength. Field lines emerge from positive charges and terminate on negative charges; they never cross (the field cannot point in two directions at once).
 
 ## Mental Models
 

@@ -35,7 +35,13 @@ After this concept, the learner can:
 
 ## Core Understanding
 
-_Acceleration is the rate of change of velocity with respect to time._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+A car is moving at 60 km/h east. Is it accelerating? You cannot answer from that single fact. Acceleration describes how velocity is changing — not what the velocity is. A car cruising at constant 60 km/h east has zero acceleration. A car speeding up from 60 to 70 km/h is accelerating forward. A car braking from 60 to 50 km/h is accelerating backward — a negative acceleration in the direction of motion. These feel different but are all "acceleration."
+
+Acceleration is the rate of change of velocity: a = Δv/Δt. It is a vector — direction matters. And here is the most important non-obvious fact: an object can be accelerating even when its speed is not changing. A car travelling at constant 60 km/h around a circular roundabout is continuously changing direction, which means its velocity vector is continuously changing, which means it has acceleration — always pointing toward the centre of the circle. This centripetal acceleration is real and requires a real force (the car's tyres pushing inward). Students who equate acceleration with "speeding up" will systematically fail circular motion problems.
+
+The units of acceleration are m/s² — metres per second per second. This is not abstract: 9.8 m/s² means "velocity increases by 9.8 m/s every second." After 1 second of free fall, the object is moving at 9.8 m/s downward. After 2 seconds, 19.6 m/s. After 3 seconds, 29.4 m/s. The speed increases linearly with time under constant acceleration — this is the kinematic equation v = u + at.
+
+The relationship between acceleration and force is the next concept: Newton's second law (F = ma) states that net force IS what produces acceleration. No net force → no acceleration → constant velocity. This connects the kinematic description (how motion changes) to the dynamic cause (what produces that change).
 
 ## Mental Models
 

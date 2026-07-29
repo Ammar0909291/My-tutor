@@ -30,7 +30,13 @@ The learner can:
 
 ## Core Understanding
 
-_Wave speed is determined by the medium's properties; the wave equation relates displacement to position and time._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+Sound travels at about 340 m/s in air and about 1,500 m/s in water — more than four times faster. Why? You cannot change the speed of sound by shouting louder, or by making the sound higher-pitched. The speed is fixed by the medium, not by the source.
+
+Wave speed is determined entirely by the properties of the medium through which the wave travels: for mechanical waves, by the medium's stiffness (how strongly it "pushes back" when disturbed) and its density (how much mass must be set in motion). Water is much denser than air but also much stiffer, and stiffness wins — water transmits sound faster. Steel is denser still but extremely stiff, so sound travels at around 5,000 m/s in steel. Temperature matters too: warmer air is stiffer, so sound travels slightly faster in summer than in winter.
+
+The wave equation y = A sin(kx − ωt) makes the medium-speed relationship concrete. Here k = 2π/λ is the wave number (how many radians of the wave fit per metre of distance) and ω = 2πf is the angular frequency (how many radians the wave cycles through per second). The ratio ω/k is the wave speed: v = ω/k = fλ. This is the same v = fλ relation from wave properties, now expressed in terms of the wave's spatial and temporal frequency.
+
+The non-obvious consequence: changing the frequency of a wave in a given medium does NOT change its speed. It changes the wavelength instead. Turn on a higher-frequency tuning fork: the sound travels at the same 340 m/s, but with shorter wavelength. The medium controls the speed; the source controls the frequency; wavelength adjusts automatically to make v = fλ hold.
 
 ## Mental Models
 

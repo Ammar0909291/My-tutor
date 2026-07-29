@@ -29,7 +29,13 @@ The learner can:
 
 ## Core Understanding
 
-_Coulomb's law states that the electrostatic force between two point charges is proportional to their product and inversely proportional to the square of their separation._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+Two magnets repel each other across empty space — no contact, no visible mechanism, action at a distance. Coulomb's law is the precise quantitative description of the same phenomenon for electric charges: the force between two charged objects depends on their charges and the distance between them, and acts along the line connecting them.
+
+The law: F = kq₁q₂/r². Three things control the force. The charges q₁ and q₂: doubling either charge doubles the force. The separation r: double the distance and the force drops to one-quarter (inverse-square, not inverse). The constant k ≈ 9 × 10⁹ N·m²/C² tells you how strong electrostatic interactions are — and that constant is enormous, which is why even small charges create measurable forces. The direction is attraction when the charges have opposite signs (force is negative in the product q₁q₂) and repulsion when same sign (positive product).
+
+Coulomb's law is a perfect structural parallel to Newton's law of gravity: F_grav = Gm₁m₂/r². Both are inverse-square laws. Both act along the line connecting the two objects. Both involve a constant that sets the strength of the interaction. The critical difference: mass has only one sign (everything attracts gravitationally), but charge has two signs, so electrostatic forces can be either attractive or repulsive. This is why gravity dominates at cosmic scales (no cancellation between planets) while electrostatics dominates at atomic scales (charges cancel almost perfectly in bulk matter, leaving tiny net effects that are still enormous compared to gravity).
+
+The formula gives force between point charges — objects whose size is negligible compared to the separation. For extended charge distributions, Coulomb's law still holds, but you must integrate over the distribution. The electric field concept (the next concept in the KG) is the tool that makes this tractable.
 
 ## Mental Models
 

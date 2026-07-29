@@ -28,7 +28,15 @@ The learner can:
 
 ## Core Understanding
 
-_Heat transfers between systems by conduction (contact), convection (fluid flow), or radiation (electromagnetic waves)._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+Your hand touches a metal door handle in winter. It feels cold. But the handle is at the same temperature as the wooden door beside it. Why does the handle feel colder? Because heat is flowing from your hand into the handle much faster than into the wood — and that higher rate of heat flow is what you feel as "cold." Temperature is the property; heat flow is the experience.
+
+Heat always flows from higher temperature to lower temperature — never the reverse. The three mechanisms differ only in what carries the energy:
+
+Conduction is heat flowing through direct contact, carried by particle vibrations passing energy to neighbouring particles. Metals conduct heat quickly because their free electrons can transport energy efficiently — the same electrons that make metals electrically conductive make them thermally conductive. The rate of conduction (Fourier's law) is: Q/t = kA(ΔT/L) — proportional to the thermal conductivity k, the cross-sectional area A, and the temperature difference ΔT, and inversely proportional to the thickness L. A thick wall of low-conductivity material (insulation) slows conduction dramatically.
+
+Convection is heat carried by bulk movement of a fluid (liquid or gas). Hot air rises (it's less dense), cool air sinks to replace it, and the resulting circulation loop (convection current) continuously brings cooler fluid to the hot source and carries hot fluid away. Forced convection — using a fan or pump — is faster and more controllable than natural convection.
+
+Radiation is heat carried by electromagnetic waves (predominantly infrared) emitted by any object with temperature above absolute zero. No medium is needed — radiation travels through vacuum. The Stefan-Boltzmann law governs the rate of emission: P = εσT⁴. The T⁴ dependence means a small temperature increase produces a large increase in radiated power — double the temperature and radiation power increases 16-fold. This is why the Sun (surface ~5,800 K) radiates intensely while a room-temperature object radiates too weakly to feel as warmth from a distance.
 
 ## Mental Models
 

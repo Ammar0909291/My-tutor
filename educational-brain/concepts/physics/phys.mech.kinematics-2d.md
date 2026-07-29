@@ -30,7 +30,13 @@ The learner can:
 
 ## Core Understanding
 
-_Two-dimensional kinematics applies vector decomposition to analyse motion in a plane._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+A ball thrown horizontally from a table flies forward and falls downward at the same time. What determines how far it travels before hitting the floor? Most learners' instinct is to see this as one complicated curved motion. The insight that makes it solvable: the horizontal and vertical motions are completely independent of each other.
+
+Horizontal: no force acts horizontally (ignoring air resistance), so the ball moves at constant horizontal velocity for the entire flight. Vertical: gravity pulls the ball downward with constant acceleration g = 9.8 m/s², exactly as if it had been dropped straight down from the table. The horizontal velocity has zero effect on how fast the ball falls. Drop one ball straight down and throw another horizontally from the same height at the same instant — they hit the floor at exactly the same time.
+
+This independence is the key to all 2D kinematics. Any motion in a plane is separated into two independent 1D problems along perpendicular axes. Each axis runs its own kinematic equations (s = ut + ½at², v = u + at) completely independently. The two axes share only one thing: time. The same time t connects the horizontal and vertical positions. You solve for the time in one axis and use that same time in the other.
+
+Vector decomposition is the mechanical tool that makes this work: take any velocity or acceleration at an angle θ and split it into a horizontal component (magnitude × cos θ) and a vertical component (magnitude × sin θ). After that, it's two separate 1D problems. Projectile motion, circular motion, and relative velocity all use this same decompose-then-analyse strategy.
 
 ## Mental Models
 
