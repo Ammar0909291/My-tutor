@@ -21,9 +21,16 @@ See Blueprint (`docs/curriculum/blueprints/phys.em.faradays-law.md §1 Learning 
 
 ## Core Understanding
 
-Faraday's law states that the induced EMF equals the negative rate of change of magnetic flux through a circuit: ε = −dΦ/dt.
+Push a bar magnet toward a coil of wire. A current flows in the coil — but no battery is present, no circuit is connected, and the magnet does not touch the wire. Move the magnet back out, and the current reverses. Stop moving the magnet, and the current stops entirely. This is electromagnetic induction: a changing magnetic field creates an electric field, which drives a current in the coil.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+Faraday's law quantifies this: ε = −dΦ/dt. The induced EMF (electromotive force — the voltage that drives the current) equals the negative rate of change of magnetic flux through the circuit. Three things can change the flux and induce an EMF: changing the magnetic field strength B, changing the area A of the loop, or changing the angle θ between the field and the loop's normal (Φ = BAcosθ). Any of these three in isolation, or in combination, induces an EMF.
+
+The law is the physical foundation of everything that generates or transforms electricity:
+- Generators: a rotating coil in a magnetic field — the angle θ changes continuously, continuously changing Φ, inducing a sinusoidal EMF. This is how all electrical power is generated.
+- Transformers: alternating current in a primary coil produces a continuously changing magnetic field, which changes flux through a secondary coil, inducing an alternating EMF. The voltage ratio equals the turns ratio: V₂/V₁ = N₂/N₁.
+- Wireless charging: alternating current in a charging pad creates a changing flux through a receiving coil in the device.
+
+The negative sign in the law is not mathematical decoration — it encodes Lenz's law: the induced current flows in a direction that opposes the change in flux. This is energy conservation: if the induced current reinforced the change instead of opposing it, you could generate unlimited energy from a small initial push — impossible.
 
 ## Mental Models
 

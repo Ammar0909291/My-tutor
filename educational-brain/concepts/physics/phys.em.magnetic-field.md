@@ -29,7 +29,17 @@ The learner can:
 
 ## Core Understanding
 
-_A magnetic field exerts forces on moving charges and current-carrying conductors; field lines indicate its direction and strength._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+Hold a compass near a wire carrying no current: the needle points north. Switch on the current: the needle deflects. Switch the current direction: the needle deflects the other way. This was Ørsted's discovery in 1820 — one of the most surprising in physics. Electric current creates a magnetic field. Moving charges and magnetic fields are inseparable.
+
+The magnetic field B is a vector field that exerts a force on moving charges: F = qv × B. Three things about this force immediately stand out:
+
+First, it acts only on moving charges. A stationary charge in a magnetic field feels nothing. An electric field acts on any charge regardless of velocity; a magnetic field acts only on charges in motion.
+
+Second, the force is perpendicular to BOTH the velocity and the field. This means the magnetic force never does work on a charged particle (force ⊥ displacement → zero dot product → zero work). Instead, it continuously changes the particle's direction without changing its speed. This is why charged particles in uniform magnetic fields travel in circles: the magnetic force provides centripetal acceleration, continuously redirecting but never speeding up or slowing down. This is the operating principle of cyclotrons and mass spectrometers.
+
+Third, the cross product means the direction of the force reverses if either the velocity or the field reverses — and it is zero when velocity and field are parallel (sin 0 = 0). To find the force direction: right-hand rule — point fingers in the direction of v, curl them toward B, thumb points in the direction of F for a positive charge.
+
+For a straight conductor carrying current I in a field B, the force per unit length is F/L = I(L × B) — this is the principle behind all electric motors. Current-carrying loops in magnetic fields experience torques that rotate them to align with the field — the foundation of DC motors.
 
 ## Mental Models
 

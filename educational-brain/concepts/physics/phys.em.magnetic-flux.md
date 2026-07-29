@@ -29,7 +29,13 @@ The learner can:
 
 ## Core Understanding
 
-_Magnetic flux Φ = B·A is the total magnetic field passing perpendicularly through a surface area A._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+Hold a wire loop in a magnetic field. Tilt the loop so its plane is parallel to the field lines — no field lines pass through the loop; the flux is zero. Rotate the loop so its plane is perpendicular to the field lines — maximum field lines pass through it; flux is maximum. The loop area hasn't changed. The field strength hasn't changed. What changed is the angle between the field and the loop's face. This is why magnetic flux depends on three things: field strength, area, and the angle between them.
+
+Magnetic flux is Φ = B·A·cosθ, where θ is the angle between the magnetic field vector B and the normal to the surface (not the angle between B and the plane surface — a common error). When B is perpendicular to the surface (parallel to the normal), cosθ = 1 and flux is maximum. When B is parallel to the surface (perpendicular to the normal), cosθ = 0 and flux is zero. The unit is the weber (Wb): 1 Wb = 1 T·m².
+
+The conceptual picture: imagine field lines as threads. Flux counts how many threads pass through the surface. A larger loop catches more threads. A stronger field has more threads per unit area. Tilting the loop so it slices through fewer threads reduces flux. Flux is the "amount of magnetic field passing through" the surface.
+
+Flux alone has no immediate physical effect on a circuit. What matters for induction is the RATE OF CHANGE of flux — this is Faraday's law. A steady, unchanging flux (even a large one) produces no induced EMF. Only when flux is changing — because the field changes, the area changes, or the angle changes — does an EMF appear. This is why generators work by rotating coils (continuously changing the angle) rather than by just sitting in a strong field.
 
 ## Mental Models
 
