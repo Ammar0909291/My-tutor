@@ -34,7 +34,11 @@ After this concept, the learner can:
 
 ## Core Understanding
 
-_Displacement is the vector change in position while distance is the total scalar path length._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+You walk 400 metres north, then 300 metres south. How far did you travel? 700 metres. How far are you from where you started? 100 metres north. These are two different questions with two different answers — and physics has two different words for them.
+
+Distance is the total length of the path you walked: 700 m. It only adds, never cancels, and it is always positive. Displacement is the straight-line vector from your starting point to your ending point: 100 m north. It cares only about where you started and where you ended — the path you took to get there is irrelevant. If you ended exactly where you started, displacement is zero — no matter how far you walked.
+
+This distinction matters for everything downstream. Velocity is defined as displacement divided by time — not distance divided by time. Speed is distance divided by time. A sprinter who runs one full lap of a 400 m track in 50 seconds has a speed of 8 m/s, but a velocity of 0 m/s (they ended where they started). Every kinematic equation in the curriculum is written in terms of displacement, not distance. A learner who treats them as synonyms will get the right magnitude in simple cases and a systematically wrong answer whenever direction changes occur.
 
 ## Mental Models
 

@@ -28,7 +28,11 @@ The learner can:
 
 ## Core Understanding
 
-_Temperature measures the average kinetic energy of particles; thermal equilibrium exists when two bodies in contact have equal temperatures._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+Touch a metal spoon and a wooden spoon that have been sitting in the same room for an hour. The metal one feels colder. But both are at exactly the same temperature — room temperature. Temperature is not what you feel; it is not heat, and it is not cold. It is a property of matter that determines the direction heat will flow.
+
+Temperature is a measure of the average random kinetic energy of the particles in a substance. Higher temperature means particles are moving faster on average. When two objects are placed in contact, heat flows from the higher-temperature object to the lower-temperature object — always in that direction, never reversed — until they reach the same temperature. At that point, heat stops flowing, and we say they are in thermal equilibrium. This is also why the metal spoon feels colder: metal conducts heat away from your hand more quickly than wood does, so your hand cools faster. Both spoons are at the same temperature; they differ in how quickly they transfer heat.
+
+The temperature scales used in physics all measure the same underlying quantity but use different reference points. Celsius uses the freezing point (0°C) and boiling point (100°C) of water. Kelvin uses absolute zero — the theoretical point at which particle motion ceases entirely — as its zero point: 0 K = −273.15°C. Kelvin is the only scale where temperature is directly proportional to average kinetic energy. An object at 200 K has exactly twice the average particle kinetic energy of an object at 100 K. This is why every physics formula that uses temperature in an equation (gas laws, radiation, entropy) requires the Kelvin scale — using Celsius would make the proportionality wrong.
 
 ## Mental Models
 

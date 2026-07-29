@@ -35,7 +35,13 @@ After this concept, the learner can:
 
 ## Core Understanding
 
-_Vectors are added by the parallelogram law or by resolving them into orthogonal components._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+3 newtons north plus 4 newtons east. Most people's first instinct: "7 newtons." The correct answer is 5 newtons — pointing northeast at 53°. This is not a trick or an exception. It is the fundamental difference between scalar arithmetic and vector arithmetic.
+
+When two vectors combine, you cannot add their magnitudes because their directions determine how much each contributes in any given direction. The resultant is the closing side of the triangle formed by placing the two vectors head-to-tail — a geometric sum, not an algebraic one. For the 3N-north / 4N-east case, Pythagoras gives √(3² + 4²) = 5 N and arctan(3/4) gives 37° from east, so 53° from north. The answer is exact — no approximation.
+
+The component method generalises this to any number of vectors at any angle: (1) resolve each vector into its x-component (magnitude × cos θ) and y-component (magnitude × sin θ); (2) sum all x-components to get Rₓ; (3) sum all y-components to get Rᵧ; (4) reconstruct the resultant as √(Rₓ² + Rᵧ²) at angle arctan(Rᵧ/Rₓ). This one method handles every 2D vector problem in the curriculum — forces, velocities, fields, displacements — regardless of how many vectors or what angles they make. Learn it once; use it for all of classical mechanics.
+
+One non-obvious consequence: the order of addition does not matter. 3N north then 4N east gives exactly the same resultant as 4N east then 3N north. Vector addition is commutative — the head-to-tail triangle can be drawn in either sequence, and the closing side is always the same.
 
 ## Mental Models
 

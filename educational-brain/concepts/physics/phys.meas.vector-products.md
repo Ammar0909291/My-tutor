@@ -25,24 +25,25 @@
 
 After this concept, the learner can:
 
-only do
-  restricted versions of both concepts (1D work, magnitude-only torque). Every
-  advanced mechanics, electromagnetism, and quantum mechanics calculation uses one
-  or both products.
-- **Difficulty**: proficient · **Bloom**: apply · **Mastery threshold**: 0.80 ·
-  **Est. hours**: 4 · **References**: NCERT Physics Class 11 Ch. 4; H.C. Verma Vol. 1
-     (A·B = |A||B|cos θ) and the component formula (A·B = AxBx + AyBy + AzBz),
-     and state the result is a scalar.
+1. Compute the dot product using the geometric formula (A·B = |A||B|cos θ) and
+   the component formula (A·B = AₓBₓ + AᵧBᵧ + A_zB_z), and state the result is
+   a scalar.
 2. Determine the angle between two vectors using the dot product.
 3. Compute the magnitude of the cross product (|A × B| = |A||B|sin θ), find its
-     direction by the right-hand rule, and state the result is a vector perpendicular
-     to both operands.
+   direction by the right-hand rule, and state the result is a vector perpendicular
+   to both operands.
 4. Identify which product (dot or cross) is appropriate for a given physical
-     context (work → dot; torque → cross) and justify the choice.
+   context (work → dot; torque → cross) and justify the choice.
 
 ## Core Understanding
 
-_The dot product yields a scalar and the cross product yields a vector perpendicular to both operands._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+There are two fundamentally different ways to "multiply" two vectors, and physicists use both constantly — but never interchangeably. The type of physical question you're asking determines which one you need.
+
+The dot product (A·B) asks: "how much of A goes in the direction of B?" It extracts alignment. When a force pushes an object sideways while it moves forward, only the forward component of the force does work — the dot product captures exactly that. The result is always a scalar — a single number — because alignment has no direction. When two vectors are perpendicular, their dot product is zero (none of A lies along B). When they point the same way, the dot product is maximum. The formula is A·B = |A||B|cos θ.
+
+The cross product (A × B) asks: "how much rotation do these two vectors generate together?" It extracts perpendicularity. When a wrench handle and the applied force are both in the same plane, their cross product gives the torque: a vector pointing along the bolt's axis — perpendicular to BOTH the handle and the force — whose magnitude tells you how strongly the bolt turns. The result is a vector in a new direction. When two vectors are parallel, the cross product is zero (no rotation). When they're perpendicular, the cross product is maximum. The formula is |A × B| = |A||B|sin θ, with direction given by the right-hand rule.
+
+The non-obvious consequence: these two products are opposite in their sensitivity to angle. Dot product is maximum at 0° (parallel), zero at 90° (perpendicular), negative at 180°. Cross product is zero at 0°, maximum at 90°. They are complementary measurements — the part of A that "goes along" B, and the part that "goes across" B.
 
 ## Mental Models
 

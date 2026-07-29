@@ -33,7 +33,13 @@ After this concept, the learner can:
 
 ## Core Understanding
 
-_Electric charge is a fundamental property of matter that is quantised and conserved in all interactions._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+Rub a balloon on your hair. The balloon can now pick up small pieces of paper, stick to a wall, or make your hair stand on end. Nothing was added to the balloon — no glue, no magnet, no special material. Something was rearranged. That something is electric charge.
+
+Electric charge is a fundamental property of matter, like mass, but with two opposite types: positive and negative. Protons carry positive charge; electrons carry negative charge; neutrons carry none. In a neutral atom, the number of protons and electrons are exactly equal, so the charges cancel. When you rub the balloon on your hair, electrons transfer from your hair to the balloon — the balloon gains extra electrons (becomes negatively charged) and your hair loses electrons (becomes positively charged). The total charge in the system hasn't changed; it has only been redistributed. This is charge conservation: charge can move, but the total can never increase or decrease.
+
+Two rules govern interactions between charges. Opposite charges attract each other: the negatively charged balloon is attracted toward nearby positive charges (which is why it sticks to the wall — the positive charges in the wall rearrange slightly to be closer to the balloon's surface). Like charges repel: two negatively charged objects push each other apart.
+
+Charge is also quantised — it comes only in discrete packets. The smallest possible free charge is the charge of one electron: e = 1.6 × 10⁻¹⁹ coulombs. You cannot have half an electron's worth of charge. Every charged object has a charge that is an exact integer multiple of this value. The macroscopic charges we deal with (nanocoulombs, microcoulombs) are enormous numbers of individual elementary charges — a nanocoulomb is approximately 6 billion electrons — but the underlying discreteness is always there.
 
 ## Mental Models
 

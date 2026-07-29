@@ -28,7 +28,13 @@ The learner can:
 
 ## Core Understanding
 
-_Waves are characterised by amplitude, wavelength, period, frequency, and phase, related by v = fλ._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+Drop a stone into a still pond. Ripples spread outward. Watch carefully: the water itself does not travel outward — it bobs up and down in place. What travels is the disturbance — the pattern of up-and-down motion propagating from one water molecule to the next. This is the deep insight about waves: they carry energy through a medium without transporting the medium itself.
+
+Every wave, whether water, sound, or light, is characterised by the same five measurable properties. Amplitude is the maximum displacement from equilibrium — how high the ripple rises — and it determines the wave's energy. Wavelength (λ) is the distance from one crest to the next crest — the physical length of one complete cycle. Period (T) is the time it takes one complete cycle to pass a fixed point. Frequency (f) is the number of complete cycles per second, measured in hertz: f = 1/T. Wave speed (v) is how fast the pattern moves through the medium.
+
+These five quantities are not independent. Speed, frequency, and wavelength are locked together by one equation: v = fλ. Read it as: "the speed of a wave equals the number of cycles per second times the length of each cycle." For a given medium, wave speed is fixed (set by the medium's properties). So if frequency increases, wavelength must decrease proportionally — a high-frequency wave has short wavelength; a low-frequency wave has long wavelength. This is why high-pitched sounds have shorter wavelengths than low-pitched sounds, and why blue light (high frequency) has a shorter wavelength than red light (low frequency).
+
+Phase is the fifth property — the position within a cycle at a specific moment. Two waves with identical frequency and wavelength can be in phase (crests align → they reinforce) or out of phase (crests of one align with troughs of the other → they cancel). Phase difference is what determines whether two waves constructively or destructively interfere — the entire phenomenon of interference depends on it.
 
 ## Mental Models
 
