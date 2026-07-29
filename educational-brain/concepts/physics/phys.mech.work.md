@@ -21,9 +21,17 @@ See Blueprint (`docs/curriculum/blueprints/phys.mech.work.md §1 Learning Object
 
 ## Core Understanding
 
-Work is the scalar product of force and displacement, measuring energy transfer by a force.
+You push a heavy sofa across a room — clearly you did work. You hold the same sofa still for an hour — exhausting, but in physics, zero work. You carry the sofa horizontally across the room — also zero work, in the physics sense. Why? Because work is not about effort. It is about energy transfer by a force in the direction of motion.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+Work done by a force is W = F·d·cosθ — the magnitude of the force, times the distance moved, times the cosine of the angle between the force and the displacement. Three implications:
+
+First: holding the sofa still (d = 0) does zero work. Your muscles are doing biological work, consuming ATP, but they are not transferring energy to the sofa.
+
+Second: carrying the sofa horizontally (force is vertical to support it, displacement is horizontal, θ = 90°, cos 90° = 0) does zero work on the sofa. The force and the displacement are perpendicular — the force does not contribute to motion in the direction of travel. This is why it takes no mechanical energy to carry a constant-weight object horizontally on a frictionless surface.
+
+Third: the sign of work matters. A force in the same direction as motion does positive work (adds energy to the object). A force opposing motion (like friction, or the string as a ball swings upward) does negative work (removes energy from the object). The net work done on an object equals its change in kinetic energy — this is the Work-Energy Theorem: W_net = ΔKE = ½mv² − ½mu².
+
+Work is a scalar (the dot product removes the directionality of the vectors), measured in joules. One joule is one newton times one metre — the work done by a 1 N force moving its point of application 1 m in the direction of the force.
 
 ## Mental Models
 

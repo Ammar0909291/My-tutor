@@ -21,9 +21,13 @@ See Blueprint (`docs/curriculum/blueprints/phys.mech.momentum.md §1 Learning Ob
 
 ## Core Understanding
 
-Linear momentum is the product of mass and velocity, a conserved vector quantity in isolated systems.
+A tennis ball and a lorry are both moving at 10 m/s. Which is harder to stop? Obviously the lorry — it has far more "quantity of motion" even at the same speed. And a golf ball at 200 m/s is harder to stop than the same golf ball at 10 m/s. Momentum captures both effects: p = mv — the mass times the velocity. It is a vector: both magnitude and direction matter.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+Momentum's power comes from its conservation. In an isolated system (no external forces), the total momentum never changes, regardless of what the objects inside the system do to each other. Before a collision and after a collision, the total vector momentum is identical. This is conservation of momentum, and it derives directly from Newton's Third Law: when two objects collide, each exerts an equal and opposite force on the other for the same duration. Equal forces, same time → equal and opposite impulses → their momenta change by equal and opposite amounts → total momentum unchanged.
+
+Impulse is the bridge between force and momentum change: J = FΔt = Δp. Applying a force for longer (or applying a larger force for the same time) produces a larger change in momentum. This is why car airbags save lives: the force required to stop a head-on collision is enormous; an airbag increases the stopping time, reducing the peak force on the head even though the total impulse (momentum change) is the same.
+
+Momentum conservation is more fundamental than Newton's laws — it survives into quantum mechanics and special relativity, where Newton's F = ma does not. In quantum mechanics, momentum is a primary observable (a particle's wavelength is h/p — the de Broglie relation). Conservation of momentum is ultimately a consequence of translational symmetry of physical laws (Noether's theorem) — the fact that the laws of physics are the same everywhere in space.
 
 ## Mental Models
 

@@ -28,7 +28,13 @@ The learner can:
 
 ## Core Understanding
 
-_Electric current is the rate of flow of charge; drift velocity is the average velocity of charge carriers under an electric field._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+You flip a light switch and the bulb lights up almost instantly — but the wire is 3 metres long and electrons in copper drift at only about 0.1 mm per second. The electrons in the wire when you turn on the switch are not the same electrons that reach the bulb — it would take hours. What travels instantly is the electric field — the push propagating through the wire at nearly the speed of light.
+
+Electric current is the rate of charge flow: I = dQ/dt, measured in amperes. One ampere means one coulomb of charge passing a cross-section of the wire per second. In metal wires, the charge carriers are electrons (negative charges moving opposite to conventional current direction); in electrolytes, both positive and negative ions carry current; in semiconductors, both electrons and "holes" (absence of electrons) carry current.
+
+The drift velocity of electrons in a typical wire is tiny — ~0.1 mm/s — despite the current flowing immediately. This is because the wire is already full of mobile electrons (about 10²⁸ per cubic metre in copper). When the electric field switches on, it pushes all these existing electrons simultaneously. The effect propagates at nearly the speed of light even though individual electrons shuffle forward very slowly. This is the analogy of water in a pipe: when you turn on the tap, water flows immediately from the other end — not because the same water molecules travel that fast, but because the push transmits instantly.
+
+The relationship between current, charge carrier properties, and drift velocity is I = nAvq, where n is the number of charge carriers per unit volume, A is the cross-sectional area of the wire, v is the drift velocity, and q is the charge per carrier. This equation connects the microscopic picture (individual charge carriers drifting) to the macroscopic measurement (current in amperes).
 
 ## Mental Models
 
