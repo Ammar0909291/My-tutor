@@ -24,9 +24,18 @@ See Blueprint (`docs/curriculum/blueprints/phys.therm.phase-transitions.md §1 L
 
 ## Core Understanding
 
-Phase transitions absorb or release latent heat at constant temperature as a substance changes between solid, liquid, and gas phases.
+Put a pot of water on a hot stove. The temperature climbs steadily from room temperature toward 100°C. Then something strange happens: the temperature stops rising. The stove is still on; energy is still entering the water — but the temperature stays exactly at 100°C until all the water has turned to steam. Only then does the temperature of the steam begin to rise. Where did all that energy go?
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+It went into breaking the attractive forces holding water molecules together in the liquid phase — not into making them move faster (which would raise temperature). This is latent heat: energy absorbed or released at constant temperature during a phase transition.
+
+The amount of energy required is characterised by the latent heat L (joules per kilogram): Q = mL. For water, the latent heat of vaporisation is about 2,260 kJ/kg — enormous compared to the 418 kJ required to heat a kilogram of water from 0°C to 100°C. This is why boiling water at 100°C can still cause severe burns: 1 gram of steam at 100°C carries 2,260 J more energy than 1 gram of water at 100°C, and releases all of it as it condenses on skin.
+
+Three phases — solid, liquid, gas — are connected by three transition pairs:
+- Melting/freezing (solid ↔ liquid): latent heat of fusion
+- Vaporisation/condensation (liquid ↔ gas): latent heat of vaporisation (largest)
+- Sublimation/deposition (solid ↔ gas): dry ice directly becoming CO₂ gas; frost forming from air directly
+
+The temperature at which these transitions occur depends on pressure (the triple point is the unique pressure-temperature at which all three phases coexist). At the triple point of water (611.7 Pa, 0.01°C), ice, liquid water, and water vapour are simultaneously in equilibrium — the pressure is so low that liquid water cannot exist above this pressure without immediately vaporising or freezing.
 
 ## Mental Models
 

@@ -24,9 +24,13 @@ See Blueprint (`docs/curriculum/blueprints/phys.therm.kinetic-theory.md §1 Lear
 
 ## Core Understanding
 
-Kinetic theory derives macroscopic gas properties from the statistical mechanics of molecular motion.
+Pressure is something you can measure macroscopically with a gauge. But what causes it? Kinetic theory answers this from first principles: the pressure a gas exerts on its container walls is the cumulative result of billions of molecules colliding with those walls every second.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+Start from a mental model of a box of gas molecules moving in random directions at a range of speeds. Each molecule that hits a wall bounces back elastically, transferring momentum to the wall. The pressure is the average rate of momentum transfer per unit area — the average force per unit area of all these impacts. By working through the statistics of molecular velocities (using the Maxwell-Boltzmann distribution), kinetic theory derives: P = (1/3)ρ⟨v²⟩, where ρ is the mass density and ⟨v²⟩ is the mean square speed of the molecules.
+
+Comparing this to the ideal gas law PV = nRT gives the key result: average kinetic energy per molecule = (3/2)k_BT, where k_B is Boltzmann's constant. Temperature is literally a measure of the average translational kinetic energy of the molecules. Doubling the Kelvin temperature doubles the average kinetic energy — which doubles ⟨v²⟩ — which doubles the pressure at constant volume. The ideal gas law is not a postulate; it is a derived consequence of molecular mechanics.
+
+The root mean square speed follows: v_rms = √(3k_BT/m), where m is the mass of one molecule. At room temperature, nitrogen molecules move at roughly 500 m/s. Lighter molecules (hydrogen) move faster at the same temperature; heavier molecules (CO₂) move slower. This explains effusion (lighter gases escape faster through a tiny hole) and the composition of planetary atmospheres (light gases like hydrogen escape Earth's gravity over geological time; heavy gases are retained).
 
 ## Mental Models
 

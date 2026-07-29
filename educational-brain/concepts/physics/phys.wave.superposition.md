@@ -24,9 +24,13 @@ See Blueprint (`docs/curriculum/blueprints/phys.wave.superposition.md §1 Learni
 
 ## Core Understanding
 
-The superposition principle states that the resultant displacement is the algebraic sum of displacements of individual waves.
+Two stone ripples spreading across a pond meet. Instead of bouncing off each other or blocking each other, they pass straight through — after the crossing, each ripple continues unchanged. But at the moment they overlap, the water surface is determined by adding their heights together: where both have crests, the surface reaches double the normal crest height; where one has a crest and the other a trough of equal magnitude, the surface is flat.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+This is the superposition principle: when two or more waves occupy the same region of space, the total displacement at every point and at every instant is the algebraic sum of the individual displacements. The waves do not interact with each other — they each proceed as if the other were absent — but they share the medium at the same time, and the medium's displacement is their sum.
+
+Superposition is a property of linear systems: those where the medium's response to a disturbance is proportional to the disturbance. Air is linear at normal sound levels (which is why many sounds can exist in the same space without distorting each other). Ocean waves at very high amplitudes become non-linear, and superposition fails (waves then interact and distort each other). Most waves in the physics curriculum (sound at normal levels, light, small-amplitude water waves, electromagnetic waves in linear media) obey superposition precisely.
+
+Superposition is the foundation of interference (what happens when two waves of the same frequency overlap) and diffraction (what happens when a wave bends around an edge and the Huygens wavelets — each obeying superposition — add up to form the observed pattern). Standing waves also arise from superposition: a wave travelling in one direction plus a wave of equal amplitude and frequency travelling in the opposite direction superpose to create a pattern that appears to stand still — with fixed nodes (zero amplitude) and antinodes (maximum amplitude).
 
 ## Mental Models
 

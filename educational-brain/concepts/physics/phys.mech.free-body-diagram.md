@@ -21,9 +21,13 @@ See Blueprint (`docs/curriculum/blueprints/phys.mech.free-body-diagram.md §1 Le
 
 ## Core Understanding
 
-A free body diagram isolates a body and represents all external forces acting on it as vectors.
+A student tries to solve "a box is pushed up a ramp at constant velocity — find the pushing force." Without a diagram, they apply Newton's Second Law and immediately get confused: which forces are acting? Do I include gravity? What direction? Which way does friction point? The free body diagram is the tool that converts a confusing physical situation into an unambiguous list of forces.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+A free body diagram isolates one object — the "free body" — and draws every external force acting on it as a labelled arrow, starting from the object's centre, pointing in the direction the force acts. "External" means forces from OTHER objects — the contact force from the ramp, gravity from Earth, friction from the surface. Internal forces (like the forces between molecules within the box) cancel each other and never appear in a free body diagram. "Every" means every force — leaving one out produces a wrong answer, always.
+
+The diagram is the translation layer between the physical situation and Newton's Second Law. Once you have correctly identified every force and its direction, you set up ΣF = ma by resolving into components: ΣFₓ = maₓ and ΣFᵧ = maᵧ. For the ramp problem: x-direction (along ramp): pushing force − friction − component of gravity along ramp = 0 (constant velocity, so a = 0). y-direction (perpendicular to ramp): normal force − component of gravity perpendicular = 0. Two equations, two unknowns.
+
+Common errors that a good FBD prevents: drawing gravity perpendicular to a slope (gravity always points vertically downward — only its components along and perpendicular to the slope differ); forgetting friction when a surface is described as "smooth" but the problem implies relative motion; confusing the tension in a rope with the weight it holds; drawing forces that point in the direction of motion (no "forward force" on a car coasting — only the direction of velocity, not any real force).
 
 ## Mental Models
 

@@ -24,9 +24,13 @@ See Blueprint (`docs/curriculum/blueprints/phys.wave.interference.md §1 Learnin
 
 ## Core Understanding
 
-Wave interference is the superposition of two or more waves producing regions of reinforcement or cancellation.
+Shine a laser through two narrow slits onto a screen. You expect two bright bars of light — one from each slit. Instead, you see a pattern of alternating bright and dark bands, extending far beyond the two slits' positions. Dark bands — from a source of light — appear in regions that geometric optics says should be illuminated. This is constructive and destructive interference: the hallmark of wave behaviour.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+When two waves of the same frequency overlap, the result depends on their phase difference — how their cycles are offset relative to each other. If both waves have a crest arriving at the same point at the same time (phase difference = 0 or multiples of 2π), they reinforce: the resultant amplitude is doubled. This is constructive interference. If one wave arrives with a crest when the other arrives with a trough (phase difference = π or odd multiples of π), they cancel: the resultant amplitude is zero. This is destructive interference.
+
+For the double-slit, each slit acts as a source of waves. At any point on the screen, the two waves have travelled different distances (path difference = d·sinθ, where d is the slit separation and θ is the angle from the centre). Constructive interference occurs where the path difference is a whole number of wavelengths (bright fringe positions: y = mλL/d for integer m). Destructive interference occurs where path difference is a half-integer of wavelengths (dark fringe positions: y = (m + ½)λL/d).
+
+Interference requires coherence: the two sources must have a stable phase relationship. If the phase difference varies randomly, the interference pattern averages out and disappears. Two separate light bulbs are incoherent and cannot produce a stable interference pattern; a laser split by a beam splitter is coherent and does. This is why lasers are required for many optical interference demonstrations, and why the sun's extended disc — effectively many incoherent sources — cannot produce fringes over large separations.
 
 ## Mental Models
 

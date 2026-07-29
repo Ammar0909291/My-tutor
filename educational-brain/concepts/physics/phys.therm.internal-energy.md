@@ -24,9 +24,15 @@ See Blueprint (`docs/curriculum/blueprints/phys.therm.internal-energy.md §1 Lea
 
 ## Core Understanding
 
-Internal energy is the total kinetic and potential energy of all molecules in a thermodynamic system.
+Heat a beaker of water and its temperature rises — you can feel it. But if you heat water at exactly 100°C (at sea level), the temperature stops rising. Energy is still going in; where is it going? Not into faster-moving molecules (that would raise temperature) — it is going into breaking the attractive forces between water molecules, freeing them to become steam. The energy is stored in the intermolecular potential energy. This hidden energy is part of internal energy.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+Internal energy U is the total microscopic energy of a system — the sum of the kinetic energy of every molecule (which is related to temperature) and the potential energy of every intermolecular interaction (which depends on the arrangement and separation of molecules). Both parts matter.
+
+For an ideal gas, the potential energy term is zero by definition (ideal gas molecules have no intermolecular forces). All internal energy is kinetic: U = (f/2)nRT for a gas with f degrees of freedom per molecule. For a monatomic ideal gas (f = 3): U = (3/2)nRT. Temperature is the direct measure of this kinetic contribution. This is why the internal energy of an ideal gas depends only on temperature — not on pressure or volume.
+
+For real systems (liquids, solids, non-ideal gases), changing the volume changes the intermolecular distances and therefore the potential energy — even at constant temperature. This is why gases that expand into vacuum cool slightly (their kinetic energy converts to potential energy of separation), while the ideal gas model predicts no temperature change for free expansion.
+
+Internal energy is a state function: it depends only on the current state of the system (temperature, pressure, volume, composition), not on how the system got there. This is critical for thermodynamics: two paths to the same state always produce the same ΔU, even if the heat added and work done differ along each path.
 
 ## Mental Models
 

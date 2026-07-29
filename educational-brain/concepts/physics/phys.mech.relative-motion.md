@@ -21,9 +21,13 @@ See Blueprint (`docs/curriculum/blueprints/phys.mech.relative-motion.md §1 Lear
 
 ## Core Understanding
 
-Relative motion describes the velocity and position of one object as observed from a moving reference frame.
+Two trains pass each other on parallel tracks. To a person on Train A, Train B appears to be moving at 200 km/h. To a person standing on the platform, both trains are moving at 100 km/h in opposite directions. Who is "right" about Train B's speed? Both are right — speed and velocity are always measured relative to a reference frame. There is no absolute velocity; there is only velocity relative to some observer.
 
-This is the physical model learners must hold — not just a formula to apply — before downstream concepts can be correctly understood and transferred.
+Relative velocity is calculated by vector subtraction: the velocity of B relative to A is v_BA = v_B − v_A, where both velocities are measured relative to the same ground frame. In 1D: if train A moves at +100 km/h and train B moves at −100 km/h (opposite direction), then v_BA = −100 − 100 = −200 km/h — the trains approach each other at 200 km/h, which matches the observer on Train A's perception.
+
+In 2D, the vector subtraction must account for direction. A classic example: a boat wants to cross a river directly from one bank to the other. The river flows at 3 m/s east. The boat's speed through the water is 4 m/s. If the boat points straight across (north), it will drift east and arrive downstream of the target. To go straight across, the boat must angle upstream (northwest) so that the river's eastward push cancels out. The required heading angle: point the boat so that its eastward component of velocity exactly cancels the river's 3 m/s east. The actual speed across the river is reduced to √(4² − 3²) = √7 m/s.
+
+Relative motion is not a separate topic — it is the framework within which all motion is described. Every measurement of velocity and every application of Newton's laws implicitly assumes a reference frame. The special case where reference frames are non-inertial (accelerating) requires fictitious forces; Galilean relativity (and its relativistic generalisation) governs how motion transforms between inertial frames.
 
 ## Mental Models
 
