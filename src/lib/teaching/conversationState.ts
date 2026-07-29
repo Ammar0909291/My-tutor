@@ -96,6 +96,17 @@ export interface ConversationState {
   /** A.6: turns spent in the current phase without advancing. Resets to 0
    *  on any phase transition. Used to detect stale teaching loops. */
   turnsInCurrentPhase: number
+  /** QL-5 (questionLegality.ts, Runtime Redesign Mission Part 7, closes
+   *  gap G2): has a reflection/check-style question already been asked
+   *  during the CURRENT entry into CHECK phase? CHECK is legacy's
+   *  conflation of the canonical ladder's REFLECT+ASSESS states (see
+   *  kernel/tsm/phases.ts's canonicalToLegacy mapping) — until that split
+   *  is live (S5), this flag enforces the mission's "reflection questions
+   *  max 1" invariant against the one CHECK entry a failure can force the
+   *  machine to repeat. Resets to false on every fresh entry into CHECK
+   *  from a different phase; set true the first time a question is asked
+   *  while phase===CHECK. */
+  reflectionAskedThisEntry: boolean
 }
 
 export function initialConversationState(conceptId: string | null): ConversationState {
@@ -127,6 +138,7 @@ export function initialConversationState(conceptId: string | null): Conversation
     learnerConfidence: 'unknown',
     frustrationLevel: 0,
     turnsInCurrentPhase: 0,
+    reflectionAskedThisEntry: false,
   }
 }
 
@@ -192,6 +204,19 @@ const PRIOR_KNOWLEDGE_PROBE_RE =
 export function isPriorKnowledgeProbe(assistantText: string): boolean {
   const withoutCode = assistantText.replace(/```[\s\S]*?```/g, '')
   return PRIOR_KNOWLEDGE_PROBE_RE.test(withoutCode)
+}
+
+/** QL-5 support: fold reflectionAskedThisEntry across a phase transition.
+ * A fresh entry into CHECK (from any other phase) clears the budget; a
+ * question asked WHILE already in CHECK spends it; anything else carries
+ * the previous value forward unchanged. Pure — called at every return
+ * point in advanceConversationState() below. */
+function foldReflectionAskedThisEntry(
+  prevPhase: TeachingPhase, nextPhase: TeachingPhase, askedQuestion: boolean, prevFlag: boolean,
+): boolean {
+  if (nextPhase === 'CHECK' && prevPhase !== 'CHECK') return false
+  if (prevPhase === 'CHECK' && askedQuestion) return true
+  return prevFlag
 }
 
 function phaseIndex(p: TeachingPhase): number { return PHASE_ORDER.indexOf(p) }
@@ -309,6 +334,9 @@ export function advanceConversationState(
       (prev.consecutiveFailures + 1) + (prev.remediationCount + 1) * 0.5
     ))
     next.phase = phaseDown(prev.phase, next.demonstrated)
+    next.reflectionAskedThisEntry = foldReflectionAskedThisEntry(
+      prev.phase, next.phase, evidence.askedQuestion, prev.reflectionAskedThisEntry ?? false,
+    )
     return next
   }
 
@@ -333,6 +361,9 @@ export function advanceConversationState(
     // Success evidence at CHECK/PRACTICE is voided by a later failure at
     // the same rung only in part — keep it (high-water mark), the phase
     // drop alone forces re-earning the transition.
+    next.reflectionAskedThisEntry = foldReflectionAskedThisEntry(
+      prev.phase, next.phase, evidence.askedQuestion, prev.reflectionAskedThisEntry ?? false,
+    )
     return next
   }
 
@@ -365,6 +396,10 @@ export function advanceConversationState(
   next.turnsInCurrentPhase = next.phase === prev.phase
     ? (prev.turnsInCurrentPhase ?? 0) + 1
     : 0
+
+  next.reflectionAskedThisEntry = foldReflectionAskedThisEntry(
+    prev.phase, next.phase, evidence.askedQuestion, prev.reflectionAskedThisEntry ?? false,
+  )
 
   return next
 }

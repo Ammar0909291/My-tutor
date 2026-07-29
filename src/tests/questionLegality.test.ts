@@ -275,3 +275,75 @@ describe('Band 2 is subtractive only', () => {
     expect(d.blockedReason).toBeNull()
   })
 })
+
+// ── QL-5 · REFLECTION QUESTION BUDGET (S3, closes design-report gap G2) ─────
+
+describe('QL-5 — at most one reflection question per CHECK entry', () => {
+  it('allows the first question on a fresh CHECK entry', () => {
+    const v = questionLegality(S({
+      phase: 'CHECK', taughtThisSession: true, reflectionAskedThisEntry: false,
+    }))
+    expect(v.askLegal).toBe(true)
+  })
+
+  it('blocks a second question within the same CHECK entry', () => {
+    const v = questionLegality(S({
+      phase: 'CHECK', taughtThisSession: true, reflectionAskedThisEntry: true,
+    }))
+    expect(v.askLegal).toBe(false)
+    expect(v.reason).toBe('QL5_REFLECTION_BUDGET_EXCEEDED')
+  })
+
+  it('does not apply outside CHECK phase', () => {
+    const v = questionLegality(S({
+      phase: 'GUIDE', taughtThisSession: true, reflectionAskedThisEntry: true,
+    }))
+    expect(v.reason).not.toBe('QL5_REFLECTION_BUDGET_EXCEEDED')
+  })
+
+  it('advanceConversationState sets the flag the first time CHECK asks a question', () => {
+    const entered = advanceConversationState(S({ phase: 'GUIDE', demonstrated: true }), {
+      askedQuestion: false, signalCorrect: true, recoveryFired: false,
+    })
+    expect(entered.phase).toBe('CHECK')
+    expect(entered.reflectionAskedThisEntry).toBe(false) // fresh entry, not yet asked
+
+    const asked = advanceConversationState(entered, {
+      askedQuestion: true, signalCorrect: null, recoveryFired: false,
+    })
+    expect(asked.reflectionAskedThisEntry).toBe(true)
+  })
+
+  it('resets the flag on a fresh entry into CHECK after a failure sent it back to GUIDE', () => {
+    const inCheckAsked = S({ phase: 'CHECK', demonstrated: true, reflectionAskedThisEntry: true })
+    const droppedToGuide = advanceConversationState(inCheckAsked, {
+      askedQuestion: false, signalCorrect: false, recoveryFired: false,
+    })
+    expect(droppedToGuide.phase).toBe('GUIDE')
+
+    const reentered = advanceConversationState(droppedToGuide, {
+      askedQuestion: false, signalCorrect: true, recoveryFired: false,
+    })
+    expect(reentered.phase).toBe('CHECK')
+    expect(reentered.reflectionAskedThisEntry).toBe(false) // budget renewed on fresh entry
+  })
+
+  it('does not carry the flag forward once CHECK is exited upward to PRACTICE', () => {
+    const inCheckAsked = S({ phase: 'CHECK', demonstrated: true, correctAtCheck: 0, reflectionAskedThisEntry: true })
+    const advanced = advanceConversationState(inCheckAsked, {
+      askedQuestion: false, signalCorrect: true, recoveryFired: false,
+    })
+    expect(advanced.phase).toBe('PRACTICE')
+    // Re-entering CHECK later (e.g. after a future failure) must start fresh —
+    // covered by the reset test above; this asserts PRACTICE itself is unaffected.
+    expect(questionLegality(advanced).reason).not.toBe('QL5_REFLECTION_BUDGET_EXCEEDED')
+  })
+
+  it('foldLegalityMetrics tracks QL-5 blocks in their own field', () => {
+    const m = foldLegalityMetrics(initialLegalityMetrics(), {
+      decidedMove: 'teach', askedQuestion: false, blockedReason: 'QL5_REFLECTION_BUDGET_EXCEEDED',
+    })
+    expect(m.ql5Blocks).toBe(1)
+    expect(m.ql1Blocks).toBe(0)
+  })
+})

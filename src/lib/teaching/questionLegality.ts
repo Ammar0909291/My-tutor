@@ -30,6 +30,21 @@
  *         for a single turn, then the tutor reverted to observation questions
  *         in the very next turn.
  *
+ *   QL-5  REFLECTION QUESTION BUDGET (Runtime Redesign Mission Part 7,
+ *         closes design-report gap G2): the mission's question-category
+ *         policy caps reflection questions at 1 per REFLECT entry. The
+ *         live 6-phase ladder conflates the canonical REFLECT+ASSESS
+ *         states into one CHECK phase (kernel/tsm/phases.ts's
+ *         canonicalToLegacy mapping) — until that split ships (S5), this
+ *         rule enforces the invariant against the one CHECK entry a
+ *         failure can force the machine to repeat: at most one question
+ *         per fresh entry into CHECK. Deliberately NOT extended to the
+ *         "understanding ≤2 consecutive" or "assessment illegal outside
+ *         INDEPENDENT/ASSESS" categories from the same mission section —
+ *         both need the canonical ladder's phase distinctions to gate
+ *         correctly, and guessing a mapping onto the conflated CHECK phase
+ *         risks wrong behavior on live traffic. Those wait for S5.
+ *
  * Deliberately NOT here: any give-to-ask ratio. A ratio is a MONITORING
  * quantity — its correct value differs by activity (first exposure vs
  * Socratic diagnosis vs practice vs mastery check), so a global constant is
@@ -51,6 +66,7 @@ export type LegalityReason =
   | 'QL2_DIAGNOSTIC_CONCLUDED'
   | 'QL3_LEARNER_DIRECTIVE_ACTIVE'
   | 'QL4_MISSING_CAPABILITY'
+  | 'QL5_REFLECTION_BUDGET_EXCEEDED'
 
 export interface LegalityVerdict {
   /** false ⇒ 'ask' has been removed from the legal move set this turn. */
@@ -178,6 +194,21 @@ export function questionLegality(
     }
   }
 
+  // QL-5 — the reflection budget for this CHECK entry is already spent.
+  // Ranked below QL-3/QL-2 (both are about what THIS turn's learner
+  // message just showed) and above QL-4/QL-1 (structural/capability
+  // checks that apply regardless of phase).
+  if (state.phase === 'CHECK' && state.reflectionAskedThisEntry === true) {
+    return {
+      askLegal: false,
+      reason: 'QL5_REFLECTION_BUDGET_EXCEEDED',
+      rationale:
+        'One reflection question has already been asked during this CHECK ' +
+        'entry. Asking another repeats the same category of question rather ' +
+        'than progressing — give feedback or move the lesson forward instead.',
+    }
+  }
+
   // QL-4 — the question demands an operation the learner cannot perform.
   // Ranked below the learner's own statement and below a concluded diagnostic
   // (both are about THIS turn), and above QL-1 because a capability block is
@@ -250,6 +281,11 @@ export interface LegalityMetrics {
    *  rising count means the curriculum is sequenced above the learner's
    *  operational floor — a placement or prerequisite defect, not a teaching one. */
   ql4Blocks: number
+  /** QL-5: a second reflection-category question was attempted within the
+   *  same CHECK entry. A rising count means CHECK is being re-entered
+   *  (failures) more than it is being passed — a teaching-quality signal,
+   *  not a curriculum one. */
+  ql5Blocks: number
   /** Monitoring only — never a gate. Compare against the per-activity human
    *  baseline once a human-tutor corpus exists; a global target is wrong. */
   gives: number
@@ -257,7 +293,7 @@ export interface LegalityMetrics {
 }
 
 export function initialLegalityMetrics(): LegalityMetrics {
-  return { askViolations: 0, ql1Blocks: 0, ql2Blocks: 0, ql3Blocks: 0, ql4Blocks: 0, gives: 0, asks: 0 }
+  return { askViolations: 0, ql1Blocks: 0, ql2Blocks: 0, ql3Blocks: 0, ql4Blocks: 0, ql5Blocks: 0, gives: 0, asks: 0 }
 }
 
 const REASON_TO_FIELD: Record<LegalityReason, keyof LegalityMetrics> = {
@@ -265,6 +301,7 @@ const REASON_TO_FIELD: Record<LegalityReason, keyof LegalityMetrics> = {
   QL2_DIAGNOSTIC_CONCLUDED: 'ql2Blocks',
   QL3_LEARNER_DIRECTIVE_ACTIVE: 'ql3Blocks',
   QL4_MISSING_CAPABILITY: 'ql4Blocks',
+  QL5_REFLECTION_BUDGET_EXCEEDED: 'ql5Blocks',
 }
 
 /** Fold one completed turn into the metrics. Pure. */
