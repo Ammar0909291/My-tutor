@@ -2491,6 +2491,39 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         cleanText = stripRawImageUrls(cleanText)
       } catch { /* non-fatal */ }
 
+      // A.1-7 — Response Quality Guard: detect dead loops, stuck states,
+      // transition recursion, intro stalls, and empty conversational turns.
+      // Runs on Library turns only (assembled turns are human-curated).
+      if (!assembled) {
+        try {
+          const { runQualityGuard, buildStuckRecoveryBlock } = await import('@/lib/teaching/responseQualityGuard')
+          const recentAssistant = learnSession.messages
+            .filter((m) => m.role === MessageRole.ASSISTANT)
+            .slice(0, 3)
+            .map((m) => m.content)
+          const totalTurns = learnSession.messages.filter((m) => m.role === MessageRole.ASSISTANT).length
+          const guard = runQualityGuard({
+            candidate: cleanText,
+            recentAssistantMessages: recentAssistant,
+            turnsInPhase: conversationStateHoisted?.turnsInCurrentPhase ?? 0,
+            consecutiveFailures: conversationStateHoisted?.consecutiveFailures ?? 0,
+            phase: conversationStateHoisted?.phase ?? 'OBSERVE',
+            totalTurnsThisLesson: totalTurns,
+            lessonTitle: lessonCtx?.lessonTitle ?? null,
+            isFirstTurn: totalTurns === 0,
+          })
+          if (!guard.passed && guard.replacement) {
+            cleanText = guard.replacement
+          }
+          if (guard.stuckState?.isStuck) {
+            systemPrompt += buildStuckRecoveryBlock(
+              guard.stuckState,
+              lessonCtx?.lessonTitle ?? null,
+            )
+          }
+        } catch { /* non-fatal */ }
+      }
+
       // K6 — EOS Runtime integration: run the K5 Output Verifier on the
       // cleaned text. Off by default; behind ENABLE_OUTPUT_VERIFIER (or the
       // master ENABLE_EOS_RUNTIME). Failures follow the RS §9.3 protocol:
