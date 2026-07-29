@@ -18,14 +18,6 @@
   of one object) will systematically misapply Newton's third law.
 - **Difficulty**: foundational · **Bloom**: understand · **Mastery threshold**: 0.70 ·
   **Est. hours**: 2 · **References**: NCERT Physics Class 9 Ch. 9
-     objects, requiring both an agent (what exerts the force) and a recipient
-     (what experiences it).
-2. Classify forces as contact forces (normal, friction, tension, applied) or
-     field forces (gravity, electric, magnetic) and give examples of each.
-3. Identify all forces acting ON a single object in a given scenario and draw
-     a free-body diagram showing them as vectors.
-4. Explain why net force (vector sum of all forces on an object) — not any
-     individual force — determines the change in motion.
 
 ## Learning Objective
 
@@ -224,7 +216,31 @@ From the dispatch library (Delivery 2 §6):
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **CONCRETE-THEN-ABSTRACT** — spring scale first. Learner stretches a rubber band
+   and feels the pull; this is the direction-and-magnitude reality of force. Then:
+   "What are all the forces on this book sitting on the table?" Require the learner
+   to name the agent: "Earth pulls the book downward (gravity). The table pushes
+   the book upward (normal force). Friction?" None if static and no horizontal force.
+   The agent-recipient requirement is drilled before any formula.
+
+2. **FREE-BODY DIAGRAM** — draw one for every force-identification problem: isolated
+   object as a dot; each force as an arrow from the dot with label (magnitude, direction,
+   agent). No forces drawn that are not real; no missing forces. The FBD is the
+   primary tool — not equation manipulation — for identifying what forces act.
+
+3. **ERROR-ANALYSIS** — the normal force surprise: "A 5 kg book rests on a table.
+   What forces act ON the book?" Common wrong answer: only gravity (M2 — normal force
+   omitted). Show the net force consequence: if only gravity acts, the book accelerates
+   downward — but it doesn't. Therefore there must be an upward force. The normal force
+   is discovered by contradiction, not announced.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — three session openers:
+   "List all forces acting on a car moving at constant velocity on a flat road" →
+   "Draw a free-body diagram of a book on a tilted ramp" → "What is the difference
+   between a contact force and a field force? Give two examples of each."
+
 
 ## Voice Teaching Notes
 

@@ -18,14 +18,6 @@
   deceleration, upward/downward acceleration, or circular motion.
 - **Difficulty**: developing · **Bloom**: understand · **Mastery threshold**: 0.75 ·
   **Est. hours**: 3 · **References**: NCERT Physics Class 9 Ch. 8
-     compute it including sign.
-2. Distinguish between speeding up, slowing down (deceleration), and direction
-     change as three distinct manifestations of non-zero acceleration.
-3. Identify the sign of acceleration from a described scenario (positive means
-     accelerating in the positive direction; negative means decelerating or
-     accelerating in the negative direction).
-4. Explain why an object moving at constant speed can still be accelerating
-     (if direction is changing — e.g. circular motion).
 
 ## Learning Objective
 
@@ -243,7 +235,30 @@ From the dispatch library (Delivery 2 §6):
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **GUIDED-DISCOVERY** — the direction-change surprise: "A car is turning a
+   corner at CONSTANT speed. Is it accelerating?" Most learners say no (M2 active).
+   Ask: "What is velocity?" (speed + direction). "Is the direction changing?"
+   (Yes). "So is velocity changing?" (Yes). "So is there acceleration?" The learner
+   derives the definition from the collision, not from the text.
+
+2. **SIGN-CONVENTION DRILL** — four cases, one at a time, learner states the sign
+   of acceleration: (a) speeding up while moving right (a > 0); (b) slowing down
+   while moving right (a < 0); (c) speeding up while moving left (a < 0);
+   (d) slowing down while moving left (a > 0). No shortcutting ("decelerating" is
+   not an answer — the sign is). Must be automatic before kinematics equations.
+
+3. **GRAPH-INTERPRETATION** — velocity-time graph: slope = acceleration. Flat line
+   (zero slope) = constant velocity = zero acceleration. Negative slope = negative
+   acceleration, regardless of sign of velocity. Show a case where v is negative
+   and a is positive (slowing down in negative direction) — a common graphing error.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — three session openers:
+   "Can an object have acceleration when its speed is constant?" → "A car slows from
+   30 m/s to 10 m/s in 4 s — what is its acceleration?" → "What does the slope of
+   a velocity-time graph represent?"
+
 
 ## Voice Teaching Notes
 

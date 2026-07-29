@@ -18,13 +18,7 @@
 - **Difficulty**: developing · **Bloom**: understand · **Mastery
   threshold**: 0.75 (KG-authored) · **Est. hours**: 3 ·
   **Reference (KG)**: NCERT Physics Class 9 Ch. 9
-     it stop (it keeps moving, same speed, same direction).
-2. Explain why moving things around us DO stop (friction/air are forces
-     — the everyday world hides the law rather than showing it).
-3. Identify, for a given scenario, whether a net force is acting — from
-     the *motion's change*, not from whether it "looks pushed."
-4. State the law's both halves (rest stays rest / motion stays motion)
-     and why they are one statement, not two.
+
 
 ## Learning Objective
 
@@ -240,7 +234,31 @@ animism here — story is garnish only); games (no natural mechanic embodies
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **PREDICTION-BEFORE-DEMO** — this is the single highest-fit action for this
+   concept because the learner's prediction is the misconception made visible.
+   Before ANY demonstration: "A ball is rolling on a flat surface with no friction.
+   Nothing touches it. What happens to it?" Require a written/spoken commitment.
+   Only THEN run the demo or thought experiment. The contrast between prediction
+   and observation is what this lesson teaches — not the statement of the law.
+
+2. **THOUGHT-EXPERIMENT** — deep space: "An astronaut pushes a hockey puck in empty
+   space, far from any star. What does the puck do one second after they let go?
+   One minute? One hour? One year?" Force through each time increment. The intuition
+   that says "it slows down" has nowhere to hide once friction, air, and gravity are
+   explicitly removed. This is the canonical home of the thought-experiment action.
+
+3. **ERROR-ANALYSIS** — present a student answer: "A ball keeps rolling because the
+   force of the throw is still inside it." Ask: where is this force? Can it be
+   measured? What agent is exerting it? When does it "run out"? Each question
+   dismantles the impetus misconception (M1) by exposing it as untestable.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — three session openers:
+   "What happens to a moving object with no net force — in your own words, not the
+   law's wording?" → "Why do things slow down in everyday life if Newton's first law
+   is true?" → "A car braking suddenly throws passengers forward. Which law explains
+   this, and why?"
 
 ## Voice Teaching Notes
 

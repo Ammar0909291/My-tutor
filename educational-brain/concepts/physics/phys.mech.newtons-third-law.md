@@ -145,7 +145,32 @@ Inflate a balloon and release it. Air jets backward; balloon flies forward. Acti
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **PREDICTION-BEFORE-DEMO** — truck-and-car collision prediction: "A 20-tonne truck
+   and a 1-tonne car collide head-on. During the collision, which object exerts the
+   greater force on the other?" Require a written/spoken answer before any explanation.
+   Most learners say the truck. After discussion: the forces are equal in magnitude,
+   opposite in direction. Ask: "Why is the car destroyed and the truck undamaged?"
+   (Answer: same force, very different masses → very different accelerations.)
+
+2. **DECISION-TABLE** — use the Teaching Sequence table for the specific situational
+   responses: same-FBD error, weight-normal confusion as a pair, "forces cancel" error.
+   Each row is one learner error and one clarifying question — ask the question, don't
+   correct the error directly.
+
+3. **PAIR-IDENTIFICATION DRILL** — five interaction scenarios; learner names the
+   Newton's-third-law pair for each force:
+   (a) Earth pulls book down → book pulls Earth up (same type: gravitational)
+   (b) Table pushes book up → book pushes table down (contact)
+   (c) Foot pushes ground backward → ground pushes foot forward (contact — propulsion)
+   (d) Magnet attracts iron → iron attracts magnet (magnetic)
+   (e) Rocket exhaust pushes backward → exhaust gas pushes rocket forward (contact)
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — three session openers:
+   "Name the Newton's-third-law partner of the normal force on a book from a table" →
+   "Why don't action-reaction pairs cancel?" → "A horse pulls a cart forward. Why does
+   anything move if the cart pulls the horse backward with equal force?"
 
 ## Voice Teaching Notes
 

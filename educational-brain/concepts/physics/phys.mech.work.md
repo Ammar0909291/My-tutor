@@ -153,7 +153,29 @@ The ramp discovery reveals that machines change the force-distance trade-off but
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **PREDICTION-BEFORE-DEMO** — before the definition: "You hold a heavy box perfectly
+   still for one minute. In physics, have you done any work?" Most learners say yes
+   (everyday usage of "work"). Correct: no work (no displacement). "You slide the box
+   sideways on a frictionless floor. The weight of the box acts downward. Does gravity
+   do work on the box?" (No — force perpendicular to displacement.) These two surprises
+   motivate the technical definition.
+
+2. **WORKED-EXAMPLE** — three W = F·d·cos(θ) traces:
+   (a) F parallel to d: W = Fd (θ = 0°, cos θ = 1) — maximum work
+   (b) F perpendicular to d: W = 0 (θ = 90°) — normal force on horizontal motion
+   (c) F at 60° to d: W = Fd·cos(60°) = Fd/2 — partial work
+   After each: "what is the direction of motion and the direction of force?"
+
+3. **ENERGY-WORK THEOREM** — derive W_net = ΔKE from Newton's second law and kinematics
+   (v² = u² + 2as → ½mv² − ½mu² = Fs = W). The learner sees the theorem as a
+   consequence, not a separate rule to memorise.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — three session openers:
+   "A force of 20 N at 30° to the horizontal pushes a box 5 m. Compute the work done." →
+   "Does a book resting on a table do work? Does the table do work on the book?" → "A
+   moving car brakes to a stop. Where did its kinetic energy go?"
 
 ## Voice Teaching Notes
 

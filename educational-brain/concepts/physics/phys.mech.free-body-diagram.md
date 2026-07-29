@@ -148,7 +148,31 @@ The contrast with the full-scene chaos motivates the need for isolation.
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **WORKED-EXAMPLE** — draw an FBD for a resting book on a flat table, step by step:
+   (a) draw the object as a dot; (b) name every object touching it or exerting a field
+   force on it (table, Earth); (c) draw one arrow per force, label with agent and type
+   (F_gravity from Earth, downward; F_N from table, upward); (d) check: does any force
+   lack a real agent? Remove it if so. The "agent check" is the quality gate — the most
+   common error is drawing a "force of motion" with no agent.
+
+2. **DECISION-TABLE** — use the full situational dispatch table in the Teaching Sequence
+   above as the lesson plan. Each row is one tutor turn: learner makes an FBD error,
+   tutor asks the question in the right column. The question — not a correction — is
+   the action every time. The learner must repair their own FBD.
+
+3. **PROGRESSIVE-COMPLEXITY** — sequence of FBD tasks in order:
+   (a) Book on table (2 forces, vertical equilibrium)
+   (b) Book on ramp (3 forces: gravity, normal perpendicular to surface, friction down-ramp)
+   (c) Hanging box on two cables at angles (3 forces, equilibrium)
+   (d) Atwood machine — TWO separate FBDs, one per mass
+   Stop and address any error before advancing to the next task.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — three session openers:
+   "Draw an FBD for a box sliding up a frictionless ramp" → "What forces act on a car
+   turning left at constant speed?" → "Draw an FBD for two connected masses being pulled
+   by a rope, identify all forces on each mass separately."
 
 ## Voice Teaching Notes
 

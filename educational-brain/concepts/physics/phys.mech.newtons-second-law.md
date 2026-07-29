@@ -180,7 +180,27 @@ Learners sometimes reason: "If I push with 20 N and friction is 8 N, the 20 N is
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **FBD-GATE** — never accept ΣF = ma with a named "F" that hasn't come from an FBD.
+   Every problem starts with a complete FBD; the net force is the vector sum of all
+   forces on that diagram. If the learner writes "F = ma" with F = applied force,
+   redirect: "Draw the FBD. What are ALL forces? Sum them. That sum is ΣF."
+
+2. **DECISION-TABLE** — use the Teaching Sequence table above for the specific
+   situational responses: wrong force type, a-vs-v confusion, weight-mass conflation,
+   two-body problems. Each situation has a specific question to ask, not a lecture to give.
+
+3. **GRAPH-INTERPRETATION** — velocity-time graph analysis: present a v-t graph with
+   positive v and negative slope. Ask: "Is the object moving forward or backward?"
+   (forward). "Is it accelerating forward or backward?" (backward — negative slope).
+   "Draw the FBD. Where does the backward force come from?" This resolves the
+   a-and-v-in-same-direction misconception (M2) without stating it.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — three session openers:
+   "A 5 kg block is pushed at 10 N with 3 N friction — what is its acceleration?" →
+   "What is the direction of acceleration of a car braking from 30 m/s?" → "Draw a
+   velocity-time graph of an object with constant positive acceleration."
 
 ## Voice Teaching Notes
 

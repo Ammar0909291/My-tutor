@@ -20,11 +20,6 @@
   problem involving direction changes.
 - **Difficulty**: foundational · **Bloom**: remember · **Mastery threshold**: 0.70 ·
   **Est. hours**: 2 · **References**: NCERT Physics Class 9 Ch. 8
-     (including direction), and distance as the total scalar path length.
-2. Correctly compute both displacement and distance for a described motion path.
-3. Identify scenarios where displacement and distance are equal (straight-line
-     motion in one direction) and where they differ (any change of direction).
-4. State that displacement can be zero even when distance is not (return to start).
 
 ## Learning Objective
 
@@ -215,7 +210,29 @@ From the dispatch library (Delivery 2 §6):
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **GUIDED-DISCOVERY** — round-trip problem: learner walks forward 10 m, then
+   back 10 m. "How far did you walk?" (20 m — distance). "Where are you now
+   compared to where you started?" (back at start = 0 m — displacement). The
+   distinction must emerge from the learner's own answer to these two questions.
+   Do NOT define displacement first.
+
+2. **CONTRAST-CASES** — present every journey as a distance/displacement pair:
+   walk to school (distance = 1.2 km, displacement = 800 m NE); car lap of a
+   circuit (distance = 4 km, displacement = 0). Never state distance alone after
+   this concept — always ask "and the displacement?"
+
+3. **ERROR-ANALYSIS** — present a student's answer: "A person walks 3 km east
+   and 4 km north. The displacement is 3 + 4 = 7 km." Find the two errors:
+   (1) displacement is a vector, not a scalar sum (Pythagoras: 5 km); (2) direction
+   is missing. Both errors must be named, not just one corrected.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — three session openers:
+   "What is the displacement of a round-trip of 5 km?" → "A car drives 3 km east
+   then 4 km north — state the displacement including direction" → "In what situation
+   are distance and displacement equal?"
+
 
 ## Voice Teaching Notes
 

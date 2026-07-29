@@ -157,7 +157,28 @@ The pattern recognition approach builds genuine ownership of the conservation pr
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **WORKED-EXAMPLE** — elastic and inelastic collision traces, one each:
+   (a) Elastic (billiard ball hits identical ball at rest): before: p_total = mv, 0;
+   after: 0, mv — momentum and KE both conserved; show both conservation equations.
+   (b) Perfectly inelastic (two balls stick together): before: p_total = m₁v₁ + m₂v₂;
+   after: (m₁+m₂)v_f — momentum conserved; compute KE before and after and show
+   KE_after < KE_before. Ask: "Is this a violation of energy conservation?" (No — KE
+   converts to heat/deformation.) This prevents the "collisions violate energy" error.
+
+2. **PREDICTION-BEFORE-DEMO** — truck-vs-ball explosion: two objects at rest, spring
+   releases. "A 10 kg cart and a 1 kg ball are pushed apart by a spring. Which moves
+   faster after?" Wait for prediction. Then: v_cart/v_ball = 1/10. "Which has more
+   momentum?" Wait. "The same — they must: total momentum was zero before."
+
+3. **IMPULSE-FORCE WORKED EXAMPLE** — why air bags save lives: F × Δt = Δp. Same Δp
+   (car stops). Longer Δt (airbag) → smaller F on driver. Show numbers.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — three session openers:
+   "What is the difference between elastic and inelastic collisions?" → "A 3 kg ball at
+   4 m/s east hits a 1 kg ball at rest. They stick. Find the final velocity." → "A
+   1000 N force acts for 0.02 s. What impulse does it deliver?"
 
 ## Voice Teaching Notes
 

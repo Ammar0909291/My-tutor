@@ -20,14 +20,6 @@
   problem requires these equations.
 - **Difficulty**: developing · **Bloom**: apply · **Mastery threshold**: 0.80 ·
   **Est. hours**: 4 · **References**: NCERT Physics Class 11 Ch. 3
-     which variables appear in each (to enable choosing the right equation).
-2. Solve for any one unknown given the other three kinematic quantities (u, v,
-     a, s, t) using the appropriate equation.
-3. Set up a sign convention for a given problem and apply it consistently —
-     choosing positive and negative directions and treating all signed quantities
-     accordingly.
-4. Apply the equations to free-fall problems (a = ±g = ±9.8 m/s²), including
-     objects thrown upward.
 
 ## Learning Objective
 
@@ -39,14 +31,6 @@ predict the future state
   problem requires these equations.
 - **Difficulty**: developing · **Bloom**: apply · **Mastery threshold**: 0.80 ·
   **Est. hours**: 4 · **References**: NCERT Physics Class 11 Ch. 3
-     which variables appear in each (to enable choosing the right equation).
-2. Solve for any one unknown given the other three kinematic quantities (u, v,
-     a, s, t) using the appropriate equation.
-3. Set up a sign convention for a given problem and apply it consistently —
-     choosing positive and negative directions and treating all signed quantities
-     accordingly.
-4. Apply the equations to free-fall problems (a = ±g = ±9.8 m/s²), including
-     objects thrown upward.
 
 ## Core Understanding
 
@@ -232,7 +216,32 @@ From the dispatch library (Delivery 2 §6):
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **GUIDED-DISCOVERY** — derive v = u + at from the definition of acceleration
+   (a = Δv/t), then s = ut + ½at² from the area under a v-t graph. Learner
+   derives the equations rather than receiving them. This converts the equations
+   from arbitrary formulae to logical consequences — and means the learner can
+   re-derive them if they forget.
+
+2. **WORKED-EXAMPLE** — three problems with explicit equation-selection:
+   (a) Given u, a, t; find v and s → choose v = u + at and s = ut + ½at²
+   (b) Given u, v, s; find a → choose v² = u² + 2as (no time needed)
+   (c) Vertical: ball thrown up at 20 m/s, g = −10 m/s²; find max height and total
+   air time. State the sign convention before computing; label positive direction.
+   Equation-selection algorithm must be named explicitly at each step.
+
+3. **ERROR-ANALYSIS** — present three common errors one at a time:
+   (a) Sign error: "a ball decelerates at 5 m/s²" written as a = +5 → correct to
+   a = −5 if taking up as positive and ball moving upward. Ask learner to find error.
+   (b) Peak error: using t = total air time to find max height instead of t = ½ air time.
+   (c) Using wrong equation because one variable is overlooked.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — three session openers:
+   "A car accelerates from rest at 3 m/s² for 5 s — find its final speed and
+   distance covered" → "Derive s = ut + ½at² from first principles" → "Which equation
+   do you use if time is unknown?"
+
 
 ## Voice Teaching Notes
 

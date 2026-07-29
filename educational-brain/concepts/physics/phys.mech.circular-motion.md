@@ -144,7 +144,29 @@ Cut a curved section of ramp banked at angle θ. Roll marbles at different speed
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **PREDICTION-BEFORE-DEMO** — swing a ball on a string in a circle. Before releasing:
+   "If I let go now, which way will the ball fly?" Most learners say outward (centrifugal
+   intuition, M1). After release: the ball flies tangentially, not outward. Ask: "Which
+   direction was it moving just before I let go?" The tangential direction is the answer.
+   The conflict between prediction and observation creates the need for the concept.
+
+2. **WORKED-EXAMPLE** — one fully worked centripetal-force problem with all forces
+   identified: a car on a flat circular road. FBD: weight (down), normal (up), friction
+   (horizontal, toward centre). Net force = friction = mv²/r. Ask: "What happens if the
+   speed increases beyond what static friction can provide?" This connects to banking-angle
+   problems (upcoming) organically.
+
+3. **MISCONCEPTION-PROBE** — present: "A ball on a string is swinging in a vertical
+   circle. At the top, what forces act on the ball and what is the centripetal force?"
+   Watch for the "centrifugal force" label on the FBD (M1). Require the learner to name
+   the real agent of every force drawn.
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — three session openers:
+   "What is centripetal acceleration? Which direction does it point?" → "A 2 kg ball
+   moves at 3 m/s in a 0.5 m radius circle — find the centripetal force" → "What
+   provides the centripetal force for a car turning on a flat dry road?"
 
 ## Voice Teaching Notes
 

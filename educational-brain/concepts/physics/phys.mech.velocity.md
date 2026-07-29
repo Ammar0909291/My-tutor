@@ -18,12 +18,6 @@
   deceleration (negative acceleration with the direction of motion).
 - **Difficulty**: foundational · **Bloom**: understand · **Mastery threshold**: 0.70 ·
   **Est. hours**: 2 · **References**: NCERT Physics Class 9 Ch. 8
-     total displacement/total time, and explain why they differ when direction
-     changes.
-2. Compute average speed and average velocity from a described motion.
-3. Explain what instantaneous velocity means (rate of change of position at a
-     single instant) and how it differs from average velocity over a time interval.
-4. Use the sign of velocity to indicate direction in a chosen coordinate system.
 
 ## Learning Objective
 
@@ -39,12 +33,6 @@ not understand why speed (distance/time) and
   deceleration (negative acceleration with the direction of motion).
 - **Difficulty**: foundational · **Bloom**: understand · **Mastery threshold**: 0.70 ·
   **Est. hours**: 2 · **References**: NCERT Physics Class 9 Ch. 8
-     total displacement/total time, and explain why they differ when direction
-     changes.
-2. Compute average speed and average velocity from a described motion.
-3. Explain what instantaneous velocity means (rate of change of position at a
-     single instant) and how it differs from average velocity over a time interval.
-4. Use the sign of velocity to indicate direction in a chosen coordinate system.
 
 ## Core Understanding
 
@@ -224,7 +212,28 @@ From the dispatch library (Delivery 2 §6):
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. The specific actions for this concept are detailed in the Teaching Sequence above. Priority dispatch: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets misconceptions listed), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). See Blueprint §4 Conceptual Development Sequence for the full TA-by-TA script and decision rules.
+Priority dispatch (in order):
+
+1. **ERROR-ANALYSIS** — round-trip collision first (before any definition): "A car
+   drives 100 km to a city and 100 km back in 2 hours total. What is its average
+   speed? What is its average velocity?" Most learners say "100 km/h" for both.
+   Correct: average speed = 100 km/h; average velocity = 0 km/h (net displacement = 0).
+   The cognitive conflict creates the need for the distinction.
+
+2. **GRAPH-INTERPRETATION** — position vs. time graph alongside the formula:
+   constant positive slope = constant positive velocity; zero slope = at rest;
+   negative slope = moving backward. The graph and the formula encode the same thing.
+   Never teach one without the other.
+
+3. **CONTRAST-CASES** — speed/velocity pairs for every example:
+   "The car travels at 60 km/h north — speed is 60 km/h, velocity is 60 km/h north."
+   "The car is going in circles at 60 km/h — speed is 60 km/h, velocity is changing."
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — three session openers:
+   "A car completes a 200 m circular track in 10 s — what is its average speed?
+   What is its average velocity?" → "What does the slope of a position-time graph
+   represent?" → "Can velocity be zero when speed is not? Give an example."
+
 
 ## Voice Teaching Notes
 

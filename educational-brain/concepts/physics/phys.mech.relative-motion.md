@@ -149,7 +149,29 @@ A plane aims due north at 250 km/h airspeed. Wind blows east at 50 km/h. Ground 
 
 ## Tutor Actions
 
-See `../teaching-actions/` dispatch library. Priority dispatch for this concept: **WORKED-EXAMPLE** (makes the mechanism concrete), **ERROR-ANALYSIS** (targets the misconceptions listed above), and **RETRIEVAL-SCHEDULE-PROMPT** (opens every returning session). Blueprint §4 Conceptual Development Sequence provides the full TA-by-TA script and student-state decision rules.
+Priority dispatch (in order):
+
+1. **CONCRETE-THEN-ABSTRACT** — walking on a train first: you walk at 2 m/s toward
+   the front of a train moving at 30 m/s. Your velocity relative to the ground:
+   32 m/s. Your velocity relative to the train: 2 m/s. Write both. "The same motion,
+   two different numbers — neither is wrong; both are relative to a stated reference."
+
+2. **WORKED-EXAMPLE** — three reference-frame problems:
+   (a) Walking on train (1D, same direction, then opposite)
+   (b) Boat crossing river with current (2D — vector addition)
+   (c) Airplane with crosswind — find ground speed and actual direction
+   State the reference frame explicitly before each computation.
+
+3. **MISCONCEPTION-PROBE** — "Is there a preferred reference frame in which velocities
+   are 'really' correct?" Most learners say "the ground frame." Correct: no preferred
+   frame in classical mechanics. The ground frame is convenient; the train frame is
+   equally valid. This prevents M1 (absolute-velocity belief).
+
+4. **RETRIEVAL-SCHEDULE-PROMPT** — three session openers:
+   "A train moves east at 20 m/s. A passenger walks west at 3 m/s. What is their
+   velocity relative to the ground?" → "A boat moves at 5 m/s north across a river
+   with a 3 m/s east current — find ground velocity" → "What does 'reference frame'
+   mean?"
 
 ## Voice Teaching Notes
 
