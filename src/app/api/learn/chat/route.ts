@@ -402,6 +402,14 @@ export async function POST(req: Request) {
         lessonCtx?.lessonTitle ?? null,
         false,
       )
+      // B/C/E — Visual Quality Guard: capability awareness, educational labels,
+      // and concept-specific constraints (e.g. quantum numbers).
+      const { buildVisualCapabilityBlock, buildQuantumNumbersConstraints, getEducationalLabels } = await import('@/lib/teaching/visualQualityGuard')
+      const conceptIdForVisual = libraryConceptNodeIdHoisted ?? null
+      systemPrompt += buildVisualCapabilityBlock(availableVisual, conceptIdForVisual)
+      systemPrompt += buildQuantumNumbersConstraints(conceptIdForVisual)
+      const eduLabels = getEducationalLabels(conceptIdForVisual)
+      if (eduLabels) systemPrompt += `\nEDUCATIONAL NOTATION: ${eduLabels}`
     } catch (err) {
       console.warn('[learn/chat] library visual aids context skipped:', err)
     }
@@ -1670,6 +1678,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             lessonCtx?.lessonTitle ?? null,
             visualAlreadyShown,
           )
+          // B/C/E — Visual Quality Guard: capability awareness, educational
+          // labels, quantum numbers constraints for conversation-state path.
+          try {
+            const { buildVisualCapabilityBlock, buildQuantumNumbersConstraints, getEducationalLabels } = await import('@/lib/teaching/visualQualityGuard')
+            systemPrompt += buildVisualCapabilityBlock(availableVisual, convConceptId)
+            systemPrompt += buildQuantumNumbersConstraints(convConceptId)
+            const eduLabels = getEducationalLabels(convConceptId)
+            if (eduLabels) systemPrompt += `\nEDUCATIONAL NOTATION: ${eduLabels}`
+          } catch { /* non-fatal */ }
           // Bugs 5/6/7 — explicit learner requests are detected in code and
           // dispatched as forced TeachingActions, injected AFTER the turn
           // directive so they override the phase's default move. A diagram
@@ -2444,6 +2461,30 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           forceVisualRenderHoisted || forceForPromise,
           availableVisualHoisted as import('@/lib/school/visuals/visualTypes').VisualType | null,
         )
+      }
+
+      // B.8-14, C.15-23, D.24-30 — Visual Quality Guard (post-LLM):
+      // suppress visuals that fail relevance, misconception risk, or
+      // narration sync checks. Non-fatal, never blocks the response.
+      if (responseVisual && !forceVisualRenderHoisted) {
+        try {
+          const { runVisualQualityGuard } = await import('@/lib/teaching/visualQualityGuard')
+          const { hasVisualBeenShown } = await import('@/lib/teaching/visualIntelligence')
+          const recentVisuals = learnSession.messages
+            .filter((m) => m.role === MessageRole.ASSISTANT)
+            .slice(0, 5)
+            .map((m) => (m as any).visual ?? null)
+          const conceptIdForGuard = libraryConceptNodeIdHoisted ?? conversationStateHoisted?.conceptId ?? null
+          const vqResult = runVisualQualityGuard({
+            responseText: cleanText,
+            visualType: responseVisual,
+            conceptId: conceptIdForGuard,
+            isRepeat: hasVisualBeenShown(responseVisual as any, recentVisuals),
+          })
+          if (vqResult.suppressVisual) {
+            responseVisual = null
+          }
+        } catch { /* non-fatal */ }
       }
 
       // Sprint W gap A: extract the [HINT] tag's text (if the model emitted
