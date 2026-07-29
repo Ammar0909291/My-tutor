@@ -32,7 +32,16 @@ After this concept, the learner can:
 
 ## Core Understanding
 
-_Significant figures indicate the precision of a measurement by specifying which digits are meaningful._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+Your calculator does not know where your data came from. When you multiply 2.3 × 4.57 and it displays 10.511, it is treating both numbers as if they were exact mathematical quantities. But 2.3 was measured with a ruler: it could be anywhere from 2.25 to 2.35. That uncertainty in the FIRST number already makes the fourth decimal place of the answer completely meaningless. Reporting 10.511 is a lie — you are claiming precision that was never in your data.
+
+Significant figures are the convention physicists use to stop this. Every digit you keep beyond the legitimate ones is a false claim of precision. Every digit you drop below the legitimate ones throws away real information. The rules define the exact boundary.
+
+There are TWO different rules for TWO different operations — and this is not arbitrary:
+
+- **Addition and subtraction**: use decimal places (absolute precision). Your answer cannot be more precisely PLACED than your least precisely placed input. Adding 12.3 + 0.056 gives 12.4 — not 12.356 — because the absolute uncertainty of 12.3 (±0.05) swamps the precision of 0.056.
+- **Multiplication and division**: use significant figures (relative precision). Your answer cannot be more precisely DETERMINED than your least precisely measured input. Multiplying 2.3 × 4.57 gives 11 — not 10.511 — because 2.3 has only 2 significant figures.
+
+Two operations, two rules, one principle: do not invent precision that your measurements do not contain.
 
 ## Mental Models
 
@@ -384,3 +393,4 @@ become automatic only through practice across many subsequent topics.
 ## Version History
 
 - **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.
+- **v1.1** (2026-07-29): Teaching quality upgrade. Core Understanding rewritten — "calculator doesn't know your data" framing; false precision as a lie, not a technicality; explicit distinction between the addition rule (decimal places = absolute precision) and the multiplication rule (sig figs = relative precision) with example and reason for each.

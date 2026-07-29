@@ -32,7 +32,15 @@ After this concept, the learner can:
 
 ## Core Understanding
 
-_Unit conversion uses multiplicative factors or SI prefixes to express quantities in different units._ This concept is the physical model learners must hold — not just a formula to apply — before related downstream concepts can be correctly understood and transferred.
+Unit conversion is not arithmetic — it is substitution. When you write:
+
+**72 km/h × (1000 m / 1 km) × (1 h / 3600 s) = 20 m/s**
+
+you are substituting equivalent expressions for each unit. "1000 m" and "1 km" are the same thing — so the fraction (1000 m / 1 km) equals exactly 1. Multiplying by 1 does not change the physical quantity; it changes only which counting unit you are using to express it. The old units cancel algebraically — exactly like cancelling factors in a fraction.
+
+The direction of the conversion is determined entirely by which unit appears in the denominator of the conversion fraction — not by memorisation, not by rule of thumb. Write the fraction with the unit you want to REMOVE in the denominator, and the new unit appears automatically. This one method handles every unit conversion you will ever encounter: single units, compound units (km/h), squared units (m²), cubed units (m³). Only the number of fractions changes.
+
+One non-obvious consequence: converting squared units requires squaring the conversion factor. 1 m = 100 cm, but 1 m² = 10,000 cm² (= 100²). If this surprises you, write it out: 1 m² = (1 m)² = (100 cm)² = 10,000 cm². Learners who don't see this will make consistent errors in area and volume problems throughout the curriculum.
 
 ## Mental Models
 
@@ -357,3 +365,4 @@ its downstream impact is as broad as any concept in the curriculum. The
 ## Version History
 
 - **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.
+- **v1.1** (2026-07-29): Teaching quality upgrade. Core Understanding rewritten — "substitution, not arithmetic" framing; conversion fraction method explained as the one generating rule; squared-unit surprise (1 m² = 10,000 cm²) called out explicitly as a non-obvious consequence.
