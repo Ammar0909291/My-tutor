@@ -9,6 +9,7 @@
  * Pure. No I/O.
  */
 import type { VerifierContext } from '@/lib/kernel/verifier'
+import type { TurnHistory } from '@/lib/kernel/verifier/history'
 
 export interface BuildContextInput {
   // Learner / register
@@ -49,6 +50,13 @@ export interface BuildContextInput {
   bannedConceptTerms: string[]
   /** Capability ids in a NO state — feeds V-CAP. */
   noCapabilities?: string[]
+  /** S1 — recent-turn ring buffer for the V-DUP-x / V-OSCILLATE rules.
+   *  Omitted ⇒ those rules are no-ops (additive; see history.ts). */
+  turnHistory?: TurnHistory
+  /** S1 — the recovery key active this turn (feeds V-REC-REPEAT). */
+  recoveryKey?: string | null
+  /** S1 — the phase this turn is expected to land on (feeds V-OSCILLATE). */
+  phaseAfter?: string | null
 }
 
 /** The pre-K7 floor, kept ONLY as the fallback for callers without machine
@@ -83,5 +91,8 @@ export function buildVerifierContext(input: BuildContextInput): VerifierContext 
     noCapabilities: input.noCapabilities ?? [],
     learnerText: input.learnerText,
     legalTags: input.legalTags,
+    turnHistory: input.turnHistory,
+    recoveryKey: input.recoveryKey,
+    phaseAfter: input.phaseAfter,
   }
 }

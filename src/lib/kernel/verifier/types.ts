@@ -36,6 +36,16 @@ export const RULE_CODES = [
   'V-PRAISE',   // banned praise/mockery for current affect band
   'V-REACT',    // (LOG-only in v1) REACT mandated but missing
   'V-CLOSE',    // CLOSE move introduces new content (RS I-14)
+  // S1 (Runtime Redesign Mission, Part 3/4) — history-aware rules. All LOG
+  // severity for now: thresholds are unvalidated against real traffic, and
+  // this codebase's own promotion discipline (eos-runtime/flags.ts) is
+  // "measure in LOG before ENFORCE, never guess a threshold straight to
+  // enforcement." See kernel/verifier/history.ts for the detectors.
+  'V-DUP-EXACT',    // draft is byte-identical (normalized) to a recent turn
+  'V-DUP-NEAR',     // draft is near-duplicate of the immediately previous turn
+  'V-DUP-QUESTION', // draft asks a near-duplicate question of a recent one
+  'V-REC-REPEAT',   // recovery turn near-duplicates an earlier rung's script
+  'V-OSCILLATE',    // phase sequence shows an A→B→A→B cycle
 ] as const
 
 export type RuleCode = (typeof RULE_CODES)[number]
@@ -61,6 +71,13 @@ export const SEVERITY: Record<RuleCode, Severity> = {
   'V-PRAISE':    'REJECT',
   'V-REACT':     'LOG',
   'V-CLOSE':     'REJECT',
+  // S1 — LOG only until real-traffic false-positive rates are measured
+  // (design report §S7: "never flip all at once").
+  'V-DUP-EXACT':    'LOG',
+  'V-DUP-NEAR':     'LOG',
+  'V-DUP-QUESTION': 'LOG',
+  'V-REC-REPEAT':   'LOG',
+  'V-OSCILLATE':    'LOG',
 }
 
 export interface Violation {
@@ -112,6 +129,18 @@ export interface VerifierContext {
   learnerText: string
   /** Legal single-line tags for this turn (V-TAG whitelist). */
   legalTags: string[]
+  /** S1 — recent-turn history for the V-DUP-x / V-OSCILLATE rules. Optional:
+   *  undefined ⇒ those rules are no-ops (a caller that hasn't wired history
+   *  yet gets the exact same behavior as before this addition — additive
+   *  by construction, matching this module's own convention for noCapabilities). */
+  turnHistory?: import('./history').TurnHistory
+  /** The recovery key active on THIS turn (null if none) — feeds
+   *  V-REC-REPEAT. Independent of `move === 'RECOVER'` because a caller may
+   *  know the key before mapping it to a PolicyMove. */
+  recoveryKey?: string | null
+  /** The phase this turn is expected to land on (legacy 6-phase name) —
+   *  feeds V-OSCILLATE. */
+  phaseAfter?: string | null
 }
 
 /** The verifier's output. Consumers apply the rejection protocol below. */

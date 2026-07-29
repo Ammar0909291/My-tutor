@@ -112,6 +112,12 @@ export async function POST(req: Request) {
       ? snapshot.pendingPlacementProbe
       : null
     const snapshotLastPrereqGap = typeof snapshot?.lastPrerequisiteGap === 'string' ? snapshot.lastPrerequisiteGap : null
+    // S1 (Runtime Redesign Mission Part 4): the turn-history ring buffer
+    // feeding V-DUP-EXACT/V-DUP-NEAR/V-DUP-QUESTION/V-REC-REPEAT/V-OSCILLATE.
+    // Rides the same contextSnapshot persist as every other counter here —
+    // no new store, no migration.
+    const { readTurnHistory: readTurnHistoryShared } = await import('@/lib/kernel/verifier/history')
+    const snapshotTurnHistory = readTurnHistoryShared(snapshot?.turnHistory)
     // P1: cumulative failure counter — incremented on recovery turns and false SIGNALs
     const snapshotSessionFailureCount = typeof snapshot?.sessionFailureCount === 'number' ? snapshot.sessionFailureCount : 0
     // Loop 2: narrative tracker state — hookDelivered/coreTaught/hookResolved
@@ -1334,6 +1340,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     let masteryGatePendingHoisted = false
     let learnerRequestHoisted: import('@/lib/teaching/masteryGate').LearnerRequest | null = null
     let conversationStateAfterTurnHoisted: import('@/lib/teaching/conversationState').ConversationState | null = null
+    // S1 — this turn's appended entry into the history ring (V-DUP-*/
+    // V-OSCILLATE rules' persisted state), merged into the final snapshot
+    // delta alongside conversationStateUpdate below.
+    let turnHistoryUpdateHoisted: Record<string, unknown> | null = null
     // Loop 2: narrative arc tracking — gates lesson completion on core-taught milestone
     let narrativeStateHoisted: import('@/lib/teaching/narrativeTracker').NarrativeState | null = null
     let masteryCompletionSuppressedHoisted = false
@@ -2569,6 +2579,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               noCapabilities: capabilityStateHoisted
                 ? (await import('@/lib/teaching/capabilityModel')).noCapabilities(capabilityStateHoisted)
                 : [],
+              // S1 — history-aware LOG rules (additive; no behavior change
+              // until these are promoted to REJECT per the design report).
+              turnHistory: snapshotTurnHistory,
+              recoveryKey: recoveryKeyHoisted,
+              phaseAfter: conversationStateHoisted?.phase ?? null,
             })
             const gate = await verifierGate({
               draftText: cleanText,
@@ -2634,6 +2649,26 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           console.warn('[learn/chat] EOS verifier gate skipped:', err)
         }
       }
+
+      // S1 — append this turn to the history ring, unconditionally (not
+      // gated on eosFlags.outputVerifier): the ring must accumulate whether
+      // or not any consumer is currently enabled, matching this route's own
+      // K7 frustration convention above, or the ring would be stale on the
+      // day the V-DUP-*/V-OSCILLATE rules are promoted to REJECT.
+      try {
+        const { buildTurnRecord, appendTurn, serializeTurnHistory } = await import('@/lib/kernel/verifier/history')
+        const { repliesWithQuestion: repliesWithQuestionForHistory } = await import('@/lib/teaching/conversationState')
+        const record = buildTurnRecord(cleanText, {
+          askedQuestion: repliesWithQuestionForHistory(cleanText),
+          recoveryKey: recoveryKeyHoisted,
+          phaseAfter: conversationStateHoisted?.phase ?? null,
+        })
+        turnHistoryUpdateHoisted = { turnHistory: serializeTurnHistory(appendTurn(snapshotTurnHistory, record)) }
+        snapshotRederivers.push((fresh) => {
+          const readFresh = readTurnHistoryShared(fresh.turnHistory)
+          return { turnHistory: serializeTurnHistory(appendTurn(readFresh, record)) }
+        })
+      } catch { /* additive; never break the turn */ }
 
       // ── STANCE ENFORCEMENT / MASTERY GATE (server-authoritative
       // completion, Bugs 1/2/3/12; Claude Recommendation #6) ──
@@ -3488,7 +3523,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
           const narrativeUpdate = narrativeStateHoisted ? { narrativeState: narrativeStateHoisted } : {}
 
-          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0 || Object.keys(narrativeUpdate).length > 0 || teachingStepUpdateHoisted) {
+          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0 || Object.keys(narrativeUpdate).length > 0 || teachingStepUpdateHoisted || turnHistoryUpdateHoisted) {
             // Atomic JSONB merge (same pattern as the school snapshot above).
             const libSnapshotDelta = {
               ...(conceptChanged ? { currentConceptNodeId: newLibConceptId } : {}),
@@ -3498,6 +3533,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               ...failureCountUpdate,
               ...conversationStateUpdate,
               ...narrativeUpdate,
+              ...(turnHistoryUpdateHoisted ?? {}),
               // Option B — Teaching Sequence Executor: persist the runtime-
               // selected step so the next turn (or a resumed session) reads
               // it back via readTeachingStepIndex() instead of restarting.

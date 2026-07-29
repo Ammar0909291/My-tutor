@@ -11,7 +11,9 @@ export {
   RULES, withoutCodeFences, paragraphCount, questionCount,
   stripUnknownTags, vQ1, vQ2, vStage, vVocName, vVocFormula, vVocReg,
   vTerms, vLen, vCap, vRec, vClose, vAssess, vTag, vComplete, vPraise, vReact,
+  vDupExact, vDupNear, vDupQuestion, vRecRepeat, vOscillate,
 } from './rules'
+export * from './history'
 export {
   renderFallback, chooseFallback, templateMove, type FallbackKind, type TemplateContext,
 } from './templateFallback'

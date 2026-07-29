@@ -19,6 +19,11 @@ import {
   IMPERATIVE_TASK_PATTERNS, CONCEPT_TERM_SEED, TECHNICAL_TERM_SEED,
   CLOSE_NEW_CONTENT_PATTERNS,
 } from './lexicons'
+import {
+  normalizeForComparison, detectExactDuplicate, detectNearDuplicate,
+  detectDuplicateQuestion, detectRepeatedRecoveryScript, detectPhaseOscillation,
+  DEFAULT_SIMILARITY_THRESHOLD, type TurnHistory,
+} from './history'
 
 /** Excise ```code``` blocks; scans run on the remainder. Pure. */
 export function withoutCodeFences(text: string): string {
@@ -327,6 +332,98 @@ export function vClose(text: string, ctx: VerifierContext): Violation | null {
   return null
 }
 
+// ── S1 (Runtime Redesign Mission Parts 3/4) — history-aware rules ──────────
+//
+// All five read ctx.turnHistory, which is optional: when the caller hasn't
+// wired history yet, ctx.turnHistory is undefined and every rule below
+// returns null immediately — byte-identical to pre-S1 behavior. This is the
+// same additive-optionality convention this file already uses for
+// ctx.noCapabilities (see vCap above).
+//
+// All five are LOG severity (types.ts SEVERITY table) until real-traffic
+// false-positive rates are measured — never REJECT on an unvalidated
+// threshold (design report §S7).
+
+function emptyHistoryGuard(ctx: VerifierContext): TurnHistory | null {
+  return ctx.turnHistory && ctx.turnHistory.turns ? ctx.turnHistory : null
+}
+
+// ── V-DUP-EXACT · byte-identical (normalized) to a recent turn ─────────────
+export function vDupExact(text: string, ctx: VerifierContext): Violation | null {
+  const history = emptyHistoryGuard(ctx)
+  if (!history) return null
+  const normalized = normalizeForComparison(withoutCodeFences(text))
+  const result = detectExactDuplicate(normalized, history)
+  if (result.isDuplicate) {
+    return { code: 'V-DUP-EXACT', severity: 'LOG', matched: normalized.slice(0, 60),
+             detail: `matches turn at ring index ${result.matchedIndex}` }
+  }
+  return null
+}
+
+// ── V-DUP-NEAR · near-duplicate of the immediately previous turn ──────────
+export function vDupNear(text: string, ctx: VerifierContext): Violation | null {
+  const history = emptyHistoryGuard(ctx)
+  if (!history) return null
+  const normalized = normalizeForComparison(withoutCodeFences(text))
+  const tokens = new Set(normalized.split(' ').filter((w) => w.length > 0))
+  const result = detectNearDuplicate(tokens, history, DEFAULT_SIMILARITY_THRESHOLD)
+  if (result.isNearDuplicate) {
+    return { code: 'V-DUP-NEAR', severity: 'LOG',
+             matched: `similarity=${result.maxSimilarity.toFixed(2)}`,
+             detail: `threshold=${DEFAULT_SIMILARITY_THRESHOLD}` }
+  }
+  return null
+}
+
+// ── V-DUP-QUESTION · near-duplicate question of a recent one ──────────────
+export function vDupQuestion(text: string, ctx: VerifierContext): Violation | null {
+  const history = emptyHistoryGuard(ctx)
+  if (!history) return null
+  const askedQuestion = repliesWithQuestion(text)
+  if (!askedQuestion) return null
+  const normalized = normalizeForComparison(withoutCodeFences(text))
+  const tokens = new Set(normalized.split(' ').filter((w) => w.length > 0))
+  const result = detectDuplicateQuestion(tokens, askedQuestion, history, DEFAULT_SIMILARITY_THRESHOLD)
+  if (result.isNearDuplicate) {
+    return { code: 'V-DUP-QUESTION', severity: 'LOG',
+             matched: `similarity=${result.maxSimilarity.toFixed(2)}`,
+             detail: `matches question at ring index ${result.matchedIndex}` }
+  }
+  return null
+}
+
+// ── V-REC-REPEAT · recovery script near-duplicates an earlier rung ────────
+export function vRecRepeat(text: string, ctx: VerifierContext): Violation | null {
+  const history = emptyHistoryGuard(ctx)
+  if (!history) return null
+  const recoveryKey = ctx.recoveryKey ?? null
+  if (!recoveryKey) return null
+  const normalized = normalizeForComparison(withoutCodeFences(text))
+  const tokens = new Set(normalized.split(' ').filter((w) => w.length > 0))
+  const result = detectRepeatedRecoveryScript(tokens, recoveryKey, history, DEFAULT_SIMILARITY_THRESHOLD)
+  if (result.isNearDuplicate) {
+    return { code: 'V-REC-REPEAT', severity: 'LOG',
+             matched: `similarity=${result.maxSimilarity.toFixed(2)}`,
+             detail: `recoveryKey=${recoveryKey} repeats rung at ring index ${result.matchedIndex}` }
+  }
+  return null
+}
+
+// ── V-OSCILLATE · phase sequence shows an A→B→A→B cycle ───────────────────
+export function vOscillate(_text: string, ctx: VerifierContext): Violation | null {
+  const history = emptyHistoryGuard(ctx)
+  if (!history) return null
+  const phaseAfter = ctx.phaseAfter ?? null
+  const result = detectPhaseOscillation(phaseAfter, history)
+  if (result.isOscillating && result.cycle) {
+    return { code: 'V-OSCILLATE', severity: 'LOG',
+             matched: `${result.cycle[0]}↔${result.cycle[1]}`,
+             detail: 'phase sequence oscillated A→B→A→B over the last 4 turns' }
+  }
+  return null
+}
+
 /** Ordered rule set. Authorization gates (V-ASSESS, V-COMPLETE) run
  *  BEFORE V-TAG so an illegally-emitted control tag REJECTS rather
  *  than being quietly stripped. V-TAG then handles all remaining
@@ -338,4 +435,8 @@ export const RULES = [
   vTag,
   vQ1, vQ2, vStage, vVocName, vVocFormula, vVocReg,
   vTerms, vLen, vCap, vRec, vClose, vPraise, vReact,
+  // S1 — history-aware, LOG severity (see block above). Ordered last: none
+  // of them strip or reject, so their position cannot affect any earlier
+  // rule's view of the text.
+  vDupExact, vDupNear, vDupQuestion, vRecRepeat, vOscillate,
 ] as const
