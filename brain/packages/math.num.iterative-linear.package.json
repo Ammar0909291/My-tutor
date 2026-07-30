@@ -1,0 +1,550 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.num.iterative-linear-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.num.iterative-linear",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e8014dde7befbbaaf56b3e6dfaa60c4e72f9d6b130287afc760cd62905dadf28",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.num.iterative-linear.md": "sha256:1363db618b3759d1e9ee6824b2d49a8e3f12f531f0732ae88d67ef456e6c8aa6"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 12,
+      "mastery_probe": 1
+    },
+    "ruleCount": 12
+  },
+  "concept": {
+    "conceptId": "math.num.iterative-linear",
+    "name": "Iterative Methods for Linear Systems",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.linalg.linear-system",
+      "math.num.error-analysis"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.num.iterative-linear-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.num.iterative-linear (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.num.iterative-linear.md": "sha256:1363db618b3759d1e9ee6824b2d49a8e3f12f531f0732ae88d67ef456e6c8aa6"
+      },
+      "contentHash": "sha256:639af6d98f43b05dcc247d0a7bf81f2c1809a810bb147d63ae276ec5e3115a60",
+      "ruleCount": 12,
+      "bandCounts": {
+        "3": 12
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.num.iterative-linear.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.iterative-linear.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.iterative-linear"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.iterative-linear\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.iterative-linear.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.iterative-linear.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.iterative-linear"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.iterative-linear\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.iterative-linear.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.iterative-linear.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.iterative-linear"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.iterative-linear\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.iterative-linear.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.iterative-linear.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.iterative-linear"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.iterative-linear\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.iterative-linear.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.iterative-linear.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.iterative-linear"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.iterative-linear\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.iterative-linear.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.iterative-linear.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.iterative-linear"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.iterative-linear\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.iterative-linear.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.iterative-linear.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.iterative-linear"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.iterative-linear\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.iterative-linear.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.iterative-linear.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.iterative-linear"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.iterative-linear\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.iterative-linear.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.iterative-linear.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.iterative-linear"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.iterative-linear\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.iterative-linear.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.iterative-linear.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.iterative-linear"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.iterative-linear\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.iterative-linear.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.iterative-linear.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.iterative-linear"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.iterative-linear\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.iterative-linear.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.iterative-linear.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.iterative-linear"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.iterative-linear\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.num.iterative-linear/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.num.iterative-linear",
+      "title": "Learning Objective",
+      "content": "Given a large sparse linear system Ax=b, the student applies the Jacobi and Gauss–Seidel iterations, states the convergence condition (spectral radius of the iteration matrix ρ(M)<1), explains why direct methods (LU) are impractical for large sparse systems (fill-in), derives the conjugate gradient method as the optimal Krylov subspace solver for symmetric positive definite A, and selects a preconditioner to accelerate convergence.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.iterative-linear.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.num.iterative-linear/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.num.iterative-linear",
+      "title": "ITERATIVE-ALWAYS-SLOWER",
+      "content": "| MC-1 | ITERATIVE-ALWAYS-SLOWER | Student assumes iterative methods are inferior to direct LU because they converge gradually rather than solving exactly — does not account for fill-in, which makes direct methods O(n³) even on sparse matrices | Type 5 — instruction-induced (LU is taught as the \"proper\" solution method for linear systems; iterative methods are presented as approximations, implying inferiority, without discussing sparsity) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.iterative-linear.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.num.iterative-linear/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.num.iterative-linear",
+      "title": "JACOBI-AND-GS-ALWAYS-CONVERGE",
+      "content": "| MC-2 | JACOBI-AND-GS-ALWAYS-CONVERGE | Student believes Jacobi or Gauss–Seidel always converges to the solution, not realising convergence requires the spectral radius of the iteration matrix to be less than 1 | Type 1 — overgeneralization (convergence examples in textbooks are always chosen with diagonally dominant matrices; students do not check the convergence condition for other matrices and assume the methods always work) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.iterative-linear.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.num.iterative-linear/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.num.iterative-linear",
+      "title": "CG-FOR-ANY-SYSTEM",
+      "content": "| MC-3 | CG-FOR-ANY-SYSTEM | Student applies the Conjugate Gradient method to any linear system, not recognising it requires A to be symmetric positive definite (SPD) — applying CG to a non-SPD system produces divergent iterates | Type 5 — instruction-induced (CG is presented as \"the best iterative method\" without sufficient emphasis on the SPD requirement; students apply it indiscriminately) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.iterative-linear.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.num.iterative-linear/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.iterative-linear",
+      "title": "CORRECT → \"Jacobi: update each xᵢ using old values of all others; GS uses new values immediately. Convergence: ρ(M)<1. Diagonal dominance is sufficient. Iterative methods exploit sparsity that direct LU destroys via fill-in.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Jacobi: update each xᵢ using old values of all others; GS uses new values immediately. Convergence: ρ(M)<1. Diagonal dominance is sufficient. Iterative methods exploit sparsity that direct LU destroys via fill-in.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.iterative-linear.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.num.iterative-linear/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.iterative-linear",
+      "title": "PARTIAL (knows the update formulas but not the convergence condition) → \"The iteration matrix M=D⁻¹(L+U). Each iteration multiplies the error by M: eₖ=Mᵏe₀. This decays to zero iff ρ(M)=max|λᵢ(M)|<1 — the spectral radius. Diagonal dominance (|aᵢᵢ|>Σⱼ≠ᵢ|aᵢⱼ|) guarantees ρ(M)<1 for Jacobi.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (knows the update formulas but not the convergence condition) → \\\"The iteration matrix M=D⁻¹(L+U). Each iteration multiplies the error by M: eₖ=Mᵏe₀. This decays to zero iff ρ(M)=max|λᵢ(M)|<1 — the spectral radius. Diagonal dominance (|aᵢᵢ|>Σⱼ≠ᵢ|aᵢⱼ|) guarantees ρ(M)<1 for Jacobi.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.iterative-linear.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.num.iterative-linear/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.iterative-linear",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.iterative-linear.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.num.iterative-linear/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.iterative-linear",
+      "title": "NO_RESPONSE → \"Solve [[5,1],[1,5]][x₁;x₂]=[6;6] by Jacobi. Start with x=0. After one iteration: x₁=(6−1·0)/5=1.2, x₂=(6−1·0)/5=1.2. True solution: [1,1]. Continue 3 more iterations. Does it converge?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"Solve [[5,1],[1,5]][x₁;x₂]=[6;6] by Jacobi. Start with x=0. After one iteration: x₁=(6−1·0)/5=1.2, x₂=(6−1·0)/5=1.2. True solution: [1,1]. Continue 3 more iterations. Does it converge?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.iterative-linear.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.num.iterative-linear/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.iterative-linear",
+      "title": "CORRECT → \"Jacobi: slow convergence (ρ≈1 for large sparse systems). SOR: 40× faster with optimal ω. CG: optimal for SPD systems, O(√κ) iterations. Preconditioner reduces κ and speeds convergence.\" → A03",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Jacobi: slow convergence (ρ≈1 for large sparse systems). SOR: 40× faster with optimal ω. CG: optimal for SPD systems, O(√κ) iterations. Preconditioner reduces κ and speeds convergence.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.iterative-linear.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.num.iterative-linear/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.iterative-linear",
+      "title": "PARTIAL (understands CG needs SPD but cannot explain why) → \"CG minimises the A-norm of the error ‖eₖ‖_A over the Krylov subspace Kₖ(A,r₀). The A-norm ‖e‖_A=√(eᵀAe) is only a valid norm if A is SPD — that's why CG requires SPD. For non-symmetric A, use GMRES or BiCGSTAB instead.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (understands CG needs SPD but cannot explain why) → \\\"CG minimises the A-norm of the error ‖eₖ‖_A over the Krylov subspace Kₖ(A,r₀). The A-norm ‖e‖_A=√(eᵀAe) is only a valid norm if A is SPD — that's why CG requires SPD. For non-symmetric A, use GMRES or BiCGSTAB instead.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.iterative-linear.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.num.iterative-linear/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.iterative-linear",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.iterative-linear.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.num.iterative-linear/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.iterative-linear",
+      "title": "NO_RESPONSE → \"For a 100×100 grid, the 2D Poisson matrix has N=10,000 unknowns and ρ_Jacobi≈0.999. How many Jacobi iterations are needed to reduce the error by a factor of 1000?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"For a 100×100 grid, the 2D Poisson matrix has N=10,000 unknowns and ρ_Jacobi≈0.999. How many Jacobi iterations are needed to reduce the error by a factor of 1000?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.iterative-linear.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.num.iterative-linear/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.iterative-linear",
+      "title": "CORRECT → \"CG requires A to be SPD. For non-symmetric systems (convection-diffusion, non-self-adjoint PDEs), use GMRES or BiCGSTAB. The choice among iterative methods depends on: symmetry of A, positive-definiteness, cost of matrix–vector product, memory budget.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"CG requires A to be SPD. For non-symmetric systems (convection-diffusion, non-self-adjoint PDEs), use GMRES or BiCGSTAB. The choice among iterative methods depends on: symmetry of A, positive-definiteness, cost of matrix–vector product, memory budget.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.iterative-linear.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.num.iterative-linear/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.iterative-linear",
+      "title": "PARTIAL (knows CG needs SPD but cannot name the alternative) → \"For non-symmetric A, the Krylov subspace methods are GMRES (minimises ‖r‖₂, any non-singular A, full restart needed) and BiCGSTAB (short recurrences, less memory, may be less stable). Both reduce to CG when A is SPD.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (knows CG needs SPD but cannot name the alternative) → \\\"For non-symmetric A, the Krylov subspace methods are GMRES (minimises ‖r‖₂, any non-singular A, full restart needed) and BiCGSTAB (short recurrences, less memory, may be less stable). Both reduce to CG when A is SPD.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.iterative-linear.md",
+        "startLine": 94,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "math.num.iterative-linear/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.iterative-linear",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.iterative-linear.md",
+        "startLine": 95,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "math.num.iterative-linear/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.iterative-linear",
+      "title": "NO_RESPONSE → \"GMRES vs. CG: both build a Krylov subspace Kₖ(A,r₀)=span{r₀,Ar₀,…,Aᵏ⁻¹r₀}. CG minimises ‖eₖ‖_A; GMRES minimises ‖rₖ‖₂. Which additional property of A makes CG's minimisation problem well-defined?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"GMRES vs. CG: both build a Krylov subspace Kₖ(A,r₀)=span{r₀,Ar₀,…,Aᵏ⁻¹r₀}. CG minimises ‖eₖ‖_A; GMRES minimises ‖rₖ‖₂. Which additional property of A makes CG's minimisation problem well-defined?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.iterative-linear.md",
+        "startLine": 96,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "math.num.iterative-linear/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.num.iterative-linear",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Solve [[5,−1,−1],[−1,5,−1],[−1,−1,5]]x=[3,3,3]ᵀ using Jacobi iteration starting at x=0. Perform 5 iterations. Check diagonal dominance. Estimate the convergence rate from the spectral radius.\n2. Apply SOR with ω=1.2 to the system in problem 1. Compare the convergence rate with Jacobi. Compute the optimal ω analytically if the spectral radius of the Jacobi iteration matrix is known.\n3. For A=[[4,1],[1,3]], apply 5 steps of CG starting with x₀=0 and b=[5,4]ᵀ. Verify that the exact solution is found in at most 2 iterations (in exact arithmetic). Confirm A is SPD.\n4. Construct a 3×3 matrix A that is NOT diagonally dominant and show that Jacobi iteration diverges on Ax=b=[1,1,1]ᵀ. Confirm that GMRES converges to the solution in at most 3 steps.\n\n**P55 — Reflect & Consolidate:** \"Jacobi/GS: cheap per step, converges iff ρ(M)<1, slow for large systems. CG: optimal for SPD, O(√κ) iterations. Preconditioning reduces κ. For non-symmetric A: GMRES. Iterative methods are the only option for very large sparse systems (fill-in makes direct methods infeasible).\"\n\n**P76 — Transfer Probe (Independence mode):**\nThe incomplete LU (ILU) preconditioner approximates A≈L̃Ũ where L̃, Ũ are sparse factors (non-zeros only where A has non-zeros). (a) Explain why a preconditioned CG with M=L̃Ũ is equivalent to CG applied to M⁻¹A (an SPD system, if L̃Ũ≈A and A is SPD). (b) Show that the condition number of M⁻¹A is smaller than κ(A) when M is a good approximation to A. (c) For the 2D Poisson equation with N unknowns, estimate the number of PCG iterations with ILU preconditioner vs. unpreconditioned CG. (d) What are the trade-offs between ILU(0) (zero fill-in) and ILU(k) (k levels of fill-in)?\n\n**P55 — Reflect & Consolidate:** \"ILU preconditioning: the approximate factorisation M≈A shifts the spectrum of M⁻¹A close to 1, reducing the effective condition number from κ(A) to κ(M⁻¹A)≪κ(A). Better fill-in (larger k in ILU(k)) gives a better preconditioner but more memory — the classic accuracy-vs-cost trade-off in scientific computing.\"\n\n**P75 — Mastery Assessment:**\n\"A finite-element discretisation of a 3D heat equation produces an N=10⁶ SPD sparse matrix A with average 27 non-zeros per row. (a) Compare the memory requirements of dense LU and ILU-preconditioned CG for this system. (b) If κ(A)=10⁶, estimate the number of unpreconditioned CG iterations for 10⁻⁸ relative residual. (c) With an ILU(0) preconditioner reducing κ to 10², how many PCG iterations are needed? (d) The right-hand side b changes 1000 times (different time steps) but A is the same. Should you refactorize A at each step, or reuse the preconditioner?\"\n\n**P55 — Reflect & Consolidate:** \"For time-dependent PDEs with a fixed spatial operator A and many right-hand sides, the preconditioner M is computed once and reused. Each PCG solve costs O(nnz × κ_P^{1/2}) operations. Factorizing A once vs. iterating multiple times is a trade-off between factorisation cost and iteration cost, depending on the number of time steps.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.num.iterative-linear complete\n- Score 3/5 → REVIEW convergence condition and CG requirements; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.linalg.linear-system or math.num.error-analysis; reassign\n\n**P78 — Completion:** Iterative methods for linear systems certified. Student applies Jacobi, GS, and CG; checks convergence via spectral radius; selects the right method based on symmetry and sparsity; applies preconditioning and compares direct vs. iterative costs.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.iterative-linear.md",
+        "startLine": 109,
+        "endLine": 136
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

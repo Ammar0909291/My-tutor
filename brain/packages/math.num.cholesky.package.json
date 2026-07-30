@@ -1,0 +1,550 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.num.cholesky-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.num.cholesky",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6295f9759a3f31cd6bba38d8dcb4b66ec5f351ec2f64a205eceb57474ba0e46e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.num.cholesky.md": "sha256:8a5f01ca28c3c4b75c4a607d639fb114cad434670f0c1d958ad351560c2563fd"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 12,
+      "mastery_probe": 1
+    },
+    "ruleCount": 12
+  },
+  "concept": {
+    "conceptId": "math.num.cholesky",
+    "name": "Cholesky Factorization",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.linalg.cholesky",
+      "math.num.lu-factorization"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.num.cholesky-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.num.cholesky (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.num.cholesky.md": "sha256:8a5f01ca28c3c4b75c4a607d639fb114cad434670f0c1d958ad351560c2563fd"
+      },
+      "contentHash": "sha256:d5d2fba289f25095a9a6b1b0d3cbcd98b5666922a9df70cf5c80d8923da88db5",
+      "ruleCount": 12,
+      "bandCounts": {
+        "3": 12
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.num.cholesky.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.cholesky.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.cholesky"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.cholesky\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.cholesky.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.cholesky.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.cholesky"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.cholesky\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.cholesky.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.cholesky.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.cholesky"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.cholesky\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.cholesky.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.cholesky.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.cholesky"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.cholesky\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.cholesky.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.cholesky.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.cholesky"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.cholesky\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.cholesky.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.cholesky.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.cholesky"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.cholesky\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.cholesky.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.cholesky.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.cholesky"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.cholesky\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.cholesky.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.cholesky.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.cholesky"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.cholesky\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.cholesky.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.cholesky.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.cholesky"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.cholesky\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.cholesky.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.cholesky.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.cholesky"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.cholesky\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.cholesky.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.cholesky.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.cholesky"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.cholesky\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.cholesky.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.cholesky.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.cholesky"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.cholesky\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.num.cholesky/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.num.cholesky",
+      "title": "Learning Objective",
+      "content": "Given a symmetric positive definite (SPD) matrix A, the student computes the Cholesky factorisation A=LLᵀ by the column-by-column algorithm; explains why SPD is a necessary and sufficient condition for the factorisation to exist without pivoting; counts the exact operation count (≈⅓n³ flops, half of LU); and uses the factorisation to test whether a given matrix is SPD by attempting the factorisation and checking for negative values under the square root.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.cholesky.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.num.cholesky/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.num.cholesky",
+      "title": "CHOLESKY-WORKS-FOR-ANY-SYMMETRIC",
+      "content": "| MC-1 | CHOLESKY-WORKS-FOR-ANY-SYMMETRIC | Student applies Cholesky to a symmetric but indefinite matrix (negative eigenvalues) and does not understand why it fails — encounters a negative number under a square root | Type 1 — overgeneralization (symmetry is necessary; positive-definiteness is also necessary but is the harder condition to visualise; students remember \"symmetric\" and forget \"positive definite\") |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.cholesky.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.num.cholesky/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.num.cholesky",
+      "title": "CHOLESKY-IS-LU-WITH-SYMMETRY",
+      "content": "| MC-2 | CHOLESKY-IS-LU-WITH-SYMMETRY | Student does not understand why Cholesky costs half of LU; believes Cholesky is just LU applied to a symmetric matrix with the same cost | Type 5 — instruction-induced (Cholesky is introduced as a special case of LU for symmetric matrices, which is correct, but the cost saving from exploiting symmetry is often not emphasised numerically) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.cholesky.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.num.cholesky/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.num.cholesky",
+      "title": "POSITIVE-DEFINITE-MEANS-ALL-POSITIVE-ENTRIES",
+      "content": "| MC-3 | POSITIVE-DEFINITE-MEANS-ALL-POSITIVE-ENTRIES | Student believes a matrix is SPD if all its entries are positive — confuses positive entries with positive eigenvalues | Type 3 — language contamination (the word \"positive\" in \"positive definite\" sounds like it describes the entries; the actual definition (xᵀAx>0 for all x≠0) is more abstract) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.cholesky.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.num.cholesky/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.cholesky",
+      "title": "CORRECT → \"Cholesky: A=LLᵀ for SPD A. Cost ⅓n³ (half LU). SPD test: attempt the factorisation; negative sqrt = not SPD.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Cholesky: A=LLᵀ for SPD A. Cost ⅓n³ (half LU). SPD test: attempt the factorisation; negative sqrt = not SPD.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.cholesky.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.num.cholesky/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.cholesky",
+      "title": "PARTIAL (knows the factorisation exists but not why SPD is needed) → \"The diagonal entry L_{jj}=√(a_{jj}−Σ L_{jk}²). If A is not positive definite, the argument can be negative or zero — the square root fails or gives a zero pivot. Positive definiteness is exactly the condition that makes every diagonal entry positive.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (knows the factorisation exists but not why SPD is needed) → \\\"The diagonal entry L_{jj}=√(a_{jj}−Σ L_{jk}²). If A is not positive definite, the argument can be negative or zero — the square root fails or gives a zero pivot. Positive definiteness is exactly the condition that makes every diagonal entry positive.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.cholesky.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.num.cholesky/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.cholesky",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.cholesky.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.num.cholesky/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.cholesky",
+      "title": "NO_RESPONSE → \"Factor A=[[4,2],[2,5]] as LLᵀ. Step 1: L₁₁=√4=2. Step 2: L₂₁=2/2=1. Step 3: L₂₂=√(5−1²)=2. Check: LLᵀ=[[2,0],[1,2]][[2,1],[0,2]]=[[4,2],[2,5]]=A. ✓\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"Factor A=[[4,2],[2,5]] as LLᵀ. Step 1: L₁₁=√4=2. Step 2: L₂₁=2/2=1. Step 3: L₂₂=√(5−1²)=2. Check: LLᵀ=[[2,0],[1,2]][[2,1],[0,2]]=[[4,2],[2,5]]=A. ✓\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.cholesky.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.num.cholesky/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.cholesky",
+      "title": "CORRECT → \"Cholesky is preferred for SPD over LU: 2× cheaper (⅓n³ vs ⅔n³), more stable (amplifies by √κ not κ), no pivoting needed. Cholesky failure diagnoses non-SPD. Modified Cholesky adds a diagonal shift for near-SPD matrices.\" → A03",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Cholesky is preferred for SPD over LU: 2× cheaper (⅓n³ vs ⅔n³), more stable (amplifies by √κ not κ), no pivoting needed. Cholesky failure diagnoses non-SPD. Modified Cholesky adds a diagonal shift for near-SPD matrices.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.cholesky.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.num.cholesky/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.cholesky",
+      "title": "PARTIAL (understands cost but not stability advantage) → \"Cholesky does not pivot (because pivoting would destroy symmetry exploitation). Yet for SPD matrices, Cholesky is backward-stable WITHOUT pivoting. This is because positive definiteness itself controls the growth of the factors: the diagonal entries L_{jj} are bounded by √a_{jj}, so there is no catastrophic amplification.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (understands cost but not stability advantage) → \\\"Cholesky does not pivot (because pivoting would destroy symmetry exploitation). Yet for SPD matrices, Cholesky is backward-stable WITHOUT pivoting. This is because positive definiteness itself controls the growth of the factors: the diagonal entries L_{jj} are bounded by √a_{jj}, so there is no catastrophic amplification.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.cholesky.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.num.cholesky/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.cholesky",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.cholesky.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.num.cholesky/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.cholesky",
+      "title": "NO_RESPONSE → \"How many floating-point multiplications does Cholesky require for n=4? For n=1000? Express as a formula in n.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"How many floating-point multiplications does Cholesky require for n=4? For n=1000? Express as a formula in n.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.cholesky.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.num.cholesky/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.cholesky",
+      "title": "CORRECT → \"SPD does not mean all entries are positive — it means all eigenvalues are positive (or equivalently xᵀAx>0). Cholesky is the fastest way to test SPD: attempt it; if it completes, A is SPD; if it fails (negative sqrt), A is not SPD.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"SPD does not mean all entries are positive — it means all eigenvalues are positive (or equivalently xᵀAx>0). Cholesky is the fastest way to test SPD: attempt it; if it completes, A is SPD; if it fails (negative sqrt), A is not SPD.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.cholesky.md",
+        "startLine": 96,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "math.num.cholesky/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.cholesky",
+      "title": "PARTIAL (correct about Cholesky test but confused about the definition) → \"xᵀAx>0 means: put any non-zero vector x into the quadratic form — the result is always positive. For A=[[2,−3],[−3,5]] and x=[1,0]: xᵀAx=2>0. For x=[1,1]: xᵀAx=2−3−3+5=1>0. For x=[3,2]: xᵀAx=18−36+20=2>0. The negative entries don't prevent positive definiteness when the overall quadratic form stays positive.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (correct about Cholesky test but confused about the definition) → \\\"xᵀAx>0 means: put any non-zero vector x into the quadratic form — the result is always positive. For A=[[2,−3],[−3,5]] and x=[1,0]: xᵀAx=2>0. For x=[1,1]: xᵀAx=2−3−3+5=1>0. For x=[3,2]: xᵀAx=18−36+20=2>0. The negative entries don't prevent positive definiteness when the overall quadratic form stays positive.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.cholesky.md",
+        "startLine": 97,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "math.num.cholesky/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.cholesky",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.cholesky.md",
+        "startLine": 98,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "math.num.cholesky/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.cholesky",
+      "title": "NO_RESPONSE → \"Attempt Cholesky on A=[[1,2],[2,1]]. What happens at L₂₂=√(1−2²)=√(−3)? What does this tell you about whether A is SPD?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"Attempt Cholesky on A=[[1,2],[2,1]]. What happens at L₂₂=√(1−2²)=√(−3)? What does this tell you about whether A is SPD?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.cholesky.md",
+        "startLine": 99,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "math.num.cholesky/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.num.cholesky",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Compute the Cholesky factorisation A=LLᵀ for A=[[9,3,0],[3,5,−1],[0,−1,4]]. Show all steps. Verify LLᵀ=A.\n2. Count the exact number of square roots and multiplications/additions in Cholesky for n=3. Compare with LU for n=3.\n3. Is B=[[2,1,1],[1,2,1],[1,1,2]] positive definite? Use the Cholesky test and independently verify using Sylvester's criterion (check all principal minors).\n4. A student computes the Cholesky factorisation and obtains L₃₃=√(−0.001). They suspect a rounding error. Describe the modified Cholesky approach: what diagonal shift δ makes A+δI SPD, and how do you choose δ?\n\n**P55 — Reflect & Consolidate:** \"Cholesky: A=LLᵀ for SPD A. Algorithm: column by column, √ at each diagonal. Cost: ⅓n³ (2× faster than LU). No pivoting needed. Failure = not SPD. Modified Cholesky adds δI to handle near-indefinite Hessians in optimisation.\"\n\n**P76 — Transfer Probe (Cross-link: math.linalg.cholesky):**\nThe LDLT factorisation A=LDLᵀ (L unit lower triangular, D diagonal) avoids square roots and is used for symmetric indefinite matrices. (a) Derive LDLT from Cholesky by writing L_chol = L_LDLT D^{1/2}. (b) Explain how LDLT with diagonal pivoting (Bunch–Kaufman) extends to symmetric indefinite matrices where some Dᵢᵢ<0. (c) For a symmetric indefinite system arising in a saddle-point problem (KKT conditions), is LDLT preferred over Cholesky? Why? (d) Compare the stability of LDLT (pivoting required) with Cholesky (no pivoting needed for SPD).\n\n**P55 — Reflect & Consolidate:** \"LDLT avoids the square root in Cholesky and extends to symmetric indefinite matrices via Bunch–Kaufman pivoting. SPD: use Cholesky (fastest, most stable). Symmetric indefinite (e.g. KKT systems in optimisation): use LDLT with pivoting. Non-symmetric: use LU with partial pivoting.\"\n\n**P75 — Mastery Assessment:**\n\"A Gaussian process regression model requires solving (K+σ²I)x=y where K is the n×n kernel matrix (SPD, n=2000). (a) What is the preferred factorisation? (b) If σ²=0.001 and K is nearly singular (smallest eigenvalue ≈10⁻⁶), will Cholesky succeed? What happens to numerical accuracy? (c) Increase σ² to 0.01 — how does this affect the condition number and Cholesky stability? (d) After computing the Cholesky factor L, how do you compute log det(K+σ²I) using L (needed for Gaussian process hyperparameter optimisation)?\"\n\n**P55 — Reflect & Consolidate:** \"For Gaussian processes: A=K+σ²I, solve via Cholesky. The nugget σ²I regularises the condition number and ensures positive definiteness. log det(A)=2Σᵢ log Lᵢᵢ — a free by-product of the Cholesky factorisation, vital for marginal likelihood computation.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.num.cholesky complete\n- Score 3/5 → REVIEW SPD definition and cost comparison; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.linalg.cholesky or math.num.lu-factorization; reassign\n\n**P78 — Completion:** Cholesky factorisation certified. Student computes A=LLᵀ, explains the SPD requirement, counts the ⅓n³ cost, uses Cholesky as an SPD test, and applies modified Cholesky for near-indefinite matrices.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.cholesky.md",
+        "startLine": 112,
+        "endLine": 139
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

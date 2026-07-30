@@ -1,0 +1,618 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.num.euler-method-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.num.euler-method",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b0c2aadd0ec23ca0b53c3bfbe248948f05574a39a05b84fd4b17968e8076197e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.num.euler-method.md": "sha256:5fae62b6bded1f692a6ab06f29565fe215617001e484a5c8144b4c069cc9effc"
+    },
+    "assetCount": 19,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 14,
+      "mastery_probe": 1
+    },
+    "ruleCount": 14
+  },
+  "concept": {
+    "conceptId": "math.num.euler-method",
+    "name": "Euler's Method (Numerical ODE)",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.de.euler-method",
+      "math.num.error-analysis"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.num.euler-method-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.num.euler-method (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.num.euler-method.md": "sha256:5fae62b6bded1f692a6ab06f29565fe215617001e484a5c8144b4c069cc9effc"
+      },
+      "contentHash": "sha256:78f6f4e756d491cb13feb9a3f7a07b74a6b560eccb756130707256f0dba56031",
+      "ruleCount": 14,
+      "bandCounts": {
+        "3": 14
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.num.euler-method.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.euler-method.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.euler-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.euler-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.euler-method.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.euler-method.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.euler-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.euler-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.euler-method.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.euler-method.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.euler-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.euler-method\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.euler-method.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.euler-method.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.euler-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.euler-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.euler-method.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.euler-method.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.euler-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.euler-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.euler-method.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.euler-method.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.euler-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.euler-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.euler-method.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.euler-method.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.euler-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.euler-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.euler-method.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.euler-method.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.euler-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.euler-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.euler-method.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.euler-method.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.euler-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.euler-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.euler-method.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.euler-method.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.euler-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.euler-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.euler-method.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.euler-method.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.euler-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.euler-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.euler-method.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.euler-method.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.euler-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.euler-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.euler-method.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.euler-method.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.euler-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.euler-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.euler-method.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.euler-method.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.euler-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.euler-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.num.euler-method/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.num.euler-method",
+      "title": "Learning Objective",
+      "content": "Given an initial value problem y'=f(t,y), y(t₀)=y₀, the student applies the explicit Euler method yₙ₊₁=yₙ+h·f(tₙ,yₙ) to step forward in time; derives the local truncation error O(h²) and global error O(h); compares explicit vs. implicit Euler for stability on stiff equations; explains the concept of the stability region (a method is stable for step size h if h·λ lies in the stability region) and recognises the O(h) vs. O(h²) trade-off of implicit Euler's larger stability region.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.euler-method.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.num.euler-method/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.num.euler-method",
+      "title": "GLOBAL-ERROR-IS-O(h²)",
+      "content": "| MC-1 | GLOBAL-ERROR-IS-O(h²) | Student believes Euler's global error is O(h²) because the local truncation error is O(h²) — confuses local and global error accumulation | Type 3 — language contamination (\"truncation error\" sounds like the total error; the word \"local\" is easily forgotten; students apply the per-step error directly as the total error) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.euler-method.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.num.euler-method/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.num.euler-method",
+      "title": "SMALLER-STEP-ALWAYS-BETTER",
+      "content": "| MC-2 | SMALLER-STEP-ALWAYS-BETTER | Student reduces h without limit to improve accuracy, not recognising that round-off error grows as 1/h as the number of steps increases | Type 5 — instruction-induced (convergence tables always show error decreasing; the optimal step-size trade-off between truncation and round-off error is rarely taught in first courses) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.euler-method.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.num.euler-method/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.num.euler-method",
+      "title": "EULER-UNSTABLE-MEANS-WRONG",
+      "content": "| MC-3 | EULER-UNSTABLE-MEANS-WRONG | Student dismisses Euler's method entirely when it shows oscillations or blow-up, not recognising that the instability is caused by h being outside the stability region and can be fixed by reducing h or switching to an implicit method | Type 1 — overgeneralization (the unstable output looks like a numerical bug; students conclude the method is unreliable rather than diagnosing the step-size/stability-region relationship) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.euler-method.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.num.euler-method/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.euler-method",
+      "title": "**Local truncation error (LTE):** Error introduced in one step = O(h²)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"**Local truncation error (LTE):** Error introduced in one step = O(h²)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.euler-method.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.num.euler-method/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.euler-method",
+      "title": "**Global error:** Accumulated over (b−a)/h steps ≈ LTE/h × (b−a) = O(h²)/h × (b−a) = O(h)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"**Global error:** Accumulated over (b−a)/h steps ≈ LTE/h × (b−a) = O(h²)/h × (b−a) = O(h)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.euler-method.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.num.euler-method/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.euler-method",
+      "title": "CORRECT → \"Euler: yₙ₊₁=yₙ+hf(tₙ,yₙ). LTE=O(h²) per step, global error O(h) total. Stability requires h<2/|λ| for the test equation.\" → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"CORRECT → \\\"Euler: yₙ₊₁=yₙ+hf(tₙ,yₙ). LTE=O(h²) per step, global error O(h) total. Stability requires h<2/|λ| for the test equation.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.euler-method.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.num.euler-method/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.euler-method",
+      "title": "PARTIAL (applies the formula but confuses LTE with global error) → \"LTE measures the error in ONE step. You take (b−a)/h steps, so global error ≈ (b−a)/h × h² = (b−a)h — that's O(h), one order less than LTE. Halving h halves the global error, not quarters it.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"PARTIAL (applies the formula but confuses LTE with global error) → \\\"LTE measures the error in ONE step. You take (b−a)/h steps, so global error ≈ (b−a)/h × h² = (b−a)h — that's O(h), one order less than LTE. Halving h halves the global error, not quarters it.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.euler-method.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.num.euler-method/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.euler-method",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-5\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.euler-method.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.num.euler-method/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.euler-method",
+      "title": "NO_RESPONSE → \"Apply Euler's method to y'=y, y(0)=1 with h=0.5 from t=0 to t=1. True solution: y(t)=eᵗ. What is y(1) after two Euler steps? What is the error?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-6\",\"title\":\"NO_RESPONSE → \\\"Apply Euler's method to y'=y, y(0)=1 with h=0.5 from t=0 to t=1. True solution: y(t)=eᵗ. What is y(1) after two Euler steps? What is the error?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.euler-method.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.num.euler-method/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.euler-method",
+      "title": "CORRECT → \"Explicit Euler: cheap, O(h) convergence, stability requires h<2/|λ|. Implicit Euler: always stable for λ<0 (A-stable), same O(h) convergence, but requires solving an implicit equation per step.\" → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"CORRECT → \\\"Explicit Euler: cheap, O(h) convergence, stability requires h<2/|λ|. Implicit Euler: always stable for λ<0 (A-stable), same O(h) convergence, but requires solving an implicit equation per step.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.euler-method.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.num.euler-method/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.euler-method",
+      "title": "PARTIAL (understands stability but cannot compute the stability region) → \"For y'=λy, explicit Euler gives yₙ₊₁=(1+hλ)yₙ. For stability, |1+hλ|<1. Draw the complex plane: this is a circle of radius 1 centered at −1. For real negative λ, the constraint is h<2/|λ|.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"PARTIAL (understands stability but cannot compute the stability region) → \\\"For y'=λy, explicit Euler gives yₙ₊₁=(1+hλ)yₙ. For stability, |1+hλ|<1. Draw the complex plane: this is a circle of radius 1 centered at −1. For real negative λ, the constraint is h<2/|λ|.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.euler-method.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.num.euler-method/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.euler-method",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-9\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.euler-method.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.num.euler-method/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.euler-method",
+      "title": "NO_RESPONSE → \"Apply explicit Euler to y'=−10y with h=0.5. Show three steps. Does the solution grow or decay? Does that match the true behaviour?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-10\",\"title\":\"NO_RESPONSE → \\\"Apply explicit Euler to y'=−10y with h=0.5. Show three steps. Does the solution grow or decay? Does that match the true behaviour?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.euler-method.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.num.euler-method/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.euler-method",
+      "title": "CORRECT → \"Wild oscillations in explicit Euler signal instability: hλ is outside the stability region. Fix by reducing h below 2/|λ|, or switch to an implicit (A-stable) method.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-11\",\"title\":\"CORRECT → \\\"Wild oscillations in explicit Euler signal instability: hλ is outside the stability region. Fix by reducing h below 2/|λ|, or switch to an implicit (A-stable) method.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.euler-method.md",
+        "startLine": 96,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "math.num.euler-method/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.euler-method",
+      "title": "PARTIAL (identifies the problem but not the fix) → \"For stiff ODEs (large |λ|), the stability constraint h<2/|λ| forces h to be tiny even when accuracy only needs a coarse h. The cost then comes from stability, not accuracy — that is the hallmark of a stiff ODE. Implicit methods decouple stability from step size.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"PARTIAL (identifies the problem but not the fix) → \\\"For stiff ODEs (large |λ|), the stability constraint h<2/|λ| forces h to be tiny even when accuracy only needs a coarse h. The cost then comes from stability, not accuracy — that is the hallmark of a stiff ODE. Implicit methods decouple stability from step size.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.euler-method.md",
+        "startLine": 97,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "math.num.euler-method/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.euler-method",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-13\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.euler-method.md",
+        "startLine": 98,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "math.num.euler-method/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.euler-method",
+      "title": "NO_RESPONSE → \"For y'=−100y, what is the maximum step size that keeps explicit Euler stable? What happens if you use h=0.1?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-14\",\"title\":\"NO_RESPONSE → \\\"For y'=−100y, what is the maximum step size that keeps explicit Euler stable? What happens if you use h=0.1?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.euler-method.md",
+        "startLine": 99,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "math.num.euler-method/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.num.euler-method",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Apply explicit Euler to y'=−y, y(0)=1 with h=0.5 from t=0 to t=2. Compute 4 steps by hand, compare with e^{−t}, and report the global error at t=2. Then halve h to h=0.25 and repeat (8 steps). Confirm the global error roughly halves.\n2. For y'=−10y, determine the stability boundary for explicit Euler. Show that h=0.21 is unstable and h=0.19 is stable by computing 10 steps of each and observing whether the solution grows or decays.\n3. Apply implicit Euler to y'=−10y, y(0)=1 with h=0.5 (3 steps). Show that even this large h produces a decaying solution (though not accurate). Derive the implicit update formula and confirm A-stability.\n4. For y'=f(t,y)=t+y, y(0)=1, apply Euler's method with h=0.1 from t=0 to t=1. True solution: y(t)=2eᵗ−t−1. Report the error at t=1 and verify the O(h) convergence by repeating with h=0.05.\n\n**P55 — Reflect & Consolidate:** \"Euler: yₙ₊₁=yₙ+hf(tₙ,yₙ). LTE=O(h²), global error=O(h). Stability region for explicit: |1+hλ|<1. Implicit Euler: A-stable (no step-size constraint for λ<0) but requires solving an implicit equation. Stiff problems need implicit methods.\"\n\n**P76 — Transfer Probe (Cross-link: math.de.euler-method):**\nThe Euler method applied to a system y'=Ay (A is an m×m matrix) extends the scalar analysis. (a) Derive the stability condition for the explicit Euler step y_{n+1}=(I+hA)yₙ in terms of the eigenvalues of A. (b) For A=[[−1,1000],[0,−1000]] (a stiff system with eigenvalues −1 and −1000), compute the maximum stable h for explicit Euler. (c) Show that implicit Euler applied to this system produces yₙ₊₁=(I−hA)⁻¹yₙ and is stable for all h>0. (d) Connect the stability analysis of Euler's method to the eigenvalue spectrum of the Jacobian ∂f/∂y in general nonlinear ODE solvers.\n\n**P55 — Reflect & Consolidate:** \"For systems, stability is determined by the eigenvalues of the Jacobian. Stiffness is the presence of widely separated eigenvalues — the fast modes force explicit methods to use tiny h even when the slow (physical) modes are all that matters. Implicit methods decouple stability from the fast modes.\"\n\n**P75 — Mastery Assessment:**\n\"A population model is described by dy/dt=y(1−y)−0.1y² (logistic + harvesting). (a) At the fixed points of this ODE, what is λ=∂f/∂y? (b) Near the stable equilibrium, what is the maximum explicit Euler step size for stability? (c) Apply explicit Euler with h=0.1 from y(0)=0.5 for 20 steps. Does the solution converge to the equilibrium? (d) Compare with implicit Euler (solve the nonlinear update by Newton's method for each step). Which is more accurate per step? (e) If you needed 10⁻⁴ accuracy at t=10, how many steps does each method require?\"\n\n**P55 — Reflect & Consolidate:** \"Stiffness is intrinsic to the ODE (the eigenvalues of the Jacobian), not to the method. The explicit/implicit Euler trade-off — cheap steps vs. unconditional stability — determines which is efficient. Nonlinear ODEs need an inner Newton solve at each implicit step, but the stability advantage still dominates for stiff systems.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.num.euler-method complete\n- Score 3/5 → REVIEW local vs. global error and stability region; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.de.euler-method or math.num.error-analysis; reassign\n\n**P78 — Completion:** Euler's method (numerical ODE) certified. Student applies explicit/implicit Euler, derives LTE and global error, identifies the stability region, diagnoses instability, and explains stiffness and the implicit/explicit trade-off.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.euler-method.md",
+        "startLine": 112,
+        "endLine": 139
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,549 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.num.stiff-ode-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.num.stiff-ode",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d839212b9e46a3e1f8aaac83614a9f7242ab3b6ba7bfe4efdcfa923298a0ce05",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.num.stiff-ode.md": "sha256:ceefdc95bc6bb8b1fc165a8bac76cf77a219a9e637db6e6d986492c6bb682645"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 12,
+      "mastery_probe": 1
+    },
+    "ruleCount": 12
+  },
+  "concept": {
+    "conceptId": "math.num.stiff-ode",
+    "name": "Stiff ODEs and Implicit Methods",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.num.runge-kutta"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.num.stiff-ode-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.num.stiff-ode (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.num.stiff-ode.md": "sha256:ceefdc95bc6bb8b1fc165a8bac76cf77a219a9e637db6e6d986492c6bb682645"
+      },
+      "contentHash": "sha256:8ea878ab06fd98f80d8107cd098f68b4ebbffd8118c3c233a6abb7efeaa89bba",
+      "ruleCount": 12,
+      "bandCounts": {
+        "3": 12
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.num.stiff-ode.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.stiff-ode.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.stiff-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.stiff-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.stiff-ode.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.stiff-ode.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.stiff-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.stiff-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.stiff-ode.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.stiff-ode.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.stiff-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.stiff-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.stiff-ode.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.stiff-ode.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.stiff-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.stiff-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.stiff-ode.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.stiff-ode.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.stiff-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.stiff-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.stiff-ode.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.stiff-ode.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.stiff-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.stiff-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.stiff-ode.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.stiff-ode.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.stiff-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.stiff-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.stiff-ode.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.stiff-ode.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.stiff-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.stiff-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.stiff-ode.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.stiff-ode.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.stiff-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.stiff-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.stiff-ode.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.stiff-ode.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.stiff-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.stiff-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.stiff-ode.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.stiff-ode.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.stiff-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.stiff-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.stiff-ode.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.stiff-ode.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.stiff-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.stiff-ode\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.num.stiff-ode/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.num.stiff-ode",
+      "title": "Learning Objective",
+      "content": "Given an ODE system y'=f(t,y) with a wide spread of eigenvalues of the Jacobian ∂f/∂y, the student identifies the system as stiff by computing the stiffness ratio (|λ_max|/|λ_min| ≫ 1); explains why explicit methods (Euler, RK4) are forced to use h ≪ 1/|λ_max| for stability even when the physical solution is smooth on the slow timescale 1/|λ_min|; derives the stability function of implicit Euler (R(hλ)=1/(1−hλ)) and shows A-stability (left half-plane ⊂ stability region); contrasts L-stability (R(hλ)→0 as hλ→−∞) with A-stability; and identifies BDF (Backward Differentiation Formula) methods as the standard stiff solver class in MATLAB's `ode15s` and scipy's `solve_ivp`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.stiff-ode.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.num.stiff-ode/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.num.stiff-ode",
+      "title": "STIFF-MEANS-HARD-TO-SOLVE",
+      "content": "| MC-1 | STIFF-MEANS-HARD-TO-SOLVE | Student treats \"stiff\" as a synonym for \"numerically difficult\" or \"ill-conditioned\" — does not understand that stiffness is specifically about the ratio of timescales (fast-decaying transients vs. slow solution of interest) that forces explicit methods to use unnecessarily small steps | Type 3 — language contamination (\"stiff\" sounds like \"rigid\" or \"hard\"; the technical definition in terms of Jacobian eigenvalue ratios is counterintuitive because a stiff ODE can have a very smooth, slow solution that is easy to describe but requires tiny steps for explicit methods) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.stiff-ode.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.num.stiff-ode/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.num.stiff-ode",
+      "title": "IMPLICIT-METHODS-MORE-ACCURATE",
+      "content": "| MC-2 | IMPLICIT-METHODS-MORE-ACCURATE | Student believes implicit methods (implicit Euler, BDF) are more accurate than explicit methods (RK4) because they are used for hard problems — does not recognise that A-stable implicit methods often have lower formal order and that their advantage is stability, not accuracy | Type 5 — instruction-induced (stiff solvers are recommended for hard problems; students infer that \"recommended for hard problems\" means \"more accurate\"; they do not distinguish stability from accuracy) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.stiff-ode.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.num.stiff-ode/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.num.stiff-ode",
+      "title": "STIFFNESS-IS-A-PROPERTY-OF-THE-EQUATION",
+      "content": "| MC-3 | STIFFNESS-IS-A-PROPERTY-OF-THE-EQUATION | Student believes stiffness is an intrinsic property of the ODE regardless of the time interval, not recognising that an ODE can be stiff on [0, ε] (fast transient) and non-stiff on [ε, T] (slow smooth solution); the stiffness ratio changes as the solution evolves | Type 1 — overgeneralization (a textbook labels an ODE \"stiff\" or \"non-stiff\"; students conclude this is a fixed, global property; the eigenvalues of ∂f/∂y in fact depend on y(t) and change along the trajectory) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.stiff-ode.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.num.stiff-ode/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.stiff-ode",
+      "title": "CORRECT → \"Stiffness: large spread of Jacobian eigenvalues. Explicit Euler stability requires h<2/|λ_max|, which is tiny for stiff problems. Implicit Euler: A-stable (stable for all h>0 when Re(λ)<0).\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Stiffness: large spread of Jacobian eigenvalues. Explicit Euler stability requires h<2/|λ_max|, which is tiny for stiff problems. Implicit Euler: A-stable (stable for all h>0 when Re(λ)<0).\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.stiff-ode.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.num.stiff-ode/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.stiff-ode",
+      "title": "PARTIAL (understands stiffness ratio but not why it forces small steps) → \"Explicit Euler amplification factor: R(hλ)=1+hλ. For stability: |1+hλ|<1. The stability REGION is inside the unit disk centred at −1. The fast eigenvalue λ_max has large |λ_max|, so h must satisfy h<2/|λ_max| — independent of whether you NEED accuracy on that timescale. Stiffness forces stability-driven, not accuracy-driven, step-size choice.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (understands stiffness ratio but not why it forces small steps) → \\\"Explicit Euler amplification factor: R(hλ)=1+hλ. For stability: |1+hλ|<1. The stability REGION is inside the unit disk centred at −1. The fast eigenvalue λ_max has large |λ_max|, so h must satisfy h<2/|λ_max| — independent of whether you NEED accuracy on that timescale. Stiffness forces stability-driven, not accuracy-driven, step-size choice.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.stiff-ode.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.num.stiff-ode/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.stiff-ode",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.stiff-ode.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.num.stiff-ode/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.stiff-ode",
+      "title": "NO_RESPONSE → \"For y'=−1000y−0.001z, y(0)=1, z(0)=1, what is the stiffness ratio? What step size does explicit Euler require for stability? What step size would RK4 require? How does this compare with the 'slow' timescale 1/0.001=1000?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"For y'=−1000y−0.001z, y(0)=1, z(0)=1, what is the stiffness ratio? What step size does explicit Euler require for stability? What step size would RK4 require? How does this compare with the 'slow' timescale 1/0.001=1000?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.stiff-ode.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.num.stiff-ode/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.stiff-ode",
+      "title": "CORRECT → \"BDF methods: multistep, order 1-6, A(α)-stable, standard for stiff problems. L-stability: fast modes fully damped (implicit Euler). A-stability alone: trapezoidal rule can show spurious oscillations for stiff problems.\" → A03",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"BDF methods: multistep, order 1-6, A(α)-stable, standard for stiff problems. L-stability: fast modes fully damped (implicit Euler). A-stability alone: trapezoidal rule can show spurious oscillations for stiff problems.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.stiff-ode.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.num.stiff-ode/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.stiff-ode",
+      "title": "PARTIAL (understands stability region but not L-stability) → \"The trapezoidal rule has amplification factor R(hλ)=(1+hλ/2)/(1−hλ/2). As hλ→−∞ (large negative, fast stiff eigenvalue): R→(−∞)/(+∞)→−1. So the fast mode oscillates between +1 and −1 amplitude — it never damps! This 'high-frequency ringing' is the symptom of A-stable-but-not-L-stable methods applied to stiff problems. L-stability (R→0) eliminates this.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (understands stability region but not L-stability) → \\\"The trapezoidal rule has amplification factor R(hλ)=(1+hλ/2)/(1−hλ/2). As hλ→−∞ (large negative, fast stiff eigenvalue): R→(−∞)/(+∞)→−1. So the fast mode oscillates between +1 and −1 amplitude — it never damps! This 'high-frequency ringing' is the symptom of A-stable-but-not-L-stable methods applied to stiff problems. L-stability (R→0) eliminates this.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.stiff-ode.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.num.stiff-ode/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.stiff-ode",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.stiff-ode.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.num.stiff-ode/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.stiff-ode",
+      "title": "NO_RESPONSE → \"Apply the trapezoidal rule to y'=−1000y, y(0)=1 with h=0.1 for three steps. Compute R(hλ)=(1+hλ/2)/(1−hλ/2) for hλ=−100. What happens to y₁,y₂,y₃?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"Apply the trapezoidal rule to y'=−1000y, y(0)=1 with h=0.1 for three steps. Compute R(hλ)=(1+hλ/2)/(1−hλ/2) for hλ=−100. What happens to y₁,y₂,y₃?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.stiff-ode.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.num.stiff-ode/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.stiff-ode",
+      "title": "CORRECT → \"Stiff = wide Jacobian eigenvalue spread. The slow solution is simple; the fast transients have already decayed. Explicit methods are forced to track the fast modes. Implicit methods decouple stability from the fast timescale, but pay with a Jacobian solve each step.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"Stiff = wide Jacobian eigenvalue spread. The slow solution is simple; the fast transients have already decayed. Explicit methods are forced to track the fast modes. Implicit methods decouple stability from the fast timescale, but pay with a Jacobian solve each step.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.stiff-ode.md",
+        "startLine": 100,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "math.num.stiff-ode/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.stiff-ode",
+      "title": "PARTIAL (correctly diagnoses stiffness but says implicit is always better) → \"Implicit methods are better FOR STIFF problems. For non-stiff problems, the inner Jacobian solve (LU factorisation, O(n³) for dense J) is wasted cost that explicit methods avoid. scipy's `solve_ivp` starts with RK45 (explicit) and suggests BDF if it detects stiffness (millions of tiny steps). Choose the method based on the problem, not habit.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (correctly diagnoses stiffness but says implicit is always better) → \\\"Implicit methods are better FOR STIFF problems. For non-stiff problems, the inner Jacobian solve (LU factorisation, O(n³) for dense J) is wasted cost that explicit methods avoid. scipy's `solve_ivp` starts with RK45 (explicit) and suggests BDF if it detects stiffness (millions of tiny steps). Choose the method based on the problem, not habit.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.stiff-ode.md",
+        "startLine": 101,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "math.num.stiff-ode/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.stiff-ode",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.stiff-ode.md",
+        "startLine": 102,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "math.num.stiff-ode/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.stiff-ode",
+      "title": "NO_RESPONSE → \"The ODE y'=−y+sin(t) is NOT stiff (λ=−1). The ODE y'=−10⁶y+sin(t) IS stiff. In both cases, the solution for large t is close to sin(t). Why does the second ODE require a stiff solver even though both long-time solutions look the same?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"The ODE y'=−y+sin(t) is NOT stiff (λ=−1). The ODE y'=−10⁶y+sin(t) IS stiff. In both cases, the solution for large t is close to sin(t). Why does the second ODE require a stiff solver even though both long-time solutions look the same?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.stiff-ode.md",
+        "startLine": 103,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "math.num.stiff-ode/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.num.stiff-ode",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. The ODE y'=−1000y+sin(t), y(0)=1. (a) What is the stiffness ratio? (b) What step size does explicit Euler require for stability? (c) Apply implicit Euler with h=0.1 for 5 steps (each step requires solving yₙ₊₁=yₙ+hf(tₙ₊₁,yₙ₊₁) → yₙ₊₁=yₙ+h(−1000yₙ₊₁+sin(tₙ₊₁)) → yₙ₊₁=(yₙ+h·sin(tₙ₊₁))/(1+1000h)). (d) After t=0.01 (10 time constants), the fast transient has decayed. Why can a stiff solver use h=0.1 for t>0.01 but not for t<0.001?\n2. Compare the stability functions R(hλ) for explicit Euler, implicit Euler, and the trapezoidal rule. Evaluate each at hλ=−100. Which method damps the fast mode most? Which shows spurious oscillations?\n3. A chemical kinetics system has 3 species and Jacobian eigenvalues −10⁶, −1000, −0.001. (a) What is the stiffness ratio? (b) What is the maximum h for RK4 stability? (c) BDF2 with h=0.01: how many total steps to t=100? How many for explicit RK4?\n4. Identify which of the following ODEs are stiff: (a) y'=−y, y(0)=1 on [0,10]; (b) y'=[−10⁶ 0; 0 −1]y on [0,100]; (c) y'=y(1−y) on [0,20] (logistic equation); (d) the heat equation semi-discretised on a grid of 100 points (eigenvalues of the tridiagonal Laplacian matrix scale as −(100)²=−10⁴).\n\n**P55 — Reflect & Consolidate:** \"Stiff ODE: wide Jacobian eigenvalue spread. Explicit methods stability-limited: h<2/|λ_max|. Implicit Euler: A-stable. BDF methods: standard stiff solvers (ode15s, scipy BDF). L-stability: fast modes fully damped. Stiffness is local in time (eigenvalues change along trajectory).\"\n\n**P76 — Transfer Probe (Independence mode):**\nDifferential-algebraic equations (DAEs) of the form F(t,y,y')=0 (or M(t)y'=f(t,y) with singular mass matrix M) arise in constrained mechanical systems, electrical circuits, and chemical equilibria. (a) Show that the index-1 DAE y'=f(y,z), 0=g(y,z) can be interpreted as the stiffness limit of the ODE y'=f(y,z), εz'=g(y,z) as ε→0 (singular perturbation). (b) Explain why explicit methods cannot directly solve DAEs without regularisation. (c) MATLAB's `ode15s` and `ode23t` can solve index-1 and some index-2 DAEs via differentiation of the constraint g=0. What additional information (Jacobian structure, consistent initial conditions) is needed? (d) For a mechanical system with holonomic constraints q̈=f(q,q̇)−Jᵀλ, g(q)=0 (index-3), why do BDF methods fail at high index and what is the Baumgarte stabilisation fix?\n\n**P55 — Reflect & Consolidate:** \"DAEs are the limit of stiff ODEs as the fast timescale goes to zero. Index-1 DAEs are solvable by BDF with consistent initial conditions. Higher-index DAEs require index reduction (differentiate constraints) or stabilisation (Baumgarte). Understanding stiff ODEs is the prerequisite for DAE solvers — the eigenvalue at infinity replaces the fast eigenvalue of the stiff ODE.\"\n\n**P75 — Mastery Assessment:**\n\"A battery model consists of a fast electrochemical reaction (timescale 10⁻⁶ s) coupled to a slow thermal dynamics (timescale 10² s). The coupled ODE has stiffness ratio 10⁸. (a) Why is explicit RK45 impractical for a 1-hour simulation? (b) BDF2 with tolerance 10⁻⁶: estimate the total number of steps needed (the fast transient lasts 10⁻⁴ s, then the thermal dynamics dominate). (c) Each BDF step requires solving a 100×100 Jacobian system. What fraction of total computation is the Jacobian solve vs. the function evaluation? (d) A student proposes splitting: integrate the fast electrochemical subsystem with an explicit method on tiny steps, and the thermal subsystem separately on large steps. What is operator splitting, and what accuracy order does Strang splitting achieve?\"\n\n**P55 — Reflect & Consolidate:** \"Multi-timescale systems (battery, combustion, climate): implicit BDF for the full coupled system, or operator splitting to decouple fast and slow components. Splitting introduces a splitting error (Strang splitting is O(Δt²)), which must be balanced against the accuracy of each subsolver. The decision is driven by the Jacobian structure (dense vs. block-diagonal) and whether the coupling between fast and slow subsystems is strong or weak.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.num.stiff-ode complete\n- Score 3/5 → REVIEW stiffness definition and stability function comparison; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.num.runge-kutta; reassign\n\n**P78 — Completion:** Stiff ODEs certified. Student identifies stiffness via Jacobian eigenvalue spread, explains why explicit methods require stability-driven tiny steps, derives implicit Euler A-stability and BDF L-stability, and selects the appropriate solver class for stiff vs. non-stiff problems.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.stiff-ode.md",
+        "startLine": 116,
+        "endLine": 143
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

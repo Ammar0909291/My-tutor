@@ -1,0 +1,754 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.num.svd-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.num.svd",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c43201375bbd0b135f4631431db538a12ed937c8cb7d4aec47ff20d6938cffbe",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.num.svd.md": "sha256:43971602e40e88de67c026bcaa3b2786f8b83dfd1b9cd8946999fcafab0a6808"
+    },
+    "assetCount": 23,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 18,
+      "mastery_probe": 1
+    },
+    "ruleCount": 18
+  },
+  "concept": {
+    "conceptId": "math.num.svd",
+    "name": "Numerical SVD and Applications",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.linalg.svd",
+      "math.num.qr-algorithm"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.num.svd-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.num.svd (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.num.svd.md": "sha256:43971602e40e88de67c026bcaa3b2786f8b83dfd1b9cd8946999fcafab0a6808"
+      },
+      "contentHash": "sha256:b2510d3a3746f4d13cd8884bdc3b2fdc4d26daa5cf78ba6faa1050d618a8910a",
+      "ruleCount": 18,
+      "bandCounts": {
+        "3": 18
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.num.svd.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.svd.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.svd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.svd\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.svd.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.svd.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.svd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.svd\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.svd.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.svd.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.svd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.svd\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.svd.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.svd.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.svd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.svd\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.svd.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.svd.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.svd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.svd\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.svd.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.svd.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.svd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.svd\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.svd.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.svd.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.svd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.svd\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.svd.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.svd.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.svd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.svd\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.svd.TA-17",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.svd.md#TA-17",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.svd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.svd\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.svd.TA-18",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.svd.md#TA-18",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.svd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.svd\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.svd.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.svd.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.svd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.svd\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.svd.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.svd.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.svd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.svd\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.svd.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.svd.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.svd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.svd\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.svd.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.svd.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.svd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.svd\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.svd.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.svd.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.svd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.svd\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.svd.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.svd.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.svd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.svd\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.svd.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.svd.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.svd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.svd\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.svd.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.svd.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.svd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.svd\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.num.svd/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.num.svd",
+      "title": "Learning Objective",
+      "content": "Given a real m×n matrix A, the student explains how the SVD A=UΣVᵀ is computed numerically in two phases (bidiagonalisation then QR-SVD iteration); interprets the singular values as the 2-norm of the rank-1 components; computes the best rank-k approximation Aₖ=U_kΣ_kV_kᵀ and states the Eckart-Young theorem; uses the numerical rank (number of singular values above a threshold ε‖A‖₂) to diagnose near-rank-deficiency; computes the 2-norm and condition number from the largest and smallest singular values; and applies truncated SVD to least-squares problems with near-singular matrices (regularised least squares via SVD pseudo-inverse).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.num.svd/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.num.svd",
+      "title": "SVD-AND-EIGENDECOMPOSITION-ARE-THE-SAME",
+      "content": "| MC-1 | SVD-AND-EIGENDECOMPOSITION-ARE-THE-SAME | Student treats SVD (A=UΣVᵀ) as the same as eigendecomposition (A=PDP⁻¹) — believes singular values are eigenvalues and U,V are eigenvector matrices | Type 3 — language contamination (both decompositions involve a diagonal matrix of \"special values\" and two matrices of \"special vectors\"; the words \"singular value\" and \"eigenvalue\" are both \"values\" of a matrix; for symmetric matrices, the two coincide — students overgeneralise this special case) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.num.svd/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.num.svd",
+      "title": "TRUNCATED-SVD-DISCARDS-INFORMATION",
+      "content": "| MC-2 | TRUNCATED-SVD-DISCARDS-INFORMATION | Student believes the best rank-k approximation Aₖ loses \"random\" information from A — does not recognise that the Eckart-Young theorem proves Aₖ is the OPTIMAL rank-k approximation in both 2-norm and Frobenius norm | Type 5 — instruction-induced (truncation sounds like loss; \"throwing away\" singular values sounds destructive; the optimality proof requires understanding spectral norms, which is beyond most first courses) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.num.svd/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.num.svd",
+      "title": "NUMERICAL-RANK-IS-EXACT-RANK",
+      "content": "| MC-3 | NUMERICAL-RANK-IS-EXACT-RANK | Student reads the computed singular values as exact and uses a count of exactly-zero values as the rank — not recognising that floating-point SVD gives near-zero (not zero) values for rank-deficient matrices and that a threshold ε‖A‖₂ is required to determine numerical rank | Type 5 — instruction-induced (theoretical rank counts exactly-zero singular values; computing rank in practice requires a threshold; the distinction is not emphasised in linear algebra courses that work with exact arithmetic) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.num.svd/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.svd",
+      "title": "CORRECT → \"SVD: A=UΣVᵀ. Singular values = √eigenvalues of AᵀA. Best rank-k approx: truncated SVD (Eckart-Young). 2-norm=σ₁, condition number=σ₁/σₙ.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"SVD: A=UΣVᵀ. Singular values = √eigenvalues of AᵀA. Best rank-k approx: truncated SVD (Eckart-Young). 2-norm=σ₁, condition number=σ₁/σₙ.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.num.svd/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.svd",
+      "title": "PARTIAL (understands the decomposition but not the rank-1 interpretation) → \"A = Σ σᵢuᵢvᵢᵀ: each rank-1 term σᵢuᵢvᵢᵀ captures one 'principal component' of A. The first term has the largest σ₁ and explains the most variance. Eckart-Young: cutting off after k terms gives the best rank-k approximation — not the kth term specifically, but the sum of the FIRST k terms (since σ₁≥σ₂≥…).\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (understands the decomposition but not the rank-1 interpretation) → \\\"A = Σ σᵢuᵢvᵢᵀ: each rank-1 term σᵢuᵢvᵢᵀ captures one 'principal component' of A. The first term has the largest σ₁ and explains the most variance. Eckart-Young: cutting off after k terms gives the best rank-k approximation — not the kth term specifically, but the sum of the FIRST k terms (since σ₁≥σ₂≥…).\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.num.svd/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.svd",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.num.svd/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.svd",
+      "title": "NO_RESPONSE → \"Compute the SVD of A=[[3,0],[0,1]]. What are U, Σ, Vᵀ? What is ‖A‖₂? What is the best rank-1 approximation of A?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"Compute the SVD of A=[[3,0],[0,1]]. What are U, Σ, Vᵀ? What is ‖A‖₂? What is the best rank-1 approximation of A?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.num.svd/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.svd",
+      "title": "Full SVD: 1000 singular values; exact storage requires 1000 × (1000+1+1000) ≈ 2×10⁶ numbers",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full SVD: 1000 singular values; exact storage requires 1000 × (1000+1+1000) ≈ 2×10⁶ numbers\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.num.svd/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.svd",
+      "title": "Rank-10 truncation: store only U_10 (1000×10), Σ_10 (10), V_10 (1000×10) = 20,010 numbers (99% compression)",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Rank-10 truncation: store only U_10 (1000×10), Σ_10 (10), V_10 (1000×10) = 20,010 numbers (99% compression)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.num.svd/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.svd",
+      "title": "Rank-50 truncation: 100,050 numbers (90% compression), visually excellent",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Rank-50 truncation: 100,050 numbers (90% compression), visually excellent\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.num.svd/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.svd",
+      "title": "CORRECT → \"TSVD: discard components with σᵢ<ε to regularise ill-conditioned least-squares. Numerical rank: count σᵢ above ε·‖A‖₂ threshold. Condition number = σ₁/σₙ.\" → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"CORRECT → \\\"TSVD: discard components with σᵢ<ε to regularise ill-conditioned least-squares. Numerical rank: count σᵢ above ε·‖A‖₂ threshold. Condition number = σ₁/σₙ.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.num.svd/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.svd",
+      "title": "PARTIAL (understands truncation but not why it regularises) → \"The least-squares solution x=(AᵀA)⁻¹Aᵀb can be written in SVD form: x=Σ(uᵢᵀb/σᵢ)vᵢ. A tiny σᵢ amplifies noise in uᵢᵀb by factor 1/σᵢ. If uᵢᵀb is pure noise (magnitude ≈ε‖b‖) and σᵢ≈ε‖A‖₂, then the ith component is ε‖b‖/(ε‖A‖₂) = ‖b‖/‖A‖₂ — a component of full magnitude, dominated by noise. Truncating it removes amplified noise.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-9\",\"title\":\"PARTIAL (understands truncation but not why it regularises) → \\\"The least-squares solution x=(AᵀA)⁻¹Aᵀb can be written in SVD form: x=Σ(uᵢᵀb/σᵢ)vᵢ. A tiny σᵢ amplifies noise in uᵢᵀb by factor 1/σᵢ. If uᵢᵀb is pure noise (magnitude ≈ε‖b‖) and σᵢ≈ε‖A‖₂, then the ith component is ε‖b‖/(ε‖A‖₂) = ‖b‖/‖A‖₂ — a component of full magnitude, dominated by noise. Truncating it removes amplified noise.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.num.svd/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.svd",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-10\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.num.svd/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.svd",
+      "title": "NO_RESPONSE → \"The matrix A=[[1,0],[0,10⁻⁸]] has ‖A‖₂=1 and ‖A⁻¹‖₂=10⁸. If b=[1,10⁻⁸]ᵀ and b is perturbed by δb=[0,10⁻¹⁶]ᵀ (machine epsilon sized), how large is δx in the second component? What does this say about the condition number?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-11\",\"title\":\"NO_RESPONSE → \\\"The matrix A=[[1,0],[0,10⁻⁸]] has ‖A‖₂=1 and ‖A⁻¹‖₂=10⁸. If b=[1,10⁻⁸]ᵀ and b is perturbed by δb=[0,10⁻¹⁶]ᵀ (machine epsilon sized), how large is δx in the second component? What does this say about the condition number?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.num.svd/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.svd",
+      "title": "Eigenvalues can be negative or complex; singular values are always non-negative.",
+      "content": "{\"id\":\"TA-12\",\"title\":\"Eigenvalues can be negative or complex; singular values are always non-negative.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.num.svd/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.svd",
+      "title": "For the non-symmetric A=[[1,2],[3,4]], the SVD decomposition A=UΣVᵀ has U≠V (two different orthogonal matrices); eigendecomposition A=PDP⁻¹ has P not orthogonal.",
+      "content": "{\"id\":\"TA-13\",\"title\":\"For the non-symmetric A=[[1,2],[3,4]], the SVD decomposition A=UΣVᵀ has U≠V (two different orthogonal matrices); eigendecomposition A=PDP⁻¹ has P not orthogonal.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 94,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "math.num.svd/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.svd",
+      "title": "Only for symmetric positive semidefinite matrices do singular values equal eigenvalues.",
+      "content": "{\"id\":\"TA-14\",\"title\":\"Only for symmetric positive semidefinite matrices do singular values equal eigenvalues.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 95,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "math.num.svd/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.svd",
+      "title": "CORRECT → \"SVD singular values ≠ eigenvalues (except for symmetric PSD). Singular values are √eigenvalues of AᵀA, always non-negative. Eigenvalues can be negative or complex.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-15\",\"title\":\"CORRECT → \\\"SVD singular values ≠ eigenvalues (except for symmetric PSD). Singular values are √eigenvalues of AᵀA, always non-negative. Eigenvalues can be negative or complex.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 100,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "math.num.svd/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.svd",
+      "title": "PARTIAL (knows they differ but not why) → \"The eigenvalue equation Ax=λx requires a square matrix; singular values come from the symmetric positive semidefinite matrix AᵀA (which always has non-negative eigenvalues). For non-symmetric A: the eigenvectors don't form an orthogonal basis in general, so P is not orthogonal; but U and V (from SVD) are always orthogonal by construction.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-16\",\"title\":\"PARTIAL (knows they differ but not why) → \\\"The eigenvalue equation Ax=λx requires a square matrix; singular values come from the symmetric positive semidefinite matrix AᵀA (which always has non-negative eigenvalues). For non-symmetric A: the eigenvectors don't form an orthogonal basis in general, so P is not orthogonal; but U and V (from SVD) are always orthogonal by construction.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 101,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "math.num.svd/teaching_action_meta/TA-17",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.svd",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-17\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-17",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 102,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "math.num.svd/teaching_action_meta/TA-18",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.svd",
+      "title": "NO_RESPONSE → \"For A=[[0,1],[0,0]] (a nilpotent matrix): eigenvalues are both 0. Compute AᵀA=[[0,0],[1,0]][[0,1],[0,0]]=[[0,0],[0,1]]. What are the singular values? How do they differ from the eigenvalues?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-18\",\"title\":\"NO_RESPONSE → \\\"For A=[[0,1],[0,0]] (a nilpotent matrix): eigenvalues are both 0. Compute AᵀA=[[0,0],[1,0]][[0,1],[0,0]]=[[0,0],[0,1]]. What are the singular values? How do they differ from the eigenvalues?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-18",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 103,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "math.num.svd/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.num.svd",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Compute the SVD of A=[[1,1],[0,1],[1,0]] by (a) forming AᵀA, (b) finding its eigenvalues (λ₁,λ₂), (c) computing singular values σᵢ=√λᵢ, (d) finding V (eigenvectors of AᵀA), (e) finding U (Uᵢ=Avᵢ/σᵢ). Verify A=UΣVᵀ.\n2. A 100×100 matrix A has singular values σ₁=100, σ₂=10, σ₃=1, σ₄=0.1, σ₅=10⁻¹⁰. (a) What is ‖A‖₂? (b) What is κ₂(A)? (c) What is the numerical rank at tolerance ε=10⁻⁸·‖A‖₂? (d) What is ‖A−A₃‖₂ (the error of the rank-3 truncation)?\n3. A student solves the least-squares problem Ax=b where A is 50×5 and has singular values 10, 5, 1, 0.01, 10⁻¹². The right-hand side b has noise ‖δb‖=10⁻³. (a) Without regularisation: how large can the 5th component of the least-squares solution be? (b) With TSVD at threshold σ_k<0.1: which singular values are retained? What is the resulting solution norm?\n4. For the linear system Ax=b where A has κ₂(A)=10⁸ and the right-hand side b has relative error ε=10⁻¹⁰ (from measurement noise): what is the guaranteed relative error in the computed solution x? What does this say about the meaningful digits in x?\n\n**P55 — Reflect & Consolidate:** \"SVD = U Σ Vᵀ; singular values are non-negative, always exist. Best rank-k approximation: Eckart-Young (Aₖ minimises ‖A−C‖₂). 2-norm=σ₁, condition number=σ₁/σₙ. Numerical rank: threshold ε·σ₁. TSVD and Tikhonov regularise ill-conditioned least-squares.\"\n\n**P76 — Transfer Probe (Cross-link: math.linalg.svd):**\nRandomised SVD algorithms (Halko-Martinsson-Tropp, 2011) compute a rank-k approximation in O(mn·log k) operations — much faster than the O(mn·min(m,n)) cost of full SVD. (a) The algorithm draws a random Gaussian matrix Ω (n×(k+p)) and forms Y=AΩ (m×(k+p)). Explain why the column space of Y approximates the dominant left singular subspace of A. (b) After computing Q=qr(Y).Q (orthonormal basis for range(Y)), form B=QᵀA (a small (k+p)×n matrix) and compute its SVD. Show that the resulting factors give an approximate rank-k SVD of A. (c) For a 10⁶×10⁶ sparse matrix with effective rank k=100, estimate the speedup of randomised SVD over computing the full SVD. (d) The power iteration variant Y=(AAᵀ)^q AΩ improves accuracy for matrices with slowly decaying singular values. Why does raising to the power q make the singular value decay faster and improve the approximation?\n\n**P55 — Reflect & Consolidate:** \"Randomised SVD: O(mnk) instead of O(mn·min(m,n)) — transforms large-scale SVD from infeasible to seconds. Power iteration improves accuracy for 'flat' singular value spectra. Used in: recommender systems (n=10⁸ users × m=10⁶ items), topic modelling (TF-IDF matrix), scientific simulations (covariance matrices). The randomised sketch Y=AΩ is the key insight: projecting onto k+p random directions captures the k-dimensional dominant subspace with high probability.\"\n\n**P75 — Mastery Assessment:**\n\"A natural language processing task requires computing the top-50 singular vectors of a 10⁶×10⁵ TF-IDF document-term matrix (10¹¹ entries, mostly zeros — sparsity 99.99%). (a) Why is full SVD infeasible? What algorithm would you use? (b) The matrix has singular value spectrum σ₁=100, σ₂=80, …, σ₅₀=10, σ₅₁=0.1 (sharp drop). What numerical rank threshold captures the meaningful structure? (c) The top-50 truncated SVD is used for document retrieval. A query vector q is projected into the SVD space as ŷ=U₅₀ᵀq. Why is the projection into U₅₀ preferable to using the raw query vector for similarity computation? (d) If a new document arrives, can the rank-50 SVD be updated cheaply without recomputing from scratch? What is the rank-1 update to the SVD?\"\n\n**P55 — Reflect & Consolidate:** \"Large-scale SVD: always use randomised or Lanczos-based algorithms (Krylov subspace). The SVD of a sparse matrix is NOT sparse — U and V are dense — so memory for the full SVD scales as O((m+n)k), not the sparse entry count. Online SVD updates (rank-1 perturbations) allow streaming data without full recomputation — essential for recommender systems and streaming PCA.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.num.svd complete\n- Score 3/5 → REVIEW SVD vs. eigendecomposition and numerical rank; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.linalg.svd or math.num.qr-algorithm; reassign\n\n**P78 — Completion:** Numerical SVD certified. Student explains the two-phase computation (bidiagonalisation + QR-SVD), applies Eckart-Young for best rank-k approximation, computes 2-norm and condition number from singular values, determines numerical rank with threshold, regularises ill-conditioned least squares via TSVD, and distinguishes SVD from eigendecomposition.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.svd.md",
+        "startLine": 116,
+        "endLine": 143
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

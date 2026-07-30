@@ -1,0 +1,652 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.num.lu-factorization-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.num.lu-factorization",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:09b8ae07e6671ace6c8249dc87a6b5294e75efadcd5f17485678763643e3bd2c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.num.lu-factorization.md": "sha256:0b54d340b8c55e8f452089f950458f2aac03b34154b6a151bed6df8f0aa6cdf0"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 15,
+      "mastery_probe": 1
+    },
+    "ruleCount": 15
+  },
+  "concept": {
+    "conceptId": "math.num.lu-factorization",
+    "name": "LU Factorization",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.linalg.lu-factorization",
+      "math.num.error-analysis"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.num.lu-factorization-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.num.lu-factorization (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.num.lu-factorization.md": "sha256:0b54d340b8c55e8f452089f950458f2aac03b34154b6a151bed6df8f0aa6cdf0"
+      },
+      "contentHash": "sha256:24032f7a1f94324b2ff55611b079950fd8a151e375a7bada787fc131a3c60c11",
+      "ruleCount": 15,
+      "bandCounts": {
+        "3": 15
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.num.lu-factorization.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.lu-factorization.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.lu-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.lu-factorization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.lu-factorization.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.lu-factorization.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.lu-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.lu-factorization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.lu-factorization.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.lu-factorization.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.lu-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.lu-factorization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.lu-factorization.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.lu-factorization.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.lu-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.lu-factorization\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.lu-factorization.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.lu-factorization.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.lu-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.lu-factorization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.lu-factorization.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.lu-factorization.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.lu-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.lu-factorization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.lu-factorization.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.lu-factorization.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.lu-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.lu-factorization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.lu-factorization.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.lu-factorization.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.lu-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.lu-factorization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.lu-factorization.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.lu-factorization.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.lu-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.lu-factorization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.lu-factorization.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.lu-factorization.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.lu-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.lu-factorization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.lu-factorization.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.lu-factorization.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.lu-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.lu-factorization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.lu-factorization.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.lu-factorization.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.lu-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.lu-factorization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.lu-factorization.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.lu-factorization.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.lu-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.lu-factorization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.lu-factorization.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.lu-factorization.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.lu-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.lu-factorization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.lu-factorization.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.lu-factorization.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.lu-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.lu-factorization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.num.lu-factorization/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.num.lu-factorization",
+      "title": "Learning Objective",
+      "content": "Given a square matrix A, the student factors A=LU (or A=PLU with partial pivoting) by Gaussian elimination, explains why partial pivoting is necessary for numerical stability, solves Ax=b via forward substitution (Ly=b) then back substitution (Ux=y), counts the operation count (⅔n³ flops for factorisation, O(n²) per solve), and reuses a single LU factorisation to solve multiple right-hand sides efficiently.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.lu-factorization.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.num.lu-factorization/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.num.lu-factorization",
+      "title": "LU-SAME-AS-INVERSE",
+      "content": "| MC-1 | LU-SAME-AS-INVERSE | Student solves Ax=b by computing A⁻¹x rather than LU; does not recognise that LU is O(n³/3) while A⁻¹ costs 3 times more and loses backward-stability guarantees | Type 5 — instruction-induced (linear algebra courses present A⁻¹ as the canonical solution method; the numerical computation cost of forming an explicit inverse is rarely discussed there) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.lu-factorization.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.num.lu-factorization/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.num.lu-factorization",
+      "title": "PIVOTING-IS-OPTIONAL",
+      "content": "| MC-2 | PIVOTING-IS-OPTIONAL | Student applies Gaussian elimination without pivoting and believes the result is always correct if the matrix is invertible — does not recognise that a near-zero pivot causes catastrophic cancellation in the divided row | Type 1 — overgeneralization (examples in textbooks use \"nice\" matrices where the (1,1) pivot is already large; students generalise that the first element is always a suitable pivot) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.lu-factorization.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.num.lu-factorization/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.num.lu-factorization",
+      "title": "FORWARD-BACK-ORDER-DOESNT-MATTER",
+      "content": "| MC-3 | FORWARD-BACK-ORDER-DOESNT-MATTER | Student solves Ux=y before Ly=b, or confuses which system to solve first; does not remember the two-step order | Type 3 — language contamination (\"forward\" and \"backward\" substitution labels are both directional adjectives; students confuse which step comes first when working from the LU factorisation) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.lu-factorization.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.num.lu-factorization/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.lu-factorization",
+      "title": "LU factorisation: ≈⅔n³ multiplications/additions",
+      "content": "{\"id\":\"TA-1\",\"title\":\"LU factorisation: ≈⅔n³ multiplications/additions\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.lu-factorization.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.num.lu-factorization/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.lu-factorization",
+      "title": "Each forward/back substitution solve: O(n²)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Each forward/back substitution solve: O(n²)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.lu-factorization.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.num.lu-factorization/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.lu-factorization",
+      "title": "k right-hand sides: ⅔n³ + 2kn² — factorize once, solve k times cheaply",
+      "content": "{\"id\":\"TA-3\",\"title\":\"k right-hand sides: ⅔n³ + 2kn² — factorize once, solve k times cheaply\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.lu-factorization.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.num.lu-factorization/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.lu-factorization",
+      "title": "CORRECT → \"LU factorises A into L (unit lower triangular) and U (upper triangular). Partial pivoting ensures numerical stability. Solve by forward sub (Ly=b) then back sub (Ux=y). Cost: ⅔n³ for factorisation.\" → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"CORRECT → \\\"LU factorises A into L (unit lower triangular) and U (upper triangular). Partial pivoting ensures numerical stability. Solve by forward sub (Ly=b) then back sub (Ux=y). Cost: ⅔n³ for factorisation.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.lu-factorization.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.num.lu-factorization/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.lu-factorization",
+      "title": "PARTIAL (understands the factorisation but not the two-step solve order) → \"Once we have L and U: first solve Ly=b using forward substitution (top to bottom, since L is lower triangular). Then solve Ux=y using back substitution (bottom to top). The result x=A⁻¹b.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-5\",\"title\":\"PARTIAL (understands the factorisation but not the two-step solve order) → \\\"Once we have L and U: first solve Ly=b using forward substitution (top to bottom, since L is lower triangular). Then solve Ux=y using back substitution (bottom to top). The result x=A⁻¹b.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.lu-factorization.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.num.lu-factorization/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.lu-factorization",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-6\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.lu-factorization.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.num.lu-factorization/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.lu-factorization",
+      "title": "NO_RESPONSE → \"Factor A=[[2,1],[6,4]] as LU. Hint: what multiplier eliminates the (2,1) entry? That multiplier becomes L₂₁.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-7\",\"title\":\"NO_RESPONSE → \\\"Factor A=[[2,1],[6,4]] as LU. Hint: what multiplier eliminates the (2,1) entry? That multiplier becomes L₂₁.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.lu-factorization.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.num.lu-factorization/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.lu-factorization",
+      "title": "CORRECT → \"Without pivoting, a small pivot causes catastrophic cancellation in Gaussian elimination. Partial pivoting bounds the multipliers |mᵢⱼ|≤1 and keeps rounding errors controlled. For multiple right-hand sides, one LU factorisation + k cheap solves beats k full Gaussian eliminations.\" → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"CORRECT → \\\"Without pivoting, a small pivot causes catastrophic cancellation in Gaussian elimination. Partial pivoting bounds the multipliers |mᵢⱼ|≤1 and keeps rounding errors controlled. For multiple right-hand sides, one LU factorisation + k cheap solves beats k full Gaussian eliminations.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.lu-factorization.md",
+        "startLine": 74,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.num.lu-factorization/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.lu-factorization",
+      "title": "PARTIAL (understands pivoting but not the multiple-RHS advantage) → \"If you need to solve the same linear system Ax=b₁, Ax=b₂, …, Ax=b_k, computing A⁻¹ explicitly costs 3×⅔n³ flops. Using LU: compute it once (⅔n³ flops), then for each bₖ run forward+back substitution (2n² flops each). For k=100 and n=1000, LU is roughly 50× faster.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-9\",\"title\":\"PARTIAL (understands pivoting but not the multiple-RHS advantage) → \\\"If you need to solve the same linear system Ax=b₁, Ax=b₂, …, Ax=b_k, computing A⁻¹ explicitly costs 3×⅔n³ flops. Using LU: compute it once (⅔n³ flops), then for each bₖ run forward+back substitution (2n² flops each). For k=100 and n=1000, LU is roughly 50× faster.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.lu-factorization.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.num.lu-factorization/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.lu-factorization",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-10\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.lu-factorization.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.num.lu-factorization/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.lu-factorization",
+      "title": "NO_RESPONSE → \"Solve [[0.001, 1],[1,1]][x₁;x₂]=[1.001; 2] without pivoting and with pivoting. What goes wrong without pivoting on a calculator with 3-digit precision?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-11\",\"title\":\"NO_RESPONSE → \\\"Solve [[0.001, 1],[1,1]][x₁;x₂]=[1.001; 2] without pivoting and with pivoting. What goes wrong without pivoting on a calculator with 3-digit precision?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.lu-factorization.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.num.lu-factorization/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.lu-factorization",
+      "title": "CORRECT → \"Computing A⁻¹ explicitly costs ~3× more than solving directly via LU. The solve path (LU + forward/back sub) also has better numerical stability. Never form A⁻¹ just to solve Ax=b.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-12\",\"title\":\"CORRECT → \\\"Computing A⁻¹ explicitly costs ~3× more than solving directly via LU. The solve path (LU + forward/back sub) also has better numerical stability. Never form A⁻¹ just to solve Ax=b.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.lu-factorization.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.num.lu-factorization/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.lu-factorization",
+      "title": "PARTIAL (knows solve is faster but not why) → \"The reason solve avoids A⁻¹: every matrix–vector multiply accumulates O(n²) floating-point errors. If A⁻¹ has errors from its own computation, multiplying by b compounds them. Forward/back substitution has only O(n) rounding stages per right-hand-side, much better-controlled.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-13\",\"title\":\"PARTIAL (knows solve is faster but not why) → \\\"The reason solve avoids A⁻¹: every matrix–vector multiply accumulates O(n²) floating-point errors. If A⁻¹ has errors from its own computation, multiplying by b compounds them. Forward/back substitution has only O(n) rounding stages per right-hand-side, much better-controlled.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.lu-factorization.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.num.lu-factorization/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.lu-factorization",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-14\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.lu-factorization.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.num.lu-factorization/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.lu-factorization",
+      "title": "NO_RESPONSE → \"Count the floating-point multiplications needed to compute A⁻¹ (inverting a 3×3 by hand) vs. solving Ax=b directly by row reduction. Which requires fewer steps?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-15\",\"title\":\"NO_RESPONSE → \\\"Count the floating-point multiplications needed to compute A⁻¹ (inverting a 3×3 by hand) vs. solving Ax=b directly by row reduction. Which requires fewer steps?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.lu-factorization.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.num.lu-factorization/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.num.lu-factorization",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Factor A = [[2,4,−2],[1,3,0],[−3,−2,7]] as PA=LU using partial pivoting. Show the row swaps and the multipliers at each step.\n2. Use the LU factorisation from problem 1 to solve Ax=b for b=[2,5,−4]ᵀ and b=[0,1,3]ᵀ. Show forward and back substitution for each.\n3. Count the flop count (multiplications + additions) for: (a) LU factorisation of an n×n matrix; (b) forward substitution; (c) back substitution. Express in big-O notation and as exact leading terms.\n4. The matrix A=[[0.001,1],[1,1]] is solved with and without partial pivoting using 4-digit decimal arithmetic. Without pivoting: compute the solution. With pivoting: compute. Compare with the exact solution x=[1,1]ᵀ and explain the difference.\n\n**P55 — Reflect & Consolidate:** \"LU = Gaussian elimination stored compactly. L stores multipliers, U is the result. Solve: Ly=b (forward), Ux=y (backward). Always use partial pivoting. Cost: ⅔n³. Reuse for k right-hand sides.\"\n\n**P76 — Transfer Probe (Cross-link: math.linalg.lu-factorization):**\nBlock LU factorisation is used for large systems by partitioning A into block sub-matrices. (a) Partition A into 2×2 blocks: A=[[A₁₁,A₁₂],[A₂₁,A₂₂]]. Show that A=LU can be written as A₁₁=L₁₁U₁₁, A₂₁=L₂₁U₁₁, A₁₂=L₁₁U₁₂, A₂₂=L₂₁U₁₂+L₂₂U₂₂ (the Schur complement). (b) Explain why block LU gives the same solution as scalar LU. (c) Identify the memory and cache advantages of block LU on modern hardware. (d) What happens to the Schur complement A₂₂−L₂₁U₁₂ if A₁₁ is nearly singular?\n\n**P55 — Reflect & Consolidate:** \"Block LU decomposes the problem hierarchically: the Schur complement A₂₂−A₂₁A₁₁⁻¹A₁₂ is the reduced system after eliminating the first block. Cache-friendly block operations on modern hardware explain why LAPACK uses block LU even though scalar LU is theoretically equivalent.\"\n\n**P75 — Mastery Assessment:**\n\"A finite-element structural model produces the n×n stiffness matrix K (n=500, symmetric positive definite). Ten load vectors f₁,…,f₁₀ must be solved. (a) Describe the full solution strategy (choose: LU, Cholesky, iterative). (b) Count the total flops for LU with partial pivoting vs. solving 10 independent systems. (c) If K is also sparse (≤5 non-zeros per row), should you use dense LU? What alternative is better? (d) If K is perturbed by a small ΔK, express how the solution x changes to first order using the LU factorisation already computed.\"\n\n**P55 — Reflect & Consolidate:** \"LU factorization is the workhorse for dense linear systems. For symmetric positive definite matrices, Cholesky halves the cost. For sparse matrices, sparse LU (with fill-in minimisation orderings) or iterative methods dominate. The LU already computed gives a cheap approximation for perturbed systems via one forward/back substitution update.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.num.lu-factorization complete\n- Score 3/5 → REVIEW partial pivoting and two-step solve; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.linalg.lu-factorization or math.num.error-analysis; reassign\n\n**P78 — Completion:** LU factorization certified. Student factors A=PLU with partial pivoting, solves by forward/back substitution, explains the stability role of pivoting, counts flops, and reuses the factorisation for multiple right-hand sides.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.lu-factorization.md",
+        "startLine": 103,
+        "endLine": 130
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,244 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.num.numerical-integration-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.num.numerical-integration",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:aba2128ff6234ca26cae342af6ad7a306c69196335b822404804f52fb1177afc",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.num.numerical-integration.md": "sha256:05c711767a53f1ff65173c25ed09356e99e7c6c1f8ec6fe66f8bc5a0f472b668"
+    },
+    "assetCount": 8,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.num.numerical-integration",
+    "name": "Numerical Integration",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.calc.definite-integral",
+      "math.num.interpolation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.num.numerical-integration-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.num.numerical-integration (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.num.numerical-integration.md": "sha256:05c711767a53f1ff65173c25ed09356e99e7c6c1f8ec6fe66f8bc5a0f472b668"
+      },
+      "contentHash": "sha256:b1deaeaa5e90a21b1690bd07f65ea28125ded2d3c737d7546327d5df24367ebe",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.num.numerical-integration.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.numerical-integration.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.numerical-integration"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.numerical-integration\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.numerical-integration.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.numerical-integration.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.numerical-integration"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.numerical-integration\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.numerical-integration.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.numerical-integration.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.numerical-integration"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.numerical-integration\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.num.numerical-integration/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.num.numerical-integration",
+      "title": "Learning Objective",
+      "content": "Given a function or dataset, the student applies the rectangle rule (left, right, midpoint), the Trapezoidal Rule, and Simpson's Rule to approximate ∫ₐᵇ f(x) dx; derives the error bounds O(h²) for the Trapezoid Rule and O(h⁴) for Simpson's Rule via the Euler–Maclaurin expansion; chooses the optimal rule for smooth vs. tabulated data; and implements composite integration with n subintervals to achieve a prescribed accuracy.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-integration.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.num.numerical-integration/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.num.numerical-integration",
+      "title": "MORE-POINTS-ALWAYS-BETTER",
+      "content": "| MC-1 | MORE-POINTS-ALWAYS-BETTER | Student increases n without limit, not realising that for smooth f the O(h⁴) Simpson error converges fast enough that n=100 is already excessive — and for noisy data, very fine grids amplify noise | Type 5 — instruction-induced (convergence tables always show error decreasing; the diminishing returns or noise-amplification regime is rarely shown) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-integration.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.num.numerical-integration/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.num.numerical-integration",
+      "title": "TRAPEZOID-SAME-AS-SIMPSON",
+      "content": "| MC-2 | TRAPEZOID-SAME-AS-SIMPSON | Student treats the Trapezoid Rule and Simpson's Rule as equivalent because both use the endpoints — does not recognise that Simpson uses the midpoint as a third evaluation point and achieves a higher order of accuracy | Type 3 — language contamination (\"both trap the area under a curve\" — the word \"trapezoid\" focuses attention on the shape of the region rather than the polynomial degree of the quadrature rule) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-integration.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.num.numerical-integration/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.num.numerical-integration",
+      "title": "RECTANGLE-RULE-IS-WRONG",
+      "content": "| MC-3 | RECTANGLE-RULE-IS-WRONG | Student dismisses the midpoint rectangle rule as inaccurate, not knowing it has the same O(h²) error constant as the Trapezoid Rule and beats the left/right rules by a factor of 2 | Type 5 — instruction-induced (left-rectangle rule is introduced as the naive method and immediately replaced; the midpoint rule is presented later, after the student has mentally categorised all rectangle rules as \"inaccurate\") |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-integration.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.num.numerical-integration/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.numerical-integration",
+      "title": "1.8961",
+      "content": "{\"id\":\"TA-4\",\"title\":\"1.8961\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-integration.md",
+        "startLine": 35,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.num.numerical-integration/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.numerical-integration",
+      "title": "1.9742",
+      "content": "{\"id\":\"TA-8\",\"title\":\"1.9742\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-integration.md",
+        "startLine": 36,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "math.num.numerical-integration/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.numerical-integration",
+      "title": "1.9936",
+      "content": "{\"id\":\"TA-16\",\"title\":\"1.9936\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-integration.md",
+        "startLine": 37,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "math.num.numerical-integration/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.num.numerical-integration",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Approximate ∫₀² √(1+x²) dx using (a) the Trapezoidal Rule with n=4 and (b) Simpson's Rule with n=4. Compute the error bound for each and determine which method achieves 3 decimal place accuracy.\n2. Show that Simpson's Rule is exact for cubic polynomials (degree ≤ 3). Hint: the error formula involves f⁽⁴⁾(x) — what is f⁽⁴⁾ for a cubic?\n3. A function f is known only at tabulated points x₀=0, x₁=0.25, x₂=0.5, x₃=0.75, x₄=1.0 with values 1, 1.064, 1.284, 1.756, 2.718. Approximate ∫₀¹ f(x) dx using (a) Trapezoid Rule and (b) Simpson's Rule (n=4, even). Which is more reliable if f has measurement noise?\n4. Use the convergence ratio test to empirically determine the order of the midpoint rectangle rule. Compute ∫₀¹ cos(x) dx with n=4, 8, 16 using the midpoint rule. Compute error ratios and confirm O(h²) order.\n\n**P55 — Reflect & Consolidate:** \"Rectangle (midpoint O(h²)) < Trapezoidal O(h²) = Midpoint < Simpson's O(h⁴). For smooth functions use Simpson's to minimise evaluations. For tabulated data use Trapezoid. Convergence ratio test confirms the order empirically.\"\n\n**P76 — Transfer Probe (Independence mode):**\nRomberg integration extrapolates from Trapezoid approximations at step sizes h, h/2, h/4 to cancel the leading O(h²) error term and achieve O(h⁴) accuracy without explicitly implementing Simpson's Rule. (a) Let T(h) be the Trapezoid approximation with step h. Show that R(h) = (4T(h/2) − T(h))/3 equals Simpson's Rule with step h/2. (b) Apply Romberg integration to ∫₀π sin(x) dx with h=π/4 (5 evaluations). (c) Explain how further Richardson extrapolation steps produce O(h⁶), O(h⁸) accuracy. (d) Implement Romberg's method for ∫₀¹ e^x dx and confirm that three extrapolation levels give machine precision.\n\n**P55 — Reflect & Consolidate:** \"Romberg integration applies Richardson extrapolation to the Trapezoid Rule: each extrapolation level eliminates the leading error term, doubling the convergence order. It achieves high accuracy with far fewer evaluations than composite Trapezoid alone, and the Trapezoid evaluations are reused across levels.\"\n\n**P75 — Mastery Assessment:**\n\"A structural engineer needs ∫₀⁵ σ(x) dx where σ(x) is a stress function measured at x=0,0.5,1,2,3,4,5 (unevenly spaced!). (a) Can you directly apply Simpson's Rule with these points? If not, what are your options? (b) Apply the composite Trapezoid Rule to the uneven grid. (c) Estimate the error if you assume σ is smooth (|σ''|≤10). (d) A more accurate measurement gives σ at x=0,1,2,3,4,5 and also at the midpoints. Now apply composite Simpson's. (e) How many decimal places of accuracy do you gain by adding midpoints?\"\n\n**P55 — Reflect & Consolidate:** \"Real data often comes on non-uniform grids — Simpson's Rule requires evenly spaced pairs, so Trapezoid is the default for irregular grids. Adding midpoint evaluations unlocks composite Simpson's with O(h⁴) accuracy improvement.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.num.numerical-integration complete\n- Score 3/5 → REVIEW error order derivation and method selection; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.calc.definite-integral or math.num.interpolation; reassign\n\n**P78 — Completion:** Numerical integration certified. Student applies Trapezoid and Simpson's Rules, computes error bounds, selects the optimal rule, and uses the convergence ratio test to verify order empirically.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-integration.md",
+        "startLine": 115,
+        "endLine": 142
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

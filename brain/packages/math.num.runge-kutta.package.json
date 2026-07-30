@@ -1,0 +1,345 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.num.runge-kutta-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.num.runge-kutta",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a2987334da01bc72e321642cb7bb7f14e4647ffbab34224881639af3465d1e60",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.num.runge-kutta.md": "sha256:b396615dde3696ffdea74256af86401feb27bb58adb956d2856955f77857dfee"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "math.num.runge-kutta",
+    "name": "Runge-Kutta Methods",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.num.euler-method"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.num.runge-kutta-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.num.runge-kutta (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.num.runge-kutta.md": "sha256:b396615dde3696ffdea74256af86401feb27bb58adb956d2856955f77857dfee"
+      },
+      "contentHash": "sha256:3fe7131fc60f1e02d3835c4bdd3ceb5f6b7d705d6d9066e8d5e67dc7d2dd2c7f",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.num.runge-kutta.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.runge-kutta.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.runge-kutta"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.runge-kutta\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.runge-kutta.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.runge-kutta.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.runge-kutta"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.runge-kutta\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.runge-kutta.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.runge-kutta.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.runge-kutta"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.runge-kutta\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.runge-kutta.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.runge-kutta.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.runge-kutta"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.runge-kutta\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.runge-kutta.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.runge-kutta.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.runge-kutta"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.runge-kutta\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.runge-kutta.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.runge-kutta.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.runge-kutta"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.runge-kutta\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.num.runge-kutta/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.num.runge-kutta",
+      "title": "Learning Objective",
+      "content": "Given an initial value problem y'=f(t,y), y(t₀)=y₀, the student derives the classical RK4 update from the idea of evaluating the slope at multiple interior points; states the local truncation error O(h⁵) and global error O(h⁴) for RK4; explains why RK4 requires four function evaluations per step while Euler requires one; compares explicit RK methods against implicit (collocation) RK methods for stiff problems; and applies adaptive step-size control (step doubling or embedded pairs such as RK45) to maintain a target local error tolerance.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.runge-kutta.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.num.runge-kutta/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.num.runge-kutta",
+      "title": "RK4-IS-EXACT",
+      "content": "| MC-1 | RK4-IS-EXACT | Student believes RK4 gives the exact solution because it matches Taylor series to order four — does not recognise that a nonzero O(h⁵) LTE still accumulates | Type 3 — language contamination (\"fourth-order\" sounds complete; students confuse \"matches up to order 4\" with \"no error at all beyond order 4\") |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.runge-kutta.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.num.runge-kutta/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.num.runge-kutta",
+      "title": "MORE-STAGES-ALWAYS-BETTER",
+      "content": "| MC-2 | MORE-STAGES-ALWAYS-BETTER | Student assumes increasing the number of stages always improves accuracy, not recognising that beyond 4 stages extra stages do not buy a corresponding order increase (Butcher barrier) and that each stage costs an f evaluation | Type 5 — instruction-induced (tables showing order 1→2→3→4 improve accuracy for 1→2→3→4 stages lead students to extrapolate; the Butcher barrier at 5 stages is rarely covered in first courses) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.runge-kutta.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.num.runge-kutta/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.num.runge-kutta",
+      "title": "ADAPTIVE-STEP-CHANGES-METHOD",
+      "content": "| MC-3 | ADAPTIVE-STEP-CHANGES-METHOD | Student thinks that when an adaptive solver reduces h it is switching to a different, lower-order method — does not understand that the same RK formula is applied with a smaller step | Type 1 — overgeneralization (solvers report step sizes that vary; students interpret any change in h as a change in the underlying algorithm) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.runge-kutta.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.num.runge-kutta/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.runge-kutta",
+      "title": "1 (Euler)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"1 (Euler)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.runge-kutta.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.num.runge-kutta/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.runge-kutta",
+      "title": "2",
+      "content": "{\"id\":\"TA-2\",\"title\":\"2\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.runge-kutta.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.num.runge-kutta/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.runge-kutta",
+      "title": "3",
+      "content": "{\"id\":\"TA-3\",\"title\":\"3\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.runge-kutta.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.num.runge-kutta/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.runge-kutta",
+      "title": "4",
+      "content": "{\"id\":\"TA-4\",\"title\":\"4\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.runge-kutta.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.num.runge-kutta/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.runge-kutta",
+      "title": "4 (NOT 5)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"4 (NOT 5)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.runge-kutta.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.num.runge-kutta/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.runge-kutta",
+      "title": "5",
+      "content": "{\"id\":\"TA-6\",\"title\":\"5\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.runge-kutta.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.num.runge-kutta/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.num.runge-kutta",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Apply RK4 to y'=−2y, y(0)=1 with h=0.5. Compute all four stages k₁,k₂,k₃,k₄ and y₁. Compare with the exact e^{−1}. Now apply Euler with the same h and compare errors. Confirm that RK4's error is roughly h⁴/Euler's h factor smaller.\n2. Write the Butcher tableau for the classical RK4 method. Identify the stage evaluations, abscissae (c-column), and weights (b-row). Verify: Σbᵢ=1 (consistency condition). What does this ensure?\n3. An adaptive RK45 solver reports taking steps of size h=0.3, 0.28, 0.31, 0.05, 0.04, 0.06 over [0,1]. Where is the solution changing rapidly? What would you expect about f(t,y) in that region?\n4. For y'=−1000y, y(0)=1 (stiff, λ=−1000), what is the maximum h for stable explicit RK4? (The RK4 stability region along the negative real axis extends to |hλ|≤2.785.) Compare with the maximum h for explicit Euler (h<2/1000). How many steps does each require to integrate to t=0.1?\n\n**P55 — Reflect & Consolidate:** \"RK4: four slope evaluations per step, O(h⁴) global error, much more accurate than Euler for the same h. Adaptive RK45 pairs a 4th- and 5th-order formula to estimate local error and tune h automatically. Butcher barrier: more stages beyond 4 don't automatically buy higher order. For stiff ODEs, switch to implicit methods.\"\n\n**P76 — Transfer Probe (Independence mode):**\nSymplectic (geometric) integrators preserve the phase-space volume of Hamiltonian systems, preventing the artificial energy drift that RK methods introduce over long integration times. (a) Apply RK4 to the harmonic oscillator y''=−y (as a system: y'=v, v'=−y) with h=0.1 for 100 periods (t∈[0,200π]). Does the computed energy H=v²/2+y²/2 drift? (b) The symplectic Euler method: y_{n+1}=yₙ+h·vₙ, v_{n+1}=vₙ−h·yₙ₊₁ (implicit in v, explicit in y). Apply for 100 periods. Does energy drift? (c) Explain why preserving a quadratic invariant exactly (Hamiltonian) is a structural property of the integrator, not just a matter of accuracy order. (d) When would you choose a symplectic integrator over RK4 despite RK4's higher formal order?\n\n**P55 — Reflect & Consolidate:** \"RK4 is not symplectic: it introduces artificial energy drift over long times, even at small h. Symplectic methods preserve the phase-space structure of Hamiltonian systems exactly — this is a geometric property, not an accuracy improvement. For long-time orbital mechanics, molecular dynamics, and conservative systems: use symplectic integrators. For short-time, non-Hamiltonian dynamics with high accuracy requirements: use adaptive RK45.\"\n\n**P75 — Mastery Assessment:**\n\"A spacecraft trajectory requires integrating the two-body gravitational ODE y''=−μy/|y|³ for 10 orbital periods. (a) Which method preserves energy better over 10 periods: RK4 or symplectic Euler? Why? (b) The orbit is nearly circular. Where does adaptive RK45 take large steps, and where small? (c) At periapsis (closest approach), |y| is small and forces are large. What does this imply for the required step size and the stability of explicit methods? (d) If the mission demands position accuracy of 1 metre after 10 periods and the orbit radius is 6,000 km, what fractional accuracy is needed? Can RK4 achieve this with h=100 s?\"\n\n**P55 — Reflect & Consolidate:** \"Long-time Hamiltonian dynamics: symplectic first. Short-time, smooth: adaptive RK45. Stiff (λ₁/λ₂ ≫ 1): implicit methods. The method choice is driven by: (1) the ODE's stiffness, (2) whether conserved quantities must be preserved, (3) the integration time relative to the characteristic timescale.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.num.runge-kutta complete\n- Score 3/5 → REVIEW RK4 derivation and adaptive step control; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.num.euler-method; reassign\n\n**P78 — Completion:** Runge-Kutta methods certified. Student derives RK4 from weighted slope averaging, states LTE=O(h⁵)/global O(h⁴), applies adaptive step-size control via embedded pairs, explains the Butcher barrier, and identifies when to switch from explicit RK to implicit or symplectic integrators.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.runge-kutta.md",
+        "startLine": 128,
+        "endLine": 155
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
