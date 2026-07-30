@@ -124,6 +124,15 @@ const SCENARIOS = scenarios()
 /** The ladder's answer, in the kernel's move vocabulary. Uses the single
  *  owner of that mapping — restating it here would let the test agree with a
  *  stale copy, which is the drift kernel/policyMove.ts was created to end. */
+/** The Band-2 reason, when legality (not Band 4) decided this scenario. */
+function ladderBlockedReason(s: Scenario): string | null {
+  return decideNextMoveDetailed(s.cs, {
+    recoveryTurn: false,
+    workedExampleFirst: s.workedExampleFirst,
+    legality: { hasEvidencedPriorKnowledge: true },
+  }).blockedReason
+}
+
 function ladderMove(s: Scenario): string | null {
   const d = decideNextMoveDetailed(s.cs, {
     recoveryTurn: false,
@@ -196,6 +205,14 @@ describe('Band 4 reproduces the conversation ladder', () => {
   it('agrees with decideNextMoveHeuristic on EVERY scenario', () => {
     const mismatches: Array<{ key: string; ladder: string | null; pack: string }> = []
     for (const s of SCENARIOS) {
+      // Band 4 only, as this file's ladderMove() comment states. Where the
+      // Band 2 legality layer removed ASK, the ladder's move was decided
+      // ABOVE the heuristic, while toInputs() hands the pack `askLegal: true`
+      // — so those scenarios are not a comparison of the two ladders and
+      // never were. `hasEvidencedPriorKnowledge` already neutralises QL-1 for
+      // the same reason; this covers the remaining rules (QL-2's diagnostic
+      // block, QL-5's reflection budget), which have no such knob.
+      if (ladderBlockedReason(s) !== null) continue
       const pack = decide(BASE_PACK, toInputs(s.cs, s.workedExampleFirst)).move
       const ladder = ladderMove(s)
       if (pack !== ladder) mismatches.push({ key: s.key, ladder, pack })

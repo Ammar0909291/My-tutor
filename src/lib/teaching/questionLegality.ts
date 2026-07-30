@@ -99,6 +99,17 @@ export interface LegalityContext {
 export const DEFAULT_DIAGNOSTIC_CONCLUDES_AFTER = 2
 
 /**
+ * The half of the ladder where a question is a DIAGNOSTIC PROBE — asked to
+ * discover what the learner already has, rather than to assess what the tutor
+ * has taught. Identical boundary to conversationState's isDeliveryPhase(), and
+ * for the same underlying reason; declared here rather than imported to keep
+ * this module's dependency on conversationState type-only, as it already is.
+ */
+function isDiagnosticPhase(phase: TeachingPhase): boolean {
+  return phase === 'OBSERVE' || phase === 'DEMONSTRATE' || phase === 'GUIDE'
+}
+
+/**
  * Non-answers that make ASK illegal on the following turn. One — because you
  * do not answer "I don't know" with another question, ever. Discovered by the
  * transcript-replay test: a threshold of 2 for both the block and the phase
@@ -176,9 +187,37 @@ export function questionLegality(
   }
 
   // QL-2 — a non-answer is never answered with a question.
+  //
+  // Scoped to the DIAGNOSTIC half of the ladder, which is what this rule is
+  // about and what its own reason code (QL2_DIAGNOSTIC_CONCLUDED) says: the
+  // probe has succeeded, the answer is "they don't know", so probing again
+  // yields nothing. That reasoning holds for questions asked to find out what
+  // the learner already has — OBSERVE, DEMONSTRATE, GUIDE. It does not hold at
+  // CHECK, PRACTICE or TRANSFER, where a question is not a diagnostic probe
+  // but the assessment of material the tutor has since taught.
+  //
+  // Unscoped it was permanent, and permanent at the highest-authority band.
+  // `consecutiveDontKnows` is cleared only by `signalCorrect === true`, and a
+  // signal requires a question, so the block sustained itself: one "I don't
+  // know" made every question for the rest of the concept illegal. That
+  // starves the mastery gates of the graded answer they advance on, and since
+  // prompt assembly is a pure function of this state, the tutor then re-emits
+  // the same instruction indefinitely — the reported repetition.
+  //
+  // Deliberately NOT fixed by decaying the counter: `consecutiveDontKnows` is
+  // also the diagnostic run-length that decideNextMove and
+  // phaseAfterConcludedDiagnostic read, where the run must survive a bare
+  // acknowledgement between two confusion signals (the Loop 4 rule). Scoping
+  // the consumer leaves that counter's meaning intact and changes only the
+  // reach of this block.
+  //
+  // The per-turn form of the same rule is enforced independently and is not
+  // affected: a live "I don't know" fires recovery, and decideNextMoveDetailed
+  // returns 'teach' on any recovery turn before this band is consulted.
   const nonAnswers = state.consecutiveDontKnows ?? 0
   const concludesAt = ctx.diagnosticConcludesAfter ?? DEFAULT_DIAGNOSTIC_CONCLUDES_AFTER
-  if (nonAnswers >= DEFAULT_NON_ANSWER_BLOCKS_ASK) {
+  const inDiagnostic = isDiagnosticPhase(state.phase)
+  if (inDiagnostic && nonAnswers >= DEFAULT_NON_ANSWER_BLOCKS_ASK) {
     return {
       askLegal: false,
       reason: 'QL2_DIAGNOSTIC_CONCLUDED',

@@ -276,6 +276,27 @@ function foldReflectionAskedThisEntry(
   return prevFlag
 }
 
+/**
+ * A.6 support: fold turnsInCurrentPhase across a transition. Same shape and
+ * the same reason as foldReflectionAskedThisEntry above — the fold is applied
+ * at EVERY return point of advanceConversationState, because a value computed
+ * at only one of them is not a fold, it is a fold that some turns skip.
+ *
+ * It previously WAS computed at only one of them: the shared tail, which the
+ * remediation and failure branches both return before reaching. Those are
+ * precisely the branches that hold the phase still, so the counter that
+ * measures "how long have we been stuck" was frozen for the entire duration
+ * of being stuck, and the STALE LOOP directive it feeds — the runtime's
+ * designated last-resort anti-repetition device, at 4 turns — could not fire
+ * in the one situation it exists for. Every failure turn re-emitted a
+ * byte-identical directive with the counter reading 0.
+ */
+function foldTurnsInCurrentPhase(
+  prevPhase: TeachingPhase, nextPhase: TeachingPhase, prevCount: number,
+): number {
+  return nextPhase === prevPhase ? (prevCount ?? 0) + 1 : 0
+}
+
 function phaseIndex(p: TeachingPhase): number { return PHASE_ORDER.indexOf(p) }
 
 function phaseDown(p: TeachingPhase, demonstrated: boolean): TeachingPhase {
@@ -394,6 +415,9 @@ export function advanceConversationState(
     next.reflectionAskedThisEntry = foldReflectionAskedThisEntry(
       prev.phase, next.phase, evidence.askedQuestion, prev.reflectionAskedThisEntry ?? false,
     )
+    next.turnsInCurrentPhase = foldTurnsInCurrentPhase(
+      prev.phase, next.phase, prev.turnsInCurrentPhase ?? 0,
+    )
     return next
   }
 
@@ -414,14 +438,69 @@ export function advanceConversationState(
     // what produced the observed loop — the tutor showed once, re-entered
     // OBSERVE, and the observation question came back. The diagnostic's own
     // result ("nothing here yet") is the evidence DEMONSTRATE needs.
-    next.phase = phaseAfterConcludedDiagnostic(next.phase, next.consecutiveDontKnows)
+    //
+    // Both counters record the SAME fact — an OBSERVE probe was run and
+    // produced nothing — arriving by two different channels: a `dont_know`
+    // recovery utterance (consecutiveDontKnows) or a wrong/absent answer
+    // (observeFailures). Only the first was wired here, so the second road
+    // out of OBSERVE existed in decideNextMove (which can force 'show') and
+    // nowhere in the fold (which is the only layer that can move a phase).
+    // A move-layer escape cannot advance a ladder: the learner who answers
+    // wrong twice was pinned in OBSERVE permanently, because phaseDown's
+    // floor is OBSERVE until `demonstrated`, and `demonstrated` is only set
+    // by a no-question turn OUTSIDE OBSERVE — a condition OBSERVE forbids.
+    // OBSERVE was therefore absorbing, and since prompt assembly is a pure
+    // function of the state, every subsequent turn produced a byte-identical
+    // directive. Reading both channels here closes that fixed point using the
+    // transition the module already owns. max(), not sum(): a dont_know at
+    // OBSERVE increments both, and must still count as one failed probe.
+    next.phase = phaseAfterConcludedDiagnostic(
+      next.phase,
+      Math.max(next.consecutiveDontKnows, next.observeFailures),
+    )
     // Success evidence at CHECK/PRACTICE is voided by a later failure at
     // the same rung only in part — keep it (high-water mark), the phase
     // drop alone forces re-earning the transition.
     next.reflectionAskedThisEntry = foldReflectionAskedThisEntry(
       prev.phase, next.phase, evidence.askedQuestion, prev.reflectionAskedThisEntry ?? false,
     )
+    next.turnsInCurrentPhase = foldTurnsInCurrentPhase(
+      prev.phase, next.phase, prev.turnsInCurrentPhase ?? 0,
+    )
     return next
+  }
+
+  // ── The reachability law ────────────────────────────────────────────────
+  //
+  // DEMONSTRATE→GUIDE is gated on `demonstrated` — "the teacher has actually
+  // demonstrated", per this module's own contract at the top of the file. It
+  // is NOT gated on a learner signal, and it must not be, because DEMONSTRATE
+  // is the one phase that structurally cannot produce one:
+  //
+  //   phase DEMONSTRATE ⇒ decideNextMoveHeuristic returns 'show'
+  //   move 'show'       ⇒ the turn asks nothing (MOVE_LINE: "Ask NO questions")
+  //   nothing asked     ⇒ the model emits no SIGNAL
+  //   no SIGNAL         ⇒ signalCorrect is null ⇒ `succeeded` is false
+  //
+  // So while this transition lived inside the `succeeded` branch its guard
+  // could never be evaluated, and DEMONSTRATE was an absorbing state for
+  // EVERY learner — including one answering perfectly. Since buildTurnDirective
+  // is a pure function of this state, the tutor then re-emitted a
+  // byte-identical directive on every subsequent turn: the reported bug.
+  //
+  // The general rule, of which this is the only instance: a phase whose
+  // decided move can never ask a question must not have a signal-gated exit.
+  // OBSERVE ('ask'), GUIDE (alternates teach/ask), CHECK, PRACTICE and
+  // TRANSFER ('ask') can all reach their gates; DEMONSTRATE alone could not.
+  //
+  // Hoisted here so ONE site owns the transition for all three evidence kinds
+  // (a correct signal, a bare acknowledgement, or a neutral reply) — they all
+  // mean the same thing at this rung, and three copies of one rule is how the
+  // guard drifted out of reach in the first place. The failure and
+  // remediation paths return above this line, so a struggling learner is
+  // still never carried forward.
+  if (prev.phase === 'DEMONSTRATE' && next.demonstrated) {
+    next.phase = 'GUIDE'
   }
 
   if (succeeded) {
@@ -432,7 +511,7 @@ export function advanceConversationState(
         next.phase = 'DEMONSTRATE'
         break
       case 'DEMONSTRATE':
-        if (next.demonstrated) next.phase = 'GUIDE'
+        // Owned by the reachability law above.
         break
       case 'GUIDE':
         if (next.demonstrated) next.phase = 'CHECK'
@@ -479,7 +558,7 @@ export function advanceConversationState(
         next.phase = 'DEMONSTRATE'
         break
       case 'DEMONSTRATE':
-        if (next.demonstrated) next.phase = 'GUIDE'
+        // Owned by the reachability law above.
         break
       case 'GUIDE':
         if (next.demonstrated) next.phase = 'CHECK'
@@ -493,9 +572,9 @@ export function advanceConversationState(
   }
 
   // A.6: track turns in the current phase — reset on transition.
-  next.turnsInCurrentPhase = next.phase === prev.phase
-    ? (prev.turnsInCurrentPhase ?? 0) + 1
-    : 0
+  next.turnsInCurrentPhase = foldTurnsInCurrentPhase(
+    prev.phase, next.phase, prev.turnsInCurrentPhase ?? 0,
+  )
 
   next.reflectionAskedThisEntry = foldReflectionAskedThisEntry(
     prev.phase, next.phase, evidence.askedQuestion, prev.reflectionAskedThisEntry ?? false,
@@ -573,32 +652,82 @@ export function decideNextMoveDetailed(
   return { move: decideNextMoveHeuristic(state, ctx), blockedReason: null, rationale: null }
 }
 
+/**
+ * Has the remedial give this turn's struggle gates would order already been
+ * delivered?
+ *
+ * Every gate below ("they said I-don't-know twice", "we have probed twice",
+ * "they have failed twice") is a REMEDIAL INTERVENTION: stop interrogating,
+ * give them something. An intervention is spent once it has been delivered.
+ *
+ * Unscoped, each of those gates was permanent, and permanence turned every one
+ * of them into a trap with the same shape:
+ *
+ *   gate fires ⇒ move is 'show' ⇒ a SHOW turn asks nothing ⇒ no SIGNAL ⇒
+ *   `succeeded` never becomes true ⇒ the counter that the gate reads is only
+ *   ever reset by success ⇒ the gate fires again, forever.
+ *
+ * The move engine could therefore pin itself to a non-asking move for the
+ * remaining life of the concept, which starves every phase above GUIDE of the
+ * graded answer it advances on — and, because buildTurnDirective is a pure
+ * function of this state, re-emits a byte-identical directive every turn.
+ *
+ * `teachSegmentsSinceQuestion` already records exactly the needed fact: it
+ * counts consecutive no-question turns and is zeroed the moment a question is
+ * asked. So a nonzero value means "we have given since we last asked" — the
+ * intervention landed — and the machine may return to the phase ladder. If the
+ * learner then fails the next question, the counter zeroes and the gate fires
+ * again: a re-show/re-check rhythm, not a mode the lesson cannot leave.
+ *
+ * No new state, and no gate's intent is weakened — only its permanence.
+ */
+function remedialGiveDelivered(state: ConversationState): boolean {
+  return (state.teachSegmentsSinceQuestion ?? 0) > 0
+}
+
 /** The pre-existing heuristic ladder, unchanged in behaviour. Only reachable
  *  once Band 2 has confirmed ASK is legal. */
 function decideNextMoveHeuristic(state: ConversationState, ctx: NextMoveContext): NextMove {
+  // The struggle/probe gates below are one-shot interventions (see
+  // remedialGiveDelivered). Once the give has landed, the phase ladder resumes.
+  const remedialPending = !remedialGiveDelivered(state)
   // Hard Rule 1: the student has said "I don't know / didn't understand"
   // twice in a row — Discovery is definitively over, teaching must begin.
-  if ((state.consecutiveDontKnows ?? 0) >= 2) return 'show'
+  if (remedialPending && (state.consecutiveDontKnows ?? 0) >= 2) return 'show'
   // Permanent gate: after 2 total prior-knowledge probes the inquiry phase
   // is definitively over. Unlike CPK, this counter never resets, so
   // abbreviated probes that fall outside PRIOR_KNOWLEDGE_PROBE_RE cannot
   // reset the gate once 2 formal probes have been seen. A human tutor stops
   // asking "have you seen X?" after the student has said "no" twice.
-  if ((state.totalKnowledgeProbes ?? 0) >= 2) return 'show'
+  if (remedialPending && (state.totalKnowledgeProbes ?? 0) >= 2) return 'show'
   // P0-4: semantic loop break — the same underlying question, reworded,
   // twice in a row. More specific than the generic question budget below
   // (which only counts, never recognizes repeated INTENT), so it is
   // checked first and can fire even where the generic count alone would not.
-  if (state.consecutivePriorKnowledgeProbes >= 2) return 'show'
+  if (remedialPending && state.consecutivePriorKnowledgeProbes >= 2) return 'show'
   // Observe-failure gate: when the student has failed the OBSERVE observation
   // question twice, stop repeating it — advance to DEMONSTRATE.
-  if ((state.observeFailures ?? 0) >= 2) return 'show'
+  //
+  // Scoped to OBSERVE, because that is the whole of its stated purpose (see
+  // the field's own doc comment: "so the phase advances to DEMONSTRATE
+  // instead of repeating the observation loop"). The counter never resets —
+  // correctly, it is a high-water mark of what happened during the diagnostic
+  // — so an unscoped read kept forcing SHOW for the entire remaining lifetime
+  // of the concept. That starves the ladder of the one input it advances on:
+  // every phase above GUIDE moves on a graded answer, a graded answer needs a
+  // question, and this gate forbade questions forever. The escape then held
+  // the machine at DEMONSTRATE exactly as it had previously held it at
+  // OBSERVE. Once the phase HAS left OBSERVE the escape has already been
+  // taken, and continuing to suppress ASK enforces a condition that no longer
+  // exists. Later phases have their own failure handling (drop one, floor
+  // DEMONSTRATE) — the same boundary phaseAfterConcludedDiagnostic draws.
+  if (remedialPending && state.phase === 'OBSERVE' && (state.observeFailures ?? 0) >= 2) return 'show'
   // Hard question budget: two asks without a give → give.
   if (state.questionsAskedSinceTeach >= 2) {
     return state.consecutiveFailures >= 1 ? 'show' : 'teach'
   }
   // Repeated struggle → demonstrate, don't interrogate (Phase F).
-  if (state.consecutiveFailures >= 2) return 'show'
+  if (remedialPending && state.consecutiveFailures >= 2) return 'show'
   // Worked-example-first: until something has been demonstrated, show.
   if (ctx.workedExampleFirst && !state.demonstrated) return 'show'
 

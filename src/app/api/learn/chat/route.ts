@@ -3713,7 +3713,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // The server asked a question last turn iff its decided move
               // was 'ask'; absent that we fall back to the ladder's own
               // record that a question was outstanding.
-              answerWasExpected: evidenceMoveHoisted === 'ASK'
+              // NextMove is lowercase ('teach' | 'show' | 'ask'), so the
+              // comparison against 'ASK' was unsatisfiable — the first
+              // disjunct never contributed and the whole predicate rested on
+              // the fallback alone. It feeds RC-D's dropped-observation
+              // counter (needsSignalRepair), so the freeze-breaker was reading
+              // a partly-blind input.
+              answerWasExpected: evidenceMoveHoisted === 'ask'
                 || (conversationStateHoisted?.questionsAskedSinceTeach ?? 0) > 0,
               learnerReplySubstantive: message.trim().length > 0
                 && !isBareAckForMetrics(message)

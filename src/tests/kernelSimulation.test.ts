@@ -128,13 +128,28 @@ describe('determinism', () => {
     expect(seq(1)).not.toBe(seq(2))
   })
 
-  it('and the runtime is deliberately insensitive to which guess was made', async () => {
+  it('and guessing never buys mastery, whichever guess was made', async () => {
+    // This previously asserted the two seeds produce an IDENTICAL trace, on the
+    // premise that the guesser's '12' and 'understood!' are both non-decisive.
+    // That premise no longer holds and should not: 'understood!' is a bare
+    // acknowledgement, and an acknowledgement deliberately advances the
+    // DELIVERY phases — the learner saying "I'm done with that step" is exactly
+    // the evidence a delivery step needs, and withholding it is what froze the
+    // lesson. So the seeds legitimately differ by how soon delivery advances.
+    //
+    // The invariant actually worth pinning is the one the mastery gates exist
+    // for, and it is unchanged: a guess is not evidence of understanding, so
+    // neither seed can reach an assessment phase without answering anything
+    // correctly — while both must still make progress rather than freeze.
     const p = personaById('guesser')!
-    const trace = async (seed: number) =>
-      (await runEpisode({ persona: p, seed, turns: 20 })).turns
-        .map((t) => `${t.decision.move}|${t.stateBefore.phase}`).join(',')
-    // Non-decisive answers must not move the ladder differently.
-    expect(await trace(1)).toBe(await trace(2))
+    for (const seed of [1, 2]) {
+      const turns = (await runEpisode({ persona: p, seed, turns: 20 })).turns
+      const phases = turns.map((t) => t.stateBefore.phase)
+      expect(phases).toContain('DEMONSTRATE')   // progress, not a fixed point
+      expect(phases).not.toContain('CHECK')     // and never a mastery gate
+      expect(phases).not.toContain('PRACTICE')
+      expect(phases).not.toContain('TRANSFER')
+    }
   })
 })
 

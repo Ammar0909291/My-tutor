@@ -22,7 +22,7 @@
  *   Band 4: default-move-fallback
  *   Band 6: fallback-chain
  */
-import type { PolicyPack, Rule } from './types'
+import type { PolicyPack, PolicyInputs, Rule } from './types'
 import { getStageCeiling } from '../tsm/phases'
 
 const P = (id: string, band: 0|1|2|3|4|5|6, citation: string, guard: Rule['guard'], effect: Rule['effect'], opts: { specificity: number; mandatory?: boolean }): Rule => ({
@@ -226,10 +226,27 @@ const b4LegalityGiveTeach = P(
  * "consecutive don't-knows" and "the inquiry phase is permanently over" are
  * different answers a reviewer must be able to tell apart.
  */
+/**
+ * Band 4 mirror of conversationState's `remedialGiveDelivered`.
+ *
+ * Each SHOW gate below is a remedial intervention, and an intervention is
+ * spent once delivered. Unscoped they were permanent, and permanence made each
+ * one self-sustaining: the gate forces SHOW, a SHOW turn asks nothing, so no
+ * SIGNAL arrives, so the counter the gate reads (cleared only by success) never
+ * clears, so the gate fires again — forever. `teachSegmentsSinceQuestion` is
+ * zeroed the moment a question is asked, so a nonzero value means the give has
+ * landed and the phase ladder may resume.
+ *
+ * Must stay in exact agreement with decideNextMoveHeuristic — ladderParity
+ * asserts move-for-move equality across the full scenario matrix.
+ */
+const remedialPending = (i: PolicyInputs): boolean =>
+  (i.teachSegmentsSinceQuestion ?? 0) === 0
+
 const b4DontKnowGate = P(
   'B4.gate.consecutive-dont-knows.v1', 4,
   'conversationState decideNextMoveHeuristic (Hard Rule 1)',
-  { reads: ['consecutiveDontKnows'], match: (i) => (i.consecutiveDontKnows ?? 0) >= 2, describe: 'two consecutive "I don\'t know" → discovery is over' },
+  { reads: ['consecutiveDontKnows', 'teachSegmentsSinceQuestion'], match: (i) => remedialPending(i) && (i.consecutiveDontKnows ?? 0) >= 2, describe: 'two consecutive "I don\'t know" → discovery is over' },
   { move: 'SHOW', actionClass: 'DEMONSTRATION' },
   { specificity: 8 },
 )
@@ -237,7 +254,7 @@ const b4DontKnowGate = P(
 const b4TotalProbesGate = P(
   'B4.gate.total-knowledge-probes.v1', 4,
   'conversationState decideNextMoveHeuristic (permanent gate)',
-  { reads: ['totalKnowledgeProbes'], match: (i) => (i.totalKnowledgeProbes ?? 0) >= 2, describe: 'two prior-knowledge probes asked this session, ever' },
+  { reads: ['totalKnowledgeProbes', 'teachSegmentsSinceQuestion'], match: (i) => remedialPending(i) && (i.totalKnowledgeProbes ?? 0) >= 2, describe: 'two prior-knowledge probes asked this session, ever' },
   { move: 'SHOW', actionClass: 'DEMONSTRATION' },
   { specificity: 8 },
 )
@@ -245,7 +262,7 @@ const b4TotalProbesGate = P(
 const b4LoopBreakGate = P(
   'B4.gate.repeated-probe-intent.v1', 4,
   'conversationState decideNextMoveHeuristic (P0-4 semantic loop break)',
-  { reads: ['consecutivePriorKnowledgeProbes'], match: (i) => (i.consecutivePriorKnowledgeProbes ?? 0) >= 2, describe: 'the same question, reworded, twice' },
+  { reads: ['consecutivePriorKnowledgeProbes', 'teachSegmentsSinceQuestion'], match: (i) => remedialPending(i) && (i.consecutivePriorKnowledgeProbes ?? 0) >= 2, describe: 'the same question, reworded, twice' },
   { move: 'SHOW', actionClass: 'DEMONSTRATION' },
   { specificity: 8 },
 )
@@ -253,7 +270,7 @@ const b4LoopBreakGate = P(
 const b4ObserveFailureGate = P(
   'B4.gate.observe-failures.v1', 4,
   'conversationState decideNextMoveHeuristic (observe-failure gate)',
-  { reads: ['observeFailures'], match: (i) => (i.observeFailures ?? 0) >= 2, describe: 'the observation question has failed twice' },
+  { reads: ['observeFailures', 'teachSegmentsSinceQuestion', 'phase'], match: (i) => remedialPending(i) && i.phase === 'OBSERVE' && (i.observeFailures ?? 0) >= 2, describe: 'the observation question has failed twice' },
   { move: 'SHOW', actionClass: 'DEMONSTRATION' },
   { specificity: 8 },
 )
@@ -280,7 +297,7 @@ const b4QuestionBudgetTeach = P(
 const b4RepeatedStruggle = P(
   'B4.repeated-struggle.show.v1', 4,
   'foundations/01 §3 (worked-example-first)',
-  { reads: ['consecutiveFailures'], match: (i) => i.consecutiveFailures >= 2, describe: '≥2 consecutive failures' },
+  { reads: ['consecutiveFailures', 'teachSegmentsSinceQuestion'], match: (i) => remedialPending(i) && i.consecutiveFailures >= 2, describe: '≥2 consecutive failures, nothing given since' },
   { move: 'SHOW', actionClass: 'DEMONSTRATION' },
   { specificity: 6 },
 )

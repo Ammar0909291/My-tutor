@@ -196,8 +196,26 @@ describe('Transcript Replay B — repeated confusion changes teaching behavior i
     // that the server FORCES a non-question turn regardless of prompt
     // wording — the deterministic anti-repetition guarantee.
     expect(state.consecutiveFailures).toBeGreaterThanOrEqual(2)
-    const move = decideNextMove(state, { recoveryTurn: false, workedExampleFirst: false })
-    expect(move).toBe('show')
+
+    // The guarantee is that a struggling learner is GIVEN something instead of
+    // being interrogated — enforced at the moment it matters, immediately
+    // after the failure, before anything has been given.
+    const rightAfterFailure = { ...state, teachSegmentsSinceQuestion: 0 }
+    expect(decideNextMove(rightAfterFailure, { recoveryTurn: false, workedExampleFirst: false }))
+      .toBe('show')
+
+    // What it is NOT is a permanent mode. Four consecutive explanations have
+    // now been delivered without a single question, and the gate reads
+    // `consecutiveFailures`, which is cleared only by a correct answer — which
+    // requires a question. Left unscoped it therefore suppressed questioning
+    // for the rest of the concept, so no signal could ever arrive, so the
+    // ladder could not advance and the same instruction was re-emitted every
+    // turn: the repetition this very test is named for. Checking whether the
+    // fourth explanation landed is both the correct teaching move and the only
+    // way out.
+    expect(state.teachSegmentsSinceQuestion).toBeGreaterThan(0)
+    expect(decideNextMove(state, { recoveryTurn: false, workedExampleFirst: false }))
+      .toBe('ask')
   })
 
   it('"why do you keep asking me questions" stops the questioning outright, not just softens it', () => {

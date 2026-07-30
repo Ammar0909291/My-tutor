@@ -179,7 +179,19 @@ describe('Production Replay Regression — Brain ON fixes all 13 reported bugs',
     state = advanceConversationState(state, {
       askedQuestion: false, signalCorrect: null, recoveryFired: false, isPriorKnowledgeProbe: false,
     })
-    expect(state.phase).toBe('DEMONSTRATE')
+    // BUG-10's invariant is that progress is never thrown away — the machine
+    // must not fall back to OBSERVE. It moves FORWARD here: this turn is a
+    // completed demonstration (no question asked), which is exactly the
+    // evidence gate DEMONSTRATE→GUIDE is defined on.
+    //
+    // This previously asserted DEMONSTRATE, which was the frozen behaviour
+    // rather than the intended one: the transition was gated on a correct
+    // SIGNAL, and DEMONSTRATE's decided move is always 'show', which asks
+    // nothing, so no signal could ever exist and the phase could never be
+    // left. See conversationState's reachability law.
+    expect(state.demonstrated).toBe(true)
+    expect(state.phase).toBe('GUIDE')
+    expect(state.phase).not.toBe('OBSERVE')
   })
 
   it('BUG-11: follow-up question → D4b-ANSWER-STUDENT-FIRST', () => {
