@@ -382,3 +382,120 @@ describe('QL-5 — at most one reflection question per CHECK entry', () => {
     expect(m.ql1Blocks).toBe(0)
   })
 })
+
+/**
+ * Production verification failure (2026-07-30, second report): the tutor waits
+ * for an acknowledgement, the learner sends "Got it", and the tutor repeats the
+ * waiting message.
+ *
+ * Traced to QL-5 carrying the same "one-shot gate made permanent" defect QL-2
+ * was already fixed for, at a rung the DEMONSTRATE reachability law did not
+ * cover. reflectionAskedThisEntry clears only on a FRESH entry into CHECK, and
+ * CHECK's forward exit (correctAtCheck) needs a graded answer, which needs a
+ * question, which QL-5 forbade for the whole stay. So CHECK was ABSORBING for
+ * any learner who only acknowledges — the one input a non-asking turn can
+ * elicit — and prompt assembly, being a pure function of the state, re-emitted
+ * the same non-asking directive every turn.
+ *
+ * The reachability property these tests pin is the general one the module
+ * already states for DEMONSTRATE: a phase whose exit is signal-gated must be
+ * able to reach a question.
+ */
+describe('QL-5 — the reflection budget must not make CHECK absorbing', () => {
+  /** The learner acknowledges; the tutor's reply does whatever the move says. */
+  function ackTurn(state: ConversationState): { state: ConversationState; move: string } {
+    const move = decideNextMoveDetailed(state, CTX).move
+    return {
+      move,
+      state: advanceConversationState(state, {
+        askedQuestion: move === 'ask',
+        signalCorrect: null,          // an acknowledgement is never a graded answer
+        recoveryFired: false,
+        acknowledgement: true,
+      }),
+    }
+  }
+
+  it('still blocks two reflection questions BACK TO BACK', () => {
+    // Nothing given since the question — the invariant QL-5 exists for.
+    const v = questionLegality(S({
+      phase: 'CHECK', taughtThisSession: true,
+      reflectionAskedThisEntry: true, teachSegmentsSinceQuestion: 0,
+    }))
+    expect(v.askLegal).toBe(false)
+    expect(v.reason).toBe('QL5_REFLECTION_BUDGET_EXCEEDED')
+  })
+
+  it('releases once a give has landed, so CHECK can ask again', () => {
+    const v = questionLegality(S({
+      phase: 'CHECK', taughtThisSession: true,
+      reflectionAskedThisEntry: true, teachSegmentsSinceQuestion: 1,
+    }))
+    expect(v.askLegal).toBe(true)
+    expect(v.reason).toBeNull()
+  })
+
+  it('an acknowledgement-only learner is never stranded: CHECK keeps asking', () => {
+    // The reported transcript. Ten consecutive acknowledgements, no answers.
+    let s = S({ phase: 'CHECK', taughtThisSession: true, demonstrated: true })
+    const moves: string[] = []
+    for (let i = 0; i < 10; i++) {
+      const turn = ackTurn(s)
+      s = turn.state
+      moves.push(turn.move)
+    }
+    // Before the fix this was ['ask', then 'teach' forever] — the learner was
+    // never asked anything again, so the graded answer CHECK advances on was
+    // unreachable and the lesson could not progress.
+    expect(moves).toContain('ask')
+    expect(moves.filter((m) => m === 'ask').length).toBeGreaterThanOrEqual(4)
+    // Never two questions in a row — the invariant QL-5 protects.
+    for (let i = 1; i < moves.length; i++) {
+      expect(moves[i] === 'ask' && moves[i - 1] === 'ask').toBe(false)
+    }
+    // Still at CHECK: an acknowledgement never buys mastery.
+    expect(s.phase).toBe('CHECK')
+    expect(s.correctAtCheck).toBe(0)
+  })
+
+  it('the forward exit is reachable again: a correct answer leaves CHECK', () => {
+    // Walk into the stalled state, then actually answer the question.
+    let s = S({ phase: 'CHECK', taughtThisSession: true, demonstrated: true })
+    for (let i = 0; i < 3; i++) s = ackTurn(s).state
+    expect(s.phase).toBe('CHECK')
+
+    const answered = advanceConversationState(s, {
+      askedQuestion: true, signalCorrect: true, recoveryFired: false,
+    })
+    expect(answered.phase).toBe('PRACTICE')
+    expect(answered.correctAtCheck).toBe(1)
+  })
+
+  it('no two consecutive turns produce an identical directive at CHECK', () => {
+    // Prompt assembly is a pure function of the state, so a repeated state IS
+    // a repeated tutor message. This is the property the learner observes.
+    let s = S({ phase: 'CHECK', taughtThisSession: true, demonstrated: true })
+    const directives: string[] = []
+    for (let i = 0; i < 8; i++) {
+      const move = decideNextMoveDetailed(s, CTX).move
+      directives.push(buildTurnDirective({
+        state: s, nextMove: move, maxParagraphs: 4, workedExampleFirst: false,
+        visualType: null, firstLessonActive: false, lowSignalAcknowledgement: true,
+      }))
+      s = ackTurn(s).state
+    }
+    for (let i = 1; i < directives.length; i++) {
+      expect(directives[i]).not.toBe(directives[i - 1])
+    }
+  })
+
+  it('decideNextMove is unaffected outside CHECK', () => {
+    // teachSegmentsSinceQuestion is read only by the CHECK-scoped QL-5 arm.
+    const guide = S({
+      phase: 'GUIDE', taughtThisSession: true,
+      reflectionAskedThisEntry: true, teachSegmentsSinceQuestion: 0,
+    })
+    expect(questionLegality(guide).reason).not.toBe('QL5_REFLECTION_BUDGET_EXCEEDED')
+    expect(decideNextMove(guide, CTX)).toBeTruthy()
+  })
+})

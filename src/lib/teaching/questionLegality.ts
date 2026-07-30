@@ -237,7 +237,42 @@ export function questionLegality(
   // Ranked below QL-3/QL-2 (both are about what THIS turn's learner
   // message just showed) and above QL-4/QL-1 (structural/capability
   // checks that apply regardless of phase).
-  if (state.phase === 'CHECK' && state.reflectionAskedThisEntry === true) {
+  //
+  // Scoped to "nothing has been given since that question" for exactly the
+  // reason QL-2 above is scoped to the diagnostic phase: unscoped, this block
+  // was permanent, and permanence at CHECK is absorbing rather than merely
+  // restrictive.
+  //
+  // `reflectionAskedThisEntry` is cleared only by a FRESH entry into CHECK
+  // from another phase (foldReflectionAskedThisEntry). CHECK's forward exit is
+  // `correctAtCheck`, which only a graded answer increments; a graded answer
+  // needs a question; and this block forbade every question for the whole
+  // stay. So the one input CHECK advances on was unreachable from inside
+  // CHECK, and the only remaining exit was a FAILURE (recovery or a wrong
+  // answer) dropping the phase. A learner who simply acknowledges — the one
+  // input a non-asking turn can elicit — could never leave CHECK at all, and
+  // because prompt assembly is a pure function of this state, the tutor
+  // re-emitted the same non-asking directive every turn: the reported
+  // repetition, at the rung the DEMONSTRATE reachability law did not cover.
+  //
+  // `teachSegmentsSinceQuestion` already records the needed fact and is the
+  // same counter remedialGiveDelivered() uses in conversationState.ts for this
+  // identical "one-shot gate made permanent" shape: it counts consecutive
+  // no-question turns and is zeroed the moment a question is asked. Nonzero
+  // therefore means a give has landed since the last question, so asking now
+  // is the next beat of a check/feedback rhythm rather than a second
+  // reflection question stacked on the first.
+  //
+  // The invariant is not weakened — it is enforced more precisely. Before, a
+  // question could be followed by another question anywhere later in the same
+  // entry as long as the phase had been re-entered; now CHECK strictly
+  // alternates ask → give → ask, so two reflection questions can never be
+  // adjacent. Only the permanence is removed.
+  if (
+    state.phase === 'CHECK'
+    && state.reflectionAskedThisEntry === true
+    && (state.teachSegmentsSinceQuestion ?? 0) === 0
+  ) {
     return {
       askLegal: false,
       reason: 'QL5_REFLECTION_BUDGET_EXCEEDED',
