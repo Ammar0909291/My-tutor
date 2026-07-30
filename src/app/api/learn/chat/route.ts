@@ -410,12 +410,31 @@ export async function POST(req: Request) {
     // resumes from it instead of restarting or improvising.
     let teachingStepUpdateHoisted: { teachingStepIndex: number; teachingStepConceptId: string } | null = null
 
-    // D.23-30: Visual Intelligence — enhanced visual selection, relevance,
-    // repeat avoidance, URL stripping, narration sync. Replaces the simpler
-    // buildVisualsSystemBlock with teaching-objective-aligned directives.
+    // Visual detection — OBSERVATION SEED ONLY (no prompt injection).
+    //
+    // Runtime-architecture audit (2026-07-30): this used to be the legacy
+    // Sprint-BW visual path, upgraded in place to buildVisualIntelligenceBlock
+    // by commit e7ae0400. That same commit ALSO added a second, registry-first
+    // visual block on the conversation-state-machine path (~line 1690). Both
+    // ran unconditionally on every turn, so every prompt carried two VISUAL
+    // INTELLIGENCE blocks — and, after ADR 15, two RENDERED REALITY blocks.
+    //
+    // They disagreed on WHICH visual: this site keyword-matches on the
+    // unit/lesson title only, while the conversation-state site consults the
+    // Visualization Registry first (getConceptVisualType(conceptId)) and falls
+    // back to this exact detectVisual() call. The later site is therefore a
+    // strict superset — it can never be worse, and is concept-accurate where
+    // this one guesses from a title. Two contradictory directives in one
+    // prompt is the documented cause of wrong visuals, narration/render
+    // desync, and hallucinated labels.
+    //
+    // Resolution: the conversation-state-machine site is the SINGLE OWNER of
+    // visual + RENDERED REALITY prompt injection. This site keeps only its
+    // cueObservations seed — the later site overwrites both fields when it
+    // runs, so the seed is observable only on the degraded path where the
+    // wave-0 brain try/catch aborts before reaching it.
     try {
       const { detectVisual } = await import('@/lib/school/visuals/detectVisual')
-      const { buildVisualIntelligenceBlock } = await import('@/lib/teaching/visualIntelligence')
       const availableVisual = detectVisual({
         subjectSlug: subjectCode,
         chapterTitle: lessonCtx?.unitTitle ?? '',
@@ -423,15 +442,6 @@ export async function POST(req: Request) {
       })
       cueObservations.availableVisual = availableVisual
       cueObservations.visualDetectionRan = true
-      // ADR 15: use RRM ground truth for alreadyShown instead of hardcoded false
-      const { hasVisualBeenRendered: rrmHasVisual, buildRenderedRealityBlock: rrmBlock } = await import('@/lib/teaching/renderedRealityModel')
-      systemPrompt += buildVisualIntelligenceBlock(
-        availableVisual,
-        lessonCtx?.lessonTitle ?? null,
-        rrmHasVisual(snapshotRRMLog, availableVisual),
-      )
-      // ADR 15: inject RENDERED REALITY block
-      systemPrompt += rrmBlock(snapshotRRMLog)
     } catch (err) {
       console.warn('[learn/chat] library visual aids context skipped:', err)
     }
