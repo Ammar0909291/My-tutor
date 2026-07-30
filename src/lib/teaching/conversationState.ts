@@ -39,6 +39,27 @@ export const PHASE_ORDER: TeachingPhase[] = [
   'OBSERVE', 'DEMONSTRATE', 'GUIDE', 'CHECK', 'PRACTICE', 'TRANSFER',
 ]
 
+/**
+ * The ladder splits in two, and the split is the reason acknowledgements are
+ * safe to act on.
+ *
+ * DELIVERY phases (OBSERVE, DEMONSTRATE, GUIDE) describe what the teacher has
+ * put in front of the learner. Moving through them costs nothing pedagogically
+ * — the learner has not been asked to prove anything yet.
+ *
+ * MASTERY GATES (CHECK, PRACTICE, TRANSFER) advance on correctAtCheck /
+ * correctAtPractice, which only a real answer increments. This is where the
+ * anti-hollow-advancement law lives, and an acknowledgement must never move it.
+ *
+ * Single source of truth for both the acknowledgement transition in
+ * advanceConversationState() and the LOW-SIGNAL line in buildTurnDirective(),
+ * so the state machine and the prompt can never disagree about which phases an
+ * acknowledgement may move.
+ */
+export function isDeliveryPhase(phase: TeachingPhase): boolean {
+  return phase === 'OBSERVE' || phase === 'DEMONSTRATE' || phase === 'GUIDE'
+}
+
 /** Highest Question Stage (base prompt's QUESTION STAGE POLICY, 1–7)
  * permitted in each phase — the structural ban on OBSERVE→calculation
  * jumps. Stage 6 (calculation) is unreachable before PRACTICE. */
@@ -207,6 +228,18 @@ export interface TurnEvidence {
   /** True when the server-decided move disagrees with what the LLM rendered
    *  (e.g., decided 'ask' but response had no question). */
   parityViolation?: boolean
+  /** The learner's message was a bare acknowledgement — a receipt ("got it")
+   *  or a forward request ("go", "continue", "ready"). Sourced from
+   *  isLowSignalAcknowledgement(), the same predicate that drives the turn
+   *  directive's LOW-SIGNAL line, so detection has exactly one owner.
+   *
+   *  Before this field existed the acknowledgement decorated the prompt and
+   *  was then discarded: it reached no counter and no transition. A delivery
+   *  turn (teach/show) asks nothing, so no SIGNAL can be emitted, so
+   *  signalCorrect stayed null forever and the ladder had no reachable exit —
+   *  the machine re-issued the same phase directive on every acknowledgement.
+   *  See advanceConversationState()'s acknowledgement branch. */
+  acknowledgement?: boolean
 }
 
 /**
@@ -415,6 +448,46 @@ export function advanceConversationState(
         if (next.correctAtPractice >= 2) next.phase = 'TRANSFER'
         break
       case 'TRANSFER':
+        break
+    }
+  } else if (evidence.acknowledgement) {
+    // The learner acknowledged ("got it") or asked to proceed ("go",
+    // "continue", "ready"). This is the ONLY input a learner can give after a
+    // delivery turn, because a delivery turn asks nothing and therefore emits
+    // no SIGNAL — without a transition here the ladder is a fixed point and
+    // the tutor regenerates the same phase directive forever.
+    //
+    // It advances the DELIVERY phases only. OBSERVE / DEMONSTRATE / GUIDE are
+    // about what the teacher has put in front of the learner, so a receipt is
+    // sufficient evidence to move to the next delivery step. CHECK, PRACTICE
+    // and TRANSFER are mastery gates — they advance on correctAtCheck /
+    // correctAtPractice, which only a real answer can increment. An
+    // acknowledgement never moves those, so "Got it" can still never buy
+    // mastery. That boundary is the whole point: the hollow-advancement
+    // protection lives at the gates, and holding the delivery phases hostage
+    // to it never protected anything — it only stalled the lesson.
+    //
+    // `demonstrated` gates the same two transitions it gates on the succeeded
+    // path above, so an acknowledgement cannot skip a demonstration that
+    // never happened. Deliberately NOT gated on whether this turn asked a
+    // question: a learner who answers an OBSERVE probe with "ok" is declining
+    // to engage with it, and moving to DEMONSTRATE (show them) is the correct
+    // response — the same escalation observeFailures and totalKnowledgeProbes
+    // already make.
+    switch (prev.phase) {
+      case 'OBSERVE':
+        next.phase = 'DEMONSTRATE'
+        break
+      case 'DEMONSTRATE':
+        if (next.demonstrated) next.phase = 'GUIDE'
+        break
+      case 'GUIDE':
+        if (next.demonstrated) next.phase = 'CHECK'
+        break
+      case 'CHECK':
+      case 'PRACTICE':
+      case 'TRANSFER':
+        // Mastery gates — an acknowledgement is not evidence of mastery.
         break
     }
   }
@@ -668,8 +741,20 @@ export function detectAutonomyRequest(message: string): boolean {
  * content (no question, no technical term, no number). We intentionally keep
  * the token set tight to avoid false positives on short but real answers.
  */
+// Two families share one structural definition: a short turn carrying no
+// answer content.
+//   · RECEIPT      — "got it", "I see", "makes sense": the learner heard it.
+//   · FORWARD      — "go", "continue", "next", "ready", "let's go": the
+//                    learner is asking to proceed.
+// Both are the same thing to the state machine: the learner consumed the
+// delivery and is not answering a question. They differ only in politeness,
+// so they are detected by one predicate rather than two parallel ones.
+// FORWARD tokens were absent before 2026-07-30, which left "go" / "continue"
+// / "next" / "ready" invisible to every detector in this file — no autonomy
+// match (AUTONOMY_RE needs "next topic" / "ready to move on"), no navigation
+// match, no recovery match, no acknowledgement match.
 const LOW_SIGNAL_TOKENS_RE =
-  /^[\s,!.]*(?:(?:got it|i see|okay|ok|alright|sure|right|yep|yup|yeah|i understand|understood|makes sense|i get it|i got it|sounds good|sounds right|fine|hmm|uh huh|uh-huh|mhm|m-hm|cool|great|perfect|nice|good|yes|no problem|fair enough|noted|of course|definitely)[,!.\s]*)+([\?].*)?$/i
+  /^[\s,!.]*(?:(?:got it|i see|okay|ok|alright|sure|right|yep|yup|yeah|i understand|understood|makes sense|i get it|i got it|sounds good|sounds right|fine|hmm|uh huh|uh-huh|mhm|m-hm|cool|great|perfect|nice|good|yes|no problem|fair enough|noted|of course|definitely|go|go on|go ahead|continue|next|ready|i'?m ready|let'?s go|let'?s continue|keep going|carry on|proceed)[,!.\s]*)+([\?].*)?$/i
 
 export function isLowSignalAcknowledgement(message: string): boolean {
   const trimmed = message.trim()
@@ -872,8 +957,20 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
 
   // Bug 2: bare acknowledgements are not evidence of understanding. Require a
   // concrete check question before allowing the phase to advance.
+  // The instruction depends on which half of the ladder we are on, because the
+  // server's own response to an acknowledgement differs by half (see
+  // isDeliveryPhase and advanceConversationState's acknowledgement branch).
+  // Issuing the mastery-gate wording during a delivery phase is what produced
+  // the observed loop: the phase frame said "show the idea working" while this
+  // line said "do not explain further", and a model given two opposite orders
+  // resolves them with a content-free holding message — which the learner
+  // acknowledges again, forever.
   if (p.lowSignalAcknowledgement) {
-    lines.push('- LOW-SIGNAL RESPONSE DETECTED: the learner sent a bare social acknowledgement ("Got it", "okay", "I see", etc.). This is NOT evidence of understanding. You MUST ask ONE concrete check question to verify comprehension before doing anything else — do not advance, do not explain further, ask now.')
+    if (isDeliveryPhase(p.state.phase)) {
+      lines.push('- LEARNER ASKED TO PROCEED: they sent a bare acknowledgement or a request to continue ("Got it", "go", "continue", "ready"). They are telling you they are done with the last step, not that they have proven understanding. Deliver the NEXT step of the lesson now — new content, a demonstration, or a worked step, per the teaching phase above. Do NOT restate, re-summarise, or reword your previous message, and do NOT send another holding line ("let\'s take one small step", "whenever you\'re ready"): they already said they are ready.')
+    } else {
+      lines.push('- LOW-SIGNAL RESPONSE DETECTED: the learner sent a bare social acknowledgement ("Got it", "okay", "I see", etc.). This is NOT evidence of understanding. You MUST ask ONE concrete check question to verify comprehension before doing anything else — do not advance, do not explain further, ask now.')
+    }
   }
 
   // Bug 3: prevent sequential sub-example jumping before mastery. Stay on the

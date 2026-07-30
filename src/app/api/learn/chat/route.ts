@@ -1364,6 +1364,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     let evidenceWorkedExampleFirstHoisted = false
     let evidenceAutonomyHoisted = false
     let navigationRequestHoisted = false
+    // The learner's turn was a bare acknowledgement — a receipt ("got it") or
+    // a forward request ("go", "continue", "ready"). Computed ONCE from
+    // isLowSignalAcknowledgement() and reused by the turn directive and by
+    // both conversation-state fold sites, so prompt assembly and the state
+    // machine can never disagree about whether this turn was an
+    // acknowledgement.
+    let lowSignalAckHoisted = false
     // Mastery gate (server-authoritative lesson completion):
     // - masteryGatePendingHoisted: the learner asked to advance before
     //   mastery — the client renders Continue Learning / Skip Anyway.
@@ -1750,6 +1757,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             learnerRequestHoisted === 'explain_differently' && remediationTier >= 3 && availableVisual !== null
           forceVisualRenderHoisted =
             shouldForceVisualRender(learnerRequestHoisted, availableVisual) || explainDifferentlyNeedsVisual
+          // One detection, two consumers: the turn directive below and the
+          // conversation-state fold after the LLM call.
+          lowSignalAckHoisted = isLowSignalAcknowledgement(message)
           systemPrompt += buildTurnDirective({
             state: conversationStateHoisted,
             nextMove,
@@ -1766,9 +1776,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             directiveJustIssued: recoveryKeyHoisted === 'too_many_questions',
             // Bug 1: anchor OBSERVE hook to the lesson concept being taught.
             lessonTitle: lessonCtx?.lessonTitle ?? null,
-            // Bug 2: flag bare social acknowledgements so the directive forces
-            // a concrete check question rather than letting the phase advance.
-            lowSignalAcknowledgement: isLowSignalAcknowledgement(message),
+            // Bug 2: flag bare acknowledgements so the directive forces a
+            // concrete check question rather than a repeat of the same prose.
+            lowSignalAcknowledgement: lowSignalAckHoisted,
             // Recovery routing: a learner blocked on an OPERATION is not
             // stuck on the idea, and re-explaining the concept cannot help.
             capabilityRepair: (() => {
@@ -2808,6 +2818,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
             signalVerificationStatus: signalVerificationStatusHoisted,
             parityViolation: parityViolationThisTurn,
+            // Advances the delivery phases only (OBSERVE→DEMONSTRATE→GUIDE→
+            // CHECK); the mastery gates still require a real answer.
+            acknowledgement: lowSignalAckHoisted,
           })
 
           // Loop 2: advance narrative state with this turn's evidence
@@ -3541,6 +3554,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
                 signalVerificationStatus: signalVerificationStatusHoisted,
                 parityViolation: !!(evidenceMoveHoisted === 'ask' && !fallbackAskedQ),
+                acknowledgement: lowSignalAckHoisted,
               }),
             })
           }
