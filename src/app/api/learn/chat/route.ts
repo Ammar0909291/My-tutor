@@ -122,8 +122,38 @@ export async function POST(req: Request) {
     // no new store, no migration.
     const { readTurnHistory: readTurnHistoryShared } = await import('@/lib/kernel/verifier/history')
     const snapshotTurnHistory = readTurnHistoryShared(snapshot?.turnHistory)
-    // P1: cumulative failure counter — incremented on recovery turns and false SIGNALs
-    const snapshotSessionFailureCount = typeof snapshot?.sessionFailureCount === 'number' ? snapshot.sessionFailureCount : 0
+    // Session lifecycle boundary (07 §8 rule 1), computed ONCE here and reused
+    // by the episode block below. The newest loaded message predates this
+    // turn's user insert (see the fetch above), so the gap is genuine learner
+    // inactivity. Hoisted to this point because the failure counter directly
+    // below is scoped to the episode and therefore needs the same answer — two
+    // separate boundary computations over one fact is the shape of bug this
+    // very counter had.
+    const { isNewEpisode: isNewEpisodeShared, episodeFailureCount } = await import('@/lib/teaching/sessionLifecycle')
+    const lastMessageAtMs = learnSession.messages[0]?.createdAt
+      ? new Date(learnSession.messages[0].createdAt).getTime()
+      : null
+    const episodeBoundary = isNewEpisodeShared(lastMessageAtMs, turnReceivedAt)
+    // P1: failure counter driving the recovery escalation ladder
+    // (buildRecoveryBlock's rungs: 1 = vary the wording, 2 = stop asking,
+    // 4 = close the concept for today).
+    //
+    // Scoped to the EPISODE, not to the LearnSession row. A LearnSession is
+    // resumed for up to 24 hours (/api/sessions), while an episode boundary is
+    // a 30-minute inactivity gap — so one row spans many episodes, and this
+    // counter previously accumulated across all of them with no reset anywhere
+    // in the codebase. deriveEpisode() already resets the OTHER affect budget
+    // (sessionEpisode.visibleFailures) at exactly this boundary, per 07 §8
+    // rule 1 ("past = new session, budgets reset"); this one was left behind,
+    // so the two disagreed about how many failures "this session" has had.
+    //
+    // The consequence was a returning learner's FIRST stumble of a fresh
+    // episode being handled as their fifth: buildRecoveryBlock read 4+ and
+    // emitted "AFFECT BUDGET EXHAUSTED — close this concept for today, do NOT
+    // attempt another explanation", on the same turn the OPENING block was
+    // telling the tutor to open with an engineered win. Recovery skipped its
+    // entire ladder and exited into a close it had not earned.
+    const snapshotSessionFailureCount = episodeFailureCount(snapshot?.sessionFailureCount, episodeBoundary)
     // Loop 2: narrative tracker state — hookDelivered/coreTaught/hookResolved
     const snapshotNarrativeState = (snapshot?.narrativeState && typeof snapshot.narrativeState === 'object')
       ? snapshot.narrativeState as import('@/lib/teaching/narrativeTracker').NarrativeState
@@ -1435,17 +1465,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // timestamps — the newest loaded message predates this turn's user
         // insert, so the gap is genuine learner inactivity, never LLM-claimed.
         {
-          const { isNewEpisode, deriveEpisode, buildOpeningBlock, buildAffectCloseBlock, detectExplicitFinishRequest, forceClosing } = await import('@/lib/teaching/sessionLifecycle')
-          const lastMsgAt = learnSession.messages[0]?.createdAt
-            ? new Date(learnSession.messages[0].createdAt).getTime()
-            : null
+          const { deriveEpisode, buildOpeningBlock, buildAffectCloseBlock, detectExplicitFinishRequest, forceClosing } = await import('@/lib/teaching/sessionLifecycle')
+          const lastMsgAt = lastMessageAtMs
           const prevEpisode = (snapshot?.sessionEpisode && typeof snapshot.sessionEpisode === 'object')
             ? snapshot.sessionEpisode as import('@/lib/teaching/sessionLifecycle').SessionEpisode
             : null
           const prevLastSignal = (snapshot?.lastSignal && typeof snapshot.lastSignal === 'object')
             ? snapshot.lastSignal as { correctness?: boolean }
             : null
-          const boundary = isNewEpisode(lastMsgAt, turnReceivedAt)
+          // Computed once at the top of the turn, alongside the failure counter
+          // it also scopes — see episodeBoundary's definition there.
+          const boundary = episodeBoundary
           sessionEpisodeHoisted = deriveEpisode(prevEpisode, boundary, turnReceivedAt, prevLastSignal)
           sessionEpisodeFreshHoisted = boundary
           // 07 §6 extension: an explicit, unambiguous "finish it now" outranks
@@ -3456,10 +3486,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // count (decision-engine/05: per-failure ladders).
           const failureThisTurn = recoveryKeyHoisted !== null || teachingSignal?.correctness === false
           const newSessionFailureCount = failureThisTurn ? snapshotSessionFailureCount + 1 : snapshotSessionFailureCount
-          const failureCountUpdate = failureThisTurn ? { sessionFailureCount: newSessionFailureCount } : {}
+          // Persist on a boundary turn even when nothing failed: snapshotSessionFailureCount
+          // was reset to 0 for this episode at the read site, and a reset that is
+          // only held in memory is undone by the next turn re-reading the stale
+          // persisted value.
+          const failureCountUpdate = (failureThisTurn || episodeBoundary)
+            ? { sessionFailureCount: newSessionFailureCount }
+            : {}
           // ISS-13: the counter is an increment over the base, so a concurrent
-          // turn's increment must not be overwritten by ours.
-          if (failureThisTurn) {
+          // turn's increment must not be overwritten by ours. That re-derivation
+          // is correct only WITHIN an episode — across a boundary the stored
+          // value belongs to the previous episode, so re-deriving from it would
+          // resurrect exactly the count this reset exists to drop. On a boundary
+          // turn our own value is authoritative.
+          if (failureThisTurn && !episodeBoundary) {
             snapshotRederivers.push((fresh) => ({
               sessionFailureCount: (typeof fresh.sessionFailureCount === 'number' ? fresh.sessionFailureCount : 0) + 1,
             }))

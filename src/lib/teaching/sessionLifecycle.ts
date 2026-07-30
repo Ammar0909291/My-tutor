@@ -78,6 +78,31 @@ export function deriveEpisode(
 }
 
 /**
+ * The SECOND affect budget, scoped to the same boundary as the first.
+ *
+ * `sessionEpisode.visibleFailures` (reset by deriveEpisode above) and
+ * contextSnapshot's `sessionFailureCount` (persisted by route.ts, and read by
+ * recoveryGuard.buildRecoveryBlock to pick an escalation rung) both count
+ * "failures this session". Only the first was reset at a boundary. The second
+ * had no reset anywhere, so it accumulated for the whole LearnSession row —
+ * and a row is resumed for up to 24 hours while a boundary is 30 minutes, so
+ * one row spans many episodes.
+ *
+ * Two counters over one fact, with different lifetimes, is the defect; this
+ * function is the missing half, placed next to deriveEpisode so the reset rule
+ * has a single owner and the two budgets cannot drift apart again.
+ *
+ * §8 rule 1 is explicit that a boundary resets budgets — "past = new session,
+ * budgets reset" — and says nothing about exempting one of them.
+ */
+export function episodeFailureCount(persisted: unknown, newBoundary: boolean): number {
+  if (newBoundary) return 0
+  return typeof persisted === 'number' && Number.isFinite(persisted) && persisted > 0
+    ? Math.floor(persisted)
+    : 0
+}
+
+/**
  * Fold this turn's parsed signal into the episode — the only mutation path.
  * OPENING → CORE on the first answered item (the due retrieval, or the
  * engineered win). CORE → CLOSING when the affect budget is spent
