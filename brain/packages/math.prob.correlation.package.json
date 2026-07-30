@@ -1,0 +1,551 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.correlation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.correlation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:eddd1601e9b7a50a21418019df2c948842a8a664c80797afad47b0f73c74d0a2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.correlation.md": "sha256:76761155710b450c707835474d3f72f63f2a739f019987f14b83cd3a131b38ca"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 12,
+      "mastery_probe": 1
+    },
+    "ruleCount": 12
+  },
+  "concept": {
+    "conceptId": "math.prob.correlation",
+    "name": "Correlation",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.prob.covariance"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.correlation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.correlation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.correlation.md": "sha256:76761155710b450c707835474d3f72f63f2a739f019987f14b83cd3a131b38ca"
+      },
+      "contentHash": "sha256:0e476bd04bad42f819ed8c19b7165c3caa702b9b02802ce1c48807ef40d1f5cc",
+      "ruleCount": 12,
+      "bandCounts": {
+        "3": 12
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.correlation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.correlation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.correlation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.correlation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.correlation.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.correlation.md#TA-10 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.correlation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.correlation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.correlation.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.correlation.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.correlation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.correlation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.correlation.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.correlation.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.correlation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.correlation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.correlation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.correlation.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.correlation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.correlation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.correlation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.correlation.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.correlation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.correlation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.correlation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.correlation.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.correlation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.correlation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.correlation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.correlation.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.correlation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.correlation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.correlation.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.correlation.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.correlation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.correlation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.correlation.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.correlation.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.correlation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.correlation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.correlation.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.correlation.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.correlation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.correlation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.correlation.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.correlation.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.correlation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.correlation\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.correlation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.correlation",
+      "title": "Learning Objective",
+      "content": "The student defines correlation ρ(X,Y)=Cov(X,Y)/(SD(X)·SD(Y)); interprets ρ as a dimensionless measure of LINEAR association in [−1,1]; explains why |ρ|=1 iff Y=aX+b a.s. for some a≠0; distinguishes correlation from causation; identifies that ρ=0 means uncorrelated (not independent) — and that independence implies ρ=0 but not vice versa; and applies the formula for variance of a sum: Var(X+Y)=Var(X)+2Cov(X,Y)+Var(Y).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.correlation.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.prob.correlation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.correlation",
+      "title": "CORRELATION-ZERO-MEANS-INDEPENDENT",
+      "content": "| MC-1 | CORRELATION-ZERO-MEANS-INDEPENDENT | Student concludes X and Y are independent whenever ρ(X,Y)=0; doesn't know there exist dependent, uncorrelated random variables | Type 5 — instruction-induced (independence IMPLIES ρ=0 is taught; students invert this: ρ=0 implies independence) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.correlation.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.prob.correlation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.correlation",
+      "title": "CORRELATION-MEASURES-ALL-DEPENDENCE",
+      "content": "| MC-2 | CORRELATION-MEASURES-ALL-DEPENDENCE | Student treats ρ as a complete measure of dependence; doesn't know ρ only captures LINEAR association and can miss nonlinear dependencies | Type 3 — language contamination (\"correlation\" in everyday language means \"any relationship\"; in probability it means specifically linear association) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.correlation.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.prob.correlation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.correlation",
+      "title": "CORRELATION-AND-COVARIANCE-ARE-PROPORTIONAL",
+      "content": "| MC-3 | CORRELATION-AND-COVARIANCE-ARE-PROPORTIONAL | Student treats Cov and ρ as interchangeable up to a constant; doesn't know the normalisation by SD(X)·SD(Y) removes the units and scale, making ρ dimensionless | Type 1 — overgeneralisation (ρ = Cov(X,Y)/(SD(X)SD(Y)); students think \"ρ is just Cov scaled by a constant\" without understanding that the constant depends on X and Y themselves, making ρ scale-invariant while Cov is not) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.correlation.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.correlation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.correlation",
+      "title": "−1 ≤ ρ ≤ 1 (Cauchy-Schwarz inequality)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"−1 ≤ ρ ≤ 1 (Cauchy-Schwarz inequality)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.correlation.md",
+        "startLine": 46,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "math.prob.correlation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.correlation",
+      "title": "ρ=1 ↔ Y = aX+b a.s. for some a>0 (perfect positive linear relationship)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"ρ=1 ↔ Y = aX+b a.s. for some a>0 (perfect positive linear relationship)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.correlation.md",
+        "startLine": 47,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "math.prob.correlation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.correlation",
+      "title": "ρ=−1 ↔ Y = aX+b a.s. for some a<0 (perfect negative linear relationship)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"ρ=−1 ↔ Y = aX+b a.s. for some a<0 (perfect negative linear relationship)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.correlation.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.prob.correlation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.correlation",
+      "title": "ρ=0 ↔ X,Y are uncorrelated (linear association is zero — but they may still be dependent)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"ρ=0 ↔ X,Y are uncorrelated (linear association is zero — but they may still be dependent)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.correlation.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.prob.correlation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.correlation",
+      "title": "Scale invariance: ρ(aX+b, cY+d) = sign(ac)·ρ(X,Y) for a,c≠0",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Scale invariance: ρ(aX+b, cY+d) = sign(ac)·ρ(X,Y) for a,c≠0\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.correlation.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.prob.correlation/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.correlation",
+      "title": "If ρ=0: Var(X+Y)=Var(X)+Var(Y) (Pythagorean-like addition)",
+      "content": "{\"id\":\"TA-6\",\"title\":\"If ρ=0: Var(X+Y)=Var(X)+Var(Y) (Pythagorean-like addition)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.correlation.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.prob.correlation/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.correlation",
+      "title": "If ρ=1: Var(X+Y)=(SD(X)+SD(Y))² (maximum variance)",
+      "content": "{\"id\":\"TA-7\",\"title\":\"If ρ=1: Var(X+Y)=(SD(X)+SD(Y))² (maximum variance)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.correlation.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.prob.correlation/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.correlation",
+      "title": "If ρ=−1: Var(X+Y)=(SD(X)−SD(Y))² (can be zero if SD(X)=SD(Y))",
+      "content": "{\"id\":\"TA-8\",\"title\":\"If ρ=−1: Var(X+Y)=(SD(X)−SD(Y))² (can be zero if SD(X)=SD(Y))\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.correlation.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.prob.correlation/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.correlation",
+      "title": "CORRECT → \"ρ=Cov/(SD·SD). −1≤ρ≤1. ρ=0 ≠ independent. Y=X² example: ρ=0 but dependent. Var(X+Y)=Var(X)+2Cov+Var(Y).\" → Gate (P91)",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"ρ=Cov/(SD·SD). −1≤ρ≤1. ρ=0 ≠ independent. Y=X² example: ρ=0 but dependent. Var(X+Y)=Var(X)+2Cov+Var(Y).\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.correlation.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.prob.correlation/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.correlation",
+      "title": "PARTIAL (MC-1: ρ=0 means independent) → \"ρ=0 means NO LINEAR association. But X and Y can still be related in nonlinear ways. Counter-example: X~Uniform(−1,1), Y=X². Cov(X,Y)=E[X³]=0 (odd function, symmetric distribution). So ρ=0. But Y=X² — knowing X you know Y exactly. Completely dependent, yet ρ=0.\" → TB-R01 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (MC-1: ρ=0 means independent) → \\\"ρ=0 means NO LINEAR association. But X and Y can still be related in nonlinear ways. Counter-example: X~Uniform(−1,1), Y=X². Cov(X,Y)=E[X³]=0 (odd function, symmetric distribution). So ρ=0. But Y=X² — knowing X you know Y exactly. Completely dependent, yet ρ=0.\\\" → TB-R01 → Gate\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.correlation.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.prob.correlation/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.correlation",
+      "title": "INCORRECT → TB-R01 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R01 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.correlation.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.prob.correlation/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.correlation",
+      "title": "NO_RESPONSE → \"Cov(X,Y)=3, Var(X)=9, Var(Y)=4. Compute ρ. [ρ=3/(3·2)=3/6=0.5.] If you change units so Y is in different units making SD(Y)=10 instead: does ρ change? [ρ=Cov·(scale_Y)/(SD(X)·10·SD(Y)/SD(Y))... actually ρ uses SD, which also scales: new ρ=(3·scale_Y)/(3·10)=... wait, let me think. If Y → Y/5, then Cov(X,Y/5)=Cov(X,Y)/5=3/5, SD(Y/5)=SD(Y)/5=2/5. ρ=(3/5)/(3·2/5)=(3/5)/(6/5)=3/6=0.5. Unchanged!]\" → TB-R01 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"Cov(X,Y)=3, Var(X)=9, Var(Y)=4. Compute ρ. [ρ=3/(3·2)=3/6=0.5.] If you change units so Y is in different units making SD(Y)=10 instead: does ρ change? [ρ=Cov·(scale_Y)/(SD(X)·10·SD(Y)/SD(Y))... actually ρ uses SD, which also scales: new ρ=(3·scale_Y)/(3·10)=... wait, let me think. If Y → Y/5, then Cov(X,Y/5)=Cov(X,Y)/5=3/5, SD(Y/5)=SD(Y)/5=2/5. ρ=(3/5)/(3·2/5)=(3/5)/(6/5)=3/6=0.5. Unchanged!]\\\" → TB-R01 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.correlation.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.prob.correlation/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.correlation",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Cov(X,Y)=6, Var(X)=9, Var(Y)=16. Compute ρ(X,Y).\n2. X and Y are i.i.d. with variance σ². Compute Var(X−Y). What is ρ(X+Y, X−Y)?\n3. If ρ(X,Y)=0.8, SD(X)=3, SD(Y)=5, compute Var(2X+3Y).\n4. X~Uniform(0,1). Let Y=1−X. Compute ρ(X,Y). (Expected: −1, since Y is a strictly decreasing linear function of X.)\n5. True or false: if X+Y has the same distribution as X−Y, then ρ(X,Y)=0. Prove or give a counterexample.\n\n**P55 — Reflect & Consolidate:** \"ρ=Cov/(SD·SD) ∈[−1,1]. ρ=±1: perfect linear relationship. ρ=0: uncorrelated (not necessarily independent). Var(X+Y)=Var(X)+2ρ·SD(X)·SD(Y)+Var(Y). Scale-invariant: changing units doesn't change ρ.\"\n\n**P76 — Transfer Probe (Cross-link mode: math.stats.correlation):**\n(a) Sample correlation r = ∑(xᵢ−x̄)(yᵢ−ȳ) / (√∑(xᵢ−x̄)² · √∑(yᵢ−ȳ)²). This is the plug-in estimator of ρ using sample means and sample deviations. For n=2 data points: what is r always equal to? (±1, because two points always determine a line.) (b) Anscombe's quartet: four datasets with nearly identical r≈0.816, nearly identical means and variances, but radically different scatter plots (linear, quadratic, outlier-driven, vertical line + outlier). What does this say about r as a summary statistic? (c) Pearson vs Spearman: Pearson r measures linear association; Spearman rank correlation measures monotone association (replace values with ranks, then compute r). When would you prefer Spearman? When would Pearson fail but Spearman work?\n\n**P75 — Mastery Assessment:**\n\"Portfolio variance: hold fraction w in asset X (mean μ_X, SD σ_X) and (1−w) in asset Y (mean μ_Y, SD σ_Y), correlation ρ. The portfolio return is R=wX+(1−w)Y. (a) Compute E[R] and Var(R). (b) For what w is Var(R) minimised? (Differentiate Var(R) with respect to w and set to zero.) (c) If ρ=−1: what does the minimum variance equal? What is the optimal w? Interpret: can you eliminate risk entirely when ρ=−1?\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW Var(X+Y) formula and ρ=0 ≠ independence\n- Score ≤ 3/5 → PREREQUISITE GAP in math.prob.covariance; reassign\n\n**P78 — Completion:** Correlation certified. Student computes ρ; interprets ±1 as perfect linear; understands ρ=0 ≠ independent; applies Var(X+Y) formula; connects to Anscombe's quartet and portfolio theory.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.correlation.md",
+        "startLine": 72,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

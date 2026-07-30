@@ -1,0 +1,721 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.bayesian-inference-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.bayesian-inference",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1218661c23f0547552bdfdb1e6aa6e055620fdb8b79c26e357e9b98ec4cd0990",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.bayesian-inference.md": "sha256:e856b0ab3e8dde7d03bbedca0b0f7bdad1fdb0eeec08ec99fa9ab6f66cbe95ce"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 17,
+      "mastery_probe": 1
+    },
+    "ruleCount": 17
+  },
+  "concept": {
+    "conceptId": "math.prob.bayesian-inference",
+    "name": "Bayesian Inference",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.prob.bayes-theorem"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.bayesian-inference-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.bayesian-inference (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.bayesian-inference.md": "sha256:e856b0ab3e8dde7d03bbedca0b0f7bdad1fdb0eeec08ec99fa9ab6f66cbe95ce"
+      },
+      "contentHash": "sha256:c24e682cdbac6c7e5873960a3ba7c87c0c65ce291538fd014378b4678e80cd29",
+      "ruleCount": 17,
+      "bandCounts": {
+        "3": 17
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.bayesian-inference.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayesian-inference.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayesian-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayesian-inference\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayesian-inference.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayesian-inference.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayesian-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayesian-inference\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayesian-inference.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayesian-inference.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayesian-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayesian-inference\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayesian-inference.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayesian-inference.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayesian-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayesian-inference\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayesian-inference.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayesian-inference.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayesian-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayesian-inference\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayesian-inference.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayesian-inference.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayesian-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayesian-inference\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayesian-inference.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayesian-inference.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayesian-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayesian-inference\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayesian-inference.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayesian-inference.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayesian-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayesian-inference\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayesian-inference.TA-17",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayesian-inference.md#TA-17",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayesian-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayesian-inference\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayesian-inference.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayesian-inference.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayesian-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayesian-inference\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayesian-inference.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayesian-inference.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayesian-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayesian-inference\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayesian-inference.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayesian-inference.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayesian-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayesian-inference\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayesian-inference.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayesian-inference.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayesian-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayesian-inference\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayesian-inference.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayesian-inference.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayesian-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayesian-inference\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayesian-inference.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayesian-inference.md#TA-7 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayesian-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayesian-inference\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayesian-inference.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayesian-inference.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayesian-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayesian-inference\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayesian-inference.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayesian-inference.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayesian-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayesian-inference\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.bayesian-inference/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "Learning Objective",
+      "content": "The student frames inference as a prior-to-posterior update via Bayes' theorem P(θ|data)∝P(data|θ)P(θ); identifies conjugate prior families (Beta-Binomial, Normal-Normal, Gamma-Poisson) and explains why conjugacy yields closed-form posteriors; computes posterior mean, variance, and credible intervals for these conjugate models; distinguishes credible intervals from frequentist confidence intervals; and applies posterior predictive distributions to predict future observations.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.prob.bayesian-inference/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "PRIOR-IS-ARBITRARY-SO-BAYES-IS-SUBJECTIVE",
+      "content": "| MC-1 | PRIOR-IS-ARBITRARY-SO-BAYES-IS-SUBJECTIVE | Student dismisses Bayesian inference as \"subjective\" because different priors give different posteriors; doesn't know that (a) priors can be non-informative/objective, (b) posteriors converge with sufficient data, and (c) all inference requires assumptions | Type 3 — language contamination (\"subjective\" in everyday language means unreliable or biased; in Bayesian inference it refers to incorporating prior information, not arbitrary opinion) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.prob.bayesian-inference/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "CONJUGATE-PRIOR-IS-THE-ONLY-VALID-PRIOR",
+      "content": "| MC-2 | CONJUGATE-PRIOR-IS-THE-ONLY-VALID-PRIOR | Student uses only conjugate priors because they give closed-form solutions; doesn't know conjugacy is a computational convenience, not a requirement — non-conjugate priors require MCMC/approximate methods | Type 5 — instruction-induced (introductory courses show only conjugate examples; students conclude the closed-form result is necessary) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.prob.bayesian-inference/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "CREDIBLE-INTERVAL-EQUALS-CONFIDENCE-INTERVAL",
+      "content": "| MC-3 | CREDIBLE-INTERVAL-EQUALS-CONFIDENCE-INTERVAL | Student equates a 95% Bayesian credible interval with a 95% frequentist confidence interval; states \"there's a 95% chance θ is in [L,U]\" for a frequentist confidence interval | Type 3 — language contamination (both are called \"95% intervals\"; the frequentist interval is about repeated sampling, not θ's probability; the Bayesian interval directly gives P(θ∈[L,U]|data)=0.95) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.bayesian-inference/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "Beta(1,1) = Uniform (no prior information)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Beta(1,1) = Uniform (no prior information)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 43,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "math.prob.bayesian-inference/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "α>1: prior mass concentrated away from 0; β>1: away from 1",
+      "content": "{\"id\":\"TA-2\",\"title\":\"α>1: prior mass concentrated away from 0; β>1: away from 1\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 44,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.prob.bayesian-inference/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "Prior mean: α/(α+β). Prior effective sample size: α+β.",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prior mean: α/(α+β). Prior effective sample size: α+β.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 45,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.prob.bayesian-inference/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "Posterior mean: (α+k)/(α+β+n). A weighted average of prior mean α/(α+β) and MLE k/n.",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Posterior mean: (α+k)/(α+β+n). A weighted average of prior mean α/(α+β) and MLE k/n.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.prob.bayesian-inference/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "As n→∞: posterior mean → k/n (data overwhelm the prior).",
+      "content": "{\"id\":\"TA-5\",\"title\":\"As n→∞: posterior mean → k/n (data overwhelm the prior).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.prob.bayesian-inference/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "CORRECT → \"Beta(α,β) prior + Binomial likelihood → Beta(α+k, β+n−k) posterior. Posterior mean = weighted average of prior mean and MLE. Credible interval: P(θ∈[L,U]|data)=95%.\" → A02",
+      "content": "{\"id\":\"TA-6\",\"title\":\"CORRECT → \\\"Beta(α,β) prior + Binomial likelihood → Beta(α+k, β+n−k) posterior. Posterior mean = weighted average of prior mean and MLE. Credible interval: P(θ∈[L,U]|data)=95%.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.prob.bayesian-inference/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "PARTIAL (MC-3: credible=confidence) → \"A Bayesian credible interval [L,U] DIRECTLY states P(θ∈[L,U]|data)=0.95 — θ has 95% posterior probability of being in [L,U]. A frequentist confidence interval says: if you repeated this experiment many times and computed the interval each time, 95% of such intervals would contain the true θ. The frequentist θ is fixed (not a random variable) — so 'probability that θ is in [L,U]' is 0 or 1 for a frequentist, not 0.95.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-7\",\"title\":\"PARTIAL (MC-3: credible=confidence) → \\\"A Bayesian credible interval [L,U] DIRECTLY states P(θ∈[L,U]|data)=0.95 — θ has 95% posterior probability of being in [L,U]. A frequentist confidence interval says: if you repeated this experiment many times and computed the interval each time, 95% of such intervals would contain the true θ. The frequentist θ is fixed (not a random variable) — so 'probability that θ is in [L,U]' is 0 or 1 for a frequentist, not 0.95.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.prob.bayesian-inference/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-8\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.prob.bayesian-inference/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "NO_RESPONSE → \"Fair coin prior: Beta(2,2) (biased slightly toward 0.5). You flip 10 times and get 7 heads. Posterior: Beta(2+7, 2+3)=Beta(9,5). Posterior mean: 9/14≈0.643. MLE: 7/10=0.70. Prior mean: 0.5. The posterior is between prior and MLE — the prior pulled it slightly downward from 0.70.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-9\",\"title\":\"NO_RESPONSE → \\\"Fair coin prior: Beta(2,2) (biased slightly toward 0.5). You flip 10 times and get 7 heads. Posterior: Beta(2+7, 2+3)=Beta(9,5). Posterior mean: 9/14≈0.643. MLE: 7/10=0.70. Prior mean: 0.5. The posterior is between prior and MLE — the prior pulled it slightly downward from 0.70.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.prob.bayesian-inference/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "1/τₙ² = 1/τ² + n/σ² (precisions add)",
+      "content": "{\"id\":\"TA-10\",\"title\":\"1/τₙ² = 1/τ² + n/σ² (precisions add)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 70,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.prob.bayesian-inference/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "μₙ = (μ₀/τ² + nX̄/σ²)·τₙ² (precision-weighted average of prior mean and MLE)",
+      "content": "{\"id\":\"TA-11\",\"title\":\"μₙ = (μ₀/τ² + nX̄/σ²)·τₙ² (precision-weighted average of prior mean and MLE)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 71,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "math.prob.bayesian-inference/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "As n→∞: μₙ → X̄, τₙ² → 0 (posterior concentrates on MLE).",
+      "content": "{\"id\":\"TA-12\",\"title\":\"As n→∞: μₙ → X̄, τₙ² → 0 (posterior concentrates on MLE).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 72,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "math.prob.bayesian-inference/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "Posterior mean: (α+∑xᵢ)/(β+n).",
+      "content": "{\"id\":\"TA-13\",\"title\":\"Posterior mean: (α+∑xᵢ)/(β+n).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.prob.bayesian-inference/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "CORRECT → \"Conjugate families: Beta-Binomial, Normal-Normal, Gamma-Poisson, Dirichlet-Multinomial. All share: posterior in same family as prior, parameters updated by sufficient statistics. MCMC for non-conjugate.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-14\",\"title\":\"CORRECT → \\\"Conjugate families: Beta-Binomial, Normal-Normal, Gamma-Poisson, Dirichlet-Multinomial. All share: posterior in same family as prior, parameters updated by sufficient statistics. MCMC for non-conjugate.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.prob.bayesian-inference/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "PARTIAL → \"Conjugacy: the posterior belongs to the same parametric family as the prior. The benefit is a closed-form update. For Normal-Normal: precisions (1/variance) add — the posterior precision is prior precision plus n times data precision.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-15\",\"title\":\"PARTIAL → \\\"Conjugacy: the posterior belongs to the same parametric family as the prior. The benefit is a closed-form update. For Normal-Normal: precisions (1/variance) add — the posterior precision is prior precision plus n times data precision.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.prob.bayesian-inference/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-16\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.prob.bayesian-inference/teaching_action_meta/TA-17",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "NO_RESPONSE → \"Poisson model: you observe counts 3,1,4,1,5. n=5 flips, ∑xᵢ=14. Prior λ~Gamma(2,1) (prior mean 2). Posterior: Gamma(2+14, 1+5)=Gamma(16,6). Posterior mean: 16/6≈2.67. MLE: 14/5=2.8. The prior pulled it slightly down.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-17\",\"title\":\"NO_RESPONSE → \\\"Poisson model: you observe counts 3,1,4,1,5. n=5 flips, ∑xᵢ=14. Prior λ~Gamma(2,1) (prior mean 2). Posterior: Gamma(2+14, 1+5)=Gamma(16,6). Posterior mean: 16/6≈2.67. MLE: 14/5=2.8. The prior pulled it slightly down.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-17",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.prob.bayesian-inference/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.bayesian-inference",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. A coin is flipped 20 times, yielding 14 heads. (a) Start with a Uniform prior (Beta(1,1)). Compute the posterior. (b) Start with Beta(5,5) (biased toward fairness). Compute the posterior. (c) Compare the two posterior means. For what n would the two posteriors have means differing by less than 0.01?\n2. Normal-Normal model: X₁,…,X₁₀ are measurements with known σ²=4. Observed X̄=7.2. Prior: μ~N(5,9). Compute the posterior distribution of μ. What is the posterior mean and variance?\n3. A hospital observes 3 infections per 100 patient-days over 100 days (∑xᵢ=300, n=100). Prior on infection rate λ: Gamma(1,1). Compute the posterior mean, variance, and a 95% credible interval (approximate as posterior mean ± 2 posterior SD).\n4. Posterior predictive: in the Beta-Binomial model with prior Beta(α,β) and observed k heads in n flips, show that P(next flip = head | data) = (α+k)/(α+β+n) by computing E[θ|data].\n5. Two coins are in a bag: coin A is fair (P(H)=0.5), coin B is biased (P(H)=0.8). A coin is picked at random. After 5 flips yielding 4 heads, compute the posterior probability that the coin is B. (Treat this as a discrete-prior Bayesian inference problem.)\n\n**P55 — Reflect & Consolidate:** \"Bayesian: posterior ∝ likelihood × prior. Beta-Binomial: Beta(α+k, β+n−k). Normal-Normal: precisions add, means precision-weighted. Conjugacy = closed-form convenience. Credible interval ≠ confidence interval — it IS a probability statement about θ.\"\n\n**P76 — Transfer Probe (Cross-link mode: math.stats.bayesian-inference):**\n(a) Posterior concentration: by Bernstein-von Mises theorem, under mild conditions the posterior distribution concentrates around the true parameter value at rate 1/√n and becomes approximately Normal. This means Bayesian and frequentist inference agree asymptotically. Under what circumstances would they disagree significantly in finite samples? (b) Model selection via Bayes factors: BF₁₂ = P(data|model 1)/P(data|model 2) = ∫P(data|θ,M₁)P(θ|M₁)dθ / ∫P(data|θ,M₂)P(θ|M₂)dθ. A Bayes factor >10 is \"strong evidence\" for model 1 (Jeffreys scale). How is this different from a frequentist p-value? (c) Empirical Bayes: instead of specifying the prior P(θ|α) from domain knowledge, estimate the hyperparameter α from the data (maximize the marginal likelihood P(data|α)=∫P(data|θ)P(θ|α)dθ). Explain how this compromises the Bayesian interpretation but is computationally attractive for hierarchical models.\n\n**P75 — Mastery Assessment:**\n\"A pharmaceutical company tests a new drug in a clinical trial. Let θ be the drug's true response rate. Prior (from previous trials): θ~Beta(10,10). The trial enrolls 50 patients; 32 respond. (a) Compute the posterior distribution of θ. (b) Compute the posterior mean and a 95% credible interval. (c) The company wants to claim the drug 'works' if P(θ>0.5|data)>0.90. Does the data support this claim? (Compute this posterior probability approximately: the posterior is Beta(42,28); Beta(42,28) has mean 42/70≈0.60 and most of its mass above 0.50.) (d) A competitor drug has θ₀=0.55. What is the posterior probability that the new drug is better: P(θ>0.55|data)?\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW conjugate update formulas and credible interval interpretation\n- Score ≤ 3/5 → PREREQUISITE GAP in math.prob.bayes-theorem; reassign\n\n**P78 — Completion:** Bayesian Inference certified. Student applies the Beta-Binomial, Normal-Normal, and Gamma-Poisson conjugate models; computes posterior summaries; constructs credible intervals; interprets the posterior predictive; connects to Bayesian statistics.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayesian-inference.md",
+        "startLine": 100,
+        "endLine": 124
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

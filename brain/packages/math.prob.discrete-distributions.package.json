@@ -1,0 +1,243 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.discrete-distributions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.discrete-distributions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:77ba9db244ba99eb11ca4404b2668b63ee4ae93f053417ea178102f5f766e903",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.discrete-distributions.md": "sha256:81bdc477fd6369c322fb6bb0e0c6bc60ffc76cb2673065ff946b6339f1b3da4f"
+    },
+    "assetCount": 8,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.prob.discrete-distributions",
+    "name": "Discrete Distributions",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.prob.pmf"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.discrete-distributions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.discrete-distributions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.discrete-distributions.md": "sha256:81bdc477fd6369c322fb6bb0e0c6bc60ffc76cb2673065ff946b6339f1b3da4f"
+      },
+      "contentHash": "sha256:3dcb108631bfa52a69ff53ccc7d004c8efe1794658bb13e098ec7cca27eea7c1",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.discrete-distributions.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.discrete-distributions.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.discrete-distributions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.discrete-distributions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.discrete-distributions.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.discrete-distributions.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.discrete-distributions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.discrete-distributions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.discrete-distributions.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.discrete-distributions.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.discrete-distributions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.discrete-distributions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.discrete-distributions/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.discrete-distributions",
+      "title": "Learning Objective",
+      "content": "The student states the PMF, mean, and variance of the Bernoulli(p), Binomial(n,p), Geometric(p), Negative Binomial(r,p), Poisson(λ), and Hypergeometric(N,K,n) distributions; identifies the real-world processes that generate each distribution; recognises the relationships between families (Geometric as special case of Negative Binomial; Poisson as limit of Binomial; Binomial sum of Bernoullis); and selects the correct distribution for a given scenario (sampling with vs. without replacement; bounded vs. unbounded counts; fixed vs. random number of trials).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.discrete-distributions.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.prob.discrete-distributions/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.discrete-distributions",
+      "title": "GEOMETRIC-COUNTS-FAILURES-OR-TRIALS",
+      "content": "| MC-1 | GEOMETRIC-COUNTS-FAILURES-OR-TRIALS | Student confuses two versions: X = number of failures before the first success (support {0,1,2,…}) vs. X = number of trials until first success (support {1,2,3,…}); applies the wrong PMF and gets mean p vs. 1/p confused | Type 5 — instruction-induced (different textbooks use different conventions; both are called \"Geometric\"; students switching sources see both and conflate them) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.discrete-distributions.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.prob.discrete-distributions/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.discrete-distributions",
+      "title": "POISSON-REQUIRES-LARGE-N-SMALL-P",
+      "content": "| MC-2 | POISSON-REQUIRES-LARGE-N-SMALL-P | Student believes the Poisson distribution only applies as a Binomial approximation (n large, p small); doesn't know Poisson is a primary distribution for count data (customer arrivals, mutations, radioactive decay) in its own right | Type 5 — instruction-induced (Poisson is often first derived as a Binomial limit in introductory courses, so students associate it exclusively with the approximation context) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.discrete-distributions.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.prob.discrete-distributions/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.discrete-distributions",
+      "title": "HYPERGEOMETRIC-IS-BINOMIAL-WITHOUT-REPLACEMENT",
+      "content": "| MC-3 | HYPERGEOMETRIC-IS-BINOMIAL-WITHOUT-REPLACEMENT | Student treats Hypergeometric as simply \"Binomial but without replacement,\" correctly noting the sampling difference but failing to account for the changing probability at each draw; uses Binomial PMF with fixed p when n/N is not negligible | Type 1 — overgeneralisation (the without-replacement intuition is correct; the error is keeping p fixed at K/N instead of updating the probability at each draw, which changes the variance formula) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.discrete-distributions.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.discrete-distributions/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.discrete-distributions",
+      "title": "Limit of Binomial:",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Limit of Binomial:\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.discrete-distributions.md",
+        "startLine": 72,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "math.prob.discrete-distributions/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.discrete-distributions",
+      "title": "Poisson process axioms:",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Poisson process axioms:\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.discrete-distributions.md",
+        "startLine": 73,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "math.prob.discrete-distributions/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.discrete-distributions",
+      "title": "Rare events:",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Rare events:\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.discrete-distributions.md",
+        "startLine": 74,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.prob.discrete-distributions/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.discrete-distributions",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. X~Binomial(15, 0.3). Compute (a) E[X] and Var[X]; (b) P(X=4); (c) P(X≥2) using P(X≥2)=1−P(X=0)−P(X=1).\n2. A fair die is rolled until a 6 appears. Let X be the number of rolls needed. (a) Identify the distribution of X and its parameters. (b) Compute E[X], Var[X], and P(X>10). (c) What is the probability of needing more than 12 rolls, given you've already needed more than 6? (Apply the memoryless property.)\n3. A call centre receives 8 calls per hour on average. Using the Poisson model: (a) P(exactly 10 calls in the next hour); (b) P(at least 1 call in the next 15 minutes); (c) E[number of calls in the next 3 hours].\n4. A production line has 5% defective items. An inspector draws 10 items from a batch of 100 without replacement. Let X = number of defective items drawn. (a) Identify the exact distribution and compute E[X] and Var[X]. (b) Compare with the Binomial approximation. How large would the batch need to be for the Binomial approximation to have relative error less than 10% on the variance?\n5. A Negative Binomial: a basketball player makes each free throw independently with probability 0.80. What is the probability of needing more than 5 attempts to make 3 shots? (Compute P(X>5) where X~NegBinomial(r=3, p=0.8) using the trials-until-r-th-success convention.)\n\n**P55 — Reflect & Consolidate:** \"Six distributions: Bernoulli (one trial) → Binomial (fixed n) → Geometric (until first success) → Neg.Binomial (until r-th success) → Poisson (count in time/space) → Hypergeometric (without replacement). Relationships: sum/limit/special-case chains. Selection: identify fixed n, unlimited trials, rate-based, or finite population.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Compound distributions: if N~Poisson(λ) and X₁,X₂,… are i.i.d. with mean μ and variance σ², and S=X₁+⋯+X_N is a random sum, show E[S]=λμ and Var(S)=λ(σ²+μ²)=λE[X²]. (Use the law of total expectation and total variance.) (b) The Conway-Maxwell-Poisson (CMP) distribution generalises Poisson to handle both underdispersion (Var<Mean, as in queuing systems) and overdispersion (Var>Mean, as in count data with clustering). For what real-world applications would each regime arise? (c) Zero-inflated Poisson: in count data with excess zeros (e.g., number of doctor visits, where many people visit zero times regardless of their health), a mixture of a point mass at 0 and a Poisson(λ) is often used. Write the PMF and identify when standard Poisson would underfit.\n\n**P75 — Mastery Assessment:**\n\"A blood bank needs to classify donors by blood type. 45% are Type O, 40% Type A, 11% Type B, 4% Type AB. 20 donors arrive. (a) Let X = number of Type O donors. What is the distribution of X? Compute E[X] and P(X≥10). (b) The blood bank needs to collect Type O until it has 8 Type O donors. Let Y = total donors processed. What is the distribution of Y? Compute E[Y]. (c) If the blood bank has a capacity of 25 donors per day and follows a Poisson process with λ=20 donors per day, what is the probability that the bank is overwhelmed (more than 25 donors arrive)? (d) Compare parts (a) and (c): one is Binomial and one is Poisson. Why is each model appropriate for its setting?\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW Poisson and Hypergeometric PMF formulas\n- Score ≤ 3/5 → PREREQUISITE GAP in math.prob.pmf; reassign\n\n**P78 — Completion:** Discrete Distributions certified. Student identifies and applies all six families; computes PMF, mean, and variance; recognises when each applies; connects the distribution families via sum/limit relationships.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.discrete-distributions.md",
+        "startLine": 101,
+        "endLine": 125
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

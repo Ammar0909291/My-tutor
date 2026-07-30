@@ -1,0 +1,379 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.linearity-expectation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.linearity-expectation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:683d3000ff3efd4ac891f077db40c51dca37fc4f1797fbf1c5e018c9a3f75ef2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.linearity-expectation.md": "sha256:4e04cf7dbcd5130fa9b59a069e70e0609e1d4a64a6718bc5b805b39a896ecf71"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "math.prob.linearity-expectation",
+    "name": "Linearity of Expectation",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.95,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.prob.expected-value"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.linearity-expectation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.linearity-expectation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.linearity-expectation.md": "sha256:4e04cf7dbcd5130fa9b59a069e70e0609e1d4a64a6718bc5b805b39a896ecf71"
+      },
+      "contentHash": "sha256:a8594b1f8dc207ec13a2b447996ea173a50eed3ae4581e56276172019d20fc2a",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.linearity-expectation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.linearity-expectation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.linearity-expectation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.linearity-expectation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.linearity-expectation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.linearity-expectation.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.linearity-expectation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.linearity-expectation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.linearity-expectation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.linearity-expectation.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.linearity-expectation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.linearity-expectation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.linearity-expectation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.linearity-expectation.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.linearity-expectation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.linearity-expectation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.linearity-expectation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.linearity-expectation.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.linearity-expectation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.linearity-expectation\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.linearity-expectation.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.linearity-expectation.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.linearity-expectation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.linearity-expectation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.linearity-expectation.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.linearity-expectation.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.linearity-expectation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.linearity-expectation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.linearity-expectation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.linearity-expectation",
+      "title": "Learning Objective",
+      "content": "The student states and applies linearity of expectation: E[aX+bY]=aE[X]+bE[Y] for any random variables X,Y and constants a,b — without requiring independence; uses linearity to compute expectations by decomposing a complex random variable into a sum of simpler indicator variables; and recognises when linearity (vs. variance/independence) is the right tool.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.linearity-expectation.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.prob.linearity-expectation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.linearity-expectation",
+      "title": "LINEARITY-REQUIRES-INDEPENDENCE",
+      "content": "| MC-1 | LINEARITY-REQUIRES-INDEPENDENCE | Student refuses to apply E[X+Y]=E[X]+E[Y] when X and Y are dependent; thinks the formula only holds for independent variables | Type 5 — instruction-induced (E[XY]=E[X]E[Y] DOES require independence; students overgeneralise this requirement to E[X+Y], which holds universally) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.linearity-expectation.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.prob.linearity-expectation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.linearity-expectation",
+      "title": "E[XY]=E[X]E[Y]-ALWAYS",
+      "content": "| MC-2 | E[XY]=E[X]E[Y]-ALWAYS | Student confuses linearity (E[X+Y]=E[X]+E[Y], always true) with the product rule (E[XY]=E[X]E[Y], true only when independent); applies product rule to dependent variables | Type 1 — overgeneralisation (both look like \"expectation distributes\"; the distinction is + vs × and dependence) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.linearity-expectation.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.prob.linearity-expectation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.linearity-expectation",
+      "title": "LINEARITY-APPLIES-TO-NONLINEAR-FUNCTIONS",
+      "content": "| MC-3 | LINEARITY-APPLIES-TO-NONLINEAR-FUNCTIONS | Student believes E[f(X)]=f(E[X]) for general f (e.g. E[X²]=(E[X])², E[1/X]=1/E[X]); conflates linearity with general function-composition | Type 1 — overgeneralisation (linearity DOES give E[aX+b]=aE[X]+b; students extend it to non-linear f, ignoring Jensen's inequality) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.linearity-expectation.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.linearity-expectation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.linearity-expectation",
+      "title": "CORRECT → \"E[X+Y]=E[X]+E[Y] always (no independence needed). Indicator technique: X=∑Iₐᵢ → E[X]=∑P(Aᵢ). E[XY]≠E[X]E[Y] in general.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"E[X+Y]=E[X]+E[Y] always (no independence needed). Indicator technique: X=∑Iₐᵢ → E[X]=∑P(Aᵢ). E[XY]≠E[X]E[Y] in general.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.linearity-expectation.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.prob.linearity-expectation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.linearity-expectation",
+      "title": "PARTIAL (thinks independence needed) → \"Independence is NOT required for E[X+Y]=E[X]+E[Y]. See the proof: it uses only P(X=x,Y=y) summing to P(X=x) and P(Y=y) marginally — no independence. Independence IS needed for E[XY]=E[X]E[Y]. Keep these two rules separate.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (thinks independence needed) → \\\"Independence is NOT required for E[X+Y]=E[X]+E[Y]. See the proof: it uses only P(X=x,Y=y) summing to P(X=x) and P(Y=y) marginally — no independence. Independence IS needed for E[XY]=E[X]E[Y]. Keep these two rules separate.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.linearity-expectation.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.prob.linearity-expectation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.linearity-expectation",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.linearity-expectation.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.prob.linearity-expectation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.linearity-expectation",
+      "title": "NO_RESPONSE → \"Roll two dice. X=face 1, Y=face 2. Are they independent? Yes. What is E[X+Y]? Now: coin flip H gives 1, T gives 0. Set X=result, Y=1−X. E[X]=1/2, E[Y]=1/2. Are X and Y independent? E[X+Y]=E[1]=1=E[X]+E[Y]. Linearity works even though X and Y are perfectly dependent (negatively correlated).\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"Roll two dice. X=face 1, Y=face 2. Are they independent? Yes. What is E[X+Y]? Now: coin flip H gives 1, T gives 0. Set X=result, Y=1−X. E[X]=1/2, E[Y]=1/2. Are X and Y independent? E[X+Y]=E[1]=1=E[X]+E[Y]. Linearity works even though X and Y are perfectly dependent (negatively correlated).\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.linearity-expectation.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.prob.linearity-expectation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.linearity-expectation",
+      "title": "CORRECT → \"E[f(X)]=f(E[X]) only for linear f. For x²: E[X²]≥(E[X])². The gap is exactly Var(X).\" → Gate (P91)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"E[f(X)]=f(E[X]) only for linear f. For x²: E[X²]≥(E[X])². The gap is exactly Var(X).\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.linearity-expectation.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.prob.linearity-expectation/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.linearity-expectation",
+      "title": "PARTIAL or INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL or INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.linearity-expectation.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.prob.linearity-expectation/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.linearity-expectation",
+      "title": "NO_RESPONSE → \"If X=2 always, then E[X²]=4=(E[X])². Now if X=0 or 2 with equal probability: E[X]=1, E[X²]=(0²+2²)/2=2≠1=(E[X])². What's the difference? Var(X)=E[X²]−(E[X])².\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"NO_RESPONSE → \\\"If X=2 always, then E[X²]=4=(E[X])². Now if X=0 or 2 with equal probability: E[X]=1, E[X²]=(0²+2²)/2=2≠1=(E[X])². What's the difference? Var(X)=E[X²]−(E[X])².\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.linearity-expectation.md",
+        "startLine": 70,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.prob.linearity-expectation/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.linearity-expectation",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. A fair die is rolled n times. X = sum of all faces. Compute E[X] using linearity. (Xᵢ = face on roll i; E[Xᵢ]=3.5.)\n2. A deck of 52 cards is shuffled. X = number of cards that are in the same position as in the original ordering (fixed points). Compute E[X] without computing the full distribution.\n3. X~Binomial(n,p). Using Xᵢ=indicator that trial i succeeds: compute E[X]=np using linearity. (You do NOT need the Binomial PMF formula for this.)\n4. Are X and −X independent? Compute E[X+(−X)]=E[0]=0 and E[X]+E[−X]=E[X]−E[X]=0. Does this use independence? Why or why not?\n5. If E[X]=3 and E[X²]=13, compute Var(X). Can E[X²] be computed from linearity applied to X²? (Explain why or why not.)\n\n**P55 — Reflect & Consolidate:** \"E[X+Y]=E[X]+E[Y] always. Indicator trick: X=∑Iₐᵢ → E[X]=∑P(Aᵢ), no independence needed. E[XY]=E[X]E[Y] only for independent. E[f(X)]=f(E[X]) only for linear f.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Coupon collector problem: collect n types of coupons uniformly at random (with replacement). X = number of draws to complete the collection. Let Xₖ = number of draws to get the k-th new coupon after already having k−1 types. Xₖ~Geometric((n−k+1)/n). By linearity: E[X]=∑_{k=1}^{n} E[Xₖ]=n∑_{k=1}^{n} 1/k = n·H_n where H_n is the n-th harmonic number. Compute E[X] for n=4. (b) This sum ∑Xₖ: are the Xₖ independent? Does your answer to (a) depend on whether they are? (c) For n=365 (birthday coupons), E[X]≈365 ln 365≈2153 draws. Interpret this in the birthday context.\n\n**P75 — Mastery Assessment:**\n\"n people are seated randomly. Person i 'matches' if they sit in their own seat. X=number of matches. (a) Compute E[X]. (b) Are the indicator events I₁,…,Iₙ independent? (c) Does independence matter for computing E[X]? (d) If instead you want Var(X), does independence matter then? (Hint: Var(∑Xᵢ)=∑Var(Xᵢ)+2∑_{i<j}Cov(Xᵢ,Xⱼ) — the covariance terms do NOT vanish here.)\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW indicator trick application\n- Score ≤ 3/5 → PREREQUISITE GAP in math.prob.expected-value; reassign\n\n**P78 — Completion:** Linearity of Expectation certified. Student states and applies E[X+Y]=E[X]+E[Y] without independence; uses indicator decomposition; distinguishes from product rule and non-linear case.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.linearity-expectation.md",
+        "startLine": 84,
+        "endLine": 108
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

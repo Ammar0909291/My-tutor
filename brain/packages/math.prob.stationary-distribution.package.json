@@ -1,0 +1,417 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.stationary-distribution-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.stationary-distribution",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:53912183ae25cd5211f7eb4d9010c30c0ce01df8729075f30a928253749c27a3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.stationary-distribution.md": "sha256:f2c4164559981e7296a001a5626ace7a429e535757a47c30930e7107e78f38a6"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.prob.stationary-distribution",
+    "name": "Stationary Distribution",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.prob.transition-matrix"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.stationary-distribution-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.stationary-distribution (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.stationary-distribution.md": "sha256:f2c4164559981e7296a001a5626ace7a429e535757a47c30930e7107e78f38a6"
+      },
+      "contentHash": "sha256:80bca91e8b82cfb4d7b099e0715654d5d60c1cfc9ac82b898f237c411e053197",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.stationary-distribution.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.stationary-distribution.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.stationary-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.stationary-distribution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.stationary-distribution.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.stationary-distribution.md#TA-2 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.stationary-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.stationary-distribution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.stationary-distribution.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.stationary-distribution.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.stationary-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.stationary-distribution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.stationary-distribution.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.stationary-distribution.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.stationary-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.stationary-distribution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.stationary-distribution.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.stationary-distribution.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.stationary-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.stationary-distribution\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.stationary-distribution.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.stationary-distribution.md#TA-6 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.stationary-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.stationary-distribution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.stationary-distribution.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.stationary-distribution.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.stationary-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.stationary-distribution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.stationary-distribution.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.stationary-distribution.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.stationary-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.stationary-distribution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.stationary-distribution/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.stationary-distribution",
+      "title": "Learning Objective",
+      "content": "The student defines a stationary distribution π as a probability vector satisfying πP=π and ∑_i πᵢ=1; solves the balance equations for small chains; proves uniqueness for irreducible chains; states the detailed balance condition πᵢP_{ij}=πⱼP_{ji} (reversibility) and explains that it implies stationarity; applies detailed balance to compute stationary distributions without solving linear systems; and connects the stationary distribution to long-run time averages.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.stationary-distribution.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.prob.stationary-distribution/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.stationary-distribution",
+      "title": "STATIONARY-DISTRIBUTION-IS-THE-INITIAL-DISTRIBUTION",
+      "content": "| MC-1 | STATIONARY-DISTRIBUTION-IS-THE-INITIAL-DISTRIBUTION | Student believes the stationary distribution π is the distribution at time 0; doesn't know π is the LONG-RUN distribution that the chain converges to (for ergodic chains), which may differ from any initial distribution | Type 3 — language contamination (\"stationary\" suggests something fixed from the start; in the probabilistic sense it means a distribution that doesn't CHANGE from one step to the next, not that it was always there) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.stationary-distribution.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.prob.stationary-distribution/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.stationary-distribution",
+      "title": "DETAILED-BALANCE-IS-REQUIRED-FOR-STATIONARITY",
+      "content": "| MC-2 | DETAILED-BALANCE-IS-REQUIRED-FOR-STATIONARITY | Student believes a distribution must satisfy detailed balance to be stationary; doesn't know detailed balance is SUFFICIENT but not NECESSARY for stationarity (πP=π is the only requirement; detailed balance is a stronger condition that implies reversibility) | Type 5 — instruction-induced (detailed balance is usually taught as the method for finding stationary distributions; students generalise the calculation method to a definition requirement) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.stationary-distribution.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.prob.stationary-distribution/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.stationary-distribution",
+      "title": "EVERY-CHAIN-HAS-A-UNIQUE-STATIONARY-DISTRIBUTION",
+      "content": "| MC-3 | EVERY-CHAIN-HAS-A-UNIQUE-STATIONARY-DISTRIBUTION | Student assumes any Markov chain has exactly one stationary distribution; doesn't account for reducible chains (which have multiple stationary distributions — one supported on each closed communication class) or periodic chains (stationary exists but chain doesn't converge to it) | Type 5 — instruction-induced (uniqueness is proved for irreducible chains; students generalise to all chains without verifying irreducibility) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.stationary-distribution.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.stationary-distribution/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.stationary-distribution",
+      "title": "CORRECT → \"πP=π, ∑πᵢ=1. Solve the linear system. Unique for irreducible chains. Long-run time average interpretation.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"πP=π, ∑πᵢ=1. Solve the linear system. Unique for irreducible chains. Long-run time average interpretation.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.stationary-distribution.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.prob.stationary-distribution/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.stationary-distribution",
+      "title": "PARTIAL (MC-1: stationary = initial) → \"The stationary distribution π is not the starting distribution. It's the distribution the chain APPROACHES over time (for ergodic chains). If the chain starts in some other distribution π₀, then π₀·Pⁿ → π as n→∞. The stationary distribution is a property of the transition matrix, not the initial conditions.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (MC-1: stationary = initial) → \\\"The stationary distribution π is not the starting distribution. It's the distribution the chain APPROACHES over time (for ergodic chains). If the chain starts in some other distribution π₀, then π₀·Pⁿ → π as n→∞. The stationary distribution is a property of the transition matrix, not the initial conditions.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.stationary-distribution.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.prob.stationary-distribution/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.stationary-distribution",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.stationary-distribution.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.prob.stationary-distribution/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.stationary-distribution",
+      "title": "NO_RESPONSE → \"3-state chain: P=[[0.5,0.3,0.2],[0.1,0.7,0.2],[0.4,0.4,0.2]]. Set up πP=π: π₁=0.5π₁+0.1π₂+0.4π₃, π₂=0.3π₁+0.7π₂+0.4π₃, π₃=0.2π₁+0.2π₂+0.2π₃. Plus π₁+π₂+π₃=1. Solve: π₃=0.2(π₁+π₂+π₃)=0.2 (since sum=1). Simplify remaining equations.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"3-state chain: P=[[0.5,0.3,0.2],[0.1,0.7,0.2],[0.4,0.4,0.2]]. Set up πP=π: π₁=0.5π₁+0.1π₂+0.4π₃, π₂=0.3π₁+0.7π₂+0.4π₃, π₃=0.2π₁+0.2π₂+0.2π₃. Plus π₁+π₂+π₃=1. Solve: π₃=0.2(π₁+π₂+π₃)=0.2 (since sum=1). Simplify remaining equations.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.stationary-distribution.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.prob.stationary-distribution/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.stationary-distribution",
+      "title": "CORRECT → \"Detailed balance: πᵢP_{ij}=πⱼP_{ji}. Sufficient (not necessary) for stationarity. Reversibility. Birth-death chains solved telescopically via detailed balance.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Detailed balance: πᵢP_{ij}=πⱼP_{ji}. Sufficient (not necessary) for stationarity. Reversibility. Birth-death chains solved telescopically via detailed balance.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.stationary-distribution.md",
+        "startLine": 91,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "math.prob.stationary-distribution/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.stationary-distribution",
+      "title": "PARTIAL (MC-2: detailed balance required) → \"Detailed balance is SUFFICIENT for stationarity but NOT necessary. Many chains are stationary without being reversible. The birth-death chain and MCMC algorithms (Metropolis-Hastings) are designed to be reversible, which makes them easy to analyse. But a 3-cycle chain has π=[1/3,1/3,1/3] as its stationary distribution WITHOUT satisfying detailed balance.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (MC-2: detailed balance required) → \\\"Detailed balance is SUFFICIENT for stationarity but NOT necessary. Many chains are stationary without being reversible. The birth-death chain and MCMC algorithms (Metropolis-Hastings) are designed to be reversible, which makes them easy to analyse. But a 3-cycle chain has π=[1/3,1/3,1/3] as its stationary distribution WITHOUT satisfying detailed balance.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.stationary-distribution.md",
+        "startLine": 92,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "math.prob.stationary-distribution/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.stationary-distribution",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.stationary-distribution.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.prob.stationary-distribution/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.stationary-distribution",
+      "title": "NO_RESPONSE → \"Birth-death chain on {0,1,2}: p₀=0.3, q₁=0.7, p₁=0.4, q₂=0.6, and state 2 is absorbing (q₂=1 at boundary). Use detailed balance: π₀p₀=π₁q₁ → 0.3π₀=0.7π₁ → π₁=(3/7)π₀. π₁p₁=π₂q₂ → 0.4π₁=0.6π₂ → π₂=(2/3)π₁=(2/3)(3/7)π₀=(2/7)π₀. Normalise: π₀(1+3/7+2/7)=π₀(12/7)=1 → π₀=7/12.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"Birth-death chain on {0,1,2}: p₀=0.3, q₁=0.7, p₁=0.4, q₂=0.6, and state 2 is absorbing (q₂=1 at boundary). Use detailed balance: π₀p₀=π₁q₁ → 0.3π₀=0.7π₁ → π₁=(3/7)π₀. π₁p₁=π₂q₂ → 0.4π₁=0.6π₂ → π₂=(2/3)π₁=(2/3)(3/7)π₀=(2/7)π₀. Normalise: π₀(1+3/7+2/7)=π₀(12/7)=1 → π₀=7/12.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.stationary-distribution.md",
+        "startLine": 94,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "math.prob.stationary-distribution/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.stationary-distribution",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Find the stationary distribution of the weather chain P=[[0.7,0.2,0.1],[0.3,0.4,0.3],[0.2,0.3,0.5]]. (Set up and solve the linear system πP=π with ∑πᵢ=1.)\n2. A 2-state chain with α=0.3 and β=0.5 (see A01 formula). Compute the stationary distribution and verify πP=π directly.\n3. Birth-death chain on {0,1,2,3}: p₀=p₁=p₂=0.6, q₁=q₂=q₃=0.4, absorbing at both ends. (a) Use detailed balance to find the stationary distribution. (b) Is the chain reversible?\n4. A chain has transition matrix P=[[0,1,0],[0,0,1],[1,0,0]]. Find the stationary distribution. Does the chain converge to it? (This chain has a cycle of length 3 — what is the period?)\n5. Consider a Markov chain on integers {0,1,2,…} (infinite state space) where from state i, the chain goes to i+1 with probability p and to 0 with probability 1−p (a \"renewal chain\"). When does a stationary distribution exist? (Hint: try π₀=1−p, πᵢ=(1−p)pⁱ for i≥1 and check πP=π.)\n\n**P55 — Reflect & Consolidate:** \"Stationary: πP=π, ∑πᵢ=1. Unique for irreducible chains. Long-run average. Detailed balance (sufficient, not necessary): πᵢP_{ij}=πⱼP_{ji}. Birth-death: solve telescopically. Convergence requires ergodicity.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Metropolis-Hastings algorithm: to sample from a target distribution π on a large state space, construct a Markov chain with stationary distribution π. The Metropolis-Hastings acceptance ratio r(x,y)=min(1, π(y)q(x|y)/(π(x)q(y|x))) ensures detailed balance. Why does satisfying detailed balance guarantee that π is stationary for this chain? (b) Gibbs sampling: a special case of Metropolis-Hastings where components of a multivariate distribution are updated one at a time, always from the conditional distribution. For a bivariate (X,Y): sample X|Y=y, then Y|X=x, repeat. The joint distribution P(X,Y) is the stationary distribution. Why is this useful for Bayesian posterior sampling? (c) The Google PageRank vector is the stationary distribution of a modified random walk on the web. Why does a unique stationary distribution exist? (Hint: the modification with teleportation makes the chain irreducible and aperiodic.)\n\n**P75 — Mastery Assessment:**\n\"A database server has 3 possible states: Idle (I), Busy-low (L), Busy-high (H). Transition matrix:\nP = [[0.5, 0.4, 0.1],\n     [0.3, 0.5, 0.2],\n     [0.2, 0.3, 0.5]]\n(a) Find the stationary distribution π. (b) In the long run, what fraction of time is the server in each state? (c) Does the chain satisfy detailed balance? If not, which pairs violate it? (d) If the cost per time unit is 0 (Idle), 1 (Low), 5 (High), what is the long-run average cost per time unit? (e) If the server starts Idle and Idle→High direct transition probability is 0.1, after how many steps does the distribution reach within 0.01 of the stationary distribution? (Approximate using the 2nd eigenvalue.)\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW detailed balance vs. stationarity distinction\n- Score ≤ 3/5 → PREREQUISITE GAP in math.prob.transition-matrix; reassign\n\n**P78 — Completion:** Stationary Distribution certified. Student solves balance equations; applies detailed balance; identifies when stationarity and uniqueness hold; connects to MCMC and PageRank.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.stationary-distribution.md",
+        "startLine": 108,
+        "endLine": 136
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

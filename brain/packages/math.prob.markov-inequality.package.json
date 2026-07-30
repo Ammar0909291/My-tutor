@@ -1,0 +1,345 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.markov-inequality-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.markov-inequality",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6f9f24e2bc6042e769ee4d8f1765342146c909f1a254b03b5cef72491122e908",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.markov-inequality.md": "sha256:73f718fbdb4b98f8acdad6d41834cb08dd8755a80fdb23b7c915b8ca54021d77"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "math.prob.markov-inequality",
+    "name": "Markov's Inequality",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.prob.expected-value"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.markov-inequality-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.markov-inequality (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.markov-inequality.md": "sha256:73f718fbdb4b98f8acdad6d41834cb08dd8755a80fdb23b7c915b8ca54021d77"
+      },
+      "contentHash": "sha256:a5a2078483cd7fe619daed67632d6a9b00a71976be847cace86ae03a4657d5e8",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.markov-inequality.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.markov-inequality.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.markov-inequality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.markov-inequality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.markov-inequality.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.markov-inequality.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.markov-inequality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.markov-inequality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.markov-inequality.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.markov-inequality.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.markov-inequality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.markov-inequality\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.markov-inequality.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.markov-inequality.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.markov-inequality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.markov-inequality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.markov-inequality.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.markov-inequality.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.markov-inequality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.markov-inequality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.markov-inequality.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.markov-inequality.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.markov-inequality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.markov-inequality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.markov-inequality/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.markov-inequality",
+      "title": "Learning Objective",
+      "content": "The student states Markov's inequality: for X≥0 and a>0, P(X≥a)≤E[X]/a; proves it in one line from the definition of expectation; applies it to bound tail probabilities when only the mean is known; recognises when Markov is tight (concentrated at 0 and a); and identifies that Markov requires X≥0 but no distributional assumptions beyond finite mean.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-inequality.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.prob.markov-inequality/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.markov-inequality",
+      "title": "MARKOV-REQUIRES-SPECIFIC-DISTRIBUTION",
+      "content": "| MC-1 | MARKOV-REQUIRES-SPECIFIC-DISTRIBUTION | Student thinks Markov's inequality is a formula for a specific distribution (like the Binomial or Poisson); doesn't recognise it as a universal bound holding for ANY non-negative random variable | Type 5 — instruction-induced (probability inequalities are usually introduced alongside specific distributions; students categorise Markov as a \"distribution result\" rather than a distribution-free bound) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-inequality.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.prob.markov-inequality/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.markov-inequality",
+      "title": "MARKOV-REQUIRES-X-SYMMETRIC",
+      "content": "| MC-2 | MARKOV-REQUIRES-X-SYMMETRIC | Student tries to apply Markov to X that can be negative; doesn't know the non-negativity requirement; or tries to apply it to deviations from the mean before converting to a non-negative quantity | Type 3 — language contamination (\"Markov\" is associated with Markov chains (unrelated), and students assume both share some symmetry/stationarity requirement) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-inequality.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.prob.markov-inequality/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.markov-inequality",
+      "title": "MARKOV-BOUND-IS-TIGHT-FOR-ALL-DISTRIBUTIONS",
+      "content": "| MC-3 | MARKOV-BOUND-IS-TIGHT-FOR-ALL-DISTRIBUTIONS | Student thinks P(X≥a)=E[X]/a (equality) for all non-negative X; doesn't know equality holds only for the degenerate two-point distribution concentrated on {0,a} | Type 1 — overgeneralisation (if shown the tight example, students assume it generalises to equality always) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-inequality.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.markov-inequality/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.markov-inequality",
+      "title": "If E[X]=5: P(X≥25) ≤ 5/25 = 1/5. Regardless of the distribution.",
+      "content": "{\"id\":\"TA-1\",\"title\":\"If E[X]=5: P(X≥25) ≤ 5/25 = 1/5. Regardless of the distribution.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-inequality.md",
+        "startLine": 47,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "math.prob.markov-inequality/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.markov-inequality",
+      "title": "If number of errors in a program has mean 10: P(≥100 errors) ≤ 1/10.",
+      "content": "{\"id\":\"TA-2\",\"title\":\"If number of errors in a program has mean 10: P(≥100 errors) ≤ 1/10.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-inequality.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.prob.markov-inequality/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.markov-inequality",
+      "title": "CORRECT → \"P(X≥a)≤E[X]/a for X≥0. Proof: lower-bound E[X] by a·P(X≥a). Tight at {0,a} two-point distribution. Requires X≥0 and a>E[X] for a non-trivial bound.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"CORRECT → \\\"P(X≥a)≤E[X]/a for X≥0. Proof: lower-bound E[X] by a·P(X≥a). Tight at {0,a} two-point distribution. Requires X≥0 and a>E[X] for a non-trivial bound.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-inequality.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.prob.markov-inequality/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.markov-inequality",
+      "title": "PARTIAL → TB-R01 → Gate",
+      "content": "{\"id\":\"TA-4\",\"title\":\"PARTIAL → TB-R01 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-inequality.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.prob.markov-inequality/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.markov-inequality",
+      "title": "INCORRECT → TB-R01 → Gate",
+      "content": "{\"id\":\"TA-5\",\"title\":\"INCORRECT → TB-R01 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-inequality.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.prob.markov-inequality/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.markov-inequality",
+      "title": "NO_RESPONSE → \"E[X]=E[X·1_{X≥a}]+E[X·1_{X<a}]. Which term is bigger? What lower bound can you put on E[X·1_{X≥a}] using the fact that X≥a on this event?\" → TB-R01 → Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"NO_RESPONSE → \\\"E[X]=E[X·1_{X≥a}]+E[X·1_{X<a}]. Which term is bigger? What lower bound can you put on E[X·1_{X≥a}] using the fact that X≥a on this event?\\\" → TB-R01 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-inequality.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.prob.markov-inequality/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.markov-inequality",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. X is a non-negative random variable with E[X]=3. Bound P(X≥12) using Markov's inequality.\n2. A factory produces items; the expected number of defects per batch is 6. Use Markov to bound the probability that a batch has at least 30 defects. Is this bound useful?\n3. X≥0 with E[X]=μ. Show that P(X≥kμ)≤1/k for any k>1. This is the standard multiplicative form of Markov.\n4. Give an example of a distribution where Markov's bound P(X≥a)=E[X]/a (equality) holds exactly.\n5. Why can't Markov be applied directly to P(|X−μ|≥a) (i.e. to bound the probability that X deviates from its mean by a)? What transformation is needed? (Hint: what is |X−μ|? Is it non-negative? What is its mean?)\n\n**P55 — Reflect & Consolidate:** \"P(X≥a)≤E[X]/a for X≥0. Proof: E[X]≥a·P(X≥a). Distribution-free. Tight at two-point {0,a}. Only useful when a>E[X]. Gateway to Chebyshev (apply Markov to (X−μ)²).\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Chebyshev's inequality from Markov: let Y=(X−μ)². Y is non-negative. E[Y]=Var(X)=σ². P(|X−μ|≥k) = P(Y≥k²) ≤ E[Y]/k² = σ²/k² (by Markov applied to Y). This IS Chebyshev's inequality. Write it in the form P(|X−μ|≥kσ)≤1/k². (b) Apply Chebyshev (derived from Markov) to X with E[X]=50, Var(X)=25: bound P(|X−50|≥15). Compare with Markov applied directly to X (using E[X]=50, threshold a=65): which is tighter? (c) What does it mean that Chebyshev \"refines\" Markov? What extra information does it use?\n\n**P75 — Mastery Assessment:**\n\"(a) Prove Markov's inequality from scratch (no notes). (b) Apply it: X~Poisson(4). Bound P(X≥20) using Markov. Compare with the exact value P(X≥20)=∑_{k=20}^∞ e⁻⁴4ᵏ/k! ≈ 0.0000084. Is Markov tight here? (c) Is Markov ever tight for the Poisson distribution? (Recall: tightness requires the distribution to concentrate on {0,a}. Does Poisson ever do this?)\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW proof and tightness condition\n- Score ≤ 3/5 → PREREQUISITE GAP in math.prob.expected-value; reassign\n\n**P78 — Completion:** Markov's Inequality certified. Student states and proves the bound; applies to tail probabilities; derives Chebyshev from it; understands tightness and when it's useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-inequality.md",
+        "startLine": 67,
+        "endLine": 91
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

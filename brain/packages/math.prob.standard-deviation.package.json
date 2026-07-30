@@ -1,0 +1,379 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.standard-deviation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.standard-deviation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8e909f9e7dd00803da3748f2dc0211f988f64d1849ee360f8d923097da069bcd",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.standard-deviation.md": "sha256:47939b586d54f22b24802f1d2de5f99bae80f9ef49845b2f8e5d03fbe73aceee"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "math.prob.standard-deviation",
+    "name": "Standard Deviation",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.95,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "math.prob.variance"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.standard-deviation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.standard-deviation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.standard-deviation.md": "sha256:47939b586d54f22b24802f1d2de5f99bae80f9ef49845b2f8e5d03fbe73aceee"
+      },
+      "contentHash": "sha256:2ae19cb40f3663dd8601a2eb120032030d8f5ab2e1c7b6773abd87e9864394c4",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.standard-deviation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.standard-deviation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.standard-deviation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.standard-deviation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.standard-deviation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.standard-deviation.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.standard-deviation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.standard-deviation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.standard-deviation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.standard-deviation.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.standard-deviation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.standard-deviation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.standard-deviation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.standard-deviation.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.standard-deviation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.standard-deviation\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.standard-deviation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.standard-deviation.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.standard-deviation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.standard-deviation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.standard-deviation.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.standard-deviation.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.standard-deviation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.standard-deviation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.standard-deviation.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.standard-deviation.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.standard-deviation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.standard-deviation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.standard-deviation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.standard-deviation",
+      "title": "Learning Objective",
+      "content": "The student defines standard deviation as SD(X)=√Var(X); interprets SD as a measure of spread in the same units as X; distinguishes SD from variance (SD is interpretable, variance is mathematically tractable); applies the formula SD(aX+b)=|a|·SD(X); explains why adding a constant b does not affect spread; and uses SD to describe data spread in context (e.g. \"scores are within ±1 SD of the mean about 68% of the time for normal distributions\").",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.standard-deviation.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.prob.standard-deviation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.standard-deviation",
+      "title": "SD-AND-VARIANCE-ARE-INTERCHANGEABLE",
+      "content": "| MC-1 | SD-AND-VARIANCE-ARE-INTERCHANGEABLE | Student treats SD and variance as synonyms; plugs variance where SD is expected or vice versa; reports SD as \"the average squared deviation\" | Type 3 — language contamination (both measure \"spread\"; students confuse them because the formula relationship is simple; instructors sometimes use one when they mean the other informally) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.standard-deviation.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.prob.standard-deviation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.standard-deviation",
+      "title": "ADDING-CONSTANT-CHANGES-SD",
+      "content": "| MC-2 | ADDING-CONSTANT-CHANGES-SD | Student believes SD(X+5)≠SD(X); thinks shifting the distribution changes its spread | Type 1 — overgeneralisation (E[X+5]=E[X]+5, so students apply the same logic to SD; the correct rule is that SD measures spread AROUND the mean, which is unchanged by a shift) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.standard-deviation.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.prob.standard-deviation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.standard-deviation",
+      "title": "SD-IS-THE-AVERAGE-DEVIATION",
+      "content": "| MC-3 | SD-IS-THE-AVERAGE-DEVIATION | Student believes SD=E[|X−μ|] (mean absolute deviation) not √E[(X−μ)²]; confuses the two measures of spread | Type 5 — instruction-induced (mean absolute deviation is mentioned in some curricula as an easier-to-understand alternative; students mix the two formulas) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.standard-deviation.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.standard-deviation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.standard-deviation",
+      "title": "SD(aX+b) = |a|·SD(X) (scaling multiplies SD; shifting doesn't change it)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"SD(aX+b) = |a|·SD(X) (scaling multiplies SD; shifting doesn't change it)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.standard-deviation.md",
+        "startLine": 44,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.prob.standard-deviation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.standard-deviation",
+      "title": "SD(X+Y) ≠ SD(X)+SD(Y) in general (covariance term; equality only when X,Y independent)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"SD(X+Y) ≠ SD(X)+SD(Y) in general (covariance term; equality only when X,Y independent)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.standard-deviation.md",
+        "startLine": 45,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.prob.standard-deviation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.standard-deviation",
+      "title": "SD(X+Y) = √(Var(X)+Var(Y)) when X,Y are independent",
+      "content": "{\"id\":\"TA-3\",\"title\":\"SD(X+Y) = √(Var(X)+Var(Y)) when X,Y are independent\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.standard-deviation.md",
+        "startLine": 46,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "math.prob.standard-deviation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.standard-deviation",
+      "title": "CORRECT → \"SD=√Var; units match X; SD(aX+b)=|a|·SD(X).\" → Gate (P91)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"CORRECT → \\\"SD=√Var; units match X; SD(aX+b)=|a|·SD(X).\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.standard-deviation.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.prob.standard-deviation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.standard-deviation",
+      "title": "PARTIAL → revisit Var(X) definition and the square-root step → Gate",
+      "content": "{\"id\":\"TA-5\",\"title\":\"PARTIAL → revisit Var(X) definition and the square-root step → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.standard-deviation.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.prob.standard-deviation/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.standard-deviation",
+      "title": "INCORRECT → TB-R01 → Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"INCORRECT → TB-R01 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.standard-deviation.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.prob.standard-deviation/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.standard-deviation",
+      "title": "NO_RESPONSE → \"If Var(X)=9 cm², what is SD(X) in cm? If Y=3X, what is SD(Y)?\" → Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"NO_RESPONSE → \\\"If Var(X)=9 cm², what is SD(X) in cm? If Y=3X, what is SD(Y)?\\\" → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.standard-deviation.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.prob.standard-deviation/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.standard-deviation",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. X has Var(X)=16. What is SD(X)? What is SD(3X−7)?\n2. Scores on a test: mean=50, SD=8. A student scored 66. How many SDs above the mean is this?\n3. X and Y are independent with SD(X)=3, SD(Y)=4. What is SD(X+Y)? What is SD(X−Y)?\n4. If SD(X)=5, what is Var(X)? If the units of X are metres, what are the units of SD(X)? Of Var(X)?\n5. True or false: SD(X+Y)=SD(X)+SD(Y) always. Give a counterexample or prove it.\n\n**P55 — Reflect & Consolidate:** \"SD=√Var; same units as X. Shift: no effect. Scale: SD multiplies by |a|. Independent sum: SD²=SD(X)²+SD(Y)² (Pythagoras of spread).\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Chebyshev's inequality: P(|X−μ|≥k·SD(X))≤1/k². For k=2: at most 25% of probability lies more than 2 SDs from the mean — for ANY distribution. Apply to X with mean=100, SD=10: what fraction of outcomes lie outside [80,120]? (b) For a normal distribution the 68-95-99.7 rule gives P(|X−μ|≤SD)≈0.68, P(|X−μ|≤2·SD)≈0.95. How does this compare with Chebyshev's bound at k=2? (c) When would you prefer to report SD rather than variance? When would you prefer variance?\n\n**P75 — Mastery Assessment:**\n\"X~Bernoulli(p): compute Var(X)=p(1−p) and SD(X)=√(p(1−p)). At what value of p is SD(X) maximised? Interpret geometrically.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW SD(aX+b) rule\n- Score ≤ 3/5 → PREREQUISITE GAP in math.prob.variance; reassign\n\n**P78 — Completion:** Standard Deviation certified. Student computes SD from variance; applies scaling rules; interprets SD as spread in original units; uses Chebyshev's inequality.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.standard-deviation.md",
+        "startLine": 64,
+        "endLine": 88
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

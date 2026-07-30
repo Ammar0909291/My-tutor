@@ -1,0 +1,549 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.total-probability-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.total-probability",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7b9ed4656cedcdbd1fbcca8180d7db5e1c6a01f3bf6ed9a381dfd1d8a0bcda7a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.total-probability.md": "sha256:1c9ef98d495d8d83fe7ca78cc3a567680b2e7a1a6fe007746200e750f54c36c0"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 12,
+      "mastery_probe": 1
+    },
+    "ruleCount": 12
+  },
+  "concept": {
+    "conceptId": "math.prob.total-probability",
+    "name": "Law of Total Probability",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.prob.conditional-probability"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.total-probability-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.total-probability (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.total-probability.md": "sha256:1c9ef98d495d8d83fe7ca78cc3a567680b2e7a1a6fe007746200e750f54c36c0"
+      },
+      "contentHash": "sha256:86720c4f38d90831f2df218f7e88b4772baa41479459a40678e24a3a89999265",
+      "ruleCount": 12,
+      "bandCounts": {
+        "3": 12
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.total-probability.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.total-probability.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.total-probability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.total-probability\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.total-probability.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.total-probability.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.total-probability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.total-probability\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.total-probability.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.total-probability.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.total-probability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.total-probability\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.total-probability.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.total-probability.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.total-probability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.total-probability\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.total-probability.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.total-probability.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.total-probability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.total-probability\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.total-probability.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.total-probability.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.total-probability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.total-probability\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.total-probability.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.total-probability.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.total-probability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.total-probability\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.total-probability.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.total-probability.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.total-probability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.total-probability\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.total-probability.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.total-probability.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.total-probability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.total-probability\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.total-probability.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.total-probability.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.total-probability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.total-probability\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.total-probability.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.total-probability.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.total-probability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.total-probability\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.total-probability.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.total-probability.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.total-probability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.total-probability\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.total-probability/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.total-probability",
+      "title": "Learning Objective",
+      "content": "The student states the law of total probability: if B₁,…,Bₙ is a partition of the sample space (mutually exclusive, exhaustive), then P(A)=∑ᵢP(A|Bᵢ)P(Bᵢ); applies it to compute unconditional probabilities by conditioning on a helpful partition; distinguishes the law from Bayes' theorem (which uses it as a normaliser); and extends it to the continuous case using conditional densities.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.total-probability.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.prob.total-probability/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.total-probability",
+      "title": "TOTAL-PROBABILITY-AVERAGES-PROBABILITIES",
+      "content": "| MC-1 | TOTAL-PROBABILITY-AVERAGES-PROBABILITIES | Student computes P(A)=[P(A|B₁)+P(A|B₂)]/2 (simple average) instead of the weighted average ∑P(A|Bᵢ)P(Bᵢ); ignores the base-rate weights P(Bᵢ) | Type 1 — overgeneralisation (averaging P(A|B₁) and P(A|B₂) seems intuitive when the student thinks of \"averaging cases\"; ignores that the Bᵢ may be unequally likely) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.total-probability.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.prob.total-probability/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.total-probability",
+      "title": "PARTITION-IS-OPTIONAL",
+      "content": "| MC-2 | PARTITION-IS-OPTIONAL | Student applies the law to events B₁,B₂ that are not a partition (either not exhaustive or not mutually exclusive); gets incorrect results | Type 3 — language contamination (\"condition on cases\" is vague; \"partition\" means both mutually exclusive AND exhaustive, and students often check one but not both) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.total-probability.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.prob.total-probability/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.total-probability",
+      "title": "TOTAL-PROBABILITY-IS-ONLY-FOR-TWO-CASES",
+      "content": "| MC-3 | TOTAL-PROBABILITY-IS-ONLY-FOR-TWO-CASES | Student uses only P(A)=P(A|B)P(B)+P(A|Bᶜ)P(Bᶜ) and cannot extend to n>2 partition elements | Type 5 — instruction-induced (first examples always have two cases B and Bᶜ; students don't generalise to arbitrary partitions) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.total-probability.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.total-probability/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.total-probability",
+      "title": "1% of population has disease D.",
+      "content": "{\"id\":\"TA-1\",\"title\":\"1% of population has disease D.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.total-probability.md",
+        "startLine": 47,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "math.prob.total-probability/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.total-probability",
+      "title": "Test sensitivity: P(+|D)=0.95 (true positive rate).",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Test sensitivity: P(+|D)=0.95 (true positive rate).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.total-probability.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.prob.total-probability/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.total-probability",
+      "title": "Test specificity: P(−|Dᶜ)=0.90 (true negative rate), so P(+|Dᶜ)=0.10 (false positive rate).",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Test specificity: P(−|Dᶜ)=0.90 (true negative rate), so P(+|Dᶜ)=0.10 (false positive rate).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.total-probability.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.prob.total-probability/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.total-probability",
+      "title": "Partition: {D, Dᶜ}. P(D)=0.01, P(Dᶜ)=0.99.",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Partition: {D, Dᶜ}. P(D)=0.01, P(Dᶜ)=0.99.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.total-probability.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.prob.total-probability/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.total-probability",
+      "title": "CORRECT → \"P(A)=∑P(A|Bᵢ)P(Bᵢ) over partition {Bᵢ}. Proof: partition A into A∩Bᵢ pieces. Medical testing example: weighted average of conditional probabilities by base rates.\" → A02",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"P(A)=∑P(A|Bᵢ)P(Bᵢ) over partition {Bᵢ}. Proof: partition A into A∩Bᵢ pieces. Medical testing example: weighted average of conditional probabilities by base rates.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.total-probability.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.prob.total-probability/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.total-probability",
+      "title": "PARTIAL (using unweighted average) → \"P(A) is a WEIGHTED average of P(A|Bᵢ), weighted by P(Bᵢ). If B₁ is 10 times more likely than B₂, then P(A|B₁) contributes 10 times more to P(A). The simple average (P(A|B₁)+P(A|B₂))/2 ignores these base rates.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (using unweighted average) → \\\"P(A) is a WEIGHTED average of P(A|Bᵢ), weighted by P(Bᵢ). If B₁ is 10 times more likely than B₂, then P(A|B₁) contributes 10 times more to P(A). The simple average (P(A|B₁)+P(A|B₂))/2 ignores these base rates.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.total-probability.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.prob.total-probability/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.total-probability",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.total-probability.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.prob.total-probability/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.total-probability",
+      "title": "NO_RESPONSE → \"A bag contains coins: 3 fair coins, 1 biased (P(H)=0.9). You pick a coin at random and flip it. What is P(H)? Condition: if fair coin, P(H)=0.5; if biased, P(H)=0.9. P(pick fair)=3/4, P(pick biased)=1/4. P(H)=?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"A bag contains coins: 3 fair coins, 1 biased (P(H)=0.9). You pick a coin at random and flip it. What is P(H)? Condition: if fair coin, P(H)=0.5; if biased, P(H)=0.9. P(pick fair)=3/4, P(pick biased)=1/4. P(H)=?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.total-probability.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.prob.total-probability/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.total-probability",
+      "title": "CORRECT → \"Law extends to n cases, continuous conditioning, and tower expectation. Recursive problems (Gambler's ruin, first-step analysis) use it as the core tool.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"Law extends to n cases, continuous conditioning, and tower expectation. Recursive problems (Gambler's ruin, first-step analysis) use it as the core tool.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.total-probability.md",
+        "startLine": 74,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.prob.total-probability/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.total-probability",
+      "title": "PARTIAL → \"The law works for any partition — even infinitely many pieces (integral form). For discrete Y: P(A)=∑_y P(A|Y=y)P(Y=y). For continuous Y: P(A)=∫P(A|Y=y)f_Y(y)dy.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL → \\\"The law works for any partition — even infinitely many pieces (integral form). For discrete Y: P(A)=∑_y P(A|Y=y)P(Y=y). For continuous Y: P(A)=∫P(A|Y=y)f_Y(y)dy.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.total-probability.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.prob.total-probability/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.total-probability",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.total-probability.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.prob.total-probability/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.total-probability",
+      "title": "NO_RESPONSE → \"Gambler's ruin: start at $2, win or lose $1 per game. Let p_k=P(reach $5 before $0 | have $k). Condition on first step: if win (prob 1/2) you move to k+1; if lose you move to k−1. p_k=½p_{k+1}+½p_{k-1}. This is the law of total probability — do you see it?\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"Gambler's ruin: start at $2, win or lose $1 per game. Let p_k=P(reach $5 before $0 | have $k). Condition on first step: if win (prob 1/2) you move to k+1; if lose you move to k−1. p_k=½p_{k+1}+½p_{k-1}. This is the law of total probability — do you see it?\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.total-probability.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.prob.total-probability/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.total-probability",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. A bag has 4 red and 6 blue balls. You pick one at random; if red, you roll a 6-sided die; if blue, you roll a 4-sided die. What is P(roll a 3)?\n2. 5% of emails are spam. A spam filter correctly identifies spam 95% of the time and correctly identifies non-spam 99% of the time. What fraction of all emails does the filter flag as spam?\n3. A fair coin is flipped until heads appears. Let X be the number of flips. Using the law of total probability with conditioning on the first flip: P(X=1)=1/2, P(X=k)=P(X=k|first is T)·P(first is T)=P(X=k−1)·1/2. Verify this gives the Geometric distribution.\n4. Let X~Uniform(0,2) and Y=X² if X<1, Y=X if X≥1. Compute E[Y] using the law of total expectation: E[Y]=E[Y|X<1]·P(X<1)+E[Y|X≥1]·P(X≥1).\n5. In a random walk on {0,1,…,n}: from state k (0<k<n) move to k+1 with prob p and k−1 with prob 1−p. Let h_k=P(reach n before 0 | start at k). Write the recurrence using the law of total probability.\n\n**P55 — Reflect & Consolidate:** \"P(A)=∑P(A|Bᵢ)P(Bᵢ) over partition. Weighted average — NOT simple average. Proof: partition A into pieces. Extensions: tower expectation, integral form, first-step analysis recursions.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Law of total variance: Var(X) = E[Var(X|Y)] + Var(E[X|Y]). This is also called the variance decomposition formula. Explain its structure: the first term is the \"within-group variance\" (average of variance within each Y-group) and the second is the \"between-group variance\" (variance of the group means). (b) Apply it: X|Y=y ~ Poisson(y), Y~Gamma(α,β). Compute E[X|Y=y]=y and Var(X|Y=y)=y. Then E[X]=E[Y]=α/β. And Var(X)=E[Y]+Var(Y)=α/β+α/β²=α(β+1)/β². This is the negative binomial variance. (c) Why is the law of total variance useful for hierarchical/mixture models?\n\n**P75 — Mastery Assessment:**\n\"A factory has three machines A, B, C producing 50%, 30%, and 20% of widgets respectively. Machine A produces 2% defective, B produces 5% defective, C produces 8% defective. (a) What fraction of all widgets are defective? (Use the law of total probability.) (b) If a widget is defective, which machine is most likely to have produced it? (This requires Bayes' theorem — set it up, using your answer to (a) as the denominator.)\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW partition definition\n- Score ≤ 3/5 → PREREQUISITE GAP in math.prob.conditional-probability; reassign\n\n**P78 — Completion:** Law of Total Probability certified. Student states and applies the law; identifies valid partitions; extends to expectation and continuous cases; uses as the building block for Bayes' theorem.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.total-probability.md",
+        "startLine": 91,
+        "endLine": 115
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,617 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.quantile-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.quantile",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3bd909fb5cfbfe65079c77cd3b2c2406c2293c004572a90e469a984208a1026e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.quantile.md": "sha256:b96ecde0f438b02a72d31838cfa7e9077ddceab24e02e285dec69bbee3d7afca"
+    },
+    "assetCount": 19,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 14,
+      "mastery_probe": 1
+    },
+    "ruleCount": 14
+  },
+  "concept": {
+    "conceptId": "math.prob.quantile",
+    "name": "Quantile",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.prob.cdf"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.quantile-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.quantile (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.quantile.md": "sha256:b96ecde0f438b02a72d31838cfa7e9077ddceab24e02e285dec69bbee3d7afca"
+      },
+      "contentHash": "sha256:32cdadc21b9f1164114c2ca3ea1dba61bccacb9264be2250d2215642be2eb9e1",
+      "ruleCount": 14,
+      "bandCounts": {
+        "3": 14
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.quantile.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.quantile.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.quantile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.quantile\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.quantile.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.quantile.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.quantile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.quantile\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.quantile.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.quantile.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.quantile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.quantile\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.quantile.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.quantile.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.quantile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.quantile\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.quantile.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.quantile.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.quantile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.quantile\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.quantile.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.quantile.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.quantile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.quantile\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.quantile.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.quantile.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.quantile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.quantile\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.quantile.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.quantile.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.quantile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.quantile\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.quantile.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.quantile.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.quantile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.quantile\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.quantile.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.quantile.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.quantile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.quantile\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.quantile.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.quantile.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.quantile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.quantile\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.quantile.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.quantile.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.quantile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.quantile\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.quantile.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.quantile.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.quantile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.quantile\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.quantile.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.quantile.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.quantile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.quantile\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.quantile/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.quantile",
+      "title": "Learning Objective",
+      "content": "The student defines the p-th quantile (0<p<1) of a random variable X as Q(p)=inf{x: F(x)≥p} where F is the CDF; computes quantiles from given CDFs; identifies the median as Q(0.5), quartiles as Q(0.25) and Q(0.75), and percentiles; applies the quantile function to transform Uniform(0,1) to any target distribution (the inverse-CDF or quantile method); and distinguishes quantiles from moments (mean, variance) as measures of distribution shape.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.quantile.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.prob.quantile/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.quantile",
+      "title": "QUANTILE-IS-THE-CDF",
+      "content": "| MC-1 | QUANTILE-IS-THE-CDF | Student confuses Q(p) (which maps probability to value) with F(x) (which maps value to probability); inverts the direction; writes Q(0.5)=F(0.5) or similar | Type 3 — language contamination (both F and Q involve probability and x-values; the direction of the mapping is the only difference, and students who haven't explicitly worked with inverse functions conflate them) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.quantile.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.prob.quantile/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.quantile",
+      "title": "MEDIAN-ALWAYS-EQUALS-MEAN",
+      "content": "| MC-2 | MEDIAN-ALWAYS-EQUALS-MEAN | Student assumes Q(0.5)=E[X] for all distributions; doesn't know they coincide only for symmetric distributions | Type 5 — instruction-induced (Normal distribution is the canonical first example; mean=median for Normal; students generalise; skewed distributions (Exponential, log-normal) have mean≠median) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.quantile.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.prob.quantile/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.quantile",
+      "title": "QUANTILE-IS-ONLY-DEFINED-FOR-CONTINUOUS-DISTRIBUTIONS",
+      "content": "| MC-3 | QUANTILE-IS-ONLY-DEFINED-FOR-CONTINUOUS-DISTRIBUTIONS | Student doesn't know how to define or compute quantiles for discrete distributions; thinks quantiles require a smooth CDF | Type 5 — instruction-induced (quantile formulas are typically derived for continuous distributions first; the infimum definition Q(p)=inf{x:F(x)≥p} handles discrete distributions but students aren't always shown this) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.quantile.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.quantile/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.quantile",
+      "title": "For continuous, strictly increasing F: Q(p) = F⁻¹(p) (the inverse CDF).",
+      "content": "{\"id\":\"TA-1\",\"title\":\"For continuous, strictly increasing F: Q(p) = F⁻¹(p) (the inverse CDF).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.quantile.md",
+        "startLine": 41,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "math.prob.quantile/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.quantile",
+      "title": "For discrete F: Q(p) is the smallest x where F first reaches or exceeds p.",
+      "content": "{\"id\":\"TA-2\",\"title\":\"For discrete F: Q(p) is the smallest x where F first reaches or exceeds p.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.quantile.md",
+        "startLine": 42,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "math.prob.quantile/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.quantile",
+      "title": "Q(0.5) = **median** (50th percentile): half the probability is below, half above",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Q(0.5) = **median** (50th percentile): half the probability is below, half above\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.quantile.md",
+        "startLine": 45,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.prob.quantile/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.quantile",
+      "title": "Q(0.25) = **first quartile** (Q1): 25% below",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Q(0.25) = **first quartile** (Q1): 25% below\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.quantile.md",
+        "startLine": 46,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "math.prob.quantile/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.quantile",
+      "title": "Q(0.75) = **third quartile** (Q3): 75% below",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Q(0.75) = **third quartile** (Q3): 75% below\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.quantile.md",
+        "startLine": 47,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "math.prob.quantile/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.quantile",
+      "title": "IQR = Q(0.75)−Q(0.25): \"middle 50%\" spread measure",
+      "content": "{\"id\":\"TA-6\",\"title\":\"IQR = Q(0.75)−Q(0.25): \\\"middle 50%\\\" spread measure\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.quantile.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.prob.quantile/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.quantile",
+      "title": "Q(k/100) = k-th **percentile**: k% below",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Q(k/100) = k-th **percentile**: k% below\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.quantile.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.prob.quantile/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.quantile",
+      "title": "X~Exponential(λ): F(x)=1−e^{−λx}. Set F(x)=p: 1−e^{−λx}=p → x=−ln(1−p)/λ. So Q(p)=−ln(1−p)/λ. Median=Q(0.5)=ln(2)/λ≈0.693/λ. Mean=1/λ>ln(2)/λ: mean>median (right-skewed distribution).",
+      "content": "{\"id\":\"TA-8\",\"title\":\"X~Exponential(λ): F(x)=1−e^{−λx}. Set F(x)=p: 1−e^{−λx}=p → x=−ln(1−p)/λ. So Q(p)=−ln(1−p)/λ. Median=Q(0.5)=ln(2)/λ≈0.693/λ. Mean=1/λ>ln(2)/λ: mean>median (right-skewed distribution).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.quantile.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.prob.quantile/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.quantile",
+      "title": "X~Uniform(0,1): F(x)=x. Q(p)=p. Median=0.5.",
+      "content": "{\"id\":\"TA-9\",\"title\":\"X~Uniform(0,1): F(x)=x. Q(p)=p. Median=0.5.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.quantile.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.prob.quantile/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.quantile",
+      "title": "X~Bernoulli(0.3): P(X=0)=0.7, P(X=1)=0.3. F(0)=0.7, F(1)=1. Q(0.5)=inf{x:F(x)≥0.5}=0. Median=0 (the mode of this distribution).",
+      "content": "{\"id\":\"TA-10\",\"title\":\"X~Bernoulli(0.3): P(X=0)=0.7, P(X=1)=0.3. F(0)=0.7, F(1)=1. Q(0.5)=inf{x:F(x)≥0.5}=0. Median=0 (the mode of this distribution).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.quantile.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.prob.quantile/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.quantile",
+      "title": "CORRECT → \"Q(p)=F⁻¹(p). Median=Q(0.5). IQR=Q(0.75)−Q(0.25). Exponential: median=ln2/λ<mean=1/λ. Inverse CDF method: X=Q(U), U~Uniform(0,1).\" → Gate (P91)",
+      "content": "{\"id\":\"TA-11\",\"title\":\"CORRECT → \\\"Q(p)=F⁻¹(p). Median=Q(0.5). IQR=Q(0.75)−Q(0.25). Exponential: median=ln2/λ<mean=1/λ. Inverse CDF method: X=Q(U), U~Uniform(0,1).\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.quantile.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.prob.quantile/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.quantile",
+      "title": "PARTIAL (confuses Q and F) → \"F maps VALUES to PROBABILITIES: F(x)=P(X≤x). Q maps PROBABILITIES to VALUES: Q(p)=inf{x:F(x)≥p}. They are inverses of each other (when F is invertible). Example: if F(3)=0.7, then Q(0.7)=3.\" → TB-R01 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"PARTIAL (confuses Q and F) → \\\"F maps VALUES to PROBABILITIES: F(x)=P(X≤x). Q maps PROBABILITIES to VALUES: Q(p)=inf{x:F(x)≥p}. They are inverses of each other (when F is invertible). Example: if F(3)=0.7, then Q(0.7)=3.\\\" → TB-R01 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.quantile.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.prob.quantile/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.quantile",
+      "title": "INCORRECT → TB-R01 → Gate",
+      "content": "{\"id\":\"TA-13\",\"title\":\"INCORRECT → TB-R01 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.quantile.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.prob.quantile/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.quantile",
+      "title": "NO_RESPONSE → \"Exponential(1) CDF: F(x)=1−e^{-x}. What value x satisfies F(x)=0.5? Solve: 1−e^{-x}=0.5 → e^{-x}=0.5 → x=ln2≈0.693. This is Q(0.5), the median.\" → TB-R01 → Gate",
+      "content": "{\"id\":\"TA-14\",\"title\":\"NO_RESPONSE → \\\"Exponential(1) CDF: F(x)=1−e^{-x}. What value x satisfies F(x)=0.5? Solve: 1−e^{-x}=0.5 → e^{-x}=0.5 → x=ln2≈0.693. This is Q(0.5), the median.\\\" → TB-R01 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.quantile.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.prob.quantile/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.quantile",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. X~Normal(0,1). The 97.5th percentile is z₀.₀₂₅=1.96 (standard table value). What is Q(0.975)? What is Q(0.025)? (Use symmetry: Q(1−p)=−Q(p) for the standard Normal.)\n2. X~Exponential(2). Find the median, Q1, and Q3. Compute IQR=Q3−Q1.\n3. X has CDF F(x)=x² for 0≤x≤1. Find Q(p) for all 0<p<1.\n4. U~Uniform(0,1). Define X=−ln(U)/λ. What is the CDF of X? Identify its distribution. (This is the inverse CDF method applied to Exponential(λ).)\n5. X~Poisson(3). Compute Q(0.5) (the median) using the CDF: find the smallest integer k with P(X≤k)≥0.5. (You'll need P(X≤0)≈0.050, P(X≤1)≈0.199, P(X≤2)≈0.423, P(X≤3)≈0.647.)\n\n**P55 — Reflect & Consolidate:** \"Q(p)=F⁻¹(p): value at which CDF first reaches p. Median=Q(0.5); IQR=Q(0.75)−Q(0.25). Right-skewed: mean>median. Inverse CDF method: simulate any distribution from Uniform.\"\n\n**P76 — Transfer Probe (Cross-link mode: math.stats.percentile):**\n(a) In statistics, the sample quantile of a dataset {x₁,…,xₙ} at level p is computed from the order statistics x_{(1)}≤⋯≤x_{(n)} using various interpolation formulas (different software uses different conventions). The key idea: x_{(k)} estimates Q(k/n) or Q((k−0.5)/n). Explain why the sample quantile is a natural estimator of the population quantile. (b) Quantile-Quantile (Q-Q) plots: to check if data follows a Normal distribution, plot sample quantiles against Normal quantiles. If the data is Normal, the plot is a straight line. If the tail is heavier than Normal (e.g. Student's t), the plot curves upward at the extremes. Interpret a Q-Q plot where the right tail curves upward. (c) In risk management, the Value at Risk (VaR) at level α is defined as VaR_α = Q(α) of the loss distribution. If losses are Heavy-tailed, why does the median (Q(0.5)) underestimate tail risk compared to VaR_0.99?\n\n**P75 — Mastery Assessment:**\n\"(a) X~Gamma(2,1): f(x)=xe^{-x} for x>0. The CDF has no closed form, but Q(0.5)≈1.678 (given). Interpret this: 'half of all Gamma(2,1) realisations are below ___'. (b) The mean of Gamma(2,1)=2>median≈1.678. What does this say about the skewness? (c) If Y=2X where X~Gamma(2,1), what is Q_Y(0.5)? (Use the CDF transformation: F_Y(y)=P(Y≤y)=P(X≤y/2)=F_X(y/2). Hence Q_Y(p)=2·Q_X(p).) (d) What is IQR(Y)?\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW direction of quantile (Q=F⁻¹, not F)\n- Score ≤ 3/5 → PREREQUISITE GAP in math.prob.cdf; reassign\n\n**P78 — Completion:** Quantile certified. Student defines Q(p)=F⁻¹(p); computes median, quartiles, IQR; applies inverse CDF method; connects to percentiles and Q-Q plots.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.quantile.md",
+        "startLine": 71,
+        "endLine": 95
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

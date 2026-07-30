@@ -1,0 +1,857 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.bayes-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.bayes-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:183f1019838c6659623ea1a1493249f2799ce57930768928fb70ba0cdc79e029",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.bayes-theorem.md": "sha256:b60a8d7cff9220c2fab3374b123d0a1c50c937de12a729371407535861e2c14d"
+    },
+    "assetCount": 26,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 21,
+      "mastery_probe": 1
+    },
+    "ruleCount": 21
+  },
+  "concept": {
+    "conceptId": "math.prob.bayes-theorem",
+    "name": "Bayes' Theorem",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.prob.total-probability"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.bayes-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.bayes-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.bayes-theorem.md": "sha256:b60a8d7cff9220c2fab3374b123d0a1c50c937de12a729371407535861e2c14d"
+      },
+      "contentHash": "sha256:576f8ae0189c07780b0c37459797ff7ad714deb8c786af3690a7ed14172258ef",
+      "ruleCount": 21,
+      "bandCounts": {
+        "3": 21
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.bayes-theorem.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayes-theorem.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayes-theorem.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayes-theorem.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayes-theorem.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayes-theorem.md#TA-11 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayes-theorem.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayes-theorem.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayes-theorem.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayes-theorem.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayes-theorem.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayes-theorem.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayes-theorem.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayes-theorem.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayes-theorem.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayes-theorem.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayes-theorem.TA-17",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayes-theorem.md#TA-17",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayes-theorem.TA-18",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayes-theorem.md#TA-18",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayes-theorem\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayes-theorem.TA-19",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayes-theorem.md#TA-19",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayes-theorem.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayes-theorem.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayes-theorem.TA-20",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayes-theorem.md#TA-20",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayes-theorem.TA-21",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayes-theorem.md#TA-21",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayes-theorem.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayes-theorem.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayes-theorem.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayes-theorem.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayes-theorem.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayes-theorem.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayes-theorem.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayes-theorem.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayes-theorem.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayes-theorem.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayes-theorem.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayes-theorem.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.bayes-theorem.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.bayes-theorem.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.bayes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.bayes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.bayes-theorem/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "Learning Objective",
+      "content": "The student states Bayes' theorem P(B|A)=P(A|B)P(B)/P(A); identifies the roles of prior P(B), likelihood P(A|B), posterior P(B|A), and normalising constant P(A); computes P(A) using the law of total probability when needed; applies Bayes' theorem to update beliefs given evidence in medical testing, spam filtering, and base-rate neglect scenarios; and distinguishes the posterior from the likelihood (avoiding the classic confusion of P(disease|test+) with P(test+|disease)).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "POSTERIOR-EQUALS-LIKELIHOOD",
+      "content": "| MC-1 | POSTERIOR-EQUALS-LIKELIHOOD | Student writes P(B|A)=P(A|B) or computes P(disease|test+)=P(test+|disease)=sensitivity; ignores the prior and base rate entirely | Type 5 — instruction-induced (sensitivity is the headline number reported for medical tests; students compute \"how likely is a positive test given disease\" and reverse it without Bayes) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "BASE-RATE-NEGLECT",
+      "content": "| MC-2 | BASE-RATE-NEGLECT | Student focuses only on sensitivity and specificity, ignores P(disease); computes a posterior far too high when the prior is very small (e.g. rare disease scenario) | Type 3 — language contamination (\"the test is 95% accurate\" implies P(disease|test+)≈0.95 in everyday language, conflating test accuracy with posterior probability) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "BAYES-ONLY-WORKS-FOR-TWO-HYPOTHESES",
+      "content": "| MC-3 | BAYES-ONLY-WORKS-FOR-TWO-HYPOTHESES | Student applies the formula only when B is binary (disease/no disease); doesn't extend to partitions B₁,…,Bₙ with the generalised form P(Bᵢ|A)=P(A|Bᵢ)P(Bᵢ)/∑ⱼP(A|Bⱼ)P(Bⱼ) | Type 5 — instruction-induced (all introductory examples use exactly two hypotheses; the general partition form is rarely shown) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "**Prior** P(B): belief about B before observing A",
+      "content": "{\"id\":\"TA-1\",\"title\":\"**Prior** P(B): belief about B before observing A\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "**Likelihood** P(A|B): probability of observing A if B is true",
+      "content": "{\"id\":\"TA-2\",\"title\":\"**Likelihood** P(A|B): probability of observing A if B is true\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "**Posterior** P(B|A): updated belief after observing A",
+      "content": "{\"id\":\"TA-3\",\"title\":\"**Posterior** P(B|A): updated belief after observing A\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "**Evidence** P(A): normalising constant (ensures posterior sums to 1)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"**Evidence** P(A): normalising constant (ensures posterior sums to 1)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "1% prevalence: P(D)=0.01, P(Dᶜ)=0.99",
+      "content": "{\"id\":\"TA-5\",\"title\":\"1% prevalence: P(D)=0.01, P(Dᶜ)=0.99\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "Sensitivity: P(+|D)=0.95",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Sensitivity: P(+|D)=0.95\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "Specificity: P(−|Dᶜ)=0.90, so P(+|Dᶜ)=0.10",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Specificity: P(−|Dᶜ)=0.90, so P(+|Dᶜ)=0.10\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "P(+) = 0.95×0.01 + 0.10×0.99 = 0.0095+0.099 = 0.1085",
+      "content": "{\"id\":\"TA-8\",\"title\":\"P(+) = 0.95×0.01 + 0.10×0.99 = 0.0095+0.099 = 0.1085\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "**P(D|+) = 0.0095/0.1085 ≈ 8.8%** — not 95%!",
+      "content": "{\"id\":\"TA-9\",\"title\":\"**P(D|+) = 0.0095/0.1085 ≈ 8.8%** — not 95%!\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "CORRECT → \"P(B|A)=P(A|B)P(B)/P(A). Prior×Likelihood/Evidence=Posterior. Medical test: posterior ≠ sensitivity. Generalised form for partitions.\" → A02",
+      "content": "{\"id\":\"TA-10\",\"title\":\"CORRECT → \\\"P(B|A)=P(A|B)P(B)/P(A). Prior×Likelihood/Evidence=Posterior. Medical test: posterior ≠ sensitivity. Generalised form for partitions.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "PARTIAL (MC-1: posterior = likelihood) → \"P(+|D)=0.95 is the LIKELIHOOD — probability of testing positive IF you have the disease. P(D|+) is the POSTERIOR — probability of having the disease given you tested positive. They are not equal: P(D|+)=P(+|D)P(D)/P(+)=0.95×0.01/0.1085≈0.088. The prior P(D)=0.01 is what flips the number.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-11\",\"title\":\"PARTIAL (MC-1: posterior = likelihood) → \\\"P(+|D)=0.95 is the LIKELIHOOD — probability of testing positive IF you have the disease. P(D|+) is the POSTERIOR — probability of having the disease given you tested positive. They are not equal: P(D|+)=P(+|D)P(D)/P(+)=0.95×0.01/0.1085≈0.088. The prior P(D)=0.01 is what flips the number.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-12\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 70,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "NO_RESPONSE → \"1% of people have disease D. A test has sensitivity 90% (P(+|D)=0.90) and false positive rate 5% (P(+|Dᶜ)=0.05). A random person tests positive. What is P(D|+)? Step 1: P(+)=0.90×0.01+0.05×0.99=0.009+0.0495=0.0585. Step 2: P(D|+)=0.009/0.0585≈15.4%.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-13\",\"title\":\"NO_RESPONSE → \\\"1% of people have disease D. A test has sensitivity 90% (P(+|D)=0.90) and false positive rate 5% (P(+|Dᶜ)=0.05). A random person tests positive. What is P(D|+)? Step 1: P(+)=0.90×0.01+0.05×0.99=0.009+0.0495=0.0585. Step 2: P(D|+)=0.009/0.0585≈15.4%.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 71,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "Start: P(fair coin)=P(biased coin)=0.5. Biased coin: P(H|biased)=0.9.",
+      "content": "{\"id\":\"TA-14\",\"title\":\"Start: P(fair coin)=P(biased coin)=0.5. Biased coin: P(H|biased)=0.9.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "Observe H. P(fair|H)=P(H|fair)×0.5/P(H)=(0.5×0.5)/(0.5×0.5+0.9×0.5)=0.25/0.70≈0.357.",
+      "content": "{\"id\":\"TA-15\",\"title\":\"Observe H. P(fair|H)=P(H|fair)×0.5/P(H)=(0.5×0.5)/(0.5×0.5+0.9×0.5)=0.25/0.70≈0.357.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "Observe another H (using 0.357 as new prior for fair).",
+      "content": "{\"id\":\"TA-16\",\"title\":\"Observe another H (using 0.357 as new prior for fair).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/teaching_action_meta/TA-17",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "After k consecutive heads: posterior for \"fair\" shrinks exponentially (ratio 0.5/0.9 per head).",
+      "content": "{\"id\":\"TA-17\",\"title\":\"After k consecutive heads: posterior for \\\"fair\\\" shrinks exponentially (ratio 0.5/0.9 per head).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-17",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/teaching_action_meta/TA-18",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "CORRECT → \"Posterior becomes next prior. Odds form: posterior odds = Bayes factor × prior odds. Sequential Bayes.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-18\",\"title\":\"CORRECT → \\\"Posterior becomes next prior. Odds form: posterior odds = Bayes factor × prior odds. Sequential Bayes.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-18",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 91,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/teaching_action_meta/TA-19",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "PARTIAL → \"Each new observation updates the belief. The posterior from observation 1 is the prior for observation 2. Multiply Bayes factors: after k heads, odds(fair)/odds(biased) = (0.5/0.9)^k × prior odds.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-19\",\"title\":\"PARTIAL → \\\"Each new observation updates the belief. The posterior from observation 1 is the prior for observation 2. Multiply Bayes factors: after k heads, odds(fair)/odds(biased) = (0.5/0.9)^k × prior odds.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-19",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 92,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/teaching_action_meta/TA-20",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-20\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-20",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/teaching_action_meta/TA-21",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "NO_RESPONSE → \"Prior odds of fair=1:1. Bayes factor for one H is P(H|fair)/P(H|biased)=0.5/0.9≈0.556. After 2 H: odds of fair = 0.556²×1=0.309:1. So P(fair|HH)=0.309/1.309≈0.236.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-21\",\"title\":\"NO_RESPONSE → \\\"Prior odds of fair=1:1. Bayes factor for one H is P(H|fair)/P(H|biased)=0.5/0.9≈0.556. After 2 H: odds of fair = 0.556²×1=0.309:1. So P(fair|HH)=0.309/1.309≈0.236.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-21",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 94,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "math.prob.bayes-theorem/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.bayes-theorem",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. A disease affects 0.5% of the population. A test has sensitivity 98% and specificity 95%. (a) Compute P(+). (b) Compute P(disease|+). (c) Compute P(disease|−). (Why is P(disease|−) so small — what does a negative test tell you here?)\n2. A spam filter: 30% of emails are spam. P(word \"prize\"|spam)=0.40, P(\"prize\"|not spam)=0.01. A new email contains \"prize\". What is P(spam|\"prize\")?\n3. Three urns: Urn A has 2 red/1 blue, Urn B has 1 red/2 blue, Urn C has 3 red/0 blue. An urn is chosen uniformly at random and one ball is drawn; it is red. Find P(Urn C | red).\n4. A person tests positive for a rare condition (prevalence 1 in 10,000). The test has 99% sensitivity and 99% specificity. What is P(condition|positive)? Explain why this is surprising.\n5. A coin is either fair (P=0.5) or biased (P=0.7), each equally likely. After 5 flips: HHHTH. Compute the posterior probability that the coin is biased.\n\n**P55 — Reflect & Consolidate:** \"Bayes: Posterior=Prior×Likelihood/Evidence. P(B|A)=P(A|B)P(B)/P(A). Posterior≠likelihood (the classic inversion error). Low prevalence → low posterior even with high sensitivity. Sequential: posterior becomes new prior.\"\n\n**P76 — Transfer Probe (Cross-link mode: math.stats.bayesian-inference):**\n(a) In Bayesian statistics, the prior distribution P(θ) represents beliefs about a parameter θ before seeing data. The likelihood L(θ)=P(data|θ) represents how probable the data is for each θ. The posterior P(θ|data)∝P(data|θ)P(θ) is proportional to likelihood×prior — the normalising constant P(data)=∫P(data|θ)P(θ)dθ is the marginal likelihood. This is Bayes' theorem in continuous form. (b) Conjugate priors: if X|θ~Binomial(n,θ) and θ~Beta(a,b), then θ|X=k~Beta(a+k, b+n−k). Why is this convenient? (c) Credible interval vs. confidence interval: a 95% Bayesian credible interval [L,U] means P(θ∈[L,U]|data)=0.95. A 95% frequentist confidence interval does NOT mean this — it means that 95% of intervals constructed by this procedure contain the true θ. Which interpretation do most practitioners actually want?\n\n**P75 — Mastery Assessment:**\n\"An airport security scanner has sensitivity 99% (P(alarm|weapon)=0.99) and false alarm rate 0.1% (P(alarm|no weapon)=0.001). Suppose 1 in 1,000,000 passengers carries a weapon. (a) What fraction of passengers trigger an alarm? (b) Given a passenger triggers an alarm, what is the probability they carry a weapon? (c) The airport adds a second independent scanner. If the first scanner alarmed, what is P(weapon|both alarm)? (Use the posterior from (b) as the new prior.) (d) Comment on the design implication: is it better to have one very sensitive scanner or two moderately sensitive ones?\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW base-rate neglect and the prior's role\n- Score ≤ 3/5 → PREREQUISITE GAP in math.prob.total-probability; reassign\n\n**P78 — Completion:** Bayes' Theorem certified. Student derives and applies Bayes' formula; distinguishes posterior from likelihood; correctly uses the prior; extends to partitions; connects to Bayesian statistics.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.bayes-theorem.md",
+        "startLine": 108,
+        "endLine": 132
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

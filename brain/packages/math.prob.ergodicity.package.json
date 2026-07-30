@@ -1,0 +1,621 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.ergodicity-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.ergodicity",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9291b0d0ef0a9578774389c41c5b66b5a056b238e2d7782b1c1040926994a183",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.ergodicity.md": "sha256:cc1ef21cf87ecf3fccabc63be8c1ad21910f5b140f0b0bbb28128d5d27b880b3"
+    },
+    "assetCount": 19,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 14,
+      "mastery_probe": 1
+    },
+    "ruleCount": 14
+  },
+  "concept": {
+    "conceptId": "math.prob.ergodicity",
+    "name": "Ergodicity",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.prob.stationary-distribution"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.ergodicity-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.ergodicity (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.ergodicity.md": "sha256:cc1ef21cf87ecf3fccabc63be8c1ad21910f5b140f0b0bbb28128d5d27b880b3"
+      },
+      "contentHash": "sha256:03755a42ce1e1780da8243878bce13c8b7b6e6e705afbaa6744b02a3190eb662",
+      "ruleCount": 14,
+      "bandCounts": {
+        "3": 14
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.ergodicity.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.ergodicity.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.ergodicity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.ergodicity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.ergodicity.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.ergodicity.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.ergodicity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.ergodicity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.ergodicity.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.ergodicity.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.ergodicity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.ergodicity\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.ergodicity.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.ergodicity.md#TA-12 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.ergodicity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.ergodicity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.ergodicity.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.ergodicity.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.ergodicity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.ergodicity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.ergodicity.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.ergodicity.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.ergodicity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.ergodicity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.ergodicity.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.ergodicity.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.ergodicity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.ergodicity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.ergodicity.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.ergodicity.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.ergodicity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.ergodicity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.ergodicity.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.ergodicity.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.ergodicity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.ergodicity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.ergodicity.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.ergodicity.md#TA-5 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.ergodicity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.ergodicity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.ergodicity.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.ergodicity.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.ergodicity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.ergodicity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.ergodicity.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.ergodicity.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.ergodicity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.ergodicity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.ergodicity.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.ergodicity.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.ergodicity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.ergodicity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.ergodicity.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.ergodicity.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.ergodicity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.ergodicity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.ergodicity/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.ergodicity",
+      "title": "Learning Objective",
+      "content": "The student states the ergodic theorem: for an ergodic Markov chain, the time average (1/n)∑_{k=1}^n f(X_k) converges almost surely to the space average ∑_i πᵢf(i); identifies the conditions for ergodicity (irreducible + aperiodic + positive recurrent for discrete chains; or mixing in continuous settings); explains why periodic and reducible chains are NOT ergodic; states the mixing time as the number of steps until the chain's distribution is close to stationarity; and applies ergodicity to justify Monte Carlo estimates via Markov chains (MCMC).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.ergodicity.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.prob.ergodicity/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.ergodicity",
+      "title": "ERGODIC-MEANS-THE-CHAIN-VISITS-ALL-STATES-EQUALLY",
+      "content": "| MC-1 | ERGODIC-MEANS-THE-CHAIN-VISITS-ALL-STATES-EQUALLY | Student thinks an ergodic chain must spend equal time in all states; doesn't know ergodicity means time averages equal the specific stationary distribution (which need not be uniform) | Type 3 — language contamination (\"ergodic\" in physics sometimes describes systems that visit all regions of phase space — this informal description makes students think it means equal visitation; the mathematical definition involves the stationary measure, which can be non-uniform) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.ergodicity.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.prob.ergodicity/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.ergodicity",
+      "title": "ERGODICITY-REQUIRES-AN-INFINITE-STATE-SPACE",
+      "content": "| MC-2 | ERGODICITY-REQUIRES-AN-INFINITE-STATE-SPACE | Student believes ergodicity is a property of infinite or continuous chains only; doesn't apply the concept to finite chains where ergodicity = irreducible + aperiodic | Type 5 — instruction-induced (ergodicity and mixing time are often introduced in the context of random walks on large graphs or continuous systems; students don't see finite-chain examples explicitly analysed for ergodicity) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.ergodicity.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.prob.ergodicity/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.ergodicity",
+      "title": "TIME-AVERAGE-CONVERGENCE-MEANS-DISTRIBUTION-CONVERGENCE",
+      "content": "| MC-3 | TIME-AVERAGE-CONVERGENCE-MEANS-DISTRIBUTION-CONVERGENCE | Student conflates the ergodic theorem (time averages converge) with convergence in distribution (Pⁿ(x,·)→π in TV distance); doesn't know these are distinct results — time averages converge for ergodic chains; distributional convergence additionally requires the chain to be aperiodic | Type 1 — overgeneralisation (both conclusions involve \"converging to stationarity\"; students conflate sample-path averages with one-step distributional convergence, missing the distinction between almost-sure convergence of averages and weak convergence of distributions) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.ergodicity.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.ergodicity/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.ergodicity",
+      "title": "**Irreducibility:** Ensures the chain visits all states (no state is \"unreachable\").",
+      "content": "{\"id\":\"TA-1\",\"title\":\"**Irreducibility:** Ensures the chain visits all states (no state is \\\"unreachable\\\").\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.ergodicity.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.prob.ergodicity/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.ergodicity",
+      "title": "**Positive recurrence:** Ensures the chain returns to each state in finite expected time. (E[return time to state j] = 1/πⱼ.) All states in a finite irreducible chain are positive recurrent.",
+      "content": "{\"id\":\"TA-2\",\"title\":\"**Positive recurrence:** Ensures the chain returns to each state in finite expected time. (E[return time to state j] = 1/πⱼ.) All states in a finite irreducible chain are positive recurrent.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.ergodicity.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.prob.ergodicity/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.ergodicity",
+      "title": "**Aperiodicity:** Not required for the time-average convergence, but required for distributional convergence (Pⁿ(x,·)→π).",
+      "content": "{\"id\":\"TA-3\",\"title\":\"**Aperiodicity:** Not required for the time-average convergence, but required for distributional convergence (Pⁿ(x,·)→π).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.ergodicity.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.prob.ergodicity/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.ergodicity",
+      "title": "CORRECT → \"Ergodic theorem: time average → space average almost surely. Conditions: irreducible + positive recurrent (+ aperiodic for distributional convergence). MCMC: ergodic theorem justifies using Markov chain time averages as integrals.\" → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"CORRECT → \\\"Ergodic theorem: time average → space average almost surely. Conditions: irreducible + positive recurrent (+ aperiodic for distributional convergence). MCMC: ergodic theorem justifies using Markov chain time averages as integrals.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.ergodicity.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.prob.ergodicity/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.ergodicity",
+      "title": "PARTIAL (MC-1: ergodic = visits all states equally) → \"Ergodicity means time averages converge to the STATIONARY distribution π, not to the uniform distribution. If state 1 has π₁=0.1 and state 2 has π₂=0.9, an ergodic chain spends 10% of time in state 1 and 90% in state 2 — unequal visitation, but perfectly ergodic. The stationary distribution determines how much time is spent in each state.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-5\",\"title\":\"PARTIAL (MC-1: ergodic = visits all states equally) → \\\"Ergodicity means time averages converge to the STATIONARY distribution π, not to the uniform distribution. If state 1 has π₁=0.1 and state 2 has π₂=0.9, an ergodic chain spends 10% of time in state 1 and 90% in state 2 — unequal visitation, but perfectly ergodic. The stationary distribution determines how much time is spent in each state.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.ergodicity.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.prob.ergodicity/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.ergodicity",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-6\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.ergodicity.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.prob.ergodicity/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.ergodicity",
+      "title": "NO_RESPONSE → \"Weather chain: π=(0.4, 0.3, 0.3) for (Sunny, Cloudy, Rainy). Run the chain for 1000 steps. Ergodic theorem predicts: ~400 sunny days, ~300 cloudy, ~300 rainy. If f(Sunny)=1, f(Cloudy)=0.5, f(Rainy)=0 (comfort index): long-run average comfort = π_S·1+π_C·0.5+π_R·0=0.4+0.15+0=0.55.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-7\",\"title\":\"NO_RESPONSE → \\\"Weather chain: π=(0.4, 0.3, 0.3) for (Sunny, Cloudy, Rainy). Run the chain for 1000 steps. Ergodic theorem predicts: ~400 sunny days, ~300 cloudy, ~300 rainy. If f(Sunny)=1, f(Cloudy)=0.5, f(Rainy)=0 (comfort index): long-run average comfort = π_S·1+π_C·0.5+π_R·0=0.4+0.15+0=0.55.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.ergodicity.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.prob.ergodicity/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.ergodicity",
+      "title": "**Random walk on a line** ({0,…,n}): mixing time O(n²) — slow, because it takes O(n²) steps for a random walk to traverse the whole space.",
+      "content": "{\"id\":\"TA-8\",\"title\":\"**Random walk on a line** ({0,…,n}): mixing time O(n²) — slow, because it takes O(n²) steps for a random walk to traverse the whole space.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.ergodicity.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.prob.ergodicity/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.ergodicity",
+      "title": "**Random walk on a complete graph** (Kₙ): mixing time O(log n) — very fast, every step independently mixes.",
+      "content": "{\"id\":\"TA-9\",\"title\":\"**Random walk on a complete graph** (Kₙ): mixing time O(log n) — very fast, every step independently mixes.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.ergodicity.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.prob.ergodicity/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.ergodicity",
+      "title": "**Glauber dynamics for Ising model** at high temperature: fast mixing; at low temperature (below critical): exponentially slow mixing (phase transition!).",
+      "content": "{\"id\":\"TA-10\",\"title\":\"**Glauber dynamics for Ising model** at high temperature: fast mixing; at low temperature (below critical): exponentially slow mixing (phase transition!).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.ergodicity.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.prob.ergodicity/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.ergodicity",
+      "title": "CORRECT → \"Mixing time = steps until TV distance to π ≤ ε. Spectral gap determines mixing speed. Aperiodicity required. Fast vs. slow mixing examples.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-11\",\"title\":\"CORRECT → \\\"Mixing time = steps until TV distance to π ≤ ε. Spectral gap determines mixing speed. Aperiodicity required. Fast vs. slow mixing examples.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.ergodicity.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.prob.ergodicity/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.ergodicity",
+      "title": "PARTIAL (MC-3: time average = distributional convergence) → \"Two separate convergence results: (1) Ergodic theorem — time averages (1/n)∑f(X_k) → E_π[f] a.s. for irreducible + positive recurrent chains, even periodic ones. (2) Distributional convergence — P^t(x,·)→π in TV distance — requires ALSO aperiodic. A periodic chain with period 2 alternates between two sets of states; its time averages still converge to π, but its one-step distributions oscillate and never converge.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"PARTIAL (MC-3: time average = distributional convergence) → \\\"Two separate convergence results: (1) Ergodic theorem — time averages (1/n)∑f(X_k) → E_π[f] a.s. for irreducible + positive recurrent chains, even periodic ones. (2) Distributional convergence — P^t(x,·)→π in TV distance — requires ALSO aperiodic. A periodic chain with period 2 alternates between two sets of states; its time averages still converge to π, but its one-step distributions oscillate and never converge.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.ergodicity.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.prob.ergodicity/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.ergodicity",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-13\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.ergodicity.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.prob.ergodicity/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.ergodicity",
+      "title": "NO_RESPONSE → \"Random walk on a cycle of length 10 (periodic, period 2): starting at vertex 0, after n steps, you're always at an even vertex (even n) or odd vertex (odd n). Time fraction at vertex 0 → 1/10=π₀. But P^n(0,0) oscillates: 0 for odd n, positive for even n. Time average converges; distributional convergence fails.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-14\",\"title\":\"NO_RESPONSE → \\\"Random walk on a cycle of length 10 (periodic, period 2): starting at vertex 0, after n steps, you're always at an even vertex (even n) or odd vertex (odd n). Time fraction at vertex 0 → 1/10=π₀. But P^n(0,0) oscillates: 0 for odd n, positive for even n. Time average converges; distributional convergence fails.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.ergodicity.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.prob.ergodicity/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.ergodicity",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. 2-state ergodic chain with P=[[0.6,0.4],[0.2,0.8]]. (a) Simulate (mentally or computationally) 10 steps starting from state 1. (b) Stationary distribution π. (c) After 100 steps, the empirical fraction of time in state 1 should be close to π₁. What does the ergodic theorem guarantee about this fraction as n→∞?\n2. A 3-state chain has P=[[0,1,0],[0,0,1],[1,0,0]]. (a) Is this chain ergodic? (b) Does the time average (1/n)∑𝟏{X_k=1} converge? If so, to what? (c) Does P^n(1,·) converge?\n3. For the 2-state chain P=[[1−α,α],[β,1−β]], the second eigenvalue is λ₂=1−α−β. (a) What is the spectral gap γ? (b) Bound the mixing time T_mix (to ε=0.01) in terms of α and β. (c) Which is slower to mix: α=β=0.01 or α=β=0.5?\n4. MCMC estimate: π is a distribution on {1,2,3,4,5} with πᵢ∝i (so π₁=1/15, π₂=2/15, …, π₅=5/15). Design a Metropolis-Hastings chain on these states and describe how you would use it to estimate E_π[X²].\n5. Prove: if a finite Markov chain is irreducible and has a doubly stochastic transition matrix (each column also sums to 1), then the uniform distribution is stationary. (Hint: check πP=π for uniform π.)\n\n**P55 — Reflect & Consolidate:** \"Ergodic theorem: time average → E_π[f] a.s. (irreducible + positive recurrent). Distributional convergence: Pⁿ(x,·)→π in TV (also need aperiodic). Mixing time: steps to get within ε of π. Spectral gap γ: T_mix≈(1/γ)log(1/ε). MCMC: ergodic theorem justifies sampling-based integration.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Continuous ergodic theory: for measure-preserving dynamical systems (T,X,μ), the Birkhoff ergodic theorem states (1/n)∑_{k=0}^{n−1}f(T^kx)→∫f dμ a.e. for ergodic systems. Explain the analogy: what plays the role of the transition matrix P, the stationary distribution π, and the function f? (b) Rapid mixing and counting: for many combinatorial problems (e.g., counting perfect matchings of a bipartite graph), exact counting is #P-complete. Approximate counting can be done by constructing an ergodic Markov chain on the combinatorial structures and estimating the fraction via the ergodic theorem. What mixing-time bound is needed for an ε-approximation in polynomial time? (c) Coupling and mixing: the coupling argument upper-bounds mixing time by constructing two copies of the chain (one starting from the worst initial state, one from π) and bounding the time until they meet (couple). Why does coupling provide a TV distance bound?\n\n**P75 — Mastery Assessment:**\n\"An MCMC algorithm simulates a Markov chain on {1,2,…,100} with stationary distribution πᵢ∝i² (so π concentrates near 100). The transition matrix has spectral gap γ=0.01. (a) Estimate the mixing time T_mix. (b) If we want to estimate E_π[X]=∑πᵢ·i to within ±1 with 95% probability, how long should we run the chain? (Give a rough estimate: the variance of the time average is ≈(∫f dπ − (∫f dπ)²) × 2/γ / n by the CLT for Markov chains.) (c) The chain starts at state 1 (far from where π concentrates). Should we discard the first T_mix steps as 'burn-in' before using the ergodic average? Justify. (d) If we doubled the spectral gap to γ=0.02 (faster mixing chain), how would the answers to (a) and (b) change?\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW mixing time definition and spectral gap\n- Score ≤ 3/5 → PREREQUISITE GAP in math.prob.stationary-distribution; reassign\n\n**P78 — Completion:** Ergodicity certified. Student states and applies the ergodic theorem; distinguishes time-average from distributional convergence; computes mixing time bounds; connects to MCMC and Birkhoff's theorem.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.ergodicity.md",
+        "startLine": 104,
+        "endLine": 128
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,277 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.marginal-distribution-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.marginal-distribution",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:14f387b243ddd5a23fd0f7f451c7d7d5f6a8f2d00639acdb19183cbbea2678cc",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.marginal-distribution.md": "sha256:ff973dd69ebbc8f3a12fc4c0e63c84293990a2eba7b04fbfa76618184ad44f41"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.prob.marginal-distribution",
+    "name": "Marginal Distribution",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.prob.joint-distribution"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.marginal-distribution-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.marginal-distribution (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.marginal-distribution.md": "sha256:ff973dd69ebbc8f3a12fc4c0e63c84293990a2eba7b04fbfa76618184ad44f41"
+      },
+      "contentHash": "sha256:1e25773152e28d5d45d7b50d91402e0b3c813e1e6ae00a89184de962015b52b2",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.marginal-distribution.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.marginal-distribution.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.marginal-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.marginal-distribution\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.marginal-distribution.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.marginal-distribution.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.marginal-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.marginal-distribution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.marginal-distribution.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.marginal-distribution.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.marginal-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.marginal-distribution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.marginal-distribution.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.marginal-distribution.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.marginal-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.marginal-distribution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.marginal-distribution/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.marginal-distribution",
+      "title": "Learning Objective",
+      "content": "The student defines the marginal PMF/PDF of X from a joint distribution by summing/integrating out the other variable: p_X(x)=∑_y p_{X,Y}(x,y) or f_X(x)=∫f_{X,Y}(x,y)dy; computes marginal distributions from joint tables and joint densities; recovers the original joint only from marginals when X,Y are independent; and distinguishes marginalisation (recovering individual distributions) from conditioning (computing distributions given information about the other variable).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.marginal-distribution.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.prob.marginal-distribution/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.marginal-distribution",
+      "title": "MARGINALS-DETERMINE-THE-JOINT",
+      "content": "| MC-1 | MARGINALS-DETERMINE-THE-JOINT | Student believes knowing p_X and p_Y fully determines p_{X,Y}; doesn't know the joint is only recoverable from marginals when X,Y are independent | Type 1 — overgeneralisation (the factorisation p_{X,Y}=p_X·p_Y holds FOR independent X,Y; students generalise this to all pairs) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.marginal-distribution.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.prob.marginal-distribution/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.marginal-distribution",
+      "title": "MARGINAL-IS-THE-CONDITIONAL",
+      "content": "| MC-2 | MARGINAL-IS-THE-CONDITIONAL | Student confuses p_X(x) (the unconditional, marginal distribution of X) with p_{X|Y}(x|y) (the distribution of X given Y=y); writes p_X(x)=p_{X,Y}(x,y)/p_Y(y) for the marginal | Type 3 — language contamination (both involve \"the distribution of X in a joint setting\"; the difference is whether Y is observed (conditional) or averaged out (marginal)) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.marginal-distribution.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.prob.marginal-distribution/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.marginal-distribution",
+      "title": "INTEGRATING-TO-GET-MARGINAL-IS-OPTIONAL",
+      "content": "| MC-3 | INTEGRATING-TO-GET-MARGINAL-IS-OPTIONAL | Student computes the marginal of a continuous distribution by evaluating the joint at a specific y value rather than integrating; writes f_X(x)=f_{X,Y}(x,y₀) for some fixed y₀ | Type 5 — instruction-induced (for conditional distributions, you do fix y and normalise; students confuse the procedure with marginalisation, which requires integration, not evaluation) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.marginal-distribution.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.marginal-distribution/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.marginal-distribution",
+      "title": "CORRECT → \"Marginal: sum/integrate out the other variable. Table row sums. Continuous: integrate out y. Independence iff p_{X,Y}=p_X·p_Y for all (x,y).\" → Gate (P91)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Marginal: sum/integrate out the other variable. Table row sums. Continuous: integrate out y. Independence iff p_{X,Y}=p_X·p_Y for all (x,y).\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.marginal-distribution.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.prob.marginal-distribution/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.marginal-distribution",
+      "title": "PARTIAL (confuses marginal with conditional) → \"Marginal p_X(x)=∑_y p_{X,Y}(x,y): you sum OVER ALL values of y. Conditional p_{X|Y}(x|y₀)=p_{X,Y}(x,y₀)/p_Y(y₀): you FIX y=y₀ and normalise. Marginal averages out Y; conditional conditions on a specific Y value.\" → TB-R01 → Gate",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (confuses marginal with conditional) → \\\"Marginal p_X(x)=∑_y p_{X,Y}(x,y): you sum OVER ALL values of y. Conditional p_{X|Y}(x|y₀)=p_{X,Y}(x,y₀)/p_Y(y₀): you FIX y=y₀ and normalise. Marginal averages out Y; conditional conditions on a specific Y value.\\\" → TB-R01 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.marginal-distribution.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.prob.marginal-distribution/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.marginal-distribution",
+      "title": "INCORRECT → TB-R01 → Gate",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.marginal-distribution.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.prob.marginal-distribution/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.marginal-distribution",
+      "title": "NO_RESPONSE → \"Joint PMF: p(0,0)=0.1, p(0,1)=0.3, p(1,0)=0.2, p(1,1)=0.4. Find p_X(0) and p_X(1) by summing each row.\" → TB-R01 → Gate",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"Joint PMF: p(0,0)=0.1, p(0,1)=0.3, p(1,0)=0.2, p(1,1)=0.4. Find p_X(0) and p_X(1) by summing each row.\\\" → TB-R01 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.marginal-distribution.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.prob.marginal-distribution/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.marginal-distribution",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Joint PMF table: P(X=1,Y=1)=0.1, P(X=1,Y=2)=0.2, P(X=2,Y=1)=0.3, P(X=2,Y=2)=0.4. Find p_X and p_Y. Are X and Y independent?\n2. Joint PDF f(x,y)=2 for 0<x<y<1. Find f_X(x) and f_Y(y). (Careful with integration limits — they depend on x and y respectively.)\n3. Joint PDF f(x,y)=e^{-x-y} for x>0,y>0. Find marginals. Are X and Y independent? What are their distributions?\n4. (X,Y) is uniformly distributed on the unit disk {(x,y): x²+y²≤1}. Find f_X(x). (Hint: for a given x, y ranges over −√(1−x²) to √(1−x²).) What is the distribution of X?\n5. Give an example of two random variables with the same marginal distributions as in Question 3 but that are NOT independent.\n\n**P55 — Reflect & Consolidate:** \"Marginal=sum/integrate out the other variable. Table row/column sums. Marginals ≠ joint (dependence lost). Independence: p_{X,Y}=p_X·p_Y. Marginal ≠ conditional (no normalisation in marginal).\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Copulas: a copula C(u,v) is a joint CDF of (U,V)~Uniform(0,1) that captures ONLY the dependence structure between U and V, stripped of marginal information. The Sklar's theorem says any joint CDF F(x,y)=C(F_X(x),F_Y(y)) for some copula C. The independence copula is C(u,v)=uv; the perfect positive dependence copula is C(u,v)=min(u,v). Why does the copula framework separate the marginals from the dependence? (b) In machine learning: the naïve Bayes classifier assumes P(features|label) = ∏P(feature_i|label) (conditional independence). Why does this assumption simplify computation? What does it mean about the joint vs marginal structure of the features? (c) Marginalisation in Bayesian inference: P(θ|data) ∝ P(data|θ)P(θ). The marginal likelihood P(data)=∫P(data|θ)P(θ)dθ normalises the posterior. Why is computing this integral often computationally expensive?\n\n**P75 — Mastery Assessment:**\n\"Joint PDF f(x,y)=kxy for 0<x<2, 0<y<3. (a) Find k (so that f integrates to 1). (b) Find the marginals f_X(x) and f_Y(y). (c) Are X and Y independent? (Check if f=f_X·f_Y.) (d) Compute E[XY] directly from the joint. Verify E[XY]=E[X]E[Y] (consistent with independence).\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW integration limits for marginals of continuous joints\n- Score ≤ 3/5 → PREREQUISITE GAP in math.prob.joint-distribution; reassign\n\n**P78 — Completion:** Marginal Distribution certified. Student computes marginals from joints by summing/integrating; checks independence; distinguishes marginal from conditional; understands copulas as the dependence structure.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.marginal-distribution.md",
+        "startLine": 79,
+        "endLine": 103
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

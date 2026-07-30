@@ -1,0 +1,515 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.law-of-unconscious-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.law-of-unconscious",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ddd2a82e6b28470792ee718b34582ca492814061dcf4e13bd86996de7829de02",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.law-of-unconscious.md": "sha256:1e2b8298f48179c94f12f33f192f9c1954f125aeebfb2c3ff1b922ce9a544133"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 11,
+      "mastery_probe": 1
+    },
+    "ruleCount": 11
+  },
+  "concept": {
+    "conceptId": "math.prob.law-of-unconscious",
+    "name": "Law of the Unconscious Statistician",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.prob.expected-value"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.law-of-unconscious-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.law-of-unconscious (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.law-of-unconscious.md": "sha256:1e2b8298f48179c94f12f33f192f9c1954f125aeebfb2c3ff1b922ce9a544133"
+      },
+      "contentHash": "sha256:a77c68d0e829d62d4663bed5ca158dd91a74b2b2c4977599248688cf37601996",
+      "ruleCount": 11,
+      "bandCounts": {
+        "3": 11
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.law-of-unconscious.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.law-of-unconscious"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.law-of-unconscious\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.law-of-unconscious.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.law-of-unconscious"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.law-of-unconscious\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.law-of-unconscious.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.law-of-unconscious"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.law-of-unconscious\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.law-of-unconscious.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.law-of-unconscious"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.law-of-unconscious\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.law-of-unconscious.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.law-of-unconscious"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.law-of-unconscious\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.law-of-unconscious.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.law-of-unconscious"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.law-of-unconscious\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.law-of-unconscious.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.law-of-unconscious"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.law-of-unconscious\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.law-of-unconscious.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.law-of-unconscious"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.law-of-unconscious\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.law-of-unconscious.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.law-of-unconscious"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.law-of-unconscious\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.law-of-unconscious.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.law-of-unconscious"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.law-of-unconscious\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.law-of-unconscious.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.law-of-unconscious"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.law-of-unconscious\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.law-of-unconscious/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.law-of-unconscious",
+      "title": "Learning Objective",
+      "content": "The student states the Law of the Unconscious Statistician (LOTUS): for a random variable X with PMF/PDF f_X, and any function g, E[g(X)]=∑ₓ g(x)f_X(x) (discrete) or ∫g(x)f_X(x)dx (continuous); applies LOTUS to compute E[X²], E[1/X], E[eˣ], and E[g(X)] for standard distributions without first finding the distribution of g(X); and explains why LOTUS is \"unconscious\" — it avoids computing the distribution of Y=g(X).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.prob.law-of-unconscious/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.law-of-unconscious",
+      "title": "E[g(X)]=g(E[X])",
+      "content": "| MC-1 | E[g(X)]=g(E[X]) | Student computes E[X²]=(E[X])², E[eˣ]=e^{E[X]}, E[1/X]=1/E[X]; conflates expectation with direct function evaluation | Type 1 — overgeneralisation (E[aX+b]=aE[X]+b IS correct; students extend linearity to nonlinear functions) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.prob.law-of-unconscious/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.law-of-unconscious",
+      "title": "LOTUS-REQUIRES-KNOWING-DISTRIBUTION-OF-Y",
+      "content": "| MC-2 | LOTUS-REQUIRES-KNOWING-DISTRIBUTION-OF-Y | Student thinks they must compute f_Y (the distribution of Y=g(X)) before using LOTUS; doesn't understand that LOTUS avoids this step | Type 5 — instruction-induced (the \"proper\" derivation of E[Y] for Y=g(X) first finds f_Y using the change-of-variable theorem; students who learn that method first assume it's always required) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.prob.law-of-unconscious/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.law-of-unconscious",
+      "title": "LOTUS-ONLY-WORKS-FOR-MONOTONE-g",
+      "content": "| MC-3 | LOTUS-ONLY-WORKS-FOR-MONOTONE-g | Student thinks LOTUS requires g to be invertible/monotone; confuses LOTUS with the change-of-variable theorem for densities | Type 5 — instruction-induced (the change-of-variable theorem for f_Y DOES require monotonicity (or piecewise monotonicity); LOTUS for E[g(X)] does not — it works for any measurable g) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.law-of-unconscious/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.law-of-unconscious",
+      "title": "E[X²] = ∑x² P(X=x) — needed for Var(X)=E[X²]−(E[X])²",
+      "content": "{\"id\":\"TA-1\",\"title\":\"E[X²] = ∑x² P(X=x) — needed for Var(X)=E[X²]−(E[X])²\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.prob.law-of-unconscious/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.law-of-unconscious",
+      "title": "E[X(X−1)] = ∑x(x−1)P(X=x) — the \"factorial moment\", easier for Binomial/Poisson",
+      "content": "{\"id\":\"TA-2\",\"title\":\"E[X(X−1)] = ∑x(x−1)P(X=x) — the \\\"factorial moment\\\", easier for Binomial/Poisson\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.prob.law-of-unconscious/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.law-of-unconscious",
+      "title": "E[eᵗˣ] = ∑ eᵗˣ P(X=x) — the moment generating function M_X(t) at parameter t",
+      "content": "{\"id\":\"TA-3\",\"title\":\"E[eᵗˣ] = ∑ eᵗˣ P(X=x) — the moment generating function M_X(t) at parameter t\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.prob.law-of-unconscious/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.law-of-unconscious",
+      "title": "E[|X|] = ∑|x|P(X=x) — no need to split by sign of X first",
+      "content": "{\"id\":\"TA-4\",\"title\":\"E[|X|] = ∑|x|P(X=x) — no need to split by sign of X first\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.prob.law-of-unconscious/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.law-of-unconscious",
+      "title": "CORRECT → \"E[g(X)]=∑g(x)P(X=x), using X's PMF/PDF directly. No need to find distribution of g(X).\" → A02",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"E[g(X)]=∑g(x)P(X=x), using X's PMF/PDF directly. No need to find distribution of g(X).\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.prob.law-of-unconscious/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.law-of-unconscious",
+      "title": "PARTIAL → \"LOTUS means you compute E[g(X)] directly from the distribution of X. You don't need the distribution of Y=g(X). Example: E[X²] — just weight x² by P(X=x), not by P(X²=y) (which would be the hard route).\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL → \\\"LOTUS means you compute E[g(X)] directly from the distribution of X. You don't need the distribution of Y=g(X). Example: E[X²] — just weight x² by P(X=x), not by P(X²=y) (which would be the hard route).\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.prob.law-of-unconscious/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.law-of-unconscious",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.prob.law-of-unconscious/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.law-of-unconscious",
+      "title": "NO_RESPONSE → \"X~Geometric(p). E[X]=(1−p)/p? Actually E[X]=1/p for standard geometric. Compute E[X(X−1)] directly: E[X(X−1)]=∑_{k=1}^{∞} k(k−1)(1−p)^{k-1}p. This is the 'hard route' for the second moment. LOTUS says: compute ∑_{k=0}^{∞} k(k−1) P(X=k). Can you see this is the same sum?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"X~Geometric(p). E[X]=(1−p)/p? Actually E[X]=1/p for standard geometric. Compute E[X(X−1)] directly: E[X(X−1)]=∑_{k=1}^{∞} k(k−1)(1−p)^{k-1}p. This is the 'hard route' for the second moment. LOTUS says: compute ∑_{k=0}^{∞} k(k−1) P(X=k). Can you see this is the same sum?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.prob.law-of-unconscious/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.law-of-unconscious",
+      "title": "CORRECT → Gate (P91)",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md",
+        "startLine": 70,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.prob.law-of-unconscious/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.law-of-unconscious",
+      "title": "PARTIAL or INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL or INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md",
+        "startLine": 71,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "math.prob.law-of-unconscious/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.law-of-unconscious",
+      "title": "NO_RESPONSE → \"Directly compute ∫₀^∞ x²·λe^{−λx}dx. Use integration by parts: let u=x², dv=λe^{−λx}dx. Then du=2x dx, v=−e^{−λx}. Result: [−x²e^{−λx}]₀^∞ + ∫₀^∞ 2x·e^{−λx}dx. The first term is 0; the second is (2/λ)E[X]=(2/λ)(1/λ)=2/λ².\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"NO_RESPONSE → \\\"Directly compute ∫₀^∞ x²·λe^{−λx}dx. Use integration by parts: let u=x², dv=λe^{−λx}dx. Then du=2x dx, v=−e^{−λx}. Result: [−x²e^{−λx}]₀^∞ + ∫₀^∞ 2x·e^{−λx}dx. The first term is 0; the second is (2/λ)E[X]=(2/λ)(1/λ)=2/λ².\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md",
+        "startLine": 72,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "math.prob.law-of-unconscious/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.law-of-unconscious",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. X~Poisson(λ). Use LOTUS to compute E[X(X−1)]=λ². (Hint: k(k−1)·e^{−λ}λᵏ/k! = e^{−λ}λᵏ/(k−2)! for k≥2.) Then use E[X(X−1)]=E[X²]−E[X] to find E[X²]=λ²+λ. Hence Var(X)=λ.\n2. X~Uniform(0,1). Compute E[X²] and E[1/(1+X)] using LOTUS (continuous form: integrate g(x)·1 dx over [0,1]).\n3. X has PMF P(X=k)=1/n for k=1,…,n. Compute E[X²] and E[X(X−1)] using LOTUS. Verify that Var(X)=(n²−1)/12.\n4. X~Exponential(λ). Compute the moment generating function M(t)=E[eᵗˣ]=∫₀^∞ eᵗˣ·λe^{−λx}dx for t<λ. Simplify.\n5. If E[g(X)]=g(E[X]) for all X, what does that say about g? (Answer: g must be linear, or X is a constant.)\n\n**P55 — Reflect & Consolidate:** \"LOTUS: E[g(X)]=∑g(x)P(X=x) or ∫g(x)fX(x)dx. No need to find distribution of g(X). KEY use: E[X²] for variance. E[g(X)]≠g(E[X]) in general — only for linear g.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) X~Normal(μ,σ²). The moment generating function is M(t)=E[eᵗˣ]=∫_{-∞}^∞ eᵗˣ · (2πσ²)^{-1/2} exp(−(x−μ)²/(2σ²))dx. By completing the square in the exponent: M(t)=exp(μt+σ²t²/2). Use this to find E[X]=M'(0) and E[X²]=M''(0). Verify E[X²]=μ²+σ². (b) Cumulant generating function: K(t)=ln M(t). Why is K(t)=μt+σ²t²/2 particularly simple for the Normal distribution? (c) The k-th moment of X is E[Xᵏ]=M^{(k)}(0). For a Normal, use M(t)=exp(μt+σ²t²/2) to find E[X³] (third moment) and E[X⁴] (fourth moment) by differentiating.\n\n**P75 — Mastery Assessment:**\n\"X~Binomial(n,p). (a) Use LOTUS with g(k)=k(k−1): compute E[X(X−1)]=n(n−1)p². (Hint: k(k−1)C(n,k)=(n)(n−1)C(n−2,k−2).) (b) Hence find E[X²] and Var(X)=np(1−p). (c) Verify: for n=1 (Bernoulli), Var(X)=p(1−p). (d) This derivation uses LOTUS and combinatorial identities — not the LOTUS integral. Which random variables are most naturally handled by LOTUS-sum vs LOTUS-integral?\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW LOTUS integral for continuous variables\n- Score ≤ 3/5 → PREREQUISITE GAP in math.prob.expected-value; reassign\n\n**P78 — Completion:** LOTUS certified. Student applies E[g(X)]=∑g(x)P(X=x) directly; uses for E[X²], factorial moments, MGF; distinguishes from E[g(X)]=g(E[X]) error.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.law-of-unconscious.md",
+        "startLine": 86,
+        "endLine": 110
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

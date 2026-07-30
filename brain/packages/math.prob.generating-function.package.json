@@ -1,0 +1,859 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.generating-function-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.generating-function",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ff0c637466776b9020b600ebf184cf36df9f3cf9c21d2d2dc8203e448183f36b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.generating-function.md": "sha256:24bd92b7106e6378c3a2d3e53ac625985d5ad257f72bf54180b20df7107e6709"
+    },
+    "assetCount": 26,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 21,
+      "mastery_probe": 1
+    },
+    "ruleCount": 21
+  },
+  "concept": {
+    "conceptId": "math.prob.generating-function",
+    "name": "Generating Function",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.prob.pmf"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.generating-function-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.generating-function (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.generating-function.md": "sha256:24bd92b7106e6378c3a2d3e53ac625985d5ad257f72bf54180b20df7107e6709"
+      },
+      "contentHash": "sha256:9f6e8b9eddbd1c40a47c354758d2e553994273c9948f2b391f261fa52e0bbe89",
+      "ruleCount": 21,
+      "bandCounts": {
+        "3": 21
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.generating-function.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.generating-function.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.generating-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.generating-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.generating-function.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.generating-function.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.generating-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.generating-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.generating-function.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.generating-function.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.generating-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.generating-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.generating-function.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.generating-function.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.generating-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.generating-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.generating-function.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.generating-function.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.generating-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.generating-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.generating-function.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.generating-function.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.generating-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.generating-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.generating-function.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.generating-function.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.generating-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.generating-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.generating-function.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.generating-function.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.generating-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.generating-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.generating-function.TA-17",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.generating-function.md#TA-17",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.generating-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.generating-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.generating-function.TA-18",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.generating-function.md#TA-18",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.generating-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.generating-function\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.generating-function.TA-19",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.generating-function.md#TA-19 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.generating-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.generating-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.generating-function.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.generating-function.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.generating-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.generating-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.generating-function.TA-20",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.generating-function.md#TA-20",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.generating-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.generating-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.generating-function.TA-21",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.generating-function.md#TA-21",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.generating-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.generating-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.generating-function.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.generating-function.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.generating-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.generating-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.generating-function.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.generating-function.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.generating-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.generating-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.generating-function.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.generating-function.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.generating-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.generating-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.generating-function.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.generating-function.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.generating-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.generating-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.generating-function.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.generating-function.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.generating-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.generating-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.generating-function.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.generating-function.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.generating-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.generating-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.generating-function.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.generating-function.md#TA-9 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.generating-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.generating-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.generating-function/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.generating-function",
+      "title": "Learning Objective",
+      "content": "The student defines the probability generating function (PGF) G_X(z)=E[z^X]=∑_{k=0}^∞ P(X=k)z^k for non-negative integer-valued X; computes moments from the PGF via G^{(r)}(1)=E[X(X−1)⋯(X−r+1)]; defines the moment generating function (MGF) M_X(t)=E[e^{tX}] for any random variable; recovers moments via M^{(r)}(0)=E[X^r]; applies the key property that independence implies M_{X+Y}(t)=M_X(t)M_Y(t) (PGF: G_{X+Y}(z)=G_X(z)G_Y(z)); and uses PGFs to identify distributions via their generating function.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.generating-function",
+      "title": "MGF-IS-JUST-A-TRICK-NOT-A-DISTRIBUTION-TOOL",
+      "content": "| MC-1 | MGF-IS-JUST-A-TRICK-NOT-A-DISTRIBUTION-TOOL | Student treats the MGF as a computational shortcut but doesn't know it UNIQUELY determines the distribution: two random variables with the same MGF (wherever it exists) have identical distributions | Type 5 — instruction-induced (MGFs are introduced as \"moment machines\"; the uniqueness theorem is often mentioned briefly or omitted; students don't realise the MGF carries all distributional information, not just moments) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.generating-function",
+      "title": "G-PRIME-AT-1-GIVES-E[X-SQUARED]",
+      "content": "| MC-2 | G-PRIME-AT-1-GIVES-E[X-SQUARED] | Student differentiates G(z) once and evaluates at z=1 to get E[X²]; actually gets E[X(X−1)]=E[X²]−E[X]; doesn't apply the formula E[X²]=G''(1)+G'(1) to correct this | Type 1 — overgeneralisation (the first derivative evaluated at a CDF function gives a specific quantity; students apply the \"derivative at a point gives a moment\" heuristic without tracking the falling factorial vs. raw moment distinction) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.generating-function",
+      "title": "INDEPENDENCE-MEANS-PGFS-ADD",
+      "content": "| MC-3 | INDEPENDENCE-MEANS-PGFS-ADD | Student writes G_{X+Y}(z)=G_X(z)+G_Y(z) for independent X,Y instead of the correct product rule G_{X+Y}(z)=G_X(z)G_Y(z) | Type 1 — overgeneralisation (convolution of PMFs involves a sum — P_{X+Y}(k)=∑P_X(j)P_Y(k−j) — and students conflate \"summing probabilities\" with \"adding generating functions\"; the power-series multiplication is the correct mechanism) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.generating-function",
+      "title": "G'(z) = ∑_{k=1}^∞ k·P(X=k)·z^{k−1} → G'(1) = E[X]",
+      "content": "{\"id\":\"TA-1\",\"title\":\"G'(z) = ∑_{k=1}^∞ k·P(X=k)·z^{k−1} → G'(1) = E[X]\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.generating-function",
+      "title": "G''(z) = ∑_{k=2}^∞ k(k−1)·P(X=k)·z^{k−2} → G''(1) = E[X(X−1)] = E[X²] − E[X]",
+      "content": "{\"id\":\"TA-2\",\"title\":\"G''(z) = ∑_{k=2}^∞ k(k−1)·P(X=k)·z^{k−2} → G''(1) = E[X(X−1)] = E[X²] − E[X]\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.generating-function",
+      "title": "So E[X²] = G''(1) + G'(1) and Var(X) = G''(1) + G'(1) − [G'(1)]²",
+      "content": "{\"id\":\"TA-3\",\"title\":\"So E[X²] = G''(1) + G'(1) and Var(X) = G''(1) + G'(1) − [G'(1)]²\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.generating-function",
+      "title": "Bernoulli(p): G(z) = 1−p+pz",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Bernoulli(p): G(z) = 1−p+pz\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.generating-function",
+      "title": "Binomial(n,p): G(z) = (1−p+pz)^n (power of Bernoulli PGF — confirms: sum of n independent Bernoullis)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Binomial(n,p): G(z) = (1−p+pz)^n (power of Bernoulli PGF — confirms: sum of n independent Bernoullis)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.generating-function",
+      "title": "Geometric(p) (trials until first success): G(z) = pz/(1−(1−p)z) for |z|<1/(1−p)",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Geometric(p) (trials until first success): G(z) = pz/(1−(1−p)z) for |z|<1/(1−p)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.generating-function",
+      "title": "Poisson(λ): G(z) = e^{λ(z−1)}",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Poisson(λ): G(z) = e^{λ(z−1)}\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.generating-function",
+      "title": "CORRECT → \"G(z)=∑P(X=k)z^k. G'(1)=E[X]. G''(1)=E[X²]−E[X]. Independent sum: G_{X+Y}=G_X·G_Y.\" → A02",
+      "content": "{\"id\":\"TA-8\",\"title\":\"CORRECT → \\\"G(z)=∑P(X=k)z^k. G'(1)=E[X]. G''(1)=E[X²]−E[X]. Independent sum: G_{X+Y}=G_X·G_Y.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.generating-function",
+      "title": "PARTIAL (MC-2: G''(1)=E[X²]) → \"G'(z)=∑k·P(k)·z^{k−1}. At z=1: G'(1)=∑k·P(k)=E[X]. ✓. G''(z)=∑k(k−1)P(k)z^{k−2}. At z=1: G''(1)=∑k(k−1)P(k)=E[X(X−1)]=E[X²−X]=E[X²]−E[X]. So E[X²]=G''(1)+G'(1), NOT just G''(1).\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-9\",\"title\":\"PARTIAL (MC-2: G''(1)=E[X²]) → \\\"G'(z)=∑k·P(k)·z^{k−1}. At z=1: G'(1)=∑k·P(k)=E[X]. ✓. G''(z)=∑k(k−1)P(k)z^{k−2}. At z=1: G''(1)=∑k(k−1)P(k)=E[X(X−1)]=E[X²−X]=E[X²]−E[X]. So E[X²]=G''(1)+G'(1), NOT just G''(1).\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.generating-function",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-10\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.generating-function",
+      "title": "NO_RESPONSE → \"X~Poisson(3). G(z)=e^{3(z−1)}. Compute G'(z)=3e^{3(z−1)}. G'(1)=3=E[X]. ✓. G''(z)=9e^{3(z−1)}. G''(1)=9=E[X(X−1)]=E[X²]−E[X]. E[X²]=9+3=12. Var(X)=12−9=3=λ. ✓\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-11\",\"title\":\"NO_RESPONSE → \\\"X~Poisson(3). G(z)=e^{3(z−1)}. Compute G'(z)=3e^{3(z−1)}. G'(1)=3=E[X]. ✓. G''(z)=9e^{3(z−1)}. G''(1)=9=E[X(X−1)]=E[X²]−E[X]. E[X²]=9+3=12. Var(X)=12−9=3=λ. ✓\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.generating-function",
+      "title": "M'(0) = E[X], M''(0) = E[X²], M'''(0) = E[X³], …",
+      "content": "{\"id\":\"TA-12\",\"title\":\"M'(0) = E[X], M''(0) = E[X²], M'''(0) = E[X³], …\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.generating-function",
+      "title": "Bernoulli(p): M(t) = 1−p+pe^t",
+      "content": "{\"id\":\"TA-13\",\"title\":\"Bernoulli(p): M(t) = 1−p+pe^t\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.generating-function",
+      "title": "Binomial(n,p): M(t) = (1−p+pe^t)^n",
+      "content": "{\"id\":\"TA-14\",\"title\":\"Binomial(n,p): M(t) = (1−p+pe^t)^n\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.generating-function",
+      "title": "Normal(μ,σ²): M(t) = e^{μt+σ²t²/2}",
+      "content": "{\"id\":\"TA-15\",\"title\":\"Normal(μ,σ²): M(t) = e^{μt+σ²t²/2}\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.generating-function",
+      "title": "Exponential(λ): M(t) = λ/(λ−t) for t<λ",
+      "content": "{\"id\":\"TA-16\",\"title\":\"Exponential(λ): M(t) = λ/(λ−t) for t<λ\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/teaching_action_meta/TA-17",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.generating-function",
+      "title": "Poisson(λ): M(t) = e^{λ(e^t−1)}",
+      "content": "{\"id\":\"TA-17\",\"title\":\"Poisson(λ): M(t) = e^{λ(e^t−1)}\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-17",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/teaching_action_meta/TA-18",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.generating-function",
+      "title": "CORRECT → \"M(t)=E[e^{tX}]. M^{(r)}(0)=E[X^r]. Independent sum: M_{X+Y}=M_X·M_Y. Uniqueness: MGF determines distribution.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-18\",\"title\":\"CORRECT → \\\"M(t)=E[e^{tX}]. M^{(r)}(0)=E[X^r]. Independent sum: M_{X+Y}=M_X·M_Y. Uniqueness: MGF determines distribution.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-18",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 94,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/teaching_action_meta/TA-19",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.generating-function",
+      "title": "PARTIAL (MC-3: PGFs add instead of multiply) → \"For INDEPENDENT X,Y: G_{X+Y}(z)=E[z^{X+Y}]=E[z^X·z^Y]=E[z^X]E[z^Y]=G_X(z)G_Y(z). They MULTIPLY. Intuition: the PGF of a sum is the PRODUCT of PGFs (like Laplace transforms of convolutions). PMF convolution is the coefficient-level operation; PGF multiplication is the transform-level operation.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-19\",\"title\":\"PARTIAL (MC-3: PGFs add instead of multiply) → \\\"For INDEPENDENT X,Y: G_{X+Y}(z)=E[z^{X+Y}]=E[z^X·z^Y]=E[z^X]E[z^Y]=G_X(z)G_Y(z). They MULTIPLY. Intuition: the PGF of a sum is the PRODUCT of PGFs (like Laplace transforms of convolutions). PMF convolution is the coefficient-level operation; PGF multiplication is the transform-level operation.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-19",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 95,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/teaching_action_meta/TA-20",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.generating-function",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-20\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-20",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 96,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/teaching_action_meta/TA-21",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.generating-function",
+      "title": "NO_RESPONSE → \"X~N(0,1). M(t)=e^{t²/2}. Compute M'(t)=te^{t²/2}. M'(0)=0=E[X]. ✓. M''(t)=(1+t²)e^{t²/2}. M''(0)=1=E[X²]. ✓. Var(X)=E[X²]−(E[X])²=1−0=1. ✓\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-21\",\"title\":\"NO_RESPONSE → \\\"X~N(0,1). M(t)=e^{t²/2}. Compute M'(t)=te^{t²/2}. M'(0)=0=E[X]. ✓. M''(t)=(1+t²)e^{t²/2}. M''(0)=1=E[X²]. ✓. Var(X)=E[X²]−(E[X])²=1−0=1. ✓\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-21",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 97,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "math.prob.generating-function/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.generating-function",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. X~Geometric(p) with PMF P(X=k)=(1−p)^{k−1}p, k=1,2,…. (a) Compute the PGF G(z). (b) Use G'(1) to find E[X]. (c) Use G''(1) to find Var(X). Verify against the known formula (1−p)/p².\n2. X and Y are independent Poisson(λ) random variables. Use MGFs to show X+Y~Poisson(2λ).\n3. The PGF of a distribution is G(z)=z³. Identify the distribution. (Hint: expand as a power series — what are the probabilities?)\n4. X~Binomial(n,p). (a) Use the PGF to derive E[X] and Var[X]. (b) Confirm Var(X)=np(1−p) via the formula Var(X)=G''(1)+G'(1)−[G'(1)]².\n5. X~Exponential(2). The MGF is M(t)=2/(2−t) for t<2. (a) Compute E[X] and E[X²] using derivatives of M at t=0. (b) Verify: E[X]=1/2 (mean of Exp(2)), Var(X)=1/4.\n\n**P55 — Reflect & Consolidate:** \"PGF: G(z)=E[z^X], G'(1)=E[X], G''(1)=E[X(X−1)]. MGF: M(t)=E[e^{tX}], M^{(r)}(0)=E[X^r]. Independent sums: generating functions MULTIPLY. Uniqueness: same MGF → same distribution.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Characteristic functions: φ_X(t)=E[e^{itX}] (replacing t by it in the MGF) always exist for any distribution, unlike MGFs. By the Lévy continuity theorem, convergence of characteristic functions implies convergence in distribution. This is the key tool in proving the Central Limit Theorem. (b) Compound Poisson: let S=X₁+⋯+X_N where N~Poisson(λ) and X_i are i.i.d. Show that G_S(z)=G_N(G_X(z))=e^{λ(G_X(z)−1)}. (This is the composition of PGFs, not the product.) (c) The Z-transform in signal processing is G(z)=∑_{k=0}^∞ p_k z^{-k} — the inverse of the PGF convention. How does the Z-transform's convolution theorem correspond to the PGF product rule for independent sums?\n\n**P75 — Mastery Assessment:**\n\"Let X₁, X₂, X₃ be independent, each Geometric(p) (trials-until-first-success convention). Their sum Y=X₁+X₂+X₃~Negative Binomial(r=3, p). (a) Compute G_Y(z) using the PGF product rule. (b) Use G_Y'(1) to find E[Y]=3/p. (c) Use G_Y''(1)+G_Y'(1)−[G_Y'(1)]² to find Var(Y)=3(1−p)/p². (d) Identify the PGF G_Y(z)=(pz/(1−(1−p)z))³ — verify it matches the known NegBin(3,p) PGF. (e) Evaluate M_Y(t) (the MGF) and use it to derive E[Y] independently.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW falling factorial moment formula and product rule\n- Score ≤ 3/5 → PREREQUISITE GAP in math.prob.pmf; reassign\n\n**P78 — Completion:** Generating Function certified. Student computes PGFs and MGFs; extracts moments; applies the product rule for independent sums; uses uniqueness theorem; connects PGF to characteristic functions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.generating-function.md",
+        "startLine": 111,
+        "endLine": 135
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
