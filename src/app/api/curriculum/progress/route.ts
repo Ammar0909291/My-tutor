@@ -241,18 +241,44 @@ export async function PATCH(req: Request) {
               orderBy: { updatedAt: 'desc' },
             })
             if (activeSession) {
-              const snap = (activeSession.contextSnapshot ?? {}) as Record<string, unknown>
-              await prisma.learnSession.update({
-                where: { id: activeSession.id },
-                data: {
-                  contextSnapshot: {
-                    ...snap,
-                    currentConceptNodeId: null,
-                    nextConceptNodeId: null,
-                    conversationState: null,
-                  },
+              // ISS-13: go through the versioned writer, exactly as the chat
+              // route's own persist does. This was a read-modify-write of the
+              // WHOLE contextSnapshot column that never read, checked, or
+              // advanced `_v`, which broke the lost-update protocol in both
+              // directions:
+              //
+              //  · it spread the version it read straight back out, so `_v`
+              //    did not move even though the content had. A chat turn that
+              //    started before the skip still matched its `WHERE _v = N`
+              //    and merged its delta on top — re-writing conversationState
+              //    and the concept pointer this block had just cleared. The
+              //    skip was silently undone, which is precisely the "skip
+              //    never actually skipped" failure the block above exists to
+              //    fix.
+              //  · replacing the whole column (rather than a jsonb merge of
+              //    the three keys it means to change) discards every field a
+              //    concurrent turn wrote between this read and this write —
+              //    not just the conflicting keys.
+              //
+              // No `rederive`: clearing three keys is a pure state
+              // replacement, so re-applying the same delta against a newer
+              // base on retry is already correct (see writeSnapshotDelta's
+              // contract). Fail-soft — it never throws.
+              const { writeSnapshotDelta, readSnapshotVersion } = await import('@/lib/db/snapshotWrite')
+              const result = await writeSnapshotDelta(prisma, {
+                sessionId: activeSession.id,
+                expectedVersion: readSnapshotVersion(activeSession.contextSnapshot),
+                delta: {
+                  currentConceptNodeId: null,
+                  nextConceptNodeId: null,
+                  conversationState: null,
                 },
               })
+              if (!result.applied) {
+                console.warn('[curriculum/progress] skip pointer reset not applied', {
+                  sessionId: activeSession.id, conflicted: result.conflicted, error: result.error,
+                })
+              }
             }
           }
         } catch (err) {
