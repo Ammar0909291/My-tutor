@@ -137,6 +137,11 @@ export async function POST(req: Request) {
       conceptId: string; planSignature: string; stageIndex: number; totalStages: number
     } : null
 
+    // ADR 15: Rendered Reality Model — read the visual-state log from
+    // contextSnapshot at turn start.  Additive: empty log = today's behavior.
+    const { readRRM } = await import('@/lib/teaching/renderedRealityModel')
+    const snapshotRRMLog = readRRM(snapshot)
+
     // CUE (Conversation Understanding Engine, Milestone 1): per-turn
     // observation collector. Branch-scoped engine outputs (misconceptions,
     // visuals) are recorded here at their EXISTING call sites so the single
@@ -418,11 +423,15 @@ export async function POST(req: Request) {
       })
       cueObservations.availableVisual = availableVisual
       cueObservations.visualDetectionRan = true
+      // ADR 15: use RRM ground truth for alreadyShown instead of hardcoded false
+      const { hasVisualBeenRendered: rrmHasVisual, buildRenderedRealityBlock: rrmBlock } = await import('@/lib/teaching/renderedRealityModel')
       systemPrompt += buildVisualIntelligenceBlock(
         availableVisual,
         lessonCtx?.lessonTitle ?? null,
-        false,
+        rrmHasVisual(snapshotRRMLog, availableVisual),
       )
+      // ADR 15: inject RENDERED REALITY block
+      systemPrompt += rrmBlock(snapshotRRMLog)
     } catch (err) {
       console.warn('[learn/chat] library visual aids context skipped:', err)
     }
@@ -1699,19 +1708,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           cueObservations.visualDetectionRan = true
           availableVisualHoisted = availableVisual
           // D.23-30: Visual Intelligence block for the conversation state
-          // machine path. alreadyShown = true when we've been in a visual-
-          // capable phase (OBSERVE/DEMONSTRATE/GUIDE) for >0 turns — the
-          // visual was likely already emitted on the first turn of this phase.
+          // machine path. ADR 15: alreadyShown now uses RRM ground truth
+          // instead of the phase-counter heuristic.
           const { buildVisualIntelligenceBlock } = await import('@/lib/teaching/visualIntelligence')
-          const visualAlreadyShown = conversationStateHoisted.turnsInCurrentPhase > 0
-            && (conversationStateHoisted.phase === 'OBSERVE'
-              || conversationStateHoisted.phase === 'DEMONSTRATE'
-              || conversationStateHoisted.phase === 'GUIDE')
+          const { hasVisualBeenRendered, buildRenderedRealityBlock } = await import('@/lib/teaching/renderedRealityModel')
+          const visualAlreadyShown = hasVisualBeenRendered(snapshotRRMLog, availableVisual)
           systemPrompt += buildVisualIntelligenceBlock(
             availableVisual,
             lessonCtx?.lessonTitle ?? null,
             visualAlreadyShown,
           )
+          // ADR 15: inject RENDERED REALITY block — ground truth of what
+          // the learner's screen currently shows.
+          systemPrompt += buildRenderedRealityBlock(snapshotRRMLog)
           // Bugs 5/6/7 — explicit learner requests are detected in code and
           // dispatched as forced TeachingActions, injected AFTER the turn
           // directive so they override the phase's default move. A diagram
@@ -3030,6 +3039,24 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // same computation, not duplicated.
       const visualFired = Boolean(detectedVisualSpec || detectedSceneSpec || responseVisual)
 
+      // ADR 15: create RRM entry after visual pipeline resolution.
+      // Single-writer: this is the ONLY path that writes RRM entries.
+      let rrmEntryThisTurn: import('@/lib/teaching/renderedRealityModel').RRMEntry | null = null
+      if (visualFired) {
+        try {
+          const { createRRMEntry } = await import('@/lib/teaching/renderedRealityModel')
+          rrmEntryThisTurn = createRRMEntry({
+            visualType: responseVisual,
+            visualSpec: detectedVisualSpec,
+            sceneSpec: detectedSceneSpec,
+            dynamicVisualizationCode,
+            responseVisual,
+            matchedConcept: resolvedConceptId ?? snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? null,
+            turnNumber: snapshotRRMLog.length + 1,
+          })
+        } catch { /* non-fatal — RRM is additive, absence = today's behavior */ }
+      }
+
       // Teaching Strategy Engine outcome log (docs/STUDENT_MEMORY_AUDIT.md):
       // additive, fire-and-forget, non-fatal — records which strategy fired
       // and whether a visual ultimately rendered this turn, for future
@@ -3693,7 +3720,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             }))
           } catch { /* telemetry never takes a turn down */ }
 
-          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0 || Object.keys(narrativeUpdate).length > 0 || teachingStepUpdateHoisted || turnHistoryUpdateHoisted || Object.keys(progressionUpdate).length > 0) {
+          // ADR 15: build the RRM snapshot delta (append new entry to log).
+          const rrmUpdate: Record<string, unknown> = {}
+          if (rrmEntryThisTurn) {
+            const { buildRRMSnapshotDelta } = await import('@/lib/teaching/renderedRealityModel')
+            rrmUpdate.renderedRealityLog = buildRRMSnapshotDelta(
+              [...snapshotRRMLog, rrmEntryThisTurn],
+            ).renderedRealityLog
+          }
+
+          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0 || Object.keys(narrativeUpdate).length > 0 || teachingStepUpdateHoisted || turnHistoryUpdateHoisted || Object.keys(progressionUpdate).length > 0 || rrmEntryThisTurn) {
             // Atomic JSONB merge (same pattern as the school snapshot above).
             const libSnapshotDelta = {
               ...(conceptChanged ? { currentConceptNodeId: newLibConceptId } : {}),
@@ -3709,6 +3745,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // selected step so the next turn (or a resumed session) reads
               // it back via readTeachingStepIndex() instead of restarting.
               ...(teachingStepUpdateHoisted ?? {}),
+              // ADR 15: RRM visual-state log
+              ...rrmUpdate,
             }
             // ISS-13: conditional on the version read at the start of this
             // turn. If a concurrent turn committed in between, the write
