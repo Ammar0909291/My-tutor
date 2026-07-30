@@ -25,6 +25,10 @@ import {
   type StudentState, type AssembledLesson,
 } from '@/lib/teaching/assets'
 import { stripIpaNotation } from '@/lib/text/ipaSanitizer'
+import {
+  pickCurrentTopicSlug, foldProgressionMetrics, readProgressionMetrics,
+  progressionTags, needsSignalRepair,
+} from '@/lib/teaching/progressionIntegrity'
 
 // Voice Signal Recovery (Claude Recommendation #7): mirrors
 // VoiceTimingSignal (src/lib/voice/voiceSignal.ts) exactly — never trust a
@@ -154,7 +158,18 @@ export async function POST(req: Request) {
     const [curriculumLessons, studentProgress, topicProgressRowsShared, learningProfileShared, subjectAnalyticsShared] = await Promise.all([
       (prisma as any).curriculum?.findMany({ where: { subjectCode }, orderBy: { order: 'asc' } }).catch(() => []) ?? Promise.resolve([]),
       (prisma as any).studentProgress?.findUnique({ where: { userId_subjectCode: { userId, subjectCode: progressCode } } }).catch(() => null) ?? Promise.resolve(null),
-      prisma.topicProgress.findMany({ where: { userId, subjectSlug: subjectCode } }),
+      // RC-A: `orderBy` is load-bearing, not cosmetic. Without it Postgres
+      // may return these rows in any order, and an UPDATE relocates a row
+      // under MVCC — so the row a `.find(status === 'IN_PROGRESS')` returned
+      // could change between turns, flapping the resolved concept identity
+      // and resetting the whole ConversationState. Deterministic ordering
+      // here plus pickCurrentTopicSlug() at every selection site closes it.
+      // See src/lib/teaching/progressionIntegrity.ts and
+      // src/tests/progressionStall.test.ts.
+      prisma.topicProgress.findMany({
+        where: { userId, subjectSlug: subjectCode },
+        orderBy: [{ updatedAt: 'desc' }, { topicSlug: 'asc' }],
+      }),
       prisma.learningProfile.findUnique({ where: { userId } }).catch(() => null),
       prisma.subjectAnalytics.findUnique({ where: { userId_subjectId: { userId, subjectId: learnSession.subjectId } } }).catch(() => null),
     ])
@@ -201,7 +216,7 @@ export async function POST(req: Request) {
         )
         if (syntheticLessons.length > 0) {
           const topicProgressRows = topicProgressRowsShared
-          const inProgressSlug = topicProgressRows.find((r) => r.status === 'IN_PROGRESS')?.topicSlug
+          const inProgressSlug = pickCurrentTopicSlug(topicProgressRows)
           const currentLesson = (inProgressSlug
             ? syntheticLessons.find((l) => l.topicSlug === inProgressSlug)
             : null)
@@ -265,7 +280,7 @@ export async function POST(req: Request) {
           )
           if (syntheticLessons.length > 0) {
             const topicProgressRows = topicProgressRowsShared
-            const inProgressSlug = topicProgressRows.find((r) => r.status === 'IN_PROGRESS')?.topicSlug
+            const inProgressSlug = pickCurrentTopicSlug(topicProgressRows)
             const currentLesson = (inProgressSlug
               ? syntheticLessons.find((l) => l.topicSlug === inProgressSlug)
               : null)
@@ -715,7 +730,7 @@ export async function POST(req: Request) {
     // Additive, own try/catch, never blocks. Teaching style only — content
     // stays curriculum-controlled (the block carries an explicit guard line).
     try {
-      const currentTopicSlug = topicProgressRowsShared.find((r) => r.status === 'IN_PROGRESS')?.topicSlug ?? null
+      const currentTopicSlug = pickCurrentTopicSlug(topicProgressRowsShared)
       if (currentTopicSlug) {
         const { getTutorTeachingContext, buildTutorTeachingContextBlock } = await import('@/lib/intelligence/tutorTeachingContext')
         const teachingContext = await getTutorTeachingContext(userId, subjectCode, currentTopicSlug)
@@ -792,7 +807,9 @@ export async function POST(req: Request) {
           conceptPreviouslyMasteredHoisted = true
         }
 
-        const inProgressSlug = topicProgressRows.find((r) => r.status === 'IN_PROGRESS')?.topicSlug
+        // ?? undefined: this consumer's signature is `string | undefined`,
+        // matching the `?.topicSlug` it previously received.
+        const inProgressSlug = pickCurrentTopicSlug(topicProgressRows) ?? undefined
         const kgContext = buildKnowledgeGraphContext(subjectCode, completedSlugs, inProgressSlug)
         if (kgContext) systemPrompt += `\n\n${kgContext}`
 
@@ -1344,6 +1361,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // V-OSCILLATE rules' persisted state), merged into the final snapshot
     // delta alongside conversationStateUpdate below.
     let turnHistoryUpdateHoisted: Record<string, unknown> | null = null
+    // STEP 2 — progression telemetry provenance atoms for this turn.
+    let progressionTagsHoisted: string[] = []
+    // RC-D — did the freeze-breaker fire this turn? Recorded as provenance.
+    let signalRepairFiredHoisted = false
     // S2 — the objective ledger for the current concept (attempts,
     // assessments, completion, stall detection). Read pre-turn near
     // conversationStateHoisted above; folded with this turn's evidence and
@@ -1808,6 +1829,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             recoveryKeyHoisted, firstLessonActiveHoisted, snapshotSessionFailureCount,
             conversationStateHoisted?.demonstrated !== true,
           )
+        }
+
+        // RC-D freeze-breaker — the runtime refuses to wait for a second
+        // dropped observation. Injected after recovery so a genuine affect
+        // state still outranks it (a flooded learner is not asked to confirm
+        // a restatement), but ahead of everything advisory. See
+        // progressionIntegrity.buildSignalRepairBlock for why this changes
+        // the TURN rather than repeating the instruction that just failed.
+        if (!recoveryKeyHoisted && needsSignalRepair(
+          readProgressionMetrics(snapshot?.progressionMetrics),
+        )) {
+          const { buildSignalRepairBlock } = await import('@/lib/teaching/progressionIntegrity')
+          systemPrompt += buildSignalRepairBlock()
+          signalRepairFiredHoisted = true
         }
       } catch (err) {
         console.warn('[learn/chat] wave-0 brain blocks skipped:', err)
@@ -3565,6 +3600,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 // violation this turn, for observability only (never
                 // rewrites prose beyond the completion-tag strip above).
                 ...stanceViolationsHoisted.map((code) => `stance:${code}`),
+                // STEP 2 — progression anomalies (missing signal, concept flap)
+                ...progressionTagsHoisted,
+                ...(signalRepairFiredHoisted ? ['progression:signal-repair'] : []),
               ],
               freshSessionBoundary: sessionEpisodeFreshHoisted,
               boundaryGapMs: null,
@@ -3574,7 +3612,54 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
           const narrativeUpdate = narrativeStateHoisted ? { narrativeState: narrativeStateHoisted } : {}
 
-          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0 || Object.keys(narrativeUpdate).length > 0 || teachingStepUpdateHoisted || turnHistoryUpdateHoisted) {
+          // STEP 2 (instrumentation) — progression telemetry. Measurement
+          // only: nothing here gates a turn or changes learner-visible
+          // output. Rides the same contextSnapshot persist as every other
+          // counter (no new store, no migration). Every input is a value the
+          // route already computed.
+          let progressionUpdate: Record<string, unknown> = {}
+          try {
+            const stateAfterForMetrics = (conversationStateUpdate.conversationState as
+              import('@/lib/teaching/conversationState').ConversationState | undefined)
+              ?? conversationStateAfterTurnHoisted ?? conversationStateHoisted
+            const { isBareAcknowledgement: isBareAckForMetrics } = await import('@/lib/teaching/masteryGate')
+            const { masteryVerified: masteryVerifiedForMetrics } = await import('@/lib/teaching/masteryGate')
+            const facts = {
+              // The server asked a question last turn iff its decided move
+              // was 'ask'; absent that we fall back to the ladder's own
+              // record that a question was outstanding.
+              answerWasExpected: evidenceMoveHoisted === 'ASK'
+                || (conversationStateHoisted?.questionsAskedSinceTeach ?? 0) > 0,
+              learnerReplySubstantive: message.trim().length > 0
+                && !isBareAckForMetrics(message)
+                && recoveryKeyHoisted === null,
+              signalPresent: teachingSignal !== null && teachingSignal !== undefined,
+              phaseBefore: conversationStateHoisted?.phase ?? null,
+              phaseAfter: stateAfterForMetrics?.phase ?? null,
+              conceptBefore: conversationStateHoisted?.conceptId ?? null,
+              conceptAfter: stateAfterForMetrics?.conceptId ?? null,
+              evidenceBefore: {
+                correctAtCheck: conversationStateHoisted?.correctAtCheck ?? 0,
+                correctAtPractice: conversationStateHoisted?.correctAtPractice ?? 0,
+              },
+              recoveryFired: recoveryKeyHoisted !== null,
+              duplicateDetected: eosVerifierTagsHoisted.some((t) => t.includes('V-DUP')),
+              masteryVerifiedNow: masteryVerifiedForMetrics(stateAfterForMetrics ?? null),
+            }
+            progressionUpdate = {
+              progressionMetrics: foldProgressionMetrics(
+                readProgressionMetrics(snapshot?.progressionMetrics), facts,
+              ),
+            }
+            progressionTagsHoisted = progressionTags(facts)
+            snapshotRederivers.push((fresh) => ({
+              progressionMetrics: foldProgressionMetrics(
+                readProgressionMetrics(fresh.progressionMetrics), facts,
+              ),
+            }))
+          } catch { /* telemetry never takes a turn down */ }
+
+          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0 || Object.keys(narrativeUpdate).length > 0 || teachingStepUpdateHoisted || turnHistoryUpdateHoisted || Object.keys(progressionUpdate).length > 0) {
             // Atomic JSONB merge (same pattern as the school snapshot above).
             const libSnapshotDelta = {
               ...(conceptChanged ? { currentConceptNodeId: newLibConceptId } : {}),
@@ -3585,6 +3670,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               ...conversationStateUpdate,
               ...narrativeUpdate,
               ...(turnHistoryUpdateHoisted ?? {}),
+              ...progressionUpdate,
               // Option B — Teaching Sequence Executor: persist the runtime-
               // selected step so the next turn (or a resumed session) reads
               // it back via readTeachingStepIndex() instead of restarting.
@@ -3599,20 +3685,31 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // as the unconditional write always did, and never the reply.
             const { writeSnapshotDelta, readSnapshotVersion } = await import('@/lib/db/snapshotWrite')
             const rederivers = snapshotRederivers
-            writeSnapshotDelta(prisma, {
+            // RC-B: AWAITED, deliberately. This was fire-and-forget
+            // (`.then()`), and this route sets no `runtime`/`maxDuration` and
+            // uses no `waitUntil`/`after()` — so on a serverless platform the
+            // instance can be frozen the moment the response is returned,
+            // with this write still in flight. A dropped write means the next
+            // turn reads a stale snapshot: no phase, no counters, no concept
+            // identity — a silent stall indistinguishable from the learner
+            // never having answered. writeSnapshotDelta is already total
+            // (never throws; every path resolves), so awaiting it cannot fail
+            // the turn — it only costs one round-trip before the reply
+            // returns, which is the correct trade against losing the turn's
+            // entire learning state.
+            const writeResult = await writeSnapshotDelta(prisma, {
               sessionId,
               expectedVersion: readSnapshotVersion(snapshot),
               delta: libSnapshotDelta,
               rederive: rederivers.length === 0
                 ? undefined
                 : (fresh) => Object.assign({}, ...rederivers.map((f) => f(fresh))),
-            }).then((r) => {
-              if (!r.applied) {
-                console.warn('[learn/chat] snapshot write not applied', {
-                  sessionId, conflicted: r.conflicted, error: r.error,
-                })
-              }
-            }).catch(() => {})
+            })
+            if (!writeResult.applied) {
+              console.warn('[learn/chat] snapshot write not applied', {
+                sessionId, conflicted: writeResult.conflicted, error: writeResult.error,
+              })
+            }
           }
         } catch (err) {
           console.warn('[learn/chat] wave-0 library persist skipped:', err)
