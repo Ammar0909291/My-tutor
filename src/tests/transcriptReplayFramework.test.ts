@@ -40,11 +40,11 @@
 import { describe, it, expect } from 'vitest'
 import {
   initialConversationState, advanceConversationState, decideNextMoveDetailed,
-  repliesWithQuestion, isPriorKnowledgeProbe,
+  repliesWithQuestion, isPriorKnowledgeProbe, isLowSignalAcknowledgement,
   type ConversationState, type TeachingPhase,
 } from '@/lib/teaching/conversationState'
 import { detectFailureState, isDontKnowSignal, buildRecoveryBlock } from '@/lib/teaching/recoveryGuard'
-import { masteryVerified, isBareAcknowledgement, detectLearnerRequest } from '@/lib/teaching/masteryGate'
+import { masteryVerified, detectLearnerRequest } from '@/lib/teaching/masteryGate'
 import {
   buildTurnRecord, appendTurn, initialTurnHistory,
   detectExactDuplicate, detectNearDuplicate, detectPhaseOscillation,
@@ -91,6 +91,18 @@ export interface ReplayOutcome {
   recoveryIndices: number[]
   /** Turn indices where the runtime would have injected the freeze-breaker. */
   signalRepairIndices: number[]
+  /** The failure state detected per turn — null where none fired. Recorded
+   *  because WHICH state fired selects the recovery script and the
+   *  dont-know-signal membership, so "recovery fired" alone under-specifies
+   *  the turn. */
+  recoveryKeys: Array<string | null>
+  /** The server-decided move per turn. Previously computed and thrown away,
+   *  which left the move/legality layer — where the CHECK-absorbing and
+   *  directive-conflict defects both lived — unverifiable by this battery
+   *  despite the file claiming otherwise. */
+  moves: Array<'teach' | 'show' | 'ask'>
+  /** Why ASK was removed, per turn (null when it was legal). */
+  blockedReasons: Array<string | null>
 }
 
 /**
@@ -112,22 +124,42 @@ export function replay(t: ReplayTranscript): ReplayOutcome {
     finalState: state, metrics, phases,
     duplicateTurnIndices: [], duplicateQuestionIndices: [],
     oscillationIndices: [], recoveryIndices: [], signalRepairIndices: [],
+    recoveryKeys: [], moves: [], blockedReasons: [],
   }
+
+  // route.ts reads the learner's immediately preceding message off the session
+  // (newest-first, fetched before this turn's insert) and passes it to
+  // detectFailureState. A replay that does not thread it through is running a
+  // strictly weaker detector than the runtime — see the drift guard below.
+  let priorLearnerMessage: string | null = null
 
   t.turns.forEach((turn, i) => {
     // 1. Would the runtime inject the freeze-breaker before this turn?
     if (needsSignalRepair(metrics)) out.signalRepairIndices.push(i)
 
-    // 2. Classification — the same detectors the route runs, same order.
-    const recoveryKey = detectFailureState(turn.learner)
+    // 2. Classification — the same detectors the route runs, same order, with
+    //    the same arguments. The prior message is what enables the
+    //    repeated-identical-answer rung, which returns 'frustrated' where the
+    //    one-argument form returns 'dont_know'/'confused'/null.
+    const recoveryKey = detectFailureState(turn.learner, priorLearnerMessage)
+    out.recoveryKeys.push(recoveryKey)
     if (recoveryKey) out.recoveryIndices.push(i)
     const learnerRequest = detectLearnerRequest(turn.learner)
 
-    // 3. Server decision for this turn (recorded for legality assertions).
-    decideNextMoveDetailed(state, {
+    // 3. Server decision for this turn. CAPTURED, not discarded.
+    //
+    //    One deliberate difference from route.ts, stated rather than hidden:
+    //    `legality` is omitted because a transcript carries no prior-knowledge
+    //    or capability evidence. Per questionLegality's contract, omitting it
+    //    is the CONSERVATIVE reading — it can only ever remove ASK, never add
+    //    it — so a replay can under-report a legal question but can never
+    //    invent one the runtime would have blocked.
+    const decision = decideNextMoveDetailed(state, {
       recoveryTurn: recoveryKey !== null,
       workedExampleFirst: false,
     })
+    out.moves.push(decision.move)
+    out.blockedReasons.push(decision.blockedReason)
 
     // 4. Duplicate / oscillation detection against real turn history.
     const normalized = normalizeForComparison(turn.tutor)
@@ -140,7 +172,14 @@ export function replay(t: ReplayTranscript): ReplayOutcome {
 
     // 5. Fold the ladder with this turn's evidence.
     const before = state
-    const bareAck = isBareAcknowledgement(turn.learner)
+    // isLowSignalAcknowledgement, not isBareAcknowledgement: route.ts uses the
+    // former as the SINGLE OWNER of "is this a bare acknowledgement" — for the
+    // `acknowledgement` evidence field and for the turn directive's LOW-SIGNAL
+    // line alike. The two predicates genuinely disagree (isBareAcknowledgement
+    // does not recognise the forward tokens "ready" / "let's go" / "keep
+    // going" / "carry on" / "proceed"), so a replay using the other one
+    // classifies real learner turns differently from the runtime.
+    const bareAck = isLowSignalAcknowledgement(turn.learner)
     const effectiveSignal = bareAck ? null : (turn.signalCorrect ?? null)
     state = advanceConversationState(state, {
       askedQuestion,
@@ -150,6 +189,16 @@ export function replay(t: ReplayTranscript): ReplayOutcome {
       isPriorKnowledgeProbe: isPriorKnowledgeProbe(turn.tutor),
       dontKnowSignal: isDontKnowSignal(recoveryKey),
       learnerIssuedDirective: recoveryKey === 'too_many_questions',
+      // The field whose absence froze this harness's ladder. A delivery turn
+      // asks nothing, so it emits no SIGNAL, so an acknowledgement is the ONLY
+      // evidence such a turn can produce. Without it the replay reproduced the
+      // pre-2026-07-30 runtime — OBSERVE forever under an acknowledging
+      // learner — while the shipping runtime climbs to CHECK.
+      acknowledgement: bareAck,
+      // Computable only once the decided move is captured (step 3), which is
+      // why it was absent before. Same expression route.ts uses: the server
+      // said ASK and the rendered reply carried no question.
+      parityViolation: decision.move === 'ask' && !askedQuestion,
     })
     phases.push(state.phase)
 
@@ -176,6 +225,7 @@ export function replay(t: ReplayTranscript): ReplayOutcome {
     history = appendTurn(history, buildTurnRecord(turn.tutor, {
       askedQuestion, recoveryKey, phaseAfter: state.phase,
     }))
+    priorLearnerMessage = turn.learner
   })
 
   out.finalState = state
