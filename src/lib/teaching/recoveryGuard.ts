@@ -25,6 +25,11 @@
  * favors firing only on confident matches.
  */
 
+// The single owner of "is this message a bare acknowledgement" (see
+// isRepeatedAnswer below). conversationState.ts does not import this module,
+// so this edge adds no cycle.
+import { isLowSignalAcknowledgement } from './conversationState'
+
 export type FailureStateKey =
   | 'dont_know' | 'dont_understand' | 'confused' | 'forgot' | 'guessing'
   | 'too_hard' | 'give_up' | 'hate_subject' | 'scared' | 'stupid' | 'cant'
@@ -253,17 +258,40 @@ function isShoutingCaps(text: string): boolean {
 /**
  * P0-3: repeated-identical-answer check — the learner's normalized message
  * matches their own immediately preceding message. Structural, not a
- * phrase list: any content can trigger it. Trivial acknowledgements
- * ("ok", "yes") are excluded via the length floor — those are handled
- * elsewhere (masteryGate.isBareAcknowledgement) and repeating one is not
- * evidence of frustration.
+ * phrase list: any content can trigger it.
+ *
+ * An ACKNOWLEDGEMENT is not an answer, so repeating one is not repeating an
+ * answer, and this check must not see it. That exclusion was already the
+ * stated contract; it was implemented as a `length >= 4` proxy, and a length
+ * floor is not a test for "is this an acknowledgement". It admitted every
+ * acknowledgement longer than three characters — "got it", "continue",
+ * "next", "understood", "makes sense" — while excluding only the shortest
+ * ("go", "yes", "ok"). The consequence was a self-reinforcing stall on the
+ * one input a delivery turn can produce:
+ *
+ *   delivery turn asks nothing ⇒ the learner can only acknowledge ⇒ a second
+ *   acknowledgement is read as 'frustrated' ⇒ detectFailureState returns
+ *   non-null ⇒ the route sets recoveryFired ⇒ advanceConversationState takes
+ *   its `failed` branch, which returns BEFORE the acknowledgement transition
+ *   ⇒ the phase steps DOWN instead of forward, and buildRecoveryBlock (which
+ *   preempts everything and forbids new content) makes the tutor emit
+ *   another holding line ⇒ the learner acknowledges again.
+ *
+ * So the acknowledgement transition was unreachable from exactly the state
+ * that needs it. The floor is kept for genuinely short repeated content; the
+ * acknowledgement class is now excluded by the predicate that owns it —
+ * isLowSignalAcknowledgement(), the same one that drives the acknowledgement
+ * transition in advanceConversationState(). Sharing that single owner is what
+ * makes it impossible for the two to disagree about what an acknowledgement
+ * is, which is the property whose absence produced this bug.
  */
 function isRepeatedAnswer(message: string, priorUserMessage: string | null | undefined): boolean {
   if (!priorUserMessage) return false
   const normalize = (s: string) => s.trim().toLowerCase().replace(/['’]/g, '').replace(/[.,!?…\s]+/g, ' ').trim()
   const a = normalize(message)
   const b = normalize(priorUserMessage)
-  return a.length >= 4 && a === b
+  if (a.length < 4 || a !== b) return false
+  return !isLowSignalAcknowledgement(message)
 }
 
 /**

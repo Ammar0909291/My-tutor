@@ -45,6 +45,8 @@ import {
   type ConversationState,
   type TeachingPhase,
 } from '@/lib/teaching/conversationState'
+import { detectFailureState, isDontKnowSignal } from '@/lib/teaching/recoveryGuard'
+import { detectLearnerRequest } from '@/lib/teaching/masteryGate'
 
 /** The acknowledgements named in the bug report. */
 const ACKNOWLEDGEMENTS = [
@@ -275,6 +277,124 @@ describe('the turn directive stops contradicting the phase frame', () => {
     })
     expect(d).not.toContain('LEARNER ASKED TO PROCEED')
     expect(d).not.toContain('LOW-SIGNAL RESPONSE DETECTED')
+  })
+})
+
+/**
+ * Production verification failure (2026-07-30). The transitions above were
+ * already correct and already green — but the lesson still did not advance in
+ * production, because every test above hand-builds the evidence object and so
+ * never crosses the layer that actually decides `recoveryFired`.
+ *
+ * That layer is detectFailureState(message, priorUserMessage). Its
+ * repeated-identical-answer check classified a REPEATED ACKNOWLEDGEMENT as
+ * 'frustrated', which the route folds as recoveryFired — and the `failed`
+ * branch of advanceConversationState returns before the acknowledgement
+ * transition is ever reached. The fix is unreachable from the exact state that
+ * needs it, and the recovery block (which preempts everything and forbids new
+ * content) then makes the tutor emit another holding line.
+ *
+ * These replays therefore run the route's real order — detect, then decide,
+ * then fold — and carry priorUserMessage across turns exactly as route.ts does.
+ */
+describe('route-order replay: the acknowledgement survives failure detection', () => {
+  /** One learner turn, in the route's order (route.ts:1414 → 1681 → 2808). */
+  function routeTurn(
+    state: ConversationState,
+    message: string,
+    priorUserMessage: string | null,
+  ): { state: ConversationState; move: string; recoveryKey: string | null } {
+    const recoveryKey = detectFailureState(message, priorUserMessage)
+    const move = decideNextMoveDetailed(state, {
+      recoveryTurn: recoveryKey !== null,
+      workedExampleFirst: false,
+    }).move
+    return {
+      recoveryKey,
+      move,
+      state: advanceConversationState(state, {
+        // A delivery turn asks nothing — the state that produces the bug.
+        askedQuestion: false,
+        signalCorrect: null,
+        recoveryFired: recoveryKey !== null,
+        acknowledgement: isLowSignalAcknowledgement(message),
+        dontKnowSignal: isDontKnowSignal(recoveryKey),
+        learnerRequest: detectLearnerRequest(message),
+      }),
+    }
+  }
+
+  it.each(ACKNOWLEDGEMENTS)(
+    'repeating %j is never read as frustration',
+    (msg) => {
+      // Same message twice in a row — the shape the reported transcript has,
+      // because a holding line gives the learner nothing else to say.
+      expect(detectFailureState(msg, msg)).toBeNull()
+    },
+  )
+
+  it.each(ACKNOWLEDGEMENTS)(
+    'the phase advances on a repeated %j, it does not step down',
+    (msg) => {
+      const first = routeTurn(initialConversationState('c1'), msg, null)
+      expect(first.state.phase).toBe('DEMONSTRATE')
+
+      const second = routeTurn(first.state, msg, msg)
+      expect(second.recoveryKey).toBeNull()
+      expect(second.state.phase).toBe('GUIDE')
+      // The observed production symptom was the opposite of advancement:
+      // recovery fired, so the phase dropped and a failure was recorded.
+      expect(second.state.consecutiveFailures).toBe(0)
+    },
+  )
+
+  it('the reported transcript reaches a question instead of looping', () => {
+    // Tutor: "Let's take one small step together..." (a delivery turn)
+    // User:  Got it / Got it / go / continue / next
+    let state = initialConversationState('c1')
+    let prior: string | null = null
+    const phases: TeachingPhase[] = []
+    const moves: string[] = []
+    for (const msg of ['Got it', 'Got it', 'go', 'continue', 'next']) {
+      const turn = routeTurn(state, msg, prior)
+      state = turn.state
+      phases.push(state.phase)
+      moves.push(turn.move)
+      prior = msg
+    }
+    // Walks the delivery half, then holds at the mastery gate — which is the
+    // correct place to hold, and is not a stall: the move is now 'ask', so the
+    // learner is given something to answer rather than another holding line.
+    expect(phases).toEqual(['DEMONSTRATE', 'GUIDE', 'CHECK', 'CHECK', 'CHECK'])
+    expect(moves.at(-1)).toBe('ask')
+    // The pre-fix trace was DEMONSTRATE → DEMONSTRATE (recovery) → GUIDE →
+    // CHECK → GUIDE: never monotonic, and every recovery turn re-emitted the
+    // same content-free holding line.
+    expect(state.consecutiveFailures).toBe(0)
+  })
+
+  it('genuine repeated ANSWERS are still frustration — the guard is intact', () => {
+    // The check exists for a learner re-sending real content because the tutor
+    // keeps asking the same thing. Excluding acknowledgements must not disarm it.
+    expect(detectFailureState('the acceleration is 9.8', 'the acceleration is 9.8'))
+      .toBe('frustrated')
+    expect(detectFailureState('because the mass cancels', 'Because the mass cancels.'))
+      .toBe('frustrated')
+    // And a repeated answer still preempts: recovery wins over any ack reading.
+    expect(isLowSignalAcknowledgement('the acceleration is 9.8')).toBe(false)
+  })
+
+  it('real failure states still fire, repeated or not', () => {
+    // A single struggle utterance keeps its own key and its own script.
+    expect(detectFailureState("I don't know", null)).toBe('dont_know')
+    expect(detectFailureState("I'm confused", null)).toBe('confused')
+    // Repeated, the pre-existing repeated-answer rung reclassifies it as
+    // exasperation — unchanged by the acknowledgement exclusion, and asserted
+    // here so the exclusion can never widen into these.
+    expect(detectFailureState("I don't know", "I don't know")).toBe('frustrated')
+    expect(detectFailureState("I'm confused", "I'm confused")).toBe('frustrated')
+    // Either way recovery still owns the turn — the guard is not disarmed.
+    expect(detectFailureState("I don't know", "I don't know")).not.toBeNull()
   })
 })
 
