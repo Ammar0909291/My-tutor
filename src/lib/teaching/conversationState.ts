@@ -107,6 +107,18 @@ export interface ConversationState {
    *  from a different phase; set true the first time a question is asked
    *  while phase===CHECK. */
   reflectionAskedThisEntry: boolean
+  /** Verified-evidence counters: increment only when the SIGNAL passed
+   *  independent verification (signalVerification.ts). The unverified
+   *  counters (correctAtCheck/correctAtPractice) still drive the teaching
+   *  phase ladder; these drive strict mastery (completion authority). */
+  verifiedCorrectAtCheck: number
+  verifiedCorrectAtPractice: number
+  /** Accumulates signal-verification flags across the session. A high
+   *  count reduces trust in the SIGNAL and is visible in telemetry. */
+  signalContradictions: number
+  /** Counts turns where the server-decided move disagrees with what the
+   *  LLM actually rendered (e.g., decided 'ask' but no question appeared). */
+  parityViolations: number
 }
 
 export function initialConversationState(conceptId: string | null): ConversationState {
@@ -139,6 +151,10 @@ export function initialConversationState(conceptId: string | null): Conversation
     frustrationLevel: 0,
     turnsInCurrentPhase: 0,
     reflectionAskedThisEntry: false,
+    verifiedCorrectAtCheck: 0,
+    verifiedCorrectAtPractice: 0,
+    signalContradictions: 0,
+    parityViolations: 0,
   }
 }
 
@@ -183,6 +199,14 @@ export interface TurnEvidence {
    *  Sourced from recoveryGuard's `too_many_questions` failure state, which
    *  is the detector for exactly this family of utterances. */
   learnerIssuedDirective?: boolean
+  /** Signal verification status from signalVerification.ts. When 'CLEAN',
+   *  the signal counts toward both regular and strict mastery. When
+   *  'SUSPICIOUS' or 'CONTRADICTED', it counts toward regular mastery
+   *  (phase advancement) but NOT strict mastery (completion authority). */
+  signalVerificationStatus?: 'CLEAN' | 'SUSPICIOUS' | 'CONTRADICTED'
+  /** True when the server-decided move disagrees with what the LLM rendered
+   *  (e.g., decided 'ask' but response had no question). */
+  parityViolation?: boolean
 }
 
 /**
@@ -369,6 +393,7 @@ export function advanceConversationState(
 
   if (succeeded) {
     next.consecutiveFailures = 0
+    const verified = evidence.signalVerificationStatus === 'CLEAN' || evidence.signalVerificationStatus === undefined
     switch (prev.phase) {
       case 'OBSERVE':
         next.phase = 'DEMONSTRATE'
@@ -381,10 +406,12 @@ export function advanceConversationState(
         break
       case 'CHECK':
         next.correctAtCheck = prev.correctAtCheck + 1
+        if (verified) next.verifiedCorrectAtCheck = (prev.verifiedCorrectAtCheck ?? 0) + 1
         if (next.correctAtCheck >= 1) next.phase = 'PRACTICE'
         break
       case 'PRACTICE':
         next.correctAtPractice = prev.correctAtPractice + 1
+        if (verified) next.verifiedCorrectAtPractice = (prev.verifiedCorrectAtPractice ?? 0) + 1
         if (next.correctAtPractice >= 2) next.phase = 'TRANSFER'
         break
       case 'TRANSFER':
@@ -400,6 +427,14 @@ export function advanceConversationState(
   next.reflectionAskedThisEntry = foldReflectionAskedThisEntry(
     prev.phase, next.phase, evidence.askedQuestion, prev.reflectionAskedThisEntry ?? false,
   )
+
+  // Signal verification telemetry: fold contradiction and parity counters.
+  if (evidence.signalVerificationStatus === 'CONTRADICTED') {
+    next.signalContradictions = (prev.signalContradictions ?? 0) + 1
+  }
+  if (evidence.parityViolation) {
+    next.parityViolations = (prev.parityViolations ?? 0) + 1
+  }
 
   return next
 }

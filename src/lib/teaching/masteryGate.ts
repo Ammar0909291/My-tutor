@@ -47,6 +47,31 @@ export function masteryVerified(state: ConversationState | null): boolean {
   )
 }
 
+/**
+ * Strict mastery: requires VERIFIED evidence only — signals that passed
+ * independent cross-checking (signalVerification.ts). Used by the
+ * completion gate (gateLessonCompletion) so lesson completion cannot be
+ * authorized by contradicted or suspicious evidence.
+ *
+ * Falls back to the regular counters when verified counters are absent
+ * (persisted state from before this feature was added), so existing
+ * sessions are not broken.
+ */
+export function masteryVerifiedStrict(state: ConversationState | null): boolean {
+  if (!state) return false
+  const hasVerifiedCounters = (state.verifiedCorrectAtCheck ?? 0) > 0 || (state.verifiedCorrectAtPractice ?? 0) > 0
+  const hasContradictions = (state.signalContradictions ?? 0) > 0
+  if (!hasVerifiedCounters && !hasContradictions) {
+    return masteryVerified(state)
+  }
+  const vCheck = state.verifiedCorrectAtCheck ?? 0
+  const vPractice = state.verifiedCorrectAtPractice ?? 0
+  return (
+    vCheck >= MASTERY_CHECK_REQUIRED &&
+    vPractice >= MASTERY_PRACTICE_REQUIRED
+  )
+}
+
 // ── Bug 2: acknowledgements are not evidence ─────────────────────────────────
 
 /**
@@ -110,7 +135,7 @@ export function gateLessonCompletion(
 ): CompletionGateResult {
   const hasTag = /\[LESSON_COMPLETE\]/i.test(text)
   if (!hasTag) return { cleanText: text, authorized: false, suppressed: false }
-  if (masteryVerified(state)) {
+  if (masteryVerifiedStrict(state)) {
     return { cleanText: text, authorized: true, suppressed: false }
   }
   return {

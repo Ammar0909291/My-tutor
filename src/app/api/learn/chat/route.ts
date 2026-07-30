@@ -2453,6 +2453,32 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         if (isBareAcknowledgement(message)) teachingSignal = null
       }
 
+      // Architectural Root Cause Fix: cross-check the SIGNAL against
+      // independently observable evidence before it drives mastery state.
+      // A CONTRADICTED signal is overridden (text wins over tag); a
+      // SUSPICIOUS signal still drives the teaching flow but is excluded
+      // from strict mastery (completion authority).
+      let signalVerificationStatusHoisted: 'CLEAN' | 'SUSPICIOUS' | 'CONTRADICTED' = 'CLEAN'
+      if (teachingSignal && teachingSignal.correctness !== undefined) {
+        try {
+          const { verifySignal, resolveContradiction } = await import('@/lib/teaching/signalVerification')
+          const lastAsstForLatency = learnSession.messages.find((m: { role: string }) => m.role === 'ASSISTANT')
+          const learnerLatencyMs = lastAsstForLatency
+            ? Math.max(0, turnReceivedAt - new Date((lastAsstForLatency as { createdAt: Date }).createdAt).getTime())
+            : null
+          const verification = verifySignal(teachingSignal, {
+            assistantText: text,
+            learnerMessage: message,
+            phase: conversationStateHoisted?.phase ?? 'OBSERVE',
+            turnLatencyMs: learnerLatencyMs,
+          })
+          signalVerificationStatusHoisted = verification.status
+          if (verification.status === 'CONTRADICTED') {
+            teachingSignal = resolveContradiction(teachingSignal, verification)
+          }
+        } catch { /* non-fatal — fall through with CLEAN */ }
+      }
+
       // Phase 2/5 capture: decompose a successful LLM generation into
       // whichever labelled sections and assessment items it actually
       // contains and persist each as a DRAFT for future reuse. Fire-and-
@@ -2744,8 +2770,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const { advanceConversationState, repliesWithQuestion, isPriorKnowledgeProbe } = await import('@/lib/teaching/conversationState')
           const { isDontKnowSignal } = await import('@/lib/teaching/recoveryGuard')
           const { enforceStance } = await import('@/lib/teaching/stanceEnforcement')
+          const askedQuestionThisTurn = repliesWithQuestion(cleanText)
+          // Turn Parity Observer: compare what the server decided against
+          // what the LLM actually rendered. Measurement only — no blocking.
+          const parityViolationThisTurn = !!(
+            evidenceMoveHoisted === 'ask' && !askedQuestionThisTurn
+          )
           conversationStateAfterTurnHoisted = advanceConversationState(conversationStateHoisted, {
-            askedQuestion: repliesWithQuestion(cleanText),
+            askedQuestion: askedQuestionThisTurn,
             signalCorrect: teachingSignal?.correctness ?? null,
             recoveryFired: recoveryKeyHoisted !== null,
             learnerRequest: learnerRequestHoisted,
@@ -2754,10 +2786,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             strategyUsed: selectedStrategyHoisted ?? undefined,
             signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
             dontKnowSignal: isDontKnowSignal(recoveryKeyHoisted),
-            // QL-3: an explicit "explain rather than keep asking" directive is
-            // exactly recoveryGuard's too_many_questions family; it suppresses
-            // ASK for several turns, not just this one.
             learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
+            signalVerificationStatus: signalVerificationStatusHoisted,
+            parityViolation: parityViolationThisTurn,
           })
 
           // Loop 2: advance narrative state with this turn's evidence
@@ -3459,9 +3490,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           } else if (conversationStateHoisted) {
             const { advanceConversationState, repliesWithQuestion, isPriorKnowledgeProbe } = await import('@/lib/teaching/conversationState')
             const { isDontKnowSignal } = await import('@/lib/teaching/recoveryGuard')
+            const fallbackAskedQ = repliesWithQuestion(cleanText)
             Object.assign(conversationStateUpdate, {
               conversationState: advanceConversationState(conversationStateHoisted, {
-                askedQuestion: repliesWithQuestion(cleanText),
+                askedQuestion: fallbackAskedQ,
                 signalCorrect: teachingSignal?.correctness ?? null,
                 recoveryFired: recoveryKeyHoisted !== null,
                 learnerRequest: learnerRequestHoisted,
@@ -3470,6 +3502,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
                 dontKnowSignal: isDontKnowSignal(recoveryKeyHoisted),
                 learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
+                signalVerificationStatus: signalVerificationStatusHoisted,
+                parityViolation: !!(evidenceMoveHoisted === 'ask' && !fallbackAskedQ),
               }),
             })
           }
