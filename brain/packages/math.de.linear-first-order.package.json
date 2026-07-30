@@ -1,0 +1,419 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.linear-first-order-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.linear-first-order",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b5293e787215f45d96f012177c634c55e8f38f77db45e267433653722962181c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.linear-first-order.md": "sha256:4f9cffb00f6ed7b1b0d94d89f18366871067b99b75fb771bb7766f93b4bea068"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.de.linear-first-order",
+    "name": "Linear First-Order ODE",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.de.first-order-ode",
+      "math.de.ode-linearity",
+      "math.calc.u-substitution"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.linear-first-order-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.linear-first-order (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.linear-first-order.md": "sha256:4f9cffb00f6ed7b1b0d94d89f18366871067b99b75fb771bb7766f93b4bea068"
+      },
+      "contentHash": "sha256:1522ccad7c6482a16ef365fca644060706908d7f260e7bf346b60094093bb233",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.linear-first-order.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.linear-first-order.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.linear-first-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.linear-first-order\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.linear-first-order.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.linear-first-order.md#TA-2 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.linear-first-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.linear-first-order\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.linear-first-order.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.linear-first-order.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.linear-first-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.linear-first-order\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.linear-first-order.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.linear-first-order.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.linear-first-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.linear-first-order\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.linear-first-order.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.linear-first-order.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.linear-first-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.linear-first-order\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.linear-first-order.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.linear-first-order.md#TA-6 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.linear-first-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.linear-first-order\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.linear-first-order.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.linear-first-order.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.linear-first-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.linear-first-order\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.linear-first-order.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.linear-first-order.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.linear-first-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.linear-first-order\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.linear-first-order/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.linear-first-order",
+      "title": "Learning Objective",
+      "content": "The student identifies a first-order linear ODE of the form dy/dx + P(x)y = Q(x); computes the integrating factor μ(x) = exp(∫P(x)dx); multiplies both sides by μ to obtain (μy)' = μQ(x); integrates both sides to obtain the general solution y = (1/μ)∫μQ dx + C/μ; applies initial conditions to determine the particular solution; and identifies when the homogeneous equation (Q=0) has a simpler exponential solution.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.linear-first-order.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.linear-first-order/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.linear-first-order",
+      "title": "INTEGRATING-FACTOR-MUST-INCLUDE-CONSTANT",
+      "content": "| MC-1 | INTEGRATING-FACTOR-MUST-INCLUDE-CONSTANT | Student writes μ(x) = Ce^{∫P dx} and carries C throughout, creating confusion about which C is from the integrating factor and which is from the integration of both sides | Type 5 — instruction-induced (students know indefinite integrals include a +C; they don't realize that for the integrating factor, any valid antiderivative works — the constant of integration in μ is absorbed into the final arbitrary constant C, so the simplest choice is to set it to zero) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.linear-first-order.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.de.linear-first-order/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.linear-first-order",
+      "title": "FORGETTING-TO-DIVIDE-BY-MU-AT-THE-END",
+      "content": "| MC-2 | FORGETTING-TO-DIVIDE-BY-MU-AT-THE-END | Student correctly computes ∫μQ dx but writes y = ∫μQ dx + C instead of y = (1/μ)(∫μQ dx + C), forgetting to divide by μ when isolating y | Type 3 — language contamination (the step (μy)' = μQ is visually presented as a multiplication, not a composition; students solve for μy correctly but then forget the y= μy/μ step, seeing it as \"already solved\") |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.linear-first-order.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.de.linear-first-order/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.linear-first-order",
+      "title": "MISIDENTIFYING-THE-STANDARD-FORM",
+      "content": "| MC-3 | MISIDENTIFYING-THE-STANDARD-FORM | Student tries to apply the integrating factor method to dy/dx = P(x)y + Q(x) (wrong sign convention) or to a Bernoulli equation, getting the wrong μ | Type 1 — overgeneralisation (the integrating factor method is learned in one form; students apply it to any equation with a y-term on the right, not checking whether the equation is actually in dy/dx + P(x)y = Q(x) form with P, Q functions of x only) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.linear-first-order.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.linear-first-order/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.linear-first-order",
+      "title": "CORRECT → \"Standard form: dy/dx + P(x)y = Q(x). Integrating factor: μ=e^{∫P dx}. Multiply, integrate: μy=∫μQ dx+C. Divide by μ.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Standard form: dy/dx + P(x)y = Q(x). Integrating factor: μ=e^{∫P dx}. Multiply, integrate: μy=∫μQ dx+C. Divide by μ.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.linear-first-order.md",
+        "startLine": 70,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.de.linear-first-order/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.linear-first-order",
+      "title": "PARTIAL (MC-1: constant in μ) → \"For the integrating factor, ANY antiderivative of P works. If you write μ=Ce^{∫P dx}, then dividing by μ gives y=(C₁e^{∫P dx})⁻¹(∫μQ dx+C₂)/C — two constants multiply and combine into one. The convention is: set the constant in ∫P dx to zero, giving the simplest μ=e^{∫P dx}. The final arbitrary constant comes from integrating μQ.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (MC-1: constant in μ) → \\\"For the integrating factor, ANY antiderivative of P works. If you write μ=Ce^{∫P dx}, then dividing by μ gives y=(C₁e^{∫P dx})⁻¹(∫μQ dx+C₂)/C — two constants multiply and combine into one. The convention is: set the constant in ∫P dx to zero, giving the simplest μ=e^{∫P dx}. The final arbitrary constant comes from integrating μQ.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.linear-first-order.md",
+        "startLine": 71,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "math.de.linear-first-order/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.linear-first-order",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.linear-first-order.md",
+        "startLine": 72,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "math.de.linear-first-order/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.linear-first-order",
+      "title": "NO_RESPONSE → \"dy/dx − 3y = 6. Standard form: dy/dx + (−3)y = 6. P=−3, Q=6. μ=e^{−3x}. (e^{−3x}y)'=6e^{−3x}. Integrate: e^{−3x}y=−2e^{−3x}+C. Divide: y=−2+Ce^{3x}. Check: y'=3Ce^{3x}; y'−3y=3Ce^{3x}−3(−2+Ce^{3x})=6. ✓\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"dy/dx − 3y = 6. Standard form: dy/dx + (−3)y = 6. P=−3, Q=6. μ=e^{−3x}. (e^{−3x}y)'=6e^{−3x}. Integrate: e^{−3x}y=−2e^{−3x}+C. Divide: y=−2+Ce^{3x}. Check: y'=3Ce^{3x}; y'−3y=3Ce^{3x}−3(−2+Ce^{3x})=6. ✓\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.linear-first-order.md",
+        "startLine": 73,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "math.de.linear-first-order/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.linear-first-order",
+      "title": "CORRECT → \"Homogeneous: y=C/μ=Ce^{−∫P dx}. Integrating factor works for all Q (including Q=0). Bernoulli converts to linear.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Homogeneous: y=C/μ=Ce^{−∫P dx}. Integrating factor works for all Q (including Q=0). Bernoulli converts to linear.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.linear-first-order.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.de.linear-first-order/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.linear-first-order",
+      "title": "PARTIAL (MC-2: forgot to divide by μ) → \"After integrating: μy=∫μQ dx+C. That's μy, not y. Divide both sides by μ(x) to get y=(1/μ(x))∫μQ dx+C/μ(x). The C/μ(x) term gives the homogeneous solution; the integral gives the particular solution.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (MC-2: forgot to divide by μ) → \\\"After integrating: μy=∫μQ dx+C. That's μy, not y. Divide both sides by μ(x) to get y=(1/μ(x))∫μQ dx+C/μ(x). The C/μ(x) term gives the homogeneous solution; the integral gives the particular solution.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.linear-first-order.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.de.linear-first-order/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.linear-first-order",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.linear-first-order.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.de.linear-first-order/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.linear-first-order",
+      "title": "NO_RESPONSE → \"t dy/dt + 2y = t², y(1)=0. Divide by t: dy/dt + (2/t)y = t. P=2/t, Q=t. μ=e^{2ln t}=t². (t²y)'=t²·t=t³. Integrate: t²y=t⁴/4+C. Divide: y=t²/4+C/t². Apply y(1)=0: 0=1/4+C → C=−1/4. Solution: y=t²/4−1/(4t²).\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"t dy/dt + 2y = t², y(1)=0. Divide by t: dy/dt + (2/t)y = t. P=2/t, Q=t. μ=e^{2ln t}=t². (t²y)'=t²·t=t³. Integrate: t²y=t⁴/4+C. Divide: y=t²/4+C/t². Apply y(1)=0: 0=1/4+C → C=−1/4. Solution: y=t²/4−1/(4t²).\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.linear-first-order.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.de.linear-first-order/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.linear-first-order",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Solve: dy/dx + (1/x)y = x², x>0. Find the general solution and the particular solution with y(1) = 1.\n2. Solve: dy/dx − y tan x = sec x. (Use μ = e^{−∫tan x dx} = cos x.)\n3. Solve: dy/dx + 2xy = 2x. (Hint: Q=2x=P·x/x·x — but use the integrating factor method systematically, not guessing.)\n4. Convert the Bernoulli equation dy/dx − y = y³ to a linear ODE via v = y^{−2}; then solve using the integrating factor method.\n5. A mixing tank initially contains 100 L of pure water. Brine with 0.5 kg/L flows in at 2 L/min; the well-mixed solution drains at 2 L/min. The salt amount y(t) satisfies dy/dt + (2/100)y = 0.5·2. Solve the IVP with y(0) = 0 and find the long-run salt concentration.\n\n**P55 — Reflect & Consolidate:** \"Standard form: dy/dx + P(x)y = Q(x). Integrating factor: μ=e^{∫P dx} (no constant in exponent). Multiply: (μy)'=μQ. Integrate: μy=∫μQ dx+C. Divide: y=(1/μ)(∫μQ dx+C). One constant C. Bernoulli converts to linear.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) The integrating factor approach generalises to linear systems: d**x**/dt = A(t)**x** + **b**(t). For a 1D system this is exactly the scalar linear ODE. For 2D, the matrix exponential e^{∫A dt} plays the role of μ. What must A(t) satisfy for e^{∫A dt} to be a valid integrating factor matrix? (b) Sturm-Liouville theory: the self-adjoint form is d/dx[p(x)y'] + q(x)y = λw(x)y. The weight function w(x) plays a role analogous to the integrating factor for converting the equation to self-adjoint form. What property does the eigensolution set have that makes it useful for expanding arbitrary functions? (c) The method of integrating factors in thermodynamics: an inexact differential δQ is converted to an exact differential dS = δQ/T (entropy) via the integrating factor 1/T (temperature). What is the mathematical condition for an inexact differential form P dx + Q dy to admit an integrating factor μ(x,y)?\n\n**P75 — Mastery Assessment:**\n\"(a) Solve dy/dx + (2/x)y = eˣ/x² for x>0 with y(1) = 0. (b) A particle moves with velocity v(t) satisfying dv/dt + (b/m)v = g where b>0 (drag coefficient), m (mass), g (gravity). This is a linear first-order ODE for v. Solve it with v(0)=0 (starts from rest). What is the terminal velocity as t→∞? (c) For the equation xdy/dx = y + x (rewrite in standard form first), find the general solution and the envelope of the family of particular solutions. (d) The equation dy/dx + P(x)y = Q(x) has two particular solutions y₁(x) and y₂(x). Show that y₁ − y₂ is a solution of the homogeneous equation dy/dx + P(x)y = 0. Why is this?\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW integrating factor construction and the divide-by-μ step\n- Score ≤ 3/5 → PREREQUISITE GAP in math.de.first-order-ode or math.calc.u-substitution; reassign\n\n**P78 — Completion:** Linear First-Order ODE certified. Student identifies standard form; computes integrating factor correctly; multiplies, integrates, and divides by μ; applies initial conditions; handles variable-coefficient cases.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.linear-first-order.md",
+        "startLine": 102,
+        "endLine": 126
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

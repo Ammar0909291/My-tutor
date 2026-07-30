@@ -1,0 +1,588 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.homogeneous-ode-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.homogeneous-ode",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a73870c4c73714ad7a9773a0f0e280ca1fcdc9c4a3e21b56349bde0f36e73ea8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.homogeneous-ode.md": "sha256:cbfec3591bdf1082a1d7a355b989e33ac02685817432e00b809adc9317c0aded"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 13,
+      "mastery_probe": 1
+    },
+    "ruleCount": 13
+  },
+  "concept": {
+    "conceptId": "math.de.homogeneous-ode",
+    "name": "Homogeneous ODE",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.de.first-order-ode",
+      "math.de.separable"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.homogeneous-ode-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.homogeneous-ode (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.homogeneous-ode.md": "sha256:cbfec3591bdf1082a1d7a355b989e33ac02685817432e00b809adc9317c0aded"
+      },
+      "contentHash": "sha256:30ae4ad0950452635867ea2bfdd58453e002cd5038c90b1613f25c89ad144159",
+      "ruleCount": 13,
+      "bandCounts": {
+        "3": 13
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.homogeneous-ode.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.homogeneous-ode.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.homogeneous-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.homogeneous-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.homogeneous-ode.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.homogeneous-ode.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.homogeneous-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.homogeneous-ode\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.homogeneous-ode.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.homogeneous-ode.md#TA-11 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.homogeneous-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.homogeneous-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.homogeneous-ode.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.homogeneous-ode.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.homogeneous-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.homogeneous-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.homogeneous-ode.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.homogeneous-ode.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.homogeneous-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.homogeneous-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.homogeneous-ode.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.homogeneous-ode.md#TA-2 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.homogeneous-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.homogeneous-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.homogeneous-ode.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.homogeneous-ode.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.homogeneous-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.homogeneous-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.homogeneous-ode.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.homogeneous-ode.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.homogeneous-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.homogeneous-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.homogeneous-ode.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.homogeneous-ode.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.homogeneous-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.homogeneous-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.homogeneous-ode.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.homogeneous-ode.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.homogeneous-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.homogeneous-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.homogeneous-ode.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.homogeneous-ode.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.homogeneous-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.homogeneous-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.homogeneous-ode.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.homogeneous-ode.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.homogeneous-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.homogeneous-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.homogeneous-ode.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.homogeneous-ode.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.homogeneous-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.homogeneous-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.homogeneous-ode/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.homogeneous-ode",
+      "title": "Learning Objective",
+      "content": "The student identifies a homogeneous first-order ODE of the form dy/dx = f(y/x) (or equivalently M(x,y)dx + N(x,y)dy = 0 where M and N are homogeneous functions of the same degree); applies the substitution v = y/x (so y = vx and dy/dx = v + x dv/dx) to reduce the equation to a separable ODE in v and x; solves the separable ODE; and converts back to y using y = vx.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.homogeneous-ode.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.homogeneous-ode/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.homogeneous-ode",
+      "title": "HOMOGENEOUS-MEANS-ZERO-RIGHT-SIDE",
+      "content": "| MC-1 | HOMOGENEOUS-MEANS-ZERO-RIGHT-SIDE | Student confuses \"homogeneous first-order ODE\" (dy/dx = f(y/x), a structure condition) with \"homogeneous linear ODE\" (dy/dx + P(x)y = 0, zero right side); applies the wrong technique to the wrong type | Type 3 — language contamination (\"homogeneous\" means \"same throughout\" in both cases, but the mathematical definition differs radically between nonlinear first-order and linear ODEs; this ambiguity is genuine — both uses appear in standard textbooks) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.homogeneous-ode.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.de.homogeneous-ode/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.homogeneous-ode",
+      "title": "FORGETTING-PRODUCT-RULE-IN-DY-DX",
+      "content": "| MC-2 | FORGETTING-PRODUCT-RULE-IN-DY-DX | Student substitutes y = vx but differentiates it as dy/dx = dv/dx (forgetting the product rule contribution x·dv/dx + v); gets the wrong reduced ODE | Type 5 — instruction-induced (students who just learned chain-rule-only substitutions (u-substitution) apply the same pattern here; the product rule for y = vx is dy/dx = v + x·dv/dx, which is NOT just dv/dx) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.homogeneous-ode.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.de.homogeneous-ode/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.homogeneous-ode",
+      "title": "M-AND-N-MUST-HAVE-DEGREE-ZERO",
+      "content": "| MC-3 | M-AND-N-MUST-HAVE-DEGREE-ZERO | Student thinks the test for homogeneity requires M and N to each have degree zero, rather than the same degree as each other | Type 1 — overgeneralisation (for dy/dx = f(y/x), the ratio N/M (or M/N) must depend on y/x only; this is equivalent to M and N being homogeneous of the SAME degree — not necessarily degree zero) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.homogeneous-ode.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.homogeneous-ode/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.homogeneous-ode",
+      "title": "CORRECT → \"Homogeneous ODE: dy/dx=f(y/x). Substitute v=y/x, dy/dx=v+x dv/dx. Separable in v and x. Solve, back-substitute y=vx.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Homogeneous ODE: dy/dx=f(y/x). Substitute v=y/x, dy/dx=v+x dv/dx. Separable in v and x. Solve, back-substitute y=vx.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.homogeneous-ode.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.de.homogeneous-ode/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.homogeneous-ode",
+      "title": "PARTIAL (MC-2: dy/dx = dv/dx) → \"y = vx is a product of two functions of x. Differentiate using the product rule: dy/dx = d/dx[v·x] = (dv/dx)·x + v·(dx/dx) = x dv/dx + v. The v term (from differentiating x = 1) is essential — it's not just dv/dx.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (MC-2: dy/dx = dv/dx) → \\\"y = vx is a product of two functions of x. Differentiate using the product rule: dy/dx = d/dx[v·x] = (dv/dx)·x + v·(dx/dx) = x dv/dx + v. The v term (from differentiating x = 1) is essential — it's not just dv/dx.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.homogeneous-ode.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.de.homogeneous-ode/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.homogeneous-ode",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.homogeneous-ode.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.de.homogeneous-ode/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.homogeneous-ode",
+      "title": "NO_RESPONSE → \"dy/dx = (x+y)/x = 1 + y/x = 1 + v. Substitute: v + x dv/dx = 1+v → x dv/dx = 1 → dv = dx/x → v = ln|x|+C. Back-substitute: y/x = ln|x|+C → y = x(ln|x|+C).\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"dy/dx = (x+y)/x = 1 + y/x = 1 + v. Substitute: v + x dv/dx = 1+v → x dv/dx = 1 → dv = dx/x → v = ln|x|+C. Back-substitute: y/x = ln|x|+C → y = x(ln|x|+C).\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.homogeneous-ode.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.de.homogeneous-ode/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.homogeneous-ode",
+      "title": "\"Homogeneous first-order ODE\" (this concept): dy/dx = f(y/x). Nonlinear. Solved by v = y/x.",
+      "content": "{\"id\":\"TA-5\",\"title\":\"\\\"Homogeneous first-order ODE\\\" (this concept): dy/dx = f(y/x). Nonlinear. Solved by v = y/x.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.homogeneous-ode.md",
+        "startLine": 71,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "math.de.homogeneous-ode/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.homogeneous-ode",
+      "title": "\"Homogeneous linear ODE\" (second-order and higher): dy/dx + P(x)y = 0. Linear. Solved by integrating factor (first order) or characteristic equation (second order).",
+      "content": "{\"id\":\"TA-6\",\"title\":\"\\\"Homogeneous linear ODE\\\" (second-order and higher): dy/dx + P(x)y = 0. Linear. Solved by integrating factor (first order) or characteristic equation (second order).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.homogeneous-ode.md",
+        "startLine": 72,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "math.de.homogeneous-ode/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.homogeneous-ode",
+      "title": "Write dy/dx = M(x,y)/N(x,y).",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Write dy/dx = M(x,y)/N(x,y).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.homogeneous-ode.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.de.homogeneous-ode/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.homogeneous-ode",
+      "title": "Check: if you substitute (x,y) → (tx,ty), does dy/dx stay the same? (i.e., does the ratio M(tx,ty)/N(tx,ty) = M(x,y)/N(x,y)?) If yes, it's homogeneous of this type.",
+      "content": "{\"id\":\"TA-8\",\"title\":\"Check: if you substitute (x,y) → (tx,ty), does dy/dx stay the same? (i.e., does the ratio M(tx,ty)/N(tx,ty) = M(x,y)/N(x,y)?) If yes, it's homogeneous of this type.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.homogeneous-ode.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.de.homogeneous-ode/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.homogeneous-ode",
+      "title": "Equivalent: can you write dy/dx purely as a function of y/x?",
+      "content": "{\"id\":\"TA-9\",\"title\":\"Equivalent: can you write dy/dx purely as a function of y/x?\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.homogeneous-ode.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.de.homogeneous-ode/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.homogeneous-ode",
+      "title": "CORRECT → \"Two meanings of 'homogeneous': (1) dy/dx=f(y/x), nonlinear → v=y/x; (2) linear with zero right side → different method. Test: does scaling (x,y)→(tx,ty) leave dy/dx unchanged?\" → Gate (P91)",
+      "content": "{\"id\":\"TA-10\",\"title\":\"CORRECT → \\\"Two meanings of 'homogeneous': (1) dy/dx=f(y/x), nonlinear → v=y/x; (2) linear with zero right side → different method. Test: does scaling (x,y)→(tx,ty) leave dy/dx unchanged?\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.homogeneous-ode.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.de.homogeneous-ode/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.homogeneous-ode",
+      "title": "PARTIAL (MC-1: confused with zero right side) → \"Homogeneous first-order ODE means dy/dx = f(y/x) — the right side is a function of the RATIO y/x. This is NOT the same as 'homogeneous linear ODE' (zero right side, like dy/dx+Py=0). For instance, dy/dx = y/x is a homogeneous first-order ODE (f(v)=v) AND also a linear ODE with zero right side — but dy/dx = (x+y)/x is only homogeneous first-order (f(v)=1+v), not linear.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"PARTIAL (MC-1: confused with zero right side) → \\\"Homogeneous first-order ODE means dy/dx = f(y/x) — the right side is a function of the RATIO y/x. This is NOT the same as 'homogeneous linear ODE' (zero right side, like dy/dx+Py=0). For instance, dy/dx = y/x is a homogeneous first-order ODE (f(v)=v) AND also a linear ODE with zero right side — but dy/dx = (x+y)/x is only homogeneous first-order (f(v)=1+v), not linear.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.homogeneous-ode.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.de.homogeneous-ode/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.homogeneous-ode",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.homogeneous-ode.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.de.homogeneous-ode/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.homogeneous-ode",
+      "title": "NO_RESPONSE → \"Check: is dy/dx = (y²−x²)/(xy) homogeneous? Replace x by tx, y by ty: (t²y²−t²x²)/(tx·ty)=(t²(y²−x²))/(t²xy)=(y²−x²)/(xy). YES, it's homogeneous (degree 0 ratio). Substitute: v + x dv/dx = (v²−1)/v. x dv/dx = (v²−1)/v − v = (v²−1−v²)/v = −1/v. Separate: v dv = −dx/x. v²/2=−ln|x|+C. (y/x)²/2+ln|x|=C.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-13\",\"title\":\"NO_RESPONSE → \\\"Check: is dy/dx = (y²−x²)/(xy) homogeneous? Replace x by tx, y by ty: (t²y²−t²x²)/(tx·ty)=(t²(y²−x²))/(t²xy)=(y²−x²)/(xy). YES, it's homogeneous (degree 0 ratio). Substitute: v + x dv/dx = (v²−1)/v. x dv/dx = (v²−1)/v − v = (v²−1−v²)/v = −1/v. Separate: v dv = −dx/x. v²/2=−ln|x|+C. (y/x)²/2+ln|x|=C.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.homogeneous-ode.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.de.homogeneous-ode/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.homogeneous-ode",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Solve: dy/dx = (y² + xy)/x². (Check homogeneity, substitute v=y/x, separate, solve.)\n2. Solve: (x² + 2xy)dy = (y² + 2xy)dx. (Rearrange to dy/dx=..., verify homogeneous, substitute.)\n3. Solve the IVP: x dy − y dx = √(x²+y²) dx, y(1) = 0.\n4. Show that any separable ODE dy/dx = g(x)h(y) that is also homogeneous (dy/dx = f(y/x)) must satisfy: g(x) = c/x and h(y) = f(y/x)/(c/x) for some constant c. What family of ODEs does this describe?\n5. The ODE dy/dx = (ax + by)/(cx + dy) (a, b, c, d constants) is homogeneous. Solve it generally by substituting v = y/x. (Your answer will involve arctan or ln, depending on the discriminant of the denominator.)\n\n**P55 — Reflect & Consolidate:** \"Homogeneous first-order ODE: dy/dx = f(y/x). Test: M(tx,ty)=tⁿM, N(tx,ty)=tⁿN. Substitute v=y/x, so dy/dx=v+x dv/dx. Separable ODE in v,x. Solve, back-substitute y=vx. Distinct from 'homogeneous linear ODE'.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) The Euler-Cauchy ODE: x²y'' + axy' + by = 0 is solved by the substitution x = eᵗ (or equivalently y = xᵐ). How does the homogeneous structure of this ODE — all terms have the same total degree (2) in x and y and its derivatives — motivate this substitution, by analogy with the v=y/x substitution? (b) The Clairaut equation: y = xy' + f(y') is a first-order ODE. Differentiate both sides with respect to x. Show that the general solution consists of a family of lines y = Cx + f(C), and that there is also a singular solution obtained by eliminating p=y' from y=xp+f(p) and y=xp'+f'(p')·0=x+f'(p)·p'. (c) Scale-invariant problems in physics: the heat equation boundary layer has self-similar solutions u(x,t) = g(x/√t). Explain how this is analogous to the v = y/x substitution for homogeneous ODEs.\n\n**P75 — Mastery Assessment:**\n\"(a) Solve: (x²y + y³)dx + (x³ + xy²)dy = 0. (Verify homogeneous, substitute, separate, solve.) (b) A ray of light in a medium with refractive index n(x,y) = 1/y satisfies the homogeneous ODE dy/dx = y/x + √((y/x)²−1). Solve this ODE. (The solution should be a family of circles.) (c) The orbit equation dr/dθ = r·f(r·e_θ) in polar coordinates, where f is homogeneous of degree 0, can be converted to a separable ODE via u = 1/r. Explain the structural analogy with the v = y/x substitution. (d) For the ODE dy/dx = (y/x)·g(y/x), identify the general formula for the solution in terms of a single integral, and verify that the special case g(v)=v gives y = Cx (all lines through the origin).\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW the disambiguation from homogeneous linear ODEs and the product-rule differentiation\n- Score ≤ 3/5 → PREREQUISITE GAP in math.de.separable; reassign\n\n**P78 — Completion:** Homogeneous ODE certified. Student identifies the f(y/x) structure; distinguishes from homogeneous linear ODEs; applies v=y/x with correct product-rule differentiation; separates and solves; back-substitutes correctly.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.homogeneous-ode.md",
+        "startLine": 100,
+        "endLine": 124
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

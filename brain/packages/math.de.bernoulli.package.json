@@ -1,0 +1,485 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.bernoulli-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.bernoulli",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7a563959e8515462971de46dbca3acd90477607dca69014840253e78b0891e7f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.bernoulli.md": "sha256:d3dc69c981f72f00884fa5150470d99f169bd2e858374e858d38f487868bf001"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 10,
+      "mastery_probe": 1
+    },
+    "ruleCount": 10
+  },
+  "concept": {
+    "conceptId": "math.de.bernoulli",
+    "name": "Bernoulli ODE",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.de.linear-first-order"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.bernoulli-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.bernoulli (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.bernoulli.md": "sha256:d3dc69c981f72f00884fa5150470d99f169bd2e858374e858d38f487868bf001"
+      },
+      "contentHash": "sha256:23c00bf1ad139ec763c0535e1e712d6bc0d67c950a27a3d498ef989eb50ad049",
+      "ruleCount": 10,
+      "bandCounts": {
+        "3": 10
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.bernoulli.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.bernoulli.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.bernoulli"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.bernoulli\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.bernoulli.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.bernoulli.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.bernoulli"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.bernoulli\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.bernoulli.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.bernoulli.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.bernoulli"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.bernoulli\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.bernoulli.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.bernoulli.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.bernoulli"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.bernoulli\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.bernoulli.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.bernoulli.md#TA-4 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.bernoulli"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.bernoulli\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.bernoulli.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.bernoulli.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.bernoulli"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.bernoulli\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.bernoulli.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.bernoulli.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.bernoulli"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.bernoulli\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.bernoulli.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.bernoulli.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.bernoulli"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.bernoulli\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.bernoulli.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.bernoulli.md#TA-8 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.bernoulli"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.bernoulli\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.bernoulli.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.bernoulli.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.bernoulli"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.bernoulli\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.bernoulli/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.bernoulli",
+      "title": "Learning Objective",
+      "content": "The student identifies a Bernoulli ODE of the form dy/dx + P(x)y = Q(x)yⁿ (n ≠ 0, 1); makes the substitution v = y^{1−n} to transform it into a linear first-order ODE in v; solves that linear ODE using the integrating factor method; and converts back to y.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bernoulli.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.bernoulli/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.bernoulli",
+      "title": "WRONG-EXPONENT-IN-SUBSTITUTION",
+      "content": "| MC-1 | WRONG-EXPONENT-IN-SUBSTITUTION | Student substitutes v = yⁿ instead of v = y^{1−n}, getting a different (wrong) equation | Type 1 — overgeneralisation (the denominator of y^{−n} in the divide-by-yⁿ step makes students think the substitution involves the exponent n directly, not 1−n) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bernoulli.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.de.bernoulli/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.bernoulli",
+      "title": "FORGETTING-THE-1-MINUS-N-FACTOR-IN-DV-DX",
+      "content": "| MC-2 | FORGETTING-THE-1-MINUS-N-FACTOR-IN-DV-DX | Student computes dv/dx = y^{−n}dy/dx (without the (1−n) factor) when differentiating v = y^{1−n}, making the substitution incorrect | Type 5 — instruction-induced (students apply the chain rule but forget the power-rule coefficient: d/dx[y^{1−n}] = (1−n)y^{−n}dy/dx, not y^{−n}dy/dx) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bernoulli.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.de.bernoulli/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.bernoulli",
+      "title": "BERNOULLI-APPLIES-FOR-ALL-N",
+      "content": "| MC-3 | BERNOULLI-APPLIES-FOR-ALL-N | Student attempts the Bernoulli substitution for n=0 or n=1 (which are already linear ODEs not needing this method), or applies it when the right side is Q(x)·f(y) with f not a power function | Type 1 — overgeneralisation (the pattern yⁿ on the right triggers the Bernoulli label; students don't check whether n=0 or n=1, which are excluded cases) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bernoulli.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.bernoulli/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.bernoulli",
+      "title": "n = 0: dy/dx + P(x)y = Q(x) — already linear; solve directly.",
+      "content": "{\"id\":\"TA-1\",\"title\":\"n = 0: dy/dx + P(x)y = Q(x) — already linear; solve directly.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bernoulli.md",
+        "startLine": 43,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "math.de.bernoulli/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.bernoulli",
+      "title": "n = 1: dy/dx + P(x)y = Q(x)y → dy/dx = [Q(x)−P(x)]y — separable; solve directly.",
+      "content": "{\"id\":\"TA-2\",\"title\":\"n = 1: dy/dx + P(x)y = Q(x)y → dy/dx = [Q(x)−P(x)]y — separable; solve directly.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bernoulli.md",
+        "startLine": 44,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.de.bernoulli/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.bernoulli",
+      "title": "CORRECT → \"Bernoulli: n≠0,1. Substitute v=y^{1−n}. ODE becomes linear: dv/dx+(1−n)Pv=(1−n)Q. Solve, convert back via y=v^{1/(1−n)}.\" → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"CORRECT → \\\"Bernoulli: n≠0,1. Substitute v=y^{1−n}. ODE becomes linear: dv/dx+(1−n)Pv=(1−n)Q. Solve, convert back via y=v^{1/(1−n)}.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bernoulli.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.de.bernoulli/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.bernoulli",
+      "title": "PARTIAL (MC-2: forgot 1−n factor) → \"When differentiating v=y^{1−n}: by the chain rule, dv/dx=(1−n)y^{(1−n)−1}·dy/dx=(1−n)y^{−n}·dy/dx. The factor (1−n) is essential. After dividing the ODE by yⁿ, you have y^{−n}dy/dx=(1/(1−n))dv/dx, so the substitution gives (1/(1−n))dv/dx+Pv=Q. Don't lose the (1−n) or you'll get the wrong linear ODE.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"PARTIAL (MC-2: forgot 1−n factor) → \\\"When differentiating v=y^{1−n}: by the chain rule, dv/dx=(1−n)y^{(1−n)−1}·dy/dx=(1−n)y^{−n}·dy/dx. The factor (1−n) is essential. After dividing the ODE by yⁿ, you have y^{−n}dy/dx=(1/(1−n))dv/dx, so the substitution gives (1/(1−n))dv/dx+Pv=Q. Don't lose the (1−n) or you'll get the wrong linear ODE.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bernoulli.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.de.bernoulli/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.bernoulli",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-5\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bernoulli.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.de.bernoulli/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.bernoulli",
+      "title": "NO_RESPONSE → \"dy/dx + (1/x)y = x²y³. n=3. v=y^{1−3}=y^{−2}. dv/dx=−2y^{−3}dy/dx. Divide by y³: y^{−3}dy/dx+(1/x)y^{−2}=x². Substitute: (−1/2)dv/dx+(1/x)v=x². Multiply by −2: dv/dx−(2/x)v=−2x². Linear! μ=e^{∫−2/x dx}=x^{−2}. (x^{−2}v)'=−2x^{−2}·x²=−2. x^{−2}v=−2x+C. v=x²(C−2x). Convert: 1/y²=Cx²−2x³.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-6\",\"title\":\"NO_RESPONSE → \\\"dy/dx + (1/x)y = x²y³. n=3. v=y^{1−3}=y^{−2}. dv/dx=−2y^{−3}dy/dx. Divide by y³: y^{−3}dy/dx+(1/x)y^{−2}=x². Substitute: (−1/2)dv/dx+(1/x)v=x². Multiply by −2: dv/dx−(2/x)v=−2x². Linear! μ=e^{∫−2/x dx}=x^{−2}. (x^{−2}v)'=−2x^{−2}·x²=−2. x^{−2}v=−2x+C. v=x²(C−2x). Convert: 1/y²=Cx²−2x³.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bernoulli.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.de.bernoulli/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.bernoulli",
+      "title": "CORRECT → \"Logistic = Bernoulli with n=2. Torricelli = Bernoulli with n=1/2. Pattern: right side = Q(x)·yⁿ with P,Q functions of x.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-7\",\"title\":\"CORRECT → \\\"Logistic = Bernoulli with n=2. Torricelli = Bernoulli with n=1/2. Pattern: right side = Q(x)·yⁿ with P,Q functions of x.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bernoulli.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.de.bernoulli/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.bernoulli",
+      "title": "PARTIAL (MC-3: applies to n=0 or n=1, or wrong right side) → \"n=0: dy/dx+Py=Q — already linear (Q times y⁰=Q times 1=Q). n=1: dy/dx+Py=Qy → dy/dx=(Q−P)y — separable. Neither needs the Bernoulli substitution. Also, the right side must be Q(x)·yⁿ — a power of y with a coefficient depending only on x; if it's Q(x,y) in a more complex form, check whether another method applies first.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-8\",\"title\":\"PARTIAL (MC-3: applies to n=0 or n=1, or wrong right side) → \\\"n=0: dy/dx+Py=Q — already linear (Q times y⁰=Q times 1=Q). n=1: dy/dx+Py=Qy → dy/dx=(Q−P)y — separable. Neither needs the Bernoulli substitution. Also, the right side must be Q(x)·yⁿ — a power of y with a coefficient depending only on x; if it's Q(x,y) in a more complex form, check whether another method applies first.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bernoulli.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.de.bernoulli/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.bernoulli",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-9\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bernoulli.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.de.bernoulli/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.bernoulli",
+      "title": "NO_RESPONSE → \"dP/dt = rP − aP² (a=r/K). Rewrite: dP/dt − rP = −aP². Bernoulli with n=2, P_coeff=−r, Q=−a. v=P^{−1}: dv/dt+rv=a. Integrating factor: e^{rt}. (e^{rt}v)'=ae^{rt}. v=a/r+Ce^{−rt}. 1/P=a/r+Ce^{−rt}. P=r/(a+Cre^{−rt})=K/(1+Ke/P₀·e^{−rt}).\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"NO_RESPONSE → \\\"dP/dt = rP − aP² (a=r/K). Rewrite: dP/dt − rP = −aP². Bernoulli with n=2, P_coeff=−r, Q=−a. v=P^{−1}: dv/dt+rv=a. Integrating factor: e^{rt}. (e^{rt}v)'=ae^{rt}. v=a/r+Ce^{−rt}. 1/P=a/r+Ce^{−rt}. P=r/(a+Cre^{−rt})=K/(1+Ke/P₀·e^{−rt}).\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bernoulli.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.de.bernoulli/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.bernoulli",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Solve: dy/dx + y = y². (Logistic-type. Identify n, make the substitution, solve the linear ODE, convert back.)\n2. Solve: dy/dx − (4/x)y = x√y, for x > 0. (Identify n = 1/2. Let v = √y.)\n3. Solve the Bernoulli equation dv/dx + v = e^x v^{1/2}. Convert, solve, convert back.\n4. A population P(t) satisfies dP/dt = 0.5P − 0.001P². (a) Identify this as Bernoulli with n=2. (b) What is the carrying capacity K? (c) Solve with P(0)=100.\n5. Show that the substitution v = y^{1−n} converts the general Bernoulli ODE dy/dx + P(x)y = Q(x)yⁿ into the linear ODE dv/dx + (1−n)P(x)v = (1−n)Q(x). (Derive the transformation algebraically.)\n\n**P55 — Reflect & Consolidate:** \"Bernoulli ODE: dy/dx + Py = Qyⁿ, n≠0,1. Substitute v=y^{1−n}: dv/dx+(1−n)Pv=(1−n)Q (linear). Solve for v using integrating factor. Convert back: y=v^{1/(1−n)}. Excluded: n=0 (linear), n=1 (separable).\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) The Riccati equation dy/dx = P(x) + Q(x)y + R(x)y² is more general than Bernoulli (a particular solution y₁ must be known; then v = 1/(y−y₁) converts it to a linear ODE). How does the Riccati equation reduce to a Bernoulli equation when P(x) = 0? (b) In fluid dynamics, the boundary layer equation contains a Bernoulli-type nonlinear term. Explain qualitatively why a substitution v=y^{1−n} might linearise such equations. (c) Ordinary Bernoulli differential equation vs. Bernoulli's principle in fluid mechanics: both are named after the same family but are mathematically unrelated. Bernoulli's principle P + ½ρv² + ρgh = const arises from integrating Euler's equation (a PDE, not an ODE). Classify Euler's equation for an inviscid fluid.\n\n**P75 — Mastery Assessment:**\n\"(a) Solve: t dy/dt + y = y² ln t, t > 0. (Rewrite in standard form; identify n; apply the substitution.) (b) A tank contains a chemical that decays according to dy/dt = −ky + ay^{3/2}, where k, a > 0 are constants. This is a Bernoulli ODE. Find the general solution. (c) Show that the substitution v = y^{1−n} transforms Bernoulli into a linear ODE, and then show that the general solution of the Bernoulli ODE can be written as y^{1−n} = (1−n)e^{−(1−n)∫P dx} ∫Q(x)e^{(1−n)∫P dx} dx + C·e^{−(1−n)∫P dx}. (d) For n > 1, does the Bernoulli ODE have a constant solution? Find it.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW the chain-rule differentiation of v = y^{1−n} and the (1−n) factor\n- Score ≤ 3/5 → PREREQUISITE GAP in math.de.linear-first-order; reassign\n\n**P78 — Completion:** Bernoulli ODE certified. Student identifies Bernoulli form; makes the correct v=y^{1−n} substitution; differentiates correctly including the (1−n) factor; solves the resulting linear ODE; converts back.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bernoulli.md",
+        "startLine": 95,
+        "endLine": 119
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

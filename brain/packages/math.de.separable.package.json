@@ -1,0 +1,418 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.separable-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.separable",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:40fc279699f317a1e00dbbf56b4c2908176ea1381edc13463285a02638473669",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.separable.md": "sha256:8ce067def40311a451a87b26dbb159d3b81cf9a03db4040cc66156e26646ef43"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.de.separable",
+    "name": "Separable ODE",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.de.first-order-ode",
+      "math.calc.definite-integral"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.separable-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.separable (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.separable.md": "sha256:8ce067def40311a451a87b26dbb159d3b81cf9a03db4040cc66156e26646ef43"
+      },
+      "contentHash": "sha256:a81dd315f9c1e56418f582fc33a1b52905b292b4d76b08972ce91a864590b9b5",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.separable.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.separable.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.separable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.separable\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.separable.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.separable.md#TA-2 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.separable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.separable\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.separable.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.separable.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.separable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.separable\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.separable.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.separable.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.separable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.separable\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.separable.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.separable.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.separable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.separable\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.separable.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.separable.md#TA-6 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.separable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.separable\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.separable.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.separable.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.separable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.separable\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.separable.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.separable.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.separable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.separable\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.separable/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.separable",
+      "title": "Learning Objective",
+      "content": "The student identifies a separable ODE of the form dy/dx = g(x)h(y); rewrites it as (1/h(y))dy = g(x)dx; integrates both sides to obtain the implicit general solution; solves for y explicitly when possible; applies initial conditions to determine the particular solution; identifies where the solution may fail to be valid (h(y)=0 → constant solutions; domain of integration); and handles the constant of integration correctly throughout.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.separable.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.separable/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.separable",
+      "title": "TWO-CONSTANTS-FROM-TWO-INTEGRALS",
+      "content": "| MC-1 | TWO-CONSTANTS-FROM-TWO-INTEGRALS | Student writes ∫(1/h(y))dy+C₁=∫g(x)dx+C₂ and carries two constants throughout; doesn't know C₁ and C₂ can be combined into a single constant C=C₂−C₁ | Type 5 — instruction-induced (students learn \"every indefinite integral gets a +C\"; seeing two integrals, they add two constants; the teacher often doesn't emphasise that the difference of two arbitrary constants is one arbitrary constant) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.separable.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.de.separable/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.separable",
+      "title": "FORGETTING-CONSTANT-SOLUTIONS",
+      "content": "| MC-2 | FORGETTING-CONSTANT-SOLUTIONS | Student divides by h(y) without checking whether h(y)=0 gives a valid (constant) solution; misses the equilibrium solution y=y₀ where h(y₀)=0 | Type 5 — instruction-induced (the division step feels routine; students focus on the \"main\" integration and don't return to check y=y₀ as a separate case) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.separable.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.de.separable/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.separable",
+      "title": "SEPARABLE-MEANS-ALWAYS-EXPLICITLY-SOLVABLE",
+      "content": "| MC-3 | SEPARABLE-MEANS-ALWAYS-EXPLICITLY-SOLVABLE | Student assumes the implicit solution H(y)=G(x)+C can always be solved explicitly for y; doesn't know many separable ODEs yield implicit solutions that cannot be further simplified | Type 1 — overgeneralisation (simple examples (y'=xy, y'=y/x, y'=y²) all have explicit solutions; students assume \"solve\" means \"find y=...\") |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.separable.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.separable/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.separable",
+      "title": "CORRECT → \"Separate: (1/h)dy=g dx. Integrate both sides, one constant C. Check h=0 for constant solutions. Apply IC to find C.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Separate: (1/h)dy=g dx. Integrate both sides, one constant C. Check h=0 for constant solutions. Apply IC to find C.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.separable.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.de.separable/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.separable",
+      "title": "PARTIAL (MC-1: two constants) → \"Both indefinite integrals produce a +C, but the two constants combine into one: H(y)+C₁=G(x)+C₂ → H(y)=G(x)+(C₂−C₁). Since C₂−C₁ is an arbitrary constant, we call it C. A first-order ODE has exactly one arbitrary constant in its general solution.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (MC-1: two constants) → \\\"Both indefinite integrals produce a +C, but the two constants combine into one: H(y)+C₁=G(x)+C₂ → H(y)=G(x)+(C₂−C₁). Since C₂−C₁ is an arbitrary constant, we call it C. A first-order ODE has exactly one arbitrary constant in its general solution.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.separable.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.de.separable/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.separable",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.separable.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.de.separable/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.separable",
+      "title": "NO_RESPONSE → \"dy/dx=y/x. Separate: dy/y=dx/x. Integrate: ln|y|=ln|x|+C. Exponentiate: |y|=e^C·|x|=A|x| → y=Ax (includes x=0 case). Check: h(y)=y → y=0 gives y=0=A·0: already included. General solution: y=Cx (C arbitrary).\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"dy/dx=y/x. Separate: dy/y=dx/x. Integrate: ln|y|=ln|x|+C. Exponentiate: |y|=e^C·|x|=A|x| → y=Ax (includes x=0 case). Check: h(y)=y → y=0 gives y=0=A·0: already included. General solution: y=Cx (C arbitrary).\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.separable.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.de.separable/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.separable",
+      "title": "CORRECT → \"Implicit solutions: H(y)=G(x)+C (may not simplify further). Equilibrium solutions: h(y₀)=0. Verify all solutions by substitution.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Implicit solutions: H(y)=G(x)+C (may not simplify further). Equilibrium solutions: h(y₀)=0. Verify all solutions by substitution.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.separable.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.de.separable/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.separable",
+      "title": "PARTIAL (MC-2: forgot constant solutions) → \"Before dividing by h(y), set h(y)=0 and solve: each solution y=y₀ is a constant solution (y'=0, and g(x)·h(y₀)=0 ✓). Check whether these are included in the general solution formula by taking limits of C, or record them separately.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (MC-2: forgot constant solutions) → \\\"Before dividing by h(y), set h(y)=0 and solve: each solution y=y₀ is a constant solution (y'=0, and g(x)·h(y₀)=0 ✓). Check whether these are included in the general solution formula by taking limits of C, or record them separately.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.separable.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.de.separable/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.separable",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.separable.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.de.separable/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.separable",
+      "title": "NO_RESPONSE → \"dy/dx=(1−y)y. Equilibrium: h(y)=y(1−y)=0 → y=0 and y=1. Separate (for y≠0,1): dy/(y(1−y))=dx. Partial fractions: 1/(y(1−y))=1/y+1/(1−y). Integrate: ln|y|−ln|1−y|=x+C → y/(1−y)=Ae^x → y=Ae^x/(1+Ae^x). Check: as A→0, y→0. As A→∞, y→1. Both equilibria are limits of the general solution.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"dy/dx=(1−y)y. Equilibrium: h(y)=y(1−y)=0 → y=0 and y=1. Separate (for y≠0,1): dy/(y(1−y))=dx. Partial fractions: 1/(y(1−y))=1/y+1/(1−y). Integrate: ln|y|−ln|1−y|=x+C → y/(1−y)=Ae^x → y=Ae^x/(1+Ae^x). Check: as A→0, y→0. As A→∞, y→1. Both equilibria are limits of the general solution.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.separable.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.de.separable/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.separable",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Solve the IVP: dy/dx = 3y, y(0) = 2.\n2. Solve: dy/dx = x/y. Find the explicit solution and describe the family of curves.\n3. Solve: dy/dx = (1+y²)/(1+x²). (Separate and use ∫1/(1+u²)du = arctan(u)+C.)\n4. Find all solutions (including equilibrium solutions) of dy/dx = y(2−y). Sketch the solution curves in the xy-plane.\n5. Solve: dy/dx = xy/(x²+1), y(0) = 1. Verify your answer by substituting back.\n\n**P55 — Reflect & Consolidate:** \"Separate: (1/h)dy=g dx. Integrate both sides, ONE constant C. Check h=0 for equilibria. Apply IC for particular solution. Verify by substitution. Implicit solutions are valid answers when explicit form not available.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Logistic equation: dy/dt = ry(1−y/K) (r,K>0). This is separable. Solve it by partial fractions: 1/(y(1−y/K))=1/y+1/(K−y). Show the general solution is y(t)=K/(1+Ae^{−rt}) (logistic curve). Identify the equilibrium solutions. What is the long-run behaviour? (b) Separation of variables for PDEs: the heat equation u_t = k u_{xx} is often solved by assuming u(x,t)=X(x)T(t). Substituting and separating gives T'/kT = X''/X = −λ (a constant). This gives two ODEs: T'+kλT=0 and X''+λX=0. How is this analogous to the ODE separation technique? (c) Bernoulli's principle in fluid dynamics gives (along a streamline) P+½ρv²+ρgh=const. The equation for the velocity of fluid exiting a tank at height h satisfies dh/dt=−A√(2gh)/B (Torricelli's law). Solve this separable ODE for h(t).\n\n**P75 — Mastery Assessment:**\n\"A population of bacteria grows according to dy/dt = ky(M−y) where k=0.001, M=1000 (carrying capacity), and y(0)=50 (initial population). (a) Identify the equilibrium solutions. (b) Solve the ODE (it is separable via partial fractions). (c) Find the particular solution satisfying the initial condition. (d) When does the population reach y=500 (half carrying capacity)? (e) Sketch the solution and describe the long-run behaviour.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW equilibrium solutions and handling of the integration constant\n- Score ≤ 3/5 → PREREQUISITE GAP in math.de.first-order-ode or math.calc.definite-integral; reassign\n\n**P78 — Completion:** Separable ODE certified. Student separates variables; integrates; finds general and particular solutions; identifies equilibria; handles implicit solutions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.separable.md",
+        "startLine": 103,
+        "endLine": 127
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
