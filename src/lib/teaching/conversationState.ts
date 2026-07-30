@@ -836,11 +836,11 @@ export interface TurnDirectiveParams {
 
 const PHASE_FRAME: Record<TeachingPhase, string> = {
   OBSERVE:     'OBSERVE — show ONE concrete anchor (a drawn arrow, a scenario, a physical object) then ask what the learner NOTICES about it. This is NOT prior-knowledge probing — never ask "have you seen / heard / used / tried / know" whether they have encountered the concept before. Show first. Then ask what they observe.',
-  DEMONSTRATE: 'DEMONSTRATE — show the idea working (worked example, demonstration, concrete walkthrough). Explain after showing, never instead of showing.',
-  GUIDE:       'GUIDE — do it WITH the learner: supported steps, you carry most of the weight, fade support gradually.',
-  CHECK:       'CHECK — verify the basic idea landed with ONE small check at or below the stage ceiling. React to the answer contentfully.',
-  PRACTICE:    'PRACTICE — the learner works; you watch and react. One problem at a time. Calculation questions are now allowed.',
-  TRANSFER:    'TRANSFER — apply the idea in a genuinely new context. Stretch, but stay warm.',
+  DEMONSTRATE: 'DEMONSTRATE — show the idea working: (1) concrete situation first, (2) walk through step by step, (3) name the principle only AFTER they see it work. Explain after showing, never instead of showing. Connect every step to what the learner already noticed in OBSERVE.',
+  GUIDE:       'GUIDE — do it WITH the learner: supported steps, you carry most of the weight, fade support gradually. Name aloud what you are doing at each step ("First I check… then I…") so the learner absorbs the strategy, not just the answer.',
+  CHECK:       'CHECK — verify the basic idea landed with ONE small check at or below the stage ceiling. React to the answer contentfully. After a correct answer, ask "How did you figure that out?" or "What told you that was right?" — one metacognitive prompt per CHECK.',
+  PRACTICE:    'PRACTICE — the learner works; you watch and react. One problem at a time. Calculation questions are now allowed. After grading, briefly name the strategy that worked ("You used X to get Y") so the learner can reuse it deliberately.',
+  TRANSFER:    'TRANSFER — apply the idea in a genuinely new context. Stretch, but stay warm. Ask the learner to predict before computing ("Before we solve it — what do you expect will happen and why?").',
 }
 
 const MOVE_LINE: Record<NextMove, string> = {
@@ -956,6 +956,20 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   // turns without advancement, force the LLM to try a different approach.
   if ((p.state.turnsInCurrentPhase ?? 0) >= 4) {
     lines.push(`- STALE LOOP (${p.state.turnsInCurrentPhase} turns in ${p.state.phase}): your previous approach is not landing. Try a COMPLETELY DIFFERENT angle — a new analogy, a concrete physical demo, a worked example from a different domain, or a simpler sub-problem. Do NOT rephrase the same explanation.`)
+  }
+  // Metacognitive scaffolding — phase-appropriate self-monitoring prompts.
+  // CHECK/PRACTICE/TRANSFER are the phases where the learner is doing work
+  // that benefits from naming their own strategy. GUIDE gets a lighter
+  // version (think-aloud modeling). OBSERVE/DEMONSTRATE are teacher-led and
+  // don't interrupt with metacognitive prompts.
+  if (p.state.phase === 'GUIDE' && p.nextMove === 'teach') {
+    lines.push('- THINK-ALOUD: narrate your reasoning as you work alongside the learner ("I\'m checking whether… because…"). Model the inner monologue so they absorb the strategy, not just the steps.')
+  }
+  if (p.state.phase === 'PRACTICE' && p.nextMove === 'ask' && p.state.correctAtPractice >= 1) {
+    lines.push('- STRATEGY NAMING: the learner has solved at least one practice problem. After grading this one, ask one brief metacognitive question: "What strategy did you use?" or "How would you explain your approach to a friend?" — builds transfer readiness.')
+  }
+  if (p.state.phase === 'TRANSFER') {
+    lines.push('- PREDICT-THEN-CHECK: before the learner computes, ask them to predict the result and say WHY ("What do you expect, and what makes you think so?"). Prediction forces the learner to activate their mental model, not just execute a procedure.')
   }
   // E.33: maintain lesson continuity — after any side question, example
   // request, or tangent, the LLM must return to the lesson's main thread
