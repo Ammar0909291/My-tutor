@@ -1,0 +1,419 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.systems-matrix-method-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.systems-matrix-method",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1e7aacec608935b9a81592f218bded4d79ca63f9e2975cb8e5d1a94efd8776ed",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.systems-matrix-method.md": "sha256:d041090777bedf6577a4dcc285d00a58c31e2f59c76eacbce78b7bdc763c2c53"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.de.systems-matrix-method",
+    "name": "Matrix Method for Systems of ODEs",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.de.systems-ode",
+      "math.linalg.eigenvalues",
+      "math.linalg.diagonalization"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.systems-matrix-method-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.systems-matrix-method (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.systems-matrix-method.md": "sha256:d041090777bedf6577a4dcc285d00a58c31e2f59c76eacbce78b7bdc763c2c53"
+      },
+      "contentHash": "sha256:fd31a8d553d0a8461212f55555b63d69b0418da0e35d7339fa0945e583ad8e17",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.systems-matrix-method.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.systems-matrix-method.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.systems-matrix-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.systems-matrix-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.systems-matrix-method.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.systems-matrix-method.md#TA-2 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.systems-matrix-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.systems-matrix-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.systems-matrix-method.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.systems-matrix-method.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.systems-matrix-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.systems-matrix-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.systems-matrix-method.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.systems-matrix-method.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.systems-matrix-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.systems-matrix-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.systems-matrix-method.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.systems-matrix-method.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.systems-matrix-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.systems-matrix-method\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.systems-matrix-method.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.systems-matrix-method.md#TA-6 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.systems-matrix-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.systems-matrix-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.systems-matrix-method.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.systems-matrix-method.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.systems-matrix-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.systems-matrix-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.systems-matrix-method.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.systems-matrix-method.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.systems-matrix-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.systems-matrix-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.systems-matrix-method/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.systems-matrix-method",
+      "title": "Learning Objective",
+      "content": "The student writes a first-order linear system x' = Ax in matrix form; computes the eigenvalues and eigenvectors of A; assembles the general solution x(t) = c₁v₁eλ₁ᵗ + c₂v₂eλ₂ᵗ for real distinct eigenvalues; handles complex eigenvalues λ=α±βi by expressing the solution in real form using e^{αt}(cos(βt), sin(βt)); handles repeated eigenvalues using the Jordan block structure with a generalised eigenvector; defines the matrix exponential eᴬᵗ and explains how it unifies all cases; and applies initial conditions to find the particular solution x(t)=eᴬᵗx₀.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.systems-matrix-method.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.systems-matrix-method/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.systems-matrix-method",
+      "title": "EIGENVECTOR-SOLUTION-IS-SCALAR",
+      "content": "| MC-1 | EIGENVECTOR-SOLUTION-IS-SCALAR | Student writes the solution as x(t) = eλᵗ (a scalar) rather than x(t) = v·eλᵗ (scalar-times-eigenvector); plugs eigenvalue into the ODE correctly but forgets the eigenvector | Type 5 — instruction-induced (the scalar ODE solution eλᵗ is learned first; students import the scalar form into the vector problem without realising that eλᵗ must be the COMPONENT of the direction, i.e., each component of x grows like eλᵗ along the corresponding eigenvector direction) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.systems-matrix-method.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.de.systems-matrix-method/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.systems-matrix-method",
+      "title": "COMPLEX-EIGENVALUE-GIVES-COMPLEX-SOLUTION",
+      "content": "| MC-2 | COMPLEX-EIGENVALUE-GIVES-COMPLEX-SOLUTION | When λ=α+βi, student writes x(t) = ve^{(α+βi)t} and reports a complex-valued solution; doesn't take real and imaginary parts to form two real independent solutions | Type 5 — instruction-induced (Euler's formula e^{iβt}=cosβt+i sinβt is taught in isolation; applying it to extract REAL solutions from complex eigenvalues requires an additional step — forming Re[ve^{λt}] and Im[ve^{λt}] — that is often stated without sufficient emphasis) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.systems-matrix-method.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.de.systems-matrix-method/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.systems-matrix-method",
+      "title": "MATRIX-EXPONENTIAL-IS-COMPONENT-EXPONENTIAL",
+      "content": "| MC-3 | MATRIX-EXPONENTIAL-IS-COMPONENT-EXPONENTIAL | Student believes eᴬ = matrix whose (i,j) entry is e^{aᵢⱼ}; doesn't know that eᴬ = I + A + A²/2! + ⋯ (the matrix power series definition) | Type 1 — overgeneralisation (the scalar identity e^a = scalar; students apply \"exponentiation\" component-wise, which is not how matrix functions work — e^{[[0,1],[0,0]]} ≠ [[1,e],[1,1]] but equals [[1,1],[0,1]]) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.systems-matrix-method.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.systems-matrix-method/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.systems-matrix-method",
+      "title": "CORRECT → \"x=Ax: try veλᵗ → eigenvalue problem. Solution: Σcᵢvᵢeλᵢᵗ. ICs fix c₁,c₂.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"x=Ax: try veλᵗ → eigenvalue problem. Solution: Σcᵢvᵢeλᵢᵗ. ICs fix c₁,c₂.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.systems-matrix-method.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.de.systems-matrix-method/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.systems-matrix-method",
+      "title": "PARTIAL (MC-1: forgot eigenvector) → \"The solution is NOT just eλᵗ — it is v·eλᵗ where v is the EIGENVECTOR. The scalar eλᵗ says HOW FAST the solution grows; the eigenvector v says IN WHICH DIRECTION. Without the eigenvector, you have a scalar, not a vector.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (MC-1: forgot eigenvector) → \\\"The solution is NOT just eλᵗ — it is v·eλᵗ where v is the EIGENVECTOR. The scalar eλᵗ says HOW FAST the solution grows; the eigenvector v says IN WHICH DIRECTION. Without the eigenvector, you have a scalar, not a vector.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.systems-matrix-method.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.de.systems-matrix-method/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.systems-matrix-method",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.systems-matrix-method.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.de.systems-matrix-method/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.systems-matrix-method",
+      "title": "NO_RESPONSE → \"x' = [[0,1],[−2,−3]]x. Char. eq.: λ²+3λ+2=0 → λ₁=−1, λ₂=−2. Eigenvectors: v₁=[1;−1], v₂=[1;−2]. Solution: x=c₁[1;−1]e^{−t}+c₂[1;−2]e^{−2t}. With x(0)=[1;0]: c₁+c₂=1, −c₁−2c₂=0 → c₂=−1, c₁=2. x(t)=2[1;−1]e^{−t}−[1;−2]e^{−2t}.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"x' = [[0,1],[−2,−3]]x. Char. eq.: λ²+3λ+2=0 → λ₁=−1, λ₂=−2. Eigenvectors: v₁=[1;−1], v₂=[1;−2]. Solution: x=c₁[1;−1]e^{−t}+c₂[1;−2]e^{−2t}. With x(0)=[1;0]: c₁+c₂=1, −c₁−2c₂=0 → c₂=−1, c₁=2. x(t)=2[1;−1]e^{−t}−[1;−2]e^{−2t}.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.systems-matrix-method.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.de.systems-matrix-method/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.systems-matrix-method",
+      "title": "CORRECT → \"Complex λ=α±βi: real pair x₁,x₂ using e^{αt}(a cosβt−b sinβt) form. Repeated λ: generalised eigenvector → x₂=(v₁t+v₂)eλᵗ. Matrix exponential: eᴬᵗ=Pe^{Dt}P⁻¹.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Complex λ=α±βi: real pair x₁,x₂ using e^{αt}(a cosβt−b sinβt) form. Repeated λ: generalised eigenvector → x₂=(v₁t+v₂)eλᵗ. Matrix exponential: eᴬᵗ=Pe^{Dt}P⁻¹.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.systems-matrix-method.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.de.systems-matrix-method/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.systems-matrix-method",
+      "title": "PARTIAL (MC-3: component-wise exponential) → \"eᴬ is NOT the matrix with entries e^{aᵢⱼ}. It is defined by the power series: eᴬ = I + A + A²/2! + ⋯. For a diagonalisable A=PDP⁻¹: eᴬ = P·diag(e^{d₁},…,e^{dₙ})·P⁻¹ — the diagonal entries (eigenvalues) are exponentiated, not the matrix entries.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (MC-3: component-wise exponential) → \\\"eᴬ is NOT the matrix with entries e^{aᵢⱼ}. It is defined by the power series: eᴬ = I + A + A²/2! + ⋯. For a diagonalisable A=PDP⁻¹: eᴬ = P·diag(e^{d₁},…,e^{dₙ})·P⁻¹ — the diagonal entries (eigenvalues) are exponentiated, not the matrix entries.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.systems-matrix-method.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.de.systems-matrix-method/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.systems-matrix-method",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.systems-matrix-method.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.de.systems-matrix-method/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.systems-matrix-method",
+      "title": "NO_RESPONSE → \"x'=[[2,−1],[1,2]]x. λ=2±i. v=(A−(2+i)I)null: [[0,−1],[1,−i]]v=0 → v=[1;−i]=a+ib=[1;0]+i[0;−1]. x₁=e²ᵗ([1;0]cost−[0;−1]sint)=e²ᵗ[cost;sint]. x₂=e²ᵗ([1;0]sint+[0;−1]cost)=e²ᵗ[sint;−cost]. General: x=c₁e²ᵗ[cost;sint]+c₂e²ᵗ[sint;−cost].\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"x'=[[2,−1],[1,2]]x. λ=2±i. v=(A−(2+i)I)null: [[0,−1],[1,−i]]v=0 → v=[1;−i]=a+ib=[1;0]+i[0;−1]. x₁=e²ᵗ([1;0]cost−[0;−1]sint)=e²ᵗ[cost;sint]. x₂=e²ᵗ([1;0]sint+[0;−1]cost)=e²ᵗ[sint;−cost]. General: x=c₁e²ᵗ[cost;sint]+c₂e²ᵗ[sint;−cost].\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.systems-matrix-method.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.de.systems-matrix-method/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.systems-matrix-method",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Solve x' = [[1,2],[0,−1]]x with x(0)=[1;0].\n2. Solve x' = [[0,−4],[1,0]]x. (Complex eigenvalues λ=±2i; express in real form.)\n3. Solve x' = [[2,1],[0,2]]x with x(0)=[0;1]. (Repeated eigenvalue λ=2; find generalised eigenvector.)\n4. Compute eᴬᵗ for A=[[3,1],[0,2]] using the diagonalisation A=PDP⁻¹. Verify that eᴬᵗx₀ at t=0 gives x₀=[1;1].\n5. A 3×3 system: write the general solution of x' = Ax where A has eigenvalues 1 (with eigenvector [1;0;0]), 2 (with eigenvector [0;1;0]), and 3 (with eigenvector [0;0;1]). Without computing: what is eᴬ? (Hint: the eigenvectors are the standard basis vectors.)\n\n**P55 — Reflect & Consolidate:** \"x'=Ax: eigenvalue problem (A−λI)v=0. Real distinct λ: x=Σcᵢvᵢeλᵢᵗ. Complex λ=α±βi: real-part/imaginary-part pair with e^{αt}cos/sin factors. Repeated λ: generalised eigenvector gives x₂=(v₁t+v₂)eλᵗ. Matrix exponential: eᴬᵗ=Pe^{Dt}P⁻¹ unifies all cases; x(t)=eᴬᵗx₀.\"\n\n**P76 — Transfer Probe (Cross-link mode: math.linalg.matrix-exponential):**\n(a) Matrix exponential and the fundamental matrix: the fundamental matrix Φ(t) of x'=Ax (defined as the n×n matrix whose columns are n linearly independent solutions) satisfies Φ'=AΦ. Show that eᴬᵗ is the unique fundamental matrix with Φ(0)=I. Explain how Φ(t)Φ(s)=Φ(t+s) reflects the group structure of solutions. (b) Cayley-Hamilton and finite computation: the Cayley-Hamilton theorem states that A satisfies its own characteristic polynomial p(λ)=0, i.e., p(A)=0. This means Aⁿ can be expressed as a linear combination of I, A, …, Aⁿ⁻¹, so eᴬᵗ can be expressed EXACTLY as a polynomial in A of degree ≤ n−1 with t-dependent coefficients. For a 2×2 matrix, show that eᴬᵗ = α₀(t)I + α₁(t)A where α₀, α₁ satisfy the scalar ODEs derived from the eigenvalues (Putzer's algorithm). (c) Non-diagonalisable matrix exponential: for the Jordan block J = [[λ,1],[0,λ]], compute e^{Jt} directly from the power series. Show the answer is e^{λt}[[1,t],[0,1]] — the t factor is the hallmark of a repeated eigenvalue with deficient geometric multiplicity, directly explaining the (v₁t+v₂)eλᵗ solution form.\n\n**P75 — Mastery Assessment:**\n\"(a) A 2×2 predator-prey linearised system: x' = [[−0.5, 0.4],[−0.3, 0.2]]x. Find the eigenvalues. Classify the equilibrium at the origin (stable/unstable node, saddle, spiral). Find the general real solution. (b) An RLC circuit network modelled as a 3×3 linear system x' = Ax. Given that A has eigenvalues −1, −2, −3 with corresponding eigenvectors v₁, v₂, v₃, write the general solution and the matrix exponential eᴬᵗ without computing eigenvectors explicitly. (c) For A=[[0,1],[0,0]] (repeated eigenvalue 0 with algebraic multiplicity 2): (i) compute eᴬᵗ using the series (A²=0, so only two terms survive); (ii) identify the generalised eigenvector v₂ satisfying Av₂=v₁; (iii) verify that x(t)=v₁t+v₂ is the second solution.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW complex eigenvalue real-form extraction and the matrix exponential connection\n- Score ≤ 3/5 → PREREQUISITE GAP in math.linalg.eigenvalues or math.linalg.diagonalization; reassign\n\n**P78 — Completion:** Matrix Method for Systems of ODEs certified. Student forms the eigenvalue problem, constructs solutions for all three eigenvalue cases (real distinct / complex / repeated), correctly computes the real-form solution from complex eigenpairs, and relates the general solution to the matrix exponential eᴬᵗ.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.systems-matrix-method.md",
+        "startLine": 100,
+        "endLine": 124
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

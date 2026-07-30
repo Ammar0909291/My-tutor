@@ -1,0 +1,485 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.fourier-sine-cosine-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.fourier-sine-cosine",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:554a66514163548ca614686e2a736fad55ff0ad29f2ec8c78b654e9ea3bd07bd",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md": "sha256:162f10245bb76869fda918a42132c0a8375b3fbb9da2b6d0f097289c0f9a8d8b"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 10,
+      "mastery_probe": 1
+    },
+    "ruleCount": 10
+  },
+  "concept": {
+    "conceptId": "math.de.fourier-sine-cosine",
+    "name": "Fourier Sine and Cosine Series",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.de.fourier-series"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.fourier-sine-cosine-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.fourier-sine-cosine (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md": "sha256:162f10245bb76869fda918a42132c0a8375b3fbb9da2b6d0f097289c0f9a8d8b"
+      },
+      "contentHash": "sha256:0f2aea33576a5a4876315999a2c3665fcc7c12e7c0d1b165f212a2c66d670667",
+      "ruleCount": 10,
+      "bandCounts": {
+        "3": 10
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.fourier-sine-cosine.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.fourier-sine-cosine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.fourier-sine-cosine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.fourier-sine-cosine.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.fourier-sine-cosine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.fourier-sine-cosine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.fourier-sine-cosine.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md#TA-2 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.fourier-sine-cosine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.fourier-sine-cosine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.fourier-sine-cosine.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.fourier-sine-cosine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.fourier-sine-cosine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.fourier-sine-cosine.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.fourier-sine-cosine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.fourier-sine-cosine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.fourier-sine-cosine.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.fourier-sine-cosine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.fourier-sine-cosine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.fourier-sine-cosine.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.fourier-sine-cosine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.fourier-sine-cosine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.fourier-sine-cosine.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.fourier-sine-cosine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.fourier-sine-cosine\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.fourier-sine-cosine.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md#TA-8 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.fourier-sine-cosine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.fourier-sine-cosine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.fourier-sine-cosine.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.fourier-sine-cosine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.fourier-sine-cosine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.fourier-sine-cosine/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.fourier-sine-cosine",
+      "title": "Learning Objective",
+      "content": "The student applies Fourier sine and cosine series to functions defined on [0,L] by choosing the correct half-range expansion: the Fourier sine series (FSS) represents f as a sum of sines bₙsin(nπx/L) — matching zero-value boundary conditions at x=0 and x=L; the Fourier cosine series (FCS) represents f as a sum of cosines a₀/2 + aₙcos(nπx/L) — matching zero-derivative (Neumann) BCs; computes the coefficients bₙ = (2/L)∫₀ᴸ f(x)sin(nπx/L)dx and aₙ = (2/L)∫₀ᴸ f(x)cos(nπx/L)dx; explains that FSS corresponds to the odd extension of f and FCS to the even extension; and applies these expansions as a tool for solving PDEs with Dirichlet or Neumann boundary conditions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.fourier-sine-cosine/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.fourier-sine-cosine",
+      "title": "FULL-FOURIER-FORMULA-USED-ON-HALF-INTERVAL",
+      "content": "| MC-1 | FULL-FOURIER-FORMULA-USED-ON-HALF-INTERVAL | Student uses the full Fourier series formulas (aₙ over [−L,L]) for a function on [0,L]; gets wrong coefficients and non-matching boundary behaviour | Type 5 — instruction-induced (the full Fourier series on [−L,L] is taught first; students copy the formula to the half-interval [0,L] without registering that the limits of integration and the factor 2/L vs. 1/L both change; the half-range factor 2/L vs. 1/L is a persistent arithmetic trap) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.de.fourier-sine-cosine/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.fourier-sine-cosine",
+      "title": "SINE-SERIES-FOR-ZERO-DERIVATIVE-BC",
+      "content": "| MC-2 | SINE-SERIES-FOR-ZERO-DERIVATIVE-BC | Student uses a Fourier sine series for a PDE with Neumann (zero-derivative) BCs and vice versa, without connecting the series choice to the boundary condition satisfied | Type 3 — language contamination (\"sine\" and \"cosine\" sound like arbitrary labels; students don't realise that the sine function inherently has zeros at endpoints (Dirichlet BC f(0)=f(L)=0) while the cosine has zero derivatives at endpoints (Neumann BC f'(0)=f'(L)=0) — the BC-to-series pairing is dictated by function behaviour, not convention) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.de.fourier-sine-cosine/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.fourier-sine-cosine",
+      "title": "COSINE-SERIES-ALWAYS-HAS-NONZERO-AVERAGE",
+      "content": "| MC-3 | COSINE-SERIES-ALWAYS-HAS-NONZERO-AVERAGE | Student thinks the constant term a₀/2 of the Fourier cosine series is always nonzero; forgets that for an odd function's odd extension f(x)=x (which has zero average over [−L,L]) all cosine coefficients, including a₀, are zero | Type 1 — overgeneralisation (standard examples of cosine series have a₀≠0; students don't connect a₀=(2/L)∫₀ᴸ f(x)dx, which is twice the average of f on [0,L] and can be zero) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.fourier-sine-cosine/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.fourier-sine-cosine",
+      "title": "CORRECT → \"FSS: bₙ=(2/L)∫₀ᴸ f sin(nπx/L)dx. FCS: aₙ=(2/L)∫₀ᴸ f cos(nπx/L)dx, plus a₀/2. FSS↔odd extension; FCS↔even extension.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"FSS: bₙ=(2/L)∫₀ᴸ f sin(nπx/L)dx. FCS: aₙ=(2/L)∫₀ᴸ f cos(nπx/L)dx, plus a₀/2. FSS↔odd extension; FCS↔even extension.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.de.fourier-sine-cosine/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.fourier-sine-cosine",
+      "title": "PARTIAL (MC-1: used 1/L factor) → \"The half-range coefficient formula uses 2/L, NOT 1/L. The full Fourier series on [−L,L] uses 1/L because you integrate over a length 2L. The half-range integrates over [0,L] only — half the interval — so the normalisation constant doubles to 2/L to compensate. Copy the formulas: bₙ=(2/L)∫₀ᴸ f(x)sin(nπx/L)dx.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (MC-1: used 1/L factor) → \\\"The half-range coefficient formula uses 2/L, NOT 1/L. The full Fourier series on [−L,L] uses 1/L because you integrate over a length 2L. The half-range integrates over [0,L] only — half the interval — so the normalisation constant doubles to 2/L to compensate. Copy the formulas: bₙ=(2/L)∫₀ᴸ f(x)sin(nπx/L)dx.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.de.fourier-sine-cosine/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.fourier-sine-cosine",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.de.fourier-sine-cosine/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.fourier-sine-cosine",
+      "title": "NO_RESPONSE → \"FCS of f(x)=x on [0,2]: aₙ=(2/2)∫₀² x cos(nπx/2)dx. Integration by parts: [x·2sin(nπx/2)/(nπ)]₀² − ∫₀² 2sin(nπx/2)/(nπ)dx = 0 + [2·2cos(nπx/2)/(nπ)²]₀² = 4(cos(nπ)−1)/(nπ)² = 4((−1)ⁿ−1)/(nπ)². a₀=(2/2)∫₀² x dx = 2. FCS: x = 1 + Σ[4((−1)ⁿ−1)/(nπ)²]cos(nπx/2).\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"FCS of f(x)=x on [0,2]: aₙ=(2/2)∫₀² x cos(nπx/2)dx. Integration by parts: [x·2sin(nπx/2)/(nπ)]₀² − ∫₀² 2sin(nπx/2)/(nπ)dx = 0 + [2·2cos(nπx/2)/(nπ)²]₀² = 4(cos(nπ)−1)/(nπ)² = 4((−1)ⁿ−1)/(nπ)². a₀=(2/2)∫₀² x dx = 2. FCS: x = 1 + Σ[4((−1)ⁿ−1)/(nπ)²]cos(nπx/2).\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.de.fourier-sine-cosine/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.fourier-sine-cosine",
+      "title": "Dirichlet BC (u=0 at boundary) → Fourier SINE series (sines vanish at endpoints).",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Dirichlet BC (u=0 at boundary) → Fourier SINE series (sines vanish at endpoints).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.de.fourier-sine-cosine/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.fourier-sine-cosine",
+      "title": "Neumann BC (∂u/∂x=0 at boundary) → Fourier COSINE series (cosine derivatives vanish).",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Neumann BC (∂u/∂x=0 at boundary) → Fourier COSINE series (cosine derivatives vanish).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.de.fourier-sine-cosine/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.fourier-sine-cosine",
+      "title": "CORRECT → \"Dirichlet BC (u=0 at ends) → FSS. Neumann BC (uₓ=0 at ends) → FCS. FCS has constant term a₀/2=average — conserved for insulated heat equation.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-7\",\"title\":\"CORRECT → \\\"Dirichlet BC (u=0 at ends) → FSS. Neumann BC (uₓ=0 at ends) → FCS. FCS has constant term a₀/2=average — conserved for insulated heat equation.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.de.fourier-sine-cosine/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.fourier-sine-cosine",
+      "title": "PARTIAL (MC-2: wrong BC-series matching) → \"RULE: the sine function has sin(0)=0 and sin(nπ)=0 — it satisfies zero-VALUE BCs at both endpoints (Dirichlet). The cosine has zero DERIVATIVE: d/dx cos(nπx/L)|_{x=0,L} = 0 — it satisfies zero-DERIVATIVE BCs (Neumann). Match the series to the boundary condition your PDE actually has.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-8\",\"title\":\"PARTIAL (MC-2: wrong BC-series matching) → \\\"RULE: the sine function has sin(0)=0 and sin(nπ)=0 — it satisfies zero-VALUE BCs at both endpoints (Dirichlet). The cosine has zero DERIVATIVE: d/dx cos(nπx/L)|_{x=0,L} = 0 — it satisfies zero-DERIVATIVE BCs (Neumann). Match the series to the boundary condition your PDE actually has.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.de.fourier-sine-cosine/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.fourier-sine-cosine",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-9\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.de.fourier-sine-cosine/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.fourier-sine-cosine",
+      "title": "NO_RESPONSE → \"uₜ=uₓₓ, uₓ(0,t)=uₓ(1,t)=0, u(x,0)=cos(2πx). Neumann → FCS. Expand: aₙ=(2/1)∫₀¹ cos(2πx)cos(nπx)dx. For n=2: ∫₀¹ cos²(2πx)dx=1/2 → a₂=1. All other n: orthogonality gives 0. a₀=2∫₀¹ cos(2πx)dx=0. u(x,t)=cos(2πx)e^{−4π²t}.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"NO_RESPONSE → \\\"uₜ=uₓₓ, uₓ(0,t)=uₓ(1,t)=0, u(x,0)=cos(2πx). Neumann → FCS. Expand: aₙ=(2/1)∫₀¹ cos(2πx)cos(nπx)dx. For n=2: ∫₀¹ cos²(2πx)dx=1/2 → a₂=1. All other n: orthogonality gives 0. a₀=2∫₀¹ cos(2πx)dx=0. u(x,t)=cos(2πx)e^{−4π²t}.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.de.fourier-sine-cosine/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.fourier-sine-cosine",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Compute the Fourier sine series of f(x)=x(π−x) on [0,π]. Sketch three partial sums.\n2. Compute the Fourier cosine series of f(x)=1 on [0,L]. Show that a₀=2 and aₙ=0 for n≥1. Verify: the series trivially equals f.\n3. A heat equation uₜ=uₓₓ, u(0,t)=u(π,t)=0, u(x,0)=3sin(x)−sin(3x). Without computing integrals, write the solution using the eigenfunction expansion (identify the Fourier coefficients by inspection).\n4. A heat equation uₜ=uₓₓ with Neumann BCs uₓ(0,t)=uₓ(L,t)=0 and u(x,0)=f(x). Show that the average temperature ∫₀ᴸ u(x,t)dx is conserved for all t>0. Interpret physically: why must heat be conserved when the ends are insulated?\n5. Let f(x)=x on [0,1]. (a) Compute its FSS. (b) Compute its FCS. (c) Use the Parseval identity ‖f‖²=(L/2)Σbₙ² for the FSS of f(x)=1 on [0,π] to sum the series 1+1/9+1/25+⋯=π²/8.\n\n**P55 — Reflect & Consolidate:** \"Half-range series: FSS bₙ=(2/L)∫₀ᴸ f sin(nπx/L)dx (odd extension, Dirichlet BCs). FCS aₙ=(2/L)∫₀ᴸ f cos(nπx/L)dx, a₀/2=average (even extension, Neumann BCs). PDE rule: Dirichlet BC→FSS; Neumann BC→FCS.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Discrete sine and cosine transforms (DST/DCT): for a discrete sequence fₖ, k=0,…,N−1, the DCT and DST are the digital analogues of the FCS and FSS. The DCT-II (the most common, used in JPEG compression) is defined by Fₙ=(2/N)Σfₖcos((π/N)(k+1/2)n). Explain how this corresponds to evaluating the FCS at the midpoints of N equal subintervals of [0,L] — the computational analogue of Gauss quadrature for the FCS integral. (b) Gibbs phenomenon near jump discontinuities: the FSS of f(x)=1 on (0,π) (with odd extension) converges to 0 at x=0 and x=π but overshoots by approximately 9% at x→0⁺, regardless of the number of terms. Show algebraically that the partial sum Sₙ(x)=(4/π)Σₖ₌₁ⁿ sin((2k−1)x)/(2k−1) has a maximum near x=π/(2n) and that this maximum → (4/π)∫₀^π sinc(u)du/2 ≈ 1.179 as n→∞. (c) Formal half-range derivation: on [0,L], the eigenfunctions of −d²φ/dx² = λφ with φ(0)=φ(L)=0 are φₙ(x)=sin(nπx/L) with λₙ=(nπ/L)². The FCS eigenfunctions satisfy φ'(0)=φ'(L)=0, giving cos(nπx/L). Show that both sets form complete orthogonal bases for L²([0,L]) and derive the coefficient formulas from the orthogonality relations.\n\n**P75 — Mastery Assessment:**\n\"(a) Solve the BVP: uₜ = 4uₓₓ, 0<x<1, t>0; u(0,t)=u(1,t)=0; u(x,0)=x(1−x). Compute the first three nonzero Fourier sine coefficients and write the full series solution. (b) A heat equation with Neumann BCs: uₜ=uₓₓ, uₓ(0,t)=uₓ(1,t)=0, u(x,0)=2+cos(πx)+cos(2πx)/2. Write the solution by inspection (no integral computation needed). What is u(x,t) as t→∞? (c) Show that the FSS and FCS of f(x)=x on [0,1] converge to different limits at x=0 and x=1. What does each series converge to at the endpoints? Explain the difference using odd vs. even extension. (d) Parseval's identity: for the FSS bₙ=(2/L)∫₀ᴸ f sin(nπx/L)dx, the identity is ∫₀ᴸ f²dx = (L/2)Σbₙ². Apply it to f(x)=x on [0,π] (using your FSS from part (a) of Problem Set #5) to show Σ1/n² = π²/6.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW the BC-to-series matching rule and the coefficient normalisation factor\n- Score ≤ 3/5 → PREREQUISITE GAP in math.de.fourier-series; reassign\n\n**P78 — Completion:** Fourier Sine and Cosine Series certified. Student distinguishes FSS and FCS by their boundary condition semantics; computes half-range coefficients with the correct 2/L factor; identifies odd/even extensions; applies the appropriate series to solve heat equation BVPs with Dirichlet or Neumann BCs.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-sine-cosine.md",
+        "startLine": 99,
+        "endLine": 123
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

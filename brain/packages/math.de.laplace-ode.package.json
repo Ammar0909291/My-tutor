@@ -1,0 +1,520 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.laplace-ode-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.laplace-ode",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b8b921a3ce6506c22c2393872aad3dffc3ddcc06d50ad7030fdb02c18a2c3667",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.laplace-ode.md": "sha256:324606781c731a3f00e9c8c77bb56edd8e89935d21b565458112811530f19cb5"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 11,
+      "mastery_probe": 1
+    },
+    "ruleCount": 11
+  },
+  "concept": {
+    "conceptId": "math.de.laplace-ode",
+    "name": "Solving ODEs with Laplace Transforms",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.de.inverse-laplace",
+      "math.de.ivp"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.laplace-ode-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.laplace-ode (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.laplace-ode.md": "sha256:324606781c731a3f00e9c8c77bb56edd8e89935d21b565458112811530f19cb5"
+      },
+      "contentHash": "sha256:e0d728da11befd93e5412ed0151f83d9dcbddce4e45e1c84a5abdd1bb551d857",
+      "ruleCount": 11,
+      "bandCounts": {
+        "3": 11
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.laplace-ode.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.laplace-ode.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.laplace-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.laplace-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.laplace-ode.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.laplace-ode.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.laplace-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.laplace-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.laplace-ode.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.laplace-ode.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.laplace-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.laplace-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.laplace-ode.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.laplace-ode.md#TA-2 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.laplace-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.laplace-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.laplace-ode.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.laplace-ode.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.laplace-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.laplace-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.laplace-ode.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.laplace-ode.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.laplace-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.laplace-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.laplace-ode.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.laplace-ode.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.laplace-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.laplace-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.laplace-ode.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.laplace-ode.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.laplace-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.laplace-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.laplace-ode.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.laplace-ode.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.laplace-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.laplace-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.laplace-ode.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.laplace-ode.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.laplace-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.laplace-ode\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.laplace-ode.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.laplace-ode.md#TA-9 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.laplace-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.laplace-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.laplace-ode/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.laplace-ode",
+      "title": "Learning Objective",
+      "content": "The student applies the Laplace transform method to solve initial value problems: takes the Laplace transform of both sides of an ODE (converting the IVP into an algebraic equation in s), solves for Y(s) by incorporating the given initial conditions through the transform of derivatives (ℒ{y'}=sY−y(0), ℒ{y''}=s²Y−sy(0)−y'(0)), decomposes Y(s) using partial fractions, and recovers y(t) by inverse Laplace transform; and recognises the advantage of this method for piecewise or impulsive forcing functions via the convolution theorem and the step/delta function transforms.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-ode.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.laplace-ode/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.laplace-ode",
+      "title": "INITIAL-CONDITIONS-IGNORED-UNTIL-END",
+      "content": "| MC-1 | INITIAL-CONDITIONS-IGNORED-UNTIL-END | Student takes ℒ{y''}=s²Y(s) (forgetting the initial condition terms −sy(0)−y'(0)); then applies IC only at the end to C₁, C₂ — which doesn't work because there are no free constants; the ICs are already encoded in Y(s) | Type 5 — instruction-induced (students learn the ODE general solution approach where ICs come last; they apply the same pattern here, not realising that the Laplace method encodes ICs algebraically at the transform step itself) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-ode.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.de.laplace-ode/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.laplace-ode",
+      "title": "PARTIAL-FRACTIONS-DEGREE-ERROR",
+      "content": "| MC-2 | PARTIAL-FRACTIONS-DEGREE-ERROR | Student writes partial-fraction decomposition for Y(s) without first checking that the numerator degree is less than the denominator degree; writes wrong form for repeated or complex roots | Type 5 — instruction-induced (partial fractions as taught in calculus assume proper fractions; in Laplace problems, polynomial division may be needed first; repeated real and complex-conjugate pairs require distinct term forms not covered in basic calculus courses) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-ode.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.de.laplace-ode/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.laplace-ode",
+      "title": "CONVOLUTION-CONFUSED-WITH-PRODUCT",
+      "content": "| MC-3 | CONVOLUTION-CONFUSED-WITH-PRODUCT | Student thinks ℒ⁻¹{F(s)G(s)} = f(t)g(t) (pointwise product); doesn't know the correct inverse is the convolution (f*g)(t) = ∫₀ᵗ f(τ)g(t−τ)dτ | Type 1 — overgeneralisation (ℒ{f+g}=F+G and ℒ{af}=aF follow linearity; students assume ℒ{fg}=FG symmetrically; the convolution theorem — that multiplication in s-domain corresponds to convolution in t-domain — has no elementary-algebra analogue and is genuinely counter-intuitive) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-ode.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.laplace-ode/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.laplace-ode",
+      "title": "CORRECT → \"ℒ{y''}=s²Y−sy(0)−y'(0). Encode ICs in Y(s) at transform step. Partial fractions → ℒ⁻¹ via table.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"ℒ{y''}=s²Y−sy(0)−y'(0). Encode ICs in Y(s) at transform step. Partial fractions → ℒ⁻¹ via table.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-ode.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.de.laplace-ode/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.laplace-ode",
+      "title": "PARTIAL (MC-1: forgot IC terms) → \"The Laplace transform formula for y'' is: ℒ{y''} = s²Y(s) − s·y(0) − y'(0). The initial conditions appear IMMEDIATELY when you transform — they are NOT free constants to be applied later. There is no C₁, C₂ in this method. The ICs are baked into Y(s) algebraically.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (MC-1: forgot IC terms) → \\\"The Laplace transform formula for y'' is: ℒ{y''} = s²Y(s) − s·y(0) − y'(0). The initial conditions appear IMMEDIATELY when you transform — they are NOT free constants to be applied later. There is no C₁, C₂ in this method. The ICs are baked into Y(s) algebraically.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-ode.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.de.laplace-ode/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.laplace-ode",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-ode.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.de.laplace-ode/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.laplace-ode",
+      "title": "NO_RESPONSE → \"y'' + 4y = 0, y(0)=2, y'(0)=0. Transform: s²Y − 2s + 4Y = 0. (s²+4)Y = 2s. Y = 2s/(s²+4). ℒ⁻¹: y=2cos(2t). Check: y'=−4sin2t, y''=−8cos2t; y''+4y=−8cos2t+8cos2t=0 ✓; y(0)=2 ✓; y'(0)=0 ✓.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"y'' + 4y = 0, y(0)=2, y'(0)=0. Transform: s²Y − 2s + 4Y = 0. (s²+4)Y = 2s. Y = 2s/(s²+4). ℒ⁻¹: y=2cos(2t). Check: y'=−4sin2t, y''=−8cos2t; y''+4y=−8cos2t+8cos2t=0 ✓; y(0)=2 ✓; y'(0)=0 ✓.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-ode.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.de.laplace-ode/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.laplace-ode",
+      "title": "Forcing functions with jumps: f(t) = t (0≤t<π), sin t (t≥π) — encode with 𝒰",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Forcing functions with jumps: f(t) = t (0≤t<π), sin t (t≥π) — encode with 𝒰\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-ode.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.de.laplace-ode/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.laplace-ode",
+      "title": "Impulsive forcing: F(t) = δ(t−a) — hammer blow, lightning strike",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Impulsive forcing: F(t) = δ(t−a) — hammer blow, lightning strike\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-ode.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.de.laplace-ode/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.laplace-ode",
+      "title": "Repeated roots in s: partial fractions handle them as cleanly as distinct roots",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Repeated roots in s: partial fractions handle them as cleanly as distinct roots\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-ode.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.de.laplace-ode/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.laplace-ode",
+      "title": "CORRECT → \"𝒰(t−a): ℒ=e^{−as}/s; second-shifting for f(t−a)𝒰(t−a). δ(t−a): ℒ=e^{−as}. Convolution: ℒ⁻¹{FG}=f*g, not f·g.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-8\",\"title\":\"CORRECT → \\\"𝒰(t−a): ℒ=e^{−as}/s; second-shifting for f(t−a)𝒰(t−a). δ(t−a): ℒ=e^{−as}. Convolution: ℒ⁻¹{FG}=f*g, not f·g.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-ode.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.de.laplace-ode/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.laplace-ode",
+      "title": "PARTIAL (MC-3: product vs. convolution) → \"WRONG: ℒ⁻¹{F(s)G(s)} ≠ f(t)·g(t). CORRECT: ℒ⁻¹{F(s)G(s)} = ∫₀ᵗ f(τ)g(t−τ)dτ (convolution). Example: ℒ⁻¹{1/(s(s+1))} = ∫₀ᵗ 1·e^{−(t−τ)}dτ = 1−e^{−t}. Check: pointwise product would give 1·e^{−t}=e^{−t}, which is wrong.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-9\",\"title\":\"PARTIAL (MC-3: product vs. convolution) → \\\"WRONG: ℒ⁻¹{F(s)G(s)} ≠ f(t)·g(t). CORRECT: ℒ⁻¹{F(s)G(s)} = ∫₀ᵗ f(τ)g(t−τ)dτ (convolution). Example: ℒ⁻¹{1/(s(s+1))} = ∫₀ᵗ 1·e^{−(t−τ)}dτ = 1−e^{−t}. Check: pointwise product would give 1·e^{−t}=e^{−t}, which is wrong.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-ode.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.de.laplace-ode/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.laplace-ode",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-ode.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.de.laplace-ode/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.laplace-ode",
+      "title": "NO_RESPONSE → \"y'' + y = δ(t−π), y(0)=0, y'(0)=0. ℒ: (s²+1)Y=e^{−πs}. Y=e^{−πs}/(s²+1). ℒ⁻¹: sin(t−π)𝒰(t−π) = −sin(t)𝒰(t−π). So y(t)=0 for t<π; y(t)=−sin(t) for t≥π. Physically: zero until the impulse at t=π, then pure oscillation.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"NO_RESPONSE → \\\"y'' + y = δ(t−π), y(0)=0, y'(0)=0. ℒ: (s²+1)Y=e^{−πs}. Y=e^{−πs}/(s²+1). ℒ⁻¹: sin(t−π)𝒰(t−π) = −sin(t)𝒰(t−π). So y(t)=0 for t<π; y(t)=−sin(t) for t≥π. Physically: zero until the impulse at t=π, then pure oscillation.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-ode.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.de.laplace-ode/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.laplace-ode",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Solve the IVP using Laplace transforms: y'' − 2y' + y = eᵗ, y(0)=1, y'(0)=0.\n2. Solve: y'' + 4y' + 4y = δ(t−2), y(0)=0, y'(0)=0. (Heaviside step required after δ transform.)\n3. Solve: y'' + y = 𝒰(t−π), y(0)=0, y'(0)=0. (Apply second shifting theorem; simplify using sin(t−π)=−sin t.)\n4. Use the convolution theorem to find y(t) if Y(s) = 1/[(s²+1)²]. Express as an integral, then evaluate.\n5. A spring-mass system: y'' + 4y = f(t), y(0)=0, y'(0)=0, where f(t) = 1 for 0≤t<2, f(t)=0 for t≥2. Write f(t) using Heaviside step functions, transform, solve for Y(s), and invert using the second shifting theorem.\n\n**P55 — Reflect & Consolidate:** \"Laplace ODE method: ℒ → algebra in Y(s) (ICs embedded via ℒ{y''}=s²Y−sy(0)−y'(0)) → partial fractions → ℒ⁻¹. Advantage: handles piecewise/impulsive forcing cleanly via 𝒰(t−a) and δ(t−a). Convolution theorem: ℒ⁻¹{FG}=f*g.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Transfer function: for ay''+by'+cy=r(t) with zero ICs, Y(s)=R(s)/P(s) where P(s)=as²+bs+c is the characteristic polynomial. Define the transfer function H(s)=1/P(s). Show that y(t)=(h*r)(t) where h(t)=ℒ⁻¹{H(s)} is the impulse response. Connect to the engineering meaning: H(s) is the system's \"gain\" as a function of complex frequency s. (b) Z-transform analogy: the discrete-time analogue of the Laplace transform is the Z-transform Z{xₙ}=∑xₙz^{−n}. The shift operator Zˉ¹ corresponds to s in the Laplace world — Z{xₙ₋₁}=z^{−1}X(z). Use this to write the Z-transform of a second-order linear recurrence aₙ₊₂+pₙ₊₁+qaₙ=f(n) and compare structurally with the Laplace-transformed ODE. (c) Paley-Wiener theorem: a function y(t) is the Laplace transform of a causal L² function (supported on t≥0) if and only if its Laplace transform Y(s) is square-integrable on every vertical line Re(s)=c>0. Explain qualitatively why the region of convergence Re(s)>c encodes the exponential growth rate of y(t).\n\n**P75 — Mastery Assessment:**\n\"(a) Solve y'' + 2y' + 5y = e^{−t}cos(2t), y(0)=0, y'(0)=0 using Laplace transforms. (Hint: ℒ{e^{−t}cos2t}=(s+1)/((s+1)²+4). The characteristic polynomial is s²+2s+5=(s+1)²+4.) (b) A beam vibration model: ÿ + 4y = F₀[𝒰(t) − 𝒰(t−T)] (force applied from 0 to T, then removed). Find y(t) for t>T with y(0)=ẏ(0)=0. (c) Use the convolution theorem to show that for y'' + ω₀²y = f(t) with zero ICs, the solution is y(t) = (1/ω₀)∫₀ᵗ sin(ω₀(t−τ))f(τ)dτ. This is Duhamel's principle — the response is the superposition of impulse responses to each infinitesimal piece of f. (d) For the Laplace-transformed ODE P(s)Y(s) = Q(s) + R(s) where Q(s) comes from initial conditions, explain why the initial-condition contribution Q(s)/P(s) gives the transient response and R(s)/P(s) gives the forced response. When does the forced response equal the convolution h*r?\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW encoding of initial conditions and the convolution theorem\n- Score ≤ 3/5 → PREREQUISITE GAP in math.de.inverse-laplace or math.de.ivp; reassign\n\n**P78 — Completion:** Laplace ODE method certified. Student encodes ICs via the derivative-transform formula, computes Y(s) algebraically, inverts via partial fractions and table lookup, handles piecewise/impulsive forcing with step/delta functions, and applies the convolution theorem correctly.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-ode.md",
+        "startLine": 104,
+        "endLine": 128
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

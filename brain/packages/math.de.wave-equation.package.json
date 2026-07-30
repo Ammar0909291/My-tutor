@@ -1,0 +1,418 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.wave-equation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.wave-equation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b059dd5d2d805a533fa704ae45c8ef6822b44c87ccde3afdf0a6ef9c4eb8fe97",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.wave-equation.md": "sha256:5810ba549820bd8f831c7e146ec4ccc24857397b8fc95651278c0b387c4affce"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.de.wave-equation",
+    "name": "The Wave Equation",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.de.separation-of-variables-pde",
+      "math.de.fourier-series"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.wave-equation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.wave-equation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.wave-equation.md": "sha256:5810ba549820bd8f831c7e146ec4ccc24857397b8fc95651278c0b387c4affce"
+      },
+      "contentHash": "sha256:e89d2039b58e3d5b450c1ce9f643ca69a3082ec13738fed789b2933e6da88d3d",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.wave-equation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.wave-equation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.wave-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.wave-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.wave-equation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.wave-equation.md#TA-2 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.wave-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.wave-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.wave-equation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.wave-equation.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.wave-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.wave-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.wave-equation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.wave-equation.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.wave-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.wave-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.wave-equation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.wave-equation.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.wave-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.wave-equation\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.wave-equation.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.wave-equation.md#TA-6 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.wave-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.wave-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.wave-equation.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.wave-equation.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.wave-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.wave-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.wave-equation.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.wave-equation.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.wave-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.wave-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.wave-equation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.wave-equation",
+      "title": "Learning Objective",
+      "content": "The student solves the initial-boundary value problem for the wave equation uₜₜ = c² uₓₓ on [0,L] by separation of variables: derives the eigenvalue problem X''+λX=0 and the time ODE T''+c²λT=0 (giving sinusoidal time dependence), assembles the series solution u(x,t)=Σ[aₙcos(cλₙ^{1/2}t)+bₙsin(cλₙ^{1/2}t)]sin(nπx/L), applies BOTH initial conditions u(x,0)=f(x) and uₜ(x,0)=g(x) to determine the coefficients; derives d'Alembert's solution u(x,t)=½[f(x+ct)+f(x−ct)] for the unbounded domain problem; and interprets the solution physically: finite propagation speed c, standing waves (harmonics), and energy conservation.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wave-equation.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.wave-equation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.wave-equation",
+      "title": "ONE-INITIAL-CONDITION-FOR-WAVE",
+      "content": "| MC-1 | ONE-INITIAL-CONDITION-FOR-WAVE | Student sets up the wave equation IBVP with only u(x,0)=f(x) (one IC) and forgets uₜ(x,0)=g(x) (initial velocity); gets an underdetermined system (two sets of Fourier coefficients for one equation) | Type 5 — instruction-induced (the heat equation requires only ONE initial condition u(x,0)=f(x); students carry this into the wave equation without noticing that the wave equation is SECOND-ORDER in t, requiring two ICs — analogous to needing both y(0) and y'(0) for a second-order ODE IVP) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wave-equation.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.de.wave-equation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.wave-equation",
+      "title": "TIME-OSCILLATION-FREQUENCY-EQUALS-EIGENVALUE",
+      "content": "| MC-2 | TIME-OSCILLATION-FREQUENCY-EQUALS-EIGENVALUE | Student writes Tₙ(t)=Asin(λₙt)+Bcos(λₙt) (using λₙ as the frequency) instead of Tₙ(t)=A sin(cλₙ^{1/2}t)+B cos(cλₙ^{1/2}t); forgets that the time ODE is T''+c²λₙT=0, whose frequency is c√λₙ, not λₙ | Type 5 — instruction-induced (the ODE T''+c²λT=0 has angular frequency ωₙ=c√λₙ, which is c times the square root of the eigenvalue; students often write ωₙ=λₙ (confusing the eigenvalue with its square root) or ωₙ=cλₙ (using the eigenvalue linearly instead of its square root)) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wave-equation.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.de.wave-equation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.wave-equation",
+      "title": "DALEMBERT-APPLIES-INSIDE-BOUNDED-DOMAIN",
+      "content": "| MC-3 | DALEMBERT-APPLIES-INSIDE-BOUNDED-DOMAIN | Student applies d'Alembert's formula u=½[f(x+ct)+f(x−ct)] directly to the bounded [0,L] problem without the odd-extension or method of images correction; gets a solution that doesn't satisfy the BCs u(0,t)=u(L,t)=0 | Type 1 — overgeneralisation (d'Alembert's formula is derived for the unbounded line −∞<x<∞; on a finite interval, the formula only works if f is extended as a 2L-periodic ODD function; applying it naively to a bounded domain ignores reflections at the boundaries, violating the BCs) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wave-equation.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.wave-equation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.wave-equation",
+      "title": "CORRECT → \"Two ICs: aₙ from u(x,0)=f(x), bₙ from uₜ(x,0)=g(x). Time ODE: T''+c²λₙT=0 → Tₙ=aₙcos(ωₙt)+bₙsin(ωₙt), ωₙ=cnπ/L.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Two ICs: aₙ from u(x,0)=f(x), bₙ from uₜ(x,0)=g(x). Time ODE: T''+c²λₙT=0 → Tₙ=aₙcos(ωₙt)+bₙsin(ωₙt), ωₙ=cnπ/L.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wave-equation.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.de.wave-equation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.wave-equation",
+      "title": "PARTIAL (MC-1: only one IC used) → \"The wave equation uₜₜ=c²uₓₓ is SECOND-ORDER in t. Just like a second-order ODE y''=fy needs BOTH y(0) and y'(0) to pin down its solution, the wave IBVP needs BOTH u(x,0)=f(x) AND uₜ(x,0)=g(x). The aₙ coefficients come from f, the bₙ coefficients from g. Without g, the bₙ are undetermined — you have half the solution.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (MC-1: only one IC used) → \\\"The wave equation uₜₜ=c²uₓₓ is SECOND-ORDER in t. Just like a second-order ODE y''=fy needs BOTH y(0) and y'(0) to pin down its solution, the wave IBVP needs BOTH u(x,0)=f(x) AND uₜ(x,0)=g(x). The aₙ coefficients come from f, the bₙ coefficients from g. Without g, the bₙ are undetermined — you have half the solution.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wave-equation.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.de.wave-equation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.wave-equation",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wave-equation.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.de.wave-equation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.wave-equation",
+      "title": "NO_RESPONSE → \"uₜₜ=4uₓₓ, [0,π], u=0 at ends, u(x,0)=sin(x), uₜ(x,0)=2sin(2x). c=2, ωₙ=2n. a₁=1 (from u(x,0)=sin x), aₙ=0 else. From uₜ(x,0)=2sin2x: Σbₙ(2n)sin(nx)=2sin2x → b₂·4=2 → b₂=1/2, others 0. u=sin(x)cos(2t)+(1/2)sin(2x)sin(4t).\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"uₜₜ=4uₓₓ, [0,π], u=0 at ends, u(x,0)=sin(x), uₜ(x,0)=2sin(2x). c=2, ωₙ=2n. a₁=1 (from u(x,0)=sin x), aₙ=0 else. From uₜ(x,0)=2sin2x: Σbₙ(2n)sin(nx)=2sin2x → b₂·4=2 → b₂=1/2, others 0. u=sin(x)cos(2t)+(1/2)sin(2x)sin(4t).\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wave-equation.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.de.wave-equation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.wave-equation",
+      "title": "CORRECT → \"D'Alembert: u=½[f(x+ct)+f(x−ct)]+1/(2c)∫g for ℝ; odd-extension for [0,L]. Finite speed c = domain of dependence. Energy conserved. Standing wave = superposition of two travelling waves.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"D'Alembert: u=½[f(x+ct)+f(x−ct)]+1/(2c)∫g for ℝ; odd-extension for [0,L]. Finite speed c = domain of dependence. Energy conserved. Standing wave = superposition of two travelling waves.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wave-equation.md",
+        "startLine": 92,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "math.de.wave-equation/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.wave-equation",
+      "title": "PARTIAL (MC-3: applied d'Alembert without odd extension) → \"D'Alembert's formula ONLY applies directly on the infinite domain ℝ. On [0,L] with u(0,t)=0, you need to EXTEND f to all of ℝ as an ODD function (so F(x)=−F(−x)) and make it 2L-periodic. Then u(x,t)=½[F(x+ct)+F(x−ct)]. Without this step, the formula gives a function that does NOT vanish at x=0 and x=L, violating the BCs.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (MC-3: applied d'Alembert without odd extension) → \\\"D'Alembert's formula ONLY applies directly on the infinite domain ℝ. On [0,L] with u(0,t)=0, you need to EXTEND f to all of ℝ as an ODD function (so F(x)=−F(−x)) and make it 2L-periodic. Then u(x,t)=½[F(x+ct)+F(x−ct)]. Without this step, the formula gives a function that does NOT vanish at x=0 and x=L, violating the BCs.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wave-equation.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.de.wave-equation/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.wave-equation",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wave-equation.md",
+        "startLine": 94,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "math.de.wave-equation/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.wave-equation",
+      "title": "NO_RESPONSE → \"uₜₜ=uₓₓ on ℝ, u(x,0)=e^{−x²}, uₜ(x,0)=0. D'Alembert: u=½[e^{−(x+t)²}+e^{−(x−t)²}]. At t=1, x=3: u(3,1)=½[e^{−16}+e^{−4}]≈½e^{−4}≈0.0092. Interpretation: the Gaussian splits into two equal-amplitude Gaussian pulses moving left and right.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"uₜₜ=uₓₓ on ℝ, u(x,0)=e^{−x²}, uₜ(x,0)=0. D'Alembert: u=½[e^{−(x+t)²}+e^{−(x−t)²}]. At t=1, x=3: u(3,1)=½[e^{−16}+e^{−4}]≈½e^{−4}≈0.0092. Interpretation: the Gaussian splits into two equal-amplitude Gaussian pulses moving left and right.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wave-equation.md",
+        "startLine": 95,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "math.de.wave-equation/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.wave-equation",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Solve: uₜₜ = 9uₓₓ, 0<x<π, u(0,t)=u(π,t)=0, u(x,0)=sin(x)+sin(2x)/4, uₜ(x,0)=0.\n2. Solve: uₜₜ = uₓₓ, 0<x<1, u(0,t)=u(1,t)=0, u(x,0)=0, uₜ(x,0)=sin(πx). (Only bₙ are nonzero.)\n3. Use d'Alembert's formula for the IVP uₜₜ=c²uₓₓ on ℝ with u(x,0)=f(x)=e^{−|x|} and uₜ(x,0)=0. Find u(0,t) for t>0 and show it equals [e^{−ct}+e^{−ct}]/2=e^{−ct}.\n4. Show that the standing wave u(x,t)=sin(nπx/L)cos(nπct/L) can be written as the sum of two equal-amplitude travelling waves. Identify the speed and direction of each.\n5. Verify that the energy E(t)=½∫₀^π[uₜ²+uₓ²]dx is conserved for the solution to Problem 1.\n\n**P55 — Reflect & Consolidate:** \"Wave equation uₜₜ=c²uₓₓ: separation → X''+λX=0 + T''+c²λT=0. Two ICs: aₙ from u(x,0), bₙ from uₜ(x,0)/ωₙ. D'Alembert on ℝ: u=½[f(x+ct)+f(x−ct)]+1/(2c)∫g. Bounded: use odd 2L-periodic extension. Energy conserved. Standing wave = sum of two travelling waves.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Non-dispersive vs. dispersive waves: the wave equation uₜₜ=c²uₓₓ is non-dispersive — all frequencies travel at the same speed c. A dispersive wave equation is uₜₜ=c²uₓₓ−αuₓₓₓₓ (beam equation), where different frequencies travel at different speeds. Show that for a solution eⁱ⁽ᵏˣ⁻ωᵗ⁾ to satisfy each equation, the dispersion relation is ω=ck (non-dispersive) and ω²=c²k²+αk⁴ (dispersive), and that the GROUP velocity v_g=dω/dk differs from the phase velocity v_p=ω/k for the dispersive case. (b) Reflection and transmission: consider a wave equation with a discontinuity in wave speed at x=0: c=c₁ for x<0 and c=c₂ for x>0. A wave e^{i(k₁x−ωt)} from x<0 hits the interface and produces a reflected and transmitted wave. Use continuity of u and uₓ at x=0 to derive the reflection coefficient R=(c₁−c₂)/(c₁+c₂) and transmission coefficient T=2c₁/(c₁+c₂). Show that energy is conserved: R²+T²·(c₂/c₁)=1. (c) Wave equation in higher dimensions: the 3D wave equation uₜₜ=c²∇²u has Kirchhoff's formula u(x,t)=(1/(4πc²t))∫_{|y−x|=ct}[g(y)+f(y)/∂t + something]dS as its general solution (Huygens principle in 3D). Explain why in 3D, a compact initial disturbance produces a sharp wave front (Huygens' principle holds), while in 2D it does not (the tail effect: \"Hadamard's method of descent\").\n\n**P75 — Mastery Assessment:**\n\"(a) Solve uₜₜ=4uₓₓ on [0,2] with u(0,t)=u(2,t)=0, u(x,0)=x(2−x), uₜ(x,0)=1. Compute the first three terms of the solution explicitly. (b) A guitar string of length L=0.65 m with wave speed c=300 m/s. What is the fundamental frequency (in Hz)? What are the first three harmonic frequencies? Compare with the equal-temperament A4=440 Hz. (c) Show by direct substitution that u(x,t)=F(x+ct)+G(x−ct) (for arbitrary twice-differentiable F, G) is the GENERAL solution of uₜₜ=c²uₓₓ on ℝ. Show that the d'Alembert formula is a specific choice of F and G determined by the ICs. (d) The dispersive Schrödinger equation iu_t = −u_{xx} (in dimensionless form): find a plane-wave solution eⁱ⁽ᵏˣ⁻ωᵗ⁾ and determine the dispersion relation. Is this equation dispersive? Why does the quantum wave function's modulus |u|² satisfy a conservation law, while the equation itself is not a real-valued wave equation?\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW the two-initial-condition requirement and d'Alembert's odd-extension for bounded domains\n- Score ≤ 3/5 → PREREQUISITE GAP in math.de.separation-of-variables-pde or math.de.fourier-series; reassign\n\n**P78 — Completion:** The Wave Equation certified. Student separates variables with both ICs, correctly identifies ωₙ=cnπ/L as the oscillation frequency, derives d'Alembert's formula, applies the odd-extension correctly for bounded domains, verifies energy conservation, and interprets standing waves as superpositions of travelling waves.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wave-equation.md",
+        "startLine": 109,
+        "endLine": 133
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

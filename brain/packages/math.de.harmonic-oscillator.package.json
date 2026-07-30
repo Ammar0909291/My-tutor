@@ -1,0 +1,520 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.harmonic-oscillator-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.harmonic-oscillator",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:20ad482c33e6e56d48be2366e0422c125f066934b47b4175a67135db0810c12b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.harmonic-oscillator.md": "sha256:9e6dedf117bbf325d4642eb02db8e6bf31c9cb9d1ad70c2962434a0eaf483c2d"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 11,
+      "mastery_probe": 1
+    },
+    "ruleCount": 11
+  },
+  "concept": {
+    "conceptId": "math.de.harmonic-oscillator",
+    "name": "Harmonic Oscillator ODE",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.de.char-equation",
+      "math.de.undetermined-coefficients"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.harmonic-oscillator-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.harmonic-oscillator (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.harmonic-oscillator.md": "sha256:9e6dedf117bbf325d4642eb02db8e6bf31c9cb9d1ad70c2962434a0eaf483c2d"
+      },
+      "contentHash": "sha256:94a7442cd5eeb2f22171895c0a21c264a7bbf013cdf1b24077040b0a26a7b452",
+      "ruleCount": 11,
+      "bandCounts": {
+        "3": 11
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.harmonic-oscillator.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.harmonic-oscillator"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.harmonic-oscillator\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.harmonic-oscillator.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.harmonic-oscillator"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.harmonic-oscillator\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.harmonic-oscillator.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.harmonic-oscillator"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.harmonic-oscillator\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.harmonic-oscillator.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.harmonic-oscillator"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.harmonic-oscillator\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.harmonic-oscillator.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.harmonic-oscillator"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.harmonic-oscillator\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.harmonic-oscillator.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.harmonic-oscillator"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.harmonic-oscillator\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.harmonic-oscillator.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md#TA-5 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.harmonic-oscillator"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.harmonic-oscillator\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.harmonic-oscillator.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.harmonic-oscillator"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.harmonic-oscillator\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.harmonic-oscillator.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.harmonic-oscillator"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.harmonic-oscillator\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.harmonic-oscillator.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.harmonic-oscillator"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.harmonic-oscillator\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.harmonic-oscillator.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md#TA-9 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.harmonic-oscillator"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.harmonic-oscillator\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.harmonic-oscillator/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.harmonic-oscillator",
+      "title": "Learning Objective",
+      "content": "The student classifies the harmonic oscillator equation my'' + cy' + ky = F(t) by its discriminant Δ = c² − 4mk into underdamped (Δ<0), critically damped (Δ=0), and overdamped (Δ>0) regimes; writes the homogeneous solution in each case; applies the amplitude-phase form y = R cos(ω₀t − φ) for the underdamped free oscillator; identifies the natural frequency ω₀ = √(k/m), damped frequency ω_d = √(ω₀²−γ²) where γ=c/(2m), and the transient/steady-state decomposition of the forced response; and computes the amplitude of the steady-state response as a function of driving frequency.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-oscillator/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.harmonic-oscillator",
+      "title": "CRITICAL-DAMPING-IS-MAXIMUM-DAMPING",
+      "content": "| MC-1 | CRITICAL-DAMPING-IS-MAXIMUM-DAMPING | Student thinks critical damping (c² = 4mk) means the most damping; doesn't know overdamped (c² > 4mk) has MORE damping and returns MORE slowly to equilibrium | Type 3 — language contamination (\"critical\" in everyday language suggests extreme or maximum; in physics it means the boundary between two qualitative behaviours — oscillatory vs. non-oscillatory — not the maximum damping coefficient) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-oscillator/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.harmonic-oscillator",
+      "title": "NATURAL-FREQUENCY-EQUALS-DAMPED-FREQUENCY",
+      "content": "| MC-2 | NATURAL-FREQUENCY-EQUALS-DAMPED-FREQUENCY | Student uses ω₀=√(k/m) as the oscillation frequency even for the damped case, instead of ω_d=√(ω₀²−γ²) < ω₀ | Type 5 — instruction-induced (the undamped case y''+ω₀²y=0 is taught first; students apply ω₀ to all cases without noticing that damping slows the oscillation) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-oscillator/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.harmonic-oscillator",
+      "title": "FORCING-AT-ANY-FREQUENCY-CAUSES-RESONANCE",
+      "content": "| MC-3 | FORCING-AT-ANY-FREQUENCY-CAUSES-RESONANCE | Student thinks resonance occurs whenever there is a periodic forcing, rather than only when the driving frequency equals the natural frequency (ω=ω₀ in the undamped case) | Type 1 — overgeneralisation (resonance is presented dramatically; students associate \"forced oscillation\" with \"resonance\" rather than the specific frequency-matching condition) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-oscillator/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.harmonic-oscillator",
+      "title": "Natural frequency: ω₀ = √(k/m) [rad/s]",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Natural frequency: ω₀ = √(k/m) [rad/s]\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-oscillator/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.harmonic-oscillator",
+      "title": "Damping ratio: ζ = c/(2√(mk)) = γ/ω₀",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Damping ratio: ζ = c/(2√(mk)) = γ/ω₀\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-oscillator/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.harmonic-oscillator",
+      "title": "Underdamped: ζ<1; critically damped: ζ=1; overdamped: ζ>1.",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Underdamped: ζ<1; critically damped: ζ=1; overdamped: ζ>1.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-oscillator/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.harmonic-oscillator",
+      "title": "CORRECT → \"Underdamped: complex roots → decaying oscillation e^{−γt}cos(ω_dt−φ). Critical: repeated root → (C₁+C₂t)e^{−γt}. Overdamped: two real roots → sum of decaying exponentials.\" → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"CORRECT → \\\"Underdamped: complex roots → decaying oscillation e^{−γt}cos(ω_dt−φ). Critical: repeated root → (C₁+C₂t)e^{−γt}. Overdamped: two real roots → sum of decaying exponentials.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-oscillator/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.harmonic-oscillator",
+      "title": "PARTIAL (MC-2: uses ω₀ for damped oscillations) → \"The damped oscillation frequency is ω_d=√(ω₀²−γ²), NOT ω₀. Damping slows the oscillation: ω_d<ω₀. The solution is y=e^{−γt}(C₁cosω_dt+C₂sinω_dt). Only when c=0 (no damping) does ω_d=ω₀.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-5\",\"title\":\"PARTIAL (MC-2: uses ω₀ for damped oscillations) → \\\"The damped oscillation frequency is ω_d=√(ω₀²−γ²), NOT ω₀. Damping slows the oscillation: ω_d<ω₀. The solution is y=e^{−γt}(C₁cosω_dt+C₂sinω_dt). Only when c=0 (no damping) does ω_d=ω₀.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-oscillator/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.harmonic-oscillator",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-6\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-oscillator/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.harmonic-oscillator",
+      "title": "NO_RESPONSE → \"Spring-mass: m=1, c=2, k=5. Δ=4−20=−16<0. Underdamped. γ=c/(2m)=1. ω_d=√(5−1)=2. Solution: y=e^{−t}(C₁cos2t+C₂sin2t). With y(0)=1, y'(0)=0: C₁=1; y'=−e^{−t}(C₁cos2t+C₂sin2t)+e^{−t}(−2C₁sin2t+2C₂cos2t)=0 at t=0: −1+2C₂=0 → C₂=1/2. y=e^{−t}(cos2t+sin2t/2).\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-7\",\"title\":\"NO_RESPONSE → \\\"Spring-mass: m=1, c=2, k=5. Δ=4−20=−16<0. Underdamped. γ=c/(2m)=1. ω_d=√(5−1)=2. Solution: y=e^{−t}(C₁cos2t+C₂sin2t). With y(0)=1, y'(0)=0: C₁=1; y'=−e^{−t}(C₁cos2t+C₂sin2t)+e^{−t}(−2C₁sin2t+2C₂cos2t)=0 at t=0: −1+2C₂=0 → C₂=1/2. y=e^{−t}(cos2t+sin2t/2).\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-oscillator/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.harmonic-oscillator",
+      "title": "CORRECT → \"Forced: y=yₕ(transient)+yₚ(steady-state). Steady-state amplitude =F₀/√((k−mω²)²+c²ω²). Resonance (undamped): ω=ω₀ → modification rule → amplitude grows as t.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-8\",\"title\":\"CORRECT → \\\"Forced: y=yₕ(transient)+yₚ(steady-state). Steady-state amplitude =F₀/√((k−mω²)²+c²ω²). Resonance (undamped): ω=ω₀ → modification rule → amplitude grows as t.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-oscillator/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.harmonic-oscillator",
+      "title": "PARTIAL (MC-3: all forcing causes resonance) → \"Resonance requires the driving frequency to MATCH the system's natural frequency: ω=ω₀ (for undamped), or ω≈ω_res (for damped). At other frequencies, yₚ oscillates at amplitude F₀/√(...), which can be small or large but is FINITE for c>0. Only at the resonant frequency does the amplitude peak (or blow up for c=0).\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-9\",\"title\":\"PARTIAL (MC-3: all forcing causes resonance) → \\\"Resonance requires the driving frequency to MATCH the system's natural frequency: ω=ω₀ (for undamped), or ω≈ω_res (for damped). At other frequencies, yₚ oscillates at amplitude F₀/√(...), which can be small or large but is FINITE for c>0. Only at the resonant frequency does the amplitude peak (or blow up for c=0).\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-oscillator/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.harmonic-oscillator",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-oscillator/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.harmonic-oscillator",
+      "title": "NO_RESPONSE → \"y''+4y=cos3t. ω₀=2, ω=3. Steady-state: yₚ=Acos3t+Bsin3t. yₚ''=−9Acos3t−9Bsin3t. (−9A+4A)cos3t+(−9B+4B)sin3t=cos3t → −5A=1→A=−1/5; −5B=0→B=0. yₚ=−cos3t/5. At ω=2: denominator=4−4·4=−12 → |yₚ|=1/12... wait: (k−mω²)=(4−4)=0; undamped resonance → use modification rule → yₚ=(t/4)sin2t.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"NO_RESPONSE → \\\"y''+4y=cos3t. ω₀=2, ω=3. Steady-state: yₚ=Acos3t+Bsin3t. yₚ''=−9Acos3t−9Bsin3t. (−9A+4A)cos3t+(−9B+4B)sin3t=cos3t → −5A=1→A=−1/5; −5B=0→B=0. yₚ=−cos3t/5. At ω=2: denominator=4−4·4=−12 → |yₚ|=1/12... wait: (k−mω²)=(4−4)=0; undamped resonance → use modification rule → yₚ=(t/4)sin2t.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-oscillator/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.harmonic-oscillator",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Classify the oscillator with m=1, c=6, k=9 (find Δ, γ, ω_d if applicable). Solve y(0)=1, y'(0)=0.\n2. For m=1, c=0, k=4: find the solution y(0)=0, y'(0)=2. Write in amplitude-phase form R cos(ω₀t−φ).\n3. Forced underdamped oscillator: y'' + 2y' + 5y = 3cos t. Find the transient and steady-state parts. What is the long-run behaviour?\n4. For the undamped forced oscillator y'' + ω₀²y = cos(ωt) (ω≠ω₀): find the steady-state amplitude. Plot amplitude vs. ω and identify the resonant peak. What happens as c→0?\n5. RLC circuit: L d²q/dt² + R dq/dt + q/C = E₀cos(ωt). Identify the analogues of m, c, k, F₀. Find the steady-state current I=dq/dt amplitude as a function of ω.\n\n**P55 — Reflect & Consolidate:** \"my''+cy'+ky=F. Δ=c²−4mk: Δ<0 underdamped (oscillates, decays), Δ=0 critically damped, Δ>0 overdamped. ω₀=√(k/m), γ=c/(2m), ω_d=√(ω₀²−γ²). Forced: y=yₕ+yₚ. yₚ amplitude =F₀/√((k−mω²)²+c²ω²). Resonance: ω=ω₀ with c=0.\"\n\n**P76 — Transfer Probe (Cross-link mode: math.trig.trig-functions):**\n(a) The RLC circuit and the spring-mass system obey the SAME second-order ODE — the same mathematical structure produces electromagnetic oscillations and mechanical vibrations. Identify the exact analogy: charge q ↔ position x, inductance L ↔ mass m, resistance R ↔ damping c, 1/C ↔ spring constant k. Use this analogy to predict the frequency of a lossless LC oscillator (R=0) and its resonance. (b) The amplitude-phase form y=Re^{−γt}cos(ω_dt−φ) uses both exponential and trigonometric functions. Derive R and φ in terms of the initial conditions y(0)=y₀, y'(0)=v₀. Show that R²=y₀²+(v₀+γy₀)²/ω_d². (c) In quantum mechanics, the harmonic oscillator Hamiltonian is H=p²/(2m)+mω₀²x²/2. The classical correspondence: the expectation value ⟨x⟩(t) satisfies the classical equation m⟨x⟩''=−mω₀²⟨x⟩. How does damping fit into the quantum picture?\n\n**P75 — Mastery Assessment:**\n\"(a) A mass-spring-damper system has m=2 kg, k=50 N/m, c=20 N·s/m. Is it underdamped, critically damped, or overdamped? Find the general solution. (b) The system in (a) is given initial conditions x(0)=0.1 m, x'(0)=0. Find the particular solution and the time at which the mass first returns to x=0. (c) A forcing F(t)=5cos(ωt) is applied to an undamped oscillator (m=1, k=4, c=0). For ω=1,2,3: compute the steady-state amplitude. Which ω is closest to resonance? (d) For the forced undamped oscillator y''+4y=cos2t (resonance): apply the modification rule to find yₚ=(t/4)sin2t. Interpret this physically: why does energy accumulate without bound?\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW the damped frequency formula and the steady-state amplitude expression\n- Score ≤ 3/5 → PREREQUISITE GAP in math.de.char-equation or math.de.undetermined-coefficients; reassign\n\n**P78 — Completion:** Harmonic Oscillator ODE certified. Student classifies damping regimes from the discriminant; writes correct solution form in each case; distinguishes ω₀ from ω_d; computes steady-state amplitude; identifies resonance condition.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-oscillator.md",
+        "startLine": 102,
+        "endLine": 126
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

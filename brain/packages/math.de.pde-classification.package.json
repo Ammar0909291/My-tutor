@@ -1,0 +1,825 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.pde-classification-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.pde-classification",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:94c980529e8190f852c0e8fe186de1a86eeb1d3da16a775ee4894b2365367d0f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.pde-classification.md": "sha256:3bb771d2ee832247757b0ce6a2eada24f61da26b3e33e2a1d1a0f98e4263bf70"
+    },
+    "assetCount": 25,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 20,
+      "mastery_probe": 1
+    },
+    "ruleCount": 20
+  },
+  "concept": {
+    "conceptId": "math.de.pde-classification",
+    "name": "Classification of PDEs",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.de.pde"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.pde-classification-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.pde-classification (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.pde-classification.md": "sha256:3bb771d2ee832247757b0ce6a2eada24f61da26b3e33e2a1d1a0f98e4263bf70"
+      },
+      "contentHash": "sha256:b5de0d1fe101d685a7544e6270ffe2f245c34e2df6c0da3a76e848048de8c4e8",
+      "ruleCount": 20,
+      "bandCounts": {
+        "3": 20
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.pde-classification.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.pde-classification.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.pde-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.pde-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.pde-classification.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.pde-classification.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.pde-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.pde-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.pde-classification.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.pde-classification.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.pde-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.pde-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.pde-classification.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.pde-classification.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.pde-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.pde-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.pde-classification.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.pde-classification.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.pde-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.pde-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.pde-classification.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.pde-classification.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.pde-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.pde-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.pde-classification.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.pde-classification.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.pde-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.pde-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.pde-classification.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.pde-classification.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.pde-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.pde-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.pde-classification.TA-17",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.pde-classification.md#TA-17",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.pde-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.pde-classification\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.pde-classification.TA-18",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.pde-classification.md#TA-18 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.pde-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.pde-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.pde-classification.TA-19",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.pde-classification.md#TA-19",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.pde-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.pde-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.pde-classification.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.pde-classification.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.pde-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.pde-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.pde-classification.TA-20",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.pde-classification.md#TA-20",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.pde-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.pde-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.pde-classification.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.pde-classification.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.pde-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.pde-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.pde-classification.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.pde-classification.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.pde-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.pde-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.pde-classification.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.pde-classification.md#TA-5 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.pde-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.pde-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.pde-classification.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.pde-classification.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.pde-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.pde-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.pde-classification.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.pde-classification.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.pde-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.pde-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.pde-classification.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.pde-classification.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.pde-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.pde-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.pde-classification.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.pde-classification.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.pde-classification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.pde-classification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.pde-classification/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.pde-classification",
+      "title": "Learning Objective",
+      "content": "The student classifies second-order linear PDEs of the form Auₓₓ + Buₓᵧ + Cuᵧᵧ + lower-order terms = 0 using the discriminant Δ = B² − 4AC: elliptic (Δ<0), parabolic (Δ=0), hyperbolic (Δ>0); identifies canonical examples (Laplace/Poisson = elliptic, heat = parabolic, wave = hyperbolic); explains the connection between classification and the physical character of the equation (equilibrium vs. diffusion vs. propagation); and matches each class to its appropriate solution method and boundary/initial condition requirements.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.pde-classification",
+      "title": "DISCRIMINANT-APPLIED-TO-COEFFICIENTS-NOT-PDE",
+      "content": "| MC-1 | DISCRIMINANT-APPLIED-TO-COEFFICIENTS-NOT-PDE | Student applies B²−4AC to a quadratic polynomial appearing in the solution or in boundary data rather than to the COEFFICIENTS A, B, C of the leading second-order terms of the PDE itself | Type 3 — language contamination (\"discriminant\" is first encountered for quadratic equations ax²+bx+c=0; students reflexively apply Δ=b²−4ac to whatever polynomial appears in the PDE problem without identifying A, B, C as the PDE coefficients of uₓₓ, uₓᵧ, uᵧᵧ) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.pde-classification",
+      "title": "CLASSIFICATION-IS-GLOBAL-NOT-LOCAL",
+      "content": "| MC-2 | CLASSIFICATION-IS-GLOBAL-NOT-LOCAL | Student thinks the classification of a PDE with variable coefficients A(x,y), B(x,y), C(x,y) is fixed globally; doesn't realise that the discriminant B²−4AC can change sign across the domain, making a PDE elliptic in one region and hyperbolic in another | Type 5 — instruction-induced (textbook examples almost always have constant A, B, C where the classification is indeed global; variable-coefficient PDEs — like the Tricomi equation yuₓₓ+uᵧᵧ=0, elliptic for y>0 and hyperbolic for y<0 — are rarely presented, leaving students with the impression that classification is always a single fixed label) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.pde-classification",
+      "title": "PARABOLIC-MEANS-PARABOLA-SHAPE",
+      "content": "| MC-3 | PARABOLIC-MEANS-PARABOLA-SHAPE | Student confuses \"parabolic PDE\" with a PDE whose solution has a parabolic shape, or thinks the classification refers to the geometry of the solution rather than the discriminant condition Δ=0 | Type 3 — language contamination (\"parabolic\" in everyday mathematics describes a parabola (the curve y=x²); \"parabolic PDE\" is a technical classification by discriminant, not by the shape of any solution; the connection is to the theory of conic sections — an equation Ax²+Bxy+Cy²=1 is a parabola when B²−4AC=0 — but no solution of the heat equation is literally parabolic) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.pde-classification",
+      "title": "**Elliptic:** equilibrium — solutions are determined by BCs on the whole boundary (Dirichlet or Neumann); no preferred direction; smooth solutions inside.",
+      "content": "{\"id\":\"TA-1\",\"title\":\"**Elliptic:** equilibrium — solutions are determined by BCs on the whole boundary (Dirichlet or Neumann); no preferred direction; smooth solutions inside.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.pde-classification",
+      "title": "**Parabolic:** diffusion — initial condition at t=0 + BCs on spatial boundary determine the solution for t>0; smoothing effect (infinitely smooth for t>0 even from rough IC).",
+      "content": "{\"id\":\"TA-2\",\"title\":\"**Parabolic:** diffusion — initial condition at t=0 + BCs on spatial boundary determine the solution for t>0; smoothing effect (infinitely smooth for t>0 even from rough IC).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.pde-classification",
+      "title": "**Hyperbolic:** propagation — initial conditions at t=0 plus ICs for uₜ determine the solution; finite propagation speed (waves), characteristics, possible shocks.",
+      "content": "{\"id\":\"TA-3\",\"title\":\"**Hyperbolic:** propagation — initial conditions at t=0 plus ICs for uₜ determine the solution; finite propagation speed (waves), characteristics, possible shocks.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.pde-classification",
+      "title": "CORRECT → \"Δ=B²−4AC: Δ<0 elliptic (Laplace), Δ=0 parabolic (heat), Δ>0 hyperbolic (wave). Physical: equilibrium / diffusion / propagation.\" → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"CORRECT → \\\"Δ=B²−4AC: Δ<0 elliptic (Laplace), Δ=0 parabolic (heat), Δ>0 hyperbolic (wave). Physical: equilibrium / diffusion / propagation.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.pde-classification",
+      "title": "PARTIAL (MC-1: wrong identification of A,B,C) → \"A, B, C are the coefficients of the SECOND-ORDER TERMS ONLY: uₓₓ, uₓᵧ, uᵧᵧ. Specifically: A = coefficient of uₓₓ; B = coefficient of uₓᵧ; C = coefficient of uᵧᵧ. Lower-order terms (uₓ, uᵧ, u, constant) play NO role in classification. Then compute Δ=B²−4AC.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-5\",\"title\":\"PARTIAL (MC-1: wrong identification of A,B,C) → \\\"A, B, C are the coefficients of the SECOND-ORDER TERMS ONLY: uₓₓ, uₓᵧ, uᵧᵧ. Specifically: A = coefficient of uₓₓ; B = coefficient of uₓᵧ; C = coefficient of uᵧᵧ. Lower-order terms (uₓ, uᵧ, u, constant) play NO role in classification. Then compute Δ=B²−4AC.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.pde-classification",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-6\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.pde-classification",
+      "title": "NO_RESPONSE → \"Classify 3uₓₓ − 4uₓᵧ + 5uᵧᵧ = 0. A=3, B=−4, C=5. Δ=16−60=−44<0. Elliptic. Classify uₓₓ − 2uₓᵧ + uᵧᵧ + uₓ = 0. A=1,B=−2,C=1. Δ=4−4=0. Parabolic.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-7\",\"title\":\"NO_RESPONSE → \\\"Classify 3uₓₓ − 4uₓᵧ + 5uᵧᵧ = 0. A=3, B=−4, C=5. Δ=16−60=−44<0. Elliptic. Classify uₓₓ − 2uₓᵧ + uᵧᵧ + uₓ = 0. A=1,B=−2,C=1. Δ=4−4=0. Parabolic.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.pde-classification",
+      "title": "For y>0: Δ<0 — ELLIPTIC (subsonic flow analogy).",
+      "content": "{\"id\":\"TA-8\",\"title\":\"For y>0: Δ<0 — ELLIPTIC (subsonic flow analogy).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.pde-classification",
+      "title": "For y=0: Δ=0 — PARABOLIC (transition, sonic).",
+      "content": "{\"id\":\"TA-9\",\"title\":\"For y=0: Δ=0 — PARABOLIC (transition, sonic).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.pde-classification",
+      "title": "For y<0: Δ>0 — HYPERBOLIC (supersonic flow).",
+      "content": "{\"id\":\"TA-10\",\"title\":\"For y<0: Δ>0 — HYPERBOLIC (supersonic flow).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.pde-classification",
+      "title": "**Elliptic** → boundary value problem; use Fourier series, separation of variables, Green's functions; do NOT specify time evolution.",
+      "content": "{\"id\":\"TA-11\",\"title\":\"**Elliptic** → boundary value problem; use Fourier series, separation of variables, Green's functions; do NOT specify time evolution.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 73,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.pde-classification",
+      "title": "**Parabolic** → initial-boundary value problem; use Fourier series in x, exponential decay in t; well-posed with u(x,0)=f(x) + BCs.",
+      "content": "{\"id\":\"TA-12\",\"title\":\"**Parabolic** → initial-boundary value problem; use Fourier series in x, exponential decay in t; well-posed with u(x,0)=f(x) + BCs.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 74,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.pde-classification",
+      "title": "**Hyperbolic** → initial-boundary value problem with TWO initial conditions (u and uₜ); d'Alembert's formula or Fourier series; finite propagation speed means information travels along characteristics.",
+      "content": "{\"id\":\"TA-13\",\"title\":\"**Hyperbolic** → initial-boundary value problem with TWO initial conditions (u and uₜ); d'Alembert's formula or Fourier series; finite propagation speed means information travels along characteristics.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.pde-classification",
+      "title": "Elliptic: specify u or ∂u/∂n on the ENTIRE boundary (overdetermination or underdetermination leads to ill-posedness).",
+      "content": "{\"id\":\"TA-14\",\"title\":\"Elliptic: specify u or ∂u/∂n on the ENTIRE boundary (overdetermination or underdetermination leads to ill-posedness).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.pde-classification",
+      "title": "Parabolic: specify u at t=0 and BCs in x; do NOT need ∂u/∂t at t=0.",
+      "content": "{\"id\":\"TA-15\",\"title\":\"Parabolic: specify u at t=0 and BCs in x; do NOT need ∂u/∂t at t=0.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.pde-classification",
+      "title": "Hyperbolic: specify BOTH u and ∂u/∂t at t=0 (Cauchy data).",
+      "content": "{\"id\":\"TA-16\",\"title\":\"Hyperbolic: specify BOTH u and ∂u/∂t at t=0 (Cauchy data).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/teaching_action_meta/TA-17",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.pde-classification",
+      "title": "CORRECT → \"Variable coefficients: classify locally via Δ(x,y)=B(x,y)²−4A(x,y)C(x,y) — may change across domain. Elliptic→BVP. Parabolic→IC+BCs. Hyperbolic→IC+∂u/∂t IC+BCs.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-17\",\"title\":\"CORRECT → \\\"Variable coefficients: classify locally via Δ(x,y)=B(x,y)²−4A(x,y)C(x,y) — may change across domain. Elliptic→BVP. Parabolic→IC+BCs. Hyperbolic→IC+∂u/∂t IC+BCs.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-17",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/teaching_action_meta/TA-18",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.pde-classification",
+      "title": "PARTIAL (MC-2: global classification for variable coefficients) → \"For variable A(x,y), B(x,y), C(x,y): compute Δ(x,y)=B²−4AC at each point. The CLASSIFICATION CAN CHANGE across the domain. The Tricomi equation yuₓₓ+uᵧᵧ=0 is elliptic for y>0 and hyperbolic for y<0 — there is no single global label. When the problem specifies a domain, classify Δ on that domain (it may be a single type, or mixed).\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-18\",\"title\":\"PARTIAL (MC-2: global classification for variable coefficients) → \\\"For variable A(x,y), B(x,y), C(x,y): compute Δ(x,y)=B²−4AC at each point. The CLASSIFICATION CAN CHANGE across the domain. The Tricomi equation yuₓₓ+uᵧᵧ=0 is elliptic for y>0 and hyperbolic for y<0 — there is no single global label. When the problem specifies a domain, classify Δ on that domain (it may be a single type, or mixed).\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-18",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/teaching_action_meta/TA-19",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.pde-classification",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-19\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-19",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/teaching_action_meta/TA-20",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.pde-classification",
+      "title": "NO_RESPONSE → \"Classify each PDE in its domain: (1) uₓₓ+uᵧᵧ=f(x,y) in disk {x²+y²<1}: A=1,B=0,C=1,Δ=−4<0 everywhere → ELLIPTIC throughout. (2) uₜ=uₓₓ+uᵧᵧ (heat in 2D) as −uₜ+uₓₓ+uᵧᵧ=0: treat (x,y,t) — mixed character (see remark). In (x,t): A=1,B=0,C=0 → Δ=0, PARABOLIC.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-20\",\"title\":\"NO_RESPONSE → \\\"Classify each PDE in its domain: (1) uₓₓ+uᵧᵧ=f(x,y) in disk {x²+y²<1}: A=1,B=0,C=1,Δ=−4<0 everywhere → ELLIPTIC throughout. (2) uₜ=uₓₓ+uᵧᵧ (heat in 2D) as −uₜ+uₓₓ+uᵧᵧ=0: treat (x,y,t) — mixed character (see remark). In (x,t): A=1,B=0,C=0 → Δ=0, PARABOLIC.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-20",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.de.pde-classification/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.pde-classification",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Classify each PDE: (a) 4uₓₓ + 4uₓᵧ + uᵧᵧ = 0; (b) uₓₓ − uᵧᵧ = 0; (c) uₓₓ + 2uₓᵧ + uᵧᵧ − uₓ = 0; (d) uₓₓ + 4uᵧᵧ = 0.\n2. Show that every PDE of the form uₓₓ + uᵧᵧ = F(x,y,u,uₓ,uᵧ) is elliptic regardless of F.\n3. For the PDE (y²+1)uₓₓ + uᵧᵧ = 0: (a) find the discriminant Δ as a function of y; (b) classify the PDE in each region of the xy-plane; (c) for what value of y (if any) is the PDE parabolic?\n4. A researcher claims that a BVP for the wave equation (hyperbolic) with only boundary conditions (no initial condition on uₜ) is well-posed. Explain, using the classification, why this is likely to be ill-posed.\n5. Write the heat equation uₜ = c²uₓₓ in the form of the general second-order linear PDE with independent variables (x,t) instead of (x,y). Identify A, B, C and compute Δ. Confirm it is parabolic.\n\n**P55 — Reflect & Consolidate:** \"Auₓₓ+Buₓᵧ+Cuᵧᵧ+⋯=0. Δ=B²−4AC: <0 elliptic (Laplace), =0 parabolic (heat), >0 hyperbolic (wave). Variable coefficients: classify locally. Physical meaning: equilibrium / diffusion / wave propagation. IC/BC requirements: BVP / IC+BCs / IC+∂ₜIC+BCs.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Canonical forms: every second-order linear PDE can be reduced (by a change of variables) to a canonical form in which cross-derivative terms vanish. For elliptic PDEs, the canonical form is ũₛₛ + ũₜₜ + lower = 0 (Laplace structure); for hyperbolic, ũₛₜ + lower = 0 (d'Alembert structure); for parabolic, ũₛₛ − ũₜ + lower = 0 (heat structure). Show that the transformation to canonical form amounts to diagonalising the symbol matrix [[A, B/2],[B/2, C]]. (b) Systems of first-order PDEs: the wave equation uₜₜ=c²uₓₓ can be written as a 2×2 first-order system [uₜ; cₓ]' = [[0,c],[c,0]][uₓ; uₜ]. The eigenvalues of the coefficient matrix give the characteristic speeds ±c. Explain how this characteristic analysis generalises the scalar hyperbolic classification. (c) Pseudo-differential operators: the symbol of the second-order PDE A uₓₓ + B uₓᵧ + C uᵧᵧ is σ(ξ,η) = Aξ²+Bξη+Cη² (obtained by replacing ∂/∂x→iξ, ∂/∂y→iη). Show that the PDE is elliptic iff σ≠0 for all (ξ,η)≠(0,0) — i.e., the operator has no real \"direction of non-coerciveness,\" which is equivalent to Δ<0.\n\n**P75 — Mastery Assessment:**\n\"(a) Classify and state the appropriate initial/boundary conditions for: (i) the Helmholtz equation uₓₓ+uᵧᵧ+k²u=0; (ii) the Klein-Gordon equation uₜₜ−c²uₓₓ+m²u=0; (iii) the Schrödinger equation iuₜ=−uₓₓ+Vu (interpret as real/imaginary system). (b) The PDE Δu=u in a bounded domain with u=0 on the boundary: (i) classify the equation; (ii) state why this is an eigenvalue problem; (iii) explain whether solutions necessarily exist for all values of the constant m² in Δu+m²u=0. (c) Explain in physical terms (no computation) why an elliptic PDE requires boundary conditions everywhere on the boundary, while a parabolic PDE only requires conditions on part of the boundary (the initial time and spatial edges). What would happen if you tried to impose uₜ(x,0)=g(x) as an extra IC for the heat equation? (d) For the variable-coefficient PDE u_xx − x·u_yy = 0: determine the type in each of the three regions x>0, x=0, x<0. Sketch the transition curve in the xy-plane.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW the variable-coefficient local classification and the IC/BC requirements per type\n- Score ≤ 3/5 → PREREQUISITE GAP in math.de.pde; reassign\n\n**P78 — Completion:** Classification of PDEs certified. Student applies the discriminant B²−4AC to identify elliptic, parabolic, and hyperbolic PDEs; recognises the canonical examples (Laplace, heat, wave); classifies variable-coefficient PDEs locally; and matches each class to its correct initial/boundary condition requirements and solution character.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.pde-classification.md",
+        "startLine": 100,
+        "endLine": 124
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

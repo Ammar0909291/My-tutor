@@ -1,0 +1,418 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.undetermined-coefficients-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.undetermined-coefficients",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1ef427e69d846c6f9aa7c318cbf8a6c42a02179d8a7955a19f585f83bdbbe188",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.undetermined-coefficients.md": "sha256:630a1f6e2566043f561506c29144191ba5ce6a661a416e8a6703e265317b70b6"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.de.undetermined-coefficients",
+    "name": "Method of Undetermined Coefficients",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.de.second-order-linear",
+      "math.de.char-equation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.undetermined-coefficients-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.undetermined-coefficients (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.undetermined-coefficients.md": "sha256:630a1f6e2566043f561506c29144191ba5ce6a661a416e8a6703e265317b70b6"
+      },
+      "contentHash": "sha256:450251d9907c575ae83af4b3bb38930d6d0dfe4630e6c494b146d1ceec19ced0",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.undetermined-coefficients.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.undetermined-coefficients.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.undetermined-coefficients"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.undetermined-coefficients\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.undetermined-coefficients.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.undetermined-coefficients.md#TA-2 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.undetermined-coefficients"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.undetermined-coefficients\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.undetermined-coefficients.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.undetermined-coefficients.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.undetermined-coefficients"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.undetermined-coefficients\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.undetermined-coefficients.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.undetermined-coefficients.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.undetermined-coefficients"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.undetermined-coefficients\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.undetermined-coefficients.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.undetermined-coefficients.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.undetermined-coefficients"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.undetermined-coefficients\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.undetermined-coefficients.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.undetermined-coefficients.md#TA-6 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.undetermined-coefficients"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.undetermined-coefficients\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.undetermined-coefficients.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.undetermined-coefficients.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.undetermined-coefficients"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.undetermined-coefficients\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.undetermined-coefficients.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.undetermined-coefficients.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.undetermined-coefficients"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.undetermined-coefficients\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.undetermined-coefficients/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.undetermined-coefficients",
+      "title": "Learning Objective",
+      "content": "The student applies the method of undetermined coefficients to find a particular solution yₚ of ay'' + by' + cy = g(x) when g(x) is a polynomial, exponential, sine, cosine, or product thereof; selects the correct trial function (including the modification rule when any term of the trial function solves the homogeneous equation); determines the coefficients by substitution; and forms the general solution y = yₕ + yₚ.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.undetermined-coefficients.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.undetermined-coefficients/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.undetermined-coefficients",
+      "title": "ONLY-MATCHING-THE-LEAD-TERM",
+      "content": "| MC-1 | ONLY-MATCHING-THE-LEAD-TERM | When g(x) is a polynomial of degree n, student uses only Axⁿ as yₚ instead of the full Aₙxⁿ + Aₙ₋₁xⁿ⁻¹ + ⋯ + A₀; the lower-degree terms are needed because differentiation lowers degree | Type 5 — instruction-induced (simple examples with g=constant → yₚ=A work fine; students extrapolate that for g=x they only need yₚ=Ax, not realizing differentiation of Ax produces a constant that must cancel against bA and cAx separately, requiring a constant term A₀) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.undetermined-coefficients.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.de.undetermined-coefficients/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.undetermined-coefficients",
+      "title": "FORGETTING-MODIFICATION-RULE",
+      "content": "| MC-2 | FORGETTING-MODIFICATION-RULE | Student uses the standard trial function even when part of it is already in yₕ, leading to a system of equations with no solution (the undetermined coefficients come out as 0=1) | Type 5 — instruction-induced (the basic method is taught first for cases where the trial function doesn't overlap yₕ; when it does, the system degenerates and students just report \"no solution\" rather than recognising the need to multiply by x) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.undetermined-coefficients.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.de.undetermined-coefficients/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.undetermined-coefficients",
+      "title": "SINE-ONLY-TRIAL-FOR-SINE-FORCING",
+      "content": "| MC-3 | SINE-ONLY-TRIAL-FOR-SINE-FORCING | When g(x) = sin(bx), student uses yₚ = A sin(bx) only, omitting the cosine term B cos(bx); substituting into the ODE produces a cosine term on the left that can't be cancelled | Type 1 — overgeneralisation (g has only sine → yₚ should have only sine seems logical; students don't realise that differentiating A sin produces A cos, which needs a separate B coefficient to cancel) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.undetermined-coefficients.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.undetermined-coefficients/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.undetermined-coefficients",
+      "title": "CORRECT → \"Trial yₚ from table. Check overlap with yₕ → modify by x or x². Substitute, match coefficients. y=yₕ+yₚ.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Trial yₚ from table. Check overlap with yₕ → modify by x or x². Substitute, match coefficients. y=yₕ+yₚ.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.undetermined-coefficients.md",
+        "startLine": 70,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.de.undetermined-coefficients/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.undetermined-coefficients",
+      "title": "PARTIAL (MC-2: forgot modification rule) → \"If substituting the trial yₚ gives 0=nonzero (inconsistent system), the trial function duplicates a term in yₕ. STOP — multiply yₚ by x. Re-substitute. If still inconsistent, multiply by x². The modification rule applies once for each resonant term.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (MC-2: forgot modification rule) → \\\"If substituting the trial yₚ gives 0=nonzero (inconsistent system), the trial function duplicates a term in yₕ. STOP — multiply yₚ by x. Re-substitute. If still inconsistent, multiply by x². The modification rule applies once for each resonant term.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.undetermined-coefficients.md",
+        "startLine": 71,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "math.de.undetermined-coefficients/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.undetermined-coefficients",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.undetermined-coefficients.md",
+        "startLine": 72,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "math.de.undetermined-coefficients/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.undetermined-coefficients",
+      "title": "NO_RESPONSE → \"y'' + 4y = cos 2x. yₕ = C₁cos2x+C₂sin2x. Trial: yₚ = Acos2x+Bsin2x overlaps yₕ → multiply by x: yₚ = x(Acos2x+Bsin2x). yₚ'' = A(−4xcos2x+2·(−2sin2x))... after computation: yₚ''= (−4Ax+4B)cos2x+(−4Bx−4A)sin2x. yₚ''+4yₚ = 4Bcos2x−4Asin2x = cos2x → B=1/4, A=0. yₚ = (x/4)sin2x.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"y'' + 4y = cos 2x. yₕ = C₁cos2x+C₂sin2x. Trial: yₚ = Acos2x+Bsin2x overlaps yₕ → multiply by x: yₚ = x(Acos2x+Bsin2x). yₚ'' = A(−4xcos2x+2·(−2sin2x))... after computation: yₚ''= (−4Ax+4B)cos2x+(−4Bx−4A)sin2x. yₚ''+4yₚ = 4Bcos2x−4Asin2x = cos2x → B=1/4, A=0. yₚ = (x/4)sin2x.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.undetermined-coefficients.md",
+        "startLine": 73,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "math.de.undetermined-coefficients/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.undetermined-coefficients",
+      "title": "CORRECT → \"Products → combine all trial factors. Superposition: split g, solve separately, add. Fails for tan/sec/ln — use VoP.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Products → combine all trial factors. Superposition: split g, solve separately, add. Fails for tan/sec/ln — use VoP.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.undetermined-coefficients.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.de.undetermined-coefficients/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.undetermined-coefficients",
+      "title": "PARTIAL (MC-3: sine-only trial) → \"When g(x) contains sin(bx) OR cos(bx), the trial ALWAYS has BOTH A sin(bx) AND B cos(bx). Differentiating A sin(bx) produces A·b·cos(bx), which needs a B coefficient to cancel when substituted. Even if g has only sin, the trial must include cos.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (MC-3: sine-only trial) → \\\"When g(x) contains sin(bx) OR cos(bx), the trial ALWAYS has BOTH A sin(bx) AND B cos(bx). Differentiating A sin(bx) produces A·b·cos(bx), which needs a B coefficient to cancel when substituted. Even if g has only sin, the trial must include cos.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.undetermined-coefficients.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.de.undetermined-coefficients/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.undetermined-coefficients",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.undetermined-coefficients.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.de.undetermined-coefficients/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.undetermined-coefficients",
+      "title": "NO_RESPONSE → \"y'' + y = 3eˣ + 2x. g₁=3eˣ → yₚ₁=Aeˣ; A−0+A=3eˣ... wait: A+A·0'+A=3 → yₚ₁''+yₚ₁=2Aeˣ=3eˣ → A=3/2. g₂=2x → yₚ₂=Bx+C; 0+0+Bx+C=2x → B=2, C=0. yₚ=3eˣ/2+2x.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"y'' + y = 3eˣ + 2x. g₁=3eˣ → yₚ₁=Aeˣ; A−0+A=3eˣ... wait: A+A·0'+A=3 → yₚ₁''+yₚ₁=2Aeˣ=3eˣ → A=3/2. g₂=2x → yₚ₂=Bx+C; 0+0+Bx+C=2x → B=2, C=0. yₚ=3eˣ/2+2x.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.undetermined-coefficients.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.de.undetermined-coefficients/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.undetermined-coefficients",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Find the general solution: y'' − 5y' + 6y = 2eˣ.\n2. Find yₚ for: y'' + 2y' + y = x² + 1. (Full polynomial trial; note the double root r=−1.)\n3. Find the general solution: y'' + 4y = sin 2x. (Identify resonance, apply modification rule.)\n4. Find yₚ for: y'' − y' = xeˣ. (Trial: eˣ(Ax+B); check if eˣ appears in yₕ first.)\n5. Find the general solution: y'' + y = x sin x. (Trial: (Ax+B)sin x + (Cx+D)cos x; verify no modification needed since r=±i and trial terms xsin x, xcos x are NOT in yₕ = C₁sin x+C₂cos x.)\n\n**P55 — Reflect & Consolidate:** \"y'' + by' + cy = g(x). General: y=yₕ+yₚ. Trial yₚ from table (polynomial → full degree; eᵃˣ → Aeᵃˣ; sin/cos → BOTH). Modification rule: if trial ⊂ yₕ, multiply by x (or x²). Superposition for sums. Not applicable: tan/sec/ln/1/x.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Exponential response formula: for ay''+by'+cy=eˢˣ, if s is NOT a root of the characteristic polynomial p(s)=as²+bs+c, then yₚ=eˢˣ/p(s). When s IS a root of multiplicity k, yₚ=xᵏeˢˣ/p⁽ᵏ⁾(s). Verify this formula reproduces the modification rule. (b) Complex exponential shortcut: to solve y''+y=cos x, write g=Re[eⁱˣ], solve y''+y=eⁱˣ for complex yₚ=eⁱˣ/p(i), take the real part. Show how this unifies the sin/cos trial. (c) The method fails for ay''+by'+cy=tan x. The Wronskian is W=e^{−∫(b/a)dx}. The variation of parameters formula gives yₚ=y₂∫(y₁g/W)dx − y₁∫(y₂g/W)dx. Why can the undetermined-coefficients method not handle tan x?\n\n**P75 — Mastery Assessment:**\n\"(a) Solve: y'' − 4y = 4x² + 2xeˣ. (Split by superposition.) (b) Solve: y'' + 4y' + 4y = e^{−2x}. (Identify double root r=−2; apply x² modification.) (c) For the forced oscillator y'' + ω²y = F₀sin(ωt) (resonance), show that the particular solution grows as yₚ = −(F₀/2ω)t cos(ωt). What is the physical interpretation of the t factor? (d) Consider y'' + 3y' + 2y = eˢˣ for various values of s. For which values of s does the modification rule apply? For those values, find the modified trial function.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW the modification rule and the full-polynomial trial\n- Score ≤ 3/5 → PREREQUISITE GAP in math.de.char-equation or math.de.second-order-linear; reassign\n\n**P78 — Completion:** Undetermined Coefficients certified. Student selects the correct trial function; applies the modification rule when needed; determines all coefficients by substitution; uses superposition for sums; recognises when VoP is required instead.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.undetermined-coefficients.md",
+        "startLine": 104,
+        "endLine": 128
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

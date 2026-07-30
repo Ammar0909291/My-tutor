@@ -1,0 +1,244 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.chaos-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.chaos",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3233d9cc7e140f404f752b05c6ef36928e3df4d36bb36a0af11b41ab661ea0ce",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.chaos.md": "sha256:f1cb821beb42a427078d0851f8f73400d54682075a530986bd42d4d1d85a101c"
+    },
+    "assetCount": 8,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.de.chaos",
+    "name": "Chaos Theory",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.6,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.de.nonlinear-ode",
+      "math.de.bifurcation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.chaos-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.chaos (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.chaos.md": "sha256:f1cb821beb42a427078d0851f8f73400d54682075a530986bd42d4d1d85a101c"
+      },
+      "contentHash": "sha256:af766b0f03181a6c86197e79bdb34327be2e11a3ff6e4b002ab127417ccb6418",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.chaos.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.chaos.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.chaos"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.chaos\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.chaos.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.chaos.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.chaos"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.chaos\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.chaos.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.chaos.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.chaos"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.chaos\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.chaos/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.chaos",
+      "title": "Learning Objective",
+      "content": "The student analyses chaotic behaviour in deterministic dynamical systems: defines chaos via sensitive dependence on initial conditions (SDIC), topological transitivity, and dense periodic orbits (Devaney's definition); quantifies sensitivity using the maximal Lyapunov exponent λ₁ (λ₁ > 0 implies chaos); identifies strange attractors as bounded, fractal, non-periodic limit sets; analyses the Lorenz system and logistic map as canonical examples; traces the period-doubling route to chaos and the Feigenbaum constant δ ≈ 4.669; estimates the fractal (correlation) dimension of a strange attractor; and explains why chaos in 3D autonomous ODEs requires dimension ≥ 3 (Poincaré-Bendixson) and why Lyapunov exponents determine long-term predictability horizons.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.chaos.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.chaos/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.chaos",
+      "title": "CHAOS-MEANS-RANDOM",
+      "content": "| MC-1 | CHAOS-MEANS-RANDOM | Student conflates chaos with randomness; says \"chaotic systems are unpredictable so they must be random\"; doesn't recognise that chaos arises from DETERMINISTIC rules and that each trajectory is uniquely determined by initial conditions — the unpredictability comes from exponential sensitivity to initial conditions, not from any stochastic process | Type 3 — language contamination (\"chaos\" in everyday English means disorder or randomness; students apply this colloquial meaning to the technical term, missing that mathematical chaos is deterministic — the same initial condition always gives the same trajectory; the system merely appears random because no finite measurement precision is sufficient for long-term prediction) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.chaos.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.de.chaos/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.chaos",
+      "title": "LYAPUNOV-EXPONENT-MEASURES-DIVERGENCE-SPEED",
+      "content": "| MC-2 | LYAPUNOV-EXPONENT-MEASURES-DIVERGENCE-SPEED | Student thinks λ₁ directly measures how fast two trajectories separate; interprets λ₁ = 1 as \"trajectories double their distance every unit time\"; misses that λ₁ = lim(t→∞) (1/t) ln(|δx(t)|/|δx(0)|) is an ASYMPTOTIC time-averaged rate, that the instantaneous rate fluctuates wildly along the attractor, and that the actual predictability horizon depends on both λ₁ AND the ratio of the system's scale to the measurement error | Type 5 — instruction-induced (λ₁ is often introduced with the formula |δx(t)| ≈ |δx(0)|eλ₁t and the claim \"diverges exponentially,\" encouraging a constant-rate interpretation; but along a strange attractor the local expansion rate varies enormously — the trajectory alternates between expansion and compression in different directions, and only the AVERAGE over time is λ₁) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.chaos.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.de.chaos/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.chaos",
+      "title": "CHAOS-REQUIRES-LARGE-SYSTEMS",
+      "content": "| MC-3 | CHAOS-REQUIRES-LARGE-SYSTEMS | Student believes chaos only occurs in complex, high-dimensional systems (many particles, turbulence) and not in simple 3-variable or discrete-map systems; fails to recognise that the Lorenz system (3D ODE) and the logistic map (1D discrete) are both minimal systems exhibiting genuine chaos, and that dimension ≥ 3 is sufficient (not necessary to be \"large\") for continuous-time autonomous ODE chaos | Type 1 — overgeneralisation (chaos is popularly associated with weather (atmospheric models, millions of degrees of freedom) and other \"complex\" systems; students over-apply \"large system → chaos\" and its contrapositive \"simple system → no chaos,\" not knowing that Lorenz specifically showed a 3-variable truncation of the Navier-Stokes equations already exhibits chaos) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.chaos.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.chaos/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.chaos",
+      "title": "SDIC:",
+      "content": "{\"id\":\"TA-1\",\"title\":\"SDIC:\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.chaos.md",
+        "startLine": 42,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "math.de.chaos/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.chaos",
+      "title": "Topological transitivity:",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Topological transitivity:\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.chaos.md",
+        "startLine": 43,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "math.de.chaos/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.chaos",
+      "title": "Dense periodic orbits:",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Dense periodic orbits:\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.chaos.md",
+        "startLine": 44,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.de.chaos/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.chaos",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. For the logistic map xₙ₊₁=rxₙ(1−xₙ) at r=4: (a) show that the substitution xₙ=sin²(πθₙ/2) transforms this to θₙ₊₁=2θₙ (mod 1) (doubling map); (b) show that the doubling map has λ=ln(2); (c) conclude r=4 is chaotic and find the exact predictability horizon for initial error ε₀=10⁻¹⁰.\n2. The Lorenz system with σ=10, b=8/3, r=28: (a) verify volume contracts at rate −(σ+b+1)=−41/3; (b) show C±=(±√(72),±√(72),27) are equilibria and compute their Jacobian; (c) find the eigenvalues of J at C+ and determine their stability.\n3. Explain the Feigenbaum universality: why should the ratio (rₙ−rₙ₋₁)/(rₙ₊₁−rₙ)→δ for ANY smooth unimodal map? What does this say about the universality of the period-doubling route to chaos? (Conceptual; cite the renormalization group argument.)\n4. For a 3D attractor with Lyapunov exponents λ₁=0.4, λ₂=0, λ₃=−1.8: (a) compute the Kaplan-Yorke dimension; (b) verify the attractor satisfies Σλᵢ<0 (dissipative); (c) determine whether the attractor has higher or lower fractal dimension than the Lorenz attractor at standard parameters.\n5. Construct a cobweb diagram for the tent map f(x)=1−|2x−1| on [0,1] at 10 iterations starting from x₀=0.3 and x₀=0.300001. Estimate when the two orbits first diverge by more than 0.1, and verify this is consistent with λ=ln(2).\n\n**P55 — Reflect & Consolidate:** \"Chaos: deterministic + SDIC + λ₁>0. NOT random. Predictability horizon t_predict≈(1/λ₁)ln(L/ε₀). ODE chaos requires ≥3 dimensions. Lorenz: 3D, λ₁≈0.906, D≈2.06, volume contracts. Period-doubling: Feigenbaum δ≈4.669, universal. Strange attractor: fractal, zero volume, dense orbits. Kaplan-Yorke dimension: D_KY=j+(Σλᵢ)/|λⱼ₊₁|.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Symbolic dynamics: the horseshoe map (Smale) acts on a square by stretching, folding, and re-injecting. Its dynamics is isomorphic to the full shift on two symbols {0,1}: each trajectory is encoded as a bi-infinite sequence (…s₋₂s₋₁.s₀s₁s₂…) where sₙ∈{0,1}. The shift map σ: sₙ→sₙ₊₁ has topological entropy log 2 and satisfies all three of Devaney's conditions. Explain how this symbolic coding makes it rigorous that: (i) SDIC holds (two sequences differing in one symbol diverge after sufficient iterations); (ii) dense periodic orbits exist (periodic sequences are dense in the shift space); (iii) a dense orbit exists (a sequence containing all finite words). (b) Chaos in Hamiltonian systems: for a conservative (Hamiltonian) system, the Lyapunov exponents satisfy the symplectic pairing law: λᵢ + λₙ₊₁₋ᵢ = 0 for all i. This means a Hamiltonian system with a positive Lyapunov exponent must have an equal negative exponent, with Σλᵢ=0 (no dissipation). Explain how chaotic Hamiltonian systems (e.g., the double pendulum, N-body problem) differ from dissipative strange attractors — specifically: why there is no attractor, why phase-space volume is conserved, and what \"Arnold diffusion\" means for multi-dimensional integrable perturbations. (c) Control of chaos (OGY method): a chaotic attractor contains a dense set of unstable periodic orbits (UPOs). The Ott-Grebogi-Yorke (OGY) algorithm stabilises a chosen UPO by applying tiny parameter perturbations each time the trajectory passes near that orbit's Poincaré section. Explain mathematically how the linear stable/unstable manifold decomposition of the UPO's Poincaré map fixed point guides the perturbation direction, and why chaos control requires exponentially smaller effort than controlling a non-chaotic system to a comparable target.\n\n**P75 — Mastery Assessment:**\n\"(a) The Hénon map: xₙ₊₁=1−axₙ²+yₙ, yₙ₊₁=bxₙ with a=1.4, b=0.3. (i) Show this map is invertible and compute the Jacobian determinant (which equals b throughout — volume contraction); (ii) show the fixed points satisfy x*=(−(1−b)±√((1−b)²+4a))/(2a); (iii) explain why, despite being a 2D map, the Hénon attractor can be chaotic (Poincaré-Bendixson applies only to continuous-time ODE, not to maps). (b) Compute the predictability horizon for two competing weather models: Model A has λ₁=0.2 day⁻¹, Model B has λ₁=0.35 day⁻¹. If both start with initial error ε₀=0.5% of the attractor scale, which model has longer predictability, by how many days? (c) A student argues: 'The Lorenz attractor must have integer dimension because it is the closure of a set of smooth trajectories.' Identify the flaw and explain why the Lorenz attractor has non-integer dimension ≈2.06. (d) Describe the period-doubling cascade for a smooth unimodal map (sketching the bifurcation diagram of the logistic map). Mark the accumulation point r_∞≈3.5699. Explain what happens for r>r_∞ and why the Feigenbaum constant δ≈4.669 is the same for any such map.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW the Lyapunov exponent definition and the period-doubling/Feigenbaum universality\n- Score ≤ 3/5 → PREREQUISITE GAP in math.de.bifurcation or math.de.nonlinear-ode; reassign\n\n**P78 — Completion:** Chaos Theory certified. Student defines chaos via Devaney's three conditions and relates them to positive Lyapunov exponents; computes predictability horizons; identifies the Lorenz system as a canonical chaotic ODE; explains the period-doubling route to chaos and Feigenbaum universality; estimates fractal/Kaplan-Yorke dimension; distinguishes chaotic deterministic dynamics from randomness; and recognises that chaos in autonomous ODEs requires dimension ≥ 3.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.chaos.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

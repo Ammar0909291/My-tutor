@@ -1,0 +1,623 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.variation-of-parameters-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.variation-of-parameters",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bcaa0de63f5f86eced48ec3ba0175db0fc8cdbae316aaa40f735b83b0680b5b9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.variation-of-parameters.md": "sha256:511bbe12b201e78d4a7a9f03dbe1bad76dc1ad46df1a20574f11db4c3d050727"
+    },
+    "assetCount": 19,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 14,
+      "mastery_probe": 1
+    },
+    "ruleCount": 14
+  },
+  "concept": {
+    "conceptId": "math.de.variation-of-parameters",
+    "name": "Variation of Parameters",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.de.wronskian",
+      "math.de.second-order-homogeneous",
+      "math.calc.integration-by-parts"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.variation-of-parameters-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.variation-of-parameters (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.variation-of-parameters.md": "sha256:511bbe12b201e78d4a7a9f03dbe1bad76dc1ad46df1a20574f11db4c3d050727"
+      },
+      "contentHash": "sha256:b4fc11ed493a8f588617f97242d69f073880cf16b14ed82df39ca75bfe0f326e",
+      "ruleCount": 14,
+      "bandCounts": {
+        "3": 14
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.variation-of-parameters.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.variation-of-parameters.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.variation-of-parameters"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.variation-of-parameters\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.variation-of-parameters.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.variation-of-parameters.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.variation-of-parameters"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.variation-of-parameters\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.variation-of-parameters.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.variation-of-parameters.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.variation-of-parameters"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.variation-of-parameters\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.variation-of-parameters.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.variation-of-parameters.md#TA-12 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.variation-of-parameters"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.variation-of-parameters\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.variation-of-parameters.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.variation-of-parameters.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.variation-of-parameters"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.variation-of-parameters\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.variation-of-parameters.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.variation-of-parameters.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.variation-of-parameters"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.variation-of-parameters\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.variation-of-parameters.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.variation-of-parameters.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.variation-of-parameters"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.variation-of-parameters\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.variation-of-parameters.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.variation-of-parameters.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.variation-of-parameters"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.variation-of-parameters\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.variation-of-parameters.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.variation-of-parameters.md#TA-4 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.variation-of-parameters"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.variation-of-parameters\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.variation-of-parameters.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.variation-of-parameters.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.variation-of-parameters"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.variation-of-parameters\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.variation-of-parameters.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.variation-of-parameters.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.variation-of-parameters"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.variation-of-parameters\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.variation-of-parameters.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.variation-of-parameters.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.variation-of-parameters"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.variation-of-parameters\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.variation-of-parameters.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.variation-of-parameters.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.variation-of-parameters"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.variation-of-parameters\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.variation-of-parameters.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.variation-of-parameters.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.variation-of-parameters"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.variation-of-parameters\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.variation-of-parameters/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.variation-of-parameters",
+      "title": "Learning Objective",
+      "content": "The student derives and applies the variation of parameters formula for a second-order linear ODE ay'' + by' + cy = g(x): given the homogeneous solutions y₁, y₂ (with Wronskian W), finds the particular solution yₚ = −y₁∫(y₂g/aW)dx + y₂∫(y₁g/aW)dx; evaluates the required integrals; and forms the general solution y = yₕ + yₚ. The student also recognises that this method applies to any g(x) (including tan x, ln x, 1/x) where undetermined coefficients fails.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.variation-of-parameters.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.variation-of-parameters/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.variation-of-parameters",
+      "title": "FORGETTING-THE-LEADING-COEFFICIENT",
+      "content": "| MC-1 | FORGETTING-THE-LEADING-COEFFICIENT | Student applies the formula yₚ=−y₁∫(y₂g/W)dx + y₂∫(y₁g/W)dx without dividing g by the leading coefficient a when a≠1; gets an answer off by a factor of 1/a | Type 5 — instruction-induced (the formula is often stated for the monic form y''+Py'+Qy=f where the leading coefficient is 1; students apply it without checking whether the equation has been divided by a first) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.variation-of-parameters.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.de.variation-of-parameters/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.variation-of-parameters",
+      "title": "WRONSKIAN-IN-DENOMINATOR-CAN-BE-ZERO",
+      "content": "| MC-2 | WRONSKIAN-IN-DENOMINATOR-CAN-BE-ZERO | Student doesn't check that W≠0 before applying the formula; if y₁, y₂ are linearly dependent (W=0 everywhere), the formula fails entirely | Type 1 — overgeneralisation (students treat the Wronskian as just \"a number to compute\" and plug in without verifying that it's nonzero — i.e., that y₁, y₂ are genuinely independent) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.variation-of-parameters.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.de.variation-of-parameters/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.variation-of-parameters",
+      "title": "VARIATION-OF-PARAMETERS-ALWAYS-GIVES-A-CLEANER-ANSWER-THAN-UNDETERMINED-COEFFICIENTS",
+      "content": "| MC-3 | VARIATION-OF-PARAMETERS-ALWAYS-GIVES-A-CLEANER-ANSWER-THAN-UNDETERMINED-COEFFICIENTS | Student prefers VoP even when undetermined coefficients applies, then struggles with difficult integrals that undetermined coefficients would have avoided entirely | Type 1 — overgeneralisation (students learn VoP as \"the general method\" and over-apply it; the principle is: use undetermined coefficients when g is a polynomial/exponential/trig product — VoP otherwise) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.variation-of-parameters.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.variation-of-parameters/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.variation-of-parameters",
+      "title": "u₁'y₁ + u₂'y₂ = 0",
+      "content": "{\"id\":\"TA-1\",\"title\":\"u₁'y₁ + u₂'y₂ = 0\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.variation-of-parameters.md",
+        "startLine": 47,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "math.de.variation-of-parameters/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.variation-of-parameters",
+      "title": "a(u₁'y₁' + u₂'y₂') = g(x)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"a(u₁'y₁' + u₂'y₂') = g(x)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.variation-of-parameters.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.de.variation-of-parameters/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.variation-of-parameters",
+      "title": "CORRECT → \"yₚ=u₁y₁+u₂y₂. u₁'=−y₂f/W, u₂'=y₁f/W. W=y₁y₂'−y₂y₁'. Divide by leading coefficient first.\" → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"CORRECT → \\\"yₚ=u₁y₁+u₂y₂. u₁'=−y₂f/W, u₂'=y₁f/W. W=y₁y₂'−y₂y₁'. Divide by leading coefficient first.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.variation-of-parameters.md",
+        "startLine": 70,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.de.variation-of-parameters/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.variation-of-parameters",
+      "title": "PARTIAL (MC-1: forgot leading coefficient) → \"If the ODE is ay''+by'+cy=g with a≠1, FIRST divide through by a to get y''+Py'+Qy=f=g/a. The VoP formulas use f=g/a (NOT g) in the numerator. If you use g without dividing by a, your u₁' and u₂' are off by factor a, so yₚ is wrong by factor a.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"PARTIAL (MC-1: forgot leading coefficient) → \\\"If the ODE is ay''+by'+cy=g with a≠1, FIRST divide through by a to get y''+Py'+Qy=f=g/a. The VoP formulas use f=g/a (NOT g) in the numerator. If you use g without dividing by a, your u₁' and u₂' are off by factor a, so yₚ is wrong by factor a.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.variation-of-parameters.md",
+        "startLine": 71,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "math.de.variation-of-parameters/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.variation-of-parameters",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-5\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.variation-of-parameters.md",
+        "startLine": 72,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "math.de.variation-of-parameters/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.variation-of-parameters",
+      "title": "NO_RESPONSE → \"y'' − y = eˣ/x. yₕ: r²−1=0 → r=±1 → y₁=eˣ, y₂=e^{−x}. W=eˣ(−e^{−x})−e^{−x}(eˣ)=−1−1=−2. f=eˣ/x. u₁'=−e^{−x}·(eˣ/x)/(−2)=1/(2x). u₁=(1/2)ln|x|. u₂'=eˣ·(eˣ/x)/(−2)=−e²ˣ/(2x). u₂=−(1/2)∫e²ˣ/x dx (Ei function). yₚ=(1/2)eˣln|x|−(e^{−x}/2)∫e²ˣ/x dx.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-6\",\"title\":\"NO_RESPONSE → \\\"y'' − y = eˣ/x. yₕ: r²−1=0 → r=±1 → y₁=eˣ, y₂=e^{−x}. W=eˣ(−e^{−x})−e^{−x}(eˣ)=−1−1=−2. f=eˣ/x. u₁'=−e^{−x}·(eˣ/x)/(−2)=1/(2x). u₁=(1/2)ln|x|. u₂'=eˣ·(eˣ/x)/(−2)=−e²ˣ/(2x). u₂=−(1/2)∫e²ˣ/x dx (Ei function). yₚ=(1/2)eˣln|x|−(e^{−x}/2)∫e²ˣ/x dx.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.variation-of-parameters.md",
+        "startLine": 73,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "math.de.variation-of-parameters/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.variation-of-parameters",
+      "title": "g(x) is a polynomial, eᵃˣ, sin(bx), cos(bx), or their products.",
+      "content": "{\"id\":\"TA-7\",\"title\":\"g(x) is a polynomial, eᵃˣ, sin(bx), cos(bx), or their products.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.variation-of-parameters.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.de.variation-of-parameters/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.variation-of-parameters",
+      "title": "Reason: the integral ∫y₂g/W dx is explicit and matched by the trial function automatically.",
+      "content": "{\"id\":\"TA-8\",\"title\":\"Reason: the integral ∫y₂g/W dx is explicit and matched by the trial function automatically.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.variation-of-parameters.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.de.variation-of-parameters/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.variation-of-parameters",
+      "title": "g(x) = tan x, sec x, ln x, 1/x, 1/(1+x²), or any function not of the listed form.",
+      "content": "{\"id\":\"TA-9\",\"title\":\"g(x) = tan x, sec x, ln x, 1/x, 1/(1+x²), or any function not of the listed form.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.variation-of-parameters.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.de.variation-of-parameters/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.variation-of-parameters",
+      "title": "Also always valid for all g — but may produce harder integrals.",
+      "content": "{\"id\":\"TA-10\",\"title\":\"Also always valid for all g — but may produce harder integrals.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.variation-of-parameters.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.de.variation-of-parameters/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.variation-of-parameters",
+      "title": "CORRECT → \"VoP: always valid but may produce hard integrals. UC: faster when g is polynomial/exp/trig. High order: Wₖ/W formula.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-11\",\"title\":\"CORRECT → \\\"VoP: always valid but may produce hard integrals. UC: faster when g is polynomial/exp/trig. High order: Wₖ/W formula.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.variation-of-parameters.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.de.variation-of-parameters/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.variation-of-parameters",
+      "title": "PARTIAL (MC-3: VoP preferred always) → \"VoP is always VALID but often produces integrals that can't be evaluated in closed form (e.g., ∫e²ˣ/x dx is not elementary). Undetermined coefficients, when applicable, produces only algebraic equations — no integration needed. Always try UC first if g is polynomial/exponential/trig; VoP is the fallback.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"PARTIAL (MC-3: VoP preferred always) → \\\"VoP is always VALID but often produces integrals that can't be evaluated in closed form (e.g., ∫e²ˣ/x dx is not elementary). Undetermined coefficients, when applicable, produces only algebraic equations — no integration needed. Always try UC first if g is polynomial/exponential/trig; VoP is the fallback.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.variation-of-parameters.md",
+        "startLine": 91,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "math.de.variation-of-parameters/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.variation-of-parameters",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-13\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.variation-of-parameters.md",
+        "startLine": 92,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "math.de.variation-of-parameters/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.variation-of-parameters",
+      "title": "NO_RESPONSE → \"y''+4y=sec2x. y₁=cos2x, y₂=sin2x. W=2. f=sec2x. u₁'=−sin2x·sec2x/2=−tan2x/2. u₁=(1/4)ln|cos2x|. u₂'=cos2x·sec2x/2=1/2. u₂=x/2. yₚ=(1/4)cos2x·ln|cos2x|+(x/2)sin2x.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-14\",\"title\":\"NO_RESPONSE → \\\"y''+4y=sec2x. y₁=cos2x, y₂=sin2x. W=2. f=sec2x. u₁'=−sin2x·sec2x/2=−tan2x/2. u₁=(1/4)ln|cos2x|. u₂'=cos2x·sec2x/2=1/2. u₂=x/2. yₚ=(1/4)cos2x·ln|cos2x|+(x/2)sin2x.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.variation-of-parameters.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.de.variation-of-parameters/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.variation-of-parameters",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Solve: y'' + y = sec x using variation of parameters.\n2. Solve: y'' − 2y' + y = eˣ/x using variation of parameters. (y₁=eˣ, y₂=xeˣ.)\n3. Solve: y'' + 4y = cos² x using both methods: (a) undetermined coefficients (write cos²x = (1+cos2x)/2, use superposition); (b) variation of parameters. Verify the answers agree.\n4. For the ODE y'' − y = 1/(1+eˣ): find yₚ using VoP. (The integrals involve logarithms.)\n5. Derive the VoP formula for the first-order linear ODE y' + P(x)y = g(x): assume y₁ = e^{−∫P dx} and yₚ = u(x)y₁; find u'. Show the result equals the integrating factor formula.\n\n**P55 — Reflect & Consolidate:** \"Variation of parameters: yₚ=u₁y₁+u₂y₂. Divide ODE by a first. W=y₁y₂'−y₂y₁'. u₁'=−y₂f/W, u₂'=y₁f/W. Integrate to get u₁, u₂. Use when g∉{polynomial/exp/trig products}. Otherwise prefer undetermined coefficients.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Green's function: for y''+P(x)y'+Q(x)y=f(x) with boundary conditions y(a)=y(b)=0, the solution is y(x)=∫ₐᵇ G(x,s)f(s)ds where G(x,s) is the Green's function built from y₁, y₂, and W. Identify G(x,s) in terms of the VoP formula and explain why G is the ODE's \"impulse response.\" (b) For the initial value problem y''+y=f(t), y(0)=0, y'(0)=0, the solution y(t)=∫₀ᵗ sin(t−s)f(s)ds is a convolution. Identify the \"kernel\" sin(t−s) as the Green's function and connect to the VoP formula. (c) For the nth-order linear ODE, the VoP formula extends to n homogeneous solutions and n integrals. State the formula for n=3 and write the system of n equations determining u₁', u₂', u₃'.\n\n**P75 — Mastery Assessment:**\n\"(a) Solve y'' − 3y' + 2y = eˣ/(1+eˣ) using variation of parameters. (b) Solve x²y'' − 2xy' + 2y = x ln x (Euler-Cauchy equation; first find y₁=x, y₂=x² by the substitution y=xᵐ, then apply VoP). (c) Verify Abel's theorem for y'' + P(x)y' + Q(x)y = 0: if y₁, y₂ are any two solutions, show d/dx[y₁y₂'−y₂y₁'] = −P(x)W. Solve this first-order ODE for W and write W(x)=W(x₀)·exp(−∫P dx). (d) When does VoP yield a particular solution that coincides with the solution produced by undetermined coefficients? Explain why.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW the leading-coefficient division and when to prefer undetermined coefficients\n- Score ≤ 3/5 → PREREQUISITE GAP in math.de.wronskian; reassign\n\n**P78 — Completion:** Variation of Parameters certified. Student applies the VoP formula correctly (divides by a, checks W≠0, integrates u₁' and u₂'); uses VoP when UC fails; connects to Green's functions and convolution.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.variation-of-parameters.md",
+        "startLine": 107,
+        "endLine": 131
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

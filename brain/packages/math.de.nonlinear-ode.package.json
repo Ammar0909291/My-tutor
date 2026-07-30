@@ -1,0 +1,418 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.nonlinear-ode-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.nonlinear-ode",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d1df181a2e61c7d591a5ac8623eb9f789f22e602fdf12da63d7f8353082b5b2a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.nonlinear-ode.md": "sha256:534d7b70c026dd9c1fbf10450294c6f0e7f46bc9316c01319ab486df834fe420"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.de.nonlinear-ode",
+    "name": "Nonlinear ODEs",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.de.first-order-ode",
+      "math.de.stability-analysis"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.nonlinear-ode-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.nonlinear-ode (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.nonlinear-ode.md": "sha256:534d7b70c026dd9c1fbf10450294c6f0e7f46bc9316c01319ab486df834fe420"
+      },
+      "contentHash": "sha256:c78a6b133be7bf28dd6dc0918e769d1c78372f57b22365c13bd7fba70fc9f814",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.nonlinear-ode.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.nonlinear-ode.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.nonlinear-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.nonlinear-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.nonlinear-ode.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.nonlinear-ode.md#TA-2 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.nonlinear-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.nonlinear-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.nonlinear-ode.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.nonlinear-ode.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.nonlinear-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.nonlinear-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.nonlinear-ode.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.nonlinear-ode.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.nonlinear-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.nonlinear-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.nonlinear-ode.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.nonlinear-ode.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.nonlinear-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.nonlinear-ode\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.nonlinear-ode.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.nonlinear-ode.md#TA-6 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.nonlinear-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.nonlinear-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.nonlinear-ode.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.nonlinear-ode.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.nonlinear-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.nonlinear-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.nonlinear-ode.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.nonlinear-ode.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.nonlinear-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.nonlinear-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.nonlinear-ode/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.nonlinear-ode",
+      "title": "Learning Objective",
+      "content": "The student analyses nonlinear autonomous ODEs and systems x' = f(x): identifies equilibria (fixed points) by solving f(x*)=0; linearises f around each equilibrium to obtain the Jacobian matrix J=Df(x*); classifies the local behaviour (stable/unstable node, saddle, stable/unstable spiral, centre) from the eigenvalues of J; sketches the phase portrait by combining local equilibrium analysis with the global flow; identifies common nonlinear phenomena including limit cycles (Poincaré-Bendixson theorem), nullclines, and the van der Pol and predator-prey (Lotka-Volterra) systems; and recognises the limitations of linearisation (e.g., Lyapunov stability vs. linearised stability for a centre).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.nonlinear-ode.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.nonlinear-ode/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.nonlinear-ode",
+      "title": "LINEARISATION-ALWAYS-DETERMINES-NONLINEAR-BEHAVIOUR",
+      "content": "| MC-1 | LINEARISATION-ALWAYS-DETERMINES-NONLINEAR-BEHAVIOUR | Student believes the Jacobian eigenvalue classification always correctly describes the nonlinear system's behaviour near an equilibrium; doesn't know that a linearly-classified \"centre\" (purely imaginary eigenvalues) may be a stable or unstable spiral in the nonlinear system | Type 5 — instruction-induced (for nodes and saddles, linearisation is conclusive (Hartman-Grobman); for a centre, it is not — the nonlinear terms determine whether the orbit is actually closed, spiralling in, or spiralling out; this exceptional case is not always stressed, leaving students with the impression that linearisation is always reliable) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.nonlinear-ode.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.de.nonlinear-ode/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.nonlinear-ode",
+      "title": "ALL-NONLINEAR-ODES-CANNOT-BE-SOLVED-EXACTLY",
+      "content": "| MC-2 | ALL-NONLINEAR-ODES-CANNOT-BE-SOLVED-EXACTLY | Student assumes that because the ODE is nonlinear, no exact solution exists; doesn't recognise that many nonlinear ODEs (separable, Bernoulli, exact, special substitutions) have exact solutions, and that qualitative analysis (phase portrait, equilibria) gives complete information without solving explicitly | Type 1 — overgeneralisation (linear ODEs have systematic exact-solution methods; students over-apply the lesson \"nonlinear = hard = no exact solution\" without recognising that the qualitative/geometrical approach to nonlinear systems is itself a complete methodology, not just an approximation) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.nonlinear-ode.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.de.nonlinear-ode/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.nonlinear-ode",
+      "title": "EQUILIBRIUM-AT-ZERO-ONLY",
+      "content": "| MC-3 | EQUILIBRIUM-AT-ZERO-ONLY | Student looks only at x*=0 as an equilibrium; misses equilibria at other fixed points where f(x*)=0; may set f(x*)=0 only partially (e.g., checks only the first component of a 2D system) | Type 5 — instruction-induced (linear systems with constant coefficients have only one equilibrium at the origin; students transfer this uniqueness to nonlinear systems, which can have zero, one, or many equilibria depending on the shape of f) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.nonlinear-ode.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.nonlinear-ode/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.nonlinear-ode",
+      "title": "CORRECT → \"Equilibria: solve f(x*)=0. Linearise: u'=Df(x*)u. Eigenvalues of J classify type. Centre needs extra analysis.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Equilibria: solve f(x*)=0. Linearise: u'=Df(x*)u. Eigenvalues of J classify type. Centre needs extra analysis.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.nonlinear-ode.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.de.nonlinear-ode/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.nonlinear-ode",
+      "title": "PARTIAL (MC-3: only found x*=(0,0)) → \"For a nonlinear system, f(x*)=0 may have MULTIPLE solutions — one, many, or none other than the trivial x*=0. For the pendulum: sin(x*)=0 gives x*=nπ for ALL integers n — infinitely many equilibria. ALWAYS solve f(x*)=0 completely, not just check x*=0.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (MC-3: only found x*=(0,0)) → \\\"For a nonlinear system, f(x*)=0 may have MULTIPLE solutions — one, many, or none other than the trivial x*=0. For the pendulum: sin(x*)=0 gives x*=nπ for ALL integers n — infinitely many equilibria. ALWAYS solve f(x*)=0 completely, not just check x*=0.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.nonlinear-ode.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.de.nonlinear-ode/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.nonlinear-ode",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.nonlinear-ode.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.de.nonlinear-ode/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.nonlinear-ode",
+      "title": "NO_RESPONSE → \"Lotka-Volterra: x'=x(a−by), y'=y(−c+dx). Equilibria: x(a−by)=0 and y(−c+dx)=0. (1) x=0,y=0: predator-prey extinction. (2) x=c/d,y=a/b: coexistence. Jacobian at (c/d,a/b): J=[[0,−bc/d],[da/b,0]] → λ=±i√(ac) → Centre (linear). For Lotka-Volterra: actually a nonlinear centre (integrals of motion).\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"Lotka-Volterra: x'=x(a−by), y'=y(−c+dx). Equilibria: x(a−by)=0 and y(−c+dx)=0. (1) x=0,y=0: predator-prey extinction. (2) x=c/d,y=a/b: coexistence. Jacobian at (c/d,a/b): J=[[0,−bc/d],[da/b,0]] → λ=±i√(ac) → Centre (linear). For Lotka-Volterra: actually a nonlinear centre (integrals of motion).\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.nonlinear-ode.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.de.nonlinear-ode/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.nonlinear-ode",
+      "title": "CORRECT → \"Nullclines mark where x'=0 or y'=0. Poincaré-Bendixson: bounded region + no equilibria → limit cycle. Van der Pol: unique stable limit cycle. Lyapunov V>0, V'≤0 → stable.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Nullclines mark where x'=0 or y'=0. Poincaré-Bendixson: bounded region + no equilibria → limit cycle. Van der Pol: unique stable limit cycle. Lyapunov V>0, V'≤0 → stable.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.nonlinear-ode.md",
+        "startLine": 95,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "math.de.nonlinear-ode/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.nonlinear-ode",
+      "title": "PARTIAL (MC-1: linearisation of centre is conclusive) → \"A linear centre (purely imaginary eigenvalues) is INCONCLUSIVE for the nonlinear system. The centre may be: (1) a nonlinear centre (closed orbits — Lotka-Volterra), (2) a stable spiral (nonlinear terms cause energy dissipation), or (3) an unstable spiral. To resolve, you need either a conserved quantity (first integral) or a Lyapunov function. Linearisation alone cannot distinguish these three cases.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (MC-1: linearisation of centre is conclusive) → \\\"A linear centre (purely imaginary eigenvalues) is INCONCLUSIVE for the nonlinear system. The centre may be: (1) a nonlinear centre (closed orbits — Lotka-Volterra), (2) a stable spiral (nonlinear terms cause energy dissipation), or (3) an unstable spiral. To resolve, you need either a conserved quantity (first integral) or a Lyapunov function. Linearisation alone cannot distinguish these three cases.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.nonlinear-ode.md",
+        "startLine": 96,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "math.de.nonlinear-ode/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.nonlinear-ode",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.nonlinear-ode.md",
+        "startLine": 97,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "math.de.nonlinear-ode/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.nonlinear-ode",
+      "title": "NO_RESPONSE → \"x'=x(1−x²), equilibria at x*=0,±1. J=1−3x*²: at x*=0, J=1>0 unstable; at x*=1, J=−2<0 stable; at x*=−1, J=−2<0 stable. Phase line: flow away from 0, toward ±1. No limit cycle in 1D (no Poincaré-Bendixson needed — just sign of f).\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"x'=x(1−x²), equilibria at x*=0,±1. J=1−3x*²: at x*=0, J=1>0 unstable; at x*=1, J=−2<0 stable; at x*=−1, J=−2<0 stable. Phase line: flow away from 0, toward ±1. No limit cycle in 1D (no Poincaré-Bendixson needed — just sign of f).\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.nonlinear-ode.md",
+        "startLine": 98,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "math.de.nonlinear-ode/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.nonlinear-ode",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Find all equilibria and classify each for: ẋ=x(1−y), ẏ=y(x−2). (Lotka-Volterra variant. Check (0,0), (2,1).)\n2. For the system ẋ=−y+x(1−x²−y²), ẏ=x+y(1−x²−y²): (a) show x*=0 is an unstable spiral; (b) convert to polar coordinates (r'=r(1−r²), θ'=1); (c) show r=1 is a stable limit cycle.\n3. The van der Pol equation ẍ−0.1(1−x²)ẋ+x=0: write as a 2D system, find the unique equilibrium at (0,0), classify it, and explain qualitatively why a limit cycle must exist near r=2.\n4. Show that V(x,y)=x²+y² is a Lyapunov function for the system ẋ=−x+xy², ẏ=−y+x²y at (0,0). Classify the stability.\n5. The pendulum with damping: ẋ=y, ẏ=−sinx−0.5y. Find all equilibria in [−2π,2π]×ℝ, classify each, and describe the long-term behaviour of a pendulum released from x=0.8π, y=0.\n\n**P55 — Reflect & Consolidate:** \"Nonlinear system x'=f(x): equilibria at f(x*)=0. Jacobian J=Df(x*): eigenvalues classify (node/saddle/spiral). Centre: inconclusive — need Lyapunov or first integral. Nullclines: nullclines intersect at equilibria. Poincaré-Bendixson: bounded, no equilibria → limit cycle. Lyapunov: V>0, V'≤0 → stable.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Poincaré map: for a periodic orbit γ of period T, define a transverse cross-section Σ and the Poincaré return map P: Σ→Σ by P(x₀)=φ_T(x₀) (the first return to Σ after one full period). A limit cycle corresponds to a fixed point of P. The stability of the limit cycle is determined by the eigenvalue of DP at the fixed point (|λ|<1 stable, |λ|>1 unstable). Explain how this converts a question about periodic orbits of ODEs into a fixed-point problem for maps. (b) Index theory: the Poincaré-Hopf index theorem assigns an integer index to each equilibrium of a 2D vector field (stable/unstable node: +1, saddle: −1). For any closed curve C containing no equilibria, the sum of indices of all equilibria inside equals the winding number of f on C. Use this to show that a limit cycle must contain at least one equilibrium inside it, with total index +1. (c) Normal form theory: near a Hopf bifurcation (a pair of complex eigenvalues crossing the imaginary axis), the nonlinear system in polar form becomes ṙ=ar+br³+⋯, θ̇=ω+⋯. Show that a limit cycle exists at r=√(−a/b) when a/b<0 (supercritical Hopf: stable limit cycle emerges from a stable spiral becoming unstable).\n\n**P75 — Mastery Assessment:**\n\"(a) Analyse the system: ẋ=x(3−x−2y), ẏ=y(2−x−y). Find all equilibria, classify each using the Jacobian, and sketch the phase portrait. Identify which equilibrium is the long-term attractor. (b) A 'pendulum in a bucket' model: ẋ=y, ẏ=sin(x)−0.1y (note the POSITIVE sin). Find the equilibria in [0,2π]×ℝ and classify. Explain the physical difference from the restoring-force pendulum. (c) Show that the Lotka-Volterra system ẋ=x(a−by), ẏ=y(−c+dx) (a,b,c,d>0) has a conserved quantity H(x,y)=dx−c ln x+by−a ln y. Verify dH/dt=0 on solutions. Conclude that the coexistence equilibrium is a nonlinear centre (level curves of H are closed orbits). (d) Construct a Lyapunov function V=x²+2y² for the system ẋ=−x+2y², ẏ=−y. Compute V' and determine whether the origin is stable, asymptotically stable, or unstable.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW the linearisation-at-centre limitation and the Poincaré-Bendixson theorem application\n- Score ≤ 3/5 → PREREQUISITE GAP in math.de.stability-analysis; reassign\n\n**P78 — Completion:** Nonlinear ODEs certified. Student finds all equilibria, linearises via the Jacobian, classifies equilibrium types from eigenvalues, recognises the centre case as inconclusive, identifies limit cycles via Poincaré-Bendixson, sketches phase portraits using nullclines, and constructs or verifies Lyapunov functions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.nonlinear-ode.md",
+        "startLine": 112,
+        "endLine": 136
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
