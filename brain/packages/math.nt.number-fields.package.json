@@ -1,0 +1,1434 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.number-fields-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.number-fields",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bb5ac708978863e06068495f8dd7dd7ed1e27e5005dfcf410503975097160461",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.number-fields.md": "sha256:d107d44afd1e8bcb4aeb956d937c9ac4096c5db43a10cab4484e5bc511730fb0"
+    },
+    "assetCount": 43,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 38,
+      "mastery_probe": 1
+    },
+    "ruleCount": 38
+  },
+  "concept": {
+    "conceptId": "math.nt.number-fields",
+    "name": "Number Fields",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.55,
+    "estimatedHours": 30,
+    "prerequisites": [
+      "math.nt.algebraic-integers",
+      "math.abst.field-extension"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.number-fields-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.number-fields (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.number-fields.md": "sha256:d107d44afd1e8bcb4aeb956d937c9ac4096c5db43a10cab4484e5bc511730fb0"
+      },
+      "contentHash": "sha256:f334eb0eb685d12be625f4887c40f0bac0bac5816a13dcb87bd09450e6436e69",
+      "ruleCount": 38,
+      "bandCounts": {
+        "3": 38
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-17",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-17",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-18",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-18",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-19",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-19",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-20",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-20",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-21",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-21",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-22",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-22",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-23",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-23",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-24",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-24",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-25",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-25",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-26",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-26",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-27",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-27",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-28",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-28",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-29",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-29",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-30",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-30",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-31",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-31",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-32",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-32",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-33",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-33",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-34",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-34",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-35",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-35",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-36",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-36",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-37",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-37",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-38",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-38",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.number-fields.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.number-fields.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.number-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.number-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.number-fields/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.number-fields",
+      "title": "Learning Objective",
+      "content": "The student defines a number field K as a finite-degree field extension of ℚ; constructs K=ℚ(α)≅ℚ[x]/(f) where f is the minimal polynomial of α over ℚ; identifies the degree [K:ℚ] as the degree of f; describes the ring of integers O_K as the ring of algebraic integers in K and identifies O_K for quadratic fields; defines the field discriminant disc(K) and explains its role in detecting ramified primes; classifies how rational primes split in O_K as split/inert/ramified; defines the Galois group Gal(K/ℚ) for Galois extensions (K/ℚ normal and separable); and states the fundamental theorem of Galois theory relating subfields of K to subgroups of Gal(K/ℚ).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.number-fields",
+      "title": "NUMBER-FIELDS-ARE-JUST-FIELDS",
+      "content": "| MC-1 | NUMBER-FIELDS-ARE-JUST-FIELDS | Student treats a number field as any abstract field, missing that the definition requires (1) a subfield of ℂ (or at least a finite extension of ℚ), (2) finite degree over ℚ; doesn't distinguish number fields from finite fields 𝔽_p or function fields | Type 3 — language contamination (\"number field\" and \"field\" share the word \"field\"; students already know fields abstractly from algebra; the specific constraint \"finite extension of ℚ\" and the embedding in ℂ are not foregrounded by the word; students conflate number fields with 𝔽_p or treat ℚ̄ as a number field, which it isn't — ℚ̄ is infinite-degree) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.number-fields",
+      "title": "ALL-PRIMES-SPLIT-THE-SAME-WAY",
+      "content": "| MC-2 | ALL-PRIMES-SPLIT-THE-SAME-WAY | Student assumes every rational prime p has the same splitting behaviour in O_K; doesn't know that splitting type depends on how f(x) (the defining polynomial) factors mod p; forgets the special case of ramification at discriminant primes | Type 1 — overgeneralisation (students correctly learn \"p splits in ℤ[i] iff p≡1 mod 4\" for the Gaussian integers; they overgeneralise to \"there's one rule for all fields and all primes\"; in reality, splitting type varies by field and by prime, and is computed from Kummer's theorem via factorisation of f mod p) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.number-fields",
+      "title": "GALOIS-GROUP-EQUALS-CYCLIC-GROUP",
+      "content": "| MC-3 | GALOIS-GROUP-EQUALS-CYCLIC-GROUP | Student assumes Gal(K/ℚ) is always cyclic or always ℤ/nℤ; unaware that Galois groups can be any group (S_n, A_n, dihedral groups, etc.) and that most degree-5+ polynomial splitting fields have Galois group S_5 or A_5 | Type 5 — instruction-induced (first examples taught are always quadratic (Gal≅ℤ/2ℤ), cyclotomic (Gal≅(ℤ/nℤ)× which is abelian), or specific cubic cases — all abelian or cyclic; the first non-abelian Galois group requires a degree-6 splitting field of a degree-3 polynomial with Galois group S₃, which appears later; students extrapolate the abelian pattern from first examples) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "ℚ(√2): f=x²−2; K≅ℚ[x]/(x²−2); elements a+b√2 (a,b∈ℚ); [K:ℚ]=2",
+      "content": "{\"id\":\"TA-1\",\"title\":\"ℚ(√2): f=x²−2; K≅ℚ[x]/(x²−2); elements a+b√2 (a,b∈ℚ); [K:ℚ]=2\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 47,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "ℚ(i): f=x²+1; elements a+bi; [K:ℚ]=2",
+      "content": "{\"id\":\"TA-2\",\"title\":\"ℚ(i): f=x²+1; elements a+bi; [K:ℚ]=2\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "ℚ(ζ₃) where ζ₃=e^{2πi/3}: f=x²+x+1; elements a+bζ₃; [K:ℚ]=2",
+      "content": "{\"id\":\"TA-3\",\"title\":\"ℚ(ζ₃) where ζ₃=e^{2πi/3}: f=x²+x+1; elements a+bζ₃; [K:ℚ]=2\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "ℚ(2^{1/3}): f=x³−2; elements a+b·2^{1/3}+c·2^{2/3}; [K:ℚ]=3 (NOT a Galois extension: does not contain ζ₃·2^{1/3}, the other complex cube root)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"ℚ(2^{1/3}): f=x³−2; elements a+b·2^{1/3}+c·2^{2/3}; [K:ℚ]=3 (NOT a Galois extension: does not contain ζ₃·2^{1/3}, the other complex cube root)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "ℚ(ζ₅)=ℚ(e^{2πi/5}): f=x⁴+x³+x²+x+1; [K:ℚ]=4; Gal(K/ℚ)≅(ℤ/5ℤ)×≅ℤ/4ℤ",
+      "content": "{\"id\":\"TA-5\",\"title\":\"ℚ(ζ₅)=ℚ(e^{2πi/5}): f=x⁴+x³+x²+x+1; [K:ℚ]=4; Gal(K/ℚ)≅(ℤ/5ℤ)×≅ℤ/4ℤ\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "NOT a number field: 𝔽_p (characteristic p>0, not a ℚ-extension), ℝ, ℂ (infinite degree over ℚ), ℚ̄ (algebraic closure, infinite degree)",
+      "content": "{\"id\":\"TA-6\",\"title\":\"NOT a number field: 𝔽_p (characteristic p>0, not a ℚ-extension), ℝ, ℂ (infinite degree over ℚ), ℚ̄ (algebraic closure, infinite degree)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "IS a number field: any ℚ(α) for algebraic α (degree = deg of minimal polynomial of α over ℚ)",
+      "content": "{\"id\":\"TA-7\",\"title\":\"IS a number field: any ℚ(α) for algebraic α (degree = deg of minimal polynomial of α over ℚ)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "CORRECT → \"[K:ℚ] = degree of minimal polynomial. Three equivalent pictures. Degree 2 examples: ℚ(√D). Non-Galois example: ℚ(2^{1/3}) — degree 3 but doesn't contain all roots of x³−2.\" → A02",
+      "content": "{\"id\":\"TA-8\",\"title\":\"CORRECT → \\\"[K:ℚ] = degree of minimal polynomial. Three equivalent pictures. Degree 2 examples: ℚ(√D). Non-Galois example: ℚ(2^{1/3}) — degree 3 but doesn't contain all roots of x³−2.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "PARTIAL (doesn't understand quotient ring picture) → \"ℚ[x]/(f) means: take all polynomials with rational coefficients, and declare that f(x)=0. So if f=x²−2, we get x²=2 in this ring. Any polynomial g(x) reduces modulo f: e.g. x³+1=x·x²+1=x·2+1=2x+1 (using x²=2). The resulting ring has elements of the form a+bx with a,b∈ℚ, where x is 'a square root of 2'. This is exactly ℚ(√2).\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-9\",\"title\":\"PARTIAL (doesn't understand quotient ring picture) → \\\"ℚ[x]/(f) means: take all polynomials with rational coefficients, and declare that f(x)=0. So if f=x²−2, we get x²=2 in this ring. Any polynomial g(x) reduces modulo f: e.g. x³+1=x·x²+1=x·2+1=2x+1 (using x²=2). The resulting ring has elements of the form a+bx with a,b∈ℚ, where x is 'a square root of 2'. This is exactly ℚ(√2).\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-10\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "NO_RESPONSE → \"Is ℝ a number field? (Does it have finite degree over ℚ?) Is ℚ(√2,√3) a number field? What is its degree over ℚ?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-11\",\"title\":\"NO_RESPONSE → \\\"Is ℝ a number field? (Does it have finite degree over ℚ?) Is ℚ(√2,√3) a number field? What is its degree over ℚ?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "ℚ(√D): O_K=ℤ[√D] if D≡2,3(mod 4); O_K=ℤ[(1+√D)/2] if D≡1(mod 4)",
+      "content": "{\"id\":\"TA-12\",\"title\":\"ℚ(√D): O_K=ℤ[√D] if D≡2,3(mod 4); O_K=ℤ[(1+√D)/2] if D≡1(mod 4)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "disc(K)=4D if D≡2,3(mod 4); disc(K)=D if D≡1(mod 4)",
+      "content": "{\"id\":\"TA-13\",\"title\":\"disc(K)=4D if D≡2,3(mod 4); disc(K)=D if D≡1(mod 4)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "**Splits completely:** r=[K:ℚ], all eᵢ=1, all deg(gᵢ)=1 — \"p splits\"",
+      "content": "{\"id\":\"TA-14\",\"title\":\"**Splits completely:** r=[K:ℚ], all eᵢ=1, all deg(gᵢ)=1 — \\\"p splits\\\"\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 73,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "**Inert:** r=1, e₁=1, deg(g₁)=[K:ℚ] — \"p stays prime\"",
+      "content": "{\"id\":\"TA-15\",\"title\":\"**Inert:** r=1, e₁=1, deg(g₁)=[K:ℚ] — \\\"p stays prime\\\"\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 74,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "**Ramified:** some eᵢ>1 — \"p ramifies\"; ramification occurs precisely when p|disc(K)",
+      "content": "{\"id\":\"TA-16\",\"title\":\"**Ramified:** some eᵢ>1 — \\\"p ramifies\\\"; ramification occurs precisely when p|disc(K)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-17",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "**Partial split:** r>1 but deg(gᵢ)>1 for some i — mixed splitting",
+      "content": "{\"id\":\"TA-17\",\"title\":\"**Partial split:** r>1 but deg(gᵢ)>1 for some i — mixed splitting\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-17",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-18",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "p splits (p≡1 mod 4 in ℚ(i), or (D/p)=1): (p)=P·P̄, two distinct prime ideals",
+      "content": "{\"id\":\"TA-18\",\"title\":\"p splits (p≡1 mod 4 in ℚ(i), or (D/p)=1): (p)=P·P̄, two distinct prime ideals\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-18",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-19",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "p inert ((D/p)=−1): (p) remains prime in O_K",
+      "content": "{\"id\":\"TA-19\",\"title\":\"p inert ((D/p)=−1): (p) remains prime in O_K\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-19",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-20",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "p ramifies (p|disc(K), i.e. p|D or p=2 when D≡2,3 mod 4): (p)=P²",
+      "content": "{\"id\":\"TA-20\",\"title\":\"p ramifies (p|disc(K), i.e. p|D or p=2 when D≡2,3 mod 4): (p)=P²\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-20",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-21",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "p=5: ramifies. (5)=(√5)².",
+      "content": "{\"id\":\"TA-21\",\"title\":\"p=5: ramifies. (5)=(√5)².\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-21",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-22",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "p=11: (5/11)=(5·11^{(-1)} mod 11)... Legendre symbol (5/11): 5^5=3125≡3125−284·11=3125−3124=1 mod 11. (5/11)=1. Splits: 11=split (11 splits in ℤ[(1+√5)/2]).",
+      "content": "{\"id\":\"TA-22\",\"title\":\"p=11: (5/11)=(5·11^{(-1)} mod 11)... Legendre symbol (5/11): 5^5=3125≡3125−284·11=3125−3124=1 mod 11. (5/11)=1. Splits: 11=split (11 splits in ℤ[(1+√5)/2]).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-22",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-23",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "p=3: (5/3)=(2/3)=−1. Inert. (3) stays prime.",
+      "content": "{\"id\":\"TA-23\",\"title\":\"p=3: (5/3)=(2/3)=−1. Inert. (3) stays prime.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-23",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-24",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "p=2: disc=5, 2∤5. f=x²−5≡x²+1≡(x+1)² mod 2. Ramifies? Actually p=2 divides disc of ℤ[√5]=4·5=20, but disc(K)=5. So 2 does not divide disc(K)=5. f=x²−5≡x²−1=(x−1)(x+1) mod 2. Splits! (2)=P·P̄ where P=(2,(√5−1)/2)... Actually ℤ[(1+√5)/2] is the ring of integers, so we apply Kummer with g(x)=x²−x−1 (the minimal polynomial of (1+√5)/2). g≡x²+x+1 mod 2 (irreducible over 𝔽₂). So 2 is INERT.",
+      "content": "{\"id\":\"TA-24\",\"title\":\"p=2: disc=5, 2∤5. f=x²−5≡x²+1≡(x+1)² mod 2. Ramifies? Actually p=2 divides disc of ℤ[√5]=4·5=20, but disc(K)=5. So 2 does not divide disc(K)=5. f=x²−5≡x²−1=(x−1)(x+1) mod 2. Splits! (2)=P·P̄ where P=(2,(√5−1)/2)... Actually ℤ[(1+√5)/2] is the ring of integers, so we apply Kummer with g(x)=x²−x−1 (the minimal polynomial of (1+√5)/2). g≡x²+x+1 mod 2 (irreducible over 𝔽₂). So 2 is INERT.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-24",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-25",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "CORRECT → \"Kummer's theorem: factor f mod p, degree patterns give splitting type. Ramification ↔ p|disc(K). Quadratic fields: Legendre symbol determines split/inert/ramify. Know examples with p=2,3,5,7 in ℚ(√5).\" → A03",
+      "content": "{\"id\":\"TA-25\",\"title\":\"CORRECT → \\\"Kummer's theorem: factor f mod p, degree patterns give splitting type. Ramification ↔ p|disc(K). Quadratic fields: Legendre symbol determines split/inert/ramify. Know examples with p=2,3,5,7 in ℚ(√5).\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-25",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-26",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "PARTIAL (doesn't connect discriminant to ramification) → \"A prime p ramifies in K iff p divides the field discriminant disc(K). This is why disc(K) is so important — it encodes exactly which primes behave 'badly' (gain squared factors in their ideal factorisation). For K=ℚ(√D) with D square-free: disc=D if D≡1(mod 4), disc=4D otherwise. So the primes that ramify in ℚ(√5) are exactly the prime divisors of 5, namely p=5 only. In ℚ(√6): disc=4·6=24, so p=2 and p=3 both ramify.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-26\",\"title\":\"PARTIAL (doesn't connect discriminant to ramification) → \\\"A prime p ramifies in K iff p divides the field discriminant disc(K). This is why disc(K) is so important — it encodes exactly which primes behave 'badly' (gain squared factors in their ideal factorisation). For K=ℚ(√D) with D square-free: disc=D if D≡1(mod 4), disc=4D otherwise. So the primes that ramify in ℚ(√5) are exactly the prime divisors of 5, namely p=5 only. In ℚ(√6): disc=4·6=24, so p=2 and p=3 both ramify.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-26",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 91,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-27",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-27\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-27",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 92,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-28",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "NO_RESPONSE → \"In ℚ(i) with O_K=ℤ[i]: the defining polynomial is f=x²+1. Factor f mod p: (a) f mod 5 = (x−2)(x+2) over 𝔽₅ (since 2²=4≡−1). So 5 splits: (5)=(2+i)(2−i) in ℤ[i]. (b) f mod 3 = x²+1 (irreducible over 𝔽₃). So 3 is inert. (c) f mod 2 = (x+1)² over 𝔽₂. So 2 ramifies: (2)=(1+i)²(−i) in ℤ[i]. What is the discriminant of ℚ(i)? Is 2 a divisor of disc(ℚ(i))?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-28\",\"title\":\"NO_RESPONSE → \\\"In ℚ(i) with O_K=ℤ[i]: the defining polynomial is f=x²+1. Factor f mod p: (a) f mod 5 = (x−2)(x+2) over 𝔽₅ (since 2²=4≡−1). So 5 splits: (5)=(2+i)(2−i) in ℤ[i]. (b) f mod 3 = x²+1 (irreducible over 𝔽₃). So 3 is inert. (c) f mod 2 = (x+1)² over 𝔽₂. So 2 ramifies: (2)=(1+i)²(−i) in ℤ[i]. What is the discriminant of ℚ(i)? Is 2 a divisor of disc(ℚ(i))?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-28",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-29",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "p splits in ℚ(√2) iff (2/p)=1 iff p≡±1(mod 8)",
+      "content": "{\"id\":\"TA-29\",\"title\":\"p splits in ℚ(√2) iff (2/p)=1 iff p≡±1(mod 8)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-29",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 101,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-30",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "p splits in ℚ(√3) iff (3/p)=1 iff p≡±1(mod 12)",
+      "content": "{\"id\":\"TA-30\",\"title\":\"p splits in ℚ(√3) iff (3/p)=1 iff p≡±1(mod 12)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-30",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 102,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-31",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "p splits in ℚ(√6) iff (6/p)=1 iff (2/p)(3/p)=1",
+      "content": "{\"id\":\"TA-31\",\"title\":\"p splits in ℚ(√6) iff (6/p)=1 iff (2/p)(3/p)=1\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-31",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 103,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-32",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "(2/7)=1 (since 7≡±1 mod 8? 7≡−1 mod 8. Yes.) So 7 splits in ℚ(√2).",
+      "content": "{\"id\":\"TA-32\",\"title\":\"(2/7)=1 (since 7≡±1 mod 8? 7≡−1 mod 8. Yes.) So 7 splits in ℚ(√2).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-32",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 106,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-33",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "(3/7)=(7/3)(−1)^{(3−1)(7−1)/4}=(1/3)(−1)³=1·(−1)=−1. So 7 is INERT in ℚ(√3).",
+      "content": "{\"id\":\"TA-33\",\"title\":\"(3/7)=(7/3)(−1)^{(3−1)(7−1)/4}=(1/3)(−1)³=1·(−1)=−1. So 7 is INERT in ℚ(√3).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-33",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 107,
+        "endLine": 107
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-34",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "(6/7)=(2/7)(3/7)=1·(−1)=−1. So 7 is INERT in ℚ(√6).",
+      "content": "{\"id\":\"TA-34\",\"title\":\"(6/7)=(2/7)(3/7)=1·(−1)=−1. So 7 is INERT in ℚ(√6).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-34",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 108,
+        "endLine": 108
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-35",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "CORRECT → \"Splitting depends on the specific field, not just the degree. Legendre symbol (D/p) determines splitting in ℚ(√D). Three quadratic fields can have three different splitting behaviours for the same prime.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-35\",\"title\":\"CORRECT → \\\"Splitting depends on the specific field, not just the degree. Legendre symbol (D/p) determines splitting in ℚ(√D). Three quadratic fields can have three different splitting behaviours for the same prime.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-35",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 113,
+        "endLine": 113
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-36",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "PARTIAL → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-36\",\"title\":\"PARTIAL → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-36",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 114,
+        "endLine": 114
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-37",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-37\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-37",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 115,
+        "endLine": 115
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/teaching_action_meta/TA-38",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.number-fields",
+      "title": "NO_RESPONSE → \"For p=7: compute x²−2 mod 7. Does it have roots mod 7? (Find x with x²≡2 mod 7: try x=3: 9≡2. Yes! So 7 splits in ℚ(√2).) Now compute x²−3 mod 7. Try x=1: 1−3=−2. x=2: 4−3=1. x=3: 9−3=6. x=4: 16−3=13≡6. x=5: 25−3=22≡1. x=6: 36−3=33≡5. No root, so 7 is INERT in ℚ(√3). Same prime, different fields, different behaviour.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-38\",\"title\":\"NO_RESPONSE → \\\"For p=7: compute x²−2 mod 7. Does it have roots mod 7? (Find x with x²≡2 mod 7: try x=3: 9≡2. Yes! So 7 splits in ℚ(√2).) Now compute x²−3 mod 7. Try x=1: 1−3=−2. x=2: 4−3=1. x=3: 9−3=6. x=4: 16−3=13≡6. x=5: 25−3=22≡1. x=6: 36−3=33≡5. No root, so 7 is INERT in ℚ(√3). Same prime, different fields, different behaviour.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-38",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 116,
+        "endLine": 116
+      }
+    },
+    {
+      "assetId": "math.nt.number-fields/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.number-fields",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. For K=ℚ(∛2) (cube root of 2): (a) What is [K:ℚ]? (b) Is K/ℚ Galois? (Justify: does K contain all roots of x³−2 over ℚ?) (c) What is the splitting field L of x³−2 over ℚ? What is [L:ℚ]? (d) What is Gal(L/ℚ)? (Hint: L=ℚ(∛2,ω) where ω=e^{2πi/3}. The automorphisms send ∛2 to its other roots and fix or permute ω.)\n2. Determine how p=7 splits in the ring of integers of K=ℚ(√−3). (First identify O_K: is disc(K)=−3 or −12? What is the minimal polynomial of (1+√−3)/2=ζ₃? Then factor the minimal polynomial of the generator of O_K modulo 7.)\n3. Let K=ℚ(ζ₇) where ζ₇=e^{2πi/7}. Then [K:ℚ]=6 and Gal(K/ℚ)≅(ℤ/7ℤ)×≅ℤ/6ℤ (cyclic of order 6). List all subgroups of Gal(K/ℚ) and their corresponding fixed subfields (intermediate extensions of ℚ). What are the degrees of these subfields over ℚ?\n4. State the Chebotarev Density Theorem and apply it to K=ℚ(√5): (a) What fraction of primes split completely in K? (b) What fraction are inert? (c) What fraction ramify? (Use the fact that Gal(K/ℚ)≅ℤ/2ℤ and that \"splits completely\" corresponds to the identity element.)\n\n**P55 — Reflect & Consolidate:** \"Number field: finite extension of ℚ. Degree = dimension as ℚ-vector space. O_K: ring of algebraic integers. Discriminant: encodes ramified primes. Prime splitting: factor defining polynomial mod p (Kummer). Galois group: can be any finite group. Fundamental theorem: subfield ↔ subgroup (inclusion-reversing). Chebotarev: density of splitting primes = fraction of identity-class conjugacy class in Gal(K/ℚ).\"\n\n**P76 — Transfer Probe (Cross-link mode: math.abst.galois-theory):**\n(a) The Langlands program: a non-abelian generalisation of class field theory. For abelian extensions of ℚ, class field theory (Kronecker-Weber) says the splitting of p in K depends only on p mod n for some n. For non-abelian extensions, the \"generalised reciprocity law\" would say the splitting of p depends on the trace of the Frobenius element Frob_p in a representation ρ: Gal(K̄/ℚ)→GL_n(ℂ). The Langlands program conjectures that all such representations arise from automorphic forms (L-functions of modular forms, Hecke eigenvalues). Wiles' proof of Fermat's Last Theorem completed a key case: the Galois representation attached to an elliptic curve over ℚ corresponds to a modular form. Explain in your own words: why is \"Galois representation corresponds to a modular form\" a generalisation of \"prime splitting in K depends on p mod n\"? (b) For K=ℚ(√5) and the Legendre symbol (5/p): quadratic reciprocity says (5/p)=(p/5) when p≢5 mod 4... actually (5/p)(p/5)=(−1)^{(5−1)(p−1)/4}=(−1)^{p−1}=1 (since p odd). So (5/p)=(p/5). The primes p with (5/p)=1 are exactly the primes p≡±1 mod 5. This is the \"explicit reciprocity law\" for ℚ(√5). What is the analogous explicit law for ℚ(ζ₅)? (Hint: how does p split in ℚ(ζ₅)? Answer: p splits completely iff p≡1 mod 5.) (c) Artin's reciprocity law: for a Galois extension K/ℚ with abelian Galois group G, there is a surjective homomorphism (ℤ/nℤ)×→G (for appropriate n) such that the Frobenius element Frob_p maps to the class [p mod n]. This generalises both quadratic reciprocity and the Kronecker-Weber theorem. For K=ℚ(i): G=ℤ/2ℤ, and the map (ℤ/4ℤ)×→G sends p≡1(mod 4) to identity (splits), p≡3(mod 4) to the non-trivial element (stays prime). Verify this for p=5 (splits in ℤ[i] since 5=(2+i)(2−i)) and p=3 (inert since (−1/3)=−1).\n\n**P55 — Reflect & Consolidate:** \"Class field theory and Galois theory are inseparable at the advanced level. Artin reciprocity: splitting of primes in abelian extensions determined by congruence conditions (generalises every classical reciprocity law). Langlands program: non-abelian case, connects Galois representations to automorphic forms — the deepest open territory in modern number theory, the proof of Fermat's Last Theorem being one completed chapter.\"\n\n**P75 — Mastery Assessment:**\n\"(a) Classify the splitting of p=11 in (i) ℚ(√−1)=ℚ(i), (ii) ℚ(√2), (iii) ℚ(√11). Show work using Legendre symbols or direct computation. (b) For the splitting field K of x³−2 over ℚ: [K:ℚ]=6, Gal(K/ℚ)≅S₃. The subgroup lattice of S₃ has: S₃ itself; three order-2 subgroups ⟨(12)⟩,⟨(13)⟩,⟨(23)⟩; one order-3 subgroup A₃=⟨(123)⟩; and {e}. By the fundamental theorem of Galois theory, list the six intermediate fields (subfields of K containing ℚ). What are their degrees over ℚ? (c) Dedekind's theorem: if f(x)=x³−2 and p=5, factor f mod 5. Use this to determine how 5 splits in ℤ[2^{1/3}]. (Note: ℤ[2^{1/3}] may not be the full ring of integers of ℚ(2^{1/3}); but for p∤disc(ℤ[2^{1/3}]) Kummer's theorem still applies.)\"\n\n**P55 — Reflect & Consolidate:** \"Number fields unify arithmetic and geometry: prime splitting in K↔factorisation in O_K↔ramification in a covering of Spec(ℤ) (the 'arithmetic curve'). This geometric picture — due to Grothendieck — makes étale fundamental groups the arithmetic analogue of Galois groups, and is the language of modern arithmetic geometry and the Langlands program.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 3/5 → MASTERED; math.nt.number-fields complete\n- Score 2/5 → REVIEW prime splitting and Galois group structure; replay A02\n- Score ≤ 1/5 → PREREQUISITE GAP in math.nt.algebraic-integers or math.abst.field-extension; reassign\n\n**P78 — Completion:** Number Fields certified. Student defines number fields and their degrees; identifies rings of integers; computes discriminants; classifies prime splitting via Kummer's theorem; describes Galois groups and the Galois correspondence; connects to class field theory and the Langlands program.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.number-fields.md",
+        "startLine": 135,
+        "endLine": 162
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

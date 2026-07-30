@@ -1,0 +1,346 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.eulers-totient-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.eulers-totient",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2bbffa19046acc3bb7a7925c893c4ba414ee648231f459193689362fe2a56ea0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.eulers-totient.md": "sha256:d60c7ce0fed16c603109872171ccb481399ab8023506f8ef1805c846572247d6"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "math.nt.eulers-totient",
+    "name": "Euler's Totient Function",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.nt.divisibility",
+      "math.nt.prime-factorization"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.eulers-totient-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.eulers-totient (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.eulers-totient.md": "sha256:d60c7ce0fed16c603109872171ccb481399ab8023506f8ef1805c846572247d6"
+      },
+      "contentHash": "sha256:f20e87d7f53fdb8b9875f15d97f2159c22fa715d6b3379a1075b9601bd5b58ef",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.eulers-totient.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.eulers-totient.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.eulers-totient"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.eulers-totient\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.eulers-totient.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.eulers-totient.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.eulers-totient"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.eulers-totient\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.eulers-totient.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.eulers-totient.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.eulers-totient"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.eulers-totient\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.eulers-totient.TA-24",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.eulers-totient.md#TA-24",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.eulers-totient"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.eulers-totient\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.eulers-totient.TA-30",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.eulers-totient.md#TA-30",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.eulers-totient"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.eulers-totient\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.eulers-totient.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.eulers-totient.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.eulers-totient"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.eulers-totient\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.eulers-totient/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.eulers-totient",
+      "title": "Learning Objective",
+      "content": "The student defines φ(n) as the count of integers in {1,2,…,n} that are coprime to n; computes φ(n) from prime factorisation using the product formula φ(n)=n∏_{p|n}(1−1/p); proves multiplicativity φ(mn)=φ(m)φ(n) when gcd(m,n)=1; computes φ(pᵏ) directly; states and applies Euler's Theorem a^φ(n)≡1(mod n) when gcd(a,n)=1; and identifies Fermat's Little Theorem as the special case n=p prime.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-totient.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.eulers-totient/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.eulers-totient",
+      "title": "TOTIENT-COUNTS-PRIMES-UP-TO-n",
+      "content": "| MC-1 | TOTIENT-COUNTS-PRIMES-UP-TO-n | Student believes φ(n) = the number of primes ≤ n (the prime-counting function π(n)); confuses two different counting functions with similar sounding definitions | Type 3 — language contamination (\"totient\" is an unfamiliar word; \"count of numbers up to n satisfying a primeness-adjacent property\" conflates with the more familiar prime-counting concept; both are listed in the same lesson) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-totient.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.nt.eulers-totient/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.eulers-totient",
+      "title": "TOTIENT-ALWAYS-MULTIPLICATIVE",
+      "content": "| MC-2 | TOTIENT-ALWAYS-MULTIPLICATIVE | Student applies φ(mn)=φ(m)φ(n) without the gcd(m,n)=1 condition; computes φ(12)=φ(4)×φ(3) (correct, gcd=1), then incorrectly applies the same formula to φ(36)=φ(4)×φ(9)=2×6=12 when in fact φ(36)=12 (happens to be correct here but for wrong reasoning since gcd(4,9)=1 anyway — a better trap is φ(6)=φ(2)×φ(3) vs φ(4)=φ(2)×φ(2)) | Type 1 — overgeneralization (multiplicativity is a clean rule; the gcd condition is easily forgotten when it's \"usually\" satisfied in textbook examples) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-totient.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.nt.eulers-totient/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.eulers-totient",
+      "title": "EULERS-THEOREM-HOLDS-FOR-ALL-a",
+      "content": "| MC-3 | EULERS-THEOREM-HOLDS-FOR-ALL-a | Student applies a^φ(n)≡1(mod n) for any a without checking gcd(a,n)=1; tries 2^φ(6)≡1(mod 6) but 2²=4≢1(mod 6) | Type 5 — instruction-induced (Euler's Theorem is stated cleanly without always emphasising the coprimality hypothesis; students applying Fermat's Little Theorem for prime p know all 1≤a<p are coprime, so the habit of not checking transfers) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-totient.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.eulers-totient/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.eulers-totient",
+      "title": "—",
+      "content": "{\"id\":\"TA-1\",\"title\":\"—\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-totient.md",
+        "startLine": 21,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.eulers-totient/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.eulers-totient",
+      "title": "2",
+      "content": "{\"id\":\"TA-2\",\"title\":\"2\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-totient.md",
+        "startLine": 22,
+        "endLine": 22
+      }
+    },
+    {
+      "assetId": "math.nt.eulers-totient/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.eulers-totient",
+      "title": "2×3",
+      "content": "{\"id\":\"TA-6\",\"title\":\"2×3\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-totient.md",
+        "startLine": 23,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "math.nt.eulers-totient/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.eulers-totient",
+      "title": "2²×3",
+      "content": "{\"id\":\"TA-12\",\"title\":\"2²×3\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-totient.md",
+        "startLine": 24,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "math.nt.eulers-totient/teaching_action_meta/TA-24",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.eulers-totient",
+      "title": "2³×3",
+      "content": "{\"id\":\"TA-24\",\"title\":\"2³×3\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-24",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-totient.md",
+        "startLine": 25,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "math.nt.eulers-totient/teaching_action_meta/TA-30",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.eulers-totient",
+      "title": "2×3×5",
+      "content": "{\"id\":\"TA-30\",\"title\":\"2×3×5\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-30",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-totient.md",
+        "startLine": 26,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.nt.eulers-totient/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.eulers-totient",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Compute φ(n) for n=100, n=210, n=p^5 (p prime), n=p²q (p,q distinct primes). Use the product formula; show work.\n2. Find all n such that φ(n)=4. (There are multiple answers.) Explain how to find them systematically.\n3. Compute 13^100 mod 7 using Fermat's Little Theorem. Compute 2^100 mod 15 using Euler's Theorem. Show that Euler's Theorem applies by checking gcd(2,15)=1.\n4. Prove the sum formula ∑_{d|n} φ(d) = n by partitioning {1,…,n} into classes based on gcd(k,n).\n\n**P55 — Reflect & Consolidate:** \"φ(n)=n∏_{p|n}(1−1/p). φ(pᵏ)=pᵏ⁻¹(p−1). Multiplicativity requires gcd(m,n)=1. Euler's Theorem: a^φ(n)≡1(mod n) when gcd(a,n)=1. Reduce exponents mod φ(n) for modular exponentiation. φ(p)=p−1 gives Fermat's Little Theorem.\"\n\n**P76 — Transfer Probe (Independence mode):**\nThe RSA algorithm uses two large primes p=61, q=53 (toy example). (a) Compute n=p×q and φ(n)=(p−1)(q−1). Why does φ(n)=(p−1)(q−1) hold here? (b) Choose public exponent e=17. Find d such that ed≡1(mod φ(n)); this is the private key. (c) To encrypt message m=65: compute c=m^e mod n. (d) Decrypt: verify m≡c^d(mod n). (e) Explain why the security of RSA depends on difficulty of computing φ(n) without knowing p and q.\n\n**P55 — Reflect & Consolidate:** \"For n=pq (distinct primes): φ(n)=(p−1)(q−1) from multiplicativity (gcd(p,q)=1) and φ(p)=p−1. The RSA encryption works because m^(ed)=m^(kφ(n)+1)=m·(m^φ(n))^k≡m·1^k≡m(mod n) by Euler's Theorem (gcd(m,n)=1 for valid messages). Computing φ(n) from n requires knowing p and q — hence factoring n is the hard problem.\"\n\n**P75 — Mastery Assessment:**\n\"(a) Compute φ(1000). (b) Find all n≤30 with φ(n)=φ(n+1). (c) For which n is φ(n) odd? (d) Compute 7^500 mod 1000 using Euler's Theorem. (e) Is it true that φ(mn) ≥ φ(m)φ(n) for all m,n? Prove it or find a counterexample.\"\n\n**P55 — Reflect & Consolidate:** \"φ(1000)=400. φ(n) is odd only for n=1 and n=2 (since φ(n) is always even for n≥3: every prime p has p−1 even, and every prime power has φ(pᵏ)=pᵏ⁻¹(p−1) even). φ(mn)≥φ(m)φ(n) always: since φ is multiplicative, φ(mn)=φ(m)φ(n)∏gcd-corrections ≥ φ(m)φ(n).\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.nt.eulers-totient complete\n- Score 3/5 → REVIEW the product formula and the gcd(a,n)=1 condition on Euler's Theorem; replay A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.nt.prime-factorization or math.nt.divisibility; reassign\n\n**P78 — Completion:** Euler's Totient certified. Student computes φ(n) via the product formula and prime factorisation; proves and applies multiplicativity; states and applies Euler's Theorem (checking the gcd condition); reduces modular exponentials using φ; identifies Fermat's Little Theorem as a special case.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-totient.md",
+        "startLine": 114,
+        "endLine": 141
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,345 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.residue-classes-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.residue-classes",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:5c99c11f3a575293a47ba51fce58a2049c68b91f3ab1160904dd7095f2a35e5f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.residue-classes.md": "sha256:339fb2e02a02d2ddd10f607285c96114a8db24f557fa0917cf09a01e4edf6c56"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "math.nt.residue-classes",
+    "name": "Residue Classes",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.nt.congruence"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.residue-classes-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.residue-classes (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.residue-classes.md": "sha256:339fb2e02a02d2ddd10f607285c96114a8db24f557fa0917cf09a01e4edf6c56"
+      },
+      "contentHash": "sha256:7f0e8a12bc8f5ec4e41e2eae9566929492f45b4324c04e0e97d2233a6927451c",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.residue-classes.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.residue-classes.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.residue-classes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.residue-classes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.residue-classes.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.residue-classes.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.residue-classes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.residue-classes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.residue-classes.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.residue-classes.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.residue-classes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.residue-classes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.residue-classes.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.residue-classes.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.residue-classes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.residue-classes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.residue-classes.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.residue-classes.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.residue-classes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.residue-classes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.residue-classes.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.residue-classes.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.residue-classes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.residue-classes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.residue-classes/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.residue-classes",
+      "title": "Learning Objective",
+      "content": "The student defines the residue class [a]_n = {a+kn : k∈ℤ} as the set of all integers congruent to a modulo n; proves that exactly n distinct residue classes partition ℤ; verifies that addition and multiplication of classes ([a]+[b]=[a+b], [a]·[b]=[ab]) are well-defined (independent of representative choice); identifies the resulting ring ℤ/nℤ and recognises that it is a field when n is a prime; and traces the connection to the abstract notion of a quotient ring.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.residue-classes.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.residue-classes/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.residue-classes",
+      "title": "RESIDUE-CLASS-IS-JUST-THE-REMAINDER",
+      "content": "| MC-1 | RESIDUE-CLASS-IS-JUST-THE-REMAINDER | Student treats [a]_n as a single number (the remainder when a is divided by n), not as the infinite set {…,a−n, a, a+n, a+2n,…} | Type 3 — language contamination (\"residue\" = \"remainder\" in everyday usage; the class notation [a]_n appears alongside the modular remainder operation a mod n; students collapse the set to its canonical element) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.residue-classes.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.nt.residue-classes/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.residue-classes",
+      "title": "OPERATIONS-ON-CLASSES-NEED-A-CANONICAL-REPRESENTATIVE",
+      "content": "| MC-2 | OPERATIONS-ON-CLASSES-NEED-A-CANONICAL-REPRESENTATIVE | Student insists you must reduce to the canonical representative (remainder in {0,…,n−1}) before computing [a]+[b] or [a]·[b]; doesn't recognize that ANY representative gives the same class result | Type 5 — instruction-induced (teachers present \"compute mod n\" as a procedure; the conceptual step — any representative works because all differ by a multiple of n — is elided; students conclude the algorithm requires the canonical choice) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.residue-classes.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.nt.residue-classes/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.residue-classes",
+      "title": "Z-MOD-n-IS-ALWAYS-A-FIELD",
+      "content": "| MC-3 | Z-MOD-n-IS-ALWAYS-A-FIELD | Student concludes ℤ/nℤ is a field for all n≥2 because it is a ring; doesn't recognise that zero-divisors appear for composite n | Type 1 — overgeneralization (ℤ/pℤ for prime p is the first example taught, and it is a field; the prime condition is stated but students extend the \"it's a field\" conclusion to composite moduli without checking) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.residue-classes.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.residue-classes/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.residue-classes",
+      "title": "Field (𝔽₂)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Field (𝔽₂)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.residue-classes.md",
+        "startLine": 40,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "math.nt.residue-classes/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.residue-classes",
+      "title": "Field (𝔽₃)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Field (𝔽₃)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.residue-classes.md",
+        "startLine": 41,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "math.nt.residue-classes/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.residue-classes",
+      "title": "Ring, not field",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Ring, not field\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.residue-classes.md",
+        "startLine": 42,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "math.nt.residue-classes/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.residue-classes",
+      "title": "Field (𝔽₅)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Field (𝔽₅)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.residue-classes.md",
+        "startLine": 43,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "math.nt.residue-classes/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.residue-classes",
+      "title": "Ring, not field",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Ring, not field\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.residue-classes.md",
+        "startLine": 44,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.nt.residue-classes/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.residue-classes",
+      "title": "Field (𝔽₇)",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Field (𝔽₇)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.residue-classes.md",
+        "startLine": 45,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.nt.residue-classes/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.residue-classes",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. List all elements of [−3]₇ that lie between −20 and 20. Determine whether [−3]₇=[4]₇. Explain.\n2. Prove that addition in ℤ/nℤ is associative: ([a]+[b])+[c]=[a]+([b]+[c]). (Trace through the well-definedness issue.)\n3. Find all zero divisors in ℤ/12ℤ. What is the connection between zero divisors mod 12 and the factorisation of 12?\n4. Let n=p be prime. Prove that every non-zero element [a] in ℤ/pℤ has a multiplicative inverse. (Hint: gcd(a,p) and Bézout.)\n\n**P55 — Reflect & Consolidate:** \"ℤ/nℤ has exactly n residue classes; each is an infinite set. Addition and multiplication are well-defined (class of result depends only on classes of inputs, not representatives). ℤ/nℤ is a ring always; a field iff n is prime. Quotient-ring structure: nℤ is an ideal, ℤ/nℤ=ℤ/(nℤ).\"\n\n**P76 — Transfer Probe (Cross-link mode: math.abst.quotient-ring):**\nThe construction ℤ/nℤ generalises to any ring R and ideal I: form the quotient ring R/I. (a) The map φ: ℤ→ℤ/nℤ defined by φ(a)=[a]_n is a ring homomorphism. Verify it preserves addition and multiplication. (b) What is the kernel of φ? Express it as a set. (c) In the quotient ℝ[x]/(x²+1) (polynomials modulo x²+1): what is [x²]? What is [x]²? What familiar structure does this quotient ring resemble? (d) Explain in one sentence how ℤ/nℤ and ℝ[x]/(x²+1) are both instances of the general quotient-ring construction.\n\n**P55 — Reflect & Consolidate:** \"Quotient ring R/I: cosets r+I as elements, operations (r+I)+(s+I)=(r+s)+I. For ℤ/nℤ: I=nℤ, cosets are the residue classes. For ℝ[x]/(x²+1): [x²]=[−1] (since x²+1≡0 mod x²+1, so x²≡−1), so [x]²=[−1], giving the algebra of complex numbers (setting [x]=i). Both are the same categorical construction: a ring modulo an ideal.\"\n\n**P75 — Mastery Assessment:**\n\"(a) Prove that [a]_n=[b]_n if and only if n|(a−b). (b) In ℤ/15ℤ, compute [7]×[13] and [7]^4. (c) Is ℤ/15ℤ a field? Find a specific pair of zero divisors. (d) Define a ring homomorphism from ℤ/6ℤ to ℤ/3ℤ. Verify the homomorphism property for addition and multiplication. What is the kernel?\"\n\n**P55 — Reflect & Consolidate:** \"Ring homomorphism ℤ/6ℤ→ℤ/3ℤ: [a]₆↦[a]₃. Well-defined since 6|a−b implies 3|a−b. Kernel = {[0]₆,[3]₆} = 3ℤ/6ℤ. This is the First Isomorphism Theorem in miniature: (ℤ/6ℤ)/kernel ≅ ℤ/3ℤ.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.nt.residue-classes complete\n- Score 3/5 → REVIEW well-definedness and the field/ring distinction; replay A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.nt.congruence; reassign\n\n**P78 — Completion:** Residue Classes certified. Student defines residue classes as infinite sets; proves exactly n classes partition ℤ; verifies well-definedness of arithmetic operations; identifies ℤ/nℤ as a ring and field iff n prime; traces the connection to the general quotient-ring construction.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.residue-classes.md",
+        "startLine": 113,
+        "endLine": 140
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

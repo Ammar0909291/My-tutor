@@ -1,0 +1,651 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.divisibility-rules-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.divisibility-rules",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1ef9b792c8beee3860f95212c0da56b29e545e93f9921fb0cb6d4e9059c8b061",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.divisibility-rules.md": "sha256:4ced42522dc87f254330837ab266381dc545fc7aa8acadb5de1409cd82607ad2"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 15,
+      "mastery_probe": 1
+    },
+    "ruleCount": 15
+  },
+  "concept": {
+    "conceptId": "math.nt.divisibility-rules",
+    "name": "Divisibility Rules",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.nt.divisibility"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.divisibility-rules-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.divisibility-rules (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.divisibility-rules.md": "sha256:4ced42522dc87f254330837ab266381dc545fc7aa8acadb5de1409cd82607ad2"
+      },
+      "contentHash": "sha256:2e238962128d3f0dd1c7a9b5da8eef718c631ec44aca0d7de53a6ffb0ecba3f5",
+      "ruleCount": 15,
+      "bandCounts": {
+        "3": 15
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.divisibility-rules.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.divisibility-rules.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.divisibility-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.divisibility-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.divisibility-rules.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.divisibility-rules.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.divisibility-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.divisibility-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.divisibility-rules.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.divisibility-rules.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.divisibility-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.divisibility-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.divisibility-rules.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.divisibility-rules.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.divisibility-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.divisibility-rules\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.divisibility-rules.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.divisibility-rules.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.divisibility-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.divisibility-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.divisibility-rules.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.divisibility-rules.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.divisibility-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.divisibility-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.divisibility-rules.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.divisibility-rules.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.divisibility-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.divisibility-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.divisibility-rules.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.divisibility-rules.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.divisibility-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.divisibility-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.divisibility-rules.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.divisibility-rules.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.divisibility-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.divisibility-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.divisibility-rules.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.divisibility-rules.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.divisibility-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.divisibility-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.divisibility-rules.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.divisibility-rules.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.divisibility-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.divisibility-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.divisibility-rules.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.divisibility-rules.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.divisibility-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.divisibility-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.divisibility-rules.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.divisibility-rules.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.divisibility-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.divisibility-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.divisibility-rules.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.divisibility-rules.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.divisibility-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.divisibility-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.divisibility-rules.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.divisibility-rules.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.divisibility-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.divisibility-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.divisibility-rules/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.divisibility-rules",
+      "title": "Learning Objective",
+      "content": "The student applies divisibility rules for 2, 3, 4, 5, 6, 8, 9, 10, and 11 to determine whether a number is divisible by each without performing the division; derives the rule for 3 (and 9) from the fact that 10≡1 (mod 3) (and mod 9), showing that the digit sum has the same remainder as the original number; applies multiple rules in combination to factor numbers and identify composite numbers quickly; and states when a rule works for a product (e.g., divisible by 6 iff divisible by both 2 and 3).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.divisibility-rules.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.divisibility-rules/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.divisibility-rules",
+      "title": "DIGIT-SUM-TESTS-DIVISIBILITY-BY-7",
+      "content": "| MC-1 | DIGIT-SUM-TESTS-DIVISIBILITY-BY-7 | Student extends the digit sum rule to 7 (and 11), believing that if the digit sum is divisible by 7 the number is divisible by 7 — does not recognise that 10≢1 (mod 7) so the digit sum rule breaks | Type 1 — overgeneralization (the digit sum rule works beautifully for 3 and 9; students apply it to every divisor without checking the required congruence condition 10≡1 mod d) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.divisibility-rules.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.nt.divisibility-rules/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.divisibility-rules",
+      "title": "DIVISIBLE-BY-6-IFF-DIVISIBLE-BY-2-AND-3",
+      "content": "| MC-2 | DIVISIBLE-BY-6-IFF-DIVISIBLE-BY-2-AND-3 | Student applies the combination rule (div by 6 iff by 2 and 3) to coprime factors but then extends it incorrectly to non-coprime pairs (e.g., thinks div by 4 iff div by 2 and 2 — i.e., just div by 2) | Type 5 — instruction-induced (the rule \"div by ab iff div by a and b\" is stated without the coprimality condition gcd(a,b)=1; students try to apply it for a=b=2 to get div by 4) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.divisibility-rules.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.nt.divisibility-rules/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.divisibility-rules",
+      "title": "LAST-DIGIT-RULE-WORKS-FOR-ALL-ODD-DIVISORS",
+      "content": "| MC-3 | LAST-DIGIT-RULE-WORKS-FOR-ALL-ODD-DIVISORS | Student checks only the last digit for divisibility by 5 and generalises: \"only the last digit matters for all divisors\" — not recognising that this works for 2, 4, 5, 8 (powers of 2 or 5, which divide 10^k), but not for 3, 7, 9, 11 | Type 1 — overgeneralization (the last-digit rule for 2 and 5 is taught first and is very intuitive; the extension to other divisors fails because 10≢0 mod 3 or mod 7) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.divisibility-rules.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.divisibility-rules/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.divisibility-rules",
+      "title": "CORRECT → \"Rules derived from 10^k mod d. Digit sum for 3,9 (since 10≡1). Alternating sum for 11 (since 10≡−1). Last digits for 2,4,5,8 (powers divide 10^k). Combination rule only for coprime factors.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Rules derived from 10^k mod d. Digit sum for 3,9 (since 10≡1). Alternating sum for 11 (since 10≡−1). Last digits for 2,4,5,8 (powers divide 10^k). Combination rule only for coprime factors.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.divisibility-rules.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.nt.divisibility-rules/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.divisibility-rules",
+      "title": "PARTIAL (knows the rules but not the derivation) → \"For the rule of 3: n=d₀+10d₁+100d₂+…. Now 10=9+1≡1 (mod 3), and 100=99+1≡1 (mod 3). Every power of 10 is ≡1 (mod 3). So n≡d₀×1+d₁×1+d₂×1+…=digit sum (mod 3). The digit sum has exactly the same remainder when divided by 3 as n itself.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (knows the rules but not the derivation) → \\\"For the rule of 3: n=d₀+10d₁+100d₂+…. Now 10=9+1≡1 (mod 3), and 100=99+1≡1 (mod 3). Every power of 10 is ≡1 (mod 3). So n≡d₀×1+d₁×1+d₂×1+…=digit sum (mod 3). The digit sum has exactly the same remainder when divided by 3 as n itself.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.divisibility-rules.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.nt.divisibility-rules/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.divisibility-rules",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.divisibility-rules.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.nt.divisibility-rules/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.divisibility-rules",
+      "title": "NO_RESPONSE → \"Is 5,472 divisible by 3? By 4? By 6? By 8? Show your work using divisibility rules, not long division.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"Is 5,472 divisible by 3? By 4? By 6? By 8? Show your work using divisibility rules, not long division.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.divisibility-rules.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.nt.divisibility-rules/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.divisibility-rules",
+      "title": "Div by 6 iff by 2 and 3: ✓ (gcd(2,3)=1)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Div by 6 iff by 2 and 3: ✓ (gcd(2,3)=1)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.divisibility-rules.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.nt.divisibility-rules/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.divisibility-rules",
+      "title": "Div by 4 iff by 2: ✗ (4=2², gcd(2,2)=2≠1; 6 is div by 2 but not by 4)",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Div by 4 iff by 2: ✗ (4=2², gcd(2,2)=2≠1; 6 is div by 2 but not by 4)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.divisibility-rules.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.nt.divisibility-rules/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.divisibility-rules",
+      "title": "Div by 12 iff by 3 and 4: ✓ (gcd(3,4)=1; more useful than 3 and 2 since it captures div by 4)",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Div by 12 iff by 3 and 4: ✓ (gcd(3,4)=1; more useful than 3 and 2 since it captures div by 4)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.divisibility-rules.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.nt.divisibility-rules/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.divisibility-rules",
+      "title": "CORRECT → \"Digit sum for 3,9 (10≡1 mod 3,9). Alternating sum for 11 (10≡−1 mod 11). Last k digits for 2^k and 5 (10^k divisible by 2^k and 5^k). No simple rule for 7. Combination: gcd(a,b)=1 required.\" → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"CORRECT → \\\"Digit sum for 3,9 (10≡1 mod 3,9). Alternating sum for 11 (10≡−1 mod 11). Last k digits for 2^k and 5 (10^k divisible by 2^k and 5^k). No simple rule for 7. Combination: gcd(a,b)=1 required.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.divisibility-rules.md",
+        "startLine": 94,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "math.nt.divisibility-rules/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.divisibility-rules",
+      "title": "PARTIAL (knows rules but misapplies combination rule) → \"The combination rule divisible by a AND b implies divisible by ab works ONLY when gcd(a,b)=1. Proof: if a|n and b|n and gcd(a,b)=1, then ab|n (by Bézout/CRT). If gcd(a,b)>1, the rule fails: 4|12 and 6|12 but 24∤12. Useful combinations: 6 (2×3), 10 (2×5), 12 (3×4), 15 (3×5), 35 (5×7).\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-9\",\"title\":\"PARTIAL (knows rules but misapplies combination rule) → \\\"The combination rule divisible by a AND b implies divisible by ab works ONLY when gcd(a,b)=1. Proof: if a|n and b|n and gcd(a,b)=1, then ab|n (by Bézout/CRT). If gcd(a,b)>1, the rule fails: 4|12 and 6|12 but 24∤12. Useful combinations: 6 (2×3), 10 (2×5), 12 (3×4), 15 (3×5), 35 (5×7).\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.divisibility-rules.md",
+        "startLine": 95,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "math.nt.divisibility-rules/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.divisibility-rules",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-10\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.divisibility-rules.md",
+        "startLine": 96,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "math.nt.divisibility-rules/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.divisibility-rules",
+      "title": "NO_RESPONSE → \"Without performing division, determine all single-digit divisors of 1,980. Show your work using divisibility rules.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-11\",\"title\":\"NO_RESPONSE → \\\"Without performing division, determine all single-digit divisors of 1,980. Show your work using divisibility rules.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.divisibility-rules.md",
+        "startLine": 97,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "math.nt.divisibility-rules/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.divisibility-rules",
+      "title": "CORRECT → \"Digit sum rule only works when 10≡1 (mod d), i.e., for d=3 and d=9. For d=7: 10≡3 (mod 7), not 1 — so digit sums have wrong weights. Must use division or specialised tests for 7.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-12\",\"title\":\"CORRECT → \\\"Digit sum rule only works when 10≡1 (mod d), i.e., for d=3 and d=9. For d=7: 10≡3 (mod 7), not 1 — so digit sums have wrong weights. Must use division or specialised tests for 7.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.divisibility-rules.md",
+        "startLine": 107,
+        "endLine": 107
+      }
+    },
+    {
+      "assetId": "math.nt.divisibility-rules/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.divisibility-rules",
+      "title": "PARTIAL (knows the rule fails for 7 but not why) → \"The digit sum rule is based on the fact that every power of 10 has the same remainder (mod d). For d=3: 10≡1, so 10^k≡1 for all k — hence digit sum works. For d=7: 10≡3, 100≡2, 1000≡6, 10000≡4, 10⁵≡5, 10⁶≡1 (period 6). The remainders are 3,2,6,4,5,1,3,2,6,… — not constant. No single digit-sum rule captures all these varying weights.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-13\",\"title\":\"PARTIAL (knows the rule fails for 7 but not why) → \\\"The digit sum rule is based on the fact that every power of 10 has the same remainder (mod d). For d=3: 10≡1, so 10^k≡1 for all k — hence digit sum works. For d=7: 10≡3, 100≡2, 1000≡6, 10000≡4, 10⁵≡5, 10⁶≡1 (period 6). The remainders are 3,2,6,4,5,1,3,2,6,… — not constant. No single digit-sum rule captures all these varying weights.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.divisibility-rules.md",
+        "startLine": 108,
+        "endLine": 108
+      }
+    },
+    {
+      "assetId": "math.nt.divisibility-rules/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.divisibility-rules",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-14\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.divisibility-rules.md",
+        "startLine": 109,
+        "endLine": 109
+      }
+    },
+    {
+      "assetId": "math.nt.divisibility-rules/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.divisibility-rules",
+      "title": "NO_RESPONSE → \"Compute 10 mod 7, 100 mod 7, 1000 mod 7. Are they all equal? What does this tell you about whether a digit sum rule can work for divisibility by 7?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-15\",\"title\":\"NO_RESPONSE → \\\"Compute 10 mod 7, 100 mod 7, 1000 mod 7. Are they all equal? What does this tell you about whether a digit sum rule can work for divisibility by 7?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.divisibility-rules.md",
+        "startLine": 110,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "math.nt.divisibility-rules/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.divisibility-rules",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Without performing division, determine which of the following numbers are divisible by each of 2,3,4,5,6,8,9,10,11: (a) 7,920; (b) 5,148; (c) 3,003; (d) 14,400.\n2. Derive the divisibility rule for 4 using the fact that 100≡0 (mod 4). Show why only the last two digits matter. Verify using 5,312 and 5,313.\n3. A number n=abc (a three-digit number in base 10) is divisible by both 3 and 4. Write down all conditions on a,b,c. How many three-digit numbers are divisible by 12? (Use divisibility by 3 and 4, with gcd(3,4)=1.)\n4. Derive the divisibility rule for 11 from the congruence 10≡−1 (mod 11). Apply it to check whether 8,953,428 is divisible by 11. Verify your answer by dividing.\n\n**P55 — Reflect & Consolidate:** \"Divisibility rules encode modular arithmetic. Digit sum: works when 10≡1 (mod d) → rules for 3 and 9. Alternating sum: 10≡−1 (mod 11) → rule for 11. Last k digits: works when d|10^k → rules for 2,4,5,8,10. Combination: coprime factors only.\"\n\n**P76 — Transfer Probe (Independence mode):**\nDivisibility rules extend to bases other than 10. (a) In base 8 (octal), what is the analog of the digit-sum rule for 3? (Hint: 8≡−1 (mod 3).) (b) In base 16 (hexadecimal), derive the rule for divisibility by 15 and by 5. (Hint: 16≡1 (mod 5).) (c) A computer represents integers in base 2. Derive divisibility rules for 3 and 7 in binary. (Hint: 2≡−1 (mod 3), 2³=8≡1 (mod 7).) (d) A programmer wants to quickly check if a 32-bit integer n is divisible by 5 without division (CPU division is slow). Using the base-2 rule from (c), outline an algorithm using only bitwise operations and addition.\n\n**P55 — Reflect & Consolidate:** \"Divisibility rules are base-dependent. In base b: digit sum works when b≡1 (mod d); alternating sum when b≡−1 (mod d); last-k-digit rules when d|b^k. In binary: alternating sum for 3 (since 2≡−1 mod 3), 3-bit sum for 7 (since 2³=8≡1 mod 7). These translate to efficient bitwise algorithms — important in embedded systems and hardware design.\"\n\n**P75 — Mastery Assessment:**\n\"A customs form asks for a 13-digit ISBN barcode number to be self-checking: the weighted sum d₁×1+d₂×3+d₃×1+…+d₁₃×1 must be divisible by 10 (alternating weights 1 and 3). (a) Is this rule a divisibility rule for 10? Explain. (b) Given digits d₁…d₁₂=9780306406157 (dropping last digit), compute d₁₃ such that the check sum is divisible by 10. (c) If one digit is changed by ±1, does the check always detect the error? Prove it. (d) If two adjacent digits are transposed, does the check always detect the error? Compare with a simple digit-sum check for ISBN.\"\n\n**P55 — Reflect & Consolidate:** \"Check-digit schemes (ISBN, credit cards, UPC) are divisibility rules in disguise — a weighted digit sum modulo a small number. The choice of weights and modulus determines which errors are detectable. The ISBN-13 alternating 1/3 weight scheme over mod 10 detects all single-digit errors (since neither weight is 0 mod 10) but misses some transpositions (unlike ISBN-10's weights 1,2,…,10).\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.nt.divisibility-rules complete\n- Score 3/5 → REVIEW derivation from 10^k mod d and the combination rule; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.nt.divisibility; reassign\n\n**P78 — Completion:** Divisibility rules certified. Student applies rules for 2,3,4,5,6,8,9,10,11; derives each rule from the relevant congruence of powers of 10; uses the combination rule correctly for coprime factors; and explains why no simple digit rule exists for 7.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.divisibility-rules.md",
+        "startLine": 123,
+        "endLine": 150
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

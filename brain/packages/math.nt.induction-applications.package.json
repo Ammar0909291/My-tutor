@@ -1,0 +1,618 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.induction-applications-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.induction-applications",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:43a941f5cc4b7405ba85978a037721ebdafcde1ed4041994d9eb1582ca5b97ef",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.induction-applications.md": "sha256:664baeb790de1f14d85cc68654c972cef488d48b17df7fc1b50023b29a4e3f41"
+    },
+    "assetCount": 19,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 14,
+      "mastery_probe": 1
+    },
+    "ruleCount": 14
+  },
+  "concept": {
+    "conceptId": "math.nt.induction-applications",
+    "name": "Induction Applications in Number Theory",
+    "difficultyRaw": "proficient",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.found.proof-by-induction",
+      "math.nt.divisibility"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.induction-applications-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.induction-applications (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.induction-applications.md": "sha256:664baeb790de1f14d85cc68654c972cef488d48b17df7fc1b50023b29a4e3f41"
+      },
+      "contentHash": "sha256:fd0b099d0d4b0f8b4c6f54824b229f9fa892f310bdbfdff175c364613fb79306",
+      "ruleCount": 14,
+      "bandCounts": {
+        "3": 14
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.induction-applications.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.induction-applications.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.induction-applications"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.induction-applications\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.induction-applications.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.induction-applications.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.induction-applications"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.induction-applications\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.induction-applications.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.induction-applications.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.induction-applications"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.induction-applications\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.induction-applications.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.induction-applications.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.induction-applications"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.induction-applications\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.induction-applications.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.induction-applications.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.induction-applications"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.induction-applications\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.induction-applications.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.induction-applications.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.induction-applications"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.induction-applications\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.induction-applications.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.induction-applications.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.induction-applications"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.induction-applications\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.induction-applications.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.induction-applications.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.induction-applications"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.induction-applications\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.induction-applications.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.induction-applications.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.induction-applications"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.induction-applications\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.induction-applications.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.induction-applications.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.induction-applications"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.induction-applications\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.induction-applications.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.induction-applications.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.induction-applications"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.induction-applications\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.induction-applications.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.induction-applications.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.induction-applications"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.induction-applications\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.induction-applications.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.induction-applications.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.induction-applications"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.induction-applications\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.induction-applications.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.induction-applications.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.induction-applications"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.induction-applications\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.induction-applications/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.induction-applications",
+      "title": "Learning Objective",
+      "content": "The student constructs complete inductive proofs (base case + inductive step) for number-theoretic divisibility claims (e.g., n(n²−1) is divisible by 6 for all n∈ℕ); selects between weak induction (P(n)→P(n+1)) and strong induction (P(1)∧…∧P(n)→P(n+1)) based on what the inductive step requires; proves sum and product formulas using induction; applies induction to prove properties of prime factorisation and divisibility; and identifies when an inductive proof fails because the inductive step implicitly uses a stronger hypothesis.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.induction-applications.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.induction-applications/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.induction-applications",
+      "title": "INDUCTION-ONLY-PROVES-FINITELY-MANY-CASES",
+      "content": "| MC-1 | INDUCTION-ONLY-PROVES-FINITELY-MANY-CASES | Student believes induction proves the statement \"for many values of n\" but not \"for ALL n\"; asks \"but what about n=1000 — did induction really cover that?\" | Type 3 — language contamination (\"mathematical induction\" sounds similar to \"inductive reasoning\" (inferring from examples), which IS fallible; students map the meaning of empirical induction onto the deductive structure of mathematical induction) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.induction-applications.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.nt.induction-applications/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.induction-applications",
+      "title": "BASE-CASE-SCOPE-DETERMINES-PROVEN-RANGE",
+      "content": "| MC-2 | BASE-CASE-SCOPE-DETERMINES-PROVEN-RANGE | Student believes proving P(1) and P(n)→P(n+1) only proves P(1),P(2),…,P(N) for some finite N, not P(n) for all n≥1; alternatively, believes proving P(3) and P(n)→P(n+1) proves P(n) for all n (including n<3) | Type 1 — overgeneralization (students don't trace the \"chain reaction\" structure: P(1) triggers P(2) triggers P(3)… which never terminates — it reaches every n) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.induction-applications.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.nt.induction-applications/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.induction-applications",
+      "title": "STRONG-INDUCTION-IS-STRICTLY-STRONGER-THAN-WEAK",
+      "content": "| MC-3 | STRONG-INDUCTION-IS-STRICTLY-STRONGER-THAN-WEAK | Student believes strong induction can prove statements that weak induction cannot; treats them as genuinely different proof powers rather than equivalent strategies | Type 3 — language contamination (the word \"strong\" implies greater power; students don't recognise that any theorem provable by strong induction has an equivalent weak-induction proof, possibly with a modified statement) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.induction-applications.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.induction-applications/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.induction-applications",
+      "title": "CORRECT → \"Induction: base case establishes P(n₀); inductive step P(n)→P(n+1) chains from n₀ to every n≥n₀. Divisibility induction: expand P(n+1) in terms of P(n) to isolate the difference, which is always divisible by the target.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Induction: base case establishes P(n₀); inductive step P(n)→P(n+1) chains from n₀ to every n≥n₀. Divisibility induction: expand P(n+1) in terms of P(n) to isolate the difference, which is always divisible by the target.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.induction-applications.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.nt.induction-applications/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.induction-applications",
+      "title": "PARTIAL (skips base case or treats it as trivial verification only) → \"The base case is NOT optional or a formality. Without it the chain has no starting link. The statement 'n³−n is divisible by 3' would have no proven base — the inductive step alone would only show 'IF it holds for some k, THEN it holds for k+1', which is vacuously true but proves nothing if no k is established.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (skips base case or treats it as trivial verification only) → \\\"The base case is NOT optional or a formality. Without it the chain has no starting link. The statement 'n³−n is divisible by 3' would have no proven base — the inductive step alone would only show 'IF it holds for some k, THEN it holds for k+1', which is vacuously true but proves nothing if no k is established.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.induction-applications.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.nt.induction-applications/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.induction-applications",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.induction-applications.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.nt.induction-applications/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.induction-applications",
+      "title": "NO_RESPONSE → \"What is the base case for proving P(n): 4|(n⁴−n²)? Verify it. Then compute P(2): does 4|(16−4)=12? Is 4|12?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"What is the base case for proving P(n): 4|(n⁴−n²)? Verify it. Then compute P(2): does 4|(16−4)=12? Is 4|12?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.induction-applications.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.nt.induction-applications/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.induction-applications",
+      "title": "If n+1 is prime, we're done (it IS a prime factorisation with one factor).",
+      "content": "{\"id\":\"TA-5\",\"title\":\"If n+1 is prime, we're done (it IS a prime factorisation with one factor).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.induction-applications.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.nt.induction-applications/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.induction-applications",
+      "title": "If n+1 is composite, then n+1=ab with 2≤a,b<n+1. By the strong induction hypothesis, both a and b have prime factorisations. Concatenating them gives a prime factorisation of n+1. ✓",
+      "content": "{\"id\":\"TA-6\",\"title\":\"If n+1 is composite, then n+1=ab with 2≤a,b<n+1. By the strong induction hypothesis, both a and b have prime factorisations. Concatenating them gives a prime factorisation of n+1. ✓\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.induction-applications.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.nt.induction-applications/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.induction-applications",
+      "title": "CORRECT → \"Strong induction: IH = P holds for ALL k≤n. Use when step needs more than just the previous case. Weak and strong induction are logically equivalent (same theorems provable).\" → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"CORRECT → \\\"Strong induction: IH = P holds for ALL k≤n. Use when step needs more than just the previous case. Weak and strong induction are logically equivalent (same theorems provable).\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.induction-applications.md",
+        "startLine": 95,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "math.nt.induction-applications/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.induction-applications",
+      "title": "PARTIAL (uses strong induction but can't construct the step) → Walk through the Fibonacci example step by step → TB-R02 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"PARTIAL (uses strong induction but can't construct the step) → Walk through the Fibonacci example step by step → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.induction-applications.md",
+        "startLine": 96,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "math.nt.induction-applications/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.induction-applications",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-9\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.induction-applications.md",
+        "startLine": 97,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "math.nt.induction-applications/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.induction-applications",
+      "title": "NO_RESPONSE → \"To prove 'every postage ≥8 cents can be made with 3-cent and 5-cent stamps', you need cases n=8,9 as base and then use n−3 (if n−3≥8) in the inductive step. Why does this require strong induction?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-10\",\"title\":\"NO_RESPONSE → \\\"To prove 'every postage ≥8 cents can be made with 3-cent and 5-cent stamps', you need cases n=8,9 as base and then use n−3 (if n−3≥8) in the inductive step. Why does this require strong induction?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.induction-applications.md",
+        "startLine": 98,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "math.nt.induction-applications/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.induction-applications",
+      "title": "CORRECT → \"Mathematical induction is a deductive proof, not empirical enumeration. The two premises together imply ALL cases without listing them.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-11\",\"title\":\"CORRECT → \\\"Mathematical induction is a deductive proof, not empirical enumeration. The two premises together imply ALL cases without listing them.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.induction-applications.md",
+        "startLine": 108,
+        "endLine": 108
+      }
+    },
+    {
+      "assetId": "math.nt.induction-applications/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.induction-applications",
+      "title": "PARTIAL → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"PARTIAL → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.induction-applications.md",
+        "startLine": 109,
+        "endLine": 109
+      }
+    },
+    {
+      "assetId": "math.nt.induction-applications/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.induction-applications",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-13\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.induction-applications.md",
+        "startLine": 110,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "math.nt.induction-applications/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.induction-applications",
+      "title": "NO_RESPONSE → \"If I've proven P(1) and P(n)→P(n+1) for all n, is P(1000000) proven? Walk me through why.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-14\",\"title\":\"NO_RESPONSE → \\\"If I've proven P(1) and P(n)→P(n+1) for all n, is P(1000000) proven? Walk me through why.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.induction-applications.md",
+        "startLine": 111,
+        "endLine": 111
+      }
+    },
+    {
+      "assetId": "math.nt.induction-applications/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.induction-applications",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Prove by induction: for all n≥1, 6|(n³−n). (Note: this is different from 3|(n³−n); the divisor is 6.)\n2. Prove by strong induction: every integer n≥2 can be written as a product of prime numbers (possibly just one prime). This is the existence part of the Fundamental Theorem of Arithmetic.\n3. Prove: for all n≥1, 1³+2³+…+n³ = [n(n+1)/2]². (The sum of cubes equals the square of the sum of first n integers.)\n4. A frog climbs a staircase of n steps, jumping either 1 or 2 steps at a time. Let f(n) = the number of ways to climb n steps. Find a recurrence for f(n) and prove by strong induction that f(n)=F_{n+1} (the (n+1)th Fibonacci number).\n\n**P55 — Reflect & Consolidate:** \"Divisibility proofs: expand P(n+1) to isolate P(n)+divisible-remainder. Weak induction: use P(n) to prove P(n+1). Strong induction: use all P(1)…P(n) — necessary when the step needs non-adjacent earlier cases. Induction proves universal statements (for ALL n≥n₀), not empirical patterns.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Prove: for all n≥1, 2^n > n. (b) Prove by induction: for n≥1, ∑_{k=1}^{n} k·k! = (n+1)!−1. (c) A sequence is defined by a₁=1, a₂=3, aₙ=aₙ₋₁+2aₙ₋₂ for n≥3. Prove by strong induction that aₙ=2ⁿ+(−1)ⁿ for all n≥1. (d) Prove: if p is prime and p|(a₁a₂…aₖ), then p|aᵢ for some i. (Use strong induction on k.)\n\n**P55 — Reflect & Consolidate:** \"The prime divisibility property (part d) is the key lemma making unique prime factorisation work: if p divides a product, it divides one factor. The induction on k chains: p|a₁a₂…aₖ = (a₁…aₖ₋₁)·aₖ. Since p is prime, p|(a₁…aₖ₋₁) or p|aₖ. The first case gives the inductive hypothesis (the product has k−1 factors).\"\n\n**P75 — Mastery Assessment:**\n\"(a) Prove: n²+n is even for all n≥1. (b) Prove: for all n≥0, 4|(5ⁿ−1). (c) Prove by strong induction: every positive integer can be represented in binary (as a sum of distinct powers of 2). (d) Find the flaw in the following 'proof' that all horses are the same colour: Base case: trivially, a set of 1 horse has all horses the same colour. Inductive step: given n+1 horses, remove horse A to get n horses (all same colour by IH); add A back and remove horse B — n horses (all same colour by IH). So all n+1 horses are same colour. [This is a classic fallacy.]\"\n\n**P55 — Reflect & Consolidate:** \"The 'all horses' proof fails at the transition from n=1 to n=2: removing horse A gives {B} (one colour), removing B gives {A} (one colour), but the two singleton sets don't overlap — so you can't conclude A and B are the same colour. The inductive step requires the n horses and the n+1 horses to share at least one element, which fails when n=1 (two sets {A} and {B} with no common element).\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.nt.induction-applications complete\n- Score 3/5 → REVIEW the inductive step construction for divisibility; replay A01\n- Score ≤ 2/5 → PREREQUISITE GAP in math.found.proof-by-induction; reassign\n\n**P78 — Completion:** Induction Applications certified. Student constructs complete weak- and strong-induction proofs for divisibility, summation, and factorisation claims; distinguishes base case scope from proven range; explains why mathematical induction is a deductive proof covering all n; identifies classic induction fallacies.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.induction-applications.md",
+        "startLine": 124,
+        "endLine": 151
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

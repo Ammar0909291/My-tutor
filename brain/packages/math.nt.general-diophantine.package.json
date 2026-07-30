@@ -1,0 +1,855 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.general-diophantine-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.general-diophantine",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7efc34eb7cb55b536f90c9874923f122f9b4d71bfa3fb4219e142e507085e379",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.general-diophantine.md": "sha256:8ed94020d915241dd6e3bd4d089154b2e57d25dc5b13f18f697aac412b633d4f"
+    },
+    "assetCount": 26,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 21,
+      "mastery_probe": 1
+    },
+    "ruleCount": 21
+  },
+  "concept": {
+    "conceptId": "math.nt.general-diophantine",
+    "name": "General Diophantine Equations",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.65,
+    "estimatedHours": 20,
+    "prerequisites": [
+      "math.nt.linear-diophantine"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.general-diophantine-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.general-diophantine (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.general-diophantine.md": "sha256:8ed94020d915241dd6e3bd4d089154b2e57d25dc5b13f18f697aac412b633d4f"
+      },
+      "contentHash": "sha256:ed87ee3428003405b1e7adf578bd33350a2b62db60e838d0915f62a263025d32",
+      "ruleCount": 21,
+      "bandCounts": {
+        "3": 21
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.general-diophantine.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.general-diophantine.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.general-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.general-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.general-diophantine.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.general-diophantine.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.general-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.general-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.general-diophantine.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.general-diophantine.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.general-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.general-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.general-diophantine.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.general-diophantine.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.general-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.general-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.general-diophantine.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.general-diophantine.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.general-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.general-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.general-diophantine.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.general-diophantine.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.general-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.general-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.general-diophantine.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.general-diophantine.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.general-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.general-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.general-diophantine.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.general-diophantine.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.general-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.general-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.general-diophantine.TA-17",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.general-diophantine.md#TA-17",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.general-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.general-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.general-diophantine.TA-18",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.general-diophantine.md#TA-18",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.general-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.general-diophantine\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.general-diophantine.TA-19",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.general-diophantine.md#TA-19",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.general-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.general-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.general-diophantine.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.general-diophantine.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.general-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.general-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.general-diophantine.TA-20",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.general-diophantine.md#TA-20",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.general-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.general-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.general-diophantine.TA-21",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.general-diophantine.md#TA-21",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.general-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.general-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.general-diophantine.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.general-diophantine.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.general-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.general-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.general-diophantine.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.general-diophantine.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.general-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.general-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.general-diophantine.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.general-diophantine.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.general-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.general-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.general-diophantine.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.general-diophantine.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.general-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.general-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.general-diophantine.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.general-diophantine.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.general-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.general-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.general-diophantine.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.general-diophantine.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.general-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.general-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.general-diophantine.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.general-diophantine.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.general-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.general-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.general-diophantine/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "Learning Objective",
+      "content": "The student classifies polynomial Diophantine equations by their expected behaviour (degree, number of variables, geometric genus); states key landmark results including Fermat's Last Theorem (no integer solutions to xⁿ+yⁿ=zⁿ for n≥3 with xyz≠0), the Hasse-Minkowski theorem for quadratic forms (local-global principle for quadratic equations), and Thue's theorem (finitely many solutions for |f(x,y)|=c when f is irreducible of degree ≥3); applies the method of infinite descent to prove simple impossibility results; and recognises that deciding integer solvability of general Diophantine equations is undecidable (Hilbert's Tenth Problem).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "ALL-POLYNOMIAL-EQUATIONS-HAVE-INTEGER-SOLUTIONS",
+      "content": "| MC-1 | ALL-POLYNOMIAL-EQUATIONS-HAVE-INTEGER-SOLUTIONS | Student extends the ℝ-solvability of any non-degenerate polynomial equation to ℤ-solvability; believes every polynomial equation with integer coefficients has integer solutions | Type 1 — overgeneralization (over ℝ most polynomial equations have solutions; students don't recognise the integer constraint as fundamentally more restrictive; Fermat's Last Theorem is the canonical counterexample) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "LOCAL-GLOBAL-PRINCIPLE-IS-UNIVERSAL",
+      "content": "| MC-2 | LOCAL-GLOBAL-PRINCIPLE-IS-UNIVERSAL | Student applies the Hasse-Minkowski theorem (solvable mod p for all p + solvable in ℝ implies solvable in ℤ) to degree-3 and higher polynomial equations; thinks \"if it works everywhere locally, it works globally\" in all cases | Type 5 — instruction-induced (Hasse-Minkowski is proven for quadratic forms and presented as a natural principle; students don't know it fails for cubics and higher — the Selmer curve 3x³+4y³+5z³=0 is the textbook counterexample) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "DEGREE-ALONE-DETERMINES-SOLUTION-FINITENESS",
+      "content": "| MC-3 | DEGREE-ALONE-DETERMINES-SOLUTION-FINITENESS | Student believes higher degree always means fewer solutions; thinks x⁵+y⁵=n always has finitely many solutions regardless of n and structure | Type 1 — overgeneralization (Fermat's Last Theorem for n≥3 does have no nontrivial solutions, but Pell's equation x²−Dy²=1 of degree 2 has infinitely many; the genus of the algebraic curve, not just degree, governs finiteness) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "CORRECT → \"Diophantine equations: solvability varies wildly by degree, number of variables, and algebraic structure. FLT says no nontrivial solutions for xⁿ+yⁿ=zⁿ (n≥3). Genus governs finiteness. Local-global holds for degree 2 (Hasse-Minkowski) but fails for degree 3+. Hilbert's 10th: undecidable in general.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Diophantine equations: solvability varies wildly by degree, number of variables, and algebraic structure. FLT says no nontrivial solutions for xⁿ+yⁿ=zⁿ (n≥3). Genus governs finiteness. Local-global holds for degree 2 (Hasse-Minkowski) but fails for degree 3+. Hilbert's 10th: undecidable in general.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "PARTIAL (doesn't know what \"local-global\" means) → \"Local-global for Diophantines: an equation that has solutions mod p for every prime p AND in the real numbers is called 'locally solvable everywhere'. If local solvability implied global (ℤ/ℚ) solvability, we'd have an efficient existence test. Hasse-Minkowski shows this works for quadratic equations. The Selmer curve 3x³+4y³+5z³=0 has no rational point despite being locally solvable everywhere — the local-global principle breaks for degree 3.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (doesn't know what \\\"local-global\\\" means) → \\\"Local-global for Diophantines: an equation that has solutions mod p for every prime p AND in the real numbers is called 'locally solvable everywhere'. If local solvability implied global (ℤ/ℚ) solvability, we'd have an efficient existence test. Hasse-Minkowski shows this works for quadratic equations. The Selmer curve 3x³+4y³+5z³=0 has no rational point despite being locally solvable everywhere — the local-global principle breaks for degree 3.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "NO_RESPONSE → \"Does x²+y²=3 have integer solutions? How about x²+y²=5? Try to find them.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"Does x²+y²=3 have integer solutions? How about x²+y²=5? Try to find them.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "x²+y²=n: solvable iff every prime p≡3(mod 4) divides n to an even power (Fermat's two-square theorem)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"x²+y²=n: solvable iff every prime p≡3(mod 4) divides n to an even power (Fermat's two-square theorem)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "x²−Dy²=1 (Pell): always infinitely many solutions for D non-square (see math.nt.pells-equation)",
+      "content": "{\"id\":\"TA-6\",\"title\":\"x²−Dy²=1 (Pell): always infinitely many solutions for D non-square (see math.nt.pells-equation)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "ax²+bxy+cy²=n: solved by theory of binary quadratic forms; solvability related to class numbers",
+      "content": "{\"id\":\"TA-7\",\"title\":\"ax²+bxy+cy²=n: solved by theory of binary quadratic forms; solvability related to class numbers\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 70,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "E: y²=x³+ax+b defines an elliptic curve when discriminant ≠0",
+      "content": "{\"id\":\"TA-8\",\"title\":\"E: y²=x³+ax+b defines an elliptic curve when discriminant ≠0\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 73,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "Rational solutions form a finitely-generated abelian group (Mordell's theorem): E(ℚ)≅ℤʳ×T (T finite torsion group, r = rank)",
+      "content": "{\"id\":\"TA-9\",\"title\":\"Rational solutions form a finitely-generated abelian group (Mordell's theorem): E(ℚ)≅ℤʳ×T (T finite torsion group, r = rank)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 74,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "If r=0: finitely many rational solutions; if r>0: infinitely many",
+      "content": "{\"id\":\"TA-10\",\"title\":\"If r=0: finitely many rational solutions; if r>0: infinitely many\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "Integer solutions: finitely many (Siegel's theorem)",
+      "content": "{\"id\":\"TA-11\",\"title\":\"Integer solutions: finitely many (Siegel's theorem)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "Faltings' Theorem (Mordell Conjecture, proved 1983): any curve of genus ≥2 over ℚ has only finitely many rational points",
+      "content": "{\"id\":\"TA-12\",\"title\":\"Faltings' Theorem (Mordell Conjecture, proved 1983): any curve of genus ≥2 over ℚ has only finitely many rational points\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "xⁿ+yⁿ=1 for n≥4 is genus ≥2 → finitely many rational solutions (known explicitly: only trivial ones)",
+      "content": "{\"id\":\"TA-13\",\"title\":\"xⁿ+yⁿ=1 for n≥4 is genus ≥2 → finitely many rational solutions (known explicitly: only trivial ones)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "CORRECT → \"Genus governs finiteness: genus 0 → often ∞; genus 1 (elliptic) → depends on rank; genus ≥2 → finitely many (Faltings). Quadratic forms: Hasse-Minkowski. Integer vs rational solutions differ significantly.\" → A03",
+      "content": "{\"id\":\"TA-14\",\"title\":\"CORRECT → \\\"Genus governs finiteness: genus 0 → often ∞; genus 1 (elliptic) → depends on rank; genus ≥2 → finitely many (Faltings). Quadratic forms: Hasse-Minkowski. Integer vs rational solutions differ significantly.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 92,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "PARTIAL (confuses rational and integer solutions) → \"Diophantine equations over ℚ (rational solutions) and over ℤ (integer solutions) are different problems. Example: y²=x³−2 has infinitely many rational points but only finitely many integer solutions (in fact just (3,±5) — proved by Baker's theory of linear forms in logarithms). Siegel's theorem: any elliptic curve has only finitely many integer points.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-15\",\"title\":\"PARTIAL (confuses rational and integer solutions) → \\\"Diophantine equations over ℚ (rational solutions) and over ℤ (integer solutions) are different problems. Example: y²=x³−2 has infinitely many rational points but only finitely many integer solutions (in fact just (3,±5) — proved by Baker's theory of linear forms in logarithms). Siegel's theorem: any elliptic curve has only finitely many integer points.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-16\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 94,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/teaching_action_meta/TA-17",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "NO_RESPONSE → \"List all integer solutions to x²+y²=25. How many are there? Is this consistent with the behavior expected for quadratic equations?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-17\",\"title\":\"NO_RESPONSE → \\\"List all integer solutions to x²+y²=25. How many are there? Is this consistent with the behavior expected for quadratic equations?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-17",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 95,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/teaching_action_meta/TA-18",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "CORRECT → \"Hasse-Minkowski: quadratic forms only. Counterexample for degree 3: Selmer curve. Local-global principle is a non-trivial fact about degree 2, not a general truth.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-18\",\"title\":\"CORRECT → \\\"Hasse-Minkowski: quadratic forms only. Counterexample for degree 3: Selmer curve. Local-global principle is a non-trivial fact about degree 2, not a general truth.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-18",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 105,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/teaching_action_meta/TA-19",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "PARTIAL → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-19\",\"title\":\"PARTIAL → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-19",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 106,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/teaching_action_meta/TA-20",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-20\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-20",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 107,
+        "endLine": 107
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/teaching_action_meta/TA-21",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "NO_RESPONSE → \"Hasse-Minkowski applies to which degree of polynomial equations? For which degrees does it fail to apply?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-21\",\"title\":\"NO_RESPONSE → \\\"Hasse-Minkowski applies to which degree of polynomial equations? For which degrees does it fail to apply?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-21",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 108,
+        "endLine": 108
+      }
+    },
+    {
+      "assetId": "math.nt.general-diophantine/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.general-diophantine",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Use infinite descent to prove x²+y²=z² has no primitive solution where x,y,z are all odd. (Consider residues modulo 4: odd²≡1 mod 4; then 1+1≡2 and z²≡2 mod 4 is impossible since z² must be 0 or 1 mod 4.)\n2. The equation x²+y²=n is solvable in ℤ iff in the prime factorisation of n, every prime p≡3(mod 4) appears to an even power. Verify this for n=5,10,15,25. For which n≤20 is x²+y²=n solvable?\n3. The Catalan conjecture (now Mihailescu's theorem): the only solution to xᵃ−yᵇ=1 with x,y,a,b>1 is 3²−2³=1. Verify this solution. Find all solutions to x²−y²=1 (note: a=b=2 here, not covered by Catalan since xy≠0 requires x,y>0).\n4. Classify the following Diophantine equations by expected number of solutions (0, finite, or infinite) using genus and degree reasoning: (a) x²+3y²=7; (b) y²=x³−x; (c) x³+y³=z³; (d) x²−5y²=1.\n\n**P55 — Reflect & Consolidate:** \"General Diophantine equations: no universal algorithm (Hilbert's 10th, Matiyasevich). Genus governs solution count. FLT: no nontrivial solutions for degree ≥3 homogeneous. Hasse-Minkowski: local-global for degree 2 only. Infinite descent: a powerful ad hoc technique for impossibility proofs.\"\n\n**P76 — Transfer Probe (Cross-link mode: math.nt.algebraic-number-theory):**\nThe equation x²+5=y³ has the unique integer solution (x,y)=(±2,3). The proof uses the ring ℤ[√−5]. (a) Factor x²+5=(x+√−5)(x−√−5) in ℤ[√−5]. Why does this factorisation help? (b) Show that gcd(x+√−5, x−√−5)=1 in this ring (assuming gcd(x,y)=1 in ℤ). (c) Explain why ℤ[√−5] is NOT a UFD (unique factorisation domain): show that 6=2×3=(1+√−5)(1−√−5) gives two distinct factorisations into irreducibles. (d) This breakdown of UFD forces the use of ideal factorisation (math.nt.algebraic-number-theory) to complete the proof. Explain in one sentence why algebraic number theory is necessary for Diophantine equations involving non-linear terms.\n\n**P55 — Reflect & Consolidate:** \"ℤ[√−5] lacks UFD: 6 has two distinct factorisations. Ideal factorisation recovers unique factorisation at the ideal level. Diophantine equations with x²+D or Norms of algebraic integers naturally live in rings ℤ[√−D]; when these rings lack UFD, elementary methods fail and algebraic number theory provides the necessary toolkit.\"\n\n**P75 — Mastery Assessment:**\n\"(a) Prove that xⁿ+yⁿ=zⁿ has no solutions with x=y=1 for n≥3. (b) Explain in your own words why Hilbert's Tenth Problem being undecidable doesn't mean all Diophantine equations are hard — give an example of an equation where solvability is decidable. (c) The equation x²+y²=z² is parametrised by x=m²−n², y=2mn, z=m²+n². Use this to count the number of primitive Pythagorean triples (z,y) with z<100. (d) Why does Faltings' theorem imply xⁿ+yⁿ=1 has only finitely many rational solutions for n≥4? What is the genus of the curve xⁿ+yⁿ=1?\"\n\n**P55 — Reflect & Consolidate:** \"Genus of xⁿ+yⁿ=1 (as a projective curve) = (n−1)(n−2)/2. For n=4: genus=3 ≥2, so Faltings applies. For n=3: genus=1 (elliptic curve) — finitely many integral solutions (Siegel), but potentially infinitely many rational ones depending on rank. Hilbert's 10th undecidability: no UNIVERSAL algorithm, but specific families (linear, Pell, etc.) are perfectly decidable.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.nt.general-diophantine complete\n- Score 3/5 → REVIEW the genus classification and the local-global principle; replay A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.nt.linear-diophantine; reassign\n\n**P78 — Completion:** General Diophantine Equations certified. Student classifies equations by genus and expected solution count; states FLT, Faltings, Hasse-Minkowski, and undecidability; applies infinite descent for impossibility; recognises when algebraic number theory is needed.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.general-diophantine.md",
+        "startLine": 121,
+        "endLine": 148
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

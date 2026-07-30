@@ -1,0 +1,889 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.pells-equation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.pells-equation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d7c63942fdd814a730d552730929b3ce851beb859345f5e3db859f3151ad69ae",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.pells-equation.md": "sha256:1f98f406b777977f448c4995281b12f4483706d51323ff2b5b3300bd27311b37"
+    },
+    "assetCount": 27,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 22,
+      "mastery_probe": 1
+    },
+    "ruleCount": 22
+  },
+  "concept": {
+    "conceptId": "math.nt.pells-equation",
+    "name": "Pell's Equation",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.65,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.nt.general-diophantine"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.pells-equation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.pells-equation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.pells-equation.md": "sha256:1f98f406b777977f448c4995281b12f4483706d51323ff2b5b3300bd27311b37"
+      },
+      "contentHash": "sha256:36e8d1388b19a2c84644f45c5c806808c6f1f61cbc358bdc20a1fcefe90b75c1",
+      "ruleCount": 22,
+      "bandCounts": {
+        "3": 22
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-17",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-17",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-18",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-18",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-19",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-19",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-20",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-20",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-21",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-21",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-22",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-22",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pells-equation.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pells-equation.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pells-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pells-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.pells-equation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.pells-equation",
+      "title": "Learning Objective",
+      "content": "The student states Pell's equation x²−Dy²=1 (D a positive non-square integer) and recognises that it always has infinitely many positive integer solutions; identifies the fundamental solution (x₁,y₁) as the smallest positive-integer solution; generates all solutions from the fundamental solution via the recurrence xₙ₊₁=x₁xₙ+Dy₁yₙ, yₙ₊₁=x₁yₙ+y₁xₙ (equivalently via (xₙ+yₙ√D)=(x₁+y₁√D)ⁿ); finds the fundamental solution by computing the continued-fraction expansion of √D; and explains the historical misattribution of the equation to John Pell.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.pells-equation",
+      "title": "PELL-HAS-ONLY-TRIVIAL-SOLUTION",
+      "content": "| MC-1 | PELL-HAS-ONLY-TRIVIAL-SOLUTION | Student believes (1,0) (and (−1,0)) are the only solutions to x²−Dy²=1; doesn't recognise that nontrivial solutions always exist and form an infinite family | Type 1 — overgeneralization (the related equation x²−Dy²=0 has only the trivial solution x=y=0 for non-square D; students conflate the two and conclude Pell only has trivial solutions) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.pells-equation",
+      "title": "NEGATIVE-D-CASE-IS-ANALOGOUS",
+      "content": "| MC-2 | NEGATIVE-D-CASE-IS-ANALOGOUS | Student treats x²+Dy²=1 (positive D) the same as x²−Dy²=1; doesn't realise that x²+Dy²=1 with D>0 has only finitely many integer solutions (in fact only (±1,0)) | Type 5 — instruction-induced (the sign of D in the equation is visually minor; instructors who present x²−Dy²=1 quickly may not contrast with the positive-sign version; the finiteness of solutions for the positive-sign case is a sharp but easily missed distinction) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.pells-equation",
+      "title": "SOLUTIONS-ARE-GENERATED-BY-ADDITION",
+      "content": "| MC-3 | SOLUTIONS-ARE-GENERATED-BY-ADDITION | Student tries to generate new Pell solutions from (x₁,y₁) by adding (x₁,y₁) repeatedly: (2x₁, 2y₁), etc.; doesn't know the correct recurrence/composition rule | Type 1 — overgeneralization (the harmonic series and arithmetic sequences suggest \"add to get more\"; the correct operation is multiplication in the ring ℤ[√D]: (x₁+y₁√D)ⁿ for n=1,2,3,… which is NOT simple addition of components) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "p₀/q₀ = 1/1: 1²−2×1²=−1",
+      "content": "{\"id\":\"TA-1\",\"title\":\"p₀/q₀ = 1/1: 1²−2×1²=−1\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "p₁/q₁ = 3/2: 9−8=1 ✓ → fundamental solution (3,2)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"p₁/q₁ = 3/2: 9−8=1 ✓ → fundamental solution (3,2)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "p₂/q₂ = 7/5: 49−50=−1",
+      "content": "{\"id\":\"TA-3\",\"title\":\"p₂/q₂ = 7/5: 49−50=−1\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "p₃/q₃ = 17/12: 289−288=1 ✓",
+      "content": "{\"id\":\"TA-4\",\"title\":\"p₃/q₃ = 17/12: 289−288=1 ✓\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "p₄/q₄ = 41/29: 1681−1682=−1",
+      "content": "{\"id\":\"TA-5\",\"title\":\"p₄/q₄ = 41/29: 1681−1682=−1\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "(x₂,y₂): x₂=3×3+2×2×2=9+8=17; y₂=3×2+2×3=6+6=12. Check: 289−288=1 ✓",
+      "content": "{\"id\":\"TA-6\",\"title\":\"(x₂,y₂): x₂=3×3+2×2×2=9+8=17; y₂=3×2+2×3=6+6=12. Check: 289−288=1 ✓\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "(x₃,y₃): x₃=3×17+2×2×12=51+48=99; y₃=3×12+2×17=36+34=70. Check: 9801−9800=1 ✓",
+      "content": "{\"id\":\"TA-7\",\"title\":\"(x₃,y₃): x₃=3×17+2×2×12=51+48=99; y₃=3×12+2×17=36+34=70. Check: 9801−9800=1 ✓\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "CORRECT → \"Pell x²−Dy²=1 always has ∞ solutions. Fundamental solution from CF of √D. Recurrence: (xₙ+yₙ√D)=(x₁+y₁√D)ⁿ. Solutions grow roughly as (x₁+y₁√D)ⁿ.\" → A02",
+      "content": "{\"id\":\"TA-8\",\"title\":\"CORRECT → \\\"Pell x²−Dy²=1 always has ∞ solutions. Fundamental solution from CF of √D. Recurrence: (xₙ+yₙ√D)=(x₁+y₁√D)ⁿ. Solutions grow roughly as (x₁+y₁√D)ⁿ.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "PARTIAL (can find fundamental solution but can't generate the family) → \"Once (x₁,y₁) is known, generate the family via the norm composition: (x₂,y₂)=(x₁²+Dy₁², 2x₁y₁) for the 'doubling' formula, or generally xₙ₊₁=x₁xₙ+Dy₁yₙ, yₙ₊₁=x₁yₙ+y₁xₙ. This comes from (x₁+y₁√D)(xₙ+yₙ√D)=x_{n+1}+y_{n+1}√D.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-9\",\"title\":\"PARTIAL (can find fundamental solution but can't generate the family) → \\\"Once (x₁,y₁) is known, generate the family via the norm composition: (x₂,y₂)=(x₁²+Dy₁², 2x₁y₁) for the 'doubling' formula, or generally xₙ₊₁=x₁xₙ+Dy₁yₙ, yₙ₊₁=x₁yₙ+y₁xₙ. This comes from (x₁+y₁√D)(xₙ+yₙ√D)=x_{n+1}+y_{n+1}√D.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-10\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "NO_RESPONSE → \"Find two positive-integer solutions to x²−3y²=1. Start by checking small values of y: y=1 gives x²=4, so x=2 ✓. Is (2,1) the fundamental solution? Find the next one.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-11\",\"title\":\"NO_RESPONSE → \\\"Find two positive-integer solutions to x²−3y²=1. Start by checking small values of y: y=1 gives x²=4, so x=2 ✓. Is (2,1) the fundamental solution? Find the next one.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "D=1 is a perfect square, not considered (x²−y²=(x+y)(x−y)=1 → x+y=x−y=1 or x+y=x−y=−1 → trivial)",
+      "content": "{\"id\":\"TA-12\",\"title\":\"D=1 is a perfect square, not considered (x²−y²=(x+y)(x−y)=1 → x+y=x−y=1 or x+y=x−y=−1 → trivial)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "D=n²m with m square-free: x²−n²my²=1 has the same solutions as x²−my²=1 scaled appropriately",
+      "content": "{\"id\":\"TA-13\",\"title\":\"D=n²m with m square-free: x²−n²my²=1 has the same solutions as x²−my²=1 scaled appropriately\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "Negative Pell x²−Dy²=−1: solvable iff the period of the CF of √D is ODD; e.g. D=2 has period 1 (odd) so (1,1): 1−2=−1 ✓ before the fundamental solution to +1",
+      "content": "{\"id\":\"TA-14\",\"title\":\"Negative Pell x²−Dy²=−1: solvable iff the period of the CF of √D is ODD; e.g. D=2 has period 1 (odd) so (1,1): 1−2=−1 ✓ before the fundamental solution to +1\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "CORRECT → \"Solutions grow as (x₁+y₁√D)ⁿ. Best approximations to √D. Units in ℤ[√D] correspond to solutions to norm-1 equations. Negative Pell x²−Dy²=−1: solvable iff CF period is odd.\" → A03",
+      "content": "{\"id\":\"TA-15\",\"title\":\"CORRECT → \\\"Solutions grow as (x₁+y₁√D)ⁿ. Best approximations to √D. Units in ℤ[√D] correspond to solutions to norm-1 equations. Negative Pell x²−Dy²=−1: solvable iff CF period is odd.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "PARTIAL (doesn't connect to best rational approximations) → \"The continued fraction convergents pₙ/qₙ of √D are the rational numbers closest to √D for their denominator size — they're the 'best' approximations in the sense that no p/q with q≤qₙ is closer to √D. Pell solutions (xₙ,yₙ) ARE these convergent numerators and denominators, so solving Pell's equation is equivalent to finding the best rational approximations to √D.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-16\",\"title\":\"PARTIAL (doesn't connect to best rational approximations) → \\\"The continued fraction convergents pₙ/qₙ of √D are the rational numbers closest to √D for their denominator size — they're the 'best' approximations in the sense that no p/q with q≤qₙ is closer to √D. Pell solutions (xₙ,yₙ) ARE these convergent numerators and denominators, so solving Pell's equation is equivalent to finding the best rational approximations to √D.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-17",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-17\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-17",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-18",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "NO_RESPONSE → \"Pell for D=5: √5=[2;4,4,4,…]. First convergent 2/1: 4−5=−1. Second: (2×4+2)/(4×1+1)=10/4... simplify: p₁=4×2+2=10? No, use the recurrence: p₋₁=1,p₀=2; pₙ=aₙpₙ₋₁+pₙ₋₂. So p₁=4×2+1=9, q₁=4×1+0=4. Check: 81−80=1 ✓. So (9,4) is fundamental.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-18\",\"title\":\"NO_RESPONSE → \\\"Pell for D=5: √5=[2;4,4,4,…]. First convergent 2/1: 4−5=−1. Second: (2×4+2)/(4×1+1)=10/4... simplify: p₁=4×2+2=10? No, use the recurrence: p₋₁=1,p₀=2; pₙ=aₙpₙ₋₁+pₙ₋₂. So p₁=4×2+1=9, q₁=4×1+0=4. Check: 81−80=1 ✓. So (9,4) is fundamental.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-18",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-19",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "CORRECT → \"Generate Pell solutions by norm composition: (x₁+y₁√D)ⁿ, equivalently using the recurrence xₙ₊₁=x₁xₙ+Dy₁yₙ, yₙ₊₁=x₁yₙ+y₁xₙ. NOT by adding.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-19\",\"title\":\"CORRECT → \\\"Generate Pell solutions by norm composition: (x₁+y₁√D)ⁿ, equivalently using the recurrence xₙ₊₁=x₁xₙ+Dy₁yₙ, yₙ₊₁=x₁yₙ+y₁xₙ. NOT by adding.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-19",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 95,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-20",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "PARTIAL → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-20\",\"title\":\"PARTIAL → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-20",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 96,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-21",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-21\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-21",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 97,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/teaching_action_meta/TA-22",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pells-equation",
+      "title": "NO_RESPONSE → \"Compute (3+2√2)² by expanding. What are the rational and irrational parts? This gives the next Pell solution (17,12). Now compute (3+2√2)³ to get the one after that.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-22\",\"title\":\"NO_RESPONSE → \\\"Compute (3+2√2)² by expanding. What are the rational and irrational parts? This gives the next Pell solution (17,12). Now compute (3+2√2)³ to get the one after that.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-22",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 98,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "math.nt.pells-equation/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.pells-equation",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Find the fundamental solution to x²−3y²=1. Verify by checking small values. Then generate the next two solutions using the recurrence.\n2. Find the continued-fraction expansion of √7. Use the convergents to find the fundamental solution to x²−7y²=1.\n3. Find all integer solutions to x²−4y²=1. (Careful: D=4=2² is a perfect square. What happens to the equation? Factor x²−4y²=(x−2y)(x+2y)=1.)\n4. Show that if (x₁,y₁) is the fundamental solution to x²−Dy²=1, then xₙ=(xₙ₊₁+xₙ₋₁)/2x₁ (i.e. xₙ satisfies a linear recurrence). Find the recurrence and characteristic equation.\n\n**P55 — Reflect & Consolidate:** \"x²−Dy²=1: always ∞ solutions for non-square D. Fundamental solution from CF of √D. Recurrence: (xₙ+yₙ√D)=(x₁+y₁√D)ⁿ. Solutions form an infinite cyclic group under norm multiplication. Best approximations to √D. Perfect-square D: not considered (factors differently).\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Archimedes' Cattle Problem (simplified): find the smallest positive integer solution to x²−4729494y²=1. You don't need to find it — explain why the continued fraction of √4729494 will eventually yield the answer, and why the solution is astronomically large (the actual solution has hundreds of thousands of digits). (b) The equation x²−2y²=−1 (negative Pell): find its fundamental solution. Explain why solutions to negative Pell automatically give solutions to positive Pell by squaring. (c) Pell-like equation x²−Dy²=N for general N: not always solvable, and the solution set has different structure. Describe the structure for N=−1 (if solvable) and give one example of N for which the equation has no solutions.\n\n**P55 — Reflect & Consolidate:** \"Negative Pell x²−2y²=−1: fundamental solution (1,1); squaring gives (1+√2)²=3+2√2, i.e. (3,2) for positive Pell. In general: if negative Pell is solvable (period of CF is odd), its solutions generate all Pell solutions of both signs. Archimedes: the large solution reflects the continued fraction's large period (almost 400,000 terms) before the first +1 convergent appears.\"\n\n**P75 — Mastery Assessment:**\n\"(a) Find all solutions (x,y) with 0<y<50 to x²−7y²=1. List them. (b) Prove that the sequence (xₙ) satisfying the Pell recurrence is strictly increasing. (c) Prove that gcd(xₙ,yₙ)=1 for all n (all Pell solutions are primitive). (d) The equation x²−Dy²=4 appears in the theory of Chebyshev polynomials. If x=L_n (Lucas numbers) and y=F_n (Fibonacci numbers) for D=5, verify that L_n²−5F_n²=4(−1)ⁿ. [Use L₁=1,F₁=1,L₂=3,F₂=1,L₃=4,F₃=2.]\"\n\n**P55 — Reflect & Consolidate:** \"Lucas-Fibonacci Pell: L_n²−5F_n²=4(−1)ⁿ — a signed Pell equation alternating between ±4. This connects Pell theory to the Fibonacci sequence via the golden ratio φ=(1+√5)/2 (which is the fundamental solution direction x₁+y₁√5=1+√5 for D=5, offset by 2).\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.nt.pells-equation complete\n- Score 3/5 → REVIEW the continued-fraction method and the composition recurrence; replay A01\n- Score ≤ 2/5 → PREREQUISITE GAP in math.nt.general-diophantine; reassign\n\n**P78 — Completion:** Pell's Equation certified. Student states solvability (always infinitely many solutions for non-square D); finds fundamental solution via continued fractions; generates the family via norm composition recurrence; distinguishes positive and negative Pell; explains the group structure of solutions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pells-equation.md",
+        "startLine": 111,
+        "endLine": 138
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

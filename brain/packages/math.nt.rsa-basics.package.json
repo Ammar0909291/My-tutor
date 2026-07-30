@@ -1,0 +1,755 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.rsa-basics-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.rsa-basics",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:14eaf9403e2b48e14b8169ef89c9b8cd5e4f2ac2cb159be3a7dce008d47e1f89",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.rsa-basics.md": "sha256:f1b6d58b364ec61e51a6bd9fa5284daccb83e4ea8fa3af0e60ec9cfebb0efedc"
+    },
+    "assetCount": 23,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 18,
+      "mastery_probe": 1
+    },
+    "ruleCount": 18
+  },
+  "concept": {
+    "conceptId": "math.nt.rsa-basics",
+    "name": "RSA Cryptosystem Basics",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.nt.eulers-theorem",
+      "math.nt.primality-testing",
+      "math.nt.modular-inverse"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.rsa-basics-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.rsa-basics (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.rsa-basics.md": "sha256:f1b6d58b364ec61e51a6bd9fa5284daccb83e4ea8fa3af0e60ec9cfebb0efedc"
+      },
+      "contentHash": "sha256:8064424e58eea240508ed9a04f983a397146f35bb4f8319d8a371a0bf8864451",
+      "ruleCount": 18,
+      "bandCounts": {
+        "3": 18
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.rsa-basics.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.rsa-basics.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.rsa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.rsa-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.rsa-basics.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.rsa-basics.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.rsa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.rsa-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.rsa-basics.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.rsa-basics.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.rsa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.rsa-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.rsa-basics.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.rsa-basics.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.rsa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.rsa-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.rsa-basics.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.rsa-basics.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.rsa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.rsa-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.rsa-basics.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.rsa-basics.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.rsa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.rsa-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.rsa-basics.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.rsa-basics.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.rsa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.rsa-basics\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.rsa-basics.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.rsa-basics.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.rsa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.rsa-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.rsa-basics.TA-17",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.rsa-basics.md#TA-17",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.rsa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.rsa-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.rsa-basics.TA-18",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.rsa-basics.md#TA-18",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.rsa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.rsa-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.rsa-basics.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.rsa-basics.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.rsa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.rsa-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.rsa-basics.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.rsa-basics.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.rsa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.rsa-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.rsa-basics.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.rsa-basics.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.rsa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.rsa-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.rsa-basics.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.rsa-basics.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.rsa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.rsa-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.rsa-basics.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.rsa-basics.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.rsa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.rsa-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.rsa-basics.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.rsa-basics.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.rsa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.rsa-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.rsa-basics.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.rsa-basics.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.rsa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.rsa-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.rsa-basics.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.rsa-basics.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.rsa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.rsa-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.rsa-basics/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "Learning Objective",
+      "content": "The student describes the RSA key-generation procedure (choose large primes p,q; compute n=pq and φ(n)=(p−1)(q−1); select public exponent e with gcd(e,φ(n))=1; compute private exponent d≡e⁻¹(mod φ(n))); verifies that decryption reverses encryption via Euler's Theorem (m^(ed)≡m(mod n) for valid messages); identifies integer factoring as the presumed hard subproblem; explains why a small public key (e.g. e=65537) doesn't weaken security; and analyses what breaks if p or q is revealed, if e and φ(n) are both known, or if p≈q.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "RSA-SECURITY-COMES-FROM-EULER-THEOREM",
+      "content": "| MC-1 | RSA-SECURITY-COMES-FROM-EULER-THEOREM | Student believes RSA's security is mathematical — because computing ed≡1(mod φ(n)) or applying Euler's Theorem is hard | Type 5 — instruction-induced (RSA is introduced via Euler's Theorem, which IS the correctness proof; students conflate correctness with security; the actual security assumption — factoring n is computationally hard — is a separate, empirical conjecture, not the mathematics they just learned) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "DECRYPTION-IS-THE-REVERSE-ALGORITHM-OF-ENCRYPTION",
+      "content": "| MC-2 | DECRYPTION-IS-THE-REVERSE-ALGORITHM-OF-ENCRYPTION | Student thinks decryption applies a different kind of operation from encryption — e.g. \"encryption multiplies, decryption divides\" or \"encryption uses modular exponentiation, decryption uses logarithms\" | Type 3 — language contamination (\"encrypt\" and \"decrypt\" sound like opposite operations; the mathematical elegance that both are modular exponentiation (just with different exponents e and d) is unexpected and counterintuitive to students used to XOR-based or substitution ciphers) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "SMALL-PUBLIC-EXPONENT-WEAKENS-RSA",
+      "content": "| MC-3 | SMALL-PUBLIC-EXPONENT-WEAKENS-RSA | Student believes using e=3 or e=65537 makes RSA weaker because \"the exponent is too small to be secure\" | Type 1 — overgeneralization (in symmetric cryptography, key size directly measures security; students apply this intuition to RSA's exponent; the actual security comes from the modulus n's size, not from e's size — e=65537 is standard and secure) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "n=61×53=3233",
+      "content": "{\"id\":\"TA-1\",\"title\":\"n=61×53=3233\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "φ(n)=60×52=3120",
+      "content": "{\"id\":\"TA-2\",\"title\":\"φ(n)=60×52=3120\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "e=17 (gcd(17,3120)=1 since 17 is prime and 17∤3120)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"e=17 (gcd(17,3120)=1 since 17 is prime and 17∤3120)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "d=17⁻¹ mod 3120: extended Euclidean gives d=2753 (verify: 17×2753=46801=15×3120+1 ✓)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"d=17⁻¹ mod 3120: extended Euclidean gives d=2753 (verify: 17×2753=46801=15×3120+1 ✓)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "Encrypt m=65: 65^17 mod 3233 = 2790 (computed by repeated squaring)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Encrypt m=65: 65^17 mod 3233 = 2790 (computed by repeated squaring)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "Decrypt: 2790^2753 mod 3233 = 65 ✓",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Decrypt: 2790^2753 mod 3233 = 65 ✓\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "CORRECT → \"RSA: n=pq; φ(n)=(p−1)(q−1); e public; d=e⁻¹ mod φ(n) private. Encryption and decryption are both modular exponentiation. Correctness via Euler. Security via factoring hardness.\" → A02",
+      "content": "{\"id\":\"TA-7\",\"title\":\"CORRECT → \\\"RSA: n=pq; φ(n)=(p−1)(q−1); e public; d=e⁻¹ mod φ(n) private. Encryption and decryption are both modular exponentiation. Correctness via Euler. Security via factoring hardness.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "PARTIAL (cannot verify decryption correctness) → \"Trace through: c=mᵉ mod n. Then c^d=(mᵉ)^d=m^(ed) mod n. We chose d so that ed≡1(mod φ(n)), meaning ed=1+kφ(n). So m^(ed)=m¹×(m^φ(n))^k. By Euler's Theorem (assuming gcd(m,n)=1), m^φ(n)≡1(mod n), so (m^φ(n))^k≡1. Thus m^(ed)≡m(mod n).\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-8\",\"title\":\"PARTIAL (cannot verify decryption correctness) → \\\"Trace through: c=mᵉ mod n. Then c^d=(mᵉ)^d=m^(ed) mod n. We chose d so that ed≡1(mod φ(n)), meaning ed=1+kφ(n). So m^(ed)=m¹×(m^φ(n))^k. By Euler's Theorem (assuming gcd(m,n)=1), m^φ(n)≡1(mod n), so (m^φ(n))^k≡1. Thus m^(ed)≡m(mod n).\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-9\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "NO_RESPONSE → \"In the toy example p=3, q=5: what is n? φ(n)? Choose e=3. Find d. Encrypt m=4.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-10\",\"title\":\"NO_RESPONSE → \\\"In the toy example p=3, q=5: what is n? φ(n)? Choose e=3. Find d. Encrypt m=4.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "CORRECT → \"Knowing p or q breaks RSA instantly. Knowing φ(n) breaks RSA. Balanced p≈q enables Fermat attack. Small e is fine; small n is not. Padding prevents cube-root attacks on small messages.\" → A03",
+      "content": "{\"id\":\"TA-11\",\"title\":\"CORRECT → \\\"Knowing p or q breaks RSA instantly. Knowing φ(n) breaks RSA. Balanced p≈q enables Fermat attack. Small e is fine; small n is not. Padding prevents cube-root attacks on small messages.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "PARTIAL (doesn't understand why knowing φ(n) is equivalent to knowing the factorisation) → \"If you know φ(n)=(p−1)(q−1) AND n=pq, you have two equations: p+q=n−φ(n)+1 and p×q=n. These are a quadratic's coefficients: t²−(p+q)t+pq=0. Solving gives p and q directly. So knowing φ(n) is as good as factoring n.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-12\",\"title\":\"PARTIAL (doesn't understand why knowing φ(n) is equivalent to knowing the factorisation) → \\\"If you know φ(n)=(p−1)(q−1) AND n=pq, you have two equations: p+q=n−φ(n)+1 and p×q=n. These are a quadratic's coefficients: t²−(p+q)t+pq=0. Solving gives p and q directly. So knowing φ(n) is as good as factoring n.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-13\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "NO_RESPONSE → \"If an attacker knows n=3233 and φ(n)=3120, can they find p and q? Set up the equations and solve.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-14\",\"title\":\"NO_RESPONSE → \\\"If an attacker knows n=3233 and φ(n)=3120, can they find p and q? Set up the equations and solve.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "CORRECT → \"Security = hardness of factoring n. Given φ(n), finding d is fast (Euclidean). The mathematical machinery (Euler, modular exponentiation) enables correct key pairs; factoring hardness prevents an adversary from generating the same key pair.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-15\",\"title\":\"CORRECT → \\\"Security = hardness of factoring n. Given φ(n), finding d is fast (Euclidean). The mathematical machinery (Euler, modular exponentiation) enables correct key pairs; factoring hardness prevents an adversary from generating the same key pair.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 96,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "PARTIAL → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-16\",\"title\":\"PARTIAL → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 97,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/teaching_action_meta/TA-17",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-17\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-17",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 98,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/teaching_action_meta/TA-18",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "NO_RESPONSE → \"Given n=3233 and φ(n)=3120, find d for e=17 using the Extended Euclidean Algorithm. How many steps does it take? Is this 'hard'?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-18\",\"title\":\"NO_RESPONSE → \\\"Given n=3233 and φ(n)=3120, find d for e=17 using the Extended Euclidean Algorithm. How many steps does it take? Is this 'hard'?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-18",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 99,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "math.nt.rsa-basics/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.rsa-basics",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. RSA setup: p=11, q=13. Compute n, φ(n). Choose e=7. Find d. Encrypt m=5. Decrypt to recover m.\n2. An attacker intercepts a message encrypted with RSA (n=15, e=3). They also obtain φ(n)=8 through a side channel. Can they find d? Decrypt c=13.\n3. Why would choosing p=q=17 (so n=289) be a terrible choice for RSA? What does the Fermat factoring attack give immediately?\n4. RSA correctness proof: suppose ed=kφ(n)+1 for some k. Prove that m^(ed)≡m(mod n) for all m with gcd(m,n)=1. (Use Euler's Theorem explicitly.)\n\n**P55 — Reflect & Consolidate:** \"RSA: key generation relies on finding modular inverse (Extended Euclidean). Correctness relies on Euler's Theorem. Security relies on factoring hardness (unproven but widely believed). Small e is fine for security; balanced p≈q and knowing φ(n) are fatal weaknesses.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) A variant called textbook ElGamal: choose prime p, generator g mod p, private key x, public key y=g^x mod p. Encrypt m as (g^k mod p, m·y^k mod p) for random k. The discrete logarithm problem (finding x from g^x mod p) is presumed hard — analogously to RSA's factoring problem. Explain the structural parallel: what plays the role of e, d, n, and the hard problem? (b) RSA can also be used for digital signatures: sign m by computing s=m^d mod n; verify by checking m≡s^e(mod n). Explain why signing and verifying work correctly. (c) If an RSA private key d is recovered by an adversary, and the user generates a new key pair but keeps the SAME n=pq, is the new key pair secure? Explain.\n\n**P55 — Reflect & Consolidate:** \"Parallel: ElGamal's private x ≅ RSA's d; public y ≅ e; prime p ≅ n; discrete log ≅ factoring. Digital signatures work by swapping roles of public and private: the signer computes with d (secret), the verifier with e (public) — the same Euler-theorem correctness applies. Reusing n after key compromise: NO — the attacker knows n's factorisation from the first compromise and can immediately compute any new private key from the new public key.\"\n\n**P75 — Mastery Assessment:**\n\"RSA implementation analysis: a programmer implements RSA with p=10007, q=10009 (twin primes). (a) Is n=p×q? Compute n. (b) Why is this choice of p and q particularly dangerous? (c) The programmer also reuses the same n across 500 users, assigning each a different e. An attacker intercepts two ciphertexts c₁,c₂ encrypted under the same n with public exponents e₁,e₂ satisfying gcd(e₁,e₂)=1. How can the attacker recover m without factoring n? (Hint: Bézout + common-modulus attack.) (d) Would RSA still work mathematically if n were a product of THREE primes p,q,r instead of two? What would φ(n) be?\"\n\n**P55 — Reflect & Consolidate:** \"Twin-prime danger: Fermat factoring finds p,q in O(1) steps since n=(p−1)(p+1) and |p−q|=2. Common-modulus attack: find s₁,s₂ with s₁e₁+s₂e₂=1 (Bézout); then c₁^s₁·c₂^s₂=(mᵉ¹)^s₁·(mᵉ²)^s₂=m^(s₁e₁+s₂e₂)=m¹=m. Three-prime RSA: works mathematically; φ(pqr)=(p−1)(q−1)(r−1); key generation same; factoring n is still the hard problem.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.nt.rsa-basics complete\n- Score 3/5 → REVIEW the correctness proof via Euler's Theorem and the factoring-hardness security argument; replay A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.nt.eulers-theorem or math.nt.modular-inverse; reassign\n\n**P78 — Completion:** RSA Basics certified. Student executes key generation, encryption, and decryption; proves correctness via Euler's Theorem; identifies integer factoring as the security assumption; analyses attack scenarios (knowing p, knowing φ(n), p≈q, padding absence); explains why small e is harmless and small n is catastrophic.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.rsa-basics.md",
+        "startLine": 112,
+        "endLine": 139
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

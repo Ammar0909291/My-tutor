@@ -1,0 +1,992 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.algebraic-number-theory-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.algebraic-number-theory",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f93e8de5799bec0e870cdc5b24b6777a650a9bdcf8292e9269d2230ecdca41d6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md": "sha256:27754586781c40d055e8b15960d033953d5aa3e88f86c58785071b493fa259fd"
+    },
+    "assetCount": 30,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 25,
+      "mastery_probe": 1
+    },
+    "ruleCount": 25
+  },
+  "concept": {
+    "conceptId": "math.nt.algebraic-number-theory",
+    "name": "Algebraic Number Theory",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.6,
+    "estimatedHours": 60,
+    "prerequisites": [
+      "math.nt.general-diophantine",
+      "math.abst.ring-theory"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.algebraic-number-theory-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.algebraic-number-theory (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md": "sha256:27754586781c40d055e8b15960d033953d5aa3e88f86c58785071b493fa259fd"
+      },
+      "contentHash": "sha256:35145250eb7d3c1f4428e9c512e5107c4a66fff202730a01772205a6d7af2866",
+      "ruleCount": 25,
+      "bandCounts": {
+        "3": 25
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-17",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-17",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-18",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-18",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-19",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-19",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-20",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-20",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-21",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-21",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-22",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-22",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-23",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-23",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-24",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-24",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-25",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-25",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-number-theory.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-number-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-number-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.algebraic-number-theory/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "Learning Objective",
+      "content": "The student defines an algebraic number field K=ℚ(α) as a finite extension of ℚ of degree [K:ℚ]=n; identifies the ring of integers O_K as the subring of algebraic integers in K; states that O_K is a Dedekind domain (Noetherian, integrally closed, every nonzero prime ideal is maximal); explains why O_K need not be a UFD and how ideal factorisation restores unique factorisation (every nonzero ideal factors uniquely into prime ideals); defines the ideal class group Cl(K)=I(O_K)/P(O_K) and its class number h_K; states Minkowski's bound; and explains the connection between the class number and Fermat's Last Theorem for regular primes.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "ALL-RINGS-OF-INTEGERS-ARE-UFDS",
+      "content": "| MC-1 | ALL-RINGS-OF-INTEGERS-ARE-UFDS | Student assumes O_K is always a UFD, extending ℤ's unique factorisation; unaware that ℤ[√−5] (the ring of integers of ℚ(√−5)) fails UFD and this is the whole motivation for ideal theory | Type 5 — instruction-induced (ℤ is the canonical example of a number ring and it IS a UFD; students taught Fundamental Theorem of Arithmetic as a universal truth apply it to all rings of integers without knowing the class number condition) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "IDEAL-CLASS-GROUP-MEASURES-HOW-MANY-IDEALS-THERE-ARE",
+      "content": "| MC-2 | IDEAL-CLASS-GROUP-MEASURES-HOW-MANY-IDEALS-THERE-ARE | Student thinks h_K = |Cl(K)| counts total ideals or prime ideals of O_K; doesn't understand it measures failure of principal-ideal generation (i.e. failure of UFD property) | Type 3 — language contamination (\"class\" and \"group\" suggest a measure or collection of ideals per se; the actual meaning — equivalence classes of fractional ideals under principal-ideal equivalence — is abstract) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "ALGEBRAIC-INTEGERS-IN-K-ARE-JUST-INTEGER-LINEAR-COMBINATIONS-OF-BASIS",
+      "content": "| MC-3 | ALGEBRAIC-INTEGERS-IN-K-ARE-JUST-INTEGER-LINEAR-COMBINATIONS-OF-BASIS | Student believes O_K = ℤ[α] always; doesn't know that O_K can be strictly larger than ℤ[α] for a generating element α | Type 5 — instruction-induced (examples like ℚ(√2) where O_K=ℤ[√2] and ℚ(√−1) where O_K=ℤ[i] confirm ℤ[α]=O_K; when the minimal polynomial has discriminant not equal to the field discriminant (e.g. ℚ(√5) where O_K=ℤ[(1+√5)/2]≠ℤ[√5]), students are caught off guard) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "**Algebraic number field:** K=ℚ(α) for some algebraic number α; [K:ℚ]=degree of minimal polynomial of α over ℚ",
+      "content": "{\"id\":\"TA-1\",\"title\":\"**Algebraic number field:** K=ℚ(α) for some algebraic number α; [K:ℚ]=degree of minimal polynomial of α over ℚ\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "**Ring of integers:** O_K = {x∈K : x satisfies a monic polynomial with integer coefficients} = algebraic integers in K",
+      "content": "{\"id\":\"TA-2\",\"title\":\"**Ring of integers:** O_K = {x∈K : x satisfies a monic polynomial with integer coefficients} = algebraic integers in K\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "**Dedekind domain:** integral domain where every nonzero ideal factors uniquely into prime ideals (O_K is always a Dedekind domain by the fundamental theorem of algebraic number theory)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"**Dedekind domain:** integral domain where every nonzero ideal factors uniquely into prime ideals (O_K is always a Dedekind domain by the fundamental theorem of algebraic number theory)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "**Ideal class group:** Cl(K) = (fractional ideals of O_K)/(principal fractional ideals); h_K=|Cl(K)|; h_K=1 ↔ O_K is a UFD",
+      "content": "{\"id\":\"TA-4\",\"title\":\"**Ideal class group:** Cl(K) = (fractional ideals of O_K)/(principal fractional ideals); h_K=|Cl(K)|; h_K=1 ↔ O_K is a UFD\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "**Minkowski's bound:** every ideal class contains an ideal of norm ≤ M_K = (n!/nⁿ)(4/π)^(r₂)√|disc(K)| where r₂ = number of complex embeddings; only finitely many prime ideals lie below M_K, making h_K computable",
+      "content": "{\"id\":\"TA-5\",\"title\":\"**Minkowski's bound:** every ideal class contains an ideal of norm ≤ M_K = (n!/nⁿ)(4/π)^(r₂)√|disc(K)| where r₂ = number of complex embeddings; only finitely many prime ideals lie below M_K, making h_K computable\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "CORRECT → \"K=ℚ(α); O_K = algebraic integers in K; O_K is Dedekind domain; ideal factorisation is unique even when element factorisation fails; h_K = |Cl(K)|; h_K=1 ↔ UFD.\" → A02",
+      "content": "{\"id\":\"TA-6\",\"title\":\"CORRECT → \\\"K=ℚ(α); O_K = algebraic integers in K; O_K is Dedekind domain; ideal factorisation is unique even when element factorisation fails; h_K = |Cl(K)|; h_K=1 ↔ UFD.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "PARTIAL (doesn't understand ideal factorisation) → \"An ideal I of O_K is a subgroup of O_K closed under multiplication by O_K. A prime ideal P is one where ab∈P implies a∈P or b∈P. In a Dedekind domain, every ideal (not just elements) factors uniquely into prime ideals. Example: in ℤ[√−5], the element 6 doesn't have unique factorisation, but the ideal (6) does: it equals a specific product of prime ideals, regardless of whether you start from 2×3 or (1+√−5)(1−√−5). The uniqueness lives at the ideal level.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-7\",\"title\":\"PARTIAL (doesn't understand ideal factorisation) → \\\"An ideal I of O_K is a subgroup of O_K closed under multiplication by O_K. A prime ideal P is one where ab∈P implies a∈P or b∈P. In a Dedekind domain, every ideal (not just elements) factors uniquely into prime ideals. Example: in ℤ[√−5], the element 6 doesn't have unique factorisation, but the ideal (6) does: it equals a specific product of prime ideals, regardless of whether you start from 2×3 or (1+√−5)(1−√−5). The uniqueness lives at the ideal level.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-8\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "NO_RESPONSE → \"In ℤ, show that 6=2×3 is unique (up to ordering and units). In ℤ[√−5], compute (1+√−5)(1−√−5)=1+5=6. Are 1+√−5 and 2 related in ℤ[√−5]? Is 2 a unit in ℤ[√−5]?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-9\",\"title\":\"NO_RESPONSE → \\\"In ℤ, show that 6=2×3 is unique (up to ordering and units). In ℤ[√−5], compute (1+√−5)(1−√−5)=1+5=6. Are 1+√−5 and 2 related in ℤ[√−5]? Is 2 a unit in ℤ[√−5]?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "D≡2,3(mod 4): O_K=ℤ[√D] (basis {1,√D})",
+      "content": "{\"id\":\"TA-10\",\"title\":\"D≡2,3(mod 4): O_K=ℤ[√D] (basis {1,√D})\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "D≡1(mod 4): O_K=ℤ[(1+√D)/2] (basis {1,(1+√D)/2})",
+      "content": "{\"id\":\"TA-11\",\"title\":\"D≡1(mod 4): O_K=ℤ[(1+√D)/2] (basis {1,(1+√D)/2})\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "Example: ℚ(√5), D=5≡1(mod 4): O_K=ℤ[φ] where φ=(1+√5)/2 is the golden ratio; φ satisfies φ²−φ−1=0 (monic, integer coefficients). Note ℤ[√5]⊊O_K.",
+      "content": "{\"id\":\"TA-12\",\"title\":\"Example: ℚ(√5), D=5≡1(mod 4): O_K=ℤ[φ] where φ=(1+√5)/2 is the golden ratio; φ satisfies φ²−φ−1=0 (monic, integer coefficients). Note ℤ[√5]⊊O_K.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "Discriminant disc(K): for ℚ(√D): disc=4D if D≡2,3(mod 4); disc=D if D≡1(mod 4)",
+      "content": "{\"id\":\"TA-13\",\"title\":\"Discriminant disc(K): for ℚ(√D): disc=4D if D≡2,3(mod 4); disc=D if D≡1(mod 4)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "Unit group O_K×: by Dirichlet's Unit Theorem, O_K×≅ℤʳ×μ where r=r₁+r₂−1 (r₁ real, r₂ complex places) and μ is the finite group of roots of unity. For imaginary quadratic fields: only r=0 (finite unit groups). For real quadratic: r=1 (infinite cyclic, generated by the fundamental unit — connects to Pell's equation!).",
+      "content": "{\"id\":\"TA-14\",\"title\":\"Unit group O_K×: by Dirichlet's Unit Theorem, O_K×≅ℤʳ×μ where r=r₁+r₂−1 (r₁ real, r₂ complex places) and μ is the finite group of roots of unity. For imaginary quadratic fields: only r=0 (finite unit groups). For real quadratic: r=1 (infinite cyclic, generated by the fundamental unit — connects to Pell's equation!).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 70,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "h=1: D=−1,−2,−3,−7,−11,−19,−43,−67,−163 (Stark-Heegner theorem)",
+      "content": "{\"id\":\"TA-15\",\"title\":\"h=1: D=−1,−2,−3,−7,−11,−19,−43,−67,−163 (Stark-Heegner theorem)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "h=2: D=−5,−6,−10,−13,−15,−22,−35,−37,…",
+      "content": "{\"id\":\"TA-16\",\"title\":\"h=2: D=−5,−6,−10,−13,−15,−22,−35,−37,…\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-17",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "h grows (logarithmically) as |D|→∞",
+      "content": "{\"id\":\"TA-17\",\"title\":\"h grows (logarithmically) as |D|→∞\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-17",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-18",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "CORRECT → \"O_K depends on D mod 4. Discriminant distinguishes basis choice. Units: Dirichlet's theorem; real quadratic fields have Pell-generated infinite unit groups; imaginary quadratic fields have finite unit groups. h_K=1 for only 9 imaginary quadratic fields.\" → A03",
+      "content": "{\"id\":\"TA-18\",\"title\":\"CORRECT → \\\"O_K depends on D mod 4. Discriminant distinguishes basis choice. Units: Dirichlet's theorem; real quadratic fields have Pell-generated infinite unit groups; imaginary quadratic fields have finite unit groups. h_K=1 for only 9 imaginary quadratic fields.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-18",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-19",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "PARTIAL (doesn't connect Pell to units) → \"In ℤ[√2]: the equation x²−2y²=1 asks for elements of norm 1 in ℤ[√2]. The fundamental solution (3,2) gives the fundamental unit u=3+2√2. Every unit of ℤ[√2] is ±uⁿ for n∈ℤ — exactly the infinite family of Pell solutions. Algebraic number theory thus contains and generalises Pell's equation.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-19\",\"title\":\"PARTIAL (doesn't connect Pell to units) → \\\"In ℤ[√2]: the equation x²−2y²=1 asks for elements of norm 1 in ℤ[√2]. The fundamental solution (3,2) gives the fundamental unit u=3+2√2. Every unit of ℤ[√2] is ±uⁿ for n∈ℤ — exactly the infinite family of Pell solutions. Algebraic number theory thus contains and generalises Pell's equation.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-19",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-20",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-20\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-20",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-21",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "NO_RESPONSE → \"In ℤ[√−1]=ℤ[i]: what are the units? List them. Is the factorisation 5=(2+i)(2−i) unique up to units? What is h(ℚ(i))?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-21\",\"title\":\"NO_RESPONSE → \\\"In ℤ[√−1]=ℤ[i]: what are the units? List them. Is the factorisation 5=(2+i)(2−i) unique up to units? What is h(ℚ(i))?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-21",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-22",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "CORRECT → \"ℤ[√−5] fails UFD: 6=2×3=(1+√−5)(1−√−5). This failure is measured by h_K=2. Ideal factorisation restores uniqueness.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-22\",\"title\":\"CORRECT → \\\"ℤ[√−5] fails UFD: 6=2×3=(1+√−5)(1−√−5). This failure is measured by h_K=2. Ideal factorisation restores uniqueness.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-22",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-23",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "PARTIAL → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-23\",\"title\":\"PARTIAL → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-23",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 94,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-24",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-24\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-24",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 95,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/teaching_action_meta/TA-25",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "NO_RESPONSE → \"Verify: (1+√−5)(1−√−5)=1+5=6. Is this the same factorisation as 2×3=6? Are 1+√−5 and 2 related by a unit in ℤ[√−5]? (Units of ℤ[√−5] are just ±1; is 2/(1+√−5)=(1−√−5)/3 a unit?)\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-25\",\"title\":\"NO_RESPONSE → \\\"Verify: (1+√−5)(1−√−5)=1+5=6. Is this the same factorisation as 2×3=6? Are 1+√−5 and 2 related by a unit in ℤ[√−5]? (Units of ℤ[√−5] are just ±1; is 2/(1+√−5)=(1−√−5)/3 a unit?)\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-25",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 96,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-number-theory/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.algebraic-number-theory",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Determine the ring of integers O_K for K=ℚ(√−3), ℚ(√6), and ℚ(√13). Compute the discriminant of each.\n2. In ℤ[√−5], verify that (2,1+√−5) is a prime ideal: show that ℤ[√−5]/(2,1+√−5)≅𝔽₂. Then show (2,1+√−5)²=(2) (the ideal generated by 2 in ℤ[√−5]).\n3. State Minkowski's bound for ℚ(√−5). Use it to show that every ideal class contains an ideal of norm ≤M. List all prime ideals of norm ≤M and explain why they generate Cl(ℚ(√−5))=ℤ/2ℤ.\n4. Explain why the Stark-Heegner result (only finitely many imaginary quadratic fields with class number 1) implies that ℤ[√−D] is a UFD for only finitely many values of D. Is ℤ[√−6] a UFD? (h(ℚ(√−6))=2.)\n\n**P55 — Reflect & Consolidate:** \"O_K = ring of integers; Dedekind domain; ideal factorisation unique. h_K measures UFD failure. Minkowski bound gives finite computable procedure for h_K. Unit group: Dirichlet theorem. Pell solutions = units of norm 1 in real quadratic O_K.\"\n\n**P76 — Transfer Probe (Cross-link mode: math.abst.galois-theory):**\n(a) For the cyclotomic field K=ℚ(ζ_p) (p prime): the Galois group Gal(K/ℚ)≅(ℤ/pℤ)×. Why is Gal(K/ℚ) abelian? (b) Kummer's approach: if p is an odd prime and p∤h(ℚ(ζ_p)) (p is a 'regular prime'), then Fermat's Last Theorem holds for exponent p (Kummer's theorem). The primes p<100 that are irregular (p|h(ℚ(ζ_p))) are: 37, 59, 67. Explain why h(ℚ(ζ_37))>1 would concern Kummer. (c) Chebotarev Density Theorem: the density of primes that split completely in a degree-n Galois extension is 1/n. For ℚ(√−5)/ℚ (degree 2): half of all primes split completely, a quarter each ramify or remain inert. Verify: 7 is inert (7≡3 mod 4... actually in ℚ(√−5) splitting is determined by Legendre symbol (−5/p)). Compute for p=7: (−5/7)=(−1/7)(5/7)=(−1)^3×(7/5)(−1)^... use quadratic reciprocity.\n\n**P55 — Reflect & Consolidate:** \"Cyclotomic fields: Gal(ℚ(ζ_p)/ℚ)≅(ℤ/pℤ)× abelian — this is why abelian extensions of ℚ are all contained in cyclotomic fields (Kronecker-Weber). Class field theory: complete description of abelian extensions in terms of class groups (generalises quadratic reciprocity). Chebotarev: governs prime splitting by Galois group structure.\"\n\n**P75 — Mastery Assessment:**\n\"(a) Show that 5 splits in ℤ[i] as (5)=(2+i)(2−i): verify 5=(2+i)(2−i) in ℤ[i], and that 2+i and 2−i are non-associate primes. (b) Compute h(ℚ(i)) using Minkowski's bound. Conclude ℤ[i] is a UFD. (c) In ℚ(√−23): h=3. This means there are ideals that are not principal, but every ideal cubed is principal. Show that the prime 2 is inert in ℤ[(1+√−23)/2] (i.e. (2) remains prime) or splits (use Legendre symbol (−23/2)). (d) Explain in 2-3 sentences why algebraic number theory is needed for Wiles' proof of Fermat's Last Theorem, beyond what Kummer's regular-prime approach already provides.\"\n\n**P55 — Reflect & Consolidate:** \"ℤ[i] is a PID (h=1): every prime p≡1(mod 4) splits as p=(a+bi)(a−bi) (Gaussian prime factorisation); p≡3(mod 4) remains prime. Wiles' proof needs sophisticated machinery beyond Kummer: modularity lifting, Galois representations, deformation theory, Wiles' own ε-conjecture — algebraic number theory at the frontier of modern mathematics.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 3/5 → MASTERED; math.nt.algebraic-number-theory complete\n- Score 2/5 → REVIEW ideal factorisation in Dedekind domains and class number; replay A01\n- Score ≤ 1/5 → PREREQUISITE GAP in math.abst.ring-theory; reassign\n\n**P78 — Completion:** Algebraic Number Theory certified. Student defines number fields, rings of integers, Dedekind domains; explains UFD failure via class numbers; applies Minkowski's bound; connects to Pell's equation via unit groups; relates to Galois theory; understands Kummer's approach to FLT.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-number-theory.md",
+        "startLine": 109,
+        "endLine": 136
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

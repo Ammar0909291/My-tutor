@@ -1,0 +1,278 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.sieve-of-eratosthenes-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.sieve-of-eratosthenes",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:50816f2be631bbd76f2dc4f7fb69f0163400c93c210ca7aaea045c0a69fa65e1",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.sieve-of-eratosthenes.md": "sha256:b309663ebd68c28d212ee0fdf2020590ce5fbfdc05c537bec86a78c752422631"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.nt.sieve-of-eratosthenes",
+    "name": "Sieve of Eratosthenes",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.nt.prime-number",
+      "math.nt.divisibility"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.sieve-of-eratosthenes-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.sieve-of-eratosthenes (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.sieve-of-eratosthenes.md": "sha256:b309663ebd68c28d212ee0fdf2020590ce5fbfdc05c537bec86a78c752422631"
+      },
+      "contentHash": "sha256:cbd5945f7125ebdd4714158536c53029c5684d6d11122f6edb5f47390285ec5c",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.sieve-of-eratosthenes.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.sieve-of-eratosthenes.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.sieve-of-eratosthenes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.sieve-of-eratosthenes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.sieve-of-eratosthenes.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.sieve-of-eratosthenes.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.sieve-of-eratosthenes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.sieve-of-eratosthenes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.sieve-of-eratosthenes.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.sieve-of-eratosthenes.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.sieve-of-eratosthenes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.sieve-of-eratosthenes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.sieve-of-eratosthenes.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.sieve-of-eratosthenes.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.sieve-of-eratosthenes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.sieve-of-eratosthenes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.sieve-of-eratosthenes/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.sieve-of-eratosthenes",
+      "title": "Learning Objective",
+      "content": "The student executes the Sieve of Eratosthenes to find all primes up to N by sequentially crossing off multiples; explains why it suffices to start crossing off at p² (not 2p) for each prime p; states the time complexity O(N log log N) and space complexity O(N); derives the prime counting function approximation π(N) ≈ N/ln N (prime number theorem); and implements or traces the sieve for N=50 without omitting any prime.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.sieve-of-eratosthenes.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.sieve-of-eratosthenes/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.sieve-of-eratosthenes",
+      "title": "START-CROSSING-AT-2p-NOT-p²",
+      "content": "| MC-1 | START-CROSSING-AT-2p-NOT-p² | Student starts crossing off multiples of p from 2p (the first multiple after p) rather than p² — does not recognise that all composites less than p² that are multiples of p have a smaller prime factor and are already crossed off | Type 5 — instruction-induced (the most natural starting point for \"cross off multiples of p\" is \"start just after p, i.e. at 2p\"; the p² optimisation is presented as an optional speedup rather than the theoretically justified starting point) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.sieve-of-eratosthenes.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.nt.sieve-of-eratosthenes/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.sieve-of-eratosthenes",
+      "title": "SIEVE-MISSES-PRIMES-AFTER-√N",
+      "content": "| MC-2 | SIEVE-MISSES-PRIMES-AFTER-√N | Student stops the sieve at √N and incorrectly crosses off all remaining numbers, not recognising that numbers remaining after crossing off multiples of primes up to √N are themselves prime | Type 1 — overgeneralization (the fact that trial division only needs to go to √N leads students to think the sieve is \"done\" when they reach √N and incorrectly delete remaining numbers) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.sieve-of-eratosthenes.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.nt.sieve-of-eratosthenes/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.sieve-of-eratosthenes",
+      "title": "CROSSING-OFF-MUST-VISIT-EVERY-MULTIPLE",
+      "content": "| MC-3 | CROSSING-OFF-MUST-VISIT-EVERY-MULTIPLE | Student marks composites by testing every pair (p, kp) without using the sieve's sequential structure, turning the O(N log log N) algorithm into O(N√N) | Type 5 — instruction-induced (the description \"cross off every multiple of p\" does not specify the starting point or the sequential structure; students independently implement an inner loop from p+1 to N/p rather than marking p², p²+p, p²+2p, …) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.sieve-of-eratosthenes.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.sieve-of-eratosthenes/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.sieve-of-eratosthenes",
+      "title": "Segmented sieve",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Segmented sieve\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.sieve-of-eratosthenes.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.nt.sieve-of-eratosthenes/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.sieve-of-eratosthenes",
+      "title": "Bit sieve",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Bit sieve\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.sieve-of-eratosthenes.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.nt.sieve-of-eratosthenes/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.sieve-of-eratosthenes",
+      "title": "Odds-only sieve",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Odds-only sieve\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.sieve-of-eratosthenes.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.nt.sieve-of-eratosthenes/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.sieve-of-eratosthenes",
+      "title": "Linear sieve",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Linear sieve\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.sieve-of-eratosthenes.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.nt.sieve-of-eratosthenes/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.sieve-of-eratosthenes",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Apply the Sieve of Eratosthenes for N=50. Show each step (which prime p is processed, which numbers are newly crossed, starting from p²). List all primes ≤50. Count them and compare with the estimate 50/ln(50)≈13.5.\n2. Implement the sieve in pseudocode. Your implementation should: (a) use a boolean array `is_prime[2..N]`; (b) start crossing multiples at p²; (c) step by p in the inner loop; (d) output all i with is_prime[i]=true. Trace your pseudocode for N=15.\n3. How many crossings does the sieve make for N=100? Estimate using Σ_{p≤10} ⌊(100−p²)/p⌋+1 for primes p=2,3,5,7. How does this compare with naively crossing from 2p to N?\n4. The twin prime conjecture states there are infinitely many primes p with p+2 also prime (e.g., 3,5; 5,7; 11,13; 17,19). Apply the sieve for N=100 and list all twin prime pairs. Using π(N)≈N/ln N, estimate the density of primes near N=10⁶. How rare would you expect twin primes to be at that scale?\n\n**P55 — Reflect & Consolidate:** \"Sieve: cross p², p²+p, … for each prime p≤√N. Remaining uncrossed = prime. O(N log log N) time. π(N)≈N/ln N (primes thin out). Segmented sieve for large N. Stop outer loop at √N, never cross remaining numbers.\"\n\n**P76 — Transfer Probe (Independence mode):**\nThe Sieve of Eratosthenes can be adapted to sieve for other arithmetic properties. (a) Sieve for squarefree numbers (numbers not divisible by any perfect square p²): mark multiples of 4, 9, 25, 49, … as square-full; remaining numbers are squarefree. How does the density of squarefree numbers up to N compare with the prime density? (The fraction of squarefree integers is 6/π²≈0.608.) (b) Sieve for k-almost-primes (products of exactly k prime factors with multiplicity): describe the algorithm and its complexity. (c) The Sieve of Sundaram (1934) sieve for primes directly: mark all numbers of the form i+j+2ij (for i,j≥1) and then 2k+1 where k is unmarked gives an odd prime. Verify this for i,j up to 5 and explain why it works.\n\n**P55 — Reflect & Consolidate:** \"Sieve-style algorithms extend beyond primes: squarefree numbers, smooth numbers, k-almost-primes, powerful numbers. The core idea is the same — use divisibility information propagated globally across an array to classify numbers in O(N polylog N) time, far faster than checking each number individually.\"\n\n**P75 — Mastery Assessment:**\n\"A programmer needs all primes up to N=10⁹ for a cryptographic key-screening tool. Available RAM: 128 MB. (a) A standard bit-array sieve needs N/8 bytes of RAM. Is 128 MB enough? (b) If not, describe the segmented sieve approach and estimate how many segments are needed. (c) The screening tool needs to test whether a given 512-bit integer is prime. Can the Sieve of Eratosthenes be used directly? What method is used instead? (d) How many primes are approximately in the range [10⁹, 10⁹+10⁶] (use the prime number theorem)?\"\n\n**P55 — Reflect & Consolidate:** \"N=10⁹ requires 125 MB as a bit array — just feasible, but segmented sieve is safer for memory-limited environments. For primality testing of large numbers (>10¹⁵), the sieve is infeasible; use Miller-Rabin probabilistic test (O(k log²N) per test) or AKS deterministic test (O(log⁶N)). The sieve is optimal for range primality; probabilistic tests are optimal for individual large-number testing.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.nt.sieve-of-eratosthenes complete\n- Score 3/5 → REVIEW the p² starting point and correctness argument; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.nt.prime-number or math.nt.divisibility; reassign\n\n**P78 — Completion:** Sieve of Eratosthenes certified. Student executes the sieve from p², explains the p² optimisation and the correctness argument, states O(N log log N) complexity, applies the prime number theorem, and describes the segmented sieve for large N.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.sieve-of-eratosthenes.md",
+        "startLine": 120,
+        "endLine": 147
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

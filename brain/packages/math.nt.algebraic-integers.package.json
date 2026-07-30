@@ -1,0 +1,788 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.algebraic-integers-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.algebraic-integers",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b9fcc7e0ae70b57f92c5e84e7f3d39f173a0bef1569ecb2ce903383e471367f5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.algebraic-integers.md": "sha256:579f1a145deac9646921f39268876d6e3da80f2a6d1adb7ff0b2a3de35c4106e"
+    },
+    "assetCount": 24,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 19,
+      "mastery_probe": 1
+    },
+    "ruleCount": 19
+  },
+  "concept": {
+    "conceptId": "math.nt.algebraic-integers",
+    "name": "Algebraic Integers",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.6,
+    "estimatedHours": 20,
+    "prerequisites": [
+      "math.nt.algebraic-number-theory",
+      "math.abst.ring-theory"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.algebraic-integers-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.algebraic-integers (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.algebraic-integers.md": "sha256:579f1a145deac9646921f39268876d6e3da80f2a6d1adb7ff0b2a3de35c4106e"
+      },
+      "contentHash": "sha256:f68632be7726528030e628070750858756a9a403f0db15b5a630f6589e4b4687",
+      "ruleCount": 19,
+      "bandCounts": {
+        "3": 19
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-integers.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-integers.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-integers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-integers.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-integers.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-integers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-integers.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-integers.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-integers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-integers.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-integers.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-integers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-integers.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-integers.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-integers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-integers.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-integers.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-integers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-integers.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-integers.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-integers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-integers.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-integers.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-integers\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-integers.TA-17",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-integers.md#TA-17",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-integers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-integers.TA-18",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-integers.md#TA-18",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-integers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-integers.TA-19",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-integers.md#TA-19",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-integers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-integers.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-integers.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-integers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-integers.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-integers.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-integers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-integers.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-integers.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-integers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-integers.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-integers.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-integers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-integers.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-integers.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-integers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-integers.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-integers.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-integers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-integers.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-integers.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-integers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.algebraic-integers.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.algebraic-integers.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.algebraic-integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.algebraic-integers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.algebraic-integers/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "Learning Objective",
+      "content": "The student defines an algebraic integer as an element α∈ℂ satisfying a monic polynomial with integer coefficients; proves that the set of algebraic integers in any field extension forms a ring (closed under addition and multiplication); identifies the algebraic integers in ℚ as exactly ℤ; defines the norm N(α)=∏σ(α) and trace Tr(α)=∑σ(α) over all field embeddings σ; computes norm and trace for elements of quadratic fields using N(a+b√D)=a²−Db² and Tr(a+b√D)=2a; and explains why norm and trace are rational integers when α is an algebraic integer.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "ALL-ALGEBRAIC-NUMBERS-ARE-ALGEBRAIC-INTEGERS",
+      "content": "| MC-1 | ALL-ALGEBRAIC-NUMBERS-ARE-ALGEBRAIC-INTEGERS | Student assumes every number satisfying an integer-coefficient polynomial is an algebraic integer; forgets the monic condition; believes 3/2 (satisfying 2x−3=0) is an algebraic integer | Type 3 — language contamination (\"algebraic\" is shared between \"algebraic number\" and \"algebraic integer\"; the crucial monic requirement is easily forgotten; the term \"integer\" misleads students into thinking it is automatically a stronger condition that subsumes all algebraic numbers) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "ALGEBRAIC-INTEGER-MEANS-INTEGER",
+      "content": "| MC-2 | ALGEBRAIC-INTEGER-MEANS-INTEGER | Student believes \"algebraic integer\" is just a synonym for an ordinary integer, not understanding it refers to complex numbers satisfying monic polynomials; fails to recognise √2 or i as algebraic integers | Type 3 — language contamination (the word \"integer\" carries its ordinary meaning of ℤ from arithmetic; students do not expect \"algebraic integer\" to apply to irrational or complex numbers; the algebraic-number-theory sense is a technical extension of the intuitive one that requires deliberate teaching) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "NORMS-ARE-ALWAYS-POSITIVE",
+      "content": "| MC-3 | NORMS-ARE-ALWAYS-POSITIVE | Student assumes N(α)>0 always; fails to account for real quadratic fields where N(a+b√D)=a²−Db² can be negative when Db²>a² | Type 1 — overgeneralisation (in complex quadratic fields N(α)=|α|² which IS positive; students generalise this to all fields; the norm for real embeddings is not a squared modulus but the product of all real Galois conjugates, which can be negative) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "CORRECT → \"Algebraic integer: monic polynomial in ℤ[x]. Ring: sum/product of algebraic integers are algebraic integers. ℚ∩(algebraic integers)=ℤ.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Algebraic integer: monic polynomial in ℤ[x]. Ring: sum/product of algebraic integers are algebraic integers. ℚ∩(algebraic integers)=ℤ.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "PARTIAL (forgets monic condition) → \"The monic condition is what separates algebraic integers from algebraic numbers. The algebraic integer 3/2 question: 3/2 satisfies 2x−3=0 (not monic). To be an algebraic integer, it would need to satisfy a monic polynomial with INTEGER coefficients. Can it? If (3/2)ⁿ+aₙ₋₁(3/2)ⁿ⁻¹+⋯+a₀=0, multiply by 2ⁿ to get 3ⁿ+aₙ₋₁·2·3ⁿ⁻¹+⋯=0, making 3ⁿ even — impossible. So 3/2 is NOT an algebraic integer.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (forgets monic condition) → \\\"The monic condition is what separates algebraic integers from algebraic numbers. The algebraic integer 3/2 question: 3/2 satisfies 2x−3=0 (not monic). To be an algebraic integer, it would need to satisfy a monic polynomial with INTEGER coefficients. Can it? If (3/2)ⁿ+aₙ₋₁(3/2)ⁿ⁻¹+⋯+a₀=0, multiply by 2ⁿ to get 3ⁿ+aₙ₋₁·2·3ⁿ⁻¹+⋯=0, making 3ⁿ even — impossible. So 3/2 is NOT an algebraic integer.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "NO_RESPONSE → \"Does √2 satisfy a polynomial with integer coefficients? Write it. Is the leading coefficient 1? Then √2 IS an algebraic integer. Does 3/2 satisfy any monic polynomial with INTEGER coefficients? Suppose (3/2)²+a(3/2)+b=0 with a,b∈ℤ. Compute: 9/4+3a/2+b=0. Multiply by 4: 9+6a+4b=0. Can this hold for integer a,b?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"Does √2 satisfy a polynomial with integer coefficients? Write it. Is the leading coefficient 1? Then √2 IS an algebraic integer. Does 3/2 satisfy any monic polynomial with INTEGER coefficients? Suppose (3/2)²+a(3/2)+b=0 with a,b∈ℤ. Compute: 9/4+3a/2+b=0. Multiply by 4: 9+6a+4b=0. Can this hold for integer a,b?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "**Norm:** N_{K/ℚ}(β) = ∏ᵢσᵢ(β) (product of all Galois conjugates)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"**Norm:** N_{K/ℚ}(β) = ∏ᵢσᵢ(β) (product of all Galois conjugates)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "**Trace:** Tr_{K/ℚ}(β) = ∑ᵢσᵢ(β) (sum of all Galois conjugates)",
+      "content": "{\"id\":\"TA-6\",\"title\":\"**Trace:** Tr_{K/ℚ}(β) = ∑ᵢσᵢ(β) (sum of all Galois conjugates)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "N(a+b√D) = (a+b√D)(a−b√D) = a²−Db²",
+      "content": "{\"id\":\"TA-7\",\"title\":\"N(a+b√D) = (a+b√D)(a−b√D) = a²−Db²\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "Tr(a+b√D) = (a+b√D)+(a−b√D) = 2a",
+      "content": "{\"id\":\"TA-8\",\"title\":\"Tr(a+b√D) = (a+b√D)+(a−b√D) = 2a\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 70,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "K=ℚ(√2): N(3+2√2)=9−8=1, Tr(3+2√2)=6. N=1 means 3+2√2 is a UNIT of ℤ[√2].",
+      "content": "{\"id\":\"TA-9\",\"title\":\"K=ℚ(√2): N(3+2√2)=9−8=1, Tr(3+2√2)=6. N=1 means 3+2√2 is a UNIT of ℤ[√2].\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "K=ℚ(√−5): N(1+√−5)=1+5=6, Tr(1+√−5)=2. N=6 means norm(1+√−5)=6.",
+      "content": "{\"id\":\"TA-10\",\"title\":\"K=ℚ(√−5): N(1+√−5)=1+5=6, Tr(1+√−5)=2. N=6 means norm(1+√−5)=6.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "K=ℚ(ζ₃) (ζ₃=e^{2πi/3}): three embeddings. N(ζ₃)=1 (ζ₃ is a root of unity, N=constant term of x²+x+1 = 1). Tr(ζ₃)=−1 (sum of roots of x²+x+1).",
+      "content": "{\"id\":\"TA-11\",\"title\":\"K=ℚ(ζ₃) (ζ₃=e^{2πi/3}): three embeddings. N(ζ₃)=1 (ζ₃ is a root of unity, N=constant term of x²+x+1 = 1). Tr(ζ₃)=−1 (sum of roots of x²+x+1).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "CORRECT → \"Norm = product of conjugates; Trace = sum. Both in ℤ when element is algebraic integer. Quadratic: N(a+b√D)=a²−Db², Tr=2a. Norm=1 characterises units. Norm can be negative for real quadratic.\" → A03",
+      "content": "{\"id\":\"TA-12\",\"title\":\"CORRECT → \\\"Norm = product of conjugates; Trace = sum. Both in ℤ when element is algebraic integer. Quadratic: N(a+b√D)=a²−Db², Tr=2a. Norm=1 characterises units. Norm can be negative for real quadratic.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "PARTIAL (doesn't recognise negative norms) → \"For REAL quadratic fields ℚ(√D) with D>0, the two conjugates a+b√D and a−b√D are BOTH real. Their product a²−Db² can be negative when b is large and D is large relative to a. For example in ℚ(√2): N(1+√2)=1−2=−1<0. This means 1+√2 is a unit of norm −1 (a 'norm-negative' unit). Contrast with IMAGINARY quadratic ℚ(√−5): N(a+b√−5)=a²+5b²>0 always (sum of squares).\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-13\",\"title\":\"PARTIAL (doesn't recognise negative norms) → \\\"For REAL quadratic fields ℚ(√D) with D>0, the two conjugates a+b√D and a−b√D are BOTH real. Their product a²−Db² can be negative when b is large and D is large relative to a. For example in ℚ(√2): N(1+√2)=1−2=−1<0. This means 1+√2 is a unit of norm −1 (a 'norm-negative' unit). Contrast with IMAGINARY quadratic ℚ(√−5): N(a+b√−5)=a²+5b²>0 always (sum of squares).\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-14\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "NO_RESPONSE → \"In ℚ(√2): compute N(1+√2). Answer: (1+√2)(1−√2)=1−2=−1. Is this consistent with 1+√2 being a unit of ℤ[√2]? (What is (1+√2)(−1+√2)? What's N(unit)?)\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-15\",\"title\":\"NO_RESPONSE → \\\"In ℚ(√2): compute N(1+√2). Answer: (1+√2)(1−√2)=1−2=−1. Is this consistent with 1+√2 being a unit of ℤ[√2]? (What is (1+√2)(−1+√2)? What's N(unit)?)\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "CORRECT → \"φ=(1+√5)/2 IS an algebraic integer (monic polynomial x²−x−1). 3/2 is NOT (rational root theorem: rational algebraic integers must lie in ℤ).\" → Gate (P91)",
+      "content": "{\"id\":\"TA-16\",\"title\":\"CORRECT → \\\"φ=(1+√5)/2 IS an algebraic integer (monic polynomial x²−x−1). 3/2 is NOT (rational root theorem: rational algebraic integers must lie in ℤ).\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 98,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/teaching_action_meta/TA-17",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "PARTIAL → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-17\",\"title\":\"PARTIAL → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-17",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 99,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/teaching_action_meta/TA-18",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-18\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-18",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 100,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/teaching_action_meta/TA-19",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "NO_RESPONSE → \"For φ: verify φ²=φ+1, so φ²−φ−1=0 (monic?). For 3/2: suppose (3/2)ⁿ+a_{n-1}(3/2)^{n-1}+⋯+a₀=0 with aᵢ∈ℤ. Multiply by 2ⁿ: 3ⁿ+2a_{n-1}·3^{n-1}+⋯+2ⁿa₀=0. What does this say about 3ⁿ mod 2?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-19\",\"title\":\"NO_RESPONSE → \\\"For φ: verify φ²=φ+1, so φ²−φ−1=0 (monic?). For 3/2: suppose (3/2)ⁿ+a_{n-1}(3/2)^{n-1}+⋯+a₀=0 with aᵢ∈ℤ. Multiply by 2ⁿ: 3ⁿ+2a_{n-1}·3^{n-1}+⋯+2ⁿa₀=0. What does this say about 3ⁿ mod 2?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-19",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 101,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "math.nt.algebraic-integers/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.algebraic-integers",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Determine whether each of the following is an algebraic integer: (a) 2/3; (b) √3; (c) (1+√−3)/2; (d) 1+∛2; (e) e^{iπ/4}=(√2/2)(1+i). For each, either exhibit a monic integer polynomial it satisfies or prove it is not an algebraic integer.\n2. In ℚ(√−7): compute N(3+√−7) and Tr(3+√−7). Is 3+√−7 an algebraic integer? (The ring of integers of ℚ(√−7) is ℤ[(1+√−7)/2] since −7≡1(mod 4).) Verify that (1+√−7)/2 is an algebraic integer but 3+√−7 ∈ O_{ℚ(√−7)}.\n3. Prove the ring-closure property: if α and β satisfy monic integer polynomials of degrees m and n respectively, then α+β is a root of a monic integer polynomial of degree ≤mn. (Hint: consider the matrix of multiplication-by-(α+β) acting on the ℤ-module ℤ[α]⊗ℤ[β] which has rank mn and is closed under multiplication by α and β separately.)\n4. Prove that if α is an algebraic integer with α∈ℚ then α∈ℤ. What does this imply about the number φ−1=(√5−1)/2? Is it an algebraic integer? Is it in ℤ?\n\n**P55 — Reflect & Consolidate:** \"Algebraic integer: monic integer polynomial. NOT the same as ℤ (includes √2, i, φ, ζ_n). Ring-closed. Rational algebraic integers are exactly ℤ. Norm = product of embeddings; Trace = sum. Norm can be negative for real quadratic fields. N=1 or N=−1 ↔ unit.\"\n\n**P76 — Transfer Probe (Independence mode: cross_links = []):**\n(a) The ring ℤ[√2] is norm-Euclidean: the division algorithm works using the norm as the 'size' measure. Specifically: for any a,b∈ℤ[√2] with b≠0, there exist q,r∈ℤ[√2] with a=qb+r and N(r)<N(b). Show that for b=3+√2 (with N(3+√2)=9−2=7) and a=5+2√2 (with N(5+2√2)=25−8=17), you can find such q and r by computing a/b=(5+2√2)/(3+√2)=(5+2√2)(3−√2)/7=(15−5√2+6√2−4)/7=(11+√2)/7≈(11+1.41)/7≈1.77+0.2√2. Round to nearest element of ℤ[√2]: q=2 (rounding 1.77→2, 0.2→0). Then r=a−qb=5+2√2−2(3+√2)=5+2√2−6−2√2=−1. Verify N(−1)=1<7=N(b). (b) Use norm-Euclidean property to explain why ℤ[√2] is a PID (hence a UFD), contrasting with ℤ[√−5] which has class number 2. (c) Can you use the norm function N(a+b√D)=a²−Db² to run a Euclidean algorithm in ℤ[√3]? The key requirement is: for all a,b∈ℤ[√3] with b≠0, |N(r)|<|N(b)|. Does ℤ[√3] satisfy this? (It does — ℤ[√3] is norm-Euclidean.)\n\n**P55 — Reflect & Consolidate:** \"Norm-Euclidean rings are PIDs (hence UFDs): ℤ[√2], ℤ[i], ℤ[√−2], ℤ[ω] (ω=e^{2πi/3}). Non-Euclidean but PID: ℤ[(1+√−19)/2]. Non-PID (h>1): ℤ[√−5] (h=2). Class number measures failure of both PID and UFD properties.\"\n\n**P75 — Mastery Assessment:**\n\"(a) Prove that the set of all algebraic integers in ℂ forms a ring. You must show: (i) 0 and 1 are algebraic integers; (ii) if α and β are algebraic integers then so is α+β; (iii) if α and β are algebraic integers then so is αβ. You may use the fact that if M and N are finitely generated ℤ-modules with αM⊆M and βN⊆N, then M⊗N is finitely generated with both α and β acting on it, hence α+β and αβ act on M⊗N. (b) Determine O_K for K=ℚ(√−11). (Hint: −11≡1 mod 4.) Verify that (1+√−11)/2 is an algebraic integer. What is N((1+√−11)/2)? (c) Let α=2^{1/3} (cube root of 2). Its minimal polynomial over ℚ is x³−2. Is α an algebraic integer? What are N_{ℚ(α)/ℚ}(α) and Tr_{ℚ(α)/ℚ}(α)? (Hint: the three embeddings send α to 2^{1/3}, 2^{1/3}ω, 2^{1/3}ω² where ω=e^{2πi/3}.)\"\n\n**P55 — Reflect & Consolidate:** \"The ring of all algebraic integers in ℂ is a fascinating object: it is a Bézout domain (every finitely generated ideal is principal) but NOT Noetherian (the chain ℤ ⊂ ℤ[√2] ⊂ ℤ[2^{1/2},2^{1/3}] ⊂ ⋯ never stabilises). The algebraic integers in a fixed number field K form the ring O_K which IS Noetherian and Dedekind — the Noetherian condition is what makes ideal factorisation unique.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 3/5 → MASTERED; math.nt.algebraic-integers complete\n- Score 2/5 → REVIEW monic condition and norm computation; replay A01\n- Score ≤ 1/5 → PREREQUISITE GAP in math.nt.algebraic-number-theory or math.abst.ring-theory; reassign\n\n**P78 — Completion:** Algebraic Integers certified. Student defines algebraic integers via monic polynomials; confirms ℤ = (algebraic integers)∩ℚ; verifies ring closure; computes norm and trace in quadratic fields; connects norm to units and Euclidean domains.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.algebraic-integers.md",
+        "startLine": 120,
+        "endLine": 147
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

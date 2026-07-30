@@ -1,0 +1,345 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.composite-number-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.composite-number",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:966030c18fae7f288d20aa5fb9ac23c5777bd776fa46cfaf3e37a6f14cf4b7c0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.composite-number.md": "sha256:96b0f787e812075845117c0fd3124397b4b4ea22913d6f140c171d790e164e24"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "math.nt.composite-number",
+    "name": "Composite Numbers",
+    "difficultyRaw": "developing",
+    "bloom": "remember",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.nt.prime-number"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.composite-number-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.composite-number (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.composite-number.md": "sha256:96b0f787e812075845117c0fd3124397b4b4ea22913d6f140c171d790e164e24"
+      },
+      "contentHash": "sha256:432e5da684faa447b0276bff3993632374b8c15e44a999922676a4ad4198ae9b",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.composite-number.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.composite-number.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.composite-number"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.composite-number\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.composite-number.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.composite-number.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.composite-number"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.composite-number\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.composite-number.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.composite-number.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.composite-number"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.composite-number\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.composite-number.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.composite-number.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.composite-number"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.composite-number\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.composite-number.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.composite-number.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.composite-number"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.composite-number\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.composite-number.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.composite-number.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.composite-number"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.composite-number\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.composite-number/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.composite-number",
+      "title": "Learning Objective",
+      "content": "The student classifies any positive integer greater than 1 as either prime or composite; states that a composite number has at least one factor pair other than 1 and itself; lists all factor pairs of a given composite number; explains why 1 is neither prime nor composite; and uses the Fundamental Theorem of Arithmetic to confirm that every composite number has a unique prime factorisation.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.composite-number.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.composite-number/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.composite-number",
+      "title": "COMPOSITE-MEANS-EVEN",
+      "content": "| MC-1 | COMPOSITE-MEANS-EVEN | Student believes all even numbers are composite and uses \"even\" as a synonym for \"composite\" — not recognising that 2 is even and prime | Type 3 — language contamination (\"composite\" and \"even\" are both contrasted with \"prime\" in early lessons; the mnemonic \"all even numbers are composite\" is taught without the exception 2) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.composite-number.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.nt.composite-number/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.composite-number",
+      "title": "ONE-IS-PRIME",
+      "content": "| MC-2 | ONE-IS-PRIME | Student classifies 1 as prime because it is divisible only by 1 and itself — confusing the definition's requirement of EXACTLY two distinct divisors with \"no divisors other than 1\" | Type 3 — language contamination (the phrase \"divisible only by 1 and itself\" applied to 1 gives two identical values — 1 and 1 — so students conclude it qualifies; the \"distinct divisors\" qualifier is often omitted in early formulations) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.composite-number.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.nt.composite-number/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.composite-number",
+      "title": "COMPOSITES-HAVE-EXACTLY-ONE-FACTOR-PAIR",
+      "content": "| MC-3 | COMPOSITES-HAVE-EXACTLY-ONE-FACTOR-PAIR | Student thinks a composite number has exactly one non-trivial factor pair — does not recognise that numbers like 12 have multiple factor pairs | Type 1 — overgeneralization (small composite examples in textbooks often use 4=2×2 or 6=2×3, each with one non-trivial pair; students do not see examples with multiple pairs until larger composites are introduced) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.composite-number.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.composite-number/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.composite-number",
+      "title": "{1}",
+      "content": "{\"id\":\"TA-1\",\"title\":\"{1}\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.composite-number.md",
+        "startLine": 16,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "math.nt.composite-number/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.composite-number",
+      "title": "{1,2}",
+      "content": "{\"id\":\"TA-2\",\"title\":\"{1,2}\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.composite-number.md",
+        "startLine": 17,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.nt.composite-number/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.composite-number",
+      "title": "{1,2,4}",
+      "content": "{\"id\":\"TA-4\",\"title\":\"{1,2,4}\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.composite-number.md",
+        "startLine": 18,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "math.nt.composite-number/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.composite-number",
+      "title": "{1,2,3,6}",
+      "content": "{\"id\":\"TA-6\",\"title\":\"{1,2,3,6}\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.composite-number.md",
+        "startLine": 19,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.nt.composite-number/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.composite-number",
+      "title": "{1,7}",
+      "content": "{\"id\":\"TA-7\",\"title\":\"{1,7}\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.composite-number.md",
+        "startLine": 20,
+        "endLine": 20
+      }
+    },
+    {
+      "assetId": "math.nt.composite-number/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.composite-number",
+      "title": "{1,2,3,4,6,12}",
+      "content": "{\"id\":\"TA-12\",\"title\":\"{1,2,3,4,6,12}\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.composite-number.md",
+        "startLine": 21,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.composite-number/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.composite-number",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Classify each of the following as prime, composite, or neither: 1, 2, 17, 24, 49, 51, 97. For each composite, list ALL factor pairs.\n2. A student says: \"If n is divisible by 3 and n>3, then n is composite.\" Is this always true? If so, prove it. If a number's digit sum is divisible by 3 and the number is >3, what can you conclude?\n3. Find the smallest composite number that: (a) has exactly 3 divisors; (b) has exactly 4 divisors; (c) has exactly 6 divisors. What do these numbers have in common structurally?\n4. How many divisors does 360 have? Use the prime factorisation 360=2³×3²×5. How many non-trivial factor pairs does 360 have?\n\n**P55 — Reflect & Consolidate:** \"Composite: n>1 with divisor d satisfying 1<d<n. 1 is neither prime nor composite (unit). Factor pairs: (d, n/d) for each d≤√n. τ(n)=(a₁+1)(a₂+1)… from prime factorisation. Trial division to √n tests compositeness.\"\n\n**P76 — Transfer Probe (Independence mode):**\nA semiprime is a product of exactly two primes (not necessarily distinct): pq where p,q prime. (a) List all semiprimes up to 30. (b) Prove that a semiprime pq (p≤q) has exactly 4 divisors when p<q, or 3 divisors when p=q. (c) The RSA cryptosystem relies on the difficulty of factoring large semiprimes. If p=12,227 and q=12,251 are both prime, is n=p×q=149,814,377 composite? How many divisors does it have? How would you verify p and q are prime? (d) Explain why semiprimes are the \"simplest\" composites and why factoring them is harder than factoring a number with many small factors.\n\n**P55 — Reflect & Consolidate:** \"Semiprimes (n=pq, both prime) have the fewest divisors possible for a composite: exactly 4 when p≠q, or 3 when p=q. This minimal structure makes them hardest to factor — no small factor to find by trial division. RSA exploits exactly this: factoring a semiprime requires work proportional to √n (trial division) or sub-exponential algorithms for cryptographic sizes.\"\n\n**P75 — Mastery Assessment:**\n\"A school has 36 students in a class. The teacher wants to arrange them in equal rows. (a) List all ways to arrange them in a rectangle with at least 2 rows and 2 columns. (b) In how many ways can 37 students be arranged? (c) If 35 students are absent and only the remaining number can be arranged in a 5×7 rectangle, how many are absent? (d) The teacher wants a number of students that can be arranged into MORE than 6 different rectangles (counting (a,b) and (b,a) as one). What is the smallest such number?\"\n\n**P55 — Reflect & Consolidate:** \"Rectangular arrangements of n objects correspond to factor pairs of n. Numbers with many factor pairs (highly composite numbers: 12, 24, 36, 48, 60) are maximally flexible for equal groupings. A prime number can only be arranged in one rectangle: 1×p.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.nt.composite-number complete\n- Score 3/5 → REVIEW factor pairs and the status of 1; replay A01\n- Score ≤ 2/5 → PREREQUISITE GAP in math.nt.prime-number; reassign\n\n**P78 — Completion:** Composite numbers certified. Student classifies integers >1 as prime or composite, explains why 1 is excluded from both, lists all factor pairs, applies the √n trial-division test, and uses the divisor-count formula τ(n).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.composite-number.md",
+        "startLine": 108,
+        "endLine": 135
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

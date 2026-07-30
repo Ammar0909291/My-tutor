@@ -1,0 +1,244 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.bezout-identity-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.bezout-identity",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:135900c5ad5fac38ecdc99a7f119ef71d6ece91391e2ba238af926e201dd0b07",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.bezout-identity.md": "sha256:162ecca930bc6f1cc90a4c507a5f7fa1d0c6e132ec828d88c08a8b022d341c4d"
+    },
+    "assetCount": 8,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.nt.bezout-identity",
+    "name": "Bézout's Identity",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.nt.extended-euclidean-algorithm",
+      "math.nt.gcd"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.bezout-identity-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.bezout-identity (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.bezout-identity.md": "sha256:162ecca930bc6f1cc90a4c507a5f7fa1d0c6e132ec828d88c08a8b022d341c4d"
+      },
+      "contentHash": "sha256:c871a88595c19f4f95b2295a1131de289e9e91cd44c34e4895ad0d963d200059",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.bezout-identity.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.bezout-identity.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.bezout-identity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.bezout-identity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.bezout-identity.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.bezout-identity.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.bezout-identity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.bezout-identity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.bezout-identity.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.bezout-identity.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.bezout-identity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.bezout-identity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.bezout-identity/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.bezout-identity",
+      "title": "Learning Objective",
+      "content": "The student states Bézout's Identity: for any integers a,b (not both zero), there exist integers s,t such that sa+tb=gcd(a,b); finds a specific pair (s,t) by back-substituting the steps of the Extended Euclidean Algorithm; describes the complete set of solutions as s₀+k(b/d), t₀−k(a/d) for k∈ℤ where d=gcd(a,b); proves that gcd(a,b) is the smallest positive integer representable as a linear combination of a and b; and identifies the implication that gcd(a,b)=1 iff there exist s,t with sa+tb=1.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.bezout-identity.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.bezout-identity/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.bezout-identity",
+      "title": "BEZOUT-COEFFICIENTS-ARE-UNIQUE",
+      "content": "| MC-1 | BEZOUT-COEFFICIENTS-ARE-UNIQUE | Student believes there is exactly one pair (s,t) satisfying sa+tb=gcd(a,b); does not recognize the infinite family of solutions parameterised by k | Type 1 — overgeneralization (the back-substitution method produces one specific solution; students treat it as the unique solution rather than one member of an infinite family) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.bezout-identity.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.nt.bezout-identity/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.bezout-identity",
+      "title": "ANY-LINEAR-COMBINATION-IS-ACHIEVABLE",
+      "content": "| MC-2 | ANY-LINEAR-COMBINATION-IS-ACHIEVABLE | Student believes sa+tb=c has an integer solution for any integer c (not just multiples of gcd); tries to write 7=s×6+t×10 and is confused when it fails | Type 1 — overgeneralization (Bézout says gcd is achievable, and its multiples are; student doesn't absorb the gcd(a,b)|c necessity) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.bezout-identity.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.nt.bezout-identity/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.bezout-identity",
+      "title": "BACK-SUBSTITUTION-GIVES-THE-SMALLEST-COEFFICIENTS",
+      "content": "| MC-3 | BACK-SUBSTITUTION-GIVES-THE-SMALLEST-COEFFICIENTS | Student believes the s,t obtained from back-substitution are the pair with smallest absolute values; doesn't recognize they can be reduced by adding/subtracting multiples of b/d and a/d | Type 5 — instruction-induced (back-substitution is taught as \"the\" method; its output is presented as definitive; the parametric family s₀+k(b/d) is often deferred or omitted entirely in introductory treatments) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.bezout-identity.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.bezout-identity/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.bezout-identity",
+      "title": "Modular inverses:",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Modular inverses:\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.bezout-identity.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.nt.bezout-identity/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.bezout-identity",
+      "title": "GCD as generator:",
+      "content": "{\"id\":\"TA-2\",\"title\":\"GCD as generator:\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.bezout-identity.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.nt.bezout-identity/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.bezout-identity",
+      "title": "Coprimality and primes:",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Coprimality and primes:\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.bezout-identity.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.nt.bezout-identity/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.bezout-identity",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Find integers s,t such that 47s+30t=gcd(47,30). Show all Extended Euclidean Algorithm steps and the back-substitution. Then find two more solutions to the equation.\n2. Determine whether each equation has integer solutions; if yes, find one: (a) 14s+21t=7; (b) 15s+25t=6; (c) 35s+56t=14.\n3. Prove: if gcd(a,b)=1 and a|bc, then a|c. (Hint: use Bézout to write sa+tb=1, then multiply through by c.)\n4. Given that 3×17+(−5)×10=1, find the modular inverse of 17 modulo 10. Verify: 17×?≡1(mod 10).\n\n**P55 — Reflect & Consolidate:** \"Bézout: sa+tb=gcd(a,b) always solvable. General sa+tb=c solvable iff gcd(a,b)|c. Complete solution family: (s₀+kb/d, t₀−ka/d). Application: gcd(a,n)=1 gives the modular inverse of a mod n as the Bézout coefficient s.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) The integers 1994 and 1993 are consecutive integers. Without computing, what is gcd(1994,1993)? Write down specific integers s,t with s×1994+t×1993=gcd(1994,1993). (b) Prove that for consecutive integers n and n+1, gcd(n,n+1)=1. (c) If gcd(a,b)=1, prove that gcd(a,b²)=1 and gcd(a²,b)=1. (d) A Chicken McNugget theorem variant: if gcd(a,b)=1 with a,b>1, prove that every integer N≥(a−1)(b−1) can be written as sa+tb with s,t≥0. (Hint: for each N, find a Bézout representation and adjust to make both coefficients non-negative.)\n\n**P55 — Reflect & Consolidate:** \"gcd(n,n+1)=1 always (consecutive integers share no prime factor). If gcd(a,b)=1, then gcd(a,bⁿ)=1 for all n (no prime can divide both a and any power of b). The Chicken McNugget bound (a−1)(b−1)−1 = ab−a−b is the largest non-representable number when gcd(a,b)=1 — the Frobenius number.\"\n\n**P75 — Mastery Assessment:**\n\"(a) Use the Extended Euclidean Algorithm and back-substitution to find s,t with 252s+198t=gcd(252,198). (b) Find all solutions to 252s+198t=18. (c) Does 252s+198t=25 have a solution? Explain. (d) Find the modular inverse of 252 modulo 11 (if it exists); otherwise explain why it doesn't.\"\n\n**P55 — Reflect & Consolidate:** \"gcd(252,198)=18; Bézout gives one (s₀,t₀); all solutions to =18 use the parametric family. For =25: 18∤25, no solution. Modular inverse of 252 mod 11: gcd(252,11)=gcd(10,11)=1 (since 252≡10≡−1 mod 11), so inverse exists and equals −1≡10 mod 11; check: 252×10=2520=229×11+1 ✓.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.nt.bezout-identity complete\n- Score 3/5 → REVIEW the solvability condition gcd|c and the parametric family; replay A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.nt.extended-euclidean-algorithm; reassign\n\n**P78 — Completion:** Bézout's Identity certified. Student states and applies Bézout's Identity; finds coefficients by back-substitution; generates the complete solution family; applies the condition gcd|c for general sa+tb=c; uses Bézout to find modular inverses and prove coprimality lemmas.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.bezout-identity.md",
+        "startLine": 114,
+        "endLine": 141
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

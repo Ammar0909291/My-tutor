@@ -1,0 +1,550 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.lcm-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.lcm",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:dc4f99a13aac97976acd1b857c4489cd507f8c32e58bddaa12f04afe7cd0ffd7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.lcm.md": "sha256:e5708a21fb577c827dcf32b232c126f4175fb6a5905a5b7a255bbb82a12f99d6"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 12,
+      "mastery_probe": 1
+    },
+    "ruleCount": 12
+  },
+  "concept": {
+    "conceptId": "math.nt.lcm",
+    "name": "Least Common Multiple (LCM)",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.nt.prime-factorization",
+      "math.nt.gcd"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.lcm-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.lcm (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.lcm.md": "sha256:e5708a21fb577c827dcf32b232c126f4175fb6a5905a5b7a255bbb82a12f99d6"
+      },
+      "contentHash": "sha256:f0c2ea8172c520285cccf11c46d517be67907483888144d300a5c7c41136c3e3",
+      "ruleCount": 12,
+      "bandCounts": {
+        "3": 12
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.lcm.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.lcm.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.lcm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.lcm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.lcm.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.lcm.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.lcm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.lcm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.lcm.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.lcm.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.lcm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.lcm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.lcm.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.lcm.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.lcm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.lcm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.lcm.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.lcm.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.lcm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.lcm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.lcm.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.lcm.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.lcm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.lcm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.lcm.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.lcm.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.lcm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.lcm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.lcm.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.lcm.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.lcm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.lcm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.lcm.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.lcm.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.lcm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.lcm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.lcm.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.lcm.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.lcm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.lcm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.lcm.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.lcm.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.lcm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.lcm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.lcm.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.lcm.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.lcm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.lcm\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.lcm/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.lcm",
+      "title": "Learning Objective",
+      "content": "The student computes the LCM of two or more positive integers using the prime-factorisation method (take the highest power of each prime that appears); applies the relationship lcm(a,b)×gcd(a,b)=a×b to compute LCM from a known GCD; verifies LCM as the smallest positive integer divisible by every given number; and uses LCM to find a common denominator when adding fractions with unlike denominators.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.lcm.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.lcm/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.lcm",
+      "title": "LCM-IS-ALWAYS-THE-PRODUCT",
+      "content": "| MC-1 | LCM-IS-ALWAYS-THE-PRODUCT | Student computes lcm(a,b)=a×b universally, never applying the GCD relationship; writes lcm(6,4)=24 instead of 12 | Type 1 — overgeneralization (the product formula is correct for coprime pairs; the student extends it to all pairs without checking) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.lcm.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.nt.lcm/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.lcm",
+      "title": "TAKE-MIN-EXPONENTS-FOR-LCM",
+      "content": "| MC-2 | TAKE-MIN-EXPONENTS-FOR-LCM | Student applies the GCD rule (minimum exponent per prime) to LCM as well — \"I take the smallest power of each prime for both operations\" | Type 1 — overgeneralization (the min-for-GCD rule is recent learning; student symmetrises it without checking which operation needs min vs max) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.lcm.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.nt.lcm/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.lcm",
+      "title": "LCM-CAN-BE-LESS-THAN-EITHER-INPUT",
+      "content": "| MC-3 | LCM-CAN-BE-LESS-THAN-EITHER-INPUT | Student believes LCM might be smaller than both a and b in some cases because \"least\" signals a small value | Type 3 — language contamination (\"least\" in LCM means smallest among all common multiples, not necessarily small in absolute terms; LCM ≥ max(a,b) always) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.lcm.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.lcm/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.lcm",
+      "title": "CORRECT → \"LCM = product of each prime to its MAXIMUM power across all inputs. lcm(a,b)×gcd(a,b)=a×b. LCM ≥ max(a,b); equal iff one divides the other.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"LCM = product of each prime to its MAXIMUM power across all inputs. lcm(a,b)×gcd(a,b)=a×b. LCM ≥ max(a,b); equal iff one divides the other.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.lcm.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.nt.lcm/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.lcm",
+      "title": "PARTIAL (uses product formula for all pairs) → \"lcm(6,4)=6×4=24 would be correct only if gcd(6,4)=1. Since gcd(6,4)=2, lcm=24/2=12. List the multiples: 6,12,… and 4,8,12,… — 12 appears first, confirming LCM=12, not 24.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (uses product formula for all pairs) → \\\"lcm(6,4)=6×4=24 would be correct only if gcd(6,4)=1. Since gcd(6,4)=2, lcm=24/2=12. List the multiples: 6,12,… and 4,8,12,… — 12 appears first, confirming LCM=12, not 24.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.lcm.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.nt.lcm/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.lcm",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.lcm.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.nt.lcm/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.lcm",
+      "title": "NO_RESPONSE → \"List the first five multiples of 6 and the first five multiples of 8. Which is the first number that appears in both lists?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"List the first five multiples of 6 and the first five multiples of 8. Which is the first number that appears in both lists?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.lcm.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.nt.lcm/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.lcm",
+      "title": "CORRECT → \"lcm=product only when gcd=1. Otherwise lcm(a,b)=ab/gcd(a,b). LCM for three inputs: iterate pairwise. LCM = smallest denominator for fraction addition.\" → A03",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"lcm=product only when gcd=1. Otherwise lcm(a,b)=ab/gcd(a,b). LCM for three inputs: iterate pairwise. LCM = smallest denominator for fraction addition.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.lcm.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.nt.lcm/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.lcm",
+      "title": "PARTIAL (correct method but cannot apply to fractions) → \"To add 1/4+1/6: the common denominator must be divisible by 4 AND by 6 — that means it must be a common multiple of 4 and 6. The LEAST common multiple is the SMALLEST valid denominator, keeping numbers compact. lcm(4,6)=12, so 1/4=3/12 and 1/6=2/12, giving sum 5/12.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (correct method but cannot apply to fractions) → \\\"To add 1/4+1/6: the common denominator must be divisible by 4 AND by 6 — that means it must be a common multiple of 4 and 6. The LEAST common multiple is the SMALLEST valid denominator, keeping numbers compact. lcm(4,6)=12, so 1/4=3/12 and 1/6=2/12, giving sum 5/12.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.lcm.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.nt.lcm/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.lcm",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.lcm.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.nt.lcm/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.lcm",
+      "title": "NO_RESPONSE → \"Is lcm(4,9) equal to 4×9? What about lcm(4,6)? Why the difference?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"Is lcm(4,9) equal to 4×9? What about lcm(4,6)? Why the difference?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.lcm.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.nt.lcm/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.lcm",
+      "title": "CORRECT → \"GCD = minimum exponent (overlap). LCM = maximum exponent (union). They're complementary: gcd×lcm=product.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"GCD = minimum exponent (overlap). LCM = maximum exponent (union). They're complementary: gcd×lcm=product.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.lcm.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.nt.lcm/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.lcm",
+      "title": "PARTIAL (knows the rule but confuses direction) → \"Make a table: prime 2 appears with exponent 2 in 12 and exponent 1 in 18. For GCD take min(2,1)=1 → factor of 2¹. For LCM take max(2,1)=2 → factor of 2². Opposite operations, opposite results.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (knows the rule but confuses direction) → \\\"Make a table: prime 2 appears with exponent 2 in 12 and exponent 1 in 18. For GCD take min(2,1)=1 → factor of 2¹. For LCM take max(2,1)=2 → factor of 2². Opposite operations, opposite results.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.lcm.md",
+        "startLine": 94,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "math.nt.lcm/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.lcm",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.lcm.md",
+        "startLine": 95,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "math.nt.lcm/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.lcm",
+      "title": "NO_RESPONSE → \"Compute gcd(12,18) using the exponent method. Now compute lcm(12,18). Which exponent operation did you use each time?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"Compute gcd(12,18) using the exponent method. Now compute lcm(12,18). Which exponent operation did you use each time?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.lcm.md",
+        "startLine": 96,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "math.nt.lcm/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.lcm",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Compute lcm(24,36), lcm(7,11), lcm(8,12,18) using the prime-factorisation method. For each, verify lcm×gcd = product (for the two-number cases).\n2. A traffic light cycles every 40 seconds; a second light cycles every 60 seconds. They are both green at time 0. After how many seconds will both be green simultaneously again? (What mathematical concept gives the answer?)\n3. Simplify the sum 5/12 + 7/18 by finding the LCM of the denominators. Show all steps. Why does using the LCM give a simpler result than using any other common denominator?\n4. Prove that for any positive integers a and b, lcm(a,b)=a×b if and only if gcd(a,b)=1.\n\n**P55 — Reflect & Consolidate:** \"LCM = product of each prime to its MAX power across inputs. lcm(a,b)×gcd(a,b)=a×b for all positive integers. LCM ≥ max(a,b); equals one input iff that input divides the other. LCM is the smallest valid common denominator for fraction addition.\"\n\n**P76 — Transfer Probe (Independence mode):**\nThree friends exercise together on day 1. Alice exercises every 3 days, Bob every 4 days, Charlie every 6 days. (a) How many days until all three exercise together again? (b) In 360 days, how many times do all three exercise together (including day 1)? (c) Two positive integers have GCD=6 and LCM=60. List all possible pairs (a,b) with a≤b. (d) Is it possible for two numbers to have GCD=6 and LCM=50? Explain why or why not.\n\n**P55 — Reflect & Consolidate:** \"lcm(a,b,c)=lcm(lcm(a,b),c). The pair-with-given-GCD-and-LCM problem is constrained by gcd×lcm=a×b — any pair (a,b) satisfying this can be found by factoring lcm/gcd and distributing prime powers. GCD|LCM is a necessary condition; GCD∤LCM means no such pair exists (as in the GCD=6, LCM=50 case, since 6∤50).\"\n\n**P75 — Mastery Assessment:**\n\"A choir has sections of 24, 36, and 48 singers. The director wants to split the whole choir into equal groups, each group containing the same number from each section. (a) What is the largest group size possible? (b) The director also wants to arrange all singers from all three sections into rows of equal size (combining sections). What is the smallest number of rows possible if each singer must stand in a row with others of their section? (c) Two bells ring at intervals of 15 and 21 minutes. If they ring together at noon, when do they next ring together? At how many times between noon and midnight do they ring together?\"\n\n**P55 — Reflect & Consolidate:** \"GCD solves 'split into equal groups' (part a: gcd(24,36,48)=12). LCM solves 'when do periodic events coincide' (bells: lcm(15,21)=105 minutes). The row problem requires more careful analysis: keeping sections separate with equal-size rows requires the row size to divide each section — so it's the GCD of the section sizes.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.nt.lcm complete\n- Score 3/5 → REVIEW the lcm×gcd=product relationship; replay A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.nt.gcd or math.nt.prime-factorization; reassign\n\n**P78 — Completion:** LCM certified. Student computes LCM using prime factorisation (max exponents), the GCD formula, and common-multiple enumeration; applies LCM to fraction addition and periodic-coincidence problems; explains why LCM = product only for coprime inputs.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.lcm.md",
+        "startLine": 109,
+        "endLine": 136
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

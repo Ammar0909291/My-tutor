@@ -1,0 +1,890 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.linear-diophantine-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.linear-diophantine",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:fc9074d0bc0f550581cf35de03b10d49633b5b8e1b0e8a9f8b986ad777cfc804",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.linear-diophantine.md": "sha256:05a0475a362725f9dd67d52a3a4efc6d17855a01147c80041bdcb5b534b6d6f6"
+    },
+    "assetCount": 27,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 22,
+      "mastery_probe": 1
+    },
+    "ruleCount": 22
+  },
+  "concept": {
+    "conceptId": "math.nt.linear-diophantine",
+    "name": "Linear Diophantine Equations",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.nt.bezout-identity",
+      "math.nt.gcd"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.linear-diophantine-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.linear-diophantine (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.linear-diophantine.md": "sha256:05a0475a362725f9dd67d52a3a4efc6d17855a01147c80041bdcb5b534b6d6f6"
+      },
+      "contentHash": "sha256:149b608019e0598280f02d3e6b7e9999710696745a30a0ab4ad2181ce21879c1",
+      "ruleCount": 22,
+      "bandCounts": {
+        "3": 22
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-17",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-17",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-18",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-18",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-19",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-19",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-20",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-20",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-21",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-21",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-22",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-22",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.linear-diophantine.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.linear-diophantine.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.linear-diophantine"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.linear-diophantine\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.linear-diophantine/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "Learning Objective",
+      "content": "The student determines whether the linear Diophantine equation ax+by=c has integer solutions (necessary and sufficient condition: gcd(a,b)|c); finds one particular solution (x₀,y₀) by scaling the Bézout coefficients; writes the complete solution set as x=x₀+(b/d)t, y=y₀−(a/d)t for t∈ℤ (where d=gcd(a,b)); interprets solutions geometrically as lattice points on a line; and applies the solvability criterion to practical problems involving integer constraints.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "LINEAR-DIOPHANTINE-ALWAYS-HAS-SOLUTION",
+      "content": "| MC-1 | LINEAR-DIOPHANTINE-ALWAYS-HAS-SOLUTION | Student believes ax+by=c always has integer solutions because \"it's just a linear equation\"; doesn't know the gcd(a,b)|c condition | Type 1 — overgeneralization (linear equations over ℝ always have solutions; students extend this to ℤ without recognising that the integer constraint is highly restrictive) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "ONE-SOLUTION-MEANS-UNIQUE-INTEGER-SOLUTION",
+      "content": "| MC-2 | ONE-SOLUTION-MEANS-UNIQUE-INTEGER-SOLUTION | Student finds one particular solution (x₀,y₀) and concludes it is the only integer solution | Type 1 — overgeneralization (the continuous version y=(c−ax)/b has infinitely many real solutions but students correctly learn \"one\" for the integer version without recognising the countably infinite integer family) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "NEGATIVE-SOLUTIONS-MUST-BE-EXCLUDED",
+      "content": "| MC-3 | NEGATIVE-SOLUTIONS-MUST-BE-EXCLUDED | Student discards solutions where x or y is negative, thinking \"you can't have negative coins/items\"; doesn't recognise the abstract integer domain | Type 3 — language contamination (word problems use physical quantities (apples, coins, hours) that must be non-negative; students apply this domain restriction to the mathematical equation itself rather than to the problem context only) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "d=gcd(14,21)=7; c=35; 7|35 ✓ (c/d=5)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"d=gcd(14,21)=7; c=35; 7|35 ✓ (c/d=5)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "Reduced equation: 2x+3y=5",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Reduced equation: 2x+3y=5\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "Bézout for gcd(2,3)=1: 1×3+(−1)×2=1, so 5×3+(−5)×2=5 → (x₀,y₀)=(−5,5)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Bézout for gcd(2,3)=1: 1×3+(−1)×2=1, so 5×3+(−5)×2=5 → (x₀,y₀)=(−5,5)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "Check: 14(−5)+21(5)=−70+105=35 ✓",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Check: 14(−5)+21(5)=−70+105=35 ✓\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "Complete solution: x=−5+3t, y=5−2t (since b/d=21/7=3, a/d=14/7=2)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Complete solution: x=−5+3t, y=5−2t (since b/d=21/7=3, a/d=14/7=2)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "Verify at t=2: x=1, y=1: 14+21=35 ✓; at t=3: x=4, y=−1: 56−21=35 ✓",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Verify at t=2: x=1, y=1: 14+21=35 ✓; at t=3: x=4, y=−1: 56−21=35 ✓\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "CORRECT → \"Solvable iff gcd(a,b)|c. Particular solution: scale Bézout coefficients by c/gcd. Complete family: x=x₀+(b/d)t, y=y₀−(a/d)t. Geometric: equally-spaced lattice points on a line.\" → A02",
+      "content": "{\"id\":\"TA-7\",\"title\":\"CORRECT → \\\"Solvable iff gcd(a,b)|c. Particular solution: scale Bézout coefficients by c/gcd. Complete family: x=x₀+(b/d)t, y=y₀−(a/d)t. Geometric: equally-spaced lattice points on a line.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "PARTIAL (finds particular solution but can't write the family) → \"One solution (x₀,y₀) gives ALL solutions. The key insight: if (x₀,y₀) satisfies ax+by=c and (x,y) also satisfies it, then a(x−x₀)+b(y−y₀)=0, so a/d·(x−x₀)=−b/d·(y−y₀). Since gcd(a/d,b/d)=1, we need (b/d)|(x−x₀), so x−x₀=bt/d for some t, and then y−y₀=−at/d.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-8\",\"title\":\"PARTIAL (finds particular solution but can't write the family) → \\\"One solution (x₀,y₀) gives ALL solutions. The key insight: if (x₀,y₀) satisfies ax+by=c and (x,y) also satisfies it, then a(x−x₀)+b(y−y₀)=0, so a/d·(x−x₀)=−b/d·(y−y₀). Since gcd(a/d,b/d)=1, we need (b/d)|(x−x₀), so x−x₀=bt/d for some t, and then y−y₀=−at/d.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-9\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "NO_RESPONSE → \"Does 6x+9y=20 have integer solutions? Does 6x+9y=21? For the solvable one, find a particular solution.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-10\",\"title\":\"NO_RESPONSE → \\\"Does 6x+9y=20 have integer solutions? Does 6x+9y=21? For the solvable one, find a particular solution.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "3x+7y=11; d=gcd(3,7)=1; 1|11 ✓",
+      "content": "{\"id\":\"TA-11\",\"title\":\"3x+7y=11; d=gcd(3,7)=1; 1|11 ✓\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "Bézout: 5×3+(−2)×7=1, so (x₀,y₀)=(55,−22)... cleaner: try small values. y=1: 3x=4, not integer. y=−1: 3x=18, x=6 ✓. So (x₀,y₀)=(6,−1).",
+      "content": "{\"id\":\"TA-12\",\"title\":\"Bézout: 5×3+(−2)×7=1, so (x₀,y₀)=(55,−22)... cleaner: try small values. y=1: 3x=4, not integer. y=−1: 3x=18, x=6 ✓. So (x₀,y₀)=(6,−1).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 70,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "Complete: x=6+7t, y=−1−3t",
+      "content": "{\"id\":\"TA-13\",\"title\":\"Complete: x=6+7t, y=−1−3t\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 71,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "Non-negative: x≥0 → t≥−6/7 → t≥0; y≥0 → −1−3t≥0 → t≤−1/3 → t≤−1. No t satisfies both t≥0 and t≤−1. No non-negative solution — 11 cannot be made from 3¢ and 7¢ coins.",
+      "content": "{\"id\":\"TA-14\",\"title\":\"Non-negative: x≥0 → t≥−6/7 → t≥0; y≥0 → −1−3t≥0 → t≤−1/3 → t≤−1. No t satisfies both t≥0 and t≤−1. No non-negative solution — 11 cannot be made from 3¢ and 7¢ coins.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 72,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "CORRECT → \"Complete solution family parameterised by t∈ℤ. Non-negative solutions: intersect the family with x,y≥0 to find valid t-range. Solvability in ℕ is a separate question from solvability in ℤ.\" → A03",
+      "content": "{\"id\":\"TA-15\",\"title\":\"CORRECT → \\\"Complete solution family parameterised by t∈ℤ. Non-negative solutions: intersect the family with x,y≥0 to find valid t-range. Solvability in ℕ is a separate question from solvability in ℤ.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "PARTIAL (treats every application as requiring non-negative solutions) → \"The equation ax+by=c always has integer solutions (when d|c) regardless of sign. The non-negative requirement comes from the CONTEXT, not the mathematics. Separate the two: first check ℤ-solvability (mathematical), then restrict to ℕ solutions (contextual).\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-16\",\"title\":\"PARTIAL (treats every application as requiring non-negative solutions) → \\\"The equation ax+by=c always has integer solutions (when d|c) regardless of sign. The non-negative requirement comes from the CONTEXT, not the mathematics. Separate the two: first check ℤ-solvability (mathematical), then restrict to ℕ solutions (contextual).\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-17",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-17\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-17",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-18",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "NO_RESPONSE → \"Solve 5x+8y=3 completely. Then find all non-negative solutions. Are there any?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-18\",\"title\":\"NO_RESPONSE → \\\"Solve 5x+8y=3 completely. Then find all non-negative solutions. Are there any?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-18",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-19",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "CORRECT → \"Check gcd first. If gcd∤c, done (no solutions). If gcd|c, proceed to find particular solution and write the family.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-19\",\"title\":\"CORRECT → \\\"Check gcd first. If gcd∤c, done (no solutions). If gcd|c, proceed to find particular solution and write the family.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-19",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 92,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-20",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "PARTIAL → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-20\",\"title\":\"PARTIAL → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-20",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-21",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-21\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-21",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 94,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/teaching_action_meta/TA-22",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "NO_RESPONSE → \"What is gcd(15,25)? Does it divide 11? Does it divide 10?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-22\",\"title\":\"NO_RESPONSE → \\\"What is gcd(15,25)? Does it divide 11? Does it divide 10?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-22",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 95,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "math.nt.linear-diophantine/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.linear-diophantine",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Solve completely (find all integer solutions, or prove no solution exists): (a) 12x+18y=24; (b) 25x+35y=15; (c) 17x+19y=1.\n2. A store sells two items costing $6 and $14. In how many ways can a customer spend exactly $100? Find all solutions with non-negative quantities.\n3. Prove: if ax+by=c has one solution, then it has infinitely many. (Explicitly construct infinitely many from one.)\n4. Two integer solutions to 5x+8y=1 are (5,−3) and (−3,2). Verify both. Write the parametric family and show these are two members of it.\n\n**P55 — Reflect & Consolidate:** \"ax+by=c solvable iff d=gcd(a,b)|c. Particular solution: scale Bézout coefficients by c/d. Complete family: x=x₀+(b/d)t, y=y₀−(a/d)t. Non-negative solutions: restrict t to a valid range from both inequalities. Infinitely many ℤ-solutions; finitely many ℕ-solutions.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) The Frobenius Coin Problem: given coprime positive integers a,b, the largest integer that CANNOT be represented as xa+yb with x,y≥0 is ab−a−b (the Frobenius number). Verify this formula for a=3,b=5. Find a non-negative representation of 8=3x+5y and show 7 cannot be so represented. (b) Prove: if gcd(a,b)=1, then every integer n>ab−a−b CAN be represented as xa+yb with x,y≥0. (Hint: using Bézout, find a ℤ-solution; then adjust t to make both coordinates non-negative.) (c) Determine the Frobenius number for a=6, b=10. Does gcd(6,10)=1? What does this mean?\n\n**P55 — Reflect & Consolidate:** \"Frobenius number ab−a−b exists only when gcd(a,b)=1. If gcd(a,b)>1, then multiples of gcd(a,b) like ab itself cannot be represented (a=6,b=10 — cannot make 1,2,3,4,5,7,8,9,11,13 and many others, in fact infinitely many non-representable values since odd multiples of 5 and non-multiples of 2 are out of reach). The Frobenius problem for three or more coprime generators is much harder (NP-hard in general).\"\n\n**P75 — Mastery Assessment:**\n\"Solve completely and interpret: (a) 91x+77y=455; (b) A vending machine dispenses items of value 35¢ and 45¢. Can you pay exactly $1.00 using any combination (possibly zero) of items of each type? If yes, find all ways; if no, explain why. (c) Prove that if gcd(a,b)=1 and c>0, then ax−by=c has at least one solution with x,y>0 (both strictly positive). (Hint: use the parametric family and adjust t.)\"\n\n**P55 — Reflect & Consolidate:** \"91x+77y=455: gcd(91,77)=7, 7|455 ✓, one family. Vending: 35x+45y=100, gcd(35,45)=5, 5|100 ✓ — solvable in ℤ; check non-negative: x=2, y=0 works (2×35=70 — actually 70≠100... 35x+45y=100: try y=0: 35x=100, x=100/35 not integer; y=2: 35x=10, no; y=1: 35x=55, no... gcd=5, 100/5=20, 7x+9y=20: y=1: 7x=11, no; y=0: 7x=20, no; y=2: 7x=2, no; y=3: 7x=-7, no... so no non-negative solution). Strict-positive proof: adjust t until x,y>0 — works since b/d and a/d are both positive.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.nt.linear-diophantine complete\n- Score 3/5 → REVIEW the solvability condition and the parametric family; replay A01\n- Score ≤ 2/5 → PREREQUISITE GAP in math.nt.bezout-identity; reassign\n\n**P78 — Completion:** Linear Diophantine Equations certified. Student checks gcd solvability condition; finds particular solutions via Bézout scaling; writes the complete parametric family; restricts to non-negative solutions for contextual problems; applies the Frobenius number concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.linear-diophantine.md",
+        "startLine": 108,
+        "endLine": 135
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

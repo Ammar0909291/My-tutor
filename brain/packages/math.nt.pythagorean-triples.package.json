@@ -1,0 +1,312 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.pythagorean-triples-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.pythagorean-triples",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a79573e58dd8a664fce3e46a37e706ac9b80f93f653a4910f0d13ff403122486",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.pythagorean-triples.md": "sha256:254287b9bc680dcb5aa30a10d67bde27a7838279d2432ada7bd94494c0abb34e"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "math.nt.pythagorean-triples",
+    "name": "Pythagorean Triples",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.nt.general-diophantine",
+      "math.geom.pythagorean-theorem"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.pythagorean-triples-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.pythagorean-triples (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.pythagorean-triples.md": "sha256:254287b9bc680dcb5aa30a10d67bde27a7838279d2432ada7bd94494c0abb34e"
+      },
+      "contentHash": "sha256:d2202de25d42bd4792932db633a60ed2ce47521182063629433fb2d68aed8ced",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.pythagorean-triples.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pythagorean-triples.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pythagorean-triples"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pythagorean-triples\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pythagorean-triples.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pythagorean-triples.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pythagorean-triples"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pythagorean-triples\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pythagorean-triples.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pythagorean-triples.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pythagorean-triples"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pythagorean-triples\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pythagorean-triples.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pythagorean-triples.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pythagorean-triples"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pythagorean-triples\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.pythagorean-triples.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.pythagorean-triples.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.pythagorean-triples"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.pythagorean-triples\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.pythagorean-triples/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.pythagorean-triples",
+      "title": "Learning Objective",
+      "content": "The student defines a Pythagorean triple as a positive-integer solution (a,b,c) to a²+b²=c²; classifies triples as primitive (gcd(a,b,c)=1) or non-primitive; states and applies Euclid's parametrisation of primitive triples: a=m²−n², b=2mn, c=m²+n² where m>n>0, gcd(m,n)=1, and m,n have opposite parity; proves that every Pythagorean triple is a non-negative integer multiple of a primitive one; identifies all primitive triples (a,b,c) with c<100; and connects the parametrisation to the Gaussian integer factorisation c=|m+ni|².",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pythagorean-triples.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.pythagorean-triples/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.pythagorean-triples",
+      "title": "FEW-PYTHAGOREAN-TRIPLES-EXIST",
+      "content": "| MC-1 | FEW-PYTHAGOREAN-TRIPLES-EXIST | Student believes only a handful of Pythagorean triples exist (3,4,5), (5,12,13), (8,15,17), etc.; doesn't realise Euclid's formula generates infinitely many primitive triples, and scalar multiples generate even more | Type 3 — language contamination (textbooks list a few famous triples; the word \"triple\" sounds specific/finite; students don't realise the formula gives a parametric infinite family) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pythagorean-triples.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.nt.pythagorean-triples/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.pythagorean-triples",
+      "title": "EUCLID-FORMULA-WITHOUT-COPRIMALITY-CONDITION-GIVES-ALL-PRIMITIVE-TRIPLES",
+      "content": "| MC-2 | EUCLID-FORMULA-WITHOUT-COPRIMALITY-CONDITION-GIVES-ALL-PRIMITIVE-TRIPLES | Student applies a=m²−n², b=2mn, c=m²+n² for all m>n without the gcd(m,n)=1 and opposite-parity conditions; produces non-primitive triples thinking they are primitive | Type 5 — instruction-induced (many sources present Euclid's formula without carefully stating the two conditions on m,n; the conditions are treated as an optional refinement when they're actually required to get exactly the primitive triples) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pythagorean-triples.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.nt.pythagorean-triples/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.pythagorean-triples",
+      "title": "HYPOTENUSE-OF-PRIMITIVE-TRIPLE-CAN-BE-EVEN",
+      "content": "| MC-3 | HYPOTENUSE-OF-PRIMITIVE-TRIPLE-CAN-BE-EVEN | Student believes the hypotenuse c=m²+n² can be even in a primitive triple; doesn't trace through the parity argument that forces c to be odd | Type 1 — overgeneralization (non-primitive triples like (6,8,10) have even hypotenuse 10; students see these and conclude primitive triples can too; the parity argument requires m and n to have opposite parity, forcing m²+n² ≡ 1 (mod 2) = odd) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pythagorean-triples.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.pythagorean-triples/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pythagorean-triples",
+      "title": "1",
+      "content": "{\"id\":\"TA-2\",\"title\":\"1\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pythagorean-triples.md",
+        "startLine": 25,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "math.nt.pythagorean-triples/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pythagorean-triples",
+      "title": "2",
+      "content": "{\"id\":\"TA-3\",\"title\":\"2\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pythagorean-triples.md",
+        "startLine": 26,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.nt.pythagorean-triples/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pythagorean-triples",
+      "title": "1",
+      "content": "{\"id\":\"TA-4\",\"title\":\"1\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pythagorean-triples.md",
+        "startLine": 27,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.nt.pythagorean-triples/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pythagorean-triples",
+      "title": "2",
+      "content": "{\"id\":\"TA-5\",\"title\":\"2\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pythagorean-triples.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.nt.pythagorean-triples/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.pythagorean-triples",
+      "title": "1",
+      "content": "{\"id\":\"TA-6\",\"title\":\"1\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pythagorean-triples.md",
+        "startLine": 31,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.nt.pythagorean-triples/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.pythagorean-triples",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Find all primitive Pythagorean triples with hypotenuse c<50. Organise by (m,n) values. How many are there?\n2. Prove: in any primitive Pythagorean triple (a,b,c), exactly one of a,b is divisible by 4, and c≡1(mod 4).\n3. Find all Pythagorean triples (primitive and non-primitive) with one leg equal to 20. (Hint: set 20=2mn or 20=m²−n² and solve for integers.)\n4. The triple (a,b,c) with b=a+1 (consecutive integers) is called a 'nearly isosceles' Pythagorean triple. Find the first four such triples and the values of (m,n) that produce them.\n\n**P55 — Reflect & Consolidate:** \"Euclid: a=m²−n², b=2mn, c=m²+n² with m>n>0, gcd(m,n)=1, m−n odd. Every primitive triple arises this way. Parity: one leg always even (b), hypotenuse always odd. Multiples of primitive triples give all triples.\"\n\n**P76 — Transfer Probe (Cross-link mode: math.geom.pythagorean-theorem):**\n(a) A ladder of length 25 feet leans against a wall. If the base is an integer number of feet from the wall and the top is an integer number of feet above the ground, what are the possible configurations? (Connect to Pythagorean triples with hypotenuse 25.) (b) A Pythagorean triple (a,b,c) can be derived from the Gaussian integer z=m+ni: set a=Re(z²)=m²−n², b=Im(z²)=2mn, c=|z|²=m²+n². Verify this for z=2+i. (c) Fermat's Last Theorem for n=4: prove x⁴+y⁴=z² has no positive-integer solution. (Hint: assume (a,b,c) with a=x², b=y², c=z is a Pythagorean triple and apply Euclid's formula, then descend.) This implies x⁴+y⁴=z⁴ also has no solution.\n\n**P55 — Reflect & Consolidate:** \"Pythagorean triples with c=25: 25=5²; primes ≡1(mod 4) appearing in c. 25=5×5; 5≡1(mod 4). Triples: (7,24,25) and (15,20,25)=(3,4,5)×5. The Gaussian integer derivation shows why Pythagorean triples and the arithmetic of ℤ[i] are the same theory.\"\n\n**P75 — Mastery Assessment:**\n\"(a) List all primitive Pythagorean triples with hypotenuse between 25 and 75. (b) Prove that there are infinitely many primitive Pythagorean triples by showing the formula for n=1, m=2,4,6,8,… gives distinct primitive triples. (c) A right triangle has area 6. Find all primitive Pythagorean triples for which the area of the right triangle (ab/2) is a perfect square. [This connects to the 'congruent number problem' — 6 is the first congruent number.]\"\n\n**P55 — Reflect & Consolidate:** \"Area=ab/2=m n(m²−n²)=mn(m+n)(m−n). For primitive triples with gcd(m,n)=1 and m−n odd, the four factors m,n,m+n,m−n are pairwise coprime. The product being a perfect square requires each factor to be a perfect square. Finding such m,n is the congruent number problem for a specific value of area.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.nt.pythagorean-triples complete\n- Score 3/5 → REVIEW the primitivity conditions and parity arguments; replay A01\n- Score ≤ 2/5 → PREREQUISITE GAP in math.geom.pythagorean-theorem; reassign\n\n**P78 — Completion:** Pythagorean Triples certified. Student applies Euclid's formula with correct conditions (gcd=1, opposite parity); lists primitive triples; proves parity and divisibility properties; connects to Gaussian integers; applies to geometric problems.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.pythagorean-triples.md",
+        "startLine": 119,
+        "endLine": 146
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
