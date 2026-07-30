@@ -231,10 +231,10 @@ describe('acknowledgement never overrides stronger evidence', () => {
 })
 
 describe('the turn directive stops contradicting the phase frame', () => {
-  function directiveFor(phase: TeachingPhase): string {
+  function directiveFor(phase: TeachingPhase, nextMove: 'teach' | 'ask' = 'teach'): string {
     return buildTurnDirective({
       state: { ...initialConversationState('c1'), phase },
-      nextMove: 'teach',
+      nextMove,
       maxParagraphs: null,
       workedExampleFirst: false,
       visualType: null,
@@ -256,11 +256,29 @@ describe('the turn directive stops contradicting the phase frame', () => {
   )
 
   it.each(['CHECK', 'PRACTICE', 'TRANSFER'] as const)(
-    '%s keeps the mastery-gate wording intact',
+    '%s keeps the mastery-gate wording intact when the turn asks',
     (phase) => {
-      const d = directiveFor(phase)
+      const d = directiveFor(phase, 'ask')
       expect(d).toContain('LOW-SIGNAL RESPONSE DETECTED')
       expect(d).toContain('do not explain further')
+      expect(d).not.toContain('LEARNER ASKED TO PROCEED')
+    },
+  )
+
+  // The give-turn half of the same rule. This case previously asserted the
+  // ASK wording on a 'teach' turn — i.e. it pinned the contradiction rather
+  // than the invariant: the directive ordered "ask now" while its own move
+  // line ordered "Ask NO questions this turn". The gate itself is unchanged
+  // (an acknowledgement still earns no mastery credit, which
+  // advanceConversationState enforces, not this wording); only the order to
+  // ask is dropped on turns that are not allowed to ask.
+  it.each(['CHECK', 'PRACTICE', 'TRANSFER'] as const)(
+    '%s refuses the acknowledgement credit without ordering a question on a give turn',
+    (phase) => {
+      const d = directiveFor(phase, 'teach')
+      expect(d).toContain('LOW-SIGNAL RESPONSE DETECTED')
+      expect(d).toContain('NOT evidence of understanding')
+      expect(d).not.toContain('You MUST ask ONE concrete check question')
       expect(d).not.toContain('LEARNER ASKED TO PROCEED')
     },
   )

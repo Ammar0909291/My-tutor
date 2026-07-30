@@ -1097,8 +1097,25 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   if (p.lowSignalAcknowledgement) {
     if (isDeliveryPhase(p.state.phase)) {
       lines.push('- LEARNER ASKED TO PROCEED: they sent a bare acknowledgement or a request to continue ("Got it", "go", "continue", "ready"). They are telling you they are done with the last step, not that they have proven understanding. Deliver the NEXT step of the lesson now — new content, a demonstration, or a worked step, per the teaching phase above. Do NOT restate, re-summarise, or reword your previous message, and do NOT send another holding line ("let\'s take one small step", "whenever you\'re ready"): they already said they are ready.')
-    } else {
+    } else if (p.nextMove === 'ask') {
       lines.push('- LOW-SIGNAL RESPONSE DETECTED: the learner sent a bare social acknowledgement ("Got it", "okay", "I see", etc.). This is NOT evidence of understanding. You MUST ask ONE concrete check question to verify comprehension before doing anything else — do not advance, do not explain further, ask now.')
+    } else {
+      // Same acknowledgement, same mastery gate — but the server has already
+      // decided this turn is a GIVE, so ordering a question here would
+      // contradict the move line ("Ask NO questions this turn") and, when a
+      // legality block is what removed ASK, the Band-2 line as well.
+      //
+      // That contradiction is the delivery-half bug at a different rung. The
+      // fix above resolved it for OBSERVE/DEMONSTRATE/GUIDE only; at the
+      // mastery gates the same two opposite orders survived, and a model given
+      // opposite orders resolves them with a content-free holding message —
+      // which the learner acknowledges again, forever.
+      //
+      // The gate is NOT weakened by softening this wording: an acknowledgement
+      // is refused mastery credit by advanceConversationState's acknowledgement
+      // branch (CHECK/PRACTICE/TRANSFER break without advancing), not by this
+      // sentence. Prompt text cannot move the ladder; only evidence can.
+      lines.push('- LOW-SIGNAL RESPONSE DETECTED: the learner sent a bare social acknowledgement ("Got it", "okay", "I see", etc.). This is NOT evidence of understanding and it earns no progress at this stage. Questions are not available to you this turn, so do NOT ask one: give them the next piece of teaching instead — react to where they actually are, add something new, or work a step. Do NOT restate or reword your previous message, and do NOT send a holding line ("let\'s take one small step", "whenever you\'re ready").')
     }
   }
 
@@ -1194,7 +1211,13 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   if (p.state.phase === 'PRACTICE' && p.nextMove === 'ask' && p.state.correctAtPractice >= 1) {
     lines.push('- STRATEGY NAMING: the learner has solved at least one practice problem. After grading this one, ask one brief metacognitive question: "What strategy did you use?" or "How would you explain your approach to a friend?" — builds transfer readiness.')
   }
-  if (p.state.phase === 'TRANSFER') {
+  // Gated on the decided move for the same reason STRATEGY NAMING above is:
+  // this line ORDERS a question ("ask them to predict"), so on a give turn it
+  // contradicts the move line's "Ask NO questions this turn". TRANSFER decides
+  // a non-ask move in roughly half its reachable states (question budget,
+  // struggle gates, or a legality block), so the contradiction was not a corner
+  // case. Prediction is still ordered on every TRANSFER turn that asks.
+  if (p.state.phase === 'TRANSFER' && p.nextMove === 'ask') {
     lines.push('- PREDICT-THEN-CHECK: before the learner computes, ask them to predict the result and say WHY ("What do you expect, and what makes you think so?"). Prediction forces the learner to activate their mental model, not just execute a procedure.')
   }
   // E.33: maintain lesson continuity — after any side question, example
